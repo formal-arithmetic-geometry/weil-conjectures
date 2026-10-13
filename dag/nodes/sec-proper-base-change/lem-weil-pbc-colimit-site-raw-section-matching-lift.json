@@ -20,34 +20,38 @@
  "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone with vertex $C$ [def-weil-pbc-category-colimit]. Let $P_j$ and $Q$ be precoverages on $F(j)$ and $C$. Every transition functor $F(a)$ and cocone functor $V_j$ is continuous for the generated topologies [def-weil-pbc-sites-and-cohomology]. Fix $i\\in J$ and a set-valued sheaf $G$ on $P_i$. Write $I=\\mathrm{Under}(i)$, $A_t=F(t.hom)_sG$. For $b:t\\to t'$ give a sheaf map $\\theta_b:A_t\\to F(b.right)^s A_{t'}$ whose composite with the unit $G\\to F(t.hom)^s A_t$ equals the unit at $t'$ componentwise as objects of the arrow category of sets. For $t\\in I$ let $B_t$ be a presheaf on $C$, with $\\beta_t:A_t\\to V_t^p B_t$ exhibiting $B_t$ as the left Kan extension of the underlying presheaf of $A_t$ along $V_t^{op}$. Here $V_t=V_{t.right}$, $V_t^p$ is presheaf restriction, and a left Kan extension means that composition with $\\beta_t$ bijects maps $B_t\\to T$ with maps $A_t\\to V_t^p T$ for every presheaf $T$. Let $B:I\\to\\mathrm{PSh}(C)$ have these objects and satisfy, for all $b:t\\to t'$ and $X\\in F(t.right)$, $\\beta_t(X)B(b)(V_tX)=\\theta_b(X)\\beta_{t'}(F(b.right)X)$ as objects of $\\mathrm{Arrow}(\\mathrm{Set})$.Assume also that the object and arrow cocones of $V$ are set colimits [def-weil-pbc-arrows-functor]. Every $P_j$ has singleton isomorphism covers, covering pullbacks, stability under finite composition and finite base change [def-weil-pbc-finite-precoverage]. Every covering presieve of $P_j$ has finitely many distinct arrows. Transitions preserve covering presieves and pullbacks along their covering arrows, and their inverse-image functors preserve finite limits. Each $V_j$ preserves covering pullbacks. Fix j in J, X in F(j), a covering presieve R in P_j(X), and a compatible family x of raw sections on R.map(V_j). There exist t in Under(i), W in F(t.right), a covering presieve T in P_t(W), an equality e: V_t(W)=V_j(X), and a compatible family y of A_t sections on T. The arrows V_t(g) followed by the equality transport e, indexed by the set T.uncurry of covering arrows, generate exactly R.map(V_j). For each such g: Z -> W the image of y_g under beta_t(Z) and the colimit coprojection equals x at V_t(g) followed by e. This asserts only a compatible stage lift, not an amalgamation or its uniqueness.",
  "proof": [
   {
-   "text": "Compute each left Kan extension pointwise. Its generators are sections of a\nstage inverse image together with an arrow from the evaluation object to a stage image.\nThe object and arrow set-colimits let us lift that arrow and its endpoints to a common\nstage; restrict the section along the lifted arrow. A finite chain of Kan relations\ncan likewise be lifted to a later stage. Naturality of beta and h-beta-map turn its\nrelations into restriction and theta transport. The equation h-theta identifies theta\nwith the unique adjunction transpose of the unit, so these transports compose.\nConsequently every raw section has a stage representative and every equality of raw\nrepresentatives holds after further refinement.\n\nIndex the original cover by R.uncurry. Its finiteness allows us to lift all its local\nsections simultaneously to a stage receiving i and j. Transport the original cover\nthere; hcover makes it covering. For each pair of covering arrows, hx gives equality\non their pullback in the limit category. Covering pullbacks exist at the stage, and\nhpullback and hVpullback identify their images with these limit pullbacks. Apply the\nraw equality criterion to the finitely many resulting equations and refine once more\nso all hold. The pullback universal property then gives compatibility on every common\ntest object. The resulting family y has the prescribed beta/colimit images by\nnaturality and h-beta-map. The cocone equation identifies the transported target W\nwith the original image target; its equality is e. The transported covering arrows,\nindexed by T.uncurry, give exactly the original image presieve, including duplicates,\nwhich is hT. If R is empty, use its transported empty cover and the empty family:\nthere are no sections or equations to lift. No amalgamation or uniqueness is asserted\nand no arbitrary existential witness is used to define data.",
+   "text": "Index R by its finite subtype R.uncurry. Use finite simultaneous raw section lifting to obtain sections s at a stage receiving j and i; no compatibility is required for this step.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-categories",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "def-weil-pbc-arrows-functor",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-finite-precoverage",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-colimit-site-raw-finite-sections-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0A35 finite-cover equalizer calculation, stage representatives and overlap equations"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The cocone equation supplies L followed by M = V_j. Its equality transports intertwine the image of each covering arrow. Apply the given raw compatibility hx on the limit category to the image of each pair of common test arrows at the new stage. The section-image equalities from the preceding step give indexed raw compatibility of s. The mapped indexed presieve is covering by hcover.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply finite raw matching refinement to this already represented indexed family. Obtain a further stage with a compatible indexed family s' and prescribed transported raw images.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-raw-finite-matching-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the covering presieve by the second transition. Prove it is covering using hcover. Composition of the two cocone equations identifies the final target with V_j X. The explicit image_cover_eq helper proves that mapping the uncurried transported presieve and composing with this equality gives exactly R.map V_j. Mathlib Arrows.Compatible.familyOfElements descends the compatible indexed sections through repeated arrows and proves compatibility. Its evaluation lemma identifies the section at each index. Compose the two raw image formulas; finally apply hx along the equality of source objects and the identity to identify these images with x on the final covering arrows. Empty indices and repeated arrows are covered by the same construction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-categories",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "def-weil-pbc-arrows-functor",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-finite-precoverage",
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-weil-pbc-colimit-site-raw-finite-sections-lift",
+  "lem-weil-pbc-colimit-site-raw-finite-matching-refinement"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35 finite-cover equalizer argument expanded into raw Kan representative lifting, second reader H3"
+  "place": "Tag 0A35, finite matching-family calculation expanded into two lower steps and explicit cover transport"
  },
  "mathlib_searches": [
   {
@@ -114,12 +118,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T225315-L-1807780",
+  "landing": "20261013T015551-L-3019253",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
