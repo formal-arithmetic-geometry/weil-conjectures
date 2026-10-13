@@ -14,6 +14,10 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatPullback
 /-! # Object comparison for relatively flat tensor base change
 
 Source: Stacks Project, Tag 0A1D, lemma-base-change-tensor
@@ -27,6 +31,26 @@ universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry
+
+private noncomputable local instance tensorModelModules (X : Scheme.{u}) :
+    MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+  SheafOfModules.monoidalCategory X.sheaf
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tensorPullback_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [(Scheme.Modules.tensorPullback f).Additive]
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) :
+    CochainComplex.IsKFlat (R := X.sheaf)
+      (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj P) := by
+  have h := CochainComplex.isKFlat_pullback f.base X.sheaf Y.sheaf ⟨f.c⟩ P hP
+  convert h using 1
+  rfl
+
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 
 /-- Object-level form of the canonical relatively flat tensor base-change comparison.
 The second tensor factor on the new scheme is ordinary termwise pullback.
@@ -60,6 +84,46 @@ theorem relativelyFlat_tensor_baseChange_iso
         ((derivedPullback (pullback.fst f g)).obj E ⊗
           DerivedCategory.Q.obj
             (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex
-              (.up ℤ)).obj G))) := by sorry
+              (.up ℤ)).obj G))) := by
+  classical
+  let QX := DerivedCategory.Q
+    (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  obtain ⟨P, s, hP, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution
+    (R := X.sheaf) (QX.objPreimage E)
+  have : QuasiIso s := hs
+  let eP : QX.obj P ≅ E := asIso (QX.map s) ≪≫ QX.objObjPreimageIso E
+  obtain ⟨comparison⟩ := kFlat_derivedTensor_comparison_natIso X
+    ((Functor.const (Discrete PUnit.{1})).obj P)
+    ((Functor.const (Discrete PUnit.{1})).obj G) (fun _ ↦ hP)
+  let a := (comparison.app ⟨PUnit.unit⟩).app ⟨PUnit.unit⟩
+  let α := (tensorIso eP (Iso.refl (QX.obj G))).symm ≪≫ a
+  have : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  have hbc := relativelyFlat_derivedBaseChange_complex f g E hE G hGb hGqc hGflat
+    P hP eP α
+  obtain ⟨F, hF, hmap, hadd, ε, hder, φ, _, _, _⟩ :=
+    derivedPullback_tensorProduct (pullback.fst f g)
+  have hEq : F = Scheme.Modules.tensorPullback (pullback.fst f g) :=
+    CategoryTheory.Functor.ext hF (fun _ _ b ↦ hmap b)
+  subst F
+  let FC := (Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex (.up ℤ)
+  obtain ⟨pulledComparison⟩ := kFlat_derivedTensor_comparison_natIso (pullback f g)
+    ((Functor.const (Discrete PUnit.{1})).obj (FC.obj P))
+    ((Functor.const (Discrete PUnit.{1})).obj (FC.obj G))
+    (fun _ ↦ tensorPullback_kFlat (pullback.fst f g) P hP)
+  let c := (pulledComparison.app ⟨PUnit.unit⟩).app ⟨PUnit.unit⟩
+  obtain ⟨_, _, _, _, _, _, _, F₀, hF₀, hmap₀, _, ε₀, _, _, hK₀⟩ :=
+    Classical.choose_spec (exists_derivedPullback (pullback.fst f g))
+  have hEq₀ : F₀ = Scheme.Modules.tensorPullback (pullback.fst f g) :=
+    CategoryTheory.Functor.ext hF₀ (fun _ _ b ↦ hmap₀ b)
+  subst F₀
+  have := hK₀ P hP
+  let dP : (derivedPullback (pullback.fst f g)).obj (QX.obj P) ≅
+      DerivedCategory.Q.obj (FC.obj P) :=
+    asIso (ε₀.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+  let targetIso := DerivedCategory.Q.mapIso (φ P G) ≪≫ c.symm ≪≫
+    tensorIso (dP.symm ≪≫ (derivedPullback (pullback.fst f g)).mapIso eP)
+      (Iso.refl _)
+  exact ⟨@asIso _ _ _ _ _ hbc ≪≫ (schemeDerivedDirectImage (pullback.snd f g)).mapIso targetIso⟩
 
 end AlgebraicGeometry

@@ -17,40 +17,55 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat resolution of a representative of E. Its total tensor with G represents E tensor^L G using the derived tensor counit for a K-flat left factor.",
+   "text": "Choose a K-flat resolution P of a complex representing E. Localizing its quasi-isomorphism gives eP:Q(P) ≅ E. Apply the existing public theorem kFlat_derivedTensor_comparison_natIso to constant one-object families and evaluate its components directly, without declaring a duplicate object-model lemma, to get Q(P) tensor Q(G) ≅ Q(Tot(P tensor G)). Compose with tensorIso eP.symm (Iso.refl _) to obtain α.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-pc-kflat-derived-tensor-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply relativelyFlat_derivedBaseChange_complex to the K-flat representative, its tensor identification, and the supplied quasi-coherence, upper bound and relative flatness. Take asIso of its invertible composite.",
+   "text": "Apply relativelyFlat_derivedBaseChange_complex to f, g, E, G, the given quasi-coherence, upper bound and relative flatness, and P, hP, eP, α. Its IsIso proof supplies the base-change object isomorphism via asIso.",
    "uses": [
     "lem-pc-rf-base-change-complex"
    ],
    "elementary": false
   },
   {
-   "text": "Ordinary pullback of the total tensor is the total tensor of the ordinary pullbacks by module tensor compatibility. The pulled K-flat left factor represents derived pullback of E. Thus this total complex represents the tensor of that object with Q of the ordinary pulled G. Apply the direct-image functor to this identification and compose with the preceding isomorphism. No derived pullback of G is substituted.",
+   "text": "Extract the termwise total-tensor comparison φ from derivedPullback_tensorProduct. The recorded object and map formulas identify its functor F strictly with Scheme.Modules.tensorPullback g′ by Functor.ext. Use φ at P and G; its statement provides this comparison for arbitrary complexes, so G is not required to be K-flat.",
    "uses": [
-    "lem-pc-derived-pullback-tensor-product",
-    "lem-pc-kflat-pullback-preservation"
+    "lem-pc-derived-pullback-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The explicit ringed-space pullback of P is definitionally its termwise scheme tensor pullback. Specialize isKFlat_pullback to the scheme structure map to prove this pulled P K-flat. Apply the same existing public natural derived-tensor comparison again and evaluate its components directly, now at g′*P and g′*G.",
+   "uses": [
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the K-flat counit clause for the recorded derivedPullback g′ from exists_derivedPullback. Its object and map formulas again identify the underived functor with tensorPullback g′. The invertible counit at P gives dP:Lg′*Q(P) ≅ Q(g′*P). Compose Q(φ), the inverse pulled tensor comparison, and tensorIso (dP.symm followed by Lg′*(eP)) (Iso.refl _) to identify the ordinary pulled total tensor with Lg′*E tensor Q(g′*G). Map this identification through RfT,* and compose with the preceding base-change isomorphism.",
+   "uses": [
+    "def-pc-derived-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
   "lem-pc-derived-pullback-tensor-product",
+  "lem-pc-kflat-derived-tensor-comparison",
   "lem-pc-kflat-pullback-preservation",
   "lem-pc-kflat-resolution",
   "lem-pc-rf-base-change-complex"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project (source checked at https://stacks.math.columbia.edu/tag/0A1H and linked tags)",
-  "place": "Tag 0A1D, lemma-base-change-tensor, object-level reading of its canonical comparison"
+  "document": "Stacks Project (https://stacks.math.columbia.edu/tag/0A1D, https://stacks.math.columbia.edu/tag/06YC, https://stacks.math.columbia.edu/tag/06YH)",
+  "place": "Tag 0A1D, lemma-base-change-tensor: object-level comparison in K-flat coordinates; Tags 06YC and 06YH for pullback preservation and derived tensor"
  },
  "mathlib_searches": [
   {
@@ -147,11 +162,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-cbcd4",
-  "group": "R1",
+  "reviewer": "COMPILER",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T024044-L-3337853",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proof with node records, correction with Stacks 0A1D/0A1H, and downstream uses; four delivery modules and four direct importers compile cleanly; axioms conform."
+  "landing": "20261013T040749-L-3949137",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
