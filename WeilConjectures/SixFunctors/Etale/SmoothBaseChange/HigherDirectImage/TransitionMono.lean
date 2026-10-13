@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Limit
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Limit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 
 /-!
