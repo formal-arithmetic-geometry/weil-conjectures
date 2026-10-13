@@ -17,50 +17,36 @@
  },
  "proof": [
   {
-   "text": "On an affine open B of Tprime the old affine intersections base change to affine opens. Their new coefficient sections are Gamma(B,O) tensor over Gamma(U,O) the old sections. The affine-section pullback pure-tensor formula commutes with each face restriction and with restriction in B. Use the canonical GammaSpecIso and affine chart actions of the specified model.",
+   "text": "Apply the termwise coordinate theorem to the specified pulled-back model and M = gprime pullback F. It supplies the increasing-tuple additive equivalences, restriction compatibility, local scalar action, and signed differential equation on every open of Tprime.",
    "uses": [
-    "lem-pc-finite-affine-cech-intersection-base-change",
-    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-pc-finite-affine-cech-base-change-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified finite affine model has zero negative terms, and additive pullback preserves this property. Apply the ordered module-sheaf comparison to the coordinates and the given e, hd and hlinear. It gives a homotopy equivalence from the pulled-back model to the direct image of D extended by zero.",
+   "uses": [
+    "lem-pc-ordered-cech-module-comparison",
     "def-pc-finite-affine-cech-model"
    ],
    "elementary": false
   },
   {
-   "text": "Each increasing-tuple product is finite, so tensor commutes with it. These termwise maps commute with the signed face sums and assemble into isomorphisms of the increasing-tuple section complexes on B. The natural degree extension is zero in negative degrees, and the universe lift only reindexes finite products.",
-   "uses": [
-    "def-sc-alternating-cech-total-complex"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The usual-to-ordered restriction induces isomorphisms on homology by the ordered Cech comparison, applied also to a family covering just its union. e and hd identify the usual sheaf complex with D after forgetting to global-ring module presheaves; the additional scalar formula supplies full local module linearity. The induced sheaf-complex comparison is thus a comparison of module sheaves, not merely abelian sheaves.",
-   "uses": [
-    "lem-pc-alternating-cech-computes",
-    "lem-pc-linear-cech-sheaf-resolution"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict to every affine B. The termwise constructions and the ordered comparison are restriction-compatible, so their homology isomorphisms agree on overlaps and glue. Restriction of sheaves is exact and hence commutes with homology. This identifies the specified pulled-back model homology with Hq(fprime_*D), without using an augmentation of D or a tensor-homology exchange. An empty family has zero terms on both sides.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
+   "text": "For each natural q, apply HomotopyEquiv.toHomologyIso at integer q. Compose it with HomologicalComplex.extendHomologyIso for embeddingUpNat at q; this identifies the extended homology with the original natural-degree homology of pushforward D. The composition is the required module-sheaf isomorphism.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-finite-affine-cech-model",
-  "def-sc-alternating-cech-total-complex",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pc-alternating-cech-computes",
-  "lem-pc-finite-affine-cech-intersection-base-change",
-  "lem-pc-linear-cech-sheaf-resolution",
-  "lem-weil-pbc-module-pullback-affine-sections"
+  "lem-pc-finite-affine-cech-base-change-coordinates",
+  "lem-pc-ordered-cech-module-comparison"
  ],
  "proof_origin": {
-  "by": "worker F1",
+  "by": "worker A2",
   "document": "Stacks Project",
-  "place": "Tag 02KE, affine termwise calculation; Tags 01FJ, 01FK and 01FM, ordered Cech comparison; explicit Lean reduction by F1"
+  "place": "Tag 02KE, termwise calculation; Tags 01FJ, 01FK and 01FM, ordered comparison",
+  "note": "Lean composition of termwise coordinates, module-sheaf homotopy equivalence, and Mathlib homology of extension; two strictly intermediate holes split off."
  },
  "mathlib_searches": [
   {
@@ -133,9 +119,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T034204-L-3765828",
+  "landing": "20261013T045509-L-123673",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

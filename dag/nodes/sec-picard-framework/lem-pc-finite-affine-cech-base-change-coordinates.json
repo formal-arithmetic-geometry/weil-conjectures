@@ -1,0 +1,159 @@
+{
+ "id": "lem-pc-finite-affine-cech-base-change-coordinates",
+ "kind": "statement",
+ "title": "Local coordinates of the pulled-back finite affine Cech complex",
+ "statement": "Let $f:X\\to T$ be a separated morphism of schemes [def-pc-morphism-conventions], $F$ a quasi-coherent module sheaf on $X$ [def-weil-sheaf-of-modules-category], $U\\subset T$ affine, and $V_i$, $i\\in\\operatorname{Fin}(r)$, any finite family of affine opens of $Y=f^{-1}U$. Let $g:T'\\to U$, $g':X'\\to X$, and $f':X'\\to T'$ give a cartesian square for $f$ and $g$ followed by $U\\hookrightarrow T$ [def-pc-fibre-product]. Write $W_i=(g')^{-1}(j_Y(V_i))$, $M=(g')^*F$ [def-pc-module-pullback], and $K=g^*C(f|_U,F|_Y,V)$ for the specified finite affine complex [def-pc-finite-affine-cech-model]. Then there are additive equivalences for every $p\\in\\mathbb N$ and open $B\\subset T'$,\n$a_{p,B}:\\Gamma(B,K^p)\\simeq\\prod_{t:\\operatorname{Fin}(p+1)\\hookrightarrow_o\\operatorname{Fin}(r)}\\Gamma((\\bigcap_l W_{t(l)})\\cap(f')^{-1}B,M)$, where the intersections and face maps are [def-sc-alternating-cech-total-complex]. These maps commute with restrictions of $B$. Under them the action of $b\\in\\Gamma(B,\\mathcal O_{T'})$ in coordinate $t$ is multiplication by the restriction of $(f')^*b$ to that intersection. They intertwine the differential with the sum over deleting position $j$, with coefficient $(-1)^j$ and coefficient-section restriction from the face intersection to the full intersection. No covering, flatness, or homology assertion is imposed.",
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-finite-affine-cech-model",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Coherence unit part (a), the termwise finite affine Cech calculation before taking homology; Tag 02KE, Lemma 30.5.1 and termwise calculation in proof of Lemma 30.5.2 (https://stacks.math.columbia.edu/tag/02KE)"
+ },
+ "proof": [
+  {
+   "text": "Put Y = f inverse image U. Since f is separated and U affine, Y is separated. Each increasing tuple has nonempty length, so its intersection Z is an affine open of Y. The supplied pullback square identifies the new intersection with Z times_U Tprime. The intersection base-change theorem shows its map to Tprime is affine. Consequently its inverse image over an affine B in Tprime is affine.",
+   "uses": [
+    "lem-pc-finite-affine-cech-intersection-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine pullback section formula to F restricted to Z and the base-changed affine intersection over B. Identify its section ring with Gamma(B,O) tensor over Gamma(U,O) Gamma(Z,O). Associativity of tensor products gives its coefficient module as Gamma(B,O) tensor over Gamma(U,O) Gamma(Z,F). The map sends b tensor s to b times the restriction of the pullback-unit image of s. On the source side the GammaSpecIso scalar restriction and final affine-chart pullback in finiteAffineCechModel give this same tensor module.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-finite-affine-cech-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the finite type of increasing tuples, tensor preserves the product: finite products are finite direct sums, and the componentwise tensor map has inverse given by summing the inclusions. Thus the individual affine coefficient isomorphisms assemble into a bijective additive coordinate map on each affine B. The face maps and section restrictions commute with this map on pure tensors by naturality of the pullback unit and functoriality of restrictions; extend by additivity to all tensors. The pure-tensor map is Gamma(B,O)-linear. Signed face sums therefore commute with these coordinates. Extension from natural degrees identifies the terms at integer p and their differentials.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The affine-basis coordinate maps and their inverses agree on overlaps: restrict first to an affine basis of each overlap and use their already checked restriction equations. The sheaf gluing axiom extends the coordinates and their inverses to all B. Linearity, naturality and the signed differential identity are sheaf-local equations, so hold on all opens. If a coefficient intersection is empty its sections are zero; if r is zero or p+1 exceeds r the product index is empty, hence both terms are zero.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-affine-cech-model",
+  "def-sc-alternating-cech-total-complex",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-finite-affine-cech-intersection-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "worker A2",
+  "document": "Stacks Project",
+  "place": "Coherence unit part (a), the termwise finite affine Cech calculation before taking homology; Tag 02KE, Lemma 30.5.1 and termwise calculation in proof of Lemma 30.5.2 (https://stacks.math.columbia.edu/tag/02KE)",
+  "note": "Explicit module-sheaf formulation of the cited constructions, by A2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv, CochainComplex",
+   "results": "CochainComplex.mappingCone.rotateHomotopyEquiv, CochainComplex.mappingConeCompHomotopyEquiv, HomotopyEquiv.isKInjective, CochainComplex.cm5b.homotopyEquiv, HomotopyEquiv.isKProjective",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine Cech complex termwise base change agrees with ordered Cech cochains and usual Cech cochains up to homotopy",
+   "results": "Rep.standardComplex.compForgetAugmentedIso, AlgebraicTopology.DoldKan.Γ₀NondegComplexIso, AlgebraicTopology.DoldKan.Γ₀.Obj.map, AlgebraicTopology.alternatingFaceMapComplexConst, AlgebraicTopology.DoldKan.Γ₀_obj_obj, SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁_hom_f_f, AlgebraicTopology.DoldKan.Γ₀.obj_obj, AlgebraicTopology.singularChainComplexFunctorIsoOfTotallyDisconnectedSpace",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*[Hh]omotopy|[Hh]omotopy.*[Cc]ech|[Aa]lternating.*[Cc]ech",
+   "results": "No matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite affine Cech section complex commutes with arbitrary base change term by term",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechSectionBaseChange",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), the termwise finite affine Cech calculation before taking homology; Tag 02KE, Lemma 30.5.1 and termwise calculation in proof of Lemma 30.5.2 (https://stacks.math.columbia.edu/tag/02KE)",
+   "via": [
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineCechBaseChangeCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineCechBaseChangeCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteAffineCech_baseChange_coordinates",
+  "statement": "theorem finiteAffineCech_baseChange_coordinates {X T : Scheme.{u}} (f : X ⟶ T)\n    [IsSeparated f] (F : X.Modules) [F.IsQuasicoherent]\n    (U : T.Opens) (hU : IsAffineOpen U) {r : ℕ}\n    (V : Fin r → (f ⁻¹ᵁ U).toScheme.Opens) (hV : ∀ i, IsAffineOpen (V i))\n    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n    (sq : IsPullback g' f' f (g ≫ U.ι))\n    (W₀ : ULift.{u} (Fin r) → X'.Opens)\n    (hW : ∀ i, W₀ i = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ V i.down)) :\n    let K := ((Modules.pullback g).mapHomologicalComplex _).obj\n      (finiteAffineCechModel (f ∣_ U) (F.restrict (f ⁻¹ᵁ U).ι) V)\n    let M := (Modules.pullback g').obj F\n    ∃ a : ∀ (p : ℕ) (B : T'.Opens),\n      Γ(K.X (p : ℤ), B) ≃+\n        (∀ t : Fin (p + 1) ↪o Fin r,\n          Γ(M, alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t ⊓ f' ⁻¹ᵁ B)),\n      (∀ (p : ℕ) {B C : T'.Opens} (i : B ⟶ C)\n        (s : Γ(K.X (p : ℤ), C)) (t : Fin (p + 1) ↪o Fin r),\n      a p B ((K.X (p : ℤ)).presheaf.map i.op s) t =\n        M.presheaf.map (homOfLE (inf_le_inf le_rfl\n          ((TopologicalSpace.Opens.map f'.base).map i).le)).op (a p C s t)) ∧\n      (∀ (p : ℕ) (B : T'.Opens) (b : Γ(T', B))\n        (s : Γ(K.X (p : ℤ), B)) (t : Fin (p + 1) ↪o Fin r),\n      a p B (b • s) t =\n        X'.presheaf.map (homOfLE (show\n          alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t ⊓ f' ⁻¹ᵁ B ≤ f' ⁻¹ᵁ B\n            from inf_le_right)).op (f'.app B b) • a p B s t) ∧\n      (∀ (p : ℕ) (B : T'.Opens) (s : Γ(K.X (p : ℤ), B))\n        (t : Fin (p + 2) ↪o Fin r),\n      a (p + 1) B ((K.d (p : ℤ) ((p + 1 : ℕ) : ℤ)).app B s) t =\n        ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •\n          M.presheaf.map (homOfLE (inf_le_inf\n            (alternatingCechIntersection_face_le (fun i ↦ W₀ ⟨i⟩) p t j) le_rfl)).op\n              (a p B s ((Fin.succAboveOrderEmb j).trans t)))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T045509-L-123673",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T045509-L-123673",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

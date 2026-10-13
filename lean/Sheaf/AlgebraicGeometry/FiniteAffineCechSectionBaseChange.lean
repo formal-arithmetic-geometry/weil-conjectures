@@ -8,9 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import Sheaf.AlgebraicGeometry.FiniteAffineCechBaseChangeCoordinates
+import Sheaf.AlgebraicGeometry.OrderedCechModuleComparison
+import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # Termwise base change and the ordered Čech comparison
 
@@ -86,6 +86,21 @@ theorem finiteAffineCech_section_baseChange {X T : Scheme.{u}} (f : X ⟶ T)
     ∀ q : ℕ,
       Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj
           (finiteAffineCechModel (f ∣_ U) (F.restrict (f ⁻¹ᵁ U).ι) V)).homology q ≅
-        (((Modules.pushforward f').mapHomologicalComplex _).obj D).homology q) := by sorry
+        (((Modules.pushforward f').mapHomologicalComplex _).obj D).homology q) := by
+  obtain ⟨a, hn, hl, ha⟩ :=
+    finiteAffineCech_baseChange_coordinates f F U hU V hV g g' f' sq W hW
+  let K : CochainComplex T'.Modules ℤ := ((Modules.pullback g).mapHomologicalComplex _).obj
+    (finiteAffineCechModel (f ∣_ U) (F.restrict (f ⁻¹ᵁ U).ι) V)
+  have hK : K.IsStrictlyGE 0 := by
+    have : (finiteAffineCechModel (f ∣_ U) (F.restrict (f ⁻¹ᵁ U).ι) V).IsStrictlyGE 0 :=
+      finiteAffineCechModel_ge _ _ V
+    dsimp only [K]
+    infer_instance
+  obtain ⟨E⟩ := orderedCech_module_comparison f' ((Modules.pullback g').obj F) W
+    K hK a hn hl ha D e hd hlinear
+  intro q
+  exact ⟨E.toHomologyIso (q : ℤ) ≪≫
+    (((Modules.pushforward f').mapHomologicalComplex _).obj D).extendHomologyIso
+      ComplexShape.embeddingUpNat (j := q) rfl⟩
 
 end AlgebraicGeometry.Scheme.Modules
