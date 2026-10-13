@@ -7,6 +7,9 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.Basic
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
+import Sheaf.Algebra.Homology.DerivedTensorSecondLocalizationModels
+import Sheaf.Algebra.Homology.DerivedTensorBaseLocalizationModels
 /-! # Localizing the base and second factor of a derived tensor
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
@@ -26,6 +29,29 @@ open scoped TensorProduct ChangeOfRings
 attribute [local instance] Algebra.TensorProduct.rightAlgebra
 
 namespace RingTensorCohomology
+
+/-- Changing equal scalar maps gives the identity on pure tensors. -/
+private noncomputable def equalScalarComplexIso
+    (S T : Type u) [CommRing S] [CommRing T] (f g : S →+* T) (h : f = g)
+    (Q : CochainComplex (ModuleCat.{u} S) ℤ) :
+    ((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj Q ≅
+      ((ModuleCat.extendScalars g).mapHomologicalComplex (.up ℤ)).obj Q :=
+  eqToIso (congrArg
+    (fun k : S →+* T ↦ ((ModuleCat.extendScalars k).mapHomologicalComplex (.up ℤ)).obj Q) h)
+
+private theorem equalScalarComplexIso_tmul
+    (S T : Type u) [CommRing S] [CommRing T] (f g : S →+* T) (h : f = g)
+    (Q : CochainComplex (ModuleCat.{u} S) ℤ) (j : ℤ) (d : T) (x : Q.X j) :
+    (equalScalarComplexIso S T f g h Q).hom.f j (d ⊗ₜ[S, f] x) = d ⊗ₜ[S, g] x := by
+  subst g
+  rfl
+
+private theorem equalScalarComplexIso_inv_tmul
+    (S T : Type u) [CommRing S] [CommRing T] (f g : S →+* T) (h : f = g)
+    (Q : CochainComplex (ModuleCat.{u} S) ℤ) (j : ℤ) (d : T) (x : Q.X j) :
+    (equalScalarComplexIso S T f g h Q).inv.f j (d ⊗ₜ[S, g] x) = d ⊗ₜ[S, f] x := by
+  subst g
+  rfl
 
 variable (R A B Rp Bp D : Type u)
   [CommRing R] [CommRing A] [CommRing B] [CommRing Rp] [CommRing Bp] [CommRing D]
@@ -131,6 +157,77 @@ theorem derivedTensor_base_second_localization_models
             (e Q' L' K').hom =
           (e Q L K).hom ≫
             (ModuleCat.extendScalars (algebraMap (A ⊗[Rp] Bp) D)).map h) := by
-  sorry
+  classical
+  let : Algebra R D :=
+    ((algebraMap (A ⊗[R] B) D).comp (algebraMap R (A ⊗[R] B))).toAlgebra
+  let : IsScalarTower R (A ⊗[R] B) D :=
+    IsScalarTower.of_algebraMap_eq' rfl
+  let : IsScalarTower R A D := IsScalarTower.of_algebraMap_eq' (by
+    rw [IsScalarTower.algebraMap_eq R (A ⊗[R] B) D,
+      IsScalarTower.algebraMap_eq R A (A ⊗[R] B),
+      IsScalarTower.algebraMap_eq A (A ⊗[R] B) D]
+    rfl)
+  let : IsScalarTower R B D := IsScalarTower.of_algebraMap_eq' (by
+    rw [IsScalarTower.algebraMap_eq R (A ⊗[R] B) D,
+      IsScalarTower.algebraMap_eq R B (A ⊗[R] B),
+      IsScalarTower.algebraMap_eq B (A ⊗[R] B) D]
+    rfl)
+  let : IsScalarTower R Bp D := IsScalarTower.of_algebraMap_eq' (by
+    rw [IsScalarTower.algebraMap_eq R B D, IsScalarTower.algebraMap_eq B Bp D,
+      IsScalarTower.algebraMap_eq R B Bp]
+    rfl)
+  let φ : (A ⊗[R] Bp) →ₐ[R] D := Algebra.TensorProduct.lift
+    (IsScalarTower.toAlgHom R A D) (IsScalarTower.toAlgHom R Bp D)
+      (fun _ _ ↦ Commute.all _ _)
+  let : Algebra (A ⊗[R] Bp) D := φ.toRingHom.toAlgebra
+  let : IsScalarTower A (A ⊗[R] Bp) D :=
+    IsScalarTower.of_algebraMap_eq' (by
+      ext x
+      change algebraMap A D x = φ (x ⊗ₜ[R] (1 : Bp))
+      simp [φ])
+  let : IsScalarTower Bp (A ⊗[R] Bp) D :=
+    IsScalarTower.of_algebraMap_eq' (by
+      ext x
+      change algebraMap Bp D x = φ ((1 : A) ⊗ₜ[R] x)
+      simp [φ])
+  obtain ⟨e₁, c₁, n₁⟩ := derivedTensor_second_localization_models R A B Bp D T i
+  obtain ⟨e₂, c₂, n₂⟩ := derivedTensor_base_localization_models R A Bp Rp D S i
+  let U : ∀ Q : CochainComplex (ModuleCat.{u} A) ℤ,
+      ModuleCat.BaseDerivedTensorCohomologyModel R A Bp Q D :=
+    fun Q ↦ Classical.choice
+      (ModuleCat.nonempty_baseDerivedTensorCohomologyModel R A Bp Q D)
+  refine ⟨fun Q L K ↦ e₁ Q L (U Q) ≪≫ e₂ Q (U Q) K, ?_, ?_⟩
+  · intro Q L K τ hτ
+    let f₀ := (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B))
+    let f₁ := (algebraMap (A ⊗[R] Bp) D).comp (algebraMap A (A ⊗[R] Bp))
+    have hf : f₀ = f₁ := by
+      dsimp [f₀, f₁]
+      rw [← IsScalarTower.algebraMap_eq A (A ⊗[R] B) D,
+        ← IsScalarTower.algebraMap_eq A (A ⊗[R] Bp) D]
+    let τ₀ := equalScalarComplexIso A D f₀ f₁ hf Q
+    let τ₂ := τ₀.symm ≪≫ τ
+    have hc₁ := c₁ Q L (U Q) τ₀ (by
+      intro j d x
+      exact equalScalarComplexIso_tmul A D f₀ f₁ hf Q j d x)
+    have hc₂ := c₂ Q (U Q) K τ₂ (by
+      intro j d x
+      change τ.hom.f j (τ₀.inv.f j _) = _
+      rw [equalScalarComplexIso_inv_tmul, hτ])
+    have hcomp : τ₀.hom ≫ τ₂.hom = τ.hom := by simp [τ₂]
+    change L.localizedComparison i ≫ HomologicalComplex.homologyMap τ.hom i =
+      (e₁ Q L (U Q)).hom ≫ (e₂ Q (U Q) K).hom ≫ K.localizedComparison i
+    rw [← hcomp, HomologicalComplex.homologyMap_comp, ← Category.assoc, hc₁,
+      Category.assoc]
+    exact congrArg (fun k ↦ (e₁ Q L (U Q)).hom ≫ k) hc₂
+  · intro Q Q' f L K L' K' δ ε g h hδ hg hε hh
+    obtain ⟨δ₀, g₀, hδ₀, hg₀⟩ := exists_baseDerivedTensorCohomologyModelMap
+      R A Bp D Q Q' f (U Q) (U Q') i
+    have hn₁ := n₁ Q Q' f L (U Q) L' (U Q') δ δ₀ g g₀ hδ hg hδ₀ hg₀
+    have hn₂ := n₂ Q Q' f (U Q) K (U Q') K' δ₀ ε g₀ h hδ₀ hg₀ hε hh
+    change (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).map g ≫
+        ((e₁ Q' L' (U Q')).hom ≫ (e₂ Q' (U Q') K').hom) =
+      ((e₁ Q L (U Q)).hom ≫ (e₂ Q (U Q) K).hom) ≫
+        (ModuleCat.extendScalars (algebraMap (A ⊗[Rp] Bp) D)).map h
+    rw [← Category.assoc, hn₁, Category.assoc, hn₂, Category.assoc]
 
 end RingTensorCohomology

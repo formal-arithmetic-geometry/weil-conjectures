@@ -13,46 +13,42 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat R-resolution F of B[0]. Since Q is an Rp-complex, tensor localization identifies Q tensor_R F with Q tensor_Rp (Rp tensor_R F). Localization is exact and preserves K-flatness, so the localized F resolves Rp tensor_R B.",
+   "text": "Construct A tensor_R Bp -> D from the compatible maps from A and Bp using the tensor algebra universal property. Its restrictions to A and Bp are the prescribed maps. Apply second-factor localization to obtain e1 from L to an intermediate (R,A,Bp)-model, and localized-base change to obtain e2 from that model to K. Compose e1 and e2.",
    "uses": [
-    "lem-pc-balanced-derived-tensor-model",
-    "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-pc-kflat-extension-of-scalars"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The map Rp tensor_R B to Bp is a flat localization: Bp already inverts S via its Rp-algebra structure. Apply flat second-factor localization, then tensor associativity to extend cohomology to D.",
-   "uses": [
-    "lem-pc-derived-tensor-flat-second-localization",
-    "lem-weil-pbc-localization-flat"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The localized augmentation gives the same comparison map; its ordinary target remains D tensor_A Q. Multiplication and chain maps commute with localization. Transport to arbitrary models by counit uniqueness and their cohomology action equations.",
-   "uses": [
-    "lem-pc-derived-tensor-action-naturality",
+    "lem-pc-derived-tensor-second-localization-models",
+    "lem-pc-derived-tensor-base-localization-models",
     "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The A -> D composites through all three coefficient tensor algebras agree by scalar towers. Equality of these maps yields an ordinary complex isomorphism tau0 fixing pure tensors. Factor the given tau as tau0 followed by tau0 inverse followed by tau. Apply both comparison squares, and use functoriality of homology and associativity to compose them.",
+   "uses": [
+    "lem-pc-derived-tensor-second-localization-models",
+    "lem-pc-derived-tensor-base-localization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For Q -> Qprime, obtain a counit-compatible map between intermediate models and its tensor-linear cohomology map. Apply the two naturality equations to these maps and compose them by associativity. This proves naturality for the original characterized g and h.",
+   "uses": [
+    "lem-pc-derived-tensor-second-localization-models",
+    "lem-pc-derived-tensor-base-localization-models",
+    "lem-pc-base-derived-tensor-cohomology-model-map"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-balanced-derived-tensor-model",
-  "lem-weil-pbc-localization-tensor-product",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-pc-kflat-extension-of-scalars",
-  "lem-pc-derived-tensor-flat-second-localization",
-  "lem-weil-pbc-localization-flat",
-  "lem-pc-derived-tensor-action-naturality",
-  "def-pc-base-derived-tensor-cohomology-model"
+  "lem-pc-derived-tensor-second-localization-models",
+  "lem-pc-derived-tensor-base-localization-models",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-base-derived-tensor-cohomology-model-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ8, affine identity, separated into first-factor and base/second-factor localizations"
+  "place": "Tag 0DJ8 affine identity; G1 separates second-factor localization followed by change of base and proves their composition"
  },
  "mathlib_searches": [
   {
@@ -123,9 +119,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T100224-L-2504027",
+  "landing": "20261013T125009-L-3836642",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
