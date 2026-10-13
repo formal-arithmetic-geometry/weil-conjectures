@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.TorsionControlledLocalCocycle
+import Sheaf.AlgebraicGeometry.TorsionControlledDescendedSourceComparisons
+import Sheaf.Topology.GlueSheavesOfModules
 
 /-! # Algebraic descent with local formal comparisons
 
@@ -95,6 +98,21 @@ theorem torsionControlled_algebraization_local_descent
             (Scheme.idealSheafPower (J.comap (U i).ι).toModulesι s).2 (kernel ai.hom)) ∧
           IsZero (Scheme.idealModuleProduct
             (Scheme.idealSheafPower (J.comap (U i).ι).toModulesι s).2
-            (cokernel ai.hom))) := by sorry
+            (cokernel ai.hom))) := by
+  classical
+  choose Fi ai βi hfactor hbound using hlocal
+  obtain ⟨Li, li, bi, qi, θ, hbi, hqi, hδ, hcoc, hbcompat, hqcompat⟩ :=
+    torsionControlled_local_cocycle
+      J H N δ ι U Hlocal hHlocal γ hγ Fi ai βi hfactor hbound
+  obtain ⟨M, φ, hφ⟩ :=
+    (glue_sheaves_of_modules.{u, u} X.toRingedSpace ι U hcover).2.2 Li θ hcoc
+  obtain ⟨hM, a, ε, hε, hδε, he⟩ :=
+    torsionControlled_descended_source_comparisons
+      J H N δ ι U hcover Hlocal hHlocal Fi ai βi Li li bi qi θ
+      hbi hqi hδ hbcompat hqcompat M φ hφ
+  refine ⟨⟨M, hM⟩, a, ε, hε, hδε, ?_⟩
+  intro i
+  obtain ⟨e, he⟩ := he i
+  exact ⟨Fi i, ai i, e, he, hbound i⟩
 
 end AlgebraicGeometry

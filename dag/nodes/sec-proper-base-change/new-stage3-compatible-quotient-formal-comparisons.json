@@ -1,0 +1,113 @@
+{
+ "id": "new-stage3-compatible-quotient-formal-comparisons",
+ "kind": "lemma",
+ "title": "Compatible local quotient maps identify a fixed coherent source's completion with N.",
+ "statement": "Let $X$ be a Noetherian scheme, $J$ ideal sheaf data, $H$ a coherent module and $N$ a coherent formal module for $J$ [def-weil-pbc-coherent-formal-module], and $\\delta:N\\to H^\\wedge$. Let $(U_i)$ be a family of open subschemes. Fix a coherent global $F$ and $a:F\\to H$. Supply coherent $F_i$, identifications $e_i:F|_{U_i}\\cong F_i$, and $\\beta_i:N|_{U_i}\\cong F_i^\\wedge$. Supply maps $p_{i,n}:F|_{U_i}\\to N_n|_{U_i}$ which, under the open-subscheme/over-site equivalence, equal $e_i\\pi_{F_i,n}\\beta_{i,n}^{-1}$. Assume these maps agree on every open in a pairwise intersection and $p_{i,n}\\delta_n=a|_{U_i}\\pi_{H,n}|_{U_i}$. Then there are system isomorphisms $\\epsilon_i:N|_{U_i}\\cong F^\\wedge|_{U_i}$ whose hom components agree on every contained open and satisfy $\\delta_n|_{U_i}=\\epsilon_{i,n}a^\\wedge_n|_{U_i}$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), first sentence of the proof (Zariski locality via uniqueness); Sheaves Tags 00AL and 00AM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Restriction along an open immersion is exact and commutes with ideal-module\nproducts and ideal powers. It therefore identifies each restricted quotient of F\nwith the quotient of Fi through ei, compatibly with the quotient projections.\nCombining this normalized comparison with βi.inv gives an isomorphism from the\nrestricted quotient of F to N at each level. The normalization equation for pi\nsays that the projection followed by this isomorphism is pi. Quotient projections\nare epimorphisms. Thus hcompat, checked at every open in a pairwise intersection,\nidentifies these isomorphisms there. Their inverses also agree there. The canonical\nquotient transitions and the naturality of βi identify the component maps as an\nisomorphism of inverse systems. Its inverse is ε. Precompose the required\nfactorization with the quotient projection; hδ gives equality, and cancellation\nof this epimorphism proves the equation. For J=0 projections are isomorphisms;\nfor J=1 all quotients and N on the covering opens are zero; empty covers have\nno comparison obligations.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-formal-restriction",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-torsion-controlled-formal-restriction",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), first sentence of the proof (Zariski locality via uniqueness); Sheaves Tags 00AL and 00AM; explicit interfaces and Lean assembly by E1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unique lifted algebraic isomorphisms between torsion controlled triples form an overlap cocycle",
+   "results": "; Algebra.Extension.h1Cotangentι_ext, Algebra.Extension.h1Cotangentι_ext_iff, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.Extension.Cotangent.ext, Algebra.Extension.H1Cotangent.map_eq, Algebra.SubmersivePresentation.subsingleton_h1Cotangent, Algebra.Generators.H1Cotangent.δ_comp_equiv, Algebra.SubmersivePresentation.cotangentEquiv_apply",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component tools used in compiled proofs where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "results": "; AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component tools used in compiled proofs where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "torsionControlled.*cocycle|compatible_quotient_formal_comparisons|descended_source_comparisons",
+   "results": "; ",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component tools used in compiled proofs where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible local quotient maps identify the completion of a coherent sheaf with a formal system",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationLocalDescent",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Local descent subargument: Compatible local quotient maps identify a fixed coherent source's completion with N.",
+   "via": [
+    "new-stage3-torsion-controlled-algebraization-local-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleQuotientFormalComparisons.lean",
+  "declaration": "AlgebraicGeometry.compatible_quotient_formal_comparisons",
+  "statement": "theorem compatible_quotient_formal_comparisons\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    (H F : CoherentModules X) (N : CoherentFormalModule X J)\n    (δ : N ⟶ (completion X J).obj H) (a : F ⟶ H)\n    (ι : Type u) (U : ι → X.Opens)\n    (Fi : ∀ i, CoherentModules (U i).toScheme)\n    (ei : ∀ i, (Scheme.Modules.restrictFunctor (U i).ι).obj F.obj ≅ (Fi i).obj)\n    (βi : ∀ i, N.obj ⋙ Scheme.Modules.restrictFunctor (U i).ι ≅\n      formalCompletionSystem (J.comap (U i).ι) (Fi i).obj)\n    (pi : ∀ (i : ι) (n : ℕᵒᵖ), F.obj.over (U i) ⟶ (N.obj.obj n).over (U i))\n    (hpi : ∀ (i : ι) (n : ℕᵒᵖ),\n      (Scheme.Modules.overEquiv (U i)).functor.map (pi i n) ≫\n        (Scheme.Modules.overFunctorEquiv (U i)).hom.app (N.obj.obj n) =\n      (Scheme.Modules.overFunctorEquiv (U i)).hom.app F.obj ≫ (ei i).hom ≫\n        formalModuleQuotientπ (J.comap (U i).ι) (n.unop + 1) (Fi i).obj ≫\n          (βi i).inv.app n)\n    (hcompat : ∀ (n : ℕᵒᵖ) (i j : ι) (W : X.Opens) (hi : W ≤ U i) (hj : W ≤ U j),\n      (pi i n).val.app (op (Over.mk (homOfLE hi))) =\n        (pi j n).val.app (op (Over.mk (homOfLE hj))))\n    (hδ : ∀ (i : ι) (n : ℕᵒᵖ), pi i n ≫ (δ.hom.app n).over (U i) =\n      a.hom.over (U i) ≫ (formalModuleQuotientπ J (n.unop + 1) H.obj).over (U i)) :\n    ∃ ε : ∀ i, N.obj ⋙ SheafOfModules.overFunctor\n        (moduleRings X.toRingedSpace) (U i) ≅\n        ((completion X J).obj F).obj ⋙ SheafOfModules.overFunctor\n          (moduleRings X.toRingedSpace) (U i),\n      (∀ (n : ℕᵒᵖ) (i j : ι) (W : X.Opens) (hi : W ≤ U i) (hj : W ≤ U j),\n        ((ε i).hom.app n).val.app (op (Over.mk (homOfLE hi))) =\n          ((ε j).hom.app n).val.app (op (Over.mk (homOfLE hj)))) ∧\n      (∀ (n : ℕᵒᵖ) (i : ι), (δ.hom.app n).over (U i) =\n        (ε i).hom.app n ≫ (((completion X J).map a).hom.app n).over (U i))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T072345-L-1117565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T072345-L-1117565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
