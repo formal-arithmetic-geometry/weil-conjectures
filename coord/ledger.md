@@ -12373,3 +12373,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:12 L: merged deliver/J4/Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison (stage 3; reviewer PASS; first push; landing 20261013T121222-L-3505965 (proof); batch 20261013T121219; modules 1; new nodes 0)
 - 12:12 L: merged deliver/K1/Sheaf.AlgebraicGeometry.FinitePresentationLocalObjectModels (stage 3; reviewer PASS; first push; landing 20261013T121222-L-3506120 (interface); batch 20261013T121219; modules 2; new nodes 1)
 - 12:12 L: merged deliver/M4/Sheaf.AlgebraicGeometry.KoszulSelfExtYonedaSurjection (stage 3; reviewer PASS; first push; landing 20261013T121222-L-3506236 (interface); batch 20261013T121219; modules 2; new nodes 1)
+- 12:12 L: merged deliver/P4/Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparison (stage 3; reviewer PASS; first push; landing 20261013T121223-L-3506391 (interface); batch 20261013T121219; modules 2; new nodes 1)

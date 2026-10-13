@@ -6,6 +6,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.StalkComparisonSourceTransport
 public import Sheaf.Algebra.Homology.BaseDerivedTensorLocalizedNaturality
+import all Mathlib.Algebra.Homology.Localization
+import Sheaf.Algebra.Homology.BaseDerivedExtensionLinear
+import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import Sheaf.Algebra.Homology.KFlatStalkCriterion
+import Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIso
 
 /-! # Derived scalar extension and the stalk of derived pullback
 
@@ -27,12 +32,35 @@ noncomputable section
 
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
+private theorem homology_comparison
+    {D : Type u} [CommRing D] [HasDerivedCategory.{w} (ModuleCat.{u} D)]
+    {M N : CochainComplex (ModuleCat.{u} D) ℤ}
+    {U V W : DerivedCategory (ModuleCat.{u} D)}
+    (s : U ≅ DerivedCategory.Q.obj M) (k : V ≅ DerivedCategory.Q.obj N)
+    (t : M ≅ N) (v : V ⟶ W) (i : ℤ) :
+    ((DerivedCategory.homologyFunctor _ i).mapIso s ≪≫
+      (DerivedCategory.homologyFunctorFactors _ i).app M).inv ≫
+        (DerivedCategory.homologyFunctor _ i).map
+          (s.hom ≫ DerivedCategory.Q.map t.hom ≫ k.inv ≫ v) =
+      HomologicalComplex.homologyMap t.hom i ≫
+        ((DerivedCategory.homologyFunctor _ i).mapIso k ≪≫
+          (DerivedCategory.homologyFunctorFactors _ i).app N).inv ≫
+        (DerivedCategory.homologyFunctor _ i).map v := by
+  simp only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv,
+    Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc, s.inv_hom_id]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  exact congrArg (fun h ↦ h ≫ (DerivedCategory.homologyFunctor _ i).map k.inv ≫
+    (DerivedCategory.homologyFunctor _ i).map v)
+    ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} D) i).inv.naturality t.hom).symm
+
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
   {X X' S S' : Scheme.{u}}
   (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
   (sq : IsPullback g' f' f g)
 
+set_option linter.unusedVariables false in
 /-- Derived extension of the original stalk identifies naturally with the stalk of
 sheaf derived pullback. The computation on K-flat complexes uses precisely the
 specified tensor-stalk isomorphism and the two universal counits.
@@ -87,6 +115,45 @@ theorem exists_stalkDerivedExtensionComparison (z : X') :
                   (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)
                     i).inv ≫
                 (comparisonStalkCohomology X' z i).map
-                  (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by sorry
+                  (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
+  let := leftAlgebra f g' z
+  let := rightAlgebra f f' g g' sq z
+  let := (tensorMap f f' g g' sq z).toAlgebra
+  let := HasDerivedCategory.standard (ModuleCat.{u} (A g' z))
+  let := HasDerivedCategory.standard (ModuleCat.{u} (C z))
+  let ρ := (algebraMap (A g' z ⊗[R f g' z] B f' z) (C z)).comp
+    (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z))
+  let : Algebra (A g' z) (C z) := ρ.toAlgebra
+  obtain ⟨L, ε, hL, _hadd, _hscalar⟩ :=
+    ModuleCat.exists_baseDerivedExtension_linear (A g' z) (C z)
+  refine ⟨L, ε, hL, ?_⟩
+  obtain ⟨j, hj⟩ := exists_stalkDerivedExtensionComparisonIso f f' g g' sq z L ε hL
+  refine ⟨j, ?_⟩
+  intro P hP hcP
+  have hsP := ModuleCat.scalarExtensionCounit_isIso_of_kFlat ρ (stalkComplex g' z P)
+    ((RingedSpace.isKFlat_iff_stalk_isKFlat X.toRingedSpace P).mp hP (g' z)) L ε hL
+  refine ⟨hsP, ?_⟩
+  intro i
+  let := hsP
+  let E := ModuleCat.extendScalars.{u, u, u} ρ
+  let s := L.mapIso ((DerivedCategory.quotientCompQhIso _).symm.app
+      (stalkComplex g' z P)) ≪≫
+    asIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (stalkComplex g' z P))) ≪≫
+    DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).app
+      (stalkComplex g' z P)) ≪≫
+    (DerivedCategory.quotientCompQhIso _).app (tensorComplex f f' g g' sq z P)
+  let k := (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapDerivedCategoryFactors.app
+      (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)
+  rw [hj P hP hcP]
+  convert homology_comparison s k (tensorStalkIso f f' g g' sq z P)
+    ((comparisonDerivedStalk X' z).map
+      (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))) i using 1 <;>
+    simp only [s, k, E, ρ, tensorComplex, RingHom.algebraMap_toAlgebra,
+      Functor.comp_obj, HomologicalComplex.homologyFunctor_obj,
+      ModuleCat.scalarExtensionHomologyIso,
+      comparisonStalkHomologyIso, comparisonStalkCohomology, Functor.comp_map,
+      Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.app_inv, Iso.symm_hom,
+      asIso_hom, Category.assoc]
+  rfl
 
 end AlgebraicGeometry.SingleComplexBaseChange
