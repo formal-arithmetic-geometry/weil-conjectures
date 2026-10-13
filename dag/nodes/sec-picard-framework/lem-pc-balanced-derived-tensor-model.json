@@ -28,62 +28,48 @@
  ],
  "proof": [
   {
-   "text": "Regard each commutative ring as the sheaf of rings on the one-point site. Applying [lem-pc-kflat-resolution] to the complex M over A (and, after restriction of scalars, to R' over R) supplies K-flat resolutions $P\\to M$ and $F\\to R'$. The hypotheses already specify such P and F, so the chosen resolutions fit the one-point specialization of the K-flat definitions.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 064K and 06Y6, existence and choice of K-flat resolutions"
-   }
-  },
-  {
-   "text": "Apply [lem-pc-derived-tensor-second-factor-functor] to the ring map $R\\to A$ and the complex $N=M$ of $A$-modules: by its clause (2) with $E=R'$, the derived tensor $M\\otimes_R^{\\mathbf L}R'$ (the value $R'\\otimes_R^{\\mathbf L}M$ of that functor, the factors written in the other order) is represented in $D(A)$ by $\\operatorname{Tot}(F\\otimes_R M)$, the total complex of [def-pc-tensor-complex-sheaves] on the one-point site, with $A$ acting through $M$. By its clause (3) for the quasi-isomorphism $u:P\\to M$ of complexes of $A$-modules, $\\operatorname{Tot}(1_F\\otimes u):\\operatorname{Tot}(F\\otimes_R P)\\to\\operatorname{Tot}(F\\otimes_R M)$ is an $A$-linear quasi-isomorphism. The symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on $F^p\\otimes_R P^q$ is an $A$-linear chain isomorphism $\\operatorname{Tot}(F\\otimes_R P)\\cong\\operatorname{Tot}(P\\otimes_R F)$. Hence $P\\otimes_R F$ represents $M\\otimes_R^{\\mathbf L}R'$ in $D(A)$, with $A$ acting through $P$.",
+   "text": "Apply [lem-pc-derived-tensor-second-factor-functor] to R to A. Its functor U on A-complexes inverts quasi-isomorphisms by its last clause. Use Localization.lift along Q_A and Localization.fac to obtain the bifunctor T on D(A). The signed mapBifunctorFlipIso of Mathlib identifies its opposite-order totalization with the mixedTotalTensor of [def-pc-mixed-total-tensor]; transport the counit through this isomorphism and the localization comparison. IsRightKanExtension transport proves the left-derived universal property, and the K-flat counit clause gives computation on F. Naturality follows by composing the localization, counit, and signed flip naturality equations.",
    "uses": [
     "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-mixed-total-tensor",
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6 (lemma-derived-base-change) with N=M and E=R', and lemma-derived-tor-quasi-isomorphism-other-side"
-   }
+   "elementary": false
   },
   {
-   "text": "For $b\\in R'$, multiplication $\\mu_b:R'\\to R'$ is an $R$-linear map, hence an endomorphism of $R'$ in $D(R)$, and $b\\mapsto\\mu_b$ is a ring map $R'\\to\\operatorname{End}_{D(R)}(R')$. The functor $-\\otimes_R^{\\mathbf L}M:D(R)\\to D(A)$ of [lem-pc-derived-tensor-second-factor-functor] (2) sends it to a ring map $R'\\to\\operatorname{End}_{D(A)}(M\\otimes_R^{\\mathbf L}R')$. For $a\\in A$, multiplication by $a$ is a morphism $M\\to M$ of complexes of $A$-modules ($A$ is commutative), and clause (3) gives the induced natural transformation, represented on the model of Step 2 by multiplication by $a$ on $P$; its naturality with respect to $\\mu_b$ says that the endomorphisms induced by $a$ and by $b$ commute in $D(A)$. Applying $H^i$ gives commuting actions of $A$ and $R'$ on every cohomology module, agreeing on $R$, hence an $A\\otimes_R R'$-module structure.",
+   "text": "For q:P to M and f:F to R′[0], Q_A(q) and Q_R(f) are isomorphisms. The counit at F is invertible by [lem-pc-derived-tensor-second-factor-functor]. Define e as the inverse of that counit followed by T(Q_A(q)) at Q_R(F), then T(Q_A(M))(Q_R(f)). Its compatibility equation follows from inverse cancellation; uniqueness follows by cancelling the counit and Iso.ext. This uses no extra K-flatness of P over R, nor any new choice of P; the hypothesis that P is K-flat over A is retained.",
    "uses": [
     "lem-pc-derived-tensor-second-factor-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6, functoriality of the derived tensor in both variables"
-   }
+   "elementary": true
   },
   {
-   "text": "Independence of $F$ is the canonical-comparison part of [lem-pc-derived-tensor-second-factor-functor] (2); independence of $P$ holds because for two K-flat resolutions $P\\to M$, $P'\\to M$ Step 2 gives quasi-isomorphisms from both models to $\\operatorname{Tot}(F\\otimes_R M)$ (up to the symmetry isomorphism), whence a canonical isomorphism in $D(A)$, compatible with a third choice. Functoriality in $M$: a morphism $M\\to M'$ of complexes of $A$-modules induces by clause (3) a morphism $M\\otimes_R^{\\mathbf L}R'\\to M'\\otimes_R^{\\mathbf L}R'$ compatible with composition, an isomorphism when $M\\to M'$ is a quasi-isomorphism, so the construction descends to $D(A)$. The comparison isomorphisms and these morphisms commute with the actions of Step 3 by naturality of the functor and of the transformations of clause (3), so the $A\\otimes_R R'$-module structures on cohomology are canonical.",
+   "text": "The pointwise derived functor is additive because the triangulated structure in [lem-pc-derived-tensor-second-factor-functor] gives additivity; transport it across the localization comparison. Construct multiplication as a ring map from R′ to End of R′ as an R-module, and compose the additive single, localization, and derived functors. This gives rho with the required formula. Naturality of the first-variable transformation evaluated at multiplication by b gives its commutation with multiplication by a.",
    "uses": [
     "lem-pc-derived-tensor-second-factor-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6, independence of K-flat resolutions and functoriality"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Prove common-R scalar compatibility in three local helpers. On each total-tensor summand extension of scalars sends r times identity to algebraMap(R,A)(r) times identity, by the pure tensor balancing relation; tensorLeft linearity and total-summand extensionality give the complex identity. Homology naturality and ShortComplex.homologyMap_smul give the same identity for H(Q(K)). For the derived functor use the actual source-library functorial flat resolution (ModuleCat.hasFunctorialFlatResolution, Abelian.LeftResolution.reduced and kFlat_resolutionFunctor_obj), with K-flatness in the ordinary-module predicate [def-pc-module-kflat-complex]. The invertible counit on a K-flat model and its naturality transfer the scalar identity to that model; naturality of the resolution map and cancellation of its derived homology image transfer it to every complex. Compose rho with homology and ModuleCat.endRingEquiv. The resulting R′ ring map to A-linear endomorphisms agrees with A-scalars on R. Make it an R-algebra map, pair it with the central A-scalar algebra map, and apply Algebra.TensorProduct.lift. Restriction of the evaluation module along this ring map constructs the required module on the original cohomology carrier; lift_tmul gives the exact pure-tensor action equation.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-module-kflat-complex",
+    "def-pc-mixed-total-tensor"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex",
+  "def-pc-mixed-total-tensor",
+  "def-pc-module-kflat-complex",
   "def-pc-tensor-complex-sheaves",
   "lem-pc-derived-tensor-second-factor-functor"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 064K and 06Y6"
+  "place": "Tags 064L and 06Y6; explicit Lean assembly by V3 using Mathlib signed flip, localization, scalar transport, and the tensor algebra universal property (2026-10-13)"
  },
  "mathlib_searches": [
   {
@@ -160,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T100202-L-2497439",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
