@@ -21,31 +21,32 @@
  "statement": "Let Z be an integral Noetherian scheme [def-pc-scheme, pqf-def-locnoeth, def-pc-integral-scheme] and G a coherent module [pqf-def-coherent]. There exist r ≥ 0, an open U containing the generic point ξ, and a map from the restriction to U of the free structure-module sheaf on ULift (Fin r) to G restricted to U, such that its stalk map at ξ in U is an isomorphism [def-weil-pbc-module-stalk, def-weil-sheaf-of-modules-category].",
  "proof": [
   {
-   "text": "Use a finite local generating family for G at ξ. Every germ is a linear combination of its germs because the generating map is locally surjective. The generic ring is the function field (Mathlib AlgebraicGeometry.FunctionField), so choose a finite basis of G_ξ. The stalk of a finite free sheaf is free on the same basis: finite tuples of germs have representatives on one common neighbourhood.",
+   "text": "Coherence gives finite type. Apply finite_moduleStalk_of_isFiniteType at the generic point; its ring stalk is the function field, which Mathlib makes a field. Module.finBasis gives a basis of rank r, reindexed by ULift (Fin r). Use exists_finite_free_moduleStalk_linearEquiv and this basis to build the stalk module isomorphism from the finite free source to G.",
    "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
-    "def-weil-pbc-module-stalk"
+    "lem-weil-pbc-finite-type-module-stalk-finite",
+    "lem-weil-pbc-finite-free-module-stalk-equiv"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The finite free source is quasi-coherent with its standard finite generating family, hence coherent by the locally Noetherian criterion. Extend the basis isomorphism by the coherent stalk-map extension theorem. Its elementwise restriction-stalk equality identifies the new stalk map with the basis isomorphism conjugated by restriction-stalk isomorphisms, so it is invertible. Rank zero is allowed.",
+   "text": "Construct the finite free sheaf presentation with empty relations and identity generator map. Presentation.isFinitePresentation gives finite presentation, hence quasi-coherence and finite type. Apply the locally Noetherian coherence criterion and exists_open_hom_of_coherent_stalk_map to extend the basis isomorphism. Its elementwise equality identifies the resulting stalk map composed with the two additive restriction-stalk comparisons with the basis isomorphism. Cancel the bijective comparisons using Function.Bijective.of_comp_iff and of_comp_iff' and use ConcreteCategory.isIso_iff_bijective. Rank zero is included.",
    "uses": [
     "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-coherent-stalk-map-extends"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-stalk",
   "lem-weil-pbc-coherent-stalk-map-extends",
+  "lem-weil-pbc-finite-free-module-stalk-equiv",
+  "lem-weil-pbc-finite-type-module-stalk-finite",
   "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Stacks Project Tag 01YE, integral case: finite generic basis and extension by Tag 01Y4"
+  "place": "Stacks Project Tag 01YE, integral case: finite generic basis and extension by Tag 01Y4; Q1 Lean proof with finite stalk and coordinate lemmas"
  },
  "mathlib_searches": [
   {
@@ -144,9 +145,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261013T025312-L-3426198",
+  "landing": "20261013T054231-L-447387",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

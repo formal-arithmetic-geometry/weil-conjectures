@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-finite-free-module-stalk-equiv",
+ "kind": "statement",
+ "title": "Finite free sheaf stalks have finite coordinates",
+ "statement": "For a scheme X [def-pc-scheme], finite index type I, and x in X, the stalk [def-pc-module-stalk-functor] of the free O_X-module sheaf on I [def-weil-sheaf-of-modules-category] is linearly equivalent over O_{X,x} to the module of functions I to O_{X,x}.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Stacks Project Tag 01C6: coordinate construction for finite local trivializations; reuse of the proved localStalkEquiv helper in Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Restriction to the top open preserves the free sheaf: overFunctor is a left adjoint, and mapFreeIso applies with the identity unit comparison. Apply the already proved private localStalkEquiv coordinate construction from FiniteLocallyFreeStalkFinrank to this trivialization. Its projections and finite sums are mutually inverse. This delivery exposes that construction as a public Nonempty theorem; it does not infer a linear equivalence merely from a finrank equality. Finite empty I is included.",
+   "uses": [
+    "def-pc-module-stalk-functor",
+    "lem-sc-finite-locally-free-stalk-finrank"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "lem-sc-finite-locally-free-stalk-finrank"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Stacks Project Tag 01C6: coordinate construction for finite local trivializations; reuse of the proved localStalkEquiv helper in Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of a finite free sheaf is a finite free module",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "note": "Service unavailable; no absence claim or mathematical verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of a finite free sheaf of modules is linearly equivalent to the finite product of the stalk ring",
+   "date": "2026-10-13",
+   "results": "ModuleCat.Tilde.stalkIso_hom; ModuleCat.Tilde.stalkIso; ModuleCat.Tilde.stalkToFiberLinearMap_toStalk; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; ModuleCat.Tilde.stalkToFiberLinearMap; ModuleCat.Tilde.stalkIso_inv; ModuleCat.Tilde.toStalk; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc",
+   "verdict": "Related APIs; no direct sheaf-level theorem. Use the proved local construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.mapFreeIso",
+   "date": "2026-10-13",
+   "results": "SheafOfModules.mapFreeIso; SheafOfModules.mapFreeIso_hom; SheafOfModules.ιFree_mapFreeIso_hom; SheafOfModules.ιFree_mapFree_inv; SheafOfModules.map_ιFree_mapFreeIso_inv; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.ιFree_mapFreeIso_hom_assoc; SheafOfModules.map_ιFree_mapFreeIso_inv_assoc",
+   "verdict": "Relevant API used directly in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "freeSectionsLinearEquiv|localStalkEquiv",
+   "date": "2026-10-13",
+   "results": "No Mathlib hits.",
+   "verdict": "No Mathlib hit. Separate local library search finds the proved private localStalkEquiv construction, reused via import all."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhood",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-integral-generic-free-neighbourhood",
+   "place": "finite generic basis step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeModuleStalkEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeModuleStalkEquiv.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finite_free_moduleStalk_linearEquiv",
+  "statement": "theorem exists_finite_free_moduleStalk_linearEquiv (X : Scheme.{u})\n    (I : Type u) [Finite I] (x : X) :\n    Nonempty (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj\n      (SheafOfModules.free (R := X.ringCatSheaf) I)) ≃ₗ[X.presheaf.stalk x]\n        (I → X.presheaf.stalk x))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T054231-L-447387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T054231-L-447387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

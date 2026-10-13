@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-finite-type-module-stalk-finite",
+ "kind": "statement",
+ "title": "Stalks of finite type module sheaves are finite modules",
+ "statement": "Let X be a scheme [def-pc-scheme], F an O_X-module sheaf [def-weil-sheaf-of-modules-category] of finite type [def-weil-pbc-module-finite-type-presentation], and x a point of X. Then the actual stalk F_x [def-pc-module-stalk-functor] is a finitely generated module over the structure-ring stalk O_{X,x}.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Stacks Project Tag 01B4, Definition 01B5: finite local generators; restriction-stalk transport"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite local generating family near x. Transport its generating epimorphism through overEquiv to the open subscheme and through overFunctorEquiv to the restricted F. The covering condition gives an open U containing x.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply generating_sections_iff_stalk_span to the finite family on U at the lift y of x. Its finite range spans the whole stalk, so Submodule.fg_span proves this stalk is finite.",
+   "uses": [
+    "lem-weil-pbc-generating-sections-stalk-span"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The additive restriction-stalk comparison is semilinear over the structure-ring comparison U.stalkIso y. To prove this, represent a scalar and a vector by germs on a common intersection. The germ comparison formulas and smul_restrictAppIso_hom identify the two actions. For the open inclusion its appIso is the identity. The comparison is surjective, so Module.Finite.of_surjective transports finite generation back to F_x. Empty generator sets give the zero module; an empty scheme has no point x.",
+   "uses": [
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-generating-sections-stalk-span"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Stacks Project Tag 01B4, Definition 01B5: finite local generators; restriction-stalk transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of a sheaf of modules of finite type is finitely generated",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "note": "Service unavailable; no absence claim or mathematical verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every stalk of a finite type structure module sheaf is a finitely generated module over the local ring",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType.stalkMap; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; Module.Finite.of_localized_maximal; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; Module.Finite.of_localizationSpan_finite'",
+   "verdict": "Related APIs; no direct sheaf-level theorem. Use the proved local construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite.of_surjective",
+   "date": "2026-10-13",
+   "results": "Module.Finite.of_surjective",
+   "verdict": "Relevant API used directly in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "Module.Finite.of_surjective|generating_sections_iff_stalk_span",
+   "date": "2026-10-13",
+   "results": "Mathlib/NumberTheory/NumberField/FractionalIdeal.lean; Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean; Mathlib/RingTheory/TotallySplit.lean; Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean; Mathlib/Algebra/Category/FGModuleCat/Colimits.lean; Mathlib/RingTheory/LocalRing/Module.lean; Mathlib/Algebra/Module/FinitePresentation.lean; Mathlib/RingTheory/Finiteness/Basic.lean",
+   "verdict": "Related APIs; no direct sheaf-level theorem. Use the proved local construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhood",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-integral-generic-free-neighbourhood",
+   "place": "finite generic basis step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeModuleStalkFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeModuleStalkFinite.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_moduleStalk_of_isFiniteType",
+  "statement": "theorem finite_moduleStalk_of_isFiniteType (X : Scheme.{u}) (F : X.Modules)\n    [F.IsFiniteType] (x : X) :\n    Module.Finite (X.presheaf.stalk x)\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T054231-L-447387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T054231-L-447387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
