@@ -8,11 +8,14 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection
+import Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree
+import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.IdealPowerEvaluationEventuallyZero
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
-import Sheaf.Topology.GlueSheavesOfModules
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Lifting sections into ideal-power annihilator quotients
 
@@ -28,6 +31,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 800000 in
+-- Elaborating restricted module maps and their components needs a larger heartbeat budget.
+set_option backward.isDefEq.respectTransparency false in
 /-- Every section on the ideal complement lifts into an ideal-power annihilator quotient.
 
 Proof: On an affine open write I = (f_1,...,f_t) and F = M~. The condition hann
@@ -88,6 +94,122 @@ theorem ideal_power_quotient_local_lifting_section
     (hq : ∀ (n m : ℕ) (h : n ≤ m),
       cokernel.π (a n) ≫ q n m h = cokernel.π (a m)) :
     ∀ s : Γ(F, U), ∃ (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ cokernel (a n)),
-      (cokernel.π (a n)).app U s = φ.app U (one n) := by sorry
+      (cokernel.π (a n)).app U s = φ.app U (one n) := by
+  classical
+  intro s
+  have rcomp (n k m : ℕ) (hnk : n ≤ k) (hkm : k ≤ m) :
+      r k m hkm ≫ r n k hnk = r n m (hnk.trans hkm) := by
+    have := formalPolynomial_power_mono ι n
+    apply (cancel_mono (idealSheafPower ι n).2).mp
+    rw [Category.assoc, hr, hr, hr]
+  have rone (n m : ℕ) (h : n ≤ m) (W : X.Opens) (hWU : W ≤ U) :
+      (r n m h).val.app (op W)
+          (((idealSheafPower ι m).1).presheaf.map (homOfLE hWU).op (one m)) =
+        ((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n) := by
+    apply formalPolynomial_power_injective ι n W
+    have he := congrArg (fun f ↦ f.val.app (op W)) (hr n m h)
+    have hone' (k : ℕ) :
+        (idealSheafPower ι k).2.val.app (op W)
+            (((idealSheafPower ι k).1).presheaf.map (homOfLE hWU).op (one k)) =
+          X.presheaf.map (homOfLE hWU).op (1 : Γ(X, U)) := by
+      have hn := PresheafOfModules.naturality_apply
+        (idealSheafPower ι k).2.val (homOfLE hWU).op (one k)
+      exact hn.trans (congrArg (X.presheaf.map (homOfLE hWU).op) (hone k))
+    change ((r n m h ≫ (idealSheafPower ι n).2).val.app (op W)) _ = _
+    rw [he, hone', hone']
+  obtain ⟨S, hfin, hcover⟩ :=
+    isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens.mp
+      ⟨isCompact_univ (X := X), isOpen_univ⟩
+  have hcover' : (⨆ V : S, V.1.1) = ⊤ := by
+    ext x
+    simpa using (Set.ext_iff.mp hcover x).symm
+  have := hfin.to_subtype
+  let := Fintype.ofFinite S
+  have hlift (V : S) := ideal_power_quotient_affine_lifting_section
+    ι F U one hU hone A a hmono hqc hann hquot V.1 s
+  choose k φ hφ using hlift
+  let n := Finset.univ.sup k
+  have hkn (V : S) : k V ≤ n := Finset.le_sup (Finset.mem_univ V)
+  let α (V : S) : ((idealSheafPower ι n).1).over V.1.1 ⟶
+      (cokernel (a n)).over V.1.1 :=
+    (r (k V) n (hkn V)).over V.1.1 ≫ φ V ≫ (q (k V) n (hkn V)).over V.1.1
+  have hα (V : S) (W : X.Opens) (hWU : W ≤ U) (hWV : W ≤ V.1.1) :
+      (α V).val.app (op (Over.mk (homOfLE hWV)))
+          (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n)) =
+        (cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWU).op s) := by
+    change (q (k V) n (hkn V)).val.app (op W)
+      ((φ V).val.app (op (Over.mk (homOfLE hWV)))
+        ((r (k V) n (hkn V)).val.app (op W) _)) = _
+    rw [rone, ← hφ V W hWU hWV]
+    exact congrArg (fun f ↦ f.app W (F.presheaf.map (homOfLE hWU).op s))
+      (hq (k V) n (hkn V))
+  have : (A n).IsQuasicoherent := hqc n
+  have : (cokernel (a n)).IsQuasicoherent := Modules.isQuasicoherent_cokernel (a n)
+  have hagree (V V' : S) := ideal_power_local_maps_eventually_agree
+    ι (cokernel (a n)) U one r hU hone hr V.1.1 V'.1.1
+    (QuasiSeparatedSpace.inter_isCompact _ _ V.1.1.isOpen V.1.2.isCompact
+      V'.1.1.isOpen V'.1.2.isCompact) n (α V) (α V')
+    (fun W hWU hWV hWV' ↦ (hα V W hWU hWV).trans (hα V' W hWU hWV').symm)
+  choose l hnl hl using hagree
+  let m := max n (Finset.univ.sup (fun p : S × S ↦ l p.1 p.2))
+  have hnm : n ≤ m := le_max_left _ _
+  let β (V : S) : ((idealSheafPower ι m).1).over V.1.1 ⟶
+      (cokernel (a m)).over V.1.1 :=
+    (r n m hnm).over V.1.1 ≫ α V ≫ (q n m hnm).over V.1.1
+  have hβ (V V' : S) (W : X.Opens) (hWV : W ≤ V.1.1) (hWV' : W ≤ V'.1.1) :
+      (β V).val.app (op (Over.mk (homOfLE hWV))) =
+        (β V').val.app (op (Over.mk (homOfLE hWV'))) := by
+    have hlm : l V V' ≤ m :=
+      (show l V V' ≤ Finset.univ.sup (fun p : S × S ↦ l p.1 p.2) from
+        Finset.le_sup (f := fun p : S × S ↦ l p.1 p.2)
+          (Finset.mem_univ (V, V'))).trans (le_max_right _ _)
+    have he := congrArg (fun f ↦ f.val.app (op W))
+      (rcomp n (l V V') m (hnl V V') hlm)
+    change (r n m hnm).val.app (op W) ≫
+        (α V).val.app (op (Over.mk (homOfLE hWV))) ≫ (q n m hnm).val.app (op W) =
+      (r n m hnm).val.app (op W) ≫
+        (α V').val.app (op (Over.mk (homOfLE hWV'))) ≫ (q n m hnm).val.app (op W)
+    rw [← he]
+    change ((r (l V V') m hlm).val.app (op W) ≫
+        (r n (l V V') (hnl V V')).val.app (op W)) ≫
+        (α V).val.app (op (Over.mk (homOfLE hWV))) ≫ (q n m hnm).val.app (op W) =
+      ((r (l V V') m hlm).val.app (op W) ≫
+        (r n (l V V') (hnl V V')).val.app (op W)) ≫
+        (α V').val.app (op (Over.mk (homOfLE hWV'))) ≫ (q n m hnm).val.app (op W)
+    rw [Category.assoc, Category.assoc]
+    rw [← Category.assoc ((r n (l V V') (hnl V V')).val.app (op W)),
+      hl V V' W hWV hWV', Category.assoc]
+  obtain ⟨ψ, hψ, _⟩ := (glue_sheaves_of_modules X.toRingedSpace S
+    (fun V ↦ V.1.1) hcover').1 _ _ β hβ
+  refine ⟨m, ψ, ?_⟩
+  let T : TopCat.Sheaf Ab X := ⟨(cokernel (a m)).presheaf, (cokernel (a m)).isSheaf⟩
+  apply T.eq_of_locally_eq' (fun V : S ↦ U ⊓ V.1.1) U
+    (fun V ↦ homOfLE inf_le_left)
+    (by simp only [← inf_iSup_eq, hcover', inf_top_eq, le_refl])
+  intro V
+  have hp := PresheafOfModules.naturality_apply (cokernel.π (a m)).val
+    (homOfLE (inf_le_left : U ⊓ V.1.1 ≤ U)).op s
+  have hs := PresheafOfModules.naturality_apply ψ.val
+    (homOfLE (inf_le_left : U ⊓ V.1.1 ≤ U)).op (one m)
+  change (cokernel (a m)).presheaf.map (homOfLE inf_le_left).op
+      ((cokernel.π (a m)).app U s) =
+    (cokernel (a m)).presheaf.map (homOfLE inf_le_left).op (ψ.val.app (op U) (one m))
+  apply hp.symm.trans
+  apply Eq.trans _ hs
+  have he := congrArg (fun f ↦ f.val.app
+    (op (Over.mk (homOfLE (inf_le_right : U ⊓ V.1.1 ≤ V.1.1))))) (hψ V)
+  change (cokernel.π (a m)).app (U ⊓ V.1.1)
+      (F.presheaf.map (homOfLE inf_le_left).op s) =
+    ψ.val.app (op (U ⊓ V.1.1))
+      (((idealSheafPower ι m).1).presheaf.map (homOfLE inf_le_left).op (one m))
+  change _ = (ψ.over V.1.1).val.app (op (Over.mk
+    (homOfLE (inf_le_right : U ⊓ V.1.1 ≤ V.1.1)))) _
+  rw [he]
+  change _ = (q n m hnm).val.app (op (U ⊓ V.1.1))
+    ((α V).val.app (op (Over.mk (homOfLE inf_le_right)))
+      ((r n m hnm).val.app (op (U ⊓ V.1.1)) _))
+  rw [rone, hα]
+  exact (congrArg (fun f ↦ f.app (U ⊓ V.1.1)
+    (F.presheaf.map (homOfLE inf_le_left).op s)) (hq n m hnm)).symm
 
 end AlgebraicGeometry.Scheme

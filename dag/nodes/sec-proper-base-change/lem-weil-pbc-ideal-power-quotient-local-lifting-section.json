@@ -41,59 +41,40 @@
  ],
  "proof": [
   {
-   "text": "On an affine open identify the finite type quasi-coherent ideal with a finitely generated ideal J=(f_1,...,f_t), and F with M~ via the affine tilde/Gamma equivalence. Finite generation makes annihilators of J^n commute with localization, so hann and monicity identify A_n with Ann_M(J^n)~, and the quasi-coherent cokernel-image theorem identifies Q_n with (M/Ann_M(J^n))~.",
+   "text": "Choose a finite affine cover using the affine basis and quasi-compactness. On each member apply the affine quotient lifting lemma, obtaining a degree k(V), a map phi(V), and its evaluation equation on all opens in U intersect V. Choose n to be the finite supremum of the degrees.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-ideal-power-quotient-affine-lifting-section"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
-   }
+   "elementary": false
   },
   {
-   "text": "Write s on D(f_i) as x_i/f_i^k, with k positive. On overlaps choose a common e with (f_i f_j)^e(f_j^k x_i-f_i^k x_j)=0; replace x_i by f_i^e x_i and k by k+e. Put d=t(k-1)+1 and K={x : every f_i^k x=0}. A monomial of degree d contains f_i^k. Send it to the monomial with that exponent lowered by k, times x_i, modulo K. Multiplying a relation between monomials by f_j^k gives the original relation times x_j, hence zero, so this defines J^d → M/K. The same monomial bound gives K⊆Ann_M(J^d), and thus a map J^d → M/Ann_M(J^d). On D(f_i) its value on f_i^d is f_i^(d-k)x_i, so evaluation is x_i/f_i^k, as required. For t=0 the complement is empty and a positive ideal power supplies the zero map.",
+   "text": "Prove r composition by cancellation of the monic power inclusion. Prove that r carries the restriction of one m to that of one n by sectionwise injectivity and naturality of the power inclusions. Define alpha(V)=r(k(V),n)|V followed by phi(V) followed by q(k(V),n)|V. The preceding unit equation and hq show its evaluation is pi_n(s). The cokernel at n is quasi-coherent. Quasi-separatedness makes every pairwise affine intersection quasi-compact. Apply local eventual agreement to alpha(V) and alpha(V′). Choose m to be the maximum of n and all pairwise agreement degrees.",
    "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
-   }
-  },
-  {
-   "text": "Choose a finite affine cover with quasi-compact overlaps and construct local lifts by the preceding affine calculation. Transport to a common degree using r and q. Their equations over the monic power inclusions and epic quotient projections imply identity and composition laws and preserve evaluation. On every affine member of a finite overlap cover the difference has zero evaluation into a quasi-coherent cokernel. Cokernel closure and ideal_power_evaluation_eventually_zero on that affine scheme kill the difference after restricting to a later ideal power; composition with q preserves zero. Choose one upper bound for all local and overlap degrees. The local homomorphisms agree and glue by glue_sheaves_of_modules; section uniqueness identifies evaluation with π_n(s). Empty schemes and empty complements use zero maps; the unit ideal uses the global section map in degree zero.",
-   "uses": [
-    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "lem-weil-pbc-formal-polynomial-power-lifts",
     "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
-    "lem-weil-pbc-ideal-power-evaluation-eventually-zero",
+    "lem-weil-pbc-ideal-power-local-maps-eventually-agree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define beta(V)=r(n,m)|V followed by alpha(V) followed by q(n,m)|V. The composition equation for r lets beta(V) and beta(V′) factor through their equality at the pairwise degree, so they agree on every open in the overlap. Glue by the morphism clause of glue_sheaves_of_modules. To verify evaluation, restrict pi_m(s) and psi(one m) to U intersect V. Naturality, the glued-map restriction equation, the unit equation for r, the evaluation equation for alpha, and hq identify these restrictions. Sheaf separation yields their equality on U. Finite suprema and the gluing theorem also handle an empty cover.",
+   "uses": [
     "lem-weil-pbc-glue-sheaves-of-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-weil-pbc-ideal-power-quotient-affine-lifting-section",
+  "lem-weil-pbc-formal-polynomial-power-lifts",
   "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
-  "lem-weil-pbc-ideal-power-evaluation-eventually-zero",
+  "lem-weil-pbc-ideal-power-local-maps-eventually-agree",
   "lem-weil-pbc-glue-sheaves-of-modules"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+  "place": "Lean implementation of finite affine gluing in 01PQ, using two separated local statements; U1, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -168,9 +149,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T054239-L-450076",
+  "landing": "20261013T100142-L-2491649",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
