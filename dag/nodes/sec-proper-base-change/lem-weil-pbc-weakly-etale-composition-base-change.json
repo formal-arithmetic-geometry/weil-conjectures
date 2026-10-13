@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-weakly-etale-composition-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Source note and proof sentence \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\": auxiliary qcqs pro-etale site geometry used by that finite-stage proof, via lem-weil-pbc-proetale-qcqs-finite-family-geometry; not a literal qcqs paragraph in the blueprint.",
+   "via": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composition and base change of weakly etale morphisms",
+ "statement": "Let $f:U\\to V$ and $g:V\\to W$ be morphisms of schemes [def-pc-scheme]. If $f$ and $g$ are weakly etale [def-weil-weakly-etale-morphism], then $g\\circ f$ is weakly etale. If $f$ is weakly etale and $h:V^{\\prime}\\to V$ is any morphism of schemes, then the projection $V^{\\prime}\\times_V U\\to V^{\\prime}$ [def-pc-fibre-product] is weakly etale.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 094T, lemma-composition-weakly-etale (2); Tag 094U, lemma-base-change-weakly-etale (2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-weakly-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stability of weakly etale scheme morphisms under composition and pullback and diagonals",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.stableUnderComposition, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale; ",
+   "date": "2026-10-14",
+   "verdict": "no exact weakly etale hit; etale results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.comp_mem",
+   "results": "3 hits: CategoryTheory.MorphismProperty.comp_mem, CategoryTheory.MorphismProperty.Over.map_comp, CategoryTheory.MorphismProperty.Under.map_comp; ",
+   "date": "2026-10-14",
+   "verdict": "generic composition match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklyEtale|weaklyEtale",
+   "results": "5 hits: 20, 25, 44, 48, 52; ",
+   "date": "2026-10-14",
+   "verdict": "match in local source"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMultiplicative|IsStableUnderBaseChange|WeaklyEtale \\(f ≫ g\\)|pullback.fst",
+   "results": "5 hits: 66, 71, 75, 91, 92; ",
+   "date": "2026-10-14",
+   "verdict": "match in local source"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MorphismProperty.comp_mem, CategoryTheory.MorphismProperty.pullback_fst",
+  "file": "Mathlib/CategoryTheory/MorphismProperty/Composition.lean",
+  "line": 119,
+  "how": "Composition: comp_mem at Composition.lean:119-121 specialized to @AlgebraicGeometry.WeaklyEtale, using the IsMultiplicative instance at AlgebraicGeometry/Morphisms/WeaklyEtale.lean:66-68 (and composition instance :71-72). Base change: pullback_fst at CategoryTheory/MorphismProperty/Limits.lean:217-219 specialized to @WeaklyEtale, using the IsStableUnderBaseChange instance at WeaklyEtale.lean:75-77 (projection instance :90-92). Both specialize in one line; definition is exactly flat with flat diagonal (:44-46). All source proofs are sorry-free."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-proetale-qcqs-site-limits",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

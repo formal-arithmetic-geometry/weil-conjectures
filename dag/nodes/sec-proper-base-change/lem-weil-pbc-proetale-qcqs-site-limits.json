@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof paragraph 1: the qcqs subsite has a site structure, finite limits and inclusion preserving fibre products and coverings.",
+   "place": "Source note and proof sentence \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\": auxiliary qcqs pro-etale site geometry used by that finite-stage proof, via lem-weil-pbc-proetale-qcqs-finite-family-geometry; not a literal qcqs paragraph in the blueprint.",
    "via": [
     "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
    ]
@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Qcqs pro-etale subsite and finite limits",
- "statement": "For a scheme X [def-pc-scheme] with its pro-etale site [def-weil-pbc-proetale-site] and qcqs conventions [def-weil-pbc-scheme-conventions], the full subcategory of X_proetale on quasi-compact and quasi-separated objects, equipped with finite pro-etale covering families, is a site. It has fibre products and finite limits computed as scheme limits; its inclusion into X_proetale preserves fibre products and sends coverings to coverings. In every slice over an object T of this subsite, finite limits agree with scheme limits over T. Adjoining finitely many arrows with a common target to a finite covering family preserves the covering property.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with its small pro-etale site [def-weil-pbc-proetale-site], using the size convention [def-weil-size-convention]. Let $\\mathcal C$ be its full subcategory on quasi-compact and quasi-separated schemes [def-weil-pbc-scheme-conventions], with finite pro-etale covering families [def-weil-pbc-proetale-covering]. Then $\\mathcal C$ is a site [def-weil-pbc-sites-and-cohomology], has fibre products [def-pc-fibre-product] computed as scheme fibre products, and its inclusion into $X_{\\mathrm{proet}}$ preserves fibre products and sends coverings to coverings. For every $T\\in\\mathcal C$, the slice $\\mathcal C/T$ has finite limits computed as scheme limits over $T$. If $X$ itself is quasi-compact and quasi-separated, $\\mathcal C$ has finite limits computed as scheme limits over $X$. Adjoining finitely many arrows of $\\mathcal C$ with the same target to a finite covering family preserves the covering property.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 09A1, proof of lemma-w-contractible-hypercovering, qcqs subsite paragraph; Tag 098M, lemma-fibre-products-proetale"
@@ -23,13 +23,61 @@
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $U\\to T\\leftarrow V$ in $\\mathcal C$, both arrows are weakly etale by the between-objects lemma. The scheme fibre product $P=U\\times_T V$ exists. Its projection to $V$ is weakly etale by base change, hence $P\\to X$ is weakly etale by composition. By qcqs permanence (1), $U\\to T$ is quasi-compact and quasi-separated; (3) gives these properties for $P\\to V$, and (2) gives that $P$ is qcqs. The scheme universal property restricts to the full subcategory, with the induced arrows over $X$, proving existence and preservation of fibre products.",
+   "uses": [
+    "lem-trf-weakly-etale-between-objects",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The full pro-etale category is a site as specified in its definition. An isomorphism with qcqs target has qcqs source, so its singleton covering belongs to $\\mathcal C$. Composing a finite covering with one finite covering for each of its finitely many sources gives a finite covering in the full site, with all sources still in $\\mathcal C$. Pullback of a finite covering along an arrow of $\\mathcal C$ is a covering in the full site with the same finite index set; step 1 puts its sources in $\\mathcal C$. These are exactly the three site axioms. Coverings are sent to coverings by their definition.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix $T\\in\\mathcal C$. The slice has terminal object $T\\xrightarrow{\\mathrm{id}}T$ and binary products from step 1. For parallel arrows $a,b:U\\rightrightarrows V$ over $T$, construct $E=U\\times_{V\\times_T V}V$, using $(a,b)$ and $\\Delta_{V/T}$. Both $V\\times_T V$ and $E$ are in $\\mathcal C$ by step 1. A morphism to $E$ is uniquely a morphism $c$ to $U$ with $ac=bc$, since its $V$-component must equal $ac$; this proves the equalizer universal property. For a finite diagram, form the product of its objects and the product of one target object for each diagram arrow; the two maps to the latter product have components given by the source projection followed by the arrow, and the target projection. Their equalizer is the limit. Empty products are $T$. Each construction has the same universal property in schemes over $T$. If $X$ is qcqs, it is terminal in $\\mathcal C$, and this construction with $T=X$ gives finite limits there.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every additional arrow in $\\mathcal C$ is weakly etale by the between-objects lemma. For each affine open of the target, keep the finite list of affine source opens witnessing the original fpqc covering; their images still cover that affine open after more arrows are adjoined. Thus the enlarged family is pro-etale covering by its definition, and the union of its two finite index sets is finite.",
+   "uses": [
+    "lem-trf-weakly-etale-between-objects",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-weakly-etale-between-objects",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-weakly-etale-composition-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A1 and 098M"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
   "by": "worker",
@@ -66,5 +114,20 @@
    "date": "2026-10-14",
    "verdict": "unavailable"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-qcqs-site-limits",
+  "worker": "stage1",
+  "summary": "Corrected the false unrestricted finite-limit clause; derived qcqs fibre products, finite-cover site axioms, slice limits and adjoining-arrow stability explicitly. One generic weakly etale stability Mathlib leaf replaces two clause-restating nodes.",
+  "blueprint": "Source note and proof sentence \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\": auxiliary qcqs pro-etale site geometry used by that finite-stage proof, via lem-weil-pbc-proetale-qcqs-finite-family-geometry; not a literal qcqs paragraph in the blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-67104e2ec",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-67104e2ec (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, including Tags 09A1/098M/094T/094U, the corrected equalizer, qcqs slice limits, edge cases, duplicate search, and target coefficient/base-change route. The new Mathlib leaf omitted required created.by and created.date metadata; corrected whole JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-weakly-etale-composition-base-change.json. Full review is in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
