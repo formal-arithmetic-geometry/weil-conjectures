@@ -263,6 +263,48 @@ lemma Etale.baseChange_app_comp_overLowerStarTransition :
       (Etale.isPullback_stage k W U').toCommSq _)]
   simp only [Functor.map_comp, Category.assoc]
 
+/-- Composition with a shifted map `f⟦q⟧'` before the base-change step of
+`AlgebraicGeometry.Etale.stageCohomologyEquiv`, for maps `b`, `b'` out of the restrictions to `W`
+with `w^* f ≫ b' = b ≫ g`. -/
+lemma Etale.freeSheafSingleHomEquiv_shift_comp {S : Scheme.{u}} (W : S.Etale) (q : ℤ)
+    {M M' : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {N N' : DerivedCategory.Plus (Sheaf W.left.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (x : (DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.freeSheaf Λ S).obj W) ⟶ M⟦q⟧)
+    (f : M ⟶ M') (b : D+((W.hom)^*[ModuleCat.{u + 1} Λ]).obj M ⟶ N)
+    (b' : D+((W.hom)^*[ModuleCat.{u + 1} Λ]).obj M' ⟶ N') (g : N ⟶ N')
+    (w : D+((W.hom)^*[ModuleCat.{u + 1} Λ]).map f ≫ b' = b ≫ g) :
+    Etale.freeSheafSingleHomEquiv Λ W _ (x ≫ f⟦q⟧') ≫
+        (D+((W.hom)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app M' ≫ b'⟦q⟧' =
+      (Etale.freeSheafSingleHomEquiv Λ W _ x ≫
+        (D+((W.hom)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app M ≫ b⟦q⟧') ≫ g⟦q⟧' := by
+  have hw : (D+((W.hom)^*[ModuleCat.{u + 1} Λ]).map f)⟦q⟧' ≫ b'⟦q⟧' = b⟦q⟧' ≫ g⟦q⟧' := by
+    rw [← Functor.map_comp, ← Functor.map_comp, w]
+  rw [Etale.freeSheafSingleHomEquiv_comp]
+  simp only [Category.assoc, Functor.commShiftIso_hom_naturality_assoc, hw]
+
+/-- Under `AlgebraicGeometry.Etale.lowerStarPlusShiftedHomEquiv`, composition with the
+transition map of a triangle `a ≫ h = h'` followed by `Rh'_*(f)` is the pullback along `a`
+followed by `f⟦q⟧'`. -/
+lemma Etale.lowerStarPlusShiftedHomEquiv_comp_lowerStarPlusTransition_map {X Y Y' : Scheme.{u}}
+    (a : Y' ⟶ Y) (h : Y ⟶ X) (h' : Y' ⟶ X) (w : a ≫ h = h') (q : ℤ)
+    (A : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    {K' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (x : A ⟶ (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K)⟦q⟧)
+    (f : D+((a)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ K') :
+    Etale.lowerStarPlusShiftedHomEquiv Λ h' q A K'
+        (x ≫ (Etale.lowerStarPlusTransition Λ a h h' w K ≫
+          R+((h')_*[ModuleCat.{u + 1} Λ]).map f)⟦q⟧') =
+      (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) a h h' w.symm).hom.app A ≫
+        D+((a)^*[ModuleCat.{u + 1} Λ]).map (Etale.lowerStarPlusShiftedHomEquiv Λ h q A K x) ≫
+        (D+((a)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K ≫ f⟦q⟧' := by
+  subst w
+  rw [Etale.upperStarCompDerivedPlus_eq_eqToIso_trans]
+  simp only [Functor.map_comp, ← Category.assoc, Etale.lowerStarPlusShiftedHomEquiv_comp_map,
+    Etale.lowerStarPlusShiftedHomEquiv_comp_lowerStarPlusTransition]
+
+set_option maxHeartbeats 1000000 in
+-- the elaboration of the composite maps in the diagram chase is slow
 /-- **The identification of `AlgebraicGeometry.Etale.stageCohomologyEquiv` is compatible with
 the transition maps.** For `φ : U' ⟶ U` over `B`, composition with the transition map
 `R(U ⟶ S)_*(G|_U) ⟶ R(U' ⟶ S)_*(G|_{U'})` (`AlgebraicGeometry.Etale.overLowerStarTransition`)
@@ -279,7 +321,17 @@ theorem Etale.stageCohomologyEquiv_comp
       Etale.overCohomologyMap Λ (Etale.stageBaseSheaf Λ k W G) q
         ((Etale.stageFunctor (Etale.isPullback_stageBase k W)).map φ)
         (Etale.stageCohomologyEquiv Λ k W G q U x) := by
-  sorry
+  have hs := Etale.stageSourceIso_comp Λ k W φ
+  have ht := congrArg (fun m ↦ m⟦q⟧') (Etale.stageTargetIso_comp Λ k W G φ)
+  simp only [Functor.map_comp, Category.assoc] at ht
+  rw [Etale.stageCohomologyEquiv_apply, Etale.stageCohomologyEquiv_apply,
+    Etale.freeSheafSingleHomEquiv_shift_comp Λ W q x _ _ _ _
+      (Etale.baseChange_app_comp_overLowerStarTransition Λ k W G φ),
+    Etale.lowerStarPlusShiftedHomEquiv_comp_lowerStarPlusTransition_map]
+  simp only [Etale.overCohomologyMap, Functor.map_comp, Category.assoc, ht,
+    Functor.commShiftIso_hom_naturality_assoc]
+  dsimp only [Functor.id_obj] at hs ⊢
+  simp only [reassoc_of% hs]
 
 end Transition
 
