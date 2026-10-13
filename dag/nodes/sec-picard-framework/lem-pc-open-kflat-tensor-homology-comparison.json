@@ -1,0 +1,184 @@
+{
+ "id": "lem-pc-open-kflat-tensor-homology-comparison",
+ "kind": "statement",
+ "title": "Open-local comparison of K-flat tensor homology",
+ "statement": "Let X be a topological space and R a sheaf of commutative rings on its open site [def-pur-sheaf-tensor-product], with underlying ring sheaf A, and U an open. Let P,Q be complexes of A-modules, P K-flat over R [def-pc-kflat-complex], and q:P→Q a quasi-isomorphism [def-pc-quasi-iso-modules]. Let T,H be complexes of A restricted to the localized site U [def-pur-localized-ringed-site], T K-flat over R restricted to U, and s:H→Q restricted to U and t:H→T quasi-isomorphisms. For every sheaf F of A-modules and integer i, the restriction to U of H^i(Tot(P tensor_R F[0])) is isomorphic to H^i(Tot(T tensor_(R restricted to U) (F restricted to U)[0])) [def-pc-tensor-complex-sheaves]. This statement has no degree bounds or scheme hypotheses.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
+ },
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Restriction to the open site is exact and commutes with tensor and arbitrary coproducts: sectionwise restriction commutes with the presheaf tensor and the same covering sieves sheafify on the localized site. It therefore commutes with totalization and homology. Regard R as the ring sheaf of the ringed space (X,R); open pullback preserves K-flatness. Thus the restriction of P is K-flat and its map to the restriction of Q is a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-localized-module-restriction-quasi-iso",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-pullback-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
+   }
+  },
+  {
+   "text": "The maps q restricted to U, s and t connect P restricted to U to T by a zigzag of quasi-isomorphisms. Use the calculus of fractions for the derived category to replace the zigzag by a common roof, and take a K-flat resolution of its source. Tensoring a quasi-isomorphism between K-flat complexes with any complex preserves quasi-isomorphisms: first resolve the second factor by a K-flat complex, then use the acyclic-cone criterion, the tensor-cone isomorphism and tensor symmetry for the three sides of the comparison square; the fourth side is invertible on homology by two-of-three. Apply this to F restricted to U, in degree zero.",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
+   }
+  },
+  {
+   "text": "Take homology of the resulting zigzag of quasi-isomorphisms. Compose these isomorphisms with the restriction-total-tensor and restriction-homology comparisons to obtain the claimed local homology isomorphism. No boundedness or scheme structure occurs in this comparison.",
+   "uses": [
+    "def-pc-quasi-iso-modules",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-localized-module-restriction-quasi-iso",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-pullback-preservation",
+  "def-pc-derived-category",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Local relative Tor verification for perfect direct image: independence of the global K-flat model and exact open restriction, original node proof step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "open restriction of tensor homology of K flat complexes invariant under a roof of quasi isomorphisms",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, Module.Flat.iff_preservesFiniteLimits_tensorLeft, HomologicalComplex.HasGoodTensor₁₂, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open restriction of tensor homology of K flat complexes invariant under a roof of quasi isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctor",
+   "results": "12 hits: CochainComplex.mapBifunctor, CochainComplex.ιMapBifunctor, CochainComplex.mapBifunctorShift₁Iso, CochainComplex.mapBifunctorShift₂Iso, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*homology|homology.*tensor|overFunctor",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-isomorphic K-flat resolutions give isomorphic derived tensor cohomology after restricting an open subset",
+   "results": "8 results: derived localization and injective resolutions, no open K-flat tensor comparison",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"tensor\"",
+   "results": "0 results",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*homology|homology.*tensor|kFlat.*comparison|KFlat.*comparison",
+   "results": "KFlatDerivedTensorComparison is scheme-specific, whereas this statement is for an arbitrary topological ring sheaf; no existing declaration is an exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictPerfectTensorRelativeTorBound",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Local relative Tor verification for perfect direct image: independence of the global K-flat model and exact open restriction, original node proof step 3.",
+   "via": [
+    "lem-pc-strict-perfect-tensor-relative-tor-bound",
+    "lem-pc-perfect-tensor-finite-relative-tor",
+    "lem-pc-noetherian-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenKFlatTensorHomologyComparison.lean",
+  "declaration": "CochainComplex.open_kFlat_tensor_homology_comparison",
+  "statement": "theorem open_kFlat_tensor_homology_comparison\n    {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})\n    (U : TopologicalSpace.Opens X)\n    (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (hP : IsKFlat (R := R) P) (q : P ⟶ Q) (hq : QuasiIso q)\n    (T H : CochainComplex (SheafOfModules.{u} ((sheafCompose ((Opens.grothendieckTopology X).over U)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) ℤ)\n    (hT : IsKFlat (R := R.over U) T)\n    (s : H ⟶ ((SheafOfModules.overFunctor.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj Q) (t : H ⟶ T) (hs : QuasiIso s) (ht : QuasiIso t)\n    (F : SheafOfModules.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (i : ℤ) :\n    Nonempty (((SheafOfModules.overFunctor.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).obj\n      ((mapBifunctor P ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)\n        (@curriedTensor _ _ (SheafOfModules.monoidalCategory R))).homology i)) ≅\n      ((mapBifunctor T ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj\n        ((SheafOfModules.overFunctor.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).obj F))\n        (@curriedTensor _ _ (SheafOfModules.monoidalCategory (R.over U)))).homology i))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T100112-L-2482330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T100112-L-2482330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

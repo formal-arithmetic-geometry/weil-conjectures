@@ -19,69 +19,52 @@
  ],
  "proof": [
   {
-   "text": "On the specified open U, the given isomorphism identifies E with the bounded strictly perfect complex L. Its terms are direct summands of finite free modules, hence flat over O_U. Bounded-above flat complexes are K-flat. Thus L tensor G|_U computes the restriction of the derived tensor. The total degree n is the sum over p+q=n; outside [a+c,b+d], either p is outside [a,b] or q is outside [c,d], and every summand is zero.",
+   "text": "Obtain the local complex T, its sum degree bounds, K-flatness and the quasi-isomorphic roof connecting it to scalar-restricted K.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-kflat-closure",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-pc-strict-perfect-relative-tensor-model"
    ],
    "elementary": false,
    "source": {
     "document": "Stacks Project",
-    "place": "Tag 0DJQ, proof, local relative Tor verification; Tag 08CI, implication (2) to (1); Tag 08CG"
+    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
    }
   },
   {
-   "text": "Fix x in U and an affine neighbourhood V of f(x). Affine neighbourhoods W of x contained in f^{-1}V form a filtered neighbourhood basis. The hypothesis makes G^q(W) flat over O_S(V). Their filtered colimit is the stalk G^q_x and is flat over O_S(V). The canonical O_{S,f(x)} action restricts to this action, and O_{S,f(x)} is a localization of O_S(V); the localization flatness criterion therefore gives flatness over O_{S,f(x)}. This is the stalk of the inverse-image base ring. Tensoring with L^p gives a retract of a finite direct sum of G^q|_U, so the total model is termwise flat over the inverse-image base ring. Its boundedness makes it K-flat over that ring.",
+   "text": "Apply the general open K-flat tensor homology comparison to the supplied global resolution q:P→K restricted along the base ring map and the local roof. This identifies the restriction of the displayed global homology with the homology of T tensor the restricted F[0].",
    "uses": [
-    "def-pc-scheme-module-flat-over",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-perfect-complex",
-    "lem-weil-pbc-filtered-colimit-flat-modules",
-    "lem-pc-kflat-closure"
+    "lem-pc-open-kflat-tensor-homology-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "Stacks Project",
-    "place": "Tag 0DJQ, proof, local relative Tor verification; Tag 08CI, implication (2) to (1); Tag 08CG"
+    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
    }
   },
   {
-   "text": "Exact open restriction commutes with the direct-sum total tensor and its cohomology and preserves K-flatness (apply the ringed-space pullback preservation theorem to the open inclusion with the inverse-image base ring). The given global quasi-isomorphism q and representative isomorphism eK identify P|_U with the local bounded relatively flat model in the derived category of base-ring modules. Independence of K-flat resolutions identifies their derived tensors with every F|_U. The latter has zero terms, hence zero cohomology, outside [a+c,b+d]. The restriction to U of the global homology sheaf is therefore zero. Its sections on every V contained in U vanish. Empty opens are vacuous; reversed intervals force one of the bounded factors to vanish and give the same conclusion.",
+   "text": "Prove directly in Lean that tensoring a bounded complex T with F[0] has zero homology outside the same degree interval. For a summand indexed by p+q=i, either q is nonzero and the single complex term is zero, or q=0 and p=i, so the term of T is zero. Tensor sends these zero objects to zero and the direct-sum universal property makes the total term zero. Zero middle term gives zero homology. Transport along the comparison isomorphism and evaluate at the object V→U in the localized site. This evaluation is definitionally the original sections over V.",
    "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-quasi-iso-modules",
     "def-pc-tensor-complex-sheaves",
-    "lem-pc-kflat-pullback-preservation",
-    "lem-pc-kflat-resolution"
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "Stacks Project",
-    "place": "Tag 0DJQ, proof, local relative Tor verification; Tag 08CI, implication (2) to (1); Tag 08CG"
+    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
+  "lem-pc-strict-perfect-relative-tensor-model",
+  "lem-pc-open-kflat-tensor-homology-comparison",
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-closure",
-  "def-pc-scheme-derived-tensor-structure",
-  "def-pc-scheme-module-flat-over",
-  "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-filtered-colimit-flat-modules",
-  "def-pc-kflat-complex",
-  "def-pc-quasi-iso-modules",
-  "lem-pc-kflat-pullback-preservation",
-  "lem-pc-kflat-resolution"
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A4",
+  "group": "R2",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 0DJQ and 08CI, local tensor argument expanded to the fixed global K-flat model"
+  "place": "Tags 0DJQ and 08CI: reduction to a bounded local relative model and model comparison; degreewise zero and evaluation proved directly in Lean"
  },
  "mathlib_searches": [
   {
@@ -152,9 +135,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T072338-L-1114868",
+  "landing": "20261013T100112-L-2482330",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

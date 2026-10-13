@@ -11955,3 +11955,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/R1/Sheaf.RingTheory.TorsionExtensionFlatDescent (stage 3; reviewer PASS; first push; landing 20261013T100110-L-2481807 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/R2/Sheaf.AlgebraicGeometry.IdealTensorMultiplicationKernelControl (stage 3; reviewer PASS; first push; landing 20261013T100111-L-2481961 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/R2/Sheaf.AlgebraicGeometry.ProperFlatSingleOpenPseudoCoherent (stage 3; reviewer PASS; first push; landing 20261013T100111-L-2482090 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:01 L: merged deliver/R2/Sheaf.AlgebraicGeometry.StrictPerfectTensorRelativeTorBound (stage 3; reviewer PASS; first push; landing 20261013T100112-L-2482330 (interface); batch 20261013T095923; modules 3; new nodes 2)

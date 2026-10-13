@@ -11,6 +11,8 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.Single
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorModel
+import Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison
 import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Homology.KFlatPullback
@@ -31,6 +33,36 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
 
+private theorem bounded_tensor_single_isZero
+    {C : Type*} [Category C] [Abelian C] [MonoidalCategory C]
+    [MonoidalPreadditive C] [HasColimits C]
+    (T : CochainComplex C ℤ) (F : C) (a b : ℤ)
+    (hb : ∀ n : ℤ, n < a ∨ b < n → IsZero (T.X n))
+    (i : ℤ) (hi : i < a ∨ b < i) :
+    IsZero ((CochainComplex.mapBifunctor T
+      ((HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj F)
+      (curriedTensor C)).homology i) := by
+  let N := (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj F
+  let B := CochainComplex.mapBifunctor T N (curriedTensor C)
+  have hz : IsZero (B.X i) := by
+    apply (IsZero.iff_id_eq_zero _).2
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    change p + q = i at hpq
+    have hs : IsZero (T.X p ⊗ N.X q) := by
+      by_cases hq : q = 0
+      · subst q
+        have hp : p = i := by omega
+        subst p
+        exact (tensorRight (N.X 0)).map_isZero (hb i hi)
+      · exact (tensorLeft (T.X p)).map_isZero
+          (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq)
+    exact hs.eq_of_src _ _
+  exact (HomologicalComplex.ExactAt.of_isZero hz).isZero_homology
+
+set_option synthInstance.maxSize 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- A strictly perfect chart of amplitude `[a,b]` gives the relative tensor bound
 `[a+c,b+d]` on that chart, for any global relative K-flat model of the tensor.
 Source: Stacks Project, Tag 0DJQ, proof, and Tag 08CI, implication (2) to (1).
@@ -87,6 +119,28 @@ theorem strictPerfect_tensor_relativeTor_bound
             IsZero ((SheafOfModules.evaluation A (Opposite.op V)).obj
               ((CochainComplex.mapBifunctor P
                 ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)
-                (@curriedTensor _ _ (SheafOfModules.monoidalCategory R))).homology i)) := by sorry
+                (@curriedTensor _ _ (SheafOfModules.monoidalCategory R))).homology i)) := by
+  dsimp only
+  let R := TopCat.Sheaf.inverseImageRing f.base S.sheaf
+  let A := (sheafCompose (Opens.grothendieckTopology X)
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj R
+  obtain ⟨T, H, hb, hT, s, t, hs, ht⟩ :=
+    strictPerfect_relativeTensor_model f E G K eK U L hL eL a b c d hLb hGb hGflat
+  intro P hP q hq F i hi V hVU
+  obtain ⟨e⟩ := CochainComplex.open_kFlat_tensor_homology_comparison
+    R U P _ hP q hq T H hT s t hs ht F i
+  let C := SheafOfModules.{u} ((sheafCompose
+    ((Opens.grothendieckTopology X).over U)
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))
+  let : MonoidalCategory C := SheafOfModules.monoidalCategory (R.over U)
+  have : MonoidalPreadditive C :=
+    Classical.choice (SheafOfModules.tensorClosed (R.over U)).1
+  have hz := bounded_tensor_single_isZero (C := C) T
+    ((SheafOfModules.overFunctor.{u} A U).obj F) (a + c) (b + d) hb i hi
+  have hlocal := hz.of_iso e
+  let ev := SheafOfModules.evaluation (A.over U)
+    (Opposite.op (Over.mk (homOfLE hVU)))
+  exact ev.map_isZero hlocal
+
 
 end AlgebraicGeometry.Scheme
