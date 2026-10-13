@@ -18,70 +18,52 @@
  ],
  "proof": [
   {
-   "text": "Fix a prime q of S with g outside q, and localize it to a prime qg of S_g. Its contraction to R remains p = q cap R, since the localization map factors the original R-algebra map. The given map P = R[t_1,...,t_n] to S_g is finite type and quasi-finite at every prime.",
+   "text": "Put $p=q\\cap R$, $k=\\kappa(p)$, $F=k\\otimes_R S$, $T=k\\otimes_R S_g$, and $P=R[t_1,\\ldots,t_n]$. Construct $\\varphi:k[t_1,\\ldots,t_n]\\to T$ as the tensor-product map $1\\otimes f$ composed with the inverse polynomial scalar-extension isomorphism [lem-weil-pbc-polynomial-scalar-extension]. The coefficient-map compatibility follows from the formula taking the image of a polynomial in $P$ back to $1\\otimes$ that polynomial. Every element of $T$ is a finite sum $\\sum_i a_i\\otimes s_i=\\sum_i(1\\otimes s_i)\\varphi(C(a_i))$. Thus the square with rings $P,S_g,k[t_1,\\ldots,t_n],T$ has exactly the finite-sum generation property of [lem-weil-pbc-quasi-finite-four-rings]. That theorem proves that $\\varphi$ is finite type and quasi-finite at every prime, using the given quasi-finiteness at the contraction of each prime. This is the fully proved private helper polynomial_factorization_baseChange; it works over any commutative R-algebra A, not just k.",
    "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-quasi-finite-four-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The polynomial ring $k[t_1,\\ldots,t_n]$ is finite type over $k$, and $\\varphi$ is finite type by step 1. Their composite makes $T$ finite type over $k$ [def-weil-pbc-finite-type-algebra]. Apply [lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra] to $\\varphi$ to get $\\dim\\operatorname{Spec}T\\le n$. The scalar tower is justified directly by the k-algebra homomorphism identity for $\\varphi$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the canonical map $j:F\\to T$ by tensoring $S\\to S_g$ with k. Localization commutes with tensor base change [lem-weil-pbc-localization-base-change]; the precise Mathlib form used is IsLocalization.tensorProduct_tensorProduct_right, whose compatibility condition is checked on $1\\otimes s$. The image of the powers of g consists of the powers of $b=1\\otimes g$, so $T$ is an away localization of $F$ at b. By [lem-weil-pbc-spec-localization-away-basic-open], contraction along j is an open embedding with range $D(b)$. Its homeomorphism onto that range identifies the global dimensions of $\\operatorname{Spec}T$ and $D(b)$. Therefore $\\dim D(b)\\le n$.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
     "lem-weil-pbc-spec-localization-away-basic-open"
    ],
    "elementary": false
   },
   {
-   "text": "Fix $\\mathfrak q'\\in D(g)$ and put $\\mathfrak p'=\\varphi^{-1}(\\mathfrak q')$. Put $T=S_g\\otimes_R\\kappa(\\mathfrak p')$. The isomorphism [lem-weil-pbc-tensor-cancel-base-change] identifies $T$ with $S_g\\otimes_S(S\\otimes_R\\kappa(\\mathfrak p'))$; then [lem-weil-pbc-localization-base-change] identifies it with $F_{\\mathfrak p',\\bar g}$, the localization of $F_{\\mathfrak p'}=S\\otimes_R\\kappa(\\mathfrak p')$ at $\\bar g$. The base change of $P$ is $\\kappa(\\mathfrak p')[t_1,\\dots,t_n]$ by [lem-weil-pbc-polynomial-scalar-extension], and its map to $T$ is the base change of $P\\to S_g$, by the same tensor-cancellation isomorphism with $S=P$. The latter is quasi-finite at every prime, so [lem-weil-pbc-quasi-finite-four-rings], with $R=P$, $S=S_g$, $R'=\\kappa(\\mathfrak p')[t_1,\\dots,t_n]$ and $S'=T$, shows that the polynomial-to-$T$ map is quasi-finite at every prime (the tensor map to $T$ is an isomorphism and hence surjective). It is of finite type because the finitely many $R$-algebra generators of $S$, together with $g^{-1}$, generate $T$ over $\\kappa(\\mathfrak p')[t_1,\\dots,t_n]$ [def-weil-pbc-finite-type-algebra].",
+   "text": "Let Q be the fibre prime for q. The inverse of [lem-weil-pbc-fibre-ring-primes-bijection] is contraction along the right tensor inclusion, so its inverse-application identity gives $Q\\cap S=q$. Thus $b\\notin Q$ follows from $g\\notin q$, and Q belongs to the open neighbourhood $D(b)$. By the infimum defining local dimension [def-kun-topological-dimension-at-point], $\\dim_Q\\operatorname{Spec}F\\le\\dim D(b)\\le n$. In Lean this is iInf₂_le at the neighbourhood PrimeSpectrum.basicOpen b followed by the bound from step 3. No localized prime qg or equality of local dimensions on open subspaces is needed.",
    "uses": [
-    "lem-weil-pbc-tensor-cancel-base-change",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-quasi-finite-four-rings",
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs, lines 31319-31322), 'Considering the fibres'; quasi-finite base change is Lemma Tag 00PP (lemma-quasi-finite-base-change, lines 30362-30388), through the existing four-rings form Tag 00PN"
-   }
-  },
-  {
-   "text": "Since $T$ is a finite type $\\kappa(\\mathfrak p')$-algebra with a quasi-finite map from $\\kappa(\\mathfrak p')[t_1,\\dots,t_n]$, [lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra] gives $\\dim\\operatorname{Spec}T\\le n$. Thus the dimension of $\\operatorname{Spec}T$ at any of its points is at most $n$ by taking the whole space among the open neighbourhoods in the infimum defining local dimension [def-kun-topological-dimension-at-point]. In particular this holds at the point $\\mathfrak Q'_g$ corresponding to $\\mathfrak q'_g$ by [lem-weil-pbc-fibre-ring-primes-bijection].",
-   "uses": [
-    "lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra",
     "lem-weil-pbc-fibre-ring-primes-bijection",
     "def-kun-topological-dimension-at-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs, lines 31320-31322), via Lemma Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra); local dimension bound from Topology Tag 0B7I"
-   }
-  },
-  {
-   "text": "Under $T\\cong F_{\\mathfrak p',\\bar g}$ from step 2, $\\operatorname{Spec}T$ is the open subspace $D(\\bar g)$ of $\\operatorname{Spec}F_{\\mathfrak p'}$ by [lem-weil-pbc-spec-localization-away-basic-open]. The fibre-prime correspondence [lem-weil-pbc-fibre-ring-primes-bijection] identifies $\\mathfrak Q'_g$ with the prime $\\mathfrak Q'$ associated to $\\mathfrak q'$; it lies in $D(\\bar g)$ because $g\\notin\\mathfrak q'$. Hence [lem-weil-pbc-dimension-at-point-open-subspace] gives $\\dim_{\\mathfrak Q'}\\operatorname{Spec}F_{\\mathfrak p'}=\\dim_{\\mathfrak Q'_g}\\operatorname{Spec}T\\le n$ by step 3. This is $\\dim_{\\mathfrak q'}(S/R)\\le n$, for every $\\mathfrak q'\\in D(g)$.",
-   "uses": [
-    "lem-weil-pbc-spec-localization-away-basic-open",
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "lem-weil-pbc-dimension-at-point-open-subspace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, conclusion of Lemma Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs, lines 31317-31323); local dimension on the principal open uses Topology Definition Tag 0055 and Algebra Lemma Tag 00E4"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-tensor-cancel-base-change",
-  "lem-weil-pbc-localization-base-change",
   "lem-weil-pbc-polynomial-scalar-extension",
   "lem-weil-pbc-quasi-finite-four-rings",
   "def-weil-pbc-finite-type-algebra",
   "lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-spec-localization-away-basic-open",
   "lem-weil-pbc-fibre-ring-primes-bijection",
-  "def-kun-topological-dimension-at-point",
-  "lem-weil-pbc-dimension-at-point-open-subspace"
+  "def-kun-topological-dimension-at-point"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Proof of Tag 00QH, the reduction to Tag 00QG on each residue-field fibre; localization and fibre-prime identifications expanded by P2."
+  "place": "Proof of Tag 00QH, considering the fibres and applying Tag 00QG; scalar extension implemented via Tag 00PN. J3 implements the final local bound by the principal-open neighbourhood directly. Tags 00QH, 00QG and 00PN read online on 2026-10-13 because the literature checkout is absent."
  },
  "mathlib_searches": [
   {
@@ -171,13 +153,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T212723-L-1131496",
-  "kind": "interface",
+  "landing": "20261013T045535-L-130297",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

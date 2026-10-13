@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.RingTheory.DimensionQuasiFiniteOverPolynomialAlgebra
 import Sheaf.RingTheory.QuasiFiniteFourRings
+import Mathlib.RingTheory.Localization.BaseChange
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import Mathlib.RingTheory.TensorProduct.MvPolynomial
 
 /-!
 # Fibre dimension bound from a quasi-finite polynomial factorization
@@ -23,8 +26,64 @@ Source: Stacks Project, proof of Tag 00QH, after the application of Tag 00QE.
 
 universe u v
 
+
 namespace Algebra
 
+open scoped _root_.TensorProduct in
+set_option backward.isDefEq.respectTransparency false in
+private theorem polynomial_factorization_baseChange
+    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
+    (A : Type*) [CommRing A] [Algebra R A] (n : ℕ)
+    (f : MvPolynomial (Fin n) R →ₐ[R] S)
+    (hft : @FiniteType (MvPolynomial (Fin n) R) S _ _ f.toRingHom.toAlgebra)
+    (hq : ∀ q : PrimeSpectrum S,
+      @IsQuasiFiniteAtPrime (MvPolynomial (Fin n) R) S
+        _ _ f.toRingHom.toAlgebra hft q) :
+    ∃ φ : MvPolynomial (Fin n) A →ₐ[A] A ⊗[R] S,
+      ∃ hφ : @FiniteType (MvPolynomial (Fin n) A) (A ⊗[R] S)
+        _ _ φ.toRingHom.toAlgebra,
+      ∀ q : PrimeSpectrum (A ⊗[R] S),
+        @IsQuasiFiniteAtPrime (MvPolynomial (Fin n) A) (A ⊗[R] S)
+          _ _ φ.toRingHom.toAlgebra hφ q := by
+  classical
+  let P := MvPolynomial (Fin n) R
+  let P' := MvPolynomial (Fin n) A
+  let T := A ⊗[R] S
+  let φ : P' →ₐ[A] T :=
+    (Algebra.TensorProduct.map (AlgHom.id A A) f).comp
+      (MvPolynomial.algebraTensorAlgEquiv R A).symm.toAlgHom
+  let : Algebra P S := f.toRingHom.toAlgebra
+  let : FiniteType P S := hft
+  let : Algebra P P' := (MvPolynomial.map (algebraMap R A)).toAlgebra
+  let : Algebra P' T := φ.toRingHom.toAlgebra
+  let : Algebra S T := Algebra.TensorProduct.rightAlgebra
+  let : Algebra P T :=
+    ((Algebra.TensorProduct.includeRight (R := R) (A := A)).comp f).toRingHom.toAlgebra
+  have : IsScalarTower P S T := IsScalarTower.of_algebraMap_eq' rfl
+  have : IsScalarTower P P' T := IsScalarTower.of_algebraMap_eq fun x ↦ by
+    change (1 : A) ⊗ₜ[R] f x = φ (MvPolynomial.map (algebraMap R A) x)
+    change 1 ⊗ₜ[R] f x = Algebra.TensorProduct.map (AlgHom.id A A) f
+      ((MvPolynomial.algebraTensorAlgEquiv R A).symm
+        (MvPolynomial.map (algebraMap R A) x))
+    rw [MvPolynomial.algebraTensorAlgEquiv_symm_map]
+    simp
+  have hgen : ∀ x : T, ∃ (m : ℕ) (s : Fin m → S) (r : Fin m → P'),
+      x = ∑ i, algebraMap S T (s i) * algebraMap P' T (r i) := by
+    intro x
+    obtain ⟨m, a, s, hx⟩ := TensorProduct.exists_sum_tmul_eq x
+    refine ⟨m, s, fun i ↦ MvPolynomial.C (a i), ?_⟩
+    rw [hx]
+    congr 1
+    funext i
+    change a i ⊗ₜ[R] s i = (1 ⊗ₜ[R] s i) * φ (MvPolynomial.C (a i))
+    rw [show MvPolynomial.C (a i) = algebraMap A P' (a i) from rfl, φ.commutes]
+    change a i ⊗ₜ[R] s i = (1 ⊗ₜ[R] s i) * (a i ⊗ₜ[R] (1 : S))
+    simp [Algebra.TensorProduct.tmul_mul_tmul]
+  obtain ⟨hφ, hqφ⟩ := finiteType_and_isQuasiFiniteAtPrime_of_four_rings
+    P S P' T hgen
+  exact ⟨φ, hφ, fun q ↦ hqφ q (hq _)⟩
+
+set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-finite factorization of `R → S[g⁻¹]` through a polynomial algebra in `n`
 variables bounds the local dimensions of all the original fibres at primes in `D(g)`.
 No distinguished prime or initial fibre-dimension hypothesis is needed.
@@ -66,7 +125,49 @@ theorem fibre_dimension_le_of_quasiFinite_polynomial_localization
     (q : PrimeSpectrum S) (hg : g ∉ q.asIdeal) :
     topologicalKrullDimAt
       (PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S))
-        ⟨q, rfl⟩) ≤ (n : WithBot ℕ∞) := by
-  sorry
+        ⟨q, rfl⟩) ≤ (n : WithBot ℕ∞) := open scoped _root_.TensorProduct in by
+  classical
+  let p := q.comap (algebraMap R S)
+  let k := p.asIdeal.ResidueField
+  let F := p.asIdeal.Fiber S
+  let T := p.asIdeal.Fiber (Localization.Away g)
+  let Q : PrimeSpectrum F := PrimeSpectrum.preimageEquivFiber R S p ⟨q, rfl⟩
+  obtain ⟨φ, hφ, hqφ⟩ := polynomial_factorization_baseChange k n f hft hq
+  let : Algebra (MvPolynomial (Fin n) k) T := φ.toRingHom.toAlgebra
+  have : IsScalarTower k (MvPolynomial (Fin n) k) T :=
+    IsScalarTower.of_algebraMap_eq fun x ↦ (φ.commutes x).symm
+  have : FiniteType k T := FiniteType.trans
+    (inferInstance : FiniteType k (MvPolynomial (Fin n) k)) hφ
+  have hdim := AlgebraicGeometry.topologicalKrullDim_spec_le_of_quasiFinite_over_mvPolynomial
+    k n T φ hφ hqφ
+  change topologicalKrullDim (PrimeSpectrum T) ≤ (n : WithBot ℕ∞) at hdim
+  let j : F →ₐ[k] T := Algebra.TensorProduct.map (AlgHom.id k k)
+    (IsScalarTower.toAlgHom R S (Localization.Away g))
+  let : Algebra F T := j.toRingHom.toAlgebra
+  have : IsScalarTower k F T := IsScalarTower.of_algebraMap_eq fun x ↦ (j.commutes x).symm
+  have hloc := IsLocalization.tensorProduct_tensorProduct_right R k (Submonoid.powers g)
+    (Localization.Away g) (by
+      ext x
+      change j (1 ⊗ₜ[R] x) = 1 ⊗ₜ[R] algebraMap S (Localization.Away g) x
+      exact Algebra.TensorProduct.map_tmul (AlgHom.id k k)
+        (IsScalarTower.toAlgHom R S (Localization.Away g)) 1 x)
+  have : IsLocalization.Away
+      (Algebra.TensorProduct.includeRight (R := R) (A := k) g) T := by
+    simpa only [Submonoid.map_powers] using hloc
+  let b : F := Algebra.TensorProduct.includeRight g
+  have hj := PrimeSpectrum.localization_away_isOpenEmbedding T b
+  have hr := PrimeSpectrum.localization_away_comap_range T b
+  have hQ : Q.comap Algebra.TensorProduct.includeRight.toRingHom = q :=
+    congrArg Subtype.val ((PrimeSpectrum.preimageEquivFiber R S p).symm_apply_apply ⟨q, rfl⟩)
+  have hmem : Q ∈ PrimeSpectrum.basicOpen b := by
+    change g ∉ (Q.comap Algebra.TensorProduct.includeRight.toRingHom).asIdeal
+    rw [hQ]
+    exact hg
+  have hbasic : topologicalKrullDim (PrimeSpectrum.basicOpen b) ≤ (n : WithBot ℕ∞) := by
+    let e := hj.toIsEmbedding.toHomeomorph
+    have he := IsHomeomorph.topologicalKrullDim_eq e e.isHomeomorph
+    rw [hr] at he
+    exact he.symm.trans_le hdim
+  exact (iInf₂_le (PrimeSpectrum.basicOpen b) hmem).trans hbasic
 
 end Algebra
