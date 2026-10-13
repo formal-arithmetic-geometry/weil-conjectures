@@ -13,34 +13,33 @@
  },
  "proof": [
   {
-   "text": "Restrict along the inverse ring isomorphisms to obtain exact inverse equivalences. The structural-map equations give the base restriction and extension compatibilities. Transport the universal left-derived extension and its counit; its universal property identifies the result with the other model.",
+   "text": "Evaluate hD at (a,1) and (1,b) to obtain compatibility of the coefficient maps A to D and B to D. Express hA and hB as equalities of ring homomorphisms. Forget q and t to additive chain isomorphisms; q linearity gives the required semilinearity and ht gives the target generator formula. Apply the existing localized ring transport theorem to obtain l and its additive-homology square.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model"
+    "lem-pc-base-derived-tensor-ring-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Apply homology and cohomologyIso_smul. The transported map commutes with A and B; tensor induction makes it linear for the tensor algebra. Extend to D using the equation for eD, then forget scalars to obtain the additive isomorphism l.",
-   "uses": [
-    "def-pc-base-derived-tensor-cohomology-model"
-   ],
-   "elementary": false
+   "text": "Compare left homology data mapped by restriction followed by forgetting with the same data mapped by direct forgetting. Identity maps on cycles and homology satisfy the three compatibility equations, so homology-map naturality at the identity identifies their homology isomorphisms. The mapHomologyIso_eq formula and inverse cancellation give coherence of the exact homology comparisons.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Use comparison_eq for the unlocalized comparison. The pure-tensor formula for t identifies the ordinary target map. Apply localized_eq and the extension/restriction adjunction; exact restriction homology gives the displayed square.",
-   "uses": [
-    "def-pc-base-derived-tensor-cohomology-model"
-   ],
-   "elementary": false
+   "text": "Compose the ring-transport square with the inverse of the restriction homology comparison. Replace the composite direct-forgetful and restriction factors using the coherence identity. Apply Mathlib ShortComplex.mapHomologyIso_hom_naturality to t and cancel the remaining forgetful homology isomorphism. This is the required square, without any assumption that a localized comparison is invertible.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model"
+  "lem-pc-base-derived-tensor-ring-transport"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C3",
+  "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/06Y6",
-  "place": "lemma-derived-base-change, independence of choices and universal derived extension; Tag 0DJ8 equation-bc under ring isomorphisms"
+  "place": "lemma-derived-base-change, independence of choices and universal derived extension; equation-bc in Tag 0DJ7 under ring isomorphisms",
+  "note": "Reuse the existing coefficient-ring transport statement; the remaining homology coherence and square conversion are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -140,10 +139,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T181057-L-2599440",
-  "kind": "interface",
+  "landing": "20261013T201740-L-3966183",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
