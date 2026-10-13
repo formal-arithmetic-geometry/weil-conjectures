@@ -19,14 +19,14 @@
    "elementary": false
   },
   {
-   "text": "Specialize pushout scalar-extension cancellation to the regular A-module. Inverse image of its underlying additive sheaf, with the action determined by the unit, is the regular inverse-image algebra module. Extension along t has inverse maps z tensor a ↦ z*t(a) and z ↦ z tensor 1; balancing makes them inverse, also after sheafification. Thus the underlying O_U-module of B is identified with tensorPullback(f_*O_U), compatibly with its unit.",
+   "text": "Apply the sheaf-level regular-module comparison to identify tensorPullback(f_*O_U) with the regular B-module restricted along b, compatibly with the canonical pullback unit. This isolates the regular-module specialization of pushout cancellation.",
    "uses": [
-    "lem-weil-pbc-affine-module-tensor-base-change"
+    "stage3-pushout-regular-module-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Since W is affine, the affine pullback section comparison is a linear bijection C tensor_D C → B(W), after swapping factors. Unit compatibility sends 1 tensor d to δ(d); O_U-linearity sends c tensor d to b(c)δ(d). Tensor induction and the proved pure-tensor formula identify this additive map with q. Injectivity of the linear comparison implies injectivity of q, without asserting its surjectivity.",
+   "text": "Use the affine module section comparison for G=f_*O_U on V and W=f⁻¹V, with W affine. Rewrite appLE at the identity inclusion to f.app V. Compose tensor swap, the affine comparison, and the section isomorphism e. The unit formula and O_U-linearity agree with affinePushoutSectionMap_tmul on pure tensors. Tensor induction proves equality on every tensor; injectivity follows by cancellation of e, the affine comparison, and tensor swap.",
    "uses": [
     "lem-weil-pbc-module-pullback-affine-sections",
     "stage3-affine-pushout-ring-section-map",
@@ -36,16 +36,16 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-module-tensor-base-change",
-  "lem-weil-pbc-module-pullback-affine-sections",
   "pqf-lem-pushforward-qcoh",
+  "stage3-pushout-regular-module-comparison",
+  "lem-weil-pbc-module-pullback-affine-sections",
   "stage3-affine-pushout-ring-section-map",
   "stage3-affine-pushout-ring-section-map-tmul"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 01SB, 01I9, 01IA, 01HV",
-  "place": "Tag 01SB affine reduction, expanded regular-module argument and elementary ring tensor calculation: Injectivity of the canonical affine tensor section map"
+  "document": "Stacks Project, Tags 01SB, 01IA and 01HV",
+  "place": "Lean reduction through sheaf-level regular-module identification, quasi-coherent pushforward, affine-section specialization, tensor induction, and injectivity cancellation"
  },
  "mathlib_searches": [
   {
@@ -127,9 +127,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T015616-L-3027546",
+  "landing": "20261013T040757-L-3951747",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

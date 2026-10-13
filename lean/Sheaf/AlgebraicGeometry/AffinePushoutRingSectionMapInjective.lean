@@ -1,6 +1,12 @@
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.AffinePushoutRingSectionMap
+import Sheaf.AlgebraicGeometry.PushoutRegularModuleComparison
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Sheaf.AlgebraicGeometry.AffinePushoutRingSectionMapTmul
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
@@ -8,6 +14,8 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 variable {U X : Scheme.{u}} (f : U ⟶ X)
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical affine tensor section map has zero kernel.
 Source: Stacks Project, Morphisms, Tag 01SB, affine reduction; Schemes, Tags 01IA and 01HV.
 (blueprint: stage3-affine-pushout-ring-section-map-injective).
@@ -41,6 +49,51 @@ theorem affinePushoutSectionMap_injective [IsAffineHom f]
     (V : X.Opens) (hV : IsAffineOpen V) :
     letI : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
     Function.Injective (affinePushoutSectionMap f B b t hpushout V).hom := by
-  sorry
+  classical
+  dsimp only
+  let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
+  let G := (pushforward f).obj (SheafOfModules.unit U.ringCatSheaf)
+  have : QuasiSeparated f := by
+    have := IsSeparated.of_isAffineHom f
+    infer_instance
+  have : (SheafOfModules.unit U.ringCatSheaf).IsQuasicoherent :=
+    SheafOfModules.isQuasicoherent_unit.{u, u, u}
+  have hG : G.IsQuasicoherent :=
+    isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f _
+  obtain ⟨e, he⟩ := exists_pushout_regularModule_comparison f B b t hpushout
+  have hs := exists_tensorPullback_affine_sections f
+    ⟨V, hV⟩ ⟨f ⁻¹ᵁ V, hV.preimage f⟩ le_rfl
+  dsimp only at hs
+  rw [Scheme.Hom.appLE_eq_app] at hs
+  obtain ⟨c, hc, _, hct, _⟩ := hs
+  let q := affinePushoutSectionMap f B b t hpushout V
+  have hformula (x y : Γ(U, f ⁻¹ᵁ V)) :
+      e.hom.val.app (op (f ⁻¹ᵁ V)) (c G hG (y ⊗ₜ[Γ(X, V)] x)) =
+        q.hom (x ⊗ₜ[Γ(X, V)] y) := by
+    rw [hct]
+    simp only [homOfLE_refl, op_id]
+    rw [((tensorPullback f).obj G).presheaf.map_id]
+    change e.hom.val.app (op (f ⁻¹ᵁ V))
+      (x • (show Γ((tensorPullback f).obj G, f ⁻¹ᵁ V) from
+        ((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app G).val.app
+          (op V) y)) = _
+    rw [(e.hom.val.app (op (f ⁻¹ᵁ V))).hom.map_smul]
+    rw [he]
+    exact (affinePushoutSectionMap_tmul f B b t hpushout V x y).symm
+  have hcomparison (z : Γ(U, f ⁻¹ᵁ V) ⊗[Γ(X, V)] Γ(U, f ⁻¹ᵁ V)) :
+      e.hom.val.app (op (f ⁻¹ᵁ V))
+        (c G hG (TensorProduct.comm Γ(X, V) Γ(U, f ⁻¹ᵁ V) Γ(U, f ⁻¹ᵁ V) z)) =
+          q.hom z := by
+    induction z using TensorProduct.induction_on with
+    | zero => simp
+    | tmul x y => simpa only [TensorProduct.comm_tmul] using hformula x y
+    | add z z' hz hz' => simp only [map_add, hz, hz']
+  have : IsIso (e.hom.val.app (op (f ⁻¹ᵁ V))) :=
+    (SheafOfModules.evaluation U.ringCatSheaf (op (f ⁻¹ᵁ V))).map_isIso e.hom
+  intro z z' hzz
+  apply (TensorProduct.comm Γ(X, V) Γ(U, f ⁻¹ᵁ V) Γ(U, f ⁻¹ᵁ V)).injective
+  apply (hc G hG).1
+  apply (ConcreteCategory.bijective_of_isIso (e.hom.val.app (op (f ⁻¹ᵁ V)))).1
+  exact (hcomparison z).trans (hzz.trans (hcomparison z').symm)
 end
 end AlgebraicGeometry.Scheme.Modules
