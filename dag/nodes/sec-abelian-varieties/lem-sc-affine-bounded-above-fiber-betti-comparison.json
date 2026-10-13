@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-affine-bounded-above-fiber-betti-comparison",
+ "kind": "statement",
+ "title": "Fibre Betti comparison for a supplied affine bounded-above free model",
+ "statement": "Let X be a scheme [def-pc-scheme] and E in its derived category [def-pc-derived-category]. Let U be an affine open, A = Gamma(U,O_X), and F a cochain complex of free A-modules with F^n = 0 for n > b. Suppose E restricted to the localized site of U is isomorphic to Q of the termwise affinePerfectSheafification of F (the functor of [lem-pc-affine-perfect-module-model]). For every integer i and z in U, let p be the image of z under the canonical affine chart U -> Spec A. Then the derived fibre Betti number [def-sc-derived-fiber-betti] beta_i(E,z) equals the finrank over kappa(p) of H^i(F tensor_A kappa(p)). No finite-rank, lower-bound or pseudo-coherence hypothesis is imposed; the representative is supplied, not constructed.",
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI, proof, affine reduction; Tag 08DW(2) and its proof; https://stacks.math.columbia.edu/tag/0BDI and https://stacks.math.columbia.edu/tag/08DW"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-affine-perfect-module-model",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact equivalence between sheaves on Spec Gamma(U,O) and the localized open site, compatible with termwise affinePerfectSheafification, to interpret hmodel on the affine spectrum. Factor the residue point through U. The open-restriction comparison for derived pullback identifies its fibre with the fibre of Q(tilde F) on the spectrum. The factorization is the restriction of X.fromSpecResidueField z since its image is z in U.",
+   "uses": [
+    "lem-pc-affine-localized-site-derived-transport",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Free terms are flat. Convert F.IsStrictlyLE b to the explicit upper bound and apply the bounded-above flat module K-flat theorem. The affine derived-pullback comparison now computes pullback of Q(tilde F) along A to kappa(p) termwise by tilde of F tensor_A kappa(p). The residueFieldMap of the open immersion and the affine chart are isomorphisms; compose them with Spec.residueFieldIso. Compatibility with the A-action follows from Spec.algebraMap_residueFieldIso_inv and the naturality of germs and residues.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take degree-i cohomology. Tilde is exact and on Spec of the residue field its global sections recover the original module. The scalar action in derivedFiberCohomology is transported through GammaSpecIso. Therefore the residue-field isomorphism of the preceding step identifies the resulting cohomology with homology of the scalar-extension complex by a semilinear bijection. Isomorphic scalar fields and a semilinear bijection preserve module rank and hence finrank, even when the dimension is infinite. Applying the definition of derivedFiberBetti gives the asserted equality. Empty U has no z; zero complexes, zero ranks and degrees above b are covered by the same maps.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-sc-derived-fiber-betti"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-localized-site-derived-transport",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K1",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI, proof, affine reduction; Tag 08DW(2) and its proof; https://stacks.math.columbia.edu/tag/0BDI and https://stacks.math.columbia.edu/tag/08DW",
+  "note": "Expanded localized-site and residue-field scalar identifications in the affine computation of Tag 0BDI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of the derived residue field fiber of an affine bounded above free module complex",
+   "results": "UNAVAILABLE: service Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex locally admits a bounded above finite free complex computing derived residue field fibers",
+   "results": "Eight hits for derived-category support and K-projective factorization; no affine residue-field comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finrank\", \"restrictScalars\"",
+   "results": "No exact comparison for localized sheaf representatives.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*fiberBetti|fiberBetti.*affine|boundedAbove.*fiber; derivedFiberCohomology; affinePerfectSheafification",
+   "results": "msearch grep: no hits. Repository rg found global K-flat stalk and stalk-free residue comparisons, and affine module-model helpers; none states the local affine chart comparison. Whole-DAG title search found only the parent existence theorem, its bounded one-degree caller and perfect residue models.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PseudoCoherentFiberBoundedAboveModel",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BDI affine reduction: compute the derived residue fibres of a supplied bounded-above finite-free affine representative",
+   "via": [
+    "lem-sc-pseudo-coherent-fiber-bounded-above-model",
+    "lem-sc-pseudo-coherent-fiber-finite-free-model",
+    "lem-sc-perfect-jump-loci",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBoundedAboveFiberBettiComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBoundedAboveFiberBettiComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_boundedAbove_fiberBetti_eq",
+  "statement": "theorem affine_boundedAbove_fiberBetti_eq (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ x : X, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (X.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory X) (U : X.Opens) (hU : IsAffineOpen U)\n    (F : CochainComplex (ModuleCat.{u} (X.presheaf.obj (.op U))) ℤ)\n    (b : ℤ) (hb : F.IsStrictlyLE b)\n    (hfree : ∀ n : ℤ, Module.Free (X.presheaf.obj (.op U)) (F.X n))\n    (hmodel : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅\n        DerivedCategory.Q.obj\n          (((affinePerfectSheafification X U hU).mapHomologicalComplex (.up ℤ)).obj F)))\n    (i : ℤ) (z : U) :\n    derivedFiberBetti X E i z =\n      Module.finrank (hU.isoSpec.hom z).asIdeal.ResidueField\n        ((((ModuleCat.extendScalars\n          (algebraMap (X.presheaf.obj (.op U))\n            (hU.isoSpec.hom z).asIdeal.ResidueField)).mapHomologicalComplex\n              (ComplexShape.up ℤ)).obj F).homology i)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T111859-L-3055026",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T111859-L-3055026",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
