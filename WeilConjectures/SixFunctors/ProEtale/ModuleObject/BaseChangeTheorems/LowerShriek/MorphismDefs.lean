@@ -64,6 +64,9 @@ finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all
   cartesian square whose two vertical maps are the same `f`, the identification
   `Rf_!^{c.baseChange sq} ≅ Rf_!^c` of the lower shrieks attached to the base-changed and the
   original compactification.
+- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChangeSelf`: for such a square, the
+  compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf_!^c` with the same
+  compactification `c` on both sides.
 
 ## Sorried input
 
@@ -292,6 +295,32 @@ noncomputable def boundedConstructibleLowerShriekBaseChangeCompactificationIso
     boundedConstructibleLowerShriekOfCompactification Λ ℓ k (c.baseChange sq) ≅
       boundedConstructibleLowerShriekOfCompactification Λ ℓ k c :=
   sorry
+
+/-- The *compact-support base-change morphism* `Ex_!^c : Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf_!^c` on
+bounded constructible complexes for a cartesian square `sq : IsPullback g' f f g` whose two
+vertical maps are the same morphism `f`, and a compactification `c` of `f`, with the lower shriek
+attached to `c` on both sides: the compact-support base-change morphism
+`boundedConstructibleLowerShriekBaseChange` into `Rf_!^{c.baseChange sq}`, followed by the
+identification `boundedConstructibleLowerShriekBaseChangeCompactificationIso` of the
+base-changed compactification with `c`. -/
+@[no_expose]
+noncomputable def boundedConstructibleLowerShriekBaseChangeSelf (c : Compactification f)
+    (sq : IsPullback g' f f g) :
+    boundedConstructibleLowerShriekOfCompactification Λ ℓ k c ⋙
+        boundedConstructibleUpperStar Λ ℓ k g ⟶
+      boundedConstructibleUpperStar Λ ℓ k g' ⋙
+        boundedConstructibleLowerShriekOfCompactification Λ ℓ k c :=
+  boundedConstructibleLowerShriekBaseChange Λ ℓ k c sq ≫
+    Functor.whiskerLeft _
+      (boundedConstructibleLowerShriekBaseChangeCompactificationIso Λ ℓ k c sq).hom
+
+lemma boundedConstructibleLowerShriekBaseChangeSelf_eq (c : Compactification f)
+    (sq : IsPullback g' f f g) :
+    boundedConstructibleLowerShriekBaseChangeSelf Λ ℓ k c sq =
+      boundedConstructibleLowerShriekBaseChange Λ ℓ k c sq ≫
+        Functor.whiskerLeft _
+          (boundedConstructibleLowerShriekBaseChangeCompactificationIso Λ ℓ k c sq).hom := by
+  rw [boundedConstructibleLowerShriekBaseChangeSelf]
 
 end CompactificationIso
 
