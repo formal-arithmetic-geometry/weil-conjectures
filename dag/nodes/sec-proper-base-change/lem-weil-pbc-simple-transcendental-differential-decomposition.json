@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-simple-transcendental-differential-decomposition",
+ "kind": "statement",
+ "title": "Canonical differential decomposition for a simple transcendental extension",
+ "statement": "Let k → F₀ → F be a tower of fields. Let m = 1 and y : Fin m → F consist of transcendental elements over F₀, and suppose IntermediateField.adjoin F₀ (range y) = top. There exists an F-linear equivalence (F tensor over F₀ Ω[F₀/k]) × (Fin m → F) ≃ Ω[F/k] carrying (x,c) to the canonical differential base-change map of x plus the sum of c_j d(y_j). No finite basis of Ω[F₀/k] is assumed. Differentials and their canonical derivation are as in [def-weil-pbc-kahler-differentials]; transcendence is the negation of [def-weil-algebraic-element].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00RX (polynomial basis), 00RT (localization), 00RS (differential sequence), and 00S2 (Jacobi–Zariski); smoothing.tex Tag 07FI, transcendental case."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-algebraic-element"
+ ],
+ "proof": [
+  {
+   "text": "Since m = 1, algebraicIndependent_unique_type_iff gives algebraic independence. Its aevalEquiv identifies P = F₀[X_j] with A = F₀[y_j]. The adjoin hypothesis and mem_adjoin_iff_div show that every element of F is a fraction from A; IsFractionRing.of_field and of_ringEquiv_left make F a fraction field of P. Localization is formally étale, so transport the scalar extension of mvPolynomialBasis through tensorKaehlerEquivOfFormallyEtale to give a relative basis brel_j = D F₀ F (y_j).",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib Algebra.FormallySmooth.of_algebraicIndependent makes F/F₀ formally smooth. Hence H₁(L_{F/F₀}) is zero. Apply Mathlib Algebra.H1Cotangent.exact_δ_mapBaseChange and LinearMap.injective_iff_eq_zero_of_exact to show u = mapBaseChange k F₀ F is injective. These are applications of proved Mathlib theorems, with no library proof hole.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let v = map k F₀ F F and s(c) = sum_j c_j D k F(y_j). The map_D formula and the relative basis expansion give v(s(c)) = brel.equivFun.symm(c). The first exact differential sequence gives v(u(x)) = 0 and ker v = range u. Therefore f(x,c) = u(x) + s(c) is injective by first determining c through v, then x through u. For ω, choose c = brel.equivFun(v(ω)); exactness gives x with u(x) = ω − s(c), which proves surjectivity. LinearEquiv.ofBijective f is the required equivalence; its formula is definitional.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-kahler-differentials-first-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00RX, 00RT, 00RS and 00S2, with the fraction-field construction patterned on the proved library module Sheaf.FieldTheory.SeparablyGeneratedDifferentialsBasis. All tools in this proof are already proved in Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kahler differential decomposition of a simple transcendental field extension",
+   "results": "UNAVAILABLE: Internal Server Error from service. Other search kinds completed.",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "basis of Kahler differentials after a simple transcendental or finite separable field extension",
+   "results": "Polynomial basis and submersive presentation basis results, no admissible enlargement or simple rational-extension decomposition.",
+   "date": "2026-10-13",
+   "verdict": "Supporting results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "results": "Canonical scalar-extension equivalence and its derivation application formula. Used directly for the formally etale case; localization supports the rational case.",
+   "date": "2026-10-13",
+   "verdict": "Exact for etale differential step, not geometric construction."
+  },
+  {
+   "tool": "grep",
+   "query": "admissible.*(basis|enlarg)|enlarg.*(basis|subalgebra)|tensorKaehlerEquivOfFormallyEtale",
+   "results": "No geometric enlargement theorem; canonical differential equivalence occurs in Mathlib/RingTheory/Etale/Kaehler.lean.",
+   "date": "2026-10-13",
+   "verdict": "No direct match for either new complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuUnscaledUnitBasis",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Geometric enlargement and differential transport within lem-weil-pbc-popescu-unscaled-unit-basis",
+   "via": [
+    "lem-weil-pbc-popescu-unscaled-unit-basis",
+    "lem-weil-pbc-popescu-denominator-basis-enlargement",
+    "lem-weil-pbc-popescu-quotient-basis-enlargement",
+    "lem-weil-pbc-popescu-solution-modulo-choose",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SimpleTranscendentalDifferentialDecomposition",
+  "file": "lean/Sheaf/RingTheory/SimpleTranscendentalDifferentialDecomposition.lean",
+  "declaration": "KaehlerDifferential.exists_simple_transcendental_differential_decomposition",
+  "statement": "theorem exists_simple_transcendental_differential_decomposition\n    (k : Type u) (F₀ : Type v) (F : Type w) [Field k] [Field F₀] [Field F]\n    [Algebra k F₀] [Algebra k F] [Algebra F₀ F] [IsScalarTower k F₀ F]\n    (m : ℕ) (y : Fin m → F) (hm : m = 1)\n    (hy : ∀ j, Transcendental F₀ (y j))\n    (hgen : IntermediateField.adjoin F₀ (Set.range y) = ⊤) :\n    ∃ E : ((F ⊗[F₀] KaehlerDifferential k F₀) × (Fin m → F)) ≃ₗ[F]\n        KaehlerDifferential k F,\n      ∀ (x : F ⊗[F₀] KaehlerDifferential k F₀) (c : Fin m → F),\n        E (x, c) = mapBaseChange k F₀ F x + ∑ j, c j • D k F (y j)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T130034-L-3923223",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T130034-L-3923223",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
