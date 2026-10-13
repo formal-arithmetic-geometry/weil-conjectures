@@ -12,28 +12,37 @@
  ],
  "proof": [
   {
-   "text": "For each x, the base facts and prefix agreement give σ(r)=τ(r)=j and a=b+1. Delete position r and label j, obtaining genuine restricted permutations ρ₀ and η₀ through successor bijections.",
+   "text": "Fix x and use its base facts a=b+1 and tau(r)=j. Prefix agreement, since r<a, gives sigma(r)=j. For each permutation pi with pi(r)=j, construct a permutation of Fin(p+1) by composing finSuccAboveEquiv r, the subtype equivalence induced by pi between the complements of r and j, and the inverse of finSuccAboveEquiv j. Its defining equation is pi(r.succAbove k)=j.succAbove(restriction k). The private proved helper restrict_perm verifies this equation directly from apply_symm_apply.",
    "uses": [
     "def-pc-alternating-cech-sorting-operators"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The restriction ρ₀ is stable for t∘j.succAbove and therefore equals ρ by uniqueness of the strictly lexicographically ordered enumeration of the pairs (value,label). The restriction η₀ has prefix b equal to ρ and an increasing tail, so equals η by uniqueness of the increasing enumeration of the complementary labels. Their restriction equations give the result. This proof applies to any equivalence satisfying the base facts, not just a constructed deletion equivalence.",
+   "text": "The private proved helper stable_restrict transfers monotonicity and the equal-value tie condition through the strictly increasing successor embeddings. Mathlib Tuple.eq_sort_iff identifies this stable restricted permutation with the incoming rho.",
    "uses": [
     "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the restricted tau in the same manner. For k<b, the successor position is below a=b+1, hence prefix agreement and the already proved restriction equation for sigma identify its prefix with rho. For b<=k<l, r<a and a=b+1 force a<=r.succAbove(k); strict monotonicity of r.succAbove and the increasing tail of tau give the increasing tail of the restriction, reflected through j.succAbove. Apply cechPartialSort_existsUnique to identify the restriction with incoming eta, and substitute both equalities into the defining restriction equations. All inequalities are finite-index arithmetic; p=0, b=0, b=p and repeated tuple values are included.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "lem-pc-alternating-cech-partial-sort-unique"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-alternating-cech-sorting-operators"
+  "def-pc-alternating-cech-sorting-operators",
+  "lem-pc-alternating-cech-partial-sort-unique"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "B3 second reader",
+  "agent": "T4 (Codex)",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM, explicit deletion/insertion argument"
+  "place": "Tag 01FM, prefix-deletion correspondence; restriction through complement equivalences and uniqueness"
  },
  "mathlib_searches": [
   {
@@ -109,10 +118,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T015544-L-3016720",
-  "kind": "interface",
+  "landing": "20261013T040801-L-3953068",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
