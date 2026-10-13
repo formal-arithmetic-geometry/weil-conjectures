@@ -28,7 +28,8 @@ is `AlgebraicGeometry.Scheme.Hom.isPullback_deformationSpaceMap`.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.polynomialSpecMap`: the morphism `𝔸¹_{X'} ⟶ 𝔸¹_X` over `h`
-- `AlgebraicGeometry.Scheme.IdealSheafData.extendedReesPullbackData`: the maps of extended Rees algebras
+- `AlgebraicGeometry.Scheme.IdealSheafData.extendedReesPullbackData`:
+  the maps of extended Rees algebras
 - `AlgebraicGeometry.Scheme.IdealSheafData.deformationSpaceMap`: the morphism `D_J X' ⟶ D_I X`
 
 ## Main statements
@@ -261,7 +262,8 @@ lemma map_siteIdeal_imageSite (U : X'.AffineZariskiSite) :
 
 /-- Along an open immersion `h : X' ⟶ X`, the extended Rees algebra of `h^* I` over an affine
 open `U` is the base change of the one of `I` over `h(U)`. -/
-lemma isPushout_extendedReesPullbackData_imageSite (hJI : J = I.comap h) (U : X'.AffineZariskiSite) :
+lemma isPushout_extendedReesPullbackData_imageSite (hJI : J = I.comap h)
+    (U : X'.AffineZariskiSite) :
     IsPushout (h.appLE (imageSite h U).1 U.1 (h.preimage_image_eq U.1).ge)
       (I.toReesPresheaf.app (op (imageSite h U))) (J.toReesPresheaf.app (op U))
       ((extendedReesPullbackData h I J hJ).map (h.preimage_image_eq U.1).ge) := by
