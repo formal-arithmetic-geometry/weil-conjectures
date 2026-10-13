@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY and Lemma 079U; duality.tex Tag 0AA8 final comparison diagrams"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-sc-mixed-pullback-square-tensor-coherence",
+ "title": "Tensor coherence of the canonical pullback-square comparison",
+ "statement": "Let f:X→Y and g:Y′→Y be arbitrary scheme morphisms [def-pc-scheme], with fibre-product projections f′:X′→Y′ and gX:X′→X [def-pc-fibre-product]. Use derived pullbacks [def-pc-derived-pullback] and the fixed canonical composition isomorphisms c [lem-pc-ringed-spaces-derived-pullback-composition]. Define α: Lg*⋙Lf′* ≅ Lf*⋙LgX* by c(f′,g), equality transport along the square condition, and c(gX,f) inverse. For all P,Q in the derived category of OY-modules [def-pc-derived-category], the normalized pullback tensor comparisons τ [lem-sc-mixed-hom-tensor-pullback-iso] satisfy Lf′*(τg(P,Q));τf′(Lg*P,Lg*Q);(αP⊗αQ) = α(P⊗Q);LgX*(τf(P,Q));τgX(Lf*P,Lf*Q). No right adjoint, direct-image pairing, or base-change map occurs in this equality.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-derived-pullback",
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "proof": [
+  {
+   "text": "Prove that compatibility on K-flat representatives: the termwise pullback-composition comparison is the mate of the ordinary direct-image composition comparison, and the ordinary pullback tensor comparison sends pulled-back pure tensors to the tensor of their pulled-back sections. Both composition paths give those same sections. The normalization equations of the tensorators and composition comparisons transport this equation through their invertible derived counits. K-flat resolutions and naturality extend it to every A,B.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-sc-mixed-hom-tensor-pullback-iso",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY and Lemma 079U; duality.tex Tag 0AA8 final comparison diagrams",
+  "note": "Isolate tensor compatibility of left pullbacks; no right adjoints or base-change morphisms in this statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "mate of a monoidal natural isomorphism between composite left adjoints preserves right adjoint tensor pairing",
+   "results": "Generic mateEquiv and rightAdjointLaxMonoidal; none pins the chosen pullback composition comparisons.",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical mate tools only; no exact theorem for the fixed normalized scheme pullback-square comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Adjunction homEquiv naturality; useful for categorical calculation but no tensor coherence.",
+   "date": "2026-10-13",
+   "verdict": "Adjunction homEquiv naturality closes the categorical glue but does not state tensor coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*monoidal|monoidal.*baseChange|mixedPullbackSquareComparison",
+   "results": "msearch grep: zero matches. Direct rg on DerivedPullbackComposition*.lean finds unit/associativity coherence and K-flat normalization but no tensorator compatibility declaration.",
+   "date": "2026-10-13",
+   "verdict": "No exact existing declaration located in the repository or Mathlib search."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback composition comparison commutes with the normalized tensor comparison on a cartesian square",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical absence verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChangeTransport",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 final comparison diagrams: tensor compatibility underlying the internal Hom exchange",
+   "via": [
+    "lem-sc-mixed-internal-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-counit-transport",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedPullbackSquareTensorCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedPullbackSquareTensorCoherence.lean",
+  "declaration": "AlgebraicGeometry.mixedPullbackSquareComparison_tensor",
+  "declarations": [
+   "AlgebraicGeometry.mixedPullbackSquareComparison",
+   "AlgebraicGeometry.mixedPullbackSquareComparison_tensor"
+  ],
+  "statement": "theorem mixedPullbackSquareComparison_tensor\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)\n    (P Q : schemeDerivedCategory Y) :\n    (derivedPullback (pullback.snd f g)).map\n        ((mixedHomTensorPullbackIso g).hom.app (P, Q)) ≫\n      (mixedHomTensorPullbackIso (pullback.snd f g)).hom.app\n        ((derivedPullback g).obj P, (derivedPullback g).obj Q) ≫\n      ((mixedPullbackSquareComparison f g).hom.app P ⊗ₘ\n        (mixedPullbackSquareComparison f g).hom.app Q) =\n    (mixedPullbackSquareComparison f g).hom.app (P ⊗ Q) ≫\n      (derivedPullback (pullback.fst f g)).map\n        ((mixedHomTensorPullbackIso f).hom.app (P, Q)) ≫\n      (mixedHomTensorPullbackIso (pullback.fst f g)).hom.app\n        ((derivedPullback f).obj P, (derivedPullback f).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T155941-L-1305263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T155941-L-1305263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
