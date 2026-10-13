@@ -9,9 +9,9 @@
  "unit": "sk-thm-picard-pn",
  "proof_origin": {
   "by": "agent",
-  "agent": "M1 (Codex)",
+  "agent": "W2 (Codex)",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM, equation 20.23.6.1; labelled-deletion verification omitted in source, written out by the agent"
+  "place": "Tag 01FM, cohomology-equation-first-homotopy; explicit verification of the labelled tail deletion"
  },
  "blueprint": {
   "is": null,
@@ -30,17 +30,50 @@
  "statement": "Let X be a scheme, I a linearly ordered type, U : I -> X.Opens, F an abelian-group-valued presheaf, S a SiteCechComplex for the maps U_i -> X [def-weil-pbc-site-cech-complex], p a natural number, s a degree-(p+1) cochain, and t : Fin (p+2) -> I. Use the stable sorting filter, partial sorting filter, and junction map [def-pc-alternating-cech-sorting-operators]. Define E and B by the following displayed formulas. The sum of junction-labelled deletions with a < r equals minus the sum of advanced partial sorting contributions B_(a+1).\n\nlet E := fun (σ : Equiv.Perm (Fin (p + 2))) (a : Fin (p + 2))\n        (τ : Equiv.Perm (Fin (p + 2))) (r : Fin (p + 3)) ↦\n      ((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) •\n        F.map (S.indexMap t (cechJunction σ τ a)).op\n          ((-1 : ℤ) ^ r.val •\n            F.map (S.indexMap (t ∘ cechJunction σ τ a) r.succAbove).op\n              (s ((t ∘ cechJunction σ τ a) ∘ r.succAbove)))\n    let T := ∑ σ, ∑ a, ∑ τ, ∑ r,\n      if ((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧\n          cechJunction σ τ a r = σ a) ∧ a.val < r.val then E σ a τ r else 0\n    let B : ℕ → S.cochains F (p + 1) := fun a t ↦\n      ∑ σ, ∑ τ, if cechStableSort t σ ∧\n          (∀ k, k.val < a → τ k = σ k) ∧\n          (∀ i j, a ≤ i.val → i < j → τ i < τ j) then\n        (Equiv.Perm.sign τ : ℤ) • F.map (S.indexMap t τ).op (s (t ∘ τ)) else 0\n    T = - ∑ a : Fin (p + 2), B (a.val + 1) t",
  "proof": [
   {
-   "text": "Proof: For each fixed sigma and a, the permutation satisfying the partial\nsorting filter is unique: its prefix is sigma below a and its tail is the\nincreasing enumeration of the unused labels. The same construction defines\nthe unique partial permutation rho at stage a+1 (including stage p+2).\nLet tau be the stage-a permutation and b = tau.symm (sigma a). Then b >= a,\nsince a label in the fixed prefix cannot equal sigma a by injectivity.\nThe tail junction label sigma a occurs exactly at r = b+1. Removing that\nposition leaves rho, obtained from tau by moving the entry at b to a and\nshifting entries a through b-1 one place right. This fixes sigma through a\nand leaves the remaining tail increasing. This move has sign (-1)^(b-a),\nincluding b=a when it is the identity. Thus sign(rho) = (-1)^(b-a) sign(tau).\nThe deletion coefficient (-1)^a (-1)^(b+1) sign(tau) equals -sign(rho),\nbecause a+b+1 and b-a+1 differ by 2a. Comparing all projections with\nindexMap_pr and the fibre product universal property identifies the two\nindex-map composite with the map for rho. Functoriality and additivity of F\ntherefore turn the unique tail term into the negative stage-a+1 term.\nApply this for each sigma, retaining its stable sorting filter on both sides,\nand sum over a and sigma. At the last a, tau=rho=sigma and b=a, so the same\nargument still applies. Labels, rather than their values in I, are compared,\nso repetitions in t cause no extra terms; an empty I admits no such t.",
+   "text": "For each sigma and a, use unique partial sorting at a and a+1 to collapse the two permutation filters to their unique tau and rho. This uses no stable-sort uniqueness; the stable-sort condition is retained as an outer decidable filter.",
    "uses": [
-    "def-pc-alternating-cech-sorting-operators",
-    "def-weil-pbc-site-cech-complex"
+    "lem-pc-alternating-cech-partial-sort-unique",
+    "def-pc-alternating-cech-sorting-operators"
    ],
    "elementary": false
+  },
+  {
+   "text": "Let b=tau^{-1}(sigma(a)). The fixed prefix and injectivity give b>=a. Unfolding cechJunction proves that its tail copy of sigma(a) occurs precisely at r=b+1. Advancing the partial sort identifies the tuple after deleting r with rho and gives rho=tau*(cycleIcc a b).symm.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "lem-pc-alternating-cech-partial-sort-advance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By multiplicativity of permutation sign, sign_symm, and Mathlib Fin.sign_cycleIcc_of_le, sign(rho)=sign(tau)*(-1)^(b-a). The identity (-1)^a*(-1)^b=(-1)^(b-a) follows from b=a+(b-a) and (-1)^(2a)=1. Therefore the deletion coefficient is -sign(rho).",
+   "uses": [
+    "lem-pc-alternating-cech-partial-sort-advance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the two index maps by subsingleton elimination in the category of opens. Apply op_comp and functoriality of F, then the deleted-tuple equality, to identify the transported section with the pullback indexed by rho. Additivity moves integer scalars through F.map.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "lem-pc-alternating-cech-partial-sort-advance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Collapse the unique tau, rho and r finite sums with Finset.sum_ite_eq'. For a failed stable-sort filter both sides vanish. Commute the sigma and a sums and distribute negation to obtain the stated equality. Empty I has no such tuple; repeated values in t introduce no ambiguity because the argument uses original labels.",
+   "uses": [
+    "lem-pc-alternating-cech-partial-sort-unique",
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-alternating-cech-sorting-operators",
-  "def-weil-pbc-site-cech-complex"
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-alternating-cech-partial-sort-advance",
+  "lem-pc-alternating-cech-partial-sort-unique"
  ],
  "mathlib_searches": [
   {
@@ -111,12 +144,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T232141-L-1992950",
+  "landing": "20261013T003203-L-2430947",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

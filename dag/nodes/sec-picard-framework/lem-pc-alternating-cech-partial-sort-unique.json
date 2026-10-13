@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-alternating-cech-partial-sort-unique",
+ "kind": "statement",
+ "title": "Unique partial sorting permutation",
+ "statement": "Let $n,a$ be natural numbers with $a\\le n$, and let $\\sigma$ be a permutation of $\\mathrm{Fin}(n)$. There is exactly one permutation $\\tau$ agreeing with $\\sigma$ at every position $k<a$ and satisfying $\\tau(i)<\\tau(j)$ whenever $a\\le i<j$. Both the empty prefix and the empty tail are allowed.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, definition of sigma_a preceding cohomology-equation-first-homotopy"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Define the injective numerical key f(k)=sigma^{-1}(k) when sigma^{-1}(k)<a and f(k)=n+k otherwise. Apply Mathlib Tuple.sort to this key. By strong induction on k<a, the preimage of sigma(k) cannot precede k because earlier positions already agree with sigma. Monotonicity of the sorted key bounds its value at k by k. A smaller value would repeat an earlier prefix entry, so the value is k and the entry is sigma(k).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Beyond the prefix, sigma^{-1}(tau(i)) cannot lie below a, or bijectivity would repeat a fixed prefix label. Thus the key is n+tau(i), and its monotonicity plus injectivity gives a strictly increasing tail. Conversely every permutation satisfying the two filters orders the injective key: use prefix indices, the gap at n, and increasing labels in the three respective cases. Mathlib Tuple.eq_sort_iff identifies it with Tuple.sort f. The same argument covers n=0, a=0 and a=n.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W2 (Codex)",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, cohomology-equation-first-homotopy; explicit verification of the labelled tail deletion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unique permutation with prescribed prefix and increasing remaining labels",
+   "results": "HTTP Internal Server Error; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unique permutation with prescribed prefix and increasing remaining tail sign of moving an entry",
+   "results": "Permutation-sign and sorting ingredients, including Tuple.antitone_pair_of_not_sorted'; no exact partial sorting theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Fin.sign_cycleIcc_of_le",
+   "results": "Fin.sign_cycleIcc_of_le in Mathlib.GroupTheory.Perm.Fin; sign ingredient used in the parent proof.",
+   "date": "2026-10-13",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "cechPartialSort|sign_cycleIcc|eq_sort_iff",
+   "results": "Mathlib Fin.sign_cycleIcc_of_le and Tuple.eq_sort_iff; local sorting definitions, no theorem asserting unique partial sort or its advance.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "permutation of finite linearly ordered set sorted tail fixing prefix",
+   "results": "Tuple.sort, Tuple.sort_perm, Tuple.bubble_sort_induction and list sorting lemmas; Tuple.sort is used to construct the partial sort.",
+   "date": "2026-10-13",
+   "verdict": "construction ingredient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingTailContribution",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Proof: compare the explicit Cech complex with its alternating complex via the first sorting homotopy; Tag 01FM, definition of sigma_a preceding cohomology-equation-first-homotopy",
+   "via": [
+    "lem-pc-alternating-cech-first-sorting-junction-tail-contribution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechPartialSortUnique",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechPartialSortUnique.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechPartialSort_existsUnique",
+  "statement": "theorem cechPartialSort_existsUnique (n : ℕ) (σ : Equiv.Perm (Fin n))\n    (a : ℕ) (_ha : a ≤ n) :\n    ∃! τ : Equiv.Perm (Fin n),\n      (∀ k, k.val < a → τ k = σ k) ∧\n      (∀ i j, a ≤ i.val → i < j → τ i < τ j)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T003203-L-2430947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T003203-L-2430947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

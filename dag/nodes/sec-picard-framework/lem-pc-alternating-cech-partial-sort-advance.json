@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-alternating-cech-partial-sort-advance",
+ "kind": "statement",
+ "title": "Advancing the partially sorted prefix by a cycle",
+ "statement": "Let $p$ be a natural number, let $\\sigma,\\tau,\\rho$ be permutations of $\\mathrm{Fin}(p+2)$, and let $a$ be a position. Suppose $\\tau$ satisfies the partial sorting filter [def-pc-alternating-cech-sorting-operators] at a, and $\\rho$ agrees with $\\sigma$ at positions below a+1 and is strictly increasing at positions at least a+1. Write $b=\\tau^{-1}(\\sigma(a))$. Deleting position b+1 from the junction map [def-pc-alternating-cech-sorting-operators] gives $\\rho$. Moreover $\\rho=\\tau\\circ(a\\; a+1\\;\\ldots\\; b)^{-1}$, where the interval cycle fixes positions outside the interval and is identity when b=a.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, cohomology-equation-first-homotopy, tail-labelled part of the omitted verification"
+ },
+ "stmt_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "Injectivity of sigma and the fixed-prefix condition imply b>=a. Set c=Fin.cycleIcc a b and pi=tau*c.symm. The inverse cycle fixes k<a and k>b, sends a to b, and sends a<k<=b to k-1. These formulas follow by applying c and using Mathlib Fin.cycleIcc_of_lt, Fin.cycleIcc_of_gt, Fin.cycleIcc_of_last and Fin.cycleIcc_of_ge_of_lt.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The formulas show that pi agrees with sigma through a. In its remaining tail the argument of tau is i-1 up through b and i thereafter. These arguments are increasing and at least a, so pi has increasing tail. Apply unique partial sorting at stage a+1 to identify pi with rho.",
+   "uses": [
+    "lem-pc-alternating-cech-partial-sort-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the junction composed with (b+1).succAbove at k. For k<a it is tau(k)=sigma(k); at a it is sigma(a)=tau(b); for a<k<=b it is tau(k-1); for k>b it is tau(k). Thus the deleted tuple equals pi and hence rho. All cases include b=a and the last a, when the advanced tail is empty.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "lem-pc-alternating-cech-partial-sort-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W2 (Codex)",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, cohomology-equation-first-homotopy; explicit verification of the labelled tail deletion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unique permutation with prescribed prefix and increasing remaining labels",
+   "results": "HTTP Internal Server Error; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unique permutation with prescribed prefix and increasing remaining tail sign of moving an entry",
+   "results": "Permutation-sign and sorting ingredients, including Tuple.antitone_pair_of_not_sorted'; no exact partial sorting theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Fin.sign_cycleIcc_of_le",
+   "results": "Fin.sign_cycleIcc_of_le in Mathlib.GroupTheory.Perm.Fin; sign ingredient used in the parent proof.",
+   "date": "2026-10-13",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "cechPartialSort|sign_cycleIcc|eq_sort_iff",
+   "results": "Mathlib Fin.sign_cycleIcc_of_le and Tuple.eq_sort_iff; local sorting definitions, no theorem asserting unique partial sort or its advance.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "permutation of finite linearly ordered set sorted tail fixing prefix",
+   "results": "Tuple.sort, Tuple.sort_perm, Tuple.bubble_sort_induction and list sorting lemmas; Tuple.sort is used to construct the partial sort.",
+   "date": "2026-10-13",
+   "verdict": "construction ingredient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingTailContribution",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Proof: compare the explicit Cech complex with its alternating complex via the first sorting homotopy; Tag 01FM, cohomology-equation-first-homotopy, tail-labelled part of the omitted verification",
+   "via": [
+    "lem-pc-alternating-cech-first-sorting-junction-tail-contribution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechPartialSortAdvance",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechPartialSortAdvance.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechPartialSort_advance",
+  "statement": "theorem cechPartialSort_advance (p : ℕ) (σ τ ρ : Equiv.Perm (Fin (p + 2)))\n    (a : Fin (p + 2)) (hτ : cechPartialSort σ τ a)\n    (hρ : (∀ k, k.val < a.val + 1 → ρ k = σ k) ∧\n      (∀ i j, a.val + 1 ≤ i.val → i < j → ρ i < ρ j)) :\n    cechJunction σ τ a ∘ (τ.symm (σ a)).succ.succAbove = ρ ∧\n      ρ = τ * (Fin.cycleIcc a (τ.symm (σ a))).symm",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T003203-L-2430947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T003203-L-2430947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
