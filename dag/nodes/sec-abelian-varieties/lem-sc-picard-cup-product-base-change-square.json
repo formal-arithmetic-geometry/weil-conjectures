@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-picard-cup-product-base-change-square",
+ "kind": "statement",
+ "title": "Commuting base-change square for the Picard cup transpose",
+ "statement": "Let f:X→S, j:W→S and h:T→W be scheme morphisms [def-pc-scheme], and E a finite locally free O_X-module [def-sc-finite-locally-free-sheaf]. Assume the canonical adjunction units at O_W for X_W→W and at O_T for X_T→T are invertible [lem-pc-module-pullback-adjunction]. Assume P(f,E,j) [def-sc-picard-direct-image-rank-condition]. Set N_W=p_W*q_W^*E and D_W=p_W*q_W^*(dual E), and define N_T,D_T similarly, using tensor pullback [def-pc-module-pullback]. For the explicit cup transposes φ_W,φ_T [def-sc-picard-cup-product-map] there exist isomorphisms a:h^*D_W≅D_T and b:h^*(dual N_W)≅dual N_T such that h^*φ_W followed by b equals a followed by φ_T. This is a commuting square of morphisms; it asserts no invertibility criterion for any counit.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "penultimate paragraph, compatibility with arbitrary base change; final paragraph, degree-zero cup product and its evaluation formula"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-picard-direct-image-rank-condition",
+  "def-pc-module-pullback",
+  "def-sc-picard-cup-product-map"
+ ],
+ "proof": [
+  {
+   "text": "The two canonical base-change maps supplied by P(f,E,j) are isomorphisms. Compare the iterated pullback with X_T using the cartesian isomorphism and the module pullback composition comparisons. The dual base-change map gives a:h^*D_W≅D_T and the primal one gives c:h^*N_W≅N_T.",
+   "uses": [
+    "def-sc-picard-direct-image-rank-condition",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "N_W is finite locally free by P. Pullback-duality gives h^*(dual N_W)≅dual(h^*N_W). Compose it with the inverse dual of c to define b:h^*(dual N_W)≅dual N_T.",
+   "uses": [
+    "def-sc-picard-direct-image-rank-condition",
+    "lem-ag-pullback-dual-finite-locally-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uncurry the proposed square and substitute the adjoint definitions of the two base-change maps. By naturality of the units and counits, their triangle identities, and the composition law for their mates, each side is pullback of E⊗dual E→O_X to X_T, evaluated on the two counits and then pushed to T. Tensor and unit comparisons commute by naturality; the section formula m↦1⊗m makes the structure-unit comparison compatible with base change. Thus the uncurried maps agree, and injectivity of currying gives the square. Rank zero and the empty scheme use unique maps between zero sheaves; no flatness or reducedness of T is used.",
+   "uses": [
+    "def-sc-picard-cup-product-map",
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-weil-pbc-module-base-change-map-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-direct-image-rank-condition",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-ag-pullback-dual-finite-locally-free",
+  "def-sc-picard-cup-product-map",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-weil-pbc-module-base-change-map-pasting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "penultimate paragraph, compatibility with arbitrary base change; final paragraph, degree-zero cup product and its evaluation formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Degree zero cup product of direct images is compatible with arbitrary base change when the base change maps are invertible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the degree zero cup product transpose between direct images of a finite locally free sheaf and its dual gives a commuting square",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.unitHomEquiv_symm_comp; SheafOfModules.pullbackObjFreeIso; SheafOfModules.freeHomEquiv_symm_comp",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "picardCupProduct|pushforward.*[Pp]airing",
+   "results": "msearch reports zero hits, but its configured Mathlib source path is absent. Independent rg over /home/ubuntu/weil-lean/.lake/packages/mathlib/Mathlib/AlgebraicGeometry and Algebra/Category/ModuleCat also found no matches. Search of lean/Sheaf and lean/WeilConjectures found the parent criterion only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCupProductCriterionAux",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, universal locally closed Picard locus via Tag 0BDP: penultimate paragraph, compatibility with arbitrary base change; final paragraph, degree-zero cup product and its evaluation formula",
+   "via": [
+    "new-picard-cup-product-equivalence",
+    "lem-sc-picard-cup-product-criterion",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardCupProductBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardCupProductBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardCupProduct_baseChange_square",
+  "statement": "theorem picardCupProduct_baseChange_square\n    {X S W T : Scheme.{u}} (f : X ⟶ S) (E : X.Modules) [E.IsFiniteLocallyFree]\n    (j : W ⟶ S) (h : T ⟶ W)\n    (hO : IsIso ((Classical.choose\n      (Modules.exists_tensorPullbackAdjunction (pullback.snd f j))).unit.app\n        (SheafOfModules.unit W.ringCatSheaf)))\n    (hOT : IsIso ((Classical.choose\n      (Modules.exists_tensorPullbackAdjunction (pullback.snd f (h ≫ j)))).unit.app\n        (SheafOfModules.unit T.ringCatSheaf)))\n    (hR : PicardDirectImageRankCondition f E j) :\n    ∃ (a : (Modules.tensorPullback h).obj\n        ((Modules.pushforward (pullback.snd f j)).obj\n          ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E))) ≅\n        (Modules.pushforward (pullback.snd f (h ≫ j))).obj\n          ((Modules.tensorPullback (pullback.fst f (h ≫ j))).obj (Modules.dual E)))\n      (b : (Modules.tensorPullback h).obj\n        (Modules.dual ((Modules.pushforward (pullback.snd f j)).obj\n          ((Modules.tensorPullback (pullback.fst f j)).obj E))) ≅\n        Modules.dual ((Modules.pushforward (pullback.snd f (h ≫ j))).obj\n          ((Modules.tensorPullback (pullback.fst f (h ≫ j))).obj E))),\n      (Modules.tensorPullback h).map (picardCupProductMap f E j hO) ≫ b.hom =\n        a.hom ≫ picardCupProductMap f E (h ≫ j) hOT",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T015623-L-3030098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T015623-L-3030098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

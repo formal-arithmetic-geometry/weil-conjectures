@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-picard-cup-product-local-dual-bases",
+ "kind": "statement",
+ "title": "Local equal-rank dual-basis criterion for cup product",
+ "statement": "Let f:X→S and j:W→S be morphisms of schemes [def-pc-scheme], and E a finite locally free O_X-module [def-sc-finite-locally-free-sheaf]. Put p:X_W→W, q:X_W→X, N=p_*q^*E [def-pc-module-pullback, lem-pc-module-pullback-adjunction]. Assume the canonical adjunction unit at O_W is invertible, and N is finite locally free. Suppose each w∈W has an open neighbourhood U and a natural number r such that N|_U and E pulled to X_U are finite locally free of rank r. For the explicitly constructed cup transpose φ [def-sc-picard-cup-product-map], φ is invertible if and only if the adjunction counit p^*N→q^*E is invertible. No properness, flatness, or base-change compatibility is assumed in this local assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final paragraph, perfect pairing and the two displayed mutually dual bases"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-picard-cup-product-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied neighbourhood and shrink it so N has a finite free basis of size r; the pulled-back E on X_U has rank r. Tensor pullback along U is restriction, and the counit carries each basis vector to its section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If the cup transpose is invertible, lift the coordinate dual basis through its inverse. Pullback-duality turns these lifted sections into functionals on E on X_U. The proved identity picardPushforwardPairing_counit says their evaluations on the basis sections are δ_ij: the scalar cup product pulls back to evaluation. They give a left inverse to the restricted counit.",
+   "uses": [
+    "def-sc-picard-cup-product-map",
+    "lem-ag-pullback-dual-finite-locally-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each stalk the counit is a square matrix of size r with a left inverse. Multiplicativity of determinants makes its determinant a unit, hence the adjugate formula makes it invertible. These local inverses are unique and glue to invert the counit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Conversely an invertible counit identifies q^*E with p^*N. Dualize and use pullback-duality and the finite locally free structure-unit theorem to identify p_*q^*(dual E) with dual N. The same defining cup identity then identifies cup product with ordinary evaluation, whose transpose is the identity. For rank zero all bases are empty and the argument is the identity of the zero sheaf; an empty base has an empty cover.",
+   "uses": [
+    "def-sc-picard-cup-product-map",
+    "lem-ag-pullback-dual-finite-locally-free",
+    "lem-sc-finite-locally-free-tensor-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-cup-product-map",
+  "lem-ag-pullback-dual-finite-locally-free",
+  "lem-sc-finite-locally-free-tensor-unit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final paragraph, perfect pairing and the two displayed mutually dual bases"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The transpose of the evaluation cup product is an isomorphism if and only if the adjunction counit is an isomorphism for equal rank vector bundles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of the degree zero evaluation cup pairing is invertible exactly when the evaluation counit is invertible for vector bundles of the same rank",
+   "results": "Module.Invertible.linearEquiv; Trivialization.symm_continuousLinearEquivAt_eq; Bundle.Trivial.symmL_trivialization; Trivialization.symmₗ_linearMapAt; Trivialization.linearMapAt_symmₗ; Trivialization.symm_apply_eq_mk_continuousLinearEquivAt_symm; Trivialization.apply_eq_prod_continuousLinearEquivAt; Trivialization.symmL_continuousLinearMapAt",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "picardCupProduct|pushforward.*[Pp]airing",
+   "results": "msearch reports zero hits, but its configured Mathlib source path is absent. Independent rg over /home/ubuntu/weil-lean/.lake/packages/mathlib/Mathlib/AlgebraicGeometry and Algebra/Category/ModuleCat also found no matches. Search of lean/Sheaf and lean/WeilConjectures found the parent criterion only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCupProductCriterionAux",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, universal locally closed Picard locus via Tag 0BDP: final paragraph, perfect pairing and the two displayed mutually dual bases",
+   "via": [
+    "new-picard-cup-product-equivalence",
+    "lem-sc-picard-cup-product-criterion",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardCupProductLocalCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardCupProductLocalCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardCupProduct_isIso_iff_counit_of_local_ranks",
+  "statement": "theorem picardCupProduct_isIso_iff_counit_of_local_ranks\n    {X S W : Scheme.{u}} (f : X ⟶ S) (E : X.Modules) [E.IsFiniteLocallyFree]\n    (j : W ⟶ S)\n    (hO : IsIso ((Classical.choose\n      (Modules.exists_tensorPullbackAdjunction (pullback.snd f j))).unit.app\n        (SheafOfModules.unit W.ringCatSheaf)))\n    (hN : ((Modules.pushforward (pullback.snd f j)).obj\n      ((Modules.tensorPullback (pullback.fst f j)).obj E)).IsFiniteLocallyFree)\n    (hRanks : ∀ w : W, ∃ U : W.Opens, w ∈ U ∧ ∃ r : ℕ,\n      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n        ((Modules.tensorPullback U.ι).obj\n          ((Modules.pushforward (pullback.snd f j)).obj\n            ((Modules.tensorPullback (pullback.fst f j)).obj E))) r ∧\n      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n        ((Modules.tensorPullback (pullback.fst f (U.ι ≫ j))).obj E) r) :\n    IsIso (picardCupProductMap f E j hO) ↔\n      IsIso ((Classical.choose\n        (Modules.exists_tensorPullbackAdjunction (pullback.snd f j))).counit.app\n          ((Modules.tensorPullback (pullback.fst f j)).obj E))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T015623-L-3030098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T015623-L-3030098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

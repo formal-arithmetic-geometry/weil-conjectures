@@ -12,16 +12,36 @@
  ],
  "proof": [
   {
-   "text": "Use the local finite-free rank decomposition and dual-basis argument described in the Stacks Project proof.",
-   "uses": [],
+   "text": "Construct the specific morphism φ by transposing the degree-zero evaluation pairing, with tensor comparisons and the inverse structure-sheaf unit.",
+   "uses": [
+    "def-sc-picard-cup-product-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any h:T→W, specialize hW to the identity of W and normalize identity composition. Apply the base-change-square theorem to obtain isomorphisms a,b with h^*φ followed by b equal to a followed by φ_T.",
+   "uses": [
+    "lem-sc-picard-cup-product-base-change-square"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Since a,b are isomorphisms, cancelling them shows IsIso(h^*φ) iff IsIso(φ_T). Extract from hW(h) finite local freeness of N_T and from its rank condition at the identity of T the common local ranks of N_T and E on X_U. Normalize identity compositions by congruence on the rank propositions; apply the local dual-basis criterion and compose the two equivalences. The existing dual direct-image theorem is not used for this part, and the hypothesis hD is retained unchanged.",
+   "uses": [
+    "lem-sc-picard-cup-product-local-dual-bases"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-cup-product-base-change-square",
+  "lem-sc-picard-cup-product-local-dual-bases"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "final two proof paragraphs, cup product and local dual bases, before the determinant-open assertion"
+  "place": "final two paragraphs, explicit degree-zero cup product, its base-change compatibility, and the local equal-rank dual-basis argument"
  },
  "mathlib_searches": [
   {
@@ -96,20 +116,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "S4",
+  "reviewer": "COMPILER",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261012T231640-L-1963789",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.picard_cupProductCriterion_of_finiteLocallyFree",
-   "AlgebraicGeometry.Scheme.picard_dual_directImage_isFiniteLocallyFree"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.picard_cupProductCriterion_of_finiteLocallyFree"
-  ]
+  "landing": "20261013T015623-L-3030098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

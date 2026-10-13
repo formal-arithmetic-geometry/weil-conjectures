@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+import Sheaf.AlgebraicGeometry.PicardCupProductLocalCriterion
+import Sheaf.AlgebraicGeometry.PicardCupProductBaseChange
 
 @[expose] public section
 
@@ -93,6 +95,44 @@ theorem picard_cupProductCriterion_of_finiteLocallyFree
           IsIso ((Classical.choose
             (Modules.exists_tensorPullbackAdjunction (pullback.snd f (h ≫ j)))).counit.app
               ((Modules.tensorPullback (pullback.fst f (h ≫ j))).obj E)) := by
-  sorry
+  classical
+  have _hD := hD
+  refine ⟨picardCupProductMap f E j (hO j), ?_⟩
+  intro T h
+  have hR : PicardDirectImageRankCondition f E j := by
+    simpa only [Category.id_comp] using hW (𝟙 W)
+  obtain ⟨a, b, hab⟩ := picardCupProduct_baseChange_square f E j h (hO j)
+    (hO (h ≫ j)) hR
+  have hcmp :
+      IsIso ((Modules.tensorPullback h).map (picardCupProductMap f E j (hO j))) ↔
+        IsIso (picardCupProductMap f E (h ≫ j) (hO (h ≫ j))) := by
+    constructor
+    · intro hh
+      have : IsIso (a.hom ≫ picardCupProductMap f E (h ≫ j) (hO (h ≫ j))) := by
+        rw [← hab]
+        infer_instance
+      exact IsIso.of_isIso_comp_left a.hom _
+    · intro hh
+      have : IsIso
+          ((Modules.tensorPullback h).map (picardCupProductMap f E j (hO j)) ≫ b.hom) := by
+        rw [hab]
+        infer_instance
+      exact IsIso.of_isIso_comp_right _ b.hom
+  apply hcmp.trans
+  apply picardCupProduct_isIso_iff_counit_of_local_ranks f E (h ≫ j)
+    (hO (h ≫ j)) (hW h).1
+  intro t
+  obtain ⟨U, ht, r, hN, _, hE⟩ := (hW h).2.1 (𝟙 T) t
+  refine ⟨U, ht, r, ?_, ?_⟩
+  · exact (congrArg (fun k : T ⟶ S ↦
+      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+        ((Modules.tensorPullback U.ι).obj
+          ((Modules.pushforward (pullback.snd f k)).obj
+            ((Modules.tensorPullback (pullback.fst f k)).obj E))) r)
+      (by simp : 𝟙 T ≫ h ≫ j = h ≫ j)).mp hN
+  · exact (congrArg (fun k : U.toScheme ⟶ S ↦
+      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+        ((Modules.tensorPullback (pullback.fst f k)).obj E) r)
+      (by simp : U.ι ≫ 𝟙 T ≫ h ≫ j = U.ι ≫ (h ≫ j))).mp hE
 
 end AlgebraicGeometry.Scheme
