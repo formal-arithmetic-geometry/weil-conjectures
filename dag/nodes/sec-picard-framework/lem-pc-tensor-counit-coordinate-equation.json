@@ -28,20 +28,24 @@
  },
  "proof": [
   {
-   "text": "For K-flat P and G the canonical predicate supplies the coordinate equation for a pinned chain comparison. Two pinned comparisons agree: compose one with the inverse of the other, check each total-complex coproduct summand, and cancel the invertible module tensor comparison. Thus the given φ has the canonical coordinate equation.",
+   "text": "Prove pinnedComparison_natural for an additive functor with a natural module tensor isomorphism: precompose the desired chain equation by the inverse of the source comparison, check each total-complex coproduct summand with HomologicalComplex.mapBifunctor.hom_ext, cancel the module tensor isomorphism, and use the two pinned summand equations and module tensor naturality. This proves the chain comparison naturality for the two specified comparisons, without requiring a separately chosen family.",
    "uses": [
-    "def-pc-derived-pullback-tensor-comparison",
-    "lem-weil-pbc-module-pullback-tensor",
-    "lem-pc-derived-pullback-tensor-product"
+    "lem-weil-pbc-module-pullback-tensor"
    ],
    "elementary": false
   },
   {
-   "text": "Choose K-flat resolutions r:P0 → P and s:G0 → G, put t=Tot(r tensor s), v=Tot(k*r tensor k*s), and d=Lk*(Qr tensor Qs). The pinned summand equations and module naturality give k*(t);phi=phi0;v. Naturality of the source localization map and the total counit identifies d followed by the left side of the desired equation with Lk*(mu(P0,G0));epsilon(H0);Q(phi0);Q(v). Naturality of tau, the factor counits, and the target localization map identifies d followed by the right side with tau(QP0,QG0);(epsilon(P0) tensor epsilon(G0));mu(k*P0,k*G0);Q(v). The K-flat coordinate equation equates these expressions. Qr and Qs, their tensor, and hence d are invertible, so d cancels. Neither t nor v nor either ordinary pulled-back resolution map is asserted to be a quasi-isomorphism.",
+   "text": "Choose K-flat resolutions r:P0→P and s:G0→G with CochainComplex.exists_isKFlatResolution. Unpack IsCanonicalPullbackTensorComparison to obtain the pinned comparison ψ and its counit coordinate equation at P0,G0. Put t=Tot(r tensor s) and v=Tot(k*r tensor k*s). The first step gives k*(t);φ=ψ;v.",
    "uses": [
     "lem-pc-kflat-resolution",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The localization tensor map is natural by Functor.LaxMonoidal.μ_natural for the recorded Q lax structure (modelMap_natural). Naturality of the shared counit at t and the chain equality identify Lk*(Qr tensor Qs) followed by the desired left side with the known K-flat left side followed by Qv. Naturality of τ, naturality of the separate counits at r and s, tensorHom_comp_tensorHom, and target modelMap_natural identify the similarly precomposed right side with the K-flat right side followed by Qv. Postcompose the K-flat equation by Qv. Since Qr and Qs are isomorphisms, their tensor and its image under derivedPullback are isomorphisms; cancel that epimorphism. No ordinary pulled-back resolution map is asserted to be a quasi-isomorphism.",
+   "uses": [
     "def-pc-scheme-derived-tensor-structure",
-    "lem-pc-derived-pullback-tensor-product",
     "def-pc-single-complex-base-change-stalk-condition",
     "def-pc-derived-pullback-tensor-comparison"
    ],
@@ -50,11 +54,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K3",
+  "group": "H4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 079U; perfect.tex Tag 0DJA(1)",
-  "note": "Isolates coherence of the universal counit on arbitrary total-complex representatives, rather than their invertibility or construction."
+  "place": "Tag 079U (lemma-pullback-tensor-product); perfect.tex Tag 0DJA(1); K-flat resolutions Tag 06YS",
+  "note": "Formalized the original K-flat resolution transport route. Chain naturality and localization tensor naturality are proved private helpers; no new proof holes."
  },
  "blueprint": {
   "is": null,
@@ -115,10 +119,9 @@
   "date": "2026-10-13"
  },
  "proof_deps": [
-  "def-pc-derived-pullback-tensor-comparison",
   "lem-weil-pbc-module-pullback-tensor",
-  "lem-pc-derived-pullback-tensor-product",
   "lem-pc-kflat-resolution",
+  "def-pc-derived-pullback-tensor-comparison",
   "def-pc-scheme-derived-tensor-structure",
   "def-pc-single-complex-base-change-stalk-condition"
  ],
@@ -135,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-1d6a9",
-  "group": "K3",
+  "reviewer": "X-2cd6c",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T100025-L-2468000",
+  "landing": "20261013T130348-L-3952067",
   "kind": "interface",
-  "note": "independent Codex review: Matched both Lean signatures with their nodes, proof steps with cited declarations and Stacks sources; both delivered modules and sole direct importer RelativelyFlatDerivedBaseChangeComplex compile cleanly. Private helpers use only standard axioms; the parent additionally uses sorryAx through the documented coherence theorem. Existing interfaces and unit route are preserved."
+  "note": "independent Codex review: Matched the unchanged Lean signature with the node, the resolution-transport proof with its recorded dependencies, and the documented local caches with their implementations; delivered module and sole direct importer TensorCounitOneKFlatCoordinates compile cleanly; axiom closure is exactly propext, Classical.choice, Quot.sound; no new holes, target changes, or unit-route violations."
  }
 }
