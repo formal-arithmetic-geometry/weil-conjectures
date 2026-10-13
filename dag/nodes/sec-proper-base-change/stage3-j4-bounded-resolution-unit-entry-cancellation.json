@@ -14,33 +14,30 @@
  },
  "proof": [
   {
-   "text": "Extend by zero to integer degrees, including empty bases in negative degrees. Apply ChainComplex.exists_splitting_of_isUnit_entry to the supplied unit coefficient in degree j+1. Restrict the complementary complex to natural degrees. Its basis sizes decrease by one at j and j+1 and agree elsewhere.",
+   "text": "Apply the natural-degree unit-entry homotopy cancellation theorem to the complex and supplied bases and pivot, obtaining C′, bases, size equations and a homotopy equivalence with injective forward components.",
    "uses": [
-    "lem-weil-pbc-free-complex-unit-entry-splits"
+    "lem-weil-pbc-nat-unit-entry-homotopy-cancellation"
    ],
    "elementary": false
   },
   {
-   "text": "The removed two-term identity complex is contractible: use the inverse differential as the only nonzero component of the contracting homotopy. Its augmentation is zero, since at j=0 its degree-zero term is a differential image and for j>0 its degree-zero term is zero. Restrict the original augmentation to the complement. Homology of a binary direct sum splits, so inclusion of the complement induces homology isomorphisms. Composing with the original quasi-isomorphic augmentation gives a quasi-isomorphism to M in degree zero. Finite free terms are projective; with the restricted augmentation these data form a ProjectiveResolution M.",
-   "uses": [
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": false
+   "text": "Eliminate the supplied basis existences inside the theorem proof (no public data definition is introduced), give C′ projectivity by projective_of_free, and define its augmentation as e.hom followed by P.π. HomotopyEquiv.quasiIso_hom and quasiIso_comp prove this is a projective resolution. Above d the injective forward component into the original zero term gives subsingleton, hence IsZero.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The complement above d is a direct summand of a zero term and hence zero. Nontrivial commutative rings have invariant basis number. Identify finite basis sizes with finrank; the splitting gives nonincrease at every degree and a drop by one at j.",
+   "text": "Module.Finite.of_basis and Module.Free.of_basis give finite freeness. Module.finrank_eq_card_basis identifies both size functions with finrank. Case splitting on the two pivot degrees, the size equations and elementary natural-number arithmetic give nonincrease and strict decrease.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-complex-unit-entry-splits",
-  "def-weil-pbc-exact-sequence"
+  "lem-weil-pbc-nat-unit-entry-homotopy-cancellation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 00MT, used in Tag 00OA"
+  "place": "Tags 00MT and 00OA; direct natural-degree split-functional implementation"
  },
  "mathlib_searches": [
   {
@@ -120,9 +117,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T015559-L-3022255",
+  "landing": "20261013T040747-L-3948586",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

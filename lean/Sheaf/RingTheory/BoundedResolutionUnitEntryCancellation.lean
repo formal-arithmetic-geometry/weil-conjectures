@@ -4,7 +4,11 @@ public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.LinearAlgebra.Matrix.ToLin
-import Sheaf.Algebra.Homology.UnitEntrySplits
+import Sheaf.Algebra.Homology.NatUnitEntryHomotopyCancellation
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+import Mathlib.RingTheory.FiniteType
 
 /-!
 # Cancellation at a supplied unit entry in a bounded free resolution
@@ -21,27 +25,19 @@ namespace ModuleCat
 /-- Remove a supplied unit pivot, preserving the augmentation and controlling ranks.
 Source: Stacks Project, Algebra, Tag 00MT, used in the proof of Tag 00OA.
 
-Proof: Extend the natural-degree complex by zero to negative integer degrees;
-use the supplied bases in nonnegative degrees and the empty basis in negative
-ones. Apply `ChainComplex.exists_splitting_of_isUnit_entry` in degree `j + 1`
-with the supplied pivot. Restrict its complementary complex to natural degrees.
-The identity summand occupies degrees `j + 1` and `j`, both at most `d`.
-It is contractible, with homotopy the inverse of its identity differential.
-The augmentation kills it: if `j = 0`, its degree-zero term is the image of
-its degree-one differential, and the augmentation composed with that differential
-is zero; if `j > 0`, its degree-zero term is zero. Restrict the augmentation
-along the inclusion of the complement. The inclusion induces isomorphisms on
-homology because the other summand is contractible. Its composite augmentation
-therefore is a quasi-isomorphism onto the single complex on `M`, as is the
-original augmentation. The complementary terms have bases supplied by the
-splitting theorem and hence are finite free and projective, so these data form
-`P' : ProjectiveResolution M`. Outside the two pivot degrees the bases have
-size `n i`, while in the pivot degrees their sizes plus one equal `n i`.
-Invariant basis number over the nontrivial commutative ring identifies these
-sizes with finrank. Thus ranks never increase, and at `j` they strictly drop.
-Above `d` the complement is a direct summand of the original zero module, so
-it is zero. No local-ring criterion or choice of a unit pivot is part of this
-statement: the pivot and its invertibility are inputs.
+Proof: Apply the natural-degree cancellation theorem, which supplies a complementary
+complex, its smaller finite bases, and a homotopy equivalence whose forward map
+is degreewise injective. Finite bases give projectivity; compose the forward
+map with the original augmentation. A homotopy equivalence is a quasi-isomorphism,
+and the composite of quasi-isomorphisms is one, so these data form a projective
+resolution of `M`. In degrees above `d`, injectivity into the original zero
+term makes the complementary term subsingleton and hence zero. Its finite bases
+give finite freeness. Over a nontrivial commutative ring, finrank equals the
+cardinality of each finite basis. At the pivot degrees the smaller sizes plus
+one equal the original sizes, and elsewhere the sizes agree. Natural-number
+arithmetic gives the asserted inequalities. The supplied bound `j < d` is
+retained in the statement, although this argument preserves boundedness even
+without it. No unit pivot is chosen: its indices and invertibility are inputs.
 (blueprint: stage3-j4-bounded-resolution-unit-entry-cancellation) -/
 theorem exists_bounded_resolution_unit_entry_cancellation {R : Type u} [CommRing R]
     [Nontrivial R] (M : ModuleCat.{max u v} R) (d : ℕ) (P : ProjectiveResolution M)
@@ -56,6 +52,39 @@ theorem exists_bounded_resolution_unit_entry_cancellation {R : Type u} [CommRing
       (∀ i : Fin (d + 1), Module.finrank R (P'.complex.X i.val) ≤
         Module.finrank R (P.complex.X i.val)) ∧
       Module.finrank R (P'.complex.X j) < Module.finrank R (P.complex.X j) := by
-  sorry
+  have _ := hjd
+  obtain ⟨C', n', e, hb', hinj, hsucc, hj, hother⟩ :=
+    ChainComplex.exists_nat_homotopy_cancellation_of_isUnit_entry P.complex n b j p q hu
+  let b' : ∀ i : ℕ, Module.Basis (Fin (n' i)) R (C'.X i) :=
+    fun i ↦ (hb' i).some
+  let P' : ProjectiveResolution M :=
+    { complex := C'
+      projective := fun i ↦ ModuleCat.projective_of_free (b' i)
+      π := e.hom ≫ P.π }
+  have hrank : ∀ i, Module.finrank R (P.complex.X i) = n i := by
+    intro i
+    simpa using Module.finrank_eq_card_basis (b i)
+  have hrank' : ∀ i, Module.finrank R (P'.complex.X i) = n' i := by
+    intro i
+    simpa using Module.finrank_eq_card_basis (b' i)
+  refine ⟨P', ?_, ?_, ?_, ?_⟩
+  · intro i hi
+    apply ModuleCat.isZero_iff_subsingleton.mpr
+    have : Subsingleton (P.complex.X i) :=
+      ModuleCat.isZero_iff_subsingleton.mp (hzero i hi)
+    exact (hinj i).subsingleton
+  · intro i
+    exact ⟨Module.Finite.of_basis (b' i), Module.Free.of_basis (b' i)⟩
+  · intro i
+    rw [hrank', hrank]
+    by_cases hs : i.val = j + 1
+    · rw [hs]
+      omega
+    by_cases ht : i.val = j
+    · rw [ht]
+      omega
+    rw [hother i.val hs ht]
+  · rw [hrank', hrank]
+    omega
 
 end ModuleCat

@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-nat-split-functionals-homotopy",
+ "kind": "statement",
+ "title": "Natural-degree deformation retract from two split functionals",
+ "statement": "Let R be a commutative ring and C a natural-degree chain complex of R-modules [def-weil-pbc-exact-sequence]. Fix j≥0, functionals α:C_(j+1)→R and β:C_j→R and vectors z∈C_(j+1), w∈C_j with α(z)=β(w)=1, βd_(j+1)=α, d_(j+1)(z)=w, αd_(j+2)=0 and d_j(w)=0 (the last differential is zero if j=0). Define S_(j+1)=ker α, S_j=ker β, and S_i=C_i otherwise. There exist a natural-degree complex C′, linear equivalences C′_i≃S_i, and a homotopy equivalence e:C′→C whose forward components are injective. No bases, augmentation, boundedness or nontrivial-ring hypothesis are required.",
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00MT, proof of Lemma 10.102.2"
+ },
+ "proof": [
+  {
+   "text": "Restrict differentials to S: hd and hin imply kernel preservation, and the complex relation descends by injectivity of inclusions. Define the retraction at the special degrees by x−α(x)z and x−β(x)w, and by identity elsewhere. The identities hd, hdz, hin and hout show differential compatibility. Retraction followed by inclusion on S is identity. For the other composite choose the only nonzero homotopy from degree j to j+1 as x↦−β(x)z; the homotopy equations at j+1 and j are hd and hdz, and all others are zero. At j=0 the outgoing differential is zero by shape. These data give e and its injective inclusion components. This expands the complement and trivial summand construction of Stacks 00MT.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00MT, proof of Lemma 10.102.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Split functionals with value one on a vector give a deformation retract of a chain complex onto their kernels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain complex with a unit matrix differential coefficient splits off a contractible two term complex and has a smaller homotopy equivalent finite free complex",
+   "results": "Generic localization, alternating complex, and Dold-Kan infrastructure; no supplied functional kernel deformation-retract construction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyEquiv\", \"QuasiIso\"",
+   "results": "HomotopyEquiv.quasiIso_hom, quasiIso_inv, quasiIsoAt_hom and quasiIsoAt_inv apply after a homotopy equivalence is built; none builds the complement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "split.*functional|homotopy.*ker|homotopy.*[Uu]nit",
+   "results": "Nine unrelated topology or derived-functor matches; no kernel-complement deformation retract. Also read Homotopy structure and generic shape extension/restriction APIs.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.BoundedResolutionUnitEntryCancellation",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof final sentence: finite etale lifting; subordinate 00MT cancellation through minimal finite free resolutions",
+   "via": [
+    "stage3-j4-bounded-resolution-unit-entry-cancellation",
+    "stage3-s2-bounded-resolution-cancellation-decreases-rank",
+    "lem-weil-pbc-minimal-finite-free-resolution-local"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.NatSplitFunctionalsHomotopy",
+  "file": "lean/Sheaf/Algebra/Homology/NatSplitFunctionalsHomotopy.lean",
+  "declaration": "ChainComplex.exists_nat_homotopy_equiv_of_split_functionals",
+  "statement": "theorem exists_nat_homotopy_equiv_of_split_functionals\n    {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℕ)\n    (j : ℕ) (α : C.X (j + 1) →ₗ[R] R) (β : C.X j →ₗ[R] R)\n    (z : C.X (j + 1)) (w : C.X j)\n    (hz : α z = 1) (hw : β w = 1)\n    (hd : ∀ x, β ((C.d (j + 1) j).hom x) = α x)\n    (hdz : (C.d (j + 1) j).hom z = w)\n    (hin : ∀ x, α ((C.d (j + 2) (j + 1)).hom x) = 0)\n    (hout : (C.d j (j - 1)).hom w = 0) :\n    let S : ∀ i : ℕ, Submodule R (C.X i) := fun i ↦\n      if h : i = j + 1 then h ▸ LinearMap.ker α\n      else if h : i = j then h ▸ LinearMap.ker β else ⊤\n    ∃ (C' : ChainComplex (ModuleCat.{max u v} R) ℕ)\n      (g : ∀ i, C'.X i ≃ₗ[R] S i) (e : HomotopyEquiv C' C),\n      ∀ i : ℕ, Function.Injective (e.hom.f i).hom",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T040747-L-3948586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T040747-L-3948586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
