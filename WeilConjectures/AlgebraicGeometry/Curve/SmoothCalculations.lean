@@ -9,12 +9,16 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import WeilConjectures.AlgebraicGeometry.Curve.AssertionsTransfer
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.ExtensionInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantModSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 
 /-!
 # The curve assertions for constant coefficients on smooth curves
@@ -85,6 +89,55 @@ lemma Etale.isTorsion_constantModSheaf (X : Scheme.{u}) {n : ℕ} (hn : 0 < n) :
   have hx := congr_arg (fun φ => φ.hom x) h
   simp only [ModuleCat.hom_nsmul, ModuleCat.hom_zero] at hx
   exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, hx⟩
+
+/-- The pullback of the underlying abelian sheaf of the constant sheaf `Λ/nΛ` along
+`g : X ⟶ Y` is the underlying abelian sheaf of the constant sheaf `Λ/nΛ` on `X`. -/
+noncomputable def Etale.upperStarConstantModSheafForgetIso {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (n : ℕ) :
+    (Etale.upperStar AddCommGrpCat.{u + 1} g).obj
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+          (Etale.constantModSheaf Λ Y n)) ≅
+      (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ X n) :=
+  (Etale.upperStar AddCommGrpCat.{u + 1} g).mapIso (Etale.constantModSheafForgetIso Λ Y n) ≪≫
+    (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).app _ ≪≫
+    (Etale.constantModSheafForgetIso Λ X n).symm
+
+/-- The étale cohomology of the empty scheme vanishes. -/
+lemma Etale.subsingleton_sheafH_of_isEmpty {X : Scheme.{u}} [IsEmpty X]
+    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
+    Subsingleton (Sheaf.H G q) :=
+  Etale.subsingleton_H_of_isClopen (ι := PEmpty.{u + 1}) (fun i ↦ i.elim) (fun i ↦ i.elim)
+    (fun i ↦ i.elim) (fun x ↦ isEmptyElim x) G q fun i ↦ i.elim
+
+/-- Let `X` be a nonempty scheme. If every element of every geometric stalk of the constant
+sheaf `Λ/nΛ` is killed by an integer prime to `n`, then `Λ/nΛ = 0`: the stalks are `Λ/nΛ`,
+which is killed by `n`. -/
+lemma Etale.subsingleton_quotient_of_forall_sheafFiber (X : Scheme.{u}) [Nonempty X] (n : ℕ)
+    (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
+      (x : ↥((pointSmallEtale s).sheafFiber.obj (Etale.constantModSheaf Λ X n))),
+      ∃ m : ℕ, m.Coprime n ∧ m • x = 0) :
+    Subsingleton (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ)) := by
+  obtain ⟨x₀⟩ := ‹Nonempty X›
+  let e := (pointSmallEtale (X.algClosurePoint x₀)).sheafFiberConstantSheafIso
+    (ModuleCat.of Λ (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ)))
+  suffices hy : ∀ y : Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ), y = 0 from
+    ⟨fun a b ↦ (hy a).trans (hy b).symm⟩
+  intro y
+  obtain ⟨m, hm, hx⟩ := h _ (X.algClosurePoint x₀) (e.inv y)
+  have h₁ : m • y = 0 := by
+    have := congrArg e.hom.hom hx
+    rwa [map_nsmul, map_zero, ← ModuleCat.comp_apply, e.inv_hom_id, ModuleCat.id_apply] at this
+  have h₂ : n • y = 0 := Etale.nsmul_quotient_span_eq_zero Λ n y
+  rw [← addOrderOf_eq_one_iff]
+  exact Nat.eq_one_of_dvd_coprimes hm (addOrderOf_dvd_of_nsmul_eq_zero h₁)
+    (addOrderOf_dvd_of_nsmul_eq_zero h₂)
+
+/-- The constant sheaf `Λ/nΛ` vanishes if `Λ/nΛ = 0`. -/
+lemma Etale.isZero_constantModSheaf (X : Scheme.{u}) (n : ℕ)
+    [Subsingleton (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ))] :
+    IsZero (Etale.constantModSheaf Λ X n) :=
+  Functor.map_isZero _ (ModuleCat.isZero_of_subsingleton _)
 
 namespace IsCurve
 
