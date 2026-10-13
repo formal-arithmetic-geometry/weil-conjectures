@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.Algebra.Homology.AffineBaseChangeTildeOrdinaryComparison
 
 /-! # AffineBaseChangeTildeCanonicalGlobalComparison
 
@@ -23,6 +25,37 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
+
+private theorem tensorAlgebraMap_isIso
+    (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
+    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]
+    (φ : A →+* D) (ψ : B →+* D)
+    (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)
+    (hψ : (algebraMap (A ⊗[R] B) D).comp
+      Algebra.TensorProduct.includeRight.toRingHom = ψ)
+    (sq : IsPullback (Spec.map (CommRingCat.ofHom φ)) (Spec.map (CommRingCat.ofHom ψ))
+      (Spec.map (CommRingCat.ofHom (algebraMap R A)))
+      (Spec.map (CommRingCat.ofHom (algebraMap R B)))) :
+    IsIso (CommRingCat.ofHom (algebraMap (A ⊗[R] B) D)) := by
+  let a := Spec.map (CommRingCat.ofHom (algebraMap (A ⊗[R] B) D))
+  have ha : a ≫ (pullbackSpecIso R A B).inv = sq.isoPullback.hom := by
+    apply pullback.hom_ext
+    · simp only [Category.assoc, pullbackSpecIso_inv_fst', IsPullback.isoPullback_hom_fst]
+      change Spec.map (CommRingCat.ofHom (algebraMap (A ⊗[R] B) D)) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap A (A ⊗[R] B))) = _
+      rw [← Spec.map_comp]
+      exact congrArg (fun q ↦ Spec.map (CommRingCat.ofHom q)) hφ
+    · simp only [Category.assoc, pullbackSpecIso_inv_snd, IsPullback.isoPullback_hom_snd]
+      change Spec.map (CommRingCat.ofHom (algebraMap (A ⊗[R] B) D)) ≫
+        Spec.map (CommRingCat.ofHom Algebra.TensorProduct.includeRight.toRingHom) = _
+      rw [← Spec.map_comp]
+      exact congrArg (fun q ↦ Spec.map (CommRingCat.ofHom q)) hψ
+  have : IsIso (a ≫ (pullbackSpecIso R A B).inv) := by rw [ha]; infer_instance
+  have : IsIso a := IsIso.of_isIso_comp_right _ (pullbackSpecIso R A B).inv
+  have : IsIso (Scheme.Spec.map (CommRingCat.ofHom (algebraMap (A ⊗[R] B) D)).op) := this
+  have := isIso_of_reflects_iso
+    (CommRingCat.ofHom (algebraMap (A ⊗[R] B) D)).op Scheme.Spec
+  exact (isIso_op_iff _).mp this
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -96,6 +129,60 @@ theorem exists_affineBaseChangeTildeCanonicalGlobalComparison
         ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom (algebraMap R A)))).obj K)),
       eU.hom ≫ H.map (schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom (algebraMap R A)))
         (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom (algebraMap R R')))
-        (Spec.map (CommRingCat.ofHom φg')) sq.w K) = F.map a ≫ d.hom.app L := by sorry
+        (Spec.map (CommRingCat.ofHom φg')) sq.w K) = F.map a ≫ d.hom.app L := by
+  let m := ModuleCat.baseDerivedTensorCohomologyModel R A R' M A'
+  let α := algebraMap (A ⊗[R] R') A'
+  let j : R' →+* A ⊗[R] R' := Algebra.TensorProduct.includeRight.toRingHom
+  let r := ModuleCat.restrictScalars φf'
+  let s := ModuleCat.restrictScalars j
+  let T := tilde.functor (.of R')
+  let ρ := ModuleCat.restrictScalarsComp' j α φf' hφf'.symm
+  let η := (ModuleCat.extendRestrictScalarsAdj α).unit.app (m.cohomology i)
+  have hα : IsIso (CommRingCat.ofHom α) :=
+    tensorAlgebraMap_isIso R A R' A' φg' φf' hφg' hφf' sq
+  let ε : (A ⊗[R] R') ≃+* A' :=
+    (asIso (CommRingCat.ofHom α)).commRingCatIsoToRingEquiv
+  have : (ModuleCat.restrictScalars α).IsEquivalence :=
+    ModuleCat.restrictScalars_isEquivalence_of_ringEquiv ε
+  have : IsIso η := inferInstance
+  let U := affineBaseChangeTildeModule R A R' A' M m i
+  let t : s.obj (m.cohomology i) ⟶ r.obj U := s.map η ≫ ρ.inv.app U
+  have : IsIso t := by dsimp only [t]; infer_instance
+  obtain ⟨d, eC, heC⟩ := exists_affineBaseChangeTildeOrdinaryComparison
+    R A R' A' φg' φf' hφg' hφf' sq.w K hK hL M hM e hc i
+  let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩
+  let V := (affineDerivedCohomologyModules A' i).obj L
+  let b := affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i
+  let a := affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i V b
+  let C := (((ModuleCat.extendScalars (α.comp
+    (algebraMap A (A ⊗[R] R')))).mapHomologicalComplex (.up ℤ)).obj M)
+  let cE := m.comparison i ≫ HomologicalComplex.homologyMap m.ordinaryToLocalized i ≫
+    ((C.sc i).mapHomologyIso (ModuleCat.restrictScalars α)).hom
+  let z := (HomologicalComplex.homologyFunctor (ModuleCat.{u} A') (.up ℤ) i).map
+    (eqToHom (by dsimp only [C, α]; rw [hφg'] : C =
+      ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M)) ≫ b.hom
+  let c := s.map cE ≫ ρ.inv.app (C.homology i) ≫ r.map z
+  have htc : t ≫ r.map a = c := by
+    have hn := ρ.inv.naturality (m.localizedComparison i)
+    change s.map ((ModuleCat.restrictScalars α).map (m.localizedComparison i)) ≫
+        ρ.inv.app (C.homology i) = ρ.inv.app U ≫ r.map (m.localizedComparison i) at hn
+    calc
+      t ≫ r.map a = s.map η ≫
+          (ρ.inv.app U ≫ r.map (m.localizedComparison i)) ≫ r.map z := by
+        simp only [t, a, affineBaseChangeTildeModuleMap, z,
+          Functor.map_comp, Category.assoc]
+      _ = s.map η ≫ (s.map ((ModuleCat.restrictScalars α).map
+          (m.localizedComparison i)) ≫ ρ.inv.app (C.homology i)) ≫ r.map z := by rw [← hn]
+      _ = s.map (η ≫ (ModuleCat.restrictScalars α).map (m.localizedComparison i)) ≫
+          ρ.inv.app (C.homology i) ≫ r.map z := by
+        simp only [Functor.map_comp, Category.assoc]
+      _ = c := by rw [show η ≫ _ = cE from m.localized_eq i]
+  change eC.hom ≫ _ = T.map c ≫ d.hom.app L at heC
+  refine ⟨d, T.mapIso (asIso t).symm ≪≫ eC, ?_⟩
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, asIso_inv]
+  change T.map (inv t) ≫ eC.hom ≫ _ = T.map (r.map a) ≫ d.hom.app L
+  rw [heC, ← Category.assoc, ← T.map_comp, ← htc]
+  simp only [← Category.assoc, IsIso.inv_hom_id, Category.id_comp]
+
 
 end AlgebraicGeometry
