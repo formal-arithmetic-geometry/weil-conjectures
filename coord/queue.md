@@ -1,6 +1,6 @@
 # Work queue
 
-185 items; claim with `tools/claim.py next <group> [--stage N]`.
+183 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (23)
 
@@ -45,7 +45,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (154)
+## Stage 3: modules to prove (152)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -129,12 +129,11 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverTransport` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardDirectImageUnitMorphismPullback` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorStalkChainCoordinates` | 24 | 1 | proof |
+| `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackUnitNormalization` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftAssociatorKFlatOne` | 25 | 1 | proof |
 | `Sheaf.CategoryTheory.GrothendieckDerivedBrownRetractData` | 25 | 1 | proof |
-| `Sheaf.Paper.CechCupResolutionComparisonExists` | 25 | 1 | proof |
-| `Sheaf.Paper.CechCupResolutionTotalPairing` | 25 | 1 | proof |
 | `Sheaf.Paper.CechRefinementResolutionDiagram` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineFiniteFreeDualNaturality` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumComparisonCancellation` | 26 | 1 | proof |
@@ -165,6 +164,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicPushforwardCoordinates` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingAffineSections` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVOpenSquareCounit` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenOrdinaryComparison` | 28 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeTildeOrdinaryComparison` | 29 | 1 | proof |
@@ -177,10 +177,8 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapResidueLift` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapTorsionKernel` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalCompletionComparison` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardModuleCechExternalPairing` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangePrefix` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangeTargetTranspose` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ScalarExternalCupModuleComparison` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SelfTorConormalDualChart` | 29 | 1 | proof |
 | `Sheaf.Paper.ModuleCupKInjectiveTarget` | 29 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineOrdinaryTensorStalkCoordinates` | 30 | 1 | proof |
