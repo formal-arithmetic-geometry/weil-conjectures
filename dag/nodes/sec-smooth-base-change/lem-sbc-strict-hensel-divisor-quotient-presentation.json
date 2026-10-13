@@ -1,0 +1,139 @@
+{
+ "id": "lem-sbc-strict-hensel-divisor-quotient-presentation",
+ "kind": "statement",
+ "title": "Algebraic strict henselization presentation of a divisor quotient",
+ "statement": "Let $R$ be a commutative ring, $f\\in R$, and $\\bar y:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ a geometric point with $\\Omega$ algebraically closed [def-weil-geometric-point]. Let $H$ be its geometric strict henselization ring [def-weil-pbc-strict-henselization-limit], and let $b:R\\to H$ have spectrum equal to the structural map [def-weil-pbc-strict-henselization-structural-map]. If $b(f)$ is not a unit, there exist a prime $p\\subset R/(f)$ and a separable closure $K$ of the residue field of $A=(R/(f))_p$ [def-weil-pbc-localization-at-prime], together with compatible residue-field and $A$-algebra structures on $K$ and an $A$-algebra structure on $H/(b(f))$, such that $H/(b(f))$ is an algebraic strict henselization of $A$ relative to $K$ [def-sc-ring-strict-henselization]. No regularity or Noetherianity is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 04HX (Stalks of the structure sheaf) and 05WS (strict henselization of a quotient)"
+ },
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Identify the geometric pointed-neighbourhood colimit with the algebraic strict henselization of the local ring R_y by the affine etale triples comparison and the strict henselization triples theorem. The comparison respects the structural R-map; faithfulness of Spec and hb identify it with b.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine-chart maximal-ideal formula identifies the maximal ideal with yH. Since b(f) is a nonunit, the contraction of this ideal is y and f belongs to y. Thus y induces a prime p of R/(f).",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localizing the divisor quotient identifies (R/(f))_p with R_y/(f). Their residue fields are canonically isomorphic. The relative separable closure of this residue field in the geometric field supplies K and its local-base scalar action. Apply Stacks Tag 05WS to the principal ideal in R_y, which is contained in its maximal ideal: the quotient of its strict henselization is the strict henselization of R_y/(f). Transport that pointed-algebra colimit property through the localization/quotient isomorphism to obtain Algebra.IsStrictHenselization for H/(b(f)). This is the remaining quotient-comparison step left to prove in Lean.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M1",
+  "document": "Stacks Project",
+  "place": "Tags 04HX and 05WS; specialization to the principal divisor quotient"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "quotient of strict henselization is strict henselization of localization of quotient",
+   "date": "2026-10-14",
+   "results": "8 hits, mainly HenselianRing and localization quotient lemmas; no strict-henselization identification.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStrictHenselization\"",
+   "date": "2026-10-14",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStrictHenselization.*quotient|strictHenselization.*quotient",
+   "date": "2026-10-14",
+   "results": "0 hits in Mathlib",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quotient of strict henselization is strict henselization of localization of quotient",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularAux",
+  "date": "2026-10-14",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph, strictly henselian root calculation: identify the strict henselization divisor quotient with the strict henselization of the localized divisor ring before invoking regularity preservation",
+   "via": [
+    "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part-aux",
+    "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part",
+    "lem-sbc-strict-hensel-regular-divisor-quotient-regular",
+    "lem-sbc-strict-hensel-regular-divisor-quotient",
+    "lem-sbc-strict-hensel-root-purity-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselDivisorQuotientPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselDivisorQuotientPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationRing_divisor_quotient_presentation",
+  "statement": "theorem strictHenselizationRing_divisor_quotient_presentation\n    (R : CommRingCat.{u}) (f : R)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY)\n    (hg : ¬ IsUnit (b.hom f)) :\n    ∃ (p : Ideal (R ⧸ Ideal.span {f})) (_ : p.IsPrime)\n      (K : Type u) (_ : Field K)\n      (_ : Algebra (IsLocalRing.ResidueField (Localization.AtPrime p)) K)\n      (_ : IsSepClosure (IsLocalRing.ResidueField (Localization.AtPrime p)) K)\n      (_ : Algebra (Localization.AtPrime p) K)\n      (_ : IsScalarTower (Localization.AtPrime p)\n        (IsLocalRing.ResidueField (Localization.AtPrime p)) K)\n      (_ : Algebra (Localization.AtPrime p)\n        (strictHenselizationRing barY ⧸ Ideal.span {b.hom f})),\n      Algebra.IsStrictHenselization (Localization.AtPrime p) K\n        (strictHenselizationRing barY ⧸ Ideal.span {b.hom f})",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T165644-L-1809137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T165644-L-1809137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
