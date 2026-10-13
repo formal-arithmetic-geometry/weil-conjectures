@@ -12150,3 +12150,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FormalKernelRepresentativeProduct (stage 3; reviewer PASS; first push; landing 20261013T111902-L-3055886 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/M2/Sheaf.Algebra.Homology.MixedTotalTensorAssociatorDescent (stage 3; reviewer PASS; first push; landing 20261013T111902-L-3055983 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/M2/Sheaf.Algebra.Homology.MixedTotalTensorAssociatorNaturality (stage 3; reviewer PASS; first push; landing 20261013T111903-L-3056087 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/M2/Sheaf.Algebra.Homology.TorIndependentKFlatTensorComparison (stage 3; reviewer PASS; first push; landing 20261013T111903-L-3056281 (interface); batch 20261013T111833; modules 2; new nodes 1)
