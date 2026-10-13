@@ -203,7 +203,6 @@ public import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 public import WeilConjectures.AlgebraicGeometry.ConstantSheafPullbackTranspose
 public import WeilConjectures.AlgebraicGeometry.ConstructibleClosedGenericCriterion
 public import WeilConjectures.AlgebraicGeometry.ConstructibleFiniteStalkAnnihilatorDetection
-public import WeilConjectures.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.AdditiveScalarBaseChange
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
@@ -218,6 +217,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Boundary
 public import WeilConjectures.AlgebraicGeometry.Curve.BoundaryNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.Curve.Brauer
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
+public import WeilConjectures.AlgebraicGeometry.Curve.CoefficientPair
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.ConstantModCharPFiniteSumColimit
@@ -255,7 +255,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
-public import WeilConjectures.AlgebraicGeometry.CurveCoefficientPair
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
