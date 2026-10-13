@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-scalar-pullback-zero-global-sections",
+ "kind": "statement",
+ "title": "ScalarPullbackZeroGlobalSections",
+ "statement": "Let $k$ be a field [def-weil-field], $X,Y$ schemes [def-pc-scheme], $f:X\\to\\operatorname{Spec}k$, $g:Y\\to\\operatorname{Spec}k$, and $a:Y\\to X$ with $a\\circ f=g$. For a module sheaf $F$ on $X$ [def-weil-sheaf-of-modules-category], write $d_f,d_g$ for the canonical degree-zero global-section comparisons and $a^*s$ for tensorPullbackTopSection [def-sc-scalar-global-sections-comparison]. For every $x\\in H_k^0(f,F)$, the pullback defined in [def-sc-field-linear-module-cohomology-operations] satisfies $d_g(a^*x)=a^*(d_f(x))$. No quasi-coherence or nonemptiness is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01DZ, 01F7, 0FKV; degree-zero pullback; Sheaves Tag 0096"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-scalar-global-sections-comparison",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "Proof: The cocycle formula specifying moduleExtEquiv in degree zero identifies\nthe rightDerivedZeroIsoSelf global section with evaluation at 1 of the unique\nmorphism from the structure sheaf representing the degree-zero Ext class.\nAfter restriction of scalars and precomposition with scalarUnitMorphism, the\nconstant-sheaf adjunction identifies the resulting scalar-unit morphism with\nthat same global section. Represent scalarCohomologyExtEquiv f F 0 x by mk₀\nof this morphism. Exact inverse image sends mk₀ to the degree-zero class of\nits inverse-image morphism, and composing with mk₀ classes is ordinary morphism\ncomposition. Precomposition with scalarInverseUnitIso.inv identifies the\ninverse-image constant unit with the target constant unit. Postcomposition with\nscalarPullbackCoefficient is adjoint to the sectionwise tensor-pullback unit,\nby Classical.choose_spec of exists_scalarPullbackCoefficient. Apply that\nadjunction identity to the top open. Its inverse image is the top open on Y;\nthe restriction along the canonical inclusion of the top open into its inverse\nimage is the one in tensorPullbackTopSection. Finally cancel the target\nscalarCohomologyExtEquiv with its inverse in scalarCohomologyPullback. No\nquasi-coherence or nonemptiness is used, and the formula sends zero to zero.",
+   "uses": [
+    "def-sc-scalar-global-sections-comparison",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scalar-global-sections-comparison",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01DZ, 01F7, 0FKV, degree-zero calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Degree zero cohomology pullback is the global sections map given by the pullback adjunction unit",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero cohomology pullback is the global sections map given by the pullback adjunction unit",
+   "results": "Generic cochain multiplication or pullback adjunction lemmas only; no recorded scalar comparison identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCohomologyPullback.*zero|scalarCohomologyCup.*zero|mk₀_comp_mk₀; rg of Mathlib, WeilConjectures and Sheaf",
+   "results": "Ext.mk₀_comp_mk₀, Ext.mapExactFunctor_mk₀, Functor.rightDerivedZeroIsoSelf; no stated scalar degree-zero operation compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of Ext degree zero under the unit hom equivalence commutes with tensor and inverse image of sheaves",
+   "results": "SheafOfModules.unitHomEquiv_comp_apply, unitHomEquiv_symm_comp, pushforwardSections_unitHomEquiv, unitHomEquiv_apply_coe; no identity with the recorded scalar comparison.",
+   "date": "2026-10-13",
+   "verdict": "Second reading: generic tools, no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, Mathlib.Algebra.Homology.DerivedCategory.Ext.Map",
+   "date": "2026-10-13",
+   "verdict": "Second reading: exact-functor transport tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "unitHomEquiv|rightDerivedZeroIsoSelf|extEquiv.*zero",
+   "results": "Generic Mathlib unitHomEquiv lemmas; rg of project Sheaf and WeilConjectures found no duplicate scalar global-section compatibility statement.",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExternalCupZeroGlobalSections",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED degree-zero equalizer and pure-tensor calculation below the cube-theorem Kunneth argument; ScalarPullbackZeroGlobalSections",
+   "via": [
+    "lem-sc-external-cup-zero-global-sections",
+    "lem-sc-picard-external-cup-zero-tensor",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarPullbackZeroGlobalSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarPullbackZeroGlobalSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCohomologyPullback_zero_globalSections",
+  "statement": "theorem scalarCohomologyPullback_zero_globalSections\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (a : Y ⟶ X) (h : a ≫ f = g) (F : X.Modules) (x : scalarCohomology f F 0) :\n    scalarGlobalSectionsEquiv g ((tensorPullback a).obj F)\n        (scalarCohomologyPullback f g a h F 0 x) =\n      tensorPullbackTopSection a F (scalarGlobalSectionsEquiv f F x)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100004-L-2461970",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100004-L-2461970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

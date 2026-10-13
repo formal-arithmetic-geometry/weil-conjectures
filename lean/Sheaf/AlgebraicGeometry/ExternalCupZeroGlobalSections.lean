@@ -6,6 +6,8 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
+import Sheaf.AlgebraicGeometry.ScalarCupZeroGlobalSections
+import Sheaf.AlgebraicGeometry.ScalarPullbackZeroGlobalSections
 import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 
 /-! # Degree-zero external cup on ordinary sections
@@ -48,6 +50,10 @@ theorem externalCup_zero_globalSections
         (externalCup f g F G 0 0 a b) =
       externalGlobalSectionsTensor f g F G
         (scalarGlobalSectionsEquiv f F a ⊗ₜ[k] scalarGlobalSectionsEquiv g G b) := by
-  sorry
+  unfold externalCup
+  rw [scalarCohomologyCup_zero_globalSections,
+    scalarCohomologyPullback_zero_globalSections,
+    scalarCohomologyPullback_zero_globalSections]
+  rfl
 
 end AlgebraicGeometry.Scheme.Modules

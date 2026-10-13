@@ -16,24 +16,10 @@
  ],
  "proof": [
   {
-   "text": "The canonical degree-zero derived-functor comparison is evaluation of a morphism from the structure sheaf at 1 under the injective-resolution/Ext comparison. Restriction of scalars and the scalar-unit coefficient identify the same section with evaluation of a morphism from the constant scalar unit. Use the resolution formula defining moduleExtEquiv; its evaluation on degree-zero cocycles is the rightDerivedZeroIsoSelf map.",
+   "text": "Unfold externalCup. Apply the degree-zero internal cup formula, then the degree-zero pullback formula to each projection. The result is definitionally the tensor lift of externalGlobalSectionsBilinear on a pure tensor.",
    "uses": [
-    "def-sc-scalar-global-sections-comparison",
-    "def-sc-field-linear-module-cohomology-operations"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In degree zero, exact inverse image on scalar sheaves maps a morphism from the unit to its inverse image. Compose with the unit isomorphism and the coefficient adjoint to the tensor-pullback unit. The adjunction characterization identifies its evaluated section as tensorPullbackTopSection.",
-   "uses": [
-    "def-sc-scalar-global-sections-comparison",
-    "def-sc-field-linear-module-cohomology-operations"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The degree-zero Yoneda cup is composition of tensor-left and tensor-right images of these morphisms, preceded by the inverse unit constraint. Evaluating at 1 gives the tensor of their evaluated sections. The scalar tensor coefficient characterization turns that tensor into tmulSection. Apply this to the two projection pullbacks, using the pullback square condition for equality of structure maps. This gives the displayed equation, including empty schemes and zero sections.",
-   "uses": [
+    "lem-sc-scalar-cup-zero-global-sections",
+    "lem-sc-scalar-pullback-zero-global-sections",
     "def-sc-scalar-global-sections-comparison",
     "def-sc-field-linear-module-cohomology-operations"
    ],
@@ -41,13 +27,15 @@
   }
  ],
  "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations",
-  "def-sc-scalar-global-sections-comparison"
+  "lem-sc-scalar-cup-zero-global-sections",
+  "lem-sc-scalar-pullback-zero-global-sections",
+  "def-sc-scalar-global-sections-comparison",
+  "def-sc-field-linear-module-cohomology-operations"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, explicit degree-zero section argument and omitted cup verification"
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01DZ, 01F7, 0FKV; internal cup and projection pullback formulas"
  },
  "mathlib_searches": [
   {
@@ -152,9 +140,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T082342-L-1634842",
-  "kind": "interface"
+  "landing": "20261013T100004-L-2461970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
