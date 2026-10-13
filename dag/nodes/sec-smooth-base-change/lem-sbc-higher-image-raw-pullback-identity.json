@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Use the unit coherence of [lem-weil-pbc-inverse-image-composition] on the source A.hom followed by k and on the coefficient morphism A.hom. By upperStarComp_id_left the five-factor formula becomes the single of e.inv, inverse single comparison, derived identity pullback of z, shift comparison, and shifted single comparison followed by the single of e.hom.",
+   "text": "Let P be inverse image along the identity of A.left and e = upperStarId. The left unit law upperStarComp_id_left identifies the source comparison with e.inv and the coefficient comparison with e.hom. Prove the two component equalities separately and supply them to single_identity_transport_of_eq, avoiding dependent rewrites of the whole scheme-level formula.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition",
     "sbc-lem-higher-image-raw-over-naturality"
@@ -22,18 +22,21 @@
    "elementary": true
   },
   {
-   "text": "Apply e termwise to complexes and then the termwise identity comparison. Compose after localization with the exact-derived-functor factorization of [lem-weil-pbc-exact-functor-derived-factorization]. The localization universal property [def-weil-abstract-derived-category] gives the natural transformation from D(F) to the identity. Its compatibility with each integer shift follows from the termwise identity and the shift-compatible factorization. Faithfulness of precomposition with localization reflects this compatibility. Concretely use Localization.full_whiskeringLeft, Localization.natTrans_ext, and cancellation of the localization shift isomorphism.",
+   "text": "Use the fixed comparison tau = mapDerivedCategoryNatIso(e) followed by mapDerivedCategoryIdIso. Its factorization on Q(K) is P.mapDerivedCategoryFactors followed by Q of the termwise e and complex identity comparison. The latter commutes with all integer shifts degreewise. Full faithfulness of precomposition with localization reflects shift compatibility, by Localization.natTrans_ext and cancellation of the localization shift comparison. Restrict to D-plus: the image of the bounded-below comparison under the faithful inclusion is the full derived comparison conjugated by mapDerivedCategoryPlusCompatibility and the two unitors. These comparisons commute with shift, so NatTrans.CommShift.of_whiskerRight proves shift compatibility on D-plus. Import all Sheaf.Paper.DerivedEtaleCohomologyPullbackLaws to use its already proved private idFactors, and import all Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison to use CategoryTheory.Abelian.Ext.commShift_of_localization; neither helper is restated.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-derived-cohomology-pullback-laws",
+    "lem-weil-pbc-ext-exact-functor-identity-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "On the complex concentrated in degree zero, compute the transformation as the single-functor comparison followed by the image of e. Degree zero is e; in all other degrees the maps to the zero object agree. Apply localization and its factorization comparison. Naturality for z and shift compatibility identify the last four factors with s(e_X) followed by z. Cancel the initial s(e_X inverse). The fully faithful inclusion D-plus into D reflects equality, transporting both sides by its shift comparison. This argument includes negative degrees and zero objects.",
+   "text": "Use the already proved private single_iso_id from import all Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIdentity to compute the component of tau on each single complex: mapDerivedCategoryPlusSingleFunctor.hom followed by single(e.hom). Apply the faithful inclusion into D, then the exact functor and identity factorization equations. On complexes the equality is degreewise: in degree zero both components are e.hom, elsewhere the target is zero. For z, shift compatibility turns the shifted target factors into tau on the shifted target; naturality moves tau to the source. Substitute the single-complex computation there, cancel the inverse/direct single comparison, combine the two single maps by map_comp, cancel e.inv followed by e.hom, and apply map_id. This proves the original raw identity formula in every integer degree.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-sbc-higher-image-transition-identity"
    ],
    "elementary": false
   }
@@ -42,12 +45,15 @@
   "lem-weil-pbc-inverse-image-composition",
   "sbc-lem-higher-image-raw-over-naturality",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-derived-cohomology-pullback-laws",
+  "lem-weil-pbc-ext-exact-functor-identity-comparison",
+  "lem-sbc-higher-image-transition-identity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project and the exact-functor factorization interface",
-  "place": "The corresponding step of lem-sbc-higher-image-raw-pullback-functorial, expanded by E2"
+  "document": "Stacks Project, Tags 015F and 09Z1, and the fixed exact-functor comparisons",
+  "place": "T3 repair of returned delivery: import and use existing private idFactors, single_iso_id, and CategoryTheory.Abelian.Ext.commShift_of_localization via import all of their defining modules. The remaining private helpers prove shift compatibility for the fixed D-plus comparison and integer-degree transport. No duplicate proofs or new statements remain."
  },
  "mathlib_searches": [
   {
@@ -120,13 +126,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T203940-L-829517",
-  "kind": "interface",
+  "landing": "20261013T100137-L-2490094",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
