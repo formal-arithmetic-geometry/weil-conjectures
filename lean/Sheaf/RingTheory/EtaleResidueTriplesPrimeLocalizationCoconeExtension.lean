@@ -7,8 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRelation
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
-import Sheaf.Paper.EtaleFiniteDataDescent
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtension
 
 /-! # Compatible cocone legs across prime localization -/
 
@@ -49,6 +48,35 @@ theorem etaleResidueTriples_primeLocalization_cocone_extension
     ∃! θ : etaleResidueTriplesRingDiagram
       (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ ⟶
         (Functor.const _).obj V,
-      etaleResidueTriples_primeLocalization_coconeRelation R p K χ q ψ V η θ := by sorry
+      etaleResidueTriples_primeLocalization_coconeRelation R p K χ q ψ V η θ := by
+  classical
+  have H := etaleResidueTriples_primeLocalization_component_extension R p K χ q ψ hψ hK V η
+  choose b hb hu using H
+  let θ : etaleResidueTriplesRingDiagram
+      (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ ⟶
+        (Functor.const _).obj V :=
+    { app := b
+      naturality := by
+        intro t t' f
+        change f.hom.right.left ≫ b t' = b t
+        apply hu t
+        intro s β hα hφ
+        have ha : t.α ≫ f.hom.right.left = t'.α :=
+          congrArg CommaMorphism.left (Under.w f.hom)
+        have hp : f.hom.right.left ≫ (ΓSpecIso t'.B).inv ≫
+            (Spec t'.B).Γevaluation t'.q ≫ t'.φ =
+            (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ :=
+          Over.w f.hom.right
+        rw [← Category.assoc]
+        apply hb t' s (β ≫ f.hom.right.left)
+        · rw [← Category.assoc, hα, Category.assoc, ha]
+        · simpa only [Category.assoc, hp] using hφ }
+  refine ⟨θ, ?_, ?_⟩
+  · intro s t β hα hφ
+    exact hb t s β hα hφ
+  · intro θ' hθ'
+    apply NatTrans.ext
+    funext t
+    exact hu t (θ'.app t) (fun s β hα hφ ↦ hθ' s t β hα hφ)
 
 end AlgebraicGeometry.Scheme

@@ -15,29 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Write R_p as the filtered colimit of principal localizations R_s with s outside p. Naturality of a global cocone along pointed principal refinements makes its descended-model legs invert all remaining denominators.",
+   "text": "For each local triple t apply the single-object component extension theorem, obtaining its unique compatible leg b_t. Choose these uniquely determined ring maps.",
    "uses": [
-    "lem-weil-pbc-localization-colimit-principal-localizations"
+    "new-lem-sbc-etale-triples-prime-localization-component-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Descend each etale finitely presented A-algebra to an etale R_s-algebra. Its restricted pointing has a prime kernel and unique residue-field factorization, giving an R-triple. Extend the model leg uniquely to its A-localization. Descend morphisms, equalities, comparison isomorphisms and inverse relations at common later stages to prove independence and naturality. For any pointed R-map into a local triple, descend the map into a model after a principal refinement of its source, then use global-cocone naturality and uniqueness of localization extensions. Every local object has a model, so the compatible local cocone is unique.",
+   "text": "For a morphism f:t → t′, the composite f followed by b_t′ has the required compatibility for t: a pointed global map β to t composes with f to a pointed map to t′, by the Under and Over commutation equations. Component uniqueness therefore gives f followed by b_t′ = b_t. These are exactly the naturality equations, so the legs assemble to a local cocone.",
    "uses": [
-    "lem-weil-pbc-etale-finite-data-descent"
+    "new-lem-sbc-etale-triples-prime-localization-component-extension"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Its compatibility is the component property. For any other compatible local cocone, each leg satisfies that same property and hence equals b_t by component uniqueness. Natural-transformation extensionality gives equality of the cocones.",
+   "uses": [
+    "new-lem-sbc-etale-triples-prime-localization-component-extension"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localization-colimit-principal-localizations",
-  "lem-weil-pbc-etale-finite-data-descent"
+  "new-lem-sbc-etale-triples-prime-localization-component-extension"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tags 00CR, 01ZM, 07RP; pointed-localization part of Tag 04GW",
-  "group": "W2"
+  "place": "Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW; formal assembly of unique compatible component extensions",
+  "group": "S4"
  },
  "mathlib_searches": [
   {
@@ -111,9 +117,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T211122-L-397995",
+  "landing": "20261013T215612-L-901181",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
