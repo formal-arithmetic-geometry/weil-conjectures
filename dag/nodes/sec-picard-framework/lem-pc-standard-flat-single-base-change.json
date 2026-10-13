@@ -19,59 +19,35 @@
  },
  "proof": [
   {
-   "text": "Use the existing stalkwise flat-complex comparison and the qcqs single-complex induction theorem. The degree-zero single complex M[0] is bounded above, quasi-coherent termwise and flat over p; all other terms are zero and satisfy these properties.",
+   "text": "Construct the canonical forward mate followed by direct image of the single-module pullback counit, without selecting any isomorphism witness.",
    "uses": [
-    "lem-pc-rf-single-complex-qcqs-induction",
-    "lem-pc-counit-stalk-condition-from-localized-comparison",
-    "lem-pc-relative-flat-module-stalk",
-    "lem-pc-pullback-stalk-tensor-flat",
-    "lem-pc-flat-base-derived-tensor-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At each pullback stalk, the single complex M_x[0] is K-flat over the base stalk by relative flatness. The fibre-product stalk is flat over the tensor product of the two source stalk rings, because it is a localization of that tensor product. Thus the localized tensor comparison is invertible; no flatness over O_Y or flatness of g is asserted.",
-   "uses": [
-    "lem-pc-relative-flat-module-stalk",
-    "lem-pc-pullback-stalk-tensor-flat",
-    "lem-pc-flat-base-derived-tensor-comparison",
-    "lem-pc-module-bounded-flat-kflat"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the resulting canonical base-change isomorphism through the single-complex and ordinary tensor-pullback identifications.",
-   "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-module-pullback"
+    "def-pc-standard-single-base-change-map"
    ],
    "elementary": true
   },
   {
-   "text": "Kernels and cokernels of quasi-coherent modules are quasi-coherent, so termwise quasi-coherence of the original and pulled complexes implies quasi-coherent cohomology.",
+   "text": "For each integer n obtain monicity and epicity of the degree-n cohomology map from the two separate cohomological lemmas. In the abelian category of module sheaves, mono plus epi implies isomorphism.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+    "lem-pc-standard-flat-single-base-change-mono",
+    "lem-pc-standard-flat-single-base-change-epi"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply DerivedCategory.isIso_iff to the canonical comparison: its cohomology maps are invertible in all degrees. Form asIso, invert its orientation, and package it in Nonempty.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-rf-single-complex-qcqs-induction",
-  "lem-pc-counit-stalk-condition-from-localized-comparison",
-  "lem-pc-relative-flat-module-stalk",
-  "lem-pc-pullback-stalk-tensor-flat",
-  "lem-pc-flat-base-derived-tensor-comparison",
-  "lem-pc-module-bounded-flat-kflat",
-  "def-pc-derived-pullback",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+  "def-pc-standard-single-base-change-map",
+  "lem-pc-standard-flat-single-base-change-mono",
+  "lem-pc-standard-flat-single-base-change-epi"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 0A1D, proof of lemma-base-change-tensor specialized to a degree-zero flat module"
+  "place": "Tag 0A1D; explicit canonical comparison, separate degreewise mono and epi obligations, abelian balance and joint reflection by derived cohomology"
  },
  "mathlib_searches": [
   {
@@ -185,11 +161,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-28aa8",
-  "group": "U3",
+  "reviewer": "COMPILER",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T160713-L-1372447",
+  "landing": "20261013T181125-L-2607888",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and baseline signatures; both modules and the direct importer compiled cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
