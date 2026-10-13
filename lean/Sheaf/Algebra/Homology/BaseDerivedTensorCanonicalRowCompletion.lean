@@ -110,6 +110,45 @@ private theorem map_to_common_derived
   rw [← H.map_comp, cm.naturality, H.map_comp]
   rfl
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem restrict_exact_pair
+    {E B : Type u} [CommRing E] [CommRing B] (r : B →+* E)
+    {X Y Z : ModuleCat.{u} E} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (h : (ComposableArrows.mk₂ ((restrictScalars r).map f)
+      ((restrictScalars r).map g)).Exact) :
+    (ComposableArrows.mk₂ f g).Exact := by
+  have w : f ≫ g = 0 := by
+    apply (restrictScalars r).map_injective
+    have hw := h.toIsComplex.zero 0
+    change (restrictScalars r).map f ≫ (restrictScalars r).map g = 0 at hw
+    simpa only [Functor.map_comp, Functor.map_zero] using hw
+  apply ComposableArrows.exact₂_mk _ w
+  rw [ShortComplex.ShortExact.moduleCat_exact_iff_function_exact]
+  have hh := h.exact 0
+  rw [ShortComplex.ShortExact.moduleCat_exact_iff_function_exact] at hh
+  exact hh
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem restrict_exact_row
+    {E B : Type u} [CommRing E] [CommRing B] (r : B →+* E)
+    {X₀ X₁ X₂ X₃ X₄ : ModuleCat.{u} E}
+    (f₀ : X₀ ⟶ X₁) (f₁ : X₁ ⟶ X₂) (f₂ : X₂ ⟶ X₃) (f₃ : X₃ ⟶ X₄)
+    (h : (ComposableArrows.mk₄ ((restrictScalars r).map f₀)
+      ((restrictScalars r).map f₁) ((restrictScalars r).map f₂)
+      ((restrictScalars r).map f₃)).Exact) :
+    (ComposableArrows.mk₄ f₀ f₁ f₂ f₃).Exact := by
+  apply ComposableArrows.exact_of_δ₀
+  · apply restrict_exact_pair r
+    exact ComposableArrows.exact₂_mk _ _ (h.exact 0)
+  · apply ComposableArrows.exact_of_δ₀
+    · apply restrict_exact_pair r
+      exact ComposableArrows.exact₂_mk _ _ (h.exact 1)
+    · apply restrict_exact_pair r
+      exact ComposableArrows.exact₂_mk _ _ (h.exact 2)
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Complete the canonical same-degree model maps by the derived connecting map.
 Source: Stacks Project, Tag 06Y6, Lemma 15.61.1, exactness and independence of
 choices; step 1 of lem-pc-base-derived-tensor-ordinary-triangle-rows.
@@ -211,5 +250,130 @@ theorem exists_baseDerivedTensor_canonical_row_completion
       (m₃.cohomologyIso i).hom ≫
         (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map (δ.app X) ≫
         (DerivedCategory.homologyFunctor (ModuleCat.{u} B) 0).shiftMap
-          (ShiftedHom.map T.mor₃ D) i (i + 1) (by omega) := by sorry
+          (ShiftedHom.map T.mor₃ D) i (i + 1) (by omega) := by
+  have := m₁.universal
+  have := m₂.universal
+  have := m₃.universal
+  let W := HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)
+  let F := (restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ) ⋙
+    HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh
+  let D := (restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ) ⋙
+    HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ m₁.derived
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} B)
+  let U := restrictScalars.{u}
+    (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom
+  let c₂ := Functor.leftDerivedNatIso m₂.derived m₁.derived m₂.counit m₁.counit W
+    (Iso.refl _)
+  let c₃ := Functor.leftDerivedNatIso m₃.derived m₁.derived m₃.counit m₁.counit W
+    (Iso.refl _)
+  let e₁ := m₁.cohomologyIso i
+  let e₂ := m₂.cohomologyIso i ≪≫ (H i).mapIso (c₂.app (F.obj T.obj₂))
+  let e₃ := m₃.cohomologyIso i ≪≫ (H i).mapIso (c₃.app (F.obj T.obj₃))
+  let e₄ := m₁.cohomologyIso (i + 1)
+  let e₅ := m₂.cohomologyIso (i + 1) ≪≫
+    (H (i + 1)).mapIso (c₂.app (F.obj T.obj₂))
+  let b : (H i).obj (D.obj T.obj₃) ⟶ (H (i + 1)).obj (D.obj T.obj₁) :=
+    (H 0).shiftMap (ShiftedHom.map T.mor₃ D) i (i + 1) (by omega)
+  let t : U.obj (m₃.cohomology i) ⟶ U.obj (m₁.cohomology (i + 1)) :=
+    e₃.hom ≫ b ≫ e₄.inv
+  have ht : ∀ (a : A) (x : m₃.cohomology i),
+      t ((Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) • x) =
+      (Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) • t x := by
+    intro a x
+    let k : A ⊗[R] B := Algebra.TensorProduct.includeLeft (S := R) a
+    have ha₃ : U.map (k • 𝟙 (m₃.cohomology i)) ≫ e₃.hom =
+        e₃.hom ≫ (H i).map (D.map (a • 𝟙 T.obj₃)) := by
+      dsimp only [e₃, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom]
+      rw [← Category.assoc, m₃.cohomologyIso_smul, Category.assoc]
+      change (m₃.cohomologyIso i).hom ≫
+        (H i).map (m₃.derived.map (F.map (a • 𝟙 T.obj₃))) ≫
+        (H i).map (c₃.hom.app (F.obj T.obj₃)) = _
+      erw [← (H i).map_comp, c₃.hom.naturality, (H i).map_comp]
+      rfl
+    have ha₁ : U.map (k • 𝟙 (m₁.cohomology (i + 1))) ≫ e₄.hom =
+        e₄.hom ≫ (H (i + 1)).map (D.map (a • 𝟙 T.obj₁)) :=
+      m₁.cohomologyIso_smul (i + 1) a
+    have w : (a • 𝟙 T.obj₃) ≫ T.mor₃ =
+        T.mor₃ ≫ (a • 𝟙 T.obj₁)⟦(1 : ℤ)⟧' := by
+      ext j y
+      exact (T.mor₃.f j).hom.map_smul a y
+    have wn : D.map (a • 𝟙 T.obj₃) ≫ ShiftedHom.map T.mor₃ D =
+        ShiftedHom.map T.mor₃ D ≫ (D.map (a • 𝟙 T.obj₁))⟦(1 : ℤ)⟧' := by
+      simp only [ShiftedHom.map, ← Functor.map_comp_assoc, w, Functor.map_comp,
+        Category.assoc, Functor.commShiftIso_hom_naturality]
+    have hb : (H i).map (D.map (a • 𝟙 T.obj₃)) ≫ b =
+        b ≫ (H (i + 1)).map (D.map (a • 𝟙 T.obj₁)) := by
+      calc
+        (H i).map (D.map (a • 𝟙 T.obj₃)) ≫ b =
+            (H 0).shiftMap (D.map (a • 𝟙 T.obj₃) ≫ ShiftedHom.map T.mor₃ D)
+              i (i + 1) (by omega) :=
+          ((H 0).shiftMap_comp' _ _ i (i + 1) (by omega)).symm
+        _ = (H 0).shiftMap (ShiftedHom.map T.mor₃ D ≫
+            (D.map (a • 𝟙 T.obj₁))⟦(1 : ℤ)⟧') i (i + 1) (by omega) := by rw [wn]
+        _ = b ≫ (H (i + 1)).map (D.map (a • 𝟙 T.obj₁)) :=
+          (H 0).shiftMap_comp _ _ i (i + 1) (by omega)
+    have hi : (H (i + 1)).map (D.map (a • 𝟙 T.obj₁)) ≫ e₄.inv =
+        e₄.inv ≫ U.map (k • 𝟙 (m₁.cohomology (i + 1))) := by
+      apply (cancel_epi e₄.hom).1
+      rw [← Category.assoc, ← ha₁]
+      simp only [Category.assoc, Iso.hom_inv_id, Iso.hom_inv_id_assoc,
+        Category.comp_id]
+    have hc : U.map (k • 𝟙 (m₃.cohomology i)) ≫ t =
+        t ≫ U.map (k • 𝟙 (m₁.cohomology (i + 1))) := by
+      dsimp only [t]
+      rw [← Category.assoc, ha₃]
+      simp only [Category.assoc]
+      rw [← Category.assoc ((H i).map (D.map (a • 𝟙 T.obj₃))) b e₄.inv,
+        hb, Category.assoc, hi]
+    exact congrArg (fun f ↦ f x) hc
+  obtain ⟨s₂, hs₂⟩ := tensorLinearLift R A B _ _ t ht
+  refine ⟨s₂, ?_, ?_⟩
+  · have h0 : U.map s0 ≫ e₂.hom = e₁.hom ≫ (H i).map (D.map T.mor₁) := by
+      have hh := map_to_common_derived R A B C m₁.derived m₁.counit
+        T.obj₁ T.obj₂ T.mor₁ m₁ m₂ i δ0 s0 hδ0 hg0
+      dsimp only at hh
+      rw [Functor.leftDerivedNatTrans_id] at hh
+      change U.map s0 ≫ e₂.hom =
+        e₁.hom ≫ (H i).map (𝟙 _) ≫ (H i).map (D.map T.mor₁) at hh
+      dsimp only [H, F, D, Functor.comp_obj, Functor.comp_map] at hh ⊢
+      rw [CategoryTheory.Functor.map_id] at hh
+      simpa only [Category.id_comp] using hh
+    have h1 : U.map s1 ≫ e₃.hom = e₂.hom ≫ (H i).map (D.map T.mor₂) := by
+      exact map_to_common_derived R A B C m₁.derived m₁.counit T.obj₂ T.obj₃ T.mor₂
+        m₂ m₃ i δ1 s1 hδ1 hg1
+    have h3 : U.map s3 ≫ e₅.hom = e₄.hom ≫ (H (i + 1)).map (D.map T.mor₁) := by
+      have hh := map_to_common_derived R A B C m₁.derived m₁.counit
+        T.obj₁ T.obj₂ T.mor₁ m₁ m₂ (i + 1) δ3 s3 hδ3 hg3
+      dsimp only at hh
+      rw [Functor.leftDerivedNatTrans_id] at hh
+      change U.map s3 ≫ e₅.hom =
+        e₄.hom ≫ (H (i + 1)).map (𝟙 _) ≫ (H (i + 1)).map (D.map T.mor₁) at hh
+      dsimp only [H, F, D, Functor.comp_obj, Functor.comp_map] at hh ⊢
+      rw [CategoryTheory.Functor.map_id] at hh
+      simpa only [Category.id_comp] using hh
+    have h2 : U.map s₂ ≫ e₄.hom = e₃.hom ≫ b := by
+      rw [hs₂]
+      simp only [t, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    have hd := baseDerivedExtension_coherent_triangle_distinguished R A B
+      m₁.derived m₁.counit T hT
+    have he : (ComposableArrows.mk₄ ((H i).map (D.map T.mor₁))
+        ((H i).map (D.map T.mor₂)) b ((H (i + 1)).map (D.map T.mor₁))).Exact := by
+      apply ComposableArrows.exact_of_δ₀
+      · exact (DerivedCategory.HomologySequence.exact₂
+          (D.mapTriangle.obj T) hd i).exact_toComposableArrows
+      · apply ComposableArrows.exact_of_δ₀
+        · exact (DerivedCategory.HomologySequence.exact₃ (D.mapTriangle.obj T) hd
+            i (i + 1)).exact_toComposableArrows
+        · exact (DerivedCategory.HomologySequence.exact₁ (D.mapTriangle.obj T) hd
+            i (i + 1)).exact_toComposableArrows
+    apply restrict_exact_row Algebra.TensorProduct.includeRight.toRingHom
+    exact ComposableArrows.exact_of_iso
+      (ComposableArrows.isoMk₄ e₁ e₂ e₃ e₄ e₅ h0 h1 h2 h3).symm he
+  · have h2 : U.map s₂ ≫ e₄.hom = e₃.hom ≫ b := by
+      rw [hs₂]
+      simp only [t, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    dsimp only [U, e₄, e₃, c₃, W, F, D, H, b, Functor.leftDerivedNatIso,
+      Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.refl_hom,
+      Functor.comp_obj, Functor.comp_map] at h2 ⊢
+    simpa only [Category.assoc] using h2
 end ModuleCat
