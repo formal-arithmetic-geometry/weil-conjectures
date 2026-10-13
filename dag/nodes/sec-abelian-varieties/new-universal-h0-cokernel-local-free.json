@@ -10,27 +10,37 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Since P^(-1)=0, after scalar extension H^0 identifies with the kernel of d^0. At a prime p, finite projectivity makes source and target finite free over A=R_p. The residue-field test gives source rank n at least one and matrix rank n-1. Choose a unit (n-1)-minor and eliminate its rows and columns, obtaining diag(id_(n-1),g) where g:A -> A^m. The same row and column operations preserve kernels. This is the unit-minor argument of Tag 00O0 applied to the maximal nonzero residue block, not an application of its injectivity assertion to d.",
+   "text": "For every ring map R -> B, the scalar-extended degree-minus-one term is zero because extendScalars preserves zero objects. The short-complex homology projection is then an isomorphism. Compose its inverse and the explicit ModuleCat cycles/kernel isomorphism with the given H0 isomorphism. This gives ker(d tensor B) isomorphic to B. Lean helper h0_kernel_test proves this directly using Functor.map_isZero, moduleCatCyclesIso, asIsoHomologyπ and homologyMapIso. Test first with B equal to the residue field of A=R_p.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply new-residue-kernel-unit-minor to d^0 with the finite-projective hypotheses and the residue-field kernel test. It supplies a free A-module C, a map g:A->C, an equivalence ker(g) with ker(d tensor A), and an equivalence of the localized global quotient with C/range(g).",
    "uses": [
-    "lem-weil-pbc-finite-projective-prime-local-free"
+    "new-residue-kernel-unit-minor"
    ],
    "elementary": false
   },
   {
-   "text": "The A-algebra test gives ker(g) isomorphic to A. Compose an isomorphism A -> ker(g) with the inclusion ker(g) -> A: this is multiplication by c and is injective. For each entry b of g one has bc=0, hence cb=0, hence b=0 by injectivity. Thus g=0. The cokernel of diag(id,g) is A^m and is free. Exactness of localization identifies this cokernel with the localization of P^1/im(d^0). The n=1 case uses the empty minor; there are no primes for the zero ring.",
+   "text": "Apply the proved H0/kernel comparison with B=A. Compose with the kernel equivalence from the preceding step to obtain e:ker(g)~A. The inclusion composed with e inverse is an injective A-linear map k:A->A, so k(x)=x k(1). Its value c=k(1) belongs to ker(g). Therefore c*g(1)=0. In a basis of C every coordinate b of g(1) satisfies cb=0, hence k(b)=bc=0=k(0), and injectivity gives b=0. Thus g(1)=0 and A-linearity gives g=0. Lean helper kernel_equiv_ring_forces_zero proves this calculation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Since g=0, range(g)=0 and the quotient C/range(g) is linearly equivalent to C by quotEquivOfEqBot. Transport Module.Free across this equivalence and then the quotient equivalence from the unit-minor step using Module.Free.of_equiv.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-projective-prime-local-free"
+  "new-residue-kernel-unit-minor"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N3",
+  "group": "M3",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tags 00O0 and 00NX; rank-(n-1) unit-minor adaptation of 00O0, with the local-ring and residue-field H0 tests"
+  "place": "Tags 00O0 and 00NX, same rank-(n-1) unit-minor route; Lean proof of H0/kernel comparison, local-ring annihilator calculation and free-quotient transport, with only the residue unit-minor normal form split off."
  },
  "mathlib_searches": [
   {
@@ -127,11 +137,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-45180",
-  "group": "N3",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T165646-L-1809612",
+  "landing": "20261013T172657-L-2100394",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean matches the corrected nodes and change record; all modules and direct importers compile cleanly; original caller fails as reported and the one-line adaptation is necessary; axioms match the named remaining sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

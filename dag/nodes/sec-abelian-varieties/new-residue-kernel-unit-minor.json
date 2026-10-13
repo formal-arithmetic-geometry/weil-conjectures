@@ -1,0 +1,148 @@
+{
+ "id": "new-residue-kernel-unit-minor",
+ "kind": "statement",
+ "title": "Residue rank-one kernel gives a one-column residual normal form",
+ "statement": "Let R be a commutative ring, X and Y finite projective R-modules, f:X->Y an R-linear map, and p a prime. Set A=R_p and kappa=A/m_A. Assume the kernel of f tensor_R kappa is isomorphic to kappa. Then there exist a free A-module C and an A-linear map g:A->C such that ker(g) is linearly equivalent to ker(f tensor_R A), and the localization at p of Y/im(f) is linearly equivalent to C/im(g). No condition is imposed on the kernel over A, and g need not be zero.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00O0 and 00NX; the rank-(n-1) unit-minor adaptation of the proof of Lemma 10.79.4, with exact localization and scalar-extension comparisons."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "By lem-weil-pbc-finite-projective-prime-local-free choose free principal-open neighborhoods for X and Y containing p, then localize further to A=R_p. Their finite bases localize to finite bases over A. Scalar extension with A identifies with localization (LocalizedModule.equivTensorProduct); tensor associativity identifies the residue map with scalar extension of the localized map.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-prime-local-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In those bases let n be the source rank. The residue kernel is isomorphic to the field, so rank-nullity gives matrix rank n-1 and n>=1. Choose n-1 independent columns, and choose n-1 independent rows of their matrix. Their square determinant is nonzero in kappa. The lifted determinant is a unit of A, since its residue is nonzero. Permute the selected columns and rows to the front. The case n=1 uses the empty determinant 1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Write the resulting map in blocks [[B,b],[D,d]], with B invertible. Apply source operation (u,a)->(u-B^{-1}b*a,a) and target operation (y,z)->(B^{-1}y,z-D*B^{-1}y). These are linear equivalences with inverses reversing the operations, and change the map to diag(id,g), where g(a)=(d-D*B^{-1}b)*a. Let C be the free module on the remaining target coordinates.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The kernel of diag(id,g) is exactly the pairs (0,a) with g(a)=0. Including these pairs and undoing the source equivalence gives ker(g) equivalent to the localized kernel. Projection of the normal-form target onto C/range(g) is surjective with kernel equal to range(diag(id,g)), since this range is precisely the pairs (u,g(a)). The first isomorphism theorem gives the cokernel equivalence. Finally localizedQuotientEquiv and the localized range identity identify this cokernel with LocalizedModule p.primeCompl (Y/range(f)).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-prime-local-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M3",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 00O0 and 00NX; the rank-(n-1) unit-minor adaptation of the proof of Lemma 10.79.4, with exact localization and scalar-extension comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite projective map residue kernel dimension one split identity block remaining rank one source",
+   "results": "{\"t\": \"2026-10-13T17:07:09Z\", \"tool\": \"leansearch\", \"query\": \"finite projective map residue kernel dimension one split identity block remaining rank one source\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite projective module map whose residue field kernel has dimension one admits a unit minor splitting with one remaining source coordinate",
+   "results": "{\"t\": \"2026-10-13T17:06:42Z\", \"tool\": \"leanfinder\", \"query\": \"A finite projective module map whose residue field kernel has dimension one admits a unit minor splitting with one remaining source coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv\", \"LinearEquiv.mem_dilatransvections_iff_finrank\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Submodule.smithNormalFormCoeffs_ne_zero\", \"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\", \"Ideal.exists_smith_normal_form\"], \"digest\": \"968e1500761c8a47\"}",
+   "date": "2026-10-14",
+   "verdict": "No exact match: exists_basis_of_basis_baseChange and generic Jacobian/PID lemmas do not supply the required residual map and kernel/cokernel equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.split_injective_iff_lTensor_residueField_injective",
+   "results": "{\"t\": \"2026-10-13T17:06:42Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsLocalRing.split_injective_iff_lTensor_residueField_injective\"], \"digest\": \"e83e8b5a6c808152\"}",
+   "date": "2026-10-14",
+   "verdict": "One exact generic split-injection criterion, but the original map has a rank-one residue kernel and is not injective. Selecting the n-1 independent source columns and the quotient/kernel comparisons remain."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_minor|rank.*one.*kernel|kernel.*rank.*one",
+   "results": "{\"t\": \"2026-10-13T17:06:41Z\", \"tool\": \"grep\", \"query\": \"unit_minor|rank.*one.*kernel|kernel.*rank.*one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "No Mathlib hits. Repository searches found FiniteFreeMapResidueLocalizationStrong, which treats injective residue maps, not arbitrary maps with a rank-one kernel. The original universal-H0 modules depend on this item and cannot be used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.UniversalH0CokernelLocalFree",
+  "date": "2026-10-14",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2 fixed-affine normalization: the residue-field rank-(n-1) unit-minor step, before the local-ring kernel test eliminates the remaining differential.",
+   "via": [
+    "new-universal-h0-cokernel-local-free",
+    "new-universal-h0-split-factorization",
+    "lem-sc-universal-h0-split-differential",
+    "lem-sc-connective-universal-h0-zero-differential",
+    "lem-sc-universal-h0-projective-normalization",
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ResidueKernelUnitMinor",
+  "file": "lean/Sheaf/Algebra/Homology/ResidueKernelUnitMinor.lean",
+  "declaration": "ModuleCat.residue_kernel_unit_minor",
+  "statement": "theorem residue_kernel_unit_minor\n    (R : Type v) [CommRing R] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)\n    (hfX : Module.Finite R X) (hfY : Module.Finite R Y)\n    (hpX : Module.Projective R X) (hpY : Module.Projective R Y)\n    (𝔭 : Ideal R) [𝔭.IsPrime]\n    (hres : Nonempty (LinearMap.ker ((ModuleCat.extendScalars\n      ((IsLocalRing.residue (Localization.AtPrime 𝔭)).comp\n        (algebraMap R (Localization.AtPrime 𝔭)))).map f).hom\n      ≃ₗ[IsLocalRing.ResidueField (Localization.AtPrime 𝔭)]\n        IsLocalRing.ResidueField (Localization.AtPrime 𝔭))) :\n    ∃ (C : ModuleCat.{v} (Localization.AtPrime 𝔭))\n      (g : Localization.AtPrime 𝔭 →ₗ[Localization.AtPrime 𝔭] C),\n      Module.Free (Localization.AtPrime 𝔭) C ∧\n      Nonempty (LinearMap.ker g ≃ₗ[Localization.AtPrime 𝔭]\n        LinearMap.ker ((ModuleCat.extendScalars\n          (algebraMap R (Localization.AtPrime 𝔭))).map f).hom) ∧\n      Nonempty (LocalizedModule 𝔭.primeCompl (Y ⧸ LinearMap.range f.hom)\n        ≃ₗ[Localization.AtPrime 𝔭] (C ⧸ LinearMap.range g))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T172657-L-2100394",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T172657-L-2100394",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
