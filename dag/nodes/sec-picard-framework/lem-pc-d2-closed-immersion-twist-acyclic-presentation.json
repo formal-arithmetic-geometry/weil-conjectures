@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-d2-closed-immersion-twist-acyclic-presentation",
+ "kind": "statement",
+ "title": "Closed-immersion finite-twist presentation with eventually acyclic middle term",
+ "statement": "Let A be a Noetherian commutative ring, i : X → P^N_A a closed immersion, F a quasi-coherent finitely presented module on X, and q > 0. There is a short exact complex S on P^N_A whose third term is isomorphic to i_*F and whose first term is quasi-coherent and finitely presented. There is a natural b such that H^q(P^N_A, S.X₂ tensor O(t)) = 0 for every natural t ≥ b. Cohomology means module right-derived global sections [def-sc-ringed-space-module-cohomology]; O(t) is [def-pc-projective-space-twist]. No cohomology vanishing hypothesis on the first term is assumed.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "https://stacks.math.columbia.edu/tag/01YS, proof of (1) and (4), finite-twist presentation and vanishing of the left term; read online 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use import all of ProjectiveFiniteCohomologyPresentation to reuse its proved private coherent-pushforward and finite-twist-epimorphism lemmas without importing the cyclic Serre module. Let S be the kernel sequence of that epimorphism. Bound the finitely many natural negative-twist indices by b. For t ≥ b, each summand after tensoring with O(t) is O(t-m_j) with t-m_j ≥ 0. Apply nonnegative-twist vanishing and the source comparison to get ordinary cohomology vanishing for each summand. Ordinary H is additive for finite sums, and tensorRight preserves coproducts. Thus the twisted middle term has zero ordinary cohomology, and the source comparison gives IsZero in module cohomology.",
+   "uses": [
+    "lem-pc-u3-projective-finite-cohomology-presentation",
+    "lem-pc-d2-nonnegative-projective-twist-vanishing",
+    "lem-sc-module-cohomology-source-comparison",
+    "lem-pc-twist-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-u3-projective-finite-cohomology-presentation",
+  "lem-pc-d2-nonnegative-projective-twist-vanishing",
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-pc-twist-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YS, proof of (4), before applying the next-degree induction hypothesis"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite sum of twisting sheaves surjects onto coherent sheaf on projective space with coherent kernel",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error; no verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing cohomology of coherent sheaf after tensor with sufficiently large projective twist",
+   "date": "2026-10-13",
+   "results": "Only unrelated projective-object Ext/Tor vanishing.",
+   "verdict": "No matching presentation theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.ShortExact",
+   "date": "2026-10-13",
+   "results": "Unknown identifier; no usable result."
+  },
+  {
+   "tool": "grep",
+   "query": "ShortExact.*tensor|tensor.*ShortExact|exists.*twist in Mathlib/AlgebraicGeometry; library search for exists_epi_sigma_twist",
+   "date": "2026-10-13",
+   "results": "Mathlib has no projective-twist presentation. Source exists_epi_sigma_twist lives in Cohomology.Serre, whose imports reach the assigned item; ClosedImmersionSerreVanishing has the entire vanishing theorem but also reaches the item. Neither states this combined presentation with eventual middle-term acyclicity.",
+   "verdict": "New combined intermediate needed to avoid the import cycle."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionTwistVanishingStep",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-c2-closed-immersion-fixed-degree-vanishing",
+   "place": "descending induction: choose a finite-twist surjection with coherent kernel; twisted middle term has zero positive cohomology",
+   "via": [
+    "lem-pc-j4-closed-immersion-twist-vanishing-step"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionTwistAcyclicPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionTwistAcyclicPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_closedImmersion_twist_acyclic_presentation",
+  "statement": "theorem exists_closedImmersion_twist_acyclic_presentation\n    (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}\n    (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]\n    (F : X.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation]\n    (q : ℕ) (hq : 0 < q) :\n    ∃ S : ShortComplex (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))).Modules,\n      S.ShortExact ∧ Nonempty (S.X₃ ≅ (pushforward i).obj F) ∧\n      S.X₁.IsQuasicoherent ∧ S.X₁.IsFinitePresentation ∧\n      ∃ b : ℕ, ∀ t : ℕ, b ≤ t →\n        IsZero ((RingedSpace.moduleCohomology\n          (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))).toRingedSpace q).obj\n          (tensorObj S.X₂\n            (ProjectiveSpace.twist (ULift.{u} (Fin (N + 1))) (Spec (.of A)) t)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T125007-L-3835893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T125007-L-3835893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

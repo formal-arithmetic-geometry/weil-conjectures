@@ -1,0 +1,107 @@
+{
+ "id": "lem-pc-d2-nonnegative-projective-twist-vanishing",
+ "kind": "statement",
+ "title": "Positive cohomology vanishes for nonnegative projective twists over a ring",
+ "statement": "For a commutative ring A (including the zero ring), N a natural number, m a nonnegative integer and q a positive natural number, H^q(P^N_A,O(m)) is zero. O(m) is the projective twist [def-pc-projective-space-twist] and H is module right-derived global sections [def-sc-ringed-space-module-cohomology]. No Noetherian hypothesis is required.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01XT, Lemma on cohomology of projective-space twists, nonnegative-twist case; monomial contraction used in Tag 01YS (4)"
+ },
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Build explicitly the linear isomorphism between the standard-cover twist Cech complex, with scalars restricted along the structure morphism A → Gamma(P,O), and the Laurent-monomial complex. On an intersection indexed by sigma, send finite Laurent coefficient families to their monomial sections; the existing monomial section basis proves bijectivity, and the restriction formula proves compatibility with differentials. The affine-cover Leray comparison identifies ordinary twist cohomology with this complex homology. In degree p+1>0, use the monomial contracting homotopy. For an exponent vector with a nonnegative coordinate, the homotopy identity shows every cocycle is a boundary. If every coordinate is negative then the sum is negative (there are N+1 coordinates), so it is not m; all such coefficients are zero. Thus the complex is exact in every positive degree, including degrees above N and the case N=0. Transport IsZero through the explicit comparisons and the module-cohomology source comparison.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-sc-module-cohomology-source-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-sc-module-cohomology-source-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01XT; explicit ring-valued Cech comparison adapted from RingTwistCech in ClosedImmersionSerreVanishing, with a uniform contraction replacing degree case splits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "positive cohomology of nonnegative twists on projective space over a commutative ring vanishes",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error; no verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "positive cohomology of O(m) on projective space is zero for m nonnegative over a ring",
+   "date": "2026-10-13",
+   "results": "Only unrelated projective-resolution and Ext/Tor facts returned.",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H_twist_of_pos|monomialCechComplex_d_homotopy_add",
+   "date": "2026-10-13",
+   "results": "msearch returned zero Mathlib matches. Local rg found monomialCechComplex_d_homotopy_add in the source library and a private ring-valued Cech comparison in ClosedImmersionSerreVanishing. The source Serre theorem and full vanishing module cannot be imported because they reach the assigned item.",
+   "verdict": "Use the existing monomial homotopy and adapt the explicit private comparison without the cyclic import."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionTwistVanishingStep",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-c2-closed-immersion-fixed-degree-vanishing",
+   "place": "descending induction: positive cohomology of each O(t-m_j) vanishes for t ≥ m_j",
+   "via": [
+    "lem-pc-d2-closed-immersion-twist-acyclic-presentation",
+    "lem-pc-j4-closed-immersion-twist-vanishing-step"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NonnegativeProjectiveTwistVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/NonnegativeProjectiveTwistVanishing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isZero_moduleCohomology_projective_twist_of_nonneg",
+  "statement": "theorem isZero_moduleCohomology_projective_twist_of_nonneg\n    (A : Type u) [CommRing A] (N : ℕ) (m : ℤ) (hm : 0 ≤ m)\n    (q : ℕ) (hq : 0 < q) :\n    IsZero ((RingedSpace.moduleCohomology\n      (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))).toRingedSpace q).obj\n      (ProjectiveSpace.twist (ULift.{u} (Fin (N + 1))) (Spec (.of A)) m))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T125007-L-3835893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T125007-L-3835893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
