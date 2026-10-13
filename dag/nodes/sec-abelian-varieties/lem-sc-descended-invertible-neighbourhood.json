@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-descended-invertible-neighbourhood",
+ "kind": "statement",
+ "title": "Local triviality of a descended invertible module",
+ "statement": "Let \\(f:X\\to S\\) be a morphism of schemes [def-pc-scheme], whose tensor-pullback structure-module adjunction unit [lem-pc-module-pullback-adjunction] is an isomorphism after every base change [def-pc-base-change]. Let \\(M\\) be invertible on \\(X\\) [def-sc-invertible-module], \\(k:W\\to S\\) any morphism, and \\(w\\in W\\). Assume there is a finite locally free module \\(N\\) on \\(W\\) [def-amb-finite-locally-free-module] and an isomorphism \\(M_W\\cong f_W^*N\\), with tensor pullback [def-pc-module-pullback]. There exists an open neighbourhood \\(V\\) of \\(w\\) such that for every open \\(U\\subseteq V\\), the pullback of \\(M\\) to \\(X\\times_S U\\) is isomorphic to its structure module. No properness, flatness, source direct image, derived complex, or family of target schemes is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-amb-finite-locally-free-module",
+  "def-sc-invertible-module",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BF2, proof paragraph beginning with shrinking the base, and 0BF0, field rank calculation"
+ },
+ "proof": [
+  {
+   "text": "Test the universal unit at Spec kappa(w) mapping to S through k. If the fibre is empty, every module on it is zero, and pushforward has zero sections. An isomorphism from the nonzero residue-field structure module to that pushforward is impossible. Thus this fibre has a point.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-residue-field",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a finite free frame of N near w. Pull it to a point of the nonempty residue fibre. Tensor-pullback composition and the descent isomorphism identify its pullback with an invertible module. On Spec kappa(w), the field rank-one theorem trivializes the pullback of N; comparison of its finite free frame with this rank-one module forces its number of generators to be one. Therefore the frame of N near w has rank one.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-pc-module-pullback",
+    "lem-sc-field-pullback-rank-one-trivial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any U inside this frame neighbourhood, restrict the frame and pull it back along f_U. Compose with the base change of the descent isomorphism. The cartesian projection identities and composition of pullback identify the resulting bundle with M_U. Pullback of the structure module is the structure module, so M_U is trivial.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-field-pullback-rank-one-trivial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0BF2, proof paragraph beginning with shrinking the base, and 0BF0, field rank calculation",
+  "note": "Detailed subargument of the existing 0BF2 proof, split from the common minimal model; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free module pulled back to an invertible module along a faithfully flat morphism has rank one and is locally trivial",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A descended finite locally free module whose pullback is invertible on every nonempty fibre is trivial of rank one on a neighbourhood of a prescribed base point",
+   "results": "Actual search returned 8 hits: Module.isLocallyConstant_rankAtStalk_freeLocus, Module.isLocallyConstant_rankAtStalk, Module.mem_freeLocus, Module.FinitePresentation.exists_free_localizedModule_powers, Module.rankAtStalk_eq_zero_iff_subsingleton, Module.mem_freeLocus_of_isLocalization, Module.free_of_flat_of_isLocalRing, Module.rankAtStalk_eq_finrank_of_free. No exact theorem found; the named results are general tools.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; read candidate signatures"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*pullback|pullback.*rank|locally.*rank.*one",
+   "results": "Actual search returned 5 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean. No exact theorem found; the named results are general tools.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; read candidate signatures"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1CommonMinimalModel",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tags 0BF2, proof paragraph beginning with shrinking the base, and 0BF0, field rank calculation; Local triviality of a descended invertible module",
+   "via": [
+    "lem-sc-picard-h1-common-minimal-model",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DescendedInvertibleNeighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendedInvertibleNeighbourhood.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_descendedInvertible_neighbourhood",
+  "statement": "theorem exists_descendedInvertible_neighbourhood\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (M : X.Modules) [M.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) (w : W)\n    (hM : ∃ (N : W.Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst f k)).obj M ≅\n        (Modules.tensorPullback (pullback.snd f k)).obj N)) :\n    ∃ V : W.Opens, w ∈ V ∧ ∀ U : W.Opens, U ≤ V →\n      Nonempty ((Modules.tensorPullback (pullback.fst f (U.ι ≫ k))).obj M ≅\n        SheafOfModules.unit (pullback f (U.ι ≫ k)).ringCatSheaf)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T113343-L-3183946",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T113343-L-3183946",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
