@@ -114,6 +114,21 @@ theorem exists_pullHom_eq_pullHom_of_isLimit_of_isAffine (hc : IsLimit c) {j : J
     (map_eq_map_of_pullHom_eq _ _ _ hy₁ hy₂ h)
   exact ⟨k, t, pullHom_eq_pullHom_of_map_eq _ _ _ rfl rfl ht⟩
 
+/-- Variant of `exists_pullHom_eq_pullHom_of_isLimit_of_isAffine` with the projection of the
+limit cone replaced by an equal morphism. -/
+theorem exists_pullHom_eq_pullHom_of_isLimit_of_isAffine' (hc : IsLimit c) {j : J}
+    {W₁ W₂ : Scheme.{u}} {O₁ : W₁.Modules} {O₂ : W₂.Modules} [O₁.IsFinitePresentation]
+    [O₂.IsFinitePresentation] (x₁ : E.obj j ⟶ W₁) (x₂ : E.obj j ⟶ W₂) {y₁ : c.pt ⟶ W₁}
+    {y₂ : c.pt ⟶ W₂} (r : c.pt ⟶ E.obj j) (hr : c.π.app j = r) (hy₁ : r ≫ x₁ = y₁)
+    (hy₂ : r ≫ x₂ = y₂)
+    (ψ₁ ψ₂ : (modulesPseudofunctor.map x₁.op.toLoc).toFunctor.obj O₁ ⟶
+      (modulesPseudofunctor.map x₂.op.toLoc).toFunctor.obj O₂)
+    (h : pullHom ψ₁ r y₁ y₂ hy₁ hy₂ = pullHom ψ₂ r y₁ y₂ hy₁ hy₂) :
+    ∃ (k : J) (t : k ⟶ j), pullHom ψ₁ (E.map t) (E.map t ≫ x₁) (E.map t ≫ x₂) rfl rfl =
+      pullHom ψ₂ (E.map t) (E.map t ≫ x₁) (E.map t ≫ x₂) rfl rfl := by
+  subst hr
+  exact exists_pullHom_eq_pullHom_of_isLimit_of_isAffine hc x₁ x₂ hy₁ hy₂ ψ₁ ψ₂ h
+
 end PullHom
 
 end Scheme.Modules
@@ -229,7 +244,7 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
         simp [μ₀, μ₁, g₀, g₁, hw'])
   have hμL₁ (a : s) : resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a)) ≫ μ₁ a = μL a :=
     resTo_resTo _ _ _ _ (c.w _) _ _ _ _
-  have hA : DescentData'.pullGlue (H := H₁)
+  have hA : DescentData'.pullGlue (H := H₁) (sq' := preimageChosenPullback U gL)
       (fun a b ↦ resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b)))
       (resTo_p₁ U (c.π.app k₁.left) (c.w k₁.hom)) (resTo_p₂ U (c.π.app k₁.left) (c.w k₁.hom))
       hμL₁ = HL := by
@@ -239,6 +254,73 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
     refine pullHom_congr_left _ ?_ _ _ _ _
     rw [opensDiagram_map_eq_resTo, opensCone_π_app_eq_resTo]
     exact resTo_resTo _ _ _ _ (c.w _) _ _ _ _
+  -- Step 5: the identity and cocycle conditions hold at the limit, hence at later stages.
+  have hselfL : DescentData'.GlueSelf (H := HL) (preimageDiag U gL) (preimageDiag_p₁ U gL)
+      (preimageDiag_p₂ U gL) :=
+    DescentData'.glueSelf_isoGlueHom ε _ _ _
+  have hcocL : DescentData'.GlueCocycle (preimageChosenPullback₃ U gL) HL :=
+    DescentData'.glueCocycle_isoGlueHom ε
+  have h₅ (a : s) := by
+    haveI := hAff (U a) (hU a)
+    haveI := hN a
+    exact exists_pullHom_eq_pullHom_of_isLimit_of_isAffine (isLimitOpensCone D c hc i₀ (U a))
+      (j := k₁) (O₁ := N a) (O₂ := N a) (μ₁ a) (μ₁ a) (y₁ := μL a) (y₂ := μL a)
+      (by rw [opensCone_π_app_eq_resTo]; exact hμL₁ a)
+      (by rw [opensCone_π_app_eq_resTo]; exact hμL₁ a)
+      (DescentData'.glueSelfLHS H₁ (preimageDiag U g₁) (preimageDiag_p₁ U g₁)
+        (preimageDiag_p₂ U g₁) a) (𝟙 _)
+      (by
+        rw [pullHom_congr_left _ (opensCone_π_app_eq_resTo D c (U a) k₁),
+          pullHom_congr_left (𝟙 _) (opensCone_π_app_eq_resTo D c (U a) k₁),
+          DescentData'.pullHom_glueSelfLHS (H := H₁) (sq' := preimageChosenPullback U gL)
+            (fun a b ↦ resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b)))
+            (resTo_p₁ U (c.π.app k₁.left) (c.w k₁.hom))
+            (resTo_p₂ U (c.π.app k₁.left) (c.w k₁.hom)) hμL₁ (preimageDiag U gL)
+            (preimageDiag_p₁ U gL) (preimageDiag_p₂ U gL)
+            (preimageDiag_resTo U (c.π.app k₁.left) (c.w k₁.hom)), hA, hselfL a,
+          pullHom_id_eq_id])
+  choose kS tS htS using h₅
+  have h₅' (q : s × s × s) := by
+    haveI := hAff (U q.1 ⊓ U q.2.1 ⊓ U q.2.2) (hU₃ q.1 q.2.1 q.2.2)
+    haveI := hN q.1
+    haveI := hN q.2.2
+    exact exists_pullHom_eq_pullHom_of_isLimit_of_isAffine'
+      (isLimitOpensCone D c hc i₀ (U q.1 ⊓ U q.2.1 ⊓ U q.2.2)) (j := k₁) (O₁ := N q.1)
+      (O₂ := N q.2.2) ((preimageChosenPullback₃ U g₁ q.1 q.2.1 q.2.2).p₁ ≫ μ₁ q.1)
+      ((preimageChosenPullback₃ U g₁ q.1 q.2.1 q.2.2).p₃ ≫ μ₁ q.2.2)
+      (y₁ := (preimageChosenPullback₃ U gL q.1 q.2.1 q.2.2).p₁ ≫ μL q.1)
+      (y₂ := (preimageChosenPullback₃ U gL q.1 q.2.1 q.2.2).p₃ ≫ μL q.2.2)
+      (resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U q.1 ⊓ U q.2.1 ⊓ U q.2.2)))
+      (opensCone_π_app_eq_resTo D c _ k₁)
+      (by rw [← cancel_mono (Scheme.Opens.ι _)]; simp [μ₁, μL, g₁, gL])
+      (by rw [← cancel_mono (Scheme.Opens.ι _)]; simp [μ₁, μL, g₁, gL])
+      (DescentData'.glueCocLHS (preimageChosenPullback₃ U g₁) H₁ q.1 q.2.1 q.2.2)
+      (DescentData'.glueCocRHS (preimageChosenPullback₃ U g₁) H₁ q.1 q.2.1 q.2.2)
+      (by
+        rw [DescentData'.pullHom_glueCocLHS (H := H₁) (sq' := preimageChosenPullback U gL)
+            (sq₃ := preimageChosenPullback₃ U g₁) (sq₃' := preimageChosenPullback₃ U gL)
+            (r₂ := fun a b ↦ resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b)))
+            (hr₂₁ := resTo_p₁ U (c.π.app k₁.left) (c.w k₁.hom))
+            (hr₂₂ := resTo_p₂ U (c.π.app k₁.left) (c.w k₁.hom)) (hμ := hμL₁)
+            (r₃ := fun a b d ↦
+              resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b ⊓ U d)))
+            (h₁₂ := resTo_p₁₂ U (c.π.app k₁.left) (c.w k₁.hom))
+            (h₂₃ := resTo_p₂₃ U (c.π.app k₁.left) (c.w k₁.hom))
+            (hr₃₁ := resTo_p₁' U (c.π.app k₁.left) (c.w k₁.hom))
+            (hr₃₂ := resTo_p₂' U (c.π.app k₁.left) (c.w k₁.hom))
+            (hr₃₃ := resTo_p₃' U (c.π.app k₁.left) (c.w k₁.hom)),
+          DescentData'.pullHom_glueCocRHS (H := H₁) (sq' := preimageChosenPullback U gL)
+            (sq₃ := preimageChosenPullback₃ U g₁) (sq₃' := preimageChosenPullback₃ U gL)
+            (r₂ := fun a b ↦ resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b)))
+            (hr₂₁ := resTo_p₁ U (c.π.app k₁.left) (c.w k₁.hom))
+            (hr₂₂ := resTo_p₂ U (c.π.app k₁.left) (c.w k₁.hom)) (hμ := hμL₁)
+            (r₃ := fun a b d ↦
+              resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b ⊓ U d)))
+            (h₁₃ := resTo_p₁₃ U (c.π.app k₁.left) (c.w k₁.hom))
+            (hr₃₁ := resTo_p₁' U (c.π.app k₁.left) (c.w k₁.hom))
+            (hr₃₃ := resTo_p₃' U (c.π.app k₁.left) (c.w k₁.hom)), hA]
+        exact hcocL q.1 q.2.1 q.2.2)
+  choose kC tC htC using h₅'
   sorry
 
 end AlgebraicGeometry
