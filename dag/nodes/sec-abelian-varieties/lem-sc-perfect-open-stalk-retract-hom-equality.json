@@ -24,16 +24,17 @@
    "elementary": true
   },
   {
-   "text": "Apply the finite-free zero-germ shrinking lemma on the open subscheme W.toScheme, using the source finite free sheaf and the arbitrary target N. Concretely, take the images of its m restricted basis sections, shrink their zero germs, and intersect their finitely many neighbourhoods; the free universal property then makes the precomposed difference zero.",
+   "text": "Transport the restricted source splitting to W.toScheme with Modules.overEquiv, overMapUnitIso and mapFreeIso. Faithfulness of restriction of scalars gives equality of the stalk maps. Precompose with the transported free projection and each free basis inclusion, and evaluate on the germ of 1 to get equality of all finitely many generator image germs. Apply the proved private exists_restrict_eq_of_free_germs_eq helper from FiniteFreeStalkMapEquality, available by a proof-only import all; its finite intersection argument allows arbitrary target sheaves.",
    "uses": [
-    "lem-weil-pbc-finite-free-local-hom-zero"
+    "lem-pc-finite-free-stalk-map-eq-shrink"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the resulting open back into X and restrict the inclusion and projection there. Precompose the vanishing equality with the inclusion; the splitting identity reduces it to a|_V=b|_V. If m=0 the source retract is zero; no neighbourhood equations are needed.",
+   "text": "Cancel the restricted splitting by precomposing with the inclusion. Send the resulting open into X by W.ι and descend equality along its image-open isomorphism using restrict_map_injective_of_isIso. Transport across restrictFunctorComp and overMapCompOverEquiv using map_eq_of_iso, both proved private helpers in FiniteFreeStalkMapEquality. Empty rank requires no special case: the free coproduct helper handles an empty finite index set.",
    "uses": [
-    "def-pc-perfect-complex"
+    "def-pc-perfect-complex",
+    "lem-pc-finite-free-stalk-map-eq-shrink"
    ],
    "elementary": true
   }
@@ -42,13 +43,14 @@
   "def-pc-perfect-complex",
   "def-sc-open-module-stalk-functor",
   "def-pur-localized-ringed-site",
-  "lem-weil-pbc-finite-free-local-hom-zero"
+  "lem-pc-finite-free-stalk-map-eq-shrink"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "D4",
+  "group": "C3",
+  "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tag 01CP, lemma-stalk-internal-hom, finite-type injectivity proof (second paragraph); https://stacks.math.columbia.edu/tag/01CP, read 2026-10-13. Specialized finite-generator argument for step 1 of lem-sc-perfect-open-stalk-degreewise-shrink."
+  "place": "Tag 01CP, finite-type injectivity proof; categorical implementation adapted from exists_open_stalk_retract_map_eq, with the proved finite-germ and restriction comparison helpers of FiniteFreeStalkMapEquality."
  },
  "mathlib_searches": [
   {
@@ -127,10 +129,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T113338-L-3181977",
-  "kind": "interface",
+  "landing": "20261013T115952-L-3403422",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
