@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-pointed-etale-essentially-small",
+ "kind": "statement",
+ "title": "Pointed etale algebras are essentially small",
+ "statement": "Let R be a commutative local ring and K a chosen separable closure of its residue field. The full subcategory of Over(CommAlgCat.of R K) consisting of etale R-algebras is essentially small.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GW, finite-presentation smallness paragraph"
+ },
+ "stmt_deps": [
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Finite-presentation representatives of affine etale algebras and the set of pointings into K give essential smallness.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-essentially-small-cover"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pointed etale algebra category lem-sc-pointed-etale-essentially-small",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "essentially small pointed etale algebra category",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "EssentiallySmall IsFiltered Etale",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointedEtale_essentiallySmall pointedEtale_filtered",
+   "results": "No existing declaration",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PointedEtaleSmallFiltered",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pointed-etale-small-filtered",
+   "place": "decomposition of essential smallness and filteredness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PointedEtaleEssentiallySmall",
+  "file": "lean/Sheaf/RingTheory/PointedEtaleEssentiallySmall.lean",
+  "declaration": "Algebra.pointedEtale_essentiallySmall",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13",
+  "statement": "theorem pointedEtale_essentiallySmall\n    (R K : Type u) [CommRing R] [IsLocalRing R] [Field K]\n    [Algebra (IsLocalRing.ResidueField R) K]\n    [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K]\n    [IsScalarTower R (IsLocalRing.ResidueField R) K] :\n    let P : ObjectProperty (Over (CommAlgCat.of R K)) := fun X ↦ Etale R X.left\n    EssentiallySmall.{u} P.FullSubcategory"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T155933-L-1302495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T155933-L-1302495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

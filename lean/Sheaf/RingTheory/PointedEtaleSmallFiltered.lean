@@ -9,7 +9,8 @@ public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.CategoryTheory.EssentiallySmall
 public import Mathlib.CategoryTheory.Filtered.Basic
 
-import Sheaf.RingTheory.StrictHenselizationTriples
+import Sheaf.RingTheory.PointedEtaleEssentiallySmall
+import Sheaf.RingTheory.PointedEtaleFiltered
 
 /-!
 # Size and filteredness of pointed etale algebras
@@ -46,6 +47,6 @@ theorem pointedEtale_small_filtered
     [IsScalarTower R (IsLocalRing.ResidueField R) K] :
     let P : ObjectProperty (Over (CommAlgCat.of R K)) := fun X ↦ Etale R X.left
     EssentiallySmall.{u} P.FullSubcategory ∧ IsFiltered P.FullSubcategory := by
-  sorry
+  exact ⟨pointedEtale_essentiallySmall R K, pointedEtale_filtered R K⟩
 
 end Algebra

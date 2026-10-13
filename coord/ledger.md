@@ -13050,3 +13050,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:59 L: merged deliver/F1/Sheaf.RingTheory.StrictHenselizationQuotientBases (stage 3; reviewer PASS; first push; landing 20261013T155932-L-1302091 (interface); batch 20261013T155927; modules 2; new nodes 1)
 - 15:59 L: merged deliver/F3/Sheaf.AlgebraicGeometry.FinitePresentationLocalMapLifts (stage 3; reviewer PASS; first push; landing 20261013T155932-L-1302194 (interface); batch 20261013T155927; modules 2; new nodes 1)
 - 15:59 L: merged deliver/F4/Sheaf.Algebra.Homology.ConnectiveUniversalH0ZeroDifferential (stage 3; reviewer PASS; first push; landing 20261013T155933-L-1302349 (interface); batch 20261013T155927; modules 2; new nodes 1)
+- 15:59 L: merged deliver/G4/Sheaf.RingTheory.PointedEtaleSmallFiltered (stage 3; reviewer PASS; first push; landing 20261013T155933-L-1302495 (interface); batch 20261013T155927; modules 3; new nodes 2)
