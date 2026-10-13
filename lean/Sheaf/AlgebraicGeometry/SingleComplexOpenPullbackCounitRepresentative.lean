@@ -17,6 +17,55 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+/-- The representative identity after cancelling the open-restriction factorization.
+Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
+(blueprint: lem-pc-e2-open-pullback-counit-representative-postcomp).
+
+This is the mate calculation before composing with the inverse factorization
+isomorphism. It is strictly weaker than the displayed representative identity,
+and is isolated so that the remaining categorical cancellation is explicit. -/
+theorem singleComplexOpen_pullback_counit_representative_postcomp
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens)
+    (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :
+    let _ := (Classical.choose exists_derivedPullbackComposition) (f ∣_ V)
+    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
+    let F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom
+    let rY := schemeOpenRestriction Y V
+    let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)
+    let a := @singleComplexOpenPinnedAdjunction.{u, w} _
+    let c := @singleComplexOpenPinnedComposition.{u, w} _
+    let ε := @Classical.choose _ _
+      (Classical.choose_spec exists_derivedPullbackComposition)
+    (derivedPullback (f ∣_ V)).map
+        (rY.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫
+          rY.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app I)) ≫
+      ((derivedPullback (f ∣_ V)).mapIso
+          ((singleComplexOpenPullbackIso Y V).symm.app
+            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I))) ≪≫
+        (c (f ∣_ V) V.ι).app ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫
+        eqToIso (congrArg
+          (fun k ↦ (derivedPullback k).obj
+            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)))
+          (morphismRestrict_ι f V)) ≪≫
+        (c (f ⁻¹ᵁ V).ι f).symm.app
+          ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫
+        (singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).app
+          ((derivedPullback f).obj
+            ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)))).hom ≫
+      rX.mapDerivedCategory.map ((a f).counit.app (DerivedCategory.Qh.obj I)) ≫
+      rX.mapDerivedCategoryFactorsh.hom.app I =
+    (derivedPullback (f ∣_ V)).map (DerivedCategory.Qh.map
+      ((singleComplexOpenHomotopyDirectImageIso f V).hom.app I)) ≫
+      (ε (f ∣_ V)).app ((F₀.mapHomotopyCategory (.up ℤ)).obj
+        ((rX.mapHomotopyCategory (.up ℤ)).obj I)) ≫
+      DerivedCategory.Qh.map
+        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V)))
+          |>.mapHomotopyCategory (.up ℤ)).counit.app
+          ((rX.mapHomotopyCategory (.up ℤ)).obj I)) := by
+  sorry
+
 /-- The pullback-composition route, after the direct-image unit, is the localization
 of the sectionwise counit. This calculation does not use the derived open direct-image
 comparison: it compares the explicit pullback factors with the underived adjunction.
@@ -78,6 +127,9 @@ theorem singleComplexOpen_pullback_counit_representative
         (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V)))
           |>.mapHomotopyCategory (.up ℤ)).counit.app
           ((rX.mapHomotopyCategory (.up ℤ)).obj I)) ≫
-      rX.mapDerivedCategoryFactorsh.inv.app I := by sorry
+      rX.mapDerivedCategoryFactorsh.inv.app I := by
+  apply (cancel_mono ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategoryFactorsh.hom.app I)).1
+  simpa using
+    singleComplexOpen_pullback_counit_representative_postcomp f V I
 
 end AlgebraicGeometry
