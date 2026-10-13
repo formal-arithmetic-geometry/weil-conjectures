@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-p1-injective-ses-homotopy-boundary-lift",
+ "kind": "statement",
+ "title": "Simultaneous homotopy lift of injective SES boundaries",
+ "statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories [def-sp-abelian] with derived categories [def-weil-abstract-derived-category], and let $v:\\mathcal A\\to\\mathcal B$ be additive. Let $H$ be a short complex of bounded below integer cochain complexes [def-weil-pbc-bounded-derived-subcategories]. Assume every term of $H_1$ is injective [def-sp-injective-resolutions], and that both the underlying sequence $S$ and its termwise $v$-image are short exact. Let $\\delta_S$ and $\\delta_{vS}$ be their canonical SES boundaries [lem-weil-pbc-complex-ses-triangle]. There exists $f:qH_3\\to(qH_1)[1]$ in $K^+(\\mathcal A)$, where $q$ is the homotopy quotient, such that its localized shifted image followed by the shifted quotient-factorization comparison at $H_1$ equals the quotient-factorization comparison at $H_3$ followed by $\\delta_S$. The same $f$ mapped through $v$ on $K^+$ and localized satisfies the corresponding endpoint comparison equation for $\\delta_{vS}$. No right derived functor or derived unit appears.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014Q and 0152: degreewise split connecting map and its localized boundary"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof": [
+  {
+   "text": "Split each degree row by injectivity of the first term using ShortExact.splittingOfInjective. Construct d=homOfDegreewiseSplit and lift d to a shifted map in bounded below complexes using the inverse inclusion shift comparison. Define f by applying the bounded below homotopy quotient and its shift comparison. This is real data constructed from the given SES.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-degreewise-split-connecting-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient, bounded below inclusions, and quotientCompQhIso determine a shift-compatible natural isomorphism from the composite bounded below quotient/localization to the ambient localization. Apply ShiftedHom.map_naturality to d and use triangleOfSESδ_eq_degreewiseSplit to identify the source canonical boundary.",
+   "uses": [
+    "lem-sc-p1-split-ses-boundary-comparison",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the degreewise splittings by v. Compute degree components using homOfDegreewiseSplit_f: the mapped connecting map followed by the shift comparison equals the connecting map for the image splittings, because v preserves composition. Apply the same split-SES boundary comparison in B and naturality of the shift-compatible quotient-factorization isomorphism to obtain the second equation.",
+   "uses": [
+    "lem-weil-pbc-degreewise-split-connecting-morphism",
+    "lem-sc-p1-split-ses-boundary-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
+  "lem-sc-p1-split-ses-boundary-comparison",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014Q and 0152",
+  "note": "Extracted resolution-level boundary identification from Steps 1 and 2 of the parent node; uses the existing proved split-SES comparison and Mathlib shift naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor maps the connecting morphism of a degreewise split short exact sequence of complexes to the connecting morphism of its image",
+   "results": "Eight hits including ShortComplex.Splitting.map, map_r, map_s and mappingCone.map_δ. No complete simultaneous bounded-below homotopy lift.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"triangleOfSESδ\"",
+   "results": "Six hits including triangleOfSESδ_naturality and map_triangleOfSESδ. The latter assumes an exact functor, stronger than needed here.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "homOfDegreewiseSplit|map_triangleOfSESδ",
+   "results": "Seven hits including the degree-component formula homOfDegreewiseSplit_f and the exact-functor map lemma. Local rg also found the proved Sheaf SplitSESBoundaryComparison.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical boundary of a degreewise split short exact sequence of bounded below complexes commutes with applying an additive functor",
+   "results": "Service unavailable: Internal Server Error. Used LeanFinder, Loogle, and source grep instead.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.RightDerivedInjectiveBoundary",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Proof Step 2: comparison of the horseshoe triangle with the derived triangle, resolution-level source and image boundary identification",
+   "via": [
+    "lem-sc-p1-right-derived-injective-boundary",
+    "lem-sc-p1-horseshoe-comparison-boundary",
+    "lem-sc-p1-horseshoe-derived-triangle-comparison",
+    "lem-sc-p1-right-derived-triangle-connecting",
+    "lem-sc-p1-ext-resolution-derived-connecting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.InjectiveSESBoundaryLift",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/InjectiveSESBoundaryLift.lean",
+  "declaration": "CategoryTheory.injective_ses_homotopy_boundary_lift",
+  "statement": "theorem injective_ses_homotopy_boundary_lift\n    {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]\n    [Category.{v₂} B] [Abelian B]\n    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]\n    (v : A ⥤ B) [v.Additive] (H : ShortComplex (CochainComplex.Plus A))\n    [∀ n : ℤ, Injective (H.X₁.obj.X n)]\n    (hH : (H.map (CochainComplex.plus A).ι).ShortExact)\n    (hvH : ((H.map (CochainComplex.plus A).ι).map\n      (v.mapHomologicalComplex (.up ℤ))).ShortExact) :\n    ∃ f : (HomotopyCategory.Plus.quotient A).obj H.X₃ ⟶\n        ((HomotopyCategory.Plus.quotient A).obj H.X₁)⟦(1 : ℤ)⟧,\n      ShiftedHom.map f (DerivedCategory.Plus.Qh ⋙ DerivedCategory.Plus.ι) ≫\n          ((DerivedCategory.quotientCompQhIso A).hom.app H.X₁.obj)⟦(1 : ℤ)⟧' =\n        (DerivedCategory.quotientCompQhIso A).hom.app H.X₃.obj ≫\n          DerivedCategory.triangleOfSESδ hH ∧\n      ShiftedHom.map f\n          ((v.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh) ⋙\n            DerivedCategory.Plus.ι) ≫\n          ((DerivedCategory.quotientCompQhIso B).hom.app\n            ((v.mapHomologicalComplex (.up ℤ)).obj H.X₁.obj))⟦(1 : ℤ)⟧' =\n        (DerivedCategory.quotientCompQhIso B).hom.app\n            ((v.mapHomologicalComplex (.up ℤ)).obj H.X₃.obj) ≫\n          DerivedCategory.triangleOfSESδ hvH",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T132735-L-4151783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T132735-L-4151783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

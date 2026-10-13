@@ -12629,3 +12629,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:24 L: merged deliver/R4/Sheaf.AlgebraicGeometry.PicardExternalCechCupComponent (stage 3; reviewer PASS; first push; landing 20261013T132436-L-4128389 (interface); batch 20261013T132433; modules 3; new nodes 2)
 - 13:24 L: merged deliver/U1/Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame (stage 3; reviewer PASS; first push; landing 20261013T132437-L-4128493 (interface); batch 20261013T132433; modules 3; new nodes 2)
 - 13:24 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionInjective (stage 3; reviewer PASS; first push; landing 20261013T132437-L-4128638 (interface); batch 20261013T132433; modules 2; new nodes 1)
+- 13:27 L: merged deliver/A4/Sheaf.CategoryTheory.Abelian.RightDerivedInjectiveBoundary (stage 3; reviewer PASS; first push; landing 20261013T132735-L-4151783 (interface); batch 20261013T132734; modules 2; new nodes 1)
