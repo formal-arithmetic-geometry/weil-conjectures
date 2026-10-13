@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-affine-regular-stalk-scalar",
+ "kind": "statement",
+ "title": "Scalar endomorphisms act on the affine unit germ by their germs",
+ "statement": "Let X be a scheme [def-pc-scheme], x in an affine open U, A = Gamma(X,U), R = O_{X,x}, and H, b and mu_a as in [def-sc-affine-free-basis-germs]. For every a in A, H(mu_a)(b) = germ_U,x(a) b.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-affine-free-basis-germs"
+ ],
+ "proof": [
+  {
+   "text": "Tilde sends multiplication by a to multiplication by its structure-sheaf section. The affine chart takes that section back to a, by isoSpec_hom_appTop. The explicit regular-module sheaf isomorphism, formed from tildeSelf, restrictUnitIso and overEquiv, respects that multiplication.",
+   "uses": [
+    "def-sc-affine-free-basis-germs",
+    "lem-pc-affine-perfect-module-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ordinary direct image evaluates on U times U; scalar action is induced by restriction along the second projection. Apply the germ map to the endomorphism evaluated on 1. The germ scalar identity gives germ(a) times the explicit unit germ b.",
+   "uses": [
+    "def-sc-affine-free-basis-germs",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "def-sc-affine-free-basis-germs",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*free|free.*stalk|toStalk",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "related building blocks, no exact affine chart and ordinary direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tilde\", \"stalk\"",
+   "results": "AlgebraicGeometry.tilde.instModuleCarrierCarrierStalkAbPresheaf; AlgebraicGeometry.tilde.toStalk; AlgebraicGeometry.tilde.instIsLocalizedModuleCarrierCarrierOfCarrierStalkAbPresheafPrimeComplAsIdealHomToStalk",
+   "date": "2026-10-13",
+   "verdict": "related building blocks, no exact affine chart and ordinary direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the sheaf associated to a free module is naturally the free module over the stalk ring",
+   "results": "ModuleCat.Tilde.toStalk; ModuleCat.Tilde.stalkToFiberLinearMap_toStalk; ModuleCat.Tilde.stalkToFiberLinearMap; ModuleCat.Tilde.stalkIso_hom; SheafOfModules.freeSection; ModuleCat.Tilde.stalkIso; ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk; ModuleCat.Tilde.localizationToStalk",
+   "date": "2026-10-13",
+   "verdict": "related building blocks, no exact affine chart and ordinary direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the sheaf associated to a finite free module is the free stalk module and a scalar endomorphism acts by its germ",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFreeSheafStalkRealization",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX; construction of the bounded finite-free complex by lifting matrices, before descent of its comparison; finite-matrix spreading on an affine neighbourhood after normalization of the stalk terms; finite free stalk identification and ordinary direct-image comparison; Scalar endomorphisms act on the affine unit germ by their germs",
+   "via": [
+    "lem-sc-affine-free-sheaf-stalk-realization",
+    "lem-sc-bounded-free-stalk-complex-local-lift",
+    "lem-sc-bounded-free-stalk-complex-lift",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineRegularStalkScalar",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRegularStalkScalar.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineRegularStalkGerm_scalar",
+  "statement": "theorem affineRegularStalkGerm_scalar\n    (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)\n    (a : Γ(X, U)) :\n    (affineFreeStalkFunctor X x U hU).map (affineScalarEnd X U a)\n        (affineRegularStalkGerm X x U hxU hU) =\n      X.presheaf.germ U x hxU a • affineRegularStalkGerm X x U hxU hU",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100209-L-2499957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100209-L-2499957",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-affine-free-stalk-comparison-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of finite coordinate combinations of affine basis germs",
+ "statement": "Let X be a scheme [def-pc-scheme], x in an affine open U and let H and c_n be the explicit maps of [def-sc-affine-free-basis-germs]. For every natural number n the linear map c_n : ULift(Fin(n) -> O_{X,x}) -> H(ULift(Fin(n) -> Gamma(X,U))) is bijective.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-affine-free-basis-germs"
+ ],
+ "proof": [
+  {
+   "text": "The coordinate inclusions and projections have pi_p i_q equal to the identity when p=q and zero otherwise, and their opposite composites sum to the identity. Additivity carries these identities through H, so the H(pi_p) are jointly injective and H(pi_p)c_n(v) = c(v_p).",
+   "uses": [
+    "def-sc-affine-free-basis-germs"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Injectivity of c implies injectivity of c_n by applying each H(pi_p). For a target element choose preimages under c of each of its projected coordinates; the resulting tuple maps to it because its projected coordinates agree. The reconstruction identity handles n=0 as well.",
+   "uses": [
+    "lem-sc-affine-regular-stalk-comparison-bijective",
+    "def-sc-affine-free-basis-germs"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-affine-free-basis-germs",
+  "lem-sc-affine-regular-stalk-comparison-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*free|free.*stalk|toStalk",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "related building blocks, no exact affine chart and ordinary direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tilde\", \"stalk\"",
+   "results": "AlgebraicGeometry.tilde.instModuleCarrierCarrierStalkAbPresheaf; AlgebraicGeometry.tilde.toStalk; AlgebraicGeometry.tilde.instIsLocalizedModuleCarrierCarrierOfCarrierStalkAbPresheafPrimeComplAsIdealHomToStalk",
+   "date": "2026-10-13",
+   "verdict": "related building blocks, no exact affine chart and ordinary direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the sheaf associated to a free module is naturally the free module over the stalk ring",
+   "results": "ModuleCat.Tilde.toStalk; ModuleCat.Tilde.stalkToFiberLinearMap_toStalk; ModuleCat.Tilde.stalkToFiberLinearMap; ModuleCat.Tilde.stalkIso_hom; SheafOfModules.freeSection; ModuleCat.Tilde.stalkIso; ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk; ModuleCat.Tilde.localizationToStalk",
+   "date": "2026-10-13",
+   "verdict": "related building blocks, no exact affine chart and ordinary direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the sheaf associated to a finite free module is the free stalk module and a scalar endomorphism acts by its germ",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFreeSheafStalkRealization",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX; construction of the bounded finite-free complex by lifting matrices, before descent of its comparison; finite-matrix spreading on an affine neighbourhood after normalization of the stalk terms; finite free stalk identification and ordinary direct-image comparison; Bijectivity of finite coordinate combinations of affine basis germs",
+   "via": [
+    "lem-sc-affine-free-sheaf-stalk-realization",
+    "lem-sc-bounded-free-stalk-complex-local-lift",
+    "lem-sc-bounded-free-stalk-complex-lift",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeStalkComparisonBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeStalkComparisonBijective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineFreeStalkComparison_bijective",
+  "statement": "theorem affineFreeStalkComparison_bijective\n    (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)\n    (n : ℕ) : Function.Bijective (affineFreeStalkComparison X x U hxU hU n)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100209-L-2499957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100209-L-2499957",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
