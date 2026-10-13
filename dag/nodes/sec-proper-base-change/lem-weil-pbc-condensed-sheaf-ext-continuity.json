@@ -1,0 +1,114 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "item": "prop-weil-pbc-qbar-condensed-two-colimit",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "id": "lem-weil-pbc-condensed-sheaf-ext-continuity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "## Proof, first sentence: \"the descent formula preserves this property through the common-stage colimit of [def-weil-pbc-qbar-category]\"; single-sheaf continuity input needed to justify the condensed common-stage Hom colimit (source master TwoColimit supplies the actual condensed categories).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived continuity for a single constructible condensed module sheaf",
+ "statement": "Fix a prime $\\ell$ [def-weil-l-adic-numbers], an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-algebraic-closure], and a scheme $T$ [def-pc-scheme] whose underlying space is noetherian (every ascending chain of open subsets stabilizes). For finite intermediate fields $E\\subseteq\\Omega$ [def-weil-finite-subextension-directed-set], put $E_T^c=p_T^*C(-,E)$ using [def-weil-pbc-condensed-e-module-category]. Put $\\Omega_T^c=p_T^*\\underline\\Omega$, where $\\underline\\Omega(S)$ consists of continuous functions on a profinite set $S$ with image in one finite intermediate field. A module sheaf is constructible if it has a finite locally closed stratification on each stratum of which it is pro-etale locally the cokernel of a map between finite rank free modules over the restricted coefficient ring. Fix a finite $E$, a constructible $E_T^c$-module sheaf $M$, and a small filtered diagram $(N_i^\\bullet)$ of complexes of $E_T^c$-module sheaves [def-weil-size-convention]. Assume there is one integer $a$ such that $N_i^r=0$ for every $i$ and $r<a$. Let $N^\\bullet=\\varinjlim_i N_i^\\bullet$ be the termwise sheaf colimit and regard these complexes and $M[0]$ in the derived category [def-weil-abstract-derived-category]. For every integer $n$, the natural map $$\\varinjlim_i\\operatorname{Hom}_{D(\\operatorname{Mod}_{E_T^c})}(M[0],N_i^\\bullet[n])\\longrightarrow\\operatorname{Hom}_{D(\\operatorname{Mod}_{E_T^c})}(M[0],N^\\bullet[n])$$ is an isomorphism of abelian groups. The maps are the ones induced by the colimit cocone and are natural in $M$, in maps of the filtered diagrams, and in shifts.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "module docstring, Sorried input (Hom): the assertion for locally finitely presented modules into uniformly bounded below complexes; sheaf base case only"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Ext\" \"colimit\"",
+   "results": "0 hits: ; loogle: Function expected at\n  \"Ext\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"colimit\"",
+   "date": "2026-10-14",
+   "verdict": "invalid query; not evidence of mathematical absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from a stratified locally finitely presented pro-etale module sheaf commutes with filtered colimits of uniformly bounded below complexes",
+   "results": "8 hits: localCohomology.diagram, localCohomology.ofDiagram, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.Presentation.isColimit, Condensed.instAB5CondensedMod, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, instHasColimitsCondensedMod, localCohomology.hasColimitDiagram; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*[Cc]olimit|[Cc]olimit.*Ext",
+   "results": "25 hits: Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/Condensed/AB.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/HasColimits.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived Hom from a locally finitely presented constructible sheaf commutes with uniformly bounded below filtered colimits",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf is FP infinity on a noetherian pro-etale site: derived maps into bounded below filtered colimits",
+   "results": "8 hits: SheafOfModules.IsFiniteType, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\" \"colimit\"",
+   "results": "0 hits: ; loogle: Function expected at\n  \"Ext\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"colimit\"",
+   "date": "2026-10-14",
+   "verdict": "invalid query; not evidence of mathematical absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"colimit\"",
+   "results": "12 hits: CategoryTheory.Limits.IsColimit.extendIso, CategoryTheory.Limits.IsColimit.ofExtendIso, CategoryTheory.Limits.IsColimit.extendIsoEquiv, CategoryTheory.Limits.IsColimit.hom_ext, CategoryTheory.Limits.colimit.desc_extend, CategoryTheory.Limits.colimit.hom_ext, CategoryTheory.Limits.colimit.hom_ext_iff, CategoryTheory.Limits.BinaryCofan.IsColimit.hom_ext; ",
+   "date": "2026-10-14",
+   "verdict": "no match; generic ordinary-module or colimit results do not state the condensed sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*filtered|filtered.*Ext|isTriangulated_boundedConstructible|IsLocallyFinitelyPresented",
+   "results": "5 hits: Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean, Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean, Mathlib/FieldTheory/CardinalEmb.lean, Mathlib/CategoryTheory/Filtered/Basic.lean, Mathlib/CategoryTheory/Filtered/Basic.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match; generic ordinary-module or colimit results do not state the condensed sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely presented sheaves Ext preserves filtered colimits bounded below derived category",
+   "results": "8 hits: CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.hasExt_iff, CategoryTheory.hasExt_of_enoughInjectives, CategoryTheory.hasExt_of_hasDerivedCategory, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt, CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
