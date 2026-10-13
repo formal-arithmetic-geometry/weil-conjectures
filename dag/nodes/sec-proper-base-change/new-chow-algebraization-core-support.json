@@ -15,11 +15,11 @@
   "place": "Theorem 088E, projective compactification argument; Tag 088E"
  },
  "stmt_deps": [
-  "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-adically-complete-ring",
   "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-coherent-formal-module"
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-weil-pbc-closed-subset-proper-over-base"
  ],
  "status": "split",
  "created": {
@@ -29,9 +29,9 @@
   "group": "J1"
  },
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Theorem 088E, projective compactification argument"
+  "place": "Theorem 088E, displayed support equation, boundary avoidance, and restriction paragraphs; G1 Lean proof"
  },
  "mathlib_searches": [
   {
@@ -63,10 +63,18 @@
  "merged_into": null,
  "id": "new-chow-algebraization-core-support",
  "title": "Proper support of the algebraization candidate",
- "statement": "Under the hypotheses above, let F be a coherent module on Y and suppose its formal completion is isomorphic to the tensor pullback of G. Then F has support proper over Spec A.",
+ "statement": "Let $A$ be a commutative ring complete for an ideal $I$ [def-weil-pbc-adically-complete-ring]. Let $P$ be a locally Noetherian scheme with a proper morphism $p:P\\to\\operatorname{Spec}A$ [def-weil-proper-morphism], and let $j:Y\\to P$ be an open immersion. Let $F'$ and $F$ be coherent modules [pqf-def-coherent] on $P$ and $Y$, respectively, with $j^*F'\\simeq F$ [def-pc-module-pullback]. Assume $\\operatorname{Supp}(F')\\cap p^{-1}V(I)\\subset j(Y)$. Then $F$ has support proper over $A$ [def-weil-pbc-closed-subset-proper-over-base].",
  "proof": [
   {
-   "text": "Identify the support of F with the transported support of the pulled formal system using the completion isomorphism and Nakayama. Pullback preserves the proper support of G and proper q preserves properness; the resulting closed subset is proper over Spec A.",
+   "text": "The coherent support C on P is closed by finite-type module support. For its closed boundary C minus j(Y), properness makes the image in Spec A closed. A nonempty such image contains a maximal ideal, which contains I by the adic-complete Jacobson-radical lemma. A point above it contradicts the given closed-fibre containment. Thus C lies inside j(Y).",
+   "uses": [
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-adic-complete-jacobson-radical"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The reduced induced closed subscheme of C is proper over A. Lift its inclusion uniquely through the open immersion j; the lift is closed because its composite with the separated j is closed. Its range equals the inverse image of C, identified with Supp(F) by finite-type pullback support and the restriction isomorphism. Apply the closed-subset properness criterion with this closed subscheme structure.",
    "uses": [
     "lem-weil-pbc-support-pullback-finite-type",
     "lem-weil-pbc-closed-subset-proper-over-base-properties"
@@ -75,15 +83,16 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-support-pullback-finite-type",
-  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-support-pullback-finite-type"
  ],
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.ChowAlgebraizationCoreSupport",
   "file": "lean/Sheaf/AlgebraicGeometry/ChowAlgebraizationCoreSupport.lean",
   "declaration": "AlgebraicGeometry.chow_algebraization_candidate_support",
-  "statement": "theorem chow_algebraization_candidate_support\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) [IsAdicComplete I A]\n    {Z : Scheme.{u}} [IsNoetherian Z] (f : Z ⟶ Spec (.of A))\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (Q : Z.IdealSheafData)\n    (hQ : Q = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (G : CoherentFormalModule Z Q)\n    (hR : Scheme.Modules.HasSupportProperOver f (G.obj.obj (op 0)))\n    (Y : Scheme.{u}) (q : Y ⟶ Z) [IsProper q]\n    (F : CoherentModules Y)\n    (hF : Nonempty (G.obj ⋙ Scheme.Modules.tensorPullback q ≅\n      formalCompletionSystem (Q.comap q) F.obj)) :\n    Scheme.Modules.HasSupportProperOver (q ≫ f) F.obj",
+  "statement": "theorem chow_algebraization_candidate_support (A : Type u) [CommRing A] (I : Ideal A) [IsAdicComplete I A] {P Y : Scheme.{u}} [IsLocallyNoetherian P] (p : P ⟶ Spec (.of A)) [IsProper p] (j : Y ⟶ P) [IsOpenImmersion j] (F' : CoherentModules P) (F : CoherentModules Y) (eF : (Scheme.Modules.tensorPullback j).obj F'.obj ≅ F.obj) (hSupport : {x : P | ¬ Subsingleton (F'.obj.presheaf.stalk x)} ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) ⊆ Set.range j) : Scheme.Modules.HasSupportProperOver (j ≫ p) F.obj",
   "branch": "sheaf-dag",
   "by": "J1",
   "date": "2026-10-13"
@@ -103,17 +112,49 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-30a85",
-  "group": "R2",
+  "reviewer": "X-a094a",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T000047-L-2232075",
-  "kind": "proof",
-  "note": "independent Codex review: Packet, delivered file, node metadata, report, and lcompile.py compilation match; the STATEMENT-DISPUTED counterexample is mathematically valid.",
-  "sorry_before": [
-   "AlgebraicGeometry.chow_algebraization_candidate_support"
+  "landing": "20261013T024033-L-3334100",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs match the corrected nodes and Stacks 088E; all modules and direct importers compile, axioms are permitted, and the original caller failure confirms the minimal forced adaptation."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "G1 stage 2",
+  "old_statement": "Under the hypotheses above, let F be a coherent module on Y and suppose its formal completion is isomorphic to the tensor pullback of G. Then F has support proper over Spec A.",
+  "what": "Repair the false support inference for arbitrary algebraizations: retain the proper compactification, restriction isomorphism, and closed-fibre containment used in Stacks 088E. The sole caller keeps its original signature and obtains this construction data explicitly. No target or definition changes.",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Theorem 088E, projective compactification argument; Tag 088E"
+  },
+  "citers": [
+   {
+    "id": "new-chow-algebraization-core",
+    "holds": true,
+    "note": "The core existence statement is unchanged; its proof is forced to obtain compactification data rather than apply the false arbitrary-candidate implication."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.chow_algebraization_candidate_support"
+  "old_stmt_deps": [
+   "def-weil-pbc-noetherian-ring",
+   "def-weil-pbc-adically-complete-ring",
+   "def-weil-proper-morphism",
+   "def-weil-finite-type-morphism",
+   "def-weil-pbc-coherent-formal-module"
+  ],
+  "old_proof": [
+   {
+    "text": "Identify the support of F with the transported support of the pulled formal system using the completion isomorphism and Nakayama. Pullback preserves the proper support of G and proper q preserves properness; the resulting closed subset is proper over Spec A.",
+    "uses": [
+     "lem-weil-pbc-support-pullback-finite-type",
+     "lem-weil-pbc-closed-subset-proper-over-base-properties"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-support-pullback-finite-type",
+   "lem-weil-pbc-closed-subset-proper-over-base-properties"
   ]
  }
 }

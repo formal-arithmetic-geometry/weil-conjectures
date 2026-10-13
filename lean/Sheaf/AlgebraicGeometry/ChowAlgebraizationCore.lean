@@ -6,7 +6,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.ChowAlgebraizationCoreCandidate
+import Sheaf.AlgebraicGeometry.ChowAlgebraizationCompactificationData
 import Sheaf.AlgebraicGeometry.ChowAlgebraizationCoreSupport
 
 @[expose] public section
@@ -58,8 +58,12 @@ theorem exists_chow_algebraization_core
       Nonempty (G.obj ⋙ Scheme.Modules.tensorPullback q ≅
         formalCompletionSystem (Q.comap q) F.obj) ∧
       Scheme.Modules.HasSupportProperOver (q ≫ f) F.obj := by
-  obtain ⟨F, hF⟩ := exists_chow_algebraization_core_candidate A I f Q hQ G hR Y q n e he
+  obtain ⟨P, p, j, F', F, hP, hp, hj, hcomp, heF, hF, hs⟩ :=
+    exists_chow_algebraization_compactification_data A I f Q hQ G hR Y q n e he
+  have : IsNoetherian P := hP
+  obtain ⟨eF⟩ := heF
   refine ⟨F, hF, ?_⟩
-  exact chow_algebraization_candidate_support A I f Q hQ G hR Y q F hF
+  have h := chow_algebraization_candidate_support A I p j F' F eF hs
+  simpa only [hcomp] using h
 
 end AlgebraicGeometry

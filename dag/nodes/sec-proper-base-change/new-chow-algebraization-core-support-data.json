@@ -1,0 +1,151 @@
+{
+ "id": "new-chow-algebraization-core-support-data",
+ "kind": "statement",
+ "title": "Compactification data for the algebraization candidate",
+ "statement": "Let $A$ be a commutative Noetherian ring complete for an ideal $I$, let $f:Z\\to\\operatorname{Spec}A$ be separated and of finite type with $Z$ Noetherian, and set $Q=I\\mathcal O_Z$ [def-weil-pbc-coherent-formal-module]. Let $G$ be a coherent formal $Q$-module whose first term has support proper over $A$ [def-weil-pbc-closed-subset-proper-over-base]. Let $q:Y\\to Z$ be proper and let $e:Y\\to\\mathbf P^n_A$ be an immersion over $A$. Then there exist a Noetherian $P$, proper $p:P\\to\\operatorname{Spec}A$, an open immersion $j:Y\\to P$ with $pj=fq$, and coherent modules $F'$ on $P$ and $F$ on $Y$ [pqf-def-coherent], such that $j^*F'\\simeq F$, the $Q\\mathcal O_Y$-adic completion of $F$ is isomorphic to $q^*G$, and $\\operatorname{Supp}(F')\\cap p^{-1}V(I)\\subset j(Y)$. No support condition away from the closed fibre is asserted.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, Chow compactification, projective algebraization, and boundary-support paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Factor the supplied immersion through its scheme-theoretic image P, a closed subscheme of projective space, obtaining an open immersion j. Properness over the Noetherian A makes P Noetherian. Pull G back termwise; the formal pullback theorem gives coherence and quotient compatibility. Finite-type pullback support and the constant formal support lemma identify every term support with q inverse Supp(G_0), proper over A. Its image in the separated P is closed.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-formal-system-support-constant",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the pulled terms by j_*. The coherent open pushforward lemma applies to their common closed support; all terms vanish off that support. Quotient compatibility on j(Y) and vanishing outside give a coherent formal system on P. Apply projective existence to obtain F prime. Restriction commutes with completion and yields F, the restriction isomorphism, and the desired completion isomorphism.",
+   "uses": [
+    "lem-weil-pbc-pushforward-coherent-on-open",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "lem-weil-pbc-formal-systems-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Nakayama at each point of the adic closed fibre identifies the support of F prime there with the support of its quotient by I. This quotient is the extended first term and is supported in j(Y). Thus the closed-fibre support containment holds. Boundary removal and proper-support transport are deliberately deferred to the proved support theorem.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-formal-system-support-constant",
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-grothendieck-existence-projective",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-pushforward-coherent-on-open",
+  "lem-weil-pbc-support-pullback-finite-type"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, proof paragraphs after Chow's lemma"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projective compactification coherent formal system algebraization closed fibre support",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsOpenImmersion\"",
+   "results": "0 hits; no compactification formal algebraization statement.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*support|support.*compactification",
+   "results": "0 Mathlib hits. Local library search inspected FormalSystemsPullback, GrothendieckExistenceProjective, ChowAlgebraizationCoreCandidate, and FiniteTypeModuleSupportPullback; no theorem supplies the retained compactification data.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaf algebraization on projective closure of an open subscheme formal completion support",
+   "results": "Second reader: 8 hits, all Proj constructions/basic properties; none supplies coherent compactification algebraization with closed-fibre support.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"CoherentModules\"",
+   "results": "Second reader: 0 hits.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*support|support.*formal|compactification|algebraiz",
+   "results": "Second reader: 25 Mathlib hits inspected, none matching. Read current ChowAlgebraizationCoreCandidate and ChowFormalSystemExtension; the extension existence only specifies restriction and cannot guarantee closed-fibre support in the compactification.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowAlgebraizationCoreSupport",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-chow-algebraization-core",
+   "place": "strict decomposition of the projective algebraization argument",
+   "via": [
+    "new-chow-algebraization-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowAlgebraizationCompactificationData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowAlgebraizationCompactificationData.lean",
+  "declaration": "AlgebraicGeometry.exists_chow_algebraization_compactification_data",
+  "statement": "theorem exists_chow_algebraization_compactification_data (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] {Z : Scheme.{u}} [IsNoetherian Z] (f : Z ⟶ Spec (.of A)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (Q : Z.IdealSheafData) (hQ : Q = (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) (G : CoherentFormalModule Z Q) (hR : Scheme.Modules.HasSupportProperOver f (G.obj.obj (op 0))) (Y : Scheme.{u}) (q : Y ⟶ Z) [IsProper q] (n : ℕ) (e : Y ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A))) [IsImmersion e] (he : e ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ↘ Spec (.of A)) = q ≫ f) : ∃ (P : Scheme.{u}) (p : P ⟶ Spec (.of A)) (j : Y ⟶ P) (F' : CoherentModules P) (F : CoherentModules Y), IsNoetherian P ∧ IsProper p ∧ IsOpenImmersion j ∧ j ≫ p = q ≫ f ∧ Nonempty ((Scheme.Modules.tensorPullback j).obj F'.obj ≅ F.obj) ∧ Nonempty (G.obj ⋙ Scheme.Modules.tensorPullback q ≅ formalCompletionSystem (Q.comap q) F.obj) ∧ {x : P | ¬ Subsingleton (F'.obj.presheaf.stalk x)} ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) ⊆ Set.range j",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a094a",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T024033-L-3334100",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a094a",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T024033-L-3334100",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs match the corrected nodes and Stacks 088E; all modules and direct importers compile, axioms are permitted, and the original caller failure confirms the minimal forced adaptation."
+ }
+}
