@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-right-adjoint-mate-successive-base-change",
+ "kind": "statement",
+ "title": "Right-adjoint mate pasting on a genuine iterated pullback",
+ "statement": "Let X,Y,S,T be quasi-compact quasi-separated schemes, f:X→Y be qcqs, g:S→Y and h:T→S be morphisms. Write P=pullback(f,g), Q=pullback(P→S,h), and A=pullback(f,h followed by g). Choose right adjoints a,aS,c,d, with adjunctions, for the canonical lifted direct images X→Y, P→S, A→T, and Q→T. Assume ordinary base change for each of these three squares (f,g), (f,h followed by g), and (P→S,h) is invertible on every quasi-coherent derived object. Fix K in D_QCoh(Y). Let k:Q→A satisfy that its X-projection is Q→P→X and its T-projection is Q→T. Let G be the ambient rectangle mate at K pulled back along k, O be the ambient (f,g) mate at K pulled back along Q→P, and H be the ambient (P→S,h) mate at Lg* K. There exist isomorphisms e0:G.left≅O.left, e1:O.right≅H.left and e2:G.right≅H.right with G.hom followed by e2.hom equal to e0.hom followed by O.hom followed by e1.hom followed by H.hom. No open restriction is used here, and no second mate is assumed invertible. Schemes, fibre products, derived categories, pullback, direct image, the canonical lifted qcqs direct image, ordinary base change and the fixed second mate are as in [def-weil-pbc-scheme-conventions, def-pc-fibre-product, def-pc-derived-category, def-pc-derived-pullback, def-pc-derived-direct-image, lem-pc-qcqs-derived-direct-image-right-adjoint, def-pc-derived-base-change-map, def-sc-duality-equation-base-change-map].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0ATR",
+  "place": "Tag 0ATR, Lemma 48.5.2, diagram and final equality of the two conjugate composites; ordinary invertibility hypotheses replace the Tor-independence hypotheses which supply them"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "def-pc-derived-base-change-map",
+  "def-sc-duality-equation-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "The projection equations uniquely identify k with the iterated-pullback comparison. Pullback composition gives the source comparison. Direct-image composition and right-adjoint uniqueness give the middle and target comparisons, using the pasted units and counits of the specified adjunctions.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose ordinary base change under the composite pullback/direct-image adjunction, using its counit formula. Pullback associativity identifies the two counit transposes for the rectangle and the pasted squares. Injectivity of the Hom equivalence proves the ordinary pasting identity.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-derived-base-change-pasting",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the three second mates. Conjugation preserves composition; since all ordinary comparison components are invertible, it preserves their inverses. Move the conjugates through the units by naturality, then move the counits and cancel the middle unit/counit pair with the triangle identities. The remaining factors are e0, O, e1, H on one side and G,e2 on the other.",
+   "uses": [
+    "def-sc-duality-equation-base-change-map",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-sc-duality-equation-base-change-map",
+  "lem-cat-right-adjoint-composition",
+  "lem-pc-derived-base-change-pasting",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K1",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Duality for Schemes",
+  "place": "Tag 0ATR, Lemma 48.5.2, diagram and final equality of the two conjugate composites; ordinary invertibility hypotheses replace the Tor-independence hypotheses which supply them",
+  "note": "Categorical specialization of the cited proof, retaining invertibility only of ordinary base change; Tor independence in the source supplies that premise and is not used otherwise."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint base change mate for composite cartesian squares equals composition of mates",
+   "results": "8 hits: CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_apply, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction or underived tools only; no theorem identifying these fixed derived mates."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction or underived tools only; no theorem identifying these fixed derived mates."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|conjugateEquiv_comp|pullbackRestrictIsoRestrict",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction or underived tools only; no theorem identifying these fixed derived mates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint base change mates compose for two successive cartesian squares",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RightAdjointMateOldBaseOpenFactorization",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0ATR, Lemma 48.5.2, diagram and final equality of the two conjugate composites; ordinary invertibility hypotheses replace the Tor-independence hypotheses which supply them",
+   "via": [
+    "lem-sc-right-adjoint-mate-old-base-open-factorization"
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RightAdjointMateSuccessiveBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/RightAdjointMateSuccessiveBaseChange.lean",
+  "declaration": "AlgebraicGeometry.rightAdjoint_mate_successive_baseChange",
+  "statement": "theorem rightAdjoint_mate_successive_baseChange\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y S T : Scheme.{u}}\n    [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]\n    [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace T] [QuasiSeparatedSpace T]\n    (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (g : S ⟶ Y) (h : T ⟶ S)\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (aS : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory (pullback f g))\n    (c : schemeDerivedQCohCategory T ⥤ schemeDerivedQCohCategory (pullback f (h ≫ g)))\n    (d : schemeDerivedQCohCategory T ⥤\n      schemeDerivedQCohCategory (pullback (pullback.snd f g) h))\n    (adja : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)\n      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n        (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _\n        f _ _).fst E.obj E.property) ⊣ a)\n    (adjS : (schemeDerivedQCohProperty S).lift\n      ((schemeDerivedQCohProperty (pullback f g)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f g))\n      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n        (pullback.snd f g) _ _).fst E.obj E.property) ⊣ aS)\n    (adjc : (schemeDerivedQCohProperty T).lift\n      ((schemeDerivedQCohProperty (pullback f (h ≫ g))).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f (h ≫ g)))\n      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))) _ _ _ _\n        (pullback.snd f (h ≫ g)) _ _).fst E.obj E.property) ⊣ c)\n    (adjd : (schemeDerivedQCohProperty T).lift\n      ((schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd (pullback.snd f g) h))\n      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)) _ _ _ _\n        (pullback.snd (pullback.snd f g) h) _ _).fst E.obj E.property) ⊣ d)\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f (h ≫ g)) (h ≫ g)\n        (pullback.fst f (h ≫ g)) pullback.condition E.obj))\n    (hβS : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g\n        (pullback.fst f g) pullback.condition E.obj))\n    (hβI : ∀ E : schemeDerivedQCohCategory (pullback f g),\n      IsIso (schemeDerivedBaseChangeMap (pullback.snd f g) (pullback.snd (pullback.snd f g) h) h\n        (pullback.fst (pullback.snd f g) h) pullback.condition E.obj))\n    (K : schemeDerivedQCohCategory Y)\n    (k : pullback (pullback.snd f g) h ⟶ pullback f (h ≫ g))\n    (hk₁ : k ≫ pullback.fst f (h ≫ g) =\n      pullback.fst (pullback.snd f g) h ≫ pullback.fst f g)\n    (hk₂ : k ≫ pullback.snd f (h ≫ g) = pullback.snd (pullback.snd f g) h) :\n    let G := Arrow.mk ((derivedPullback k).map\n      ((schemeDerivedQCohProperty (pullback f (h ≫ g))).ι.map\n      (dualityEquationBaseChangeMap f (h ≫ g) a c adja adjc hβ K)))\n    let O := Arrow.mk ((derivedPullback (pullback.fst (pullback.snd f g) h)).map\n      ((schemeDerivedQCohProperty (pullback f g)).ι.map\n      (dualityEquationBaseChangeMap f g a aS adja adjS hβS K)))\n    let H := Arrow.mk ((schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.map\n      (@dualityEquationBaseChangeMap _ (pullback f g) S T _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n        (pullback.snd f g) h aS d adjS adjd hβI ⟨(derivedPullback g).obj K.obj,\n        (derivedPullback_tensor_preserve_QCoh g).1 K.obj K.property⟩))\n    ∃ (e₀ : G.left ≅ O.left) (e₁ : O.right ≅ H.left) (e₂ : G.right ≅ H.right),\n      G.hom ≫ e₂.hom = e₀.hom ≫ O.hom ≫ e₁.hom ≫ H.hom",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T113346-L-3185269",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T113346-L-3185269",
+  "kind": "interface"
+ }
+}
