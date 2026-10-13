@@ -16,51 +16,43 @@
  },
  "proof": [
   {
-   "text": "Use the affine quasi-coherent derived equivalence to represent Q by an R-module complex M. A K-flat resolution P of M computes its derived extension and its termwise tilde is K-flat.",
+   "text": "Represent Q by Q(tilde M) with M K-flat, using the proved affine module-complex model theorem.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-affine-qcoh-complex-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tags 06Z0 (lemma-affine-compare-bounded), 08DV (lemma-affine-K-flat), 08DW (lemma-quasi-coherence-pullback), and 0AA7, construction of the extension/restriction adjunct"
-   }
+   "elementary": false
   },
   {
-   "text": "The tilde/pullback formula identifies Lg*Q with the tilde of derived extension of M. Derived sections over B recover that extension through the affine equivalence. The extension/restriction adjunction on these complexes agrees with the underived tensor-pullback/direct-image adjunction and descends through localization, preserving its unit.",
-   "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "def-pc-affine-global-hom-base-change-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tags 06Z0 (lemma-affine-compare-bounded), 08DV (lemma-affine-K-flat), 08DW (lemma-quasi-coherence-pullback), and 0AA7, construction of the extension/restriction adjunct"
-   }
-  },
-  {
-   "text": "Uniqueness of left adjoints to fixed derived scalar restriction transports this adjunction to affineDerivedExtensionAdjunction. The transported left-adjoint isomorphism is a. Identity on underived sections and the normalization equation for r identify the right-adjoint comparison by the right-derived universal property. The transported unit equation is exactly the asserted equality.",
+   "text": "Define n(K) as the transpose of Gamma_R(unit_g(K)) followed by r at Lg*K. Adjunction naturality, naturality of the pullback unit, and naturality of r show n(K);Gamma_B(Lg*f)=Ext(Gamma_R(f));n(Kprime).",
    "uses": [
     "def-pc-affine-global-hom-base-change-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tags 06Z0 (lemma-affine-compare-bounded), 08DV (lemma-affine-K-flat), 08DW (lemma-quasi-coherence-pullback), and 0AA7, construction of the extension/restriction adjunct"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The model-mate theorem makes n invertible at Q(tilde M). Apply the naturality square to the model isomorphism Q to Q(tilde M). All other sides are functorial images of isomorphisms, so cancel the right side to obtain invertibility of n(Q).",
+   "uses": [
+    "lem-pc-affine-extension-sections-model-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take a=asIso(n(Q)). The apply_symm_apply equation of the extension/restriction Hom equivalence gives exactly the displayed unit equation.",
+   "uses": [
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "def-pc-affine-global-hom-base-change-map"
+  "lem-pc-affine-qcoh-complex-model",
+  "def-pc-affine-global-hom-base-change-map",
+  "lem-pc-affine-extension-sections-model-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 06Z0 (lemma-affine-compare-bounded), 08DV (lemma-affine-K-flat), 08DW (lemma-quasi-coherence-pullback), and 0AA7, construction of the extension/restriction adjunct; explicit normalization refinement of parent proof steps"
+  "place": "Tags 06Z0, 08DV, 08DW, 0AA7; explicit naturality transport from K-flat affine models"
  },
  "blueprint": {
   "is": null,
@@ -134,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T100024-L-2467844",
+  "landing": "20261013T111921-L-3062387",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

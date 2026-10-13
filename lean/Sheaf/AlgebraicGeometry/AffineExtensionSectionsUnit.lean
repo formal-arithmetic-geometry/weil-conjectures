@@ -6,8 +6,8 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.AffineQCohComplexModel
+import Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelMate
 
 /-! # Unit compatibility of affine extension and sections
 
@@ -84,6 +84,48 @@ theorem exists_affineExtensionSectionsUnit
         (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory.map a.hom =
       (affineDerivedGlobalSections (𝟙 (Spec R))).map
           ((canonicalPullbackAdjunction g).unit.app Q) ≫
-        r.hom.app ((derivedPullback g).obj Q) := by sorry
+        r.hom.app ((derivedPullback g).obj Q) := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  classical
+  obtain ⟨M, hM, ⟨e⟩⟩ := exists_affineQCohComplexModel Q hQ
+  let ΓR := affineDerivedGlobalSections (𝟙 (Spec R))
+  let ΓB := affineDerivedGlobalSections (𝟙 (Spec B))
+  let L := derivedPullback g
+  let E := affineDerivedExtension g
+  let S := (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory
+  let adj := affineDerivedExtensionAdjunction g
+  let n (K : schemeDerivedCategory (Spec R)) :=
+    (adj.homEquiv _ _).symm
+      (ΓR.map ((canonicalPullbackAdjunction g).unit.app K) ≫ r.hom.app (L.obj K))
+  have hn (K K' : schemeDerivedCategory (Spec R)) (f : K ⟶ K') :
+      n K ≫ ΓB.map (L.map f) = E.map (ΓR.map f) ≫ n K' := by
+    dsimp only [n]
+    erw [← adj.homEquiv_naturality_right_symm, ← adj.homEquiv_naturality_left_symm]
+    congr 1
+    have hunit := (canonicalPullbackAdjunction g).unit.naturality f
+    have hrnat := r.hom.naturality (L.map f)
+    dsimp only [Functor.comp_map, Functor.id_map] at hunit hrnat
+    rw [Category.assoc]
+    erw [← hrnat]
+    rw [← Category.assoc]
+    erw [← ΓR.map_comp]
+    erw [← hunit]
+    rw [ΓR.map_comp, Category.assoc]
+  let T := @Functor.mapHomologicalComplex _ _ _ _ _ _ _
+    (@id (ModuleCat.{u} R ⥤
+      SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))
+      (tilde.functor R)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
+  have hmodel : IsIso (n (DerivedCategory.Q.obj (T.obj M))) := by
+    exact affineExtensionSections_model_mate_isIso g v r hv hr M hM
+  have hniso : IsIso (n Q) := by
+    have h := hn Q _ e.hom
+    have he : IsIso (ΓB.map (L.map e.hom)) := by infer_instance
+    have hright : IsIso (E.map (ΓR.map e.hom) ≫ n _) := by infer_instance
+    have hcomp : IsIso (n Q ≫ ΓB.map (L.map e.hom)) := h ▸ hright
+    exact IsIso.of_isIso_comp_right (n Q) (ΓB.map (L.map e.hom))
+  refine ⟨asIso (n Q), ?_⟩
+  change adj.unit.app (ΓR.obj Q) ≫ S.map (n Q) = _
+  exact (adj.homEquiv _ _).apply_symm_apply _
 
 end AlgebraicGeometry

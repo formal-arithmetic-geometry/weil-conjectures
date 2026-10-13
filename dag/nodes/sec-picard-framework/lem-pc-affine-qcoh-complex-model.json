@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-affine-qcoh-complex-model",
+ "kind": "statement",
+ "title": "K-flat module-complex model for a quasi-coherent affine derived object",
+ "statement": "For a commutative ring R, every Q in D_QCoh(Spec R) [def-pc-derived-category, def-pc-scheme] is isomorphic in the sheaf derived category to Q(tilde M) for a K-flat cochain complex M of R-modules [def-pc-module-kflat-complex]. The tilde functor is applied termwise. There is no boundedness or flatness assumption on Q.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-module-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 06Z0 (lemma-affine-compare-bounded), with K-flat module resolutions, Tag 08DV"
+ },
+ "proof": [
+  {
+   "text": "Apply the core affine derived equivalence to the full-subcategory object (Q,hQ). Choose a complex representing its inverse image under the essentially surjective derived localization. Apply the equivalence functor, its counit, the fully faithful inclusion, and the termwise tilde comparison to get Q isomorphic to Q(tilde M).",
+   "uses": [
+    "new-affine-qcoh-derived-equivalence-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve M by a K-flat module complex P with quasi-isomorphism pi. Localization inverts pi. The equivalence and inclusion preserve that isomorphism. The natural tilde comparison transports invertibility to Q(tilde pi). Compose the model isomorphism with its inverse to obtain Q isomorphic to Q(tilde P).",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-affine-qcoh-derived-equivalence-core",
+  "lem-pc-source-module-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 06Z0 (lemma-affine-compare-bounded), with K-flat module resolutions, Tag 08DV; explicit formal specialization and localization argument"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 affine extension and sections unit argument: K-flat module-complex model for a quasi-coherent affine derived object",
+   "via": [
+    "lem-pc-affine-extension-sections-unit",
+    "lem-pc-affine-sections-base-change-mate",
+    "lem-pc-affine-global-hom-base-change-factorization",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine derived pullback sections adjunction unit transpose isomorphism K flat complex",
+   "results": "Service returned Internal Server Error; unavailable.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi coherent derived object affine scheme isomorphic associated sheaf complex K flat modules",
+   "results": "Eight hits on ordinary affine sheaves, flat morphisms, and quasicoherence; no derived model or normalized mate result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*isIso|isIso.*homEquiv|tilde.*unit; objObjPreimageIso; exists_quasiIso_flat_kFlat",
+   "results": "Mathlib has underived tilde unit invertibility and generic adjunction naturality. The source library supplies module K-flat resolutions. AffineModuleComplexRepresentative supplies a Gamma-ring representative, not the stated K-flat representative over the original ring. No normalized derived affine mate theorem found.",
+   "date": "2026-10-13",
+   "verdict": "reuse existing constructions; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineExtensionSectionsUnit",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineQCohComplexModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineQCohComplexModel.lean",
+  "declaration": "AlgebraicGeometry.exists_affineQCohComplexModel",
+  "statement": "theorem exists_affineQCohComplexModel\n    {R : CommRingCat.{u}} (Q : schemeDerivedCategory (Spec R))\n    (hQ : schemeDerivedQCohProperty (Spec R) Q) :\n    ∃ M : CochainComplex (ModuleCat.{u} R) ℤ,\n      (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat M ∧\n      Nonempty (Q ≅ DerivedCategory.Q.obj\n          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n            (@id (ModuleCat.{u} R ⥤\n              SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))\n              (tilde.functor R)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T111921-L-3062387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T111921-L-3062387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
