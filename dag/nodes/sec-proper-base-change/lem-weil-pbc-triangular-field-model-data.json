@@ -1,0 +1,163 @@
+{
+ "id": "lem-weil-pbc-triangular-field-model-data",
+ "kind": "statement",
+ "title": "Triangular minimal-polynomial data and independent bounded products",
+ "statement": "For fields k and K with a k-algebra structure, a finite transcendence basis x:Fin d→K and a finite family b:Fin m→K, there exist nonzero h in k[X], monic triangular polynomials p_i, variable assignments y and degrees e_i equal to natDegree p_i. The assignments y are x, inverse h(x), and b. Every triangularFieldModelEquations polynomial evaluates to zero at y. The products of b_i with exponents indexed by functions a:(i:Fin m)→Fin(e_i) are linearly independent over the intermediate field k(x). This asserts no kernel equality or coordinate map.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-triangular-field-model-equations",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Set F = k(x) and L_i = F(b_j : j < i). Algebraicity over F follows from the transcendence-basis hypothesis. For each b_i choose its monic minimal polynomial over L_i, of positive degree e_i. The simple extension quotient and its power basis, followed by Basis.smulTower, give the independent bounded products of b_i over F in K.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-algebraic-element",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-tower-product-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "Expand the minimal-polynomial coefficients in preceding product bases and replace the preceding b_j by variables. Algebraic independence identifies k[X] with k[x], whose fraction field is F. Take the product h of all coefficient denominators; it is nonzero. Lift coefficients a/h^n to a(X)T^n, keeping the leading coefficient exactly one. The lifted monic polynomial p_i has degree e_i. Assign y to x, inverse h(x), and b. Every equation vanishes because h(x) is nonzero and each minimal polynomial vanishes. Empty families use h=1; d=0 gives F=k, and repeated or inseparable generators cause no problem.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-polynomial-ring-domain",
+    "def-weil-pbc-triangular-field-model-equations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-algebraic-element",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-tower-product-basis",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "def-weil-pbc-triangular-field-model-equations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "triangular monic algebraic tower independent bounded products clearing denominators",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "minimal polynomial triangular relations with linearly independent bounded products",
+   "results": "PowerBasis.constr_pow_mul, linearIndependent_pow, PowerBasis.repr_mul_isIntegral",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no one-line theorem for the combined assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "triangular.*kernel|bounded.*monomial",
+   "results": "No matching triangular kernel theorem; MvPolynomial degree-bounded submodule and unrelated triangular matrices. AdjoinRoot.powerBasis and Basis.smulTower supply ingredients.",
+   "date": "2026-10-13",
+   "verdict": "No combined assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, MvPolynomial",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv and its evaluation formula; localization presentation and generator kernel lemmas.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: localization ingredient only, not either combined assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, MvPolynomial",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv and its evaluation formula; localization presentation and generator kernel lemmas.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: localization ingredient only, not either combined assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.TriangularFieldModelEvaluationKernel",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Triangular field model: evaluation-kernel proof steps 1–4",
+   "via": [
+    "lem-weil-pbc-triangular-field-model-evaluation-kernel",
+    "lem-weil-pbc-triangular-field-model-presentation",
+    "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+    "lem-weil-pbc-cartier-equality",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.TriangularFieldModelData",
+  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelData.lean",
+  "declaration": "FieldTheory.exists_triangularFieldModel_data",
+  "statement": "theorem exists_triangularFieldModel_data\n    (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]\n    (d : ℕ) (x : Fin d → K) (hx : IsTranscendenceBasis k x)\n    (m : ℕ) (b : Fin m → K) :\n    ∃ (h : MvPolynomial (Fin d) k)\n      (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n      (y : Fin (d + 1 + m) → K) (e : Fin m → ℕ),\n      h ≠ 0 ∧ (∀ i, (p i).Monic) ∧ (∀ i, (p i).natDegree = e i) ∧\n      (∀ j : Fin d, y ⟨j.val, by omega⟩ = x j) ∧\n      y ⟨d, by omega⟩ = (MvPolynomial.aeval x h)⁻¹ ∧\n      (∀ i : Fin m, y ⟨d + 1 + i.val, by omega⟩ = b i) ∧\n      (∀ q ∈ triangularFieldModelEquations k d m h p, MvPolynomial.aeval y q = 0) ∧\n      LinearIndependent (IntermediateField.adjoin k (Set.range x))\n        (fun a : ((i : Fin m) → Fin (e i)) => ∏ i, b i ^ (a i).val)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d0af7",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T113357-L-3188781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d0af7",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T113357-L-3188781",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all three delivered modules and the direct importer compiled successfully, including the required reduced-public-import reader check. No target signature or existing declaration changed; remaining sorrys are the two named, documented split lemmas."
+ }
+}

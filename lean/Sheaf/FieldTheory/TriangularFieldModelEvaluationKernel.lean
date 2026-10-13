@@ -7,9 +7,10 @@ module
 
 public import Sheaf.FieldTheory.TriangularFieldModelEquations
 public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Algebra.Polynomial.Monic
+import Sheaf.FieldTheory.TriangularFieldModelData
+import Sheaf.FieldTheory.TriangularFieldModelNormalForm
 
 /-!
 # The evaluation kernel of a triangular algebraic tower
@@ -32,7 +33,10 @@ polynomial construction and denominator clearing; Tag 08JZ
 (localization presentation), the kernel of that presentation
 (blueprint: lem-weil-pbc-triangular-field-model-evaluation-kernel).
 
-Proof:
+Proof (the first four steps are supplied by `exists_triangularFieldModel_data`;
+the monic quotient coordinates in step 5 are supplied by
+`triangularFieldModel_normal_form`; the independence and ideal inclusions are
+proved here):
 1. Let `F = k(x)` inside `K`. Algebraic independence embeds `k[X]` in `F`,
    which is its fraction field. The transcendence basis makes every `b i`
    algebraic over `F`. Set `L_i = F(b j : j < i)`; do not identify `L_m` with `K`.
@@ -72,6 +76,31 @@ theorem exists_triangularFieldModel_evaluation_kernel
       y ⟨d, by omega⟩ = (MvPolynomial.aeval x h)⁻¹ ∧
       (∀ i : Fin m, y ⟨d + 1 + i.val, by omega⟩ = b i) ∧
       RingHom.ker (MvPolynomial.aeval y).toRingHom =
-        Ideal.ofList (triangularFieldModelEquations k d m h p) := by sorry
+        Ideal.ofList (triangularFieldModelEquations k d m h p) := by
+  obtain ⟨h, p, y, e, hh, hp, he, hx', ht, hb, hzero, hind⟩ :=
+    exists_triangularFieldModel_data k K d x hx m b
+  refine ⟨h, p, y, hh, hp, hx', ht, hb, ?_⟩
+  classical
+  let I := Ideal.ofList (triangularFieldModelEquations k d m h p)
+  obtain ⟨coord, hcoord, hev⟩ :=
+    triangularFieldModel_normal_form k K d x hx.1 m b h p y e hh hp he hx' ht hb hzero
+  apply le_antisymm
+  · intro q hq
+    have hqzero : MvPolynomial.aeval y q = 0 := RingHom.mem_ker.mp hq
+    have hsum : ∑ a : ((i : Fin m) → Fin (e i)),
+        coord (Ideal.Quotient.mk I q) a • (∏ i, b i ^ (a i).val) = 0 := by
+      rw [← hev q]
+      exact hqzero
+    have hc : coord (Ideal.Quotient.mk I q) = 0 := by
+      have h := Fintype.linearIndependent_iffₛ.mp hind
+        (coord (Ideal.Quotient.mk I q)) 0 (by simpa using hsum)
+      exact funext h
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    apply hcoord
+    simpa using hc
+  · change Ideal.span {q | q ∈ triangularFieldModelEquations k d m h p} ≤ _
+    apply Ideal.span_le.mpr
+    intro q hq
+    exact RingHom.mem_ker.mpr (hzero q hq)
 
 end FieldTheory

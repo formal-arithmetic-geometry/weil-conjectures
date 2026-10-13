@@ -37,108 +37,51 @@
  ],
  "proof": [
   {
-   "text": "Let F = k(x). Algebraic independence identifies k[X] with k[x], whose fraction field is F. The transcendence basis makes every b_i algebraic over F. Put L_i = F(b_j : j < i); this finite tower need not reach K.",
+   "text": "Obtain nonzero h, monic p_i of degree e_i, assignments y, vanishing of the relations, and independence over k(x) of the bounded evaluations from the triangular data theorem.",
    "uses": [
-    "def-weil-pbc-transcendence-basis",
-    "def-weil-algebraic-element"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (localization presentation). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
-   }
-  },
-  {
-   "text": "Each b_i has a monic minimal polynomial of positive degree over L_i. The minimal-polynomial quotient isomorphism and its power basis, followed by Basis.smulTower at each step, give an F-basis of L_m consisting of the products of b_i with exponents strictly below the respective minimal-polynomial degrees. The same construction gives the preceding bases needed to expand coefficients. L_m need not equal K, and no separability is needed.",
-   "uses": [
-    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-tower-product-basis"
+    "lem-weil-pbc-triangular-field-model-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (localization presentation). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
    }
   },
   {
-   "text": "*The polynomials $P_i$ over $F$.* Fix $i$ and write $\\mu_i=T^{e_i}+\\sum_{l<e_i}c_{il}T^l$ with $c_{il}\\in L_{i-1}$. By step 2 each $c_{il}$ is an $F$-linear combination of monomials in $b_1,\\dots,b_{i-1}$; replacing $b_j$ by the variable $Y_j$ gives $g_{il}\\in F[Y_1,\\dots,Y_{i-1}]$ [def-weil-pbc-mv-polynomial-ring] with $g_{il}(b_1,\\dots,b_{i-1})=c_{il}$. Put $P_i:=Y_i^{e_i}+\\sum_{l<e_i}g_{il}Y_i^l\\in F[Y_1,\\dots,Y_i]$. Then $P_i$ is monic of degree $e_i$ in $Y_i$ with coefficients in $F[Y_1,\\dots,Y_{i-1}]$, and $P_i(b_1,\\dots,b_i)=\\mu_i(b_i)=0$ in $K$.",
+   "text": "Use the monic normal-form theorem to obtain injective quotient coordinates over k(x) and the evaluation sum formula. For q in the evaluation kernel, that sum is zero. Fintype.linearIndependent_iffₛ makes every coordinate zero; injectivity forces the quotient class of q to vanish, hence q is in the ideal by Ideal.Quotient.eq_zero_iff_mem.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (localization presentation). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
-   }
-  },
-  {
-   "text": "*Clearing denominators: $h$ and $D$.* The polynomials $P_1,\\dots,P_r\\in F[Y_1,\\dots,Y_r]$ have finitely many nonzero coefficients in $F$; by step 1 each is $a/s$ with $a,s\\in k[x]$, $s\\ne0$. Let $h\\in k[x]$ be the product of all these denominators $s$; $h\\ne0$ since $k[x]$ is a domain. Then each coefficient $a/s$ equals $(a\\,h/s)/h$ with $a\\,h/s=a\\prod_{s'\\ne s}s'\\in k[x]$, so it lies in the subring $D:=\\{a/h^j: a\\in k[x],\\ j\\ge0\\}\\subseteq F$. Hence $P_i\\in D[Y_1,\\dots,Y_i]$, monic in $Y_i$ of degree $e_i$ with coefficients in $D[Y_1,\\dots,Y_{i-1}]$, and $P_i(b_1,\\dots,b_i)=0$.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-domain"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (localization presentation). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
-   }
-  },
-  {
-   "text": "Lift each coefficient a/h^j to a(X) T^j, preserving the leading coefficient one. Assemble the resulting equations using [def-weil-pbc-triangular-field-model-equations]. The localization presentation identifies quotienting by hT - 1 with adjoining 1/h. Taking the further quotient by the lifted monic equations identifies the explicit polynomial quotient A with B = D[Y]/(P).",
-   "uses": [
-    "lem-weil-pbc-localization-away-polynomial-quotient",
-    "def-weil-ring-localization-away",
-    "def-weil-pbc-triangular-field-model-equations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (localization presentation). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
-   }
-  },
-  {
-   "text": "*$B_i$ is free over $D$.* For $0\\le i\\le r$ put $B_i:=D[Y_1,\\dots,Y_i]/(P_1,\\dots,P_i)$ and $E_i:=\\prod_{j\\le i}\\{0,\\dots,e_j-1\\}$. Claim: the classes of $Y^\\varepsilon$, $\\varepsilon\\in E_i$, form a basis of $B_i$ as a $D$-module [def-weil-pbc-free-module]. For $i=0$, $B_0=D$ with basis $\\{1\\}$. For $i\\ge1$: $P_1,\\dots,P_{i-1}$ do not involve $Y_i$, so taking the quotient in two stages $B_i\\cong B_{i-1}[Y_i]/(\\bar P_i)$, $\\bar P_i$ the image of $P_i$, which is monic of degree $e_i$ in $Y_i$ (step 4). By [lem-weil-pbc-monic-quotient-free], $1,Y_i,\\dots,Y_i^{e_i-1}$ is a $B_{i-1}$-basis of $B_i$, and by the induction hypothesis and [lem-weil-pbc-tower-product-basis] (for $D\\to B_{i-1}$ and the $B_{i-1}$-module $B_i$) the products $Y^\\varepsilon Y_i^l$, i.e. the $Y^{\\varepsilon'}$, $\\varepsilon'\\in E_i$, form a $D$-basis of $B_i$.",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-tower-product-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (localization presentation). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
-   }
-  },
-  {
-   "text": "Evaluation at x, h(x) inverse, and b kills all displayed relations. Under the localization and successive quotient identifications of step 5, the quotient has the D-basis of bounded monomials in step 6. Their images are the F-basis of L_m from step 2, so every element in the evaluation kernel has all D-coefficients zero. Thus the quotient evaluates injectively and the evaluation kernel on the polynomial ring is exactly the ideal of the displayed equations. If m = 0 take h = 1 and T = 1; if d = 0 the base fraction field is k. Repetitions yield degree-one minimal polynomials and no separability is needed.",
-   "uses": [
+    "lem-weil-pbc-triangular-field-model-normal-form",
     "def-weil-pbc-algebra-hom-quotient"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (localization presentation). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "For the reverse inclusion apply Ideal.span_le and RingHom.mem_ker to vanishing of each displayed equation. Combine the inclusions using le_antisymm and return the previously constructed witnesses.",
+   "uses": [
+    "lem-weil-pbc-triangular-field-model-data",
+    "def-weil-pbc-triangular-field-model-equations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-transcendence-basis",
-  "def-weil-algebraic-element",
-  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-tower-product-basis",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-polynomial-ring-domain",
-  "lem-weil-pbc-localization-away-polynomial-quotient",
-  "def-weil-ring-localization-away",
-  "def-weil-pbc-triangular-field-model-equations",
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-algebra-hom-quotient"
+  "lem-weil-pbc-triangular-field-model-data",
+  "lem-weil-pbc-triangular-field-model-normal-form",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-triangular-field-model-equations"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Proof of Tag 07BV (lemma-colimit-syntomic), first assertion, triangular minimal polynomials and denominator clearing; presentation by hT - 1 as in Tag 08JZ (localization presentation). Source also read at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+  "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
  },
  "mathlib_searches": [
   {
@@ -206,11 +149,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
+  "reviewer": "X-d0af7",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T095927-L-2450347",
+  "landing": "20261013T113357-L-3188781",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all three delivered modules and the direct importer compiled successfully, including the required reduced-public-import reader check. No target signature or existing declaration changed; remaining sorrys are the two named, documented split lemmas."
  }
 }

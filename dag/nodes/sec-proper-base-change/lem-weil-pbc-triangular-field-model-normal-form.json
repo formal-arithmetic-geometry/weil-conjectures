@@ -1,0 +1,168 @@
+{
+ "id": "lem-weil-pbc-triangular-field-model-normal-form",
+ "kind": "statement",
+ "title": "Injective coordinates for a localized triangular monic quotient",
+ "statement": "For fields k,K with a k-algebra structure, algebraically independent x:Fin d→K, any finite b:Fin m→K, nonzero h, monic triangular p_i of natDegree e_i, and y assigning x, inverse h(x) and b, assume every displayed triangular equation evaluates to zero. Then the quotient of k[X,T,Y] by the ideal of the displayed equations has an injective k-linear coordinate map to functions on exponent tuples a:(i:Fin m)→Fin(e_i), with values in k(x). Evaluation of any polynomial q is the sum of its quotient coordinates times the products of b_i to the bounded exponents. No independence, algebraicity or spanning of b is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-triangular-field-model-equations",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Let R=k[X] and D=R[1/h]. Algebraic independence embeds R in F=k(x). The assumption h nonzero extends this to an embedding D into F. The quotient by hT-1 identifies the first d+1 variable quotient with D.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "def-weil-pbc-triangular-field-model-equations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "Take quotients successively by the p_i. Each is monic of degree e_i over the quotient of the preceding variables, so its powers below e_i form a basis. Multiply these bases using Basis.smulTower to get a D-basis indexed by the exponent tuples. Take basis coordinates and embed each coefficient in F. The resulting k-linear coordinate map is injective.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-tower-product-basis",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  },
+  {
+   "text": "Evaluation kills every generator by the vanishing assumption and descends to the quotient. Apply it to the basis expansion. The equations for y identify the evaluations of basis monomials with the products of b_i and the evaluation on D with the inclusion into F. This gives the asserted finite sum formula. If any e_i=0, the monic polynomial is one and vanishing is impossible; m=0 gives the single coordinate of D.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "def-weil-pbc-triangular-field-model-equations",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-tower-product-basis",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "triangular monic algebraic tower independent bounded products clearing denominators",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coordinates of multivariate polynomial quotient by triangular monic equations after localization",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv_apply, Algebra.Generators.localizationAway_σ",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no one-line theorem for the combined assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "triangular.*kernel|bounded.*monomial",
+   "results": "No matching triangular kernel theorem; MvPolynomial degree-bounded submodule and unrelated triangular matrices. AdjoinRoot.powerBasis and Basis.smulTower supply ingredients.",
+   "date": "2026-10-13",
+   "verdict": "No combined assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, MvPolynomial",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv and its evaluation formula; localization presentation and generator kernel lemmas.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: localization ingredient only, not either combined assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.TriangularFieldModelEvaluationKernel",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Triangular field model: evaluation-kernel proof steps 5–6, prior to independence",
+   "via": [
+    "lem-weil-pbc-triangular-field-model-evaluation-kernel",
+    "lem-weil-pbc-triangular-field-model-presentation",
+    "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+    "lem-weil-pbc-cartier-equality",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.TriangularFieldModelNormalForm",
+  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelNormalForm.lean",
+  "declaration": "FieldTheory.triangularFieldModel_normal_form",
+  "statement": "theorem triangularFieldModel_normal_form\n    (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]\n    (d : ℕ) (x : Fin d → K) (hx : AlgebraicIndependent k x)\n    (m : ℕ) (b : Fin m → K) (h : MvPolynomial (Fin d) k)\n    (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n    (y : Fin (d + 1 + m) → K) (e : Fin m → ℕ)\n    (hh : h ≠ 0) (hp : ∀ i, (p i).Monic) (he : ∀ i, (p i).natDegree = e i)\n    (hyx : ∀ j : Fin d, y ⟨j.val, by omega⟩ = x j)\n    (hyt : y ⟨d, by omega⟩ = (MvPolynomial.aeval x h)⁻¹)\n    (hyb : ∀ i : Fin m, y ⟨d + 1 + i.val, by omega⟩ = b i)\n    (hzero : ∀ q ∈ triangularFieldModelEquations k d m h p,\n      MvPolynomial.aeval y q = 0)\n    : ∃ coord :\n      (MvPolynomial (Fin (d + 1 + m)) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d m h p)) →ₗ[k]\n        (((i : Fin m) → Fin (e i)) → IntermediateField.adjoin k (Set.range x)),\n      Function.Injective coord ∧\n      ∀ q : MvPolynomial (Fin (d + 1 + m)) k,\n        MvPolynomial.aeval y q =\n          ∑ a : ((i : Fin m) → Fin (e i)),\n            coord (Ideal.Quotient.mk _ q) a • (∏ i, b i ^ (a i).val)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d0af7",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T113357-L-3188781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d0af7",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T113357-L-3188781",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all three delivered modules and the direct importer compiled successfully, including the required reduced-public-import reader check. No target signature or existing declaration changed; remaining sorrys are the two named, documented split lemmas."
+ }
+}
