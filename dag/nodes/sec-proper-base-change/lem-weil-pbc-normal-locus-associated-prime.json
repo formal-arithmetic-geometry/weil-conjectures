@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Serre criterion applied to the nonnormal local domain R_p produces q contained in p where R_q fails S2 or R1, hence is nonnormal. Use the prime correspondence and localization-of-localization equivalence to identify the local rings.",
+   "text": "Apply Serre's criterion to R_p. If R1 fails at a prime r, its localization has dimension at most one and is not regular; if S2 fails, its depth is less than min(2,height r). In each case this local ring is nonnormal. Contract r to q in R using prime correspondence; q ≤ p. The localization-of-localization equivalence identifies R_q with (R_p)_r. Transport depth using the existing private theorem RingHom.depth_eq_of_ringEquiv in Sheaf.RingTheory.FlatFiberLocalDepth, accessed by proof-only import all. This theorem maps regular sequences and maximal ideals in both directions; the flat fibre depth formula itself is not used.",
    "uses": [
     "lem-weil-pbc-localization-noetherian",
     "lem-weil-pbc-primes-of-localization",
@@ -54,12 +54,13 @@
    }
   },
   {
-   "text": "Depth of R_q is at most one, from failure of S2 or from depth bounded by dimension at the associated prime zero. In dimension zero a local domain is a field, ruling out failure of regularity.",
+   "text": "In the S2 case, depth is less than two and hence at most one. In the R1 case, apply the associated-prime depth bound to the zero associated prime of the domain (witnessed by 1), and identify the quotient by zero with the ring, giving depth at most dimension and hence at most one. A normal local domain of dimension at most one is regular by the source-library theorem IsRegularLocalRing.of_isIntegrallyClosed; thus the failure of regularity makes this local ring nonnormal, including the dimension-zero edge case.",
    "uses": [
     "lem-weil-pbc-depth-le-dim-associated-prime",
     "def-weil-pbc-krull-dimension-ring",
     "def-weil-regular-scheme",
-    "def-weil-pbc-annihilator-associated-primes"
+    "def-weil-pbc-annihilator-associated-primes",
+    "lem-sc-normal-dim1-dvr"
    ],
    "elementary": false,
    "source": {
@@ -106,6 +107,7 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-regular-scheme",
   "def-weil-pbc-annihilator-associated-primes",
+  "lem-sc-normal-dim1-dvr",
   "lem-weil-pbc-depth-drops-by-one",
   "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
   "def-weil-pbc-regular-sequence",
@@ -180,13 +182,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261012T235556-L-2201941",
-  "kind": "interface",
+  "landing": "20261013T033004-L-3677221",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
