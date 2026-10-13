@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weil-pbc-roos-triangle",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Roos triangle and Milnor exact sequence",
@@ -42,27 +42,156 @@
  ],
  "proof": [
   {
-   "text": "The triangle is the definition of $\\Rlim$ in\n[def-weil-pbc-derived-inverse-limit], namely the defining Roos triangle for\nthe system $(\\operatorname{ev}_nM_\\bullet)$, with the endomorphism $1-s$\ninduced by the transition maps; the identification of its middle term with\n$R\\!\\prod_nM_n$ is the representability statement of the derived-limit\nexistence lemma. For the exact sequence the functor $\\varprojlim$ is the\nkernel of $1-s$ on the product; the cokernel of $1-s$ is the *first derived\nlimit* $\\varprojlim^1M_n$, an exact-in-general cokernel, so the ordinary\nsequence\n\n$$\n 0\\to\\varprojlim_nM_n\\to\\prod_nM_n\n \\xrightarrow{1-s}\\prod_nM_n\\to\\varprojlim^1_nM_n\\to0\n$$\n\nis exact (the left exactness of $\\varprojlim$ with the cokernel\n$\\varprojlim^1$ recorded rather than zero) in the evaluation categories of\n[def-weil-pbc-adic-coefficient-datum]. This exhibits $\\varprojlim$ as the\nkernel of $1-s$ and $\\varprojlim^1$ as its cokernel; the *Roos resolution* is\nthe two-term complex\n\n$$\n \\prod_nM_n\\xrightarrow{\\ 1-s\\ }\\prod_nM_n\n$$\n\nplaced in degrees $0,1$, whose cohomology is $\\varprojlim$ in degree $0$ and\n$\\varprojlim^1$ in degree $1$ — and whose higher cohomology vanishes because,\nfor a tower of module sheaves, the higher derived limits $\\varprojlim^i$\nvanish for $i\\geq2$ (the Roos/Mittag-Leffler chain: $\\varprojlim^1$ of a\ncountable tower of modules is computed by the cokernel of $1-s$, and\n$\\varprojlim^i=0$ for $i\\geq2$; this is the classical Milnor exact sequence\nof Stacks Project, More on Algebra, Lemma 15.88.1, Tag\n[07KW](https://stacks.math.columbia.edu/tag/07KW), which represents $\\Rlim$\nby the two-term complex $\\prod\\to\\prod$ sitting in degrees $0,1$, and the\nresulting derived-limit triangle of Lemma 15.88.9, Tag\n[07KX](https://stacks.math.columbia.edu/tag/07KX), with the short exact\nsequences of Lemma 15.88.10, Tag\n[07KY](https://stacks.math.columbia.edu/tag/07KY)); that triangle is exactly\nthe triangle displayed in the statement. For a weakly contractible\nquasi-compact $U\\in T_{\\Proet}$, the functor $\\Gamma(U,-)$ is exact on\n$\\Mod(T_{\\Proet},A_T)$, preserves the products and limits involved and the\nmaps $1-s$, so the long exact cohomology sequence of the triangle is the\ndisplayed functorial exact sequence, with $\\varprojlim{}^1$ arising as the\ncohomology of $1-s$ in the degree below.",
+   "text": "Put $\\mathcal A=\\Mod(T_{\\Proet},A_T)$ and represent $M_\\bullet$ by an integer cochain complex $C$ of strict towers. Its evaluations $C_n$ are complexes with chain maps $t_n:C_{n+1}\\to C_n$. Countable products in $\\mathcal A$ are exact and sectionwise by [lem-weil-proetale-countable-products-exact]. Hence [lem-weil-derived-limit-products-core] identifies the localization of the termwise product complex $P=\\prod_n C_n$ with the product of the evaluations in $D(\\mathcal A)$ and gives $H^j(P)=\\prod_n H^j(C_n)$. Define $s:P\\to P$ by $\\mathrm{pr}_n s=t_n\\mathrm{pr}_{n+1}$. The chain-map equation follows after every projection from $d t_n=t_n d$, and the projections are jointly faithful. Thus $d_P(1-s)=(1-s)d_P$.",
    "uses": [
-    "def-weil-pbc-derived-inverse-limit",
-    "def-weil-pbc-adic-coefficient-datum"
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-abstract-derived-category",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, label lemma-products; Tag 08TC, label definition-derived-limit"
+   }
+  },
+  {
+   "text": "Set $h=1-s$ and form the explicit complex $L(C)=\\operatorname{Cone}(h)[-1]$, so that $L(C)^j=P^{j-1}\\oplus P^j$ and $d(y,x)=(-d_Py-hx,d_Px)$. The maps $p:L(C)\\to P$, $p(y,x)=x$, and $\\delta:P\\to L(C)[1]$, $\\delta(y)=(y,0)$, give $L(C)\\xrightarrow p P\\xrightarrow h P\\xrightarrow\\delta L(C)[1]$. This is the inverse rotation of the mapping-cone triangle, with the cone/rotation signs in [def-weil-abstract-derived-category, def-weil-triangulated-category]; therefore it is distinguished. By [def-weil-derived-limit, def-weil-pbc-derived-inverse-limit] it is a Roos triangle for the evaluated tower. This constructs a model of the derived limit; it does not assert that the definition by a triangle has already chosen a functor.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "def-weil-derived-limit",
+    "def-weil-pbc-derived-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (label definition-cone), 014Q (distinguished triangles), 08TC (label definition-derived-limit)"
+   }
+  },
+  {
+   "text": "For a map $u:C\\to C'$ of strict tower complexes, the product map $v=\\prod_nu_n$ satisfies $vh=h'v$ since $u_nt_n=t'_nu_{n+1}$. On $L(C)$ define $L(u)(y,x)=(vy,vx)$. It is a chain map because $d_{L(C^{\\prime})}(vy,vx)=(-d_{P^{\\prime}}vy-h^{\\prime} vx,d_{P^{\\prime}}vx)=(-v d_Py-vhx,v d_Px)=L(u)d_{L(C)}(y,x)$. Moreover $p^{\\prime} L(u)(y,x)=vx=vp(y,x)$ and $L(u)[1]\\delta(y)=(vy,0)=\\delta^{\\prime} v(y)$, while $vh=h^{\\prime} v$ is the middle square. The diagonal map of an identity is the identity and the composite of two diagonal maps is the diagonal of their composite, so these maps define a functor and a natural triangle on strict tower complexes. If $u$ is a quasi-isomorphism of tower complexes, exact evaluation makes every $u_n$ a quasi-isomorphism, and [lem-weil-derived-limit-products-core] makes $Q(v)$ an isomorphism. In the resulting morphism of distinguished triangles the two product components are isomorphisms, so [lem-sf-triangle-morphism-iso] makes $Q(L(u))$ an isomorphism. The localization property of [def-weil-abstract-derived-category] now factors the strict cone construction, its maps and its natural triangle through $D(\\operatorname{Tow}_A(T))$. This proves the functorial assertion by a functorial realization of the derived-limit property. No functorial choice of cones for arbitrary maps in a triangulated category is used.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-abstract-derived-category",
+    "lem-weil-derived-limit-products-core",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014F, label lemma-functorial-cone (strict square, zero homotopy); Tag 014A, label lemma-third-isomorphism-triangle; Tag 05RU, localization"
+   }
+  },
+  {
+   "text": "Fix the weakly contractible object $U$. Here weakly contractible means that every surjection of sheaves of sets induces a surjection on sections over $U$ (Sites Tag 090L, label definition-w-contractible). Evaluation on abelian sheaves is left exact, since kernels are sectionwise; it is right exact because weak contractibility makes any sheaf-surjection surjective on $U$-sections. This is exactly the two-line argument of Cohomology on Sites Tag 0946 (label lemma-w-contractible), not a vanishing claim for arbitrary objects of the site. The exact forgetful functor and sectionwise limits of [lem-weil-pbc-module-sheaves-colimits-forgetful] therefore show that $E_U=\\Gamma(U,-):\\mathcal A\\to\\mathrm{Ab}$ is exact and preserves countable products. In particular this applies to the completed ring sheaf $A_T$, without requiring it to be a finite constant ring.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0946, label lemma-w-contractible (1), with Sites Tag 090L, label definition-w-contractible"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-exact-functor-derived-triangulated] to the exact additive functor $E_U$. Its termwise application carries the constructed Roos triangle to a distinguished triangle in $D(\\mathrm{Ab})$. It computes derived sections on this exact evaluation object: any resolution quasi-isomorphism remains a quasi-isomorphism after $E_U$, so $H^j(U,K)=H^j(E_U K)$, including unbounded $K$. Since $E_U$ preserves the termwise products and abelian groups have exact products by [lem-pc-abelian-groups-exact-products], [lem-weil-derived-limit-products-core] applied to $\\mathrm{Ab}$ identifies $H^j(E_UP)$ with $\\prod_n H^j(U,M_n)$. By the equations for the projections defining $s$, the induced map is $h_j((a_n))=(a_n-(t_n)_*a_{n+1})$. The long exact sequence of [lem-sf-derived-homology-long-exact] thus contains the exact segment $\\prod_n H^{i-1}(U,M_n)\\xrightarrow{h_{i-1}}\\prod_n H^{i-1}(U,M_n)\\xrightarrow{\\partial}H^i(U,L(C))\\xrightarrow b\\prod_n H^i(U,M_n)\\xrightarrow{h_i}\\prod_n H^i(U,M_n)$.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-derived-limit-products-core",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-abelian-groups-exact-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KY, label lemma-break-long-exact-sequence, proof (long exact sequence); derived.tex Tag 07KC, label lemma-products"
+   }
+  },
+  {
+   "text": "For the abelian-group towers $B_n^j=H^j(U,M_n)$, [lem-pc-derived-limit-roos-abelian-groups] identifies $\\ker h_j=\\varprojlim_nB_n^j$ and $\\operatorname{coker}h_j=R^1\\varprojlim_nB_n^j$. Since $\\partial\\circ h_{i-1}=0$, factor $\\partial$ through $\\operatorname{coker}h_{i-1}$; exactness in the preceding segment makes the resulting map $\\operatorname{coker}h_{i-1}\\to H^i(U,L(C))$ injective with image $\\ker b$. Since $\\operatorname{im}b=\\ker h_i$, corestricting $b$ to $\\ker h_i$ is surjective. These are the required short exact sequence and its maps. This argument takes the kernel and cokernel in abelian groups after evaluation, and does not infer a sheaf statement from Tag 07KW without an exact-product hypothesis.",
+   "uses": [
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, label lemma-compute-Rlim (1),(2); Tag 07KY, label lemma-break-long-exact-sequence, proof"
+   }
+  },
+  {
+   "text": "For a morphism of tower objects, step 3 gives a morphism of the functorially realized Roos triangles; evaluation carries it to a morphism of distinguished triangles. By [lem-weil-pbc-derived-cohomology-ladder] the long exact sequences commute also at the connecting maps, not only at the product maps. The kernel/cokernel identifications of [lem-pc-derived-limit-roos-abelian-groups] are natural. Consequently the induced maps on the cokernel of $h_{i-1}$, the middle cohomology group, and the kernel of $h_i$ commute with the two maps of step 6. This proves functoriality of the displayed short exact sequence. For restriction along $V\\to U$ between weakly contractible test objects, write $r_P:E_UP\\to E_VP$ for the componentwise restriction chain map. Restrictions commute with the differentials and $t_n$, so $r_Ph_U=h_Vr_P$. Define $r_L(y,x)=(r_Py,r_Px)$; then $d_Vr_L=r_Ld_U$, $p_Vr_L=r_Pp_U$ and $r_L[1]\\delta_U=\\delta_Vr_P$ by the displayed formulas. These maps give a morphism of the evaluated distinguished triangles, and [lem-weil-pbc-derived-cohomology-ladder] yields $H^i(r_L)\\partial_U=\\partial_VH^{i-1}(r_P)$. Restricting the product map to $\\ker h_i$ and passing to $\\operatorname{coker}h_{i-1}$ therefore gives commuting squares for both arrows of the short exact sequence, proving compatibility with restriction.",
+   "uses": [
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KY, label lemma-break-long-exact-sequence, natural kernel/cokernel extraction from the Roos triangle"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-inverse-limit",
   "def-weil-pbc-adic-coefficient-datum",
-  "lem-weil-derived-limit-existence"
+  "def-weil-abstract-derived-category",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-triangulated-category",
+  "def-weil-derived-limit",
+  "def-weil-pbc-derived-inverse-limit",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-abelian-groups-exact-products",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-weil-pbc-derived-cohomology-ladder"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-roos-triangle.md",
-  "place": "## Proof"
+  "place": "Proof: strict-cone functorial realization supplied explicitly; Stacks 07KC, 014E, 014F, 014A, 0946, 07KW, 07KY used as detailed in the steps; source concordance for the unchanged statement: legacy Definition 13.34.1 = Tag 08TC (derived-definition-derived-limit); legacy Lemma 15.88.1 = Tag 07KW (more-algebra-lemma-compute-Rlim); legacy Lemma 15.88.9 = Tag 07KX (more-algebra-lemma-distinguished-triangle-Rlim); legacy Lemma 15.88.10 = Tag 07KY (more-algebra-lemma-break-long-exact-sequence)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Roos triangle and Milnor short exact sequence for derived inverse limits of a countable tower of complexes of sheaves on the pro-etale site",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, DerivedCategory.triangleOfSESδ, CochainComplex.mappingCone.homologySequenceδ_triangleh, DerivedCategory.HomologySequence.exact₁, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, DerivedCategory.HomologySequence.exact₃",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern Mayer–Vietoris, general homology sequences or group cohomology, not the Roos/Milnor statement for pro-etale towers"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|Milnor|lim1|derivedLimit",
+   "results": "0 hits: ; subdirectory Algebra/Homology",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern Mayer–Vietoris, general homology sequences or group cohomology, not the Roos/Milnor statement for pro-etale towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Milnor exact sequence for sequential derived inverse limits of complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Milnor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern Mayer–Vietoris, general homology sequences or group cohomology, not the Roos/Milnor statement for pro-etale towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a homotopy inverse limit lies in a short exact sequence between the first derived inverse limit and inverse limit of cohomology",
+   "results": "8 hits: groupCohomology.map_cochainsFunctor_shortExact, groupCohomology.isIso_δ_of_isZero, groupCohomology.mapShortComplex₁_exact, groupCohomology.mapShortComplex₃_exact, groupCohomology.mapShortComplex₂_exact, CochainComplex.HomComplex.leftHomologyData', groupCohomology.mapShortComplex₃, CochainComplex.HomComplex.leftHomologyData'_H_coe",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern Mayer–Vietoris, general homology sequences or group cohomology, not the Roos/Milnor statement for pro-etale towers"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -97,5 +226,49 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "prop-weil-pbc-roos-triangle",
+  "worker": "stage1",
+  "summary": "Replaced the imported single paragraph by seven checked steps, using existing nodes only. Constructed a functorial strict-complex cone realization rather than assuming functoriality of a cone chosen in a triangulated category. Evaluated only at weakly contractible objects; extracted the Milnor sequence from the long exact sequence using the existing abelian-group Roos theorem. Removed the unused existence lemma from proof dependencies; no statement change. Second reading removed an auxiliary-presentation cone-map citation by checking the diagonal differential directly, and wrote restriction naturality at the connecting map explicitly.",
+  "blueprint": "Proof paragraph: first sentence (triangle) realized by steps 1–3; middle kernel/cokernel discussion by steps 5–6; final evaluation and functoriality sentence by steps 4–7. The source note uses 07KW only for abelian groups.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products of module sheaves, needed to represent the products by arbitrary strict complexes."
+   },
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "Generic 07KC product calculation, not a new route to proper base change."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic descent of an exact evaluation functor to derived categories."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence of a distinguished triangle."
+   },
+   {
+    "node": "lem-pc-derived-limit-roos-abelian-groups",
+    "why": "Generic kernel/cokernel computation for a tower of abelian groups after evaluation; no Picard theorem used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-derived-limit-roos-abelian-groups"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-bdfdff0e5",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-bdfdff0e5 (reviewer sub-agent of L); spot-checked: Read the item, all seven steps, cited statements and sources in full; no new nodes. Corrected step 6 to factor the boundary through coker(h_{i-1}). Cone signs, localization, exact evaluation, naturality, edge cases and acyclicity check out. Review and whole corrected JSON written. Acceptance does not certify comparison with the master targets’ condensed coefficient categories.; 1 file(s) fixed by the reviewer"
+ }
 }
