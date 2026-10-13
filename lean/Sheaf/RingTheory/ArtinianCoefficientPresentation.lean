@@ -9,6 +9,9 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import Mathlib.RingTheory.HopkinsLevitzki
+import Mathlib.RingTheory.AdicCompletion.Functoriality
+import Sheaf.RingTheory.NilpotentCoefficientAdjustment
 
 /-!
 # Finite coefficient presentations of Artinian local algebras
@@ -39,6 +42,68 @@ noncomputable def artinianCoefficientSubalgebra
   Algebra.adjoin k ((t : Set Λ) ∪
     σ '' (IntermediateField.adjoin k (s : Set (IsLocalRing.ResidueField Λ)) :
       Set (IsLocalRing.ResidueField Λ)))
+
+private theorem complete_of_nilpotent {R : Type*} [CommRing R]
+    (I : Ideal R) (hI : IsNilpotent I) : IsAdicComplete I R := by
+  obtain ⟨N, hN⟩ := hI
+  refine { haus' := fun x hx ↦ ?_, prec' := fun f hf ↦ ⟨f N, fun m ↦ ?_⟩ }
+  · simpa [hN, SModEq.bot] using hx N
+  · by_cases hm : m ≤ N
+    · exact hf hm
+    · have hNm : N ≤ m := by omega
+      have heq : f N = f m := by simpa [hN, SModEq.bot] using hf hNm
+      rw [heq]
+
+private theorem adjoin_eq_top_of_residue_section
+    (k : Type u) [Field k] (Λ : Type v) [CommRing Λ] [Algebra k Λ]
+    [IsLocalRing Λ] (σ : IsLocalRing.ResidueField Λ →+* Λ)
+    (hσ : (IsLocalRing.residue Λ).comp σ = RingHom.id _)
+    (t : Finset Λ) (ht : Ideal.span (t : Set Λ) = IsLocalRing.maximalIdeal Λ)
+    (hnil : IsNilpotent (IsLocalRing.maximalIdeal Λ)) :
+    Algebra.adjoin k ((t : Set Λ) ∪ Set.range σ) = ⊤ := by
+  let S := Algebra.adjoin k ((t : Set Λ) ∪ Set.range σ)
+  let f : S →+* Λ := S.toSubring.subtype
+  let m := IsLocalRing.maximalIdeal Λ
+  let J := m.comap f
+  have hmap : J.map f = m := by
+    apply le_antisymm
+    · exact Ideal.map_le_iff_le_comap.mpr le_rfl
+    · change IsLocalRing.maximalIdeal Λ ≤ _
+      rw [← ht]
+      apply Ideal.span_le.mpr
+      intro x hx
+      have hxS : x ∈ S := Algebra.subset_adjoin (Or.inl hx)
+      have hxm : x ∈ m := by
+        change x ∈ IsLocalRing.maximalIdeal Λ
+        rw [← ht]
+        exact Ideal.subset_span hx
+      exact Ideal.mem_map_of_mem f (show (⟨x, hxS⟩ : S) ∈ J from hxm)
+  have hJ : IsNilpotent J := by
+    obtain ⟨N, hN⟩ := hnil
+    refine ⟨N, eq_bot_iff.mpr ?_⟩
+    intro x hx
+    have hx' := Ideal.le_comap_pow f N hx
+    have hz : f x = 0 := by simpa [m, hN] using hx'
+    exact Subtype.val_injective (by simpa [f] using hz)
+  let : IsAdicComplete J S := complete_of_nilpotent J hJ
+  let : IsAdicComplete (J.map f) Λ := hmap ▸ complete_of_nilpotent m hnil
+  have hsurj : Function.Surjective ((Ideal.Quotient.mk (J.map f)).comp f) := by
+    intro x
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+    have hσS : σ (IsLocalRing.residue Λ a) ∈ S :=
+      Algebra.subset_adjoin (Or.inr ⟨_, rfl⟩)
+    refine ⟨⟨σ (IsLocalRing.residue Λ a), hσS⟩, ?_⟩
+    change Ideal.Quotient.mk (J.map f) (σ (IsLocalRing.residue Λ a)) =
+      Ideal.Quotient.mk (J.map f) a
+    rw [hmap]
+    change IsLocalRing.residue Λ (σ (IsLocalRing.residue Λ a)) =
+      IsLocalRing.residue Λ a
+    exact RingHom.congr_fun hσ _
+  have hf : Function.Surjective f := surjective_of_mk_map_comp_surjective f hsurj
+  apply top_unique
+  intro x _
+  obtain ⟨y, rfl⟩ := hf x
+  exact y.property
 
 /-- A coefficient-field section and finitely many coefficients capture the structure map.
 The section need not be a `k`-algebra map. The last clause is the surjectivity of the
@@ -88,6 +153,13 @@ theorem exists_artinian_coefficient_presentation
       (∀ a : k, algebraMap k Λ a ∈ Subring.closure ((t : Set Λ) ∪
         σ '' (IntermediateField.adjoin k (c : Set (IsLocalRing.ResidueField Λ)) :
           Set (IsLocalRing.ResidueField Λ)))) ∧
-      Algebra.adjoin k ((t : Set Λ) ∪ Set.range σ) = ⊤ := by sorry
+      Algebra.adjoin k ((t : Set Λ) ∪ Set.range σ) = ⊤ := by
+  classical
+  obtain ⟨t, ht⟩ := (IsNoetherian.noetherian (IsLocalRing.maximalIdeal Λ))
+  have hnil := (isArtinianRing_iff_isNilpotent_maximalIdeal Λ).mp
+    (inferInstance : IsArtinianRing Λ)
+  obtain ⟨σ, c, hσ, hc⟩ :=
+    exists_nilpotent_coefficient_adjustment k Λ t ht hnil p hp hH
+  exact ⟨σ, t, c, hσ, ht, hc, adjoin_eq_top_of_residue_section k Λ σ hσ t ht hnil⟩
 
 end Algebra
