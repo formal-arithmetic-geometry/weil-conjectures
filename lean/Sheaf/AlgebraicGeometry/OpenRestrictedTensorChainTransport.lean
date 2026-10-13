@@ -1,6 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import Sheaf.AlgebraicGeometry.OpenRestrictedTensorComplexIso
+import Sheaf.AlgebraicGeometry.OpenRestrictedTensorChainTransportPure
 /-! # Homology transport for normalized open tensor coordinates
 
 Source: Stacks Project, Tag 0098, stalks of pullback and restriction.
@@ -99,6 +100,21 @@ theorem openRestricted_tensor_chain_transport
               ((openTensorRestrictionComplexIso g' U P).hom.f k)) =
         F.map (t.hom.f k) ≫
           F0.map ((tensorStalkIso (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
-            g (pullback.snd g' U.ι) sq0 z0 P0).hom.f k) := by sorry
+            g (pullback.snd g' U.ι) sq0 z0 P0).hom.f k) := by
+  dsimp only
+  intro eA eD q t heD hq ht k
+  ext x
+  induction x using TensorProduct.induction_on with
+  | zero => simp
+  | tmul d x =>
+    have h := openRestricted_tensor_chain_transport_pure f f' g g' sq U sq0 z0 P k d x
+    dsimp only at h
+    have hd : eD d = ((pullback.fst g' U.ι).stalkMap z0).hom d :=
+      congrArg (fun a => a d) heD
+    change _ = (tensorStalkIso (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
+      g (pullback.snd g' U.ι) sq0 z0 _).hom.f k (t.hom.f k _)
+    rw [ht k d x, hd, hq k x]
+    exact h
+  | add x y hx hy => simp only [map_add, hx, hy]
 
 end AlgebraicGeometry.SingleComplexBaseChange
