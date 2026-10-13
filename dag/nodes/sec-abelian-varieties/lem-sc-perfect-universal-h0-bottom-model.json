@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-perfect-universal-h0-bottom-model",
+ "kind": "statement",
+ "title": "Affine bottom model on a universally free degree-zero locus",
+ "statement": "Let S be a scheme [def-pc-scheme] and K a perfect object [def-pc-perfect-complex] of D(O_S) [def-pc-derived-category]. Suppose every derived pullback Lk*K [def-pc-derived-pullback] has zero cohomology in every negative degree. Suppose each point of S has an open U0 and an integer r >= 0 such that H0(L(k >> U0.ι)*K) is finite locally free of rank r [def-amb-finite-locally-free-module] for every scheme Y and k:Y -> U0. For every point s of S there is an affine open U containing s and a strictly perfect complex B on its localized ringed site [def-pur-localized-ringed-site], with B^i zero for i < 0 and B.d(0,1)=0, together with a derived isomorphism K|U -> Q(B). No source module or arrow is specified.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Tag 0BDL, proof on the rank-r matrix charts; Tag 0BCD, residue-rank model; Tag 0EWY, square injective free map"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-amb-finite-locally-free-module",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "At s choose the universally rank-r open, and test at the residue field of s. The finite-free residue model gives an affine neighbourhood with term ranks equal to fibre dimensions. Negative vanishing makes all negative terms zero and the zero term has rank r. Restrict the model to an affine subneighbourhood inside the original rank-r open. Restriction preserves the term ranks, zero terms and boundedness.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact open restriction, its comparison with derived pullback along the inclusion, and the identity test identify H0(K)|U with a rank-r locally free sheaf. Shrink to trivialize it. Its inclusion into the rank-r zero term is a square injective matrix. The dual of its cokernel vanishes. Each coordinate of the outgoing differential factors through this cokernel, hence is zero. Thus d0 vanishes over arbitrary, possibly nonreduced, bases. Take the final shrinking affine so that the later arrow representative theorem applies.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-sc-square-injective-free-map-dual-coker-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-sc-square-injective-free-map-dual-coker-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Proof on matrix charts, only the model construction before representing the specified truncation arrow",
+  "note": "W2 isolates steps 1 and 2 of the local-chain-model plan; the specified-arrow step is completely proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect complex with universally locally free degree zero cohomology admits finite free model with zero first differential",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complex universally locally free lowest cohomology finite free model differential zero",
+   "date": "2026-10-13",
+   "results": "8 hits: Algebra.FormallySmooth.iff_subsingleton_and_projective, Algebra.formallySmooth_iff, Algebra.FormallySmooth.projective_kaehlerDifferential, CochainComplex.IsKProjective, CochainComplex.cm5b.I_d, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKProjective_iff_leftOrthogonal, CochainComplex.isKProjective_of_projective",
+   "verdict": "no scheme-level bottom-model theorem; generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"CochainComplex\"",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universalH0|finiteFreeResidueModel|linearIndependent_col_iff_row",
+   "date": "2026-10-13",
+   "results": "1 hits: Mathlib/LinearAlgebra/Matrix/Nonsingular.lean",
+   "verdict": "no scheme-level bottom-model theorem; generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectUniversalH0LocalChainModel",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof of the general cube theorem through the universal lowest-cohomology chart argument: steps 1 and 2 of lem-sc-perfect-universal-h0-local-chain-model; Tag 0BDL, matrix-chart proof.",
+   "via": [
+    "lem-sc-perfect-universal-h0-local-chain-model",
+    "lem-sc-perfect-universal-h0-truncation-pullback",
+    "lem-sc-picard-base-change-stalk-surjective",
+    "lem-sc-picard-rank-match-base-change",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectUniversalH0BottomModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectUniversalH0BottomModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_universalH0_bottom_model",
+  "statement": "theorem perfect_universalH0_bottom_model [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (S : Scheme.{u}) [∀ U : S.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))] (K : schemeDerivedCategory S) (hK : IsPerfect S K) (hnegative : ∀ (Y : Scheme.{u}) (k : Y ⟶ S) (i : ℤ), i < 0 → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj ((derivedPullback k).obj K))) (hloc : ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ∃ r : ℕ, ∀ (Y : Scheme.{u}) (k : Y ⟶ U.toScheme), SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((derivedPullback (k ≫ U.ι)).obj K)) r) (s : S) : ∃ U : S.Opens, s ∈ U ∧ IsAffineOpen U ∧ ∃ B : CochainComplex (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ℤ, IsStrictlyPerfect S U B ∧ (∀ i : ℤ, i < 0 → IsZero (B.X i)) ∧ B.d 0 1 = 0 ∧ Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj B)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T045615-L-140110",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T045615-L-140110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
