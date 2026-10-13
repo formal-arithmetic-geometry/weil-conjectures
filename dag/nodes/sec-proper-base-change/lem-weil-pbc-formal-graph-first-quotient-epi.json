@@ -14,38 +14,43 @@
  ],
  "proof": [
   {
-   "text": "On every affine open use the tilde/global-sections equivalence and the coherent formal-module dictionary to identify the discrepancy kernel and its completed morphism with finite module constructions.",
+   "text": "Coherent kernel and binary-sum closure identifies the ordinary pullback as a coherent module using Mathlib Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct. Exactness of coherent completion gives preservation of finite limits via Functor.exact_tfae. Map the ordinary coherent pullback cone through completion and lift (id, theta), using htheta, to a formal map g with first projection id and second projection theta.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-formal-completion-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Exact finite completion preserves the pullback and discrepancy kernel. Compatibility of the formal comparison morphism gives the section (id,theta) into the completed pullback, killed by the completed discrepancy; hence the completed first projection is split epi.",
+   "text": "The discrepancy target Q is the (n+1)st quotient of Fprime and is coherent and annihilated by J^(n+1). All quotients of Q inherit this annihilation by idealModuleProduct_quotient_comp_zero_iff, already proved in CoherentFormalModule. Cancel the quotient projection of the pullback to compute the reduced discrepancy: it is (q_reduced - p_reduced followed by theta_n) followed by the quotient projection of Q. Thus g followed by the completed discrepancy is zero at index n. The annihilation/stabilization equivalence makes target transitions at and above n invertible; naturality gives zero at all higher indices. Epimorphic source transitions give zero below n.",
    "uses": [
-    "lem-weil-pbc-completion-exact-finite-modules"
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-formal-kernel-factorization"
    ],
    "elementary": false
   },
   {
-   "text": "Reduction modulo the ideal identifies a finite module with the first quotient of its completion, compatibly with maps. Reduce the preceding split epimorphism to obtain local surjectivity onto F/JF, then use the affine cover to get sheaf epimorphy.",
+   "text": "Ordinary coherent kernel closure gives K=ker(d). Its kernel fork is limiting in the full coherent subcategory, by the ordinary kernel universal property. Completion preserves this fork, so g lifts to v into the completion of K. The composite v followed by the completed kernel inclusion and first projection is id. Evaluate at index zero: the induced quotient map K/JK to F/JF has a right inverse, hence is epi. Precompose with the epimorphic quotient projection K to K/JK; the defining quotient-map equation identifies the resulting composite with the required kernel inclusion followed by first projection followed by F to F/JF.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-formal-completion-exact",
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-completion-exact-finite-modules"
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-formal-completion-exact",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-formal-kernel-factorization"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C3",
+  "group": "G3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0889(1), affine comparison; Tag 087W; Algebra Tag 00MB"
+  "place": "Tag 0889(1), comparison argument, using exactness Tag 0881 and formal quotient definitions equation 0880; categorical implementation of the existing completion/kernel plan"
  },
  "mathlib_searches": [
   {
@@ -167,10 +172,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261013T095937-L-2453474",
-  "kind": "interface",
+  "landing": "20261013T111850-L-3051745",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
