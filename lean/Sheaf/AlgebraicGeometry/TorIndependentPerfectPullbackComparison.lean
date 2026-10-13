@@ -7,11 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
-import Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Mathlib.Topology.Sheaves.Abelian
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.KFlatStalkCriterion
+import Sheaf.Algebra.Homology.TorIndependentKFlatTensorComparison
+import Sheaf.AlgebraicGeometry.PullbackStalkTensorFlat
 import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
-import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 
 /-! # Tor-independent perfect pullback comparison at a stalk
 
@@ -26,6 +27,89 @@ universe u₁ w₁
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+
+private theorem stalk_additive (Y : RingedSpace.{u₁}) (y : Y) :
+    (RingedSpace.moduleStalkFunctor Y y).Additive := by
+  constructor
+  intro M N a b
+  ext m
+  change (TopCat.Presheaf.stalkFunctor Ab y).map
+    ((PresheafOfModules.toPresheaf _).map (a + b).val) m = _
+  change (TopCat.Presheaf.stalkFunctor Ab y).map
+    ((PresheafOfModules.toPresheaf _).map (a.val + b.val)) m = _
+  rw [Functor.map_add, Functor.map_add]
+  rfl
+
+private theorem kFlat_pullback_stalk_cohomology
+    {X S T : Scheme.{u₁}} (f : X ⟶ S) (g : T ⟶ S)
+    [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w₁}
+      (SheafOfModules.{u₁} (moduleRings (Limits.pullback f g).toRingedSpace))]
+    (P : schemeDerivedCategory X) (z : ↥(Limits.pullback f g))
+    (K : CochainComplex (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) ℤ)
+    (hK : K.IsKFlat) (eK : DerivedCategory.Q.obj K ≅ P) (i : ℤ) :
+    Nonempty
+      ((PullbackStalkTensor.stalkTensorComplex f g z K).homology i ≅
+        (RingedSpace.moduleStalkFunctor (Limits.pullback f g).toRingedSpace z).obj
+          ((DerivedCategory.homologyFunctor _ i).obj
+            ((derivedPullback (pullback.fst f g)).obj P))) := by
+  classical
+  let Y := Limits.pullback f g
+  let k := pullback.fst f g
+  let A := SheafOfModules.{u₁} (moduleRings X.toRingedSpace)
+  let B := SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)
+  obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, ε, _, _, hcompute⟩ :=
+    Classical.choose_spec (exists_derivedPullback k)
+  have hF' : F = Scheme.Modules.tensorPullback k :=
+    CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
+  subst F
+  let F := Scheme.Modules.tensorPullback k
+  have : F.Additive := hAdd
+  let Fc := F.mapHomologicalComplex (.up ℤ)
+  have : IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj K)) := hcompute K hK
+  let c : (derivedPullback k).obj (DerivedCategory.Q.obj K) ≅
+      DerivedCategory.Q.obj (Fc.obj K) :=
+    (derivedPullback k).mapIso ((DerivedCategory.quotientCompQhIso A).symm.app K) ≪≫
+      asIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj K)) ≪≫
+      DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors (.up ℤ)).app K) ≪≫
+      (DerivedCategory.quotientCompQhIso B).app (Fc.obj K)
+  let St := RingedSpace.moduleStalkFunctor Y.toRingedSpace z
+  have : St.PreservesZeroMorphisms :=
+    RingedSpace.moduleStalkFunctor_preservesZeroMorphisms Y.toRingedSpace z
+  have : St.PreservesHomology := Functor.preservesHomology_of_map_exact St (by
+    intro V hV
+    exact ((RingedSpace.module_stalk_exact Y.toRingedSpace V.f).2.2.2.2
+      V.X₃ V.f V.g V.zero).mp hV z)
+  let h : St.obj ((Fc.obj K).homology i) ≅
+      St.obj ((DerivedCategory.homologyFunctor B i).obj ((derivedPullback k).obj P)) :=
+    St.mapIso ((DerivedCategory.homologyFunctorFactors B i).symm.app (Fc.obj K) ≪≫
+      (DerivedCategory.homologyFunctor B i).mapIso c.symm ≪≫
+      (DerivedCategory.homologyFunctor B i).mapIso ((derivedPullback k).mapIso eK))
+  let hSt : ((St.mapHomologicalComplex (.up ℤ)).obj (Fc.obj K)).homology i ≅
+      St.obj ((Fc.obj K).homology i) := ((Fc.obj K).sc i).mapHomologyIso St
+  obtain ⟨d, _⟩ := Scheme.Modules.exists_tensorPullback_stalk_iso k z
+  have : (ModuleCat.extendScalars.{u₁, u₁, u₁} (k.stalkMap z).hom).Additive :=
+    ModuleCat.extendScalars_additive _
+  have : (RingedSpace.moduleStalkFunctor X.toRingedSpace (k z)).PreservesZeroMorphisms :=
+    RingedSpace.moduleStalkFunctor_preservesZeroMorphisms X.toRingedSpace (k z)
+  have : St.Additive := stalk_additive Y.toRingedSpace z
+  have : (RingedSpace.moduleStalkFunctor X.toRingedSpace (k z)).Additive :=
+    stalk_additive X.toRingedSpace (k z)
+  let t := ((Functor.mapHomologicalComplexCompIso
+    (Iso.refl (RingedSpace.moduleStalkFunctor X.toRingedSpace (k z) ⋙
+      ModuleCat.extendScalars.{u₁, u₁, u₁} (k.stalkMap z).hom)) (.up ℤ)).app K) ≪≫
+    (NatIso.mapHomologicalComplex d.symm (.up ℤ)).app K ≪≫
+    ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ St)) (.up ℤ)).app K).symm
+  have ht : PullbackStalkTensor.stalkTensorComplex f g z K ≅
+      ((St.mapHomologicalComplex (.up ℤ)).obj (Fc.obj K)) := by
+    let e := eqToIso (congrArg
+      (fun a : PullbackStalkTensor.A f g z →+* PullbackStalkTensor.C f g z ↦
+        ((ModuleCat.extendScalars.{u₁, u₁, u₁} a).mapHomologicalComplex (.up ℤ)).obj
+          (PullbackStalkTensor.stalkComplex f g z K))
+      (PullbackStalkTensor.tensorToStalk_spec f g z).1)
+    exact e ≪≫ t
+  exact ⟨(HomologicalComplex.homologyFunctor _ (.up ℤ) i).mapIso ht ≪≫ hSt ≪≫ h⟩
 
 /-- For a Tor-independent square, the canonical base-derived tensor comparison
 for a perfect object is an isomorphism at every pullback stalk in every degree.
@@ -64,6 +148,29 @@ theorem torIndependent_perfect_pullback_comparison
     (hTor : PullbackStalkTensor.IsTorIndependent f g)
     (P : schemeDerivedCategory X) (hP : Scheme.IsPerfect X P) :
     ∀ z : ↥(Limits.pullback f g), PullbackStalkTensor.IsComparisonIso f g P z := by
-  sorry
+  -- The algebraic argument applies to all K-flat stalks; perfection is unnecessary here.
+  have _perfect := hP
+  intro z
+  change ∀ K, K.IsKFlat → Nonempty (DerivedCategory.Q.obj K ≅ P) → ∀ i, _
+  intro K hK ⟨eK⟩ i
+  refine ⟨kFlat_pullback_stalk_cohomology f g P z K hK eK i, ?_⟩
+  intro e
+  let := PullbackStalkTensor.leftAlgebra f g z
+  let := PullbackStalkTensor.rightAlgebra f g z
+  let := PullbackStalkTensor.tensorAlgebra f g z
+  let := HasDerivedCategory.standard (ModuleCat.{u₁} (PullbackStalkTensor.R f g z))
+  let := HasDerivedCategory.standard (ModuleCat.{u₁} (PullbackStalkTensor.B f g z))
+  have hstalk := (RingedSpace.isKFlat_iff_stalk_isKFlat X.toRingedSpace K).mp hK
+    ((pullback.fst f g) z)
+  have hTor' := hTor ((pullback.fst f g) z) ((pullback.snd f g) z)
+    (PullbackStalkTensor.point_eq f g z)
+  have hflat := pullback_stalk_tensor_flat g f z rfl rfl
+    (PullbackStalkTensor.tensorToStalk_spec f g z).1
+    (PullbackStalkTensor.tensorToStalk_spec f g z).2
+  have : IsIso ((PullbackStalkTensor.cohomologyModel f g z K).localizedComparison i) :=
+    ModuleCat.localizedComparison_isIso_of_torIndependent_kFlat hTor'
+      (PullbackStalkTensor.stalkComplex f g z K) hstalk hflat
+      (PullbackStalkTensor.cohomologyModel f g z K) i
+  infer_instance
 
 end AlgebraicGeometry
