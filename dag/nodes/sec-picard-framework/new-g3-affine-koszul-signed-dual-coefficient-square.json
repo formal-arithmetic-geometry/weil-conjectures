@@ -1,0 +1,131 @@
+{
+ "id": "new-g3-affine-koszul-signed-dual-coefficient-square",
+ "kind": "statement",
+ "title": "Affine koszul signed dual coefficient square",
+ "statement": "Let Y be a scheme [def-pc-scheme], U an affine open, A=Γ(Y,U), I an ideal of A, n a natural number and f:Fin n→A. Let T be associated sheafification transported from Spec A to U and TC its termwise functor on integer cochain complexes. Let E=TC(K_A(f) extended with K_q in degree -q) [def-weil-pbc-koszul-complex]. There exist complex isomorphisms bO:D(E,T(A))≅TC(koszulDualComplex extended upwards) and bQ:D(E,T(A/I))≅TC(koszulQuotientDualComplex extended upwards). They satisfy D(E,T(A→A/I))≫bQ.hom=bO.hom≫TC(extended koszulCoefficientReduction). Here D is [def-sc-signed-sheaf-dual-complex], its coefficient map is [new-g3-signed-sheaf-dual-coefficient-map], and the dual complexes and coefficient reduction are [def-sc-koszul-dual-complex] and [new-j3-koszul-quotient-coefficient-complex]. No regularity hypothesis is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-koszul-complex",
+  "def-sc-signed-sheaf-dual-complex",
+  "new-g3-signed-sheaf-dual-coefficient-map",
+  "def-sc-koszul-dual-complex",
+  "new-j3-koszul-quotient-coefficient-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "lemma-regular-immersion-ext, displayed coefficient map; Tag 01HV, lemma-spec-sheaves, clauses (4)-(5)"
+ },
+ "proof": [
+  {
+   "text": "Choose the finite exterior-power basis. On each principal open, the internal Hom to tilde(M), for M=A or A/I, is the finite tuple of evaluations in the localized M. This is the localization of Hom_A(K_q,M). The identifications commute with restriction and therefore glue to inverse sheaf morphisms.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nonnegative degree q, conjugate these term comparisons by the canonical extension isomorphisms. Signed precomposition agrees with koszulDualBoundary and koszulQuotientDualBoundary, since -(-1)^q=(-1)^(q+1). Negative degrees and the boundary from degree -1 are zero, so the term maps form complex isomorphisms. Postcomposition with the quotient map reduces the finite tuple of evaluations and is koszulCoefficientReductionDegree; hence the coefficient square commutes in each degree.",
+   "uses": [
+    "def-sc-signed-sheaf-dual-complex",
+    "new-g3-signed-sheaf-dual-coefficient-map",
+    "new-j3-koszul-quotient-coefficient-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-sc-signed-sheaf-dual-complex",
+  "new-g3-signed-sheaf-dual-coefficient-map",
+  "new-j3-koszul-quotient-coefficient-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "Codex",
+  "group": "G3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "lemma-regular-immersion-ext, displayed coefficient map; Tag 01HV, lemma-spec-sheaves, clauses (4)-(5)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of Hom from finite free modules commutes with a quotient coefficient map",
+   "results": "8 hits; ; candidates: SheafOfModules.Presentation.mapGenerators, SheafOfModules.generatorsOfIsCokernelFree_π, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.freeHomEquiv, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.ιFree_freeMap_assoc",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.exteriorPower",
+   "results": "12 hits; ; candidates: Module.Basis.exteriorPower, exteriorPower.basis_coord, exteriorPower.coe_basis, exteriorPower.basis_apply, exteriorPower.basis_repr, exteriorPower.basis_repr_self, exteriorPower.basis_repr_ne, exteriorPower.basis_repr_apply",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*homObj|homObj.*tilde",
+   "results": "0 hits; ; candidates: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom into a single sheaf is naturally the signed dual and finite free dual sheafification commutes with coefficient quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientComplexSquare",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "finite free coefficient computation before homology, via lem-sc-affine-koszul-hom-coefficient-complex-square"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulSignedDualCoefficientSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulSignedDualCoefficientSquare.lean",
+  "declaration": "AlgebraicGeometry.affine_koszul_signed_dual_coefficient_square",
+  "statement": "theorem affine_koszul_signed_dual_coefficient_square\n    {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))\n    (n : ℕ) (f : Fin n → Γ(Y, U.1)) :\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let TC := T.mapHomologicalComplex (ComplexShape.up ℤ)\n    let E := TC.obj\n      ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)\n    ∃ (bO : signedSheafDualComplex (R := U.1.toScheme.toRingedSpace.sheaf)\n          E (T.obj (ModuleCat.of A A)) ≅\n        TC.obj ((ExteriorAlgebra.koszulDualComplex A n f).extend\n          ComplexShape.embeddingUpNat))\n      (bQ : signedSheafDualComplex (R := U.1.toScheme.toRingedSpace.sheaf)\n          E (T.obj (ModuleCat.of A (A ⧸ I))) ≅\n        TC.obj ((ExteriorAlgebra.koszulQuotientDualComplex A I n f).extend\n          ComplexShape.embeddingUpNat)),\n      signedSheafDualCoefficientMap E (T.map (ModuleCat.ofHom I.mkQ)) ≫ bQ.hom =\n        bO.hom ≫ TC.map (HomologicalComplex.extendMap\n          (ExteriorAlgebra.koszulCoefficientReduction A I n f)\n          ComplexShape.embeddingUpNat)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T152439-L-991979",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T152439-L-991979",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

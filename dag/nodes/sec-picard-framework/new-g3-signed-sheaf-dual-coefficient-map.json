@@ -1,0 +1,115 @@
+{
+ "id": "new-g3-signed-sheaf-dual-coefficient-map",
+ "kind": "definition",
+ "title": "Signed sheaf dual coefficient map",
+ "statement": "Let (C,J) be a site, R a sheaf of commutative rings whose underlying ring sheaf is defined by sheafCompose, L an integer cochain complex of sheaves of R-modules, and g:N→N′ a morphism of R-module sheaves. The coefficient morphism D(L,N)→D(L,N′) of the signed internal dual complex [def-sc-signed-sheaf-dual-complex] is defined in degree k by internal postcomposition with g. It commutes with the signed dual differential.",
+ "stmt_deps": [
+  "def-sc-signed-sheaf-dual-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A8X",
+  "place": "section-hom-complexes, displayed differential"
+ },
+ "proof": [
+  {
+   "text": "Construct the component at k by homObjMap(id on L^(-k), g). Both composites with the differential equal -(-1)^k times homObjMap(L.d(-(k+1),-k),g), by linearity and homObjMap_comp_homObjMap. CochainComplex.ofHom assembles these components into an actual morphism. No data are selected from an existence theorem.",
+   "uses": [
+    "def-sc-signed-sheaf-dual-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-signed-sheaf-dual-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "Codex",
+  "group": "G3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0A8X",
+  "place": "section-hom-complexes, displayed differential"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom complex into a single object naturally is the signed dual complex",
+   "results": "8 hits; ; candidates: HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply, CochainComplex.HomComplex.Cochain.toSingleEquiv, HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply, CochainComplex.HomComplex.Cochain.fromSingleEquiv, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle, CochainComplex.HomComplex.Cochain.toSingleMk_v, CochainComplex.HomComplex.Cochain.fromSingleMk_v, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_symm_apply",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObjMap",
+   "results": "0 hits; loogle: unknown identifier 'SheafOfModules.homObjMap'; candidates: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "signedSheafDual.*map|homComplex_to_single",
+   "results": "0 hits; ; candidates: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom into a single sheaf is naturally the signed dual and finite free dual sheafification commutes with coefficient quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientComplexSquare",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "finite free coefficient computation before homology, via lem-sc-affine-koszul-hom-coefficient-complex-square"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SignedSheafDualCoefficientMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SignedSheafDualCoefficientMap.lean",
+  "declaration": "CategoryTheory.signedSheafDualCoefficientMap",
+  "statement": "def signedSheafDualCoefficientMap\n    (L : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)\n    {N N' : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}\n    (g : N ⟶ N') :\n    signedSheafDualComplex (R := R) L N ⟶ signedSheafDualComplex (R := R) L N'",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.signedSheafDualCoefficientMap_comm",
+   "CategoryTheory.signedSheafDualCoefficientMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T152439-L-991979",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T152439-L-991979",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

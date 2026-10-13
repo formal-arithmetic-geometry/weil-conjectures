@@ -9,8 +9,8 @@ public import Sheaf.RingTheory.KoszulQuotientCoefficientComplex
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.Algebra.Homology.HomComplexToSingle
-import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Sheaf.AlgebraicGeometry.HomComplexToSingleCoefficientSquare
+import Sheaf.AlgebraicGeometry.AffineKoszulSignedDualCoefficientSquare
 
 /-! # Finite free Koszul Hom coordinates before taking homology
 
@@ -26,6 +26,10 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the transported module-sheaf aliases and complex isomorphisms needs more fuel.
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Applying internal Hom to the sheafified coefficient quotient gives the
 sheafification of the explicit coefficient reduction between dual complexes.
 Source: Stacks Project, Tag 0BQZ, Lemma 48.15.5, displayed Hom-complex map;
@@ -78,6 +82,30 @@ theorem affine_koszul_hom_coefficient_complex_square
       H.map (S.map (T.map (ModuleCat.ofHom I.mkQ))) ≫ cQ.hom =
         cO.hom ≫ TC.map (HomologicalComplex.extendMap
           (ExteriorAlgebra.koszulCoefficientReduction A I n f)
-          ComplexShape.embeddingUpNat) := by sorry
+          ComplexShape.embeddingUpNat) := by
+  subst H
+  let A := (Γ(Y, U.1) : Type u)
+  let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
+  let TC := T.mapHomologicalComplex (ComplexShape.up ℤ)
+  let E := TC.obj
+    ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)
+  obtain ⟨aO, aQ, ha⟩ := homComplex_to_single_coefficient_square
+    (R := U.1.toScheme.toRingedSpace.sheaf) E
+    (T.obj (ModuleCat.of A A)) (T.obj (ModuleCat.of A (A ⧸ I)))
+    (T.map (ModuleCat.ofHom I.mkQ))
+  obtain ⟨bO, bQ, hb⟩ := affine_koszul_signed_dual_coefficient_square U I n f
+  refine ⟨aO ≪≫ bO, aQ ≪≫ bQ, ?_⟩
+  change _ ≫ (aQ.hom ≫ bQ.hom) = (aO.hom ≫ bO.hom) ≫ _
+  calc
+    _ = (_ ≫ aQ.hom) ≫ bQ.hom := (Category.assoc _ _ _).symm
+    _ = (aO.hom ≫ signedSheafDualCoefficientMap E
+          (T.map (ModuleCat.ofHom I.mkQ))) ≫ bQ.hom :=
+      congrArg (fun g ↦ g ≫ bQ.hom) ha
+    _ = aO.hom ≫ (signedSheafDualCoefficientMap E
+          (T.map (ModuleCat.ofHom I.mkQ)) ≫ bQ.hom) := Category.assoc _ _ _
+    _ = aO.hom ≫ (bO.hom ≫ TC.map (HomologicalComplex.extendMap
+          (ExteriorAlgebra.koszulCoefficientReduction A I n f)
+          ComplexShape.embeddingUpNat)) := congrArg (fun g ↦ aO.hom ≫ g) hb
+    _ = _ := (Category.assoc _ _ _).symm
 
 end AlgebraicGeometry
