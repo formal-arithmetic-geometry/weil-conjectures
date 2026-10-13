@@ -11569,3 +11569,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: merged deliver/T2/Sheaf.AlgebraicGeometry.SectionCohomologyThetaAcyclic (stage 3; reviewer PASS; first push; landing 20261013T072406-L-1125327 (interface); batch 20261013T072335; modules 3; new nodes 2)
 - 07:24 L: merged deliver/T3/Sheaf.AlgebraicGeometry.IdealPowerAnnihilatorQuasicoherent (stage 3; reviewer PASS; first push; landing 20261013T072407-L-1125540 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:24 L: merged deliver/U1/Sheaf.RingTheory.QuasiFiniteLocalDimension (stage 3; reviewer PASS; first push; landing 20261013T072407-L-1125640 (proof); batch 20261013T072335; modules 1; new nodes 0)
+- 07:24 L: merged deliver/U1/Sheaf.RingTheory.TorsionCyclicPresentation (stage 3; reviewer PASS; first push; landing 20261013T072408-L-1125738 (proof); batch 20261013T072335; modules 1; new nodes 0)

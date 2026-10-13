@@ -35,13 +35,13 @@ annihilating `q`. The map `R / I ^ n_q → Q` taking the class of `r` to `r • 
 defined and linear, since every element of `I ^ n_q` kills `q`
 [def-weil-pbc-quotient-module]. Combine these maps by the direct sum universal property
 [def-weil-pbc-direct-sum-modules]; the image of `1` in the `q`-summand is `q`, so the
-resulting map is surjective. Every element of the direct sum has finite support. The
-maximum of `1` and the exponents of its nonzero components annihilates it: the corresponding
-ideal power is contained in each component's annihilating ideal power. Thus the direct
-sum and its kernel are ideal-power torsion. Finally the kernel inclusion is injective,
-its image is precisely the kernel, and the presentation map is surjective. This gives
-short exactness [def-weil-pbc-exact-sequence], in the abelian category of modules
-[lem-weil-pbc-ring-modules-grothendieck-abelian]. -/
+resulting map is surjective. By direct-sum induction, zero is killed by `I ^ 1`,
+a single summand is killed by its defining ideal power, and a sum of elements killed
+by `I ^ m` and `I ^ l` is killed by `I ^ max m l`. Indeed, the latter ideal power
+is contained in each of the former powers. Thus the direct sum and its kernel are
+ideal-power torsion. The kernel inclusion and the surjective presentation map form
+a short exact sequence [def-weil-pbc-exact-sequence], by Mathlib's
+`LinearMap.shortExact_shortComplexKer`. -/
 theorem exists_torsion_cyclic_presentation {R : Type u} [CommRing R] (I : Ideal R)
     (Q : Type (max u v)) [AddCommGroup Q] [Module R Q]
     (hQ : ∀ q : Q, ∃ n : ℕ, 0 < n ∧ ∀ a ∈ I ^ n, a • q = 0) :
@@ -50,6 +50,49 @@ theorem exists_torsion_cyclic_presentation {R : Type u} [CommRing R] (I : Ideal 
         Function.Surjective p ∧
         (∀ k : LinearMap.ker p, ∃ m : ℕ, 0 < m ∧ ∀ a ∈ I ^ m, a • k = 0) ∧
         p.shortComplexKer.ShortExact := by
-  sorry
+  classical
+  let n : Q → ℕ := fun q => Nat.find (hQ q)
+  have hn (q : Q) : 0 < n q ∧ ∀ a ∈ I ^ n q, a • q = 0 :=
+    Nat.find_spec (hQ q)
+  let φ (q : Q) : (R ⧸ I ^ n q) →ₗ[R] Q :=
+    (I ^ n q).liftQ (LinearMap.toSpanSingleton R Q q) (by
+      intro a ha
+      exact (hn q).2 a ha)
+  let p : (⨁ q : Q, R ⧸ I ^ n q) →ₗ[R] Q := DirectSum.toModule R Q Q φ
+  have hp : Function.Surjective p := by
+    intro q
+    refine ⟨DirectSum.lof R Q (fun q => R ⧸ I ^ n q) q
+      ((I ^ n q).mkQ 1), ?_⟩
+    change DirectSum.toModule R Q Q φ
+      (DirectSum.lof R Q (fun q => R ⧸ I ^ n q) q ((I ^ n q).mkQ 1)) = q
+    rw [DirectSum.toModule_lof]
+    exact LinearMap.toSpanSingleton_apply_one R Q q
+  have hP (x : ⨁ q : Q, R ⧸ I ^ n q) :
+      ∃ m : ℕ, 0 < m ∧ ∀ a ∈ I ^ m, a • x = 0 := by
+    induction x using DirectSum.induction_on with
+    | zero => exact ⟨1, Nat.zero_lt_one, fun a _ => smul_zero a⟩
+    | of q x =>
+      refine ⟨n q, (hn q).1, ?_⟩
+      intro a ha
+      rw [← DirectSum.of_smul]
+      have hx : a • x = 0 := by
+        obtain ⟨r, rfl⟩ := (I ^ n q).mkQ_surjective x
+        rw [← LinearMap.map_smul, Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
+        exact (I ^ n q).mul_mem_right r ha
+      rw [hx, map_zero]
+    | add x y hx hy =>
+      obtain ⟨m, hm, hx⟩ := hx
+      obtain ⟨l, hl, hy⟩ := hy
+      refine ⟨max m l, lt_of_lt_of_le hm (le_max_left _ _), ?_⟩
+      intro a ha
+      rw [smul_add, hx a (I.pow_le_pow_right (le_max_left _ _) ha),
+        hy a (I.pow_le_pow_right (le_max_right _ _) ha), zero_add]
+  refine ⟨Q, n, fun q => (hn q).1, p, hp, ?_,
+    LinearMap.shortExact_shortComplexKer hp⟩
+  intro k
+  obtain ⟨m, hm, hk⟩ := hP k.val
+  refine ⟨m, hm, fun a ha => ?_⟩
+  apply Subtype.ext
+  exact hk a ha
 
 end Ideal
