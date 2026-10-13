@@ -1,113 +1,116 @@
 {
-  "id": "lem-sc-picard-base-change-factorization",
-  "kind": "statement",
-  "title": "Canonical Picard base change factors through the coefficient comparison",
-  "statement": "For scheme morphisms f:X→S, j:W→S, h:T→W [def-pc-scheme] and a module M on X [def-pc-module-pullback], let v:X_T→X_W be the canonical top map and q_W,q_T,p_W,p_T the projections [lem-sc-picard-canonical-base-change-comparisons]. For any isomorphism I:P_v P_qW M ≅ P_qT M equal to the specified tensor composition isomorphism followed by transport along v q_W=q_T, the canonical map β_M is the square moduleBaseChangeMap followed by p_T* of I.hom [lem-weil-pbc-module-base-change-map-open-restriction]. This is a factorization of the morphism itself, with no counit or square-conjugacy assertion. The exact statement is lean.statement.",
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08HY",
-    "place": "Canonical underived base-change construction, followed by coefficient composition from Tag 0097."
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-pc-module-pullback",
+ "id": "lem-sc-picard-base-change-factorization",
+ "kind": "statement",
+ "title": "Canonical Picard base change factors through the coefficient comparison",
+ "statement": "For scheme morphisms f:X→S, j:W→S, h:T→W [def-pc-scheme] and a module M on X [def-pc-module-pullback], let v:X_T→X_W be the canonical top map and q_W,q_T,p_W,p_T the projections [lem-sc-picard-canonical-base-change-comparisons]. For any isomorphism I:P_v P_qW M ≅ P_qT M equal to the specified tensor composition isomorphism followed by transport along v q_W=q_T, the canonical map β_M is the square moduleBaseChangeMap followed by p_T* of I.hom [lem-weil-pbc-module-base-change-map-open-restriction]. This is a factorization of the morphism itself, with no counit or square-conjugacy assertion. The exact statement is lean.statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Canonical underived base-change construction, followed by coefficient composition from Tag 0097."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-sc-picard-canonical-base-change-comparisons",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the equality identifying I with the specified composition comparison. The hom of the composite isomorphism is the composite of the homs. The first factor is picardTensorCompIso(v,q_W,M); the second is equality transport along v q_W=q_T from pullback.lift_fst. These are exactly the final factor of picardDirectImageBaseChangeMap. Its first factor is moduleBaseChangeMap for v p_W=p_T h from pullback.lift_snd. Proof irrelevance identifies the projection-equation proofs. No adjunction-counit calculation is involved.",
+   "uses": [
     "lem-sc-picard-canonical-base-change-comparisons",
     "lem-weil-pbc-module-base-change-map-open-restriction"
-  ],
-  "proof": [
-    {
-      "text": "Substitute the equality identifying I with the specified composition comparison. The hom of the composite isomorphism is the composite of the homs. The first factor is picardTensorCompIso(v,q_W,M); the second is equality transport along v q_W=q_T from pullback.lift_fst. These are exactly the final factor of picardDirectImageBaseChangeMap. Its first factor is moduleBaseChangeMap for v p_W=p_T h from pullback.lift_snd. Proof irrelevance identifies the projection-equation proofs. No adjunction-counit calculation is involved.",
-      "uses": [
-        "lem-sc-picard-canonical-base-change-comparisons",
-        "lem-weil-pbc-module-base-change-map-open-restriction"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-picard-canonical-base-change-comparisons",
-    "lem-weil-pbc-module-base-change-map-open-restriction"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "https://stacks.math.columbia.edu/tag/08HY",
-    "place": "Coefficient comparison in the canonical underived base-change map, with Tag 0097."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Canonical base change factors through the pushed forward coefficient pullback composition isomorphism",
-      "results": "8 hits on algebra tensor base-change cancellation, Weierstrass maps, and differentials; no sheaf-map factorization.",
-      "date": "2026-10-13"
-    },
-    {
-      "tool": "loogle",
-      "query": "Iso.trans_hom",
-      "results": "unknown identifier 'Iso.trans_hom'; the qualified CategoryTheory.Iso.trans_hom was read in Mathlib source.",
-      "date": "2026-10-13"
-    },
-    {
-      "tool": "grep",
-      "query": "picardDirectImageBaseChangeMap.*factor|moduleBaseChangeMap.*comp",
-      "results": "No hits.",
-      "date": "2026-10-13"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The canonical module base change morphism factors through the pushforward of a coefficient pullback composition isomorphism",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-13"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.PicardBaseChangeCounit",
-    "date": "2026-10-13",
-    "group": "D2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "Coefficient comparison factor in canonical Picard base change.",
-      "via": [
-        "lem-sc-picard-base-change-counit",
-        "lem-sc-picard-cup-pairing-base-change"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.PicardBaseChangeFactorization",
-    "file": "lean/Sheaf/AlgebraicGeometry/PicardBaseChangeFactorization.lean",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.picardDirectImageBaseChangeMap_factorization",
-    "statement": "theorem picardDirectImageBaseChangeMap_factorization\n    {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (M : X.Modules)\n    (I : (tensorPullback (picardBaseChangeTop f j h)).obj\n        ((tensorPullback (Limits.pullback.fst f j)).obj M) ≅\n      (tensorPullback (Limits.pullback.fst f (h ≫ j))).obj M)\n    (hI : I = (picardTensorCompIso (picardBaseChangeTop f j h)\n        (Limits.pullback.fst f j) M ≪≫\n      eqToIso (congrArg (fun k ↦ (tensorPullback k).obj M)\n        (show picardBaseChangeTop f j h ≫ Limits.pullback.fst f j =\n            Limits.pullback.fst f (h ≫ j) from by\n          dsimp [picardBaseChangeTop]\n          rw [Limits.pullback.lift_fst])))) :\n    picardDirectImageBaseChangeMap f j h M =\n      moduleBaseChangeMap (Limits.pullback.snd f j)\n        (Limits.pullback.snd f (h ≫ j)) h (picardBaseChangeTop f j h)\n        (by dsimp [picardBaseChangeTop]; rw [Limits.pullback.lift_snd])\n        ((tensorPullback (Limits.pullback.fst f j)).obj M) ≫\n      (pushforward (Limits.pullback.snd f (h ≫ j))).map I.hom",
-    "branch": "sheaf-dag",
-    "by": "D2",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "D2",
-    "result": "pass",
-    "landing": "20261013T111840-L-3048598",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "D2",
-    "result": "pass",
-    "landing": "20261013T111840-L-3048598",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-canonical-base-change-comparisons",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Coefficient comparison in the canonical underived base-change map, with Tag 0097."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical base change factors through the pushed forward coefficient pullback composition isomorphism",
+   "results": "8 hits on algebra tensor base-change cancellation, Weierstrass maps, and differentials; no sheaf-map factorization.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Iso.trans_hom",
+   "results": "unknown identifier 'Iso.trans_hom'; the qualified CategoryTheory.Iso.trans_hom was read in Mathlib source.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "picardDirectImageBaseChangeMap.*factor|moduleBaseChangeMap.*comp",
+   "results": "No hits.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical module base change morphism factors through the pushforward of a coefficient pullback composition isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardBaseChangeCounit",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Coefficient comparison factor in canonical Picard base change.",
+   "via": [
+    "lem-sc-picard-base-change-counit",
+    "lem-sc-picard-cup-pairing-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardBaseChangeFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardBaseChangeFactorization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardDirectImageBaseChangeMap_factorization",
+  "statement": "theorem picardDirectImageBaseChangeMap_factorization\n    {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (M : X.Modules)\n    (I : (tensorPullback (picardBaseChangeTop f j h)).obj\n        ((tensorPullback (Limits.pullback.fst f j)).obj M) ≅\n      (tensorPullback (Limits.pullback.fst f (h ≫ j))).obj M)\n    (hI : I = (picardTensorCompIso (picardBaseChangeTop f j h)\n        (Limits.pullback.fst f j) M ≪≫\n      eqToIso (congrArg (fun k ↦ (tensorPullback k).obj M)\n        (show picardBaseChangeTop f j h ≫ Limits.pullback.fst f j =\n            Limits.pullback.fst f (h ≫ j) from by\n          dsimp [picardBaseChangeTop]\n          rw [Limits.pullback.lift_fst])))) :\n    picardDirectImageBaseChangeMap f j h M =\n      moduleBaseChangeMap (Limits.pullback.snd f j)\n        (Limits.pullback.snd f (h ≫ j)) h (picardBaseChangeTop f j h)\n        (by dsimp [picardBaseChangeTop]; rw [Limits.pullback.lift_snd])\n        ((tensorPullback (Limits.pullback.fst f j)).obj M) ≫\n      (pushforward (Limits.pullback.snd f (h ≫ j))).map I.hom",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T111840-L-3048598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T145115-L-694242",
+  "kind": "proof",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Modules.picardDirectImageBaseChangeMap_factorization"
+  ],
+  "sorry_after": []
+ }
 }
