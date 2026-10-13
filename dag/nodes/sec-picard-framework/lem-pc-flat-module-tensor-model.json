@@ -1,0 +1,219 @@
+{
+ "id": "lem-pc-flat-module-tensor-model",
+ "kind": "statement",
+ "title": "Flat finite-presentation model of a scalar-extended module",
+ "statement": "Let $R,C,A,B$ be commutative rings, with $R$-algebra structures on $C,A,B$, and let $f:A\\to B$ be an $R$-algebra map. Assume $A$ and $B$ are finitely presented over $R$ [def-weil-pbc-finitely-presented-algebra]. Let $M$ be a finitely presented $B$-module [def-sc-finitely-presented-module], restricted to $A$ along $f$. Set $X=C\\otimes_R A$ and $Y=C\\otimes_R B$. If $X\\otimes_A M$ is flat over $X$ [def-weil-pbc-flat-ring-map], there exist commutative rings $P,Q$, a $P$-algebra structure on $Q$, a $Q$-module $L$, and a ring map $P\\to X$, such that $P$ is finitely presented over $\\mathbf Z$, $Q$ is finitely presented over $P$, $L$ is finitely presented over $Q$, and $L$ restricted along $P\\to Q$ is flat over $P$. There is a ring isomorphism $e:X\\otimes_P Q\\simeq Y$ whose restriction to $X$ is the tensor extension of $f$, and, using the $Q$-action on $Y$ induced by $q\\mapsto e(1\\otimes q)$, a $Y$-linear isomorphism $Y\\otimes_Q L\\simeq Y\\otimes_B M$. The $B$-action on $Y$ is its right tensor inclusion.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), with tensor base-change identifications"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Give B its A-algebra structure through f. Finite presentation over the finite-type algebra A and tensor base change make Y=C\\otimes_R B finitely presented over X=C\\otimes_R A. Tensor cancellation identifies Y\\otimes_B M with X\\otimes_A M as X-modules, so it is flat over X and finitely presented over Y.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-pc-fp-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (1), applied to the scalar extension"
+   }
+  },
+  {
+   "text": "Apply the finite-presentation approximation theorem to X, Y and T=Y\\otimes_B M. The approximation has base-change transition maps and the specified colimit identifications. Its base rings are finite type over the integers, its top rings are finite type over the base, and its modules are finite. The rings are Noetherian; the rings and modules therefore have the asserted finite presentations.",
+   "uses": [
+    "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sc-noetherian-finite-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (1), first paragraph; Tag 00R1"
+   }
+  },
+  {
+   "text": "At each prime of Y contract the prime to every approximation ring and localize. Localization-colimit and localization-tensor identifications give the local ring systems and their module colimit. The limit module is flat over the localized base. Apply the local Noetherian eventual-flatness criterion to obtain a stage flat at this contracted prime.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "lem-pc-affine-flat-module-local-criterion",
+    "lem-weil-pbc-colimit-eventually-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (1), first paragraph; Tag 00R6"
+   }
+  },
+  {
+   "text": "At each stage the flat locus in the top spectrum is open. Localization commutes with base change and preserves flatness, so the inverse image of a flat locus is contained in each later flat locus. Their inverse images in Spec(Y) form a directed open cover. Quasi-compactness gives one stage whose flat locus pulls back to all of Spec(Y).",
+   "uses": [
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-local-criterion",
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (1), second paragraph"
+   }
+  },
+  {
+   "text": "The closed complement at that stage is V(J). Its extended ideal in Y is the unit ideal. Lift the coefficients of a finite unit relation to one stage and its equality to 1 to a later stage. Every prime of the later top ring avoids one of these coefficients from J; persistence puts it in the flat locus. The prime-local criterion makes the whole model module L flat over its base P.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-flat-over-localization",
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (1), third paragraph"
+   }
+  },
+  {
+   "text": "The approximation theorem gives the canonical isomorphism e:X\\otimes_P Q\\simeq Y and its compatibility with the map X\\to Y. Its module base-change isomorphism is Y\\otimes_Q L\\simeq T. On pure tensors its Q-action is the right inclusion followed by e, exactly the algebra structure in the Lean statement.",
+   "uses": [
+    "lem-weil-pbc-limit-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (1), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-pc-affine-flat-module-local-criterion",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-fp-module-base-change",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-colimit-eventually-flat",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-limit-module-finite-presentation",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat module finitely presented over a finitely presented algebra has a flat finitely presented model over a finitely generated integer algebra",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat finitely presented module over finitely presented algebra admits a flat model over a finite type integer algebra",
+   "results": "Candidates: Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat, Module.Flat.exists_factorization_of_isFinitelyPresented, Algebra.Smooth.flat_of_isNoetherianRing, Module.Flat.projective_of_finitePresentation, Algebra.FinitePresentation.of_restrict_scalars_finitePresentation, Module.FinitePresentation.iff_finitePresentation_of_finite, RingHom.flat_algebraMap_iff. No theorem states this algebra-and-module model comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*model|model.*flat|model.*stage|stage.*model",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFlatModuleDescent",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation proof step: eventual flatness of a finitely presented module, using Algebra Lemma 10.168.1 (Tag 02JO), part (3), after restricting to affine charts; flat-model construction, affine descent steps 1-7",
+   "via": [
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatModuleTensorModel",
+  "file": "lean/Sheaf/RingTheory/FlatModuleTensorModel.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_module_tensor_model",
+  "statement": "theorem exists_flat_module_tensor_model\n    {R C : Type v} {A B M : Type w}\n    [CommRing R] [CommRing C] [CommRing A] [CommRing B] [AddCommMonoid M]\n    [Algebra R C] [Algebra R A] [Algebra R B]\n    [Algebra.FinitePresentation R A] [Algebra.FinitePresentation R B]\n    [Module B M] [Module.FinitePresentation B M] (f : A →ₐ[R] B)\n    (hflat : letI : Module A M := Module.compHom M f.toRingHom\n      letI : Algebra A (C ⊗[R] A) := Algebra.TensorProduct.rightAlgebra\n      Module.Flat (C ⊗[R] A) ((C ⊗[R] A) ⊗[A] M)) :\n    ∃ (P Q L : Type (max v w)) (_ : CommRing P) (_ : CommRing Q)\n      (_ : Algebra P Q) (_ : AddCommMonoid L) (_ : Module Q L)\n      (_ : Algebra P (C ⊗[R] A)),\n      Algebra.FinitePresentation ℤ P ∧ Algebra.FinitePresentation P Q ∧\n      Module.FinitePresentation Q L ∧\n      (letI : Module P L := Module.compHom L (algebraMap P Q); Module.Flat P L) ∧\n      ∃ e : (C ⊗[R] A) ⊗[P] Q ≃+* C ⊗[R] B,\n        e.toRingHom.comp Algebra.TensorProduct.includeLeftRingHom =\n          (Algebra.TensorProduct.map (Algebra.ofId C C) f).toRingHom ∧\n        (letI : Algebra Q (C ⊗[R] B) :=\n          (e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom).toAlgebra\n         letI : Algebra B (C ⊗[R] B) := Algebra.TensorProduct.rightAlgebra\n         Nonempty ((C ⊗[R] B) ⊗[Q] L ≃ₗ[C ⊗[R] B] (C ⊗[R] B) ⊗[B] M))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T082415-L-1648810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T082415-L-1648810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

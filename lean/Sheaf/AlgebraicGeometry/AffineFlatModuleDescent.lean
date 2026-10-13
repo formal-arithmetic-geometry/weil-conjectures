@@ -9,15 +9,9 @@ public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.Algebra.FinitePresentationColimit
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
-import Sheaf.RingTheory.ColimitCategoryFpAlgebras
-import Sheaf.RingTheory.ColimitEventuallyFlat
-import Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule
-import Sheaf.RingTheory.FlatModuleAtPrime
-import Sheaf.RingTheory.LimitModuleFinitePresentation
-import Sheaf.RingTheory.OpenFlatLocus
+
+import Sheaf.RingTheory.FlatModuleTensorModel
+import Sheaf.RingTheory.FpModuleTensorModelComparison
 
 /-!
 # Eventual flatness for finitely presented modules over affine inverse limits
@@ -90,6 +84,31 @@ theorem exists_eventually_flat_of_finitePresentation
             Algebra.TensorProduct.rightAlgebra;
           Module.Flat ((F.obj j : Type v) ⊗[(F.obj i : Type v)] Ai)
             (((F.obj j : Type v) ⊗[(F.obj i : Type v)] Ai) ⊗[Ai] Ni))) := by
-  sorry
+  let : Algebra (F.obj i : Type v) (c.pt : Type v) :=
+    (c.ι.app i).hom.toAlgebra
+  obtain ⟨P, Q, L, cP, cQ, aPQ, cL, mQL, aP, hP, hQ, hL, hPL, e, he, eM⟩ :=
+    exists_flat_module_tensor_model (C := (c.pt : Type v)) f hflat
+  let : CommRing P := cP
+  let : CommRing Q := cQ
+  let : Algebra P Q := aPQ
+  let : AddCommMonoid L := cL
+  let : Module Q L := mQL
+  let : Algebra.FinitePresentation ℤ P := hP
+  let : Algebra.FinitePresentation P Q := hQ
+  let : Module.FinitePresentation Q L := hL
+  obtain ⟨j₀, hi, hmodel⟩ :=
+    exists_eventually_tensor_model_equiv F c hc f P Q L aP e he eM
+  let : Module Ai Ni := Module.compHom Ni f.toRingHom
+  let : Module P L := Module.compHom L (algebraMap P Q)
+  have : Module.Flat P L := hPL
+  refine ⟨j₀, hi, ?_⟩
+  intro j h₀ h₁
+  let : Algebra (F.obj i : Type v) (F.obj j : Type v) :=
+    (F.map (homOfLE (h₀.trans h₁))).hom.toAlgebra
+  let : Algebra Ai ((F.obj j : Type v) ⊗[F.obj i] Ai) :=
+    Algebra.TensorProduct.rightAlgebra
+  obtain ⟨aPj, ⟨ej⟩⟩ := hmodel j h₀ h₁
+  let := aPj
+  exact Module.Flat.of_linearEquiv ej.symm
 
 end AlgebraicGeometry

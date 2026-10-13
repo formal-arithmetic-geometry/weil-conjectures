@@ -1,0 +1,179 @@
+{
+ "id": "lem-pc-fp-module-tensor-model-comparison",
+ "kind": "statement",
+ "title": "Eventual comparison with a finite-presentation module model",
+ "statement": "Let $I$ be a directed preorder, $F:I\\to\\mathrm{CommRing}$ a diagram with colimit cocone $(C,\\iota)$ [def-weil-pbc-category-colimit], and fix $i\\in I$. Let $A,B$ be finitely presented $F(i)$-algebras [def-weil-pbc-finitely-presented-algebra], $f:A\\to B$ an $F(i)$-algebra map, and $M$ a finitely presented $B$-module [def-sc-finitely-presented-module]. Set $X=C\\otimes_{F(i)}A$ and $Y=C\\otimes_{F(i)}B$. Let $P,Q$ be commutative rings with a map $P\\to Q$, and $L$ a $Q$-module, with $P$ finitely presented over $\\mathbf Z$, $Q$ finitely presented over $P$, and $L$ finitely presented over $Q$. Suppose given $P\\to X$, a ring isomorphism $e:X\\otimes_P Q\\simeq Y$ whose restriction to $X$ is the tensor extension of $f$, and a $Y$-linear isomorphism $Y\\otimes_Q L\\simeq Y\\otimes_B M$, where the $Q$-action on $Y$ is $q\\mapsto e(1\\otimes q)$ and its $B$-action is its right tensor inclusion. Then there is $j_0\\geq i$ such that for every $j\\geq j_0$, with $A_j=F(j)\\otimes_{F(i)}A$ using the transition map $F(i)\\to F(j)$, there is a $P$-algebra structure on $A_j$ and an $A_j$-linear isomorphism $A_j\\otimes_P L\\simeq A_j\\otimes_A M$. Here $L$ is restricted from $Q$ to $P$ and $M$ is restricted from $B$ to $A$. No module in the hypotheses is required to be flat.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), final paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the cofinal tail above i. The tensor systems A_j, B_j and their module base changes have the stated colimits, by representatives and eventual equality in tensor base changes. Finite presentation of A and B over F(i) implies finite presentation of A to B, so every B_j is finitely presented over A_j and every base-changed module is finitely presented over B_j. For the PartialOrder version of module-map descent, pass to the poset reflection of the cofinal tail: mutually comparable indices have inverse transition isomorphisms, and the quotient diagram has the same colimit. Represent the resulting stage by an original index and transport the comparisons back; all later original indices receive them by base change.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-pc-fp-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), base-change identifications"
+   }
+  },
+  {
+   "text": "Factor P to X through an A stage, using its finite presentation over the integers. Above it make the A stages P-algebras. The map Q to Y induced by e is P-linear by the left-inclusion identity, so its finite presentation factors it through a B stage. Tensor extension gives a compatible comparison A_j\\otimes_P Q\\to B_j whose limit is e.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph, construction of Psi"
+   }
+  },
+  {
+   "text": "Both sides of the comparison are finitely presented over A_j. Descend the inverse of e by finite-presentation algebra-map descent; descend both inverse identities by its equality clause. At a common later stage the comparison is invertible. Tensor base change makes it invertible at every later stage.",
+   "uses": [
+    "lem-weil-pbc-colimit-category-fp-algebras",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph, eventual invertibility of Psi"
+   }
+  },
+  {
+   "text": "The model L and the prescribed module give finitely presented modules over this B stage. The specified Y-linear equivalence identifies their limit base changes. Descend it and its inverse by finite-presentation module-map descent; descend the two inverse identities and take a common upper bound. The descended maps are mutually inverse there and remain so after every later base change.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-pc-fp-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph, module comparison"
+   }
+  },
+  {
+   "text": "Tensor cancellation using B_j\\simeq A_j\\otimes_P Q identifies the model module with A_j\\otimes_P L, with the P-action restricted along P to Q. The prescribed module identifies with A_j\\otimes_A M. Restrict the comparison to A_j to obtain the asserted linear equivalence. The comparison argument never assumes flatness.",
+   "uses": [
+    "lem-pc-fp-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph, tensor identifications"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-pc-fp-module-base-change",
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), final paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented algebra and finitely presented module model of a filtered colimit becomes isomorphic to the prescribed base change at every sufficiently late stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism of finitely presented modules and algebras descends from a filtered ring colimit to a stage",
+   "results": "Candidates: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.preservesFilteredColimits_coyoneda, preservesFilteredColimits_coyoneda, isFinitelyPresentable, CommRingCat.isFinitelyPresentable_hom, CommRingCat.preservesColimit_coyoneda_of_finitePresentation, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, preservesColimit_coyoneda_of_finitePresentation. No theorem states this algebra-and-module model comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*model|model.*flat|model.*stage|stage.*model",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFlatModuleDescent",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation proof step: eventual flatness of a finitely presented module, using Algebra Lemma 10.168.1 (Tag 02JO), part (3), after restricting to affine charts; model comparison, affine descent step 8",
+   "via": [
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.RingTheory.FpModuleTensorModelComparison",
+  "file": "lean/Sheaf/RingTheory/FpModuleTensorModelComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_eventually_tensor_model_equiv",
+  "statement": "theorem exists_eventually_tensor_model_equiv\n    {I : Type v} [Preorder I] [IsDirectedOrder I]\n    (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)\n    {i : I} {A B M : Type w}\n    [CommRing A] [CommRing B] [AddCommMonoid M]\n    [Algebra (F.obj i : Type v) A] [Algebra (F.obj i : Type v) B]\n    [Algebra.FinitePresentation (F.obj i : Type v) A]\n    [Algebra.FinitePresentation (F.obj i : Type v) B]\n    [Module B M] [Module.FinitePresentation B M] (f : A →ₐ[F.obj i] B)\n    (P Q L : Type x) [CommRing P] [CommRing Q] [Algebra P Q]\n    [AddCommMonoid L] [Module Q L]\n    [Algebra.FinitePresentation ℤ P] [Algebra.FinitePresentation P Q]\n    [Module.FinitePresentation Q L]\n    (aP : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      Algebra P ((c.pt : Type v) ⊗[F.obj i] A))\n    (e : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI := aP\n      ((c.pt : Type v) ⊗[F.obj i] A) ⊗[P] Q ≃+* (c.pt : Type v) ⊗[F.obj i] B)\n    (he : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI := aP\n      e.toRingHom.comp Algebra.TensorProduct.includeLeftRingHom =\n        (Algebra.TensorProduct.map (Algebra.ofId (c.pt : Type v) (c.pt : Type v))\n          f).toRingHom)\n    (eM : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI := aP\n      letI : Algebra Q ((c.pt : Type v) ⊗[F.obj i] B) :=\n        (e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom).toAlgebra\n      letI : Algebra B ((c.pt : Type v) ⊗[F.obj i] B) :=\n        Algebra.TensorProduct.rightAlgebra\n      Nonempty (((c.pt : Type v) ⊗[F.obj i] B) ⊗[Q] L ≃ₗ[\n        (c.pt : Type v) ⊗[F.obj i] B] ((c.pt : Type v) ⊗[F.obj i] B) ⊗[B] M)) :\n    letI : Module A M := Module.compHom M f.toRingHom\n    letI : Module P L := Module.compHom L (algebraMap P Q)\n    ∃ j₀ : I, i ≤ j₀ ∧ ∀ (j : I) (h₀ : i ≤ j₀) (h₁ : j₀ ≤ j),\n      letI := (F.map (homOfLE (h₀.trans h₁))).hom.toAlgebra\n      letI : Algebra A ((F.obj j : Type v) ⊗[F.obj i] A) :=\n        Algebra.TensorProduct.rightAlgebra\n      ∃ aPj : Algebra P ((F.obj j : Type v) ⊗[F.obj i] A),\n        letI := aPj\n        Nonempty (((F.obj j : Type v) ⊗[F.obj i] A) ⊗[P] L ≃ₗ[\n          (F.obj j : Type v) ⊗[F.obj i] A] ((F.obj j : Type v) ⊗[F.obj i] A) ⊗[A] M)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T082415-L-1648810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T082415-L-1648810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
