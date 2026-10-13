@@ -13899,3 +13899,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:45 L: merged deliver/D2/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261013T234505-L-2160771 (proof); batch 20261013T234502; modules 1; new nodes 0)
 - 23:45 L: merged deliver/D2/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (stage 3; reviewer PASS; first push; landing 20261013T234506-L-2160875 (proof); batch 20261013T234502; modules 1; new nodes 0)
 - 23:45 L: merged deliver/D2/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261013T234506-L-2161022 (proof); batch 20261013T234502; modules 1; new nodes 0)
+- 23:45 L: merged deliver/E1/Sheaf.Algebra.Homology.SecondLocalizationOrdinarySquare (stage 3; reviewer PASS; first push; landing 20261013T234507-L-2161173 (interface); batch 20261013T234502; modules 2; new nodes 1)

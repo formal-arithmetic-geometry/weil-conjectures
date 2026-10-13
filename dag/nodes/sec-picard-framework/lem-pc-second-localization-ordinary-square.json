@@ -14,22 +14,27 @@
  },
  "proof": [
   {
-   "text": "exact extension of scalars from B to Bp preserves homology. The defining\nleftDerivedLift factorization of secondLocalizationDerivedMap makes its composite\nwith K.counit equal L.counit extended to Bp and followed by the ordinary scalar\nextension associator. Evaluate at the restriction of Q to R and apply degree-i\nhomology. Naturality of flatDerivedHomologyIso, and of the homotopy and derived\nhomology factorization isomorphisms, identifies this with the ordinary coefficient\nmap b tensor x to image(b) tensor x. Transpose the B-to-Bp scalar extension\nadjunction: its unit evaluates at 1 tensor x, giving exactly\nsecondLocalizationCohomologyMap. Substitute comparison_eq for both models and\ncancel cohomologyIso. The ordinaryIso_tmul equations identify the coefficient\nchain map with φ: precompose with L.ordinaryIso and use tensor induction in each\ndegree. Exact restriction and forgetting scalars commute with homology, by\nnaturality of mapHomologyIso and its composition identity (compare their maps on\ncycles and the surjective homology projection). This gives the displayed\nadditive square. This argument precedes extension to D: it uses neither\nordinaryToLocalized nor localizedComparison, and makes no invertibility claim\nabout either comparison. Identity coefficient maps and zero complexes give the\nsame counit identity; no flatness of D is required.",
+   "text": "Construct the B-linear chain map underlying the given additive phi. Surjectivity of L.ordinaryIso reduces scalar compatibility to pure tensors; hphi and multiplicativity of B to Bp prove it, with zero and addition handled by tensor induction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the module-linear ordinary counit square to this constructed map. Transport both comparisons along the exact restriction and forgetful homology isomorphisms. Compatibility of these isomorphisms with composition follows by cancelling the homology projection and comparing cycle inclusions. Naturality of mapHomologyIso identifies homology of the forgotten B-linear chain map with homology of phi.",
    "uses": [
-    "lem-pc-second-localization-map"
+    "lem-pc-second-localization-ordinary-B-square"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-second-localization-map"
+  "lem-pc-second-localization-ordinary-B-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N2",
+  "group": "E1",
   "date": "2026-10-14",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 06Y6, universal derived base-change counit, before the coefficient extension to D"
+  "place": "Tag 06Y6; scalar-linearity and exact forgetful homology transport formalized in second reading"
  },
  "mathlib_searches": [
   {
@@ -108,9 +113,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261013T224515-L-1473922",
+  "landing": "20261013T234507-L-2161173",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

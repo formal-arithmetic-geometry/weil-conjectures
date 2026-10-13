@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-second-localization-ordinary-B-square",
+ "kind": "statement",
+ "title": "Module-linear ordinary counit square before forgetting coefficients",
+ "statement": "Let R, A, B, Bp, D be commutative rings with R-algebras A, B, Bp, a compatible B-algebra structure on Bp, IsScalarTower R B Bp, and algebra structures of A tensor_R B and A tensor_R Bp on D. Assume derived categories for R, B, Bp and flatness of B to Bp. Let Q be a cochain complex of A-modules, i an integer, and L, K be the models of [def-pc-base-derived-tensor-cohomology-model] for B and Bp. Write X=(A tensor_R B) tensor_A Q, Y=(A tensor_R Bp) tensor_A Q, f:B to A tensor_R B and g:Bp to A tensor_R Bp for includeRight, and r for restriction Bp to B. Given a B-linear chain map phiB:Res_f X to r(Res_g Y) sending L.ordinaryIso(b tensor x) to K.ordinaryIso(image(b) tensor x), the B-linear identity is Res_f(L.comparison i);s_f inverse;H^i(phiB) = secondLocalizationCohomologyMap;r(Res_g(K.comparison i);s_g inverse);s_r inverse, where each s is the exact restriction-of-scalars homology isomorphism H^i(Res Z) to Res(H^i Z). Unlike the parent additive square, this statement assumes module linearity and neither constructs the B-linear lift of an additive map nor transports homology through forgetting scalar actions.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-second-localization-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, universal derived base-change counit"
+ },
+ "proof": [
+  {
+   "text": "Proof: install the target model's universal left-derived-functor instance.\nThe defining leftDerivedLift factorization of secondLocalizationDerivedMap\nidentifies its composite with K.counit with L.counit extended to Bp and the\nordinary scalar-extension associator. Evaluate at the restriction of Q to R,\napply degree-i homology, and use the defining localization factorization of\nflatDerivedHomologyIso to commute the flat extension with homology. Transpose\nalong extension/restriction of scalars B to Bp: the unit sends x to 1 tensor x.\nSubstitute the two comparison_eq identities and cancel the cohomologyIso maps.\nThe ordinary associator sends b tensor x to image(b) tensor x; the given hφ\nidentifies its transpose, conjugated by ordinaryIso, with φB, by tensor\ninduction after precomposing with L.ordinaryIso. Naturality of the homology\nfactorization maps and of mapHomologyIso for restriction to B completes the\nB-linear identity below. This calculation uses no forgetful functor, no\nlocalizedComparison, and no hypothesis on flatness of D.",
+   "uses": [
+    "lem-pc-second-localization-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-second-localization-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6"
+ },
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SecondLocalizationOrdinaryBSquare",
+  "file": "lean/Sheaf/Algebra/Homology/SecondLocalizationOrdinaryBSquare.lean",
+  "declaration": "RingTensorCohomology.secondLocalization_ordinary_B_square",
+  "statement": "theorem secondLocalization_ordinary_B_square (hflat : (algebraMap B Bp).Flat) (i : ℤ)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)\n    (K : ModuleCat.BaseDerivedTensorCohomologyModel R A Bp Q D)\n    (φB : ((ModuleCat.restrictScalars\n        (Algebra.TensorProduct.includeRight :\n          B →ₐ[R] A ⊗[R] B).toRingHom).mapHomologicalComplex (.up ℤ)).obj\n        (((ModuleCat.extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex (.up ℤ)).obj\n          Q) ⟶\n      ((ModuleCat.restrictScalars (algebraMap B Bp)).mapHomologicalComplex (.up ℤ)).obj\n        (((ModuleCat.restrictScalars\n          (Algebra.TensorProduct.includeRight :\n          Bp →ₐ[R] A ⊗[R] Bp).toRingHom).mapHomologicalComplex (.up ℤ)).obj\n          (((ModuleCat.extendScalars (algebraMap A (A ⊗[R] Bp))).mapHomologicalComplex (.up\n            ℤ)).obj Q)))\n    (hφ : ∀ (j : ℤ) (b : B) (x : Q.X j),\n      φB.f j (L.ordinaryIso.hom.f j (b ⊗ₜ[R,algebraMap R B] x)) =\n        K.ordinaryIso.hom.f j (algebraMap B Bp b ⊗ₜ[R,algebraMap R Bp] x)) :\n    (ModuleCat.restrictScalars\n      (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).map\n        (L.comparison i) ≫\n      (((((ModuleCat.extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n        (.up ℤ)).obj Q).sc i).mapHomologyIso\n          (ModuleCat.restrictScalars\n            (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom)).inv ≫\n      HomologicalComplex.homologyMap φB i =\n    secondLocalizationCohomologyMap R A B Bp D hflat Q L K i ≫\n      (ModuleCat.restrictScalars (algebraMap B Bp)).map\n        ((ModuleCat.restrictScalars\n          (Algebra.TensorProduct.includeRight : Bp →ₐ[R] A ⊗[R] Bp).toRingHom).map\n            (K.comparison i) ≫\n          (((((ModuleCat.extendScalars (algebraMap A (A ⊗[R] Bp))).mapHomologicalComplex\n            (.up ℤ)).obj Q).sc i).mapHomologyIso\n              (ModuleCat.restrictScalars\n                (Algebra.TensorProduct.includeRight : Bp →ₐ[R] A ⊗[R] Bp).toRingHom)).inv) ≫\n      (((((ModuleCat.restrictScalars\n        (Algebra.TensorProduct.includeRight :\n          Bp →ₐ[R] A ⊗[R] Bp).toRingHom).mapHomologicalComplex (.up ℤ)).obj\n            (((ModuleCat.extendScalars (algebraMap A (A ⊗[R] Bp))).mapHomologicalComplex (.up\n              ℤ)).obj Q)).sc i).mapHomologyIso (ModuleCat.restrictScalars (algebraMap B Bp))).inv",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of coefficients commutes with the homology map of the universal left derived tensor counit before forgetting module structure",
+   "results": "Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, AdicCompletion.ofTensorProduct_naturality, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-14",
+   "verdict": "General exactness and naturality tools; no arbitrary-model B-linear counit square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived_fac_app\"",
+   "results": "CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.leftDerived_fac_app_assoc",
+   "date": "2026-10-14",
+   "verdict": "General exactness and naturality tools; no arbitrary-model B-linear counit square."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived_fac|mapHomologyIso_inv_naturality",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-14",
+   "verdict": "General exactness and naturality tools; no arbitrary-model B-linear counit square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat extension of scalars commutes with the ordinary comparison of arbitrary universal derived tensor models before forgetting the module structure",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SecondLocalizationOrdinarySquare",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine localization identity: naturality of the derived-to-ordinary comparison under flat second coefficient extension, before scalar extension to D.",
+   "via": [
+    "lem-pc-second-localization-comparison",
+    "lem-pc-derived-tensor-second-localization-models",
+    "lem-pc-derived-tensor-localization-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T234507-L-2161173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T234507-L-2161173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
