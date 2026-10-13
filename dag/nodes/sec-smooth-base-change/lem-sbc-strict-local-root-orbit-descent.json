@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-strict-local-root-orbit-descent",
+ "kind": "statement",
+ "title": "Cyclic descent to fixed-ring punctures",
+ "statement": "Let $R,H$ be commutative rings in one universe and $\\iota:R\\to H$ a ring map. Assume $H$ is strictly henselian local (henselian with separably closed residue field), $H$ and $H/(\\iota(g))$ are regular local [def-weil-regular-scheme], and $\\iota(g)$ is a nonzerodivisor in the maximal ideal of $H$, for $g\\in R$. Let $n>0$ be invertible in $R$, put $U=D(g)\\subset\\operatorname{Spec}R$ [def-weil-pbc-scheme-conventions], and let $j:Y\\to U$ be finite etale [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Write $p=j\\circ\\iota_U$. Put $A=R[T]/(T^n-g)$ and $V=D(g)\\subset\\operatorname{Spec}A$. Suppose there is an isomorphism $Y\\times_{\\operatorname{Spec}R}V\\cong\\coprod_{\\operatorname{Fin}d}V$ [def-pc-fibre-product] commuting with the projections. Then there are $m\\in\\mathbb N$ and subgroups $K(k)\\subseteq\\mu_n(H)$ for $k\\in\\operatorname{Fin}m$, and an isomorphism over $\\operatorname{Spec}H$ from $Y\\times_{\\operatorname{Spec}R}\\operatorname{Spec}H$ to $D(\\iota(g))\\subseteq\\operatorname{Spec}(\\prod_k C^{K(k)})$. Here $C=H[t]/(t^n-\\iota(g))$, the rotations and the fixed subalgebras are the actual polynomial-evaluation constructions described in [lem-sbc-strict-local-root-invariants]; no intermediate-root identification is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, strict local root-algebra and normal-domain paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-regular-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "lem-sbc-strict-local-root-invariants"
+ ],
+ "proof": [
+  {
+   "text": "Put h=iota(g) and C=H[t]/(t^n-h). The monic relation makes C finite free. Its closed fibre has one prime, so C is local and strictly henselian. The root t is regular, C/(t)=H/(h), and the local regularity computation of [lem-sbc-root-algebra-regular-at-root] makes C regular local. It is a normal domain and its puncture is connected.",
+   "uses": [
+    "lem-sbc-root-algebra-regular-at-root"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Hensel lift the residue roots of X^n-1. The n rotations t to zeta*t give a connected cyclic torsor on D(h). Base change the supplied splitting along iota: associativity of pullbacks and the monic-root base-change isomorphism identify the pullback with d copies of this torsor. Its descent datum is a permutation action on Fin d. Partition this finite set into orbits, enumerate them by Fin m, and let K(k) be the stabilizer of a chosen representative.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Torsor descent identifies the component for K(k) with Spec((C[1/h])^K(k)). In a domain with nonzero h, invariance of a fraction forces invariance of its numerator, so this ring is (C^K(k))[1/h]. The finite disjoint union is D(h) in the spectrum of the product of the fixed subalgebras, since finite products commute with localization. All maps are over H, giving theta and its projection equation. For d=0 there are no orbits and the product is the zero ring, with empty spectrum.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-root-algebra-regular-at-root"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D4",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, strict local root-algebra and normal-domain paragraphs",
+  "note": "Explicit specialization of the intermediate-root argument; details in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fixedRing|fixedSubring|fixed.*[Ss]ubalgebra|invariants",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale cover trivialized by a cyclic Kummer root cover decomposes into intermediate root extensions over a strictly henselian regular local ring",
+   "results": "8 hits: Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, StandardEtalePair.instFormallyEtaleRing, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.homEquiv, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePresentation",
+   "date": "2026-10-13",
+   "verdict": "No exact match; only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale covers split by a connected cyclic torsor descend to a disjoint union of spectra of stabilizer invariant rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitStrictLocalOrbits",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, standard tame root covers: Tag 0EYG, strict local root-algebra and normal-domain paragraphs",
+   "via": [
+    "lem-sbc-root-split-strict-local-orbits",
+    "lem-sbc-root-split-cover-ind-etale-charts",
+    "lem-sbc-root-split-cover-on-divisor-charts",
+    "lem-sbc-root-split-cover-cyclic-chart-model",
+    "lem-sbc-root-split-cover-cyclic-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootOrbitDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictLocalRootOrbitDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strict_local_root_orbit_descent",
+  "statement": "theorem strict_local_root_orbit_descent\n    (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)\n    [IsStrictlyHenselianLocalRing H] [IsRegularLocalRing H]\n    [IsRegularLocalRing (H ⧸ Ideal.span {ι g})]\n    (hg : IsSMulRegular H (ι g)) (hgm : ι g ∈ IsLocalRing.maximalIdeal H)\n    (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g))\n    (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    [IsFinite j] [Etale j] (d : ℕ) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∀ (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n        pullback.snd p (V.ι ≫ q) →\n    ∃ (m : ℕ) (K : Fin m → Subgroup (rootsOfUnity n H)),\n        let B := ∀ k : Fin m, rootFixedAlgebra H (ι g) n (K k)\n        let N := Spec (CommRingCat.of B)\n        let q := Spec.map (CommRingCat.ofHom (algebraMap H B))\n        let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H B (ι g))\n        ∃ θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme,\n          θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T152017-L-953546",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T152017-L-953546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

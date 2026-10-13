@@ -1,0 +1,116 @@
+{
+ "id": "lem-sbc-strict-local-root-invariants",
+ "kind": "statement",
+ "title": "Fixed subalgebras of strict local root rotations",
+ "statement": "Let $H$ be a strictly henselian local commutative ring (henselian local [def-weil-pbc-henselian-terminology] with separably closed residue field), $h\\in H$ and $n>0$ with $n$ a unit in $H$. Put $C=H[t]/(t^n-h)$. Let $\\mu_n(H)=\\{\\zeta\\in H^\\times:\\zeta^n=1\\}$, acting on $C$ by the $H$-algebra homomorphisms $\\rho_\\zeta(t)=\\zeta t$. For a subgroup $K\\subseteq\\mu_n(H)$ define $C^K=\\{x\\in C:\\rho_\\zeta(x)=x\\text{ for all }\\zeta\\in K\\}$, with the inherited ring and $H$-algebra structure. Write $e=[\\mu_n(H):K]$. Then $e>0$, $e\\mid n$, and there is an $H$-algebra isomorphism $C^K\\cong H[s]/(s^e-h)$. Neither regularity nor a nonzerodivisor assumption on $h$ is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, final intermediate-field paragraph; Tag 09EV, cyclic intermediate-root calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Hensel lift the simple residue roots of X^n-1. All n roots lie in H, have pairwise unit differences, and form a cyclic group of order n. For K of order r, its index e is positive and r*e=n; hence e divides n.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The monic power basis of C is 1,t,...,t^(n-1). A generator zeta of K multiplies t^i by zeta^i. For r not dividing i, zeta^i-1 has nonzero residue and is a unit. Comparison of coefficients shows that the fixed subalgebra has basis 1,t^r,...,t^((e-1)*r).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation s at t^r is well-defined since (t^r)^e=h and its image is fixed. It maps the monic basis of H[s]/(s^e-h) bijectively onto the displayed invariant basis. Thus it is an H-algebra isomorphism; invert it to obtain the orientation asserted. For n=1, K is trivial and this is the identity on the degree-one root algebra.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D4",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, final intermediate-field paragraph; Tag 09EV, cyclic intermediate-root calculation",
+  "note": "Explicit specialization of the intermediate-root argument; details in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "invariants of a Kummer root algebra under a subgroup of roots of unity are an intermediate root algebra",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the fixed subalgebra of H[T]/(T^n-h) under a subgroup of nth roots of unity is H[S]/(S^e-h)",
+   "results": "8 hits: autAdjoinRootXPowSubCEquiv_symm_smul, autAdjoinRootXPowSubCEquiv, autAdjoinRootXPowSubC, autEquivZmod, autEquivZmod_symm_apply_natCast, autEquivRootsOfUnity_smul, autEquivZmod_symm_apply_intCast, autAdjoinRootXPowSubCHom",
+   "date": "2026-10-13",
+   "verdict": "No exact match; only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|rootsOfUnity|IsPrimitiveRoot",
+   "results": "25 hits: Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean, Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean, Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean, Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean, Mathlib/RingTheory/RootsOfUnity/AlgebraicallyClosed.lean, Mathlib/RingTheory/RootsOfUnity/Complex.lean, Mathlib/RingTheory/RootsOfUnity/Complex.lean, Mathlib/RingTheory/RootsOfUnity/Complex.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; only ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitStrictLocalOrbits",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, standard tame root covers: Tag 0EYG, final intermediate-field paragraph; Tag 09EV, cyclic intermediate-root calculation",
+   "via": [
+    "lem-sbc-root-split-strict-local-orbits",
+    "lem-sbc-root-split-cover-ind-etale-charts",
+    "lem-sbc-root-split-cover-on-divisor-charts",
+    "lem-sbc-root-split-cover-cyclic-chart-model",
+    "lem-sbc-root-split-cover-cyclic-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootInvariants",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictLocalRootInvariants.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strict_local_root_invariants",
+  "statement": "theorem strict_local_root_invariants\n    (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]\n    (h : H) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : H))\n    (K : Subgroup (rootsOfUnity n H)) :\n    0 < K.index ∧ K.index ∣ n ∧\n      Nonempty (rootFixedAlgebra H h n K ≃ₐ[H]\n        AdjoinRoot ((Polynomial.X : Polynomial H) ^ K.index - Polynomial.C h))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T152017-L-953546",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T152017-L-953546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Regular.SMul
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 
+import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootOrbitDescent
+
 /-! # Cyclic orbits on root-split strict local covers
 
 Source: Stacks Project, Tag 0EYG, local and intermediate-field paragraphs; Tag 09EV, intermediate
@@ -26,6 +28,42 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem root_fixed_puncture_iso
+    (H : CommRingCat.{u}) (B C : Type u) [CommRing B] [CommRing C]
+    [Algebra H B] [Algebra H C] (h : H) (E : B ≃ₐ[H] C) :
+    let NB := Spec (CommRingCat.of B)
+    let NC := Spec (CommRingCat.of C)
+    let UB : NB.Opens := PrimeSpectrum.basicOpen (algebraMap H B h)
+    let UC : NC.Opens := PrimeSpectrum.basicOpen (algebraMap H C h)
+    let qB := Spec.map (CommRingCat.ofHom (algebraMap H B))
+    let qC := Spec.map (CommRingCat.ofHom (algebraMap H C))
+    ∃ η : UB.toScheme ≅ UC.toScheme, η.hom ≫ UC.ι ≫ qC = UB.ι ≫ qB := by
+  dsimp
+  let f := (Scheme.Spec.mapIso E.symm.toRingEquiv.toCommRingCatIso.op).hom
+  let UB : (Spec (CommRingCat.of B)).Opens :=
+    PrimeSpectrum.basicOpen (algebraMap H B h)
+  let UC : (Spec (CommRingCat.of C)).Opens :=
+    PrimeSpectrum.basicOpen (algebraMap H C h)
+  have hU : UB = f ⁻¹ᵁ UC := by
+    apply TopologicalSpace.Opens.ext
+    ext x
+    change (algebraMap H B h ∉ x.asIdeal) ↔
+      (E.symm (algebraMap H C h) ∉ x.asIdeal)
+    rw [E.symm.commutes]
+  let η := (Spec (CommRingCat.of B)).isoOfEq hU ≪≫ f.preimageIso UC
+  refine ⟨η, ?_⟩
+  have hf : f ≫ Spec.map (CommRingCat.ofHom (algebraMap H C)) =
+      Spec.map (CommRingCat.ofHom (algebraMap H B)) := by
+    dsimp [f]
+    rw [← AlgebraicGeometry.Spec.map_comp]
+    congr 1
+    ext x
+    exact E.symm.commutes x
+  change η.hom ≫ UC.ι ≫ _ = UB.ι ≫ _
+  simp only [η, Iso.trans_hom, Category.assoc, Hom.preimageIso_hom_ι_assoc]
+  rw [hf, isoOfEq_hom_ι_assoc]
+
 /-- Over a fixed regular strictly henselian local base, root-split finite etale
 covers of a regular principal puncture decompose into intermediate root covers.
 
@@ -33,26 +71,19 @@ Source: Stacks Project, Tag 0EYG, local and intermediate-field paragraphs,
 and Tag 09EV for intermediate subextensions.
 (blueprint: lem-sbc-root-split-strict-local-orbits)
 
-Proof: Base change j and its supplied splitting along iota. Put h=iota(g).
-The root algebra C=H[t]/(t^n-h) is finite free over H. Its closed fibre has
-one prime, since h is in the maximal ideal; it is therefore local and strictly
-henselian. Multiplication by t is injective because t^n=h is regular, and
-C/(t)=H/(h) is regular local. Thus C is regular local and a normal domain.
-The puncture C[1/t] is connected. Hensel lift the distinct residue roots of
-X^n-1. They give a cyclic group of n roots of unity acting by t to zeta*t;
-the punctured root cover is its connected torsor over H[1/h]. Pullback
-associativity and compatibility of Spec with the root-algebra base change
-transport the supplied splitting to this torsor. Descent data on its d
-connected copies are a permutation action on Fin d. Decompose it into
-orbits of lengths e(k). Each length is positive and divides n, so is a
-unit in H. For an orbit of length e the stabilizer fixes t^(n/e). Eisenstein
-at the prime (h) and the cyclic intermediate-field calculation identify
-its fraction field with the extension defined by s^e=h. The latter root
-algebra is again regular local, and its localization at h is normal.
-It and the orbit cover are the same integral closure of H[1/h] in that
-field. Their isomorphism respects H[1/h]. Assemble the finitely many
-components using the product of root algebras, and restrict to D(h).
-The resulting isomorphism over H gives the stated projection equation.
+Proof: Apply strict_local_root_orbit_descent to obtain subgroups K(k) of the
+root rotations and an isomorphism theta to the puncture of the product of their
+fixed subalgebras. Transport invertibility of n along iota. For each subgroup,
+strict_local_root_invariants gives e(k)=K(k).index, positive and dividing n,
+and an H-algebra equivalence from its fixed subalgebra to H[s]/(s^e(k)-h).
+Take the product of these algebra equivalences. Spec turns its inverse into
+an isomorphism of the product spectra. Its preimage of D(h) is exactly D(h),
+because the algebra equivalence fixes every element of H. Restrict this
+isomorphism using Hom.preimageIso and isoOfEq. Contravariant functoriality of
+Spec and the H-algebra compatibility prove its projection equation. Compose
+it with theta; associativity and theta's projection equation give the desired
+isomorphism over H. This leaves the geometric descent and the invariant-ring
+calculation as independent statements, with their arguments in their docstrings.
 Edge cases: d=0 has no orbits and m=0, so both schemes are empty. For n=1
 all nonempty orbits have length one. The regular local hypotheses make
 H and H/(h) nonzero domains, so the puncture is nonempty. -/
@@ -84,6 +115,21 @@ theorem root_split_strict_local_orbits
           (algebraMap H (∀ k : Fin m,
             AdjoinRoot ((Polynomial.X : Polynomial H) ^ e k - Polynomial.C (ι g))) (ι g))
         ∃ γ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme,
-          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by sorry
+          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by
+  dsimp
+  intro δ hδ
+  obtain ⟨m, K, θ, hθ⟩ :=
+    strict_local_root_orbit_descent R H g ι hg hgm n hn p j hj d δ hδ
+  have hnH : 0 < n ∧ IsUnit (n : H) :=
+    ⟨hn.1, by simpa only [map_natCast] using hn.2.map ι⟩
+  have hc := fun k : Fin m ↦ strict_local_root_invariants H (ι g) n hnH (K k)
+  let e : Fin m → ℕ := fun k ↦ (K k).index
+  let B := ∀ k : Fin m, rootFixedAlgebra H (ι g) n (K k)
+  let C := ∀ k : Fin m,
+    AdjoinRoot ((Polynomial.X : Polynomial H) ^ e k - Polynomial.C (ι g))
+  let E : B ≃ₐ[H] C := AlgEquiv.piCongrRight (fun k ↦ (hc k).2.2.some)
+  obtain ⟨η, hη⟩ := root_fixed_puncture_iso H B C (ι g) E
+  refine ⟨m, e, (fun k ↦ ⟨(hc k).1, (hc k).2.1⟩), θ ≪≫ η, ?_⟩
+  rw [Iso.trans_hom, Category.assoc, hη, hθ]
 
 end AlgebraicGeometry.Scheme
