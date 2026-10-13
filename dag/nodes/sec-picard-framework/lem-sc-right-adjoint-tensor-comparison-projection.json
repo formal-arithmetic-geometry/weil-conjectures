@@ -24,26 +24,56 @@
  ],
  "proof": [
   {
-   "text": "Apply the unbounded quasi-coherent projection formula for a proper morphism to each K and c(O_Y); identify its canonical map with the displayed mate and invert it.",
+   "text": "Set E=c(O_Y) and RE=Rf_*E, using hRf to put RE in D_QCoh. For perfect K choose its dual and exact pairing. Monoidal pullback transports that pairing; the projection mate is the conjugate of the invertible tensorator at the dual. The conjugation equivalence preserves isomorphisms, so the mate is invertible on all perfect K.",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-derived-direct-image",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-weil-proper-morphism"
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-sc-monoidal-projection-conjugate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the natural transformation whose components are the specified projection mates: transpose inverse tensorator followed by the pullback counit. Naturality follows from oplax tensorator naturality, the whisker exchange law and adjunction naturality. Its isomorphism locus is stable under retracts by taking retracts of its naturality squares. Shift and third-triangle-object closure are supplied by projectionComparison_triangles.",
+   "uses": [
+    "lem-sc-projection-comparison-triangles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a coproduct of quasi-coherent K_j, lift its cofan into the full quasi-coherent subcategory. The inclusion preserves this coproduct by ambient coproduct closure. Pullback preserves it as a left adjoint, and tensorRight E preserves it. The pullback-tensor objects are quasi-coherent, so direct image preserves their coproduct. TensorRight RE preserves the source coproduct as well. The natural transformation restricted to the discrete input diagram is an isomorphism because each component is. Preservation of the colimit therefore makes its component at the coproduct invertible. This includes the empty index type.",
+   "uses": [
+    "lem-pc-derived-ambient-has-coproducts",
+    "lem-pc-derived-qcoh-closed-coproducts",
+    "lem-sc-derived-tensor-right-coproducts",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-canonical-derived-tensor-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The locus contains perfect objects and has all five closure properties defining perfectLocalizingClosure. Thus perfectLocalizingClosure is contained in it by sInf_le. Perfect generation identifies this closure with the top property, putting every K in the locus. Take the inverse of asIso of the projection mate to obtain pf. Its inverse equation is reflexive by construction.",
+   "uses": [
+    "lem-pc-derived-qcoh-perfect-generation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback",
-  "def-pc-derived-direct-image",
-  "def-pc-scheme-derived-tensor-structure",
-  "def-weil-proper-morphism"
+  "lem-pc-canonical-derived-tensor-qcoh",
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-derived-direct-image-preserves-direct-sums",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-pc-derived-qcoh-perfect-generation",
+  "lem-pc-perfect-tensor-hom-duality",
+  "lem-sc-derived-tensor-right-coproducts",
+  "lem-sc-monoidal-projection-conjugate",
+  "lem-sc-projection-comparison-triangles"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9U"
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Tag 08EU, proof, with global perfect generation (09IS) replacing the affine generation reduction; P1"
  },
  "mathlib_searches": [
   {
@@ -99,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T223417-L-1640913",
+  "landing": "20261013T015605-L-3024167",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
