@@ -17,39 +17,40 @@
  ],
  "proof": [
   {
-   "text": "Fix a stage and pass to its cofiltered tail, then to a directed coinitial system without changing the limit. Since all stages are affine, the limit is affine and quasi-compact. Apply finite affine etale refinement to the given cover Z_i, retaining its maps to the Z_i and representing arrows by composition. Reindex its finite sources by Fin n.",
+   "text": "Apply Scheme.isAffine_of_isLimit to the underlying affine scheme diagram. Its limit is quasi-compact. Scheme.exists_finite_affine_of_mem_smallEtaleTopology produces Fin n-indexed affine sources T_q, terminal arrows t_q in the original covering sieve and a jointly surjective family. Membership in Sieve.ofArrows factors t_q=f_q;z_{r(q)}. Compose f_q with a_{r(q)} to retain representing arrows.",
    "uses": [
-    "lem-weil-pbc-cofiltered-limit-directed-reindex",
     "lem-weil-pbc-etale-covering-affine-refinement"
    ],
    "elementary": false
   },
   {
-   "text": "At the fixed directed stage, take its terminal etale object as affine target and pull each representing W_i back from X to that stage. Use p=π_i;D(i).hom and canonical pullback comparisons to convert the affine refining cover and its representing arrows into the input of etale_finiteCoverFactorizationDescent. Apply it to descend both arrow families under a common source comparison and obtain a covering at a later stage. It permits the auxiliary targets to be non-quasi-compact: morphism factorization is applied to the qcqs base-change diagrams of the affine sources, not to their target objects. Thus no separation or quasi-compactness of X is imposed.",
+   "text": "Apply IsFiltered.exists_directed to J opposite, and use F.leftOp.Initial and Initial.isLimitWhiskerEquiv to reindex the diagram without changing its cone vertex. The affine stages supply compactness, quasi-separatedness and affine transition maps. Choose one directed stage, its full affine terminal etale object and the pullbacks of W_{r(q)} to that stage. PullbackComp and preservation of terminal objects transport t_q and f_q;a_{r(q)} into the input of etale_finiteCoverFactorizationDescent. Obtain a later stage, affine source models, both descended arrow families under common source isomorphisms, and a stage covering.",
    "uses": [
-    "lem-weil-pbc-etale-finite-cover-factorization-descent",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-weil-pbc-etale-finite-cover-factorization-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the later pullback of the fixed terminal etale object with the later terminal object. Compose model structure maps with the open immersion into X, and compose the representing maps with their projections to the original W_i. The common source comparisons followed by the maps to the selected Z_i give e_b. Pullback hom_ext and the descended arrow equations give p*(w_b)=e_b;a_{r(b)}. The family e_b;z_{r(b)} recovers the chosen limit refinement. The stage covering survives the terminal comparison and localization into X. The finite-cover descent handles the empty family, making an empty stage.",
-   "uses": [
-    "lem-weil-pbc-cartesian-square-pasting"
-   ],
-   "elementary": false
+   "text": "Identify the stage pullback of the fixed terminal object with the later terminal object. Uniqueness of terminal arrows identifies each descended covering arrow with its model structure map, so the cover transfers by joint surjectivity. Localize source models along the stage open immersion into X, and compose representing arrows with pullback projections. Since that immersion is mono and p factors through it, the X-pullback and the stage pullback are isomorphic: explicitly lift the two projections in both directions and check inverse identities by pullback hom_ext. Compose this isomorphism with the common source comparison from finite-cover descent. The fst projection of the representing equation follows from the descended equation and the projection identities for pullbackComp; the snd projection is the structural equation. Pullback hom_ext proves the representing equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose each limit-source comparison with f_q to obtain e_q. Transfer the finite limit covering through the source isomorphisms: a point y of T_q lifts via the inverse source comparison, and t_q=f_q;z_{r(q)} gives its image. Reindex Fin n by ULift to put the finite index type in the specified universe; joint surjectivity is unchanged. Associativity gives p*(w_q)=e_q;a_{r(q)}. This proof also works for n=0, without a nonempty-cover assumption.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cofiltered-limit-directed-reindex",
   "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-etale-finite-cover-factorization-descent",
-  "lem-weil-pbc-cartesian-square-pasting"
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-etale-finite-cover-factorization-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/0EYL",
-  "place": "Lemma 59.51.2, qcqs affine object and arrow descent and finite covering descent; Tag 03Q6 proof steps (1)-(3); Tag 01ZC(3) for locally finitely presented target factorization"
+  "document": "lean/Sheaf/Paper/AffineOpenRepresentingCoverDescent.lean",
+  "place": "Q4 proof: finite refinement, directed reindexing, existing finite-cover factorization descent, explicit pullback comparisons"
  },
  "mathlib_searches": [
   {
@@ -133,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T122231-L-3591864",
-  "kind": "interface",
+  "landing": "20261013T130035-L-3923790",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
