@@ -1,0 +1,156 @@
+{
+ "id": "lem-sc-affine-open-pseudo-coherent-localization-point",
+ "kind": "statement",
+ "title": "Pointwise pseudo-coherent localization on an affine open",
+ "statement": "Let X be affine [def-pc-scheme], U an open, and A=Gamma(X,O_X). Fix the derived categories [def-pc-derived-category] on X, on U and on every localized open site of U, with the last two in the same morphism universe, and module derived categories over each A_f in an independent universe. Let T from A-modules to structure-sheaf modules on X preserve zero morphisms and be naturally isomorphic to tilde followed by restriction along X.isoSpec.hom. Let M be an A-module complex. Suppose the derived restriction to U of Q(T M) is pseudo-coherent [def-pur-pseudo-coherent-complex]. For each x in U there is f in A with x in D(f), D(f) contained in U, and Q(M_f) pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. No compactness of U or finite family is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EE",
+  "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply the definition of pseudo-coherence at the point x of U. Obtain a neighbourhood V in U, a bounded-above complex P of finite free modules on its localized site, and an isomorphism from the derived restriction of Q(T M) to Q(P). Map V into X using the open immersion of U. Its image W is open, contained in U, and contains x.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08EE",
+    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+   }
+  },
+  {
+   "text": "Transport X to Spec(A) by X.isoSpec. The principal-open basis yields a in A with x in D(a) contained in W. Transport P to the localized site of the image of W in Spec(A). Use the exact equivalences on module sheaves induced by the scheme isomorphism and the open scheme/localized site equivalences. These preserve zero objects and carry free modules to free modules of the same rank via preservation of coproducts and the unit-sheaf comparison. Localize these equivalences; the composition and localization factorization comparisons transport the local-model isomorphism. The natural isomorphism hT identifies the transported termwise T-complex with the tilde complex of M. Auxiliary derived categories on Spec(A) and its open sites may be the standard ones; localization equivalences compare them with the supplied categories, so no equality of morphism universes is needed.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-equivalence",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08EE",
+    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+   }
+  },
+  {
+   "text": "Apply affine_pseudoCoherent_principal_model to this neighbourhood, the chosen principal open D(a), the transported P and its bound, finite ranks and model isomorphism. It makes Q(M_a) pseudo-coherent. Return a, its membership at x, containment in U and this property. For empty U there is no point; for empty principal opens the principal-model theorem includes the zero ring.",
+   "uses": [
+    "lem-pc-affine-pseudo-coherent-principal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08EE",
+    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-scheme-iso-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-principal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08EE",
+  "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent associated sheaf complex on an open subset of an affine scheme has a pseudo coherent module localization near each point",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent on an open subset of an affine scheme implies pseudo coherent localization at a principal neighbourhood of each point",
+   "results": "AffineTargetMorphismProperty.IsLocal.of_basicOpenCover, isLocalization_basicOpen_of_qcqs, reduce_to_affine_nbhd; no derived pseudo-coherent localization theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPseudoCoherent\"",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent.*(restrict|localiz)|IsPseudoCoherent.*basicOpen",
+   "results": "0 Mathlib hits; direct library rg found the principal-model theorem and whole-spectrum localization cover (pointwise result), and private cover quasi-isomorphism detection in AlternatingCechSheafLocalContraction (detection result). These do not give the affine principal-localization transport required here. Blueprint-wide searches for pseudo-coherent localization and quasi-isomorphism principal found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenLocalizedModel",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine module-model reduction of Tag 08EE: pointwise principal refinement of local pseudo-coherent models",
+   "via": [
+    "lem-sc-affine-open-localized-model",
+    "lem-sc-affine-pseudo-coherent-lift",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenPseudoCoherentLocalizationPoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenPseudoCoherentLocalizationPoint.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_open_pseudoCoherent_localization_point",
+  "statement": "theorem affine_open_pseudoCoherent_localization_point\n    (X : Scheme.{u}) [IsAffine X] (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    [∀ f : X.presheaf.obj (.op ⊤), HasDerivedCategory.{wL}\n      (ModuleCat.{u} (Localization.Away f))]\n    (T : ModuleCat.{u} (X.presheaf.obj (.op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace)) [T.PreservesZeroMorphisms]\n    (hT : Nonempty (T ≅ tilde.functor (X.presheaf.obj (.op ⊤)) ⋙\n      Modules.restrictFunctor X.isoSpec.hom))\n    (M : CochainComplex (ModuleCat.{u} (X.presheaf.obj (.op ⊤))) ℤ)\n    (hM : IsPseudoCoherent U.toScheme\n      (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n          (Modules.overEquiv U)).mapDerivedCategory.obj (DerivedCategory.Q.obj\n        ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj M))))\n    (x : X) (hx : x ∈ U) :\n    ∃ f : X.presheaf.obj (.op ⊤), x ∈ X.basicOpen f ∧ X.basicOpen f ≤ U ∧\n      DerivedCategory.IsPseudoCoherent\n        (DerivedCategory.Q.obj ((Functor.mapHomologicalComplex\n          (ModuleCat.extendScalars\n            (algebraMap (X.presheaf.obj (.op ⊤)) (Localization.Away f)))\n          (ComplexShape.up ℤ)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100224-L-2504251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100224-L-2504251",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

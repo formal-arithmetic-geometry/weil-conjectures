@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalModel
+import Sheaf.AlgebraicGeometry.AffineModuleComplexRepresentative
+import Sheaf.AlgebraicGeometry.AffineOpenPseudoCoherentLocalizationPoint
+import Sheaf.AlgebraicGeometry.AffinePrincipalCoverQuasiIsoDetection
 
 /-! # Affine module models on a quasi-compact open
 
@@ -105,6 +106,58 @@ theorem exists_affine_open_localized_model
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
             (Modules.overEquiv U)).mapDerivedCategory.map
               (DerivedCategory.Q.map ((T.mapHomologicalComplex (ComplexShape.up ℤ)).map α))) :=
-  by sorry
+  by
+    classical
+    obtain ⟨M, ⟨eM⟩⟩ := exists_affine_module_complex_representative X E'.obj E'.property
+    obtain ⟨t⟩ := hT
+    have c : (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj M ≅
+        ((Modules.restrictFunctor X.toSpecΓ).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj
+          ((@Functor.mapHomologicalComplex ℤ _ _ _ _ _ _
+            (tilde.functor (X.presheaf.obj (.op ⊤)))
+            ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M) := by
+      apply HomologicalComplex.Hom.isoOfComponents (fun i ↦ t.app (M.X i))
+    have eTM : DerivedCategory.Q.obj
+        ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj M) ≅ E'.obj :=
+      DerivedCategory.Q.mapIso c ≪≫ eM.symm
+    let R := ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Modules.overEquiv U)).mapDerivedCategory
+    obtain ⟨eU⟩ := e
+    have hM : IsPseudoCoherent U.toScheme (R.obj
+        (DerivedCategory.Q.obj ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj M))) := by
+      intro x
+      obtain ⟨V, hx, P, hb, hfree, ⟨hP⟩⟩ := hE x
+      exact ⟨V, hx, P, hb, hfree, ⟨(SheafOfModules.overFunctor.{u}
+        (moduleRings U.toScheme.toRingedSpace) V).mapDerivedCategory.mapIso
+          (R.mapIso eTM ≪≫ eU) ≪≫ hP⟩⟩
+    let S := {a : X.presheaf.obj (.op ⊤) // X.basicOpen a ≤ U ∧
+      DerivedCategory.IsPseudoCoherent
+        (DerivedCategory.Q.obj ((Functor.mapHomologicalComplex
+          (ModuleCat.extendScalars
+            (algebraMap (X.presheaf.obj (.op ⊤)) (Localization.Away a)))
+          (ComplexShape.up ℤ)).obj M))}
+    have hpoint : (U : Set X) ⊆ ⋃ a : S, (X.basicOpen a.val : Set X) := by
+      intro x hx
+      obtain ⟨a, hxa, haU, ha⟩ :=
+        affine_open_pseudoCoherent_localization_point X U T ⟨t⟩ M hM x hx
+      exact Set.mem_iUnion.mpr ⟨⟨a, haU, ha⟩, hxa⟩
+    obtain ⟨s, hs⟩ := hU.elim_finite_subcover
+      (fun a : S ↦ (X.basicOpen a.val : Set X)) (fun a ↦ (X.basicOpen a.val).isOpen) hpoint
+    let enum : Fin (Fintype.card s) ≃ s := (Fintype.equivFin s).symm
+    let f : Fin (Fintype.card s) → X.presheaf.obj (.op ⊤) := fun j ↦ (enum j).val.val
+    have hsub : ∀ j, X.basicOpen (f j) ≤ U := fun j ↦ (enum j).val.property.1
+    have hcover : ∀ x : X, x ∈ U → ∃ j, x ∈ X.basicOpen (f j) := by
+      intro x hx
+      obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.mp (hs hx)
+      refine ⟨enum.symm ⟨a, ha⟩, ?_⟩
+      change x ∈ (X.basicOpen (f (enum.symm ⟨a, ha⟩)) : Set X)
+      simpa only [f, Equiv.apply_symm_apply] using hxa
+    refine ⟨M, Fintype.card s, f, fun j ↦ (enum j).val.property.2, ⟨eTM⟩, ?_⟩
+    intro F α hα
+    exact affine_principal_cover_quasiIso_detection X U T ⟨t⟩
+      (Fintype.card s) f hsub hcover F M α hα
 
 end AlgebraicGeometry.Scheme

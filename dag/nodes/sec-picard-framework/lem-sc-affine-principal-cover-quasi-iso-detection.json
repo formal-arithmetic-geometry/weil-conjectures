@@ -1,0 +1,155 @@
+{
+ "id": "lem-sc-affine-principal-cover-quasi-iso-detection",
+ "kind": "statement",
+ "title": "Quasi-isomorphism detection on a principal-open cover of an affine open",
+ "statement": "Let X be affine [def-pc-scheme], U an open, A=Gamma(X,O_X), and choose derived categories [def-pc-derived-category] of structure-sheaf modules on X and on U in the same morphism universe. Let T from A-modules to structure-sheaf modules on X preserve zero morphisms and be naturally isomorphic to tilde followed by restriction along X.isoSpec.hom. Let f_j be a finite family with D(f_j) contained in U and covering U. For any A-module complexes F,M and chain map alpha:F to M, if every localized map alpha_fj is a quasi-isomorphism, then the derived restriction to U of Q(T alpha) is invertible. There are no pseudo-coherence, boundedness, compactness, or unit-ideal hypotheses.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EE",
+  "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "On each D(f_j), the principal-open tilde sections formula, natural in a module and its homomorphisms, identifies the restriction of termwise tilde with tilde of the localized complex over A_fj. On smaller principal opens this comparison is the canonical further localization, and uniqueness of localization maps proves compatibility with restriction. Transport along X.isoSpec and the natural isomorphism hT. The same comparison identifies the restricted map with tilde of alpha_fj.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08EE",
+    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+   }
+  },
+  {
+   "text": "Tilde preserves colimits as the left adjoint in the affine tilde/Gamma adjunction. For a module map, the kernel of its tilde map is quasi-coherent by the module kernel theorem. Gamma preserves kernels as a right adjoint, and the adjunction unit identifies Gamma of the source and target with their modules. Hence Gamma of the sheaf kernel is the module kernel. The adjunction counit on this quasi-coherent kernel identifies it with tilde of that module kernel, compatibly with the kernel arrow by naturality. Thus tilde preserves kernels and is exact, so it commutes with homology. Since alpha_fj is a quasi-isomorphism, its associated sheaf map has invertible homology on D(f_j). Exact open restriction and the open-scheme equivalences preserve this assertion.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08EE",
+    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+   }
+  },
+  {
+   "text": "The D(f_j), viewed as opens of U using hsub, cover U by hcover. Each homology map of the restricted T(alpha) is invertible after restriction to these opens. Apply the local open-cover criterion for module sheaf isomorphisms in each degree. Thus the restricted complex map is a quasi-isomorphism. Apply Q, and use the exact restriction localization comparison to identify its image with the map in the conclusion. Invertibility is invariant under this conjugation. An empty family forces U empty, where the same sheaf-cover criterion is vacuous.",
+   "uses": [
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08EE",
+    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08EE",
+  "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localized quasi isomorphisms on principal opens covering an open subset imply associated sheaf complex map is a quasi isomorphism on that open",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi isomorphisms of module complexes after localization on a principal open cover become quasi isomorphisms of associated sheaf complexes on the covered open subset",
+   "results": "DerivedCategory.isIso_Q_map_iff_quasiIso and Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso give general localization criteria, not the required principal-open tilde comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, Localization.Away",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*(cover|tilde)|tilde.*quasiIso",
+   "results": "0 Mathlib hits; direct library rg found the principal-model theorem and whole-spectrum localization cover (pointwise result), and private cover quasi-isomorphism detection in AlternatingCechSheafLocalContraction (detection result). These do not give the affine principal-localization transport required here. Blueprint-wide searches for pseudo-coherent localization and quasi-isomorphism principal found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenLocalizedModel",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine module-model reduction of Tag 08EE: final sheafification of localized quasi-isomorphisms",
+   "via": [
+    "lem-sc-affine-open-localized-model",
+    "lem-sc-affine-pseudo-coherent-lift",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePrincipalCoverQuasiIsoDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePrincipalCoverQuasiIsoDetection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_principal_cover_quasiIso_detection",
+  "statement": "theorem affine_principal_cover_quasiIso_detection\n    (X : Scheme.{u}) [IsAffine X] (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    (T : ModuleCat.{u} (X.presheaf.obj (.op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace)) [T.PreservesZeroMorphisms]\n    (hT : Nonempty (T ≅ tilde.functor (X.presheaf.obj (.op ⊤)) ⋙\n      Modules.restrictFunctor X.isoSpec.hom))\n    (r : ℕ) (f : Fin r → X.presheaf.obj (.op ⊤))\n    (hsub : ∀ j, X.basicOpen (f j) ≤ U)\n    (hcover : ∀ x : X, x ∈ U → ∃ j, x ∈ X.basicOpen (f j))\n    (F M : CochainComplex (ModuleCat.{u} (X.presheaf.obj (.op ⊤))) ℤ) (α : F ⟶ M)\n    (hα : ∀ j : Fin r, QuasiIso ((Functor.mapHomologicalComplex\n      (ModuleCat.extendScalars\n        (algebraMap (X.presheaf.obj (.op ⊤)) (Localization.Away (f j))))\n      (ComplexShape.up ℤ)).map α)) :\n    IsIso (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n          (Modules.overEquiv U)).mapDerivedCategory.map\n      (DerivedCategory.Q.map ((T.mapHomologicalComplex (ComplexShape.up ℤ)).map α)))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100224-L-2504251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100224-L-2504251",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
