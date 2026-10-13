@@ -1,0 +1,110 @@
+{
+ "id": "lem-sc-module-cup-resolution-components",
+ "kind": "statement",
+ "title": "Component maps for a cochain realization",
+ "statement": "For a scheme X, module sheaves F,G and a computing resolution pairing D, there are degree maps from the tensor total complex to the target extended complex satisfying the section formula on every nonnegative bidegree and the signed chain equation.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "construction before Lemma 20.31.3"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-realization-complex-data",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "Linearize each sectionwise bilinear pairing through the sheaf tensor universal property, assemble the degree maps by the total coproduct universal property, and verify the chain equation from Leibniz, extending negative degrees by zero.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "B3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "construction before Lemma 20.31.3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "assemble maps from tensor total complex coproduct",
+   "results": "HomologicalComplex.mapBifunctorDesc and ι_mapBifunctorDesc",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only",
+   "digest": "0000000000000001"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorDesc",
+   "results": "Mathlib declaration found; used for component assembly plan",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only",
+   "digest": "0000000000000002"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorDesc tensor complex chain map",
+   "results": "PicardExternalCechCupDifferential uses mapBifunctorDesc for the same coproduct assembly",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only",
+   "digest": "0000000000000003"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupResolutionExistence",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-cup-resolution-existence",
+   "place": "component assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupResolutionExistence",
+  "file": "lean/Sheaf/Paper/ModuleCupResolutionExistence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_component_data_exists",
+  "statement": "theorem moduleCup_component_data_exists {F G : X.Modules} (D : CupResolutionPairing F G) : D.ComponentData",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T145723-L-750142",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T145723-L-750142",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
