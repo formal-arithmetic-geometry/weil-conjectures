@@ -12699,3 +12699,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:54 L: returned deliver/D2/Sheaf.Paper.FiniteStructureAlgebraLift (reviewer RETURN: (reviewer X-c57c6, head c57c6d111) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.FiniteStructur)
 - 14:01 L: returned deliver/Q4/Sheaf.AlgebraicGeometry.EtaleAffineTensorSectionsEquiv (reviewer RETURN: (reviewer X-3f996, head 3f9965fce) B5: In dag/nodes/sec-curve-estimates/lem-sc-affine-top-tensor-sections.json, lines 12)
 - 14:01 L: returned deliver/R3/Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso (reviewer RETURN: (reviewer X-585de, head 585de6d76) A (AGENTS.md §3, tool-contract violation): suppressing the generated probe warning wo)
+- 14:02 L: returned deliver/F1/Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel (reviewer RETURN: (reviewer X-939f5, head 939f59445) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Af)
