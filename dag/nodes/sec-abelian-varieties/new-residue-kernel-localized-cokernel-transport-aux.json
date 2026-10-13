@@ -20,7 +20,12 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use LocalizedModule.equivTensorProduct for Y, compare its scalar structure with ModuleCat.extendScalars, and transport the range equality localized'_range_eq_range_localizedMap through this equivalence.",
+   "text": "Put A = Localization.AtPrime p and let A0 be A restricted along algebraMap R A. The identity on A gives an R-linear equivalence A to A0, with scalar compatibility Algebra.smul_def. Compose LocalizedModule.equivTensorProduct with TensorProduct.congr of this identity and the identity on Y, and extend linearity from R to A using LinearEquiv.extendScalarsOfIsLocalization. The resulting equivalence e sends y/1 to 1 tensor y.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "By Submodule.localized'_eq_span and Submodule.map_span, the image under e of the localized range is the A-span of the elements 1 tensor f(x). Each generator is the image of 1 tensor x under the scalar-extended map. Conversely, induction on tensor products shows that every image is in this span: zero and sums preserve membership, and a tensor x maps to a tensor f(x), which is a times the generator 1 tensor f(x). Return the constructed equivalence and this range equality.",
    "uses": [],
    "elementary": true
   }
@@ -28,10 +33,10 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "H2",
+  "group": "X3",
   "date": "2026-10-14",
   "document": "Mathlib",
-  "place": "BaseChange and LocalizedModule.Submodule"
+  "place": "LocalizedModule.equivTensorProduct; Submodule.localized'_eq_span; Submodule.Quotient.equiv; TensorProduct.induction_on"
  },
  "mathlib_searches": [
   {
@@ -86,11 +91,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H2",
+  "reviewer": "X-362c4",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T201752-L-3970162",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T215617-L-903137",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and DAG metadata match the repository statements; all delivered files and the sole direct importer compile, with allowed axioms only."
  }
 }
