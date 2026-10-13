@@ -15,55 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Put $u=f_i$. For $x\\in M_i$ construct a localized tuple $e(x)$. Its $M'$-coordinate is $y'=\\alpha_i^{-1}(x\\otimes1)\\in(M')_u$; its $M_j$-coordinate is $y_j=\\alpha_{ij}(x/1)\\in(M_j)_u$ for every $j$. These expressions are meaningful because $u=f_i$ is invertible on $M_i$, $M_i\\otimes_RS$, and $(M_j)_u$ [def-weil-pbc-module-localization-away], [def-weil-pbc-formal-glueing-data]. The cocycle condition (b) with all three indices $i$ says $\\alpha_{ii}^2=\\alpha_{ii}$ after the canonical iterated-localization identifications; since $\\alpha_{ii}$ is an isomorphism, it is the identity. Hence $y_i=x/1$, identified with $x$ under $(M_i)_u\\cong M_i$. The tuple $e(x)$ is $R$-linear in $x$.",
+   "text": "Form the explicit canonical localized tuple with prime coordinate alpha_i inverse of 1 tensor x and chart coordinates alpha_ij(x/1). Its prime/chart and chart/chart differences vanish by [lem-weil-pbc-formal-glueing-localized-chart-tuple].",
    "uses": [
-    "def-weil-pbc-formal-glueing-data",
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-formal-glueing-canonical-maps"
+    "lem-weil-pbc-formal-glueing-localized-chart-tuple"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 05EP (lemma-equivalence-I-unit), proof: after a generator becomes a unit one component recovers the others; Remark 05EL, cocycle condition (b)"
-   }
+   "elementary": false
   },
   {
-   "text": "The tuple $e(x)$ satisfies the equations defining H^0 after localization at u. For the $j$th equation, localize condition (a) of [def-weil-pbc-formal-glueing-data] at $u=f_i$ and evaluate it on $y'/1\\in((M')_{f_i})_{f_j}$. Its left side, $(\\alpha_{ij}\\otimes_RS)c^{M_i}_{f_j}(\\alpha_i)_{f_j}(y'/1)$, is $\\alpha_{ij}(x/1)\\otimes1=y_j\\otimes1$; its right side, $c^{M_j}_{f_i}(\\alpha_j)_{f_i}\\sigma^{M'}_{f_i,f_j}(y'/1)$, is the image of $\\alpha_j(y')$ under the tensor-localization identification. Hence the $j$th localized equation holds [lem-weil-pbc-formal-glueing-canonical-maps] (2), (3). For the $(j,k)$th equation, evaluate condition (b) on $(x/1)/1$ in $((M_i)_{f_j})_{f_k}$ and localize at $u$: its left side is $\\alpha_{jk}(y_j/1)$ and its right side is $y_k/1$ after the swaps $\\sigma$ identify the iterated localizations [lem-weil-pbc-formal-glueing-canonical-maps] (2). The resulting tuple is compatible in the localized ambient product.",
+   "text": "The all-equal cocycle makes the localized self-overlap idempotent. Localization preserves injectivity, so cancel it; multiplication by every localization denominator is injective in a localized module. Thus alpha_ii is the identity. The finite-product comparison and uniqueness on numerators identify the i coordinate of the canonical tuple with x/1.",
    "uses": [
     "def-weil-pbc-formal-glueing-data",
-    "lem-weil-pbc-formal-glueing-canonical-maps"
+    "def-weil-pbc-module-localization-away"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Remark 05EL (remark-glueing-data), conditions (a) and (b); Lemma 05EP (lemma-equivalence-I-unit); proof of Proposition 05ER (proposition-equivalence), second paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "There are finitely many prime and chart coordinates. Choose one common denominator f_i^a for the localized tuple by taking the maximum of its exponents. The finitely many prime/chart and overlap compatibility differences of its numerator vanish after localization, so each is killed by a power of f_i. Choose b at least as large as all those exponents and multiply the numerator by f_i^b. The resulting tuple h lies in H^0. In the localized i-th chart its coordinate equals f_i^{a+b} x. Since f_i is a unit on M_i, its map to its own localization is injective, so already p_i(h)=f_i^{a+b} x. Take n=a+b. For f_i=0 the chart module is zero; for t=0 there is no index i; zero rings and zero modules are included.",
+   "text": "Take a numerator m and denominator s of the canonical tuple using IsLocalizedModule.surj. Apply each localized compatibility difference to s*z=mk(m,1): every difference of m localizes to zero. Apply IsLocalizedModule.exists_of_eq to the finite product of prime/chart differences and to the finite product indexed by pairs of chart indices; obtain powers r and q killing the respective families. Then y=q*r*m satisfies both families, hence belongs to h0. Its localized i coordinate equals q*r*s*x. The chart is already a module over R[1/f_i], so its self-localization is linearly equivalent to itself. Apply this equivalence to obtain the equality in the original chart. Write q*r*s=f_i^n and take h=(y,hy).",
    "uses": [
     "def-weil-pbc-formal-glueing-H0",
     "def-weil-pbc-module-localization-away",
     "def-weil-ring-localization-away"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Remark 05EL; Lemmas 05EQ and 05EP, used in Proposition 05ER, second paragraph (verified at https://stacks.math.columbia.edu/tag/05ER and the linked tags 05EL, 05EQ, 05EP)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-formal-glueing-H0",
   "def-weil-pbc-formal-glueing-data",
   "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-formal-glueing-canonical-maps",
-  "def-weil-pbc-formal-glueing-H0",
-  "def-weil-ring-localization-away"
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-formal-glueing-localized-chart-tuple"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Expanded numerator form of the localized inverse-tuple construction in steps 2–4 of lem-weil-pbc-formal-glueing-H0-localization. Stacks 05EQ omits the finite denominator calculation; the calculation is explicitly supplied here."
+  "place": "Remark 05EL; Lemmas 05EQ and 05EP used in Proposition 05ER. Lean proves self-overlap identity, finite denominator/error clearing and injectivity; only compatibility of the explicitly specified localized tuple is split off."
  },
  "mathlib_searches": [
   {
@@ -162,9 +148,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T082401-L-1642464",
+  "landing": "20261013T095955-L-2459475",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

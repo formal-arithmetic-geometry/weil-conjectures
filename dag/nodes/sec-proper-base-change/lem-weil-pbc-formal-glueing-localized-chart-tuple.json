@@ -1,0 +1,154 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-weil-pbc-formal-glueing-localized-chart-tuple",
+ "kind": "statement",
+ "title": "The canonical localized chart tuple is compatible",
+ "statement": "Let $R,S$ be commutative rings, $\\varphi:R\\to S$ a ring map, $f:\\operatorname{Fin}(t)\\to R$, and $X=(M',M_j,\\alpha_j,\\alpha_{jk})$ a formal glueing datum [def-weil-pbc-formal-glueing-data]. Fix $i:\\operatorname{Fin}(t)$ and $x\\in M_i$. Put $u=f_i$ and $A=M'\\times\\prod_j M_j$, with all modules viewed over $R$. Let $\\ell:A\\to (M')_u\\times\\prod_j(M_j)_u$ be the coordinatewise localization map [def-weil-pbc-module-localization-away]. Let $e$ be the unique comparison isomorphism from that finite product to $A_u$ commuting with the localization maps. Set $z=e(\\alpha_i^{-1}(1\\otimes x),(\\alpha_{ij}(x/1))_j)$. For each $j$ define $a_j:A\\to S\\otimes_R M_j$ by $a_j(m',(m_k))=\\alpha_j(m'/1)-1\\otimes m_j$. For each $j,k$ define $b_{jk}:A\\to(M_k)_{f_j}$ by $b_{jk}(m',(m_l))=\\alpha_{jk}(m_j/1)-m_k/1$. Then $(a_j)_u(z)=0$ for every $j$ and $(b_{jk})_u(z)=0$ for every $j,k$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 05EL; Lemmas 05EQ and 05EP, used in Proposition 05ER, second paragraph (verified at https://stacks.math.columbia.edu/tag/05ER and the linked tags 05EL, 05EQ, 05EP)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Construct exactly the specified tuple using localization of the finite product. Its prime and chart coordinates are the displayed ones; no choice of an undetermined object occurs. The comparison is the unique linear equivalence commuting with the localization maps. Zero parameters give zero localizations.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 05EP (lemma-equivalence-I-unit), proof: after a generator becomes a unit one component recovers the others; Remark 05EL, cocycle condition (b)"
+   }
+  },
+  {
+   "text": "The tuple $e(x)$ satisfies the equations defining H^0 after localization at u. For the $j$th equation, localize condition (a) of [def-weil-pbc-formal-glueing-data] at $u=f_i$ and evaluate it on $y'/1\\in((M')_{f_i})_{f_j}$. Its left side, $(\\alpha_{ij}\\otimes_RS)c^{M_i}_{f_j}(\\alpha_i)_{f_j}(y'/1)$, is $\\alpha_{ij}(x/1)\\otimes1=y_j\\otimes1$; its right side, $c^{M_j}_{f_i}(\\alpha_j)_{f_i}\\sigma^{M'}_{f_i,f_j}(y'/1)$, is the image of $\\alpha_j(y')$ under the tensor-localization identification. Hence the $j$th localized equation holds [lem-weil-pbc-formal-glueing-canonical-maps] (2), (3). For the $(j,k)$th equation, evaluate condition (b) on $(x/1)/1$ in $((M_i)_{f_j})_{f_k}$ and localize at $u$: its left side is $\\alpha_{jk}(y_j/1)$ and its right side is $y_k/1$ after the swaps $\\sigma$ identify the iterated localizations [lem-weil-pbc-formal-glueing-canonical-maps] (2). The resulting tuple is compatible in the localized ambient product.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Remark 05EL (remark-glueing-data), conditions (a) and (b); Lemma 05EP (lemma-equivalence-I-unit); proof of Proposition 05ER (proposition-equivalence), second paragraph"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 05EL conditions (a),(b), Lemma 05EP and Proposition 05ER second paragraph; explicit canonical tuple form of steps 1–2 of the parent."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormalGlueingH0ChartPowerLift",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The localized inverse-tuple construction in steps 1–2 of lem-weil-pbc-formal-glueing-H0-chart-power-lift, serving the essential-surjectivity paragraphs of thm-weil-pbc-finite-etale-lifting.",
+   "via": [
+    "lem-weil-pbc-formal-glueing-H0-chart-power-lift",
+    "lem-weil-pbc-formal-glueing-H0-localization",
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "lem-weil-pbc-formal-glueing-isogeny",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormalGlueingLocalizedChartTuple",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingLocalizedChartTuple.lean",
+  "declaration": "FormalGlueing.localized_chart_tuple_compatible",
+  "statement": "theorem localized_chart_tuple_compatible {t : ℕ} (φ : R →+* S)\n    (f : Fin t → R) (X : Data.{u, v, w} φ f) (i : Fin t)\n    (x : piece (f i) (X.M i)) :\n    letI : Algebra R S := φ.toAlgebra\n    let A := ModuleCat.of R (restrict φ X.M' × ∀ j : Fin t, piece (f j) (X.M j))\n    let p : ∀ j : Fin t, A →ₗ[R] piece (f j) (X.M j) :=\n      fun j ↦ (LinearMap.proj j).comp (LinearMap.snd R _ _)\n    let a := fun j : Fin t ↦\n      (((X.alpha j).toLinearMap.comp\n        (LocalizedModule.mkLinearMap _ (restrict φ X.M'))).comp\n          (LinearMap.fst R _ _) -\n        (TensorProduct.mk R S (piece (f j) (X.M j)) 1).comp (p j))\n    let b := fun j k : Fin t ↦\n      (((X.alpha_overlap j k).toLinearMap.comp\n        (LocalizedModule.mkLinearMap _ (piece (f j) (X.M j)))).comp (p j) -\n        (LocalizedModule.mkLinearMap _ (piece (f k) (X.M k))).comp (p k))\n    let T := Submonoid.powers (f i)\n    let ell₀ := LocalizedModule.mkLinearMap T (restrict φ X.M')\n    let ell₁ : (∀ j, piece (f j) (X.M j)) →ₗ[R]\n        (∀ j, LocalizedModule T (piece (f j) (X.M j))) :=\n      LinearMap.pi fun j ↦ (LocalizedModule.mkLinearMap T _).comp (LinearMap.proj j)\n    let e := IsLocalizedModule.linearEquiv T (ell₀.prodMap ell₁)\n      (LocalizedModule.mkLinearMap T A)\n    let z := e ((X.alpha i).symm (TensorProduct.tmul R (1 : S) x),\n      fun j ↦ X.alpha_overlap i j (LocalizedModule.mk x 1))\n    (∀ j, localMap (f i) (a j) z = 0) ∧\n      (∀ j k, localMap (f i) (b j k) z = 0)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-formal-glueing-canonical-maps"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Formal module gluing localized compatible tuple extending a chart element",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable; no verdict of absence",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clearing denominators in a finite family of module localization compatibility equations",
+   "results": "commonDenom, exist_integer_multiples and finite variants; these clear denominators but do not prove the square or cocycle compatibility of this tuple.",
+   "verdict": "no matching compatibility theorem in returned hits",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule",
+   "results": "linearEquiv, mk surjectivity, localization universal property; none proves formal glueing square/cocycle compatibility.",
+   "verdict": "generic tools only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule.*(ker|pi|prod)|localized.*ker; FormalGlueing; localized compatible tuple",
+   "results": "Finite product localization and kernel localization tools; no matching statement in Mathlib or WeilConjectures. Blueprint search returned zero matches. Parent chart-power-lift node is the only matching inverse-tuple argument.",
+   "verdict": "no existing canonical tuple compatibility declaration found",
+   "date": "2026-10-13"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T095955-L-2459475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T095955-L-2459475",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
