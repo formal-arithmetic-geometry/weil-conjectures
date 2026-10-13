@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-pbc-completed-pullback",
-   "place": "Detailed form, comparison with Stacks 099N: passage from the completed coefficient sheaf A_T to the constant Noetherian coefficient sheaf used by Stacks. Foundational input: constant-section-properties.",
+   "place": "The coefficient comparison used here is the flat constant-to-completed comparison and its finite reductions in [lem-weil-pbc-constant-completion-equivalence].",
    "via": [
     "lem-weil-pbc-constant-completion-equivalence"
    ]
@@ -22,30 +22,81 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of the constant sheaf, the constant presheaf sequence sheafifies to the displayed sequence of constant abelian sheaves. The module-sheafification interface identifies the underlying abelian sheaf with abelian sheafification, and the arbitrary-site sheafification exactness and sectionwise-limit statement gives exactness after evaluation at every U. For surjectivity, choose a set-theoretic section s:C→B; functoriality of the constant-sheaf construction gives a morphism of sheaves of sets underline C→underline B splitting the quotient, so its component at U supplies the required section. Thus M↦underline M(U) preserves short exact sequences.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J (lemma-constant-exact), proof"
+   }
+  },
+  {
+   "text": "Choose a finite presentation R^s → R^t → Q → 0. Right exactness of tensor product gives M^s → M^t → M tensor_R Q → 0. Applying the sectionwise exact constant-sheaf sequence from step 1 at U gives underline M(U)^s → underline M(U)^t → underline(M tensor_R Q)(U) → 0; evaluation commutes with these finite direct sums. The cokernel of the first map is, by the defining finite-presentation cokernel description of tensor product, underline M(U) tensor_R Q. This identifies the canonical map, and all constructions commute with maps in M, Q, and restriction in U.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093K (lemma-tensor-with-finitely-presented), proof"
+   }
+  },
+  {
+   "text": "Let I be a finitely generated ideal of R. The existing Noetherian finite-module presentation result makes I finitely presented. The finite-presentation tensor argument, using the cited tensor right-exactness statement and the arbitrary-site sectionwise exactness statement, identifies underline M(U) tensor_R I with underline(M tensor_R I)(U). Flatness of M makes M tensor_R I → M injective, so the constant-sheaf exactness result makes the induced map on sections injective. Since R is commutative, the symmetry of tensor identifies this map with the criterion map I tensor_R underline M(U) → R tensor_R underline M(U) under the canonical unit identification R tensor_R underline M(U) ≅ underline M(U). The existing finitely-generated-ideal criterion therefore implies that underline M(U) is flat.",
+   "uses": [
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-flat-fg-ideal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093L (lemma-flat-sections), proof; Algebra, Lemma flat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-flat-fg-ideal-criterion",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J, 093K, 093L"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Sections of the constant sheaf of modules commute with tensoring a finitely presented module on an arbitrary site",
-   "results": "LightCondensed.instMonoidalLightCondSetLightCondModFree, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.monoidalCategoryStruct, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "results": "CategoryTheory.constantSheaf and generic sheafification/monoidal declarations; no theorem asserting exact evaluation of constant module sheaves or finite-presentation tensor comparison on an arbitrary site.",
    "date": "2026-10-14",
-   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+   "verdict": "no exact match"
   },
   {
    "tool": "loogle",
    "query": "\"constantSheaf\"",
-   "results": "CategoryTheory.constantSheaf, CategoryTheory.constantSheafAdj, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.instAdditiveSheafConstantSheaf, CategoryTheory.constantSheafΓAdj, CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf",
+   "results": "CategoryTheory.constantSheaf, CategoryTheory.constantSheafAdj, and generic sheafification declarations; no exact exactness/tensor/flat-sections theorem for arbitrary-site constant module sheaves.",
    "date": "2026-10-14",
-   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+   "verdict": "no exact match"
   },
   {
    "tool": "grep",
    "query": "constantSheaf|constant.*[Ss]heaf",
-   "results": "Mathlib/Geometry/RingedSpace/PresheafedSpace.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "results": "Mathlib constant-sheaf and sheafification files; no declaration combining arbitrary-site constant module section exactness, finite-presentation tensor comparison, and flatness.",
    "date": "2026-10-14",
-   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+   "verdict": "no exact match"
   },
   {
    "tool": "leansearch",
@@ -57,25 +108,40 @@
   {
    "tool": "leanfinder",
    "query": "Evaluation at a site object of the constant module sheaf is exact and commutes with tensoring by a finitely presented module",
-   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "results": "Generic sheafification/monoidal declarations and flatness-related declarations; no theorem with the arbitrary-site constant-module section statement.",
    "date": "2026-10-14",
-   "verdict": "no match: returned types concern ordinary adic completion, local cohomology, finite-range derived category fractions, or ordinary module flatness; none states the ringed-site or Koszul tower assertion."
+   "verdict": "no exact match"
   },
   {
    "tool": "loogle",
    "query": "\"constantSheaf\", \"PreservesFiniteLimits\"",
-   "results": "No hits.",
+   "results": "No exact declaration for arbitrary-site constant-module section exactness/tensor comparison/flatness.",
    "date": "2026-10-14",
-   "verdict": "no match: returned types concern ordinary adic completion, local cohomology, finite-range derived category fractions, or ordinary module flatness; none states the ringed-site or Koszul tower assertion."
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-constant-completion-equivalence",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-constant-module-section-properties",
+  "worker": "stage1",
+  "summary": "Repaired the split after review: the original proof cited site-specialized scheme/topological sheafification nodes for an arbitrary small site. Replaced those citations with the existing arbitrary-site abelian-sheaf sheafification leaf and the constant-sheaf definition and the module-sheafification interface, made the commutative tensor symmetry explicit in the flatness step, and corrected stale unrelated Mathlib-search verdict text. No new nodes are needed.",
+  "blueprint": "Realizes the ancestor blueprint sentence “The coefficient comparison used here is the flat constant-to-completed comparison and its finite reductions in [lem-weil-pbc-constant-completion-equivalence]” through Tags 093J, 093K, and 093L."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-cad282669",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-cad282669 (reviewer sub-agent of L); spot-checked: The item is mathematically correct after repair, but its delivered proof cited site-specialized scheme/topological sheafification nodes for an arbitrary site and had stale unrelated Mathlib-search verdicts. Corrected JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-constant-module-section-properties.json; review.md records all source, route, hypothesis, edge-case, coefficient-category, and target checks.; 1 file(s) fixed by the reviewer"
+ }
 }
