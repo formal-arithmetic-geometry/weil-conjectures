@@ -1,0 +1,168 @@
+{
+ "id": "lem-sc-picard-external-cup-left-homology-ladder",
+ "kind": "statement",
+ "title": "Five-term external-cup homology ladder for a short exact left coefficient sequence",
+ "statement": "Let $k$ be a field [def-weil-field], let $f:X\\to\\operatorname{Spec}k$ and $g:Y\\to\\operatorname{Spec}k$ be morphisms of quasi-compact schemes [def-pc-scheme] with affine diagonals, and let $0\\to F\\to E\\to Q\\to0$ be a specified short exact sequence [def-weil-pbc-exact-sequence] of quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent]. Let $G$ be a quasi-coherent $\\mathcal O_Y$-module. For each $M\\in\\{F,E,Q\\}$ put $A_M=\\operatorname{Tot}(\\operatorname{picardScalarModel}(f,M)\\otimes_k\\operatorname{picardScalarModel}(g,G))$ and $B_M=\\operatorname{picardScalarModel}(f\\circ\\operatorname{pr}_1,\\operatorname{pr}_1^*M\\otimes\\operatorname{pr}_2^*G)$, using [lem-sc-picard-kunneth-resolution-model] and [lem-sc-picard-external-cup-cochain]. Specify normalized cochain maps $c_M:A_M\\to B_M$ in the sense of [lem-sc-picard-external-cup-cochain]. For every $n\\in\\mathbb N$ there exist two five-term rows $R_1,R_2$ of $k$-modules, exact at their three interior terms, a commutative diagram $\\phi:R_1\\to R_2$, and isomorphisms $e_1:(R_1)_2\\cong H^n(A_F)$ and $e_2:(R_2)_2\\cong H^n(B_F)$ such that $e_2\\circ\\phi_2=H^n(c_F)\\circ e_1$. If $H^r(c_E)$ is invertible for every natural $r$, then $\\phi_0$ and $\\phi_3$ are invertible; if $H^r(c_Q)$ is invertible for every natural $r$, then $\\phi_1$ and $\\phi_4$ are invertible. This constructs the ladder, without assuming acyclicity, a cohomological bound, or invertibility of the central comparison.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, paragraph beginning Consider a short exact sequence, after equation-kunneth-on-cech (equation 33.29.1.1). Source read at https://stacks.math.columbia.edu/tag/0BED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-pbc-exact-sequence",
+  "pqf-def-coherent",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-picard-external-cup-cochain"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite affine covers of X and Y and the product cover. Affine diagonals give affine finite intersections. For the specified short exact coefficient sequence S, the affine cokernel and image formulas identify the sequences of sections on every intersection as short exact. Sections preserve kernels, and the cokernel projection is surjective on an affine open. The affine spectrum pullback, module pullback and tensor section formulas identify product-coefficient sections with factor section tensors. Over k every vector space is free and hence flat, so field tensor preserves these short exact sequences; the degreewise finite sums in totalization do as well.",
+   "uses": [
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The signed Cech refinement and cup formulas are natural in the left coefficient. Thus their three components for S form a morphism of the two short exact sequences of complexes just obtained. Apply the homology long exact sequence and its naturality, including the connecting-morphism square. This produces a commutative ladder of exact rows in k-modules. Scalar restriction is exact, since it leaves underlying additive groups and maps unchanged.",
+   "uses": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare affine Cech homology with module cohomology using the canonical affine comparison and its coefficient naturality, then with the fixed scalar resolution models. Tensor Kunneth identifies total homology with the direct sum of factor homology tensors. Lift each factor homology class to a cycle using the surjective homology projection. The tensor Kunneth cycle formula and the normalization of c, cE and cQ show that each specified homology map agrees with the transported Cech comparison on elementary tensors, hence on the whole source by linearity. These identifications give the central isomorphisms e1,e2 and the equality phi_2 followed by e2 = e1 followed by H(c). They identify the outer vertical maps with the corresponding homology maps of cE and cQ, up to isomorphisms.",
+   "uses": [
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-sc-cech-comparison-natural",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-resolution-model",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso",
+    "lem-sc-picard-external-cup-cochain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For n>0 take the five-term segment E in degree n-1, Q in degree n-1, F in degree n, E in degree n, Q in degree n. For n=0 use two initial zero objects followed by F,E,Q in degree zero. Nonnegative support of the Cech complexes gives initial monicity and hence exactness of this padded row. Package both rows as ComposableArrows of length four and their vertical maps as phi. In the positive-degree segment, positions 0 and 3 are conjugates of H(cE), and positions 1 and 4 are conjugates of H(cQ). In the initial segment positions 0 and 1 are zero-object identities. Composition with isomorphisms preserves invertibility. Therefore the two outer-invertibility implications hold, without asserting invertibility of phi_2 or H(c). The zero-coefficient and empty-scheme cases use the same zero-object rows.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-sc-cech-comparison-natural",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-sc-picard-cech-cup-pullback-compat",
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-qcoh-cech-total-tensor-nat-iso",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "E2: Tag 0BED short exact coefficient diagram, with explicit normalization and scalar-model transport; the five lemma is deliberately left to the parent Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "External cup product homology isomorphism preserved under short exact sequence of quasi coherent sheaves over a field",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Short exact sequence quasi coherent coefficient external cup product dimension shifting homology isomorphism",
+   "results": "Eight generic homological algebra matches, including derived Ext connecting maps, mapping-cone homology sequences and group cohomology exactness; none constructs this geometric external-cup ladder.",
+   "date": "2026-10-13",
+   "verdict": "no matching geometric ladder"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "Twelve generic short-exact-sequence matches, including shortExact_of_iso and the mono/epi projections; no external-cup ladder.",
+   "date": "2026-10-13",
+   "verdict": "no matching geometric ladder"
+  },
+  {
+   "tool": "grep",
+   "query": "externalCup|IsPicardExternalCupCochain|cup.*shortExact",
+   "results": "No Mathlib hits. Additional local search of lean/Sheaf, lean/WeilConjectures and DAG found the parent dimension-shifting steps and cochain normalization, but no short exact coefficient ladder declaration. Whole blueprint searches for external cup short exact and kunneth found no equivalent blueprint statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupShiftLeft",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED proof of the quasi-coherent Kunneth formula used for theorem-of-cube: the short exact coefficient diagram after equation-kunneth-on-cech, before the two dimension-shifting inductions.",
+   "via": [
+    "lem-sc-picard-external-cup-shift-left",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftHomologyLadder",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupLeftHomologyLadder.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCupCochain_left_homology_ladder",
+  "statement": "theorem picardExternalCupCochain_left_homology_ladder\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [CompactSpace Y]\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    (S : ShortComplex X.Modules) (hS : S.ShortExact)\n    [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent]\n    (G : Y.Modules) [G.IsQuasicoherent]\n    (cE : picardExternalTotal f g S.X₂ G ⟶\n      picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g S.X₂ G))\n    (hcE : IsPicardExternalCupCochain f g S.X₂ G cE)\n    (cQ : picardExternalTotal f g S.X₃ G ⟶\n      picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g S.X₃ G))\n    (hcQ : IsPicardExternalCupCochain f g S.X₃ G cQ)\n    (c : picardExternalTotal f g S.X₁ G ⟶\n      picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g S.X₁ G))\n    (hc : IsPicardExternalCupCochain f g S.X₁ G c) (n : ℕ) :\n    ∃ (R₁ R₂ : ComposableArrows (ModuleCat.{w} k) 4) (φ : R₁ ⟶ R₂)\n      (e₁ : R₁.obj' 2 ≅ (picardExternalTotal f g S.X₁ G).homology (n : ℤ))\n      (e₂ : R₂.obj' 2 ≅\n        (picardScalarModel (pullback.fst f g ≫ f)\n          (externalCupCoefficients f g S.X₁ G)).homology (n : ℤ)),\n      R₁.Exact ∧ R₂.Exact ∧\n      ((∀ r : ℕ, IsIso (HomologicalComplex.homologyMap cE (r : ℤ))) →\n        IsIso (ComposableArrows.app' φ 0) ∧ IsIso (ComposableArrows.app' φ 3)) ∧\n      ((∀ r : ℕ, IsIso (HomologicalComplex.homologyMap cQ (r : ℤ))) →\n        IsIso (ComposableArrows.app' φ 1) ∧ IsIso (ComposableArrows.app' φ 4)) ∧\n      ComposableArrows.app' φ 2 ≫ e₂.hom =\n        e₁.hom ≫ HomologicalComplex.homologyMap c (n : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T062519-L-732227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T062519-L-732227",
+  "kind": "interface"
+ }
+}
