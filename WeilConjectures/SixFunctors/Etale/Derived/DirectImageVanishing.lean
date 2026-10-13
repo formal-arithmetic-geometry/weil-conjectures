@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.AffineVanishing
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 /-!
@@ -50,8 +50,6 @@ underlying abelian sheaf of an injective sheaf of `Λ`-modules is acyclic
 - `AlgebraicGeometry.Etale.subsingleton_ext_freeSheaf_of_subsingleton_H`: the cohomology of a
   sheaf of `Λ`-modules over an étale `X`-scheme `V` vanishes in a degree where the abelian
   cohomology of its underlying abelian sheaf restricted to `V` does.
-- `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_isAffine`: `R^q h_* K = 0` as soon
-  as `H^q(W ×_X Y, K|) = 0` for every affine `W` étale over `X`.
 - `AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`: blueprint
   `lem-sf-etale-direct-image-vanishing`.
 -/
@@ -93,36 +91,9 @@ theorem Etale.subsingleton_ext_freeSheaf_of_subsingleton_H [Finite Λ] {X : Sche
     (hF : Subsingleton (Sheaf.H ((sheafCompose V.left.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         ((V.hom)^*[ModuleCat.{u + 1} Λ].obj F)) (n + 1))) :
-    Subsingleton (Abelian.Ext.{u + 1} ((Etale.freeSheaf Λ X).obj V) F (n + 1)) := by
-  have hV : AlgebraicGeometry.Etale V.hom := V.prop
-  let Φ := (V.hom)^*[ModuleCat.{u + 1} Λ] ⋙ sheafCompose V.left.smallEtaleTopology
-    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
-  refine Abelian.Ext.subsingleton_of_subsingleton_map Φ
-    (fun S hS ↦ Etale.shortExact_map_forget₂ Λ
-      (hS.map_of_exact ((V.hom)^*[ModuleCat.{u + 1} Λ]))) _
-    ((constantSheaf _ AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) ?_ ?_ n F hF
-  · intro I _ n
-    have := Etale.injective_upperStar_obj_of_etale Λ V.hom I
-    exact Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ _ n
-  · intro S hS _ h₁
-    change Subsingleton (Sheaf.H ((sheafCompose V.left.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        ((V.hom)^*[ModuleCat.{u + 1} Λ].obj S.X₁)) 1) at h₁
-    have : Subsingleton (Sheaf.H ((V.hom)^*[AddCommGrpCat.{u + 1}].obj
-        (S.map (sheafCompose X.smallEtaleTopology
-          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).X₁) 1) :=
-      @Function.Injective.subsingleton _ _ _
-        (Etale.injective_sheafHMap_of_isIso (Etale.upperStarForget₂Iso V S.X₁).hom 1) h₁
-    have hsurj := Etale.surjective_app_of_subsingleton_H_one (X := X)
-      (S := S.map (sheafCompose X.smallEtaleTopology
-        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})))
-      (Etale.shortExact_map_forget₂ Λ hS) V
-    intro g
-    obtain ⟨x, hx⟩ := hsurj (Etale.freeSheafHomEquiv Λ V S.X₃ g)
-    refine ⟨(Etale.freeSheafHomEquiv Λ V S.X₂).symm x, ?_⟩
-    apply (Etale.freeSheafHomEquiv Λ V S.X₃).injective
-    rw [Etale.freeSheafHomEquiv_comp, Equiv.apply_symm_apply]
-    exact hx
+    Subsingleton (Abelian.Ext.{u + 1} ((Etale.freeSheaf Λ X).obj V) F (n + 1)) :=
+  Etale.subsingleton_ext_freeSheaf_of_subsingleton_H_of_acyclic V F n
+    (fun I _ m ↦ Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ I m) hF
 
 /-- Blueprint `lem-sf-etale-direct-image-vanishing`: Vanishing of the higher direct images above
 the dimension.

@@ -187,16 +187,16 @@ noncomputable abbrev Etale.finalObject (Z : Scheme.{u}) : Z.Etale :=
 /-- Blueprint `lem-weil-pbc-cohomology-filtered-colimit` (subsection `sk-prop-h2`): Filtered
 colimits of étale cohomology. Let `Z` be a quasi-compact and quasi-separated scheme. Then étale
 cohomology `N ↦ Hᵠ(Z, N) = Hom(Λ_Z[0], N[0]⟦q⟧)` with coefficients in sheaves of `Λ`-modules
-commutes with filtered colimits: `colim Hᵠ(Z, N_a) ≅ Hᵠ(Z, colim N_a)`. The filtered
-categories may be as large as the coefficient modules, e.g. the poset of finitely generated
-submodules of a `Λ`-module.
+commutes with filtered colimits: `colim Hᵠ(Z, N_a) ≅ Hᵠ(Z, colim N_a)`.
 
 The same statement for abelian sheaves is
-`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`. -/
+`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`. As in the blueprint, there is no
+restriction on the size of the filtered category beyond that of the coefficients: it may be any
+filtered category in `Type (u + 1)`, the universe of the sheaves of `Λ`-modules. -/
 @[stacks 03Q6]
 theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (Z : Scheme.{u})
-    [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type (u + 1))
-    [SmallCategory J] [IsFiltered J] :
+    [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type (u + 1)) [SmallCategory J]
+    [IsFiltered J] :
     PreservesColimitsOfShape J
       (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) :=
   sorry
