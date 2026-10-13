@@ -54,6 +54,7 @@ def chainTensorMap {P P' : ChainComplex (ModuleCat.{u} R) ℕ}
     {N N' : ModuleCat.{u} R} (a : P ⟶ P') (g : N ⟶ N') :
     ((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P ⟶
       ((tensorRight N').mapHomologicalComplex (.down ℕ)).obj P' :=
+  -- Canonical composite of the two induced chain maps.
   ((tensorRight N).mapHomologicalComplex (.down ℕ)).map a ≫
     (NatTrans.mapHomologicalComplex ((tensoringRight (ModuleCat R)).map g)
       (.down ℕ)).app P'
