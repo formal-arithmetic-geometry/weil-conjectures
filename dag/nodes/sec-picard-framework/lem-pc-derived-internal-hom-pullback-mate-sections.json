@@ -22,46 +22,43 @@
  ],
  "proof": [
   {
-   "text": "The derived pullback/direct-image adjunction and its counit are supplied by [lem-pc-ringed-spaces-derived-adjoint-general]. Evaluation R\\mathcal Hom(K,L)\\otimes^{\\mathbf L}K\\to L is the map corresponding to the identity of R\\mathcal Hom(K,L) under the tensor-internal-Hom bijection of [lem-sc-derived-internal-hom-adjunction] (for R\\mathcal Hom as in [def-pur-derived-internal-hom]). Composing Lg^* of evaluation with the isomorphism Lg^*R\\mathcal Hom(K,L)\\otimes^{\\mathbf L}Lg^*K\\cong Lg^*(R\\mathcal Hom(K,L)\\otimes^{\\mathbf L}K) of [lem-pc-derived-pullback-tensor-product] and applying the bijection of [lem-sc-derived-internal-hom-adjunction] on T gives the canonical map Lg^*R\\mathcal Hom(K,L) \\to R\\mathcal Hom(Lg^*K,Lg^*L). Taking its mate under Lg^* \\dashv Rg_* defines \\gamma_{K,L}; functoriality of these bijections in all variables and naturality of the isomorphism of [lem-pc-derived-pullback-tensor-product] make this construction natural in K and L.",
+   "text": "Obtain a core-monoidal model m of the actual derived pullback and canonical natural tensor-Hom families qS,qT. From each family construct the tensor-right/internal-Hom adjunction by Mathlib Adjunction.mkOfHomEquiv. Prove that its counit is evaluation q(H(K,L),K,L)(id). Take t to be the inverse tensorator natural isomorphism of m.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "def-pur-derived-internal-hom",
-    "lem-sc-derived-internal-hom-adjunction",
-    "lem-pc-derived-pullback-tensor-product"
+    "def-pc-derived-pullback-monoidal-model",
+    "def-pc-canonical-derived-tensor-hom-bijection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Remark 08I3 (cohomology-remark-prepare-fancy-base-change), construction of the internal-Hom comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply H^0(S,-). By [lem-pur-rhom-global-sections], H^0 of the source internal Hom is Hom_{D(\\mathcal O_S)}(M,Rg_*E). By [lem-pc-derived-sections-pushforward-comparison], H^0(S,Rg_*R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,E)) identifies with H^0(T,R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,E)), and the latter is Hom_{D(\\mathcal O_T)}(Lg^*M,E) by [lem-pur-rhom-global-sections]. Under these identifications, the mate construction and the second factor are exactly pullback by Lg^* followed by postcomposition with \\varepsilon_E, so the induced map is \\varphi \\mapsto \\varepsilon_E \\circ Lg^*\\varphi. Construct these identifications on the same K-injective models as the evaluation bijections. On degree-zero Hom cocycles the composite is pullback followed by the counit; passing to homotopy classes proves the displayed equation. Mere arbitrary existential choices would not suffice.",
+   "text": "Obtain the normalized derived adjunction a, the sections comparison z, natural additive Hom identifications eS,eT, and their pointwise pullback equation from the evaluation-sections lemma. This lemma is precisely the remaining chain-cocycle computation, not the natural mate theorem.",
    "uses": [
-    "lem-pur-rhom-global-sections",
-    "lem-pc-derived-sections-pushforward-comparison",
-    "lem-pc-ringed-spaces-derived-adjoint-general"
+    "lem-pc-derived-pullback-evaluation-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section global-RHom and Lemma 079W"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Define d(K,L) by transposing μm;F(evaluation) under qT. Prove evaluation dinaturality from qS naturality. Apply qT injectivity and naturality, then tensorator naturality, to show F(HS(f));d(P′)=d(P);HT(F(f)). Apply a.homEquiv to d and its left and right naturality to construct gamma. The homEquiv inverse identity and the computed tensor-Hom counits prove the required adjunct equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For M,E apply the pointwise sections equation with L=R(E). Move the final R(HT(id,counit E)) through z using naturality of z, and through eT using its second-variable naturality. The result is F(eS(x));counit E. This Lean calculation proves the final formula without an invertibility assumption.",
+   "uses": [
+    "lem-pc-derived-pullback-evaluation-sections"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "def-pur-derived-internal-hom",
-  "lem-pur-rhom-global-sections",
-  "lem-pc-derived-sections-pushforward-comparison",
-  "lem-sc-derived-internal-hom-adjunction",
-  "lem-pc-derived-pullback-tensor-product"
+  "def-pc-derived-pullback-monoidal-model",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-pc-derived-pullback-evaluation-sections"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "S4",
-  "date": "2026-10-13",
-  "note": "The parent argument made precise; literature supplies evaluation and adjunction."
+  "agent": "E3",
+  "date": "2026-10-14",
+  "note": "Categorical mate construction and counit calculation proved in Lean; only the strictly pointwise normalized sections computation is split off."
  },
  "mathlib_searches": [
   {
@@ -139,9 +136,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T082414-L-1648263",
+  "landing": "20261013T201745-L-3968049",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
