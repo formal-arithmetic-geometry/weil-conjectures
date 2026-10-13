@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.AffineBaseChangeTildeMateFactorization
 
 /-! # AffineBaseChangeTildeOrdinaryComparison
 
@@ -27,6 +28,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option linter.unusedVariables false in
 /-- Ordinary affine mate calculation before extension of the source cohomology.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc and its affine proof;
 more-algebra.tex, Tag 06Y6; perfect.tex, Tag 08IB.
@@ -112,6 +114,23 @@ theorem exists_affineBaseChangeTildeOrdinaryComparison
         (Spec.map (CommRingCat.ofHom (algebraMap R A)))
         (Spec.map (CommRingCat.ofHom φf'))
         (Spec.map (CommRingCat.ofHom (algebraMap R R')))
-        (Spec.map (CommRingCat.ofHom φg')) hw K) = T.map c ≫ d.hom.app L := by sorry
+        (Spec.map (CommRingCat.ofHom φg')) hw K) = T.map c ≫ d.hom.app L := by
+  classical
+  obtain ⟨d, hd⟩ := exists_affineTildePushforwardCohomologyNormalization A' R' φf' i
+  obtain ⟨eC, heC⟩ := exists_affineBaseChangeTildeMateFactorization
+    R A R' A' φg' φf' hφg' hφf' hw K hK M hM e hc i
+  refine ⟨d, eC, ?_⟩
+  let Cg := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M
+  let t := affineBaseChangeTildeRepresentativeIso A A' φg' K M e hc
+  have ht := hd ⟨_, hL⟩ Cg t
+  have hb : affineTildeRepresentativeCohomologyIso A' Cg
+      ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K) t i =
+      affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i := by
+    rfl
+  rw [hb] at ht
+  dsimp only at heC ⊢
+  rw [heC]
+  rw [← Category.assoc, ht]
+  simp only [Functor.map_comp, Category.assoc]
 
 end AlgebraicGeometry

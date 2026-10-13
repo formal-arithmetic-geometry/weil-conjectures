@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-affine-tilde-pushforward-cohomology-normalization",
+ "kind": "statement",
+ "title": "Affine pushforward cohomology normalized on every tilde representative",
+ "statement": "Let $A,B$ be commutative rings, $\\phi:B\\to A$, and $f:\\operatorname{Spec}A\\to\\operatorname{Spec}B$ its spectrum map. Assume the sheaf derived categories [def-pc-derived-category] exist, and fix $i\\in\\mathbb Z$. Write $T_A,T_B$ for associated sheaf and $\\Gamma_A,\\Gamma_B$ for affine module sections [lem-weil-pbc-affine-tilde-gamma-adjunction]. Let $\\sigma:\\operatorname{res}_\\phi T_B\\cong T_Af_*$ be the ordinary comparison constructed by applying $T_B$ to the composite $\\operatorname{res}_\\phi N\\to\\operatorname{res}_\\phi\\Gamma_A(T_AN)\\cong\\Gamma_B(f_*T_AN)$ and then applying the tilde/Gamma counit. For an arbitrary unbounded complex $C$ of $A$-modules, define $q_C:T_B(\\operatorname{res}_\\phi H^i(C))\\to H^i(Rf_*Q(T_AC))$ by the inverse exact-homology comparison for $\\operatorname{res}_\\phi T_B$, the inverse $Q$/homology comparison, $H^i(Q(\\sigma_C))$, and the cohomology of the right-derived unit for $f_*$ [def-pc-derived-direct-image], in this order. These are actual maps, not existential choices. There is a natural isomorphism $d:(L\\mapsto T_B\\operatorname{res}_\\phi\\Gamma_AH^i(L))\\cong(L\\mapsto H^i(Rf_*L))$ on $D_{QCoh}(\\operatorname{Spec}A)$ [lem-pc-affine-derived-cohomology-presentation]. For every object $L$ of that category, every $C$, and every isomorphism $t:Q(T_AC)\\cong L$, let $b_{C,t}:H^i(C)\\cong\\Gamma_AH^i(L)$ be the tilde unit followed by sections of the inverse exact-tilde homology comparison, the inverse $Q$/homology comparison and $H^i(t)$ [def-pc-affine-base-change-tilde-coordinates]. Then $q_C\\circ H^i(Rf_*t)=T_B(\\operatorname{res}_\\phi b_{C,t})\\circ d_L$, where composites are written in diagrammatic order. No boundedness, nonzero-ring or K-flat hypothesis is imposed on $C$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0AVW; https://stacks.math.columbia.edu/tag/08D4; https://stacks.math.columbia.edu/tag/0DJ8; https://stacks.math.columbia.edu/tag/08HY",
+  "place": "perfect.tex, lemma-affine-morphism-equivalence (Tag 0AVW), cohomology display; lemma-application-nice-K-injective (Tag 08D4), degreewise truncation; lemma-single-complex-base-change-condition (Tag 0DJ8), affine representative coordinates."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "def-pc-affine-base-change-tilde-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "For f affine, higher direct images of every quasi-coherent module vanish. Apply the unbounded acyclic derived pushforward cohomology comparison with bound one on each inverse image of an affine open. Use the comparison induced by the right-derived unit, computed by a K-injective resolution and the truncation argument of 08D4, rather than an arbitrary choice of the existence-only isomorphism. This gives H^i(Rf*L) naturally isomorphic to f*H^i(L).",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine tilde/Gamma counit and the natural identity-on-sections pushforward/restriction comparison identify f*H^i(L) with T_B res_phi Gamma_A H^i(L). Compose the inverse of the preceding normalized cohomology comparison to obtain d. Exact tilde and exact restriction of scalars give q_C as specified. The tilde adjunction triangle identity identifies its termwise comparison with the same ordinary-to-derived unit. Thus q_C equals T_B res_phi b_(C,id) followed by d at Q(T_A C).",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-affine-base-change-tilde-coordinates",
+    "lem-pc-affine-derived-cohomology-presentation",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the naturality equation of d to t. The definition of b_(C,t) is b_(C,id) followed by Gamma_A H^i(t). Reassociate and use functoriality to obtain the displayed equation. For a zero ring all objects and maps are zero; no step excludes that case. The bound-one truncation argument applies to all unbounded C.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-derived-direct-image",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-13",
+  "document": "Stacks Project, perfect.tex and cohomology.tex",
+  "place": "perfect.tex, lemma-affine-morphism-equivalence (Tag 0AVW), cohomology display; lemma-application-nice-K-injective (Tag 08D4), degreewise truncation; lemma-single-complex-base-change-condition (Tag 0DJ8), affine representative coordinates.",
+  "note": "Detailed normalization/factorization of the affine calculation, without boundedness or a cartesian assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural cohomology isomorphism for derived affine pushforward agrees with the right derived unit on complexes of associated sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology isomorphism for an affine morphism is natural and compatible with the right derived unit on an unbounded complex of quasi coherent sheaves",
+   "results": "Actual hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, AlgebraicGeometry.Scheme.isoSpec_inv_naturality_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, AlgebraicGeometry.Scheme.isoSpec_hom_naturality_assoc, AlgebraicGeometry.Scheme.isoSpec_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc. No exact affine cohomology/mate normalization statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromTildeΓ|mapHomologyIso|rightDerivedFunctorUnit",
+   "results": "Actual hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean. No exact affine cohomology/mate normalization statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineBaseChangeTildeOrdinaryComparison",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Proof step 3: the affine input to canonicalModuleBaseChange_isIso_on_affine_open_of_affine_cases; affine base-change cohomology calculation. perfect.tex, lemma-affine-morphism-equivalence (Tag 0AVW), cohomology display; lemma-application-nice-K-injective (Tag 08D4), degreewise truncation; lemma-single-complex-base-change-condition (Tag 0DJ8), affine representative coordinates.",
+   "via": [
+    "lem-pc-affine-base-change-tilde-ordinary-comparison",
+    "lem-pc-affine-base-change-tilde-canonical-global-comparison",
+    "lem-pc-affine-base-change-tilde-global-comparison",
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTildePushforwardCohomologyNormalization.lean",
+  "declaration": "AlgebraicGeometry.exists_affineTildePushforwardCohomologyNormalization",
+  "declarations": [
+   "AlgebraicGeometry.affineTildeFunctor",
+   "AlgebraicGeometry.affineTildeFunctor_preservesZero",
+   "AlgebraicGeometry.affineTildePushforwardComparison",
+   "AlgebraicGeometry.affineTildePushforwardCohomologyMap",
+   "AlgebraicGeometry.affineTildeRepresentativeCohomologyIso",
+   "AlgebraicGeometry.exists_affineTildePushforwardCohomologyNormalization"
+  ],
+  "statement": "theorem exists_affineTildePushforwardCohomologyNormalization (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) : ∃ d : affineDerivedCohomologyModules A i ⋙ (ModuleCat.restrictScalars φ ⋙ affineTildeFunctor B) ≅ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ)) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i, ∀ (L : schemeDerivedQCohCategory (Spec (.of A))) (C : CochainComplex (ModuleCat.{u} A) ℤ) (t : DerivedCategory.Q.obj (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj C) ≅ L.obj), affineTildePushforwardCohomologyMap A B φ C i ≫ (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φ))).map t.hom) = (affineTildeFunctor B).map ((ModuleCat.restrictScalars φ).map (affineTildeRepresentativeCohomologyIso A C L.obj t i).hom) ≫ d.hom.app L",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T171510-L-1980815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T171510-L-1980815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
