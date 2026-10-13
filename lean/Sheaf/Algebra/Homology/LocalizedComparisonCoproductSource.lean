@@ -6,6 +6,10 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyCofan
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyMapNaturality
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # The source coproduct for localized derived tensor comparison
 
@@ -68,6 +72,23 @@ theorem exists_localizedComparison_coproduct_source
       (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mS.cohomology i),
       ∀ j, Sigma.ι _ j ≫ e.hom ≫ mS.localizedComparison i =
         (m j).localizedComparison i ≫ HomologicalComplex.homologyMap (F.map (s j)) i := by
-  sorry
+  classical
+  dsimp only
+  have hm (j : I) := RingTensorCohomology.exists_baseDerivedTensorCohomologyModelMap
+    R A B C (M j) S (s j) (m j) mS i
+  choose δ g hδ hg using hm
+  obtain ⟨hc⟩ := baseDerivedTensorCohomology_canonical_cofan R A B C M S s hs m mS i
+    δ g hδ hg
+  let J := extendScalars.{u, u, u} (algebraMap (A ⊗[R] B) C)
+  let hc' := isColimitCofanMkObjOfIsColimit J (fun j ↦ (m j).cohomology i) g hc
+  let e := (coproductIsCoproduct (fun j ↦ J.obj ((m j).cohomology i))).coconePointUniqueUpToIso
+    hc'
+  refine ⟨e, ?_⟩
+  intro j
+  have he : Sigma.ι _ j ≫ e.hom = J.map (g j) :=
+    (coproductIsCoproduct _).comp_coconePointUniqueUpToIso_hom hc' (Discrete.mk j)
+  rw [← Category.assoc, he]
+  exact baseDerivedTensorCohomologyMap_localized_naturality R A B C (M j) S (s j)
+    (m j) mS i (δ j) (g j) (hδ j) (hg j)
 
 end ModuleCat

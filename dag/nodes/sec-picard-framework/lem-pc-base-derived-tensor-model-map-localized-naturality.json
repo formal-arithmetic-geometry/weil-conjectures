@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-base-derived-tensor-model-map-localized-naturality",
+ "kind": "statement",
+ "title": "Canonical model maps commute with localized comparison",
+ "statement": "Let R,A,B,C be commutative rings in universe u with R-algebras A,B and an E=A tensor_R B-algebra C. Assume derived categories of R- and B-modules. Universal base-derived tensor cohomology models are as in [def-pc-base-derived-tensor-cohomology-model]. Let f:Q to Q' be an A-linear chain map, m,n models of Q,Q', and i an integer. Let δ:m.derived to n.derived be a counit-compatible natural transformation. Let g:m.cohomology(i) to n.cohomology(i) be an E-linear map whose restriction to B, after the cohomology identifications, is H^i(m.derived(f)) followed by H^i(δ at restricted Q'). Then extension of g from E to C followed by n.localizedComparison(i) equals m.localizedComparison(i) followed by degree-i homology of termwise extension of f from A to C along A to E to C. No flatness assumption or invertibility of f or g is required.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, K-flat computation and independence of the derived change of rings; coproduct argument with Tag 07D9 (injectives.tex); localized counit comparison in Tag 08IB and the calculation used in Tag 0DJA(1). Official pages https://stacks.math.columbia.edu/tag/06Y6, https://stacks.math.columbia.edu/tag/07D9 and https://stacks.math.columbia.edu/tag/0DJA were read online on 2026-10-14 because the local Stacks checkout is absent."
+ },
+ "proof": [
+  {
+   "text": "Prove naturality of ordinaryIso on pure tensors using ordinaryIso_tmul and ExtendScalars.map_tmul. Restrict g to B and compose the desired ordinary comparison equation with mapHomologyIso.inv. Use comparison_eq, the prescribed equation for g, counit compatibility, and naturality of the counit. Naturality of the derived and homotopy homology-factor isomorphisms, and of restriction mapHomologyIso, reduces the equation to the ordinaryIso naturality square just proved. Faithful restriction proves the ordinary E-linear comparison square.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove naturality of ordinaryToLocalized by its value on pure tensors. Transpose the localized equation through the extension/restriction adjunction. Its homEquiv naturality and both localized_eq identities reduce the equation to the ordinary comparison square, the ordinaryToLocalized square and naturality of mapHomologyIso. Use homologyMap_comp and associativity to close the equation; injectivity of homEquiv completes the proof. These equations hold for zero rings and zero complexes and require no coproduct or flatness hypothesis.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, K-flat computation and independence of the derived change of rings; coproduct argument with Tag 07D9 (injectives.tex); localized counit comparison in Tag 08IB and the calculation used in Tag 0DJA(1). Official pages https://stacks.math.columbia.edu/tag/06Y6, https://stacks.math.columbia.edu/tag/07D9 and https://stacks.math.columbia.edu/tag/0DJA were read online on 2026-10-14 because the local Stacks checkout is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A counit compatible map of universal derived tensor cohomology models commutes with the localized comparison map",
+   "results": "Service unavailable: Internal Server Error. LeanFinder, Loogle and source grep were used.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A counit compatible map of universal derived tensor cohomology models commutes with the localized comparison map",
+   "results": "LeanFinder returned Tor map lemmas, mapDerivedCategoryFactorsh and derived adjunction counit equations. None supplies the canonical model-map square. BaseDerivedTensorLocalizedNaturality was read but requires a derived isomorphism and invertible A-to-C extension counits; it does not cover arbitrary summand chain maps.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.BaseDerivedTensorCohomologyModel",
+   "results": "Unknown identifier in search index; project declaration read directly.",
+   "date": "2026-10-14",
+   "verdict": "no indexed match"
+  },
+  {
+   "tool": "grep",
+   "query": "canonical_cofan|localized_naturality|ModelMap.*[Cc]omparison|[Cc]omparison.*ModelMap in lean/Sheaf, lean/WeilConjectures and Mathlib; blueprint_refs.py search cohomology coproduct",
+   "results": "No canonical cofan statement found. The existing localized-naturality theorem only handles a derived isomorphism with invertible extension counits. No blueprint node matched cohomology coproduct. ModelMap gives the canonical maps but no comparison or colimit conclusion.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedComparisonCoproductSource",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Counit and scalar-extension adjunction naturality for each summand map in the localized comparison direct-sum square.",
+   "via": [
+    "lem-pc-localized-comparison-coproduct-source",
+    "lem-pc-localized-tensor-comparison-direct-sum-square",
+    "lem-pc-localized-tensor-comparison-closure-coproducts",
+    "lem-pc-localized-tensor-comparison-closure",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyMapNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorCohomologyMapNaturality.lean",
+  "declaration": "ModuleCat.baseDerivedTensorCohomologyMap_localized_naturality",
+  "statement": "theorem baseDerivedTensorCohomologyMap_localized_naturality\n    (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q')\n    (m : BaseDerivedTensorCohomologyModel R A B Q C)\n    (n : BaseDerivedTensorCohomologyModel R A B Q' C) (i : ℤ)\n    (δ : m.derived ⟶ n.derived) (g : m.cohomology i ⟶ n.cohomology i)\n    (hδ : Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} R)) δ ≫\n      n.counit = m.counit)\n    (hg : (restrictScalars.{u}\n        (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).map g ≫\n          (n.cohomologyIso i).hom =\n      (m.cohomologyIso i).hom ≫\n        (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n          (m.derived.map (DerivedCategory.Qh.map\n            ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map\n              (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).map f)))) ≫\n        (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n          (δ.app (DerivedCategory.Qh.obj\n            ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj\n              (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj Q'))))) :\n    (extendScalars (algebraMap (A ⊗[R] B) C)).map g ≫ n.localizedComparison i =\n      m.localizedComparison i ≫ HomologicalComplex.homologyMap\n        (((extendScalars.{u, u, u}\n          ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n            (.up ℤ)).map f) i",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T211100-L-390651",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T211100-L-390651",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

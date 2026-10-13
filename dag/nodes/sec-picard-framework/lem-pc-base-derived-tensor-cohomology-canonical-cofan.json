@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-base-derived-tensor-cohomology-canonical-cofan",
+ "kind": "statement",
+ "title": "Canonical universal tensor cohomology cofans are colimiting",
+ "statement": "Let R,A,B,C be commutative rings in universe u with R-algebras A,B and an E=A tensor_R B-algebra C. Assume derived categories of R- and B-modules. Universal base-derived tensor cohomology models are as in [def-pc-base-derived-tensor-cohomology-model]. Let M_j be A-module cochain complexes indexed by I:Type u, and let s_j:M_j to S be a colimiting cofan. Choose models m_j,m_S and a degree i. Let δ_j:m_j.derived to m_S.derived be counit-compatible natural transformations, and g_j:m_j.cohomology(i) to m_S.cohomology(i) E-linear maps whose restriction to B, after the cohomology identifications, is H^i(m_j.derived(s_j)) followed by H^i(δ_j at the restricted S). Then the E-module cofan with vertex m_S.cohomology(i) and legs g_j is colimiting. This statement is before further scalar extension to C, has no localized comparison equation, and includes empty I, zero rings and arbitrary unbounded complexes.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, K-flat computation and independence of the derived change of rings; coproduct argument with Tag 07D9 (injectives.tex); localized counit comparison in Tag 08IB and the calculation used in Tag 0DJA(1). Official pages https://stacks.math.columbia.edu/tag/06Y6, https://stacks.math.columbia.edu/tag/07D9 and https://stacks.math.columbia.edu/tag/0DJA were read online on 2026-10-14 because the local Stacks checkout is absent."
+ },
+ "proof": [
+  {
+   "text": "Restrict the colimiting complex cofan to R. Resolve each restricted summand K-flatly and take the termwise sum. Exactness of module sums makes the summed augmentation a quasi-isomorphism; tensor distributivity and exactness make this sum K-flat. Specialize the fixed-second-factor theorem to B in degree zero and identify its ordinary tensor with scalar extension. Compute all supplied universal derived functors using these resolutions; uniqueness of counit-compatible universal functors identifies δ_j with these canonical comparisons. Ordinary extension preserves sums, and the derived direct-sum theorem identifies the resulting cofan in D(B).",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived module homology preserves this derived cofan. Transport its cohomology cofan through the models cohomologyIso maps; the hg equations identify its legs with the restricted g_j. Thus the B-module cofan is colimiting. Given any E-module cocone, its unique B-linear universal map respects E: for every e in E the two composites of its underlying additive map with multiplication by e agree after every g_j, since the cocone legs and g_j are E-linear. B-module coproduct uniqueness proves equality. This gives the E-linear universal map, with uniqueness inherited from B. For empty I the sum resolution is zero and the same universal property applies.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-derived-module-homology-coproduct"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-derived-module-direct-sums",
+  "lem-pc-derived-module-homology-coproduct",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, K-flat computation and independence of the derived change of rings; coproduct argument with Tag 07D9 (injectives.tex); localized counit comparison in Tag 08IB and the calculation used in Tag 0DJA(1). Official pages https://stacks.math.columbia.edu/tag/06Y6, https://stacks.math.columbia.edu/tag/07D9 and https://stacks.math.columbia.edu/tag/0DJA were read online on 2026-10-14 because the local Stacks checkout is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical maps between universal derived tensor cohomology models form a coproduct before scalar extension",
+   "results": "Service unavailable: Internal Server Error. LeanFinder, Loogle and source grep were used.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical maps between universal derived tensor cohomology models form a coproduct before scalar extension",
+   "results": "LeanFinder returned cotangent-cohomology scalar extension, HomologicalComplex.ιTensorObj, Rep.torIso and tensor direct-limit APIs. None concerns this universal derived-model cofan.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.BaseDerivedTensorCohomologyModel",
+   "results": "Unknown identifier in search index; project declaration read directly.",
+   "date": "2026-10-14",
+   "verdict": "no indexed match"
+  },
+  {
+   "tool": "grep",
+   "query": "canonical_cofan|localized_naturality|ModelMap.*[Cc]omparison|[Cc]omparison.*ModelMap in lean/Sheaf, lean/WeilConjectures and Mathlib; blueprint_refs.py search cohomology coproduct",
+   "results": "No canonical cofan statement found. The existing localized-naturality theorem only handles a derived isomorphism with invertible extension counits. No blueprint node matched cohomology coproduct. ModelMap gives the canonical maps but no comparison or colimit conclusion.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedComparisonCoproductSource",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Source cohomology coproduct identification before scalar extension in the localized comparison direct-sum square.",
+   "via": [
+    "lem-pc-localized-comparison-coproduct-source",
+    "lem-pc-localized-tensor-comparison-direct-sum-square",
+    "lem-pc-localized-tensor-comparison-closure-coproducts",
+    "lem-pc-localized-tensor-comparison-closure",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyCofan",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorCohomologyCofan.lean",
+  "declaration": "ModuleCat.baseDerivedTensorCohomology_canonical_cofan",
+  "statement": "theorem baseDerivedTensorCohomology_canonical_cofan\n    {I : Type u} (M : I → CochainComplex (ModuleCat.{u} A) ℤ)\n    (S : CochainComplex (ModuleCat.{u} A) ℤ) (s : ∀ j, M j ⟶ S)\n    (hs : IsColimit (Cofan.mk S s))\n    (m : ∀ j, BaseDerivedTensorCohomologyModel R A B (M j) C)\n    (mS : BaseDerivedTensorCohomologyModel R A B S C) (i : ℤ)\n    (δ : ∀ j, (m j).derived ⟶ mS.derived)\n    (g : ∀ j, (m j).cohomology i ⟶ mS.cohomology i)\n    (hδ : ∀ j, Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} R)) (δ j) ≫\n      mS.counit = (m j).counit)\n    (hg : ∀ j, (restrictScalars.{u}\n        (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).map (g j) ≫\n          (mS.cohomologyIso i).hom =\n      ((m j).cohomologyIso i).hom ≫\n        (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n          ((m j).derived.map (DerivedCategory.Qh.map\n            ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map\n              (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex\n                (.up ℤ)).map (s j))))) ≫\n        (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n          ((δ j).app (DerivedCategory.Qh.obj\n            ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj\n              (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj S))))) :\n    Nonempty (IsColimit (Cofan.mk (mS.cohomology i) g))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T211100-L-390651",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T211100-L-390651",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
