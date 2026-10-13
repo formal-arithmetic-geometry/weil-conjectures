@@ -22,6 +22,9 @@ These exchange isomorphisms are mates under `φ̄^* ⊣ φ̄_*`
 the adjunction lifts to pro-étale Weil sheaves, with the unit and the counit of `φ̄^* ⊣ φ̄_*`,
 and restricts to Weil sheaves.
 
+The base changes `ī`, `j̄` of morphisms `i`, `j` with complementary ranges again have
+complementary ranges (`AlgebraicGeometry.Scheme.Hom.isCompl_range_geometricFiberMap`).
+
 ## Main declarations
 
 - `AlgebraicGeometry.ProEtaleWeilSheaf.upperStarLowerStarAdjunction`: the adjunction
@@ -41,13 +44,54 @@ and restricts to Weil sheaves.
 
 universe u
 
-open CategoryTheory Endofunctor
+open CategoryTheory Limits Endofunctor
 
 namespace AlgebraicGeometry
 
-open scoped ProEtale
+open ProEtale
+
+section GeometricFiber
+
+variable {k : Type u} [Field k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)}
+  {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f)
+
+/-- The base change to `k̄` of a closed immersion is a closed immersion. -/
+instance [IsClosedImmersion φ] : IsClosedImmersion (Scheme.Hom.geometricFiberMap φ h) :=
+  Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsClosedImmersion) φ h ‹_›
+
+/-- The range of the base change `φ̄ : X ⟶ Y` of `φ` to `k̄` is the preimage of the range of `φ`
+in the geometric fiber `Y`. -/
+lemma Scheme.Hom.range_geometricFiberMap :
+    Set.range (Scheme.Hom.geometricFiberMap φ h).base =
+      g.geometricFiberProj.base ⁻¹' Set.range φ.base := by
+  refine (Scheme.Pullback.range_map f (Scheme.specAlgebraicClosure k).hom g
+    (Scheme.specAlgebraicClosure k).hom φ (𝟙 _) (𝟙 _) (by simp [h]) (by simp)).trans ?_
+  simp [Scheme.Hom.geometricFiberProj]
+  rfl
+
+/-- The base changes to `k̄` of morphisms with complementary ranges have complementary
+ranges. -/
+lemma Scheme.Hom.isCompl_range_geometricFiberMap {Z₀ U₀ : Scheme.{u}}
+    {e : Z₀ ⟶ Spec (.of k)} {d : U₀ ⟶ Spec (.of k)} (i : Z₀ ⟶ X₀) (j : U₀ ⟶ X₀)
+    (hi : i ≫ f = e) (hj : j ≫ f = d) (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
+    IsCompl (Set.range (Scheme.Hom.geometricFiberMap i hi).base)
+      (Set.range (Scheme.Hom.geometricFiberMap j hj).base) := by
+  rw [range_geometricFiberMap, range_geometricFiberMap]
+  exact hij.preimage _
+
+end GeometricFiber
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- A pro-étale Weil sheaf is zero if and only if its underlying sheaf is. -/
+lemma ProEtaleWeilSheaf.isZero_iff {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    (K : ProEtaleWeilSheaf k₀ l X) : IsZero K ↔ IsZero K.carrier :=
+  ⟨fun h ↦ (IsoAlgebra.forget _).map_isZero h,
+    fun h ↦ (IsZero.iff_id_eq_zero K).2 ((IsoAlgebra.forget _).map_injective (h.eq_of_src _ _))⟩
+
+section Adjunction
+
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))]
 
@@ -151,5 +195,7 @@ instance isIso_upperStarLowerStarAdjunction_counit {U : Scheme.{u}}
   NatIso.isIso_of_isIso_app _
 
 end WeilSheaf
+
+end Adjunction
 
 end AlgebraicGeometry

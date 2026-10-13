@@ -25,6 +25,8 @@ count. As `R` is reduced, `φ` is an isomorphism after inverting `a`.
 - `Module.exists_free_away_of_finrank_fiber_eq`: `M` is free after inverting some `a ∉ p`.
 - `Module.projective_of_finrank_fiber_eq`: if `M` is finitely presented, it is projective.
 - `Module.rankAtStalk_eq_of_finrank_fiber_eq`: its rank is `n` everywhere.
+- `Module.exists_finrank_fiber_le`: for any finite `M`, the fibre dimension is upper
+  semicontinuous.
 
 ## Blueprint
 
@@ -57,18 +59,13 @@ lemma surjective_baseChange_of_smul_mem_range {N : Type*} [AddCommGroup N] [Modu
       mul_assoc, inv_mul_cancel₀ hak, mul_one]
 
 
-variable [IsReduced R] [Module.Finite R M] {n : ℕ}
-
-/-- Let `R` be reduced and `M` a finite `R`-module all of whose fibres `κ(q) ⊗[R] M` have
-dimension `n`. Then every prime `p` has a basic open neighbourhood `D(a)` on which `M` is free:
-elements of `M` lifting a basis of `κ(p) ⊗[R] M` give an isomorphism `R_aⁿ ≅ M_a`. -/
-theorem exists_free_away_of_finrank_fiber_eq
-    (h : ∀ (q : Ideal R) [q.IsPrime], finrank q.ResidueField (q.Fiber M) = n)
-    (p : Ideal R) [p.IsPrime] :
-    ∃ a ∉ p, Module.Free (Localization.Away a) (LocalizedModule.Away a M) := by
+/-- **Nakayama at a prime.** Let `M` be a finite `R`-module and `p` a prime of `R`, and let
+`d = dim κ(p) ⊗[R] M`. Elements `v : Fin d → M` lifting a basis of `κ(p) ⊗[R] M` generate `M`
+after inverting some `a ∉ p`: `a • M` lies in the span of `v`. -/
+theorem exists_smul_mem_range_linearCombination [Module.Finite R M] (p : Ideal R) [p.IsPrime] :
+    ∃ v : Fin (finrank p.ResidueField (p.Fiber M)) → M, ∃ a ∉ p,
+      ∀ m : M, a • m ∈ LinearMap.range (Fintype.linearCombination R v) := by
   classical
-  have : Nontrivial R :=
-    nontrivial_of_ne 0 1 fun h ↦ ‹p.IsPrime›.ne_top ((p.eq_top_iff_one).mpr (h ▸ p.zero_mem))
   let k := p.ResidueField
   -- A basis of `κ(p) ⊗ M` consisting of elements `1 ⊗ m`.
   let S : Set (k ⊗[R] M) := Set.range fun m : M ↦ (1 : k) ⊗ₜ[R] m
@@ -82,18 +79,21 @@ theorem exists_free_away_of_finrank_fiber_eq
       rw [show s ⊗ₜ[R] m = s • ((1 : k) ⊗ₜ[R] m) by rw [smul_tmul', smul_eq_mul, mul_one]]
       exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨m, rfl⟩)
   obtain ⟨t, htS, hspan, hli⟩ := exists_linearIndependent k S
-  let b : Basis t k (k ⊗[R] M) := Basis.mk hli (by rw [Subtype.range_coe, hspan, hS])
-  have : Finite t := Module.Finite.finite_basis b
+  let b₀ : Basis t k (k ⊗[R] M) := Basis.mk hli (by rw [Subtype.range_coe, hspan, hS])
+  have : Finite t := Module.Finite.finite_basis b₀
   let _ : Fintype t := Fintype.ofFinite t
-  have hcard : Fintype.card t = n := by rw [← Module.finrank_eq_card_basis b]; exact h p
-  choose v hv using fun i : t ↦ htS i.2
-  let φ : (t → R) →ₗ[R] M := Fintype.linearCombination R v
+  let b := b₀.reindex (Fintype.equivFinOfCardEq (Module.finrank_eq_card_basis b₀).symm)
+  have hbS (i) : b i ∈ S := by
+    rw [Basis.reindex_apply, Basis.mk_apply]
+    exact htS (Subtype.mem _)
+  choose v hv using hbS
+  let φ : (Fin (finrank k (k ⊗[R] M)) → R) →ₗ[R] M := Fintype.linearCombination R v
   -- The cokernel of `φ` vanishes after tensoring with `κ(p)`, hence near `p`.
-  have hv' (i : t) : v i ∈ LinearMap.range φ :=
+  have hv' (i) : v i ∈ LinearMap.range φ :=
     ⟨Pi.single i 1, by simp [φ]⟩
   have hzero : ((LinearMap.range φ).mkQ.baseChange k) = 0 := by
     refine b.ext fun i ↦ ?_
-    rw [Basis.mk_apply, ← hv i, LinearMap.baseChange_tmul, Submodule.mkQ_apply,
+    rw [← hv i, LinearMap.baseChange_tmul, Submodule.mkQ_apply,
       (Submodule.Quotient.mk_eq_zero _).mpr (hv' i), tmul_zero, LinearMap.zero_apply]
   have hsub : Subsingleton (k ⊗[R] (M ⧸ LinearMap.range φ)) := by
     refine ⟨fun x y ↦ ?_⟩
@@ -108,9 +108,49 @@ theorem exists_free_away_of_finrank_fiber_eq
       not_nontrivial_iff_subsingleton]
   rw [Module.support_eq_zeroLocus, PrimeSpectrum.mem_zeroLocus, Set.not_subset] at hp
   obtain ⟨a, haC, hap⟩ := hp
-  have ha (m : M) : a • m ∈ LinearMap.range φ := by
-    rw [← Submodule.Quotient.mk_eq_zero, Submodule.Quotient.mk_smul]
-    exact Module.mem_annihilator.mp haC _
+  refine ⟨v, a, hap, fun m ↦ ?_⟩
+  rw [← Submodule.Quotient.mk_eq_zero, Submodule.Quotient.mk_smul]
+  exact Module.mem_annihilator.mp haC _
+
+/-- **Upper semicontinuity of the fibre dimension.** Let `M` be a finite `R`-module and `p` a
+prime of `R`. There is `a ∉ p` such that `dim κ(q) ⊗[R] M ≤ dim κ(p) ⊗[R] M` for every prime `q`
+not containing `a`: by `Module.exists_smul_mem_range_linearCombination`, lifts of a basis of
+`κ(p) ⊗[R] M` span every fibre over `D(a)`. -/
+theorem exists_finrank_fiber_le [Module.Finite R M] (p : Ideal R) [p.IsPrime] :
+    ∃ a ∉ p, ∀ (q : Ideal R) [q.IsPrime], a ∉ q →
+      finrank q.ResidueField (q.Fiber M) ≤ finrank p.ResidueField (p.Fiber M) := by
+  have : Nontrivial R :=
+    nontrivial_of_ne 0 1 fun h ↦ ‹p.IsPrime›.ne_top ((p.eq_top_iff_one).mpr (h ▸ p.zero_mem))
+  obtain ⟨v, a, hap, ha⟩ := exists_smul_mem_range_linearCombination (M := M) p
+  refine ⟨a, hap, fun q _ haq ↦ ?_⟩
+  have hak : algebraMap R q.ResidueField a ≠ 0 := by
+    rwa [ne_eq, Ideal.algebraMap_residueField_eq_zero]
+  let φ := Fintype.linearCombination R v
+  have hsurj := surjective_baseChange_of_smul_mem_range φ ha hak
+  calc finrank q.ResidueField (q.Fiber M)
+      = finrank q.ResidueField (LinearMap.range (φ.baseChange q.ResidueField)) := by
+        rw [LinearMap.range_eq_top.mpr hsurj, finrank_top]
+    _ ≤ finrank q.ResidueField
+          (q.ResidueField ⊗[R] (Fin (finrank p.ResidueField (p.Fiber M)) → R)) :=
+        LinearMap.finrank_range_le _
+    _ = finrank p.ResidueField (p.Fiber M) := by
+        rw [Module.finrank_baseChange, Module.finrank_fin_fun]
+
+variable [IsReduced R] [Module.Finite R M] {n : ℕ}
+
+/-- Let `R` be reduced and `M` a finite `R`-module all of whose fibres `κ(q) ⊗[R] M` have
+dimension `n`. Then every prime `p` has a basic open neighbourhood `D(a)` on which `M` is free:
+elements of `M` lifting a basis of `κ(p) ⊗[R] M` give an isomorphism `R_aⁿ ≅ M_a`. -/
+theorem exists_free_away_of_finrank_fiber_eq
+    (h : ∀ (q : Ideal R) [q.IsPrime], finrank q.ResidueField (q.Fiber M) = n)
+    (p : Ideal R) [p.IsPrime] :
+    ∃ a ∉ p, Module.Free (Localization.Away a) (LocalizedModule.Away a M) := by
+  have : Nontrivial R :=
+    nontrivial_of_ne 0 1 fun h ↦ ‹p.IsPrime›.ne_top ((p.eq_top_iff_one).mpr (h ▸ p.zero_mem))
+  obtain ⟨v, a, hap, ha⟩ := exists_smul_mem_range_linearCombination (M := M) p
+  let t := Fin (finrank p.ResidueField (p.Fiber M))
+  have hcard : Fintype.card t = n := by rw [Fintype.card_fin]; exact h p
+  let φ : (t → R) →ₗ[R] M := Fintype.linearCombination R v
   -- `a` kills the kernel of `φ`.
   have hker (c : t → R) (hc : φ c = 0) (i : t) : a * c i = 0 := by
     have : a * c i ∈ nilradical R := by
