@@ -1,0 +1,137 @@
+{
+ "id": "aux-pc-coefficient-target-tensor-decoder",
+ "kind": "statement",
+ "title": "Affine coefficient tensor decoder",
+ "statement": "Let f:X -> T be separated [def-pc-morphism-conventions], F a quasi-coherent O_X-module [def-weil-sheaf-of-modules-category], U an affine open of T, and Z an affine open of Y=f inverse image U. Let g:Tprime -> U, gprime:Xprime -> X, fprime:Xprime -> Tprime form a cartesian square [def-pc-fibre-product] with f and g followed by U. Let W=gprime inverse image of the image of Z in X and B an affine open of Tprime. Put A=Gamma(U,O), R=Gamma(B,O), N=Gamma(Z,F|Y) with the A-action of [def-pc-finite-affine-cech-model], and M=gprime^*F [def-pc-module-pullback]. There exists an R-linear map l from Gamma(B,(W -> Tprime)_*(M|W)) to R tensor_A N, taking the supported pullback-unit section of each s to 1 tensor s. The supported section is coefficientSupportIso.inv applied to the restriction of coefficientPullbackGenerator(s) [lem-pc-finite-affine-cech-coefficient-comparison-map]. No candidate forward map is given and no injectivity is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pc-finite-affine-cech-model",
+  "lem-pc-finite-affine-cech-coefficient-comparison-map",
+  "def-pc-morphism-conventions",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0096, 0097, 01I9, 01IA; Tag 02KG, Lemma 30.5.1 affine tensor computation"
+ },
+ "proof": [
+  {
+   "text": "Set A = Gamma(U,O), D = Gamma(Z,O), R = Gamma(B,O), and let N be\nF(Z), with its given structural A-action. The affine intersection base-change\nlemma makes I = W intersect fprime inverse image B affine. The restricted\ncartesian square identifies I with Z times_U B. The affine ring computation\nidentifies Gamma(I,O) with R tensor_A D. Restriction preserves quasi-coherence,\nso the affine pullback section theorem identifies sections of M on I with\n(R tensor_A D) tensor_D N. Compare tensorPullback and pullback using uniqueness\nof left adjoints and the conjugate-isomorphism unit equation; compare pullback\nalong the open immersions with restriction using restrictFunctorIsoPullback.\nThese comparisons take the restricted pullback-unit section of s to\n(1 tensor 1) tensor s. The A-action is the displayed one because the canonical\nchart followed by GammaSpecIso cancels. Compose coefficientSupportIso with\nthese identifications, and then with the balanced R-linear map sending\n(r tensor d) tensor n to r tensor (d*n). This map is well-defined: balancing\nover D is associativity of the D-action on N, and balancing over A uses the\nstructural A-action on D and N. On the specified generator its value is\n1 tensor (1*s) = 1 tensor s. This gives the asserted decoder and formula.\nIf Z or B is empty all relevant modules vanish and the same formulas hold;\nno flatness, nonemptiness, or cover is used.",
+   "uses": [
+    "lem-pc-finite-affine-cech-intersection-base-change",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-pc-finite-affine-cech-coefficient-comparison-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-affine-cech-intersection-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-pc-finite-affine-cech-coefficient-comparison-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 02KG, 01I9, 01IA, 0097",
+  "note": "G4 isolates the affine geometric decoder and its generator formula; tensor induction and cancellation stay in the original theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine pullback sections admit a tensor linear decoder sending pullback unit to one tensor section",
+   "results": "Eight scheme pullback carrier and Spec tensor chart hits; none states a module-section decoder.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.induction_on",
+   "results": "TensorProduct.induction_on, Mathlib.LinearAlgebra.TensorProduct.Defs: generic tensor induction only.",
+   "date": "2026-10-13",
+   "verdict": "algebraic ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientTarget_tensor|tensorPullback_affine_sections",
+   "results": "msearch grep: zero hits; direct repository rg/read located the target and ModulePullbackAffineSections, whose scalar ring and tensorPullback model require geometric transport.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate decoder"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine quasi coherent pullback sections tensor product",
+   "results": "Service unavailable: Internal Server Error. No mathematical search result returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientTargetTensorInjective",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), affine coefficient computation: the balanced map back sends (r tensor d) tensor n to r tensor (d*n).",
+   "via": [
+    "lem-pc-coefficient-target-tensor-injective",
+    "lem-pc-coefficient-target-affine-tensor-presentation",
+    "lem-pc-finite-affine-cech-coefficient-comparison-bijective",
+    "lem-pc-finite-affine-cech-coefficient-base-change",
+    "lem-pc-finite-affine-cech-base-change-coordinates",
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientTargetTensorDecoder",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientTargetTensorDecoder.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_coefficientTarget_tensor_decoder",
+  "statement": "theorem exists_coefficientTarget_tensor_decoder\n    {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : T.Opens) (hU : IsAffineOpen U)\n    (Z : (f ⁻¹ᵁ U).toScheme.Opens) (hZ : IsAffineOpen Z)\n    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n    (sq : IsPullback g' f' f (g ≫ U.ι))\n    (W : X'.Opens) (hW : W = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ Z))\n    (B : T'.Opens) (hB : IsAffineOpen B) :\n    let : Algebra Γ(U.toScheme, ⊤) Γ(T', B) :=\n      (g.appLE ⊤ B (by simp)).hom.toAlgebra\n    let N := (ModuleCat.restrictScalars\n      (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫\n        ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom)).obj\n          ((F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat.obj (op Z))\n    let M := (pullback g').obj F\n    ∃ l : Γ((pushforward (W.ι ≫ f')).obj (M.restrict W.ι), B)\n          →ₗ[Γ(T', B)] (Γ(T', B) ⊗[Γ(U.toScheme, ⊤)] N),\n        ∀ s : N, l ((coefficientSupportIso f' M W B).inv\n          (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op\n            (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s))) =\n          (1 : Γ(T', B)) ⊗ₜ[Γ(U.toScheme, ⊤)] s",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T123205-L-3676586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T123205-L-3676586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

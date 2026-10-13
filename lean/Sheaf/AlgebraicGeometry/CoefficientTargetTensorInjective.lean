@@ -8,8 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
+import Sheaf.AlgebraicGeometry.CoefficientTargetTensorDecoder
 
 /-! # Injective of the coefficient tensor map
 
@@ -25,6 +24,23 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
+private theorem tensor_leftInverse_of_generators
+    {A R N Q : Type u} [CommRing A] [CommRing R] [Algebra A R]
+    [AddCommGroup N] [Module A N] [AddCommGroup Q] [Module R Q]
+    (c : (R ⊗[A] N) →ₗ[R] Q) (l : Q →ₗ[R] (R ⊗[A] N))
+    (h : ∀ s : N, l (c ((1 : R) ⊗ₜ[A] s)) = (1 : R) ⊗ₜ[A] s) :
+    Function.LeftInverse l c := by
+  intro t
+  induction t using TensorProduct.induction_on with
+  | zero => rw [c.map_zero, l.map_zero]
+  | tmul r s =>
+    have he : r ⊗ₜ[A] s = r • ((1 : R) ⊗ₜ[A] s) := by
+      rw [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+    rw [he, c.map_smul, l.map_smul, h]
+  | add t t' ht ht' => rw [c.map_add, l.map_add, ht, ht']
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- A tensor map with the supported pullback-unit formula is injective.
 Only injectivity is asserted; no equivalence or inverse formula is assumed.
 Source: Stacks Project, Tag 02KG (Lemma 30.5.1, affine tensor computation),
@@ -72,7 +88,21 @@ theorem coefficientTarget_tensor_injective
         (coefficientSupportIso f' M W B).inv
           (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op
             (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s))) →
-        Function.Injective c := by sorry
+        Function.Injective c := by
+  classical
+  dsimp only
+  let : Algebra Γ(U.toScheme, ⊤) Γ(T', B) :=
+    (g.appLE ⊤ B (by simp)).hom.toAlgebra
+  let N := (ModuleCat.restrictScalars
+    (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫
+      ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom)).obj
+        ((F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat.obj (op Z))
+  let M := (pullback g').obj F
+  intro c hc
+  obtain ⟨l, hl⟩ := exists_coefficientTarget_tensor_decoder f F U hU Z hZ g g' f' sq W hW B hB
+  apply (tensor_leftInverse_of_generators c l ?_).injective
+  intro s
+  rw [hc, hl]
 
 end
 end AlgebraicGeometry.Scheme.Modules
