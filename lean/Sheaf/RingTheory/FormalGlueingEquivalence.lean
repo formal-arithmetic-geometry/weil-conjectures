@@ -8,12 +8,11 @@ module
 public import Sheaf.RingTheory.FormalGlueingData
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 import Sheaf.Paper.FormalGlueingCanonicalMaps
-import Sheaf.Paper.TorsionModuleFlatBaseChangeIso
 import Sheaf.RingTheory.FormalGlueingComplexExact
-import Sheaf.RingTheory.FormalGlueingH0Localization
-import Sheaf.RingTheory.TorsionExtensionFlatDescent
+import Sheaf.RingTheory.FormalGlueingCanonicalFunctor
+import Sheaf.RingTheory.FormalGlueingMorphismLifting
+import Sheaf.RingTheory.FormalGlueingEssentialSurjectivity
 
 /-!
 # The canonical functor for formal glueing
@@ -102,6 +101,44 @@ theorem exists_canonical_equivalence {R : Type u} {S : Type v}
           Function.Bijective (Can.map : (M ⟶ N) → (Can.obj M ⟶ Can.obj N))) ∧
         (∀ X : Data.{u, v, max u v w} φ f,
           ∃ M : ModuleCat.{max u v w} R, Nonempty (Can.obj M ≅ X))) := by
-  sorry
+  classical
+  refine ⟨?_, ?_⟩
+  · intro P a b
+    refine ⟨(compare_properties φ P a).2.2.2.2, ?_⟩
+    have hs := (swap_properties P a b).2.2.2.2
+    constructor
+    · intro x y h
+      have hx := congrArg (fun k => k x) hs.1
+      have hy := congrArg (fun k => k y) hs.1
+      simpa only [LinearMap.comp_apply, LinearMap.id_apply] using
+        hx.symm.trans ((congrArg (swap b a P) h).trans hy)
+    · intro y
+      refine ⟨swap b a P y, ?_⟩
+      exact congrArg (fun k => k y) hs.2
+  · obtain ⟨Can, hobj, hmap⟩ := exists_canonical_functor φ t f
+    refine ⟨Can, hobj, hmap, ?_⟩
+    intro hflat hquot
+    refine ⟨?_, canonical_essentially_surjective φ t f Can hobj hflat hquot⟩
+    intro M N
+    refine ⟨?_, canonical_map_surjective φ t f Can hobj hmap hflat hquot M N⟩
+    intro a b hab
+    have hprime : extendMap φ a.hom = extendMap φ b.hom :=
+      eq_of_heq ((hmap M N a).1.symm.trans
+        ((heq_of_eq (congrArg (fun z => z.prime) hab)).trans (hmap M N b).1))
+    have hchart (i : Fin t) : localMap (f i) a.hom = localMap (f i) b.hom :=
+      eq_of_heq (((hmap M N a).2 i).symm.trans
+        ((heq_of_eq (congrArg (fun z => z.chart i) hab)).trans ((hmap M N b).2 i)))
+    let : Algebra R S := φ.toAlgebra
+    have hinj := (RingTheory.formalGlueingComplexExact φ hflat t f hquot N).1
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro m
+    apply hinj
+    apply Prod.ext
+    · have hp := congrArg (fun k => k (TensorProduct.tmul R (1 : S) m)) hprime
+      simpa [extendMap, LinearMap.baseChange_tmul] using hp
+    · funext i
+      have hc := congrArg (fun k => k (LocalizedModule.mk m 1)) (hchart i)
+      simpa [localMap, IsLocalizedModule.map_LocalizedModules] using hc
 
 end FormalGlueing

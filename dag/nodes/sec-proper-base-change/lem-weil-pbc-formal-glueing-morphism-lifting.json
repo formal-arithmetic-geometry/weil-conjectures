@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-morphism-lifting",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "More on Algebra, Lemma 05EM (using 05EK), and the first sentence of the proof of Proposition 05ER; steps 3,4,6 of prop-weil-pbc-formal-glueing-equivalence.",
+   "via": [
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "lem-weil-pbc-formal-glueing-isogeny",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Lifting morphisms between canonical formal glueing objects",
+ "statement": "Let $R,S$ be commutative rings and $\\varphi:R\\to S$ a flat ring map [def-weil-pbc-flat-ring-map]. Let $t\\in\\mathbf N$, $f:\\operatorname{Fin}(t)\\to R$, and $I=(f_i)_i$, and suppose the induced map $R/I\\to S/IS$ is bijective. Let $\\mathrm{Can}:\\mathrm{Mod}_R\\to\\mathrm{Glue}(\\varphi,f)$ be a functor with the canonical object components $S\\otimes_R M,M_{f_i},c^M_{f_i},\\sigma^M_{f_i,f_j}$ and map components $1\\otimes h,h_{f_i}$, with bundled equalities and heterogeneous equalities of the actual structural and component maps as in [def-weil-pbc-formal-glueing-data], [def-weil-module-base-change], [def-weil-pbc-module-localization-away]. For any $R$-modules $M,N$ and any morphism $z:\\mathrm{Can}(M)\\to\\mathrm{Can}(N)$ there exists an $R$-linear map $h:M\\to N$ with $\\mathrm{Can}(h)=z$. This asserts surjectivity only, not uniqueness or essential surjectivity.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 05EM (using 05EK), and the first sentence of the proof of Proposition 05ER; steps 3,4,6 of prop-weil-pbc-formal-glueing-equivalence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "(Part (2): from now on $\\varphi$ is flat and $R/I\\to S/IS$ is an isomorphism. The complex.) For an $R$-module $N$ let $\\alpha_N:N\\to(N\\otimes_RS)\\times\\prod_iN_{f_i}$, $n\\mapsto(n\\otimes1,(n/1)_i)$, and $\\beta_N$ be the maps of [lem-weil-pbc-formal-glueing-complex-exact], where $(N\\otimes_RS)_{f_i}$ is identified with $N_{f_i}\\otimes_RS$ by $c^N_{f_i}$ (the identification of that statement is $(x\\otimes s)/f_i^e\\leftrightarrow(x/f_i^e)\\otimes s$, which is $c^N_{f_i}$ by [lem-weil-pbc-formal-glueing-canonical-maps] (3)). By [lem-weil-pbc-formal-glueing-complex-exact], $\\alpha_N$ is injective and $\\operatorname{Ker}\\beta_N=\\operatorname{Im}\\alpha_N$. Concretely, a pair $(n',(n_i)_i)$ lies in $\\operatorname{Ker}\\beta_N$ iff (i) $c^N_{f_i}(n'/1)=n_i\\otimes1$ for all $i$ and (ii) $n_i$ and $n_j$ have the same image in $N_{f_if_j}$ under the canonical maps $N_{f_i}\\to N_{f_if_j}$, $x/f_i^e\\mapsto f_j^ex/(f_if_j)^e$, and $N_{f_j}\\to N_{f_if_j}$ [def-weil-pbc-module-localization-away], for all $i,j$.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-complex-exact",
+    "lem-weil-pbc-formal-glueing-canonical-maps",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EM (lemma-H0-inverse, line 24729), a reformulation of Lemma 05EK (lemma-recover-module-from-glueing-data, line 24579); the first sentence of the proof of 05ER"
+   }
+  },
+  {
+   "text": "(Part (2): a lemma on iterated localizations.) Let $N$ be an $R$-module, $f,g\\in R$, $x,y\\in N$, $a,b\\ge0$, and suppose $\\sigma^N_{f,g}((x/f^a)/1)=(y/g^b)/1$ in $(N_g)_f$. Then $x/f^a$ and $y/g^b$ have the same image in $N_{fg}$. Indeed $\\sigma^N_{f,g}((x/f^a)/1)=(x/1)/f^a$ (step 1), so $(x/1)/f^a=(y/g^b)/1$ in $(N_g)_f$: there is $c\\ge0$ with $f^c\\big(x/1-f^a\\cdot y/g^b\\big)=0$ in $N_g$, i.e. $(f^cg^bx-f^{c+a}y)/g^b=0$, so there is $d\\ge0$ with $g^d(f^cg^bx-f^{a+c}y)=0$ in $N$ [def-weil-pbc-module-localization-away]. The images of $x/f^a$ and $y/g^b$ in $N_{fg}$ are $g^ax/(fg)^a$ and $f^by/(fg)^b$ (canonical maps of [def-weil-pbc-module-localization-away]); their difference is $z/(fg)^{a+b}$ with $z=f^bg^{a+b}x-f^{a+b}g^ay=f^bg^a(g^bx-f^ay)$, and $(fg)^{c+d}z=f^{b+d}g^{a+c}\\cdot g^d(f^cg^bx-f^{a+c}y)=0$. Hence the difference is $0$ in $N_{fg}$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Remark 05EL (remark-glueing-data, line 24641): the identification of (M_{f_i})_{f_j} with M_{f_if_j} left implicit in the source"
+   }
+  },
+  {
+   "text": "(Part (2): $\\mathrm{Can}$ is full.) Let $(u',(u_i)_i):\\mathrm{Can}(M)\\to\\mathrm{Can}(N)$ be a morphism of $\\mathrm{Glue}$ [def-weil-pbc-formal-glueing-data]: $u'$ is $S$-linear, the $u_i:M_{f_i}\\to N_{f_i}$ are $R$-linear, $c^N_{f_i}\\circ u'_{f_i}=(u_i\\otimes_RS)\\circ c^M_{f_i}$ and $\\sigma^N_{f_i,f_j}\\circ(u_i)_{f_j}=(u_j)_{f_i}\\circ\\sigma^M_{f_i,f_j}$. Let $m\\in M$, $n'=u'(m\\otimes1)$, $n_i=u_i(m/1)$. Applying the first relation to $(m\\otimes1)/1$ gives $c^N_{f_i}(n'/1)=(u_i\\otimes_RS)((m/1)\\otimes1)=n_i\\otimes1$ (formula for $c$, step 1), which is (i) of step 3. Applying the second to $(m/1)/1$ gives $\\sigma^N_{f_i,f_j}(n_i/1)=(u_j)_{f_i}((m/1)/1)=n_j/1$; writing $n_i=x/f_i^a$, $n_j=y/f_j^b$, step 4 shows that $n_i$ and $n_j$ have the same image in $N_{f_if_j}$, which is (ii). So $(n',(n_i))\\in\\operatorname{Ker}\\beta_N=\\operatorname{Im}\\alpha_N$, and by injectivity of $\\alpha_N$ there is exactly one $u(m)\\in N$ with $u(m)\\otimes1=u'(m\\otimes1)$ and $u(m)/1=u_i(m/1)$ for all $i$ (step 3). The map $u$ is $R$-linear: $\\alpha_N(u(m_1)+r\\,u(m_2))$ and $\\alpha_N(u(m_1+rm_2))$ are both $(u'((m_1+rm_2)\\otimes1),(u_i((m_1+rm_2)/1))_i)$, as $u'$, $u_i$, $\\alpha_N$ are $R$-linear. Now $u\\otimes_RS$ and $u'$ are $S$-linear and agree on the elements $m\\otimes1$, which generate $M\\otimes_RS$ over $S$ [def-weil-module-base-change], so $u\\otimes_RS=u'$; and $u_{f_i}$, $u_i$ are $R$-linear maps into $N_{f_i}$, on which $f_i$ acts bijectively [def-weil-pbc-module-localization-away], agreeing on the elements $m/1$, so they agree on $m/f_i^e$ (both send it to the unique $z$ with $f_i^ez=u(m)/1$). Hence $(u',(u_i))=\\mathrm{Can}(u)$; with step 5, $\\mathrm{Can}$ is fully faithful.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-complex-exact",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EM (lemma-H0-inverse, line 24729), a reformulation of Lemma 05EK (lemma-recover-module-from-glueing-data, line 24579) (H^0 o Can = id), used in the first sentence of the proof of 05ER"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-glueing-complex-exact",
+  "lem-weil-pbc-formal-glueing-canonical-maps",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 05EM (using 05EK), and the first sentence of the proof of Proposition 05ER; steps 3,4,6 of prop-weil-pbc-formal-glueing-equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fully faithful formal gluing of modules flat ring map R to S isomorphism modulo ideal",
+   "results": "UNAVAILABLE: service Internal Server Error; not evidence of absence. The other searches were used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lifting compatible module maps from scalar extension and localizations under flat ring map quotient isomorphism",
+   "results": "ModuleCat.FilteredColimits.M.mk_surjective and surjective_of_isLocalized_span (requires unit ideal); no formal glueing morphism lifting.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg formal.*[Gg]lu|[Gg]lu.*[Mm]odule|[Bb]eauville|[Ll]aszlo in Mathlib/Algebra/Category/ModuleCat and Mathlib/RingTheory; rg canonical.*functor|morphism.*lifting|essential.*surject in formal-glueing DAG nodes; blueprint_refs.py search canonical functor glueing / glueing morphism / glueing equivalence",
+   "results": "No Mathlib matches. DAG has the composite proposition and its planned steps, no separately stated clause of this kind; whole blueprint has no matching module functor/lifting/algebraization node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormalGlueingEquivalence",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormalGlueingMorphismLifting",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingMorphismLifting.lean",
+  "declaration": "FormalGlueing.canonical_map_surjective",
+  "statement": "theorem canonical_map_surjective {R : Type u} {S : Type v}\n    [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)\n    (Can : ModuleCat.{max u v w} R ⥤ Data.{u, v, max u v w} φ f)\n    (hobj : (∀ M : ModuleCat.{max u v w} R,\n        (Can.obj M).M' = extend φ M ∧\n        (∀ i : Fin t, (Can.obj M).M i =\n          ModuleCat.of (Localization.Away (f i)) (LocalizedModule.Away (f i) M)) ∧\n        (∀ i : Fin t, HEq ((Can.obj M).alpha i).toLinearMap (compare φ (f i) M)) ∧\n        (∀ i j : Fin t,\n          HEq ((Can.obj M).alpha_overlap i j).toLinearMap (swap (f i) (f j) M))))\n    (hmap : (∀ (M N : ModuleCat.{max u v w} R) (h : M ⟶ N),\n        HEq (Can.map h).prime (extendMap φ h.hom) ∧\n        ∀ i : Fin t, HEq ((Can.map h).chart i) (localMap (f i) h.hom)))\n    (hflat : φ.Flat)\n    (hquot : Function.Bijective\n      (Ideal.quotientMap ((Ideal.span (Set.range f)).map φ) φ Ideal.le_comap_map))\n    (M N : ModuleCat.{max u v w} R) :\n    Function.Surjective (Can.map : (M ⟶ N) → (Can.obj M ⟶ Can.obj N))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100018-L-2466240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100018-L-2466240",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
