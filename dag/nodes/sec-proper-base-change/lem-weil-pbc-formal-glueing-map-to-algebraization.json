@@ -1,0 +1,166 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-map-to-algebraization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); algebraization of the map in part (1) of 0ALK, followed by torsion detection on the finite charts",
+   "via": [
+    "lem-weil-pbc-formal-glueing-isogeny",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Algebraize a map to a scalar extension, with torsion kernel and cokernel",
+ "statement": "Let $R$ and $S$ be commutative rings and $R\\to S$ a flat ring map [def-weil-pbc-flat-ring-map]. Let $I\\subseteq R$ be a finitely generated ideal such that the induced map $R/I\\to S/IS$ is an isomorphism. Call an $R$-module $I$-power torsion when for every element $x$ there is an integer $n\\geq0$ such that $r x=0$ for every $r\\in I^n$; for an $S$-module use restriction of scalars. Let $P$ be an $R$-module and $Q$ an $S$-module; write $S\\otimes_R P$ for scalar extension and $\\psi_S$ for scalar extension of a linear map [def-weil-module-base-change]. For an $S$-linear map $\\varphi:Q\\to S\\otimes_R P$ with $I$-power torsion kernel and cokernel, there exist an $R$-module $T$, an $R$-linear map $\\psi:T\\to P$, and an $S$-linear isomorphism $\\beta:Q\\to S\\otimes_R T$ such that $\\psi_S\\circ\\beta=\\varphi$, and both $\\ker\\psi$ and $P/\\operatorname{im}\\psi$ are $I$-power torsion.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 0ALK (lemma-application-formal-glueing), proof of part (1), using Remark 05EL (remark-glueing-data) and Proposition 05ER (proposition-equivalence); torsion follows by exact localization and finite generation as in step 5 of lem-weil-pbc-formal-glueing-isogeny"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "(Localizing a map with $I$-power torsion kernel and cokernel.) As $I$ is finitely generated, write $I=(f_1,\\dots,f_t)$. Let $T$ be an $I$-power torsion $R$-module and $f=f_i$. For $x\\in T$ pick $n\\ge1$ with $I^nx=0$; then $f^nx=0$ since $f^n\\in I^n$, so $x/1=0$ in $T_f$ and every element $x/f^e=(1/f^e)\\cdot(x/1)$ of $T_f$ is $0$ [def-weil-pbc-module-localization-away]: $T_f=0$. Now let $h:P\\to Q$ be an $R$-linear map with $I$-power torsion kernel and cokernel. Localizing the exact sequences $0\\to\\operatorname{Ker}h\\to P\\xrightarrow{h}Q$ and $P\\xrightarrow{h}Q\\to\\operatorname{Coker}h\\to0$ at $f$ gives exact sequences $(\\operatorname{Ker}h)_f\\to P_f\\xrightarrow{h_f}Q_f$ and $P_f\\xrightarrow{h_f}Q_f\\to(\\operatorname{Coker}h)_f$ [lem-weil-pbc-localization-module-exact] whose outer terms are $0$; so $h_f$ is injective and surjective, an isomorphism. If $h$ is $S$-linear between $S$-modules, $h_f$ is $S$-linear, because the $S$-action on $P_f$, $Q_f$ is by the localized multiplications and $h_f\\circ(s\\cdot)_f=(h\\circ s\\cdot)_f=(s\\cdot\\circ h)_f=(s\\cdot)_f\\circ h_f$. In particular, in (1) and (2), $\\varphi'_{f_i}$ is an $S$-linear isomorphism for every $i$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 0ALK (lemma-application-formal-glueing, line 24882): 'It is clear that the localization varphi_{f_i} is an isomorphism'; Algebra, Proposition 00CS (localization is exact)"
+   }
+  },
+  {
+   "text": "(Part (1): the glueing datum.) Use the category $\\mathrm{Glue}=\\mathrm{Glue}(R\\to S,f_1,\\dots,f_t)$ and the canonical maps $c^P_f$, $\\sigma^P_{f,g}$ of [def-weil-pbc-formal-glueing-data], and the functor $\\mathrm{Can}$ of [prop-weil-pbc-formal-glueing-equivalence] (1): $\\mathrm{Can}(N)=(N\\otimes_RS,(N_{f_i}),(c^N_{f_i}),(\\sigma^N_{f_i,f_j}))$ is an object. Put $\\mathbf D=(M',(N_{f_i})_i,(\\alpha_i)_i,(\\sigma^N_{f_i,f_j})_{i,j})$ with $\\alpha_i=c^N_{f_i}\\circ\\varphi'_{f_i}:M'_{f_i}\\to N_{f_i}\\otimes_RS$, an $S$-linear isomorphism by step 1 and (1) of the proposition. $\\mathbf D$ is an object of $\\mathrm{Glue}$: condition (b) involves only the $N_{f_i}$ and $\\sigma^N$, and is condition (b) for $\\mathrm{Can}(N)$. For (a): localizing the identity $\\sigma^{N\\otimes S}_{f_i,f_j}\\circ(\\varphi'_{f_i})_{f_j}=(\\varphi'_{f_j})_{f_i}\\circ\\sigma^{M'}_{f_i,f_j}$ (both send $(m/f_i^a)/f_j^b$ to $(\\varphi'(m)/f_j^b)/f_i^a$ [def-weil-pbc-module-localization-away]) and $(c\\circ\\varphi'_{f_i})_{f_j}=(c)_{f_j}\\circ(\\varphi'_{f_i})_{f_j}$ (localization is compatible with composition), we get $(\\sigma^N_{f_i,f_j}\\otimes S)\\circ c^{N_{f_i}}_{f_j}\\circ(\\alpha_i)_{f_j}=(\\sigma^N_{f_i,f_j}\\otimes S)\\circ c^{N_{f_i}}_{f_j}\\circ(c^N_{f_i})_{f_j}\\circ(\\varphi'_{f_i})_{f_j}=c^{N_{f_j}}_{f_i}\\circ(c^N_{f_j})_{f_i}\\circ\\sigma^{N\\otimes S}_{f_i,f_j}\\circ(\\varphi'_{f_i})_{f_j}=c^{N_{f_j}}_{f_i}\\circ(\\alpha_j)_{f_i}\\circ\\sigma^{M'}_{f_i,f_j}$, using (a) for $\\mathrm{Can}(N)$ in the middle. Moreover $\\Phi=(\\varphi',(\\mathrm{id}_{N_{f_i}})_i):\\mathbf D\\to\\mathrm{Can}(N)$ is a morphism of $\\mathrm{Glue}$: $c^N_{f_i}\\circ\\varphi'_{f_i}=(\\mathrm{id}\\otimes_RS)\\circ\\alpha_i$ by definition of $\\alpha_i$, and $\\sigma^N_{f_i,f_j}\\circ\\mathrm{id}=\\mathrm{id}\\circ\\sigma^N_{f_i,f_j}$.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 0ALK, part (1): the object (M', N_{f_i}, varphi_{f_i}, can_ij) of Glue (Remark 05EL, remark-glueing-data) and the morphism to (N tensor S, N_{f_i}, can_i, can_ij) which uses varphi in the first component"
+   }
+  },
+  {
+   "text": "(Part (1): conclusion.) By [prop-weil-pbc-formal-glueing-equivalence] (2) (essential surjectivity; its hypotheses are those of the lemma with $I=(f_1,\\dots,f_t)$) there are an $R$-module $M$ and an isomorphism $\\Theta=(\\theta',(\\theta_i)_i):\\mathrm{Can}(M)\\to\\mathbf D$ in $\\mathrm{Glue}$; since composition is componentwise [def-weil-pbc-formal-glueing-data], $\\theta':M\\otimes_RS\\to M'$ is an $S$-linear isomorphism and each $\\theta_i:M_{f_i}\\to N_{f_i}$ an isomorphism. The composite $\\Phi\\circ\\Theta:\\mathrm{Can}(M)\\to\\mathrm{Can}(N)$ (step 2) is, by full faithfulness in (2), equal to $\\mathrm{Can}(\\psi)=(\\psi\\otimes_RS,(\\psi_{f_i})_i)$ for a (unique) $R$-linear $\\psi:M\\to N$. Comparing components: $\\psi\\otimes_RS=\\varphi'\\circ\\theta'$ and $\\psi_{f_i}=\\theta_i$. Put $\\beta=\\theta'^{-1}:M'\\to M\\otimes_RS$; then $(\\psi\\otimes_RS)\\circ\\beta=\\varphi'$, which is (1). Record also: $\\psi_{f_i}$ is an isomorphism for every $i$.",
+   "uses": [
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 0ALK, part (1): 'By Proposition 05ER we conclude that there exists an R-module M such that M' = M tensor S ... This corresponds to an R-module map psi : M -> N (by the equivalence of categories of Proposition 05ER)'"
+   }
+  },
+  {
+   "text": "Let $K=\\ker\\psi$ and $C=\\operatorname{coker}\\psi$. The preceding algebraization step makes $\\psi_{f_i}$ an isomorphism for every generator $f_i$ of $I$. Exact localization of the kernel and cokernel sequences [lem-weil-pbc-localization-module-exact] therefore gives $K_{f_i}=0$ and $C_{f_i}=0$. For $x$ in either module, the fraction equality criterion [def-weil-pbc-module-localization-away] gives a positive integer $e_i$ with $f_i^{e_i}x=0$. Put $e=1+\\sum_i e_i$. The ideal $I^e$ is generated by monomials in the $f_i$ of total degree $e$. When the family is nonempty, such a monomial contains some $f_i$ to an exponent at least $e_i$, since otherwise its total degree is at most $\\sum_i(e_i-1)<e$. It therefore annihilates $x$, and so does every element of $I^e$. When the family is empty, $I=0$ and $e=1$, hence $I^e=0$ also annihilates $x$. Thus $K$ and $C$ are $I$-power torsion.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma 0ALK, last sentence ('The final statement follows for example from Lemma 05EC'); written out here through the localizations psi_{f_i}, which the construction makes isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-localization-module-exact",
+  "prop-weil-pbc-formal-glueing-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 0ALK (lemma-application-formal-glueing), proof of part (1), using Remark 05EL (remark-glueing-data) and Proposition 05ER (proposition-equivalence); torsion follows by exact localization and finite generation as in step 5 of lem-weil-pbc-formal-glueing-isogeny"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "formalGlue|formal_glu|tensorKerEquiv|range_lTensor",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal gluing descent of module maps with ideal power torsion kernel and cokernel",
+   "results": "AdicCompletion.transitionMap, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.eval_comp_of, AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, IsAdicComplete.mkQ_comp_lift, AdicCompletion.incl",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "formal gluing descent of module maps with ideal power torsion kernel and cokernel",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormalGlueingIsogeny",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormalGlueingMapToAlgebraization",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingMapToAlgebraization.lean",
+  "declaration": "FormalGlueing.exists_map_to_algebraization",
+  "statement": "theorem exists_map_to_algebraization (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG) (hquot : Function.Bijective (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map)) (P : Type (max u v w)) [AddCommGroup P] [Module R P] (Q : Type (max u v w)) [AddCommGroup Q] [Module S Q] [Module R Q] [IsScalarTower R S Q] (φ' : Q →ₗ[S] S ⊗[R] P) (hker : ∀ x : (φ'.restrictScalars R).ker, ∃ n : ℕ, ∀ r ∈ I ^ n, r • x = 0) (hcoker : ∀ x : _ ⧸ (φ'.restrictScalars R).range, ∃ n : ℕ, ∀ r ∈ I ^ n, r • x = 0) : ∃ T : ModuleCat.{max u v w} R, ∃ (ψ : T →ₗ[R] P) (β : Q ≃ₗ[S] S ⊗[R] T), (ψ.baseChange S).comp β.toLinearMap = φ' ∧ (∀ x : ψ.ker, ∃ n : ℕ, ∀ r ∈ I ^ n, r • x = 0) ∧ (∀ x : P ⧸ ψ.range, ∃ n : ℕ, ∀ r ∈ I ^ n, r • x = 0)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T082349-L-1637238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T082349-L-1637238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
