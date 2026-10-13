@@ -51,10 +51,12 @@
    "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-tensor-right-exact], tensoring the quotient presentation $F_2\\otimes_R A\\to K_A\\to\\operatorname{Tor}_1^R(M,A)\\to0$ with $B$ gives a quotient of $K_A\\otimes_A B$ identified with $\\operatorname{Tor}_1^R(M,A)\\otimes_A B$. The map $F_2\\otimes_R B\\to K_B$ is the base change of the corresponding map over $A$, so the surjection $K_A\\otimes_A B\\twoheadrightarrow K_B$ descends to a surjection on these quotients. The $A$-module structure on $\\operatorname{Tor}_1^R(M,A)$ is the functorial one in the second variable; on pure tensors the induced map sends $\\bar k\\otimes b$ to the class of $b\\bar k$, hence this descended map is the natural map $\\operatorname{Tor}_1^R(M,A)\\otimes_A B\\to\\operatorname{Tor}_1^R(M,B)$ from [def-weil-pbc-tor-modules]. It is therefore surjective.",
+   "text": "By [lem-weil-pbc-tensor-right-exact], tensoring the quotient presentation $F_2\\otimes_R A\\to K_A\\to\\operatorname{Tor}_1^R(M,A)\\to0$ with $B$ gives a quotient of $K_A\\otimes_A B$ identified with $\\operatorname{Tor}_1^R(M,A)\\otimes_A B$. The map $F_2\\otimes_R B\\to K_B$ is the base change of the corresponding map over $A$, so the surjection $K_A\\otimes_A B\\twoheadrightarrow K_B$ descends to a surjection on these quotients. The $A$-module structure on $\\operatorname{Tor}_1^R(M,A)$ is the functorial one in the second variable; on pure tensors the induced map sends $\\bar k\\otimes b$ to the class of $b\\bar k$, hence this descended map is the natural map $\\operatorname{Tor}_1^R(M,A)\\otimes_A B\\to\\operatorname{Tor}_1^R(M,B)$ from [def-weil-pbc-tor-modules]. It is therefore surjective. Lean interface repair R1: torOneModule is constructed by applying the second-variable Tor functor to multiplication endomorphisms. torOneCoefficientMap is that functor applied to the algebra map. torOneBaseChange is the balanced tensor lift of (t,b) ↦ b • torOneCoefficientMap(t), with B-linearity and its pure-tensor formula proved. The surjectivity argument above remains to be formalized; no proof of that argument is claimed. The canonical module laws use additivity of the coefficient functor [lem-weil-pbc-tor-one-second-additive]; its restriction-of-scalars compatibility uses R-linearity [lem-weil-pbc-tor-one-second-linear]. These supporting results are already proved in this module, independently of the remaining surjectivity hole.",
    "uses": [
     "def-weil-pbc-tor-modules",
-    "lem-weil-pbc-tensor-right-exact"
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-tor-one-second-additive",
+    "lem-weil-pbc-tor-one-second-linear"
    ],
    "elementary": false
   }
@@ -64,7 +66,9 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-pbc-flat-ring-map",
   "lem-weil-pbc-flat-quotient-tensor-injective",
-  "lem-weil-pbc-tensor-right-exact"
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tor-one-second-additive",
+  "lem-weil-pbc-tor-one-second-linear"
  ],
  "proof_origin": {
   "by": "document",
@@ -135,12 +139,33 @@
  "lean": {
   "module": "Sheaf.RingTheory.TorOneSurjectiveFlatMiddle",
   "declaration": "CategoryTheory.torOne_surjective_flat_middle",
-  "statement": "theorem torOne_surjective_flat_middle (R : Type u) (A : Type u) (B : Type u) (M : Type u) [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Module R B] [IsScalarTower R A B] [AddCommGroup M] [Module R M] [Module A (((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).obj (ModuleCat.of R A))] [IsScalarTower R A (((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).obj (ModuleCat.of R A))] (hflat : Module.Flat A (A ⊗[R] M)) : ∃ φ : ModuleCat.of R ((((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).obj (ModuleCat.of R A)) ⊗[A] B) ⟶ ((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).obj (ModuleCat.of R B), Epi φ",
+  "statement": "theorem torOne_surjective_flat_middle\n    (R : Type u) (A : Type u) (B : Type u) (M : Type u)\n    [CommRing R] [CommRing A] [CommRing B]\n    [Algebra R A] [Algebra A B] [Module R B] [IsScalarTower R A B]\n    [AddCommGroup M] [Module R M]\n    (hflat : Module.Flat A (A ⊗[R] M)) :\n    letI := torOneModule R M A\n    letI := torOneTensorModule R M A B\n    letI := torTowerAlgebra R A B\n    letI := torOneModule R M B\n    Function.Surjective (torOneBaseChange R M A B)",
   "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-11",
+  "by": "R1",
+  "date": "2026-10-13",
   "existing": false,
-  "file": "lean/Sheaf/RingTheory/TorOneSurjectiveFlatMiddle.lean"
+  "file": "lean/Sheaf/RingTheory/TorOneSurjectiveFlatMiddle.lean",
+  "declarations": [
+   "CategoryTheory.torOneSecondAdditive",
+   "CategoryTheory.torHomology_map_smul",
+   "CategoryTheory.torOneSecondLinear",
+   "CategoryTheory.TorOne",
+   "CategoryTheory.torTowerAlgebra",
+   "CategoryTheory.torCoefficientMul",
+   "CategoryTheory.torOneModule",
+   "CategoryTheory.torOneModule_smul",
+   "CategoryTheory.torOne_algebraMap_smul",
+   "CategoryTheory.torOneScalarTower",
+   "CategoryTheory.torCoefficientMap",
+   "CategoryTheory.torOneCoefficientMap",
+   "CategoryTheory.torOneCoefficientMap_smul",
+   "CategoryTheory.torOneTensorModule",
+   "CategoryTheory.torOneTensorModule_smul_tmul",
+   "CategoryTheory.torOnePairing",
+   "CategoryTheory.torOneBaseChange",
+   "CategoryTheory.torOneBaseChange_tmul",
+   "CategoryTheory.torOne_surjective_flat_middle"
+  ]
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -149,5 +174,15 @@
   "group": "G1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-46e11",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100110-L-2481592",
+  "kind": "interface",
+  "note": "independent Codex review: Canonical Tor actions and base-change map match the node and Stacks Tag 00MM; both new instance nodes match their Lean declarations. Compilation is clean; all 19 axiom checks pass, with sorryAx only for the documented remaining surjectivity hole. No targets changed, direct importers, or mechanical findings."
  }
 }

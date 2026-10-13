@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-tor-one-second-linear",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of the finite-etale-lifting split (Tag 0GS2 essential surjectivity), via Tag 00MM: functorial coefficient action on first Tor in the cycle-to-Tor quotient step; R-linearity needed for the canonical-action construction.",
+   "via": [
+    "lem-weil-pbc-tor-one-surjective-flat-middle",
+    "lem-weil-pbc-flat-another-variant-local-criterion",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "First Tor is R-linear in its second argument",
+ "statement": "Let R be a commutative ring and M an R-module. Let F be the functor N ↦ Tor'_1(M,N) on the category of R-modules, with Tor' derived in its first argument [def-weil-pbc-tor-modules]. This functor is additive [lem-weil-pbc-tor-one-second-additive] and for any R-modules X,Y, R-linear map f : X → Y and r ∈ R, F(r • f)=r • F(f); equivalently F is R-linear.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00MM (lemma-surjective-on-tor-one), functorial coefficient action in the free-resolution proof; supporting resolution computation formalized in Sheaf.RingTheory.TorOneSurjectiveFlatMiddle"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-one-second-additive"
+ ],
+ "proof": [
+  {
+   "text": "Fix the projective resolution P of M once for all coefficient modules. By the definition of Tor' and Mathlib ProjectiveResolution.leftDerived_app_eq, its map on a coefficient homomorphism f is the degree-one homology map of P tensor f, conjugated by the fixed comparison isomorphisms for the source and target. These isomorphisms depend on the objects, not on f.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 00MM (lemma-surjective-on-tor-one), functorial coefficient action in the free-resolution proof; supporting resolution computation formalized in Sheaf.RingTheory.TorOneSurjectiveFlatMiddle"
+   }
+  },
+  {
+   "text": "Use the proved additivity instance to give the Functor.Linear predicate its required Functor.Additive structure. Tensoring on the right takes r • f to r times its natural transformation: evaluate at a module Z and use the tensor-product scalar identity. Passing to mapHomologicalComplex and evaluating on P preserves this scalar multiplication degreewise. The local proved helper torHomology_map_smul identifies degree-one homology of the scaled chain map with r times homology of the original: the shortComplexFunctor preserves scalars componentwise and ShortComplex.homologyMap_smul applies. Finally Linear.smul_comp and Linear.comp_smul move r through the fixed comparison morphisms. Thus F(r • f)=r • F(f), which completes Functor.Linear R.",
+   "uses": [
+    "lem-weil-pbc-tor-one-second-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 00MM (lemma-surjective-on-tor-one), functorial coefficient action in the free-resolution proof; supporting resolution computation formalized in Sheaf.RingTheory.TorOneSurjectiveFlatMiddle"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-one-second-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00MM (lemma-surjective-on-tor-one), functorial coefficient action in the free-resolution proof; supporting resolution computation formalized in Sheaf.RingTheory.TorOneSurjectiveFlatMiddle",
+  "note": "R1 supporting computation of the canonical coefficient action, proved from Mathlib resolution comparison and homology laws."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The functor sending N to Tor_1(M,N) is R-linear in coefficient module maps over a commutative ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor'\", \"Linear\"",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match; resolution and homology primitives used in the proved implementation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor prime functor Tor_1(M,N) is R-linear on morphisms in its second variable",
+   "results": "CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, CategoryTheory.Functor.mapExactFunctor_smul, ModuleCat.instMonoidalPreadditive, CategoryTheory.Functor.mapExtLinearMap, Rep.Tor_map, CategoryTheory.Abelian.Ext.precompOfLinear",
+   "date": "2026-10-13",
+   "verdict": "no exact match; resolution and homology primitives used in the proved implementation"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor.*\\bLinear\\b|\\bLinear\\b.*\\bTor|homologyMap_smul",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/Linear.lean, Mathlib/Algebra/Homology/ShortComplex/Linear.lean, Mathlib/Algebra/Homology/ShortComplex/Linear.lean, Mathlib/Algebra/Homology/Linear.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; resolution and homology primitives used in the proved implementation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorOneSurjectiveFlatMiddle",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorOneSurjectiveFlatMiddle",
+  "file": "lean/Sheaf/RingTheory/TorOneSurjectiveFlatMiddle.lean",
+  "declaration": "CategoryTheory.torOneSecondLinear",
+  "statement": "instance torOneSecondLinear :\n    ((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).Linear R",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "lean_signature_context": {
+  "universe": "u",
+  "namespace": "CategoryTheory",
+  "variables": "variable (R : Type u) [CommRing R] (M : Type u) [AddCommGroup M] [Module R M]"
+ },
+ "lean_full_signature": "instance torOneSecondLinear (R : Type u) [CommRing R] (M : Type u)\n    [AddCommGroup M] [Module R M] :\n    ((Tor' (ModuleCat R) 1).obj (ModuleCat.of R M)).Linear R",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-46e11",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100110-L-2481592",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-46e11",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100110-L-2481592",
+  "kind": "interface",
+  "note": "independent Codex review: Canonical Tor actions and base-change map match the node and Stacks Tag 00MM; both new instance nodes match their Lean declarations. Compilation is clean; all 19 axiom checks pass, with sorryAx only for the documented remaining surjectivity hole. No targets changed, direct importers, or mechanical findings."
+ }
+}
