@@ -3,22 +3,151 @@
  "blueprint": {
   "is": "def-weil-pbc-complete-coefficient-datum",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Adic coefficient datum and reduction tower",
- "statement": "Let $\\Lambda$ be Noetherian, let $I=(f_1,\\ldots,f_r)\\subseteq\\Lambda$ have\n$\\Lambda/I$ torsion, and suppose every $P_n:=\\Lambda/I^n$ is perfect over\n$\\Lambda$. For $K\\in D(X_{\\mathrm{proet}},\\Lambda)$ put\n\n$$\nK_n:=K\\otimes^L_\\Lambda P_n.\n$$\n\nFor $b\\geq a$, let $q_{b,a}:K_b\\to K_a$ be induced by\n$P_b\\to P_a$. The quotient identities give\n$q_{a,a}=1$ and $q_{c,a}=q_{b,a}q_{c,b}$. Associativity also gives the\nnormalization isomorphisms\n\n$$\nK_b\\otimes^L_{P_b}P_a\\xrightarrow{\\sim}K_a,\n$$\n\nand these obey the same cocycle.",
+ "statement": "Let $X$ be a scheme and use its small pro-etale site, constant coefficient sheaves, and derived categories of sheaves of modules [def-weil-pbc-proetale-site]. Let $\\Lambda$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $I=(f_1,\\ldots,f_r)\\subseteq\\Lambda$ be a finitely generated ideal, and put $P_n=\\Lambda/I^n$ for integers $n\\geq1$, with powers and quotient rings as in [def-weil-pbc-algebra-hom-quotient]. Assume $\\Lambda/I$ is torsion as an additive group (each element is killed by a positive integer), and every $P_n$, placed in degree zero, is perfect over $\\Lambda$ [def-pc-perfect-ring-complex]. For $K\\in D(X_{\\mathrm{proet}},\\Lambda)$ define its reduction by derived change of rings [lem-pur-derived-change-of-rings]:\n$$K_n:=K\\otimes^L_{\\Lambda_X}(P_n)_X\\in D(X_{\\mathrm{proet}},P_n).$$\nHere $(P_n)_X$ and $\\Lambda_X$ are constant sheaves of rings, and the underlying $\\Lambda_X$-object is the derived tensor of [def-weil-derived-tensor]. Regard all reductions also in $D(X_{\\mathrm{proet}},\\Lambda)$ by restriction of scalars [def-pc-sheaf-restrict-scalars]. For $b\\geq a\\geq1$, define $q_{b,a}:K_b\\to K_a$ there using the quotient map $P_b\\to P_a$. The transition identities are $q_{a,a}=1$ and $q_{c,a}=q_{b,a}\\circ q_{c,b}$ for $c\\geq b\\geq a$. The canonical normalization isomorphisms are\n$$\\theta_{b,a}:K_b\\otimes^L_{(P_b)_X}(P_a)_X\\xrightarrow{\\sim}K_a.$$\nThey are the scalar-extension associativity maps. For $c\\geq b\\geq a$, the composite of $\\theta_{c,b}\\otimes^L_{(P_b)_X}(P_a)_X$ with $\\theta_{b,a}$ equals $\\theta_{c,a}$ after the canonical associativity identification of the source; for $b=a$ normalization is the unit identification.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-complete-coefficient-datum.md",
   "place": "node def-weil-pbc-complete-coefficient-datum, order 1255"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-perfect-ring-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-tensor",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Choose one K-flat resolution $Q\\to K$ with flat terms by [lem-pc-kflat-resolution], on the ringed site $(X_{\\mathrm{proet}},\\Lambda_X)$ [def-weil-pbc-proetale-site]. By [lem-pur-derived-change-of-rings], the complex $Q_n=Q\\otimes_{\\Lambda_X}(P_n)_X$ is a model of $K_n$ in the derived category of $(P_n)_X$-modules, with canonical comparisons for different resolutions. Use these models to specify the tower and normalization maps. No boundedness of $K$ or flatness of $P_n$ over $\\Lambda$ is required.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-proetale-site",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change)"
+   }
+  },
+  {
+   "text": "For $b\\geq a$, $I^b\\subseteq I^a$: write $I^b=I^aI^{b-a}$ and use that an ideal absorbs multiplication [def-weil-pbc-algebra-hom-quotient]. Thus $\\pi_{b,a}:P_b\\to P_a$ sends the class of $x$ to its class modulo $I^a$. On classes, $\\pi_{a,a}=1$ and $\\pi_{c,a}=\\pi_{b,a}\\circ\\pi_{c,b}$. Define the chain map $Q_b\\to Q_a$ by $u\\otimes t\\mapsto u\\otimes\\pi_{b,a}(t)$ using sheaf change of rings [def-pur-sheaf-tensor-product], then take its derived class after restriction of scalars [def-pc-sheaf-restrict-scalars]. Restriction retains the underlying abelian sheaves and differentials, hence the same kernels, images and cohomology; it preserves quasi-isomorphisms. The two chain-map identities hold on the displayed generators in every degree and pass to the localization. For a chain map $h:Q\\to Q'$, the comparison maps $h\\otimes1$ commute with these transitions: both composites send $u\\otimes t$ to $h(u)\\otimes\\pi_{b,a}(t)$. This equality also holds after inverting quasi-isomorphisms between K-flat models, so the canonical resolution comparisons of step 1 preserve the tower.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-complete-coefficient-datum.md",
+    "place": "transition maps and quotient identities"
+   }
+  },
+  {
+   "text": "By [lem-pur-kflat-change-of-rings], $Q_b$ is K-flat with flat terms over $(P_b)_X$. Apply [lem-pur-derived-change-of-rings] to $(P_b)_X\\to(P_a)_X$: the source of $\\theta_{b,a}$ is represented by $(Q\\otimes_{\\Lambda_X}(P_b)_X)\\otimes_{(P_b)_X}(P_a)_X$. In each degree the map $(u\\otimes t)\\otimes s\\mapsto u\\otimes\\pi_{b,a}(t)s$ has inverse $u\\otimes s\\mapsto(u\\otimes1)\\otimes s$. The balancing relations over both rings prove well-definedness, and their composites are identity by the relation $(u\\otimes t)\\otimes s=(u\\otimes1)\\otimes\\pi_{b,a}(t)s$. These are maps of the sheafified tensor products [def-pur-sheaf-tensor-product]: the formulas commute with restriction and extend uniquely by sheafification. They commute with the differentials, which act on $u$, and are $(P_a)_X$-linear. Their derived classes give $\\theta_{b,a}$, naturally and independently of the resolution by the canonical comparisons in [lem-pur-derived-change-of-rings]: for a chain map $h:Q\\to Q'$, either order of comparison and normalization sends $(u\\otimes t)\\otimes s$ to $h(u)\\otimes\\pi_{b,a}(t)s$. The same equality holds for inverses of quasi-isomorphisms and hence for the canonical comparisons in the localized category.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat); Tag 0D6D (lemma-derived-pullback-composition), proof for identity topoi and coefficient changes; sites-modules.tex Section 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "For $c\\geq b\\geq a$, both normalization paths on the same K-flat models take $((u\\otimes t)\\otimes s)\\otimes v$ to $u\\otimes\\pi_{c,a}(t)\\pi_{b,a}(s)v$. Indeed the two-stage path gives $u\\otimes\\pi_{b,a}(\\pi_{c,b}(t)s)v$, which is this expression because the quotient maps are ring homomorphisms and compose. The other path first identifies the last two extensions by the same balancing isomorphism and gives the same expression. Equality on these local tensor generators gives equality of sheaf maps, chain maps, and derived maps. For $b=a$, the formula is $(u\\otimes t)\\otimes s\\mapsto u\\otimes ts$, the unit identification. This proves the cocycle and unit identities using the explicit change-of-rings tensors [def-pur-sheaf-tensor-product]; K-flatness needed to compute the successive derived extensions is supplied by [lem-pur-kflat-change-of-rings].",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition), explicit coherence check on its K-flat models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-proetale-site",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-complete-coefficient-datum.md",
+  "place": "explicit K-flat-model verification of the transition identities and normalization cocycle, following sites-cohomology.tex Tags 06YY, 0G7E, 0D6D"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars along quotient rings forms a coherent reduction tower of complexes on a site",
+   "results": "localCohomology.diagram, Rep.Tor, instHasExtModuleCatOfSmall, Ext, Rep.Tor_obj, Algebra.Extension.instIsScalarTowerH1CotangentOfCotangent, Algebra.Extension.instModuleH1CotangentOfIsScalarTowerCotangent, CategoryTheory.Abelian.Ext.instModule",
+   "date": "2026-10-14",
+   "verdict": "no match: local cohomology diagrams, Tor and Ext are not the quotient-coefficient normalization tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, tensor",
+   "results": "loogle: unknown identifier 'tensor'",
+   "date": "2026-10-14",
+   "verdict": "no match: invalid identifier tensor, so this pattern gives no evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*tensor|tensor.*derived",
+   "results": "Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: Tor degree functors, not unbounded derived change of rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor extension of scalars is transitive for ring maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived extension of scalars for sheaves of modules along a homomorphism of sheaves of rings and composition of ring maps",
+   "results": "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardNatTrans, SheafOfModules.pushforward, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardComp, PresheafOfModules.pushforward, SheafOfModules.pushforward_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: underived sheaf pushforward and its composition, not derived scalar-extension normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\"",
+   "results": "LinearMap.extendScalarsOfSurjective, LinearEquiv.extendScalarsOfSurjective, LinearMap.extendScalarsOfSurjective_apply, LinearEquiv.extendScalarsOfSurjective_symm, LinearMap.extendScalarsOfSurjectiveEquiv, LinearEquiv.extendScalarsOfSurjective_apply, AlgEquiv.extendScalarsOfSurjective, AlgHom.extendScalarsOfSurjective",
+   "date": "2026-10-14",
+   "verdict": "no match: lifting linear maps through a surjective ring map is underived, not this tower"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|derived.*[Ee]xtend|[Ee]xtend.*derived",
+   "results": "Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: unrelated ListBlank.flatMap hits; no K-flat or derived extension declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotPowFunctor\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: no quotPowFunctor declaration in Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -37,5 +166,39 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-complete-coefficient-datum",
+  "worker": "stage1",
+  "summary": "Specified the constant coefficient categories and quotient-coefficient targets, reused existing definitions and general sheaf change-of-rings lemmas, and verified transition and normalization laws on one K-flat model. No new nodes. No assertion of completeness, finiteness, invertibility, or principal ideal was added.",
+  "blueprint": "The definition paragraphs for coefficient hypotheses, reductions and transition maps, and the final paragraph's normalization and cocycle; the four steps realize these clauses explicitly on K-flat models.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of a K-flat resolution with flat terms on any ringed site; the unit has no such existence statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Derived scalar extension into quotient coefficient categories and canonical K-flat computation; the unit has no general change-of-rings theorem."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "K-flatness and flat terms survive arbitrary sheaf-ring extension; needed to compute the second reduction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-537f7ba3d",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-537f7ba3d (reviewer sub-agent of L); spot-checked: Read the full item and all cited statements and source locations; checked all four K-flat construction steps, quotient normalization, cocycle, and nonflat/zero/equal-index cases. No new nodes or repairs. Accepted the three declared generic tool uses. Condensed target coefficients and the exact master base-change morphism remain distinct from this construction; no comparison theorem is certified. Concrete inherited issues are documented in review.md."
+ }
 }
