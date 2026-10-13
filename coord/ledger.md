@@ -12242,3 +12242,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:30 L: returned deliver/H3/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (reviewer X-79326, head 793264ac4) 5: The reader gate requires the seven direct importers to be explicitly listed and ea)
 
 - 19:32 L: batch 20261013T111833 dependency take-out
+- 11:33 L: returned deliver/P2/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentExtension (reviewer RETURN: (the landing tools, head 9ace0f42f) the delivery did not land: lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNor)
