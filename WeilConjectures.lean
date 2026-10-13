@@ -638,6 +638,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.InjectiveCoseparato
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryCounit
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
@@ -2139,6 +2140,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.TensorResolution
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitudeResidue
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStarCounit
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal
@@ -2165,6 +2167,7 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mon
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
