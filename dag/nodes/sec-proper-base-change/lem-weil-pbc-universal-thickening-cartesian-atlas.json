@@ -1,0 +1,170 @@
+{
+ "id": "lem-weil-pbc-universal-thickening-cartesian-atlas",
+ "kind": "statement",
+ "title": "Cartesian geometric atlas for glued universal thickenings",
+ "statement": "Let $h : Z \\to X$ be a morphism of schemes [def-weil-pbc-scheme-conventions], let $C$ be an open cover of $Z$ indexed in the schemes universe, and for each index $k$ let $i_k : C_k \\to Z_k^{\\prime}$ and $h_k^{\\prime} : Z_k^{\\prime} \\to X$ be a universal first order thickening of $C_k$ over $X$ for $C.f_k \\circ h$ [def-weil-pbc-universal-first-order-thickening]. There exist a scheme $W$, morphisms $j : Z \\to W$ and $p : W \\to X$, and open immersions $e_k : Z_k^{\\prime} \\to W$ [def-weil-open-immersion], whose images cover $W$, such that $p \\circ j=h$, $p \\circ e_k=h_k^{\\prime}$, and for each $k$ the square with top arrow $i_k$, left arrow $C.f_k$, right arrow $e_k$ and bottom arrow $j$ is cartesian (that is, $C_k$, with these two projections, is the categorical pullback of $e_k$ and $j$). No property of the global kernel ideal or global universal lifting property is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3 (lemma-universal-thickening), proof, fourth and fifth paragraphs; read at https://stacks.math.columbia.edu/tag/04F3"
+ },
+ "proof": [
+  {
+   "text": "For each pair of open charts of C, restrict the two supplied universal thickenings to their intersection. The unique corresponding open exists because a first order thickening is a homeomorphism. The restricted thickenings remain universal over X by the open-pieces theorem, taking the whole base open.",
+   "uses": [
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The uniqueness theorem for universal thickenings identifies the two restricted thickenings by the unique isomorphism over X fixing the intersection. On a triple intersection the direct transition and the composite transition are morphisms between the same universal thickenings extending the same identity, so uniqueness makes them equal. Repeated indices give the identity. These are exactly the overlap and cocycle identities for scheme gluing.",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "lem-weil-pbc-universal-thickening-open-pieces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the overlap opens, transition isomorphisms and their cocycle equations to form scheme glue data. Let W be its glued scheme and e_k its canonical open immersions. They cover W, and each thickened overlap is the pullback of the corresponding e_k and e_l. Glue the compatible structure maps h_k prime to p. Glue i_k followed by e_k on C to j; checking on C proves j followed by p equals h.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix k and test the inverse image of the image of e_k in any source chart C_l. The gluing pullback property identifies membership there with membership in the prescribed thickened overlap in Z_l prime. Its inverse image under i_l is precisely the source intersection of C_k and C_l, by the construction of the corresponding open. Thus the inverse image of the image of e_k under j equals the image of C.f_k. The equality i_k followed by e_k equals C.f_k followed by j comes from the gluing equation. Since both C.f_k and e_k are open immersions, the range equality identifies C_k with the inverse-image open subscheme, and the commutative square is cartesian. This identification is an isomorphism of open subschemes with their structure sheaves, not just a bijection of points.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-universal-thickening-open-pieces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3 (lemma-universal-thickening), proof, fourth and fifth paragraphs; read at https://stacks.math.columbia.edu/tag/04F3; cartesian identification expanded using the pullback description of glued overlaps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Glue universal square zero thickenings with cartesian local charts",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing square zero closed immersions on an open cover of schemes",
+   "results": "Scheme.GlueData.gluedScheme, Scheme.GlueData.f_open, Scheme.LocalRepresentability.glueData and its canonical open immersions. Generic scheme gluing, no assertion constructing cartesian charts for supplied local universal thickenings.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.GlueData\"",
+   "results": "Scheme.GlueData, glued, openCover, ι, vPullbackCone and canonical open immersions. Generic gluing API, not the construction of the thickened overlaps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "thickening.*glu|glu.*thickening",
+   "results": "msearch grep found zero Mathlib hits. Direct rg of the two library roots for IsFirstOrderThickening and IsUniversalFirstOrderThickening found no independent cartesian-atlas construction: the current glued-atlas theorem is the hole being decomposed.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct scheme by gluing infinitesimal extensions using unique overlap isomorphisms",
+   "results": "Second reading: eight hits, including Scheme.GlueData.gluedScheme, relative gluing and local representability glue data. These require overlap data; none constructs the universal-thickening overlaps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"IsPullback\"",
+   "results": "Second reading: IsOpenImmersion.isPullback proves the final cartesian-square step from commutativity and equality of opens; isPullback_lift_id, image_preimage_eq_preimage_image_of_isPullback and ker_ideal_of_isPullback_of_isOpenImmersion do not construct a glued atlas.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "thickening|nilpotent|square.zero|cartesian in gluing modules and lean/WeilConjectures/AlgebraicGeometry",
+   "results": "Second reading: UniversalFirstOrderThickeningCoverGluing applies the assigned theorem, so using it would create a cycle. Other gluing results concern effective models, and upstream dual-number constructions do not give the supplied universal thickening atlas.",
+   "date": "2026-10-13",
+   "verdict": "no independent match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningGluedAtlas",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential surjectivity: Stacks 04F3, gluing the local universal thickenings by uniqueness on overlaps; geometric construction and cartesian charts only.",
+   "via": [
+    "lem-weil-pbc-universal-first-order-thickening-glued-atlas",
+    "lem-weil-pbc-universal-first-order-thickening-affine-local",
+    "lem-weil-pbc-universal-first-order-thickening-exists-existence",
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "proof_deps": [
+  "lem-weil-pbc-universal-thickening-open-pieces",
+  "def-weil-pbc-universal-first-order-thickening",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniversalThickeningCartesianAtlas",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalThickeningCartesianAtlas.lean",
+  "declaration": "AlgebraicGeometry.universalFirstOrderThickening_cartesianAtlas",
+  "statement": "theorem universalFirstOrderThickening_cartesianAtlas\n    {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})\n    (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)\n    (h' : ∀ k, Z' k ⟶ X)\n    (H : ∀ k, IsUniversalFirstOrderThickening (C.f k ≫ h) (i k) (h' k)) :\n    ∃ (W : Scheme.{u}) (j : Z ⟶ W) (p : W ⟶ X) (e : ∀ k, Z' k ⟶ W),\n      (∀ k, IsOpenImmersion (e k)) ∧ (∀ w : W, ∃ k z, e k z = w) ∧\n      j ≫ p = h ∧ (∀ k, e k ≫ p = h' k) ∧\n      ∀ k, IsPullback (i k) (C.f k) (e k) j",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T040804-L-3954036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T040804-L-3954036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
