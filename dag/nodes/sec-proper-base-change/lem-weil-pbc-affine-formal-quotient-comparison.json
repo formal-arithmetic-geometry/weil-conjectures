@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-affine-formal-quotient-comparison",
+ "kind": "statement",
+ "title": "Projection-compatible sheafification of positive affine module quotients",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme], $J$ ideal sheaf data, $A=\\Gamma(X,\\mathcal O_X)$, $I=J(X)$, and $L$ tilde followed by pullback along the canonical affine isomorphism [lem-weil-pbc-spec-module-tilde-sections, def-pc-module-pullback]. For every $A$-module $M$ and integer $n>0$, there is an isomorphism $e:\\operatorname{formalModuleQuotient}(J,n,L(M))\\cong L(M/I^nM)$, for the explicit quotient of [def-weil-pbc-coherent-formal-module], such that the sheaf quotient projection followed by $e$ is $L$ of the module quotient projection. No finiteness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 087W, positive affine quotient systems; Schemes Tags 01I7, 01IC (exact affine correspondence) and 01I8 (tensor comparison)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "On Spec A, apply the affine projection theorem. Its surjection with kernel I^n M induces a linear quotient equivalence. Positive ideal powers are quasi-coherent; multiplication has quasi-coherent image and cokernel by tensor, kernel and cokernel closure. The affine counit therefore turns the section equivalence into a sheaf isomorphism. Cancel its image of the module quotient isomorphism and use counit naturality and the left adjunction triangle to prove the projection equation.",
+   "uses": [
+    "lem-weil-pbc-formal-module-quotient-affine-projection",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal-power pullback image equality identifies the pulled-back product image with the product by the extended power. Tensor pullback is a left adjoint and preserves cokernels. Compose cokernel.mapIso, cokernelImageι and the preservation comparison to obtain a quotient isomorphism whose projection is the pulled-back projection.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-ideal-power-product-image",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport along X isoSpec: the ideal on Spec A is J comap isoSpec.inv and its top ideal is I mapped through ΓSpecIso.inv. The affine ideal extension formula and toSpecΓ_appTop prove this identity; comap_comp and the inverse identities recover J. Uniqueness of left adjoints gives tensorPullback isomorphic to Mathlib pullback. Map this isomorphism through the explicit quotient functor and compose the two preceding comparisons. Cokernel projection equations and naturality of the pullback comparison prove the required projection identity.",
+   "uses": [
+    "lem-pc-ideal-sheaf-comap-affine-extension",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-module-quotient-affine-projection",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-module-pullback-ideal-power-product-image",
+  "def-pc-module-pullback",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 087W affine quotient identification; the explicit projection and transport proof was written by D3 using Schemes 01I7, 01IC, 01I8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafification on an affine scheme sends the quotient of a module by a power of an ideal to the cokernel of the ideal module product",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification on an affine scheme sends the quotient of any module by a power of an ideal to the cokernel of the sheaf ideal product, compatibly with the quotient projection",
+   "results": "IdealSheafData localization and subscheme quotient formulas; no exact sheaf-module quotient comparison",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.functor, CategoryTheory.Limits.cokernel",
+   "results": "0 hits",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "formalModuleQuotient|quotient.*tilde|tilde.*quotient",
+   "results": "0 hits in Mathlib search; repository search found FormalModuleQuotientAffineProjection, used in the proof",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCompletionBaseChangeUnit",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0889(1), affine construction: identify the positive quotients of the sheafified glued module; geometric comparison step of affine_completion_baseChange_unit",
+   "via": [
+    "lem-weil-pbc-affine-completion-baseChange-unit",
+    "lem-weil-pbc-torsion-controlled-affine-candidate",
+    "lem-weil-pbc-torsion-controlled-affine-algebraization",
+    "new-stage3-torsion-controlled-easy-algebraization-bridge",
+    "lem-weil-pbc-torsion-controlled-algebraization-construction",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFormalQuotientComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFormalQuotientComparison.lean",
+  "declaration": "AlgebraicGeometry.affine_formalQuotient_comparison",
+  "statement": "theorem affine_formalQuotient_comparison\n    {X : Scheme.{u}} [IsAffine X] (J : X.IdealSheafData)\n    (M : ModuleCat.{u} Γ(X, ⊤)) (n : ℕ) (hn : 0 < n) :\n    let A := Γ(X, ⊤)\n    let I := J.ideal ⟨⊤, isAffineOpen_top X⟩\n    let L := tilde.functor A ⋙ Scheme.Modules.pullback X.isoSpec.hom\n    ∃ e : formalModuleQuotient J n (L.obj M) ≅\n        L.obj (ModuleCat.of A (M ⧸ (I ^ n • (⊤ : Submodule A M)))),\n      formalModuleQuotientπ J n (L.obj M) ≫ e.hom =\n        L.map (ModuleCat.ofHom (I ^ n • (⊤ : Submodule A M)).mkQ)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T082336-L-1632525",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T082336-L-1632525",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
