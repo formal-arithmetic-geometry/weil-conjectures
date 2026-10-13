@@ -6,6 +6,8 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLiftBridge
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkHomLift
 
 /-! # One unit-source open-site stalk map lifts on one neighbourhood
 
@@ -53,7 +55,27 @@ theorem exists_open_stalk_unit_map_one_lift
       let F := SheafOfModules.unit ((moduleRings X.toRingedSpace).over U)
       ∃ (a : R ⋙ S ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)
         (k : R.obj F ⟶ R.obj N),
-        S.map k = a.hom.app F ≫ t ≫ a.inv.app N := by sorry
+        S.map k = a.hom.app F ≫ t ≫ a.inv.app N := by
+  let E := (Modules.overEquiv U).functor
+  let F := SheafOfModules.unit ((moduleRings X.toRingedSpace).over U)
+  let D := ModuleCat.restrictScalars (U.ι.stalkMap ⟨x, hxU⟩).hom
+  have : D.IsEquivalence := by
+    change (ModuleCat.restrictScalars
+      (RingEquiv.ofBijective (U.ι.stalkMap ⟨x, hxU⟩).hom
+        (ConcreteCategory.bijective_of_isIso (U.ι.stalkMap ⟨x, hxU⟩))).toRingHom).IsEquivalence
+    infer_instance
+  let q := D.preimage t
+  have : (E.obj F).IsFiniteLocallyFree := by
+    change (SheafOfModules.unit U.toScheme.ringCatSheaf).IsFiniteLocallyFree
+    infer_instance
+  obtain ⟨A, hxA, f, hf⟩ := Modules.exists_restrict_stalk_hom_lift
+    (E.obj F) (E.obj N) ⟨x, hxU⟩ q
+  obtain ⟨V, hxV, hVU, a, k, hk⟩ :=
+    exists_open_stalk_hom_of_subscheme_lift X U x hxU F N q A hxA f hf
+  refine ⟨V, hxV, hVU, a, k, ?_⟩
+  change (openModuleStalkFunctor X V ⟨x, hxV⟩).map k =
+    a.hom.app F ≫ D.map (D.preimage t) ≫ a.inv.app N at hk
+  simpa only [Functor.map_preimage] using hk
 
 
 end

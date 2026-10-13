@@ -1,0 +1,129 @@
+{
+ "id": "new-lem-sc-open-stalk-unit-map-one-lift-bridge",
+ "kind": "statement",
+ "title": "Transport of a supplied local subscheme morphism to the open slice site",
+ "status": "split",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "created": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-13",
+  "item": "Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLift"
+ },
+ "source": {
+  "document": "Stacks Project",
+  "place": "Sheaves Tag 00A0 (3), Lemma 6.31.1, open-subspace restriction and canonical identification of stalks, including module sheaves. Read https://stacks.math.columbia.edu/tag/00A0 on 2026-10-13."
+ },
+ "statement": "Let X be a scheme [def-pc-scheme], U an open containing x, and F,N module sheaves on the slice over U [def-weil-sheaf-of-modules-category]. Write E for the slice/open-subscheme equivalence and T for the module stalk at x on U. Given a T(E(F))-to-T(E(N)) linear map q, an open A of U containing x, and an actual morphism f:E(F)|_A -> E(N)|_A whose germ on every section near x agrees with q, there exist x in V contained in U, a natural restriction-stalk comparison a:R_VU S_V ≅ S_U [def-sc-open-module-stalk-functor], and k:R_VU(F) -> R_VU(N) with S_V(k)=a_F followed by the restriction of scalars of q along U.ι.stalkMap followed by a_N inverse. This is solely transport of the supplied f; no local existence of f or finite freeness is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-open-module-stalk-functor",
+  "def-pc-module-stalk-functor",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Take V=U.ι image A. The canonical isomorphism between V.toScheme and A.toScheme transports the given f. Conjugate by Modules.overMapCompOverEquiv and take the preimage under Modules.overEquiv V to obtain k. This uses only the supplied local morphism, not a lifting theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the canonical natural restriction-stalk comparison. Represent each stalk vector by a germ on a neighbourhood and use the assumed equation hf, Mathlib germ_restrictStalkNatIso_hom_app, and the slice equivalence. The composite stalk-ring map gives linearity after scalar restriction. Postcompose the resulting S(k) a_N = a_F restrictScalars(q) with a_N inverse.",
+   "uses": [
+    "lem-sc-open-module-stalk-restriction-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-open-module-stalk-restriction-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Sheaves Tag 00A0 (3); pure interface transport argument expanded by the second reader, without a local existence assertion."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLiftBridge",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenStalkUnitMapOneLiftBridge.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_open_stalk_hom_of_subscheme_lift",
+  "statement": "theorem exists_open_stalk_hom_of_subscheme_lift\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (F N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n    (q : (RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨x, hxU⟩).obj\n        ((Modules.overEquiv U).functor.obj F) ⟶\n      (RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨x, hxU⟩).obj\n        ((Modules.overEquiv U).functor.obj N))\n    (A : U.toScheme.Opens) (hxA : (⟨x, hxU⟩ : U.toScheme) ∈ A)\n    (f : (Modules.restrictFunctor A.ι).obj ((Modules.overEquiv U).functor.obj F) ⟶\n      (Modules.restrictFunctor A.ι).obj ((Modules.overEquiv U).functor.obj N))\n    (hf : ∀ (B : A.toScheme.Opens)\n      (hxB : (⟨⟨x, hxU⟩, hxA⟩ : A.toScheme) ∈ B)\n      (m : Γ((Modules.restrictFunctor A.ι).obj ((Modules.overEquiv U).functor.obj F), B)),\n      ((Modules.overEquiv U).functor.obj N).presheaf.germ (A.ι ''ᵁ B) ⟨x, hxU⟩\n          ⟨⟨⟨x, hxU⟩, hxA⟩, hxB, rfl⟩ (Modules.Hom.app f B m) =\n        q (((Modules.overEquiv U).functor.obj F).presheaf.germ (A.ι ''ᵁ B) ⟨x, hxU⟩\n          ⟨⟨⟨x, hxU⟩, hxA⟩, hxB, rfl⟩ m)) :\n    ∃ (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U),\n      let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU)\n      let S := openModuleStalkFunctor X V ⟨x, hxV⟩\n      ∃ (a : R ⋙ S ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)\n        (k : R.obj F ⟶ R.obj N),\n        S.map k = a.hom.app F ≫\n          (ModuleCat.restrictScalars (U.ι.stalkMap ⟨x, hxU⟩).hom).map q ≫\n            a.inv.app N",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-open-stalk-unit-map-one-lift",
+   "place": "Only the slice/open-subscheme transport step, after the local morphism has already been supplied.",
+   "via": [
+    "lem-sc-finite-locally-free-stalk-hom-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a morphism of module sheaves on an open subscheme through the equivalence with the slice site, preserving its map on stalks",
+   "results": "Eight hits, principally Tilde restrictions and Scheme.Modules.Hom.app; no theorem combining the slice transport and the supplied germ equation.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv",
+   "results": "The natural isomorphism overMapCompOverEquiv is available and is used in the proof plan; it does not itself provide the transported stalk equation.",
+   "verdict": "building block, no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "overMapCompOverEquiv|germ_restrictStalkNatIso",
+   "results": "Mathlib Modules.Sheaf has overMapCompOverEquiv and germ formulas. Searches in lean/Sheaf and lean/WeilConjectures found individual transport uses, not this supplied-morphism transport theorem.",
+   "verdict": "building blocks, no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a supplied morphism of module sheaves on an open subscheme to sheaves on the slice site, preserving its prescribed map on stalks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T140812-L-311310",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T140812-L-311310",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12706,3 +12706,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:06 L: returned deliver/F4/Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition (reviewer RETURN: (reviewer X-5cc1f, head 5cc1fbd31) C1: In dag/nodes/sec-picard-framework/lem-pc-tensor-stalk-comparison-squares.json, pr)
 - 14:08 L: merged deliver/A4/Sheaf.AlgebraicGeometry.OpenComparisonIntoPullbackTransport (stage 3; reviewer PASS; first push; landing 20261013T140812-L-311094 (interface); batch 20261013T140810; modules 2; new nodes 1)
 - 14:08 L: merged deliver/B3/Sheaf.AlgebraicGeometry.FieldHypersurfaceFunctionFieldModel (stage 3; reviewer PASS; first push; landing 20261013T140812-L-311199 (interface); batch 20261013T140810; modules 3; new nodes 2)
+- 14:08 L: merged deliver/B4/Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLift (stage 3; reviewer PASS; first push; landing 20261013T140812-L-311310 (interface); batch 20261013T140810; modules 2; new nodes 1)
