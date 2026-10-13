@@ -10,10 +10,8 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Order.Preorder.Chain
 public import Mathlib.Order.RelSeries
-import Sheaf.RingTheory.AssociatedPrimeMinimalOfDepth
-import Sheaf.RingTheory.AssociatedPrimePowerQuotient
-import Sheaf.RingTheory.DepthQuotientNonzerodivisor
-import Sheaf.RingTheory.IsRegularOfDimensionDrop
+import Mathlib.Order.KrullDimension
+import Sheaf.RingTheory.MaximalChainLengthOfDepthPositive
 
 /-!
 # Length of maximal prime chains in a Cohen–Macaulay local ring
@@ -76,6 +74,15 @@ theorem maximal_chain_length_eq_of_depth {S : Type u} [CommRing S]
     (hdepth : (d : ℕ∞) ≤ IsLocalRing.depth (R := S) S) (p : LTSeries (PrimeSpectrum S))
     (hmax : IsMaxChain (fun q r : PrimeSpectrum S ↦ q ≤ r) (Set.range p)) :
     p.length = d := by
-  sorry
+  induction d generalizing S with
+  | zero =>
+    have hp : p.length ≤ 0 := by
+      have hle := Order.LTSeries.length_le_krullDim p
+      change (p.length : WithBot ℕ∞) ≤ ringKrullDim S at hle
+      rw [hdim] at hle
+      exact_mod_cast hle
+    exact Nat.eq_zero_of_le_zero hp
+  | succ d ih =>
+    exact maximal_chain_length_eq_of_depth_pos d ih hdim hdepth p hmax
 
 end IsLocalRing

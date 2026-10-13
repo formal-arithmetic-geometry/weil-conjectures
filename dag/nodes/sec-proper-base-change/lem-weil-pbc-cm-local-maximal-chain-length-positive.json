@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-cm-local-maximal-chain-length-positive",
+ "kind": "statement",
+ "title": "Successor induction step for maximal Cohen–Macaulay prime chains",
+ "statement": "Assume every maximal prime chain in every dimension-d Noetherian local ring T of depth at least d has length d. Then every maximal prime chain in a dimension-(d+1) Noetherian local ring S of depth at least d+1 has length d+1.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00N9 via Tag 0AAE, successor induction step with the dimension-d hypothesis"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Maximality makes the first prime minimal, the last prime maximal, and every adjacent pair saturated. The chain has positive length: otherwise the maximal ideal is minimal, so every prime equals it and the ring has dimension zero, contradicting its dimension `d + 1`. The finitely many minimal primes contain none of the second prime, since the first prime lies strictly below it. Prime avoidance therefore gives `x` in the second prime outside all minimal primes. The first prime is associated in the Noetherian ring, and the second prime is minimal over the first plus `(x)` by saturation and `x` not belonging to the first prime. The associated-prime power quotient theorem gives a positive power `y` of `x` for which the second prime is associated to `S/yS`. This power still avoids every minimal prime and belongs to the maximal ideal. Dimension drop gives `dim(S/yS) = d`; the dimension-drop regularity theorem makes `y` a nonzerodivisor, and the quotient depth theorem gives depth at least `d` in this Noetherian local quotient. The associated element has annihilator over the quotient equal to the image of the second prime, so associated prime minimality makes that image minimal. Prime correspondence maps the tail of the original chain to a strict chain in the quotient, of length `p.length - 1`. It is maximal: its first prime is minimal, its last prime is the maximal ideal, and saturation is preserved and reflected by prime correspondence. Apply `ih` to this quotient chain to obtain `p.length - 1 = d`. The positive length of `p` then gives `p.length = d + 1`.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-associated-prime-power-quotient",
+    "lem-weil-pbc-noetherian-local-dim-drop-outside-minimal-primes",
+    "lem-weil-pbc-cm-local-dimension-drop-regular-sequence",
+    "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+    "lem-weil-pbc-cm-local-associated-prime-minimal",
+    "lem-weil-pbc-noetherian-minimal-prime-associated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-associated-prime-power-quotient",
+  "lem-weil-pbc-noetherian-local-dim-drop-outside-minimal-primes",
+  "lem-weil-pbc-cm-local-dimension-drop-regular-sequence",
+  "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+  "lem-weil-pbc-cm-local-associated-prime-minimal",
+  "lem-weil-pbc-noetherian-minimal-prime-associated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00N9 via Tag 0AAE, positive-dimensional induction step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohen Macaulay ring saturated prime chains have equal length",
+   "results": "Height, Krull dimension and regular quotient dimension results; no maximal-chain successor theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Order.LTSeries.length_le_krullDim",
+   "results": "Order.LTSeries.length_le_krullDim proves the base case only.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMaxChain.*ringKrullDim|CohenMacaulay|catenary",
+   "results": "No matching theorem; repository chains for finite type domains require extra hypotheses and do not apply.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "successor induction maximal chains prime ideals Cohen Macaulay local rings",
+   "results": "Service unavailable: Internal Server Error; no results obtained.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.MaximalChainLengthOfDepth",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cm-local-maximal-chain-length",
+   "place": "positive-dimensional induction step",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MaximalChainLengthOfDepthPositive",
+  "file": "lean/Sheaf/RingTheory/MaximalChainLengthOfDepthPositive.lean",
+  "declaration": "IsLocalRing.maximal_chain_length_eq_of_depth_pos",
+  "statement": "theorem maximal_chain_length_eq_of_depth_pos {S : Type u} [CommRing S]\n    [IsNoetherianRing S] [IsLocalRing S] (d : ℕ)\n    (ih : ∀ {T : Type u} [CommRing T] [IsNoetherianRing T] [IsLocalRing T],\n      ringKrullDim T = (d : WithBot ℕ∞) →\n      (d : ℕ∞) ≤ IsLocalRing.depth (R := T) T →\n      ∀ q : LTSeries (PrimeSpectrum T),\n        IsMaxChain (fun a b : PrimeSpectrum T ↦ a ≤ b) (Set.range q) → q.length = d)\n    (hdim : ringKrullDim S = ((d + 1 : ℕ) : WithBot ℕ∞))\n    (hdepth : ((d + 1 : ℕ) : ℕ∞) ≤ IsLocalRing.depth (R := S) S)\n    (p : LTSeries (PrimeSpectrum S))\n    (hmax : IsMaxChain (fun q r : PrimeSpectrum S ↦ q ≤ r) (Set.range p)) :\n    p.length = d + 1",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T005854-L-2606342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T005854-L-2606342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
