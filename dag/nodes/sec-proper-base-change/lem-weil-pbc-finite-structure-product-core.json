@@ -24,24 +24,52 @@
  ],
  "proof": [
   {
-   "text": "The compatible multiplication family and its completion lift are constructed from the finite direct-image ring structures, tensor comparison, and Grothendieck existence. This is the unresolved core of the plan and is recorded as an intermediate theorem for a subsequent worker.",
+   "text": "Construct multiplication on each pushforward of the structure sheaf using moduleBaseChangeMap_algebra for the identity square. Such multiplication is uniquely determined on pure section tensors by the sheaf tensor universal property. Consequently the algebra base-change identity from the same theorem holds for any choices satisfying that characterization.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set v_n = delta_n followed by psi_n tensor psi_n, the structure-sheaf multiplication m_n, and psi_n inverse. Use the tensor-composition identity, tensor-comparison naturality, the base-change multiplication identity and hpsi. After postcomposition with psi_n, reassociate, combine tensor products of composites and cancel psi_(n+1) inverse with psi_(n+1). This proves c_(n,G tensor G) followed by v_n = i_n^*(v_(n+1)) followed by c_(n,G). The private product_transport helper proves the categorical calculation.",
+   "uses": [
+    "lem-weil-pbc-finite-structure-tensor-comparison-composition",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-module-base-change-map-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor square is coherent and properly supported by finite_structure_tensor_powers_supported. The j_n are closed immersions, being base changes of the quotient closed immersions. Use compatible_family_comparison_equiv to transfer v_n to the comparison chosen by grothendieck_existence; its underlying family stays literally unchanged. Apply full faithfulness to obtain mu with j_n^*(mu) = v_n.",
    "uses": [
     "lem-weil-pbc-finite-structure-tensor-powers-supported",
-    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-thickening-system-comparison-transport",
     "prop-weil-pbc-grothendieck-existence"
    ],
    "elementary": false
+  },
+  {
+   "text": "Evaluate naturality of the pinned pullback unit at mu and at x tensor y. Substitute the reduction equation j_n^*(mu) = v_n, cancel psi_n inverse followed by psi_n, apply the tensor-comparison pure-section formula and the tensor-map pure-section formula, and apply the defining multiplication equation for m_n. Expanding finiteStructureAdjoint and pushforward composition gives exactly the asserted equality on each open.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-finite-structure-adjoint-transitions"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-structure-tensor-powers-supported",
+  "lem-weil-pbc-module-base-change-map-algebra",
+  "lem-weil-pbc-finite-structure-tensor-comparison-composition",
   "lem-weil-pbc-module-pullback-tensor",
-  "prop-weil-pbc-grothendieck-existence"
+  "lem-weil-pbc-finite-structure-tensor-powers-supported",
+  "lem-weil-pbc-thickening-system-comparison-transport",
+  "prop-weil-pbc-grothendieck-existence",
+  "lem-weil-pbc-finite-structure-adjoint-transitions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 09ZT (multiplication paragraph), 088E and 088F; read https://stacks.math.columbia.edu/tag/09ZT and /tag/088F on 2026-10-13; restored as an unresolved plan by U4 after review E3/H3"
+  "place": "Tag 09ZT multiplication paragraph, Tags 088E and 088F; E1 formalization 2026-10-14, including proved tensor-composition coherence and existing comparison transport."
  },
  "mathlib_searches": [
   {
@@ -108,16 +136,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261013T165650-L-1811347",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.finite_structure_product_exists_core"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.finite_structure_product_section_identity"
-  ]
+  "landing": "20261013T181055-L-2598894",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

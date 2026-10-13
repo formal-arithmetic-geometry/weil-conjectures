@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-finite-structure-tensor-comparison-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity over the complete base, via algebraization of finite structure algebras (09ZT): compatibility of the reduced multiplication maps with successive pullbacks.",
+   "via": [
+    "lem-weil-pbc-finite-structure-product-core",
+    "lem-weil-pbc-finite-structure-product-exists",
+    "lem-weil-pbc-finite-structure-multiplication-lift",
+    "lem-weil-pbc-algebraize-finite-structure-algebra",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor coherence of the pinned pullback composition comparison",
+ "statement": "Let $g:T\\to S$, $h:S\\to X$, and $k:T\\to X$ be morphisms of schemes [def-pc-scheme] with $w:h\\circ g=k$. Let $M,N$ be $\\mathcal O_X$-modules [def-pc-module-pullback] and let $\\delta_f(P,Q):f^*(P\\otimes Q)\\to f^*P\\otimes f^*Q$ be the canonical tensor comparison with the pinned unit section formula [lem-weil-pbc-module-pullback-tensor, def-pur-sheaf-tensor-product]. Write $c_P:g^*h^*P\\to k^*P$ for the inverse of the pinned adjunction-mate composition comparison [def-pc-tensor-pullback-composition-iso]. Then the two morphisms from $g^*h^*(M\\otimes N)$ to $k^*M\\otimes k^*N$ agree: first $g^*(\\delta_h)$, then $\\delta_g(h^*M,h^*N)$, then $c_M\\otimes c_N$ equals first $c_{M\\otimes N}$, then $\\delta_k(M,N)$. No finiteness, coherence, support or adic hypotheses are imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01CD (lemma-tensor-product-pullback), 0095 and 0096; tensor coherence needed in the multiplication paragraph of 09ZT. The mate and pure-section calculation is agent-written, from these universal properties. Read https://stacks.math.columbia.edu/tag/01CD, /tag/0096 and /tag/09ZT on 2026-10-14."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "proof": [
+  {
+   "text": "Substitute k = g followed by h. Write ah, ag, ak for the pinned tensor-pullback adjunctions. The unit_conjugateEquiv_symm identity for the defining mate, followed by its inverse and cancellation, says the composite unit followed by the inverse composition comparison equals the unit of ak. On sections the pushforward comparison for this composite is the identity; its equality-transport restriction is the presheaf identity. This is proved as composition_unit_sections.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the composite adjunction Hom bijection to the two sides and use the tensor universal property to test their adjoints on tmulSection(s,t) over every open U. Naturality of the g-unit moves the pullback of the h-tensor comparison through that unit. Apply the pure-section formulas first for h and then for g. The resulting elementary tensor is the tensor of the two successive unit images. Tensoring the inverse composition comparisons and applying the unit identity separately to M and N gives the tensor of the composite-unit images. On the other side apply the unit identity to M tensor N and then the pure-section formula for the composite. The answers agree, proving equality.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01CD, 0095, 0096; explicit adjunction-mate calculation for the 09ZT multiplication argument, formalized by E1 on 2026-10-14."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor pullback composition comparison is compatible with the tensor product comparison",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical pullback tensor comparison commutes with composition of pullbacks",
+   "results": "Eight hits concerning CategoryTheory.Over.tensorHom_left_fst, tensorHom_left_snd and associated cartesian Over pullback lemmas. These concern categorical fibre products, not tensor products of sheaves of modules or the pinned adjunction-mate comparison.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*composition|composition.*tensor",
+   "results": "25 Mathlib hits, including tensor decomposition, monoidal coherence and cartesian Over constructions. Local library searches found ModulePullbackTensor (naturality and pure-section formula), TensorPullbackCompositionIso (the pinned mate), and unit-composition calculations, but not this tensor composition identity.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStructureProductCore",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteStructureTensorComparisonComposition",
+  "file": "lean/Sheaf/Paper/FiniteStructureTensorComparisonComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteStructure_tensorComparison_composition",
+  "statement": "theorem finiteStructure_tensorComparison_composition\n    {X S T : Scheme.{u}} (g : T ⟶ S) (h : S ⟶ X) (k : T ⟶ X)\n    (w : g ≫ h = k) (M N : X.Modules) :\n    (tensorPullback g).map (Classical.choose (module_pullback_tensor h) M N).hom ≫\n        (Classical.choose (module_pullback_tensor g)\n          ((tensorPullback h).obj M) ((tensorPullback h).obj N)).hom ≫\n        ((tensorPullbackCompositionIso g h k w).inv.app M ⊗ₘ\n          (tensorPullbackCompositionIso g h k w).inv.app N) =\n      (tensorPullbackCompositionIso g h k w).inv.app (M ⊗ N) ≫\n        (Classical.choose (module_pullback_tensor k) M N).hom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T181055-L-2598894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T181055-L-2598894",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
