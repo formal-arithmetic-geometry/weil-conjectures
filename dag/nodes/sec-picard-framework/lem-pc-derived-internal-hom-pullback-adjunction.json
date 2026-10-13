@@ -34,59 +34,29 @@
  ],
  "proof": [
   {
-   "text": "The derived pullback/direct-image adjunction and its counit are supplied by [lem-pc-ringed-spaces-derived-adjoint-general]. Evaluation R\\mathcal Hom(K,L)\\otimes^{\\mathbf L}K\\to L is the map corresponding to the identity of R\\mathcal Hom(K,L) under the tensor-internal-Hom bijection of [lem-sc-derived-internal-hom-adjunction] (for R\\mathcal Hom as in [def-pur-derived-internal-hom]). Composing Lg^* of evaluation with the isomorphism Lg^*R\\mathcal Hom(K,L)\\otimes^{\\mathbf L}Lg^*K\\cong Lg^*(R\\mathcal Hom(K,L)\\otimes^{\\mathbf L}K) of [lem-pc-derived-pullback-tensor-product] and applying the bijection of [lem-sc-derived-internal-hom-adjunction] on T gives the canonical map Lg^*R\\mathcal Hom(K,L) \\to R\\mathcal Hom(Lg^*K,Lg^*L). Taking its mate under Lg^* \\dashv Rg_* defines \\gamma_{K,L}; functoriality of these bijections in all variables and naturality of the isomorphism of [lem-pc-derived-pullback-tensor-product] make this construction natural in K and L.",
+   "text": "Obtain a,bS,bT,t,gamma,z,eS,eT with their naturality, evaluation mate and zeroth hypercohomology equations from the compatible construction lemma. No invertibility is assumed in that lemma.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "def-pur-derived-internal-hom",
-    "lem-sc-derived-internal-hom-adjunction",
-    "lem-pc-derived-pullback-tensor-product"
+    "lem-pc-derived-internal-hom-pullback-mate-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Remark 08I3 (cohomology-remark-prepare-fancy-base-change), construction of the internal-Hom comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "For M and E, compose \\gamma_{M,Rg_*E} with postcomposition by the counit \\varepsilon_E. To prove that this composite is an isomorphism, test it against an arbitrary object A of D(\\mathcal O_S). For the source, [lem-sc-derived-internal-hom-adjunction] on S, then [lem-pc-ringed-spaces-derived-adjoint-general], then [lem-pc-derived-pullback-tensor-product] give \\operatorname{Hom}(A,R\\mathcal Hom(M,Rg_*E))\\cong\\operatorname{Hom}(A\\otimes^{\\mathbf L}M,Rg_*E)\\cong\\operatorname{Hom}(Lg^*(A\\otimes^{\\mathbf L}M),E)\\cong\\operatorname{Hom}(Lg^*A\\otimes^{\\mathbf L}Lg^*M,E). For the target, [lem-pc-ringed-spaces-derived-adjoint-general] and then [lem-sc-derived-internal-hom-adjunction] on T give \\operatorname{Hom}(A,Rg_*R\\mathcal Hom(Lg^*M,E))\\cong\\operatorname{Hom}(Lg^*A,R\\mathcal Hom(Lg^*M,E))\\cong\\operatorname{Hom}(Lg^*A\\otimes^{\\mathbf L}Lg^*M,E). All these bijections are natural in A. Under them, postcomposition with the displayed composite is the identity of \\operatorname{Hom}(Lg^*A\\otimes^{\\mathbf L}Lg^*M,E), by the two triangle identities for Lg^* \\dashv Rg_*, naturality of the bijections of [lem-sc-derived-internal-hom-adjunction] and of the isomorphism of [lem-pc-derived-pullback-tensor-product], and the defining evaluation equation for \\gamma. Yoneda therefore gives the asserted isomorphism, and the same calculation is natural in M and E.",
+   "text": "Whisker gamma by id.op.prod R, then compose with R applied to internal Hom of the counit. This constructs a natural transformation c. The generic counit-mate lemma proves every component invertible. NatIso.ofComponents applied to asIso(c.app P) defines d, with its hom component definitionally the required composite. The sections equation is exactly the supplied construction equation.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "def-pur-derived-internal-hom",
-    "lem-sc-derived-internal-hom-adjunction",
-    "lem-pc-derived-pullback-tensor-product"
+    "lem-pc-internal-hom-counit-mate-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Remark 08I3 and Tag 079W, internal form of the derived pullback/direct-image adjunction"
-   }
-  },
-  {
-   "text": "Apply H^0(S,-). By [lem-pur-rhom-global-sections], H^0 of the source internal Hom is Hom_{D(\\mathcal O_S)}(M,Rg_*E). By [lem-pc-derived-sections-pushforward-comparison], H^0(S,Rg_*R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,E)) identifies with H^0(T,R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,E)), and the latter is Hom_{D(\\mathcal O_T)}(Lg^*M,E) by [lem-pur-rhom-global-sections]. Under these identifications, the mate construction and the second factor are exactly pullback by Lg^* followed by postcomposition with \\varepsilon_E, so the induced map is \\varphi \\mapsto \\varepsilon_E \\circ Lg^*\\varphi.",
-   "uses": [
-    "lem-pur-rhom-global-sections",
-    "lem-pc-derived-sections-pushforward-comparison",
-    "lem-pc-ringed-spaces-derived-adjoint-general"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section global-RHom and Lemma 079W"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "def-pur-derived-internal-hom",
-  "lem-pur-rhom-global-sections",
-  "lem-pc-derived-sections-pushforward-comparison",
-  "lem-sc-derived-internal-hom-adjunction",
-  "lem-pc-derived-pullback-tensor-product"
+  "lem-pc-derived-internal-hom-pullback-mate-sections",
+  "lem-pc-internal-hom-counit-mate-iso"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Remark 08I3, Tag 079W and Lemma 08DJ"
+  "by": "agent",
+  "agent": "S4",
+  "date": "2026-10-13",
+  "note": "Lean reduction of construction and categorical invertibility, following the original three steps."
  },
  "mathlib_searches": [
   {
@@ -162,5 +132,15 @@
   "group": "K1",
   "result": "fix",
   "note": "g:T->S, one HasDerivedCategory universe on S,T; a: Lg*-|Rg_*, bS/bT tensor-RHom adjunctions, t pullback-tensor iso (landed witness form f9266a360/ae12c2b62); gamma tied as mate of t.inv then Lg*(eval) via a,bT; d.hom = gamma then Rg_*RHom(1,eps_E), iso and natural in (M,E); H0 clause phi |-> eps_E o Lg*phi through z and natural H0(RHom)=Hom identifications eS/eT. Fixed: reverted re-pointed lem-pc-derived-pullback-tensor-product record and dropped its second-spelling module (letI aux defs; rule B / H13), removed Classical.choose ties to sorried theorems; reverted the delivery's change of existing node(s) lem-pc-derived-pullback-tensor-product (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorComparison.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T082414-L-1648263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

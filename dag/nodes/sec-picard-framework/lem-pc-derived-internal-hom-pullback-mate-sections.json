@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-derived-internal-hom-pullback-mate-sections",
+ "kind": "statement",
+ "title": "Evaluation mate and compatible zeroth hypercohomology identifications",
+ "statement": "For a scheme morphism g:T→S [def-pc-scheme] and the derived categories [def-pc-derived-category] of its module sheaves, let F=Lg* [def-pc-derived-pullback], R=Rg* [def-pc-derived-direct-image], HS and HT be derived internal Hom [def-pur-derived-internal-hom], and QS and QT be zeroth hypercohomology [def-pur-ringed-site-zeroth-hypercohomology]. There exist a:F⊣R, tensor-right/internal-Hom adjunctions bS,bT, a tensor comparison t: F(- tensor -)≅F(-) tensor F(-), and a natural transformation gamma:HS→R HT(F(-),F(-)). Its adjunct under a is the transpose under bT of t.inv followed by F of the bS evaluation counit. There also exist z:R⋙QS≅QT and additive bijections eS,eT from zeroth hypercohomology of internal Hom to derived morphisms, natural in both variables. For M in D(OS), E in D(OT), the counit composite c=gamma(M,R(E)) followed by R HT(1,a.counit(E)) satisfies eT(z(QS(c)(x)))=F(eS(x)) followed by a.counit(E). This statement asserts neither invertibility of c nor a natural isomorphism with components c.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08I3 (cohomology-remark-prepare-fancy-base-change) with Tag 079W and Lemma 08DJ (cohomology-lemma-internal-hom); standard internal form of the Lf^* -| Rf_* adjunction (Lipman, Notes on derived functors, Prop. 3.2.3)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-derived-sections-pushforward-comparison",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-pc-derived-pullback-tensor-product",
+  "def-pur-ringed-site-zeroth-hypercohomology"
+ ],
+ "proof": [
+  {
+   "text": "The derived pullback/direct-image adjunction and its counit are supplied by [lem-pc-ringed-spaces-derived-adjoint-general]. Evaluation R\\mathcal Hom(K,L)\\otimes^{\\mathbf L}K\\to L is the map corresponding to the identity of R\\mathcal Hom(K,L) under the tensor-internal-Hom bijection of [lem-sc-derived-internal-hom-adjunction] (for R\\mathcal Hom as in [def-pur-derived-internal-hom]). Composing Lg^* of evaluation with the isomorphism Lg^*R\\mathcal Hom(K,L)\\otimes^{\\mathbf L}Lg^*K\\cong Lg^*(R\\mathcal Hom(K,L)\\otimes^{\\mathbf L}K) of [lem-pc-derived-pullback-tensor-product] and applying the bijection of [lem-sc-derived-internal-hom-adjunction] on T gives the canonical map Lg^*R\\mathcal Hom(K,L) \\to R\\mathcal Hom(Lg^*K,Lg^*L). Taking its mate under Lg^* \\dashv Rg_* defines \\gamma_{K,L}; functoriality of these bijections in all variables and naturality of the isomorphism of [lem-pc-derived-pullback-tensor-product] make this construction natural in K and L.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "def-pur-derived-internal-hom",
+    "lem-sc-derived-internal-hom-adjunction",
+    "lem-pc-derived-pullback-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark 08I3 (cohomology-remark-prepare-fancy-base-change), construction of the internal-Hom comparison"
+   }
+  },
+  {
+   "text": "Apply H^0(S,-). By [lem-pur-rhom-global-sections], H^0 of the source internal Hom is Hom_{D(\\mathcal O_S)}(M,Rg_*E). By [lem-pc-derived-sections-pushforward-comparison], H^0(S,Rg_*R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,E)) identifies with H^0(T,R\\mathcal Hom_{\\mathcal O_T}(Lg^*M,E)), and the latter is Hom_{D(\\mathcal O_T)}(Lg^*M,E) by [lem-pur-rhom-global-sections]. Under these identifications, the mate construction and the second factor are exactly pullback by Lg^* followed by postcomposition with \\varepsilon_E, so the induced map is \\varphi \\mapsto \\varepsilon_E \\circ Lg^*\\varphi. Construct these identifications on the same K-injective models as the evaluation bijections. On degree-zero Hom cocycles the composite is pullback followed by the counit; passing to homotopy classes proves the displayed equation. Mere arbitrary existential choices would not suffice.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-pc-derived-sections-pushforward-comparison",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section global-RHom and Lemma 079W"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-derived-sections-pushforward-comparison",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-pc-derived-pullback-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S4",
+  "date": "2026-10-13",
+  "note": "The parent argument made precise; literature supplies evaluation and adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "zeroth cohomology global sections internal Hom derived pullback counit compatibility",
+   "results": "CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; SheafOfModules.pullbackObjUnitToUnit; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm; CategoryTheory.Sheaf.ΓObjEquivHom_naturality; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm",
+   "date": "2026-10-13",
+   "verdict": "related facts; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-13",
+   "verdict": "related facts; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_yoneda_map_bijective|homEquiv_naturality_right_symm",
+   "results": "Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/Condensed/Light/InternallyProjective.lean; Mathlib/CategoryTheory/Adjunction/Quadruple.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "related facts; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom pullback direct image counit adjunction isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackAdjunction",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 case (1), final compatibility: identification (M, g'_*a'(g^*K))_X = ((g')^*M, a'(g^*K))_{X'}, its RHom-level form; Evaluation mate and compatible zeroth hypercohomology identifications",
+   "via": [
+    "lem-pc-derived-internal-hom-pullback-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackMateSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedInternalHomPullbackMateSections.lean",
+  "declaration": "AlgebraicGeometry.exists_derivedInternalHom_pullback_mate_sections",
+  "statement": "theorem exists_derivedInternalHom_pullback_mate_sections\n    {T S : Scheme.{u}} (g : T ⟶ S)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] :\n    ∃ (a : derivedPullback g ⊣ schemeDerivedDirectImage g)\n      (bS : ∀ K : schemeDerivedCategory S, tensorRight K ⊣\n        (Functor.curry.obj\n          (derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf)).obj\n            (op K))\n      (bT : ∀ K : schemeDerivedCategory T, tensorRight K ⊣\n        (Functor.curry.obj\n          (derivedInternalHom (Opens.grothendieckTopology T) T.toRingedSpace.sheaf)).obj\n            (op K))\n      (t : tensor (schemeDerivedCategory S) ⋙ derivedPullback g ≅\n        (derivedPullback g).prod (derivedPullback g) ⋙ tensor (schemeDerivedCategory T))\n      (γ : derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf ⟶\n        (derivedPullback g).op.prod (derivedPullback g) ⋙\n          derivedInternalHom (Opens.grothendieckTopology T) T.toRingedSpace.sheaf ⋙\n            schemeDerivedDirectImage g)\n      (z : schemeDerivedDirectImage g ⋙\n          ringedSiteZerothHypercohomology (Opens.grothendieckTopology S)\n            S.toRingedSpace.sheaf ≅\n        ringedSiteZerothHypercohomology (Opens.grothendieckTopology T) T.toRingedSpace.sheaf)\n      (eS : ∀ P : (schemeDerivedCategory S)ᵒᵖ × schemeDerivedCategory S,\n        (ringedSiteZerothHypercohomology (Opens.grothendieckTopology S)\n            S.toRingedSpace.sheaf).obj\n          ((derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf).obj P) ≃+\n          (P.1.unop ⟶ P.2))\n      (eT : ∀ P : (schemeDerivedCategory T)ᵒᵖ × schemeDerivedCategory T,\n        (ringedSiteZerothHypercohomology (Opens.grothendieckTopology T)\n            T.toRingedSpace.sheaf).obj\n          ((derivedInternalHom (Opens.grothendieckTopology T) T.toRingedSpace.sheaf).obj P) ≃+\n          (P.1.unop ⟶ P.2)),\n      (∀ (P P' : (schemeDerivedCategory S)ᵒᵖ × schemeDerivedCategory S) (f : P ⟶ P')\n          (x : (ringedSiteZerothHypercohomology (Opens.grothendieckTopology S)\n              S.toRingedSpace.sheaf).obj\n            ((derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf).obj P)),\n        eS P' ((ringedSiteZerothHypercohomology (Opens.grothendieckTopology S)\n            S.toRingedSpace.sheaf).map\n              ((derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf).map f)\n            x) = f.1.unop ≫ eS P x ≫ f.2) ∧\n      (∀ (P P' : (schemeDerivedCategory T)ᵒᵖ × schemeDerivedCategory T) (f : P ⟶ P')\n          (x : (ringedSiteZerothHypercohomology (Opens.grothendieckTopology T)\n              T.toRingedSpace.sheaf).obj\n            ((derivedInternalHom (Opens.grothendieckTopology T) T.toRingedSpace.sheaf).obj P)),\n        eT P' ((ringedSiteZerothHypercohomology (Opens.grothendieckTopology T)\n            T.toRingedSpace.sheaf).map\n              ((derivedInternalHom (Opens.grothendieckTopology T) T.toRingedSpace.sheaf).map f)\n            x) = f.1.unop ≫ eT P x ≫ f.2) ∧\n      (∀ K L : schemeDerivedCategory S,\n        (a.homEquiv\n            ((derivedInternalHom (Opens.grothendieckTopology S)\n              S.toRingedSpace.sheaf).obj (op K, L))\n            ((derivedInternalHom (Opens.grothendieckTopology T)\n              T.toRingedSpace.sheaf).obj\n                (op ((derivedPullback g).obj K), (derivedPullback g).obj L))).symm\n            (γ.app (op K, L)) =\n          (bT ((derivedPullback g).obj K)).homEquiv\n            ((derivedPullback g).obj\n              ((derivedInternalHom (Opens.grothendieckTopology S)\n                S.toRingedSpace.sheaf).obj (op K, L))) ((derivedPullback g).obj L)\n            (t.inv.app\n                ((derivedInternalHom (Opens.grothendieckTopology S)\n                  S.toRingedSpace.sheaf).obj (op K, L), K) ≫\n              (derivedPullback g).map ((bS K).counit.app L))) ∧\n      (∀ (M : schemeDerivedCategory S) (E : schemeDerivedCategory T)\n          (x : (ringedSiteZerothHypercohomology (Opens.grothendieckTopology S)\n              S.toRingedSpace.sheaf).obj\n            ((derivedInternalHom (Opens.grothendieckTopology S)\n              S.toRingedSpace.sheaf).obj (op M, (schemeDerivedDirectImage g).obj E))),\n        eT (op ((derivedPullback g).obj M), E)\n          ((z.hom.app\n              ((derivedInternalHom (Opens.grothendieckTopology T)\n                T.toRingedSpace.sheaf).obj (op ((derivedPullback g).obj M), E)))\n            ((ringedSiteZerothHypercohomology (Opens.grothendieckTopology S)\n                S.toRingedSpace.sheaf).map (γ.app (op M, (schemeDerivedDirectImage g).obj E) ≫\n                  (schemeDerivedDirectImage g).map\n                    ((derivedInternalHom (Opens.grothendieckTopology T)\n                      T.toRingedSpace.sheaf).map\n                      (X := (op ((derivedPullback g).obj M),\n                        (derivedPullback g).obj ((schemeDerivedDirectImage g).obj E)))\n                      (Y := (op ((derivedPullback g).obj M), E))\n                      ((𝟙 ((derivedPullback g).obj M)).op, a.counit.app E))) x)) =\n          (derivedPullback g).map\n              (eS (op M, (schemeDerivedDirectImage g).obj E) x) ≫\n            a.counit.app E)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T082414-L-1648263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T082414-L-1648263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

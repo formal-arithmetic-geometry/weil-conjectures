@@ -1,0 +1,107 @@
+{
+ "id": "lem-pc-internal-hom-counit-mate-iso",
+ "kind": "statement",
+ "title": "Invertibility of the internal-Hom counit composite",
+ "statement": "Let C,D be monoidal categories, H:Cᵒᵖ×C→C and J:Dᵒᵖ×D→D bifunctors, F:C→D and R:D→C with adjunction a:F⊣R. Suppose tensor-right by K is left adjoint to H(K,-) on C and J(K,-) on D, with specified adjunctions bC,bD. Let t:F(- tensor -)≅F(-) tensor F(-) be a natural isomorphism and gamma:H→R J(F(-),F(-)) a natural transformation whose adjunct at (K,L) is the bD transpose of t.inv at (H(K,L),K) followed by F of bC(K).counit at L. Then for every M in C and E in D, gamma(M,R(E)) followed by R J(1,a.counit(E)) is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08I3 (cohomology-remark-prepare-fancy-base-change) with Tag 079W and Lemma 08DJ (cohomology-lemma-internal-hom); standard internal form of the Lf^* -| Rf_* adjunction (Lipman, Notes on derived functors, Prop. 3.2.3)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For every test object A, define e1 as inverse tensor-Hom adjunction on C, inverse pullback adjunction, and precomposition with t.inv; define e2 as inverse pullback adjunction followed by inverse tensor-Hom adjunction on D. Naturality of the adjunction hom equivalences, the mate hypothesis and naturality of t.inv prove e2(q followed by c)=e1(q). Thus postcomposition by c equals e1 followed by e2 inverse and is bijective. Apply Mathlib isIso_of_yoneda_map_bijective.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S4",
+  "date": "2026-10-13",
+  "note": "The parent argument made precise; literature supplies evaluation and adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "zeroth cohomology global sections internal Hom derived pullback counit compatibility",
+   "results": "CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; SheafOfModules.pullbackObjUnitToUnit; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm; CategoryTheory.Sheaf.ΓObjEquivHom_naturality; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm",
+   "date": "2026-10-13",
+   "verdict": "related facts; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-13",
+   "verdict": "related facts; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_yoneda_map_bijective|homEquiv_naturality_right_symm",
+   "results": "Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; Mathlib/Condensed/Light/InternallyProjective.lean; Mathlib/CategoryTheory/Adjunction/Quadruple.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "related facts; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom pullback direct image counit adjunction isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackAdjunction",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 case (1), final compatibility: identification (M, g'_*a'(g^*K))_X = ((g')^*M, a'(g^*K))_{X'}, its RHom-level form; Invertibility of the internal-Hom counit composite",
+   "via": [
+    "lem-pc-derived-internal-hom-pullback-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InternalHomCounitMateIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/InternalHomCounitMateIso.lean",
+  "declaration": "CategoryTheory.internalHomCounitMate_isIso",
+  "statement": "theorem internalHomCounitMate_isIso\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [MonoidalCategory C] [MonoidalCategory D]\n    (H : Cᵒᵖ × C ⥤ C) (J : Dᵒᵖ × D ⥤ D)\n    (F : C ⥤ D) (R : D ⥤ C) (a : F ⊣ R)\n    (bC : ∀ K : C, tensorRight K ⊣ (Functor.curry.obj H).obj (op K))\n    (bD : ∀ K : D, tensorRight K ⊣ (Functor.curry.obj J).obj (op K))\n    (t : tensor C ⋙ F ≅ F.prod F ⋙ tensor D)\n    (γ : H ⟶ F.op.prod F ⋙ J ⋙ R)\n    (hγ : ∀ K L : C,\n      (a.homEquiv (H.obj (op K, L)) (J.obj (op (F.obj K), F.obj L))).symm\n        (γ.app (op K, L)) =\n      (bD (F.obj K)).homEquiv (F.obj (H.obj (op K, L))) (F.obj L)\n        (t.inv.app (H.obj (op K, L), K) ≫ F.map ((bC K).counit.app L)))\n    (M : C) (E : D) :\n    IsIso (γ.app (op M, R.obj E) ≫\n      R.map (J.map (X := (op (F.obj M), F.obj (R.obj E)))\n        (Y := (op (F.obj M), E)) ((𝟙 (F.obj M)).op, a.counit.app E)))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T082414-L-1648263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T082414-L-1648263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

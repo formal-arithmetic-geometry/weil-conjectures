@@ -10,10 +10,8 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.RhomGlobalSections
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
-import Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
+import Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackMateSections
+import Sheaf.AlgebraicGeometry.InternalHomCounitMateIso
 
 /-! # Derived internal Hom adjunction for pullback and direct image
 
@@ -29,6 +27,8 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical internal-Hom comparison, its counit composite as a natural isomorphism,
 and its map on zeroth hypercohomology. The witnesses are the adjunction `a`
 (Lg^* ⊣ Rg_*), the tensor/internal-Hom adjunctions `bS`, `bT`, and the pullback--tensor
@@ -155,6 +155,26 @@ theorem derivedInternalHom_pullback_adjunction
           (derivedPullback g).map
               (eS (op M, (schemeDerivedDirectImage g).obj E) x) ≫
             a.counit.app E) := by
-  sorry
+  have h := exists_derivedInternalHom_pullback_mate_sections.{u, w} g
+  rcases h with ⟨a, bS, bT, t, γ, z, eS, eT, heS, heT, hγ, hsections⟩
+  let F := derivedPullback g
+  let R := schemeDerivedDirectImage g
+  let H := derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf
+  let J := derivedInternalHom (Opens.grothendieckTopology T) T.toRingedSpace.sheaf
+  let c : (𝟭 (schemeDerivedCategory S)).op.prod R ⋙ H ⟶
+      F.op.prod (𝟭 (schemeDerivedCategory T)) ⋙ J ⋙ R :=
+    Functor.whiskerLeft ((𝟭 (schemeDerivedCategory S)).op.prod R) γ ≫
+      Functor.whiskerRight
+        (Functor.whiskerRight (NatTrans.prod (𝟙 F.op) a.counit) J) R
+  have hc (P : (schemeDerivedCategory S)ᵒᵖ × schemeDerivedCategory T) :
+      IsIso (c.app P) := by
+    exact internalHomCounitMate_isIso H J F R a bS bT t γ hγ P.1.unop P.2
+  let d := NatIso.ofComponents (fun P ↦ @asIso _ _ _ _ (c.app P) (hc P))
+    (fun f ↦ c.naturality f)
+  refine ⟨a, bS, bT, t, γ, d, z, eS, eT, heS, heT, hγ, ?_, ?_⟩
+  · intro M E
+    rfl
+  · intro M E x
+    exact hsections M E x
 
 end AlgebraicGeometry
