@@ -12891,3 +12891,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:57 L: merged deliver/C1/Sheaf.AlgebraicGeometry.Morphisms.RegularLocalDimensionTwoPuncturedFlatModel (stage 3; reviewer PASS; first push; landing 20261013T145724-L-750496 (interface); batch 20261013T145721; modules 2; new nodes 1)
 - 14:57 L: merged deliver/C4/Sheaf.FieldTheory.TriangularFieldModelBoundedIndependent (stage 3; reviewer PASS; first push; landing 20261013T145724-L-750716 (interface); batch 20261013T145721; modules 2; new nodes 1)
 - 14:57 L: merged deliver/G1/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedGermDetection (stage 3; reviewer PASS; first push; landing 20261013T145725-L-750843 (interface); batch 20261013T145721; modules 3; new nodes 2)
+- 14:57 L: merged deliver/G3/Sheaf.AlgebraicGeometry.BottomFreeChainDerivedSquare (stage 3; reviewer PASS; first push; landing 20261013T145725-L-751008 (proof); batch 20261013T145721; modules 1; new nodes 0)
