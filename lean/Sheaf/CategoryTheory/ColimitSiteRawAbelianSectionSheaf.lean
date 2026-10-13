@@ -16,6 +16,12 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
+import all Sheaf.CategoryTheory.ColimitSiteRawSectionSheaf
+import Sheaf.CategoryTheory.ColimitSiteRawAbelianStageRestriction
+import Sheaf.CategoryTheory.FinitePresieveFilteredColimit
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Mathlib.CategoryTheory.Filtered.Final
+
 /-! # ColimitSiteRawAbelianSectionSheaf
 
 Source: Stacks Project, Sites, Tag 0A35; Modules on Sites, Tag 03CO.
@@ -31,6 +37,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
 presentation construction and adjunction paragraphs; abelian colimits
 as in Modules on Sites, Tag 03CO.
@@ -129,6 +136,40 @@ theorem colimit_site_raw_abelian_section_isSheaf
       Arrow.mk ((θ t t' b).hom.app (op X) ≫
         (β t').app (op ((F.map b.right).toFunctor.obj X))))
  :
-    Presheaf.IsSheaf Q.toGrothendieck (colimit B) := by sorry
+    Presheaf.IsSheaf Q.toGrothendieck (colimit B) := by
+  rw [Presheaf.isSheaf_iff_isSheaf_forget (s := forget AddCommGrpCat.{u})]
+  have hQfinite : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y → Finite R.uncurry := by
+    intro Y R hR
+    obtain ⟨j, X, S, rfl, hS, rfl⟩ := (hQ Y R).mp hR
+    have : Finite S.uncurry := hfinite j X S hS
+    exact finite_map_cover (V.ι.app j).toFunctor S
+  apply isSheaf_of_finite_cover_conditions Q hQfinite
+  intro Y R hR
+  obtain ⟨j, X, S, rfl, hS, rfl⟩ := (hQ Y R).mp hR
+  obtain ⟨k, _, _, D, ⟨q⟩, _⟩ := colimit_site_raw_abelian_stage_restriction
+    J F P V hobjects harrows Q i G θ hθ B β hβ hβmap j
+  let D₀ := D ⋙ sheafToPresheaf (P j).toGrothendieck AddCommGrpCat.{u}
+  let W := (Functor.whiskeringRight (F.obj j)ᵒᵖ AddCommGrpCat.{u} (Type u)).obj
+    (forget AddCommGrpCat.{u})
+  have hD : ∀ t : Under k, Presieve.IsSheafFor ((D₀ ⋙ W).obj t) S := by
+    intro t
+    have hs : Presieve.IsSheaf (P j).toGrothendieck
+        ((D.obj t).obj ⋙ forget AddCommGrpCat.{u}) := by
+      rw [← isSheaf_iff_isSheaf_of_type, ← Presheaf.isSheaf_iff_isSheaf_forget]
+      exact (D.obj t).property
+    exact hs.isSheafFor_of_mem_precoverage hS
+  let : S.HasPairwisePullbacks := (P j).hasPairwisePullbacks_of_mem hS
+  have hf : S.uncurry.Finite := Set.finite_coe_iff.mp (hfinite j X S hS)
+  have hc := finitePresieve_isSheafFor_filteredColimit (D₀ ⋙ W)
+    (W.mapCocone (colimit.cocone D₀))
+    (isColimitOfPreserves W (colimit.isColimit D₀)) S hf hD
+  have hs := Presieve.isSheafFor_iso (W.mapIso q) hc
+  let vj := (V.ι.app j).toFunctor
+  let : vj.PreservesPairwisePullbacks S := by
+    constructor
+    intro Z T f g hf hg
+    exact hVpullback j X Z T S hS f g hf
+  exact (Presieve.IsSheafFor.comp_iff_of_preservesPairwisePullbacks
+    vj ((colimit B) ⋙ forget AddCommGrpCat.{u}) S).mp hs
 
 end CategoryTheory

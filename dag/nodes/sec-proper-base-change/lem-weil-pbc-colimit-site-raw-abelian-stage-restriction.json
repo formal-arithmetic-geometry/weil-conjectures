@@ -1,0 +1,152 @@
+{
+ "kind": "statement",
+ "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone with vertex $C$ [def-weil-pbc-category-colimit]. Let $P_j$ and $Q$ be precoverages on $F(j)$ and $C$. Every transition functor $F(a)$ and cocone functor $V_j$ is continuous for the generated topologies [def-weil-pbc-sites-and-cohomology]. Fix $i\\in J$ and a abelian sheaf $G$ on $P_i$. Write $I=\\mathrm{Under}(i)$, $A_t=F(t.hom)_sG$. For $b:t\\to t'$ give a sheaf map $\\theta_b:A_t\\to F(b.right)^s A_{t'}$ whose composite with the unit $G\\to F(t.hom)^s A_t$ equals the unit at $t'$ componentwise as objects of the arrow category of abelian groups. For $t\\in I$ let $B_t$ be a presheaf on $C$, with $\\beta_t:A_t\\to V_t^p B_t$ exhibiting $B_t$ as the left Kan extension of the underlying presheaf of $A_t$ along $V_t^{op}$. Here $V_t=V_{t.right}$, $V_t^p$ is presheaf restriction, and a left Kan extension means that composition with $\\beta_t$ bijects maps $B_t\\to T$ with maps $A_t\\to V_t^p T$ for every presheaf $T$. Let $B:I\\to\\mathrm{PSh}(C)$ have these objects and satisfy, for all $b:t\\to t'$ and $X\\in F(t.right)$, $\\beta_t(X)B(b)(V_tX)=\\theta_b(X)\\beta_{t'}(F(b.right)X)$ as objects of $\\mathrm{Arrow}(\\mathrm{Ab})$.Assume the object and arrow cocones of $V$ are set colimits [def-weil-pbc-arrows-functor]. No covering finiteness or pullback-preservation assumption is imposed. For every $j\\in J$, there exist $k\\in J$, $a:i\\to k$, $b:j\\to k$, and a diagram $D:\\mathrm{Under}(k)\\to\\mathrm{Sh}(P_j;\\mathrm{Ab})$ such that the presheaf colimit of the underlying presheaves of $D$ is isomorphic to $V_j^{op}\\circ\\mathrm{colim}\\,B$. For every $t=(k\\to l)$, the sheaf $D(t)$ is isomorphic to $F(b\\circ t)^s(F(a\\circ t)_sG)$, where $b\\circ t$ and $a\\circ t$ mean first $b$ or $a$, then $t$. Thus the restriction of the raw Kan colimit is a filtered colimit of explicitly specified stage sheaves; no separatedness, amalgamation or sheafness of that colimit is asserted. All presheaves and Kan extensions here are abelian.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-colimit-site-raw-abelian-stage-restriction",
+ "title": "Raw abelian stage restriction as a filtered colimit of stage sheaves",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+ },
+ "proof": [
+  {
+   "text": "Adjunction hom-equivalence injectivity applied to htheta proves identity and composition of theta, with the F endpoint transports. Choose k,a,b by filteredness. Define R(t) as pushforward along b followed by t.hom of the pullback of G along a followed by t.hom. Whisker theta and transport by F.map_comp and Under.w to define its transitions. Their identity and composition follow from the theta equations. This explicitly constructs the sheaf diagram D and its identity object comparisons, with no choice from a sorried existence theorem. Reuse the existing private coefficient-independent arrow_postcomp helper from ColimitSiteRawStageRestriction through import all; its set-valued stage restriction theorem is not used.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-colimit-site-raw-stage-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+   }
+  },
+  {
+   "text": "Compose beta with the outer B coprojections; whisker these maps along F(b followed by t.hom) and transport their targets by V.w. Postcompose hbeta_map with the outer coprojection and use colimit.w to show these maps form a cocone nu on the underlying D. All equations hold in Arrow(Ab), so endpoint transports cancel. Check the transition and unit formulas directly. Reuse the existing private coefficient-independent arrow_postcomp helper from ColimitSiteRawStageRestriction through import all; its set-valued stage restriction theorem is not used.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-colimit-site-raw-stage-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+   }
+  },
+  {
+   "text": "Apply the topology-free abelian stage Kan comparison to the constructed D and nu with the established coherence formulas. Its colimiting property determines the comparison isomorphism uniquely. Uniqueness of colimits yields q; the prescribed D object isomorphisms are identities. No finite-cover descent is used.",
+   "uses": [
+    "lem-weil-pbc-colimit-stage-abelian-kan-cocone",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-colimit-site-raw-stage-restriction",
+  "lem-weil-pbc-colimit-stage-abelian-kan-cocone",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restricting colimit of stagewise left Kan extensions of abelian presheaves to one stage is a filtered presheaf colimit",
+   "results": "Service unavailable: Internal Server Error; no search verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stagewise Kan comparison cocone of abelian presheaves over a filtered colimit of categories is colimiting",
+   "results": "Eight hits: PresheafOfModules.evaluationJointlyReflectsColimits, isColimitColimitCocone, hasColimit, colimitCocone, isColimitFreeYonedaCoproductsCokernelCofork; IsGrothendieckAbelian.IsPresentable surjectivity/injectivity maps; Presheaf.isColimitTautologicalCocone. None gives the varying-stage comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*[Kk]an|[Kk]an.*colimit in Mathlib; raw_abelian|raw.*section.*sheaf in lean/Sheaf and lean/WeilConjectures",
+   "results": "24 Mathlib hits for pointwise Kan formulas and colimit preservation, including Functor.leftKanExtensionObjIsoColimit and isColimitCoconeOfIsLeftKanExtension. Existing ColimitStageKanCocone and ColimitSiteRawStageRestriction are set-valued, so cannot be used by forgetting arbitrary abelian Kan colimits. Abelian evaluation only treats a specified object of the original stage and requires a supplied section diagram. Blueprint searches for stage restriction and 0A35 returned zero blueprint nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawAbelianSectionSheaf",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-finite-section-comparison-bijective",
+   "place": "Stage presentation in the section comparison proof, specifically raw abelian sheaf node steps 1 and 2, before finite-cover descent.",
+   "via": [
+    "lem-weil-pbc-colimit-site-raw-abelian-section-sheaf",
+    "lem-weil-pbc-colimit-site-finite-section-eventual-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteRawAbelianStageRestriction",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteRawAbelianStageRestriction.lean",
+  "declaration": "CategoryTheory.colimit_site_raw_abelian_stage_restriction",
+  "statement": "theorem colimit_site_raw_abelian_stage_restriction\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (i : J) (G : Sheaf (P i).toGrothendieck AddCommGrpCat.{u})\n    (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n                        (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}\n                          (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶\n                        ((F.map b.right).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u}\n                          (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj\n                          ((sheafPullback (F.map t'.hom).toFunctor AddCommGrpCat.{u}\n                            (P i).toGrothendieck (P t'.right).toGrothendieck).obj G))\n    (hθ : ∀ (t t' : Under i) (b : t ⟶ t'),\n      (∀ X : F.obj i,\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t.hom).toFunctor AddCommGrpCat.{u}\n                              (P i).toGrothendieck (P t.right).toGrothendieck).unit.app\n                                G).hom.app (op X) ≫\n                              (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj X))) =\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor AddCommGrpCat.{u}\n                              (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app\n                                G).hom.app (op X))))\n    (B : Under i ⥤ (V.ptᵒᵖ ⥤ AddCommGrpCat.{u}))\n    (β : ∀ t : Under i,\n      ((sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj ⟶\n        (V.ι.app t.right).toFunctor.op ⋙ B.obj t)\n    (hβ : ∀ t : Under i, (B.obj t).IsLeftKanExtension (β t))\n    (hβmap : ∀ (t t' : Under i) (b : t ⟶ t') (X : F.obj t.right),\n      Arrow.mk ((β t).app (op X) ≫\n        (B.map b).app (op ((V.ι.app t.right).toFunctor.obj X))) =\n      Arrow.mk ((θ t t' b).hom.app (op X) ≫\n        (β t').app (op ((F.map b.right).toFunctor.obj X))))\n    (j : J) :\n    ∃ (k : J) (a : i ⟶ k) (b : j ⟶ k)\n      (D : Under k ⥤ Sheaf (P j).toGrothendieck AddCommGrpCat.{u}),\n      Nonempty (colimit (D ⋙ sheafToPresheaf (P j).toGrothendieck AddCommGrpCat.{u}) ≅\n        (V.ι.app j).toFunctor.op ⋙ colimit B) ∧\n      ∀ t : Under k, Nonempty (D.obj t ≅\n        ((F.map (b ≫ t.hom)).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u}\n          (P j).toGrothendieck (P t.right).toGrothendieck).obj\n          ((sheafPullback (F.map (a ≫ t.hom)).toFunctor AddCommGrpCat.{u}\n            (P i).toGrothendieck (P t.right).toGrothendieck).obj G))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T062531-L-735633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T062531-L-735633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

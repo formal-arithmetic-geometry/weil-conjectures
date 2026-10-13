@@ -1,0 +1,147 @@
+{
+ "kind": "statement",
+ "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone whose object and arrow cocones are colimits of sets [def-weil-pbc-category-colimit, def-weil-pbc-arrows-functor]. Fix $i\\in J$. For $t\\in\\mathrm{Under}(i)$, let $A_t:F(t.\\mathrm{right})^{\\mathrm{op}}\\to\\mathrm{Ab}$ be a presheaf. For $c:t\\to t'$ let $\\theta_c:A_t\\to F(c.\\mathrm{right})^{\\mathrm{op}}\\star A_{t'}$ be a natural transformation, where $\\star$ denotes precomposition. Assume identity and composition hold componentwise as objects of $\\mathrm{Arrow}(\\mathrm{Ab})$, including the endpoint transports from $F$. Let $B:\\mathrm{Under}(i)\\to\\mathrm{PSh}(V.\\mathrm{pt})$ and $\\beta_t:A_t\\to V_t^{\\mathrm{op}}\\star B_t$ exhibit $B_t$ as a left Kan extension along $V_t^{\\mathrm{op}}$, with $V_t=V_{t.\\mathrm{right}}$. A left Kan extension here means that composing with $\\beta_t$ bijects natural transformations $B_t\\to T$ with natural transformations $A_t\\to V_t^{\\mathrm{op}}\\star T$ for every presheaf $T$ on $V.\\mathrm{pt}$. Assume $\\beta_t$ followed by $B(c)$ equals $\\theta_c$ followed by $\\beta_{t'}$ componentwise in $\\mathrm{Arrow}(\\mathrm{Ab})$. Fix $j,k\\in J$ and $a:i\\to k$, $b:j\\to k$. Let $s=\\mathrm{Under.map}(a):\\mathrm{Under}(k)\\to\\mathrm{Under}(i)$ send $(k\\xrightarrow{t.\\mathrm{hom}}l)$ to $(i\\xrightarrow{a\\,;\\,t.\\mathrm{hom}}l)$, and write $g_t=F(b\\,;\\,t.\\mathrm{hom})$, where a semicolon means composition in diagram order. Let $D:\\mathrm{Under}(k)\\to\\mathrm{PSh}(F(j))$ be a diagram with isomorphisms $e_t:D_t\\cong g_t^{\\mathrm{op}}\\star A_{s(t)}$. Assume $D(c)_U\\,;\\,e_{t',U}=e_{t,U}\\,;\\,\\theta_{s(c),g_t^{\\mathrm{op}}(U)}$ in $\\mathrm{Arrow}(\\mathrm{Ab})$ for every $c:t\\to t'$ and $U\\in F(j)^{\\mathrm{op}}$. Let $\\nu$ be a cocone on $D$ with vertex $V_j^{\\mathrm{op}}\\star\\operatorname{colim}B$. Assume $\\nu_{t,U}$ is, in $\\mathrm{Arrow}(\\mathrm{Ab})$, the composite of $e_{t,U}$, the component of $\\beta_{s(t)}$ at $g_t^{\\mathrm{op}}(U)$, and the outer coprojection for $B$ at $V_{t.\\mathrm{right}}^{\\mathrm{op}}(g_t^{\\mathrm{op}}(U))$. Then $\\nu$ is colimiting, formally $\\mathrm{Nonempty}(\\mathrm{IsColimit}(\\nu))$. This assertion constructs no sheaf diagram and uses no topology. All presheaves, diagrams, natural transformations and Kan extensions in this statement take values in abelian groups. No sheaf condition is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-colimit-stage-abelian-kan-cocone",
+ "title": "Compatible abelian stagewise Kan comparison cocone is colimiting",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+ },
+ "proof": [
+  {
+   "text": "Evaluate at an object U of F(j). The pointwise abelian Kan colimit is generated additively by sections x paired with arrows V(j)(U) to V(t.right)(X), modulo linearity and restriction relations. Every element of the outer filtered colimit comes from one B(t). Lift the finitely many arrows in its generators using harrows and align endpoints using hobjects and eventual equality. Refine to receive k and equalize the maps from i. Transport by theta and restrict along the lifted arrows, then apply e inverse. All summands now lie in one D object and can be added. Naturality of beta, hbeta_map and hnu show that this section maps to the original element.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-arrows-functor",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+   }
+  },
+  {
+   "text": "For injectivity, equality of two D classes in the outer filtered abelian colimit holds at one B stage, because forgetting abelian groups preserves filtered colimits. Equality in its pointwise Kan colimit has a witness consisting of a finite additive combination of linearity and restriction relations. Lift all objects, arrows and equations in this witness to one stage using hobjects, harrows and eventual equality; equalize all maps from k. Identity and composition of theta make these refinements coherent. Naturality of beta handles restriction relations; hbeta_map and hD identify outer transitions with D transitions. All maps are additive, so linearity relations hold as well. The two D sections agree after a further transition, hence define the same D colimit class.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-arrows-functor",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+   }
+  },
+  {
+   "text": "The map from colimit D induced by nu is natural and has bijective underlying component maps, by the preceding two steps. The forgetful functor on abelian groups reflects isomorphisms, so this is a presheaf isomorphism. Transport the chosen colimit cocone along it, yielding IsColimit nu. The zero element is represented at any stage, so an empty sum causes no exception.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula; abelian extension via Modules on Sites, Tag 03CO. Sources read at https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; local TeX is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restricting colimit of stagewise left Kan extensions of abelian presheaves to one stage is a filtered presheaf colimit",
+   "results": "Service unavailable: Internal Server Error; no search verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stagewise Kan comparison cocone of abelian presheaves over a filtered colimit of categories is colimiting",
+   "results": "Eight hits: PresheafOfModules.evaluationJointlyReflectsColimits, isColimitColimitCocone, hasColimit, colimitCocone, isColimitFreeYonedaCoproductsCokernelCofork; IsGrothendieckAbelian.IsPresentable surjectivity/injectivity maps; Presheaf.isColimitTautologicalCocone. None gives the varying-stage comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*[Kk]an|[Kk]an.*colimit in Mathlib; raw_abelian|raw.*section.*sheaf in lean/Sheaf and lean/WeilConjectures",
+   "results": "24 Mathlib hits for pointwise Kan formulas and colimit preservation, including Functor.leftKanExtensionObjIsoColimit and isColimitCoconeOfIsLeftKanExtension. Existing ColimitStageKanCocone and ColimitSiteRawStageRestriction are set-valued, so cannot be used by forgetting arbitrary abelian Kan colimits. Abelian evaluation only treats a specified object of the original stage and requires a supplied section diagram. Blueprint searches for stage restriction and 0A35 returned zero blueprint nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawAbelianSectionSheaf",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-finite-section-comparison-bijective",
+   "place": "Stage presentation in the section comparison proof, specifically raw abelian sheaf node steps 1 and 2, before finite-cover descent.",
+   "via": [
+    "lem-weil-pbc-colimit-site-raw-abelian-section-sheaf",
+    "lem-weil-pbc-colimit-site-finite-section-eventual-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitStageAbelianKanCocone",
+  "file": "lean/Sheaf/CategoryTheory/ColimitStageAbelianKanCocone.lean",
+  "declaration": "CategoryTheory.colimit_stage_abelian_kan_cocone",
+  "statement": "theorem colimit_stage_abelian_kan_cocone\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (i : J) (A : ∀ t : Under i, (F.obj t.right)ᵒᵖ ⥤ AddCommGrpCat.{u})\n    (θ : ∀ (t t' : Under i) (c : t ⟶ t'),\n      A t ⟶ (F.map c.right).toFunctor.op ⋙ A t')\n    (hθid : ∀ (t : Under i) (X : (F.obj t.right)ᵒᵖ),\n      Arrow.mk ((θ t t (𝟙 t)).app X) = Arrow.mk (𝟙 ((A t).obj X)))\n    (hθcomp : ∀ (t t' t'' : Under i) (c : t ⟶ t') (d : t' ⟶ t'')\n        (X : (F.obj t.right)ᵒᵖ),\n      Arrow.mk ((θ t t' c).app X ≫\n        (θ t' t'' d).app ((F.map c.right).toFunctor.op.obj X)) =\n      Arrow.mk ((θ t t'' (c ≫ d)).app X))\n    (B : Under i ⥤ (V.ptᵒᵖ ⥤ AddCommGrpCat.{u}))\n    (β : ∀ t : Under i, A t ⟶ (V.ι.app t.right).toFunctor.op ⋙ B.obj t)\n    (hβ : ∀ t : Under i, (B.obj t).IsLeftKanExtension (β t))\n    (hβmap : ∀ (t t' : Under i) (c : t ⟶ t') (X : F.obj t.right),\n      Arrow.mk ((β t).app (op X) ≫\n        (B.map c).app (op ((V.ι.app t.right).toFunctor.obj X))) =\n      Arrow.mk ((θ t t' c).app (op X) ≫\n        (β t').app (op ((F.map c.right).toFunctor.obj X))))\n    (j k : J) (a : i ⟶ k) (b : j ⟶ k)\n    (D : Under k ⥤ ((F.obj j)ᵒᵖ ⥤ AddCommGrpCat.{u}))\n    (e : ∀ t : Under k, D.obj t ≅\n      (F.map (b ≫ t.hom)).toFunctor.op ⋙ A ((Under.map a).obj t))\n    (hD : ∀ (t t' : Under k) (c : t ⟶ t') (U : (F.obj j)ᵒᵖ),\n      Arrow.mk ((D.map c).app U ≫ (e t').hom.app U) =\n      Arrow.mk ((e t).hom.app U ≫\n        (θ ((Under.map a).obj t) ((Under.map a).obj t') ((Under.map a).map c)).app\n          ((F.map (b ≫ t.hom)).toFunctor.op.obj U)))\n    (ν : Cocone D)\n    (hpt : ν.pt = (V.ι.app j).toFunctor.op ⋙ colimit B)\n    (hν : ∀ (t : Under k) (U : (F.obj j)ᵒᵖ),\n      Arrow.mk ((ν.ι.app t).app U) =\n      Arrow.mk ((e t).hom.app U ≫\n        (β ((Under.map a).obj t)).app ((F.map (b ≫ t.hom)).toFunctor.op.obj U) ≫\n        (colimit.ι B ((Under.map a).obj t)).app\n          ((V.ι.app t.right).toFunctor.op.obj\n            ((F.map (b ≫ t.hom)).toFunctor.op.obj U)))) :\n    Nonempty (IsColimit ν)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T062531-L-735633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T062531-L-735633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

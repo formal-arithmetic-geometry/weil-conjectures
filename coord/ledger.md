@@ -11415,3 +11415,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: merged deliver/R1/Sheaf.AlgebraicGeometry.EtaleLimitBinarySuccessorCoconeSegment (stage 3; reviewer PASS; after a return; landing 20261013T062529-L-735042 (interface); batch 20261013T062512; modules 4; new nodes 3)
 - 06:25 L: merged deliver/R3/Sheaf.AlgebraicGeometry.TorsionControlledAffineCandidate (stage 3; reviewer PASS; first push; landing 20261013T062529-L-735202 (interface); batch 20261013T062512; modules 4; new nodes 3)
 - 06:25 L: merged deliver/S3/Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality (stage 3; reviewer PASS; first push; landing 20261013T062530-L-735398 (proof); batch 20261013T062512; modules 1; new nodes 0)
+- 06:25 L: merged deliver/S3/Sheaf.CategoryTheory.ColimitSiteRawAbelianSectionSheaf (stage 3; reviewer PASS; after a return; landing 20261013T062531-L-735633 (interface); batch 20261013T062512; modules 3; new nodes 2)
