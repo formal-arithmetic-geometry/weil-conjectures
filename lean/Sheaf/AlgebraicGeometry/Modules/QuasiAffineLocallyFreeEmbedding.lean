@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.Modules.QuasiAffineFiniteFreeQuotient
+import Sheaf.AlgebraicGeometry.Modules.DualFiniteFreeQuotientEmbedding
 
 /-! # Universal finite free embeddings on Noetherian affine opens
 
@@ -51,6 +53,11 @@ theorem exists_universally_mono_free
     ∃ (r : ℕ) (α : M ⟶ free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))),
       Mono α ∧ (cokernel α).IsFiniteLocallyFree ∧
       ∀ (Y : Scheme.{u}) (g : Y ⟶ V.toScheme), Mono ((Modules.pullback g).map α) := by
-  sorry
+  have := IsFiniteLocallyFree.dual M
+  obtain ⟨r, β, hβ⟩ := exists_epi_free_of_isFiniteLocallyFree V (dual M)
+  have : Epi β := hβ
+  refine ⟨r, SheafOfModules.bidual (R := V.toScheme.sheaf) M ≫ dualMap β ≫
+    (SheafOfModules.homObjFreeUnitIso (R := V.toScheme.sheaf) (ULift.{u} (Fin r))).hom, ?_⟩
+  exact dual_free_quotient_embedding M β
 
 end AlgebraicGeometry.Scheme.Modules
