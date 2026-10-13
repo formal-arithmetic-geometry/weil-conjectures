@@ -12,44 +12,40 @@
  ],
  "proof": [
   {
-   "text": "Fix an open-immersion presentation of W ∪ V and a perfect object E on its limit base change. Restrict E to the inverse images of W and V and apply the two descent hypotheses. Directedness puts their stage objects at a common later index. Derived pullback of local strictly perfect models preserves perfectness. Because X_i is quasi-separated and W,V are quasi-compact, W ∩ V is quasi-compact and its stage morphism is finitely presented. Apply [lem-pc-perfect-descend-morphisms] on this stage overlap to the comparison isomorphism between the restrictions of the two descended perfect objects, and increase the stage to get an isomorphism c whose pullback is the prescribed overlap identification.",
+   "text": "For an arbitrary presentation of W union V and perfect limit object E, apply perfect_descent_compatible_local_data. It supplies a stage j, a cover U,V, perfect local objects A,B, an overlap isomorphism e and compatible maps a,b into restrictions of Rg_*E, whose explicit local adjoints are invertible. Unfold the real predicate PerfectOpenGluingData; it contains no global object.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-perfect-descend-morphisms"
+    "lem-pc-perfect-descent-compatible-local-data",
+    "def-pc-perfect-open-gluing-data"
    ],
    "elementary": false
   },
   {
-   "text": "Take the adjoints a,b of the two comparison isomorphisms by [lem-pc-ringed-spaces-derived-adjoint]. Use [lem-pc-restrict-derived-direct-image-open] to regard both as maps into the restrictions of the same Rf_* E. Naturality of adjunction and the equation specifying the limit pullback of c make these maps compatible on the overlap. Apply both the object and morphism clauses of [lem-sc-derived-open-gluing] on the stage union. This gives an object F restricting to the two perfect objects, and a map d:F → Rf_* E restricting to a,b.",
+   "text": "Apply derived_open_gluing on the stage cover to A,B,e. Its object clause gives F and identifications iU and iV. Its morphism clause applied to Rg_*E and the compatibility equation gives d:F to Rg_*E with restrictions iU.hom followed by a and iV.hom followed by b. At each point use local_perfect_of_openRestriction_iso on whichever member contains the point to obtain the ambient local perfect model; this proves IsPerfect F.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-sc-derived-open-gluing"
+    "lem-sc-derived-open-gluing",
+    "lem-sc-open-perfect-model-transport"
    ],
    "elementary": false
   },
   {
-   "text": "F is perfect because this property is local on the two opens. The adjoint Lf*F → E of d restricts on each open to the given comparison isomorphism. Its cone has zero cohomology locally and hence globally, so it is an isomorphism. The open-subscheme pullback identifications identify f with the exact canonical stage-to-limit map in P(W ∪ V). Transport along the given open-immersion presentation supplies the claimed predicate. Empty W, empty V, equal opens and disjoint opens cause no extra hypotheses: all restrictions and compatibility equations exist on the empty overlap.",
+   "text": "Let phi be the adjoint of d. Naturality of gamma identifies its restriction to U with gamma.hom(F), followed by the pullback of iU.hom, followed by the supplied invertible local adjoint of a. The private generic categorical helper isIso_restricted_adjoint proves this equality by cancelling gamma.hom and expanding Adjunction.homEquiv_symm_apply. The V calculation is identical. Inverse image preserves the covering union, so schemeDerived_isIso_of_openRestriction makes phi globally invertible. Return j,hij,F, its perfectness and asIso phi for the exact canonical map in PerfectDescentOnOpen.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-derived-category",
-    "lem-pc-ringed-spaces-derived-adjoint"
+    "lem-sc-derived-open-restriction-detects-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "lem-pc-perfect-descend-morphisms",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-restrict-derived-direct-image-open",
+  "def-pc-perfect-open-gluing-data",
+  "lem-pc-perfect-descent-compatible-local-data",
   "lem-sc-derived-open-gluing",
-  "def-pc-derived-category"
+  "lem-sc-derived-open-restriction-detects-iso",
+  "lem-sc-open-perfect-model-transport"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RF, proof: two-open gluing induction step (Tags 09RE, 079W, 08FE, 08DG)"
+  "place": "Tag 09RF two-open induction; U1 Lean reduction using Tag 08DG, ambient local perfect-model transport, adjunction naturality and local detection of derived isomorphisms"
  },
  "mathlib_searches": [
   {
@@ -159,9 +155,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T072355-L-1121927",
+  "landing": "20261013T100144-L-2492201",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

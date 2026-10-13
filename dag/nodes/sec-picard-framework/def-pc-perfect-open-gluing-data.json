@@ -1,0 +1,136 @@
+{
+ "id": "def-pc-perfect-open-gluing-data",
+ "kind": "definition",
+ "title": "Compatible local data for gluing a perfect pullback comparison",
+ "statement": "Let g:X\\to Y be a morphism of schemes [def-pc-scheme], with shared derived module categories on all schemes and localized open sites [def-pc-derived-category], and E\\in D(\\mathcal O_X). Define PerfectOpenGluingData(g,E) to assert the existence of opens U,V covering Y, an adjunction Lg^*\\dashv Rg_* [def-pc-derived-pullback, def-pc-derived-direct-image], and natural restriction/pullback comparisons \\gamma_U:Lg^*\\circ R_U^X\\cong R_U^Y\\circ L(g|_U)^* and \\gamma_V of the same form, where R_U^X restricts to g^{-1}U and R_U^Y restricts to U [def-pc-derived-open-restriction-maps]. There are perfect A\\in D(\\mathcal O_U) and B\\in D(\\mathcal O_V) [def-pc-perfect-complex], an overlap isomorphism e:A|_{U\\cap V}\\cong B|_{U\\cap V}, and maps a:A\\to R_U^Y(Rg_*E), b:B\\to R_V^Y(Rg_*E). With the canonical nested-open composition comparisons, a|_{U\\cap V}=e followed by b|_{U\\cap V}. Both maps L(g|_U)^*(a) followed by \\gamma_U^{-1}(Rg_*E) and then R_U^X(\\epsilon_E), and its V analogue, are invertible; \\epsilon is the supplied adjunction's counit. This predicate has only local objects and maps, and asserts no global object on Y.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, two-open induction, local objects and maps a, b, c before invoking Tag 08DG"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perfect.*(gluing|descent)|PerfectDescentOnOpen",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue two perfect derived complexes on an open cover with compatible local maps into a derived direct image",
+   "results": "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk; AlgebraicGeometry.Scheme.IsLocallyDirected.tAux; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.natTrans; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor; AlgebraicGeometry.Scheme.IsLocallyDirected.glueData; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsLocallyDirectedI₀CompFunctorForgetOfIsThin; TopCat.Presheaf.IsGluing",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes on a two open cover descend to a common finite stage with compatible overlap isomorphism",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CochainComplex.cm5b; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.isIso_map_iff",
+   "results": "CategoryTheory.NatIso.isIso_map_iff",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectOpenGluingData|perfect_descent_compatible_local_data|compatible local descent",
+   "results": "No repository or DAG match before the new declarations. Existing OpenPerfectModelTransport, DerivedOpenGluing and DerivedOpenRestrictionDetectsIso are reused for the global half.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate local-data declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible local descent data for perfect complexes on two open subschemes in a filtered system of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescentOpenUnion",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: compatible local data followed by global gluing",
+   "via": [
+    "lem-pc-perfect-complex-descent",
+    "lem-pc-perfect-descent-open-union"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOpenGluingData",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenGluingData.lean",
+  "declaration": "AlgebraicGeometry.PerfectOpenGluingData",
+  "statement": "def PerfectOpenGluingData {X Y : Scheme.{u}} (g : X ⟶ Y)\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T100144-L-2492201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T100144-L-2492201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

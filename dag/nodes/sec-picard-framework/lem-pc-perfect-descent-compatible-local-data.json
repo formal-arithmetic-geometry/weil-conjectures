@@ -1,0 +1,177 @@
+{
+ "id": "lem-pc-perfect-descent-compatible-local-data",
+ "kind": "statement",
+ "title": "Compatible local descent data at a common finite stage",
+ "statement": "Let I be a directed preorder, R:I\\to\\mathrm{CommRing} a system of Noetherian rings, c a colimit cocone with proof hc, i\\in I, and s:X_i\\to\\operatorname{Spec}R_i a locally finitely presented, quasi-compact and quasi-separated morphism. Fix shared derived module categories on schemes and their localized open sites [def-pc-derived-category]. Let W,V be opens of X_i with W quasi-compact and V affine, and assume PerfectDescentOnOpen(W) and PerfectDescentOnOpen(V) [def-pc-perfect-descent-on-open]. For any open immersion f:Z\\to X_i with image W\\cup V, put t=s\\circ f. For every perfect E on Z\\times_{R_i}c.pt [def-pc-perfect-complex], there exist j\\ge i and PerfectOpenGluingData(g_j,E) [def-pc-perfect-open-gluing-data], where g_j is exactly the canonical stage-to-limit base-change map Z\\times_{R_i}c.pt\\to Z\\times_{R_i}R_j induced by c_j. The conclusion supplies local stage objects, overlap and adjoint data, without any object on the entire stage scheme.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, two-open induction, local objects and maps a, b, c before invoking Tag 08DG"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-descent-on-open",
+  "def-pc-perfect-open-gluing-data",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Restrict E to the inverse images of W and V. The inverse-image opens give presentations into Xi of precisely W and V. Use the two descent hypotheses and preservation of perfectness under derived open pullback. Move both descended objects to a common later index using directedness, the coherent composition comparisons, and derivedPullback_preserve_perfect. Base change identifies these objects with perfect A and B on a two-open cover of the stage scheme.",
+   "uses": [
+    "def-pc-perfect-descent-on-open",
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stage scheme is finitely presented over its ring: its open in Xi is quasi-compact by compactness of W and affineness of V. Quasi-separatedness implies the intersection of the stage cover opens is quasi-compact; its open immersion is locally of finite presentation, so its structure map is finitely presented. Restrict A and B to this overlap. Apply perfect_descend_morphisms on a tail of the system to their limit comparison and choose an isomorphism lift; its equality clause stabilizes the two inverse equations. Identify the pullback of this overlap isomorphism e with the original comparison using the coherent composition maps.",
+   "uses": [
+    "lem-pc-perfect-descend-morphisms",
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the global derived adjunction and the canonical pullback/open-restriction comparisons. Derived direct image commutes with restriction to an open. Under these comparisons the local adjoints of the limit isomorphisms give a and b into the restrictions of Rg_*E. Adjunction naturality and the limit image of e identify the two overlap maps. The restricted counit formula recovers the original local comparison isomorphisms, so the two explicit IsIso clauses hold. These objects, maps and equations are exactly PerfectOpenGluingData, with no use of the global gluing theorem.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "def-pc-perfect-open-gluing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-descent-on-open",
+  "def-pc-perfect-open-gluing-data",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-perfect-descend-morphisms",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, two-open induction, local objects and maps a, b, c before invoking Tag 08DG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perfect.*(gluing|descent)|PerfectDescentOnOpen",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue two perfect derived complexes on an open cover with compatible local maps into a derived direct image",
+   "results": "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk; AlgebraicGeometry.Scheme.IsLocallyDirected.tAux; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.natTrans; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor; AlgebraicGeometry.Scheme.IsLocallyDirected.glueData; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsLocallyDirectedI₀CompFunctorForgetOfIsThin; TopCat.Presheaf.IsGluing",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes on a two open cover descend to a common finite stage with compatible overlap isomorphism",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CochainComplex.cm5b; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.isIso_map_iff",
+   "results": "CategoryTheory.NatIso.isIso_map_iff",
+   "date": "2026-10-13",
+   "verdict": "No exact common-stage compatible descent datum. Generic adjunction and isomorphism tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectOpenGluingData|perfect_descent_compatible_local_data|compatible local descent",
+   "results": "No repository or DAG match before the new declarations. Existing OpenPerfectModelTransport, DerivedOpenGluing and DerivedOpenRestrictionDetectsIso are reused for the global half.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate local-data declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible local descent data for perfect complexes on two open subschemes in a filtered system of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescentOpenUnion",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: compatible local data followed by global gluing",
+   "via": [
+    "lem-pc-perfect-complex-descent",
+    "lem-pc-perfect-descent-open-union"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectDescentCompatibleLocalData",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDescentCompatibleLocalData.lean",
+  "declaration": "AlgebraicGeometry.perfect_descent_compatible_local_data",
+  "statement": "theorem perfect_descent_compatible_local_data\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]\n    (c : Cocone R) (hc : IsColimit c) (i : I) (Xi : Scheme.{u}) (s : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (W V : Xi.Opens) (hW : IsCompact (W : Set Xi)) (hV : IsAffineOpen V)\n    (dW : PerfectDescentOnOpen R c i Xi s W)\n    (dV : PerfectDescentOnOpen R c i Xi s V)\n    (Z : Scheme.{u}) (f : Z ⟶ Xi) [IsOpenImmersion f] (hf : f.opensRange = W ⊔ V)\n    (E : schemeDerivedCategory (pullback (f ≫ s) (Spec.map (c.ι.app i))))\n    (hE : (pullback (f ≫ s) (Spec.map (c.ι.app i))).IsPerfect E) :\n    ∃ (j : I) (hij : i ≤ j),\n      let g := baseChangeMap (f ≫ s)\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app j))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))\n      PerfectOpenGluingData g E",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T100144-L-2492201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T100144-L-2492201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
