@@ -1,0 +1,129 @@
+{
+ "id": "new-affine-chart-ring-colimit-geometric",
+ "kind": "statement",
+ "title": "Ring colimit with geometric affine chart comparisons",
+ "statement": "Under def-pc-scheme and def-pc-base-change, for a directed ring diagram with affine limiting spectrum cone, a fixed stage i and an affine member of an open cover V of Xi over Spec(R_i), there is a ring diagram F on the upper tail above i and a colimit isomorphism q to the fixed limit chart ring. Each F_j is isomorphic to the stage chart ring. There is a scheme isomorphism h from the iterated limit chart to the fixed limit chart which commutes with the maps to the ambient limit base change, and whose induced ring map identifies the colimit cocone map with the chart pullback map.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Stacks Tags 01ZR and 01I6, affine reduction and pullback pasting"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Apply exists_affine_chart_upper_tail_limit to obtain the affine scheme diagram D, limiting cone d, vertex comparison z and stage comparisons e,h with their projection equations. Define F = D.rightOp followed by Scheme.Γ. Mathlib preservesColimit_Γ and isColimitCoconeRightOpOfCone make the global-sections cocone a colimit. Its unique comparison with colimit F gives q₀; compose q₀ with the inverse of Γ(z.op) to obtain q. At each stage take the inverse of Γ(e.op) as the stage ring comparison and keep h. The ambient-map equation is already supplied by the helper. The colimit comparison equation identifies colimit.ι followed by q₀ with the sections map of d.π. Apply Scheme.Hom.appTop to the geometric projection equation and use comp_appTop; cancel the two inverse sections maps of e to obtain the required ring-map equation.",
+   "uses": [
+    "new-affine-chart-upper-tail-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-affine-chart-upper-tail-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "U4: proved affine global-sections colimit conversion and projection-map calculation; geometric construction supplied by new-affine-chart-upper-tail-limit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of pullback of arbitrary sheaf of modules along an isomorphism are scalar extension along induced ring isomorphism",
+   "results": "SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackIso, SheafOfModules.pushforwardCongr, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-13",
+   "verdict": "supporting declarations; no exact chart theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom.appTop",
+   "results": "loogle: unknown identifier 'Scheme.Hom.appTop'",
+   "date": "2026-10-13",
+   "verdict": "supporting declarations; no exact chart theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*iso|iso.*sections",
+   "results": "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Topology/SeparatedMap.lean, Mathlib/Analysis/InnerProductSpace/TwoDim.lean",
+   "date": "2026-10-13",
+   "verdict": "supporting declarations; no exact chart theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*iso|iso.*sections",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-13",
+   "verdict": "supporting declarations; no exact chart theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed inverse limit of affine schemes remains a limit after base change and restriction to upper tail",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.isAffineHom_π_app, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.nonempty_of_isLimit, AlgebraicGeometry.isLimitOpensCone, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit",
+   "date": "2026-10-13",
+   "verdict": "supporting declarations; no exact chart theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom.appTop",
+   "results": "loogle: unknown identifier 'Scheme.Hom.appTop'",
+   "date": "2026-10-13",
+   "verdict": "supporting declarations; no exact chart theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine chart of a base change of a directed inverse limit is the inverse limit of its stage affine charts and its global sections ring is the colimit of their rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartSectionsColimitComparison",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-chart-sections-colimit-comparison",
+   "place": "Ring colimit and geometric chart comparison"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartRingColimitGeometric",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartRingColimitGeometric.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_chart_ring_colimit_geometric",
+  "statement": "theorem exists_affine_chart_ring_colimit_geometric\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (V : Xi.OpenCover.{u}) (a : V.I₀) (ha : IsAffine (V.X a)) :\n    let W := V.pullback₁ (pullback.fst f (c.π.app (op i)))\n    let Z := W.X a\n    ∃ F : {j : I // i ≤ j} ⥤ CommRingCat.{u},\n      ∃ q : colimit F ≅ Γ(Z, ⊤),\n      ∀ j : {j : I // i ≤ j},\n        let U : (pullback f (Spec.map (R.map (homOfLE j.property)))).OpenCover.{u} :=\n          V.pullback₁ (pullback.fst f (Spec.map (R.map (homOfLE j.property))))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE j.property))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j.val)) (c.w (homOfLE j.property).op))\n        let Y := (U.pullback₁ p).X a\n        ∃ (e : F.obj j ≅ Γ(U.X a, ⊤)) (h : Y ≅ Z),\n          h.hom ≫ W.f a = (U.pullback₁ p).f a ∧\n          colimit.ι F j ≫ q.hom ≫ (Scheme.Γ.mapIso h.op).hom =\n            e.hom ≫ (U.pullbackHom p a).appTop",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T142906-L-501387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T142906-L-501387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

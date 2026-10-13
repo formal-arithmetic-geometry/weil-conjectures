@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 
+import Sheaf.AlgebraicGeometry.AffineChartRingColimitGeometric
+import Sheaf.AlgebraicGeometry.ModuleSectionsPullbackIsoTransport
+
 /-! # Colimit and sections comparisons for a fixed affine chart
 
 Source: Stacks Project, Limits Tag 01ZR, affine case; Modules on Schemes Tag 01I6.
@@ -81,6 +84,15 @@ theorem exists_affine_chart_sections_colimit_comparison
         ∃ (e : F.obj j ≅ Γ(U.X a, ⊤)) (s : Γ(Z, ⊤) ≅ Γ(Y, ⊤)),
           colimit.ι F j ≫ q.hom ≫ s.hom = e.hom ≫ (U.pullbackHom p a).appTop ∧
           Nonempty ((ModuleCat.extendScalars s.hom.hom).obj N ≅
-            ModuleCat.of Γ(Y, ⊤) Γ(P, ⊤)) := by sorry
+            ModuleCat.of Γ(Y, ⊤) Γ(P, ⊤)) := by
+  classical
+  dsimp
+  obtain ⟨F, q, hcompare⟩ := exists_affine_chart_ring_colimit_geometric R c hc i f V a ha
+  refine ⟨F, q, ?_⟩
+  intro j
+  obtain ⟨e, h, hg, hmap⟩ := hcompare j
+  refine ⟨e, Scheme.Γ.mapIso h.op, hmap, ?_⟩
+  exact nonempty_module_sections_pullback_iso_transport h _ _ hg M
+
 
 end AlgebraicGeometry
