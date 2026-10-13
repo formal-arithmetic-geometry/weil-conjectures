@@ -15,47 +15,35 @@
  },
  "proof": [
   {
-   "text": "At each positive level the pushed quotient projection kills J^(n+1)H, using the pullback-ideal quotient identity. Factor it uniquely through the cokernel projection pi^J_n. Naturality and cancellation of these epimorphisms give the inverse-system map kappa; the unit of the given adjunction and beta similarly give gamma.",
+   "text": "Use coherence of H=f_*F on the Noetherian base to obtain quasi-coherence. The ideal-power pullback-image identity identifies the image of f*(J^(n+1)H -> H) with (J O_X)^(n+1)f*H. The latter inclusion followed by the adjunction counit f*H -> F and the quotient projection is zero by formalModuleQuotient_map_zero. Factoring through the image and the adjunction hom-set equivalence therefore shows J^(n+1)H -> H -> f_*(F/(J O_X)^(n+1)F) is zero. Define kappa_n by cokernel.desc. The cokernel factorization equation gives its required quotient identity, and cancellation of quotient projections proves naturality with respect to all transitions.",
    "uses": [
-    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-module-pullback-ideal-power-product-image",
+    "def-weil-pbc-coherent-formal-module",
     "def-pc-module-pullback",
-    "def-weil-pbc-coherent-formal-module"
+    "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict to an affine open. The degree-zero formal-functions comparison identifies lim kappa with an isomorphism. Compose its inverse with lim gamma. The affine equivalence carries this completed-module map to alpha; surjective limit projections and the affine tilde/sections equivalence give kappa_n alpha_n = gamma_n, and uniqueness.",
+   "text": "Define gamma_n as the adjunction unit at G_n followed by f_*(beta_n). Naturality of the unit and beta gives an inverse-system morphism gamma. Apply the compatible-map lifting lemma to the explicitly constructed kappa and gamma. Evaluating the equality alpha.hom >> kappa = gamma at op n gives precisely the second asserted equation; combine it with the cokernel equations for kappa.",
    "uses": [
-    "lem-weil-pbc-theorem-formal-functions",
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "All equations commute with open restriction. Uniqueness on smaller affine opens identifies the restrictions. Glue the component sheaf maps over the affine basis, checking transition compatibility and the two equations on the cover.",
-   "uses": [
-    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-formal-completion-pushforward-lift",
     "def-pc-module-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-pullback-ideal-quotient",
-  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-ideal-power-product-image",
   "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-theorem-formal-functions",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-formal-systems-pullback"
+  "def-pc-module-pullback",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-formal-completion-pushforward-lift"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 088B, first half of the proof: construction and uniqueness of alpha, parent proof steps 3--5"
+  "place": "Lemma 088B (lemma-inverse-systems-push-pull), first half of proof, construction of alpha from lim gamma; checked against https://stacks.math.columbia.edu/tag/088B"
  },
  "mathlib_searches": [
   {
@@ -135,12 +123,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261012T223412-L-1639275",
+  "landing": "20261013T000045-L-2231647",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
