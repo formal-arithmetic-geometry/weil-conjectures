@@ -9,6 +9,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 public import Mathlib.Topology.LocallyConstant.Basic
+import Sheaf.FieldTheory.GaloisMatrixHilbert90Normalized
 
 /-!
 # Matrix Hilbert 90 over a separable closure
@@ -49,6 +50,12 @@ theorem exists_galois_matrix_invariant_basis (K : Type u) [Field K] (n : ℕ)
     (hb : IsLocallyConstant b)
     (hcoc : ∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) = b (g * h)) :
     ∃ t : Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K),
-      ∀ g, b g * Matrix.GeneralLinearGroup.map g.toRingHom t = t := by sorry
+      ∀ g, b g * Matrix.GeneralLinearGroup.map g.toRingHom t = t := by
+  by_cases hn : n = 0
+  · subst n
+    refine ⟨1, ?_⟩
+    intro g
+    apply Subsingleton.elim
+  · exact exists_galois_matrix_invariant_basis_normalized K n b hb hn hcoc
 
 end Field

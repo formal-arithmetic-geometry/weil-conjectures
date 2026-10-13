@@ -1,0 +1,101 @@
+{
+ "id": "lem-sc-galois-matrix-hilbert90-normalized",
+ "kind": "statement",
+ "title": "Matrix Hilbert 90 in positive dimension",
+ "statement": "Let K be a field, n a nonzero natural number, and b a locally constant general-linear cocycle of Gal(SeparableClosure K/K) with values in GL_n(SeparableClosure K). Then there exists t in GL_n(SeparableClosure K) such that b(g) g(t) = t for every g.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, injectivity argument, invariant-basis descent for n > 0"
+ },
+ "proof": [
+  {
+   "text": "Factor the locally constant cocycle through a finite Galois quotient, form the finite Galois averaging operator on the n-dimensional vector space, prove its invariant vectors span using linear independence of distinct field automorphisms, and extract an invariant basis as the columns of t.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, injectivity argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite Galois invariant basis for a matrix cocycle",
+   "results": "No exact theorem found; the finite descent argument is project-specific.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invariant basis matrix Galois cocycle",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*invariant.*basis|matrix.*Hilbert90",
+   "results": "Only this target and scalar Hilbert 90 were found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.GaloisMatrixHilbert90",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-galois-matrix-hilbert90"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.GaloisMatrixHilbert90Normalized",
+  "file": "lean/Sheaf/FieldTheory/GaloisMatrixHilbert90Normalized.lean",
+  "declaration": "Field.exists_galois_matrix_invariant_basis_normalized",
+  "statement": "theorem exists_galois_matrix_invariant_basis_normalized (K : Type u) [Field K] (n : ℕ)\n    (b : Gal(SeparableClosure K/K) →\n      Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))\n    (hb : IsLocallyConstant b)\n    (hn : n ≠ 0)\n    (hcoc : ∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) = b (g * h)) :\n    ∃ t : Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K),\n      ∀ g, b g * Matrix.GeneralLinearGroup.map g.toRingHom t = t",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T000908-L-2281671",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T000908-L-2281671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
