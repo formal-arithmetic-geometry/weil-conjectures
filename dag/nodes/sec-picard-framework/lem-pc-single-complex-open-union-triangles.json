@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-single-complex-open-union-triangles",
+ "kind": "statement",
+ "title": "Canonical relative comparison triangles on an arbitrary compact source-open union",
+ "statement": "Let f:X→S, f′:X′→S′, g:S′→S and g′:X′→X be a cartesian square of schemes [def-pc-scheme], with S,S′ affine and f quasi-compact and quasi-separated. Let K and K′ have quasi-coherent derived cohomology [def-pc-derived-category], and let φ:L(g′)*K→K′ [def-pc-derived-pullback]. Let U,V⊆X be compact opens whose intersection is compact. Write a_Z for the arrow b_Z given by the canonical open comparison [def-pc-single-complex-open-comparison]. There exist distinguished triangles in D(O_S′) with vertices (domain a_(U∪V), domain a_U direct-sum domain a_V, domain a_(U∩V)) and respectively (codomain a_(U∪V), codomain a_U direct-sum codomain a_V, codomain a_(U∩V)), and a morphism between them whose three components are exactly a_(U∪V), the biproduct of a_U and a_V, and a_(U∩V). No comparison is assumed or asserted invertible, and U∪V need not be all of X.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 0DJ9, induction diagram applied inside U union V; Tags 08HZ and 08HY. Verified from the online Stacks pages on 2026-10-14."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-open-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put W=U union V. IsCompact.union makes W compact. Quasi-separatedness of X follows from quasi-separatedness of f over affine S. Therefore the compact open inclusion W→X and the composite W→S are qcqs. Pullback pasting gives the restricted cartesian square on W and W′=X′ times_X W. The inverse images of U,V in W cover W, and the three opens are compact. The affine morphism g and its base change make their inverse images in W′ compact. Restrict K,K′ and the coefficient morphism by the displayed canonical pullback composition comparisons; preservation of quasi-coherent cohomology supplies their QCoh hypotheses.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "def-pc-single-complex-open-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct functorial K-injective resolutions with injective components for the coefficients on W and W′. On each source the direct-image restriction sequence for the two-open cover is short exact: the first kernel identity is sheaf gluing, and surjectivity onto the overlap follows from flasqueness of injective module sheaves. Open restriction preserves K-injectivity, so the four terms compute the required derived images. The short-exact-complex triangle gives distinguishedness. Apply Lg* to the first relative triangle. Derived direct-image composition and the biproduct comparison identify its vertices with the required open images. This is the construction of Tag 08HZ, not an assumption of any base-change isomorphism.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-ringed-space-injective-restriction-surjective",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the restricted coefficient arrow using the derived adjunction for g′ restricted to W′. Functoriality of the K-injective restriction sequence gives its morphism of short exact sequences, hence its morphism of distinguished triangles including the connecting square by short-exact-triangle naturality. Transpose back. The canonical mate formula for the base-change map identifies its components: expand the counit for a composite adjunction, cancel the unit/counit triangle identities, and use associativity and naturality of the pullback composition comparisons to identify the coefficient restrictions. The middle component is the biproduct of the two open components by its projections. Construct the nested-open image isomorphisms and pullback-pasting isomorphisms explicitly. The coefficient-coherence theorem identifies the twice-restricted coefficient arrow. Apply source-coordinate naturality to obtain the domain and codomain isomorphisms and their conjugacy equations for the actual comparison arrows. Transport the vertices, all three arrows and the triangle morphism along these isomorphisms. This gives exactly the ambient comparisons on W,U,V,U intersection V, not merely unrelated arrows on isomorphic objects. None of these operations uses local invertibility. Empty, contained and repeated opens give zero or split sequences by the same construction.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map",
+    "lem-pc-derived-base-change-source-iso",
+    "lem-pc-single-complex-nested-coefficient-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-single-complex-open-comparison",
+  "lem-pc-derived-base-change-source-iso",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-single-complex-nested-coefficient-coherence",
+  "lem-sc-ringed-space-injective-restriction-surjective",
+  "lem-weil-pbc-complex-ses-triangle",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0DJ9, 08HZ, 08HY",
+  "place": "The source induction diagram restricted to U union V, with explicit coefficient transport and connecting-square naturality. D2 separated diagram construction from the two-out-of-three inference to avoid the existing relative-MV import cycle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived base change comparisons on a union of two open subschemes form a morphism of distinguished Mayer Vietoris triangles",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change arrows on a union and two opens and their intersection are a morphism of distinguished triangles",
+   "results": "DerivedCategory.triangleOfSESδ, triangleOfSESIso, triangleOfSES_mor₁ and triangleOfSES_mor₂; generic MayerVietorisSquare sheaf-gluing lemmas. These do not identify the scheme-derived base-change components.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris.*[Tt]riangle|baseChange.*[Tt]riangle, and rg Mayer.?Vietoris|baseChange.*[Tt]riangle in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Triangulated",
+   "results": "No matching scheme-relative comparison triangle. Project RelativeMVCanonicalTriangles and SingleComplexOpenUnion exist but their imports reach the parent item, so they cannot be imported here.",
+   "date": "2026-10-14",
+   "verdict": "no Mathlib match; project generalization unusable because of an import cycle"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenAffineUnion",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-single-complex-open-affine-union",
+   "place": "Construction of the morphism of relative Mayer--Vietoris triangles on the union, before the final two-out-of-three step.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnionTriangles",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnionTriangles.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenComparison_union_triangles",
+  "statement": "theorem singleComplexOpenComparison_union_triangles\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S']\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens)\n    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))\n    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) :\n    let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦\n      Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)\n    ∃ (d₁ : (a (U ⊔ V)).left ⟶ (a U).left ⊞ (a V).left)\n      (d₂ : (a U).left ⊞ (a V).left ⟶ (a (U ⊓ V)).left)\n      (d₃ : (a (U ⊓ V)).left ⟶ (a (U ⊔ V)).left⟦(1 : ℤ)⟧)\n      (d₁' : (a (U ⊔ V)).right ⟶ (a U).right ⊞ (a V).right)\n      (d₂' : (a U).right ⊞ (a V).right ⟶ (a (U ⊓ V)).right)\n      (d₃' : (a (U ⊓ V)).right ⟶ (a (U ⊔ V)).right⟦(1 : ℤ)⟧),\n      Triangle.mk d₁ d₂ d₃ ∈ distTriang (schemeDerivedCategory S') ∧\n      Triangle.mk d₁' d₂' d₃' ∈ distTriang (schemeDerivedCategory S') ∧\n      ∃ t : Triangle.mk d₁ d₂ d₃ ⟶ Triangle.mk d₁' d₂' d₃',\n        t.hom₁ = (a (U ⊔ V)).hom ∧\n        t.hom₂ = biprod.map (a U).hom (a V).hom ∧\n        t.hom₃ = (a (U ⊓ V)).hom",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T215559-L-895761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T215559-L-895761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

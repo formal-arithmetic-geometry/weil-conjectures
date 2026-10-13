@@ -14,39 +14,28 @@
  ],
  "proof": [
   {
-   "text": "Since V is affine it is compact. Since f is quasi-separated over affine S, X is quasi-separated; QuasiSeparatedSpace.inter_isCompact makes U∩V compact. Set W=U∪V; W is compact by IsCompact.union. The open immersion W→X is quasi-compact and W→S is qcqs. Form the restricted square by pullback pasting. Inside W put A=(W→X)⁻¹U and B=(W→X)⁻¹V. They cover W; compactness of A, B and A∩B follows from quasi-compactness of W→X and the three compactness statements. These are direct Mathlib geometric instances and inverse-image lemmas.",
+   "text": "Derive QuasiSeparatedSpace X from f over the affine base. The affine open V is compact by hVaff.isCompact. Apply QuasiSeparatedSpace.inter_isCompact to U and V, obtaining compactness of U intersection V.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Restrict K along W→X and K′ along the projection X′×_X W→X′; the derived pullback preservation theorem supplies quasi-coherent cohomology. Construct the restricted coefficient arrow explicitly by the same pullback-composition expression in singleComplexOpenComparison.",
+   "text": "Apply the union comparison triangle construction to K,K′,φ and the three compactness proofs. It supplies two distinguished triangles and their morphism with components exactly b_(U union V), biprod.map b_U b_V and b_(U intersection V). No local invertibility is passed to this construction.",
    "uses": [
-    "lem-pc-derived-pullback-tensor-qcoh",
-    "def-pc-single-complex-open-comparison"
+    "lem-pc-single-complex-open-union-triangles"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the nested-comparison invariance theorem to U⊆W, V⊆W and U∩V⊆W. Its forward direction transports the three given ambient isomorphisms to the three hypotheses of relative Mayer–Vietoris on A, B and A∩B.",
+   "text": "Register the two local IsIso hypotheses and identify biprod.map b_U b_V with the hom of biprod.mapIso (asIso b_U) (asIso b_V). Infer its invertibility. Transport along the component equalities to get IsIso of the second and third components. Apply Mathlib Pretriangulated.isIso₁_of_isIso₂₃ and rewrite the first-component equality to get the required comparison on the union.",
    "uses": [
-    "lem-pc-single-complex-open-nested-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply relativeMayerVietoris to the restricted square and cover A∪B=W. Its conclusion is definitionally the ambient singleComplexOpenComparison on W: the definition uses exactly this square, these restricted complexes and this coefficient arrow. Proof irrelevance identifies the commutativity witnesses. Thus the required isomorphism follows.",
-   "uses": [
-    "lem-pc-rf-single-complex-relative-mayer-vietoris",
-    "def-pc-single-complex-open-comparison"
+    "lem-sf-triangle-morphism-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-single-complex-open-comparison",
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-rf-single-complex-relative-mayer-vietoris",
-  "lem-pc-single-complex-open-nested-comparison"
+  "lem-pc-single-complex-open-union-triangles",
+  "lem-sf-triangle-morphism-iso"
  ],
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-coherence",
@@ -61,9 +50,9 @@
   "group": "R1"
  },
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tag 0DJ9, induction step inside U union V; isolated affine-adjoining specialization because the existing union module imports the parent item transitively."
+  "by": "agent",
+  "document": "Stacks Project, Tag 0DJ9",
+  "place": "Induction step: separate the source-open union diagram construction from the actual biproduct and two-out-of-three proof. RelativeMayerVietoris and SingleComplexOpenUnion cannot be imported because their existing imports reach this item. D2 2026-10-14."
  },
  "blueprint": {
   "is": null,
@@ -126,9 +115,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T211111-L-394340",
+  "landing": "20261013T215559-L-895761",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
