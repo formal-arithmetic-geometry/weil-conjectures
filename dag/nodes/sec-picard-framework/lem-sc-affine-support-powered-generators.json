@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-affine-support-powered-generators",
+ "kind": "statement",
+ "title": "Powered generators annihilating a supported perfect complex",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme], $T\\subset X$ closed with quasi-compact complement, and $U\\subset X$ quasi-compact open. Let $F\\in D(\\mathcal O_U)$ [def-pc-derived-category] be perfect [def-pc-perfect-complex] with all cohomology stalks zero at points of $U\\setminus T$. Then there are $s\\in\\mathbf N$, global section families $g_i$ on $X$ and $g_i^U$ on $U$, for $i\\in\\{0,\\ldots,s-1\\}$ [def-sc-derived-global-scalar], such that $X\\setminus T=\\bigcup_i D(g_i)$, $g_i^U|_{\\top}=\\iota^*(g_i|_{\\top})$, and $g_i^U\\operatorname{id}_F=0$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EK, lemma-lift-perfect-complex-plus-shift-support, first paragraph; Tag 08EJ, lemma-perfect-into-support-on-T"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-derived-global-scalar"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine principal-open basis and compactness to obtain a finite cover of the complement by principal opens contained in it. Mathlib: IsAffineOpen.exists_basicOpen_le and IsCompact.elim_finite_subcover. Index the finite cover by Fin t.card using Finset.equivFin. Restrict each top section to every open; presheaf functoriality proves that these families are compatible.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The open U is quasi-compact and quasi-separated. Perfectness gives quasi-coherent cohomology. For each generator, the support of F is contained in its principal zero set on U. Apply the power-annihilation theorem on U to the identity of F.",
+   "uses": [
+    "lem-sc-perfect-qcoherent",
+    "lem-sc-perfect-into-support-on-T"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Increase each annihilating exponent n to n+1: multiplication by the generator after multiplication by its n-th power is still zero. The positive power has the same principal open, by Scheme.basicOpen_pow. Restriction commutes with powers. This yields all three clauses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-sc-perfect-qcoherent",
+  "lem-sc-perfect-into-support-on-T"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EK, lemma-lift-perfect-complex-plus-shift-support, first paragraph; Tag 08EJ, lemma-perfect-into-support-on-T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A closed subset of an affine scheme with quasi compact complement is cut out by finitely many global functions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many global functions on an affine scheme cut out a closed set with quasi compact complement and powers of their restrictions annihilate a supported perfect complex",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal",
+   "date": "2026-10-13",
+   "verdict": "no exact match; useful component lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.basicOpen",
+   "results": "12 hits: AlgebraicGeometry.Scheme.basicOpen, AlgebraicGeometry.Scheme.basicOpen_le, AlgebraicGeometry.Scheme.basicOpen_restrict, AlgebraicGeometry.Scheme.zeroLocus_singleton, AlgebraicGeometry.Scheme.mem_zeroLocus_iff, AlgebraicGeometry.Scheme.basicOpen_of_isUnit, AlgebraicGeometry.Scheme.basicOpen_one, AlgebraicGeometry.Scheme.basicOpen_zero",
+   "date": "2026-10-13",
+   "verdict": "no exact match; useful component lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "basicOpen_pow|elim_finite_subcover|sectionsSubring",
+   "results": "25 hits: Mathlib/Analysis/Oscillation.lean, Mathlib/Topology/Algebra/Valued/LocallyCompact.lean, Mathlib/Topology/Sets/VietorisTopology.lean, Mathlib/Topology/Sets/VietorisTopology.lean, Mathlib/Topology/Sets/VietorisTopology.lean, Mathlib/Topology/Sets/VietorisTopology.lean, Mathlib/Topology/Sets/VietorisTopology.lean, Mathlib/Topology/Sets/Opens.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; useful component lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectSupportExtension",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: on an affine open, construct a perfect complex supported on T whose restriction contains the required perfect summands; Tag 08EK, lemma-lift-perfect-complex-plus-shift-support, first paragraph; Tag 08EJ, lemma-perfect-into-support-on-T",
+   "via": [
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSupportPoweredGenerators",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSupportPoweredGenerators.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_support_powered_generators",
+  "statement": "theorem exists_affine_support_powered_generators (X : Scheme.{u}) [IsAffine X] (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ) (U : X.Opens) (hU : IsCompact (U : Set X)) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (F : schemeDerivedCategory U.toScheme) (hF : IsPerfect U.toScheme F) (hFT : ∀ (n : ℤ) (x : U.toScheme), x.val ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf x))) : ∃ (s : ℕ) (g : Fin s → RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u})) (g' : Fin s → RingCat.sectionsSubring (U.toScheme.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u})), (∀ x : X, x ∉ T ↔ ∃ i : Fin s, x ∈ X.basicOpen ((g i).val (op ⊤))) ∧ (∀ i : Fin s, (g' i).val (op ⊤) = U.ι.appTop.hom ((g i).val (op ⊤))) ∧ (∀ i : Fin s, schemeDerivedScalar U.toScheme (g' i) (𝟙 F) = 0)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T033000-L-3675691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T033000-L-3675691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

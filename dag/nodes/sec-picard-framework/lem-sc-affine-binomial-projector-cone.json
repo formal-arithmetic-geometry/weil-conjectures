@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-affine-binomial-projector-cone",
+ "kind": "statement",
+ "title": "Projector cone cancels the unwanted binomial summands",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subset X$ open, and $R:D(\\mathcal O_X)\\to D(\\mathcal O_U)$ the canonical restriction [def-pc-derived-category]. Let $s\\in\\mathbf N$, $F\\in D(\\mathcal O_U)$ and $A\\in D(\\mathcal O_X)$ with $R(A)\\cong\\bigoplus_{j=0}^{s+1}F[j]^{\\oplus\\binom{s+1}{j}}$. Then there exists $\\alpha:R(A)\\to R(A)$ such that, for every $A^{\\prime}$, $\\gamma:A^{\\prime}\\to A$, isomorphism $b_U:R(A^{\\prime})\\cong R(A)$ with $\\alpha=R(\\gamma)\\circ b_U^{-1}$, and distinguished triangle $A^{\\prime}\\xrightarrow{\\gamma}A\\to E\\to A^{\\prime}[1]$ [def-weil-triangulated-category], one has $R(E)\\cong F\\oplus F[1]$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EK, lemma-lift-perfect-complex-plus-shift-support, final paragraph; Derived Categories, Tag 05QT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "For a finite family H indexed by J with a chosen j0, take a distinguished cone triangle of zero on H(j0) and of identity on H(j) for every j unequal to j0. Mathlib distinguished_cocone_triangle constructs the triangles and Triangle.isZero3_of_isIso1 shows that every identity cone is zero. Their product is distinguished by Mathlib productTriangle_distinguished.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The projection from the product of cones to its j0 component is an isomorphism: its inverse has the identity in that component and zero elsewhere; product extensionality and zero-ness of the other components prove both inverse laws. Rotate the zero-map triangle; its third arrow is zero. The split triangle lemma identifies its middle term, namely the chosen cone, with H(j0) plus H(j0)[1].",
+   "uses": [
+    "lem-pc-derived-zero-third-split"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the binomial index type choose j0=(0,0); the second coordinate is valid since choose(s+1,0)=1. Transfer the first arrow of the product triangle to R(A), using the supplied biproduct isomorphism and biproduct.isoProduct. This defines alpha.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restriction takes the supplied distinguished triangle to a distinguished triangle. The equation alpha=R(gamma) composed with bU inverse gives an isomorphism of its first arrow with that of the constructed product triangle. Mathlib isoTriangleOfIso12, using the triangle-morphism isomorphism criterion, identifies their third objects. Compose with the cone calculation and the shift-by-zero isomorphism to obtain R(E) isomorphic to F plus F[1].",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-pc-derived-zero-third-split",
+  "def-pc-derived-category",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EK, lemma-lift-perfect-complex-plus-shift-support, final paragraph; Derived Categories, Tag 05QT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a triangulated category the cone of the projection endomorphism on a direct sum which is zero on one summand and identity on all the others is the sum of that summand and its shift",
+   "results": "8 hits: CategoryTheory.Pretriangulated.binaryBiproductData_bicone_inl, CategoryTheory.Pretriangulated.binaryBiproductData_bicone_inr, CategoryTheory.Pretriangulated.binaryBiproductData, CochainComplex.triangleOfDegreewiseSplit, CategoryTheory.Pretriangulated.binaryBiproductData_bicone_fst, CochainComplex.mappingConeCompTriangle, CategoryTheory.Pretriangulated.binaryBiproductData_bicone_pt, CochainComplex.mappingCone.triangle",
+   "date": "2026-10-13",
+   "verdict": "no exact match; useful component lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cone of a diagonal endomorphism which is zero on one summand and identity on all other summands of a finite direct sum is that summand plus its shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.productTriangle_distinguished",
+   "results": "1 hits: CategoryTheory.Pretriangulated.productTriangle_distinguished",
+   "date": "2026-10-13",
+   "verdict": "no exact match; useful component lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "productTriangle_distinguished|exists_iso_binaryBiproduct_of_distTriang|isoTriangleOfIso₁₂",
+   "results": "16 hits: Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; useful component lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectSupportExtension",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: on an affine open, construct a perfect complex supported on T whose restriction contains the required perfect summands; Tag 08EK, lemma-lift-perfect-complex-plus-shift-support, final paragraph; Derived Categories, Tag 05QT",
+   "via": [
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBinomialProjectorCone",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBinomialProjectorCone.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_binomial_projector_cone_restrict",
+  "statement": "theorem exists_binomial_projector_cone_restrict (X : Scheme.{u}) (U : X.Opens) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (s : ℕ) (F : schemeDerivedCategory U.toScheme) (A : schemeDerivedCategory X) (e : Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj A ≅ biproduct (fun p : (j : Fin (s + 2)) × Fin (Nat.choose (s + 1) j.val) ↦ F⟦(p.1.val : ℤ)⟧))) : ∃ α : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj A ⟶ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj A, ∀ (A' : schemeDerivedCategory X) (γ : A' ⟶ A) (bU : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj A' ≅ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj A), α = bU.inv ≫ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.map γ → ∀ (E : schemeDerivedCategory X) (b : A ⟶ E) (d : E ⟶ A'⟦(1 : ℤ)⟧), Triangle.mk γ b d ∈ distTriang (schemeDerivedCategory X) → Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj E ≅ F ⊞ F⟦(1 : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T033000-L-3675691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T033000-L-3675691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

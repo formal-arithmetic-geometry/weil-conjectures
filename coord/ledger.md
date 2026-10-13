@@ -10919,3 +10919,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:29 L: merged deliver/F3/Sheaf.AlgebraicGeometry.PerfectUniversalH0TruncationPullback (stage 3; reviewer PASS; first push; landing 20261013T032958-L-3675022 (interface); batch 20261013T032954; modules 3; new nodes 2)
 - 03:29 L: merged deliver/F4/Sheaf.Algebra.Homology.ModuleRestrictionStalkComponents (stage 3; reviewer PASS; first push; landing 20261013T032959-L-3675246 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:29 L: merged deliver/F4/Sheaf.AlgebraicGeometry.PicardKunnethCechModels (stage 3; reviewer PASS; first push; landing 20261013T032959-L-3675494 (interface); batch 20261013T032954; modules 4; new nodes 3)
+- 03:30 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffinePerfectSupportExtension (stage 3; reviewer PASS; first push; landing 20261013T033000-L-3675691 (interface); batch 20261013T032954; modules 3; new nodes 2)

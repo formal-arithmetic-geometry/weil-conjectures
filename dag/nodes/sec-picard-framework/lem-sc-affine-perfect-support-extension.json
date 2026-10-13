@@ -26,59 +26,61 @@
  ],
  "proof": [
   {
-   "text": "Since X is affine, write T=V(g_1,...,g_s) for finitely many global functions. The complement of T is quasi-compact, so such a finite principal-open description exists; replacing each g_i by a suitable power does not change T.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK, proof, first paragraph"
-   }
-  },
-  {
-   "text": "Apply the affine perfect extension lemma [lem-sc-affine-perfect-plus-shift] to F on U. We obtain a perfect E on X with E|_U isomorphic to F\\oplus F[1]. Since F is supported on T\\cap U, multiplication by each g_i is zero on F after replacing g_i by a power, by [lem-sc-perfect-into-support-on-T] applied on U.",
+   "text": "Apply exists_perfect_restrict_iso_directSum_shift to obtain a perfect E0 whose restriction is F plus F[1]. Obtain finitely many powered generators cutting out T whose restrictions act by zero on F.",
    "uses": [
     "lem-sc-affine-perfect-plus-shift",
-    "lem-sc-perfect-into-support-on-T"
+    "lem-sc-affine-support-powered-generators"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK, proof, paragraphs 1-2"
-   }
+   "elementary": false
   },
   {
-   "text": "Form successive cones of multiplication by g_i on E. The iterated-cone statement [lem-sc-affine-support-iterated-cones] gives a perfect complex C_s supported on T; on U its restriction is a finite direct sum of shifts of F, with multiplicity \\binom{s+1}{j} in degree j.",
+   "text": "Construct a sequence of cones using Mathlib distinguished_cocone_triangle: extend g by zero to a sequence indexed by the natural numbers, recursively choose each cone, and restrict the resulting sequence to Fin(s+1). Its initial term is E0 and every adjacent triple is a distinguished scalar cone triangle.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine_support_iterated_cones to this actual cone chain. The last term A is perfect, vanishes at every point in a principal open D(g_i), and restricts to the binomial biproduct. The powered-generator cover identifies this support with T.",
    "uses": [
     "lem-sc-affine-support-iterated-cones"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK, proof, cone construction"
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-sc-affine-perfect-map-lift] with A=C_s, E'=C_s, and the endomorphism which is zero on the unique degree-0 F summand and the identity on all other shifted summands of C_s|_U. It supplies a perfect C' supported on T, a map beta:C'\\to C_s that is an isomorphism on U, and a compatible map gamma:C'\\to C_s. The quoted last clause gives that C' is supported on T. Since C_s is supported on T as well, Cone(gamma) is supported on T by the elementary two-of-three property for cohomology sheaves. The cone is perfect; on U the cone cancels the unwanted summands and is isomorphic to F\\oplus F[1]. Set E=Cone(gamma).",
+   "text": "Choose the projector supplied by exists_binomial_projector_cone_restrict. Perfectness gives quasi-coherent cohomology for A. Apply exists_perfect_map_lift_of_isAffine with target A to get A-prime, beta and gamma, the compatible restriction isomorphism, and support of A-prime on T.",
    "uses": [
+    "lem-sc-affine-binomial-projector-cone",
+    "lem-sc-perfect-qcoherent",
     "lem-sc-affine-perfect-map-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EK, proof, final paragraph"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The supported quasi-coherent property is triangulated, so take a supported distinguished cone of gamma. Perfect two-out-of-three proves its perfectness. The projector-cone calculation identifies its restriction with F plus F[1]. This cone is the required E.",
+   "uses": [
+    "lem-pc-supported-qcoh-triangulated",
+    "lem-pc-perfect-two-out-of-three",
+    "lem-sc-affine-binomial-projector-cone"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-affine-perfect-plus-shift",
-  "lem-sc-perfect-into-support-on-T",
+  "lem-sc-affine-support-powered-generators",
+  "def-weil-triangulated-category",
   "lem-sc-affine-support-iterated-cones",
-  "lem-sc-affine-perfect-map-lift"
+  "lem-sc-affine-binomial-projector-cone",
+  "lem-sc-perfect-qcoherent",
+  "lem-sc-affine-perfect-map-lift",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-pc-perfect-two-out-of-three"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EK (Lemma 36.13.10)"
+  "place": "Tag 08EK, lemma-lift-perfect-complex-plus-shift-support; formalized by G1 using explicit finite cone recursion, powered generators, and projector cone calculation"
  },
  "mathlib_searches": [
   {
@@ -165,5 +167,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T033000-L-3675691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
