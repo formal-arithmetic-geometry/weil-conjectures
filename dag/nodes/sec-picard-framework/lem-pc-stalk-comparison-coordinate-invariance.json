@@ -18,44 +18,38 @@
  },
  "proof": [
   {
-   "text": "Compose c.e with the inverse of d.e to identify their original complexes in D(O_X). Exact stalks and exact restriction to R transport this derived isomorphism. Universality of derived scalar extension and cohomologyIso_smul give an A-tensor-R-B-linear isomorphism of source cohomology; extend it to C. Compose c.e' with the inverse of d.e' and use exact stalks to obtain the target cohomology isomorphism.",
+   "text": "Set a=c.e followed by d.e inverse in D(O_X). Apply exists_comparisonSourceIso to get the unique tensor-algebra transport e with its underlying B-linear equation. Extend e to C. Exact derived stalk cohomology transports c.e' and d.e' to isomorphisms identifying both coordinate targets with H^i(K'_z).",
    "uses": [
-    "lem-weil-pbc-module-stalk-exact",
-    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply comparisonIntoPullback_naturality to c.P,d.P,a,e. Prove stalkComparison_normalized using naturality of comparisonStalkHomologyIso for t, the coordinate represents equation and cancellation of its invertible pullback counit. Since a.hom followed by d.e.hom equals c.e.hom, the two normalized comparisons differ by the C-extension of e. This normalization and the equality are complete Lean proofs in the item.",
+   "uses": [
+    "lem-pc-stalk-comparison-pullback-naturality",
     "def-pc-single-complex-base-change-stalk-condition"
    ],
    "elementary": false
   },
   {
-   "text": "K-flatness of the original coordinate complexes implies K-flatness of their stalk complexes. Thus ordinary extension of these stalk complexes computes derived pullback along A to C. The universal pullback counits and the degreewise tensorStalkIso identify these derived targets. Apply derived cohomology to both represents equations. The two model counit equations comparison_eq and localized_eq, together with naturality of these identifications, give a commuting square whose horizontal arrows are the displayed stalkComparison maps and whose vertical arrows are the two isomorphisms of step 1.",
-   "uses": [
-    "lem-pc-kflat-stalk-criterion",
-    "def-pc-derived-pullback",
-    "def-pc-base-derived-tensor-cohomology-model",
-    "def-pc-single-complex-base-change-stalk-condition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A commuting square with invertible vertical arrows expresses either horizontal arrow as a conjugate of the other. Composition with isomorphisms preserves and reflects invertibility.",
+   "text": "The extended e and both target identifications are isomorphisms. In either direction, the normalized equality and IsIso.of_isIso_comp_left/right remove the invertible factors and give the required equivalence.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-stalk-exact",
-  "def-pc-base-derived-tensor-cohomology-model",
   "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-kflat-stalk-criterion",
-  "def-pc-derived-pullback"
+  "lem-pc-stalk-comparison-pullback-naturality",
+  "lem-pc-stalk-comparison-source-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H3",
+  "group": "G3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "equation-bc preceding Tag 0DJ8 (lemma-single-complex-base-change-condition), canonical derived comparison and representative independence",
-  "note": "The universal-property and coordinate transport arguments written out from the canonical construction in equation-bc."
+  "place": "equation-bc preceding Tag 0DJ8 (Tag 0DJ7), with Tags 06Y6 and 06YB",
+  "note": "Decomposition into coefficient linearity and pullback naturality; the coordinate normalization and invertibility glue are complete Lean proofs."
  },
  "mathlib_searches": [
   {
@@ -126,9 +120,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261013T054219-L-443556",
+  "landing": "20261013T082347-L-1636347",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

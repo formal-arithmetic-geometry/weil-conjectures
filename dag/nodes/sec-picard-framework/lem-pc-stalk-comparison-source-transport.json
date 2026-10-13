@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-stalk-comparison-source-transport",
+ "kind": "statement",
+ "title": "Canonical derived stalk cohomology transport is tensor-algebra linear",
+ "statement": "Fix a cartesian square of schemes and the actual stalk algebra structures R,A,B,C of [def-pc-single-complex-base-change-stalk-condition]. For arbitrary complexes P,Q of O_X-modules, a derived isomorphism a:Q(P)≅Q(Q), a point z and an integer i, let M_P,M_Q be their chosen base-derived tensor cohomology models [def-pc-base-derived-tensor-cohomology-model]. Define comparisonSourceUnderlyingIso as follows: exact derived stalks and exact restriction to R transport a; the model input localization factors identify its endpoints with the model inputs; apply M_P.derived and the unique counit-compatible natural isomorphism from M_P.derived to M_Q.derived; finally apply cohomology and conjugate by both cohomologyIso identifications. There is a unique A-tensor-R-B-linear isomorphism M_P.cohomology(i)≅M_Q.cohomology(i) whose restriction to B is this specified B-linear isomorphism. No K-flatness, final target complex, morphism to that target, or invertibility of a comparison is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8 (Tag 0DJ7); More on Algebra Tag 06Y6; Cohomology Tag 06YB"
+ },
+ "proof": [
+  {
+   "text": "Exact stalks and exact restriction transport a to the base-ring derived category. The model input localization factors identify its endpoints. Universality of the derived counits supplies the unique natural identification of the model derived functors. Apply cohomology and conjugate by cohomologyIso. All these constructions and stalk exactness are already implemented in the module.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Multiplication by every a in A is natural on complexes of A-modules and descends through localization. The derived stalk isomorphism therefore commutes with it. Exact restriction and naturality of the identification between the derived extension functors preserve this equation. The two cohomologyIso_smul equations identify these endomorphisms with multiplication by a tensor 1 on the model cohomologies. Thus the underlying B-linear isomorphism commutes with this action, as does its inverse.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "B-linearity gives compatibility with 1 tensor b. Each pure tensor is the product of a tensor 1 and 1 tensor b, so tensor induction yields linearity over A tensor_R B. Bundle the two inverse maps into a module isomorphism. Restriction of scalars is faithful, so its specified underlying homomorphism determines it uniquely.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8 (Tag 0DJ7), with Tags 06Y6 and 06YB",
+  "note": "Decomposition into coefficient linearity and pullback naturality; the coordinate normalization and invertibility glue are complete Lean proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor cohomology transport along derived isomorphisms commutes with coefficient scalar actions and localized comparison",
+   "date": "2026-10-13",
+   "results": "8 hits: Rep.torIso, groupCohomologyIsoExt, Rep.Tor_map, groupHomologyIsoTor, Algebra.tensorH1CotangentOfIsLocalization, groupHomology.coinvariantsTensorResProjectiveResolutionIso, Rep.barResolution.extIso, Rep.standardResolution.extIso. No exact match for the stalk/model transport interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "date": "2026-10-13",
+   "results": "3 hits: CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatIso_inv. No exact match for the stalk/model transport interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyIso_smul|comparisonIntoPullback|BaseDerivedTensorCohomologyModel",
+   "date": "2026-10-13",
+   "results": "0 hits: . No exact match for the stalk/model transport interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor cohomology transport along derived isomorphisms is tensor algebra linear and compatible with canonical pullback comparisons",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkComparisonCoordinateInvariance",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-stalk-comparison-coordinate-invariance",
+   "place": "proof step 1 (source transport)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkComparisonSourceTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkComparisonSourceTransport.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_comparisonSourceIso",
+  "declarations": [
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonStalkAdditive",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonStalkHomology",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonStalkLimits",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonStalkColimits",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonDerivedStalk",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonStalkCohomology",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonStalkHomologyIso",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonStalkHomologyIso_naturality",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonBaseRestriction",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonModelInputIso",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonModelDerivedIso",
+   "AlgebraicGeometry.SingleComplexBaseChange.comparisonSourceUnderlyingIso",
+   "AlgebraicGeometry.SingleComplexBaseChange.exists_comparisonSourceIso"
+  ],
+  "statement": "theorem exists_comparisonSourceIso (z : X')\n    (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) :\n    letI := leftAlgebra f g' z\n    letI := rightAlgebra f f' g g' sq z\n    letI := (tensorMap f f' g g' sq z).toAlgebra\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z))\n    ∃! e : (cohomologyModel f f' g g' sq z P).cohomology i ≅\n        (cohomologyModel f f' g g' sq z Q).cohomology i,\n      (ModuleCat.restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).map e.hom =\n        (comparisonSourceUnderlyingIso f f' g g' sq z P Q a i).hom",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T082347-L-1636347",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T082347-L-1636347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
