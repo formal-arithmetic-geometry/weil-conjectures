@@ -12,12 +12,11 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Sheaf.RingTheory.CohenRing
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
 import Sheaf.RingTheory.CohenPowerSeriesPresentation
-import Sheaf.RingTheory.FieldCohenPowerSeriesFormallySmooth
+import Sheaf.RingTheory.CohenPowerSeriesParameterExtension
+import Mathlib.RingTheory.AdicCompletion.Topology
+import Mathlib.Algebra.Ring.ULift
+import Mathlib.Algebra.CharP.Algebra
 import Sheaf.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
-import Sheaf.RingTheory.PowerSeriesAdicEvaluation
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
@@ -32,6 +31,31 @@ Source: Stacks Project, Lemma 07NN and the proof of Proposition 07NQ
 universe u v
 
 namespace RingHom
+
+private theorem flat_and_regular_fibre_of_parameters
+    {R : Type u} {S : Type v} [CommRing R] [CommRing S]
+    [IsRegularLocalRing R] [IsRegularLocalRing S]
+    (f : R →+* S) [IsLocalHom f] (t : List R) (z : List S)
+    (ht : IsLocalRing.IsRegularSystemOfParameters t)
+    (hz : IsLocalRing.IsRegularSystemOfParameters (t.map f ++ z)) :
+    f.Flat ∧ IsRegularLocalRing (S ⧸ (IsLocalRing.maximalIdeal R).map f) := by
+  have hs := IsRegularLocalRing.isRegular_and_quotients_of_generators
+    S (t.map f ++ z).length hz.2.symm (t.map f ++ z) hz
+  have hweak : RingTheory.Sequence.IsWeaklyRegular S (t.map f) :=
+    ((RingTheory.Sequence.isWeaklyRegular_append_iff S (t.map f) z).mp
+      hs.1.toIsWeaklyRegular).1
+  have hreg : RingTheory.Sequence.IsRegular S (t.map f) := by
+    apply (IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal ?_).mpr hweak
+    intro x hx
+    exact hz.1 ▸ Ideal.subset_span (List.mem_append_left z hx)
+  have hflat := flat_of_regular_parameters f t.length t ht.2.symm rfl ht.1 hreg
+  have hquot := (hs.2.1 (t.map f).length (by simp)).1
+  rw [List.take_left] at hquot
+  have hideal : Ideal.ofList (t.map f) = (IsLocalRing.maximalIdeal R).map f := by
+    rw [← ht.1]
+    exact (Ideal.map_ofList f t).symm
+  rw [hideal] at hquot
+  exact ⟨hflat, hquot⟩
 
 /-- A complete local homomorphism admits compatible power-series presentations with a flat
 map carrying parameters into parameters and regular closed fibre. Source: Stacks, Lemma 07NN;
@@ -83,7 +107,83 @@ theorem exists_complete_local_map_cohen_presentation
             IsLocalRing.IsRegularSystemOfParameters t ∧
             IsLocalRing.IsRegularSystemOfParameters (t.map u ++ z) ∧
             (∀ p : ℕ, p.Prime → CharP (IsLocalRing.ResidueField A) p →
-              t.head? = some (p : R)) :=
-  sorry
+              t.head? = some (p : R)) := by
+  classical
+  let e : A ≃+* ULift.{v} A := ULift.ringEquiv.symm
+  let : IsLocalRing (ULift.{v} A) := e.isLocalRing
+  let : IsNoetherianRing (ULift.{v} A) := isNoetherianRing_of_ringEquiv A e
+  have hc := (IsAdicComplete.congr_ringEquiv (IsLocalRing.maximalIdeal A) e).mpr
+    (inferInstance : IsAdicComplete (IsLocalRing.maximalIdeal A) A)
+  rw [IsLocalRing.map_ringEquiv_maximalIdeal] at hc
+  let := hc
+  obtain ⟨n, ΛA, hcomm, hlocal, hregular, hcomplete, q₀, hq, hqlocal, _, hcases⟩ :=
+    IsLocalRing.cohen_power_series_presentation (ULift.{v} A)
+  let := hcomm
+  let := hlocal
+  let := hregular
+  let := hqlocal
+  let q := e.symm.toRingHom.comp q₀
+  have hqsurj : Function.Surjective q := e.symm.surjective.comp hq
+  have hqlocal' : IsLocalHom q := IsLocalHom.of_surjective q hqsurj
+  have hglocal : IsLocalHom (f.comp q) := RingHom.isLocalHom_comp f q
+  have : IsLocalHom e.symm.toRingHom :=
+    IsLocalHom.of_surjective _ e.symm.surjective
+  let er := IsLocalRing.ResidueField.map e.symm.toRingHom
+  rcases hcases with ⟨hfield, hchar, ⟨ec, _⟩, _, ht⟩ |
+    ⟨p, hchar, hcohen, _, _, ht⟩
+  · let := hchar
+    have hΛchar : CharZero ΛA := ec.toRingHom.charZero
+    let t : List (MvPowerSeries (Fin n) ΛA) := List.ofFn (fun i : Fin n ↦ MvPowerSeries.X i)
+    obtain ⟨ΛB, hBcomm, m, hSregular, hScomplete, hBfield, _, v, u, hv, hvlocal,
+      hulocal, hcomp, z, hz⟩ :=
+      MvPowerSeries.exists_cohen_power_series_parameter_extension n 0
+        (fun _ ↦ ⟨hfield, hΛchar⟩) (by simp) (f.comp q) t (by simp [t])
+    let := hBcomm
+    let := hSregular
+    let := hulocal
+    have hff := flat_and_regular_fibre_of_parameters u t z ht hz
+    refine ⟨ΛA, ΛB, hcomm, hBcomm, n, m, hregular, hSregular,
+      hcomplete, hScomplete, (fun _ ↦ ⟨hfield, hBfield rfl⟩), ?_,
+      q, v, u, hqsurj, hqlocal', hv, hvlocal, hulocal, hcomp, hff.1, hff.2,
+      t, z, ht, hz, ?_⟩
+    · intro p hp hcp
+      have : CharZero (IsLocalRing.ResidueField A) :=
+        charZero_of_injective_ringHom er.injective
+      exact False.elim (hp.ne_zero (CharP.eq _ hcp (CharP.ofCharZero _)))
+    · intro p hp hcp
+      have : CharZero (IsLocalRing.ResidueField A) :=
+        charZero_of_injective_ringHom er.injective
+      exact False.elim (hp.ne_zero (CharP.eq _ hcp (CharP.ofCharZero _)))
+  · let := hchar
+    have hp : p.Prime := hcohen.1
+    let t : List (MvPowerSeries (Fin n) ΛA) :=
+      (p : MvPowerSeries (Fin n) ΛA) :: List.ofFn (fun i : Fin n ↦ MvPowerSeries.X i)
+    have ht' : IsLocalRing.IsRegularSystemOfParameters t := by simpa [t] using ht
+    obtain ⟨ΛB, hBcomm, m, hSregular, hScomplete, _, hBcohen, v, u, hv, hvlocal,
+      hulocal, hcomp, z, hz⟩ :=
+      MvPowerSeries.exists_cohen_power_series_parameter_extension n p
+        (fun h ↦ False.elim (hp.ne_zero h)) (fun _ ↦ hcohen)
+        (f.comp q) t (by simp [t, hp.ne_zero])
+    let := hBcomm
+    let := hSregular
+    let := hulocal
+    have hff := flat_and_regular_fibre_of_parameters u t z ht' hz
+    have hcharA : CharP (IsLocalRing.ResidueField A) p :=
+      charP_of_injective_ringHom er.injective p
+    refine ⟨ΛA, ΛB, hcomm, hBcomm, n, m, hregular, hSregular,
+      hcomplete, hScomplete, ?_, ?_,
+      q, v, u, hqsurj, hqlocal', hv, hvlocal, hulocal, hcomp, hff.1, hff.2,
+      t, z, ht', hz, ?_⟩
+    · intro hzero
+      let := hzero
+      exact False.elim (hp.ne_zero (CharP.eq _ hcharA (CharP.ofCharZero _)))
+    · intro r _ hcr
+      have hr : r = p := CharP.eq _ hcr hcharA
+      subst r
+      exact ⟨hcohen, hBcohen hp.ne_zero⟩
+    · intro r _ hcr
+      have hr : r = p := CharP.eq _ hcr hcharA
+      subst r
+      rfl
 
 end RingHom

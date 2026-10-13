@@ -1,0 +1,190 @@
+{
+ "id": "lem-weil-pbc-cohen-power-series-parameter-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of the finite-etale-lifting split, compatible Cohen presentations: lifting a map from a fixed source and adjoining variables in Stacks 07NN; original node steps 1 through 4",
+   "via": [
+    "lem-weil-pbc-complete-local-map-cohen-presentation",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Extending canonical Cohen power-series parameters along a local map",
+ "statement": "Let c,n be natural numbers, Lambda a commutative ring, and R=Lambda[[X_1,...,X_n]] a regular local ring [def-weil-regular-scheme]. If c=0 assume Lambda is a field of characteristic zero; if c≠0 assume Lambda is a Cohen ring for c. Let B be a Noetherian complete local ring and g:R→B a local homomorphism. Let t be the list of X variables if c=0, or c followed by these variables otherwise. Then there are a coefficient ring Lambda_B in the common universe, an integer m, and S=Lambda_B[[W_1,...,W_m]] complete regular local, with Lambda_B a field if c=0 and a Cohen ring for c otherwise, a surjective local map v:S→B and a local map h:R→S with v h=g, and z such that t.map h ++ z is a regular system of parameters. No flatness or closed-fibre conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NN, proof; https://stacks.math.columbia.edu/tag/07NN"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "The constant-coefficient kernel is the ideal of the variables. Splitting each series into its constant part and a series in this kernel proves m_R=m_Lambda R+(X). In the field case this is (X); in the Cohen case it is (c,X). The field/Cohen formal-smoothness theorem therefore applies to R over the integers.",
+   "uses": [
+    "lem-weil-pbc-power-series-kernels",
+    "lem-weil-pbc-field-cohen-power-series-formally-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof; https://stacks.math.columbia.edu/tag/07NN"
+   }
+  },
+  {
+   "text": "Show the residue field of B has characteristic c. If c=0, the composition Lambda→R→B→k_B is an injective field homomorphism, so k_B has characteristic zero. If c≠0, c is prime and nonunit in Lambda, hence in R, and locality makes its image zero in k_B. Thus CharP k_B c holds. Apply the Cohen presentation theorem to a universe lift of B, transporting completeness by the ring equivalence, and compose the resulting presentation with the equivalence back to B. Comparing residue characteristics forces the coefficient ring Lambda_B to be a field if c=0 and a Cohen ring for c otherwise.",
+   "uses": [
+    "lem-weil-pbc-cohen-power-series-presentation",
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof; https://stacks.math.columbia.edu/tag/07NN"
+   }
+  },
+  {
+   "text": "Let v:S_0→B be that presentation, I=m_{S_0}, J=ker v. Surjectivity gives map v I=m_B and locality gives J≤I. For x in every J+I^k, v x belongs to every m_B^k, hence vanishes by separatedness of complete B. Thus J is closed. Identify S_0/J with B and apply the formally smooth adic lifting theorem over the integers with t=r=1 to the local map g. Obtain phi:R→S_0 with v phi=g and phi(m_R)⊆I, hence phi local. The algebra structures over the integers are identified by uniqueness.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-lift-into-complete",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof; https://stacks.math.columbia.edu/tag/07NN"
+   }
+  },
+  {
+   "text": "Apply the fixed-map parameter-perturbation lemma to phi and the canonical list t. It gives complete regular S, pi:S→S_0 surjective local, and h:R→S local with pi h=phi, whose images of t extend to parameters. Compose v with pi; surjectivity and locality compose, and (v pi)h=v phi=g. Retain the same Lambda_B and its characteristic-dependent coefficient properties.",
+   "uses": [
+    "lem-weil-pbc-power-series-parameter-perturbation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof; https://stacks.math.columbia.edu/tag/07NN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-kernels",
+  "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+  "lem-weil-pbc-cohen-power-series-presentation",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-power-series-parameter-perturbation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NN, proof; https://stacks.math.columbia.edu/tag/07NN; explicit Lean expansion of the lifting and variable-adjoining argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a local map between formal power series rings over fields or Cohen rings, adjoining new variables to its target makes the source variables part of a regular system of parameters",
+   "results": "PowerSeries.exist_eq_span_eq_ncard_of_X_notMem; PowerSeries.weierstrassDistinguished_mul; PowerSeries.exists_isWeierstrassFactorization; PowerSeries.weierstrassDistinguished; PowerSeries.isDistinguishedAt_weierstrassDistinguished; PowerSeries.weierstrassUnit; PowerSeries.IsWeierstrassDivisor; PowerSeries.exists_isWeierstrassDivision",
+   "date": "2026-10-13",
+   "verdict": "no match: the results do not construct compatible parameter lists"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsLocalHom",
+   "results": "MvPowerSeries.map.isLocalHom",
+   "date": "2026-10-13",
+   "verdict": "no match: the results do not construct compatible parameter lists"
+  },
+  {
+   "tool": "grep",
+   "query": "parameter.*perturb|power.series.*parameter.*extension",
+   "results": "No matching declarations.",
+   "date": "2026-10-13",
+   "verdict": "no match: the results do not construct compatible parameter lists"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local map of formal power series rings can be made to send canonical parameters into a regular system of parameters by adjoining independent variables to the target",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local homomorphism from power series over a characteristic zero field or Cohen ring into a complete Noetherian local ring factors through a power series ring with source parameters extending to target parameters",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompleteLocalMapCohenPresentation",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CohenPowerSeriesParameterExtension",
+  "file": "lean/Sheaf/RingTheory/CohenPowerSeriesParameterExtension.lean",
+  "declaration": "MvPowerSeries.exists_cohen_power_series_parameter_extension",
+  "statement": "theorem exists_cohen_power_series_parameter_extension\n    {Λ : Type u} [CommRing Λ] (n c : ℕ)\n    [IsRegularLocalRing (MvPowerSeries (Fin n) Λ)]\n    (hzero : c = 0 → IsField Λ ∧ CharZero Λ)\n    (hpos : c ≠ 0 → IsCohenRing c Λ)\n    {B : Type v} [CommRing B] [IsLocalRing B] [IsNoetherianRing B]\n    [IsAdicComplete (IsLocalRing.maximalIdeal B) B]\n    (g : MvPowerSeries (Fin n) Λ →+* B) [IsLocalHom g]\n    (t : List (MvPowerSeries (Fin n) Λ))\n    (ht : t = if c = 0 then List.ofFn (fun i : Fin n ↦ (X i : MvPowerSeries (Fin n) Λ))\n      else (c : MvPowerSeries (Fin n) Λ) :: List.ofFn (fun i : Fin n ↦ X i)) :\n    ∃ (ΛB : Type (max u v)) (_ : CommRing ΛB) (m : ℕ)\n      (_ : IsRegularLocalRing (MvPowerSeries (Fin m) ΛB)),\n      IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin m) ΛB))\n        (MvPowerSeries (Fin m) ΛB) ∧\n      (c = 0 → IsField ΛB) ∧ (c ≠ 0 → IsCohenRing c ΛB) ∧\n      ∃ (v : MvPowerSeries (Fin m) ΛB →+* B)\n        (h : MvPowerSeries (Fin n) Λ →+* MvPowerSeries (Fin m) ΛB),\n        Function.Surjective v ∧ IsLocalHom v ∧ IsLocalHom h ∧ v.comp h = g ∧\n        ∃ z : List (MvPowerSeries (Fin m) ΛB),\n          IsLocalRing.IsRegularSystemOfParameters (t.map h ++ z)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T010622-L-2673617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T010622-L-2673617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
