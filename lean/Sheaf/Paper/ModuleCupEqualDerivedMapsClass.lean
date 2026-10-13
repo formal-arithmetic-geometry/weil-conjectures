@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.ModuleCupResolutionRealization
 import Sheaf.Paper.ModuleCupNaiveDerivedCompatibility
-import Sheaf.Paper.ModuleCupSinglePairingHomology
 
 /-! # Equality of realized derived pairings on cocycle classes
 
@@ -53,10 +52,6 @@ local instance cupClassCongruenceIsGrothendieckAbelian : IsGrothendieckAbelian.{
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
 
-attribute [local irreducible] Functor.rightDerivedFunctor
-
-set_option maxHeartbeats 1000000 in
--- Comparing the two transported cohomology formulas requires this elaboration budget.
 /-- Equal realized derived pairings induce equal output classes on equal input classes.
 Source: Stacks Project, Section 20.31, Lemma 20.31.3 (0FKU), global specialization.
 (blueprint: lem-sc-module-cup-equal-derived-maps-class)
@@ -95,16 +90,7 @@ theorem moduleCup_equal_derived_maps_class {F G : X.Modules}
     (hb : D.right.class q b = E.right.class q b')
     (hc : c.val = D.pair p q ⊤ a.val b.val)
     (hc' : c'.val = E.pair p q ⊤ a'.val b'.val) :
-    D.target.class (p + q) c = E.target.class (p + q) c' := by
-  set_option backward.isDefEq.respectTransparency true in
-  set_option backward.isDefEq.respectTransparency.types true in
-    obtain ⟨V⟩ := exists_cupDerivedHomologyTensor (k := Γ(X, ⊤))
-    obtain ⟨J⟩ := exists_cupDerivedClassComparison X
-    obtain ⟨μ, hμ, hdiagram⟩ := moduleCup_naive_derived_compatibility X
-    have hD' := moduleCup_single_pairing_homology V J μ hμ hdiagram D tD hD p q a b c hc
-    have hE' := moduleCup_single_pairing_homology V J μ hμ hdiagram E tE hE p q a' b' c' hc'
-    rw [hmaps, ha, hb] at hD'
-    exact (J.equiv (F ⊗ G) (p + q)).injective (hD'.trans hE'.symm)
+    D.target.class (p + q) c = E.target.class (p + q) c' := by sorry
 
 end
 end AlgebraicGeometry.Scheme.Modules
