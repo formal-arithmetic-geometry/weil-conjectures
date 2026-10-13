@@ -15,24 +15,48 @@
  ],
  "proof": [
   {
-   "text": "Set U to the open range of the inclusion of W intersect V into V. The intersection\nis compact by quasi-separatedness and compactness of W and affine V, so U is compact.\nThe inverse image of T in V is closed. Its complement identifies through the open\nembedding with V intersect the compact open complement of T, hence is compact by the\nsame intersection criterion. The inclusion U.toScheme into W is an open immersion.\nDefine G by exact restriction of F along that inclusion. At each point of U, pull back\na strictly perfect neighbourhood model of F, preserving the degree bounds, finite free\nmodules and retract equations. These give perfectness of G. Exact homology and the\nrestriction-stalk comparison identify each stalk of G with the corresponding stalk of F,\nso support restricts as stated. The scheme isomorphism from the ambient overlap to U\nsupplies the exact module equivalence and the derived equivalence e. Transport the\nchosen derived localization along it, and transport the localized-site localizations\nthrough the corresponding equivalences on each open of U to supply hO. The natural\nrestriction composition comparisons identify ordinary restriction from V followed by e\nwith SV, and identify e(G) with SW(F). Both comparisons arise by deriving the underived\nrestriction comparisons, so commute with shifts and biproducts. Apply those comparisons\nto G plus G[1] to obtain the last isomorphism. Empty opens and empty support need no\nseparate case: the same scheme isomorphism, exact restrictions and zero stalks apply.",
+   "text": "Set U = V.ι inverse-image W. The image of U under subtype inclusion is V intersect W. Apply IsCompact.inter_of_isOpen in the quasi-separated ambient scheme, using hV.isCompact and hW, and transfer compactness back through IsEmbedding.subtypeVal.isCompact_iff. Closedness of the inverse image of T follows from continuity; its complement has image V intersect the open compact complement of T. The same intersection lemma proves compactness of this complement.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport the given localization on the localized site of V at U across Modules.overEquiv U to obtain hD. The private helper hasDerivedCategory_of_equivalence constructs the localization by composing the termwise equivalence with DerivedCategory.Q and verifies its universal property through Functor.IsLocalization.of_equivalence_source. Obtain the family hO using nonempty_derivedOpenLocalization U.toScheme. Define j = V.ι restricted to W, R = Modules.restrictFunctor j, and G = R.mapDerivedCategory.obj F. No object is chosen from an unproved existence assertion.",
    "uses": [
-    "def-pc-perfect-complex",
     "def-pc-derived-category",
-    "def-pc-derived-open-restriction-maps"
+    "lem-pc-derived-open-localization-universe"
    ],
    "elementary": false
+  },
+  {
+   "text": "Identify exact R with Modules.tensorPullback j by uniqueness of left adjoints. The localization-derived functor of this exact tensor pullback and derivedPullback j are isomorphic by leftDerivedUnique, using exists_derivedPullback. Apply derivedPullback_preserve_perfect and transport each local strictly perfect witness along this isomorphism. For support, mapDerivedCategoryHomologyFunctorIso and Modules.restrictStalkNatIso identify each homology stalk of G at x with that of F at j(x). The equation morphismRestrict_base_coe identifies their ambient points; injectivity of the stalk isomorphism transfers Subsingleton.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-derived-pullback-perfect",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct s : U.toScheme ≅ (W inf V).toScheme as V.ι.isoImage U followed by X.isoOfEq (V.functor_map_eq_inf W). Pushforward along s and its inverse gives the exact module equivalence E and hence e = E.mapDerivedCategory. By uniqueness of left adjoints E.functor is restriction along s.inv. Composing with U.ι or j gives respectively the two ambient overlap inclusions, verified by cancel_mono on V.ι and W.ι. Modules.overFunctorEquiv, overMapCompOverEquiv and restrictFunctorComp give the underived restriction squares; mapDerivedCategoryCompIso and mapDerivedCategoryNatIso descend both to derived natural isomorphisms. The V square supplies the first requested comparison. The W square, together with R.mapDerivedCategory.mapBiprod and commShiftIso, supplies the final comparison on F plus F[1]. All constructions include empty opens and empty support.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
   "def-pc-derived-category",
+  "lem-pc-derived-open-localization-universe",
+  "def-pc-derived-pullback",
+  "lem-pc-derived-pullback-perfect",
+  "def-pc-perfect-complex",
   "def-pc-derived-open-restriction-maps"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "https://stacks.math.columbia.edu/tag/09IM",
-  "place": "Overlap restriction input to the supported affine extension step using Tag 08EK"
+  "by": "agent",
+  "agent": "W4",
+  "date": "2026-10-13",
+  "based_on": "Original Stacks 09IM overlap restriction plan; existing exact-derived functor comparisons and the proved derived-pullback preservation theorem (09UA)."
  },
  "mathlib_searches": [
   {
@@ -114,10 +138,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T100050-L-2475126",
-  "kind": "interface",
+  "landing": "20261013T111941-L-3069740",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
