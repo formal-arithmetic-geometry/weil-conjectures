@@ -1,0 +1,142 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-weil-proper-morphism",
+  "def-pc-module-pullback",
+  "def-weil-pbc-adic-completion",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Proof, paragraph beginning Set Y prime = Spec B completion; Tags 0887, 02KH, 02N7 and 02O5"
+ },
+ "id": "lem-weil-pbc-formal-flat-quotient-mate-data",
+ "title": "Ordinary flat quotient comparisons and adjunction mates",
+ "statement": "Let $Y,S$ be Noetherian schemes, $f:X\\to Y$ proper and $g:S\\to Y$ flat [def-weil-proper-morphism, def-weil-flat-morphism]. Let $J$ and $I$ be quasi-coherent ideal sheaves with $J.\\operatorname{comap}(g)=I$. Put $Z=X\\times_Y S$, $q:Z\\to X$, $p:Z\\to S$ [def-pc-fibre-product]. Fix an adjunction $a:f^*\\dashv f_*$ [def-pc-module-pullback], a coherent formal $J$-system $G$, a coherent module $F$ on $X$, and an isomorphism $\\beta:G\\circ f^*\\simeq F^\\wedge$ [def-weil-pbc-coherent-formal-module, pqf-def-coherent]. Suppose a coherent formal $I$-system $G_0$ and a coherent module $F_0$ on $Z$ are supplied with $h_G:G_0=G\\circ g^*$ and $F_0=q^*F$. Then there are an adjunction $a_R:p^*\\dashv p_*$, an isomorphism $\\beta_0:G_0\\circ p^*\\simeq F_0^\\wedge$, an ordinary-module isomorphism $b:p_*F_0\\simeq g^*f_*F$, and a system map $t:(F^\\wedge\\circ f_*)\\circ g^*\\to F_0^\\wedge\\circ p_*$ such that, for every $n\\ge0$, writing $\\pi_n$ for the quotient by the $(n+1)$st ideal power, $b\\,g^*(f_*\\pi_n)\\,t_n=p_*\\pi_{0,n}$ and $\\operatorname{eqToHom}(h_G)_n\\,g^*(\\eta^a_{G_n}f_*\\beta_n)\\,t_n=\\eta^{a_R}_{G_{0,n}}p_*\\beta_{0,n}$. This statement involves only the ordinary pushforward $f_*F$ and its pullback, not completion of that pushforward or any map out of it.",
+ "proof": [
+  {
+   "text": "Use degree-zero flat base change and its section formula to obtain the natural adjunction mate g*f_*M to p_*q*M, invertible on quasi-coherent M. Identify the exchanged fibre-product models via their symmetry. Apply its inverse at F and identify F zero = q*F to obtain the ordinary isomorphism b.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-flat-base-change-map-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull beta through the pullback-composition comparison and the completion-pullback comparison. Choose a tensor-pullback adjunction on p and compare the given adjunction on f with the adjunction used in base change; absorb the resulting left-adjoint automorphism into the composition comparison to obtain beta zero. Whisker the base-change map on the quotient system with the inverse completion-pullback comparison for F to define t.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the base-change map at F to its quotient, together with the quotient-projection equation of completion pullback, gives b times the pulled pushforward projection times t = p_* of the new projection. The base-change mate equation, naturality at beta and the adjusted pullback composition comparison give the unit equation. The comparisons are natural in the level, so t and beta zero are maps of systems. Zero and unit ideals, zero modules, and empty schemes satisfy the same cokernel identities.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-map-sections",
+    "lem-weil-pbc-formal-systems-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-base-change-resolution-iso",
+  "lem-weil-pbc-flat-base-change-map-sections",
+  "lem-weil-pbc-formal-systems-pullback",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Completed-base-change paragraph; ordinary quotient and mate portion of the original transport-square steps 1, 2 and 4, using 0887, 02KH and 02N7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat base change natural isomorphism of pushforward pullback functors and adjunction mate",
+   "results": "Eight hits, including Scheme.Modules.conjugateEquiv_pullbackComp_inv and PresheafOfModules.pullbackComp; generic adjunction and composition tools, no flat quotient-mate comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Twelve hits including homEquiv, homEquiv_apply and comp_homEquiv; generic adjunction tools, no scheme base-change or quotient-system statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback.*baseChange|baseChange.*tensorPullback",
+   "results": "Zero hits in the launcher search. Local rg found pullback composition and the existing resolution-defined base-change interfaces; none supplies this normalized quotient and mate data.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of pushforward of coherent modules commutes with quotient projections and adjunction unit",
+   "results": "Service unavailable: Internal Server Error. No mathematical absence conclusion is drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalComparisonFlatTransportSquare",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity proof through proper Grothendieck existence and Stacks 088B: completed-base-change quotient/adjunction comparisons; original transport-square steps 1, 2 and 4",
+   "via": [
+    "lem-weil-pbc-formal-comparison-flat-transport-square",
+    "lem-weil-pbc-formal-comparison-completed-affine-data",
+    "lem-weil-pbc-formal-comparison-completed-affine-restriction-iso",
+    "lem-weil-pbc-formal-comparison-completed-affine-model",
+    "lem-weil-pbc-formal-systems-push-pull-affine-annihilation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFlatQuotientMateData",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFlatQuotientMateData.lean",
+  "declaration": "AlgebraicGeometry.formal_flat_quotient_mate_data",
+  "statement": "theorem formal_flat_quotient_mate_data {X Y S : Scheme.{u}} [IsNoetherian Y] [IsNoetherian S] (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f] (g : S ⟶ Y) [Flat g] (I : S.IdealSheafData) (hI : J.comap g = I) (adj : Scheme.Modules.tensorPullback f ⊣ Scheme.Modules.pushforward f) (G : CoherentFormalModule Y J) (F : CoherentModules X) (β : G.obj ⋙ Scheme.Modules.tensorPullback f ≅ formalCompletionSystem (J.comap f) F.obj) (G₀ : CoherentFormalModule S I) (F₀ : CoherentModules (pullback f g)) (hG : G₀.obj = G.obj ⋙ Scheme.Modules.tensorPullback g) (hF : F₀.obj = (Scheme.Modules.tensorPullback (pullback.fst f g)).obj F.obj) : let p := pullback.snd f g ∃ (adjR : Scheme.Modules.tensorPullback p ⊣ Scheme.Modules.pushforward p) (β₀ : G₀.obj ⋙ Scheme.Modules.tensorPullback p ≅ formalCompletionSystem (I.comap p) F₀.obj) (b : (Scheme.Modules.pushforward p).obj F₀.obj ≅ (Scheme.Modules.tensorPullback g).obj ((Scheme.Modules.pushforward f).obj F.obj)) (t : (formalCompletionSystem (J.comap f) F.obj ⋙ Scheme.Modules.pushforward f) ⋙ Scheme.Modules.tensorPullback g ⟶ formalCompletionSystem (I.comap p) F₀.obj ⋙ Scheme.Modules.pushforward p), (∀ n : ℕ, b.hom ≫ (Scheme.Modules.tensorPullback g).map ((Scheme.Modules.pushforward f).map (formalModuleQuotientπ (J.comap f) (n + 1) F.obj)) ≫ t.app (op n) = (Scheme.Modules.pushforward p).map (formalModuleQuotientπ (I.comap p) (n + 1) F₀.obj)) ∧ (∀ n : ℕ, (eqToHom hG).app (op n) ≫ (Scheme.Modules.tensorPullback g).map (adj.unit.app (G.obj.obj (op n)) ≫ (Scheme.Modules.pushforward f).map (β.hom.app (op n))) ≫ t.app (op n) = adjR.unit.app (G₀.obj.obj (op n)) ≫ (Scheme.Modules.pushforward p).map (β₀.hom.app (op n)))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T130753-L-3987248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T130753-L-3987248",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

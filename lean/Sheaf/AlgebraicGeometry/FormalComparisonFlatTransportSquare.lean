@@ -11,9 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
-import Sheaf.AlgebraicGeometry.FormalSystemsPullback
-import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
-import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
+import all Sheaf.AlgebraicGeometry.FormalSystemsPullback
+import Sheaf.AlgebraicGeometry.FormalFlatQuotientMateData
 
 /-! # Flat transport squares for formal comparison maps
 
@@ -26,6 +25,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport the quotient comparison and adjunction diagram under flat base change.
 This statement does not take or construct a map from G to the completed direct image.
 Source: Stacks Project, Tag 088B, completed-base change paragraph; Tags 02KH and 0887.
@@ -96,6 +97,43 @@ theorem formalComparison_flat_transport_square
             (adj.unit.app (G.obj.obj (op n)) ≫
               (Scheme.Modules.pushforward f).map (β.hom.app (op n))) ≫ t.app (op n) =
         adjR.unit.app (G₀.obj.obj (op n)) ≫
-          (Scheme.Modules.pushforward p).map (β₀.hom.app (op n))) := by sorry
+          (Scheme.Modules.pushforward p).map (β₀.hom.app (op n))) := by
+  classical
+  subst I
+  obtain ⟨adjR, β₀, b, t, ht, hunit⟩ :=
+    formal_flat_quotient_mate_data J f g (J.comap g) rfl adj G F β G₀ F₀ hG hF
+  let H : CoherentModules Y := ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩
+  let δ : formalCompletionSystem (J.comap g)
+      ((Scheme.Modules.pushforward (pullback.snd f g)).obj F₀.obj) ≅
+      formalCompletionSystem J H.obj ⋙ Scheme.Modules.tensorPullback g :=
+    (formalCompletionFunctor (J.comap g)).mapIso b ≪≫
+      (completionPullbackIso g J).app H
+  have hδ (n : ℕ) : formalModuleQuotientπ (J.comap g) (n + 1)
+      ((Scheme.Modules.pushforward (pullback.snd f g)).obj F₀.obj) ≫ δ.hom.app (op n) =
+      b.hom ≫ (Scheme.Modules.tensorPullback g).map
+        (formalModuleQuotientπ J (n + 1) H.obj) := by
+    change formalModuleQuotientπ (J.comap g) (n + 1) _ ≫
+      (formalCompletionMap (J.comap g) b.hom).app (op n) ≫
+        (powerQuotientIso g J H.obj
+          ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType _ _).mp
+            H.property).1 (n + 1)).hom = _
+    rw [← Category.assoc]
+    rw [show formalModuleQuotientπ (J.comap g) (n + 1) _ ≫
+        (formalCompletionMap (J.comap g) b.hom).app (op n) =
+        b.hom ≫ formalModuleQuotientπ (J.comap g) (n + 1) _ from
+      cokernel.π_desc _ _ _]
+    rw [Category.assoc, powerQuotientIso_π]
+  let κ₀ := δ.hom ≫ Functor.whiskerRight κ (Scheme.Modules.tensorPullback g) ≫ t
+  refine ⟨adjR, β₀, κ₀, δ, t, ?_, rfl, hunit⟩
+  intro n
+  change formalModuleQuotientπ (J.comap g) (n + 1) _ ≫
+    (δ.hom.app (op n) ≫ (Scheme.Modules.tensorPullback g).map (κ.app (op n))) ≫
+      t.app (op n) = _
+  rw [← Category.assoc, ← Category.assoc, hδ]
+  calc
+    _ = b.hom ≫ (Scheme.Modules.tensorPullback g).map
+        (formalModuleQuotientπ J (n + 1) H.obj ≫ κ.app (op n)) ≫ t.app (op n) := by
+      simp only [Functor.map_comp, Category.assoc]
+    _ = _ := by rw [hκ]; exact ht n
 
 end AlgebraicGeometry
