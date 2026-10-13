@@ -3,40 +3,139 @@
  "blueprint": {
   "is": "lemma-weil-pbc-projection-formula-tower-compatibility",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Projection formulas form a coefficient tower",
- "statement": "For every $n$, let $q_n:P_{n+1}\\to P_n$ be the quotient. The square\n\n$$\n\\begin{CD}\n(Rf_*K)\\otimes^LP_{n+1} @>{\\pi_{n+1}}>>\nRf_*(K\\otimes^LP_{n+1})\\\\\n@V{1\\otimes q_n}VV @VV{Rf_*(1\\otimes q_n)}V\\\\\n(Rf_*K)\\otimes^LP_n @>{\\pi_n}>> Rf_*(K\\otimes^LP_n)\n\\end{CD}\n$$\n\ncommutes, and so does the square with every $\\pi$ replaced by $\\rho$ and\nhorizontal arrows reversed; its vertical arrows remain the two quotient\nmaps.",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes, with the ordinary unbounded pro-etale derived operations $Lf^*\\dashv Rf_*$ of [def-weil-pbc-proetale-operations], and let $K\\in D(X_{\\mathrm{proet}},\\Lambda)$. Use the coefficient datum $(\\Lambda,I)$ and $P_n=\\Lambda/I^n$ for $n\\geq1$ of [def-weil-pbc-complete-coefficient-datum]. Coefficient complexes are constant sheaves on the indicated site; on $X$ they are identified with their pullbacks from $Y$. All maps below are in $D(Y_{\\mathrm{proet}},\\Lambda)$, after restriction of scalars, not maps between different quotient-coefficient categories. Choose bounded finite-projective representatives of the perfect $\\Lambda$-complexes $P_n$, and use the arrows $\\pi_n,\\rho_n$ of [def-weil-pbc-projection-formula-arrows] for these representatives. For every $n\\geq1$, let $q_n:P_{n+1}\\to P_n$ be the quotient. The square\n\n$$\n\\begin{CD}\n(Rf_*K)\\otimes^LP_{n+1} @>{\\pi_{n+1}}>>\nRf_*(K\\otimes^LP_{n+1})\\\\\n@V{1\\otimes q_n}VV @VV{Rf_*(1\\otimes q_n)}V\\\\\n(Rf_*K)\\otimes^LP_n @>{\\pi_n}>> Rf_*(K\\otimes^LP_n)\n\\end{CD}\n$$\n\ncommutes, and so does the square with every $\\pi$ replaced by $\\rho$ and\nhorizontal arrows reversed; its vertical arrows remain the two quotient\nmaps.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-tower-compatibility.md",
   "place": "node lemma-weil-pbc-projection-formula-tower-compatibility, order 1273"
  },
  "stmt_deps": [
   "def-weil-pbc-complete-coefficient-datum",
-  "def-weil-pbc-projection-formula-arrows"
+  "def-weil-pbc-projection-formula-arrows",
+  "def-weil-pbc-proetale-operations"
  ],
  "proof": [
   {
-   "text": "The two adjoints of the forward composites are both\n\n$$\nLf^*Rf_*K\\otimes^LP_{n+1}\n\\xrightarrow{\\epsilon_K\\otimes1}K\\otimes^LP_{n+1}\n\\xrightarrow{1\\otimes q_n}K\\otimes^LP_n.\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Write $L=Lf^*$ and $R=Rf_*$, and let $\\epsilon:LR\\to1$ be the counit. Put $L=Lf^*$ and $R=Rf_*$. The datum [def-weil-pbc-complete-coefficient-datum] supplies the perfect complexes $P_n$ and the quotient maps. Perfectness over the ring means precisely the existence of a bounded finite-projective representative [def-pc-perfect-ring-complex]; choose one for each $n$, with splittings as in [def-weil-pbc-strict-perfect-coefficient-package]. The operations [def-weil-pbc-proetale-operations] supply an exact coefficient-preserving inverse image and the unbounded derived adjunction. To justify the constant-coefficient identifications, inverse image preserves constant sheaves: for a constant object with value $M$, its maps to a sheaf $H$ are maps from $M$ to global sections of $H$; adjunction and $(f_*H)(Y)=H(X)$ give the same description on either site. Thus the two objects represent the same functor, naturally in $M$. This applies to modules and their ring actions, hence to $P_n$ and $q_n$. Exactness allows this identification termwise in the derived category. No flatness of $P_n$ over $\\Lambda$ is claimed.",
+   "uses": [
+    "def-weil-pbc-complete-coefficient-datum",
+    "def-pc-perfect-ring-complex",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); coefficient convention and elementary constant-object adjunction calculation"
+   }
   },
   {
-   "text": "Thus the forward square commutes. Invert the two horizontal isomorphisms in\nthe equality\n$Rf_*(1\\otimes q_n)\\pi_{n+1}=\\pi_n(1\\otimes q_n)$ to obtain the asserted\ncompatibility for $\\rho$.",
-   "uses": [],
-   "elementary": null
+   "text": "For a coefficient object $P$, let $t_P:L(RK\\otimes^LP)\\xrightarrow{\\sim}LRK\\otimes^LLP$ be the bifunctorial comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. By [def-weil-pbc-projection-formula-arrows], the transpose of $\\pi_P$ is $a_P=(\\epsilon_K\\otimes1_{LP})t_P$. Set $P=P_{n+1}$, $Q=P_n$, $q=q_n$, $u=1_{RK}\\otimes q$ and $v=1_K\\otimes Lq$. Under the adjunction [def-weil-pbc-proetale-operations], the transpose of $R(v)\\pi_P$ is $v a_P$: explicitly, $\\epsilon_{K\\otimes LQ}LR(v)L\\pi_P=v\\epsilon_{K\\otimes LP}L\\pi_P$ by counit naturality. The transpose of $\\pi_Q u$ is $a_Q L(u)$ by functoriality of $L$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map)"
+   }
+  },
+  {
+   "text": "Naturality of $t$ in its second variable [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives $t_Q L(u)=(1_{LRK}\\otimes Lq)t_P$. The interchange law for the tensor bifunctor gives $(\\epsilon_K\\otimes1_{LQ})(1_{LRK}\\otimes Lq)=(1_K\\otimes Lq)(\\epsilon_K\\otimes1_{LP})$. Consequently $a_Q L(u)=v a_P$. The bijection of the adjunction [def-weil-pbc-proetale-operations] is injective, so the two original morphisms are equal: $R(v)\\pi_{n+1}=\\pi_n u$. Under step 1's constant-coefficient identifications, this is exactly the forward quotient square.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 07A6; explicit tensor interchange and injectivity of the adjunction bijection"
+   }
+  },
+  {
+   "text": "Apply [lemma-weil-pbc-projection-formula-totalization] to the bounded finite-projective representatives chosen in step 1. It gives both $\\rho_j\\pi_j=1$ and $\\pi_j\\rho_j=1$, for $j=n,n+1$, for the constructed $\\rho_j$ (not merely an unspecified inverse). Compose step 3's equality on the left with $\\rho_n$ and on the right with $\\rho_{n+1}$. Associativity and these identities give $\\rho_n R(v)=u\\rho_{n+1}$, which is the reversed-horizontal square with the same downward quotient maps. For a chosen identification $s:F^\\bullet\\xrightarrow{\\sim}P_j$, the forward naturality calculation of steps 2–3, applied to $s$, gives $R(1_K\\otimes Ls)\\pi_F=\\pi_{P_j}(1_{RK}\\otimes s)$. Thus conjugating $\\pi_F$ along these two isomorphisms gives the fixed arrow $\\pi_{P_j}$. Conjugating its constructed inverse gives an inverse of that same arrow. Any two such inverses $b,c$ satisfy $b=b\\pi_{P_j}c=c$, proving independence of both representatives and splittings.",
+   "uses": [
+    "lemma-weil-pbc-projection-formula-totalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-tower-compatibility.md",
+    "place": "## Proof, inverse identities and inversion of the forward square"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-projection-formula-arrows",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-weil-pbc-projection-formula-totalization"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-tower-compatibility.md",
-  "place": "## Proof"
+  "place": "## Proof, expanded adjoint and inverse calculation using Stacks Tags 07A4, 07A6 and 0B56"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula morphism is natural in the perfect coefficient complex and its inverse commutes with quotient coefficient transition maps",
+   "results": "CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π', CategoryTheory.ProjectiveResolution.iso_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the derived sheaf projection formula coefficient tower with its constructed inverse"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the derived sheaf projection formula coefficient tower with its constructed inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the derived sheaf projection formula coefficient tower with its constructed inverse"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the projection morphism for a monoidal left adjoint and its right adjoint in the tensor factor",
+   "results": "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.map_η_comp_η_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the derived sheaf projection formula coefficient tower with its constructed inverse"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula isomorphism is natural in coefficients in the derived category of sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"naturality\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the derived sheaf projection formula coefficient tower with its constructed inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|unit_app_tensor_comp_map_δ|map_μ_comp_counit_app_tensor",
+   "results": "1024, 1036, 1193, 1204, 1232",
+   "date": "2026-10-14",
+   "verdict": "no match: the hits do not state the derived sheaf projection formula coefficient tower with its constructed inverse"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +162,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-projection-formula-tower-compatibility",
+  "worker": "stage1",
+  "summary": "Expanded both transposes and the tensor-naturality equation, cited the existing totalization inverse theorem, and made the common ambient coefficient category and n>=1 explicit. No new nodes.",
+  "blueprint": "First blueprint proof paragraph: steps 2–3; second paragraph: step 4. Step 1 exposes the implicit coefficient and perfect-package hypotheses."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-c46da5c28",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-c46da5c28 (reviewer sub-agent of L); spot-checked: Read the full item, cited DAG statements, blueprint/unit route, Stacks sources, and report. Verified hypotheses, adjunction/tensor naturality, inverse-square typing, coefficient category, edge cases, searches, and absence of new nodes. Review written to review.md."
+ }
 }
