@@ -15,34 +15,45 @@
  ],
  "proof": [
   {
-   "text": "Apply the primed currying condition to alpha^n(s). The componentwise functoriality formula in homComplex_exists, applied first to the outer projection and then the inner projection, gives h^(i+j+n)(phi_i(f^i(x))_j(g^j(y))). Here phi is the original source iterated-Hom section.",
+   "text": "Extract componentwise Hom-map naturality from homComplex_projections_exists. Apply the primed curry condition to alpha(s). Apply the outer projection formula and then the inner formula using congrArg, rather than expanding entire localized maps. The result is h applied to the original nested Hom evaluation at f(x) and g(y).",
    "uses": [
-    "lem-sc-hom-tensor-degreewise",
-    "def-pur-hom-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the other evaluation apply the Hom functor projection formula to beta. The identity HomologicalComplex.ι_mapBifunctorMap restricts its precomposition map to the termwise tensor f^i tensor g^j on the (i,j) summand. Naturality of the tensorator of sheafification and its counit shows the tensorObjIsoSheafification comparison is natural; combine this with naturality of the sheafification unit. Consequently the canonical image of x tensor y is sent to the canonical image of f^i(x) tensor g^j(y). The unprimed currying condition yields the same value as the previous step, proving the equality.",
-   "uses": [
+    "lem-sc-hom-complex-projections",
     "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed",
     "lem-sc-hom-tensor-degreewise"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use HomologicalComplex.ι_mapBifunctorMap and homTensorSectionMap_natural to show that the total tensor map carries the canonical (i,j) pure tensor to the corresponding tensor of f(x) and g(y). This is proved in the private total_tensor_pure helper using the sectionwise tensorHom formula.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-sc-hom-tensor-section-natural"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the Hom projection formula to beta at a(s). Use congrArg to replace its tensor argument by the canonical tensor of f(x) and g(y), then apply the unprimed curry condition. Both sides equal the value from the first step, so transitivity proves the original single-pure-tensor equation.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections",
+    "lem-sc-hom-tensor-degreewise"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-tensor-complex-sheaves",
   "def-pur-hom-complex",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sc-hom-tensor-degreewise"
+  "lem-sc-hom-complex-projections",
+  "lem-sc-hom-tensor-degreewise",
+  "lem-sc-hom-tensor-section-natural"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "K3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A90: expanded localized component proof by A4; tensor universal property from Modules on Sites, Section 03EK"
+  "place": "Tag 0A90; componentwise Hom naturality and total tensor inclusion calculations formalized, canonical sheaf tensor section naturality isolated in lem-sc-hom-tensor-section-natural."
  },
  "mathlib_searches": [
   {
@@ -127,9 +138,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T031529-L-3567700",
+  "landing": "20261013T054224-L-445021",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

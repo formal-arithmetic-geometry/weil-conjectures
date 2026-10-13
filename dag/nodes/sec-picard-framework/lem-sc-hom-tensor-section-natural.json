@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-hom-tensor-section-natural",
+ "kind": "statement",
+ "title": "Naturality of the canonical presheaf-to-sheaf tensor map",
+ "statement": "Let (C,J) be a site and R a sheaf of commutative rings. Let A,Aprime,B,Bprime be sheaves of R-modules, f:Aprime -> A and g:Bprime -> B. Write s(A,B) for homTensorSectionMap [lem-sc-hom-tensor-degreewise], the unit of module sheafification [def-weil-presheaf-modules-sheafification] followed by the underlying inverse of the sheaf tensor comparison [def-pur-sheaf-tensor-product]. Then s(Aprime,Bprime);(f tensor g).val = (f.val tensor g.val);s(A,B), an equality of presheaf module morphisms. No invertibility of f or g, boundedness, or hypothesis on sections is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (tensor product as sheafification), and Lemma 03CY (module sheafification universal property); https://stacks.math.columbia.edu/tag/03EK and https://stacks.math.columbia.edu/tag/03CY"
+ },
+ "stmt_deps": [
+  "lem-sc-hom-tensor-degreewise",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write S for module sheafification, eta for its unit, epsilon for its counit, and c(A,B) for tensorObjIsoSheafification. By definition c is the tensor of inverse counit components followed by the tensorator of S. Naturality of epsilon and of that tensorator gives (f tensor g);c(A,B) = c(Aprime,Bprime);S(f.val tensor g.val). This uses only the sheaf tensor construction, not monoidal closure.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the preceding equality with the inverse comparison on the left and right. It becomes c(Aprime,Bprime) inverse;(f tensor g) = S(f.val tensor g.val);c(A,B) inverse. Apply the forgetful functor and precompose with eta at Aprime.val tensor Bprime.val. Naturality of eta moves f.val tensor g.val to the left of the unit at A.val tensor B.val. Associativity of composition gives the asserted equality, since s is precisely eta followed by c inverse. The argument also works for zero morphisms or zero modules and does not claim pure tensors globally generate a sheaf tensor.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Expanded naturality consequence of Section 03EK and Lemma 03CY, read online; the source comparison is implemented in WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the canonical presheaf tensor to sheaf tensor map for sheaves of modules",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no mathematical verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural map from the sectionwise presheaf tensor product into the underlying sheaf tensor product is natural in both module sheaves",
+   "results": "PresheafOfModules tensorObj_map_tmul, tensorHom and tensorHom_app: sectionwise tensor formulas, without the underlying sheafification comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unit_naturality\"",
+   "results": "Adjunction.unit_naturality and its reassociated form: relevant ingredient, not the combined statement.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom_app|μ_natural|tensorObjIsoSheafification; whole library tensor section naturality",
+   "results": "Mathlib provides tensorHom_app and tensorator naturality. The source MonoidalClosed has comparison naturality only with identical site and coefficient universes. SheafificationTensor.tensorPure_natural is private and has the same universe restriction. No public general-site theorem matches this signature. Blueprint search for tensor sheafification natural returned no matching node.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorCurryNaturalPure",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-hom-tensor-total",
+   "place": "Tag 0A90, functoriality of the degreewise currying construction: canonical pure tensors commute with maps of both tensor factors.",
+   "via": [
+    "lem-sc-hom-tensor-curry-natural-pure",
+    "lem-sc-hom-tensor-naturality-component",
+    "lem-sc-hom-tensor-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorSectionNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorSectionNaturality.lean",
+  "declaration": "CategoryTheory.homTensorSectionMap_natural",
+  "statement": "theorem homTensorSectionMap_natural {A A' B B' : Mod} (f : A' ⟶ A) (g : B' ⟶ B) : letI := SheafOfModules.monoidalCategory R homTensorSectionMap R A' B' ≫ (f ⊗ₘ g).val = (f.val ⊗ₘ g.val) ≫ homTensorSectionMap R A B",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T054224-L-445021",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T054224-L-445021",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
