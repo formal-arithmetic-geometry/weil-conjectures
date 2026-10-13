@@ -1,0 +1,117 @@
+{
+ "kind": "statement",
+ "proof_origin": {
+  "by": "agent",
+  "group": "A3",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "087W affine finite-level reduction and 087X restriction; transport to an arbitrary affine open"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineProjections",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-formal-module-affine-open-sections-adic",
+ "title": "Finite adic sections on an arbitrary affine open",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-module-affine-projections",
+   "place": "finite-level hypotheses before the algebraic limit argument"
+  },
+  "same_as": null
+ },
+ "statement": "Let X be a Noetherian scheme, I an ideal sheaf, F a coherent formal I-module, and V an affine open. Set T_n=F_n(V), with index n representing positive level n+1. Each T_n is a finite module over Γ(X,V), is annihilated by I(V)^(n+1), and the successor section transition T_(n+1) → T_n is surjective with kernel I(V)^(n+1)T_(n+1). Only finite levels and successor maps occur; no inverse limit property is asserted.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W, first proof paragraph, and Lemma 087X (2); https://stacks.math.columbia.edu/tag/087W and https://stacks.math.columbia.edu/tag/087X checked 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the formal module to V; the restriction-object theorem gives its coherent formal object conditions. Identify V with Spec Γ(X,V), transporting the ideal to that associated with I(V).",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine finite-level sections theorem. The restriction and affine-scheme section comparisons are linear isomorphisms, natural in the level. They transport finite generation and annihilation and conjugate each successor map. Thus surjectivity and the ideal-multiple kernel formula transport to the original sections on V. No limiting cone or projection formula is used.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-module-affine-sections-adic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-coherent-formal-module-affine-sections-adic"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite sections coherent formal sheaf on affine open annihilation ideal power successor kernel",
+   "results": "8 hits, including exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen and IdealSheafData ideal-section lemmas; none states this formal-system finite-level theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.evaluation\", Module.Finite",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherentFormalModule.*sections|adicTower.*finiteLimit; affine.*sections.*adic|affine.*tower|sections.*transition in lean/Sheaf",
+   "results": "msearch grep 0 Mathlib hits. Local rg found coherentFormalModule_affine_sections_adic on Spec A, coherentFormalModules_affine_limit, and the algebraic adicTower_finiteLimit. No arbitrary-affine-open finite-level statement. The Spec A statement is used in the new node proof plan, not restated independently.",
+   "date": "2026-10-13",
+   "verdict": "no exact match for arbitrary affine opens"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine sections of coherent formal sheaves annihilated by ideal powers with surjective successor maps",
+   "results": "Service unavailable: Internal Server Error. No verdict; LeanFinder, Loogle and source grep used instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleAffineOpenSectionsAdic.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_affine_open_sections_adic",
+  "statement": "theorem coherentFormalModule_affine_open_sections_adic\n    (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)\n    (F : CoherentFormalModule X I) (V : X.affineOpens) :\n    let T := F.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op V.1)\n    (∀ n : ℕ, Module.Finite Γ(X, V.1) (T.obj (op n))) ∧\n    (∀ n : ℕ, I.ideal V ^ (n + 1) •\n      (⊤ : Submodule Γ(X, V.1) (T.obj (op n))) = ⊥) ∧\n    (∀ n : ℕ,\n      Function.Surjective (T.map (homOfLE (Nat.le_succ n)).op) ∧\n      LinearMap.ker (T.map (homOfLE (Nat.le_succ n)).op).hom =\n        I.ideal V ^ (n + 1) •\n          (⊤ : Submodule Γ(X, V.1) (T.obj (op (n + 1)))))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T015542-L-3016235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T015542-L-3016235",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
