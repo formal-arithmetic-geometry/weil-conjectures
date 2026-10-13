@@ -10797,3 +10797,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:52 L: merged deliver/B2/Sheaf.Algebra.Homology.LocalizedHomComplexBoundaries (stage 3; reviewer PASS; first push; landing 20261013T025257-L-3421344 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:52 L: merged deliver/B2/Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionIso (stage 3; reviewer PASS; first push; landing 20261013T025257-L-3421444 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:52 L: merged deliver/B4/Sheaf.RingTheory.AssociatedPrimeMinimalOfDepth (stage 3; reviewer PASS; first push; landing 20261013T025258-L-3421565 (proof); batch 20261013T025255; modules 1; new nodes 0)
+- 02:52 L: merged deliver/C2/Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoStrictPositive (stage 3; reviewer PASS; after a return; landing 20261013T025258-L-3421714 (interface); batch 20261013T025255; modules 3; new nodes 2)

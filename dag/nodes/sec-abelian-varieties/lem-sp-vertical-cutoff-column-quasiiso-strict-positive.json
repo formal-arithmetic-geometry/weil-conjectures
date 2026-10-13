@@ -13,22 +13,33 @@
  },
  "proof": [
   {
-   "text": "Proof: put E = L extended by zero and I = image of E.d (a - 1) a.\nMonicity of the upper cutoff inclusion forces g to be the canonical nested\ninclusion. Degreewise cokernels show that its quotient is zero below a - 1,\nis I in degree a - 1, and is the upper cutoff in degrees at least a.\nThe equation hq makes q zero in degree a - 1, the quotient by I in degree a,\nand an isomorphism above a. When b = a + 1, its degree-a component is the\nprojection from cycles to homology; when b > a + 1, it is the projection from\nE.X a to opcycles. Both are epimorphisms with kernel I. Thus q is degreewise\nepic, and its kernel has I only in degrees a - 1 and a, with differential\nan isomorphism between them. The inverse differential contracts this kernel.\nSince 0 < a, both degrees remain after restriction to the naturals. The\nhomology exact sequence of the kernel-source-window short exact sequence\nthen makes every homology map of q an isomorphism. This specializes the\ncanonical truncations of Stacks tag 0118; the kernel argument is agent-written.",
+   "text": "Apply verticalCutoff_comparison_epi to the integer extension with t=b-1, then evaluate hq and use epi_of_epi_fac to prove every component of q epic. HomologicalComplex.epi_of_epi_f gives Epi q.",
    "uses": [
-    "def-sp-double-complex-vertical-window",
-    "lem-sp-double-complex-vertical-tower-maps"
+    "lem-sp-vertical-cutoff-comparison-epi"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply verticalCutoff_comparison_kernel_twoTerm. Positivity implies a.toNat-1+1=a.toNat. The proved private acyclic_twoTerm lemma proves exactness at the first term from its invertible outgoing differential, exactness at the second from its invertible incoming differential, and exactness elsewhere from zero objects. Thus kernel q is acyclic.",
+   "uses": [
+    "lem-sp-vertical-cutoff-comparison-kernel-two-term"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the short exact sequence kernel q -> cokernel g -> W[a,b). Its exactness is ShortComplex.exact_kernel q; monicity and epimorphy are instances. In each natural degree n the homology exact sequence gives mono(H(q,n)) because H(kernel q,n)=0 and epi(H(q,n)) because H(kernel q,n+1)=0. Mathlib isIso_of_mono_of_epi and quasiIso_iff conclude QuasiIso q.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-double-complex-vertical-window",
-  "lem-sp-double-complex-vertical-tower-maps"
+  "lem-sp-vertical-cutoff-comparison-epi",
+  "lem-sp-vertical-cutoff-comparison-kernel-two-term"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0118",
-  "place": "Canonical cochain truncations; G2 specialization of the two-term contractible-kernel argument."
+  "place": "C2 formalizes the assigned two-term kernel route; homology sequence from Stacks Tag 0111 via Mathlib.Algebra.Homology.HomologySequence."
  },
  "mathlib_searches": [
   {
@@ -145,12 +156,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T231635-L-1962168",
+  "landing": "20261013T025258-L-3421714",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

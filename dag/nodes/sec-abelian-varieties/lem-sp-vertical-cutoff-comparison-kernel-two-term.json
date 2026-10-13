@@ -1,0 +1,179 @@
+{
+ "id": "lem-sp-vertical-cutoff-comparison-kernel-two-term",
+ "kind": "statement",
+ "title": "Kernel of the nested cutoff comparison has two terms and invertible differential",
+ "statement": "Let $C$ be abelian and $L$ a nonnegative cochain complex. Define the cutoffs $T_c$ and windows $W[a,b)$ by [lem-sp-double-complex-vertical-tower-maps] and [def-sp-double-complex-vertical-window]. Let $0<a<b$ be integers, $g:T_a(L)\\to T_b(L)$ satisfy $g\\iota_b=\\iota_a$, and $q:\\operatorname{coker}g\\to W[a,b)(L)$ satisfy that its composite with the cokernel projection is the restriction of $\\tau_{\\le b-1}(E\\to\\tau_{\\ge a}E)$, where $E$ is $L$ extended by zero to integer degrees. Then $\\ker q$ is zero outside natural degrees $a-1$ and $a$, and its differential from degree $a-1$ to $a$ is an isomorphism.",
+ "stmt_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0118",
+  "place": "homology-section-truncations, cochain canonical truncations (3) and (4); specialization of the assigned node's endpoint argument."
+ },
+ "proof": [
+  {
+   "text": "Put E=L extended by zero and I=image(E.d(a-1,a)). Monicity of the upper cutoff inclusion and compatibility determine g as the canonical nested inclusion. Evaluate its cokernel. It is zero below a-1, is I in degree a-1, and agrees with the upper cutoff in degree a and above. Evaluation preserves cokernels in the abelian category of complexes.",
+   "uses": [
+    "def-sp-double-complex-vertical-window",
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the projection equation. At a-1, q maps to zero, so its kernel is I. At a it is the opcycles quotient if a<b-1, or the cycles-to-homology quotient if a=b-1, each with kernel I. Above a the comparison is invertible until the upper cutoff, and afterwards its source and target are zero. Evaluation preserves kernels; thus all other kernel terms vanish.",
+   "uses": [
+    "def-sp-double-complex-vertical-window",
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chain map identities of the cokernel projection and kernel inclusion identify the remaining kernel differential with the identity on I under the two image identifications. In an abelian category coimage-to-image is invertible. Since a>0, both integer degrees survive restriction and equal a.toNat-1 and a.toNat; this also handles a=1, b=a+1 and I=0.",
+   "uses": [
+    "def-sp-double-complex-vertical-window",
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0118",
+  "place": "Canonical truncations; C2 formal epimorphy proof and two-term kernel specialization of the existing plan."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-13T00:48:32Z",
+   "tool": "grep",
+   "query": "kernel.*twoTerm|comparison_kernel|cycles_projection_epi|truncLEMap.*Epi|Epi.*truncLEMap",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": [],
+   "verdict": "No exact theorem found; truncation coordinate and homology APIs supply the proved epimorphy argument, while the specific two-term kernel calculation remains to formalize."
+  },
+  {
+   "t": "2026-10-13T00:48:32Z",
+   "tool": "loogle",
+   "query": "\"truncLEMap\", \"Epi\"",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": [],
+   "verdict": "No exact theorem found; truncation coordinate and homology APIs supply the proved epimorphy argument, while the specific two-term kernel calculation remains to formalize."
+  },
+  {
+   "t": "2026-10-13T00:48:32Z",
+   "tool": "leanfinder",
+   "query": "Kernel of comparison from cokernel of nested upper smart truncations to smart interval truncation is zero outside two adjacent degrees and its differential is an isomorphism",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+    "HomologicalComplex.truncGE'.XIso",
+    "HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom_assoc",
+    "HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom",
+    "HomologicalComplex.truncGEXIso",
+    "HomologicalComplex.truncGE'XIso",
+    "HomologicalComplex.shortComplexTruncLEX₃ToTruncGE",
+    "HomologicalComplex.truncLE'XIso"
+   ],
+   "digest": "239c801d51e73900",
+   "date": "2026-10-13",
+   "results": [
+    "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+    "HomologicalComplex.truncGE'.XIso",
+    "HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom_assoc",
+    "HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom",
+    "HomologicalComplex.truncGEXIso",
+    "HomologicalComplex.truncGE'XIso",
+    "HomologicalComplex.shortComplexTruncLEX₃ToTruncGE",
+    "HomologicalComplex.truncLE'XIso"
+   ],
+   "verdict": "No exact theorem found; truncation coordinate and homology APIs supply the proved epimorphy argument, while the specific two-term kernel calculation remains to formalize."
+  },
+  {
+   "t": "2026-10-13T00:49:35Z",
+   "tool": "leansearch",
+   "query": "epimorphism of upper truncations induced by lower truncation projection, and kernel of nested cutoff cokernel comparison",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoStrictPositive",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-double-complex-spectral-sequences",
+   "place": "Proof steps 1 and 2: comparison of finite smart cutoff quotients with smart vertical windows.",
+   "via": [
+    "lem-sp-vertical-cutoff-quotient-comparison",
+    "lem-sp-vertical-cutoff-column-quasiiso",
+    "lem-sp-vertical-cutoff-column-quasiiso-strict",
+    "lem-sp-vertical-cutoff-column-quasiiso-strict-positive"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.VerticalCutoffComparisonKernelTwoTerm",
+  "file": "lean/Sheaf/Algebra/Homology/VerticalCutoffComparisonKernelTwoTerm.lean",
+  "declaration": "HomologicalComplex₂.verticalCutoff_comparison_kernel_twoTerm",
+  "statement": "theorem verticalCutoff_comparison_kernel_twoTerm\n    (L : CochainComplex C ℕ) (a b : ℤ) (hab : a < b) (ha : 0 < a)\n    (g : (verticalCutoff a).obj L ⟶ (verticalCutoff b).obj L)\n    (hg : g ≫ (verticalCutoffι b).app L = (verticalCutoffι a).app L)\n    (q : cokernel g ⟶ (verticalWindow a b).obj L)\n    (hq : cokernel.π g ≫ q = HomologicalComplex.restrictionMap\n      (CochainComplex.truncLEMap\n        (CochainComplex.πTruncGE (L.extend ComplexShape.embeddingUpNat) a) (b - 1))\n      ComplexShape.embeddingUpNat) :\n    (∀ n, n ≠ a.toNat - 1 → n ≠ a.toNat → IsZero ((kernel q).X n)) ∧\n      IsIso ((kernel q).d (a.toNat - 1) a.toNat)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T025258-L-3421714",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T025258-L-3421714",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
