@@ -5,9 +5,8 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.GroupTheory.QuotientGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
-import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
+import WeilConjectures.AlgebraicGeometry.Curve.Picard
 import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionDiv
-import Mathlib.Algebra.Group.TypeTags.Hom
 @[expose] public section
 universe u
 open CategoryTheory
@@ -31,14 +30,27 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
     Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃*
       Multiplicative (ZMod n)) := by
   classical
-  obtain ⟨P0, hP0, e, -, -⟩ := f.exists_mulEquiv_prod_picZero
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  have : SmoothOfRelativeDimension 1 f :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := f))
+  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
+    ‹SmoothOfRelativeDimension 1 f›
+  have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
+  let P0 := (Scheme.picDegreeHom k C).ker
+  have hP0 : (P0 : Set C.Pic) = f.picZero := Scheme.coe_ker_picDegreeHom
+  obtain ⟨e, -⟩ := Scheme.exists_mulEquiv_prod_ker_picDegreeHom (k := k) (C := C)
   have hdiv : Function.Surjective (fun x : P0 ↦ x ^ n) := by
     intro L
     obtain ⟨M, hM, hpow⟩ := f.pic_proper_ntorsion_div n _hn L (by
       rw [← hP0]
       exact L.property)
     refine ⟨⟨M, by change M ∈ (P0 : Set C.Pic); rw [hP0]; exact hM⟩, ?_⟩
-    exact Subtype.ext hpow
+    simpa using Subtype.ext hpow
   let φ : C.Pic →* Multiplicative (ZMod n) :=
     (Int.castAddHom (ZMod n)).toMultiplicative.comp
       ((MonoidHom.fst (Multiplicative ℤ) P0).comp e.toMonoidHom)
@@ -74,3 +86,4 @@ theorem Scheme.Hom.pic_proper_ntorsion_coker
   exact ⟨(QuotientGroup.quotientMulEquivOfEq hker).trans
     (QuotientGroup.quotientKerEquivOfSurjective φ hφ)⟩
 end AlgebraicGeometry
+
