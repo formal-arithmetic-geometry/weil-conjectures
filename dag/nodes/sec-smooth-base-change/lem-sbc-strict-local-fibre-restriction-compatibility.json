@@ -16,36 +16,25 @@
  },
  "proof": [
   {
-   "text": "Expand the two section restriction constructions and cancel the global-section/terminal-section isomorphisms. Transport between any two terminal objects using the unique terminal-object isomorphism. Naturality of the unit along i moves it past the strict-local neighbourhood section.",
+   "text": "Apply strictLocal_section_pullback with q = i, hqt = hi′, hq = hi, and the given pointed limit-leg identities ht. This identifies qcqsStrictLocalSectionRestriction followed by globalSectionsUpperStarMap and the inverse-image composition comparison with geometricFibreSectionRestriction followed by inverse terminal evaluation.",
    "uses": [
-    "lem-weil-pbc-qcqs-strict-local-module-comparison"
+    "lem-weil-pbc-strict-local-section-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "The inverse-image composition coherence equation combines the unit of the projection to X and the unit of i into the unit of g′. Evaluation of that identity gives the same unit appearing in geometricFibreSectionRestriction.",
-   "uses": [
-    "lemma-weil-pbc-finite-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The two projections of the remaining iterated pullback lift are g′ and f′ followed by the selected neighbourhood point: use hi, hi′ and the pointed leg identity ht. Pullback uniqueness identifies it with geometricFibreSectionLift. Conclude by the definition of geometricFibreSectionRestriction.",
-   "uses": [
-    "lem-sbc-geometric-fibre-exchange-germs"
-   ],
-   "elementary": false
+   "text": "Unfold strictLocalFibreRestriction, reassociate, postcompose the preceding identity with terminal evaluation, and cancel the inverse/hom pair of the terminal evaluation isomorphism. This gives exactly the asserted equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-geometric-fibre-exchange-germs",
-  "lem-weil-pbc-qcqs-strict-local-module-comparison",
-  "lemma-weil-pbc-finite-pullback-composition"
+  "lem-weil-pbc-strict-local-section-pullback"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EYP, canonical restrictions; Tag 03Q9; inverse-image unit coherence"
+  "place": "Tags 03Q9 and 0EYP, canonical restrictions; D3 reuses the proved strictLocal_section_pullback and cancels terminal evaluation (2026-10-13)."
  },
  "mathlib_searches": [
   {
@@ -108,13 +97,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
+  "reviewer": "X-98934",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T194118-L-457477",
+  "landing": "20261013T054212-L-441543",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged Lean signature and definition match the node; proof and DAG match pullback specialization and terminal cancellation. Delivered module and sole direct importer compile cleanly; only permitted axioms occur."
  }
 }

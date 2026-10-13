@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
-public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
+import Sheaf.AlgebraicGeometry.StrictLocalSectionPullback
 
 /-! # Compatibility of the constructed strict-local fibre restriction
 
@@ -54,18 +54,13 @@ identities, and asserts neither continuity nor invertibility.
 Source: Stacks Project, Tag 0EYP, canonical restrictions, and Tag 03Q9.
 (blueprint: lem-sbc-strict-local-fibre-restriction-compatibility).
 
-Proof: Expand qcqsStrictLocalSectionRestriction. Its terminal evaluation map is
-inverse to the first factor in the global-sections restriction along i. Cancel
-these maps. Naturality of the unit for i moves its unit past the neighbourhood
-section map. The composition coherence equation for inverse-image units then
-combines the unit for the strict-local projection with the unit for i into the
-unit for g'. Evaluate the inverse-image composition isomorphism at the terminal
-object. The remaining etale morphism has projections f' followed by the marked
-point and g': the first is the pointed limit-leg identity in ht, the second is hi.
-Pullback uniqueness identifies it with geometricFibreSectionLift. The resulting
-composite is geometricFibreSectionRestriction by its definition. This argument
-works for empty schemes and the zero coefficient ring; it has no integral, local,
-or proper assumption. -/
+Proof: Apply `strictLocal_section_pullback` with q = i and the two projection
+identities hi' and hi. It identifies the first two factors of the constructed
+restriction with geometricFibreSectionRestriction followed by inverse terminal
+evaluation. Postcompose with terminal evaluation and cancel its inverse. The
+pointed limit-leg calculation and composition-unit coherence are already proved
+in that theorem. No continuity or invertibility of the restriction is used,
+and the argument includes empty schemes and the zero coefficient ring. -/
 theorem strictLocalFibreRestriction_compatibility
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -87,6 +82,11 @@ theorem strictLocalFibreRestriction_compatibility
         ((AffineEtale.Spec Y).obj
           ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)
         ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2 := by
-  sorry
+  have h := strictLocal_section_pullback Λ sq F t ht i hi' hi j
+  unfold strictLocalFibreRestriction
+  simp only [← Category.assoc] at h ⊢
+  rw [h]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  exact Category.comp_id _
 
 end AlgebraicGeometry.Etale
