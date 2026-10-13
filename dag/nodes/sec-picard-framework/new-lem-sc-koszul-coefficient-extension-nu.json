@@ -13,26 +13,37 @@
  ],
  "proof": [
   {
-   "text": "Proof: Put B = A/I and C = S/IS. Localization is flat, so Tag 062H gives\nKoszul regularity of the image sequence. The conormal-basis theorem (Tag 062I)\ngives bases b_i of I/I^2 and c_i of IS/(IS)^2 consisting of the generator classes.\nLet b_i^* and c_i^* be their coordinate functionals. Their increasing top wedges\nare bases of the normal determinants. Define nu by sending a times the top\nwedge of b_i^* to q(a) times the top wedge of c_i^*. This is additive and\nA-linear: hq identifies the A-action through B with the A-action through C.\nThe coordinates of koszulConormalVector(v) in b are the residues of the\ncoordinates of v, by its linearCombination definition. The coordinates of its\nimage in c are their q-images by hq. Pairing the top dual wedge with these\nvectors is their coordinate determinant (pairingDual_ιMulti_ιMulti). Ring maps\npreserve determinants, so multiplication by q(a) gives exactly the displayed\nformula for every w and v. For r = 0 use the empty wedge and determinant 1.\nIf B or C is the zero ring, the same basis-coordinate construction and formulas\nstill apply, without a nontriviality hypothesis. No data are chosen from a mere\nexistence statement: the described coordinate maps are explicit once the\nconormal bases, fixed by their generator values, are given.",
+   "text": "Localization is flat by Mathlib IsLocalization.flat. Apply isKoszulRegular_of_flat to the image sequence and exists_koszul_conormal_basis to both sequences. The bases b and c are determined by their values on the generator classes, so no arbitrary data are extracted from an undetermined existence theorem.",
    "uses": [
     "lem-sc-koszul-regular-flat-base-change",
-    "lem-sc-koszul-conormal-basis",
-    "lem-sc-exterior-power-dual-pairing",
-    "lem-weil-pbc-exterior-power-free-basis"
+    "lem-sc-koszul-conormal-basis"
    ],
    "elementary": false
+  },
+  {
+   "text": "Put e = the ordered wedge of b, z = the ordered wedge of the coordinate functionals of c, and l(w) = pairingDual(w)(e). Define nu(w) = q(l(w)) times z. Additivity follows from linearity of l and additivity of q. The identity hq on residues and map_mul prove A-linearity under the two restricted scalar actions.",
+   "uses": [
+    "lem-sc-exterior-power-dual-pairing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand koszulConormalVector using Finsupp.linearCombination_apply. The generator-value conditions identify the summands with scalar multiples of b or c. Mathlib map_sum, LinearMap.map_smul_of_tower, Basis.coord_apply and Finsupp.single_apply compute coordinates directly, without a separate conormal-coordinate theorem. On the target, a coefficient absent from the mapped Finsupp support has image zero in S, so hq makes its residue zero as well. Apply Mathlib AlternatingMap.eq_smul_basis_det to pairingDual(w) composed with the alternating wedge map: its value on arbitrary conormal vectors is l(w) times the determinant of the residue coefficient matrix. The transpose in Basis.toMatrix disappears by Matrix.det_transpose. On the target dual coordinate wedge, pairingDual_ιMulti_ιMulti gives the determinant of the q-images of exactly the same coefficients. RingHom.map_det and hq identify this determinant with q of the source determinant. Linearity of pairingDual in its first argument and map_mul now give the requested identity. All formulas hold for r = 0 and zero quotient rings; no nontriviality hypothesis or cancellation is used.",
+   "uses": [
+    "lem-sc-exterior-power-dual-pairing"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-koszul-regular-flat-base-change",
   "lem-sc-koszul-conormal-basis",
-  "lem-sc-exterior-power-dual-pairing",
-  "lem-weil-pbc-exterior-power-free-basis"
+  "lem-sc-exterior-power-dual-pairing"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
-  "place": "Lemma 48.15.5, coefficient extension construction"
+  "place": "Finite free coefficient-extension calculation; M3 evaluates on the conormal basis wedge and uses Mathlib AlternatingMap.eq_smul_basis_det instead of a normal-determinant basis. Repair: removed the duplicated private conormal_coord theorem; the two matrix computations now use Mathlib sum and basis identities directly."
  },
  "mathlib_searches": [
   {
@@ -145,11 +156,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d4d25",
-  "group": "B4",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T005854-L-2606112",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean matched the unchanged parent statement, component nodes, source constructions, proof metadata and report; all delivery modules and the direct importer compiled cleanly, and axiom checks showed only permitted axioms plus expected sorryAx."
+  "landing": "20261013T031546-L-3572431",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

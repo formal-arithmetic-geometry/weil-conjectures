@@ -8,6 +8,10 @@ module
 public import Sheaf.RingTheory.KoszulConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Localization.Defs
+import Sheaf.RingTheory.KoszulConormalBasis
+import Sheaf.RingTheory.KoszulRegularFlatBaseChange
+import Mathlib.RingTheory.Flat.Localization
+import Mathlib.LinearAlgebra.Determinant
 
 /-! # KoszulCoefficientExtensionNu
 
@@ -22,6 +26,39 @@ universe u
 open CategoryTheory
 
 namespace ExteriorAlgebra
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem pairing_conormal_det
+    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
+    (hf : Ideal.span (Set.range f) = I)
+    (b : Module.Basis (Fin r) (A ⧸ I) I.Cotangent)
+    (hb : ∀ i, b i = koszulConormalVector A I r f hf (Finsupp.single i 1))
+    (w : ⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent))
+    (v : Fin r → (Fin r →₀ A)) :
+    exteriorPower.pairingDual (A ⧸ I) I.Cotangent r w
+        (exteriorPower.ιMulti (A ⧸ I) r
+          (fun i ↦ koszulConormalVector A I r f hf (v i))) =
+      exteriorPower.pairingDual (A ⧸ I) I.Cotangent r w
+        (exteriorPower.ιMulti (A ⧸ I) r b) *
+          Ideal.Quotient.mk I (Matrix.of fun i j ↦ v i j).det := by
+  classical
+  have hb' : ∀ i, I.toCotangent
+      ⟨f i, hf ▸ Ideal.subset_span (Set.mem_range_self i)⟩ = b i := by
+    intro i
+    simpa [koszulConormalVector] using (hb i).symm
+  let l := exteriorPower.pairingDual (A ⧸ I) I.Cotangent r w
+  have h := (l.compAlternatingMap (exteriorPower.ιMulti (A ⧸ I) r)).eq_smul_basis_det b
+  have hv := DFunLike.congr_fun h (fun i ↦ koszulConormalVector A I r f hf (v i))
+  have hm : b.toMatrix (fun i ↦ koszulConormalVector A I r f hf (v i)) =
+      (Matrix.of fun i j ↦ Ideal.Quotient.mk I (v i j)).transpose := by
+    ext i j
+    change b.coord i (koszulConormalVector A I r f hf (v j)) = _
+    simp [koszulConormalVector, Finsupp.linearCombination_apply, Finsupp.sum_fintype,
+      hb', Module.Basis.coord_apply, Algebra.smul_def, Finsupp.single_apply]
+  simp only [AlternatingMap.smul_apply, LinearMap.compAlternatingMap_apply,
+    Module.Basis.det_apply, hm, Matrix.det_transpose, smul_eq_mul] at hv
+  have hd := (RingHom.map_det (Ideal.Quotient.mk I) (Matrix.of fun i j ↦ v i j)).symm
+  exact hv.trans (congrArg (fun a ↦ l (exteriorPower.ιMulti (A ⧸ I) r b) * a) hd)
 
 /-- The coefficient extension normal determinant map with its evaluation formula.
 Source: Stacks Project, Tag 0BQZ, finite free Koszul computation.
@@ -65,6 +102,67 @@ theorem exists_koszul_coefficient_extension_nu
           ((v i).mapRange (algebraMap A S) (map_zero _)))) =
     q (exteriorPower.pairingDual (A ⧸ I) I.Cotangent r w
       (exteriorPower.ιMulti (A ⧸ I) r
-        (fun i ↦ koszulConormalVector A I r f hf (v i)))) := by sorry
+        (fun i ↦ koszulConormalVector A I r f hf (v i)))) := by
+  classical
+  have : Module.Flat A S := IsLocalization.flat S T
+  have hregs := RingTheory.Sequence.isKoszulRegular_of_flat A S r f hreg
+  obtain ⟨b, hb⟩ := exists_koszul_conormal_basis A I r f hreg hf
+  obtain ⟨c, hc⟩ := exists_koszul_conormal_basis S (I.map (algebraMap A S)) r
+    (algebraMap A S ∘ f) hregs hs
+  let e := exteriorPower.ιMulti (A ⧸ I) r b
+  let z := exteriorPower.ιMulti (S ⧸ I.map (algebraMap A S)) r c.coord
+  let l : (⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent)) →ₗ[A ⧸ I] (A ⧸ I) :=
+    (LinearMap.applyₗ e).comp (exteriorPower.pairingDual (A ⧸ I) I.Cotangent r)
+  let ν : koszulNormalDeterminant A I r →ₗ[A]
+      (ModuleCat.restrictScalars (algebraMap A S)).obj
+        (koszulNormalDeterminant S (I.map (algebraMap A S)) r) :=
+    { toFun := fun w ↦ q (l w) • z
+      map_add' := by
+        intro w w'
+        simp only [map_add, add_smul]
+      map_smul' := by
+        intro a w
+        change ⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent) at w
+        change q (l (Ideal.Quotient.mk I a • w)) • z =
+          Ideal.Quotient.mk (I.map (algebraMap A S)) (algebraMap A S a) •
+            (q (l w) • z)
+        rw [map_smul, smul_eq_mul, map_mul, hq, smul_smul] }
+  refine ⟨ν, ?_⟩
+  intro w v
+  have hp : exteriorPower.pairingDual (S ⧸ I.map (algebraMap A S))
+      (I.map (algebraMap A S)).Cotangent r z
+      (exteriorPower.ιMulti (S ⧸ I.map (algebraMap A S)) r
+        (fun i ↦ koszulConormalVector S (I.map (algebraMap A S)) r
+          (algebraMap A S ∘ f) hs
+          ((v i).mapRange (algebraMap A S) (map_zero _)))) =
+      q (Ideal.Quotient.mk I (Matrix.of fun i j ↦ v i j).det) := by
+    have hc' : ∀ i, (I.map (algebraMap A S)).toCotangent
+        ⟨(algebraMap A S ∘ f) i, hs ▸ Ideal.subset_span (Set.mem_range_self i)⟩ =
+        c i := by
+      intro i
+      simpa [koszulConormalVector] using (hc i).symm
+    simp only [z, exteriorPower.pairingDual_ιMulti_ιMulti]
+    simp only [koszulConormalVector, Finsupp.linearCombination_apply,
+      hc']
+    simp only [Finsupp.sum, map_sum, LinearMap.map_smul_of_tower,
+      Module.Basis.coord_apply]
+    simp only [Finsupp.mapRange_apply, Module.Basis.repr_self, algebraMap_smul]
+    simp only [Algebra.smul_def, Finsupp.single_apply,
+      mul_ite, mul_one, mul_zero, Finset.sum_ite_eq', Finsupp.mem_support_iff]
+    refine Eq.trans ?_ ((congrArg q (RingHom.map_det (Ideal.Quotient.mk I)
+      (Matrix.of fun i j ↦ v i j))).trans (RingHom.map_det q _)).symm
+    congr 1
+    ext i j
+    dsimp
+    split_ifs with h
+    · change 0 = q (Ideal.Quotient.mk I (v i j))
+      rw [hq, h, map_zero]
+    · change Ideal.Quotient.mk (I.map (algebraMap A S))
+          (algebraMap A S (v i j)) = q (Ideal.Quotient.mk I (v i j))
+      exact (hq _).symm
+  change exteriorPower.pairingDual _ _ r (q (l w) • z) _ = _
+  rw [map_smul, LinearMap.smul_apply, smul_eq_mul, hp,
+    pairing_conormal_det A I r f hf b hb, map_mul]
+  rfl
 
 end ExteriorAlgebra
