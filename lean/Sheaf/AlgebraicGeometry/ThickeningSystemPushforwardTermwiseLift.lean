@@ -3,10 +3,11 @@ module
 public import Sheaf.AlgebraicGeometry.ThickeningSystemPushforward
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 
 @[expose] public section
 universe v
@@ -15,6 +16,7 @@ namespace AlgebraicGeometry
 noncomputable section
 set_option autoImplicit false
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A lifted adjacent transition becomes invertible after tensor pullback.
 Source: Stacks, Remark 088F, Lemma 087T and equation 0880.
 (blueprint: lem-weil-pbc-thickening-system-pushforward-lifting-termwise).
@@ -48,7 +50,86 @@ theorem thickeningSystemPushforward_adjacent_isIso
     (hu : (Scheme.Modules.pushforward (j (n + 1))).map u ≫
         (thickeningPushforwardComparison j hi n).hom.app F ≫ eF.hom =
       eG.hom ≫ H.obj.map (homOfLE (Nat.le_succ n)).op) :
-    IsIso ((ai n).homEquiv G F |>.symm u) := by sorry
+    IsIso ((ai n).homEquiv G F |>.symm u) := by
+  classical
+  have _ := hF
+  have hj (k : ℕ) : IsClosedImmersion (j k) := (hgeom k).1
+  have hicomp : IsClosedImmersion (i n ≫ j (n + 1)) := hi n ▸ hj n
+  have : IsClosedImmersion (i n) :=
+    IsClosedImmersion.of_comp_isClosedImmersion (i n) (j (n + 1))
+  have : IsLocallyNoetherian (T (n + 1)) :=
+    LocallyOfFiniteType.isLocallyNoetherian (j (n + 1))
+  have : G.IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType (T (n + 1)) G).mp hG).1
+  have hk : (i n).ker = (J.comap (j (n + 1))) ^ (n + 1) := by
+    rw [← Scheme.IdealSheafData.comap_map_of_isClosedImmersion (j (n + 1)) (i n).ker,
+      Scheme.IdealSheafData.map_ker, hi n, (hgeom n).2,
+      Scheme.IdealSheafData.comap_pow]
+  obtain ⟨q, hq⟩ := closedImmersion_power_quotient (J.comap (j (n + 1)))
+    (n + 1) (i n) hk (ai n) G
+  obtain ⟨ρ, hρ, _, _⟩ :=
+    (Scheme.closedImmersion_pushforward_idealPowers (j (n + 1)) J).2.2.2
+  let d := ρ G (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) ≪≫
+    (Scheme.Modules.pushforward (j (n + 1))).mapIso q ≪≫
+    (thickeningPushforwardComparison j hi n).app ((Scheme.Modules.tensorPullback (i n)).obj G)
+  have hd : formalModuleQuotientπ J (n + 1)
+      ((Scheme.Modules.pushforward (j (n + 1))).obj G) ≫ d.hom =
+      (Scheme.Modules.pushforward (j (n + 1))).map ((ai n).unit.app G) ≫
+        (thickeningPushforwardComparison j hi n).hom.app
+          ((Scheme.Modules.tensorPullback (i n)).obj G) := by
+    dsimp only [d, Iso.trans_hom, Functor.mapIso_hom]
+    rw [← Category.assoc, ← Category.assoc, hρ G (n + 1) (Nat.succ_le_succ (Nat.zero_le n)),
+      ← Functor.map_comp, hq]
+    rfl
+  let e : formalModuleQuotient J (n + 1)
+      ((Scheme.Modules.pushforward (j (n + 1))).obj G) ≅
+      formalModuleQuotient J (n + 1) (H.obj.obj (op (n + 1))) :=
+    { hom := formalModuleQuotientMap J eG.hom (Nat.le_refl (n + 1))
+      inv := formalModuleQuotientMap J eG.inv (Nat.le_refl (n + 1))
+      hom_inv_id := by
+        rw [← formalModuleQuotientMap_comp, eG.hom_inv_id]
+        exact formalModuleQuotientMap_id J _ _
+      inv_hom_id := by
+        rw [← formalModuleQuotientMap_comp, eG.inv_hom_id]
+        exact formalModuleQuotientMap_id J _ _ }
+  obtain ⟨a, ha⟩ := H.property.2.2 n
+  let f := (ai n).homEquiv G F |>.symm u
+  have hf : (ai n).unit.app G ≫ (Scheme.Modules.pushforward (i n)).map f = u := by
+    rw [← (ai n).homEquiv_unit G F f]
+    exact (ai n).homEquiv G F |>.apply_symm_apply u
+  have he : d.hom ≫ (Scheme.Modules.pushforward (j n)).map f ≫ eF.hom =
+      e.hom ≫ a.hom := by
+    apply (cancel_epi (CategoryTheory.Limits.cokernel.π (Scheme.idealModuleProductι
+      (Scheme.idealSheafPower J.toModulesι (n + 1)).2
+        ((Scheme.Modules.pushforward (j (n + 1))).obj G)))).1
+    change formalModuleQuotientπ J (n + 1) _ ≫ _ = _
+    rw [← Category.assoc, ← Category.assoc, hd]
+    simp only [Category.assoc]
+    rw [← NatTrans.naturality_assoc]
+    simp only [Functor.comp_map, ← Category.assoc, ← Functor.map_comp]
+    rw [hf]
+    simp only [Category.assoc]
+    rw [hu]
+    change _ = (formalModuleQuotientπ J (n + 1) _ ≫
+      formalModuleQuotientMap J eG.hom (Nat.le_refl (n + 1))) ≫ a.hom
+    simp only [formalModuleQuotientπ, formalModuleQuotientMap,
+      CategoryTheory.Limits.cokernel.π_desc, Category.assoc]
+    exact congrArg (eG.hom ≫ ·) ha.symm
+  have hm : (Scheme.Modules.pushforward (j n)).map f =
+      d.inv ≫ e.hom ≫ a.hom ≫ eF.inv := by
+    calc
+      _ = d.inv ≫ (d.hom ≫ (Scheme.Modules.pushforward (j n)).map f ≫ eF.hom) ≫
+          eF.inv := by simp
+      _ = _ := by rw [he]; simp only [Category.assoc]
+  have : IsIso ((Scheme.Modules.pushforward (j n)).map f) := by
+    rw [hm]
+    exact (d.symm ≪≫ e ≪≫ a ≪≫ eF.symm).isIso_hom
+  let hff := (closedImmersion_pushforward_fullyFaithful (j n)).2
+  let : (Scheme.Modules.pushforward (j n)).Full :=
+    { map_surjective := fun {X Y} ↦ (hff X Y).2 }
+  let : (Scheme.Modules.pushforward (j n)).Faithful :=
+    { map_injective := fun {X Y} ↦ (hff X Y).1 }
+  exact isIso_of_reflects_iso f (Scheme.Modules.pushforward (j n))
 
 end
 end AlgebraicGeometry
