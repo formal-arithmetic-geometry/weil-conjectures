@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.CategoryTheory.SiteCohomologyPullbackData
 
 /-! # Evaluation of degree-zero object cohomology
 Source: Mathlib, SheafCohomology/Basic, Ext/Basic, Sheafification and Yoneda.
@@ -18,21 +18,8 @@ universe u
 open CategoryTheory Opposite
 namespace CategoryTheory
 
-/-- Evaluate a degree-zero Ext class on the identity generator of the free sheaf.
-Source: Mathlib, SheafCohomology/Basic, Ext/Basic, Sheafification and Yoneda.
-(blueprint: lem-weil-pbc-object-cohomology-zero-evaluation).
--/
-noncomputable def siteCohomology_zero_section
-    {C : Type u} [SmallCategory C] (T : GrothendieckTopology C)
-    [HasSheafify T AddCommGrpCat.{u}]
-    [HasExt.{u} (Sheaf T AddCommGrpCat.{u})]
-    (A : Sheaf T AddCommGrpCat.{u}) (X : C) (x : Sheaf.H' A 0 X) :
-    A.obj.obj (op X) :=
-  ((Abelian.Ext.addEquiv₀ x).hom.app (op X)).hom
-    (((toSheafify T (yoneda.obj X ⋙ AddCommGrpCat.free)).app (op X)).hom
-      (FreeAbelianGroup.of (𝟙 X)))
-
-/-- Degree-zero evaluation is injective, preserves zero, and is natural in the sheaf.
+/-- Degree-zero evaluation `Sheaf.objectCohomologyEval₀` on the identity generator of the free
+sheaf is injective, preserves zero, and is natural in the sheaf.
 Source: Mathlib, SheafCohomology/Basic, Ext/Basic, Sheafification and Yoneda.
 (blueprint: lem-weil-pbc-object-cohomology-zero-evaluation).
 
@@ -46,42 +33,20 @@ commutes with each identification, proving the displayed naturality equation.
 -/
 theorem siteCohomology_zero_section_properties
     {C : Type u} [SmallCategory C] (T : GrothendieckTopology C)
-    [HasSheafify T AddCommGrpCat.{u}]
     [HasExt.{u} (Sheaf T AddCommGrpCat.{u})] :
     (∀ (A : Sheaf T AddCommGrpCat.{u}) (X : C),
-      Function.Injective (siteCohomology_zero_section T A X)) ∧
+      Function.Injective (Sheaf.objectCohomologyEval₀ T X A)) ∧
     (∀ (A : Sheaf T AddCommGrpCat.{u}) (X : C),
-      siteCohomology_zero_section T A X 0 = 0) ∧
+      Sheaf.objectCohomologyEval₀ T X A 0 = 0) ∧
     (∀ (A B : Sheaf T AddCommGrpCat.{u}) (f : A ⟶ B) (X : C)
       (x : Sheaf.H' A 0 X),
-      siteCohomology_zero_section T B X
+      Sheaf.objectCohomologyEval₀ T X B
           ((((Sheaf.cohomologyPresheafFunctor T 0).map f).app (op X)).hom x) =
-        (f.hom.app (op X)).hom (siteCohomology_zero_section T A X x)) := by
-  constructor
-  · intro A X x y h
-    apply Abelian.Ext.addEquiv₀.injective
-    apply ((sheafificationAdjunction T AddCommGrpCat.{u}).homEquiv
-      (yoneda.obj X ⋙ AddCommGrpCat.free) A).injective
-    apply ((AddCommGrpCat.adj.whiskerRight Cᵒᵖ).homEquiv
-      (yoneda.obj X) A.obj).injective
-    apply yonedaEquiv.injective
-    exact h
-  constructor
-  · intro A X
-    unfold siteCohomology_zero_section
-    rw [map_zero]
-    rfl
-  · intro A B f X x
-    have hx : Abelian.Ext.addEquiv₀
-        ((((Sheaf.cohomologyPresheafFunctor T 0).map f).app (op X)).hom x) =
-        Abelian.Ext.addEquiv₀ x ≫ f := by
-      delta Abelian.Ext.addEquiv₀
-      apply (Abelian.Ext.mk₀_bijective _ B).injective
-      simp only [AddEquiv.coe_mk, Abelian.Ext.mk₀_homEquiv₀_apply,
-        ← Abelian.Ext.mk₀_comp_mk₀]
-      rfl
-    unfold siteCohomology_zero_section
-    rw [hx]
-    rfl
+        (f.hom.app (op X)).hom (Sheaf.objectCohomologyEval₀ T X A x)) := by
+  refine ⟨fun A X ↦ Sheaf.objectCohomologyEval₀_injective T X A, fun A X ↦ ?_,
+    fun A B f X x ↦ Sheaf.objectCohomologyEval₀_naturality T X f x⟩
+  unfold Sheaf.objectCohomologyEval₀
+  rw [map_zero]
+  rfl
 
 end CategoryTheory
