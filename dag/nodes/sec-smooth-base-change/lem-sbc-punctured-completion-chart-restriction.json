@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-punctured-completion-chart-restriction",
+ "kind": "statement",
+ "title": "The punctured comparison restricts the first matching-ring projection",
+ "statement": "Let $A$ be a commutative local ring, $C$ its maximal-ideal adic completion [def-weil-pbc-adic-completion], $U\\subseteq\\operatorname{Spec}A$ an arbitrary open, $q:Y\\to U$ and $s:E\\to\\operatorname{Spec}C$ arbitrary scheme morphisms, and $D$ completion overlap data [def-sbc-punctured-completion-matching-sections]. Write $B$ for its matching ring, $a:A\\to B$ for its base map, $m:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ for its model map, $p:Y\\to m^{-1}(U)$ for its punctured comparison, and $P:B\\to\\Gamma(Y)$ for the first ring-pullback projection. For $f\\in A$ put $V=(q\\circ\\iota_U)^{-1}(D(f))$ and $W=(m|_U)^{-1}(\\iota_U^{-1}(D(f)))$. Let $\\rho:B\\to\\Gamma(W)$ be affine-global-section identification followed by restriction, and $\\psi:\\Gamma(W)\\to\\Gamma(p^{-1}(W))$ the pullback along $p|_W$. Give $\\Gamma(Y,V)$ its structural $A$-action and $\\Gamma(p^{-1}(W))$ the action through $\\psi\\rho a$. There is an $A$-linear equivalence $c:\\Gamma(Y,V)\\simeq\\Gamma(p^{-1}(W))$ with $\\psi(\\rho(z))=c(P(z)|_V)$ for every $z\\in B$. No finiteness or generator hypothesis is needed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 05ER, natural comparison Psi on coordinate projections; Tag 0BLH, affine chart setup. The restriction/adjunction calculation is supplied in full in Lean."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "By puncturedMap_over the composite of p with the restricted model map is q. Inverse-image functoriality, followed by U inclusion, gives p inverse image of W equal to V. Apply the presheaf to this equality and compose with the top-section isomorphism of the open subscheme to obtain a ring isomorphism H from Gamma(Y,V) to Gamma(p inverse image of W).",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The definition of fromPunctured is Y.toSpecGamma followed by Spec of P. Apply appTop and the Spec-Gamma naturality identity: the inverse affine global-section isomorphism followed by fromPunctured.appTop equals P. The puncturedMap inclusion equals fromPunctured, and the restriction square commutes. Apply appTop contravariantly to this square; it says psi rho equals P followed by restriction to the inverse-image open. The top-section isomorphism and the open equality identify this latter restriction with H of restriction to V. This proves the asserted equation for every z.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first projection of baseMap is the structural map on Y by the ring-pullback lift equation. Substitute baseMap(a) into the preceding equation. It identifies H of the structural scalar on V with psi rho baseMap(a). Since H is a ring isomorphism, preservation of multiplication now proves A-linearity on every chart section. Its additive equivalence with this scalar law is c.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-matching-sections",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "J2",
+  "document": "Stacks Project",
+  "place": "Tag 05ER, natural comparison Psi on coordinate projections; Tag 0BLH, affine chart setup. The restriction/adjunction calculation is supplied in full in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of the first projection of a matching ring under the Spec Gamma adjunction to a principal chart",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a principal open under the Spec Gamma adjunction equals restriction of the first projection of a ring pullback",
+   "results": "AlgebraicGeometry.toOpen_toSpecΓ_app; Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top; Scheme.toOpen_eq; Scheme.Opens.toSpecΓ_SpecMap_appLE. These support the adjunction calculation, but none states the comparison for CompletionGluingData.",
+   "date": "2026-10-14",
+   "verdict": "proved by combining the existing restriction and adjunction identities"
+  },
+  {
+   "tool": "grep",
+   "query": "morphismRestrict_ι|ΓSpecIso_naturality|toSpecΓ_appTop",
+   "results": "25 Mathlib hits, including Restrict.lean:581 morphismRestrict_ι, Scheme.lean:609 ΓSpecIso_naturality, GammaSpecAdjunction.lean:466 toSpecΓ_appTop. Read these sources and Restrict.lean:146 topIso; they give the full proof after inverse-image functoriality.",
+   "date": "2026-10-14",
+   "verdict": "proof ingredients present; no existing combined matching-ring chart theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingChart",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "The completion overlap matching algebra used in the punctured finite-model input; geometric affine chart/equalizer identification before denominator lifting, steps 1 and 2 of lem-sbc-punctured-matching-chart-power-lift. The punctured comparison restricts the first matching-ring projection.",
+   "via": [
+    "lem-sbc-punctured-completion-formal-glueing-chart",
+    "lem-sbc-punctured-matching-chart-power-lift",
+    "new-sbc-punctured-completion-matching-affine-sections-comparison",
+    "lem-sbc-punctured-completion-matching-affine-sections",
+    "lem-sbc-punctured-completion-matching-punctured-iso",
+    "lem-sbc-punctured-completion-finite-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionChartRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_matching_chart_restriction",
+  "statement": "theorem exists_matching_chart_restriction\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme}\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))}\n    (D : CompletionGluingData A U q E s) (f : A) :\n    let V := (q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen f\n    let W := (D.modelMap ∣_ U) ⁻¹ᵁ (U.ι ⁻¹ᵁ PrimeSpectrum.basicOpen f)\n    let ρ := ((ΓSpecIso D.matchingRing).inv ≫\n      (W.ι ≫ (D.modelMap ⁻¹ᵁ U).ι).appTop).hom\n    let ψ := (D.puncturedMap ∣_ W).appTop.hom\n    let P := pullback.fst\n      (pullback.fst q (completionSpecMap A ∣_ U)).appTop D.toCompleted.appTop\n    let aY := ((ΓSpecIso (.of A)).inv ≫ (q ≫ U.ι).appTop).hom\n    letI : Algebra A Γ(Y, V) :=\n      ((Y.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op).hom.comp aY).toAlgebra\n    letI : Algebra A Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤) :=\n      ((ψ.comp ρ).comp D.baseMap.hom).toAlgebra\n    ∃ c : Γ(Y, V) ≃ₗ[A] Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤),\n      ∀ z : D.matchingRing,\n        ψ (ρ z) = c (Y.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op (P z))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T201755-L-3971595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T201755-L-3971595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
