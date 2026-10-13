@@ -33,94 +33,51 @@
  ],
  "proof": [
   {
-   "text": "(The base system.) Apply [lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z] to the local ring $(R,\\mathfrak m)$: we get a nonempty directed set $(\\Lambda,\\le)$, local rings $(R_\\lambda,\\mathfrak p_\\lambda)$, essentially of finite type over $\\mathbf Z$, local transition homomorphisms $r_{\\mu\\lambda}:R_\\lambda\\to R_\\mu$ (identities for $\\lambda=\\mu$, compatible with composition) and local homomorphisms $\\pi_\\lambda:R_\\lambda\\to R$ compatible with them, such that $(R,(\\pi_\\lambda)_{\\lambda\\in\\Lambda})$ is a colimit of $(R_\\lambda)$ in the category of commutative rings [def-weil-pbc-category-colimit].",
-   "uses": [
-    "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00R7 (lemma-criterion-flatness-fibre, line 32992), first paragraph: 'As in the proof of Lemma 00QV we may first write $R=\\colim R_\\lambda$ as a directed colimit of local $\\mathbf Z$-algebras which are essentially of finite type'"
-   }
-  },
-  {
-   "text": "(The middle ring.) Apply [lem-weil-pbc-limit-module-essentially-finite-presentation-over-system] to the system of step 1 ($A_\\lambda=R_\\lambda$, $a_{\\mu\\lambda}=r_{\\mu\\lambda}$, $A=R$, $\\pi_\\lambda$), to $T=S$ with the local homomorphism $\\tau=\\alpha$ (by hypothesis $S$ is essentially of finite presentation over $R$ via $\\alpha$, in the sense of that node), and to the module $N=0$ (the cokernel of $S^{\\oplus0}\\to S^{\\oplus0}$, so finitely presented). We get $\\lambda_1\\in\\Lambda$ and, on $\\Lambda_1=\\{\\lambda\\ge\\lambda_1\\}$, local rings $S_\\lambda$, local homomorphisms $\\rho_\\lambda:R_\\lambda\\to S_\\lambda$, local transition homomorphisms $s_{\\mu\\lambda}:S_\\lambda\\to S_\\mu$ with $s_{\\mu\\lambda}\\rho_\\lambda=\\rho_\\mu r_{\\mu\\lambda}$, and local homomorphisms $\\kappa_\\lambda:S_\\lambda\\to S$ with $\\kappa_\\lambda\\rho_\\lambda=\\alpha\\pi_\\lambda$ and $\\kappa_\\mu s_{\\mu\\lambda}=\\kappa_\\lambda$, such that $(S,(\\kappa_\\lambda)_{\\lambda\\in\\Lambda_1})$ is a colimit of $(S_\\lambda)_{\\Lambda_1}$ in commutative rings, $S_\\lambda$ is essentially of finite type over $R_\\lambda$ via $\\rho_\\lambda$, and for $\\lambda_1\\le\\lambda\\le\\mu$ the maps $S_\\lambda\\otimes_{R_\\lambda}R_\\mu\\to S_\\mu$, $x\\otimes y\\mapsto s_{\\mu\\lambda}(x)\\rho_\\mu(y)$, and $S_\\lambda\\otimes_{R_\\lambda}R\\to S$, $x\\otimes y\\mapsto\\kappa_\\lambda(x)\\alpha(y)$, are localizations at some multiplicative subsets (clauses (1), (2), (4), (5) of that node; the module data, all zero, are discarded).",
-   "uses": [
-    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00R7 (lemma-criterion-flatness-fibre, line 32992), first paragraph: 'Next, we may assume that for some $\\lambda_1\\in\\Lambda$ there exist $f_{j,\\lambda_1}\\in R_{\\lambda_1}[x_1,\\dots,x_n]$ such that $S=\\colim_{\\lambda\\ge\\lambda_1}S_\\lambda$, with $S_\\lambda=(R_\\lambda[x_1,\\dots,x_n]/(f_{1,\\lambda},\\dots,f_{u,\\lambda}))_{\\mathfrak q_\\lambda}$' (the construction of the proof of Lemma Tag 00QV, line 32346)"
-   }
-  },
-  {
-   "text": "($S'$ is essentially of finite presentation over $S$.) By hypothesis $S\\cong W^{-1}B$ as $R$-algebras with $B$ a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra]; a presentation $R[x_1,\\dots,x_n]/(f_1,\\dots,f_u)\\cong B$ is in particular a surjection of $R$-algebras $R[x_1,\\dots,x_n]\\to B$, so $B$ is of finite type over $R$ [def-weil-pbc-finite-type-algebra] and $S$ is essentially of finite type over $R$ via $\\alpha$ [def-weil-pbc-essentially-finite-type-algebra]. By hypothesis $S'$ is essentially of finite presentation over $R$ via $\\beta\\circ\\alpha$. Hence, by [lem-weil-pbc-essentially-finite-presentation-over-intermediate] (with $\\varphi=\\alpha$, $\\psi=\\beta$), $S'$ is isomorphic as an $S$-algebra (via $\\beta$) to a localization $V^{-1}P'$ of a finitely presented $S$-algebra $P'$ at a multiplicative subset $V\\subseteq P'$.",
+   "text": "The supplied finite presentation of B makes B finite type over R, and localization and composition make α essentially of finite type. Apply [lem-weil-pbc-essentially-finite-presentation-over-intermediate] to derive a localization presentation of S′ over S. This proves the intermediate-presentation reduction rather than assuming it.",
    "uses": [
     "def-weil-pbc-finitely-presented-algebra",
     "def-weil-pbc-finite-type-algebra",
     "def-weil-pbc-essentially-finite-type-algebra",
     "lem-weil-pbc-essentially-finite-presentation-over-intermediate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00R7 (lemma-criterion-flatness-fibre, line 32992), first paragraph, where $S'$ is written as $(S_\\lambda[y_1,\\dots,y_m]/(\\bar g_{1,\\lambda},\\dots,\\bar g_{v,\\lambda}))_{\\bar{\\mathfrak q}'_\\lambda}$ in the colimit, i.e. as a localization of a finitely presented $S$-algebra (used there without statement)"
-   }
+   "elementary": false
   },
   {
-   "text": "(The top ring and the module.) The set $\\Lambda_1$ of step 2 is a nonempty directed set ($\\lambda_1\\in\\Lambda_1$, and an upper bound in $\\Lambda$ of two elements of $\\Lambda_1$ lies in $\\Lambda_1$). Apply [lem-weil-pbc-limit-module-essentially-finite-presentation-over-system] to the system $A_\\lambda=S_\\lambda$ ($\\lambda\\in\\Lambda_1$) with transition maps $s_{\\mu\\lambda}$, $A=S$ with the maps $\\kappa_\\lambda$ (local rings, local maps, colimit: step 2), to $T=S'$ with the local homomorphism $\\tau=\\beta$ ($S'$ is essentially of finite presentation over $S$ by step 3), and to the $S'$-module $N=M$, finitely presented by hypothesis. We get $\\lambda_2\\in\\Lambda_1$ and, on $\\Lambda_2=\\{\\lambda\\in\\Lambda_1:\\lambda\\ge\\lambda_2\\}=\\{\\lambda\\in\\Lambda:\\lambda\\ge\\lambda_2\\}$, local rings $S'_\\lambda$, local homomorphisms $\\sigma_\\lambda:S_\\lambda\\to S'_\\lambda$, local transition homomorphisms $s'_{\\mu\\lambda}:S'_\\lambda\\to S'_\\mu$ with $s'_{\\mu\\lambda}\\sigma_\\lambda=\\sigma_\\mu s_{\\mu\\lambda}$, local homomorphisms $\\kappa'_\\lambda:S'_\\lambda\\to S'$ with $\\kappa'_\\lambda\\sigma_\\lambda=\\beta\\kappa_\\lambda$ and $\\kappa'_\\mu s'_{\\mu\\lambda}=\\kappa'_\\lambda$, $S'_\\lambda$-modules $M_\\lambda$ with semilinear transition maps $m_{\\mu\\lambda}:M_\\lambda\\to M_\\mu$ and semilinear maps $\\nu_\\lambda:M_\\lambda\\to M$ (over $s'_{\\mu\\lambda}$, resp. $\\kappa'_\\lambda$) compatible with them, such that: $S'$ is the colimit of the rings $S'_\\lambda$ and $M$ the colimit of the abelian groups $M_\\lambda$ over $\\Lambda_2$; $S'_\\lambda$ is essentially of finite type over $S_\\lambda$ via $\\sigma_\\lambda$; $M_\\lambda$ is the cokernel of a $S'_\\lambda$-linear map $S'^{\\oplus s}_\\lambda\\to S'^{\\oplus t}_\\lambda$; for $\\lambda\\le\\mu$ in $\\Lambda_2$, $S'_\\lambda\\otimes_{S_\\lambda}S_\\mu\\to S'_\\mu$ is a localization and $M_\\lambda\\otimes_{S'_\\lambda}S'_\\mu\\to M_\\mu$ an isomorphism; and $S'_\\lambda\\otimes_{S_\\lambda}S\\to S'$ is a localization and $M_\\lambda\\otimes_{S'_\\lambda}S'\\to M$ an isomorphism (clauses (1)-(5) of that node, with the maps $x\\otimes y\\mapsto\\bar x\\,y$ written there).",
+   "text": "Obtain the directed base system F with local transitions, local cocone π₀, colimit R and essential finite type over ℤ from [lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z].",
    "uses": [
-    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system"
+    "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00R7 (lemma-criterion-flatness-fibre, line 32992), first paragraph: 'For some $\\lambda_2\\ge\\lambda_1$ there exist $g_{j,\\lambda_2}$ ... such that $S'=\\colim_{\\lambda\\ge\\lambda_2}S'_\\lambda$ ...', the presentation matrix $A$ of $M$ descended to $A_{\\lambda_3}$ and $M_\\lambda=\\operatorname{Coker}(A_\\lambda)$ for $\\lambda\\ge\\lambda_3$ (the matrix lies in $\\mathrm{Mat}(t\\times s,S'_{\\lambda_3})$; the source's '$S_{\\lambda_3}$' is a misprint), and the first sentence of the second paragraph ('With these choices ... is a localization ... is an isomorphism'); the construction of Lemma Tag 00QX (line 32427) over the system $S_\\lambda$"
-   }
+   "elementary": false
   },
   {
-   "text": "(Restricting $R$ and $S$ to $\\Lambda_2$.) Every $\\lambda\\in\\Lambda$ has some $\\lambda'\\in\\Lambda_2$ with $\\lambda\\le\\lambda'$ (an upper bound of $\\lambda,\\lambda_2$), and likewise for $\\lambda\\in\\Lambda_1$. Regard $\\Lambda$ as the category $\\mathcal I$ with one arrow $\\mu\\to\\lambda$ when $\\lambda\\le\\mu$; it is cofiltered since $\\Lambda$ is nonempty and directed, and $\\mathcal I^{\\mathrm{op}}$ is the directed set $\\Lambda$, on which $(R_\\lambda,r_{\\mu\\lambda})$ is a functor. The full subcategory $\\mathcal J=\\Lambda_2$ satisfies the hypothesis of [lem-weil-pbc-colimit-initial-full-subcategory] (1). Hence the canonical map from the colimit of $(R_\\lambda)_{\\lambda\\in\\Lambda_2}$ to $R$ (induced by the $\\pi_\\lambda$, $\\lambda\\in\\Lambda_2$) is an isomorphism, i.e. $(R,(\\pi_\\lambda)_{\\lambda\\in\\Lambda_2})$ is a colimit of $(R_\\lambda)_{\\Lambda_2}$ in commutative rings [def-weil-pbc-category-colimit]. The same argument with $\\Lambda_1$ in place of $\\Lambda$ shows that $(S,(\\kappa_\\lambda)_{\\lambda\\in\\Lambda_2})$ is a colimit of $(S_\\lambda)_{\\Lambda_2}$.",
+   "text": "Apply [lem-weil-pbc-limit-tower-over-local-system] to this supplied base system and both localization presentations. It returns a final J, the restricted base diagram J ⋙ F and its explicit cocone, and the upper-ring and module diagrams satisfying every requested clause except finite generation.",
    "uses": [
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-limit-tower-over-local-system"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00R7 (lemma-criterion-flatness-fibre, line 32992), first paragraph (all systems are taken over $\\lambda\\ge\\lambda_3$ there)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Conclusion.) Take the nonempty directed set $\\Lambda_2$ and, for $\\lambda\\le\\mu$ in $\\Lambda_2$, the local rings $R_\\lambda$, $S_\\lambda$, $S'_\\lambda$, the local homomorphisms $\\rho_\\lambda:R_\\lambda\\to S_\\lambda$ (step 2) and $\\sigma_\\lambda:S_\\lambda\\to S'_\\lambda$ (step 4), the transition maps $r_{\\mu\\lambda}$, $s_{\\mu\\lambda}$, $s'_{\\mu\\lambda}$, $m_{\\mu\\lambda}$, and the maps $\\pi_\\lambda$, $\\kappa_\\lambda$, $\\kappa'_\\lambda$, $\\nu_\\lambda$ to $R$, $S$, $S'$, $M$. All these ring maps are local (steps 1, 2, 4); the transition maps commute with $\\rho$ and $\\sigma$ ($s_{\\mu\\lambda}\\rho_\\lambda=\\rho_\\mu r_{\\mu\\lambda}$, $s'_{\\mu\\lambda}\\sigma_\\lambda=\\sigma_\\mu s_{\\mu\\lambda}$), the maps to $R,S,S'$ commute with $\\alpha$, $\\beta$ ($\\kappa_\\lambda\\rho_\\lambda=\\alpha\\pi_\\lambda$, $\\kappa'_\\lambda\\sigma_\\lambda=\\beta\\kappa_\\lambda$) and with the transition maps, and the $M$-maps are semilinear and compatible (steps 2, 4). Clause (1) of the statement is step 5 for $R$, $S$ and step 4 for $S'$, $M$; clause (2) is step 1 ($R_\\lambda$ over $\\mathbf Z$), step 2 ($S_\\lambda$ over $R_\\lambda$) and step 4 ($S'_\\lambda$ over $S_\\lambda$); clause (3) is step 4 (a cokernel of $S'^{\\oplus s}_\\lambda\\to S'^{\\oplus t}_\\lambda$ is generated by the images of the $t$ basis vectors, so it is finitely generated [def-weil-finitely-generated-module]); clause (4) is step 2 for $S_\\lambda\\otimes_{R_\\lambda}R_\\mu\\to S_\\mu$ and step 4 for $S'_\\lambda\\otimes_{S_\\lambda}S_\\mu\\to S'_\\mu$ and $M_\\lambda\\otimes_{S'_\\lambda}S'_\\mu\\cong M_\\mu$; clause (5) is step 2 for $S_\\lambda\\otimes_{R_\\lambda}R\\to S$ and step 4 for $S'_\\lambda\\otimes_{S_\\lambda}S\\to S'$ and $M_\\lambda\\otimes_{S'_\\lambda}S'\\cong M$.",
+   "text": "At each stage, the supplied linear equivalence from a finite free cokernel transfers Module.Finite from the quotient to the stage module using Module.Finite.of_surjective. Reassemble the original conclusion with this additional conjunct; all rings, diagrams, maps and other clauses are unchanged.",
    "uses": [
-    "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
-    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system",
     "def-weil-finitely-generated-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00R7 (lemma-criterion-flatness-fibre, line 32992), first paragraph, and the first sentence of the second paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system",
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-essentially-finite-type-algebra",
   "lem-weil-pbc-essentially-finite-presentation-over-intermediate",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z",
+  "lem-weil-pbc-limit-tower-over-local-system",
   "def-weil-finitely-generated-module"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 00R7 (lemma-criterion-flatness-fibre, line 32992), first paragraph and first sentence of the second; with the constructions of the proofs of Lemmas Tag 00QU (line 32273), 00QV (line 32346) and 00QX (line 32427)"
+  "place": "Algebra, proof of Tag 00R7, first paragraph (two applications of the constructions of Tags 00QV and 00QX), and first sentence of the second paragraph (tensor comparisons).",
+  "note": "W2 second reading: real reduction through a supplied base system and an intermediate presentation; one strictly smaller descent-and-restriction hole remains."
  },
  "mathlib_searches": [
   {
@@ -220,5 +177,15 @@
   "group": "J1",
   "result": "fix",
   "note": "FIX rewrite: local R,S,S' (one universe u, Λ : Type u) with local α,β; ess. fin. pres. as Algebra.FinitePresentation B + IsLocalization W S with f∘algebraMap=α (resp. β∘α); M cokernel of t×s matrix; conclusion in H1/G1 functor+IsColimit cocone form: local stages/transitions/π κ κ', ρ,σ natural with κρ=απ, κ'σ=βκ, semilinear D and ν, (1) four IsColimit, (2) EssFiniteType over ℤ/ρ/σ, (3) Module.Finite + t×s cokernel, (4) two tensor localizations + ≃ₗ, (5) two tensor localizations to S,S' + ≃ₗ to M; private IsLocalizationMap dropped for Mathlib IsLocalization"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T222422-L-1229872",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -16,7 +16,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
 import Sheaf.RingTheory.EssentiallyFinitePresentationOverIntermediate
-import Sheaf.RingTheory.LimitModuleEssentiallyFinitePresentationOverSystem
+import Sheaf.Paper.LimitTowerOverLocalSystem
 import Sheaf.RingTheory.LocalRingColimitEssentiallyFiniteType
 
 /-! # Limit presentation of an essentially finitely presented local tower
@@ -166,6 +166,32 @@ theorem limit_tower_essentially_finite_presentation
           ∀ (y : S') (x : D.obj i),
             e (y ⊗ₜ[C.obj i] x) =
               y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x) := by
-  sorry
+  have hα : α.EssFiniteType := by
+    let : Algebra R S := α.toAlgebra
+    let : Algebra B S := f.toAlgebra
+    let : IsScalarTower R B S := IsScalarTower.of_algebraMap_eq' hf.symm
+    let : IsLocalization W S := hS
+    let : Algebra.EssFiniteType B S := Algebra.EssFiniteType.of_isLocalization S W
+    exact Algebra.EssFiniteType.comp R B S
+  obtain ⟨Q, _, _, hQ, V, g, hg, htop⟩ :=
+    RingHom.essentially_finite_presentation_over_intermediate α β hα B' W' f' hf' hS'
+  let : Algebra.FinitePresentation S Q := hQ
+  obtain ⟨I, _, _, _, F, π₀, hFlocal, hFmap, hπlocal, hcolim, hFfinite⟩ :=
+    CommRingCat.exists_local_essFiniteType_colimit R
+  obtain ⟨Λ, _, _, _, J, _, Bs, C, ρ, σ, κ, κ', D, ν, inst, h⟩ :=
+    limit_tower_over_local_system F π₀ hFlocal (fun i j h ↦ hFmap i j (homOfLE h))
+      hπlocal hcolim hFfinite α β B W f hf hS Q V g hg htop M s t H hM
+  let A := J ⋙ F
+  let π : A ⟶ (Functor.const Λ).obj (CommRingCat.of R) :=
+    { app := fun i ↦ π₀.app (J.obj i)
+      naturality := fun _ _ h ↦ π₀.naturality (J.map h) }
+  rcases h with ⟨h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13,
+    h14, h15, h16, h17, h18, h19, h20, h21, h22, h23, h24, h25, h26, h27, h28, h29⟩
+  refine ⟨Λ, inferInstance, inferInstance, inferInstance, A, Bs, C, ρ, σ, π, κ, κ', D, ν,
+    inst, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17,
+    h18, h19, h20, h21, h22, ?_, h23, h24, h25, h26, h27, h28, h29⟩
+  intro i
+  obtain ⟨H₀, ⟨e⟩⟩ := h23 i
+  exact Module.Finite.of_surjective e.toLinearMap e.surjective
 
 end WeilConjectures
