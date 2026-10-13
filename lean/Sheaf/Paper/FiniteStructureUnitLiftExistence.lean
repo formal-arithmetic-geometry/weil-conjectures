@@ -15,6 +15,11 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.Paper.FiniteStructureAdjointTransitions
 
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.Paper.FiniteStructureUnitQuotientSystem
+import Sheaf.AlgebraicGeometry.GrothendieckExistence
+import Sheaf.AlgebraicGeometry.ThickeningSystemComparisonTransport
+
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # Lift the unit of finite structure sheaves
@@ -38,6 +43,50 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
+
+/-- Naturality of the explicit adjoint in the source module. -/
+private theorem finiteStructureAdjoint_precomp
+    {X S Y : Scheme.{u}} (j : S ⟶ X) (p : Y ⟶ S)
+    {F G : X.Modules} (w : F ⟶ G)
+    (a : (tensorPullback j).obj G ⟶ (pushforward p).obj
+      (SheafOfModules.unit Y.ringCatSheaf)) :
+    finiteStructureAdjoint j p F ((tensorPullback j).map w ≫ a) =
+      w ≫ finiteStructureAdjoint j p G a := by
+  simp only [finiteStructureAdjoint, Functor.map_comp, Category.assoc]
+  have hn := (Classical.choose (exists_tensorPullbackAdjunction j)).unit.naturality w
+  simp only [Functor.comp_map, Functor.id_map] at hn
+  rw [← Category.assoc, ← hn, Category.assoc]
+
+/-- Adjunction and invertible pushforward composition detect reduced morphisms. -/
+private theorem finiteStructureAdjoint_injective
+    {X S Y : Scheme.{u}} (j : S ⟶ X) (p : Y ⟶ S) (G : X.Modules) :
+    Function.Injective (finiteStructureAdjoint j p G) := by
+  intro a b h
+  apply ((Classical.choose (exists_tensorPullbackAdjunction j)).homEquiv _ _).injective
+  simp only [finiteStructureAdjoint, ← Category.assoc] at h
+  have h' := (cancel_mono
+    ((pushforwardComp p j).hom.app (SheafOfModules.unit Y.ringCatSheaf))).mp h
+  simpa only [Adjunction.homEquiv_unit] using h'
+
+/-- Changing a natural comparison leaves the underlying compatible family unchanged. -/
+private theorem compatible_family_change
+    {X : Scheme.{u}} {T : ℕ → Scheme.{u}} {i : ∀ n, T n ⟶ T (n + 1)}
+    (j : ∀ n, T n ⟶ X) (hj : ∀ n, IsClosedImmersion (j n))
+    (c d : ∀ n, tensorPullback (j (n + 1)) ⋙ tensorPullback (i n) ≅ tensorPullback (j n))
+    (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)
+    (hG : RingedSpace.IsCoherent X.toRingedSpace G)
+    (v : ∀ n, (tensorPullback (j n)).obj G ⟶ (tensorPullback (j n)).obj F)
+    (hv : ∀ n, (d n).hom.app G ≫ v n =
+      (tensorPullback (i n)).map (v (n + 1)) ≫ (d n).hom.app F) :
+    ∀ n, (c n).hom.app G ≫ v n =
+      (tensorPullback (i n)).map (v (n + 1)) ≫ (c n).hom.app F := by
+  obtain ⟨e, he⟩ := compatible_family_comparison_equiv (i := i) j hj c d
+    (⟨F, hF⟩ : CoherentModules X) (⟨G, hG⟩ : CoherentModules X)
+  have h := (e ⟨v, hv⟩).property
+  change ∀ n, (c n).hom.app G ≫ (e ⟨v, hv⟩).val n =
+    (tensorPullback (i n)).map ((e ⟨v, hv⟩).val (n + 1)) ≫ (c n).hom.app F at h
+  rw [he ⟨v, hv⟩] at h
+  exact h
 
 /-- Existence part of the unit lift through a proper supporting quotient.
 Source: Stacks Project, Tag 09ZT, algebra structure paragraph, expanded using 088E, 088F
@@ -131,6 +180,81 @@ theorem finite_structure_unit_lift_existence
             (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U
           ((η.val.app (op U)).hom r) =
           (fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom
-          (Ideal.Quotient.mk (I ^ (n + 1)))))).app U r) := by sorry
+          (Ideal.Quotient.mk (I ^ (n + 1)))))).app U r) := by
+  classical
+  obtain ⟨Q, hQ, hproperQ, q, v, hv, hq⟩ :=
+    finite_structure_unit_quotient_system A I X f i hi hp c hc Yn fnY gn hcart hw
+      G hG hproper ψ hψ
+  let j := fun n : ℕ ↦ pullback.fst f
+    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
+  let d : ∀ n : ℕ, tensorPullback (j (n + 1)) ⋙ tensorPullback (i n) ≅
+      tensorPullback (j n) := fun n ↦
+    (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
+      (j (n + 1)))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n))
+  have hj : ∀ n, IsClosedImmersion (j n) := by
+    intro n
+    dsimp only [j]
+    have : IsClosedImmersion (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1))))) :=
+      IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+    infer_instance
+  have hvd := compatible_family_change (i := i) j hj d c G Q hG hQ v hv
+  obtain ⟨w, hw, _⟩ :=
+    (grothendieck_existence A I f i hi hp d (fun _ ↦ rfl)).1
+      G Q hG hQ hproper hproperQ v hvd
+  let η : SheafOfModules.unit X.ringCatSheaf ⟶ G := q ≫ w
+  have hη : ∀ (n : ℕ) (U : X.Opens) (r : Γ(X, U)),
+      (finiteStructureAdjoint (j n) (fnY n) G (ψ n).hom).app U ((η.val.app (op U)).hom r) =
+        (fnY n ≫ j n).app U r := by
+    intro n U r
+    have hn := finiteStructureAdjoint_precomp (j n) (fnY n) w (ψ n).hom
+    rw [hw n] at hn
+    have hs := congrArg (fun z ↦ z.app U ((q.val.app (op U)).hom r)) hn
+    change (finiteStructureAdjoint (j n) (fnY n) G (ψ n).hom).app U
+      (w.app U ((q.val.app (op U)).hom r)) = _
+    simpa only [Hom.comp_app, ConcreteCategory.comp_apply] using hs.symm.trans (hq n U r)
+  let eta : (𝟙_ X.Modules) ⟶ G := η
+  let L : G ⟶ G := (ρ_ G).inv ≫ (G ◁ eta) ≫ μ
+  have hL : ∀ (U : X.Opens) (x : Γ(G, U)),
+      L.app U x = μ.app U (tmulSection ((η.val.app (op U)).hom (1 : Γ(X, U))) x) := by
+    intro U x
+    simp only [L, Hom.comp_app, ConcreteCategory.comp_apply, rightUnitor_inv_app,
+      whiskerLeft_app_tmulSection]
+    exact hcomm U x ((η.val.app (op U)).hom (1 : Γ(X, U)))
+  have hLn : ∀ n : ℕ, (tensorPullback (j n)).map L = 𝟙 _ := by
+    intro n
+    apply (cancel_mono (ψ n).hom).mp
+    apply finiteStructureAdjoint_injective (j n) (fnY n) G
+    rw [finiteStructureAdjoint_precomp, Category.id_comp]
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    ext x
+    change (finiteStructureAdjoint (j n) (fnY n) G (ψ n).hom).app (unop U)
+      (L.app (unop U) x) =
+      (finiteStructureAdjoint (j n) (fnY n) G (ψ n).hom).app (unop U) x
+    rw [hL]
+    have hm := hμ n (unop U) ((η.val.app U).hom (1 : Γ(X, unop U))) x
+    dsimp only at hm
+    refine hm.trans ?_
+    rw [hη n (unop U) 1, map_one, one_mul]
+  have hLeq : L = 𝟙 G := by
+    obtain ⟨z, hz, huniq⟩ :=
+      (grothendieck_existence A I f i hi hp d (fun _ ↦ rfl)).1 G G hG hG hproper hproper
+      (fun n ↦ 𝟙 ((tensorPullback (j n)).obj G)) (by
+        intro n
+        exact (Category.comp_id _).trans
+          ((Category.id_comp _).symm.trans (congrArg
+            (fun t ↦ t ≫ (d n).hom.app G)
+            (CategoryTheory.Functor.map_id (tensorPullback (i n))
+              ((tensorPullback (j (n + 1))).obj G)).symm)))
+    have hid : ∀ n, (tensorPullback (j n)).map (𝟙 G) = 𝟙 _ := by
+      intro n
+      exact CategoryTheory.Functor.map_id _ _
+    exact (huniq L hLn).trans (huniq (𝟙 G) hid).symm
+  refine ⟨η, ?_, hη⟩
+  intro U x
+  rw [← hL, hLeq]
+  rfl
 
 end AlgebraicGeometry

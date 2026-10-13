@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-finite-structure-unit-quotient-system",
+ "kind": "statement",
+ "title": "Compatible reduced units through a coherent proper supporting quotient",
+ "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $I$ an ideal, and $f:X\\to\\operatorname{Spec}A$ a separated finite type morphism [def-weil-proper-morphism], [def-weil-finite-type-morphism]. Put $X_n=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I^{n+1})$ with projections $j_n:X_n\\to X$ and $b_n:X_n\\to\\operatorname{Spec}(A/I^{n+1})$ [def-pc-base-change]. Let $i_n:X_n\\to X_{n+1}$ satisfy $j_{n+1}\\circ i_n=j_n$ and $b_{n+1}\\circ i_n=t_n\\circ b_n$, where $t_n$ is induced by the quotient map $A/I^{n+2}\\to A/I^{n+1}$. Let $c_n:i_n^*j_{n+1}^*\\cong j_n^*$ be the pinned tensor-pullback composition comparison [def-pc-tensor-pullback-composition-iso], [def-pc-module-pullback]. Let $p_n:Y_n\\to X_n$ be finite [def-weil-finite-integral-morphism], with $g_n:Y_n\\to Y_{n+1}$ forming cartesian squares and $j_{n+1}\\circ p_{n+1}\\circ g_n=j_n\\circ p_n$. Let $G$ be coherent [pqf-def-coherent] on $X$ with support proper over $A$ [def-weil-pbc-closed-subset-proper-over-base], and let $\\psi_n:j_n^*G\\cong p_{n,*}\\mathcal O_{Y_n}$ satisfy $\\beta_n i_n^*(\\psi_{n+1})=\\psi_nc_n$, where $\\beta_n$ is affine base change followed by the structure-sheaf pullback map [lem-weil-pbc-affine-pushforward-base-change]. Then there exist a coherent module $Q$ on $X$ with support proper over $A$, a module morphism $q:\\mathcal O_X\\to Q$, and morphisms $v_n:j_n^*Q\\to j_n^*G$ with $v_nc_{n,Q}=c_{n,G}i_n^*(v_{n+1})$, such that, for every open $U$ and scalar section $r\\in\\mathcal O_X(U)$, the adjoint of $\\psi_nv_n$ [lem-weil-pbc-finite-structure-adjoint-transitions] sends $q_U(r)$ to $(j_np_n)^\\sharp_U(r)$. No completeness of A and no multiplication or lifted unit on G is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09ZT, algebra structure paragraph: reduced unit factorization, expanded using 0CYS, 01XZ, 01Y6, 0096 and affine base change; official Stacks pages read 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-weil-pbc-finite-structure-adjoint-transitions"
+ ],
+ "proof": [
+  {
+   "text": "X is Noetherian since it is finite type over the Noetherian affine base. Coherence gives quasi-coherence and finite type. Choose the scheme-theoretic support Z of G, defined by its annihilator J; it is proper over A. Construct Q as the pushforward of O_Z and q as its structure map (the quotient O_X to O_X/J). Finite pushforward gives coherence, and its support is proper.",
+   "uses": [
+    "lem-weil-pbc-module-support-proper-over-base",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor pullback is a left adjoint, hence preserves the quotient. The image of J annihilates j_n^*G and therefore p_n,*O_Yn through psi_n. Acting on 1 shows its structure map kills J. Factor the structure map through j_n^*Q by the cokernel universal property and compose with psi_n inverse to obtain v_n.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-ideal-product-image",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both sides of the compatibility equation agree after precomposition with the epimorphic pullback of q: base change preserves the structure map, hpsi identifies the transition of G, and the pinned composition comparison matches the canonical composite unit. Cancel that epimorphism. The canonical adjunction sends r to 1 tensor r, so evaluating the factored map after q on any open gives precisely the structure ring map of p_n followed by j_n. This also proves the displayed scalar formula.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-weil-pbc-finite-structure-adjoint-transitions",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-support-proper-over-base",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-ideal-product-image",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-weil-pbc-finite-structure-adjoint-transitions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09ZT, algebra structure paragraph: reduced unit factorization, expanded using 0CYS, 01XZ, 01Y6, 0096 and affine base change; official Stacks pages read 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Reduced units of finite structure sheaves factor compatibly through a coherent quotient of the structure sheaf with proper support",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent module with proper support: its reduced finite structure sheaf units factor through one coherent supporting quotient",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation",
+   "verdict": "no exact match for the compatible supporting-quotient factorization",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unit",
+   "results": "12 hits: SheafOfModules.unit, SheafOfModules.unitHomEquiv, SheafOfModules.unit_val, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.freeCofan, SheafOfModules.ιFree",
+   "verdict": "no exact match for the compatible supporting-quotient factorization",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteStructureAdjoint|compatible_family_comparison_equiv|unit.*quotient",
+   "results": "25 hits: Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/NumberTheory/NumberField/Ideal/Basic.lean, Mathlib/NumberTheory/NumberField/Ideal/Basic.lean, Mathlib/NumberTheory/NumberField/Ideal/Basic.lean",
+   "verdict": "no exact match for the compatible supporting-quotient factorization",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStructureUnitLiftExistence",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "09ZT algebraization subargument of finite-etale lifting: factor reduced structure-sheaf units through a proper supporting quotient before using full faithfulness",
+   "via": [
+    "lem-weil-pbc-finite-structure-unit-lift-existence",
+    "lem-weil-pbc-finite-structure-unit-lift",
+    "lem-weil-pbc-finite-structure-algebra-operations-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteStructureUnitQuotientSystem",
+  "file": "lean/Sheaf/Paper/FiniteStructureUnitQuotientSystem.lean",
+  "declaration": "AlgebraicGeometry.finite_structure_unit_quotient_system",
+  "statement": "theorem finite_structure_unit_quotient_system\n    (A : Type u) [CommRing A] (I : Ideal A)\n    [IsNoetherianRing A]\n    (X : Scheme.{u}) (f : X ⟶ Spec (.of A))\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (i : ∀ n : ℕ, pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ⟶\n      pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))\n    (hi : ∀ n : ℕ, i n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n\n      + 1 + 1))))) = pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +\n      1))))))\n    (hp : ∀ n : ℕ, i n ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n\n      + 1 + 1))))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +\n      1))))) ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I :=\n      I) (Nat.le_succ (n + 1))))))\n    (c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom\n      (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅\n      Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom\n      (Ideal.Quotient.mk (I ^ (n + 1)))))))\n    (hc : ∀ n : ℕ, c n = (Scheme.Modules.tensorPullbackCompositionIso (i n)\n      (pullback.fst f (Spec.map (CommRingCat.ofHom\n        (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))\n      (pullback.fst f (Spec.map (CommRingCat.ofHom\n        (Ideal.Quotient.mk (I ^ (n + 1)))))) (hi n)).symm)\n    (Yn : ℕ → Scheme.{u})\n    (fnY : ∀ n, Yn n ⟶ pullback f\n      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))\n    [∀ n, IsFinite (fnY n)]\n    (gn : ∀ n, Yn n ⟶ Yn (n + 1))\n    (hcart : ∀ n, IsPullback (fnY n) (gn n) (i n) (fnY (n + 1)))\n    (hw : ∀ n, gn n ≫ (fnY (n + 1) ≫ pullback.fst f\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) =\n      fnY n ≫ pullback.fst f\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))\n    (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G)\n    (hproper : Scheme.Modules.HasSupportProperOver f G)\n    (ψ : ∀ n, (Scheme.Modules.tensorPullback (pullback.fst f\n      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G ≅\n        (Scheme.Modules.pushforward (fnY n)).obj\n          (SheafOfModules.unit (Yn n).ringCatSheaf))\n    (hψ : ∀ n,\n      (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫\n        (Scheme.Modules.moduleBaseChangeMap (fnY (n + 1)) (fnY n) (i n) (gn n)\n          (hcart n).flip.w (SheafOfModules.unit (Yn (n + 1)).ringCatSheaf) ≫\n          (Scheme.Modules.pushforward (fnY n)).map\n            (Scheme.Modules.tensorPullbackObjUnitToUnit (gn n))) =\n        (c n).hom.app G ≫ (ψ n).hom) :\n    ∃ Q : X.Modules, RingedSpace.IsCoherent X.toRingedSpace Q ∧\n      Scheme.Modules.HasSupportProperOver f Q ∧\n      ∃ (q : SheafOfModules.unit X.ringCatSheaf ⟶ Q)\n        (v : ∀ n : ℕ, (Scheme.Modules.tensorPullback (pullback.fst f\n          (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj Q ⟶\n          (Scheme.Modules.tensorPullback (pullback.fst f\n          (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G),\n        (∀ n : ℕ, (c n).hom.app Q ≫ v n =\n          (Scheme.Modules.tensorPullback (i n)).map (v (n + 1)) ≫ (c n).hom.app G) ∧\n        (∀ (n : ℕ) (U : X.Opens) (r : Γ(X, U)),\n          (Scheme.Modules.finiteStructureAdjoint\n            (pullback.fst f (Spec.map (CommRingCat.ofHom\n              (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) Q (v n ≫ (ψ n).hom)).app U\n            ((q.val.app (op U)).hom r) =\n            (fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom\n              (Ideal.Quotient.mk (I ^ (n + 1)))))).app U r)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T151703-L-924613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T151703-L-924613",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

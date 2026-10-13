@@ -24,38 +24,44 @@
  ],
  "proof": [
   {
-   "text": "By proper support choose a closed subscheme with ideal J annihilating G. Its supporting quotient O_X/J is coherent with proper support. The reduced structure maps factor through its reductions, since J kills each direct-image algebra identified with the pullback of G. The factorization is compatible with transitions by the unit base-change formula and the pinned-adjunction composition comparison.",
+   "text": "Obtain Q, q and the compatible reduced factorizations v_n from the supporting-quotient-system theorem. Q and G are coherent with proper support.",
    "uses": [
-    "lem-weil-pbc-module-support-proper-over-base",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "def-pc-tensor-pullback-composition-iso"
+    "lem-weil-pbc-finite-structure-unit-quotient-system"
    ],
    "elementary": false
   },
   {
-   "text": "Full faithfulness of completion lifts these factorizations to the unique quotient-to-G map; compose with O_X to obtain eta. Under the adjunction unit and pushforward composition, its section formula is the structure ring map. The multiplicativity hypothesis on mu identifies its completed left-unit composite with the identity. Faithfulness on G proves the left-unit identity on X.",
+   "text": "Transport v_n from the pinned composition comparison to the chosen comparison used by grothendieck_existence. The projections j_n are closed immersions, as base changes of quotient closed immersions. The fully proved private compatible_family_change helper uses compatible_family_comparison_equiv and leaves v_n unchanged. Full faithfulness lifts v_n to w:Q to G. Set eta=q followed by w. The fully proved private adjoint-precomposition helper and the reduction equation of w give the scalar formula for eta.",
+   "uses": [
+    "lem-weil-pbc-thickening-system-comparison-transport",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-finite-structure-adjoint-transitions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define L:G to G by the inverse right unitor, identity tensored with eta, and mu. The tensor-section formulas and the given symmetry give L(x)=mu(eta(1) tensor x). Multiplicativity and the scalar formula at 1 show a_n(L(x))=a_n(x). Naturality of the adjoint and its Hom-equivalence injectivity imply (j_n^*L) followed by psi_n equals psi_n; cancel psi_n to get j_n^*L=identity. Uniqueness in grothendieck_existence for G to G gives L=identity. Evaluating on sections proves the left-unit law. No associativity or properness of O_X is needed in this existence step.",
    "uses": [
     "prop-weil-pbc-grothendieck-existence",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-finite-structure-adjoint-transitions",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-support-proper-over-base",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "def-pc-tensor-pullback-composition-iso",
+  "lem-weil-pbc-finite-structure-unit-quotient-system",
+  "lem-weil-pbc-thickening-system-comparison-transport",
   "prop-weil-pbc-grothendieck-existence",
-  "def-pc-module-pullback"
+  "lem-weil-pbc-finite-structure-adjoint-transitions",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "R1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Stacks Tag 09ZT, multiplication paragraph; expanded using 088E, 088F and 0CYS. Read https://stacks.math.columbia.edu/tag/09ZT on 2026-10-13."
+  "place": "Tag 09ZT unit step expanded using 0CYS and 088F: supporting quotient factorization split off; comparison transfer, completion lift, scalar formula and faithfulness proof implemented in Lean."
  },
  "mathlib_searches": [
   {
@@ -131,9 +137,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T142907-L-501588",
+  "landing": "20261013T151703-L-924613",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
