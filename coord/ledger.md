@@ -13694,3 +13694,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:12 L: returned deliver/P4/Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap (reviewer RETURN: (reviewer X-56dc3, head 56dc3aaef) H10 / reviewer point 2: Removing exists_schemeDerivedAdjunction breaks existing users)
 
 - 06:14 L: batch 20261013T215553 dependency take-out
+- 22:17 L: returned deliver/T4/Sheaf.RingTheory.KoszulConormalCycleRelations (reviewer RETURN: (reviewer X-cbcf4, head cbcf4443e) D1/D2: In lean/Sheaf/RingTheory/KoszulConormalCycleRelations.lean, the proof `intro x)
