@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-compatible-etale-generic-fibre-model",
+ "kind": "statement",
+ "title": "A specified finite etale generic field extension spreads with compatible fibre maps",
+ "statement": "Let $S$ be an irreducible scheme with generic point $\\eta_S$, let $f:X\\to S$ be any scheme morphism [def-pc-scheme-fibre, def-pc-fibre-product], and let $L$ be a field with a finite etale map $y_\\eta:\\operatorname{Spec}L\\to\\operatorname{Spec}\\kappa(\\eta_S)$ [def-weil-etale-morphism]. Write $G=X_{\\eta_S}\\times_{\\kappa(\\eta_S)}\\operatorname{Spec}L$. There exist a scheme $T$, an etale map $g:T\\to S$, a generic point $\\eta$ of $T$ mapping to $\\eta_S$, and a scheme morphism $a:G\\to P=X\\times_S T$ whose underlying map is an embedding and whose range is exactly the fibre of $P\\to T$ at $\\eta$. For every field $E$ and $z:\\operatorname{Spec}E\\to\\operatorname{Spec}\\kappa(\\eta)$ there are $z_L:\\operatorname{Spec}E\\to\\operatorname{Spec}L$ and an isomorphism $e:P_\\eta\\times_{\\kappa(\\eta)}\\operatorname{Spec}E\\simeq G\\times_L\\operatorname{Spec}E$, with $e$ followed by projection to $G$ and $a$ equal to the geometric fibre inclusion into $P$. No closed subset, finite type hypothesis on $f$, or conclusion about nongeneric fibres is included.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0551 (lemma-split-irreducible-components), proof, monic polynomial construction; Tag 055G (lemma-geometrically-connected-generic-fibre), model construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "On an affine generic neighbourhood Spec R the nilradical is prime. The given finite etale field extension is finite separable. Choose a primitive element, multiply it by an element outside the generic prime, and clear denominators to lift its minimal polynomial to a monic polynomial over R. The given extension is its generic quotient. This is the construction in Tag 0551.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-primitive-element"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The discriminant does not vanish at the generic prime. Localize away from it to make the monic quotient finite etale. It is free over the localized base. Every point generalizes to a point of its generic fibre, because the finite etale map is flat; that generic fibre is the one-point spectrum of L. Thus it has a unique generic point and is irreducible. Its generic residue field is L. Compose with the open inclusion into S. Alternatively restrict to an irreducible neighbourhood of the generic point. This proves the requested g and eta.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The generic fibre square of g is the supplied Spec L extension. Base-change this square by X and use pullback pasting. It gives an isomorphism from G to the fibre of P over eta, hence the morphism a as its composition with the fibre inclusion. The fibre inclusion is an embedding, with range exactly the fibre. After every field extension of the residue field, the same pullback pasting supplies z_L, e and the commuting equality. This uses only isomorphisms and does not choose a point of G.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-primitive-element"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0551 (lemma-split-irreducible-components), proof, monic polynomial construction; Tag 055G (lemma-geometrically-connected-generic-fibre), model construction.",
+  "note": "Source argument specialized to a supplied field extension or finite closed family; proof left for the next stage-3 item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale extension of generic residue field extends to etale neighbourhood with same generic fibre",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale residue field extension spreads to etale neighbourhood with identical generic fibre",
+   "digest": "9f379795778bed05",
+   "date": "2026-10-13",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.IsEtaleAt.comp, Algebra.mem_etaleLocus_iff, Algebra.exists_etale_of_isEtaleAt, Algebra.etaleLocus, Algebra.IsEtaleAt, RingHom.Etale.toAlgebra, RingHom.etale_algebraMap",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(etale|Etale).*([Gg]eneric|[Rr]esidue)|exists.*([Gg]eneric|[Rr]esidue).*(etale|Etale)",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricGenericCoverModel",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 0551 (lemma-split-irreducible-components), proof, monic polynomial construction; Tag 055G (lemma-geometrically-connected-generic-fibre), model construction.",
+   "via": [
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleEtaleGenericFibreModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleEtaleGenericFibreModel.lean",
+  "declaration": "AlgebraicGeometry.exists_compatible_etale_generic_fibre_model",
+  "statement": "theorem exists_compatible_etale_generic_fibre_model {X S : Scheme.{u}}\n    [IrreducibleSpace S] (f : X ⟶ S)\n    {L : Type u} [Field L]\n    (yη : Spec (CommRingCat.of L) ⟶\n      Spec (CommRingCat.of (S.residueField (genericPoint S))))\n    [IsFinite yη] [Etale yη] :\n    ∃ (T : Scheme.{u}) (g : T ⟶ S) (η : T)\n      (a : pullback (f.fiberToSpecResidueField (genericPoint S)) yη ⟶ pullback f g),\n      Etale g ∧ IsGenericPoint η Set.univ ∧ g η = genericPoint S ∧\n      IsEmbedding a ∧ Set.range a = (pullback.snd f g) ⁻¹' {η} ∧\n      ∀ (E : Type u) (_ : Field E)\n        (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of (T.residueField η))),\n        ∃ (zL : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of L))\n          (e : pullback ((pullback.snd f g).fiberToSpecResidueField η) z ≅\n            pullback (pullback.snd (f.fiberToSpecResidueField (genericPoint S)) yη) zL),\n          e.hom ≫ pullback.fst _ zL ≫ a =\n            pullback.fst _ z ≫ (pullback.snd f g).fiberι η",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T045542-L-132423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T045542-L-132423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

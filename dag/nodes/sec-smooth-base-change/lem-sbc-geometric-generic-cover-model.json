@@ -14,12 +14,46 @@
   "def-pc-fibre-product",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "If I is empty, apply the already proved model-data theorem and discharge the geometric fibre and incidence assertions by elimination of an empty index. This requires no field model construction or irreducibility shrinking.",
+   "uses": [
+    "new-lem-sbc-geometric-generic-cover-model-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If I is nonempty, obtain T, g, eta, a from the compatible etale generic-fibre model. Define C_i = closure(a(A_i)). The embedding closure formula proves a inverse image of C_i equals A_i. The cover of A implies the C_i cover the fibre over eta. The supplied field-base-change isomorphisms transport the geometric irreducibility of A_i to every geometric generic trace of C_i.",
+   "uses": [
+    "lem-sbc-compatible-etale-generic-fibre-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply closed-family geometric irreducibility shrinking to C_i. Apply the already proved closed-cover shrinking theorem to the finite closed union of the C_i and the empty subset; their union covers the generic fibre. Intersect the two opens. Restrict g to this open, pull back the C_i along the canonical pullback.map r, and retain the generic point in this open.",
+   "uses": [
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-generic-fibre-closed-cover-spread"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse images along r are closed and cover by the closed-cover open. The restricted generic point is generic by specialization in a subtype. A proved private helper pastes the fibre square of any pullback with any residue-field test square to give an isomorphism of geometric fibres; use it to transport the geometric irreducibility on the chosen open. For x in A_i intersect A_j, a(x) lies in the generic fibre. The range formula for pullback.map supplies b over a(x). Closure membership gives both closed-subset memberships, and commutativity and subtype injectivity prove its base point is eta in the restricted open.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-closed-family-geometric-fibre-shrink",
+  "lem-sbc-compatible-etale-generic-fibre-model",
+  "lem-sbc-generic-fibre-closed-cover-spread",
+  "new-lem-sbc-geometric-generic-cover-model-data"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 055G, 0559 and 054W. Decomposition withdrawn on reviewer X-c640f repair: the arbitrary-cover refinement is false (Spec k, Bool, C_false empty and C_true univ). Main theorem reopened; refinement retained only as historical, with no Lean declaration."
+  "place": "Tags 0551, 054Y and 0559; Tag 055G through the closed-family model construction.",
+  "note": "M3: compatible generic fibre model plus independent closed-family irreducibility shrinking. Closures, their exact generic traces, covering restriction, fibre transport and generic incidences are proved in Lean. No arbitrary-cover refinement."
  },
  "mathlib_searches": [
   {
@@ -108,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-71740",
-  "group": "W4",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T025312-L-3426067",
+  "landing": "20261013T045542-L-132423",
   "kind": "interface",
-  "note": "independent Codex review: Delivered signatures and node metadata match the recorded repair; module and sole direct importer compile cleanly; model-data proof uses only permitted axioms; main theorem remains a documented named sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
