@@ -1,0 +1,130 @@
+{
+ "id": "lem-sp-filtered-complex-cycle-representative-correction",
+ "kind": "statement",
+ "title": "Correct a boundary differential without changing the graded cycle class",
+ "statement": "Let C be abelian, K a cochain complex, F a decreasing filtration (def-sp-filtration and def-sp-filtered-complex-subquotients), r >= 1, and i,j related by bidegree (r,1-r). Let t,tprime from an object A into the i and j filtration steps, and x,y into their graded r-cycles, satisfy dt=tprime and the two graded representative equations. If y maps to zero under the target page quotient (lem-sp-filtered-complex-page-differential), then after an epimorphism e:B -> A there is a morphism z:B -> graded (r+1)-cycles at i whose graded inclusion equals e followed by x and its graded inclusion. This asserts only correction of given simultaneous representatives; it mentions no page differential data D or map to its kernel.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed formulas for Z_r and B_r before lemma-spectral-sequence-filtered-complex"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof": [
+  {
+   "text": "Write p = i.1 and n = i.1 + i.2. The relation gives j.1 = p+r and\nj.1+j.2 = n+1. Since the target page is the cokernel of its boundary inclusion,\nhy0 factors y through the target graded boundary subobject. Pull back the image\nepimorphism defining this subobject, and the epimorphism onto the sum of the\nunquotiented boundary subobject with F^(p+r+1). The equality of target graded\nclasses then says, after pulling back the graded quotient epimorphism's kernel,\nthat dt is a sum of an incoming boundary and a term in F^(p+r+1). Pull back the\nimage epimorphism from F^((p+r)-r+1) = F^(p+1) defining that incoming boundary.\nOn the resulting epic cover e of A, obtain a morphism b into F^(p+1) with\nd(e t - b) in F^(p+r+1). Include b into F^p; this is possible since F is\nantitone. Thus e t - b factors through the unquotiented (r+1)-cycle intersection.\nIts graded projection factors through the image defining successor graded cycles,\ngiving z. The graded projection kills b, so z has exactly the same graded class\nas e x, by hx. Each cover is a pullback of an image or cokernel epimorphism and\nis epic in an abelian category; their finite composite e is epic. This proves\nthe displayed equality without projectivity or elementwise lifting.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed formulas for Z_r and B_r before lemma-spectral-sequence-filtered-complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "S4 second reading: finite image/pullback subtraction argument from the displayed Z_r and B_r formulas; checked against https://stacks.math.columbia.edu/tag/012K"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "refinement|factorThru.*kernel|cokernel.*zero",
+   "results": "Mathlib/Topology/Sets/CompactOpenCovered.lean; Mathlib/Topology/PartitionOfUnity.lean; Mathlib/Topology/PartitionOfUnity.lean; Mathlib/Topology/PartitionOfUnity.lean; Mathlib/Topology/EMetricSpace/Paracompact.lean; Mathlib/Topology/EMetricSpace/Paracompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.epi_pullback_of_epi_f",
+   "results": "CategoryTheory.Abelian.epi_pullback_of_epi_f",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a morphism killed by a quotient differential to deeper filtered cycles after an epimorphic refinement",
+   "results": "HomologicalComplex.HomologySequence.instEpiMap'ComposableArrows₃OfNatNat; CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p; ComplexShape.Embedding.epi_liftExtend_f_iff; HomologicalComplex.HomologySequence.epi_homologyMap_τ₃; CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.epi_f; HomologicalComplex.instEpiHomologyπ; CategoryTheory.ShortComplex.Exact.exact_up_to_refinements; HomologicalComplex.liftCycles_i",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg correction, successor, refinement in lean/Sheaf/CategoryTheory/FilteredComplex*.lean and lean/Sheaf/Algebra/Homology/FilteredComplex*.lean; source-library filtered-complex modules",
+   "results": "Existing differential representative cover supplies simultaneous t,tprime,x,y, but does not correct a boundary differential. SuccessorBoundaryRepresentatives covers incoming successor boundaries; RepresentativeKernels compares kernels for a homology image, not successor cycles. No duplicate found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered cycle whose differential is a boundary can be corrected by subtracting a higher filtration representative to become a successor cycle without changing its graded class",
+   "results": "Service unavailable: Internal Server Error. No search verdict is claimed. Other search kinds and local source searches completed.",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCoverEpi",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-filtered-complex-successor-cycles-cover-epi",
+   "place": "Subtract the F^(p+1) boundary representative after the page quotient pullback",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexCycleRepresentativeCorrection",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexCycleRepresentativeCorrection.lean",
+  "declaration": "CategoryTheory.filteredComplex_cycle_representative_correction",
+  "statement": "theorem filteredComplex_cycle_representative_correction\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)\n    (i j : ℤ × ℤ) (hij : (ComplexShape.up' (r, 1 - r)).Rel i j)\n    (A : C)\n    (t : A ⟶ (F.step i.1 : CochainComplex C ℤ).X (i.1 + i.2))\n    (t' : A ⟶ (F.step j.1 : CochainComplex C ℤ).X (j.1 + j.2))\n    (x : A ⟶ (F.complexCycles i.1 (i.1 + i.2) r : C))\n    (y : A ⟶ (F.complexCycles j.1 (j.1 + j.2) r : C))\n    (ht : t ≫ (F.step i.1).arrow.f (i.1 + i.2) ≫\n      K.d (i.1 + i.2) (j.1 + j.2) = t' ≫ (F.step j.1).arrow.f (j.1 + j.2))\n    (hx : x ≫ (F.complexCycles i.1 (i.1 + i.2) r).arrow =\n      t ≫ (F.complexQuotientπ i.1 (i.1 + 1) (by omega)).f (i.1 + i.2))\n    (hy : y ≫ (F.complexCycles j.1 (j.1 + j.2) r).arrow =\n      t' ≫ (F.complexQuotientπ j.1 (j.1 + 1) (by omega)).f (j.1 + j.2))\n    (hy0 : y ≫ filteredComplexPageπ K F r j = 0) :\n    ∃ (B : C) (e : B ⟶ A), Epi e ∧\n      ∃ z : B ⟶ (F.complexCycles i.1 (i.1 + i.2) (r + 1) : C),\n        z ≫ (F.complexCycles i.1 (i.1 + i.2) (r + 1)).arrow =\n          e ≫ x ≫ (F.complexCycles i.1 (i.1 + i.2) r).arrow",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T011935-L-2765978",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T011935-L-2765978",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

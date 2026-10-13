@@ -15,30 +15,56 @@
  ],
  "proof": [
   {
-   "text": "Put p = pq.1, n = pq.1 + pq.2 and j = (p+r,pq.2-r+1). To show that f covers the kernel, take any morphism into D.page.cycles pq. After pulling back the page quotient epimorphism and then the image epimorphism from unquotiented r-cycle representatives, its composite with iCycles is represented by x in F^p with dx in F^(p+r). The representative equation for D and the kernel condition say that the class of dx vanishes in the target page quotient. Its kernel is the target boundary subobject. Pull back the epimorphisms defining that image and its sum with F^(p+r+1); on this further epimorphic refinement write dx = dy+z, where y lies in F^((p+r)-r+1) = F^(p+1) and z lies in F^(p+r+1). Then x-y lies in F^p and d(x-y) = z, so it is an (r+1)-cycle representative. Since y lies in F^(p+1), x-y and x have the same source graded class. Its map into graded successor cycles followed by f therefore equals the given kernel morphism on this refinement: postcomposing with the monomorphism iCycles gives this equality by hf. Apply this to the identity of the kernel object. We obtain an epimorphism onto that object factoring through f, so f is epic. All local lifts here mean pullbacks of image or cokernel epimorphisms; those pullbacks are epic in an abelian category. Thus no projective objects or elementwise lifting assumption is used.",
+   "text": "Use filteredComplex_differential_representatives_cover at i=pq and j=pq+(r,1-r), obtaining an epic x and simultaneous representatives t,tprime,x,y. The composite x followed by the page cokernel projection is epic. Pull it back along D.page.iCycles, giving an epic c:P -> page cycles, with projection a:P -> A and a x pi = c iCycles.",
    "uses": [
+    "lem-sp-filtered-complex-differential-representatives-cover",
     "def-sp-abelian",
-    "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients",
     "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed formulas for Z_r and B_r before lemma-spectral-sequence-filtered-complex"
+   }
+  },
+  {
+   "text": "Precompose D.on_representatives by a. The pullback equation and iCycles_d imply (a y) followed by the target page quotient is zero. Apply the representative correction to a t,a tprime,a x,a y. This gives an epic e:B -> P and z into successor graded cycles with the same source graded class as e a x.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-cycle-representative-correction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+    "place": "Tag 012K, displayed formulas for Z_r and B_r before lemma-spectral-sequence-filtered-complex"
+   }
+  },
+  {
+   "text": "Cancel the monomorphism from graded r-cycles to the graded piece to obtain z followed by hZ = e a x. Postcompose with the page quotient and use hf and the pullback equation. Cancel iCycles to obtain z f = e c. Since e and c are epic, Mathlib epi_of_epi_fac proves Epi f.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed formulas for Z_r and B_r before lemma-spectral-sequence-filtered-complex"
    }
   }
  ],
  "proof_deps": [
+  "lem-sp-filtered-complex-differential-representatives-cover",
   "def-sp-abelian",
-  "def-sp-filtration",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-cycle-representative-correction",
   "def-sp-filtered-complex-subquotients",
-  "lem-sp-filtered-complex-page-differential"
+  "def-sp-filtration"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "B3 second reading: epi part of Tag 012K representative calculation, independent of the parent cover theorem."
+  "place": "S4 second reading: proved representative-cover pullback and epi cancellation; only the boundary subtraction calculation is split off."
  },
  "mathlib_searches": [
   {
@@ -123,12 +149,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261012T225258-L-1800701",
+  "landing": "20261013T011935-L-2765978",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
