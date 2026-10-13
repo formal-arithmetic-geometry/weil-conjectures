@@ -1,0 +1,111 @@
+{
+ "id": "lem-sbc-generic-flat-finite-presentation-lfp",
+ "kind": "statement",
+ "title": "Generic local finite presentation over an integral base",
+ "statement": "Let $f:X\\to S$ be locally of finite type and quasi-compact [def-weil-finite-type-morphism], with $S$ integral [def-pc-integral-scheme]. There exists a nonempty open $U\\subseteq S$ such that the restricted morphism $f^{-1}(U)\\to U$ is locally of finite presentation [def-sbc-locally-finite-presentation].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 051T and 052A, finite-presentation clauses; proofs read at https://stacks.math.columbia.edu/tag/051T and https://stacks.math.columbia.edu/tag/052A"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonempty affine open Spec A of S and a finite affine cover Spec B_i of its inverse image. For each finite type A-algebra B, apply the existing proved torsion-cover theorem from Sheaf.RingTheory.GenericFlatness (imported with import all) to obtain a finitely presented algebra C and a surjection C→B whose kernel is A-torsion. That theorem constructs C by lifting finitely many relation generators over Frac(A) after clearing denominators. Generic flatness applied to Spec C→Spec A gives a nonzero a for which C_a is flat over A_a, hence torsion free. The localized kernel vanishes, so C_a≅B_a. Localization preserves finite presentation, hence B_a is finitely presented over A_a. Intersect the finitely many basic opens, which all contain the generic point. Locality on the source proves local finite presentation of the restricted map. An empty cover gives the whole affine base.",
+   "uses": [
+    "lem-sbc-finite-type-algebra-generic-flatness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finite-type-algebra-generic-flatness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 051T and 052A; existing private torsion-cover theorem imported with import all from Sheaf.RingTheory.GenericFlatness, affine-cover construction adapted from Sheaf.AlgebraicGeometry.GenericFlatness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "locally of finite presentation after restricting a finite type morphism to a nonempty open of an integral scheme",
+   "results": "Mathlib restriction instances only; no generic theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyOfFinitePresentation (f ∣_ U)",
+   "results": "0 hits; unknown identifier in standalone query",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation",
+   "results": "Mathlib finite-presentation and descent declarations; no generic-open theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic finite presentation after localization for finite type algebra over a domain",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "finite-presentation part of the generic-flatness proof"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericLocallyOfFinitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericLocallyOfFinitePresentation.lean",
+  "declaration": "AlgebraicGeometry.exists_nonempty_open_locallyOfFinitePresentation_restrict",
+  "statement": "theorem exists_nonempty_open_locallyOfFinitePresentation_restrict {X S : Scheme.{u}} [IsIntegral S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] : ∃ U : S.Opens, (U : Set S).Nonempty ∧ LocallyOfFinitePresentation (f ∣_ U)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T060428-L-585855",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T060428-L-585855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

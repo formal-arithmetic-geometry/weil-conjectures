@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Properties
 
+import Sheaf.AlgebraicGeometry.GenericFlatness
+import Sheaf.AlgebraicGeometry.GenericLocallyOfFinitePresentation
+
 /-! # Generic flatness with finite presentation
 
 Source: Stacks Project, Tag 052A.
@@ -40,6 +43,34 @@ No noetherianity or separatedness hypothesis is needed.
 theorem exists_nonempty_open_flat_finitePresentation_restrict {X S : Scheme.{u}}
     [IsIntegral S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ U : S.Opens, (U : Set S).Nonempty ∧ Flat (f ∣_ U) ∧
-      LocallyOfFinitePresentation (f ∣_ U) := by sorry
+      LocallyOfFinitePresentation (f ∣_ U) := by
+  obtain ⟨U₁, hU₁, hflat⟩ := exists_nonempty_open_flat_restrict f
+  obtain ⟨U₂, hU₂, hfp⟩ := exists_nonempty_open_locallyOfFinitePresentation_restrict f
+  have hη₁ : genericPoint S ∈ U₁ := by
+    apply ((genericPoint_spec S).mem_open_set_iff U₁.isOpen).mpr
+    simpa only [Set.univ_inter] using hU₁
+  have hη₂ : genericPoint S ∈ U₂ := by
+    apply ((genericPoint_spec S).mem_open_set_iff U₂.isOpen).mpr
+    simpa only [Set.univ_inter] using hU₂
+  let U : S.Opens := U₁ ⊓ U₂
+  have hU : (U : Set S).Nonempty := ⟨genericPoint S, hη₁, hη₂⟩
+  have himage (V : S.Opens) (hUV : U ≤ V) : V.ι ''ᵁ V.ι ⁻¹ᵁ U = U := by
+    ext x
+    constructor
+    · rintro ⟨y, hy, rfl⟩
+      exact hy
+    · intro hx
+      exact ⟨⟨x, hUV hx⟩, hx, rfl⟩
+  refine ⟨U, hU, ?_, ?_⟩
+  · have h : Flat ((f ∣_ U₁) ∣_ (U₁.ι ⁻¹ᵁ U)) :=
+      IsZariskiLocalAtTarget.restrict hflat _
+    have h' := (MorphismProperty.arrow_mk_iso_iff @Flat
+      (morphismRestrictRestrict f U₁ (U₁.ι ⁻¹ᵁ U))).mp h
+    rwa [himage U₁ inf_le_left] at h'
+  · have h : LocallyOfFinitePresentation ((f ∣_ U₂) ∣_ (U₂.ι ⁻¹ᵁ U)) :=
+      IsZariskiLocalAtTarget.restrict hfp _
+    have h' := (MorphismProperty.arrow_mk_iso_iff @LocallyOfFinitePresentation
+      (morphismRestrictRestrict f U₂ (U₂.ι ⁻¹ᵁ U))).mp h
+    rwa [himage U₂ inf_le_right] at h'
 
 end AlgebraicGeometry
