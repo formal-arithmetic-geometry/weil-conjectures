@@ -14,30 +14,27 @@
  },
  "proof": [
   {
-   "text": "Form the specified total tensor source and target complexes. Tensor K-flatness and pullback K-flatness make the localization tensor maps invertible; use eP and c.e for the source isomorphism and the pullback counit on P and c.e\\prime for the target isomorphism. The chain tensor comparison in hτ, followed by tensoring c.t, defines e.t. The canonical counit equation, naturality and c.represents prove its represents field. The source is K-flat, so its pullback counit is invertible.",
+   "text": "Extract the pinned chain comparison chi and its degreewise and counit equations from h tau on P and c.P. Apply the tensor coordinate identification theorem to the counit equation and naturality of tau. Its isomorphisms, K-flatness and counit invertibility together with the explicitly constructed chain map chi followed by identity tensor c.t give the Coordinates record.",
    "uses": [
-    "lem-pc-kflat-tensor-product",
-    "lem-pc-kflat-pullback-preservation",
     "def-pc-derived-pullback-tensor-comparison",
-    "def-pc-single-complex-base-change-stalk-condition"
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-tensor-coordinate-identifications"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Take sigma to be the inverse source stalk tensor isomorphism. Take rho by the target stalk tensor isomorphism and the inverse pullback-stalk isomorphism on P. On each total-tensor summand, the pinned module pullback tensor equation and the tensorStalkIso generator equation identify the two routes with scalar extension of the same pure tensor followed by the stalk of c.t in the second factor. Scalar extension tensorators have precisely this pure-tensor formula. Equality on generators, then on each summand, then on the total direct sum proves the chain equation. Naturality respects the differentials and their signs. No boundedness or flatness of C is needed.",
+   "text": "Apply the independent chain stalk square to P, c.P, c.N and c.t using the degreewise equation extracted from h tau. Its sigma and rho have the required types for the constructed Coordinates record; the complex equalities are reflexivity and the chain equation is the supplied square.",
    "uses": [
-    "lem-pc-stalk-tensor-complex",
-    "lem-weil-pbc-module-pullback-tensor",
-    "def-pc-single-complex-base-change-stalk-condition",
-    "def-pc-derived-pullback-tensor-comparison"
+    "lem-pc-tensor-pullback-stalk-square"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "J4",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA(1), tensor-transitivity computation using Tag 0BYJ and equation-bc before Tag 0DJ8; explicit coordinate refinement of parent steps 1 and 2"
+  "place": "Tag 0DJA(1); explicit Lean construction from separate derived-coordinate and chain-stalk calculations"
  },
  "mathlib_searches": [
   {
@@ -103,10 +100,8 @@
  "proof_deps": [
   "def-pc-derived-pullback-tensor-comparison",
   "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-kflat-pullback-preservation",
-  "lem-pc-kflat-tensor-product",
-  "lem-pc-stalk-tensor-complex",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-pc-tensor-coordinate-identifications",
+  "lem-pc-tensor-pullback-stalk-square"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -122,9 +117,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T165650-L-1811085",
+  "landing": "20261013T181106-L-2602503",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

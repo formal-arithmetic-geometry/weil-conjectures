@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-tensor-coordinate-identifications",
+ "kind": "statement",
+ "title": "Derived identifications for a specified tensor chain map",
+ "statement": "Let $g':X'\\to X$ be a scheme morphism, let $E,K$ be objects of $D(\\mathcal O_X)$ and $K'$ an object of $D(\\mathcal O_{X'})$, with a morphism $\\phi:Lg'^*K\\to K'$ and K-flat coordinates $c$ for it [def-pc-single-complex-base-change-stalk-condition]. Let $P$ be K-flat with $e_P:QP\\cong E$. Let $\\tau(A,B):Lg'^*(A\\otimes B)\\to Lg'^*A\\otimes Lg'^*B$ be natural. Let $H$ denote termwise module pullback. Suppose $\\chi:H\\operatorname{Tot}(P\\otimes c.P)\\cong\\operatorname{Tot}(HP\\otimes H(c.P))$ satisfies the canonical derived counit equation of [def-pc-derived-pullback-tensor-comparison] for this pair. Set $T=\\operatorname{Tot}(P\\otimes c.P)$, $N=\\operatorname{Tot}(HP\\otimes c.N)$, and $d=\\chi;(1\\otimes c.t)$. There are isomorphisms $e:QT\\cong E\\otimes K$ and $e':QN\\cong Lg'^*E\\otimes K'$ such that $T$ is K-flat, its shared pullback counit is invertible, and $\\epsilon_T;Qd;e'=Lg'^*e;\\tau(E,K);(1\\otimes\\phi)$. No stalk assertion or cartesian square is involved.",
+ "stmt_deps": [
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1), local computation using Tag 0BYJ"
+ },
+ "proof": [
+  {
+   "text": "The source is K-flat by the K-flat tensor theorem; pullback preserves K-flatness of P. The localization tensor maps on P,c.P and HP,c.N are invertible by the upstream derived monoidal localization on K-flat inputs. Set e to the inverse source localization map followed by eP tensor c.e, and e prime to the inverse target localization map followed by the tensor of the inverse shared counit on P and derivedPullback(eP) with c.e prime. The shared counit is invertible on K-flat complexes by uniqueness of left-derived functors and the recorded K-flat counit.",
+   "uses": [
+    "lem-pc-kflat-tensor-product",
+    "lem-pc-kflat-pullback-preservation",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the representation equation with derivedPullback of the invertible source localization tensor map. Substitute the supplied counit equation, use localization tensor-map naturality for identity tensor c.t, and cancel the target localization map. Tensor composition cancels the counit on P; c.represents identifies the second-factor composite. Naturality of tau at eP and c.e gives the desired right side. This is exactly tensor_representation_algebra in Lean.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-tensor-product",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "J4",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Explicit refinement of Tag 0DJA(1), coordinate construction (parent step 1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "K flat tensor representatives localization counit morphism naturality",
+   "results": "Eight module flatness/localization and tensor naturality results; no tensor-coordinate identification or chain stalk square.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "results": "Found CategoryTheory.Functor.LaxMonoidal.μ_natural, the localization tensor-map naturality used in the derived coordinate calculation; it does not supply either intermediate statement.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_tensor_coordinate_identifications|exists_tensor_pullback_stalk_square",
+   "results": "msearch zero hits. Local rg located natural stalk tensor and module pullback tensor comparisons, but no combined generator-level square.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalks and pullback commute with tensor products of complexes and their canonical comparison maps",
+   "results": "Service unavailable: Internal Server Error; no results obtained.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorStalkChainCoordinates",
+  "date": "2026-10-14",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-tensor-stalk-comparison-squares",
+   "place": "Tensor representative and chain-level stalk identification, parent fixed-map square steps 1 and 2; Derived identifications for a specified tensor chain map",
+   "via": [
+    "lem-pc-tensor-stalk-chain-coordinates",
+    "lem-pc-tensor-stalk-fixed-map-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorCoordinateIdentifications",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorCoordinateIdentifications.lean",
+  "declaration": "AlgebraicGeometry.exists_tensor_coordinate_identifications",
+  "statement": "theorem exists_tensor_coordinate_identifications\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' : Scheme.{u}} (g' : X' ⟶ X)\n    (E K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (τ : ∀ A B : schemeDerivedCategory X,\n      (derivedPullback g').obj (A ⊗ B) ⟶\n        (derivedPullback g').obj A ⊗ (derivedPullback g').obj B)\n    (hnat : ∀ (A A' B B' : schemeDerivedCategory X) (a : A ⟶ A') (b : B ⟶ B'),\n      (derivedPullback g').map (a ⊗ₘ b) ≫ τ A' B' =\n        τ A B ≫ ((derivedPullback g').map a ⊗ₘ (derivedPullback g').map b))\n    (c : SingleComplexBaseChange.Coordinates g' K K' φ)\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (eP : DerivedCategory.Q.obj P ≅ E) (hP : P.IsKFlat)\n    (χ : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj\n        (pullbackTensorTotal X P c.P) ≅\n      pullbackTensorTotal X'\n        (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)\n        (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj c.P))\n    (hχ : (derivedPullback g').map (pullbackTensorModelMap X P c.P) ≫\n        (SingleComplexBaseChange.counit g').app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P c.P)) ≫\n        DerivedCategory.Q.map χ.hom =\n      τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj c.P) ≫\n        ((SingleComplexBaseChange.counit g').app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ\n          (SingleComplexBaseChange.counit g').app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P)) ≫\n        pullbackTensorModelMap X'\n          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)\n          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj c.P)) :\n    let T := pullbackTensorTotal X P c.P\n    let N := pullbackTensorTotal X'\n      (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) c.N\n    let d := χ.hom ≫\n      HomologicalComplex.mapBifunctorMap (𝟙 _) c.t (curriedTensor _) (.up ℤ)\n    ∃ (e : DerivedCategory.Q.obj T ≅ E ⊗ K)\n      (e' : DerivedCategory.Q.obj N ≅ (derivedPullback g').obj E ⊗ K'),\n      T.IsKFlat ∧\n      IsIso ((SingleComplexBaseChange.counit g').app\n        ((HomotopyCategory.quotient _ (.up ℤ)).obj T)) ∧\n      (SingleComplexBaseChange.counit g').app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj T) ≫\n        DerivedCategory.Q.map d ≫ e'.hom =\n      (derivedPullback g').map e.hom ≫ (τ E K ≫ ((derivedPullback g').obj E ◁ φ))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T181106-L-2602503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T181106-L-2602503",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

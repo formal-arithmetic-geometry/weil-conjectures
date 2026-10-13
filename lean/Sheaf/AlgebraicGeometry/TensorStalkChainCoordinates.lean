@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 
+import Sheaf.AlgebraicGeometry.TensorCoordinateIdentifications
+import Sheaf.AlgebraicGeometry.TensorPullbackStalkSquare
+
 /-! # Tensor coordinates and the chain-level stalk square
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
@@ -26,6 +29,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
 
+set_option linter.unusedVariables false in
 /-- Tensor coordinates for the given representative, with a chain-level stalk square.
 
 Proof: form the total tensor of P and c.P. It is K-flat by tensor associativity
@@ -100,6 +104,39 @@ theorem exists_tensorStalk_chain_coordinates
         (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) c.N ∧
       F.map σ.hom ≫ (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z e.P).hom ≫
           S.map e.t =
-        (Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t) ≫ ρ.hom := by sorry
+        (Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t) ≫ ρ.hom := by
+  classical
+  let := pullbackDescentModuleTensor X
+  let := pullbackDescentModuleTensor X'
+  let := modulePreadditive X
+  let := modulePreadditive X'
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
+  let : (curriedTensor X'.Modules).PreservesZeroMorphisms :=
+    SheafOfModules.preservesZeroMorphisms_curriedTensor X'.sheaf
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
+  let : ∀ M : X'.Modules, ((curriedTensor X'.Modules).obj M).PreservesZeroMorphisms :=
+    fun M ↦ SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X'.sheaf M
+  obtain ⟨χ, hdegree, hcounit⟩ := hτ.1 P c.P hP c.isKFlat
+  obtain ⟨e, e', hflat, hiso, hrep⟩ :=
+    exists_tensor_coordinate_identifications g' E.obj K.obj K'.obj φ τ hτ.2 c
+      P eP hP χ hcounit
+  let d := χ.hom ≫
+    HomologicalComplex.mapBifunctorMap (𝟙 _) c.t (curriedTensor _) (.up ℤ)
+  let coords : SingleComplexBaseChange.Coordinates g' (E.obj ⊗ K.obj)
+      (((derivedPullback g').obj E.obj) ⊗ K'.obj)
+      (τ E.obj K.obj ≫ ((derivedPullback g').obj E.obj ◁ φ)) :=
+    { P := pullbackTensorTotal X P c.P
+      N := pullbackTensorTotal X'
+        (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) c.N
+      e := e
+      e' := e'
+      isKFlat := hflat
+      counit_isIso := hiso
+      t := d
+      represents := hrep }
+  obtain ⟨σ, ρ, hsquare⟩ :=
+    exists_tensor_pullback_stalk_square f f' g g' sq P c.P c.N c.t χ hdegree z
+  exact ⟨coords, σ, ρ, rfl, rfl, hsquare⟩
+
 
 end AlgebraicGeometry
