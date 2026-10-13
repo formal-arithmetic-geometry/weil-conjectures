@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Extension.Basic
 public import Mathlib.Algebra.MvPolynomial.Eval
+import Sheaf.RingTheory.PolynomialCoefficientTensorQuotient
 
 /-! # The conormal inclusion for polynomial coefficient reduction
 
@@ -64,6 +65,92 @@ theorem polynomial_coefficient_conormal_inclusion
         RingHom.ker (MvPolynomial.map (Ideal.Quotient.mk I) (σ := Fin m)) ⊓
             (RingHom.ker φ) ^ 2 =
           RingHom.ker (MvPolynomial.map (Ideal.Quotient.mk I) (σ := Fin m)) *
-            RingHom.ker φ) := by sorry
+            RingHom.ker φ) := by
+  classical
+  let E := Extension.ofSurjective φ.toIntAlgHom hφ
+  let H : Ideal E.Ring := RingHom.ker (MvPolynomial.map (Ideal.Quotient.mk I) (σ := Fin m))
+  have hHJ : H ≤ E.ker := by
+    intro q hq
+    change φ q = 0
+    rw [hφeq]
+    change α (MvPolynomial.map (Ideal.Quotient.mk I) q) = 0
+    rw [show MvPolynomial.map (Ideal.Quotient.mk I) q = 0 from hq, map_zero]
+  let j : H →ₗ[E.Ring] E.ker := Submodule.inclusion hHJ
+  let f : H →ₗ[E.Ring] E.Cotangent := Extension.Cotangent.mk.comp j
+  let N : Submodule E.Ring H := E.ker • ⊤
+  have hN : N ≤ f.ker := by
+    intro x hx
+    apply (Extension.Cotangent.mk_eq_zero_iff _).mpr
+    have hx' : x.1 ∈ E.ker * H :=
+      (Submodule.mem_smul_top_iff E.ker H x).mp hx
+    change x.1 ∈ E.ker ^ 2
+    simpa only [pow_two] using (Ideal.mul_mono_right hHJ) hx'
+  let g : H ⧸ N →ₗ[E.Ring] E.Cotangent := N.liftQ f hN
+  obtain ⟨e, he⟩ := polynomial_coefficient_tensor_quotient P I m C α φ hφeq hφ
+  let t : C ⊗[P ⧸ I] I.Cotangent →ₗ[E.Ring] E.Cotangent := g.comp e.toLinearMap
+  let i : C ⊗[P ⧸ I] I.Cotangent →ₗ[C] E.Cotangent :=
+    { toFun := t
+      map_add' := t.map_add
+      map_smul' := fun c z ↦ by
+        obtain ⟨q, rfl⟩ := E.algebraMap_surjective c
+        simpa only [RingHom.id_apply, algebraMap_smul] using t.map_smul q z }
+  refine ⟨i, ?_, ?_, ?_⟩
+  · intro c x y hy
+    have hx : MvPolynomial.C x.1 ∈ H := by
+      change MvPolynomial.map (Ideal.Quotient.mk I) (MvPolynomial.C x.1) = 0
+      rw [MvPolynomial.map_C, Ideal.Quotient.eq_zero_iff_mem.mpr x.2, map_zero]
+    let z : H := ⟨MvPolynomial.C x.1, hx⟩
+    change g (e (c ⊗ₜ I.toCotangent x)) = c • Extension.Cotangent.mk y
+    rw [he c x z rfl]
+    change f (E.σ c • z) = c • Extension.Cotangent.mk y
+    rw [f.map_smul]
+    have hz : j z = y := Subtype.ext hy.symm
+    change E.σ c • Extension.Cotangent.mk (j z) = c • Extension.Cotangent.mk y
+    rw [hz, ← algebraMap_smul C, E.algebraMap_σ]
+  · change t.range = _
+    rw [LinearMap.range_comp, e.range, Submodule.map_top, Submodule.range_liftQ]
+    change (Extension.Cotangent.mk.comp j).range = _
+    rw [LinearMap.range_comp]
+    congr 1
+    ext x
+    simp only [LinearMap.mem_range, Submodule.mem_comap]
+    constructor
+    · rintro ⟨y, rfl⟩
+      exact y.2
+    · intro hx
+      exact ⟨⟨x.1, hx⟩, Subtype.ext rfl⟩
+  · have hg : Function.Injective i ↔ Function.Injective g := by
+      change Function.Injective (g ∘ e) ↔ Function.Injective g
+      constructor
+      · intro hi a b hab
+        have := hi (show g (e (e.symm a)) = g (e (e.symm b)) by simpa using hab)
+        exact e.symm.injective this
+      · exact fun hg ↦ hg.comp e.injective
+    rw [hg]
+    change Function.Injective g ↔ H ⊓ E.ker ^ 2 = H * E.ker
+    constructor
+    · intro hg
+      apply le_antisymm
+      · intro x hx
+        have hxH : x ∈ H := hx.1
+        let y : H := ⟨x, hxH⟩
+        have hfy : f y = 0 := (Extension.Cotangent.mk_eq_zero_iff _).mpr hx.2
+        have hgy : g (Submodule.Quotient.mk y) = g 0 := by
+          simpa [g] using hfy
+        have hyN : y ∈ N := (Submodule.Quotient.mk_eq_zero N).mp (hg hgy)
+        have := (Submodule.mem_smul_top_iff E.ker H y).mp hyN
+        simpa [Ideal.mul_comm] using this
+      · exact le_inf Ideal.mul_le_left
+          (by simpa [pow_two] using Ideal.mul_mono_left hHJ)
+    · intro hprod
+      apply (injective_iff_map_eq_zero g).mpr
+      intro z hz
+      obtain ⟨x, rfl⟩ := Submodule.mkQ_surjective N z
+      have hx : x.1 ∈ E.ker ^ 2 := by
+        exact (Extension.Cotangent.mk_eq_zero_iff (P := E) (j x)).mp hz
+      apply (Submodule.Quotient.mk_eq_zero N).mpr
+      apply (Submodule.mem_smul_top_iff E.ker H x).mpr
+      have : x.1 ∈ H * E.ker := hprod ▸ (show x.1 ∈ H ⊓ E.ker ^ 2 from ⟨x.2, hx⟩)
+      simpa [Ideal.mul_comm] using this
 
 end Algebra

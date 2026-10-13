@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-polynomial-coefficient-tensor-quotient",
+ "kind": "statement",
+ "title": "Polynomial coefficient tensors as a quotient of the coefficient kernel",
+ "statement": "Let $P$ be a commutative ring, $I\\subseteq P$ an ideal, $A=P/I$, $Q=P[y_1,\\ldots,y_m]$, and $C$ a commutative $A$-algebra. Let $\\alpha:A[y_1,\\ldots,y_m]\\to C$ be an $A$-algebra map and let $\\varphi:Q\\to C$ be surjective with $\\varphi=\\alpha\\circ\\pi$, where $\\pi$ reduces coefficients. Put $H=\\ker\\pi$ and $J=\\ker\\varphi$. There exists a $Q$-linear equivalence $e:C\\otimes_A(I/I^2)\\simeq H/JH$ such that $e(c\\otimes[x])=[\\widetilde c\\operatorname{C}(x)]$, where $\\widetilde c$ is the chosen section of $\\varphi$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00S2, proof of lemma-exact-sequence-NL, coefficient kernel and conormal row; tensor quotient identification as in More on Algebra Tag 07D4, proof of lemma-transitive-lci-at-end"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the coefficient kernel identity H = I Q. The canonical map Q tensor_P I to I Q is injective: after inclusion in Q it is the tensor of the ideal subtype, followed by the tensor unit equivalence, and Q is P-free and hence flat. It is surjective by induction on the ideal span of the constants from I. Thus it is a Q-linear equivalence.",
+   "uses": [
+    "lem-weil-pbc-polynomial-coefficient-map-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient tensor equivalence gives A tensor_P I = I/I². Extend its scalars from P to A using quotient surjectivity. Apply tensor congruence and cancel the intermediate A to get C tensor_A (I/I²) = C tensor_P I. Tensor the coefficient equivalence with C over Q and cancel Q to identify C tensor_Q H with the same module.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-module-base-change-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first isomorphism theorem identifies Q/J with C. Tensor with H and apply the quotient tensor equivalence to obtain C tensor_Q H = H/JH. Compose the preceding equivalences, restricting their scalars from C to Q. On c tensor [x], the first two equivalences give c tensor C(x), and the last gives the class of the chosen section of c times C(x). This proves the formula, including the zero ring and empty variable set.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-coefficient-map-kernel",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-module-base-change-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00S2, proof of lemma-exact-sequence-NL, coefficient kernel and conormal row; tensor quotient identification as in More on Algebra Tag 07D4, proof of lemma-transitive-lci-at-end; explicit Mathlib tensor and quotient implementation by B3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Polynomial coefficient kernel modulo presentation kernel product is isomorphic to tensor of conormal module",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial ideal coefficient kernel tensor ideal quotient by product is isomorphic to base change conormal module",
+   "results": "Algebra.Extension.cotangentEquiv and contangentEquiv_tmul; tensorCotangent; no exact polynomial coefficient-kernel quotient equivalence",
+   "verdict": "component results; explicit composition proved in Lean",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "quotTensorEquivQuotSMul|cancelBaseChange|mem_smul_top_iff",
+   "results": "TensorProduct.Quotient and TensorProduct.Tower provide quotient and cancellation equivalences; no exact match",
+   "verdict": "component results; explicit composition proved in Lean",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialCoefficientConormalInclusion",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Conormal sequence in the proof of Tag 07CE: Tensor inclusion, image and kernel criterion for polynomial coefficient reduction; refines lem-weil-pbc-projective-symmetric-conormal-reduction-exact; coefficient expansion and tensor quotient identification",
+   "via": [
+    "lem-weil-pbc-polynomial-coefficient-conormal-inclusion",
+    "lem-weil-pbc-projective-symmetric-conormal-reduction-exact",
+    "lem-weil-pbc-symmetric-projective-presentation-conormal",
+    "lem-weil-pbc-improve-presentation-smooth-conormal-free",
+    "lem-weil-pbc-smooth-retract-relative-global-complete-intersection",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialCoefficientTensorQuotient",
+  "file": "lean/Sheaf/RingTheory/PolynomialCoefficientTensorQuotient.lean",
+  "declaration": "Algebra.polynomial_coefficient_tensor_quotient",
+  "statement": "theorem polynomial_coefficient_tensor_quotient\n    (P : Type u) [CommRing P] (I : Ideal P) (m : ℕ)\n    (C : Type v) [CommRing C] [Algebra (P ⧸ I) C]\n    (α : MvPolynomial (Fin m) (P ⧸ I) →ₐ[P ⧸ I] C)\n    (φ : MvPolynomial (Fin m) P →+* C)\n    (hφeq : φ = α.toRingHom.comp (MvPolynomial.map (Ideal.Quotient.mk I)))\n    (hφ : Function.Surjective φ) :\n    let E := Extension.ofSurjective φ.toIntAlgHom hφ\n    let H := RingHom.ker (MvPolynomial.map (Ideal.Quotient.mk I) (σ := Fin m))\n    ∃ (e : C ⊗[P ⧸ I] I.Cotangent ≃ₗ[E.Ring]\n        H ⧸ (E.ker • (⊤ : Submodule E.Ring H))),\n      ∀ (c : C) (x : I) (y : H), y.1 = MvPolynomial.C x.1 →\n        e (c ⊗ₜ I.toCotangent x) = Submodule.Quotient.mk (E.σ c • y)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T045513-L-124719",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T045513-L-124719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
