@@ -4,6 +4,9 @@ public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
+import all Sheaf.Topology.ClosedImmersionPushforwardCohomology
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+
 @[expose] public section
 
 universe u
@@ -19,6 +22,22 @@ Source: Stacks Tags 00AE and 01AX.
 theorem closedImmersion_algebraDirectImage_preservesHomology
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :
     (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).PreservesHomology := by
-  sorry
+  let F := RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)
+  let R := moduleRings Z.toRingedSpace
+  let S := moduleRings (directImageAlgebraSpace i)
+  have hE : F.PreservesEpimorphisms := by
+    constructor
+    intro M N g hg
+    have : Epi ((SheafOfModules.toSheaf R).map g) := Functor.map_epi _ _
+    have hpush := TopCat.epi_pushforward_closedEmbedding i.base i.isClosedEmbedding
+      ((SheafOfModules.toSheaf R).map g)
+    have : Epi ((SheafOfModules.toSheaf S).map (F.map g)) := hpush
+    exact Functor.epi_of_epi_map (SheafOfModules.toSheaf S) inferInstance
+  let := hE
+  have : PreservesFiniteLimits F := by
+    dsimp [F, RingedSpace.moduleDirectImage]
+    infer_instance
+  exact Functor.preservesHomology_of_preservesEpis_and_kernels F
 
 end AlgebraicGeometry
+
