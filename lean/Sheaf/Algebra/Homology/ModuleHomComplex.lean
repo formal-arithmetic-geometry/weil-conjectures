@@ -31,7 +31,10 @@ Proof: Mathlib `HomComplex.δ_shape` says the differential vanishes off adjacent
 theorem moduleHom_shape (L M : CochainComplex (ModuleCat.{uH} A) ℤ)
     (n m : ℤ) (h : ¬ (ComplexShape.up ℤ).Rel n m) :
     ModuleCat.ofHom (HomComplex.δ_hom A L M n m) = 0 := by
-  sorry
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro z
+  exact HomComplex.δ_shape n m h z
 
 /-- Consecutive linear Hom differentials compose to zero.
 Source: Stacks, Tag 0A8H (blueprint: def-sc-module-total-hom-complex).
@@ -40,7 +43,10 @@ mixed terms in `d_M f - (-1)^n f d_L`, with the remaining terms killed by `d² =
 theorem moduleHom_square (L M : CochainComplex (ModuleCat.{uH} A) ℤ) (n m k : ℤ) :
     ModuleCat.ofHom (HomComplex.δ_hom A L M n m) ≫
       ModuleCat.ofHom (HomComplex.δ_hom A L M m k) = 0 := by
-  sorry
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro z
+  exact HomComplex.δ_δ n m k z
 
 /-- The A-module-valued Hom complex, using Mathlib's cochains and signed linear differential.
 Source: Stacks, Tag 0A8H (blueprint: def-sc-module-total-hom-complex). -/
