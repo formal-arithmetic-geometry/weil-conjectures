@@ -7,11 +7,10 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.CategoryTheory.ColimitSiteSections
-import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionRepresentatives
+import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionEventualEquality
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Scalar section comparison along an inverse system
 Source: Stacks Project, Tags 09YN and 09YQ.
@@ -116,6 +115,24 @@ theorem etale_limit_scalar_section_colimit
       { pt := L.pt.obj.obj (op Tlim)
         ι := { app := μ
                naturality := fun j k a ↦ by simpa using hleg j k a } }
-    Nonempty (IsColimit C) := by sorry
+    Nonempty (IsColimit C) := by
+  intro J Tj Tlim γ δ hγ hδ ρ μ hid hcomp hleg A C
+  have : Nonempty J := ⟨⟨i₀, le_rfl⟩⟩
+  have : IsDirected J (· ≤ ·) := ⟨fun j k ↦ by
+    obtain ⟨l, hj, hk⟩ := exists_ge_ge j.val k.val
+    exact ⟨⟨l, j.property.trans hj⟩, hj, hk⟩⟩
+  let U := forget AddCommGrpCat.{u + 1}
+  let : PreservesFilteredColimitsOfSize.{u, u} U :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} U
+  have : ReflectsColimit A U := reflectsColimit_of_reflectsIsomorphisms A U
+  refine ⟨isColimitOfReflects U ?_⟩
+  apply Types.FilteredColimit.isColimitOf' (A ⋙ U) (U.mapCocone C)
+  · intro x
+    obtain ⟨j, z, hz⟩ := etale_limit_scalar_sections_representatives
+      D c hc F φ hidentity hcomposition G eG hG L hL i₀ T₀ γ δ hγ hδ x
+    exact ⟨j, z, hz.symm⟩
+  · intro j s t hst
+    exact etale_limit_scalar_sections_eventual_equality
+      D c hc F φ hidentity hcomposition G eG hG L hL i₀ T₀ γ δ hγ hδ j s t hst
 
 end AlgebraicGeometry.Etale
