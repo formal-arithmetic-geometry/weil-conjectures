@@ -26,14 +26,24 @@
  ],
  "proof": [
   {
-   "text": "Use the localized Mayer–Vietoris diagram and its exact rows, with the comparison maps supplied by the diagram theorem.",
+   "text": "On each W intersected with S, multiplication by s^n is an isomorphism because s trivializes L. The fraction formula hc therefore determines c on every fraction. Fractions generate the quotient of the direct sum, so the formula determines the additive homomorphism uniquely. Apply the localized Mayer–Vietoris diagram theorem, identify its nonvanishing open with S by equality of underlying sets, and identify its comparison family with c by uniqueness. This transfers all exactness and commuting squares to c. The former arbitrary-c signature was false: on Spec k for a nonzero field with U = V = S = top, L = F = O, s = 1 and c W p = 0, its premises held but its degree-zero conclusion failed. The added hc excludes that historical counterexample.",
    "uses": [
     "lem-sc-invert-s-cohomology-mayer-vietoris-diagram"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the five-lemma to the four local comparison bijections to obtain bijectivity of the middle comparison in each degree.",
+   "text": "Use the same uniqueness on fractions to identify c on U, V and U intersect V with the equivalences in h_locU, h_locV and the restored h_locUV fraction formula. The local and product comparison maps are bijective in all degrees.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "In degree zero both union-to-product maps are injective. A kernel element of the union comparison maps to zero in the upper product by injectivity of the product comparison, hence is zero. To lift a lower union element, lift its image in the product through the product comparison. Commutativity and injectivity of the intersection comparison put the lift in the upper kernel; upper exactness lifts it to the union, and lower injectivity identifies its image with the original element.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For p = q + 1 take the five consecutive terms: product in degree q, intersection in degree q, union in degree q + 1, product in degree q + 1, intersection in degree q + 1. The exact rows and commuting squares, with all four outside comparisons bijective, give the middle bijection by the additive five lemma. Together with degree zero this proves the conclusion for every p. This is the full intended proof of the corrected interface; its Lean proof remains sorry.",
    "uses": [
     "lem-weil-pbc-five-lemma"
    ],
@@ -84,7 +94,7 @@
   "module": "Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluingAux",
   "file": "lean/Sheaf/AlgebraicGeometry/CohomologySectionLocalizationGluingAux.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.localized_middle_comparison_bijective",
-  "statement": "theorem localized_middle_comparison_bijective (X : Scheme.{u_1}) [CompactSpace X] [QuasiSeparatedSpace X] (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (F : X.Modules) [F.IsQuasicoherent] (S : X.Opens) (hS : (S : Set X) = nonvanishingLocus L s) (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V) (c : ∀ (W : X.Opens) (p : ℕ), CohomologyFractionPresentation L F s p W →+ (RingedSpace.openModuleCohomology X.toRingedSpace p (W ⊓ S)).obj F) (h_locU : ∀ p : ℕ, ∃ e : CohomologyFractionPresentation L F s p U ≃+ (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ S)).obj F, ∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p U).obj (F ⊗ L.tensorPow n : X.Modules)), (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ S)).map (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) : F ⟶ (F ⊗ L.tensorPow n : X.Modules)) (e (cohomologyFraction L F s p U n ξ)) = (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p (homOfLE (inf_le_left : U ⊓ S ≤ U))).app (F ⊗ L.tensorPow n : X.Modules) ξ) (h_locV : ∀ p : ℕ, ∃ e : CohomologyFractionPresentation L F s p V ≃+ (RingedSpace.openModuleCohomology X.toRingedSpace p (V ⊓ S)).obj F, ∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p V).obj (F ⊗ L.tensorPow n : X.Modules)), (RingedSpace.openModuleCohomology X.toRingedSpace p (V ⊓ S)).map (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) : F ⟶ (F ⊗ L.tensorPow n : X.Modules)) (e (cohomologyFraction L F s p V n ξ)) = (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p (homOfLE (inf_le_left : V ⊓ S ≤ V))).app (F ⊗ L.tensorPow n : X.Modules) ξ) (h_locUV : ∀ p : ℕ, ∃ e : CohomologyFractionPresentation L F s p (U ⊓ V) ≃+ (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ V ⊓ S)).obj F, ∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ V)).obj (F ⊗ L.tensorPow n : X.Modules)), True) : ∀ p : ℕ, Function.Bijective (c (U ⊔ V) p)",
+  "statement": "theorem localized_middle_comparison_bijective\n    (X : Scheme.{u_1}) [CompactSpace X] [QuasiSeparatedSpace X]\n    (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))\n    (F : X.Modules) [F.IsQuasicoherent]\n    (S : X.Opens) (hS : (S : Set X) = nonvanishingLocus L s)\n    (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V)\n    (c : ∀ (W : X.Opens) (p : ℕ), CohomologyFractionPresentation L F s p W →+\n      (RingedSpace.openModuleCohomology X.toRingedSpace p (W ⊓ S)).obj F)\n    (hc : ∀ (W : X.Opens) (p n : ℕ)\n        (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p W).obj\n          (F ⊗ L.tensorPow n : X.Modules)),\n      (RingedSpace.openModuleCohomology X.toRingedSpace p (W ⊓ S)).map\n          (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n            F ⟶ (F ⊗ L.tensorPow n : X.Modules))\n          (c W p (cohomologyFraction L F s p W n ξ)) =\n        (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p\n          (homOfLE (inf_le_left : W ⊓ S ≤ W))).app\n            (F ⊗ L.tensorPow n : X.Modules) ξ)\n    (h_locU : ∀ p : ℕ, ∃ e : CohomologyFractionPresentation L F s p U ≃+\n        (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ S)).obj F,\n      ∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p U).obj\n          (F ⊗ L.tensorPow n : X.Modules)),\n        (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ S)).map\n            (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n              F ⟶ (F ⊗ L.tensorPow n : X.Modules))\n            (e (cohomologyFraction L F s p U n ξ)) =\n          (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_left : U ⊓ S ≤ U))).app\n              (F ⊗ L.tensorPow n : X.Modules) ξ)\n    (h_locV : ∀ p : ℕ, ∃ e : CohomologyFractionPresentation L F s p V ≃+\n        (RingedSpace.openModuleCohomology X.toRingedSpace p (V ⊓ S)).obj F,\n      ∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p V).obj\n          (F ⊗ L.tensorPow n : X.Modules)),\n        (RingedSpace.openModuleCohomology X.toRingedSpace p (V ⊓ S)).map\n            (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n              F ⟶ (F ⊗ L.tensorPow n : X.Modules))\n            (e (cohomologyFraction L F s p V n ξ)) =\n          (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_left : V ⊓ S ≤ V))).app\n              (F ⊗ L.tensorPow n : X.Modules) ξ)\n    (h_locUV : ∀ p : ℕ, ∃ e : CohomologyFractionPresentation L F s p (U ⊓ V) ≃+\n        (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ V ⊓ S)).obj F,\n      ∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ V)).obj\n          (F ⊗ L.tensorPow n : X.Modules)),\n        (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ V ⊓ S)).map\n            (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n              F ⟶ (F ⊗ L.tensorPow n : X.Modules))\n            (e (cohomologyFraction L F s p (U ⊓ V) n ξ)) =\n          (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_left : U ⊓ V ⊓ S ≤ U ⊓ V))).app\n              (F ⊗ L.tensorPow n : X.Modules) ξ) :\n    ∀ p : ℕ, Function.Bijective (c (U ⊔ V) p)",
   "existing": false,
   "branch": "sheaf-dag",
   "by": "P3",
@@ -101,13 +111,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "X-cf64b",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261012T194130-L-461451",
+  "landing": "20261013T024043-L-3337456",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the corrected Lean signature byte-for-byte with the node, the canonical comparison with its source and dependencies, and the minimal forced adaptation with independent compilation and axiom checks."
  }
 }

@@ -105,11 +105,8 @@ theorem cohomologyFractionPresentation_gluing
     rw [hS, hS₀]
   subst S₀
   have hbij : ∀ p : ℕ, Function.Bijective (c (U ⊔ V) p) := by
-    apply localized_middle_comparison_bijective X L s F S hS₀ U V hU hV c
-      h_locU h_locV
-    intro p
-    obtain ⟨e, he⟩ := h_locUV p
-    exact ⟨e, fun _ _ => trivial⟩
+    exact localized_middle_comparison_bijective X L s F S hS₀ U V hU hV c hc
+      h_locU h_locV h_locUV
   intro p
   let e : CohomologyFractionPresentation L F s p (U ⊔ V) ≃+
       (RingedSpace.openModuleCohomology X.toRingedSpace p ((U ⊔ V) ⊓ S)).obj F :=
