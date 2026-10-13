@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.AffineBaseChangeTildeCanonicalGlobalComparison
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelIndependence
 
 /-! # AffineBaseChangeTildeGlobalComparison
 
@@ -93,6 +95,21 @@ theorem exists_affineBaseChangeTildeGlobalComparison
         ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom (algebraMap R A)))).obj K)),
       eU.hom ≫ H.map (schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom (algebraMap R A)))
         (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom (algebraMap R R')))
-        (Spec.map (CommRingCat.ofHom φg')) sq.w K) = F.map a ≫ d.hom.app L := by sorry
+        (Spec.map (CommRingCat.ofHom φg')) sq.w K) = F.map a ≫ d.hom.app L := by
+  let m₀ := ModuleCat.baseDerivedTensorCohomologyModel R A R' M A'
+  obtain ⟨d, e₀, h₀⟩ := exists_affineBaseChangeTildeCanonicalGlobalComparison
+    R A R' A' φg' φf' hφg' hφf' sq K hK hL M hM e hc i
+  obtain ⟨s, hs⟩ := ModuleCat.baseDerivedTensorCohomologyModel_localized_independence
+    R A R' A' M m m₀ i
+  let F := ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R')
+  refine ⟨d, F.mapIso s ≪≫ e₀, ?_⟩
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom]
+  rw [Category.assoc, h₀, ← Category.assoc, ← F.map_comp]
+  congr 1
+  dsimp only [affineBaseChangeTildeModuleMap]
+  rw [← Category.assoc, ← Category.assoc, hs]
+  simp only [Category.assoc]
+  rfl
+
 
 end AlgebraicGeometry

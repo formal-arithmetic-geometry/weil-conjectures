@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-affine-base-change-tilde-canonical-global-comparison",
+ "kind": "statement",
+ "title": "Affine mate calculation for the fixed tensor model",
+ "statement": "Let R,A,R',A' be commutative rings with R-algebra structures on A,R' and a structure map A tensor_R R' to A'. Let phi_g':A to A' and phi_f':R' to A' be its restrictions and assume their spectrum square is cartesian. Let M be an A-K-flat unbounded complex, K a quasi-coherent derived object on Spec A, e:Q(tilde M) isomorphic to K, L=Lg'^*K quasi-coherent and its counit on tilde M invertible. For the fixed library tensor model m=ModuleCat.baseDerivedTensorCohomologyModel R A R' M A' and any integer i, use the explicit U and a of [def-pc-affine-base-change-tilde-coordinates] with canonical target coordinate b. There exist a natural affine direct-image cohomology presentation d:Gamma H^i(-), restricted to R' and associated sheaf, isomorphic to H^i(Rf'_*(-)), and eU:tilde(restrict_R' U) isomorphic to H^i(Lg^*Rf_*K), with eU.hom followed by cohomology of the canonical base-change mate equal to tilde(restrict_R' a) followed by d at L. No stalk or localization conclusion is asserted. The universal comparison between arbitrary tensor models is not part of this fixed-model calculation.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6; https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Independence of choices for derived change of rings; affine base-change cohomology calculation"
+ },
+ "stmt_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-base-change",
+  "def-pc-module-kflat-complex",
+  "lem-pc-affine-derived-cohomology-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For the library's fixed model, use the R-K-flat scalar-extension construction and exact tilde to identify the source cohomology. Transport along the cartesian tensor-algebra isomorphism to A'. Unlike the parent, no comparison of arbitrary universal models is needed here.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-pc-affine-base-change-tilde-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine higher-direct-image vanishing supplies hacyc in the natural unbounded derived pushforward cohomology theorem. Compose that natural isomorphism with the tilde/Gamma counit on quasi-coherent cohomology and the natural pushforward/restriction-of-scalars section comparison. This constructs d naturally on the whole quasi-coherent derived category, not merely at L.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "lem-pc-affine-derived-cohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the common K-flat span the tensor-pullback unit equation identifies the scheme derived mate with the ring comparison. Use m.comparison_eq and m.localized_eq to identify its D-extension with the prescribed a. The target coordinate b uses the same inverse counit and e. Apply homology to obtain the global square.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-pc-affine-base-change-tilde-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-base-change-map",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6; https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Independence of choices for derived change of rings; affine base-change cohomology calculation",
+  "note": "Official Stacks pages consulted; proof decomposition and algebraic transport written by Q2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of universal left derived scalar extension functors preserves tensor cohomology comparisons",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of affine derived base change agrees with the canonical tensor comparison on a K flat resolution",
+   "results": "Cotangent complex base change and localization; no arbitrary unbounded affine mate comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "BaseDerivedTensorCohomologyModel|leftDerived.*[Uu]niq",
+   "results": "Mathlib Functor.leftDerivedUnique and leftDerivedNatIso; reused leftDerivedNatIso and leftDerivedNatTrans_app. No existing model-independence theorem.",
+   "verdict": "reuse universal uniqueness",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineBaseChangeTildeGlobalComparison",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-base-change-tilde-global-comparison",
+   "place": "Fixed-model affine computation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineBaseChangeTildeCanonicalGlobalComparison",
+  "file": "lean/Sheaf/Algebra/Homology/AffineBaseChangeTildeCanonicalGlobalComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_affineBaseChangeTildeCanonicalGlobalComparison",
+  "declarations": [
+   "AlgebraicGeometry.exists_affineBaseChangeTildeCanonicalGlobalComparison"
+  ],
+  "statement": "theorem exists_affineBaseChangeTildeCanonicalGlobalComparison (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A'] [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A'] [HasDerivedCategory.{wM} (ModuleCat.{u} R)] [HasDerivedCategory.{wM} (ModuleCat.{u} R')] (φg' : A →+* A') (φf' : R' →+* A') (hφg' : (algebraMap (A ⊗[R] R') A').comp (algebraMap A (A ⊗[R] R')) = φg') (hφf' : (algebraMap (A ⊗[R] R') A').comp Algebra.TensorProduct.includeRight.toRingHom = φf') (sq : IsPullback (Spec.map (CommRingCat.ofHom φg')) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom (algebraMap R A))) (Spec.map (CommRingCat.ofHom (algebraMap R R')))) (K : schemeDerivedCategory (Spec (.of A))) (hK : schemeDerivedQCohProperty (Spec (.of A)) K) (hL : schemeDerivedQCohProperty (Spec (.of A')) ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K)) (M : CochainComplex (ModuleCat.{u} A) ℤ) (hM : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat M) (e : DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) ≅ K) (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ) : let m := ModuleCat.baseDerivedTensorCohomologyModel R A R' M A' ∃ d : affineDerivedCohomologyModules A' i ⋙ (ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R')) ≅ (schemeDerivedQCohProperty (Spec (.of A'))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf')) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i, let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩ let V := (affineDerivedCohomologyModules A' i).obj L let F := ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R') let H := DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i let U := affineBaseChangeTildeModule R A R' A' M m i let b := affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i let a := affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i V b ∃ eU : F.obj U ≅ H.obj ((derivedPullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).obj ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom (algebraMap R A)))).obj K)), eU.hom ≫ H.map (schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom (algebraMap R A))) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom (algebraMap R R'))) (Spec.map (CommRingCat.ofHom φg')) sq.w K) = F.map a ≫ d.hom.app L",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T150352-L-809845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T150352-L-809845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
