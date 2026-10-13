@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-open-pinned-single-degree-square",
+ "kind": "statement",
+ "title": "Natural open restriction square for pinned single-degree tensor counits",
+ "statement": "Fix derived categories [def-pc-derived-category] and additive tensor pullbacks [def-pc-module-pullback]. For a cartesian square f:X→S, g:S′→S, g′:X′→X, f′:X′→S′ [def-pc-fibre-product], integer n, and opens V⊆S, W⊆S′ with W⊆g⁻¹V, put U=f⁻¹V, fA=f|V, gA=g|W, P=U×_V W, p:P→U, q:P→W, and r:G↦G|U [def-pc-derived-open-restriction-maps]. Let T_Y embed modules on Y as single complexes in degree n, and R be derived restriction to W. Define d_k(M,n) by the component of the composition-pinned tensor counit [lem-pc-ringed-spaces-derived-pullback-composition], followed by the termwise single-complex identification; this is a real construction. There exist natural isomorphisms a:T_X⋙Rf_*⋙Lg*⋙R≅r⋙T_U⋙RfA_*⋙LgA* and b:g′*_tensor⋙T_X′⋙Rf′_*⋙R≅r⋙p*_tensor⋙T_P⋙Rq_* such that for every module G, R(β(T_X G)≫Rf′_*(d_g′(G,n)))≫b_G=a_G≫(βA(T_U(rG))≫Rq_*(d_p(rG,n))). Here β and βA are the recorded derived base-change maps [def-pc-derived-base-change-map]. No arbitrary counit comparison is quantified; a,b are natural in G. All integer degrees, zero modules and empty opens are allowed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Stacks Tags 08FE, 08HY, 08IB and 0D5U; geometric Steps 1–2 and the reference-counit part of Step 3 of stage3-open-fixed-counits-compatibility."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "For the cartesian square f:X→S, g:S′→S, g′:X′→X, f′:X′→S′, put U=f inverse-image V and Z=f′ inverse-image W. A cone over U and W composes to a cone over X and S′, and the unique lift through X′ factors through Z. This gives the projection-compatible isomorphism Z≅U×_V W, including empty opens.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction preserves K-injectives because extension by zero is its exact left adjoint. Compute derived direct images of f and f′ on these resolutions, identifying direct-image restriction naturally (08FE). Restriction preserves K-flat complexes by testing against acyclic complexes extended by zero, using exact extension by zero and its tensor projection formula. On these resolutions obtain the pullback restriction comparison for g. Exact restriction identifies the degree-n single functor with the single functor after restriction. Compose these natural isomorphisms to get a. For b combine f′ direct-image restriction with ordinary tensor restriction along Z≅P and the single-functor identification.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the left-derived counits selected with the composition structure. Transpose the two reference base-change composites under the derived adjunctions pinned to these counits. On K-flat and K-injective representatives both transposes are tensor reassociation followed by pullback of the direct-image counit. The underived restriction-square mate identity, including units, counits and reassociations, holds termwise. Localize this identity to get equality of the transposes, hence the mates. The final single-complex map is exactly pinnedSingleDegreeTensorComparison. The constructions are natural in the module G, so one pair of natural isomorphisms a,b works for every G. Only these pinned comparisons are used here; there is no arbitrary-counit change or truncation assertion.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map",
+    "lem-weil-pbc-module-square-restriction-commutes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-fibre-product",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-module-square-restriction-commutes",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Stacks Tags 08FE, 08HY, 08IB and 0D5U; geometric Steps 1–2 and the reference-counit part of Step 3 of stage3-open-fixed-counits-compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived base change commutes with open restriction for pinned single complex counits",
+   "results": "Internal Server Error; no results",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived base change mate commutes with restriction to open subschemes",
+   "results": "Scheme restriction and underived restrictFunctorComp lemmas; no derived open mate square",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "BeckChevalley|baseChange.*[Rr]estrict|[Rr]estrict.*baseChange",
+   "results": "Mathlib matches concern scalar base change. Repository compatibility theorem is downstream and would close an import cycle. Blueprint search 08HY has no matches.",
+   "verdict": "no usable exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounitsCompatibility",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Step 1: local affine reduction by open restriction; Geometric restriction comparisons and equality of the pinned reference mates, before changing counits",
+   "via": [
+    "stage3-open-fixed-counits-compatibility",
+    "lem-pc-base-change-open-fixed-counits",
+    "lem-pc-canonical-module-base-change-open-comparison-compat",
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenPinnedSingleDegreeSquare.lean",
+  "declaration": "AlgebraicGeometry.open_pinned_single_degree_square",
+  "statement": "theorem open_pinned_single_degree_square\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (g' : X' ⟶ X) (f' : X' ⟶ S') (sq : IsPullback g' f' f g)\n    (n : ℤ) (V : S.Opens) (W : S'.Opens) (hWV : W ≤ g ⁻¹ᵁ V) :\n    let U := f ⁻¹ᵁ V\n    let fA := f ∣_ V\n    let gA := g.resLE V W hWV\n    let p := pullback.fst fA gA\n    let q := pullback.snd fA gA\n    let T := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n\n    let T0 := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n\n    let T' := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) n\n    let TP := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) n\n    let R := (schemeOpenRestriction S' W).mapDerivedCategory\n    ∃ a : ((T ⋙ schemeDerivedDirectImage f) ⋙ derivedPullback g) ⋙ R ≅\n        ((schemeOpenRestriction X U ⋙ T0) ⋙ schemeDerivedDirectImage fA) ⋙\n          derivedPullback gA,\n    ∃ b : ((Scheme.Modules.tensorPullback g' ⋙ T') ⋙ schemeDerivedDirectImage f') ⋙ R ≅\n        ((schemeOpenRestriction X U ⋙ Scheme.Modules.tensorPullback p) ⋙ TP) ⋙\n          schemeDerivedDirectImage q,\n    ∀ G : X.Modules,\n      R.map (schemeDerivedBaseChangeMap f f' g g' sq.w (T.obj G) ≫\n          (schemeDerivedDirectImage f').map (pinnedSingleDegreeTensorComparison g' G n)) ≫\n        b.hom.app G =\n      a.hom.app G ≫\n        (schemeDerivedBaseChangeMap fA q gA p pullback.condition\n            (T0.obj ((schemeOpenRestriction X U).obj G)) ≫\n          (schemeDerivedDirectImage q).map\n            (pinnedSingleDegreeTensorComparison p ((schemeOpenRestriction X U).obj G) n))",
+  "declarations": [
+   "AlgebraicGeometry.open_pinned_single_degree_square",
+   "AlgebraicGeometry.pinnedSingleDegreeTensorComparison"
+  ],
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T045535-L-130050",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T045535-L-130050",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

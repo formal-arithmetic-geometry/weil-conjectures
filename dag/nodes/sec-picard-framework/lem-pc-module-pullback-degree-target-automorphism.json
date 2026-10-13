@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-module-pullback-degree-target-automorphism",
+ "kind": "statement",
+ "title": "Target automorphism of two single-module pullback comparisons in any degree",
+ "statement": "Fix derived categories [def-pc-derived-category]. Let k:X→Y be a scheme morphism, with additive tensor pullback [def-pc-module-pullback], let G be any O_Y-module, and let n∈ℤ. Let c₀,c: Lk*(G(n))→(k*_tensor G)(n) be components of witnessing left-derived tensor counits [def-pc-derived-pullback], followed by the termwise single-complex identification (the degree-n version of [def-pc-derived-module-base-change-map]). Then there exists an automorphism α:k*_tensor G≅k*_tensor G such that c=c₀ followed by α in degree n. There is no base-change square, open restriction, direct image, flatness or properness hypothesis. Zero modules, negative degrees, and empty schemes are included.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Stacks Tags 06YJ and 08HY; the arbitrary-degree version of the truncation argument in Step 3 of stage3-open-fixed-counits-compatibility and lem-pc-module-pullback-comparison-target-automorphism."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-derived-pullback",
+  "def-pc-derived-module-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "For a right exact additive functor F and a quasi-isomorphism P→G(n) between complexes supported at most n, the outgoing degree-n differentials vanish. Hence degree-n homology is left homology with zero final differential, and right exactness identifies homology after F with F of homology. The map on degree-n homology after F is an isomorphism. This is proved using ShortComplex.mapHomologyIso_hom_naturality and F.preservesLeftHomology_of_zero_g.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose the functorial flat replacement of the single complex G(n), with upper bound n. It is K-flat by bounded-above flatness. The recorded counit of derivedPullback is invertible on it. For any other witnessing counit, leftDerivedUnique gives an invertible natural transformation of derivedPullback whose composite with the recorded counit is the other one; its component on the resolution is therefore invertible. Naturality along the resolution augmentation, the preceding right-exact homology calculation and localization of that quasi-isomorphism show that every comparison induces an isomorphism on H^n.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply flatComplexDerivedPullback to the same flat replacement, and transport its upper support through its localization isomorphism to the single complex. The derived pullback of G(n) is therefore in D≤n.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form α from the inverse of H^n(c₀), followed by H^n(c), transporting through singleFunctorCompHomologyFunctorIso. Since the source is D≤n and the target single object is D≥n, homologyFunctor_map_bijective_of_isLE_of_isGE in WeilConjectures gives injectivity on morphisms. Naturality of the single-homology identification and cancellation give equality of the homology maps; injectivity gives c=c₀≫α[n]. The calculation is in an arbitrary integer degree and requires no flatness of G.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-kflat-bounded-flat-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Stacks Tags 06YJ and 08HY; the arbitrary-degree version of the truncation argument in Step 3 of stage3-open-fixed-counits-compatibility and lem-pc-module-pullback-comparison-target-automorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived tensor pullback comparison two counits differ by automorphism single complex",
+   "results": "Internal Server Error; no results",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two left derived tensor pullback counits at a single module differ by an automorphism of the ordinary pullback module in degree n",
+   "results": "Tor naturality and scalar-pullback composition; no counit comparison theorem",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor_map_bijective_of_isLE_of_isGE|singleFunctorCompHomologyFunctorIso; modulePullbackComparison_target_automorphism",
+   "results": "Mathlib has singleFunctorCompHomologyFunctorIso, and WeilConjectures has the homology-map bijection. Existing Sheaf theorem applies only in degree zero; DerivedPullbackSingleCohomology requires flatness and does not compare counits. Blueprint search target automorphism has no matches.",
+   "verdict": "generic tools used; no exact arbitrary-degree theorem",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounitsCompatibility",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Step 1: local affine reduction by open restriction; Changing witnessing counits using the upper support and top homology of a single complex",
+   "via": [
+    "stage3-open-fixed-counits-compatibility",
+    "lem-pc-base-change-open-fixed-counits",
+    "lem-pc-canonical-module-base-change-open-comparison-compat",
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackComparisonDegreeAutomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackComparisonDegreeAutomorphism.lean",
+  "declaration": "AlgebraicGeometry.modulePullbackComparison_degree_target_automorphism",
+  "statement": "theorem modulePullbackComparison_degree_target_automorphism\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (a : X ⟶ Y) [(Scheme.Modules.tensorPullback a).Additive]\n    (G : Y.Modules) (n : ℤ)\n    (c₀ c : (derivedPullback a).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj G) ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj\n            ((Scheme.Modules.tensorPullback a).obj G))\n    (hc₀ : IsModulePullbackComparisonInDegree a G n c₀)\n    (hc : IsModulePullbackComparisonInDegree a G n c) :\n    ∃ α : (Scheme.Modules.tensorPullback a).obj G ≅\n        (Scheme.Modules.tensorPullback a).obj G,\n      c = c₀ ≫ (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).map α.hom",
+  "declarations": [
+   "AlgebraicGeometry.modulePullbackComparison_degree_target_automorphism",
+   "AlgebraicGeometry.IsModulePullbackComparisonInDegree"
+  ],
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T045535-L-130050",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T045535-L-130050",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
