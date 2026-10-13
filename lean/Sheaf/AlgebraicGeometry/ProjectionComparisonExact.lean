@@ -11,6 +11,9 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorShift
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
+import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 /-! # Exactness of the canonical projection comparison
 
@@ -53,22 +56,19 @@ Source: Stacks Project, Tag 08EU, proof (exactness of the functors involved), an
 Cohomology, equation (20.54.2.1).
 (blueprint: lem-sc-projection-comparison-exact).
 
-Proof: represent derived tensor and pullback by K-flat complexes and direct image by
-K-injective resolutions. Tensoring with a K-flat complex sends mapping cones to mapping
-cones; direct image on K-injectives and derived pullback likewise preserve cone triangles.
-The tensor shift isomorphisms on these representatives, with their Koszul signs, give
-exact shift structures on the source and target composite functors. To handle the supplied
-strong monoidal structure on pullback, transport its shift comparison along the inverse
-tensorator and the identification K[n] = K tensor the shifted unit. The tensorator's
-associativity and unit identities identify this transported comparison with the one on
-K-flat representatives, up to conjugation by natural isomorphisms; hence exactness is
-preserved. Tensorator naturality and counit naturality show that the mate commutes with
-these comparisons: transpose the square under the adjunction, expand the inverse
-tensorator followed by the whiskered counit, and use associativity and unit coherence.
-The zero-shift and addition coherence follow from the same identities. Descend from
-representatives by the localization universal property. This proves exactness of both
-specified functors and shift compatibility of the already constructed natural
-transformation, without any invertibility assumption on its components. -/
+Proof: choose compatible exact shifts for derived pullback and tensor from
+`derivedPullback_tensorShift`. Give direct image the right-adjoint shift induced by
+`a`; the adjunction then commutes with shifts. Since pullback is triangulated,
+Mathlib's right-adjoint exactness theorem makes direct image triangulated. Exactness
+of tensor and the composition instances give the two required exact functors.
+Flip the oplax tensorator natural transformation to match tensorRight. Its shift
+compatibility is one clause of the tensor-shift theorem, and naturality of the tensor
+shifts in the fixed factor gives compatibility for tensoring the counit. Identify
+`projectionComparisonNatTrans` componentwise with `a.rightAdjointProjectionMap`
+for this flipped tensorator. The upstream projection-map shift theorem now proves
+the required shift equation. No projection component is cancelled or assumed
+invertible. The geometric tensor/pullback shift construction remains a separate
+statement; the adjunction, direct-image exactness and mate argument are proved here. -/
 theorem projectionComparison_exact
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -84,6 +84,39 @@ theorem projectionComparison_exact
       (tensorRight ((schemeDerivedDirectImage f).obj E.obj)).IsTriangulated ∧
       ((derivedPullback f ⋙ tensorRight E.obj) ⋙
         schemeDerivedDirectImage f).IsTriangulated ∧
-      NatTrans.CommShift (projectionComparisonNatTrans f a E.obj) ℤ := by sorry
+      NatTrans.CommShift (projectionComparisonNatTrans f a E.obj) ℤ := by
+  obtain ⟨sF, sY, sZ, hF, hY, hZ, hmap, hδ⟩ := derivedPullback_tensorShift f
+  let : (derivedPullback f).CommShift ℤ := sF
+  let : (derivedPullback f).IsTriangulated := hF
+  let := sY
+  let := sZ
+  let (M : schemeDerivedCategory Y) : (tensorRight M).IsTriangulated := hY M
+  let (M : schemeDerivedCategory Z) : (tensorRight M).IsTriangulated := hZ M
+  let := a.rightAdjointCommShift ℤ
+  have : a.CommShift ℤ := a.commShift_of_leftAdjoint ℤ
+  have : (schemeDerivedDirectImage f).IsTriangulated := a.isTriangulated_rightAdjoint
+  let φ : (Functor.postcompose₂.obj (derivedPullback f)).obj
+      (curriedTensor (schemeDerivedCategory Y)).flip ⟶
+      (((Functor.whiskeringLeft₂ (schemeDerivedCategory Z)).obj
+        (derivedPullback f)).obj (derivedPullback f)).obj
+          (curriedTensor (schemeDerivedCategory Z)).flip :=
+    Functor.flipping.functor.map (Functor.OplaxMonoidal.δNatTrans (derivedPullback f))
+  have : NatTrans.CommShift
+      (F₁ := tensorRight ((schemeDerivedDirectImage f).obj E.obj) ⋙ derivedPullback f)
+      (F₂ := derivedPullback f ⋙ tensorRight
+        ((derivedPullback f).obj ((schemeDerivedDirectImage f).obj E.obj)))
+      (φ.app ((schemeDerivedDirectImage f).obj E.obj)) ℤ := hδ _
+  have : NatTrans.CommShift
+      ((curriedTensor (schemeDerivedCategory Z)).flip.map (a.counit.app E.obj)) ℤ :=
+    hmap _
+  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
+  have hη : projectionComparisonNatTrans f a E.obj =
+      (a.rightAdjointProjectionMap φ).app E.obj := by
+    ext K
+    simp only [projectionComparisonNatTrans, Adjunction.rightAdjointProjectionMap_app_app,
+      Functor.Monoidal.μIso_inv]
+    rfl
+  rw [hη]
+  exact a.commShift_rightAdjointProjectionMap_app φ E.obj
 
 end AlgebraicGeometry

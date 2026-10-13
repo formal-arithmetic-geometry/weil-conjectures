@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-derived-pullback-tensor-shift",
+ "kind": "statement",
+ "title": "Compatible exact tensor and pullback shift structures",
+ "statement": "Let f:Z → Y be a proper morphism of Noetherian schemes [def-pc-scheme, def-weil-proper-morphism]. Use the ambient derived categories [def-pc-derived-category], their shared K-flat derived tensor [def-pc-scheme-derived-tensor-structure], and F=Lf* [def-pc-derived-pullback], with the supplied strong monoidal structure. There exist coherent integer-shift structures on F and on every tensorRight M on both categories, such that F and all these tensor functors are triangulated. The tensor shifts on Z are natural in the fixed factor: for every b:M → N, the natural transformation K ↦ K tensor b commutes with shifts. For every M in D(O_Y), the flipped inverse tensorator F(K tensor M) → F(K) tensor F(M), natural in K, commutes with the composite shifts. No independently fixed pullback shift, direct image, adjunction, counit, projection mate, or projection invertibility is assumed or concluded.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Tag 08EU, proof: exactness of the two composite functors; Cohomology, equation (20.54.2.1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "On K-flat representatives, use the Koszul shift comparison for total tensor in its first variable. The comparison is natural in the fixed second variable. Tensor of mapping cones is the corresponding mapping cone, so the resulting tensor functors are triangulated. Termwise tensor pullback on K-flat resolutions likewise preserves mapping cones and commutes with translation.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the pullback comparison together with the tensor comparisons for the supplied strong monoidal structure, rather than fixing a shift of pullback in advance. Express translation as tensor with the translated unit and transport through the inverse tensorator and the unit isomorphism. Tensorator associativity gives the addition identity and its unit identities give the zero identity. Transport the distinguished cone triangles along the comparison isomorphisms. The resulting exact pullback and tensor shift structures make the flipped inverse tensorator commute with translation in its varying first factor.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend these natural comparisons through K-flat localization; the comparisons respect quasi-isomorphisms and the zero and addition equations descend as equalities. Naturality of the tensor comparison in its fixed second variable gives NatTrans.CommShift for every tensorRight morphism. These are precisely the two compatibility clauses of the theorem. The zero object, empty schemes, and zero shifts are included by the unit/zero equations.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Exactness assertion in Tag 08EU proof, expanded using the K-flat tensor/pullback constructions and monoidal transport from steps 2–3 of lem-sc-projection-comparison-exact; equation (20.54.2.1) fixes the inverse tensorator orientation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact derived tensor shift structures compatible with strong monoidal derived pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact derived tensor shift structures compatible with strong monoidal derived pullback",
+   "results": "CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Tor_map; CategoryTheory.Tor'_map_app; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback.*tensorShift|tensor.*CommShift",
+   "results": "No hits. Local rg finds upstream DerivedCategory.Monoidal.Shift, which supplies tensor exactness for its canonical comparisons but no compatibility with the supplied geometric monoidal pullback.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.NatTrans.CommShift",
+   "results": "Second reader: shift compatibility composition and transport lemmas, including CommShift.ofIso_compatibility and NatTrans.CommShift.comp; none constructs compatible geometric tensor/pullback shifts. Local reading also checked DerivedCategory.commShift_of_tensorRight_fac: it requires a factorization compatible with the termwise oplax structure, which is not a hypothesis for the supplied arbitrary strong monoidal structure here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectionComparisonExact",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Projection-formula exactness and shift compatibility used in the right-adjoint tensor formula; geometric tensor/pullback part of steps 2–3 of lem-sc-projection-comparison-exact.",
+   "via": [
+    "lem-sc-projection-comparison-exact",
+    "lem-sc-projection-comparison-triangles",
+    "lem-sc-right-adjoint-tensor-comparison-projection",
+    "lem-sc-right-adjoint-tensor-comparison-natural",
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorShift.lean",
+  "declaration": "AlgebraicGeometry.derivedPullback_tensorShift",
+  "statement": "theorem derivedPullback_tensorShift\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)] :\n    ∃ (sF : (derivedPullback f).CommShift ℤ)\n      (sY : ∀ M : schemeDerivedCategory Y, (tensorRight M).CommShift ℤ)\n      (sZ : ∀ M : schemeDerivedCategory Z, (tensorRight M).CommShift ℤ),\n      letI := sF\n      letI := sY\n      letI := sZ\n      (derivedPullback f).IsTriangulated ∧\n      (∀ M : schemeDerivedCategory Y, (tensorRight M).IsTriangulated) ∧\n      (∀ M : schemeDerivedCategory Z, (tensorRight M).IsTriangulated) ∧\n      (∀ {M N : schemeDerivedCategory Z} (b : M ⟶ N),\n        NatTrans.CommShift ((curriedTensor (schemeDerivedCategory Z)).flip.map b) ℤ) ∧\n      (∀ M : schemeDerivedCategory Y,\n        NatTrans.CommShift\n          (F₁ := tensorRight M ⋙ derivedPullback f)\n          (F₂ := derivedPullback f ⋙ tensorRight ((derivedPullback f).obj M))\n          ((Functor.flipping.functor.map\n            (Functor.OplaxMonoidal.δNatTrans (derivedPullback f))).app M) ℤ)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T072347-L-1118452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T072347-L-1118452",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
