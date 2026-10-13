@@ -1,0 +1,137 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Tag 0BQZ displayed Hom complex coefficient map; Tag 01HV Lemma 26.5.4(4)-(5), functorial basic-open localization"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-koszul-complex",
+  "def-pur-hom-complex",
+  "def-sc-koszul-dual-complex",
+  "new-j3-koszul-quotient-coefficient-complex",
+  "lem-sc-affine-koszul-hom-coefficient-complex-square"
+ ],
+ "proof": [
+  {
+   "text": "Apply homology to the finite free coefficient complex square. Exactness of tilde and chart restriction gives the natural mapHomologicalComplexHomologyIso comparison. Compose this square with naturality of extendHomologyIso to identify integer m homology with natural m homology. The private generic homology_coefficient_square is proved by mapping the initial square, and composing these three commuting squares. Specialize it to the dual Koszul complexes and their coefficient reduction. The restriction limits instance is Scheme.Modules.preservesLimitsOfSize_restrictFunctor, imported from QuasicoherentKernel; its colimit preservation is the restriction adjunction instance. The natural homology comparison is Functor.mapHomologicalComplexHomologyIso from PreservesQuasiIso, and the extension comparison is Mathlib extendHomologyIso_hom_naturality.",
+   "uses": [
+    "lem-sc-affine-koszul-hom-coefficient-complex-square",
+    "lem-sc-tilde-preserves-finite-limits",
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-koszul-hom-coefficient-complex-square",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "D2",
+  "group": "D2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "displayed Hom-complex coefficient map",
+  "note": "Second reader D2 recorded the restriction limits and colimits dependencies used by the actual instance synthesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafifying Hom from a finite free Koszul complex commutes naturally with quotient coefficients",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul Hom complex on affine scheme coefficient reduction modulo an ideal commutes with sheafification",
+   "results": "8 hits: Scheme.IdealSheafData.isLocalization_away, ideal_le_ker_glueDataObjι, subschemeObjIso, subschemeι_app, glueDataObjι_ι, glueDataObjHom, ker_glueDataObjι_appTop, Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp.",
+   "date": "2026-10-13",
+   "verdict": "No Hom-complex coefficient square."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.extendHomologyIso",
+   "results": "11 hits, including extendHomologyIso and extendHomologyIso_hom_naturality. These handle the final index-extension comparison only.",
+   "date": "2026-10-13",
+   "verdict": "Useful components, no assembled sheaf coefficient square."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(Hom|hom|tilde)|homComplex.*tilde|tilde.*homComplex",
+   "results": "Local AffineKoszulHomComplexIso and AffineKoszulHomCoordinates compute only structure-sheaf coefficients. AffineQuotientRestrictedIso gives an objectwise quotient identification. None gives the quotient coefficient square. Blueprint search for Koszul coefficient found no match.",
+   "date": "2026-10-13",
+   "verdict": "No existing exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "proof step 4, exact homology transport and natural index-extension comparison",
+   "via": [
+    "lem-sc-affine-koszul-coefficient-hom-coordinates",
+    "new-k1-koszul-ext-coefficient-affine-model",
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-sc-affine-koszul-hom-coefficient-homology-square",
+ "title": "Homology transport of the affine Koszul coefficient square",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientHomologySquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulHomCoefficientHomologySquare.lean",
+  "declaration": "AlgebraicGeometry.affine_koszul_hom_coefficient_homology_square",
+  "statement": "theorem affine_koszul_hom_coefficient_homology_square\n    {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))\n    (n m : ℕ) (f : Fin n → Γ(Y, U.1))\n    (H : CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ ⥤\n      CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ)\n    (hH : H =\n      let A := (Γ(Y, U.1) : Type u)\n      let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n      let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)\n      (homComplexFunctor (R := U.1.toScheme.toRingedSpace.sheaf)).obj (op E)) :\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let S := CochainComplex.singleFunctor U.1.toScheme.Modules 0\n    let D := HomologicalComplex.homologyFunctor U.1.toScheme.Modules\n      (ComplexShape.up ℤ) (m : ℤ)\n    let G := S ⋙ H ⋙ D\n    ∃ (cO : G.obj (T.obj (ModuleCat.of A A)) ≅\n        T.obj ((ExteriorAlgebra.koszulDualComplex A n f).homology m))\n      (cQ : G.obj (T.obj (ModuleCat.of A (A ⧸ I))) ≅\n        T.obj ((ExteriorAlgebra.koszulQuotientDualComplex A I n f).homology m)),\n      G.map (T.map (ModuleCat.ofHom I.mkQ)) ≫ cQ.hom = cO.hom ≫ T.map\n        (HomologicalComplex.homologyMap\n          (ExteriorAlgebra.koszulCoefficientReduction A I n f) m)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "statement": "For any affine chart U of a scheme Y [def-pc-scheme], ideal I of A=Γ(Y,U), and sequence f:Fin n → A, the finite free Hom coefficient complex square [lem-sc-affine-koszul-hom-coefficient-complex-square] induces isomorphisms on degree m homology to T of the natural-degree dual Koszul homologies [def-sc-koszul-dual-complex, new-j3-koszul-quotient-coefficient-complex]. They intertwine the coefficient quotient map with T of the homology map of koszulCoefficientReduction. Here T is tilde followed by chart transport [lem-weil-pbc-spec-module-tilde-sections], H is the specified Hom functor [def-pur-hom-complex] with equality hH, and m is any natural number. No closed immersion or adjunction coefficient map is involved.",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T144154-L-614172",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T144154-L-614172",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
