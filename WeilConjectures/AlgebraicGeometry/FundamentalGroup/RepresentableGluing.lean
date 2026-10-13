@@ -99,24 +99,29 @@ noncomputable def τ {U U' : 𝔅} (h : U ≤ U') : (X U).left ⟶ (X U').left :
 
 variable {F X r}
 
+omit h𝔅 in
 lemma τ_hom {U U' : 𝔅} (h : U ≤ U') :
     τ F X r h ≫ (X U').hom = (X U).hom ≫ openHom (show U.1 ≤ U'.1 from h) :=
   ((r U').exists_overElt_eq ((X U).hom ≫ openHom (show U.1 ≤ U'.1 from h))
     ((r U).overElt (𝟙 _))).choose_spec.1
 
+omit h𝔅 in
 lemma overElt_τ {U U' : 𝔅} (h : U ≤ U') :
     (r U').overElt (τ F X r h) = (r U).overElt (𝟙 _) :=
   ((r U').exists_overElt_eq ((X U).hom ≫ openHom (show U.1 ≤ U'.1 from h))
     ((r U).overElt (𝟙 _))).choose_spec.2
 
+omit h𝔅 in
 lemma overElt_comp_τ {U U' : 𝔅} (h : U ≤ U') {T : Y.Etale} (a : T ⟶ (X U).left) :
     (r U').overElt (a ≫ τ F X r h) = (r U).overElt a := by
   rw [(r U').overElt_comp, overElt_τ, ← (r U).overElt_comp, Category.comp_id]
 
+omit h𝔅 in
 lemma τ_refl (U : 𝔅) : τ F X r (le_refl U) = 𝟙 _ :=
   (r U).overElt_injective (by rw [τ_hom, openHom_refl, Category.comp_id, Category.id_comp])
     (by rw [overElt_τ])
 
+omit h𝔅 in
 lemma τ_comp {U U' U'' : 𝔅} (h : U ≤ U') (h' : U' ≤ U'') :
     τ F X r h ≫ τ F X r h' = τ F X r (h.trans h') :=
   (r U'').overElt_injective
@@ -224,8 +229,10 @@ noncomputable def TUfst (T : Y.Etale) (U : 𝔅) : TU T U ⟶ T :=
 noncomputable def TUsnd (T : Y.Etale) (U : 𝔅) : TU T U ⟶ openObj U.1 :=
   homMk (pullback.snd (structMap T) U.1.ι) pullback.condition.symm
 
+omit h𝔅 in
 @[simp] lemma TUfst_left (T : Y.Etale) (U : 𝔅) :
     (TUfst T U).left = pullback.fst (structMap T) U.1.ι := rfl
+omit h𝔅 in
 @[simp] lemma TUsnd_left (T : Y.Etale) (U : 𝔅) :
     (TUsnd T U).left = pullback.snd (structMap T) U.1.ι := rfl
 
@@ -342,7 +349,8 @@ lemma glue_naturality {T T' : Y.Etale} (h : T' ⟶ T) (s : F.obj.obj (op T)) :
       rw [pullback.lift_fst_assoc, Category.assoc, w_left])
   have h₁ : hU ≫ TUsnd T U = TUsnd T' U := hom_ext (by simp [hU])
   have h₂ : hU ≫ TUfst T U = TUfst T' U ≫ h := hom_ext (by simp [hU])
-  have h₂' : hU.left ≫ pullback.fst (structMap T) U.1.ι = pullback.fst (structMap T') U.1.ι ≫ h.left := by
+  have h₂' : hU.left ≫ pullback.fst (structMap T) U.1.ι =
+      pullback.fst (structMap T') U.1.ι ≫ h.left := by
     simpa using congr_arg (fun f ↦ f.left) h₂
   rw [glue_left, comp_left, glue_left, fst_glueLeft T' _ U (hU ≫ a)
     (by rw [Category.assoc, ha₁, h₁])

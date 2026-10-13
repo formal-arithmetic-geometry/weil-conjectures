@@ -107,6 +107,7 @@ theorem subsingleton_sheafH_of_etale_functionField {W : Scheme.{u}}
       (Scheme.isTorsion_of_nsmul_id_eq_zero hn (nsmul_id_lowerStar_eq_zero e hG)) hq
   exact (bijective_edgeMap_of_isFinite e G q).surjective.subsingleton
 
+omit [IsAlgClosed k] in
 include f in
 /-- The generic fibre `V ×_C Spec k(C)` of an affine étale `C`-scheme `V` is affine: the generic
 point `Spec k(C) ⟶ C` is an affine morphism, `C` being separated. -/
@@ -120,6 +121,7 @@ lemma isAffine_generic_etale_obj (V : C.Etale) [IsAffine V.left] :
   change IsAffine (pullback V.hom C.fromSpecFunctionField)
   infer_instance
 
+omit [IsAlgClosed k] in
 include f in
 /-- **Vanishing of `R¹η_*`, locally.** Let `0 → M → J → N → 0` be a short exact sequence of
 sheaves on `Spec k(C)` such that `H¹(W, M) = 0` for every affine étale `k(C)`-scheme `W`. Then

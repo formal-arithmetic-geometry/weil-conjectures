@@ -83,7 +83,7 @@ in the blueprint statement is not formalised here.
 (blueprint: `lem-sc-ga-cohomology`, vanishing in degrees `≥ 2`) -/
 theorem subsingleton_sheafH_gaSheaf (f : C ⟶ Spec (.of k)) [IsCurve f] (n : ℕ) :
     Subsingleton (Sheaf.H C.gaSheaf (n + 2)) :=
-  subsingleton_sheafH_add_two_of_forall_isAffine f _ (fun W w hw hW q ↦
+  subsingleton_sheafH_add_two_of_forall_isAffine f _ (fun W w _ _ q ↦
     have : Subsingleton ((Sheaf.functorH _ (q + 1)).obj W.gaSheaf) :=
       W.subsingleton_sheafH_gaSheaf_of_isAffine q
     ((Sheaf.functorH _ (q + 1)).mapIso

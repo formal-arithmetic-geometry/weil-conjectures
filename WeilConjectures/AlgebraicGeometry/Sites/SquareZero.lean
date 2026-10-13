@@ -228,7 +228,7 @@ lemma gaKernelVal_zero (T : Y.Etaleᵒᵖ) : gaKernelVal h T 0 = 0 := by
   rfl
 
 lemma gaKernelVal_injective (T : Y.Etaleᵒᵖ) [IsClosedImmersion h] :
-    Function.Injective (gaKernelVal h T) := fun x y hxy ↦
+    Function.Injective (gaKernelVal h T) := fun _ _ hxy ↦
   Sheaf.injective_app_f (gaKernelSequence_shortExact h) T (ULift.ext _ _ hxy)
 
 lemma gaKernelVal_map {T T' : Y.Etaleᵒᵖ} (g : T ⟶ T') (x : (gaKernel h).obj.obj T) :

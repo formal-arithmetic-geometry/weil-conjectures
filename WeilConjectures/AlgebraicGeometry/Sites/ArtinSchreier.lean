@@ -200,6 +200,7 @@ theorem exists_etale_surjective_pow_sub_eq_appTop {U : Scheme.{u}} {p : ℕ} (hp
 
 variable (X : Scheme.{u}) (p : ℕ) [Fact p.Prime] (hp : (p : Γ(X, ⊤)) = 0)
 
+omit [Fact p.Prime] in
 include hp in
 lemma natCast_eq_zero_of_etale (U : X.Etale) : (p : Γ(U.left, ⊤)) = 0 := by
   rw [← map_natCast U.hom.appTop.hom, hp, map_zero]

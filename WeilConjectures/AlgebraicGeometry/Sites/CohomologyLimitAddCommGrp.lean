@@ -24,10 +24,11 @@ affine transition maps and limit `X`, and let `F` be an abelian étale sheaf on 
 `lemma-weil-pbc-etale-cohomology-continuity`).
 
 For sheaves of `Λ`-modules this is proved in
-`WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimit` in terms of the restriction maps `AlgebraicGeometry.Etale.cohomologyRestrictOver`. Here the case
-of sheaves of `ULift ℤ`-modules is transported to abelian sheaves: taking underlying abelian
-sheaves is an equivalence which commutes with pullbacks and preserves injectives, so it identifies
-the cohomology groups (`AlgebraicGeometry.Etale.cohomologyForget₂AddEquiv`) compatibly with the
+`WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimit` in terms of the restriction maps
+`AlgebraicGeometry.Etale.cohomologyRestrictOver`. Here the case of sheaves of
+`ULift ℤ`-modules is transported to abelian sheaves: taking underlying abelian sheaves is an
+equivalence which commutes with pullbacks and preserves injectives, so it identifies the cohomology
+groups (`AlgebraicGeometry.Etale.cohomologyForget₂AddEquiv`) compatibly with the
 restriction maps (`AlgebraicGeometry.Etale.cohomologyForget₂AddEquiv_cohomologyRestrictOver`).
 
 ## Main statements
@@ -352,7 +353,8 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
       exact this
     obtain ⟨j, g, hg⟩ :=
       exists_cohomologyRestrictOver_eq_zero_of_isLimit (ULift.{u + 1} ℤ) D c hc G q i y hy'
-    exact ⟨j, g, by rw [hmap (D.obj j).hom (D.obj i).hom (D.map g).left (Over.w _), hg, map_zero, map_zero]⟩
+    exact ⟨j, g, by
+      rw [hmap (D.obj j).hom (D.obj i).hom (D.map g).left (Over.w _), hg, map_zero, map_zero]⟩
 
 end Continuity
 

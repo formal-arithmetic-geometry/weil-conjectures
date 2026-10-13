@@ -448,7 +448,7 @@ noncomputable def higherDirectImageStalkComparison :
   (Scheme.pointSmallEtale s).presheafFiberDesc
     (fun V v ↦ AddCommGrpCat.ofHom (cohomologyPresheafRestrict Λ f F q _ V
       (stalkPoint f s ⟨V, v⟩) (stalkPoint_w f s ⟨V, v⟩)))
-    (fun V V' a v ↦ AddCommGrpCat.ext fun p ↦
+    (fun _ _ a v ↦ AddCommGrpCat.ext fun p ↦
       cohomologyPresheafRestrict_stalkPoint_map Λ f s F q a v p)
 
 lemma toPresheafFiber_higherDirectImageStalkComparison (V : S.Etale)

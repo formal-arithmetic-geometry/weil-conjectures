@@ -50,25 +50,29 @@ noncomputable def gaPresheaf : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
   X.etaleStructurePresheaf ⋙ forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat ⋙
     AddCommGrpCat.uliftFunctor.{u + 1, u}
 
-open Pseudofunctor.LocallyDiscreteOpToCat Modules in
+set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
-set_option backward.isDefEq.respectTransparency.types false in
-/-- The underlying presheaf of sets of `V ↦ Γ(V, 𝒪_V)` is a sheaf on the small étale site: `a ↦ a ·`
-identifies it with the étale sheaf `V ↦ End(V^* 𝒪_X)`. -/
+open Pseudofunctor.LocallyDiscreteOpToCat Modules in
+/-- The underlying presheaf of sets of `V ↦ Γ(V, 𝒪_V)` is a sheaf on the small étale site:
+`a ↦ a ·` identifies it with the étale sheaf `V ↦ End(V^* 𝒪_X)`. -/
 theorem isSheaf_etaleStructurePresheaf_comp_forget :
-    Presieve.IsSheaf X.smallEtaleTopology (X.etaleStructurePresheaf ⋙ CategoryTheory.forget CommRingCat) := by
+    Presieve.IsSheaf X.smallEtaleTopology
+      (X.etaleStructurePresheaf ⋙ CategoryTheory.forget CommRingCat) := by
   have h := (isSheaf_iff_isSheaf_of_type _ _).1
     (Modules.isSheaf_etaleHom (unitObj X) (unitObj X))
   let G := toProEt X ⋙ ProEt.forget X
   have : (Modules.unit X).IsInvertible := isInvertible_tensorUnit
   let eqv (V : X.Etaleᵒᵖ) : Γ(V.unop.left, ⊤) ≃ (etaleHom (unitObj X) (unitObj X)).obj V :=
-    have hA : ((Modules.pullback (G.obj V.unop).hom).obj (Modules.unit X)).IsInvertible := inferInstance
+    have hA : ((Modules.pullback (G.obj V.unop).hom).obj (Modules.unit X)).IsInvertible :=
+      inferInstance
     Equiv.ofBijective (fun a ↦ smulMor
       ((modulesPseudofunctor.map (G.obj V.unop).hom.op.toLoc).toFunctor.obj (unitObj X)) a)
-      ⟨fun a b hab ↦ eq_of_smulHom_eq ((Modules.pullback (G.obj V.unop).hom).obj (Modules.unit X)) hab,
+      ⟨fun a b hab ↦
+        eq_of_smulHom_eq ((Modules.pullback (G.obj V.unop).hom).obj (Modules.unit X)) hab,
         fun φ ↦ by
-          obtain ⟨c, hc⟩ := exists_eq_smulHom ((Modules.pullback (G.obj V.unop).hom).obj (Modules.unit X)) φ
+          obtain ⟨c, hc⟩ :=
+            exists_eq_smulHom ((Modules.pullback (G.obj V.unop).hom).obj (Modules.unit X)) φ
           exact ⟨c, hc.symm⟩⟩
   refine Presieve.isSheaf_iso _ (NatIso.ofComponents (fun V ↦ (eqv V).toIso) ?_).symm h
   intro V W f
@@ -201,8 +205,8 @@ lemma isPullback_prod_left_left (W T : Over V) :
 lemma bijective_gaBaseChange (W T : Over V) [IsAffine V.left] [IsAffine W.left.left]
     [IsAffine T.left.left] : Function.Bijective (gaBaseChange W T) := by
   have h := (isPushout_appTop_of_isPullback (isPullback_prod_left_left W T)).flip
-  letI : Algebra Γ(V.left, ⊤) Γ(W.left.left, ⊤) := inferInstanceAs (Algebra _ (OverΓ W))
-  letI : Algebra Γ(V.left, ⊤) Γ(T.left.left, ⊤) := inferInstanceAs (Algebra _ (OverΓ T))
+  let : Algebra Γ(V.left, ⊤) Γ(W.left.left, ⊤) := inferInstanceAs (Algebra _ (OverΓ W))
+  let : Algebra Γ(V.left, ⊤) Γ(T.left.left, ⊤) := inferInstanceAs (Algebra _ (OverΓ T))
   let e := h.tensorEquiv rfl rfl
   have he : ∀ t : OverΓ W ⊗[Γ(V.left, ⊤)] OverΓ T, gaBaseChange W T t = e t := by
     intro t
@@ -303,7 +307,8 @@ theorem exactAt_cechComplex_gaPresheaf [IsAffine V.left] {n : ℕ} (U : Fin n �
   have hsurj := (ofArrows_mem_smallEtaleTopology_iff (fun a ↦ (U a).hom)).1 hcov
   have := faithfullyFlat_pi_overΓ U hUa hsurj
   exact Presheaf.exactAt_cechComplex_of_baseChange U (gaModulePresheaf V) X.gaPresheaf
-    (fun y ↦ gaPresheafAddEquiv _) (fun y θ s ↦ gaPresheafAddEquiv_naturality _ s) (fun a ↦ OverΓ (U a))
+    (fun y ↦ gaPresheafAddEquiv _) (fun y θ s ↦ gaPresheafAddEquiv_naturality _ s)
+    (fun a ↦ OverΓ (U a))
     (fun a W ↦ (gaBaseChange W (U a)).toAddMonoidHom)
     (fun a W W' f s b ↦ gaBaseChange_naturality (U a) f s b)
     (fun a k y ↦ by

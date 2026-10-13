@@ -246,7 +246,7 @@ variable {N : Scheme.{u}} {n : N ⟶ B.left} {q : V.left.left ⟶ N}
   (hpb : IsPullback q V.hom.left n p.left)
   (hq : (γC F p r).left ≫ q = pullback.fst (V.hom.left ≫ p.left) p.left ≫ q)
 
-include hpb hq in
+include hq in
 /-- Two points of `V` over the same point of `B` representing the same section of `F` have the
 same image in the descended scheme. -/
 lemma left_comp_q_eq {T : Y.Etale} {a₁ a₂ : T ⟶ V.left}
@@ -318,6 +318,8 @@ instance (Z : Over B) [Surjective p.left] : Surjective (prZ p Z).left := by
   rw [prZ_left]
   infer_instance
 
+-- `hpb` is kept as an argument so that `descLeft` and its API take it uniformly
+set_option linter.unusedSectionVars false in
 include hpb hq in
 lemma exists_fst_comp_eq [Surjective p.left] (Z : Over B) (s : F.obj.obj (op Z.left)) :
     ∃ m : Z.left.left ⟶ N, ∀ a : ZW p Z ⟶ V.left, a ≫ V.hom = prW p Z →
@@ -333,7 +335,7 @@ lemma exists_fst_comp_eq [Surjective p.left] (Z : Over B) (s : F.obj.obj (op Z.l
     rw [← pullback.condition_assoc])
   have hk : k₁ ≫ prZ p Z = k₂ ≫ prZ p Z := hom_ext (by simp [k₁, k₂, pullback.condition])
   have hK : k₁.left ≫ a.left ≫ q = k₂.left ≫ a.left ≫ q := by
-    have := left_comp_q_eq hpb hq (a₁ := k₁ ≫ a) (a₂ := k₂ ≫ a)
+    have := left_comp_q_eq hq (a₁ := k₁ ≫ a) (a₂ := k₂ ≫ a)
       (by simp only [Category.assoc, reassoc_of% ha₁, prW_comp, reassoc_of% hk])
       (by rw [r.overElt_comp, r.overElt_comp, ha₂, ← Functor.map_comp_apply,
         ← Functor.map_comp_apply, ← op_comp, ← op_comp, hk])
@@ -396,7 +398,7 @@ lemma desc_naturality [Surjective p.left] [AlgebraicGeometry.Etale n] {Z Z' : Ov
   let hW : ZW p Z' ⟶ ZW p Z := homMk (pullback.map _ _ _ _ f.left.left (𝟙 _) (𝟙 _)
     (by simp [← comp_left, Over.w f]) (by simp)) (by
       change _ ≫ pullback.fst _ _ ≫ Z.left.hom = pullback.fst _ _ ≫ Z'.left.hom
-      simp [w_left])
+      simp)
   have h₁ : hW ≫ prW p Z = prW p Z' := hom_ext (by simp [hW])
   have h₂ : hW ≫ prZ p Z = prZ p Z' ≫ f.left := hom_ext (by simp [hW])
   refine desc_ext ?_
