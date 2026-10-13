@@ -194,7 +194,8 @@ theorem Sheaf.isConstant_over_of_shortExact_of_sections {M N : ModuleCat.{v'} Λ
       mono_f := (ModuleCat.mono_iff_injective _).2 (injective_inl p f)
       epi_g := (ModuleCat.epi_iff_surjective _).2 (surjective_proj p f hp) }
   have hz (y : S.X₁.obj.obj (op V)) : S.g.hom.app (op V) (S.f.hom.app (op V) y) = 0 := by
-    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app, ← ObjectProperty.FullSubcategory.comp_hom, S.zero]
+    rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+      ← ObjectProperty.FullSubcategory.comp_hom, S.zero]
     rfl
   let Φ : SP.map (constantSheaf (J.over V) _) ⟶ S.map (J.overPullback _ V) :=
     { τ₁ := constantSheafOverHom J _ V M ≫ (J.overPullback _ V).map e₁.inv

@@ -52,6 +52,7 @@ it embeds fully faithfully into the essentially small category of finitely gener
 `B`-algebras. (blueprint: `lem-weil-pbc-pair-henselization-essentially-small`) -/
 theorem essentiallySmall_isPairEtaleNeighborhood (J : Ideal B) :
     EssentiallySmall.{u} (IsPairEtaleNeighborhood J).FullSubcategory :=
-  essentiallySmall_of_fully_faithful (ObjectProperty.ιOfLE (isPairEtaleNeighborhood_le_finiteType J))
+  essentiallySmall_of_fully_faithful
+    (ObjectProperty.ιOfLE (isPairEtaleNeighborhood_le_finiteType J))
 
 end CommAlgCat

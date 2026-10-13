@@ -17,7 +17,8 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 # Underlying sheaves of sets and directed colimits of module sheaves
 
 Source: Stacks Project, modules.tex, Lemma 01AH (line 204), together with
-Sheaves Lemmas 007O and 0087 and Section 009E (blueprint: `lem-weil-pbc-module-directed-colimit-underlying-sets`).
+Sheaves Lemmas 007O and 0087 and Section 009E
+(blueprint: `lem-weil-pbc-module-directed-colimit-underlying-sets`).
 -/
 
 @[expose] public section

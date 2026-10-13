@@ -53,7 +53,8 @@ noncomputable def cohomologyMapCompIso (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
 composition isomorphism `k^* F ≅ f^* g^* F` and an automorphism of the constant sheaf `ℤ`.
 (blueprint: `lem-weil-pbc-cohomology-pullback-functorial`, composition) -/
 theorem cohomologyMap_cohomologyMap_of_comp_eq (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
-    (hk : f ≫ g = k) (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) {n : ℕ} (x : Sheaf.H F n) :
+    (hk : f ≫ g = k) (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) {n : ℕ}
+    (x : Sheaf.H F n) :
     cohomologyMap f _ n (cohomologyMap g F n x) =
       (Ext.mk₀ (cohomologyMapCompIso f g k hk).hom).comp
         ((cohomologyMap k F n x).comp

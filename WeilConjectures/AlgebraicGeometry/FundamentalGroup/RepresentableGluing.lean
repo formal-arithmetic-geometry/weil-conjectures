@@ -87,7 +87,7 @@ end BasisCover
 
 section Gluing
 
-variable {𝔅 : Set Y.Opens} [h𝔅 : Fact (TopologicalSpace.Opens.IsBasis 𝔅)]
+variable {𝔅 : Set Y.Opens}
   (F : Sheaf Y.smallEtaleTopology (Type w)) (X : ∀ U : 𝔅, Over (openObj U.1))
   (r : ∀ U : 𝔅, ((Over.forget (openObj U.1)).op ⋙ F.obj).RepresentableBy (X U))
 
@@ -136,6 +136,8 @@ noncomputable def gluingFunctor : 𝔅 ⥤ Scheme.{u} where
     rw [← comp_left]
     exact congr_arg (fun f ↦ f.left)
       (τ_comp (F := F) (X := X) (r := r) (leOfHom h) (leOfHom h')).symm
+
+variable [h𝔅 : Fact (TopologicalSpace.Opens.IsBasis 𝔅)]
 
 /-- The structure maps `X_U ⟶ U`. -/
 noncomputable def gluingNatTrans :
@@ -224,8 +226,10 @@ noncomputable def TUfst (T : Y.Etale) (U : 𝔅) : TU T U ⟶ T :=
 noncomputable def TUsnd (T : Y.Etale) (U : 𝔅) : TU T U ⟶ openObj U.1 :=
   homMk (pullback.snd (structMap T) U.1.ι) pullback.condition.symm
 
+omit h𝔅 in
 @[simp] lemma TUfst_left (T : Y.Etale) (U : 𝔅) :
     (TUfst T U).left = pullback.fst (structMap T) U.1.ι := rfl
+omit h𝔅 in
 @[simp] lemma TUsnd_left (T : Y.Etale) (U : 𝔅) :
     (TUsnd T U).left = pullback.snd (structMap T) U.1.ι := rfl
 
@@ -342,7 +346,8 @@ lemma glue_naturality {T T' : Y.Etale} (h : T' ⟶ T) (s : F.obj.obj (op T)) :
       rw [pullback.lift_fst_assoc, Category.assoc, w_left])
   have h₁ : hU ≫ TUsnd T U = TUsnd T' U := hom_ext (by simp [hU])
   have h₂ : hU ≫ TUfst T U = TUfst T' U ≫ h := hom_ext (by simp [hU])
-  have h₂' : hU.left ≫ pullback.fst (structMap T) U.1.ι = pullback.fst (structMap T') U.1.ι ≫ h.left := by
+  have h₂' : hU.left ≫ pullback.fst (structMap T) U.1.ι =
+      pullback.fst (structMap T') U.1.ι ≫ h.left := by
     simpa using congr_arg (fun f ↦ f.left) h₂
   rw [glue_left, comp_left, glue_left, fst_glueLeft T' _ U (hU ≫ a)
     (by rw [Category.assoc, ha₁, h₁])

@@ -21,7 +21,8 @@ record the local vanishing data and the separatedness implication; the remaining
 argument is the finite filtered-category equalisation from Sites, Tag 0738.
 Source: Stacks Project, Sites, Lemma Tag 0738, proof of part (2).
 The finite family is equalized using filteredness, and separatedness then gives
-the global vanishing. (blueprint: `lem-weil-pbc-etale-section-colimit-eventual-zero-finite-cover`). -/
+the global vanishing.
+(blueprint: `lem-weil-pbc-etale-section-colimit-eventual-zero-finite-cover`). -/
 theorem etale_section_colimit_eventual_zero_of_finite_cover
     (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (U : X.Etale) (I : Type w) [SmallCategory I] [IsFiltered I]

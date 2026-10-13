@@ -16,8 +16,9 @@ Let `Y` be a scheme. This file proves the two halves of the dictionary between f
 `Y`-schemes and finite locally constant sheaves of sets on the small étale site of `Y`.
 
 * For a finite étale `Y`-scheme `X`, the sheaf `U ↦ Hom_Y(U, X)` is constant over every member
-  of an étale cover trivialising `X` (`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`,
-  blueprint `lem-fet-locally-trivial`), and its stalks are the geometric fibres of `X`, which
+  of an étale cover trivialising `X`
+  (`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_isPullback_sigma`, blueprint
+  `lem-fet-locally-trivial`), and its stalks are the geometric fibres of `X`, which
   are finite (`AlgebraicGeometry.Scheme.Etale.isConstant_over_uliftYoneda_of_isPullback`,
   `AlgebraicGeometry.Scheme.Etale.finite_sheafFiber_uliftYoneda`).
 * Conversely, a sheaf of sets `E` with finite stalks which is constant over the members of an
@@ -173,8 +174,8 @@ theorem exists_representableBy_of_isConstant (E : Sheaf Y.smallEtaleTopology (Ty
     obtain ⟨U, hU, hyU, hUV, W, _, q, _, p, hpq, hp⟩ :=
       exists_isAffineOpen_surjective_etale (𝒰.f i) hy ⟨x, hx⟩
     obtain ⟨w, hw⟩ := p.surjective ⟨y, hyU⟩
-    exact ⟨U, ⟨hU, i, Etale.mk (q ≫ 𝒰.f i), homMk q rfl, homMk p hpq, inferInstanceAs (IsAffine W), hp, ⟨w⟩⟩,
-      hyU, hUV⟩
+    exact ⟨U, ⟨hU, i, Etale.mk (q ≫ 𝒰.f i), homMk q rfl, homMk p hpq,
+      inferInstanceAs (IsAffine W), hp, ⟨w⟩⟩, hyU, hUV⟩
   refine exists_representableBy_of_isBasis E 𝔅 h𝔅 fun U ↦ ?_
   obtain ⟨hU, i, W, a, p, hW, hp, ⟨w⟩⟩ := U.2
   obtain ⟨S, _, hS⟩ := exists_representableBy_trivialOver_of_isConstant E hE _ (a.left w) (h𝒰 i)

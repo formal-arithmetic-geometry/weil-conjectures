@@ -77,11 +77,11 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- **Spreading a finite étale Galois cover.** Let `S` be a qcqs integral normal scheme with
-generic point `η` and function field `κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth morphism with geometrically
-connected fibres, and let `σ` be a section of `c`. Let `G` be a finite group whose order is
-invertible on `S`, let `Cη` be the generic fibre of `c`, given by the cartesian square
-`hCη`, and let `Z` be a finite étale Galois cover of `Cη` with group `G` carrying a
-`κ(η)`-rational point above the generic point `sη` of the section. Then there is a finite
+generic point `η` and function field `κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth
+morphism with geometrically connected fibres, and let `σ` be a section of `c`. Let `G` be a
+finite group whose order is invertible on `S`, let `Cη` be the generic fibre of `c`, given by
+the cartesian square `hCη`, and let `Z` be a finite étale Galois cover of `Cη` with group `G`
+carrying a `κ(η)`-rational point above the generic point `sη` of the section. Then there is a finite
 étale Galois cover `T` of `C` with group `G` and a `G`-equivariant morphism `ψ : Z.P ⟶ T.P`
 making `Z` the restriction of `T` to `Cη`, that is, making the square over `j : Cη ⟶ C`
 cartesian.

@@ -106,6 +106,7 @@ noncomputable def constantSheafToContinuousMapSheafOfTypes :
   ((sheafificationAdjunction Y.smallEtaleTopology (Type (u + 1))).homEquiv _ _).symm
     (constToContinuousMapOfTypes Y S)
 
+omit [DiscreteTopology S] in
 lemma toSheafify_constantSheafToContinuousMapSheafOfTypes :
     toSheafify Y.smallEtaleTopology _ ≫ (constantSheafToContinuousMapSheafOfTypes Y S).hom =
       constToContinuousMapOfTypes Y S := by
@@ -216,7 +217,8 @@ noncomputable def representableByTrivialOver (E : Sheaf Y.smallEtaleTopology (Ty
       Over.homMk f.left (by simp only [Over.mk_hom]; rw [← Category.assoc, Over.w f])
     have h := NatTrans.naturality_apply e.inv g.op
       (continuousMapEquivOfEquiv σ (trivialOverHomEquiv Z t))
-    change e.inv.app (op (Over.mk (Z'.hom ≫ a))) (continuousMapEquivOfEquiv σ (trivialOverHomEquiv Z' (f ≫ t))) = _
+    change e.inv.app (op (Over.mk (Z'.hom ≫ a)))
+      (continuousMapEquivOfEquiv σ (trivialOverHomEquiv Z' (f ≫ t))) = _
     rw [trivialOverHomEquiv_comp]
     exact h
 

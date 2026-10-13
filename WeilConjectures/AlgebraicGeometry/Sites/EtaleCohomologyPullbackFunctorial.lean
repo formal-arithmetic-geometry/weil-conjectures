@@ -9,7 +9,8 @@ import WeilConjectures.AlgebraicGeometry.Sites.ConstantPullbackIdentityCoherence
 /-!
 # Functoriality of pullback on étale cohomology
 
-Source: literature/stacks-project/cohomology.tex, Section Tag 01F7 (blueprint: `lem-weil-pbc-cohomology-pullback-functorial`)
+Source: literature/stacks-project/cohomology.tex, Section Tag 01F7
+(blueprint: `lem-weil-pbc-cohomology-pullback-functorial`)
 -/
 
 @[expose] public section

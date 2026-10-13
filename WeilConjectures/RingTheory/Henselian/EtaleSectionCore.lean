@@ -6,7 +6,8 @@ public import Mathlib.RingTheory.Idempotents
 /-!
 # Core splitting for an étale section
 
-Source: Stacks Project, Tag 09XI (blueprint: `lem-weil-pbc-etale-section-idempotent-splitting-core`).
+Source: Stacks Project, Tag 09XI
+(blueprint: `lem-weil-pbc-etale-section-idempotent-splitting-core`).
 -/
 
 @[expose] public section

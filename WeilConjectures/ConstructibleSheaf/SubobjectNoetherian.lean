@@ -20,7 +20,8 @@ of modules over a noetherian ring is constructible.
 
 ## References
 
-- Stacks Project, Lemma 59.74.1 (03RZ) and Lemma 59.74.3, <https://stacks.math.columbia.edu/tag/09BH>
+- Stacks Project, Lemma 59.74.1 (03RZ) and Lemma 59.74.3,
+  <https://stacks.math.columbia.edu/tag/09BH>
 -/
 
 @[expose] public section
