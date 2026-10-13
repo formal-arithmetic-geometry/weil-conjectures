@@ -1,11 +1,15 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import Sheaf.AlgebraicGeometry.PinnedSingleTensorShifts
+import Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounitEquation
 /-! # Pinned single tensor counits under an isomorphism
 Source: Stacks Project, Tags 08HY, 0096 and 0D5S.
 (blueprint: lem-pc-isomorphic-single-tensor-counit). -/
 @[expose] public section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option synthInstance.maxSize 2048
 universe u w
 open CategoryTheory Limits
 noncomputable section
@@ -52,5 +56,8 @@ theorem exists_isomorphic_single_tensor_counit
         (a e.hom).unit.app ((derivedPullback p).obj K) ≫
             (schemeDerivedDirectImage e.hom).map
               ((c e.hom p).hom.app K ≫ pinnedSingleTensorCounit (e.hom ≫ p) 0 M) ≫
-            t.hom.app M = pinnedSingleTensorCounit p 0 M := by sorry
+            t.hom.app M = pinnedSingleTensorCounit p 0 M := by
+  refine ⟨Classical.choose (exists_isomorphic_single_tensor_counit_transport p e), ?_⟩
+  intro M
+  exact isomorphic_single_tensor_counit_transport_equation p e M
 end AlgebraicGeometry

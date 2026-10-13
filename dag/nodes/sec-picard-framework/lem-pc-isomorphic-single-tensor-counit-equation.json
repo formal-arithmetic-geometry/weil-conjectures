@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-isomorphic-single-tensor-counit-equation",
+ "kind": "statement",
+ "title": "Counit equation for the transported isomorphism",
+ "statement": "theorem isomorphic_single_tensor_counit_transport_equation\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    {X P Z : Scheme.{u}} (p : P ⟶ X) (e : Z ≅ P) :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    let a := fun {A B : Scheme.{u}} (s : A ⟶ B) ↦\n      Classical.choose (exists_schemeDerivedAdjunction s\n        (hAdd := (Classical.choose exists_derivedPullbackComposition) s)\n        ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) s)\n        ((Classical.choose (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))) s))\n    let t := Classical.choose (exists_isomorphic_single_tensor_counit_transport p e)\n    ∀ M : X.Modules,\n      let K := (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M\n      (a e.hom).unit.app ((derivedPullback p).obj K) ≫\n          (schemeDerivedDirectImage e.hom).map\n            ((c e.hom p).hom.app K ≫ pinnedSingleTensorCounit (e.hom ≫ p) 0 M) ≫\n          t.hom.app M = pinnedSingleTensorCounit p 0 M",
+ "stmt_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-base-change-map",
+  "lem-pc-pinned-single-tensor-shifts",
+  "lem-pc-isomorphic-single-tensor-counit-transport"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Derived pullback composition and adjunction transport"
+ },
+ "proof": [
+  {
+   "text": "Use the specified inverse-component formula from the transport theorem. Naturality of the unit, followed by the defining derived composition factorization, identifies the first two displayed factors with the counit for p followed by t.inv.app M. Compose with t.hom.app M and cancel its inverse. The equation refers only to this uniquely characterized transport.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map",
+    "lem-pc-pinned-single-tensor-shifts",
+    "lem-pc-isomorphic-single-tensor-counit-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-base-change-map",
+  "lem-pc-pinned-single-tensor-shifts",
+  "lem-pc-isomorphic-single-tensor-counit-transport"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Canonical transport fixed by explicit inverse components and counit compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an exact equivalence of abelian categories the derived functor comparison on single complexes is invertible and compatible with composition",
+   "results": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor; DerivedCategory.singleFunctorIsoCompQ; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; DerivedCategory.singleFunctorsPostcompQIso; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.instIsIsoFunctorFromLeftDerivedZero; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+   "date": "2026-10-13",
+   "verdict": "Exact-functor and derived-factorization ingredients only; no theorem with these pinned scheme counits and canonical inverse components."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_fac",
+   "results": "CategoryTheory.Functor.leftDerived_fac",
+   "date": "2026-10-13",
+   "verdict": "Exact-functor and derived-factorization ingredients only; no theorem with these pinned scheme counits and canonical inverse components."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*fac|mapDerivedCategorySingleFunctor|isEquivalence.*[Dd]erived",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Abelian/LeftDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "Exact-functor and derived-factorization ingredients only; no theorem with these pinned scheme counits and canonical inverse components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived adjunction unit and the single complex comparison for an exact equivalence are isomorphisms compatible with tensor pullback composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounit",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-isomorphic-single-tensor-counit",
+   "place": "factorization under source isomorphism"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounitEquation",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsomorphicSingleTensorCounitEquation.lean",
+  "declaration": "AlgebraicGeometry.isomorphic_single_tensor_counit_transport_equation",
+  "statement": "theorem isomorphic_single_tensor_counit_transport_equation\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    {X P Z : Scheme.{u}} (p : P ⟶ X) (e : Z ≅ P) :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    let a := fun {A B : Scheme.{u}} (s : A ⟶ B) ↦\n      Classical.choose (exists_schemeDerivedAdjunction s\n        (hAdd := (Classical.choose exists_derivedPullbackComposition) s)\n        ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) s)\n        ((Classical.choose (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))) s))\n    let t := Classical.choose (exists_isomorphic_single_tensor_counit_transport p e)\n    ∀ M : X.Modules,\n      let K := (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M\n      (a e.hom).unit.app ((derivedPullback p).obj K) ≫\n          (schemeDerivedDirectImage e.hom).map\n            ((c e.hom p).hom.app K ≫ pinnedSingleTensorCounit (e.hom ≫ p) 0 M) ≫\n          t.hom.app M = pinnedSingleTensorCounit p 0 M",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d0cfe",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T190155-L-3221152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d0cfe",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T190155-L-3221152",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, DAG nodes, report, and change record match the stated item; all modules and direct importer compile cleanly."
+ }
+}
