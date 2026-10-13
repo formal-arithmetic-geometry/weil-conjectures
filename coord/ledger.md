@@ -12193,3 +12193,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/R4/Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineGenerators (stage 3; reviewer PASS; first push; landing 20261013T111919-L-3061870 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/R4/Sheaf.AlgebraicGeometry.Morphisms.TameRootProductResidueSeparable (stage 3; reviewer PASS; first push; landing 20261013T111920-L-3062019 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/R4/Sheaf.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComparisons (stage 3; reviewer PASS; first push; landing 20261013T111920-L-3062145 (interface); batch 20261013T111833; modules 3; new nodes 2)
+- 11:19 L: merged deliver/S1/Sheaf.AlgebraicGeometry.AdjointTensorAnnihilatorTransport (stage 3; reviewer PASS; first push; landing 20261013T111921-L-3062264 (interface); batch 20261013T111833; modules 3; new nodes 2)
