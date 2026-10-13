@@ -87,11 +87,6 @@ noncomputable def sheafExtendScalarsProjection :
       Category.assoc, Category.assoc, ← Functor.map_comp, ← Functor.map_comp]
     erw [rightUnitor_naturality]
 
-/-- **Extension of scalars is a tensor product**: the projection map `K ⊗ S_X ⟶ res (S ⊗_R K)`
-is an isomorphism. -/
-instance isIso_sheafExtendScalarsProjection : IsIso (sheafExtendScalarsProjection R S X) :=
-  sorry
-
 end Projection
 
 section Pullback

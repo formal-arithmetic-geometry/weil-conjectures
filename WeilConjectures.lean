@@ -2211,6 +2211,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShr
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Perfect
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormulaBounded
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormulaExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Shift
@@ -2252,6 +2253,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjection
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionComparison
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionIso
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.CoefficientChange
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.CoefficientChangeTrace
