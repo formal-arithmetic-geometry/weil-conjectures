@@ -19,18 +19,22 @@
  },
  "proof": [
   {
-   "text": "Apply the normalized direct-image composition unit equation to replace unit_Dfg;e.inv by unit_Dg at Df(K), followed by RDg(unit_Df). Map this equality by RΓZ and paste with the ΓZ unit.",
+   "text": "Extract the chosen normalized direct-image composition unit equation at K, with all three sheaf-localization universes explicitly instantiated to the fixed w. Extract the mixed Leray unit equations for g at Df(K) and for f at K. Sectionwise normalization makes each underived Leray comparison the identity: extensionality on modules proves that identity, and its homotopy-composition factors cancel.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-sc-mixed-global-sections-direct-image-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Move RDg(unit_Df) across c_g by naturality and apply the mixed Leray unit equation for g at Df(K). Combine the maps inside scalar restriction, apply the mixed unit equation for f at K, and distribute Sg over the composite. Underived comparisons are identity on sections, so their homotopy factors cancel. This gives the stated common factor path b without canceling a derived unit.",
-   "uses": [
-    "lem-sc-mixed-global-sections-direct-image-iso"
-   ],
-   "elementary": false
+   "text": "The fully proved private generic_first_layer lemma performs the composition-unit, naturality, and first-Leray pasting with abstract additive functors. Substitute the strict underived direct-image composition equality; map its unit equation by the global-sections derived functor and move the f unit across the g comparison by naturality. The explicit equality of source objects identifies global sections after direct image with scalar restriction of global sections; heq_comp transports the normalized g unit equation along it without unfolding derived localization choices. Specialize this lemma to the scheme functors and unfold only the scheme wrapper definitions; associativity gives p;c_g equal to the g scalar factor followed by Sg(unit_ΓY(Df K)) and Sg(RΓY(unit_Df(K))).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The fully proved private finish_unit_paste lemma maps the normalized mixed unit equation for f by Sg, prepends the g scalar factor, and substitutes the first-layer equality. Functoriality and associativity produce precisely b. No derived unit is canceled, and no boundedness or K-injectivity assumption is added.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -39,9 +43,9 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q3",
-  "date": "2026-10-13",
-  "note": "Strict component of the parent argument: normalize only the left path before any invertibility or cancellation. The other path is not mentioned and I need not be K-injective. Identity morphisms, zero complexes and empty schemes satisfy the same unit equations."
+  "group": "T2",
+  "date": "2026-10-14",
+  "note": "Complete compiling Lean proof of the original route. Abstract categorical pasting carries an explicit source-object equality via HEq and heq_comp, avoiding expensive unfolding of localization choices. No new sorry, node, definition, or public interface."
  },
  "mathlib_searches": [
   {
@@ -111,10 +115,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T165648-L-1810468",
-  "kind": "interface",
+  "landing": "20261013T201809-L-3976800",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
