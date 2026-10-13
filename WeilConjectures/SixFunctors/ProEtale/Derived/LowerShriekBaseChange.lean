@@ -170,7 +170,10 @@ theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_iff
   simp only [rightDerivedLowerShriekOfCompactificationBaseChangeMap, isIso_comp_left_iff,
     isIso_comp_right_iff]
 
-/-- The compact-support exchange `Ex_! : Lg^* Rf_! ⟶ Rf'_!(c ×_Y Y') Lg'^*` for the chosen
+/-- Blueprint `sk-def-sf-exchanges`: Exchange and projection transformations, typed (the
+compact-support exchange `Ex_!` on the pro-étale sites, at finite coefficient stages).
+
+The compact-support exchange `Ex_! : Lg^* Rf_! ⟶ Rf'_!(c ×_Y Y') Lg'^*` for the chosen
 compactification `c` of `f`. -/
 noncomputable def rightDerivedLowerShriekBaseChangeMap [HasCompactification f]
     (sq : IsPullback g' f' f g) :
