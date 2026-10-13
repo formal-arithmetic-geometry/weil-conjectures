@@ -1,0 +1,159 @@
+{
+ "id": "lem-pc-canonical-evaluation-open-restriction",
+ "kind": "statement",
+ "title": "Canonical derived evaluation commutes with open restriction",
+ "statement": "Let X be a scheme [def-pc-scheme], U an open, and K,N objects in its specified derived category [def-pc-derived-category]. Assume a specified derived category on the over-site of U in the same morphism universe w. On the scheme U.toScheme use the standard localization (morphism universe u+1). Let E be the derived functor of Modules.overEquiv U [lem-weil-pbc-module-restriction-open-immersion-colimits], with the shared SheafOfModules category instances, and R the composite of exact over-site restriction with E. Let H_X and H_U be the fixed derived internal Hom functors [def-pur-derived-internal-hom], D=H_X(K,1_X), K_U=RK, N_U=RN, and D_U=H_U(K_U,1_U). Define g_X and g_U as the canonical adjuncts of the respective associator; identity tensor evaluation; right unitor composites using [def-pc-canonical-derived-tensor-hom-bijection] and [def-pc-scheme-derived-tensor-structure]. There exist isomorphisms a:R(N tensor D)≅N_U tensor D_U and b:R(H_X(K,N))≅H_U(K_U,N_U) such that R(g_X);b.hom=a.hom;g_U. This statement has no chosen local complexes, no Hom exactness or dual flatness hypothesis, and no ordinary evaluation arrow.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DL (lemma-restriction-RHom-to-U), 06YH (derived tensor construction)"
+ },
+ "proof": [
+  {
+   "text": "The over-site equivalence identifies a module over V→U with the same module on the corresponding open of U.toScheme. Its inverse restores those sections, so both composites are naturally isomorphic to the identity. The exact derived equivalence is obtained by applying its termwise complex functor and localization; its factorization is mapDerivedCategoryFactors. Different localization universes are compared by the universal property of localization.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose K-flat tensor representatives globally. Exact open restriction preserves their K-flatness and identifies each tensor term and coproduct total degree with the restricted term. Localize these comparisons. The tensor unit is the structure sheaf in degree zero, and restriction and overEquiv identify it with the corresponding unit on the open scheme. These give natural tensor and unit comparisons; their associativity and unit laws hold on each pure tensor before localization.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-open-restriction-kflat-model",
+    "lem-pc-open-restriction-total-tensor",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute derived internal Hom on the fixed functorial K-injective target. Its restriction is K-injective. The product Hom restriction comparison sends every local linear map to its restriction and respects differentials. Apply the exact over-equivalence and localization factorization to obtain natural Hom comparisons, for N and for the tensor unit.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-sc-hom-complex-restrict-open",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uncurry on the K-flat tensor representatives using the fixed canonical tensor-Hom representative equation. Evaluation followed by restriction is the same map on every tensor summand as evaluation of the restricted map. The preceding tensor and Hom comparisons therefore intertwine the evaluation counits. Their associativity and unit laws identify the uncurrying of R(g_X), after these comparisons, with that of g_U. Injectivity of the canonical equivalence gives the square. Compose the tensor comparison with the dual Hom comparison and the unit comparison to obtain a; the Hom comparison gives b. All coproduct and product arguments include zero complexes and the empty open.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-hom-complex-restrict-open",
+    "lem-pc-open-restriction-total-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pur-derived-internal-hom",
+  "lem-pc-kflat-resolution",
+  "lem-pc-open-restriction-kflat-model",
+  "lem-pc-open-restriction-total-tensor",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-hom-complex-restrict-open",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DL (lemma-restriction-RHom-to-U), 06YH (derived tensor construction)",
+  "description": "N4 read the cited Stacks tags online. This fills out the ordinary representative and restriction calculations in the source; no evaluation invertibility is claimed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived evaluation commutes with restriction to an open subset",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived evaluation commutes with restriction to an open subset",
+   "results": "TopCat.Presheaf restriction and Scheme morphism restriction formulas; no derived tensor-Hom evaluation comparison",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*evaluation|evaluation.*derived|tensorHom.*restrict|restrict.*tensorHom in Mathlib/Algebra/Homology and Mathlib/AlgebraicGeometry",
+   "results": "No matching theorem in these Mathlib source directories. Blueprint search found no matching imported node; the existing tensor-model restriction theorem requires a fixed global K-flat model and a common localization universe.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExactSourceEvaluationLocalComparisons",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, final paragraph: tensor-Hom identification for finite locally free modules; local ordinary models in Stacks 08DQ, below the unit route.",
+   "via": [
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalEvaluationOpenRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalEvaluationOpenRestriction.lean",
+  "declaration": "AlgebraicGeometry.exists_canonicalEvaluation_open_restriction",
+  "statement": "theorem exists_canonicalEvaluation_open_restriction (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K N : schemeDerivedCategory X) :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let R := (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E\n    let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.sheaf\n    let HU := derivedInternalHom\n      (Opens.grothendieckTopology U.toScheme.toRingedSpace) U.toScheme.sheaf\n    let KU := R.obj K\n    let NU := R.obj N\n    let D := H.obj (op K, 𝟙_ (schemeDerivedCategory X))\n    let DU := HU.obj (op KU, 𝟙_ (schemeDerivedCategory U.toScheme))\n    let g := ((schemeDerivedTensorHomEquiv X) (N ⊗ D) K N).symm\n      ((α_ N D K).hom ≫ N ◁\n        ((schemeDerivedTensorHomEquiv X) D K (𝟙_ (schemeDerivedCategory X)) (𝟙 D)) ≫\n          (ρ_ N).hom)\n    let gU := ((schemeDerivedTensorHomEquiv U.toScheme) (NU ⊗ DU) KU NU).symm\n      ((α_ NU DU KU).hom ≫ NU ◁\n        ((schemeDerivedTensorHomEquiv U.toScheme) DU KU\n          (𝟙_ (schemeDerivedCategory U.toScheme)) (𝟙 DU)) ≫ (ρ_ NU).hom)\n    ∃ a : R.obj (N ⊗ D) ≅ NU ⊗ DU,\n      ∃ b : R.obj (H.obj (op K, N)) ≅ HU.obj (op KU, NU),\n        R.map g ≫ b.hom = a.hom ≫ gU",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T132737-L-4152183",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T132737-L-4152183",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

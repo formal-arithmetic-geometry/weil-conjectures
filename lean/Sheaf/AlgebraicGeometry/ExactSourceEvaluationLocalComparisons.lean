@@ -8,8 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.CanonicalEvaluationOpenRestriction
+import Sheaf.AlgebraicGeometry.ExactSourceEvaluationOpenModels
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The local representative equation for evaluation with an exact Hom source
 
@@ -29,6 +30,27 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
+private theorem descend_comparison_squares
+    {C D : Type*} [Category* C] [Category* D]
+    (E : C ⥤ D) [E.Full] [E.Faithful]
+    {S T S' T' : C} {A B : D} (g : S ⟶ T) (f : S' ⟶ T')
+    (c : E.obj S ≅ A) (d : E.obj T ≅ B)
+    (a : A ≅ E.obj S') (b : B ≅ E.obj T') (h : A ⟶ B)
+    (h₁ : E.map g ≫ d.hom = c.hom ≫ h)
+    (h₂ : h ≫ b.hom = a.hom ≫ E.map f) :
+    ∃ a' : S ≅ S', ∃ b' : T ≅ T', g ≫ b'.hom = a'.hom ≫ f := by
+  refine ⟨E.preimageIso (c ≪≫ a), E.preimageIso (d ≪≫ b), ?_⟩
+  apply E.map_injective
+  simp only [Functor.map_comp, Functor.preimageIso_hom, Functor.map_preimage,
+    Iso.trans_hom]
+  calc
+    E.map g ≫ d.hom ≫ b.hom = c.hom ≫ h ≫ b.hom := by
+      simpa only [Category.assoc] using congrArg (fun t ↦ t ≫ b.hom) h₁
+    _ = (c.hom ≫ a.hom) ≫ E.map f := by
+      simpa only [Category.assoc] using congrArg (fun t ↦ c.hom ≫ t) h₂
+
+set_option maxHeartbeats 1000000 in
+-- Derived equivalence instance comparisons need a larger declaration-local budget.
 /-- The representative equation needs preservation of quasi-isomorphisms by Hom(P,-)
 and K-flatness of its ordinary dual, rather than finite freeness or invertibility
 of ordinary evaluation. The second complex is arbitrary.
@@ -87,6 +109,22 @@ theorem exists_exactSource_evaluation_local_comparisons (X : Scheme.{u})
     ∃ a : R.obj (N ⊗ D) ≅ DerivedCategory.Q.obj (localEvaluationTensor X U P F),
       ∃ b : R.obj (H.obj (op K, N)) ≅
           DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F),
-        R.map g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f := by sorry
+        R.map g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f := by
+  let : HasDerivedCategory.{u + 1}
+      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
+    HasDerivedCategory.standard _
+  let ec := (Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U))
+  have : ec.Additive := Functor.additive_of_preserves_binary_products ec
+  let E := ec.mapDerivedCategory
+  let R := (SheafOfModules.overFunctor.{u}
+    (moduleRings X.toRingedSpace) U).mapDerivedCategory
+  obtain ⟨c, d, hrestrict⟩ := exists_canonicalEvaluation_open_restriction X U K N
+  obtain ⟨aU, bU, hmodel⟩ := exists_exactSource_evaluation_open_models X U
+    (E.obj (R.obj K)) (E.obj (R.obj N)) P F _hhom _hdual
+    (E.mapIso _eK).symm (E.mapIso _eN).symm f _hf
+  exact descend_comparison_squares E _ _ c d aU bU _ hrestrict hmodel
 
 end AlgebraicGeometry
