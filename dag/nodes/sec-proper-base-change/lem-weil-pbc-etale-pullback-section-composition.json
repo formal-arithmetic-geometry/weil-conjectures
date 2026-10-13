@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-etale-pullback-section-composition",
+ "kind": "statement",
+ "title": "Composition of canonical coefficient section transitions on etale pullbacks",
+ "statement": "Let $I$ be a preorder and $D:I^{op}\\to Sch$ a diagram [def-pc-scheme, def-weil-pbc-category-colimit]. Let $F_i$ be abelian sheaves on the small etale sites [def-weil-pbc-etale-site, def-weil-pbc-abelian-etale-sheaves], and let $\\varphi_a:p_a^*F_i\\to F_j$ satisfy the canonical inverse-image composition law [def-weil-pbc-inverse-image]. Fix $i_0$ and one etale object $W_0$ over $D_{i_0}$. Put $J=\\{j\\mid i_0\\le j\\}$ and $W_j=B_{p_{ji_0}}W_0$, where $B$ is actual etale base change [def-pc-fibre-product]. Suppose $\\gamma_a:B_{p_a}W_j\\simeq W_k$ for every arrow $a:j\\to k$, with first projection to $W_0$ equal to the composite of the two pullback first projections. Define $T_a=\\eta_{p_a,F_j}(W_j);\\varphi_a(B_{p_a}W_j);F_k(\\gamma_a^{-1})$, with presheaf restrictions contravariant. Then $T_{a;b}=T_a;T_b$ for every composable pair. This involves one etale object and no Cech cochain maps or cocone data.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP, lemma-colimit, proof: canonical Cech comparison maps; parent stage-data step 3. Etale realization in Tag 09YQ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The canonical iterated-pullback isomorphism followed by the pullback of gamma a and gamma b equals gamma (a;b). Check equality of over-category morphisms on their underlying maps and then on both pullback projections. For the first projection to W0 substitute hgamma twice and the explicit first-projection formula of pullbackComp; for the structural projection use Over.w. Taking inverses gives the corresponding inverse comparison identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate upperStarComp_hom_app_unit_app at Wj. The coefficient composition law expresses the composite coefficient map through upperStarComp. Naturality of the resulting coefficient transformation across the geometric pullback comparison moves its restriction to the right. Unit naturality across phi a replaces the two-unit expression by phi a followed by the second unit and coefficient map. Naturality of that latter sheaf morphism across gamma a moves its restriction to the right as well. The inverse geometric identity and contravariant functoriality cancel the canonical comparison and identify the remaining restrictions. Associativity proves the equality of section morphisms.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP canonical Cech comparison, single-object coefficient composition calculation from unit coherence and pullback uniqueness; proved by J3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackComp|lowerStarComp",
+   "date": "2026-10-13",
+   "results": "25 hits: Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/Basic.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean",
+   "verdict": "No direct varying-etale-site section composition theorem; use existing unit coherence and pullback uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "date": "2026-10-13",
+   "results": "3 hits: CategoryTheory.Adjunction.unit_naturality, CategoryTheory.LiftRightAdjoint.unitEqualises, CategoryTheory.LiftRightAdjoint.unitEqualizes",
+   "verdict": "No direct varying-etale-site section composition theorem; use existing unit coherence and pullback uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of section maps induced by adjunction units for inverse images of etale sheaves and iterated pullbacks",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullbackComp, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk",
+   "verdict": "No direct varying-etale-site section composition theorem; use existing unit coherence and pullback uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical section coefficient maps on etale pullbacks compose by inverse image adjunction unit coherence and naturality",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientComposition",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Single-object section calculation in the composition proof, before Cech product and cochain-map extensionality.",
+   "via": [
+    "lem-weil-pbc-etale-limit-finite-cech-coefficient-composition",
+    "lem-weil-pbc-etale-limit-finite-cech-coefficient-laws",
+    "lem-weil-pbc-etale-limit-finite-cech-coefficient-data",
+    "lem-weil-pbc-etale-limit-finite-cech-stage-data",
+    "lem-weil-pbc-etale-limit-finite-cech-complex-colimit",
+    "lem-weil-pbc-etale-limit-injective-colimit-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtalePullbackSectionComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePullbackSectionComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_pullback_section_composition",
+  "statement": "theorem etale_pullback_section_composition\n    {I : Type u} [Preorder I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (i₀ : I) (W₀ : (D.obj (op i₀)).Etale) :\n    let J := {j : I // i₀ ≤ j}\n    let Wj := fun j : J ↦\n      (MorphismProperty.Over.pullback @Etale ⊤\n        (D.map (homOfLE j.property).op)).obj W₀\n    ∀ (γ : ∀ (j k : J) (a : j ⟶ k),\n        (MorphismProperty.Over.pullback @Etale ⊤\n          (D.map (show j.val ⟶ k.val from a).op)).obj (Wj j) ≅ Wj k)\n      (hγ : ∀ (j k : J) (a : j ⟶ k),\n        (γ j k a).hom.left ≫\n            pullback.fst W₀.hom (D.map (homOfLE k.property).op) =\n          pullback.fst (Wj j).hom (D.map (show j.val ⟶ k.val from a).op) ≫\n            pullback.fst W₀.hom (D.map (homOfLE j.property).op)),\n    let T := fun (j k : J) (a : j ⟶ k) ↦\n      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n        (D.map (show j.val ⟶ k.val from a).op)).unit.app (F j.val)).hom.app\n          (op (Wj j)) ≫\n      (φ (show j.val ⟶ k.val from a)).hom.app\n        (op ((MorphismProperty.Over.pullback @Etale ⊤\n          (D.map (show j.val ⟶ k.val from a).op)).obj (Wj j))) ≫\n      (F k.val).obj.map (γ j k a).inv.op\n    ∀ (j k r : J) (a : j ⟶ k) (b : k ⟶ r),\n      T j r (a ≫ b) = T j k a ≫ T k r b",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T072353-L-1121128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T072353-L-1121128",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

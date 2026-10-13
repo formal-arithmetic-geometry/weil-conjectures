@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+import Sheaf.AlgebraicGeometry.EtalePullbackSectionComposition
 
 @[expose] public section
 universe u
@@ -16,6 +17,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
+set_option linter.unusedVariables false in
 /-- The composition law for prescribed descended Cech coefficient maps.
 Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed canonical
 Cech comparison. This is the composition part of the agent's explicit etale realization.
@@ -149,7 +151,41 @@ theorem etale_limit_finite_cech_coefficient_composition
                 (c.π.app (op j.val))).obj (Wj j n t))) ≫
             L.pt.obj.map (δ j n t).inv.op) →
       (∀ (j k r : J) (a : j ⟶ k) (b : k ⟶ r),
-        m j r (a ≫ b) = m j k a ≫ m k r b) := by sorry
+        m j r (a ≫ b) = m j k a ≫ m k r b) := by
+  intro J B Blim Uj Vj fj W₀ pr₀ Wj Wlim Nj Nlim Pj Plim Cj CX
+    eNj eNlim γ δ hNj hNlim hγ hδ m l hml j k r a b
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply Pi.hom_ext
+  intro t
+  apply (cancel_mono ((F r.val).obj.map (eNj r n t).hom.op)).1
+  change (m j r (a ≫ b)).f n ≫ Pi.π (Pj r n) t ≫
+      (F r.val).obj.map (eNj r n t).hom.op =
+    (m j k a).f n ≫ (m k r b).f n ≫ Pi.π (Pj r n) t ≫
+      (F r.val).obj.map (eNj r n t).hom.op
+  let T := fun (j k : J) (a : j ⟶ k) ↦
+    ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+      (D.map (show j.val ⟶ k.val from a).op)).unit.app (F j.val)).hom.app
+        (op (Wj j n t)) ≫
+    (φ (show j.val ⟶ k.val from a)).hom.app
+      (op ((MorphismProperty.Over.pullback @Etale ⊤
+        (D.map (show j.val ⟶ k.val from a).op)).obj (Wj j n t))) ≫
+    (F k.val).obj.map (γ j k a n t).inv.op
+  have hm (j k : J) (a : j ⟶ k) :
+      (m j k a).f n ≫ Pi.π (Pj k n) t ≫ (F k.val).obj.map (eNj k n t).hom.op =
+        Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op ≫ T j k a :=
+    hml.1 j k a n t
+  have hc : T j r (a ≫ b) = T j k a ≫ T k r b :=
+    etale_pullback_section_composition D F φ hcomposition i₀ (W₀ n t)
+      (fun j k a ↦ γ j k a n t) (fun j k a ↦ hγ j k a n t) j k r a b
+  rw [hm j r (a ≫ b), hm k r b, hc]
+  calc
+    Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op ≫
+        T j k a ≫ T k r b =
+      ((m j k a).f n ≫ Pi.π (Pj k n) t ≫
+        (F k.val).obj.map (eNj k n t).hom.op) ≫ T k r b := by
+          rw [hm j k a]
+          simp only [Category.assoc]
+    _ = _ := by simp only [Category.assoc]
 
 end AlgebraicGeometry.Etale
-
