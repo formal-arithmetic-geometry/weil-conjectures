@@ -15,7 +15,7 @@
  },
  "proof": [
   {
-   "text": "Use the invertible stalk maps of the four inverse affine-spectrum isomorphisms. Naturality of isoSpec identifies the points; compose the stalk maps with the point-congruence isomorphisms. The stalkMap_comp and stalkMap_congr_hom equations show that both maps from the base stalk commute with these identifications. The same equations for the two projections to the target stalk, together with the two defining restrictions of tensorMap, imply its pure-tensor compatibility: each pure tensor maps to the product of its two projection images, and eD preserves multiplication.",
+   "text": "Construct each ring equivalence as the point equality isomorphism followed by the invertible stalk map of the inverse isoSpec map. Obtain hA and hB by evaluating isoSpec_inv_naturality for g' and f', and obtain hR by composing hA with isoSpec_inv_naturality for f. For any affine morphism, stalkMap_congr_hom applied to isoSpec_inv_naturality and stalkMap_comp proves the naturality equation for these equivalences. Equality induction identifies stalkCongr with eqToHom. Apply this equation to f for R-to-A compatibility. For R-to-B, first transport the base point using sq.w and sq0.w, then apply naturality for g. Equality induction on these two point equalities gives compatibility of the ring equivalences with the two stalkCongr maps.",
    "uses": [
     "def-pc-scheme",
     "def-pc-single-complex-base-change-stalk-condition"
@@ -23,24 +23,34 @@
    "elementary": false
   },
   {
-   "text": "For the input complex use tensorPullbackRestrictIso for X.isoSpec.inv and the restriction-stalk comparison at the spectrum point. The comparison carries every module germ to the corresponding pulled-back germ. On a common neighborhood the formula for the germ of a scalar product shows that it is semilinear for the stalk-ring equivalence eA. Its inverse comes from the inverse restriction-stalk comparison. Naturality for every P.d gives the differential equations, so the components form q into restriction of scalars. Zero complexes obey the same formulas; empty spectra supply no point.",
+   "text": "The two restriction equations in exists_tensorMap imply that tensorMap sends a pure tensor to the product of its g' and f' projection images: write the tensor as algebraMap(a) times includeRight(b), then use map_mul and both equations. Apply the preceding stalk naturality equation to g' and f'. Since eD preserves multiplication, these two equations give the claimed pure-tensor compatibility.",
    "uses": [
-    "lem-pc-iso-pullback-stalk-cohomology",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_tensorPullback_stalk_iso to j=X.isoSpec.inv at g0'(z0), obtaining T naturally isomorphic to S followed by extension along rho=j.stalkMap. Since rho is invertible, restrictScalars rho is an equivalence (ModuleCat.restrictScalars_isEquivalence_of_ringEquiv). The extension/restriction adjunction therefore makes extension an equivalence too and its unit is invertible. Whisker the unit with S and follow it by the inverse tensor-pullback-stalk isomorphism whiskered with restriction. This gives S naturally isomorphic to T followed by restriction of scalars. Use the auxiliary comparisonStalkAdditive instance from the source-transport module and tensorPullbackAdditive from the stalk-condition module to map this natural isomorphism to complexes. Functor.mapHomologicalComplexCompIso identifies the compositions with the stated termwise complexes. Equality induction on hA gives the comparison at the requested old point and identifies rho with eA.toRingHom. Combine this chain isomorphism with the four ring equivalences and the three compatibility equations.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-pc-stalk-comparison-source-transport",
+    "def-pc-single-complex-base-change-stalk-condition",
     "def-pc-derived-category"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
   "def-pc-derived-category",
+  "def-pc-scheme",
   "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-iso-pullback-stalk-cohomology"
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-weil-pbc-module-stalk-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0098",
-  "place": "stalk-pullback formula applied to the inverse affine-spectrum isomorphisms; naturality on germs"
+  "place": "Q4 Lean proof: Tag 0098 tensor pullback stalk natural isomorphism; Tag 0096 adjunction, invertible extension/restriction unit along the inverse affine-spectrum stalk map; isoSpec_inv_naturality, stalkMap_comp and stalkMap_congr_hom for ring and tensor compatibility."
  },
  "mathlib_searches": [
   {
@@ -117,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H4",
+  "reviewer": "X-d6fc4",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T211107-L-393319",
+  "landing": "20261013T222409-L-1225370",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature and proof to the node and recorded dependencies; module and direct importer AffineSpectrumTensorCoordinateData compile cleanly; all proved declarations use only propext, Classical.choice, and Quot.sound."
  }
 }
