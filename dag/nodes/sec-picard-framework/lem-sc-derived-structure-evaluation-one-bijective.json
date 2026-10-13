@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-derived-structure-evaluation-one-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of canonical evaluation on the global structure class of one",
+ "statement": "For any scheme X and chosen unbounded derived category of module sheaves [def-pc-derived-category], use the standard derived category of modules over Γ(X,O_X). Let F be H^0 of the right derived global sections functor [def-sc-ringed-space-module-cohomology, def-pc-ringed-spaces-derived-direct-image], viewed as an additive group. Construct z_X in F(O_X[0]) by sending 1 through the inverse of single-complex homology, the inverse of homologyFunctorFactors and the ordinary-to-derived unit built from quotientCompQhIso and rightDerivedFunctorUnit. For every E, the concrete map Hom(O_X[0],E) → F(E), f ↦ F(f)(z_X), is bijective. No open restriction, affine base ring, boundedness or quasi-coherence assumption occurs.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09M1",
+  "place": "First Hom formula, structure-sheaf case; Tag 079V, K-injective derived sections"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The private unit_evaluation_bijective proves evaluation of ordinary maps from the structure module is bijective on global sections: a section determines its restrictions and multiplication by local scalars. Transport this bijection to each term of the single complex. Lift chain maps and homotopies componentwise, giving global_homotopy_map_bijective. All these steps are proved in Lean.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For modules, maps from a projective object in degree zero to a negative derived object vanish. The truncation triangle and exact Hom sequences imply H^0 is bijective on maps from the free module in degree zero. Transport along a source isomorphism and evaluate at one to obtain free_evaluation_bijective. These private proofs follow the existing proved private calculations in DerivedFreeModuleHomology; Mathlib provides projective-source vanishing and the source library provides truncation homology comparison.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The K-injective resolutions and derived-functor units are those supplied by [def-pc-ringed-spaces-derived-direct-image]. Take a K-injective representative J of E. Localization is bijective on maps into J. The sections single complex is K-projective, so module-side localization is bijective on maps out of it. The right-derived unit at J is an isomorphism. The naturality square of that unit combines these bijections with free_evaluation_bijective; evaluation_bijective_of_unit proves this argument generically. Transport back along the chosen target isomorphism and quotientCompQhIso at the source. Unfolding the explicit class of one shows that this transport equals derivedStructureGlobalOne, using only map_comp. Every step is proved in Lean.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A4",
+  "document": "https://stacks.math.columbia.edu/tag/09M1",
+  "place": "First Hom formula, structure-sheaf case; Tag 079V, K-injective derived sections",
+  "note": "Canonical cycle construction from the cited source; Lean glue by A4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections evaluation at one maps from structure sheaf natural equivalence",
+   "results": "{\"t\": \"2026-10-13T12:48:18Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections evaluation at one maps from structure sheaf natural equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.Scheme.\\u0393SpecIso\", \"AlgebraicGeometry.\\u0393Spec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"AlgebraicGeometry.StructureSheaf.to_global_factors_apply\", \"AlgebraicGeometry.\\u0393Spec.toSpec\\u0393_of\", \"AlgebraicGeometry.\\u0393Spec_adjunction_homEquiv_eq\"], \"digest\": \"da2f43133312b520\"}",
+   "date": "2026-10-13",
+   "verdict": "No complete normalized derived evaluation comparison; ordinary ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-13T12:48:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctor\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "No complete normalized derived evaluation comparison; ordinary ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedStructureSheaf|singleMapHomologicalComplex|overFunctor.*rightDerived",
+   "results": "{\"t\": \"2026-10-13T12:51:25Z\", \"tool\": \"grep\", \"query\": \"derivedStructureSheaf|singleMapHomologicalComplex|overFunctor.*rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean\", \"Mathlib/Algebra/Homology/Additive.lean\", \"Mathlib/Algebra/Homology/Additive.lean\", \"Mathlib/Algebra/Homology/Additive.lean\", \"Mathlib/Algebra/Homology/Additive.lean\", \"Mathlib/Algebra/Homology/Additive.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\"], \"digest\": \"2f6f840d27702be7\"}",
+   "date": "2026-10-13",
+   "verdict": "No complete normalized derived evaluation comparison; ordinary ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-13T12:51:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctor\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "No complete normalized derived evaluation comparison; ordinary ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical evaluation of derived structure sheaf maps on the class of one is bijective and open restriction preserves derived sections",
+   "results": "{\"t\": \"2026-10-13T13:06:53Z\", \"tool\": \"leansearch\", \"query\": \"Canonical evaluation of derived structure sheaf maps on the class of one is bijective and open restriction preserves derived sections\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenSectionsUnit",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Global Hom identification in the final paragraph of the finite-duality proof: normalized structure-object evaluation, via the derived affine-perfect/open calculation",
+   "via": [
+    "lem-sc-derived-open-structure-sections-unit",
+    "lem-sc-koszul-open-structure-evaluation",
+    "lem-sc-koszul-open-hom-identity-evaluation",
+    "lem-sc-koszul-open-hom-chain-evaluation",
+    "lem-sc-koszul-open-hom-comparison-square",
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedStructureEvaluationOne",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedStructureEvaluationOne.lean",
+  "declaration": "AlgebraicGeometry.derivedStructure_evaluation_one_bijective",
+  "statement": "theorem derivedStructure_evaluation_one_bijective (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (E : schemeDerivedCategory X) :\n    letI := HasDerivedCategory.standard\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))\n    let F := (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor ⋙\n      DerivedCategory.homologyFunctor\n        (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) 0 ⋙\n      forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat\n    Function.Bijective (fun f :\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj\n          (SheafOfModules.unit (moduleRings X.toRingedSpace)) ⟶ E ↦\n      F.map f (derivedStructureGlobalOne X))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.derivedStructureGlobalOne",
+   "AlgebraicGeometry.derivedStructure_evaluation_one_bijective"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T134359-L-95446",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T134359-L-95446",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,8 +9,7 @@ public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import Mathlib.Algebra.Homology.SingleHomology
-import Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.AlgebraicGeometry.OpenSectionsCohomologyComparison
 
 /-! # The canonical unit in derived open sections
 
@@ -121,6 +120,7 @@ def derivedOpenStructureUnit (A : Type u) [CommRing A]
     (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0).app S).inv
       (openStructureUnitClass A U))
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation on a general open, with its ordinary sections unit normalization.
 Source: Stacks Project, Tag 09M1, first paragraph, specialized to the structure
 sheaf; Tag 06Z0, the sections adjunction and its unit.
@@ -170,7 +170,47 @@ theorem derivedOpenStructure_evaluation_unit
       (∀ (E E' : schemeDerivedCategory (Spec (.of A))) (g : E ⟶ E')
         (ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E),
         b E' (ψ ≫ R.map g) = H.map (G.map g) (b E ψ)) ∧
-      b (koszulOpenStructure A) (𝟙 _) = derivedOpenStructureUnit A U := by sorry
+      b (koszulOpenStructure A) (𝟙 _) = derivedOpenStructureUnit A U := by
+  classical
+  let R := ((SheafOfModules.overFunctor.{u}
+    (moduleRings (Spec (.of A)).toRingedSpace) U) ⋙
+    Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U)).mapDerivedCategory
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0
+  let G := (affineOpenSections A U).rightDerivedFunctor
+  let := HasDerivedCategory.standard
+    (ModuleCat.{u} ((moduleRings U.toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))
+  let F := (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace).rightDerivedFunctor ⋙
+    DerivedCategory.homologyFunctor
+      (ModuleCat.{u} ((moduleRings U.toScheme.toRingedSpace).obj.obj (Opposite.op ⊤))) 0 ⋙
+    forget₂ (ModuleCat.{u} ((moduleRings U.toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))
+      AddCommGrpCat
+  let i := openStructureRestrictionIso A U
+  obtain ⟨c, hc, hunit⟩ := openSections_cohomology_unit_comparison A U
+  let a (E : schemeDerivedCategory (Spec (.of A))) :=
+    Equiv.ofBijective (fun f ↦ F.map f (derivedStructureGlobalOne U.toScheme))
+      (derivedStructure_evaluation_one_bijective U.toScheme (R.obj E))
+  let b (E : schemeDerivedCategory (Spec (.of A))) :=
+    (Iso.homCongr i (Iso.refl (R.obj E))).trans ((a E).trans (c E))
+  refine ⟨b, ?_, ?_⟩
+  · intro E E' g ψ
+    have hn := hc E E' g (F.map (i.inv ≫ ψ) (derivedStructureGlobalOne U.toScheme))
+    convert hn using 1
+    all_goals simp only [b, a, F, Equiv.trans_apply, Iso.homCongr, Equiv.ofBijective_apply,
+      Equiv.coe_fn_mk,
+      Iso.refl_hom, Category.comp_id, Functor.map_comp,
+      Functor.comp_map, CategoryTheory.comp_apply]
+    all_goals rfl
+  · convert hunit using 1
+    all_goals simp only [b, a, F, Equiv.trans_apply, Iso.homCongr, Equiv.ofBijective_apply,
+      Equiv.coe_fn_mk,
+      Iso.refl_hom, Category.comp_id, derivedOpenStructureUnit,
+      affineOpenSectionsToDerived, affineOpenSectionsDerivedUnit, openStructureUnitClass,
+      openStructureSheafComplex, openStructureModuleComplex, affineOpenTildeSectionsUnit,
+      Functor.comp_map]
+    all_goals rfl
 
 end
 end AlgebraicGeometry

@@ -14,42 +14,40 @@
  ],
  "proof": [
   {
-   "text": "Identify the restriction of tilde(A[0]) with O_U[0]. On a K-injective representative J, evaluation at one sends a chain map O_U[0] to J to a degree-zero global cycle; its inverse multiplies that cycle by local sections of O_U. Homotopies correspond exactly to boundaries. Quotienting therefore yields the canonical structure-sheaf Hom/hypercohomology equivalence of [lem-pc-derived-structure-sheaf-hom-hypercohomology], retaining the cycle description for the normalization below.",
+   "text": "Construct the explicit source isomorphism i by openStructureRestrictionIso (extended single complex, tilde, and restriction of the structure module). Use [lem-sc-open-sections-cohomology-unit-comparison] with this fixed i to obtain the natural cohomology equivalences c preserving the explicit class of one.",
    "uses": [
-    "lem-pc-derived-structure-sheaf-hom-hypercohomology",
-    "def-sc-koszul-open-system"
+    "lem-sc-open-sections-cohomology-unit-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Open restriction preserves K-injectives by its exact left adjoint extension by zero [lem-sc-derived-open-restriction-adjunction-exact]. The over-equivalence does likewise. Restrict an ambient K-injective resolution to U. Its global sections, after exact scalar restriction along A to Gamma(U,O_U), are exactly the affineOpenSections complex. Comparing the localization and derived-functor units gives H(G(E)) in the specified universe. Evaluation and all these comparisons commute with postcomposition by maps of K-injective representatives, which descend to every derived arrow.",
+   "text": "Apply [lem-sc-derived-structure-evaluation-one-bijective] on U to every R(E), giving the equivalence a_E by Equiv.ofBijective. Compose Iso.homCongr i (Iso.refl R(E)), a_E and c_E. This constructs the required family b without choosing arbitrary data from a mere existence theorem.",
    "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "def-sc-principal-open-alternating-total"
+    "lem-sc-derived-structure-evaluation-one-bijective"
    ],
    "elementary": false
   },
   {
-   "text": "The structure identity evaluates to 1 before resolution. The ordinary class of its restriction is the explicitly constructed openStructureUnitClass: extendHomologyIso and singleObjHomologySelfIso identify the class of 1, and tilde.toOpen restricts it. Naturality of the derived-functor unit with the resolution sends this class to derivedOpenStructureUnit, proving b_O(id)=z_U. Empty U has zero section and Hom groups; the zero ring and all universes use the same comparison isos. This normalization is established from the cycle construction, not inferred from an arbitrary existential equivalence.",
+   "text": "Functoriality gives F(i.inv≫ψ≫R(g))(1)=F(R(g))(F(i.inv≫ψ)(1)). Apply naturality of c to prove postcomposition naturality. For the structure identity, i.inv≫id=i.inv; the cohomology comparison normalization unfolds to derivedOpenStructureUnit by its existing real definitions. These are the explicit Lean simp calculations.",
    "uses": [
     "def-sc-koszul-open-system",
     "def-sc-principal-open-alternating-total"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "lem-sc-open-sections-cohomology-unit-comparison",
+  "lem-sc-derived-structure-evaluation-one-bijective",
   "def-sc-koszul-open-system",
-  "lem-sc-derived-open-restriction-adjunction-exact",
   "def-sc-principal-open-alternating-total"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N3",
+  "group": "A4",
   "document": "https://stacks.math.columbia.edu/tag/09M1",
   "place": "First paragraph, structure-sheaf specialization; Tag 06Z0, sections adjunction; Tag 08BS, restriction of K-injectives",
-  "note": "Source read on the official Stacks tag pages; construction and Lean glue by N3. Below the unit level; the unit and chapter routes are unchanged."
+  "note": "Canonical global evaluation bijectivity proved in Lean; open cohomology/unit comparison split off. Unit and chapter routes unchanged."
  },
  "mathlib_searches": [
   {
@@ -143,9 +141,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T124312-L-3777034",
+  "landing": "20261013T134359-L-95446",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
