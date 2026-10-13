@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-affine-spectrum-coordinate-representatives",
+ "kind": "statement",
+ "title": "Termwise representatives for affine spectrum coefficient transport",
+ "statement": "Let $X,X\\prime$ be affine schemes [def-pc-scheme], with chosen derived categories [def-pc-derived-category]. Let $g\\prime:X\\prime\\to X$, $K\\in D(\\mathcal O_X)$, $K\\prime\\in D(\\mathcal O_{X\\prime})$ and $\\phi:L(g\\prime)^*K\\to K\\prime$ [def-pc-derived-pullback]. Let $c$ be K-flat Coordinates for this coefficient morphism [def-pc-single-complex-base-change-stalk-condition]. There exist Coordinates $d$ for the explicitly transported coefficient objects and morphism [def-pc-affine-spectrum-derived-coordinates], whose complexes are exactly $d.P=(X.\\mathrm{isoSpec}^{-1})^*c.P$ and $d.N=(X\\prime.\\mathrm{isoSpec}^{-1})^*c.N$, with both pullbacks taken termwise. No base-change square or invertibility of a stalk comparison is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-affine-spectrum-derived-coordinates",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "lemma-single-complex-base-change-condition, affine spectrum reduction; Tag 0D5S, lemma-pullback-composition; Tag 0098, lemma-stalk-pullback"
+ },
+ "proof": [
+  {
+   "text": "Tensor pullback along each inverse spectrum isomorphism is an exact equivalence, with inverse tensor pullback along its hom. The adjunctions and identity/composition comparisons supply the equivalence. Hence it preserves quasi-isomorphisms and computes its derived functor on every complex. Pullback preserves K-flatness, so P0, the termwise pullback of c.P, is K-flat.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set N0 to the termwise pullback of c.N. The universal derived counits for the exact isomorphism pullbacks, followed by the derived images of c.e and c.eprime, identify Q(P0) and Q(N0) with the two explicit affine spectrum objects.",
+   "uses": [
+    "def-pc-affine-spectrum-derived-coordinates",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use isoSpec inverse naturality to identify the two composite scheme maps. The underived composition isomorphism, followed by inverse-spectrum pullback of c.t, defines t0. The defining leftDerivedLift equations and counit naturality transport c.represents to the represents equation for affineSpectrumDerivedMorphism. The K-flat counit is invertible at P0. Assemble the Coordinates with exactly P0 and N0.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-affine-spectrum-derived-coordinates",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-affine-spectrum-derived-coordinates",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Explicit expansion of the affine spectrum reduction, following the original node steps 2 and 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Termwise pullback of derived morphism coordinates along affine spectrum isomorphisms and conjugacy of stalk tensor cohomology comparison maps",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict is inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise pullback of K flat derived morphism coordinates along affine spectrum isomorphisms, and conjugacy of the resulting stalk tensor cohomology comparison arrows",
+   "results": "8 hits: flat_appLE, pullbackSpecIso_hom_base, tensorCongr_SpecTensorTo and affine open-cover identities. No result constructs derived representative coordinates or identifies stalk comparison arrows.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.isoSpec_inv_naturality",
+   "results": "One hit: Scheme.isoSpec_inv_naturality in Mathlib.AlgebraicGeometry.AffineScheme. It identifies composite scheme maps, but not representative complexes or comparison maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoSpec.*(stalk|[Cc]omplex)|[Cc]omplex.*isoSpec",
+   "results": "One Mathlib hit, RingHomProperties.lean:731, using stalkMap of isoSpec. No derived-complex or stalk-comparison transport theorem. Local rg found fixed-square coordinate invariance and source-open conjugacy, neither this spectrum transport.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumStalkCondition",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "lemma-single-complex-base-change-condition, affine spectrum reduction: invariance of equation-bc under canonical spectrum coordinates; Tag 0DJ9 affine-open paragraph",
+   "via": [
+    "lem-pc-affine-spectrum-stalk-condition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumCoordinateRepresentatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumCoordinateRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_affineSpectrum_coordinate_representatives",
+  "statement": "theorem exists_affineSpectrum_coordinate_representatives\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']\n    (g' : X' ⟶ X) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') (c : Coordinates g' K K' φ) :\n    ∃ d : Coordinates (Spec.map g'.appTop)\n        (affineSpectrumDerivedObject X K) (affineSpectrumDerivedObject X' K')\n        (affineSpectrumDerivedMorphism g' K K' φ),\n      d.P = ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex\n        (.up ℤ)).obj c.P ∧\n      d.N = ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex\n        (.up ℤ)).obj c.N",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T123204-L-3676208",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T123204-L-3676208",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

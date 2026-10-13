@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-affine-spectrum-stalk-conjugacy",
+ "kind": "statement",
+ "title": "Pointwise affine spectrum conjugacy for termwise representatives",
+ "statement": "Let $f:X\\to S$, $f\\prime:X\\prime\\to S\\prime$, $g:S\\prime\\to S$, $g\\prime:X\\prime\\to X$ form a cartesian square of affine schemes [def-pc-scheme], with a pullback proof for the square of their spectrum global-section maps. Fix chosen derived categories [def-pc-derived-category], objects $K,K\\prime$, and $\\phi:L(g\\prime)^*K\\to K\\prime$ [def-pc-derived-pullback]. Let $c$ be Coordinates for $\\phi$ [def-pc-single-complex-base-change-stalk-condition] and $d$ Coordinates for its explicit spectrum transport [def-pc-affine-spectrum-derived-coordinates]. Assume $d.P=(X.\\mathrm{isoSpec}^{-1})^*c.P$ and $d.N=(X\\prime.\\mathrm{isoSpec}^{-1})^*c.N$ as termwise complexes. For each point $z_0\\in\\operatorname{Spec}\\Gamma(X\\prime,\\mathcal O_{X\\prime})$ and each $i\\in\\mathbf Z$, the additive arrows underlying stalkComparison for $c$ at $X\\prime.\\mathrm{isoSpec}^{-1}(z_0)$ and for $d$ at $z_0$ are isomorphic in the arrow category of abelian groups. Neither horizontal comparison is assumed invertible.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-affine-spectrum-derived-coordinates",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "lemma-single-complex-base-change-condition, affine spectrum reduction; Tag 0D5S, lemma-pullback-composition; Tag 0098, lemma-stalk-pullback"
+ },
+ "proof": [
+  {
+   "text": "Naturality of isoSpec and stalkMap_comp identify the four local rings at corresponding points, intertwining all algebra structures. The two restriction equations for tensorMap and tensor universality identify the tensor-to-stalk maps. The pullback-stalk formula, natural in complexes, and the two assumed equalities identify the stalk complexes of d.P and d.N with scalar transport of c.P and c.N.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ring isomorphisms give exact scalar equivalences. Uniqueness of the universal left-derived extension and its counit gives isomorphisms on derived tensor cohomology. Naturality for A-multiplication identifies the full A tensor_R B action. Extending to C gives the source isomorphism. Exactness of stalks gives the target homology isomorphism. Correct these identifications by the derived ratios of the representative isomorphisms e and eprime when d uses other representative isomorphisms.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The represents equations, the leftDerivedLift equation defining affineSpectrumDerivedPullbackIso, and the cohomology model comparison_eq and localized_eq equations identify the horizontal maps under these source and target isomorphisms. Naturality of tensorStalkIso gives a commuting square. Forget module scalars and use Mathlib Arrow.isoMk to obtain the asserted arrow isomorphism.",
+   "uses": [
+    "def-pc-affine-spectrum-derived-coordinates",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-stalk-comparison-pullback-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-stalk-comparison-source-transport",
+  "def-pc-affine-spectrum-derived-coordinates",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-stalk-comparison-pullback-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Explicit expansion of the affine spectrum reduction, following the original node steps 2 and 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Termwise pullback of derived morphism coordinates along affine spectrum isomorphisms and conjugacy of stalk tensor cohomology comparison maps",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict is inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise pullback of K flat derived morphism coordinates along affine spectrum isomorphisms, and conjugacy of the resulting stalk tensor cohomology comparison arrows",
+   "results": "8 hits: flat_appLE, pullbackSpecIso_hom_base, tensorCongr_SpecTensorTo and affine open-cover identities. No result constructs derived representative coordinates or identifies stalk comparison arrows.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.isoSpec_inv_naturality",
+   "results": "One hit: Scheme.isoSpec_inv_naturality in Mathlib.AlgebraicGeometry.AffineScheme. It identifies composite scheme maps, but not representative complexes or comparison maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoSpec.*(stalk|[Cc]omplex)|[Cc]omplex.*isoSpec",
+   "results": "One Mathlib hit, RingHomProperties.lean:731, using stalkMap of isoSpec. No derived-complex or stalk-comparison transport theorem. Local rg found fixed-square coordinate invariance and source-open conjugacy, neither this spectrum transport.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumStalkCondition",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "lemma-single-complex-base-change-condition, affine spectrum reduction: invariance of equation-bc under canonical spectrum coordinates; Tag 0DJ9 affine-open paragraph",
+   "via": [
+    "lem-pc-affine-spectrum-stalk-condition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumStalkConjugacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumStalkConjugacy.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.nonempty_affineSpectrum_stalkComparison_arrow_iso",
+  "statement": "theorem nonempty_affineSpectrum_stalkComparison_arrow_iso\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']\n    (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop)\n      (Spec.map f.appTop) (Spec.map g.appTop))\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') (c : Coordinates g' K K' φ)\n    (d : Coordinates (Spec.map g'.appTop)\n      (affineSpectrumDerivedObject X K) (affineSpectrumDerivedObject X' K')\n      (affineSpectrumDerivedMorphism g' K K' φ))\n    (hP : d.P = ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex\n      (.up ℤ)).obj c.P)\n    (hN : d.N = ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex\n      (.up ℤ)).obj c.N)\n    (z0 : Spec Γ(X', ⊤)) (i : ℤ) :\n    Nonempty\n      (Arrow.mk ((forget₂ (ModuleCat.{u} (X'.presheaf.stalk (X'.isoSpec.inv z0)))\n          AddCommGrpCat.{u}).map\n            (stalkComparison f f' g g' sq c (X'.isoSpec.inv z0) i)) ≅\n        Arrow.mk ((forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0))\n          AddCommGrpCat.{u}).map\n            (stalkComparison (Spec.map f.appTop) (Spec.map f'.appTop)\n              (Spec.map g.appTop) (Spec.map g'.appTop) sq0 d z0 i)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T123204-L-3676208",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T123204-L-3676208",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
