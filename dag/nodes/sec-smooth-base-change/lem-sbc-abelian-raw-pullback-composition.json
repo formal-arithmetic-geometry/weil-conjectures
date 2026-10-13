@@ -16,24 +16,41 @@
  ],
  "proof": [
   {
-   "text": "Substitute hd so d is b ≫ a, and convert hφ to equality of morphisms. Expand the\nfive factors of each raw pullback. Functor.map_comp distributes D(b^*) over the inner\nfive factors. Naturality of the single-functor comparison for b^* at the source comparison\nmoves that comparison to the left of the inverse single comparison. The adjacent direct\nand inverse single comparisons at the intermediate source then cancel. Use naturality of\nthe derived composition isomorphism D((b ≫ a)^*) ≅ D(a^*) ⋙ D(b^*) at z to replace the\ntwice pulled-back class by the class pulled back along b ≫ a. The source factors agree\nwith the source factor for d by upperStarComp associativity applied to b, a, h. On single\ncomplexes the derived composition agrees with the underived comparison by\nabelianPullbackSingleComposition (specialized to b, a, b ≫ a, rfl), so its source component\nmoves across the single comparisons. Its shift compatibility, proved on complexes and\ndescended through localization, moves the target component through the two commShiftIso\nfactors. Naturality of the single comparison at φa moves φa past the intermediate\ncomparison; functoriality of single and shift combines the coefficient factors as\nsingle(upperStarComp.hom ≫ b^*.map φa ≫ φb). This is single(φd) by hφ. Use wa, wb, wd\nand associativity to identify the structure-map equalities (their proof transports are\nproof-irrelevant). The five remaining factors are exactly the raw formula for d.\nNo invertibility of any coefficient morphism is used; zero coefficients, empty schemes,\nidentity maps and p = 0 obey the same calculation.",
+   "text": "Normalize d, h′ and h″ using hd, wa and wb, and replace φd by the composite coefficient map using eq_of_heq hφ. Work first with an abstract Grothendieck abelian coefficient category and an arbitrary source sheaf M on S; specialize to AddCommGrpCat and the free sheaf on U at the end. These substitutions preserve every original hypothesis and conclusion; wd transports are proof-irrelevant.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The private singleComp lemma unfolds upperStarPlusComp and combines the already proved private exact-functor helpers Functor.plus_single_comp and Functor.plus_single_natIso from EtalePullbackSingleComp. This gives the compatibility of the derived composition with both single-functor comparisons. The sourceComp lemma uses naturality of the inverse single comparison, upperStarComp_assoc, and cancellation of the two invertible single comparisons to identify the source factors of the iterated raw map with the composite source factors followed by upperStarPlusComp.hom.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-sbc-abelian-pullback-single-composition"
+    "lem-sbc-pullback-single-comp"
    ],
    "elementary": false
+  },
+  {
+   "text": "The targetComp lemma obtains shift compatibility of upperStarPlusComp by composing the already proved private Functor.plusNatIso_commShift and Functor.plusCompIso_commShift helpers of AbelianDerivedDirectImageTransitionShift. Naturality of commShiftIso moves both shifted coefficient factors; NatTrans.shift_app_comm combines the two shift comparisons. Naturality of the single comparison at φa and singleComp identify the remaining coefficient factors with single(upperStarComp.hom ≫ b*.map φa ≫ φb). This calculation uses no invertibility of φa or φb and works for all integer shifts.",
+   "uses": [
+    "lem-sbc-pullback-single-comp",
+    "lem-sbc-abelian-derived-transition-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private rawGeneralComp lemma expands the five actual raw factors and distributes D(b*) over composition. Substitute sourceComp, use naturality of upperStarPlusComp.hom at z, and substitute targetComp. The resulting equality is exactly the composite raw formula. Specializing its coefficient category, degree, source free sheaf and class proves the original theorem without any new holes.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-derived-inverse-image-composition",
-  "lem-sbc-abelian-pullback-single-composition"
+  "lem-sbc-pullback-single-comp",
+  "lem-sbc-abelian-derived-transition-shift"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project, Tags 09Z1 and 03CB",
-  "place": "G3 spells out the structural five-factor calculation in parent proof step 2; not the geometric continuity argument."
+  "document": "Stacks Project, Tags 09Z1 and 03CB; existing proved exact-functor single and shift compatibility helpers",
+  "place": "N2 formalizes the five-factor calculation using sourceComp, targetComp and naturality; no new theorem with sorry."
  },
  "mathlib_searches": [
   {
@@ -126,10 +143,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T054217-L-442825",
-  "kind": "interface",
+  "landing": "20261013T065112-L-899923",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
