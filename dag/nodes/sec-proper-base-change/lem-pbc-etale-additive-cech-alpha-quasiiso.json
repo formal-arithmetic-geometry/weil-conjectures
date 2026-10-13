@@ -16,24 +16,53 @@
  ],
  "proof": [
   {
-   "text": "Global restrictions commute with the resolution differential and with the\nalternating Cech cofaces. The latter cancel in horizontal degree zero, so the\ncomponents alpha form a chain map. The canonical open inclusion preserves\ncoverings and finite limits, and its value at top is terminal. Each injective\nresolution term therefore has a quasi-isomorphic augmented open-cover Cech row,\nby etaleOpenCechInjectiveAugmentation_quasiIso. Apply the first-quadrant column\naugmentation criterion, with Cech degree first, to these rows. Its component\nformula is precisely additiveCechAlpha, so the resulting map is a quasi-isomorphism.\nDegree zero uses sheaf gluing; empty covers force the scheme and its sections to\nbe empty and zero respectively, and repeated or empty intersections cause no change.",
+   "text": "Use zariski_to_etale_core to obtain an inclusion j which forgets to X.restrictFunctor and preserves finite limits and covers. The canonical additiveCechOpenInclusion has the same forgetful composite; fullyFaithfulCancelRight gives a natural isomorphism to j. Transfer finite-limit preservation and continuity, then use isContinuous_iff_coverPreserving to obtain cover preservation. Preservation of terminal objects makes its value at top terminal.",
    "uses": [
     "def-pbc-etale-additive-cech-normalization",
+    "lem-weil-pbc-zariski-etale-core"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct restriction-zero by the product of the maps from each tuple intersection to the identity etale object. Naturality of a resolution differential proves that these form a map a to Cech degree zero. The two degree-zero Cech cofaces become equal after composing to the terminal identity object; their alternating sum is zero, proving a followed by the horizontal differential is zero.",
+   "uses": [
+    "def-pbc-etale-additive-cech-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct b by following each component of a by the (0,n) total inclusion. The total differential identities give one zero horizontal term and the vertical resolution term with sign +1, proving the chain-map equation. Its components are definitionally additiveCechAlpha.",
+   "uses": [
+    "def-pbc-etale-additive-cech-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each injective resolution term, precompose its single-object augmentation by the isomorphism on sections induced by the unique isomorphism between the terminal open-inclusion object and the identity etale object. The degree-zero projections are the usual open restrictions: both composite site maps have terminal codomain, hence agree. Apply etaleOpenCechInjectiveAugmentation_quasiIso; cancel the precomposed isomorphism using quasiIso_iff_comp_left.",
+   "uses": [
     "lem-sc-etale-open-cech-injective-augmentation",
+    "def-pbc-etale-additive-cech-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply quasiIso_of_column_augmentation to a, its zero horizontal differential, b, the defining component equality, and the preceding row quasi-isomorphisms. This proves QuasiIso b and supplies the required existential witness. No nonempty-cover hypothesis was used; empty or repeated intersections and the empty cover remain included.",
+   "uses": [
     "lem-sc-first-quadrant-column-augmentation"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pbc-etale-additive-cech-normalization",
+  "lem-weil-pbc-zariski-etale-core",
   "lem-sc-etale-open-cech-injective-augmentation",
   "lem-sc-first-quadrant-column-augmentation"
  ],
  "proof_origin": {
-  "by": "E3 worker",
+  "by": "R3 worker",
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Lemma 20.11.2, augmentation alpha"
+  "place": "Lemma 20.11.2, augmentation alpha; explicit restriction and total-differential calculations adapted from Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionTotal"
  },
  "mathlib_searches": [
   {
@@ -127,10 +156,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T130032-L-3922743",
-  "kind": "interface",
+  "landing": "20261013T141533-L-381147",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
