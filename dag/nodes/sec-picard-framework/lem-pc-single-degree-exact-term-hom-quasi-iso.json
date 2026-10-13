@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-single-degree-exact-term-hom-quasi-iso",
+ "kind": "statement",
+ "title": "Single-degree exact-term Hom preserves quasi-isomorphisms",
+ "statement": "Let C be a small category, J a Grothendieck topology and R a sheaf of commutative rings. Let P be a cochain complex of sheaves of R-modules [def-pc-cochain-complex-modules], and fix an integer k. Assume P^n is zero for n different from k, and internal sheaf Hom from P^k preserves short exact sequences. For every quasi-isomorphism f:M to N of arbitrary cochain complexes [def-pc-quasi-iso-modules], the induced map Hom(P,M) to Hom(P,N) [def-pur-hom-complex] is a quasi-isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/cohomology.tex; literature/stacks-project/homology.tex",
+  "place": "Tag 0A8X, Hom products and differential; Tag 08DM, bounded Hom calculation; Tag 010N, exact functors; step 1 of lem-pc-bounded-exact-term-hom-quasi-iso"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Every product factor except the one at k is zero. Use the product universal property to identify Hom(P,M)^n with internal Hom(P^k,M^(k+n)). Since every source differential vanishes, the differential is postcomposition with d_M. The identification commutes with f componentwise, including when P^k is zero.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The internal Hom functor is additive sectionwise. Short-exact-sequence preservation gives finite-limit and finite-colimit preservation by the exact-functor criterion.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the natural homology comparison for an exact functor to the degreewise image of M and N. The map on cohomology is an isomorphism because f is a quasi-isomorphism. Translation of the grading by k does not affect this assertion.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-quasi-iso-modules",
+  "def-pur-hom-complex",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0A8X, 08DM, 010N and 0117",
+  "place": "The bounded exact-term Hom argument, separated into its single-degree and split-tail calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal Hom complex from a single degree exact functor preserves quasi isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom complexes of a degreewise split short exact source sequence form a short exact sequence and preserve quasi isomorphisms by two out of three",
+   "results": "CochainComplex.mappingCone.quasiIso_descShortComplex, HomologicalComplex.HomologySequence.quasiIso_τ₃, HomologicalComplex.shortExact_of_degreewise_shortExact, HomologicalComplex.shortExact_iff_degreewise_shortExact, CochainComplex.cm5b.instQuasiIsoIntP, quasiIsoAt_iff_exactAt', DerivedCategory.HomologySequence.exact₁, quasiIsoAt_iff_exactAt",
+   "date": "2026-10-13",
+   "verdict": "No sheaf-valued stupid-tail Hom sequence or single-degree comparison; generic exact-sequence tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*hom|hom.*quasiIso",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean, Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic quasi-isomorphism results, no match for these sheaf Hom constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof final paragraph: finite-locally-free tensor-Hom identification, through the local finite-projective calculation of lem-pc-rhom-strict-perfect-hom; bounded-filtration reduction; Tag 0A8X, Hom products and differential; Tag 08DM, bounded Hom calculation; Tag 010N, exact functors; step 1 of lem-pc-bounded-exact-term-hom-quasi-iso",
+   "via": [
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "lem-pc-rhom-strict-perfect-hom",
+    "lem-pc-perfect-rhom-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SingleDegreeExactTermHomQuasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/SingleDegreeExactTermHomQuasiIso.lean",
+  "declaration": "CategoryTheory.quasiIso_homComplex_map_of_single_degree_exact_term",
+  "statement": "theorem quasiIso_homComplex_map_of_single_degree_exact_term\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    (P : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)\n    (k : ℤ) (hsingle : ∀ n : ℤ, n ≠ k → IsZero (P.X n))\n    (hexact : ∀ (S : ShortComplex (SheafOfModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))),\n      S.ShortExact → ∃ hz : SheafOfModules.homObjMap (R := R) (𝟙 (P.X k)) S.f ≫\n          SheafOfModules.homObjMap (R := R) (𝟙 (P.X k)) S.g = 0,\n        (ShortComplex.mk (SheafOfModules.homObjMap (R := R) (𝟙 (P.X k)) S.f)\n          (SheafOfModules.homObjMap (R := R) (𝟙 (P.X k)) S.g) hz).ShortExact)\n    {M N : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ}\n    (f : M ⟶ N) [QuasiIso f] :\n    QuasiIso (((homComplexFunctor (R := R)).obj (op P)).map f)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T022421-L-3216603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T022421-L-3216603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

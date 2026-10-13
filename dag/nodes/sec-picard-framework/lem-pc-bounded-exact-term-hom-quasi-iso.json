@@ -27,44 +27,48 @@
  ],
  "proof": [
   {
-   "text": "For P concentrated in degree k, the product and differential formulas of def-pur-hom-complex identify Hom(P,M) with the shifted complex obtained by applying internal Hom from P^k degreewise. Postcomposition is additive. Preservation of short exact sequences gives an exact functor: factor any differential through its image and apply the short exact sequences for its kernel and image. The equivalence of short-exact preservation with exactness is lem-sp-exact-functor-preserves-homology. The natural cohomology comparison of lem-weil-pbc-exact-functor-complex-cohomology then shows preservation of quasi-isomorphisms.",
+   "text": "Induct on a natural interval width d with P supported in [a,a+d]. For d=0 apply the single-degree Hom theorem at a. Internal Hom from zero is zero, so all-zero sources are included.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pc-quasi-iso-modules",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-sp-exact-functor-preserves-homology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Let T_k be the stupid tail of P in degrees at least k and G_k=P^k placed in degree k. The sequence 0 to T_{k+1} to T_k to G_k to 0 is degreewise split. From the product projections and differential of def-pur-hom-complex, restriction and extension by zero give the degreewise split sequence 0 to Hom(G_k,M) to Hom(T_k,M) to Hom(T_{k+1},M) to 0, compatible with the maps induced by f. Repeat for N.",
-   "uses": [
-    "def-pur-hom-complex"
+    "lem-pc-single-degree-exact-term-hom-quasi-iso"
    ],
    "elementary": true
   },
   {
-   "text": "Use the natural long exact sequences of lem-weil-pbc-complex-ses-homology-long-exact and apply lem-weil-pbc-five-lemma to the five consecutive terms centered on each cohomology of Hom(T_k,-). If the maps for G_k and T_{k+1} are quasi-isomorphisms, so is the map for T_k. Starting with the zero tail above b, descend finitely to a; the omitted degrees below a are zero. The first step handles each G_k. If b<a, P and both Hom complexes are zero. Finite support makes all products effectively finite despite unbounded M and N.",
+   "text": "For a successor width, form the real Mathlib stupid tail U in degrees at least a+1. It is supported in [a+1,a+1+d]. Its terms are either zero or isomorphic to the corresponding P terms. Prove exactness for zero sources and transport short exactness along those isomorphisms. Apply the induction hypothesis to U. Apply the single-degree theorem to P^a placed in degree a, transporting the exact-term hypothesis along singleObjXSelf.",
    "uses": [
+    "def-pur-hom-complex",
+    "lem-pc-single-degree-exact-term-hom-quasi-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the natural short exact Hom sequences for the stupid tail. Transport the two outer quasi-isomorphisms through their arrow isomorphisms. Apply the proved upstream HomologicalComplex.HomologySequence.quasiIso_τ₂ (WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns), whose long-exact-sequence proof uses the five lemma. Transport the middle quasi-isomorphism back through its arrow isomorphism.",
+   "uses": [
+    "lem-pc-stupid-tail-hom-short-exact",
     "lem-weil-pbc-complex-ses-homology-long-exact",
     "lem-weil-pbc-five-lemma",
     "def-pc-quasi-iso-modules"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For the original bounds a,b take d=(b-a).toNat. Then b is at most a+d, including b<a; the given bounds imply the interval hypothesis. Apply the proved finite induction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
   "def-pc-quasi-iso-modules",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-sp-exact-functor-preserves-homology",
+  "def-pur-hom-complex",
+  "lem-pc-single-degree-exact-term-hom-quasi-iso",
+  "lem-pc-stupid-tail-hom-short-exact",
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "lem-weil-pbc-five-lemma"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DM, bounded Hom calculation adapted to exact termwise Hom using Homology Tag 0117"
+  "document": "Stacks Project, Tags 0A8X, 08DM and 0117",
+  "place": "Bounded exact-term argument; Lean finite-width induction by P3, using the upstream long-exact-sequence quasiIso_τ₂ lemma after independent second reading"
  },
  "mathlib_searches": [
   {
@@ -125,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T202252-L-708614",
+  "landing": "20261013T022421-L-3216603",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

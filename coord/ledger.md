@@ -10677,3 +10677,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/N3/Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsChosen (stage 3; reviewer PASS; first push; landing 20261013T022420-L-3216137 (interface); batch 20261013T022404; modules 3; new nodes 2)
 - 02:24 L: merged deliver/N3/Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonTriangle (stage 3; reviewer PASS; first push; landing 20261013T022421-L-3216326 (interface); batch 20261013T022404; modules 2; new nodes 1)
 - 02:24 L: merged deliver/P1/Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkBaseChangeReflectsIso (stage 3; reviewer PASS; first push; landing 20261013T022421-L-3216439 (interface); batch 20261013T022404; modules 3; new nodes 2)
+- 02:24 L: merged deliver/P3/Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T022421-L-3216603 (interface); batch 20261013T022404; modules 3; new nodes 2)
