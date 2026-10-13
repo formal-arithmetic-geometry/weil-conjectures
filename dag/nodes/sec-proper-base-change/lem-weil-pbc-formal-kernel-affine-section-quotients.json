@@ -13,49 +13,35 @@
  ],
  "proof": [
   {
-   "text": "Restrict F, H, and alpha to the affine open U, preserving their formal-module conditions, and transport to Spec A via the affine chart. Apply the affine formal-module equivalence to obtain finite completed modules N and P, a completed-linear f:N -> P, and natural A-linear surjective projections with ideal-power kernels. Put L=ker(f).",
+   "text": "Construct finite completed modules and the induced completed-linear map with A-linear compatible projections. Put L=ker(f).",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+    "lem-weil-pbc-formal-completed-projections-linear"
    ],
    "elementary": false
   },
   {
-   "text": "The completion is Noetherian. The reduced-kernel image bound applied to f supplies a. For every m, compare the stabilized image at m+c with that at l=max(m+c,m+a); hc identifies these subobjects, while the bound identifies the latter with the image of L in N/K^(m+1)N. Affine sections preserve the kernel and image calculation. Via hS define q_m on the restriction of scalars of L. It is A-linear and surjective and has zero criterion L.subtype(z) in K^(m+1)N.",
+   "text": "Identify the projected range of L with the stabilized image sections by the affine range theorem.",
    "uses": [
-    "lem-weil-pbc-adic-completion-noetherian",
-    "new-adic-kernel-image-bound",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-stabilized-kernel-section-range"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality of j equates the two composites from L to F_a(U). Each j_a is monic by hS, hence injective on sections. Cancel it to obtain S(b->a)(U)(q_b(z))=q_a(z), for every a<=b. This only uses the projections and identifications constructed in the previous two steps.",
+   "text": "Each j_m is monic by hS. Evaluation preserves monomorphisms, so its section map t_m is injective. The isomorphism hS identifies the range of t_m with the projected range of L. Compose the restriction of p_m, codomain-restricted to this range, with the inverse of LinearEquiv.ofInjective t_m to define q_m. The range equality proves surjectivity. The projection zero criterion and injectivity of t_m prove the required kernel criterion. Naturality of j and p, followed by cancellation of t_a, proves transition compatibility.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "new-adic-kernel-image-bound"
+  "lem-weil-pbc-formal-completed-projections-linear",
+  "lem-weil-pbc-stabilized-kernel-section-range"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "J4",
+  "group": "P2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X (lemma-inverse-systems-abelian), affine description of K prime_m for claim (a), using Lemma 087W; read at https://stacks.math.columbia.edu/tag/087X and https://stacks.math.columbia.edu/tag/087W"
+  "place": "Tags 087W and 087X; completed linear projections, Artin--Rees range comparison, and inverse range equivalences"
  },
  "mathlib_searches": [
   {
@@ -140,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T123206-L-3677079",
+  "landing": "20261013T131949-L-4087785",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-stabilized-kernel-section-range",
+ "kind": "statement",
+ "title": "Stabilized affine kernel image equals the projection of the completed kernel",
+ "statement": "Let X be a Noetherian scheme, I an ideal sheaf, F and H coherent formal modules on (X,I), alpha:F->H a morphism, and U an affine open [def-weil-pbc-coherent-formal-module]. Put A=Gamma(U,O_X), R=AdicCompletion(I(U),A), and K=I(U)R [def-weil-pbc-adic-completion]. Fix a stabilization index c, so the image subobject of ker(alpha_l)->F_m agrees with the image at m+c whenever m+c<=l. Given completed R-modules M,N, an R-linear map f:M->N with N finite, A-linear surjective maps p_n:M|_A->Gamma(U,F_n), additive maps q_n:N->Gamma(U,H_n), the ideal-power zero criteria for p_n and q_n, the intertwining equation q_n f=alpha_n(U) p_n, and the transition equation p_m=F(l->m)(U) p_l, the range of p_m restricted to ker(f) equals the section range of the inclusion of the abelian image of ker(alpha_(m+c))->F_m. This theorem constructs neither completed modules nor maps to an arbitrary presentation S.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project Tags 087W and 087X, affine limit construction and calculation of claim (a)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Use Noetherianity of completion and the reduced-kernel image bound at l=max(m+c,m+d). The quotient-map equality is equivalent to equality of additive projected images, by the already proved quotient_map_eq_iff_additive_image_eq helper in the affine comparison module.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "new-adic-kernel-image-bound",
+    "new-formal-affine-kernel-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The already proved kernel_transition_range helper identifies the projected preimage with the section range of the categorical kernel followed by transition. Quasi-coherence and affine image exactness replace this by the section range of its abelian image inclusion.",
+   "uses": [
+    "new-formal-affine-kernel-image-comparison",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use hc to construct an isomorphism of the two image subobjects by Subobject.isoOfMkEqMk. Its hom and inverse show equality of section ranges. Rewrite the projected kernel image as the range of the restriction to the kernel subtype.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "new-adic-kernel-image-bound",
+  "new-formal-affine-kernel-image-comparison",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 087W and 087X; proof implemented in Lean from adic towers and Artin--Rees"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite completed module projections of coherent formal sheaf sections stabilized kernel image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stabilized formal kernel affine sections compatible quotients completed finite module",
+   "results": "Eight hits about affine scheme limits and ideal sheaf kernels; none constructs these module projections or stabilized ranges.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap, Function.Injective, LinearEquiv",
+   "results": "LinearEquiv.ofInjective found and used for the final quotient-map construction; no exact affine formal-module result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilized.*kernel|kernel.*stabili",
+   "results": "msearch returned zero hits; rg found the assigned theorem and related formal-module files. CoherentFormalModuleAffineKernelImageComparison contains proved helpers used by the range proof, and a private additive projection construction strengthened here to A-linear projections.",
+   "date": "2026-10-13",
+   "verdict": "reused proved helpers; no exact public interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineSectionQuotients",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Affine quotient section identification of stabilized coherent formal kernels",
+   "via": [
+    "lem-weil-pbc-formal-kernel-stalk-presentation",
+    "lem-weil-pbc-formal-kernel-quotient-transition-exact-bound",
+    "lem-weil-pbc-formal-kernel-quotient-comparison-bound",
+    "lem-weil-pbc-formal-kernel-quotient-adic-bound",
+    "lem-weil-pbc-formal-kernel-quotient-aux",
+    "lem-weil-pbc-formal-kernel-construction",
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "lem-weil-pbc-formal-kernel-affine-stalk-filtration",
+    "lem-weil-pbc-formal-kernel-affine-section-quotients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleStabilizedKernelSectionRange",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleStabilizedKernelSectionRange.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_stabilized_kernel_section_range",
+  "statement": "theorem coherentFormalModule_stabilized_kernel_section_range\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (U : X.affineOpens)\n    (M N : ModuleCat.{u} (AdicCompletion (I.ideal U) Γ(X, U.1)))\n    (f : M ⟶ N) (hN : Module.Finite (AdicCompletion (I.ideal U) Γ(X, U.1)) N)\n    (p : ∀ n : ℕ,\n      ((ModuleCat.restrictScalars\n        (algebraMap Γ(X, U.1) (AdicCompletion (I.ideal U) Γ(X, U.1)))).obj M)\n          →ₗ[Γ(X, U.1)] Γ(F.obj.obj (op n), U.1))\n    (q : ∀ n : ℕ, N →+ Γ(H.obj.obj (op n), U.1))\n    (hp : ∀ n : ℕ, Function.Surjective (p n))\n    (hpk : ∀ (n : ℕ) (x : M), p n x = 0 ↔\n      x ∈ ((I.ideal U).map\n        (algebraMap Γ(X, U.1) (AdicCompletion (I.ideal U) Γ(X, U.1)))) ^ (n + 1) •\n          (⊤ : Submodule (AdicCompletion (I.ideal U) Γ(X, U.1)) M))\n    (hqk : ∀ (n : ℕ) (y : N), q n y = 0 ↔\n      y ∈ ((I.ideal U).map\n        (algebraMap Γ(X, U.1) (AdicCompletion (I.ideal U) Γ(X, U.1)))) ^ (n + 1) •\n          (⊤ : Submodule (AdicCompletion (I.ideal U) Γ(X, U.1)) N))\n    (hf : ∀ (n : ℕ) (x : M), q n (f x) = (α.hom.app (op n)).app U.1 (p n x))\n    (ht : ∀ (l m : ℕ) (h : m ≤ l) (x : M),\n      p m x = (F.obj.map (homOfLE h).op).app U.1 (p l x)) :\n    ∀ m : ℕ, Set.range (fun z : f.hom.ker ↦ p m (f.hom.ker.subtype z)) =\n      Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op)).app U.1)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T131949-L-4087785",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T131949-L-4087785",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
