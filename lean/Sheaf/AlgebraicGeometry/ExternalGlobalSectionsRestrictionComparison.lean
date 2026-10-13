@@ -6,6 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
+import Sheaf.AlgebraicGeometry.ExternalSectionsOpenComparison
 
 /-! # Restriction compatibility of external global sections
 
@@ -41,6 +42,7 @@ def externalSectionsTopIso
   (scalarPresheaf (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)).mapIso
     (eqToIso (by simp))
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The external section comparison is a morphism of presheaves on the second factor.
 Its components identify with the canonical comparisons on the open subschemes.
 Source: Stacks Project, Tag 0BED, degree-zero cup product; Tags 0096 and 0097,
@@ -85,7 +87,38 @@ theorem exists_externalSectionsRestrictionComparison
               (externalCupCoefficients f (V.ι ≫ g) F (G.restrict V.ι)) (op ⊤),
           c.app (op V) ≫ eT.hom = eS.hom ≫
             ModuleCat.ofHom
-              (externalGlobalSectionsTensor f (V.ι ≫ g) F (G.restrict V.ι)) := by sorry
+              (externalGlobalSectionsTensor f (V.ι ≫ g) F (G.restrict V.ι)) := by
+  let c : scalarPresheaf g G ⋙
+      MonoidalCategory.tensorLeft (scalarObj f F (op ⊤)) ⟶
+      externalSectionsPushforward f g F G :=
+    { app := fun V ↦ externalSectionsComponent f g F G V.unop
+      naturality := fun _ _ i ↦ externalSectionsComponent_naturality f g F G i }
+  refine ⟨c, ?_, ?_⟩
+  · have ht : (externalSectionsTopIso f g F G).hom =
+        𝟙 (scalarObj (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) (op ⊤)) := by
+      change (scalarPresheaf (pullback.fst f g ≫ f)
+        (externalCupCoefficients f g F G)).map (𝟙 (op ⊤)) = _
+      exact (scalarPresheaf (pullback.fst f g ≫ f)
+        (externalCupCoefficients f g F G)).map_id (op ⊤)
+    rw [ht]
+    erw [Category.comp_id]
+    apply ModuleCat.hom_ext
+    apply TensorProduct.ext'
+    intro s t
+    change tmulSection
+        (scalarPullbackGlobalSection f (pullback.fst f g) F (pullback.snd f g ⁻¹ᵁ ⊤) s)
+        (scalarUnitSection g (pullback.snd f g) G ⊤ t) =
+      tmulSection (M := (tensorPullback (pullback.fst f g)).obj F)
+        (N := (tensorPullback (pullback.snd f g)).obj G)
+        (tensorPullbackTopSection (pullback.fst f g) F s)
+        (tensorPullbackTopSection (pullback.snd f g) G t)
+    dsimp only [scalarPullbackGlobalSection, LinearMap.comp_apply, scalarUnitSection,
+      scalarRestriction, tensorPullbackTopSection]
+    congr 1
+    exact (presheaf_map_id_apply (M := (tensorPullback (pullback.snd f g)).obj G)
+        (homOfLE (by simp : ⊤ ≤ pullback.snd f g ⁻¹ᵁ ⊤)) _).symm
+  · intro V
+    exact externalSectionsComponent_openComparison f g F G V
 
 end
 end AlgebraicGeometry.Scheme.Modules

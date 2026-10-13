@@ -15,37 +15,37 @@
  ],
  "proof": [
   {
-   "text": "For V in Y, restrict the pr_1 pullback of s in Gamma(X,F) to pr_2 inverse-image V, and apply the pr_2 pullback unit to t in G(V). The tensor section of the two is bilinear over k: the scalar structure maps agree by the fibre-product equation. TensorProduct.lift therefore defines c_V. Naturality of the adjunction units and tmulSection_map show that c_V commutes with restrictions, first on pure tensors and then by tensor induction. At the top open, the additional restriction by preimage_top is exactly tensorPullbackTopSection in each factor, proving the normalization equation.",
+   "text": "Use the explicit component family externalSectionsComponent and its naturality from [lem-sc-external-sections-components] as the app and naturality fields of a Lean natural transformation. No existential choice of a component family is used.",
    "uses": [
-    "def-sc-scalar-global-sections-comparison",
-    "def-sc-field-linear-module-cohomology-operations"
+    "lem-sc-external-sections-components"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The base change of V→Y identifies X times V with the open pr_2 inverse-image V. On sources, the restriction section iso identifies G restricted to V at top with G(V), preserving the k-action; tensor with Gamma(X,F) to obtain eS. On targets, restrict the external coefficient along this open immersion. Identify restriction with tensor pullback by the open-immersion unit equation, identify pullbacks on the two factors by composition of adjunctions, and identify the pullback of their tensor by the module-pullback-tensor comparison. These give eT on scalar global sections. Each comparison preserves the pulled-back sections by its unit equation. Thus c_V followed by eT equals eS followed by the external tensor comparison over V on pure tensors; tensor induction proves the square for all tensors. Empty opens and zero modules require no exception since all the comparisons are functorial isomorphisms.",
+   "text": "At the top open, externalSectionsTopIso is the section map of the equality preimage_top. Test on pure tensors. The first factor is definitionally tensorPullbackTopSection; for the second, the additional restriction from preimage_top to top is the identity. PresheafOfModules.map_id gives the normalization equation with externalGlobalSectionsTensor.",
    "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-module-pullback-tensor",
+    "lem-sc-external-sections-components",
     "def-sc-scalar-global-sections-comparison"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For each open V apply externalSectionsComponent_openComparison to this same explicitly defined component. Its source and target are definitionally the two evaluations in the required local square. Assemble the natural transformation, normalization equation, and local comparison witnesses with the existential and conjunction constructors.",
+   "uses": [
+    "lem-sc-external-sections-open-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations",
   "def-sc-scalar-global-sections-comparison",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-module-pullback-tensor",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "lem-sc-external-sections-components",
+  "lem-sc-external-sections-open-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, omitted degree-zero canonical-cup verification; restriction compatibility spelled out using Tags 0096, 0097, 01CD; source read at https://stacks.math.columbia.edu/tag/0BED"
+  "place": "Tag 0BED, explicit degree-zero section construction and tensor-extensionality normalization; open-subscheme identification isolated in lem-sc-external-sections-open-comparison."
  },
  "mathlib_searches": [
   {
@@ -132,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T111901-L-3055628",
+  "landing": "20261013T122443-L-3609688",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
