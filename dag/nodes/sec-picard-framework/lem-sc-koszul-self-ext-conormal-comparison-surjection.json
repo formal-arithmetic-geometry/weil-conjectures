@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+ "kind": "statement",
+ "title": "Surjective comparison from dual exterior conormal to self Ext",
+ "statement": "Let i:Z→Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], V an open of Z and n a natural number. Suppose that every z∈V has an affine neighborhood U of i(z) for which the ideal i.ker.ideal U [def-sbc-closed-immersion-ideal-sheaf] is the span of a finite Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence]. Put C=i*ker(i) using tensor pullback [def-pc-module-pullback], B=i_*O_Z, and G=H^n(RHom_Y(B[0],B[0])) [def-pc-derived-category, def-pur-derived-internal-hom]. Then there exists an O_V-linear morphism from the restriction to V of Hom_Z(exteriorSheaf(C,n),O_Z) [def-sc-sheaf-exterior-power, def-pur-sheaf-hom] to (i*G)|V which is surjective on every module stalk [def-weil-pbc-module-stalk]. No injectivity, inverse or compatibility with Yoneda products is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power",
+  "def-weil-pbc-module-stalk"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03EM",
+  "place": "Linear sheaf-morphism gluing on a covering family; Tag 0BQY supplies the local comparisons."
+ },
+ "proof": [
+  {
+   "text": "Obtain from the local Koszul comparison theorem one neighborhood of every point, the local maps and their equality on every smaller overlap open, together with section surjectivity. The neighborhoods cover the top open since the neighborhood indexed by each point contains that point.",
+   "uses": [
+    "lem-sc-koszul-self-ext-conormal-local-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use existsUnique_hom_of_cover for these neighborhoods mapping to the top open. For any arrow to the pullback of two cover arrows, its composites with both projections determine a subopen of both neighborhoods, so the local compatibility hypothesis supplies exactly the gluing compatibility. Evaluate the glued morphism over the top open at each open included in top to obtain the global module-sheaf map; naturality is the glued morphism naturality. The gluing equation identifies its components on each cover member with the local maps. Represent a target germ at a point on a smaller neighborhood inside that point's chosen cover member. Section surjectivity lifts the representative, and the source germ maps to that target germ. This is the required stalk surjectivity. Empty V gives an empty covering sieve, which covers the empty top open, and a vacuous stalk claim.",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-koszul-self-ext-conormal-local-comparison",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "U2",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/03EM",
+   "place": "Linear sheaf-morphism gluing on a covering family; Tag 0BQY supplies the local comparisons."
+  },
+  "note": "Global gluing and passage from section surjectivity to stalk surjectivity are complete Lean proofs; only compatible affine comparison data remains in the local theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "There is a surjective comparison morphism from dual exterior conormal to the self Ext sheaf of a Koszul regular closed immersion",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective sheaf morphism from the internal dual of the exterior conormal to self Ext on a regular immersion locus",
+   "results": "Eight hits on closed-immersion section surjectivity, subscheme gluing, and free-sheaf generators. None mentions derived self Ext or supplies this map.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "OrzechProperty.bijective_of_surjective_of_injective",
+   "results": "The exact finite-module surjectivity criterion is available, and is used to prove injectivity in the parent. It does not construct the comparison morphism.",
+   "date": "2026-10-13",
+   "verdict": "partial tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "self_ext|selfExt|koszul in Mathlib/AlgebraicGeometry and Mathlib/LinearAlgebra/ExteriorPower; project-wide self_ext and conormal comparison",
+   "results": "No Mathlib hits. The project self-Ext exterior and Yoneda-surjection modules import the parent and cannot be used without a cycle. The independent stalk-basis declaration gives ranks, not a sheaf map. Blueprint searches for self Ext and dual exterior conormal both find zero blueprint nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulSelfExtDualExteriorConormal",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Self-coefficient Ext calculation: constructing and gluing the comparison from the dual exterior conormal, followed only by the local spanning conclusion.",
+   "via": [
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtConormalComparisonSurjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtConormalComparisonSurjection.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_self_ext_conormal_comparison_surjection",
+  "statement": "theorem koszulRegularImmersion_self_ext_conormal_comparison_surjection\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (V : Z.Opens) (n : ℕ)\n    (hregular : ∀ z : Z, z ∈ V → ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let T := (Scheme.Modules.restrictFunctor V.ι).obj\n      ((Scheme.Modules.tensorPullback i).obj G)\n    let F := (Scheme.Modules.restrictFunctor V.ι).obj\n      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))\n    ∃ φ : F ⟶ T, ∀ z : V.toScheme, Function.Surjective (φ.stalkLinearMap z)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T130350-L-3952540",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T130350-L-3952540",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

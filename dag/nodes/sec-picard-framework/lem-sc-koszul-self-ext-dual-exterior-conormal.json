@@ -20,52 +20,51 @@
  },
  "proof": [
   {
-   "text": "On a regular affine chart resolve A/I by the actual augmented Koszul projective resolution. Sheafify its augmentation and use open restriction of derived internal Hom and the bounded-above finite-free Hom model. The differential of Hom(K,A/I) is zero, since every generator lies in I. Thus degree-n cohomology is Hom_A(wedge^n A^m,A/I), which equals Hom_(A/I)(wedge^n((A/I)^m),A/I).",
+   "text": "Obtain a stalk-surjective O_V-linear comparison from the dual exterior conormal to self Ext. This new statement contains the affine Koszul Hom construction and overlap gluing only; injectivity is not assumed.",
    "uses": [
-    "new-j3-koszul-projective-resolution",
-    "lem-sc-affine-quotient-resolution-sheafification",
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-sc-derived-hom-finite-free-model"
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection"
    ],
    "elementary": false
   },
   {
-   "text": "Identify (A/I)^m with I/I² by the regular conormal basis. This identifies the preceding module with the dual of wedge^n(I/I²). Sheafifying identifies it with dual(exteriorSheaf C n) on the inverse-image chart, where C=i*ker(i). The quotient scalar action is the usual A/I action, so the tensor pullback after cohomology gives that same module.",
+   "text": "At a point choose one regular chart. The regular conormal basis and affine frame make the determinant pairing from the exterior of the conormal dual to the dual exterior conormal surjective on every subopen of that chart. Represent stalk elements by sections on smaller neighborhoods to obtain stalk surjectivity, and transport through open restriction and exteriorSheaf_restrict_iso. This produces a surjective stalk map q from the exterior of the restricted conormal dual to the dual exterior conormal.",
    "uses": [
     "lem-sc-koszul-conormal-basis",
-    "lem-sc-affine-conormal-frame"
+    "lem-sc-affine-conormal-frame",
+    "lem-sc-exterior-dual-pairing-construction",
+    "lem-sc-exterior-dual-pairing-local-bijective",
+    "lem-sc-exterior-sheaf-restrict-iso"
    ],
    "elementary": false
   },
   {
-   "text": "For a substitution f′=A f use exteriorPower.map of the corresponding degree-one linear map in every Koszul degree. The contraction-sum formula shows it commutes with the differential and it lifts the identity of A/I. On reduction modulo I its degree-one map is exactly the map on conormal classes, and its degree-n map is their nth exterior power. Hom into A/I transposes this map, exactly the transition on the dual exterior conormal. Comparison maps lifting the identity of A/I are homotopic because both are projective resolutions; hence choices give identical cohomology maps. These formulas commute with localization. Refine intersections by affine subopens and glue the local maps and inverses by the sheaf condition. A common K-injective Hom model compares the given derived universe. Degree zero, degrees above the chart length, and empty V satisfy the same formulas.",
+   "text": "The independent self-Ext stalk-bases theorem gives finite bases for the source of q and the self-Ext target on the same n-element-subset index set. Their basis equivalence is injective. The composite of q with the comparison is surjective, so OrzechProperty.bijective_of_surjective_of_injective over the commutative scheme stalk ring makes that composite bijective. Since q is surjective, injectivity of the composite implies injectivity of the comparison itself. Its surjectivity was already given. Detect a sheaf-module isomorphism by bijectivity on all stalks and package it with asIso. This also handles empty V, degree zero and degrees above the chart length without extra hypotheses.",
    "uses": [
-    "new-j3-koszul-projective-resolution",
-    "new-q2-koszul-generator-chain-map",
-    "lem-sc-derived-hom-finite-free-model",
-    "lem-sc-affine-conormal-frame"
+    "lem-sc-koszul-self-ext-stalk-bases",
+    "lem-weil-pbc-module-iso-on-stalks"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "new-j3-koszul-projective-resolution",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-koszul-self-ext-conormal-comparison-surjection",
   "lem-sc-koszul-conormal-basis",
   "lem-sc-affine-conormal-frame",
-  "new-q2-koszul-generator-chain-map"
+  "lem-sc-exterior-dual-pairing-construction",
+  "lem-sc-exterior-dual-pairing-local-bijective",
+  "lem-sc-exterior-sheaf-restrict-iso",
+  "lem-sc-koszul-self-ext-stalk-bases",
+  "lem-weil-pbc-module-iso-on-stalks"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "M4",
+  "agent": "U2",
   "date": "2026-10-13",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
   },
-  "note": "The zero-differential Koszul Hom calculation of 0BQY followed by the conormal identification. The explicit overlap argument is supplied here; the exterior-of-dual determinant pairing is a separate, existing lemma."
+  "note": "Decomposition: construction and spanning are split off; injectivity is proved using the existing independent stalk bases, the determinant pairing and Mathlib OrzechProperty. No target, existing signature, chapter or unit route is changed."
  },
  "mathlib_searches": [
   {
@@ -144,9 +143,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M4",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T121222-L-3506236",
+  "landing": "20261013T130350-L-3952540",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
