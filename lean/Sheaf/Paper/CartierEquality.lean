@@ -12,7 +12,6 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import Mathlib.FieldTheory.FinTrdeg
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.Dimension.Constructions
 import Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
 import Sheaf.RingTheory.FractionFieldCompleteIntersectionCotangent
 
