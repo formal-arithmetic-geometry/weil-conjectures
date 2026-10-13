@@ -11669,3 +11669,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineUnion (stage 3; reviewer PASS; first push; landing 20261013T082355-L-1639702 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:23 L: merged deliver/M2/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryChainNaturality (stage 3; reviewer PASS; after a return; landing 20261013T082355-L-1639868 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:23 L: merged deliver/M2/Sheaf.FieldTheory.FieldExtensionCompleteIntersectionSubalgebras (stage 3; reviewer PASS; first push; landing 20261013T082356-L-1640039 (interface); batch 20261013T082326; modules 2; new nodes 1)
+- 08:23 L: merged deliver/M3/Sheaf.AlgebraicGeometry.PerfectStalkQuasiIsoDetection (stage 3; reviewer PASS; first push; landing 20261013T082356-L-1640239 (interface); batch 20261013T082326; modules 3; new nodes 2)

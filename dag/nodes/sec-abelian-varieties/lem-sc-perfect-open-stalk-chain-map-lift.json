@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-perfect-open-stalk-chain-map-lift",
+ "kind": "statement",
+ "title": "Lifting an arbitrary perfect open-site stalk chain map",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an affine open, $x\\in U$, and $P,Q$ strictly perfect complexes of module sheaves on the slice site over $U$ [def-pc-perfect-complex]. Write $T$ for the termwise open module stalk functor at $x$ [def-sc-open-module-stalk-functor]. Every chain map $t:T(P)\\to T(Q)$ [def-weil-abstract-derived-category] is represented on an affine open $V\\subseteq U$ containing $x$: for the restriction functor $R$ from $U$ to $V$ and the termwise stalk functor $S$ at $x$ on $V$, there exist a natural isomorphism $e:R\\circ S\\cong T$ (composition in functor order) and a chain map $g:R(P)\\to R(Q)$ with $S(g)=e_P\\,t\\,e_Q^{-1}$ (composition in categorical order). No homotopy inverse or quasi-isomorphism of $t$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine proof case (1), finite-component calculation; More on Algebra Tag 0BC7 (2); https://stacks.math.columbia.edu/tag/09RE and https://stacks.math.columbia.edu/tag/0BC7"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-sc-open-module-stalk-functor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the slice/open-subscheme equivalence in def-sc-open-module-stalk-functor. The given finite-free retractions show that each term is finitely presented. Apply the finite-presentation internal-Hom stalk comparison to represent each stalk component by a local sheaf map. Only the finite intersection of the two support intervals has nonzero components; intersect their finitely many neighbourhoods and choose an affine neighbourhood containing x inside U. Equivalently, sandwich each component between the free retractions and lift its finite matrix entries as germs.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-sc-open-module-stalk-functor",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each relevant degree the chain equation has zero stalk. Injectivity of the internal-Hom stalk comparison identifies this with a zero germ of the local error map. The germ equality criterion shrinks the neighbourhood until this map is zero. There are finitely many equations, including boundary degrees adjacent to the support intervals. Intersect the resulting opens and choose a smaller affine neighbourhood V. Outside those degrees one of the terms is zero, so the equations hold automatically. The components now define a chain map g.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cofinality of neighbourhoods inside V identifies iterated restriction followed by the V stalk with the original U stalk, on every sheaf and every map. Compose the slice/open-subscheme equivalences and the open immersion stalk-ring isomorphisms to obtain e : R composed with S is naturally isomorphic to T. Apply it termwise to complexes. The chosen germ representatives give S(g)=e(P).hom composed with t composed with e(Q).inv. This is an equality of chain maps, not merely of derived classes. Zero ranks and empty support intersections use zero maps.",
+   "uses": [
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-sc-open-module-stalk-functor",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 09RE and 0BC7 (2), expanded by M3 to finite-free retracts and the open-site stalk interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chain map between bounded complexes of finite projective sheaves at a stalk extends on a neighbourhood",
+   "results": "8 hits: TopCat.stalkToFiber, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk, TopCat.Presheaf.stalk_hom_ext, AlgebraicGeometry.germ_comp_stalkToFiberRingHom, TopCat.Presheaf.stalk_hom_ext_iff, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk, AlgebraicGeometry.stalkToFiberRingHom_germ",
+   "verdict": "no matching neighbourhood descent theorem",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy, \"stalk\"",
+   "results": "0 hits: ",
+   "verdict": "no matching neighbourhood descent theorem",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "(homotopy|Homotopy|chainMap).*(stalk|Stalk)|(stalk|Stalk).*(homotopy|Homotopy|chainMap)",
+   "results": "0 hits: ",
+   "verdict": "no matching neighbourhood descent theorem",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain map between bounded complexes of finite projective sheaves at a stalk extends on a neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectStalkQuasiIsoDetection",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: the local perfect-model comparison in the route through perfect H0 locally closed; arbitrary inverse chain-map descent",
+   "via": [
+    "lem-sc-perfect-stalk-quasi-iso-detection",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenStalkChainMapLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_open_stalk_chainMap_lift",
+  "statement": "theorem exists_affine_perfect_open_stalk_chainMap_lift\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) (hU : IsAffineOpen U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)\n    (t : ((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj P ⟶\n      ((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).obj Q) :\n    ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (hVU : V ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)\n      let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)\n      ∃ (e : R ⋙ S ≅ T) (g : R.obj P ⟶ R.obj Q),\n        S.map g = (e.app P).hom ≫ t ≫ (e.app Q).inv",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T082356-L-1640239",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T082356-L-1640239",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

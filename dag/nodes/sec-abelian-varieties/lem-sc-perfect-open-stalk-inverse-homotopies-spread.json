@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-perfect-open-stalk-inverse-homotopies-spread",
+ "kind": "statement",
+ "title": "Spreading two prescribed inverse homotopies",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an affine open, $x\\in U$, $P,Q$ strictly perfect complexes on the slice over $U$ [def-pc-perfect-complex], and $f:P\\to Q$ a chain map [def-weil-abstract-derived-category]. Let $V\\subseteq U$ be an affine open containing $x$, let $R$ be termwise restriction from $U$ to $V$, and let $S$ be the termwise open module stalk functor at $x$ on $V$ [def-sc-open-module-stalk-functor]. Suppose a specified map $g:R(Q)\\to R(P)$ has homotopies $S(R(f)\\,g)\\simeq 1$ and $S(g\\,R(f))\\simeq 1$. Then there is an affine open $W\\subseteq U$ containing $x$ and a map $g_W:Q|_W\\to P|_W$ with homotopies $(f|_W)\\,g_W\\simeq 1$ and $g_W\\,(f|_W)\\simeq 1$. The given forward map is preserved; no quasi-isomorphism hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine proof case (1), finite-component calculation; More on Algebra Tag 0BC7 (2); https://stacks.math.columbia.edu/tag/09RE and https://stacks.math.columbia.edu/tag/0BC7"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-sc-open-module-stalk-functor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the two bounded complexes and their finite-free retractions to V. Choose the two input homotopies at its stalk. Their reverse-degree components have finite support, because outside the bounded intervals either source or target term is zero. Use the finite-presentation internal-Hom stalk comparison on each component to represent both finite lists on one common neighbourhood inside V. Alternatively sandwich into the free retracts and lift each of the finitely many matrix entries.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-sc-open-module-stalk-functor",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The homotopy commutation errors have zero stalk by the two given homotopies. The injective internal-Hom stalk comparison and the zero-germ criterion make each error map zero after shrinking. There are finitely many error equations in both homotopies, including adjacent boundary degrees; outside the support terms vanish. Intersect the neighbourhoods and choose an affine open W containing x. The lifted reverse-degree components, zero off reverse degree, satisfy Homotopy.zero and Homotopy.comm for the two composites and identities.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the given map g from V to W. The canonical comparison between iterated slice restriction and direct restriction from U to W transports it to gW. Naturality identifies the restricted forward map with the specified restriction of f, identifies the composites, and preserves the identity maps. Transport the two constructed homotopies through these comparison isomorphisms to get the displayed inverse homotopies. This step never invokes a quasi-isomorphism detection theorem.",
+   "uses": [
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-sc-open-module-stalk-functor",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 09RE and 0BC7 (2), expanded by M3 to finite-free retracts and the open-site stalk interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chain map between bounded complexes of finite projective sheaves at a stalk extends on a neighbourhood",
+   "results": "8 hits: TopCat.stalkToFiber, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk, TopCat.Presheaf.stalk_hom_ext, AlgebraicGeometry.germ_comp_stalkToFiberRingHom, TopCat.Presheaf.stalk_hom_ext_iff, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk, AlgebraicGeometry.stalkToFiberRingHom_germ",
+   "verdict": "no matching neighbourhood descent theorem",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy, \"stalk\"",
+   "results": "0 hits: ",
+   "verdict": "no matching neighbourhood descent theorem",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "(homotopy|Homotopy|chainMap).*(stalk|Stalk)|(stalk|Stalk).*(homotopy|Homotopy|chainMap)",
+   "results": "0 hits: ",
+   "verdict": "no matching neighbourhood descent theorem",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain map between bounded complexes of finite projective sheaves at a stalk extends on a neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectStalkQuasiIsoDetection",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: the local perfect-model comparison in the route through perfect H0 locally closed; descent of the two inverse homotopies",
+   "via": [
+    "lem-sc-perfect-stalk-quasi-iso-detection",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenStalkInverseHomotopiesSpread.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_open_stalk_inverse_homotopies_spread",
+  "statement": "theorem exists_affine_perfect_open_stalk_inverse_homotopies_spread\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) (hU : IsAffineOpen U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)\n    (f : P ⟶ Q) (V : X.Opens) (hxV : x ∈ V) (hV : IsAffineOpen V) (hVU : V ≤ U)\n    (g : ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).obj Q ⟶\n      ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).obj P)\n    (hfg : Nonempty (Homotopy\n      (((openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)).map\n        ((((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).map f) ≫ g)) (𝟙 _)))\n    (hgf : Nonempty (Homotopy\n      (((openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)).map\n        (g ≫ (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)).map f))) (𝟙 _))) :\n    ∃ (W : X.Opens) (_hxW : x ∈ W) (_hW : IsAffineOpen W) (hWU : W ≤ U),\n      let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)\n      ∃ (gW : R.obj Q ⟶ R.obj P),\n        Nonempty (Homotopy (R.map f ≫ gW) (𝟙 _)) ∧\n        Nonempty (Homotopy (gW ≫ R.map f) (𝟙 _))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T082356-L-1640239",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T082356-L-1640239",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
