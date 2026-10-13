@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-directed-tensor-cocones-colimit-n3",
+ "kind": "statement",
+ "title": "Colimits of coherent directed iterated tensor cocones",
+ "statement": "Let $I$ be a directed preorder, $F:I\\to\\mathrm{CommRing}$ a diagram with colimit $A$ [def-weil-pbc-category-colimit], $i_0\\le i$, and $B_0,C_0$ commutative $F(i_0)$-algebras. Put $B_j=F(j)\\otimes_{F(i_0)}B_0$, $C_j=F(j)\\otimes_{F(i_0)}C_0$, $B=A\\otimes_{F(i_0)}B_0$, $C=A\\otimes_{F(i_0)}C_0$ and $J=\\{j\\in I\\mid i\\le j\\}$. Let $P,Q$ be commutative rings with $Q$ a $P$-algebra, and give $B,B_j$ $P$-algebra structures. Give ring diagrams $D,E:J\\to\\mathrm{CommRing}$ in a common universe, equivalences $d_j:D(j)\\simeq B_j\\otimes_PQ$, $c_j:E(j)\\simeq C_j$, cocones $c_D,c_E$, equivalences $d_\\infty:c_D.\\mathrm{pt}\\simeq B\\otimes_PQ$, $c_\\infty:c_E.\\mathrm{pt}\\simeq C$, and $P$-linear maps $\\mu_j:B_j\\to B$. Suppose $\\mu_j$ is the canonical tensor coprojection and that $d_\\infty c_D.\\iota_j=(\\mu_j\\otimes\\mathrm{id}_Q)d_j$, while $c_\\infty c_E.\\iota_j$ is the canonical $C_j\\to C$ composed with $c_j$. Suppose for every $j\\le k$ there is a $P$-linear canonical tensor transition $\\beta_{kj}:B_j\\to B_k$ such that $d_kD(j\\le k)=(\\beta_{kj}\\otimes\\mathrm{id}_Q)d_j$, and $c_kE(j\\le k)$ is the canonical transition $C_j\\to C_k$ composed with $c_j$. Then both $c_D$ and $c_E$ are colimit cocones. No comparison map between $D$ and $E$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00D6, 00D7 and 00DD (lemma-tensor-products-commute-with-limits), directed representatives, eventual equality, and tensor products commuting with colimits; direct proof of 00DD read online on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "On the nonempty cofinal tail above i, representatives and eventual equality identify the colimits of the canonical B_j and C_j systems with B and C. Move any representative outside the tail to a common upper bound with i. Transport this through c_j, c∞, and the target transition and leg equations to obtain the colimit universal property of c_E.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A compatible family of ring maps out of D restricts to compatible maps out of B_j and maps out of Q. The Q maps are identical by directedness, since all transitions fix Q. The B_j maps extend uniquely to B by the same representative and eventual-equality criterion. Their agreement with the Q map on P holds at any stage, using μ_j. The tensor universal property gives the unique extension from B tensor_P Q. The source transition and leg equations transport this universal property through d_j and d∞ to c_D.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-13",
+  "place": "Stage-3 decomposition of the corrected comparison-system statement; explicit conjugation of the global comparison and independent colimit criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Directed colimits of commutative rings and tensor products with fixed algebra canonical cocone is a colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a directed diagram of commutative rings canonical cocones with points tensor products of its colimit are colimits, including another tensor product over a fixed ring",
+   "results": "8 hits: CommRingCat.coproductCoconeIsColimit, CommRingCat.coproductCoconeIsColimit_desc, TensorProduct.directLimitRight, CommRingCat.coproductCocone_pt, DirectedSystem.rTensor, TensorProduct.toDirectLimit, DirectedSystem.lTensor, CommRingCat.coproductCocone",
+   "date": "2026-10-13",
+   "verdict": "component lemmas; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]ocone|[Ii]sColimit.*tensor|tensor.*[Ii]sColimit",
+   "results": "23 hits: Mathlib/Algebra/Category/Ring/Constructions.lean, Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean",
+   "date": "2026-10-13",
+   "verdict": "component lemmas; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ComparisonMapBaseChangeSystem",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules'); algebra comparison-map descent in Tag 02JO (3); Base change extends a finite-stage tensor comparison to a pushout system; Colimits of coherent directed iterated tensor cocones",
+   "via": [
+    "lem-weil-pbc-comparison-map-base-change-system",
+    "lem-weil-pbc-finite-presentation-comparison-system",
+    "lem-weil-pbc-finite-presentation-model-stage",
+    "lem-weil-pbc-colimit-flat-ring-map-stage",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DirectedTensorCoconesColimit",
+  "file": "lean/Sheaf/RingTheory/DirectedTensorCoconesColimit.lean",
+  "declaration": "RingHom.isColimit_directed_tensor_cocones",
+  "statement": "theorem isColimit_directed_tensor_cocones\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{v}) [HasColimit F]\n    (i₀ : I) (B₀ : Type w) (C₀ : Type x) [CommRing B₀] [CommRing C₀]\n    [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀]\n    (P Q : Type y) [CommRing P] [CommRing Q] [Algebra P Q]\n    (aP : letI := (colimit.ι F i₀).hom.toAlgebra\n      Algebra P (↥(colimit F) ⊗[F.obj i₀] B₀))\n    (i : I) (hi : i₀ ≤ i)\n    (aPs : ∀ j : {j : I // i ≤ j},\n      letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n      Algebra P (↥(F.obj j.val) ⊗[F.obj i₀] B₀))\n    (D E : {j : I // i ≤ j} ⥤ CommRingCat.{max v w x y})\n    (d : ∀ j : {j : I // i ≤ j},\n      letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n      letI := aPs j\n      ↥(D.obj j) ≃+* (↥(F.obj j.val) ⊗[F.obj i₀] B₀) ⊗[P] Q)\n    (c : ∀ j : {j : I // i ≤ j},\n      letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n      ↥(E.obj j) ≃+* (↥(F.obj j.val) ⊗[F.obj i₀] C₀))\n    (cD : Cocone D) (cE : Cocone E)\n    (dLim : letI := (colimit.ι F i₀).hom.toAlgebra\n      letI := aP\n      ↥cD.pt ≃+* (↥(colimit F) ⊗[F.obj i₀] B₀) ⊗[P] Q)\n    (cLim : letI := (colimit.ι F i₀).hom.toAlgebra\n      ↥cE.pt ≃+* (↥(colimit F) ⊗[F.obj i₀] C₀))\n    (μs : ∀ j : {j : I // i ≤ j},\n      letI := (colimit.ι F i₀).hom.toAlgebra\n      letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n      letI := aPs j\n      letI := aP\n      (↥(F.obj j.val) ⊗[F.obj i₀] B₀) →ₐ[P]\n        (↥(colimit F) ⊗[F.obj i₀] B₀))\n    (hμs : ∀ j : {j : I // i ≤ j},\n      letI := (colimit.ι F i₀).hom.toAlgebra\n      letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n      let αj : F.obj j.val →ₐ[F.obj i₀] ↥(colimit F) :=\n        { (colimit.ι F j.val).hom with\n          commutes' := fun s ↦\n            congrArg (fun f : F.obj i₀ ⟶ colimit F ↦ f s)\n              (colimit.w F (homOfLE (hi.trans j.property))) }\n      (μs j).toRingHom =\n        (Algebra.TensorProduct.map αj (AlgHom.id (F.obj i₀) B₀)).toRingHom)\n    (hcD : ∀ j : {j : I // i ≤ j},\n      letI := (colimit.ι F i₀).hom.toAlgebra\n      letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n      letI := aPs j\n      letI := aP\n      dLim.toRingHom.comp (cD.ι.app j).hom =\n        (Algebra.TensorProduct.map (μs j) (AlgHom.id P Q)).toRingHom.comp\n          (d j).toRingHom)\n    (hDt : ∀ {j k : {j : I // i ≤ j}} (r : j ⟶ k),\n      letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n      letI := (F.map (homOfLE (hi.trans k.property))).hom.toAlgebra\n      letI := aPs j\n      letI := aPs k\n      ∃ β : (↥(F.obj j.val) ⊗[F.obj i₀] B₀) →ₐ[P]\n          (↥(F.obj k.val) ⊗[F.obj i₀] B₀),\n        (let αjk : F.obj j.val →ₐ[F.obj i₀] F.obj k.val :=\n          { (F.map (homOfLE (leOfHom r))).hom with\n            commutes' := fun s ↦\n              congrArg (fun f : F.obj i₀ ⟶ F.obj k.val ↦ f s)\n                (F.map_comp (homOfLE (hi.trans j.property))\n                  (homOfLE (leOfHom r))).symm };\n          β.toRingHom =\n            (Algebra.TensorProduct.map αjk\n              (AlgHom.id (F.obj i₀) B₀)).toRingHom) ∧\n        (d k).toRingHom.comp (D.map r).hom =\n          (Algebra.TensorProduct.map β (AlgHom.id P Q)).toRingHom.comp\n            (d j).toRingHom)\n    (hcE : ∀ j : {j : I // i ≤ j},\n      letI := (colimit.ι F i₀).hom.toAlgebra\n      letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n      let αj : F.obj j.val →ₐ[F.obj i₀] ↥(colimit F) :=\n        { (colimit.ι F j.val).hom with\n          commutes' := fun s ↦\n            congrArg (fun f : F.obj i₀ ⟶ colimit F ↦ f s)\n              (colimit.w F (homOfLE (hi.trans j.property))) }\n      cLim.toRingHom.comp (cE.ι.app j).hom =\n        (Algebra.TensorProduct.map αj (AlgHom.id (F.obj i₀) C₀)).toRingHom.comp\n          (c j).toRingHom)\n    (hEt : ∀ {j k : {j : I // i ≤ j}} (r : j ⟶ k),\n      letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n      letI := (F.map (homOfLE (hi.trans k.property))).hom.toAlgebra\n      let αjk : F.obj j.val →ₐ[F.obj i₀] F.obj k.val :=\n          { (F.map (homOfLE (leOfHom r))).hom with\n            commutes' := fun s ↦\n              congrArg (fun f : F.obj i₀ ⟶ F.obj k.val ↦ f s)\n                (F.map_comp (homOfLE (hi.trans j.property))\n                  (homOfLE (leOfHom r))).symm }\n      (c k).toRingHom.comp (E.map r).hom =\n        (Algebra.TensorProduct.map αjk (AlgHom.id (F.obj i₀) C₀)).toRingHom.comp\n          (c j).toRingHom)\n    : Nonempty (IsColimit cD) ∧ Nonempty (IsColimit cE)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T111907-L-3057451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T111907-L-3057451",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

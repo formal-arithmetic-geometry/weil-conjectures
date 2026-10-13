@@ -11,7 +11,8 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 import Mathlib.RingTheory.TensorProduct.Pi
 import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import Sheaf.RingTheory.ComparisonTensorCocones
+import Sheaf.RingTheory.DirectedTensorCoconesColimit
 
 /-! # Extending a tensor comparison by base change
 
@@ -236,6 +237,28 @@ theorem exists_comparison_map_base_change_system
                     (Algebra.TensorProduct.includeLeftRingHom (R := P)
                       (A := ↥(F.obj j.val) ⊗[F.obj i₀] B₀) (B := Q)) =
                     (Algebra.TensorProduct.map (Algebra.ofId (F.obj j.val) (F.obj j.val))
-                      φ₀).toRingHom) := by sorry
+                      φ₀).toRingHom) := by
+  classical
+  obtain ⟨aPs, D, E, α, d, c, cD, cE, dLim, cLim, μs,
+      hμs, hcD, hDt, hcE, hEt, hcomm, hpush, hcompat⟩ :=
+    exists_comparison_tensor_cocones F i₀ B₀ C₀ φ₀ P Q aP e.toRingHom he
+      i hi aPi μB hμB ψ hψ hlim
+  obtain ⟨⟨hD⟩, ⟨hE⟩⟩ :=
+    isColimit_directed_tensor_cocones F i₀ B₀ C₀ P Q aP i hi
+      aPs D E d c cD cE dLim cLim μs hμs hcD hDt hcE hEt
+  let _ := (colimit.ι F i₀).hom.toAlgebra
+  let _ := aP
+  let f : cD.pt ⟶ cE.pt :=
+    CommRingCat.ofHom (cLim.symm.toRingHom.comp (e.toRingHom.comp dLim.toRingHom))
+  refine ⟨aPs, D, E, α, d, c, cD, cE, f, hD, hE, ?_, ?_, hpush, hcompat⟩
+  · intro j
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro z
+    apply cLim.injective
+    have hz := DFunLike.congr_fun (hcomm j) z
+    simpa [f] using hz
+  · exact cLim.symm.bijective.comp (e.bijective.comp dLim.bijective)
+
 
 end RingHom

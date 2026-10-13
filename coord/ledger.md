@@ -12159,3 +12159,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/N1/Sheaf.AlgebraicGeometry.Morphisms.TraceDiscriminantEvaluationEtaleFibre (stage 3; reviewer PASS; first push; landing 20261013T111906-L-3057022 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/N1/Sheaf.AlgebraicGeometry.Morphisms.TraceDiscriminantSectionLocalization (stage 3; reviewer PASS; first push; landing 20261013T111906-L-3057198 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/N3/Sheaf.AlgebraicGeometry.CommonGenericHypersurfaceAffineOpen (stage 3; reviewer PASS; first push; landing 20261013T111906-L-3057343 (interface); batch 20261013T111833; modules 3; new nodes 2)
+- 11:19 L: merged deliver/N3/Sheaf.RingTheory.ComparisonMapBaseChangeSystem (stage 3; reviewer PASS; first push; landing 20261013T111907-L-3057451 (interface); batch 20261013T111833; modules 3; new nodes 2)
