@@ -5,7 +5,7 @@ Authors: SHEAF group R4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardExternalCechCupBidegree
+public import Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate
 
 /-! # The external Alexander--Whitney differential calculation
 Source: Stacks Project, Tags 0BED and 07MB.
@@ -19,50 +19,6 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
-
-/-- Assemble specified bidegree maps by the tensor-total coproduct universal property.
-Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech.
-(blueprint: lem-sc-picard-external-cech-cup-differential). -/
-def picardExternalCechCupDegreeMaps
-    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
-    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) (G : Y.Modules)
-    (l : ∀ p q : ℕ, ((curriedTensor (ModuleCat.{w} k)).obj
-        (((picardCechFunctor f U).obj F).X p)).obj
-          (((picardCechFunctor g V).obj G).X q) ⟶
-      ((picardCechFunctor (pullback.fst f g ≫ f)
-        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
-          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X (p + q)) :
-    ∀ n : ℕ, (HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)
-        ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
-          (ComplexShape.up ℕ)).X n ⟶ ((picardCechFunctor (pullback.fst f g ≫ f)
-        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
-          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X n :=
-  fun _n ↦ HomologicalComplex.mapBifunctorDesc
-    (fun p q hpq ↦ l p q ≫ eqToHom (congrArg
-      (fun j ↦ ((picardCechFunctor (pullback.fst f g ≫ f)
-        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
-          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X j) hpq))
-
-/-- Each specified bidegree map is recovered by its tensor-total inclusion.
-Source: the coproduct universal property, Stacks Project Tag 0BED.
-(blueprint: lem-sc-picard-external-cech-cup-differential). -/
-theorem picardExternalCechCupDegreeMaps_ι
-    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
-    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) (G : Y.Modules)
-    (l : ∀ p q : ℕ, ((curriedTensor (ModuleCat.{w} k)).obj
-        (((picardCechFunctor f U).obj F).X p)).obj
-          (((picardCechFunctor g V).obj G).X q) ⟶
-      ((picardCechFunctor (pullback.fst f g ≫ f)
-        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
-          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X (p + q))
-    (p q : ℕ) :
-    HomologicalComplex.ιMapBifunctor ((picardCechFunctor f U).obj F)
-      ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
-        (ComplexShape.up ℕ) p q (p + q) rfl ≫
-      picardExternalCechCupDegreeMaps f g U V F G l (p + q) = l p q := by
-  dsimp only [picardExternalCechCupDegreeMaps]
-  rw [HomologicalComplex.ι_mapBifunctorDesc]
-  simp
 
 /-- The adjacent-degree chain equation for degree maps with the front/back coordinates.
 Source: Stacks Project, Tag 07MB, and Tag 0BED, equation-kunneth-on-cech.
@@ -96,7 +52,10 @@ theorem picardExternalCechCupDegreeMaps_comm
       (HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)
         ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
           (ComplexShape.up ℕ)).d n (n + 1) ≫
-        picardExternalCechCupDegreeMaps f g U V F G l (n + 1) := by sorry
+        picardExternalCechCupDegreeMaps f g U V F G l (n + 1) := by
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  exact picardExternalCechCupDegreeMaps_comm_ι f g U V F G l hl n p q hpq
 
 end
 end AlgebraicGeometry.Scheme.Modules
