@@ -6,13 +6,9 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
 public import
   WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
-
-import Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHom
 
 /-! # Raw cohomology pullback and the higher-image comparison
 
@@ -26,6 +22,8 @@ universe u
 open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
+
+set_option backward.isDefEq.respectTransparency true
 
 /-- Raw cohomology with coefficients restricted from W. -/
 noncomputable abbrev higherDirectImageRawOverPresheaf
@@ -57,46 +55,12 @@ noncomputable def higherDirectImageRawOverPullback
     {A B : Over W} (f : A ⟶ B) (U : S.Etale)
     (z : (higherDirectImageRawOverPresheaf Λ k G q B).obj (op U)) :
     (higherDirectImageRawOverPresheaf Λ k G q A).obj (op U) :=
-  (DerivedCategory.Plus.singleFunctor _ 0).map
-      ((upperStarComp (ModuleCat.{u + 1} Λ) f.left (B.hom ≫ k) (A.hom ≫ k)
-        (by rw [← Category.assoc, Over.w])).hom.app _) ≫
-    (((f.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).inv.app _ ≫
-    D+((f.left)^*[ModuleCat.{u + 1} Λ]).map z ≫
-    (D+((f.left)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj
-        (((B.hom)^*[ModuleCat.{u + 1} Λ]).obj G)) ≫
-    (shiftFunctor _ q).map
-      ((((f.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
-        (DerivedCategory.Plus.singleFunctor _ 0).map
-          ((upperStarComp (ModuleCat.{u + 1} Λ) f.left B.hom A.hom
-            (Over.w f).symm).inv.app G))
-
-private lemma raw_presheaf_map_apply
-    (Λ : Type (u + 1)) [CommRing Λ] {Y S : Scheme.{u}} (h : Y ⟶ S) (q : ℤ)
-    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    {T U : S.Etale} (a : T ⟶ U) (z : (higherDirectImagePresheaf Λ h q K).obj (op U)) :
-    (higherDirectImagePresheaf Λ h q K).map a.op z =
+  higherDirectImageRawTrianglePullback Λ f.left (B.hom ≫ k) (A.hom ≫ k)
+    (by rw [← Category.assoc, Over.w]) q _ _
+    ((((f.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
       (DerivedCategory.Plus.singleFunctor _ 0).map
-        (((h)^*[ModuleCat.{u + 1} Λ]).map ((freeSheaf Λ S).map a)) ≫ z := rfl
-
-private lemma pullback_class_naturality
-    {C D E D' E' : Type*} [Category* C] [Category* D] [Category* E]
-    [Category* D'] [Category* E']
-    (F : C ⥤ D) (G : C ⥤ E) (L : D ⥤ E)
-    (SD : D ⥤ D') (SE : E ⥤ E') (LD : D' ⥤ E')
-    (c : G ⟶ F ⋙ L) (t : SD ⋙ LD ≅ L ⋙ SE)
-    {X Y : C} (a : X ⟶ Y) {Z : D'} {Z' : E'}
-    (z : SD.obj (F.obj Y) ⟶ Z) (e : LD.obj Z ⟶ Z') :
-    SE.map (c.app X) ≫ t.inv.app (F.obj X) ≫
-        LD.map (SD.map (F.map a) ≫ z) ≫ e =
-      SE.map (G.map a) ≫ SE.map (c.app Y) ≫ t.inv.app (F.obj Y) ≫ LD.map z ≫ e := by
-  have hc := c.naturality a
-  have ht := t.inv.naturality (F.map a)
-  change G.map a ≫ c.app Y = c.app X ≫ L.map (F.map a) at hc
-  change SE.map (L.map (F.map a)) ≫ t.inv.app (F.obj Y) =
-    t.inv.app (F.obj X) ≫ LD.map (SD.map (F.map a)) at ht
-  rw [LD.map_comp, Category.assoc, ← reassoc_of% ht,
-    ← SE.map_comp_assoc, ← hc, SE.map_comp, Category.assoc]
+        ((upperStarComp (ModuleCat.{u + 1} Λ) f.left B.hom A.hom
+          (Over.w f).symm).inv.app G)) U z
 
 /-- The comparison component of raw pullback with the higher direct image map.
 Source: Stacks Project, Tags 03Q8 and 09Z1; canonical derived-Hom comparison.
@@ -131,7 +95,17 @@ theorem higherDirectImageRawOverPullback_restriction
         ((higherDirectImageRawOverPresheaf Λ k G q B).map a.op z) =
       (higherDirectImageRawOverPresheaf Λ k G q A).map a.op
             (higherDirectImageRawOverPullback Λ k G q f U z) := by
-  sorry
+  let v : D+((f.left)^*[ModuleCat.{u + 1} Λ]).obj
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj
+        (((B.hom)^*[ModuleCat.{u + 1} Λ]).obj G)) ⟶
+      (DerivedCategory.Plus.singleFunctor _ 0).obj
+        (((A.hom)^*[ModuleCat.{u + 1} Λ]).obj G) :=
+    (((f.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
+      (DerivedCategory.Plus.singleFunctor _ 0).map
+        ((upperStarComp (ModuleCat.{u + 1} Λ) f.left B.hom A.hom
+          (Over.w f).symm).inv.app G)
+  exact higherDirectImageRawTrianglePullback_restriction Λ f.left
+    (B.hom ≫ k) (A.hom ≫ k) (by rw [← Category.assoc, Over.w]) q _ _ v U z T a
 
 /-- Raw pullback intertwines the fixed cohomology-presheaf comparison with the
 canonical higher-image transition. This requires no limit or qcqs assumptions.

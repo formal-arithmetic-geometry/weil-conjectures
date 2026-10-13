@@ -2,7 +2,7 @@
  "id": "sbc-lem-higher-image-raw-over-restriction",
  "kind": "statement",
  "title": "Raw over restriction component",
- "statement": "For a commutative ring Λ, schemes Y, Y′, S, morphisms a:Y′→Y, h:Y→S, h′:Y′→S with a≫h=h′, bounded-below derived module sheaves K on Y and K′ on Y′, integer q, and a specified derived coefficient morphism v:a* K→K′ [def-weil-pbc-derived-categories], [def-weil-pbc-etale-sheaves], define r_U(z) by the single-complex map of the pullback composition isomorphism, the inverse single-complex comparison, derived pullback of z, the shift comparison, and v[q] [lem-weil-pbc-inverse-image-composition]. For etale S-objects T,U, b:T→U and a raw class z∈Hom(h*Λ[U][0],K[q]), one has r_T(z|_T)=r_U(z)|_T.",
+ "statement": "For a commutative ring Λ, schemes W and S, k:W→S, a sheaf G of Λ-modules on W_et, an integer q, objects A and B over W, and f:A→B over W, put K_B=(B^*G)[0] and K_A=(A^*G)[0] [def-weil-pbc-derived-categories], [def-weil-pbc-etale-sheaves]. For an etale S-object U, put P_B(U)=Hom(((B→S)^*Λ[U])[0],K_B[q]), and likewise P_A [def-weil-pbc-direct-image]. Define r_f:P_B(U)→P_A(U) by pullback composition, the inverse single-complex comparison, derived pullback of the class, the shift comparison, and the shifted canonical coefficient identification f^*K_B→K_A [lem-weil-pbc-inverse-image-composition]. For etale S-objects T,U, b:T→U and z∈P_B(U), one has r_f(z|_T)=r_f(z)|_T.",
  "source": {
   "document": "Stacks Project",
   "place": "Tags 03Q8 and 09Z1, canonical comparison maps; explicit derived-Hom formulation"
@@ -15,20 +15,20 @@
  ],
  "proof": [
   {
-   "text": "Restriction is precomposition with the single-complex free-sheaf map. Apply naturality of inverse-image composition and of the inverse single-complex comparison to this map, then functoriality of derived pullback. Postcompose by the fixed shift comparison and v[q]; associativity gives the claimed equality.",
+   "text": "Apply higherDirectImageRawTrianglePullback_restriction to f.left, B.hom composed with k, A.hom composed with k, the two single complexes of the sheaves pulled back from G, and the canonical coefficient morphism. The raw over pullback is this specialization by definition, so both sides agree definitionally.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition"
+    "sbc-lem-higher-image-raw-triangle-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-inverse-image-composition"
+  "sbc-lem-higher-image-raw-triangle-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 03Q8 and 09Z1; canonical derived-Hom comparison, argument written by E2"
+  "place": "Tags 03Q8 and 09Z1; V1 specializes the existing raw triangle restriction theorem to the canonical coefficient morphism"
  },
  "mathlib_searches": [
   {
@@ -99,13 +99,36 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E2",
+  "reviewer": "X-ec309",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T194108-L-453988",
+  "landing": "20261013T100155-L-2495270",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean with corrected node statements, recorded proof dependencies, original public signatures and definition, change records, and report; delivery and all six direct importers compile cleanly."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "V1 stage 2",
+  "old_statement": "For a commutative ring Λ, schemes Y, Y′, S, morphisms a:Y′→Y, h:Y→S, h′:Y′→S with a≫h=h′, bounded-below derived module sheaves K on Y and K′ on Y′, integer q, and a specified derived coefficient morphism v:a* K→K′ [def-weil-pbc-derived-categories], [def-weil-pbc-etale-sheaves], define r_U(z) by the single-complex map of the pullback composition isomorphism, the inverse single-complex comparison, derived pullback of z, the shift comparison, and v[q] [lem-weil-pbc-inverse-image-composition]. For etale S-objects T,U, b:T→U and a raw class z∈Hom(h*Λ[U][0],K[q]), one has r_T(z|_T)=r_U(z)|_T.",
+  "what": "Reviewer X-4d817 H3: the prose quantified over arbitrary derived complexes and an arbitrary coefficient morphism, while the recorded Lean declaration and proof establish the over-W specialization with coefficients canonically pulled back from G. Replace the whole prose statement by that specialization; all Lean signatures remain unchanged. This stage-3 correction uses the stage-2 statement_change schema.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tags 03Q8 and 09Z1, canonical comparison maps; explicit derived-Hom formulation"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Restriction is precomposition with the single-complex free-sheaf map. Apply naturality of inverse-image composition and of the inverse single-complex comparison to this map, then functoriality of derived pullback. Postcompose by the fixed shift comparison and v[q]; associativity gives the claimed equality.",
+    "uses": [
+     "lem-weil-pbc-inverse-image-composition"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-inverse-image-composition"
+  ]
  }
 }
