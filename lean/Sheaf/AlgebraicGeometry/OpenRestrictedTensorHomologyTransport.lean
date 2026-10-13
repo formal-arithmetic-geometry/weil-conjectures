@@ -1,6 +1,8 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import Sheaf.AlgebraicGeometry.OpenRestrictedTensorComplexIso
+import Sheaf.AlgebraicGeometry.OpenRestrictedTensorChainTransport
+import Sheaf.AlgebraicGeometry.OpenStalkChainHomologyTransport
 /-! # Homology transport for normalized open tensor coordinates
 
 Source: Stacks Project, Tag 0098, stalks of pullback and restriction.
@@ -112,6 +114,15 @@ theorem openRestricted_tensor_homology_transport
           (comparisonStalkHomologyIso X' z Pg i).inv) ≫
           (openDerivedStalkIso (pullback.fst g' U.ι) z0 i).hom.app
             (DerivedCategory.Q.obj Pg) ≫ HU.map (openRestrictedTensorDerivedIso g' U P).hom
-    := by sorry
+    := by
+  dsimp only
+  intro eA eD q t heD hq ht
+  have hc := openRestricted_tensor_chain_transport f f' g g' sq U sq0 z0 P
+    eA eD q t heD hq ht
+  exact openStalk_chain_homology_transport (pullback.fst g' U.ι) z0 i _ _ _ _ eD t.hom
+    (tensorStalkIso f f' g g' sq (pullback.fst g' U.ι z0) P).hom
+    (tensorStalkIso (U.ι ≫ f) (pullback.fst g' U.ι ≫ f') g
+      (pullback.snd g' U.ι) sq0 z0 _).hom
+    (openTensorRestrictionComplexIso g' U P).hom hc
 
 end AlgebraicGeometry.SingleComplexBaseChange

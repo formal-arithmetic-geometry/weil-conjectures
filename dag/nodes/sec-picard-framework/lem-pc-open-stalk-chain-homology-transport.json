@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-open-stalk-chain-homology-transport",
+ "kind": "statement",
+ "title": "Homology of an additive open stalk chain square",
+ "statement": "Let j:Y→Z be an open immersion, y a point of Y, and i an integer, with the derived categories of module sheaves existing. Let N,N0 be sheaf complexes on Z,Y, V,V0 complexes of modules over the corresponding stalk rings, e an isomorphism of these rings, t:V→restrictScalars(e)(V0), a:V→stalk(N), b:V0→stalk(N0), and alpha:restrict(j)(N)→N0. Assume degreewise that a, followed by inverse additive restrictStalkNatIso and stalk(alpha), equals t followed by b after forgetting scalars. Then homology(t), exact restriction-of-scalars homology, homology(b), and inverse comparisonStalkHomologyIso on Y compose to homology(a), inverse comparisonStalkHomologyIso on Z, openDerivedStalkIso(j), and additive derived stalk cohomology of openRestrictionRepresentativeIso(j,N) inverse followed by Q(alpha). The comparisons are the constructed ones of [def-pc-open-derived-stalk-iso]. No tensor formula or input coordinate is asserted.",
+ "stmt_deps": [
+  "def-pc-open-derived-stalk-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "Parent proof step 2; Stacks Section 20.32 (0D5U) opening paragraph, exact restriction, and exact-functor homology naturality."
+ },
+ "proof": [
+  {
+   "text": "Assemble the degreewise equality into an equality of additive chain maps and apply homology. Move the exact forgetful comparisons across all chain maps by mapHomologyIso naturality; the exact comparison for restriction followed by forgetting agrees with direct forgetting by uniqueness of the kernel and cokernel homology identifications. Expand openDerivedStalkIso and openRestrictionRepresentativeIso: the derived restriction comparison and its inverse cancel. The remaining exact restriction and stalk homology comparisons identify with homology of inverse restrictStalkNatIso. Apply comparisonStalkHomologyIso_naturality to alpha. Cancel the invertible endpoint comparisons to obtain the stated formula.",
+   "uses": [
+    "def-pc-open-derived-stalk-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-derived-stalk-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "Parent proof step 2; Stacks Section 20.32 (0D5U) opening paragraph, exact restriction, and exact-functor homology naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso_comp|mapHomologyIso.*naturality|mapHomologicalComplexHomologyIso.*naturality",
+   "date": "2026-10-14",
+   "results": "5 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "verdict": "Generic ingredients only; no theorem with this coordinate normalization and conclusion.",
+   "available": true
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "date": "2026-10-14",
+   "results": "12 hits: CategoryTheory.ShortComplex.mapHomologyIso, CategoryTheory.ShortComplex.mapHomologyIso', CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso, CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq, CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq, CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality",
+   "verdict": "Generic ingredients only; no theorem with this coordinate normalization and conclusion.",
+   "available": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact open restriction stalk comparison induces a homology square from an equality of additive complex maps",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, HomologicalComplex.restriction.hasHomology, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, HomologicalComplex.restrictionHomologyIso, HomologicalComplex.opcycles_right_exact, HomologicalComplex.restrictionHomologyIso_hom_homologyι, HomologicalComplex.pOpcycles_restrictionOpcyclesIso_hom",
+   "verdict": "Generic ingredients only; no theorem with this coordinate normalization and conclusion.",
+   "available": true
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact open restriction comparison of derived stalk homology from a commutative additive chain square",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictedTensorHomologyTransport",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-restricted-tensor-homology-transport",
+   "place": "Parent proof step 2; Stacks Section 20.32 (0D5U) opening paragraph, exact restriction, and exact-functor homology naturality.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenStalkChainHomologyTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenStalkChainHomologyTransport.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openStalk_chain_homology_transport",
+  "statement": "theorem openStalk_chain_homology_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion j] (y : Y) (i : ℤ)\n    (N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)\n    (N0 : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (V : CochainComplex (ModuleCat.{u} (Z.presheaf.stalk (j y))) ℤ)\n    (V0 : CochainComplex (ModuleCat.{u} (Y.presheaf.stalk y)) ℤ)\n    (e : Z.presheaf.stalk (j y) ≃+* Y.presheaf.stalk y)\n    (t : V ⟶ ((ModuleCat.restrictScalars.{u} e.toRingHom).mapHomologicalComplex\n      (.up ℤ)).obj V0)\n    (a : V ⟶ ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (j y)).mapHomologicalComplex\n      (.up ℤ)).obj N)\n    (b : V0 ⟶ ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapHomologicalComplex\n      (.up ℤ)).obj N0)\n    (alpha : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj N ⟶ N0)\n    (h : ∀ k : ℤ,\n      (forget₂ (ModuleCat.{u} (Z.presheaf.stalk (j y))) AddCommGrpCat.{u}).map (a.f k) ≫\n        (Scheme.Modules.restrictStalkNatIso j y).inv.app (N.X k) ≫\n        (forget₂ (ModuleCat.{u} (Y.presheaf.stalk y)) AddCommGrpCat.{u}).map\n          ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map (alpha.f k)) =\n      (forget₂ (ModuleCat.{u} (Z.presheaf.stalk (j y))) AddCommGrpCat.{u}).map (t.f k) ≫\n        (forget₂ (ModuleCat.{u} (Y.presheaf.stalk y)) AddCommGrpCat.{u}).map (b.f k)) :\n    let F := forget₂ (ModuleCat.{u} (Z.presheaf.stalk (j y))) AddCommGrpCat.{u}\n    let F0 := forget₂ (ModuleCat.{u} (Y.presheaf.stalk y)) AddCommGrpCat.{u}\n    let HU := comparisonStalkCohomology Y y i ⋙ F0\n    F.map (HomologicalComplex.homologyMap t i) ≫\n        F.map ((V0.sc i).mapHomologyIso (ModuleCat.restrictScalars.{u} e.toRingHom)).hom ≫\n        F0.map (HomologicalComplex.homologyMap b i ≫\n          (comparisonStalkHomologyIso Y y N0 i).inv) =\n      F.map (HomologicalComplex.homologyMap a i ≫\n        (comparisonStalkHomologyIso Z (j y) N i).inv) ≫\n        (openDerivedStalkIso j y i).hom.app (DerivedCategory.Q.obj N) ≫\n        HU.map ((openRestrictionRepresentativeIso j N).inv ≫ DerivedCategory.Q.map alpha)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T231537-L-1818056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T231537-L-1818056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
