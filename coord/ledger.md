@@ -11840,7 +11840,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:59 L: merged deliver/G4/Sheaf.AlgebraicGeometry.OpenModuleImageSectionRestriction (stage 3; reviewer PASS; first push; landing 20261013T095956-L-2459830 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 09:59 L: merged deliver/G4/Sheaf.AlgebraicGeometry.PicardPairingPullbackCoherence (stage 3; reviewer PASS; first push; landing 20261013T095957-L-2459980 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 09:59 L: merged deliver/G4/Sheaf.AlgebraicGeometry.PicardUniversalSingleRankLocusFinitePresentation (stage 3; reviewer PASS; after a return; landing 20261013T095958-L-2460214 (interface); batch 20261013T095923; modules 3; new nodes 2)
-- 09:59 L: merged deliver/H1/Sheaf.Algebra.Homology.SingleSupportTorAcyclicTensor (stage 3; reviewer PASS; first push; landing 20261013T095958-L-2460441 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 09:59 L: merged deliver/H1/Sheaf.AlgebraicGeometry.EtaleLimitOpenRestrictedSystem (stage 3; reviewer PASS; first push; landing 20261013T095959-L-2460598 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/H1/Sheaf.AlgebraicGeometry.FixedAbelianDescendedSectionLift (stage 3; reviewer PASS; after a return; landing 20261013T095959-L-2460817 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:00 L: merged deliver/H1/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps (stage 3; reviewer PASS; after a return; landing 20261013T100000-L-2460952 (interface); batch 20261013T095923; modules 2; new nodes 1)
@@ -12076,3 +12075,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearBijective (stage 3; reviewer PASS; first push; landing 20261013T100230-L-2505776 (interface); batch 20261013T095923; modules 2; new nodes 1; change records: coord/changes/determinant-split-linear-bijective-notation.md)
 - 10:03 L: returned deliver/T3/Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap (reviewer RETURN: (reviewer X-a68d7, head a68d7c13d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Per)
 - 10:13 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.HigherDirectImageTransitionCoreComposition (reviewer RETURN: (reviewer X-fc9b9, head fc9b9cd48) the reviewer passed it, but the landing failed: eometry.Etale.complex_single_natIso: )
+
+- 18:52 L: red in batch 20261013T095923 (own fault); batch take-out blocked by a coord/returns/P3.md conflict; the repair job XR works on it (launcher 18:55)
