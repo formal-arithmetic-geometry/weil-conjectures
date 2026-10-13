@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-linear-cech-sheaf-resolution",
+ "kind": "statement",
+ "title": "Cech sheaf resolution with compatible local scalar actions",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ an index type in the universe of $X$, $(U_i)_{i\\in I}$ an open cover and $F$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category]. There exist a nonnegative complex $D$ of $\\mathcal O_X$-modules, an augmentation $\\epsilon:F[0]\\to D$, and natural presheaf isomorphisms $e_p$ from the underlying global-ring module presheaf of $D^p$ to the usual Cech term [def-weil-pbc-site-cech-complex] $B\\mapsto\\prod_{y:\\operatorname{Fin}(p+1)\\to I}F((\\prod_lU_{y(l)})\\cap B)$, satisfying the signed differential identity and the restriction-coordinate augmentation identity. There are also module-sheaf isomorphisms $D^p\\simeq\\prod_y j_{y,*}(F|_{\\cap_lU_{y(l)}})$. For each $p,y,B$, write $c_{p,y,B}$ for the y-coordinate of $e_p(B)$. For all $a\\in\\mathcal O_X(B)$ and $s\\in D^p(B)$ one has $c_{p,y,B}(as)=a|_{(\\prod_lU_{y(l)})\\cap B}\\,c_{p,y,B}(s)$. Finally $\\epsilon$ is a quasi-isomorphism. Empty covers and empty schemes are included.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "source": {
+  "document": "Weil conjectures blueprint and Stacks Project",
+  "place": "lem-pc-cech-resolution, displayed complex and proof paragraph 1; Tag 01EO, Cech cohomology for module sheaves"
+ },
+ "proof": [
+  {
+   "text": "Use the canonical construction underlying lem-pc-cech-sheaf-construction: P(Z)=jZ,*(F|Z), with sections F(Z intersect B), restriction maps in Z, and the Cech complex functor. Its product projections give the differential, augmentation, and term isomorphisms. The witnesses are obtained from this construction, not by taking an arbitrary existing presheaf isomorphism.",
+   "uses": [
+    "lem-pc-cech-sheaf-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each coordinate is a projection of module sheaves, hence multiplication by a in OX(B) becomes multiplication by its restriction along the second product projection. Evaluate this linearity on sections to obtain the extra formula for c. No comparison of global and local module actions is assumed.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the local augmentation quasi-isomorphism to these same e and differential and augmentation identities. Since the Ui cover, underlying homology sheaves vanish locally and thus globally. The global augmentation is therefore a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-cech-sheaf-local-quasi-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-cech-sheaf-construction",
+  "lem-pc-cech-sheaf-local-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "worker F1",
+  "document": "Weil conjectures blueprint and Stacks Project",
+  "place": "lem-pc-cech-resolution, displayed complex and proof paragraph 1; Tag 01EO, Cech cohomology for module sheaves; explicit Lean reduction by F1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech complex of sheaves of modules resolution local scalar multiplication compatibility",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech sheaf resolution module sheaves local scalar multiplication compatible with product projections",
+   "results": "PresheafOfModules.Sheafify.SMulCandidate.mk', CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.Sheafify.SMulCandidate.x, PresheafOfModules.Sheafify.SMulCandidate, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.smul",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|forgetToPresheafModuleCat",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechModelComparison",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), Cech-to-derived machinery: retain local scalar actions in the Cech sheaf resolution",
+   "via": [
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LinearCechSheafResolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/LinearCechSheafResolution.lean",
+  "declaration": "AlgebraicGeometry.exists_linear_cech_sheaf_resolution",
+  "statement": "theorem exists_linear_cech_sheaf_resolution\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hU : iSup U = ⊤)\n    (F : X.Modules) :\n    ∃ (D : CochainComplex X.Modules ℕ)\n      (ε : (CochainComplex.single₀ X.Modules).obj F ⟶ D)\n      (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor U).obj\n          ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p),\n      (∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor U).obj\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1)) ∧\n      (∀ (y : Fin 1 → ι) (V : X.Opens),\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 F).inv ≫ ε.f 0).val ≫\n          (e 0).hom ≫\n            Pi.π (fun y : Fin 1 → ι =>\n              ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n                (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat).obj\n                  (op (∏ᶜ fun l => U (y l)))) y).app (op V) =\n          F.presheafModuleCat.map (prod.snd : (∏ᶜ fun l => U (y l)) ⨯ V ⟶ V).op) ∧\n      (∀ p : ℕ, Nonempty (D.X p ≅ ∏ᶜ fun y : Fin (p + 1) → ι =>\n        (Scheme.Modules.pushforward (⨅ l, U (y l)).ι).obj (F.restrict (⨅ l, U (y l)).ι))) ∧\n      (∀ (p : ℕ) (y : Fin (p + 1) → ι) (B : X.Opens),\n        let c : Γ(D.X p, B) → Γ(F, (∏ᶜ fun l ↦ U (y l)) ⨯ B) :=\n          fun s ↦ ((e p).hom ≫ Pi.π (fun y : Fin (p + 1) → ι ↦\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat).obj\n                (op (∏ᶜ fun l ↦ U (y l)))) y).app (op B) s\n        ∀ (a : Γ(X, B)) (s : Γ(D.X p, B)),\n          c (a • s) = X.presheaf.map (prod.snd :\n            (∏ᶜ fun l ↦ U (y l)) ⨯ B ⟶ B).op a • c s) ∧\n      QuasiIso ε",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T034204-L-3765828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T034204-L-3765828",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

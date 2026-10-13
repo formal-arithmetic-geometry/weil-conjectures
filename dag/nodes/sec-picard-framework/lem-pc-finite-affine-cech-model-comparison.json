@@ -14,36 +14,42 @@
  },
  "proof": [
   {
-   "text": "On an affine open W of the new base, the base changes of the affine cover members and their nonempty intersections are affine, by separatedness over the affine U. Affine pullback of quasi-coherent sections identifies the new section module with Gamma(W,O) tensor over Gamma(U,O) the old one. The pure-tensor formula commutes with face restrictions; finite products commute with tensor. The canonical base chart and GammaSpecIso identify the scalar actions in the specified model, yielding an isomorphism of ordinary alternating complexes. No tensor-homology interchange is used.",
+   "text": "Define the pulled-back opens Wi=gprime inverse image jY(Vi), indexed by ULift Fin r. Their supremum is top: image and inverse image commute with supremums, the original family covers Y, and the cartesian commutativity equation ensures gprime takes every point into Y. Obtain the same D, epsilon, e and differential descriptions together with local scalar compatibility from the linear Cech resolution.",
    "uses": [
-    "def-pc-finite-affine-cech-model",
-    "def-pc-affine-alternating-cech-model"
+    "lem-pc-linear-cech-sheaf-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each full tuple y, its old intersection Z is affine by separatedness of Y over the affine U. Its pulled-back intersection equals gprime inverse image jY(Z), since the image under an injective open immersion commutes with nonempty finite intersections. The proved intersection lemma makes both its inclusion and its map to Tprime affine. Affine higher-image vanishing and the open-pushforward composition comparison show each factor j_*(M|W) is fprime_*-acyclic. Acyclicity is invariant under isomorphism and finite products, so every D term is acyclic. The affine acyclicity proof is reproduced in private proved helpers from CechAcyclicOnAffines and rightAcyclic_of_epi_map_g, rather than importing DirectImage.AffineMorphism: that module imports proper finiteness through FiniteFreeComplex and closes an import cycle back to this comparison. Injective modules are flasque, this Cech-acyclic class is closed under the indicated cokernels, and the affine preimages of affine base opens give sectionwise surjectivity, hence epimorphisms after pushforward. Dimension shifting then supplies the required acyclicity.",
+   "uses": [
+    "lem-pc-finite-affine-cech-intersection-base-change",
+    "lem-pc-affine-morphism-hi",
+    "lem-pc-open-pushforward-derived-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Affine acyclicity and the Cech comparison identify the homology of the new cover complex with cohomology of the pulled-back coefficient. Increasing-tuple restriction gives the same cohomology. The affine-base higher-direct-image comparison identifies it with sections of R^q fprime_* gprime^*F on W. These maps are induced by the Cech augmentation, hence commute with affine restrictions and glue to a sheaf isomorphism. Transport along the unique isomorphism from the supplied cartesian square to the standard pullback. The empty cover forces an empty source; all section complexes and higher direct images are then zero.",
+   "text": "Apply the section-complex base-change comparison to this D, e, hd and local scalar formula. It identifies the homology of the specified pulled-back model with the homology of fprime_*D. The already proved generic acyclic-resolution criterion rightDerivedObjIsoOfResolution identifies the latter with higherDirectImage fprime q applied to M, since epsilon is a quasi-isomorphism and pushforward is left exact. Compose the two actual isomorphisms. This works for every supplied square and every q, including the empty cover.",
    "uses": [
-    "lem-pc-affine-vanishing",
-    "lem-pc-cech-computes",
-    "lem-pc-alternating-cech-computes",
-    "lem-pc-cohomology-sections-affine-base"
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lemma-weil-pbc-leray-acyclicity"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-affine-alternating-cech-model",
-  "def-pc-finite-affine-cech-model",
-  "lem-pc-affine-vanishing",
-  "lem-pc-alternating-cech-computes",
-  "lem-pc-cech-computes",
-  "lem-pc-cohomology-sections-affine-base"
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-finite-affine-cech-intersection-base-change",
+  "lem-pc-finite-affine-cech-section-base-change",
+  "lem-pc-linear-cech-sheaf-resolution",
+  "lem-pc-open-pushforward-derived-comparison",
+  "lemma-weil-pbc-leray-acyclicity"
  ],
  "proof_origin": {
-  "by": "worker N1",
-  "document": "Stacks Project",
-  "place": "Tags 02KE (affine termwise base-change calculation), 01XD, 01XK and 01FK; explicit construction and reduction written by N1"
+  "by": "worker F1",
+  "document": "Stacks Project and Weil conjectures blueprint",
+  "place": "Tags 02KE, 01KP, 01S5 and 01FK; lem-pc-cech-resolution; compiled reduction via locally linear Cech resolution and ordinary acyclic-resolution theorem; affine acyclicity is the proved source DirectImage.AffineMorphism argument reproduced in private helpers using only its acyclic imports"
  },
  "mathlib_searches": [
   {
@@ -136,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T005857-L-2607448",
+  "landing": "20261013T034204-L-3765828",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

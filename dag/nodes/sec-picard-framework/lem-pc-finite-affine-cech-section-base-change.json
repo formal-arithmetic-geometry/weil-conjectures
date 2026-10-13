@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-finite-affine-cech-section-base-change",
+ "kind": "statement",
+ "title": "Section-complex base change for the specified finite affine Cech model",
+ "statement": "Let $f:X\\to T$ be separated [def-pc-morphism-conventions], $F$ quasi-coherent [def-weil-sheaf-of-modules-category], $U\\subset T$ affine and $(V_i)_{i\\in\\operatorname{Fin}(r)}$ a finite family of affine opens in $Y=f^{-1}U$. No covering assumption is made. Let a cartesian square [def-pc-fibre-product] be given by $g:T^\\prime\\to U$, $g^\\prime:X^\\prime\\to X$, $f^\\prime:X^\\prime\\to T^\\prime$ and $f$. Put $M=(g^\\prime)^*F$ [def-pc-module-pullback] and $W_i=(g^\\prime)^{-1}(j_Y(V_i))$, indexing the new family by the universe lift of $\\operatorname{Fin}(r)$. Let $D$ be any nonnegative complex of $\\mathcal O_{X^\\prime}$-modules, with presheaf term identifications $e_p$ with the usual Cech terms for $W,M$, respecting differentials and local scalar actions as in [lem-pc-linear-cech-sheaf-resolution]. An augmentation and exactness of $D$ are not assumed. For every $q\\geq0$ there is an isomorphism of $\\mathcal O_{T^\\prime}$-modules $H^q(g^*C(f|_U,F|_Y,V))\\simeq H^q(f^\\prime_*D)$, where $C$ is the specified complex [def-pc-finite-affine-cech-model]. No flatness or injective resolutions are needed.",
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "lem-pc-linear-cech-sheaf-resolution",
+  "def-pc-finite-affine-cech-model"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02KE, affine termwise calculation; Tags 01FJ, 01FK and 01FM, ordered Cech comparison"
+ },
+ "proof": [
+  {
+   "text": "On an affine open B of Tprime the old affine intersections base change to affine opens. Their new coefficient sections are Gamma(B,O) tensor over Gamma(U,O) the old sections. The affine-section pullback pure-tensor formula commutes with each face restriction and with restriction in B. Use the canonical GammaSpecIso and affine chart actions of the specified model.",
+   "uses": [
+    "lem-pc-finite-affine-cech-intersection-base-change",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-finite-affine-cech-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each increasing-tuple product is finite, so tensor commutes with it. These termwise maps commute with the signed face sums and assemble into isomorphisms of the increasing-tuple section complexes on B. The natural degree extension is zero in negative degrees, and the universe lift only reindexes finite products.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The usual-to-ordered restriction induces isomorphisms on homology by the ordered Cech comparison, applied also to a family covering just its union. e and hd identify the usual sheaf complex with D after forgetting to global-ring module presheaves; the additional scalar formula supplies full local module linearity. The induced sheaf-complex comparison is thus a comparison of module sheaves, not merely abelian sheaves.",
+   "uses": [
+    "lem-pc-alternating-cech-computes",
+    "lem-pc-linear-cech-sheaf-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict to every affine B. The termwise constructions and the ordered comparison are restriction-compatible, so their homology isomorphisms agree on overlaps and glue. Restriction of sheaves is exact and hence commutes with homology. This identifies the specified pulled-back model homology with Hq(fprime_*D), without using an augmentation of D or a tensor-homology exchange. An empty family has zero terms on both sides.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-affine-cech-model",
+  "def-sc-alternating-cech-total-complex",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-alternating-cech-computes",
+  "lem-pc-finite-affine-cech-intersection-base-change",
+  "lem-pc-linear-cech-sheaf-resolution",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "worker F1",
+  "document": "Stacks Project",
+  "place": "Tag 02KE, affine termwise calculation; Tags 01FJ, 01FK and 01FM, ordered Cech comparison; explicit Lean reduction by F1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary pullback of alternating finite affine Cech complex homology equals homology of pushforward of Cech sheaf complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology of finite affine Cech section complex associated sheaf computes higher direct images under arbitrary base change",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCech|higherDirectImage",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechModelComparison",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), finite affine Cech section complex: tensor the finite terms before homology",
+   "via": [
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineCechSectionBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineCechSectionBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteAffineCech_section_baseChange",
+  "statement": "theorem finiteAffineCech_section_baseChange {X T : Scheme.{u}} (f : X ⟶ T)\n    [IsSeparated f] (F : X.Modules) [F.IsQuasicoherent]\n    (U : T.Opens) (hU : IsAffineOpen U) {r : ℕ}\n    (V : Fin r → (f ⁻¹ᵁ U).toScheme.Opens) (hV : ∀ i, IsAffineOpen (V i))\n    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n    (sq : IsPullback g' f' f (g ≫ U.ι))\n    (D : CochainComplex X'.Modules ℕ)\n    (W : ULift.{u} (Fin r) → X'.Opens)\n    (hW : ∀ i, W i = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ V i.down))\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor W).obj\n          ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj\n              ((Scheme.Modules.pullback g').obj F).presheafModuleCat)).X p)\n    (hd : ∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor W).obj\n            ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj\n              ((Scheme.Modules.pullback g').obj F).presheafModuleCat)).d p (p + 1))\n    (hlinear : ∀ (p : ℕ) (y : Fin (p + 1) → ULift.{u} (Fin r)) (B : X'.Opens),\n        let c : Γ(D.X p, B) → Γ((Modules.pullback g').obj F, (∏ᶜ fun l ↦ W (y l)) ⨯ B) :=\n          fun s ↦ ((e p).hom ≫ Pi.π (fun y : Fin (p + 1) → ULift.{u} (Fin r) ↦\n            ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj\n                ((Modules.pullback g').obj F).presheafModuleCat).obj\n                (op (∏ᶜ fun l ↦ W (y l)))) y).app (op B) s\n        ∀ (a : Γ(X', B)) (s : Γ(D.X p, B)),\n          c (a • s) = X'.presheaf.map (prod.snd :\n            (∏ᶜ fun l ↦ W (y l)) ⨯ B ⟶ B).op a • c s) :\n    ∀ q : ℕ,\n      Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj\n          (finiteAffineCechModel (f ∣_ U) (F.restrict (f ⁻¹ᵁ U).ι) V)).homology q ≅\n        (((Modules.pushforward f').mapHomologicalComplex _).obj D).homology q)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T034204-L-3765828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T034204-L-3765828",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
