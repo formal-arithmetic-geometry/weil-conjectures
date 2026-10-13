@@ -3,24 +3,86 @@
  "blueprint": {
   "is": "def-weil-pbc-adic-derived-inverse-limit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Explicit adic derived inverse limit",
- "statement": "For a tower $M_\\bullet=(M_n,t_{n+1,n})$, put\n\n$$\ns((x_n)_n)=(t_{n+1,n}(x_{n+1}))_n,\n\\qquad\nR\\varprojlim_nM_n:=\\operatorname{Cone}\n\\left(1-s:\\prod_nM_n\\longrightarrow\\prod_nM_n\\right)[-1].\n$$\n\nThus there is a functorial distinguished triangle\n\n$$\nR\\varprojlim_nM_n\\longrightarrow\\prod_nM_n\n\\xrightarrow{1-s}\\prod_nM_n\\longrightarrow .\n$$\n\nMaps of towers act componentwise on the two products and hence on the cone.",
+ "statement": "Let $X$ be a scheme with its small pro-etale site, constant sheaves of rings, and derived categories of sheaves of modules [def-weil-pbc-proetale-site], let $\\Lambda$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let $I=(f_1,\\ldots,f_r)\\subseteq\\Lambda$ be a finitely generated ideal.  Put $P_n=\\Lambda/I^n$ for $n\\geq1$, with ideal powers and quotient rings as in [def-weil-pbc-algebra-hom-quotient]; assume that $\\Lambda/I$ is torsion as an additive group (each element is killed by a positive integer) and that each $P_n$, in degree zero, is perfect over $\\Lambda$ [def-pc-perfect-ring-complex].  Let $K\\in D(X_{\\mathrm{proet}},\\Lambda)$, and define\n$$K_n:=K\\otimes^L_{\\Lambda_X}(P_n)_X\\in D(X_{\\mathrm{proet}},P_n),$$\nusing the derived change of rings [lem-pur-derived-change-of-rings], with underlying derived tensor as in [def-weil-derived-tensor], with $(P_n)_X$ and $\\Lambda_X$ the constant sheaves of rings.  Regard each $K_n$ also as an object of $\\mathcal D:=D(X_{\\mathrm{proet}},\\Lambda)$ by restriction of scalars [def-pc-sheaf-restrict-scalars], and let $q_{n+1,n}:K_{n+1}\\to K_n$ be induced by $P_{n+1}\\twoheadrightarrow P_n$; these are the transitions of the reduction tower [def-weil-pbc-complete-coefficient-datum], an inverse system [def-weil-inverse-system].\n\nAssume that $\\mathcal D$ is triangulated with shift $[1]$ and distinguished triangles [def-weil-triangulated-category], and that the countable product $\\prod_{n\\geq1}K_n$ with projections exists [def-weil-category-product].  Let $s:\\prod_nK_n\\to\\prod_nK_n$ be the transition endomorphism [def-weil-tower-transition-endomorphism], characterized by $\\operatorname{pr}_n\\circ s=q_{n+1,n}\\circ\\operatorname{pr}_{n+1}$.\n\nAn *adic derived inverse limit* of $K$ is a derived limit [def-weil-derived-limit] of this reduction tower, namely a triple $(L,p,\\delta)$ consisting of an object $L\\in\\mathcal D$ and morphisms $p:L\\to\\prod_nK_n$ and $\\delta:\\prod_nK_n\\to L[1]$ such that\n$$L\\xrightarrow{p}\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\xrightarrow{\\delta}L[1]$$\nis a distinguished triangle.  We may write $L=R\\varprojlim_nK_n$ for any such chosen triple; this notation denotes a property with chosen triangle, not a canonically selected object or a functor.  No morphisms between chosen triples are specified by this definition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-adic-derived-inverse-limit.md",
   "place": "node def-weil-pbc-adic-derived-inverse-limit, order 1256"
  },
  "stmt_deps": [
-  "def-weil-pbc-complete-coefficient-datum"
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-inverse-system",
+  "def-weil-category-product",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-perfect-ring-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-tensor",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-limit"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit as cone of 1 minus shift on product of a tower",
+   "results": "8 hits: HomologicalComplex.coneOfHasLimitEval, HomologicalComplex.coneOfHasLimitEval_pt_d, HomologicalComplex.coneOfHasLimitEval_pt_X, HomologicalComplex.isLimitOfEval, HomologicalComplex.coneOfHasLimitEval_π_app_f, CategoryTheory.Limits.SequentialProduct.cone, CategoryTheory.Limits.SequentialProduct.isLimit, HomotopyCategory.spectralObjectMappingCone_ω₁",
+   "date": "2026-10-14",
+   "verdict": "no match: generic complex cones and sequential products do not state the derived inverse-limit definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit, Cone, Product",
+   "results": "0 hits: loogle: unknown identifier 'Cone'",
+   "date": "2026-10-14",
+   "verdict": "invalid query: unknown identifier Cone; this is not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "derived inverse limit|Rlim|Cone.*prod in Mathlib/CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse limit cone product tower",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy limit of a sequential diagram in a triangulated category defined by a distinguished triangle of products",
+   "results": "8 hits: CategoryTheory.Pretriangulated.productTriangle.isLimitFan, HomotopyCategory.spectralObjectMappingCone, HomotopyCategory.spectralObjectMappingCone_ω₁, CategoryTheory.Pretriangulated.productTriangle.fan, CochainComplex.mappingConeCompTriangleh, HomotopyCategory.Pretriangulated.distinguished_cocone_triangle, CochainComplex.mappingCone.triangleh, HomotopyCategory.Pretriangulated.distinguishedTriangles",
+   "date": "2026-10-14",
+   "verdict": "no match: products of triangles and mapping-cone triangles, not a homotopy limit predicate of an adic reduction tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyLimit\"",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyLimit|homotopy.limit|derived.limit|milnor|roos",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +106,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-adic-derived-inverse-limit",
+  "worker": "stage1",
+  "summary": "Repaired the definition after the E1/E4/C4 and B2 returns. Restored all coefficient hypotheses explicitly, placed the reduction tower in one triangulated derived category with its product, and specified a chosen Roos distinguished triangle using the existing generic derived-limit definition. Removed unsupported canonical-Cone/functor assertions. Second reading added direct links for coefficient notions and precise Stacks tags and labels, removed the auxiliary assertion about morphism completion from the definition, and ran independent Mathlib searches. No new nodes.",
+  "blueprint": "Entire blueprint definition: its coefficient datum supplies the reduction tower, the projection formula defines the shift, and the displayed Roos triangle defines derived-limit data. The unsupported final functoriality clause is corrected to exclude a canonical choice or functor; Stacks derived.tex Tag 08TC (definition-derived-limit) and Tag 0H9J (remark-functoriality-derived-limit) justify the correction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-d4ed9a794",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-d4ed9a794 (reviewer sub-agent of L); spot-checked: Read the full item, all thirteen cited statements, route, and source mathematics. The chosen Roos triangle matches Stacks 08TC/0H9J; coefficient hypotheses, types, and small cases check out. Repaired B5 by adding missing exact source tags and TeX labels in the corrected JSON. review.md records downstream functoriality gaps and preserves the distinction from condensed target coefficients; no target was changed.; 1 file(s) fixed by the reviewer"
+ }
 }
