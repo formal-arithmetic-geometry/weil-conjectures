@@ -6,6 +6,8 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative
+import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentExtension
 
 /-! # Localization of componentwise uncurrying
 
@@ -76,6 +78,12 @@ theorem exists_tensorHomUncurry_descent (X : Scheme.{u})
       t K' L' M' (a.hom ≫ f ≫
         (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
           X.toRingedSpace.sheaf).map (b.hom.op, c.hom)) =
-        (a.hom ⊗ₘ b.hom) ≫ t K L M f ≫ c.hom := by sorry
+        (a.hom ⊗ₘ b.hom) ≫ t K L M f ≫ c.hom := by
+  let := schemeDerivedTensorMonoidal X
+  obtain ⟨t, ht⟩ := exists_tensorHomUncurry_descent_representative X
+  obtain ⟨s, hs, hi⟩ := exists_tensorHomUncurry_descent_extension X t ht
+  refine ⟨s, ?_, hi⟩
+  intro P L M hP φ
+  exact (hs P L M hP φ).trans (ht P L M hP φ)
 
 end AlgebraicGeometry
