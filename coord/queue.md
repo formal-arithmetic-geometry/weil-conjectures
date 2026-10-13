@@ -1,6 +1,6 @@
 # Work queue
 
-145 items; claim with `tools/claim.py next <group> [--stage N]`.
+142 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (145)
+## Stage 3: modules to prove (142)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -52,12 +52,9 @@
 | `Sheaf.AlgebraicGeometry.EtaleLimitConeRestrictionNaturality` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechCofaceEvaluation` | 17 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations` | 17 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedTensorHomCochainComponents` | 18 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare` | 18 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RawModuleScalarMapFormula` | 18 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas` | 18 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquare` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryGradedRealization` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatBaseChangeChartUnitIso` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality` | 20 | 1 | proof |
