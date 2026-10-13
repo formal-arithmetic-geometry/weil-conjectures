@@ -1,0 +1,164 @@
+{
+ "id": "lem-sc-affine-kflat-residue-pullback-model",
+ "kind": "statement",
+ "title": "Derived residue pullback of a supplied affine K-flat module model",
+ "statement": "Let X be a scheme [def-pc-scheme], E in its derived category [def-pc-derived-category], U an affine open, A=Gamma(U,O_X), and F a K-flat A-module cochain complex [def-pc-kflat-complex]. Assume E restricted to the localized site of U is isomorphic to Q of termwise affinePerfectSheafification F [lem-pc-affine-perfect-module-model]. For z in U set p=hU.isoSpec.hom z. Let e:kappa_X(z) -> kappa(p) be the field isomorphism obtained by composing the residue map of U.ι, the inverse residue map of hU.isoSpec.hom, and Spec.residueFieldIso A p. Then the derived residue pullback Li_z^* E is isomorphic to Q of termwise tilde over kappa_X(z) of restrictScalars e applied termwise to F tensor_A kappa(p). This is an isomorphism of derived sheaf objects, without taking cohomology or dimensions; F need not be bounded or free.",
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tags 0BDI (affine reduction) and 08DW(2) (affine derived pullback); https://stacks.math.columbia.edu/tag/08DW and https://stacks.math.columbia.edu/tag/0BDI"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof": [
+  {
+   "text": "Factor the residue point through U. Use the canonical exact over-site and affine restriction equivalences to transport the supplied model to Q(tilde F) on Spec A. Open restriction commutes with derived pullback. The exact functors defining affinePerfectSheafification, not an arbitrary existential equivalence, are used in these identifications.",
+   "uses": [
+    "lem-pc-affine-localized-site-derived-transport",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the explicit field isomorphism e from the residue maps of the open immersion and the affine chart and Spec.residueFieldIso. Residue-point naturality and Spec.map_residueFieldIso_inv_eq_fromSpecResidueField identify the two residue morphisms. Spec.algebraMap_residueFieldIso_inv and naturality of evaluation identify A -> kappa_X(z) with e.inv composed with algebraMap A kappa(p).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply derivedPullback_tilde_iso with the identity K-flat resolution of F. Transport the resulting termwise residue-extension complex along the field isomorphism: pullback along a field isomorphism is exact scalar transport and agrees with restrictScalars e.hom. Compose the derived isomorphisms from the preceding steps. The scalar-change tilde comparison is the ordinary affine formula specialized to an isomorphism.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-localized-site-derived-transport",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tags 0BDI (affine reduction) and 08DW(2) (affine derived pullback)",
+  "note": "Separates the derived-object computation from the proved K-flatness and homology/rank steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback of affine K-flat module complex computes residue field fibre",
+   "results": "UNAVAILABLE: service Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finrank of derived residue field fibre of bounded above free complex on affine scheme",
+   "results": "Eight results on cotangent spaces, rank at stalk and ring quotients; no derived-object comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finrank\", \"restrictScalars\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*fiberBetti|fiberBetti.*affine|tilde.*homology|homology.*tilde; derivedFiberCohomology; affine residue pullback",
+   "results": "msearch grep no hits; rg found the existing affine derived-pullback and localized derived transport formulas but no ambient derived-object comparison for a supplied K-flat affine model. Blueprint search found no matching node.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image at a point computed by tensoring a K-flat quasi-coherent complex with the residue field",
+   "results": "Second reader: eight hits, principally presheaf differentials and ordinary Scheme.Modules.pullback; none is this derived-object comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kFlat\"",
+   "results": "Second reader: only Lean.mkFlatCtorOfStructCtorName; no mathematical comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "residuePullback|derivedPullback_tilde|restrictFunctorIsoPullback; affine.*(residue|KFlat|kFlat)|localized.*residue|residue.*localized",
+   "results": "Second reader: msearch found ordinary restrictFunctorIsoPullback. Repository rg and reading found KFlatStalkResidueCohomology (global sheaf representatives), LocalizedStrictPerfectResidueHomology (strictly perfect and degree-zero naturality), AffineSpectrumDerivedCoordinates (coordinate transport), and the two existing affine formula dependencies. None already states the supplied local unbounded K-flat module comparison.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineBoundedAboveFiberBettiComparison",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BDI affine reduction: the derived-object computation preceding cohomology and Betti ranks",
+   "via": [
+    "lem-sc-affine-bounded-above-fiber-betti-comparison",
+    "lem-sc-pseudo-coherent-fiber-bounded-above-model",
+    "lem-sc-pseudo-coherent-fiber-finite-free-model",
+    "lem-sc-perfect-jump-loci",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKFlatResiduePullbackModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_kFlat_residuePullback_model",
+  "statement": "theorem affine_kFlat_residuePullback_model (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ x : X, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (X.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory X) (U : X.Opens) (hU : IsAffineOpen U)\n    (F : CochainComplex (ModuleCat.{u} (X.presheaf.obj (.op U))) ℤ)\n    (hF : (HomologicalComplex.quasiIso\n      (ModuleCat.{u} (X.presheaf.obj (.op U))) (.up ℤ)).kFlat F)\n    (hmodel : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅\n        DerivedCategory.Q.obj\n          (((affinePerfectSheafification X U hU).mapHomologicalComplex (.up ℤ)).obj F)))\n    (z : U) :\n    let e := asIso (U.ι.residueFieldMap z) ≪≫\n      (asIso (hU.isoSpec.hom.residueFieldMap z)).symm ≪≫\n        Spec.residueFieldIso (X.presheaf.obj (.op U)) (hU.isoSpec.hom z)\n    Nonempty ((derivedPullback (X.fromSpecResidueField z)).obj E ≅\n      DerivedCategory.Q.obj\n        (((tilde.functor (X.residueField z)).mapHomologicalComplex (.up ℤ)).obj\n          (((ModuleCat.restrictScalars e.hom.hom).mapHomologicalComplex (.up ℤ)).obj\n            (((ModuleCat.extendScalars\n              (algebraMap (X.presheaf.obj (.op U))\n                (hU.isoSpec.hom z).asIdeal.ResidueField)).mapHomologicalComplex\n                  (.up ℤ)).obj F))))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T124313-L-3777151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T124313-L-3777151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

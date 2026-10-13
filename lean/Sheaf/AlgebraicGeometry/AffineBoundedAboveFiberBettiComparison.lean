@@ -10,9 +10,11 @@ public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Sheaf.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
+import Sheaf.Topology.PointModuleEvaluationEquivalence
+import Mathlib.CategoryTheory.Adjunction.Additive
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # Fibre Betti numbers of a supplied affine bounded-above free model
 
@@ -75,6 +77,71 @@ theorem affine_boundedAbove_fiberBetti_eq (X : Scheme.{u})
         ((((ModuleCat.extendScalars
           (algebraMap (X.presheaf.obj (.op U))
             (hU.isoSpec.hom z).asIdeal.ResidueField)).mapHomologicalComplex
-              (ComplexShape.up ℤ)).obj F).homology i) := by sorry
+              (ComplexShape.up ℤ)).obj F).homology i) := by
+  classical
+  let A := X.presheaf.obj (.op U)
+  let k := X.residueField z
+  let p := hU.isoSpec.hom z
+  let e : k ≅ CommRingCat.of p.asIdeal.ResidueField :=
+    asIso (U.ι.residueFieldMap z) ≪≫
+      (asIso (hU.isoSpec.hom.residueFieldMap z)).symm ≪≫ Spec.residueFieldIso A p
+  let C := ((ModuleCat.extendScalars (algebraMap A p.asIdeal.ResidueField)).mapHomologicalComplex
+    (.up ℤ)).obj F
+  let R := ModuleCat.restrictScalars e.hom.hom
+  let V := (R.mapHomologicalComplex (.up ℤ)).obj C
+  have hacyclic := CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat F
+    ⟨b, (F.isStrictlyLE_iff b).mp hb⟩ (fun n ↦ by
+      have := hfree n
+      exact Module.Flat.of_free)
+  have hF : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat F := by
+    rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+      HomotopyCategory.kFlat_iff_preserves_acyclic]
+    intro N hN
+    obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
+    rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
+    have hr := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic
+      (CochainComplex.mapBifunctor N F (MonoidalCategory.curriedTensor _))).2
+        (hacyclic N hN)
+    refine ⟨?_, hr⟩
+    exact (HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) hr
+  let α := Classical.choice (affine_kFlat_residuePullback_model X E U hU F hF hmodel z)
+  let S := SheafOfModules.{u} (moduleRings (Spec k).toRingedSpace)
+  let Γ : S ⥤ ModuleCat.{u} k :=
+    SheafOfModules.evaluation (moduleRings (Spec k).toRingedSpace) (.op ⊤) ⋙
+      ModuleCat.restrictScalars (ΓSpecIso k).inv.hom
+  have : (RingedSpace.globalSectionsFunctor (Spec k).toRingedSpace).IsEquivalence :=
+    RingedSpace.globalSectionsFunctor_isEquivalence_of_unique _
+  have : Limits.PreservesFiniteLimits
+      (SheafOfModules.evaluation (moduleRings (Spec k).toRingedSpace) (.op ⊤)) :=
+    inferInstanceAs (Limits.PreservesFiniteLimits
+      (RingedSpace.globalSectionsFunctor (Spec k).toRingedSpace))
+  have : Limits.PreservesFiniteColimits
+      (SheafOfModules.evaluation (moduleRings (Spec k).toRingedSpace) (.op ⊤)) :=
+    inferInstanceAs (Limits.PreservesFiniteColimits
+      (RingedSpace.globalSectionsFunctor (Spec k).toRingedSpace))
+  have : Limits.PreservesFiniteLimits Γ := Limits.comp_preservesFiniteLimits _ _
+  have : Limits.PreservesFiniteColimits Γ := Limits.comp_preservesFiniteColimits _ _
+  have : Γ.PreservesHomology := inferInstance
+  let T := tilde.functor k
+  let TV := (T.mapHomologicalComplex (.up ℤ)).obj V
+  let a : derivedFiberCohomology X E i z ≅ Γ.obj (TV.homology i) :=
+    Γ.mapIso ((DerivedCategory.homologyFunctor S i).mapIso α ≪≫
+      (DerivedCategory.homologyFunctorFactors S i).app TV)
+  have : (moduleSpecΓFunctor (R := k)).Additive :=
+    (tilde.adjunction (R := k)).right_adjoint_additive
+  let c : ((Γ.mapHomologicalComplex (.up ℤ)).obj TV) ≅ V :=
+    (Functor.mapHomologicalComplexCompIso (tilde.toTildeΓNatIso (R := k)).symm
+      (.up ℤ)).app V ≪≫ (Functor.mapHomologicalComplexIdIso (ModuleCat.{u} k) (.up ℤ)).app V
+  let d := (HomologicalComplex.homologyFunctor (ModuleCat.{u} k) (.up ℤ) i).mapIso c
+  let av : derivedFiberCohomology X E i z ≅ V.homology i :=
+    a ≪≫ ((TV.sc i).mapHomologyIso Γ).symm ≪≫ d
+  let ar : V.homology i ≅ R.obj (C.homology i) := (C.sc i).mapHomologyIso R
+  have hr := (av ≪≫ ar).toLinearEquiv.finrank_eq
+  have hdim : Module.rank k (R.obj (C.homology i)) =
+      Module.rank p.asIdeal.ResidueField (C.homology i) :=
+    rank_eq_of_equiv_equiv e.hom.hom (AddEquiv.refl _) e.commRingCatIsoToRingEquiv.bijective
+      (fun _ _ ↦ rfl)
+  unfold derivedFiberBetti
+  exact hr.trans (congrArg Cardinal.toNat hdim)
 
 end AlgebraicGeometry.Scheme

@@ -15,24 +15,23 @@
  ],
  "proof": [
   {
-   "text": "Use the exact equivalence between sheaves on Spec Gamma(U,O) and the localized open site, compatible with termwise affinePerfectSheafification, to interpret hmodel on the affine spectrum. Factor the residue point through U. The open-restriction comparison for derived pullback identifies its fibre with the fibre of Q(tilde F) on the spectrum. The factorization is the restriction of X.fromSpecResidueField z since its image is z in U.",
+   "text": "Free terms are flat; use acyclic_mapBifunctor_of_boundedAbove_flat and the homotopy-category acyclic tensor characterization to prove K-flatness of F.",
    "uses": [
-    "lem-pc-affine-localized-site-derived-transport",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-module-bounded-flat-kflat"
    ],
    "elementary": false
   },
   {
-   "text": "Free terms are flat. Convert F.IsStrictlyLE b to the explicit upper bound and apply the bounded-above flat module K-flat theorem. The affine derived-pullback comparison now computes pullback of Q(tilde F) along A to kappa(p) termwise by tilde of F tensor_A kappa(p). The residueFieldMap of the open immersion and the affine chart are isomorphisms; compose them with Spec.residueFieldIso. Compatibility with the A-action follows from Spec.algebraMap_residueFieldIso_inv and the naturality of germs and residues.",
+   "text": "Apply affine_kFlat_residuePullback_model to get a derived sheaf object isomorphism with termwise tilde of the residue-extension complex, transported to kappa_X(z) along the canonical field isomorphism.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-sc-affine-kflat-residue-pullback-model"
    ],
    "elementary": false
   },
   {
-   "text": "Take degree-i cohomology. Tilde is exact and on Spec of the residue field its global sections recover the original module. The scalar action in derivedFiberCohomology is transported through GammaSpecIso. Therefore the residue-field isomorphism of the preceding step identifies the resulting cohomology with homology of the scalar-extension complex by a semilinear bijection. Isomorphic scalar fields and a semilinear bijection preserve module rank and hence finrank, even when the dimension is infinite. Applying the definition of derivedFiberBetti gives the asserted equality. Empty U has no z; zero complexes, zero ranks and degrees above b are covered by the same maps.",
+   "text": "Apply derived homology in degree i. Global sections on the one-point field spectrum are an exact equivalence, and restrictScalars along GammaSpecIso is exact. Commute sections with homology, use tilde.toTildeΓNatIso termwise and the complex composition and identity comparisons, then commute residue-field scalar restriction with homology. The resulting linear equivalence preserves finrank. The additive identity between scalar-restricted and original homology is compatible with the bijective field map, so rank_eq_of_equiv_equiv and Cardinal.toNat prove the asserted equality of finranks, including infinite dimensions.",
    "uses": [
+    "lem-pc-point-module-evaluation-equivalence",
     "lem-weil-pbc-spec-module-tilde-sections",
     "def-sc-derived-fiber-betti"
    ],
@@ -40,19 +39,19 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-localized-site-derived-transport",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
   "lem-pc-module-bounded-flat-kflat",
+  "lem-sc-affine-kflat-residue-pullback-model",
+  "lem-pc-point-module-evaluation-equivalence",
   "lem-weil-pbc-spec-module-tilde-sections",
   "def-sc-derived-fiber-betti"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K1",
+  "group": "N4",
   "date": "2026-10-13",
   "document": "Stacks Project, Derived Categories of Schemes",
-  "place": "Tag 0BDI, proof, affine reduction; Tag 08DW(2) and its proof; https://stacks.math.columbia.edu/tag/0BDI and https://stacks.math.columbia.edu/tag/08DW",
-  "note": "Expanded localized-site and residue-field scalar identifications in the affine computation of Tag 0BDI."
+  "place": "Tags 0BDI (affine reduction) and 08DW(2) (affine derived pullback)",
+  "note": "Separates the derived-object computation from the proved K-flatness and homology/rank steps."
  },
  "mathlib_searches": [
   {
@@ -140,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T111859-L-3055026",
+  "landing": "20261013T124313-L-3777151",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
