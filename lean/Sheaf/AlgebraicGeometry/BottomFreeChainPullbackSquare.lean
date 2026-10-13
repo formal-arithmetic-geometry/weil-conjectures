@@ -7,9 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.BottomFreeChainPullbackComparison
 
 /-! # Pullback of a specified finite-free bottom chain square
 
@@ -84,6 +82,26 @@ theorem bottomFreeChain_pullback_square
             (((DerivedCategory.homologyFunctor
               (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).map
                 ((derivedPullback g).map f)).over V) ≫ eQ.hom =
-                  eP.hom ≫ HomologicalComplex.homologyMap β a := by sorry
+                  eP.hom ≫ HomologicalComplex.homologyMap β a := by
+  let V := g ⁻¹ᵁ W
+  let F := Modules.tensorPullback (g.resLE W V (le_refl V)) ⋙
+    (Modules.overEquiv V).inverse
+  obtain ⟨hF, eP, eQ, he⟩ := bottomFreeChain_pullback_comparison
+    T X Z f a W A B hAbounded hBbounded hAfree hBfree α eA eB hsquare T' g
+  let := hF
+  let P := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj A
+  let Q := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj B
+  let β := (F.mapHomologicalComplex (ComplexShape.up ℤ)).map α
+  refine ⟨V, hy, P, Q, ?_, ?_, ?_, ?_, β, ?_, eP, eQ, he⟩
+  · exact Functor.map_isZero F hAprev
+  · exact Functor.map_isZero F hBprev
+  · change F.map (A.d a (a + 1)) = 0
+    rw [hAzero, F.map_zero]
+  · change F.map (B.d a (a + 1)) = 0
+    rw [hBzero, F.map_zero]
+  · change IsIso (F.map (α.f a))
+    have := hα
+    infer_instance
+
 
 end AlgebraicGeometry.Scheme

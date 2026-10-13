@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-bottom-free-chain-pullback-comparison",
+ "kind": "statement",
+ "title": "Natural homology square for termwise finite-free pullback",
+ "statement": "Let T be a scheme [def-pc-scheme], X and Z objects of D(O_T) [def-pc-derived-category], f:X→Z, and a an integer. Choose derived categories of all schemes in one morphism universe. Let W be an open in T, A and B bounded-above cochain complexes of module sheaves on W [def-pc-cochain-complex-modules], each with finite free terms [def-weil-pbc-free-module]. Let α:A→B and fix isomorphisms eA:L(W.ι)*X≅Q(A) and eB:L(W.ι)*Z≅Q(B) [def-pc-derived-pullback] satisfying L(W.ι)*(f) followed by eB.hom = eA.hom followed by Q(α). For any scheme morphism g:T′→T, put V=g inverse-image W, h=g.resLE W V (le_refl V), and F=Modules.tensorPullback h followed by the inverse of Modules.overEquiv V [def-pc-module-pullback]. Then F is additive. Put P=F(A), Q=F(B), β=F(α), with F applied termwise. There are isomorphisms eP:H^a(Lg*X)|_V≅H^a(P) and eQ:H^a(Lg*Z)|_V≅H^a(Q) with H^a(Lg*f)|_V followed by eQ.hom = eP.hom followed by H^a(β). No zero-term, zero-differential, component-invertibility or point hypotheses are imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat computation and naturality, with 06YD bounded-above flatness, 0D5S composition and 08DW restriction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-free-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Set V=g inverse-image W and h=g.resLE W V (le_refl V). Define F explicitly as tensorPullback h followed by (Modules.overEquiv V).inverse. The tensor-pullback adjunction makes it right exact and hence additive; the equivalence is additive, so F is additive. Finite free terms are finite sums of the structure sheaf, hence flat. The bounded-above flat complexes A and B are K-flat. Use one left-derived counit ε for tensorPullback h; its components at A and B are invertible. If flatComplexDerivedPullback presents another counit, the unique isomorphism of left-derived functors transports its invertibility to ε. Naturality at α gives the termwise square.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-module-pullback",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let R_W and R_V be exact restriction to the open subschemes. The unique comparison between the left derived functor of tensorPullback W.ι and R_W.mapDerivedCategory identifies L(W.ι)* with exact restriction. The natural open-restriction comparison identifies Lg* followed by R_V.mapDerivedCategory with R_W.mapDerivedCategory followed by Lh*. Apply this comparison at X and Z, and map the given commutative square through Lh*. Compose with ε at A and B and the natural quotient/homotopy comparisons. This gives a derived commutative square with endpoints represented by tensorPullback h applied termwise to A and B. Equivalently use derived composition along the cartesian open square; the two constructions are natural for f.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply degree-a derived homology to that square and use homologyFunctorFactors to replace homology of Q of each complex by complex homology. Exactness of the equivalence (Modules.overEquiv V).inverse identifies homology of its termwise images with its image of homology; its unit isomorphism identifies the image of R_V of a sheaf with that sheaf restricted to the localized site over V. Compose these natural isomorphisms to form eP and eQ. Naturality at α and f proves the displayed equation. The construction uses no bottom-degree conditions. Empty V gives the same equivalences, zero ranks give zero objects, and the degree-a functor exists for every integer a.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat computation and naturality, with 06YD bounded-above flatness, 0D5S composition and 08DW restriction",
+  "note": "M2 isolates the comparison part of the original plan; bottom-degree preservation is proved separately in the importing item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex",
+   "results": "loogle: unknown identifier 'Functor.mapHomologicalComplex'",
+   "date": "2026-10-13",
+   "verdict": "This identifier was not resolved by Loogle; the successful semantic and source searches below found no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex|homologyFunctorFactors_hom_naturality",
+   "results": "Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic pullback and complex-functor primitives only; no scheme derived homology comparison for this specified chart square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived pullback on bounded above finite free complexes gives a homology square on the inverse image open",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; TopCat.Sheaf.pullbackIso; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_assoc; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-13",
+   "verdict": "Generic pullback and complex-functor primitives only; no scheme derived homology comparison for this specified chart square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a bounded above finite free complex commutes naturally with restriction and homology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BottomFreeChainPullbackSquare",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Transport of the specified chart chain square in step 3 of lem-sc-zero-bottom-arrow-pullback-local: the natural derived and homology comparisons, before bottom-degree preservation.",
+   "via": [
+    "lem-sc-bottom-free-chain-pullback-square",
+    "lem-sc-zero-bottom-arrow-pullback-local",
+    "lem-sc-local-zero-bottom-model-pullback",
+    "lem-sc-perfect-universal-lowest-cohomology-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BottomFreeChainPullbackComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/BottomFreeChainPullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.bottomFreeChain_pullback_comparison",
+  "statement": "theorem bottomFreeChain_pullback_comparison\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (T : Scheme.{u}) (X Z : schemeDerivedCategory T) (f : X ⟶ Z) (a : ℤ)\n    (W : T.Opens)\n    (A B : CochainComplex\n      (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) ℤ)\n    (hAbounded : ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (A.X i))\n    (hBbounded : ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (B.X i))\n    (hAfree : ∀ i : ℤ, ∃ n : ℕ, Nonempty (A.X i ≅ SheafOfModules.free\n      (R := moduleRings W.toScheme.toRingedSpace) (ULift.{u} (Fin n))))\n    (hBfree : ∀ i : ℤ, ∃ n : ℕ, Nonempty (B.X i ≅ SheafOfModules.free\n      (R := moduleRings W.toScheme.toRingedSpace) (ULift.{u} (Fin n))))\n    (α : A ⟶ B)\n    (eA : (derivedPullback W.ι).obj X ≅ DerivedCategory.Q.obj A)\n    (eB : (derivedPullback W.ι).obj Z ≅ DerivedCategory.Q.obj B)\n    (hsquare : (derivedPullback W.ι).map f ≫ eB.hom =\n      eA.hom ≫ DerivedCategory.Q.map α)\n    (T' : Scheme.{u}) (g : T' ⟶ T) :\n    let V := g ⁻¹ᵁ W\n    let F := Modules.tensorPullback (g.resLE W V (le_refl V)) ⋙\n      (Modules.overEquiv V).inverse\n    ∃ hF : F.Additive,\n      letI := hF\n      let P := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj A\n      let Q := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj B\n      let β := (F.mapHomologicalComplex (ComplexShape.up ℤ)).map α\n      ∃ (eP : ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj\n          ((derivedPullback g).obj X)).over V ≅ P.homology a)\n        (eQ : ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj\n          ((derivedPullback g).obj Z)).over V ≅ Q.homology a),\n        (((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).map\n            ((derivedPullback g).map f)).over V) ≫ eQ.hom =\n              eP.hom ≫ HomologicalComplex.homologyMap β a",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T122230-L-3591606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T122230-L-3591606",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
