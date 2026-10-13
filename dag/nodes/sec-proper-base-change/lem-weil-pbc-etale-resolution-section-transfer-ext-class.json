@@ -16,21 +16,28 @@
  },
  "proof": [
   {
-   "text": "Adjoint α degreewise to β:g*I→J. The augmentation equation says β represents the identity of g*G. Exactness preserves the augmentation quasi-isomorphism; extMk_hom and mapExactFunctor_hom compute the image of the represented Ext class.",
+   "text": "Construct e:g*I→J degreewise by the inverse homEquiv applied to α. Apply homEquiv injectivity and its left/right naturality to prove the chain-map equations. Left naturality of the inverse equivalence, hα, right naturality, and homEquiv_id show g*(I.ι⁰)e⁰=J.ι⁰. The chain-map equation and hfX show that g*(fX)e^q is closed.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exactFunctor_resolution_cocycle with coefficient morphism the identity of g*G, comparison e and its augmentation equation. The exactness and additivity instances of upperStar discharge the functor assumptions. Simplify composition with Ext.mk₀ of the identity to obtain the image of I.extMk fX as J.extMk(g*(fX)e^q).",
    "uses": [
     "def-weil-pbc-inverse-image",
-    "prop-weil-pbc-inverse-image-exact"
+    "lem-weil-pbc-exact-functor-resolution-cocycle"
    ],
    "elementary": false
   },
   {
-   "text": "Precompose by the explicitly constructed free-open pullback map. Unit naturality and the counit identity calculate the section of the resulting cocycle as openResolutionSectionTransfer of the section of fX. hsections and injectivity of sectionsEquiv identify it with fY. The degree-zero Ext precomposition formula finishes.",
+   "text": "Apply sectionsEquiv injectivity to identify k followed by g*(fX)e^q with fY. Expand k via its defining inverse sectionsEquiv and cancel apply_symm_apply. Unit naturality and homEquiv.apply_symm_apply give unit followed by g_*(g*(fX)e^q)=fX followed by α^q. Evaluate this equality with sectionsEquiv, using sectionsEquiv_naturality. Naturality_apply of the sheaf morphism moves its component across restriction along openSectionPullback. The resulting equality is hsections after expanding openResolutionSectionTransfer. Finally use InjectiveResolution.mk₀_comp_extMk and substitute the equality of cocycles.",
    "uses": [
     "def-weil-pbc-etale-open-free-sheaf-pullback",
     "def-weil-pbc-etale-open-comparison-data",
     "def-weil-pbc-etale-resolution-section-transfer"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -38,12 +45,13 @@
   "def-weil-pbc-etale-open-free-sheaf-pullback",
   "def-weil-pbc-etale-resolution-section-transfer",
   "def-weil-pbc-inverse-image",
-  "prop-weil-pbc-inverse-image-exact"
+  "lem-weil-pbc-exact-functor-resolution-cocycle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project (tag pages read online)",
-  "place": "https://stacks.math.columbia.edu/tag/01F8 and https://stacks.math.columbia.edu/tag/01FB (resolution functoriality); https://stacks.math.columbia.edu/tag/0A50 (section complexes); explicit Lean-model calculation, not a verbatim Stacks statement."
+  "place": "https://stacks.math.columbia.edu/tag/01F8 and https://stacks.math.columbia.edu/tag/01FB (resolution functoriality); https://stacks.math.columbia.edu/tag/0A50 (section complexes)",
+  "note": "Q2: formalized the adjunction and section calculation; reused exactFunctor_resolution_cocycle for the derived-category computation, and Mathlib mk₀_comp_extMk for precomposition."
  },
  "mathlib_searches": [
   {
@@ -126,13 +134,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T234226-L-2127286",
-  "kind": "interface",
+  "landing": "20261013T015607-L-3024908",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
