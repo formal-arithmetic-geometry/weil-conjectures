@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Define D as the actual shared Hom complex Hom(P,A[0]), not as a chosen witness. In degree n its product factors are Hom(P^p,A[0]^(p+n)). All factors except p=-n are zero. Projection to p=-n is an isomorphism: the inverse has the identity component there and zero components elsewhere; the product universal property verifies both inverse identities. On the bottom-topology one-object site, evaluation is an equivalence with A-modules (all restriction maps are identities and every presheaf is a sheaf). Internal Hom evaluates to linear Hom, and the tensor evaluates to module tensor. Hence D^n evaluates to the module dual of P^(-n).",
+   "text": "Use the specified product fan of the shared Hom complex [def-pur-hom-complex] and its projections [def-pc-perfect-rhom-base-change-map]. Lift the family whose component at p=-n is the identity and whose other components are zero. The lift followed by that projection is the identity by the product factorization equation. For the reverse composite, apply product extensionality: at p=-n the factorization equation gives identity, and every other target is zero since the single complex is zero in degree p+n. The single-complex term isomorphism identifies the surviving target with the unit ring sheaf. This constructs the isomorphism D^n ≅ internalHom(P^(-n),A).",
    "uses": [
     "def-pc-perfect-rhom-base-change-map",
     "def-pur-hom-complex"
@@ -22,8 +22,17 @@
    "elementary": false
   },
   {
-   "text": "For a finite projective module M choose a split presentation M -> A^r -> M with composite the identity. Dualizing reverses the arrows and again gives a split presentation, because precomposition preserves composition and identities. Coordinate linear functionals identify the dual of A^r with A^r. Thus the dual of M is projective and therefore flat (Mathlib Module.dual_projective and Module.Flat.of_projective). Tensoring with it preserves finite limits and colimits. Transport this exactness along evaluation and the tensor comparison to obtain SheafOfModules.IsFlat for each D^n. This proves the assertion without boundedness of P.",
+   "text": "Evaluate internal Hom at the sole object. Evaluation of a slice morphism at the identity slice object is a linear map P^(-n)(*) → A. It is injective since the slice has only one object; it is surjective by extending a linear map to the one-object presheaves and restricting it to the slice. This is a linear equivalence. Install the given finite and projective instances, then apply Mathlib Module.dual_projective, Module.Flat.of_projective and Module.Flat.of_linearEquiv to obtain flatness of the evaluated internal Hom module.",
    "uses": [
+    "def-pc-perfect-rhom-base-change-map",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every site object equals the chosen point, so flatness holds at every evaluation of the internal Hom presheaf. By Mathlib Module.Flat tensorRight preserves finite limits in each module category. PresheafOfModules.evaluationJointlyReflectsLimits then shows tensorRight for this presheaf preserves finite limits. Apply [lem-pc-sites-modules-sheafification-flat] with the identity ring map. Mathlib gives an isomorphism from its sheafification to the original sheaf via the sheafification-adjunction counit. Transport exactFunctor across the tensorRight natural isomorphism induced by that counit, and then across the dual-term isomorphism. This is precisely flatness [def-pc-flat-sheaf-modules]. No boundedness or nonzero-ring hypothesis is used.",
+   "uses": [
+    "lem-pc-sites-modules-sheafification-flat",
     "def-pc-flat-sheaf-modules"
    ],
    "elementary": false
@@ -32,13 +41,14 @@
  "proof_deps": [
   "def-pc-perfect-rhom-base-change-map",
   "def-pur-hom-complex",
+  "lem-pc-sites-modules-sheafification-flat",
   "def-pc-flat-sheaf-modules"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), finite-projective dual argument; projectivity of the dual also Mathlib/LinearAlgebra/Dual/Lemmas.lean, Module.dual_projective (lines 145-147)",
-  "note": "Expanded chain-level finite-projective argument; the exact sheaf interface is not a verbatim Stacks statement."
+  "by": "N4 stage 3 worker",
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0A6A, finite-projective dual argument; Tag 03ET, flatness of sheafification",
+  "note": "Complete Lean proof of the product collapse and singleton-slice linear equivalence; Mathlib supplies dual projectivity and module tensor exactness; the existing sheafification-flatness theorem supplies the sheaf transfer."
  },
  "mathlib_searches": [
   {
@@ -125,10 +135,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T082423-L-1651496",
-  "kind": "interface",
+  "landing": "20261013T100042-L-2473192",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
