@@ -5,7 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechCofaceEvaluation
+import Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRestriction
 
 /-! # Geometric cofaces of normalized singleton tensor sections
 Source: Stacks Project, Tag 03P2; Tag 03DR for section restrictions.
@@ -64,7 +65,21 @@ theorem singletonTensorCech_normalized_coface
       (f (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b))) =
     f' (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)]
       PiTensorProduct.tprod Γ(U.left, ⊤) (j.insertNth 1 b))) := by
-  sorry
+  classical
+  let : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra
+  let V := fun _ : Fin (n + 2) → Fin 1 ↦
+    AddCommGrpCat.of (ULift.{u + 1}
+      Γ((Modules.tensorPullback
+        (∏ᶜ (fun _ : Fin (n + 2) ↦ Over.mk g)).left.hom).obj F, ⊤))
+  have hi : Function.Injective (Pi.π V (fun _ ↦ 0)) := by
+    have he : (fun _ : Fin (n + 2) ↦ (0 : Fin 1)) = default := Subsingleton.elim _ _
+    rw [he, ← productUniqueIso_hom]
+    exact (ConcreteCategory.bijective_of_isIso _).injective
+  apply hi
+  apply ULift.ext
+  exact (singletonTensorCech_coface_evaluation X F U W g n j _).trans
+    (singletonTensor_normalized_restriction X F U W g n j f f' hf hf' m b)
+
 
 end
 end AlgebraicGeometry.Scheme

@@ -14,35 +14,22 @@
  },
  "proof": [
   {
-   "text": "Let P and Q be the categorical products of n+1 and n+2 copies of W→U. The product map p:Q→P omits j, and p followed by the k-th projection is the j.succAbove(k)-th projection, by Pi.lift_π. The formal-coproduct Čech face has index map precomposition with j.succAbove and component p. Its presheaf map is a product lift of projection followed by section restriction. Evaluating at the constant-zero tuple uses Pi.lift_π and gives restriction along p of the evaluated input section.",
+   "text": "Project both Čech sections to the sole outer tuple. This projection is the hom of productUniqueIso, hence injective by ConcreteCategory.bijective_of_isIso. Taking ULift.down is injective by ULift.ext. The coface-evaluation theorem identifies the first evaluation with restriction along the omitted-factor product map; the normalized-restriction theorem identifies that section with the evaluated inserted-unit section. Transitivity gives equality of evaluations, and injectivity gives the asserted equality of Čech sections.",
    "uses": [
-    "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Apply hf to the input m tensor tprod(b). By the semilinearity clause of the restriction theorem, restricting this section pulls back the product of projection functions as a scalar, and restricts the coefficient section. The composition clause and p's over-U triangle identify the restricted coefficient with direct restriction from U to Q. Ring-map preservation of products and p's projection equations identify the scalar with the product of the retained Q-projection functions.",
-   "uses": [
-    "lem-sc-etale-qcoherent-presheaf-functorial"
+    "lem-sc-singleton-tensor-cech-coface-evaluation",
+    "lem-sc-singleton-tensor-normalized-restriction"
    ],
    "elementary": false
-  },
-  {
-   "text": "Apply hf' to m tensor tprod(j.insertNth 1 b). Its evaluated scalar product has j-th factor the pullback of 1, hence 1. Fin.prod_univ_succAbove and insertNth at j.succAbove identify the other factors with those in the preceding step. Thus evaluated outputs agree. The outer product index Fin(n+2)→Fin1 is a singleton, so its projection is the hom of productUniqueIso and is injective. ULift.down is injective too. Therefore the Čech coface of f's pure value is f' of the inserted-unit pure value. When n=0 there are the two usual projection restrictions; zero section groups obey the same equations.",
-   "uses": [
-    "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization",
-  "lem-sc-etale-qcoherent-presheaf-functorial"
+  "lem-sc-singleton-tensor-cech-coface-evaluation",
+  "lem-sc-singleton-tensor-normalized-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Expanded the geometric restriction part implicit in Tag 03P2 using Tag 03DR; both pages read online on 2026-10-13."
+  "place": "Tags 03P2 and 03DR. B2 implements the projection/injectivity argument and splits the arbitrary-section evaluation and normalized-section restriction calculations, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -132,9 +119,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T054240-L-450278",
+  "landing": "20261013T121839-L-3557958",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
