@@ -16,20 +16,50 @@
  ],
  "proof": [
   {
-   "text": "A reducible closed set T is the union of two proper closed subsets T₁ and T₂:\nuse the closed-union characterization of preirreducibility and intersect both closed\nsets with T. Tag 01YD gives a coherent submodule H of F with support in T₂ and a\ncoherent quotient supported in T₁. Concretely, let J be the ideal of the reduced\ninduced structure on T₁, and take H = J^n F. On X minus T₂, a power of J kills F\nby Tag 01Y9; hence H is supported in T₂. Outside T₁ the ideal J is the unit ideal,\nso F/H has zero stalk there. Coherence follows from Noetherian coherence stability\nfor ideal products and cokernels. The inclusion H to F is a monomorphism, and its\ncanonical cokernel sequence is short exact. Support containment followed by strict\ninclusion T₁,T₂ into T gives both strict-support conclusions. Empty or singleton\nsupports cannot satisfy hred; either of H or its quotient may be zero, which causes\nno exception since T is nonempty. This theorem constructs no filtration and uses\nno support-induction hypothesis.",
+   "text": "Use the closed-union characterization of non-preirreducibility to find two closed sets covering T, neither containing T. Intersect each with T to obtain proper closed subsets T1 and T2 and support(F) = T1 union T2.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct K as the actual vanishing ideal of T1. Apply coherent_ideal_power_supported_on_closed with C = T2 to choose an exponent n, quasi-coherence of K^n, and support(K^n F) contained in T2. Define H = K^n F via the multiplication image and f its image inclusion.",
    "uses": [
-    "lem-weil-pbc-coherent-support-union-exact-sequence"
+    "lem-pc-s3-coherent-ideal-power-supported-on-closed",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coherence of F gives quasi-coherence. Quasi-coherence is preserved by tensor products and images, so H is quasi-coherent. The coherent-submodule theorem gives coherence of H and its cokernel; the image inclusion is monic and its canonical cokernel sequence is short exact.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal zero-set theorem identifies the proper-stalk locus of K with T1. Outside T1 its stalk inclusion is surjective, so the stalk ideal is the unit ideal. The product/quotient stalk formula gives a zero quotient stalk for every exponent n; at exponent zero use the identity inclusion. Thus support(cokernel f) is contained in T1. Compose both support bounds with the proper inclusions T1,T2 into T.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-weil-pbc-ideal-module-product-stalk"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-support-union-exact-sequence"
+  "lem-pc-s3-coherent-ideal-power-supported-on-closed",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 01YF reducible-support paragraph, applying Tag 01YD"
+  "place": "Tag 01YF reducible-support paragraph and Tag 01YD ideal-power construction; second reading removes the duplicate support-union split and proves coherence, exactness and quotient support directly."
  },
  "mathlib_searches": [
   {
@@ -113,12 +143,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T223411-L-1639003",
+  "landing": "20261013T010611-L-2669632",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
