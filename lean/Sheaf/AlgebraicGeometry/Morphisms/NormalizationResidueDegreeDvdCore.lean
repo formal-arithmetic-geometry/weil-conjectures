@@ -10,6 +10,17 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+/- STATEMENT-DISPUTED: G is unrelated to p or a; no torsor or Galois hypothesis is present.
+Take N = Spec R[t], P = V = Spec C[t], p = identity, and a induced by R[t] -> C[t].
+Take D = Spec R with j the zero section, O = D(t), and G the trivial group.
+The relative normalization of N in P is P, since C[t] is integral over R[t].
+At the point (t) of P the residue extension is C/R, of degree 2, but Nat.card G = 1.
+All hypotheses hold: p is finite etale; a is finite, hence qcqs; the normalization map
+is finite; D is regular and integral; j is an effective Cartier centre; O is its complement.
+Thus the claimed divisibility is 2 | 1. Tag 09EB requires a finite Galois extension;
+it does not connect an arbitrary group G to that extension. The caller retains a G-torsor
+but this interface discards it, as well as the compatibility between a, p, and O. -/
+
 /--
 The arithmetic residue-degree calculation for a finite etale morphism over the generic
 point of a Cartier divisor.  This is the local Galois/DVR calculation (Stacks Project,

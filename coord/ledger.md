@@ -13825,3 +13825,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:15 L: merged deliver/C1/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionEquation (stage 3; reviewer PASS; first push; landing 20261013T231531-L-1815631 (interface); batch 20261013T231527; modules 2; new nodes 1)
 - 23:15 L: merged deliver/C2/Sheaf.Algebra.Homology.ExtInjectiveResolutionComparison (stage 3; reviewer PASS; first push; landing 20261013T231531-L-1815745 (interface); batch 20261013T231527; modules 3; new nodes 2)
 - 23:15 L: merged deliver/C2/Sheaf.Algebra.Homology.FirstLocalizationCohomologyBaseChange (stage 3; reviewer PASS; first push; landing 20261013T231532-L-1815968 (interface); batch 20261013T231527; modules 4; new nodes 3)
+- 23:15 L: merged deliver/C2/Sheaf.AlgebraicGeometry.Morphisms.NormalizationResidueDegreeDvdCore (stage 3; reviewer PASS; first push; landing 20261013T231532-L-1816149 (proof); batch 20261013T231527; modules 1; new nodes 0)
