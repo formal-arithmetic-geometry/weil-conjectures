@@ -13,33 +13,40 @@
  ],
  "proof": [
   {
-   "text": "On the cofinal tail above i₀, descend each affine etale source and its map into the fixed affine W using object and arrow descent. Directedness places the finite collection at a common stage.",
+   "text": "Use affineEtale_common_models to descend the finite family of affine etale sources. Choose a stage above both the model stage and i₀, and base change each model there. isPullback_isPullbackLift retains the cartesian comparisons with the original V_q.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit"
+    "lem-pbc-affine-etale-common-models",
+    "lem-weil-pbc-cartesian-square-pasting"
    ],
    "elementary": false
   },
   {
-   "text": "For each source model, its base-change tail has affine transitions, affine hence qcqs terms, and limit the original V_q. Compose b_q with the projection to U_q. Apply lem-weil-pbc-finite-presentation-map-limit-factorization, whose Mathlib declaration is Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation (Limits 01ZC(3)), to the etale structure map U_q → D(i₀). This requires only local finite presentation of U_q, not quasi-compactness or quasi-separatedness of U_q. The structure equation gives the arrow into the stage pullback. Take a common stage and use pullback pasting to get the same source comparison for both equations. For an empty family take the identity stage.",
+   "text": "For each chosen affine source model, form its base-change diagram and limiting cone. Its terms are qcqs and its transitions affine. For each of the two target families (W and U_q), compose the original arrow with the first projection to the target, transporting through the source pullback isomorphism. Apply Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation over D(i₀). Only local finite presentation of the etale targets is required. Index the two families by Fin(n) times Bool and use IsCofiltered.inf_objs_exists to choose one common stage, transporting the factorized maps by diagram transitions. This also works for the empty family.",
    "uses": [
     "lem-weil-pbc-scheme-over-limit",
-    "lem-weil-pbc-finite-presentation-map-limit-factorization",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-finite-presentation-map-limit-factorization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Construct the stage etale arrows by pullback.lift from the descended scheme maps and the source structure morphisms. The factorization structure equations ensure these lifts are over the stage. Base change preserves affine sources. Define d_q using the same cartesian source square for both arrows. Prove each displayed equation by pullback.hom_ext: its first projection is the factorization equation, after computing the pullback-composition comparison and the common source comparison; its second projection follows because both composites are morphisms over the limit.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-pbc-affine-etale-common-models",
   "lem-weil-pbc-cartesian-square-pasting",
   "lem-weil-pbc-finite-presentation-map-limit-factorization",
   "lem-weil-pbc-scheme-over-limit"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P1",
+  "group": "E2",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EYL (lemma-colimit-affine-sites), qcqs proof; Limits Tag 01ZM (lemma-descend-finite-presentation) and Tag 01ZC (proposition-characterize-locally-finite-presentation)"
+  "place": "Tag 0EYL (qcqs object descent), Limits 01ZC(3) and 01YZ; sources read online 2026-10-13; Lean assembly by E2"
  },
  "mathlib_searches": [
   {
@@ -122,13 +129,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T234222-L-2126206",
-  "kind": "interface",
+  "landing": "20261013T010613-L-2670399",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
