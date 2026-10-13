@@ -16,33 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Identify the localized module category over U with the modules on U.toScheme using Scheme.Modules.overEquiv. Its sheaf tensor comparison is obtained on local pure tensors and commutes with sheafification, arbitrary sums and differentials. Under this exact equivalence, the termwise overFunctor becomes canonical open restriction. Apply openRestriction_isKFlat to P and N, and transport the acyclic-tensor criteria back through the exact tensor-compatible equivalence. This gives both K-flat clauses. The empty-open case is vacuous on stalks.",
+   "text": "Use the natural localized tensor equivalence to build a bicomplex isomorphism; since the equivalence preserves sums, mapTotalIso yields its total tensor comparison. For each acyclic localized F, exactness of the equivalence makes E(F) acyclic. Apply openRestriction_isKFlat and the total tensor comparison, then reflect exactness through the faithful equivalence. This proves both restricted K-flat clauses.",
    "uses": [
-    "lem-pc-open-restriction-kflat-model",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-sc-localized-open-tensor-equivalence",
+    "lem-pc-open-restriction-kflat-model"
    ],
    "elementary": false
   },
   {
-   "text": "Apply openRestriction_totalTensor_iso for P and N. The same equivalence commutes with tensor totalization, by summing its natural pure-tensor comparisons in each degree; the two differentials and their signs commute with those maps. Thus the complex comparison transports back to the localized site. Apply Q to this isomorphism and compose with overFunctor.mapDerivedCategoryFactors. No perfectness or specified local model enters this step.",
+   "text": "Apply openRestriction_totalTensor_iso. Compose with the inverse total tensor comparison for the localized equivalence, and lift this complex isomorphism with the fully faithful induced complex functor preimageIso. Apply Q and compose with overFunctor.mapDerivedCategoryFactors to obtain the stated derived isomorphism.",
    "uses": [
+    "lem-sc-localized-open-tensor-equivalence",
     "lem-pc-open-restriction-total-tensor",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-localized-open-tensor-equivalence",
   "lem-pc-open-restriction-kflat-model",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "lem-pc-open-restriction-total-tensor",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
-  "by": "agent P1",
-  "document": "https://stacks.math.columbia.edu/tag/06YC",
-  "place": "K-flat preservation combined with total tensor locality from Tags 01CD and 08DX; explicit localization carrier transport"
+  "by": "agent M2",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YC, 08DX; Modules Tag 01CD; exact tensor-compatible equivalence transport"
  },
  "mathlib_searches": [
   {
@@ -126,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "X-6c8c9",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T120501-L-3445346",
+  "landing": "20261013T130348-L-3952210",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched unchanged signatures, tensor transport proof, remaining module-level comparison, DAG records and report; both delivered modules and sole direct importer compiled cleanly; axiom probes showed only permitted axioms and expected sorryAx."
  }
 }

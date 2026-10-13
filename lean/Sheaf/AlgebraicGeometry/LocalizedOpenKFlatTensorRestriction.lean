@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.LocalizedOpenTensorEquivalence
+import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
+import Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor
+import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # K-flat tensor models under localized open restriction
 
@@ -18,11 +22,18 @@ Source: Stacks Project, Tags 06YC, 01CD and 08DX.
 
 universe u w
 
-open CategoryTheory MonoidalCategory
+open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
+
+@[instance_reducible]
+private noncomputable def loktr_localizedTensor (X : Scheme.{u}) (U : X.Opens) :
+    MonoidalCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=
+  SheafOfModules.monoidalCategory (X.sheaf.over U)
+
+attribute [local instance] loktr_localizedTensor
 
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
@@ -71,6 +82,52 @@ local instance loktr_localTotal (X : Scheme.{u}) (U : X.Opens)
       (@curriedTensor _ _ (SheafOfModules.monoidalCategory (X.sheaf.over U))) (.up ℤ) :=
   fun _ ↦ inferInstance
 
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem localizedEquiv_totalTensor_iso (X : Scheme.{u}) (U : X.Opens)
+    (A B : CochainComplex
+      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) :
+    let E := Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U)
+    Nonempty (((E.mapHomologicalComplex (.up ℤ)).obj
+      (CochainComplex.mapBifunctor A B (curriedTensor _))) ≅
+      CochainComplex.mapBifunctor ((E.mapHomologicalComplex (.up ℤ)).obj A)
+        ((E.mapHomologicalComplex (.up ℤ)).obj B) (curriedTensor _)) := by
+  let E := Equivalence.functor
+    (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+    (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+    (Scheme.Modules.overEquiv U)
+  let K := (((curriedTensor
+    (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))).mapBifunctorHomologicalComplex
+      (.up ℤ) (.up ℤ)).obj A).obj B
+  have : E.PreservesTotalComplex K (.up ℤ) := fun _ ↦ inferInstance
+  let e₁ := (HomologicalComplex₂.mapTotalIso E K (.up ℤ)).symm
+  obtain ⟨e, he⟩ := exists_localizedOpen_tensor_equivalence X U
+  let e₂ :
+      (((E.mapHomologicalComplex (.up ℤ)).mapHomologicalComplex (.up ℤ)).obj K) ≅
+        (((curriedTensor (SheafOfModules.{u}
+          (moduleRings U.toScheme.toRingedSpace))).mapBifunctorHomologicalComplex
+            (.up ℤ) (.up ℤ)).obj ((E.mapHomologicalComplex (.up ℤ)).obj A)).obj
+              ((E.mapHomologicalComplex (.up ℤ)).obj B) :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun p ↦ HomologicalComplex.Hom.isoOfComponents (fun q ↦ e (A.X p) (B.X q))
+        (by
+          intro q q' hq
+          change (e (A.X p) (B.X q)).hom ≫ E.obj (A.X p) ◁ E.map (B.d q q') =
+            E.map (A.X p ◁ B.d q q') ≫ (e (A.X p) (B.X q')).hom
+          simpa [E] using (he (A.X p) (A.X p) (B.X q) (B.X q') (𝟙 _) (B.d q q')).symm))
+      (by
+        intro p p' hp
+        apply HomologicalComplex.Hom.ext
+        funext q
+        change (e (A.X p) (B.X q)).hom ≫ E.map (A.d p p') ▷ E.obj (B.X q) =
+          E.map (A.d p p' ▷ B.X q) ≫ (e (A.X p') (B.X q)).hom
+        simpa [E] using (he (A.X p) (A.X p') (B.X q) (B.X q) (A.d p p') (𝟙 _)).symm)
+  exact ⟨e₁ ≪≫ HomologicalComplex₂.total.mapIso e₂ (.up ℤ)⟩
+
 set_option maxHeartbeats 800000 in
 -- The localized-site tensor carrier needs additional elaboration steps.
 /-- Exact open restriction preserves K-flatness and the total tensor model.
@@ -110,6 +167,37 @@ theorem localizedOpen_kFlat_tensor_restriction (X : Scheme.{u}) (U : X.Opens)
         (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N
           (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≅
         DerivedCategory.Q.obj (CochainComplex.mapBifunctor P' N'
-          (@curriedTensor _ _ (SheafOfModules.monoidalCategory (X.sheaf.over U))))) := by sorry
+          (@curriedTensor _ _ (SheafOfModules.monoidalCategory (X.sheaf.over U))))) := by
+  let R := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U
+  let E := Equivalence.functor
+    (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+    (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+    (Scheme.Modules.overEquiv U)
+  let RC := R.mapHomologicalComplex (.up ℤ)
+  let EC := E.mapHomologicalComplex (.up ℤ)
+  have hrestrict (K : CochainComplex
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+      (hK : CochainComplex.IsKFlat (R := X.sheaf) K) :
+      CochainComplex.IsKFlat (R := X.sheaf.over U) (RC.obj K) := by
+    have h := openRestriction_isKFlat X U K hK
+    change ∀ F : CochainComplex
+      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,
+      F.Acyclic → (CochainComplex.mapBifunctor F (RC.obj K)
+        (@curriedTensor _ _ (SheafOfModules.monoidalCategory (X.sheaf.over U)))).Acyclic
+    intro F hF i
+    obtain ⟨e⟩ := localizedEquiv_totalTensor_iso X U F (RC.obj K)
+    have hEF : (EC.obj F).Acyclic := fun j ↦ (hF j).map E
+    have hT := (h (EC.obj F) hEF i).of_iso e.symm
+    exact ((CochainComplex.mapBifunctor F (RC.obj K) (curriedTensor _)).sc i
+      |>.exact_map_iff_of_faithful E).mp hT
+  refine ⟨hrestrict P hP, hrestrict N hN, ?_⟩
+  obtain ⟨e⟩ := openRestriction_totalTensor_iso X U P N
+  obtain ⟨t⟩ := localizedEquiv_totalTensor_iso X U (RC.obj P) (RC.obj N)
+  let e' : RC.obj (CochainComplex.mapBifunctor P N (curriedTensor _)) ≅
+      CochainComplex.mapBifunctor (RC.obj P) (RC.obj N) (curriedTensor _) :=
+    EC.preimageIso (e ≪≫ t.symm)
+  exact ⟨(R.mapDerivedCategoryFactors.app
+    (CochainComplex.mapBifunctor P N (curriedTensor _))) ≪≫
+      DerivedCategory.Q.mapIso e'⟩
 
 end AlgebraicGeometry

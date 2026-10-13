@@ -1,0 +1,116 @@
+{
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "status": "split",
+ "mathlib_match": null,
+ "id": "lem-sc-localized-open-tensor-equivalence",
+ "title": "Natural tensor comparison for the localized open-site equivalence",
+ "statement": "Let X be a scheme [def-pc-scheme] and U an open. The canonical equivalence E = Scheme.Modules.overEquiv U identifies sheaves of modules on the localized site over U with sheaves of modules on U.toScheme [def-weil-sheaf-of-modules-category], using the restricted structure sheaf as coefficients. For every pair F,G of localized module sheaves there is an isomorphism E(F tensor G) ≅ E(F) tensor E(G), natural in both module maps, for the sheaf tensor structures [def-pur-sheaf-tensor-product]. No K-flatness, boundedness or derived-category assumption is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01CD",
+  "place": "Lemma 17.16.4; functorial tensor compatibility, with the localized-site pure-tensor construction spelled out in the proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Identify objects of the localized site with opens of U.toScheme and their coefficient rings with the restricted structure sheaf. On presheaf tensors send a pure tensor to the tensor of corresponding sections, using the coefficient ring isomorphism. The inverse coefficient isomorphism defines the inverse. Both maps respect balanced relations and restriction maps. The site equivalence preserves covering sieves, so the maps pass through sheafification and remain inverse. The formulas commute with each module map, proving naturality. Empty sites and zero modules obey the same construction.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent M2",
+  "document": "https://stacks.math.columbia.edu/tag/01CD",
+  "place": "Tag 01CD and the localized open-site equivalence; extracted from step 1 of lem-sc-localized-open-kflat-tensor-restriction"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalizedOpenKFlatTensorRestriction",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper-flat support argument: derived tensor of local perfect models; module-tensor portion of localized open restriction, step 1 of lem-sc-localized-open-kflat-tensor-restriction",
+   "via": [
+    "lem-sc-localized-open-kflat-tensor-restriction",
+    "lem-sc-strict-perfect-tensor-local-comparison",
+    "lem-sc-perfect-derived-tensor-perfect",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction to over site preserves tensor products of sheaves of modules and K flat complexes",
+   "results": "Module flatness and cartesian sheaf tensors only",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "overFunctor, overFunctorMap, overFunctorEquiv; no tensor comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv.*[Tt]ensor|[Tt]ensor.*overEquiv|overEquiv.*[Mm]onoidal",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the equivalence of sheaves of modules on an open subscheme with the localized open site preserves tensor products naturally",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict.",
+   "date": "2026-10-13",
+   "status": "unavailable"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedOpenTensorEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedOpenTensorEquivalence.lean",
+  "declaration": "AlgebraicGeometry.exists_localizedOpen_tensor_equivalence",
+  "statement": "theorem exists_localizedOpen_tensor_equivalence (X : Scheme.{u}) (U : X.Opens) :\n    letI : MonoidalCategory\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=\n      SheafOfModules.monoidalCategory (X.sheaf.over U)\n    let E := Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)\n    ∃ e : ∀ (F G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)),\n      E.obj (F ⊗ G) ≅ E.obj F ⊗ E.obj G,\n      ∀ (F F' G G' : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n        (f : F ⟶ F') (g : G ⟶ G'),\n        E.map (f ⊗ₘ g) ≫ (e F' G').hom =\n          (e F G).hom ≫ (E.map f ⊗ₘ E.map g)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6c8c9",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T130348-L-3952210",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6c8c9",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T130348-L-3952210",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged signatures, tensor transport proof, remaining module-level comparison, DAG records and report; both delivered modules and sole direct importer compiled cleanly; axiom probes showed only permitted axioms and expected sorryAx."
+ }
+}
