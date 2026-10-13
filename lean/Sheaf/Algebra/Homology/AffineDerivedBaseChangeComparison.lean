@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group C1
+Authors: SHEAF groups C1 and Q3
 -/
 module
 
@@ -9,10 +9,8 @@ public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatResolution
+import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
 
 /-!
 # Affine derived base change and localization
@@ -38,6 +36,66 @@ open scoped TensorProduct
 
 namespace RingTensorCohomology
 
+private theorem augmentation_quasiIso (R : Type u) [CommRing R]
+    (K : CochainComplex (ModuleCat.{u} R) ℤ) : QuasiIso ((augmentation R).app K) := by
+  dsimp [augmentation]
+  infer_instance
+
+private theorem resolution_kFlat (R : Type u) [CommRing R]
+    (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+    (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat
+      ((resolution R).obj K) := by
+  exact (flatResolution R).kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K
+
+private theorem resolution_quasiIso_map (R : Type u) [CommRing R]
+    {K L : CochainComplex (ModuleCat.{u} R) ℤ} (f : K ⟶ L) (hf : QuasiIso f) :
+    QuasiIso ((resolution R).map f) := by
+  have := augmentation_quasiIso R K
+  have := augmentation_quasiIso R L
+  have : QuasiIso (((augmentation R).app K) ≫ f) := inferInstance
+  have : QuasiIso ((resolution R).map f ≫ (augmentation R).app L) := by
+    rw [(augmentation R).naturality f]
+    change QuasiIso ((augmentation R).app K ≫ f)
+    infer_instance
+  exact (quasiIso_iff_comp_right ((resolution R).map f) ((augmentation R).app L)).1 this
+
+open scoped ChangeOfRings in
+private theorem restrictedExtension_quasiIso_of_kFlat
+    (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]
+    [Algebra R A] [Algebra R B]
+    {P Q : CochainComplex (ModuleCat.{u} A) ℤ} (a : P ⟶ Q)
+    (ha : QuasiIso a)
+    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat P)
+    (hQ : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat Q) :
+    QuasiIso ((extend R B).map ((restrict R A).map a)) := by
+  have : (ModuleCat.extendScalars (algebraMap R B)).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj _).left_adjoint_additive
+  have : (ModuleCat.extendScalars (algebraMap A (A ⊗[R] B))).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj _).left_adjoint_additive
+  obtain ⟨eP, heP⟩ := ModuleCat.exists_baseTensorOrdinaryIso R A B P
+  obtain ⟨eQ, heQ⟩ := ModuleCat.exists_baseTensorOrdinaryIso R A B Q
+  let F := (ModuleCat.extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex (.up ℤ)
+  let G := (ModuleCat.restrictScalars
+    (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).mapHomologicalComplex
+      (.up ℤ)
+  have : QuasiIso (F.map a) :=
+    CochainComplex.scalarExtension_quasiIso_of_kFlat _ a ha hP hQ
+  have : QuasiIso (G.map (F.map a)) := inferInstance
+  apply (quasiIso_iff_of_arrow_mk_iso _ _ (Arrow.isoMk eP eQ ?_)).2 this
+  apply HomologicalComplex.Hom.ext
+  funext j
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro z
+  induction z using TensorProduct.induction_on with
+  | zero => simp
+  | tmul b x =>
+    change (G.map (F.map a)).f j (eP.hom.f j (b ⊗ₜ[R, algebraMap R B] x)) =
+      eQ.hom.f j (b ⊗ₜ[R, algebraMap R B] (a.f j x))
+    rw [heP, heQ]
+    rfl
+  | add x y hx hy => simp only [_root_.map_add] at hx hy ⊢; rw [hx, hy]
+
 /-- Stacks, equation comparison-map and Tag 0DJ8, affine proof.
 (blueprint: lem-pc-affine-derived-base-change-comparison-map)
 
@@ -47,14 +105,26 @@ on every pair of K-flat models P -> M and E -> P. The equations fixing `es,et` u
 resolution augmentations, so these are the canonical model identifications, not arbitrary
 isomorphisms. No Tor independence is assumed.
 
-Proof: choose the A-K-flat resolution P of M and the R-K-flat resolution E of
-its restriction, using lem-pc-kflat-resolution on the one-point site. The span's
-left map is inverted by derived scalar extension (lem-pur-derived-change-of-rings).
-Its right map is E tensor R' -> P tensor R', identified with P tensor_A A'.
-Consequently the localization of the span gives the displayed unique morphism.
-The cohomology factorization is natural and preserves inverses, giving the last equation.
-The universal property of derived scalar extension identifies this span with the map
-computed using any K-flat models and gives independence of choices and naturality. -/
+Proof:
+1. The existing spanLeft_isIso says that every cohomology map of the left span
+   arrow is invertible. Hence the arrow is a quasi-isomorphism and becomes an
+   isomorphism under Q. Define c by its inverse followed by the right span arrow.
+2. Naturality of homologyFunctorFactors identifies H(c) with comparison. Cancel
+   the left span arrow to prove uniqueness.
+3. Apply the existing CochainComplex.scalarExtension_quasiIso_of_kFlat theorem
+   from KFlatScalarExtensionDerivedIso to preserve quasi-isomorphisms between
+   K-flat complexes under ordinary scalar extension.
+   exists_baseTensorOrdinaryIso identifies extension of restricted A-complexes
+   with extension to A tensor_R B followed by restriction to B; its pure-tensor
+   formula proves naturality. Thus this functor also preserves quasi-isomorphisms
+   between A-K-flat complexes.
+4. For p and e, the source identification is the inverse of Q(extend(augmentation E))
+   followed by Q(extend(resolution(e followed by restrict(p)))). The target
+   identification is the inverse of Q(extend(restrict(augmentation P))) followed
+   by Q(targetComplex(p)). These are isomorphisms by Step 3. Naturality of the
+   augmentations gives c(P) followed by the target augmentation equal to the
+   R-augmentation of restrict(P), and its naturality at e gives the model equation
+   after cancellation. Naturality of c at p gives the asserted value at M. -/
 theorem exists_affineDerivedBaseChangeComparison
     (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra R B] [HasDerivedCategory.{w} (ModuleCat.{u} B)] :
@@ -87,7 +157,112 @@ theorem exists_affineDerivedBaseChangeComparison
               ((restrict R A).map ((augmentation A).app P))) ≫ et.hom =
             DerivedCategory.Q.map ((targetComplex R A B).map p) ∧
           es.hom ≫ c.app M = DerivedCategory.Q.map ((extend R B).map e) ≫ et.hom := by
-  sorry
+  have hleft : IsIso (Functor.whiskerRight (spanLeft R A B) DerivedCategory.Q) := by
+    have (M : CochainComplex (ModuleCat.{u} A) ℤ) :
+        IsIso ((Functor.whiskerRight (spanLeft R A B) DerivedCategory.Q).app M) := by
+      apply (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2
+      rw [quasiIso_iff]
+      intro i
+      rw [quasiIsoAt_iff_isIso_homologyMap]
+      have := spanLeft_isIso R A B i
+      exact inferInstanceAs (IsIso
+        ((Functor.whiskerRight (spanLeft R A B)
+          (HomologicalComplex.homologyFunctor (ModuleCat.{u} B) (.up ℤ) i)).app M))
+    exact NatIso.isIso_of_isIso_app _
+  let l := Functor.whiskerRight (spanLeft R A B) DerivedCategory.Q
+  let r := Functor.whiskerRight (spanRight R A B) DerivedCategory.Q
+  let c := inv l ≫ r
+  refine ⟨hleft, c, ⟨?_, ?_, ?_⟩, ?_⟩
+  · simp [c, r]
+  · intro i
+    have := spanLeft_isIso R A B i
+    apply NatTrans.ext
+    funext M
+    apply (cancel_epi ((DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map
+      (l.app M))).1
+    have hc : l.app M ≫ c.app M = r.app M := by simp [c]
+    change _ ≫ ((DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map
+      (c.app M) ≫ _) = _ ≫ (_ ≫ (comparison R A B i).app M)
+    rw [← Category.assoc, ← Functor.map_comp, hc]
+    change (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map
+        (DerivedCategory.Q.map ((spanRight R A B).app M)) ≫
+        (DerivedCategory.homologyFunctorFactors (ModuleCat.{u} B) i).hom.app
+          ((targetComplex R A B).obj M) =
+      (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map
+        (DerivedCategory.Q.map ((spanLeft R A B).app M)) ≫
+        (DerivedCategory.homologyFunctorFactors (ModuleCat.{u} B) i).hom.app
+          ((sourceComplex R A B).obj M) ≫ (comparison R A B i).app M
+    rw [DerivedCategory.homologyFunctorFactors_hom_naturality,
+      DerivedCategory.homologyFunctorFactors_hom_naturality_assoc]
+    simp [comparison, NatTrans.comp_app]
+  · intro M P E p e hp he hP hE
+    let X := extend R B ⋙ DerivedCategory.Q
+    let Y := restrict R A ⋙ X
+    let Z := resolution R ⋙ X
+    let G := targetComplex R A B ⋙ DerivedCategory.Q
+    have haugE := augmentation_quasiIso R E
+    have haugP := augmentation_quasiIso A P
+    have hextE := CochainComplex.scalarExtension_quasiIso_of_kFlat (algebraMap R B)
+      ((augmentation R).app E) haugE (resolution_kFlat R E) hE
+    have hextP := restrictedExtension_quasiIso_of_kFlat R A B
+      ((augmentation A).app P) haugP (resolution_kFlat A P) hP
+    have hpR : QuasiIso ((restrict R A).map p) := inferInstance
+    have hep : QuasiIso (e ≫ (restrict R A).map p) := inferInstance
+    have hres := resolution_quasiIso_map R (e ≫ (restrict R A).map p) hep
+    have hextRes := CochainComplex.scalarExtension_quasiIso_of_kFlat (algebraMap R B)
+      ((resolution R).map (e ≫ (restrict R A).map p)) hres
+      (resolution_kFlat R E) (resolution_kFlat R ((restrict R A).obj M))
+    have hpA := resolution_quasiIso_map A p hp
+    have hextG := restrictedExtension_quasiIso_of_kFlat R A B ((resolution A).map p)
+      hpA (resolution_kFlat A P) (resolution_kFlat A M)
+    have : IsIso (X.map ((augmentation R).app E)) :=
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hextE
+    have : IsIso (Y.map ((augmentation A).app P)) :=
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hextP
+    have : IsIso (Z.map (e ≫ (restrict R A).map p)) :=
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hextRes
+    have : IsIso (G.map p) :=
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hextG
+    let es := (asIso (X.map ((augmentation R).app E))).symm ≪≫
+      asIso (Z.map (e ≫ (restrict R A).map p))
+    let et := (asIso (Y.map ((augmentation A).app P))).symm ≪≫ asIso (G.map p)
+    refine ⟨es, et, ?_, ?_, ?_⟩
+    · change X.map ((augmentation R).app E) ≫ es.hom = _
+      simp [es, X, Z]
+    · change Y.map ((augmentation A).app P) ≫ et.hom = _
+      simp [et, Y, X, G]
+    · have hcP : c.app P ≫ Y.map ((augmentation A).app P) =
+          X.map ((augmentation R).app ((restrict R A).obj P)) := by
+        apply (cancel_epi (l.app P)).1
+        rw [← Category.assoc]
+        have hspan : l.app P ≫ c.app P = r.app P := by simp [c]
+        rw [hspan]
+        change X.map ((augmentation R).app ((restrict R A).obj ((resolution A).obj P))) ≫
+            X.map ((restrict R A).map ((augmentation A).app P)) =
+          X.map ((resolution R).map ((restrict R A).map ((augmentation A).app P))) ≫
+            X.map ((augmentation R).app ((restrict R A).obj P))
+        rw [← X.map_comp, ← X.map_comp]
+        exact congrArg X.map (by
+          simpa only [Functor.id_map, Functor.id_obj] using
+            ((augmentation R).naturality ((restrict R A).map ((augmentation A).app P))).symm)
+      have haug : X.map ((augmentation R).app E) ≫ X.map e =
+          Z.map e ≫ X.map ((augmentation R).app ((restrict R A).obj P)) := by
+        simpa only [X, Z, Functor.comp_map, Functor.id_map, Functor.map_comp] using
+          congrArg X.map ((augmentation R).naturality e).symm
+      apply (cancel_epi (X.map ((augmentation R).app E))).1
+      change X.map ((augmentation R).app E) ≫ (es.hom ≫ c.app M) =
+        X.map ((augmentation R).app E) ≫ (X.map e ≫ et.hom)
+      simp only [es, et, Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv,
+        Category.assoc, IsIso.hom_inv_id_assoc]
+      rw [Functor.map_comp, ← Category.assoc]
+      change (Z.map e ≫ (sourceComplex R A B ⋙ DerivedCategory.Q).map p) ≫ c.app M = _
+      rw [Category.assoc, c.naturality]
+      rw [← Category.assoc, ← Category.assoc, haug, ← hcP]
+      simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+      rfl
+  · intro c' hc'
+    apply (cancel_epi l).1
+    simpa [c] using hc'.1
 
 /-- Stacks, Tag 0DJ8, affine proof, including the displayed localization identities.
 (blueprint: lem-pc-affine-derived-base-change-comparison-map)

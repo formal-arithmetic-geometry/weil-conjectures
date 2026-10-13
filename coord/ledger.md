@@ -11939,3 +11939,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.KoszulOpenHomChainEvaluation (stage 3; reviewer PASS; first push; landing 20261013T100100-L-2478410 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.ScalarCupUnitIdentities (stage 3; reviewer PASS; after a return; landing 20261013T100101-L-2478571 (interface); batch 20261013T095923; modules 4; new nodes 3)
 - 10:01 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalLocalization (stage 3; reviewer PASS; first push; landing 20261013T100101-L-2478795 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:01 L: merged deliver/Q3/Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison (stage 3; reviewer PASS; after a return; landing 20261013T100102-L-2479085 (proof); batch 20261013T095923; modules 1; new nodes 0)
