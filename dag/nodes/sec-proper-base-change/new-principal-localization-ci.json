@@ -1,0 +1,126 @@
+{
+ "id": "new-principal-localization-ci",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-relative-global-complete-intersection-principal-localization",
+   "place": "stage-3 decomposition of the proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Principal localization preserves relative global complete intersection",
+ "statement": "For every commutative ring R, natural numbers n,c, presentation f : Fin c → MvPolynomial (Fin n) R satisfying IsRelativeGlobalCompleteIntersectionPresentation, and polynomial h, the Fin.snoc presentation formed by renaming f, adjoining one variable, and appending rename(h)·X(last n)−1 also satisfies IsRelativeGlobalCompleteIntersectionPresentation.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36640), part (2), proof line 36665 ('the localization at one element can be described as S_g = S[x_{n+1}]/(g x_{n+1} - 1)'); the fibre dimensions, left implicit there, as in the proof of Lemma Tag 00SA (lemma-localize-lci, line 35852: 'By the remarks following the definition dim(S_g) = n - c') with the remark after Definition Tag 00S9 (definition-lci-field, lines 35834-35849); the definition is Tag 00SP (definition-relative-global-complete-intersection, line 36506); tags verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "This is the corresponding algebraic construction from the Stacks proof; the proof is split off for a later worker.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00SS (line 36640), part (2), proof line 36665; the fibre-dimension part, which the source leaves implicit, follows the proof of Lemma Tag 00SA (line 35852) and the paragraph after Definition Tag 00S9 (lines 35834-35849), with the fibre presentation of the proof of 00SS (1) (lines 36660-36662)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of polynomial ring by c polynomials whose fibres have dimension n - c, localization at an element",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv (Mathlib.RingTheory.MvPolynomial.Localization), RingHom.finitePresentation_holdsForLocalizationAway, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, MvPolynomial.isLocalization, PrimeSpectrum.range_comap_algebraMap_localization_compl_eq_range_comap_quotientMk",
+   "date": "2026-10-10",
+   "verdict": "no match: nothing about fibre dimension of a presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative global complete intersection: R[x_1..x_n]/(f_1..f_c) with all fibres of dimension n-c, localized at an element h by adding variable x_{n+1} with h x_{n+1} - 1",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.SubmersivePresentation.localizationAway, Algebra.IsStandardSmooth, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match: only standard smooth presentations (Jacobian condition), no fibre-dimension condition"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Presentation.dimension",
+   "results": "Algebra.Presentation.dimension (#generators - #relations, a number attached to a presentation, no fibre condition), id_dimension, localizationAway_dimension_zero, dimension_reindex, dimension_mvPolynomial, dimension_ofAlgEquiv, PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, SubmersivePresentation.isStandardSmoothOfRelativeDimension (Mathlib.RingTheory.Extension.Presentation.*)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's presentation dimension is the count n - c, with no statement about fibre dimensions"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'complete intersection\\|CompleteIntersection\\|syntomic\\|relative dimension' and grep -rn 'stacks 00ST\\|stacks 00SS\\|stacks 00SA\\|stacks 00SP' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; look at Mathlib/RingTheory/Extension/Presentation/",
+   "results": "no complete-intersection notion; 'relative dimension' only for standard smooth algebras and smooth morphisms (RingTheory/Smooth/StandardSmooth.lean, AlgebraicGeometry/Morphisms/Smooth.lean); the docstring of RingTheory/Extension/Presentation/Basic.lean line 103 mentions complete intersections; no Stacks tag 00ST/00SS/00SA/00SP",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPrincipalLocalization",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-relative-global-complete-intersection-principal-localization",
+  "worker": "stage1",
+  "summary": "Read 00SS (line 36640) and its proof, 00SA (line 35852) with the remark after 00S9, the definition 00SP (line 36506); tags verified in tags/tags. Statement kept. Corrected source.place: the proof of 00SS cites 00P3 (lemma-dimension-preserved-field-extension), not 00P4, and only for part (1), which part (2) does not need. Six steps: (1) T' = T_g via the coefficient-map kernel and R[x]/(rx-1) = R_r leaves (route of the merged 00SA node, step 3); (2) the fibre F = T (x) k(p) is k[x]/(f-bar) (polynomial scalar extension, tensor-quotient base change); (3) T' (x) k(p) = F_g (algebra localization base change leaf); (4) a nonzero fibre of T' lies over a nonzero fibre of T, which is equidimensional of dimension n-c (equidimensional node); (5) dim of the nonzero principal localization is n-c (open immersion of D(e), dimension at a point on an open subspace, supremum of local dimensions); (6) conclusion with (n+1)-(c+1). No new nodes. Mathlib searches of the item (all three kinds, recorded at creation) suffice: no relative global complete intersection notion in Mathlib, not a leaf."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PrincipalLocalizationCI",
+  "file": "lean/Sheaf/RingTheory/PrincipalLocalizationCI.lean",
+  "declaration": "Algebra.principalLocalization_ci",
+  "statement": "theorem principalLocalization_ci (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) (hrel : IsRelativeGlobalCompleteIntersectionPresentation f) (h : MvPolynomial (Fin n) R) : IsRelativeGlobalCompleteIntersectionPresentation (Fin.snoc (α := fun _ ↦ MvPolynomial (Fin (n + 1)) R) (fun i ↦ MvPolynomial.rename Fin.castSucc (f i)) (MvPolynomial.rename Fin.castSucc h * MvPolynomial.X (Fin.last n) - 1))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T004334-L-2509166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T004334-L-2509166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

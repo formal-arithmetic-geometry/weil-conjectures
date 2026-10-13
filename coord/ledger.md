@@ -10354,3 +10354,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:43 L: merged deliver/E1/Sheaf.AlgebraicGeometry.HomLocalKernelOfPresentation (stage 3; reviewer PASS; first push; landing 20261013T004333-L-2508796 (proof); batch 20261013T004330; modules 1; new nodes 0)
 - 00:43 L: merged deliver/H1/Sheaf.AlgebraicGeometry.CompletionInternalHomAffineSectionsLift (stage 3; reviewer PASS; after a return; landing 20261013T004333-L-2508901 (interface); batch 20261013T004330; modules 2; new nodes 1)
 - 00:43 L: merged deliver/H4/Sheaf.Paper.EtaleHypercohomologySupportedResolutionMaps (stage 3; reviewer PASS; first push; landing 20261013T004334-L-2509013 (interface); batch 20261013T004330; modules 2; new nodes 1)
+- 00:43 L: merged deliver/H4/Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPrincipalLocalization (stage 3; reviewer PASS; first push; landing 20261013T004334-L-2509166 (interface); batch 20261013T004330; modules 3; new nodes 2)

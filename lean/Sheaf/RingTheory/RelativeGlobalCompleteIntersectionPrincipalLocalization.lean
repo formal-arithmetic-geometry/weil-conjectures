@@ -3,9 +3,8 @@ module
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.MvPolynomial.Rename
-import Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
-import Sheaf.Topology.DimensionSupremumLocalDimensions
-import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.PrincipalLocalizationAlgEquiv
+import Sheaf.RingTheory.PrincipalLocalizationCI
 
 /-!
 # Principal localization of a relative global complete intersection
@@ -62,6 +61,6 @@ theorem relativeGlobalCompleteIntersection_principalLocalization
         e (Ideal.Quotient.mk _ (MvPolynomial.X (Fin.last n))) =
           IsLocalization.Away.invSelf
             (Ideal.Quotient.mk (Ideal.span (Set.range f)) h) := by
-  sorry
+  exact ⟨principalLocalization_ci R n c f hrel h, principalLocalization_algEquiv R n c f h⟩
 
 end Algebra
