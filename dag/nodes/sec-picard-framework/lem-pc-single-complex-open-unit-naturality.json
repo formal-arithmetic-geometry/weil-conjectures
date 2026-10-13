@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-single-complex-open-unit-naturality",
+ "kind": "statement",
+ "title": "Naturality of the source-open comparison with restriction units",
+ "statement": "Let f:X\\to S, f':X'\\to S', g:S'\\to S and g':X'\\to X be morphisms of schemes [def-pc-scheme] with g'\\mathbin{;}f=f'\\mathbin{;}g, where semicolon means composition in diagram order. Choose unbounded derived categories for every scheme [def-pc-derived-category], objects K\\in D(X), K'\\in D(X') and a morphism \\varphi:L_{g'}K\\to K'. Let U\\subset X be any open, t:U\\to X its immersion, p:X'\\times_X U\\to X' and v:X'\\times_X U\\to U the canonical projections. Write L_s=derivedPullback(s), R_s=schemeDerivedDirectImage(s), and a_s:L_s\\dashv R_s for the adjunction selected in [def-pc-derived-base-change-map] using the counits selected in [lem-pc-ringed-spaces-derived-pullback-composition]. Let c(s,r):L_r\\mathbin{;}L_s\\cong L_{s\\mathbin{;}r} be the composition isomorphisms selected by that same theorem. Let k:R_{t\\mathbin{;}f}\\cong R_t\\mathbin{;}R_f and k':R_{p\\mathbin{;}f'}\\cong R_p\\mathbin{;}R_{f'} be the right-adjoint mates of c(t,f) and c(p,f') under a_{t;f}, a_f.comp(a_t) and a_{p;f'}, a_{f'}.comp(a_p), respectively. Define A=L_g(R_f(\\eta_t(K))\\mathbin{;}k^{-1}_{L_tK}) and B=R_{f'}(\\eta_p(K'))\\mathbin{;}(k')^{-1}_{L_pK'}. Then A\\mathbin{;}b_U=b_K\\mathbin{;}R_{f'}(\\varphi)\\mathbin{;}B, where b_U is the explicit source-open comparison of [def-pc-single-complex-open-comparison] and b_K is the canonical base-change map of [def-pc-derived-base-change-map]. This is an equality of morphisms from L_gR_fK to R_{p;f'}L_pK', with no cartesian hypothesis on the original square or invertibility hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY, adjoint description, with Tag 0D5S composition, applied in Tag 0DJ9"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-base-change-map",
+  "def-pc-single-complex-open-comparison",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Transpose both sides under the composite derived adjunction. Expand the counit formula for the base-change map and use naturality and associativity of the canonical derived pullback composition comparisons; the pullback equation identifies the middle transports. Triangle identities cancel the open restriction unit and the remaining expression is the original base-change composite followed by the coefficient map.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY and 0D5S, mate calculation expanded by C1 for the source-open comparison in Tag 0DJ9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change along an isomorphism transport comparison source open",
+   "results": "8 hits. ",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Adjunction.counit",
+   "results": "12 hits. ",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change commutes with the adjunction units for restriction to a source open",
+   "results": "0 hits. service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*unit|unit.*baseChange|conjugateIsoEquiv",
+   "results": "12 hits. ",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenTop",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 source-open induction, identifying its comparison at the whole open",
+   "via": [
+    "lem-pc-single-complex-open-top",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnitNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnitNaturality.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenComparison_unit_naturality",
+  "statement": "theorem singleComplexOpenComparison_unit_naturality\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (h : g' ≫ f = f' ≫ g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') (U : X.Opens) :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))\n    let a := fun {A B : Scheme.{u}} (s : A ⟶ B) ↦\n      Classical.choose (exists_schemeDerivedAdjunction s\n        (hAdd := (Classical.choose exists_derivedPullbackComposition) s)\n        ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) s)\n        ((Classical.choose (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))) s))\n    let p := pullback.fst g' U.ι\n    let k := conjugateIsoEquiv (a (U.ι ≫ f)) ((a f).comp (a U.ι)) (c U.ι f)\n    let k' := conjugateIsoEquiv (a (p ≫ f')) ((a f').comp (a p)) (c p f')\n    (derivedPullback g).map\n        ((schemeDerivedDirectImage f).map ((a U.ι).unit.app K) ≫\n          k.inv.app ((derivedPullback U.ι).obj K)) ≫\n      singleComplexOpenComparison f f' g g' h K K' φ U =\n    (schemeDerivedBaseChangeMap f f' g g' h K ≫\n        (schemeDerivedDirectImage f').map φ) ≫\n      ((schemeDerivedDirectImage f').map ((a p).unit.app K') ≫\n        k'.inv.app ((derivedPullback p).obj K'))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095934-L-2452593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095934-L-2452593",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
