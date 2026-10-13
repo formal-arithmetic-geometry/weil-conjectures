@@ -16,40 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Trivialize the invertible module at x. Homogeneous multiplication is tensor multiplication transported by tensorPowAddIso; therefore a positive section-ring power is nonvanishing exactly when its base section is nonvanishing, by the residue-field test. Apply hg with denominator a of degree r, exponent d and numerator s^r to prove g(x) in D_+(a) implies nonvanishing of a at x. The ambient-image section equation gives the same germ equation under the open-immersion stalk identification.",
+   "text": "Import all Sheaf.AlgebraicGeometry.SectionRingProjPreimageForward and reuse its proved private helper nonvanishing_power, which identifies the nonvanishing locus of each positive homogeneous power with that of its base. Its tensor/isomorphism/component helpers are not redeclared here.",
    "uses": [
-    "def-pc-proj",
-    "def-sc-invertible-section-ring",
-    "lem-weil-pbc-nonvanishing-section-trivializes"
+    "lem-sc-ample-proj-canonical-map-preimage-forward"
    ],
    "elementary": false
   },
   {
-   "text": "For the reverse implication choose a positive-degree chart b of degree q through g(x), using avoidance of the irrelevant ideal. Apply hg with exponent r and numerator a^q. A nonzero numerator in the fibre forces the scalar quotient pullback to be a unit in the source stalk. Localness reflects this unit to the Proj stalk. The homogeneous localization stalk and the prime-localization unit criterion show a^q avoids the homogeneous prime, hence a does. Repeat both directions for h with t.",
+   "text": "For one chart map g on U and a point x of U with a nonvanishing section s of positive degree d, prove the membership equivalence for any a of positive degree r. In the forward direction specialize hg to denominator a, exponent d and numerator s^r, using r*d=d*r. Take ambient germs at x on the image of the inverse-image chart. If a^d vanished modulo the maximal ideal, its scalar multiple s^r would vanish too. The positive-power test gives nonvanishing of a. Reuse nonvanishing_power and nonvanishing_of_local_smul from SectionRingProjPreimageForward, accessed by the proof-only import all; these helpers retain the ambient scheme X and apply directly to the image open.",
    "uses": [
-    "def-pc-proj",
+    "lem-sc-ample-proj-canonical-map-preimage-forward",
     "def-sc-invertible-section-ring",
-    "lem-weil-pbc-nonvanishing-section-trivializes"
+    "def-pc-proj"
    ],
    "elementary": false
   },
   {
-   "text": "The two image points have identical membership in all positive homogeneous basic opens. Mathlib Proj.isBasis_basicOpen and TopologicalSpace.IsTopologicalBasis.eq_iff (Proj is T0) give equality of the points. ContinuousMap.ext gives equality of underlying maps.",
+   "text": "For the reverse direction choose a positive homogeneous b of degree q outside the image prime, using avoidance of the irrelevant ideal. Apply hg to denominator b, exponent r and numerator a^q. Taking ambient germs, nonvanishing of a^q forces the pulled-back scalar germ to be a unit. Map this unit through U.stalkIso.inv and use U.germ_stalkIso_inv. Localness of g.stalkMap reflects it to the Proj stalk. ProjectiveSpectrum.Proj.awayToSection_germ and Proj.stalkIso identify this germ with the homogeneous fraction. HomogeneousLocalization.isUnit_iff_isUnit_val and IsLocalization.AtPrime.isUnit_mk'_iff show its numerator a^q avoids the homogeneous prime. Proj.basicOpen_pow gives membership in D_+(a). Reuse exists_sectionRing_chart, scalar_isUnit_of_nonvanishing and chart_fraction_numerator_notMem from SectionRingProjPreimageReverse, and nonvanishing_power from SectionRingProjPreimageForward, through proof-only import all. Only the open-immersion germ transport is proved locally.",
    "uses": [
+    "lem-sc-ample-proj-canonical-map-preimage-forward",
+    "lem-sc-ample-proj-canonical-map-preimage-reverse",
+    "def-pc-proj",
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two images of an overlap point have identical membership in every positive homogeneous basic open by applying the single-chart equivalence on U and V, whose underlying source points agree by Scheme.homOfLE_apply. Compare the homogeneous prime ideals with HomogeneousIdeal.ext'. Positive-degree membership already agrees. For degree zero choose a positive homogeneous b outside the first prime; it is outside the second too. Apply the positive-degree comparison to a*b, and use Proj.basicOpen_mul to cancel membership in D_+(b). Equality of homogeneous prime ideals gives equality of Proj points by ProjectiveSpectrum.ext. This avoids constructing a positive-degree topological basis. The common positive homogeneous chart is supplied by the existing private exists_sectionRing_chart helper in SectionRingProjPreimageReverse.",
+   "uses": [
+    "lem-sc-ample-proj-canonical-map-preimage-reverse",
     "def-pc-proj"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-proj",
+  "lem-sc-ample-proj-canonical-map-preimage-forward",
   "def-sc-invertible-section-ring",
-  "lem-weil-pbc-nonvanishing-section-trivializes"
+  "def-pc-proj",
+  "lem-sc-ample-proj-canonical-map-preimage-reverse"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01N8 (lemma-converse-construction), local quotient construction and uniqueness; 01NK (lemma-invertible-map-into-proj), differing degrees"
+  "place": "Tags 01N8 and 01NK, uniqueness by homogeneous chart membership. D2 repair reuses the proved private helpers of SectionRingProjPreimageForward and SectionRingProjPreimageReverse with proof-only import all, rather than duplicating their statements and proofs. The local open-immersion scalar-germ transport and final homogeneous-ideal extensionality are proved by D2."
  },
  "mathlib_searches": [
   {
@@ -147,10 +157,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T000908-L-2281914",
-  "kind": "interface",
+  "landing": "20261013T022410-L-3211644",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
