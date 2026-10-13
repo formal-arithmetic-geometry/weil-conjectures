@@ -1,0 +1,158 @@
+{
+ "id": "new-flat-base-change-chart-cohomology-transport",
+ "kind": "statement",
+ "title": "Affine scalar-extension chart transport of module cohomology",
+ "statement": "Let f:X -> S and g:S prime -> S be arbitrary scheme morphisms, F a module, I and J resolutions of F and G=tensorPullback(g prime)F, p a natural number, V,W affine opens, W<=g inverse V, and D the open choices. Let the supplied Gamma(S,V)-algebra on Gamma(S prime,W) have algebraMap equal to g.appLE. Put h:f inverse V -> Spec Gamma(S,V), N=pullback F to f inverse V, T=baseChangedScheme(h), A=baseChangedModule(h,N), L=f prime inverse W, U=g prime inverse(f inverse V), and M=G restricted to L. There is an additive equivalence t from derived module sections of A on T to those of M on L. It intertwines scalar endomorphisms from the two structure maps to Spec Gamma(S prime,W). For any source module-cohomology class x, t of the baseChangeUnit h-map after the restriction/pullback coefficient comparison equals cohomologyOpenRestriction(G,U,L) of the D.psi h-map applied to x. No higher-image sheaf, Leray edge, qcqs, quasi-coherence or Ext comparison is involved.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "First paragraph of Lemma 30.5.2: affine-local dictionary only, without its flatness conclusion; functoriality of h-maps in Remark 20.14.2 (01FB), pullback adjunction in 0096 (Lemma 6.26.2) and composition in 0097 (Lemma 6.26.3). Sources read on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-flat-cohomology-comparison",
+  "new-resolution-section-class-open-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Use the fibre-product universal property and affine chart isomorphisms to identify T with L. The equality of algebraMap with g.appLE ensures the two affine-base maps agree. Construct inverses by projection and check their composites by pullback.hom_ext.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify A with G restricted to L using pullback composition and the unique left-adjoint comparison between tensor pullback and ordinary pullback. The restriction/pullback iso completes the coefficient comparison. Apply cohomology h-maps along the scheme isomorphism and its inverse; their compositions are identities.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two projections to Spec Gamma(W) agree, so naturality for multiplication gives the scalar equation. Transpose the coefficient unit equation; composite-adjunction unit identities reduce it to D.unit_square restricted to L. Apply cohomology functoriality to obtain the displayed unit equation.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "new-resolution-section-class-open-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The argument uses only isomorphisms, units and their naturalities and covers empty opens, zero coefficients and p=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-module-pullback",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "new-resolution-section-class-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "U3 following document",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "First paragraph of Lemma 30.5.2: affine-local dictionary only, without its flatness conclusion; functoriality of h-maps in Remark 20.14.2 (01FB), pullback adjunction in 0096 (Lemma 6.26.2) and composition in 0097 (Lemma 6.26.3). Sources read on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology functor transports module sections along scheme isomorphism and respects multiplication",
+   "results": "Service returned Internal Server Error. No absence conclusion from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology on an affine base higher direct image sections Leray natural comparison",
+   "results": "Eight hits, including cohomologyPresheafFunctor and affine transition-limit lemmas. No chart/coefficient or normalized resolution restriction equation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"moduleCohomology\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*restriction; resolutionSectionClass.*restriction; chart.*cohomology",
+   "results": "Mathlib search returned no hits. Library has RestrictedResolutionCohomology (top to open on section-complex homology), TargetSectionClassRestriction (top-open germ formula), AffineResolutionSectionBijective and ResolutionSectionScalarMap. None states transport on the non-affine scalar-extension chart or the two arbitrary-open normalized class equation. Blueprint searches for restriction and Leray reviewed; no same statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local cohomology dictionary in the flat base-change input to the formal-functions stalk comparison, specifically the source and target section identifications before applying flat cohomology base change. Target affine chart and Leray comparison with common-complex cohomological pullback compatibility.; Affine target Leray comparison for the module cohomology unit map; Affine scalar-extension chart transport of module cohomology",
+   "via": [
+    "new-flat-base-change-module-leray-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeChartCohomologyTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flatBaseChange_chart_cohomology_transport",
+  "statement": "theorem exists_flatBaseChange_chart_cohomology_transport\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (F : X.Modules) (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (p : ℕ) (V : S.Opens) (W : S'.Opens) (hV : IsAffineOpen V) (hW : IsAffineOpen W)\n    (eVW : W ≤ g ⁻¹ᵁ V) (D : FlatBaseChangeOpenChoices f g F I J V)\n    [Algebra Γ(S, V) Γ(S', W)]\n    (hAlgebra : algebraMap Γ(S, V) Γ(S', W) = (g.appLE V W eVW).hom) :\n    let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ\n    let N := (pullback (f ⁻¹ᵁ V).ι).obj F\n    let T := baseChangedScheme (S := Γ(S', W)) h\n    let A := baseChangedModule (S := Γ(S', W)) h N\n    let C := RingedSpace.moduleCohomology T.toRingedSpace p\n    let G := (tensorPullback (pullback.snd g f)).obj F\n    let U := (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n    let L := (pullback.fst g f) ⁻¹ᵁ W\n    let e : L ≤ U := by\n      change (pullback.fst g f) ⁻¹ᵁ W ≤ (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n      rw [flatBaseChangeOpenEquality f g V]\n      exact (pullback.fst g f).preimage_mono eVW\n    let M := (restrictFunctor L.ι).obj G\n    let C' := RingedSpace.moduleCohomology L.toScheme.toRingedSpace p\n    let k := (pullback.fst g f).resLE W L le_rfl ≫ W.toSpecΓ\n    ∃ t : C.obj A ≃+ C'.obj M,\n      (∀ (a : Γ(S', W)) (y : C.obj A),\n        t ((C.map (A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫\n          (baseChangeSnd (S := Γ(S', W)) h).appTop).hom a))).hom y) =\n        ((C'.map (M.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫ k.appTop).hom a))).hom\n          (t y))) ∧\n      (∀ x : (RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n          ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F),\n        t (moduleCohomologyFMap (baseChangeFst (S := Γ(S', W)) h)\n          (baseChangeUnit (S := Γ(S', W)) h N) p\n          (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map\n            ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F).hom).hom x)) =\n        cohomologyOpenRestriction G U L e p\n          (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V) U le_rfl)\n            D.psi p x))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aa578",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T155944-L-1306402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aa578",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T155944-L-1306402",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations and proofs with their node statements, dependencies, source arguments, and report; all four modules and direct importer compile cleanly, with only permitted axioms and documented sorry dependencies."
+ }
+}

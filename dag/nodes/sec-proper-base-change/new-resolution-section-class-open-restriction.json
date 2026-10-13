@@ -1,0 +1,146 @@
+{
+ "id": "new-resolution-section-class-open-restriction",
+ "kind": "statement",
+ "title": "Normalized resolution class restriction between two arbitrary opens",
+ "statement": "Let f:X -> S be any scheme morphism, F any module, I an injective resolution and p a natural number. Let W <= V be opens of S, U an open of X with specified equality U=f inverse V, and R,R prime augmentation-preserving restricted-resolution section identifications for I over U and f inverse W. The class maps c,c prime are resolutionSectionClass followed by I.isoRightDerivedObj inverse, with R.sections transported by the displayed equality for c. Then c prime(cohomologyOpenRestriction(F,U,f inverse W)(y)) equals restriction to W of c(y) for every derived module-section class y on U. Here cohomologyOpenRestriction is constructed from the restriction adjunction unit and the canonical restriction-composition isomorphism. No affineness, qcqs, quasi-coherence or scalar extension is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Lemma 20.7.3 and the restriction equation 20.7.1.1 (01E2); Remark 20.14.2 (01FB). Sources read on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Compute restriction of fixed-resolution sections using restrictedResolution_cohomology, and compose open inclusions using moduleCohomologyFMap functoriality. The canonical restriction-composition coefficient iso is the one in cohomologyOpenRestriction. Both restricted resolutions preserve the original augmentation; the components equations give termwise I(U) -> I(f inverse W).",
+   "uses": [
+    "lem-weil-pbc-restricted-resolution-cohomology",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Commute termwise section restriction with exact evaluation homology comparisons, then with sectionCohomologyTheta, and finally with the evaluated inverse of I.isoRightDerivedObj. Their naturality squares give the equality of normalized class maps.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same complexes and composition identities handle equal or empty opens, the zero coefficient and p=0. No restriction map is inverted.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-restricted-resolution-cohomology"
+ ],
+ "proof_origin": {
+  "by": "U3 following document",
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Lemma 20.7.3 and the restriction equation 20.7.1.1 (01E2); Remark 20.14.2 (01FB). Sources read on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology functor transports module sections along scheme isomorphism and respects multiplication",
+   "results": "Service returned Internal Server Error. No absence conclusion from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology on an affine base higher direct image sections Leray natural comparison",
+   "results": "Eight hits, including cohomologyPresheafFunctor and affine transition-limit lemmas. No chart/coefficient or normalized resolution restriction equation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"moduleCohomology\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*restriction; resolutionSectionClass.*restriction; chart.*cohomology",
+   "results": "Mathlib search returned no hits. Library has RestrictedResolutionCohomology (top to open on section-complex homology), TargetSectionClassRestriction (top-open germ formula), AffineResolutionSectionBijective and ResolutionSectionScalarMap. None states transport on the non-affine scalar-extension chart or the two arbitrary-open normalized class equation. Blueprint searches for restriction and Leray reviewed; no same statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local cohomology dictionary in the flat base-change input to the formal-functions stalk comparison, specifically the source and target section identifications before applying flat cohomology base change. Target affine chart and Leray comparison with common-complex cohomological pullback compatibility.; Affine target Leray comparison for the module cohomology unit map; Normalized resolution class restriction between two arbitrary opens",
+   "via": [
+    "new-flat-base-change-module-leray-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResolutionSectionClassOpenRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionSectionClassOpenRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.resolutionSectionClass_open_restriction",
+  "statement": "theorem resolutionSectionClass_open_restriction\n    {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (I : InjectiveResolution F)\n    (p : ℕ) (V W : S.Opens) (eWV : W ≤ V)\n    (U : X.Opens) (e : U = f ⁻¹ᵁ V) (R : RestrictedResolutionSections I U)\n    (R' : RestrictedResolutionSections I (f ⁻¹ᵁ W)) :\n    let eU : f ⁻¹ᵁ W ≤ U := by rw [e]; exact f.preimage_mono eWV\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let Q := ((pushforward f).rightDerived p).obj F\n    let c := resolutionSectionClass R.resolution K V\n      (R.sections ≪≫ eqToIso (congrArg (fun T ↦\n        ((RingedSpace.openModuleSections X.toRingedSpace T).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj I.cocomplex) e)) p ≫\n      Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V\n    let c' := resolutionSectionClass R'.resolution K W R'.sections p ≫\n      Hom.app (I.isoRightDerivedObj (pushforward f) p).inv W\n    ∀ y : (RingedSpace.moduleCohomology U.toScheme.toRingedSpace p).obj\n        ((restrictFunctor U.ι).obj F),\n      c' (cohomologyOpenRestriction F U (f ⁻¹ᵁ W) eU p y) =\n        Q.presheaf.map (homOfLE eWV).op (c y)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.resolutionSectionClass_open_restriction",
+   "AlgebraicGeometry.Scheme.Modules.cohomologyOpenRestriction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aa578",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T155944-L-1306402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aa578",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T155944-L-1306402",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations and proofs with their node statements, dependencies, source arguments, and report; all four modules and direct importer compile cleanly, with only permitted axioms and documented sorry dependencies."
+ }
+}

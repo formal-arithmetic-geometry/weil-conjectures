@@ -14,63 +14,38 @@
  ],
  "proof": [
   {
-   "text": "Use the fibre-product universal property, the affine chart isomorphisms V -> Spec Gamma(V) and W -> Spec Gamma(W), and W <= g inverse V to identify the chart Y_B with f prime inverse W. Pullback composition and restriction/pullback identification identify N_B with the restriction of g prime tensor pullback F. Comparing the two composite adjunction units using D.unit_square shows that the chart coefficient map equals D.psi followed by restriction to this smaller open.",
+   "text": "Obtain the chart additive equivalence t with its scalar and unit equations, and the affine target additive equivalence d with its scalar and restriction equations. These constructions do not use the arbitrary natural Ext coordinates E.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-pc-flat-cohomology-comparison",
-    "def-pc-tensor-pullback-composition-iso",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "def-weil-pbc-flat-base-change-open-choices"
+    "new-flat-base-change-chart-cohomology-transport",
+    "new-flat-base-change-target-open-edge"
    ],
    "elementary": false
   },
   {
-   "text": "Functoriality of module cohomology h-maps transports the equality of the preceding coefficient maps. The resulting module cohomology class is the restriction to the chart of moduleCohomologyFMap(D.psi)(x); its source is first changed through the morphism restrictFunctorIsoPullback.hom.",
+   "text": "Compose E at the chart coefficient inverse, t, and d to form bAdd. Apply E naturality to the scalar endomorphism to obtain the scalar equation for E inverse. Combine this with t and d scalar equations to form a linear map; its underlying additive equivalence makes it bijective, so LinearEquiv.ofBijective gives b.",
    "uses": [
-    "lem-weil-pbc-module-cohomology-fmap-functorial",
-    "def-weil-pbc-module-cohomology-fmap"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Base change preserves qcqs and pullback preserves quasi-coherence. Apply the normalized affine resolution class bijectivity theorem to f prime over W. The augmentation and component equations of D.target ensure that restriction of its targetClass is the same cocycle class map on this chart, by theta and natural restriction of higher-image sections.",
-   "uses": [
-    "lem-pc-affine-resolution-section-bijective",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "def-weil-pbc-flat-base-change-open-choices"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compose the chart identification, the affine class equivalence and E inverse at N_B. Naturality of E for the scalar endomorphisms and the scalar compatibility of the class map show B-linearity. The preceding map equality proves the displayed formula. No source Ext comparison or Ext pullback map is used in this step.",
-   "uses": [
-    "lem-pc-resolution-section-scalar-map",
     "def-pc-flat-cohomology-comparison"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "All constructions use section complexes and augmentation-preserving comparisons. Degree zero, empty opens and zero coefficients require no exceptional choices and no invertibility of a cohomology pullback.",
-   "uses": [],
+   "text": "On a source class, cancel E inverse composed with E. Then apply the chart unit equation and the target edge restriction equation in succession. Their transitive equality is precisely the required formula.",
+   "uses": [
+    "new-flat-base-change-chart-cohomology-transport",
+    "new-flat-base-change-target-open-edge"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
   "def-pc-flat-cohomology-comparison",
-  "def-pc-tensor-pullback-composition-iso",
-  "def-weil-pbc-flat-base-change-open-choices",
-  "def-weil-pbc-module-cohomology-fmap",
-  "lem-pc-affine-resolution-section-bijective",
-  "lem-pc-resolution-section-scalar-map",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-module-cohomology-fmap-functorial",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "new-flat-base-change-chart-cohomology-transport",
+  "new-flat-base-change-target-open-edge"
  ],
  "proof_origin": {
-  "by": "P4 following document",
+  "by": "U3 following document",
   "document": "https://stacks.math.columbia.edu/tag/01XK",
-  "place": "Lemma 30.4.6; cocycle description in Tag 01E4, Lemma 20.7.3; h-map functoriality in Tag 01FB, Remark 20.14.2; affine chart dictionary of Tag 02KH. Source read on the Stacks website on 2026-10-13."
+  "place": "Lemma 30.4.6; cocycle description in Tag 01E4, Lemma 20.7.3; h-map functoriality in Tag 01FB, Remark 20.14.2; affine chart dictionary of Tag 02KH. Source read on the Stacks website on 2026-10-13. Lean combination of chart transport and normalized smaller-open edge."
  },
  "mathlib_searches": [
   {
@@ -172,11 +147,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
+  "reviewer": "X-aa578",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T131950-L-4087892",
+  "landing": "20261013T155944-L-1306402",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered declarations and proofs with their node statements, dependencies, source arguments, and report; all four modules and direct importer compile cleanly, with only permitted axioms and documented sorry dependencies."
  }
 }

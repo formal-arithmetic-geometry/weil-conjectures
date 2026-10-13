@@ -1,0 +1,147 @@
+{
+ "id": "new-flat-base-change-target-open-edge",
+ "kind": "statement",
+ "title": "Normalized affine target edge after restricting to a smaller open",
+ "statement": "Let f:X -> S be qcqs, g:S prime -> S arbitrary, F quasi-coherent, I,J resolutions, p a natural number, V an open of S, W an affine open of S prime with W<=g inverse V, and D the specified open choices. Put G=tensorPullback(g prime)F, U=g prime inverse(f inverse V), L=f prime inverse W, M=G restricted to L, Q=R^p f prime_*G, and k:L -> Spec Gamma(S prime,W). There is an additive equivalence d from derived module sections of M on L to Gamma(Q,W). It sends the cohomology action of the multiplication endomorphism induced by a in Gamma(S prime,W) along k to scalar multiplication by a. For every class y on U it sends cohomologyOpenRestriction(G,U,L)(y) to restriction to W of D.targetClass(p)(y). This statement involves no scalar-extension chart, coefficient unit map or Ext comparison.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01XK",
+  "place": "Lemma 30.4.6; cocycle normalization in Lemma 20.7.3 (01E4) and Remark 20.14.2 (01FB). Sources read on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-module-cohomology-fmap",
+  "new-resolution-section-class-open-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Apply restrictedResolutionSections_exists to J and L to obtain the actual termwise restricted resolution and its augmentation-preserving section comparison. This proved theorem constructs the resolution explicitly. Tensor pullback agrees with ordinary pullback by unique left adjoints, so G is quasi-coherent; f prime is qcqs by base change. The ordinary pullback quasi-coherence instance is isQuasicoherent_pullback from WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde.",
+   "uses": [
+    "lem-pc-restricted-resolution-sections-exist",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form c=resolutionSectionClass(R) followed by the inverse resolution comparison at W. affine_resolutionSectionClass_bijective makes c bijective; AddEquiv.ofBijective supplies d. resolutionSectionClass_map_smulHom supplies its scalar formula.",
+   "uses": [
+    "lem-pc-affine-resolution-section-bijective",
+    "lem-pc-resolution-section-scalar-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply resolutionSectionClass_open_restriction to f prime, G,J, the opens g inverse V and W, D.target and R. The equality flatBaseChangeOpenEquality identifies U with f prime inverse(g inverse V); its displayed c is exactly D.targetClass.",
+   "uses": [
+    "new-resolution-section-class-open-restriction",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-pc-affine-resolution-section-bijective",
+  "lem-pc-resolution-section-scalar-map",
+  "lem-pc-restricted-resolution-sections-exist",
+  "new-resolution-section-class-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "U3 following document",
+  "document": "https://stacks.math.columbia.edu/tag/01XK",
+  "place": "Lemma 30.4.6; cocycle normalization in Lemma 20.7.3 (01E4) and Remark 20.14.2 (01FB). Sources read on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology functor transports module sections along scheme isomorphism and respects multiplication",
+   "results": "Service returned Internal Server Error. No absence conclusion from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology on an affine base higher direct image sections Leray natural comparison",
+   "results": "Eight hits, including cohomologyPresheafFunctor and affine transition-limit lemmas. No chart/coefficient or normalized resolution restriction equation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"moduleCohomology\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*restriction; resolutionSectionClass.*restriction; chart.*cohomology",
+   "results": "Mathlib search returned no hits. Library has RestrictedResolutionCohomology (top to open on section-complex homology), TargetSectionClassRestriction (top-open germ formula), AffineResolutionSectionBijective and ResolutionSectionScalarMap. None states transport on the non-affine scalar-extension chart or the two arbitrary-open normalized class equation. Blueprint searches for restriction and Leray reviewed; no same statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local cohomology dictionary in the flat base-change input to the formal-functions stalk comparison, specifically the source and target section identifications before applying flat cohomology base change. Target affine chart and Leray comparison with common-complex cohomological pullback compatibility.; Affine target Leray comparison for the module cohomology unit map; Normalized affine target edge after restricting to a smaller open",
+   "via": [
+    "new-flat-base-change-module-leray-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeTargetOpenEdge",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeTargetOpenEdge.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flatBaseChange_target_open_edge",
+  "statement": "theorem exists_flatBaseChange_target_open_edge\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    [QuasiCompact f] [QuasiSeparated f]\n    (F : X.Modules) [F.IsQuasicoherent] (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (p : ℕ) (V : S.Opens) (W : S'.Opens) (hW : IsAffineOpen W)\n    (eVW : W ≤ g ⁻¹ᵁ V) (D : FlatBaseChangeOpenChoices f g F I J V) :\n    let G := (tensorPullback (pullback.snd g f)).obj F\n    let U := (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n    let L := (pullback.fst g f) ⁻¹ᵁ W\n    let e : L ≤ U := by\n      change (pullback.fst g f) ⁻¹ᵁ W ≤ (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)\n      rw [flatBaseChangeOpenEquality f g V]\n      exact (pullback.fst g f).preimage_mono eVW\n    let M := (restrictFunctor L.ι).obj G\n    let C := RingedSpace.moduleCohomology L.toScheme.toRingedSpace p\n    let k := (pullback.fst g f).resLE W L le_rfl ≫ W.toSpecΓ\n    let Q := ((pushforward (pullback.fst g f)).rightDerived p).obj G\n    ∃ d : C.obj M ≃+ Γ(Q, W),\n      (∀ (a : Γ(S', W)) (y : C.obj M),\n        d ((C.map (M.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫ k.appTop).hom a))).hom y)\n          = a • d y) ∧\n      (∀ y : (RingedSpace.moduleCohomology U.toScheme.toRingedSpace p).obj\n          ((restrictFunctor U.ι).obj G),\n        d (cohomologyOpenRestriction G U L e p y) =\n          Q.presheaf.map (homOfLE eVW).op (D.targetClass p y))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aa578",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T155944-L-1306402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aa578",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T155944-L-1306402",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered declarations and proofs with their node statements, dependencies, source arguments, and report; all four modules and direct importer compile cleanly, with only permitted axioms and documented sorry dependencies."
+ }
+}

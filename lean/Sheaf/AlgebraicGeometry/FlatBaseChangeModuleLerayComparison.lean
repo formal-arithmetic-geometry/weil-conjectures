@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
+import Sheaf.AlgebraicGeometry.FlatBaseChangeTargetOpenEdge
+import Sheaf.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport
+
 /-! # Affine target Leray comparison in module cohomology
 
 Source: Stacks Project, Tags 01XK, 01E4 and 01FB.
@@ -24,7 +27,37 @@ open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
+attribute [local irreducible] moduleCohomologyFMap cohomologyOpenRestriction
 
+private theorem linearEquiv_from_scalar_transports
+    {R A B C D : Type*} [CommRing R]
+    [AddCommGroup A] [AddCommGroup B] [AddCommGroup C] [AddCommGroup D]
+    [Module R A] [Module R D]
+    (e : B ≃+ A) (t : B ≃+ C) (d : C ≃+ D)
+    (ρ : R → B → B) (σ : R → C → C)
+    (he : ∀ a x, e (ρ a x) = a • e x)
+    (ht : ∀ a x, t (ρ a x) = σ a (t x))
+    (hd : ∀ a x, d (σ a x) = a • d x) :
+    ∃ b : A ≃ₗ[R] D, ∀ x : B, b (e x) = d (t x) := by
+  let bAdd := e.symm.trans (t.trans d)
+  let l : A →ₗ[R] D :=
+    { toFun := bAdd
+      map_add' := bAdd.map_add
+      map_smul' := fun a y ↦ by
+        have hi : e.symm (a • y) = ρ a (e.symm y) := by
+          apply e.injective
+          rw [AddEquiv.apply_symm_apply, he, AddEquiv.apply_symm_apply]
+        change d (t (e.symm (a • y))) = a • d (t (e.symm y))
+        rw [hi, ht, hd] }
+  refine ⟨LinearEquiv.ofBijective l bAdd.bijective, ?_⟩
+  intro x
+  change d (t (e.symm (e x))) = d (t x)
+  rw [AddEquiv.symm_apply_apply]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Combining the two geometric transports compares explicit module cohomology functors.
 /-- The target Leray identification commutes with module cohomology pullback.
 The displayed algebra is required to be the canonical map on sections.
 Only a natural coefficient comparison on the target chart is supplied; no
@@ -89,6 +122,28 @@ theorem exists_flatBaseChange_module_leray_comparison
               (D.targetClass p
                 (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                   ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p x)) := by
-  sorry
+  classical
+  intro h N Q E hE
+  let T := baseChangedScheme (S := Γ(S', W)) h
+  let A := baseChangedModule (S := Γ(S', W)) h N
+  let C := RingedSpace.moduleCohomology T.toRingedSpace p
+  obtain ⟨t, ht, hunit⟩ := exists_flatBaseChange_chart_cohomology_transport
+    f g F I J p V W hV hW eVW D hAlgebra
+  obtain ⟨d, hd, hres⟩ := exists_flatBaseChange_target_open_edge
+    f g F I J p V W hW eVW D
+  let ρ (a : Γ(S', W)) (x : C.obj A) :=
+    (C.map (A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫
+      (baseChangeSnd (S := Γ(S', W)) h).appTop).hom a))).hom x
+  have hscalar (a : Γ(S', W)) (x : C.obj A) :
+      E A (ρ a x) =
+        a • (show HOver (baseChangeSnd (S := Γ(S', W)) h) A p from E A x) := by
+    exact hE A A (A.smulHom (((Scheme.ΓSpecIso Γ(S', W)).inv ≫
+      (baseChangeSnd (S := Γ(S', W)) h).appTop).hom a)) x
+  obtain ⟨b, hb⟩ := linearEquiv_from_scalar_transports
+    (A := HOver (baseChangeSnd (S := Γ(S', W)) h) A p)
+    (E A) t d ρ _ hscalar ht hd
+  refine ⟨b, ?_⟩
+  intro x
+  exact (hb _).trans ((congrArg d (hunit x)).trans (hres _))
 
 end AlgebraicGeometry.Scheme.Modules
