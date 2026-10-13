@@ -18,31 +18,57 @@
  ],
  "proof": [
   {
-   "text": "The affine first-isomorphism and tilde/Gamma argument described in Lemma 087W proves the stated reconstruction component (and, for assembly, its compatibility equations).",
+   "text": "For each F and level n, transpose the given sections projection through the affine tilde/Gamma adjunction. Naturality of ideal products and annihilation of the target level imply that this transpose kills the ideal-power product, so cokernel.desc defines a sheaf quotient comparison q with its projection equation.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-weil-pbc-adic-completion",
-    "lem-weil-pbc-coherent-formal-modules-affine-quotient",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "def-weil-pbc-coherent-formal-module",
     "pqf-lem-coherent-ft-locnoeth",
-    "def-weil-pbc-coherent-formal-module"
+    "lem-weil-pbc-formal-module-ideal-power-factor"
    ],
    "elementary": false
+  },
+  {
+   "text": "The adjunction unit naturality and right triangle identify the sections of the transpose after the unit with the given surjective projection. Therefore Gamma(q) is epi. The assumed objectwise isomorphism supplies a separate levelwise isomorphism i. The coherent target has finite affine sections; restriction along the global-sections ring isomorphism makes them finite over A. The composite i.inv followed by Gamma(q) is a surjective endomorphism of that finite module, hence bijective. Consequently Gamma(q) is an isomorphism. Counit naturality with i makes the source counit invertible, and counit naturality with q then makes q invertible.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the now uniquely determined quotient comparisons. For each transition precompose both sides with the source cokernel projection, use cokernel.pi_desc and the projection equation, then use naturality of p and the counit. Cancel the epi projection and assemble the inverse-system isomorphism with NatIso.ofComponents; lift it to the full coherent-formal subcategory.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-affine-quotient"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a morphism F to G, precompose each level of the outer naturality equation with the quotient projection. The quotient-map equation and the projection equations reduce this to hnatural, mapped by tilde and composed with the counit. Cancel the projection; componentwise equality and NatIso.ofComponents give the stated natural isomorphism.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-affine-quotient"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective",
   "lem-weil-pbc-coherent-formal-modules-affine-quotient",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "pqf-lem-coherent-ft-locnoeth",
-  "def-weil-pbc-coherent-formal-module"
+  "lem-weil-pbc-formal-module-ideal-power-factor"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R2",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087W, first-isomorphism and assembly steps"
+  "group": "K1",
+  "document": "literature/stacks-project/coherent.tex; literature/stacks-project/algebra.tex",
+  "place": "Lemma 087W, affine correspondence and reconstruction; Lemma 05G8, surjective endomorphisms of finite modules; categorical assembly written by K1"
  },
  "mathlib_searches": [
   {
@@ -105,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T231639-L-1963494",
-  "kind": "interface",
+  "landing": "20261013T033003-L-3676643",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
