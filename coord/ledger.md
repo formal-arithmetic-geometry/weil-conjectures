@@ -12169,3 +12169,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/P3/Sheaf.AlgebraicGeometry.GenericHypersurfaceGeometricIrreducibilitySpread (stage 3; reviewer PASS; first push; landing 20261013T111910-L-3058298 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/P3/Sheaf.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmentation (stage 3; reviewer PASS; first push; landing 20261013T111910-L-3058445 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/P3/Sheaf.AlgebraicGeometry.Morphisms.AffineSectionAssociatedStalk (stage 3; reviewer PASS; first push; landing 20261013T111910-L-3058590 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:19 L: merged deliver/P4/Sheaf.AlgebraicGeometry.ModuleRestrictionStalkIso (stage 3; reviewer PASS; first push; landing 20261013T111911-L-3058691 (proof); batch 20261013T111833; modules 1; new nodes 0)

@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Take the linear component maps with their germ formula from new-module-restriction-stalk-components. Compare their underlying additive maps with the restriction-stalk isomorphism induced by the final neighborhood functor (Mathlib PresheafedSpace.restrictStalkIso). Equality on all germs gives equality on the colimit. The additive comparison is invertible and forgetting module structure reflects isomorphisms.",
+   "text": "Take the linear components and their germ formula from new-module-restriction-stalk-components. Identify the underlying restricted module presheaf with the restriction of the ambient abelian presheaf by the identity natural isomorphism. Apply the abelian stalk functor to this identification and compose with Mathlib PresheafedSpace.restrictStalkIso. Every restricted stalk element is represented by a germ; stalkFunctor_map_germ_apply and restrictStalkIso_hom_eq_germ_apply identify the component on that germ with the additive comparison. Transfer injectivity and surjectivity of the additive isomorphism to the linear component, and apply ConcreteCategory.isIso_iff_bijective for ModuleCat. Its associated asIso is the required isomorphism.",
    "uses": [
     "new-module-restriction-stalk-components",
     "def-pur-localized-ringed-site",
@@ -30,7 +30,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Tag 01CP, third paragraph; restriction comparison also Sheaves Tag 00A0 (3). Categorical expansion by Q2; source read online 2026-10-13."
+  "place": "Tag 01CP, third paragraph; restriction comparison also Sheaves Tag 00A0 (3). Categorical expansion by Q2; source read online 2026-10-13. Lean formalization by P4: explicit identity of restricted abelian presheaves, germ comparison, and bijectivity criterion for ModuleCat."
  },
  "mathlib_searches": [
   {
@@ -119,10 +119,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T100059-L-2478229",
-  "kind": "interface",
+  "landing": "20261013T111911-L-3058691",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
