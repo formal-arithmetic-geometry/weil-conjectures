@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-etale-limit-open-comparison-certificate-degree",
+ "kind": "statement",
+ "title": "Geometric certificates for canonical open comparisons in arbitrary degree",
+ "statement": "Let $I$ be a nonempty directed preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ an inverse diagram of schemes [def-pc-scheme], and $c$ a cone [def-weil-pbc-category-colimit]. Let $F_i$ be abelian sheaves [def-weil-pbc-abelian-etale-sheaves] on $D_i$, with inverse-image transitions $\\varphi_f:D(f^{\\mathrm{op}})^*F_i\\to F_j$ [def-weil-pbc-inverse-image] satisfying the canonical identity and composition equations. Let $G:I\\to\\operatorname{Ab}(c.pt_{\\acute et})$ have isomorphisms $eG_i:G_i\\cong c_i^*F_i$ and arrows conjugate to the inverse-image composition comparison followed by $c_j^*\\varphi_f$. Let $L$ be a cocone on $G$. Fix a scheme $X$, $i_0\\in I$, $g_0:D_{i_0}\\to X$ and $W\\subseteq X$ open. Put $J=I_{\\ge i_0}$, $W_j=(D(j\\to i_0);g_0)^{-1}W$ and $W_L=(c_{i_0};g_0)^{-1}W$. The restricted transition $W_k\\to W_j$ and projection $W_L\\to W_j$ are the restrictions of the original maps. Their coefficient maps are the inverse-image composition comparisons followed by the restrictions of $\\varphi_f$ or $(eG_j)^{-1};L_j$, respectively. Write $T_W^n(f)$ and $\\lambda_W^n(j)$ for the resulting maps on cohomology [def-weil-pbc-etale-cohomology, def-weil-pbc-cohomology-pullback], namely pullback followed by the cohomology map of that coefficient map. Assume that $c$ is limiting, that all $D_i$ are quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], all transitions are affine, and $L$ is a colimit. Suppose $O\\subseteq X$ is open, $W\\le O$ is quasi-compact, and $D_{i_0}\\cong O$ identifies $g_0$ with the inclusion of $O$. Fix $n\\ge0$ and a predicate $P$ on schemes with $P(W)$. For any supplied diagram $K$, isomorphisms $e_j$ and cocone legs $\\iota$ satisfying the arrow and leg formulas above, the map $\\operatorname{colim}K\\to H^n(W_L,L.pt|_{W_L})$ has a StageCohomologyComparison certificate for $P$ [def-weil-pbc-stage-cohomology-comparison]. No isomorphism or cohomology continuity is asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ (theorem-colimit), coherent-system construction and restriction; Tag 01F7, canonical pullback and cohomology functoriality. The finite direct-sum application is Tag 0A50 (lemma-mayer-vietoris)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-stage-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify the tail opposite with Over(op i0), and restrict the diagram and limiting cone to inverse-image opens. The restricted cone is limiting, transitions are affine, and compactness of W pulls back along affine maps. Open subschemes inherit quasi-separatedness. The least restricted stage is isomorphic to W.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the coefficient system using inverse-image composition. Finality of the directed tail preserves the reindexed sheaf colimit and inverse image preserves that colimit as a left adjoint. The concrete maps and supplied object identifications satisfy the system constructor formulas; apply it and transport through the limit-open and coefficient isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-etale-limit-open-cohomology-cocone-degree",
+    "def-weil-pbc-stage-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-stage-cohomology-comparison",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-etale-limit-open-cohomology-cocone-degree",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-limit-cone-affine-projections-opens"
+ ],
+ "proof_origin": {
+  "by": "R1 stage 3 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YQ and 0A50; specialization of the parent construction to these parts; sources read on the Stacks website."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural Mayer Vietoris exact sequence cohomology functor open cover",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare",
+   "date": "2026-10-13",
+   "verdict": "tools only; no construction of canonical restricted diagrams"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural Mayer Vietoris connecting morphisms coefficient sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleLimitSingleOpenComparison|etale_mayerVietoris_connecting",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "tools only; no construction of canonical restricted diagrams"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitBinarySuccessorCoconeSegment",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Parent successor segment: canonical restricted diagrams, geometric certificates, and compatible exact maps, respectively.",
+   "via": [
+    "lem-weil-pbc-etale-limit-binary-successor-cocone-segment",
+    "lem-weil-pbc-etale-limit-binary-geometric-ladder",
+    "lem-weil-pbc-etale-limit-binary-comparison-ladder",
+    "lem-weil-pbc-etale-limit-binary-eventual-zero",
+    "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitOpenComparisonCertificateDegree",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitOpenComparisonCertificateDegree.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_open_comparison_certificate_degree",
+  "statement": "theorem etale_limit_open_comparison_certificate_degree\n    (X : Scheme.{u}) (O W : X.Opens) (hW : IsCompact (W : Set X)) (hWO : W ≤ O)\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    (i₀ : I) (e : D.obj (op i₀) ≅ O.toScheme)\n    (n : ℕ) (allowed : Scheme.{u} → Prop) (hallowed : allowed W.toScheme)\n    (K : Set.Ici i₀ ⥤ AddCommGrpCat.{u + 1})\n    (eK : ∀ j : Set.Ici i₀, K.obj j ≅ AddCommGrpCat.of (Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D (e.hom ≫ O.ι) W j).ι).obj (F j.val)) n))\n    (hK : ∀ (j k : Set.Ici i₀) (f : j ⟶ k), K.map f =\n      (eK j).hom ≫ tailOpenCohomologyMapDegree D (e.hom ≫ O.ι) W F φ n f ≫ (eK k).inv)\n    (ι : K ⟶ (Functor.const (Set.Ici i₀)).obj (AddCommGrpCat.of (Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1}\n        ((c.π.app (op i₀) ≫ (e.hom ≫ O.ι)) ⁻¹ᵁ W).ι).obj L.pt) n)))\n    (hι : ∀ j, ι.app j =\n      (eK j).hom ≫ tailOpenCohomologyLegDegree D c (e.hom ≫ O.ι) W F G eG L n j) :\n    StageCohomologyComparison allowed (colimit.desc K (Cocone.mk _ ι))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T062529-L-735042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T062529-L-735042",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
