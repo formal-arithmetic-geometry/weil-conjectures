@@ -1,0 +1,183 @@
+{
+ "id": "lem-pc-q3-affine-open-twist-vanishing-independent",
+ "kind": "statement",
+ "title": "Affine-open twist vanishing independent of proper coherence",
+ "statement": "Let S be Noetherian [pqf-def-locnoeth], f:X -> S proper [def-weil-proper-morphism], F a quasi-coherent coherent module [pqf-def-coherent], and L invertible [def-sc-invertible-module]. Fix an affine open V of S such that L restricted to f inverse-image V is ample [def-weil-pbc-ample-invertible-module], and assume injective resolutions of X.Modules. There is a natural-number threshold n0 such that for n >= n0 and every q > 0 the restriction to V of R^q f_*(F tensor L^n) [def-pc-derived-direct-image] is zero. This statement fixes one affine open and asserts no uniform threshold over the whole base.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 02O1, Lemma 30.16.2, affine-local proof; Tag 0B5T (4), with the finite Cech cohomological-degree bound"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the proper morphism to the specified affine open V. Its base is affine Noetherian and its source locally Noetherian. Restriction preserves coherence and quasi-coherence. The hypothesis supplies the ample invertible restriction of L. Apply affine-base Serre vanishing to F restricted to this source. A finite affine cover of the quasi-compact separated source bounds all quasi-coherent cohomology by its Cech complex; take the maximum of the bounds in the finitely many positive degrees. The empty source gives threshold zero.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-coherent-serre-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine-base comparison identifies module cohomology with sections of each higher direct image. Higher images are quasi-coherent; the affine tilde/global-sections correspondence detects the zero module from zero sections. Thus the higher images over V vanish with that threshold.",
+   "uses": [
+    "lem-pc-cohomology-sections-affine-base",
+    "lem-pc-finite-support-hi",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of derived direct image to V and exactness of open restriction identify these higher images with the restrictions in the conclusion. Restriction commutes with tensor products and powers; transport the vanishing along these isomorphisms. This is only a statement for one affine open; no global threshold is chosen.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-finite-support-hi",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 02O1, Lemma 30.16.2, affine-local proof; Tag 0B5T (4), with the finite Cech cohomological-degree bound",
+  "note": "Extracted strictly the affine-local part of Tag 02O1. The existing RelativeSerreVanishing and CoherentSerreVanishing module imports reach the parent graph-vanishing item through proper coherence and cannot be imported here; the proof must use an independent acyclic implementation of the stated affine Serre step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Serre|kill.by.twisting|higherDirectImage.*restrict",
+   "results": {
+    "t": "2026-10-13T06:06:49Z",
+    "tool": "grep",
+    "query": "Serre|kill.by.twisting|higherDirectImage.*restrict",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Modular.lean",
+     "Mathlib/NumberTheory/Modular.lean",
+     "Mathlib/NumberTheory/Modular.lean",
+     "Mathlib/NumberTheory/ModularForms/Derivative.lean",
+     "Mathlib/NumberTheory/ModularForms/Derivative.lean",
+     "Mathlib/NumberTheory/ModularForms/Derivative.lean",
+     "Mathlib/NumberTheory/ModularForms/Derivative.lean",
+     "Mathlib/NumberTheory/ModularForms/Derivative.lean"
+    ],
+    "digest": "054862d430945ae2"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching algebraic-geometric twisting vanishing theorem; semantic hits concern sections of structure sheaves and grep hits are unrelated Serre terminology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre vanishing higher direct images restricted to one affine open after ample twists",
+   "results": {
+    "t": "2026-10-13T06:06:50Z",
+    "tool": "leansearch",
+    "query": "Serre vanishing higher direct images restricted to one affine open after ample twists",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images vanish on an affine open for all positive degrees after large tensor powers of an ample invertible module",
+   "results": {
+    "t": "2026-10-13T06:06:50Z",
+    "tool": "leanfinder",
+    "query": "Higher direct images vanish on an affine open for all positive degrees after large tensor powers of an ample invertible module",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact"
+    ],
+    "digest": "69edcfdf9c63a6d2"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching algebraic-geometric twisting vanishing theorem; semantic hits concern sections of structure sheaves and grep hits are unrelated Serre terminology."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveGraphTwistVanishing",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 02O5 proof: applying Lemma 30.16.2 to the graph twist L; affine-local vanishing before the finite-cover maximum (parent proof step 3)",
+   "via": [
+    "lem-pc-m1-projective-graph-twist-vanishing",
+    "lem-pc-q2-chow-twist-finite-cohomology",
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenTwistVanishingIndependent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenTwistVanishingIndependent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_twist_on_affine_open",
+  "statement": "theorem exists_isZero_higherDirectImage_twist_on_affine_open\n    {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f]\n    (F : X.Modules) [F.IsQuasicoherent] (hF : RingedSpace.IsCoherent X.toRingedSpace F)\n    (L : X.Modules) [L.IsInvertible]\n    (V : S.Opens) (hV : IsAffineOpen V)\n    (hL : ∃ h : (L.restrict (f ⁻¹ᵁ V).ι).IsInvertible,\n      @IsAmple (f ⁻¹ᵁ V).toScheme (L.restrict (f ⁻¹ᵁ V).ι) h)\n    [HasInjectiveResolutions X.Modules] :\n    ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n → ∀ q : ℕ, 0 < q →\n      IsZero (((higherDirectImage f q).obj (F ⊗ L.tensorPow n)).restrict V.ι)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T082406-L-1645201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T082406-L-1645201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

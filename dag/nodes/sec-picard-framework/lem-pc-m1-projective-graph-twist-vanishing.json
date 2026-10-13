@@ -18,39 +18,59 @@
  ],
  "proof": [
   {
-   "text": "Separatedness of g makes the graph lift a closed immersion into projective space over S. The twist is unchanged by this lift. Reindex nonempty finite coordinates and identify the ordinary pullback with tensor pullback; its restriction over every affine open is ample. Empty coordinates force Y empty.",
+   "text": "Use the existing proved private helpers AlgebraicGeometry.tensorPullback_invertible and AlgebraicGeometry.homOfGlobalSection_appTop_one from ProjectiveAmpleInvertible, imported with import all; do not restate either helper. For any finite coordinate type, use the standard coordinate sections of the integral projective twist. Pulling their nonvanishing loci through the tensor-pullback adjunction identifies them with the inverse images of the standard affine charts. These charts cover the source, are affine over an affine base, and form a finite family. Their pulled-back sections, transported through the right unitor, witness ampleness with exponent one. Uniqueness of left adjoints identifies tensor pullback with ordinary pullback. This argument also treats the empty coordinate type, where the cover forces the source empty.",
    "uses": [
-    "lem-pc-chow-relative-ample"
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-section-nonvanishing-zero-locus",
+    "lem-sc-nonvanishing-tensor-pullback",
+    "lem-sc-ample-iso",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-projective-ample-invertible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, coherent.tex",
-    "place": "Tags 02O5, graph construction of L, and 02O1, Lemma 30.16.2"
-   }
+   "elementary": false
   },
   {
-   "text": "The structure module of Y is coherent because Y is locally Noetherian. On inverse images of affine opens, Serre vanishing for the ample line bundle gives vanishing in every positive degree. Restriction of derived direct image identifies this with vanishing over the open base. Take the maximum of thresholds for a finite affine cover of S, and use the tensor unit isomorphism to get L.tensorPow n.",
+   "text": "Separatedness of g gives the closed graph lift over S. Restrict it to an affine open V and base change it to projective space over V. Apply the preceding chart argument there. The integral-model projection identities, pullback composition and restriction/pullback comparison identify this ample module with L restricted to p inverse-image V; transport ampleness across the resulting isomorphism.",
    "uses": [
-    "lem-weil-pbc-coherent-serre-vanishing",
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-sc-ample-iso",
+    "def-nagata-projective-space-base-change",
+    "def-pc-module-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, coherent.tex",
-    "place": "Tags 02O5, graph construction of L, and 02O1, Lemma 30.16.2"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Properness over Noetherian S makes Y locally Noetherian. The tensor unit is invertible, quasi-coherent and finitely presented, hence coherent by the locally Noetherian coherence criterion. For each affine V of S apply the independent affine-open twist-vanishing theorem to that unit and L, obtaining a local threshold d(V).",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-invertible-sheaf-instance",
+    "lem-pc-q3-affine-open-twist-vanishing-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compactness of S selects finitely many affine opens covering S. Set n0 to the Finset supremum of their thresholds, zero for an empty selection. Every selected restriction vanishes for n >= n0 and q > 0. The proved library theorem Modules.isZero_of_iSup_eq_top glues their vanishing. Map the left unitor of L.tensorPow n through higherDirectImage to remove the unit tensor factor.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-chow-relative-ample",
-  "lem-weil-pbc-coherent-serre-vanishing",
-  "lem-pc-restrict-derived-direct-image-open"
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-sc-ample-iso",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-projective-ample-invertible",
+  "def-nagata-projective-space-base-change",
+  "def-pc-module-pullback",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-invertible-sheaf-instance",
+  "lem-pc-q3-affine-open-twist-vanishing-independent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, coherent.tex",
-  "place": "Tags 02O5, graph construction of L, and 02O1, Lemma 30.16.2",
-  "note": "M1 extracted an independent step of the specified Chow-twist argument; no use of general proper coherence."
+  "place": "Tag 02O5 graph-twist construction and Tag 02O1 finite-affine-cover proof",
+  "note": "Q3 made the coordinate-chart and finite-cover steps into Lean, generalized the existing ProjectiveAmpleInvertible coordinate proof to any finite coordinate type locally, and split only one affine-open vanishing step. No use of general proper coherence or the stronger ChowRelativeAmple theorem. Repair: removed both duplicate private helpers and used the originals through import all ProjectiveAmpleInvertible; the arbitrary-finite-coordinate chart argument remains local."
  },
  "mathlib_searches": [
   {
@@ -160,9 +180,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T054225-L-445166",
+  "landing": "20261013T082406-L-1645201",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
