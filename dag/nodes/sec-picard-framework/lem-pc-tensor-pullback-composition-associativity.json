@@ -1,0 +1,110 @@
+{
+ "id": "lem-pc-tensor-pullback-composition-associativity",
+ "kind": "statement",
+ "title": "Associativity of canonical tensor pullback comparison",
+ "statement": "Let $h:X_1\\to X_0$, $q:X_2\\to X_1$, $p:Z\\to X_2$, $b:Z\\to X_1$, $a:Z\\to X_0$ and $d:X_2\\to X_0$ be scheme morphisms [def-pc-scheme] with $p;q=b$, $q;h=d$, $b;h=a$ and $p;d=a$. For any module $M$ on $X_0$ [def-pc-module-pullback], the canonical tensor composition comparisons $c$ [def-pc-tensor-pullback-composition-iso] satisfy $c_{p,d,a}(M);p^*(c_{q,h,d}(M))=c_{b,h,a}(M);c_{p,q,b}(h^*M)$. Both are maps $a^*M\\to p^*q^*h^*M$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0096",
+  "place": "Tags 0095, 0096 and 0097, definition and adjunction of module pullback and composition; Tag 01ZR first proof for local recovery."
+ },
+ "proof": [
+  {
+   "text": "Use the six chosen tensor pullback adjunctions. For the four right-adjoint comparisons use pushforwardComp followed by pushforwardCongr of the supplied factorization. Their associativity square follows by module-morphism extensionality on opens: each component is a restriction map along an equality of opens, and functoriality composes these into the same map by subsingleton equality of open morphisms. Apply Mathlib Adjunction.leftAdjointCompIso_assoc, recorded by lem-sc-left-adjoint-composition-iso-associativity. Evaluate the inverse isomorphisms at M. The inverse of leftAdjointCompIso is precisely tensorPullbackCompositionIso.hom, by the definition of conjugateIsoEquiv and inversion.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-sc-left-adjoint-composition-iso-associativity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-left-adjoint-composition-iso-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0096",
+  "place": "Expanded coherence calculation in the existing recovery-transport proof; Tags 0095 and 0096 read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associativity of canonical composition isomorphisms for left adjoints to sheaf pushforward and recovery of morphisms on iterated pulled back open covers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction comparison for module pullback along an open cover is compatible with composition of two morphisms and the isomorphism between iterated pullback charts",
+   "results": "AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app, AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.PresheafedSpace.GlueData.f_invApp_f_app, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_fst",
+   "date": "2026-10-13",
+   "verdict": "Generic tools or related statements only; no exact scheme-level comparison square or recovery theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_associator_hom|pseudofunctor_associativity|localMapRecovery",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic tools or related statements only; no exact scheme-level comparison square or recovery theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapRecoveryTransport",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Recovery equations persist under an arbitrary later base change; Associativity of canonical tensor pullback comparison",
+   "via": [
+    "lem-pc-fp-local-map-recovery-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackCompositionAssociativity",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackCompositionAssociativity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullbackCompositionIso_associativity",
+  "statement": "theorem tensorPullbackCompositionIso_associativity\n    {X₀ X₁ X₂ Z : Scheme.{u}}\n    (h : X₁ ⟶ X₀) (q : X₂ ⟶ X₁) (p : Z ⟶ X₂)\n    (b : Z ⟶ X₁) (a : Z ⟶ X₀) (d : X₂ ⟶ X₀)\n    (wpq : p ≫ q = b) (wqh : q ≫ h = d)\n    (wbh : b ≫ h = a) (wpd : p ≫ d = a) (M : X₀.Modules) :\n    (tensorPullbackCompositionIso p d a wpd).hom.app M ≫\n        (tensorPullback p).map ((tensorPullbackCompositionIso q h d wqh).hom.app M) =\n      (tensorPullbackCompositionIso b h a wbh).hom.app M ≫\n        (tensorPullbackCompositionIso p q b wpq).hom.app ((tensorPullback h).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbd5e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T211059-L-390407",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbd5e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T211059-L-390407",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered files and DAG records to the packet, compiled all modules and the direct importer, and verified allowed axioms."
+ }
+}

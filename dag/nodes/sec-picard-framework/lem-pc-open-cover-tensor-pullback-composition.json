@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-open-cover-tensor-pullback-composition",
+ "kind": "statement",
+ "title": "Composition square for restriction and tensor pullback",
+ "statement": "Let $q:Y\\to X$, $p:Z\\to Y$ and $b:Z\\to X$ be morphisms of schemes [def-pc-scheme] with $p;q=b$. Let $U_0$ be an open cover of $X$, and fix an index $\\alpha$. Put $U=q^*U_0$, $V=p^*U$ and $W=b^*U_0$. Supply an isomorphism $s:V_\\alpha\\cong W_\\alpha$ whose composition with $W_\\alpha\\to Z$ is $V_\\alpha\\to Z$ and whose composition with $W_\\alpha\\to (U_0)_\\alpha$ is $V_\\alpha\\to U_\\alpha\\to (U_0)_\\alpha$. Write $t_0,t_1,t_2$ for the canonical restriction comparisons for $b,q,p$ [def-pc-open-cover-tensor-pullback-comparison], $c:b^*\\cong q^*p^*$ for the canonical tensor composition comparison [def-pc-tensor-pullback-composition-iso], $l$ for ordinary pullback composition along the second projection equation, and $v$ for ordinary pullback composition along the first projection equation. For every module $M$ on $X$ [def-pc-module-pullback], the following maps agree: $s^*(t_0(M));v(b^*M);(V_\\alpha\\to Z)^*(c(M))$ and $l(M|_{(U_0)_\\alpha});(V_\\alpha\\to U_\\alpha)^*(t_1(M));t_2(q^*M)$. The two paths have the same source and target; their exact factors are in lean.statement.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0096",
+  "place": "Tags 0095, 0096 and 0097, definition and adjunction of module pullback and composition; Tag 01ZR first proof for local recovery."
+ },
+ "proof": [
+  {
+   "text": "Expand the restriction comparisons into ordinary pullback composition and the unique comparison between tensor and ordinary left adjoints to pushforward. Conjugate the square under the chosen adjunctions. Mates preserve composition and whiskering, so the intermediate unique-adjoint comparisons cancel. Both right-adjoint paths are pushforward composition along the chart projections. The equations on the two projections make them equal; on opens they are the same restriction map. Injectivity of conjugation and evaluation at M give the displayed identity. Empty charts, identity morphisms and the zero module satisfy the same equations.",
+   "uses": [
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0096",
+  "place": "Expanded coherence calculation in the existing recovery-transport proof; Tags 0095 and 0096 read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associativity of canonical composition isomorphisms for left adjoints to sheaf pushforward and recovery of morphisms on iterated pulled back open covers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction comparison for module pullback along an open cover is compatible with composition of two morphisms and the isomorphism between iterated pullback charts",
+   "results": "AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app, AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.PresheafedSpace.GlueData.f_invApp_f_app, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_fst",
+   "date": "2026-10-13",
+   "verdict": "Generic tools or related statements only; no exact scheme-level comparison square or recovery theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_associator_hom|pseudofunctor_associativity|localMapRecovery",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic tools or related statements only; no exact scheme-level comparison square or recovery theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapRecoveryTransport",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Recovery equations persist under an arbitrary later base change; Composition square for restriction and tensor pullback",
+   "via": [
+    "lem-pc-fp-local-map-recovery-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoverTensorPullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.openCoverTensorPullbackComparison_composition",
+  "statement": "theorem openCoverTensorPullbackComparison_composition\n    {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (b : Z ⟶ X)\n    (wpq : p ≫ q = b) (U₀ : X.OpenCover.{u}) (α : U₀.I₀)\n    (s : ((U₀.pullback₁ q : Y.OpenCover.{u}).pullback₁ p : Z.OpenCover.{u}).X α ≅\n      (U₀.pullback₁ b).X α)\n    (hs : s.hom ≫ (U₀.pullback₁ b).f α =\n      ((U₀.pullback₁ q : Y.OpenCover.{u}).pullback₁ p : Z.OpenCover.{u}).f α)\n    (hk : s.hom ≫ U₀.pullbackHom b α =\n      Scheme.Cover.pullbackHom (U₀.pullback₁ q : Y.OpenCover.{u}) p α ≫ U₀.pullbackHom q α)\n    (M : X.Modules) :\n    let U : Y.OpenCover.{u} := U₀.pullback₁ q\n    let V : Z.OpenCover.{u} := U.pullback₁ p\n    let W : Z.OpenCover.{u} := U₀.pullback₁ b\n    let t₀ := openCoverTensorPullbackComparison b U₀ α\n    let t₁ := openCoverTensorPullbackComparison q U₀ α\n    let t₂ := openCoverTensorPullbackComparison p U α\n    let c := tensorPullbackCompositionIso p q b wpq\n    let l := pullbackComp s.hom (U₀.pullbackHom b α) ≪≫ pullbackCongr hk ≪≫\n      (pullbackComp (U.pullbackHom p α) (U₀.pullbackHom q α)).symm\n    let v := pullbackComp s.hom (W.f α) ≪≫ pullbackCongr hs\n    (pullback s.hom).map (t₀.hom.app M) ≫ v.hom.app ((tensorPullback b).obj M) ≫\n        (pullback (V.f α)).map (c.hom.app M) =\n      l.hom.app ((pullback (U₀.f α)).obj M) ≫\n        (pullback (U.pullbackHom p α)).map (t₁.hom.app M) ≫\n          t₂.hom.app ((tensorPullback q).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbd5e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T211059-L-390407",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbd5e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T211059-L-390407",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered files and DAG records to the packet, compiled all modules and the direct importer, and verified allowed axioms."
+ }
+}
