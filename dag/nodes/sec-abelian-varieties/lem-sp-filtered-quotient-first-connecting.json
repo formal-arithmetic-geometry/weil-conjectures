@@ -15,9 +15,23 @@
  ],
  "proof": [
   {
-   "text": "The cokernel universal properties of the nested filtration inclusions construct i and j with the two projection squares. The quotient-of-quotients short exact sequence proves exactness. The homology connecting-map representative formula sends a graded cycle lifted to F^p/F^(p+2) to the graded class of its differential in gr^(p+1). The two hH projection equations identify the source and target quotients with these homology classes. Precompose with the epic cycle-representative map and the epic boundary cokernel projection. The representative equation for D gives equality there; epic cancellation gives the displayed equality.",
+   "text": "Apply Mathlib kernelCokernelCompSequence.snakeInput to the inclusions F^(p+2) -> F^(p+1) -> F^p. The cokernel row is exact; its first map is mono since the second inclusion has zero kernel, and its last map is epic. The cokernel map identities give both projection squares. Integer index transport is performed in the auxiliary filtered_quotient_sequence lemma before choosing the maps.",
    "uses": [
-    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved simultaneous differential-representatives cover to obtain t,t',x,y with x epic. The source differential lies in F^(p+1), and the target differential is zero by d squared = 0, so t and t' factor through the corresponding cycle representative subobjects. The supplied hH lifts define graded cycles cx,cy. Mono cancellation extends each hH normalization equation to these arbitrary representatives.",
+   "uses": [
+    "lem-sp-filtered-complex-differential-representatives-cover",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project t to F^p/F^(p+2). Both projection squares and the chain map equations identify its image in gr^p with cx and its differential with the inclusion of cy. Apply Mathlib ShortComplex.ShortExact.δ_eq' to obtain cx pi_H δ = cy pi_H. The representative equation of D and the two normalization equations identify both sides after precomposition by x followed by the boundary cokernel projection. This composite is epic, so cancel it.",
+   "uses": [
     "lem-sp-filtered-complex-page-differential"
    ],
    "elementary": false
@@ -25,13 +39,14 @@
  ],
  "proof_deps": [
   "def-sp-filtered-complex-subquotients",
-  "lem-sp-filtered-complex-page-differential"
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-differential-representatives-cover"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Homological Algebra",
   "place": "Tag 012K, Lemma 12.24.3(1), boundary map of the two-step quotient sequence",
-  "note": "Componentwise formulation and explicit index transports; no countable direct sums."
+  "note": "V1 compiled proof: Mathlib kernel/cokernel composition snake input, δ_eq', existing proved simultaneous representatives cover, normalization by mono cancellation, and epic cancellation. No new postponed statement."
  },
  "mathlib_searches": [
   {
@@ -114,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-fef74",
-  "group": "C3",
+  "reviewer": "COMPILER",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T072340-L-1115686",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with node statements and dependencies; existing signature unchanged; all six modules and direct importer FilteredQuotientPageRealization compile cleanly; axioms and three documented postponed lemmas satisfy the brief."
+  "landing": "20261013T100156-L-2495688",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
