@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import Mathlib.RingTheory.Flat.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonInheritanceFixedDegree
 
 /-! # Tensor inheritance for localized cohomology comparisons
 
@@ -69,6 +70,9 @@ theorem localizedTensorComparison_inheritance
       (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C),
       (∀ i : ℤ, IsIso (m.localizedComparison i ≫ HomologicalComplex.homologyMap t i)) →
       ∀ i : ℤ, IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap
-        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by sorry
+        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by
+  dsimp
+  intro t m mU h i
+  exact localizedTensorComparison_inheritance_fixed_degree R A B C hC U Q N hU hQ t m mU i (h i)
 
 end ModuleCat
