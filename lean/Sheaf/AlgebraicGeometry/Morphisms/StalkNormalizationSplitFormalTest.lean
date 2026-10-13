@@ -18,14 +18,8 @@ public import Sheaf.RingTheory.Depth
 
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
-import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
-import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
-import Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionPowerSeriesChart
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense
-import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.RingTheory.NormalLocalDepthTwo
-import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFullyFaithful
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionCompletionChart
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalSplit
 
 /-!
 # A split formal test for the local normalization
@@ -111,6 +105,25 @@ theorem GaloisCover.exists_stalk_normalization_split_formal_test {S C : Scheme.{
         e.hom ≫ Sigma.desc (fun _ : G ↦ 𝟙 _) = pullback.snd n t) ∧
       t ((Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d))))
         (IsLocalRing.closedPoint (S.presheaf.stalk s))) =
-        τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) := by sorry
+        τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) := by
+  dsimp only
+  intro hn
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  let a := S.fromSpecStalk s
+  let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
+  let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=
+    pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])
+  obtain ⟨d, t, ht, hbase, hsection⟩ :=
+    exists_smooth_section_completion_chart (S.presheaf.stalk s)
+      (pullback.snd c a) τ (by simp only [τ, pullback.lift_snd]; rfl)
+  obtain ⟨e, he⟩ :=
+    GaloisCover.exists_stalk_normalization_formal_split
+      hS c σ hσ G q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ
+      s hs hmin hdepth hn d t ht hbase hsection
+  refine ⟨d, t, ht, ⟨e, he⟩, ?_⟩
+  exact congrArg (fun f ↦ f (IsLocalRing.closedPoint (S.presheaf.stalk s))) hsection
 
 end AlgebraicGeometry.Scheme
