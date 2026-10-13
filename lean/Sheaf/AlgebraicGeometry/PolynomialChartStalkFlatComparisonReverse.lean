@@ -3,6 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.PolynomialChartFibreStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparisonReverseAux
 
 /-! Reverse flatness comparison for a polynomial chart.
 
@@ -34,6 +35,8 @@ theorem polynomial_chart_stalk_flat_comparison_reverse
     (he : e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = U.ι ≫ f)
     (x : U.toScheme) :
     (PolynomialChart.stalkMap f U n e he x).Flat → (e.stalkMap x).hom.Flat := by
-  sorry
+  intro hfibre
+  exact polynomial_chart_stalk_flat_comparison_reverse_aux f U n e he x
+    (Flat.stalkMap f (U.ι x)) hfibre
 
 end AlgebraicGeometry
