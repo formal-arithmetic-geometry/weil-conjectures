@@ -13805,3 +13805,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:45 L: merged deliver/U4/Sheaf.AlgebraicGeometry.SelfTorIdealWedgeCoordinates (stage 3; reviewer PASS; first push; landing 20261013T224523-L-1477062 (interface); batch 20261013T224504; modules 2; new nodes 1)
 - 22:49 L: returned deliver/P2/Sheaf.Paper.LimitTowerOverLocalSystem (reviewer RETURN: (reviewer X-2e8b2, head 2e8b2d72f) E2: `RingHom.exists_limit_module_module_data_core` is false because it accepts arbitr)
 - 22:49 L: returned deliver/F2/Sheaf.RingTheory.LimitModuleModuleData (reviewer RETURN: (reviewer X-57457, head 574572753) E2 — lean/Sheaf/RingTheory/LimitModuleModuleData.lean, exists_limit_module_module_dat)
+- 22:50 L: returned deliver/J4/Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition (reviewer RETURN: (reviewer X-574cb, head 574cb7bd6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pi)
