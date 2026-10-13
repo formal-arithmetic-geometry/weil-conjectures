@@ -13,45 +13,31 @@
  ],
  "proof": [
   {
-   "text": "Use the underived open restriction and open composition isomorphisms of def-pc-derived-mayer-vietoris-open-counit-model. For an open A of Y, their composite identifies h_*j_{h^{-1}A,*}(I|h^{-1}A) with j_{A,*}((h_*I)|A). On a test open B both evaluate to I(h^{-1}(B intersect A)); the equality of inverse image with intersection identifies the section groups and their scalar actions. Apply this degreewise to complexes: naturality of the isomorphisms makes the section identifications commute with differentials.",
+   "text": "Assemble the actual ordinary open-image comparison from the fixed underived composition and restriction isomorphisms. Its unit compatibility is lem-pc-open-image-direct-image-comparison-unit. Apply its natural transformation termwise to I and compose with the open-image functor applied to the supplied chain map f, for U, V and U intersect V. Naturality of the ordinary comparison proves the chain-map equations; inverse image preserves intersections.",
    "uses": [
-    "def-pc-derived-mayer-vietoris-open-counit-model",
-    "def-pc-kinjective-mayer-vietoris-data"
+    "lem-pc-open-image-direct-image-comparison-unit"
    ],
    "elementary": false
   },
   {
-   "text": "For A equal to U, V, or U intersect V, compose the preceding comparison with j_{A,*} of restriction of the supplied chain map f. For the intersection use h^{-1}(U intersect V)=h^{-1}U intersect h^{-1}V. These are a, b, and c. No localized representative or derived resolution is chosen.",
+   "text": "In each degree use naturality of the Y-open unit at f and the unit comparison identity to get each of the first two squares. Use naturality of the Y-nested restriction at f and lem-pc-open-image-direct-image-comparison-restriction to get each of the last two squares. Associativity combines these identities. Extensionality of chain maps gives the asserted four equalities.",
    "uses": [
-    "def-pc-kinjective-mayer-vietoris-data"
+    "lem-pc-open-image-direct-image-comparison-unit",
+    "lem-pc-open-image-direct-image-comparison-restriction"
    ],
    "elementary": true
-  },
-  {
-   "text": "Under the section identifications, the transported unit is restriction from B to B intersect A: unfold the definition schemeOpenModuleAdjunction and its transport along overFunctorEquiv. The first two equations are f_B followed by this restriction equals the same restriction followed by f_{B intersect A}, which is naturality of the sheaf morphism f in each degree. Equality on all section modules and in all degrees proves the two chain equations.",
-   "uses": [
-    "def-pc-kinjective-mayer-vietoris-data"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Unfold the mate formula for schemeOpenModuleImageRestriction. The inverse nested restriction comparison restricts twice, the counit removes the repeated larger-open restriction, and the forward comparison identifies the result with the smaller-open restriction. Thus its section component is restriction from B intersect U or B intersect V to B intersect U intersect V. Naturality of f at these two inclusions proves the last two equations. The construction uses no covering or injectivity, and the same section computations apply to empty and repeated opens and zero complexes.",
-   "uses": [
-    "def-pc-kinjective-mayer-vietoris-data"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-mayer-vietoris-open-counit-model",
-  "def-pc-kinjective-mayer-vietoris-data"
+  "lem-pc-open-image-direct-image-comparison-unit",
+  "lem-pc-open-image-direct-image-comparison-restriction"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "C4",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08BV (lemma-exact-sequence-j-star), displayed complex, and 08FE (lemma-restrict-direct-image-open), underived sectionwise identity; official Stacks pages read online",
-  "note": "Detailed sectionwise chain-map expansion of the underived identity in Tag 08FE and the diagram in Tag 08BV."
+  "agent": "V2",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE and 08BV",
+  "note": "Construct the three comparison maps; replace nested-mate section calculations by adjunction cancellation, then prove all four chain squares degreewise by naturality."
  },
  "mathlib_searches": [
   {
@@ -122,11 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
+  "reviewer": "X-e1306",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T211056-L-389440",
+  "landing": "20261013T234524-L-2168379",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and node metadata; all three modules and the direct importer compiled, with permitted axioms only."
  }
 }

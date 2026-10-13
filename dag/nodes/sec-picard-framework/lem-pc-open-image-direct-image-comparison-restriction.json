@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-open-image-direct-image-comparison-restriction",
+ "kind": "statement",
+ "title": "The fixed ordinary open-image comparison respects nested restriction",
+ "statement": "For a scheme morphism h:X→Y, opens W≤U of Y and an O_X-module M, let F=h_* and D be the fixed comparison [lem-pc-open-image-direct-image-comparison-unit]. For the unsigned open-image restriction maps ρ [def-pc-kinjective-mayer-vietoris-data], D_U(M);ρ_{U,W,F(M)}=F(ρ_{h⁻¹U,h⁻¹W,M});D_W(M). There is no covering or injectivity hypothesis.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE, underived identity in the proof, and 08BV, displayed section sequence; official Stacks pages read online"
+ },
+ "stmt_deps": [
+  "lem-pc-open-image-direct-image-comparison-unit",
+  "def-pc-kinjective-mayer-vietoris-data"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the proved private helpers isIso_smaller_restriction_unit and cancel_into_right_adjoint from OpenImageComplexComparisonRestriction by a proof-only import all. The first supplies invertibility of the larger-open unit restricted to the smaller open, and the second supplies cancellation after transposing under the smaller-open adjunction. Open direct image is fully faithful, so the larger-open restriction\nof its adjunction unit is invertible. Applying the overlap restriction and\nconjugating by schemeOpenRestrictionCompIso shows that restriction of this\nunit to the smaller open is invertible as well. Unit compatibility of the\nordinary comparison transfers this property to the direct image of the\ninverse-image-open unit. The smaller-open adjunction Hom equivalence therefore\nallows cancellation of that direct image in maps into the smaller-open image.\nAfter precomposition by it, both sides become the smaller-open unit: use\nschemeOpenModuleImage_unit_restriction on X and Y and the comparison unit\nidentity at U and W. This proves equality without expanding the nested mate\non sections. Empty and repeated opens need no exception; all the adjunction\nidentities and invertibilities continue to hold.",
+   "uses": [
+    "lem-pc-open-image-direct-image-comparison-unit",
+    "def-pc-kinjective-mayer-vietoris-data",
+    "lem-pc-open-image-complex-comparison-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-open-image-direct-image-comparison-unit",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "lem-pc-open-image-complex-comparison-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "V2",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE and 08BV",
+  "note": "Reuse existing private invertibility and adjunction-cancellation helpers via import all; combine ordinary unit compatibility with the fixed unit-restriction identity. No duplicate helper is declared."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of a sheaf commutes with restricting to open subsets and extending by direct image, compatible with units and nested restrictions",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app, CategoryTheory.Sheaf.ΓRes_map_assoc",
+   "date": "2026-10-14",
+   "verdict": "Generic adjunction and section formulas only; no fixed ordinary open-image comparison unit or restriction identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit",
+   "results": "12 hits: CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.id_unit, CategoryTheory.Adjunction.mk'_unit, CategoryTheory.Adjunction.mkOfUnitCounit_unit, CategoryTheory.Equivalence.toAdjunction_unit, CategoryTheory.Adjunction.ext, CategoryTheory.Adjunction.ext_iff, CategoryTheory.Adjunction.toEquivalence",
+   "date": "2026-10-14",
+   "verdict": "Generic adjunction and section formulas only; no fixed ordinary open-image comparison unit or restriction identity."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*[Rr]estrict|[Rr]estrict.*pushforward",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-14",
+   "verdict": "Generic adjunction and section formulas only; no fixed ordinary open-image comparison unit or restriction identity."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_unit_app_app|restrictFunctorComp|pushforwardComp",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-14",
+   "verdict": "Generic adjunction and section formulas only; no fixed ordinary open-image comparison unit or restriction identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "date": "2026-10-14",
+   "verdict": "Generic adjunction and section formulas only; no fixed ordinary open-image comparison unit or restriction identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary direct image and open restriction comparison of sheaves of modules carries the inverse image open adjunction unit to the open adjunction unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MayerVietorisDirectImageChainSquares",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "ordinary direct-image Mayer–Vietoris chain squares, compatibility of the open-image comparison",
+   "via": [
+    "lem-pc-mayer-vietoris-direct-image-chain-squares",
+    "lem-pc-mayer-vietoris-image-resolution-comparison-first",
+    "lem-pc-mayer-vietoris-image-resolution-comparison",
+    "lem-pc-derived-mayer-vietoris-functorial"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenImageDirectImageComparisonRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenImageDirectImageComparisonRestriction.lean",
+  "declaration": "AlgebraicGeometry.schemeOpenImageDirectImageComparison_restriction",
+  "statement": "theorem schemeOpenImageDirectImageComparison_restriction\n    (X Y : Scheme.{u}) (h : X ⟶ Y) {W U : Y.Opens} (i : W ⟶ U)\n    (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :\n    (schemeOpenImageDirectImageComparison h U).hom.app M ≫\n        (schemeOpenModuleImageRestriction Y i).app\n          ((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).obj M) =\n      (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).map\n          ((schemeOpenModuleImageRestriction X ((Opens.map h.base).map i)).app M) ≫\n        (schemeOpenImageDirectImageComparison h W).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e1306",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T234524-L-2168379",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e1306",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T234524-L-2168379",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node metadata; all three modules and the direct importer compiled, with permitted axioms only."
+ }
+}
