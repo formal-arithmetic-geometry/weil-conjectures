@@ -12858,3 +12858,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/D2/Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates (stage 3; reviewer PASS; first push; landing 20261013T144154-L-614172 (interface); batch 20261013T144152; modules 4; new nodes 3)
 - 14:41 L: merged deliver/D2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedSplit (stage 3; reviewer PASS; first push; landing 20261013T144154-L-614317 (interface); batch 20261013T144152; modules 4; new nodes 3)
 - 14:41 L: merged deliver/E1/Sheaf.AlgebraicGeometry.LocalizedMixedPullbackFiniteFreeModel (stage 3; reviewer PASS; first push; landing 20261013T144155-L-614447 (proof); batch 20261013T144152; modules 1; new nodes 0)
+- 14:41 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootPurityData (stage 3; reviewer PASS; first push; landing 20261013T144155-L-614657 (interface); batch 20261013T144152; modules 3; new nodes 2)
