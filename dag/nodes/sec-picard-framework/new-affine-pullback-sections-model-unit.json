@@ -1,0 +1,134 @@
+{
+ "id": "new-affine-pullback-sections-model-unit",
+ "kind": "statement",
+ "title": "Pullback adjunction unit on a K-flat affine sections model",
+ "statement": "Let $R,B$ be commutative rings, $g:\\operatorname{Spec}B\\to\\operatorname{Spec}R$ a morphism, and $M$ an unbounded K-flat complex of $R$-modules [def-pc-module-kflat-complex]. Use the affine functors and normalized pullback adjunction of [def-pc-affine-global-hom-base-change-map], the associated-sheaf functor of [lem-weil-pbc-affine-tilde-gamma-adjunction], and additive tilde and tensor pullback. Let $v:g_*\\Gamma_R\\simeq\\Gamma_B U$ and $r:Rg_*R\\Gamma_R\\simeq R\\Gamma_B U_D$ be natural isomorphisms satisfying the exact derived-unit compatibility hr in lean.statement. Set $K=\\widetilde M$, $X=\\Gamma_RK$, $Z=R\\Gamma_R(QK)$, $P=g^*$, and $Y=\\Gamma_B(PK)$. For every isomorphism $s:Z\\simeq QX$ whose inverse is the canonical affine sections comparison, there is an isomorphism $b:R\\Gamma_B(Lg^*(QK))\\simeq QY$ such that $R\\Gamma_R(\\eta_g(QK))\\,r\\,U_D(b)=s\\,Q(\\Gamma_R(\\eta_P(K))\\,v_{PK})\\,\\kappa_U^{-1}(Y)$. The comparisons and equation are specified verbatim in lean.statement. No scalar-extension adjunction, c or hc is required.",
+ "stmt_deps": [
+  "def-pc-affine-global-hom-base-change-map",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 (lemma-affine-compare-bounded), 08DV (lemma-affine-K-flat), 08DW(2) (lemma-quasi-coherence-pullback), and 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect); normalized derived adjunction unit calculation"
+ },
+ "proof": [
+  {
+   "text": "K-flatness of tilde M makes the normalized pullback counit invertible. Termwise tensor pullback of tilde is associated sheaf after scalar extension over B, transporting g to Spec of its coordinate ring map by full faithfulness of Spec. The B-sections comparison is invertible. Compose derived B-sections of the counit with its inverse to construct b.",
+   "uses": [
+    "lem-pc-affine-tilde-kflat",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "new-affine-tilde-derived-sections-unit-isIso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized derived pullback adjunction unit factorization to K. Naturality of the sections comparison moves the pullback counit past the sections comparison. The supplied hr identifies the derived lift of v with r. Substitute s.inv for the R-sections comparison and cancel invertible comparisons. The resulting identity is exactly the asserted pullback equation.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tilde-kflat",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "new-affine-tilde-derived-sections-unit-isIso",
+  "def-pc-derived-base-change-map",
+  "def-pc-affine-global-hom-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "The K-flat affine model argument and normalized unit factorization from the parent node, separated by adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction mate computed on K flat models agrees with underived adjunction unit",
+   "results": "CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.mateEquiv_counit; CategoryTheory.Adjunction.map_η_comp_η; CategoryTheory.Adjunction.unit_app_unit_comp_map_η; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.ε_comp_map_ε",
+   "date": "2026-10-13",
+   "verdict": "Generic derived adjunction tools only; no exact affine model unit statement."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|unit_leftAdjointUniq_hom_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic derived adjunction tools only; no exact affine model unit statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat scalar extension counit gives an isomorphism compatible with the derived adjunction unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "date": "2026-10-13",
+   "verdict": "Generic derived adjunction tools only; no exact affine model unit statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelFactorization",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 affine extension and sections unit argument: Derived model factorization of an underived affine unit comparison; Pullback adjunction unit on a K-flat affine sections model",
+   "via": [
+    "new-affine-extension-sections-model-factorization",
+    "lem-pc-affine-extension-sections-model-mate",
+    "lem-pc-affine-extension-sections-unit",
+    "lem-pc-affine-sections-base-change-mate",
+    "lem-pc-affine-global-hom-base-change-factorization",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePullbackSectionsModelUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePullbackSectionsModelUnit.lean",
+  "declaration": "AlgebraicGeometry.exists_affinePullbackSections_model_unit",
+  "statement": "theorem exists_affinePullbackSections_model_unit\n    {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)\n    (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙\n        affineGlobalSections (𝟙 (Spec R)) ≅\n      affineGlobalSections (𝟙 (Spec B)) ⋙\n        ModuleCat.restrictScalars.{u} (affineBaseRingMap g))\n    (r : schemeDerivedDirectImage g ⋙ affineDerivedGlobalSections (𝟙 (Spec R)) ≅\n      affineDerivedGlobalSections (𝟙 (Spec B)) ⋙\n        (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory)\n    (hr : ∀ J : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace)) (ComplexShape.up ℤ),\n      (Functor.rightDerivedFunctorCompUnit\n          (RingedSpace.moduleDirectImage g.toLRSHom.toShHom)\n          (affineGlobalSections (𝟙 (Spec R)))).app J ≫\n        (affineGlobalSectionsDerivedIso (𝟙 (Spec R))).hom.app\n          ((schemeDerivedDirectImage g).obj (DerivedCategory.Qh.obj J)) ≫\n        r.hom.app (DerivedCategory.Qh.obj J) =\n      DerivedCategory.Qh.map ((v.hom.mapHomotopyCategory (ComplexShape.up ℤ)).app J) ≫\n        (affineGlobalSections (𝟙 (Spec B)) ⋙\n          ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).rightDerivedFunctorUnit.app J ≫\n        (Functor.rightDerivedFunctorCompMapDerivedCategoryIso\n            (affineGlobalSections (𝟙 (Spec B)))\n            (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)) ≪≫\n          Functor.isoWhiskerRight (affineGlobalSectionsDerivedIso (𝟙 (Spec B)))\n            (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory).hom.app\n          (DerivedCategory.Qh.obj J))\n    [hT : (@id (ModuleCat.{u} R ⥤\n      SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))\n        (tilde.functor R)).Additive]\n    [hP : (@id (SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace) ⥤\n      SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))\n        (Scheme.Modules.tensorPullback g)).Additive]\n    (M : CochainComplex (ModuleCat.{u} R) ℤ)\n    (hM : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat M) :\n    let T := @Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (@id (ModuleCat.{u} R ⥤\n        SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))\n        (tilde.functor R)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)\n    let K := T.obj M\n    let X := ((affineGlobalSections (𝟙 (Spec R))).mapHomologicalComplex (.up ℤ)).obj K\n    let Z := (affineDerivedGlobalSections (𝟙 (Spec R))).obj (DerivedCategory.Q.obj K)\n    let P : SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace) ⥤\n      SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace) :=\n      Scheme.Modules.tensorPullback g\n    letI : P.Additive := hP\n    let U := ModuleCat.restrictScalars.{u} (affineBaseRingMap g)\n    let adjP : P ⊣ RingedSpace.moduleDirectImage g.toLRSHom.toShHom :=\n      Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)\n    let Y := ((affineGlobalSections (𝟙 (Spec B))).mapHomologicalComplex (.up ℤ)).obj\n      ((P.mapHomologicalComplex (.up ℤ)).obj K)\n    ∀ (s : Z ≅ DerivedCategory.Q.obj X),\n      s.inv =\n        (DerivedCategory.quotientCompQhIso _).inv.app X ≫\n          (affineGlobalSections (𝟙 (Spec R))).rightDerivedFunctorUnit.app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj K) ≫\n          (affineGlobalSections (𝟙 (Spec R))).rightDerivedFunctor.map\n            ((DerivedCategory.quotientCompQhIso _).hom.app K) ≫\n          (affineGlobalSectionsDerivedIso (𝟙 (Spec R))).hom.app\n            (DerivedCategory.Q.obj K) →\n      ∃ (b : (affineDerivedGlobalSections (𝟙 (Spec B))).obj\n          ((derivedPullback g).obj (DerivedCategory.Q.obj K)) ≅ DerivedCategory.Q.obj Y),\n        (affineDerivedGlobalSections (𝟙 (Spec R))).map\n            ((canonicalPullbackAdjunction g).unit.app (DerivedCategory.Q.obj K)) ≫\n          r.hom.app ((derivedPullback g).obj (DerivedCategory.Q.obj K)) ≫\n          U.mapDerivedCategory.map b.hom =\n        s.hom ≫ DerivedCategory.Q.map\n          (((affineGlobalSections (𝟙 (Spec R))).mapHomologicalComplex (.up ℤ)).map\n              ((adjP.mapHomologicalComplex (.up ℤ)).unit.app K) ≫\n            (v.hom.mapHomologicalComplex (.up ℤ)).app\n              ((P.mapHomologicalComplex (.up ℤ)).obj K)) ≫\n          U.mapDerivedCategoryFactors.inv.app Y",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T141535-L-382002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T141535-L-382002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

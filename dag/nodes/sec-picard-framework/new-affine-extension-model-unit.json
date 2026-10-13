@@ -1,0 +1,140 @@
+{
+ "id": "new-affine-extension-model-unit",
+ "kind": "statement",
+ "title": "Extension adjunction unit on a K-flat affine sections model",
+ "statement": "Let $R,B$ be commutative rings, $g:\\operatorname{Spec}B\\to\\operatorname{Spec}R$ a morphism, and $M$ an unbounded K-flat complex of $R$-modules [def-pc-module-kflat-complex]. Use the affine functors and fixed extension adjunction of [def-pc-affine-global-hom-base-change-map] and the associated-sheaf functor of [lem-weil-pbc-affine-tilde-gamma-adjunction], with their additive structures. Set $K=\\widetilde M$, $X=\\Gamma_R K$, $Z=R\\Gamma_R(QK)$, $E=B\\otimes_R-$ and $U$ restriction of scalars. There are isomorphisms $s:Z\\simeq QX$ and $a:LE(Z)\\simeq Q(EX)$ such that $s^{-1}$ is the canonical ordinary-to-derived affine sections comparison, and $\\eta_{LE\\dashv U}(Z)\\,U(a)=s\\,Q(\\eta_{E\\dashv U}(X))\\,\\kappa_U^{-1}(EX)$, where $\\kappa_U$ is the exact-restriction localization comparison. The comparisons and equation are specified verbatim in lean.statement. No tensor pullback, v, r or comparison c is required.",
+ "stmt_deps": [
+  "def-pc-affine-global-hom-base-change-map",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 (lemma-affine-compare-bounded), 08DV (lemma-affine-K-flat), 08DW(2) (lemma-quasi-coherence-pullback), and 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect); normalized derived adjunction unit calculation"
+ },
+ "proof": [
+  {
+   "text": "Construct eX:M ≅ X degreewise from tilde.isoTop; naturality of tilde.toTildeΓNatIso proves compatibility with differentials. Transport categorical K-flatness along eX. Apply affineTildeDerivedSectionsUnit_isIso to the homotopy image of M, and compose this invertible comparison with quotientCompQhIso and affineGlobalSectionsDerivedIso. Its inverse is s and its inverse formula is definitional.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "new-affine-tilde-derived-sections-unit-isIso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install PreservesKFlatQuasiIso for ordinary extension. Apply the first clause of mixedTensor_kFlat_quasiIso with the B tensor unit in degree zero. The map₂HomologicalComplexFlipObjSingleIso and extension of the left unitor identify this map with termwise extension of the given quasi-isomorphism. Transport QuasiIso across the two arrow isomorphisms. The standard derived extension adjunction with exact restriction is then defined. Its K-flat counit ε on X is invertible; compose the quotient/homotopy comparisons with asIso ε to obtain d.",
+   "uses": [
+    "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the unit-compatible uniqueness isomorphism e from the fixed extension adjunction to the standard derived adjunction. Put a=LE(s) followed by e and d. Apply derivedη_fac_app to the extension homotopy adjunction. Postcompose with the exact restriction derived-functor isomorphism; its unit compatibility cancels the restriction unit and gives the ordinary unit equation on Qh(X). The explicit mapDerivedCategoryFactorsh formula, naturality of quotientCompQhIso, and the HomotopyCategory adjunction unit formula convert this to the equation on Q(X). Naturality of the fixed extension unit for s.hom followed by unit_leftAdjointUniq_hom_app gives the stated equation on Z. The construction and all cancellations are written in Lean.",
+   "uses": [
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-module-kflat-complex",
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "new-affine-tilde-derived-sections-unit-isIso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 (lemma-affine-compare-bounded), 08DW(2) (lemma-quasi-coherence-pullback) and 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect); complete Lean proof using mixed tensor scalar-extension test and derivedη_fac_app, W4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction mate computed on K flat models agrees with underived adjunction unit",
+   "results": "CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.mateEquiv_counit; CategoryTheory.Adjunction.map_η_comp_η; CategoryTheory.Adjunction.unit_app_unit_comp_map_η; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.ε_comp_map_ε",
+   "date": "2026-10-13",
+   "verdict": "Generic derived adjunction tools only; no exact affine model unit statement."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|unit_leftAdjointUniq_hom_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic derived adjunction tools only; no exact affine model unit statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat scalar extension counit gives an isomorphism compatible with the derived adjunction unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "date": "2026-10-13",
+   "verdict": "Generic derived adjunction tools only; no exact affine model unit statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelFactorization",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 affine extension and sections unit argument: Derived model factorization of an underived affine unit comparison; Extension adjunction unit on a K-flat affine sections model",
+   "via": [
+    "new-affine-extension-sections-model-factorization",
+    "lem-pc-affine-extension-sections-model-mate",
+    "lem-pc-affine-extension-sections-unit",
+    "lem-pc-affine-sections-base-change-mate",
+    "lem-pc-affine-global-hom-base-change-factorization",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineExtensionModelUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineExtensionModelUnit.lean",
+  "declaration": "AlgebraicGeometry.exists_affineExtension_model_unit",
+  "statement": "theorem exists_affineExtension_model_unit\n    {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)\n    [(@id (ModuleCat.{u} R ⥤\n      SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))\n        (tilde.functor R)).Additive]\n    [(ModuleCat.extendScalars.{u, u, u} (affineBaseRingMap g)).Additive]\n    (M : CochainComplex (ModuleCat.{u} R) ℤ)\n    (hM : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat M) :\n    let T := @Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (@id (ModuleCat.{u} R ⥤\n        SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))\n        (tilde.functor R)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)\n    let K := T.obj M\n    let X := ((affineGlobalSections (𝟙 (Spec R))).mapHomologicalComplex (.up ℤ)).obj K\n    let Z := (affineDerivedGlobalSections (𝟙 (Spec R))).obj (DerivedCategory.Q.obj K)\n    let E := ModuleCat.extendScalars.{u, u, u} (affineBaseRingMap g)\n    let U := ModuleCat.restrictScalars.{u} (affineBaseRingMap g)\n    ∃ (s : Z ≅ DerivedCategory.Q.obj X)\n      (a : (affineDerivedExtension g).obj Z ≅\n        DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj X)),\n      s.inv =\n        (DerivedCategory.quotientCompQhIso _).inv.app X ≫\n          (affineGlobalSections (𝟙 (Spec R))).rightDerivedFunctorUnit.app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj K) ≫\n          (affineGlobalSections (𝟙 (Spec R))).rightDerivedFunctor.map\n            ((DerivedCategory.quotientCompQhIso _).hom.app K) ≫\n          (affineGlobalSectionsDerivedIso (𝟙 (Spec R))).hom.app\n            (DerivedCategory.Q.obj K) ∧\n      (affineDerivedExtensionAdjunction g).unit.app Z ≫ U.mapDerivedCategory.map a.hom =\n        s.hom ≫ DerivedCategory.Q.map\n          (((ModuleCat.extendRestrictScalarsAdj (affineBaseRingMap g)).mapHomologicalComplex\n            (.up ℤ)).unit.app X) ≫\n          U.mapDerivedCategoryFactors.inv.app ((E.mapHomologicalComplex (.up ℤ)).obj X)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T141535-L-382002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T141535-L-382002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

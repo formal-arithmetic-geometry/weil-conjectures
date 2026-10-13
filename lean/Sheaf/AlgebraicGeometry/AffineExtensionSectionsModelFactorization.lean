@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
-import Sheaf.AlgebraicGeometry.TensorPullbackTilde
-import Sheaf.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
+import Sheaf.AlgebraicGeometry.AffineExtensionModelUnit
+import Sheaf.AlgebraicGeometry.AffinePullbackSectionsModelUnit
 
 /-! # Localization of the affine model comparison
 
@@ -139,6 +138,87 @@ theorem exists_affineExtensionSections_model_factorization
             ((canonicalPullbackAdjunction g).unit.app Q) ≫
           r.hom.app ((derivedPullback g).obj Q))) ≫ b.hom =
         a.hom ≫ DerivedCategory.Q.map ((c.mapHomologicalComplex (.up ℤ)).app M) := by
-  sorry
+  dsimp only
+  obtain ⟨s, a, hs, ha⟩ := exists_affineExtension_model_unit g M hM
+  obtain ⟨b, hb⟩ := exists_affinePullbackSections_model_unit g v r hr M hM s hs
+  refine ⟨a, b, ?_⟩
+  let T := @Functor.mapHomologicalComplex _ _ _ _ _ _ _
+    (@id (ModuleCat.{u} R ⥤
+      SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))
+      (tilde.functor R)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
+  let K := T.obj M
+  let S := affineGlobalSections (𝟙 (Spec R))
+  let E := ModuleCat.extendScalars.{u, u, u} (affineBaseRingMap g)
+  let U := ModuleCat.restrictScalars.{u} (affineBaseRingMap g)
+  let P : SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace) :=
+      Scheme.Modules.tensorPullback g
+  have : P.Additive := inferInstanceAs
+    ((@id (SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))
+      (Scheme.Modules.tensorPullback g)).Additive)
+  let adjP : P ⊣ RingedSpace.moduleDirectImage g.toLRSHom.toShHom :=
+    Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
+  let X := (S.mapHomologicalComplex (.up ℤ)).obj K
+  let f := (c.mapHomologicalComplex (.up ℤ)).app M
+  have hchain :
+      ((ModuleCat.extendRestrictScalarsAdj (affineBaseRingMap g)).mapHomologicalComplex
+          (.up ℤ)).unit.app X ≫ (U.mapHomologicalComplex (.up ℤ)).map f =
+        (S.mapHomologicalComplex (.up ℤ)).map
+            ((adjP.mapHomologicalComplex (.up ℤ)).unit.app K) ≫
+          (v.hom.mapHomologicalComplex (.up ℤ)).app
+            ((P.mapHomologicalComplex (.up ℤ)).obj K) := by
+    ext i : 1
+    exact hc (M.X i)
+  let Y := ((affineGlobalSections (𝟙 (Spec B))).mapHomologicalComplex (.up ℤ)).obj
+    ((P.mapHomologicalComplex (.up ℤ)).obj K)
+  let η := ((ModuleCat.extendRestrictScalarsAdj (affineBaseRingMap g)).mapHomologicalComplex
+    (.up ℤ)).unit.app X
+  have hnat : U.mapDerivedCategoryFactors.inv.app
+        ((E.mapHomologicalComplex (.up ℤ)).obj X) ≫
+      U.mapDerivedCategory.map (DerivedCategory.Q.map f) =
+      DerivedCategory.Q.map ((U.mapHomologicalComplex (.up ℤ)).map f) ≫
+        U.mapDerivedCategoryFactors.inv.app Y := by
+    exact (U.mapDerivedCategoryFactors.inv.naturality f).symm
+  have hright : (affineDerivedExtensionAdjunction g).unit.app
+      ((affineDerivedGlobalSections (𝟙 (Spec R))).obj (DerivedCategory.Q.obj K)) ≫
+      U.mapDerivedCategory.map (a.hom ≫ DerivedCategory.Q.map f) =
+      s.hom ≫ DerivedCategory.Q.map
+        ((S.mapHomologicalComplex (.up ℤ)).map
+            ((adjP.mapHomologicalComplex (.up ℤ)).unit.app K) ≫
+          (v.hom.mapHomologicalComplex (.up ℤ)).app
+            ((P.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+        U.mapDerivedCategoryFactors.inv.app Y := by
+    calc
+      _ = ((affineDerivedExtensionAdjunction g).unit.app
+            ((affineDerivedGlobalSections (𝟙 (Spec R))).obj (DerivedCategory.Q.obj K)) ≫
+          U.mapDerivedCategory.map a.hom) ≫
+            U.mapDerivedCategory.map (DerivedCategory.Q.map f) := by
+        rw [Functor.map_comp, Category.assoc]
+      _ = (s.hom ≫ DerivedCategory.Q.map η ≫
+          U.mapDerivedCategoryFactors.inv.app
+            ((E.mapHomologicalComplex (.up ℤ)).obj X)) ≫
+            U.mapDerivedCategory.map (DerivedCategory.Q.map f) :=
+        congrArg (fun z ↦ z ≫ U.mapDerivedCategory.map (DerivedCategory.Q.map f)) ha
+      _ = s.hom ≫ DerivedCategory.Q.map η ≫
+          DerivedCategory.Q.map ((U.mapHomologicalComplex (.up ℤ)).map f) ≫
+            U.mapDerivedCategoryFactors.inv.app Y := by
+        simp only [Category.assoc]
+        exact congrArg (fun z ↦ s.hom ≫ DerivedCategory.Q.map η ≫ z) hnat
+      _ = _ := by
+        rw [← DerivedCategory.Q.map_comp_assoc]
+        exact congrArg (fun z ↦ s.hom ≫ DerivedCategory.Q.map z ≫
+          U.mapDerivedCategoryFactors.inv.app Y) hchain
+  apply ((affineDerivedExtensionAdjunction g).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply,
+    Adjunction.homEquiv_unit]
+  change ((affineDerivedGlobalSections (𝟙 (Spec R))).map
+      ((canonicalPullbackAdjunction g).unit.app (DerivedCategory.Q.obj K)) ≫
+    r.hom.app ((derivedPullback g).obj (DerivedCategory.Q.obj K))) ≫
+    U.mapDerivedCategory.map b.hom =
+    (affineDerivedExtensionAdjunction g).unit.app
+      ((affineDerivedGlobalSections (𝟙 (Spec R))).obj (DerivedCategory.Q.obj K)) ≫
+    U.mapDerivedCategory.map (a.hom ≫ DerivedCategory.Q.map f)
+  exact (Category.assoc _ _ _).trans (hb.trans hright.symm)
 
 end AlgebraicGeometry
