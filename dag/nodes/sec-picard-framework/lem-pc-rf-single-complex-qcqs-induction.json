@@ -27,65 +27,48 @@
  ],
  "proof": [
   {
-   "text": "The assertion that the displayed composite is an isomorphism is local on S'. Restricting to an affine open of S' preserves the derived pullback, derived direct image, and the canonical comparison map, so it is enough to take g:S'\\to S with S' and S affine; then X is quasi-compact and quasi-separated by the hypotheses and the cartesian square.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ9, proof, first paragraph"
-   }
+   "text": "Apply the target-locality reduction with an affine-base criterion still to prove. This uses exact open restriction and compatibility of the canonical map, and introduces no global compactness assumption on S.",
+   "uses": [
+    "lem-pc-single-complex-target-locality"
+   ],
+   "elementary": false
   },
   {
-   "text": "Let U\\subseteq X be an affine open, so U=Spec(A), S=Spec(R), S'=Spec(R') and U'=U\\times_S S'=Spec(A') with A'=A\\otimes_R R' are affine, and the stalk hypothesis restricts to U'. Write K|_U and K'|_{U'} as \\widetilde{M^\\bullet} and \\widetilde{N^\\bullet} by the affine equivalence D(A)\\simeq D_{\\mathrm{QCoh}}(\\mathcal O_U) [lem-pc-affine-qcoh-derived-equivalence]. Since U\\to S and U'\\to S' are affine, hence qcqs, their derived direct images lie in D_{\\mathrm{QCoh}} [lem-pc-derived-direct-image-preserves-qcoh] and correspond under the same equivalence on S and S' to M^\\bullet and N^\\bullet viewed over R and R' (derived global sections of a composite); derived pullback along Spec R'\\to Spec R and Spec A'\\to Spec A is -\\otimes^L_R R' and -\\otimes^L_A A' on these sheaves [lem-pc-affine-derived-pullback-tensor-tilde]. Thus the base-change composite for U is the module map M^\\bullet\\otimes_R^L R'\\to M^\\bullet\\otimes_A^L A'\\to N^\\bullet, which is an isomorphism in D(R') by the affine criterion [lem-pc-rf-single-complex-affine-base-change].",
+   "text": "For the resulting square with affine bases, infer CompactSpace X from QuasiCompact f and QuasiSeparatedSpace X from QuasiSeparated f. Define P(U) to be IsIso of the explicit canonical source-open comparison. Its affine base case is the source-open affine comparison theorem.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-derived-direct-image-preserves-qcoh",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-rf-single-complex-affine-base-change"
+    "def-pc-single-complex-open-comparison",
+    "lem-pc-single-complex-open-affine"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tags 0DJ8 and 0DJ9, affine case"
-   }
+   "elementary": false
   },
   {
-   "text": "Define P(W) for a quasi-compact open W of X to mean that the analogous composite Lg^*R(W\\to S)_*K|_W\\to R(W'\\to S')_*K'|_{W'}, with W'=(g')^{-1}(W), is an isomorphism. Step 2 gives P(W) for every affine W. By the qcqs induction principle [lem-sc-invert-s-cohomology-induction], applied to the qcqs scheme X of Step 1, P(X) follows once P(U\\cup V) is shown for U a quasi-compact open and V an affine open with P(U), P(V), P(U\\cap V). In that situation U\\cap V is quasi-compact because X is quasi-separated [pqf-lem-qs-intersection-qc], and U\\cup V is quasi-compact and quasi-separated over the affine S.",
+   "text": "For quasi-compact U and affine V, V is compact and U intersection V is compact by Mathlib QuasiSeparatedSpace.inter_isCompact. The source-open union theorem then combines P(U), P(V), P(U intersection V) into P(U union V). Apply quasiCompactOpen_induction to obtain P(top).",
    "uses": [
-    "lem-sc-invert-s-cohomology-induction",
-    "pqf-lem-qs-intersection-qc"
+    "lem-pc-single-complex-open-union",
+    "lem-sc-invert-s-cohomology-induction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ9, proof by the induction principle"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the relative Mayer--Vietoris gluing lemma [lem-pc-rf-single-complex-relative-mayer-vietoris] to the cartesian square for f|_{U\\cup V}:U\\cup V\\to S and its base change (U\\cup V)'\\to S', with K|_{U\\cup V}\\to K'|_{(U\\cup V)'}: its hypotheses are U, V, U\\cap V quasi-compact (Step 3) and the three comparison isomorphisms P(U), P(V), P(U\\cap V). It gives P(U\\cup V), so P holds for every quasi-compact open, in particular P(X).",
+   "text": "Normalize the top-open comparison to the original global comparison. This completes the affine-base criterion supplied to the target-locality reduction.",
    "uses": [
-    "lem-pc-rf-single-complex-relative-mayer-vietoris"
+    "lem-pc-single-complex-open-top"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJ9, induction step and conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-derived-direct-image-preserves-qcoh",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-rf-single-complex-affine-base-change",
+  "lem-pc-single-complex-target-locality",
+  "def-pc-single-complex-open-comparison",
+  "lem-pc-single-complex-open-affine",
+  "lem-pc-single-complex-open-union",
   "lem-sc-invert-s-cohomology-induction",
-  "pqf-lem-qs-intersection-qc",
-  "lem-pc-rf-single-complex-relative-mayer-vietoris"
+  "lem-pc-single-complex-open-top"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ9 (lemma-single-complex-base-change), proof"
+  "place": "Tag 0DJ9; B4 formalized the source-open induction, splitting off affine transport, union transport, top normalization and target locality."
  },
  "mathlib_searches": [
   {
@@ -238,5 +221,15 @@
    "def-pc-derived-pullback",
    "def-pc-base-change"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T082332-L-1631244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

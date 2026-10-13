@@ -9,13 +9,11 @@ public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.Algebra.Homology.SingleComplexAffineBaseChange
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection
-import Sheaf.AlgebraicGeometry.RelativeMayerVietoris
+import Sheaf.AlgebraicGeometry.SingleComplexOpenAffine
+import Sheaf.AlgebraicGeometry.SingleComplexOpenUnion
+import Sheaf.AlgebraicGeometry.SingleComplexOpenTop
+import Sheaf.AlgebraicGeometry.SingleComplexTargetLocality
 
 /-! # Quasi-compact quasi-separated base change for one complex
 
@@ -36,21 +34,17 @@ by the given phi, expressed in K-flat representative coordinates. The conclusion
 is the canonical base-change morphism followed by Rf'_* of that same phi.
 
 Proof (the four steps of the node):
-1. Invertibility is local on S'. Restrict to affine opens of S' mapping into
-   affine opens of S. Derived pullback, direct image and the canonical map restrict
-   compatibly; X is then qcqs.
-2. For an affine U in X, use lem-pc-affine-qcoh-derived-equivalence and
-   lem-pc-derived-direct-image-preserves-qcoh to identify the restricted objects
-   with complexes of modules. By lem-pc-affine-derived-pullback-tensor-tilde,
-   pullback is derived scalar extension. The stalk condition then gives the
-   affine comparison isomorphism by lem-pc-rf-single-complex-affine-base-change.
-3. Define P(W) as invertibility of the comparison on a quasi-compact open W.
-   Affine opens satisfy P by step 2. Apply lem-sc-invert-s-cohomology-induction.
-   In its induction step U is quasi-compact and V affine; their intersection is
-   quasi-compact by pqf-lem-qs-intersection-qc, since X is quasi-separated.
-4. Apply lem-pc-rf-single-complex-relative-mayer-vietoris to U union V: the
-   comparisons on U, V and their intersection are isomorphisms, so the comparison
-   on their union is an isomorphism. Induction gives P(X), proving the result.
+1. Apply singleComplexBaseChange_targetLocal, supplying the affine-base criterion
+   proved below. Its open restriction argument reduces to affine S and S'.
+2. QuasiCompact f and QuasiSeparated f make X compact and quasi-separated over
+   these affine bases. Define P(U) as invertibility of singleComplexOpenComparison.
+   The affine case is singleComplexOpenComparison_affine, which transports the
+   existing affine single-complex criterion to source-open coordinates.
+3. For compact U and affine V, their intersection is compact by Mathlib's
+   QuasiSeparatedSpace.inter_isCompact. singleComplexOpenComparison_union transports
+   relative Mayer--Vietoris to U union V. Apply quasiCompactOpen_induction to obtain P(X).
+4. singleComplexOpenComparison_top identifies this top-open comparison with the
+   original comparison, completing the affine-base criterion of step 1.
 Source: Stacks Project, perfect.tex, Tag 0DJ9
 (blueprint: lem-pc-rf-single-complex-qcqs-induction). -/
 theorem singleComplexBaseChangeQcqsInduction
@@ -65,6 +59,28 @@ theorem singleComplexBaseChangeQcqsInduction
     (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K K' φ) :
     IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w K ≫
       (schemeDerivedDirectImage f').map φ) := by
-  sorry
+  apply singleComplexBaseChange_targetLocal (f := f) (f' := f') (g := g) (g' := g')
+    (sq := sq) (K := K) (hK := hK) (K' := K') (hK' := hK') (φ := φ) (h_stalk := h_stalk)
+  intro X₀ X₀' S₀ S₀' f₀ f₀' g₀ g₀' sq₀ _ _ _ _ K₀ hK₀ K₀' hK₀' φ₀ hstalk₀
+  let : CompactSpace X₀ := QuasiCompact.compactSpace_of_compactSpace f₀
+  let : QuasiSeparatedSpace X₀ := quasiSeparatedSpace_of_quasiSeparated f₀
+  let P : X₀.Opens → Prop := fun U ↦
+    IsIso (singleComplexOpenComparison f₀ f₀' g₀ g₀' sq₀.w K₀ K₀' φ₀ U)
+  have h_affine : ∀ U : X₀.Opens, IsAffineOpen U → P U := by
+    intro U hU
+    exact singleComplexOpenComparison_affine f₀ f₀' g₀ g₀' sq₀
+      K₀ hK₀ K₀' hK₀' φ₀ hstalk₀ U hU
+  have h_union : ∀ U V : X₀.Opens, IsCompact (U : Set X₀) → IsAffineOpen V →
+      P U → P V → P (U ⊓ V) → P (U ⊔ V) := by
+    intro U V hUqc hV hU hPV hUV
+    have hVqc : IsCompact (V : Set X₀) := hV.isCompact
+    have hUVqc : IsCompact ((U ⊓ V : X₀.Opens) : Set X₀) :=
+      QuasiSeparatedSpace.inter_isCompact (U : Set X₀) (V : Set X₀)
+        U.isOpen hUqc V.isOpen hVqc
+    exact singleComplexOpenComparison_union f₀ f₀' g₀ g₀' sq₀
+      K₀ hK₀ K₀' hK₀' φ₀ U V hUqc hVqc hUVqc hU hPV hUV
+  have htop : P ⊤ := quasiCompactOpen_induction X₀ P h_affine h_union ⊤
+    (by simpa using (isCompact_univ : IsCompact (Set.univ : Set X₀)))
+  exact singleComplexOpenComparison_top f₀ f₀' g₀ g₀' sq₀.w K₀ K₀' φ₀ htop
 
 end AlgebraicGeometry

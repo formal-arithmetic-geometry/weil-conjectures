@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-single-complex-open-union",
+ "kind": "statement",
+ "title": "Mayer--Vietoris gluing in ambient source-open coordinates",
+ "statement": "Let X'→X, S'→S be a cartesian square, with S,S' affine and f:X→S quasi-compact and quasi-separated [def-pc-scheme]. Let K,K' have quasi-coherent derived cohomology and φ:L(g')*K→K' [def-pc-derived-category]. For opens U,V of X with U,V,U∩V quasi-compact, if the explicit comparisons b_U,b_V,b_(U∩V) [def-pc-single-complex-open-comparison] are isomorphisms, then b_(U∪V) is an isomorphism. U and V need not cover X. There is no stalk-condition hypothesis in this gluing statement.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), induction step, applied to the source U union V"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-single-complex-open-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put W = U union V. Inside W take the inverse images of U and V; they cover W,\nare quasi-compact, and their intersection identifies with U intersection V. Since\nX is quasi-separated over the affine S, the quasi-compact open immersion W → X\nis quasi-compact, and W → S is qcqs. Base change identifies W' with X' times_X W.\nRestrict K and K' and transport phi by the pullback composition comparisons.\nOpen restriction preserves quasi-coherent cohomology. Apply relativeMayerVietoris\nto the resulting square with source W. Its three comparison hypotheses are the\nambient comparisons on U, V and their intersection: the identifications follow\nfrom associativity of fibre products and coherence of derived pullback composition\nand its direct-image mates. The conclusion is the ambient comparison on W by the\nsame naturality. Empty opens cause no exception; a redundant member of the cover\nalso gives the same comparison.",
+   "uses": [
+    "lem-pc-rf-single-complex-relative-mayer-vietoris"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-single-complex-relative-mayer-vietoris"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9, induction step, applied to the source U union V; canonical transport details expanded by B4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived sheaf morphism is an isomorphism if its restrictions to affine open subschemes are isomorphisms",
+   "results": "8 hits, including Scheme.Modules.Hom.isIso_iff_isIso_app and affine-local scheme morphism properties; none provides the canonical unbounded derived comparison transport. Searched project sources additionally for source-open comparison, target locality and coordinate naturality.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.derivedPullback",
+   "results": "0 hits; the identifier belongs to the project rather than Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleComplex.*BaseChange|quasiCompactOpen_induction",
+   "results": "0 Mathlib hits. Local rg searches of both roots found the existing affine criterion, relative Mayer--Vietoris theorem and derived open restriction detector, but no statements for these source-open coordinates or the conditional affine-base reduction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change morphism restriction open subscheme isomorphism",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred from this search.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexQcqsInduction",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 single-complex criterion: induction step, applied to the source U union V",
+   "via": [
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnion.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenComparison_union",
+  "declarations": [
+   "AlgebraicGeometry.singleComplexOpenComparison_union"
+  ],
+  "statement": "theorem singleComplexOpenComparison_union [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K') (φ : (derivedPullback g').obj K ⟶ K') (U V : X.Opens) (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X)) (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hU : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ U)) (hV : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ V)) (hUV : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ (U ⊓ V))) : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ (U ⊔ V))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T082332-L-1631244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T082332-L-1631244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

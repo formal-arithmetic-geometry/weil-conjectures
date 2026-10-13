@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-single-complex-target-locality",
+ "kind": "statement",
+ "title": "Target locality reduces the single-complex criterion to affine bases",
+ "statement": "Fix a family of derived categories of sheaves of modules on schemes [def-pc-derived-category]. Suppose the single-complex derived base-change criterion holds for every cartesian square with both bases affine, f quasi-compact and quasi-separated, K,K' quasi-coherent in the derived sense, and φ:L(g')*K→K' satisfying the stalk condition [def-pc-single-complex-base-change-stalk-condition]. Then that criterion holds for arbitrary bases: for every such cartesian square with no affineness assumptions, the canonical composite Lg*Rf*K→Rf'*L(g')*K→Rf'*K' [def-pc-derived-base-change-map] is invertible. The affine-base criterion is a premise, not asserted unconditionally by this lemma.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), first paragraph, reduction to affine bases"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "proof": [
+  {
+   "text": "For a point of S' choose an affine neighbourhood V of its image in S, and an\naffine neighbourhood V' of the point contained in g inverse-image V. Restrict f to\nf inverse-image V and f' to f' inverse-image V'. Together with g restricted V' → V\nand the restriction of g' these form a cartesian square with affine bases. Quasi-\ncompactness and quasi-separatedness survive this restriction. Restrict K, K' and\nphi, using the canonical derived pullback composition comparison; quasi-coherent\ncohomology and the stalk condition survive since local rings on opens agree with\nthe original local rings. Apply the supplied affine-base criterion. Derived direct\nimage commutes with restriction to inverse-image opens, as does derived pullback.\nTheir canonical comparisons identify the restricted composite with the local\nbase-change composite: this follows from naturality of the derived counits in the\nadjoint description of the map. Thus the original arrow is invertible on V'.\nApply schemeDerived_isIso_of_openRestriction, since such V' cover S'. Empty bases\nare covered by the vacuous locality criterion. No global compactness of S is used.",
+   "uses": [
+    "lem-sc-derived-open-restriction-detects-iso",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-detects-iso",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9, first paragraph, reduction to affine bases; canonical transport details expanded by B4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived sheaf morphism is an isomorphism if its restrictions to affine open subschemes are isomorphisms",
+   "results": "8 hits, including Scheme.Modules.Hom.isIso_iff_isIso_app and affine-local scheme morphism properties; none provides the canonical unbounded derived comparison transport. Searched project sources additionally for source-open comparison, target locality and coordinate naturality.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.derivedPullback",
+   "results": "0 hits; the identifier belongs to the project rather than Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleComplex.*BaseChange|quasiCompactOpen_induction",
+   "results": "0 Mathlib hits. Local rg searches of both roots found the existing affine criterion, relative Mayer--Vietoris theorem and derived open restriction detector, but no statements for these source-open coordinates or the conditional affine-base reduction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change morphism restriction open subscheme isomorphism",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred from this search.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexQcqsInduction",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 single-complex criterion: first paragraph, reduction to affine bases",
+   "via": [
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexTargetLocality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexTargetLocality.lean",
+  "declaration": "AlgebraicGeometry.singleComplexBaseChange_targetLocal",
+  "declarations": [
+   "AlgebraicGeometry.singleComplexBaseChange_targetLocal"
+  ],
+  "statement": "theorem singleComplexBaseChange_targetLocal [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (h_affine : ∀ {X₀ X₀' S₀ S₀' : Scheme.{u}} (f₀ : X₀ ⟶ S₀) (f₀' : X₀' ⟶ S₀') (g₀ : S₀' ⟶ S₀) (g₀' : X₀' ⟶ X₀) (sq₀ : IsPullback g₀' f₀' f₀ g₀) [IsAffine S₀] [IsAffine S₀'] [QuasiCompact f₀] [QuasiSeparated f₀] (K₀ : schemeDerivedCategory X₀) (hK₀ : schemeDerivedQCohProperty X₀ K₀) (K₀' : schemeDerivedCategory X₀') (hK₀' : schemeDerivedQCohProperty X₀' K₀') (φ₀ : (derivedPullback g₀').obj K₀ ⟶ K₀') (h_stalk₀ : SingleComplexBaseChange.StalkCondition f₀ f₀' g₀ g₀' sq₀ K₀ K₀' φ₀), IsIso (schemeDerivedBaseChangeMap f₀ f₀' g₀ g₀' sq₀.w K₀ ≫ (schemeDerivedDirectImage f₀').map φ₀)) {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) [QuasiCompact f] [QuasiSeparated f] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K') (φ : (derivedPullback g').obj K ⟶ K') (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K K' φ) : IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w K ≫ (schemeDerivedDirectImage f').map φ)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T082332-L-1631244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T082332-L-1631244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
