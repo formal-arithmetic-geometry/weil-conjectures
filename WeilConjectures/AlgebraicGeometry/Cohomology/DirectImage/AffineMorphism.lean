@@ -78,26 +78,6 @@ theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X
   rw [Finset.coe_image]
   exact key x (hs ▸ Submodule.mem_top)
 
-
-/-- **Vanishing of the cohomology in large degrees** of a quasi-coherent module on a proper scheme
-over a field: `H^q(X, ℱ) = Γ(Spec k, R^q f_* ℱ)` (`exists_addEquiv_sections_higherDirectImage_H`),
-and the higher direct images vanish in large degrees
-(`AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage`). -/
-theorem exists_forall_subsingleton_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X.Modules)
-    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
-    ∃ D : ℕ, ∀ q, D < q → Subsingleton (ℱ.H q) := by
-  have := isGrothendieckAbelian X
-  obtain ⟨N, hN⟩ := exists_isZero_higherDirectImage (X ↘ Spec (.of k)) ℱ
-  refine ⟨N, fun q hq ↦ ?_⟩
-  obtain ⟨e, -⟩ := exists_addEquiv_sections_higherDirectImage_H (X ↘ Spec (.of k)) q
-  have h0 := (hN q hq.le).eq_of_src (𝟙 _) 0
-  have : Subsingleton Γ((higherDirectImage (X ↘ Spec (.of k)) q).obj ℱ, ⊤) :=
-    ⟨fun a b ↦ by
-      have ha := congrArg (fun φ ↦ (φ.app ⊤) a) h0
-      have hb := congrArg (fun φ ↦ (φ.app ⊤) b) h0
-      simp only [Hom.id_app, Hom.zero_app] at ha hb
-      exact ha.trans hb.symm⟩
-  exact (e ℱ).toEquiv.symm.subsingleton
 end Finiteness
 
 end AlgebraicGeometry.Scheme.Modules

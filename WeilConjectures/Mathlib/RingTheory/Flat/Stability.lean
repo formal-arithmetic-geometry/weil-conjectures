@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.Flat.Stability
-public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!
 # Flatness of a tensor product over an intermediate algebra
