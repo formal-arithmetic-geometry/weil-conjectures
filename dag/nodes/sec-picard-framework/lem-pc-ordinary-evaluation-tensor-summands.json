@@ -15,7 +15,7 @@
  },
  "proof": [
   {
-   "text": "Construct the coefficient-compatible presheaf reindexing tensorator on pure tensors. Descend it through sheafification, using the open-site sheafification comparison. Balanced relations and associativity of tensor products prove the core monoidal laws. Interchanging the pure factors proves symmetry. On the unit this reindexing is precisely the structure-sheaf restriction isomorphism overEquivFunctorObjUnitIso, so its unit is the prescribed one. This is a direct construction, not selection of a witness from a bare existence assertion.",
+   "text": "Reindex module presheaves using PresheafOfModules.pushforward₀OfCommRingCat along the inverse open-site equivalence. Its existing monoidal structure is braided: on each section both composites swap the two pure tensor factors. Sheafification is monoidal and braided. Use exists_localizedOpen_sheafification_iso to supply the lifting isomorphism, and Mathlib Localization.Monoidal.functorMonoidalOfComp to construct a monoidal structure on L. Its lifting isomorphism is monoidal. The braided equation descends by Localization.natTrans₂_ext: on sheafification images it follows by cancellation of the sheafification tensorator from the braided equation for the composite. This constructs the structure directly within the proof, rather than selecting arbitrary module data from a mere existence theorem.",
    "uses": [
     "lem-sc-localized-open-sheafification",
     "def-pur-sheaf-tensor-product"
@@ -23,9 +23,17 @@
    "elementary": false
   },
   {
-   "text": "Use the inverse tensorator in each bidegree. Naturality makes it commute with each differential, so two isoOfComponents constructions give a bicomplex isomorphism. The equivalence preserves coproducts. Compose inverse mapTotalIso with total.mapIso of this bicomplex isomorphism. The map_ι_mapTotalXIso_inv and total inclusion naturality equations identify the image of each summand with the inverse tensorator followed by the target inclusion. These APIs also account for the signed vertical differential; no boundedness is needed.",
+   "text": "Normalize the resulting unit ε to the prescribed isomorphism e=overEquivFunctorObjUnitIso U. Put b=e followed by ε inverse, an automorphism of the target tensor unit. The explicit natural automorphism s of the identity has s_A=λ_A inverse followed by b tensor id_A followed by λ_A. Naturality follows from whisker exchange and left-unitor naturality; s at the unit is b by equality of the unitors and right-unitor naturality. Transport the monoidal structure along the natural automorphism of L given by s_(L A). Its unit is ε followed by s_(L I)=b followed by ε=e. Naturality and the original braided equation give the braided equation for the transported inverse tensorator. These are fully proved private helpers in the assigned module, with no additional public hypotheses or unproved statements.",
    "uses": [
-    "def-pc-tensor-complex-sheaves"
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open-site equivalence is additive and preserves coproducts. Use the inverse normalized tensorator in each bidegree; its oplax naturality in each factor proves the two differential equations. Two HomologicalComplex.Hom.isoOfComponents constructions give a bicomplex isomorphism e₂. Compose inverse HomologicalComplex₂.mapTotalIso with HomologicalComplex₂.total.mapIso e₂. The summand equation follows by map_ι_mapTotalXIso_inv and ιTotal_map; the bidegree component of e₂ is definitionally the inverse tensorator. Use the existing tensorClosed theorem for monoidal preadditivity. The totalization API supplies the signs, and no boundedness condition is used.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": false
   }
@@ -33,15 +41,16 @@
  "proof_deps": [
   "def-pc-tensor-complex-sheaves",
   "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed",
   "lem-sc-localized-open-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A4",
+  "group": "H4",
   "date": "2026-10-14",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8X, ordinary tensor totalization; the parent node proof step 2; Mathlib overEquiv and WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap, map_ι_mapTotalXIso_inv.",
-  "description": "Detailed ordinary-complex calculation from the parent plan; literature tags read online. No derived or perfectness assertion is used."
+  "document": "Mathlib.CategoryTheory.Localization.Monoidal.Functor; Mathlib.CategoryTheory.Monoidal.Functor; WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap",
+  "place": "functorMonoidalOfComp, lifting_isMonoidal, coreMonoidalTransport, mapTotalIso, map_ι_mapTotalXIso_inv; normalized-unit calculation supplied by H4",
+  "description": "Implemented the node plan using existing monoidal localization and totalization APIs. Unit normalization and braided descent are fully proved private helpers. No new holes or changes to any existing definition or signature."
  },
  "mathlib_searches": [
   {
@@ -154,11 +163,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-eca30",
-  "group": "A4",
+  "reviewer": "X-bc7bb",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T224505-L-1469096",
+  "landing": "20261013T234512-L-2163357",
   "kind": "interface",
-  "note": "independent Codex review: Delivery matches the stage-3 brief: target and existing signatures are unchanged, delivered modules and direct importer compile, documented split sorries/nodes and local attribute change agree."
+  "note": "independent Codex review: Delivered module, node, report, change record, theorem signature, and direct importer matched against the review brief and compiled cleanly."
  }
 }
