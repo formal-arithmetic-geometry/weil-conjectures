@@ -72,31 +72,35 @@
  "statement": "Let X be Noetherian, J a quasi-coherent ideal sheaf, H, F, F′ coherent modules, and a:F→H, a′:F′→H morphisms whose kernels and cokernels are annihilated by positive powers of J. Given θ:completion(F)→completion(F′) with θ≫completion(a′)=completion(a), there exists g:F→F′ with g≫a′=a.",
  "proof": [
   {
-   "text": "On an affine open Spec A, identify coherent modules with finite A-modules M, M′, N and their formal completions with tensor products by the I-adic completion A-hat. Retain the map theta-hat induced by θ and the equation a′-hat theta-hat=a-hat from hθ.",
-   "uses": [],
+   "text": "Extract the positive power annihilating ker(a′) from ha′. Apply coherentMap_torsion_completion_ext_zero to obtain a depth n for which ker(a′) followed by the quotient F′ → F′/J^(n+1)F′ is monomorphic. The torsion bound on a is not needed.",
+   "uses": [
+    "lem-weil-pbc-coherent-map-torsion-completion-ext-zero"
+   ],
    "elementary": false
   },
   {
-   "text": "Choose finite generators f_i of I. The torsion kernel/cokernel bounds make a and a′ isomorphisms after localization at every f_i. Set g_i=(a′_i)^(-1)a_i. These agree on overlaps, and hθ identifies their completed localizations with theta-hat by cancellation of a′_i.",
-   "uses": [],
+   "text": "At this separating depth use torsionControlledGraphFst_isIso: the finite graph of the prescribed component of θ in F ×_H F′ has invertible first projection. Its epi property uses ha′ and hθ; its mono property uses the separating quotient. Define the witness g as the inverse first projection followed by the second projection, bundled in the full subcategory of coherent modules.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-completion-hom-lift-completion"
+   ],
    "elementary": false
   },
   {
-   "text": "For each x in M pair theta-hat(x) with g_i(x/1). Formal gluing exactness (Tag 05EK) for M′ produces a unique preimage g(x). Its injectivity proves linearity, and injectivity of the analogous map for N proves a′g=a. The completed component of this construction is theta-hat.",
+   "text": "The pullback condition gives graph.snd followed by a′ equal to graph.fst followed by a. Compose with the inverse of graph.fst, use associativity and inverse cancellation, and apply full-subcategory hom extensionality. This proves g followed by a′ equals a. No claim about arbitrary lifts or completion of g is needed.",
    "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Transfer these module maps to coherent sheaf maps. On intersections refine by affine opens; the same completed component θ and localized comparisons, and injectivity of formal gluing, identify both restrictions. Glue the sheaf maps and check the equation on the affine cover. For I=0 completion is the constant system and θ itself is g; hθ is the required equation. For I=A use the inverse of a′; the empty scheme has unique morphisms.",
-   "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-map-torsion-completion-ext-zero",
+  "lem-weil-pbc-torsion-controlled-completion-hom-lift-completion"
+ ],
  "proof_origin": {
-  "by": "D3 worker, repair of reviewer X-a7def point 4",
+  "by": "worker",
+  "group": "Q4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0889(1), uniqueness verification; Tags 05EK, 00MA and Tag 04TN"
+  "place": "Tag 0889(1), finite-graph comparison with Artin–Rees separation"
  },
  "lean": {
   "existing": false,
@@ -121,12 +125,12 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-4a0d0",
-  "group": "D3",
+  "reviewer": "COMPILER",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T034203-L-3765583",
-  "kind": "interface",
-  "note": "independent Codex review: Repaired raw signature matches its node and prior return; both delivered modules and direct importers compile; original Exists fails as reported, confirming the minimal one-line adaptation; axioms are standard plus expected sorryAx."
+  "landing": "20261013T072403-L-1124266",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-13",

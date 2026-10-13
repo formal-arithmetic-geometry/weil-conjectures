@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExtZero
+import Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftCompletion
 
 @[expose] public section
 universe u
@@ -56,6 +58,21 @@ theorem torsionControlled_completion_hom_lift_raw
         (cokernel a'.hom))))
     (θ : (completion X J).obj F ⟶ (completion X J).obj F')
     (hθ : θ ≫ (completion X J).map a' = (completion X J).map a) :
-    ∃ g : F ⟶ F', g ≫ a' = a := by sorry
+    ∃ g : F ⟶ F', g ≫ a' = a := by
+  obtain ⟨_, _, _, _⟩ := ha
+  obtain ⟨n, hn⟩ := coherentMap_torsion_completion_ext_zero J F' H a'
+    (by obtain ⟨s, hs, hk, hc⟩ := ha'; exact ⟨s, hs, hk⟩)
+  let := torsionControlledGraphFst_isIso J a a' ha' θ hθ n hn
+  refine ⟨ObjectProperty.homMk
+    (inv (torsionControlledGraphFst J a a' θ n) ≫
+      torsionControlledGraphSnd J a a' θ n), ?_⟩
+  apply ObjectProperty.hom_ext
+  change (inv (torsionControlledGraphFst J a a' θ n) ≫
+    torsionControlledGraphSnd J a a' θ n) ≫ a'.hom = a.hom
+  have hp : torsionControlledGraphSnd J a a' θ n ≫ a'.hom =
+      torsionControlledGraphFst J a a' θ n ≫ a.hom := by
+    dsimp [torsionControlledGraphSnd, torsionControlledGraphFst]
+    simp only [Category.assoc, pullback.condition]
+  rw [Category.assoc, hp, IsIso.inv_hom_id_assoc]
 
 end AlgebraicGeometry
