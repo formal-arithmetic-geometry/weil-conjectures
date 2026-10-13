@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 public import Mathlib.Algebra.Homology.Monoidal
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
 
 /-! # Canonical tensor comparison for derived pullback
 
@@ -126,9 +128,102 @@ def IsCanonicalPullbackTensorComparison {T X : Scheme.{uTC}} (g : T ⟶ X)
       (derivedPullback g).map (a ⊗ₘ b) ≫ τ E' K' =
         τ E K ≫ ((derivedPullback g).map a ⊗ₘ (derivedPullback g).map b)
 
+private theorem counit_isIso {T X : Scheme.{uTC}} (g : T ⟶ X)
+    (P : CochainComplex (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : P.IsKFlat) :
+    IsIso ((SingleComplexBaseChange.counit g).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
+  obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, ε, hε, _, hK⟩ :=
+    Classical.choose_spec (exists_derivedPullback.{uTC, wTC} g)
+  have hF' : F = Scheme.Modules.tensorPullback g :=
+    CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
+  subst F
+  change (derivedPullback g).IsLeftDerivedFunctor ε
+    (HomotopyCategory.quasiIso _ (.up ℤ)) at hε
+  have hshared :=
+    Classical.choose (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{uTC, wTC})) g
+  change (derivedPullback g).IsLeftDerivedFunctor (SingleComplexBaseChange.counit g)
+    (HomotopyCategory.quasiIso _ (.up ℤ)) at hshared
+  have := hshared
+  have hfac := Functor.leftDerivedNatTrans_app
+    (derivedPullback g) (derivedPullback g) ε (SingleComplexBaseChange.counit g)
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _)
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+  have hεP := hK P hP
+  have hiso : IsIso (Functor.leftDerivedNatTrans
+      (derivedPullback g) (derivedPullback g) ε (SingleComplexBaseChange.counit g)
+      (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _)) :=
+    (Functor.leftDerivedUnique (derivedPullback g) (derivedPullback g) ε
+      (SingleComplexBaseChange.counit g) (HomotopyCategory.quasiIso _ (.up ℤ))).isIso_hom
+  have hcomp : IsIso ((Functor.leftDerivedNatTrans
+      (derivedPullback g) (derivedPullback g) ε (SingleComplexBaseChange.counit g)
+      (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _)).app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+        (SingleComplexBaseChange.counit g).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
+    rw [hfac]
+    simpa using hεP
+  exact IsIso.of_isIso_comp_left
+    ((Functor.leftDerivedNatTrans
+      (derivedPullback g) (derivedPullback g) ε (SingleComplexBaseChange.counit g)
+      (HomotopyCategory.quasiIso _ (.up ℤ)) (𝟙 _)).app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) _
+
+private theorem modelMap_isIso (X : Scheme.{uTC})
+    (P N : CochainComplex (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : P.IsKFlat) : IsIso (pullbackTensorModelMap X P N) := by
+  let C := SheafOfModules.{uTC} (moduleRings X.toRingedSpace)
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let := SheafOfModules.symmetricCategory X.sheaf
+  have : MonoidalPreadditive C := Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  let : MonoidalClosed C := Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
+  have : IsGrothendieckAbelian.{uTC} C :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  have : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink.{0, 0, uTC, uTC} C
+  have := schemeModule_hasFunctorialFlatResolution X
+  have := DerivedCategory.hasDerivedMonoidalCategory C
+  have (M : C) : PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj M) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft M)
+      (NatIso.ofComponents (fun N ↦ β_ M N) (by intros; simp [curriedTensor]))
+  have (M : C) : PreservesColimitsOfShape ℤ ((curriedTensor C).obj M) := inferInstance
+  have : HasExactColimitsOfShape ℤ C := inferInstance
+  have (j : ℤ) : HasColimitsOfShape
+      (Discrete ((ComplexShape.up ℤ).π (.up ℤ) (.up ℤ) ⁻¹' {j})) C := inferInstance
+  have : (HomotopyCategory.quasiIso C (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure :=
+    inferInstance
+  have hk : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
+    rw [HomotopyCategory.kFlat_iff_preserves_acyclic]
+    intro M hM
+    obtain ⟨M, rfl⟩ := M.quotient_obj_surjective
+    rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hM
+    have hr : HomotopyCategory.subcategoryAcyclic C
+        ((HomotopyCategory.quotient C (.up ℤ)).obj M ⊗
+          (HomotopyCategory.quotient C (.up ℤ)).obj P) :=
+      (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 (hP M hM)
+    exact ⟨(HomotopyCategory.subcategoryAcyclic C).prop_of_iso (β_ _ _) hr, hr⟩
+  have : IsIso (Functor.LaxMonoidal.μ (DerivedCategory.Qh (C := C))
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P)
+      ((HomotopyCategory.quotient C (.up ℤ)).obj N)) :=
+    DerivedMonoidal.isIso_counit_app_app_of_kFlat_left
+      (DerivedCategory.Qh (C := C)) (HomotopyCategory.quasiIso C (.up ℤ)) _ _ hk
+  change IsIso (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := C)) P N)
+  change IsIso (_ ≫ _ ≫ _)
+  change IsIso (_ ≫ (_ ≫ _) ≫ _)
+  infer_instance
+
 /-- Transport a verified core-monoidal model to the canonical comparison predicate.
 The model supplies the counit and K-flat coordinate equations; the transport is the
 standard descent argument through K-flat resolutions.
+Proof: identify the model's module functor with the actual tensor pullback by
+functor extensionality. The left-derived universal property gives a natural
+isomorphism delta from the model counit to the shared counit, satisfying
+`delta ≫ shared counit = model counit`. Conjugate the inverse model tensorator
+by delta inverse on the tensor input and by the tensor of delta on the outputs.
+Naturality follows from naturality of delta and the tensorator. Substituting
+the counit comparison into the model coordinate equation gives the required
+canonical equation; the model's degreewise equation pins the same chain map.
 Source: Stacks, 079U; perfect.tex, 0DJA(1)
 (blueprint: def-pc-derived-pullback-tensor-comparison-model-transport). -/
 theorem exists_canonical_from_model {T X : Scheme.{uTC}} (g : T ⟶ X)
@@ -174,7 +269,67 @@ theorem IsCanonicalPullbackTensorComparison.unique {T X : Scheme.{uTC}} {g : T �
         (derivedPullback g).obj E ⊗ (derivedPullback g).obj K}
     (h : IsCanonicalPullbackTensorComparison g τ)
     (h' : IsCanonicalPullbackTensorComparison g τ') : τ = τ' := by
-  sorry
+  classical
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let := SheafOfModules.monoidalCategory T.sheaf
+  have : MonoidalPreadditive (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  have : MonoidalPreadditive (SheafOfModules.{uTC} (moduleRings T.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed T.sheaf).1
+  dsimp only [IsCanonicalPullbackTensorComparison] at h h'
+  have hflat (P N : CochainComplex
+      (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ)
+      (hP : P.IsKFlat) (hN : N.IsKFlat) :
+      τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) =
+        τ' (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) := by
+    obtain ⟨φ, hφ, heq⟩ := h.1 P N hP hN
+    obtain ⟨ψ, hψ, heq'⟩ := h'.1 P N hP hN
+    have hφψ : φ.inv ≫ ψ.hom = 𝟙 _ := by
+      apply HomologicalComplex.hom_ext
+      intro n
+      apply HomologicalComplex.mapBifunctor.hom_ext
+      intro p q hpq
+      apply (cancel_epi
+        (((Classical.choose (Scheme.Modules.module_pullback_tensor g))
+          (P.X p) (N.X q)).hom)).1
+      simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f, ← Category.assoc]
+      rw [← hφ p q n hpq]
+      have hid : φ.hom.f n ≫ φ.inv.f n = 𝟙 _ :=
+        congrArg (fun a ↦ a.f n) φ.hom_inv_id
+      simp only [Category.assoc, hid]
+      exact (hψ p q n hpq).trans (hφ p q n hpq).symm
+    have hhom : φ.hom = ψ.hom := by
+      calc
+        φ.hom = φ.hom ≫ (φ.inv ≫ ψ.hom) := by rw [hφψ, Category.comp_id]
+        _ = ψ.hom := by simp only [← Category.assoc, φ.hom_inv_id, Category.id_comp]
+    have hPull : CochainComplex.IsKFlat (R := T.sheaf)
+        (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) := by
+      convert CochainComplex.isKFlat_pullback g.base T.sheaf X.sheaf ⟨g.c⟩ P hP using 1
+      rfl
+    have := counit_isIso g P hP
+    have := counit_isIso g N hN
+    have := modelMap_isIso T
+      (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)
+      (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N) hPull
+    apply (cancel_mono
+      (((SingleComplexBaseChange.counit g).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
+        (SingleComplexBaseChange.counit g).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+        pullbackTensorModelMap T
+          (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)
+          (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N))).1
+    rw [← heq, ← heq', hhom]
+  funext E K
+  obtain ⟨c⟩ := SingleComplexBaseChange.nonempty_coordinates g E
+    ((derivedPullback g).obj E) (𝟙 _)
+  obtain ⟨d⟩ := SingleComplexBaseChange.nonempty_coordinates g K
+    ((derivedPullback g).obj K) (𝟙 _)
+  have hnat := h.2 _ _ _ _ c.e.hom d.e.hom
+  have hnat' := h'.2 _ _ _ _ c.e.hom d.e.hom
+  apply (cancel_epi ((derivedPullback g).map (c.e.hom ⊗ₘ d.e.hom))).1
+  rw [hnat, hnat', hflat c.P d.P c.isKFlat d.isKFlat]
+
 
 end AlgebraicGeometry
 end
