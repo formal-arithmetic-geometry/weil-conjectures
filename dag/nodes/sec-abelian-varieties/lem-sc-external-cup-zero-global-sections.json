@@ -1,0 +1,160 @@
+{
+ "id": "lem-sc-external-cup-zero-global-sections",
+ "kind": "statement",
+ "title": "External cup in degree zero on global sections",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$, $g:Y\\to\\operatorname{Spec}k$ schemes [def-pc-scheme], and $F,G$ arbitrary module sheaves [def-weil-sheaf-of-modules-category]. Let $d_f,d_g,d_{f\\circ\\operatorname{pr}_1}$ and $T$ be the canonical degree-zero/global-section comparisons and explicit external section tensor map [def-sc-scalar-global-sections-comparison]. For all $a\\in H_k^0(f,F)$, $b\\in H_k^0(g,G)$, one has $d_{f\\circ\\operatorname{pr}_1}(\\operatorname{externalCup}(f,g,F,G,0,0,a,b))=T(d_f(a)\\otimes d_g(b))$, using the specified external cup [def-sc-field-linear-module-cohomology-operations]. No quasi-coherence, affine diagonal or quasi-compactness is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01DZ, 01F7, 0FKV; degree-zero evaluation of the external cup in Tag 0BED"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-scalar-global-sections-comparison",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "The canonical degree-zero derived-functor comparison is evaluation of a morphism from the structure sheaf at 1 under the injective-resolution/Ext comparison. Restriction of scalars and the scalar-unit coefficient identify the same section with evaluation of a morphism from the constant scalar unit. Use the resolution formula defining moduleExtEquiv; its evaluation on degree-zero cocycles is the rightDerivedZeroIsoSelf map.",
+   "uses": [
+    "def-sc-scalar-global-sections-comparison",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree zero, exact inverse image on scalar sheaves maps a morphism from the unit to its inverse image. Compose with the unit isomorphism and the coefficient adjoint to the tensor-pullback unit. The adjunction characterization identifies its evaluated section as tensorPullbackTopSection.",
+   "uses": [
+    "def-sc-scalar-global-sections-comparison",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero Yoneda cup is composition of tensor-left and tensor-right images of these morphisms, preceded by the inverse unit constraint. Evaluating at 1 gives the tensor of their evaluated sections. The scalar tensor coefficient characterization turns that tensor into tmulSection. Apply this to the two projection pullbacks, using the pullback square condition for equality of structure maps. This gives the displayed equation, including empty schemes and zero sections.",
+   "uses": [
+    "def-sc-scalar-global-sections-comparison",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-scalar-global-sections-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, explicit degree-zero section argument and omitted cup verification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Degree zero Yoneda cup equals tensor product of global sections of module sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero Yoneda cup equals tensor product of global sections of module sheaves",
+   "results": "8 hits: LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, PresheafOfModules.unitHomEquiv, LightCondensed.ihomPoints_apply, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_apply_coe, PresheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-13",
+   "verdict": "No complete matching statement; canonical degree-zero comparison is used directly where available."
+  },
+  {
+   "tool": "grep",
+   "query": "mk₀.*comp|comp_mk₀|rightDerivedZeroIsoSelf",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+   "date": "2026-10-13",
+   "verdict": "No complete matching statement; canonical degree-zero comparison is used directly where available."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a product of quasi compact schemes over a field tensor pullback bilinear map isomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.Scheme.Pullback.SpecTensorTo_SpecOfPoint, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.pullbackSpecIso_hom_base",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no matching complete residual statement; generic Ext composition and affine product tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Abelian.Ext.mk₀, Abelian.Ext.comp",
+   "results": "loogle: unknown identifier 'Abelian.Ext.mk₀'",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no matching complete residual statement; generic Ext composition and affine product tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "external.*[Ss]ection|[Ss]ection.*external|mk₀_comp_mk₀",
+   "results": "19 hits: Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Shift/ShiftedHom.lean, Mathlib/CategoryTheory/Shift/ShiftedHom.lean, Mathlib/CategoryTheory/Shift/ShiftedHom.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no matching complete residual statement; generic Ext composition and affine product tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupZeroTensor",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED degree-zero equalizer and pure-tensor calculation below the cube-theorem Kunneth argument",
+   "via": [
+    "lem-sc-picard-external-cup-zero-tensor",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExternalCupZeroGlobalSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExternalCupZeroGlobalSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.externalCup_zero_globalSections",
+  "statement": "theorem externalCup_zero_globalSections (k : Type w) [Field k] (X Y : Scheme.{w}) (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) (F : X.Modules) (G : Y.Modules) (a : scalarCohomology f F 0) (b : scalarCohomology g G 0) : scalarGlobalSectionsEquiv (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) (externalCup f g F G 0 0 a b) = externalGlobalSectionsTensor f g F G (scalarGlobalSectionsEquiv f F a ⊗ₜ[k] scalarGlobalSectionsEquiv g G b)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T082342-L-1634842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T082342-L-1634842",
+  "kind": "interface"
+ }
+}

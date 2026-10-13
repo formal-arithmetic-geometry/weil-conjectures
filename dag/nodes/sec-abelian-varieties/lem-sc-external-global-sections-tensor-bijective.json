@@ -1,0 +1,164 @@
+{
+ "id": "lem-sc-external-global-sections-tensor-bijective",
+ "kind": "statement",
+ "title": "External global-section tensor map is bijective",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$, $g:Y\\to\\operatorname{Spec}k$ schemes [def-pc-scheme]. Assume $X,Y$ are quasi-compact and their diagonals over $k$ are affine. Let $F,G$ be quasi-coherent module sheaves [pqf-def-coherent]. The explicit $k$-linear map $T:S_f(F)\\otimes_k S_g(G)\\to S_{f\\circ\\operatorname{pr}_1}(\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G)$ [def-sc-scalar-global-sections-comparison], induced by tensoring the projection pullback sections, is bijective. This is an assertion about ordinary sections, with no cohomology or cup comparison.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech; two finite-cover equalizers in degree zero"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-scalar-global-sections-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite affine covers of X and Y. Affine diagonal makes their pairwise intersections affine. On each product of charts and each overlap, affine spectrum product, tensor-pullback sections and sheaf tensor sections identify T with the algebraic tensor section map. The unit and pure-tensor formulas make these maps restriction-compatible.",
+   "uses": [
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed affine V in Y, use the sheaf equalizer of the finite cover of X. Tensor over a field is exact and commutes with finite products, so this equalizer identifies sections on X times V with Gamma(X,F) tensor G(V). The comparisons commute with restriction in V.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-scalar-global-sections-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the second finite sheaf equalizer on Y. Tensor with Gamma(X,F) again preserves its kernel and finite products. The resulting bijection equals T on pure tensors by the chart formulas, hence everywhere by tensor induction. Empty schemes and zero coefficients are included: the equalizers and their tensor products then have zero kernels.",
+   "uses": [
+    "def-sc-scalar-global-sections-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scalar-global-sections-comparison",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, explicit degree-zero section argument and omitted cup verification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global sections external tensor product quasicoherent schemes over field degree zero Kunneth",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, PresheafOfModules.Monoidal.tensorObj, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, LightCondensed.instMonoidalLightCondSetLightCondModFree, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo",
+   "date": "2026-10-13",
+   "verdict": "No complete matching statement; canonical degree-zero comparison is used directly where available."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections external tensor of quasicoherent sheaves Kunneth over a field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mk₀.*comp|comp_mk₀|rightDerivedZeroIsoSelf",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+   "date": "2026-10-13",
+   "verdict": "No complete matching statement; canonical degree-zero comparison is used directly where available."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a product of quasi compact schemes over a field tensor pullback bilinear map isomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.Scheme.Pullback.SpecTensorTo_SpecOfPoint, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.pullbackSpecIso_hom_base",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no matching complete residual statement; generic Ext composition and affine product tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Abelian.Ext.mk₀, Abelian.Ext.comp",
+   "results": "loogle: unknown identifier 'Abelian.Ext.mk₀'",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no matching complete residual statement; generic Ext composition and affine product tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "external.*[Ss]ection|[Ss]ection.*external|mk₀_comp_mk₀",
+   "results": "19 hits: Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Shift/ShiftedHom.lean, Mathlib/CategoryTheory/Shift/ShiftedHom.lean, Mathlib/CategoryTheory/Shift/ShiftedHom.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no matching complete residual statement; generic Ext composition and affine product tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupZeroTensor",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED degree-zero equalizer and pure-tensor calculation below the cube-theorem Kunneth argument",
+   "via": [
+    "lem-sc-picard-external-cup-zero-tensor",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExternalGlobalSectionsTensorBijective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.externalGlobalSectionsTensor_bijective",
+  "statement": "theorem externalGlobalSectionsTensor_bijective (k : Type w) [Field k] (X Y : Scheme.{w}) (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)] (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] : Function.Bijective (externalGlobalSectionsTensor f g F G)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T082342-L-1634842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T082342-L-1634842",
+  "kind": "interface"
+ }
+}
