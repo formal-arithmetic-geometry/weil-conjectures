@@ -62,7 +62,52 @@ theorem associatedExtension_restriction_existsUnique
           (associatedRestriction X U).hom] m) =
           (X.presheaf.map f a) ⊗ₜ[(X.presheaf.obj (op (⊤ : Opens (X : Type u)))),
             (associatedRestriction X V).hom] m := by
-  sorry
+  have hc : (associatedRestriction X V).hom =
+      (X.presheaf.map f).hom.comp (associatedRestriction X U).hom := by
+    have h := X.presheaf.map_comp (homOfLE (show U.unop ≤ ⊤ from le_top)).op f
+    exact congrArg CommRingCat.Hom.hom h
+  let : Module (X.presheaf.obj (op (⊤ : Opens (X : Type u))))
+      (X.presheaf.obj U) := Module.compHom _ (associatedRestriction X U).hom
+  let : Module (X.presheaf.obj (op (⊤ : Opens (X : Type u))))
+      (X.presheaf.obj V) := Module.compHom _ (associatedRestriction X V).hom
+  let h : X.presheaf.obj U →ₗ[X.presheaf.obj (op (⊤ : Opens (X : Type u)))]
+      X.presheaf.obj V :=
+    { toFun := X.presheaf.map f
+      map_add' := (X.presheaf.map f).hom.map_add
+      map_smul' := fun a b ↦ by
+        change X.presheaf.map f (associatedRestriction X U a * b) =
+          associatedRestriction X V a * X.presheaf.map f b
+        rw [map_mul]
+        exact congrArg (· * X.presheaf.map f b) (RingHom.congr_fun hc a).symm }
+  let l := TensorProduct.map h (LinearMap.id : M →ₗ[_] M)
+  let r : associatedExtension X M U ⟶
+      (ModuleCat.restrictScalars ((associatedRingSheaf X).obj.map f).hom).obj
+        (associatedExtension X M V) := ModuleCat.ofHom
+    (X := associatedExtension X M U)
+    (Y := (ModuleCat.restrictScalars ((associatedRingSheaf X).obj.map f).hom).obj
+      (associatedExtension X M V))
+    { toFun := l
+      map_add' := l.map_add
+      map_smul' := fun a z ↦ by
+        induction z using TensorProduct.induction_on with
+        | zero => rw [smul_zero, map_zero, smul_zero]
+        | tmul b m =>
+          change X.presheaf.obj U at b
+          change l ((a * b) ⊗ₜ[_] m) = (X.presheaf.map f a) • l (b ⊗ₜ[_] m)
+          simp only [l, TensorProduct.map_tmul, LinearMap.id_apply]
+          change (X.presheaf.map f (a * b)) ⊗ₜ[_, (associatedRestriction X V).hom] m =
+            (X.presheaf.map f a) •
+              ((X.presheaf.map f b) ⊗ₜ[_, (associatedRestriction X V).hom] m)
+          rw [ModuleCat.ExtendScalars.smul_tmul, map_mul]
+        | add x y hx hy => rw [smul_add, map_add, hx, hy, map_add, smul_add] }
+  have hr (a : X.presheaf.obj U) (m : M) :
+      r (a ⊗ₜ[_, (associatedRestriction X U).hom] m) =
+        (X.presheaf.map f a) ⊗ₜ[_, (associatedRestriction X V).hom] m := rfl
+  refine ⟨r, hr, ?_⟩
+  intro s hs
+  apply ModuleCat.ExtendScalars.hom_ext
+  intro m
+  rw [hs, hr]
 
 /-- The restriction `ρ^U_V ⊗ id_M` of the tensor presheaf, the unique map of
 `associatedExtension_restriction_existsUnique` (Stacks, Modules, Lemma 01BH (3))
@@ -71,6 +116,18 @@ noncomputable def associatedExtensionRestriction
     (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))))
     {U V : (Opens (X : Type u))ᵒᵖ} (f : U ⟶ V) :=
   Classical.choose (associatedExtension_restriction_existsUnique X M f)
+
+/-- The chosen restriction has its specified pure-tensor formula, by the existence-and-uniqueness
+ theorem. Source: Stacks, Modules, Lemma 01BH (3)
+ (blueprint: def-weil-pbc-associated-module). -/
+private theorem associatedExtensionRestriction_tmul
+    (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))))
+    {U V : (Opens (X : Type u))ᵒᵖ} (f : U ⟶ V)
+    (a : X.presheaf.obj U) (m : M) :
+    associatedExtensionRestriction X M f
+      (a ⊗ₜ[_, (associatedRestriction X U).hom] m) =
+      (X.presheaf.map f a) ⊗ₜ[_, (associatedRestriction X V).hom] m :=
+  (Classical.choose_spec (associatedExtension_restriction_existsUnique X M f)).1 a m
 
 /-- Restriction of scalar extensions respects identities and composition.
 The defining unique map sends `a ⊗ m` to `a|_V ⊗ m`. For the identity,
@@ -94,7 +151,20 @@ theorem associatedExtensionRestriction_laws
           (ModuleCat.restrictScalars _).map (associatedExtensionRestriction X M g) ≫
           (ModuleCat.restrictScalarsComp' _ _ _
             (congrArg RingCat.Hom.hom ((associatedRingSheaf X).obj.map_comp f g))).inv.app _) := by
-  sorry
+  constructor
+  · intro U
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro m
+    rw [associatedExtensionRestriction_tmul]
+    simp
+    rfl
+  · intro U V W f g
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro m
+    simp only [ModuleCat.comp_apply, associatedExtensionRestriction_tmul]
+    change _ = associatedExtensionRestriction X M g _
+    erw [associatedExtensionRestriction_tmul]
+    simp
 
 /-- The tensor presheaf `U ↦ O_X(U) ⊗_{Γ(X,O_X)} M`, with restrictions
 `ρ ⊗ id`, from Stacks, Modules, Lemma 01BH (3).
@@ -132,7 +202,16 @@ theorem associatedModulePresheafMap_naturality
         (associatedModulePresheafMapApp X f V) =
       associatedModulePresheafMapApp X f U ≫
         (associatedModulePresheaf X N).map i := by
-  sorry
+  apply ModuleCat.ExtendScalars.hom_ext
+  intro m
+  change (ModuleCat.extendScalars (associatedRestriction X V).hom).map f
+      (associatedExtensionRestriction X M i
+        ((1 : X.presheaf.obj U) ⊗ₜ[_, (associatedRestriction X U).hom] m)) =
+    associatedExtensionRestriction X N i
+      ((ModuleCat.extendScalars (associatedRestriction X U).hom).map f
+        ((1 : X.presheaf.obj U) ⊗ₜ[_, (associatedRestriction X U).hom] m))
+  rw [associatedExtensionRestriction_tmul, ModuleCat.ExtendScalars.map_tmul,
+    ModuleCat.ExtendScalars.map_tmul, associatedExtensionRestriction_tmul]
 
 /-- The componentwise maps `id ⊗ f` form the morphism of tensor presheaves
 from Stacks, Modules, Lemma 01BH (2), (3).
