@@ -12876,3 +12876,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:51 L: merged deliver/P4/Sheaf.AlgebraicGeometry.RestrictedAffineSingleCompositionLaw (stage 3; reviewer PASS; first push; landing 20261013T145122-L-696780 (proof); batch 20261013T145113; modules 1; new nodes 0)
 - 14:51 L: merged deliver/Q1/Sheaf.Paper.ModuleCupGodementModelPairing (stage 3; reviewer PASS; first push; landing 20261013T145123-L-696931 (interface); batch 20261013T145113; modules 4; new nodes 3)
 - 14:51 L: merged deliver/R3/Sheaf.Algebra.Homology.StrictlyPerfectHomQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T145123-L-697059 (proof); batch 20261013T145113; modules 1; new nodes 0)
+- 14:51 L: merged deliver/R4/Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding (stage 3; reviewer PASS; first push; landing 20261013T145123-L-697180 (interface); batch 20261013T145113; modules 3; new nodes 2)

@@ -1,0 +1,112 @@
+{
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "status": "split",
+ "kind": "statement",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-reduced-generic-fibre-field-embedding",
+   "place": "Affine tensor and reduction construction",
+   "via": []
+  }
+ },
+ "same_as": [],
+ "proof_origin": {
+  "by": "agent",
+  "place": "Direct proof of invariance of the definition using coefficient-field equivalence and Mathlib separability transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "reduced.*fiber|fiber.*reduced|IsSeparablyGenerated|of_equiv_equiv",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:29:42Z\", \"tool\": \"grep\", \"query\": \"reduced.*fiber|fiber.*reduced|IsSeparablyGenerated|of_equiv_equiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Inertia.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Relrank.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\"], \"digest\": \"9a32960cbf61862f\"}",
+   "digest": "9a32960cbf61862f",
+   "verdict": "No exact combined statement; related primitives were inspected. Transport is proved using algebraicIndependent_ringHom_iff_of_comp_eq and Algebra.IsSeparable.of_equiv_equiv."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "algebraic independence coefficient field isomorphism separable field extension transport",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:29:43Z\", \"tool\": \"leanfinder\", \"query\": \"algebraic independence coefficient field isomorphism separable field extension transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicIndependent.aevalEquivField\", \"AlgebraicIndependent.aevalEquivField_apply_coe\", \"AlgebraicIndependent.reprField\", \"AlgebraicIndependent.aevalEquiv\", \"Algebra.IsAlgebraic.algebraicIndependent_iff\", \"AlgebraicIndepOn.aevalEquiv\", \"AlgebraicIndependent.aevalEquivField_algebraMap_apply_coe\", \"IntermediateField.algebraicIndependent_adjoin_iff\"], \"digest\": \"c039de87bba403b1\"}",
+   "digest": "c039de87bba403b1",
+   "verdict": "No exact combined statement; related primitives were inspected. Transport is proved using algebraicIndependent_ringHom_iff_of_comp_eq and Algebra.IsSeparable.of_equiv_equiv."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicIndependent, RingEquiv",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:29:43Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicIndependent, RingEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No exact combined statement; related primitives were inspected. Transport is proved using algebraicIndependent_ringHom_iff_of_comp_eq and Algebra.IsSeparable.of_equiv_equiv."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separably generated field extensions are invariant under compatible coefficient field ring isomorphisms",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:30:39Z\", \"tool\": \"leansearch\", \"query\": \"Separably generated field extensions are invariant under compatible coefficient field ring isomorphisms\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "availability": "unavailable",
+   "note": "service unavailable: Internal Server Error"
+  }
+ ],
+ "id": "lem-sbc-reduced-generic-fibre-field-embedding-transport",
+ "title": "Transport separable generation across residue-field equivalence",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 030O (definition); invariance proved directly from Mathlib primitives"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof_deps": [],
+ "statement": "Let K, K-prime, E be fields, with K- and K-prime-algebra structures on E, and a ring equivalence e: K to K-prime such that the image of x under K to E equals the image of e(x) under K-prime to E for every x. If E/K-prime is separably generated [def-weil-pbc-separable-field-extension], then E/K is separably generated.",
+ "proof": [
+  {
+   "text": "Apply algebraicIndependent_ringHom_iff_of_comp_eq to e and the identity of E. This preserves algebraic independence in both directions, and therefore preserves maximality and the chosen transcendence basis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The two coefficient maps have the same range because e is surjective. The generated intermediate fields have equal underlying subfields; RingEquiv.subfieldCongr gives their identity equivalence. Algebra.IsSeparable.of_equiv_equiv transports separability across it, proving the desired definition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedGenericFibreFieldEmbeddingTransport.lean",
+  "declaration": "AlgebraicGeometry.separablyGenerated_of_residueField_equiv",
+  "statement": "theorem separablyGenerated_of_residueField_equiv\n    (K K' E : Type u) [Field K] [Field K'] [Field E]\n    (e : K ≃+* K') [Algebra K E] [Algebra K' E]\n    (hcompat : ∀ x : K, algebraMap K E x = algebraMap K' E (e x))\n    (h : Algebra.IsSeparablyGenerated K' E) :\n    Algebra.IsSeparablyGenerated K E",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T145123-L-697180",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T145123-L-697180",
+  "kind": "interface"
+ }
+}
