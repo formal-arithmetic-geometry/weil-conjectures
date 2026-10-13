@@ -13696,3 +13696,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:14 L: batch 20261013T215553 dependency take-out
 - 22:17 L: returned deliver/T4/Sheaf.RingTheory.KoszulConormalCycleRelations (reviewer RETURN: (reviewer X-cbcf4, head cbcf4443e) D1/D2: In lean/Sheaf/RingTheory/KoszulConormalCycleRelations.lean, the proof `intro x)
 - 22:19 L: returned deliver/M1/Sheaf.Topology.RingedModuleSkyscraper (reviewer RETURN: (reviewer X-1f103, head 1f103bd59) A (review point 2): In coord/changes/ringed-module-skyscraper-restoration.md, immedia)
+- 22:21 L: returned deliver/D2/Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitEquality (reviewer RETURN: (reviewer X-4de8e, head 4de8e0084) E1/E2: at the theorem declaration, old unrestricted `(e ...) (ε ...) : ... := by sorr)
