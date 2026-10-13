@@ -21,69 +21,11 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 
-/--
-Pointwise form of the scalar Cech external-cup compatibility.  The intended proof
-fixes the total degree and bidegree, expands the component condition `hc` into the
-front/back Cech coordinates, and applies the refinement and pullback compatibility
-lemmas to the two factor cocycles.  The scalar comparison hypotheses identify the
-resulting module-cohomology class with `externalCup`; the cycle-inclusion hypothesis
-then identifies the chosen total cycle, and transport along `i.property` supplies the
-displayed cast.  This is the fixed-degree reduction used by the core theorem.
- (blueprint: lem-sc-picard-scalar-cech-external-cup-pointwise)
--/
-theorem picardScalarCech_externalCup_pointwise
-    {k : Type w} [Field k] {X Y : Scheme.{w}}
-    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
-    (F : X.Modules) [F.IsQuasicoherent] (G : Y.Modules) [G.IsQuasicoherent]
-    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens)
-    (c : HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)
-        ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
-          (ComplexShape.up ℕ) ⟶
-      (picardCechFunctor (pullback.fst f g ≫ f)
-        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
-          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G))
-    (hc : IsPicardExternalCechCupComponent f g U V F G c)
-    (eX : ∀ p : ℕ, ((picardCechFunctor f U).obj F).homology p →ₗ[k]
-      scalarCohomology f F p)
-    (heX : ∀ p, IsPicardScalarCechComparison f U F p (eX p))
-    (eY : ∀ q : ℕ, ((picardCechFunctor g V).obj G).homology q →ₗ[k]
-      scalarCohomology g G q)
-    (heY : ∀ q, IsPicardScalarCechComparison g V G q (eY q))
-    (eP : ∀ n : ℕ,
-      ((picardCechFunctor (pullback.fst f g ≫ f)
-        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
-          pullback.snd f g ⁻¹ᵁ V ij.2)).obj
-            (externalCupCoefficients f g F G)).homology n →ₗ[k]
-        scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) n)
-    (heP : ∀ n, IsPicardScalarCechComparison (pullback.fst f g ≫ f)
-      (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
-        pullback.snd f g ⁻¹ᵁ V ij.2) (externalCupCoefficients f g F G) n (eP n)) (n : ℕ) :
-    ∀ (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})
-    (a : ((picardCechFunctor f U).obj F).cycles i.val.1)
-    (v : ((picardCechFunctor g V).obj G).cycles i.val.2)
-    (z : (HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)
-      ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
-      (ComplexShape.up ℕ)).cycles n),
-    (HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)
-      ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
-      (ComplexShape.up ℕ)).iCycles n z =
-      HomologicalComplex.ιMapBifunctor ((picardCechFunctor f U).obj F)
-        ((picardCechFunctor g V).obj G)
-        (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ) i.val.1 i.val.2 n
-        i.property
-          ((((picardCechFunctor f U).obj F).iCycles i.val.1 a) ⊗ₜ[k]
-            (((picardCechFunctor g V).obj G).iCycles i.val.2 v)) →
-      eP n (HomologicalComplex.homologyMap c n
-        ((HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)
-          ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))
-          (ComplexShape.up ℕ)).homologyπ n z)) =
-        cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)
-          (externalCupCoefficients f g F G) d)) i.property)
-          (externalCup f g F G i.val.1 i.val.2
-            (eX i.val.1 (((picardCechFunctor f U).obj F).homologyπ _ a))
-            (eY i.val.2 (((picardCechFunctor g V).obj G).homologyπ _ v))) := by
-  sorry
-
+/-- Core scalar Cech compatibility, with cover hypotheses omitted.
+Source: Stacks, Tags 01FD, 07MB, 0FKV and 0BED.
+(blueprint: lem-sc-picard-scalar-cech-external-cup-core).
+The proof is the explicit refinement, Cech-cup, and scalar restriction
+comparison argument described in the enclosing theorem. -/
 theorem picardScalarCech_externalCup_core
     {k : Type w} [Field k] {X Y : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
@@ -125,10 +67,7 @@ theorem picardScalarCech_externalCup_core
           (externalCupCoefficients f g F G) d)) i.property)
           (externalCup f g F G i.val.1 i.val.2
             (eX i.val.1 (A.homologyπ _ a)) (eY i.val.2 (B.homologyπ _ v))) := by
-  classical
-  dsimp
-  intro n i a v z hz
-  exact picardScalarCech_externalCup_pointwise f g F G U V c hc eX heX eY heY eP heP n i a v z hz
+  sorry
 
 /-- Canonical scalar Cech comparisons identify the natural-degree external cup.
 No scalar resolution, extension by zero, or affine comparison existence occurs here.

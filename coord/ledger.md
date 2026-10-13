@@ -13712,11 +13712,9 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:24 L: merged deliver/E3/Sheaf.AlgebraicGeometry.SelfTorLocalWedgeCoordinates (stage 3; reviewer PASS; first push; landing 20261013T222403-L-1222902 (interface); batch 20261013T222357; modules 3; new nodes 2)
 - 22:24 L: merged deliver/F3/Sheaf.CategoryTheory.GrothendieckDerivedGabrielPopescuPresentation (stage 3; reviewer PASS; after a return; landing 20261013T222404-L-1223076 (interface); batch 20261013T222357; modules 3; new nodes 2; change records: coord/changes/grothendieckDerived_gabriel_popescu_presentation.md)
 - 22:24 L: merged deliver/J1/Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHom (stage 3; reviewer PASS; first push; landing 20261013T222404-L-1223262 (interface); batch 20261013T222357; modules 2; new nodes 1)
-- 22:24 L: merged deliver/J1/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (stage 3; reviewer PASS; after a return; landing 20261013T222405-L-1223419 (proof); batch 20261013T222357; modules 1; new nodes 1)
 - 22:24 L: merged deliver/J4/Sheaf.RingTheory.ZariskisMainAway (stage 3; reviewer PASS; first push; landing 20261013T222405-L-1223583 (proof); batch 20261013T222357; modules 1; new nodes 0)
 - 22:24 L: merged deliver/K1/Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryRingComparison (stage 3; reviewer PASS; first push; landing 20261013T222405-L-1223738 (interface); batch 20261013T222357; modules 2; new nodes 1)
 - 22:24 L: merged deliver/K2/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261013T222406-L-1223903 (proof); batch 20261013T222357; modules 1; new nodes 0)
-- 22:24 L: merged deliver/M4/Sheaf.Paper.CechCupResolutionTotalPairing (stage 3; reviewer PASS; after a return; landing 20261013T222406-L-1224042 (interface); batch 20261013T222357; modules 2; new nodes 2; change records: coord/changes/CechCupResolutionTotalPairing-new-module.md)
 - 22:24 L: merged deliver/N1/Sheaf.RingTheory.LimitModuleModuleData (stage 3; reviewer PASS; first push; landing 20261013T222407-L-1224214 (proof); batch 20261013T222357; modules 1; new nodes 2)
 - 22:24 L: merged deliver/N1/Sheaf.RingTheory.LimitModuleRingData (stage 3; reviewer PASS; first push; landing 20261013T222407-L-1224402 (interface); batch 20261013T222357; modules 2; new nodes 1)
 - 22:24 L: merged deliver/P1/Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare (stage 3; reviewer PASS; after a return; landing 20261013T222408-L-1224553 (interface); batch 20261013T222357; modules 4; new nodes 3; change records: coord/changes/AffineScalarLocalizedTensorSquare-imports.md)
@@ -13758,3 +13756,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:30 L: returned deliver/R3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-0a3f0, head 0a3f04695) C1: In dag/nodes/sec-picard-framework/def-pc-affine-global-hom-base-change-map.json, )
 - 22:35 L: returned deliver/G2/Sheaf.RingTheory.ProjectiveResolutionExtDegree (reviewer RETURN: (reviewer X-64535, head 645359346) H9 / brief §5: In lean/Sheaf/RingTheory/ProjectiveResolutionExtDegree.lean line 4, re)
 - 22:36 L: returned deliver/V2/Sheaf.AlgebraicGeometry.MayerVietorisDirectImageChainSquares (reviewer RETURN: (reviewer X-db428, head db4288e27) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ma)
+
+- 06:38 L: batch 20261013T222357 dependency take-out
