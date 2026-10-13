@@ -18,28 +18,35 @@
  },
  "proof": [
   {
-   "text": "The open-subgroup fixed-field theorem gives L/K finite separable and fixingSubgroup(L)=H. Ks is a separable closure of L. Restriction of scalars identifies Gal(Ks/L) with H. Both Krull topologies have the same neighborhood basis of stabilizers of finite subsets of Ks, hence this group identification is a homeomorphism.",
+   "text": "Use openSubgroup_fixedField_finite_separable to obtain finite-dimensional L=Ks^H and L.fixingSubgroup=H. Ks is a separable closure of L because it is separably closed and separable over L by the tower theorem. Compose MulEquiv.subgroupCongr with L.fixingSubgroupEquiv. The Krull-topology lemma and the subtype inclusion give continuity in both directions.",
    "uses": [
-    "lem-exc-etale-open-subgroup-fixed-field"
+    "lem-exc-etale-open-subgroup-fixed-field",
+    "lem-exc-fixing-subgroup-krull-topology"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the abelian geometric-stalk equivalence over L and reindex discrete representations by this homeomorphism. Retain its natural additive stalk isomorphism. An extension tau of g in H fixes L, since elements of L are fixed by g and embedded via Ks; restricting scalars turns the canonical germ formula over L into the formula specified for C. Thus the functor and its quasi-inverse are determined up to the natural isomorphisms used downstream.",
+   "text": "Apply abelianSheaves_equiv_discreteGModules over L at Omega. Construct reindexDiscrete and reindexDiscreteEquiv explicitly: precompose each representation with the continuous group homomorphism; carry every intertwining map unchanged; openness of stabilizers follows by continuous preimage. Precomposition with the inverse gives the inverse functor, with identity linear maps as unit and counit. Compose the equivalences and retain the existing additive stalk comparison.",
    "uses": [
     "lem-exc-abelian-sheaves-gmodules"
    ],
    "elementary": false
+  },
+  {
+   "text": "For g in H and its K-linear extension tau to Omega, every element of L is fixed by g. Evaluating the extension identity on such an element shows that tau fixes its image in Omega. Equip the same ring automorphism with this L-linearity, and apply the existing abelian germ-action formula to e(g) and tauL. The reindexed action and retained stalk comparison are definitionally the required ones.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-exc-abelian-sheaves-gmodules",
-  "lem-exc-etale-open-subgroup-fixed-field"
+  "lem-exc-etale-open-subgroup-fixed-field",
+  "lem-exc-fixing-subgroup-krull-topology",
+  "lem-exc-abelian-sheaves-gmodules"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair."
+  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair.; C2 second reading: actual Lean reduction using the existing abelian equivalence and a proved Krull-topology auxiliary theorem."
  },
  "mathlib_searches": [
   {
@@ -121,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-38891",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T223415-L-1640273",
+  "landing": "20261013T001613-L-2330099",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered modules and nodes, target signature, axioms, compilation, and direct importer all matched the stage-3 brief."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

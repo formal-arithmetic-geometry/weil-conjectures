@@ -12,6 +12,7 @@ public import Mathlib.Topology.Algebra.OpenSubgroup
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.FieldTheory.OpenSubgroupFixedField
+import Sheaf.FieldTheory.FixingSubgroupKrullTopology
 
 /-!
 # Restricted subgroup representations and the fixed-field comparison
@@ -184,6 +185,37 @@ theorem primarySubmoduleTopIso
   have : IsIso f := isIso_of_mono_of_epi f
   exact ⟨ObjectProperty.isoMk _ (asIso f)⟩
 
+private noncomputable def reindexDiscrete
+    (A : Type) [Ring A]
+    {G J : Type u} [Group G] [Group J] [TopologicalSpace G] [TopologicalSpace J]
+    [IsTopologicalGroup G] [IsTopologicalGroup J]
+    (e : G →* J) (he : Continuous e) :
+    Rep.DiscreteContinuousRep.{0, u, u + 1} A J ⥤
+      Rep.DiscreteContinuousRep.{0, u, u + 1} A G where
+  obj R := ⟨Rep.of (R.obj.ρ.comp e), fun x ↦ (R.property x).preimage he⟩
+  map f := ObjectProperty.homMk (Rep.ofHom
+    ⟨f.hom.hom.toLinearMap, fun g ↦ f.hom.hom.2 (e g)⟩)
+  map_id _ := rfl
+  map_comp _ _ := rfl
+
+private noncomputable def reindexDiscreteEquiv
+    (A : Type) [Ring A]
+    {G J : Type u} [Group G] [Group J] [TopologicalSpace G] [TopologicalSpace J]
+    [IsTopologicalGroup G] [IsTopologicalGroup J]
+    (e : G ≃* J) (he : Continuous e) (hi : Continuous e.symm) :
+    Rep.DiscreteContinuousRep.{0, u, u + 1} A J ≌
+      Rep.DiscreteContinuousRep.{0, u, u + 1} A G where
+  functor := reindexDiscrete A e.toMonoidHom he
+  inverse := reindexDiscrete A e.symm.toMonoidHom hi
+  unitIso := NatIso.ofComponents (fun R ↦ ObjectProperty.isoMk _
+    (Rep.mkIso { __ := LinearEquiv.refl A R.obj.V
+                 isIntertwining' := fun g ↦ by ext x; simp [reindexDiscrete] }))
+    (by intros; ext x; rfl)
+  counitIso := NatIso.ofComponents (fun R ↦ ObjectProperty.isoMk _
+    (Rep.mkIso { __ := LinearEquiv.refl A R.obj.V
+                 isIntertwining' := fun g ↦ by ext x; simp [reindexDiscrete] }))
+    (by intros; ext x; rfl)
+
 /-- Source: Stacks Project, Tags 0BML, 03QT, 03QW and 04JQ.
 (blueprint: lem-sc-primary-fixed-field-module-comparison)
 
@@ -206,6 +238,43 @@ theorem nonempty_primaryFixedFieldComparison
     (Ω : Type u) [Field Ω] [Algebra Ks Ω] [Algebra K Ω]
     [IsScalarTower K Ks Ω] [IsAlgClosed Ω] :
     ∃ C : PrimaryFixedFieldEquivalence K Ks H,
-      PrimaryFixedFieldComparison K Ks H Ω C := by sorry
+      PrimaryFixedFieldComparison K Ks H Ω C := by
+  let L := IntermediateField.fixedField H.toSubgroup
+  obtain ⟨hfinite, _, hfix, _⟩ :=
+    (openSubgroup_fixedField_finite_separable.{u, u, u} K Ks).1 H.toSubgroup H.isOpen
+  have : FiniteDimensional K L := hfinite
+  have : IsScalarTower L Ks Ω := inferInstance
+  have : IsSepClosure L Ks :=
+    ⟨IsSepClosure.sep_closed K, Algebra.isSeparable_tower_top_of_isSeparable K L Ks⟩
+  let e : H.toSubgroup ≃* Gal(Ks/L) :=
+    (MulEquiv.subgroupCongr hfix.symm).trans L.fixingSubgroupEquiv
+  have hc := IntermediateField.continuous_fixingSubgroupEquiv K Ks L
+  have he : Continuous e := by
+    exact hc.1.comp (continuous_subtype_val.subtype_mk _)
+  have hi : Continuous e.symm := by
+    exact (continuous_subtype_val.comp hc.2).subtype_mk _
+  obtain ⟨E, _, i, _, _, haction, _⟩ :=
+    abelianSheaves_equiv_discreteGModules.{u, 0} L Ks Ω
+  let D := reindexDiscreteEquiv ℤ e he hi
+  let C : PrimaryFixedFieldEquivalence K Ks H := E.trans D
+  let i' : C.functor ⋙ primaryModuleForget K Ks H ≅
+      (primaryFixedFieldPoint K Ks H Ω).sheafFiber (A := AddCommGrpCat.{u + 1}) := i
+  refine ⟨C, i', ?_⟩
+  intro F g τ hτ X x x' hx z
+  have hg (a : L) : (g : Gal(Ks/K)) (a : Ks) = a := a.property g
+  let τL : Ω ≃ₐ[L] Ω :=
+    { τ.toRingEquiv with
+      commutes' := fun a ↦ by
+        have h := DFunLike.congr_fun hτ (a : Ks)
+        change τ ((algebraMap Ks Ω) (a : Ks)) = (algebraMap Ks Ω) (a : Ks)
+        change (algebraMap Ks Ω) ((g : Gal(Ks/K)) (a : Ks)) =
+          τ ((algebraMap Ks Ω) (a : Ks)) at h
+        rw [hg] at h
+        exact h.symm }
+  have hτL : (algebraMap Ks Ω).comp (e g).toRingHom =
+      τL.toRingHom.comp (algebraMap Ks Ω) := by
+    ext a
+    exact DFunLike.congr_fun hτ a
+  exact haction F (e g) τL hτL X x x' hx z
 
 end AlgebraicGeometry.Scheme

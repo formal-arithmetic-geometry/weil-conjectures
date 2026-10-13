@@ -1,0 +1,109 @@
+{
+ "id": "lem-exc-fixing-subgroup-krull-topology",
+ "kind": "statement",
+ "title": "Krull topology on the fixing subgroup of a finite intermediate field",
+ "statement": "Let K be a field [def-pc-field-extension], Ks a separable closure of K [def-pd-separable-closure], and L an intermediate field of Ks/K that is finite-dimensional over K. Equip Gal(Ks/K) and Gal(Ks/L) with their Krull topologies, and L.fixingSubgroup with the subspace topology from Gal(Ks/K). The canonical multiplicative equivalence L.fixingSubgroupEquiv : L.fixingSubgroup ≃* Gal(Ks/L), which retains the underlying automorphism of Ks, is continuous in both directions.",
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pd-separable-closure"
+ ],
+ "source": {
+  "document": "Mathlib/FieldTheory/KrullTopology.lean",
+  "place": "krullTopology_mem_nhds_one_iff and IntermediateField.fixingSubgroup_isOpen; Mathlib/FieldTheory/Galois/Profinite.lean, InfiniteGalois compactness; Mathlib/Topology/Homeomorph/Lemmas.lean, Continuous.continuous_symm_of_equiv_compact_to_t2; Stacks Tag 0BMJ as cited in Mathlib."
+ },
+ "proof": [
+  {
+   "text": "For a basic identity neighborhood in Gal(Ks/L), choose a finite intermediate extension E/L whose fixing subgroup lies in it. E is finite-dimensional over K by the tower theorem. The identity K-linear map transfers this finiteness to E.restrictScalars K. Its fixing subgroup is open in Gal(Ks/K), so intersecting with L.fixingSubgroup gives an open neighborhood mapped into the original neighborhood. The homomorphism continuity-at-one criterion proves continuity of fixingSubgroupEquiv.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The domain is a closed subgroup of the compact group Gal(Ks/K), hence compact. Ks/L is algebraic by separability in the tower, so Gal(Ks/L) is Hausdorff. Apply Continuous.continuous_symm_of_equiv_compact_to_t2 to the underlying bijection to prove inverse continuity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/FieldTheory/KrullTopology.lean",
+  "place": "krullTopology_mem_nhds_one_iff and IntermediateField.fixingSubgroup_isOpen; Mathlib/FieldTheory/Galois/Profinite.lean, InfiniteGalois compactness; Mathlib/Topology/Homeomorph/Lemmas.lean, Continuous.continuous_symm_of_equiv_compact_to_t2; Stacks Tag 0BMJ as cited in Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fixing subgroup of a finite intermediate field in a separable closure is homeomorphic to the Galois group over that intermediate field with the Krull topology",
+   "results": "IntermediateField.fixingSubgroupEquiv, IntermediateField.subgroupEquivAlgEquiv, InfiniteGalois.IntermediateFieldEquivClosedSubgroup, IsGaloisGroup.map_mulEquivAlgEquiv_fixingSubgroup, InfiniteGalois.normalAutEquivQuotient_apply, InfiniteGalois.limitToAlgEquiv, InfiniteGalois.mulEquivToLimit, InfiniteGalois.fixingSubgroup_fixedField",
+   "date": "2026-10-13",
+   "verdict": "No theorem asserting continuity of fixingSubgroupEquiv found. Use the existing algebraic equivalence, Krull neighborhood basis, and compact-to-Hausdorff inverse-continuity theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Continuous, IntermediateField.fixingSubgroupEquiv",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "No theorem asserting continuity of fixingSubgroupEquiv found. Use the existing algebraic equivalence, Krull neighborhood basis, and compact-to-Hausdorff inverse-continuity theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous_fixingSubgroup|fixingSubgroupEquiv|continuous_symm_of_equiv_compact_to_t2",
+   "results": "Mathlib/FieldTheory/Galois/IsGaloisGroup.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Infinite.lean, Mathlib/Topology/Homeomorph/Lemmas.lean, Mathlib/Topology/Homeomorph/Lemmas.lean",
+   "date": "2026-10-13",
+   "verdict": "No theorem asserting continuity of fixingSubgroupEquiv found. Use the existing algebraic equivalence, Krull neighborhood basis, and compact-to-Hausdorff inverse-continuity theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The algebraic equivalence between the fixing subgroup of a finite intermediate field in a separable closure and its absolute Galois group is continuous in both directions for the Krull topology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationFixedFieldComparison",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-primary-fixed-field-module-comparison",
+   "place": "first proof step: topological identification of the subgroup with the fixed-field Galois group"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.FixingSubgroupKrullTopology",
+  "file": "lean/Sheaf/FieldTheory/FixingSubgroupKrullTopology.lean",
+  "declaration": "IntermediateField.continuous_fixingSubgroupEquiv",
+  "statement": "theorem IntermediateField.continuous_fixingSubgroupEquiv\n    (K Ks : Type u) [Field K] [Field Ks] [Algebra K Ks]\n    [IsSepClosure K Ks] (L : IntermediateField K Ks) [FiniteDimensional K L] :\n    Continuous L.fixingSubgroupEquiv ∧ Continuous L.fixingSubgroupEquiv.symm",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T001613-L-2330099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T001613-L-2330099",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
