@@ -87,7 +87,8 @@ theorem exists_smoothAtPrime_free_conormal_basis
               (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)))) := by
   rcases exists_smoothAtPrime_conormal_data R n m f q hs with
     ⟨a, ha, V, c, hcard, hbound, hsm, hb⟩
-  refine ⟨a, ha, V, c, hcard, hbound, hsm, hb, ?_⟩
-  exact exists_smoothAtPrime_differential_data R n m f a V c q ha hcard hbound hsm hb
+  obtain ⟨a', ha', hsm', hb', hdiff⟩ :=
+    exists_smoothAtPrime_differential_data R n m f a V c q ha hcard hbound hsm hb
+  exact ⟨a', ha', V, c, hcard, hbound, hsm', hb', hdiff⟩
 
 end Algebra

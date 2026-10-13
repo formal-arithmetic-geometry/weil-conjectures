@@ -10246,3 +10246,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:16 L: merged deliver/M3/Sheaf.RingTheory.FiniteNormalSup (stage 3; reviewer PASS; first push; landing 20261013T001614-L-2330513 (proof); batch 20261013T001612; modules 1; new nodes 0)
 - 00:16 L: merged deliver/M4/Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible (stage 3; reviewer PASS; first push; landing 20261013T001615-L-2330684 (proof); batch 20261013T001612; modules 1; new nodes 0)
 - 00:16 L: merged deliver/R4/Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheaf (stage 3; reviewer PASS; first push; landing 20261013T001615-L-2330786 (interface); batch 20261013T001612; modules 3; new nodes 2)
+- 00:16 L: merged deliver/S3/Sheaf.RingTheory.SmoothAtPrimeDifferentialData (stage 3; reviewer PASS; first push; landing 20261013T001616-L-2330907 (interface); batch 20261013T001612; modules 4; new nodes 2; change records: coord/changes/smoothAtPrimeDifferentialData-common-shrink.md)

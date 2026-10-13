@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Complementary differential basis data",
- "statement": "theorem exists_smoothAtPrime_differential_data (R : Type u) [CommRing R] (n m : ℕ) (f : Fin m → MvPolynomial (Fin n) R) (a : MvPolynomial (Fin n) R) (V : Finset (Fin m)) (c : ℕ) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (ha : Ideal.Quotient.mk (Ideal.span (Set.range f)) a ∉ q.asIdeal) (hcard : V.card = c) (hbound : c ≤ min n m) (hsm : Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a))) : (∃ (e : Fin c ≃ V), ∃ b : Module.Basis (Fin c) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (LocalizedModule.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a) (Ideal.span (Set.range f)).Cotangent), ∀ j : Fin c, b j = LocalizedModule.mkLinearMap (Submonoid.powers (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (Ideal.span (Set.range f)).Cotangent ((Ideal.span (Set.range f)).toCotangent ⟨f (e j).1, Ideal.subset_span ⟨(e j).1, rfl⟩⟩)) → Nonempty (Module.Basis (Fin (n - c)) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (KaehlerDifferential R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a))))",
+ "statement": "theorem exists_smoothAtPrime_differential_data (R : Type u) [CommRing R] (n m : ℕ) (f : Fin m → MvPolynomial (Fin n) R) (a : MvPolynomial (Fin n) R) (V : Finset (Fin m)) (c : ℕ) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (ha : Ideal.Quotient.mk (Ideal.span (Set.range f)) a ∉ q.asIdeal) (_hcard : V.card = c) (hbound : c ≤ min n m) (hsm : Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a))) : (∃ (e : Fin c ≃ V), ∃ b : Module.Basis (Fin c) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (LocalizedModule.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a) (Ideal.span (Set.range f)).Cotangent), ∀ j : Fin c, b j = LocalizedModule.mkLinearMap (Submonoid.powers (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (Ideal.span (Set.range f)).Cotangent ((Ideal.span (Set.range f)).toCotangent ⟨f (e j).1, Ideal.subset_span ⟨(e j).1, rfl⟩⟩)) → ∃ a' : MvPolynomial (Fin n) R, Ideal.Quotient.mk (Ideal.span (Set.range f)) a' ∉ q.asIdeal ∧ Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a')) ∧ (∃ (e : Fin c ≃ V), ∃ b : Module.Basis (Fin c) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a')) (LocalizedModule.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a') (Ideal.span (Set.range f)).Cotangent), ∀ j : Fin c, b j = LocalizedModule.mkLinearMap (Submonoid.powers (Ideal.Quotient.mk (Ideal.span (Set.range f)) a')) (Ideal.span (Set.range f)).Cotangent ((Ideal.span (Set.range f)).toCotangent ⟨f (e j).1, Ideal.subset_span ⟨(e j).1, rfl⟩⟩)) ∧ Nonempty (Module.Basis (Fin (n - c)) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a')) (KaehlerDifferential R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a'))))",
  "source": {
   "document": "literature/stacks-project/smoothing.tex",
   "place": "Lemma Tag 07C6"
@@ -19,20 +19,24 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "This is the corresponding strict component of the parent proof plan.",
+   "text": "Apply the split conormal sequence on the initial smooth principal open. Spread the finite projective differential complement of rank n-c to a smaller principal open, then base change the prescribed conormal basis to that same open. Lift the additional localization factor from the quotient to the polynomial ring and use primality to keep the product outside q.",
    "uses": [
-    "lem-weil-pbc-smooth-at-prime-free-conormal-basis-conormal-data"
+    "lem-weil-pbc-smooth-localization-conormal-split",
+    "lem-weil-pbc-smooth-split-complement-shrink",
+    "lem-weil-pbc-prescribed-basis-further-localization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-smooth-at-prime-free-conormal-basis-conormal-data"
+  "lem-weil-pbc-smooth-localization-conormal-split",
+  "lem-weil-pbc-smooth-split-complement-shrink",
+  "lem-weil-pbc-prescribed-basis-further-localization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Lemma Tag 07C6"
+  "place": "Tag 07C6, proof, especially the replacement of a by a times a further element outside the prime; S3 corrects the missing further shrink and implements the argument"
  },
  "mathlib_searches": [
   {
@@ -73,7 +77,7 @@
   "module": "Sheaf.RingTheory.SmoothAtPrimeDifferentialData",
   "file": "lean/Sheaf/RingTheory/SmoothAtPrimeDifferentialData.lean",
   "declaration": "Algebra.exists_smoothAtPrime_differential_data",
-  "statement": "theorem exists_smoothAtPrime_differential_data (R : Type u) [CommRing R] (n m : ℕ) (f : Fin m → MvPolynomial (Fin n) R) (a : MvPolynomial (Fin n) R) (V : Finset (Fin m)) (c : ℕ) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (ha : Ideal.Quotient.mk (Ideal.span (Set.range f)) a ∉ q.asIdeal) (hcard : V.card = c) (hbound : c ≤ min n m) (hsm : Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a))) : (∃ (e : Fin c ≃ V), ∃ b : Module.Basis (Fin c) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (LocalizedModule.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a) (Ideal.span (Set.range f)).Cotangent), ∀ j : Fin c, b j = LocalizedModule.mkLinearMap (Submonoid.powers (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (Ideal.span (Set.range f)).Cotangent ((Ideal.span (Set.range f)).toCotangent ⟨f (e j).1, Ideal.subset_span ⟨(e j).1, rfl⟩⟩)) → Nonempty (Module.Basis (Fin (n - c)) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (KaehlerDifferential R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a))))",
+  "statement": "theorem exists_smoothAtPrime_differential_data (R : Type u) [CommRing R] (n m : ℕ) (f : Fin m → MvPolynomial (Fin n) R) (a : MvPolynomial (Fin n) R) (V : Finset (Fin m)) (c : ℕ) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (ha : Ideal.Quotient.mk (Ideal.span (Set.range f)) a ∉ q.asIdeal) (_hcard : V.card = c) (hbound : c ≤ min n m) (hsm : Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a))) : (∃ (e : Fin c ≃ V), ∃ b : Module.Basis (Fin c) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (LocalizedModule.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a) (Ideal.span (Set.range f)).Cotangent), ∀ j : Fin c, b j = LocalizedModule.mkLinearMap (Submonoid.powers (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (Ideal.span (Set.range f)).Cotangent ((Ideal.span (Set.range f)).toCotangent ⟨f (e j).1, Ideal.subset_span ⟨(e j).1, rfl⟩⟩)) → ∃ a' : MvPolynomial (Fin n) R, Ideal.Quotient.mk (Ideal.span (Set.range f)) a' ∉ q.asIdeal ∧ Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a')) ∧ (∃ (e : Fin c ≃ V), ∃ b : Module.Basis (Fin c) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a')) (LocalizedModule.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a') (Ideal.span (Set.range f)).Cotangent), ∀ j : Fin c, b j = LocalizedModule.mkLinearMap (Submonoid.powers (Ideal.Quotient.mk (Ideal.span (Set.range f)) a')) (Ideal.span (Set.range f)).Cotangent ((Ideal.span (Set.range f)).toCotangent ⟨f (e j).1, Ideal.subset_span ⟨(e j).1, rfl⟩⟩)) ∧ Nonempty (Module.Basis (Fin (n - c)) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a')) (KaehlerDifferential R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a'))))",
   "branch": "sheaf-dag",
   "by": "U2",
   "date": "2026-10-13"
@@ -89,13 +93,42 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
+  "reviewer": "X-5de90",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T184349-L-4022043",
+  "landing": "20261013T001616-L-2330907",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean signatures match all four node records; the recorded common-shrink correction preserves the parent statement; all modules compile, the original caller fails as reported, and the adaptation is minimal."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "S3 stage 2",
+  "old_statement": "theorem exists_smoothAtPrime_differential_data (R : Type u) [CommRing R] (n m : ℕ) (f : Fin m → MvPolynomial (Fin n) R) (a : MvPolynomial (Fin n) R) (V : Finset (Fin m)) (c : ℕ) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (ha : Ideal.Quotient.mk (Ideal.span (Set.range f)) a ∉ q.asIdeal) (hcard : V.card = c) (hbound : c ≤ min n m) (hsm : Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a))) : (∃ (e : Fin c ≃ V), ∃ b : Module.Basis (Fin c) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (LocalizedModule.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a) (Ideal.span (Set.range f)).Cotangent), ∀ j : Fin c, b j = LocalizedModule.mkLinearMap (Submonoid.powers (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (Ideal.span (Set.range f)).Cotangent ((Ideal.span (Set.range f)).toCotangent ⟨f (e j).1, Ideal.subset_span ⟨(e j).1, rfl⟩⟩)) → Nonempty (Module.Basis (Fin (n - c)) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (KaehlerDifferential R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a))))",
+  "what": "The fixed-open conclusion is false: a free conormal module gives stably free differentials, not necessarily free differentials. The proof of Tag 07C6 explicitly permits a further shrink. The corrected conclusion supplies that new witness together with the preserved prescribed conormal basis and smoothness.",
+  "source": {
+   "document": "literature/stacks-project/smoothing.tex",
+   "place": "Tag 07C6, proof, especially the replacement of a by a times a further element outside the prime"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-smooth-at-prime-free-conormal-basis",
+    "holds": true,
+    "note": "The parent statement is unchanged. Its proof now uses the new localization witness and the preserved conormal basis from the corrected component."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "This is the corresponding strict component of the parent proof plan.",
+    "uses": [
+     "lem-weil-pbc-smooth-at-prime-free-conormal-basis-conormal-data"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-smooth-at-prime-free-conormal-basis-conormal-data"
+  ]
  }
 }

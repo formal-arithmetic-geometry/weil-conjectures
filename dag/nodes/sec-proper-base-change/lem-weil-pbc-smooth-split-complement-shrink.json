@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-smooth-split-complement-shrink",
+ "kind": "statement",
+ "title": "Complementary differential basis after a further principal shrink",
+ "statement": "theorem exists_smooth_split_complement_shrink (R : Type u) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] (a : A) (p : Ideal A) [p.IsPrime] (ha : a ∉ p) (n c : ℕ) (hc : c ≤ n) (M : Type w) [AddCommGroup M] [Module (Localization.Away a) M] (b : Module.Basis (Fin c) (Localization.Away a) M) (hsm : Smooth R (Localization.Away a)) (hsplit : Nonempty ((M × KaehlerDifferential R (Localization.Away a)) ≃ₗ[Localization.Away a] (Fin n → Localization.Away a))) : ∃ t : A, t ∉ p ∧ Smooth R (Localization.Away (a * t)) ∧ Nonempty (Module.Basis (Fin (n - c)) (Localization.Away (a * t)) (KaehlerDifferential R (Localization.Away (a * t))))",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07C6, proof, especially the replacement of a by a times a further element outside the prime"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Extend the prime to A[1/a], using disjointness of its powers from the prime. The smooth differential module is finite projective, and its localization at this prime is free by Mathlib Module.free_of_flat_of_isLocalRing.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Base change the given split equivalence and the conormal basis to the local ring. TensorProduct.prodRight and finrank_prod give c + rank(differentials) = n, hence the rank is n-c. Reindex the finite local basis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use Module.FinitePresentation.exists_basis_localizedModule_powers to spread that rank-n-c basis to a principal open of A[1/a]. Take the numerator t of the localization element; associated elements belong to the same ideals, so t is outside the original prime.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use IsLocalization.Away.mul_of_associated to identify the iterated localization with A[1/(a*t)]. Transport the basis by tensor base change and KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale. Smoothness follows by composition with principal localization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07C6, proof, especially the replacement of a by a times a further element outside the prime; Lean proof written by S3 from the cited generic Mathlib declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented projective differential complement becomes free after further localization",
+   "results": "Service unavailable: HTTP Internal Server Error; no verdict is asserted.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth algebra free conormal module implies differential module stably free",
+   "results": "Found Algebra.FormallySmooth.projective_kaehlerDifferential and Algebra.IsStandardSmooth.free_kaehlerDifferential, but no fixed-open cancellation theorem. Used projectivity and generic module basis spreading.",
+   "date": "2026-10-13",
+   "verdict": "related matches; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*basis.*localized|basis.*Away|baseChange.*basis",
+   "results": "Found Module.FinitePresentation.exists_basis_localizedModule_powers and Module.Basis.baseChange, used in the proofs.",
+   "date": "2026-10-13",
+   "verdict": "used generic Mathlib components"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothAtPrimeDifferentialData",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-at-prime-free-conormal-basis-differential-data",
+   "place": "corrected common-shrink argument in Tag 07C6",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothSplitComplementShrink",
+  "file": "lean/Sheaf/RingTheory/SmoothSplitComplementShrink.lean",
+  "declaration": "Algebra.exists_smooth_split_complement_shrink",
+  "statement": "theorem exists_smooth_split_complement_shrink (R : Type u) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] (a : A) (p : Ideal A) [p.IsPrime] (ha : a ∉ p) (n c : ℕ) (hc : c ≤ n) (M : Type w) [AddCommGroup M] [Module (Localization.Away a) M] (b : Module.Basis (Fin c) (Localization.Away a) M) (hsm : Smooth R (Localization.Away a)) (hsplit : Nonempty ((M × KaehlerDifferential R (Localization.Away a)) ≃ₗ[Localization.Away a] (Fin n → Localization.Away a))) : ∃ t : A, t ∉ p ∧ Smooth R (Localization.Away (a * t)) ∧ Nonempty (Module.Basis (Fin (n - c)) (Localization.Away (a * t)) (KaehlerDifferential R (Localization.Away (a * t))))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5de90",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T001616-L-2330907",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5de90",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T001616-L-2330907",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures match all four node records; the recorded common-shrink correction preserves the parent statement; all modules compile, the original caller fails as reported, and the adaptation is minimal."
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-prescribed-basis-further-localization",
+ "kind": "statement",
+ "title": "Prescribed localized bases persist on a smaller principal open",
+ "statement": "theorem exists_prescribed_basis_away_mul {A : Type u} [CommRing A] {M : Type v} [AddCommGroup M] [Module A M] {ι : Type*} (a t : A) (m : ι → M) (b : Module.Basis ι (Localization.Away a) (LocalizedModule.Away a M)) (hb : ∀ i, b i = LocalizedModule.mkLinearMap (Submonoid.powers a) M (m i)) : ∃ b' : Module.Basis ι (Localization.Away (a * t)) (LocalizedModule.Away (a * t) M), ∀ i, b' i = LocalizedModule.mkLinearMap (Submonoid.powers (a * t)) M (m i)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section 10.9, localization of modules, applied in the common-shrink paragraph of Tag 07C6"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Give A[1/(a*t)] its A[1/a]-algebra structure via awayToAwayRight, and verify the scalar tower on elements of A.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Base change the prescribed basis. Combine LocalizedModule.equivTensorProduct, LinearEquiv.baseChange, and TensorProduct.AlgebraTensorModule.cancelBaseChange to identify the new module with LocalizedModule.Away (a*t) M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check each basis vector using the tensor-product formulas: m i divided by one maps to m i divided by one. This proves the full prescribed-vector assertion without any freeness cancellation or finiteness hypothesis.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section 10.9, localization of modules, applied in the common-shrink paragraph of Tag 07C6; Lean proof written by S3 from the cited generic Mathlib declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented projective differential complement becomes free after further localization",
+   "results": "Service unavailable: HTTP Internal Server Error; no verdict is asserted.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth algebra free conormal module implies differential module stably free",
+   "results": "Found Algebra.FormallySmooth.projective_kaehlerDifferential and Algebra.IsStandardSmooth.free_kaehlerDifferential, but no fixed-open cancellation theorem. Used projectivity and generic module basis spreading.",
+   "date": "2026-10-13",
+   "verdict": "related matches; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*basis.*localized|basis.*Away|baseChange.*basis",
+   "results": "Found Module.FinitePresentation.exists_basis_localizedModule_powers and Module.Basis.baseChange, used in the proofs.",
+   "date": "2026-10-13",
+   "verdict": "used generic Mathlib components"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothAtPrimeDifferentialData",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-at-prime-free-conormal-basis-differential-data",
+   "place": "corrected common-shrink argument in Tag 07C6",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PrescribedBasisFurtherLocalization",
+  "file": "lean/Sheaf/RingTheory/PrescribedBasisFurtherLocalization.lean",
+  "declaration": "Module.Basis.exists_prescribed_basis_away_mul",
+  "statement": "theorem exists_prescribed_basis_away_mul {A : Type u} [CommRing A] {M : Type v} [AddCommGroup M] [Module A M] {ι : Type*} (a t : A) (m : ι → M) (b : Module.Basis ι (Localization.Away a) (LocalizedModule.Away a M)) (hb : ∀ i, b i = LocalizedModule.mkLinearMap (Submonoid.powers a) M (m i)) : ∃ b' : Module.Basis ι (Localization.Away (a * t)) (LocalizedModule.Away (a * t) M), ∀ i, b' i = LocalizedModule.mkLinearMap (Submonoid.powers (a * t)) M (m i)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5de90",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T001616-L-2330907",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5de90",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T001616-L-2330907",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures match all four node records; the recorded common-shrink correction preserves the parent statement; all modules compile, the original caller fails as reported, and the adaptation is minimal."
+ }
+}
