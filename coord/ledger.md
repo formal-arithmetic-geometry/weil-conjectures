@@ -10884,3 +10884,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/R2/Sheaf.RingTheory.FibreLocalRingNaturalIso (stage 3; reviewer PASS; first push; landing 20261013T031548-L-3573205 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/R3/Sheaf.AlgebraicGeometry.EtaleOpenFreeSheafUnitPullback (stage 3; reviewer PASS; after a return; landing 20261013T031549-L-3573359 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/S4/Sheaf.AlgebraicGeometry.Morphisms.NormalizationDenseOpen (stage 3; reviewer PASS; first push; landing 20261013T031549-L-3573459 (interface); batch 20261013T031526; modules 2; new nodes 1)
+- 03:15 L: merged deliver/T1/Sheaf.CategoryTheory.ColimitSiteRawFiniteMatchingRefinement (stage 3; reviewer PASS; first push; landing 20261013T031550-L-3573646 (interface); batch 20261013T031526; modules 2; new nodes 1)

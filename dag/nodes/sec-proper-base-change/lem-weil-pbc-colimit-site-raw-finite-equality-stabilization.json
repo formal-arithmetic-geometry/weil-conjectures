@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-colimit-site-raw-finite-equality-stabilization",
+ "kind": "statement",
+ "title": "Finite equality detection for raw stage section representatives",
+ "statement": "Let $J$ be a small filtered category and $F:J\\to\\mathrm{Cat}$ a diagram of small categories [def-weil-pbc-category-colimit]. Let $P_j$ be a precoverage on $F(j)$, let $V$ be a cocone with vertex $C$, and let $Q$ be a precoverage on $C$. Assume every transition $F(a)$ and cocone functor $V_j$ is continuous for the generated topologies [def-weil-pbc-sites-and-cohomology], and that the object and arrow cocones of $V$ are set colimits [def-weil-pbc-arrows-functor]. Fix $i\\in J$ and a set-valued sheaf $G$ on $P_i$. For $t\\in\\mathrm{Under}(i)$ put $A_t=F(t.hom)_sG$ and $V_t=V_{t.right}$. Give sheaf maps $\\theta_b:A_t\\to F(b.right)^sA_{t'}$ for $b:t\\to t'$, whose composites with the inverse-image unit of $G$ are the unit at $t'$, componentwise as objects of the arrow category of sets. Let $B:\\mathrm{Under}(i)\\to\\mathrm{PSh}(C)$ and $\\beta_t:A_t\\to V_t^pB_t$ exhibit $B_t$ as the left Kan extension along $V_t^{op}$. Assume $\\beta_t(X) B(b)(V_tX)=\\theta_b(X)\\beta_{t'}(F(b.right)X)$ as objects of the arrow category of sets. Write $H=\\mathrm{colim}\\,B$ and $\\rho_t(X)(s)=\\iota_t(V_tX)(\\beta_t(X)(s))$. Fix $t\\in\\mathrm{Under}(i)$, a finite set $K$, objects $X_p\\in F(t.right)$ and sections $r_p,s_p\\in A_t(X_p)$ for $p\\in K$. If $\\rho_t(X_p)(r_p)=\\rho_t(X_p)(s_p)$ for every $p$, then there are $t\\to t\\prime$ with arrow $b$ such that $\\theta_b(X_p)(r_p)=\\theta_b(X_p)(s_p)$ for every $p$. This detects equality at finitely many objects; it asserts neither compatibility nor amalgamation of a covering family.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of presentations and first equality in the finite-cover H^0 calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Proof: The unit condition htheta determines each theta uniquely by the sheaf\nadjunction hom-equivalence. Consequently theta preserves identity and composition,\nwith the object transports supplied by F and the triangles in Under i.\n\nFor one p, evaluate the outer presheaf colimit at Y = V_t(X_p). Evaluation\npreserves colimits and Under i is filtered, so equality of its two representatives\nholds in B_k(Y) after one transition t -> k. By hbeta-map these are beta_k images\nof theta-transported r_p and s_p, with the cocone object transport to Y.\nThe pointwise left Kan formula presents B_k(Y) by triples (W, a, x), with\nW in F(k.right), a : Y -> V_k(W), and x a section at W. Equality is a finite\nzigzag of relations identifying (W, a, restriction along h of x') with\n(W', a followed by V_k(h), x'), for h : W -> W'.\n\nLift all the finitely many arrows a to a stage receiving k, using surjectivity\nof the arrow cocone. Use eventual equality in the object cocone to align their\nsources with the forward image of X_p and their targets with the forward images\nof W. Refine again so eventual equality in the arrow cocone enforces each\nrelation triangle and identifies both endpoint arrows with the identity of\nthe forward image of X_p. Filteredness equalizes the competing stage maps,\nincluding the maps from i, so this is one transition in Under i.\nSend each triple to the section obtained by theta-transporting x and restricting\nalong its lifted arrow. Naturality of theta and the lifted triangles make the\ntwo sides of each generating relation equal. Thus the zigzag endpoints agree;\nthe identity endpoint arrows and composition of theta identify them with the\noriginal r_p and s_p transported through the composite transition from t.\n\nRepeat this construction for each p. Since K is finite, filteredness supplies a\ncommon receiving stage and equalizes the finitely many maps from t. Transport\nof an equality remains an equality, and composition of theta gives every\nrequired equation for that single transition. If K is empty, take the identity\nof t. This argument uses no covering family, pullback, or gluing.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-categories",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-arrows-functor",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-categories",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Expansion of the omitted finite Kan-relation lifting in Tag 0A35, checked against https://stacks.math.columbia.edu/tag/0A35"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite family of equalities of representatives of a filtered colimit of left Kan extensions of stage sheaves holds after a common stage transition",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of finitely many stage sheaf sections in a raw left Kan filtered colimit is detected at a later stage",
+   "results": "Fixed-site sheaf gluing and section extensionality lemmas, including Presieve.isSheafFor_arrows_iff and Functor.IsCoverDense.sheaf_eq_amalgamation; no raw stage equality criterion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "raw.*finite.*equality|raw.*matching.*refinement|Kan.*eventual",
+   "results": "msearch: 0 hits. Direct reads of Types.FilteredColimit.isColimit_eq_iff and isColimit_eq_iff', Mathlib/CategoryTheory/Limits/Types/Filtered.lean:141-162, give fixed-diagram equality only. ColimitSiteRawSectionRelations is restricted to objects descending from the initial stage, with a supplied section diagram, and cannot be directly applied to arbitrary X_p.",
+   "date": "2026-10-13",
+   "verdict": "supporting API; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawFiniteMatchingRefinement",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Stabilize the finite overlap equations in the raw matching-lift proof, before stage amalgamation",
+   "via": [
+    "lem-weil-pbc-colimit-site-raw-finite-matching-refinement",
+    "lem-weil-pbc-colimit-site-raw-section-matching-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteRawFiniteEqualityStabilization",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteRawFiniteEqualityStabilization.lean",
+  "declaration": "CategoryTheory.colimit_site_raw_finite_equality_stabilization",
+  "statement": "theorem colimit_site_raw_finite_equality_stabilization\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (i : J) (G : Sheaf (P i).toGrothendieck (Type u))\n    (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n                        (sheafPullback (F.map t.hom).toFunctor (Type u)\n                          (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶\n                        ((F.map b.right).toFunctor.sheafPushforwardContinuous (Type u)\n                          (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj\n                          ((sheafPullback (F.map t'.hom).toFunctor (Type u)\n                            (P i).toGrothendieck (P t'.right).toGrothendieck).obj G))\n    (hθ : ∀ (t t' : Under i) (b : t ⟶ t'),\n      (∀ X : F.obj i,\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t.right).toGrothendieck).unit.app\n                                G).hom.app (op X) ≫\n                              (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj X))) =\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app\n                                G).hom.app (op X))))\n    (B : Under i ⥤ (V.ptᵒᵖ ⥤ Type u))\n    (β : ∀ t : Under i,\n      ((sheafPullback (F.map t.hom).toFunctor (Type u)\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj ⟶\n        (V.ι.app t.right).toFunctor.op ⋙ B.obj t)\n    (hβ : ∀ t : Under i, (B.obj t).IsLeftKanExtension (β t))\n    (hβmap : ∀ (t t' : Under i) (b : t ⟶ t') (X : F.obj t.right),\n      Arrow.mk ((β t).app (op X) ≫\n        (B.map b).app (op ((V.ι.app t.right).toFunctor.obj X))) =\n      Arrow.mk ((θ t t' b).hom.app (op X) ≫\n        (β t').app (op ((F.map b.right).toFunctor.obj X))))\n    (t : Under i) (K : Type u) [Finite K] (X : K → F.obj t.right)\n    (r s : ∀ p, ((sheafPullback (F.map t.hom).toFunctor (Type u)\n      (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj.obj (op (X p)))\n    (hrs : ∀ p,\n      (colimit.ι B t).app (op ((V.ι.app t.right).toFunctor.obj (X p)))\n          ((β t).app (op (X p)) (r p)) =\n        (colimit.ι B t).app (op ((V.ι.app t.right).toFunctor.obj (X p)))\n          ((β t).app (op (X p)) (s p))) :\n    ∃ (t' : Under i) (b : t ⟶ t'), ∀ p,\n      (θ t t' b).hom.app (op (X p)) (r p) =\n        (θ t t' b).hom.app (op (X p)) (s p)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T031550-L-3573646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T031550-L-3573646",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

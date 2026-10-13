@@ -14,32 +14,30 @@
  ],
  "proof": [
   {
-   "text": "Take the pairwise covering pullbacks at the given stage. Naturality of beta\nand the coprojections identifies the raw images of the two restricted sections.\nThe assumed raw compatibility makes them equal. The pointwise Kan presentation,\nwith object and arrow set colimits, detects equality of stage sections after a\ntransition: lift the finite chain of Kan and outer colimit relations to one stage,\nwhere naturality and h-beta-map turn them into restriction and theta transport.\nThe unit condition h-theta makes theta the unique adjunction transpose and hence\nmakes these transports compose. There are finitely many pairs of covering arrows;\nfilteredness and equalization give one transition where every equality holds.\nTransition preservation of covering pullbacks identifies the transported equations\nwith equations on pairwise pullbacks at the new stage. The pullback universal\nproperty proves indexed compatibility on arbitrary common test objects. Transport\nthe original sections by theta to obtain s'. Naturality and h-beta-map give the\nstated equality of raw images; e is the cocone equality. Repeated arrows therefore\nhave equal sections, including after transport. For an empty family use the identity\ntransition and the empty family. No new raw representatives or amalgamation are needed.",
+   "text": "Take each pairwise pullback of covering arrows at t. Naturality of the raw map beta followed by the coprojection identifies raw images of their restricted sections with the two restrictions in hs. Thus hs supplies one raw equality for each pair. Apply finite raw equality stabilization with K = I times I to get one b making all theta-transported overlap sections equal.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-categories",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "def-weil-pbc-arrows-functor",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-colimit-site-raw-finite-equality-stabilization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0A35, construction of G and first equality in the finite-cover H^0 calculation"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Set s′_p = theta_b(Y_p)(s_p). Naturality of theta turns the equalities at the old pullbacks into equalities of restrictions along their mapped projections. hpullback makes the mapped pullback cone a limit. For any common test object at the new stage use its unique lift into that cone and apply the presheaf restriction map to the overlap equality. This proves indexed compatibility, including repeated arrows.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Cocone naturality V.w supplies e_U. Extract the equation from hbeta-map using Arrow.mk_eq_mk_iff, transporting its codomain through e_U. Compose with the new coprojection, use its naturality along e_U, and use colimit.w for b. Evaluating at s_p gives exactly the required raw-image formula. Sections are explicitly transported by theta, never chosen as arbitrary witnesses. The same construction works for an empty index set.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-categories",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "def-weil-pbc-arrows-functor",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-weil-pbc-colimit-site-raw-finite-equality-stabilization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Expansion of the omitted raw Kan presentation and finite equalizer details of Tag 0A35; source verified at https://stacks.math.columbia.edu/tag/0A35"
+  "place": "Tag 0A35 finite overlap calculation: finite equality stabilization followed by naturality and the preserved pullback universal property, formalized by T1"
  },
  "mathlib_searches": [
   {
@@ -118,9 +116,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T015551-L-3019253",
+  "landing": "20261013T031550-L-3573646",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
