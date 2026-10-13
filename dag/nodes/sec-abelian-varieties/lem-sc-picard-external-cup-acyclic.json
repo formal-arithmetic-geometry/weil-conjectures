@@ -17,56 +17,43 @@
  ],
  "proof": [
   {
-   "text": "Choose finite affine covers and their product cover; affine diagonal makes all finite intersections affine. The affine pullback and tensor section formulas identify Cech on X times an affine V with Cech(X,F) tensor G(V). Exact field tensor and affine Cech comparison give zero positive cohomology and Gamma(X,F) tensor G(V) in degree zero.",
+   "text": "Apply natural-degree tensor Kunneth to the constructed nonnegative scalar models. In positive degree each natural p+q=n summand has a positive factor, hence is zero by hF or hG and the model comparison. Direct-sum induction makes source homology zero. The acyclic external-coefficients theorem makes target homology zero; every map between these zero vector spaces is bijective.",
    "uses": [
-    "lem-sc-picard-affine-diagonal-intersections",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-sc-cech-comparison-map-iso-affine"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the higher direct image presheaf description on the affine basis to identify pr2_* external coefficients with Gamma(X,F) tensor G and to prove higher direct images vanish. Expand Gamma(X,F) in a basis. Affine diagonal implies Y quasi-separated, so qcqs direct-sum cohomology and Leray show product cohomology is zero above zero and is the section tensor in degree zero.",
-   "uses": [
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-weil-pbc-qcqs-cohomology-direct-sum",
-    "lem-pc-leray-degenerate-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The degree-zero section tensor identification sends s tensor t to projection pullbacks followed by tensor: check on every product affine chart using the section formulas. Signed Cech cup compatibility gives this formula for external cup. Natural-degree tensor Kunneth and the constructed model comparisons identify source homology with the section tensor in degree zero and with zero above zero. Lift factor homology classes through homology projections; the Kunneth cycle formula and the normalized cochain hypothesis identify H(c) on pure tensors. Extend by linearity. Thus H(c) is invertible in degree zero and between zero objects above zero.",
-   "uses": [
-    "lem-sc-picard-cech-cup-pullback-compat",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
     "lem-sc-qcoh-cech-total-tensor-nat-iso",
     "lem-sc-picard-kunneth-resolution-model",
-    "lem-sc-picard-external-cup-cochain"
+    "lem-sc-picard-external-coefficients-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree zero prove the natural index set has only (0,0). Its direct-sum inclusion is bijective by evaluation for injectivity and direct-sum induction for surjectivity. Compose this inclusion with tensor Kunneth to identify source homology with the tensor of the two degree-zero factor homologies.",
+   "uses": [
+    "lem-sc-qcoh-cech-total-tensor-nat-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain the degree-zero geometric tensor equivalence, transport the two factors and target through picardScalarModelEquiv, and compare the resulting linear equivalence with H(c). Lift arbitrary factor homology elements through the surjective homology projections. Tensor Kunneth provides a tensor cycle, and hc identifies H(c) on its class with externalCup. The geometric pure-tensor formula proves equality; tensor extensionality extends it to all tensors. Transport injectivity and surjectivity through the source equivalence to prove IsIso H(c).",
+   "uses": [
+    "lem-sc-picard-external-cup-zero-tensor",
+    "lem-sc-picard-kunneth-resolution-model",
+    "lem-sc-picard-external-cup-cochain",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-leray-degenerate-sections",
-  "lem-sc-cech-comparison-map-iso-affine",
-  "lem-sc-picard-affine-diagonal-intersections",
-  "lem-sc-picard-cech-cup-pullback-compat",
+  "lem-sc-picard-external-coefficients-acyclic",
   "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-external-cup-zero-tensor",
   "lem-sc-picard-kunneth-resolution-model",
-  "lem-sc-qcoh-cech-total-tensor-nat-iso",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-qcqs-cohomology-direct-sum",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+  "lem-sc-qcoh-cech-total-tensor-nat-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, lemma-kunneth; F1 made the acyclic base and individual bounded dimension-shifting steps explicit, including transport to arbitrary normalized resolution-model maps."
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and acyclic Leray base case; final degree-zero cup verification; C1 separated geometric vanishing and degree-zero section tensor comparison, and proved the normalized homology-map reduction in Lean."
  },
  "mathlib_searches": [
   {
@@ -147,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T045524-L-127495",
+  "landing": "20261013T060411-L-581369",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

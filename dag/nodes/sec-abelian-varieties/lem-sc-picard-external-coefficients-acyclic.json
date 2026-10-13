@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-picard-external-coefficients-acyclic",
+ "kind": "statement",
+ "title": "Acyclicity of external tensor coefficients",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}(k)$ and $g:Y\\to\\operatorname{Spec}(k)$ scheme morphisms [def-pc-scheme], with $X,Y$ quasi-compact and with affine diagonals. Let $F,G$ be quasi-coherent modules [pqf-def-coherent] satisfying $H^p(X,F)=H^p(Y,G)=0$ for every $p>0$, where $H^p$ is module right-derived global sections [def-sc-ringed-space-module-cohomology]. For the actual external tensor coefficients $E=\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G$ [def-sc-field-linear-module-cohomology-operations], one has $H^n(X\\times_kY,E)=0$ for every natural $n>0$. This does not assert anything about a cochain comparison map or its normalization.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and acyclic Leray base case; final degree-zero cup verification"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine cover of X. For each affine open V of Y, the section formulas identify Cech(X times V, external coefficients) with Cech(X,F) tensor G(V). Tensor over k is exact, so hF and affine Cech comparison give zero positive cohomology and Gamma(X,F) tensor G(V) in degree zero, naturally in affine V.",
+   "uses": [
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-sc-cech-comparison-map-iso-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the affine-basis higher-direct-image presheaf description to identify pr2_* of the external coefficients with Gamma(X,F) tensor G and show that higher direct images vanish.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A basis of Gamma(X,F) identifies that sheaf with a direct sum of copies of G. Affine diagonal implies that Y is quasi-separated. The qcqs direct-sum cohomology comparison and hG make pr2_* acyclic; zero higher direct images are also acyclic.",
+   "uses": [
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-sc-picard-affine-diagonal-intersections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every p>0 and q, H^p(Y,R^q pr2_* E)=0: use the direct-sum acyclicity for q=0 and the zero higher direct images for q>0. The degenerate Leray edge consequently identifies H^n of the product coefficients with Gamma(Y,R^n pr2_* E), which is zero for n>0. All constructions apply to empty schemes, zero sheaves and infinite bases.",
+   "uses": [
+    "lem-pc-leray-degenerate-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-leray-degenerate-sections",
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and acyclic Leray base case; final degree-zero cup verification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The external tensor product of acyclic quasi coherent modules on quasi compact schemes with affine diagonal over a field has zero positive cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For acyclic quasi coherent modules on quasi compact schemes with affine diagonal over a field the external tensor product is acyclic and its global sections are the tensor product",
+   "results": "8 hits: LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-13",
+   "verdict": "No matching geometric theorem; hits are definitions or unrelated categories."
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|acyclic",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No matching geometric theorem; hits are definitions or unrelated categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupAcyclic",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED acyclic base case and degree-zero cup verification in the quasi-coherent Kunneth argument used by the cube theorem",
+   "via": [
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAcyclic.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCupCoefficients_acyclic",
+  "statement": "theorem picardExternalCupCoefficients_acyclic (k : Type w) [Field k] (X Y : Scheme.{w}) (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)] (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (hF : ∀ p : ℕ, 0 < p → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F)) (hG : ∀ p : ℕ, 0 < p → IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj G)) (n : ℕ) (hn : 0 < n) : IsZero ((RingedSpace.moduleCohomology (Limits.pullback f g).toRingedSpace n).obj (externalCupCoefficients f g F G))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T060411-L-581369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T060411-L-581369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
