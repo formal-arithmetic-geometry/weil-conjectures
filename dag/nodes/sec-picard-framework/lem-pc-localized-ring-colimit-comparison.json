@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Local fraction maps form a cocone: the numerator transition identity extends uniquely to all fractions because denominators are units.",
+   "text": "Compose each specified stage equivalence with the canonical local ring map. Localization ring-hom extensionality and the numerator transition identity show these maps form a cocone c to T_p.",
    "uses": [
     "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-category-colimit"
@@ -21,24 +21,30 @@
    "elementary": true
   },
   {
-   "text": "Lift a numerator and denominator to a common stage through κ to prove surjectivity. Lift a multiplier outside p and descend the zero cross difference to a later stage to prove injectivity. The resulting bijective ring comparison gives the required ring equivalence and coprojection formula.",
+   "text": "For any cocone s on L, restrict along the numerator maps and use the supplied colimit of F to obtain f_s:T→s.pt. Every denominator y outside p has a representative x at a stage, because forget CommRingCat preserves filtered colimits. The contraction identity implies x avoids p_i, so its localized image is a unit and f_s(y) is a unit.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-rings-zero"
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
    ],
    "elementary": false
+  },
+  {
+   "text": "Extend f_s uniquely across T_p by IsLocalization.lift. Factorization at each stage and uniqueness follow by localization ring-hom extensionality and the supplied colimit hom_ext. This proves c is a colimit. The unique isomorphism from the canonical colimit of L to c.pt gives the requested ring equivalence and coprojection formula.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-filtered-colimit-rings-zero"
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 02JO and 037D; read online https://stacks.math.columbia.edu/tag/02JO and https://stacks.math.columbia.edu/tag/037D; detailed fraction argument supplied in Lean docstring"
+  "place": "Tag 037D, first paragraph; universal-property argument adapted by U3 from the proved local library module Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrimeData (its proof, not its declaration). Uses Mathlib localization uniqueness and filtered-colimit representative lifting; no fraction equality criterion."
  },
  "mathlib_searches": [
   {
@@ -219,10 +225,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T151139-L-879098",
-  "kind": "interface",
+  "landing": "20261013T153223-L-1060315",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
