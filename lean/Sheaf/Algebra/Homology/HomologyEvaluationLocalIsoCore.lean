@@ -2,8 +2,9 @@ module
 
 public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Homology.HomComplexRestrictOpen
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.FiniteFreeZeroHomologyEvaluation
+import Sheaf.Algebra.Homology.HomologyEvaluationRoofComparison
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! Core finite-free roof calculation for local homology evaluation. -/
 
@@ -35,6 +36,38 @@ theorem homologyEvaluation_local_iso_of_roof (X : AlgebraicGeometry.Scheme.{u})
     (hfree : ∀ k : ℤ, ∃ r : ℕ, Nonempty (E.X k ≅
       SheafOfModules.free (R := V.toScheme.ringCatSheaf.over W) (ULift.{u} (Fin r)))) :
     IsIso (((Scheme.Modules.restrictFunctor V.ι).map e).over W) := by
-  sorry
+  let O := SheafOfModules.overFunctor.{u} X.ringCatSheaf V
+  let A := (Scheme.Modules.overEquiv V).functor
+  let R := Scheme.Modules.restrictFunctor V.ι
+  let B := SheafOfModules.overFunctor.{u} V.toScheme.ringCatSheaf W
+  let F := R ⋙ B
+  let : PreservesFiniteLimits O := moduleOverFunctor_limits_proof X.toRingedSpace V
+  let : PreservesFiniteColimits O := moduleOverFunctor_colimits_proof X.toRingedSpace V
+  let : PreservesFiniteLimits (O ⋙ A) := comp_preservesFiniteLimits O A
+  let : PreservesFiniteColimits (O ⋙ A) := comp_preservesFiniteColimits O A
+  let : PreservesFiniteLimits R :=
+    preservesFiniteLimits_of_natIso (Scheme.Modules.overFunctorEquiv V)
+  let : PreservesFiniteColimits R :=
+    preservesFiniteColimits_of_natIso (Scheme.Modules.overFunctorEquiv V)
+  let : PreservesFiniteLimits B := moduleOverFunctor_limits_proof V.toScheme.toRingedSpace W
+  let : PreservesFiniteColimits B := moduleOverFunctor_colimits_proof V.toScheme.toRingedSpace W
+  let : PreservesFiniteLimits F := comp_preservesFiniteLimits R B
+  let : PreservesFiniteColimits F := comp_preservesFiniteColimits R B
+  let : F.PreservesZeroMorphisms := moduleOpenOver_preservesZeroMorphisms X V W
+  have hK : ∀ k : ℤ, k ≠ 0 →
+      IsZero (((moduleOpenOverComplexFunctor X V W).obj J).homology k) := by
+    intro k hk
+    exact (F.map_isZero (hJ k hk)).of_iso
+      ((F.mapHomologicalComplexHomologyIso (.up ℤ) k).app J)
+  obtain ⟨f, hf, c, hc, hc'⟩ := finiteFreeZero_homologyEvaluation
+    (V.toScheme.sheaf.over W) E ((moduleOpenOverComplexFunctor X V W).obj J)
+    n hK hzero hsupp hfree
+  obtain ⟨a, b, hab⟩ := homologyEvaluation_roof_comparison X T J n e he V W hI
+    E L q p hq hp f c hc hc'
+  let : IsIso f := hf
+  have : IsIso ((((Scheme.Modules.restrictFunctor V.ι).map e).over W) ≫ b.hom) := by
+    rw [hab]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ b.hom
 
 end CategoryTheory

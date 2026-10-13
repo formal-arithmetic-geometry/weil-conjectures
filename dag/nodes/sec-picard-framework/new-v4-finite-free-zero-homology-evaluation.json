@@ -1,0 +1,134 @@
+{
+ "id": "new-v4-finite-free-zero-homology-evaluation",
+ "kind": "statement",
+ "title": "Cycle-compatible evaluation for a finite-free zero-differential complex",
+ "statement": "Let C be a small site with topology S and commutative ring sheaf R [def-weil-sheaf-of-modules-category]. Let E and K be integer-indexed cochain complexes of R-modules [def-pc-cochain-complex-modules]. Assume E has zero differentials, is zero outside a finite interval, and each E^p is isomorphic to the free module on ULift(Fin r_p). Assume H^k(K)=0 for k unequal to zero. For n an integer put P=Hom(E,K) [def-pur-hom-complex] and let pi:P^n -> Hom(E^(-n),K^0) be the fixed product projection [lem-sc-hom-complex-projections]. There exist an isomorphism f:H^n(P) -> Hom(H^(-n)(E),H^0(K)) and c:Z^n(P) -> Hom(Z^(-n)(E),Z^0(K)) with two identities: postcomposing c by the inclusion Z^0(K)->K^0 equals the product projection restricted to P-cycles and precomposed by Z^(-n)(E)->E^(-n); postcomposing c by the class map Z^0(K)->H^0(K) equals the P-class map followed by f and precomposition by Z^(-n)(E)->H^(-n)(E).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "proof, finite-free Hom calculation, expanded using the Hom differential of Tag 0A8X"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "The fixed projections exhibit P degreewise as the product of Hom(E^p,K^(p+n)). The Hom differential formula has zero source term because d_E=0, so these projections identify P with the product of the translated factor complexes. Terms outside the finite support are zero factors. Thus only a finite product remains.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each p choose its specified free-sheaf isomorphism. finiteFreeInternalHomExact makes Hom(E^p,-) exact, and its basis-evaluation equations identify it with r_p copies of the identity functor. The private helper finiteFree_hom_preservesHomology already converts this exactness into Mathlib PreservesHomology. Finite products preserve kernels and cokernels in an abelian category. Therefore H^n(P) is the finite product of Hom(E^p,H^(p+n)(K)). Concentration of K eliminates every factor except p=-n. Since d_E=0, E^(-n), Z^(-n)(E), and H^(-n)(E) are isomorphic. The surviving projection induces the claimed isomorphism f.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluating a P-cycle on an E-cycle has zero K differential by the projection differential formula. The kernel universal property of the cycle inclusion supplies c and the first identity. The homology comparison in the preceding step is induced by this same component projection, so composing c with the K class map gives the second identity. This also handles degrees outside the support, rank zero and the zero ring.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections",
+  "def-pur-hom-complex",
+  "lem-sc-finite-free-internal-hom-exact",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "V4",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQY",
+   "place": "proof, finite-free Hom calculation, expanded using the Hom differential of Tag 0A8X"
+  },
+  "description": "Explicit expansion of the core node subargument; formalization by V4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homology of internal Hom for finite free zero differential complexes",
+   "results": "UNAVAILABLE: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of internal Hom from a bounded finite free complex with zero differential to a complex concentrated in cohomology degree zero",
+   "results": "Eight hits, including CochainComplex.HomComplex.homologyAddEquiv and CohomologyClass.homAddEquiv_apply; these concern the group-valued Hom complex, not internal sheaf Hom.",
+   "date": "2026-10-14",
+   "verdict": "No matching sheaf-valued evaluation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyEvaluation|zero.*[Hh]om.*[Ii]so; homObjFreeIso|finiteFreeInternalHomExact",
+   "results": "No Mathlib evaluation match. Source InternalHomFree gives the finite-free object iso; our FiniteFreeInternalHomExact proves exactness and basis formulas. SingleSupportedFiniteFreeHomologyIso is a one-column object iso, without evaluation compatibility, so not this statement.",
+   "date": "2026-10-14",
+   "verdict": "Reuse the exactness theorem for the finite-free factors; the finite-model evaluation calculation and its cycle identities remain to prove."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomologyEvaluationLocalIsoCore",
+  "date": "2026-10-14",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local zero-differential Koszul self-Ext calculation: Cycle-compatible evaluation for a finite-free zero-differential complex",
+   "via": [
+    "new-b2-homology-evaluation-local-iso-core",
+    "new-b2-homology-evaluation-local-iso",
+    "lem-sc-homology-evaluation-formal-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteFreeZeroHomologyEvaluation",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteFreeZeroHomologyEvaluation.lean",
+  "declaration": "CategoryTheory.finiteFreeZero_homologyEvaluation",
+  "statement": "theorem finiteFreeZero_homologyEvaluation\n    {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}\n    (R : Sheaf S CommRingCat.{u})\n    (E K : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (n : ℤ) (hK : ∀ k : ℤ, k ≠ 0 → IsZero (K.homology k))\n    (hzero : ∀ a b : ℤ, E.d a b = 0)\n    (hsupp : ∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (E.X k))\n    (hfree : ∀ k : ℤ, ∃ r : ℕ, Nonempty (E.X k ≅\n      SheafOfModules.free (ULift.{u} (Fin r)))) :\n    let P := homComplex (R := R) E K\n    let π := (Classical.choose (homComplex_projections_exists (R := R)))\n      E K n (-n) 0 (by omega)\n    ∃ f : P.homology n ⟶ SheafOfModules.homObj (R := R)\n        (E.homology (-n)) (K.homology 0),\n      IsIso f ∧ ∃ c : P.cycles n ⟶\n        SheafOfModules.homObj (R := R) (E.cycles (-n)) (K.cycles 0),\n      c ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.iCycles 0) =\n        P.iCycles n ≫ π ≫ SheafOfModules.homObjMap (R := R) (E.iCycles (-n)) (𝟙 _) ∧\n      c ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.homologyπ 0) =\n        P.homologyπ n ≫ f ≫ SheafOfModules.homObjMap (R := R) (E.homologyπ (-n)) (𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T190202-L-3224171",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T190202-L-3224171",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

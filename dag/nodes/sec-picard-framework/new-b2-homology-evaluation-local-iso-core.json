@@ -14,28 +14,42 @@
  ],
  "proof": [
   {
-   "text": "Apply the finite-free zero-differential Hom calculation and transport across the quasi-isomorphism comparison square.",
+   "text": "Let O be over-V restriction and A the over-open equivalence. Their composite is naturally isomorphic to scheme-open restriction. Use the proved moduleOverFunctor_limits_proof and moduleOverFunctor_colimits_proof from DerivedHomMayerVietoris for both opens, and Mathlib preservation under composition and natural isomorphism, to make F exact. Mathlib mapHomologicalComplexHomologyIso and map_isZero then prove F(J) has zero homology outside degree zero.",
    "uses": [
     "new-b2-homology-evaluation-definitions",
-    "def-pur-kinjective-complex",
-    "def-pc-quasi-iso-modules"
+    "lem-sc-derived-hom-mayer-vietoris"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply finiteFreeZero_homologyEvaluation to E and F(J) to get f, its invertibility, c, and both cycle identities. Apply homologyEvaluation_roof_comparison to e and the roof with these identities to get isomorphisms a,b and the evaluation square.",
+   "uses": [
+    "new-v4-finite-free-zero-homology-evaluation",
+    "new-v4-homology-evaluation-roof-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right side a.hom composed with f is invertible. Rewrite the square to make the restricted evaluation composed with b.hom invertible, then cancel b.hom using Mathlib IsIso.of_isIso_comp_right.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "new-b2-homology-evaluation-definitions",
-  "def-pur-kinjective-complex",
-  "def-pc-quasi-iso-modules"
+  "lem-sc-derived-hom-mayer-vietoris",
+  "new-v4-finite-free-zero-homology-evaluation",
+  "new-v4-homology-evaluation-roof-comparison"
  ],
  "proof_origin": {
-  "by": "G4",
-  "agent": "G4",
+  "by": "agent",
+  "agent": "V4",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "zero-differential Hom calculation"
-  }
+  },
+  "description": "Lean decomposition into a finite-model calculation and an independent restriction/roof naturality square; exactness of two-step restriction and cancellation proved in the item."
  },
  "mathlib_searches": [
   {
@@ -113,9 +127,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261013T181057-L-2599640",
+  "landing": "20261013T190202-L-3224171",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
