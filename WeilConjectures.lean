@@ -1410,7 +1410,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Preorder.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.TripleProj
@@ -1536,6 +1535,7 @@ public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
 public import WeilConjectures.Mathlib.FieldTheory.Fixed
 public import WeilConjectures.Mathlib.FieldTheory.Galois.Infinite
+public import WeilConjectures.Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Classification
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
@@ -1875,7 +1875,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
-public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingField
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
@@ -2058,6 +2057,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionMono
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
@@ -2070,7 +2070,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapZero
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap

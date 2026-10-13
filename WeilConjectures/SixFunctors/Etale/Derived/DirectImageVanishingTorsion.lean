@@ -228,6 +228,53 @@ theorem Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic {k : Type u}
     (Abelian.Ext.precompAddEquiv (Etale.upperStarFreeSheafIso Λ f W) M (n + 1)).symm.toEquiv
     ).subsingleton
 
+/-- **Vanishing of the higher direct images above twice the dimension, arbitrary target.** Let
+`k` be a separably closed field, `X` a `k`-scheme locally of finite type with `dim X ≤ d`, and
+`f : X ⟶ Y` a quasi-compact morphism to an arbitrary scheme `Y`. Let `Λ` be a coefficient ring
+such that, for every étale `X`-scheme `V`, the underlying abelian sheaves of injective sheaves of
+`Λ`-modules on `V` are acyclic. Then `R^q f_* M = 0` for every `q > 2d` and every étale sheaf `M`
+of `Λ`-modules on `X` whose restrictions to étale `X`-schemes are torsion.
+
+This is the argument of `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic`,
+which only uses `Y` through the quasi-compactness of `f`: for an affine étale `W ⟶ Y`, the scheme
+`W ×_Y X` is quasi-compact, of finite type over `k` and étale over `X`. -/
+theorem Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic_of_quasiCompact {k : Type u}
+    [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f]
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] (d : ℕ)
+    (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
+    (hI : ∀ (V : X.Etale) (I : Sheaf V.left.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      [Injective I] (m : ℕ), Subsingleton (Sheaf.H ((sheafCompose V.left.smallEtaleTopology
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj I) (m + 1)))
+    (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hM : ∀ V : X.Etale, ((sheafCompose V.left.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        ((V.hom)^*[ModuleCat.{u + 1} Λ].obj M)).IsTorsion)
+    (q : ℤ) (hq : (2 * d : ℤ) < q) :
+    IsZero (Etale.higherDirectImage Λ f q M) := by
+  obtain ⟨n, rfl⟩ : ∃ n : ℕ, q = ((n + 1 : ℕ) : ℤ) := ⟨(q - 1).toNat, by omega⟩
+  refine Etale.isZero_higherDirectImage_of_forall_isAffine_of_subsingleton f _ M fun W hW ↦ ?_
+  let V := (MorphismProperty.Over.pullback @Etale ⊤ f).obj W
+  have hV : AlgebraicGeometry.Etale V.hom := V.prop
+  -- the cohomology of the restriction of `M` to `V = W ×_Y X` vanishes above `2d`
+  have hcd : Subsingleton (Sheaf.H ((sheafCompose V.left.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        ((V.hom)^*[ModuleCat.{u + 1} Λ].obj M)) (n + 1)) := by
+    have : CompactSpace ((𝟭 Scheme.{u}).obj W.left) := by
+      change CompactSpace W.left
+      infer_instance
+    have : CompactSpace ((𝟭 Scheme.{u}).obj V.left) :=
+      QuasiCompact.compactSpace_of_compactSpace (pullback.fst W.hom f)
+    have : QuasiCompact (V.hom ≫ aX) :=
+      (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).2 inferInstance
+    exact Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed d (V.hom ≫ aX)
+      ((V.hom.topologicalKrullDim_le_of_etale).trans hX) _ (hM V) (n + 1) (by omega)
+  have : Subsingleton (Abelian.Ext.{u + 1} ((Etale.freeSheaf Λ X).obj V) M (n + 1)) :=
+    Etale.subsingleton_ext_freeSheaf_of_subsingleton_H_of_acyclic V M n (hI V) hcd
+  exact ((DerivedCategory.Plus.singleFunctorHomEquivExt.{u + 1}
+    ((f)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ Y).obj W)) M (n + 1)).trans
+    (Abelian.Ext.precompAddEquiv (Etale.upperStarFreeSheafIso Λ f W) M (n + 1)).symm.toEquiv
+    ).subsingleton
+
 /-- **Injective sheaves of `ULift ℤ`-modules are acyclic.** The underlying abelian sheaf of an
 injective étale sheaf of `ULift ℤ`-modules is injective, taking underlying abelian sheaves being
 an equivalence (`AlgebraicGeometry.Etale.isEquivalence_sheafCompose_forget₂_uliftInt`), hence it
@@ -305,6 +352,40 @@ theorem Etale.isZero_higherDirectImage_of_two_mul_lt (hΛ : IsAddTorsion Λ) {k 
   let φ := Etale.uliftIntRingHom Λ
   obtain ⟨m, hm, hm1⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.1 (hΛ (1 : Λ))
   have hz := Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic f aX aY hf d hX
+    (fun V I _ n ↦ Etale.subsingleton_H_forget₂_uliftInt_of_injective I n)
+    ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj M) (fun V ↦ ?_) q hq
+  · have hz' := IsZero.of_iso hz (Etale.restrictScalarsHigherDirectImageIso f q M)
+    rw [IsZero.iff_id_eq_zero] at hz' ⊢
+    refine (Sheaf.restrictScalars Y.smallEtaleTopology φ).map_injective ?_
+    rw [CategoryTheory.Functor.map_id, Functor.map_zero]
+    exact hz'
+  · refine Sheaf.IsTorsion.of_iso ((sheafCompose V.left.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).mapIso
+        (asIso ((Etale.upperStarRestrictScalars φ V.hom).natTrans.app M)).symm) ?_
+    refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_
+    refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨m, hm, ?_⟩
+    let y : ((V.hom)^*[ModuleCat.{u + 1} Λ].obj M).obj.obj U := x
+    change m • y = 0
+    rw [← one_smul Λ y, ← smul_assoc, hm1, zero_smul]
+
+
+/-- **Vanishing of the higher direct images above twice the dimension, torsion coefficients,
+arbitrary target.** Let `k` be a separably closed field, `X` a `k`-scheme locally of finite type
+with `dim X ≤ d`, `f : X ⟶ Y` a quasi-compact morphism to an arbitrary scheme `Y`, and `Λ` a ring
+which is torsion as an additive group. Then `R^q f_* M = 0` for every `q > 2d` and every étale
+sheaf `M` of `Λ`-modules on `X`.
+
+The proof is that of `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`, using
+`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic_of_quasiCompact`. -/
+theorem Etale.isZero_higherDirectImage_of_quasiCompact_of_two_mul_lt (hΛ : IsAddTorsion Λ)
+    {k : Type u} [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f]
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] (d : ℕ)
+    (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
+    (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (hq : (2 * d : ℤ) < q) :
+    IsZero (Etale.higherDirectImage Λ f q M) := by
+  let φ := Etale.uliftIntRingHom Λ
+  obtain ⟨m, hm, hm1⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.1 (hΛ (1 : Λ))
+  have hz := Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic_of_quasiCompact f aX d hX
     (fun V I _ n ↦ Etale.subsingleton_H_forget₂_uliftInt_of_injective I n)
     ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj M) (fun V ↦ ?_) q hq
   · have hz' := IsZero.of_iso hz (Etale.restrictScalarsHigherDirectImageIso f q M)

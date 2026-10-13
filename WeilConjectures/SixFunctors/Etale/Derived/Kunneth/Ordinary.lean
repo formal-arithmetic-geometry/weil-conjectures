@@ -739,8 +739,8 @@ theorem isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed {X : Scheme.{u}}
   have (J : Type (u + 1)) := preservesCoproducts_rightDerivedLowerStar Λ a
     (hasFiniteCohomologicalDimensionMorphism_of_isSepClosed Λ a hX) J
   let e := constantSheafEquivalenceOfIsSepClosed Λ (k := k)
-  letI : e.functor.Additive := additive_constantSheaf Λ _
-  letI : e.inverse.Additive := additive_sheafSections_obj Λ _
+  have : e.functor.Additive := additive_constantSheaf Λ _
+  have : e.inverse.Additive := additive_sheafSections_obj Λ _
   -- the constant complex functor `D(Λ) ⥤ D((Spec k)_ét, Λ)`, an equivalence
   have : (constantFunctor Λ (Spec (.of k))).IsEquivalence :=
     e.mapDerivedCategory.isEquivalence_functor
