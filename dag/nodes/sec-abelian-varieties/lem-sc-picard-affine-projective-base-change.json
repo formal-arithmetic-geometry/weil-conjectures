@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-picard-affine-projective-base-change",
+ "kind": "statement",
+ "title": "Base change of an affine K-flat structure-image model",
+ "statement": "Let $f:X\\to S$ be a flat quasi-compact separated morphism of schemes [def-weil-flat-morphism], where quasi-compact means that inverse images of quasi-compact opens are quasi-compact, and separated means that the diagonal is a closed immersion. Let $M$ be an $\\mathcal O_X$-module, $k:W\\to S$ a scheme morphism, and $U\\subset W$ an affine open. Put $R=\\Gamma(W,U)$. Assume the tensor pullback of $M$ to $X\\times_S U$ is isomorphic to its structure sheaf [def-pc-module-pullback]. Let $P$ be a cochain complex of $R$-modules with $\\operatorname{Tot}(L\\otimes_R P)$ acyclic for every acyclic cochain complex $L$ [def-pc-module-kflat-complex]. Suppose the termwise affinePerfectSheafification of $P$ represents, on the localized site over $U$, the restriction of $R(p_W)_*(q_W^*M[0])$, where $p_W:X\\times_S W\\to W$ and $q_W:X\\times_S W\\to X$ are the projections [def-pc-derived-direct-image, lem-pc-affine-perfect-module-model]. For each commutative ring $B$ and ring map $\\varphi:R\\to B$, let $P_B$ be termwise extension of scalars and let $g:\\operatorname{Spec}B\\to S$ be the composite through $\\operatorname{Spec}R\\cong U$, then $U\\hookrightarrow W$ and $k$. Then $Q(\\widetilde{P_B})\\cong R(p_g)_*\\mathcal O_{X\\times_S\\operatorname{Spec}B}[0]$ in the supplied derived category of sheaves of modules on $\\operatorname{Spec}B$ [def-pc-derived-category]. Derived categories on schemes and on all localized open sites are supplied in universe $v+1$; rings, schemes and modules are in universe $v$. No boundedness, projectivity, termwise finite generation, or structure-unit hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "lem-pc-affine-perfect-module-model",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-flat-morphism",
+  "def-pc-module-kflat-complex"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0A1D, 08DW(2), 08FE and 06Z0; geometric model-comparison step of the structure-image argument of Tag 0BF2"
+ },
+ "proof": [
+  {
+   "text": "Apply the exact over equivalence to hrep, cancelling the inverse over equivalence in affinePerfectSheafification. Derived direct image commutes with restriction to U. Identify the restriction of X times_S W to U with X times_S U by its pullback universal property, and use tensor-pullback composition to carry M to the supplied trivialization. Transport along U isomorphic to Spec R. This identifies Q(tilde P) with the derived structure direct image over Spec R.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-affine-localized-site-derived-transport",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the quasi-compact separated flat morphism X times_S U to U along Spec B to Spec R to U. Its structure sheaf is invertible. Apply isIso_derivedBaseChange_of_flat_invertible to that structure module. Derived pullback of the structure sheaf is its ordinary pullback, and the tensor-unit isomorphism identifies it with the structure sheaf of the new fibre product. The canonical iterated pullback isomorphism identifies the resulting direct image with R(pullback.snd f g)_*O. No perfectness conclusion or finite presentation hypothesis is needed.",
+   "uses": [
+    "lem-pc-flat-invertible-canonical-derived-base-change",
+    "lem-pc-flat-module-canonical-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine K-flat pullback formula derivedPullback_tilde_kFlat_natIso to the supplied K-flat complex P and ring map phi. It identifies the derived pullback of Q(tilde P) with Q(tilde PB), where PB is ordinary termwise scalar extension. Compose this isomorphism with the pullback of the identification in step 1 and the base-change isomorphism of step 2. This gives the displayed derived isomorphism without any structure-unit hypothesis or cohomological assertion.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-localized-site-derived-transport",
+  "lem-pc-flat-invertible-canonical-derived-base-change",
+  "lem-pc-flat-module-canonical-derived-pullback",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0A1D, 08DW(2), 08FE and 06Z0; exact open-site transport and canonical flat-invertible base change, without perfectness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homology of a bounded projective affine module model after arbitrary scalar extension is global sections of the base changed derived direct image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a K-flat complex on an affine open representing a proper flat derived structure direct image, sheafification of its scalar extension represents the derived direct image after arbitrary affine base change",
+   "results": "8 hits: Scheme.Hom.flat_appLE, Flat.flat_appLE, Flat.flat_of_affine_subset, flat_iff, Flat.instHasRingHomPropertyFlat, Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.sheafificationCompPullback. No derived structure-image model comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic flatness and underived adjunction statements only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|isKProjective_of_projective|tilde.toTildeΓNatIso",
+   "results": "5 hits, including Mathlib/AlgebraicGeometry/Modules/Tilde.lean:338,904 and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:113,128. Searched project modules as well; AffineDerivedPullbackTensorTilde supplies the scalar part, DerivedDirectImageOpenRestriction supplies the open part, but neither composes them with the supplied representation and the proper structure base change.",
+   "date": "2026-10-13",
+   "verdict": "No exact comparison; use existing comparisons in the proof plan"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveHomology",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2 affine projective representation: model comparison under arbitrary scalar extension before the universal low-homology calculation",
+   "via": [
+    "lem-sc-picard-affine-structure-projective-homology",
+    "lem-sc-picard-affine-structure-projective-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardAffineProjectiveBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardAffineProjectiveBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_affine_projective_base_change",
+  "statement": "theorem picard_affine_projective_base_change\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [QuasiCompact f] [IsSeparated f]\n    (M : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)\n    (U : W.Opens) (hU : IsAffineOpen U)\n    (htrivial : Nonempty\n      ((Modules.tensorPullback (pullback.fst f (U.ι ≫ k))).obj M ≅\n        SheafOfModules.unit (pullback f (U.ι ≫ k)).ringCatSheaf))\n    (P : CochainComplex (ModuleCat.{v} (W.presheaf.obj (.op U))) ℤ)\n    (hP : ∀ L : CochainComplex (ModuleCat.{v} (W.presheaf.obj (.op U))) ℤ,\n      L.Acyclic → (CochainComplex.mapBifunctor L P\n        (MonoidalCategory.curriedTensor _)).Acyclic)\n    (hrep : Nonempty ((SheafOfModules.overFunctor.{v}\n        (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n        ((schemeDerivedDirectImage (pullback.snd f k)).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n            ((Modules.tensorPullback (pullback.fst f k)).obj M))) ≅\n        DerivedCategory.Q.obj\n          (((affinePerfectSheafification W U hU).mapHomologicalComplex (.up ℤ)).obj P))) :\n    ∀ (B : Type v) [CommRing B] (φ : W.presheaf.obj (.op U) →+* B),\n      let g : Spec (.of B) ⟶ S :=\n        Spec.map (CommRingCat.ofHom φ) ≫ hU.isoSpec.inv ≫ U.ι ≫ k\n      Nonempty\n        (DerivedCategory.Q.obj\n          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n            (@id (ModuleCat.{v} B ⥤\n              SheafOfModules.{v} (moduleRings (Spec (.of B)).toRingedSpace))\n              (tilde.functor (.of B))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj\n                (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P)) ≅\n          (schemeDerivedDirectImage (pullback.snd f g)).obj\n            ((DerivedCategory.singleFunctor\n              (SheafOfModules.{v} (moduleRings (pullback f g).toRingedSpace)) 0).obj\n                (SheafOfModules.unit (pullback f g).ringCatSheaf)))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T155936-L-1303520",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T155936-L-1303520",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
