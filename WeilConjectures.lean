@@ -2142,6 +2142,7 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ProperPushforwar
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Braided
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.CounitStructure
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.FlatModuleCat
@@ -2187,6 +2188,7 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyExact
+public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
@@ -2195,6 +2197,7 @@ public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.DenseOpen
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.DualIrreducible
+public import WeilConjectures.WeilSheaf.ExtensionByZero
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.FiniteLength
 public import WeilConjectures.WeilSheaf.Finiteness
@@ -2236,6 +2239,7 @@ public import WeilConjectures.WeilSheaf.StalkFrobenius
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.StalkMonoidal
+public import WeilConjectures.WeilSheaf.StalkOpenImmersion
 public import WeilConjectures.WeilSheaf.StalkPairing
 public import WeilConjectures.WeilSheaf.StalkTateTwist
 public import WeilConjectures.WeilSheaf.StalkTensor
