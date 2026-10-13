@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-affine-kprojective-hom-complex",
+ "kind": "statement",
+ "title": "Affine K-projective Hom-complex representatives",
+ "statement": "Let $A$ be a commutative ring, with specified derived categories of $A$-modules and of module sheaves on $X=\\operatorname{Spec}A$ [def-weil-abstract-derived-category, def-pc-derived-category]. Let $M$ be an arbitrary integer cochain complex of $A$-modules, and let $T$ be termwise associated sheaf (the functor koszulOpenTilde of [def-sc-koszul-open-system]). A complex $L$ is K-projective if every chain map from $L$ into an acyclic complex is null-homotopic. There are additive equivalences $a_{L,h_L}:\\operatorname{Hom}(Q(TL),Q(TM))\\simeq H^0(\\operatorname{Hom}^{\\bullet}_A(L,M))$ for all K-projective $L$ and proofs $h_L$ of K-projectivity, where the module Hom complex is [def-sc-module-total-hom-complex]. For K-projective $L,L'$, a chain map $g:L'\\to L$, and any Hom-complex chain map $t$ with $t^n(z)=\\operatorname{ofHom}(g)\\circ z$ in every degree, $a_{L',h_{L'}}(Q(Tg)\\circ\\phi)=H^0(t)(a_{L,h_L}(\\phi))$. Moreover, for every $\\phi:Q(TL)\\to Q(TM)$ there are a chain map $g:L\\to M$ and a cycle $z\\in Z^0(\\operatorname{Hom}^{\\bullet}_A(L,M))$ such that $Q(Tg)=\\phi$, the inclusion of $z$ into degree-zero cochains is $\\operatorname{ofHom}(g)$, and $a_{L,h_L}(\\phi)=\\pi(z)$ for the canonical homology projection.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "perfect-lemma-affine-compare-bounded, derived tilde equivalence; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:43-48 (Qh_map_bijective) and HomotopyCategory/HomComplexCohomology.lean:170-218 (homAddEquiv and homologyAddEquiv)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-category",
+  "def-sc-koszul-open-system",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply the core affine equivalence and its termwise tilde comparison. Full faithfulness of its functor, followed by the full quasi-coherent inclusion, gives an additive bijection between Hom(Q(TL),Q(TM)) and Hom(Q(L),Q(M)), natural under all chain-map precompositions.",
+   "uses": [
+    "new-affine-qcoh-derived-equivalence-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a K-projective L, maps to the acyclic cone of a quasi-isomorphism and its shifts are null-homotopic. The exact Hom sequence of the cone therefore makes postcomposition with a quasi-isomorphism a bijection on homotopy classes out of L. The localization universal property identifies these classes with Hom(Q(L),Q(M)). Degree-zero cochains satisfying d_M g = g d_L are precisely chain maps; the equation delta(h)=g-g′ is precisely a chain homotopy. Thus the additive quotient is the homology of the module Hom complex. This is the quotient represented by Mathlib Qh_map_bijective, homAddEquiv and homologyAddEquiv; forgetting the A-action preserves the cycles and quotient.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition with g sends a representative cycle to ofHom(g) composed with that cycle. The hypothesis on t gives the same cochain, so it gives the same homology class; this proves naturality. Every homology class lifts through the surjective homology projection to a cycle; turn the cycle into its chain map and transport through the two bijections to obtain the three representative identities. These constructions include arbitrary unbounded M and all zero cases.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category",
+  "new-affine-qcoh-derived-equivalence-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y2",
+  "document": "https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "perfect-lemma-affine-compare-bounded, derived tilde equivalence; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:43-48 (Qh_map_bijective) and HomotopyCategory/HomComplexCohomology.lean:170-218 (homAddEquiv and homologyAddEquiv)",
+  "note": "Generic quotient and chain-level portions of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine derived morphisms from a K-projective module complex are degree zero linear Hom complex cohomology with chain map representatives",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a bounded projective complex is degree zero cohomology of its Hom complex, naturally under precomposition",
+   "results": "Found 8 hits: CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.ProjectiveResolution.extMk, CategoryTheory.Abelian.Ext, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.hom'",
+   "date": "2026-10-13",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Hh]om|[Hh]om.*homology",
+   "results": "Found 25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean",
+   "date": "2026-10-13",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenHomHomologyComparison",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper-flat support argument, affine Koszul Hom identification: parent steps 1 and 2, separated into generic affine K-projective quotient machinery.",
+   "via": [
+    "lem-sc-koszul-open-hom-homology-comparison",
+    "lem-sc-koszul-open-hom-restriction-eventually-zero",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKProjectiveHomComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKProjectiveHomComplex.lean",
+  "declaration": "AlgebraicGeometry.affineKProjective_homComplex",
+  "statement": "theorem affineKProjective_homComplex (A : Type u) [CommRing A]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)]\n    (M : CochainComplex (ModuleCat.{u} A) ℤ) :\n    let T := (koszulOpenTilde A).mapHomologicalComplex (.up ℤ)\n    ∃ a : ∀ (L : CochainComplex (ModuleCat.{u} A) ℤ) (_hL : L.IsKProjective),\n        (DerivedCategory.Q.obj (T.obj L) ⟶ DerivedCategory.Q.obj (T.obj M)) ≃+\n          (CochainComplex.moduleHomComplex L M).homology 0,\n      (∀ (L L' : CochainComplex (ModuleCat.{u} A) ℤ)\n        (hL : L.IsKProjective) (hL' : L'.IsKProjective) (g : L' ⟶ L)\n        (t : CochainComplex.moduleHomComplex L M ⟶ CochainComplex.moduleHomComplex L' M),\n        (∀ (n : ℤ) (z : CochainComplex.HomComplex.Cochain L M n),\n          (t.f n) z = (CochainComplex.HomComplex.Cochain.ofHom g).comp z (zero_add n)) →\n        ∀ φ : DerivedCategory.Q.obj (T.obj L) ⟶ DerivedCategory.Q.obj (T.obj M),\n          a L' hL' (DerivedCategory.Q.map (T.map g) ≫ φ) =\n            HomologicalComplex.homologyMap t 0 (a L hL φ)) ∧\n      ∀ (L : CochainComplex (ModuleCat.{u} A) ℤ) (hL : L.IsKProjective)\n        (φ : DerivedCategory.Q.obj (T.obj L) ⟶ DerivedCategory.Q.obj (T.obj M)),\n        ∃ (g : L ⟶ M) (z : (CochainComplex.moduleHomComplex L M).cycles 0),\n          DerivedCategory.Q.map (T.map g) = φ ∧\n          (CochainComplex.moduleHomComplex L M).iCycles 0 z =\n            CochainComplex.HomComplex.Cochain.ofHom g ∧\n          a L hL φ = (CochainComplex.moduleHomComplex L M).homologyπ 0 z",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T082425-L-1652075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T082425-L-1652075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

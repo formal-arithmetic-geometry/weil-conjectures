@@ -6,9 +6,10 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
-import Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
-import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
+import Sheaf.AlgebraicGeometry.AffineKProjectiveHomComplex
+import Sheaf.AlgebraicGeometry.KoszulChainRestrictionFormula
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # The stagewise derived Hom identification for the Koszul comparison
 
@@ -24,6 +25,10 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+set_option maxHeartbeats 1000000 in
+-- Affine counits and the nested derived restriction require extra elaboration heartbeats.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived Hom from each Koszul tail is its Hom-complex cohomology, naturally in
 power transitions. The canonical comparison sends a restriction-zero arrow to zero.
 This statement does not assert exactness of a filtered colimit, injectivity of the
@@ -89,6 +94,93 @@ theorem koszulOpenHom_homology_comparison
           HomologicalComplex.homologyMap (D.map (homOfLE h)) 0 (α a φ)) ∧
       ∀ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ E.obj), R.map φ = 0 →
         β (HomologicalComplex.homologyMap (colimit.ι D e) 0 (α e φ)) = 0 := by
-  sorry
+  classical
+  dsimp only
+  let M := ((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F
+  let T := (koszulOpenTilde A).mapHomologicalComplex (.up ℤ)
+  let L (e : ℕ) := (koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat
+  let D := koszulCechHomDiagram A r f M
+  let j (e : ℕ) := koszulCechHomObjIso A r f M e
+  let s : T.obj M ≅ F := HomologicalComplex.Hom.isoOfComponents
+    (fun n ↦ by
+      have : (F.X n).IsQuasicoherent := hF n
+      have : IsIso (Scheme.Modules.fromTildeΓ (R := .of A) (F.X n)) :=
+        Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (R := .of A) (F.X n)
+      exact asIso (Scheme.Modules.fromTildeΓ (R := .of A) (F.X n)))
+    (fun n m _ ↦ by
+      change Scheme.Modules.fromTildeΓ (R := .of A) (F.X n) ≫ F.d n m = _
+      exact ((Scheme.Modules.fromTildeΓNatTrans (R := .of A)).naturality (F.d n m)).symm)
+  let q := DerivedCategory.Q.mapIso s ≪≫ eF
+  have hL (e : ℕ) : CochainComplex.IsKProjective (L e) := by
+    let : ∀ n, Projective ((koszulOpenTail A r f e).X n) := fun n ↦ by
+      change Projective (ModuleCat.of A (⋀[A]^(n + 1) (Fin r →₀ A)))
+      exact ModuleCat.projective_of_free (Module.Free.chooseBasis A _)
+    infer_instance
+  obtain ⟨a, ha, hrep⟩ := affineKProjective_homComplex A M
+  let p (e : ℕ) : (koszulOpenObject A r f e ⟶ E.obj) ≃+
+      (DerivedCategory.Q.obj (T.obj (L e)) ⟶ DerivedCategory.Q.obj (T.obj M)) :=
+    { toFun := fun φ ↦ φ ≫ q.inv
+      invFun := fun φ ↦ φ ≫ q.hom
+      left_inv := fun φ ↦ by simp
+      right_inv := fun φ ↦ by simp
+      map_add' := fun φ ψ ↦ by simp only [Preadditive.add_comp] }
+  let k (e : ℕ) : (CochainComplex.moduleHomComplex (L e) M).homology 0 ≃+
+      (D.obj e).homology 0 := ((HomologicalComplex.homologyFunctor
+    (ModuleCat.{u} A) (.up ℤ) 0).mapIso (j e).symm).toLinearEquiv.toAddEquiv
+  let α (e : ℕ) : (koszulOpenObject A r f e ⟶ E.obj) ≃+ (D.obj e).homology 0 :=
+    (p e).trans ((a (L e) (hL e)).trans (k e))
+  refine ⟨α, ?_, ?_⟩
+  · intro x y h φ
+    let g := HomologicalComplex.extendMap (koszulOpenTransition A r f x y h)
+      ComplexShape.embeddingDownNat
+    let t := (j x).inv ≫ D.map (homOfLE h) ≫ (j y).hom
+    have ht (n : ℤ) (z : CochainComplex.HomComplex.Cochain (L x) M n) :
+        (t.f n) z = (CochainComplex.HomComplex.Cochain.ofHom g).comp z (zero_add n) := by
+      exact (koszulCechHomDiagram_exists A r f M).choose_spec.2 x y h n z
+        ((koszulCechHomDiagram_exists A r f M).choose_spec.1 x)
+        ((koszulCechHomDiagram_exists A r f M).choose_spec.1 y)
+    have hh := ha (L x) (L y) (hL x) (hL y) g t ht (p x φ)
+    have hp : p y (koszulOpenMap A r f x y h ≫ φ) =
+        DerivedCategory.Q.map (T.map g) ≫ p x φ := by
+      exact Category.assoc _ _ _
+    calc
+      α y (koszulOpenMap A r f x y h ≫ φ) =
+          (k y) (a (L y) (hL y) (DerivedCategory.Q.map (T.map g) ≫ p x φ)) :=
+        congrArg ((a (L y) (hL y)).trans (k y)) hp
+      _ = (k y) (HomologicalComplex.homologyMap t 0 (a (L x) (hL x) (p x φ))) :=
+        congrArg (k y) hh
+      _ = HomologicalComplex.homologyMap (D.map (homOfLE h)) 0 (α x φ) := by
+        change (HomologicalComplex.homologyMap t 0 ≫
+          HomologicalComplex.homologyMap (j y).inv 0) _ =
+            (HomologicalComplex.homologyMap (j x).inv 0 ≫
+              HomologicalComplex.homologyMap (D.map (homOfLE h)) 0) _
+        congr 1
+        rw [← HomologicalComplex.homologyMap_comp, ← HomologicalComplex.homologyMap_comp]
+        simp [t]
+  · intro e φ hφ
+    obtain ⟨g, z, hg, hz, hclass⟩ := hrep (L e) (hL e) (p e φ)
+    have hφrep : DerivedCategory.Q.map (T.map g) ≫ q.hom = φ := by
+      rw [hg]
+      change (φ ≫ q.inv) ≫ q.hom = φ
+      simp
+    obtain ⟨b, hb⟩ := koszulChain_restriction_formula A r f F hF E eF s (fun _ ↦ by simp [s])
+    have hφrep' : DerivedCategory.Q.map (T.map g) ≫
+        DerivedCategory.Q.map s.hom ≫ eF.hom = φ := hφrep
+    have hzero := hb e g z hz 0 (by
+      rw [comp_zero]
+      exact ((congrArg _ hφrep').trans hφ).symm)
+    rw [map_zero] at hzero
+    have hα : α e φ = HomologicalComplex.homologyMap (j e).inv 0
+        ((CochainComplex.moduleHomComplex (L e) M).homologyπ 0 z) := by
+      change (k e) (a (L e) (hL e) (p e φ)) = _
+      rw [hclass]
+      rfl
+    exact (congrArg (fun x : (D.obj e).homology 0 ↦
+      (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0).app
+        (koszulCechHomColimit A r f M)).inv ≫
+        (DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0).map
+          (koszulCechDerivedComparison A r f F ≫
+            (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor.map eF.hom))
+              (HomologicalComplex.homologyMap (colimit.ι D e) 0 x)) hα).trans hzero.symm
 
 end AlgebraicGeometry

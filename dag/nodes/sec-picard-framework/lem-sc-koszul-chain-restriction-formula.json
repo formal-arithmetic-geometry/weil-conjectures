@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-koszul-chain-restriction-formula",
+ "kind": "statement",
+ "title": "Chain-level restriction formula for Koszul Hom comparison",
+ "statement": "Let $A$ be a commutative ring, $r\\geq0$, $f:\\{0,\\ldots,r-1\\}\\to A$, $X=\\operatorname{Spec}A$, $U=\\bigcup_jD(f_j)$, and let $I_e$, the structure object $O$, and the augmentation $u_e:I_e\\to O$ be [def-sc-koszul-open-system]. Specify the derived categories required to form derived restriction $R$ to $U$ and module derived sections. Let $F$ be a termwise quasi-coherent integer cochain complex of module sheaves on $X$, $E\\in D_{QCoh}(X)$ [def-pc-derived-category], and $e_F:Q(F)\\simeq E$. Put $M=\\Gamma(X,F)$ and let $s:T(M)\\simeq F$ be an isomorphism whose component in every degree is the canonical tilde/global-section counit. Let $D$ be the module Koszul Hom diagram, $C$ its colimit, $j_e:D_e\\simeq\\operatorname{Hom}^{\\bullet}_A(L_e,M)$ its specified object isomorphism for the extended module tail $L_e$, and let $\\beta:H^0(C)\\to H^0(R\\Gamma_A(U,E))$ be the localization/homology comparison inverse followed by the canonical Koszul-to-Cech-derived-sections comparison and $R\\Gamma_A(U,e_F)$ [def-sc-koszul-cech-comparison-construction]. There is an additive equivalence $b:\\operatorname{Hom}(R(O),R(E))\\simeq H^0(R\\Gamma_A(U,E))$ such that for every $e$, chain map $g:L_e\\to M$, cycle $z$ whose inclusion is $\\operatorname{ofHom}(g)$, and arrow $\\psi:R(O)\\to R(E)$ satisfying $R(u_e)\\circ\\psi=R(Q(Tg)\\circ Q(s)\\circ e_F)$, one has $b(\\psi)=\\beta(H^0(\\iota_e)(H^0(j_e^{-1})(\\pi(z))))$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08D1",
+  "place": "perfect-lemma-alternating-cech-complex-complex, signed Hom-to-Cech identification; Equation perfect-equation-comparison (Tag 08DC), proof of perfect-proposition-represent-cohomology-class-on-open (Tag 08DD)"
+ },
+ "stmt_deps": [
+  "def-sc-koszul-open-system",
+  "def-pc-derived-category",
+  "def-sc-koszul-cech-comparison-construction"
+ ],
+ "proof": [
+  {
+   "text": "Use evaluation at one for derived Hom from the structure sheaf on U. Identify the restricted chosen structure object with that structure sheaf and restrict scalars from Gamma(U,O_U) to A. This gives the additive equivalence b; postcompose along e_F to give its target E.",
+   "uses": [
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the cocone formula on the actual chain map g: on the intersection J its value is evaluation on the ordered exterior basis, divided by the generator product to exponent e+1, with the specified totalization sign. The canonical counit condition on s identifies this with the sheaf evaluation of Tg. On D(f_j), exterior multiplication by the jth generator divided by f_j^(e+1) contracts the full Koszul complex. Applying the chain-map identity to that contraction shows that inverse augmentation followed by Tg has exactly these localized values, including the signs. Agreement on intersections and the Cech-derived comparison give the equality in derived sections. The equation imposed on psi determines this inverse-augmentation composite, by lem-sc-affine-perfect-koszul-principal-unit-iso at exponent e+1, since its shifted tail and augmentation agree with the open-system definitions and the subsequent overEquiv preserves isomorphisms.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "def-sc-koszul-cech-comparison-construction",
+    "lem-sc-affine-perfect-koszul-principal-unit-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass the equality to H^0. The condition on z identifies its projection pi(z) with the class of g; j_e inverse transports it to D_e, and the cocone leg factors as comparison composed with iota_e. The inverse localization/homology comparison gives exactly beta as displayed. Evaluation at one yields b(psi). For r=0, zero ring, F=0, and g=0 the same constructions are zero and the formula holds.",
+   "uses": [
+    "def-sc-koszul-cech-comparison-construction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-cech-comparison-construction",
+  "def-sc-koszul-open-system",
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "lem-sc-affine-perfect-koszul-principal-unit-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y2",
+  "document": "https://stacks.math.columbia.edu/tag/08D1",
+  "place": "perfect-lemma-alternating-cech-complex-complex, signed Hom-to-Cech identification; Equation perfect-equation-comparison (Tag 08DC), proof of perfect-proposition-represent-cohomology-class-on-open (Tag 08DD)",
+  "note": "Generic quotient and chain-level portions of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul to Cech comparison on chain map cohomology agrees with restriction followed by inverse augmentation and evaluation at one",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul to Cech comparison on chain map cohomology agrees with restriction followed by inverse augmentation and evaluation at one",
+   "results": "Found 8 generic group-cohomology/cochain-comparison hits; no Koszul restriction formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul|Koszul|Cech",
+   "results": "Found 2 hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-13",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenHomHomologyComparison",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper-flat support argument, canonical restriction formula: parent step 3, evaluated only on actual module chain maps and their cycles.",
+   "via": [
+    "lem-sc-koszul-open-hom-homology-comparison",
+    "lem-sc-koszul-open-hom-restriction-eventually-zero",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulChainRestrictionFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulChainRestrictionFormula.lean",
+  "declaration": "AlgebraicGeometry.koszulChain_restriction_formula",
+  "statement": "theorem koszulChain_restriction_formula\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)]\n    (F : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent)\n    (E : schemeDerivedQCohCategory (Spec (.of A)))\n    (eF : DerivedCategory.Q.obj F ≅ E.obj)\n    (s : ((koszulOpenTilde A).mapHomologicalComplex (.up ℤ)).obj\n      (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F) ≅ F)\n    (hs : ∀ n : ℤ, s.hom.f n = Scheme.Modules.fromTildeΓ (R := .of A) (F.X n)) :\n    let R := ((SheafOfModules.overFunctor.{u}\n      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{u}\n          ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))\n        (D := SheafOfModules.{u}\n          (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))\n        (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory\n    let M := ((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F\n    let D := koszulCechHomDiagram A r f M\n    let C := koszulCechHomColimit A r f M\n    let β := ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0).app C).inv ≫\n      (DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0).map\n        (koszulCechDerivedComparison A r f F ≫\n          (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor.map eF.hom)\n    ∃ b : (R.obj (koszulOpenStructure A) ⟶ R.obj E.obj) ≃+\n        (DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0).obj\n          ((affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor.obj E.obj),\n      ∀ (e : ℕ)\n        (g : (koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat ⟶ M)\n        (z : (CochainComplex.moduleHomComplex\n          ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat) M).cycles 0),\n        (CochainComplex.moduleHomComplex\n          ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat) M).iCycles 0 z =\n            CochainComplex.HomComplex.Cochain.ofHom g →\n        ∀ ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E.obj,\n          R.map (koszulOpenUnit A r f e) ≫ ψ =\n            R.map (DerivedCategory.Q.map\n              (((koszulOpenTilde A).mapHomologicalComplex (.up ℤ)).map g) ≫\n                DerivedCategory.Q.map s.hom ≫ eF.hom) →\n          b ψ = β (HomologicalComplex.homologyMap (colimit.ι D e) 0\n            (HomologicalComplex.homologyMap (koszulCechHomObjIso A r f M e).inv 0\n              ((CochainComplex.moduleHomComplex\n                ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat) M).homologyπ\n                  0 z)))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T082425-L-1652075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T082425-L-1652075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

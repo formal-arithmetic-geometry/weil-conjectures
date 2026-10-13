@@ -14,36 +14,41 @@
  ],
  "proof": [
   {
-   "text": "Termwise affine quasi-coherence recovers F from the associated sheaf of its A-module section complex. Full faithfulness of the core affine derived equivalence identifies Hom from each derived sheaf tail with Hom in D(A) from its module tail, transporting the target through the specified isomorphism.",
-   "uses": [
-    "new-affine-qcoh-derived-equivalence-core"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Each extended tail is bounded above with finite free terms, hence K-projective. Derived arrows out of it are homotopy classes of chain maps, equivalently degree-zero Hom-complex cohomology. Use koszulCechHomObjIso to transport to the actual chosen diagram object. These additive identifications commute with the precomposition transition formula defining koszulCechHomDiagram.",
+   "text": "Construct the termwise affine counit isomorphism s using Mathlib Scheme.Modules.fromTildeGamma for the quasi-coherent terms of F, with naturality giving its complex compatibility. Let q=Q(s) followed by eF. The module tail is K-projective: each exterior-power term is free and hence projective, and extension of the natural-number chain complex is strictly bounded above.",
    "uses": [
     "lem-sc-bounded-above-projective-kprojective"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "On every principal intersection J, evaluation of a chain representative on the exterior generator followed by division by the product of f_j to the stage exponent is restriction followed by the inverse restricted augmentation. The prescribed totalization sign is exactly the sign converting the negative tail differential to the alternating Cech differential. The derived Cech comparison and evaluation at one identify this class with the displayed beta image. A zero restricted arrow has zero image. Empty cover, zero ring, zero F and zero phi give zero groups or classes; no regularity of the sequence or boundedness of the target is used.",
+   "text": "Apply affineKProjective_homComplex to M. Postcomposition with q inverse transports Hom(I_e,E) to Hom(Q(T(L_e)),Q(T(M))); then transport homology back through koszulCechHomObjIso inverse to define alpha_e as a composite of additive equivalences. Conjugate D.map by the object isomorphisms. The formula in koszulCechHomDiagram_exists is the precomposition formula required by the generic theorem. Its naturality followed by homologyMap_comp and cancellation of j_y with its inverse proves the transition identity.",
    "uses": [
-    "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+    "lem-sc-affine-kprojective-hom-complex",
+    "def-sc-koszul-cech-comparison-construction"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For phi, use the generic representative clause to obtain a chain map g and cycle z, whose homology projection is the identified class. Cancel q inverse with q to show Q(Tg) followed by q equals phi. Apply koszulChain_restriction_formula with psi=0: the augmentation equation follows from comp_zero and R.map(phi)=0. Since b is additive b(0)=0. Transport its resulting equality along the class identity for alpha_e and reverse it to obtain the required zero.",
+   "uses": [
+    "lem-sc-affine-kprojective-hom-complex",
+    "lem-sc-koszul-chain-restriction-formula"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "def-sc-koszul-cech-comparison-construction",
+  "lem-sc-affine-kprojective-hom-complex",
   "lem-sc-bounded-above-projective-kprojective",
-  "new-affine-qcoh-derived-equivalence-core"
+  "lem-sc-koszul-chain-restriction-formula"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Proposition 36.9.5, Tag 08DD, stagewise Hom identification; Equation 36.9.4.1, Tag 08DC, canonical restriction formula"
+  "by": "agent",
+  "group": "Y2",
+  "document": "https://stacks.math.columbia.edu/tag/08DD",
+  "place": "Stagewise derived Hom identification and restriction comparison, through generic affine representatives and the chain-level fraction formula",
+  "note": "Compiled decomposition into two strictly separate reusable statements; no target or existing signature changed."
  },
  "mathlib_searches": [
   {
@@ -116,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261013T054230-L-446928",
+  "landing": "20261013T082425-L-1652075",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
