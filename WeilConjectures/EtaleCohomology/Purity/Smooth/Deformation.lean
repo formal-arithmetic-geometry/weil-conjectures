@@ -151,6 +151,7 @@ theorem exists_nonempty_iso_twistShift_of_leftDerivedUpperStar_iso {U T : Scheme
         (_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app _) ≪≫
     ((pointSmallEtale x').uliftSheafFiberIso _).symm.app _ ≪≫ sheafFiberUnitIso _ x'⟩
 
+omit [HasTateTwist Λ] in
 /-- Blueprint `lem-pur-dnc-section-geometry`: Geometry of the deformation
 
 *Base change of section invariants*, the input of the two fibre identifications
@@ -238,6 +239,7 @@ include D in
 theorem hasInvertibleExponent_scheme : HasInvertibleExponent Λ D.scheme :=
   HasInvertibleExponent.of_hom (D.proj ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B)
 
+omit [HasTateTwist Λ] in
 /-- The family object is ⊗-invertible: `ω_{g̃}` is by cohomological smoothness of the smooth
 separated `g̃` (`sk-prop-cohsm` (a)), and derived pullback along `s̃` preserves invertibility. -/
 theorem isInvertible_familyObject :
@@ -248,6 +250,7 @@ theorem isInvertible_familyObject :
 
 variable [HasCompactification g]
 
+omit [HasTateTwist Λ] in
 /-- The fibre of the family at `t = 1` is the section invariant of `(g, s)`
 (`lem-pur-dnc-section-geometry` (1)): `Li₁^* F ≅ 𝒞(g, s)`, by base change for `g̃` along the
 unit section. -/

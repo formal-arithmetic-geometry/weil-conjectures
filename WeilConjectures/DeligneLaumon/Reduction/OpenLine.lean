@@ -46,6 +46,10 @@ universe u
 
 open CategoryTheory
 
+/- Through `Mathlib.AlgebraicGeometry.Group.Affine`, `Spec k₀` is also an object over itself via
+`specOverSpec`; prefer the identity structure `CategoryTheory.instOverClass`. -/
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]

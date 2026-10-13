@@ -194,18 +194,10 @@ theorem jordanHolder (s₁ s₂ : ρ.CompositionSeries) :
     ∃ e : Fin s₁.length ≃ Fin s₂.length, ∀ i, Nonempty ((s₁.factor i).Equiv (s₂.factor (e i))) := by
   obtain ⟨e, he⟩ := _root_.CompositionSeries.jordan_holder s₁.series s₂.series
     (s₁.head_eq.trans s₂.head_eq.symm) (s₁.last_eq.trans s₂.last_eq.symm)
-  refine ⟨e, fun i ↦ ?_⟩
-  refine JordanHolderLattice.Iso.rel
+  exact ⟨e, fun i ↦ JordanHolderLattice.Iso.rel
     (fun X Y ↦ Nonempty ((X.2.subquotient X.1).Equiv (Y.2.subquotient Y.1)))
     ⟨Representation.Equiv.refl _⟩ (fun ⟨f⟩ ↦ ⟨f.symm⟩) (fun ⟨f⟩ ⟨g⟩ ↦ ⟨f.trans g⟩)
-    (fun {x y} _ ↦ ⟨(Subrepresentation.subquotientEquivOfIntertwiningMap (.id ρ)
-      (U := x ⊓ y) (S := y) (U' := x) (S' := x ⊔ y)
-      (fun z hz ↦ le_sup_right (a := x) hz) (fun z _ hz ↦ (Subrepresentation.mem_inf.1 hz).1)
-      (fun z hzy hzx ↦ Subrepresentation.mem_inf.2 ⟨hzx, hzy⟩) fun w hw ↦ ?_).symm⟩) (he i)
-  obtain ⟨a, ha, b, hb, rfl⟩ := Submodule.mem_sup.1 hw
-  refine ⟨b, hb, ?_⟩
-  rw [Representation.IntertwiningMap.id_apply, sub_add_cancel_right]
-  exact x.toSubmodule.neg_mem ha
+    (fun {x y} _ ↦ ⟨(Subrepresentation.subquotientSupEquiv x y).symm⟩) (he i)⟩
 
 end CompositionSeries
 
