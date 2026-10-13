@@ -5,6 +5,7 @@ Authors: SHEAF group X3
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 /-! # Composition of inverse images and coefficient units
 
 Source: Stacks Project, Section 01F7, functoriality of pullback.
@@ -63,6 +64,43 @@ theorem coefficientUnit_comp (g : Z ⟶ Y) (f : Y ⟶ X) (M : X.Modules) :
         coefficientUnit g ((pullback f).obj M) ≫
         (SheafOfModules.toSheaf Z.ringCatSheaf).map ((pullbackComp g f).hom.app M) =
       (invImageComp g f).hom.app ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) ≫
-        coefficientUnit (g ≫ f) M := by sorry
+        coefficientUnit (g ≫ f) M := by
+  let af := TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} f.base
+  let ag := TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} g.base
+  let ac := TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} (g ≫ f).base
+  apply (cancel_mono ((SheafOfModules.toSheaf Z.ringCatSheaf).map
+    ((pullbackComp g f).inv.app M))).1
+  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+  erw [(SheafOfModules.toSheaf Z.ringCatSheaf).map_id, Category.comp_id]
+  have hc := unit_conjugateEquiv_symm ac (af.comp ag) (𝟙 _)
+    ((SheafOfModules.toSheaf X.ringCatSheaf).obj M)
+  change ac.unit.app _ ≫ 𝟙 _ =
+    (af.comp ag).unit.app _ ≫ _ at hc
+  erw [Category.comp_id] at hc
+  apply ((af.comp ag).homEquiv _ _).injective
+  have hl : (af.comp ag).homEquiv _ _
+      ((invImage g).map (coefficientUnit f M) ≫ coefficientUnit g _) =
+      (SheafOfModules.toSheaf X.ringCatSheaf).map (pullbackUnit f M) ≫
+        (TopCat.Sheaf.pushforward AddCommGrpCat f.base).map
+          ((SheafOfModules.toSheaf Y.ringCatSheaf).map (pullbackUnit g _)) := by
+    erw [Adjunction.comp_homEquiv]
+    change af.homEquiv _ _ (ag.homEquiv _ _
+      ((invImage g).map (coefficientUnit f M) ≫ coefficientUnit g _)) = _
+    erw [ag.homEquiv_naturality_left]
+    simp only [coefficientUnit, coeff, af, ag]
+    erw [af.homEquiv_naturality_right]
+    erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+  erw [hl]
+  conv_rhs =>
+    erw [(af.comp ag).homEquiv_naturality_right]
+    erw [Adjunction.homEquiv_unit]
+  erw [← hc]
+  erw [CategoryTheory.Functor.map_comp, ← Category.assoc, ← ac.homEquiv_unit]
+  simp only [coefficientUnit, coeff, ac]
+  erw [Equiv.apply_symm_apply]
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  exact (pullbackUnit_comp_app g f M U.unop).symm
 
 end AlgebraicGeometry.Scheme.Modules
