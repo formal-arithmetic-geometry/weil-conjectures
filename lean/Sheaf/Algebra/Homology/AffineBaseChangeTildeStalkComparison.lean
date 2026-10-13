@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.AffineBaseChangeOrdinaryStalkComparison
+import Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates
 
 /-! # AffineBaseChangeTildeStalkComparison
 
@@ -26,6 +28,8 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option maxHeartbeats 800000 in
+-- Comparing the explicit stalk and module composites unfolds several derived functors.
 /-- Localization of the explicit tensor cohomology arrow agrees with the stalk arrow.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, last displayed localization identity;
 Tags 06Y6, 01HV and 08IB.
@@ -94,6 +98,38 @@ theorem affineBaseChangeTildeModuleMap_localized
         (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) e hc p i
       ∃ lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk r).left,
         ∀ x, affineDerivedCohomologyStalkIso A' i p L
-          (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x) := by sorry
+          (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x)  := by
+  have _ := hK
+  dsimp only
+  intro p
+  obtain ⟨lU, hlU⟩ := exists_affineBaseChangeOrdinaryStalkComparison
+    R A R' A' φg' φf' hφg' hφf' sq M hM i m p
+  refine ⟨lU, ?_⟩
+  intro x
+  let C := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M
+  let V := (affineDerivedCohomologyModules A' i).obj
+    (⟨_, hL⟩ : schemeDerivedQCohCategory (Spec (.of A')))
+  let b := affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i
+  let a₀ := affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i
+    (C.homology i) (Iso.refl _)
+  have ha : affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i V b =
+      a₀ ≫ b.hom := by
+    dsimp only [affineBaseChangeTildeModuleMap, affineBaseChangeTildeModule, a₀,
+      Iso.refl_hom]
+    erw [Category.comp_id, Category.assoc]
+  have hloc : LocalizedModule.map p.asIdeal.primeCompl
+      (affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i V b).hom x =
+        LocalizedModule.map p.asIdeal.primeCompl b.hom.hom
+          (LocalizedModule.map p.asIdeal.primeCompl a₀.hom x) := by
+    rw [ha]
+    exact congrArg (fun z ↦ z x)
+      (IsLocalizedModule.map_comp' p.asIdeal.primeCompl
+        (LocalizedModule.mkLinearMap p.asIdeal.primeCompl _)
+        (LocalizedModule.mkLinearMap p.asIdeal.primeCompl _)
+        (LocalizedModule.mkLinearMap p.asIdeal.primeCompl _) a₀.hom b.hom.hom)
+  rw [hloc]
+  rw [affineTensorPullbackHomologyStalkIso_coordinates A A' φg' K hL M e hc i p]
+  rw [hlU]
+  rfl
 
 end AlgebraicGeometry
