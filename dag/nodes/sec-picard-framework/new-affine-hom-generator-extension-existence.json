@@ -15,56 +15,44 @@
  },
  "proof": [
   {
-   "text": "Substitute the two equalities fixing T and e to the standard chart constructions. On Spec A, send each linear map h:M->N to tilde(h), regarded as a global section of internal Hom. This assignment is additive. Scalar multiplication by a in Hom becomes multiplication by the image of a on the associated sheaves: on localized sections this follows from (a h)(m)/s = a h(m)/s. Thus it is an A-linear map Hom_A(M,N)->Gamma(internalHom(tilde M,tilde N)).",
+   "text": "Substitute the equation fixing T. Compose the tilde/global-sections adjunction with restriction along the affine chart. The resulting left adjoint T is additive, as it preserves colimits. The assignment alpha(h) = e.hom followed by the unit-to-internal-Hom section representing T(h) is additive; this is checked componentwise using the two section equivalences.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove scalar compatibility of tilde on all opens by evaluating sections at prime ideals and inducting on localized-module fractions. Transport the resulting identity through the chart ring isomorphisms. Naturality of appIso shows that its scalar sections restrict compatibly. Evaluating internal-Hom sections on an over-object and using linearity of e proves alpha(r*h) = T(a |-> a*r) followed by alpha(h). The normalized equation specifying e is unnecessary for this step: any linear rank-one isomorphism works.",
    "uses": [
     "lem-weil-pbc-spec-module-tilde-sections",
     "def-pur-sheaf-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/01I7",
-    "place": "Lemma 26.7.1 (lemma-compare-constructions), mapping property for arbitrary target sheaves; Tag 01HV (4)-(5), principal-open localization and restriction."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the tilde/global-sections adjunction to the A-linear assignment in step 1. Its adjoint is the required morphism tilde(Hom_A(M,N))->internalHom(tilde M,tilde N). The adjunction formula evaluated on a |-> a*h gives the global section tilde(h), establishing the generator equation. This step asserts only existence, not uniqueness.",
+   "text": "Let S be the right adjoint of T. Take the adjunct A -> S(internalHom) of alpha(h) and evaluate it at one. Additivity of the adjunction equivalence and its naturality under multiplication by r make these values an A-linear map Hom_A(M,N) -> S(internalHom). Let c be its adjoint. Adjunction naturality under a |-> a*h, followed by extensionality of linear maps out of A, proves T(a |-> a*h) followed by c = alpha(h). Precompose with e.inv and cancel e.inv followed by e.hom to obtain the stated normalization. No finite presentation or quasi-coherence of internal Hom is used, and zero rings and zero modules require no special case.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pur-sheaf-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/01I7",
-    "place": "Lemma 26.7.1 (lemma-compare-constructions), mapping property for arbitrary target sheaves; Tag 01HV (4)-(5), principal-open localization and restriction."
-   }
-  },
-  {
-   "text": "Transport this morphism along the affine-chart scheme isomorphism. The rank-one identification is precisely tildeSelf followed by restrictUnitIso. The unitHomEquiv and homObjSectionsEquiv identifications turn the transported global section tilde(h) into the right hand side of the stated normalization. Zero rings give the empty scheme and zero modules give the zero morphism; no finiteness or quasi-coherence assumption on internal Hom is used.",
-   "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-pur-sheaf-hom",
-    "lem-weil-pbc-spec-tilde-free-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/01I7",
-    "place": "Lemma 26.7.1 (lemma-compare-constructions), mapping property for arbitrary target sheaves; Tag 01HV (4)-(5), principal-open localization and restriction."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-hom",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-spec-tilde-free-module"
+  "lem-weil-pbc-spec-module-tilde-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "agent": "Codex",
-  "group": "S1",
+  "group": "U2",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/01I7",
-   "place": "Lemma 26.7.1 (lemma-compare-constructions), mapping property for arbitrary target sheaves; Tag 01HV (4)-(5), principal-open localization and restriction."
+   "place": "Lemma 26.7.1 (lemma-compare-constructions), mapping property; Tag 01HV (4)-(7), localization and functoriality."
   }
  },
  "mathlib_searches": [
@@ -154,10 +142,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T211112-L-394467",
-  "kind": "interface",
+  "landing": "20261013T215613-L-901915",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
