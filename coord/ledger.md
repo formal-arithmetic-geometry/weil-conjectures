@@ -12163,3 +12163,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/N4/Sheaf.AlgebraicGeometry.FiniteFreeLocalHomZero (stage 3; reviewer PASS; first push; landing 20261013T111907-L-3057553 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/N4/Sheaf.AlgebraicGeometry.FiniteFreeLocalStalkMapLift (stage 3; reviewer PASS; first push; landing 20261013T111908-L-3057651 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/P1/Sheaf.AlgebraicGeometry.SingleComplexOpenStalkCondition (stage 3; reviewer PASS; first push; landing 20261013T111908-L-3057750 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:19 L: merged deliver/P2/Sheaf.AlgebraicGeometry.AffineRegularStalkScalar (stage 3; reviewer PASS; first push; landing 20261013T111908-L-3057944 (interface); batch 20261013T111833; modules 2; new nodes 1)

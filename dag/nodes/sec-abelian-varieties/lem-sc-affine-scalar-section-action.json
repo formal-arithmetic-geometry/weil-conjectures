@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-affine-scalar-section-action",
+ "kind": "statement",
+ "title": "Affine scalar endomorphism action on sections over its chart",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an affine open, and $A=\\Gamma(X,U)$. Write $\\Phi$ for affinePerfectSheafification [lem-pc-affine-perfect-module-model], and $P$ for ordinary direct image from the slice over $U$ [def-sc-affine-free-basis-germs]. Let $\\mu_a:A\\to A$ be multiplication by $a\\in A$ [def-sc-affine-free-basis-germs]. For every section $m\\in\\Gamma(U,P\\Phi(A))$, the component of $P\\Phi(\\mu_a)$ over $U$ sends $m$ to $a m$. No point or stalk is part of this assertion.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-affine-free-basis-germs",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof": [
+  {
+   "text": "On every basic open of Spec A, localization of the linear map r maps to ar acts as multiplication by the structure-sheaf image of a, by the localization relations. The tilde construction glues these maps; equality of section maps on a basis gives equality on every open by separatedness.",
+   "uses": [
+    "lem-pc-affine-perfect-module-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the restriction along hU.isoSpec.hom and the inverse over equivalence. At the top of U, isoSpec_hom_appTop is GammaSpecIso.hom followed by U.topIso.inv, hence sends the canonical section of a to the top section corresponding to a. At the slice object U times U the scalar is its restriction along the second projection. The ring map defining pushforwardOver is exactly this restriction, so the scalar action on the pushed-forward module over U is a times m. This is a calculation with the structure-ring comparison maps, and does not use a stalk or the explicit unit germ.",
+   "uses": [
+    "def-sc-affine-free-basis-germs",
+    "lem-pc-affine-perfect-module-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-affine-free-basis-germs",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, Lemma 26.5.4 (7), natural associated-sheaf stalk localization; Tag 01IB, affine module sheafification; Tag 01C6, finite free sheaves; Tag 0098, restriction along the affine chart; direct-image stalk computed on the cofinal neighbourhoods contained in U; sectionwise scalar part of lem-sc-affine-regular-stalk-scalar, before taking a germ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification sends scalar multiplication of modules over affine scheme to scalar multiplication on sections",
+   "results": "PresheafOfModules.Sheafify.mul_smul; PresheafOfModules.Sheafify.smul; PresheafOfModules.Sheafify.map_smul; PresheafOfModules.Sheafify.map_smul_eq; PresheafOfModules.Sheafify.smulCandidate; PresheafOfModules.Sheafify.one_smul; PresheafOfModules.Sheafify.smul_add; PresheafOfModules.Sheafify.SMulCandidate.h",
+   "date": "2026-10-13",
+   "verdict": "No exact match for scalar endomorphism action after affine chart and slice transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tilde\", \"smul\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match for scalar endomorphism action after affine chart and slice transport."
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*scalar|scalar.*tilde|affineScalarEnd_section|map.*smul",
+   "results": "Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/Topology/Bornology/Absorbs.lean; Mathlib/NumberTheory/GaussSum.lean; Mathlib/NumberTheory/GaussSum.lean; Mathlib/Dynamics/Ergodic/MeasurePreserving.lean; Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for scalar endomorphism action after affine chart and slice transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of scalar multiplication on an affine scheme acts on sections by the corresponding structure sheaf scalar",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineRegularStalkScalar",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX; construction of the bounded finite-free complex by lifting matrices, before descent of its comparison; finite-matrix spreading on an affine neighbourhood after normalization of the stalk terms; finite free stalk identification and ordinary direct-image comparison; Scalar endomorphisms act on the affine unit germ by their germs; sectionwise scalar action before taking the unit germ",
+   "via": [
+    "lem-sc-affine-regular-stalk-scalar",
+    "lem-sc-affine-free-sheaf-stalk-realization",
+    "lem-sc-bounded-free-stalk-complex-local-lift",
+    "lem-sc-bounded-free-stalk-complex-lift",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineScalarSectionAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineScalarSectionAction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineScalarEnd_section_action",
+  "statement": "theorem affineScalarEnd_section_action (X : Scheme.{u}) (U : X.Opens)\n    (hU : IsAffineOpen U) (a : Γ(X, U)) :\n    let P := SheafOfModules.pushforward.{u}\n      (SheafOfModules.pushforwardOver (R := moduleRings X.toRingedSpace) U)\n    ∀ m : (P.obj ((affinePerfectSheafification X U hU).obj\n        (ModuleCat.of Γ(X, U) Γ(X, U)))).val.obj (.op U),\n      (P.map ((affinePerfectSheafification X U hU).map\n        (affineScalarEnd X U a))).val.app (.op U) m = a • m",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T111908-L-3057944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T111908-L-3057944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

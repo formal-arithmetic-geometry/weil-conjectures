@@ -6,6 +6,7 @@ Authors: SHEAF group W2
 module
 
 public import Sheaf.AlgebraicGeometry.AffineFreeBasisGerms
+import Sheaf.AlgebraicGeometry.AffineScalarSectionAction
 
 /-! # Scalar action on the unit germ of affine sheafification
 
@@ -39,6 +40,25 @@ theorem affineRegularStalkGerm_scalar
     (a : Γ(X, U)) :
     (affineFreeStalkFunctor X x U hU).map (affineScalarEnd X U a)
         (affineRegularStalkGerm X x U hxU hU) =
-      X.presheaf.germ U x hxU a • affineRegularStalkGerm X x U hxU hU := by sorry
+      X.presheaf.germ U x hxU a • affineRegularStalkGerm X x U hxU hU := by
+  let P := SheafOfModules.pushforward.{u}
+    (SheafOfModules.pushforwardOver (R := moduleRings X.toRingedSpace) U)
+  let M := (affinePerfectSheafification X U hU).obj (ModuleCat.of Γ(X, U) Γ(X, U))
+  let b := (P.map (affineRegularSheafIso X U hU).inv).val.app (.op U)
+    (1 : ((moduleRings X.toRingedSpace).over U).obj.obj
+      (.op ((CategoryTheory.Over.star U).obj U)))
+  change RingedSpace.stalkAddMap X.toRingedSpace x
+    (P.map ((affinePerfectSheafification X U hU).map (affineScalarEnd X U a)))
+    (TopCat.Presheaf.germ (P.obj M).val.presheaf U x hxU b) = _
+  dsimp only [RingedSpace.stalkAddMap]
+  erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
+  change TopCat.Presheaf.germ (P.obj M).val.presheaf U x hxU
+    ((P.map ((affinePerfectSheafification X U hU).map
+      (affineScalarEnd X U a))).val.app (.op U) b) =
+    X.presheaf.germ U x hxU a •
+      TopCat.Presheaf.germ (P.obj M).val.presheaf U x hxU b
+  erw [← PresheafOfModules.germ_smul (R := X.presheaf) (P.obj M).val]
+  apply congrArg (TopCat.Presheaf.germ (P.obj M).val.presheaf U x hxU)
+  exact affineScalarEnd_section_action X U hU a b
 
 end AlgebraicGeometry.Scheme
