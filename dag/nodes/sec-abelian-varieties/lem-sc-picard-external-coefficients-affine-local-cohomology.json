@@ -1,0 +1,153 @@
+{
+ "id": "lem-sc-picard-external-coefficients-affine-local-cohomology",
+ "kind": "statement",
+ "title": "PicardExternalCoefficientsAffineLocalCohomology",
+ "statement": "Let k be a field [def-weil-field], X,Y schemes [def-pc-scheme], and f:X -> Spec(k), g:Y -> Spec(k) morphisms. Assume X is quasi-compact and the diagonal of f is affine. Let F,G be quasi-coherent modules on X,Y [pqf-def-coherent]. Put E=pr1^*F tensor pr2^*G [def-sc-field-linear-module-cohomology-operations]. For every affine open V of Y and every q >= 0, there is an isomorphism of additive groups H^q(pr2^{-1}(V),E) [def-sc-open-module-cohomology] with H^q(X,F) tensor_k Gamma(V,G restricted to V). The first factor uses the scalarCohomology k-action induced by f; the second uses scalarObj for V -> Y -> Spec(k). There are no acyclicity hypotheses and no quasi-compactness or affine-diagonal hypothesis on Y.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, affine-open calculation and degree-zero direct-image formula; read at https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-open-module-cohomology",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover U_i of X. The affine diagonal criterion makes all finite intersections affine. The inverse image of the affine open V under pr2 is the product X times V. Open-immersion pullback agrees with restriction; its compatibility with composition identifies the restriction of E with the external tensor of F and G restricted to V. The products U_i times V and their intersections are affine.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every product chart, affine pullback and tensor-section comparisons identify sections with F(U_intersection) tensor_k G(V). Their pure-tensor formulas commute with restrictions, so the Cech differential is d tensor 1. Finite products over tuples of cover indices commute with tensor: send the tensor of a tuple with t to the tuple of tensors; invert it using the finitely many coordinate inclusions.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensoring with the vector space G(V) is exact. It preserves the cycles and boundaries and hence cohomology of the Cech complex. The affine Cech comparison identifies the first-factor cohomology with H^q(X,F), with k-action restricted along f. The same comparison on X times V identifies its Cech cohomology with the cohomology of E on the inverse-image open; restricting injective resolutions computes precisely openModuleCohomology. Forget the scalar action to obtain the stated isomorphism of additive groups. This applies in degree zero and to empty schemes, empty V and zero modules.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sc-cech-comparison-map-iso-affine",
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-open-module-cohomology",
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED; detailed expansion of the local Cech calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology on X times an affine open of external tensor coefficients equals cohomology of X tensor sections on the affine open",
+   "results": "service unavailable: Internal Server Error",
+   "available": false,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of external tensor product on X times an affine scheme is H of X tensor sections on the affine factor",
+   "results": "8 hits: scheme pullback triplet tensorCongr APIs, pullbackSpecIso and AffineSpace.homOfVector; no external cohomology comparison.",
+   "verdict": "No match; pullbackSpecIso is only the affine geometric ingredient.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "external.*cohom|cohom.*external|external.*coproduct|coproduct.*external",
+   "results": "0 Mathlib hits. Library rg found Picard Kunneth and acyclicity modules above this item, which import it transitively and cannot be used without a cycle.",
+   "verdict": "No existing affine-local comparison at this interface.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsDirectImages",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED acyclic base case, local tensor calculation",
+   "via": [
+    "lem-sc-picard-external-coefficients-direct-images",
+    "lem-sc-picard-external-coefficients-acyclic",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineLocalCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAffineLocalCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCupCoefficients_affine_local_cohomology",
+  "statement": "theorem picardExternalCupCoefficients_affine_local_cohomology\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [IsAffineHom (pullback.diagonal f)]\n    (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent]\n    (V : Y.Opens) (hV : IsAffineOpen V) (q : ℕ) :\n    Nonempty\n      (((RingedSpace.openModuleCohomology (Limits.pullback f g).toRingedSpace q\n        ((pullback.snd f g) ⁻¹ᵁ V)).obj (externalCupCoefficients f g F G)) ≅\n        AddCommGrpCat.of (scalarCohomology f F q ⊗[k]\n          scalarObj (V.ι ≫ g) (G.restrict V.ι) (Opposite.op ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T111845-L-3050190",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T111845-L-3050190",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

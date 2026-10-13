@@ -10,6 +10,12 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
+import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineLocalCohomology
+import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardCoproduct
+import Sheaf.Paper.HigherDirectImagePresheaf
+import Mathlib.Algebra.Category.Grp.Zero
+import Mathlib.Topology.Sheaves.Abelian
+
 /-! # Direct images of an external tensor product with an acyclic first factor
 
 Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, acyclic base case.
@@ -22,6 +28,62 @@ universe w
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
+
+private theorem isZero_higherDirectImage_of_affine_local
+    {X Y : Scheme.{w}} (f : X ⟶ Y) (F : X.Modules) (q : ℕ)
+    (h : ∀ V : Y.Opens, IsAffineOpen V →
+      IsZero ((RingedSpace.openModuleCohomology X.toRingedSpace q (f ⁻¹ᵁ V)).obj F)) :
+    IsZero (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj F) := by
+  let : EnoughInjectives X.Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let : (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).Additive :=
+    RingedSpace.moduleDirectImage_additive f.toLRSHom.toShHom
+  let I := injectiveResolution F
+  let K : CochainComplex Y.Modules ℕ :=
+    ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj I.cocomplex
+  let P := sectionCohomologyPresheaf K q
+  have hP (V : Y.Opens) (hV : IsAffineOpen V) :
+      IsZero (P.presheaf.obj (Opposite.op V)) := by
+    let L := ((SheafOfModules.forget Y.ringCatSheaf).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj K
+    let E := PresheafOfModules.toPresheaf Y.ringCatSheaf.obj ⋙
+      (CategoryTheory.evaluation Y.Opensᵒᵖ AddCommGrpCat.{w}).obj (Opposite.op V)
+    let : (RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)).Additive :=
+      RingedSpace.openModuleSections_additive _ _
+    let e := I.isoRightDerivedObj
+      (RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)) q
+    exact (h V hV).of_iso (((L.sc q).mapHomologyIso E).symm ≪≫ e.symm)
+  have hstalk (x : Y) :
+      IsZero ((PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj x).obj P) := by
+    suffices hs : Subsingleton
+        ((PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj x).obj P) from
+      @ModuleCat.isZero_of_subsingleton _ _ _ hs
+    refine ⟨fun a b ↦ ?_⟩
+    have hz (a : TopCat.Presheaf.stalk (C := AddCommGrpCat.{w})
+        (X := Y.toTopCat) P.presheaf x) : a = 0 := by
+      obtain ⟨V, hxV, a, rfl⟩ := TopCat.Presheaf.exists_germ_eq (X := Y.toTopCat) P.presheaf a
+      obtain ⟨W, hW, hxW, hWV⟩ := exists_isAffineOpen_mem_and_subset hxV
+      have : Subsingleton (P.presheaf.obj (Opposite.op W)) :=
+        AddCommGrpCat.subsingleton_of_isZero (hP W hW)
+      rw [← TopCat.Presheaf.germ_res_apply P.presheaf (homOfLE hWV) x hxW a]
+      have ha : P.presheaf.map (homOfLE hWV).op a = 0 := Subsingleton.elim _ _
+      exact (congrArg (TopCat.Presheaf.germ P.presheaf W x hxW) ha).trans (map_zero _)
+    exact (hz a).trans (hz b).symm
+  let D := ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj F
+  let A := SheafOfModules.toSheaf Y.ringCatSheaf
+  suffices hA : IsZero (A.obj D) from
+    (IsZero.iff_id_eq_zero D).mpr (A.map_injective (hA.eq_of_src _ _))
+  apply (TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero (A.obj D)).mpr
+  intro x
+  have hi := (higherDirectImagePresheaf f F I q).2.2.1 x
+  let τ := (PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj x).map
+    (sectionCohomologyTheta K q ≫
+      (SheafOfModules.forget Y.ringCatSheaf).map
+        (I.isoRightDerivedObj (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) q).inv)
+  have : IsIso τ := hi
+  have hs := ModuleCat.subsingleton_of_isZero ((hstalk x).of_iso (asIso τ).symm)
+  exact @AddCommGrpCat.isZero_of_subsingleton _ hs
 
 /-- The positive direct images of the external coefficients vanish, and the zeroth
 is a coproduct of copies of the second coefficient. No acyclicity of G is assumed.
@@ -60,6 +122,39 @@ theorem picardExternalCupCoefficients_directImages
       (ι : ∀ _ : I, G ⟶ ((RingedSpace.moduleDirectImage
         (pullback.snd f g).toLRSHom.toShHom).rightDerived 0).obj
           (externalCupCoefficients f g F G)),
-      Nonempty (IsColimit (Cofan.mk _ ι)) := by sorry
+      Nonempty (IsColimit (Cofan.mk _ ι)) := by
+  constructor
+  · intro q hq
+    apply isZero_higherDirectImage_of_affine_local
+    intro V hV
+    obtain ⟨e⟩ := picardExternalCupCoefficients_affine_local_cohomology k X Y f g F G V hV q
+    let : Subsingleton (scalarCohomology f F q) := by
+      change Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F)
+      exact ModuleCat.subsingleton_of_isZero (hF q hq)
+    have hz (t : scalarCohomology f F q ⊗[k]
+        scalarObj (V.ι ≫ g) (G.restrict V.ι) (Opposite.op ⊤)) : t = 0 := by
+      induction t using TensorProduct.induction_on with
+      | zero => rfl
+      | tmul a b =>
+        have ha : a = 0 := Subsingleton.elim _ _
+        simp only [ha, TensorProduct.zero_tmul]
+      | add a b ha hb => simp only [ha, hb, add_zero]
+    let : Subsingleton (scalarCohomology f F q ⊗[k]
+        scalarObj (V.ι ≫ g) (G.restrict V.ι) (Opposite.op ⊤)) :=
+      ⟨fun a b ↦ (hz a).trans (hz b).symm⟩
+    exact (AddCommGrpCat.isZero_of_subsingleton _).of_iso e
+  · obtain ⟨I, ι, ⟨hc⟩⟩ :=
+      picardExternalCupCoefficients_pushforward_coproduct k X Y f g F G
+    let P := RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom
+    let E := externalCupCoefficients f g F G
+    let : EnoughInjectives (Limits.pullback f g).Modules :=
+      (RingedSpace.moduleSheaves_abelian_enoughInjectives
+        (Limits.pullback f g).toRingedSpace).2
+    have : IsIso (P.toRightDerivedZero.app E) :=
+      (higherDirectImagePresheaf (pullback.snd f g) E (injectiveResolution E) 0).2.2.2.2
+    let e := asIso (P.toRightDerivedZero.app E)
+    refine ⟨I, fun i ↦ ι i ≫ e.hom, ⟨?_⟩⟩
+    exact hc.ofIsoColimit (Cofan.ext e (fun i ↦ rfl))
+
 
 end AlgebraicGeometry.Scheme.Modules
