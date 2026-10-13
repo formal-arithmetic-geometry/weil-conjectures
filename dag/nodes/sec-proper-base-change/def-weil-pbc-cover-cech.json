@@ -3,25 +3,76 @@
  "blueprint": {
   "is": "def-weil-pbc-cover-cech",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Covering Cech complexes",
- "statement": "For a finite covering $\\mathcal V=\\{V_a\\to U\\}_{a=1}^m$ on either site and a\nmodule sheaf $M$, its Cech cochain complex has\n\n$$\n \\check C^p(\\mathcal V,M)=\n \\prod_{a_0,\\ldots,a_p}M(V_{a_0}\\times_U\\cdots\\times_UV_{a_p}),\n \\qquad \\delta=\\sum_{j=0}^{p+1}(-1)^j d_j^*.\n$$\n\nIts cohomology is denoted $\\check H^p(\\mathcal V,M)$. The augmentation is\nrestriction from $M(U)$. Here module sheaves have the meanings of the etale\nand pro-etale sheaf conventions.",
+ "statement": "Let $T$ be a scheme. Work either on its small etale site with module sheaves as in [def-weil-pbc-etale-sheaves], or on its small pro-etale site with module sheaves as in [def-weil-pbc-proetale-modules], in the size conventions of those nodes. Let $U$ be an object of the chosen site, $\\mathcal V=\\{f_a:V_a\\to U\\}_{a=1}^m$ a finite covering, and $M$ a module sheaf on that site. In forming the following complex use the underlying presheaf of abelian groups of $M$.\n\nThe covering Cech cochain complex is the complex of [def-weil-pbc-site-cech-complex] for this covering and this presheaf. Thus, for $p\\geq0$, put\n\n$$\n\\check C^p(\\mathcal V,M)=\\prod_{(a_0,\\ldots,a_p)\\in\\{1,\\ldots,m\\}^{p+1}} M(V_{a_0}\\times_U\\cdots\\times_U V_{a_p}),\n$$\n\nwith all ordered tuples, including repetitions. For $0\\leq j\\leq p+1$, let $d_j$ be the projection from the fibre product indexed by $(a_0,\\ldots,a_{p+1})$ to the product with its $j$-th factor omitted. The differential is\n\n$$\n(\\delta^p s)_{a_0\\ldots a_{p+1}}=\\sum_{j=0}^{p+1}(-1)^j M(d_j)(s_{a_0\\ldots\\widehat{a_j}\\ldots a_{p+1}}).\n$$\n\nTerms in negative degrees are zero. Its cohomology is denoted\n\n$$\n\\check H^p(\\mathcal V,M)=H^p(\\check C^\\bullet(\\mathcal V,M))=\\ker\\delta^p/\\operatorname{im}\\delta^{p-1}\\quad(p\\geq0),\n$$\n\nwhere $\\operatorname{im}\\delta^{-1}=0$. The augmentation is the restriction map\n\n$$\n\\epsilon:M(U)\\longrightarrow\\check C^0(\\mathcal V,M),\\qquad s\\longmapsto(M(f_a)(s))_{a=1}^m.\n$$\n\nThe augmentation is additional to the nonnegative complex used to define $\\check H^p$; equivalently it supplies the degree $-1$ map of the augmented complex. All products and cohomology above are taken in abelian groups. Restricting the coefficient sheaf to $U$ also makes these groups modules over its ring of sections on $U$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-cover-cech.md",
   "place": "node def-weil-pbc-cover-cech, order 1281"
  },
  "stmt_deps": [
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-proetale-modules"
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-cech-complex"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|cechComplex|cech.*[Aa]ugment",
+   "results": "2 hits; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole definition on both coefficient sites including its specified augmentation; reusable general Cech complex constructions found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cochain complex of a finite covering on a site with module sheaf coefficients alternating differential and augmentation",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, AlgebraicTopology.AlternatingCofaceMapComplex.obj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.Sheaf.cohomologyPresheafFunctor, ContinuousCohomology.homogeneousCochains, AlgebraicTopology.alternatingCofaceMapComplex",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole definition on both coefficient sites including its specified augmentation; reusable general Cech complex constructions found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplex\"",
+   "results": "1 hits; CategoryTheory.cechComplexFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole definition on both coefficient sites including its specified augmentation; reusable general Cech complex constructions found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech complex of covering family of objects with abelian presheaf coefficients",
+   "results": "0 hits; ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex functor for a family in the over category, homology and restriction augmentation",
+   "results": "8 hits; CategoryTheory.SimplicialObject.augmentedCechNerve, AlgebraicTopology.DoldKan.Γ₀.obj, CategoryTheory.SimplicialObject.cechNerve, AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, AlgebraicTopology.DoldKan.Γ₀.obj_obj, CategoryTheory.CosimplicialObject.augmentedCechConerve, AlgebraicTopology.DoldKan.Γ₀_obj_obj, CategoryTheory.CosimplicialObject.augmentedCechConerve_obj",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole definition on both coefficient sites including its specified augmentation; reusable general Cech complex constructions found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"alternatingCofaceMapComplex\"",
+   "results": "8 hits; AlgebraicTopology.AlternatingCofaceMapComplex.obj, AlgebraicTopology.AlternatingCofaceMapComplex.objD, AlgebraicTopology.alternatingCofaceMapComplex, AlgebraicTopology.alternatingCofaceMapComplex_obj, AlgebraicTopology.AlternatingCofaceMapComplex.map, AlgebraicTopology.alternatingCofaceMapComplex_map, AlgebraicTopology.AlternatingCofaceMapComplex.d_squared, AlgebraicTopology.AlternatingCofaceMapComplex.d_eq_unop_d",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole definition on both coefficient sites including its specified augmentation; reusable general Cech complex constructions found"
+  },
+  {
+   "tool": "grep",
+   "query": "def homology|def cech|augment",
+   "results": "7 hits; Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole definition on both coefficient sites including its specified augmentation; reusable general Cech complex constructions found"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +98,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-cover-cech",
+  "worker": "stage1",
+  "summary": "Reused the existing general-site Cech definition; made the underlying abelian presheaf, ordered tuples with repetitions, face projections, zero negative terms, unaugmented cohomology and restriction augmentation explicit. No new nodes. Coefficient categories remain exactly the etale and pro-etale conventions, not condensed coefficients.",
+  "blueprint": "All displayed terms and differential, the cohomology notation, and the augmentation sentence of def-weil-pbc-cover-cech.md (order 1281). This is a definition supporting the unit, with no change to its proof route."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-1c668d8dd",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-1c668d8dd (reviewer sub-agent of L); spot-checked: Read the complete item, report, required instructions, chapter/unit route, all cited nodes, Stacks sources, and archived master targets. The Cech definition matches the blueprint and source, preserves both coefficient categories, handles ordered/repeated indices, augmentation, empty and singleton cases, and introduces no duplicate or false statement. Review written to review.md; no repairs or tool uses accepted."
+ }
 }
