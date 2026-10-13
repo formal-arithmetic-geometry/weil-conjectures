@@ -130,6 +130,11 @@ def inverse(root, commits, *, imports_only=False):
                         value = ''.join(lines).encode()
                 else:
                     value = merge_text(before, landed, current)
+            elif path.startswith('coord/returns/'):
+                # bookkeeping of returns: keep it as it is now (2026-10-14: undoing a delivery's edit of
+                # coord/returns/P3.md conflicted with later entries and blocked a batch for 15 minutes; the
+                # take-out writes its own return entries afterwards)
+                value = current
             elif path.startswith('coord/claims/'):
                 # A renewed/reclaimed item belongs to its current holder. Restore
                 # the old claim only when landing removed it and it is still absent.
