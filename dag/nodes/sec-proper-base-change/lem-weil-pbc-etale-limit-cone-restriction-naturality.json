@@ -20,24 +20,40 @@
  ],
  "proof": [
   {
-   "text": "Put f₀ = c.π.app (op j.val). The cone equation for j.val → i₀, followed by g₀, and composition of inverse-image opens give W_L = f₀⁻¹W_j for W = A and W = B. The defining equations for tailLimitOpenMap show that its compositions with the stage-open inclusions are the limit-open inclusions followed by f₀. Monicity of the stage-open inclusions identifies these maps with the restrictions of f₀, after transporting along the equalities of opens. Expand tailOpenCohomologyLegDegree and openSquareCoefficient. Using Sheaf.H.map_comp_apply, the leg on W is openCohomologyPullback f₀ W_j (F j.val) q followed by the cohomology map of the restriction of the coefficient morphism (eG j.val).inv ≫ L.ι.app j.val. Apply openCohomologyPullback_restriction to A_j ≤ B_j. Restriction commutes with this coefficient morphism: expand openCohomologyRestriction, move the morphism past cohomologyMap using cohomologyMap_map, combine the Sheaf.H.map factors, and apply naturality of the inverse upperStarComp comparison to their coefficient composites. Compose the two equalities and transport back to the supplied limit opens. Proof irrelevance identifies the inclusion and commuting-square proofs. Only the single coefficient morphism is used; no coefficient-system or cocone naturality law is needed for this square. Empty or equal opens satisfy the same calculation.",
+   "text": "For a scheme map f:Y→X and nested opens A≤B of X and C≤E of Y, let a:C→A and b:E→B satisfy C.ι followed by f = a followed by A.ι and E.ι followed by f = b followed by B.ι. Cancel the monomorphism B.ι to obtain (C→E) followed by b = a followed by (A→B). This uses only the homOfLE_ι equations and associativity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The private additive-homomorphism equality cohomologyMap_transported_comp_hom combines cohomologyMap_map, cohomologyPullbackFunctorial composition, and Sheaf.H.map_comp_apply after extensionality. With arbitrary coefficient maps l and k it identifies the whole composite H(k)∘a*∘H(l)∘b* with H(upperStarComp(a,b).hom followed by a*(l) followed by k)∘c*. This generalizes the existing pointwise transported-composition calculations in place; DFunLike.congr_fun evaluates the homomorphism equality at x in each square path.",
    "uses": [
     "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-open-cohomology-restriction-naturality"
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand the two openSquareCoefficient maps and openCohomologyRestriction. Naturality of the inverse upperStarComp for C→E and E.ι moves the coefficient φ:f*F→G to the last factor. Apply the proved component associativity rearrangements upperStarComp_hom_app_map_upperStarComp_inv_app to (C→E,b,B.ι) and (a,A→B,B.ι), and map_upperStarComp_hom_app_upperStarComp_inv_app to (C→E,E.ι,f). Cancel adjacent hom/inv comparisons. The two composite coefficient morphisms now agree. Apply the transported-composition helper to both paths around the commuting square, and rewrite by this coefficient equality. This proves the private openSquare_restriction lemma without identifying opens with actual inverse images.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply openSquare_restriction with f=c.π.app(op j), stage opens tailStageOpen A and B, limit opens (c_i₀ followed by g₀) inverse images of A and B, restricted maps tailLimitOpenMap A and B, and φ=(eG j).inv followed by L.ι.app j. The two commuting-square hypotheses are Scheme.Hom.resLE_comp_ι after expanding tailLimitOpenMap. Expanding tailOpenCohomologyLegDegree and the additive-group composition gives the statement exactly. No universality, coefficient cocone naturality, directedness, nonemptiness or nonempty-open hypothesis is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-open-cohomology-restriction-naturality"
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01F7",
-  "place": "K2: single nested-open square specialization of parent step 1; complete argument in the Lean docstring."
+  "place": "T2: direct commuting-square calculation with arbitrary coefficients, using the proved inverse-image component associativity rearrangements in WeilConjectures.SixFunctors.BaseChange.Pasting; specialization to the tail cone squares from Tag 09YQ. Repair: generalized the duplicated pointwise helper in place to equality of additive homomorphisms, then evaluated it with DFunLike.congr_fun."
  },
  "mathlib_searches": [
   {
@@ -124,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-e3051",
-  "group": "K2",
+  "reviewer": "X-78ac8",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T201758-L-3972741",
+  "landing": "20261013T224520-L-1475604",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, node statements, signatures, proofs, imports, change record, report, and direct importer compile all match the stage-3 review requirements; all delivered modules and EtaleLimitOpenBoundaryTransform compile without errors or warnings."
+  "note": "independent Codex review: Delivered module, node, report, and change record match the stated theorem; delivered tree and direct importer compile cleanly, with permitted axioms only."
  }
 }
