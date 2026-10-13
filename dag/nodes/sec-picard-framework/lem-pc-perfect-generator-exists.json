@@ -26,66 +26,35 @@
  ],
  "proof": [
   {
-   "text": "For an affine scheme X = Spec(A), O_X is a perfect object of D_QCoh(O_X) and a perfect generator: E = 0 exactly when Hom(O_X[n], E) vanishes for every n.",
+   "text": "Apply the supported perfect generator theorem with T = X. The empty complement is compact; all support conditions are vacuous. This gives a perfect object P of D_QCoh(X), the shifted-Hom detection equivalence, and the required triangulated structure.",
    "uses": [
-    "lem-pc-perfect-generation-affine-base"
+    "lem-pc-supported-perfect-generator"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IS affine case"
-   }
+   "elementary": false
   },
   {
-   "text": "Let X be quasi-compact and quasi-separated with X = U union V, U quasi-compact open and V affine open, and let P be a perfect generator of D_QCoh(O_U). The cited induction step gives a perfect Q on X and a perfect Koszul object K' supported on V minus U such that Q direct-sum K' is a generator of D_QCoh(O_X); a direct sum of two perfect objects is perfect (on a common refinement of the two coverings the sum of two strictly perfect complexes is strictly perfect), and Q direct-sum K' lies in D_QCoh(O_X) because a perfect object has quasi-coherent cohomology sheaves (elementary: locally it is isomorphic to a bounded complex of direct summands of finite free modules, whose cohomology sheaves are kernels modulo images of maps of quasi-coherent modules, hence quasi-coherent, and quasi-coherence is local). So D_QCoh(O_X) has a single perfect generator lying in D_QCoh(O_X).",
+   "text": "The same P is compact. Apply the supported tower construction core with V empty, E = P and arbitrary target Y. Its support hypotheses are vacuous and its triangulated-closure hypothesis comes from the supported generator theorem. It supplies a tower starting at zero, transition triangles with coproducts of shifts of P as the third objects, and an ambient telescope triangle ending in Y. All indexing sets are in Type u, regardless of the derived morphism universe.",
    "uses": [
-    "lem-pc-perfect-generation-open-induction-step"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IS, induction step"
-   }
-  },
-  {
-   "text": "For the qcqs scheme X, let P(W) be the property that D_QCoh(O_W) has a perfect generator, i.e. a perfect object G with E = 0 if and only if Hom(G[n], E) = 0 for all n, for every E in D_QCoh(O_W). P holds for every affine open by Step 1. If U is quasi-compact open, V affine open and P(U) holds, then U union V is a quasi-compact open of the quasi-separated X, hence itself quasi-compact and quasi-separated, and Step 2 applied to U union V gives P(U union V). By the induction principle, P(X) holds: D_QCoh(O_X) has a perfect generator G.",
-   "uses": [
-    "lem-sc-invert-s-cohomology-induction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 08DR, as applied in Tag 09IS"
-   }
-  },
-  {
-   "text": "Let G be the perfect generator from Step 3 and let S be the smallest strictly full subcategory containing G and closed under shifts, cones, retracts and set-indexed direct sums. The category D_QCoh(O_X) is a triangulated subcategory of D(O_X) (elementary: it is closed under shifts, and under cones by the long exact cohomology sequence and the fact that quasi-coherent modules form a weak Serre subcategory, i.e. are closed under kernels, cokernels and extensions) and has set-indexed direct sums, G, which lies in D_QCoh(O_X) by Steps 1 and 2, is compact, and the one-member family (G) has coproduct G, which is a generator. By the homotopy-colimit construction for a set of compact generators, every object Y is obtained from coproducts of shifts of G by successive cones and a final coproduct cone. Shifts of G are perfect, so the closure properties put every such object in S; hence S is all of D_QCoh(O_X).",
-   "uses": [
-    "lem-pc-derived-qcoh-direct-sums",
     "lem-pc-perfect-object-compact",
-    "def-pc-generators",
-    "lem-pc-compact-generators-build-objects"
+    "lem-sc-supported-derived-generated-perfect-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09SN, applied to the perfect generator of Tag 09IS"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Let Q be any ambient triangulated, retract-closed property closed under Type u coproducts and containing P. Shift closure puts every P[m] in Q and coproduct closure puts each attaching sum in Q. The initial zero object lies in Q. Induction on the transition triangles, using triangulated closure of their middle object, puts every stage in Q. Reindex the countable coproduct by ULift ℕ in Type u and apply coproduct closure. Closure of the third object in the telescope triangle puts Y in Q. Retract closure is not needed. These are the defining closure properties and the coproduct index equivalence.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-generation-affine-base",
-  "lem-pc-perfect-generation-open-induction-step",
-  "lem-sc-invert-s-cohomology-induction",
-  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-supported-perfect-generator",
   "lem-pc-perfect-object-compact",
-  "def-pc-generators",
-  "lem-pc-compact-generators-build-objects"
+  "lem-sc-supported-derived-generated-perfect-core"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09IS, proof of theorem-bondal-van-den-Bergh"
+  "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+  "place": "Tag 0A9A with support X; Tag 09IS; derived.tex Tag 09SN, via the existing supported tower core"
  },
  "mathlib_searches": [
   {
@@ -174,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T022431-L-3220781",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
