@@ -1,6 +1,6 @@
 # Work queue
 
-185 items; claim with `tools/claim.py next <group> [--stage N]`.
+186 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (23)
 
@@ -45,7 +45,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (154)
+## Stage 3: modules to prove (155)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -191,6 +191,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularAux` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootDomainEtale` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorUnique` | 30 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVInverseOpenComparisons` | 30 | 1 | proof |
 | `Sheaf.Paper.ModuleCupGlobalTensorComparison` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedMayerVietorisDirectImageBoundary` | 31 | 1 | proof |
