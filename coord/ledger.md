@@ -12155,3 +12155,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/M4/Sheaf.AlgebraicGeometry.OrderedCechModuleRestrictionMap (stage 3; reviewer PASS; first push; landing 20261013T111904-L-3056552 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/M4/Sheaf.AlgebraicGeometry.ProjectiveFiniteCohomologyPresentation (stage 3; reviewer PASS; first push; landing 20261013T111904-L-3056651 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/N1/Sheaf.AlgebraicGeometry.AffineKoszulScalarExtComparison (stage 3; reviewer PASS; after a return; landing 20261013T111905-L-3056807 (interface); batch 20261013T111833; modules 6; new nodes 5)
+- 11:19 L: merged deliver/N1/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitDivisorCharts (stage 3; reviewer PASS; first push; landing 20261013T111905-L-3056913 (interface); batch 20261013T111833; modules 2; new nodes 1)
