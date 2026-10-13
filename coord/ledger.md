@@ -10862,3 +10862,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffinePerfectMapLift (stage 3; reviewer PASS; first push; landing 20261013T031538-L-3570402 (interface); batch 20261013T031526; modules 3; new nodes 2)
 - 03:15 L: merged deliver/G2/Sheaf.AlgebraicGeometry.AffineUniversalTensorExact (stage 3; reviewer PASS; first push; landing 20261013T031538-L-3570529 (interface); batch 20261013T031526; modules 3; new nodes 2)
 - 03:15 L: merged deliver/G3/Sheaf.AlgebraicGeometry.RestrictedDerivedEvaluationPullback (stage 3; reviewer PASS; first push; landing 20261013T031539-L-3570655 (interface); batch 20261013T031526; modules 3; new nodes 2)
+- 03:15 L: merged deliver/G3/Sheaf.CategoryTheory.FilteredQuotientMapRestrictions (stage 3; reviewer PASS; first push; landing 20261013T031539-L-3570788 (proof); batch 20261013T031526; modules 1; new nodes 0)

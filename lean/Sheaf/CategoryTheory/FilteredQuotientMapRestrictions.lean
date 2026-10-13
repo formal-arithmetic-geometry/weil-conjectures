@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-!
 # Restrictions of filtered maps to cycles and boundary quotients
@@ -21,6 +22,68 @@ universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory
 
+private theorem restriction {D : Type u} [Category.{v} D] [Abelian D]
+    {A B : D} (f : A ⟶ B) (S : Subobject A)
+    (T : Subobject B) (h : S ≤ (Subobject.pullback f).obj T) :
+    ∃ k : (S : D) ⟶ (T : D), k ≫ T.arrow = S.arrow ≫ f := by
+  have hf := (Subobject.factors_pullback_obj_iff f T S.arrow).mp
+    ((Subobject.le_iff_factors_arrow _ _).mp h)
+  exact ⟨T.factorThru _ hf, T.factorThru_arrow _ hf⟩
+
+private theorem preserves_pullback {D : Type u} [Category.{v} D] [Abelian D]
+    {A B X Y : D} (a : A ⟶ B) (b : X ⟶ Y)
+    (f : A ⟶ X) (g : B ⟶ Y) (w : f ≫ b = a ≫ g)
+    (S : Subobject X) (T : Subobject Y) (h : S ≤ (Subobject.pullback b).obj T) :
+    (Subobject.pullback f).obj S ≤
+      (Subobject.pullback a).obj ((Subobject.pullback g).obj T) := by
+  rw [← Subobject.pullback_comp, ← w, Subobject.pullback_comp]
+  exact (Subobject.pullback f).monotone h
+
+private theorem preserves_image {D : Type u} [Category.{v} D] [Abelian D]
+    {A B X Y : D} (a : A ⟶ B) (b : X ⟶ Y)
+    (f : A ⟶ X) (g : B ⟶ Y) (w : f ≫ b = a ≫ g)
+    (S : Subobject A) (T : Subobject B) (h : S ≤ (Subobject.pullback a).obj T) :
+    (Subobject.«exists» f).obj S ≤
+      (Subobject.pullback b).obj ((Subobject.«exists» g).obj T) := by
+  apply (Subobject.gc_exists_pullback f _ _).mpr
+  rw [← Subobject.pullback_comp, w, Subobject.pullback_comp]
+  exact h.trans ((Subobject.pullback a).monotone
+    ((Subobject.gc_exists_pullback g).le_u_l T))
+
+private theorem preserves_inf {D : Type u} [Category.{v} D] [Abelian D]
+    {A B : D} (f : A ⟶ B)
+    (S S' : Subobject A) (T T' : Subobject B)
+    (h : S ≤ (Subobject.pullback f).obj T)
+    (h' : S' ≤ (Subobject.pullback f).obj T') :
+    S ⊓ S' ≤ (Subobject.pullback f).obj (T ⊓ T') := by
+  rw [(Subobject.gc_exists_pullback f).u_inf]
+  exact inf_le_inf h h'
+
+private theorem preserves_sup {D : Type u} [Category.{v} D] [Abelian D]
+    {A B : D} (f : A ⟶ B)
+    (S S' : Subobject A) (T T' : Subobject B)
+    (h : S ≤ (Subobject.pullback f).obj T)
+    (h' : S' ≤ (Subobject.pullback f).obj T') :
+    S ⊔ S' ≤ (Subobject.pullback f).obj (T ⊔ T') :=
+  sup_le (h.trans ((Subobject.pullback f).monotone le_sup_left))
+    (h'.trans ((Subobject.pullback f).monotone le_sup_right))
+
+private theorem preserves_steps {D : Type u} [Category.{v} D] [Abelian D]
+    (K L : CochainComplex D ℤ)
+    (F : DecreasingFiltration K) (G : DecreasingFiltration L)
+    (t : K ⟶ L)
+    (s : ∀ a : ℤ, (F.step a : CochainComplex D ℤ) ⟶
+      (G.step a : CochainComplex D ℤ))
+    (hs : ∀ a, s a ≫ (G.step a).arrow = (F.step a).arrow ≫ t) (a n : ℤ) :
+    F.complexStep a n ≤ (Subobject.pullback (t.f n)).obj (G.complexStep a n) := by
+  apply (Subobject.imageSubobject_le_iff _ _).mpr
+  apply (Subobject.factors_pullback_obj_iff _ _ _).mpr
+  have w := congrArg (fun h ↦ h.f n) (hs a)
+  change (s a).f n ≫ (G.step a).arrow.f n = (F.step a).arrow.f n ≫ t.f n at w
+  rw [← w]
+  exact imageSubobject_factors_comp_self _ _
+
+set_option linter.unusedVariables false in
 /-- A filtered map induces cycle and boundary quotient maps and a representative restriction.
 Source: Stacks Project, Homology, Tag 012K, displayed cycle-boundary formulas and
 Lemma 12.24.4.
@@ -81,6 +144,72 @@ theorem filteredQuotient_map_restrictions
               (V.obj.filtration.complexCycleRepresentatives p (p + q) r : C),
             ρ ≫ (V.obj.filtration.complexCycleRepresentatives p (p + q) r).arrow =
               (U.obj.filtration.complexCycleRepresentatives p (p + q) r).arrow ≫
-                (s p).f (p + q) := by sorry
+                (s p).f (p + q) := by
+  have hstep := preserves_steps U.obj.obj V.obj.obj U.obj.filtration V.obj.filtration
+    t.hom.hom s hs
+  have hrep (a n j : ℤ) :
+      U.obj.filtration.complexCycleRepresentatives a n j ≤
+        (Subobject.pullback ((s a).f n)).obj
+          (V.obj.filtration.complexCycleRepresentatives a n j) := by
+    unfold DecreasingFiltration.complexCycleRepresentatives
+    apply preserves_pullback _ _ _ _
+      (congrArg (fun h ↦ h.f n) (hs a)).symm
+    apply preserves_inf
+    · exact hstep a n
+    · exact preserves_pullback (t.hom.hom.f n) (t.hom.hom.f (n + 1))
+        (U.obj.obj.d n (n + 1)) (V.obj.obj.d n (n + 1))
+        (t.hom.hom.comm n (n + 1)).symm
+        _ _ (hstep (a + j) (n + 1))
+  have hcycle (j : ℤ) : U.obj.filtration.complexCycles p (p + q) j ≤
+      (Subobject.pullback (g.f (p + q))).obj
+        (V.obj.filtration.complexCycles p (p + q) j) := by
+    unfold DecreasingFiltration.complexCycles
+    apply preserves_image _ _ _ _ (congrArg (fun h ↦ h.f (p + q)) hg)
+    apply preserves_pullback _ _ _ _
+      (congrArg (fun h ↦ h.f (p + q)) (hs p)).symm
+    apply preserves_sup
+    · apply preserves_inf
+      · exact hstep p (p + q)
+      · exact preserves_pullback (t.hom.hom.f (p + q)) (t.hom.hom.f (p + q + 1))
+          (U.obj.obj.d (p + q) (p + q + 1))
+          (V.obj.obj.d (p + q) (p + q + 1)) (t.hom.hom.comm _ _).symm _ _
+          (hstep (p + j) (p + q + 1))
+    · exact hstep (p + 1) (p + q)
+  have hboundary (j : ℤ) : U.obj.filtration.complexBoundaries p (p + q) j ≤
+      (Subobject.pullback (g.f (p + q))).obj
+        (V.obj.filtration.complexBoundaries p (p + q) j) := by
+    unfold DecreasingFiltration.complexBoundaries
+    apply preserves_image _ _ _ _ (congrArg (fun h ↦ h.f (p + q)) hg)
+    apply preserves_pullback _ _ _ _
+      (congrArg (fun h ↦ h.f (p + q)) (hs p)).symm
+    apply preserves_sup
+    · apply preserves_inf
+      · exact hstep p (p + q)
+      · exact preserves_image (t.hom.hom.f (p + q - 1)) (t.hom.hom.f (p + q))
+          (U.obj.obj.d (p + q - 1) (p + q))
+          (V.obj.obj.d (p + q - 1) (p + q)) (t.hom.hom.comm _ _).symm _ _
+          (hstep (p - j + 1) (p + q - 1))
+    · exact hstep (p + 1) (p + q)
+  have hquot (j : ℤ) (hj : 1 ≤ j) :
+      ∃ (kz : (U.obj.filtration.complexCycles p (p + q) j : C) ⟶
+          (V.obj.filtration.complexCycles p (p + q) j : C))
+        (k : cokernel (Subobject.ofLE _ _ (hBZ U p q j hj)) ⟶
+          cokernel (Subobject.ofLE _ _ (hBZ V p q j hj))),
+        kz ≫ (V.obj.filtration.complexCycles p (p + q) j).arrow =
+          (U.obj.filtration.complexCycles p (p + q) j).arrow ≫ g.f (p + q) ∧
+        cokernel.π (Subobject.ofLE _ _ (hBZ U p q j hj)) ≫ k =
+          kz ≫ cokernel.π (Subobject.ofLE _ _ (hBZ V p q j hj)) := by
+    obtain ⟨kz, hz⟩ := restriction _ _ _ (hcycle j)
+    obtain ⟨kb, hb⟩ := restriction _ _ _ (hboundary j)
+    have w : Subobject.ofLE _ _ (hBZ U p q j hj) ≫ kz =
+        kb ≫ Subobject.ofLE _ _ (hBZ V p q j hj) := by
+      rw [← cancel_mono (V.obj.filtration.complexCycles p (p + q) j).arrow]
+      rw [Category.assoc, hz, ← Category.assoc, Subobject.ofLE_arrow,
+        Category.assoc, Subobject.ofLE_arrow, hb]
+    refine ⟨kz, cokernel.map _ _ kb kz w, hz, ?_⟩
+    exact cokernel.π_desc _ _ _
+  obtain ⟨kz, k, hz, hk⟩ := hquot r (by exact hr)
+  obtain ⟨kz₁, k₁, hz₁, hk₁⟩ := hquot 1 (by omega)
+  exact ⟨kz, k, hz, hk, ⟨kz₁, k₁, hz₁, hk₁⟩, restriction _ _ _ (hrep p (p + q) r)⟩
 
 end CategoryTheory

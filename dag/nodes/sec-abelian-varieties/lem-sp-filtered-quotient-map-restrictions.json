@@ -14,27 +14,29 @@
  ],
  "proof": [
   {
-   "text": "The chain-map equation and filtration preservation imply s_p sends x with dx in F^(p+r) into the same condition in V. Apply the pullback universal property of complexCycleRepresentatives to restrict (s p).f(p+q), obtaining ρ and its inclusion equation.",
+   "text": "Evaluate hs at each degree. The factorization of the step inclusion followed by the underlying map through the target step inclusion proves complexStep preservation (preserves_steps). Preservation of subobjects is expressed as S <= pullback(f)(T). Pullback composition and monotonicity prove preserves_pullback for a commuting square; the image-pullback Galois connection proves preserves_image. Its right adjoint preserves meets, giving preserves_inf, while monotonicity and the supremum universal property give preserves_sup. Apply these operations to the expression defining complexCycleRepresentatives, using the chain-map square, and obtain its restriction via Subobject.factorThru.",
    "uses": [
     "def-sp-filtered-complex-subquotients",
-    "def-sp-filtration"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The projection square for g sends the image of representatives defining complexCycles into the target cycle image, giving kz. The chain-map square preserves d(F^(p-r+1)), preservation of F^p preserves the intersection with that image, and preservation of F^(p+1) preserves the added filtration step. Projection therefore sends complexBoundaries into complexBoundaries. Restrict to the boundary subobjects, check the inclusion square by monic cancellation, then apply cokernel.map to get k.",
-   "uses": [
-    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration",
     "def-sp-abelian"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Repeat the cycle and boundary restrictions at r=1 with the same s and g to get kz₁ and k₁. Zero objects and zero filtration steps obey the same universal properties, and r=1 needs no exceptional case.",
+   "text": "For every integer page j, preserve the intersection of the pth step with the differential inverse image of the (p+j)th step, then its supremum with the (p+1)th step. Pull back along the pth step inclusion and push forward along the graded quotient. The evaluated hs and hg squares and preserves_pullback/preserves_image give hcycle j. For hboundary j, instead use preserves_image on the incoming differential and the (p-j+1)th step, then apply the same intersection, supremum, pullback and graded image operations. Restriction yields kz and kb with their inclusion equations. Postcompose the proposed boundary-to-cycle square with the target cycle inclusion; rewrite hz, hb and Subobject.ofLE_arrow, then cancel this monomorphism. Use cokernel.map on the resulting square, with cokernel.π_desc giving the projection equation.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration",
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Instantiate the quotient construction hquot at r with hr and at 1 with 1 <= 1. Combine their witnesses and equations with the representative restriction from hrep p (p+q) r. No extra first-page comparison or special case is used; zero steps and objects satisfy the same universal properties.",
    "uses": [
     "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -43,9 +45,9 @@
   "def-sp-abelian"
  ],
  "proof_origin": {
-  "by": "Q3 stage-3 worker",
+  "by": "G3 stage-3 worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 012K, Lemma 12.24.4; categorical expansion of its explicit-representatives argument"
+  "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.4; complete categorical argument from image-pullback adjunction and cokernel universal property"
  },
  "mathlib_searches": [
   {
@@ -126,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261013T015608-L-3025163",
-  "kind": "interface",
+  "landing": "20261013T031539-L-3570788",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
