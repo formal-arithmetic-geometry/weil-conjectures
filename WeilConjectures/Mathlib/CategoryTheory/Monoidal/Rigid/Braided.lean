@@ -78,6 +78,47 @@ category `(Perf R, ⊗ᴸ_R, R)` of perfect complexes over a commutative ring `R
 noncomputable def trace {X : C} [HasRightDual X] (f : X ⟶ X) : 𝟙_ C ⟶ 𝟙_ C :=
   η_ X Xᘁ ≫ f ▷ Xᘁ ≫ (β_ X Xᘁ).hom ≫ ε_ X Xᘁ
 
+/-- The trace is cyclic: `tr(g ≫ h) = tr(h ≫ g)` for `g : X ⟶ Y` and `h : Y ⟶ X`. -/
+theorem trace_comp_comm {X Y : C} [HasRightDual X] [HasRightDual Y] (g : X ⟶ Y) (h : Y ⟶ X) :
+    trace (g ≫ h) = trace (h ≫ g) := by
+  symm
+  simp only [trace, MonoidalCategory.comp_whiskerRight, Category.assoc]
+  rw [← coevaluation_comp_rightAdjointMate_assoc, whisker_exchange_assoc,
+    BraidedCategory.braiding_naturality_right_assoc, rightAdjointMate_comp_evaluation,
+    ← BraidedCategory.braiding_naturality_left_assoc]
+
+/-- Blueprint `prop-trf-trace-formal-laws` (1), conjugacy invariance of the trace: if
+`w : X ≅ X'` intertwines `f : X ⟶ X` and `f' : X' ⟶ X'`, then `tr(f) = tr(f')`. -/
+theorem trace_eq_of_iso {X X' : C} [HasRightDual X] [HasRightDual X'] (w : X ≅ X') (f : X ⟶ X)
+    (f' : X' ⟶ X') (h : f ≫ w.hom = w.hom ≫ f') : trace f = trace f' := by
+  have : f' = w.inv ≫ f ≫ w.hom := by rw [h, Iso.inv_hom_id_assoc]
+  rw [this, trace_comp_comm, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
+/-- Blueprint `def-trf-karoubi-trace`: the trace of an endomorphism `v` on a summand of a
+dualizable object depends only on the summand. If `e = π ≫ i` is an idempotent of `P` split by
+`i : Q ⟶ P`, `π : P ⟶ Q` with `i ≫ π = 𝟙 Q`, the summand trace `tr(v ∘ e ∣ P)` is the trace of
+the induced endomorphism `i ≫ v ≫ π` of the summand `Q = eP`. -/
+theorem trace_comp_idempotent {P Q : C} [HasRightDual P] [HasRightDual Q] (v : P ⟶ P)
+    (i : Q ⟶ P) (π : P ⟶ Q) : trace (v ≫ π ≫ i) = trace (i ≫ v ≫ π) := by
+  rw [← Category.assoc, trace_comp_comm]
+
+/-- The trace of the identity of the monoidal unit is the identity, for any right dual of the
+unit. -/
+theorem trace_id_tensorUnit [HasRightDual (𝟙_ C)] : trace (𝟙 (𝟙_ C)) = 𝟙 _ := by
+  have h := ExactPairing.evaluation_coevaluation (𝟙_ C) (𝟙_ C)ᘁ
+  rw [whiskerRight_id, id_whiskerLeft] at h
+  have hc : (ρ_ (𝟙_ C ⊗ (𝟙_ C)ᘁ)).inv ≫ (α_ _ _ _).hom ≫ (λ_ ((𝟙_ C)ᘁ ⊗ 𝟙_ C)).hom =
+      (λ_ (𝟙_ C)ᘁ).hom ≫ (ρ_ (𝟙_ C)ᘁ).inv := by
+    monoidal_coherence
+  have h' : (ρ_ (𝟙_ C)).hom ≫ (η_ _ _ ≫ (λ_ (𝟙_ C)ᘁ).hom ≫ (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫
+      (λ_ (𝟙_ C)).inv = 𝟙 _ := by
+    rw [← reassoc_of% hc]
+    simpa [unitors_equal] using h
+  rw [trace, id_whiskerRight, Category.id_comp, braiding_tensorUnit_left]
+  calc _ = (ρ_ (𝟙_ C)).inv ≫ ((ρ_ (𝟙_ C)).hom ≫ (η_ _ _ ≫ (λ_ (𝟙_ C)ᘁ).hom ≫
+        (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫ (λ_ (𝟙_ C)).inv) ≫ (λ_ (𝟙_ C)).hom := by simp
+    _ = 𝟙 _ := by rw [h']; simp [unitors_equal]
+
 /-- In a braided monoidal closed category, the internal hom `[X, 𝟙_ C]` out of an object `X`
 with a right dual `Xᘁ` is isomorphic to `Xᘁ`: both `ihom X` and `tensorRight Xᘁ` are right
 adjoint to `X ⊗ - ≅ - ⊗ X`. -/

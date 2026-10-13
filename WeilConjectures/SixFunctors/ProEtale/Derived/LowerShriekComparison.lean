@@ -77,10 +77,14 @@ noncomputable def comparisonLowerStarOpenImmersionRestrictionIso :
       ProEtale.openImmersionRestriction A j ⋙ ν_*(U)[A] :=
   Iso.refl _
 
-/-- The extension by zero along an open immersion `j : U ⟶ X` commutes with the comparison
-`ν^*`: `ν_X^* ∘ j^{ét}_! ≅ j^{proét}_! ∘ ν_U^*`. Both sides are left adjoint to the two sides
-of `AlgebraicGeometry.ProEtale.comparisonLowerStarOpenImmersionRestrictionIso`, and the
-isomorphism is its conjugate. -/
+/-- Blueprint `lem-cbc-proetale-extension-zero-comparison`: Comparison of extension by zero with
+the site morphism.
+
+The extension by zero along an open immersion `j : U ⟶ X` commutes with the comparison
+`ν^*`: `ν_X^* ∘ j^{ét}_! ≅ j^{proét}_! ∘ ν_U^*`, naturally in the étale sheaf. Both sides are
+left adjoint to the two sides of
+`AlgebraicGeometry.ProEtale.comparisonLowerStarOpenImmersionRestrictionIso`, which are equal
+(both are restriction of sections along `U ⟶ X`), and the isomorphism is its conjugate. -/
 noncomputable def openImmersionLowerShriekComparisonUpperStarIso :
     Etale.openImmersionLowerShriek A j ⋙ ν^*(X)[A] ≅
       ν^*(U)[A] ⋙ ProEtale.openImmersionLowerShriek A j :=
