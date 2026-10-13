@@ -9,6 +9,9 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
+import Sheaf.RingTheory.ComparisonTensorDiagrams
+import Sheaf.RingTheory.ComparisonTensorCanonicalMaps
+import Sheaf.RingTheory.ComparisonTensorCanonicalCocones
 
 /-! # Local tensor comparison system
 Source: Stacks Project, Algebra, Tag 02JO (3), construction of Ψ, and Tag 00DD.
@@ -183,6 +186,50 @@ theorem exists_comparison_tensor_local_system
                             (colimit.w F (homOfLE hi)) }
                     cLim ((cE.ι.app j).hom ((α.app j).hom ((d j).symm (1 ⊗ₜ[P] q)))) =
                       Algebra.TensorProduct.map αi (AlgHom.id (F.obj i₀) C₀)
-                        (ψ (1 ⊗ₜ[P] q))) := by sorry
+                        (ψ (1 ⊗ₜ[P] q))) := by
+  classical
+  obtain ⟨aPs, D, E, α, d, c, βs, hβs, hDt, hEt, hpush, hcompat, hQ⟩ :=
+    exists_comparison_tensor_diagrams F i₀ B₀ C₀ φ₀ P Q i hi aPi ψ hψ
+  obtain ⟨μs, hμs⟩ :=
+    exists_comparison_tensor_canonical_maps F i₀ B₀ P aP i hi aPi μB hμB aPs βs hβs
+  obtain ⟨cD, cE, dLim, cLim, hcD, hcE⟩ :=
+    exists_comparison_tensor_canonical_cocones F i₀ B₀ C₀ P Q aP i hi
+      aPs D E d c μs hμs hDt hEt
+  refine ⟨aPs, D, E, α, d, c, cD, cE, dLim, cLim, μs,
+    hμs, hcD, hDt, hcE, hEt, hpush, hcompat, ?_⟩
+  intro j q
+  let := (colimit.ι F i₀).hom.toAlgebra
+  let := (F.map (homOfLE hi)).hom.toAlgebra
+  let := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra
+  let := aPi
+  let := aPs j
+  have hc := DFunLike.congr_fun (hcE j)
+    ((α.app j).hom ((d j).symm (1 ⊗ₜ[P] q)))
+  simp only [RingHom.comp_apply, RingEquiv.toRingHom_eq_coe,
+    RingEquiv.coe_toRingHom, AlgHom.toRingHom_eq_coe, AlgHom.coe_toRingHom] at hc
+  dsimp only
+  erw [hc, hQ j q]
+  clear hc
+  let αij : F.obj i →ₐ[F.obj i₀] F.obj j.val :=
+    { (F.map (homOfLE j.property)).hom with
+      commutes' := fun s ↦ congrArg (fun f : F.obj i₀ ⟶ F.obj j.val ↦ f s)
+        (F.map_comp (homOfLE hi) (homOfLE j.property)).symm }
+  let αj : F.obj j.val →ₐ[F.obj i₀] ↥(colimit F) :=
+    { (colimit.ι F j.val).hom with
+      commutes' := fun s ↦ congrArg (fun f : F.obj i₀ ⟶ colimit F ↦ f s)
+        (colimit.w F (homOfLE (hi.trans j.property))) }
+  let αi : F.obj i →ₐ[F.obj i₀] ↥(colimit F) :=
+    { (colimit.ι F i).hom with
+      commutes' := fun s ↦ congrArg (fun f : F.obj i₀ ⟶ colimit F ↦ f s)
+        (colimit.w F (homOfLE hi)) }
+  have hcomp : αj.comp αij = αi := by
+    ext z
+    exact congrArg (fun f : F.obj i ⟶ colimit F ↦ f z)
+      (colimit.w F (homOfLE j.property))
+  change Algebra.TensorProduct.map αj (AlgHom.id (F.obj i₀) C₀)
+    (Algebra.TensorProduct.map αij (AlgHom.id (F.obj i₀) C₀) (ψ (1 ⊗ₜ[P] q))) = _
+  rw [← AlgHom.comp_apply, ← Algebra.TensorProduct.map_comp, hcomp]
+  rfl
+
 
 end RingHom
