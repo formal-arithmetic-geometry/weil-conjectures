@@ -1,0 +1,137 @@
+{
+ "id": "new-e3-affine-model-stalk-presentation",
+ "kind": "statement",
+ "title": "Natural affine model presentation over the original local ring",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $x\\in Y$, and $U\\subseteq Y$ an affine open containing $x$. Put $A=\\Gamma(U,\\mathcal O_Y)$ and $S=\\mathcal O_{Y,x}$ [def-pc-module-stalk-functor], with $A\\to S$ the germ map. Let $T$ be the associated-module functor [lem-weil-pbc-spec-module-tilde-sections] followed by restriction along $U\\cong\\operatorname{Spec}A$. There is a family of $S$-linear equivalences $\\delta_{F,M,e}:S\\otimes_A M\\xrightarrow{\\sim}F_x$ for every sheaf of $\\mathcal O_Y$-modules $F$ [def-weil-sheaf-of-modules-category], every $A$-module $M$, and every model isomorphism $e:F|_U\\xrightarrow{\\sim}T(M)$. For morphisms $c:F\\to G$ and $d:M\\to N$ and model isomorphisms $e_F,e_G$ satisfying $e_G\\circ(c|_U)=T(d)\\circ e_F$, the identity $c_x(\\delta_{F,M,e_F}(t))=\\delta_{G,N,e_G}((S\\otimes_A d)(t))$ holds for every $t\\in S\\otimes_A M$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-stalk-functor",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01BH",
+  "place": "Lemma 17.10.5 (3); Tag 01HV, Lemma 26.5.4 (6)-(7) and functoriality; local-ring presentation part of new-e1-affine-model-stalk-tensor-transport"
+ },
+ "proof": [
+  {
+   "text": "Put xU=(x,hx) in U and q=isoSpec(xU). Mathlib Scheme.Modules.restrictStalkNatIso, first for U.ι and then for U.2.isoSpec.hom, and the stalk of e identify F_x with (tilde M)_q. These additive maps are semilinear over the corresponding invertible stalk-ring maps: on germs on a common neighborhood the formula is epsilon(r smul m)=alpha inverse(r) smul epsilon(m), by germ_restrictStalkNatIso_hom_app, the inverse ring germ formula, and germ_smul. Germ representatives reduce all scalars and elements to this calculation. The chart ring map transports the germ A->S to the canonical map A->O_SpecA,q (isoSpec_hom_appTop and germ_stalkMap_apply). Thus the composite identification is linear over the identified stalk rings. The maps are fixed functorially before any module is chosen.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The statement [lem-weil-pbc-spec-tilde-stalk-localization] gives both the ring localization O_SpecA,q=A_q and the module localization tilde.toStalk M q at the complement of q. Transfer the ring localization along the preceding stalk-ring isomorphism (also Mathlib IsAffineOpen.isLocalization_stalk) and the module localization along the preceding semilinear module isomorphism. This gives a localization map M->F_x compatible with the germ A->S. IsLocalizedModule.isBaseChange and its equiv give the S-linear equivalence delta:S tensor_A M->F_x, sending s tensor m to s times the transported tilde germ of m.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take stalks of the supplied commuting square and use naturality of the restriction-stalk isomorphisms and the tilde germ maps. This gives the naturality equality on 1 tensor m. Both sides are S-linear, so it holds on s tensor m, and tensor induction extends it to all t. All constructions also work for the zero module; an empty open admits no point satisfying hx. No global quasi-coherence of F is required.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E3",
+  "group": "E3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/01BH",
+  "place": "Lemma 17.10.5 (3), and 01HV (6)-(7)",
+  "note": "Expanded geometric presentation part of the parent plan; sources read online on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Stalk of an affine associated module is the tensor product of the local ring with the module naturally",
+   "results": "8 hits: ModuleCat.Tilde.stalkIso, toStalk and localization maps; older names. Pinned source has tilde.toStalk and IsLocalizedModule. No chart/model transport statement.",
+   "date": "2026-10-13",
+   "verdict": "Components only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.toStalk",
+   "results": "2 hits: tilde.toStalk and its IsLocalizedModule instance.",
+   "date": "2026-10-13",
+   "verdict": "No chart transport and natural local-ring presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|isBaseChange|cancelBaseChange",
+   "results": "Mathlib Scheme.Modules.restrictStalkNatIso, IsLocalizedModule.isBaseChange, tensor cancellation. Local source also has private tilde localization comparisons in Sheaf.AlgebraicGeometry.Modules.TildeStalkTensorComparison; no exact assembled chart/model presentation.",
+   "date": "2026-10-13",
+   "verdict": "Components only; blueprint search affine model stalk returned zero matches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of an affine associated module is naturally local ring tensor module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModelStalkTensorTransport",
+  "group": "E3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "Original affine-model stalk transport plan, restriction and localization identification before extension to R.",
+   "via": [
+    "new-e1-affine-model-stalk-tensor-transport",
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModelStalkPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModelStalkPresentation.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_model_stalk_presentation",
+  "statement": "theorem exists_affine_model_stalk_presentation\n    {Y : Scheme.{u}} (x : Y) (U : Y.affineOpens) (hx : x ∈ U.1) :\n    let A := (Γ(Y, U.1) : Type u)\n    let S := (Y.presheaf.stalk x : Type u)\n    letI : Algebra A S := (Y.presheaf.germ U.1 x hx).hom.toAlgebra\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    ∃ δ : ∀ (F : Y.Modules) (M : ModuleCat.{u} A),\n      ((Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj M) →\n        (S ⊗[A] M) ≃ₗ[S] F.presheaf.stalk x,\n      ∀ (F G : Y.Modules) (M N : ModuleCat.{u} A) (c : F ⟶ G) (d : M ⟶ N)\n        (eF : (Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj M)\n        (eG : (Scheme.Modules.restrictFunctor U.1.ι).obj G ≅ T.obj N),\n        (Scheme.Modules.restrictFunctor U.1.ι).map c ≫ eG.hom = eF.hom ≫ T.map d →\n        ∀ t, c.stalkLinearMap x (δ F M eF t) =\n          δ G N eG (d.hom.baseChange S t)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T134400-L-95795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T134400-L-95795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
