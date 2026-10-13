@@ -9,9 +9,9 @@
  "unit": "sk-thm-picard-pn",
  "proof_origin": {
   "by": "agent",
-  "agent": "M1 (Codex)",
+  "agent": "M3 (Codex)",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM, equation 20.23.6.1; labelled-deletion verification omitted in source, written out by the agent"
+  "place": "Tag 01FM, equation 20.23.6.1; direct labelled-prefix computation formalized from the existing plan"
  },
  "blueprint": {
   "is": null,
@@ -30,12 +30,33 @@
  "statement": "Let X be a scheme, I a linearly ordered type, U : I -> X.Opens, F an abelian-group-valued presheaf, S a SiteCechComplex for the maps U_i -> X [def-weil-pbc-site-cech-complex], p a natural number, s a degree-(p+1) cochain, and t : Fin (p+2) -> I. Use the stable sorting filter, partial sorting filter, and junction map [def-pc-alternating-cech-sorting-operators]. Define E and B by the following displayed formulas. The sum of junction-labelled deletions with r <= a equals the sum of unadvanced partial sorting contributions B_a.\n\nlet E := fun (σ : Equiv.Perm (Fin (p + 2))) (a : Fin (p + 2))\n        (τ : Equiv.Perm (Fin (p + 2))) (r : Fin (p + 3)) ↦\n      ((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) •\n        F.map (S.indexMap t (cechJunction σ τ a)).op\n          ((-1 : ℤ) ^ r.val •\n            F.map (S.indexMap (t ∘ cechJunction σ τ a) r.succAbove).op\n              (s ((t ∘ cechJunction σ τ a) ∘ r.succAbove)))\n    let P := ∑ σ, ∑ a, ∑ τ, ∑ r,\n      if ((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧\n          cechJunction σ τ a r = σ a) ∧ r.val ≤ a.val then E σ a τ r else 0\n    let B : ℕ → S.cochains F (p + 1) := fun a t ↦\n      ∑ σ, ∑ τ, if cechStableSort t σ ∧\n          (∀ k, k.val < a → τ k = σ k) ∧\n          (∀ i j, a ≤ i.val → i < j → τ i < τ j) then\n        (Equiv.Perm.sign τ : ℤ) • F.map (S.indexMap t τ).op (s (t ∘ τ)) else 0\n    P = ∑ a : Fin (p + 2), B a.val t",
  "proof": [
   {
-   "text": "Proof: Fix sigma, a and a partial sorting permutation tau. In the prefix of\nq = cechJunction sigma tau a, q(r) = sigma(r). Injectivity of sigma shows\nthat q(r) = sigma(a) and r <= a hold exactly when r = a. Removing this\nposition gives q composed with a.succAbove = tau: below a this uses the\nfixed-prefix condition, and at and above a it uses the tail branch of q.\nThe composite of the two index maps is the index map for tau, since their\ncomposites with every projection agree by indexMap_pr and the chosen fibre\nproduct universal property. Apply functoriality of F and move integer scalar\nmultiplication through its additive maps. The two powers (-1)^a multiply\nto 1, so the remaining term is sign(tau) times the restriction along tau.\nFor a pair failing the stable or partial sorting filter, both contributions\nare zero. The partial sorting filter is exactly the filter defining B(a).\nSumming these identities over r, tau, a and sigma, and commuting the sigma\nand a sums, gives the claimed equality. No uniqueness of stable sorting is\nneeded here. Repeated values of t are harmless since deletion uses labels.",
+   "text": "For any prefix deletion position r, unfold cechJunction in its prefix branch. Injectivity of sigma shows that cechJunction sigma tau a r = sigma a and r.val <= a.val hold if and only if r = a.castSucc. This is prefix_junction_filter.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Under cechPartialSort sigma tau a, deleting a.castSucc from the junction recovers tau as a function. Below a, succAbove is castSucc and the fixed-prefix condition identifies sigma k with tau k. At or above a, succAbove is succ and the tail branch is tau k. This is prefix_junction_delete.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Parallel morphisms in X.Opens are equal. Thus the opposite index map for a composite equals the composite of the opposite index maps. Functor.map_comp gives the local composite transport equality; rewrite the recovered junction deletion tuple to tau. Move integer scalar multiplication through F.map and combine the scalars. The product of the two powers (-1)^a is one, leaving sign(tau).",
    "uses": [
     "def-pc-alternating-cech-sorting-operators",
     "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Commute the outer sigma and a sums and compare summands for each a, sigma, tau. If stable and partial sorting hold, prefix_junction_filter and Finset.sum_ite_eq reduce the r sum to a.castSucc, and the previous transport and coefficient identities give its B summand. Otherwise both sides vanish because the B filter is definitionally stable sorting and cechPartialSort. Finset.sum_congr assembles the equality.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -111,13 +132,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T232141-L-1992950",
-  "kind": "interface",
+  "landing": "20261013T004335-L-2509515",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
