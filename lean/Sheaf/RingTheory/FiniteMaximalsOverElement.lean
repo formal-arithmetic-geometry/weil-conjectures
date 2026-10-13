@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 
 /-!
 # Finitely many maximal ideals over a nonzero element
@@ -34,6 +35,17 @@ theorem finite_maximalIdeals_containing_nonzero
     (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R]
     (h_dim : ringKrullDim R = 1) (x : R) (hx : x ≠ 0) :
     Set.Finite {m : Ideal R | m.IsMaximal ∧ x ∈ m} := by
-  sorry
+  let : Ring.KrullDimLE 1 R := Ring.krullDimLE_iff.mpr (by simp [h_dim])
+  refine (Ideal.finite_minimalPrimes_of_isNoetherianRing R (Ideal.span {x})).subset ?_
+  rintro m ⟨hm, hxm⟩
+  let : m.IsPrime := hm.isPrime
+  obtain ⟨p, hp, hpm⟩ := Ideal.exists_minimalPrimes_le
+    (m.span_singleton_le_iff_mem.mpr hxm)
+  have hxp : x ∈ p := hp.le (Ideal.subset_span (Set.mem_singleton x))
+  have hp0 : p ≠ ⊥ := by
+    intro h
+    exact hx (by simpa [h] using hxp)
+  have h_eq : p = m := (hp.isPrime.isMaximal_of_ne_bot hp0).eq_of_le hm.ne_top hpm
+  exact h_eq ▸ hp
 
 end Ring
