@@ -43,6 +43,12 @@ theorem exists_simple_filtration_of_length_lt_top
         (∀ i : Fin r,
           IsSimpleModule R
             (↥(F i.succ) ⧸ Submodule.comap (F i.succ).subtype (F i.castSucc))) := by
-  sorry
+  obtain ⟨s, hs₀, hs₁⟩ := isFiniteLength_iff_exists_compositionSeries.mp
+    (Module.length_ne_top_iff.mp hM.ne)
+  refine ⟨s.length, s, hs₀, hs₁, ?_, ?_⟩
+  · intro i
+    exact (s.step i).lt
+  · intro i
+    exact (covBy_iff_quot_is_simple (s.step i).le).mp (s.step i)
 
 end Module

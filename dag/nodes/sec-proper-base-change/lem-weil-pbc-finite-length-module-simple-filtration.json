@@ -29,26 +29,18 @@
  ],
  "proof": [
   {
-   "text": "Choose a chain of maximal length. Let $\\ell=\\mathrm{length}_R(M)<\\infty$ [def-weil-pbc-module-length]. Let $S$ be the set of integers $n\\ge0$ for which there is a chain of $R$-submodules $0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_n=M$. $S$ is nonempty: if $M=0$ the one-term chain $0=M_0=M$ gives $0\\in S$, and if $M\\ne0$ the chain $0\\subsetneq M$ gives $1\\in S$. Every $n\\in S$ satisfies $n\\le\\ell$ by the definition of $\\ell$ as the supremum. So $S$ is a nonempty set of integers bounded above by $\\ell$ and has a largest element $r$; fix a chain $0=M_0\\subsetneq\\cdots\\subsetneq M_r=M$ realizing it. (Stacks says 'choose any maximal chain'; this step writes out why one exists: a chain of largest length cannot be refined.)",
+   "text": "Apply Mathlib Module.length_ne_top_iff to the inequality length_R(M) < infinity [def-weil-pbc-module-length], obtaining IsFiniteLength R M. Apply isFiniteLength_iff_exists_compositionSeries to obtain a composition series s of Submodule R M with head zero and last M. Set r = s.length and F = s.toFun; RelSeries.head and RelSeries.last give the required endpoints.",
    "uses": [
     "def-weil-pbc-module-length"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00J3 (lemma-simple-pieces), statement ('Choose any maximal chain') and proof, line 12546ff."
-   }
+   "elementary": true
   },
   {
-   "text": "The quotients are simple. Fix $1\\le i\\le r$ and let $\\pi:M_i\\to M_i/M_{i-1}$ be the projection. Since $M_{i-1}\\ne M_i$, the quotient $M_i/M_{i-1}$ is nonzero. Suppose $\\bar N\\subset M_i/M_{i-1}$ is an $R$-submodule with $\\bar N\\ne0$ and $\\bar N\\ne M_i/M_{i-1}$. Then $N=\\pi^{-1}(\\bar N)$ is an $R$-submodule of $M$ with $M_{i-1}\\subseteq N\\subseteq M_i$ and $\\pi(N)=\\bar N$ ($\\pi$ is surjective); $N\\ne M_{i-1}$ since $\\pi(M_{i-1})=0\\ne\\bar N$, and $N\\ne M_i$ since $\\pi(M_i)=M_i/M_{i-1}\\ne\\bar N$. Inserting $N$ gives a chain $0=M_0\\subsetneq\\cdots\\subsetneq M_{i-1}\\subsetneq N\\subsetneq M_i\\subsetneq\\cdots\\subsetneq M_r=M$ with $r+1$ proper inclusions, so $r+1\\in S$, contradicting the maximality of $r$. Hence every submodule of $M_i/M_{i-1}$ is $0$ or $M_i/M_{i-1}$, and $M_i/M_{i-1}$ is simple [def-weil-pbc-simple-module]. (Stacks 00J3 proof: 'If $M_i/M_{i-1}$ is not simple then we can refine the filtration and the filtration is not maximal.')",
+   "text": "For each i in Fin r, s.step i states that F(i.castSucc) is covered by F(i.succ); its lt field gives the required strict inequality. Apply Mathlib covBy_iff_quot_is_simple to the le field and the same covering relation. This gives IsSimpleModule R (F(i.succ) / comap (F(i.succ)).subtype (F(i.castSucc))) [def-weil-pbc-simple-module], exactly the required quotient. When r = 0 both adjacent-step conditions are vacuous, so the construction also includes the zero module.",
    "uses": [
     "def-weil-pbc-simple-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00J3 (lemma-simple-pieces), statement ('Choose any maximal chain') and proof, line 12546ff."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -56,9 +48,9 @@
   "def-weil-pbc-simple-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 00J3 (lemma-simple-pieces), part (2) and the first sentence of its proof; the existence of a maximal chain (step 1) is written out from Definition Tag 02LY"
+  "place": "Lemma Tag 00J3, part (2), implemented via Mathlib Module.length_ne_top_iff, isFiniteLength_iff_exists_compositionSeries and covBy_iff_quot_is_simple."
  },
  "mathlib_searches": [
   {
@@ -156,5 +148,15 @@
   "group": "G1",
   "result": "pass",
   "note": "CommRing R, Module R M; hM = Module.length R M < ⊤ (recorded def-weil-pbc-module-length); ∃ r:ℕ, F : Fin (r+1) → Submodule R M, F 0 = ⊥, F last = ⊤, strict F i.castSucc < F i.succ, IsSimpleModule R (F i.succ ⧸ comap subtype F i.castSucc) (recorded def-weil-pbc-simple-module); r=0 zero module; not literally Mathlib (isFiniteLength_iff_exists_compositionSeries has IsFiniteLength + covBy), so existing:false; same Fin-chain shape as landed consumer ArtinianIdealLengthOneFiltration"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T040801-L-3952886",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
