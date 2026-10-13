@@ -13,20 +13,35 @@
  ],
  "proof": [
   {
-   "text": "Take degree n to be the additive group of locally constant functions\nfrom G^n to the carrier of E(M). Define the differential by the formula below.\nThe non-action faces preserve local constancy by continuous precomposition\nwith the projections and adjacent multiplication maps. For the action face,\nfix a point (g_0,t). The cochain is constant with value m near t. On the open\ncoset g_0 Stab(m), the action on m is constant, so this face is locally constant.\nAll faces are additive in the coefficient, and so is their signed sum.\nNumber the action face 0, the multiplication faces 1 through n, and the final\nomission face n+1. The usual face relation pairs compositions of faces in the\nsquare of the differential, with the two signs differing by a minus sign.\nFor two internal faces the relation is associativity or commutation of\nmerges of disjoint pairs; at the first face it is the action law; at the\nlast face it is the compatibility of omission with the other faces.\nThese exhaust the pairs, so the square vanishes. At n=0 this also follows\nby expanding d(g acting on m minus m) and applying the action law.\nThese additive maps and their square-zero relation define the complex.\nPostcompose cochains with E(f). Equivariance gives commutation with the\naction face, and additivity gives commutation with the signed sum, hence\nthese are complex morphisms. Identity and composition hold pointwise.\nThis defines the functor C on A; take identity additive coordinates e.\nThe two required equations are then the definitions of the maps and\nof the differential. This construction does not assert exactness.",
+   "text": "Construct lcD explicitly on locally constant functions using the displayed inhomogeneous differential. Open stabilizers give ContinuousSMul on the discrete coefficient module. The tail and contractNth maps are continuous coordinatewise, so each face and its finite signed sum are locally constant. Addition is verified pointwise.",
    "uses": [
     "def-exc-discrete-modules-category"
    ],
    "elementary": false
+  },
+  {
+   "text": "Give the coefficient representation its discrete topology, making each linear action map continuous. Apply lem-sc-homogeneous-inhomogeneous-continuous-cohomology to obtain additive coordinates identifying lcD with the differential of Mathlib TopRep.homogeneousCochains. Transport the square-zero equation of that complex through these coordinates. No data is chosen from an unproved existence theorem: lcD remains the explicit formula, and the coordinates are used only in the proof of square-zero.",
+   "uses": [
+    "lem-sc-homogeneous-inhomogeneous-continuous-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build lcComplex with CochainComplex.of. Define coefficient maps by LocallyConstant.mapAddMonoidHom. Equivariance, map_add, map_sum and map_zsmul prove commutation with lcD pointwise. HomologicalComplex.hom_ext and pointwise reflexivity prove identity and composition. Compose the resulting functor with E.functor and take identity additive coordinates; the two required formulas are respectively reflexivity and CochainComplex.of_d.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-exc-discrete-modules-category"
+  "def-exc-discrete-modules-category",
+  "lem-sc-homogeneous-inhomogeneous-continuous-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG; the pointwise verification is supplied by F4 from the parent proof."
+  "place": "Tag 0DVG, displayed differential; B2 uses the existing homogeneous coordinates to transport square-zero."
  },
  "mathlib_searches": [
   {
@@ -101,10 +116,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T022413-L-3213047",
-  "kind": "interface",
+  "landing": "20261013T054210-L-440944",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
