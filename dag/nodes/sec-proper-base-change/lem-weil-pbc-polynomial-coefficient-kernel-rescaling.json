@@ -1,0 +1,168 @@
+{
+ "id": "lem-weil-pbc-polynomial-coefficient-kernel-rescaling",
+ "kind": "statement",
+ "title": "Coefficient rescaling stabilizes polynomial multiplication kernels",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $\\mathfrak p$ a prime ideal, $d\\geq0$, and $f:\\operatorname{Fin}(d)\\to R$. Assume that every permutation of the sequence of images of the $f_i$ in $R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is regular [def-weil-pbc-regular-sequence]. For each integer $e>0$, there are $s_i\\in R\\setminus\\mathfrak p$ such that, with $T=R[X_i:i\\in\\operatorname{Fin}(d)]$ [def-weil-pbc-mv-polynomial-ring] and $\\gamma_i=C(s_if_i)X_i$, multiplication by $\\gamma_i$ and by $\\gamma_i^2$ have equal kernels on $T/(\\gamma_j^e:j<i)$ for every $i$. No target ring, field, flat chart, or maximal-ideal generation is assumed or asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 07FJ (lemma-resolve-general), justification of item-modify-pii (item 12)"
+ },
+ "proof": [
+  {
+   "text": "Multiplying each term of a regular sequence by a unit preserves regularity. Induct on the list: the head remains injective and the quotient by the head is unchanged, since the principal ideals of a and ua are equal. In the source prime localization every coefficient outside p becomes a unit. This is implemented by regular_ofFn_mul_units.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any current coefficient family, regular in every order after localization, apply the polynomial-variables theorem to obtain regularity of C(f_j)X_j over R_p. Raise preceding terms to e, leaving the current term at exponent one, using the positive-powers theorem. regular_mod_prev identifies injectivity of the current term modulo the ideal of preceding powers. The proved helper ofList_take_ofFn identifies this ideal with the explicit index-bounded span.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-polynomial-variables",
+    "lem-weil-pbc-regular-sequence-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put T=R[X_j] and S=C(R minus p). Polynomial base change makes R_p[X_j] a localization of T at S (Mathlib MvPolynomial.isLocalization). The quotient by the extended prefix ideal is the localization of T modulo that prefix: the quotient localization instance and isLocalizedModule_iff_isLocalization give the canonical module localization map. IsLocalizedModule.linearEquiv identifies it with LocalizedModule S (T/I), preserving scalar multiplication. Thus the injectivity from the previous step gives equality of first and square kernels on the localized module. All these maps are the canonical maps; no arbitrary choice of ring or quotient is made.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "T is Noetherian by the finite-type Noetherian theorem, and T/I is finite as a T-module. Apply Ogoma to S, the current polynomial term, and T/I. Its exponent-one conclusion supplies an element C(t) of S; choose its coefficient preimage t outside p and replace only the current coefficient by t times that coefficient. This is the proved helper exists_factor_of_polynomial_regular.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-ogoma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n from zero to d, maintaining coefficient factors outside p and kernel equalities at all indices below n. Initially all factors are one. At index n, unit invariance from step 1 and local permutation regularity give the hypotheses of steps 2 through 4. Update only the n-th factor. For every earlier index both its current scalar and the entire preceding-power ideal are unchanged, so its kernel equality persists. A span equality proved by extensionality transports the new n-th equality to the updated family. At n=d all required indices are covered. The induction starts at d=0 without requiring an index, so the empty-family case is included.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-ogoma",
+  "lem-weil-pbc-regular-sequence-polynomial-variables",
+  "lem-weil-pbc-regular-sequence-powers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 07FJ (lemma-resolve-general), justification of item-modify-pii (item 12)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular sequence polynomial coefficients localization equalize multiplication kernels square",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rescale coefficients outside a prime to equalize first and square multiplication kernels in polynomial quotients of powers of earlier regular parameters",
+   "date": "2026-10-13",
+   "results": "Eight unrelated hits about Weierstrass preparation, untilts and perfection; none states coefficient kernel rescaling.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegular, MvPolynomial",
+   "date": "2026-10-13",
+   "results": "Twelve hits about regular elements X, monomials and leading coefficients; no regular-sequence rescaling result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ogoma|kernel.*rescal|rescal.*kernel",
+   "date": "2026-10-13",
+   "results": "One unrelated SemiNormedGrp/Kernels norm-rescaling hit; no ring-theoretic coefficient rescaling theorem.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuPolynomialKernelParameters",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07FJ, justification of item-modify-pii: induction rescaling the next coefficient by an element outside the contracted prime",
+   "via": [
+    "lem-weil-pbc-popescu-polynomial-kernel-parameters",
+    "lem-weil-pbc-popescu-coefficient-rescaling",
+    "lem-weil-pbc-popescu-rescaling-data",
+    "lem-weil-pbc-popescu-unpadded-coefficient-chart",
+    "lem-weil-pbc-popescu-rescaled-coefficient-chart",
+    "lem-weil-pbc-popescu-parameter-coefficient-model",
+    "lem-weil-pbc-popescu-parameter-coefficients",
+    "lem-weil-pbc-popescu-parameter-solution",
+    "lem-weil-pbc-popescu-char-p-preparation-global",
+    "popescu-char-p-preparation-core",
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialCoefficientKernelRescaling",
+  "file": "lean/Sheaf/RingTheory/PolynomialCoefficientKernelRescaling.lean",
+  "declaration": "RingTheory.Sequence.exists_polynomial_coefficient_kernel_rescaling",
+  "statement": "theorem exists_polynomial_coefficient_kernel_rescaling\n    {R : Type u} [CommRing R] [IsNoetherianRing R]\n    (p : Ideal R) [p.IsPrime] (d : ℕ) (f : Fin d → R)\n    (hperm : ∀ l : List (Localization.AtPrime p),\n      (List.ofFn (fun i ↦ algebraMap R (Localization.AtPrime p) (f i))).Perm l →\n        IsRegular (Localization.AtPrime p) l)\n    (e : ℕ) (he : 0 < e) :\n    ∃ s : Fin d → R, (∀ i, s i ∉ p) ∧\n      (∀ (i : Fin d)\n        (x : MvPolynomial (Fin d) R ⧸ Ideal.span\n          {y | ∃ j : Fin d, j.val < i.val ∧\n            y = (MvPolynomial.C (s j * f j) * MvPolynomial.X j) ^ e}),\n        (MvPolynomial.C (s i * f i) * MvPolynomial.X i) • x = 0 ↔\n          (MvPolynomial.C (s i * f i) * MvPolynomial.X i) ^ 2 • x = 0)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T122444-L-3609985",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T122444-L-3609985",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
