@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-integer-section-acyclic-incoming-kernel-image",
+ "kind": "statement",
+ "title": "First-cohomology vanishing of incoming kernels and images for integer complexes",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $V$ an open of $Y$, and $F$ an integer-indexed cochain complex of module sheaves [def-pc-cochain-complex-modules, def-weil-sheaf-of-modules-category]. Assume that for every integer $j$ and positive integer $r$, the ordinary sheaf cohomology [def-sc-sheaf-cohomology-functor] of both $\\operatorname{coker}(F^{j-1}\\to F^j)|_V$ and $H^j(F)|_V$ vanishes in degree $r$. For every integer $p$, the degree-one module right-derived global sections [def-sc-ringed-space-module-cohomology] on $V$ of $\\ker(F^{p-1}\\to F^p)|_V$ and $\\operatorname{im}(F^{p-1}\\to F^p)|_V$ are zero objects. No boundedness, affineness, quasi-coherence, or termwise vanishing is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tag 08C2, lemma-alternating-cech-complex-complex-ss, hypotheses (3)(b),(3)(c); Tag 015B, lemma-higher-derived-functors, long exact sequence of right derived functors, applied to cycle and opcycle sequences."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-sheaf-cohomology-functor",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Convert the ordinary cohomology vanishings into zero objects in module right-derived sections using the natural additive equivalences of lem-sc-module-cohomology-source-comparison on the open subscheme V. Restriction is exact, so the following short exact sequences remain short exact after restriction. Module sheaves on V have enough injectives by lem-sc-ringed-space-module-sheaves-enough-injectives, allowing application of the right-derived long exact sequence.",
+   "uses": [
+    "lem-sc-module-cohomology-source-comparison",
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put $Q^j=\\operatorname{coker}d^{j-1}$ and $B^{j+1}=\\operatorname{im}d^j$. The right homology kernel property gives $0\\to H^j(F)\\to Q^j\\to B^{j+1}\\to0$. Its long exact sequence places $H^1(V,B^{j+1}|_V)$ between $H^1(V,Q^j|_V)=0$ and $H^2(V,H^j(F)|_V)=0$. Hence incoming images have vanishing first cohomology in every degree. The image of the map out of Q identifies with the image of d by its strong epi-mono factorization.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cycle sequence $0\\to B^j\\to Z^j\\to H^j(F)\\to0$ and its long exact sequence put $H^1(V,Z^j|_V)$ between two zero objects, using the preceding step and the homology vanishing hypothesis. Thus cycles have vanishing first cohomology. At degree p, the incoming kernel is $Z^{p-1}$ and the incoming image is $B^p$; transport through the kernel and image universal-property isomorphisms. The argument is valid also for empty V and the zero complex.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "worker A4",
+  "document": "Stacks Project, Tags 08C2 and 015B",
+  "place": "Direct dimension shifting in the cycle and opcycle short exact sequences; formal proof in IntegerSectionAcyclicIncomingKernelImage."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of cohomology of cokernels and homology sheaves implies acyclicity of cycles and boundaries",
+   "results": "{\"t\": \"2026-10-13T12:53:20Z\", \"tool\": \"leansearch\", \"query\": \"Vanishing of cohomology of cokernels and homology sheaves implies acyclicity of cycles and boundaries\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyIsKernel\"",
+   "results": "{\"t\": \"2026-10-13T12:54:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"homologyIsKernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.rightHomologyIsKernel\", \"CategoryTheory.ShortComplex.homologyIsKernel\", \"HomologicalComplex.homologyIsKernel\"], \"digest\": \"c55f1c16b3aa5137\"}",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic_incoming|cohomology.*opcycles",
+   "results": "{\"t\": \"2026-10-13T12:53:21Z\", \"tool\": \"grep\", \"query\": \"acyclic_incoming|cohomology.*opcycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyMono",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine restriction-of-scalars adjunction used in its first proof paragraph: degreewise mono part of unbounded affine section comparison, reduced to the cycle and opcycle exact sequences.",
+   "via": [
+    "lem-sc-affine-open-sections-resolution-quasi-iso",
+    "lem-sc-qcoh-alternating-cech-resolution-quasi-iso",
+    "lem-sc-affine-basis-sections-derived-unit",
+    "lem-sc-affine-basis-sections-resolution-homology-mono"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegerSectionAcyclicIncomingKernelImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegerSectionAcyclicIncomingKernelImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.integer_section_acyclic_incoming_kernel_image",
+  "statement": "theorem integer_section_acyclic_incoming_kernel_image\n    {Y : Scheme.{u}} (F : CochainComplex Y.Modules ℤ) (V : Y.Opens)\n    (hcokernels : ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((cokernel (F.d (n - 1) n)).restrict V.ι).H (q + 1)))\n    (hhomology : ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.homology n).restrict V.ι).H (q + 1))) (p : ℤ) :\n    IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace 1).obj\n      ((restrictFunctor V.ι).obj (kernel (F.sc p).f))) ∧\n    IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace 1).obj\n      ((restrictFunctor V.ι).obj (image (F.sc p).f)))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T133223-L-4192519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T133223-L-4192519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
