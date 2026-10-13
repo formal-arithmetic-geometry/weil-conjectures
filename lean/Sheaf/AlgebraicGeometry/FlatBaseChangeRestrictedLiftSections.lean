@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 
+import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftAugmentation
+import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSectionsFormula
+
 /-! # The restriction square on section complexes
 
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
@@ -21,6 +24,25 @@ open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
+
+/-- Restriction along inverse-image top identifies global sections of pushforward. -/
+private def restrictedLiftSectionsIso {Y Z : Scheme.{uBC}} (h : Y ⟶ Z)
+    (A : CochainComplex Y.Modules ℕ) :
+    ((RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)).obj A ≅
+    ((RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+      (((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).obj A) := by
+  refine (HomologicalComplex.Hom.isoOfComponents
+    (fun n ↦ (presheaf (A.X n)).mapIso
+      (eqToIso (by simp) : op (h ⁻¹ᵁ (⊤ : Z.Opens)) ≅ op (⊤ : Y.Opens))) ?_).symm
+  intro n m _
+  change (presheaf (A.X n)).map _ ≫
+    ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).map (A.d n m)).app _ =
+    ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).map (A.d n m)).app _ ≫
+      (presheaf (A.X m)).map _
+  exact ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).map
+    (A.d n m)).naturality _
 
 /-- Restriction of an augmented lift, together with its canonical section square.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
@@ -75,6 +97,19 @@ theorem flatBaseChangeRestrictedLift_sections {X S S' : Scheme.{uBC}}
           ((RingedSpace.openModuleSections
             (Limits.pullback g f).toRingedSpace U).mapHomologicalComplex
               (ComplexShape.up ℕ)).obj J.cocomplex)
-              (flatBaseChangeOpenEquality f g V))).hom := by sorry
+              (flatBaseChangeOpenEquality f g V))).hom := by
+  let h := (pullback.snd g f).resLE (f ⁻¹ᵁ V)
+    ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl
+  let a := restrictedLiftSectionsIso h D.target.resolution.cocomplex
+  have ha : ∀ n : ℕ, a.inv.f n =
+      (Scheme.Modules.presheaf (D.target.resolution.cocomplex.X n)).map
+        (eqToHom (by simp) :
+          (⊤ : ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)).toScheme.Opens) ⟶
+            h ⁻¹ᵁ (⊤ : (f ⁻¹ᵁ V).toScheme.Opens)).op := by
+    intro n
+    rfl
+  refine ⟨flatBaseChangeRestrictedLift f g I J t V D, a,
+    flatBaseChangeRestrictedLift_augmentation f g I J t ht V D, ha, ?_⟩
+  exact flatBaseChangeRestrictedLift_section_formula f g I J t V D a ha
 
 end AlgebraicGeometry.Scheme.Modules
