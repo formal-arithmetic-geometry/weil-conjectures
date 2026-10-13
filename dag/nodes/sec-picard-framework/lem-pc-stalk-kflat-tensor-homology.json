@@ -15,33 +15,35 @@
  ],
  "proof": [
   {
-   "text": "The stalk criterion makes P_x K-flat: tensoring any acyclic complex with it gives an acyclic complex.",
+   "text": "Apply isKFlat_iff_stalk_isKFlat to P and hP at x. This gives acyclicity of total tensor with the actual stalk complex for every acyclic complex over the stalk ring.",
    "uses": [
     "lem-pc-kflat-stalk-criterion"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Restriction along e and its inverse are inverse exact equivalences. The balanced tensor maps send m tensor n to m tensor n, with scalars interpreted via e; their inverses use e inverse, so they preserve total tensor and acyclicity. They therefore carry the K-flat stalk complex to the K-flat complex S(P). The same termwise equivalence carries F[0] to S(F)[0].",
+   "text": "For a ring equivalence e:A≃B, specialize nonempty_tensorRestrictExtendScalarsIso to the second complex restricted along e. Restriction is fully faithful, so the counit of extendRestrictScalarsAdj is invertible. Lift that counit to complexes by mapHomologicalComplexCompIso and mapHomologicalComplexIdIso, apply tensor with the first complex, and compose its restricted inverse with the tensor identity. This proves Res(Tot(P tensor L))≅Tot(Res(P) tensor Res(L)). To transport K-flatness, lift an arbitrary acyclic A-complex through restriction along e inverse, apply stalk K-flatness, and restrict the resulting acyclic total tensor back along e. Compose the tensor comparison with the complex equivalence counit to return to the original test complex. Convert this acyclic-tensor criterion to categorical kFlat using kFlat_quotient_obj_iff and kFlat_iff_preserves_acyclic, with braiding supplying the other tensor order.",
    "uses": [
+    "lem-pc-tensor-restrict-extend-scalars",
     "def-pc-module-kflat-complex"
    ],
    "elementary": true
   },
   {
-   "text": "Use exactness of stalks to commute homology with the stalk functor. Use the natural stalk tensor complex isomorphism, and the termwise single comparison, to identify the transported stalk tensor complex with Tot(S(P) tensor S(F)[0]). Scalar restriction is exact and does not change the underlying abelian group.",
+   "text": "Use the exactness clause of module_stalk_exact with each short complex to prove that the module stalk functor preserves homology, via Functor.exact_tfae. Obtain finite-limit and finite-colimit preservation and compose with exact restriction of scalars. Assemble the complex isomorphism by applying restriction to exists_stalk_tensor_complex_iso, then the ring-equivalence tensor comparison, then singleMapHomologicalComplex on the second factor. Apply homologyFunctor.mapIso and prepend the inverse of ShortComplex.mapHomologyIso. This gives the ordinary transported stalk tensor homology isomorphism.",
    "uses": [
     "lem-weil-pbc-module-stalk-exact",
-    "lem-pc-stalk-tensor-complex"
+    "lem-pc-stalk-tensor-complex",
+    "lem-pc-tensor-restrict-extend-scalars"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the source K-flat tensor model comparison to S(P) and S(F)[0]. Its first factor is K-flat; its second need not be flat. Compose with singleFunctorIsoCompQ and homologyFunctorFactors, apply degree-i homology and forget scalars. These compositions give the claimed isomorphism. Zero modules and zero rings satisfy the same identities; total complexes use sums, so unbounded complexes are allowed.",
+   "text": "Apply QObjTensorQObjIsoOfKFlatLeft to the transported stalk of P and the degree-zero single of the transported F. Precompose with whiskerLeftIso of singleFunctorIsoCompQ. Apply degree-i derived homology to the inverse of this comparison, prepend the inverse of homologyFunctorFactors, and compose with the ordinary homology isomorphism from the previous step. Forget scalars to obtain the abelian-group isomorphism in the statement. The underlying abelian-group stalk agrees definitionally with forgetting the actual constructed stalk module.",
    "uses": [
     "lem-pc-source-kflat-module-tensor-model"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -49,15 +51,16 @@
   "lem-pc-kflat-stalk-criterion",
   "lem-pc-source-kflat-module-tensor-model",
   "lem-pc-stalk-tensor-complex",
+  "lem-pc-tensor-restrict-extend-scalars",
   "lem-weil-pbc-module-stalk-exact"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 06YB, 08CG and 09U9; Modules Tag 01AG; derived tensor comparison as implemented by DerivedCategory.QObjTensorQObjIsoOfKFlatLeft in the source library.",
-  "group": "M1",
+  "document": "https://stacks.math.columbia.edu/tag/06Y1",
+  "place": "Tensor identity in the proof, specialized via the invertible extension/restriction counit; stalk homology calculation of Tag 09U9 and stalk criterion of Tag 06YB.",
+  "group": "H3",
   "date": "2026-10-13",
-  "note": "Specialization and scalar-transport glue of the source argument, separated from the prescribed representative comparison."
+  "note": "Fully compiling Lean proof from existing declarations, with proved private helpers for scalar transport and exact stalk homology. No new statements or holes."
  },
  "mathlib_searches": [
   {
@@ -139,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M1",
+  "reviewer": "X-e7e59",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T125448-L-3875464",
+  "landing": "20261013T143545-L-560675",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature matched the node; proof and dependencies matched updated metadata; delivered module and direct importer RelativeTensorStalkGlobalHomology compiled cleanly; all six proved declarations use only the three permitted axioms."
  }
 }
