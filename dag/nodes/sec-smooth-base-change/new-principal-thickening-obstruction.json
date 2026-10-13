@@ -12,26 +12,32 @@
  ],
  "proof": [
   {
-   "text": "The kernel of R -> R/(g) is (g), and its (n+1)st power is (g^(n+1)). On every affine open of W, the pullback thickening has quotient structure sheaf O_W/(g^(n+1)); these canonical identifications glue to identify its pushforward with the cokernel of I_n -> O_W. Restriction is the quotient projection.",
-   "uses": [],
+   "text": "Apply principal_thickening_cokernel_sections to identify the degree-zero cohomology of the cokernels of image inclusions with thickening sections, compatibly with restrictions and induced quotient maps.",
+   "uses": [
+    "new-principal-thickening-cokernel-sections"
+   ],
    "elementary": false
   },
   {
-   "text": "Apply the natural long exact cohomology sequence to 0 -> I_n -> O_W -> O_W/I_n -> 0 and identify H^0 with global sections. Its boundary in degree zero gives delta_n; exactness gives precisely the required ambient lift for every boundary-zero section.",
+   "text": "For each n, form the explicit short complex image(p_n) -> O_W -> cokernel(image inclusion). It is short exact by ShortComplex.exact_cokernel. Define the additive boundary by H.delta in degree zero composed with the inverse section comparison. H.ker_delta_eq_range_map_g supplies a degree-zero ambient preimage of a boundary-zero section; H.zeroLinearEquiv and the comparison equation turn it into the required ambient section.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The inclusion compatibility of kappa and identity on O_W induce a map between the quotient sequences. The over-W equation on h identifies its pullback on sections with that quotient map, since the structure-sheaf quotient is an epimorphism. Naturality of the connecting homomorphism gives the stated equality for all h,kappa,t.",
-   "uses": [],
+   "text": "Construct the morphism of these explicit short complexes with components kappa, identity, and cokernel.map. The private proved boundary_naturality lemma follows from ShortExact.extClass_naturality and associativity of Ext composition. Apply it to this morphism, then use the functorial section-comparison equation to identify the induced quotient pullback with h.appTop.",
+   "uses": [
+    "new-principal-thickening-cokernel-sections"
+   ],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-principal-thickening-cokernel-sections"
+ ],
  "proof_origin": {
-  "by": "T1",
-  "document": "Stacks Project",
-  "place": "Tags 0H3D and 0H3E (quotient comparison); Tag 01DZ, Section 20.2 (universal delta-functor)"
+  "by": "E1",
+  "document": "Stacks Project and existing Lean long-exact-sequence API",
+  "place": "Tags 01IH, 01QP, 01DZ; WeilConjectures.AlgebraicGeometry.Cohomology.LongExact; Mathlib Ext.extClass_naturality"
  },
  "mathlib_searches": [
   {
@@ -106,9 +112,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261013T211114-L-395047",
+  "landing": "20261013T215600-L-896493",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

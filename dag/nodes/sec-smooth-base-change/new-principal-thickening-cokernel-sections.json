@@ -1,0 +1,128 @@
+{
+ "id": "new-principal-thickening-cokernel-sections",
+ "kind": "statement",
+ "title": "Functorial cokernel-section comparison for principal thickenings",
+ "statement": "For any commutative ring R, element g and open W in Spec R [def-weil-pbc-scheme-conventions], put p_n = multiplication by the restricted g^(n+1) on O_W and i_n = image inclusion of p_n. There are additive equivalences e_n from H^0(W,cokernel(i_n)) to global sections of the nth quotient-power thickening of W. They carry H^0 of the quotient projection, under the canonical identification H^0(O_W)=Gamma(W,O_W), to restriction of ambient functions. For every kappa:image(p_m)->image(p_n) commuting with inclusions and every h:W_n->W_m over W, e_n composed with H^0 of the induced cokernel map equals h.appTop composed with e_m. There is no H^1 assertion or lifting assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01IH (affine closed subschemes), 01QP (ideal inclusion and factorization), 01DZ (degree-zero cohomology)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The quotient map R -> R/(g) has kernel (g). Its (n+1)st power is (g^(n+1)). Base change to an affine open Spec B in W identifies the thickening with Spec B/(g^(n+1)B); image of multiplication by the restricted g^(n+1) is the ideal sheaf of that closed immersion. This is the affine quotient calculation of Stacks 01IH.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel of the ideal inclusion is the pushforward structure sheaf of the closed subscheme. The local identifications commute with localization and with restriction, and glue over an affine open cover. Compose their global-section isomorphism with the canonical H^0-to-sections equivalence. This gives additive equivalences e_n, with e_n(H^0(quotient)(H^0(O_W)-sections inverse(a))) equal to restriction of a.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For kappa commuting with the ideal inclusions, kappa and identity on O_W induce the cokernel map. If h is over W its pullback on pushforward structure sheaves agrees with this map: both give the restriction map after precomposition with the quotient projection. That projection is an epimorphism of sheaves, so equality follows. Apply global sections and naturality of H^0 to obtain the stated equation. This is the quotient functoriality in Stacks 01QP. Empty W and unit g give zero quotients; g=0 gives O_W. None of this uses surjectivity on global sections.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "E1",
+  "document": "Stacks Project",
+  "place": "Tags 01IH, 01QP and 01DZ; affine calculation and gluing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "H0 of the structure sheaf of a closed immersion equals global sections of the quotient by its defining ideal",
+   "results": "UNAVAILABLE: service returned Internal Server Error on both attempts. Other searches and direct source reading were used.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cokernel of a principal ideal inclusion is the pushforward structure sheaf of the closed subscheme",
+   "results": "Scheme.IdealSheafData.subschemeObjIso and subschemeι_app in Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme give affine quotient sections, but not this global functorial cokernel comparison.",
+   "date": "2026-10-14",
+   "verdict": "components only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*pushforward|quotient.*structureSheaf|structureSheaf.*quotient",
+   "results": "Only a ProjectiveSpectrum.StructureSheaf quotient lift matched in Mathlib. Read subschemeObjIso, upstream IdealSheaf.Module, QuotientBaseChangeIdeal and PrincipalQuotientMultiplicationImage; they are components, not duplicates. Blueprint keyword search found zero matches.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global functions on a closed subscheme as sections of the cokernel of the ideal sheaf inclusion",
+   "results": "Second reader: subschemeObjIso, subschemeι_app, isLocalization_away and ofIdealTop_ideal supply affine components only. No global functorial H^0/cokernel comparison returned.",
+   "date": "2026-10-14",
+   "verdict": "components only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.cokernel, SheafOfModules",
+   "results": "Second reader: successful request, zero hits.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(pushforward|ideal)|((pushforward|ideal).*cokernel)|quotient.*structureSheaf|structureSheaf.*quotient",
+   "results": "Second reader found closedImmersion_unit_quotient, and read its statement and proof. It identifies the ideal-product cokernel with pushforward of tensorPullback for fixed i and F, natural in F. It does not identify the multiplication-image cokernel with actual thickening sections or provide naturality as i varies. QuotientBaseChangeIdeal, PrincipalQuotientMultiplicationImage and upstream IdealSheaf.Module are complementary components. Closing the comparison still requires transport of the ideal images, pullback unit and H^0, not a direct application.",
+   "date": "2026-10-14",
+   "verdict": "components only; no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningObstruction",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-principal-thickening-obstruction",
+   "place": "Proof steps 1 and 3: quotient identification and functoriality before applying cohomology",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningCokernelSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PrincipalThickeningCokernelSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.principal_thickening_cokernel_sections",
+  "statement": "theorem principal_thickening_cokernel_sections\n    (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens) :\n    let p := fun n : ℕ ↦ Modules.smulHom (SheafOfModules.unit W.toScheme.ringCatSheaf)\n      ((((ΓSpecIso (.of R)).inv ≫ W.ι.appTop) g) ^ (n + 1))\n    let i := fun n : ℕ ↦ image.ι (p n)\n    ∃ e : ∀ n : ℕ, Modules.H (cokernel (i n)) 0 ≃+\n        Γ(FiniteEtale.Adic.openThickening\n          (Ideal.Quotient.mk (Ideal.span {g})) W n, ⊤),\n      (∀ n (a : Γ(W.toScheme, ⊤)),\n        e n (Modules.H.map (cokernel.π (i n)) 0\n          ((Modules.H.zeroLinearEquiv _).symm a)) =\n        (FiniteEtale.Adic.openThickeningMap\n          (Ideal.Quotient.mk (Ideal.span {g})) W n).appTop a) ∧\n      (∀ (n m : ℕ) (κ : image (p m) ⟶ image (p n))\n        (h : FiniteEtale.Adic.openThickening\n            (Ideal.Quotient.mk (Ideal.span {g})) W n ⟶\n          FiniteEtale.Adic.openThickening (Ideal.Quotient.mk (Ideal.span {g})) W m)\n        (hk : κ ≫ i n = i m),\n        h ≫ FiniteEtale.Adic.openThickeningMap\n            (Ideal.Quotient.mk (Ideal.span {g})) W m =\n          FiniteEtale.Adic.openThickeningMap\n            (Ideal.Quotient.mk (Ideal.span {g})) W n →\n        ∀ x, e n (Modules.H.map\n          (cokernel.map (i m) (i n) κ (𝟙 _) (by simpa using hk.symm)) 0 x) =\n          h.appTop (e m x))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T215600-L-896493",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T215600-L-896493",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
