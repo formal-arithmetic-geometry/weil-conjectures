@@ -43,7 +43,7 @@ theorem cohomologyMap_cohomologyMap_eq_zero_iff_comp (f : X ⟶ Y) (g : Y ⟶ Z)
     (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) (x : Sheaf.H F n) :
     cohomologyMap f _ n (cohomologyMap g F n x) = 0 ↔ cohomologyMap (f ≫ g) F n x = 0 := by
   rw [cohomologyMap_apply, cohomologyMap_apply, cohomologyMap_apply, Ext.mapExactFunctor_comp,
-    Ext.mapExactFunctor_mk₀, Ext.mapExactFunctor_mapExactFunctor _ _ _
+    Ext.mapExactFunctor_mk₀, Ext.mapExactFunctor_mapExactFunctor_of_iso _ _ _
       (upperStarComp AddCommGrpCat.{u + 1} f g), Ext.mk₀_comp_mk₀_assoc,
     Ext.mk₀_comp_mk₀_assoc, Ext.mk₀_comp_eq_zero_iff, Ext.mk₀_comp_eq_zero_iff,
     Ext.comp_mk₀_eq_zero_iff]

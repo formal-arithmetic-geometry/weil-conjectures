@@ -18,8 +18,8 @@ then along `G₂` is pushing it forward along `G`, up to the isomorphisms given 
 
 ## Main statements
 
-- `CategoryTheory.Abelian.Ext.mapExactFunctor_mapExactFunctor`: the comparison of the two
-  push-forwards.
+- `CategoryTheory.Abelian.Ext.mapExactFunctor_mapExactFunctor_of_iso`: the comparison of the
+  two push-forwards.
 -/
 
 @[expose] public section
@@ -57,7 +57,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] {D : Type u'} [Category.{v'} 
 
 /-- Pushing an `Ext`-class forward along `G₁` and then along `G₂` is pushing it forward along
 a functor `G ≅ G₁ ⋙ G₂`, conjugated by the components of the isomorphism. -/
-lemma mapExactFunctor_mapExactFunctor (G₁ : C ⥤ D) [G₁.Additive]
+lemma mapExactFunctor_mapExactFunctor_of_iso (G₁ : C ⥤ D) [G₁.Additive]
     [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁] (G₂ : D ⥤ E) [G₂.Additive]
     [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂] (G : C ⥤ E) [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (τ : G ≅ G₁ ⋙ G₂) {A B : C} {n : ℕ}
