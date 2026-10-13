@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Sheaf.RingTheory.Depth
+import Sheaf.AlgebraicGeometry.Morphisms.DepthThreeLocalCohomologyVanishing
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedHOneLocalCohomologyComparison
 
 /-! # First cohomology of the structure sheaf on a depth-three puncture
 
@@ -38,6 +40,8 @@ theorem depth_three_puncture_h_one
     (W : (Spec (.of R)).Opens)
     (hW : ∀ x : Spec (.of R), x ∈ W ↔ x ≠ IsLocalRing.closedPoint R) :
     Subsingleton (Modules.H (X := W.toScheme)
-      (SheafOfModules.unit W.toScheme.ringCatSheaf) 1) := by sorry
+      (SheafOfModules.unit W.toScheme.ringCatSheaf) 1) := by
+  apply punctured_h_one_subsingleton_of_local_cohomology_vanishing R W hW
+  exact depth_three_local_cohomology_vanishing R hdepth
 
 end AlgebraicGeometry.Scheme
