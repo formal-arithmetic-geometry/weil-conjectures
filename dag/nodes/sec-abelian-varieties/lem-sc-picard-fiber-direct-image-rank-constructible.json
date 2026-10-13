@@ -22,8 +22,9 @@
  ],
  "proof": [
   {
-   "text": "E is finitely presented and flat over S: it is finite locally free on X and f is flat. Properness and local finite presentation give finite presentation of f. Apply perfect direct image and arbitrary base change (Tag 0B91(2)) to E.",
+   "text": "Use finitePresentation_projective_sections from [lem-pc-finite-flat-affine-sections-projective] on every affine open of X. Projective modules are flat. Flatness of f gives flatness of the affine coordinate ring over the base coordinate ring; Module.Flat.trans proves E.IsFlatOver f. Finite local freeness supplies finite presentation. Properness supplies quasi-compactness and quasi-separatedness, so apply [lem-pc-rf-perfect-base-change] to K = Rf_*(E[0]) to obtain perfectness and arbitrary canonical module base change.",
    "uses": [
+    "lem-pc-finite-flat-affine-sections-projective",
     "def-sc-finite-locally-free-sheaf",
     "def-weil-flat-morphism",
     "lem-pc-rf-perfect-base-change"
@@ -31,39 +32,54 @@
    "elementary": false
   },
   {
-   "text": "On Spec kappa(s), its derived fibre has degree-zero cohomology equal to the ordinary direct image of E pulled back to X_s. This uses the canonical derived-to-ordinary pullback comparison and degree-zero direct-image identification.",
+   "text": "For the residue-field morphism g, unpack the universal-property specification of derivedPullback on p = pullback.fst f g, as in [def-pc-derived-pullback]. Identify its underived functor with tensorPullback by functor extensionality, and evaluate its derived counit at E[0] to construct the comparison c. Compose the scheme derived base-change map with Rq_*(c), where q = pullback.snd f g. Its defining witnesses satisfy [def-pc-derived-module-base-change-map], so [lem-pc-rf-perfect-base-change] makes this map invertible. Apply degree-zero homology. The proved source-library Functor.homologyRightDerivedFunctorObjSingleFunctorIso identifies H^0(Rq_*(p^*E[0])) with R^0q_*(p^*E); Mathlib Functor.rightDerivedZeroIsoSelf identifies this with ordinary q_*(p^*E), since pushforward preserves finite limits. These are the right-derived functors defining [def-pc-derived-direct-image]. Evaluate on the whole field spectrum and restrict scalars through GammaSpecIso to obtain the private fibre_homology_iso.",
    "uses": [
-    "lem-pc-rf-perfect-base-change"
+    "def-pc-derived-pullback",
+    "def-pc-derived-module-base-change-map",
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-derived-direct-image"
    ],
    "elementary": false
   },
   {
-   "text": "A quasi-coherent module on the spectrum of a field is finite locally free of rank r exactly when its vector space of global sections has dimension r. The vector spaces here are finite dimensional by perfectness.",
+   "text": "Apply finiteFiberCohomology from [new-perfect-finite-residue-cohomology-finite] to the strictly perfect neighbourhood supplied by perfectness at s. Transfer finite dimensionality along fibre_homology_iso. The proved source-library Scheme.Modules.isFiniteLocallyFreeOfRank_iff_finrank_moduleSpecΓFunctor_obj detects the fixed-rank predicate [def-amb-finite-locally-free-module] by the dimension of global sections on a field spectrum. LinearEquiv.finrank_eq then identifies this dimension with derivedFiberBetti S K 0 s [def-sc-derived-fiber-betti]. Set extensionality proves equality of the ordinary rank locus with the degree-zero Betti level set.",
    "uses": [
-    "def-amb-finite-locally-free-module"
+    "new-perfect-finite-residue-cohomology-finite",
+    "def-amb-finite-locally-free-module",
+    "def-sc-derived-fiber-betti"
    ],
    "elementary": false
   },
   {
-   "text": "Consequently the displayed locus is the degree-zero Betti-number level set of Rf_*E. Perfect implies pseudo-coherent, and Tag 0BDI(3) makes this set locally constructible. On an empty fibre the vector space is zero, so such points occur precisely in the level r=0.",
+   "text": "At each point, [lem-pc-strictly-perfect-finite-free-refinement] replaces the strictly perfect neighbourhood by a bounded finite-free representative. Forget its lower bound; this directly gives the bounded-above finite-free witness for pseudo-coherence [def-pur-pseudo-coherent-complex]. No finite-Tor-dimension conclusion is required. Apply the level-set conjunct of [lem-sc-perfect-jump-loci] at degree zero and rank r, and rewrite by the equality of loci proved in the preceding step. No nonempty fibre or positive-rank assumption is used.",
    "uses": [
+    "lem-pc-strictly-perfect-finite-free-refinement",
+    "def-pur-pseudo-coherent-complex",
     "lem-sc-perfect-jump-loci"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-finite-flat-affine-sections-projective",
   "def-sc-finite-locally-free-sheaf",
   "def-weil-flat-morphism",
   "lem-pc-rf-perfect-base-change",
+  "def-pc-derived-pullback",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-direct-image",
+  "new-perfect-finite-residue-cohomology-finite",
   "def-amb-finite-locally-free-module",
+  "def-sc-derived-fiber-betti",
+  "lem-pc-strictly-perfect-finite-free-refinement",
+  "def-pur-pseudo-coherent-complex",
   "lem-sc-perfect-jump-loci"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDI",
-  "place": "Clause (3), applied to Rf_*E from Tag 0B91(2), as in Tag 0BDP second proof paragraph",
-  "note": "Stage-3 specialization of the cited literature; no connectedness or surjectivity assumed."
+  "place": "Clause (3), with Tag 0B91(2), following the second proof paragraph of Tag 0BDP",
+  "note": "F1 stage-3 Lean proof: explicit canonical module base change and degree-zero right-derived comparison; pointwise finite-dimensionality and finite-free refinement use existing declarations. No new statements or hypotheses."
  },
  "mathlib_searches": [
   {
@@ -138,10 +154,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T024038-L-3335821",
-  "kind": "interface",
+  "landing": "20261013T045524-L-127606",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
