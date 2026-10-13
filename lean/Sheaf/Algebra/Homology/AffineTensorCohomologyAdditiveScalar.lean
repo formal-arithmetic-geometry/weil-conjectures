@@ -6,8 +6,8 @@ Authors: SHEAF group R3
 module
 
 public import Sheaf.Algebra.Homology.RingTensorCohomology
-import Sheaf.Algebra.Homology.BaseDerivedExtensionLinear
-import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
+import Sheaf.Algebra.Homology.AffineTensorCohomologyAdditiveScalarParts
+import Sheaf.Algebra.Homology.AffineTensorCohomologyScalarParts
 
 /-! # Additivity and base scalars on affine tensor cohomology
 
@@ -51,6 +51,8 @@ theorem affineTensorCohomology_additive_scalar
     (∀ (M : CochainComplex (ModuleCat.{u} A) ℤ) (r : R),
       (target R A B i).map (algebraMap R A r • 𝟙 M) =
         algebraMap R B r • 𝟙 ((target R A B i).obj M)) := by
-  sorry
+  obtain ⟨haddS, haddT⟩ := affineTensorCohomology_additive_parts R A B i
+  obtain ⟨hscalarS, hscalarT⟩ := affineTensorCohomology_scalar_parts R A B i
+  exact ⟨haddS, haddT, hscalarS, hscalarT⟩
 
 end RingTensorCohomology

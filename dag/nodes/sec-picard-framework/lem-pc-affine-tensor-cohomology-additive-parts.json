@@ -1,0 +1,117 @@
+{
+ "source": {
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6 and Tag 0DJ8, transport through derived tensor cohomology"
+ },
+ "stmt_deps": [
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Stacks Tag 06Y6 computes derived extension on K-flat models and makes\nit an exact, hence additive, functor. The resolution augmentation identifies\nsource cohomology naturally with derived extension from R to B after restriction\nfrom A, followed by homology. Thus additivity transports to source. For target,\nordinary tensor associativity identifies B tensor_R P with\n(A tensor_R B) tensor_A P for the A-K-flat resolution P. The maps and inverses\nare given on pure tensors, so the identification is natural in P and hence M.\nThis identifies target cohomology with derived extension from A to A tensor_R B,\nfollowed by restriction to B and homology. These functors are additive, so\nadditivity transports to target by conjugation with the natural comparison.\nThe chosen resolution functor need not itself preserve addition. No flatness or\nboundedness assumption is needed, and the same comparisons apply to zero rings\nand zero complexes.",
+   "uses": [
+    "lem-pc-base-derived-extension-linear",
+    "def-pc-ring-tensor-cohomology",
+    "lem-pc-base-tensor-ordinary-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-derived-extension-linear",
+  "def-pc-ring-tensor-cohomology",
+  "lem-pc-base-tensor-ordinary-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6 and Tag 0DJ8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of derived extension of scalars computed on functorial K-flat resolutions is additive and preserves the original base ring scalar action",
+   "results": "Unavailable: Internal Server Error; no search results could be assessed.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor naturally isomorphic additive functor preserves addition morphisms cohomology derived tensor",
+   "results": "8 hits, including mapDerivedCategorySingleFunctor, mapDerivedCategoryFactorsh_hom_app and mapExtAddHom. These concern exact functors or Ext; none identifies the chosen affine resolution models.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive",
+   "results": "12 hits for additive functor infrastructure including the class, composition infrastructure and finite products. None states these affine identities.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "additive_of_iso|additive_of_natIso|homologyMap_smul",
+   "results": "17 hits: Functor.additive_of_iso and ShortComplex.homologyMap_smul provide transport tools but not the needed natural comparison to these resolution models. Project search found BaseDerivedExtensionLinear and BaseTensorOrdinaryIso; the parent is the sole exact combined statement.",
+   "date": "2026-10-13",
+   "verdict": "reuse transport tools; model identification still open"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTensorCohomologyAdditiveScalar",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-tensor-cohomology-additive-scalar",
+   "place": "strictly smaller transport component",
+   "via": [
+    "lem-pc-affine-tensor-cohomology-additive-scalar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-affine-tensor-cohomology-additive-parts",
+ "title": "Additivity of affine tensor cohomology",
+ "statement": "For commutative R-algebras A and B, and every integer i, the source and target functors defined in [def-pc-ring-tensor-cohomology] are additive, with no flatness or boundedness hypotheses.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTensorCohomologyAdditiveScalarParts",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTensorCohomologyAdditiveScalarParts.lean",
+  "declaration": "RingTensorCohomology.affineTensorCohomology_additive_parts",
+  "statement": "theorem affineTensorCohomology_additive_parts (R A B : Type u) [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (i : ℤ) : (source R A B i).Additive ∧ (target R A B i).Additive",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "kind": "statement",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T125009-L-3836414",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T125009-L-3836414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
