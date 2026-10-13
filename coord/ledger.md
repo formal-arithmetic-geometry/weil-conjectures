@@ -13083,3 +13083,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:59 L: merged deliver/W2/Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootInvariants (stage 3; reviewer PASS; first push; landing 20261013T155946-L-1307258 (interface); batch 20261013T155927; modules 3; new nodes 2)
 - 15:59 L: merged deliver/X2/Sheaf.RingTheory.PointedEtaleCompletionStageFlat (stage 3; reviewer PASS; first push; landing 20261013T155946-L-1307408 (proof); batch 20261013T155927; modules 1; new nodes 1)
 - 16:01 L: returned deliver/K3/Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisSquares (reviewer RETURN: (reviewer X-9f9d4, head 9f9d4af67) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.De)
+- 16:03 L: returned deliver/S2/Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairMapLifting (reviewer RETURN: (reviewer X-f6569, head f65699716) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fi)
