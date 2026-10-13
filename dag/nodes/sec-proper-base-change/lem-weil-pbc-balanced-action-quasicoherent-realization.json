@@ -15,35 +15,28 @@
  ],
  "proof": [
   {
-   "text": "On each affine U = Spec C, M(U) is a C-module and rho gives a commuting B-action. The scalar equality balances the two A-actions, so (c tensor b)n = c rho(b)n defines a C tensor_A B-module. Quasi-coherence identifies restrictions to D(c) with localization, and naturality of rho identifies their B-actions. Refining affine intersections by basic affine opens glues these actions into an f^*(B tilde)-module whose underlying O_X-module is M.",
+   "text": "Use balancedAction_directImage_module to extend rho to a sheaf G over pi_* O_Y, together with an O_X-linear isomorphism e0:M -> S(G) and its sectionwise scalar formula. The base-change projection pi is affine: Spec B -> Spec A is a morphism between affines and affineness is stable under base change.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-balanced-action-direct-image-module"
    ],
    "elementary": false
   },
   {
-   "text": "Use relative-spectrum base change to identify the pulled-back algebra with pi_* O_Y and its relative spectrum with Y. The scalar-restriction clause of affine module correspondence identifies quasi-coherence over pi_* O_Y with quasi-coherence over O_X, so the algebra module from step 1 is quasi-coherent. Apply its equivalence to that algebra module. Its algebra-linear comparison isomorphism, after restriction of scalars, gives e: M ≅ pi_* F with F quasi-coherent. The section b of the pulled-back algebra is fB^sharp(b). Algebra-linearity of e gives rho(b) followed by e.hom equal to e.hom followed by pi_*(multiplication by fB^sharp(b)). Check this formula on the affine cover; sheaf-map extensionality gives it globally.",
+   "text": "Transport quasi-coherence of M through e0. The scalar-restriction clause of affine_module_correspondence gives quasi-coherence of G. Destructure its explicit inverse tensor functor H and algebra-linear comparison beta:G -> R(H(G)), which is an isomorphism for quasi-coherent G. Put F=H(G) and e=e0 followed by scalar restriction of beta. The theorem gives quasi-coherence of F. On U, rewrite the action using the formula for e0, then the linear map beta_U commutes with the pi_* O_Y scalar. The resulting expression is definitionally the pushforward of smulHom(fB-sharp(b)). Module-map extensionality gives the required equality.",
    "uses": [
-    "lem-weil-pbc-relative-spec-base-change",
-    "lem-weil-pbc-affine-module-correspondence",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-affine-module-correspondence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-relative-spec-base-change",
+  "lem-weil-pbc-balanced-action-direct-image-module",
   "lem-weil-pbc-affine-module-correspondence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 0897, 01LX, 01SB",
-  "place": "Explication of the ungraded realization in the relative-spectrum paragraph of 0897, with the local action extension and gluing detailed; online sources read on 2026-10-13."
+  "document": "Stacks Project, Tags 01LX, 01SB, 0897",
+  "place": "J3: balanced-action extension isolated as a smaller first-step theorem; existing scalar restriction and inverse affine correspondence combined by a complete Lean proof."
  },
  "mathlib_searches": [
   {
@@ -139,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T024051-L-3339988",
+  "landing": "20261013T034207-L-3766762",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

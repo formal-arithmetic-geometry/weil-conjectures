@@ -8,8 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
+import Sheaf.Paper.BalancedActionDirectImageModule
 import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 
 /-! # Realization of a balanced algebra action
@@ -62,6 +61,35 @@ theorem balancedAction_quasicoherent_realization
       ∃ (e : M ≅ (Scheme.Modules.pushforward pi).obj F),
         ∀ b : B, rho b ≫ e.hom = e.hom ≫
           (Scheme.Modules.pushforward pi).map
-            (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) := by sorry
+            (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) := by
+  classical
+  let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
+  let Y := pullback f g
+  let pi : Y ⟶ X := pullback.fst f g
+  let fB : Y ⟶ Spec (.of B) := pullback.snd f g
+  let C := (TopCat.Sheaf.pushforward CommRingCat.{u} pi.base).obj Y.sheaf
+  let R := (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj C
+  let S := SheafOfModules.restrictScalars.{u}
+    ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map
+      (show X.sheaf ⟶ C from ⟨pi.c⟩))
+  obtain ⟨G, e₀, he₀⟩ := balancedAction_directImage_module f M hM rho hscalar
+  let : IsAffineHom g := inferInstance
+  let : IsAffineHom pi := MorphismProperty.pullback_fst f g inferInstance
+  obtain ⟨hqc, _, C', b, t, ε, _, _, _, P, pobj, κ, _, _, H, hobj, γ, _, _,
+    hH, α, β, _, _, _, hβ, _⟩ := Scheme.Modules.affine_module_correspondence pi
+  have hSG : (S.obj G).IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso e₀ hM
+  have hG : G.IsQuasicoherent := (hqc G).mpr hSG
+  have : IsIso (β.app G) := hβ G hG
+  let F : Y.Modules := H.obj G
+  let e : M ≅ (Scheme.Modules.pushforward pi).obj F := e₀ ≪≫ S.mapIso (asIso (β.app G))
+  refine ⟨F, hH G hG, e, ?_⟩
+  intro b
+  ext U x
+  change (β.app G).val.app (op U) ((e₀.hom.val.app (op U)).hom
+    ((rho b).val.app (op U) x)) = _
+  rw [he₀ b U x]
+  rw [map_smul]
+  rfl
 
 end AlgebraicGeometry
