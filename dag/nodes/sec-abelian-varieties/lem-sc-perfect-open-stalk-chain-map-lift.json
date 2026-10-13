@@ -15,39 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Use the slice/open-subscheme equivalence in def-sc-open-module-stalk-functor. The given finite-free retractions show that each term is finitely presented. Apply the finite-presentation internal-Hom stalk comparison to represent each stalk component by a local sheaf map. Only the finite intersection of the two support intervals has nonzero components; intersect their finitely many neighbourhoods and choose an affine neighbourhood containing x inside U. Equivalently, sandwich each component between the free retractions and lift its finite matrix entries as germs.",
+   "text": "Apply degreewise extension to the components of the given chain map t, obtaining W, eW and g with their stalk identities. Only strict perfectness of P is used.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-sc-open-module-stalk-functor",
-    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+    "lem-sc-perfect-open-stalk-degreewise-lift"
    ],
    "elementary": false
   },
   {
-   "text": "For each relevant degree the chain equation has zero stalk. Injectivity of the internal-Hom stalk comparison identifies this with a zero germ of the local error map. The germ equality criterion shrinks the neighbourhood until this map is zero. There are finitely many equations, including boundary degrees adjacent to the support intervals. Intersect the resulting opens and choose a smaller affine neighbourhood V. Outside those degrees one of the terms is zero, so the equations hold automatically. The components now define a chain map g.",
+   "text": "Conjugating t by eW gives a chain map. Its adjacent chain equations, together with the component identities of g, prove that the stalks of g commute with the differentials. Apply the degreewise shrinking theorem to obtain V, eV and k with adjacent chain equations and the stalk conjugation formula.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+    "lem-sc-perfect-open-stalk-degreewise-shrink"
    ],
    "elementary": false
   },
   {
-   "text": "Cofinality of neighbourhoods inside V identifies iterated restriction followed by the V stalk with the original U stalk, on every sheaf and every map. Compose the slice/open-subscheme equivalences and the open immersion stalk-ring isomorphisms to obtain e : R composed with S is naturally isomorphic to T. Apply it termwise to complexes. The chosen germ representatives give S(g)=e(P).hom composed with t composed with e(Q).inv. This is an equality of chain maps, not merely of derived classes. Zero ranks and empty support intersections use zero maps.",
-   "uses": [
-    "def-sc-open-module-stalk-functor"
-   ],
-   "elementary": false
+   "text": "Construct fV with CochainComplex.ofHom k hk. Use HomologicalComplex.hom_ext to check the desired stalk equality degreewise. Substitute the identities of k and g and cancel eW.inv followed by eW.hom for both P and Q. This yields exactly the conjugation of t by eV. The original theorem signature, including hU and hQ, stays identical although those hypotheses are not needed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "def-sc-open-module-stalk-functor",
-  "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+  "lem-sc-perfect-open-stalk-degreewise-lift",
+  "lem-sc-perfect-open-stalk-degreewise-shrink"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tags 09RE and 0BC7 (2), expanded by M3 to finite-free retracts and the open-site stalk interface"
+  "place": "Tags 09RE and 01CP, expanded by V3 into degreewise extension and differential-defect shrinking; Lean constructs the chain map and proves the comparison equality."
  },
  "mathlib_searches": [
   {
@@ -128,9 +122,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T082356-L-1640239",
+  "landing": "20261013T100205-L-2498620",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

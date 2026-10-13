@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseLift
+import Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink
 import Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation
 
 /-! # Lifting a perfect stalk chain map
@@ -22,25 +24,25 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
+-- Retain the original interface even though affineness of U and perfectness of Q are unused.
+set_option linter.unusedVariables false in
 /-- An arbitrary chain map of perfect stalk complexes lifts on an affine neighbourhood.
 Source: Stacks Project, Tag 09RE, affine proof's finite-presentation calculation;
 Tag 0BC7 (2), chain representatives, and Tag 00CR.
 (blueprint: lem-sc-perfect-open-stalk-chain-map-lift).
 
-Proof: Take sections on the affine U. Each finite-free retract gives a finite
-projective section module, and the tilde/Gamma adjunction identifies the original
-terms with its associated sheaf. Stalks identify these modules with localization
-at the prime of x. Sandwich the components of t between the given retract maps;
-these become finite matrices of germs. Only degrees in the finite intersection
-of the support intervals of P and Q contribute. Represent all entries by sections
-on principal opens containing x, and intersect this finite family. Sandwich the
-lifted matrices back between the restricted retract maps. Each chain equation
-holds on the stalk; after sandwiching into the finite free modules, it is a finite
-list of germ equalities. Shrink to principal opens where these equalities hold.
-The resulting components form g. Cofinality of neighbourhoods inside V and the
-open-immersion stalk-ring isomorphism give the natural isomorphism e for all
-complexes, with the displayed equality on g. No inverse or quasi-isomorphism
-condition is required. Empty support intersections and zero ranks give zero maps. -/
+Proof: Extend the degreewise stalk maps by
+`exists_affine_perfect_open_stalk_degreewise_lift`. The given chain map makes
+their stalks commute with the differentials, by conjugating with the comparison
+isomorphism. Apply `exists_affine_perfect_open_stalk_degreewise_shrink`, assemble
+its components with `CochainComplex.ofHom`, and cancel the intermediate
+comparison isomorphisms degreewise. The two component lemmas implement the
+finite-presentation argument: only finitely many components and differential
+defects have nonzero source, their germs have common representatives, and the
+zero defect germs vanish on a common smaller neighbourhood. Only strict
+perfectness of P is needed; the signature retains the original hypotheses on
+U and Q. No inverse or quasi-isomorphism condition is required. Empty source
+support and zero ranks use zero maps. -/
 theorem exists_affine_perfect_open_stalk_chainMap_lift
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) (hU : IsAffineOpen U)
     (P Q : CochainComplex
@@ -54,7 +56,39 @@ theorem exists_affine_perfect_open_stalk_chainMap_lift
       let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)
       let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)
       ∃ (e : R ⋙ S ≅ T) (g : R.obj P ⟶ R.obj Q),
-        S.map g = (e.app P).hom ≫ t ≫ (e.app Q).inv := by sorry
+        S.map g = (e.app P).hom ≫ t ≫ (e.app Q).inv := by
+  clear hU hQ
+  obtain ⟨W, hxW, _, hWU, eW, g, hg⟩ :=
+    exists_affine_perfect_open_stalk_degreewise_lift X U x hxU P Q hP t.f
+  let RW := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+    (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)
+  let SW := (openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ)
+  have hcomm (n : ℤ) :
+      (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) ≫
+        (SW.obj (RW.obj Q)).d n (n + 1) =
+      (SW.obj (RW.obj P)).d n (n + 1) ≫
+        (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g (n + 1)) := by
+    rw [hg n, hg (n + 1)]
+    change (eW.app P).hom.f n ≫ t.f n ≫ (eW.app Q).inv.f n ≫
+        (SW.obj (RW.obj Q)).d n (n + 1) = _
+    exact ((eW.app P).hom ≫ t ≫ (eW.app Q).inv).comm n (n + 1)
+  obtain ⟨V, hxV, hV, _, hVU, eV, k, hk, hkg⟩ :=
+    exists_affine_perfect_open_stalk_degreewise_shrink
+      X U x hxU P Q hP W hxW hWU eW g hcomm
+  let fV := CochainComplex.ofHom k hk
+  refine ⟨V, hxV, hV, hVU, eV, fV, ?_⟩
+  apply HomologicalComplex.hom_ext
+  intro n
+  change (openModuleStalkFunctor X V ⟨x, hxV⟩).map (k n) = _
+  rw [hkg n, hg n]
+  simp only [HomologicalComplex.comp_f, Category.assoc]
+  have hPcancel : (eW.app P).inv.f n ≫ (eW.app P).hom.f n = 𝟙 _ := by
+    simpa only [HomologicalComplex.comp_f, HomologicalComplex.id_f] using
+      congrArg (fun f ↦ f.f n) (eW.app P).inv_hom_id
+  have hQcancel : (eW.app Q).inv.f n ≫ (eW.app Q).hom.f n = 𝟙 _ := by
+    simpa only [HomologicalComplex.comp_f, HomologicalComplex.id_f] using
+      congrArg (fun f ↦ f.f n) (eW.app Q).inv_hom_id
+  simp only [← Category.assoc, hPcancel, hQcancel, Category.id_comp]
 
 end
 end AlgebraicGeometry.Scheme
