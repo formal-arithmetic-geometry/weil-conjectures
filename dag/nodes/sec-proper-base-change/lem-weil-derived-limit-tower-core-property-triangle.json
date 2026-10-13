@@ -66,44 +66,49 @@
  ],
  "proof": [
   {
-   "text": "Evaluation at n is right adjoint to the exact functor sending X to the tower equal to X at levels at most n and zero above n. Hence each evaluated complex is K-injective. Form the termwise product P; its localized projections give a product in the derived category.",
+   "text": "Evaluation at each level preserves K-injectivity. Construct the termwise product fan and apply the K-injective product theorem to obtain a limiting fan after localization.",
    "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-tower-evaluation-kinjective",
     "lem-pc-ringed-space-product-kinjective"
    ],
    "elementary": false
   },
   {
-   "text": "Define the chain map t = 1-shift on P. Evaluation preserves limits, so the legs of c identify c.pt degreewise with the kernel of t. Construct the canonical map from this kernel complex to the shifted mapping cone; the Roos comparison theorem makes its localized image an isomorphism.",
+   "text": "Use the universal property of the product complex to construct iota from the supplied limit cone and t as identity minus the transition shift. Their projection equations follow from the universal property.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The Roos construction gives a distinguished triangle with first map Q(iota), second map Q(t), and both middle objects Q(P.pt).",
    "uses": [
-    "lem-weil-derived-limit-roos-complex",
-    "def-weil-tower-transition-endomorphism"
+    "lem-weil-derived-limit-tower-roos-triangle"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the backwards rotated cone triangle and transport it along the comparison isomorphism and the product isomorphism from Q(P) to the chosen product. Checking each projection identifies the middle map with 1-shift and the first map with the product lift of the localized legs of c. This gives δ and the asserted canonical Roos triangle.",
+   "text": "Use the unique isomorphism from the localized product fan to the chosen derived-category product. Checking projections identifies the transported first map with p and the second with the transition endomorphism. Transport distinguishedness along the resulting triangle isomorphism.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-triangulated-category",
-    "def-weil-derived-limit"
+    "def-weil-derived-limit",
+    "def-weil-tower-transition-endomorphism"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-tower-evaluation-kinjective",
   "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-derived-limit-roos-complex",
-  "def-weil-tower-transition-endomorphism",
+  "lem-weil-derived-limit-tower-roos-triangle",
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-weil-tower-transition-endomorphism"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitTowerTriangle.lean",
-  "place": "theorem derivedCategory_towerLimit_triangle"
+  "place": "derivedCategory_towerLimit_triangle: evaluation, localized product fan, Roos construction, and triangle transport (second reading M1)"
  },
  "lean": {
   "existing": false,
@@ -127,12 +132,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T202249-L-707871",
+  "landing": "20261013T054225-L-445299",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

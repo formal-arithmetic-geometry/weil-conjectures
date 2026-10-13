@@ -1,0 +1,101 @@
+{
+ "id": "lem-weil-tower-evaluation-kinjective",
+ "kind": "lemma",
+ "title": "Evaluation preserves K-injective complexes of inverse systems",
+ "statement": "Evaluation preserves K-injective complexes of inverse systems. Let A be an abelian category, I a K-injective cochain complex in the functor category from the opposite natural-number poset to A [def-sp-kinjective-bridge], and n an object of that poset. The complex whose p-th object is (I.X p)(n), with evaluated differentials, is K-injective in A. No product-exactness, enough-injectives, boundedness or epimorphic-transition assumptions are required.",
+ "stmt_deps": [
+  "def-sp-kinjective-bridge"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070M context; exact-adjoint argument from lem-weil-pbc-right-adjoint-preserves-kinjective, using Mathlib CategoryTheory/Adjunction/Evaluation and exact finite coproducts"
+ },
+ "proof": [
+  {
+   "text": "The Mathlib evaluation left adjoint sends X at m to the coproduct indexed by morphisms n to m. This hom type is subsingleton and therefore finite. The composite with evaluation at m is naturally isomorphic to the constant-diagram functor followed by its finite coproduct. Finite coproducts are exact in an abelian category, so this composite preserves finite limits. Finite limits in the tower category are computed pointwise. The left adjoint thus preserves finite limits; it preserves colimits by adjunction and is additive.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the exact-left-adjoint criterion to the evaluation adjunction; the functor applied to I is definitionally I.asFunctor.obj n.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Algebra/Homology/TowerEvaluationKInjective.lean",
+  "place": "tower_evaluation_isKInjective (second reading M1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at a vertex in a thin category preserves K-injective cochain complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at an object of a poset preserves K-injective cochain complexes because its exact left adjoint is extension by zero",
+   "results": "8 hits: CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.cm5b.I_X, CochainComplex.cm5b.I, CochainComplex.cm5b.instIsStrictlyGEI, CochainComplex.IsKInjective, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-13",
+   "verdict": "No exact match; available primitives used in the proof or planned construction."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationLeftAdjoint|preservesKInjectiveComplexes",
+   "results": "3 hits: Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; available primitives used in the proof or planned construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerTriangle",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-derived-limit-tower-core-property-triangle"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TowerEvaluationKInjective",
+  "file": "lean/Sheaf/Algebra/Homology/TowerEvaluationKInjective.lean",
+  "declaration": "CategoryTheory.tower_evaluation_isKInjective",
+  "statement": "theorem tower_evaluation_isKInjective\n    (A : Type u) [Category.{v} A] [Abelian A]\n    (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] (n : ℕᵒᵖ) :\n    CochainComplex.IsKInjective (I.asFunctor.obj n)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T054225-L-445299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T054225-L-445299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

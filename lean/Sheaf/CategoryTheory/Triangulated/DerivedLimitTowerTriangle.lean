@@ -7,9 +7,8 @@ public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 import Sheaf.Algebra.Homology.KInjectiveProducts
-import Sheaf.Algebra.Homology.RoosComplex
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+import Sheaf.Algebra.Homology.TowerEvaluationKInjective
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerRoosTriangle
 
 @[expose] public section
 universe w v u
@@ -57,6 +56,55 @@ theorem derivedCategory_towerLimit_triangle
       let p := Pi.lift (fun n : ℕ ↦ DerivedCategory.Q.map (c.π.app (Opposite.op n)))
       ∃ δ : (∏ᶜ K₀) ⟶ (DerivedCategory.Q.obj c.pt)⟦(1 : ℤ)⟧,
         IsDerivedLimitTriangle f₀ (DerivedCategory.Q.obj c.pt) p δ := by
-  sorry
+  intro hI I _ c hc
+  let K := fun n : ℕ ↦ I.asFunctor.obj (Opposite.op n)
+  have (n : ℕ) : CochainComplex.IsKInjective (K n) :=
+    tower_evaluation_isKInjective A I (Opposite.op n)
+  let P : Fan K := HomologicalComplex.coneOfHasLimitEval (Discrete.functor K)
+  let hP := HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor K)
+  obtain ⟨_, ⟨hQP⟩⟩ := CochainComplex.termwise_product_isKInjective_and_isLimit K
+  let iota : c.pt ⟶ P.pt := hP.lift
+    (Fan.mk c.pt (fun n : ℕ ↦ c.π.app (Opposite.op n)))
+  let s : P.pt ⟶ P.pt := hP.lift
+    (Fan.mk P.pt (fun n : ℕ ↦ P.proj (n + 1) ≫
+      I.asFunctor.map (homOfLE (Nat.le_succ n)).op))
+  let t : P.pt ⟶ P.pt := 𝟙 _ - s
+  have hiota (n : ℕ) : iota ≫ P.proj n = c.π.app (Opposite.op n) :=
+    hP.fac _ ⟨n⟩
+  have ht (n : ℕ) : t ≫ P.proj n = P.proj n - P.proj (n + 1) ≫
+      I.asFunctor.map (homOfLE (Nat.le_succ n)).op := by
+    dsimp [t]
+    rw [Preadditive.sub_comp, Category.id_comp]
+    exact congrArg (fun x ↦ P.proj n - x) (hP.fac _ ⟨n⟩)
+  obtain ⟨δ, hδ⟩ := derivedCategory_tower_roos_triangle A I c hc P hP iota t hiota ht
+  let K₀ := fun n : ℕ ↦ DerivedCategory.Q.obj (K n)
+  let f₀ := fun n : ℕ ↦ DerivedCategory.Q.map
+    (I.asFunctor.map (homOfLE (Nat.le_succ n)).op)
+  let p := Pi.lift (fun n : ℕ ↦ DerivedCategory.Q.map (c.π.app (Opposite.op n)))
+  let hQFan := (Fan.isLimitMapConeEquiv DerivedCategory.Q K P) hQP
+  let E : DerivedCategory.Q.obj P.pt ≅ ∏ᶜ K₀ :=
+    hQFan.conePointUniqueUpToIso (productIsProduct K₀)
+  have hE (n : ℕ) : E.hom ≫ Pi.π K₀ n = DerivedCategory.Q.map (P.proj n) :=
+    hQFan.conePointUniqueUpToIso_hom_comp (productIsProduct K₀) ⟨n⟩
+  have hπ (n : ℕ) : p ≫ Pi.π K₀ n = DerivedCategory.Q.map (c.π.app (Opposite.op n)) :=
+    Pi.lift_π _ _
+  have hi : DerivedCategory.Q.map iota ≫ E.hom = p := by
+    apply Pi.hom_ext
+    intro n
+    simp only [Category.assoc, hE, ← Functor.map_comp, hiota, hπ]
+  have hT : DerivedCategory.Q.map t ≫ E.hom =
+      E.hom ≫ towerTransitionEndomorphism f₀ := by
+    apply Pi.hom_ext
+    intro n
+    simp only [Category.assoc, hE, ← Functor.map_comp, ht, Functor.map_sub]
+    simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
+      Category.id_comp, Preadditive.comp_sub, Pi.lift_π, hE, f₀]
+    rw [Functor.map_comp, ← Category.assoc, hE]
+  refine ⟨E.inv ≫ δ, ?_⟩
+  exact (Pretriangulated.distinguished_iff_of_iso
+    (Pretriangulated.Triangle.isoMk
+      (Pretriangulated.Triangle.mk (DerivedCategory.Q.map iota) (DerivedCategory.Q.map t) δ)
+      (Pretriangulated.Triangle.mk p (towerTransitionEndomorphism f₀) (E.inv ≫ δ))
+      (Iso.refl _) E E (by simpa using hi) hT (by simp))).mp hδ
 
 end CategoryTheory
