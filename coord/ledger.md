@@ -10230,3 +10230,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:11 L: returned deliver/V2/Sheaf.AlgebraicGeometry.PicardBaseChangeStalkRanks (reviewer RETURN: (reviewer X-955a9, head 955a96ae5) B9 (stages/1-dag.md §6): Correct blueprint.from in both new nodes. In dag/nodes/sec-a)
 - 00:12 L: returned deliver/H1/Sheaf.AlgebraicGeometry.CompletionInternalHomAffineSectionsLift (reviewer RETURN: (the landing tools, head 8952427fc) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 00:12 L: merged deliver/A3/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractions (stage 3; reviewer PASS; first push; landing 20261013T001225-L-2305084 (interface); batch 20261013T001224; modules 3; new nodes 2)
+- 00:12 L: merged deliver/C3/Sheaf.RingTheory.ArtinianTranscendentalLocalizationProperties (stage 3; reviewer PASS; first push; landing 20261013T001226-L-2305244 (proof); batch 20261013T001224; modules 1; new nodes 0)

@@ -25,45 +25,49 @@
  },
  "proof": [
   {
-   "text": "Let $\\theta:D[t]\\to S$ evaluate $t$ at $x$. Locality gives $\\mathfrak m_D[t]\\subseteq P=\\theta^{-1}(\\mathfrak m_S)$. Reduction factors through $F[t]\\to K$, evaluation at $\\alpha=\\operatorname{res}_S(x)$. Transcendence means this map is injective, so $P=\\mathfrak m_D[t]$; this follows coefficientwise using $f\\in\\mathfrak m_D[t]$ iff every coefficient of $f$ lies in $\\mathfrak m_D$. No injectivity of $\\theta$ is needed.",
+   "text": "Reduce polynomial evaluation using the residue maps. Ring-hom extensionality identifies aeval(residue x) after coefficient reduction with residue after evaluation. Transcendence forces a reduced polynomial to be zero exactly when its evaluation vanishes. Ideal.mem_map_C_iff and coefficient extensionality therefore identify P with map C (maximalIdeal D). No flatness or evaluation injectivity is required.",
    "uses": [
+    "def-weil-residue-field",
     "def-weil-algebraic-element",
-    "def-weil-polynomial-ring",
-    "def-weil-pbc-flat-ring-map"
+    "def-weil-polynomial-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
-   }
+   "elementary": true
   },
   {
-   "text": "The polynomial ring $D[t]$ is Noetherian since $D$ is Artinian and thus Noetherian, and its localization $T_0=D[t]_P$ is Noetherian and local. Its maximal ideal is $PT_0=\\mathfrak m_D T_0$, which is nilpotent. Therefore $T_0$ is Artinian. The map $D\\to T_0$ is local. The polynomial algebra is smooth over $D$, hence $D\\to T_0$ is essentially smooth.",
+   "text": "D is Noetherian by instIsNoetherianRingOfIsArtinianRing, Polynomial D by Polynomial.isNoetherianRing, and its localization by the localization Noetherian instance. Apply isArtinianRing_iff_isNilpotent_maximalIdeal to D to obtain a nilpotence exponent. Localization.AtPrime.map_eq_maximalIdeal identifies the maximal ideal of L. Map the equality of coefficient ideals, then use Ideal.map_map, Ideal.map_pow and Ideal.map_bot to transport that exponent. The reverse direction of the same Mathlib criterion proves L is Artinian, without the quotient-Artinian lemma.",
    "uses": [
     "lem-weil-pbc-artinian-local-noetherian-nilpotent",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-polynomial-ring",
     "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "def-weil-pbc-essentially-smooth-ring-map"
+    "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For d in maximalIdeal D, the constant polynomial C d belongs to P by coefficientwise membership. IsLocalization.AtPrime.to_map_mem_maximal_iff implies its image belongs to maximalIdeal L. local_hom_TFAE gives locality of D to L. ULift.ringEquiv transports locality and Artinianity; mapping a unit down reflects units for the lifted algebra map.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Polynomial D is formally smooth and finitely presented, hence smooth. Let Q be its explicit ULift, with algebra equivalence e, and let M be the image of P.primeCompl under e. Smooth.of_equiv makes Q smooth. Compose ULift.algEquiv with IsLocalization.algEquivOfAlgEquiv to give the required algebra equivalence from ULift L to Localization M. These constructed data witness EssentiallySmooth.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-residue-field",
   "def-weil-algebraic-element",
   "def-weil-polynomial-ring",
-  "def-weil-pbc-flat-ring-map",
   "lem-weil-pbc-artinian-local-noetherian-nilpotent",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-localization-noetherian",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
   "lem-weil-pbc-polynomial-ring-smooth",
   "def-weil-pbc-essentially-smooth-ring-map"
  ],
@@ -134,13 +138,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T203946-L-831414",
-  "kind": "interface",
+  "landing": "20261013T001226-L-2305244",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
