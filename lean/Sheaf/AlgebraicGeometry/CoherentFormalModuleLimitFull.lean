@@ -8,8 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionObjects
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitQuotient
 
 /-! # Reconstructing formal-system maps from maps of limit sheaves
 
@@ -52,6 +51,38 @@ and empty affine opens also satisfy the argument. No proper morphism, comparison
 theorem coherentFormalModule_limit_full {Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (G H : CoherentFormalModule Y J)
     (β : limit G.obj ⟶ limit H.obj) :
-    ∃ α : G ⟶ H, lim.map α.hom = β := by sorry
+    ∃ α : G ⟶ H, lim.map α.hom = β := by
+  classical
+  have hG := coherentFormalModule_limit_quotient J G
+  have hH := coherentFormalModule_limit_quotient J H
+  let eG (n : ℕ) := (hG n).choose
+  let eH (n : ℕ) := (hH n).choose
+  have heG (n : ℕ) : formalModuleQuotientπ J (n + 1) (limit G.obj) ≫
+      (eG n).hom = limit.π G.obj (op n) := (hG n).choose_spec
+  have heH (n : ℕ) : formalModuleQuotientπ J (n + 1) (limit H.obj) ≫
+      (eH n).hom = limit.π H.obj (op n) := (hH n).choose_spec
+  let a (n : ℕ) : G.obj.obj (op n) ⟶ H.obj.obj (op n) :=
+    (eG n).inv ≫ formalModuleQuotientMap J β (Nat.le_refl (n + 1)) ≫ (eH n).hom
+  have ha (n : ℕ) : limit.π G.obj (op n) ≫ a n = β ≫ limit.π H.obj (op n) := by
+    rw [← heG, ← heH]
+    simp [a, formalModuleQuotientMap, formalModuleQuotientπ, Category.assoc]
+  have hπ (n : ℕ) : Epi (limit.π G.obj (op n)) := by
+    rw [← heG]
+    dsimp [formalModuleQuotientπ]
+    infer_instance
+  let t : G.obj ⟶ H.obj :=
+    { app := fun n ↦ a n.unop
+      naturality := by
+        intro i j f
+        have := hπ i.unop
+        apply (cancel_epi (limit.π G.obj i)).1
+        change limit.π G.obj i ≫ (G.obj.map f ≫ a j.unop) =
+          limit.π G.obj i ≫ (a i.unop ≫ H.obj.map f)
+        rw [← Category.assoc, limit.w, ha j.unop, ← Category.assoc, ha i.unop]
+        simp only [Category.assoc, limit.w] }
+  refine ⟨ObjectProperty.homMk t, ?_⟩
+  apply limit.hom_ext
+  intro n
+  exact (limMap_π t n).trans (ha n.unop)
 
 end AlgebraicGeometry

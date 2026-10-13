@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-module-limit-quotient",
+ "kind": "statement",
+ "title": "Ideal-power quotient of a coherent formal-module limit sheaf",
+ "statement": "Let $Y$ be a Noetherian scheme, $J$ a quasi-coherent ideal sheaf, $G$ a coherent $J$-adic formal module [def-weil-pbc-coherent-formal-module], and $n\\in\\mathbb N$. Write $L=\\varprojlim G$ for its limit in $\\mathcal O_Y$-module sheaves. There is an isomorphism $e:L/J^{n+1}L\\simeq G_n$ such that the quotient projection followed by $e$ equals the canonical limit projection $L\\to G_n$. The indexing convention labels level $n+1$ by $n$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W, formula M/I^n M=M_n; local uniqueness in first half of Lemma 088B. Sources read at https://stacks.math.columbia.edu/tag/087W and https://stacks.math.columbia.edu/tag/088B."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation on each affine open V preserves limits. The unique isomorphism of limiting cones carries the evaluated canonical projection to the canonical projection of the evaluated tower. Apply the affine projection theorem to obtain surjectivity and the kernel formula J(V)^(n+1) times the entire section limit.",
+   "uses": [
+    "lem-weil-pbc-formal-module-affine-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ideal-power clauses of ideal_times_quasiCoherent_affine_sections to the quasi-coherent unit sheaf: on each affine V the range of the power inclusion is J(V)^(n+1). Multiplication followed by the limit projection vanishes on pure tensor germs, since the ideal power annihilates the level. Pure tensors generate tensor stalks, so the composite sheaf morphism is zero and its sheaf image lies in the kernel. Conversely every affine kernel section is a finite sum of ideal-power scalars times limit sections by the affine kernel formula. Lift its scalars through the power inclusion and form pure tensor sections, yielding a preimage under multiplication. The kernel therefore lies in the image locally, and the two subsheaves coincide. This argument neither assumes quasi-coherence of the limit nor assumes that evaluation preserves arbitrary sheaf images.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine surjectivity makes the projection an epimorphism of sheaves. The kernel-image identification makes it a cokernel of the multiplication-image inclusion in this abelian category. Uniqueness of cokernels gives the isomorphism from the formalModuleQuotient cokernel, with its required projection equation. Empty opens, zero sheaves, J=0 and J=1 obey the same argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-module-affine-projections",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W projection-kernel calculation; explicit affine-basis sheaf formulation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The quotient of an inverse limit sheaf of coherent adic modules by the nth ideal power is its nth level",
+   "results": "Service unavailable: Internal Server Error. Attempt recorded by msearch.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projections from the inverse limit of coherent adic sheaves identify its ideal power quotients with the terms of the system",
+   "results": "Eight adic-completion evaluation and transition lemmas, including AdicCompletion.eval_comp_of; no result for arbitrary coherent formal-module sheaf limits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalModuleQuotient.*limit|limit.*formalModuleQuotient|coherentFormalModule_limit_quotient",
+   "results": "msearch returned zero hits. Direct rg of library and Mathlib found no quotient identification for the sheaf limit; the library affine projection theorem supplies the sectionwise input.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitFull",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "First half of Lemma 088B: reconstruct alpha using the affine quotient formula of Lemma 087W; single-system limit projection quotient identification",
+   "via": [
+    "lem-weil-pbc-coherent-formal-module-limit-full",
+    "lem-weil-pbc-formal-completion-pushforward-lift",
+    "lem-weil-pbc-formal-systems-push-pull-comparison",
+    "lem-weil-pbc-formal-systems-push-pull-core",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleLimitQuotient.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_limit_quotient",
+  "statement": "theorem coherentFormalModule_limit_quotient {Y : Scheme.{u}} [IsNoetherian Y]\n    (J : Y.IdealSheafData) (G : CoherentFormalModule Y J) (n : ℕ) :\n    ∃ e : formalModuleQuotient J (n + 1) (limit G.obj) ≅ G.obj.obj (op n),\n      formalModuleQuotientπ J (n + 1) (limit G.obj) ≫ e.hom =\n        limit.π G.obj (op n)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T025301-L-3422392",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T025301-L-3422392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
