@@ -1,0 +1,161 @@
+{
+ "id": "lem-pc-strictly-perfect-evaluation-local-section",
+ "kind": "statement",
+ "title": "A local section of canonical derived evaluation",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with derived categories [def-pc-derived-category] on $X$ and every open. Let $K,N\\in D(\\mathcal O_X)$, let $U$ be an open, and let $P$ be a complex of $\\mathcal O_U$-modules strictly perfect in the sense of [def-pc-perfect-complex]. Suppose given $e_K:RK\\cong QP$, where $R$ is exact restriction. Put $H=R\\mathcal Hom$ [def-pur-derived-internal-hom], $D=H(K,\\mathcal O_X[0])$, and use the derived tensor of [def-pc-scheme-derived-tensor-structure]. Let $g:N\\otimes^L D\\to H(K,N)$ be the adjunct, for the fixed canonical family [def-pc-canonical-derived-tensor-hom-bijection], of the associator followed by $1_N\\otimes\\mathrm{ev}$ and the right unitor, where $\\mathrm{ev}$ is the image of $1_D$ under that family. There exists $s:RH(K,N)\\to R(N\\otimes^L D)$ with $s;R(g)=1_{RH(K,N)}$. Only this one inverse identity is asserted; no representative of N or comparison with a prescribed chain map is an input or a conclusion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pur-derived-internal-hom",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-canonical-derived-tensor-hom-bijection"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, ordinary complex models and comparison; Tag 08DM, lemma-Rhom-strictly-perfect; Tag 08DL, lemma-restriction-RHom-to-U"
+ },
+ "proof": [
+  {
+   "text": "Represent RN by a K-injective F. Restriction of derived internal Hom and its K-injective representative computation identify RH(K,N) with Q Hom(P,F).",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "def-pur-derived-internal-hom",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve O[0] and use the bounded exact-term Hom quasi-isomorphism calculation: finite-free retractions make internal Hom from each P term exact. This identifies the restricted derived dual with Hom(P,O[0]). In degree q its only nonzero factor is Hom(P^(-q),O). Dualizing the finite free inclusion and projection gives a finite free retraction of this term. The dual support is [-b,-a]; its terms are flat, so the dual is K-flat. Exact open restriction and the K-flat tensor computation give the source model Q Tot(F tensor Hom(P,O[0])).",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pur-derived-internal-hom",
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "lem-sc-finite-free-internal-hom-exact",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical tensor-Hom representative equation, followed by restriction, uncurries the adjunct on the (p,q) tensor summand. On the r-th Hom projection it evaluates the dual on P^r and applies the right unit action to F^p if r+q=0, and is zero otherwise. This is the ordinary evaluation formula; the tensor inclusions and Hom projections detect equality. Evaluation is degreewise invertible for strictly perfect P, hence is an isomorphism of complexes.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "def-pur-hom-complex",
+    "lem-pc-strictly-perfect-ordinary-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse of ordinary evaluation and conjugate it by the target and source model isomorphisms. Its composite with evaluation is the identity after each Hom product projection; localizing and conjugating gives s;R(g)=1 on the target.",
+   "uses": [
+    "lem-pc-strictly-perfect-ordinary-evaluation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, ordinary complex models and comparison; Tag 08DM, lemma-Rhom-strictly-perfect; Tag 08DL, lemma-restriction-RHom-to-U",
+  "description": "R4 isolates the target inverse identity in the ordinary model calculation of Stacks 08DQ. The tags were read online; the local literature checkout lacks cohomology.tex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived tensor Hom evaluation for a strictly perfect complex has a left inverse after restriction to an open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left inverse and a right inverse for derived tensor internal Hom evaluation of a strictly perfect complex",
+   "results": "Eight hits on tensor-complex unitors and Tor vanishing, not a local sheaf derived evaluation inverse: HomologicalComplex.rightUnitor'_inv, HomologicalComplex.rightUnitor, HomologicalComplex.leftUnitor'_inv, HomologicalComplex.leftUnitor, HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.leftUnitor'_inv_comm, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictlyPerfect.*([Rr]etraction|[Ss]ection)|[Ee]valuation.*([Ll]eft[Ii]nverse|[Rr]ight[Ii]nverse)",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComparisons",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, final paragraph: the tensor-Hom identification for a finite locally free module; Stacks 08DQ local strictly perfect calculation, target inverse identity",
+   "via": [
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictlyPerfectEvaluationLocalSection.lean",
+  "declaration": "AlgebraicGeometry.exists_strictlyPerfect_evaluation_local_section",
+  "statement": "theorem exists_strictlyPerfect_evaluation_local_section (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K N : schemeDerivedCategory X) (U : X.Opens)\n    (P : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (_hstrict : Scheme.IsStrictlyPerfect X U P)\n    (_eK : (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj P) :\n    let R := (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory\n    let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n      X.toRingedSpace.sheaf\n    let D := H.obj (op K, 𝟙_ (schemeDerivedCategory X))\n    let g := ((schemeDerivedTensorHomEquiv X) (N ⊗ D) K N).symm\n      ((α_ N D K).hom ≫ N ◁\n        ((schemeDerivedTensorHomEquiv X) D K (𝟙_ (schemeDerivedCategory X)) (𝟙 D)) ≫\n          (ρ_ N).hom)\n    ∃ s : R.obj (H.obj (op K, N)) ⟶ R.obj (N ⊗ D),\n      s ≫ R.map g = 𝟙 (R.obj (H.obj (op K, N)))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-perfect-complex",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-strictly-perfect-ordinary-evaluation",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-finite-free-internal-hom-exact",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T111920-L-3062145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T111920-L-3062145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

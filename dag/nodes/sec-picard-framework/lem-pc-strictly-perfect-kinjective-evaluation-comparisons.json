@@ -71,57 +71,43 @@
  },
  "proof": [
   {
-   "text": "Restrict derived internal Hom to U and transport through eK and eN. The second model F is already K-injective, so derivedInternalHom_obj_iso computes the target as Q Hom(P,F) directly, supplying b without any quasi-isomorphism calculation for F.",
+   "text": "Obtain a left inverse r and a right inverse s of the restricted canonical evaluation from the two one-sided identity statements. Associativity gives r=(s;R(g));r=s;(R(g);r)=s, so r and s agree. These equations construct an isomorphism e with hom R(g).",
    "uses": [
-    "lem-sc-derived-internal-hom-restrict-open",
-    "def-pur-derived-internal-hom",
-    "def-pur-kinjective-complex"
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-evaluation-local-section",
+    "def-pc-canonical-derived-tensor-hom-bijection"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the same computation to O_U[0]. The dual degree-q term is the dual of P^(-q); dualizing its finite-free retraction shows that it is finite projective and flat. The bounded dual is K-flat. Hence tensoring it with arbitrary F computes the derived tensor. Exact restriction and the given representative of N supply a, with symmetry used when the K-flat factor is second.",
+   "text": "Use derivedInternalHom_restrict_open, then derivedInternalHom_obj_iso with the given P and K-injective F and the inverse representative isomorphisms. Compose these to obtain b: RH(K,N) iso Q Hom(P,F).",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-derived-internal-hom",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pc-bounded-exact-term-hom-quasi-iso",
-    "lem-sc-finite-free-internal-hom-exact"
+    "lem-sc-derived-internal-hom-restrict-open",
+    "def-pur-derived-internal-hom"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the canonical tensor-Hom representative equation with the already K-injective target F. Uncurrying each tensor summand gives evaluation of the dual on P and the unit action on F, exactly hf. The coproduct inclusions and Hom projections detect equality. Localize and transport through the same restriction and representative comparisons to obtain the displayed square; no resolution of F or Hom(P,-) quasi-isomorphism preservation is required here.",
+   "text": "The given ordinary evaluation f is degreewise invertible, so it is an isomorphism of complexes. Define a=e;b;(Qf)^(-1). The inverse identity (Qf)^(-1);Qf=1 and associativity give R(g);b=a;Qf. This uses exactly the original f and preserves every original hypothesis.",
    "uses": [
-    "def-pc-canonical-derived-tensor-hom-bijection",
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-pc-strictly-perfect-ordinary-evaluation",
-    "def-pur-hom-complex"
+    "lem-pc-strictly-perfect-ordinary-evaluation"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-canonical-derived-tensor-hom-bijection",
-  "def-pc-perfect-complex",
-  "def-pc-scheme-derived-tensor-structure",
-  "def-pc-tensor-complex-sheaves",
   "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-pur-kinjective-complex",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-strictly-perfect-evaluation-local-retraction",
+  "lem-pc-strictly-perfect-evaluation-local-section",
   "lem-pc-strictly-perfect-ordinary-evaluation",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-finite-free-internal-hom-exact"
+  "lem-sc-derived-internal-hom-restrict-open"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, ordinary complex models and comparison; Tag 08DM, lemma-Rhom-strictly-perfect; Tag 08DL, lemma-restriction-RHom-to-U",
-  "description": "N1 isolated the already K-injective target case from the Stacks local evaluation computation. Arbitrary second representatives are treated by a separate, fully written resolution transport in the parent module. Stable source tags 08DQ, 08DM and 08DL were read online."
+  "description": "R4 writes the categorical gluing proof, constructing the source comparison from the restricted evaluation isomorphism, the K-injective target comparison and the inverse of the prescribed ordinary evaluation. The two inverse identities are separate remaining items. No definition or statement is changed."
  },
  "mathlib_searches": [
   {
@@ -160,9 +146,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T100039-L-2471995",
+  "landing": "20261013T111920-L-3062145",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
