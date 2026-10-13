@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Because X is quasi-compact, choose a finite affine open cover X=U_1 union ... union U_N. Since the diagonal of X over Spec(k) is affine, every finite intersection U_{i_0} cap ... cap U_{i_p} is affine, by the affine-diagonal intersection lemma.",
+   "text": "By Mathlib isCompact_iff_finite_and_eq_biUnion_affineOpens choose a finite set s of affine opens covering the top open of X. Use I = s as the index type, with its Fintype structure and the linear order pulled back from Fintype.equivFin. The affine diagonal over Spec(k) makes pairwise intersections affine by isAffineHom_diagonal_iff applied to the top affine open of Spec(k). InfClosed.biInf_mem_of_nonempty then makes every nonempty finite intersection affine.",
    "uses": [
     "lem-sc-picard-affine-diagonal-intersections"
    ],
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Order the index set {1,...,N}. By the alternating Cech complex lemma, the Cech cohomology of this cover is the cohomology of the alternating complex, whose degree-p term is the product of F(U_{i_0...i_p}) over strictly increasing tuples i_0<...<i_p in {1,...,N}. There is no such tuple when p >= N, so the alternating complex is zero in degrees p >= N, and Cech cohomology of the cover vanishes in every degree p >= N.",
+   "text": "Construct SiteCechComplex using the actual infima of the cover opens and inclusion maps. Their universal properties are the infimum universal property; all map identities follow because opens form a poset. Identify its full section complex with TopCat.Presheaf.cechComplex by identity degree maps: both differentials are the same signed face restrictions. Apply alternatingCechComputes. If p >= N = Fintype.card I, a strictly increasing Fin(p+1)-tuple would be injective and force p+1 <= N, a contradiction. Thus the ordered term is the trivial group, its degree-p homology is zero by ShortComplex.isZero_homology_of_isZero_X₂, and the full Čech homology is zero by the comparison isomorphism.",
    "uses": [
     "lem-pc-alternating-cech-computes"
    ],
@@ -50,9 +50,10 @@
    }
   },
   {
-   "text": "By the Cech comparison theorem for a cover whose finite intersections are affine, Cech cohomology agrees with H^p(X,F) for every quasi-coherent F. Therefore H^p(X,F)=0 for p >= N. Taking d_X=N-1 proves the claimed uniform bound.",
+   "text": "Apply Scheme.Modules.nonempty_cechComplex_linearEquiv_H using the affine nonempty intersections and the covering equality. Its inverse followed by cechComplexHomologyAddEquiv identifies ordinary H^p(X,F) with the zero abelian Čech homology group. Apply exists_moduleCohomology_source_comparison to identify module right-derived cohomology additively with ordinary H. The resulting injective map into a subsingleton makes the module cohomology a subsingleton, hence a zero ModuleCat object. Choose d=N, independently of F: d<p implies N<=p, also for N=0.",
    "uses": [
-    "lem-pc-cech-computes"
+    "lem-pc-cech-computes",
+    "lem-sc-module-cohomology-source-comparison"
    ],
    "elementary": false,
    "source": {
@@ -64,12 +65,13 @@
  "proof_deps": [
   "lem-sc-picard-affine-diagonal-intersections",
   "lem-pc-cech-computes",
-  "lem-pc-alternating-cech-computes"
+  "lem-pc-alternating-cech-computes",
+  "lem-sc-module-cohomology-source-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01XI, coherent-lemma-vanishing-nr-affines"
+  "place": "Tag 01XI, second proof of coherent-lemma-vanishing-nr-affines; implemented by Q3 using the existing module/ordinary cohomology comparison (Stacks 03FD)"
  },
  "mathlib_searches": [
   {
@@ -157,5 +159,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T015607-L-3025017",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
