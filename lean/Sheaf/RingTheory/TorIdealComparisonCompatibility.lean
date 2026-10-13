@@ -13,6 +13,9 @@ public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Ideal.Maps
 
+import Sheaf.RingTheory.TorIdealQuotientChainMap
+import Sheaf.RingTheory.TorIdealCycleLift
+
 /-! # Compatibility of Tor connecting formulas
 Source: Stacks Project, Algebra, Tags 00M5 and 00M6.
 -/
@@ -116,6 +119,80 @@ theorem exists_tor_ideal_comparison_compatibility
                 J))) 1).inv (((((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸
                 J))).mapHomologicalComplex (ComplexShape.down ℕ)).obj G.complex).homologyπ 1 w)))) ∧
       (∀ t : (((Tor' (ModuleCat.{u} R) 1).obj M).obj (ModuleCat.of R (R ⧸ I))), 
-        δA (τ t) = θ (δR t)) := by sorry
+        δA (τ t) = θ (δR t)) := by
+  classical
+  have _ := hg
+  have _ := hP
+  have _ := hG
+  let C := (((tensoringRight (ModuleCat.{u} R)).obj
+    (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex
+  let D := (((tensoringRight (ModuleCat.{u} A)).obj
+    (ModuleCat.of A (A ⧸ J))).mapHomologicalComplex (ComplexShape.down ℕ)).obj G.complex
+  let eR := P.isoLeftDerivedObj
+    ((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸ I))) 1
+  let eA := G.isoLeftDerivedObj
+    ((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸ J))) 1
+  have hlocal (φ : ∀ n : ℕ, (P.complex.X n) →+ (G.complex.X n))
+      (hφ : ∀ (n : ℕ) (r : R) (p : P.complex.X n), φ n (r • p) = f r • φ n p)
+      (hdφ : ∀ (n : ℕ) (p : P.complex.X (n + 1)),
+        G.complex.d (n + 1) n (φ (n + 1) p) = φ n (P.complex.d (n + 1) n p))
+      (hπφ : ∀ p : P.complex.X 0, G.π.f 0 (φ 0 p) = g (P.π.f 0 p))
+      (ψ : ((forget₂ (ModuleCat.{u} R) AddCommGrpCat).mapHomologicalComplex
+        (ComplexShape.down ℕ)).obj C ⟶
+        ((forget₂ (ModuleCat.{u} A) AddCommGrpCat).mapHomologicalComplex
+          (ComplexShape.down ℕ)).obj D)
+      (hψ : ∀ (n : ℕ) (p : P.complex.X n) (r : R),
+        ψ.f n (p ⊗ₜ[R] Ideal.Quotient.mk I r) =
+          φ n p ⊗ₜ[A] Ideal.Quotient.mk J (f r))
+      (z : C.cycles 1) (w : D.cycles 1)
+      (heq : ψ.f 1 (C.iCycles 1 z) = D.iCycles 1 w) :
+      δA (eA.inv (D.homologyπ 1 w)) = θ (δR (eR.inv (C.homologyπ 1 z))) := by
+    obtain ⟨y, k, a, p, hy, hdy⟩ := exists_quotient_cycle_lift I M P z
+    let b : Fin k → J := fun j ↦ ⟨f (a j), by
+      rw [hJ]
+      exact Ideal.mem_map_of_mem f (a j).property⟩
+    have hw : D.iCycles 1 w = φ 1 y ⊗ₜ[A] (1 : A ⧸ J) := by
+      rw [← heq, hy]
+      simpa only [map_one] using hψ 1 y 1
+    have hd : G.complex.d 1 0 (φ 1 y) = ∑ j, (b j : A) • φ 0 (p j) := by
+      rw [hdφ 0 y, hdy, map_sum]
+      exact Finset.sum_congr rfl (fun j _ ↦ hφ 0 (a j) (p j))
+    rw [hformulaA w (φ 1 y) k b (fun j ↦ φ 0 (p j)) hw hd,
+      hformulaR z y k a p hy hdy, map_sum]
+    apply Finset.sum_congr rfl
+    intro j _
+    rw [hθ (a j) (P.π.f 0 (p j)) (b j) rfl, hπφ]
+  obtain ⟨ψ₀, hψ₀, hcycles₀⟩ :=
+    exists_quotient_tensor_comparison f I J hJ M N P G φ₀ hφ₀ hdφ₀
+  have hrange : ∀ t, ∃ v, δA v = θ (δR t) := by
+    intro t
+    obtain ⟨z, hz⟩ := (epi_iff_surjective (C.homologyπ 1)).mp inferInstance (eR.hom t)
+    have ht : eR.inv (C.homologyπ 1 z) = t := by
+      rw [hz]
+      exact ConcreteCategory.congr_hom eR.hom_inv_id t
+    obtain ⟨w, hw⟩ := hcycles₀ z
+    refine ⟨eA.inv (D.homologyπ 1 w), ?_⟩
+    rw [← ht]
+    exact hlocal φ₀ hφ₀ hdφ₀ hπφ₀ ψ₀ hψ₀ z w hw
+  let τ : (((Tor' (ModuleCat.{u} R) 1).obj M).obj (ModuleCat.of R (R ⧸ I))) →+
+      (((Tor' (ModuleCat.{u} A) 1).obj N).obj (ModuleCat.of A (A ⧸ J))) :=
+    { toFun := fun t ↦ (hrange t).choose
+      map_zero' := by
+        apply hδA
+        simpa only [map_zero] using (hrange 0).choose_spec
+      map_add' := by
+        intro x y
+        apply hδA
+        rw [(hrange (x + y)).choose_spec, map_add, map_add, map_add,
+          (hrange x).choose_spec, (hrange y).choose_spec] }
+  have hcomm : ∀ t, δA (τ t) = θ (δR t) := fun t ↦ (hrange t).choose_spec
+  refine ⟨τ, ?_, hcomm⟩
+  intro φ hφ hdφ hπφ
+  obtain ⟨ψ, hψ, _⟩ := exists_quotient_tensor_comparison f I J hJ M N P G φ hφ hdφ
+  refine ⟨ψ, hψ, ?_⟩
+  intro z w heq
+  apply hδA
+  rw [hcomm]
+  exact (hlocal φ hφ hdφ hπφ ψ hψ z w heq).symm
 
 end ModuleCat

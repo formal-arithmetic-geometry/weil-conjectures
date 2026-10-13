@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-quotient-tensor-comparison",
+ "kind": "statement",
+ "title": "Quotient tensor chain map from a semilinear comparison",
+ "statement": "Let R and A be commutative rings, f:R→A a ring homomorphism, I an ideal of R, and J=map(f,I). Let M be an R-module and N an A-module, and let P→M and G→N be projective resolutions (projective terms [def-weil-pbc-projective-module] and exact augmented complexes [def-weil-pbc-exact-sequence], with cycles as in [def-weil-pbc-module-chain-complex-homology]). Suppose additive maps φ_n:P_n→G_n satisfy φ_n(rp)=f(r)φ_n(p) and d_G φ_{n+1}=φ_n d_P. There is a morphism ψ of underlying additive complexes P⊗_R R/I→G⊗_A A/J such that ψ_n(p⊗mk_I(r))=φ_n(p)⊗mk_J(f(r)). For every degree-one cycle z of the source there is a degree-one cycle w of the target with ψ_1(iCycles(z))=iCycles(w). Neither augmentations, freeness of the terms, Tor, nor any connecting maps are needed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Parent lem-weil-pbc-tor-ideal-comparison-compatibility, Step 1; Algebra, Section 00LY, proof of 00M5 and Remark 00M6. The quotient-complex details are expanded explicitly here."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Since f(I)⊆J, descend mk_J∘f through R/I using Ideal.Quotient.lift. Its scalar formula on representatives makes it an f-semilinear map qL:R/I→A/J. Package each φ_n as an f-semilinear map φL_n.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use TensorProduct.map φL_n qL and forget scalar structures to define ψ_n. For a consecutive differential, tensor induction reduces the chain identity to hdφ on p⊗r. HomologicalComplex.Hom needs only pairs related by the complex shape; these are exactly i=j+1. This constructs ψ and proves its pure tensor formula.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For z a cycle, let x=ψ_1(iCycles(z)). The chain identity and iCycles_d give d_G x=0. The A-linear map A→(G⊗A/J)_1 sending a to a•x has zero composite with d. Lift this map to cycles via HomologicalComplex.liftCycles, and evaluate at 1 to obtain w. The liftCycles_i identity gives iCycles(w)=x.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Parent lem-weil-pbc-tor-ideal-comparison-compatibility, Step 1; explicit complete Lean proof using Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "semilinear map of complexes induces tensor quotient chain map sending cycles to cycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "semilinear map of complexes induces tensor quotient chain map sending cycles to cycles",
+   "results": "Candidates: HomologicalComplex.i_cyclesMk, HomologicalComplex.cyclesMap, HomologicalComplex.cyclesFunctor_map, HomologicalComplex.tensorHom, HomologicalComplex.cyclesMap_comp, HomologicalComplex.cyclesMap_i, HomologicalComplex.coinvariantsTensorObj, HomologicalComplex.HasTensor. Sources inspected; no exact theorem. Used the tensor and homological-complex primitives in the complete Lean proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent Mathlib lemmas used"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorProduct.map|liftCycles_i",
+   "results": "Candidates: Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean, Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean, Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean, Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean, Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean, Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/Algebra/Lie/TensorProduct.lean, Mathlib/Algebra/Lie/Weights/Basic.lean. Sources inspected; no exact theorem. Used the tensor and homological-complex primitives in the complete Lean proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent Mathlib lemmas used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorIdealComparisonCompatibility",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Parent ideal-kernel naturality node, Steps 5–6; Stacks Algebra, functoriality in Section 00LY, Remark 00M6, and comparison Tag 00LS (https://stacks.math.columbia.edu/tag/00LS).; parent comparison compatibility Step 1.",
+   "via": [
+    "lem-weil-pbc-tor-ideal-comparison-compatibility",
+    "lem-weil-pbc-tor-ideal-kernel-naturality",
+    "lem-weil-pbc-flat-another-variant-local-criterion",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorIdealQuotientChainMap",
+  "file": "lean/Sheaf/RingTheory/TorIdealQuotientChainMap.lean",
+  "declaration": "ModuleCat.exists_quotient_tensor_comparison",
+  "statement": "theorem exists_quotient_tensor_comparison\n    {R A : Type u} [CommRing R] [CommRing A]\n    (f : R →+* A) (I : Ideal R) (J : Ideal A) (hJ : J = Ideal.map f I)\n    (M : ModuleCat.{u} R) (N : ModuleCat.{u} A)\n    (P : ProjectiveResolution M) (G : ProjectiveResolution N)\n    (φ : ∀ n : ℕ, (P.complex.X n) →+ (G.complex.X n))\n    (hφ : ∀ (n : ℕ) (r : R) (p : P.complex.X n), φ n (r • p) = f r • φ n p)\n    (hdφ : ∀ (n : ℕ) (p : P.complex.X (n + 1)),\n      G.complex.d (n + 1) n (φ (n + 1) p) = φ n (P.complex.d (n + 1) n p)) :\n    ∃ ψ : ((forget₂ (ModuleCat.{u} R) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj ((((tensoringRight (ModuleCat.{u} R)).obj\n        (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex) ⟶\n      ((forget₂ (ModuleCat.{u} A) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj ((((tensoringRight (ModuleCat.{u} A)).obj\n        (ModuleCat.of A (A ⧸ J))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj G.complex),\n      (∀ (n : ℕ) (p : P.complex.X n) (r : R),\n        ψ.f n (p ⊗ₜ[R] Ideal.Quotient.mk I r) =\n          φ n p ⊗ₜ[A] Ideal.Quotient.mk J (f r)) ∧\n      (∀ z : ((((tensoringRight (ModuleCat.{u} R)).obj\n        (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex).cycles 1,\n        ∃ w : ((((tensoringRight (ModuleCat.{u} A)).obj\n        (ModuleCat.of A (A ⧸ J))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj G.complex).cycles 1,\n          ψ.f 1 (((((tensoringRight (ModuleCat.{u} R)).obj\n        (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex).iCycles 1 z) =\n            ((((tensoringRight (ModuleCat.{u} A)).obj\n        (ModuleCat.of A (A ⧸ J))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj G.complex).iCycles 1 w)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T111858-L-3054698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T111858-L-3054698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

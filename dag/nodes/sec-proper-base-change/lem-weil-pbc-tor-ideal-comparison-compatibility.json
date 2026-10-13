@@ -13,48 +13,45 @@
  ],
  "proof": [
   {
-   "text": "For the supplied comparison φ₀, map each quotient tensor by p ⊗ mk r ↦ φ₀(p) ⊗ mk(f r). The map f sends I into J. Semilinearity preserves balancing and sends IP_n into JG_n, so this map is well defined, additive, and commutes with the differentials. Apply homology and the supplied resolution isomorphisms to define τ.",
+   "text": "Construct the quotient tensor chain map ψ₀ for the supplied φ₀, together with the fact that it sends source cycles to target cycles.",
+   "uses": [
+    "lem-weil-pbc-quotient-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary comparison φ and quotient chain map ψ satisfying its pure tensor formula, lift a source cycle z to y⊗1 and write d_P y=Σ a_j p_j. Put b_j=(f(a_j), proof f(a_j)∈J). If ψ_1(iCycles(z))=iCycles(w), the pure tensor formula gives iCycles(w)=φ_1(y)⊗1. The differential identity, additivity, and semilinearity give d_G φ_1(y)=Σ b_j φ_0(p_j). Apply hformulaA and hformulaR. Apply θ termwise to the finite sum using hθ; hπφ identifies each augmented image. Hence δA(class(w))=θ(δR(class(z))).",
+   "uses": [
+    "lem-weil-pbc-quotient-cycle-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every t in source Tor is eR.inv(homologyπ(z)): use surjectivity of homologyπ on eR.hom(t), and eR.hom_inv_id. For ψ₀ the image cycle w from Step 1 and the calculation of Step 2 provide a preimage v of θ(δR(t)) under δA. Injectivity of δA makes this preimage unique. Choose it as τ(t); this is a uniquely determined object, not arbitrary witness data. Apply δA to prove τ(0)=0 and τ(x+y)=τ(x)+τ(y) from additivity of θ and the connecting maps. The chosen preimage equation gives δA τ=θ δR.",
    "uses": [
     "def-weil-pbc-tor-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
-   }
+   "elementary": true
   },
   {
-   "text": "Represent a degree-one cycle by y ⊗ 1 and express d y as a finite sum of I-multiples. Tensor right exactness for the quotient sequence provides the lift and the expression. Send them by φ₀: semilinearity gives d(φ₀ y)=Σ f(a_j) φ₀(p_j). Apply the assumed connecting formulas. The θ formula and augmentation identity give δA τ=θ δR on cycle classes. Surjectivity of homologyπ and the resolution isomorphism give it on all Tor elements.",
+   "text": "For any φ, construct its ψ using Step 1. If ψ maps z to w, apply δA to the desired equality. The preimage equation for τ and the cycle calculation of Step 2 give identical images, so injectivity proves the universal cycle-class formula. No homotopy comparison or induced homology-map transport is needed.",
    "uses": [
-    "lem-weil-pbc-tensor-right-exact",
-    "def-weil-pbc-tor-modules"
+    "lem-weil-pbc-quotient-tensor-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
-   }
-  },
-  {
-   "text": "Repeat the quotient-chain-map construction for any other comparison φ, giving τφ and δA τφ=θ δR by the preceding calculation. Injectivity of δA gives τφ=τ. Thus this φ has a ψ with the universal cycle-class formula for the common τ.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-tor-modules",
-  "lem-weil-pbc-tensor-right-exact"
+  "lem-weil-pbc-quotient-cycle-lift",
+  "lem-weil-pbc-quotient-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U3",
+  "group": "J4",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Parent ideal-kernel naturality node, Steps 5–6; Stacks Algebra, functoriality in Section 00LY, Remark 00M6, and comparison Tag 00LS (https://stacks.math.columbia.edu/tag/00LS).",
-  "note": "The detailed formula argument follows the parent node plan; official Stacks pages 00M5, 00M6, and 00LS were read because the local literature source is not materialized."
+  "place": "Algebra, Section 00LY and Remark 00M6; original comparison node Steps 1–3.",
+  "note": "Complete proof: quotient chain maps and quotient cycle lifts, then unique preimages under the assumed injective connecting map. No unresolved theorem is used. No target or existing signature changes."
  },
  "mathlib_searches": [
   {
@@ -169,9 +166,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T082417-L-1649508",
+  "landing": "20261013T111858-L-3054698",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

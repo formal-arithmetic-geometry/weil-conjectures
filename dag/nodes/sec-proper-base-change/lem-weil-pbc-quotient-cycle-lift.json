@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-quotient-cycle-lift",
+ "kind": "statement",
+ "title": "Cycle lifts and finite ideal-multiple differentials in a quotient tensor complex",
+ "statement": "Let R be a commutative ring, I an ideal of R, M an R-module, and P→M a projective resolution (projective terms [def-weil-pbc-projective-module] and exact augmented complex [def-weil-pbc-exact-sequence]). Form C=P⊗_R R/I, with cycles and their inclusion as in [def-weil-pbc-module-chain-complex-homology]. Every z∈Z_1(C) admits y∈P_1, a natural number k, a:Fin(k)→I, and p:Fin(k)→P_0 such that iCycles(z)=y⊗1 and d_P y=Σ_j a_j p_j. No freeness hypothesis on the terms of P is necessary.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Parent lem-weil-pbc-tor-ideal-comparison-compatibility, Step 2; Algebra, Section 00LY, proof of 00M5 and Remark 00M6. The quotient-complex details are expanded explicitly here."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Let e:P_1⊗R/I≃P_1/(I•P_1) be TensorProduct.tensorQuotEquivQuotSMul. Lift e(iCycles(z)) through the surjective quotient map to y. The formula tensorQuotEquivQuotSMul_tmul_mk for y⊗mk_I(1) proves iCycles(z)=y⊗1.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply iCycles_d to z and substitute the lift. The mapped differential on a pure tensor is (d_P y)⊗1, so this tensor is zero. Apply tensorQuotEquivQuotSMul in degree zero and Submodule.Quotient.mk_eq_zero to conclude d_P y∈I•P_0.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Induct on this membership with Submodule.smul_induction_on. A single product a•p is a sum indexed by Fin(1). For a sum of expressions indexed by Fin(k₁) and Fin(k₂), concatenate both coefficient and vector families with Fin.addCases and use Fin.sum_univ_add. This gives the required finite expression and completes the claimed witnesses.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Parent lem-weil-pbc-tor-ideal-comparison-compatibility, Step 2; explicit complete Lean proof using Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lift a cycle in a complex tensored with R/I to y tensor 1 with differential a finite sum of ideal multiples",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.tensorQuotEquivQuotSMul",
+   "results": "Candidates: TensorProduct.tensorQuotEquivQuotSMul, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor, TensorProduct.tensorQuotEquivQuotSMul_tmul_mk, TensorProduct.tensorQuotEquivQuotSMul_symm_mk, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ. Sources inspected; no exact theorem. Used the tensor and homological-complex primitives in the complete Lean proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent Mathlib lemmas used"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorQuotEquivQuotSMul|smul_induction_on",
+   "results": "Candidates: Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Module/LocalizedModule/Submodule.lean, Mathlib/Algebra/Module/LocalizedModule/Submodule.lean, Mathlib/Algebra/Ring/Submonoid/Pointwise.lean. Sources inspected; no exact theorem. Used the tensor and homological-complex primitives in the complete Lean proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent Mathlib lemmas used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorIdealComparisonCompatibility",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Parent ideal-kernel naturality node, Steps 5–6; Stacks Algebra, functoriality in Section 00LY, Remark 00M6, and comparison Tag 00LS (https://stacks.math.columbia.edu/tag/00LS).; parent comparison compatibility Step 2.",
+   "via": [
+    "lem-weil-pbc-tor-ideal-comparison-compatibility",
+    "lem-weil-pbc-tor-ideal-kernel-naturality",
+    "lem-weil-pbc-flat-another-variant-local-criterion",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorIdealCycleLift",
+  "file": "lean/Sheaf/RingTheory/TorIdealCycleLift.lean",
+  "declaration": "ModuleCat.exists_quotient_cycle_lift",
+  "statement": "theorem exists_quotient_cycle_lift\n    {R : Type u} [CommRing R] (I : Ideal R) (M : ModuleCat.{u} R)\n    (P : ProjectiveResolution M)\n    (z : ((((tensoringRight (ModuleCat.{u} R)).obj\n        (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex).cycles 1) :\n    ∃ (y : P.complex.X 1) (k : ℕ) (a : Fin k → I) (p : Fin k → P.complex.X 0),\n      ((((tensoringRight (ModuleCat.{u} R)).obj\n        (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex).iCycles 1 z = y ⊗ₜ[R] (1 : R ⧸ I) ∧\n      P.complex.d 1 0 y = ∑ j, (a j : R) • p j",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T111858-L-3054698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T111858-L-3054698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
