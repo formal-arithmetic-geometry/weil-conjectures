@@ -1,6 +1,6 @@
 # Work queue
 
-179 items; claim with `tools/claim.py next <group> [--stage N]`.
+180 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (23)
 
@@ -45,7 +45,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (148)
+## Stage 3: modules to prove (149)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -178,6 +178,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapResidueQuotientSurjective` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalFiniteLevelLift` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalRestrictionKernel` | 30 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SelfExtTorResolutionModel` | 30 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization` | 31 | 1 | proof |
 | `Sheaf.Algebra.Homology.HomologyEvaluationCycleExistence` | 31 | 1 | proof |
