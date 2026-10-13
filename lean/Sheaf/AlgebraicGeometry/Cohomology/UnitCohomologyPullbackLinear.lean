@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Mathlib.CategoryTheory.Sites.Equivalence
 
 @[expose] public section
 set_option backward.isDefEq.respectTransparency.types false
@@ -70,7 +71,44 @@ theorem unitCohomologyPullbackLinear_bijective
     (hd : d ≫ f = f') (M : Y.Modules) (e : M ≅ SheafOfModules.unit Y.ringCatSheaf)
     (n : ℕ) :
     Function.Bijective (unitCohomologyPullbackLinear f f' d hd M
-      (e.hom ≫ SheafOfModules.unitToPushforwardObjUnit d.toRingCatSheafHom) n) := by sorry
+      (e.hom ≫ SheafOfModules.unitToPushforwardObjUnit d.toRingCatSheafHom) n) := by
+  let a := TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} d.base
+  let E := TopologicalSpace.Opens.mapMapIso (asIso d.base)
+  have hE : E.functor.IsCocontinuous
+      (Opens.grothendieckTopology Y)
+      (Opens.grothendieckTopology X) :=
+    (E.toAdjunction.isCocontinuous_iff_coverPreserving _ _).mpr
+      (coverPreserving_opens_map (inv d.base))
+  have hE' : E.inverse.IsCocontinuous
+      (Opens.grothendieckTopology X)
+      (Opens.grothendieckTopology Y) :=
+    (E.symm.toAdjunction.isCocontinuous_iff_coverPreserving _ _).mpr
+      (coverPreserving_opens_map d.base)
+  have hdense := E.isDenseSubsite_inverse_of_isCocontinuous
+    (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)
+  have hr : (TopCat.Sheaf.pushforward AddCommGrpCat.{u} d.base).IsEquivalence :=
+    (E.sheafCongr (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)
+      AddCommGrpCat.{u}).isEquivalence_inverse
+  have hl : (invImage d).IsEquivalence := a.isEquivalence_left_of_isEquivalence_right
+  let φ := e.hom ≫ SheafOfModules.unitToPushforwardObjUnit d.toRingCatSheafHom
+  have hu : IsIso (SheafOfModules.unitToPushforwardObjUnit d.toRingCatSheafHom) := by
+    apply Hom.isIso_iff_isIso_app.mpr
+    intro U
+    apply (ConcreteCategory.isIso_iff_bijective _).mpr
+    exact ConcreteCategory.bijective_of_isIso (d.app U)
+  have hφ : IsIso ((SheafOfModules.toSheaf Y.ringCatSheaf).map φ) := by
+    dsimp only [φ]
+    infer_instance
+  have hc : IsIso (coeff d φ) := by
+    change IsIso (a.homEquiv _ _ |>.symm _)
+    rw [Adjunction.homEquiv_counit]
+    infer_instance
+  change Function.Bijective (fun x ↦ Sheaf.H.map (coeff d φ) n
+    (Sheaf.H.mapFunctor (invImage d) (constIso d).symm
+      ((SheafOfModules.toSheaf Y.ringCatSheaf).obj M) n x))
+  exact (ConcreteCategory.bijective_of_isIso
+    ((Sheaf.functorH _ n).map (coeff d φ))).comp
+    (Sheaf.H.mapFunctor_bijective (invImage d) (constIso d).symm _ n)
 
 end
 end AlgebraicGeometry.Scheme.Modules
