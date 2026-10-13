@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-derived-open-union-adjunction-triangle",
+ "kind": "statement",
+ "title": "Direct-image adjunction triangle on an arbitrary open union",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and assume the derived module categories on $X$ and all its localized open sites exist in one Hom universe [def-pc-derived-category]. For every open $T$, write $R_T=D(\\operatorname{overFunctor}_T)$ and choose a functor $G_T$ and an adjunction $a_T:R_T\\dashv G_T$. Let $U,V$ be arbitrary opens, $E'\\in D(\\mathcal O_X)$, and $k\\in\\mathbf Z$. Put $W=U\\cup V$, $O=U\\cap V$, $N=G_O R_O(E'[k-1])$, $A=G_W R_W(E'[k])$, and $B=G_U R_U(E'[k])\\oplus G_V R_V(E'[k])$. Let $\\beta:R_W A\\to R_W(E'[k])$ be the transpose of $1_A$ under $a_W$, and let $b:A\\to B$ be the biproduct lift of the transposes under $a_U,a_V$ of the two canonical restrictions of $\\beta$ [lem-sc-derived-hom-mayer-vietoris]. There exist maps $d:N\\to A$ and $c:B\\to N[1]$ for which $N\\xrightarrow d A\\xrightarrow b B\\xrightarrow c N[1]$ is a distinguished triangle [def-weil-triangulated-category]. There is no compactness, quasi-coherence, support, or source-object assumption.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV, lemma-exact-sequence-j-star, applied on U union V and followed by derived direct image to X; Tag 079W, lemma-adjoint"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-sc-derived-hom-mayer-vietoris",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Put W=U union V and use [lem-pc-open-derived-localization-adjunction] to obtain derived localizations on W and all its opens in the given Hom universe. Restrict E′[k] to W. Use [prop-pur-kinjective-resolutions-exist] for a K-injective representative with injective terms. The inverse images of U and V cover W, so [lem-pc-kinjective-mayer-vietoris-presentation] gives the short exact complex, with its pair-of-units first arrow and the required direct-image comparisons. Apply [lem-weil-pbc-complex-ses-triangle] and inverse rotation.",
+   "uses": [
+    "lem-pc-open-derived-localization-adjunction",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-kinjective-mayer-vietoris-presentation",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the right derived direct image from W to X. It preserves the triangle and commutes with integer shifts by [lem-pc-right-derived-functor-triangulated]. Identify each composite direct image with a right adjoint to the corresponding restriction on X: compose the adjunctions, identify their left adjoints using associativity of localized restriction and exact-functor localization comparisons [def-pc-derived-open-restriction-maps, lem-weil-pbc-exact-functor-derived-factorization], and use the unique isomorphism of right adjoints compatible with the adjunction. The shift comparison identifies the first vertex with G_(U intersection V)(R_(U intersection V)(E′[k-1])). Transport distinguishedness along these vertex isomorphisms.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "def-pc-derived-open-restriction-maps",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit at R_W(E′[k]) is the transpose of identity on A. The canonical nested restriction comparison sends this counit to maps R_U A -> R_U(E′[k]) and R_V A -> R_V(E′[k]). Transposing back gives the U and V components of the transported unit arrow; thus this arrow is exactly the explicit biproduct lift b. This mate computation uses adjunction naturality and the two triangle identities, so it is unchanged on replacing canonical right adjoints by the supplied ones. On sections it is restriction from Z intersection W to Z intersection U and Z intersection V. Empty opens yield zero vertices, repeated opens yield a split triangle, and shift addition works for every integer k.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-kinjective-mayer-vietoris-presentation",
+  "lem-pc-open-derived-localization-adjunction",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X3",
+  "date": "2026-10-13",
+  "note": "Expansion of Tag 08BV for the arbitrary union, with fixed localized-site right adjoints and an explicitly constructed restriction arrow. Source read at the Stacks tag and in cohomology.tex, lemma-exact-sequence-j-star."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image Mayer Vietoris triangle for arbitrary two open subsets right adjoint restriction",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris distinguished triangle of derived direct images of open restrictions",
+   "results": "Eight hits concerning GrothendieckTopology.MayerVietorisSquare, its sheaf condition, short complex and pushout; no derived module direct-image triangle with localized adjunctions.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|mayer_vietoris|coyoneda_exact₂",
+   "results": "Mathlib sheaf MayerVietoris squares and generic Triangle.coyoneda_exact₂ found. The generic exactness lemma is used in the parent, but none constructs the derived direct-image triangle. Project search found KInjectiveMayerVietorisPresentation for whole-space covers, and DerivedMayerVietorisTriangle with compactness and quasi-coherence hypotheses; neither states this arbitrary-union localized-adjunction triangle.",
+   "date": "2026-10-13",
+   "verdict": "no match for geometric triangle"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedOpenHomScalarMayerVietoris",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof, Mayer--Vietoris globalization of annihilation; scalar naturality of the overlap boundary; direct-image triangle realizing the Mayer-Vietoris boundary before taking Hom",
+   "via": [
+    "lem-sc-derived-open-hom-scalar-mayer-vietoris",
+    "lem-sc-perfect-into-support-on-T",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenUnionAdjunctionTriangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenUnionAdjunctionTriangle.lean",
+  "declaration": "AlgebraicGeometry.derived_open_union_adjunction_triangle",
+  "statement": "theorem derived_open_union_adjunction_triangle (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ W : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))] (U V : X.Opens) (G : ∀ W : X.Opens, DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W)) ⥤ schemeDerivedCategory X) (adj : ∀ W : X.Opens, (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory ⊣ G W) (E' : schemeDerivedCategory X) (k : ℤ) : let R := fun W : X.Opens ↦ (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory let N := (G (U ⊓ V)).obj ((R (U ⊓ V)).obj (E'⟦k - 1⟧)) let A := (G (U ⊔ V)).obj ((R (U ⊔ V)).obj (E'⟦k⟧)) let B := (G U).obj ((R U).obj (E'⟦k⟧)) ⊞ (G V).obj ((R V).obj (E'⟦k⟧)) let β := ((adj (U ⊔ V)).homEquiv A ((R (U ⊔ V)).obj (E'⟦k⟧))).symm (𝟙 A) let b := biprod.lift ((adj U).homEquiv A ((R U).obj (E'⟦k⟧)) (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_left) β)) ((adj V).homEquiv A ((R V).obj (E'⟦k⟧)) (derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_right) β)) ∃ (d : N ⟶ A) (c : B ⟶ N⟦(1 : ℤ)⟧), Triangle.mk d b c ∈ distTriang (schemeDerivedCategory X)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T100219-L-2502498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T100219-L-2502498",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

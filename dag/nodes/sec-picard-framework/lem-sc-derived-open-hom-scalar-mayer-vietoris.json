@@ -15,33 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sc-derived-hom-mayer-vietoris] on the open union W=U union V, using the exact equivalence between its module sheaves and the localized-site carrier over W. Associativity of restriction identifies restrictions to U,V and their intersection with the canonical derivedOpenHomRestriction maps. The canonical restriction/shift comparisons and shift-addition isomorphism identify the negative overlap Ext for E\\prime[k] with Hom to the restriction of E\\prime[k-1]. Exactness at Hom on W gives the displayed image assertion.",
+   "text": "Use [lem-pc-open-derived-localization-adjunction] to choose a right adjoint G_T of each localized derived restriction R_T, with an adjunction. These choices are of right adjoints, determined up to the adjunction-compatible natural isomorphism. Apply [lem-sc-derived-open-union-adjunction-triangle] to E′ and k, obtaining its inverse-rotated direct-image triangle with the restriction arrow b constructed explicitly from the union counit.",
    "uses": [
-    "lem-sc-derived-hom-mayer-vietoris",
-    "lem-pc-open-derived-restriction-comparison"
+    "lem-pc-open-derived-localization-adjunction",
+    "lem-sc-derived-open-union-adjunction-triangle"
    ],
    "elementary": false
   },
   {
-   "text": "In the proof via the distinguished open-cover triangle, the boundary is precomposition by its connecting morphism followed by the derived extension/restriction adjunction. Both the triangle and the adjunction Hom equivalence are natural in the source. Apply naturality to r times identity on E; on each open its restriction is multiplication by the restricted section. This gives scalar equivariance of the same additive boundary. The shift identifications are natural and do not change that equation. This argument applies for empty opens, all integers k and any r, without any cohomology support hypothesis.",
+   "text": "Prove compatibility of derivedOpenHomRestriction with precomposition using functoriality and naturality of the canonical comparison isomorphism. Adjunction.homEquiv_naturality_left_symm and cancellation of homEquiv with its inverse show that the two projections of b transpose to the canonical restrictions. These computations are the proved private helpers restriction_precomp, derived_restriction_precomp and transpose_restriction.",
    "uses": [
-    "lem-sc-open-hom-triangle-realization",
-    "def-sc-derived-global-scalar"
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved private helper boundary_of_adjunction_triangle takes Hom from E into the triangle. Define the additive boundary by transporting postcomposition with d through the two additive adjunction bijections. If the two restrictions of beta vanish, the two components of its transpose composed with b vanish; biproduct extensionality gives zero. Mathlib Triangle.coyoneda_exact₂ gives a lift, which transports back to gamma. Naturality of both adjunction bijections and associativity prove equivariance for every endomorphism of E; specialize to schemeDerivedScalar X r (identity E), as defined in [def-sc-derived-global-scalar].",
+   "uses": [
+    "def-sc-derived-global-scalar",
+    "lem-weil-pbc-hom-into-triangle-exact"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-hom-mayer-vietoris",
-  "lem-pc-open-derived-restriction-comparison",
-  "lem-sc-open-hom-triangle-realization",
-  "def-sc-derived-global-scalar"
+  "def-sc-derived-global-scalar",
+  "lem-pc-open-derived-localization-adjunction",
+  "lem-sc-derived-open-union-adjunction-triangle",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-hom-into-triangle-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "T3",
+  "group": "X3",
   "date": "2026-10-13",
-  "note": "Detailed expansion of the indicated Stacks proof paragraph; the affine and scalar-boundary tasks are strictly separate from the global induction."
+  "note": "Covariant Hom into the Tag 08BV direct-image triangle. All restriction, additive-boundary, Hom exactness and source-naturality calculations proved in Lean; geometric distinguishedness isolated as one strictly smaller theorem without any source E or scalar r."
  },
  "mathlib_searches": [
   {
@@ -118,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T045606-L-138144",
+  "landing": "20261013T100219-L-2502498",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
