@@ -13,35 +13,43 @@
  ],
  "proof": [
   {
-   "text": "Since Q is supported only in degree k, identify it with the single complex on Q^k: the degree-k component is identity, other components are the unique zero-object isomorphisms, and every differential is zero.",
+   "text": "Convert the support assumption to IsStrictlyGE k and IsStrictlyLE k and use the proved source CochainComplex.isoSingle to identify Q with the single complex on Q.X k. The existing signature, support hypothesis and Tor convention are unchanged.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Take a projective resolution of Q^k and reindex its i-th term in cochain degree k-i. Its augmentation is a quasi-isomorphism to Q. It is bounded above with flat terms, so is K-flat [lem-pc-module-bounded-flat-kflat]. After tensoring its homology in degree k-i is Tor_i(Q^k,B) [def-weil-pbc-tor-modules]. In degree k the augmentation is the Tor-zero isomorphism by right exactness; below k use the stated positive Tor vanishing, and above k both sides vanish. Thus the tensor augmentation is a quasi-isomorphism.",
+   "text": "For M = Q.X k and N = B, take the existing Mathlib projectiveResolution M. In chain degree zero, ChainComplex.quasiIsoAt₀_iff and ShortComplex.quasiIso_iff_of_zeros' reduce the tensor augmentation to exactness and epimorphy of its cokernel map; tensor preserves this cokernel by CokernelCofork.mapIsColimit. In positive chain degrees, ProjectiveResolution.isoLeftDerivedObj identifies homology with the specified Tor' groups [def-weil-pbc-tor-modules]; their assumed vanishing gives exactness, and the mapped single complex has zero terms there. Extend along ComplexShape.embeddingUpIntLE k. The proved mapExtendFunctorNatIso and quasiIso_extendMap_iff transport the tensor augmentation calculation to cochain degrees k-i, while extendSingleIso identifies its target with the single complex in degree k.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat",
     "def-weil-pbc-tor-modules"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For the specified arbitrary resolution f:P -> Q, compare it and the projective resolution via a common K-flat refinement in the homotopy category (the cofiltered resolution comparison from Tag 06XY). Its transition maps remain quasi-isomorphisms after tensoring, by [lem-pc-mixed-tensor-kflat-quasi-iso] specialized to the identity ring map and the single complex B in degree zero, identifying the mixed tensor with ordinary tensor. Their augmentation square commutes up to homotopy; tensor preserves this homotopy, and two-out-of-three gives the claim for f. No boundedness of P is used.",
+   "text": "The extended projective resolution is bounded above by k and has projective, hence flat, terms. Translate flatness using ModuleCat.flat_iff_flat, supply exact integer-indexed colimits using the module AB5 instance and AsSmall.equiv, and apply the closed source CochainComplex.kFlat_of_isStrictlyLE_of_flat. Thus this is a K-flat resolution [def-pc-module-kflat-complex] whose tensor augmentation is a quasi-isomorphism.",
    "uses": [
-    "lem-pc-mixed-tensor-kflat-quasi-iso"
+    "def-pc-module-kflat-complex"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use the proved ModuleCat.hasFunctorialFlatResolution instance and the reduced source LeftResolution.resolutionFunctor T, with natural quasi-isomorphism ρ:T→Id and K-flat values. Naturality and two-out-of-three show T maps quasi-isomorphisms to quasi-isomorphisms. The closed generic MorphismProperty.whiskerRight_of_kFlat, transported through map₂HomologicalComplexFlipObjSingleIso, shows termwise tensor with N preserves quasi-isomorphisms between K-flat complexes. For the calculated augmentation g:S→Q, the naturality square for g gives that tensor(ρ_Q) is a quasi-isomorphism, since tensor(T(g)), tensor(ρ_S), and tensor(g) are. The naturality square for the specified f:P→Q then gives that tensor(f) is a quasi-isomorphism, since tensor(T(f)), tensor(ρ_P), and tensor(ρ_Q) are. These squares commute as chain maps; no homotopy refinement or mixed tensor comparison is needed. Transport g through the single-support isomorphism to Q before this comparison.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-module-bounded-flat-kflat",
   "def-weil-pbc-tor-modules",
-  "lem-pc-mixed-tensor-kflat-quasi-iso"
+  "def-pc-module-kflat-complex"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "H1",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/06XY",
-  "place": "Section 15.60, Lemmas 15.60.7, 15.60.9, 15.60.12 and Definition 15.60.13; parent Tag 08IB final affine calculation; detailed module-specialized expansion of the parent proof"
+  "place": "Tags 06XY and 08IB: projective-resolution Tor calculation; resolution independence via naturality squares of the proved source functorial K-flat resolution",
+  "note": "Complete Lean proof using Mathlib and closed generic source-library theorems; no new statements or holes."
  },
  "mathlib_searches": [
   {
@@ -113,10 +121,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T082328-L-1629957",
-  "kind": "interface",
+  "landing": "20261013T095958-L-2460441",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
