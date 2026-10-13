@@ -1,0 +1,130 @@
+{
+ "id": "new-e1-restricted-tensor-pullback-stalk",
+ "kind": "statement",
+ "title": "Natural restricted tensor pullback stalk comparison",
+ "statement": "Let i:Z→Y be a morphism of schemes [def-pc-scheme], V an open of Z and z a point of V. Put S=O_Y,i(z), R=O_V,z [def-pc-module-stalk-functor], with S-algebra map the composite of i.stalkMap and V.ι.stalkMap. There exists a family of additive equivalences from the stalk on V of the tensor pullback [def-pc-module-pullback] of every Y-module F [def-weil-sheaf-of-modules-category] to R tensor over S with F_i(z). The family intertwines the restricted pullback stalk map of every morphism c:F→G with baseChange R of c.stalkLinearMap. This holds for arbitrary scheme morphisms and module sheaves.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-stalk-functor",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "Sheaves, Lemma 6.26.4, with tensor-pullback composition (0097) and open restriction"
+ },
+ "proof": [
+  {
+   "text": "Use the restriction adjunction and tensor-pullback adjunction to identify open restriction with tensor pullback along V.ι. Compose this with nonempty_tensorPullbackComp to identify tensorPullback i followed by restriction with tensorPullback (V.ι ≫ i). Whisker by the module stalk functor at z and compose with exists_tensorPullback_stalk_iso. Rewrite the composite stalk map with Scheme.Hom.stalkMap_comp. The component linear equivalences give the additive equivalences β; evaluation of the composite natural isomorphism naturality equation gives precisely the desired baseChange equality.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E1",
+  "group": "E1",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "Sheaves, Lemma 6.26.4, with tensor-pullback composition (0097) and open restriction",
+  "note": "Strict intermediate comparison in the original proof plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural affine tilde module stalk tensor base change",
+   "results": "8 hits including ModuleCat.Tilde.stalkIso and localization-to-stalk maps; no assembled natural affine transport.",
+   "date": "2026-10-13",
+   "verdict": "Components only, not an exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.toStalk",
+   "results": "2 hits: tilde.toStalk and its IsLocalizedModule instance.",
+   "date": "2026-10-13",
+   "verdict": "Components only, not an exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*restrict|restrict.*stalk",
+   "results": "25 hits including Scheme.Modules.restrictStalkNatIso.",
+   "date": "2026-10-13",
+   "verdict": "Components only, not an exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural tensor product comparison for stalk of affine module restricted along open immersion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModelTensorPullbackStalk",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "Natural restricted tensor pullback stalk comparison",
+   "via": [
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedTensorPullbackStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedTensorPullbackStalk.lean",
+  "declaration": "AlgebraicGeometry.exists_restricted_tensorPullback_stalk",
+  "statement": "theorem exists_restricted_tensorPullback_stalk\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) (V : Z.Opens) (z : V.toScheme) :\n    let S := (Y.presheaf.stalk (i z.1) : Type u)\n    let R := (V.toScheme.presheaf.stalk z : Type u)\n    let φ : S →+* R := (i.stalkMap z.1 ≫ V.ι.stalkMap z).hom\n    letI : Algebra S R := φ.toAlgebra\n    ∃ β : ∀ (F : Y.Modules),\n      ((Scheme.Modules.restrictFunctor V.ι).obj\n        ((Scheme.Modules.tensorPullback i).obj F)).presheaf.stalk z ≃+\n          R ⊗[S] F.presheaf.stalk (i z.1),\n      ∀ (F G : Y.Modules) (c : F ⟶ G) (x),\n        β G (((Scheme.Modules.restrictFunctor V.ι).map\n          ((Scheme.Modules.tensorPullback i).map c)).stalkLinearMap z x) =\n        (c.stalkLinearMap (i z.1)).baseChange R (β F x)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T130749-L-3985975",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T130749-L-3985975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

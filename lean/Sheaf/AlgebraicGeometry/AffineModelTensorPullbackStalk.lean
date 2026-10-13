@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.AlgebraicGeometry.RestrictedTensorPullbackStalk
+import Sheaf.AlgebraicGeometry.AffineModelStalkTensorTransport
 
 /-! # Natural stalk comparison for the pullback of an affine tilde model
 
@@ -65,6 +66,20 @@ theorem exists_affine_model_tensorPullback_stalk
         ∀ x, τ G N eG
           (((Scheme.Modules.restrictFunctor V.ι).map
             ((Scheme.Modules.tensorPullback i).map c)).stalkLinearMap z x) =
-          d.hom.baseChange R (τ F M eF x) := by sorry
+          d.hom.baseChange R (τ F M eF x) := by
+  let ρ : (Γ(Y, U.1) : Type u) →+* (V.toScheme.presheaf.stalk z : Type u) :=
+    ((Y.presheaf.germ U.1 (i z.1) hzU) ≫ i.stalkMap z.1 ≫ V.ι.stalkMap z).hom
+  let := ρ.toAlgebra
+  let φ : (Y.presheaf.stalk (i z.1) : Type u) →+*
+      (V.toScheme.presheaf.stalk z : Type u) := (i.stalkMap z.1 ≫ V.ι.stalkMap z).hom
+  let := φ.toAlgebra
+  dsimp only
+  obtain ⟨β, hβ⟩ := exists_restricted_tensorPullback_stalk i V z
+  obtain ⟨γ, hγ⟩ := exists_affine_model_stalk_tensor_transport i V z U hzU
+  refine ⟨fun F M e ↦ (β F).trans (γ F M e), ?_⟩
+  intro F G M N c d eF eG h x
+  change γ G N eG (β G _) = d.hom.baseChange _ (γ F M eF (β F x))
+  rw [hβ F G c x]
+  exact hγ F G M N c d eF eG h (β F x)
 
 end AlgebraicGeometry

@@ -1,0 +1,127 @@
+{
+ "id": "new-e1-affine-model-stalk-tensor-transport",
+ "kind": "statement",
+ "title": "Natural affine model stalk tensor transport",
+ "statement": "Let i:Z→Y be a scheme morphism [def-pc-scheme], V an open of Z, z a point of V, and U an affine open of Y containing i(z). Put A=O_Y(U), S=O_Y,i(z), R=O_V,z [def-pc-module-stalk-functor], with S→R the composite stalk map and A→R the composite germ and stalk maps. Let T be tilde [lem-weil-pbc-spec-module-tilde-sections] followed by restriction along the affine chart isomorphism. There exists a family of additive equivalences R tensor over S with F_i(z) ≃ R tensor over A with M, for each module sheaf F [def-weil-sheaf-of-modules-category], A-module M and model isomorphism e:F|U≅T(M). It is natural in compatible c:F→G and d:M→N: whenever c|U followed by eG equals eF followed by T(d), this family intertwines baseChange R of c.stalkLinearMap with baseChange R of d.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-stalk-functor",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01BH",
+  "place": "Lemma 17.10.5(3), functorial associated-module stalk formula; inverse image and scalar extension stalk comparison (Tags 008H, 0098)"
+ },
+ "proof": [
+  {
+   "text": "Proof: Open restriction identifies the stalk of F at i(z) with the U-chart stalk.\nThe supplied e identifies it with the chart restriction of tilde M. The affine\nisomorphism carries this stalk to the tilde stalk at the corresponding prime of A.\nThe tilde germ map is module localization at that prime. Extension to R cancels\nthis localization: each denominator is a unit in the original ring stalk and hence\nin R. Write a localized stalk element as m/s, with s outside the corresponding prime.\nSend r tensor (m/s) to (rho(s) inverse times r) tensor m. Localization equality\nis preserved since the element killing the difference also maps to a unit in R;\nthe balancing relations follow from the composite A-to-S-to-R germ map. The\ninverse sends r tensor m to r tensor (m/1), transported back along e and the\nchart. Their composites are identities: on m/1 this is immediate, and on m/s\nmove the invertible scalar s across the tensor. Fractions generate the localized\nstalk, and pure tensors generate each tensor product, so this proves both\nidentities on all elements. All these maps respect module\nmorphisms. The supplied square therefore identifies the map induced by c with the\none induced by d. Check this on pure tensors and extend by additivity. This works\nfor arbitrary modules, including zero modules, with no flatness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E1",
+  "group": "E1",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/01BH",
+  "place": "Lemma 17.10.5(3), functorial associated-module stalk formula; inverse image and scalar extension stalk comparison (Tags 008H, 0098)",
+  "note": "Strict intermediate comparison in the original proof plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural affine tilde module stalk tensor base change",
+   "results": "8 hits including ModuleCat.Tilde.stalkIso and localization-to-stalk maps; no assembled natural affine transport.",
+   "date": "2026-10-13",
+   "verdict": "Components only, not an exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.toStalk",
+   "results": "2 hits: tilde.toStalk and its IsLocalizedModule instance.",
+   "date": "2026-10-13",
+   "verdict": "Components only, not an exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*restrict|restrict.*stalk",
+   "results": "25 hits including Scheme.Modules.restrictStalkNatIso.",
+   "date": "2026-10-13",
+   "verdict": "Components only, not an exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural tensor product comparison for stalk of affine module restricted along open immersion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModelTensorPullbackStalk",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "Natural affine model stalk tensor transport",
+   "via": [
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModelStalkTensorTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModelStalkTensorTransport.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_model_stalk_tensor_transport",
+  "statement": "theorem exists_affine_model_stalk_tensor_transport\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) (V : Z.Opens) (z : V.toScheme)\n    (U : Y.affineOpens) (hzU : i z.1 ∈ U.1) :\n    let A := (Γ(Y, U.1) : Type u)\n    let S := (Y.presheaf.stalk (i z.1) : Type u)\n    let R := (V.toScheme.presheaf.stalk z : Type u)\n    let φ : S →+* R := (i.stalkMap z.1 ≫ V.ι.stalkMap z).hom\n    letI : Algebra S R := φ.toAlgebra\n    let ρ : A →+* R := ((Y.presheaf.germ U.1 (i z.1) hzU) ≫\n      i.stalkMap z.1 ≫ V.ι.stalkMap z).hom\n    letI : Algebra A R := ρ.toAlgebra\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    ∃ γ : ∀ (F : Y.Modules) (M : ModuleCat.{u} A),\n      ((Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj M) →\n        (R ⊗[S] F.presheaf.stalk (i z.1)) ≃+ R ⊗[A] M,\n      ∀ (F G : Y.Modules) (M N : ModuleCat.{u} A) (c : F ⟶ G) (d : M ⟶ N)\n        (eF : (Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj M)\n        (eG : (Scheme.Modules.restrictFunctor U.1.ι).obj G ≅ T.obj N),\n        (Scheme.Modules.restrictFunctor U.1.ι).map c ≫ eG.hom = eF.hom ≫ T.map d →\n        ∀ x, γ G N eG ((c.stalkLinearMap (i z.1)).baseChange R x) =\n          d.hom.baseChange R (γ F M eF x)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T130749-L-3985975",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T130749-L-3985975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
