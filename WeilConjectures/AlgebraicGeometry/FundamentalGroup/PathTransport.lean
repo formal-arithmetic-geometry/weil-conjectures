@@ -83,20 +83,72 @@ lemma pullbackPathIso_trans (f : X ⟶ Y) {y z w : Spec (.of Ω) ⟶ X} (τ : fi
   ext P x
   simp [pullbackPathIso]
 
+/-- The point of the base change `P ×_Y X` at `y` corresponding to a point `x` of `P` at `y ≫ f`
+is the lift `(x, y)`. -/
+@[simp]
+lemma pullbackFiberIso_inv_app_left (f : X ⟶ Y) (y : Spec (.of Ω) ⟶ X) (P : Y.FiniteEtale)
+    (x : (fiber (y ≫ f)).obj P) :
+    ((pullbackFiberIso f y).inv.app P x).left =
+      Limits.pullback.lift x.left y (fiber_left_comp _ x) :=
+  rfl
+
+/-- Elementwise description of `pullbackPathIso`: the image of `x` is the first projection of
+the image under `τ` of the point `(x, y)` of the base change. -/
+lemma pullbackPathIso_hom_app_left (f : X ⟶ Y) {y z : Spec (.of Ω) ⟶ X}
+    (τ : fiber y ≅ fiber z) (P : Y.FiniteEtale) (x : (fiber (y ≫ f)).obj P) :
+    ((pullbackPathIso f τ).hom.app P x).left =
+      (τ.hom.app ((pullback f).obj P) ((pullbackFiberIso f y).inv.app P x)).left ≫
+        Limits.pullback.fst P.obj.hom f :=
+  rfl
+
+/-- Transport along an equality of fibre functors coming from an equality of geometric points
+does not change the underlying morphism of a point. -/
+lemma eqToIso_fiber_hom_app_left {y z : Spec (.of Ω) ⟶ Y} (hyz : y = z) (h : fiber y = fiber z)
+    (P : Y.FiniteEtale) (x : (fiber y).obj P) : ((eqToIso h).hom.app P x).left = x.left := by
+  subst hyz
+  rfl
+
 lemma pullbackPathIso_symm (f : X ⟶ Y) {y z : Spec (.of Ω) ⟶ X} (τ : fiber y ≅ fiber z) :
     pullbackPathIso f τ.symm = (pullbackPathIso f τ).symm := by
-  sorry
+  ext P x
+  simp [pullbackPathIso]
 
 /-- The path induced by an equality of geometric points is the equality of the images. -/
 lemma pullbackPathIso_eqToIso (f : X ⟶ Y) {y z : Spec (.of Ω) ⟶ X} (h : y = z) :
     pullbackPathIso f (eqToIso (congrArg fiber h)) = eqToIso (by rw [h]) := by
-  sorry
+  subst h
+  simp [pullbackPathIso_refl]
 
 /-- Transporting a path along equal morphisms. -/
 lemma pullbackPathIso_congr {f f' : X ⟶ Y} (hf : f = f') {y z : Spec (.of Ω) ⟶ X}
     (τ : fiber y ≅ fiber z) :
     pullbackPathIso f τ = eqToIso (by rw [hf]) ≪≫ pullbackPathIso f' τ ≪≫ eqToIso (by rw [hf]) := by
-  sorry
+  subst hf
+  simp
+
+/-- The comparison morphism `(P ×_Z Y) ×_Y X ⟶ P ×_Z X` of finite étale `X`-schemes. -/
+noncomputable def pullbackCompHom {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (P : Z.FiniteEtale) :
+    (pullback f).obj ((pullback g).obj P) ⟶ (pullback (f ≫ g)).obj P :=
+  ObjectProperty.homMk (MorphismProperty.Over.homMk
+    (Limits.pullback.lift (Limits.pullback.fst _ _ ≫ Limits.pullback.fst _ _)
+      (Limits.pullback.snd _ _) (by
+        change (Limits.pullback.fst _ _ ≫ Limits.pullback.fst P.obj.hom g) ≫ P.obj.hom =
+          Limits.pullback.snd (Limits.pullback.snd P.obj.hom g) f ≫ f ≫ g
+        rw [Category.assoc, Limits.pullback.condition, ← Category.assoc,
+          Limits.pullback.condition, Category.assoc]))
+    (Limits.pullback.lift_snd _ _ _))
+
+/-- The underlying morphism of `pullbackCompHom` is the lift `(fst ≫ fst, snd)`. -/
+@[simp]
+lemma pullbackCompHom_hom_left {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (P : Z.FiniteEtale) :
+    (pullbackCompHom f g P).hom.left =
+      Limits.pullback.lift (Limits.pullback.fst _ _ ≫ Limits.pullback.fst _ _)
+        (Limits.pullback.snd _ _) (by
+          change (Limits.pullback.fst _ _ ≫ Limits.pullback.fst P.obj.hom g) ≫ P.obj.hom =
+            Limits.pullback.snd (Limits.pullback.snd P.obj.hom g) f ≫ f ≫ g
+          rw [Category.assoc, Limits.pullback.condition, ← Category.assoc,
+            Limits.pullback.condition, Category.assoc]) :=
+  rfl
 
 /-- The path induced along a composite is the iterated induced path. -/
 lemma pullbackPathIso_comp {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) {y z : Spec (.of Ω) ⟶ X}
@@ -104,14 +156,41 @@ lemma pullbackPathIso_comp {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) {y z : S
     pullbackPathIso (f ≫ g) τ =
       eqToIso (by rw [Category.assoc]) ≪≫ pullbackPathIso g (pullbackPathIso f τ) ≪≫
         eqToIso (by rw [Category.assoc]) := by
-  sorry
+  ext P x
+  apply fiber_ext
+  rw [Iso.trans_hom, Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app, FintypeCat.comp_apply,
+    FintypeCat.comp_apply]
+  rw [eqToIso_fiber_hom_app_left (Category.assoc z f g), pullbackPathIso_hom_app_left,
+    pullbackPathIso_hom_app_left, pullbackPathIso_hom_app_left]
+  have hx : ((eqToIso (congrArg fiber (Category.assoc y f g)).symm).hom.app P x).left = x.left :=
+    eqToIso_fiber_hom_app_left (Category.assoc y f g).symm _ P x
+  have hw : (fiber y).map (pullbackCompHom f g P) ((pullbackFiberIso f y).inv.app _
+      ((pullbackFiberIso g (y ≫ f)).inv.app P
+        ((eqToIso (congrArg fiber (Category.assoc y f g)).symm).hom.app P x))) =
+      (pullbackFiberIso (f ≫ g) y).inv.app P x := by
+    apply fiber_ext
+    rw [fiber_map_left, pullbackCompHom_hom_left, pullbackFiberIso_inv_app_left f y,
+      pullbackFiberIso_inv_app_left (f ≫ g) y]
+    apply Limits.pullback.hom_ext
+    · rw [Category.assoc, Limits.pullback.lift_fst, Limits.pullback.lift_fst_assoc,
+        Limits.pullback.lift_fst, pullbackFiberIso_inv_app_left, Limits.pullback.lift_fst, hx]
+    · rw [Category.assoc, Limits.pullback.lift_snd, Limits.pullback.lift_snd,
+        Limits.pullback.lift_snd]
+  rw [← hw, ← ConcreteCategory.comp_apply, τ.hom.naturality, ConcreteCategory.comp_apply,
+    fiber_map_left, pullbackCompHom_hom_left]
+  simp only [Category.assoc, Limits.pullback.lift_fst]
 
 /-- The path induced by a reparametrisation path is the reparametrisation path of the image. -/
 lemma pullbackPathIso_fiberReparamIso (f : X ⟶ Y) (a : Spec (.of Ω) ≅ Spec (.of Ω))
     (y : Spec (.of Ω) ⟶ X) :
     pullbackPathIso f (fiberReparamIso a y) =
       eqToIso (by rw [Category.assoc]) ≪≫ fiberReparamIso a (y ≫ f) := by
-  sorry
+  ext P x
+  apply fiber_ext
+  rw [Iso.trans_hom, NatTrans.comp_app, FintypeCat.comp_apply]
+  rw [fiberReparamIso_hom_app_left, eqToIso_fiber_hom_app_left (Category.assoc a.hom y f),
+    pullbackPathIso_hom_app_left, fiberReparamIso_hom_app_left, Category.assoc,
+    pullbackFiberIso_inv_app_left, Limits.pullback.lift_fst]
 
 /-- A path `τ : F_y ≅ F_z` carries the point of a finite étale `P` on a section `σ` at `y` to the
 point on the same section at `z`: naturality with respect to the morphism `Y ⟶ P` of finite
@@ -120,6 +199,20 @@ lemma path_section {y z : Spec (.of Ω) ⟶ Y} (τ : fiber y ≅ fiber z) (P : Y
     (σ : Y ⟶ P.obj.left) (hσ : σ ≫ P.obj.hom = 𝟙 Y) (x : (fiber y).obj P)
     (hx : x.left = y ≫ σ) :
     (τ.hom.app P x).left = z ≫ σ := by
-  sorry
+  let T : Y.FiniteEtale :=
+    ⟨MorphismProperty.Over.mk ⊤ (𝟙 Y) inferInstance, inferInstanceAs (IsFinite (𝟙 Y))⟩
+  let S : T ⟶ P := ObjectProperty.homMk (MorphismProperty.Over.homMk σ hσ)
+  let x₁ : (fiber y).obj T := fiberMk y T y (Category.comp_id y)
+  have hx₁ : (fiber y).map S x₁ = x := fiber_ext y <| by
+    rw [fiber_map_left, hx]
+    rfl
+  have key : τ.hom.app P x = (fiber z).map S (τ.hom.app T x₁) := by
+    rw [← hx₁]
+    exact ConcreteCategory.congr_hom (τ.hom.naturality S) x₁
+  have h₀ : (τ.hom.app T x₁).left = z := by
+    rw [← Category.comp_id (τ.hom.app T x₁).left]
+    exact fiber_left_comp z (τ.hom.app T x₁)
+  rw [key, fiber_map_left, h₀]
+  rfl
 
 end AlgebraicGeometry.Scheme.FiniteEtale
