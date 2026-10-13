@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import Sheaf.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionSurjective
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionInjective
 
 /-!
 # Full faithfulness on the punctured zero section of a power-series open
@@ -78,6 +78,12 @@ theorem finiteEtale_powerSeries_punctured_section_fully_faithful
         x ≠ IsLocalRing.closedPoint A) :
     let z := Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d)))
     ∀ P Q : V.toScheme.FiniteEtale,
-      Function.Bijective ((FiniteEtale.pullback (z ∣_ V)).map (X := P) (Y := Q)) := by sorry
+      Function.Bijective ((FiniteEtale.pullback (z ∣_ V)).map (X := P) (Y := Q)) := by
+  dsimp
+  intro P Q
+  exact ⟨finiteEtale_powerSeries_punctured_section_restriction_injective
+      A hdepth d hd V hV P Q,
+    finiteEtale_powerSeries_punctured_section_restriction_surjective
+      A hdepth d hd V hV P Q⟩
 
 end AlgebraicGeometry.Scheme
