@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-!
 # Derived extension-by-zero and restriction adjunction
@@ -38,18 +38,16 @@ Source: literature/stacks-project/cohomology.tex, Tag 08BT (used in Tag 08BW);
 literature/stacks-project/derived.tex, Tags 015F and 09T5
 (blueprint: lem-sc-derived-open-shriek-derived-adjunction).
 
-Proof: (1) Put A = Mod(O_X), B = Mod(O_U), F = restriction and G = extension by
-zero. Both are exact and additive, with G left adjoint to F, by
-`lem-sc-derived-open-restriction-adjunction-exact`. Apply
-`lem-weil-pbc-exact-functor-derived-factorization` to each: termwise application
-preserves quasi-isomorphisms and descends along the localization Q, giving the two
-natural factorization isomorphisms. Every transition in the ind-system for
-F and in the pro-system for G is consequently an isomorphism. Those systems are
-therefore essentially constant, so RF and LG are defined everywhere and computed
-termwise (Tag 015F). (2) Apply `lem-pc-derived-adjoint-functors` (Tag 09T5) to this
-adjoint pair of functors between the abelian module categories. Its derived
-adjunction supplies the Hom bijection, functorial in both derived objects, and
-the factorization for F identifies the right-hand object with restriction to U. -/
+Proof: (1) Take the exact underived adjunction from
+`open_restriction_adjunction_exact`. Its left adjoint is additive by
+`Adjunction.left_adjoint_additive`; restriction is already additive and exact.
+(2) Apply `Adjunction.mapHomotopyCategory` to obtain the termwise adjunction on
+homotopy categories. Exactness gives the two factorization isomorphisms
+`Functor.mapDerivedCategoryFactorsh`. Their inverses supply the two commuting
+squares with the localization functors `DerivedCategory.Qh`.
+(3) Apply Mathlib's `Adjunction.localization` at the quasi-isomorphisms to these
+squares. This gives an adjunction between precisely the two canonical
+`mapDerivedCategory` functors in the statement, hence their natural Hom bijection. -/
 theorem derived_open_shriek_adjunction (X : RingedSpace.{u}) (U : Opens X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))] :
@@ -62,6 +60,22 @@ theorem derived_open_shriek_adjunction (X : RingedSpace.{u}) (U : Opens X)
           (open_restriction_adjunction_exact X U).2.2.1
           (open_restriction_adjunction_exact X U).2.2.2.1 ⊣
         (SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory) := by
-  sorry
+  let G := SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) U ⋙
+    PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)
+  let F := SheafOfModules.overFunctor.{u} (moduleRings X) U
+  let adj : G ⊣ F := Classical.choice (open_restriction_adjunction_exact X U).2.2.2.2
+  have : G.Additive := adj.left_adjoint_additive
+  have : PreservesFiniteLimits G := (open_restriction_adjunction_exact X U).2.2.1
+  have : PreservesFiniteColimits G := (open_restriction_adjunction_exact X U).2.2.2.1
+  let : CatCommSq (G.mapHomotopyCategory (ComplexShape.up ℤ))
+      DerivedCategory.Qh DerivedCategory.Qh G.mapDerivedCategory :=
+    ⟨G.mapDerivedCategoryFactorsh.symm⟩
+  let : CatCommSq (F.mapHomotopyCategory (ComplexShape.up ℤ))
+      DerivedCategory.Qh DerivedCategory.Qh F.mapDerivedCategory :=
+    ⟨F.mapDerivedCategoryFactorsh.symm⟩
+  exact ⟨(adj.mapHomotopyCategory (ComplexShape.up ℤ)).localization
+    DerivedCategory.Qh (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
+    DerivedCategory.Qh (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
+    G.mapDerivedCategory F.mapDerivedCategory⟩
 
 end AlgebraicGeometry

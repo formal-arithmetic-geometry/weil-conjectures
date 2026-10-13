@@ -26,41 +26,34 @@
  ],
  "proof": [
   {
-   "text": "Set $\\mathcal A=\\operatorname{Mod}(\\mathcal O_X)$ and $\\mathcal B=\\operatorname{Mod}(\\mathcal O_U)$, with $F=j^{-1}:\\mathcal A\\to\\mathcal B$ and $G=j_!:\\mathcal B\\to\\mathcal A$. Both functors are exact and additive by [lem-sc-derived-open-restriction-adjunction-exact], and $G$ is left adjoint to $F$ there. Applying [lem-weil-pbc-exact-functor-derived-factorization] to each of $F$ and $G$ gives functors on the derived categories whose values are represented by applying the corresponding functor termwise to any complex; the same statement says that the termwise functors carry quasi-isomorphisms to quasi-isomorphisms. Hence for a complex $K$ of $\\mathcal A$ every transition map of the ind-system $(F(K'))_{K\\to K'}$ is an isomorphism in $D(\\mathcal B)$, so the system is essentially constant with value $F(K)$; dually for the pro-system $(G(M'))_{M'\\to M}$. Thus $RF$ and $LG$ in the sense of [lem-pc-derived-adjoint-functors] are defined at every complex and are computed termwise.",
+   "text": "Take G = extensionByZeroPresheaf followed by sheafification and F = overFunctor. The adjunction G ⊣ F and exactness of G are supplied by [lem-sc-derived-open-restriction-adjunction-exact]; F is already additive and exact. Obtain G.Additive from Adjunction.left_adjoint_additive. Apply [lem-weil-pbc-termwise-adjunction-homotopy] to get G.mapHomotopyCategory ⊣ F.mapHomotopyCategory.",
    "uses": [
     "lem-sc-derived-open-restriction-adjunction-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-pc-derived-adjoint-functors"
+    "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015F (lemma-right-derived-exact-functor), parts (2)-(4), applied to the exact functors j_! and j^{-1}"
-   }
+   "elementary": false
   },
   {
-   "text": "The hypotheses of [lem-pc-derived-adjoint-functors] now hold for the adjoint pair $G=j_!\\dashv F=j^{-1}$: the module categories are abelian, their derived categories are [def-weil-abstract-derived-category], and the left and right derived functors are defined everywhere by Step 1. The lemma therefore gives a canonical bijection $\\operatorname{Hom}_{D(\\mathcal O_X)}(j_!A,B)\\cong\\operatorname{Hom}_{D(\\mathcal O_U)}(A,j^{-1}B)$, functorial in $A$ and $B$. Since the derived restriction is represented termwise by restriction, this is the asserted restriction of $B$ to $U$.",
+   "text": "Use the homotopy-category factorization isomorphisms Functor.mapDerivedCategoryFactorsh from [lem-weil-pbc-exact-functor-derived-factorization]. Their inverses define CatCommSq instances for the two exact functors and DerivedCategory.Qh. The latter are localizations at HomotopyCategory.quasiIso by [def-weil-abstract-derived-category]. Applying Mathlib CategoryTheory.Adjunction.localization to the termwise adjunction and these two squares gives G.mapDerivedCategory ⊣ F.mapDerivedCategory. Wrap this adjunction in Nonempty. The additive and exactness instances are the proof terms specified in the unchanged statement, by proof irrelevance.",
    "uses": [
-    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-exact-functor-derived-factorization",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 09T5 (lemma-derived-adjoint-functors), as in the proof of Cohomology Tag 08BT"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-pc-derived-adjoint-functors",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "S3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
-  "place": "Cohomology Lemma 08BT proof; derived-adjunction mechanism from Derived Categories Lemmas 015F and 09T5"
+  "place": "Tags 08BT, 015F and 09T5; direct localization of the termwise adjunction using Mathlib Adjunction.localization instead of essentially constant ind/pro systems"
  },
  "mathlib_searches": [
   {
@@ -163,5 +156,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T022429-L-3219327",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
