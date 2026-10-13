@@ -1,0 +1,182 @@
+{
+ "id": "lem-sc-scheme-iso-right-adjoint-normalized",
+ "kind": "statement",
+ "title": "Counit-normalized transport of a right adjoint along a source isomorphism",
+ "statement": "For qcqs schemes P,U,S, qcqs f:P→S and f′:U→S, and e:U≅P with e.hom≫f=f′, choose right adjoints a,b with their specified adjunctions to the canonical lifted direct images. There is a natural isomorphism φ:a followed by the inclusion and L(e.hom) ≅ b followed by the inclusion. It satisfies SchemeIsoRightAdjointNormalized: let adj(k) be the pinned adjunction of def-pc-derived-base-change-map, c be the canonical pullback composition comparison for e.hom and f followed by the equality transport, and δ:Rf′≅Re⋙Rf be conjugateIsoEquiv adj(f′) (adj(f).comp adj(e.hom)) c. For every K, Rf(ηe(aK))≫δ.inv(L e(aK))≫Rf′(φK)≫εb(K)=εa(K). The normalization is an equality of ambient derived morphisms. This concerns one vertical map and contains no base change or second mate.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0ATR",
+  "place": "Tag 0ATR, composite adjunction and conjugate calculation; Tag 0D5S, canonical pullback composition"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-base-change-map",
+  "lem-pc-derived-pullback-tensor-qcoh"
+ ],
+ "proof": [
+  {
+   "text": "Construct the equivalence Le using inverse pullback along e.inv and the canonical composition and identity comparisons. Its pinned right adjoint Re is an equivalence. Restrict Le⊣Re to QCoh by fully faithful inclusions. Conjugate c to obtain δ, and lift it into QCoh.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-qcqs-derived-direct-image-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reverse the restricted equivalence adjunction and compose with adja; transport its left functor along δ.symm. rightAdjointUniq against adjb gives φ. Its counit identity, preceded by Rf of the equivalence unit and δ.inv, reduces by cancellation to εa. Apply the full-subcategory inclusion; the restricted unit is the ambient pinned unit. This is the proved private normalized_comparison and the final inclusion rewrite.",
+   "uses": [
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-cat-right-adjoint-composition",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Duality for Schemes",
+  "place": "Tag 0ATR",
+  "note": "Categorical specialization; normalized endpoint comparisons are proved in Lean, and the remaining square is isolated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id; ",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact derived transport statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint mate transport along an equivalence of categories",
+   "results": "8 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.Bicategory.toNatTrans_mateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.Bicategory.mateEquiv_apply, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_counit; ",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact derived transport statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(vcomp|hcomp)|rightAdjointUniq|unit.*[Ii]so",
+   "results": "25 hits: Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/NumberField/DedekindZeta.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean; ",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact derived transport statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism of right adjoints transported by a scheme isomorphism with counit compatibility",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Functor.isRightAdjoint_of_iso, AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso, CategoryTheory.Adjunction.ofNatIsoLeft, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso; ",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact derived transport statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app; ",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact derived transport statement."
+  },
+  {
+   "tool": "grep",
+   "query": "SchemeIsoRightAdjointNormalized|schemeIso_secondMate|rightAdjointUniq_hom_app_counit",
+   "results": "2 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean; ",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact derived transport statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived second base change mate commutes with normalized right adjoint isomorphisms under source scheme isomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc; ",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact derived transport statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_vcomp; ",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact derived transport statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|conjugateEquiv_mateEquiv_vcomp",
+   "results": "11 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; ",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact derived transport statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived right adjoints and second mates are transported by a source scheme isomorphism with counit normalization",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RightAdjointMateSchemeIsoTransportMate",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0ATR, transport of adjunctions and conjugate comparison under the cartesian source identification",
+   "via": [
+    "lem-sc-right-adjoint-mate-scheme-iso-transport-mate",
+    "lem-sc-right-adjoint-mate-scheme-iso-transport",
+    "lem-sc-right-adjoint-mate-old-base-open-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoRightAdjointNormalized",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoRightAdjointNormalized.lean",
+  "declaration": "AlgebraicGeometry.exists_schemeIsoRightAdjoint_normalized",
+  "declarations": [
+   "AlgebraicGeometry.SchemeIsoRightAdjointNormalized",
+   "AlgebraicGeometry.exists_schemeIsoRightAdjoint_normalized"
+  ],
+  "statement": "theorem exists_schemeIsoRightAdjoint_normalized [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] {P U S : Scheme.{u}} [CompactSpace P] [QuasiSeparatedSpace P] [CompactSpace U] [QuasiSeparatedSpace U] [CompactSpace S] [QuasiSeparatedSpace S] (f : P ⟶ S) [QuasiCompact f] [QuasiSeparated f] (f' : U ⟶ S) [QuasiCompact f'] [QuasiSeparated f'] (e : U ≅ P) (he : e.hom ≫ f = f') (a : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory P) (b : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory U) (adja : (schemeDerivedQCohProperty S).lift ((schemeDerivedQCohProperty P).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _ (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f _ _).fst E.obj E.property) ⊣ a) (adjb : (schemeDerivedQCohProperty S).lift ((schemeDerivedQCohProperty U).ι ⋙ schemeDerivedDirectImage f') (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _ (quasiSeparatedSpace_of_quasiSeparated f') _ _ _ _ f' _ _).fst E.obj E.property) ⊣ b) : ∃ φ : (a ⋙ (schemeDerivedQCohProperty P).ι) ⋙ derivedPullback e.hom ≅ b ⋙ (schemeDerivedQCohProperty U).ι, SchemeIsoRightAdjointNormalized f f' e he a b adja adjb φ",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T134400-L-95919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T134400-L-95919",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

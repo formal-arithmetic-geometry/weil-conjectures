@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.CategoryTheory.Comma.Arrow
-import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.SchemeIsoSecondMateNormalizedSquare
 
 /-! # Transport of a right-adjoint mate across a scheme isomorphism
 
@@ -90,6 +89,27 @@ theorem rightAdjoint_mate_scheme_iso_transport_mate
       (dualityEquationBaseChangeMap f g a d adja adjd hβf K))) ≅
         Arrow.mk ((schemeDerivedQCohProperty (pullback f' g)).ι.map
       (dualityEquationBaseChangeMap f' g b b' adjb adjb' hβ K)))) := by
-  sorry
+  classical
+  let : QuasiSeparatedSpace (pullback f g : Scheme.{u}) :=
+    quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)
+  let : QuasiSeparatedSpace (pullback f' g : Scheme.{u}) :=
+    quasiSeparatedSpace_of_quasiSeparated (pullback.snd f' g)
+  have hr : r = pullback.map f' g f g e.hom (𝟙 T) (𝟙 S)
+      (by simpa using he.symm) (by simp) := by
+    apply pullback.hom_ext
+    · simpa using hr₁
+    · simpa using hr₂
+  have : IsIso r := by rw [hr]; infer_instance
+  obtain ⟨φ, hφ⟩ := exists_schemeIsoRightAdjoint_normalized f f' e he a b adja adjb
+  obtain ⟨ψ, hψ⟩ := exists_schemeIsoRightAdjoint_normalized
+    (pullback.snd f g) (pullback.snd f' g) (asIso r) hr₂ d b' adjd adjb'
+  intro hβf
+  let sourceIso := schemeIsoMateSourceIso f f' e g a b K r hr₁ φ
+  let targetIso := ψ.app (((schemeDerivedQCohProperty T).lift
+    ((schemeDerivedQCohProperty S).ι ⋙ derivedPullback g)
+    (fun E ↦ (derivedPullback_tensor_preserve_QCoh g).1 E.obj E.property)).obj K)
+  refine ⟨Arrow.isoMk sourceIso targetIso ?_⟩
+  exact schemeIso_secondMate_normalized_square f f' e he g a b d b'
+    adja adjb adjd adjb' hβ K r hr₁ hr₂ hβf φ ψ hφ hψ
 
 end AlgebraicGeometry
