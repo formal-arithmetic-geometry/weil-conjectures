@@ -1,0 +1,118 @@
+{
+ "id": "lem-sbc-punctured-root-charts-ind-etale-descent",
+ "kind": "statement",
+ "title": "Punctured root charts descend from an ind-etale algebra",
+ "statement": "Let R and H be commutative rings in one universe, g∈R, and ι:R→H an ind-etale map. Let p:Y→Spec R be affine and locally of finite presentation. Let x∈Spec H and y∈Spec R satisfy Spec(ι)(x)=y. Fix m≥0 and e:Fin m→N with all e(k)>0 and invertible in H. Suppose that Y×_R Spec H is isomorphic over Spec H to D(ι(g)) in Spec of the product of H[t]/(t^e(k)-ι(g)). Then there are a commutative ring S in the same universe, an etale map φ:R→S, and z∈Spec S with Spec(φ)(z)=y. The same e(k) are positive units in S, and Y×_R Spec S is isomorphic over Spec S to D(φ(g)) in Spec of the product of S[t]/(t^e(k)-φ(g)). The index set and exponents are retained, and the isomorphism commutes with the second projection.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, descent paragraph; Tag 05N9 (2), (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-regular-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Present H as a filtered colimit of etale R-algebras S_i using ι.IndEtale. Since p is affine and locally of finite presentation, write Y=Spec B with B a finitely presented R-algebra. Each punctured product of root algebras is affine and finitely presented over its base: it is the finite product of monic polynomial quotients followed by the one-element localization at the image of g. The product, quotients, and localization commute with this filtered base change.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0EYG, descent paragraph; Tag 05N9 (2), (3)"
+   }
+  },
+  {
+   "text": "Use Tag 05N9 (2) to descend the coordinate maps of the given isomorphism and its inverse to a common stage. Use (3) to descend both inverse identities and the identities with the base algebra. These yield an isomorphism over Spec S_i, hence exactly the displayed projection identity after applying Spec. The finitely many units e(k) have inverses in H; descend their inverses and multiplication identities to a later common stage. The map S_i→H pulls the given point x back to a point z of Spec S_i. The cocone identity implies Spec(φ)(z)=Spec(ι)(x)=y. Every stage is etale over R. Retain the original m and e; in particular retain φ(g), rather than an unspecified associated divisor equation, in every root polynomial.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0EYG, descent paragraph; Tag 05N9 (2), (3)"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G3",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, descent paragraph; Tag 05N9 (2), (3)",
+  "note": "Specialization and Lean interface of the stated root-split argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of finitely presented affine schemes over an ind etale ring descends to an etale algebra stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism finite presentation algebra descends filtered colimit etale algebras",
+   "results": "8 hits: Algebra.Etale.finitePresentation, Algebra.Etale.exists_subalgebra_fg, StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra, StandardEtalePresentation.toPresentation",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*(equiv|iso)|(equiv|iso).*colimit",
+   "results": "1 hits: Mathlib/RingTheory/RingHomProperties.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverOnDivisorCharts",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-split-cover-cyclic-charts",
+   "place": "Tag 0EYG, descent paragraph; Tag 05N9 (2), (3) in the on-divisor root-split argument",
+   "via": [
+    "lem-sbc-root-split-cover-on-divisor-charts",
+    "lem-sbc-root-split-cover-cyclic-chart-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootChartsIndEtaleDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootChartsIndEtaleDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_root_charts_descend_indEtale",
+  "statement": "theorem punctured_root_charts_descend_indEtale\n    (R H : CommRingCat.{u}) (g : R) (ι : R →+* H) (hι : ι.IndEtale)\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (hp : IsAffineHom p ∧ LocallyOfFinitePresentation p)\n    (x : Spec H) (y : Spec R) (hx : (Spec.map (CommRingCat.ofHom ι)) x = y)\n    (m : ℕ) (e : Fin m → ℕ) (he : ∀ k, 0 < e k ∧ IsUnit (e k : H))\n    (hmodel :\n      let N := Spec (CommRingCat.of (∀ k : Fin m,\n          AdjoinRoot ((Polynomial.X : Polynomial H) ^ e k - Polynomial.C (ι g))))\n        let q := Spec.map (CommRingCat.ofHom\n          (algebraMap H (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial H) ^ e k - Polynomial.C (ι g)))))\n        let V : N.Opens := PrimeSpectrum.basicOpen\n          (algebraMap H (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial H) ^ e k - Polynomial.C (ι g))) (ι g))\n        ∃ γ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme,\n          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι))) :\n    ∃ (S : CommRingCat.{u}) (φ : R →+* S) (z : Spec S),\n      Etale (Spec.map (CommRingCat.ofHom φ)) ∧\n      (Spec.map (CommRingCat.ofHom φ)) z = y ∧\n      (∀ k, 0 < e k ∧ IsUnit (e k : S)) ∧\n        let N := Spec (CommRingCat.of (∀ k : Fin m,\n          AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C (φ g))))\n        let q := Spec.map (CommRingCat.ofHom\n          (algebraMap S (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C (φ g)))))\n        let V : N.Opens := PrimeSpectrum.basicOpen\n          (algebraMap S (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C (φ g))) (φ g))\n        ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅ V.toScheme,\n          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T142856-L-497584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T142856-L-497584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

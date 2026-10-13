@@ -10,6 +10,9 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverIndEtaleCharts
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootChartsIndEtaleDescent
+
 @[expose] public section
 
 universe u
@@ -84,6 +87,13 @@ theorem root_split_cover_on_divisor_charts
           (algebraMap S (∀ k : Fin m,
             AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C (φ g))) (φ g))
         ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅ V.toScheme,
-          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ)) := by sorry
+          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ)) := by
+  dsimp only
+  intro δ hδ
+  obtain ⟨hp, H, ι, x, hι, hx, m, e, he, γ, hγ⟩ :=
+    root_split_cover_indEtale_charts R g n hn hg p hj d y hy δ hδ
+  obtain ⟨S, φ, z, hφ, hz, heS, γS, hγS⟩ :=
+    punctured_root_charts_descend_indEtale R H g ι hι p hp x y hx m e he ⟨γ, hγ⟩
+  exact ⟨S, φ, z, hφ, hz, m, e, heS, γS, hγS⟩
 
 end AlgebraicGeometry.Scheme
