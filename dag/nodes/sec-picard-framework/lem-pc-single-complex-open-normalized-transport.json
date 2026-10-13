@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-single-complex-open-normalized-transport",
+ "kind": "statement",
+ "title": "Open transport of the normalized comparison into derived pullback",
+ "statement": "Let f:X to S, f prime:X prime to S prime, g:S prime to S and g prime:X prime to X form a cartesian square [def-pc-base-change] of schemes [def-pc-scheme], with the chosen derived categories [def-pc-derived-category]. Choose opens V in S and V prime in S prime satisfying V prime contained in the inverse image of V. Put U=f inverse V and U prime=f prime inverse V prime. Let j:U prime to U commute with the open inclusions and g prime, and suppose the restricted square j,f prime restricted,f restricted,g.resLE is cartesian. Fix only K on X, a K-flat complex P representing K and a K-flat complex Q representing its exact open restriction, together with the two representing derived isomorphisms and invertible pinned pullback counits. At z in U prime and integer i let F0,F be the additive forgetful functors, H0,H exact derived stalk cohomology, R exact derived restriction on X prime, and theta the canonical restricted identity coefficient of Lg prime star K. There exist a natural isomorphism nu:R followed by H0 followed by F0 to H followed by F, and an additive isomorphism l between the sources of the two comparisonIntoPullback maps [lem-pc-stalk-comparison-pullback-naturality], such that restricted comparisonIntoPullback followed by H0 of Lj star a then theta, followed by nu at Lg prime star K, equals l followed by original comparisonIntoPullback followed by H of Lg prime star e. There is no target K prime, coefficient phi, target complex, or coordinate chain map in this statement. Exact derived restriction is [def-pc-derived-open-restriction-maps], theta is constructed using [def-pc-single-complex-open-restriction-data], and exact derived stalk cohomology is [lem-pc-stalk-comparison-source-transport]. The tensor cohomology model in comparisonIntoPullback is [def-pc-base-derived-tensor-cohomology-model], with the actual stalk rings and structure maps from [def-pc-single-complex-base-change-stalk-condition].",
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-scheme",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-single-complex-open-restriction-data",
+  "lem-pc-stalk-comparison-pullback-naturality",
+  "lem-pc-stalk-comparison-source-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), first paragraph; Tag 0DJ7 equation-bc; cohomology.tex Tag 08HY and Tag 08FE"
+ },
+ "proof": [
+  {
+   "text": "Identify the four local rings and their structure maps using the actual open-immersion stalk isomorphisms, stalkMap_comp, hj and the restriction squares. Identify the tensor algebra and its map to the final stalk ring by its universal property.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact stalks of e and a identify the two K-flat source representatives after ring transport. Use restriction-stalk extension and the overFunctor/restrictFunctor comparison. Transport left-derived scalar extension through the exact ring equivalences; its counit-compatible uniqueness gives the cohomology transport. The cohomologyIso_smul equations lift this to the tensor-algebra action. Extend to the final stalk ring and forget scalars to obtain l. Exact restriction and the restriction-stalk natural isomorphism induce the derived cohomology natural isomorphism nu.",
+   "uses": [
+    "lem-pc-open-restriction-stalk-extension-iso",
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-flat source representatives the pinned pullback counits are invertible. The comparison_eq and localized_eq equations and the tensor-stalk identification express comparisonIntoPullback by their universal counits. Naturality under the preceding ring and representative transports identifies the two maps. The leftDerivedUnique factorization equation of singleComplexOpenPullbackIso and the pinned composition maps identify the intervening morphism with theta, the restricted identity coefficient. This proves the displayed square before postcomposition with any coefficient or target homology identification.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-single-complex-open-restriction-data",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-single-complex-open-restriction-data",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-open-restriction-stalk-extension-iso",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-stalk-comparison-pullback-naturality",
+  "lem-pc-stalk-comparison-source-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), first paragraph; Tag 0DJ7 equation-bc; cohomology.tex Tag 08HY and Tag 08FE",
+  "note": "Extracted only the source/counit calculation from steps 1-3 of the parent. The coefficient and target-coordinate calculation is proved in Lean in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor cohomology comparison natural under restriction to open subschemes",
+   "results": "8 hits, including Scheme.Modules.restrictFunctorComp and Scheme.Hom.appLE_map; none states normalized cross-ring tensor comparison transport.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictStalkNatIso\"",
+   "results": "3 hits: restrictStalkNatIso and its two germ formulas; these concern underived additive stalks, not the derived tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial underived tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonIntoPullback|restrictStalkNatIso",
+   "results": "Mathlib search returned restrictStalkNatIso and its two germ formulas. Repository search found StalkComparisonPullbackNaturality and StalkComparisonSourceTransport, which compare representatives within a fixed square, not different stalk rings of restricted base schemes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor stalk comparison under open restriction",
+   "results": "Service unavailable: Internal Server Error. The LeanFinder, Loogle and Mathlib source searches are recorded separately.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenCoordinateStalkEquivalence",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 locality on S prime; normalized source/counit portion of the open-coordinate stalk calculation",
+   "via": [
+    "lem-pc-single-complex-open-coordinate-stalk-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenCoordinateStalkTransportData",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenCoordinateStalkTransportData.lean",
+  "declaration": "AlgebraicGeometry.exists_singleComplexOpen_normalized_transport",
+  "statement": "theorem exists_singleComplexOpen_normalized_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X)\n    (V : S.Opens) (V' : S'.Opens) (hV' : V' ≤ g ⁻¹ᵁ V)\n    (j : (f' ⁻¹ᵁ V').toScheme ⟶ (f ⁻¹ᵁ V).toScheme)\n    (hj : j ≫ (f ⁻¹ᵁ V).ι = (f' ⁻¹ᵁ V').ι ≫ g')\n    (sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hV'))\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (Q : CochainComplex\n      (SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace)) ℤ)\n    (e : DerivedCategory.Q.obj P ≅ K)\n    (a : DerivedCategory.Q.obj Q ≅\n      (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj K)\n    (hP : P.IsKFlat) (hQ : Q.IsKFlat)\n    (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))\n    (hcQ : IsIso ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n    (z : (f' ⁻¹ᵁ V').toScheme) (i : ℤ) :\n    let F₀ := forget₂ (ModuleCat.{u} ((f' ⁻¹ᵁ V').toScheme.presheaf.stalk z)) AddCommGrpCat.{u}\n    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z.val)) AddCommGrpCat.{u}\n    let H₀ := comparisonStalkCohomology (f' ⁻¹ᵁ V').toScheme z i\n    let H := comparisonStalkCohomology X' z.val i\n    let R := (schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory\n    let θ := singleComplexRestrictedCoefficient g' K ((derivedPullback g').obj K) (𝟙 _)\n      (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj\n    ∃ (ν : R ⋙ H₀ ⋙ F₀ ≅ H ⋙ F)\n      (l : F₀.obj ((Arrow.mk (comparisonIntoPullback (f ∣_ V) (f' ∣_ V')\n        (g.resLE V V' hV') j sq₀ z Q hcQ i)).left) ≅\n        F.obj ((Arrow.mk (comparisonIntoPullback f f' g g' sq z.val P hcP i)).left)),\n      F₀.map (comparisonIntoPullback (f ∣_ V) (f' ∣_ V')\n          (g.resLE V V' hV') j sq₀ z Q hcQ i ≫\n        H₀.map ((derivedPullback j).map a.hom ≫ θ)) ≫\n          ν.hom.app ((derivedPullback g').obj K) =\n      l.hom ≫ F.map (comparisonIntoPullback f f' g g' sq z.val P hcP i ≫\n        H.map ((derivedPullback g').map e.hom))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T133227-L-4193932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T133227-L-4193932",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
