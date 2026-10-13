@@ -23,19 +23,22 @@
    "elementary": false
   },
   {
-   "text": "Apply the branch-locus argument of Tag 0BJH at x. Etale localization reduces the flat locally quasi-finite map to a finite locally free map with x the only point over y=f(x). The discriminant cuts out the locally principal ramification locus. If y were in that locus, a dimension-one generalization y' in it exists because x is not generic. A ramified point x' over y' specializes to x, since a finite map is closed and x is the only point over y. Finite flat local maps preserve dimension, so dim O(X,x')=1, contradicting the unramifiedness proved in the preceding step. Therefore f is etale at x. Points in W are already etale. Etaleness local on the source gives Etale f; empty X and W=X are included.",
-   "uses": [],
+   "text": "At each point outside W use the depth-dimension bound to get positive stalk dimension. Apply the pointwise flat quasi-finite criterion to its dimension-one generalizations, with W as their formally unramified neighbourhood. At points in W use W itself as an etale neighbourhood. These opens cover X; Mathlib IsZariskiLocalAtSource.of_iSup_eq_top proves Etale f.",
+   "uses": [
+    "lem-sbc-quasi-finite-flat-codimension-one-etale-neighbourhood"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-depth-le-support-dimension"
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-sbc-quasi-finite-flat-codimension-one-etale-neighbourhood"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "Q4",
+  "by": "G1",
   "document": "Stacks Project",
-  "place": "Tag 0BJH (Lemma 58.21.2), applied as in the proof of Tag 0EY6(3)"
+  "place": "Tag 0BJH, applied as in 0EY6(3); depth bound and source-open assembly formalized in Lean"
  },
  "mathlib_searches": [
   {
@@ -112,9 +115,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T034209-L-3767562",
+  "landing": "20261013T045529-L-128772",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

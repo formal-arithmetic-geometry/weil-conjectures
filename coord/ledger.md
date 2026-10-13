@@ -11116,3 +11116,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/F3/Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice (stage 3; reviewer PASS; after a return; landing 20261013T045527-L-128328 (interface); batch 20261013T045507; modules 4; new nodes 3)
 - 04:55 L: merged deliver/F3/Sheaf.Paper.EtaleCEStationaryComparisonsAtBounds (stage 3; reviewer PASS; first push; landing 20261013T045528-L-128449 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:55 L: merged deliver/G1/Sheaf.AlgebraicGeometry.FormalAssociatedGradedAlgebraExists (stage 3; reviewer PASS; first push; landing 20261013T045528-L-128616 (interface); batch 20261013T045507; modules 2; new nodes 1)
+- 04:55 L: merged deliver/G1/Sheaf.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity (stage 3; reviewer PASS; first push; landing 20261013T045529-L-128772 (interface); batch 20261013T045507; modules 2; new nodes 1)
