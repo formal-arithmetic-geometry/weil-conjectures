@@ -10,6 +10,7 @@ public import Sheaf.Paper.CechRefinementCochainMap
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Cech cup products and pullback
 
@@ -30,6 +31,11 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 open CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
+
+-- Keep section scalar instances at the scheme-module interface.
+attribute [local irreducible] tensorPullback tensorPullbackObj
+attribute [local instance 2000]
+  instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf
 
 /-- Coefficient maps act componentwise in the intersection description of cochains. -/
 private theorem cech_coefficient_apply {X : Scheme.{v}} {ι : Type v}
@@ -438,6 +444,11 @@ theorem cechCup_coefficient_naturality (X : Scheme.{v}) {ι : Type v} (U : ι �
   exact cup_coefficient_cochain U φ ψ p q a.val b.val
 
 
+-- The intermediate cover hypothesis stays in the signature but is not needed here.
+set_option linter.unusedVariables false in
+set_option maxHeartbeats 800000 in
+-- Respect the irreducible pullback interface during the composition calculation.
+set_option backward.isDefEq.respectTransparency true in
 /-- Successive specified refinements compose after the canonical coefficient identification.
 The last two equalities give the composite comparison square and functoriality of the
 usual cohomology pullback, respectively.
@@ -510,7 +521,118 @@ theorem cechRefinement_composition_naturality
         ((RingedSpace.moduleCohomology X''.toRingedSpace p).map
           ((tensorSectionsComp f₁ f).hom.app F)) =
       moduleCohomologyPullback (f₁ ≫ f) F p) := by
-  sorry
+  clear hU'
+  have hu := unit_conjugateEquiv_symm
+    (Classical.choose (exists_tensorPullbackAdjunction (f₁ ≫ f)))
+    ((Classical.choose (exists_tensorPullbackAdjunction f)).comp
+      (Classical.choose (exists_tensorPullbackAdjunction f₁)))
+    (pushforwardComp f₁ f).inv F
+  change (Classical.choose (exists_tensorPullbackAdjunction (f₁ ≫ f))).unit.app F ≫
+      (pushforwardComp f₁ f).inv.app _ =
+    (Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F ≫
+      (pushforward f).map
+        ((Classical.choose (exists_tensorPullbackAdjunction f₁)).unit.app
+          ((tensorPullback f).obj F)) ≫
+      (pushforward f₁ ⋙ pushforward f).map ((tensorSectionsComp f₁ f).hom.app F) at hu
+  have hunit :
+      (Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F ≫
+        (pushforward f).map
+          ((Classical.choose (exists_tensorPullbackAdjunction f₁)).unit.app
+            ((tensorPullback f).obj F)) ≫
+        (pushforwardComp f₁ f).hom.app _ ≫
+        (pushforward (f₁ ≫ f)).map ((tensorSectionsComp f₁ f).hom.app F) =
+      (Classical.choose (exists_tensorPullbackAdjunction (f₁ ≫ f))).unit.app F := by
+    apply (cancel_mono ((pushforwardComp f₁ f).inv.app _)).1
+    simp only [Category.assoc]
+    rw [(pushforwardComp f₁ f).inv.naturality, Iso.hom_inv_id_app_assoc]
+    exact hu.symm
+  have hcochain : gamma ≫ gamma₁ ≫
+      ((forget₂ (ModuleCat.{v} Γ(X'', ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex
+        (ComplexShape.up ℕ)).map
+          ((cechComplexFunctor U'').map
+            ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+              ((tensorSectionsComp f₁ f).hom.app F).val)) = gammaComp := by
+    ext n : 1
+    apply AddCommGrpCat.ext
+    intro a
+    apply (TopCat.Presheaf.cechComplexFunctorXAddEquiv U''
+      ((tensorPullback (f₁ ≫ f)).obj F).presheafModuleCat n).injective
+    funext y
+    change TopCat.Presheaf.cechComplexFunctorXAddEquiv U''
+      ((tensorPullback (f₁ ≫ f)).obj F).presheafModuleCat n
+      ((((cechComplexFunctor U'').map
+        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+          ((tensorSectionsComp f₁ f).hom.app F).val)).f n)
+        (gamma₁.f n (gamma.f n a))) y = _
+    rw [cech_coefficient_apply]
+    let V := ⨅ j, U (refine (refine₁ (y j)))
+    let z := TopCat.Presheaf.cechComplexFunctorXAddEquiv U F.presheafModuleCat n a
+      (refine ∘ refine₁ ∘ y)
+    let i := cechRefinementIntersection f U U' refine hrefine n (refine₁ ∘ y)
+    let j := cechRefinementIntersection f₁ U' U'' refine₁ hrefine₁ n y
+    let k := cechRefinementIntersection (f₁ ≫ f) U U''
+      (refine ∘ refine₁) hrefineComp n y
+    let H := (tensorPullback f).obj F
+    let L := (tensorPullback f₁).obj H
+    let C := (tensorPullback (f₁ ≫ f)).obj F
+    let η := (Classical.choose (exists_tensorPullbackAdjunction f₁)).unit.app H
+    let τ := (tensorSectionsComp f₁ f).hom.app F
+    refine Eq.trans ?_ (hgammaComp n a y).symm
+    refine Eq.trans (congrArg (τ.app (⨅ j, U'' (y j)))
+      (hgamma₁ n (gamma.f n a) y)) ?_
+    refine Eq.trans (congrArg (fun t ↦ τ.app (⨅ j, U'' (y j))
+      (L.presheaf.map j.op (η.app (⨅ j, U' (refine₁ (y j))) t)))
+      (hgamma n a (refine₁ ∘ y))) ?_
+    have hi := Hom.app_presheaf_map η i
+      (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F).app V z)
+    change η.app (⨅ j, U' (refine₁ (y j))) (H.presheaf.map i.op
+      (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F).app V z)) =
+      L.presheaf.map ((Opens.map f₁.base).map i).op
+        (η.app (f ⁻¹ᵁ V)
+          (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F).app V z)) at hi
+    refine (congrArg (fun t ↦ τ.app (⨅ j, U'' (y j))
+      (L.presheaf.map j.op t)) hi).trans ?_
+    refine (congrArg (τ.app (⨅ j, U'' (y j)))
+      (restriction_comp L.presheaf _ _ k.op _)).trans ?_
+    refine (Hom.app_presheaf_map τ k _).trans ?_
+    have hs := congrArg (fun t ↦ t.app V z) hu
+    simp only [Hom.comp_app, pushforward_map_app, Functor.comp_map,
+      pushforwardComp_inv_app_app, AddCommGrpCat.comp_apply] at hs
+    change ((Classical.choose (exists_tensorPullbackAdjunction (f₁ ≫ f))).unit.app F).app
+        V z = τ.app (f₁ ⁻¹ᵁ (f ⁻¹ᵁ V))
+      (η.app (f ⁻¹ᵁ V)
+        (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F).app V z)) at hs
+    exact congrArg (C.presheaf.map k.op) hs.symm
+  refine ⟨hcochain, ?_, (moduleCohomologyPullback_comp f₁ f F
+    ((tensorSectionsComp f₁ f).hom.app F) hunit p).symm⟩
+  obtain ⟨c₀, hc₀⟩ := ((cechComparisonMapNaturality X U hU).2 0).1 F
+  obtain ⟨c₂, hc₂⟩ := ((cechComparisonMapNaturality X U hU).2 (p + 0)).1 (F ⊗ F)
+  obtain ⟨cup, hcup, _⟩ := exists_unique_cechCupProduct U F F p 0
+  obtain ⟨sheafCup, hsheafCup, _⟩ := exists_unique_moduleCupProduct F F p 0
+  have hcomparison := (cechCupPullbackCompat X X'' (f₁ ≫ f) U hU U'' hU''
+    (refine ∘ refine₁) hrefineComp F F p 0 c hc cComp hcComp gammaComp hgammaComp
+    c₀ hc₀ c₂ hc₂ cup hcup sheafCup hsheafCup).1
+  set_option backward.isDefEq.respectTransparency false in
+    let τ := (cechComplexFunctor U'').map
+      ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+        ((tensorSectionsComp f₁ f).hom.app F).val)
+    let V := forget₂ (ModuleCat.{v} Γ(X'', ⊤)) AddCommGrpCat.{v}
+    have hh := congrArg (fun k ↦ HomologicalComplex.homologyMap k p) hcochain
+    simp only [HomologicalComplex.homologyMap_comp] at hh
+    have hn := ShortComplex.mapHomologyIso_hom_naturality
+      ((HomologicalComplex.shortComplexFunctor _ _ p).map τ) V
+    dsimp only [cechRefinementHomology]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    have hn' := congrArg (fun t ↦ t ≫ V.map cComp) hn
+    simp only [Category.assoc] at hn'
+    erw [← hn']
+    have hh' := congrArg (fun t ↦ t ≫
+      ((((cechComplexFunctor U'').obj
+        ((tensorPullback (f₁ ≫ f)).obj F).presheafModuleCat).sc p).mapHomologyIso V).hom ≫
+        V.map cComp) hh
+    simp only [Category.assoc] at hh'
+    erw [hh']
+    exact hcomparison
 
 set_option maxHeartbeats 800000 in
 -- The tuplewise tensor-pullback calculation needs additional elaboration steps.
