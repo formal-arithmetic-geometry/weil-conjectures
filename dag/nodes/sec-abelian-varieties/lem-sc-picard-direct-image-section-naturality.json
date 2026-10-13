@@ -42,25 +42,10 @@
  },
  "proof": [
   {
-   "text": "Use invertibility and flatness of f to see that pr_X^*L is finitely presented and flat over W. Canonical arbitrary base change identifies Lt^*E with the direct image of L_T[0]. Derived pullback of the structure sheaf is the structure sheaf. The canonical derived adjunction, full faithfulness of the single functor, and evaluation on 1 at top give the additive equivalences q_t. Use the derived adjunction obtained from the same tensor adjunction as the canonical base-change map, not an independently chosen adjunction.",
+   "text": "Use picardDirectImageSectionMap_bijective to equip each actual additive comparison map with AddEquiv.ofBijective. For every successive base change apply picardDirectImageSectionMap_restriction. Its map is definitionally the underlying map of these equivalences.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-derived-pullback-structure-sheaf-local",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "def-sc-invertible-module",
-    "def-pc-derived-direct-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The projection equations determine j by the pullback universal property. The canonical inverse mate of pushforward composition gives c. Naturality of the derived adjunction identifies the transposes after base change; the canonical degree-zero mate square identifies the result with the ordinary tensor adjunction unit. Associativity of the chosen derived composition comparisons identifies the restriction with picardDerivedModelRestriction. Evaluating the equality of module morphisms on the unit at top and restricting j inverse top to top gives the displayed equality. No nonempty fibre is used.",
-   "uses": [
-    "def-pc-base-change",
-    "lem-pc-module-pullback-adjunction",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-pc-canonical-degree-zero-mate-square",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-sc-picard-derived-model-sections"
+    "lem-sc-picard-direct-image-section-map-bijective",
+    "lem-sc-picard-direct-image-section-map-restriction"
    ],
    "elementary": false
   }
@@ -68,7 +53,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Derived Categories of Schemes and Cohomology of Sheaves",
-  "place": "Tags 0B91 clause (2), 08HY and 0D5S; cohomological part separated from the geometric residue-fibre argument"
+  "place": "Tags 0B91, 08HY and 0D5S; fixed-map decomposition of the two original proof steps"
  },
  "mathlib_searches": [
   {
@@ -110,17 +95,8 @@
   "group": "J3"
  },
  "proof_deps": [
-  "def-pc-base-change",
-  "def-pc-derived-direct-image",
-  "def-sc-invertible-module",
-  "def-sc-picard-derived-model-sections",
-  "lem-pc-canonical-degree-zero-mate-square",
-  "lem-pc-module-pullback-adjunction",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-pc-rf-perfect-base-change",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-derived-pullback-structure-sheaf-local"
+  "lem-sc-picard-direct-image-section-map-bijective",
+  "lem-sc-picard-direct-image-section-map-restriction"
  ],
  "lean": {
   "existing": false,
@@ -146,9 +122,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T111858-L-3054546",
+  "landing": "20261013T133226-L-4193401",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

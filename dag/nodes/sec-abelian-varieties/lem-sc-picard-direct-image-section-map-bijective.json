@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-picard-direct-image-section-map-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of the fixed additive section comparison",
+ "statement": "Let f:X→S be flat proper locally of finite presentation and L invertible. For arbitrary k:W→S and t:T→W, the explicitly constructed additive map [def-sc-picard-direct-image-section-map] from derived test sections to Γ(X_T,L_T) is bijective. This asserts only the pointwise bijectivity of a fixed map, with no successive-base-change claim.",
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes and Cohomology of Sheaves",
+  "place": "Tags 0B91 clause (2), 08HY, 0D5S; parent proof step 1: base change, derived adjunction and evaluation give the additive equivalences"
+ },
+ "stmt_deps": [
+  "def-sc-picard-direct-image-section-map",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Put p = pr_W and M = pr_X^*L. Invertibility makes L finitely presented\nand intrinsically flat; flatness of f makes M flat over W. Properness and finite\npresentation persist under base change. Identify the square used in\npicardDirectImageSectionMap with the chosen pullback square by its universal\nproperty. Apply perfect_derivedDirectImage_baseChange to M. Its canonical\ncomparison is the base-change mate followed by the single pullback comparison;\ntransporting its target by the fixed coefficient isomorphism preserves invertibility.\nThe source structure-sheaf comparison is invertible. Under canonical derived\nadjunction, morphisms from the degree-zero structure sheaf into Rp_*N[0] are\nmorphisms from the pulled-back structure sheaf into N[0]. Pullback preserves the\nstructure sheaf and the single functor is fully faithful. Thus these morphisms\nare precisely ordinary module morphisms O to N. Their identification with H^0 of\nRp_*N[0] is the canonicalDirectImageH0Iso computation of the right-derived unit,\nso evaluating the displayed map at 1 is exactly the section equivalence.\nEvaluation at 1 and restriction of the pushforward from inverse-top to top are\nbijective. The same argument applies to zero modules on empty schemes.",
+   "uses": [
+    "def-sc-picard-direct-image-section-map",
+    "lem-pc-rf-perfect-base-change",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-canonical-degree-zero-mate-square",
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-direct-image-section-map",
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-canonical-degree-zero-mate-square",
+  "lem-pc-canonical-single-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories of Schemes and Cohomology of Sheaves",
+  "place": "Tags 0B91 clause (2), 08HY, 0D5S; parent proof step 1: base change, derived adjunction and evaluation give the additive equivalences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The degree zero canonical proper flat base change section map is bijective and natural",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical proper flat derived base change gives natural additive global section comparison",
+   "results": "Eight hits, including Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjUnitToUnit and pullbackComp. No fixed derived section comparison or its bijectivity/naturality.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "Six hits: unitHomEquiv, composition/evaluation formulas and pushforwardSections_unitHomEquiv. These provide evaluation ingredients only.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalSinglePullbackMap|homologyFunctor",
+   "results": "Mathlib 25 hits (homology functor ingredients). Local rg finds canonicalDegreeZeroMateSquare, perfect_derivedDirectImage_baseChange and unitHomAddEquiv; none states the map-specific properties. Blueprint search for section comparison finds no blueprint match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDirectImageSectionNaturality",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "parent proof step 1: base change, derived adjunction and evaluation give the additive equivalences",
+   "via": [
+    "lem-sc-picard-direct-image-section-naturality",
+    "lem-sc-picard-direct-image-test-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDirectImageSectionMapBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDirectImageSectionMapBijective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardDirectImageSectionMap_bijective",
+  "statement": "theorem picardDirectImageSectionMap_bijective\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) {T : Scheme.{v}} (t : T ⟶ W) :\n    Function.Bijective (picardDirectImageSectionMap f L W k t)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T133226-L-4193401",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T133226-L-4193401",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

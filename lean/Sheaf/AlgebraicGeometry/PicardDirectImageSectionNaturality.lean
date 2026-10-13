@@ -14,11 +14,9 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
 
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.DerivedPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare
 
+import Sheaf.AlgebraicGeometry.PicardDirectImageSectionMapBijective
+import Sheaf.AlgebraicGeometry.PicardDirectImageSectionMapRestriction
 
 /-! # Natural section comparisons under successive base change
 
@@ -97,6 +95,11 @@ theorem picard_direct_image_section_naturality
                     (((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).unit.app
                       ((Modules.tensorPullback (pullback.fst f (t ≫ k))).obj L)).val.app
                         (Opposite.op ⊤) (q t ξ))) =
-              q t' (picardDerivedModelRestriction E i t t' h ξ) := by sorry
+              q t' (picardDerivedModelRestriction E i t t' h ξ) := by
+  classical
+  refine ⟨fun t ↦ AddEquiv.ofBijective (picardDirectImageSectionMap f L W k t)
+    (picardDirectImageSectionMap_bijective f L W k t), ?_⟩
+  intro T T' i t t' h j hj₁ hj₂
+  exact picardDirectImageSectionMap_restriction f L W k i t t' h j hj₁ hj₂
 
 end AlgebraicGeometry.Scheme
