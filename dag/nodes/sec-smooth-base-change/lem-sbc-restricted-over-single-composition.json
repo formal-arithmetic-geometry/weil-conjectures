@@ -1,0 +1,132 @@
+{
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, lemma-relative-colimit, affine-object restriction; Tag 0EZM, lemma-colimit-variant-complexes, fixed-coefficient comparisons"
+ },
+ "id": "lem-sbc-restricted-over-single-composition",
+ "kind": "statement",
+ "title": "Triangle composition law for restricted fixed-coefficient single complexes",
+ "statement": "Let W,S be schemes, k:W→S, F an abelian sheaf on W, A,B,C objects of Over W, f:B→A, g:C→B, a:C→A with a=g≫f, and U etale over S. Let qf,qg,qa be their canonical restricted pullback maps and hq:qa=qg≫qf. Then the explicit restricted single transition for a equals the inverse-image composition comparison for qg,qf,qa followed by qg inverse image of the transition for f and the transition for g. No indexing diagram, identity law or cone equation is asserted.",
+ "stmt_deps": [
+  "def-sbc-restricted-over-single-data",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Substitute ha to replace the third arrow by g followed by f. Expand the\nthree explicit transition homs. The second pullback projections satisfy the\ncommuting triangles with f.left, g.left, and their composite. Apply the associativity\nlaw of upperStarComp to these triangles and to the structure arrows to W. Naturality\nmoves each sheaf comparison across inverse image, and the inverse comparisons\ncancel. Thus the composite of the two coefficient maps is the coefficient map\nfor the composite, preceded by upperStarComp for the restricted maps. Applying\nthe single functor and naturality of mapCochainComplexSingleFunctor gives the stated\ncomplex identity. Its composition compatibility is checked in degree zero, where\nit is the original functor composition identity; in other degrees the source is\nzero. Transport along hq identifies the composite restricted map with that for a.\nNo cone, limiting property, or category structure on an indexing type is required;\nzero sheaves, empty schemes and identity arrows satisfy the same calculation.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and library inverse-image coherence",
+  "place": "09Z1 affine-object restriction and 0EZM coefficient transition compatibility; explicit unit/associativity calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Identity and composition coherence of inverse image of a fixed sheaf on schemes and single cochain complexes",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent inverse image transition maps of a fixed sheaf restricted to fibre products, identity and composition",
+   "date": "2026-10-13",
+   "results": "Eight sheaf pullback and restriction hits; none states these fixed-coefficient single-complex comparisons. Loogle mapCochainComplexSingleFunctor supplies only the single comparison.",
+   "verdict": "no full match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexSingleFunctor|upperStarComp_assoc|restrictedOverSingle",
+   "date": "2026-10-13",
+   "results": "Mathlib singleFunctor comparison; local upperStar unit/associativity lemmas; RestrictedAffineSingleTransitionLaws only applies to preorders. No general-category fixed-coefficient theorem.",
+   "verdict": "no full match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical pullback isomorphisms of a single fixed sheaf satisfy the cocycle identity over composable scheme maps",
+   "date": "2026-10-13",
+   "results": "Second reading by B2: eight scheme open-cover pullback cocycle hits; these concern geometric gluing arrows, not inverse-image single-complex transitions.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.mapHomologicalComplex_comp",
+   "date": "2026-10-13",
+   "results": "Second reading by B2: the natural transformation mapping composition lemma is available. It supports the complex calculation but does not supply the coefficient identity or associativity calculation.",
+   "verdict": "supporting lemma only"
+  },
+  {
+   "tool": "grep",
+   "query": "singleMapHomologicalComplex|pullback.*cocycle|upperStar.*unit",
+   "date": "2026-10-13",
+   "results": "Second reading by B2: singleMapHomologicalComplex and its self/non-self component lemmas; repository upperStar unit and associativity coherence and preorder restricted-affine laws. No full match.",
+   "verdict": "supporting lemmas only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedOverSingleCoherence",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Fixed-coefficient restricted complexes in the affine-object reduction, Tag 09Z1",
+   "via": [
+    "lem-sbc-restricted-over-single-coherence",
+    "lem-sbc-restricted-over-abelian-complex-data",
+    "lem-sbc-higher-image-raw-complex-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedOverSingleComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedOverSingleComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.restrictedOverSingle_composition",
+  "declarations": [
+   "AlgebraicGeometry.Etale.restrictedOverSingle_composition"
+  ],
+  "statement": "theorem restrictedOverSingle_composition {W S : Scheme.{u}} (k : W ⟶ S) (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) {A B C : Over W} (f : B ⟶ A) (g : C ⟶ B) (a : C ⟶ A) (ha : a = g ≫ f) (U : S.Etale) (hq : rawAffineRestrictedMap a.left (A.hom ≫ k) (C.hom ≫ k) (by rw [← Category.assoc, Over.w]) U = rawAffineRestrictedMap g.left (B.hom ≫ k) (C.hom ≫ k) (by rw [← Category.assoc, Over.w]) U ≫ rawAffineRestrictedMap f.left (A.hom ≫ k) (B.hom ≫ k) (by rw [← Category.assoc, Over.w]) U) : (restrictedOverSingleIso k F a U).hom = (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{u + 1} (rawAffineRestrictedMap g.left (B.hom ≫ k) (C.hom ≫ k) (by rw [← Category.assoc, Over.w]) U) (rawAffineRestrictedMap f.left (A.hom ≫ k) (B.hom ≫ k) (by rw [← Category.assoc, Over.w]) U) (rawAffineRestrictedMap a.left (A.hom ≫ k) (C.hom ≫ k) (by rw [← Category.assoc, Over.w]) U) hq) (ComplexShape.up ℤ)).hom.app (restrictedOverSingle k F A U) ≫ ((upperStar AddCommGrpCat.{u + 1} (rawAffineRestrictedMap g.left (B.hom ≫ k) (C.hom ≫ k) (by rw [← Category.assoc, Over.w]) U)).mapHomologicalComplex (ComplexShape.up ℤ)).map (restrictedOverSingleIso k F f U).hom ≫ (restrictedOverSingleIso k F g U).hom",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-dcce6",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T143543-L-559896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-dcce6",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T143543-L-559896",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node statements, change record, report, and downstream importer matched the review brief; all delivered modules and the direct importer compile successfully."
+ }
+}

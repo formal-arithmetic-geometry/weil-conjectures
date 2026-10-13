@@ -17,22 +17,22 @@
  ],
  "proof": [
   {
-   "text": "Substitute the equality identifying D and the heterogeneous equalities\nidentifying c, K, phi, G, and eG with the displayed concrete constructions.\nWrite r_A for the second projection U times_S A to A. For each arrow f,\nexpand the coefficient comparison as the inverse comparison for a_f and r_B,\nthe comparison for r_A and f.left, and r_A inverse image of the inverse comparison\nfor f.left and B.hom. These compare the two iterated inverse images of the same\nfixed sheaf F. The identity comparison is the inverse-image unit law. For two\narrows, inverse-image associativity identifies their composite with the comparison\nfor the composite arrow; naturality moves the comparisons through the coefficient\nmaps and cancels each hom with its inverse. Apply the single-complex functor and\nits natural comparison with inverse image to obtain the displayed identity and\ncomposition equations. For the cone equation, substitute the cone relation\nc_j followed by D(f) equals c_i into this composition equation. The comparison\nfor c_i cancels its inverse, leaving the identity map on the fixed apex complex.\nThis proof needs neither a limit hypothesis nor affineness, boundedness,\ncohomology, or a cohomology continuity theorem. Empty schemes and zero sheaves\nobey the same functorial identities.",
+   "text": "First prove the canonical coherence statement in a private, fully proved helper. Apply restrictedOverSingle_unit at each object, and restrictedOverSingle_composition to the three functor image arrows using map_comp. For the cone law apply the same composition theorem to c₀.π_j and D₀.map(f), with the named composite c₀.π_i supplied by cone naturality. The generic categorical lemma iso_cancel_triangle precomposes this equality with the inverse of the transition isomorphism for c₀.π_i and uses inv_hom_id. Since G is constant and eG is the inverse leg isomorphism, the result is exactly the cone equation. Finally substitute D and eliminate each HEq for c,K,phi,G,eG; apply the fully proved canonical helper. This equality transport is the only use of the concrete-data hypotheses.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-sbc-raw-affine-restricted-cohomology"
+    "lem-sbc-restricted-over-single-unit",
+    "lem-sbc-restricted-over-single-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-inverse-image-composition",
-  "def-sbc-raw-affine-restricted-cohomology"
+  "lem-sbc-restricted-over-single-unit",
+  "lem-sbc-restricted-over-single-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project and library inverse-image coherence",
-  "place": "Explicit unit and associativity argument for the fixed coefficient comparison"
+  "place": "B2: unit and triangle composition calculations, with cone coherence derived by cancellation rather than split into a new obligation"
  },
  "mathlib_searches": [
   {
@@ -105,12 +105,6 @@
   "file": "lean/Sheaf/AlgebraicGeometry/RestrictedOverSingleCoherence.lean",
   "declaration": "AlgebraicGeometry.Etale.restrictedOverSingle_coherence",
   "declarations": [
-   "AlgebraicGeometry.Etale.restrictedOverDiagram",
-   "AlgebraicGeometry.Etale.restrictedOverCone",
-   "AlgebraicGeometry.Etale.restrictedOverSingle",
-   "AlgebraicGeometry.Etale.restrictedOverSingleIso",
-   "AlgebraicGeometry.Etale.restrictedOverSingleG",
-   "AlgebraicGeometry.Etale.restrictedOverSingleConeIso",
    "AlgebraicGeometry.Etale.restrictedOverSingle_coherence"
   ],
   "statement": "theorem restrictedOverSingle_coherence {W S : Scheme.{u}} (k : W ⟶ S) (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [Category.{u} I] (D₀ : I ⥤ Over W) (c₀ : Cone D₀) (U : S.Etale) (D : I ⥤ Scheme.{u}) (c : Cone D) (K : ∀ i : I, CochainComplex (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (φ : ∀ {i j : I} (f : j ⟶ i), ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K i) ⟶ K j) (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (eG : ∀ i : I, G.obj (op i) ≅ ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K i)) (_hD : D = restrictedOverDiagram k D₀ U) (_hc : HEq c (restrictedOverCone k D₀ c₀ U)) (_hK : HEq K (fun i ↦ restrictedOverSingle k F (D₀.obj i) U)) (_hφ : HEq @φ (fun {i j : I} (f : j ⟶ i) ↦ (restrictedOverSingleIso k F (D₀.map f) U).hom)) (_hG : HEq G (restrictedOverSingleG k F D₀ c₀ U)) (_heG : HEq eG (restrictedOverSingleConeIso k F D₀ c₀ U)) : (∀ i : I, φ (𝟙 i) = (NatIso.mapHomologicalComplex (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i))) (ComplexShape.up ℤ)).hom.app (K i) ≫ (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i)) (ComplexShape.up ℤ)).hom.app (K i)) ∧ (∀ (i j l : I) (f : j ⟶ i) (g : l ⟶ j), φ (g ≫ f) = (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f) (D.map (g ≫ f)) (D.map_comp g f)) (ComplexShape.up ℤ)).hom.app (K i) ≫ ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex (ComplexShape.up ℤ)).map (φ f) ≫ φ g) ∧ (∀ (i j : I) (f : j ⟶ i), G.map f.op = (eG i).hom ≫ (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f) (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (K i) ≫ ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv)",
@@ -131,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "X-dcce6",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T120803-L-3470660",
+  "landing": "20261013T143543-L-559896",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, node statements, change record, report, and downstream importer matched the review brief; all delivered modules and the direct importer compile successfully."
  }
 }

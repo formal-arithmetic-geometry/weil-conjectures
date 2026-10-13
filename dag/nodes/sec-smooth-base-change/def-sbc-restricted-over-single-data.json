@@ -1,0 +1,114 @@
+{
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, lemma-relative-colimit, affine-object restriction; Tag 0EZM, lemma-colimit-variant-complexes, fixed-coefficient comparisons"
+ },
+ "id": "def-sbc-restricted-over-single-data",
+ "kind": "definition",
+ "title": "Explicit restricted fixed-coefficient single-complex data",
+ "statement": "For schemes W,S, k:W→S, a fixed abelian sheaf F on W and an etale object U over S, construct the pullback diagram and cone for a diagram in Over W, the degree-zero single complex on each double inverse image of F, its canonical triangle isomorphism from the three inverse-image composition comparisons, and the constant apex complex with the inverse leg isomorphisms. All six constructions are explicit and contain no postponed data.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit pullback construction and its projection identities to define the diagram and cone. Form the single complexes of iterated inverse images. Compose the inverse-image comparison isomorphisms and the natural single comparison; the map is invertible since it is a composite of isomorphisms. Define the constant apex diagram and take inverse leg isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and library inverse-image coherence",
+  "place": "09Z1 affine-object restriction and 0EZM coefficient transition compatibility; explicit unit/associativity calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Identity and composition coherence of inverse image of a fixed sheaf on schemes and single cochain complexes",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent inverse image transition maps of a fixed sheaf restricted to fibre products, identity and composition",
+   "date": "2026-10-13",
+   "results": "Eight sheaf pullback and restriction hits; none states these fixed-coefficient single-complex comparisons. Loogle mapCochainComplexSingleFunctor supplies only the single comparison.",
+   "verdict": "no full match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexSingleFunctor|upperStarComp_assoc|restrictedOverSingle",
+   "date": "2026-10-13",
+   "results": "Mathlib singleFunctor comparison; local upperStar unit/associativity lemmas; RestrictedAffineSingleTransitionLaws only applies to preorders. No general-category fixed-coefficient theorem.",
+   "verdict": "no full match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedOverSingleCoherence",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Fixed-coefficient restricted complexes in the affine-object reduction, Tag 09Z1",
+   "via": [
+    "lem-sbc-restricted-over-single-coherence",
+    "lem-sbc-restricted-over-abelian-complex-data",
+    "lem-sbc-higher-image-raw-complex-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedOverSingleData",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedOverSingleData.lean",
+  "declaration": "AlgebraicGeometry.Etale.restrictedOverDiagram",
+  "declarations": [
+   "AlgebraicGeometry.Etale.restrictedOverDiagram",
+   "AlgebraicGeometry.Etale.restrictedOverCone",
+   "AlgebraicGeometry.Etale.restrictedOverSingle",
+   "AlgebraicGeometry.Etale.restrictedOverSingleIso",
+   "AlgebraicGeometry.Etale.restrictedOverSingleG",
+   "AlgebraicGeometry.Etale.restrictedOverSingleConeIso"
+  ],
+  "statement": "def restrictedOverDiagram {W S : Scheme.{u}} (k : W ⟶ S) {I : Type u} [Category.{u} I] (D : I ⥤ Over W) (U : S.Etale) : I ⥤ Scheme.{u}",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-dcce6",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T143543-L-559896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-dcce6",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T143543-L-559896",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node statements, change record, report, and downstream importer matched the review brief; all delivered modules and the direct importer compile successfully."
+ }
+}

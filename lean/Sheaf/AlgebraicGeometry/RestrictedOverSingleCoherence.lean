@@ -6,6 +6,9 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+public import Sheaf.AlgebraicGeometry.RestrictedOverSingleData
+import Sheaf.AlgebraicGeometry.RestrictedOverSingleUnit
+import Sheaf.AlgebraicGeometry.RestrictedOverSingleComposition
 
 /-! # Coherence of restricted fixed-coefficient single complexes
 
@@ -20,106 +23,69 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- Actual fibre products and their canonical transition arrows.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-over-single-coherence). -/
-@[implicit_reducible]
-noncomputable def restrictedOverDiagram {W S : Scheme.{u}} (k : W ⟶ S)
-    {I : Type u} [Category.{u} I] (D : I ⥤ Over W) (U : S.Etale) :
-    I ⥤ Scheme.{u} where
-  obj i := pullback U.hom ((D.obj i).hom ≫ k)
-  map f := rawAffineRestrictedMap (D.map f).left ((D.obj _).hom ≫ k)
-    ((D.obj _).hom ≫ k) (by rw [← Category.assoc, Over.w]) U
-  map_id i := by
-    apply pullback.hom_ext <;> simp [rawAffineRestrictedMap]
-  map_comp f g := by
-    apply pullback.hom_ext <;> simp [rawAffineRestrictedMap, Category.assoc]
+private theorem iso_cancel_triangle {C : Type*} [Category C] {X Y Z T : C}
+    (e : Y ≅ X) (a : Y ⟶ Z) (b : Z ⟶ T) (d : T ⟶ X)
+    (h : e.hom = a ≫ b ≫ d) : 𝟙 X = e.inv ≫ a ≫ b ≫ d := by
+  calc
+    𝟙 X = e.inv ≫ e.hom := e.inv_hom_id.symm
+    _ = e.inv ≫ a ≫ b ≫ d := by rw [h]
 
-/-- The fibre-product cone, constructed without choosing a limit witness.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-over-single-coherence). -/
-@[implicit_reducible]
-noncomputable def restrictedOverCone {W S : Scheme.{u}} (k : W ⟶ S)
-    {I : Type u} [Category.{u} I] (D : I ⥤ Over W) (c : Cone D) (U : S.Etale) :
-    Cone (restrictedOverDiagram k D U) where
-  pt := pullback U.hom (c.pt.hom ≫ k)
-  π :=
-    { app := fun i ↦ rawAffineRestrictedMap (c.π.app i).left ((D.obj i).hom ≫ k)
-        (c.pt.hom ≫ k) (by rw [← Category.assoc, Over.w]; rfl) U
-      naturality := by
-        intro i j f
-        apply pullback.hom_ext <;>
-          simp [restrictedOverDiagram, rawAffineRestrictedMap, Category.assoc,
-            ← Over.comp_left, c.w f] }
+attribute [local irreducible] upperStar upperStarComp upperStarId
+  rawAffineRestrictedMap restrictedOverSingle restrictedOverSingleIso
 
-/-- A fixed sheaf restricted to an actual fibre product, placed in degree zero.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-over-single-coherence). -/
-@[implicit_reducible]
-noncomputable def restrictedOverSingle {W S : Scheme.{u}} (k : W ⟶ S)
-    (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (A : Over W) (U : S.Etale) :=
-  (CochainComplex.singleFunctor _ 0).obj
-    ((upperStar AddCommGrpCat.{u + 1} (pullback.snd U.hom (A.hom ≫ k))).obj
-      ((upperStar AddCommGrpCat.{u + 1} A.hom).obj F))
-
-/-- The explicit isomorphism for a triangle, including the single-functor comparison.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-over-single-coherence). -/
-noncomputable def restrictedOverSingleIso {W S : Scheme.{u}} (k : W ⟶ S)
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency true in
+private theorem restrictedOverSingle_canonical_coherence
+    {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1})
-    {A B : Over W} (f : A ⟶ B) (U : S.Etale) :
-    ((upperStar AddCommGrpCat.{u + 1}
-      (rawAffineRestrictedMap f.left (B.hom ≫ k) (A.hom ≫ k)
-        (by rw [← Category.assoc, Over.w]) U)).mapHomologicalComplex
-          (ComplexShape.up ℤ)).obj (restrictedOverSingle k F B U) ≅
-      restrictedOverSingle k F A U := by
-  let w : f.left ≫ (B.hom ≫ k) = A.hom ≫ k := by rw [← Category.assoc, Over.w]
-  let a := rawAffineRestrictedMap f.left (B.hom ≫ k) (A.hom ≫ k) w U
-  let r := pullback.snd U.hom (B.hom ≫ k)
-  let r' := pullback.snd U.hom (A.hom ≫ k)
-  let R := (upperStar AddCommGrpCat.{u + 1} B.hom).obj F
-  have hw : r' ≫ f.left = a ≫ r := by simp [a, r, r', rawAffineRestrictedMap]
-  let e := ((upperStar AddCommGrpCat.{u + 1} a).mapCochainComplexSingleFunctor 0).app
-    ((upperStar AddCommGrpCat.{u + 1} r).obj R) ≪≫
-    (CochainComplex.singleFunctor _ 0).mapIso
-      (((upperStarComp AddCommGrpCat.{u + 1} a r).app R).symm ≪≫
-        (upperStarComp AddCommGrpCat.{u + 1} r' f.left (a ≫ r) hw.symm).app R ≪≫
-        (upperStar AddCommGrpCat.{u + 1} r').mapIso
-          (((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom
-            (Over.w f).symm).app F).symm))
-  -- Expose the canonical hom directly, avoiding repeated normalization of mapIso.
-  -- Its inverse is uniquely determined by the proved IsIso instance.
-  let h := ((upperStar AddCommGrpCat.{u + 1} a).mapCochainComplexSingleFunctor 0).hom.app
-    ((upperStar AddCommGrpCat.{u + 1} r).obj R) ≫
-    (CochainComplex.singleFunctor _ 0).map
-      (rawAffineRestrictedCoefficient f.left (B.hom ≫ k) (A.hom ≫ k) w
-        R ((upperStar AddCommGrpCat.{u + 1} A.hom).obj F)
-        ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom
-          (Over.w f).symm).inv.app F) U)
-  have : IsIso h := by
-    change IsIso e.hom
-    infer_instance
-  exact asIso h
+    {I : Type u} [Category.{u} I] (D₀ : I ⥤ Over W) (c₀ : Cone D₀) (U : S.Etale) :
+    let D := restrictedOverDiagram k D₀ U
+    let c := restrictedOverCone k D₀ c₀ U
+    let K := fun i : I ↦ restrictedOverSingle k F (D₀.obj i) U
+    let φ := fun {i j : I} (f : j ⟶ i) ↦
+      (restrictedOverSingleIso k F (D₀.map f) U).hom
+    let G := restrictedOverSingleG k F D₀ c₀ U
+    let eG := restrictedOverSingleConeIso k F D₀ c₀ U
+    (∀ i : I, φ (𝟙 i) =
+      (NatIso.mapHomologicalComplex
+        (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i)))
+        (ComplexShape.up ℤ)).hom.app (K i) ≫
+      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i))
+        (ComplexShape.up ℤ)).hom.app (K i)) ∧
+    (∀ (i j l : I) (f : j ⟶ i) (g : l ⟶ j), φ (g ≫ f) =
+      (NatIso.mapHomologicalComplex
+        (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f)
+          (D.map (g ≫ f)) (D.map_comp g f)) (ComplexShape.up ℤ)).hom.app (K i) ≫
+      ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex
+        (ComplexShape.up ℤ)).map (φ f) ≫ φ g) ∧
+    (∀ (i j : I) (f : j ⟶ i),
+      G.map f.op =
+      (eG i).hom ≫
+        (NatIso.mapHomologicalComplex
+          (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)
+            (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (K i) ≫
+        ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex
+          (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv) := by
+  dsimp only
+  refine ⟨?_, ?_, ?_⟩
+  · intro i
+    exact restrictedOverSingle_unit k F D₀ U i
+  · intro i j l f g
+    exact restrictedOverSingle_composition k F (D₀.map f) (D₀.map g)
+      (D₀.map (g ≫ f)) (D₀.map_comp g f) U
+      ((restrictedOverDiagram k D₀ U).map_comp g f)
+  · intro i j f
+    dsimp only [restrictedOverSingleG, restrictedOverSingleConeIso,
+      restrictedOverCone, restrictedOverDiagram, Functor.const_obj_map, Functor.const_obj_obj,
+      Iso.symm_hom, Iso.symm_inv]
+    have h := restrictedOverSingle_composition k F
+      (A := D₀.obj i) (B := D₀.obj j) (C := c₀.pt) (D₀.map f) (c₀.π.app j)
+      (c₀.π.app i) (c₀.w f).symm U ((restrictedOverCone k D₀ c₀ U).w f).symm
+    exact iso_cancel_triangle (restrictedOverSingleIso k F
+      (A := c₀.pt) (B := D₀.obj i) (c₀.π.app i) U) _ _ _ h
 
-/-- The constant complex on the limiting fibre product.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-over-single-coherence). -/
-@[implicit_reducible]
-noncomputable def restrictedOverSingleG {W S : Scheme.{u}} (k : W ⟶ S)
-    (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1})
-    {I : Type u} [Category.{u} I] (D : I ⥤ Over W) (c : Cone D) (U : S.Etale) :=
-  (Functor.const Iᵒᵖ).obj (restrictedOverSingle k F c.pt U)
-
-/-- The cone comparison is the inverse of the explicitly constructed leg isomorphism.
-Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-over-single-coherence). -/
-@[implicit_reducible]
-noncomputable def restrictedOverSingleConeIso {W S : Scheme.{u}} (k : W ⟶ S)
-    (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1})
-    {I : Type u} [Category.{u} I] (D : I ⥤ Over W) (c : Cone D) (U : S.Etale)
-    (i : I) :=
-  (restrictedOverSingleIso k F (c.π.app i) U).symm
-
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency true in
 /-- Identity, composition, and constant-diagram coherence of the explicit single complexes.
 Source: Stacks Project, Tag 09Z1, affine-object restriction in lemma-relative-colimit;
 Tag 0EZM, fixed-coefficient complexes in lemma-colimit-variant-complexes.
@@ -181,6 +147,13 @@ theorem restrictedOverSingle_coherence {W S : Scheme.{u}} (k : W ⟶ S)
           (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)
             (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (K i) ≫
         ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex
-          (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv) := by sorry
+          (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv) := by
+  subst D
+  cases eq_of_heq _hc
+  cases eq_of_heq _hK
+  cases eq_of_heq _hφ
+  cases eq_of_heq _hG
+  cases eq_of_heq _heG
+  exact restrictedOverSingle_canonical_coherence k F D₀ c₀ U
 
 end AlgebraicGeometry.Etale
