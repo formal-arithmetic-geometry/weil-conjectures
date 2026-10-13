@@ -26,51 +26,28 @@
  ],
  "proof": [
   {
-   "text": "Choose a basis of the separable closure K of the residue field A/n over A/n, and choose lifts X in A^{\\mathrm{sh}}. By [lem-sc-strict-henselization-faithfully-flat] the map A\\to A^{\\mathrm{sh}} is flat, while [lem-weil-pbc-strict-henselization-triples] identifies the maximal ideal of A^{\\mathrm{sh}} with nA^{\\mathrm{sh}} and its residue field with K. For each r\\ge1 we have (nA^{\\mathrm{sh}})^r=n^rA^{\\mathrm{sh}}, so A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r=A^{\\mathrm{sh}}\\otimes_A A/n^r is a flat A/n^r-module, as a base change of a flat module (Algebra, Tag 00HI). The ring A/n^r is local with nilpotent maximal ideal n/n^r, and the reduction of A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r modulo n/n^r is A^{\\mathrm{sh}}/nA^{\\mathrm{sh}}=K, an A/n-vector space with basis the images of X. Thus the hypotheses of [lem-weil-pbc-local-artinian-basis-when-flat], condition (1), hold for R=A/n^r, M=A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r and the images of X.",
+   "text": "Obtain X, fixed lifts x, positive-power quotient equivalences e and their standard-generator formula from the quotient-bases theorem. This is only the quotient part of the original argument.",
    "uses": [
-    "lem-sc-strict-henselization-faithfully-flat",
-    "lem-weil-pbc-strict-henselization-triples",
-    "lem-weil-pbc-local-artinian-basis-when-flat"
+    "lem-sc-strict-henselization-quotient-bases"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (4), using Algebra Tag 051F"
-   }
+   "elementary": false
   },
   {
-   "text": "Applying [lem-weil-pbc-local-artinian-basis-when-flat] at each r gives that A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r is free over A/n^r on the images of X. This is exactly the quotient assertion, including the same set X for every r because the chosen lifts are fixed in A^{\\mathrm{sh}}.",
+   "text": "Apply the generic fixed-quotient-bases completion comparison to A, C, the maximal ideal n, X, x, e and the standard-generator formula. It constructs the inverse-limit equivalence and proves the specified evaluation formula. Package X, x, e and the two conclusions into the existential statement.",
    "uses": [
-    "lem-weil-pbc-local-artinian-basis-when-flat"
+    "lem-sc-fixed-quotient-bases-completion"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (4)"
-   }
-  },
-  {
-   "text": "Let F=\\bigoplus_{x\\in X}A. The basis isomorphisms F/n^rF \\cong A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r commute with the reduction maps because every basis vector is sent to the fixed image of x. Taking inverse limits therefore identifies the n-adic completion of F, namely \\varprojlim_r F/n^rF, with T=\\varprojlim_r A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r. Hence T is the n-adic completion of F. Finally, since nA^{\\mathrm{sh}} is an ideal of A^{\\mathrm{sh}}, the ring T=\\varprojlim_r A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r is by [def-weil-pbc-adic-completion] (with ideal nA^{\\mathrm{sh}}) the n-adic ring completion of A^{\\mathrm{sh}}; the identification above is one of A-modules.",
-   "uses": [
-    "def-weil-pbc-adic-completion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-strict-henselization-faithfully-flat",
-  "lem-weil-pbc-strict-henselization-triples",
-  "lem-weil-pbc-local-artinian-basis-when-flat",
-  "def-weil-pbc-adic-completion"
+  "lem-sc-strict-henselization-quotient-bases",
+  "lem-sc-fixed-quotient-bases-completion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (4), and Lemma Tag 06LJ(c) completion identification"
+  "place": "Tags 07QM(4) and 06LJ(c), with the completion comparison formalized by J1 on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -166,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T153500-L-1085283",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

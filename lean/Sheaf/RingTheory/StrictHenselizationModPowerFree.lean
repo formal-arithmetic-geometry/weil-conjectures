@@ -9,9 +9,8 @@ public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.Finsupp.Defs
-import Sheaf.RingTheory.BasisIffBasisQuotientOfNilpotent
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
-import Sheaf.RingTheory.StrictHenselizationTriples
+import Sheaf.RingTheory.StrictHenselizationQuotientBases
+import Sheaf.RingTheory.FixedQuotientBasesCompletion
 
 /-!
 # Fixed bases for strict henselization quotients and their completed comparison
@@ -40,18 +39,14 @@ The target of that comparison is the ring completion itself, using `AdicCompleti
 ideal `nC`. The source is the displayed inverse limit of the quotients of `X →₀ A`.
 
 Proof:
-1. Choose a basis of the separable residue-field closure over the residue field of `A`
-and lift its vectors to `C`. Strict henselization is faithfully flat
-(lem-sc-strict-henselization-faithfully-flat), and its maximal ideal and residue field are
-`nC` and the chosen closure (lem-weil-pbc-strict-henselization-triples).
-2. For every positive `r`, `(nC)^r = n^r C`. The quotient is flat over `A/n^r` by flat
-base change (Stacks Tag 00HI). This base ring has nilpotent maximal ideal, and the chosen
-lifts reduce to a residue-field basis. Apply lem-weil-pbc-local-artinian-basis-when-flat
-(Stacks Tag 051F) to obtain the quotient basis on the same lifts for every `r`.
-3. Sending each free generator to its fixed lift gives quotient isomorphisms commuting
-with reduction. Their inverse limit is the indicated linear equivalence of completions.
-The positive powers are cofinal in all natural powers, so the zero coordinate adds no data.
-By def-weil-pbc-adic-completion, the target inverse limit is the ring completion at `nC`.
+1. Obtain the fixed lifts and quotient equivalences from
+Algebra.strictHenselization_quotient_bases, the quotient part of Tag 07QM(4).
+2. Apply AdicCompletion.equiv_of_fixed_quotient_bases to these equivalences. It identifies
+free-module quotients by coefficient reduction, proves transition compatibility from the
+fixed-generator formula, and constructs mutually inverse coordinatewise linear maps on
+compatible families. Its evaluation formula is precisely the required final clause.
+3. Package the fixed lifts, quotient equivalences, generator formula and completed
+comparison into the displayed existential statement.
 -/
 theorem strictHenselization_mod_power_free
     (A K C : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [Field K]
@@ -77,6 +72,9 @@ theorem strictHenselization_mod_power_free
               (E z) =
             e r hr (f.mapRange (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ r))
               (map_zero (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ r)))) := by
-  sorry
+  obtain ⟨X, x, e, he⟩ := strictHenselization_quotient_bases A K C hC
+  refine ⟨X, x, e, he, ?_⟩
+  exact AdicCompletion.equiv_of_fixed_quotient_bases
+    (IsLocalRing.maximalIdeal A) X x e he
 
 end Algebra

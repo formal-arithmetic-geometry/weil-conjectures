@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-fixed-quotient-bases-completion",
+ "kind": "statement",
+ "title": "Completion comparison from fixed quotient bases",
+ "statement": "Let A and C be commutative rings, with C an A-algebra, I an ideal of A, J=IC its extension, X a set and x:X to C a family. For every r at least 1 suppose an A-linear isomorphism e_r from the finitely supported functions X to A/I^r onto C/J^r is given and sends the standard generator i to the image of x_i. Write F for the finitely supported functions X to A. Then there exists an A-linear isomorphism E from the I-adic module completion of F to the J-adic ring completion of C [def-weil-pbc-adic-completion]. For every r at least 1, z in the former completion, and f in F whose image modulo I^r F is the r-th coordinate of z, the r-th coordinate of E(z) is e_r applied to the componentwise reduction of f modulo I^r.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06LJ (lemma-henselization-noetherian), proof of (c), completion of the free module supplied by Tag 07QM(4)"
+ },
+ "proof": [
+  {
+   "text": "The linear coefficient-reduction map F to the finitely supported functions X to A/I^r is surjective by lifting its finitely many coefficients. Its kernel is I^r F: the forward containment follows by writing a function with all coefficients in I^r as a sum of those coefficients times standard generators, and the reverse containment follows by induction on the ideal action. The first isomorphism theorem gives the coefficient quotient equivalence.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose coefficient quotient equivalences with e_r and the identification of the ring ideal quotient with the module quotient used by AdicCompletion. For r=0 use the unique isomorphism between zero modules. On representatives all the composite maps send f to the quotient class of the same linear combination of the x_i, as follows by linear-map extensionality on standard generators. Thus all transition squares commute.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The completion is the module of compatible quotient families. Apply the quotient equivalences coordinatewise, and their inverses coordinatewise for the inverse map. Injectivity of each forward map transfers compatibility to the inverse. Both inverse identities and linearity hold coordinatewise. The quotient calculation on representatives gives the evaluation formula.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06LJ (lemma-henselization-noetherian), proof of (c), completion of the free module supplied by Tag 07QM(4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible family of quotient linear equivalences induces a linear equivalence of adic completions",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible quotient bases give linear equivalence of adic completions",
+   "results": "AdicCompletion.congr requires an equivalence of the original modules; it does not supply the quotientwise comparison needed here.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientsEquiv|equiv_of_fixed_quotient_bases",
+   "results": "No matches in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StrictHenselizationModPowerFree",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "boundary-stalk completion flatness argument: Completion comparison from fixed quotient bases",
+   "via": [
+    "lem-sc-strict-henselization-completion-flat-over-base",
+    "lem-sc-strict-henselization-mod-power-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FixedQuotientBasesCompletion",
+  "file": "lean/Sheaf/RingTheory/FixedQuotientBasesCompletion.lean",
+  "declaration": "AdicCompletion.equiv_of_fixed_quotient_bases",
+  "statement": "theorem equiv_of_fixed_quotient_bases\n    {A : Type u} {C : Type w} [CommRing A] [CommRing C] [Algebra A C]\n    (I : Ideal A) (X : Type v) (x : X → C)\n    (e : ∀ (r : ℕ), 1 ≤ r → (X →₀ A ⧸ I ^ r) ≃ₗ[A]\n      C ⧸ (I.map (algebraMap A C)) ^ r)\n    (he : ∀ (r : ℕ) (hr : 1 ≤ r) (i : X),\n      e r hr (Finsupp.single i 1) =\n        Ideal.Quotient.mk ((I.map (algebraMap A C)) ^ r) (x i)) :\n    ∃ E : AdicCompletion I (X →₀ A) ≃ₗ[A]\n        AdicCompletion (I.map (algebraMap A C)) C,\n      ∀ (r : ℕ) (hr : 1 ≤ r) (z : AdicCompletion I (X →₀ A)) (f : X →₀ A),\n        AdicCompletion.eval I (X →₀ A) r z =\n          (I ^ r • (⊤ : Submodule A (X →₀ A))).mkQ f →\n        AdicCompletion.evalₐ (I.map (algebraMap A C)) r (E z) =\n          e r hr (f.mapRange (Ideal.Quotient.mk (I ^ r))\n            (map_zero (Ideal.Quotient.mk (I ^ r))))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T153500-L-1085283",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T153500-L-1085283",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
