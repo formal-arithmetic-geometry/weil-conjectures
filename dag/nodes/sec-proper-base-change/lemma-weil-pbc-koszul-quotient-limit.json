@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lemma-weil-pbc-koszul-quotient-limit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Koszul and quotient towers have the same limit",
- "statement": "There is a functorial isomorphism\n\n$$\nc_K:K^{\\wedge,\\mathrm{Kos}}\\xrightarrow{\\sim}\nR\\varprojlim_nK_n\n$$\n\nsuch that $c_K\\kappa_K=\\operatorname{comp}_K$.",
+ "statement": "Let $X,\\Lambda,I=(f_1,\\ldots,f_r)$ and $K\\in D(X_{\\mathrm{proet}},\\Lambda)$ satisfy [def-weil-pbc-complete-coefficient-datum]. Put $P_m=\\Lambda/I^m$, and use $Q_m$ and its transitions from [def-weil-pbc-intrinsic-koszul-completion]. For this assertion, both derived inverse limits are computed by the total right derived inverse-limit functor on strict towers of $\\Lambda_X$-module complexes [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; its product-cone triangle gives a choice of the adic derived inverse limit [def-weil-pbc-adic-derived-inverse-limit]. Compute the two towers with one K-flat representative of $K$ [def-weil-derived-tensor]. Define $\\kappa_K$ and $\\operatorname{comp}_K$ [def-weil-pbc-completion-map] using the strict compatible maps induced respectively by $\\Lambda\\to Q_m$ (the degree-zero inclusion) and $\\Lambda\\to P_m$. There is a natural isomorphism\n$$c_K:K^{\\wedge,\\mathrm{Kos}}\\xrightarrow{\\sim}R\\varprojlim_m K_m$$\ninduced by the strict quotient augmentations $Q_m\\to P_m$, and it satisfies $c_K\\circ\\kappa_K=\\operatorname{comp}_K$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-koszul-quotient-limit.md",
   "place": "node lemma-weil-pbc-koszul-quotient-limit, order 1259"
@@ -16,29 +16,133 @@
   "def-weil-pbc-adic-derived-inverse-limit",
   "def-weil-pbc-complete-coefficient-datum",
   "def-weil-pbc-completion-map",
-  "def-weil-pbc-intrinsic-koszul-completion"
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "def-weil-derived-tensor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
  "proof": [
   {
-   "text": "Put $J_m=(f_1^m,\\ldots,f_r^m)$. The augmentation\n$Q_m\\to\\Lambda/J_m$ has cone $\\tau_{<0}Q_m$. For $p<0$ the modules\n$H^p(Q_m)$ are finite and killed by $J_m$. The transition in degree $p$\nhas entries in $(f_1^{b-a},\\ldots,f_r^{b-a})$ from level $b$ to level $a$.\nArtin–Rees, applied to the cycles inside the finite free term $Q_a^p$,\ntherefore makes $H^p(Q_b)\\to H^p(Q_a)$ zero for $b\\gg a$. Hence\n$(\\tau_{<0}Q_m)_m$ is pro-zero and\n$(Q_m)_m\\to(\\Lambda/J_m)_m$ is a pro-isomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "Set $A=\\Lambda$ and $a_j=f_j$ in [lem-weil-pbc-noetherian-koszul-augmentation-pro-zero]. Its augmentation is $\\epsilon_m:Q_m\\to\\Lambda/I^m[0]=P_m[0]$, not the augmentation to $\\Lambda/J_m$. It exists because $f_j^m\\in I^m$, so the degree-zero quotient kills every differential into degree zero. The transition squares commute because every degree-zero Koszul transition is the identity and $P_{m+1}\\to P_m$ is the quotient. The cited statement therefore gives, for each $m$, some $k\\ge m$ with $C_k\\to C_m$ zero in $D(\\Lambda)$, where $C_m=\\operatorname{Cone}(\\epsilon_m)$. No assertion about the proof of that node is used.",
+   "uses": [
+    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0921 (lemma-sequence-Koszul-complexes), 0922 (proposition-noetherian-naive-completion-is-completion); the existing node includes the cofinal-power comparison"
+   }
   },
   {
-   "text": "The inclusions\n\n$$\nI^{r(m-1)+1}\\subseteq J_m\\subseteq I^m\n$$\n\nshow that $(\\Lambda/J_m)_m$ and $(P_n)_n$ are cofinal pro-systems. Tensor\nthe comparison maps with $K$ and apply the product-cone limit. Pro-zero\ncones have zero product-cone limit after a cofinal reindexing, so the result\nis $c_K$. Both units are induced by the same augmentations\n$\\Lambda\\to Q_m\\to\\Lambda/J_m\\to P_n$; this proves the triangle equation.",
-   "uses": [],
-   "elementary": null
+   "text": "The constant-presheaf functor on $X_{\\mathrm{proet}}$ preserves kernels and cokernels sectionwise. By [lem-weil-pbc-sheafification-exact] and [lem-pc-sites-module-sheafification-interface], its module sheafification is an exact additive functor $M\\mapsto M_X$ from $\\Lambda$-modules to $\\Lambda_X$-modules. Termwise it consequently preserves quasi-isomorphisms, shifts and cones (the cone differential is the block matrix of the original differentials and map), so it induces a functor on derived categories that sends zero morphisms to zero morphisms. Apply it to $C_k\\to C_m$: the strict sheafified cone tower $(C_m)_X$ has zero transitions at the same indices.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ (sites-lemma-sheafification-exact), Tag 03CO (sites-modules-lemma-limits-colimits-abelian-sheaves), and Tag 03CY (sites-modules-lemma-sheafification-presheaf-modules)"
+   }
+  },
+  {
+   "text": "Choose one K-flat resolution $F\\to K$ with flat terms by [lem-pc-kflat-resolution], and compute derived tensor using [def-weil-derived-tensor]. Ordinary total tensor with $F$ gives a strict map $v_m:F\\otimes_{\\Lambda_X}(Q_m)_X\\to F\\otimes_{\\Lambda_X}(P_m)_X$ and its transition squares. Its cone identifies with $F\\otimes_{\\Lambda_X}(C_m)_X$: tensor distributes over the two cone summands, and the identification of the shifted source summand uses the sign $(-1)^p$ on a tensor with an element in degree $p$ of $F$. Since $F$ is K-flat, tensoring sends an acyclic cone to an acyclic complex; it thus sends quasi-isomorphisms to quasi-isomorphisms and induces an additive functor on the derived category, sending the zero transitions from step 2 to zero. The cone tower of $v$ is therefore pro-zero in $D(X_{\\mathrm{proet}},\\Lambda)$. These are strict models for the two derived-tensor towers, with no flatness assumption on $K$ or the quotient modules.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution) and Tag 06YU (definition-derived-tor); tensor-cone identity written explicitly"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to $v$ on the ringed site $(X_{\\mathrm{proet}},\\Lambda_X)$. Step 3 verifies exactly its zero-cone-transition hypothesis, hence $c_K=R\\lim(v)$ is an isomorphism. For each quotient, specialize [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity morphism of the pro-etale topos and the ring map $\\Lambda_X\\to(P_m)_X$. Its total left derived module-pullback functor is the quotient derived tensor, computed on K-flat resolutions with flat terms. The quotient maps define natural transformations of the ordinary tensor functors by $1\\otimes(P_b\\to P_a)$; their squares with maps of resolutions commute before localization and hence after taking the left derived functors. For the Koszul tower, each $(Q_m)_X$ is a bounded finite free complex; filter it by degrees, so the graded tensor complexes are finite sums of shifts of the input complex. Tensoring a quasi-isomorphism with $(Q_m)_X$ is therefore a quasi-isomorphism, by induction on this finite filtration. A map between K-flat representatives commutes with $1_F\\otimes\\epsilon_m$ and with all transitions. These squares consequently descend to the derived categories, independently of the representatives, and applying the strict-tower derived-limit functor proves naturality in $K$. At each level the composite $\\Lambda\\to Q_m\\xrightarrow{\\epsilon_m}P_m$ is the quotient $\\Lambda\\to P_m$: on degree zero it sends $a$ to its residue class, and the source has no other degrees. Thus the two strict maps from the constant tower $F$ satisfy $v\\circ u_{\\mathrm{Kos}}=u_{\\mathrm{quot}}$. Apply the functor $R\\lim$ and precompose with the canonical map $K\\to R\\lim(\\operatorname{const}K)$ used in the strict-tower units. Functoriality gives $c_K\\circ\\kappa_K=\\operatorname{comp}_K$. This uses no choice of fillers between unrelated product-cone triangles.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), with the strict derived functor in section-derived-limits"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-kflat-resolution",
+  "def-weil-derived-tensor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-koszul-quotient-limit.md",
-  "place": "## Proof"
+  "place": "Proof, both paragraphs: direct I-power augmentation, strict sheafified tensor towers, functorial derived limit and equality of units"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees makes Koszul homology transition maps eventually zero pro-zero",
+   "results": "AdicCompletion.map_exact; IsHausdorff.haus; localCohomology.isoSelfLERadical; Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge; no exact Koszul pro-zero theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match: adic completion and filtration results do not state the Koszul cone tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "ArtinRees, Koszul, pro-zero",
+   "results": "0 hits; unknown identifier ArtinRees",
+   "date": "2026-10-14",
+   "verdict": "no match: no such Mathlib declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "Artin.?Rees|pro.?zero|Koszul in Mathlib/CategoryTheory",
+   "results": "Zero-object product declarations only; no Artin--Rees, pro-zero, or Koszul quotient-limit theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cofinal quotient ideal powers derived inverse limit product cone",
+   "results": "InverseSystem.piLTLim, InverseSystem.piEquivLim and related inverse-system equivalences; no derived product-cone comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsCofiltered, cofinal",
+   "results": "0 hits; unknown identifier CategoryTheory.Limits.IsCofiltered",
+   "date": "2026-10-14",
+   "verdict": "invalid query: no evidence of a match"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|inverse limit|product.*cone in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cofinal inverse systems quotient powers product cone limit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|homotopyLimit|homotopy_limit",
+   "results": "3 hits: covariant derivatives called Koszul connections; RegularSequence TODO on Koszul regularity; LocalCohomology introductory mention of Koszul homology. No quotient-tower derived-limit declaration.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +173,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-koszul-quotient-limit",
+  "worker": "stage1",
+  "summary": "Second reading repaired the quotient-augmentation citation, removed inapplicable directed-cofinality, supplied sheafification and K-flat tensor arguments, and made strict-tower functoriality explicit. No new nodes.",
+  "blueprint": "Proof paragraph 1: step 1 uses the existing direct I-power cone statement, which includes the cofinal-power part of paragraph 2. Steps 2 and 3 carry out the constant-sheaf and derived-tensor passage in paragraph 2. Step 4 realizes its limit comparison and unit equation."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-e8334c984",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-e8334c984 (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, cited nodes, blueprint, and Stacks sources (Tags 0921, 0922, 00WJ, 03CO, 03CY, 06YS, 0940, 0941, 07A4, 0G7E). Verified hypotheses, strict Λ_X coefficient category, augmentation-induced map, K-flat tensor/cone argument, derived-limit functoriality, unit equation, edge cases, searches, and duplicate candidates. Accepted the three off-unit generic tool uses documented in review.md; no repair is needed."
+ }
 }
