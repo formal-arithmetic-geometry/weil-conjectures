@@ -12,20 +12,35 @@
  },
  "proof": [
   {
-   "text": "Proof: identify every degree n section with a family of localized maps using\nthe sectionwise product cone of `homComplex_exists`. Under this identification,\nthe differential from degree -1 to degree 0 sends h to d_I h + h d_L.\nThe assumed component formula identifies e with the degree-zero chain-map\nconstruction. Consequently, for cycles z and z', their images under e are\nhomotopic if and only if their difference is a boundary: a degree -1 section\nyields a homotopy by its components, and the components of any homotopy assemble\ninto such a section by the same product universal property. The formula for e\nalso makes it additive, since all projections and the cycle inclusion are linear\nand chain maps are determined by their components. The homology projection in\nabelian groups is surjective, with kernel the boundaries. The quotient functor\nto the homotopy category is full and identifies exactly homotopic chain maps.\nDefine a on a homology class represented by z to be q.map (e z). The established\nboundary criterion makes this well defined and injective. Fullness of q and\nsurjectivity of e make it surjective. Take the equivalence associated to this\nbijection; its defining formula is the asserted compatibility on representatives.\nFor zero complexes both quotients are singletons; with zero differential there\nare no nonzero boundaries, as the same criterion requires.",
+   "text": "The assumed projection formula implies additivity of e: compare chain-map components, then compare the underlying presheaf maps at each W. Cycle inclusion and each evaluated projection preserve addition. Package e as an additive map.",
    "uses": [
     "def-pur-hom-complex"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use the localized null-homotopy criterion and Mathlib quotient_map_eq_zero_iff to identify the kernel of q.map composed with e with the range of toCycles from degree -1. Independently, homologyIsCokernel and exactness of cokernels in abelian groups identify the kernel of homologyπ with that same range.",
+   "uses": [
+    "lem-pur-localized-hom-complex-boundaries"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the two kernel criteria to z-z′. Additivity of e, q and homologyπ shows homologyπ(z)=homologyπ(z′) if and only if q(e(z))=q(e(z′)). Homologyπ is surjective because it is an epimorphism of abelian groups. Define the descended function using a representative of each class; the fiber criterion proves its representative formula and injectivity. Fullness of q and surjectivity of e prove surjectivity. Equiv.ofBijective supplies the required equivalence.",
+   "uses": [
+    "lem-pur-localized-hom-complex-boundaries"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex"
+  "def-pur-hom-complex",
+  "lem-pur-localized-hom-complex-boundaries"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero), verified online; second-reader decomposition of the two original proof steps"
+  "place": "Degree-zero Equation 0A8Y; X2 formalized additivity and quotient descent and isolated the degree -1 boundary criterion."
  },
  "mathlib_searches": [
   {
@@ -107,13 +122,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-4cc3b",
-  "group": "P3",
+  "reviewer": "COMPILER",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T135301-L-1684750",
+  "landing": "20261013T002359-L-2377184",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with their DAG nodes and Stacks 0A8X/0A8Y; all three modules and sole direct importer RhomIntoKInjectiveLocal compile cleanly; axioms are standard plus sorryAx from the two reported auxiliary holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
