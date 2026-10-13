@@ -17,30 +17,33 @@
  ],
  "proof": [
   {
-   "text": "Use the retractions to precompose each stalk map with the projection from a finite free sheaf. Such a map is specified by finitely many target-stalk vectors. Equivalently finite-presentation internal Hom gives a germ of a local sheaf morphism. Represent these finitely many germs on neighbourhoods inside T and intersect the neighbourhoods; finiteness of I and each rank makes this a neighbourhood of x. This is the representative argument in Tag 01CP, requiring no finite-presentation condition on the targets.",
+   "text": "Choose each given rank m_q, inclusion iota_q and projection pi_q. Use the uniform finite-free open-site local lifting theorem to obtain one family e_W of natural restriction-stalk comparisons, independent of q. Apply its lifting clause to F(pi_q) followed by h_q; this supplies a neighbourhood D_q containing x and lifts on every smaller neighbourhood.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+    "lem-sc-open-stalk-free-map-local-lift"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict the chosen representatives to the intersection and precompose with the restricted source inclusions. On stalks their composite equals the prescribed map because inclusion followed by projection is the identity. The canonical restriction-stalk comparison on module sheaves, using the open-subscheme equivalence and restriction of scalars, is natural in every sheaf; its naturality converts the germ agreement to the stated conjugation identity. Empty index families and rank-zero sources use T and zero maps.",
+   "text": "Choose a Fintype structure on I. Put Z = T intersect the finite intersection of the D_q. The point x belongs to Z since it belongs to T and every D_q, and Z is contained in T and each D_q. Evaluate the local lift for q at Z and take the common comparison e_Z.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the lifted free-source morphism by R(iota_q). Applying S gives S(R(iota_q)) followed by e_free, F(pi_q), h_q and inverse e_N. Naturality of e replaces the first two factors by e_M followed by F(iota_q). Functoriality and iota_q followed by pi_q = identity cancel the two free-retraction factors, leaving e_M followed by h_q and inverse e_N. For empty I the intersection is top, hence Z=T, and the final universal statement is vacuous; zero ranks require no special case because the finite-free lifting theorem includes them.",
    "uses": [
     "def-sc-open-module-stalk-functor"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "lem-sc-open-stalk-free-map-local-lift",
   "def-sc-open-module-stalk-functor"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 01CP representative argument and finite-free retraction reduction, adapted to a finite family on the open slice site by U3."
+  "place": "Tag 01CP finite-generator lifting and the given finite-free retraction reduction; Tag 00A0 (3) for the comparison supplied by lem-sc-open-stalk-free-map-local-lift. U3 implemented the finite intersection and naturality cancellation in Lean."
  },
  "mathlib_searches": [
   {
@@ -122,8 +125,8 @@
   "reviewer": "COMPILER",
   "group": "U3",
   "result": "pass",
-  "landing": "20261013T111933-L-3067006",
-  "kind": "interface",
+  "landing": "20261013T115033-L-3327218",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
