@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-bounded-complex-tensor-proper-support-bound",
+ "kind": "statement",
+ "title": "Proper closed bound for supports of a bounded tensor",
+ "statement": "Let f:X -> S be a locally finite-type scheme morphism [def-weil-finite-type-morphism]. Let E be any object of D(O_X) [def-pc-derived-category], and let G be a bounded complex of O_X-modules whose every term has support proper over S [def-weil-pbc-closed-subset-proper-over-base]. There exists a closed subset Z of X proper over S such that for every integer i the nonzero-stalk locus of H^i(E tensor^L G) [def-pc-scheme-derived-tensor-structure] is contained in Z. This does not assert that these cohomology supports are closed. No perfection, coherence, relative flatness or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "0DJQ: support hypothesis in the application of 08EV; 01AT; 09MQ (4); 03GN"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "If [c,d] bounds G, let Z be the union of the supports of G^n for c <= n <= d. Terms outside the interval are zero, with empty support. This is a finite union of closed subsets. If c > d the entire complex is zero and the union is empty.",
+   "uses": [
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "0DJQ: support hypothesis in the application of 08EV; 01AT; 09MQ (4); 03GN"
+   }
+  },
+  {
+   "text": "Each reduced term support maps by a closed immersion into the reduced union Z. The finite disjoint union of these supports therefore maps properly and surjectively to Z. Its map to S is proper by the assumed properness of every term support. Separatedness of Z over S descends along this proper surjection (09MQ (4)), and universal closedness descends by 03GN. Local finite type follows from Z being a closed subscheme of X. These three properties make Z proper over S.",
+   "uses": [
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "lem-weil-pbc-surjective-universally-closed-separated",
+    "lem-weil-pbc-image-universally-closed",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "0DJQ: support hypothesis in the application of 08EV; 01AT; 09MQ (4); 03GN"
+   }
+  },
+  {
+   "text": "On the open complement of Z every term of G has zero stalks, hence is the zero sheaf. Therefore the restricted complex G is zero. Restriction to an open commutes with the K-flat derived tensor, and tensor with zero is zero, so E tensor^L G restricts to zero there, for arbitrary E. Exactness of open restriction shows every cohomology sheaf is zero on this complement. Its nonzero-stalk locus is consequently contained in Z, as asserted. For an empty Z the same proof gives zero cohomology everywhere.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-category",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "0DJQ: support hypothesis in the application of 08EV; 01AT; 09MQ (4); 03GN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-surjective-universally-closed-separated",
+  "lem-weil-pbc-image-universally-closed",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "0DJQ: support hypothesis in the application of 08EV; 01AT; 09MQ (4); 03GN"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a bounded complex with proper termwise supports has all cohomology supported in one proper closed subset",
+   "results": "HTTP service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with a bounded complex with proper termwise supports has all cohomology supported in one proper closed subset",
+   "results": "Generic derived t-structure and module Tor facts only; no support bound theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|HasFiniteTorDimensionOver|proper_support_bound|tensor.*coherent in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "No matches. Also searched both library roots, all DAG nodes including the imported blueprint, and Tags 0DJQ/08CI/01Y0. No duplicate of this intermediate statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NoetherianPerfectDirectImage",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian case: verify proper closed bound for supports of a bounded tensor before applying 08EV",
+   "via": [
+    "lem-pc-noetherian-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedComplexTensorProperSupportBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedComplexTensorProperSupportBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.boundedComplex_tensor_proper_support_bound",
+  "statement": "theorem boundedComplex_tensor_proper_support_bound\n    {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (E : schemeDerivedCategory X)\n    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hGb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n))\n    (hGproper : ∀ n : ℤ, Modules.HasSupportProperOver f (G.X n)) :\n    ∃ Z : TopologicalSpace.Closeds X, IsClosedSubsetProperOver f Z ∧\n      ∀ i : ℤ,\n        {x : X | ¬ Subsingleton\n          ((Modules.presheaf (X := X)\n            ((DerivedCategory.homologyFunctor\n              (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj\n                (E ⊗ DerivedCategory.Q.obj G))).stalk x)} ⊆ (Z : Set X)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T025305-L-3423777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T025305-L-3423777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

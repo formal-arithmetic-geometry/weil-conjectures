@@ -13,6 +13,11 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.PerfectTensorBoundedCoherent
+import Sheaf.AlgebraicGeometry.BoundedComplexTensorProperSupportBound
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.AlgebraicGeometry.PerfectTensorFiniteRelativeTor
 
 /-! # Perfect direct image over a Noetherian base
 
@@ -69,6 +74,32 @@ theorem noetherian_perfect_directImage
     (hGproper : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver f (G.X n)) :
     Scheme.IsPerfect S ((schemeDerivedDirectImage f).obj
       (E ⊗ DerivedCategory.Q.obj G)) := by
-  sorry
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := ⟨⟩
+  have hGcoherent : ∀ n : ℤ, RingedSpace.IsCoherent X.toRingedSpace (G.X n) := by
+    intro n
+    exact (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X (G.X n)).2
+      ⟨inferInstance, inferInstance⟩
+  obtain ⟨hbounded, hcoherent⟩ :=
+    Scheme.perfect_tensor_bounded_coherent E hE G hGb hGcoherent
+  apply Scheme.isPerfect_schemeDerivedDirectImage_of_bounded_coherent_finiteTor
+    f (E ⊗ DerivedCategory.Q.obj G) hbounded hcoherent
+  · obtain ⟨Z, hZ, hsupport⟩ :=
+      Scheme.boundedComplex_tensor_proper_support_bound f E G hGb hGproper
+    intro i
+    let H : X.Modules := (DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj
+        (E ⊗ DerivedCategory.Q.obj G)
+    have hH : RingedSpace.IsCoherent X.toRingedSpace H := hcoherent i
+    have hq := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X H).1 hH
+    have : H.IsQuasicoherent := hq.1
+    have : H.IsFiniteType := hq.2
+    let Y : TopologicalSpace.Closeds X :=
+      ⟨{x : X | ¬ Subsingleton (H.presheaf.stalk x)},
+        (Scheme.Modules.finite_type_module_support_closed X H).2.2.2⟩
+    exact ⟨Y, rfl,
+      (Scheme.closed_subset_proper_over_base_properties f Z).2.2.1 Y (hsupport i) hZ⟩
+  · exact Scheme.perfect_tensor_hasFiniteTorDimensionOver f E hE G hGb hGflat
 
 end AlgebraicGeometry

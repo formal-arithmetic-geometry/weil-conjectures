@@ -26,51 +26,47 @@
  ],
  "proof": [
   {
-   "text": "Since S is Noetherian and f is of finite presentation, hence locally of finite type [def-pc-morphism-conventions] [def-weil-finite-type-morphism], X is locally Noetherian [pqf-def-locnoeth] (Stacks, Morphisms, Lemma 29.15.6, Tag 01T6). So each finitely presented term G^i is quasi-coherent of finite type, hence coherent [pqf-lem-coherent-ft-locnoeth], and coherent modules on a locally Noetherian scheme form an abelian subcategory closed under kernels, cokernels and finite direct sums (Stacks, Cohomology of Schemes, Lemma 30.9.2, Tag 01Y0). Let Z=\\bigcup_i\\operatorname{Supp}(G^i), a closed subset proper over S by the proper-support hypothesis on G^\\bullet [def-weil-pbc-closed-subset-proper-over-base]; as S is Noetherian, hence quasi-compact, Z is quasi-compact. Because E is perfect [def-pc-perfect-complex], finitely many opens U_1,\\dots,U_n cover Z with E|_{U_j} isomorphic to a strictly perfect complex P_j^\\bullet, whose terms are direct summands of finite free modules, hence flat; so on U_j the object E\\otimes^L G^\\bullet is the bounded total complex of P_j^\\bullet\\otimes G^\\bullet, whose terms are direct summands of finite direct sums of the G^i, and on X\\setminus Z it is zero. Hence E\\otimes^L G^\\bullet has coherent cohomology sheaves (coherence is local), nonzero only in the finite range of degrees given by the n complexes P_j^\\bullet\\otimes G^\\bullet.",
+   "text": "Finite presentation implies locally finite type. Mathlib LocallyOfFiniteType.isLocallyNoetherian gives locally Noetherian X. QuasiCompact.compactSpace_of_compactSpace gives compact X from Noetherian S, so X is Noetherian. For each term G^n, finite presentation supplies quasi-coherence and finite type by Mathlib instances; apply isCoherent_iff_isQuasicoherent_and_isFiniteType to obtain coherence.",
    "uses": [
     "def-pc-morphism-conventions",
     "def-weil-finite-type-morphism",
     "pqf-def-locnoeth",
-    "pqf-lem-coherent-ft-locnoeth",
-    "def-pc-perfect-complex"
+    "pqf-lem-coherent-ft-locnoeth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.27.2, Tag 0DJQ, proof: coherence of the cohomology of E tensor^L G"
-   }
+   "elementary": true
   },
   {
-   "text": "Every cohomology sheaf of E\\otimes^L G^\\bullet is zero on X\\setminus Z (step 1), so its support, closed because the sheaf is coherent, lies in Z. A closed subset of Z is proper over S, since a closed immersion is proper and properness is stable under composition; so each cohomology sheaf has support proper over S [def-weil-pbc-closed-subset-proper-over-base].",
+   "text": "Apply perfect_tensor_bounded_coherent to E and the bounded termwise coherent G; destruct its conjunction to get bounded and coherent cohomology of E tensor^L Q(G).",
    "uses": [
+    "lem-pc-perfect-tensor-bounded-coherent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply boundedComplex_tensor_proper_support_bound to get one proper closed Z containing every cohomology support. For each cohomology sheaf H, use isCoherent_iff_isQuasicoherent_and_isFiniteType to obtain quasi-coherence and finite type, and finite_type_module_support_closed to bundle its nonzero-stalk locus as a closed Y. The containment gives Y <= Z, so the third conjunct of closed_subset_proper_over_base_properties shows Y proper. The witness Y, reflexive equality with the nonzero-stalk locus, and this properness proof give HasSupportProperOver for H. The final existential witness unfolds the definition HasSupportProperOver [def-weil-pbc-closed-subset-proper-over-base].",
+   "uses": [
+    "lem-pc-bounded-complex-tensor-proper-support-bound",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
     "def-weil-pbc-closed-subset-proper-over-base"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.27.2, Tag 0DJQ, proof: support of E tensor^L G"
-   }
+   "elementary": true
   },
   {
-   "text": "Each G^i is flat over S, i.e. flat as an f^{-1}\\mathcal O_S-module, and so are direct summands of finite direct sums of them. So, viewed in D(f^{-1}\\mathcal O_S), the object E\\otimes^L G^\\bullet is zero on X\\setminus Z and on each U_j of step 1 is represented by a complex of flat modules in the fixed finite range [a,b] of degrees containing those of all P_j^\\bullet\\otimes G^\\bullet. By Stacks, Cohomology, Lemma 20.48.3 (Tag 08CI) its restriction to each of these opens has tor-amplitude in [a,b]; as tor-amplitude is the vanishing of the cohomology sheaves of E\\otimes^L_{f^{-1}\\mathcal O_S}\\mathcal F outside [a,b] (Definition 20.48.1, Tag 08CG), a local condition, E\\otimes^L G^\\bullet has finite Tor dimension as an object of D(f^{-1}\\mathcal O_S).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.27.2, Tag 0DJQ, proof: 'The hypothesis on the tor dimension also follows as G^i is flat over f^{-1}O_S'"
-   }
+   "text": "Apply perfect_tensor_hasFiniteTorDimensionOver to the compact X, E perfect, bounded G and termwise relative flatness. This supplies finite relative Tor dimension of E tensor^L Q(G).",
+   "uses": [
+    "lem-pc-perfect-tensor-finite-relative-tor"
+   ],
+   "elementary": true
   },
   {
-   "text": "Since f is locally of finite type (step 1) and S is Noetherian, steps 1 to 3 give the hypotheses of the Noetherian direct-image criterion [lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect] (Stacks Tag 08EV) for E\\otimes^L G^\\bullet. Its conclusion is exactly that Rf_*(E\\otimes^L G^\\bullet) is perfect on S [def-pc-perfect-complex].",
+   "text": "Apply isPerfect_schemeDerivedDirectImage_of_bounded_coherent_finiteTor (08EV) to E tensor^L Q(G), using the bounds, coherence, proper supports and relative Tor dimension just proved. Its conclusion is the original theorem, with every original binder and universe unchanged.",
    "uses": [
     "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
     "def-pc-perfect-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.27.2, Tag 0DJQ, proof: application of Lemma 36.27.1 (Tag 08EV)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -78,14 +74,19 @@
   "def-weil-finite-type-morphism",
   "pqf-def-locnoeth",
   "pqf-lem-coherent-ft-locnoeth",
-  "def-pc-perfect-complex",
+  "lem-pc-perfect-tensor-bounded-coherent",
+  "lem-pc-bounded-complex-tensor-proper-support-bound",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
   "def-weil-pbc-closed-subset-proper-over-base",
-  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+  "lem-pc-perfect-tensor-finite-relative-tor",
+  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+  "def-pc-perfect-complex"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 36.27.2, Tag 0DJQ"
+  "place": "Tag 0DJQ, proof, made into Lean through 08EV; compactness of X used for uniform bounds"
  },
  "mathlib_searches": [
   {
@@ -175,5 +176,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "[IsNoetherian S]; finite presentation = LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated (convention); E perfect = Scheme.IsPerfect; G bounded (hGb on terms), termwise SheafOfModules.IsFinitePresentation, IsFlatOver f, HasSupportProperOver f; conclusion IsPerfect S (schemeDerivedDirectImage f).obj (E ⊗ Q.obj G) with global schemeDerivedTensorMonoidal; same form as landed parent properSupport_perfect_directImage; no let/local instance/notation/tautology"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T025305-L-3423777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

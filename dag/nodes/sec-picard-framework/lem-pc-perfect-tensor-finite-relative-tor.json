@@ -1,0 +1,156 @@
+{
+ "id": "lem-pc-perfect-tensor-finite-relative-tor",
+ "kind": "statement",
+ "title": "Finite relative Tor dimension of a perfect tensor",
+ "statement": "Let X be a quasi-compact scheme [def-pc-scheme], f:X -> S any scheme morphism, E a perfect object of D(O_X) [def-pc-perfect-complex], and G a bounded complex of O_X-modules whose terms are flat over S [def-pc-scheme-module-flat-over]. Then E tensor^L G [def-pc-scheme-derived-tensor-structure] has finite Tor dimension over the inverse-image structure sheaf f^{-1}O_S [def-pc-finite-tor-dimension-over]. No coherence, Noetherian hypothesis, locally finite type or proper-support hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "0DJQ: relative Tor verification; 08CI and 08CG: bounded flat models and locality"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-perfect-complex",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-finite-tor-dimension-over"
+ ],
+ "proof": [
+  {
+   "text": "By compactness take finitely many opens carrying strictly perfect representatives P_j of E. If [c,d] bounds G and [a_j,b_j] bounds P_j, the local derived tensor is represented by P_j tensor G, bounded in [a_j+c,b_j+d], because P_j is termwise flat over O_X.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "0DJQ: relative Tor verification; 08CI and 08CG: bounded flat models and locality"
+   }
+  },
+  {
+   "text": "The affine-section definition of IsFlatOver implies stalkwise relative flatness: localize the base at f(x) and take the filtered colimit of sections on affine neighbourhoods of x; localization and filtered colimits preserve flatness. After restriction of scalars to the inverse-image structure sheaf, every term of the total complex is a summand of a finite direct sum of terms of G. The assumed relative flatness of G therefore makes every term flat over the inverse-image structure sheaf.",
+   "uses": [
+    "def-pc-scheme-module-flat-over",
+    "def-pc-perfect-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "0DJQ: relative Tor verification; 08CI and 08CG: bounded flat models and locality"
+   }
+  },
+  {
+   "text": "Choose a single interval [a,b], with a <= b, containing all the finitely many local intervals (use [0,0] for an empty cover). By 08CI each local model has Tor amplitude in [a,b]. The definition of amplitude in 08CG is cohomology vanishing after derived tensor with any module sheaf; vanishing is local, so the bound holds globally.",
+   "uses": [
+    "def-pc-finite-tor-dimension-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "0DJQ: relative Tor verification; 08CI and 08CG: bounded flat models and locality"
+   }
+  },
+  {
+   "text": "Represent the global derived object by a complex K, and choose a K-flat resolution of its restriction of scalars. It computes the same relative derived tensors. The uniform bound from step 3 provides the witnesses in HasFiniteTorDimensionOver. Only a proposition of existence is asserted; no arbitrary witness defines new data.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-finite-tor-dimension-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "0DJQ: relative Tor verification; 08CI and 08CG: bounded flat models and locality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-finite-tor-dimension-over",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "0DJQ: relative Tor verification; 08CI and 08CG: bounded flat models and locality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Perfect complex tensored with a bounded relatively flat complex on a quasi compact scheme has finite relative Tor dimension",
+   "results": "HTTP service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex tensored with a bounded relatively flat complex on a quasi compact scheme has finite relative Tor dimension",
+   "results": "CategoryTheory.isZero_Tor_succ_of_projective and Module.Flat tensor exactness only; no relative derived sheaf theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|HasFiniteTorDimensionOver|proper_support_bound|tensor.*coherent in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "No matches. Also searched both library roots, all DAG nodes including the imported blueprint, and Tags 0DJQ/08CI/01Y0. No duplicate of this intermediate statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NoetherianPerfectDirectImage",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian case: verify finite relative tor dimension of a perfect tensor before applying 08EV",
+   "via": [
+    "lem-pc-noetherian-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectTensorFiniteRelativeTor",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectTensorFiniteRelativeTor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_tensor_hasFiniteTorDimensionOver",
+  "statement": "theorem perfect_tensor_hasFiniteTorDimensionOver\n    {X S : Scheme.{u}} [CompactSpace X] (f : X ⟶ S)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X) (hE : IsPerfect X E)\n    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hGb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n))\n    (hGflat : ∀ n : ℤ, Modules.IsFlatOver (G.X n) f) :\n    HasFiniteTorDimensionOver f (E ⊗ DerivedCategory.Q.obj G)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T025305-L-3423777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T025305-L-3423777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
