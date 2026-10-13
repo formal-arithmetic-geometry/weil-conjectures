@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SingleReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
@@ -338,6 +339,35 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 section Inputs
 
+/-- First step of the proof of blueprint `lem-kun-0f1j`: reduction to single sheaves.
+
+Under the hypotheses of `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_isGE`, the base
+change map `Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)` is an isomorphism provided it
+is an isomorphism when `E` is a flat sheaf and `F` is a sheaf, both placed in degree `0`
+(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_single`). -/
+theorem isIso_tensorBaseChangeMap_of_isGE_of_single [Finite Λ] {K : Type u} [Field K]
+    [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
+    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K))
+    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact g]
+    [QuasiSeparated g] (_sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m n : ℤ)
+    (_hE : DerivedCategory.TStructure.t.IsGE E m)
+    (hEt : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), q < n →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj (((derivedTensor (ModuleCat.{u + 1} Λ)
+        X).obj E).obj ((DerivedCategory.singleFunctor _ 0).obj M))))
+    (hF : DerivedCategory.TStructure.t.IsGE F m)
+    (hsingle : ∀ 𝓔 : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), ObjectProperty.flat 𝓔 →
+      ∀ 𝓕 : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),
+        IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
+          ((L((p)^*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓔))
+          ((DerivedCategory.singleFunctor _ 0).obj 𝓕))) :
+    IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
+      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
+  have := hF
+  isIso_tensorBaseChangeMap_of_single (ModuleCat.{u + 1} Λ) h e f' g sq₂.w p E F m n
+    hEt hsingle
+
 /-- Blueprint `lem-kun-0f1j`: base change for a pushforward tensored with a bounded below complex
 of finite Tor amplitude.
 
@@ -372,7 +402,8 @@ theorem isIso_tensorBaseChangeMap_of_isGE [Finite Λ] {K : Type u} [Field K]
     (_hF : DerivedCategory.TStructure.t.IsGE F m) :
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
       ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
-  sorry
+  isIso_tensorBaseChangeMap_of_isGE_of_single Λ a b p f' h e g _sq₁ sq₂ E F m n _hE _hEt _hF
+    (fun _ _ _ ↦ sorry)
 
 /-- A derived pushforward of finite cohomological dimension along a quasi-compact
 quasi-separated morphism commutes with countable direct sums
