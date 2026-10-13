@@ -29,49 +29,64 @@
  ],
  "proof": [
   {
-   "text": "Write X=Spec(A). The given bounded-above finite-free complex P^\\bullet represents E|_U, and [lem-pc-affine-tor-amplitude-criterion] transfers the stated Tor amplitude [a,b] between the sheaf and module formulations.",
+   "text": "Test the given derived tensor vanishing against the tensor unit. The total tensor complex is naturally isomorphic to its K-flat representative by the right unitor. Apply Q homology comparison and the representing isomorphism to show the restricted complex is exact at r. The tilde functor preserves kernels by its fully faithful affine counit and quasi-coherence of kernels; as an additive left adjoint it also preserves colimits. Restriction and the over equivalence are exact. The image of the restricted preceding differential is consequently the restricted image. Exactness gives a kernel fork on that image, whose unique comparison to the chosen kernel satisfies the asserted inclusion identity. Use the private categorical generalization preservesFiniteLimits_of_kernel_in_essentialImage: an additive fully faithful functor between arbitrary abelian categories preserves finite limits if kernels of its mapped morphisms lie in its essential image. Lift and reflect a kernel fork to prove this general result. For tilde the sheaf kernel is quasi-coherent by lem-weil-pbc-quasi-coherent-module-kernel, hence its affine counit supplies the required essential-image isomorphism. No duplicate affine finite-limit theorem is stated.",
    "uses": [
-    "lem-pc-affine-tor-amplitude-criterion"
+    "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08ED proof, first paragraph and the invocation of Lemma 08E9"
+    "place": "Tag 08EG, proof of Lemma 36.13.6, image exactness and finite local freeness paragraph"
    }
   },
   {
-   "text": "Choose r<a and set K=Im(P^{r-1} \\to P^r). Since the cohomology of the represented object vanishes below a, the complex is exact at degree r on U, so the associated sheaf \\widetilde K|_U identifies with Ker(\\widetilde{P^r}|_U \\to \\widetilde{P^{r+1}}|_U); this equality is only asserted after restriction to U, not as an equality of A-modules on all of X.",
-   "uses": [],
-   "elementary": true,
+   "text": "Choose the standard derived category of sheaves on Spec A. Functor.mapDerivedCategoryFactors and mapHomologicalComplexCompIso identify derived restriction of Q(tilde P) with Q of the termwise restricted tilde complex. Transport the given Tor vanishing along this comparison and the representing isomorphism, then apply lem-sc-affine-truncation-kernel-flat with the same P, U, a, b, r.",
+   "uses": [
+    "lem-sc-affine-truncation-kernel-flat"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08ED proof, definition of K and exactness below the Tor-amplitude range"
+    "place": "Tag 08EG, proof of Lemma 36.13.6, image exactness and finite local freeness paragraph"
    }
   },
   {
-   "text": "Let f\\in A with D(f)\\subseteq U; such principal opens cover U. By [lem-sc-affine-truncation-kernel-flat] (the last-one-flat lemma), applied to the same complex and the same r<a, the A_f-module K_f is flat and finitely presented, hence a finite projective A_f-module by [lem-weil-pbc-finitely-presented-flat-module-projective] (Stacks Tag 00NX). By [lem-weil-pbc-finite-projective-standard-free-cover] there are g_1,\\dots,g_s\\in A_f generating the unit ideal with each (K_f)_{g_i} finite free, so \\widetilde K|_{D(f)} is free of finite rank on each D(g_i)\\subseteq D(f). Hence \\widetilde K|_U is locally free of finite rank, i.e. finite locally free; in particular it is flat and of finite presentation, its local sections being localizations of the flat finitely presented modules K_f.",
+   "text": "For each principal open inside U, the resulting localized linear range is flat and finitely presented. Module.Flat.projective_of_finitePresentation makes it projective, and finite presentation implies finiteness. Apply lem-sc-principal-open-finite-projective-tilde to the linear range module. Transport finite local freeness through the canonical ModuleCat.imageIsoRange isomorphism.",
    "uses": [
-    "lem-sc-affine-truncation-kernel-flat",
     "lem-weil-pbc-finitely-presented-flat-module-projective",
-    "lem-weil-pbc-finite-projective-standard-free-cover"
+    "lem-sc-principal-open-finite-projective-tilde"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08ED proof, paragraphs invoking cohomology-lemma-last-one-flat and properties-lemma-finite-locally-free (flat + finitely presented = finite locally free, Algebra Tag 00NX)"
+    "place": "Tag 08EG, proof of Lemma 36.13.6, image exactness and finite local freeness paragraph"
+   }
+  },
+  {
+   "text": "The source instance IsFiniteLocallyFree.isFinitePresentation gives finite presentation. Apply lem-sc-ext-tensor-exact to obtain left tensor exactness. The symmetric structure gives a natural isomorphism from left to right tensor, so finite limits and colimits are also preserved by right tensor, exactly the definition of SheafOfModules.IsFlat.",
+   "uses": [
+    "lem-sc-ext-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EG, proof of Lemma 36.13.6, image exactness and finite local freeness paragraph"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-tor-amplitude-criterion",
   "lem-sc-affine-truncation-kernel-flat",
   "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "lem-weil-pbc-finite-projective-standard-free-cover"
+  "lem-sc-principal-open-finite-projective-tilde",
+  "lem-sc-ext-tensor-exact",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "P1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08ED proof"
+  "place": "Tag 08EG, proof of Lemma 36.13.6, image exactness and finite local freeness paragraph; compiler-checked assembly using Mathlib exactness and derived-functor comparisons; returned duplicate affine helper generalized to arbitrary additive fully faithful functors with kernel-closed essential image"
  },
  "mathlib_searches": [
   {
@@ -198,5 +213,15 @@
    "lem-pc-affine-tor-amplitude-criterion",
    "def-pc-finite-locally-free"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T100045-L-2473873",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

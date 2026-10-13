@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-principal-open-finite-projective-tilde",
+ "kind": "statement",
+ "title": "Finite projective principal localizations give a finite locally free associated sheaf on an open",
+ "statement": "Let A be a commutative ring and U an open of Spec A [def-pc-scheme]. Let M be an A-module. Suppose that for every f in A with D(f) contained in U, M_f is a finite projective A_f-module. Then the restriction to U of the associated sheaf tilde M is finite locally free [def-sc-finite-locally-free-sheaf]. No finite presentation or finiteness of M on all of Spec A is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NX, (2) implies (7); used sheaf-locally in perfect.tex Tag 08EG"
+ },
+ "proof": [
+  {
+   "text": "Principal opens D(f) contained in U form a basis and cover U. For each such f the restriction of tilde M to Spec A_f identifies with the associated sheaf of M_f by the localization description of associated sheaves.",
+   "uses": [
+    "lem-weil-pbc-tilde-principal-localization-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, associated modules on affine schemes, localization on standard opens"
+   }
+  },
+  {
+   "text": "By hypothesis M_f is finite projective. Apply lem-weil-pbc-finite-projective-standard-free-cover over A_f. Its finite standard cover has finite free iterated localizations of M. Associated sheaf commutes with these localizations and sends finite free modules to finite free sheaves. The composite opens cover U, so the definition of finite local freeness gives the conclusion. Empty U uses an empty cover and zero modules have rank zero.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, (2) implies (7); used sheaf-locally in perfect.tex Tag 08EG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tilde-principal-localization-transport",
+  "lem-weil-pbc-finite-projective-standard-free-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NX, (2) implies (7); used sheaf-locally in perfect.tex Tag 08EG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "associated sheaf restricted to an open finite locally free if principal localizations inside that open are finite projective",
+   "results": "Module.basicOpen_subset_freeLocus_iff requires global finite presentation; sheaf generator results do not supply restricted tilde criterion",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, LocalizedModule.Away",
+   "results": "Module.basicOpen_subset_freeLocus_iff requires Module.FinitePresentation A M globally, absent here",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteLocallyFree.*principal|principal.*finiteLocallyFree",
+   "results": "No existing criterion; LocallyFreeAffine requires sections on all affine opens, not only principal localizations of the ambient module",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module with finite projective localizations on principal opens inside an open has finite locally free associated sheaf on that open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineTruncationKernelFiniteLocallyFree",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-truncation-kernel-finite-locally-free",
+   "place": "principal-open localization to finite locally free sheaf, proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenFiniteProjectiveTilde",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenFiniteProjectiveTilde.lean",
+  "declaration": "AlgebraicGeometry.finiteLocallyFree_restrict_tilde_of_principalOpen_projective",
+  "statement": "theorem finiteLocallyFree_restrict_tilde_of_principalOpen_projective\n    (A : Type u) [CommRing A] (U : (Spec (.of A)).Opens) (M : ModuleCat.{u} A)\n    (h : ∀ f : A, PrimeSpectrum.basicOpen f ≤ U →\n      Module.Finite (Localization.Away f) (LocalizedModule.Away f M) ∧\n        Module.Projective (Localization.Away f) (LocalizedModule.Away f M)) :\n    SheafOfModules.IsFiniteLocallyFree.{u, u, u}\n      (((@id (ModuleCat.{u} A ⥤\n          SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⋙\n        SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) U ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))\n          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n          (Scheme.Modules.overEquiv U)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T100045-L-2473873",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T100045-L-2473873",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
