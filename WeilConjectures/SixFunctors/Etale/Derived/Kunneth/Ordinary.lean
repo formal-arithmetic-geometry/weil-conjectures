@@ -338,6 +338,22 @@ noncomputable def mapDerivedCategoryObjTensorIsoDerivedTensor
 
 end MonoidalEquivalence
 
+section DirectSums
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
+
+/-- Blueprint `lem-kun-derived-tensor-direct-sums`: the derived tensor product `K ⊗ᴸ -` with a
+fixed complex commutes with direct sums, being left adjoint to `RHom(K, -)`
+(`AlgebraicGeometry.Etale.derivedTensorHomAdjunction`). -/
+instance preservesColimitsOfShape_derivedTensor_obj
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (J : Type*) :
+    PreservesColimitsOfShape (Discrete J) ((-⊗ᴸ-(X)[A]).obj K) :=
+  (derivedTensorHomAdjunction A K).leftAdjoint_preservesColimits.preservesColimitsOfShape
+
+end DirectSums
+
 section Constant
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
@@ -732,18 +748,12 @@ theorem isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed {X : Scheme.{u}}
       (L((a)^*[ModuleCat.{u + 1} Λ]) ⋙ (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj E) ⋙
         R((a)_*[ModuleCat.{u + 1} Λ]) :=
     (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) a).app E
-  have h₁ (J : Type (u + 1)) : PreservesColimitsOfShape (Discrete J)
-      ((-⊗ᴸ-(Spec (.of k))[ModuleCat.{u + 1} Λ]).obj
-        ((R((a)_*[ModuleCat.{u + 1} Λ])).obj E)) :=
-    (derivedTensorHomAdjunction _ _).leftAdjoint_preservesColimits.preservesColimitsOfShape
   have h₂ (J : Type (u + 1)) : PreservesColimitsOfShape (Discrete J)
       ((L((a)^*[ModuleCat.{u + 1} Λ]) ⋙ (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj E) ⋙
         R((a)_*[ModuleCat.{u + 1} Λ])) :=
     have : PreservesColimitsOfShape (Discrete J) (L((a)^*[ModuleCat.{u + 1} Λ])) :=
       (derivedUpperStarLowerStarAdjunction _ a).leftAdjoint_preservesColimits
         |>.preservesColimitsOfShape
-    have : PreservesColimitsOfShape (Discrete J) ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj E) :=
-      (derivedTensorHomAdjunction _ _).leftAdjoint_preservesColimits.preservesColimitsOfShape
     inferInstance
   have hτ : IsIso (Functor.whiskerLeft (constantFunctor Λ (Spec (.of k))) τ) := by
     refine DerivedCategory.isIso_of_isIso_app_singleFunctor_obj_self_stub
