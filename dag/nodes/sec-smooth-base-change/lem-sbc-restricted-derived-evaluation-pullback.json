@@ -1,0 +1,156 @@
+{
+ "id": "lem-sbc-restricted-derived-evaluation-pullback",
+ "kind": "statement",
+ "title": "The restricted derived section square for arbitrary source sheaves",
+ "statement": "Let $S,Y,Y\\prime$ be schemes, $a:Y\\prime\\to Y$, $h:Y\\to S$, $h\\prime:Y\\prime\\to S$, and $h\\circ a=h\\prime$. Let $U\\to S$ be etale and $p\\in\\mathbb N$. Let $G,F$ be abelian etale sheaves on $Y$ and $G\\prime,F\\prime$ such sheaves on $Y\\prime$, with $e:a^*G\\cong G\\prime$, $\\phi:a^*F\\to F\\prime$, and $t:G[0]\\to F[0][p]$ in the bounded-below derived category. Write $T_h=H^0R\\Gamma(U\\times_S Y,r^*(-))$, using the restriction and single comparisons of [def-sbc-raw-restricted-cohomology-comparison-map]. Let $z_h:T_h(G[0])\\cong\\Gamma(U\\times_S Y,r^*G)$ be its zero comparison and $s_{h,F}:T_h(F[0][p])\\cong H^p(U\\times_S Y,r^*F)$ its shift comparison. Define $b_G=z_h\\,q^*\\,\\Gamma(\\psi_{e})\\,z_{h\\prime}^{-1}$ in composition order, where $q=U\\times_S a$, $q^*$ is ordinary section pullback by the adjunction unit and $\\psi_e:q^*r^*G\\to r\\prime^*G\\prime$ is the restricted coefficient map for $e.\\mathrm{hom}$ of [def-sbc-raw-affine-restricted-cohomology]. Let $t\\prime$ be $t$ pulled back by $a$, precomposed with $e^{-1}$ and the inverse single comparison, and postcomposed with the shift comparison and $\\phi[p]$. If $R_{a,\\phi}$ is the restricted-cohomology map of [def-sbc-raw-affine-restricted-cohomology], then $T_h(t)\\,s_{h,F}\\,R_{a,\\phi}=b_G\\,T_{h\\prime}(t\\prime)\\,s_{h\\prime,F\\prime}$ as homomorphisms. No represented generator is chosen.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Derived section pullback and the single/shift comparisons; parent proof step 2. Stacks Tags 07A6 (derived adjunction), 0D6F (restriction of derived sections), 03Q8 (restricted cohomology presentation)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Put r = pr_Y, r' = pr_Y' and q = U times_S a. The pullback identities\nimply r' followed by a equals q followed by r. Use inverse-image composition\nalong this equality to identify r'^* a^* with q^* r^*. The unit for q gives a\nnatural map RΓ(V, r^* K) to RΓ(V', r'^* a^* K): apply RΓ to its derived unit,\nthen use the derived composition comparison for q_* and global sections.\nIts naturality square at t commutes by functoriality and naturality of the unit.\nOn a single G in degree zero this map is the ordinary section pullback, since\nthe degree-zero right-derived comparison identifies the derived unit with the\nunderived adjunction unit. Postcompose by e to obtain transportZero.\nOn the shifted single F the shift comparison and single-complex comparison\nidentify the same map with rawAffineComplexPullback, followed by the restricted\nsingle coefficient morphism for φ. Naturality of these comparisons gives\nrawAffineRestrictedCohomologyMap. Precompose the naturality square with the\nsingle comparison for G and the inverse of e, and postcompose with the shift\ncomparison for F'. Cancel each comparison with its inverse. The resulting\nsquare is the stated equality of homomorphisms. All constructions apply for\np = 0 and on an empty restricted scheme; no inverse of a section map is used.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent C1",
+  "document": "Stacks Project and parent proof plan",
+  "place": "Derived section pullback and the single/shift comparisons; parent proof step 2. Stacks Tags 07A6 (derived adjunction), 0D6F (restriction of derived sections), 03Q8 (restricted cohomology presentation)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections pullback commutes with morphisms and degree zero comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSectionsUpperStarMap|mapDerivedCategoryPlusSingleFunctor|rightDerivedFunctorCompIso",
+   "results": "msearch grep: 0 hits. Local rg found globalSectionsUpperStarMap in WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections and composition identities in WeilConjectures.SixFunctors.BaseChange.GlobalSections; no complete derived square.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of additive functor evaluation at an element under natural transformation and functor pullback",
+   "results": "8 hits, including NatTrans.appHom, NatTrans.appHom_apply, preadditiveYonedaMap and preadditiveYonedaMap_app. No restricted derived section square.",
+   "date": "2026-10-13",
+   "verdict": "generic evaluation ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_unit_app",
+   "results": "One match: the generic composite adjunction unit formula. It does not identify the restricted derived section or represented generator maps.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: ingredient only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of zeroth right derived functor comparison with the adjunction unit and pullback on global sections",
+   "results": "Eight hits: sheafification compatibility and sheaves-of-modules pullback/pushforward units.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: none has this abelian etale statement."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_unit_app|pullbackSheafificationCompatibility|rightDerivedZeroIsoSelf",
+   "results": "msearch: 21 hits, including Adjunction.comp_unit_app, toSheafify_pullbackSheafificationCompatibility and rightDerivedZeroIsoSelf. Local library search also found globalSectionsUpperStarMap_comp and upperStarComp_hom_app_unit_app, and RightDerivedSingleUnitHomologyComparison. These supply parts of the unit/comparison calculation, not the full restricted square or terminal-object generator identity.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no duplicate or one-step closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Derived section pullback and the single/shift comparisons; parent proof step 2. Stacks Tags 07A6 (derived adjunction), 0D6F (restriction of derived sections), 03Q8 (restricted cohomology presentation).",
+   "via": [
+    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedDerivedEvaluationPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedDerivedEvaluationPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.restrictedDerivedEvaluation_pullback",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.Hzero",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.transportZero",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.pullbackHom",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.restrictedDerivedEvaluation_pullback"
+  ],
+  "statement": "theorem restrictedDerivedEvaluation_pullback {S Y Y' : Scheme.{v}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)\n    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (G' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (e : (upperStar AddCommGrpCat.{v + 1} a).obj G ≅ G')\n    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : (upperStar AddCommGrpCat.{v + 1} a).obj F ⟶ F') (U : S.Etale)\n    (t : (DerivedCategory.Plus.singleFunctor _ 0).obj G ⟶\n      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(p : ℤ)⟧) :\n    (Hzero h U).map t ≫ (shiftIso h p F U).hom ≫\n        rawAffineRestrictedCohomologyMap a h h' w p F F' φ U =\n      transportZero a h h' w G G' e.hom U ≫\n        (Hzero h' U).map (pullbackHom a p e φ t) ≫ (shiftIso h' p F' U).hom",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T015545-L-3016995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T015545-L-3016995",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

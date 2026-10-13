@@ -1,0 +1,150 @@
+{
+ "id": "lem-sbc-restricted-comparison-generator-pullback",
+ "kind": "statement",
+ "title": "Transport of the represented identity generator",
+ "statement": "Let $S,Y,Y\\prime$ be schemes and $a:Y\\prime\\to Y$, $h:Y\\to S$, $h\\prime:Y\\prime\\to S$ with $h\\circ a=h\\prime$, and let $U\\to S$ be etale. Let $A$ be the sheafification of the free abelian presheaf represented by $U$, and put $G=h^*A$, $G\\prime=h\\prime^*A$, as in [def-sbc-raw-restricted-cohomology-comparison-map]. Let $e:a^*G\\cong G\\prime$ be the inverse of the inverse-image composition comparison. Write $\\xi_h=z_h^{-1}(\\mathrm{generator}(h,U))$ and $\\xi_{h\\prime}=z_{h\\prime}^{-1}(\\mathrm{generator}(h\\prime,U))$, with the zero comparisons and represented identity generators of [def-sbc-raw-restricted-cohomology-comparison-map]. For the explicitly constructed ordinary-section transport $b_G$ of [lem-sbc-restricted-derived-evaluation-pullback], $b_G(\\xi_h)=\\xi_{h\\prime}$. No target coefficient sheaf or higher derived-Hom class is part of this assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Parent proof step 1: represented identity and inverse-image units; Stacks Tag 03Q8, with restriction of sections as in Tag 0D6F. The explicit generator calculation is an agent expansion of this naturality step."
+ },
+ "stmt_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-restricted-derived-evaluation-pullback",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Write A = the sheafification of the free abelian presheaf represented by U,\nG = h^* A and G' = h'^* A. Cancel the zeroIso at the source of transportZero\nagainst its inverse. The remaining input is generator h U, namely the identity\nsection of A at U, mapped by the unit for h, then by sectionsIso inverse.\nWrite q = U times_S a, r = pr_Y and r' = pr_Y'. The pullback projection equations\ngive r' followed by a equals q followed by r. Expanding the restricted coefficient\nmap with the inverse-image composition comparisons identifies the two restrictions\nof A along these equal morphisms. Naturality of the inverse-image adjunction unit,\nand its composition formula, show that pulling the unit for h across q and applying\nthe comparison for a followed by h gives exactly the unit for h'. The terminal\nobject comparisons in globalSectionsUpperStarMap and sectionsIso agree: both send\nthe identity etale object of V' to the base change of U. Thus the resulting section\nis generator h' U. Postcompose with zeroIso inverse for G' to obtain the stated\nidentity. This uses no higher derived morphism and no invertibility of the section\npullback. Identity maps, degree-zero sections, and empty schemes obey the same unit\nand terminal-object equations.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "lem-sbc-restricted-derived-evaluation-pullback",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-restricted-derived-evaluation-pullback",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent C1",
+  "document": "Stacks Project and parent proof plan",
+  "place": "Parent proof step 1: represented identity and inverse-image units; Stacks Tag 03Q8, with restriction of sections as in Tag 0D6F. The explicit generator calculation is an agent expansion of this naturality step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of represented free abelian sheaf identity generator under adjunction unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "toSheafify|sheafHomSectionsEquiv|homologyRightDerivedFunctorObjSingleFunctorIso",
+   "results": "25 hits, including CategoryTheory.toSheafify and toSheafify_naturality in Mathlib.CategoryTheory.Sites.Sheafification, and module sheafification and local-bijectivity ingredients. No represented abelian generator transport identity.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of identity generator of sheafified free abelian representable sheaf under inverse image composition",
+   "results": "8 hits, including SheafOfModules.pullbackObjFreeIso, pullbackObjFreeIso_hom_naturality and pullback_map_ιFree_comp_pullbackObjFreeIso_hom. These are module sheaf ingredients, not the abelian represented generator identity here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_unit_app",
+   "results": "One match: the generic composite adjunction unit formula. It does not identify the restricted derived section or represented generator maps.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: ingredient only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image adjunction units evaluated at an etale object are compatible with base change and restriction of global sections",
+   "results": "Eight hits: open-immersion restriction units for O_X modules and Gamma-Spec adjunction formulas.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: none has this abelian etale statement."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_unit_app|pullbackSheafificationCompatibility|rightDerivedZeroIsoSelf",
+   "results": "msearch: 21 hits, including Adjunction.comp_unit_app, toSheafify_pullbackSheafificationCompatibility and rightDerivedZeroIsoSelf. Local library search also found globalSectionsUpperStarMap_comp and upperStarComp_hom_app_unit_app, and RightDerivedSingleUnitHomologyComparison. These supply parts of the unit/comparison calculation, not the full restricted square or terminal-object generator identity.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no duplicate or one-step closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Parent proof step 1: represented identity and inverse-image units; Stacks Tag 03Q8, with restriction of sections as in Tag 0D6F. The explicit generator calculation is an agent expansion of this naturality step.",
+   "via": [
+    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedComparisonGeneratorPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedComparisonGeneratorPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.restrictedComparison_generator_pullback",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.restrictedComparison_generator_pullback"
+  ],
+  "statement": "theorem restrictedComparison_generator_pullback {S Y Y' : Scheme.{v}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (U : S.Etale) :\n    transportZero a h h' w\n      ((upperStar AddCommGrpCat.{v + 1} h).obj (freeSheaf S U))\n      ((upperStar AddCommGrpCat.{v + 1} h').obj (freeSheaf S U))\n      ((upperStarComp AddCommGrpCat.{v + 1} a h h' w.symm).inv.app (freeSheaf S U)) U\n      ((zeroIso ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U)\n        ((upperStar AddCommGrpCat.{v + 1} h).obj (freeSheaf S U))).inv (generator h U)) =\n    (zeroIso ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U)\n      ((upperStar AddCommGrpCat.{v + 1} h').obj (freeSheaf S U))).inv (generator h' U)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T015545-L-3016995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T015545-L-3016995",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

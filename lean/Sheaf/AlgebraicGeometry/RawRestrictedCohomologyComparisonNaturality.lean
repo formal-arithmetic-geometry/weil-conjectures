@@ -6,10 +6,11 @@ Authors: SHEAF group D3
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
+import Sheaf.AlgebraicGeometry.RestrictedComparisonGeneratorPullback
 
 /-! # Pullback compatibility of restricted derived-Hom evaluation
 
-Source: Stacks Project, Tags 03Q8, 0BKV and 0EZM.
+Source: Stacks Project, Tags 03Q8, 0D6F and 07A6.
 (blueprint: lem-sbc-raw-restricted-cohomology-comparison-naturality).
 -/
 
@@ -21,9 +22,11 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+set_option maxRecDepth 2048 in
+set_option backward.isDefEq.respectTransparency false in
 /-- The explicit evaluation map commutes with the explicit raw pullback.
 This asserts compatibility of a constructed map, independently of invertibility.
-Source: Stacks Project, Tag 03Q8 and Cohomology on Sites, Tags 0BKV and 0EZM.
+Source: Stacks Project, Tag 03Q8 and Cohomology on Sites, Tags 0D6F and 07A6.
 (blueprint: lem-sbc-raw-restricted-cohomology-comparison-naturality).
 
 Proof: Write V = U times_S Y, V' = U times_S Y', r : V -> Y,
@@ -56,6 +59,27 @@ theorem rawRestrictedCohomologyComparison_naturality {S Y Y' : Scheme.{v}}
     rawAffineRestrictedCohomologyMap a h h' w p F F' φ U
         (rawRestrictedCohomologyComparison h p F U t) =
       rawRestrictedCohomologyComparison h' p F' U
-        (abelianHigherDirectImageRawPullback a h h' w p F F' φ U t) := by sorry
+        (abelianHigherDirectImageRawPullback a h h' w p F F' φ U t) := by
+  let G := (upperStar AddCommGrpCat.{v + 1} h).obj
+    (RawRestrictedComparison.freeSheaf S U)
+  let G' := (upperStar AddCommGrpCat.{v + 1} h').obj
+    (RawRestrictedComparison.freeSheaf S U)
+  let e : (upperStar AddCommGrpCat.{v + 1} a).obj G ≅ G' :=
+    ((upperStarComp AddCommGrpCat.{v + 1} a h h' w.symm).app
+      (RawRestrictedComparison.freeSheaf S U)).symm
+  let x := (RawRestrictedComparison.zeroIso
+    ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U) G).inv
+      (RawRestrictedComparison.generator h U)
+  have square := RawRestrictedComparison.restrictedDerivedEvaluation_pullback
+    a h h' w p G G' e F F' φ U t
+  have at_x := congrArg (fun f ↦ f x) square
+  simp only [AddCommGrpCat.comp_apply] at at_x
+  have gen := RawRestrictedComparison.restrictedComparison_generator_pullback a h h' w U
+  change RawRestrictedComparison.transportZero a h h' w G G' e.hom U x = _ at gen
+  rw [gen] at at_x
+  change rawAffineRestrictedCohomologyMap a h h' w p F F' φ U
+      ((RawRestrictedComparison.shiftIso h p F U).hom
+        ((RawRestrictedComparison.Hzero h U).map t x)) = _
+  exact at_x
 
 end AlgebraicGeometry.Etale

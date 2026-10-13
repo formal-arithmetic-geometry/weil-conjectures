@@ -14,37 +14,32 @@
  ],
  "proof": [
   {
-   "text": "Use the pullback projection identity r prime followed by a equals q followed by r. Naturality of sheafification and adjunction units transports the represented identity generator to its counterpart over the second pullback. The composition comparisons give exactly the restricted coefficient morphism.",
+   "text": "Apply the derived evaluation square to G=h* free(U), G prime=h prime* free(U), and the inverse composition comparison e. Evaluate the homomorphism equality at the inverse-zero-comparison image of generator(h,U).",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-sbc-raw-restricted-cohomology-comparison-map"
+    "lem-sbc-restricted-derived-evaluation-pullback"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply restricted derived sections to the five raw pullback factors. Naturality of the derived adjunction unit and its triangle identities, together with the single and shift comparisons, identifies the composite with rawAffineComplexPullback followed by the single restricted coefficient morphism. Taking homology and evaluating at the transported generator yields the displayed equation. No inverse to c is used.",
+   "text": "Replace transportZero of this element by the corresponding element for h prime using the generator pullback theorem. The five-factor pullbackHom is definitionally the raw pullback, and the two evaluations followed by shiftIso are definitionally the constructed comparison maps. This gives the required equality.",
    "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-sbc-raw-affine-restricted-cohomology",
-    "def-sbc-raw-restricted-cohomology-comparison-map"
+    "lem-sbc-restricted-comparison-generator-pullback",
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "lem-sbc-abelian-higher-direct-image-natural-comparison"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sbc-raw-affine-restricted-cohomology",
   "def-sbc-raw-restricted-cohomology-comparison-map",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-inverse-image-composition",
-  "prop-weil-pbc-derived-inverse-image-adjunction"
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "lem-sbc-restricted-comparison-generator-pullback",
+  "lem-sbc-restricted-derived-evaluation-pullback"
  ],
  "proof_origin": {
-  "by": "agent D3",
-  "document": "Stacks Project",
-  "place": "Tag 03Q8 and cited restriction lemmas; refinement of parent proof steps 3"
+  "by": "agent C1",
+  "document": "parent proof plan",
+  "place": "Separate steps 1 and 2; evaluate the derived square at the transported generator"
  },
  "mathlib_searches": [
   {
@@ -123,12 +118,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T223400-L-1634888",
+  "landing": "20261013T015545-L-3016995",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
