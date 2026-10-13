@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-affine-strict-henselization-structural-flat",
+ "kind": "statement",
+ "title": "Flatness of the canonical affine strict henselization structural ring map",
+ "statement": "Let $R$ be a commutative ring, $\\bar y:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ a geometric point [def-weil-geometric-point], and $H$ its canonical pointed-neighbourhood coordinate-ring colimit [def-weil-pbc-strict-henselization-limit]. If $b:R\\to H$ induces the canonical structural morphism [def-weil-pbc-strict-henselization-structural-map], then $b$ is flat [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 04HX and 07QM; Tag 0EYG, first reduction paragraph. Lean colimit argument uses WeilConjectures.RingTheory.ProEtale.FaithfullyFlat, RingHom.Flat.of_isColimit (lines 255-263)."
+ },
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "The representative pointed-neighbourhood category is cofiltered. Opposite it gives a small filtered ring diagram. The maps from R to its stages are GammaSpecIso(R).inv followed by the neighbourhood structure morphism on global sections. The over-category equations and contravariant global sections make these maps a natural transformation.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every neighbourhood is etale over Spec R, hence its map on global sections is flat. Precomposition with GammaSpecIso(R).inv preserves flatness, since that is a ring isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The defining common-composite characterization of the structural morphism identifies each stage map followed by the colimit coprojection with b. This is proved using Spec.map_injective, GammaSpecIso_inv_naturality and hb. Apply RingHom.Flat.of_isColimit, the forward implication of the existing ind-flat characterization, to this filtered diagram.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-flat-ring-map-iff-ind-flat"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-ring-map-iff-ind-flat"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H2",
+  "document": "Stacks Project",
+  "place": "Tags 04HX and 07QM; Tag 0EYG, first reduction paragraph. Lean colimit argument uses WeilConjectures.RingTheory.ProEtale.FaithfullyFlat, RingHom.Flat.of_isColimit (lines 255-263)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical ring map from an affine scheme ring to its strict henselization at a geometric point is flat",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.of_stalkMap, RingHom.Flat.localRingHom, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "verdict": "No exact Mathlib statement; use the existing library colimit-flatness tool for flatness, and split the tame normalization construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat",
+   "date": "2026-10-13",
+   "results": "12 hits: RingHom.Flat.containsIdentities, RingHom.Flat.holdsForLocalizationAway, RingHom.Flat.isStableUnderBaseChange, RingHom.Flat.ofLocalizationPrime, RingHom.Flat.ofLocalizationSpanTarget, RingHom.Flat.propertyIsLocal, RingHom.Flat.respectsIso, RingHom.Flat.stableUnderComposition",
+   "verdict": "No exact Mathlib statement; use the existing library colimit-flatness tool for flatness, and split the tame normalization construction."
+  },
+  {
+   "tool": "grep",
+   "query": "Flat.*of_isColimit|strictHensel|ramificationIdx_eq_one",
+   "date": "2026-10-13",
+   "results": "6 hits: Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/DedekindDomain/Different.lean",
+   "verdict": "No exact Mathlib statement; use the existing library colimit-flatness tool for flatness, and split the tame normalization construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of the canonical strict henselization ring map and finite normalization after adjoining a group-order root of a regular divisor",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootFiniteEtaleModel",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph, strictly henselian root calculation: Flatness of the canonical affine strict henselization structural ring map",
+   "via": [
+    "lem-sbc-strict-hensel-root-finite-etale-model",
+    "lem-sbc-regular-divisor-strict-hensel-root-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselizationStructuralFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_structural_ringHom_flat",
+  "statement": "theorem strictHenselization_structural_ringHom_flat\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    RingHom.Flat b.hom",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T140818-L-313146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T140818-L-313146",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

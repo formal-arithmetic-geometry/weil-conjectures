@@ -18,42 +18,44 @@
  ],
  "proof": [
   {
-   "text": "Pull W back and identify its base with D(f) using beta. At divisor generic points regularity makes the local rings DVRs. The stabilizer of each connected generic torsor component is its Galois group. The Galois degree formula in 09EB makes the ramification and residue degrees divide |G|; invertibility of |G| makes the ramification tame and the residue extension separable.",
+   "text": "Factor the base morphism of the punctured root scheme through the open D(f) via beta. The pullback of i is an isomorphism there: its further base change is an open immersion and surjective by the range formula. Pullback pasting then identifies the displayed cover projection as the torsor base change followed by an isomorphism, proving it finite, etale, and surjective.",
    "uses": [
-    "def-sbc-normal-dominant-galois",
-    "def-weil-regular-scheme"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Pass to the canonical strict henselization H, using its pointed-neighbourhood interpretation. Flatness preserves f as a nonzerodivisor and the quotient is the strict henselization of the regular divisor ring. Apply the same stabilizer argument after this base change to see every ramification index divides n=|G|.",
-   "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-regular-scheme",
     "def-sbc-normal-dominant-galois"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "If g is nonunit, the monic root algebra is regular local with regular quotient H/(g). Apply Abhyankar with n=|G|, which is a multiple of every tame index, then purity to extend the punctured cover to finite etale p:E→N. Its restriction is the original cover, yielding delta over V. Density of V and closedness of the finite image make p surjective. If g is a unit, V=N and the original finite etale surjective torsor pullback supplies E directly.",
+   "text": "If g is a unit, V=N. Use the original punctured pullback as E, composed with the inclusion of V into N, now an isomorphism. The pullback-fst isomorphism supplies delta; pullback.condition proves the projection identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If g is nonunit, use the finite normalization model and root divisor supplied by strict_hensel_root_purity_data. Apply exists_finite_etale_extension_of_regular_integral_divisor. Compose pullbackRestrictIsoRestrict p V with the inverse purity isomorphism and the finite-model identification. The projection equation follows from the inverse identities and pullbackRestrictIsoRestrict_hom_morphismRestrict.",
    "uses": [
-    "lem-sbc-regular-integral-divisor-etale-purity",
-    "def-sbc-normal-dominant-galois"
+    "lem-sbc-strict-hensel-root-purity-data",
+    "lem-sbc-regular-integral-divisor-etale-purity"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Flatness of b preserves injectivity of multiplication by f in H. The positive-degree monic root algebra is free over H, so multiplication by g stays injective there. Localization away from g is injective; denseRange_comap_iff_ker_le_nilRadical and the localization-away range formula show V is dense. Torsor surjectivity, delta, and pullback.condition show V is contained in the image of p. Since p is finite its image is closed. A closed set containing a dense set is the whole spectrum, proving p surjective.",
+   "uses": [
+    "lem-sbc-affine-strict-henselization-structural-flat"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-normal-dominant-galois",
-  "def-weil-regular-scheme",
-  "def-weil-pbc-strict-henselization-limit",
-  "lem-sbc-regular-integral-divisor-etale-purity"
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sbc-regular-integral-divisor-etale-purity",
+  "lem-sbc-strict-hensel-root-purity-data"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "C3",
+  "group": "H2",
   "document": "Stacks Project",
-  "place": "Tags 09EB (Galois degree formula), 0BRM (Abhyankar), 0EYE (purity), and 0EYG, strictly henselian calculation through the extension C"
+  "place": "Tags 09EB, 0BRM, 0EYG, 0EYH and 0EYE; Lean assembly uses existing divisor purity, pullback pasting, flatness, and closedness of finite images."
  },
  "mathlib_searches": [
   {
@@ -130,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T131947-L-4087045",
+  "landing": "20261013T140818-L-313146",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
