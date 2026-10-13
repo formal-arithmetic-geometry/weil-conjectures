@@ -14,38 +14,45 @@
  },
  "proof": [
   {
-   "text": "Choose horseshoe resolutions of the three sheaves. Their degreewise split exact sequence remains exact after sections, products, and finite-diagonal totalization. The assumed tuple surjectivity also makes the coefficient Čech sequence short exact.",
+   "text": "Choose the two end injective resolutions and their canonical Ext/section isomorphisms with cocycle representatives.",
    "uses": [
-    "lem-sp-horseshoe-prescribed-resolutions"
+    "lem-pc-abelian-cech-ext-section-iso"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Both sets of augmentations give morphisms of short exact complex sequences. Naturality of homology connecting maps yields the beta and alpha boundary squares. The constant-sheaf adjunction identifies the section boundary with the Ext boundary via the usual lift-differentiate-lift cocycle computation.",
+   "text": "Apply the canonical comparison predicate to the representatives of c(x) and d(x). This gives c followed by e₁ and H(alpha₁) equal to H(beta₁), and likewise for d.",
    "uses": [
     "def-pc-abelian-cech-comparison-construction",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
+    "lem-pc-abelian-cech-ext-section-iso"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the canonical quotient equations on these horseshoe resolutions. Cancel H(alpha) in degree q+1 and the canonical section/Ext identification.",
+   "text": "Obtain a common total boundary δ and both augmentation squares on the prescribed end resolutions.",
+   "uses": [
+    "lem-pc-abelian-cech-augmentation-boundary-squares"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The section augmentation on I₁ is a quasi-isomorphism because U covers X. Cancel its homology map and e₁ from the right. Substitute the quotient equations and augmentation squares, using associativity, to obtain the original connecting-map identity.",
    "uses": [
     "lem-pc-abelian-cech-alpha-quasi-iso"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-horseshoe-prescribed-resolutions",
+  "lem-pc-abelian-cech-ext-section-iso",
   "def-pc-abelian-cech-comparison-construction",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pc-abelian-cech-augmentation-boundary-squares",
   "lem-pc-abelian-cech-alpha-quasi-iso"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Lemma 20.11.2, augmented double complex; Tag 013T, horseshoe resolutions; Tag 0117, functorial homology sequence"
+  "place": "U1: explicit quotient equations and cancellation; boundary squares split off using Tags 013T and 0117"
  },
  "mathlib_searches": [
   {
@@ -117,12 +124,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T234221-L-2125679",
+  "landing": "20261013T011936-L-2766554",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

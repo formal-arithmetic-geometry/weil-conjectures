@@ -1,0 +1,238 @@
+{
+ "id": "lem-pc-abelian-cech-augmentation-boundary-squares",
+ "kind": "statement",
+ "title": "The alpha and beta augmentation boundary squares",
+ "statement": "Let X be a scheme, U_i arbitrary opens, T a short exact sequence of abelian sheaves surjective on every tuple intersection, and q a natural number. Choose prescribed end resolutions I₁ and I₃. Let e₁ and e₃ identify Ext with section homology in degrees q+1 and q, with the cocycle representative property of [lem-pc-abelian-cech-ext-section-iso]. There exists a homomorphism δ from degree-q total homology of I₃ to degree-(q+1) total homology of I₁ such that δ_Cech followed by H(beta₁) equals H(beta₃) followed by δ, and δ_Ext followed by e₁ and H(alpha₁) equals e₃ followed by H(alpha₃) and δ. The explicit augmentations and total complexes are those of [def-pc-abelian-cech-comparison-construction]. No canonical comparison map c or d is assumed and no cover hypothesis is needed.",
+ "stmt_deps": [
+  "def-pc-abelian-cech-comparison-construction",
+  "lem-pc-abelian-cech-ext-section-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0117",
+  "place": "Functorial long exact cohomology sequence, together with Tag 013T prescribed horseshoe and Tag 01EQ augmentations"
+ },
+ "proof": [
+  {
+   "text": "Extend the prescribed end resolutions by horseshoe. The degreewise split exact rows stay split exact under sections over every tuple, products over tuples and finite sums on total diagonals. Thus the section and total complex sequences are short exact; δ is the connecting map of total homology.",
+   "uses": [
+    "lem-sp-horseshoe-prescribed-resolutions",
+    "def-pc-abelian-cech-comparison-construction",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tuple surjectivity makes the coefficient Cech complex sequence short exact. The horseshoe augmentation equations give the beta morphism of short exact sequences. Restriction naturality gives the alpha morphism. Naturality of homology connecting maps gives both augmentation squares.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an Ext representative lift its cocycle to the middle resolution row, differentiate, and lift through the first inclusion. Adjunction followed by evaluation at 1 gives exactly the section-boundary representative with the same sign. The hypotheses on e₁ and e₃ identify these representatives, yielding the asserted Ext/alpha square.",
+   "uses": [
+    "lem-pc-abelian-cech-ext-section-iso",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-horseshoe-prescribed-resolutions",
+  "def-pc-abelian-cech-comparison-construction",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pc-abelian-cech-ext-section-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0117",
+  "place": "Functorial long exact cohomology sequence, together with Tag 013T prescribed horseshoe and Tag 01EQ augmentations; explicit cocycle details by U1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology comparison with sheaf Ext cohomology connecting homomorphism injective resolution",
+   "results": "{\"t\": \"2026-10-12T23:49:39Z\", \"tool\": \"leanfinder\", \"query\": \"Cech cohomology comparison with sheaf Ext cohomology connecting homomorphism injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\"], \"digest\": \"d2fc85b5ce36fb00\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic Ext and homology APIs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.extMk_surjective",
+   "results": "{\"t\": \"2026-10-12T23:49:43Z\", \"tool\": \"loogle\", \"query\": \"InjectiveResolution.extMk_surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'InjectiveResolution.extMk_surjective'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic Ext and homology APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "extMk.*connecting|section.*Ext.*iso|cech.*boundary",
+   "results": "{\"t\": \"2026-10-12T23:50:28Z\", \"tool\": \"grep\", \"query\": \"extMk.*connecting|section.*Ext.*iso|cech.*boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Operator/Extend.lean\"], \"digest\": \"9304ee6e2fc4dbde\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic Ext and homology APIs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from constant integers sheaf computed as homology of global sections of injective resolution",
+   "results": "{\"t\": \"2026-10-12T23:54:23Z\", \"tool\": \"leanfinder\", \"query\": \"Ext from constant integers sheaf computed as homology of global sections of injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extMk\"], \"digest\": \"59b8b0c04849eea1\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic Ext and homology APIs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.δ_naturality",
+   "results": "{\"t\": \"2026-10-12T23:54:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ShortComplex.ShortExact.δ_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.ShortComplex.ShortExact.δ_naturality'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic Ext and homology APIs only"
+  },
+  {
+   "t": "2026-10-13T00:29:56Z",
+   "tool": "leanfinder",
+   "query": "Ext section homology injective resolution Cech comparison",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CategoryTheory.InjectiveResolution.descFSucc",
+    "CategoryTheory.InjectiveResolution.extMk_hom",
+    "CategoryTheory.InjectiveResolution.descFOne",
+    "CategoryTheory.InjectiveResolution.extMk_surjective",
+    "CategoryTheory.InjectiveResolution.extMk_eq_zero_iff",
+    "CategoryTheory.InjectiveResolution.extMk",
+    "CochainComplex.isKInjective_of_injective_aux",
+    "CategoryTheory.InjectiveResolution.injective"
+   ],
+   "digest": "952e27799eac16eb"
+  },
+  {
+   "t": "2026-10-13T00:29:57Z",
+   "tool": "loogle",
+   "query": "InjectiveResolution extAddEquivCohomologyClass",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "loogle: Unknown identifier `InjectiveResolution`",
+   "top": [],
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "t": "2026-10-13T00:29:57Z",
+   "tool": "grep",
+   "query": "extMk.*homology",
+   "sub": "",
+   "ok": true,
+   "n_hits": 2,
+   "note": "",
+   "top": [
+    "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+    "Mathlib/CategoryTheory/Abelian/Projective/Ext.lean"
+   ],
+   "digest": "ffdfe03a71027cad"
+  },
+  {
+   "t": "2026-10-13T00:30:00Z",
+   "tool": "leanfinder",
+   "query": "augmentation boundary squares Cech homology",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve",
+    "CategoryTheory.Arrow.augmentedCechNerve",
+    "CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s",
+    "CategoryTheory.SimplicialObject.augmentedCechNerve",
+    "CategoryTheory.CosimplicialObject.augmentedCechConerve_obj",
+    "CategoryTheory.Arrow.augmentedCechConerve",
+    "CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy",
+    "CategoryTheory.Arrow.augmentedCechNerve_left"
+   ],
+   "digest": "507a1803bd432252"
+  },
+  {
+   "t": "2026-10-13T00:30:01Z",
+   "tool": "loogle",
+   "query": "ShortComplex homology connecting naturality",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "loogle: Unknown identifier `ShortComplex`",
+   "top": [],
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "t": "2026-10-13T00:30:01Z",
+   "tool": "grep",
+   "query": "homologyMap.*abelianCechBeta",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "t": "2026-10-13T00:42:03Z",
+   "tool": "leansearch",
+   "query": "Cech augmentation homology boundary map",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonBoundary",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-comparison-system-existence",
+   "place": "Canonical Ext/section identification and augmentation boundary squares in the injective Cech construction",
+   "via": [
+    "lem-pc-abelian-cech-comparison-boundary"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAugmentationBoundarySquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AbelianCechAugmentationBoundarySquares.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.abelianCechAugmentation_boundary_squares",
+  "statement": "theorem abelianCechAugmentation_boundary_squares\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)\n    (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact)\n    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (T.g.hom.app (op (⨅ l, U (y l))))) (q : ℕ)\n    (I₁ : InjectiveResolution T.X₁) (I₃ : InjectiveResolution T.X₃)\n    (e₁ : (Sheaf.functorH (Opens.grothendieckTopology X) (q + 1)).obj T.X₁ ≅\n      (abelianCechSections I₁).homology (q + 1))\n    (e₃ : (Sheaf.functorH (Opens.grothendieckTopology X) q).obj T.X₃ ≅\n      (abelianCechSections I₃).homology q)\n    (he₁ : ∀ (t : (Sheaf.functorH (Opens.grothendieckTopology X) (q + 1)).obj T.X₁),\n      ∃ (a : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n          (AddCommGrpCat.of (ULift.{u} ℤ)) ⟶ I₁.cocomplex.X (q + 1))\n        (ha : a ≫ I₁.cocomplex.d (q + 1) ((q + 1) + 1) = 0)\n        (z : (abelianCechSections I₁).cycles (q + 1)),\n        I₁.extMk a ((q + 1) + 1) rfl ha = t ∧\n        ((constantSheafAdj (Opens.grothendieckTopology X) AddCommGrpCat.{u}\n          isTerminalTop).homEquiv _ _ a) (ULift.up 1) =\n            (abelianCechSections I₁).iCycles (q + 1) z ∧\n        e₁.hom t = (abelianCechSections I₁).homologyπ (q + 1) z)\n    (he₃ : ∀ (t : (Sheaf.functorH (Opens.grothendieckTopology X) q).obj T.X₃),\n      ∃ (a : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n          (AddCommGrpCat.of (ULift.{u} ℤ)) ⟶ I₃.cocomplex.X q)\n        (ha : a ≫ I₃.cocomplex.d q (q + 1) = 0)\n        (z : (abelianCechSections I₃).cycles q),\n        I₃.extMk a (q + 1) rfl ha = t ∧\n        ((constantSheafAdj (Opens.grothendieckTopology X) AddCommGrpCat.{u}\n          isTerminalTop).homEquiv _ _ a) (ULift.up 1) =\n            (abelianCechSections I₃).iCycles q z ∧\n        e₃.hom t = (abelianCechSections I₃).homologyπ q z) :\n    ∃ (δ : ((abelianCechDouble U I₃).total (.up ℕ)).homology q ⟶\n        ((abelianCechDouble U I₁).total (.up ℕ)).homology (q + 1)),\n      TopCat.Sheaf.cechδ U hT hg q ≫\n          HomologicalComplex.homologyMap (abelianCechBeta U I₁) (q + 1) =\n        HomologicalComplex.homologyMap (abelianCechBeta U I₃) q ≫ δ ∧\n      Sheaf.functorHδ hT q ≫ e₁.hom ≫\n          HomologicalComplex.homologyMap (abelianCechAlpha U I₁) (q + 1) =\n        e₃.hom ≫ HomologicalComplex.homologyMap (abelianCechAlpha U I₃) q ≫ δ",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T011936-L-2766554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T011936-L-2766554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

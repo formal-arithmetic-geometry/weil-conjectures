@@ -6,8 +6,9 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
+import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAlphaQuasiIso
-import Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAugmentationBoundarySquares
 
 /-! # Boundary compatibility of the augmentation quotient
 
@@ -22,6 +23,35 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
+
+/-- The cocycle characterization implies the quotient equation on homology. -/
+private theorem comparison_quotient
+    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
+    {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
+    (I : InjectiveResolution F) (q : ℕ)
+    (e : (Sheaf.functorH (Opens.grothendieckTopology X) q).obj F ≅
+      (abelianCechSections I).homology q)
+    (he : ∀ (t : (Sheaf.functorH (Opens.grothendieckTopology X) q).obj F),
+      ∃ (a : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
+          (AddCommGrpCat.of (ULift.{u} ℤ)) ⟶ I.cocomplex.X q)
+        (ha : a ≫ I.cocomplex.d q (q + 1) = 0)
+        (z : (abelianCechSections I).cycles q),
+        I.extMk a (q + 1) rfl ha = t ∧
+        ((constantSheafAdj (Opens.grothendieckTopology X) AddCommGrpCat.{u}
+          isTerminalTop).homEquiv _ _ a) (ULift.up 1) =
+            (abelianCechSections I).iCycles q z ∧
+        e.hom t = (abelianCechSections I).homologyπ q z)
+    (c : (TopCat.Sheaf.cechCohomologyFunctor U q).obj F ⟶
+      (Sheaf.functorH (Opens.grothendieckTopology X) q).obj F)
+    (hc : IsAbelianCechComparison U F q c) :
+    c ≫ e.hom ≫ HomologicalComplex.homologyMap (abelianCechAlpha U I) q =
+      HomologicalComplex.homologyMap (abelianCechBeta U I) q := by
+  ext x
+  obtain ⟨a, ha, z, ht, hz, hez⟩ := he (c x)
+  change HomologicalComplex.homologyMap (abelianCechAlpha U I) q (e.hom (c x)) = _
+  rw [hez]
+  exact (hc I x a ha z hz ht.symm).symm
+
 /-- The augmentation quotient commutes with connecting maps for sequences
 surjective on every tuple intersection. Canonicity is an essential hypothesis.
 
@@ -63,5 +93,18 @@ theorem abelianCechComparison_boundary
     (hc : IsAbelianCechComparison U T.X₁ (q + 1) c)
     (hd : IsAbelianCechComparison U T.X₃ q d) :
     TopCat.Sheaf.cechδ U hT hg q ≫ c = d ≫ Sheaf.functorHδ hT q := by
-  sorry
+  let I₁ := injectiveResolution T.X₁
+  let I₃ := injectiveResolution T.X₃
+  obtain ⟨e₁, he₁⟩ := abelianCechExtSectionIso_exists I₁ (q + 1)
+  obtain ⟨e₃, he₃⟩ := abelianCechExtSectionIso_exists I₃ q
+  obtain ⟨δ, hβ, hα⟩ :=
+    abelianCechAugmentation_boundary_squares U T hT hg q I₁ I₃ e₁ e₃ he₁ he₃
+  have hc' := comparison_quotient U I₁ (q + 1) e₁ he₁ c hc
+  have hd' := comparison_quotient U I₃ q e₃ he₃ d hd
+  have : QuasiIso (abelianCechAlpha U I₁) := abelianCechAlpha_quasiIso U hcover I₁
+  apply (cancel_mono (e₁.hom ≫
+    HomologicalComplex.homologyMap (abelianCechAlpha U I₁) (q + 1))).1
+  simp only [Category.assoc]
+  rw [hc', hα, hβ, ← hd']
+  simp only [Category.assoc]
 end AlgebraicGeometry.Scheme.Modules
