@@ -45,7 +45,58 @@ variable {R₀ B Bk L : Type u} [CommRing R₀] [IsDomain R₀] [IsIntegrallyClo
   [CommRing Bk] [Algebra B Bk]
   [IsLocalization (Algebra.algebraMapSubmonoid B (nonZeroDivisors R₀)) Bk]
   [CommRing L] [Algebra Bk L] [Algebra B L] [IsScalarTower B Bk L]
-  [Module.Finite Bk L] [Algebra.Etale Bk L]
+  [Module.Finite Bk L]
+
+omit [IsNoetherianRing R₀] [Algebra.Smooth R₀ B] [IsNoetherianRing B] in
+include Bk in
+/-- Distinct ring maps `L → K` over a section `ε : B → R₀` restrict to distinct ring maps
+`T₀ → R₀` on the integral closure `T₀` of `B` in `L`, since `R₀` is integrally closed. -/
+lemma exists_integralClosure_points (ε : B →ₐ[R₀] R₀) {k : ℕ}
+    {K : Type u} [Field K] [Algebra R₀ K] [IsFractionRing R₀ K]
+    (φ : Fin k → (L →+* K))
+    (hφ : ∀ j, (φ j).comp (algebraMap B L) = (algebraMap R₀ K).comp ε.toRingHom)
+    (hφinj : Function.Injective φ) :
+    ∃ χ : Fin k → (integralClosure B L →+* R₀),
+      (∀ j, (χ j).comp (algebraMap B (integralClosure B L)) = ε.toRingHom) ∧
+        Function.Injective χ := by
+  have hinj : Function.Injective (algebraMap R₀ K) := IsFractionRing.injective R₀ K
+  have hmem (j : Fin k) (t : integralClosure B L) :
+      (φ j).comp (integralClosure B L).val.toRingHom t ∈ (algebraMap R₀ K).range := by
+    have : IsIntegral R₀ (φ j t) := IsIntegral.map_of_comp_eq ε.toRingHom (φ j) (hφ j).symm t.2
+    obtain ⟨y, hy⟩ := IsIntegrallyClosed.isIntegral_iff.1 this
+    exact ⟨y, hy⟩
+  let e : R₀ ≃+* (algebraMap R₀ K).range :=
+    RingEquiv.ofBijective (algebraMap R₀ K).rangeRestrict
+      ⟨fun x y h ↦ hinj (congrArg Subtype.val h), (algebraMap R₀ K).rangeRestrict_surjective⟩
+  let χ (j : Fin k) : integralClosure B L →+* R₀ :=
+    e.symm.toRingHom.comp (((φ j).comp (integralClosure B L).val.toRingHom).codRestrict _
+      (hmem j))
+  have hχ (j : Fin k) (t : integralClosure B L) : algebraMap R₀ K (χ j t) = φ j t := by
+    have : e (χ j t) = ((φ j).comp (integralClosure B L).val.toRingHom).codRestrict _
+        (hmem j) t := e.apply_symm_apply _
+    exact congrArg Subtype.val this
+  refine ⟨χ, fun j ↦ RingHom.ext fun b ↦ hinj ?_, fun j l hjl ↦ hφinj ?_⟩
+  · rw [RingHom.comp_apply, hχ]
+    exact congrArg (· b) (hφ j)
+  · have hT (t : integralClosure B L) : φ j t = φ l t := by
+      rw [← hχ, ← hχ, hjl]
+    refine RingHom.ext fun x ↦ ?_
+    have hx : IsIntegral Bk x := Algebra.IsIntegral.isIntegral x
+    obtain ⟨⟨_, r, hr, rfl⟩, hm⟩ := IsIntegral.exists_multiple_integral_of_isLocalization
+      (Algebra.algebraMapSubmonoid B (nonZeroDivisors R₀)) x hx
+    have h1 := hT ⟨_, hm⟩
+    simp only [Submonoid.smul_def, Algebra.smul_def, map_mul] at h1
+    have hr0 : φ j (algebraMap B L (algebraMap R₀ B r)) ≠ 0 := by
+      rw [← RingHom.comp_apply, hφ]
+      simpa using (map_ne_zero_iff _ hinj).2 (nonZeroDivisors.ne_zero hr)
+    have hjl' : φ j (algebraMap B L (algebraMap R₀ B r)) =
+        φ l (algebraMap B L (algebraMap R₀ B r)) := by
+      have h1 := congrArg (· (algebraMap R₀ B r)) (hφ j)
+      have h2 := congrArg (· (algebraMap R₀ B r)) (hφ l)
+      simp only [RingHom.comp_apply] at h1 h2
+      rw [h1, h2]
+    rw [← hjl'] at h1
+    exact mul_left_cancel₀ hr0 h1
 
 include Bk in
 /-- **Étaleness of the normalization near a section in depth two** (commutative algebra of the
@@ -171,7 +222,23 @@ theorem exists_etale_integralClosure_of_two_le_height (ε : B →ₐ[R₀] R₀)
     exact hk p
   -- the points along the section
   obtain ⟨ψ, hψ⟩ : ∃ ψ : Fin k → (integralClosure R M →ₐ[R] A), Function.Injective ψ := by
-    sorry
+    obtain ⟨χ, hχ, hχinj⟩ := exists_integralClosure_points (Bk := Bk) ε φ hφ hφinj
+    let : Algebra B A := (fRA.comp (algebraMap B R)).toAlgebra
+    have : IsScalarTower B R A := .of_algebraMap_eq' rfl
+    let χ' (j : Fin k) : T₀ →ₐ[B] A :=
+      { toRingHom := (algebraMap R₀ A).comp (χ j)
+        commutes' := fun b ↦ by
+          change algebraMap R₀ A ((χ j).comp (algebraMap B T₀) b) = fRA (algebraMap B R b)
+          rw [hχ]
+          exact (hfRA b).symm }
+    let ψ' (j : Fin k) : R ⊗[B] T₀ →ₐ[R] A :=
+      Algebra.TensorProduct.lift (Algebra.ofId R A) (χ' j) fun _ _ ↦ Commute.all _ _
+    refine ⟨fun j ↦ (ψ' j).comp e₀.symm.toAlgHom, fun j l hjl ↦ hχinj ?_⟩
+    have hinjA : Function.Injective (algebraMap R₀ A) :=
+      IsLocalization.injective A q.primeCompl_le_nonZeroDivisors
+    refine RingHom.ext fun t ↦ hinjA ?_
+    have := AlgHom.congr_fun hjl (e₀ (1 ⊗ₜ t))
+    simpa [ψ', χ'] using this
   obtain ⟨hE, hF⟩ := etale_finite_integralClosure (A := A) (R := R) (M := M) hdim hunit het ψ hψ
   have hE' : Algebra.Etale R (R ⊗[B] T₀) := .of_equiv e₀.symm
   have hF' : Module.Finite R (R ⊗[B] T₀) := .equiv e₀.symm.toLinearEquiv
