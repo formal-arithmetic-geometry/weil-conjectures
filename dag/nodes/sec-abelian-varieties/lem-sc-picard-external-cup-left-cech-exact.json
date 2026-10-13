@@ -34,35 +34,22 @@
  ],
  "proof": [
   {
-   "text": "The library finite subcovers are finite affine covers. Affine diagonal makes all nonempty finite intersections affine. On each intersection apply the sectionwise kernel property and the affine quasi-coherent cokernel formula to S. Restriction of scalars preserves the resulting short exact module sequence.",
+   "text": "The actual finite-subcover affine opens are affine. Express each categorical product of a nonempty finite tuple as its infimum, and use isAffineHom_diagonal_iff and InfClosed.iInf_mem_of_nonempty. Apply scalar affine section exactness to every tuple. Assemble a degreewise splitting by product projections and Pi.lift to prove scalar Cech short exactness.",
    "uses": [
-    "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "lem-sc-picard-affine-diagonal-intersections",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-sc-picard-scalar-affine-sections-exact",
+    "lem-sc-picard-affine-diagonal-intersections"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Tensor each section sequence with the section spaces of G over the field. It stays short exact. Finite tuple products preserve this exactness; in each natural total degree there are finitely many nonzero factor degrees. Direct sums of these sequences are exact, so the tensor total sequence is degreewise short exact.",
-   "uses": [
-    "lem-weil-pbc-flat-tensor-exact"
-   ],
-   "elementary": false
+   "text": "Extension by zero is short exact degreewise: use extendXIso inside the embedding image and the zero-object splitting outside it. Each degreewise vector-space short exact sequence splits by splittingOfProjective. Tensor its section and retraction with the identity and extend through mapBifunctorDesc. Check the three splitting identities on each total summand with ι_mapBifunctorMap and ι_mapBifunctorDesc. This proves tensor-total short exactness without a new flat-tensor lemma.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "On intersections of W, use the affine product spectrum, affine pullback section isomorphisms and tensor section formula. These identify the product-coefficient sequence with the factor section sequence tensored with sections of G. Quasi-coherence of pullbacks, identified with tensorPullback by the adjunction, and tensor-product quasi-coherence justify all the section comparisons.",
+   "text": "A finite intersection of product-cover opens equals the rectangle formed by the factor intersections. These factor intersections are affine by the first step. Apply external affine rectangle exactness, then the same Cech product-splitting and extension-by-zero arguments. The existing zero-map instances use the proved tensorPullback adjunction to obtain additivity.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-pc-module-pullback-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Products over tuples and extension by zero preserve the degreewise short exact sequences; in a category of cochain complexes degreewise exactness, monicity and epicity give short exactness. The actual functor constructions preserve zero: scalar Cech by product projections, tensor total by summand inclusions, pullback by its additive adjunction, and tensor by the tensor-Hom adjunction. Empty covers give zero terms. These are direct applications of the corresponding Mathlib constructions.",
-   "uses": [
+    "lem-sc-picard-external-affine-rectangle-exact",
     "lem-pc-module-pullback-adjunction"
    ],
    "elementary": true
@@ -71,18 +58,13 @@
  "proof_deps": [
   "lem-pc-module-pullback-adjunction",
   "lem-sc-picard-affine-diagonal-intersections",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-qcqs-finite-affine-open-cover",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+  "lem-sc-picard-external-affine-rectangle-exact",
+  "lem-sc-picard-scalar-affine-sections-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and the short exact coefficient diagram immediately after it; read online at https://stacks.math.columbia.edu/tag/0BED."
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Coefficient exactness paragraph; R1 Lean proof uses degreewise vector-space splittings for products and tensor total, and isolates the external affine-section comparison."
  },
  "blueprint": {
   "is": null,
@@ -160,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T100149-L-2493559",
+  "landing": "20261013T115028-L-3325733",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

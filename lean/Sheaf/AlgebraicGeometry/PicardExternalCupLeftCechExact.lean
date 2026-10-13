@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Sheaf.AlgebraicGeometry.PicardScalarAffineSectionsExact
+import Sheaf.AlgebraicGeometry.PicardExternalAffineRectangleExact
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
@@ -132,6 +135,191 @@ instance picardLeftProductCechFunctor_zero
   unfold picardLeftProductCechFunctor
   infer_instance
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tensor_shortExact
+    (C : CochainComplex (ModuleCat.{w} k) ℤ)
+    (S : ShortComplex (CochainComplex (ModuleCat.{w} k) ℤ)) (hS : S.ShortExact) :
+    (S.map (picardCechTensorRight C)).ShortExact := by
+  classical
+  let t (p : ℤ) :=
+    ((HomologicalComplex.shortExact_iff_degreewise_shortExact S).mp hS p).splittingOfProjective
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+  intro n
+  let r := HomologicalComplex.mapBifunctorDesc (K₁ := S.X₂) (K₂ := C)
+    (F := curriedTensor (ModuleCat.{w} k)) (c := ComplexShape.up ℤ)
+    (fun p q hpq ↦ (t p).r ▷ C.X q ≫ HomologicalComplex.ιMapBifunctor
+      S.X₁ C (curriedTensor _) (ComplexShape.up ℤ) p q n hpq)
+  let s := HomologicalComplex.mapBifunctorDesc (K₁ := S.X₃) (K₂ := C)
+    (F := curriedTensor (ModuleCat.{w} k)) (c := ComplexShape.up ℤ)
+    (fun p q hpq ↦ (t p).s ▷ C.X q ≫ HomologicalComplex.ιMapBifunctor
+      S.X₂ C (curriedTensor _) (ComplexShape.up ℤ) p q n hpq)
+  apply ShortComplex.Splitting.shortExact
+  refine { r := r, s := s, f_r := ?_, s_g := ?_, id := ?_ }
+  · change (HomologicalComplex.mapBifunctorMap S.f (𝟙 C) _ _).f n ≫ r = 𝟙 _
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    simp only [curriedTensor_obj_obj, ComplexShape.π_def,
+      HomologicalComplex.ι_mapBifunctorMap_assoc, curriedTensor_map_app,
+      HomologicalComplex.id_f, curriedTensor_obj_map, whiskerLeft_id,
+      HomologicalComplex.ι_mapBifunctorDesc, Category.id_comp, Category.comp_id, r]
+    rw [← Category.assoc, ← comp_whiskerRight]
+    change ((S.map (HomologicalComplex.eval _ _ p)).f ≫ (t p).r) ▷ _ ≫ _ = _
+    rw [(t p).f_r, id_whiskerRight, Category.id_comp]
+  · change s ≫ (HomologicalComplex.mapBifunctorMap S.g (𝟙 C) _ _).f n = 𝟙 _
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    simp only [curriedTensor_obj_obj, ComplexShape.π_def,
+      HomologicalComplex.ι_mapBifunctorDesc_assoc, Category.assoc,
+      HomologicalComplex.ι_mapBifunctorMap, curriedTensor_map_app, HomologicalComplex.id_f,
+      curriedTensor_obj_map, whiskerLeft_id, Category.id_comp, Category.comp_id, s]
+    rw [← Category.assoc, ← comp_whiskerRight]
+    change ((t p).s ≫ (S.map (HomologicalComplex.eval _ _ p)).g) ▷ _ ≫ _ = _
+    rw [(t p).s_g, id_whiskerRight, Category.id_comp]
+  · change r ≫ (HomologicalComplex.mapBifunctorMap S.f (𝟙 C) _ _).f n +
+      (HomologicalComplex.mapBifunctorMap S.g (𝟙 C) _ _).f n ≫ s = 𝟙 _
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    simp only [curriedTensor_obj_obj, ComplexShape.π_def, Preadditive.comp_add,
+      HomologicalComplex.ι_mapBifunctorDesc_assoc, Category.assoc,
+      HomologicalComplex.ι_mapBifunctorMap, curriedTensor_map_app, HomologicalComplex.id_f,
+      curriedTensor_obj_map, whiskerLeft_id, Category.id_comp,
+      HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.ι_mapBifunctorDesc,
+      Category.comp_id, r, s]
+    rw [← Category.assoc, ← Category.assoc, ← comp_whiskerRight,
+      ← comp_whiskerRight, ← Preadditive.add_comp, ← MonoidalPreadditive.add_whiskerRight]
+    change ((t p).r ≫ (S.map (HomologicalComplex.eval _ _ p)).f +
+      (S.map (HomologicalComplex.eval _ _ p)).g ≫ (t p).s) ▷ _ ≫ _ = _
+    rw [(t p).id, id_whiskerRight, Category.id_comp]
+
+private theorem extend_shortExact
+    (S : ShortComplex (CochainComplex (ModuleCat.{w} k) ℕ)) (hS : S.ShortExact) :
+    (S.map (ComplexShape.embeddingUpNat.extendFunctor _)).ShortExact := by
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+  intro n
+  by_cases hn : ∃ i, ComplexShape.embeddingUpNat.f i = n
+  · obtain ⟨i, hi⟩ := hn
+    let e : ((S.map (ComplexShape.embeddingUpNat.extendFunctor _)).map
+        (HomologicalComplex.eval _ _ n)) ≅ S.map (HomologicalComplex.eval _ _ i) :=
+      ShortComplex.isoMk
+      (S.X₁.extendXIso ComplexShape.embeddingUpNat hi)
+      (S.X₂.extendXIso ComplexShape.embeddingUpNat hi)
+      (S.X₃.extendXIso ComplexShape.embeddingUpNat hi)
+      (by
+        symm
+        change (HomologicalComplex.extendMap S.f _).f n ≫ _ = _
+        rw [HomologicalComplex.extendMap_f _ _ hi]
+        simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+        rfl)
+      (by
+        symm
+        change (HomologicalComplex.extendMap S.g _).f n ≫ _ = _
+        rw [HomologicalComplex.extendMap_f _ _ hi]
+        simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+        rfl)
+    exact ShortComplex.shortExact_of_iso e.symm
+      ((HomologicalComplex.shortExact_iff_degreewise_shortExact S).mp hS i)
+  · have h (j : ℕ) : ComplexShape.embeddingUpNat.f j ≠ n := fun hj ↦ hn ⟨j, hj⟩
+    have h₁ := S.X₁.isZero_extend_X ComplexShape.embeddingUpNat n h
+    have h₂ := S.X₂.isZero_extend_X ComplexShape.embeddingUpNat n h
+    have h₃ := S.X₃.isZero_extend_X ComplexShape.embeddingUpNat n h
+    apply ShortComplex.Splitting.shortExact
+    exact
+      { r := 0
+        s := 0
+        f_r := h₁.eq_of_src _ _
+        s_g := h₃.eq_of_src _ _
+        id := h₂.eq_of_src _ _ }
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem cech_shortExact
+    (f : X ⟶ Spec (CommRingCat.of k)) {ι : Type w} (U : ι → X.Opens)
+    (S : ShortComplex X.Modules)
+    (h : ∀ (n : ℕ) (y : Fin (n + 1) → ι),
+      (S.map (picardScalarSectionsFunctor f (∏ᶜ fun l ↦ U (y l)))).ShortExact) :
+    (S.map (picardScalarCechFunctor f U)).ShortExact := by
+  classical
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+  intro n
+  let P := scalarFunctor f ⋙ sheafToPresheaf _ _
+  let t (y : Fin (n + 1) → ι) := (h n y).splittingOfProjective
+  let r : (∏ᶜ fun y : Fin (n + 1) → ι ↦
+      (P.obj S.X₂).obj (Opposite.op (∏ᶜ fun l ↦ U (y l)))) ⟶
+      (∏ᶜ fun y : Fin (n + 1) → ι ↦
+        (P.obj S.X₁).obj (Opposite.op (∏ᶜ fun l ↦ U (y l)))) := Pi.lift fun y : Fin (n + 1) → ι ↦
+    Pi.π (fun y : Fin (n + 1) → ι ↦ (P.obj S.X₂).obj
+      (Opposite.op (∏ᶜ fun l ↦ U (y l)))) y ≫ (t y).r
+  let s : (∏ᶜ fun y : Fin (n + 1) → ι ↦
+      (P.obj S.X₃).obj (Opposite.op (∏ᶜ fun l ↦ U (y l)))) ⟶
+      (∏ᶜ fun y : Fin (n + 1) → ι ↦
+        (P.obj S.X₂).obj (Opposite.op (∏ᶜ fun l ↦ U (y l)))) := Pi.lift fun y : Fin (n + 1) → ι ↦
+    Pi.π (fun y : Fin (n + 1) → ι ↦ (P.obj S.X₃).obj
+      (Opposite.op (∏ᶜ fun l ↦ U (y l)))) y ≫ (t y).s
+  apply ShortComplex.Splitting.shortExact
+  refine { r := r, s := s, f_r := ?_, s_g := ?_, id := ?_ }
+  · apply Pi.hom_ext
+    intro y
+    change (Limits.Pi.map fun y : Fin (n + 1) → ι ↦
+      (P.map S.f).app (Opposite.op (∏ᶜ fun l ↦ U (y l)))) ≫ r ≫ Pi.π _ y = _
+    simp only [Functor.comp_obj, ObjectProperty.ι_obj, Functor.comp_map,
+      ObjectProperty.ι_map, picardScalarSectionsFunctor, Functor.rightOp_obj,
+      limit.lift_π, Fan.mk_pt, Fan.mk_π_app, ← Category.assoc, Pi.map_π,
+      Category.id_comp, P, r]
+    change _ ≫ ((S.map (picardScalarSectionsFunctor f (∏ᶜ fun l ↦ U (y l)))).f ≫ (t y).r) = _
+    rw [(t y).f_r]
+    simp only [Category.comp_id]
+    rfl
+  · apply Pi.hom_ext
+    intro y
+    change s ≫ (Limits.Pi.map fun y : Fin (n + 1) → ι ↦
+      (P.map S.g).app (Opposite.op (∏ᶜ fun l ↦ U (y l)))) ≫ Pi.π _ y = _
+    simp only [Functor.comp_obj, ObjectProperty.ι_obj, picardScalarSectionsFunctor,
+      Functor.comp_map, ObjectProperty.ι_map, Functor.rightOp_obj, Pi.map_π,
+      ← Category.assoc, limit.lift_π, Fan.mk_pt, Fan.mk_π_app, Category.id_comp, P, s]
+    change _ ≫ ((t y).s ≫ (S.map (picardScalarSectionsFunctor f (∏ᶜ fun l ↦ U (y l)))).g) = _
+    rw [(t y).s_g]
+    simp only [Category.comp_id]
+    rfl
+  · apply Pi.hom_ext
+    intro y
+    change (r ≫ (Limits.Pi.map fun y : Fin (n + 1) → ι ↦
+      (P.map S.f).app (Opposite.op (∏ᶜ fun l ↦ U (y l)))) +
+      (Limits.Pi.map fun y : Fin (n + 1) → ι ↦
+      (P.map S.g).app (Opposite.op (∏ᶜ fun l ↦ U (y l)))) ≫ s) ≫ Pi.π _ y = _
+    simp only [Functor.comp_obj, ObjectProperty.ι_obj, picardScalarSectionsFunctor,
+      Functor.comp_map, ObjectProperty.ι_map, Functor.rightOp_obj, Preadditive.add_comp,
+      Category.assoc, Pi.map_π, limit.lift_π_assoc, Fan.mk_pt, Discrete.functor_obj_eq_as,
+      Fan.mk_π_app, limit.lift_π, Pi.map_π_assoc, Category.id_comp, P, r, s]
+    rw [← Preadditive.comp_add]
+    change _ ≫ ((t y).r ≫ (S.map (picardScalarSectionsFunctor f (∏ᶜ fun l ↦ U (y l)))).f +
+      (S.map (picardScalarSectionsFunctor f (∏ᶜ fun l ↦ U (y l)))).g ≫ (t y).s) = _
+    rw [(t y).id]
+    simp only [Category.comp_id]
+    rfl
+
+private theorem opens_pi_eq_iInf {Z : Scheme.{w}} {ι : Type*} (U : ι → Z.Opens) :
+    (∏ᶜ U) = ⨅ i, U i := by
+  apply le_antisymm
+  · exact le_iInf fun i ↦ (Pi.π U i).le
+  · exact (Pi.lift fun i ↦ homOfLE (iInf_le U i)).le
+
+private theorem affine_intersection
+    (f : X ⟶ Spec (CommRingCat.of k)) [IsAffineHom (pullback.diagonal f)]
+    {ι : Type w} (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i))
+    (n : ℕ) (y : Fin (n + 1) → ι) : IsAffineOpen (∏ᶜ fun l ↦ U (y l)) := by
+  rw [opens_pi_eq_iInf]
+  have hinf : InfClosed (Set.ofPred (IsAffineOpen (X := X))) := by
+    intro A hA B hB
+    exact (isAffineHom_diagonal_iff (f := f)).mp inferInstance ⊤ (isAffineOpen_top _)
+      A (by simp) B (by simp) hA hB
+  exact hinf.iInf_mem_of_nonempty (fun l ↦ hU (y l))
+
+private theorem finite_affine_opens (Z : Scheme.{w}) [CompactSpace Z]
+    (i : Z.affineCover.finiteSubcover.I₀) : IsAffineOpen (picardFiniteAffineOpens Z i) := by
+  dsimp [picardFiniteAffineOpens, Scheme.OpenCover.finiteSubcover_f]
+  exact isAffineOpen_opensRange _
+
 /-- Both explicit Cech sequences are short exact in the left coefficient.
 Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, the short exact
 coefficient diagram after equation-kunneth-on-cech.
@@ -159,7 +347,31 @@ theorem picardExternalCup_left_cech_exact
     [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent]
     (G : Y.Modules) [G.IsQuasicoherent] :
     (S.map (picardLeftTensorCechFunctor f g G)).ShortExact ∧
-      (S.map (picardLeftProductCechFunctor f g G)).ShortExact := by sorry
+      (S.map (picardLeftProductCechFunctor f g G)).ShortExact := by
+  have hcech : (S.map (picardScalarCechFunctor f (picardFiniteAffineOpens X))).ShortExact := by
+    apply cech_shortExact
+    intro n y
+    exact picardScalar_affine_sections_exact f _
+      (affine_intersection f _ (finite_affine_opens X) n y) S hS
+  have ht := tensor_shortExact
+    (((picardScalarCechFunctor g (picardFiniteAffineOpens Y)).obj G).extend
+      ComplexShape.embeddingUpNat) _ (extend_shortExact _ hcech)
+  have hp : ((S.map (picardExternalCoefficientFunctor f g G)).map
+      (picardScalarCechFunctor (pullback.fst f g ≫ f)
+        (picardProductAffineOpens f g))).ShortExact := by
+    apply cech_shortExact
+    intro n y
+    have hrect : (∏ᶜ fun l ↦ picardProductAffineOpens f g (y l)) =
+        pullback.fst f g ⁻¹ᵁ (∏ᶜ fun l ↦ picardFiniteAffineOpens X (y l).1) ⊓
+          pullback.snd f g ⁻¹ᵁ (∏ᶜ fun l ↦ picardFiniteAffineOpens Y (y l).2) := by
+      simp only [opens_pi_eq_iInf]
+      ext x
+      simp [picardProductAffineOpens, TopologicalSpace.Opens.coe_iInf, forall_and]
+    rw [hrect]
+    exact picardExternal_affine_rectangle_exact f g _ _
+      (affine_intersection f _ (finite_affine_opens X) n (fun l ↦ (y l).1))
+      (affine_intersection g _ (finite_affine_opens Y) n (fun l ↦ (y l).2)) S hS G
+  exact ⟨ht, extend_shortExact _ hp⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules

@@ -12323,3 +12323,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:50 L: merged deliver/M2/Sheaf.Algebra.Homology.BaseDerivedTensorLocalizedNaturality (stage 3; reviewer PASS; first push; landing 20261013T115027-L-3325241 (interface); batch 20261013T115020; modules 3; new nodes 2)
 - 11:50 L: merged deliver/M4/Sheaf.AlgebraicGeometry.DescendedInvertibleNeighbourhood (stage 3; reviewer PASS; first push; landing 20261013T115027-L-3325436 (proof); batch 20261013T115020; modules 1; new nodes 0)
 - 11:50 L: merged deliver/P4/Sheaf.AlgebraicGeometry.EtaleOpenSquareDiagramIdentity (stage 3; reviewer PASS; first push; landing 20261013T115028-L-3325539 (proof); batch 20261013T115020; modules 1; new nodes 0)
+- 11:50 L: merged deliver/R1/Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact (stage 3; reviewer PASS; first push; landing 20261013T115028-L-3325733 (interface); batch 20261013T115020; modules 3; new nodes 2)
