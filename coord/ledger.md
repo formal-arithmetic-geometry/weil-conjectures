@@ -12538,3 +12538,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:54 L: merged deliver/K1/Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncations (stage 3; reviewer PASS; first push; landing 20261013T125447-L-3875209 (interface); batch 20261013T125443; modules 3; new nodes 2)
 - 12:54 L: merged deliver/K2/Sheaf.AlgebraicGeometry.PicardDirectImageFibreBetti (stage 3; reviewer PASS; first push; landing 20261013T125448-L-3875319 (interface); batch 20261013T125443; modules 3; new nodes 2)
 - 12:54 L: merged deliver/M1/Sheaf.AlgebraicGeometry.RelativeTensorStalkGlobalHomology (stage 3; reviewer PASS; first push; landing 20261013T125448-L-3875464 (interface); batch 20261013T125443; modules 3; new nodes 2)
+- 12:54 L: merged deliver/N3/Sheaf.AlgebraicGeometry.CoherentOpenSectionCarrier (stage 3; reviewer PASS; first push; landing 20261013T125448-L-3875614 (proof); batch 20261013T125443; modules 1; new nodes 0)
