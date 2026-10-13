@@ -177,7 +177,9 @@ on the unbounded derived categories `D(-_ét, Λ)` is an isomorphism. This is th
 upgrade of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`. It
 holds because the question is local on `Y`, and over a quasi-compact open of `Y` the proper
 map `f` has bounded fibre dimension, so `Rf_*` has finite cohomological dimension on torsion
-sheaves and the bounded below statement passes to unbounded complexes. -/
+sheaves and the bounded below statement passes to unbounded complexes.
+
+This is blueprint `lem-kun-0f0c` (for `Λ` torsion, i.e. a `ℤ/n`-algebra). -/
 theorem Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTorsion Λ)
     [IsProper f] (sq : IsPullback g' f' f g) :
     IsIso (Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
