@@ -34,16 +34,34 @@
  ],
  "proof": [
   {
-   "text": "Descend the finite coefficients of the presentation and localization prime to a common stage, then verify the cocone, locality, and compatibility assertions elementwise.",
-   "uses": [],
+   "text": "Use finite presentation only to obtain finite type and Small P. Replace P by its Shrink algebra in the base universe. Apply exists_finiteType_ring_system to construct a compatible tail of finite type stage algebras with colimit ring-equivalent to P. This uses finite generators, not descent of relations.",
+   "uses": [
+    "lem-weil-pbc-finite-type-ring-system"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Transport the given localization along the colimit ring equivalence, using IsLocalization.of_ringEquiv_left, and apply exists_localized_filtered_ring_system. It provides the localized diagram B, colimit cocone β, and compatible essentially-finite-type maps from the unlocalized stages.",
+   "uses": [
+    "lem-weil-pbc-localize-filtered-ring-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define τ₀ᵢ by composing the stage structure map σᵢ with the localization map. RingHom.EssFiniteType.comp gives its essential finite type. Its composite with βᵢ equals τ followed by the original colimit leg, hence is local; isLocalHom_of_comp gives locality of τ₀ᵢ. Naturality of the localization transformation and of σ proves naturality of τ₀. Each Bᵢ is local because βᵢ is local into T, by RingHom.domain_isLocalRing. Cocone naturality expresses βᵢ as βⱼ composed with a transition map, so isLocalHom_of_comp proves locality of every transition map. No local-transition assumption on the original system is needed in this argument.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-ring-system",
+  "lem-weil-pbc-localize-filtered-ring-system"
+ ],
  "proof_origin": {
   "by": "stage3-worker",
+  "group": "P2",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemmas 00QV and 00QX"
+  "place": "Tags 00QV and 037D; finite-generator polynomial-image variant for the weaker core conclusion, with the localization step proved from the existing prime-localization colimit theorem."
  },
  "mathlib_searches": [
   {
@@ -144,9 +162,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T222407-L-1224402",
+  "landing": "20261013T231541-L-1819541",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

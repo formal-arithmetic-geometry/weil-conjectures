@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-localize-filtered-ring-system",
+ "kind": "statement",
+ "title": "Localize a filtered ring diagram at a local target",
+ "statement": "Let $J$ be a small filtered category and $D:J\\to\\mathrm{CommRing}$ a diagram [def-weil-pbc-category-colimit]. Let $T$ be a nontrivial commutative ring with a unique maximal ideal and $g:\\operatorname{colim}D\\to T$ a ring map presenting $T$ as the localization at a submonoid $W$ (the elements of $W$ map to units, all target elements are fractions, and equality of base elements is detected after multiplication by an element of $W$). Then there exist a diagram $B:J\\to\\mathrm{CommRing}$, a colimit cocone $\\beta:B\\to T$, and a natural transformation $\\iota_B:D\\to B$. Every component of $\\iota_B$ is essentially of finite type [def-weil-pbc-essentially-finite-type-algebra], every component of $\\beta$ reflects units, and $\\beta_i\\circ(\\iota_B)_i=g\\circ\\iota_i$ for each canonical colimit leg $\\iota_i$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037D (lemma-colimit-normal-ring), first paragraph of the proof, localization at contracted primes; Tag 00QV (lemma-limit-essentially-finite-presentation), final paragraph, localization at the inverse-image prime."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-essentially-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Let q be the inverse image under g of the maximal ideal of T. It is prime. Each original denominator maps to a unit, and every element outside q maps to a unit, so IsLocalization.of_le enlarges W to q.primeCompl. IsLocalization.algEquiv uniquely identifies the canonical localization at q with T.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply filteredColimitLocalizationAtPrime to D and q, obtaining the localized diagram B, its object identifications, its compatible localization maps, and a colimit cocone whose point is the canonical localization at q.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the object identifications to assemble the localization maps into a natural transformation ιB. Compose the cocone with its point identification and the localization algebra equivalence to T. IsColimit.extendIso gives the resulting colimit cocone β. The localization compatibility and the algebra-equivalence equation give βᵢ ∘ ιBᵢ = g ∘ ιᵢ.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A localization map is essentially of finite type by Algebra.EssFiniteType.of_isLocalization. Composition with the object equivalence preserves this. For locality, precompose βᵢ with the inverse object equivalence and use localization extensionality on the original ring: it equals the canonical localRingHom at the contracted prime followed by the equivalence to T. Localization.isLocalHom_localRingHom and the locality of ring equivalences give locality of βᵢ.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "P2",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037D (lemma-colimit-normal-ring), first paragraph of the proof, localization at contracted primes; Tag 00QV (lemma-limit-essentially-finite-presentation), final paragraph, localization at the inverse-image prime."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization at a prime ideal commutes with filtered colimits of commutative rings",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization at a prime commutes with filtered colimits of commutative rings",
+   "results": "IsLocalization.isLocalization_isLocalization_atPrime_isLocalization and CommRingCat.FilteredColimits.colimitCoconeIsColimit are ingredients. The existing project theorem AlgebraicGeometry.filteredColimitLocalizationAtPrime supplies the prime-localization colimit.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.of_le",
+   "results": "IsLocalization.of_le enlarges the denominators, as needed to replace a local localization by localization at its contracted maximal ideal.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalHom_localRingHom|isLocalization_of_base_ringEquiv",
+   "results": "Localization.isLocalHom_localRingHom proves locality of the induced maps; base-ring equivalence transport is available in IsLocalization.isLocalization_of_base_ringEquiv.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LimitModuleRingDataCore",
+  "date": "2026-10-14",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); ring-data core: Tag 037D (lemma-colimit-normal-ring), first paragraph of the proof, localization at contracted primes; Tag 00QV (lemma-limit-essentially-finite-presentation), final paragraph, localization at the inverse-image prime.",
+   "via": [
+    "lem-weil-pbc-limit-module-ring-data-core",
+    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizeFilteredRingSystem",
+  "file": "lean/Sheaf/RingTheory/LocalizeFilteredRingSystem.lean",
+  "declaration": "RingHom.exists_localized_filtered_ring_system",
+  "statement": "theorem exists_localized_filtered_ring_system\n    {J : Type u} [SmallCategory J] [IsFiltered J]\n    (D : J ⥤ CommRingCat.{u}) (T : CommRingCat.{u}) [IsLocalRing T]\n    (g : (colimit D : CommRingCat.{u}) →+* T) (W : Submonoid (colimit D : CommRingCat.{u}))\n    (hT : letI := g.toAlgebra; IsLocalization W T) :\n    ∃ (B : J ⥤ CommRingCat.{u}) (β : B ⟶ (Functor.const _).obj T) (ιB : D ⟶ B),\n      Nonempty (IsColimit (Cocone.mk T β)) ∧\n      (∀ i, (ιB.app i).hom.EssFiniteType) ∧\n      (∀ i, IsLocalHom (β.app i).hom) ∧\n      (∀ i, (β.app i).hom.comp (ιB.app i).hom = g.comp (colimit.ι D i).hom)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T231541-L-1819541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T231541-L-1819541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
