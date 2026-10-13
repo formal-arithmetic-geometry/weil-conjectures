@@ -12241,3 +12241,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/W4/Sheaf.Paper.AffineOpenInverseImageUnitRepresentatives (stage 3; reviewer PASS; first push; landing 20261013T111942-L-3069942 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/X2/Sheaf.AlgebraicGeometry.ModuleResolutionHomologyExt (stage 3; reviewer PASS; first push; landing 20261013T111942-L-3070048 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLocalPairing (stage 3; reviewer PASS; first push; landing 20261013T111943-L-3070201 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:19 L: merged deliver/X3/Sheaf.RingTheory.BaseChangeIdealKernelGenerators (stage 3; reviewer PASS; first push; landing 20261013T111943-L-3070387 (interface); batch 20261013T111833; modules 2; new nodes 1)
