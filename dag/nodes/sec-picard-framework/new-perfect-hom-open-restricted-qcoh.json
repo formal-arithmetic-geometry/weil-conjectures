@@ -1,0 +1,105 @@
+{
+ "id": "new-perfect-hom-open-restricted-qcoh",
+ "kind": "lemma",
+ "title": "Quasi-coherence after open restriction",
+ "statement": "Restricted stage and limit objects are quasi-coherent",
+ "stmt_deps": [
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE"
+ },
+ "proof": [
+  {
+   "text": "For each stage and for the apex, apply schemeDerivedQCoh_openRestriction_iff and use quasi-coherence of the corresponding cohomology sheaf over the open.",
+   "uses": [
+    "lem-pc-derived-open-restriction-qcoh-iff"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-open-restriction-qcoh-iff"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U2",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 08FE; perfect.tex Tag 09RE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence and compatibility of restricted representing derived pullback Hom cocone",
+   "results": "no declaration matching this construction",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "PerfectHomPushPullData restricted open derived restriction",
+   "results": "no exact match in Mathlib",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty PerfectHomPushPullData schemeMVDerivedRestriction",
+   "results": "no match",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectHomPushPullData|schemeMVDerivedRestriction in Mathlib",
+   "results": "no hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedDataExists",
+  "date": "2026-10-14",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pc-perfect-hom-open-restricted-data"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedQCoh",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenRestrictedQCoh.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_open_restricted_qcoh",
+  "statement": "theorem perfect_hom_open_restricted_qcoh {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {Y : Scheme.{u}} (s : Y ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (B : Y.Opens) (Q : schemeDerivedCategory Y) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) : (∀ j : Set.Ici i, schemeDerivedQCohProperty B.toScheme ((F ⋙ schemeMVDerivedRestriction Y B).obj j)) ∧ schemeDerivedQCohProperty B.toScheme ((schemeMVDerivedRestriction Y B).obj d.pt)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T234522-L-2167281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T234522-L-2167281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
