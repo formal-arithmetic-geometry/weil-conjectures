@@ -6,6 +6,8 @@ Authors: SHEAF group S2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenComparisonUnit
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenComparisonRestriction
 
 /-! # DerivedMayerVietorisDirectImageSquares
 
@@ -65,6 +67,38 @@ theorem schemeMV_directImage_squares
         (schemeMVOpenComparison h (U ⊓ V) E).hom =
       (schemeMVMiddleComparison h U V E).hom ≫
         (schemeMVTriangle Y U V hcover ((schemeDerivedDirectImage h).obj E)).mor₂ := by
-  sorry
+  let F := schemeDerivedDirectImage h
+  have : F.Additive := inferInstance
+  have : PreservesBinaryBiproducts F :=
+    preservesBinaryBiproducts_of_preservesBinaryProducts _
+  constructor
+  · change F.map (biprod.lift _ _) ≫
+      ((F.mapBiprod _ _).hom ≫ (biprod.mapIso _ _).hom) = biprod.lift _ _
+    rw [← Category.assoc, biprod.map_lift_mapBiprod]
+    apply biprod.hom_ext
+    · simpa only [biprod.mapIso_hom, Category.assoc, biprod.map_fst,
+        biprod.lift_fst_assoc, biprod.lift_fst] using
+        schemeMVOpenComparison_unit X Y h U E
+    · simpa only [biprod.mapIso_hom, Category.assoc, biprod.map_snd,
+        biprod.lift_snd_assoc, biprod.lift_snd] using
+        schemeMVOpenComparison_unit X Y h V E
+  · change F.map (biprod.desc _ _) ≫ (schemeMVOpenComparison h (U ⊓ V) E).hom =
+      ((F.mapBiprod _ _).hom ≫ (biprod.mapIso _ _).hom) ≫ biprod.desc _ _
+    rw [← biprod.mapBiprod_hom_desc]
+    simp only [Category.assoc]
+    apply congrArg (fun f ↦ (F.mapBiprod _ _).hom ≫ f)
+    apply biprod.hom_ext'
+    · simpa only [F, Functor.comp_obj, Scheme.Hom.preimage_inf,
+        biprod.mapIso_hom, ← Category.assoc, biprod.inl_desc,
+        biprod.inl_desc_assoc,
+        biprod.inl_map_assoc, Category.assoc] using!
+        schemeMVOpenComparison_restriction.{u, w} X Y h (U ⊓ V) U inf_le_left E
+    · simpa only [F, Functor.comp_obj, Scheme.Hom.preimage_inf,
+        biprod.mapIso_hom, ← Category.assoc, biprod.inr_desc,
+        biprod.inr_desc_assoc,
+        biprod.inr_map_assoc, Category.assoc, Functor.map_neg,
+        Preadditive.neg_comp, Preadditive.comp_neg] using!
+        congrArg Neg.neg
+          (schemeMVOpenComparison_restriction.{u, w} X Y h (U ⊓ V) V inf_le_right E)
 
 end AlgebraicGeometry
