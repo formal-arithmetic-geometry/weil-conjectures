@@ -16,16 +16,15 @@
  },
  "proof": [
   {
-   "text": "The inverse tensor comparison of [def-sc-tensor-power-open-restriction-comparisons] carries a pure tensor of restricted sections to its ambient tensor by [lem-weil-pbc-module-restriction-tensor-comparison]. The sheaf tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] therefore identifies the naturality, associator and unitor diagrams as sheaf morphisms: both sides give the same ambient nested tensor, while the unit comparison transports scalars through the structure-ring isomorphism. Nested pure tensor checks extend by the iterated tensor universal property, without claiming global pure tensors generate all sections.",
+   "text": "The inverse tensor comparison of [def-sc-tensor-power-open-restriction-comparisons] carries a pure tensor of restricted sections to its ambient tensor by [lem-weil-pbc-module-restriction-tensor-comparison]. For binary tensor morphisms, cancel the sheafification comparison and use Mathlib PresheafOfModules.sheafificationAdjunction followed by sectionwise TensorProduct.induction_on. For triple tensors, the image sieve of the inner tensor sheafification unit is covering by Mathlib Presheaf.imageSieve_mem. On this sieve sectionwise tensor induction and naturality give equality; separatedness of the target sheaf gives equality on the original open. This checks arbitrary sections locally, without claiming pure tensors generate global sections.",
    "uses": [
     "def-sc-tensor-power-open-restriction-comparisons",
-    "lem-weil-pbc-module-restriction-tensor-comparison",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "lem-weil-pbc-module-restriction-tensor-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Induct on n in the recursive tensorPowAddIso of [def-sc-invertible-module]. For n=0 its inverse is the left unitor and the transport from b to 0+b. Unit coherence and elimination of the equality give the commuting diagram with the recursive power comparisons. For n+1 its inverse is the associator followed by identity tensor the previous addition inverse and the transport from n+b+1 to (n+1)+b. Expand the recursive power comparisons, use associator coherence, naturality of the tensor comparison, and the induction hypothesis inside identity tensor. Eliminate exponent equality transports to finish. This proves the diagram for all n,b; evaluation on tmulSection z w over V yields the claimed equality for arbitrary sections of both powers.",
+   "text": "Induct on n in tensorPowAddIso of [def-sc-invertible-module], proving addition_comparison as an equality of sheaf morphisms. Eliminate exponent equalities to commute equality transport with the recursive comparisons of [def-sc-tensor-power-open-restriction-comparisons], and cancel the final transport isomorphism. At n=0 use binary tensor extensionality, the left-unitor section formula, and linearity for the scalar action transported by restrictUnitIso. In the successor case use local triple-tensor extensionality, expand the associator and tensor-morphism section formulas, expand the recursive power inverse using the inverse tensor comparison, and evaluate the induction hypothesis on the remaining two factors. Finally evaluate the morphism equality on tmulSection z w over V; restrictAppIso is definitionally the required section identification.",
    "uses": [
     "def-sc-invertible-module",
     "def-sc-tensor-power-open-restriction-comparisons"
@@ -36,7 +35,6 @@
  "proof_deps": [
   "def-sc-invertible-module",
   "def-sc-tensor-power-open-restriction-comparisons",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
   "lem-weil-pbc-module-restriction-tensor-comparison"
  ],
  "proof_origin": {
@@ -127,10 +125,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T100152-L-2494364",
-  "kind": "interface",
+  "landing": "20261013T111940-L-3069259",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
