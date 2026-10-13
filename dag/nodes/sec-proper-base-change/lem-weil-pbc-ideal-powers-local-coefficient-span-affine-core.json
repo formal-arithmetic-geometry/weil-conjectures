@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-ideal-powers-local-coefficient-span-affine-core",
+ "kind": "statement",
+ "title": "Affine ideal-power coefficient span",
+ "statement": "With the data of lem-weil-pbc-ideal-powers-local-coefficient-span, if W is affine and W ≤ U, then every section of the ideal-power module product over W maps under the product inclusion into the span of the restricted generators with coefficients from I^m.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O8, proof of lemma-cohomology-powers-ideal-times-F"
+ },
+ "proof": [
+  {
+   "text": "Use the affine section formulas for quasi-coherent modules and extended ideals, induct on the recursive idealSheafPower, and expand ideal-module product membership as finite sums. Rewrite each module factor using the spanning hypothesis.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-pullback-ideal-quotient",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ideal power affine module coefficient span",
+   "results": "unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine ideal power module span",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.span affine sections",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "idealModuleProduct|idealSheafPower",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IdealPowersLocalCoefficientSpan",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ideal-powers-local-coefficient-span"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowersLocalCoefficientSpan",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowersLocalCoefficientSpan.lean",
+  "declaration": "AlgebraicGeometry.idealPowersLocalCoefficientSpan_affine",
+  "statement": "theorem idealPowersLocalCoefficientSpan_affine {A : Type v} [CommRing A]\n    {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))\n    (I : Ideal A) (J : X.IdealSheafData)\n    (hJ : J = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Opens) (hU : IsAffineOpen U) (r : ℕ) (u : Fin r → Γ(F, U))\n    (hu : Submodule.span Γ(X, U) (Set.range u) = ⊤)\n    (m : ℕ) (W : X.Opens) (hW : IsAffineOpen W) (hWU : W ≤ U)\n    (t : (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F).val.obj\n      (op W)) :\n    ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app\n        W).hom t ∈\n      Submodule.span Γ(X, W)\n        {z | ∃ (i : Fin r) (a : A), a ∈ I ^ m ∧\n          z = (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫\n            f.appLE ⊤ W le_top).hom a) •\n              F.val.map (homOfLE hWU).op (u i)}",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T000909-L-2282015",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T000909-L-2282015",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
