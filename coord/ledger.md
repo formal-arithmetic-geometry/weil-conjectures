@@ -11608,3 +11608,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/B3/Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineRestrictionIso (stage 3; reviewer PASS; after a return; landing 20261013T082330-L-1630728 (interface); batch 20261013T082326; modules 4; new nodes 3)
 - 08:23 L: merged deliver/B3/Sheaf.RingTheory.KoszulExtRoofRepresentatives (stage 3; reviewer PASS; after a return; landing 20261013T082331-L-1630885 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:23 L: merged deliver/B4/Sheaf.Algebra.Homology.TensorHomologyMapBijective (stage 3; reviewer PASS; after a return; landing 20261013T082331-L-1630992 (interface); batch 20261013T082326; modules 3; new nodes 2)
+- 08:23 L: merged deliver/B4/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero (stage 3; reviewer PASS; after a return; landing 20261013T082332-L-1631097 (proof); batch 20261013T082326; modules 1; new nodes 0)
