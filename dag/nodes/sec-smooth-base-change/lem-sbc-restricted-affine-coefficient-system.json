@@ -16,41 +16,38 @@
  ],
  "proof": [
   {
-   "text": "Construct U ×_S D(i), its pullback transitions and cone U ×_S c.pt using the pullback universal property. The universal property gives identity, composition and the limit assertion. Affine, quasi-compact and quasi-separated morphisms remain so under base change; the affine target U makes stage schemes compact and quasi-separated.",
+   "text": "Use the explicit fibre-product diagram and cone of [def-sbc-restricted-affine-coefficient-construction]. The proved restrictedAffineConeIsLimit applies the right-adjoint Over.pullback and connected-limit-preserving forgetful functor, then transports through pullback symmetry. The proved compactness, quasi-separatedness and affine-transition declarations give the geometric witnesses.",
    "uses": [
-    "def-pc-fibre-product"
+    "def-sbc-restricted-affine-coefficient-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict F_i and phi along the second projections, using rawAffineRestrictedCoefficient. The identity and associativity of upperStarComp transport the sheaf transition laws. Apply singleFunctor in degree zero. Restrict and reindex H and use eH to obtain G, eG and hG. Single complexes vanish in negative degrees.",
+   "text": "Use [lem-sbc-restricted-affine-single-coherence] for psi, its identity and composition laws, eG, hG and the complex-level cone-leg equality. The complexes K and the cocone L are the fixed explicit constructions. Their terms below zero vanish by HomologicalComplex.isZero_single_obj_X. The proved restrictedAffineLIsColimit uses left-adjoint restriction and colimit-preserving singleFunctor, and the double-opposite equivalence. Supply local names for these concrete constructions to the coherence theorem with reflexive equalities; this prevents expensive implicit unfolding in the transport laws.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-sbc-raw-affine-restricted-cohomology"
+    "def-sbc-restricted-affine-coefficient-construction",
+    "lem-sbc-restricted-affine-single-coherence"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction is left adjoint and preserves the coefficient colimit. singleFunctor preserves colimits degreewise, so the image cocone L is colimiting. Its vertex is the degree-zero single complex of the restricted coefficient colimit, so it also vanishes in negative degrees, giving hbelowL. The stage cohomology comparisons r are the single-complex identifications; the preserved coefficient colimit gives rL. On each cone triangle, the inverse-image comparisons in eG are exactly rawAffineRestrictedCoefficient. Naturality of the single comparison identifies the Q-image coefficient map in the displayed morphism equation; compose with rawAffineComplexPullback.",
+   "text": "The source and target restricted cohomology objects are definitionally the cohomology of K and L.pt, so choose r_i and rL to be identity isomorphisms. Apply DerivedCategory.Q.map and cohomology.map to the complex-level cone-leg equality, and precompose by rawAffineComplexPullback. Unfold rawAffineRestrictedCohomologyMap and remove identity compositions to obtain precisely the required morphism equality.",
    "uses": [
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "def-sbc-raw-affine-restricted-cohomology"
+    "def-sbc-raw-affine-restricted-cohomology",
+    "lem-sbc-restricted-affine-single-coherence"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-composition",
   "def-sbc-raw-affine-restricted-cohomology",
-  "lem-weil-pbc-left-adjoint-preserves-colimits"
+  "def-sbc-restricted-affine-coefficient-construction",
+  "lem-sbc-restricted-affine-single-coherence"
  ],
  "proof_origin": {
-  "by": "agent Q1",
-  "document": "Stacks Project",
-  "place": "Categorical elaboration of the coefficient construction and canonical maps of Tags 09Z1 and 0EZM"
+  "by": "agent S1",
+  "document": "Stacks Project, Tags 09Z1 and 0EZM; Mathlib over-category pullback and single-complex colimits",
+  "place": "Concrete geometric and colimit constructions; reduction of transition coherence before cohomology"
  },
  "mathlib_searches": [
   {
@@ -125,9 +122,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T045551-L-134476",
+  "landing": "20261013T065117-L-901215",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

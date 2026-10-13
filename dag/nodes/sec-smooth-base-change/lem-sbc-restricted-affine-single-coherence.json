@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-restricted-affine-single-coherence",
+ "kind": "statement",
+ "title": "Coherence of the concrete restricted single-complex coefficient system",
+ "statement": "Let S be a scheme, I a nonempty directed preorder, D : Iᵒᵖ ⥤ Over S any diagram and c any cone. Let F_i and phi be abelian etale sheaves and inverse-image coefficient transitions satisfying the identity and composition HEq laws, and H a diagram on c.pt with isomorphisms eH to the pullbacks of F_i and the canonical transition equation. Assume H has a colimit. For any etale U over S, use the concrete D', c', K, G, L of [def-sbc-restricted-affine-coefficient-construction]. There exist inverse-image complex transitions psi and cone comparison isomorphisms eG satisfying the identity, composition, and G transition laws in lean.statement. Additionally eG_i.inv followed by the concrete L injection equals mapCochainComplexSingleFunctor followed by singleFunctor.map of rawAffineRestrictedCoefficient along the cone leg with coefficient eH_i.inv followed by colimit.iota_i. This is an equality of complex morphisms, before applying Q or cohomology. No geometric limit, compactness, affine transition, colimit universal property, lower bound, or cohomology comparison is asserted here. The names D', c', K, G, and L are explicit parameters, required by one equality and four heterogeneous equalities to be exactly the stated concrete constructions. This allows the coherence formulas to be expressed using these names without repeatedly unfolding their implementation. The final equality is written as HEq to accommodate these names; specializing the data equalities makes its two morphism types identical.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Tag 09Z1 proof, base change to affine U; Tag 0EZM coefficient complex cocone and canonical maps"
+ },
+ "stmt_deps": [
+  "def-sbc-restricted-affine-coefficient-construction",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "First substitute hD' and the four heterogeneous data equalities, reducing to the concrete constructions. Define psi by the single functor applied to rawAffineRestrictedCoefficient for each transition, preceded by mapCochainComplexSingleFunctor. Pullback projection identities identify the relevant composites. The unit and associativity equations of upperStarComp, together with the given phi laws, imply the identity and composition laws after applying the single functor.",
+   "uses": [
+    "def-sbc-restricted-affine-coefficient-construction",
+    "def-sbc-raw-affine-restricted-cohomology",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each cone leg q_i, write r_i and r for the stage and limit second projections. The equality r followed by c_i = q_i followed by r_i identifies the two composite inverse images. Restrict eH_i along r, use upperStarComp on the two sides of this equality, and invert mapCochainComplexSingleFunctor to obtain eG_i. Naturality and associativity of these comparisons and hH give hG. Inverting eG_i and composing with L.iota_i cancels the image of eH_i and leaves exactly the two upperStarComp factors and restricted coefficient map used by rawAffineRestrictedCoefficient. Naturality of the single comparison gives the stated equality of complex maps.",
+   "uses": [
+    "def-sbc-restricted-affine-coefficient-construction",
+    "def-sbc-raw-affine-restricted-cohomology",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-sbc-restricted-affine-coefficient-construction",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent S1",
+  "document": "Stacks Project, Tags 09Z1 and 0EZM; Mathlib and the library inverse-image comparisons",
+  "place": "Categorical elaboration of the coefficient constructions, not cohomology continuity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves commutes with composition and sends a colimit cocone to a colimit, and is compatible with degree zero single complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of inverse image sheaf composition comparisons after restriction to fibre products",
+   "results": "GrothendieckTopology.overMapPullbackComp; Scheme.Modules.restrictFunctorComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; no theorem assembling this etale coefficient system",
+   "date": "2026-10-13",
+   "verdict": "no complete match; existing composition comparisons used"
+  },
+  {
+   "tool": "grep",
+   "query": "singleMapHomologicalComplex|upperStarComp_assoc|mapCochainComplexSingleFunctor; pullback preserves limits; PreservesColimits single",
+   "results": "HomologicalComplex.singleMapHomologicalComplex; Functor.mapCochainComplexSingleFunctor; HomologicalComplex preserves-colimits single instance; Over.pullback and mapPullbackAdj; Over preserves connected limits. Existing raw-pullback and derived-single nodes do not state underived restricted complex-system coherence.",
+   "date": "2026-10-13",
+   "verdict": "components found, no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineCoefficientSystem",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1 proof, base change to affine etale U; Tag 0EZM coefficient complexes: inverse-image transition coherence before cohomology",
+   "via": [
+    "lem-sbc-restricted-affine-coefficient-system",
+    "lem-sbc-restricted-affine-complex-system",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineSingleCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_restricted_affine_single_coherence",
+  "statement": "theorem exists_restricted_affine_single_coherence {S : Scheme.{v}}\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Over S)\n    (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i))\n      ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j), H.map f =\n      (eH i).hom ≫\n        (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left\n          (c.π.app (op i)).left\n          (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫\n        (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H]\n    (U : S.Etale)\n    (D' : Iᵒᵖ ⥤ Scheme.{v}) (c' : Cone D')\n    (K : ∀ i : Iᵒᵖ, CochainComplex\n      (Sheaf (D'.obj i).smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (G : (Iᵒᵖ)ᵒᵖ ⥤ CochainComplex\n      (Sheaf c'.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (L : Cocone G)\n    (hD' : D' = restrictedAffineDiagram D U)\n    (hc' : HEq c' (restrictedAffineCone D c U))\n    (hK : HEq K (restrictedAffineK D F U))\n    (hG' : HEq G (restrictedAffineG D c H U))\n    (hL' : HEq L (restrictedAffineL D c H U)) :\n    ∃\n    (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),\n      ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i) ⟶ K j)\n    (hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D'.map_id i)))\n        (ComplexShape.up ℤ)).hom.app (K i) ≫\n      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D'.obj i))\n        (ComplexShape.up ℤ)).hom.app (K i))\n    (hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),\n      ψ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f)\n            (D'.map (g ≫ f)) (D'.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)\n    (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅\n      ((upperStar AddCommGrpCat.{v + 1} (c'.π.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i))\n    (hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (c'.π.app j) (D'.map f)\n            (c'.π.app i) (c'.w f).symm) (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (c'.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ (eG j).inv),\n    ∀ i : Iᵒᵖ,\n      HEq ((eG i).inv ≫ L.ι.app (op i))\n        (((upperStar AddCommGrpCat.{v + 1}\n          ((restrictedAffineCone D c U).π.app i)).mapCochainComplexSingleFunctor 0).hom.app\n            ((upperStar AddCommGrpCat.{v + 1} (pullback.snd U.hom (D.obj i).hom)).obj\n              (F i.unop)) ≫\n        (CochainComplex.singleFunctor _ 0).map\n          (rawAffineRestrictedCoefficient (c.π.app i).left (D.obj i).hom c.pt.hom\n            (Over.w (c.π.app i)) (F i.unop) (colimit H)\n            ((eH i.unop).inv ≫ colimit.ι H i.unop) U))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T065117-L-901215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T065117-L-901215",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

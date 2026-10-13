@@ -6,6 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+import Sheaf.AlgebraicGeometry.RestrictedAffineSingleCoherence
 /-! # Base change and the restricted coefficient complex system
 
 Source: Stacks Project, Tag 09Z1 proof and Tag 0EZM.
@@ -20,6 +21,9 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+-- The existential proof witnesses record required properties even though the final
+-- morphism equality does not refer to them. Keep the original binder names.
+set_option linter.unusedVariables false in
 /-- Construct the base-changed schemes and their degree-zero coefficient complexes,
 including the coefficient colimit and its restriction comparisons.
 Source: Stacks Project, Tag 09Z1 proof, base change to an affine etale object;
@@ -134,6 +138,30 @@ theorem exists_restricted_affine_coefficient_system {S : Scheme.{v}}
       rawAffineRestrictedCohomologyMap (c.π.app (op i.unop)).left
         (D.obj (op i.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop))) p
         (F i.unop) (colimit H) ((eH i.unop).inv ≫ colimit.ι H i.unop) U ≫ rL.hom := by
-  sorry
+  let D' := restrictedAffineDiagram D U
+  let c' := restrictedAffineCone D c U
+  let K := restrictedAffineK D F U
+  let G := restrictedAffineG D c H U
+  let L := restrictedAffineL D c H U
+  obtain ⟨ψ, hidentity, hcomposition, eG, hG, hcoeff⟩ :=
+    exists_restricted_affine_single_coherence D c F φ hφid hφcomp H eH hH U
+      D' c' K G L rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
+  refine ⟨D', c', restrictedAffineConeIsLimit D c hc U,
+    restrictedAffineDiagram_compact D U, restrictedAffineDiagram_quasiSeparated D U,
+    fun _ _ f ↦ restrictedAffineDiagram_affine D U f,
+    K, @ψ, hidentity, hcomposition, ?_, G, eG, hG, L,
+    restrictedAffineLIsColimit D c H U, ?_, fun _ ↦ Iso.refl _, Iso.refl _, ?_⟩
+  · intro i n hn
+    exact HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0
+      ((upperStar AddCommGrpCat.{v + 1} (pullback.snd U.hom (D.obj i).hom)).obj
+        (F i.unop)) n (ne_of_lt hn)
+  · intro n hn
+    exact HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0
+      ((upperStar AddCommGrpCat.{v + 1} (pullback.snd U.hom c.pt.hom)).obj
+        (colimit H)) n (ne_of_lt hn)
+  · intro i
+    simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
+    rw [eq_of_heq (hcoeff i)]
+    rfl
 
 end AlgebraicGeometry.Etale

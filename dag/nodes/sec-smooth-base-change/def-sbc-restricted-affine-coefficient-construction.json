@@ -1,0 +1,141 @@
+{
+ "id": "def-sbc-restricted-affine-coefficient-construction",
+ "kind": "definition",
+ "title": "Concrete restricted affine scheme and coefficient constructions",
+ "statement": "For a scheme S, preorder I, diagram D : Iᵒᵖ ⥤ Over S, and etale U over S, construct the functor whose object at i is pullback U.hom (D.obj i).hom and whose map is rawAffineRestrictedMap of D.map f. Its cone for c has vertex pullback U.hom c.pt.hom and the analogous maps. Construct K as the single complex of each sheaf restricted along the second projection, G as restriction of H reindexed by double opposite followed by the single functor, and L as the image of the whiskered coefficient colimit cocone. These are actual constructions, not chosen witnesses. The accompanying proved declarations show: the cone is limiting when the underlying cone c is; stages are compact and quasi-separated when their morphisms to S are qcqs and U is affine; transitions are affine when those of D are; and L is colimiting because restriction and the single functor preserve colimits.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Tag 09Z1 proof, base change to affine U; Tag 0EZM coefficient complex cocone and canonical maps"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct the diagram and cone with pullback.map and prove their functoriality and naturality by pullback.hom_ext. Transport the preserved limit of Over.pullback U.hom followed by Over.forget U.left through pullbackSymmetry. The over-category forgetful functor preserves and reflects connected limits; I is connected because it is nonempty and directed.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first projection to affine U is the base change of the given qcqs structure morphism, so its source is compact and quasi-separated. Each transition is a pullback.map of an affine morphism and therefore affine by MorphismProperty.pullbackMap.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct K with singleFunctor of the inverse image along the second projection, and G with double-opposite reindexing followed by restriction and singleFunctor. Construct L as the image of the whiskered actual colimit cocone. Restriction is a left adjoint and singleFunctor preserves colimits; unopUnop is final, so isColimitOfPreserves and Final.isColimitWhiskerEquiv prove L colimiting.",
+   "uses": [
+    "def-sbc-raw-affine-restricted-cohomology",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent S1",
+  "document": "Stacks Project, Tags 09Z1 and 0EZM; Mathlib and the library inverse-image comparisons",
+  "place": "Categorical elaboration of the coefficient constructions, not cohomology continuity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves commutes with composition and sends a colimit cocone to a colimit, and is compatible with degree zero single complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of inverse image sheaf composition comparisons after restriction to fibre products",
+   "results": "GrothendieckTopology.overMapPullbackComp; Scheme.Modules.restrictFunctorComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; no theorem assembling this etale coefficient system",
+   "date": "2026-10-13",
+   "verdict": "no complete match; existing composition comparisons used"
+  },
+  {
+   "tool": "grep",
+   "query": "singleMapHomologicalComplex|upperStarComp_assoc|mapCochainComplexSingleFunctor; pullback preserves limits; PreservesColimits single",
+   "results": "HomologicalComplex.singleMapHomologicalComplex; Functor.mapCochainComplexSingleFunctor; HomologicalComplex preserves-colimits single instance; Over.pullback and mapPullbackAdj; Over preserves connected limits. Existing raw-pullback and derived-single nodes do not state underived restricted complex-system coherence.",
+   "date": "2026-10-13",
+   "verdict": "components found, no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineCoefficientSystem",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1 proof, base change to affine etale U; Tag 0EZM coefficient complexes: explicit fibre products and image coefficient cocone",
+   "via": [
+    "lem-sbc-restricted-affine-coefficient-system",
+    "lem-sbc-restricted-affine-complex-system",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineCoefficientConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineCoefficientConstruction.lean",
+  "declaration": "AlgebraicGeometry.Etale.restrictedAffineDiagram",
+  "statement": "def restrictedAffineDiagram {S : Scheme.{v}} {I : Type v} [Preorder I] (D : Iᵒᵖ ⥤ Over S) (U : S.Etale) : Iᵒᵖ ⥤ Scheme.{v}",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.restrictedAffineDiagram",
+   "AlgebraicGeometry.Etale.restrictedAffineCone",
+   "AlgebraicGeometry.Etale.restrictedAffineK",
+   "AlgebraicGeometry.Etale.restrictedAffineSingle",
+   "AlgebraicGeometry.Etale.restrictedAffineG",
+   "AlgebraicGeometry.Etale.restrictedAffineL",
+   "AlgebraicGeometry.Etale.restrictedAffineConeIsLimit",
+   "AlgebraicGeometry.Etale.restrictedAffineDiagram_compact",
+   "AlgebraicGeometry.Etale.restrictedAffineDiagram_quasiSeparated",
+   "AlgebraicGeometry.Etale.restrictedAffineDiagram_affine",
+   "AlgebraicGeometry.Etale.restrictedAffineLIsColimit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T065117-L-901215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T065117-L-901215",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
