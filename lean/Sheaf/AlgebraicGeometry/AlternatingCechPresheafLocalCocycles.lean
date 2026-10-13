@@ -6,6 +6,7 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechSheafConstruction
+import Sheaf.AlgebraicGeometry.AlternatingCechPresheafPositiveInsertion
 
 /-! # Local ingredients of alternating Čech exactness
 
@@ -18,6 +19,8 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Local cocycles of the explicit increasing-tuple presheaf complex are boundaries.
 Source: Stacks Project, Tag 02FU (cohomology-lemma-covering-resolution),
 with the increasing tuples of Tag 01FM.
@@ -51,6 +54,31 @@ theorem alternatingCechSheafPresheaf_local_cocycles
     (z : (alternatingCechSheafPresheafTerms U G (p + 1)).obj (op V))
     (hz : (alternatingCechSheafPresheafD U G (p + 1)).app (op V) z = 0) :
     ∃ y : (alternatingCechSheafPresheafTerms U G p).obj (op V),
-      (alternatingCechSheafPresheafD U G p).app (op V) y = z := by sorry
+      (alternatingCechSheafPresheafD U G p).app (op V) y = z := by
+  obtain ⟨s, t, hs⟩ := alternatingCechSheafPresheaf_positive_insertion U G i p
+  let P₀ := alternatingCechSheafPresheafTerms U G p
+  let P₁ := alternatingCechSheafPresheafTerms U G (p + 1)
+  let a : op V ⟶ op (V ⊓ U i) :=
+    (homOfLE (inf_le_left : V ⊓ U i ≤ V)).op
+  let b : op (V ⊓ U i) ⟶ op V :=
+    (homOfLE (le_inf le_rfl hV : V ≤ V ⊓ U i)).op
+  refine ⟨P₀.map b (s.app (op V) z), ?_⟩
+  have he := congrArg (fun f ↦ f.app (op V)) hs
+  have he' := ConcreteCategory.congr_hom he z
+  change P₁.map a z =
+    (alternatingCechSheafPresheafD U G p).app (op (V ⊓ U i)) (s.app (op V) z) +
+      (show P₁.obj (op (V ⊓ U i)) from
+        t.app (op V) ((alternatingCechSheafPresheafD U G (p + 1)).app (op V) z)) at he'
+  rw [hz, map_zero, add_zero] at he'
+  have hn := ConcreteCategory.congr_hom
+    ((alternatingCechSheafPresheafD U G p).naturality b) (s.app (op V) z)
+  change (alternatingCechSheafPresheafD U G p).app (op V)
+      (P₀.map b (s.app (op V) z)) =
+    P₁.map b ((alternatingCechSheafPresheafD U G p).app (op (V ⊓ U i))
+      (s.app (op V) z)) at hn
+  rw [hn, ← he', ← PresheafOfModules.map_comp_apply]
+  have hab : a ≫ b = 𝟙 (op V) := Subsingleton.elim _ _
+  rw [hab]
+  simp
 
 end AlgebraicGeometry
