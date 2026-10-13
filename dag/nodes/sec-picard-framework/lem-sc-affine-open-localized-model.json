@@ -1,0 +1,212 @@
+{
+ "id": "lem-sc-affine-open-localized-model",
+ "kind": "statement",
+ "title": "Module representative and localization comparison on an affine open",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme], $U\\subset X$ a quasi-compact open, and $A=\\Gamma(X,\\mathcal O_X)$. Fix derived categories [def-pc-derived-category] for sheaves on X, on U, and on all localized open sites of U, and for modules over every $A_f$. Let $T:\\operatorname{Mod}_A\\to\\operatorname{Mod}_{\\mathcal O_X}$ preserve zero morphisms and be naturally isomorphic to termwise associated sheaf on Spec(A) followed by restriction along the canonical isomorphism X to Spec(A). Let E prime belong to the quasi-coherent derived subcategory of X and let E be pseudo-coherent [def-pur-pseudo-coherent-complex] on U, with a derived isomorphism from E prime restricted to U to E. There exist a module complex M and a finite family f_j in A such that every Q(M_fj) is pseudo-coherent [def-pc-ring-pseudo-coherent-complex], Q(T M) is isomorphic to E prime, and, for every module complex F and chain map alpha from F to M, quasi-isomorphisms alpha_fj at all these localizations imply that the derived restriction to U of Q(T alpha) is invertible. No finite-free replacement F is constructed by this statement.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Transport E prime along X isoSpec to Spec(A). Use the affine quasi-coherent derived equivalence to obtain an object of D(A), and essential surjectivity of the complex localization Q to represent it by M. The equivalence factorization and the given comparison hT yield Q(T M) isomorphic to E prime. This chooses a representative only within an existence proof and defines no global data from an unproved existence theorem.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "At each point of U choose a bounded-above finite-free sheaf model from pseudo-coherence. Refine its neighbourhood to a principal open D(f) in X contained in U and in that neighbourhood. Pull back the isomorphism E prime restricted to U isomorphic to E. Exact open restriction and the equivalence of the open scheme site with the localized open site preserve the model, its upper bound, and its finite ranks. Quasi-compactness gives finitely many such principal opens covering U. The tilde principal-open sections formula identifies restricted T(M) with the associated sheaf of M_f. Apply the principal-model comparison to each finite-free local model to obtain pseudo-coherence of Q(M_f).",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-affine-pseudo-coherent-principal-model",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "For any alpha into M, exactness of tilde and the principal-open localization formula imply that T(alpha) restricts on D(f_j) to the sheafification of alpha_fj. A localized quasi-isomorphism therefore induces isomorphisms of cohomology sheaves there. These principal opens cover U, so each cohomology map of the restriction is an isomorphism on all of U. The restricted complex map is a quasi-isomorphism. Exact restriction commutes with the localization Q, so its derived image is invertible. For empty U use the empty cover: all sheaves on U are zero and all its derived maps invertible.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-affine-pseudo-coherent-principal-model",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex on a quasi compact open of an affine scheme extends to a bounded above complex of finite free modules",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, SheafOfModules.IsFiniteType, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Module.Free",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|finiteFree.*localization",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex whose localizations at finitely many ring elements are pseudo coherent admits a bounded above finite free complex mapping to it by localized quasi isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of quasi coherent sheaves on an affine scheme is a module complex and quasi isomorphisms on a finite principal open cover of an open subset can be detected by localization",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, SheafOfModules.QuasicoherentData.coversTop, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsQuasicoherent, SheafOfModules.IsFiniteType, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, Localization.Away",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*(local|tilde)|local.*quasiIso|finite.*free.*local",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent derived object on an affine scheme has a module complex representative and pseudo coherent localizations on a finite cover of a quasi compact open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module cochain complex pseudo coherent after localizing at finitely many elements admits a bounded above finite free complex mapping to it by localized quasi isomorphisms",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, CochainComplex.IsKProjective, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*(resolution|quasi|coherent)|tilde.*(exact|homology)",
+   "results": "25 hits: Mathlib/RingTheory/RingHom/QuasiFinite.lean, Mathlib/RingTheory/RingHom/QuasiFinite.lean, Mathlib/RingTheory/RingHom/QuasiFinite.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Weakly.lean, Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean; no exact match in second reading",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tilde\", \"homology\"",
+   "results": "0 hits: ; no exact match in second reading",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous finite projective resolution of a complex over several principal localizations without a unit ideal hypothesis",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.ProjectiveResolution.ofComplex, Module.projective_of_localization_maximal, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, CategoryTheory.ProjectiveResolution.projective, CategoryTheory.ProjectiveResolution.of; no exact match in second reading",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: affine pseudo-coherent lift, affine module representative and final sheafification (steps 2 and 5 of lem-sc-affine-pseudo-coherent-lift)",
+   "via": [
+    "lem-sc-affine-pseudo-coherent-lift",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenLocalizedModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenLocalizedModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_open_localized_model",
+  "statement": "theorem exists_affine_open_localized_model\n    (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    [∀ f : X.presheaf.obj (.op ⊤), HasDerivedCategory.{wL}\n      (ModuleCat.{u} (Localization.Away f))]\n    (T : ModuleCat.{u} (X.presheaf.obj (.op ⊤)) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace)) [T.PreservesZeroMorphisms]\n    (hT : Nonempty (T ≅ tilde.functor (X.presheaf.obj (.op ⊤)) ⋙\n      Modules.restrictFunctor X.isoSpec.hom))\n    (E' : schemeDerivedQCohCategory X) (E : schemeDerivedCategory U.toScheme)\n    (hE : IsPseudoCoherent U.toScheme E)\n    (e : Nonempty\n      (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n          (Modules.overEquiv U)).mapDerivedCategory.obj E'.obj ≅ E)) :\n    ∃ (M : CochainComplex (ModuleCat.{u} (X.presheaf.obj (.op ⊤))) ℤ)\n      (r : ℕ) (f : Fin r → X.presheaf.obj (.op ⊤)),\n      (∀ j : Fin r, DerivedCategory.IsPseudoCoherent\n        (DerivedCategory.Q.obj ((Functor.mapHomologicalComplex\n          (ModuleCat.extendScalars\n            (algebraMap (X.presheaf.obj (.op ⊤)) (Localization.Away (f j))))\n          (ComplexShape.up ℤ)).obj M))) ∧\n      Nonempty (DerivedCategory.Q.obj\n        ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj M) ≅ E'.obj) ∧\n      ∀ (F : CochainComplex (ModuleCat.{u} (X.presheaf.obj (.op ⊤))) ℤ) (α : F ⟶ M),\n        (∀ j : Fin r, QuasiIso ((Functor.mapHomologicalComplex\n          (ModuleCat.extendScalars\n            (algebraMap (X.presheaf.obj (.op ⊤)) (Localization.Away (f j))))\n          (ComplexShape.up ℤ)).map α)) →\n        IsIso (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.map\n              (DerivedCategory.Q.map ((T.mapHomologicalComplex (ComplexShape.up ℤ)).map α)))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

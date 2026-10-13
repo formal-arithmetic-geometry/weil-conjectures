@@ -11603,3 +11603,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/A3/Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassLinear (stage 3; reviewer PASS; first push; landing 20261013T082328-L-1630129 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/A4/Sheaf.AlgebraicGeometry.AlternatingCechSheafLocalContraction (stage 3; reviewer PASS; first push; landing 20261013T082329-L-1630229 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:23 L: merged deliver/A4/Sheaf.RingTheory.ArtinianCoefficientSubalgebraStructure (stage 3; reviewer PASS; first push; landing 20261013T082329-L-1630328 (proof); batch 20261013T082326; modules 1; new nodes 0)
+- 08:23 L: merged deliver/B2/Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift (stage 3; reviewer PASS; first push; landing 20261013T082330-L-1630429 (interface); batch 20261013T082326; modules 3; new nodes 2)

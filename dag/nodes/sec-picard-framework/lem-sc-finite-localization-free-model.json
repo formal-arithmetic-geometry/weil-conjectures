@@ -1,0 +1,214 @@
+{
+ "id": "lem-sc-finite-localization-free-model",
+ "kind": "statement",
+ "title": "A finite family of pseudo-coherent localizations has a finite-free model",
+ "statement": "Let $A$ be a commutative ring, $M$ a cochain complex of $A$-modules, and $f_1,\\ldots,f_r\\in A$ a finite family, possibly empty. Fix derived categories [def-pc-derived-category] of modules over all $A_{f_j}$. Suppose every $Q(M_{f_j})$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. There exist a complex $F$ of $A$-modules, an integer $b$ such that $F^i=0$ for $i>b$, finite free terms $F^i$, and a chain map $\\alpha:F\\to M$ such that $\\alpha_{f_j}$ is a quasi-isomorphism for every $j$. The family is not required to generate the unit ideal.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite-free bounded-above models for the finitely many localizations from ring pseudo-coherence. Take a common upper cohomology bound b (any b for the empty family). Start with F=0, alpha=0 at cutoff n=b+1. Maintain F zero below n and above b, finite free, and localized cohomology isomorphisms above n and surjections in degree n. The localized cones are then zero in cohomology in degrees at least n by the cone long exact sequence.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "At each step localized F is bounded finite free, hence (n)-pseudo-coherent. A stupid truncation of the local bounded-above free model of M is (n-1)-pseudo-coherent. Apply the cone pseudo-coherence lemma at m=n-1, then finite top cohomology, to conclude that every localized cone has finite cohomology in degree n-1.",
+   "uses": [
+    "lem-sc-cone-pseudo-coherent",
+    "lem-sc-finite-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "For each localization choose finitely many generators of its degree-(n-1) cone cohomology and cycle representatives. Express each representative as x/f_j^a. Since d(x) becomes zero after localization, f_j^c d(x)=0 for some c. Replace x by f_j^c x, an actual global cycle; its localized class is the original generator times the unit f_j^(a+c). The finitely many representatives over all j define a map from a finite free A-module to cone cycles, surjecting on cohomology at every localization. Split its cone coordinates into the new map component and the negative differential. The cycle equation proves the two complex identities. Adjoin this module in degree n-1. The cone triangle cohomology sequence gives localized isomorphisms in degrees at least n and surjectivity in n-1; higher degrees are unchanged.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+   }
+  },
+  {
+   "text": "Iterate the preceding extension along n=b+1-k for natural k. Use compatible extensions whose components in previously constructed degrees are retained. Define each final term and differential from any sufficiently late stage; compatibility makes these independent of the stage. They satisfy the square-zero and chain-map equations at that stage. All terms above b vanish and every term is finite free. For each cohomology degree i choose a stage past i-1, so that the three terms computing H^i have stabilized and the stage map is a localized cohomology isomorphism in degree i. Thus every final localized map is a quasi-isomorphism. For an empty family take F=0. No global finiteness of the cone cohomology or global cohomology vanishing is used.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sc-cone-pseudo-coherent",
+  "lem-sc-finite-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE, label lemma-lift-pseudo-coherent, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex on a quasi compact open of an affine scheme extends to a bounded above complex of finite free modules",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, SheafOfModules.IsFiniteType, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Module.Free",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|finiteFree.*localization",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex whose localizations at finitely many ring elements are pseudo coherent admits a bounded above finite free complex mapping to it by localized quasi isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of quasi coherent sheaves on an affine scheme is a module complex and quasi isomorphisms on a finite principal open cover of an open subset can be detected by localization",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, SheafOfModules.QuasicoherentData.coversTop, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsQuasicoherent, SheafOfModules.IsFiniteType, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, Localization.Away",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*(local|tilde)|local.*quasiIso|finite.*free.*local",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent derived object on an affine scheme has a module complex representative and pseudo coherent localizations on a finite cover of a quasi compact open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module cochain complex pseudo coherent after localizing at finitely many elements admits a bounded above finite free complex mapping to it by localized quasi isomorphisms",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, CochainComplex.IsKProjective, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*(resolution|quasi|coherent)|tilde.*(exact|homology)",
+   "results": "25 hits: Mathlib/RingTheory/RingHom/QuasiFinite.lean, Mathlib/RingTheory/RingHom/QuasiFinite.lean, Mathlib/RingTheory/RingHom/QuasiFinite.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Weakly.lean, Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean; no exact match in second reading",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tilde\", \"homology\"",
+   "results": "0 hits: ; no exact match in second reading",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous finite projective resolution of a complex over several principal localizations without a unit ideal hypothesis",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.ProjectiveResolution.ofComplex, Module.projective_of_localization_maximal, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, CategoryTheory.ProjectiveResolution.projective, CategoryTheory.ProjectiveResolution.of; no exact match in second reading",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: affine pseudo-coherent lift, descending finite-free cone construction and clearing denominators (steps 3–4 of lem-sc-affine-pseudo-coherent-lift)",
+   "via": [
+    "lem-sc-affine-pseudo-coherent-lift",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteLocalizationFreeModel",
+  "file": "lean/Sheaf/RingTheory/FiniteLocalizationFreeModel.lean",
+  "declaration": "DerivedCategory.exists_finite_localization_free_model",
+  "statement": "theorem exists_finite_localization_free_model (A : Type u) [CommRing A]\n    (M : CochainComplex (ModuleCat.{u} A) ℤ) (r : ℕ) (f : Fin r → A)\n    [∀ i : Fin r, HasDerivedCategory.{w} (ModuleCat.{u} (Localization.Away (f i)))]\n    (hlocal : ∀ i : Fin r, IsPseudoCoherent\n      (Q.obj ((Functor.mapHomologicalComplex\n        (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))\n        (ComplexShape.up ℤ)).obj M))) :\n    ∃ (F : CochainComplex (ModuleCat.{u} A) ℤ) (b : ℤ), F.IsStrictlyLE b ∧\n      (∀ i : ℤ, Module.Free A (F.X i) ∧ Module.Finite A (F.X i)) ∧\n      ∃ α : F ⟶ M, ∀ j : Fin r, QuasiIso\n        ((Functor.mapHomologicalComplex\n          (ModuleCat.extendScalars (algebraMap A (Localization.Away (f j))))\n          (ComplexShape.up ℤ)).map α)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
