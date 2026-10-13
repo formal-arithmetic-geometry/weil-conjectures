@@ -11101,3 +11101,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/C3/Sheaf.AlgebraicGeometry.TorsionControlledAffineAlgebraization (stage 3; reviewer PASS; after a return; landing 20261013T045519-L-126002 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:55 L: merged deliver/D2/Sheaf.AlgebraicGeometry.AffinePerfectPlusLocallyFree (stage 3; reviewer PASS; first push; landing 20261013T045519-L-126179 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:55 L: merged deliver/D2/Sheaf.AlgebraicGeometry.AffinePushoutRingSectionProducts (stage 3; reviewer PASS; first push; landing 20261013T045520-L-126298 (interface); batch 20261013T045507; modules 2; new nodes 1)
+- 04:55 L: merged deliver/D3/Sheaf.AlgebraicGeometry.AffinePerfectTensorRoof (stage 3; reviewer PASS; first push; landing 20261013T045520-L-126498 (interface); batch 20261013T045507; modules 3; new nodes 2)
