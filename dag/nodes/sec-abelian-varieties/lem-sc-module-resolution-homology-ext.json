@@ -16,23 +16,23 @@
  },
  "proof": [
   {
-   "text": "Evaluate an O_X-linear map O_X→I^n at 1 on X. Its inverse sends a global section to multiplication by its restrictions on every open set. These are additive inverse maps and commute with differentials.",
+   "text": "Use SheafOfModules.unitHomEquiv and evaluation on the terminal open to identify maps from the unit sheaf with global sections additively. Construct the inverse by restriction from the terminal open. Naturality under postcomposition gives unitSectionComplexIso between the nonnegative Hom complex and the underlying abelian-group sections complex.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The preceding identification sends global-section cycles to cocycle morphisms. In positive degree boundaries are exactly morphisms factoring through the preceding differential, hence null-homotopic cocycle maps; in degree zero both boundary subgroups vanish. Pass to the quotients to obtain the additive equivalence with cohomology classes.",
+   "text": "Map the kernel of the outgoing differential in the nonnegative Hom complex to Ext using InjectiveResolution.extMk. Mathlib add_extMk makes this additive and extMk_surjective makes it surjective. In degree p+1, extMk_eq_zero_iff identifies its kernel with the image of the preceding differential. In degree zero use extEquivCohomologyClass_extMk and fromSingleMk_mem_coboundaries_iff in degree -1: the injective resolution is zero there, so extMk vanishes exactly when the cocycle morphism is zero, as does the preceding differential. QuotientAddGroup.liftEquiv and ShortComplex.abHomologyIso yield injectiveResolution_homology_cocycle with its representative formula.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Compose with the inverse of InjectiveResolution.extAddEquivCohomologyClass. The representative formula follows from the definition of extMk. Every homology class has a cycle representative, so the formula uniquely determines the map. Zero modules and the empty scheme give zero groups on both sides.",
+   "text": "Transport the inverse of this Ext-to-Hom-homology equivalence through the homology of unitSectionComplexIso and ShortComplex.mapHomologyIso for the module-to-abelian-group forgetful functor. The lemma forget_homologyπ follows from LeftHomologyData.mapHomologyIso_eq, mapCyclesIso_eq, and the homology projection identities. Given a cycle a and a cocycle morphism phi whose value at 1 equals iCycles(a), apply the composite forward equivalence. Naturality of cyclesMap and injectivity of iCycles identify the transported cocycle with a; naturality of homologyπ and forget_homologyπ then prove the requested formula. All constructions include degree zero, zero modules and the empty scheme.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [],
- "proof_origin": "U3: Stacks 01DZ and 0B6A; evaluation at 1 and Mathlib Ext via injective-resolution cohomology classes.",
+ "proof_origin": "X2: proved from Mathlib Ext cocycle quotient APIs and terminal-open evaluation; adapted the proved private quotient helpers of Sheaf.Paper.ObjectCohomologyResolutionCocycleEquivalence and evaluation construction of Sheaf.AlgebraicGeometry.DQCoheratorAdjunction, without importing either specialization.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -131,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d5d9d",
-  "group": "U3",
+  "reviewer": "COMPILER",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T100148-L-2493399",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean proofs, fixed-resolution statement, node records and report matched against the repository and sources; compilation and axiom checks passed, including all 22 direct importers."
+  "landing": "20261013T111942-L-3070048",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
