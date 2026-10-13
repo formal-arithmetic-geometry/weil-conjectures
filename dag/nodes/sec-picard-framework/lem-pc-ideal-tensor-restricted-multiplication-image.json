@@ -1,0 +1,169 @@
+{
+ "id": "lem-pc-ideal-tensor-restricted-multiplication-image",
+ "kind": "statement",
+ "title": "Image of ideal multiplication restricted to an ideal multiple of its tensor source",
+ "statement": "Let X be a scheme [def-pc-scheme], I a quasi-coherent ideal sheaf [def-sbc-closed-immersion-ideal-sheaf], H a quasi-coherent module [pqf-def-coherent], and n,m nonnegative integers. Let T=I^n \\otimes H [def-pur-sheaf-tensor-product], mu:T \\to H multiplication, and j:I^m T \\to T the multiplication-image inclusion for the recursive ideal power [lem-weil-pbc-ideal-module-product-stalk]. There is an isomorphism e:I^(n+m)H \\cong image(j followed by mu) whose composite with the image inclusion into H is the higher-product inclusion. The higher power uses ideal-sheaf-data powers.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YB, second Artin-Rees argument and last displayed map"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The affine tensor comparison and ideal product formula compute the range of multiplication on I(U)^m T(U) as I(U)^m I(U)^n H(U)=I(U)^(n+m) H(U), including exponents zero.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine quasi-coherent image formula identifies the categorical image range with this multiplication range.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both inclusions are monic. Equal ranges on an affine basis supply unique local preimages which agree on overlaps and glue, producing inverse factorizations. They define e with the specified inclusion identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tags 01YA and 01YB; omitted balancing and image-identification details expanded by E1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The image of iterated ideal multiplication of a quasi coherent sheaf is the product ideal times that sheaf",
+   "results": {
+    "t": "2026-10-13T06:41:20Z",
+    "tool": "leansearch",
+    "query": "The image of iterated ideal multiplication of a quasi coherent sheaf is the product ideal times that sheaf",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of multiplication on an ideal multiple of an ideal tensor a quasi coherent sheaf is the product of the ideals times the sheaf",
+   "results": {
+    "t": "2026-10-13T06:41:20Z",
+    "tool": "leanfinder",
+    "query": "The image of multiplication on an ideal multiple of an ideal tensor a quasi coherent sheaf is the product of the ideals times the sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.map_includeRight_eq",
+     "Ideal.map_includeLeft_eq",
+     "Submodule.map_range_rTensor_subtype_lid",
+     "IsLocalization.coeSubmodule_mul",
+     "LinearMap.ker_tensorProductMk",
+     "Submodule.val_mulMap'_tmul",
+     "Submodule.mulMap_tmul",
+     "Module.Flat.tensorSubmoduleAlgebraEquivMul"
+    ],
+    "digest": "cda7222a33dec530"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level theorem. Algebraic search results are ingredients, not the stated sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "smul.*range|range.*smul",
+   "results": {
+    "t": "2026-10-13T06:49:13Z",
+    "tool": "grep",
+    "query": "smul.*range|range.*smul",
+    "sub": "RingTheory/TensorProduct",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/TensorProduct/Finite.lean",
+     "Mathlib/RingTheory/TensorProduct/Finite.lean"
+    ],
+    "digest": "5751395e21f06ffd"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level theorem. Algebraic search results are ingredients, not the stated sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IdealPowerTensorImageLift",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 01YB argument within ideal devissage for higher direct image coherence; Image of ideal multiplication restricted to an ideal multiple of its tensor source",
+   "via": [
+    "lem-pc-ideal-power-tensor-image-lift",
+    "lem-pc-closed-structure-ambient-ideal-extension",
+    "lem-pc-local-closed-ideal-map-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealTensorRestrictedMultiplicationImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealTensorRestrictedMultiplicationImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ideal_tensor_restricted_multiplication_image",
+  "statement": "theorem ideal_tensor_restricted_multiplication_image\n    {X : Scheme.{u}} (I : X.IdealSheafData) (H : X.Modules)\n    [H.IsQuasicoherent] (n m : ℕ) :\n    letI : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf\n    let T := (I ^ n).toModules ⊗ H\n    let μ := (I ^ n).toModulesι ▷ H ≫ (λ_ H).hom\n    let j := idealModuleProductι (idealSheafPower I.toModulesι m).2 T\n    ∃ e : idealModuleProduct (I ^ (n + m)).toModulesι H ≅ image (j ≫ μ),\n      e.hom ≫ image.ι (j ≫ μ) = idealModuleProductι (I ^ (n + m)).toModulesι H",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082338-L-1633312",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082338-L-1633312",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

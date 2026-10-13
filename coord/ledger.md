@@ -11624,3 +11624,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/D4/Sheaf.CategoryTheory.SingleHomologyShiftComparison (stage 3; reviewer PASS; first push; landing 20261013T082337-L-1632957 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/E1/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative (stage 3; reviewer PASS; first push; landing 20261013T082337-L-1633054 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:23 L: merged deliver/E1/Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyPullbackComparison (stage 3; reviewer PASS; first push; landing 20261013T082338-L-1633199 (interface); batch 20261013T082326; modules 3; new nodes 2)
+- 08:23 L: merged deliver/E1/Sheaf.AlgebraicGeometry.IdealPowerTensorImageLift (stage 3; reviewer PASS; first push; landing 20261013T082338-L-1633312 (interface); batch 20261013T082326; modules 4; new nodes 3)

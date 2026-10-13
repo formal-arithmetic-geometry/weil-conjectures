@@ -1,0 +1,175 @@
+{
+ "id": "lem-pc-ideal-tensor-multiplication-kernel-control",
+ "kind": "statement",
+ "title": "Coherence and ideal annihilation of a tensor multiplication kernel",
+ "statement": "Let X be a Noetherian scheme [pqf-def-locnoeth], I a quasi-coherent ideal sheaf [def-sbc-closed-immersion-ideal-sheaf], H a coherent module [pqf-def-coherent], and n a nonnegative integer. Put T=I^n \\otimes H [def-pur-sheaf-tensor-product] and let mu:T \\to H be multiplication. Then T is coherent, ker(mu) is quasi-coherent, and I^n ker(mu)=0, with the recursive ideal power and multiplication-image product [lem-weil-pbc-ideal-module-product-stalk].",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YB, second Artin-Rees argument and last displayed map"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "On each affine open the power ideal and H have finite section modules over the Noetherian section ring. The affine tensor comparison identifies tensor sections, which are finite. Quasi-coherence and finite type give coherence of T.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coherent kernel criterion gives coherence of K=ker(mu), hence its quasi-coherence.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a in I(U)^n and a tensor z=sum b_j tensor h_j in K(U), balancing gives a*z=a tensor sum b_j*h_j=0. The kernel inclusion is injective. The affine product formula and the recursive-power range formula identify I^n K with zero on an affine basis, hence globally. For n=0 the tensor multiplication is a unit isomorphism and K=0.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tags 01YA and 01YB; omitted balancing and image-identification details expanded by E1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The kernel of multiplication from an ideal tensor a module is annihilated by the ideal",
+   "results": {
+    "t": "2026-10-13T06:37:26Z",
+    "tool": "leansearch",
+    "query": "The kernel of multiplication from an ideal tensor a module is annihilated by the ideal",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of multiplication from an ideal tensor a module is annihilated by that ideal",
+   "results": {
+    "t": "2026-10-13T06:49:14Z",
+    "tool": "leanfinder",
+    "query": "The kernel of multiplication from an ideal tensor a module is annihilated by that ideal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.ker_tensorProductMk",
+     "LinearMap.tensorKer",
+     "LinearMap.tensorKer_tmul",
+     "Ideal.ker_tensorProductMk_quotient",
+     "LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm",
+     "LinearMap.tensorKer_coe",
+     "lTensor_mkQ",
+     "rTensor_mkQ"
+    ],
+    "digest": "480dcda5f3382c5e"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level theorem. Algebraic search results are ingredients, not the stated sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*ker|ker.*tensor",
+   "results": {
+    "t": "2026-10-13T06:41:19Z",
+    "tool": "grep",
+    "query": "tensor.*ker|ker.*tensor",
+    "sub": "RingTheory/Ideal",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean"
+    ],
+    "digest": "cc5a520fbd663387"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level theorem. Algebraic search results are ingredients, not the stated sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IdealPowerTensorImageLift",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 01YB argument within ideal devissage for higher direct image coherence; Coherence and ideal annihilation of a tensor multiplication kernel",
+   "via": [
+    "lem-pc-ideal-power-tensor-image-lift",
+    "lem-pc-closed-structure-ambient-ideal-extension",
+    "lem-pc-local-closed-ideal-map-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealTensorMultiplicationKernelControl",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealTensorMultiplicationKernelControl.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ideal_tensor_multiplication_kernel_control",
+  "statement": "theorem ideal_tensor_multiplication_kernel_control\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (H : X.Modules)\n    (hH : RingedSpace.IsCoherent X.toRingedSpace H) (n : ℕ) :\n    letI : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf\n    let T := (I ^ n).toModules ⊗ H\n    let μ := (I ^ n).toModulesι ▷ H ≫ (λ_ H).hom\n    RingedSpace.IsCoherent X.toRingedSpace T ∧\n      (kernel μ).IsQuasicoherent ∧\n      IsZero (idealModuleProduct (idealSheafPower I.toModulesι n).2 (kernel μ))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082338-L-1633312",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082338-L-1633312",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
