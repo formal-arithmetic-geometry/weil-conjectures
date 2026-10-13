@@ -17,34 +17,35 @@
  },
  "proof": [
   {
-   "text": "Resolve the structure sheaf in degree zero by itself. Its translated\ncomplex is K-flat, and its termwise pullback is the translated structure sheaf\non Z. Compare these representatives with derived pullback and the supplied\nmonoidal unit map to obtain e. Resolve a morphism by a morphism between K-flat\ncomplexes and use its mapping cone, which is again K-flat. Termwise module\npullback is additive and identifies its cone with the cone of the pulled-back\nmap. Write translation as tensor with the translated structure sheaf, using the\nfirst-variable Koszul map followed by the shifted left unitor. In these\ncoordinates the comparison of connecting maps is pullback of the inverse of\nthis rewrite, followed by the supplied inverse tensorator, e tensored with the\nidentity, and the target rewrite. The tensorator and unit equations give this\nnormalization for the supplied monoidal structure. Thus the three displayed\nmaps form a distinguished triangle. Every distinguished triangle in the derived\ncategory is isomorphic to such a localized cone triangle. Naturality of the\nrewrite, tensorator and e transports the assertion along this isomorphism.\nHere the starting triangle is in the homotopy category: replace its complex\nrepresentatives by K-flat resolutions and compare the cone triangles after\nlocalization. No assertion about arbitrary derived triangles is needed in this\nlemma. Zero complexes and the empty scheme use the same cone and unitor equations.",
+   "text": "Choose e and its distinguished-triangle assertion for K-flat cone triangles from [lem-sc-derived-pullback-translated-unit-kflat-cones]. Construct the degree-one comparison a(K)=F(c_Y(K) inverse) followed by δ, e tensor id and c_Z(F(K)). Naturality of c follows from the canonical tensor-shift naturality and the left unitor. Tensorator naturality and whisker_exchange then prove F(b[1])≫a(N)=a(K)≫F(b)[1]. No coherent integer-shift extension is needed.",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-derived-category",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-sc-scheme-canonical-shift-unit-iso",
-    "def-pc-kflat-complex",
-    "def-weil-proper-morphism",
-    "lem-pc-kflat-resolution",
-    "lem-pc-tensor-pullback-kflat-quasi-iso"
+    "lem-sc-derived-pullback-translated-unit-kflat-cones",
+    "def-sc-scheme-canonical-shift-unit-iso"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-kflat-localized-cone-presentation] to the given distinguished homotopy triangle T₀, obtaining a triangle isomorphism i from Qh(T₀) to a localized cone triangle of p:P→Q with P and Q K-flat.",
+   "uses": [
+    "lem-sc-kflat-localized-cone-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build Triangle.isoMk between their displayed pullback triangles, with components F(i₁),F(i₂),F(i₃). The first two squares are images under F of i.comm₁ and i.comm₂. For the third, naturality of a changes a(T.obj₁)≫F(i₁)[1] to F(i₁[1])≫a(S.obj₁); apply F to i.comm₃ and reassociate. Transport the distinguished cone image along this isomorphism by Pretriangulated.isomorphic_distinguished. This proves exactly the original statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback",
-  "def-pc-derived-category",
-  "def-pc-scheme-derived-tensor-structure",
+  "lem-sc-derived-pullback-translated-unit-kflat-cones",
   "def-sc-scheme-canonical-shift-unit-iso",
-  "def-pc-kflat-complex",
-  "def-weil-proper-morphism",
-  "lem-pc-kflat-resolution",
-  "lem-pc-tensor-pullback-kflat-quasi-iso"
+  "lem-sc-kflat-localized-cone-presentation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/06YJ",
-  "place": "06YJ mapping-cone exactness; translated-unit normalization and cone part of lem-sc-derived-pullback-tensor-unit-shift, expanded by the agent"
+  "place": "Formal reduction to K-flat cone representatives and naturality transport, K2; translated-unit cone computation left as a strictly restricted intermediate theorem."
  },
  "mathlib_searches": [
   {
@@ -141,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T153222-L-1059856",
+  "landing": "20261013T155936-L-1303277",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

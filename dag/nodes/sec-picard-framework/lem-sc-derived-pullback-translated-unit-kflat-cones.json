@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-derived-pullback-translated-unit-kflat-cones",
+ "kind": "statement",
+ "title": "Translated-unit comparison on K-flat cone triangles",
+ "statement": "Let f:Z→Y be proper between Noetherian schemes [def-weil-proper-morphism], with the recorded derived categories [def-pc-derived-category] in one localization universe, recorded derived pullback F [def-pc-derived-pullback], and a supplied strong monoidal structure [def-pc-scheme-derived-tensor-structure]. Write c_X(K):O_X[1]⊗K≅K[1] for [def-sc-scheme-canonical-shift-unit-iso]. There exists a single e:F(O_Y[1])≅O_Z[1] such that, for every cochain morphism p:P→Q between K-flat O_Y-complexes [def-pc-kflat-complex], with T=Qh.mapTriangle(mappingCone.triangleh p), the triangle with first maps F(T.mor₁), F(T.mor₂) and last map F(T.mor₃) followed by F(c_Y(T.obj₁) inverse), the supplied inverse tensorator δ_(O_Y[1],T.obj₁), e tensor id, and c_Z(F(T.obj₁)) is distinguished in D(O_Z). Only explicit cone triangles of K-flat morphisms are asserted here.",
+ "stmt_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-scheme-canonical-shift-unit-iso",
+  "def-pc-kflat-complex",
+  "def-weil-proper-morphism"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat mapping-cone calculation and translated-unit normalization in the proof of lem-sc-derived-pullback-translated-unit-triangles; Stacks 06YJ, with the supplied-tensorator normalization expanded by the agent."
+ },
+ "proof": [
+  {
+   "text": "Represent O_Y by its degree-zero complex and O_Y[1] by its translate. These are K-flat. Termwise module pullback identifies these complexes with O_Z and O_Z[1]. The derived-pullback comparison on K-flat representatives [def-pc-derived-pullback], together with the supplied monoidal unit map, gives a single e:F(O_Y[1])≅O_Z[1]. This e is chosen before P,Q,p.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p:P→Q between K-flat complexes, its mapping cone is K-flat by [lem-pc-kflat-closure]. The K-flat counit in [def-pc-derived-pullback] is invertible on P,Q and the cone. The additive termwise module-pullback functor identifies the pulled-back cone, its inclusion and its projection with the cone triangle of the pulled-back morphism, using CochainComplex.mappingCone.mapTrianglehIso.",
+   "uses": [
+    "lem-pc-kflat-closure",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the degree-one translation as tensor with O_Y[1] by [def-sc-scheme-canonical-shift-unit-iso]. In the cone projection comparison, the resulting map is F(c_Y(P) inverse), then the supplied inverse tensorator, then e tensor id, then c_Z(F(P)). Substitute the first-variable Koszul comparison and the shifted left unitor defining c. Naturality of the tensorator moves the cone projection through it; tensorator associativity and its unit equations give the stated normalization. Thus the displayed triangle is isomorphic to the localized termwise-pullback cone triangle and is distinguished. This step includes the compatibility for the supplied monoidal structure; exactness for an unspecified shift alone does not establish it.",
+   "uses": [
+    "def-sc-scheme-canonical-shift-unit-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-kflat-closure",
+  "def-sc-scheme-canonical-shift-unit-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat mapping-cone calculation and translated-unit normalization in the proof of lem-sc-derived-pullback-translated-unit-triangles; Stacks 06YJ, with the supplied-tensorator normalization expanded by the agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a mapping cone between K-flat complexes with the monoidal comparison expressed as tensor with the shifted unit",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a mapping cone between K-flat complexes with the monoidal comparison expressed as tensor with the shifted unit",
+   "date": "2026-10-13",
+   "results": "8 hits: CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.map_δ, CategoryTheory.Tor'_map_app, CochainComplex.mappingCone.mapTrianglehIso, CategoryTheory.Tor_map, DerivedCategory.triangleOfSESδ",
+   "verdict": "Generic cone and localization APIs only; no theorem for these K-flat sheaf statements."
+  },
+  {
+   "tool": "grep",
+   "query": "mapTrianglehIso|commShiftIso.*unit|unit.*commShiftIso",
+   "date": "2026-10-13",
+   "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+   "verdict": "Generic cone and localization APIs only; no theorem for these K-flat sheaf statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTranslatedUnitTriangles",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "K-flat mapping-cone calculation and translated-unit normalization in the proof of lem-sc-derived-pullback-translated-unit-triangles; Stacks 06YJ, with the supplied-tensorator normalization expanded by the agent.",
+   "via": [
+    "lem-sc-derived-pullback-translated-unit-triangles",
+    "lem-sc-derived-pullback-tensor-unit-shift",
+    "lem-sc-derived-pullback-canonical-tensor-shift-one",
+    "lem-sc-derived-monoidal-pullback-unital-shift",
+    "lem-sc-pinned-projection-counit-exact-shift",
+    "lem-sc-right-adjoint-tensor-compatible-exact-structures",
+    "lem-sc-right-adjoint-tensor-comparison-triangle",
+    "lem-sc-right-adjoint-tensor-comparison-diagrams",
+    "lem-sc-right-adjoint-tensor-locus-triangles",
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTranslatedUnitKFlatCones",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTranslatedUnitKFlatCones.lean",
+  "declaration": "AlgebraicGeometry.exists_derivedPullback_translatedUnit_kFlat_cones",
+  "statement": "theorem exists_derivedPullback_translatedUnit_kFlat_cones\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)] :\n    ∃ e : (derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅\n        (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧,\n      ∀ (P Q : CochainComplex\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (p : P ⟶ Q),\n        CochainComplex.IsKFlat (R := Y.sheaf) P →\n        CochainComplex.IsKFlat (R := Y.sheaf) Q →\n        let Qh : HomotopyCategory\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ) ⥤\n            schemeDerivedCategory Y := DerivedCategory.Qh\n        let T := Qh.mapTriangle.obj (CochainComplex.mappingCone.triangleh p)\n        Triangle.mk ((derivedPullback f).map T.mor₁) ((derivedPullback f).map T.mor₂)\n          ((derivedPullback f).map T.mor₃ ≫\n            ((derivedPullback f).mapIso (schemeCanonicalShiftUnitIso Y T.obj₁).symm ≪≫\n              asIso (Functor.OplaxMonoidal.δ (derivedPullback f)\n                ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) T.obj₁) ≪≫\n              tensorIso e (Iso.refl _) ≪≫\n              schemeCanonicalShiftUnitIso Z ((derivedPullback f).obj T.obj₁)).hom) ∈\n          distTriang (schemeDerivedCategory Z)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T155936-L-1303277",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T155936-L-1303277",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
