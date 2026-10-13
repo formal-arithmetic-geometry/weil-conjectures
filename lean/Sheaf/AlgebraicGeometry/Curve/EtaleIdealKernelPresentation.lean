@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
+import Sheaf.AlgebraicGeometry.Curve.EtaleIdealKernelIso
+import Sheaf.AlgebraicGeometry.Curve.EtaleNestedIdealKernel
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact
 
 /-! # Tensor presentation of the kernel of ideal restriction
@@ -55,6 +57,19 @@ theorem exists_etaleIdealKernelPresentation (X : Scheme.{u})
             etaleAdditiveSheafToLowerStar J.subschemeι) = 0,
         Nonempty (IsLimit (KernelFork.ofι
           ((Modules.etaleTensorSectionsFunctor X).map
-            (IdealSheafData.toModulesOfLE hJI) ≫ e.hom) hzero)) := by sorry
+            (IdealSheafData.toModulesOfLE hJI) ≫ e.hom) hzero)) := by
+  obtain ⟨eI, eJ, he⟩ := exists_etaleIdealKernelIsoPair X I J hJI
+  obtain ⟨k, hk, hz, ⟨hlim⟩⟩ := exists_etaleNestedIdealKernel X I J hJI
+  have hmap : eJ.hom ≫ k =
+      (Modules.etaleTensorSectionsFunctor X).map
+        (IdealSheafData.toModulesOfLE hJI) ≫ eI.hom := by
+    apply (cancel_mono (kernel.ι (etaleAdditiveSheafToLowerStar I.subschemeι))).mp
+    simpa only [Category.assoc, hk] using he.symm
+  have hzero : ((Modules.etaleTensorSectionsFunctor X).map
+      (IdealSheafData.toModulesOfLE hJI) ≫ eI.hom) ≫
+      (kernel.ι (etaleAdditiveSheafToLowerStar I.subschemeι) ≫
+        etaleAdditiveSheafToLowerStar J.subschemeι) = 0 := by
+    rw [← hmap, Category.assoc, hz, comp_zero]
+  exact ⟨eI, hzero, ⟨IsKernel.isoKernel _ _ hlim eJ hmap⟩⟩
 
 end AlgebraicGeometry.Scheme

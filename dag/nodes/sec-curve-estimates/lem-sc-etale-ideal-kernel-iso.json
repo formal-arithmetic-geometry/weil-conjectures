@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-etale-ideal-kernel-iso",
+ "kind": "statement",
+ "title": "Tensor ideal identifications compatible with inclusion",
+ "statement": "For a scheme X and nested ideal sheaf data J ≤ I, tensor sections of I and J are isomorphic to the kernels of additive restriction to their closed subschemes. The tensor inclusion composed with the first identification and its kernel inclusion equals the second identification composed with its kernel inclusion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-sc-etale-tensor-sections-right-exact"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Cover an etale object by affine etale objects V over affine opens U=Spec A.\nWrite B=Gamma(V,O). Flatness of B over A identifies B tensor I(U) and B tensor J(U)\nwith the extended ideals I_B and J_B. Restriction to the closed subscheme of either\nideal is the quotient map from B, so these extended ideals are its additive kernels.\nThe specified ideal modules are kernels of structure-module restriction, hence their\nsections and inclusion agree with these ordinary ideals and inclusion. The resulting\nisomorphisms commute with all affine restrictions, since tensor base change, quotient\nand ideal inclusion commute with ring maps. Glue over affine refinements, sheafify,\nand lift additive universes. The inclusion compatibility is checked on the same cover.\nFor I=J it is the identity; for J=0 both sides of the compatibility are zero.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "def-sc-etale-additive-structure-restriction",
+    "def-pc-module-pullback",
+    "lem-sc-etale-tensor-sections-right-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-etale-additive-structure-restriction",
+  "def-pc-module-pullback",
+  "lem-sc-etale-tensor-sections-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor sections of an ideal identify with the additive kernel of restriction compatible with inclusion",
+   "results": "Found IdealSheafData.ker_subschemeι_app, ker_subschemeι, ker_fst_of_isClosedImmersion; these supply affine ring kernel facts, not the tensor-sheaf comparison.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsKernel.isoKernel",
+   "results": "Found the generic transport of a limiting kernel fork along a vertex isomorphism; used in the combining proof.",
+   "verdict": "partial match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleIdealKernel|etaleNestedIdeal|ker_subschemeι",
+   "results": "Found affine ideal kernel lemmas. The only existing complete presentation is the assigned theorem itself; importing it would create a cycle.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change tensor ideal kernel of restriction compatible with inclusion",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleIdealKernelPresentation",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-ideal-kernel-presentation",
+   "place": "Proof: affine tensor identification and inclusion compatibility",
+   "via": [
+    "lem-sc-etale-ideal-kernel-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleIdealKernelIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleIdealKernelIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etaleIdealKernelIsoPair",
+  "statement": "theorem exists_etaleIdealKernelIsoPair (X : Scheme.{u})\n    (I J : X.IdealSheafData) (hJI : J ≤ I) :\n    ∃ eI : (Modules.etaleTensorSectionsFunctor X).obj I.toModules ≅\n        kernel (etaleAdditiveSheafToLowerStar I.subschemeι),\n      ∃ eJ : (Modules.etaleTensorSectionsFunctor X).obj J.toModules ≅\n          kernel (etaleAdditiveSheafToLowerStar J.subschemeι),\n        (Modules.etaleTensorSectionsFunctor X).map (IdealSheafData.toModulesOfLE hJI) ≫\n            eI.hom ≫ kernel.ι (etaleAdditiveSheafToLowerStar I.subschemeι) =\n          eJ.hom ≫ kernel.ι (etaleAdditiveSheafToLowerStar J.subschemeι)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T022411-L-3212320",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T022411-L-3212320",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
