@@ -1,6 +1,6 @@
 # Work queue
 
-288 items; claim with `tools/claim.py next <group> [--stage N]`.
+285 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (22)
 
@@ -44,7 +44,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (258)
+## Stage 3: modules to prove (255)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -143,7 +143,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.DerivedRestrictionZeroTransport` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedSectionPullbackZero` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFullyFaithful` | 19 | 1 | proof |
-| `Sheaf.Algebra.Homology.HomTensorDifferentialSummand` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineAlgebraUpperTruncationEdge` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryComponentNaturality` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomExtension` | 20 | 1 | proof |
@@ -155,6 +154,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalRetraction` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalSection` | 20 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 20 | 2 | proof |
+| `Sheaf.Algebra.Homology.HomTensorDifferentialSummandPure` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomEvaluationNaturality` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorShiftKFlatOne` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineData` | 21 | 1 | proof |
@@ -217,7 +217,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.RightAdjointMateSchemeIsoTransport` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RightAdjointMateSuccessiveBaseChange` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ScalarCupZeroGlobalSections` | 23 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitNaturality` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparison` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorRoof` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorTermsFlat` | 23 | 1 | proof |
@@ -266,22 +265,20 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.RingTheory.TorLocalizationDenominators` | 24 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 25 | 1 | proof |
 | `Sheaf.Algebra.Homology.FiniteStripConeFiltration` | 25 | 1 | proof |
-| `Sheaf.Algebra.Homology.TorIndependentKFlatResolutionTensor` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatModuleDescentPreorder` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.RootFactorStalkLocalization` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenStalkFreeMapLocalLift` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOpenStalkRetractHomEquality` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalAffineRectangleExact` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalRightCechProductExact` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalRightCechTensorExact` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardRightCechCupHomology` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectionMateAffineChartCertificate` | 25 | 1 | proof |
-| `Sheaf.Paper.ModuleCupPairingExists` | 25 | 1 | proof |
 | `Sheaf.Paper.ModuleCupResolutionInvariance` | 25 | 1 | proof |
 | `Sheaf.Algebra.Homology.BaseTensorDerivedComparison` | 26 | 1 | proof |
+| `Sheaf.Algebra.Homology.TorIndependentTensorAugmentation` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineExtensionSectionsModelMate` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineScalarSectionAction` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSectionsSquareComparisonCoherence` | 26 | 1 | proof |
