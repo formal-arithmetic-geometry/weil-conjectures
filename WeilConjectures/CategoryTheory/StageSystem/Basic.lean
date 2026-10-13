@@ -450,6 +450,23 @@ lemma transIso_hom_app {i j : I} (h : i ≤ j) (x : C i) :
 lemma transIso_inv_app {i j : I} (h : i ≤ j) (x : C i) :
     (S.transIso h).inv.app x = (S.isoToStage ⟨i, x⟩ h).hom := rfl
 
+variable (S) in
+/-- Blueprint `sk-prop-trace-adic` (iii), the stage `ℚ̄_ℓ`: in the filtered 2-colimit of a stage
+system (in the application, `Dᵇc(X, ℚ̄_ℓ)` as the colimit of the categories `Dᵇc(X, E)` over the
+finite extensions `E/ℚ_ℓ`) every object and every morphism is represented at a finite stage, and
+two representatives at a stage define the same morphism if and only if they agree after a further
+extension. -/
+theorem exists_stage_representation :
+    (∀ X : S.PairCategory, ∃ (i : I) (x : C i), (S.ι i).obj x = X) ∧
+    (∀ {i j : I} (x : C i) (y : C j) (f : (S.ι i).obj x ⟶ (S.ι j).obj y),
+      ∃ (n : I) (hi : i ≤ n) (hj : j ≤ n) (u : (S.T hi).obj x ⟶ (S.T hj).obj y),
+        f = (S.transIso hi).inv.app x ≫ (S.ι n).map u ≫ (S.transIso hj).hom.app y) ∧
+    ∀ {i : I} {x y : C i} (u u' : x ⟶ y),
+      (S.ι i).map u = (S.ι i).map u' ↔ ∃ (p : I) (h : i ≤ p), (S.T h).map u = (S.T h).map u' := by
+  refine ⟨fun X ↦ ⟨X.stage, X.obj, rfl⟩, fun {i j} x y f ↦ ?_, fun u u' ↦ ι_map_eq_ι_map_iff u u'⟩
+  obtain ⟨n, -, hi, hj, u, rfl⟩ := PairCategory.exists_le_mkHom_eq f i
+  exact ⟨n, hi, hj, u, mkHom_eq_isoToStage hi hj u⟩
+
 end StageSystem
 
 end CategoryTheory
