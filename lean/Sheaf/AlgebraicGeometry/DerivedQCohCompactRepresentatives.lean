@@ -11,6 +11,7 @@ public import Sheaf.CategoryTheory.CompactObject
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 
 /-! # Small representatives of compact quasi-coherent derived objects
 
@@ -34,7 +35,7 @@ theorem noetherian_open_derived_categories_exists (X : Scheme.{u}) [IsNoetherian
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     Nonempty (∀ U : X.Opens,
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))) := by
-  sorry
+  exact nonempty_derivedOpenLocalization X
 
 /-- Compact objects in the quasi-coherent derived category are perfect.
 Source: Stacks Project, Tag 09M1, converse direction of
