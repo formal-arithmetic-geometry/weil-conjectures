@@ -15,19 +15,24 @@
  ],
  "proof": [
   {
-   "text": "Let y be the unique point of Spec kappa(x). Every open neighborhood of y equals the whole space. The global germ map therefore identifies sections of any module sheaf with its stalk; its inverse sends a germ to the global representative, uniquely since every representative neighborhood is the whole space. The ring germ likewise identifies the ring stalk with global sections. Transport scalars by GammaSpecIso to kappa(x).",
+   "text": "At the closed point y of Spec kappa(x), construct the global germ natural transformation after restricting global-section scalars by GammaSpecIso inverse and stalk scalars by stalkClosedPointIso inverse. Every neighborhood of y is top (IsLocalRing.closed_point_mem_iff); exists_germ_eq gives surjectivity, and germ_eq plus identity restrictions gives injectivity. Linearity follows from PresheafOfModules.germ_smul and GammaSpecIso_hom_stalkClosedPointIso_inv. The stalk-map germ formula gives naturality. NatIso.ofComponents of the resulting bijective linear maps gives globalStalkIso.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply the natural tensorPullback stalk isomorphism at y. The equality i_x(y)=x and the equality of its stalk map, under the preceding ring identification, with the residue map identify the right side with kappa(x) tensor over O_X,x the original stalk. Those identities follow by applying both maps to germs of sections in the definition of fromSpecResidueField.",
+   "text": "Obtain e from exists_tensorPullback_stalk_iso for fromSpecResidueField x at y. Whisker globalStalkIso by tensorPullback, then whisker e by restriction of scalars along stalkClosedPointIso inverse. This identifies the global sections with extension of the original stalk to the residue-point stalk ring, restricted to kappa(x).",
    "uses": [
     "lem-weil-pbc-module-stalk-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Compose with the global germ identification to give the required linear isomorphism. Its forward map sends a pure tensor a tensor m to a times the restricted germ, and its inverse is the inverse stalk tensor map followed by the inverse global germ map. Their inverse identities and linearity follow from the constituent isomorphisms. The naturality of germs and tensorPullback stalks gives naturality in every module sheaf, hence a natural isomorphism of the two functors.",
+   "text": "For a ring isomorphism e:B->C, extendScalars e and restrictScalars e inverse are left adjoints of restrictScalars e, the latter through restrictScalarsEquivalenceOfRingEquiv. leftAdjointUniq identifies them, and extendScalarsComp then identifies extendScalars f followed by restriction along e inverse with extendScalars (e composed with f). Apply this to stalkClosedPointIso and the residue-point stalk map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use SpecToEquivOfLocalRing.apply_symm_apply at the pair (x,residue). The inverse morphism is definitionally fromSpecResidueField x. Apply congrArg to the function taking a point-local-ring-map pair to moduleStalkFunctor at the point followed by extendScalars of the map. This identifies the point and scalar map simultaneously, giving the exact right-hand functor. Compose all natural isomorphisms and this equality isomorphism.",
    "uses": [],
    "elementary": true
   }
@@ -38,7 +43,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tag 0098, Lemma 6.26.4, specialized to a residue-field point with global sections on a singleton spectrum; T3 writes the Lean interface and composition argument"
+  "place": "Tag 0098; S3 formalizes the global-germ identification and scalar transport, and uses Mathlib SpecToEquivOfLocalRing for the residue-point identification."
  },
  "mathlib_searches": [
   {
@@ -127,10 +132,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T045607-L-138264",
-  "kind": "interface",
+  "landing": "20261013T100125-L-2486701",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
