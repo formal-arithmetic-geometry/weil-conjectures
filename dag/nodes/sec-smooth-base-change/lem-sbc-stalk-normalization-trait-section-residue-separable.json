@@ -15,17 +15,29 @@
  ],
  "proof": [
   {
-   "text": "Minimality identifies the restriction of U to the trait with the punctured\ntrait. The closed fibre of the smooth base change is a regular effective Cartier\ndivisor. Invertibility of the group order gives tame ramification in codimension one,\nincluding disconnected torsors by passing to stabilizers. Normalization commutes with\nlocalization and etale base change. Thus 0EYH supplies etale charts in which the\nnormalization is a union of Spec B[T]/(T^e-f), with f an equation of that divisor and\ne positive and invertible. At any point over f=0 one has T=0 in the residue field.\nConsequently the residue extension in the displayed chart is the identity extension.\nThe etale maps introducing these charts induce finite separable residue extensions.\nSeparability descends to the original residue extension: an inseparable element would\nremain inseparable after a separable field extension. This proves the claim without\nusing the rational-point splitting assumption. An empty section fibre is vacuous.",
-   "uses": [],
+   "text": "Apply the existing trait normalization chart theorem. At n(x), choose one of its covering affine etale maps. On its pullback, transport residue separability of the finite product of tame root algebras through the supplied isomorphism over the affine base. The root-product calculation handles both zero and nonzero divisor values, so no section or divisor-equation compatibility needs to be reconstructed.",
+   "uses": [
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-tame-root-product-residue-separable"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Lift x and the selected affine-base point to a point of the pullback using Scheme.Pullback.exists_preimage_pullback. The base chart has separable residue extensions because it is etale. Compose this extension with the separable chart extension. Pullback commutativity identifies the composite with the map through n. The original source residue field embeds into the pullback residue field, so Algebra.IsSeparable.of_algHom descends separability to it. These operations are proved in private Lean helpers using residueFieldMap_comp, Algebra.IsSeparable.trans, and the etale residue-field instance. Finally identify the residue-map algebra with the canonical stalk-map quotient algebra.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-stalk-normalization-trait-charts",
+  "lem-sbc-tame-root-product-residue-separable"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "H1",
+  "by": "W2",
   "document": "Stacks Project",
-  "place": "Tag 0EYH, tame charts in the trait paragraph of 0EYJ"
+  "place": "Tag 0EYH, standard tame root charts; Tag 0EYJ, trait paragraph",
+  "note": "Existing jointly surjective trait charts plus a new generic root-product residue calculation; complete Lean descent assembly. Fixed unit route preserved."
  },
  "mathlib_searches": [
   {
@@ -99,9 +111,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T022415-L-3213755",
+  "landing": "20261013T100212-L-2500745",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

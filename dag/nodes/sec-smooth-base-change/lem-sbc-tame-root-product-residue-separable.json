@@ -1,0 +1,126 @@
+{
+ "id": "lem-sbc-tame-root-product-residue-separable",
+ "kind": "statement",
+ "title": "Separable residue extensions of finite products of tame root algebras",
+ "statement": "Let $R$ be a commutative ring, $m\\in\\mathbf N$, $f\\in R$, and $e:\\operatorname{Fin}(m)\\to\\mathbf N$ with every $e_i>0$ and $e_i$ a unit in $R$. Put $D=\\prod_{i\\in\\operatorname{Fin}(m)}R[T]/(T^{e_i}-f)$ and let $\\pi:\\operatorname{Spec}D\\to\\operatorname{Spec}R$ be induced by the diagonal coefficient map [def-weil-affine-spectrum]. For every $x\\in\\operatorname{Spec}D$, the canonical residue extension $\\kappa(x)/\\kappa(\\pi(x))$ [def-weil-residue-field] is separable algebraic [def-weil-pbc-separable-algebraic-extension]. The zero ring and $m=0$ are allowed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYH, displayed local normal form; elementary residue calculation for that form"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "A point of the spectrum of the finite product selects exactly one factor; the empty product has no points. Write k for the residue field of its base point and t for the image of the root coordinate. The fibre of that factor is k[T]/(T^e-fbar). If fbar is zero, positivity of e gives t=0 in the residue field, so the residue field is k. Otherwise t is nonzero. The derivative e*T^(e-1) is nonzero at t because e is invertible. Hence the irreducible polynomial defining this point is separable. Its quotient field is the residue field of the point. These identifications use the canonical structure maps, so the same conclusion holds for the canonical map on scheme residue fields.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "W2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYH, displayed local normal form; residue calculation written by W2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "All residue field extensions of the morphism Spec R[T]/(T^e-f) to Spec R are separable if e is invertible in R",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The residue fields of Spec R[T]/(T^e-f) are separable over the base residue fields when e is invertible",
+   "results": "8 hits; unramified local-ring residue instances and criteria, no theorem for possibly ramified root algebras",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.*[Ss]eparab|[Ss]eparab.*AdjoinRoot|residue.*[Ss]eparab",
+   "results": "3 hits; UniversallyInjective residue criterion and unramified local ring criteria. Additional direct searches of lean/Sheaf and lean/WeilConjectures found trait charts but no residue theorem for root products. Mathlib has Polynomial.separable_X_pow_sub_C for the nonzero fibre case.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monic polynomial X^n-a with n invertible, every residue field extension of its quotient algebra is separable",
+   "results": "8 hits: separably closed field and separable-degree criteria, plus instIsSeparableResidueFieldOfQuotientIdeal and Algebra.isSeparable_residueField_iff. The latter require maximal ideals and already-separable quotient algebras; none gives the root-product calculation.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.separable_X_pow_sub_C",
+   "results": "1 hit: over a field, X^n-a is separable when the casts of n and a are both nonzero. This covers only the nonzero fibre polynomial, not arbitrary base rings, products, or canonical scheme residue maps.",
+   "date": "2026-10-13",
+   "verdict": "second reading: useful ingredient, not the remaining statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionResidueSeparable",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: standard tame covers in 0EYH, followed by descent of separability of their residues",
+   "via": [
+    "lem-sbc-stalk-normalization-trait-section-residue-separable",
+    "lem-sbc-stalk-normalization-trait-section-unramified",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.TameRootProductResidueSeparable",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/TameRootProductResidueSeparable.lean",
+  "declaration": "AlgebraicGeometry.Scheme.tameRootProduct_residue_separable",
+  "statement": "theorem tameRootProduct_residue_separable (R : CommRingCat.{u})\n    (m : ℕ) (f : R) (e : Fin m → ℕ)\n    (he : ∀ k, 0 < e k ∧ IsUnit (e k : R)) :\n    let D := CommRingCat.of (∀ k : Fin m,\n      AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f))\n    let π : Spec D ⟶ Spec R :=\n      Spec.map (CommRingCat.ofHom (algebraMap R D))\n    ∀ x : Spec D,\n      letI := (π.residueFieldMap x).hom.toAlgebra\n      Algebra.IsSeparable ((Spec R).residueField (π x)) ((Spec D).residueField x)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100212-L-2500745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100212-L-2500745",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
