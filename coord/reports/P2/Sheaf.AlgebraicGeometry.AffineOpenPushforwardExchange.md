@@ -1,0 +1,1200 @@
+## What changed
+
+Proved `AlgebraicGeometry.affineOpen_pushforward_exchange` without changing its signature.
+The private helpers `adj` and `square` name the existing tensor-pullback adjunction and
+canonical pushforward square. `exchange_unit` proves the defining unit equation, and
+`exchange_vertical` proves vertical pasting by transposing, applying naturality, and
+checking pushforward composition on sections. The main proof pastes the two canonical
+pullback squares, applies affine base change twice, and cancels the invertible factors.
+
+Replaced the proof-only import `Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange`
+with its narrower `Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso` module.
+Added the proof-only import `Mathlib.AlgebraicGeometry.Modules.Tilde` for restriction
+preserving quasi-coherence. All original public imports remain. Updated the item's node
+proof and proof dependencies to name the isomorphism-only affine theorem and the actual
+adjunction calculation. No other module, interface, target, or definition changes.
+
+## Proved and sorry left
+
+Closed the single original hole:
+`AlgebraicGeometry.affineOpen_pushforward_exchange`
+(node `lem-pc-s3-affine-open-pushforward-exchange`).
+Both private theorems, `exchange_unit` and `exchange_vertical`, are fully proved.
+No `sorry` remains in the delivered module; no holes were added or split off.
+This is a proof from existing affine base-change theory, not a decomposition into new holes.
+Single-file compilation passes without warnings. The delivery dry run performs the axiom probe.
+
+## No longer needed
+
+Removed direct proof import `Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange` and
+replaced proof dependency `lem-weil-pbc-affine-pushforward-base-change` with its
+isomorphism-only sublemma `lem-weil-pbc-affine-pushforward-base-change-isIso`.
+The larger theorem's preservation-of-quasi-coherence, algebra and horizontal-pasting
+clauses are not used. No unit statement or unit proof step is bypassed: the unit record
+`sk-thm-picard-f-representable` has no realization attached to this node, and the same
+affine-open argument is implemented.
+
+The following complete inventory lists project modules that disappear from this item's
+transitive source-import closure after the import replacement, with all matching DAG node IDs.
+These are local pruning results; modules still reached by other targets remain their work.
+Third-party Mathlib modules are omitted from this project-work inventory.
+
+The inventory contains 1094 project modules.
+
+<details>
+<summary>Modules and their nodes no longer reached through this item</summary>
+
+- `Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat`: `lem-weil-pbc-filtered-colimit-flat-modules`
+- `Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension`: `lem-pc-sites-module-sheafification-bilinear-extension`
+- `Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionExistence`: `lem-pc-sites-module-sheafification-bilinear-extension-existence`
+- `Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionUniqueness`: `lem-pc-sites-module-sheafification-bilinear-extension-uniqueness`
+- `Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat`: `lem-pc-sites-modules-sheafification-flat`
+- `Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor`: `lem-pc-sites-module-sheafification-tensor`
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat`: `lem-pc-sites-modules-j-shriek-flat`
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat`: `def-pc-flat-sheaf-modules`
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct`: `lem-pc-sites-modules-coproduct-flat`
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel`: `lem-weil-pbc-sheaf-hom-finite-presentation-kernel`
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings`: `lem-weil-pbc-stalk-change-of-rings-tensor`
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRingsPresheaf`: `lem-weil-pbc-presheaf-stalk-change-of-rings-tensor`
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor`: `lem-pc-ringed-space-module-stalk-tensor`, `lem-weil-pbc-module-stalk-tensor`
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal`: `lem-pc-sites-sheaf-tensor-bilinear-universal`
+- `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed`: `lem-pc-sheaf-modules-tensor-closed`
+- `Sheaf.Algebra.Category.ModuleCat.TorSymmetry`: `lem-weil-pbc-tor-symmetry`
+- `Sheaf.Algebra.FlatTorIdealCriterion`: `lem-weil-pbc-flat-tor-ideal-criterion`
+- `Sheaf.Algebra.Homology.AcyclicKFlatTensor`: `lem-pur-acyclic-kflat-tensor-arbitrary`
+- `Sheaf.Algebra.Homology.BaseDerivedExtensionLinear`: `lem-pc-base-derived-extension-linear`
+- `Sheaf.Algebra.Homology.BaseDerivedExtensionResolution`: `lem-pc-base-derived-extension-resolution`
+- `Sheaf.Algebra.Homology.BaseDerivedExtensionScalar`: `lem-pc-base-derived-extension-scalar`
+- `Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyAction`: `lem-pc-base-derived-tensor-cohomology-action`
+- `Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel`: `def-pc-base-derived-tensor-cohomology-model`
+- `Sheaf.Algebra.Homology.BaseDerivedTensorCounitLinear`: `lem-pc-base-derived-tensor-counit-linear`
+- `Sheaf.Algebra.Homology.BaseTensorOrdinaryDegreeIso`: `lem-pc-base-tensor-ordinary-degree-iso`
+- `Sheaf.Algebra.Homology.BaseTensorOrdinaryIso`: `lem-pc-base-tensor-ordinary-iso`
+- `Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat`: `lem-pc-bounded-above-flat-kflat`
+- `Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat`: `lem-pc-bounded-above-flat-kflat-site`
+- `Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclic`: `lem-pc-bounded-above-flat-tensor-acyclic`
+- `Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclicDegree`: `lem-pc-bounded-above-flat-tensor-acyclic-degree`
+- `Sheaf.Algebra.Homology.BoundedFlatKFlat`: `lem-pc-module-bounded-flat-kflat`
+- `Sheaf.Algebra.Homology.BoundedFlatReplacement`: `lem-pc-kflat-bounded-flat-replacement`
+- `Sheaf.Algebra.Homology.ChangeOfRingsAcyclicKFlat`: `lem-pur-change-of-rings-acyclic-kflat`
+- `Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso`: `lem-pur-change-of-rings-kflat-quasi-iso`
+- `Sheaf.Algebra.Homology.ChangeOfRingsTensorAcyclic`: `lem-pur-change-of-rings-tensor-acyclic`
+- `Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison`: `lem-pur-change-of-rings-tensor-comparison`
+- `Sheaf.Algebra.Homology.ConeHorizontalGradedIso`: `lem-sp-cone-horizontal-graded-iso`
+- `Sheaf.Algebra.Homology.ConeHorizontalProjection`: `def-sp-cone-horizontal-projection`
+- `Sheaf.Algebra.Homology.ConeHorizontalProjectionDifferential`: `lem-sp-cone-horizontal-projection-differential`
+- `Sheaf.Algebra.Homology.ConeHorizontalProjectionEpi`: `lem-sp-cone-horizontal-projection-epi`
+- `Sheaf.Algebra.Homology.ConeHorizontalProjectionGenerator`: `lem-sp-cone-horizontal-projection-generator-vanishing`
+- `Sheaf.Algebra.Homology.ConeHorizontalProjectionKernel`: `lem-sp-cone-horizontal-projection-kernel`
+- `Sheaf.Algebra.Homology.ConeHorizontalQuotientIso`: `lem-sp-cone-horizontal-quotient-iso`
+- `Sheaf.Algebra.Homology.ConeHorizontalQuotientIsoExists`: `lem-sp-cone-horizontal-quotient-iso-exists`
+- `Sheaf.Algebra.Homology.ConeHorizontalStepStable`: `lem-sp-cone-horizontal-step-stable`
+- `Sheaf.Algebra.Homology.CoproductKProjective`: `lem-pc-coproduct-kprojective`
+- `Sheaf.Algebra.Homology.CyclePullbackCore`: `lem-pc-functorial-cycle-pullback-core-stage3`
+- `Sheaf.Algebra.Homology.CyclePullbackLaws`: `lem-pc-cycle-pullback-tower-laws-stage3`
+- `Sheaf.Algebra.Homology.CyclePullbackLifting`: `lem-pc-functorial-cycle-pullback-lifting-stage3`
+- `Sheaf.Algebra.Homology.CyclePullbackResolution`: `lem-pc-functorial-cycle-pullback-construction`
+- `Sheaf.Algebra.Homology.CyclePullbackTower`: `def-pc-cycle-pullback-tower-data-stage3`
+- `Sheaf.Algebra.Homology.CyclePullbackTowerComparison`: `def-tower-canonical-comparison-g3`, `lem-pc-cycle-pullback-tower-comparison-stage3`, `new-tower-comparison-first`, `new-tower-comparison-second`
+- `Sheaf.Algebra.Homology.DerivedChangeOfRings`: `lem-pur-derived-change-of-rings`
+- `Sheaf.Algebra.Homology.DoubleComplexCokernelHomologyIso`: `lem-weil-pbc-double-complex-cokernel-homology-iso`
+- `Sheaf.Algebra.Homology.DoubleComplexSingleRowTotalIso`: `lem-sp-double-complex-single-row-total-iso`
+- `Sheaf.Algebra.Homology.DoubleComplexVerticalQuotientComparison`: `lem-sp-double-complex-vertical-quotient-total-comparison`
+- `Sheaf.Algebra.Homology.DoubleComplexVerticalSpectralObject`: `lem-sp-double-complex-vertical-spectral-object`
+- `Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparison`: `lem-sp-double-complex-vertical-tower-comparison`
+- `Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonFinite`: `lem-sp-double-complex-vertical-tower-comparison-finite`
+- `Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonTop`: `lem-sp-double-complex-vertical-tower-comparison-top`
+- `Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps`: `lem-sp-double-complex-vertical-tower-maps`
+- `Sheaf.Algebra.Homology.DoubleComplexVerticalWindow`: `def-sp-double-complex-vertical-window`
+- `Sheaf.Algebra.Homology.DoubleComplexVerticalWindowHomology`: `lem-sp-double-complex-vertical-window-homology`
+- `Sheaf.Algebra.Homology.FilteredColimitsTensor`: `lem-pc-module-filtered-colimits-tensor`
+- `Sheaf.Algebra.Homology.FilteredColimitsTensorTotal`: `lem-pc-module-filtered-colimits-tensor-preserves`
+- `Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries`: `lem-sp-filtered-complex-first-page-cycles-boundaries`
+- `Sheaf.Algebra.Homology.FilteredComplexSubquotients`: `def-sp-filtered-complex-subquotients`
+- `Sheaf.Algebra.Homology.FilteredFreeKProjective`: `lem-pc-filtered-free-kprojective`, `lem-pc-filtered-free-kprojective-stage`, `lem-pc-filtered-free-kprojective-telescope`
+- `Sheaf.Algebra.Homology.FilteredFreeKProjectiveAssembly`: `lem-pc-filtered-free-kprojective-assembly`
+- `Sheaf.Algebra.Homology.FilteredFreeKProjectiveStep`: `lem-pc-filtered-free-kprojective-step`
+- `Sheaf.Algebra.Homology.FilteredFreeResolution`: `lem-pc-derived-filtered-free-resolution`
+- `Sheaf.Algebra.Homology.FilteredFreeTelescopeSplitting`: `lem-pc-filtered-free-telescope-splitting`
+- `Sheaf.Algebra.Homology.FirstQuadrantAugmentation`: `lem-sc-first-quadrant-column-augmentation`
+- `Sheaf.Algebra.Homology.FirstQuadrantExtendedTotalExact`: `lem-sp-first-quadrant-extended-total-exact`
+- `Sheaf.Algebra.Homology.FirstQuadrantTotalComparison`: `lem-sc-first-quadrant-total-column-comparison`
+- `Sheaf.Algebra.Homology.FirstQuadrantTotalComparisonFinite`: `lem-sc-finite-row-total-column-comparison`
+- `Sheaf.Algebra.Homology.FirstQuadrantTotalExtension`: `lem-sc-total-extension-nat-arrow-iso`
+- `Sheaf.Algebra.Homology.FirstQuadrantTotalShortExact`: `lem-sp-first-quadrant-total-extend-short-exact`
+- `Sheaf.Algebra.Homology.FirstQuadrantVerticalConeFiltration`: `lem-sp-first-quadrant-vertical-cone-filtration`
+- `Sheaf.Algebra.Homology.FlatAugmentationEpicification`: `lem-pc-flat-augmentation-epicification`
+- `Sheaf.Algebra.Homology.FlatCoverFunctor`: `lem-pc-sites-modules-functorial-flat-cover`
+- `Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion`: `lem-pc-module-flat-opcycles-tor-criterion`
+- `Sheaf.Algebra.Homology.FlatTruncationSuccessor`: `lem-pc-flat-truncation-successor`
+- `Sheaf.Algebra.Homology.FlatTruncationTelescopeComparison`: `lem-pc-flat-truncation-telescope-comparison`
+- `Sheaf.Algebra.Homology.FlatTruncationTower`: `lem-pc-flat-truncation-tower`
+- `Sheaf.Algebra.Homology.FreeComplexCover`: `lem-pc-derived-free-complex-cover`
+- `Sheaf.Algebra.Homology.FreeCoverBicomplex`: `lem-pc-derived-free-cover-bicomplex`
+- `Sheaf.Algebra.Homology.FreeCoverColumns`: `lem-pc-derived-free-cover-columns`
+- `Sheaf.Algebra.Homology.FreeResolutionSesSplit`: `lem-weil-pbc-free-resolution-ses-split`
+- `Sheaf.Algebra.Homology.HorizontalProjectionNaturality`: `lem-sp-horizontal-projection-naturality`
+- `Sheaf.Algebra.Homology.HorizontalProjectionTailDifferential`: `lem-sp-horizontal-projection-tail-differential`
+- `Sheaf.Algebra.Homology.InverseImageStalkScalarTransport`: `lem-pc-ringed-inverse-image-stalk-scalar-transport`
+- `Sheaf.Algebra.Homology.InverseImageStalkScalarTransportBeta`: `lem-pc-ringed-inverse-image-stalk-scalar-transport-beta`
+- `Sheaf.Algebra.Homology.InverseImageStalkScalarTransportNaturality`: `lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality`
+- `Sheaf.Algebra.Homology.KFlat`: `def-pc-kflat-complex`
+- `Sheaf.Algebra.Homology.KFlatClosure`: `lem-pc-kflat-cone-direct-sum`
+- `Sheaf.Algebra.Homology.KFlatModuleBaseChange`: `lem-pc-kflat-extension-of-scalars`
+- `Sheaf.Algebra.Homology.KFlatPullback`: `lem-pc-kflat-pullback-preservation`
+- `Sheaf.Algebra.Homology.KFlatResolution`: `lem-pc-kflat-resolution`
+- `Sheaf.Algebra.Homology.KFlatStalkCriterion`: `lem-pc-kflat-stalk-criterion`
+- `Sheaf.Algebra.Homology.KFlatTelescopeClosure`: `lem-pc-kflat-closure`
+- `Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree`: `lem-pc-kflat-tensor-cone-two-out-of-three`
+- `Sheaf.Algebra.Homology.KInjectiveProducts`: `lem-pc-ringed-space-product-kinjective`
+- `Sheaf.Algebra.Homology.KernelShiftedMappingCone`: `lem-weil-degreewise-epi-kernel-cocone-qis`
+- `Sheaf.Algebra.Homology.LargeFilteredFreeResolution`: `lem-pc-large-filtered-free-resolution`
+- `Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy`: `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy`
+- `Sheaf.Algebra.Homology.LowerTruncationStepTriangle`: `lem-pc-derived-lower-truncation-step-triangle`
+- `Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside`: `lem-sc-module-extension-by-zero-stalk-maps-outside`
+- `Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitEpi`: `lem-sc-module-extension-by-zero-unit-epi`
+- `Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitFaithful`: `lem-sc-module-extension-by-zero-unit-mono-faithful-aux`
+- `Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso`: `lem-sc-module-extension-by-zero-unit-isiso`
+- `Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitMono`: `lem-sc-module-extension-by-zero-unit-mono`
+- `Sheaf.Algebra.Homology.ModuleStalkExact`: `lem-weil-pbc-module-stalk-exact`
+- `Sheaf.Algebra.Homology.ModuleStalkFunctor`: `def-pc-module-stalk-functor`
+- `Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact`: `lem-sc-derived-open-restriction-adjunction-exact`
+- `Sheaf.Algebra.Homology.PreciseVanishing`: `lem-pc-ring-precise-vanishing`
+- `Sheaf.Algebra.Homology.PreciseVanishingCore`: `lem-pc-ring-precise-vanishing-core`
+- `Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated`: `lem-pur-quasi-isos-saturated-triangulated`
+- `Sheaf.Algebra.Homology.RelativeFlatExtension`: `lem-pc-relative-flat-extension`
+- `Sheaf.Algebra.Homology.RestrictedComplementaryTruncationComparison`: `lem-sp-restricted-complementary-truncation-comparison`
+- `Sheaf.Algebra.Homology.RightExactTruncGEIso`: `lem-pc-right-exact-truncge-iso`
+- `Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting`: `lem-weil-pbc-ringed-space-module-exactness-local-lifting`
+- `Sheaf.Algebra.Homology.RoosComparisonHomotopies`: `lem-weil-roos-comparison-homotopies`
+- `Sheaf.Algebra.Homology.RoosComparisonHomotopyRetract`: `lem-weil-roos-comparison-homotopy-retract`
+- `Sheaf.Algebra.Homology.RoosComparisonMaps`: `lem-weil-roos-comparison-maps`
+- `Sheaf.Algebra.Homology.RoosComplex`: `lem-weil-derived-limit-roos-complex`
+- `Sheaf.Algebra.Homology.RoosSplitComparison`: `lem-weil-roos-split-comparison`
+- `Sheaf.Algebra.Homology.RowCycleLiftsToZigzag`: `lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag`
+- `Sheaf.Algebra.Homology.SplitIdentityFromFunctionals`: `lem-weil-pbc-split-identity-from-functionals`
+- `Sheaf.Algebra.Homology.SplitIdentityHomotopyEquiv`: `lem-pc-split-identity-homotopy-equiv`
+- `Sheaf.Algebra.Homology.SplitSubmodulesStable`: `lem-weil-pbc-split-submodules-stable`
+- `Sheaf.Algebra.Homology.StalkTensorComplex`: `lem-pc-stalk-tensor-complex`
+- `Sheaf.Algebra.Homology.StalkTensorComplexDegrees`: `lem-pc-stalk-tensor-complex-degrees`
+- `Sheaf.Algebra.Homology.StalkTensorComplexDifferential`: `lem-pc-stalk-tensor-complex-differential`
+- `Sheaf.Algebra.Homology.TelescopeColimit`: `lem-pc-complex-hocolim-colimit`
+- `Sheaf.Algebra.Homology.TelescopeShiftMono`: `lem-pc-telescope-shift-mono`
+- `Sheaf.Algebra.Homology.TensorActionOfAdditiveFunctor`: `lem-pc-tensor-action-additive-functor`
+- `Sheaf.Algebra.Homology.TensorBicomplex`: `def-weil-pbc-tensor-bicomplex`
+- `Sheaf.Algebra.Homology.TensorPullbackStalkComplex`: `lem-pc-tensor-pullback-stalk-complex`
+- `Sheaf.Algebra.Homology.TensorResolutionColumnCokernelIso`: `lem-weil-pbc-tensor-resolution-column-cokernel-iso`
+- `Sheaf.Algebra.Homology.TensorResolutionRowCokernelIso`: `lem-weil-pbc-tensor-resolution-row-cokernel-iso`
+- `Sheaf.Algebra.Homology.TensorRestrictExtendScalars`: `lem-pc-tensor-restrict-extend-scalars`
+- `Sheaf.Algebra.Homology.TensorRestrictExtendScalarsModule`: `lem-pc-tensor-restrict-extend-module-natural`
+- `Sheaf.Algebra.Homology.TorAmplitudeFlatModel`: `lem-pc-module-tor-amplitude-flat-model`
+- `Sheaf.Algebra.Homology.TotalFreeFiltration`: `lem-pc-derived-total-free-filtration`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelEven`: `lem-pc-derived-total-filtration-cokernel-even`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelOdd`: `lem-pc-derived-total-filtration-cokernel-odd`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelOddAux`: `lem-pc-derived-total-filtration-cokernel-odd-core`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationEvenQuotientBijective`: `lem-pc-derived-total-filtration-even-quotient-bijective`, `lem-pc-derived-total-filtration-even-quotient-injective`, `lem-pc-derived-total-filtration-even-quotient-surjective`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationEvenQuotientMap`: `lem-pc-derived-total-filtration-even-quotient-map`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationExhaustive`: `lem-pc-derived-total-filtration-exhaustive`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationOddQuotientBijective`: `lem-pc-derived-total-filtration-odd-quotient-bijective`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationOddQuotientMap`: `lem-pc-derived-total-filtration-odd-quotient-map`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationQuotients`: `lem-pc-derived-total-filtration-quotients`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationStepRetraction`: `lem-pc-derived-total-filtration-step-retraction`
+- `Sheaf.Algebra.Homology.TotalFreeFiltrationTerms`: `lem-pc-derived-total-filtration-stable`
+- `Sheaf.Algebra.Homology.TowerSplitComplexReplacement`: `lem-weil-tower-split-complex-replacement`
+- `Sheaf.Algebra.Homology.TruncationTelescope`: `lem-pc-kflat-hocolim-truncations`
+- `Sheaf.Algebra.Homology.UnitEntrySplits`: `lem-weil-pbc-free-complex-unit-entry-splits`
+- `Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIso`: `lem-sp-vertical-cutoff-column-quasiiso`
+- `Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoCore`: `lem-sp-vertical-cutoff-column-quasiiso-strict`
+- `Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoEqual`: `lem-sp-vertical-cutoff-column-quasiiso-equal`
+- `Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoStrictCases`: `lem-sp-vertical-cutoff-column-quasiiso-strict-nonpositive`
+- `Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoStrictPositive`: `lem-sp-vertical-cutoff-column-quasiiso-strict-positive`
+- `Sheaf.Algebra.Homology.VerticalCutoffComparisonEpi`: `lem-sp-vertical-cutoff-comparison-epi`
+- `Sheaf.Algebra.Homology.VerticalCutoffComparisonKernelTwoTerm`: `lem-sp-vertical-cutoff-comparison-kernel-two-term`
+- `Sheaf.Algebra.Homology.VerticalCutoffQuotientComparison`: `lem-sp-vertical-cutoff-quotient-comparison`
+- `Sheaf.Algebra.Homology.VerticalWindowComponentIso`: `lem-sp-vertical-window-component-iso`
+- `Sheaf.Algebra.Homology.VerticalWindowComponentNaturality`: `lem-sp-vertical-window-component-naturality`
+- `Sheaf.Algebra.Homology.VerticalWindowDegreeIso`: `lem-sp-vertical-window-degree-iso`
+- `Sheaf.Algebra.Homology.VerticalWindowSingleIso`: `lem-sp-vertical-window-single-iso`
+- `Sheaf.Algebra.Homology.ZeroDifferentialFreeCoproduct`: `lem-pc-zero-differential-free-coproduct`
+- `Sheaf.Algebra.Homology.ZigzagBoundaryReduction`: `new-zigzag-boundary-reduction`
+- `Sheaf.Algebra.Homology.ZigzagModule`: `def-weil-pbc-double-complex-zigzag-module`
+- `Sheaf.Algebra.Homology.ZigzagModuleFunctorial`: `lem-weil-pbc-double-complex-zigzag-module-functorial`
+- `Sheaf.Algebra.Homology.ZigzagToRowCokernel`: `lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map`
+- `Sheaf.Algebra.Homology.ZigzagTrivialIfRowBoundary`: `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary`
+- `Sheaf.Algebra.Homology.ZigzagZeroComponentBoundary`: `new-zigzag-zero-component-boundary`
+- `Sheaf.AlgebraicGeometry.AffineAlternatingCechModel`: `def-pc-affine-alternating-cech-model`
+- `Sheaf.AlgebraicGeometry.AffineAssociatedModuleFlatOver`: `lem-pc-affine-associated-module-flat-over`
+- `Sheaf.AlgebraicGeometry.AffineBaseChangeTensorComparisons`: `lem-weil-pbc-affine-base-change-tensor-comparisons`
+- `Sheaf.AlgebraicGeometry.AffineCapSectionOpen`: `lem-sc-affine-cap-section-open`
+- `Sheaf.AlgebraicGeometry.AffineCapSectionOpenAlgebra`: `lem-sc-affine-cap-section-open-algebra`
+- `Sheaf.AlgebraicGeometry.AffineCapSectionOpenDictionary`: `lem-sc-affine-cap-section-open-dictionary`
+- `Sheaf.AlgebraicGeometry.AffineDerivedCounitHomologyFactorization`: `new-affine-derived-counit-homology-factorization`
+- `Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde`: `lem-pc-affine-derived-pullback-tensor-tilde`
+- `Sheaf.AlgebraicGeometry.AffineDerivedSectionsHomologyComparison`: `lem-pc-affine-derived-sections-homology-comparison`
+- `Sheaf.AlgebraicGeometry.AffineDerivedSectionsTruncatedBottom`: `new-affine-derived-sections-truncated-bottom`
+- `Sheaf.AlgebraicGeometry.AffineDerivedSectionsTruncationIso`: `new-affine-derived-sections-truncation-iso`
+- `Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison`: `new-affine-derived-tilde-homology-comparison`
+- `Sheaf.AlgebraicGeometry.AffineDerivedUnitHomologyIsIso`: `new-affine-derived-unit-homology-isIso`
+- `Sheaf.AlgebraicGeometry.AffineDerivedUnitIsomorphism`: `lem-pc-affine-derived-unit-isomorphism`
+- `Sheaf.AlgebraicGeometry.AffineFiniteFreeSheafComplexLift`: `lem-pc-affine-finite-free-sheaf-complex-lift`
+- `Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatPseudoCoherent`: `lem-pc-affine-finite-presentation-flat-pseudo-coherent`
+- `Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShortening`: `lem-pc-affine-finite-presentation-flat-shortening`
+- `Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShorteningConstruction`: `lem-pc-affine-finite-presentation-flat-shortening-construction`
+- `Sheaf.AlgebraicGeometry.AffineFlatConnectiveTruncation`: `lem-pc-affine-flat-connective-truncation`
+- `Sheaf.AlgebraicGeometry.AffineFlatModuleStalkFlat`: `lem-pc-affine-flat-module-stalk-flat`
+- `Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat`: `lem-pc-affine-flat-module-tensor-flat`
+- `Sheaf.AlgebraicGeometry.AffineFreeComplexModuleLift`: `lem-pc-affine-free-complex-module-lift`
+- `Sheaf.AlgebraicGeometry.AffineFreeComplexUnitCancellation`: `lem-pc-affine-free-complex-unit-cancellation`
+- `Sheaf.AlgebraicGeometry.AffineLocalizationSheafification`: `lem-pc-affine-localization-sheafification`
+- `Sheaf.AlgebraicGeometry.AffineLocalizedDerivedSheafification`: `lem-pc-affine-localized-derived-sheafification`
+- `Sheaf.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport`: `lem-pc-affine-localized-site-derived-transport`
+- `Sheaf.AlgebraicGeometry.AffineLocalizingPresheafSheafification`: `lem-pc-affine-localizing-presheaf-sheafification`
+- `Sheaf.AlgebraicGeometry.AffineOpcyclesFlatFromSections`: `lem-pc-affine-opcycles-flat-from-sections`
+- `Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalization`: `lem-sc-invert-s-cohomology-affine-open`
+- `Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalizationZero`: `lem-sc-invert-s-cohomology-affine-open-zero`
+- `Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing`: `pqf-lem-affine-vanishing`
+- `Sheaf.AlgebraicGeometry.AffineOpenSectionFractionLocalization`: `lem-sc-affine-open-section-fraction-localization`
+- `Sheaf.AlgebraicGeometry.AffinePerfectFlatModelReplacement`: `lem-pc-affine-perfect-flat-model-replacement`
+- `Sheaf.AlgebraicGeometry.AffinePerfectModuleModel`: `lem-pc-affine-perfect-module-model`
+- `Sheaf.AlgebraicGeometry.AffinePerfectSectionsProjectiveModel`: `lem-pc-affine-perfect-sections-projective-model`
+- `Sheaf.AlgebraicGeometry.AffinePrincipalSheafComplexTransport`: `lem-pc-affine-principal-sheaf-complex-transport`
+- `Sheaf.AlgebraicGeometry.AffineProjectiveLocalStrictModel`: `lem-pc-affine-projective-local-strict-model`
+- `Sheaf.AlgebraicGeometry.AffineProjectiveSectionsSheafification`: `lem-pc-affine-projective-sections-sheafification`
+- `Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion`: `lem-pc-affine-pseudo-coherent-criterion`
+- `Sheaf.AlgebraicGeometry.AffinePseudoCoherentLocalizationCover`: `lem-pc-affine-pseudo-coherent-localization-cover`
+- `Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalModel`: `lem-pc-affine-pseudo-coherent-principal-model`
+- `Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalSheafModel`: `lem-pc-affine-pseudo-coherent-principal-sheaf-model`
+- `Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange`: `lem-weil-pbc-affine-pushforward-base-change`
+- `Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionConstruction`: `new-affine-qcoh-derived-adjunction-construction`
+- `Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionUnitCounit`: `new-affine-qcoh-derived-adjunction-unit-counit`
+- `Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence`: `lem-pc-affine-qcoh-derived-equivalence`
+- `Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore`: `new-affine-qcoh-derived-equivalence-core`
+- `Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceShift`: `new-affine-qcoh-derived-equivalence-shift`
+- `Sheaf.AlgebraicGeometry.AffineQCohDerivedTildeTriangulated`: `new-affine-qcoh-derived-tilde-triangulated`
+- `Sheaf.AlgebraicGeometry.AffineResidueEpiSplitting`: `lem-pc-affine-residue-epi-splitting`
+- `Sheaf.AlgebraicGeometry.AffineSectionLocalization`: `lem-sc-affine-section-localization`
+- `Sheaf.AlgebraicGeometry.AffineSectionsComplexCounit`: `lem-pc-affine-sections-complex-counit`
+- `Sheaf.AlgebraicGeometry.AffineSheafResolutionOfRingModel`: `lem-pc-affine-sheaf-resolution-from-ring-model`
+- `Sheaf.AlgebraicGeometry.AffineSheafificationTorAmplitude`: `lem-pc-affine-sheafification-tor-amplitude`
+- `Sheaf.AlgebraicGeometry.AffineTensorPullbackComplexComparison`: `lem-pc-affine-tensor-pullback-complex-comparison`
+- `Sheaf.AlgebraicGeometry.AffineTensorPullbackHomologyComparison`: `lem-pc-affine-tensor-pullback-homology-comparison`
+- `Sheaf.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso`: `new-affine-tilde-derived-sections-unit-isIso`
+- `Sheaf.AlgebraicGeometry.AffineTildeTotalTensor`: `lem-pc-affine-tilde-total-tensor`
+- `Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion`: `lem-pc-affine-tor-amplitude-criterion`
+- `Sheaf.AlgebraicGeometry.AffineUniversalTensorExact`: `lem-pc-affine-universal-tensor-exact`
+- `Sheaf.AlgebraicGeometry.AffineUniversallyExactOpcyclesFlat`: `lem-pc-affine-universally-exact-opcycles-flat`
+- `Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex`: `def-sc-alternating-cech-total-complex`
+- `Sheaf.AlgebraicGeometry.Ample`: `def-weil-pbc-ample-invertible-module`
+- `Sheaf.AlgebraicGeometry.AmpleIso`: `lem-sc-ample-iso`
+- `Sheaf.AlgebraicGeometry.BirationalLinePushforwardGenericStalk`: `lem-pc-q2-birational-line-pushforward-generic-stalk`
+- `Sheaf.AlgebraicGeometry.CechModuleSheafComparison`: `lem-pc-cech-module-sheaf-comparison`
+- `Sheaf.AlgebraicGeometry.CechModuleSheafFunctor`: `def-pc-cech-module-sheaf-functor`
+- `Sheaf.AlgebraicGeometry.CechModuleSheafTerms`: `lem-pc-cech-module-sheaf-terms`
+- `Sheaf.AlgebraicGeometry.CechSheafConstruction`: `lem-pc-cech-sheaf-construction`
+- `Sheaf.AlgebraicGeometry.CechSheafLocalAugmentationKernel`: `lem-pc-cech-local-augmentation-kernel`
+- `Sheaf.AlgebraicGeometry.CechSheafLocalPositiveExact`: `lem-pc-cech-local-positive-exact`
+- `Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso`: `lem-pc-cech-sheaf-local-quasi-iso`
+- `Sheaf.AlgebraicGeometry.ChowFiniteCohomologyWitness`: `lem-pc-v3-chow-finite-cohomology-witness`
+- `Sheaf.AlgebraicGeometry.ChowRelativeAmple`: `lem-pc-chow-relative-ample`
+- `Sheaf.AlgebraicGeometry.ChowRelativeAmpleGeometric`: `lem-pc-chow-relative-ample-geometric`
+- `Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwist`: `lem-pc-chow-relative-ample-twist`
+- `Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistIso`: `lem-pc-chow-relative-ample-twist-iso`
+- `Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistProperties`: `lem-pc-chow-relative-ample-twist-properties`
+- `Sheaf.AlgebraicGeometry.ChowTwistFiniteCohomology`: `lem-pc-q2-chow-twist-finite-cohomology`
+- `Sheaf.AlgebraicGeometry.ClosedPushforwardStalks`: `lem-weil-pbc-closed-pushforward-stalks`
+- `Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase`: `def-weil-pbc-closed-subset-proper-over-base`
+- `Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite`: `lem-weil-pbc-coherent-affine-sections-finite`
+- `Sheaf.AlgebraicGeometry.CoherentCokernelRelations`: `lem-weil-pbc-coherent-cokernel-relations`
+- `Sheaf.AlgebraicGeometry.CoherentCokernelRelationsLocal`: `lem-weil-pbc-coherent-cokernel-relations-local`
+- `Sheaf.AlgebraicGeometry.CoherentExtensionRelations`: `lem-weil-pbc-coherent-extension-relations`
+- `Sheaf.AlgebraicGeometry.CoherentFiniteTypeKernelOver`: `lem-weil-pbc-coherent-finite-type-kernel-over`
+- `Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian`: `pqf-lem-coherent-ft-locnoeth`
+- `Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel`: `lem-weil-pbc-coherent-finite-type-sub-kernel`
+- `Sheaf.AlgebraicGeometry.CoherentGenericFilteredExtension`: `lem-pc-s3-coherent-generic-filtered-extension`
+- `Sheaf.AlgebraicGeometry.CoherentGenericFilteredSource`: `lem-pc-s3-coherent-generic-filtered-source`
+- `Sheaf.AlgebraicGeometry.CoherentIdealPowerSupportedOnClosed`: `lem-pc-s3-coherent-ideal-power-supported-on-closed`
+- `Sheaf.AlgebraicGeometry.CoherentIntegralFiltration`: `def-weil-pbc-coherent-integral-filtration`
+- `Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension`: `lem-weil-pbc-coherent-integral-filtration-extension`
+- `Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIrreducibleSupport`: `lem-pc-s3-irreducible-support-filtration-step`
+- `Sheaf.AlgebraicGeometry.CoherentIteratedSliceRelations`: `lem-weil-pbc-coherent-iterated-slice-relations`
+- `Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian`: `lem-weil-pbc-coherent-kernel-cokernel-locnoeth`
+- `Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum`: `lem-weil-pbc-coherent-modules-kernel-cokernel-sum`
+- `Sheaf.AlgebraicGeometry.CoherentPushforwardIdeal`: `lem-pc-r2-coherent-pushforward-ideal`
+- `Sheaf.AlgebraicGeometry.CoherentReducibleSupportExactSequence`: `lem-pc-s3-coherent-reducible-support-exact-sequence`
+- `Sheaf.AlgebraicGeometry.CoherentStalkMapExtends`: `lem-weil-pbc-coherent-stalk-map-extends`
+- `Sheaf.AlgebraicGeometry.CoherentSupportAdicChain`: `lem-pc-s3-coherent-support-adic-chain`
+- `Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence`: `lem-pc-s3-coherent-support-vanishing-ideal-nilpotence`
+- `Sheaf.AlgebraicGeometry.CohomologyFiniteExtension`: `lem-pc-e2-cohomology-finite-extension`
+- `Sheaf.AlgebraicGeometry.CohomologyFractionEventuallyZero`: `lem-sc-cohomology-fraction-eventually-zero`
+- `Sheaf.AlgebraicGeometry.CohomologyFractionPresentation`: `def-sc-cohomology-fraction-presentation`
+- `Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluing`: `lem-sc-invert-s-cohomology-gluing`
+- `Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluingAux`: `lem-sc-invert-s-cohomology-gluing-aux`
+- `Sheaf.AlgebraicGeometry.CommonGenericLatticeMaps`: `lem-pc-r2-common-generic-lattice-maps`
+- `Sheaf.AlgebraicGeometry.DerivedCategory`: `def-pc-derived-category`
+- `Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded`: `lem-pc-derived-direct-image-composition`
+- `Sheaf.AlgebraicGeometry.DerivedFunctorTruncationStabilization`: `lem-pc-derived-functor-truncation-stabilization`
+- `Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps`: `def-pc-derived-open-restriction-maps`
+- `Sheaf.AlgebraicGeometry.DerivedPullback`: `def-pc-derived-pullback`
+- `Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes`: `def-pc-derived-tensor-cohomology-vanishes`
+- `Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses`: `lem-pc-derived-tensor-open-restriction-universes`
+- `Sheaf.AlgebraicGeometry.DerivedTensorStructure`: `def-pc-scheme-derived-tensor-structure`
+- `Sheaf.AlgebraicGeometry.EpiOverFunctor`: `lem-stage3-epi-over-functor`
+- `Sheaf.AlgebraicGeometry.FieldComplexHomotopyNormalForm`: `new-field-complex-homotopy-normal-form`
+- `Sheaf.AlgebraicGeometry.FieldComplexSingleCohomology`: `new-field-complex-single-cohomology`
+- `Sheaf.AlgebraicGeometry.FieldFibreHomology`: `new-field-fibre-homology`
+- `Sheaf.AlgebraicGeometry.FiniteAffineCechBaseChangeCoordinates`: `lem-pc-finite-affine-cech-base-change-coordinates`
+- `Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange`: `lem-pc-finite-affine-cech-intersection-base-change`
+- `Sheaf.AlgebraicGeometry.FiniteAffineCechModel`: `def-pc-finite-affine-cech-model`
+- `Sheaf.AlgebraicGeometry.FiniteAffineCechModelAcyclicResolution`: `lem-pc-finite-affine-cech-model-acyclic-resolution`
+- `Sheaf.AlgebraicGeometry.FiniteAffineCechModelComparison`: `lem-pc-finite-affine-cech-model-comparison`
+- `Sheaf.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison`: `lem-pc-finite-affine-cech-model-derived-comparison`
+- `Sheaf.AlgebraicGeometry.FiniteAffineCechModelFlatOver`: `lem-pc-finite-affine-cech-model-flat-over`
+- `Sheaf.AlgebraicGeometry.FiniteAffineCechModelPerfect`: `lem-pc-finite-affine-cech-model-perfect`
+- `Sheaf.AlgebraicGeometry.FiniteAffineCechSectionBaseChange`: `lem-pc-finite-affine-cech-section-base-change`
+- `Sheaf.AlgebraicGeometry.FiniteFreeChainMapStalkEquality`: `lem-pc-finite-free-chain-map-stalk-equality`
+- `Sheaf.AlgebraicGeometry.FiniteFreePullbackResidueCriterion`: `lem-pc-finite-free-pullback-residue-criterion`
+- `Sheaf.AlgebraicGeometry.FiniteFreeResidueLocalHomotopy`: `lem-pc-finite-free-residue-local-homotopy`
+- `Sheaf.AlgebraicGeometry.FiniteFreeResidueLocusOpen`: `lem-pc-finite-free-residue-locus-open`
+- `Sheaf.AlgebraicGeometry.FiniteFreeResidueStalkHomotopy`: `lem-pc-finite-free-residue-stalk-homotopy`
+- `Sheaf.AlgebraicGeometry.FiniteFreeReverseComponentsLift`: `lem-pc-finite-free-reverse-components-lift`
+- `Sheaf.AlgebraicGeometry.FiniteFreeSingleFieldFibre`: `lem-pc-finite-free-single-field-fibre`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLift`: `lem-pc-finite-free-stalk-chain-map-lift`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftLocal`: `lem-pc-finite-free-stalk-chain-map-lift-local`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftRestrict`: `lem-pc-finite-free-stalk-chain-map-lift-restrict`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapPairLift`: `lem-pc-finite-free-stalk-chain-map-pair-lift`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLift`: `lem-pc-finite-free-stalk-degreewise-lift`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLiftAux`: `lem-pc-finite-free-stalk-degreewise-lift-core-aux`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLiftCore`: `lem-pc-finite-free-stalk-degreewise-lift-core`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLocal`: `lem-pc-finite-free-stalk-degreewise-local`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink`: `lem-pc-finite-free-stalk-degreewise-shrink`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkFiniteEquations`: `lem-pc-finite-free-stalk-finite-equations`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkFiniteMatrixLift`: `lem-pc-finite-free-stalk-finite-matrix-lift`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyPShrink`: `lem-pc-finite-free-stalk-homotopy-p-only`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyPairShrink`: `lem-pc-finite-free-stalk-homotopy-pair-shrink`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyQShrink`: `lem-pc-finite-free-stalk-homotopy-q-inside`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopySpread`: `lem-pc-finite-free-stalk-homotopy-spread`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkMapEquality`: `lem-pc-finite-free-stalk-map-eq-shrink`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkMapLocal`: `lem-pc-finite-free-stalk-map-local`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkMapPositive`: `lem-pc-finite-free-stalk-map-local-positive`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkMinimalComplex`: `lem-pc-finite-free-stalk-minimal-complex`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkUnitCancellation`: `lem-pc-finite-free-stalk-unit-cancellation`
+- `Sheaf.AlgebraicGeometry.FiniteFreeStalkUnitCancellationAt`: `lem-pc-finite-free-stalk-unit-cancellation-at`
+- `Sheaf.AlgebraicGeometry.FinitePresentationIntegralFiltration`: `lem-pc-e2-finite-presentation-integral-filtration`
+- `Sheaf.AlgebraicGeometry.FinitePresentationStalkKernel`: `lem-weil-pbc-finite-presentation-stalk-kernel`
+- `Sheaf.AlgebraicGeometry.FinitePresentationSupportReductionFiltration`: `lem-pc-s3-support-reduction-filtration`
+- `Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType`: `lem-pc-f3-finite-pushforward-finite-type`
+- `Sheaf.AlgebraicGeometry.FiniteRetractSheavesAffineTrivialization`: `lem-pc-finite-retract-sheaves-affine-trivialization`
+- `Sheaf.AlgebraicGeometry.FiniteTorDimension`: `def-pc-finite-tor-dimension`
+- `Sheaf.AlgebraicGeometry.FiniteTypeEpiImage`: `lem-weil-pbc-sheaf-finite-type-epi-image`
+- `Sheaf.AlgebraicGeometry.FiniteTypeKernelLocalGenerators`: `lem-weil-pbc-finite-type-kernel-local-generators`
+- `Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed`: `lem-weil-pbc-finite-type-module-support-closed`
+- `Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback`: `lem-weil-pbc-support-pullback-finite-type`
+- `Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices`: `def-weil-pbc-flat-base-change-open-choices`
+- `Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback`: `lem-pc-flat-complex-derived-pullback`
+- `Sheaf.AlgebraicGeometry.FlatModelFiniteFreeComparison`: `lem-pc-flat-model-finite-free-shortening-comparison`
+- `Sheaf.AlgebraicGeometry.FlatModelFiniteFreeConstruction`: `lem-pc-flat-model-finite-free-shortening-construction`
+- `Sheaf.AlgebraicGeometry.FlatModelFiniteFreeQuasiIso`: `lem-pc-flat-model-finite-free-quasi-iso`
+- `Sheaf.AlgebraicGeometry.FlatModelFiniteFreeShortening`: `lem-pc-flat-model-finite-free-shortening`
+- `Sheaf.AlgebraicGeometry.FlatModelFiniteFreeTruncation`: `lem-pc-flat-model-finite-free-truncation-zero`
+- `Sheaf.AlgebraicGeometry.FlatModelOpcyclesFlat`: `lem-pc-flat-model-opcycles-flat-zero`
+- `Sheaf.AlgebraicGeometry.FlatOverAffineOpenRestriction`: `lem-pc-flat-over-affine-open-restriction`
+- `Sheaf.AlgebraicGeometry.FlatSheafStalk`: `lem-pc-flat-sheaf-stalk-flat`
+- `Sheaf.AlgebraicGeometry.GenericIdealStalkEmbeddingExtension`: `new-generic-ideal-stalk-embedding-extension`
+- `Sheaf.AlgebraicGeometry.HigherDirectImageAffineBasisVanishing`: `lem-pc-higher-direct-image-affine-basis-vanishing`
+- `Sheaf.AlgebraicGeometry.HigherDirectImageSectionDenominators`: `lem-pc-higher-direct-image-section-denominators`
+- `Sheaf.AlgebraicGeometry.HigherDirectImageSectionTorsion`: `lem-pc-higher-direct-image-section-torsion`
+- `Sheaf.AlgebraicGeometry.HigherImageCohomologyPresheafLocalization`: `lem-pc-higher-image-cohomology-presheaf-localization`
+- `Sheaf.AlgebraicGeometry.IdealModuleMultiplicationStalkRange`: `lem-weil-pbc-ideal-multiplication-stalk-range`
+- `Sheaf.AlgebraicGeometry.IdealModuleProductStalk`: `lem-weil-pbc-ideal-module-product-stalk`
+- `Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentation`: `lem-sc-injective-module-cech-augmentation`
+- `Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentationPositive`: `lem-sc-injective-module-cech-augmentation-positive`
+- `Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentationZero`: `lem-sc-injective-module-cech-augmentation-zero`
+- `Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective`: `lem-sc-ringed-space-injective-restriction-surjective`
+- `Sheaf.AlgebraicGeometry.IntegralIdealAffineSections`: `lem-weil-pbc-integral-scheme-ideal-generic-stalk-affine`
+- `Sheaf.AlgebraicGeometry.IntegralIdealCommonSubmodule`: `lem-pc-a2-integral-ideal-common-submodule`
+- `Sheaf.AlgebraicGeometry.IntegralIdealComparisonFiltrations`: `lem-pc-v3-integral-ideal-comparison-filtrations`
+- `Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk`: `lem-weil-pbc-integral-scheme-ideal-generic-stalk`
+- `Sheaf.AlgebraicGeometry.IntegralIdealGenericStalkEquivalences`: `lem-weil-pbc-integral-scheme-ideal-generic-stalk-stalk`
+- `Sheaf.AlgebraicGeometry.IntegralIdealProperCohomology`: `lem-pc-e2-integral-ideal-proper-cohomology`
+- `Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice`: `lem-pc-r2-integral-ideals-common-generic-lattice`
+- `Sheaf.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation`: `lem-pc-intrinsic-flat-module-stalk-tensor-presentation`
+- `Sheaf.AlgebraicGeometry.InverseImageExactKFlat`: `lem-pc-inverse-image-exact-kflat-resolution`
+- `Sheaf.AlgebraicGeometry.InverseImageModuleFunctor`: `lem-pc-inverse-image-module-functor-exact`
+- `Sheaf.AlgebraicGeometry.InverseImageTensorPullbackComparison`: `lem-pc-inverse-image-tensor-pullback-comparison`
+- `Sheaf.AlgebraicGeometry.InvertSCOhomology`: `lem-sc-invert-s-cohomology`
+- `Sheaf.AlgebraicGeometry.InvertibleSectionLocalization`: `lem-sc-p1-invertible-section-localization`
+- `Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison`: `lem-pc-kflat-derived-tensor-comparison`
+- `Sheaf.AlgebraicGeometry.LerayComplexCocycleComparison`: `lem-pc-leray-complex-cocycle-comparison`
+- `Sheaf.AlgebraicGeometry.LerayDegenerateSections`: `lem-pc-leray-degenerate-sections`
+- `Sheaf.AlgebraicGeometry.LerayEdgeCocycleData`: `lem-pc-leray-edge-cocycle-data`
+- `Sheaf.AlgebraicGeometry.LerayEdgeGrothendieckComparison`: `lem-pc-leray-edge-grothendieck-comparison`
+- `Sheaf.AlgebraicGeometry.LerayEdgeVanishingIso`: `lem-pc-leray-edge-vanishing-iso`
+- `Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison`: `lem-pc-leray-sections-resolution-comparison`
+- `Sheaf.AlgebraicGeometry.LinearCechSheafResolution`: `lem-pc-linear-cech-sheaf-resolution`
+- `Sheaf.AlgebraicGeometry.LocalClosedIdealMapExtension`: `lem-pc-local-closed-ideal-map-extension`
+- `Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound`: `lem-pc-local-uniform-higher-direct-image-bound`
+- `Sheaf.AlgebraicGeometry.LocallyFiniteTorDimension`: `def-pc-locally-finite-tor-dimension`
+- `Sheaf.AlgebraicGeometry.MLSetsTowerLimitNonempty`: `lem-weil-pbc-ml-sets-tower-limit-nonempty`
+- `Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology` (no recorded module attachment)
+- `Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra`: `lem-weil-pbc-module-base-change-map-algebra`
+- `Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting`: `lem-weil-pbc-module-base-change-map-pasting`
+- `Sheaf.AlgebraicGeometry.ModuleCechComparison`: `def-sc-module-cech-comparison`
+- `Sheaf.AlgebraicGeometry.ModuleCechVanishingCriterion`: `lem-weil-pbc-module-cech-vanishing-criterion`
+- `Sheaf.AlgebraicGeometry.ModuleCohomologyFMap`: `def-weil-pbc-module-cohomology-fmap`
+- `Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison`: `lem-sc-module-cohomology-source-comparison`
+- `Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel`: `lem-weil-pbc-module-finite-presentation-cokernel`
+- `Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernelKernel`: `lem-weil-pbc-module-finite-presentation-cokernel-kernel`
+- `Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension`: `lem-weil-pbc-module-finite-type-image-extension`
+- `Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic`: `lem-weil-pbc-module-injective-open-cover-cech-acyclic`
+- `Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives`: `lem-weil-pbc-module-open-restriction-injectives`
+- `Sheaf.AlgebraicGeometry.ModulePullbackFiniteType`: `lem-weil-pbc-module-pullback-finite-type`
+- `Sheaf.AlgebraicGeometry.ModulePullbackTensor`: `lem-weil-pbc-module-pullback-tensor`
+- `Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic`: `lem-weil-pbc-module-pushforward-injective-acyclic`
+- `Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveCechVanishing`: `lem-weil-pbc-module-pushforward-injective-cech-vanishing`
+- `Sheaf.AlgebraicGeometry.ModuleSectionsAcyclicOfCohomologyVanishing`: `lem-weil-pbc-module-sections-acyclic-of-cohomology-vanishing`
+- `Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1`: `lem-weil-pbc-module-ses-cech-h1-surjective`
+- `Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor`: `lem-weil-pbc-affine-tilde-tensor`
+- `Sheaf.AlgebraicGeometry.Modules.AffineTildeTensorStalk`: `lem-weil-pbc-affine-tilde-tensor-stalk-bijective`
+- `Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction`: `lem-weil-pbc-module-extension-by-zero-adjunction`
+- `Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroHomFormula`: `lem-weil-pbc-module-extension-by-zero-hom-formula`
+- `Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroInside`: `new-extension-by-zero-inside-stalk`
+- `Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroOutside`: `new-extension-by-zero-outside-stalk`
+- `Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroUnitStalks`: `lem-weil-pbc-module-extension-by-zero-unit-stalks`
+- `Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact`: `lem-sc-ext-tensor-exact`
+- `Sheaf.AlgebraicGeometry.Modules.InverseImageStalkScalarTransport`: `lem-pc-inverse-image-stalk-scalar-transport`
+- `Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor`: `lem-weil-pbc-invertible-pullback-tensor`
+- `Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde`: `lem-pc-affine-tilde-kflat`
+- `Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage`: `lem-weil-pbc-quasi-coherent-module-cokernel-image`
+- `Sheaf.AlgebraicGeometry.Modules.ResidueFiber`: `def-weil-pbc-module-residue-fiber`
+- `Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison`: `lem-weil-pbc-module-restriction-tensor-comparison`
+- `Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk`: `lem-weil-pbc-module-stalk-pullback`
+- `Sheaf.AlgebraicGeometry.Modules.TensorPullbackTensorIsIso`: `lem-weil-pbc-module-pullback-tensor-iso-criterion`
+- `Sheaf.AlgebraicGeometry.Modules.TildeStalkTensorComparison`: `lem-pc-affine-tilde-stalk-tensor-comparison`
+- `Sheaf.AlgebraicGeometry.Morphisms.Projective`: `def-pc-projective-morphism`
+- `Sheaf.AlgebraicGeometry.NonvanishingLocusRestrict`: `lem-sc-nonvanishing-locus-restrict`
+- `Sheaf.AlgebraicGeometry.NonvanishingTensorPullback`: `lem-sc-nonvanishing-tensor-pullback`
+- `Sheaf.AlgebraicGeometry.OpenCohomologyFractionZeroComparison`: `lem-sc-open-cohomology-fraction-zero-comparison`
+- `Sheaf.AlgebraicGeometry.OpenCohomologyZeroRestriction`: `lem-sc-open-cohomology-zero-restriction`
+- `Sheaf.AlgebraicGeometry.OpenCohomologyZeroSections`: `lem-sc-open-cohomology-zero-sections`
+- `Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison`: `lem-pqf-open-module-cohomology-comparison`
+- `Sheaf.AlgebraicGeometry.OpenPushforwardDerivedComparison`: `lem-pc-open-pushforward-derived-comparison`
+- `Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel`: `lem-pc-open-restriction-kflat-model`
+- `Sheaf.AlgebraicGeometry.OpenRestrictionPerfectLocalModels`: `lem-pc-open-restriction-perfect-local-models`
+- `Sheaf.AlgebraicGeometry.OpenRestrictionTensorNaturality`: `lem-pc-open-restriction-tensor-natural`
+- `Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor`: `lem-pc-open-restriction-total-tensor`
+- `Sheaf.AlgebraicGeometry.OpenSectionFractionPresentation`: `def-sc-open-section-fraction-presentation`
+- `Sheaf.AlgebraicGeometry.OrderedCechModuleComparison`: `lem-pc-ordered-cech-module-comparison`
+- `Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective`: `lem-pc-perfect-affine-bounded-projective`
+- `Sheaf.AlgebraicGeometry.PerfectAffineModulePreimage`: `lem-pc-perfect-affine-module-preimage`
+- `Sheaf.AlgebraicGeometry.PerfectComplex`: `def-pc-perfect-complex`
+- `Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension`: `lem-pc-pseudo-coherent-finite-tor-perfect`
+- `Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor`: `lem-pc-perfect-pseudo-coherent-locally-finite-tor`
+- `Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible`: `lem-weil-pbc-projective-ample-invertible`
+- `Sheaf.AlgebraicGeometry.ProperCohomologyFiniteFreeResolution`: `lem-pc-proper-cohomology-finite-free-resolution`
+- `Sheaf.AlgebraicGeometry.ProperFlatAffineCechPerfectModel`: `lem-pc-proper-flat-affine-cech-perfect-model`
+- `Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModel`: `lem-pc-proper-flat-bounded-presentation-model`
+- `Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModelBaseChange`: `lem-pc-proper-flat-bounded-presentation-comparison-core`
+- `Sheaf.AlgebraicGeometry.ProperFlatCechModel`: `lem-pc-proper-flat-cech-model`
+- `Sheaf.AlgebraicGeometry.ProperFlatCohomologyData`: `lem-pc-proper-flat-cohomology-model-data`
+- `Sheaf.AlgebraicGeometry.ProperFlatCohomologyModel`: `lem-pc-proper-flat-cohomology-model`
+- `Sheaf.AlgebraicGeometry.ProperFlatCohomologyProperties`: `lem-pc-proper-flat-cohomology-model-properties`
+- `Sheaf.AlgebraicGeometry.ProperFlatFinitePresentationModel`: `lem-pc-proper-flat-finite-presentation-model`
+- `Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect`: `lem-pc-proper-flat-single-derived-direct-image-perfect`
+- `Sheaf.AlgebraicGeometry.ProperFlatSingleLocalFiniteTor`: `lem-pc-proper-flat-single-local-finite-tor`
+- `Sheaf.AlgebraicGeometry.ProperFlatSingleOpenPseudoCoherent`: `lem-pc-proper-flat-single-open-pseudo-coherent`
+- `Sheaf.AlgebraicGeometry.PseudoCoherentComplex`: `def-pur-pseudo-coherent-complex`
+- `Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso`: `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso`
+- `Sheaf.AlgebraicGeometry.QCohTruncationDerivedLimit`: `lem-pc-qcoh-truncation-derived-limit`
+- `Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine`: `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine`
+- `Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections`: `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections`
+- `Sheaf.AlgebraicGeometry.QuasiCompactFiniteTorDimension`: `lem-pc-quasi-compact-finite-tor-dimension`
+- `Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction`: `lem-sc-invert-s-cohomology-induction`
+- `Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersectionProperty`: `property-intersection-qc-affine`
+- `Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine`: `lem-weil-pbc-quasi-coherent-finite-type-affine`
+- `Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusion`: `lem-pc-r2-rank-one-generic-ideal-inclusion`
+- `Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusionAux`: `new-rank-one-generic-ideal-inclusion-aux`
+- `Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme`: `lem-weil-pbc-reduced-induced-closed-subscheme`
+- `Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage`: `def-pc-ringed-spaces-derived-direct-image`
+- `Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition`: `lem-pc-ringed-spaces-derived-direct-image-composition`
+- `Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic`: `lem-pc-ringed-space-direct-image-kinjective-acyclic`
+- `Sheaf.AlgebraicGeometry.RingedSpaceKFlatDirectImageHomLocalization`: `lem-pc-ringed-space-kflat-direct-image-hom-localization`
+- `Sheaf.AlgebraicGeometry.RingedSpacePastedPullbackAdjunction`: `lem-pc-ringed-space-pasted-pullback-adjunction`
+- `Sheaf.AlgebraicGeometry.RingedSpacePastedUnitKFlatHom`: `lem-pc-ringed-space-pasted-unit-kflat-hom`
+- `Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology`: `lem-pc-ringed-space-sheafification-cohomology`
+- `Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute`: `lem-pc-ringed-space-tensor-pullback-absolute`
+- `Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsoluteAux`: `q3-ringed-space-tensor-pullback-absolute-postcomposition`, `q3-ringed-space-tensor-pullback-left-derived`
+- `Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived`: `lem-pc-ringed-space-tensor-pullback-underived`
+- `Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage`: `def-pc-derived-direct-image`
+- `Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence`: `lem-pc-scheme-iso-derived-equivalence`
+- `Sheaf.AlgebraicGeometry.SchemeIsoPerfectLocalTransport`: `lem-pc-scheme-iso-perfect-local-transport`
+- `Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport`: `lem-pc-scheme-iso-perfect-transport`
+- `Sheaf.AlgebraicGeometry.SchemeModuleFreeYonedaIso`: `lem-pc-scheme-module-free-yoneda-iso`
+- `Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives`: `lem-weil-pbc-scheme-modules-enough-injectives`
+- `Sheaf.AlgebraicGeometry.SectionClearingDenominatorsQCQS`: `lem-sc-p1-section-clearing-denominators-qcqs`
+- `Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalLocalization`: `lem-pc-section-cohomology-principal-localization`
+- `Sheaf.AlgebraicGeometry.SectionFractionPresentation`: `def-sc-section-fraction-presentation`
+- `Sheaf.AlgebraicGeometry.SectionFractionRestrictionMap`: `lem-sc-p1-section-fraction-restriction-map`
+- `Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus`: `lem-weil-pbc-section-nonvanishing-zero-locus`
+- `Sheaf.AlgebraicGeometry.SectionRestrictionSTorsion`: `lem-sc-p1-section-restriction-s-torsion`
+- `Sheaf.AlgebraicGeometry.SeparatedOpenInduction`: `lem-sc-invert-s-cohomology-separated-induction`
+- `Sheaf.AlgebraicGeometry.SheafZeroStalks`: `pqf-lem-sheaf-zero-stalks`
+- `Sheaf.AlgebraicGeometry.SingleFiniteRetractSheafAffineTrivialization`: `new-pc-single-retract-sheaf-affine-trivialization`
+- `Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism`: `lem-weil-pbc-spec-local-ring-canonical-morphism`
+- `Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellation`: `lem-pc-split-top-differential-cancellation`
+- `Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellationHomotopy`: `lem-pc-split-top-differential-cancellation-homotopy`
+- `Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellationProperties`: `lem-pc-split-top-differential-cancellation-properties`
+- `Sheaf.AlgebraicGeometry.StalkFromSpecSubopen`: `lem-pc-stalk-from-spec-subopen`
+- `Sheaf.AlgebraicGeometry.StalkImageRange`: `lem-weil-pbc-ideal-multiplication-stalk-range-image`
+- `Sheaf.AlgebraicGeometry.StalkInternalHomEvaluation`: `lem-weil-pbc-stalk-internal-hom-evaluation`
+- `Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation`: `lem-weil-pbc-stalk-internal-hom-finite-presentation`
+- `Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso`: `def-pc-stalk-restriction-complex-iso`
+- `Sheaf.AlgebraicGeometry.StalkRestrictionSubopenCompatibility`: `lem-pc-stalk-restriction-subopen-compatibility`
+- `Sheaf.AlgebraicGeometry.StalkRestrictionWithinIso`: `def-pc-stalk-restriction-within-iso`
+- `Sheaf.AlgebraicGeometry.StalkTensorMultiplicationRange`: `lem-weil-pbc-ideal-multiplication-stalk-range-tensor`
+- `Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement`: `lem-pc-strictly-perfect-finite-free-refinement`
+- `Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestriction`: `lem-sc-tensor-power-section-open-restriction`
+- `Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso`: `lem-pc-tensor-pullback-kflat-quasi-iso`
+- `Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf`: `lem-weil-pbc-module-pullback-structure-sheaf`
+- `Sheaf.AlgebraicGeometry.TensorPullbackTilde`: `lem-weil-pbc-tilde-pullback-base-change`
+- `Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal`: `lem-pc-tor-amplitude-open-local`
+- `Sheaf.AlgebraicGeometry.TruncationDerivedLimit`: `lem-pc-ringed-space-truncation-derived-limit`
+- `Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound`: `lem-pc-unbounded-derived-functor-cohomological-bound`
+- `Sheaf.AlgebraicTopology.SetCechNerveFreeResolution`: `lem-weil-pbc-set-cech-nerve-free-resolution`
+- `Sheaf.CategoryTheory.Abelian.ExtEpiEffacement`: `lem-sc-ext-epi-effacement`
+- `Sheaf.CategoryTheory.Abelian.ExtRightDerivedHom`: `lem-sc-ext-right-derived-hom`
+- `Sheaf.CategoryTheory.Abelian.HorseshoeDefectFactorization`: `lem-weil-pbc-horseshoe-defect-factorization`
+- `Sheaf.CategoryTheory.Abelian.HorseshoeDegreewiseMap`: `lem-weil-pbc-horseshoe-degreewise-map`
+- `Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor`: `lem-weil-pbc-horseshoe-delta-functor`
+- `Sheaf.CategoryTheory.Abelian.HorseshoeHomotopyCorrection`: `lem-weil-pbc-horseshoe-homotopy-correction`
+- `Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift`: `lem-weil-pbc-horseshoe-correction`, `lem-weil-pbc-horseshoe-morphism-lift`, `lem-weil-pbc-horseshoe-preliminary-data`
+- `Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions`: `lem-sp-horseshoe-prescribed-resolutions`
+- `Sheaf.CategoryTheory.Abelian.HorseshoePrescribedRows`: `lem-sp-horseshoe-prescribed-row-construction`
+- `Sheaf.CategoryTheory.Abelian.HorseshoeResolutions`: `lem-weil-pbc-injective-resolution-ses`
+- `Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural`: `lem-sc-acyclic-comparison-natural`
+- `Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence`: `lem-weil-pbc-derived-functor-long-exact`
+- `Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquare`: `lem-sc-injectively-exact-square-resolution-short-exact`
+- `Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryExact`: `lem-sc-injectively-exact-square-boundary-exact`
+- `Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryNaturality`: `lem-sc-injectively-exact-square-boundary-naturality`
+- `Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundarySquareNaturality`: `lem-sc-injectively-exact-square-boundary-square-naturality`
+- `Sheaf.CategoryTheory.CanonicalResolutionCompositeUnitComparison`: `lem-pc-canonical-resolution-composite-unit-comparison`
+- `Sheaf.CategoryTheory.CanonicalResolutionDerivedIso`: `def-pc-canonical-resolution-derived-iso`
+- `Sheaf.CategoryTheory.CanonicalResolutionHomologyComparison`: `lem-pc-canonical-resolution-homology-comparison`
+- `Sheaf.CategoryTheory.DegreewiseFilteredAcyclic`: `lem-sp-degreewise-filtered-acyclic`
+- `Sheaf.CategoryTheory.DegreewiseFilteredStableQuotient`: `lem-sp-degreewise-filtered-stable-quotient`
+- `Sheaf.CategoryTheory.DeltaFunctor`: `def-weil-pbc-delta-functor`
+- `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantCofinal`: `lem-pur-essential-constant-cofinal-0a1s`
+- `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro`: `def-pc-essentially-constant-pro-diagram`
+- `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProCriterion`: `lem-pur-essential-constant-pro-criterion-05py`
+- `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit`: `lem-pc-essentially-constant-pro-hom-colimit`
+- `Sheaf.CategoryTheory.DerivedCategory.LeftDerivedExactOfLocalization`: `lem-pur-left-derived-exact-chosen-localization`
+- `Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass`: `lem-pur-left-derived-from-kflat-class`
+- `Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge`: `lem-pur-left-derived-defined-pointwise-kan-bridge`
+- `Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy`: `lem-pur-resolving-class-essential-constancy`
+- `Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect`: `lem-pc-ring-pseudo-coherent-finite-tor-perfect`
+- `Sheaf.CategoryTheory.DerivedFunctorShift`: `lem-pur-derived-functor-shift-05su`
+- `Sheaf.CategoryTheory.DerivedFunctorThirdValue`: `lem-pur-derived-functor-triangles-05sc-third-value`
+- `Sheaf.CategoryTheory.DerivedFunctorTriangleRetractionHomColimit`: `lem-pur-triangle-retraction-hom-colimit`
+- `Sheaf.CategoryTheory.DerivedFunctorTriangles`: `lem-pur-derived-functor-triangles-05sc`
+- `Sheaf.CategoryTheory.DerivedFunctorValueTriangle`: `lem-pur-derived-functor-triangles-05sc-value-triangle`
+- `Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompatibility`: `lem-pur-derived-functor-triangles-05sc-value-triangle-compatibility`
+- `Sheaf.CategoryTheory.DerivedLimitEventuallyIso`: `lem-pc-derived-limit-eventually-iso`
+- `Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups`: `lem-pc-derived-limit-roos-abelian-groups`, `lem-pc-tower-enough-injectives`
+- `Sheaf.CategoryTheory.DoubleComplexTotal`: `def-sp-double-complex-total`
+- `Sheaf.CategoryTheory.EffaceableDeltaFunctorSuccessor`: `lem-weil-pbc-effaceable-delta-functor-successor`
+- `Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal`: `lem-weil-pbc-effaceable-delta-functor-universal`
+- `Sheaf.CategoryTheory.EffacingSequenceComparison`: `lem-weil-pbc-effacing-sequence-comparison`
+- `Sheaf.CategoryTheory.EffacingSequencePushout`: `lem-weil-pbc-effacing-sequence-pushout`
+- `Sheaf.CategoryTheory.FilteredCohomologyImage`: `lem-sp-filtered-cohomology-image-finite`
+- `Sheaf.CategoryTheory.FilteredCohomologyImageCycleMap`: `new-cohomology-image-cycle-map`
+- `Sheaf.CategoryTheory.FilteredCohomologyImageNormalized`: `lem-sp-filtered-cohomology-image-normalized-quotient`
+- `Sheaf.CategoryTheory.FilteredCohomologyImagePresentation`: `lem-sp-filtered-cohomology-image-presentation`
+- `Sheaf.CategoryTheory.FilteredComplexBoundariesLECycles`: `lem-sp-filtered-complex-boundaries-le-cycles`
+- `Sheaf.CategoryTheory.FilteredComplexCycleRepresentativeCorrection`: `lem-sp-filtered-complex-cycle-representative-correction`
+- `Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover`: `lem-sp-filtered-complex-differential-representatives-cover`
+- `Sheaf.CategoryTheory.FilteredComplexGradedHomology`: `lem-sp-filtered-complex-graded-homology`
+- `Sheaf.CategoryTheory.FilteredComplexIncomingBoundaryQuotient`: `new-filtered-complex-incoming-boundary-quotient`
+- `Sheaf.CategoryTheory.FilteredComplexPageDifferential`: `lem-sp-filtered-complex-page-differential`
+- `Sheaf.CategoryTheory.FilteredComplexPageHomology`: `lem-sp-filtered-complex-page-homology`
+- `Sheaf.CategoryTheory.FilteredComplexPositivePages`: `lem-sp-filtered-complex-positive-pages`
+- `Sheaf.CategoryTheory.FilteredComplexSingleDifferentialDescent`: `lem-sp-filtered-complex-single-differential-descent`
+- `Sheaf.CategoryTheory.FilteredComplexSpectralSequence`: `lem-sp-filtered-complex-associated-spectral-sequence-construction`
+- `Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImage`: `lem-sp-filtered-complex-successor-boundaries-image`
+- `Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImageGe`: `new-filtered-complex-successor-boundaries-image-ge`
+- `Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImageLe`: `new-filtered-complex-successor-boundaries-image-le`
+- `Sheaf.CategoryTheory.FilteredComplexSuccessorBoundaryRepresentatives`: `lem-sp-filtered-complex-successor-boundary-representatives`
+- `Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover`: `lem-sp-filtered-complex-successor-cycles-cover`
+- `Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCoverEpi`: `lem-sp-filtered-complex-successor-cycles-cover-epi`
+- `Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCoverExists`: `lem-sp-filtered-complex-successor-cycles-cover-exists`
+- `Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesDifferentialZero`: `lem-sp-filtered-complex-successor-cycles-differential-zero`
+- `Sheaf.CategoryTheory.FilteredNormalizedQuotientPresentation`: `lem-sp-filtered-normalized-quotient-presentation`
+- `Sheaf.CategoryTheory.FilteredStableSubquotient`: `lem-sp-filtered-stable-subquotient-at-bounds`
+- `Sheaf.CategoryTheory.Filtration`: `def-sp-filtration`
+- `Sheaf.CategoryTheory.FiniteFiltrationRefinement`: `lem-pc-s3-finite-filtration-refinement`
+- `Sheaf.CategoryTheory.GrothendieckCocycleComparison`: `lem-pc-grothendieck-cocycle-comparison`
+- `Sheaf.CategoryTheory.GrothendieckComposablePair`: `def-sp-composite-acyclicity`
+- `Sheaf.CategoryTheory.GrothendieckEdgeCocycle`: `lem-pc-grothendieck-edge-cocycle`
+- `Sheaf.CategoryTheory.GrothendieckHypercohomologyEdge`: `lem-pc-grothendieck-hypercohomology-edge`
+- `Sheaf.CategoryTheory.GrothendieckResolutionUnitComparison`: `lem-pc-grothendieck-resolution-unit-comparison`
+- `Sheaf.CategoryTheory.HypercohomologyEdgeCocycle`: `lem-pc-hypercohomology-edge-cocycle`
+- `Sheaf.CategoryTheory.HypercohomologyLeftEdge`: `def-pc-hypercohomology-left-edge`
+- `Sheaf.CategoryTheory.HypercohomologyLeftEdgeCanonical`: `lem-pc-hypercohomology-edge-cocycle-canonical`
+- `Sheaf.CategoryTheory.HypercohomologyLeftEdgeNaturality`: `lem-pc-hypercohomology-left-edge-naturality`
+- `Sheaf.CategoryTheory.HypercohomologyLeftEdgeSingle`: `lem-pc-hypercohomology-left-edge-single`
+- `Sheaf.CategoryTheory.HypercohomologyLeftEdgeSingleAux`: `lem-pc-hypercohomology-left-edge-single-aux`
+- `Sheaf.CategoryTheory.HypercohomologyLeftEdgeTruncation`: `lem-pc-hypercohomology-left-edge-truncation`
+- `Sheaf.CategoryTheory.InjectiveModulePresheaf`: `lem-weil-pbc-ringed-site-injective-module-injective-presheaf`
+- `Sheaf.CategoryTheory.InjectiveSplitTower`: `lem-pc-injective-split-tower-injective`
+- `Sheaf.CategoryTheory.InjectiveSplitTowerExtension`: `lem-pc-injective-split-tower-extension`
+- `Sheaf.CategoryTheory.InjectiveTowerEmbedding`: `lem-pc-tower-injective-embedding`
+- `Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem`: `def-pur-saturated-triangulated-localization`
+- `Sheaf.CategoryTheory.KInjectiveBridge`: `def-sp-kinjective-bridge`
+- `Sheaf.CategoryTheory.LeftDerivedExactWhenDefined`: `lem-pur-left-derived-exact-when-defined`
+- `Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles`: `lem-pur-left-derived-kan-source-triangles`
+- `Sheaf.CategoryTheory.LeftDerivedKanTriangleValueComparison`: `lem-pur-left-derived-kan-triangle-value-comparison`
+- `Sheaf.CategoryTheory.LeftDerivedValueMorphism`: `lem-pur-derived-functor-morphisms-05sa`
+- `Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism`: `def-weil-tower-transition-endomorphism`
+- `Sheaf.CategoryTheory.MappedSingleCyclesShiftComparison`: `lem-pc-mapped-single-cycles-shift-comparison`
+- `Sheaf.CategoryTheory.MittagLefflerLimitExact`: `lem-weil-pbc-mittag-leffler-limit-exact`
+- `Sheaf.CategoryTheory.OpcyclesTorKernelIso`: `lem-pc-module-opcycles-tor-kernel-iso`
+- `Sheaf.CategoryTheory.OpcyclesTorSurjection`: `lem-pc-module-opcycles-tor-surjection`
+- `Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnit`: `lem-pc-right-derived-canonical-single-unit`
+- `Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnitShift`: `lem-pc-right-derived-canonical-single-unit-shift`
+- `Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso`: `lem-weil-pbc-derived-functor-truncation-iso`, `lem-weil-pbc-derived-functor-truncation-iso-epi`, `lem-weil-pbc-derived-functor-truncation-iso-mono`
+- `Sheaf.CategoryTheory.RightDerivedSingleDegreeComparison`: `def-pc-right-derived-single-degree-comparison`
+- `Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison`: `lem-sbc-right-derived-single-unit-homology-comparison`
+- `Sheaf.CategoryTheory.RightDerivedSingleUnitShiftTransport`: `lem-pc-right-derived-single-unit-shift-transport`
+- `Sheaf.CategoryTheory.RightDerivedUnitSingleDegree`: `lem-pc-right-derived-unit-single-degree`
+- `Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor`: `lem-weil-pbc-right-derived-universal-delta-functor`
+- `Sheaf.CategoryTheory.RightKanExtensionCoherentShift`: `lem-pur-right-kan-extension-coherent-shift`
+- `Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian`: `lem-pur-ringed-site-grothendieck-abelian`
+- `Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions`: `prop-pur-kinjective-resolutions-exist`
+- `Sheaf.CategoryTheory.RoosAcyclicResolution`: `lem-pc-roos-functorial-acyclic-resolution`
+- `Sheaf.CategoryTheory.RoosFinitePrefixLimits`: `lem-pc-roos-finite-prefix-limits`
+- `Sheaf.CategoryTheory.RoosFinitePrefixes`: `lem-pc-roos-finite-prefix-construction`
+- `Sheaf.CategoryTheory.RoosPrefixAcyclic`: `lem-pc-roos-prefix-acyclic`
+- `Sheaf.CategoryTheory.SingleHomologyShiftComparison`: `lem-pc-single-homology-shift-comparison`
+- `Sheaf.CategoryTheory.SiteCechComplex`: `def-weil-pbc-site-cech-complex`
+- `Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation`: `new-sheaf-cohomology-derived-evaluation`
+- `Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections`: `lem-sc-site-cohomology-right-derived-sections`
+- `Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic`: `lem-sc-injective-module-abelian-acyclic-zariski`
+- `Sheaf.CategoryTheory.Sites.InjectivePresheafModuleNerveAcyclic`: `lem-sc-injective-presheaf-module-nerve-acyclic`
+- `Sheaf.CategoryTheory.Sites.PresheafCechComplex`: `def-sc-presheaf-cech-complex`
+- `Sheaf.CategoryTheory.Sites.PresheafCechExtEdgeInjective`: `lem-sc-presheaf-cech-ext-edge-injective`
+- `Sheaf.CategoryTheory.Sites.PresheafCechExtEdgeKernel`: `lem-sc-presheaf-cech-ext-edge-kernel`
+- `Sheaf.CategoryTheory.Sites.PresheafCechSheafAugmentationExact`: `lem-sc-presheaf-cech-sheaf-augmentation-exact`
+- `Sheaf.CategoryTheory.Sites.PresheafCechSheafHomComparison`: `lem-sc-presheaf-cech-sheaf-hom-comparison`
+- `Sheaf.CategoryTheory.Sites.PresheafCechSheafPositiveExact`: `lem-sc-presheaf-cech-sheaf-positive-exact`
+- `Sheaf.CategoryTheory.Sites.PresheafCechSheafResolution`: `lem-sc-presheaf-cech-sheaf-resolution`
+- `Sheaf.CategoryTheory.Sites.PresheafCechVanishingCriterion`: `lem-sc-presheaf-cech-vanishing-criterion`
+- `Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling`: `lem-sc-presheaf-free-ext-local-killing`, `lem-sc-presheaf-free-ext-local-killing-witness`
+- `Sheaf.CategoryTheory.Sites.PresheafFreeNerveComparison`: `lem-sc-presheaf-free-nerve-comparison`
+- `Sheaf.CategoryTheory.Sites.PresheafFreeNerveExact`: `lem-sc-presheaf-free-nerve-exact`, `lem-sc-presheaf-free-nerve-exact-eval`, `lem-sc-presheaf-free-nerve-exact-eval-glue`
+- `Sheaf.CategoryTheory.SplitCategoryNullHomotopy`: `lem-pc-split-category-null-homotopy`
+- `Sheaf.CategoryTheory.SupportedComplexSingleRealization`: `lem-pc-supported-complex-single-realization`
+- `Sheaf.CategoryTheory.TensorHomologyImageKernelEpi`: `lem-pc-module-tensor-homology-image-kernel-epi`
+- `Sheaf.CategoryTheory.ThirdValueConstruction`: `lem-pur-derived-functor-triangles-05sc-third-value-core`
+- `Sheaf.CategoryTheory.TowerSplitEnvelope`: `lem-weil-tower-split-envelope`
+- `Sheaf.CategoryTheory.TriangleCommonRefinement`: `lem-pur-triangle-common-refinement-ms3-05r9`
+- `Sheaf.CategoryTheory.TriangleMorphismCategory`: `lem-pur-triangle-morphism-category-05r9`
+- `Sheaf.CategoryTheory.Triangulated.DenominatorTriangleCompletion`: `lem-pur-triangle-completion-ms6-05r9`
+- `Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsCore`: `lem-weil-derived-countable-products-core`
+- `Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsExistence`: `lem-weil-derived-countable-products-existence`
+- `Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsProperties`: `lem-weil-derived-countable-products-properties`
+- `Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit`: `lem-pc-derived-functor-commutes-derived-limit`
+- `Sheaf.CategoryTheory.Triangulated.DerivedLimit`: `def-weil-derived-limit`
+- `Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence`: `lem-weil-derived-limit-existence`
+- `Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts`: `lem-weil-derived-limit-products-core`
+- `Sheaf.CategoryTheory.Triangulated.DerivedLimitTower`: `lem-weil-derived-limit-tower-core`
+- `Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone`: `lem-weil-derived-limit-tower-core-cone`
+- `Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerProperty`: `lem-weil-derived-limit-tower-core-property`
+- `Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerTriangle`: `lem-weil-derived-limit-tower-core-property-triangle`
+- `Sheaf.CategoryTheory.Triangulated.MilnorBoundaryFactorization`: `lem-pc-milnor-boundary-factorization`
+- `Sheaf.CategoryTheory.Triangulated.MilnorProjectionFactorization`: `lem-pc-milnor-projection-factorization`
+- `Sheaf.CategoryTheory.Triangulated.MilnorSequence`: `lem-pc-derived-limit-milnor-sequence`
+- `Sheaf.CategoryTheory.Triangulated.RightDerivedFunctorCountableProducts`: `lem-pc-right-derived-functor-countable-products`
+- `Sheaf.CategoryTheory.Triangulated.RingedSpaceDerivedProducts`: `lem-pc-ringed-space-derived-products`
+- `Sheaf.CategoryTheory.TriangulatedHomColimitComparison`: `lem-pur-triangulated-hom-colimit-comparison`
+- `Sheaf.LinearAlgebra.KernelBasisOfUnitValue`: `lem-weil-pbc-kernel-basis-unit-value`
+- `Sheaf.Paper.CohomologyFractionComparison`: `lem-sc-cohomology-fraction-comparison`
+- `Sheaf.Paper.CohomologyFractionMayerVietorisExact`: `lem-sc-cohomology-fraction-mayer-vietoris-exact`
+- `Sheaf.Paper.CohomologyFractionMayerVietorisSquares`: `lem-sc-cohomology-fraction-mayer-vietoris-squares`
+- `Sheaf.Paper.CohomologySectionDivision`: `lem-sc-cohomology-section-division`
+- `Sheaf.Paper.DerivedTotalResolutionColumnZero`: `lem-pc-derived-total-resolution-column-zero`
+- `Sheaf.Paper.DerivedTotalResolutionHomologyInjective`: `lem-pc-derived-total-resolution-homology-injective`
+- `Sheaf.Paper.DerivedTotalResolutionHomologySurjective`: `lem-pc-derived-total-resolution-homology-surjective`
+- `Sheaf.Paper.DerivedTotalResolutionQuasiIso`: `lem-pc-derived-total-resolution-quasi-iso`
+- `Sheaf.Paper.HigherDirectImagePresheaf`: `lem-weil-pbc-higher-direct-image-presheaf`
+- `Sheaf.Paper.LocalizedCohomologyMayerVietoris`: `lem-sc-invert-s-cohomology-mayer-vietoris-diagram`
+- `Sheaf.Paper.NonvanishingSectionTrivializes`: `lem-weil-pbc-nonvanishing-section-trivializes`
+- `Sheaf.Paper.PQFCohomology`: `pqf-def-cohomology`
+- `Sheaf.Paper.TorLongExactFirstVariable`: `lem-weil-pbc-tor-long-exact-first-variable`
+- `Sheaf.Paper.TotalResolutionCycleFiniteSupport`: `aux-total-resolution-cycle-finite-support`
+- `Sheaf.Paper.TotalResolutionCycleReduction`: `lem-pc-derived-total-resolution-column-zero-cycle-reduction`
+- `Sheaf.Paper.TotalResolutionCycleSupportStep`: `aux-total-resolution-cycle-support-step`
+- `Sheaf.Paper.TotalResolutionCycleSupportZero`: `aux-total-resolution-cycle-support-zero`
+- `Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree`: `lem-sc-zariski-module-abelian-cohomology-agree`
+- `Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural`: `lem-sc-module-abelian-zariski-cohomology`, `new-zariski-module-abelian-cohomology-components`
+- `Sheaf.RingTheory.AffineFiniteProjectivePrimeMembership`: `lem-sc-affine-finite-projective-prime-membership`
+- `Sheaf.RingTheory.DerivedMapLift`: `lem-pc-ring-derived-map-lift`
+- `Sheaf.RingTheory.FiniteConeCycleAttachment`: `lem-pc-ring-finite-cone-cycle-attachment`
+- `Sheaf.RingTheory.FiniteConeFreeExtension`: `lem-pc-ring-finite-cone-free-extension`
+- `Sheaf.RingTheory.FiniteConeFreeModel`: `lem-pc-ring-finite-cone-free-model`
+- `Sheaf.RingTheory.FiniteFreeSplitTopCancellation`: `lem-pc-finite-free-split-top-cancellation`
+- `Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent`: `lem-sc-finite-cohomology`
+- `Sheaf.RingTheory.FiniteProjectiveComplexFreeModel`: `lem-pc-finite-projective-complex-free-model`
+- `Sheaf.RingTheory.FiniteProjectivePrimeLocalFree`: `lem-weil-pbc-finite-projective-prime-local-free`
+- `Sheaf.RingTheory.FreePrimeMembership`: `lem-sc-free-prime-membership`
+- `Sheaf.RingTheory.HomologyVanishingLocalizationSpan`: `lem-pc-homology-vanishing-localization-span`
+- `Sheaf.RingTheory.MPseudoCoherent`: `def-pc-ring-m-pseudo-coherent`
+- `Sheaf.RingTheory.MPseudoCoherentLocalizationConeConstruction`: `lem-pc-m-pseudo-coherent-localization-cone-construction`
+- `Sheaf.RingTheory.MPseudoCoherentLocalizationConeLocal`: `lem-pc-m-pseudo-coherent-localization-cone-local`
+- `Sheaf.RingTheory.MPseudoCoherentLocalizationConeStep`: `lem-pc-m-pseudo-coherent-localization-cone-step`
+- `Sheaf.RingTheory.MPseudoCoherentShift`: `lem-pc-ring-m-pseudo-coherent-shift`
+- `Sheaf.RingTheory.MPseudoCoherentVanishingBase`: `lem-pc-ring-m-pseudo-coherent-vanishing-base`
+- `Sheaf.RingTheory.PseudoCoherentApproximationTriangle`: `lem-pc-ring-pseudo-coherent-approximation-triangle`
+- `Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel`: `lem-pc-pseudo-coherent-bounded-finite-free-model`
+- `Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle`: `lem-pc-ring-pseudo-coherent-distinguished-triangle`
+- `Sheaf.RingTheory.PseudoCoherentIffAllM`: `lem-pc-ring-pseudo-coherent-iff-all-m`
+- `Sheaf.RingTheory.RingPseudoCoherent`: `def-pc-ring-pseudo-coherent-complex`
+- `Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue`: `lem-pc-ring-pseudo-coherent-localization-glue`
+- `Sheaf.RingTheory.StabilizingConeTower`: `lem-pc-ring-stabilizing-cone-tower`
+- `Sheaf.Topology.CohomologyPresheafDerivedSectionsEvaluation`: `lem-pc-cohomology-presheaf-derived-sections-evaluation`
+- `Sheaf.Topology.DerivedLimitStalkInjective`: `lem-pc-ringed-space-derived-limit-stalk-injective`
+- `Sheaf.Topology.InverseImageStalk`: `lem-weil-pbc-topological-inverse-image-stalk`
+- `Sheaf.Topology.ModuleMayerVietoris`: `lem-sc-mayer-vietoris-ringed-space`
+- `Sheaf.Topology.OpenModuleCohomology`: `def-sc-open-module-cohomology`
+- `Sheaf.Topology.OpenModuleCohomologyLocalIso`: `lem-sc-open-module-cohomology-local-iso`
+- `Sheaf.Topology.OpenModuleDerivedSections`: `def-pc-open-module-derived-sections`
+- `Sheaf.Topology.PointwiseTruncationLimit`: `lem-pc-ringed-space-pointwise-truncation-limit`
+- `Sheaf.Topology.PointwiseTruncationLimitExists`: `lem-pc-ringed-space-pointwise-truncation-limit-exists`
+- `Sheaf.Topology.PointwiseTruncationLimitIsIso`: `lem-pc-ringed-space-pointwise-truncation-limit-isIso`
+- `Sheaf.Topology.PointwiseTruncationOpenStabilization`: `lem-pc-pointwise-truncation-open-stabilization`
+- `Sheaf.Topology.PresheafModuleStalkFunctor`: `def-weil-pbc-module-stalk`
+- `Sheaf.Topology.PresheafStalkTensor`: `lem-pc-presheaf-module-stalk-tensor`
+- `Sheaf.Topology.RestrictInjectiveResolution`: `lem-sc-ringed-space-restrict-injective-resolution`
+- `Sheaf.Topology.RingedModuleSkyscraper`: `def-pc-ringed-module-skyscraper`
+- `Sheaf.Topology.RingedSpaceModuleCohomology`: `def-sc-ringed-space-module-cohomology`, `def-sc-sheaf-cohomology-functor`
+- `Sheaf.Topology.RingedSpaceModuleEnoughInjectives`: `lem-sc-ringed-space-module-sheaves-enough-injectives`
+- `Sheaf.Topology.RingedSpaceRGammaDerivedLimit`: `lem-pc-ringed-space-rgamma-derived-limit`
+- `Sheaf.Topology.SheafCokernelLocalImage`: `lem-weil-pbc-sheaf-cokernel-local-image`
+- `Sheaf.Topology.SheafOnBasisExtends`: `lem-weil-pbc-sheaf-on-basis-extends`
+- `Sheaf.Topology.SkyscraperComplex`: `lem-pc-skyscraper-complex`
+- `Sheaf.Topology.SkyscraperComplexAcyclic`: `lem-pc-skyscraper-complex-acyclic`
+- `Sheaf.Topology.SkyscraperComplexStalk`: `lem-pc-skyscraper-complex-stalk-recovery`
+- `WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual` (no recorded module attachment)
+- `WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomOver` (no recorded module attachment)
+- `WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit` (no recorded module attachment)
+- `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual` (no recorded module attachment)
+- `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree` (no recorded module attachment)
+- `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver` (no recorded module attachment)
+- `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed` (no recorded module attachment)
+- `WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree` (no recorded module attachment)
+- `WeilConjectures.Algebra.Homology.BifunctorLinear` (no recorded module attachment)
+- `WeilConjectures.Algebra.Homology.HomotopyCategory.Braided` (no recorded module attachment)
+- `WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure` (no recorded module attachment)
+- `WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom` (no recorded module attachment)
+- `WeilConjectures.Algebra.Homology.HomotopyCategory.Products` (no recorded module attachment)
+- `WeilConjectures.Algebra.Homology.InternalHom` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.ChowLemma`: `cor-chow-lemma-proper`, `lem-weil-pbc-chow-noetherian`, `thm-chow-lemma`
+- `WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel`: `lem-chow-closed-model`
+- `WeilConjectures.AlgebraicGeometry.ChowLemma.Glue`: `lem-chow-glue`, `lem-chow-preimage`
+- `WeilConjectures.AlgebraicGeometry.ChowLemma.Graph`: `lem-chow-graph`
+- `WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism`: `lem-pc-closed-immersion-coherent-cohomology`
+- `WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech`: `lem-pc-affine-cech-complex`, `lem-pc-affine-vanishing`
+- `WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Cohomology.Defs`: `def-pc-euler-characteristic`
+- `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism`: `lem-pc-affine-morphism-hi`
+- `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic`: `def-pc-scheme-module-flat-over`, `lem-pc-scheme-modules-grothendieck-abelian`
+- `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex`: `def-pc-invertible-in-degree-zero`, `lem-pc-coherent-hi`, `lem-pc-universal-finite-free-complex`
+- `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections`: `lem-pc-cohomology-sections-affine-base`, `lem-pc-higher-direct-image-local-vanishing`, `lem-pc-projection-formula`, `lem-pc-sections-higher-direct-image-quasi-coherent`, `lem-pc-sections-open-base-change`, `new-higher-direct-image-affine-local-qcoherent`
+- `WeilConjectures.AlgebraicGeometry.Cohomology.Exact` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Cohomology.LongExact`: `lem-pc-euler-additive`
+- `WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.EffectiveCartier`: `def-pc-divisor-line-bundle`, `lem-pc-cartier-affine-generator-regular`, `lem-pc-divisor-line-bundle-flat-pullback`, `lem-pc-divisor-line-bundle-invertible`, `lem-pc-divisor-line-bundle-properties`, `lem-pc-recd-pullback`
+- `WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators`: `lem-pc-section-clearing-denominators`
+- `WeilConjectures.AlgebraicGeometry.Modules.Dual`: `lem-pc-tensor-dual-invertible`, `lem-sc-invertible-dual`
+- `WeilConjectures.AlgebraicGeometry.Modules.FaithfullyFlatDescent` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent`: `lem-weil-pbc-finite-presentation-affine-sections`
+- `WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk`: `lem-sc-flat-cover-module-isomorphism-reflection`
+- `WeilConjectures.AlgebraicGeometry.Modules.FpqcFullyFaithful` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Modules.FreeComplex` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Basic`: `lem-sc-ext-evaluation-first-naturality`
+- `WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Free` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Presheaf` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Modules.Invertible`: `def-sc-invertible-module`, `lem-weil-pbc-invertible-pullback-invertible`
+- `WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections`: `lem-sc-affine-invertible-sections`
+- `WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula`: `lem-pc-invertible-sheaf-instance`, `lem-sc-pullback-tensor-power-iso`
+- `WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator`: `lem-sc-module-hom-local-bijective-iso`
+- `WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal`: `lem-pc-adjoint-module-pullback-monoidal`, `lem-pc-scheme-pullback-monoidal-existing`
+- `WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel`: `lem-pc-cokernel-finite-presentation-noetherian`, `lem-weil-pbc-quasi-coherent-module-cokernel-closure`
+- `WeilConjectures.AlgebraicGeometry.Modules.TensorSection` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Modules.ZariskiDescent` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus`: `def-pc-zero-scheme`, `lem-pc-invertible-common-free-generator`, `lem-pc-zero-scheme-divisor-iso`, `lem-pc-zero-scheme-ideal-local`, `lem-pc-zero-scheme-pullback-full-local-coefficient`, `lem-pc-zero-scheme-zero-iff`, `lem-sc-canonical-section-zero-scheme`
+- `WeilConjectures.AlgebraicGeometry.PicardFunctor`: `def-pc-picard-presheaf`, `def-sc-picard-group`, `lem-pc-pic-presheaf-functorial`
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace`: `def-nagata-projective-space-base-change`, `lem-pc-projective-proper`, `lemma-nagata-projective-space-base-change-proper`, `lemma-nagata-projective-space-base-change-pullback`
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion`: `lem-chow-affine-immersion`
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product`: `lem-chow-segre`
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre`: `def-chow-segre`
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist`: `def-pc-projective-space-twist`, `lem-pc-twist-tensor`
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero`: `lem-weil-pbc-projective-space-zero-isomorphism`
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules`: `def-weil-pbc-proj-twisting-sheaf`
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Mul` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Sheaf` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj` (no recorded module attachment)
+- `WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Abelian.DimensionShifting` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Abelian.Flat.Basic`: `lem-weil-pbc-flat-coproduct`
+- `WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic`: `def-sp-acyclic`, `lem-weil-pbc-leray-acyclicity-quasi-iso`
+- `WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence`: `lemma-weil-pbc-leray-acyclicity`
+- `WeilConjectures.CategoryTheory.DerivedCategory.FlatModel`: `lem-pc-source-kflat-module-tensor-model`, `lem-pc-source-module-kflat-resolution`
+- `WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp`: `lem-weil-pbc-right-adjoint-preserves-kinjective`
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction`: `prop-weil-pbc-derived-inverse-image-adjunction`
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange`: `src-right-derived-functor-plus-base-change-of-right-acyclic`
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility`: `src-right-derived-functor-plus-compatibility`
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology`: `src-right-derived-functor-plus-acyclic-unit`
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle`: `lem-sp-derived-functor-single-identification`
+- `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated`: `lem-pc-right-derived-functor-triangulated`
+- `WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.AcyclicSwallowing` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGenerated` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGeneratedCover` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.Coefficients` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.GeneratingMonoQuasiIsos` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory`: `lem-pc-derived-category-locally-small`
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`: `lem-weil-pbc-kinjective-functorial-existence`
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective`: `lem-pur-kinjective-degreewise-existence`
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution`: `lem-weil-pbc-sheaf-flat-separator`
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeCardinal` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeEnlargement` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeGeneratingSet` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeSmallObject` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf`: `lem-weil-pbc-sheaf-tensor-closed`
+- `WeilConjectures.CategoryTheory.GrothendieckAbelian.Subcomplex` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Monoidal.DerivedBraided` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Sites.SigmaPresheaf` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Sites.TransfinitePlus` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf` (no recorded module attachment)
+- `WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck`: `lem-sp-grothendieck-edge-maps`, `src-grothendieck-spectral-sequence-nat`, `thm-sp-grothendieck-base-change`
+- `WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns`: `lem-pc-bounded-above-double-complex-total-comparison`, `lem-sc-integer-finite-column-total-comparison`
+- `WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Bifunctor` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.BifunctorCommShift` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.BifunctorHomotopy` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone`: `lem-pc-tensor-mapping-cone-iso`
+- `WeilConjectures.FromJoel.Algebra.Homology.BifunctorShift` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.BifunctorTriangulated` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.CochainComplexMinus` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Embedding.ComplementaryTrunc` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Embedding.HomEquiv` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidFiltration` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Embedding.TruncGE` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Embedding.TruncLE` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomologicalBicomplex` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexFunctorEquiv` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexLimits` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Acyclic` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.DegreewiseSplit` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.KInjective` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.MonoidalTriangulated` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.PreservesQuasiIso` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Pretriangulated` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.ShiftSequence` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.Basic` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplex` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplexMinus` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Monoidal` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.ObjectProperty` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.Single` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.TotalComplex` (no recorded module attachment)
+- `WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Abelian.GrothendieckAxioms.Colim` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Functor.CurryingThree` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerived` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerivedBifunctorComp` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerivedFour` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerivedThree` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerivedTrifunctorComp` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Functor.Derived.LeftDerivedTwo` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Functor.Quadrifunctor` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.GradedObject.Bifunctor` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.GradedObject.Colimits` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.GuitartExact.Basic` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Idempotents.Basic` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Limits.Constructions.EventuallyConstant` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Localization.Composition` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.Derives` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesFour` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesThree` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.Monoidal` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.OfFunctorialResolutions` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.Product` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Monoidal.Derived` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat`: `def-pc-module-kflat-complex`
+- `WeilConjectures.FromJoel.CategoryTheory.Monoidal.Pentagon` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.Retract` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.QuotientThree` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.QuotientTwo` (no recorded module attachment)
+- `WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFunctor` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.AlgCat.FilteredColimits` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.CommAlgCat.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FilteredColimits` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.Ring.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.Bifunctor`: `lem-pc-total-bifunctor-comparison-iso`
+- `WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus`: `lem-weil-pbc-derived-direct-image-triangulated`, `lem-weil-pbc-derived-functor-negative-vanishing`
+- `WeilConjectures.Mathlib.Algebra.Homology.Double` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.Embedding.Extend` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.HomologySequence` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic`: `lem-pur-quasi-iso-cone-acyclic`
+- `WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplex` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KInjective` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.Localization` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.Monoidal` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence`: `lem-sp-first-quadrant-spectral-object-abutment`
+- `WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Homology.TotalComplex`: `thm-sp-double-complex-spectral-sequences`
+- `WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace`: `def-zl-localized-coordinates`, `lemma-nagata-quasi-affine-immersion-affine-space-exists`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction`: `def-weil-pbc-stein-factorization`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Gluing` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine`: `lem-pc-ideal-sheaf-comap-affine-extension`, `lemma-nagata-extended-ideal-affine-chart`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic`: `lemma-nagata-ideal-unit-off-support`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible`: `def-nagata-effective-cartier-ideal`, `def-nagata-invertible-ideal`, `lem-pc-flat-pullback-effective-cartier-ideal`, `lem-pc-nonzero-locally-principal-ideal-invertible`, `lemma-nagata-invertible-ideal-tensor-power`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme`: `lem-chow-scheme-theoretic-closure`, `lem-sc-mult-n-dim-one-closed-subscheme`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Presheaf` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion`: `lemma-nagata-scheme-image-universal`, `lemma-nagata-scheme-theoretic-closure-minimal`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation`: `lemma-nagata-diagonal-finite-presentation`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion`: `lem-chow-tuple-immersion`, `lemma-nagata-immersion-shrink-to-closed`, `lemma-nagata-immersion-shrink-to-closed-exists`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper`: `lem-sc-proper-affine-finite`, `lem-weil-pbc-scheme-theoretic-image-proper`, `pqf-lem-image-proper`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant`: `lem-chow-agree-on-dense-open`, `lemma-nagata-dense-flat-pullback`, `lemma-nagata-scheme-image-restrict-open`, `lemma-nagata-valuation-factor-closed`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated`: `lem-weil-pbc-separated-separating-pair-cover`, `lemma-nagata-diagonal-mixed-open`, `lemma-nagata-ext-scheme-theoretically-dominant-separated`, `lemma-nagata-separated-two-open-cover`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Properties`: `lem-chow-affine-through-generic-points`, `lem-chow-disjoint-affines`, `lemma-nagata-conrad-case3-smaller-base`, `lemma-nagata-dense-affine-cover-exists`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks`: `lemma-nagata-scheme-image-partial-section`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Restrict` (no recorded module attachment)
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Scheme`: `lem-pc-scheme-connected-iff-idempotents`
+- `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc`: `lem-galois-fpqc-family-descent-of-local-property`, `lem-weil-pbc-fpqc-family-descent-of-single-morphism-descent`
+- `WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Adjunction.Limits` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Comma.CardinalArrow` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.EssentialImage` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Generator.Abelian` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Generator.StrongGenerator` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Preorder.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Localization.Bousfield` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Linear` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Composition` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Orthogonal` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves`: `lem-sp-right-adjoint-preserves-injectives`
+- `WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Resolution` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Preadditive.Opposite` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Shift.CommShiftTwo` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Shift.Localization` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.CompatiblePlus` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.Equivalence` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.Grothendieck` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.LeftExact` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.Localization` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.Plus` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic`: `lem-galois-flasque`, `lem-weil-pbc-sheaf-ext-cohomology-long-exact`
+- `WeilConjectures.Mathlib.CategoryTheory.Skeletal` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.SmallObject.TransfiniteIteration` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Subobject.HasCardinalLT` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Subobject.Lattice` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits` (no recorded module attachment)
+- `WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor`: `lem-weil-pbc-commshift-nattrans-triangle-morphism`
+- `WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas` (no recorded module attachment)
+- `WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank` (no recorded module attachment)
+- `WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.Filtration`: `lem-weil-pbc-flat-variant-local-criterion`
+- `WeilConjectures.Mathlib.RingTheory.FinitePresentation` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.Finiteness.Descent` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic`: `lem-weil-pbc-flat-algebra-faithfully-flat-descent`
+- `WeilConjectures.Mathlib.RingTheory.Flat.Localization`: `lem-weil-pbc-noetherian-flat-locus-neighborhood`
+- `WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.Ideal.Operations` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.IsTensorProduct` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.LocalRing.Basic`: `lem-weil-pbc-local-ring-idempotent-zero-one`
+- `WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous`: `lem-weil-pbc-dehomogenization-polynomial-ring`
+- `WeilConjectures.Mathlib.RingTheory.PicardGroup` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology`: `lem-wf-affine-dimension-drop`
+- `WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic` (no recorded module attachment)
+- `WeilConjectures.Mathlib.RingTheory.TensorProduct.DirectLimitFG` (no recorded module attachment)
+- `WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Topology.KrullDimension`: `def-kun-dimension`, `def-kun-topological-dimension-at-point`, `lem-sc-dim-one-point-outside-open-closed`, `lem-sc-dim0-finite`, `lem-sc-nonempty-open-complement-finite-dim-le-one`, `lem-sc-zero-dim-noetherian-closed-finite`, `lem-weil-pbc-dimension-at-point-open-subspace`
+- `WeilConjectures.Mathlib.Topology.Sheaves.Flasque` (no recorded module attachment)
+- `WeilConjectures.Mathlib.Topology.Sober` (no recorded module attachment)
+- `WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent` (no recorded module attachment)
+- `WeilConjectures.RingTheory.ProEtale.FaithfullyFlat`: `lem-weil-pbc-flat-colimit-presentation-same-universe`, `lem-weil-pbc-flat-ring-map-iff-ind-flat`
+- `WeilConjectures.RingTheory.ProEtale.Ind` (no recorded module attachment)
+- `WeilConjectures.Topology.Sheaves.Cech`: `lem-pc-topological-injective-cech-positive-exact`
+- `WeilConjectures.Topology.Sheaves.CechComparison` (no recorded module attachment)
+- `WeilConjectures.Topology.Sheaves.CechCriterion`: `lem-pc-topological-ses-cech-sections-surjective`
+- `WeilConjectures.Topology.Sheaves.CechFlasque` (no recorded module attachment)
+- `WeilConjectures.Topology.Sheaves.PushforwardCohomology`: `lem-sc-topological-pushforward-injective`
+
+</details>
+
+## Where the brief, the DAG or earlier work was wrong
+
+No mathematical statement error was found. The planned claim that the inclusion is
+affine is obtained directly by `IsAffineHom.of_comp W.ι f`, since its composite with
+separated `f` is a morphism between affine schemes. The full affine base-change module
+was broader than needed: its existing isomorphism-only sublemma proves both required
+instances. The horizontal pasting theorem is not a vertical pasting theorem; no use of
+it is claimed. Vertical pasting is proved directly here for arbitrary commutative squares
+and arbitrary modules, with no geometric or quasi-coherence assumptions in that helper.
+
+
+## Second reading by P2
+
+1. **Unchanged interface: pass.** Compared the sole delivered module with the repository
+   using `diff`, and checked the existing theorem signature byte for byte with Python.
+   Its hypotheses, conclusion, visibility, public imports and docstring are unchanged.
+   Only private helpers, the proof, and two proof-only import lines differ. No definition
+   used by a target changes; no change record or forced adaptation is required.
+2. **Proof and axioms: pass.** Compiled the module with `lcompile.py --all` without errors
+   or warnings. A scratch copy printed the axioms of `adj`, `square`, `exchange_unit`,
+   `exchange_vertical`, and `affineOpen_pushforward_exchange`: each uses only `propext`,
+   `Classical.choice`, and `Quot.sound`, with no `sorryAx`. The delivered source has no
+   `sorry` or forbidden declaration. Read `exists_tensorPullbackAdjunction`: its
+   sectionwise formula fixes the unit, hence the Hom equivalence used downstream.
+   Choosing this pinned adjunction introduces no arbitrary witness of mere existence.
+   The other private definition explicitly composes existing pushforward isomorphisms.
+3. **Split statements and edge cases: pass.** No statements or holes are split off.
+   The two private proved identities hold for arbitrary commutative squares and modules:
+   the first is the defining adjunction equation; the second follows from naturality
+   and sectionwise functoriality. Identity arrows and zero modules cause no exceptional
+   case. The main proof uses neither nonemptiness nor flatness, and remains valid for
+   zero rings. Independently searched with LeanFinder for vertical composition of
+   adjoint base-change transformations, and with grep for pushforward composition and
+   pasting; also searched project and upstream module sources. The hits concern
+   composition isomorphisms or different categories, not this exchange identity.
+4. **Route, imports and pruning: pass.** Read the adjoint-defined base-change map and
+   affine isomorphism theorem. The two pullback squares paste in the required direction;
+   affine cancellation gives `IsAffineHom W.ι` from separated `f` and affine `W.ι ≫ f`.
+   The restriction instance comes from the proof-only Tilde import. Transposition and
+   the two affine isomorphisms give the original conclusion by cancellation. The
+   existing horizontal-pasting theorem does not supply this vertical identity. Also
+   read Mathlib `mateEquiv_vcomp`: it handles abstract mates, but identifying the
+   composite canonical scheme pushforward square still needs the sectionwise
+   coherence calculation present here. No shorter complete route was found. The narrower affine import suffices, and
+   both new proof-only imports are used. Independently recomputed the old/new source
+   import closures: exactly 1094 project modules disappear, matching the report's
+   inventory without omissions or extras. The sole removed old proof dependency is
+   listed. The unit record has empty statement and step realizations; this item does
+   not bypass a realized unit statement or proof step.
+5. **DAG agreement: pass.** Compared the node JSONs: only `proof`, `proof_deps`, and
+   `proof_origin` changed. The uses in the proof steps have exactly the recorded union;
+   the cited declarations are the base-change map and the affine isomorphism theorem
+   actually used in Lean. No new node needs validation.
+
+Second reading changed only this report by recording the independent review. No
+mathematical, interface, proof, import, or node repair was needed. One original hole
+is closed and zero holes are added; this is a proof, not a decomposition.

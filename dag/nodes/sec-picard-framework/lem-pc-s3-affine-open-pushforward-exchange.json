@@ -12,19 +12,19 @@
  },
  "proof": [
   {
-   "text": "Write j=W.ι, p=pullback.fst f g and f'=pullback.snd f g. Form the cartesian square for j along p and paste it above the square for f along g. Since f is separated over affine Spec A, X is separated. An affine-open inclusion in a separated scheme is affine; j≫f has affine source and target and hence is affine. Restriction preserves quasi-coherence.",
+   "text": "Write j=W.ι, p=pullback.fst f g, and f'=pullback.snd f g. Form the canonical pullback square sj for j along p, and paste it vertically with the canonical square sf for f along g. The affine-open hypothesis gives IsAffine W. Since W and Spec A are affine, j≫f is affine. IsAffineHom.of_comp j f and separatedness of f make j affine. Restriction preserves quasi-coherence by Mathlib Scheme.Modules.isQuasicoherent_restrictFunctor.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply affinePushforward_baseChange to G|W in the square for j and in the outer square for j≫f. Both exchange maps are invertible.",
+   "text": "Apply affinePushforward_baseChange_isIso to G|W in sj and in sj.paste_vert sf. Only the isomorphism clause is needed; the quasi-coherence-of-pushforward, algebra, and horizontal-composition clauses of the larger affine base-change module are unused.",
    "uses": [
-    "lem-weil-pbc-affine-pushforward-base-change"
+    "lem-weil-pbc-affine-pushforward-base-change-isIso"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose under the tensor-pullback adjunction for g. The adjoint of exchange is pushforward of the pullback unit followed by pushforward composition. Naturality of the unit and sectionwise associativity of pushforward identify the outer adjoint with the adjoint of exchange for f on j_*G|W followed by f'_* of exchange for j, with the canonical pushforward-composition isomorphisms at the ends. Injectivity of the adjunction Hom equivalence proves vertical pasting. Cancel f'_* of exchange for j and the composition isomorphisms to conclude.",
+   "text": "The proved private exchange_unit lemma is the defining adjunction equation. To prove the private exchange_vertical identity, apply injectivity of the g adjunction Hom equivalence. Its left and right naturality formulas and exchange_unit identify both adjoints. Naturality of the canonical pushforward square moves exchange for j past that square; exchange_unit for j then replaces it by pushforward of the q unit. On sections the remaining equality is functoriality of the restriction maps between equal opens, with equality of their arrows by thinness. Thus tensorPullback g of the pushforward-composition isomorphism followed by outer exchange equals exchange for f on j_*G|W followed by f'_* of exchange for j and the target pushforward-composition isomorphism. The left side is invertible. The two factors after exchange for f are invertible, so isIso_comp_right_iff cancels them.",
    "uses": [
     "lem-weil-pbc-module-base-change-map-open-restriction"
    ],
@@ -32,13 +32,15 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-affine-pushforward-base-change-isIso",
   "lem-weil-pbc-module-base-change-map-open-restriction"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "P2",
+  "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tag 02KG and transposition of ordinary module exchange, Tag 08HY"
+  "place": "Tags 02KG and 08HY; vertical pasting proved by the defining adjunction, naturality, and sectionwise pushforward composition"
  },
  "mathlib_searches": [
   {
@@ -113,10 +115,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T045536-L-130456",
-  "kind": "interface",
+  "landing": "20261013T060423-L-584685",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
