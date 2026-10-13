@@ -6,9 +6,9 @@ Authors: SHEAF group T3
 module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.AffineSectionsCompositionComparisons
+import Sheaf.AlgebraicGeometry.AffineExtensionSectionsUnit
+import Sheaf.AlgebraicGeometry.AffineSectionsBaseChangeUnitSquare
 import Sheaf.AlgebraicGeometry.GlobalDerivedHom
 import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
@@ -25,6 +25,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine sections comparison intertwines the extension/restriction mate with
 sheaf base change, followed by the pullback/direct-image mate of any morphism.
 The supplied sections comparison is normalized on sheaves and right-derived units.
@@ -109,6 +111,49 @@ theorem exists_affineSectionsBaseChangeMate
               (affineDerivedGlobalSections (𝟙 (Spec B))).map
                 ((schemeDerivedDirectImage (pullback.snd f g)).map
                   (((canonicalPullbackAdjunction (pullback.fst f g)).homEquiv E L).symm m)) ≫
-              d.hom.app L := by sorry
+              d.hom.app L := by
+  obtain ⟨t, b, z, d, v, r, ht, hb, hz, hd, hv, hr⟩ :=
+    exists_affineSectionsCompositionComparisons f g
+  obtain ⟨a₀, ha₀⟩ := exists_affineExtensionSectionsUnit g v r hv hr
+    ((schemeDerivedDirectImage f).obj E) hE
+  let a := (affineDerivedExtension g).mapIso (b.app E).symm ≪≫ a₀
+  have ha : (affineDerivedExtensionAdjunction g).unit.app
+        ((affineDerivedGlobalSections f).obj E) ≫
+      (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory.map a.hom =
+    b.inv.app E ≫ (affineDerivedGlobalSections (𝟙 (Spec R))).map
+        ((canonicalPullbackAdjunction g).unit.app ((schemeDerivedDirectImage f).obj E)) ≫
+      r.hom.app ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)) := by
+    dsimp only [a, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv]
+    rw [Functor.map_comp, ← Category.assoc]
+    erw [← (affineDerivedExtensionAdjunction g).unit.naturality (b.inv.app E)]
+    simp only [Functor.id_map, Functor.comp_obj]
+    erw [Category.assoc, ha₀]
+  have hu := affineSectionsBaseChange_unit_square f g t b ht hb z d hz hd
+    v r hv hr E s c hs hc
+  refine ⟨a, d, ?_⟩
+  intro L m
+  let n := ((canonicalPullbackAdjunction (pullback.fst f g)).homEquiv E L).symm m
+  have hm : (canonicalPullbackAdjunction (pullback.fst f g)).unit.app E ≫
+      (schemeDerivedDirectImage (pullback.fst f g)).map n = m := by
+    exact ((canonicalPullbackAdjunction (pullback.fst f g)).homEquiv E L).apply_symm_apply m
+  apply ((affineDerivedExtensionAdjunction g).homEquiv _ _).injective
+  rw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
+  simp only [Functor.map_comp]
+  rw [← Category.assoc, ha]
+  let S := (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory
+  have hn := d.hom.naturality n
+  dsimp only [Functor.comp_map] at hn
+  simp only [Category.assoc]
+  erw [← S.map_comp, hn, S.map_comp]
+  have hu' := congrArg (fun k ↦ b.inv.app E ≫ k) hu
+  simp only [Functor.map_comp, Iso.inv_hom_id_app_assoc] at hu'
+  erw [reassoc_of% hu']
+  erw [← c.hom.naturality n]
+  change (affineDerivedGlobalSections f).map m ≫ c.hom.app L =
+    (affineDerivedGlobalSections f).map
+        ((canonicalPullbackAdjunction (pullback.fst f g)).unit.app E) ≫
+      (affineDerivedGlobalSections f).map
+        ((schemeDerivedDirectImage (pullback.fst f g)).map n) ≫ c.hom.app L
+  rw [← Category.assoc, ← Functor.map_comp, hm]
 
 end AlgebraicGeometry

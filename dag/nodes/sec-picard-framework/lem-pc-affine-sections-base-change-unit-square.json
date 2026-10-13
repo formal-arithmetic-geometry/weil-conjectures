@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-affine-sections-base-change-unit-square",
+ "kind": "statement",
+ "title": "Affine sections of the base-change unit square",
+ "statement": "Let $f:X\\to\\operatorname{Spec}R$ and $g:\\operatorname{Spec}B\\to\\operatorname{Spec}R$ be scheme morphisms, with fibre-product projections $g_X:X'\\to X$, $f':X'\\to\\operatorname{Spec}B$ [def-pc-scheme, def-pc-fibre-product]. Use the derived functors, fixed affine sections, and canonical base-change map $\\mathrm{BC}_E:Lg^*Rf_*E\\to Rf'_*Lg_X^*E$ [def-pc-derived-category, def-pc-derived-pullback, def-pc-derived-direct-image, def-pc-affine-global-hom-base-change-map, def-pc-derived-base-change-map]. Supply six comparisons t,b,z,d,v,r with identity-on-sections and right-derived-unit normalizations as in [lem-pc-affine-sections-composition-comparisons]. Supply s and c comparing $g_{X*};\\Gamma_f$ with $\\Gamma_{f'};\\rho$ and $Rg_{X*};R\\Gamma_f$ with $R\\Gamma_{f'};D\\rho$, respectively, where s acts identically on sections and c satisfies the derived-unit normalization in lean.statement. For every $E\\in D(\\mathcal O_X)$, writing $\\Gamma_R=R\\Gamma_{\\mathrm{id}_R}$, $\\Gamma_B=R\\Gamma_{\\mathrm{id}_B}$, and $Q=Rf_*E$, one has $\\Gamma_R(\\eta_g(Q));r_{Lg^*Q};D\\rho(\\Gamma_B(\\mathrm{BC}_E);d_{Lg_X^*E})=b_E;R\\Gamma_f(\\eta_{g_X}(E));c_{Lg_X^*E}$. No quasi-coherence hypothesis is made and no morphism is asserted invertible.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-fibre-product",
+  "def-pc-derived-base-change-map",
+  "lem-pc-affine-sections-composition-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY, remark-base-change; Tag 0D5T, lemma-derived-pushforward-composition; perfect.tex Tag 0AA7, scalar restriction"
+ },
+ "proof": [
+  {
+   "text": "Expand BC_E by its canonical counit definition. Transpose under the adjunctions of g and g_X. The canonical pullback-composition comparisons identify the two paths around the square; naturality of the adjunction units and the triangle identities of f and f' cancel the counit/unit pairs. This yields the direct-image unit description of the same base-change map.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08HY, remark-base-change; Tag 0D5T, lemma-derived-pushforward-composition; perfect.tex Tag 0AA7, scalar restriction"
+   }
+  },
+  {
+   "text": "Apply sections to that unit identity. On underived sheaves t,z,v,s act identically on sections and account for the R-action. The equations hb,hd,hr,hc identify their derived counterparts with these underived maps after composing with the right-derived units. Compute on K-injective resolutions and use the right-derived universal property to identify the composites on every derived object E. The resulting equality is the displayed unit square, without an extension isomorphism or an arbitrary m.",
+   "uses": [
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08HY, remark-base-change; Tag 0D5T, lemma-derived-pushforward-composition; perfect.tex Tag 0AA7, scalar restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-affine-global-hom-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY, remark-base-change; Tag 0D5T, lemma-derived-pushforward-composition; perfect.tex Tag 0AA7, scalar restriction; explicit normalization refinement of parent proof steps"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 case (1): Affine sections of the base-change unit square; parent affine-sections/base-change-mate proof",
+   "via": [
+    "lem-pc-affine-sections-base-change-mate",
+    "lem-pc-affine-global-hom-base-change-factorization",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections affine base change adjunction mate compatibility",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.ΓSpec_adjunction_homEquiv_eq, AlgebraicGeometry.Spec_Γ_naturality_assoc, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; only underived affine adjunctions, no normalized derived sections mate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Ss]ections.*[Mm]ate|[Ss]ections.*[Uu]nit.*[Cc]ompat",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived sections comparison composition unit affine base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSectionsBaseChangeMate",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSectionsBaseChangeUnitSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSectionsBaseChangeUnitSquare.lean",
+  "declaration": "AlgebraicGeometry.affineSectionsBaseChange_unit_square",
+  "statement": "theorem affineSectionsBaseChange_unit_square\n    {R B : CommRingCat.{u}} {X : Scheme.{u}}\n    (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)\n    (t : RingedSpace.moduleDirectImage (f).toLRSHom.toShHom ⋙\n        affineGlobalSections (𝟙 (Spec R)) ≅ affineGlobalSections (f))\n    (b : schemeDerivedDirectImage (f) ⋙\n        affineDerivedGlobalSections (𝟙 (Spec R)) ≅ affineDerivedGlobalSections (f))\n    (ht : ∀ (M : SheafOfModules.{u} (moduleRings (X).toRingedSpace))\n        (x : (affineGlobalSections (f)).obj M), (t.hom.app M) x = x)\n    (hb : ∀ J : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings (X).toRingedSpace)) (ComplexShape.up ℤ),\n      (Functor.rightDerivedFunctorCompUnit\n          (RingedSpace.moduleDirectImage (f).toLRSHom.toShHom)\n          (affineGlobalSections (𝟙 (Spec R)))).app J ≫\n        (affineGlobalSectionsDerivedIso (𝟙 (Spec R))).hom.app\n          ((schemeDerivedDirectImage (f)).obj (DerivedCategory.Qh.obj J)) ≫\n        b.hom.app (DerivedCategory.Qh.obj J) =\n      DerivedCategory.Qh.map ((t.hom.mapHomotopyCategory (ComplexShape.up ℤ)).app J) ≫\n        (affineGlobalSections (f)).rightDerivedFunctorUnit.app J ≫\n        (affineGlobalSectionsDerivedIso (f)).hom.app (DerivedCategory.Qh.obj J))\n    (z : RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom ⋙\n        affineGlobalSections (𝟙 (Spec B)) ≅ affineGlobalSections (pullback.snd f g))\n    (d : schemeDerivedDirectImage (pullback.snd f g) ⋙\n        affineDerivedGlobalSections (𝟙 (Spec B)) ≅ affineDerivedGlobalSections (pullback.snd f g))\n    (hz : ∀ (M : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))\n        (x : (affineGlobalSections (pullback.snd f g)).obj M), (z.hom.app M) x = x)\n    (hd : ∀ J : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) (ComplexShape.up ℤ),\n      (Functor.rightDerivedFunctorCompUnit\n          (RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom)\n        (affineGlobalSections (𝟙 (Spec B)))).app J ≫\n        (affineGlobalSectionsDerivedIso (𝟙 (Spec B))).hom.app\n          ((schemeDerivedDirectImage (pullback.snd f g)).obj (DerivedCategory.Qh.obj J)) ≫\n        d.hom.app (DerivedCategory.Qh.obj J) =\n      DerivedCategory.Qh.map\n        ((z.hom.mapHomotopyCategory (ComplexShape.up ℤ)).app J) ≫\n        (affineGlobalSections (pullback.snd f g)).rightDerivedFunctorUnit.app J ≫\n        (affineGlobalSectionsDerivedIso (pullback.snd f g)).hom.app (DerivedCategory.Qh.obj J))\n    (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙\n        affineGlobalSections (𝟙 (Spec R)) ≅\n      affineGlobalSections (𝟙 (Spec B)) ⋙\n        ModuleCat.restrictScalars.{u} (affineBaseRingMap g))\n    (r : schemeDerivedDirectImage g ⋙ affineDerivedGlobalSections (𝟙 (Spec R)) ≅\n      affineDerivedGlobalSections (𝟙 (Spec B)) ⋙\n        (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory)\n    (hv : ∀ (M : SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))\n        (x : (affineGlobalSections (𝟙 (Spec B))).obj M), (v.hom.app M) x = x)\n    (hr : ∀ J : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace)) (ComplexShape.up ℤ),\n      (Functor.rightDerivedFunctorCompUnit\n          (RingedSpace.moduleDirectImage g.toLRSHom.toShHom)\n          (affineGlobalSections (𝟙 (Spec R)))).app J ≫\n        (affineGlobalSectionsDerivedIso (𝟙 (Spec R))).hom.app\n          ((schemeDerivedDirectImage g).obj (DerivedCategory.Qh.obj J)) ≫\n        r.hom.app (DerivedCategory.Qh.obj J) =\n      DerivedCategory.Qh.map ((v.hom.mapHomotopyCategory (ComplexShape.up ℤ)).app J) ≫\n        (affineGlobalSections (𝟙 (Spec B)) ⋙\n          ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).rightDerivedFunctorUnit.app J ≫\n        (Functor.rightDerivedFunctorCompMapDerivedCategoryIso\n            (affineGlobalSections (𝟙 (Spec B)))\n            (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)) ≪≫\n          Functor.isoWhiskerRight (affineGlobalSectionsDerivedIso (𝟙 (Spec B)))\n            (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory).hom.app\n          (DerivedCategory.Qh.obj J))\n    (E : schemeDerivedCategory X)\n    (s : RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom ⋙\n        affineGlobalSections f ≅\n      affineGlobalSections (pullback.snd f g) ⋙\n        ModuleCat.restrictScalars.{u} (affineBaseRingMap g))\n    (c : schemeDerivedDirectImage (pullback.fst f g) ⋙\n        affineDerivedGlobalSections f ≅\n      affineDerivedGlobalSections (pullback.snd f g) ⋙\n        (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory)\n    (hs : ∀ (F : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))\n        (x : (affineGlobalSections (pullback.snd f g)).obj F),\n      (s.hom.app F) x = x)\n    (hc : ∀ J : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) (ComplexShape.up ℤ),\n      (Functor.rightDerivedFunctorCompUnit\n          (RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom)\n          (affineGlobalSections f)).app J ≫\n        (affineGlobalSectionsDerivedIso f).hom.app\n          ((schemeDerivedDirectImage (pullback.fst f g)).obj (DerivedCategory.Qh.obj J)) ≫\n        c.hom.app (DerivedCategory.Qh.obj J) =\n      DerivedCategory.Qh.map ((s.hom.mapHomotopyCategory (ComplexShape.up ℤ)).app J) ≫\n        (affineGlobalSections (pullback.snd f g) ⋙\n          ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).rightDerivedFunctorUnit.app J ≫\n        (affineBaseChangedSectionsDerivedIso f g).hom.app (DerivedCategory.Qh.obj J)) :\n    (affineDerivedGlobalSections (𝟙 (Spec R))).map\n        ((canonicalPullbackAdjunction g).unit.app ((schemeDerivedDirectImage f).obj E)) ≫\n      r.hom.app ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)) ≫\n      (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory.map\n        ((affineDerivedGlobalSections (𝟙 (Spec B))).map\n            (schemeDerivedBaseChangeMap f (pullback.snd f g) g\n              (pullback.fst f g) pullback.condition E) ≫\n          d.hom.app ((derivedPullback (pullback.fst f g)).obj E)) =\n      b.hom.app E ≫ (affineDerivedGlobalSections f).map\n          ((canonicalPullbackAdjunction (pullback.fst f g)).unit.app E) ≫\n        c.hom.app ((derivedPullback (pullback.fst f g)).obj E)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T100024-L-2467844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T100024-L-2467844",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
