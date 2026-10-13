@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-fp-local-descent-datum",
+ "kind": "statement",
+ "title": "Finite-stage local module descent data",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathrm{CommRing}$ a functor with Noetherian rings $R_k$, and $c$ a limit cone of $R^{\\mathrm{op}}\\circ\\operatorname{Spec}$ with affine vertex $S$. Fix $i\\in I$ and a quasi-compact, quasi-separated, locally finitely presented morphism $f:X_i\\to\\operatorname{Spec}(R_i)$ [def-pc-scheme]. Put $X=X_i\\times_{\\operatorname{Spec}(R_i)} S$, and $X_j=X_i\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_j)$ for $j\\geq i$ [def-pc-base-change]. For a finitely presented quasi-coherent module $M$ on $X$ [pqf-def-coherent], there are $j\\geq i$, a finite affine open cover $u_a:U_a\\to X_j$, and a module descent datum $D$ on that cover (modules $D_a$, compatible invertible overlap maps satisfying the cocycle), with each $D_a$ finitely presented and quasi-coherent, such that pulling back $D$ along $p:X\\to X_j$ yields a descent datum isomorphic to the restriction datum of $M$ on the pulled-back cover. No global module on $X_j$ is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, first proof: finite affine covers and overlap compatibility"
+ },
+ "proof": [
+  {
+   "text": "On a finite affine cover of Xi (or Xj for fixed models), identify base changes of coordinate rings with tensor products and the limit ring with their directed colimit. Apply the affine finite-presentation descent theorem to the local objects or maps. For a preorder pass to its partial-order quotient; the fixed i provides nonemptiness. Lift finite generators, relation matrices, and maps at a common later stage.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For module data, cover pairwise, refinement, and triple overlaps by finitely many affines. Lift comparisons and inverses; use the equality clause to descend inverse identities, refinement agreement, and cocycles. Glue comparisons on each overlap to define D and its pullback isomorphism to the restriction of M. Only local modules and transitions are built.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof; details of the finite overlap construction expanded by H3 following the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible local finitely presented modules and local morphisms descend along inverse limits on finite affine covers",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.modulesPseudofunctor",
+   "results": "Unknown identifier; no result obtained.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*descent.*datum|descent.*datum.*finitePresentation",
+   "results": "No hits. Direct source inspection found Zariski gluing and finite-presentation locality, but not the finite-stage local lifting construction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: finite-presentation and differential data descent (01ZR); local finite-stage data before Zariski gluing",
+   "via": [
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalDescentDatum",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalDescentDatum.lean",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_local_descent_datum",
+  "statement": "theorem exists_finitePresentation_local_descent_datum {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (M : (pullback f (c.π.app (op i))).Modules) (hM : M.IsFinitePresentation) (hMq : M.IsQuasicoherent) : ∃ (j : I) (hij : i ≤ j) (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u}), let p := baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)) Finite U.I₀ ∧ (∀ a, IsAffine (U.X a)) ∧ ∃ D : modulesPseudofunctor.DescentData U.f, (∀ a, (D.obj a : (U.X a).Modules).IsFinitePresentation) ∧ (∀ a, (D.obj a : (U.X a).Modules).IsQuasicoherent) ∧ Nonempty ((Pseudofunctor.DescentData.pullFunctor modulesPseudofunctor (f := U.f) (f' := (U.pullback₁ p).f) (p := p) (α := fun a ↦ a) (p' := fun a ↦ U.pullbackHom p a) (fun a ↦ U.pullbackHom_map p a)).obj D ≅ (modulesPseudofunctor.toDescentData (U.pullback₁ p).f).obj M)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1df3a",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100005-L-2462316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1df3a",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100005-L-2462316",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered statements and proofs with their nodes and Stacks 01ZR/05N7; verified original-signature equivalence, four modules and both direct importers compile cleanly, and axioms are permitted with the two documented theorem holes."
+ }
+}

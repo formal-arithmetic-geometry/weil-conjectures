@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-fp-local-map-datum",
+ "kind": "statement",
+ "title": "Finite-stage compatible local maps between fixed models",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathrm{CommRing}$ a functor with Noetherian rings $R_k$, and $c$ a limit cone of $R^{\\mathrm{op}}\\circ\\operatorname{Spec}$ with affine vertex $S$. Fix $i\\in I$ and a quasi-compact, quasi-separated, locally finitely presented morphism $f:X_i\\to\\operatorname{Spec}(R_i)$ [def-pc-scheme]. Put $X=X_i\\times_{\\operatorname{Spec}(R_i)} S$, and $X_j=X_i\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_j)$ for $j\\geq i$ [def-pc-base-change]. Fix $j\\geq i$, finitely presented quasi-coherent modules $F_j,G_j$ on $X_j$ [pqf-def-coherent], and a map $\\varphi:(F_j)_X\\to(G_j)_X$. There are $j'\\geq j$, a finite affine open cover $U$ of $X_{j'}$, and a morphism $\\psi$ between the restriction descent data of $(F_j)_{j'}$ and $(G_j)_{j'}$. Write $A$ for pullback from $X_j$ to $X_{j'}$, $B$ for pullback from $X_{j'}$ to $X$, $e$ for the canonical comparison from direct pullback to $A\\circ B$ [def-pc-tensor-pullback-composition-iso], $Q$ for restriction to $U$ and $Q_X$ for restriction to its pullback cover on $X$. For every global $\\alpha:A F_j\\to A G_j$ whose restriction datum is $\\psi$, one has $Q_X(e_{F_j}\\circ B(\\alpha))=Q_X(\\varphi\\circ e_{G_j})$ componentwise on each member of the pulled-back cover (Lean composition order). This specifies compatible local maps and their recovery of $\\varphi$; it does not construct $\\alpha$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, first proof: finite affine covers and overlap compatibility"
+ },
+ "proof": [
+  {
+   "text": "On a finite affine cover of Xi (or Xj for fixed models), identify base changes of coordinate rings with tensor products and the limit ring with their directed colimit. Apply the affine finite-presentation descent theorem to the local objects or maps. For a preorder pass to its partial-order quotient; the fixed i provides nonemptiness. Lift finite generators, relation matrices, and maps at a common later stage.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For map data, cover pairwise overlaps by finitely many affines and apply the equality clause so local lifted maps agree. Pass to one later stage for this finite collection. Form their descent-data morphism psi. On the limit cover their components agree with phi through the canonical comparison, giving the asserted equality for any alpha with components psi. Only the local maps and compatibility equations are constructed.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof; details of the finite overlap construction expanded by H3 following the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible local finitely presented modules and local morphisms descend along inverse limits on finite affine covers",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.modulesPseudofunctor",
+   "results": "Unknown identifier; no result obtained.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*descent.*datum|descent.*datum.*finitePresentation",
+   "results": "No hits. Direct source inspection found Zariski gluing and finite-presentation locality, but not the finite-stage local lifting construction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: finite-presentation and differential data descent (01ZR); local finite-stage data before Zariski gluing",
+   "via": [
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalMapDatum.lean",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_local_map_datum",
+  "statement": "theorem exists_finitePresentation_local_map_datum {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Fj.IsFinitePresentation → Fj.IsQuasicoherent → Gj.IsFinitePresentation → Gj.IsQuasicoherent → ∀ φ : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Gj, ∃ (j' : I) (hjj' : j ≤ j'), let A := Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) let B := Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op)) ∃ e : Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)) ≅ A ⋙ B, e = Scheme.Modules.tensorPullbackCompositionIso (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) (by rw [← baseChangeMap_comp] congr 1 ext simpa using c.w (homOfLE hjj').op) ∧ ∃ U : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjj'))))).OpenCover.{u}, Finite U.I₀ ∧ (∀ a, IsAffine (U.X a)) ∧ let Q := modulesPseudofunctor.toDescentData U.f let V := U.pullback₁ (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) ∃ ψ : Q.obj (A.obj Fj) ⟶ Q.obj (A.obj Gj), ∀ α : A.obj Fj ⟶ A.obj Gj, Q.map α = ψ → ∀ a, (Scheme.Modules.pullback (V.f a)).map (e.hom.app Fj ≫ B.map α) = (Scheme.Modules.pullback (V.f a)).map (φ ≫ e.hom.app Gj))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1df3a",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100005-L-2462316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1df3a",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100005-L-2462316",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered statements and proofs with their nodes and Stacks 01ZR/05N7; verified original-signature equivalence, four modules and both direct importers compile cleanly, and axioms are permitted with the two documented theorem holes."
+ }
+}

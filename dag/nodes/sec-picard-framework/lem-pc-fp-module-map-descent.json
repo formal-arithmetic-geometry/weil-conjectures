@@ -24,44 +24,33 @@
  ],
  "proof": [
   {
-   "text": "When X_i is affine, every X_j and X are affine as well: write X_i=Spec(B_i), X_j=Spec(B_j) with B_j=B_i\\otimes_{R_i}R_j, and X=Spec(B) with B=B_i\\otimes_{R_i}R; since R is the directed colimit of the R_j (S=Spec(R)=\\varprojlim Spec(R_j)) and tensor product commutes with directed colimits, B is the directed colimit of the B_j. A finitely presented quasi-coherent module on an affine scheme is the sheaf associated to a finitely presented module, maps of quasi-coherent modules are maps of the modules, and pullback is extension of scalars. Thus the module, map, and equality assertions are exactly the affine ring statement [lem-pc-fp-module-map-descent-affine]. The Noetherian hypothesis on the R_i is not used anywhere in this proof.",
+   "text": "Construct compatible finitely presented quasi-coherent local modules at a finite stage using lem-pc-fp-local-descent-datum. Apply effective quasi-coherent descent and locality of finite presentation on its finite affine open cover (the Zariski special case of lem-pc-fpqc-descent). Pull back the gluing isomorphism and use the Mathlib toDescentDataCompPullFunctorIso. Full faithfulness of restriction to the limit open cover recovers a global pullback isomorphism. Identify the usual pullback and the tensor pullback using uniqueness of left adjoints and lem-pc-module-pullback-adjunction.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fpqc-descent",
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, first proof (affine case)"
-   }
+   "elementary": false
   },
   {
-   "text": "For general X_i, which is quasi-compact and quasi-separated because it is finitely presented over the quasi-compact, quasi-separated S_i, choose a finite affine open cover (U_a)_a of X_i; its base changes cover X_j and X, and each (U_a)_j, (U_a)_X is affine. Since X_i is quasi-separated, every pairwise intersection U_a\\cap U_b, every triple intersection U_a\\cap U_b\\cap U_c, and every intersection of two affine opens of X_i is quasi-compact; cover each of the finitely many such opens that occur below by finitely many affine opens of X_i. Agreement of two maps of quasi-coherent modules, and the cocycle condition, are local, so they hold on such an open as soon as they hold on each member of its finite affine cover. Module descent: apply the object clause of [lem-pc-fp-module-map-descent-affine] on each U_a to get models M_a. On each affine V_{ab,c} of the cover of U_a\\cap U_b apply the map clause to the given identification of the pullbacks of M_a and M_b and to its inverse, and the equality clause to the two composites with the identities, so it descends to an isomorphism \\theta_{ab,c}; apply the equality clause on the affines covering each V_{ab,c}\\cap V_{ab,c'} so that the \\theta_{ab,c} agree there and glue to an isomorphism \\theta_{ab} on (U_a\\cap U_b)_j; apply the equality clause on the affines covering each triple intersection so that the cocycle condition \\theta_{ac}=\\theta_{bc}\\circ\\theta_{ab} holds. Map descent: apply the map clause on each U_a and the equality clause on the affines covering each U_a\\cap U_b so the local maps agree on overlaps. All of this is finitely many applications, each holding from some stage on and preserved by further pullback; since I is directed, one common later stage j works. The descended modules and the isomorphisms \\theta_{ab} then glue (Zariski gluing of quasi-coherent sheaves) to a finitely presented quasi-coherent module on X_j, and the descended local maps glue to a map; pulling back the glued data gives the original module or map, since this holds on each (U_a)_X compatibly with the gluing data.",
+   "text": "Construct compatible local maps on a finite affine cover at one later stage using lem-pc-fp-local-map-datum. Surjectivity of restriction on morphisms (Zariski special case of lem-pc-fpqc-descent) glues these maps to alpha. Their equality with phi on the pulled-back open cover implies the required global equality by injectivity of restriction. Retain exactly the canonical conjugate comparison specified in the original statement.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fpqc-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, first proof (general case: Zariski gluing from the affine case)"
-   }
-  },
-  {
-   "text": "For clause (1), run the finite-cover construction on the given module M and retain the descended local modules and comparison isomorphisms; their glued module M_j is finitely presented and its pullback is M. For clause (2), run it simultaneously on F_j, G_j, and the given map, so the descended local maps glue to a map phi_{j'}:(F_j)_{j'}\\to(G_j)_{j'} whose pullback is phi. The identifications ((F_j)_{j'})_X\\cong(F_j)_X and ((G_j)_{j'})_X\\cong(G_j)_X are the canonical associativity identifications for iterated base change.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, statement and conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine"
+  "lem-pc-fp-local-descent-datum",
+  "lem-pc-fp-local-map-datum",
+  "lem-pc-fpqc-descent",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR"
+  "place": "Tag 01ZR, first proof, implemented as finite-stage local data followed by proved Zariski gluing; H3 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -123,7 +112,7 @@
   "module": "Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent",
   "declaration": "AlgebraicGeometry.finitePresentation_module_map_descent",
   "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationModuleMapDescent.lean",
-  "statement": "theorem finitePresentation_module_map_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : (∀ M : (pullback f (c.π.app (op i))).Modules, M.IsFinitePresentation → M.IsQuasicoherent → ∃ (j : I) (hij : i ≤ j) (Mj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Mj.IsFinitePresentation ∧ Mj.IsQuasicoherent ∧ Nonempty ((Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Mj ≅ M)) ∧ (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Fj.IsFinitePresentation → Fj.IsQuasicoherent → Gj.IsFinitePresentation → Gj.IsQuasicoherent → ∀ φ : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Gj, ∃ (j' : I) (hjj' : j ≤ j') (φj' : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).obj Gj) (e : Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)) ≅ Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) ⋙ Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))), e = (conjugateIsoEquiv ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))))).comp (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op)))))) (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))))).symm (Scheme.Modules.pushforwardComp (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))) ≪≫ Scheme.Modules.pushforwardCongr (by rw [← baseChangeMap_comp] congr 1 ext simpa using c.w (homOfLE hjj').op)) ∧ e.hom.app Fj ≫ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))).map φj' = φ ≫ e.hom.app Gj)",
+  "statement": "theorem finitePresentation_module_map_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : (∀ M : (pullback f (c.π.app (op i))).Modules, M.IsFinitePresentation → M.IsQuasicoherent → ∃ (j : I) (hij : i ≤ j) (Mj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Mj.IsFinitePresentation ∧ Mj.IsQuasicoherent ∧ Nonempty ((Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Mj ≅ M)) ∧ (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Fj.IsFinitePresentation → Fj.IsQuasicoherent → Gj.IsFinitePresentation → Gj.IsQuasicoherent → ∀ φ : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Gj, ∃ (j' : I) (hjj' : j ≤ j') (φj' : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).obj Gj) (e : Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)) ≅ Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) ⋙ Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))), e = Scheme.Modules.tensorPullbackCompositionIso (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) (by rw [← baseChangeMap_comp] congr 1 ext simpa using c.w (homOfLE hjj').op) ∧ e.hom.app Fj ≫ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))).map φj' = φ ≫ e.hom.app Gj)",
   "branch": "sheaf-dag",
   "by": "J1",
   "date": "2026-10-11",
@@ -150,5 +139,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1df3a",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100005-L-2462316",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered statements and proofs with their nodes and Stacks 01ZR/05N7; verified original-signature equivalence, four modules and both direct importers compile cleanly, and axioms are permitted with the two documented theorem holes."
  }
 }

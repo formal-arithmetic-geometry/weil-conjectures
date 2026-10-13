@@ -1,0 +1,46 @@
+# AlgebraicGeometry.finitePresentation_module_map_descent
+
+## Reason
+
+The original statement's fully expanded adjunction conjugation causes compilation
+with saved module output to exceed lcompile's 60-second limit, even in the
+unchanged original module. Single-file checking without saving output passes.
+Name this exact comparison by `Scheme.Modules.tensorPullbackCompositionIso`.
+The new definition is the identical explicit expression, with no new hypothesis
+and no changed mathematical conclusion. The equality proof parameter is proof
+irrelevant. All binders, universes, visibility, and declaration names are retained.
+This changes only the spelling of this intermediate theorem's signature.
+No `Challenge.lean` declaration changes and no target meaning changes.
+
+The item's statement needs the new name, so it publicly imports
+`Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso`. Other proof imports remain
+private. No existing dependency module is changed.
+
+## Old
+
+```lean
+theorem finitePresentation_module_map_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : (∀ M : (pullback f (c.π.app (op i))).Modules, M.IsFinitePresentation → M.IsQuasicoherent → ∃ (j : I) (hij : i ≤ j) (Mj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Mj.IsFinitePresentation ∧ Mj.IsQuasicoherent ∧ Nonempty ((Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Mj ≅ M)) ∧ (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Fj.IsFinitePresentation → Fj.IsQuasicoherent → Gj.IsFinitePresentation → Gj.IsQuasicoherent → ∀ φ : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Gj, ∃ (j' : I) (hjj' : j ≤ j') (φj' : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).obj Gj) (e : Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)) ≅ Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) ⋙ Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))), e = (conjugateIsoEquiv ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))))).comp (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op)))))) (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))))).symm (Scheme.Modules.pushforwardComp (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))) ≪≫ Scheme.Modules.pushforwardCongr (by rw [← baseChangeMap_comp] congr 1 ext simpa using c.w (homOfLE hjj').op)) ∧ e.hom.app Fj ≫ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))).map φj' = φ ≫ e.hom.app Gj)
+```
+
+## New
+
+```lean
+theorem finitePresentation_module_map_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : (∀ M : (pullback f (c.π.app (op i))).Modules, M.IsFinitePresentation → M.IsQuasicoherent → ∃ (j : I) (hij : i ≤ j) (Mj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Mj.IsFinitePresentation ∧ Mj.IsQuasicoherent ∧ Nonempty ((Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Mj ≅ M)) ∧ (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Fj.IsFinitePresentation → Fj.IsQuasicoherent → Gj.IsFinitePresentation → Gj.IsQuasicoherent → ∀ φ : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Gj, ∃ (j' : I) (hjj' : j ≤ j') (φj' : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).obj Fj ⟶ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).obj Gj) (e : Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)) ≅ Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) ⋙ Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))), e = Scheme.Modules.tensorPullbackCompositionIso (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))) (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) (by rw [← baseChangeMap_comp] congr 1 ext simpa using c.w (homOfLE hjj').op) ∧ e.hom.app Fj ≫ (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))).map φj' = φ ≫ e.hom.app Gj)
+```
+
+## Users
+
+`tools/downstream.py` lists 385 transitive downstream modules and reports only the
+item itself as a textual full-name use. A search of all Lean sources for the short
+name likewise finds only the declaration in this item. The delivery checker
+computed no downstream module mentioning the changed theorem name.
+Every existing caller can use the new type by definitional equality; no adaptation
+is necessary. This is not a mathematical statement correction.
+
+| module | group holding it | effect |
+| --- | --- | --- |
+| Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent | H3 | Only textual use is its own declaration; no callers need adaptation. |
+
+## Status
+
+landed 20261013T100005-L-2462316 2026-10-13 (merge of deliver/H3/Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent)
