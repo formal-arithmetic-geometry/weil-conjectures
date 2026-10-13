@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-sequential-colimit-derived-homology-representative",
+ "kind": "statement",
+ "title": "Sequential colimit derived cohomology has finite-stage representatives",
+ "statement": "For a commutative ring A and a sequential diagram D of arbitrary cochain complexes of A-modules [def-weil-abstract-derived-category], every element x of H^0(Q(colimit D)) is H^0(Q(colimit.ι D e))(z) for some natural number e and some element z of H^0(Q(D_e)). Colimits are those of complexes, computed degreewise [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00DB",
+  "place": "Lemma 10.8.8, homology commutes with directed colimits; applied in Tag 08DD"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Use ModuleCat.AB5, shrunk to small indexing categories, and Functor.preservesHomologyOfExact to make the module colimit functor preserve homology. Regard a diagram of short complexes as a short complex of diagrams via ShortComplex.functorEquivalence. Evaluation and colimit mapHomologyIso give the natural colimit comparison; homologyMap_mapNatTrans proves its cocone equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Taking the three adjacent terms of a complex preserves colimits by HomologicalComplex.isColimitOfEval and the corresponding ShortComplex criterion. Compose with short-complex homology and transport along HomologicalComplex.homologyFunctorIso to obtain preservation of sequential colimits by complex homology.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Concrete.isColimit_exists_rep supplies a finite-stage cohomology element. Transport through DerivedCategory.homologyFunctorFactors. Its naturality and inverse identity identify the resulting class with the image under H^0(Q(colimit.ι)). This is valid for unbounded complexes, the zero ring and the zero diagram.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "document": "https://stacks.math.columbia.edu/tag/00DB",
+  "place": "Lemma 10.8.8, homology commutes with directed colimits; applied in Tag 08DD",
+  "note": "Source read online; proof steps expand the H^0 argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every zeroth homology class of a filtered colimit of module complexes comes from a finite stage",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits commute with zeroth homology of complexes of modules and each element comes from a finite stage",
+   "results": "ModuleCat.FilteredColimits and Concrete.colimit_rep_eq_zero; generic colimit preservation, no exact derived-H^0 representative statement",
+   "date": "2026-10-13",
+   "verdict": "generic tools found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"colimit\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Cc]olimit|[Cc]olimit.*Koszul|homologyFunctor.*[Cc]olimit; local directed_colimit_homology",
+   "results": "No exact Mathlib match. Library DirectedColimitHomology proves an AddCommGrpCat statement for shape on integer pairs; adapt its fully proved short-complex argument to ModuleCat and integer cochain shape.",
+   "date": "2026-10-13",
+   "verdict": "generic proof reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenHomRestrictionSurjective",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper-flat support argument: finite representatives after taking H^0 of the Koszul Hom-complex colimit",
+   "via": [
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SequentialColimitDerivedHomologyRepresentative",
+  "file": "lean/Sheaf/Algebra/Homology/SequentialColimitDerivedHomologyRepresentative.lean",
+  "declaration": "AlgebraicGeometry.sequentialColimit_derivedHomology_representative",
+  "statement": "theorem sequentialColimit_derivedHomology_representative\n    [HasDerivedCategory.{w} (ModuleCat.{u} A)]\n    (D : ℕ ⥤ CochainComplex (ModuleCat.{u} A) ℤ) :\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0\n    ∀ x : H.obj (DerivedCategory.Q.obj (colimit D)),\n      ∃ (e : ℕ) (z : H.obj (DerivedCategory.Q.obj (D.obj e))),\n        H.map (DerivedCategory.Q.map (colimit.ι D e)) z = x",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T054235-L-448492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T054235-L-448492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

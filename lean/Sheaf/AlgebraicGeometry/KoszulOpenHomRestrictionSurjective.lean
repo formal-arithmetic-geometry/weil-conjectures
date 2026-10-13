@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison
-import Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
-import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
+import Sheaf.AlgebraicGeometry.KoszulOpenHomComparisonSquare
+import Sheaf.Algebra.Homology.SequentialColimitDerivedHomologyRepresentative
 
 /-! # Degree-zero consequences of the Koszul-to-Čech comparison
 
@@ -24,6 +24,30 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+private theorem affine_qcoh_representative
+    (A : Type uMain) [CommRing A]
+    [HasDerivedCategory.{wMain}
+      (SheafOfModules.{uMain} (moduleRings (Spec (.of A)).toRingedSpace))]
+    (E : schemeDerivedQCohCategory (Spec (.of A))) :
+    ∃ F : CochainComplex
+        (SheafOfModules.{uMain} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ,
+      (∀ n : ℤ, (F.X n).IsQuasicoherent) ∧ Nonempty (DerivedCategory.Q.obj F ≅ E.obj) := by
+  let := HasDerivedCategory.standard (ModuleCat.{uMain} A)
+  obtain ⟨e, ⟨h⟩, _⟩ := exists_affineQCohDerivedEquivalence A
+  let M := DerivedCategory.Q.objPreimage (e.inverse.obj E)
+  let F := ((koszulOpenTilde A).mapHomologicalComplex (ComplexShape.up ℤ)).obj M
+  refine ⟨F, ?_, ⟨?_⟩⟩
+  · intro n
+    change ((tilde.functor (.of A)).obj (M.X n)).IsQuasicoherent
+    exact instIsQuasicoherentOpensCarrierCarrierCommRingCatSpecOfCarrierObjModuleCatModulesFunctor _
+  · exact (h.app M).symm ≪≫
+      (schemeDerivedQCohProperty (Spec (.of A))).ι.mapIso
+        (e.functor.mapIso (DerivedCategory.Q.objObjPreimageIso (e.inverse.obj E)) ≪≫
+          e.counitIso.app E)
+
+set_option maxHeartbeats 1000000 in
+-- The repeated derived restriction expressions require extra elaboration heartbeats.
+set_option backward.isDefEq.respectTransparency false in
 /-- Every derived section on the principal-open union comes from a finite Koszul stage.
 Source: Stacks Project, Tag 08DD, proof of Proposition 36.9.5.
 (blueprint: lem-sc-koszul-open-hom-restriction-surjective)
@@ -101,6 +125,37 @@ theorem koszulOpenHom_restriction_surjective
         (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
     ∀ ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E.1,
       ∃ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ E.1), v e ≫ R.map φ = ψ := by
-  sorry
+  dsimp only
+  classical
+  let := HasDerivedCategory.standard (ModuleCat.{uMain} A)
+  obtain ⟨F, hF, ⟨i⟩⟩ := affine_qcoh_representative A E
+  let R := ((SheafOfModules.overFunctor.{uMain}
+      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{uMain}
+          ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
+        (D := SheafOfModules.{uMain}
+          (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
+  let j (e : ℕ) : R.obj (koszulOpenObject A r f e) ≅ R.obj (koszulOpenStructure A) :=
+    ⟨R.map (koszulOpenUnit A r f e), v e, hv₁ e, hv₂ e⟩
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{uMain} A) 0
+  let D := koszulCechHomDiagram A r f
+    (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)
+  let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor
+  let c := koszulCechDerivedComparison A r f F ≫ G.map i.hom
+  have : IsIso c := affine_koszul_cech_derived_comparison A r f F hF E i
+  have : IsIso (H.map c) := inferInstance
+  obtain ⟨a, b, hsquare⟩ := koszulOpenHom_comparison_square A r f E F hF i
+  intro ψ
+  let x : H.obj (DerivedCategory.Q.obj (colimit D)) := inv (H.map c) (b ψ)
+  obtain ⟨e, z, hz⟩ := sequentialColimit_derivedHomology_representative A D x
+  let φ := (a e).symm z
+  refine ⟨e, φ, b.injective ?_⟩
+  have hs := hsquare e φ (v e ≫ R.map φ) (by
+    rw [← Category.assoc, (j e).hom_inv_id, Category.id_comp])
+  rw [hs, Equiv.apply_symm_apply, hz]
+  change H.map c (inv (H.map c) (b ψ)) = b ψ
+  exact ConcreteCategory.congr_hom (IsIso.inv_hom_id (H.map c)) (b ψ)
 
 end AlgebraicGeometry

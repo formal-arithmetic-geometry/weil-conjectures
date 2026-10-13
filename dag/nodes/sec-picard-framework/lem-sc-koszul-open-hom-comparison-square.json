@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-koszul-open-hom-comparison-square",
+ "kind": "statement",
+ "title": "Degree-zero restriction square for the Koszul comparison",
+ "statement": "Let A be a commutative ring, f a finite sequence, U its principal-open union, E in D_QCoh(Spec A), and F a termwise quasi-coherent cochain complex with i:Q(F) isomorphic to E [def-pc-derived-category]. Let R be derived restriction to U [def-sc-koszul-open-system], H=H^0 on D(A), G=derived affineOpenSections(U), D the Koszul Hom-complex diagram on affineOpenSections(top)(F), and c its canonical comparison to G(E) [def-sc-koszul-cech-comparison-construction]. There are stage equivalences a_e:Hom(I_e,E) equivalent to H(Q(D_e)), and b:Hom(R(O),R(E)) equivalent to H(G(E)), such that whenever R(unit_e) composed with psi equals R(phi), b(psi)=H(c)(H(Q(colimit.ι D e))(a_e(phi))). This asserts identifications and a commuting square, not surjectivity of c or finite-stage representation.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DD",
+  "place": "Proposition 36.9.5 proof, stage derived-Hom identification; Tag 08D1 and equation 36.9.4.1 for the restriction comparison"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-sc-koszul-open-system",
+  "def-sc-koszul-cech-comparison-construction"
+ ],
+ "proof": [
+  {
+   "text": "Each extended Koszul tail is bounded above finite free, hence K-projective. Identify its Hom-complex H^0 with derived Hom and transport along the affine derived equivalence and F representing E. Compose with koszulCechHomObjIso to get stage equivalences a.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-sc-koszul-cech-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the structure object and use evaluation at 1 to identify its derived Hom with H^0 of derived global sections on U. Restriction of scalars along A to Gamma(U,O_U) identifies the underlying groups with H^0 of affineOpenSections.rightDerivedFunctor(E). This gives b.",
+   "uses": [
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The explicit cocone fraction formula evaluates a Hom cochain on the ordered exterior basis and divides by the generator product to exponent e+1, with the specified Hom-to-Cech sign. A contracting homotopy on each D(f_j), given by wedge with f_j^(-e-1) times the jth generator, shows that the inverse restricted augmentation followed by phi has these same fractions. The hypothesis R(unit_e) composed with psi equals R(phi) characterizes that composite because the localized augmentation is invertible. Apply the Cech-derived-section comparison and pass to H^0; independence under homotopy and transport along i prove the displayed square. For an empty cover and the zero ring all these objects are zero.",
+   "uses": [
+    "def-sc-koszul-cech-comparison-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-sc-koszul-cech-comparison-construction",
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "document": "https://stacks.math.columbia.edu/tag/08DD",
+  "place": "Proposition 36.9.5 proof, stage derived-Hom identification; Tag 08D1 and equation 36.9.4.1 for the restriction comparison",
+  "note": "Source read online; proof steps expand the H^0 argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms from a Koszul tail identify with zeroth Hom complex cohomology compatibly with restriction to principal opens",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zeroth cohomology of the Koszul to Cech comparison agrees with restriction of a derived morphism followed by the inverse augmentation",
+   "results": "Only group cohomology cochain comparison hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"Hom\", \"IsKProjective\"",
+   "results": "CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective and related generic tools",
+   "date": "2026-10-13",
+   "verdict": "generic stage identification tools; no restriction square"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Cc]olimit|[Cc]olimit.*Koszul in Mathlib; koszulOpenHom and restriction_surjective in both library roots",
+   "results": "No Mathlib Koszul restriction square. Existing source comparison, source stage diagram, and structure-sheaf hypercohomology declarations supply the ingredients but not the compatibility square. Blueprint searches Koszul comparison and homology colimit found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenHomRestrictionSurjective",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper-flat support argument: degree-zero Hom identifications and compatibility of Koszul-to-Cech comparison with restriction",
+   "via": [
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulOpenHomComparisonSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenHomComparisonSquare.lean",
+  "declaration": "AlgebraicGeometry.koszulOpenHom_comparison_square",
+  "statement": "theorem koszulOpenHom_comparison_square\n    (A : Type uMain) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{wMain}\n      (SheafOfModules.{uMain} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{wMain}\n      (SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]\n    [HasDerivedCategory.{wMain}\n      (SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))]\n    (E : schemeDerivedQCohCategory (Spec (.of A)))\n    [HasDerivedCategory.{vMain} (ModuleCat.{uMain} A)]\n    (F : CochainComplex\n      (SheafOfModules.{uMain} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent)\n    (i : DerivedCategory.Q.obj F ≅ E.obj) :\n    let R := ((SheafOfModules.overFunctor.{uMain}\n      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{uMain}\n          ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))\n        (D := SheafOfModules.{uMain}\n          (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))\n        (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{uMain} A) 0\n    let D := koszulCechHomDiagram A r f\n      (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)\n    let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor\n    let c := koszulCechDerivedComparison A r f F ≫ G.map i.hom\n    ∃ (a : ∀ e : ℕ, (koszulOpenObject A r f e ⟶ E.obj) ≃\n          H.obj (DerivedCategory.Q.obj (D.obj e)))\n      (b : (R.obj (koszulOpenStructure A) ⟶ R.obj E.obj) ≃ H.obj (G.obj E.obj)),\n      ∀ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ E.obj)\n        (ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E.obj),\n        R.map (koszulOpenUnit A r f e) ≫ ψ = R.map φ →\n        b ψ = H.map c (H.map (DerivedCategory.Q.map (colimit.ι D e)) (a e φ))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T054235-L-448492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T054235-L-448492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
