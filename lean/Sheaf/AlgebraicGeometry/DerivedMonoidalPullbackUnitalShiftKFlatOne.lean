@@ -12,6 +12,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.DerivedPullbackCanonicalTensorShiftOne
+import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftProperties
 
 /-! # Unital comparisons on K-flat representatives for translation by one
 
@@ -96,7 +98,27 @@ theorem derivedMonoidalPullback_unitalShift_kFlat_one
         ((tensorRight (𝟙_ (schemeDerivedCategory Y))).commShiftIso (1 : ℤ)).hom.app K ≫
             (τ.app K)⟦(1 : ℤ)⟧' =
           τ.app (K⟦(1 : ℤ)⟧) ≫ ((𝟭 (schemeDerivedCategory Y)).commShiftIso
-            (1 : ℤ)).hom.app K) := by sorry
+            (1 : ℤ)).hom.app K) := by
+  let := schemeCanonicalTensorShift Y
+  let := schemeCanonicalTensorShift Z
+  let sY : ∀ M : schemeDerivedCategory Y, (tensorRight M).CommShift ℤ :=
+    fun M => Functor.CommShift₂.commShiftFlipObj (h := .int) M
+  let sZ : ∀ M : schemeDerivedCategory Z, (tensorRight M).CommShift ℤ :=
+    fun M => Functor.CommShift₂.commShiftFlipObj (h := .int) M
+  obtain ⟨sF, hF, hδ⟩ := derivedPullback_canonicalTensorShift_one f
+  let := sF
+  have hY := schemeCanonicalTensorShift_properties Y
+  have hZ := schemeCanonicalTensorShift_properties Z
+  refine ⟨sF, sY, sZ, hF, hZ.1, ?_, ?_, hδ, hY.2⟩
+  · intro M N b P _
+    have : NatTrans.CommShift ((curriedTensor (schemeDerivedCategory Y)).flip.map b) ℤ :=
+      Functor.CommShift₂.commShift_flip_map (h := .int) b
+    exact NatTrans.shift_app_comm _ (1 : ℤ) (DerivedCategory.Q.obj P)
+  · intro M N b P _
+    have : NatTrans.CommShift ((curriedTensor (schemeDerivedCategory Z)).flip.map b) ℤ :=
+      Functor.CommShift₂.commShift_flip_map (h := .int) b
+    exact NatTrans.shift_app_comm _ (1 : ℤ) (DerivedCategory.Q.obj P)
+
 
 
 end AlgebraicGeometry
