@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import WeilConjectures.CategoryTheory.Sites.Torsor
+import Sheaf.AlgebraicGeometry.Curve.SquareZeroRelativeSectionKernel
+import Sheaf.AlgebraicGeometry.Curve.SquareZeroUnitsAdditiveKernelOfSections
 
 /-! # A square-zero closed immersion identifies its unit and additive kernels.
 
@@ -43,6 +44,9 @@ kernels are zero. Over the empty scheme all section groups are trivial. -/
 theorem nonempty_squareZeroRelativeUnitsAdditiveKernelIso (X : Scheme.{u})
     (I J : X.IdealSheafData) (hJI : J ≤ I) (hII : I * I ≤ J) :
     Nonempty (kernel (gmSheafToLowerStarGmSheaf (IdealSheafData.inclusion hJI)) ≅
-      kernel (etaleAdditiveSheafToLowerStar (IdealSheafData.inclusion hJI))) := by sorry
+      kernel (etaleAdditiveSheafToLowerStar (IdealSheafData.inclusion hJI))) := by
+  apply nonempty_unitsAdditiveKernelIso_of_sections (IdealSheafData.inclusion hJI)
+  intro V a b ha hb
+  exact squareZeroRelativeSectionKernel X I J hJI hII V a b ha hb
 
 end AlgebraicGeometry.Scheme

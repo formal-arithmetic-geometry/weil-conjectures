@@ -1,0 +1,163 @@
+{
+ "id": "lem-sc-square-zero-relative-units-additive-kernel-sections",
+ "kind": "statement",
+ "title": "Sectionwise square-zero unit-additive kernel comparison",
+ "statement": "Let g: X → Y be any morphism of schemes [def-pc-scheme]. Assume that on every etale Y-object V, any two sections of the structure ring restricting to zero on V ×_Y X have zero product. Then the kernel of unit restriction [def-sc-gm-torsor] is isomorphic to the kernel of additive restriction [def-sc-etale-additive-structure-restriction], as abelian sheaves on Y with the same coefficient universe lift. No ideal sheaves or closed immersion are assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; extracted from the image comparison proof as SquareZeroRelativeUnitsAdditiveKernel"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-gm-torsor",
+  "def-sc-etale-additive-structure-restriction"
+ ],
+ "proof": [
+  {
+   "text": "For a unit-kernel section u, ring restriction sends u-1 to zero. The square-zero section hypothesis applied to u-1 and v-1 implies uv-1=(u-1)+(v-1). Thus u ↦ u-1 is an additive map from the unit kernel to the additive structure sheaf. Ring-map naturality gives a sheaf morphism, and its composite with additive restriction is zero, so the categorical kernel universal property factors it into the additive kernel.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "def-sc-etale-additive-structure-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an additive-kernel section a, construct the unit with value 1+a and inverse 1-a; both inverse identities follow from a*a=0. The equality a*b=0 gives (1+a)(1+b)=1+a+b, hence an additive map into the units written additively. Ring restriction commutes with this formula, and its image restricts to 1, so it factors through the unit kernel. The two composites are identities after the monic kernel inclusions, by (1+a)-1=a and 1+(u-1)=u. All formulas include the coefficient ULift and hold over the zero ring.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "def-sc-etale-additive-structure-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-torsor",
+  "def-sc-etale-additive-structure-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim: elementary sectionwise comparison, formalized with categorical kernel lifts in the second reading"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ideal with square zero identifies units congruent to one with the additive ideal, naturally in commutative rings",
+   "results": "Hits: TrivSqZeroExt.isUnit_or_isNilpotent, TrivSqZeroExt.isUnit_or_isNilpotent_of_isMaximal_isNilpotent, IsNilpotent.isUnit_quotient_mk_iff, TrivSqZeroExt.isUnit_iff_isUnit_fst, TrivSqZeroExt.isUnit_inl_iff, Ideal.toCotangent_eq, factorPowSucc.isUnit_of_isUnit_image, TrivSqZeroExt.isUnit_inr_iff. No result states the relative etale kernel comparison. Local quotient and nilpotent unit infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no match for the sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent.isUnit_add_one",
+   "results": "Hits: IsNilpotent.isUnit_add_one. No result states the relative etale kernel comparison. Local quotient and nilpotent unit infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no match for the sheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "image.*kernel|kernel.*image",
+   "results": "Hits: Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/FinitelyPresentedGroup.lean, Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean, Mathlib/GroupTheory/Congruence/Basic.lean, Mathlib/Algebra/Homology/Opposite.lean. No result states the relative etale kernel comparison. Local quotient and nilpotent unit infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no match for the sheaf comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For nested ideals J contained in I the image of I in B/J is the kernel of B/J to B/I; nilpotent units lift and square zero unit kernels are additive kernels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "kernelIsoKer|kernel.lift",
+   "results": "Mathlib/Algebra/Category/Grp/Limits.lean, Mathlib/Algebra/Category/Grp/Limits.lean, Mathlib/Algebra/Category/Grp/Limits.lean, Mathlib/Algebra/Category/Grp/Limits.lean, Mathlib/Algebra/Category/Grp/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Subobject.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-13",
+   "verdict": "partial infrastructure; no duplicate of this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural equivalence units mapping to one and additive kernel of a ring homomorphism with square zero kernel",
+   "results": "TrivSqZeroExt.isUnit_inl_iff, TrivSqZeroExt.isUnit_iff_isUnit_fst, TrivSqZeroExt.isUnit_or_isNilpotent, TrivSqZeroExt.invertibleEquivInvertibleFst, TrivSqZeroExt.isUnit_inr_iff, TrivSqZeroExt.invertibleOfInvertibleFst, TrivSqZeroExt.isUnit_inv_iff, TrivSqZeroExt.invertibleFstOfInvertible",
+   "date": "2026-10-13",
+   "verdict": "partial infrastructure; no duplicate of this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel.lift",
+   "results": "CategoryTheory.Limits.kernel.lift, CategoryTheory.Limits.kernel.lift_mono, CategoryTheory.Limits.kernel.lift_ι, CategoryTheory.Limits.kernel.lift_ι_assoc, CategoryTheory.Limits.kernelCompMono_inv, CategoryTheory.Limits.kernel.lift_zero, CategoryTheory.Limits.kernelCompMono_hom, CategoryTheory.Limits.kernelIsIsoComp_inv",
+   "date": "2026-10-13",
+   "verdict": "partial infrastructure; no duplicate of this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "square zero closed immersion is stable under base change and functions vanishing on closed subscheme have zero product",
+   "results": "AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.Spec_iff, AlgebraicGeometry.IsClosedImmersion.lift_fac, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.instIsClosedImmersionInclusion, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι",
+   "date": "2026-10-13",
+   "verdict": "partial infrastructure; no duplicate of this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.inclusion",
+   "results": "service unavailable: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.SquareZeroRelativeUnitsAdditiveKernel",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: sectionwise square-zero comparison"
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.SquareZeroUnitsAdditiveKernelOfSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SquareZeroUnitsAdditiveKernelOfSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_unitsAdditiveKernelIso_of_sections",
+  "statement": "theorem nonempty_unitsAdditiveKernelIso_of_sections {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (hsq : ∀ (V : Y.Etaleᵒᵖ) (a b : Y.etaleStructurePresheaf.obj V),\n      (etaleStructurePresheafToPullback g).app V a = 0 →\n      (etaleStructurePresheafToPullback g).app V b = 0 → a * b = 0) :\n    Nonempty (kernel (gmSheafToLowerStarGmSheaf g) ≅\n      kernel (etaleAdditiveSheafToLowerStar g))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T000044-L-2231403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T000044-L-2231403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
