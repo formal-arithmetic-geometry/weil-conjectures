@@ -8,11 +8,8 @@ module
 public import Sheaf.RingTheory.JapaneseDomain
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
-import Sheaf.RingTheory.IsN2OfFiniteExtension
-import Sheaf.RingTheory.N2AscendsFiniteDomainExtension
-import Sheaf.RingTheory.PowerSeriesNormalDomain
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
-import Sheaf.RingTheory.TateN2CompletePrincipal
+import Sheaf.RingTheory.PowerSeriesN2Aux
+import Mathlib.RingTheory.PowerSeries.Ideal
 
 /-!
 # Power series over a Japanese domain
@@ -55,6 +52,6 @@ theorem noetherian_domain_isN2 (R : Type u) [CommRing R] [IsDomain R]
     IsNoetherianRing (PowerSeries R) ∧
       IsDomain (PowerSeries R) ∧
       IsN2 (PowerSeries R) (FractionRing (PowerSeries R)) := by
-  sorry
+  exact ⟨inferInstance, inferInstance, isN2_power_series R hR⟩
 
 end PowerSeries
