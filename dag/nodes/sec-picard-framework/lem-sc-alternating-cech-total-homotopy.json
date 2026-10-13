@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-alternating-cech-total-homotopy",
+ "kind": "statement",
+ "title": "Finite Čech totalization preserves coefficient homotopies",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $r\\geq0$ and $U:\\operatorname{Fin}(r)\\to X_{\\mathrm{open}}$ any family, without a covering assumption. For integer-indexed complexes $K,L$ of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules, def-weil-sheaf-of-modules-category] and cochain maps $f,g:K\\to L$, a cochain homotopy $h:f\\sim g$ induces a cochain homotopy $T_U(f)\\sim T_U(g)$ for the actual total functor of [def-sc-alternating-cech-total-complex].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, proof: functoriality verification; parent Step 3, signed total homotopy calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof": [
+  {
+   "text": "The Lean proof first proves the generic assertion for an additive functor A from a preadditive category to integer cochain complexes. On the (p,q) summand define H using p.negOnePow times the p component of A(h from q to q-1), followed by the target total summand inclusion. Assemble by totalDesc. Off degree m=n-1 the summand inclusion is zero by p+(q-1) != m.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Check the homotopy equation after each total inclusion, using total.hom_ext. Expand both total differentials into D1 and D2. The horizontal terms cancel by naturality of A(h) and negOnePow_succ. The vertical sign squares to one by Int.units_mul_self. Apply A to the original coefficient homotopy equation, use its additivity and functoriality, and conclude by additive-group normalization. Specialize A to alternatingCechModuleFunctor U. This proof is fully closed in Lean, including negative indices and the empty family.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1; explicit Lean reduction by T2 of parent proof Step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite alternating Cech augmentation of a K injective complex is a quasi isomorphism",
+   "results": "{\"t\": \"2026-10-13T07:31:25Z\", \"tool\": \"leanfinder\", \"query\": \"Finite alternating Cech augmentation of a K injective complex is a quasi isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"ChainComplex.quasiIsoAt₀_iff\"], \"digest\": \"3a2d397c8c2d2191\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv",
+   "results": "{\"t\": \"2026-10-13T07:32:09Z\", \"tool\": \"loogle\", \"query\": \"HomotopyEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopyEquiv.refl\", \"HomotopyEquiv.instInhabited\", \"HomotopyEquiv\", \"HomotopyEquiv.symm\", \"HomotopyEquiv.homotopyEquivalences_hom\", \"HomotopyEquiv.homotopyEquivalences_inv\", \"HomotopyEquiv.ofIso\", \"HomotopyEquiv.trans\"], \"digest\": \"f4fb88dc21152cbf\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(quasiIso|KInjective)|(quasiIso|KInjective).*cech",
+   "results": "{\"t\": \"2026-10-13T07:32:10Z\", \"tool\": \"grep\", \"query\": \"cech.*(quasiIso|KInjective)|(quasiIso|KInjective).*cech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cover alternating Cech augmentation for an unbounded complex of injective sheaves",
+   "results": "{\"t\": \"2026-10-13T07:42:10Z\", \"tool\": \"leanfinder\", \"query\": \"Finite cover alternating Cech augmentation for an unbounded complex of injective sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b.I\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.cm5b.I_X\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CochainComplex.cm5b\"], \"digest\": \"d2ce9679b50a64cc\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total.map",
+   "results": "{\"t\": \"2026-10-13T07:42:11Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex₂.total.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomologicalComplex₂.total.map\", \"HomologicalComplex₂.total.map_id\", \"HomologicalComplex₂.totalFunctor_map\", \"HomologicalComplex₂.total.mapIso_hom\", \"HomologicalComplex₂.total.mapIso_inv\", \"HomologicalComplex₂.total.forget_map\", \"HomologicalComplex₂.total.map_comp\", \"HomologicalComplex₂.ιTotalOrZero_map\"], \"digest\": \"8500d55458d7609f\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "total.*[Hh]omotopy|[Hh]omotopy.*total",
+   "results": "{\"t\": \"2026-10-13T07:42:11Z\", \"tool\": \"grep\", \"query\": \"total.*[Hh]omotopy|[Hh]omotopy.*total\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"9ea5b45f0e9eb4ab\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Totalization of double complexes preserves homotopies in the coefficient complex",
+   "results": "{\"t\": \"2026-10-13T07:42:12Z\", \"tool\": \"leansearch\", \"query\": \"Totalization of double complexes preserves homotopies in the coefficient complex\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KInjectiveAlternatingCechAugmentationQuasiIso",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: comparison of the alternating Cech complex with derived sections on the principal-open cover; Cohomology, Lemma 08C1, proof using 01EP and alternating comparison; parent proof Steps 4--5; parent augmentation Step 3, homotopy preservation",
+   "via": [
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-koszul-cech-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechTotalHomotopy",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechTotalHomotopy.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechTotal_map_homotopy",
+  "statement": "theorem alternatingCechTotal_map_homotopy\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens)\n    {K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}\n    {f g : K ⟶ L} (h : Homotopy f g) :\n    Nonempty (Homotopy ((alternatingCechTotalFunctor U).map f)\n      ((alternatingCechTotalFunctor U).map g))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T100134-L-2489512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T100134-L-2489512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

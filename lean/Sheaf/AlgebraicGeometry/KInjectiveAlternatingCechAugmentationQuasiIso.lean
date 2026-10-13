@@ -6,6 +6,9 @@ Authors: SHEAF group D3
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
+import Sheaf.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmentation
+import Sheaf.AlgebraicGeometry.AlternatingCechTotalHomotopy
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import Sheaf.AlgebraicGeometry.AlternatingCechComputes
 import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
@@ -48,6 +51,46 @@ theorem kInjective_alternatingCech_augmentation_quasiIso
     (X : Scheme.{u}) (r : ℕ) (U : Fin r → X.Opens) (hU : iSup U = ⊤)
     (J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     [J.IsKInjective] :
-    QuasiIso ((alternatingCechAugmentation U).app J) := by sorry
+    QuasiIso ((alternatingCechAugmentation U).app J) := by
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let I := (CochainComplex.kInjectiveResolutionFunctor.{u} C).obj J
+  let j : J ⟶ I := (CochainComplex.toKInjectiveResolution.{u} C).app J
+  have hj : QuasiIso j :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} C J).2
+  have : I.IsKInjective := inferInstance
+  obtain ⟨e, he⟩ := (CochainComplex.IsKInjective.quasiIso_iff j).mp hj
+  let S := (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  let T := alternatingCechTotalFunctor U
+  have hS : QuasiIso (S.map j) := by
+    rw [← he]
+    exact (RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomotopyEquiv e
+      |>.quasiIso_hom
+  have hT : QuasiIso (T.map j) := by
+    obtain ⟨h₁⟩ := alternatingCechTotal_map_homotopy U e.homotopyHomInvId
+    obtain ⟨h₂⟩ := alternatingCechTotal_map_homotopy U e.homotopyInvHomId
+    change Homotopy (T.map (e.hom ≫ e.inv)) (T.map (𝟙 J)) at h₁
+    change Homotopy (T.map (e.inv ≫ e.hom)) (T.map (𝟙 I)) at h₂
+    let eT : HomotopyEquiv (T.obj J) (T.obj I) :=
+      { hom := T.map e.hom
+        inv := T.map e.inv
+        homotopyHomInvId := by
+          rw [T.map_comp, T.map_id] at h₁
+          exact h₁
+        homotopyInvHomId := by
+          rw [T.map_comp, T.map_id] at h₂
+          exact h₂ }
+    rw [← he]
+    exact eT.quasiIso_hom
+  have hI : QuasiIso ((alternatingCechAugmentation U).app I) :=
+    injectiveTerms_alternatingCech_augmentation_quasiIso X r U hU I
+      (fun n ↦ inferInstance)
+  have hcomp : QuasiIso
+      (((alternatingCechAugmentation U).app J) ≫ T.map j) := by
+    rw [← (alternatingCechAugmentation U).naturality j]
+    change QuasiIso (S.map j ≫ (alternatingCechAugmentation U).app I)
+    infer_instance
+  exact (quasiIso_iff_comp_right ((alternatingCechAugmentation U).app J) (T.map j)).mp
+    hcomp
 
 end AlgebraicGeometry

@@ -1,0 +1,150 @@
+{
+ "id": "lem-sc-injective-terms-alternating-cech-augmentation",
+ "kind": "statement",
+ "title": "Finite-cover augmentation for unbounded complexes with injective terms",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $r\\geq0$, and $U:\\operatorname{Fin}(r)\\to X_{\\mathrm{open}}$ a family with $\\bigcup_iU_i=X$. Let $I$ be an arbitrary integer-indexed cochain complex of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules, def-weil-sheaf-of-modules-category] whose terms are injective [def-sp-injective-resolutions]. The actual section-to-total augmentation $\\Gamma(X,I)\\to T_U(I)$ of [def-sc-alternating-cech-total-complex] is a quasi-isomorphism. No boundedness or K-injectivity assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, proof: first paragraph using Tags 01EP and 01FM; parent Steps 1--2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof": [
+  {
+   "text": "For each integer degree, use injective module Cech acyclicity and the ordered-to-increasing comparison to obtain exact positive alternating row cohomology. In degree zero, the sheaf gluing axiom says that restrictions of global sections identify with the kernel; injectivity follows from separatedness. Forgetting global-ring scalars detects exactness. The comparison restricts to the actual increasing tuples and preserves the degree-zero augmentation.",
+   "uses": [
+    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+    "lem-pc-alternating-cech-computes",
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone is the total of these augmented exact rows, with the usual cone shift and signs. There are only columns -1 through r-1 because increasing (p+1)-tuples in Fin r are empty for p>=r. For a total cocycle, lift its highest Cech component horizontally, subtract the total boundary, and repeat toward smaller Cech degree. The vertical part changes only the preceding column. At column -1 augmentation injectivity forces the remainder to vanish. The finite number of columns makes this chase terminate with no vertical bound. For r=0 the covering scheme is empty; all section modules vanish. Hence the cone is acyclic and the augmentation is a quasi-isomorphism.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "lem-pc-alternating-cech-computes",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1; explicit Lean reduction by T2 of parent proof Steps 1--2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite alternating Cech augmentation of a K injective complex is a quasi isomorphism",
+   "results": "{\"t\": \"2026-10-13T07:31:25Z\", \"tool\": \"leanfinder\", \"query\": \"Finite alternating Cech augmentation of a K injective complex is a quasi isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"ChainComplex.quasiIsoAt₀_iff\"], \"digest\": \"3a2d397c8c2d2191\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv",
+   "results": "{\"t\": \"2026-10-13T07:32:09Z\", \"tool\": \"loogle\", \"query\": \"HomotopyEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopyEquiv.refl\", \"HomotopyEquiv.instInhabited\", \"HomotopyEquiv\", \"HomotopyEquiv.symm\", \"HomotopyEquiv.homotopyEquivalences_hom\", \"HomotopyEquiv.homotopyEquivalences_inv\", \"HomotopyEquiv.ofIso\", \"HomotopyEquiv.trans\"], \"digest\": \"f4fb88dc21152cbf\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(quasiIso|KInjective)|(quasiIso|KInjective).*cech",
+   "results": "{\"t\": \"2026-10-13T07:32:10Z\", \"tool\": \"grep\", \"query\": \"cech.*(quasiIso|KInjective)|(quasiIso|KInjective).*cech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cover alternating Cech augmentation for an unbounded complex of injective sheaves",
+   "results": "{\"t\": \"2026-10-13T07:42:10Z\", \"tool\": \"leanfinder\", \"query\": \"Finite cover alternating Cech augmentation for an unbounded complex of injective sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b.I\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.cm5b.I_X\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CochainComplex.cm5b\"], \"digest\": \"d2ce9679b50a64cc\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total.map",
+   "results": "{\"t\": \"2026-10-13T07:42:11Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex₂.total.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomologicalComplex₂.total.map\", \"HomologicalComplex₂.total.map_id\", \"HomologicalComplex₂.totalFunctor_map\", \"HomologicalComplex₂.total.mapIso_hom\", \"HomologicalComplex₂.total.mapIso_inv\", \"HomologicalComplex₂.total.forget_map\", \"HomologicalComplex₂.total.map_comp\", \"HomologicalComplex₂.ιTotalOrZero_map\"], \"digest\": \"8500d55458d7609f\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "total.*[Hh]omotopy|[Hh]omotopy.*total",
+   "results": "{\"t\": \"2026-10-13T07:42:11Z\", \"tool\": \"grep\", \"query\": \"total.*[Hh]omotopy|[Hh]omotopy.*total\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"9ea5b45f0e9eb4ab\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact match: results supply general homotopy and totalization APIs, not either stated Čech assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Totalization of double complexes preserves homotopies in the coefficient complex",
+   "results": "{\"t\": \"2026-10-13T07:42:12Z\", \"tool\": \"leansearch\", \"query\": \"Totalization of double complexes preserves homotopies in the coefficient complex\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KInjectiveAlternatingCechAugmentationQuasiIso",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: comparison of the alternating Cech complex with derived sections on the principal-open cover; Cohomology, Lemma 08C1, proof using 01EP and alternating comparison; parent proof Steps 4--5; parent augmentation Steps 1--2, injective-term finite-column case",
+   "via": [
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-koszul-cech-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveTermsAlternatingCechAugmentation.lean",
+  "declaration": "AlgebraicGeometry.injectiveTerms_alternatingCech_augmentation_quasiIso",
+  "statement": "theorem injectiveTerms_alternatingCech_augmentation_quasiIso\n    (X : Scheme.{u}) (r : ℕ) (U : Fin r → X.Opens) (hU : iSup U = ⊤)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hI : ∀ n : ℤ, Injective (I.X n)) :\n    QuasiIso ((alternatingCechAugmentation U).app I)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T100134-L-2489512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T100134-L-2489512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
