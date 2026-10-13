@@ -254,6 +254,107 @@ lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar
     NatTrans.mapHomologicalComplex_app_f]
   exact h
 
+set_option hygiene false in
+/-- Derived extension of scalars on `X`. -/
+local notation "Ψ[" X "]" => L(sheafExtendScalars (algebraMap R S) X)
+
+set_option hygiene false in
+/-- The derived tensor product with `S_X`. -/
+local notation "𝓣[" X "]" => L(tensorRight (sheafRestrictScalarsUnit R S X))
+
+set_option hygiene false in
+/-- The derived pullback with coefficients `R`. -/
+local notation "𝓖R" => L((g)^*[ModuleCat.{u + 1} R])
+
+set_option hygiene false in
+/-- The derived pullback with coefficients `S`. -/
+local notation "𝓖S" => L((g)^*[ModuleCat.{u + 1} S])
+
+/-- The two sides of `leftDerivedSheafExtendScalarsProjection_transpose_upperStar` agree after
+composition with the counit of `Lg^* ⋙ Ψ` on the image of an object of the homotopy category. -/
+private lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar_aux
+    (K : HomotopyCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R)) (.up ℤ)) :
+    ((𝓖S).map ((Ψ[Y]).map ((leftDerivedSheafExtendScalarsProjection R S Y).app
+          (DerivedCategory.Qh.obj K)) ≫
+        (leftDerivedSheafExtendScalarsAdjunction R S Y).counit.app
+          ((Ψ[Y]).obj (DerivedCategory.Qh.obj K))) ≫
+      (leftDerivedUpperStarExtendScalarsIso R S g).hom.app (DerivedCategory.Qh.obj K)) ≫
+      (leftDerivedUpperStarSheafExtendScalarsCounit R S g).app K =
+    ((leftDerivedUpperStarExtendScalarsIso R S g).hom.app ((𝓣[Y]).obj (DerivedCategory.Qh.obj K)) ≫
+      (Ψ[Z]).map ((leftDerivedTensorRestrictScalarsUnitUpperStarMap R S g).app
+          (DerivedCategory.Qh.obj K) ≫
+        (leftDerivedSheafExtendScalarsProjection R S Z).app ((𝓖R).obj (DerivedCategory.Qh.obj K))) ≫
+      (leftDerivedSheafExtendScalarsAdjunction R S Z).counit.app
+        ((Ψ[Z]).obj ((𝓖R).obj (DerivedCategory.Qh.obj K)))) ≫
+      (leftDerivedUpperStarSheafExtendScalarsCounit R S g).app K := by
+  have hα₁ := leftDerivedUpperStarExtendScalarsIso_hom_app_comp_counit R S g K
+  have hα₂ := leftDerivedUpperStarExtendScalarsIso_hom_app_comp_counit R S g
+    (((tensorRight (sheafRestrictScalarsUnit R S Y)).mapHomotopyCategory (.up ℤ)).obj K)
+  have hY := congrArg (𝓖S).map (leftDerivedSheafExtendScalarsProjection_transpose R S Y K)
+  have hZ := leftDerivedSheafExtendScalarsProjection_transpose R S Z
+    (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj K)
+  have ha := congrArg (Ψ[Z]).map
+    (leftDerivedTensorRestrictScalarsUnitUpperStarMap_app_comp_counit R S g K)
+  have hS := (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorCounit.naturality
+    ((Functor.mapHomotopyCategoryCompIso
+        (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Y) ⋙
+          sheafExtendScalars (algebraMap R S) Y)) (.up ℤ)).hom.app K ≫
+      (NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Y) (.up ℤ)).app K)
+  have hϑ := congrArg (Ψ[Z]).map ((leftDerivedSheafExtendScalarsProjection R S Z).naturality
+    ((g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorCounit.app K))
+  have hΨ := (sheafExtendScalars (algebraMap R S) Z).leftDerivedFunctorCounit.naturality
+    ((mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap R S g).app K)
+  have hn := (leftDerivedUpperStarExtendScalarsIso R S g).hom.naturality
+    ((tensorRight (sheafRestrictScalarsUnit R S Y)).leftDerivedFunctorCounit.app K)
+  have hH := congrArg DerivedCategory.Qh.map
+    (mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar R S g K)
+  simp only [leftDerivedSheafExtendScalarsUpperStarCounit,
+    leftDerivedUpperStarSheafExtendScalarsCounit, leftDerivedTensorRestrictScalarsUnitUpperStarCounit,
+    leftDerivedUpperStarTensorRestrictScalarsUnitCounit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp, Functor.comp_map,
+    Functor.comp_obj, Category.assoc] at hα₁ hα₂ hY hZ ha hS hϑ hΨ hn hH ⊢
+  rw [hα₁, reassoc_of% hY, reassoc_of% hS, hH]
+  erw [← Adjunction.counit_naturality_assoc]
+  rw [← reassoc_of% hϑ, hZ, reassoc_of% ha, reassoc_of% hΨ, ← reassoc_of% hn, reassoc_of% hα₂]
+
+/-- **The transposed derived projection maps commute with the derived pullback**: for `K` in
+`D(Y_proét, R)`, the square
+```
+Lg^* Ψ (K ⊗ᴸ S_Y) ──Lg^* ϑ♯──▶ Lg^* Ψ K
+       │ ≅                         │ ≅
+       ▼                           ▼
+Ψ Lg^* (K ⊗ᴸ S_Y) ──▶ Ψ (Lg^* K ⊗ᴸ S_Z) ──ϑ♯──▶ Ψ Lg^* K
+```
+commutes, where `ϑ♯ : Ψ (K ⊗ᴸ S_Y) ⟶ Ψ K` is the transpose along `Ψ ⊣ Res` of the derived
+projection map `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsProjection`, the vertical
+maps are `AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso` and the middle map is
+`Ψ` of `AlgebraicGeometry.ProEtale.leftDerivedTensorRestrictScalarsUnitUpperStarMap`. -/
+lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))) :
+    (𝓖S).map ((Ψ[Y]).map ((leftDerivedSheafExtendScalarsProjection R S Y).app K) ≫
+        (leftDerivedSheafExtendScalarsAdjunction R S Y).counit.app ((Ψ[Y]).obj K)) ≫
+      (leftDerivedUpperStarExtendScalarsIso R S g).hom.app K =
+    (leftDerivedUpperStarExtendScalarsIso R S g).hom.app ((𝓣[Y]).obj K) ≫
+      (Ψ[Z]).map ((leftDerivedTensorRestrictScalarsUnitUpperStarMap R S g).app K ≫
+        (leftDerivedSheafExtendScalarsProjection R S Z).app ((𝓖R).obj K)) ≫
+      (leftDerivedSheafExtendScalarsAdjunction R S Z).counit.app ((Ψ[Z]).obj ((𝓖R).obj K)) := by
+  let γ₁ : 𝓣[Y] ⋙ Ψ[Y] ⋙ 𝓖S ⟶ 𝓖R ⋙ Ψ[Z] :=
+    Functor.whiskerRight (Functor.whiskerRight (leftDerivedSheafExtendScalarsProjection R S Y)
+        (Ψ[Y]) ≫ Functor.whiskerLeft (Ψ[Y]) (leftDerivedSheafExtendScalarsAdjunction R S Y).counit)
+      (𝓖S) ≫ (leftDerivedUpperStarExtendScalarsIso R S g).hom
+  let γ₂ : 𝓣[Y] ⋙ Ψ[Y] ⋙ 𝓖S ⟶ 𝓖R ⋙ Ψ[Z] :=
+    Functor.whiskerLeft (𝓣[Y]) (leftDerivedUpperStarExtendScalarsIso R S g).hom ≫
+      Functor.whiskerRight (leftDerivedTensorRestrictScalarsUnitUpperStarMap R S g ≫
+        Functor.whiskerLeft (𝓖R) (leftDerivedSheafExtendScalarsProjection R S Z)) (Ψ[Z]) ≫
+      Functor.whiskerLeft (𝓖R)
+        (Functor.whiskerLeft (Ψ[Z]) (leftDerivedSheafExtendScalarsAdjunction R S Z).counit)
+  have h : γ₁ = γ₂ := by
+    apply (𝓖R ⋙ Ψ[Z]).leftDerived_ext (leftDerivedUpperStarSheafExtendScalarsCounit R S g)
+      (HomotopyCategory.quasiIso _ (.up ℤ))
+    ext K
+    simpa [γ₁, γ₂] using leftDerivedSheafExtendScalarsProjection_transpose_upperStar_aux R S g K
+  simpa [γ₁, γ₂] using NatTrans.congr_app h K
+
 end Derived
 
 end AlgebraicGeometry.ProEtale
