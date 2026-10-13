@@ -16,20 +16,43 @@
  ],
  "proof": [
   {
-   "text": "The clause is the corresponding factorization or pure-tensor uniqueness argument from the parent universal property.",
+   "text": "Evaluate a followed by f = d followed by f on b tensor (c tensor p). The assumed action formulas give f(phi(b)c tensor p) = f(c tensor bp). The pairing h(c,p)=f(tmulSection c p) is additive in both variables by the tensor-section addition formulas. Mathlib TensorProduct.liftAddHom and liftAddHom_tmul give the additive map from each sectionwise B-tensor product into Q.",
    "uses": [
-    "lem-weil-pbc-change-of-rings-tensor-balancing-universal"
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Give the additive lift its O_Y(W)-linear structure by TensorProduct.induction_on. On a pure tensor, restricted O-scalar multiplication acts on c through C.hom; smul_tmulSection and linearity of f give the required equality. Zero and sums follow from additivity. Check naturality by the same tensor induction: the characterization of changeOfRingsMap on pure tensors, tmulSection_map, and naturality of f give the pure-tensor case. These linear maps define the presheaf morphism k from the O-restriction of changeOfRingsPresheaf to Q.val.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the change-of-rings sheafification unit to obtain eta:K->T.val over O_Y. Its underlying additive presheaf map is still CategoryTheory.toSheafify, hence locally injective and locally surjective. Apply Mathlib PresheafOfModules.homEquivOfIsLocallyBijective eta Q.isSheaf to k to obtain t.val and eta followed by t.val=k; package it as the sheaf morphism t:T->Q. This invokes the locally bijective universal property directly, so no C-action on Q and no separate comparison isomorphism are needed.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "To prove g followed by t=f, precompose with the inverse tensorObjIsoSheafification and apply injectivity of the sheafification adjunction hom equivalence. Presheaf morphism extensionality and ModuleCat.MonoidalCategory.tensor_ext reduce equality to c tensor p. The formula for g identifies its value with eta(c tensor_B p); eta followed by t.val=k and liftAddHom_tmul identify the composite with f(tmulSection c p). This is the desired equality. All constructions and inductions apply also to empty opens and zero modules.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-change-of-rings-tensor-balancing-universal"
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, proof of Lemma 01SB (morphisms-lemma-affine-equivalence-modules), change of rings assertion; Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules); explicit tensor-balancing argument in steps 1-4 of lem-weil-pbc-change-of-rings-tensor-relation-presentation"
+  "place": "Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089; sectionwise balancing argument from the parent docstring, fully formalized by U4 using TensorProduct.liftAddHom and the locally bijective presheaf-module universal property."
  },
  "mathlib_searches": [
   {
@@ -104,13 +127,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261012T232901-L-2042433",
-  "kind": "interface",
+  "landing": "20261013T015618-L-3028364",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
