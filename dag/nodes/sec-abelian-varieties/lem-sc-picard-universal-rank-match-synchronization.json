@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-picard-universal-rank-match-synchronization",
+ "kind": "statement",
+ "title": "Synchronize universal direct-image ranks without a structure-sheaf unit",
+ "statement": "Let $f:X\\to S$ and $g:T\\to S$ be morphisms of schemes and $E$ an $\\mathcal O_X$-module. If $\\mathrm{PicardUniversalSingleRankMatch}(f,E,E,g)$ and $\\mathrm{PicardUniversalSingleRankMatch}(f,E,E^\\vee,g)$ [def-sc-picard-universal-single-rank-match] hold, then $\\mathrm{PicardUniversalRankMatch}(f,E,g)$ [def-sc-picard-universal-rank-match] holds. No finiteness, properness, flatness, nonempty-fibre or structure-sheaf unit hypothesis is needed.",
+ "stmt_deps": [
+  "def-sc-picard-universal-single-rank-match",
+  "def-sc-picard-universal-rank-match"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BDP, intersection of its two fixed-rank direct-image loci; the empty-fibre rank-zero argument fills the corresponding case in the parent node lem-sc-picard-universal-rank-match-locus-lfp-core."
+ },
+ "proof": [
+  {
+   "text": "For each further h and point t choose U,r and V,s from the two single-image conditions. Put W=U intersection V. Use the existing public source-library isFiniteLocallyFreeOfRank_pullback instance for ordinary pullback. Compose the adjunction comparison isomorphism with tensor-pullback composition and the open inclusion equality, then apply the existing public SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso theorem to restrict each ordinary direct-image rank to W. For the reference ranks use the canonical pullback.map from X_W to X_U or X_V, and the same composite-isomorphism transport. No separate tensor-pullback rank theorem is stated or proved.",
+   "uses": [
+    "def-sc-picard-universal-single-rank-match",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If X_W has a point, finiteLocallyFreeOfRank_stalk_finrank applied twice to its reference bundle gives r=s.",
+   "uses": [
+    "lem-sc-finite-locally-free-stalk-finrank"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If X_W is empty, Mathlib Pullback.range_map shows that the inverse image of W in X after base change by h followed by g is empty. Restrict either ordinary direct image to W. On every affine neighbourhood its sections identify with the sections of its source module over the empty open, hence are subsingleton (source Modules.subsingleton_sections_bot). The proved source rankAtStalk_sections_eq theorem computes their constant rank, and Mathlib Module.rankAtStalk_eq_zero_of_subsingleton makes it zero. Since W contains t there is an affine neighbourhood with a prime, so r=s=0.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replace s by r in the second restricted direct-image rank witness. W, its membership witness for t, the first and second direct-image ranks, and the reference rank give exactly PicardUniversalRankMatch. Repeat for all h,t; empty test schemes have no points to check.",
+   "uses": [
+    "def-sc-picard-universal-rank-match"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-universal-single-rank-match",
+  "lem-pc-module-pullback-identity-composition",
+  "def-pc-module-pullback",
+  "lem-sc-finite-locally-free-stalk-finrank",
+  "def-sc-picard-universal-rank-match"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0BDP, intersection of its two fixed-rank direct-image loci; the empty-fibre rank-zero argument fills the corresponding case in the parent node lem-sc-picard-universal-rank-match-locus-lfp-core.",
+  "note": "X2 adaptation of the parent construction; the unit route is unchanged. Repair of the duplicate tensor_rank helper: remove it and transport ranks directly along composite isomorphisms using the existing public ordinary-pullback instance and of_iso theorem. The suggested tensorRank from PicardUniversalRankMatchConjunction is private, so it cannot be imported by its source name."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two universal local finite locally free direct image rank conditions with the same reference bundle imply simultaneous common rank on one neighbourhood including empty fibres",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free ranks of two ordinary direct images can be synchronized on intersecting neighbourhoods even when the inverse image is empty",
+   "results": "Eight hits: Module.isLocallyConstant_rankAtStalk_freeLocus, Module.isLocallyConstant_rankAtStalk, Module.rankAtStalk_eq_finrank_of_free, localized module finrank, Module.rankAtStalk_eq_of_equiv and tensor/product rank formulas. No two-direct-image sheaf synchronization statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFreeOfRank|rank.*locus|locus.*rank",
+   "results": "Four Mathlib hits, all in ring-module free locus theory: rank is locally constant on the free locus. No universal sheaf direct-image rank locus or synchronization statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationCore",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, application of Tag 0BDP: fix the reference bundle rank, construct the two degree-zero direct-image rank loci and intersect them",
+   "via": [
+    "lem-sc-picard-universal-rank-match-locus-lfp-core",
+    "lem-sc-picard-universal-rank-match-locus-lfp-iso",
+    "lem-sc-picard-universal-rank-match-locus-lfp",
+    "lem-sc-picard-universal-rank-match-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchSynchronization",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardUniversalRankMatchSynchronization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardUniversalRankMatch_of_singleRankMatch_without_unit",
+  "statement": "theorem picardUniversalRankMatch_of_singleRankMatch_without_unit\n    {X S T : Scheme.{u}} (f : X ⟶ S) (E : X.Modules) (g : T ⟶ S)\n    (hE : PicardUniversalSingleRankMatch f E E g)\n    (hdual : PicardUniversalSingleRankMatch f E (Modules.dual E) g) :\n    PicardUniversalRankMatch f E g",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T060430-L-586464",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T060430-L-586464",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
