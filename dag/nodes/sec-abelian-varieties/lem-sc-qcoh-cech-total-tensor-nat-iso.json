@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-qcoh-cech-total-tensor-nat-iso",
+ "kind": "statement",
+ "title": "Natural-number reindexing of algebraic tensor Kunneth",
+ "statement": "Let k be a field [def-weil-field] and A,B integer cochain complexes of k-vector spaces, in the conventions of [def-pc-cochain-complex-modules], whose terms are zero in negative degrees. Write T=Tot(A tensor_k B) with the signed differential of [def-pc-tensor-complex-sheaves]. For every natural n there is a k-linear equivalence from the direct sum over natural p+q=n of H^p(A) tensor_k H^q(B) to H^n(T). For cycles a in A^p and b in B^q it sends [a] tensor [b] to the class of a total cycle z whose inclusion is the (p,q)-summand inclusion of a tensor b.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma varieties-lemma-kunneth (the Kunneth lemma used in Tag 0BED)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Embed the natural pairs (p,q) with p+q=n in the integer pairs by casting both coordinates. Construct the induced direct-sum linear map with DirectSum.toModule and the left inverse with DFinsupp.comapDomain. They compose to the identity on every natural summand, so the inclusion is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma varieties-lemma-kunneth (the Kunneth lemma used in Tag 0BED)"
+   }
+  },
+  {
+   "text": "The inclusion is surjective by direct-sum induction. For a nonnegative integer pair use (p.toNat,q.toNat) and cast the summand along the equality of indices. If either coordinate is negative, the corresponding complex term is zero, hence its homology is zero and the tensor summand is zero. This treats every integer summand and therefore their finite sums.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma varieties-lemma-kunneth (the Kunneth lemma used in Tag 0BED)"
+   }
+  },
+  {
+   "text": "Apply the integer-index tensor_kunneth with lower bound zero for both complexes. Compose its equivalence with the bijective inclusion constructed in the first two steps. The integer generator formula at the cast pair is exactly the natural-degree generator formula.",
+   "uses": [
+    "lem-sc-qcoh-cech-total-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma varieties-lemma-kunneth (the Kunneth lemma used in Tag 0BED)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-qcoh-cech-total-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED equation-kunneth-on-cech: zero extension to integer complexes and removal of negative-degree summands"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bilinearity of cup products in cohomology",
+   "results": "UNAVAILABLE: Internal Server Error from the service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no absence verdict inferred"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For cochain complexes of vector spaces zero in negative degrees the Kunneth isomorphism is indexed by pairs of natural numbers p plus q equals n",
+   "results": "Eight hits on embedding/connect and HomComplex constructions; none is the natural-index tensor Kunneth formula.",
+   "date": "2026-10-13",
+   "verdict": "no matching declaration among returned hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\"",
+   "results": "Twelve graded-object bifunctor construction hits, no homology Kunneth formula.",
+   "date": "2026-10-13",
+   "verdict": "no matching declaration among returned hits"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth and DFinsupp comapDomain and homology_of_isZero_X in Mathlib and library",
+   "results": "Found integer-index tensor_kunneth in Sheaf.Algebra.Homology.TensorKunneth. Mathlib provides DFinsupp.comapDomain, DirectSum.toModule and ShortComplex.isZero_homology_of_isZero_X2 to prove the reindexing.",
+   "date": "2026-10-13",
+   "verdict": "integer Kunneth plus elementary direct-sum reindexing, proved in this delivery"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardKunnethQcohIso",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED equation-kunneth-on-cech: zero extension to integer complexes and removal of negative-degree summands",
+   "via": [
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorKunnethNat",
+  "file": "lean/Sheaf/Algebra/Homology/TensorKunnethNat.lean",
+  "declaration": "HomologicalComplex.tensor_kunneth_nat",
+  "statement": "theorem tensor_kunneth_nat {k : Type w} [Field k]\n    (A B : CochainComplex (ModuleCat.{w} k) ℤ)\n    (hA : ∀ p : ℤ, p < 0 → IsZero (A.X p))\n    (hB : ∀ q : ℤ, q < 0 → IsZero (B.X q)) (n : ℕ) :\n    ∃ e : (⨁ i : {pq : ℕ × ℕ // pq.1 + pq.2 = n},\n      (A.homology (i.val.1 : ℤ)) ⊗[k] (B.homology (i.val.2 : ℤ))) ≃ₗ[k]\n        (mapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℤ)).homology\n          (n : ℤ),\n      ∀ (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})\n        (a : A.cycles (i.val.1 : ℤ)) (b : B.cycles (i.val.2 : ℤ)),\n        ∃ z : (mapBifunctor A B (curriedTensor (ModuleCat.{w} k))\n            (ComplexShape.up ℤ)).cycles (n : ℤ),\n          (mapBifunctor A B (curriedTensor (ModuleCat.{w} k))\n              (ComplexShape.up ℤ)).iCycles (n : ℤ) z =\n            ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℤ)\n              (i.val.1 : ℤ) (i.val.2 : ℤ) (n : ℤ) (by\n                change (i.val.1 : ℤ) + (i.val.2 : ℤ) = (n : ℤ)\n                exact_mod_cast i.property)\n              ((A.iCycles (i.val.1 : ℤ) a) ⊗ₜ[k] (B.iCycles (i.val.2 : ℤ) b)) ∧\n          e (DirectSum.lof k _ _ i\n              ((A.homologyπ (i.val.1 : ℤ) a) ⊗ₜ[k] (B.homologyπ (i.val.2 : ℤ) b))) =\n            (mapBifunctor A B (curriedTensor (ModuleCat.{w} k))\n              (ComplexShape.up ℤ)).homologyπ (n : ℤ) z",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T004335-L-2509399",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T004335-L-2509399",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
