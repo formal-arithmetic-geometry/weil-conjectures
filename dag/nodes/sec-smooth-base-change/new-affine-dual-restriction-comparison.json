@@ -1,0 +1,106 @@
+{
+ "id": "new-affine-dual-restriction-comparison",
+ "kind": "statement",
+ "title": "Restriction of an affine dual is the sheaf dual",
+ "statement": "Let A be a commutative Noetherian ring, W any open of Spec A, and M a finite A-module. The restriction to W of the associated sheaf of Hom_A(M,A) is isomorphic to the internal Hom of the restriction of the associated sheaf of M into the structure sheaf of W. No local freeness or boundary depth assumption is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0583, algebra-lemma-localize-hom; Tag 0EY6 proof of (1)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "A finite module over A is finitely presented. On each basic affine open D(f) contained in W, localization of Hom identifies the localized module dual with Hom over A_f of M_f into A_f. The tilde equivalence identifies these Hom modules with morphisms of the associated sheaves on D(f). The formula sends a functional to its action on localized sections, and therefore commutes with restriction from D(f) to smaller basic opens. These opens form a basis of W. The compatible local comparisons and their inverses glue to the claimed internal-Hom isomorphism. Empty W and M = 0 are included.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "U4",
+  "document": "Stacks Project",
+  "place": "Tag 0583; affine-sheaf assembly as in Tag 0EY6 proof (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tilde.*[Dd]ual|[Dd]ual.*tilde",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact affine dual comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObj",
+   "results": "loogle: unknown identifier 'SheafOfModules.homObj'",
+   "date": "2026-10-13",
+   "verdict": "No exact affine dual comparison found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated sheaf of a finite module dual is internal Hom, commuting with restriction to an open subscheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, LightCondensed.ihomPoints, SheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, LightCondensed.ihomPoints_apply, ModuleCat.tilde, LightCondensed.ihom_map_val_app",
+   "date": "2026-10-13",
+   "verdict": "No exact affine dual comparison found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf associated to the dual of a finitely presented module is the internal Hom into the structure sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDoubleDualRestriction",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-depth-two-locally-free-model",
+   "place": "structural double-dual construction: localization of Hom in the proof of the locally free restriction",
+   "via": [
+    "new-affine-double-dual-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineDualRestrictionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineDualRestrictionComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_dual_restriction_comparison",
+  "statement": "theorem affine_dual_restriction_comparison\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)\n    (M : ModuleCat.{u} A) [Module.Finite A M] :\n    Nonempty (Modules.restrict (tilde (ModuleCat.of A (Module.Dual A M))) W.ι ≅\n      SheafOfModules.homObj.{u} (R := W.toScheme.sheaf) (Modules.restrict (tilde M) W.ι)\n        (SheafOfModules.unit W.toScheme.ringCatSheaf))",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T141534-L-381617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T141534-L-381617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

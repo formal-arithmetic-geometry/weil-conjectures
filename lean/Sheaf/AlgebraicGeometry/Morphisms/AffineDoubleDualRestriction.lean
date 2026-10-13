@@ -8,6 +8,8 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.Morphisms.AffineDualRestrictionComparison
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 
 /-! # Restriction of the actual affine double dual
 
@@ -40,6 +42,15 @@ theorem affine_double_dual_restriction
     (P : W.toScheme.Modules) [P.IsFiniteLocallyFree]
     (e : Modules.restrict (tilde M) W.ι ≅ P) :
     Nonempty (Modules.restrict
-      (tilde (ModuleCat.of A (Module.Dual A (Module.Dual A M)))) W.ι ≅ P) := by sorry
+      (tilde (ModuleCat.of A (Module.Dual A (Module.Dual A M)))) W.ι ≅ P) := by
+  let N := Modules.restrict (tilde M) W.ι
+  let : N.IsFiniteLocallyFree := SheafOfModules.IsFiniteLocallyFree.of_iso.{u, u, u} e.symm
+  obtain ⟨d₁⟩ := affine_dual_restriction_comparison A W M
+  obtain ⟨d₂⟩ := affine_dual_restriction_comparison A W
+    (ModuleCat.of A (Module.Dual A M))
+  let d₃ := ((SheafOfModules.homFunctor W.toScheme.sheaf).flip.obj
+    (SheafOfModules.unit W.toScheme.ringCatSheaf)).mapIso d₁.op
+  have := SheafOfModules.isIso_bidual N
+  exact ⟨d₂ ≪≫ d₃.symm ≪≫ (asIso (SheafOfModules.bidual N)).symm ≪≫ e⟩
 
 end AlgebraicGeometry.Scheme
