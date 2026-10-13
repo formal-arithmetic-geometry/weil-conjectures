@@ -16,14 +16,15 @@
  ],
  "proof": [
   {
-   "text": "The coherent finite structure algebra r_*O_F has boundary stalk depth at least two: on an affine chart localize the finite algebra at the base point and apply the finite-local-algebra depth formula of Stacks Tag 0AUK to the source local rings above it. The empty fibre gives the zero module, of infinite depth. Hartogs then makes the canonical map r_*O_F -> j_*((r_*O_F)|_U) invertible. This restriction map preserves products and scalars, so its inverse also preserves them.",
+   "text": "Since r is finite, F is locally Noetherian. Identify the stalk of its structure module with its local ring by the filtered-colimit comparison for forgetting rings to abelian groups; compatibility of scalar multiplication follows on germs. Transport finiteness and depth along this linear equivalence (regular sequences and ideal times module are invariant). Apply positive-depth restriction injectivity to the structure module on F and W = r inverse U. The structure module is quasi-coherent and finite on every affine open. Depth at least two implies depth at least one. Thus W.ι.app V is injective for every open V of F.",
    "uses": [
-    "lem-sbc-depth-two-hartogs-restriction"
+    "lem-sbc-depth-one-restriction-injective",
+    "def-weil-pbc-depth"
    ],
    "elementary": false
   },
   {
-   "text": "The two L-morphisms induce algebra maps p_*O_E -> r_*O_F. Their restrictions agree. Naturality of the restriction unit and its injectivity for r_*O_F imply equality of the original algebra maps. Full faithfulness for affine morphisms over L implies f=g.",
+   "text": "For every open V of L, form the appLE ring maps induced by f and g from sections on p inverse V to sections on r inverse V. The equality on W, followed by appLE_comp_appLE, identifies their composites with W.ι.app (r inverse V). Cancel this injective ring map pointwise. In the anti-equivalence for affine morphisms over L these are exactly the section components of the two algebra maps, by its hmap formula. Extensionality and the faithful functor give equality of the two Over L morphisms, hence f = g.",
    "uses": [
     "lem-weil-pbc-affine-morphism-relative-spec"
    ],
@@ -31,14 +32,15 @@
   }
  ],
  "proof_deps": [
-  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-sbc-depth-one-restriction-injective",
+  "def-weil-pbc-depth",
   "lem-weil-pbc-affine-morphism-relative-spec"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "J3",
+  "by": "H2",
   "document": "Stacks Project",
-  "place": "Tag 0EY6 converse of (2), separating extension and equality of morphisms using Tags 0AUK, 0E9I and 01SA"
+  "place": "Tags 0B3M and 05AR (positive-depth restriction injectivity) and 01SA (faithfulness for affine morphisms), applied directly to the source structure module; this avoids the finite-local-algebra depth formula and the surjectivity part of Hartogs."
  },
  "mathlib_searches": [
   {
@@ -128,10 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T100015-L-2465426",
-  "kind": "interface",
+  "landing": "20261013T111852-L-3052493",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
