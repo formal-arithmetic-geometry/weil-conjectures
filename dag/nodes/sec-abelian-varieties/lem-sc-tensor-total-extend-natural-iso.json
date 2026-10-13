@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-tensor-total-extend-natural-iso",
+ "kind": "statement",
+ "title": "Normalized zero extension of a natural tensor total",
+ "statement": "Let $k$ be a field [def-weil-field] and let $A,B$ be cochain complexes of $k$-vector spaces indexed by $\\mathbb N$. Let $E$ denote extension by zero to $\\mathbb Z$, and let $T=\\operatorname{Tot}(A\\otimes_k B)$ use the signed differential [def-pc-tensor-complex-sheaves]. There exists an isomorphism $c:\\operatorname{Tot}(EA\\otimes_k EB)\\cong ET$ of cochain complexes. For every $p+q=n$ and $a\\in A^p$, $b\\in B^q$, the map $c^n$ sends the integer total coprojection of the tensor of the inverse canonical extension term comparisons applied to $a,b$ to the inverse canonical extension term comparison of the natural total coprojection of $a\\otimes b$. This specifies the coprojection normalization, and asserts no homology or Kunneth equivalence.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, equation-kunneth-on-cech; zero-extension reindexing in lem-sc-qcoh-cech-total-tensor-nat-iso, and the coprojection construction of lem-sc-total-extension-nat-arrow-iso. Official tag pages read online at https://stacks.math.columbia.edu/tag/0BED and https://stacks.math.columbia.edu/tag/0FKV."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Apply the extension-versus-total reindexing construction to the tensor double complex. In nonnegative total degrees retain the integer pairs with both coordinates nonnegative and identify them with natural pairs; negative-coordinate terms are zero. Tensor the factor extension term comparisons and compose with the natural coprojections. The inverse uses inverse term comparisons. Check both composites on each coprojection.",
+   "uses": [
+    "lem-sc-total-extension-nat-arrow-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The factor extension comparisons commute with the differentials. The total sign at the integer image of p is (-1)^p. Hence the components give an isomorphism of complexes; evaluating the construction on a pure tensor gives the normalization, including degree zero and zero factors.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-total-extension-nat-arrow-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, equation-kunneth-on-cech; zero-extension reindexing in lem-sc-qcoh-cech-total-tensor-nat-iso, and the coprojection construction of lem-sc-total-extension-nat-arrow-iso. Lean interface and transport proof written by D4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero commutes with tensor totalization of nonnegative cochain complexes",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Unavailable; no absence verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend tensor total from natural indexed complexes to integer indexed complexes preserving coprojections",
+   "results": "8 hits including HomologicalComplex.ιTensorObj, tensorObj, HasTensor, HasGoodTensor₁₂, HasGoodTensor₂₃.",
+   "verdict": "Generic tensor API, no normalized extension isomorphism found.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorTotal_extend|totalMap_extend_nat_arrow_iso",
+   "results": "0 hits in Mathlib service search. Local rg found Sheaf.Algebra.Homology.FirstQuadrantTotalExtension.totalMap_extend_nat_arrow_iso.",
+   "verdict": "The project theorem supplies an arrow isomorphism for extending a double complex, without the required tensor coprojection normalization.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardRightCechCupGenerators",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED, equation-kunneth-on-cech; zero-extension reindexing in lem-sc-qcoh-cech-total-tensor-nat-iso, and the coprojection construction of lem-sc-total-extension-nat-arrow-iso.",
+   "via": [
+    "lem-sc-picard-right-cech-cup-generators"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorTotalExtendNaturalIso",
+  "file": "lean/Sheaf/Algebra/Homology/TensorTotalExtendNaturalIso.lean",
+  "declaration": "HomologicalComplex.tensorTotal_extend_natural_iso",
+  "statement": "theorem tensorTotal_extend_natural_iso {k : Type w} [Field k]\n    (A B : CochainComplex (ModuleCat.{w} k) ℕ) :\n    let E := ComplexShape.embeddingUpNat\n    let T := mapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ)\n    let S := mapBifunctor (A.extend E) (B.extend E)\n      (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℤ)\n    ∃ c : S ≅ T.extend E,\n      ∀ (n : ℕ) (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})\n        (a : A.X i.val.1) (b : B.X i.val.2),\n        c.hom.f (n : ℤ)\n          (ιMapBifunctor (A.extend E) (B.extend E) (curriedTensor (ModuleCat.{w} k))\n            (ComplexShape.up ℤ) (i.val.1 : ℤ) (i.val.2 : ℤ) (n : ℤ) (by\n              change (i.val.1 : ℤ) + (i.val.2 : ℤ) = (n : ℤ)\n              exact_mod_cast i.property)\n            (((A.extendXIso E (i := i.val.1) rfl).inv a) ⊗ₜ[k]\n              ((B.extendXIso E (i := i.val.2) rfl).inv b))) =\n          (T.extendXIso E (i := n) rfl).inv\n            (ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ)\n              i.val.1 i.val.2 n i.property (a ⊗ₜ[k] b))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T134800-L-129279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T134800-L-129279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

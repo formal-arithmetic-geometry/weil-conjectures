@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.DirectSum.Module
+import Sheaf.Algebra.Homology.TensorKunnethNaturalComplexes
+import Sheaf.AlgebraicGeometry.PicardRightCechCupCycleComparison
 
 /-! # Specified external Cech cup on factor homology generators
 
@@ -80,6 +82,40 @@ theorem picardRightCechCup_generators
                 (externalCupCoefficients f g F G) d)) i.property)
                 (externalCup f g F G i.val.1 i.val.2
                   (picardScalarModelEquiv f F i.val.1 x)
-                  (picardScalarModelEquiv g G i.val.2 y)) := by sorry
+                  (picardScalarModelEquiv g G i.val.2 y)) := by
+  classical
+  let A := (picardCechFunctor f U).obj F
+  let B := (picardCechFunctor g V).obj G
+  let T := HomologicalComplex.mapBifunctor A B
+    (CategoryTheory.MonoidalCategory.curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ)
+  obtain ⟨alpha, beta, b, hab⟩ := picardRightCechCup_cycle_comparison
+    f g F U V hU hV hUc hVc θ hθ G
+  obtain ⟨e, he⟩ := HomologicalComplex.tensor_kunneth_natural_complexes A B n
+  let s := DirectSum.congrLinearEquiv fun i : {pq : ℕ × ℕ // pq.1 + pq.2 = n} ↦
+    TensorProduct.congr (alpha i.val.1).symm (beta i.val.2).symm
+  let t := T.extendHomologyIso ComplexShape.embeddingUpNat (j := n) rfl
+  refine ⟨(s.trans e).trans t.symm.toLinearEquiv, b n, ?_⟩
+  intro i x y
+  obtain ⟨a, ha⟩ := (ModuleCat.epi_iff_surjective (A.homologyπ i.val.1)).mp
+    inferInstance ((alpha i.val.1).symm x)
+  obtain ⟨v, hv⟩ := (ModuleCat.epi_iff_surjective (B.homologyπ i.val.2)).mp
+    inferInstance ((beta i.val.2).symm y)
+  obtain ⟨z, hz, hez⟩ := he i a v
+  have hx : alpha i.val.1 (A.homologyπ _ a) = x := by
+    rw [ha, LinearEquiv.apply_symm_apply]
+  have hy : beta i.val.2 (B.homologyπ _ v) = y := by
+    rw [hv, LinearEquiv.apply_symm_apply]
+  have hs : s (DirectSum.lof k _ _ i (x ⊗ₜ[k] y)) =
+      DirectSum.lof k _ _ i ((A.homologyπ _ a) ⊗ₜ[k] (B.homologyπ _ v)) := by
+    simp only [s, DirectSum.coe_congrLinearEquiv, DirectSum.lmap_lof,
+      LinearEquiv.coe_coe, TensorProduct.congr_tmul, ← ha, ← hv]
+  change picardScalarModelEquiv (pullback.fst f g ≫ f)
+    (externalCupCoefficients f g F G) n
+    ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
+      (t.inv (e (s (DirectSum.lof k _ _ i (x ⊗ₜ[k] y))))))) = _
+  rw [hs, hez]
+  dsimp only [A] at hx
+  dsimp only [B] at hy
+  simpa only [hx, hy] using hab n i a v z hz
 
 end AlgebraicGeometry.Scheme.Modules
