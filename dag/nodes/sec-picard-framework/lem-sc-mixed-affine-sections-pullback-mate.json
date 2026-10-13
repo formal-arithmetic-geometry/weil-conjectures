@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-mixed-affine-sections-pullback-mate",
+ "kind": "statement",
+ "title": "Affine derived sections transport pullback adjunction mates",
+ "statement": "Let $g:T\\to S$ be a morphism between affine schemes [def-pc-scheme], with independent sheaf and module derived localization universes [def-pc-derived-category]. Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_S)$. Write $F_g$ for the fixed left adjoint to derived global scalar restriction [lem-sc-mixed-global-extension-adjunction]. There is an isomorphism $a:F_g(R\\Gamma(S,E))\\cong R\\Gamma(T,Lg^*E)$ such that for every $L\\in D(\\mathcal O_T)$ and every $\\theta:Lg^*E\\to L$, the transpose under scalar extension/restriction of $R\\Gamma(S,\\operatorname{adj}_g(\\theta))$ followed by the normalized Leray comparison [lem-sc-mixed-global-sections-direct-image-iso] equals $a\\circ R\\Gamma(T,\\theta)$. Here $\\operatorname{adj}_g$ is the sheaf pullback/direct-image adjunction [lem-pc-global-hom-adjunction]. There is no perfectness or flatness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 and 08DW(2); cohomology.tex Tags 08HY and 0D5T; duality.tex Tag 0AA8, identification of beta"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-sc-mixed-global-extension-adjunction",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-pc-global-hom-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Identify the affine schemes with spectra of their global rings. Use the affine quasi-coherent derived equivalence and a K-flat module resolution of E. The tilde/pullback comparison computes Lg*E as derived extension of scalars. The underived section adjunction unit is x to 1 tensor x; deriving it and localization uniqueness identify the units, giving a unit-compatible isomorphism a for the fixed mixed scalar extension adjunction.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sc-mixed-global-extension-adjunction",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose a.hom followed by RΓ_T(theta) under the fixed scalar extension adjunction. The unit compatibility in step 1 and naturality identify this with RΓ_S of the sheaf pullback adjunct of theta, followed by the normalized derived Leray map. Its right-derived-unit equation fixes this comparison. Injectivity of homEquiv gives the required equality for every L and theta. Localization uniqueness transports these equations independently in the two morphism universes.",
+   "uses": [
+    "lem-pc-global-hom-adjunction",
+    "lem-sc-mixed-global-sections-direct-image-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-global-hom-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-sc-mixed-global-extension-adjunction",
+  "lem-sc-mixed-global-sections-direct-image-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, right-hand-side computation and final adjunction triangle; affine formula Tag 08DW(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global Hom commutes with scalar extension for perfect complexes on affine schemes",
+   "results": "AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; AlgebraicGeometry.AffineSpace.comp_homOfVector; AlgebraicGeometry.AffineSpace.map_Spec_map; CategoryTheory.Abelian.Ext.homLinearEquiv; AlgebraicGeometry.AffineSpace.map_SpecMap; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map; CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom; AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc",
+   "date": "2026-10-13",
+   "verdict": "Generic infrastructure only; no exact affine derived mate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "globalHom.*isIso|perfect.*directImage|unit.*FlatOver",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "Generic infrastructure only; no exact affine derived mate theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"homEquiv\"",
+   "results": "CategoryTheory.Functor.isIso_ranAdjunction_homEquiv_iff; CategoryTheory.Functor.isIso_lanAdjunction_homEquiv_symm_iff",
+   "date": "2026-10-13",
+   "verdict": "Generic infrastructure only; no exact affine derived mate theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections on affine schemes commutes with derived pullback and extension of scalars, compatible with adjunction units",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatImageGlobalHomBaseChangeIso",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper base change auxiliary argument, Tag 0AA8, identification of beta with affine derived scalar extension",
+   "via": [
+    "lem-sc-proper-flat-image-global-hom-base-change-isIso",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedAffineSectionsPullbackMate.lean",
+  "declaration": "AlgebraicGeometry.exists_mixedAffineSectionsPullbackMate",
+  "statement": "theorem exists_mixedAffineSectionsPullbackMate\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]\n    {S T : Scheme.{u}} [IsAffine S] [IsAffine T]\n    (g : T ⟶ S) (E : schemeDerivedCategory S)\n    (hE : schemeDerivedQCohProperty S E) :\n    ∃ a : (mixedGlobalExtension g).obj ((schemeDerivedGlobalSections S).obj E) ≅\n        (schemeDerivedGlobalSections T).obj ((derivedPullback g).obj E),\n      ∀ (L : schemeDerivedCategory T) (theta : (derivedPullback g).obj E ⟶ L),\n        ((mixedGlobalExtensionAdjunction g).homEquiv _ _).symm\n            ((schemeDerivedGlobalSections S).map\n                ((schemeHomPullbackAdjunction g).homEquiv E L theta) ≫\n              (mixedGlobalSectionsDirectImageIso g).hom.app L) =\n          a.hom ≫ (schemeDerivedGlobalSections T).map theta",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T113356-L-3188521",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T113356-L-3188521",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
