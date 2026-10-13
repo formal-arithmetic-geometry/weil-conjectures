@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-localized-module-lifted-tensor-comparison",
+ "kind": "statement",
+ "title": "Module localization from a lifted tensor comparison",
+ "statement": "Let $B,C,S,T$ be commutative rings with algebra maps $B\\to C$, $B\\to S$, $S\\to T$. Let $N$ be a $C$-module with its restricted $B$-action and $M$ a $T$-module with its restricted $S$-action. Fix a universe lift $\\widetilde S,\\widetilde T$ of $S,T$. Let $\\kappa:C\\to\\widetilde T$ and $\\phi:C\\otimes_B\\widetilde S\\to\\widetilde T$ be ring maps with $\\phi(c\\otimes1)=\\kappa(c)$ and $\\phi(1\\otimes\\operatorname{up}(s))=\\operatorname{up}(s\\text{ mapped to }T)$. Assume $\\phi$ is a localization at some submonoid, in the sense of [lem-weil-pbc-localization-of-localization]. Assume there is a $\\widetilde T$-linear isomorphism $\\widetilde T\\otimes_C N\\cong M$, where $C\\to\\widetilde T$ is $\\kappa$. Then $L=S\\otimes_B N$ admits an $E=S\\otimes_B C$ module action compatible with its $S$-action, and there is a submonoid $U$ of $E$ with an $S$-linear isomorphism $U^{-1}L\\cong M$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put E = S tensor over B C and use pushout cancellation to obtain the explicit S-linear equivalence eL: E tensor over C N ≃ S tensor over B N. Transport the E-action on the source across this equivalence. Its S-linearity proves the scalar tower with S.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  },
+  {
+   "text": "Tensor symmetry and the lift ring equivalence on S transport φ to a localization E → ULift T at the transported submonoid W. Its restrictions to S and C agree with the specified lifted S → T and κ by the two hypotheses on pure tensors, giving the scalar towers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  },
+  {
+   "text": "Tensor the localization E → ULift T over C with N. The module localization-tensor theorem makes E tensor over C N → ULift T tensor over C N a localization at W. Precompose with the E-linear version of eL.symm. Its canonical localization isomorphism, restricted to S and composed with the given lifted module equivalence restricted to S, is W⁻¹L ≃ M.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower; explicit tensor argument for step 4: the moduleLocalization comparison after tensor symmetry and universe transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "localization of base changed module S tensor over B N over tensor ring S tensor over B C is equivalent to T tensor over C N",
+   "results": "IsLocalization.moduleTensorEquiv; IsLocalizedModule.isBaseChange; IsLocalizedModule.rTensor; IsLocalization.tensorProduct_isLocalizedModule; component lemmas, no exact lifted comparison",
+   "date": "2026-10-14",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalizedModule.rTensor\"",
+   "results": "IsLocalizedModule.rTensor, Mathlib.RingTheory.Localization.BaseChange; localization-tensor compatibility only",
+   "date": "2026-10-14",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule.rTensor|AlgebraTensorModule.*[Aa]ssoc|LocalizedModule.equivTensorProduct",
+   "results": "AlgebraTensorModule.assoc in TensorProduct/Tower; LocalizedModule.equivTensorProduct in Localization/BaseChange:68; component lemmas only",
+   "date": "2026-10-14",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a module base change along a localization of a tensor product ring is a localized module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianLocalModelTowerOfCategoricalLimit",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "categorical conversion step 4: the moduleLocalization comparison after tensor symmetry and universe transport",
+   "via": [
+    "lem-weil-pbc-noetherian-local-model-tower-existence",
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-noetherian-local-model-tower-categorical-conversion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedModuleOfLiftedTensorComparison",
+  "file": "lean/Sheaf/RingTheory/LocalizedModuleOfLiftedTensorComparison.lean",
+  "declaration": "Module.localizedModule_of_liftedTensorComparison",
+  "statement": "theorem localizedModule_of_liftedTensorComparison\n    (S : Type v) (T : Type w) (B C : Type u) (N : Type t) (M : Type t)\n    [CommRing S] [CommRing T] [CommRing B] [CommRing C]\n    [Algebra B C] [Algebra B S] [Algebra S T]\n    [AddCommGroup N] [Module C N] [Module B N] [IsScalarTower B C N]\n    [AddCommGroup M] [Module T M] [Module S M] [IsScalarTower S T M]\n    (κ : C →+* ULift.{z} T)\n    (φ : C ⊗[B] ULift.{z} S →+* ULift.{z} T)\n    (hφC : ∀ c : C, φ (c ⊗ₜ[B] 1) = κ c)\n    (hφS : ∀ s : S, φ (1 ⊗ₜ[B] ULift.up s) = ULift.up (algebraMap S T s))\n    (hloc : letI := φ.toAlgebra;\n      ∃ U : Submonoid (C ⊗[B] ULift.{z} S), IsLocalization U (ULift.{z} T))\n    (hM : letI := κ.toAlgebra; Nonempty (ULift.{z} T ⊗[C] N ≃ₗ[ULift.{z} T] M)) :\n    ∃ (_ : Module (S ⊗[B] C) (S ⊗[B] N))\n      (_ : IsScalarTower S (S ⊗[B] C) (S ⊗[B] N)) (U : Submonoid (S ⊗[B] C)),\n      Nonempty (LocalizedModule U (S ⊗[B] N) ≃ₗ[S] M) ",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T234523-L-2167738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T234523-L-2167738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,6 +10,13 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.IsLimit
 public import Mathlib.RingTheory.EssentialFiniteness
+import Sheaf.RingTheory.TensorLocalizationTowerTransition
+import Sheaf.RingTheory.LocalizedModuleOfLiftedTensorComparison
+import Mathlib.RingTheory.Localization.Submodule
+import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Mathlib.Algebra.Category.Grp.Ulift
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 @[expose] public section
 
@@ -149,6 +156,249 @@ theorem noetherian_localModelTower_of_categoricalLimit
             ∀ (y : T₁) (x : D.obj i),
               e (y ⊗ₜ[C.obj i] x) =
                 y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x)) :
-    Nonempty (NoetherianLocalModelTower R S S' M) := by sorry
+    Nonempty (NoetherianLocalModelTower R S S' M) := by
+  classical
+  obtain ⟨Λ, po, ne, di, A, B, C, ρ, σ, π, κ, κ', D, ν, modN,
+    locA, locB, locC, locρ, locσ, locAm, locBm, locCm, locπ, locκ, locκ',
+    sqρ, sqσ, smulD, smulν, colA, colB, colC, colD, eftA, eftρ, eftσ,
+    finD, presD, transB, transC, transD, limB, limC, limD⟩ := h
+  let := po
+  have := ne
+  have := di
+  let := modN
+  have := locA
+  have := locB
+  have := locC
+  have := locρ
+  have := locσ
+  have := finD
+  let : ∀ i, Algebra (A.obj i) (B.obj i) := fun i ↦ (ρ.app i).hom.toAlgebra
+  let : ∀ i, Algebra (B.obj i) (C.obj i) := fun i ↦ (σ.app i).hom.toAlgebra
+  let : ∀ i, Algebra (A.obj i) (C.obj i) := fun i ↦
+    ((σ.app i).hom.comp (ρ.app i).hom).toAlgebra
+  have : ∀ i, IsScalarTower (A.obj i) (B.obj i) (C.obj i) := fun i ↦
+    IsScalarTower.of_algebraMap_eq (fun _ ↦ rfl)
+  let : ∀ i, Module (B.obj i) (D.obj i) := fun i ↦
+    Module.restrictScalars (B.obj i) (C.obj i) (D.obj i)
+  let : ∀ i, Module (A.obj i) (D.obj i) := fun i ↦
+    Module.restrictScalars (A.obj i) (B.obj i) (D.obj i)
+  have : ∀ i, IsScalarTower (B.obj i) (C.obj i) (D.obj i) := fun i ↦
+    IsScalarTower.restrictScalars _ _ _
+  have : ∀ i, IsScalarTower (A.obj i) (B.obj i) (D.obj i) := fun i ↦
+    IsScalarTower.restrictScalars _ _ _
+  let : ∀ i, Algebra (A.obj i) R := fun i ↦
+    (ULift.ringEquiv.toRingHom.comp (π.app i).hom).toAlgebra
+  let : ∀ i, Algebra (B.obj i) S := fun i ↦
+    (ULift.ringEquiv.toRingHom.comp (κ.app i).hom).toAlgebra
+  let : ∀ i, Algebra (C.obj i) S' := fun i ↦
+    (ULift.ringEquiv.toRingHom.comp (κ'.app i).hom).toAlgebra
+  have : ∀ i, IsNoetherianRing (A.obj i) := fun i ↦ by
+    have : Algebra.EssFiniteType ℤ (A.obj i) :=
+      (RingHom.essFiniteType_algebraMap).mp (eftA i)
+    exact Algebra.EssFiniteType.isNoetherianRing ℤ (A.obj i)
+  have : ∀ i, IsNoetherianRing (B.obj i) := fun i ↦ by
+    have : Algebra.EssFiniteType (A.obj i) (B.obj i) := eftρ i
+    exact Algebra.EssFiniteType.isNoetherianRing (A.obj i) (B.obj i)
+  have : ∀ i, IsNoetherianRing (C.obj i) := fun i ↦ by
+    have : Algebra.EssFiniteType (B.obj i) (C.obj i) := eftσ i
+    exact Algebra.EssFiniteType.isNoetherianRing (B.obj i) (C.obj i)
+  let liftD := AddCommGrpCat.uliftFunctor.{max u v w, t}
+  have colLiftD := isColimitOfPreserves liftD colD.some
+  have : PreservesFilteredColimitsOfSize.{max u v w, max u v w}
+      (forget AddCommGrpCat.{max u v w t}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{max u v w t, max u v w t} _
+  refine ⟨{
+    ι := Λ
+    R₀ := fun i ↦ A.obj i
+    S₀ := fun i ↦ B.obj i
+    T₀ := fun i ↦ C.obj i
+    N₀ := fun i ↦ D.obj i
+    rmap := fun _ _ h ↦ (A.map (homOfLE h)).hom
+    smap := fun _ _ h ↦ (B.map (homOfLE h)).hom
+    tmap := fun _ _ h ↦ (C.map (homOfLE h)).hom
+    nmap := fun _ _ h ↦ (D.map (homOfLE h)).hom
+    rmap_local := locAm
+    smap_local := locBm
+    tmap_local := locCm
+    nmap_smul := smulD
+    nlimit := fun i ↦ (ν.app i).hom
+    finite := finD
+    rSystem := by
+      constructor
+      · intro i x
+        change (A.map (𝟙 i)).hom x = x
+        simp
+      · intro k j i hij hjk x
+        change (A.map (homOfLE hij) ≫ A.map (homOfLE hjk)).hom x = _
+        rw [← A.map_comp]
+        rfl
+    sSystem := by
+      constructor
+      · intro i x
+        change (B.map (𝟙 i)).hom x = x
+        simp
+      · intro k j i hij hjk x
+        change (B.map (homOfLE hij) ≫ B.map (homOfLE hjk)).hom x = _
+        rw [← B.map_comp]
+        rfl
+    tSystem := by
+      constructor
+      · intro i x
+        change (C.map (𝟙 i)).hom x = x
+        simp
+      · intro k j i hij hjk x
+        change (C.map (homOfLE hij) ≫ C.map (homOfLE hjk)).hom x = _
+        rw [← C.map_comp]
+        rfl
+    nSystem := by
+      constructor
+      · intro i x
+        change (D.map (𝟙 i)).hom x = x
+        simp
+      · intro k j i hij hjk x
+        change (D.map (homOfLE hij) ≫ D.map (homOfLE hjk)).hom x = _
+        rw [← D.map_comp]
+        rfl
+    rs_comm := by
+      intro i j hij
+      exact congrArg CommRingCat.Hom.hom (ρ.naturality (homOfLE hij)).symm
+    st_comm := by
+      intro i j hij
+      exact congrArg CommRingCat.Hom.hom (σ.naturality (homOfLE hij)).symm
+    rlimit_local := by
+      intro i
+      have := locπ i
+      have : IsLocalHom (ULift.ringEquiv : ULift.{max u v w} R ≃+* R).toRingHom :=
+        ⟨fun a ha ↦ ha.map (ULift.ringEquiv : ULift.{max u v w} R ≃+* R).symm.toRingHom⟩
+      exact RingHom.isLocalHom_comp _ _
+    slimit_local := by
+      intro i
+      have := locκ i
+      have : IsLocalHom (ULift.ringEquiv : ULift.{max u v w} S ≃+* S).toRingHom :=
+        ⟨fun a ha ↦ ha.map (ULift.ringEquiv : ULift.{max u v w} S ≃+* S).symm.toRingHom⟩
+      exact RingHom.isLocalHom_comp _ _
+    tlimit_local := by
+      intro i
+      have := locκ' i
+      have : IsLocalHom (ULift.ringEquiv : ULift.{max u v w} S' ≃+* S').toRingHom :=
+        ⟨fun a ha ↦ ha.map (ULift.ringEquiv : ULift.{max u v w} S' ≃+* S').symm.toRingHom⟩
+      exact RingHom.isLocalHom_comp _ _
+    rlimit_comm := by
+      intro i j hij
+      ext x
+      exact congrArg ULift.down
+        (ConcreteCategory.congr_hom (π.naturality (homOfLE hij)) x)
+    slimit_comm := by
+      intro i j hij
+      ext x
+      exact congrArg ULift.down
+        (ConcreteCategory.congr_hom (κ.naturality (homOfLE hij)) x)
+    tlimit_comm := by
+      intro i j hij
+      ext x
+      exact congrArg ULift.down
+        (ConcreteCategory.congr_hom (κ'.naturality (homOfLE hij)) x)
+    rs_limit_comm := by
+      intro i
+      ext x
+      exact congrArg ULift.down (ConcreteCategory.congr_hom (sqρ i) x)
+    st_limit_comm := by
+      intro i
+      ext x
+      exact congrArg ULift.down (ConcreteCategory.congr_hom (sqσ i) x)
+    nlimit_comm := by
+      intro i j hij
+      exact congrArg AddCommGrpCat.Hom.hom (ν.naturality (homOfLE hij))
+    nlimit_smul := smulν
+    rlimit_surj := by
+      intro r
+      obtain ⟨i, x, hx⟩ := Concrete.isColimit_exists_rep A colA.some (ULift.up r)
+      exact ⟨i, x, congrArg ULift.down hx⟩
+    slimit_surj := by
+      intro r
+      obtain ⟨i, x, hx⟩ := Concrete.isColimit_exists_rep B colB.some (ULift.up r)
+      exact ⟨i, x, congrArg ULift.down hx⟩
+    tlimit_surj := by
+      intro r
+      obtain ⟨i, x, hx⟩ := Concrete.isColimit_exists_rep C colC.some (ULift.up r)
+      exact ⟨i, x, congrArg ULift.down hx⟩
+    nlimit_surj := by
+      intro m
+      obtain ⟨i, x, hx⟩ := Concrete.isColimit_exists_rep (D ⋙ liftD) colLiftD (ULift.up m)
+      exact ⟨i, x.down, congrArg ULift.down hx⟩
+    rlimit_eq := by
+      intro i x y hxy
+      have hxy' : (π.app i) x = (π.app i) y := ULift.ext _ _ hxy
+      obtain ⟨j, f, g, hfg⟩ :=
+        Concrete.isColimit_exists_of_rep_eq A colA.some x y hxy'
+      exact ⟨j, leOfHom f, hfg⟩
+    slimit_eq := by
+      intro i x y hxy
+      have hxy' : (κ.app i) x = (κ.app i) y := ULift.ext _ _ hxy
+      obtain ⟨j, f, g, hfg⟩ :=
+        Concrete.isColimit_exists_of_rep_eq B colB.some x y hxy'
+      exact ⟨j, leOfHom f, hfg⟩
+    tlimit_eq := by
+      intro i x y hxy
+      have hxy' : (κ'.app i) x = (κ'.app i) y := ULift.ext _ _ hxy
+      obtain ⟨j, f, g, hfg⟩ :=
+        Concrete.isColimit_exists_of_rep_eq C colC.some x y hxy'
+      exact ⟨j, leOfHom f, hfg⟩
+    nlimit_eq := by
+      intro i x y hxy
+      have hxy' : (liftD.map (ν.app i)) (ULift.up x) =
+          (liftD.map (ν.app i)) (ULift.up y) := ULift.ext _ _ hxy
+      obtain ⟨j, f, g, hfg⟩ := Concrete.isColimit_exists_of_rep_eq
+        (D ⋙ liftD) colLiftD (ULift.up x) (ULift.up y) hxy'
+      exact ⟨j, leOfHom f, congrArg ULift.down hfg⟩
+    baseTransition := by
+      intro i j hij
+      exact tensorLocalization_tower_transition (A.obj i) (B.obj i) (C.obj i)
+        (A.obj j) (B.obj j) (C.obj j) (A.map (homOfLE hij)).hom
+        (B.map (homOfLE hij)).hom (C.map (homOfLE hij)).hom
+        (transB i j hij) (transC i j hij)
+    fibreTransition := by
+      intro i j hij
+      obtain ⟨f, hf, U, hU⟩ := transC i j hij
+      exact ⟨f, U, hf, hU⟩
+    moduleTransition := transD
+    baseLocalization := by
+      intro i
+      obtain ⟨φ, hφ, U, hU⟩ := limB i
+      let e : B.obj i ⊗[A.obj i] ULift.{max u v w} R ≃+* R ⊗[A.obj i] B.obj i :=
+        ((Algebra.TensorProduct.congr (AlgEquiv.refl : B.obj i ≃ₐ[A.obj i] B.obj i)
+          (ULift.algEquiv : ULift.{max u v w} R ≃ₐ[A.obj i] R)).trans
+          (Algebra.TensorProduct.comm (A.obj i) (B.obj i) R)).toRingEquiv
+      let ψ : R ⊗[A.obj i] B.obj i →+* S :=
+        ULift.ringEquiv.toRingHom.comp (φ.comp e.symm.toRingHom)
+      let : Algebra (R ⊗[A.obj i] B.obj i) S := ψ.toAlgebra
+      have hloc : IsLocalization (U.map e) S := by
+        let : Algebra (B.obj i ⊗[A.obj i] ULift.{max u v w} R)
+            (ULift.{max u v w} S) := φ.toAlgebra
+        have : IsLocalization U (ULift.{max u v w} S) := hU
+        let : Algebra (R ⊗[A.obj i] B.obj i) (ULift.{max u v w} S) :=
+          (φ.comp e.symm.toRingHom).toAlgebra
+        have hloc' := IsLocalization.isLocalization_of_base_ringEquiv
+          U (ULift.{max u v w} S) e
+        exact (IsLocalization.isLocalization_iff_of_ringEquiv
+          (U.map e) (ULift.ringEquiv : ULift.{max u v w} S ≃+* S)).mp hloc'
+      have : IsScalarTower R (R ⊗[A.obj i] B.obj i) S := by
+        apply IsScalarTower.of_algebraMap_eq
+        intro r
+        change algebraMap R S r = ψ (r ⊗ₜ[A.obj i] 1)
+        dsimp [ψ, e]
+        rw [hφ, map_one, one_mul]
+        simp only [RingHom.ulift_apply]
+        rfl
+      exact ⟨U.map e, ⟨(IsLocalizedModule.iso (U.map e)
+        (Algebra.linearMap (R ⊗[A.obj i] B.obj i) S)).restrictScalars R⟩⟩
+    moduleLocalization := by
+      intro i
+      obtain ⟨φ, hφ, hloc⟩ := limC i
+      obtain ⟨e, he⟩ := limD i
+      exact localizedModule_of_liftedTensorComparison S S' (B.obj i) (C.obj i)
+        (D.obj i) M (κ'.app i).hom φ (by intro c; simpa using hφ c 1)
+        (by intro s; simpa only [map_one, one_mul, RingHom.ulift_apply] using
+          hφ 1 (ULift.up s)) hloc ⟨e⟩ }⟩
 
 end Module

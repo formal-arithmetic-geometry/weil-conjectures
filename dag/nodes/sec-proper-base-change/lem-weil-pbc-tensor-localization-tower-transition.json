@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-tensor-localization-tower-transition",
+ "kind": "statement",
+ "title": "Composite transition localization for a tower of rings",
+ "statement": "Let $A\\to B\\to C$ and $A^{\\prime}\\to B^{\\prime}\\to C^{\\prime}$ be towers of commutative rings, with the composite algebra structures, and let $r:A\\to A^{\\prime}$, $s:B\\to B^{\\prime}$, $t:C\\to C^{\\prime}$ be ring maps. Assume there is a ring map $\\phi_B:B\\otimes_A A^{\\prime}\\to B^{\\prime}$ sending $b\\otimes a$ to $s(b)a$, which is a localization at a submonoid $U_B$, and a ring map $\\phi_C:C\\otimes_B B^{\\prime}\\to C^{\\prime}$ sending $c\\otimes b$ to $t(c)b$, which is a localization at a submonoid $U_C$. Here a localization sends the submonoid to units, every element of the target is a fraction, and equality of images is killed by multiplication by some submonoid element, as in [lem-weil-pbc-localization-of-localization]. Then there are a submonoid $U$ of $C\\otimes_A A^{\\prime}$ and a ring map $f:C\\otimes_A A^{\\prime}\\to C^{\\prime}$ sending $c\\otimes a$ to $t(c)a$ such that $f$ is a localization at $U$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put P = B tensor over A A′. The pure-tensor formula for φ_B makes it B-linear for s. Base-change the localization P → B′ along C tensor over B P. The resulting map C tensor over B P → C tensor over B B′ is a localization at the image of U_B.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  },
+  {
+   "text": "The cancellation isomorphism C tensor over B (B tensor over A A′) ≅ C tensor over A A′ sends c tensor (b tensor a′) to bc tensor a′. Transport the preceding localization through it.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  },
+  {
+   "text": "Compose with the given localization φ_C. Localization of a localization is a localization. On c tensor a′ the composite is φ_C(c tensor φ_B(1 tensor a′)) = t(c) times the image of a′ in C′; the scalar-tower identity supplies the last equality.",
+   "uses": [
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower; explicit tensor argument for step 3: composition of the middle- and top-ring transition comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of two localizations in a commutative square base change tensor product associativity",
+   "results": "IsLocalization.tensorProduct_tensorProduct; Algebra.TensorProduct.cancelBaseChange_tmul; IsLocalization.algebraTensorEquiv; component lemmas, no exact six-ring transition comparison",
+   "date": "2026-10-14",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\"",
+   "results": "12 hits concerning localization maps of monoids, no exact ring-tower comparison",
+   "date": "2026-10-14",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_localization_isLocalization|IsLocalizedModule.rTensor|equivTensorProduct|isColimit_exists_rep",
+   "results": "IsLocalization.localization_localization_isLocalization in Localization/LocalizationLocalization.lean:110; localized-module tensor APIs in Localization/BaseChange.lean; component lemmas only",
+   "date": "2026-10-14",
+   "verdict": "component lemmas only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of tensor base change localization comparisons for a tower of commutative rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianLocalModelTowerOfCategoricalLimit",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "categorical conversion step 3: composition of the middle- and top-ring transition comparisons",
+   "via": [
+    "lem-weil-pbc-noetherian-local-model-tower-existence",
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-noetherian-local-model-tower-categorical-conversion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TensorLocalizationTowerTransition",
+  "file": "lean/Sheaf/RingTheory/TensorLocalizationTowerTransition.lean",
+  "declaration": "Module.tensorLocalization_tower_transition",
+  "statement": "theorem tensorLocalization_tower_transition\n    (A B C A' B' C' : Type u)\n    [CommRing A] [CommRing B] [CommRing C]\n    [CommRing A'] [CommRing B'] [CommRing C']\n    [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C]\n    [Algebra A' B'] [Algebra B' C'] [Algebra A' C'] [IsScalarTower A' B' C']\n    (r : A →+* A') (s : B →+* B') (t : C →+* C')\n    (hB :\n      letI := r.toAlgebra\n      ∃ φ : B ⊗[A] A' →+* B',\n        (∀ (b : B) (a : A'), φ (b ⊗ₜ[A] a) = s b * algebraMap A' B' a) ∧\n        (letI := φ.toAlgebra; ∃ U : Submonoid (B ⊗[A] A'), IsLocalization U B'))\n    (hC :\n      letI := s.toAlgebra\n      ∃ φ : C ⊗[B] B' →+* C',\n        (∀ (c : C) (b : B'), φ (c ⊗ₜ[B] b) = t c * algebraMap B' C' b) ∧\n        (letI := φ.toAlgebra; ∃ U : Submonoid (C ⊗[B] B'), IsLocalization U C')) :\n    letI := r.toAlgebra\n    ∃ (f : C ⊗[A] A' →+* C') (U : Submonoid (C ⊗[A] A')),\n      (∀ (c : C) (a : A'), f (c ⊗ₜ[A] a) = t c * algebraMap A' C' a) ∧\n      (letI := f.toAlgebra; IsLocalization U C') ",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T234523-L-2167738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T234523-L-2167738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
