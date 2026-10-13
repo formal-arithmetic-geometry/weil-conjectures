@@ -17,28 +17,48 @@
  },
  "proof": [
   {
-   "text": "Evaluate the defining derived pullback composition factorization at the restricted complex and identify the tensor comparison with the constructed open restricted tensor derived isomorphism.",
+   "text": "Reuse the already proved generic composition_factorization_transport and compare_counit_factorizations helpers from AffineSpectrumCompositionCounitSquare (these helpers have no affineness assumptions). Apply the two left-derived counit factorizations to the pairs (snd,U inclusion) and (fst,gprime), transporting the first along the pullback condition. Cancel only the derived and underived composition isomorphisms. This gives open_composition_counit_square for every complex.",
    "uses": [
     "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-affine-spectrum-composition-counit-square",
     "def-pc-open-restricted-composition-map",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary open immersion j, expand the constructed openRestrictionRepresentativeIso into the inverse exact-restriction factor and the inverse openDerivedRestrictionIso. The inverse leftDerivedUnique factor satisfies leftDerivedNatTrans_app, so its composite with the pinned counit is the exact tensor localization factor. mapDerivedCategoryNatIso_fac for the inverse underived tensor-restriction comparison then cancels the exact-restriction factor. Thus the representative hom followed by the counit is Q of the inverse termwise tensor-restriction comparison. Apply this to U inclusion and to fst at tensorPullback gprime of P.",
+   "uses": [
     "def-pc-open-derived-stalk-iso",
-    "def-pc-open-restricted-tensor-complex-iso"
+    "def-pc-open-restricted-tensor-complex-iso",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the counit for snd at the homotopy image of the inverse source tensor-restriction comparison moves that comparison past the counit. Expand the four factors of openTensorRestrictionSquareIso and check degreewise that their inverse is the ordered composite of the mapped inverse source restriction comparison, inverse source composition comparison, target composition comparison, and target restriction comparison. Apply Q. Substitute this identity, the two normalization equations, and the composition counit square into restriction_counit_glue. Categorical associativity and cancellation of the target representative isomorphism give the claimed equation, since openRestrictedTensorDerivedIso is its inverse followed by Q of the termwise square. No counit is inverted; no K-flatness is used.",
+   "uses": [
+    "def-pc-open-restricted-tensor-complex-iso",
+    "def-pc-open-derived-stalk-iso",
+    "def-pc-open-restricted-composition-map"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-affine-spectrum-composition-counit-square",
   "def-pc-open-restricted-composition-map",
+  "def-pc-tensor-pullback-composition-iso",
   "def-pc-open-derived-stalk-iso",
   "def-pc-open-restricted-tensor-complex-iso"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B4",
+  "group": "T3",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0D5S",
-  "place": "Tag 0D5S, composition of derived pullbacks; Tag 0D5U, exact restriction. Strict counit factorization before stalks and cohomology."
+  "place": "Tag 0D5S composition and Tag 0D5U exact open restriction; explicit universal-property factorization, naturality, and categorical cancellation."
  },
  "mathlib_searches": [
   {
@@ -111,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "X-9b36b",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T215558-L-895264",
+  "landing": "20261013T234523-L-2167870",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered proof matches the unchanged node statement; module and sole direct importer compile, axioms are only propext/Classical.choice/Quot.sound, and interface changes are documented."
  }
 }
