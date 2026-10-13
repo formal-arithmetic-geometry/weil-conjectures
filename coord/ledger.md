@@ -10426,3 +10426,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:06 L: merged deliver/U3/Sheaf.RingTheory.CompleteLocalMapCohenPresentation (stage 3; reviewer PASS; first push; landing 20261013T010622-L-2673617 (interface); batch 20261013T010609; modules 3; new nodes 2)
 - 01:06 L: merged deliver/U3/Sheaf.RingTheory.SmoothQuotientFibreFinrankEqSub (stage 3; reviewer PASS; first push; landing 20261013T010622-L-2673737 (proof); batch 20261013T010609; modules 1; new nodes 0)
 - 01:06 L: merged deliver/V1/Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertionsLast (stage 3; reviewer PASS; after a return; landing 20261013T010622-L-2673841 (proof); batch 20261013T010609; modules 1; new nodes 0)
+- 01:06 L: merged deliver/V1/Sheaf.AlgebraicGeometry.FormalKernelPolynomialAction (stage 3; reviewer PASS; first push; landing 20261013T010623-L-2673984 (interface); batch 20261013T010609; modules 2; new nodes 1)
