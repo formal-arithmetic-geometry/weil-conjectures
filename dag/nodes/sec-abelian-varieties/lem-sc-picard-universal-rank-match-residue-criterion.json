@@ -22,51 +22,66 @@
  ],
  "proof": [
   {
-   "text": "If X_s is empty, every further pullback is empty. Both ordinary direct images are zero and finite locally free of rank zero. The pullback of E on the empty scheme has rank zero, so the universal condition holds using the whole open.",
+   "text": "Compare tensorPullback with the source-library Modules.pullback by uniqueness of left adjoints. Import and use the existing private tensor_rank theorem from PicardPullbackLocalRanks via import all to preserve rank, without restating it. Composition and identity isomorphisms show that pullback along a scheme isomorphism also reflects rank. The universal condition tested on the identity of Spec kappa(s) supplies a neighbourhood of its unique point, necessarily the whole spectrum. Reflect the two image ranks along the top-open inclusion. The induced isomorphism between the two fibre-product models reflects the coefficient rank too. If the fibre is nonempty, choose a point and compare the stalk finranks of its two fixed-rank descriptions to obtain n=r, proving the forward implication.",
    "uses": [
     "def-sc-picard-universal-rank-match",
-    "def-amb-finite-locally-free-module"
+    "def-amb-finite-locally-free-module",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sc-finite-locally-free-stalk-finrank",
+    "lem-sc-picard-pullback-local-ranks"
    ],
    "elementary": false
   },
   {
-   "text": "Suppose X_s is nonempty. If the universal condition holds, test it on the identity of Spec kappa(s). The open neighbourhood of its unique point is the whole spectrum. Its chosen rank equals r, since E has rank r and the fibre has a point. Thus both ordinary direct images have rank r.",
+   "text": "For the empty-fibre case, construct X_(T prime) to X_T using pullback.lift for every further base map. A point of X_(T prime) would give a point of the empty X_T, so all these fibres are empty. Every module on an empty scheme is zero, and additive direct image preserves zero objects. The empty free module is zero, hence each direct image has rank zero. On an empty source every fixed-rank predicate holds by the existing private finiteLocallyFreeOfRank_of_isEmpty theorem from PicardUniversalRankMatchFiniteRanks, accessed via import all. Restricting the image modules to the whole open preserves rank zero, giving the universal condition. This is implemented by the proved private helpers fibre_empty and zero_rank and the imported empty-source rank theorem.",
    "uses": [
     "def-sc-picard-universal-rank-match",
-    "def-amb-finite-locally-free-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Conversely suppose those direct images have rank r. Perfect direct image and arbitrary base change for E and E dual identify them with degree-zero derived fibres. Over the field choose minimal finite-free models (Tag 0BCD): they have no negative terms, their degree-zero terms have rank r, and every differential is zero. In particular their outgoing degree-zero differentials are zero.",
-   "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-perfect-finite-free-residue-model"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Pulling these models to any scheme over Spec kappa(s) keeps those differentials zero and computes ordinary direct images by derived base change. Their degree-zero cohomology is free of rank r, and pullback preserves the constant rank r of E. Restricting to the whole open gives the universal condition at every point. Composition of pullback squares identifies these modules with the ones in the definition of PicardUniversalRankMatch.",
-   "uses": [
-    "lem-pc-rf-perfect-base-change",
+    "def-amb-finite-locally-free-module",
     "def-pc-module-pullback",
-    "def-sc-picard-universal-rank-match"
+    "lem-sc-picard-universal-rank-match-finite-ranks"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a qcqs morphism and a flat base map, choose injective resolutions of a quasi-coherent coefficient and its tensor pullback. Obtain an augmented comparison lift, and apply the existing resolution-defined flat base-change isomorphism in degree zero. The Mathlib rightDerivedZeroIsoSelf of the left-exact pushforward functors identifies both endpoints with ordinary direct images. For an arbitrary cartesian square, use its isomorphism to the chosen swapped pullback model. Composition of direct images and pullbacks, and Modules.pullbackIsoPushforwardInv along this scheme isomorphism, transport the resulting ordinary-image isomorphism. These operations are implemented in the fully proved private helpers image_iso and flat_image_iso.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-lift",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every morphism to Spec kappa(s) is flat. The fibre projection is proper, hence qcqs, and E and its dual are finite locally free, hence quasi-coherent; tensor pullback preserves quasi-coherence by comparison with Modules.pullback. For every further base map h, construct the map of fibre products with pullback.lift. Cancellation of the original pullback square makes the new square cartesian. Apply the ordinary-image isomorphism of the previous step separately to E and its dual, and preserve rank r under h pullback. Pullback composition transports the fixed coefficient rank hEr to every further fibre, including after the whole-open inclusion. Choose the whole open and rank r in PicardUniversalRankMatch. Combining this case with the empty-fibre case and the forward implication proves the equivalence.",
+   "uses": [
+    "def-sc-picard-universal-rank-match",
+    "def-amb-finite-locally-free-module",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-flat-base-change-lift"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-picard-universal-rank-match",
   "def-amb-finite-locally-free-module",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-perfect-finite-free-residue-model",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "def-sc-picard-universal-rank-match",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-finite-locally-free-stalk-finrank",
+  "lem-sc-picard-pullback-local-ranks",
+  "lem-sc-picard-universal-rank-match-finite-ranks",
+  "lem-weil-pbc-flat-base-change-lift",
+  "lem-weil-pbc-flat-base-change-resolution-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "Second and third proof paragraphs, perfect direct images and arbitrary base change; minimal residue models from Tag 0BCD",
-  "note": "Stage-3 specialization of the cited literature; no connectedness or surjectivity assumed."
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Part (1) in degree zero, specialized to base changes over the residue field; identity test and empty-fibre case of Tag 0BDP. Q4 implements the rank transport, cartesian-square model comparisons, and the two implications; the perfect-complex route of Tags 0B91 and 0BCD is unused. Repair: reuse the private tensor-rank and empty-source rank theorems via proof-only import all instead of duplicating them."
  },
  "mathlib_searches": [
   {
@@ -141,10 +156,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T024038-L-3335821",
-  "kind": "interface",
+  "landing": "20261013T082408-L-1645768",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
