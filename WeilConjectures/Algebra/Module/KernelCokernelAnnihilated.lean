@@ -77,7 +77,7 @@ theorem fgMap_apply_of_apply_eq {y : N} {x : M} (hx : u x = f • y) :
 
 theorem fgMap_comp_self : fgMap u hker hcoker hf hg ∘ₗ u = (f * g) • LinearMap.id := by
   ext m
-  rw [comp_apply, fgMap_apply_of_apply_eq hker hcoker hf hg (map_smul u f m).symm, smul_apply,
+  rw [comp_apply, fgMap_apply_of_apply_eq hker hcoker hf hg (map_smul u f m), smul_apply,
     id_apply, smul_smul, mul_comm]
 
 theorem comp_fgMap : u ∘ₗ fgMap u hker hcoker hf hg = (f * g) • LinearMap.id := by
@@ -128,6 +128,7 @@ noncomputable abbrev reduceModIdeal (u : M →ₗ[A] N) (J : Ideal A) :
     M ⧸ (J • ⊤ : Submodule A M) →ₗ[A] N ⧸ (J • ⊤ : Submodule A N) :=
   Submodule.mapQ _ _ u (Submodule.smul_top_le_comap_smul_top J u)
 
+include hker hcoker in
 /-- If the kernel and cokernel of `u` are killed by `I`, then so are kernel and cokernel of
 the reduction of `u` modulo any ideal `J`, by `I * I`. -/
 theorem mul_le_annihilator_ker_and_coker_reduceModIdeal (J : Ideal A) :
