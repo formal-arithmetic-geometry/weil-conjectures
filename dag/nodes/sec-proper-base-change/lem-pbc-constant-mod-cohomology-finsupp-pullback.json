@@ -14,33 +14,37 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical ULift(ZMod p)-module structure on Λ/(p) and choose a basis I. Repeat the explicit basis and finite-subcoproduct construction in the proof of the coefficient presentation theorem, retaining the chosen summand inclusions. This identifies the underlying constant sheaf with an I-indexed coproduct of X.constantZMod p. Pullback preserves this coproduct and its finite-subcoproduct diagram.",
+   "text": "Construct M = Λ/(p), prove p acts by zero, and equip M with the ZMod p module structure, restricted to ULift(ZMod p). Choose Module.Basis.ofVectorSpace. Use its representation and ModuleCat.finsuppCoconeIsColimit to identify M with the coproduct of its prime-field basis summands. Map this coproduct through coefficient forgetting and constantSheaf; PreservesCoproduct.iso and constantCommuteCompose give an isomorphism from the coproduct of X.constantZMod p to the underlying constantModSheaf. This is the explicit basis construction, not an application of the existential finite-sum presentation theorem.",
    "uses": [
-    "lem-sc-constant-mod-charp-finite-sum-colimit"
+    "lem-weil-pbc-zmod-module-structure-killed-by-n",
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "lem-weil-pbc-constant-module-sheaf-underlying"
    ],
    "elementary": false
   },
   {
-   "text": "Apply large-universe filtered-colimit continuity to X and Y and additive preservation of finite biproducts by Sheaf.functorH. The colimit of the finite sums of cohomology groups is their Finsupp direct sum, giving a and b for the same I.",
+   "text": "Use the finite-subcoproduct colimit cocone of the prime-field sheaf family. Large filtered-colimit continuity on X, and on Y after mapping the cocone through upperStar, makes the images under F = Sheaf.functorH X q and Q = upperStar g followed by Sheaf.functorH Y q colimit cocones. Both F and Q are additive and preserve finite coproducts. The private helper coproduct_preserved_of_finite_subcoproducts constructs the required coproduct desc map by the filtered universal property, using the finite coproduct desc maps for each finite subset; its fac is tested on singleton subsets and its uniq on each finite summand.",
    "uses": [
     "lem-pbc-u2-sheafH-large-filtered-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality of Etale.cohomologyMap with respect to each summand inclusion gives the equation on single-coordinate classes. Every Finsupp is a finite sum of these classes, so additivity proves the equation for all x and i. An empty basis makes both direct sums zero.",
+   "text": "Construct the Finsupp coproduct cofan with Finsupp.singleAddHom, and prove its universal property using Finsupp.liftAddHom and Finsupp.addHom_ext. Uniqueness of coproducts yields additive equivalences for F and Q. Naturality of cohomologyMap on every summand proves that these equivalences conjugate pullback to Finsupp.mapRange of the prime-field pullback: use coproduct hom_ext and the single-coordinate formulas. Transport both equivalences along the coefficient sheaf isomorphism; its naturality square gives the required equation for every x and i. Empty bases, zero coefficients and empty schemes require no separate assumptions.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pbc-u2-sheafH-large-filtered-colimit",
-  "lem-sc-constant-mod-charp-finite-sum-colimit"
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "lem-weil-pbc-zmod-module-structure-killed-by-n"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/03Q5",
-  "place": "F1 stage-3 decomposition of steps 3 of lem-sc-artin-schreier-base-change-model, expanded to record naturality"
+  "place": "S2 stage-3 Lean proof: explicit basis coproduct as in lem-sc-constant-mod-charp-finite-sum-colimit; large filtered-colimit continuity, universal properties of finite and full coproducts, and cohomologyMap_map naturality. Mathlib finiteSubcoproductsCocone and ModuleCat.finsuppCoconeIsColimit."
  },
  "mathlib_searches": [
   {
@@ -107,13 +111,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T232140-L-1992650",
-  "kind": "interface",
+  "landing": "20261013T004336-L-2509963",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
