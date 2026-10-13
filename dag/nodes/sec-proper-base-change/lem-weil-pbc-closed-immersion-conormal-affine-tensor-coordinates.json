@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Put A=Gamma(X',U'), B=Gamma(X,U), J=i'.ker.ideal U'. The inverse-image opens V' and V are affine and the immersion section maps are surjective, by [lem-weil-pbc-closed-immersion-affine-cover-criterion]. The given cartesian cone is isomorphic to the chosen pullback. Kernel invariance under that isomorphism and Mathlib IdealSheafData.ker_fst_of_isClosedImmersion identify i.ker with i'.ker.comap g. Apply [lem-pc-ideal-sheaf-comap-affine-extension] to get i.ker.ideal U=JB. The first isomorphism theorem identifies the section rings C=Gamma(Z',V') and D=Gamma(Z,V) with A/J and B/JB; commutativity supplies the compatible induced ring map C to D.",
+   "text": "Put A=Gamma(X',U'), B=Gamma(X,U), J=i'.ker.ideal U', C=Gamma(Z',V'), D=Gamma(Z,V), and N=Gamma(i'*i'.ker,V'). The section maps A to C and B to D are surjective by Scheme.Hom.app_surjective. IsPullback.of_isLimit hc and isoPullback_hom_fst, ker_comp_of_isIso and ker_fst_of_isClosedImmersion identify i.ker with i'.ker.comap g. ideal_comap_appLE then gives ker(B to D)=J.map(A to B). appLE_comp_appLE and h identify the two composites A to D, providing the compatible scalar towers.",
    "uses": [
     "lem-weil-pbc-closed-immersion-affine-cover-criterion",
     "lem-pc-ideal-sheaf-comap-affine-extension"
@@ -22,22 +22,19 @@
    "elementary": false
   },
   {
-   "text": "Apply affine_conormal_sections to i', U', R=A and r=id. The ideal J is ker(i'.app U'), so it gives an A-linear equivalence J.Cotangent≃N, normalized on ideal representatives. Both modules carry the quotient C=A/J action: the action on N restricts along i'.app and J annihilates J.Cotangent. Surjectivity of A→C upgrades the equivalence to C-linearity. The square equality makes C→D compatible with A→B→D.",
+   "text": "Apply affine_conormal_sections to i', U', R=A, r=id and J=ker(i'.app U'). Its semilinear equivalence at the identity is the A-linear equivalence e:J.Cotangent to N with the normalized unit formula. Transport Ideal.Cotangent.smul_eq_zero_of_mem through e to show J annihilates N.",
    "uses": [
-    "lem-weil-pbc-affine-conormal-sections",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+    "lem-weil-pbc-affine-conormal-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Cancel the quotient scalar ring C=A/J to identify N⊗_C D with N⊗_A D, using annihilation of J on N. Transport the conormal equivalence and swap factors to identify this with D⊗_A J.Cotangent. Since D=B/JB, base-change tensor cancellation and the quotient tensor equivalence identify the latter with (B⊗_A J.Cotangent)/(JB•⊤). The denominator is zero: for a∈J, g(a)•(b⊗m)=b⊗(a•m)=0; tensor induction extends this to all tensors, and ideal-map generation extends it to JB. Remove the zero quotient and invert the composite to get e.",
-   "uses": [
-    "lem-weil-pbc-tensor-over-quotient-ring"
-   ],
-   "elementary": false
+   "text": "The proved private helper tensorQuotientBijective shows B tensor_A N to D tensor_A N is bijective. First Ideal.map_le_iff_le_comap and tensor induction show JB annihilates B tensor_A N: algebraMap(a) acts on b tensor n as b tensor (a smul n), which vanishes. Hence the tensor of the kernel inclusion of B to D is zero. Mathlib rTensor_exact identifies the kernel of the tensor map with the range of this zero map; rTensor_surjective proves surjectivity. Separately CompatibleSMul.of_algebraMap_surjective for A to C and equivOfCompatibleSMul identify N tensor_C D with N tensor_A D. Compose TensorProduct.congr(id,e), the bijective tensor map, tensor swap, and the inverse scalar-change equivalence. This replaces the explicit quotient-tensor route with Mathlib tensor right exactness, without flatness or new unproved statements.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Trace the canonical pure-tensor formulas of scalar cancellation, quotient tensor equivalence and tensor swap. They send b⊗class(a) to class(a)⊗i.app(b). The normalized conormal equivalence sends class(a) to the i' adjunction unit on s', giving exactly the required equation. No unit for f or second sheaf pullback is used here. For J=0 the two tensor modules vanish; for J=A the source chart ring C and conormal vanish. Zero rings give the same zero-module calculation, and no flatness was used.",
+   "text": "The composite sends b tensor class(a) definitionally to e(class(a)) tensor_C i.app(b). Rewrite e(class(a)) using the normalized equation supplied by affine_conormal_sections, giving the required adjunction unit on s'. The constructions use neither nonzero-ring nor proper-ideal hypotheses, and cover J=0, J=A and zero rings.",
    "uses": [
     "lem-weil-pbc-affine-conormal-sections",
     "lem-pc-module-pullback-adjunction"
@@ -46,10 +43,10 @@
   }
  ],
  "proof_origin": {
-  "by": "E4 stage 3 worker, expanding the algebra in the cited affine reductions",
+  "by": "P4 stage 3 worker",
   "date": "2026-10-13",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tags 0473 (affine tensor source), 01R3 (2) (conormal sections), 01JU (1) (base-change ideal). Read the cited Stacks web pages on 2026-10-13."
+  "place": "Tags 0473, 01R3 (2), 01JU (1); algebraic implementation via Mathlib tensor right exactness."
  },
  "mathlib_searches": [
   {
@@ -145,7 +142,6 @@
   "lem-weil-pbc-closed-immersion-affine-cover-criterion",
   "lem-pc-ideal-sheaf-comap-affine-extension",
   "lem-weil-pbc-affine-conormal-sections",
-  "lem-weil-pbc-tensor-over-quotient-ring",
   "lem-pc-module-pullback-adjunction"
  ],
  "reviewed": {
@@ -162,10 +158,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T072346-L-1117949",
-  "kind": "interface",
+  "landing": "20261013T100053-L-2475947",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
