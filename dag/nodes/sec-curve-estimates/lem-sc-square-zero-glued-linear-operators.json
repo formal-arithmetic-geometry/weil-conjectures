@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-square-zero-glued-linear-operators",
+ "kind": "statement",
+ "title": "Linear endomorphisms from unique local scalar sections",
+ "statement": "Let X be a scheme [def-pc-scheme], B and C sheaves of commutative O_X-algebras [def-weil-pbc-ringed-space-algebra-module], p:B → C an algebra morphism, and I a sheaf of O_X-modules [def-weil-sheaf-of-modules-category] with an inclusion i:I → B in a short exact sequence 0 → I → B → C → 0 [def-weil-pbc-exact-sequence]. Suppose the product of any two sections killed by p is zero on every open. Then there is a family α_U:C(U) → End_{O_X(U)}(I(U)) of functions, satisfying i(α_U(p(b))(x))=b*i(x) and commuting with all restriction maps. No additive, multiplicative or unit laws in the argument from C(U) are asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-ringed-space-algebra-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 0B8S proof"
+ },
+ "proof": [
+  {
+   "text": "Apply the unique scalar-section theorem pointwise. The defining formula proves additivity and scalar linearity after applying the injective kernel map; uniqueness proves restriction compatibility.",
+   "uses": [
+    "lem-sc-square-zero-glued-scalar-exists-unique"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-square-zero-glued-scalar-exists-unique"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 0B8S proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "square zero sheaf local scalar action gluing",
+   "results": "Service unavailable: Internal Server Error; no absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero ideal of a sheaf of rings is a module over the quotient sheaf",
+   "results": "Ideal.instModuleQuotientCotangent and related results concern individual rings, not unique glued sections of sheaf kernels.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "square.zero|squareZero|quotient.*action",
+   "results": "msearch grep returned ring and group quotient action results. Local rg on lean/Sheaf/Paper and lean/WeilConjectures found the item and its parent, no existing unique-scalar-section theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SquareZeroQuotientLocalAction",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-square-zero-quotient-local-action",
+   "place": "0B8S proof",
+   "via": [
+    "lem-sc-square-zero-quotient-local-action"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SquareZeroGluedLinearOperators",
+  "file": "lean/Sheaf/Paper/SquareZeroGluedLinearOperators.lean",
+  "declaration": "AlgebraicGeometry.square_zero_glued_linear_operators",
+  "statement": "theorem square_zero_glued_linear_operators (X : Scheme.{u})\n    (B C : X.CommAlgebraSheaf) (p : B ⟶ C)\n    (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (i : I ⟶ commAlgebraSheafModule X.sheaf B)\n    (hw : i ≫ (commAlgebraSheafModuleFunctor X.sheaf).map p = 0)\n    (hS : (ShortComplex.mk i ((commAlgebraSheafModuleFunctor X.sheaf).map p) hw).ShortExact)\n    (hsq : ∀ (U : X.Opens) (x y : B.right.obj.obj (op U)),\n      p.right.hom.app (op U) x = 0 → p.right.hom.app (op U) y = 0 → x * y = 0) :\n    ∃ (σ : ∀ U : X.Opens, C.right.obj.obj (op U) →\n        Module.End ((moduleRings X.toRingedSpace).obj.obj (op U)) (I.val.obj (op U))),\n      (∀ (U : X.Opens) (b : B.right.obj.obj (op U)) (x : I.val.obj (op U)),\n        @id (B.right.obj.obj (op U)) (i.val.app (op U) (σ U (p.right.hom.app (op U) b) x)) =\n          b * @id (B.right.obj.obj (op U)) (i.val.app (op U) x)) ∧\n      (∀ (U V : X.Opens) (j : V ⟶ U) (f : C.right.obj.obj (op U)) (x : I.val.obj (op U)),\n        I.val.map j.op (σ U f x) = σ V (C.right.obj.map j.op f) (I.val.map j.op x))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T111901-L-3055517",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T111901-L-3055517",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

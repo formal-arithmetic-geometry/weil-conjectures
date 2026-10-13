@@ -15,37 +15,38 @@
  ],
  "proof": [
   {
-   "text": "By module_exactness_local_lifting, epimorphic p admits local lifts of every quotient section. The short exact sequence identifies I with kernel p. Evaluation preserves kernels and monomorphisms, so i is injective on sections and every section killed by p has a unique preimage under i on the same open.",
+   "text": "Apply square_zero_glued_linear_operators to obtain linear endomorphisms α_U(f), the lift formula and restriction compatibility. The operator construction itself uses the unique-scalar-section gluing theorem.",
    "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+    "lem-sc-square-zero-glued-linear-operators"
    ],
    "elementary": false
   },
   {
-   "text": "For f in C(U) and x in I(U), choose local lifts b_a of f. The sections b_a*i(x) lie in kernel p. Lift them uniquely to I on each member of the cover. If b_a and b_b are two lifts on an overlap, p(b_a-b_b)=0 and p(i(x))=0, hence (b_a-b_b)*i(x)=0 by the square-zero hypothesis. Thus the lifted sections agree on overlaps; the sheaf axiom glues them uniquely. Define sigma_U(f)(x) by this gluing, independent of all lifts.",
+   "text": "Evaluation sends the mono i to an injective section map. The lift formula at b=0 and b=1 proves the zero and unit laws.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Check O_X(U)-linearity, sigma(f+g)=sigma(f)+sigma(g), sigma(0)=0, sigma(1)=id, and sigma(fg)=sigma(f) composed with sigma(g) locally on common covers with lifts. Apply the injective i and use respectively distributivity, multiplication by zero and one, and associativity in B. These local equalities glue to equalities on U. Restricting the construction gives the restriction identity by uniqueness. Taking a global-on-U lift b proves i(sigma_U(p(b))(x))=b*i(x). The empty open and zero ideal have unique sections and satisfy the same argument.",
+   "text": "Use module_exactness_local_lifting twice to cover each open by opens admitting lifts b and c of f and g. Restriction compatibility reduces addition and multiplication of operators to these local sections. Apply the injective i, then the lift formula for b+c and b*c; distributivity and associativity prove both laws. Sheaf separatedness descends these equalities to U. Package the operators as ring homomorphisms, retaining the lift formula and restriction compatibility.",
    "uses": [
-    "def-weil-pbc-ringed-space-algebra-module",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "lem-sc-square-zero-glued-linear-operators",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-ringed-space-algebra-module",
   "def-weil-sheaf-of-modules-category",
+  "lem-sc-square-zero-glued-linear-operators",
   "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Lemma 0B8S proof; https://stacks.math.columbia.edu/tag/0B8S"
+  "place": "Cohomology, Lemma 0B8S proof; local action factorization and sheaf gluing"
  },
  "mathlib_searches": [
   {
@@ -127,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T000046-L-2231942",
+  "landing": "20261013T111901-L-3055517",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
