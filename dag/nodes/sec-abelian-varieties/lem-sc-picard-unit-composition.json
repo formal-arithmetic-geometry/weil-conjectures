@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-picard-unit-composition",
+ "kind": "statement",
+ "title": "Unit compatibility of transported Picard pullback composition",
+ "statement": "Let X,Y,Z be schemes [def-pc-scheme], k:Z→Y and l:Y→X. Use tensor pullback [def-pc-module-pullback], its unit comparison u [def-sc-picard-cup-product-map] and composition comparison c [lem-sc-picard-canonical-base-change-comparisons]. Then P_k(u_l) followed by u_k equals c_(O_X) followed by u_(k followed by l), exactly as lean.statement. No tensor pair or pairing appears.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0095",
+  "place": "Definition 6.26.1(2), tensor formula; Tag 0096, adjunction normalizing the composition comparison. Expanded tensor/unit-composition argument of lem-sc-picard-pairing-composition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-canonical-base-change-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "For the ordinary inverse unit-composition equation, use unit_hom_ext to reduce maps from O_Z to evaluation at 1 on the top open. Use pullbackSection_one_eq, pullbackSection_pullbackSection and pullbackUnit_naturality_apply to identify both values. Iso.ext_inv gives the forward equation. These are the existing proved declarations in WeilConjectures.AlgebraicGeometry.Modules.HomSection and PullbackUnit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand Picard unit and composition comparisons, use naturality of picardTensorComparison k at the ordinary unit map for l, apply the proved ordinary unit equation and cancel the comparison inverse/hom at the composite.",
+   "uses": [
+    "def-sc-picard-cup-product-map",
+    "lem-sc-picard-canonical-base-change-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-canonical-base-change-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0095",
+  "place": "Tensor formula and Tag 0096 adjunction; coherence calculation expanded from the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical composition isomorphism of pullback sheaves of modules preserves tensor products and the structure sheaf unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition isomorphism for pullback of sheaves of modules is monoidal and respects tensor and unit comparisons",
+   "results": "8 hits: SheafOfModules.pullbackComp, conjugateEquiv_pullbackComp_inv, pullback_assoc, pullbackIso, pullback_id_comp, and three pullback/free-module lemmas. No tensor-composition formula.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; composition API used."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp_tensor|picardTensorObjIso_comp_inv|picardTensorUnitIso_comp",
+   "results": "msearch: 0 hits. Independent rg of the actual Mathlib and project sources found ordinary pullbackComp and the individual pullbackMonoidal instance, but no tensor-composition equality.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardPairingComposition",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Degree-zero cup-pairing base-change compatibility in Tag 0BDP; pairing pullback coherence step 1, composition tensor/unit calculation. Tensor and unit composition coherence within pairing pullback composition.",
+   "via": [
+    "lem-sc-picard-pairing-composition",
+    "lem-sc-picard-pairing-pullback-coherence",
+    "lem-sc-picard-cup-pairing-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardUnitComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardUnitComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardTensorUnitIso_comp",
+  "statement": "theorem picardTensorUnitIso_comp\n    {X Y Z : Scheme.{u}} (k : Z ⟶ Y) (l : Y ⟶ X) :\n    (tensorPullback k).map (picardTensorUnitIso l).hom ≫\n      (picardTensorUnitIso k).hom =\n    (picardTensorCompIso k l (SheafOfModules.unit X.ringCatSheaf)).hom ≫\n      (picardTensorUnitIso (k ≫ l)).hom",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T111851-L-3052089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T111851-L-3052089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

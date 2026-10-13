@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-pullback-tensor-composition",
+ "kind": "statement",
+ "title": "Tensor compatibility of ordinary pullback composition",
+ "statement": "Let X,Y,Z be schemes [def-pc-scheme], k:Z→Y and l:Y→X, and let M,N be O_X-modules [def-weil-sheaf-of-modules-category] with the sheaf tensor product [def-pur-sheaf-tensor-product]. Use the ordinary adjoint-defined Scheme.Modules.pullback and its canonical pullbackComp. Use the fixed strong monoidal instance [lem-pc-scheme-pullback-monoidal-existing], with tensorator μ. Then μ_k(l*M,l*N) followed by k*(μ_l(M,N)) and pullbackComp(k,l) at M tensor N equals the tensor of pullbackComp(k,l) at M and N followed by μ_(k followed by l)(M,N). The exact equality is lean.statement; no pairing, unit, flatness or finite-generation hypothesis is present.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0095",
+  "place": "Definition 6.26.1(2), tensor formula; Tag 0096, adjunction normalizing the composition comparison. Expanded tensor/unit-composition argument of lem-sc-picard-pairing-composition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-scheme-pullback-monoidal-existing"
+ ],
+ "proof": [
+  {
+   "text": "The adjunction-normalized presheaf composition comparison sends r tensor (s tensor m) to r*k-sharp(s) tensor m. For two pure iterated tensors, the two routes have coefficients r*r-prime*k-sharp(s*s-prime) and (r*k-sharp(s))*(r-prime*k-sharp(s-prime)); the ring-map law and commutativity equate them. Representatives in the inverse-image colimits restrict to a common neighbourhood, and the formula respects restrictions and balancing. Tensor and colimit universal properties extend the equality to presheaf maps; after sheafification, locally represented finite sums determine the sheaf maps. The fixed monoidal localization and sheafificationCompPullback identify the tensorators. The descended composition sends 1 tensor (1 tensor m) to 1 tensor m, hence has the composite adjunction unit; injectivity of the adjunction Hom bijection identifies it with the fixed pullbackComp. Empty schemes, zero modules, zero rings and identity arrows obey the same laws.",
+   "uses": [
+    "lem-pc-scheme-pullback-monoidal-existing",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-pullback-monoidal-existing",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0095",
+  "place": "Tensor formula and Tag 0096 adjunction; coherence calculation expanded from the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical composition isomorphism of pullback sheaves of modules preserves tensor products and the structure sheaf unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition isomorphism for pullback of sheaves of modules is monoidal and respects tensor and unit comparisons",
+   "results": "8 hits: SheafOfModules.pullbackComp, conjugateEquiv_pullbackComp_inv, pullback_assoc, pullbackIso, pullback_id_comp, and three pullback/free-module lemmas. No tensor-composition formula.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; composition API used."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp_tensor|picardTensorObjIso_comp_inv|picardTensorUnitIso_comp",
+   "results": "msearch: 0 hits. Independent rg of the actual Mathlib and project sources found ordinary pullbackComp and the individual pullbackMonoidal instance, but no tensor-composition equality.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardPairingComposition",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Degree-zero cup-pairing base-change compatibility in Tag 0BDP; pairing pullback coherence step 1, composition tensor/unit calculation. Tensor and unit composition coherence within pairing pullback composition.",
+   "via": [
+    "lem-sc-picard-pairing-composition",
+    "lem-sc-picard-pairing-pullback-coherence",
+    "lem-sc-picard-cup-pairing-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackTensorComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackTensorComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullbackComp_tensor",
+  "statement": "theorem pullbackComp_tensor\n    {X Y Z : Scheme.{u}} (k : Z ⟶ Y) (l : Y ⟶ X) (M N : X.Modules) :\n    (Functor.Monoidal.μIso (pullback k) ((pullback l).obj M)\n      ((pullback l).obj N)).hom ≫\n      (pullback k).map (Functor.Monoidal.μIso (pullback l) M N).hom ≫\n        (pullbackComp k l).hom.app (M ⊗ N) =\n    ((pullbackComp k l).hom.app M ⊗ₘ (pullbackComp k l).hom.app N) ≫\n      (Functor.Monoidal.μIso (pullback (k ≫ l)) M N).hom",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T111851-L-3052089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T111851-L-3052089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

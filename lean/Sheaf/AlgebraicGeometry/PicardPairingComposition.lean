@@ -6,6 +6,8 @@ Authors: SHEAF group G4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardCanonicalBaseChange
+import Sheaf.AlgebraicGeometry.PicardTensorComposition
+import Sheaf.AlgebraicGeometry.PicardUnitComposition
 
 /-! # Composition of pulled pairings
 
@@ -19,33 +21,43 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+@[reassoc]
+private theorem picardTensorCompIso_naturality
+    {X Y Z : Scheme.{u}} (k : Z ⟶ Y) (l : Y ⟶ X)
+    {A B : X.Modules} (f : A ⟶ B) :
+    (picardTensorCompIso k l A).hom ≫ (tensorPullback (k ≫ l)).map f =
+      (tensorPullback k).map ((tensorPullback l).map f) ≫
+        (picardTensorCompIso k l B).hom := by
+  let c : tensorPullback l ⋙ tensorPullback k ≅ tensorPullback (k ≫ l) :=
+    Functor.isoWhiskerRight (picardTensorComparison l) (tensorPullback k) ≪≫
+      Functor.isoWhiskerLeft (pullback l) (picardTensorComparison k) ≪≫
+        pullbackComp k l ≪≫ (picardTensorComparison (k ≫ l)).symm
+  exact (c.hom.naturality f).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Pulling a pairing twice agrees with pulling it along the composite, after the
 specified composition comparison on each argument.
 Source: Stacks Project, Tag 0095, tensor formula; Tag 0096, adjunction.
 (blueprint: lem-sc-picard-pairing-composition)
 
-Proof: Eliminate e, reducing t to k followed by l. Expand the transported
-comparison definitions, and use naturality of picardTensorComparison at the
-inner pairing to cancel its intervening hom/inv factors. The remaining identity
-is the ordinary pullback identity with pullbackComp on its two arguments.
-For ordinary pullback, the composition comparison sends a generator
-r tensor (s tensor m) to r times k-sharp(s) tensor m. This map is characterized
-by the pullback/pushforward adjunction, so it is the specified pullbackComp.
-For generators r tensor (s tensor m) and r' tensor (s' tensor n), pulling the
-pairing twice multiplies the outer coefficients r*r', then the inner coefficients
-s*s', then applies the composite ring map to g(m tensor n). Pulling along the
-composite instead first forms r*k-sharp(s) and r'*k-sharp(s'), then multiplies
-these and the image of g(m tensor n). The ring-map law and commutativity identify
-the results. The unit comparison maps r tensor a to r*k-sharp(a), so it obeys
-the same composition rule. Generators determine the presheaf maps; these
-equalities therefore extend to sheafification. The monoidal structure of
-ordinary pullback is obtained by localization of that presheaf construction,
-so these are precisely its specified tensor maps. Transport the identity back
-through picardTensorComparison. Its naturality cancels the remaining comparison
-factors and its composition conjugation is picardTensorCompIso. Reinsert e to
-obtain the equality-comparison factors. No finiteness, flatness or invertibility
-condition on g is used. The generator and universal-property computations
-include zero modules, zero pairings, empty schemes and identity morphisms. -/
+Proof: Eliminate e, making t definitionally k followed by l and the two
+object-equality comparisons identities. Expand functoriality of tensorPullback k
+on the inner pairing. The proved unit-composition identity replaces the two unit
+maps by the composition comparison at O_X followed by the composite unit map.
+The composition comparison is a natural isomorphism: whisker the comparisons
+picardTensorComparison l and picardTensorComparison k, then compose with
+ordinary pullbackComp and the inverse comparison at k followed by l. Its
+naturality at g moves the composition comparison from O_X to M tensor N.
+The tensor-composition identity then replaces the two tensorators followed by
+this comparison with the tensor of the two argument comparisons followed by
+the composite tensorator. This is exactly the requested formula. The tensor
+identity is proved by transporting ordinary pullbackComp_tensor; the unit
+identity is proved independently from pullback sections and their composition.
+No finiteness, flatness or invertibility of g is used. Zero pairings, zero
+modules, empty schemes and identity arrows satisfy these same categorical laws. -/
 theorem picardPairing_comp
     {X Y Z : Scheme.{u}} (k : Z ⟶ Y) (l : Y ⟶ X) (t : Z ⟶ X)
     (e : k ≫ l = t) (M N : X.Modules)
@@ -59,6 +71,12 @@ theorem picardPairing_comp
       ((picardTensorCompIso k l N).hom ≫
         (eqToIso (congrArg (fun s ↦ (tensorPullback s).obj N) e)).hom)) ≫
       (picardTensorObjIso t M N).inv ≫ (tensorPullback t).map g ≫
-        (picardTensorUnitIso t).hom := by sorry
+        (picardTensorUnitIso t).hom := by
+  subst t
+  simp only [eqToIso_refl, Iso.refl_hom, Category.comp_id]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [picardTensorUnitIso_comp]
+  rw [← picardTensorCompIso_naturality_assoc]
+  rw [picardTensorObjIso_comp_inv_assoc]
 
 end AlgebraicGeometry.Scheme.Modules
