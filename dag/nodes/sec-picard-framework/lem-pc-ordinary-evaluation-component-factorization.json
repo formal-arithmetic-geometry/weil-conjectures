@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-ordinary-evaluation-component-factorization",
+ "kind": "statement",
+ "title": "Factorization of a nonzero ordinary evaluation component",
+ "statement": "For a scheme X, open U, arbitrary complexes P,F of localEvaluationModules X U [def-pc-ordinary-evaluation-data], integers p,q,n,r with p+q=n and r+q=0, the component C(p,q,n,r) equals F^p tensor the dual projection to Hom(P^r,O[0]^0), followed by the canonical Hom output identification to Hom(P^r,O), then moduleDualEvaluation(P^r,F^p), then homObjMap(id,the canonical transport F^p to F^(r+n)).",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, ordinary evaluation; Section 20.41, Hom-complex differential"
+ },
+ "stmt_deps": [
+  "def-pc-ordinary-evaluation-data",
+  "lem-pc-finite-projective-internal-hom-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Since r+q=0, the positive branch of localEvaluationComponent applies. Write b\nfor its dual projection followed by the degree-zero unit identification, and g for\nits output degree transport. Naturality of tensorHomEquiv in the tensor argument\nmoves F^p tensor b inside currying; naturality in the output moves g inside currying.\nExpand moduleDualEvaluation. Braiding naturality moves b from the outer tensor input\npast the first braiding, associator naturality moves it through the associator, and\nbraiding naturality moves it past the inner braiding. The remaining equality is\nuncurry(b)= (P^r tensor b) followed by uncurry(id), proved by applying the injective\ncurrying equivalence and using its tensor-input naturality and inverse laws.\nReassociate compositions to recover exactly the positive component formula.\nThe index-equality proofs are irrelevant; zero objects and arbitrary unbounded\ncomplexes satisfy the same identities.",
+   "uses": [
+    "def-pc-ordinary-evaluation-data",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-finite-projective-internal-hom-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ordinary-evaluation-data",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-finite-projective-internal-hom-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-13",
+  "description": "Isolated the component factorization step of the existing evaluation-naturality argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of tensor Hom adjunction for sheaves of modules factorization evaluation",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "currying a bilinear evaluation after tensoring with a morphism equals composition with the tensor Hom adjunct",
+   "date": "2026-10-13",
+   "results": [
+    "CategoryTheory.MonoidalClosed.curry_eq",
+    "CategoryTheory.MonoidalClosed.internalHomAdjunction₂",
+    "CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app",
+    "CategoryTheory.CartesianClosed.curry_eq",
+    "CategoryTheory.MonoidalClosed.uncurry_eq",
+    "CategoryTheory.MonoidalClosed.homEquiv_apply_eq",
+    "CategoryTheory.MonoidalClosed.compTranspose",
+    "ModuleCat.monoidalClosed_uncurry"
+   ],
+   "verdict": "Generic currying/uncurrying laws; no exact scheme-local component factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry_natural_left",
+   "date": "2026-10-13",
+   "results": [
+    "CategoryTheory.MonoidalClosed.curry_natural_left"
+   ],
+   "verdict": "Generic currying/uncurrying laws; no exact scheme-local component factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_natural_left|curry_natural_right",
+   "date": "2026-10-13",
+   "results": [
+    "Mathlib/Condensed/Light/InternallyProjective.lean",
+    "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean",
+    "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean",
+    "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean",
+    "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean",
+    "Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean",
+    "Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean",
+    "Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean"
+   ],
+   "verdict": "Generic currying/uncurrying laws; no exact scheme-local component factorization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationPrecompositionNaturality",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ordinary-evaluation-precomposition-naturality",
+   "place": "expand both nonzero component formulas, tensor-Hom naturality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationComponentFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationComponentFactorization.lean",
+  "declaration": "AlgebraicGeometry.ordinaryEvaluation_component_factorization",
+  "statement": "theorem ordinaryEvaluation_component_factorization (X : Scheme.{u}) (U : X.Opens)\n    (P F : CochainComplex (localEvaluationModules X U) ℤ)\n    (p q n r : ℤ) (hpq : p + q = n) (hr : r + q = 0) :\n    localEvaluationComponent X U P F p q n r hpq =\n      (F.X p ◁ (localEvaluationProjection X U P (localEvaluationUnit X U) q r 0 hr ≫\n        SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r))\n          (HomologicalComplex.singleObjXSelf (.up ℤ) 0\n            (𝟙_ (localEvaluationModules X U))).hom)) ≫\n      SheafOfModules.moduleDualEvaluation.{u}\n        (C := Over U) (J := (Opens.grothendieckTopology X).over U) (X.sheaf.over U)\n        (P.X r) (F.X p) ≫\n      SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r))\n        (F.XIsoOfEq (by omega : p = r + n)).hom",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T140813-L-311501",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T140813-L-311501",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
