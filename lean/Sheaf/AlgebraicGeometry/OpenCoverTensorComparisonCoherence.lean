@@ -6,6 +6,8 @@ Authors: SHEAF group F4
 module
 
 public import Sheaf.AlgebraicGeometry.OpenCoverRefinementComparisons
+import Sheaf.AlgebraicGeometry.OpenCoverTensorRecoveryNormalization
+import Sheaf.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence
 
 /-! # Coherence of tensor pullback comparisons on refined charts
 
@@ -18,6 +20,66 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
+private theorem assemble_refinement_comparisons
+    {C E F D K L : Type*}
+    [Category* C] [Category* E] [Category* F] [Category* D] [Category* K] [Category* L]
+    (T T' : C ⥤ E) (Ak Bk : C ⥤ D) (Al Bl : C ⥤ F)
+    (Dfun : D ⥤ F) (Pk : D ⥤ K) (Pl : F ⥤ L)
+    (Zf : K ⥤ L) (Rk : E ⥤ K) (Rl : E ⥤ L)
+    (c : T ≅ T') (tk : Bk ≅ Ak) (tl : Bl ≅ Al)
+    (gamma : Bl ≅ Bk ⋙ Dfun) (alpha : Al ≅ Ak ⋙ Dfun)
+    (beta : Rk ⋙ Zf ≅ Rl) (delta : Pk ⋙ Zf ≅ Dfun ⋙ Pl)
+    (ck : T ⋙ Rk ≅ Ak ⋙ Pk) (cl : T ⋙ Rl ≅ Al ⋙ Pl)
+    (rhoK : T' ⋙ Rk ≅ Bk ⋙ Pk) (rhoL : T' ⋙ Rl ≅ Bl ⋙ Pl)
+    (hAlpha : alpha = tl.symm ≪≫ gamma ≪≫ Functor.isoWhiskerRight tk Dfun)
+    (M : C)
+    (hk : ck.hom.app M ≫ Pk.map (tk.inv.app M) =
+      Rk.map (c.hom.app M) ≫ rhoK.hom.app M)
+    (hl : cl.hom.app M ≫ Pl.map (tl.inv.app M) =
+      Rl.map (c.hom.app M) ≫ rhoL.hom.app M)
+    (ho : Zf.map (rhoK.hom.app M) ≫ delta.hom.app (Bk.obj M) ≫
+      Pl.map (gamma.inv.app M) = beta.hom.app (T'.obj M) ≫ rhoL.hom.app M) :
+    Zf.map (ck.hom.app M) ≫ delta.hom.app (Ak.obj M) ≫ Pl.map (alpha.inv.app M) =
+      beta.hom.app (T.obj M) ≫ cl.hom.app M := by
+  have ha : alpha.inv.app M ≫ tl.inv.app M =
+      Dfun.map (tk.inv.app M) ≫ gamma.inv.app M := by
+    rw [hAlpha]
+    simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+      Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
+      Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+  apply (cancel_mono (Pl.map (tl.inv.app M))).1
+  calc
+    (Zf.map (ck.hom.app M) ≫ delta.hom.app (Ak.obj M) ≫
+        Pl.map (alpha.inv.app M)) ≫ Pl.map (tl.inv.app M) =
+        Zf.map (ck.hom.app M) ≫ delta.hom.app (Ak.obj M) ≫
+          Pl.map (Dfun.map (tk.inv.app M)) ≫ Pl.map (gamma.inv.app M) := by
+      simp only [Category.assoc, ← Pl.map_comp, ha]
+    _ = Zf.map (ck.hom.app M ≫ Pk.map (tk.inv.app M)) ≫
+        delta.hom.app (Bk.obj M) ≫ Pl.map (gamma.inv.app M) := by
+      have hn := delta.hom.naturality (tk.inv.app M)
+      change Zf.map (Pk.map (tk.inv.app M)) ≫ delta.hom.app (Bk.obj M) =
+        delta.hom.app (Ak.obj M) ≫ Pl.map (Dfun.map (tk.inv.app M)) at hn
+      rw [Zf.map_comp]
+      simp only [Category.assoc]
+      rw [← Category.assoc (delta.hom.app _) (Pl.map _) _, ← hn]
+      simp only [Category.assoc]
+    _ = Zf.map (Rk.map (c.hom.app M)) ≫
+        (beta.hom.app (T'.obj M) ≫ rhoL.hom.app M) := by
+      rw [hk, Zf.map_comp]
+      simpa only [Category.assoc] using congrArg
+        (fun t ↦ Zf.map (Rk.map (c.hom.app M)) ≫ t) ho
+    _ = (beta.hom.app (T.obj M) ≫ cl.hom.app M) ≫
+        Pl.map (tl.inv.app M) := by
+      have hn := beta.hom.naturality (c.hom.app M)
+      change Zf.map (Rk.map (c.hom.app M)) ≫ beta.hom.app (T'.obj M) =
+        beta.hom.app (T.obj M) ≫ Rl.map (c.hom.app M) at hn
+      rw [← Category.assoc, hn, Category.assoc, ← hl, ← Category.assoc]
+
+
+attribute [local irreducible] tensorPullback tensorPullbackCompositionIso
+  openCoverTensorPullbackComparison moduleRecoveryComparisonIso pullbackComp pullbackCongr
+
+set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The restriction/composition comparison is compatible with a chart refinement.
@@ -82,6 +144,48 @@ theorem openCover_tensor_comparison_coherence
       (tensorPullbackCompositionIso pl v h wl) (openCoverTensorPullbackComparison pl Ul a)
     Zf.map (ck.hom.app M) ≫ delta.hom.app (Lk.obj M) ≫
       Pl.map (alpha.inv.app M) = beta.hom.app ((tensorPullback h).obj M) ≫
-        cl.hom.app M := by sorry
+        cl.hom.app M := by
+  intro Uk Ul Vk Vl D Pk Pl Zf Rk Rl Lk Ll comparisons alpha beta delta ck cl
+  let S := pullback (U.f a)
+  let Qk := pullback (U.pullbackHom q a)
+  let Ql := pullback (U.pullbackHom v a)
+  let tk := openCoverTensorPullbackComparison q U a
+  let tl := openCoverTensorPullbackComparison v U a
+  let gamma : S ⋙ Ql ≅ (S ⋙ Qk) ⋙ D :=
+    Functor.isoWhiskerLeft S
+      ((pullbackCongr hd).symm ≪≫ (pullbackComp d (U.pullbackHom q a)).symm) ≪≫
+      (Functor.associator S Qk D).symm
+  have Hk : (Uk.pullbackHom pk a ≫ U.pullbackHom q a) ≫ U.f a = Vk.f a ≫ h := by
+    rw [Category.assoc, U.pullbackHom_map q a, ← Category.assoc,
+      Uk.pullbackHom_map pk a, Category.assoc, wk]
+  have Hl : (Ul.pullbackHom pl a ≫ U.pullbackHom v a) ≫ U.f a = Vl.f a ≫ h := by
+    rw [Category.assoc, U.pullbackHom_map v a, ← Category.assoc,
+      Ul.pullbackHom_map pl a, Category.assoc, wl]
+  let c := Adjunction.leftAdjointUniq
+    (Classical.choose (exists_tensorPullbackAdjunction h)) (pullbackPushforwardAdjunction h)
+  let rhoK : pullback h ⋙ Rk ≅ (S ⋙ Qk) ⋙ Pk :=
+    pullbackComp (Vk.f a) h ≪≫ (pullbackCongr Hk).symm ≪≫
+      (pullbackComp (Uk.pullbackHom pk a ≫ U.pullbackHom q a) (U.f a)).symm ≪≫
+      Functor.isoWhiskerLeft S (pullbackComp (Uk.pullbackHom pk a)
+        (U.pullbackHom q a)).symm ≪≫ (Functor.associator S Qk Pk).symm
+  let rhoL : pullback h ⋙ Rl ≅ (S ⋙ Ql) ⋙ Pl :=
+    pullbackComp (Vl.f a) h ≪≫ (pullbackCongr Hl).symm ≪≫
+      (pullbackComp (Ul.pullbackHom pl a ≫ U.pullbackHom v a) (U.f a)).symm ≪≫
+      Functor.isoWhiskerLeft S (pullbackComp (Ul.pullbackHom pl a)
+        (U.pullbackHom v a)).symm ≪≫ (Functor.associator S Ql Pl).symm
+  have hk : ck.hom.app M ≫ Pk.map (tk.inv.app M) =
+      Rk.map (c.hom.app M) ≫ rhoK.hom.app M :=
+    openCover_tensor_recovery_normalization q pk h wk U a Hk c rfl tk rfl ck rfl rhoK rfl M
+  have hl : cl.hom.app M ≫ Pl.map (tl.inv.app M) =
+      Rl.map (c.hom.app M) ≫ rhoL.hom.app M :=
+    openCover_tensor_recovery_normalization v pl h wl U a Hl c rfl tl rfl cl rfl rhoL rfl M
+  have ho : Zf.map (rhoK.hom.app M) ≫ delta.hom.app ((S ⋙ Qk).obj M) ≫
+      Pl.map (gamma.inv.app M) = beta.hom.app ((pullback h).obj M) ≫ rhoL.hom.app M :=
+    ordinary_pullback_refinement_coherence (U.f a) (U.pullbackHom q a)
+      (U.pullbackHom v a) (Uk.pullbackHom pk a) (Ul.pullbackHom pl a)
+      (Vk.f a) (Vl.f a) h d z hd hz hz0 Hk Hl M rhoK rfl rhoL rfl gamma rfl beta rfl delta rfl
+  exact assemble_refinement_comparisons (tensorPullback h) (pullback h)
+    Lk (S ⋙ Qk) Ll (S ⋙ Ql) D Pk Pl Zf Rk Rl c tk tl gamma alpha beta delta
+    ck cl rhoK rhoL rfl M hk hl ho
 
 end AlgebraicGeometry.Scheme.Modules

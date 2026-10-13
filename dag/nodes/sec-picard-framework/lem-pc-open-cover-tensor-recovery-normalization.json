@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-open-cover-tensor-recovery-normalization",
+ "kind": "statement",
+ "title": "Normalization of a single tensor recovery triangle",
+ "statement": "For q:Y→X, p:W→Y, h:W→X with p≫q=h, an open cover U of X and index a, let Uk,Vk be the successive pullbacks. The total chart path (Vk→Uk→U(a)) followed by U(a)→X equals Vk→W→X; supply this equality H. Let c be the canonical leftAdjointUniq comparison from tensorPullback h to ordinary pullback h, t the base-chart comparison, ck the recovery comparison, and rho the ordinary comparison from h* followed by Vk→W pullback to U(a) restriction followed by Uk→U(a) and Vk→Uk pullback. The supplied isomorphisms are fixed by equations to exactly their canonical constructions in Lean. Then ck_M followed by pullback(Vk→Uk) of t_M inverse equals pullback(Vk→W) of c_M followed by rho_M. This is one triangle, with no refinement maps d or z and no second base factorization. The constructions use [def-pc-tensor-pullback-composition-iso], [def-pc-open-cover-tensor-pullback-comparison], [def-pc-module-recovery-comparison-iso] and the pinned adjunction [lem-pc-module-pullback-adjunction].",
+ "stmt_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-module-recovery-comparison-iso",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096; step 1 of lem-pc-open-cover-tensor-comparison-coherence"
+ },
+ "proof": [
+  {
+   "text": "Transpose the tensor composition comparison under the chosen adjunctions.\nIts transpose is pushforwardComp followed by pushforwardCongr. Replace each tensor\nleft adjoint by the ordinary left adjoint using leftAdjointUniq. Conjugation respects\ncomposition and whiskering, and the ordinary inverse composition has the same\ntranspose, by conjugateEquiv_pullbackComp_inv. Injectivity therefore identifies\nthese comparisons. Expand the two chart comparisons and moduleRecoveryComparisonIso.\nMove the unique comparisons across whiskering by naturality and cancel each inverse\npair. Ordinary pullback associativity then identifies the three factors with the\nexplicit rho below; the equality H records the two chart projection equations.\nAll constructions exist for arbitrary modules and charts, including empty charts\nand the zero module, and no invertibility of the scheme maps is required.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "def-pc-module-recovery-comparison-iso",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-module-recovery-comparison-iso",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096",
+  "note": "Expanded portion of the existing canonical comparison coherence plan; uses the Mathlib mate and pullback-associativity APIs, not a verbatim assertion of Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence associativity comparison isomorphism of pullback functors and unique left adjoints",
+   "results": "ChosenPullbacksAlong.pullbackComp; Over.pullbackComp. Neither concerns Scheme.Modules tensor pullback.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq, leftAdjointUniq_trans, unit_leftAdjointUniq_hom_app; generic tools only, not this chart comparison identity.",
+   "date": "2026-10-14",
+   "verdict": "tools found; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudofunctor_associativity",
+   "results": "Mathlib.AlgebraicGeometry.Modules.Sheaf.pseudofunctor_associativity provides three-map ordinary reassociation, but not this refinement diamond or tensor normalization. Also inspected conjugateEquiv_comp, conjugateEquiv_whiskerLeft and conjugateEquiv_whiskerRight in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-14",
+   "verdict": "tools found; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherence of canonical pullback composition and comparison of left adjoints",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenCoverTensorComparisonCoherence",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-cover-tensor-comparison-coherence",
+   "place": "Single recovery normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenCoverTensorRecoveryNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoverTensorRecoveryNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.openCover_tensor_recovery_normalization",
+  "statement": "theorem openCover_tensor_recovery_normalization\n    {X Y W : Scheme.{u}} (q : Y ⟶ X) (p : W ⟶ Y) (h : W ⟶ X)\n    (w : p ≫ q = h) (U : X.OpenCover.{u}) (a : U.I₀)\n    (H : (Scheme.Cover.pullbackHom (U.pullback₁ q) p a ≫ U.pullbackHom q a) ≫ U.f a =\n      ((U.pullback₁ q).pullback₁ p).f a ≫ h)\n    (c : tensorPullback h ≅ pullback h)\n    (hc : c = Adjunction.leftAdjointUniq\n      (Classical.choose (exists_tensorPullbackAdjunction h)) (pullbackPushforwardAdjunction h))\n    (t : pullback (U.f a) ⋙ pullback (U.pullbackHom q a) ≅\n      tensorPullback q ⋙ pullback ((U.pullback₁ q).f a))\n    (ht : t = openCoverTensorPullbackComparison q U a)\n    (ck : tensorPullback h ⋙ pullback (((U.pullback₁ q).pullback₁ p).f a) ≅\n      (tensorPullback q ⋙ pullback ((U.pullback₁ q).f a)) ⋙\n        pullback (Scheme.Cover.pullbackHom (U.pullback₁ q) p a))\n    (hck : ck = moduleRecoveryComparisonIso (tensorPullback h) (tensorPullback q)\n      (tensorPullback p) (pullback ((U.pullback₁ q).f a))\n      (pullback (Scheme.Cover.pullbackHom (U.pullback₁ q) p a))\n      (pullback (((U.pullback₁ q).pullback₁ p).f a))\n      (tensorPullbackCompositionIso p q h w)\n      (openCoverTensorPullbackComparison p (U.pullback₁ q) a))\n    (rho : pullback h ⋙ pullback (((U.pullback₁ q).pullback₁ p).f a) ≅\n      (pullback (U.f a) ⋙ pullback (U.pullbackHom q a)) ⋙\n        pullback (Scheme.Cover.pullbackHom (U.pullback₁ q) p a))\n    (hrho : rho = pullbackComp (((U.pullback₁ q).pullback₁ p).f a) h ≪≫\n      (pullbackCongr H).symm ≪≫\n      (pullbackComp (Scheme.Cover.pullbackHom (U.pullback₁ q) p a ≫\n        U.pullbackHom q a) (U.f a)).symm ≪≫\n      Functor.isoWhiskerLeft (pullback (U.f a))\n        (pullbackComp (Scheme.Cover.pullbackHom (U.pullback₁ q) p a)\n          (U.pullbackHom q a)).symm ≪≫\n      (Functor.associator (pullback (U.f a)) (pullback (U.pullbackHom q a))\n        (pullback (Scheme.Cover.pullbackHom (U.pullback₁ q) p a))).symm)\n    (M : X.Modules) :\n    ck.hom.app M ≫ (pullback (Scheme.Cover.pullbackHom (U.pullback₁ q) p a)).map\n        (t.inv.app M) =\n      (pullback (((U.pullback₁ q).pullback₁ p).f a)).map (c.hom.app M) ≫\n        rho.hom.app M",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d8159",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T224507-L-1470043",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d8159",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T224507-L-1470043",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules and DAG records match the stated declarations and dependencies; all delivered files compile cleanly, including permitted sorryAx dependencies."
+ }
+}

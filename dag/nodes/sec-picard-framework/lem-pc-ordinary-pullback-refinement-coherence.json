@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-ordinary-pullback-refinement-coherence",
+ "kind": "statement",
+ "title": "Coherence of ordinary pullback on refined three-step paths",
+ "statement": "For schemes X,A,B,C,K,L,W, maps f:A→X, sK:B→A, sL:C→A, pK:K→B, pL:L→C, rK:K→W, rL:L→W, h:W→X, d:C→B,z:L→K satisfying d≫sK=sL, z≫pK=pL≫d, z≫rK=rL, (pK≫sK)≫f=rK≫h and (pL≫sL)≫f=rL≫h, define rhoK and rhoL by ordinary pullback composition and congruence along the total paths. Define gamma by d≫sK=sL, beta by z≫rK=rL, and delta by z≫pK=pL≫d. Each supplied isomorphism is equated to its explicit ordinary construction. Then z*(rhoK_M)≫delta_(f* sK* M)≫pL*(gamma_M inverse)=beta_(h* M)≫rhoL_M for all X-modules M. No tensor pullback, open cover, or chosen adjunction occurs. Schemes are as in [def-pc-scheme], and every pullback is the ordinary module pullback [def-pc-module-pullback].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096; ordinary portion of step 2 of lem-pc-open-cover-tensor-comparison-coherence"
+ },
+ "proof": [
+  {
+   "text": "Expand rhoK and rhoL. Apply pseudofunctor_associativity to reassociate each\nthree-step path to the pullback of its composite. Naturality of pullbackComp moves\nthe first comparison through pullback z. The equations Hz, Hd identify the composite\npath z then pK then sK with pL then sL; H0 identifies the path z then rK with rL.\nThe equations HK and HL identify each of these total paths followed by f with the\npath through h. Congruence is eqToIso, so its composites depend only on the endpoint\nequality, by proof irrelevance. Thus both expanded composites are the same canonical\ncomparison between the pullbacks of the same scheme map. Cancel inverse composition\ncomparisons, restore the associators, and evaluate at M. This argument uses no open\ncover condition, tensor pullback or adjunction, and applies to empty schemes, zero\nmodules and identity refinements.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096",
+  "note": "Expanded portion of the existing canonical comparison coherence plan; uses the Mathlib mate and pullback-associativity APIs, not a verbatim assertion of Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence associativity comparison isomorphism of pullback functors and unique left adjoints",
+   "results": "ChosenPullbacksAlong.pullbackComp; Over.pullbackComp. Neither concerns Scheme.Modules tensor pullback.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq, leftAdjointUniq_trans, unit_leftAdjointUniq_hom_app; generic tools only, not this chart comparison identity.",
+   "date": "2026-10-14",
+   "verdict": "tools found; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudofunctor_associativity",
+   "results": "Mathlib.AlgebraicGeometry.Modules.Sheaf.pseudofunctor_associativity provides three-map ordinary reassociation, but not this refinement diamond or tensor normalization. Also inspected conjugateEquiv_comp, conjugateEquiv_whiskerLeft and conjugateEquiv_whiskerRight in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-14",
+   "verdict": "tools found; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherence of canonical pullback composition and comparison of left adjoints",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenCoverTensorComparisonCoherence",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-cover-tensor-comparison-coherence",
+   "place": "Ordinary pullback refinement diamond",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryPullbackRefinementCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ordinary_pullback_refinement_coherence",
+  "statement": "theorem ordinary_pullback_refinement_coherence\n    {X A B C K L W : Scheme.{u}}\n    (f : A ⟶ X) (sK : B ⟶ A) (sL : C ⟶ A)\n    (pK : K ⟶ B) (pL : L ⟶ C) (rK : K ⟶ W) (rL : L ⟶ W) (h : W ⟶ X)\n    (d : C ⟶ B) (z : L ⟶ K)\n    (Hd : d ≫ sK = sL) (Hz : z ≫ pK = pL ≫ d) (H0 : z ≫ rK = rL)\n    (HK : (pK ≫ sK) ≫ f = rK ≫ h) (HL : (pL ≫ sL) ≫ f = rL ≫ h)\n    (M : X.Modules) :\n    let S := pullback f\n    let QK := pullback sK\n    let QL := pullback sL\n    let PK := pullback pK\n    let PL := pullback pL\n    let RK := pullback rK\n    let RL := pullback rL\n    let D := pullback d\n    let Zf := pullback z\n    let rhoK0 : pullback h ⋙ RK ≅ (S ⋙ QK) ⋙ PK :=\n      pullbackComp rK h ≪≫ (pullbackCongr HK).symm ≪≫\n      (pullbackComp (pK ≫ sK) f).symm ≪≫\n      Functor.isoWhiskerLeft S (pullbackComp pK sK).symm ≪≫\n      (Functor.associator S QK PK).symm\n    let rhoL0 : pullback h ⋙ RL ≅ (S ⋙ QL) ⋙ PL :=\n      pullbackComp rL h ≪≫ (pullbackCongr HL).symm ≪≫\n      (pullbackComp (pL ≫ sL) f).symm ≪≫\n      Functor.isoWhiskerLeft S (pullbackComp pL sL).symm ≪≫\n      (Functor.associator S QL PL).symm\n    let gamma0 : S ⋙ QL ≅ (S ⋙ QK) ⋙ D := Functor.isoWhiskerLeft S\n      ((pullbackCongr Hd).symm ≪≫ (pullbackComp d sK).symm) ≪≫\n      (Functor.associator S QK D).symm\n    let beta0 : RK ⋙ Zf ≅ RL := pullbackComp z rK ≪≫ pullbackCongr H0\n    let delta0 : PK ⋙ Zf ≅ D ⋙ PL :=\n      pullbackComp z pK ≪≫ pullbackCongr Hz ≪≫ (pullbackComp pL d).symm\n    ∀ (rhoK : pullback h ⋙ RK ≅ (S ⋙ QK) ⋙ PK) (_ : rhoK = rhoK0)\n      (rhoL : pullback h ⋙ RL ≅ (S ⋙ QL) ⋙ PL) (_ : rhoL = rhoL0)\n      (gamma : S ⋙ QL ≅ (S ⋙ QK) ⋙ D) (_ : gamma = gamma0)\n      (beta : RK ⋙ Zf ≅ RL) (_ : beta = beta0)\n      (delta : PK ⋙ Zf ≅ D ⋙ PL) (_ : delta = delta0),\n    Zf.map (rhoK.hom.app M) ≫ delta.hom.app ((S ⋙ QK).obj M) ≫\n      PL.map (gamma.inv.app M) = beta.hom.app ((pullback h).obj M) ≫\n        rhoL.hom.app M",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d8159",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T224507-L-1470043",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d8159",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T224507-L-1470043",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules and DAG records match the stated declarations and dependencies; all delivered files compile cleanly, including permitted sorryAx dependencies."
+ }
+}
