@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CechRefinementCochainMap
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+import Sheaf.Paper.CechRefinementResolutionBeta
 
 /-! # Refinement on resolution total cohomology
 
@@ -88,7 +89,16 @@ theorem exists_cechRefinement_resolution_diagram (X X' : Scheme.{v}) (f : X' ⟶
           (HomologicalComplex.homologyMap (moduleCechAlpha U D.J) p) ≫ t =
         r ≫ (forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat).map
           (HomologicalComplex.homologyMap (moduleCechAlpha U' D.I) p) := by
-  sorry
+  intro r
+  let := moduleCechAlpha_isIso U hU D.J p
+  let e := forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat
+  let a := HomologicalComplex.homologyMap (moduleCechAlpha U D.J) p
+  let a' := (forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat).map
+    (HomologicalComplex.homologyMap (moduleCechAlpha U' D.I) p)
+  refine ⟨e.map (inv a) ≫ r ≫ a', ?_, ?_⟩
+  · exact cechRefinement_resolution_canonical_beta X X' f U hU U' refine hrefine
+      F p gamma hgamma D
+  · exact e.map_hom_inv_assoc a (r ≫ a')
 
 end
 end AlgebraicGeometry.Scheme.Modules
