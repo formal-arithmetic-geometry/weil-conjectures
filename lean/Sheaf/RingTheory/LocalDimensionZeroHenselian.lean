@@ -4,6 +4,8 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Idempotents
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Mathlib.RingTheory.KrullDimension.Zero
+import Sheaf.RingTheory.HenselianOfNilMaximalIdeal
 
 /-!
 # Local rings of dimension zero are henselian
@@ -50,4 +52,15 @@ theorem isHenselianLocalRing_of_ringKrullDim_eq_zero
           IsIdempotentElem e →
             ∃! b : B, IsIdempotentElem b ∧
               Ideal.Quotient.mk ((IsLocalRing.maximalIdeal R).map (algebraMap R B)) b = e := by
-  sorry
+  have : Ring.KrullDimLE 0 R := Ring.krullDimLE_iff.mpr (by simp [hdim])
+  refine ⟨henselianLocalRing_of_maximalIdeal_le_nilradical R
+    (by rw [Ring.KrullDimLE.nilradical_eq_maximalIdeal]), ?_⟩
+  intro B _ _ _ e he
+  have hnil : (IsLocalRing.maximalIdeal R).map (algebraMap R B) ≤ nilradical B := by
+    rw [Ideal.map_le_iff_le_comap, ← Ring.KrullDimLE.nilradical_eq_maximalIdeal]
+    intro x hx
+    exact (show IsNilpotent x from hx).map (algebraMap R B)
+  apply existsUnique_isIdempotentElem_eq_of_ker_isNilpotent
+    (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal R).map (algebraMap R B)))
+    (fun x hx ↦ hnil (by simpa using hx)) e _ he
+  exact RingHom.mem_range.mpr (Ideal.Quotient.mk_surjective e)
