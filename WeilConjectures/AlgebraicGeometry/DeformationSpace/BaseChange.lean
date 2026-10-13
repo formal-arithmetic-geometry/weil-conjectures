@@ -28,7 +28,7 @@ is `AlgebraicGeometry.Scheme.Hom.isPullback_deformationSpaceMap`.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.polynomialSpecMap`: the morphism `𝔸¹_{X'} ⟶ 𝔸¹_X` over `h`
-- `AlgebraicGeometry.Scheme.IdealSheafData.reesPullbackData`: the maps of extended Rees algebras
+- `AlgebraicGeometry.Scheme.IdealSheafData.extendedReesPullbackData`: the maps of extended Rees algebras
 - `AlgebraicGeometry.Scheme.IdealSheafData.deformationSpaceMap`: the morphism `D_J X' ⟶ D_I X`
 
 ## Main statements
@@ -110,7 +110,7 @@ variable (I : X.IdealSheafData) (J : X'.IdealSheafData)
 /-- The base change data `Γ(X, U)[t, I t⁻¹] ⟶ Γ(X', U')[t, J t⁻¹]` of the extended Rees
 algebras along `h : X' ⟶ X`, for ideal sheaves with `h^* I ⊆ J`. -/
 @[simps]
-noncomputable def reesPullbackData : PullbackData h I.toReesPresheaf J.toReesPresheaf where
+noncomputable def extendedReesPullbackData : PullbackData h I.toReesPresheaf J.toReesPresheaf where
   map {U' U} hU := CommRingCat.ofHom ((I.siteIdeal U).extendedReesAlgebraMap
     (h.appLE U.1 U'.1 hU).hom (J.siteIdeal U') (hJ hU))
   map_naturality i' i h₁ h₂ := by
@@ -145,9 +145,9 @@ noncomputable def quotientPolynomialPullbackData :
     ext x
     exact Polynomial.map_C _
 
-lemma polynomialToRees_comp_reesPullbackData_map {U' : X'.AffineZariskiSite}
+lemma polynomialToRees_comp_extendedReesPullbackData_map {U' : X'.AffineZariskiSite}
     {U : X.AffineZariskiSite} (hU : U'.1 ≤ h ⁻¹ᵁ U.1) :
-    I.polynomialToRees.app (op U) ≫ (reesPullbackData h I J hJ).map hU =
+    I.polynomialToRees.app (op U) ≫ (extendedReesPullbackData h I J hJ).map hU =
       (polynomialPullbackData h).map hU ≫ J.polynomialToRees.app (op U') := by
   ext : 1
   exact Ideal.extendedReesAlgebraMap_comp_toExtendedReesAlgebra _ _ (hJ hU)
@@ -155,7 +155,7 @@ lemma polynomialToRees_comp_reesPullbackData_map {U' : X'.AffineZariskiSite}
 lemma reesToQuotientPolynomial_comp_quotientPolynomialPullbackData_map
     {U' : X'.AffineZariskiSite} {U : X.AffineZariskiSite} (hU : U'.1 ≤ h ⁻¹ᵁ U.1) :
     I.reesToQuotientPolynomial.app (op U) ≫ (quotientPolynomialPullbackData h I J hJ).map hU =
-      (reesPullbackData h I J hJ).map hU ≫ J.reesToQuotientPolynomial.app (op U') := by
+      (extendedReesPullbackData h I J hJ).map hU ≫ J.reesToQuotientPolynomial.app (op U') := by
   ext : 1
   exact (Ideal.extendedReesAlgebraToPolynomial_comp_extendedReesAlgebraMap
     (h.appLE U.1 U'.1 hU).hom (J.siteIdeal U') (hJ hU) (Ideal.Quotient.mk _) Ideal.mk_ker.ge
@@ -174,7 +174,7 @@ lemma polynomialToQuotientPolynomial_comp_quotientPolynomialPullbackData_map
 /-- The morphism `D_J X' ⟶ D_I X` of deformation spaces over `h : X' ⟶ X`, for ideal sheaves
 with `h^* I ⊆ J`. -/
 noncomputable def deformationSpaceMap : J.deformationSpace ⟶ I.deformationSpace :=
-  (reesPullbackData h I J hJ).comparison _ _
+  (extendedReesPullbackData h I J hJ).comparison _ _
 
 /-- The morphism `D_J X' ⟶ D_I X` lies over `h : X' ⟶ X`. -/
 @[reassoc]
@@ -188,7 +188,7 @@ lemma deformationSpaceMap_toPolynomialSpec :
     deformationSpaceMap h I J hJ ≫ I.deformationSpaceToPolynomialSpec =
       J.deformationSpaceToPolynomialSpec ≫ polynomialSpecMap h :=
   PullbackData.comparison_comp_relativeGluingMap _ _ _ _ _ _ _ _
-    (polynomialToRees_comp_reesPullbackData_map h I J hJ)
+    (polynomialToRees_comp_extendedReesPullbackData_map h I J hJ)
 
 /-- The projection `D_I X ⟶ 𝔸¹_X ⟶ 𝔸¹_B ⟶ B` is `D_I X ⟶ X ⟶ B`. -/
 lemma deformationSpaceProj_over' {B : Scheme.{u}} (g : X ⟶ B) :
@@ -219,7 +219,7 @@ lemma isPullback_deformationSpaceMap_proj
     (hcov : ∀ x : X', ∃ (U' : X'.AffineZariskiSite) (U : X.AffineZariskiSite)
       (hU : U'.1 ≤ h ⁻¹ᵁ U.1), x ∈ U'.1 ∧ IsPushout (h.appLE U.1 U'.1 hU)
         (I.toReesPresheaf.app (op U)) (J.toReesPresheaf.app (op U'))
-        ((reesPullbackData h I J hJ).map hU))
+        ((extendedReesPullbackData h I J hJ).map hU))
     {B B' : Scheme.{u}} (g : X ⟶ B) (g' : X' ⟶ B') (b : B' ⟶ B) (sq : IsPullback h g' g b) :
     IsPullback (deformationSpaceMap h I J hJ)
       (J.deformationSpaceToPolynomialSpec ≫ X'.polynomialSpecToAffineSpace ≫
@@ -230,7 +230,7 @@ lemma isPullback_deformationSpaceMap_proj
   refine IsPullback.of_bot ?_ (deformationSpaceMap_proj h I J hJ g g' b sq.w)
     (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) b)
   rw [deformationSpaceProj_over', deformationSpaceProj_over']
-  exact ((reesPullbackData h I J hJ).isPullback_comparison _ _ hcov).paste_vert sq
+  exact ((extendedReesPullbackData h I J hJ).isPullback_comparison _ _ hcov).paste_vert sq
 
 lemma toPolynomialPresheaf_comp_polynomialToQuotientPolynomial :
     X.toPolynomialPresheaf ≫ I.polynomialToQuotientPolynomial = I.toQuotientPolynomialAlgebra := by
@@ -261,10 +261,10 @@ lemma map_siteIdeal_imageSite (U : X'.AffineZariskiSite) :
 
 /-- Along an open immersion `h : X' ⟶ X`, the extended Rees algebra of `h^* I` over an affine
 open `U` is the base change of the one of `I` over `h(U)`. -/
-lemma isPushout_reesPullbackData_imageSite (hJI : J = I.comap h) (U : X'.AffineZariskiSite) :
+lemma isPushout_extendedReesPullbackData_imageSite (hJI : J = I.comap h) (U : X'.AffineZariskiSite) :
     IsPushout (h.appLE (imageSite h U).1 U.1 (h.preimage_image_eq U.1).ge)
       (I.toReesPresheaf.app (op (imageSite h U))) (J.toReesPresheaf.app (op U))
-      ((reesPullbackData h I J hJ).map (h.preimage_image_eq U.1).ge) := by
+      ((extendedReesPullbackData h I J hJ).map (h.preimage_image_eq U.1).ge) := by
   subst hJI
   have e : (I.siteIdeal (imageSite h U)).map
       (h.appLE (imageSite h U).1 U.1 (h.preimage_image_eq U.1).ge).hom =
@@ -274,10 +274,10 @@ lemma isPushout_reesPullbackData_imageSite (hJI : J = I.comap h) (U : X'.AffineZ
   have : IsIso (h.appLE (imageSite h U).1 U.1 (h.preimage_image_eq U.1).ge) := by
     have : IsIso (h.appIso U.1).hom := inferInstance
     rwa [Scheme.Hom.appIso_hom'] at this
-  have : IsIso ((reesPullbackData h I (I.comap h) hJ).map (h.preimage_image_eq U.1).ge) :=
+  have : IsIso ((extendedReesPullbackData h I (I.comap h) hJ).map (h.preimage_image_eq U.1).ge) :=
     (ConcreteCategory.isIso_iff_bijective _).mpr (Ideal.bijective_extendedReesAlgebraMap
       (asIso (h.appLE (imageSite h U).1 U.1 _)).commRingCatIsoToRingEquiv _ e)
-  exact IsPushout.of_horiz_isIso ⟨((reesPullbackData h I _ hJ).app_comp_map _).symm⟩
+  exact IsPushout.of_horiz_isIso ⟨((extendedReesPullbackData h I _ hJ).app_comp_map _).symm⟩
 
 end OpenImmersion
 
@@ -351,7 +351,7 @@ theorem exists_isPullback_deformationSpace_baseChange_of_cover [IsClosedImmersio
       (U : V.AffineZariskiSite) (hU : U'.1 ≤ pullback.fst g b ⁻¹ᵁ U.1), x ∈ U'.1 ∧
         IsPushout ((pullback.fst g b).appLE U.1 U'.1 hU) (s.ker.toReesPresheaf.app (op U))
           ((baseChangeSection g s hs b).ker.toReesPresheaf.app (op U'))
-          ((IdealSheafData.reesPullbackData (pullback.fst g b) s.ker
+          ((IdealSheafData.extendedReesPullbackData (pullback.fst g b) s.ker
             (baseChangeSection g s hs b).ker
             (map_siteIdeal_ker_le_baseChangeSection g s hs b)).map hU)) :
     ∃ φ : (baseChangeSection g s hs b).ker.deformationSpace ⟶ s.ker.deformationSpace,
@@ -379,7 +379,7 @@ theorem exists_isPullback_deformationSpace_baseChange_of_isOpenImmersion [IsOpen
     (IsPullback.of_hasPullback g b), IdealSheafData.deformationSpaceMap_toBase _ _ _ _⟩
   obtain ⟨U, hU, hx, -⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp
     (pullback g b).isBasis_affineOpens (show x ∈ (⊤ : (pullback g b).Opens) from trivial)
-  exact ⟨⟨U, hU⟩, _, _, hx, IdealSheafData.isPushout_reesPullbackData_imageSite _ _ _ _
+  exact ⟨⟨U, hU⟩, _, _, hx, IdealSheafData.isPushout_extendedReesPullbackData_imageSite _ _ _ _
     (ker_baseChangeSection g s hs b) _⟩
 
 /-- Blueprint `sk-lem-geometry` (5), base change in `B`: for `g : V ⟶ B` smooth of relative
