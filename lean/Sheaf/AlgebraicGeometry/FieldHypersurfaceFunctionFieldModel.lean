@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 
+import Sheaf.AlgebraicGeometry.FieldHypersurfaceIntegralPresentation
+import Sheaf.AlgebraicGeometry.FieldFractionRingGeometricIntegrality
+
 /-! # Hypersurface function-field presentation over a field
 
 Source: Stacks Project, Tag 0559, first proof, separating generators and minimal polynomial.
@@ -53,6 +56,18 @@ theorem exists_field_hypersurface_function_field_model
         ∃ e : FractionRing Γ(Y, ⊤) ≃+* FractionRing Γ(Z, ⊤),
           ∀ a : Γ(Spec (.of K), ⊤),
             e (algebraMap Γ(Y, ⊤) (FractionRing Γ(Y, ⊤)) (p.appTop.hom a)) =
-              algebraMap Γ(Z, ⊤) (FractionRing Γ(Z, ⊤)) (q.appTop.hom a) := by sorry
+              algebraMap Γ(Z, ⊤) (FractionRing Γ(Z, ⊤)) (q.appTop.hom a) := by
+  have : GeometricallyIrreducible p := hgeom
+  have : GeometricallyReduced p := hred
+  have : IrreducibleSpace Y := GeometricallyIrreducible.irreducibleSpace_of_subsingleton p
+  have : IsReduced Y := GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian p
+  have : IsIntegral Y := isIntegral_of_irreducibleSpace_of_isReduced Y
+  obtain ⟨n, Q, hZ, e, he⟩ := exists_integral_field_hypersurface_presentation p hred
+  let Z := Spec (.of (MvPolynomial (Fin n) K ⧸ Ideal.span {Q}))
+  let q : Z ⟶ Spec (.of K) := Spec.map (CommRingCat.ofHom
+    ((Ideal.Quotient.mk (Ideal.span {Q})).comp MvPolynomial.C))
+  have : IsIntegral Z := hZ
+  obtain ⟨hgeomZ, hredZ⟩ := geometrically_integral_of_fractionRing_equiv p q hgeom hred e he
+  exact ⟨n, Q, hgeomZ, hredZ, e, he⟩
 
 end AlgebraicGeometry

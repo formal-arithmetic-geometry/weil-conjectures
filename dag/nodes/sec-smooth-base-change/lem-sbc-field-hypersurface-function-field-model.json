@@ -16,27 +16,29 @@
  ],
  "proof": [
   {
-   "text": "The affine section algebra B is finitely generated and geometrically integral over K. Localizing B at its nonzero elements identifies its fraction field L, and tensoring this localization with any field extension preserves its domain property. Thus L/K is finitely generated and separably generated.",
-   "uses": [],
+   "text": "Geometric irreducibility over the field makes Y irreducible. Geometric reducedness and flatness over the field make Y reduced, hence integral. Apply the integral hypersurface presentation theorem to p to obtain n,Q, integral Z, and a fraction-ring equivalence fixing all base sections.",
+   "uses": [
+    "lem-sbc-field-hypersurface-integral-presentation"
+   ],
    "elementary": false
   },
   {
-   "text": "Choose a separating transcendence basis t_1,...,t_r and a primitive element z for the finite separable extension L/K(t_1,...,t_r). Remove the content of the numerator of the minimal polynomial of z to obtain Q over K in r+1 variables. Gauss lemma gives an injection K[t,T]/(Q) into L with fraction field L. For a purely transcendental extension choose the extra variable with equation T.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "The same quotient after each field extension embeds into the localized geometrically integral B; its spectrum is therefore geometrically irreducible and reduced. The two fraction fields identify with L fixing K. Transporting the canonical section-ring identification for Spec K gives the displayed compatibility.",
-   "uses": [],
+   "text": "For this integral affine Z, apply geometric-integrality transfer to the supplied fraction-ring equivalence and its compatibility with base sections. Pair the resulting geometric irreducibility and reducedness with the same n,Q,e and compatibility to give the desired witnesses.",
+   "uses": [
+    "lem-sbc-field-fraction-ring-geometric-integrality"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-field-hypersurface-integral-presentation",
+  "lem-sbc-field-fraction-ring-geometric-integrality"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0559 (more-morphisms.tex, lemma-geom-irreducible-generic-fibre), first proof",
-  "note": "Specialized and expanded from the source; the finite-type and integral clauses are proved separately in the parent module."
+  "place": "Tag 0559, first proof, separating generators and geometric integrality of the common fraction field",
+  "note": "B3: split off the integral hypersurface construction; geometric transfer proved directly by affine base change, flat tensor injections and localization."
  },
  "mathlib_searches": [
   {
@@ -127,9 +129,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T133228-L-4194150",
+  "landing": "20261013T140812-L-311199",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
