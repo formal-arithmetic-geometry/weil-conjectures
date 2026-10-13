@@ -13594,3 +13594,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:11 L: merged deliver/R1/Sheaf.AlgebraicGeometry.SingleComplexQcqsHomologyMono (stage 3; reviewer PASS; first push; landing 20261013T211111-L-394340 (interface); batch 20261013T211049; modules 2; new nodes 1)
 - 21:11 L: merged deliver/S1/Sheaf.AlgebraicGeometry.AffineHomComparisonGeneratorExtension (stage 3; reviewer PASS; first push; landing 20261013T211112-L-394467 (interface); batch 20261013T211049; modules 2; new nodes 1)
 - 21:11 L: merged deliver/S1/Sheaf.AlgebraicGeometry.LocalTensorFiniteFreeZeroModel (stage 3; reviewer PASS; first push; landing 20261013T211112-L-394675 (interface); batch 20261013T211049; modules 3; new nodes 2)
+- 21:11 L: merged deliver/T1/Sheaf.AlgebraicGeometry.Morphisms.DepthThreeLocalCohomologyVanishing (stage 3; reviewer PASS; first push; landing 20261013T211113-L-394847 (proof); batch 20261013T211049; modules 1; new nodes 0)
