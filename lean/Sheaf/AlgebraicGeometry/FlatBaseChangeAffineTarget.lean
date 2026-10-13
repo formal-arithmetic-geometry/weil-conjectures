@@ -3,15 +3,10 @@ public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.FlatBaseChangeAffineCanonicalComparisons
 import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
 import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyGluing
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 @[expose] public section
 universe u
@@ -21,6 +16,68 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
+-- Stacks 02KH, qcqs paragraph: the Mayer–Vietoris alternative.
+-- Generalized to every compact open, without compactness of the ambient scheme.
+-- Quantifying over open immersions makes the induction invariant under open-chart models.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem flatCohomologyBaseChange_bijective_of_compact_open
+    {R B : Type u} [CommRing R] [CommRing B] [Algebra R B] [Module.Flat R B]
+    {X : Scheme.{u}} [QuasiSeparatedSpace X]
+    (f : X ⟶ Spec (.of R)) (U : X.Opens) (hU : IsCompact (U : Set X)) :
+    ∀ (Y : Scheme.{u}) (j : Y ⟶ X) (_ : IsOpenImmersion j), j.opensRange = U →
+      ∀ (N : Y.Modules) (_ : N.IsQuasicoherent) (n : ℕ),
+        Function.Bijective (Scheme.Modules.H.baseChange (S := B) (j ≫ f) N n) := by
+  classical
+  let P (U : X.Opens) : Prop :=
+    ∀ (Y : Scheme.{u}) (j : Y ⟶ X) (_ : IsOpenImmersion j), j.opensRange = U →
+      ∀ (N : Y.Modules) (_ : N.IsQuasicoherent) (n : ℕ),
+        Function.Bijective (Scheme.Modules.H.baseChange (S := B) (j ≫ f) N n)
+  change P U
+  apply compact_open_induction_on (P := P) U hU
+  · intro Y j hj hjrange N hN n
+    have : IsEmpty Y := ⟨fun y ↦ by
+      have hy : j y ∈ j.opensRange := ⟨y, rfl⟩
+      rw [hjrange] at hy
+      exact hy⟩
+    exact Scheme.Modules.H.baseChange_bijective_of_isSeparated _ N n
+  · intro U hU V ih Y j hj hjrange N hN n
+    let A : Y.Opens := j ⁻¹ᵁ U
+    let C : Y.Opens := j ⁻¹ᵁ V.1
+    have hAimage : j ''ᵁ A = U := by
+      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, hjrange,
+        inf_eq_right.mpr le_sup_left]
+    have hC : IsAffineOpen C :=
+      V.2.preimage_of_isOpenImmersion j (hjrange.symm ▸ le_sup_right)
+    have hAc : IsCompact (A : Set Y) :=
+      j.isOpenEmbedding.isEmbedding.isCompact_iff.mpr (by
+        change IsCompact (j ''ᵁ A : Set X)
+        rw [hAimage]
+        exact hU)
+    have : CompactSpace A.toScheme := isCompact_iff_compactSpace.mp hAc
+    have : QuasiSeparatedSpace Y := j.isOpenEmbedding.quasiSeparatedSpace
+    have hIc : IsCompact ((A ⊓ C : Y.Opens) : Set Y) :=
+      hAc.inter_of_isOpen hC.isCompact A.isOpen C.isOpen
+    have : CompactSpace (A ⊓ C).toScheme := isCompact_iff_compactSpace.mp hIc
+    have : IsAffine C.toScheme := hC
+    have : (A ⊓ C).toScheme.IsSeparated := ⟨by
+      rw [← Limits.terminal.comp_from (Y.homOfLE (inf_le_right : A ⊓ C ≤ C))]
+      infer_instance⟩
+    apply Scheme.Modules.H.baseChange_bijective_of_openCover _ N A C ?_ ?_ ?_ ?_ n
+    · change j ⁻¹ᵁ U ⊔ j ⁻¹ᵁ V.1 = ⊤
+      rw [← j.preimage_sup, ← hjrange, j.preimage_opensRange]
+    · intro r
+      apply ih A.toScheme (A.ι ≫ j) inferInstance ?_ _ inferInstance r
+      rw [Scheme.Hom.opensRange_comp, Scheme.Opens.opensRange_ι, hAimage]
+    · intro r
+      exact Scheme.Modules.H.baseChange_bijective_of_isSeparated _ _ r
+    · intro r
+      exact Scheme.Modules.H.baseChange_bijective_of_isSeparated _ _ r
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 1000000 in
+-- The affine comparisons carry several definitionally equal section and scalar instances.
 /-- Target affine dictionary for a source comparison with a normalized linear lift.
 Source: Stacks Project, Tags 02KH (both parts), 01XJ, 01E4 and 03FD.
 (blueprint: new-flat-base-change-affine-target)
@@ -97,5 +154,52 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
               (D.targetClass p
                 (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                   ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (eH.symm xi)))) := by
-  sorry
+  classical
+  dsimp only
+  let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
+  let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
+  let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F
+  have : Module.Flat Γ(S, V) Γ(S', W) := g.flat_appLE hV hW eVW
+  have : CompactSpace (f ⁻¹ᵁ V).toScheme :=
+    isCompact_iff_compactSpace.mp (f.isCompact_preimage hV.isCompact)
+  have : IsAffine V.toScheme := hV
+  have : QuasiSeparatedSpace (f ⁻¹ᵁ V).toScheme :=
+    quasiSeparatedSpace_of_quasiSeparated (f ∣_ V)
+  have hb := flatCohomologyBaseChange_bijective_of_compact_open
+    (B := Γ(S', W)) h ⊤ isCompact_univ (f ⁻¹ᵁ V).toScheme (𝟙 _) inferInstance
+    (Scheme.Hom.opensRange_of_isIso _) N inferInstance p
+  rw [Category.id_comp] at hb
+  let c := LinearEquiv.ofBijective (Scheme.Modules.H.baseChange (S := Γ(S', W)) h N p) hb
+  obtain ⟨e0, a0, b0, ha0, hb0⟩ :=
+    Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
+      f g F I J p V W hV hW eVW D
+  intro eH a ha ha_tmul
+  let ae := LinearEquiv.ofBijective a ha
+  let b := c.symm.trans (ae.trans (a0.symm.trans (c.trans b0)))
+  refine ⟨b.toLinearMap, b.bijective, ?_⟩
+  intro xi
+  have hc (y : Scheme.Modules.HOver h N p) :
+      c (1 ⊗ₜ[Γ(S, V)] y) =
+        Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p y := by
+    change (1 : Γ(S', W)) •
+      Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p y = _
+    exact one_smul _ _
+  have ht : a (1 ⊗ₜ[Γ(S, V)] xi) =
+      a0 (1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi)) := by
+    rw [ha_tmul, ha0, e0.symm_apply_apply]
+  have ht' : a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)) =
+      1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi) :=
+    (congrArg a0.symm ht).trans (a0.symm_apply_apply _)
+  change b (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi) = _
+  calc
+    b (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi) =
+        b (c (1 ⊗ₜ[Γ(S, V)] xi)) := congrArg b (hc xi).symm
+    _ = b0 (c (a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)))) := by
+      dsimp only [b, LinearEquiv.trans_apply]
+      rw [c.symm_apply_apply]
+      rfl
+    _ = b0 (c (1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi))) := congrArg (fun z ↦ b0 (c z)) ht'
+    _ = b0 (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p
+        (e0 (eH.symm xi))) := congrArg b0 (hc _)
+    _ = _ := by simpa only [e0.symm_apply_apply] using hb0 (e0 (eH.symm xi))
 end AlgebraicGeometry

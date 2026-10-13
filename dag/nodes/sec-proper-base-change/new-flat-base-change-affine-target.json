@@ -17,33 +17,14 @@
  ],
  "proof": [
   {
-   "text": "Construct canonical e0,a0,b0 by common section-complex comparisons, affine chart pullbacks, quasi-coherent higher images, affine vanishing and cocycle-normalized Leray. The given D identifies the restricted complexes and maps with their canonical counterparts.",
+   "text": "Obtain e0, a0, b0 and their two normalization equations from the nonflat canonical affine comparison theorem. These choices do not assert invertibility of H.baseChange and do not depend on the arbitrary supplied eH or a.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-pc-module-pullback",
-    "def-weil-pbc-flat-base-change-open-choices",
-    "lem-sc-module-cohomology-source-comparison",
-    "lem-sc-module-abelian-zariski-cohomology",
-    "lem-pc-ordinary-higher-image-quasi-coherent",
-    "lem-pc-affine-vanishing",
-    "lem-pc-leray-degenerate-sections",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "new-flat-base-change-affine-canonical-comparisons"
    ],
    "elementary": false
   },
   {
-   "text": "The augmented resolution map computing moduleCohomologyFMap and the Ext inverse-image comparison compute the same map on common section complexes. D.unit_square and chart units identify the coefficient morphisms. Hence b0(baseChangeLinear(y)) is the required target class evaluated on e0 inverse y.",
-   "uses": [
-    "def-weil-pbc-module-cohomology-fmap",
-    "def-pc-flat-cohomology-comparison",
-    "def-weil-pbc-flat-base-change-open-choices",
-    "lem-sc-module-abelian-zariski-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "B is flat over A by g.flat_appLE. U is qcqs and N quasi-coherent. Use the separated Cech base-change theorem, then compact-open induction and Mayer-Vietoris gluing, to make c=H.baseChange a B-linear equivalence. No resolution beta or parent dictionary is used.",
+   "text": "Prove flat cohomology base change over every compact open U in an arbitrary (possibly noncompact) quasi-separated scheme X mapping to Spec A. Quantify over all open immersions j : Y → X with opensRange U, all quasi-coherent N on Y and all degrees. Apply compact-open induction to U itself, using the separated case on affine opens and compact intersections with an affine open, and Mayer–Vietoris gluing on unions. The empty open is an empty separated scheme. This strictly generalizes the downstream private qcqs theorem and is the proved helper flatCohomologyBaseChange_bijective_of_compact_open.",
    "uses": [
     "lem-pc-flat-cohomology-separated",
     "lem-pc-flat-cohomology-gluing"
@@ -51,20 +32,23 @@
    "elementary": false
   },
   {
-   "text": "Convert a to an equivalence and set b=b0 o c o a0 inverse o a o c inverse. Source normalization at s=1 gives a(1 tensor xi)=a0(1 tensor e0(eH inverse xi)). Cancellation and the canonical target compatibility give precisely the conclusion; all factors are bijective and B-linear.",
-   "uses": [],
+   "text": "Flatness of B over A is g.flat_appLE. Quasi-compactness and quasi-separatedness of f over affine V give compactness and quasi-separatedness of its preimage. Pullback preserves quasi-coherence. Apply the compact-open helper with U = top and j the identity on this preimage; simplify identity composition. Make c = H.baseChange into a B-linear equivalence. Its value on 1 tensor xi is baseChangeLinear(xi), by the definition of extendComparison.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "def-pc-module-pullback"
+   ],
    "elementary": true
   },
   {
-   "text": "Empty opens and zero coefficients produce zero modules; degree zero uses the same augmentations and cancellation identities.",
+   "text": "For the supplied normalized bijective a, put ae = LinearEquiv.ofBijective a and b = c inverse followed by ae followed by a0 inverse followed by c followed by b0. This is B-linear and bijective. The two source formulas give a(1 tensor xi) = a0(1 tensor e0(eH inverse xi)). Cancel c inverse with c and a0 inverse with a0, use c(1 tensor y) = baseChangeLinear(y), then apply the canonical b0 compatibility and cancel e0 inverse with e0. The resulting equation is exactly the required target formula.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project, Tags 02KH, 01XJ, 01E4 and 03FD",
-  "place": "Canonical affine section comparisons; independent flat Ext base-change and change of coordinates through the normalized source lift (second-reader repair)"
+  "document": "Stacks Project, Tag 02KH, qcqs Mayer–Vietoris alternative and canonical affine dictionary",
+  "place": "V2 repair: generalized compact-open induction to compact opens of possibly noncompact ambient schemes, avoiding the duplicated qcqs theorem in the cyclic downstream module; proved specialization and linear transport; canonical comparisons split off without flatness."
  },
  "mathlib_searches": [
   {
@@ -124,20 +108,11 @@
   "date": "2026-10-13"
  },
  "proof_deps": [
-  "def-pc-fibre-product",
   "def-pc-flat-cohomology-comparison",
   "def-pc-module-pullback",
-  "def-weil-pbc-flat-base-change-open-choices",
-  "def-weil-pbc-module-cohomology-fmap",
-  "lem-pc-affine-vanishing",
   "lem-pc-flat-cohomology-gluing",
   "lem-pc-flat-cohomology-separated",
-  "lem-pc-leray-degenerate-sections",
-  "lem-pc-ordinary-higher-image-quasi-coherent",
-  "lem-sc-module-abelian-zariski-cohomology",
-  "lem-sc-module-cohomology-source-comparison",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-module-pullback-affine-sections"
+  "new-flat-base-change-affine-canonical-comparisons"
  ],
  "tool_uses": [
   "lem-pc-flat-cohomology-separated",
@@ -157,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T011932-L-2765102",
+  "landing": "20261013T034213-L-3768487",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
