@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Over the supplied affine U, quasi-compactness gives a finite affine cover of the inverse image. Properness gives separatedness. Restrict relative flatness by the section-ring identifications for open inclusions. Form the actual finiteAffineCechModel. Its degree bounds are 0 and the size of the finite cover; its terms are flat over the identity by the finite-affine-Cech flatness theorem.",
+   "text": "On the supplied affine U, use quasi-compactness and compactness of U to make its inverse image Y compact. Reindex the finite subcover of Y.affineCover by Fin r. Properness supplies separatedness of f restricted to U. Restrict relative flatness using the proved private flatOver_openImmersion_square helper: for any commutative square with open immersions on source and base, transport section flatness along the base section-ring isomorphism and identify the scalar action using appLE_comp_appLE. Apply it to the restriction square using morphismRestrict_ι. No pullback hypothesis is needed in the helper. Form P = finiteAffineCechModel (f restricted to U) (F restricted to Y) V. finiteAffineCechModel_ge and finiteAffineCechModel_le give termwise vanishing outside [0,r]; finiteAffineCechModel_flatOver gives flatness over the identity.",
    "uses": [
     "def-pc-finite-affine-cech-model",
     "lem-pc-finite-affine-cech-model-flat-over",
@@ -27,7 +27,7 @@
    "elementary": false
   },
   {
-   "text": "The finite affine Cech derived comparison identifies Q of this specified complex with the restricted morphism direct image of the restricted single module. The open direct-image comparison and the exact-restriction-single comparison identify it with the requested open restriction of Rf_*(F[0]). Use the standard localization on the inverse-image scheme; the two comparisons allow independent source and target localizations.",
+   "text": "Supply the standard derived localization on Y; keep the supplied independent localizations on X, S and U. finiteAffineCechModel_derivedComparison gives Q(P) isomorphic to the direct image of the restricted module in degree zero. mapDerivedCategorySingleFunctor and overFunctorEquiv identify exact restriction of F[0] with the single complex of the restricted module. Compose the inverse of this comparison under the restricted direct image with the inverse component of schemeDerivedDirectImage_openRestriction. This gives Q(P) isomorphic to the requested restriction of Rf_*(F[0]).",
    "uses": [
     "lem-pc-finite-affine-cech-model-derived-comparison",
     "lem-pc-restrict-derived-direct-image-open"
@@ -35,7 +35,7 @@
    "elementary": false
   },
   {
-   "text": "Flatness over the identity implies tensor-exact sheaf flatness. The complex is bounded above, hence K-flat. For any module M, tensoring the complex with M[0] is isomorphic to termwise tensor. Outside the bounds its degree-n term is zero; tensor preserves zero objects, and a zero middle term in the homology short complex gives zero homology. The same interval [0,r] works for all M, so use this complex and the preceding representing isomorphism in the definition of finite Tor dimension. Empty covers and zero modules give zero terms.",
+   "text": "Apply isFlat_of_affineFlatOver_identity to each term of P, then isKFlat_of_boundedAbove_flat_ringedSpace with upper bound r. For any test module M and integer n outside [0,r], mapBifunctorSingle₂Iso identifies the total tensor P tensor M[0] with termwise tensor by M. tensorRight M preserves the zero degree-n term. The homology short complex therefore has zero middle object, so isZero_homology_of_isZero_X₂ gives zero homology. Use witnesses 0,r with 0 ≤ r in HasFiniteTorDimension, and use P, its K-flatness, and the composed representing isomorphism in schemeDerivedTensorCohomologyVanishes. The proof does not require a nonempty cover, a nonzero coefficient module, or a nonempty base.",
    "uses": [
     "lem-pc-affine-flat-module-tensor-flat",
     "lem-pc-bounded-above-flat-kflat",
@@ -59,7 +59,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 01XD (coherent-lemma-cech-cohomology-quasi-coherent), 08FE (cohomology-lemma-restrict-direct-image-open), 08CG and 08CI; finite-flat-Cech part of Tag 0A1H; decomposition written by C1 after reading the official tag pages"
+  "place": "Tags 01XD, 08FE, 08CG and 08CI; existing finite-flat-Cech plan realized in Lean by H2, repaired to use a genuine generalization to commutative open-immersion squares for relative flatness."
  },
  "mathlib_searches": [
   {
@@ -141,10 +141,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T045515-L-125056",
-  "kind": "interface",
+  "landing": "20261013T062522-L-732905",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
