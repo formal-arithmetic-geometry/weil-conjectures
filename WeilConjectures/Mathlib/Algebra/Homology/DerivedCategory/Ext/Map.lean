@@ -25,6 +25,8 @@ functor `G` up to isomorphism and on `u` up to precomposition.
 - `CategoryTheory.Abelian.Ext.mk₀_comp_mapExactFunctor_comp_eq_zero_iff`: the class pushed
   forward along `G₁` and then along `G₂` vanishes exactly when it vanishes pushed forward
   along any functor isomorphic to `G₁ ⋙ G₂`.
+- `CategoryTheory.Abelian.Ext.mapExactFunctor_eq_of_iso`: pushing forward along isomorphic exact
+  functors gives the same class up to the isomorphism.
 - `CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_app`,
   `CategoryTheory.Abelian.Ext.mapExactFunctor_mapExactFunctor`,
   `CategoryTheory.Abelian.Ext.mapExactFunctor_id`: pushing `Ext`-classes forward along exact
@@ -155,6 +157,15 @@ lemma mapExactFunctor_comp_mk₀_app (α : F ⟶ G) {A B : C} {n : ℕ} (x : Ext
     rw [← comp_assoc_of_second_deg_zero]
     erw [ih y]
     exact comp_assoc _ _ _ _ _ (by lia)
+
+variable {F G} in
+/-- Pushing `Ext`-classes forward along isomorphic exact functors gives the same class up to
+the isomorphism. -/
+lemma mapExactFunctor_eq_of_iso (τ : F ≅ G) {A B : C} {n : ℕ} (x : Ext A B n) :
+    x.mapExactFunctor F = (mk₀ (τ.hom.app A)).comp
+      ((x.mapExactFunctor G).comp (mk₀ (τ.inv.app B)) (add_zero n)) (zero_add n) := by
+  rw [← comp_assoc_of_third_deg_zero, ← mapExactFunctor_comp_mk₀_app F G τ.hom,
+    comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, Iso.hom_inv_id_app, comp_mk₀_id]
 
 /-- Pushing `Ext`-classes forward along `F` and then along `G` is pushing them forward along
 `F ⋙ G`. -/

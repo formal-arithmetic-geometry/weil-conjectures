@@ -17,7 +17,6 @@ groups `Hⁿ(G, A) ≃ Hⁿ(G', A)` for trivial modules `A`.
 
 ## Main definitions and statements
 
-- `CategoryTheory.Abelian.Ext.postcompAddEquiv`: postcomposition with an isomorphism on `Ext`.
 - `DiscreteModule.resEquivalence`: the equivalence of categories given by restriction.
 - `DiscreteModule.HTrivialAddEquiv`: the isomorphism `Hⁿ(G, A) ≃+ Hⁿ(G', A)`.
 - `DiscreteModule.subsingleton_H_trivialZMod_of_continuousMulEquiv`: vanishing of `Hⁿ(-, 𝔽_ℓ)`
@@ -29,23 +28,6 @@ groups `Hⁿ(G, A) ≃ Hⁿ(G', A)` for trivial modules `A`.
 universe w u
 
 open CategoryTheory Limits Action
-
-namespace CategoryTheory.Abelian.Ext
-
-variable {C : Type*} [Category* C] [Abelian C] [HasExt.{w} C] {Y Y' : C}
-
-/-- An isomorphism `e : Y ≅ Y'` induces an isomorphism `Ext X Y n ≃+ Ext X Y' n` of
-`Ext`-groups by postcomposition with `e`. -/
-@[simps! apply]
-noncomputable def postcompAddEquiv (X : C) (e : Y ≅ Y') (n : ℕ) : Ext X Y n ≃+ Ext X Y' n where
-  __ := (Ext.mk₀ e.hom).postcomp X (add_zero n)
-  invFun := (Ext.mk₀ e.inv).postcomp X (add_zero n)
-  left_inv x := by
-    simp [Ext.mk₀_comp_mk₀]
-  right_inv x := by
-    simp [Ext.mk₀_comp_mk₀]
-
-end CategoryTheory.Abelian.Ext
 
 /-- The underlying monoid homomorphism of a continuous multiplicative equivalence is
 continuous. -/

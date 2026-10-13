@@ -9,53 +9,38 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimit
 public import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Continuity of étale cohomology of abelian sheaves
+
+Let `(Xᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over a scheme `S`, with
+affine transition maps and limit `X`, and let `F` be an abelian étale sheaf on `S`. Then
+`Hᵠ(X, F|_X) = colimᵢ Hᵠ(Xᵢ, F|_{Xᵢ})` along the pullback maps
+`AlgebraicGeometry.Etale.cohomologyMap` ([Stacks, Tag 09YQ], blueprint
+`lemma-weil-pbc-etale-cohomology-continuity`).
+
+For sheaves of `Λ`-modules this is proved in
+`WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimit` in terms of the restriction maps `AlgebraicGeometry.Etale.cohomologyRestrictOver`. Here the case
+of sheaves of `ULift ℤ`-modules is transported to abelian sheaves: taking underlying abelian
+sheaves is an equivalence which commutes with pullbacks and preserves injectives, so it identifies
+the cohomology groups (`AlgebraicGeometry.Etale.cohomologyForget₂AddEquiv`) compatibly with the
+restriction maps (`AlgebraicGeometry.Etale.cohomologyForget₂AddEquiv_cohomologyRestrictOver`).
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.cohomologyMap_isColimit_of_isLimit`: continuity of the étale
+  cohomology of abelian sheaves.
 -/
 
 @[expose] public section
 
-universe w w' u
+universe u
 
 open CategoryTheory Limits Opposite Abelian
-
-namespace CategoryTheory.Adjunction
-
-variable {C D : Type*} [Category* C] [Category* D]
-
-/-- The canonical isomorphism `Adjunction.leftAdjointUniq` of two left adjoints of `G` does not
-change when both adjunctions are transported along a morphism `κ : G ⟶ G'` to adjunctions with
-right adjoint `G'` which is compatible with the units. -/
-lemma leftAdjointUniq_eq_of_unit {F F' : C ⥤ D} {G G' : D ⥤ C} (adj₁ : F ⊣ G) (adj₂ : F' ⊣ G)
-    (adj₁' : F ⊣ G') (adj₂' : F' ⊣ G') (κ : G ⟶ G')
-    (h₁ : ∀ x, adj₁'.unit.app x = adj₁.unit.app x ≫ κ.app (F.obj x))
-    (h₂ : ∀ x, adj₂'.unit.app x = adj₂.unit.app x ≫ κ.app (F'.obj x)) :
-    leftAdjointUniq adj₁ adj₂ = leftAdjointUniq adj₁' adj₂' := by
-  ext x
-  apply (adj₁'.homEquiv _ _).injective
-  rw [homEquiv_leftAdjointUniq_hom_app, homEquiv_unit, h₁, Category.assoc, ← κ.naturality,
-    ← Category.assoc, ← homEquiv_unit, homEquiv_leftAdjointUniq_hom_app, h₂]
-
-end CategoryTheory.Adjunction
-
-namespace CategoryTheory
-
-variable {C : Type*} [Category* C] (J : GrothendieckTopology C) (D : Type*) [Category* D]
-  [HasWeakSheafify J D]
-
-/-- The units of the adjunctions `constantSheaf ⊣ Γ(T, -)` for two terminal objects `T`, `T'`
-differ by the restriction along `T' ⟶ T`. -/
-lemma constantSheafAdj_unit_app_comp_map {T T' : C} (hT : IsTerminal T) (hT' : IsTerminal T')
-    (a : D) :
-    (constantSheafAdj J D hT).unit.app a ≫ ((constantSheaf J D).obj a).obj.map (hT.from T').op =
-      (constantSheafAdj J D hT').unit.app a := by
-  simp only [constantSheafAdj, Adjunction.comp_unit_app, constantPresheafAdj_unit_app,
-    evaluation_obj_map, Category.assoc]
-  erw [← ((sheafificationAdjunction J D).unit.app ((Functor.const Cᵒᵖ).obj a)).naturality]
-  simp
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
@@ -154,34 +139,6 @@ lemma upperStarForget₂Comparison_naturality (f : X ⟶ Y)
 end Forget
 
 end AlgebraicGeometry.Etale
-
-namespace CategoryTheory.Abelian.Ext
-
-variable {C : Type*} [Category* C] [Abelian C] [HasExt.{w} C]
-
-/-- An isomorphism `e : Y ≅ Y'` induces an isomorphism `Ext X Y n ≃+ Ext X Y' n` of
-`Ext`-groups by postcomposition with `e`. -/
-@[simps! apply]
-noncomputable def postcompAddEquiv (X : C) {Y Y' : C} (e : Y ≅ Y') (n : ℕ) :
-    Ext X Y n ≃+ Ext X Y' n where
-  __ := (Ext.mk₀ e.hom).postcomp X (add_zero n)
-  invFun := (Ext.mk₀ e.inv).postcomp X (add_zero n)
-  left_inv _ := by simp [Ext.mk₀_comp_mk₀]
-  right_inv _ := by simp [Ext.mk₀_comp_mk₀]
-
-variable {D : Type*} [Category* D] [Abelian D] [HasExt.{w'} D] [EnoughInjectives C]
-  {F G : C ⥤ D} [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-  [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-
-/-- Pushing `Ext`-classes forward along isomorphic exact functors gives the same class up to
-the isomorphism. -/
-lemma mapExactFunctor_eq_of_iso (τ : F ≅ G) {A B : C} {n : ℕ} (x : Ext A B n) :
-    x.mapExactFunctor F = (mk₀ (τ.hom.app A)).comp
-      ((x.mapExactFunctor G).comp (mk₀ (τ.inv.app B)) (add_zero n)) (zero_add n) := by
-  rw [← comp_assoc_of_third_deg_zero, ← mapExactFunctor_comp_mk₀_app F G τ.hom,
-    comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, Iso.hom_inv_id_app, comp_mk₀_id]
-
-end CategoryTheory.Abelian.Ext
 
 namespace AlgebraicGeometry.Etale
 
@@ -302,13 +259,101 @@ lemma cohomologyForget₂AddEquiv_cohomologyRestrictOver {Y Z : Scheme.{u}} (pY 
       Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} f pZ pY hf.symm).inv.app F) q
         (cohomologyMap f _ q (cohomologyForget₂AddEquiv e ε pZ q x)) := by
   subst hf
-  rw [cohomologyForget₂AddEquiv_apply, cohomologyForget₂AddEquiv_apply, cohomologyMap_apply,
+  have key : (x.mapExactFunctor (Ψ Z)).mapExactFunctor ((f)^*[AddCommGrpCat.{u + 1}]) =
+      (Ext.mk₀ (upperStarForget₂Comparison (ULift.{u + 1} ℤ) f _)).comp
+        (((x.mapExactFunctor ((f)^*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)])).mapExactFunctor
+          (Ψ Y)).comp
+          (Ext.mk₀ (inv (upperStarForget₂Comparison (ULift.{u + 1} ℤ) f _))) (add_zero q))
+        (zero_add q) := by
+    rw [Ext.mapExactFunctor_mapExactFunctor, Ext.mapExactFunctor_mapExactFunctor,
+      Ext.mapExactFunctor_eq_of_iso (asIso (upperStarForget₂ (ULift.{u + 1} ℤ) f).natTrans)]
+    simp [upperStarForget₂_natTrans_app]
+  have hres : cohomologyRestrictOver (ULift.{u + 1} ℤ) (f ≫ pZ) pZ f rfl G q x =
+      (Ext.mk₀ ((constantSheafCompUpperStarIso (ULift.{u + 1} ℤ) f).inv.app _)).comp
+        ((x.mapExactFunctor ((f)^*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)])).comp
+          (Ext.mk₀ ((upperStarComp (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) f pZ _ rfl).inv.app G))
+          (add_zero q)) (zero_add q) := by
+    rw [← Ext.comp_assoc_of_third_deg_zero]
+    rfl
+  rw [hres, cohomologyForget₂AddEquiv_apply, cohomologyForget₂AddEquiv_apply, cohomologyMap_apply,
     Sheaf.H.map_apply]
-  simp only [cohomologyRestrictOver, cohomologyRestrict, AddMonoidHom.comp_apply,
-    AddMonoidHom.mk'_apply, Functor.mapExtAddHom_apply, Ext.mapExactFunctor_comp,
-    Ext.mapExactFunctor_mk₀]
-  done
+  simp only [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀, key,
+    Ext.comp_assoc_of_second_deg_zero, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀_assoc,
+    Ext.mk₀_comp_mk₀]
+  rw [constantSheafForget₂Iso_hom_comp, forget₂UpperStarObjIso_hom_comp, Category.assoc]
+  rfl
 
 end Transport
+
+section Continuity
+
+set_option hygiene false in
+/-- The functor taking the underlying abelian sheaf of an étale sheaf of `ULift ℤ`-modules. -/
+local notation "Ψ" X:max => sheafCompose (Scheme.smallEtaleTopology X)
+  (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})
+
+/-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, in the
+form of an elementwise colimit statement for the pullback maps.
+
+Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
+transition maps, with limit `X = c.pt`, and let `F` be an abelian étale sheaf on `S`. Then
+`Hᵠ(X, F|_X) = colimᵢ Hᵠ(Dᵢ, F|_{Dᵢ})` along the pullback maps
+`AlgebraicGeometry.Etale.cohomologyMap`: every class on `X` comes from some `Dᵢ` (up to the
+canonical identification `F|_X ≅ (F|_{Dᵢ})|_X` of `AlgebraicGeometry.Etale.upperStarComp`), and a
+class on `Dᵢ` which vanishes on `X` already vanishes on some `Dⱼ`, `j ⟶ i`.
+
+The proof transports the case of sheaves of `ULift ℤ`-modules
+(`AlgebraicGeometry.Etale.exists_cohomologyRestrictOver_eq_of_isLimit`,
+`AlgebraicGeometry.Etale.exists_cohomologyRestrictOver_eq_zero_of_isLimit`) along the equivalence
+between sheaves of `ULift ℤ`-modules and abelian sheaves. -/
+@[stacks 09YQ]
+theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
+    (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [SmallCategory I]
+    [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]
+    [∀ i, QuasiSeparatedSpace (D.obj i).left] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]
+    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) (q : ℕ) :
+    (∀ x : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} c.pt.hom).obj F) q,
+      ∃ (i : I) (y : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q),
+        Etale.cohomologyMap (c.π.app i).left _ q y =
+          Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} (c.π.app i).left (D.obj i).hom
+            c.pt.hom (Over.w (c.π.app i)).symm).hom.app F) q x) ∧
+    ∀ (i : I) (y : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q),
+      Etale.cohomologyMap (c.π.app i).left _ q y = 0 →
+        ∃ (j : I) (g : j ⟶ i), Etale.cohomologyMap (D.map g).left _ q y = 0 := by
+  let E := (Ψ S).asEquivalence
+  let G := E.inverse.obj F
+  let ε : (Ψ S).obj G ≅ F := E.counitIso.app F
+  let e : (constantSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of (ULift ℤ)) ≅
+      (Ψ S).obj (SemiSimplicialObject.constSheaf S.smallEtaleTopology (ULift.{u + 1} ℤ)) :=
+    ((constantCommuteCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
+      AddCommGrpCat.{u + 1})).app (ModuleCat.of _ (ULift.{u + 1} ℤ))).symm
+  have hmap {Y Z : Scheme.{u}} (pY : Y ⟶ S) (pZ : Z ⟶ S) (f : Y ⟶ Z) (hf : f ≫ pZ = pY) (x) :
+      cohomologyMap f _ q (cohomologyForget₂AddEquiv e ε pZ q x) =
+        Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} f pZ pY hf.symm).hom.app F) q
+          (cohomologyForget₂AddEquiv e ε pY q
+            (cohomologyRestrictOver (ULift.{u + 1} ℤ) pY pZ f hf G q x)) := by
+    rw [cohomologyForget₂AddEquiv_cohomologyRestrictOver, ← Sheaf.H.map_comp_apply,
+      Iso.inv_hom_id_app, Sheaf.H.map_id_apply]
+  refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
+  · obtain ⟨i, y, hy⟩ := exists_cohomologyRestrictOver_eq_of_isLimit (ULift.{u + 1} ℤ) D c hc G q
+      ((cohomologyForget₂AddEquiv e ε c.pt.hom q).symm x)
+    refine ⟨i, cohomologyForget₂AddEquiv e ε (D.obj i).hom q y, ?_⟩
+    erw [hmap c.pt.hom (D.obj i).hom (c.π.app i).left (Over.w _), hy, AddEquiv.apply_symm_apply]
+    rfl
+  · obtain ⟨y, rfl⟩ := (cohomologyForget₂AddEquiv e ε (D.obj i).hom q).surjective y
+    erw [hmap c.pt.hom (D.obj i).hom (c.π.app i).left (Over.w _)] at hy
+    have hy' : cohomologyRestrictOver (ULift.{u + 1} ℤ) c.pt.hom (D.obj i).hom (c.π.app i).left
+        (Over.w _) G q y = 0 := by
+      have := congrArg (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app i).left
+        (D.obj i).hom c.pt.hom (Over.w (c.π.app i)).symm).inv.app F) q) hy
+      erw [← Sheaf.H.map_comp_apply, Iso.hom_inv_id_app, Sheaf.H.map_id_apply, map_zero,
+        AddEquiv.map_eq_zero_iff] at this
+      exact this
+    obtain ⟨j, g, hg⟩ :=
+      exists_cohomologyRestrictOver_eq_zero_of_isLimit (ULift.{u + 1} ℤ) D c hc G q i y hy'
+    exact ⟨j, g, by rw [hmap (D.obj j).hom (D.obj i).hom (D.map g).left (Over.w _), hg, map_zero, map_zero]⟩
+
+end Continuity
 
 end AlgebraicGeometry.Etale

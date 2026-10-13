@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Spreading
-public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimitAddCommGrp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 /-!

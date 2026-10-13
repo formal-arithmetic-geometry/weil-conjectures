@@ -22,6 +22,9 @@ identity of `G`.
 - `CategoryTheory.conjugateEquiv_leftAdjointUniq_hom` and
   `CategoryTheory.conjugateEquiv_leftAdjointUniq_inv`: the conjugates of the two
   directions of `Adjunction.leftAdjointUniq` are the identity of the common right adjoint.
+- `CategoryTheory.Adjunction.leftAdjointUniq_eq_of_unit`: `Adjunction.leftAdjointUniq` is unchanged
+  when both adjunctions are transported along a morphism of right adjoints compatible with the
+  units.
 
 -/
 
@@ -82,5 +85,22 @@ lemma mateEquiv_leftAdjointUniq (adj₁ : L₁ ⊣ R₁) (adj₁' : L₁' ⊣ R�
   simp
 
 end Mates
+
+namespace Adjunction
+
+/-- The canonical isomorphism `Adjunction.leftAdjointUniq` of two left adjoints of `G` does not
+change when both adjunctions are transported along a morphism `κ : G ⟶ G'` to adjunctions with
+right adjoint `G'` which is compatible with the units. -/
+lemma leftAdjointUniq_eq_of_unit {G' : D ⥤ C} (adj₁ : F ⊣ G) (adj₂ : F' ⊣ G) (adj₁' : F ⊣ G')
+    (adj₂' : F' ⊣ G') (κ : G ⟶ G')
+    (h₁ : ∀ x, adj₁'.unit.app x = adj₁.unit.app x ≫ κ.app (F.obj x))
+    (h₂ : ∀ x, adj₂'.unit.app x = adj₂.unit.app x ≫ κ.app (F'.obj x)) :
+    leftAdjointUniq adj₁ adj₂ = leftAdjointUniq adj₁' adj₂' := by
+  ext x
+  apply (adj₁'.homEquiv _ _).injective
+  rw [homEquiv_leftAdjointUniq_hom_app, homEquiv_unit, h₁, Category.assoc, ← κ.naturality,
+    ← Category.assoc, ← homEquiv_unit, homEquiv_leftAdjointUniq_hom_app, h₂]
+
+end Adjunction
 
 end CategoryTheory

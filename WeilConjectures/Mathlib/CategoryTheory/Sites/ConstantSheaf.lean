@@ -22,6 +22,9 @@ a continuous functor of sites which preserves a terminal object
 (`CategoryTheory.Functor.sheafPullbackCommuteConstant`); in particular the pullback of a
 constant sheaf is constant (`CategoryTheory.Sheaf.isConstant_sheafPullback`).
 
+Finally, the units of the adjunctions `constantSheaf ⊣ Γ(T, -)` for two terminal objects `T`, `T'`
+differ by the restriction along `T' ⟶ T` (`CategoryTheory.constantSheafAdj_unit_app_comp_map`).
+
 This file imports both `Mathlib.CategoryTheory.Sites.ConstantSheaf` and
 `Mathlib.CategoryTheory.Sites.Over` since neither imports the other, and additionally
 `Mathlib.CategoryTheory.Sites.Pullback` for the pullback of sheaves.
@@ -106,5 +109,23 @@ lemma Sheaf.isConstant_sheafPullback {T : C} (hT : IsTerminal T)
       (G.constantSheafsheafPullbackIso A J K hT hGT).app a)
 
 end Pullback
+
+section Terminal
+
+variable {C : Type*} [Category* C] (J : GrothendieckTopology C) (D : Type*) [Category* D]
+  [HasWeakSheafify J D]
+
+/-- The units of the adjunctions `constantSheaf ⊣ Γ(T, -)` for two terminal objects `T`, `T'`
+differ by the restriction along `T' ⟶ T`. -/
+lemma constantSheafAdj_unit_app_comp_map {T T' : C} (hT : IsTerminal T) (hT' : IsTerminal T')
+    (a : D) :
+    (constantSheafAdj J D hT).unit.app a ≫ ((constantSheaf J D).obj a).obj.map (hT.from T').op =
+      (constantSheafAdj J D hT').unit.app a := by
+  simp only [constantSheafAdj, Adjunction.comp_unit_app, constantPresheafAdj_unit_app,
+    evaluation_obj_map, Category.assoc]
+  erw [← ((sheafificationAdjunction J D).unit.app ((Functor.const Cᵒᵖ).obj a)).naturality]
+  simp
+
+end Terminal
 
 end CategoryTheory

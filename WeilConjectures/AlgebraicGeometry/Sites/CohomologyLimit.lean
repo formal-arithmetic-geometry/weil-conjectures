@@ -264,6 +264,7 @@ theorem exists_cohomologyRestrictOver_eq_of_isLimit (q : ℕ)
   rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
 
 set_option maxHeartbeats 1000000 in
+-- the descent of the refinement, the cocycle and its primitive is a long elaboration
 /-- **Continuity of étale cohomology, injectivity** (blueprint
 `lemma-weil-pbc-etale-cohomology-continuity`): a cohomology class of the pullback of `F` to some
 `Xᵢ` which vanishes on the limit `X = lim Xᵢ` vanishes on some `Xⱼ`, `j ⟶ i`. -/
@@ -409,7 +410,7 @@ theorem exists_cohomologyRestrictOver_eq_zero_of_isLimit (q : ℕ) (i : I)
             (Category.assoc _ _ _).symm
         _ = _ := by
           rw [e1]
-          simp only [Ψ₃, baseChangeProj_baseChangeLift_assoc, baseChangeProj_baseChangeLift]
+          simp only [baseChangeProj_baseChangeLift_assoc]
           exact baseChangeProj_baseChangeLift _ _ _ _ _ q
     rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
   cases q with
