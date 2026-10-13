@@ -1,0 +1,164 @@
+{
+ "id": "lem-sc-koszul-cech-localized-differential",
+ "kind": "lemma",
+ "title": "Adjacent differential identity for explicit localized Koszul evaluation",
+ "statement": "Let $A$ be a commutative ring, $r\\in\\mathbb N$, $f:\\operatorname{Fin}(r)\\to A$, and $F$ an integer-indexed complex of sheaves of modules on $\\operatorname{Spec}(A)$ [def-pc-cochain-complex-modules]. Fix $e\\in\\mathbb N$ and the extended negative Koszul tail $I_e$ [def-sc-koszul-open-system], at exponent $e+1$. For every nonempty $J\\subseteq\\operatorname{Fin}(r)$, let $B_J\\in I_e^{1-|J|}$ be its increasing exterior basis vector transported through extension by zero. Put $M=\\Gamma(\\operatorname{Spec}(A),F)$ and let $H_e=\\operatorname{Hom}_A^\\bullet(I_e,M)$ [def-sc-module-total-hom-complex]. Let $C(F)$ be the explicitly defined alternating principal-open total complex [def-sc-principal-open-alternating-total]. Define $\\lambda_{e,n}:H_e^n\\to C(F)^n$ by restricting $z(B_J)$ to $D(\\prod_{j\\in J} f_j)$, applying the inverse of multiplication by $(\\prod_{j\\in J}f_j)^{e+1}$ on that section module, and multiplying by $(-1)^{pq+p(p-1)/2}$, where $p=|J|-1$ and $q=n-p$. These are explicit $A$-linear maps. For every integer $n$, prove $\\lambda_{e,n+1}\\circ d_{H_e}^{n}=d_{C(F)}^{n}\\circ\\lambda_{e,n}$. No quasi-coherence or boundedness of $F$ is assumed. The Lean statement allows a family $B$ equipped with its equality to the displayed ordered wedge, so the identity applies to the existing basis definition without defining it again.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-sc-koszul-open-system",
+  "def-sc-module-total-hom-complex",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08CX, 08D0 and 08D1: diagonal power transitions, principal-open fraction map and totalization sign; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
+ },
+ "proof": [
+  {
+   "text": "In degree n and at a nonempty subset J, put p=card(J)-1 and q=n-p.\nThe Hom differential is postcomposition by d_F plus (-1)^n precomposition by the\npositive Koszul boundary, since the tail uses the negative boundary. On the ordered\nwedge, that boundary is the sum over deleting a generator, with coefficient\n(-1)^position f_j^(e+1). After restriction to D(product f_j), division by the full\nproduct to power e+1 cancels f_j^(e+1) and leaves the denominator of J.erase j.\nRestrictions compose and commute with d_F; inverses to scalar multiplication\ncommute with these A-linear maps. The singleton case has no incoming horizontal\nterm, since the tail has no augmentation term in positive cohomological degree.\nFor S(p,n)=p*(n-p)+p*(p-1)/2, one has S(p,n+1)=S(p,n)+p, and\nS(p,n+1)+n-S(p-1,n) is even. These identities give the vertical sign (-1)^p and\nthe horizontal alternating signs of principalCechDifferentialValue, respectively.\nUse the increasing enumeration of J to match the deletion positions with the\nnumber of elements less than j, and use the increasing enumeration of J.erase j\nfor the remaining ordered wedge. Equality of all subset components proves the\nlinear-map identity. No quasi-coherence is used. For r=0 there are no components;\nif a product is zero or nilpotent, its principal open is empty and sections are zero.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "def-sc-module-total-hom-complex",
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-open-system",
+  "def-sc-module-total-hom-complex",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08CX, 08D0 and 08D1: diagonal power transitions, principal-open fraction map and totalization sign; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Signed Koszul Hom evaluation on principal opens commutes with alternating Cech total differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed localized Koszul Hom cochain evaluation commutes with the alternating Cech total differential",
+   "results": "8 hits: CochainComplex.HomComplex.δ_v, CategoryTheory.ProjectiveResolution.cochainComplex_d, inhomogeneousCochains.d_eq, CochainComplex.HomComplex.δ_comp, AlgebraicTopology.AlternatingCofaceMapComplex.map, CochainComplex.HomComplex.Cochain.d_comp_ofHoms_v, CochainComplex.HomComplex.δ_zero_cochain_comp, CategoryTheory.InjectiveResolution.cochainComplex_d",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the signed localized differential identity; component tools used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.map_apply_ιMulti",
+   "results": "1 hits: exteriorPower.map_apply_ιMulti",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the signed localized differential identity; component tools used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "koszulCechLocalizedDegreeMap|koszulCechScalarDivision|koszulCechLocalizedDegreeMap_comm",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the signed localized differential identity; component tools used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul contraction ordered exterior basis localization cochain map Cech differential",
+   "results": "8 hits, including inhomogeneousCochains.d, inhomogeneousCochains.d_eq, inhomogeneousCochains.d_hom_apply, Rep.standardComplex.d_of and AlgebraicTopology.AlternatingCofaceMapComplex.obj; no localized Koszul-to-sheaf-Cech identity.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"contractLeft\", \"ιMulti\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*cech|cech.*koszul|localized.*differential|contractLeft.*ιMulti in lean/Sheaf, lean/WeilConjectures and Mathlib LinearAlgebra and Algebra/Homology",
+   "results": "Read AffineKoszulHomAlternatingCech: additive colimit existence with prescribed terms, no prescribed differential or fraction map; cannot supply this identity. KoszulDifferential.contraction_formula is private and supplies only the exterior contraction ingredient. ModuleHomComplex and Mathlib HomComplex.δ_v supply the Hom differential, not its localization calculation. Downstream KoszulCech modules import the item and cannot be used here.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: no duplicate statement or shorter whole proof found"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Koszul-to-alternating-Cech comparison in the proper-flat support argument: the adjacent differential calculation at a fixed exponent.",
+   "via": [
+    "def-sc-koszul-cech-comparison-construction",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulCechLocalizedDifferential",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulCechLocalizedDifferential.lean",
+  "declaration": "AlgebraicGeometry.koszulCechLocalizedDegreeMap_comm",
+  "declarations": [
+   "AlgebraicGeometry.koszulCechScalarDivision",
+   "AlgebraicGeometry.koszulCechLocalizedDegreeMap",
+   "AlgebraicGeometry.koszulCechLocalizedDegreeMap_comm"
+  ],
+  "statement": "theorem koszulCechLocalizedDegreeMap_comm (e : ℕ)\n    (B : ∀ J : {J : Finset (Fin r) // J.Nonempty},\n      ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat).X\n        (1 - (J.val.card : ℤ)))\n    (hB : ∀ J, B J =\n      ((koszulOpenTail A r f e).extendXIso ComplexShape.embeddingDownNat\n        (show ComplexShape.embeddingDownNat.f (J.val.card - 1) =\n          1 - (J.val.card : ℤ) by\n          simp only [ComplexShape.embeddingDownNat_f]\n          have h : 0 < J.val.card := Finset.card_pos.mpr J.property\n          omega)).inv\n        (exteriorPower.ιMulti A (J.val.card - 1 + 1)\n          (fun i ↦ Finsupp.single (J.val.orderEmbOfFin\n            (show J.val.card = J.val.card - 1 + 1 by\n              have h : 0 < J.val.card := Finset.card_pos.mpr J.property\n              omega) i) (1 : A)))) (n : ℤ) :\n    (CochainComplex.moduleHomComplex\n      ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat)\n      (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)).d\n        n (n + 1) ≫ koszulCechLocalizedDegreeMap A r f F e (n + 1) B =\n      koszulCechLocalizedDegreeMap A r f F e n B ≫ (principalCechTotal r f F).d\n        n (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T100137-L-2490261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T100137-L-2490261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,9 +15,53 @@
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tags 08CX, 08D0, 08D1 and 08D2: power transitions, localization cocone, totalization sign, derived comparison"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct linear precomposition on module-valued Hom complexes. Mathlib HomComplex.δ_ofHom_comp proves its chain-map equation. Import all Sheaf.AlgebraicGeometry.KoszulOpenSystem privately to reuse its proved private koszulOpenTransition_id and koszulOpenTransition_comp laws, without duplicating the diagonal or transition lemmas. Extension preserves these identities. Cochain.ofHom_comp and cochain associativity then give the functor laws. Use the explicit functor as the witness for koszulCechHomDiagram_exists, and proof irrelevance to remove the arbitrary object equality transports.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct each degreewise localized evaluation using the inverse to scalar multiplication on the principal intersection and the specified totalization sign. This is a real A-linear map, not a witness selected from the remaining theorem. Apply the adjacent differential identity to the ordered basis; assemble these components into a chain map to principalCechTotal at each exponent.",
+   "uses": [
+    "lem-sc-koszul-cech-localized-differential",
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An exterior-power diagonal sends the increasing wedge for J at exponent b to product(f_j)^(b-a) times its wedge at exponent a. Prove this from exteriorPower.map_apply_ιMulti, AlternatingMap.map_smul_univ and finite-product reindexing by orderEmbOfFin. Cancel multiplication by product(f_j)^(b+1) on sections of its principal open using Mathlib Scheme.Modules.isSMulRegular_of_le_basicOpen. Since b+1=(b-a)+(a+1), the denominator formulas imply that the fixed-exponent chain maps commute with precomposition transitions.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the compatible chain maps along koszulCechHomObjIso and principalCechObjIso. The diagram transition formula identifies the transported map with linear precomposition. Cancellation of the object isomorphisms proves naturality, yielding the required cocone. Its point is the specified Cech functor object definitionally; inverse scalar multiplication proves the denominator formula, and proof irrelevance handles every equality witness for the cocone point. The colimit and derived comparisons retain their existing definitions.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-sc-koszul-open-system",
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-koszul-cech-localized-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-sc-koszul-open-system",
+  "lem-sc-koszul-cech-localized-differential",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08CX, 08D0 and 08D1: diagonal power transitions, principal-open fraction map and totalization sign; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -130,22 +174,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "V2",
+  "reviewer": "COMPILER",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T022433-L-3221999",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.koszulCechCocone_exists",
-   "AlgebraicGeometry.koszulCechHomDiagram_exists",
-   "AlgebraicGeometry.koszulCech_basis_card",
-   "AlgebraicGeometry.koszulCech_basis_degree",
-   "AlgebraicGeometry.koszulCech_evaluation_degree"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.koszulCechCocone_exists",
-   "AlgebraicGeometry.koszulCechHomDiagram_exists"
-  ]
+  "landing": "20261013T100137-L-2490261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
