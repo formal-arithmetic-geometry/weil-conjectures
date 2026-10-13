@@ -10,31 +10,26 @@
  ],
  "proof": [
   {
-   "text": "The Noetherian affine V makes U intersect V quasi-compact; choose a finite cover by basic opens D(f_i) inside U intersect V. Each f_i belongs to p because y lies outside U. The direct image is quasi-coherent by the qcqs pushforward theorem. Its affine module P therefore localizes on basic opens. Restriction from P to the product of the P[1/f_i] is injective by sheaf separatedness on U intersect V.",
+   "text": "Apply the finite localized restriction detector to S. If z is killed by every scalar of the maximal ideal, then a_i kills z for each i. Linearity shows a_i kills phi_i(z); injectivity of multiplication by a_i forces phi_i(z)=0. Zero detection gives z=0.",
    "uses": [
-    "pqf-lem-pushforward-qcoh",
-    "lem-weil-pbc-affine-module-basic-open-localization"
+    "stage3-boundary-localized-finite-detector"
    ],
    "elementary": false
   },
   {
-   "text": "Localization is exact and commutes with finite products, so P_p injects into the product of (P[1/f_i])_p. An element killed by pR_p has zero image in each factor, since f_i lies in p and is invertible in that factor. Hence it is zero. The localized inclusion S_p into P_p is injective, so the same is true in S_p. In particular pR_p is not associated to S_p.",
-   "uses": [
-    "lem-weil-pbc-associated-prime-submodule"
-   ],
-   "elementary": false
+   "text": "The affine section ring and its prime localization are Noetherian. If the maximal ideal is associated, Mathlib isAssociatedPrime_iff supplies an element whose annihilator is exactly that ideal. The preceding annihilator criterion makes the element zero, whose annihilator is the whole ring, contradicting primality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-module-basic-open-localization",
-  "lem-weil-pbc-associated-prime-submodule",
-  "pqf-lem-pushforward-qcoh"
+  "stage3-boundary-localized-finite-detector"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "T4",
+  "by": "F4",
   "document": "Stacks Project",
-  "place": "Tag 0AVN, finite basic-open argument; Tags 01LC and 05AM"
+  "place": "Tag 0AVN finite basic-open argument and Tag 00LA annihilator characterization"
  },
  "mathlib_searches": [
   {
@@ -115,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-0c7d7",
-  "group": "T4",
+  "reviewer": "COMPILER",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T123549-L-3712479",
+  "landing": "20261013T131948-L-4087397",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with their DAG nodes and cited sources; all three modules, the sole direct importer, and axiom probes compile cleanly. Only the documented geometric hole contributes sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

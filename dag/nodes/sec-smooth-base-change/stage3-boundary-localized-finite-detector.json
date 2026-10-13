@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0AVN, finite basic-open argument; Tags 01LC and 05AM"
+ },
+ "id": "stage3-boundary-localized-finite-detector",
+ "title": "Finite localized restriction maps detect boundary sections",
+ "statement": "Let L be a locally Noetherian scheme, U an open, N a quasi-coherent module, V an affine open, and p a prime of R=O(V) whose point is outside U. For any submodule S of (j_*(N|U))(V), there exist finitely many R_p-modules Q_i, scalars a_i in the maximal ideal of R_p, and R_p-linear maps phi_i:S_p -> Q_i, such that multiplication by a_i is injective on Q_i and all phi_i(z)=0 implies z=0. The family may be empty.",
+ "proof": [
+  {
+   "text": "Choose finitely many basic opens D(f_i) covering U intersect V. Every f_i lies in p since the point of p is outside U. Quasi-coherence of restriction and qcqs pushforward identifies sections on these opens with P[1/f_i]. Sheaf separatedness on U intersect V makes the restriction map from P to the finite product injective.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-affine-module-basic-open-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the finite-product injection at p and compose with the localized inclusion S -> P. These remain injective. Set Q_i=(P[1/f_i])_p and a_i=image(f_i) in the maximal ideal. Each a_i acts invertibly on Q_i. The component maps phi_i detect zero. For an empty cover, sheaf separatedness gives P=0 and hence S_p=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "F4",
+  "document": "Stacks Project",
+  "place": "Tag 0AVN, finite localization injection paragraph; Tag 01LC"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-restriction-boundary-submodule-depth",
+   "place": "finite basic-open restriction injection, before associated-prime exclusion",
+   "via": [
+    "stage3-boundary-maximal-not-associated"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent direct image under an open immersion has no associated prime outside the open",
+   "results": "exists_of_res_zero_of_qcqs and scheme zero locus lemmas; no module restriction detector",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, Function.Injective",
+   "results": "associatedPrimes.subset_of_injective; subset_union_of_exact",
+   "date": "2026-10-13",
+   "verdict": "algebraic ingredients, not finite restriction data"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPrimes.*(restrict|push)|boundary.*detector|isLocalizedModule_basicOpen",
+   "results": "msearch: no hits; local rg finds affine localization denominator lemmas in WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde",
+   "date": "2026-10-13",
+   "verdict": "use the existing affine localization tools; no exact statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite basic open restriction maps of a quasicoherent sheaf detect zero after localization at a prime",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.BoundaryLocalizedFiniteDetector",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/BoundaryLocalizedFiniteDetector.lean",
+  "declaration": "AlgebraicGeometry.Scheme.boundary_localized_finite_detector",
+  "statement": "theorem boundary_localized_finite_detector\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens) (N : L.Modules)\n    (hqc : N.IsQuasicoherent) (V : L.Opens) (hV : IsAffineOpen V)\n    (S : Submodule (L.presheaf.obj (op V))\n      (((Modules.pushforward U.ι).obj\n        ((Modules.restrictFunctor U.ι).obj N)).val.obj (op V)))\n    (p : Ideal (L.presheaf.obj (op V))) [p.IsPrime]\n    (hy : hV.fromSpec ⟨p, inferInstance⟩ ∉ U) :\n    ∃ (n : ℕ) (Q : Fin n → ModuleCat.{u} (Localization.AtPrime p))\n      (a : Fin n → IsLocalRing.maximalIdeal (Localization.AtPrime p))\n      (φ : (i : Fin n) → LocalizedModule.AtPrime p S →ₗ[Localization.AtPrime p] Q i),\n      (∀ i, Function.Injective (fun x : Q i ↦ (a i : Localization.AtPrime p) • x)) ∧\n      (∀ z, (∀ i, φ i z = 0) → z = 0)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T131948-L-4087397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T131948-L-4087397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
