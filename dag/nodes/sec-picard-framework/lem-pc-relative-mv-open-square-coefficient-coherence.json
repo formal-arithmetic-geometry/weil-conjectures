@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-relative-mv-open-square-coefficient-coherence",
+ "kind": "statement",
+ "title": "Coefficient coherence for a single nested open square",
+ "statement": "Let gprime:Xprime→X be a scheme morphism, W⊆U opens with inclusion k, and N in D(X). Write r:pullback(gprime,W.ι)→pullback(gprime,U.ι) for relativeMVOpenLift, qW,pW,qU,pU for the second and first pullback projections. Use the fixed derived pullback comparisons of def-pc-relative-mv-maps. Let c:LU.ι⋙Lk≅LW.ι and cprime:LpU⋙Lr≅LpW be comparison followed by the open-composite and first-projection equalities. Let s_N:LqU LU.ι N→LpU Lgprime N and t_N:LqW LW.ι N→LpW Lgprime N be the canonical coefficient-square components. Let d:Lk⋙LqW≅LqU⋙Lr be comparison for qW,k, transport along (r≫qU=qW≫k).symm, and inverse comparison for r,qU. Then LqW(c.hom_N)≫t_N = d.hom_(LU.ι N)≫Lr(s_N)≫cprime.hom_(Lgprime N). No adjunction, direct image or counit appears. The five comparison arguments are supplied explicitly, with hypotheses equating c,cprime,d and every component of s,t to these exact canonical formulas; these equations pin the comparisons and add no mathematical restriction.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Lemma 20.27.2, canonical derived pullback composition; coefficient-comparison part of new-relative-mv-open-square-counit"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "proof": [
+  {
+   "text": "Substitute the five defining equations for the explicit comparison arguments. Specialize coefficient_square_coordinate_change to the opens W⊆U: g=gprime, v=W.ι, z=U.ι, t=qW, s=pW, qz=qU, pz=pU, e=X.homOfLE i and b=relativeMVOpenLift gprime i. Scheme.homOfLE_ι proves e≫z=v; pullback.lift_snd and lift_fst prove both coordinate equalities; pullback.condition.symm proves both square equalities. Choose Kprime=Lgprime N and phi=identity.",
+   "uses": [
+    "lem-pc-coefficient-square-coordinate-change",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0D5S",
+    "place": "Lemma 20.27.2, canonical derived pullback composition; coefficient-comparison part of new-relative-mv-open-square-counit"
+   }
+  },
+  {
+   "text": "Remove LpW(identity) and LpU(identity) by Functor.map_id. Expand the hom components of c,cprime,d by Iso.trans_hom, NatTrans.comp_app and eqToHom_app, and reassociate. Equality-transport proofs with the same endpoints agree by proof irrelevance. These component formulas give exactly the asserted equality, with no direct image, adjunction counit or base-change mate. Empty schemes, equal opens and the zero coefficient object need no separate case because none of the identities assumes a nonzero object or proper inclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0D5S",
+    "place": "Lemma 20.27.2, canonical derived pullback composition; coefficient-comparison part of new-relative-mv-open-square-counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-relative-mv-maps",
+  "lem-pc-coefficient-square-coordinate-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Lemma 20.27.2, canonical derived pullback composition; coefficient-comparison part of new-relative-mv-open-square-counit"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVOpenSquareCounit",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 relative Mayer–Vietoris restriction comparison: the pure coefficient-coherence step of the single open-square counit calculation.",
+   "via": [
+    "new-relative-mv-open-square-counit",
+    "new-relative-mv-restriction-target-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived pullback composition coherence under nested open base change coefficient comparisons",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.associator",
+   "results": "Functor.associator, associator_hom_app, whiskering triangle and associativity lemmas; none gives the pinned scheme comparison formula.",
+   "date": "2026-10-14",
+   "verdict": "Generic building blocks only."
+  },
+  {
+   "tool": "grep",
+   "query": "isoMapOfCommSq|pullHom_pullHom in Mathlib/CategoryTheory",
+   "results": "Pseudofunctor.isoMapOfCommSq in Bicategory/Strict/Pseudofunctor and descent pullHom composition lemmas. The fixed derivedPullback comparisons are not packaged as a pseudofunctor. The project coefficient_square_coordinate_change is a broader proved formula, but its identity-map and equality-transport conversion remains this intermediate step.",
+   "date": "2026-10-14",
+   "verdict": "No exact Mathlib match; project theorem supplies the stated proof route."
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVOpenSquareCoefficientCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVOpenSquareCoefficientCoherence.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_open_square_coefficient_coherence",
+  "statement": "theorem relativeMV_open_square_coefficient_coherence\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X X' : Scheme.{u}} (g' : X' ⟶ X) (W U : X.Opens) (i : W ≤ U)\n    (c : derivedPullback U.ι ⋙ derivedPullback (X.homOfLE i) ≅ derivedPullback W.ι)\n    (c' : derivedPullback (pullback.fst g' U.ι) ⋙\n      derivedPullback (relativeMVOpenLift g' i) ≅ derivedPullback (pullback.fst g' W.ι))\n    (s : ∀ N : schemeDerivedCategory X,\n      (derivedPullback (pullback.snd g' U.ι)).obj ((derivedPullback U.ι).obj N) ⟶\n        (derivedPullback (pullback.fst g' U.ι)).obj ((derivedPullback g').obj N))\n    (t : ∀ N : schemeDerivedCategory X,\n      (derivedPullback (pullback.snd g' W.ι)).obj ((derivedPullback W.ι).obj N) ⟶\n        (derivedPullback (pullback.fst g' W.ι)).obj ((derivedPullback g').obj N))\n    (d : derivedPullback (X.homOfLE i) ⋙ derivedPullback (pullback.snd g' W.ι) ≅\n      derivedPullback (pullback.snd g' U.ι) ⋙ derivedPullback (relativeMVOpenLift g' i))\n    (hc : c = relativeMVComp (X.homOfLE i) U.ι ≪≫\n      eqToIso (congrArg (fun k ↦ derivedPullback k) (Scheme.homOfLE_ι X i)))\n    (hc' : c' = relativeMVComp (relativeMVOpenLift g' i) (pullback.fst g' U.ι) ≪≫\n      eqToIso (congrArg (fun k ↦ derivedPullback k) (pullback.lift_fst _ _ _)))\n    (hs : ∀ N, s N = (relativeMVComp (pullback.snd g' U.ι) U.ι).hom.app N ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj N)\n        (pullback.condition (f := g') (g := U.ι)).symm) ≫\n      (relativeMVComp (pullback.fst g' U.ι) g').inv.app N)\n    (ht : ∀ N, t N = (relativeMVComp (pullback.snd g' W.ι) W.ι).hom.app N ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj N)\n        (pullback.condition (f := g') (g := W.ι)).symm) ≫\n      (relativeMVComp (pullback.fst g' W.ι) g').inv.app N)\n    (hd : d = relativeMVComp (pullback.snd g' W.ι) (X.homOfLE i) ≪≫\n      eqToIso (congrArg (fun k ↦ derivedPullback k)\n        (pullback.lift_snd _ _ _).symm) ≪≫\n      (relativeMVComp (relativeMVOpenLift g' i) (pullback.snd g' U.ι)).symm) :\n    ∀ N : schemeDerivedCategory X,\n    (derivedPullback (pullback.snd g' W.ι)).map (c.hom.app N) ≫ t N =\n      d.hom.app ((derivedPullback U.ι).obj N) ≫\n        (derivedPullback (relativeMVOpenLift g' i)).map (s N) ≫\n        c'.hom.app ((derivedPullback g').obj N)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T181114-L-2604603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T181114-L-2604603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

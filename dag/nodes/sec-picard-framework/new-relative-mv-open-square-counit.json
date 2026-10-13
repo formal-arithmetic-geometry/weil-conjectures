@@ -18,11 +18,26 @@
  "unit": "sk-thm-picard-semicon",
  "proof": [
   {
-   "text": "Transpose the base-change map for U → X using its defining 08HY formula.\nThe target restriction counit is the transpose after the comparison for W' → U' → X'.\nNaturality moves the base-change morphism through the inverse comparison. The\ntriangle identity cancels the U'-adjunction unit, leaving the pullback of the\nU-adjunction counit and the U coefficient comparison. Associativity of the\ncanonical pullback comparisons on W → U → X and W' → U' → X', together with\nboth projection identities of relativeMVOpenLift, identifies these factors with\nthe W coefficient comparison, the pulled-back inverse W → U → X comparison,\nthe pulled-back U-counit, and the W coefficient comparison at K. Scheme.homOfLE_ι\nidentifies the open composite, and proof irrelevance identifies all equality\ntransports. The inverse W coefficient comparison is then canceled. This argument\nuses neither strictness nor nonemptiness of the opens and works also for K = 0.",
+   "text": "The private restriction_square lemma proves the abstract counit identity from coefficient coherence and the base-change transpose. Move Tprime.map(a) through the inverse target restriction comparison by naturality. Coefficient coherence at C identifies gamma_C followed by that inverse comparison with LqW(c inverse) followed by d and Lr(theta_C).",
+   "uses": [
+    "lem-pc-relative-mv-open-square-coefficient-coherence",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private baseChange_counit lemma unfolds schemeDerivedBaseChangeMap as the pinned adjunction transpose and uses Equiv.symm_apply_apply. Hom-equivalence naturality moves the target coefficient map through this transpose. At C, the forward coefficient comparison cancels its inverse; the two equality transports cancel by proof irrelevance and eqToHom_trans. Thus theta_C followed by LpU(a) and the pU counit equals LqU of the U counit followed by theta_K.",
    "uses": [
     "def-pc-derived-base-change-map",
-    "def-pc-relative-mv-maps",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute that transpose identity in the abstract calculation, apply naturality of d to the U counit, and use coefficient coherence at K. Functor.map_comp and associativity give exactly the original displayed equality. Only the pure coefficient-coherence step is postponed.",
+   "uses": [
+    "lem-pc-relative-mv-open-square-coefficient-coherence",
+    "def-pc-relative-mv-maps"
    ],
    "elementary": false
   }
@@ -30,14 +45,14 @@
  "proof_deps": [
   "def-pc-derived-base-change-map",
   "def-pc-relative-mv-maps",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-relative-mv-open-square-coefficient-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A4",
-  "date": "2026-10-13",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08HY (remark-base-change), 08BV (lemma-unbounded-mayer-vietoris), and 08HZ (lemma-unbounded-relative-mayer-vietoris)"
+  "group": "M2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Counit description of base change, combined with the coefficient-composition step of Tag 0D5S."
  },
  "status": "split",
  "created": {
@@ -108,9 +123,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T151131-L-875951",
+  "landing": "20261013T181114-L-2604603",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
