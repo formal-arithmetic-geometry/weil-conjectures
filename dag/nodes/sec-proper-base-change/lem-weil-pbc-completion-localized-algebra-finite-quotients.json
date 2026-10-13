@@ -15,52 +15,57 @@
  },
  "proof": [
   {
-   "text": "Identify B as the localization of S at the images of R minus p. Its maximal ideals above pA correspond to Q and its localizations are S_q. The prescribed values of psi on A and its S-algebra property identify it with the canonical maps on pure tensors, hence everywhere.",
+   "text": "The prescribed base values of psi identify its composite with R to B with R to S to S_q. Ideal.map_map identifies K_q with the extension of pS to S_q; since pS is contained in q this lies in the local maximal ideal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Finiteness makes S integral over R. Ideal.IsIntegral.mem_minimalPrimes_map_under makes q minimal over pS, and localization at a minimal prime gives radical(K_q)=M_q. S and S_q are Noetherian, so M_q is finitely generated. The radical-power lemma supplies an exponent c; max(1,c) is positive and its power is still contained in K_q.",
    "uses": [
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-prime-residue-field-iso"
+    "lem-weil-pbc-minimal-prime-localization-radical",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-fg-ideal-radical-power"
    ],
    "elementary": false
   },
   {
-   "text": "For n > 0, A/(pA)^n is Artinian local. The quotient B/J^n is finite over this ring, so its spectrum is finite discrete. The product-of-localizations isomorphism and localization of quotients give precisely the displayed finite-quotient product map. For n = 0 both sides are zero rings; an empty Q is also covered.",
+   "text": "If n=0, J^n and K_q^n are the unit ideals. The source and all factors are subsingleton rings; the product map is injective and surjective, also for empty Q.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For n>0, radical(m^n)=m implies that m is a minimal prime of m^n. The local quotient lemma makes A/m^n Artinian local. B is finite over A by Module.Finite.base_change. Identify J with the extension of m and its nth power with the extension of m^n. Equip the quotient with its canonical A/m^n-algebra structure; Module.Finite.of_restrictScalars_finite gives finiteness. The finite-over-zero-dimensional-local theorem gives discrete spectrum for B/J^n. These steps are the proved private helper finite_local_quotient_discrete and its application.",
    "uses": [
     "lem-weil-pbc-noetherian-local-quotient-artinian-local",
     "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-    "lem-weil-pbc-product-of-localizations-at-maximal",
-    "lem-weil-pbc-localization-at-prime-of-quotient"
+    "lem-weil-pbc-localization-noetherian"
    ],
    "elementary": false
   },
   {
-   "text": "S is Noetherian because it is finite over R, and S_q is Noetherian by localization. The special fibre at q is a localization of the finite-dimensional algebra B/(pA)B, hence Artinian local. Its only prime is its maximal ideal. Thus K_q is contained in M_q and its radical equals M_q. Finite generation of M_q and the radical-power lemma give M_q^c contained in K_q; increasing c to c+1 ensures c >= 1.",
+   "text": "Apply the local-chart lemma. Use MaximalSpectrum.toPiLocalizationEquiv on B/J^n, RingEquiv.piCongrLeft' to reindex by Q, and RingEquiv.piCongrRight of IsLocalization.algEquiv for the factors. AlgEquiv.commutes identifies every component of this composite with the given quotientMap. The composite is an equivalence, hence the requested map is bijective.",
    "uses": [
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-finite-dim-algebra-artinian",
-    "lem-weil-pbc-artinian-local-unique-prime",
-    "lem-weil-pbc-fg-ideal-radical-power"
+    "lem-weil-pbc-localized-finite-quotient-charts",
+    "lem-weil-pbc-product-of-localizations-at-maximal"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-artinian-local-unique-prime",
   "lem-weil-pbc-fg-ideal-radical-power",
   "lem-weil-pbc-finite-algebra-noetherian",
-  "lem-weil-pbc-finite-dim-algebra-artinian",
   "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-localization-base-change",
   "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localized-finite-quotient-charts",
+  "lem-weil-pbc-minimal-prime-localization-radical",
   "lem-weil-pbc-noetherian-local-quotient-artinian-local",
   "lem-weil-pbc-product-of-localizations-at-maximal"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 07N9, finite-level algebraic part preceding passage to the inverse limit"
+  "place": "Tag 07N9 (lemma-completion-finite-extension), finite-level quotient argument; explicit Mathlib radical/minimal-prime and product assembly by X2, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -136,7 +141,7 @@
   "reviewer": "COMPILER",
   "group": "X2",
   "result": "pass",
-  "landing": "20261013T002012-L-2359254",
+  "landing": "20261013T022436-L-3223492",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
