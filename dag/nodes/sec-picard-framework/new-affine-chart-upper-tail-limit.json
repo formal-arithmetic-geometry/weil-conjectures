@@ -14,22 +14,24 @@
  ],
  "proof": [
   {
-   "text": "Let J be the upper tail above i. On J opposite form the diagram of\nSpec(R_j) over Spec(R_i), with transition maps induced by R. Its limit in the over\ncategory is c.pt with structure map c.π_i. Indeed J is final in I: for any k a\ncommon upper bound with i gives an object of J above k, and any two such objects\nhave a common upper bound. Thus J opposite is initial, so restriction of c is a\nlimit; the cone lifts to the over category by its equations. Pull back this diagram\nalong V.X a -> Xi -> Spec(R_i). Over.pullback is a right adjoint and preserves the\nlimit. The forgetful functor from the over category preserves connected limits;\nJ is nonempty (it contains i) and directed, hence J opposite is connected.\nThis gives D and its limiting cone d. Each D_j is affine, because its morphism to\nthe affine chart V.X a is a base change of a morphism between affine schemes.\nPullback pasting identifies d.pt with Z and D_j with U.X a. It also identifies\nthe iterated chart Y with Z, by the cone equation at j. The universal property\nof the pullbacks gives the two asserted equations: both sides have the same\nprojections to the original chart and ambient base change, respectively to the\nstage chart. Choose these universal-property isomorphisms as z, e and h.\nEquivalent preorder indices cause no exception: all identities and compositions\nare equations of the induced pullback maps. Empty schemes are treated by the\nsame universal properties.",
+   "text": "Use the explicitly constructed upperTailChartDiagram R i (V.f a followed by f) and upperTailChartCone. upperTailChartCone_isLimit proves the cone limiting. Every object is affine by the Mathlib affine pullback instance: Spec(R_j) -> Spec(R_i) is a morphism between affine schemes, and V.X a is affine. Apply the comparison theorem for this very cone to obtain z, e, h and the equations, and assemble the existential conclusion.",
    "uses": [
-    "def-pc-base-change",
+    "new-affine-chart-upper-tail-limit-data",
+    "new-affine-chart-upper-tail-limit-comparisons",
     "def-pc-fibre-product"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
+  "new-affine-chart-upper-tail-limit-data",
+  "new-affine-chart-upper-tail-limit-comparisons",
   "def-pc-fibre-product"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Detailed affine-limit and isomorphism-transport argument from Tags 01ZR, 0095, 0097; written by U4"
+  "document": "Stacks Project, Tag 01ZR (affine reduction); Mathlib pullback and cofinality API",
+  "place": "R3 second reading: explicit diagram/cone, proved preservation of limits, stage affineness and proved pullback comparisons."
  },
  "mathlib_searches": [
   {
@@ -123,9 +125,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T142906-L-501387",
+  "landing": "20261013T151703-L-924803",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

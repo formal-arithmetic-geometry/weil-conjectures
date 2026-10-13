@@ -1,0 +1,122 @@
+{
+ "id": "new-affine-chart-upper-tail-limit-comparisons",
+ "kind": "statement",
+ "title": "Affine upper-tail chart comparisons",
+ "statement": "For any preorder I, ring diagram R, spectrum cone c, fixed i, morphism Xi -> Spec(R_i) and chart V.X a, use the actual upperTailChartDiagram and upperTailChartCone constructed by slice pullback along V.f a followed by f (new-affine-chart-upper-tail-limit-data). Pullback pasting gives an isomorphism z of its vertex with the limit chart Z, stage isomorphisms e, and iterated-chart isomorphisms h, satisfying the two equations of new-affine-chart-upper-tail-limit. This concerns this specified cone, not arbitrary affine limiting diagrams, and needs neither directedness nor a limit hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Stacks Tags 01ZR, 0095 and 0097"
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "new-affine-chart-upper-tail-limit-data"
+ ],
+ "proof": [
+  {
+   "text": "Use pullbackSymmetry, inverse pullbackRightPullbackFstIso, and pullbackSymmetry again to construct z and every e for the explicitly defined diagram and cone. This uses only the definitions in the data node, not its limiting theorem.",
+   "uses": [
+    "new-affine-chart-upper-tail-limit-data",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the baseChangeMap p, pullback.map gives p followed by the stage first projection equal to the limit first projection. Construct h by pullbackRightPullbackFstIso followed by pullback.congrHom for this equality. Its first equation is the first-projection identity. To prove the second, apply pullback.hom_ext to the stage chart and then to its ambient base change. The projection formulas for the three isomorphisms and Over.pullback reduce all components to pullback.condition and the two projection identities of baseChangeMap. All equations are proved by these identities.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-affine-chart-upper-tail-limit-data",
+  "def-pc-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 01ZR (affine reduction); Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting",
+  "place": "R3 second reading: canonical pullback-pasting isomorphisms and projection identities; fully proved."
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartUpperTailLimit",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-affine-chart-upper-tail-limit",
+   "place": "Affine chart upper-tail construction"
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback pasting isomorphisms between iterated base changes of open cover charts commute with the two projections",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated base change of an open cover chart is isomorphic to its direct pullback, with compatible projections",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd, AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd_assoc",
+   "verdict": "Supporting constructions used in the proof; no exact duplicate of the chart theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullbackRightPullbackFstIso",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Limits.pullbackRightPullbackFstIso, CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst, CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_fst, CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_snd, CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_snd_snd, CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst_assoc, CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_fst_assoc, CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_snd_fst",
+   "verdict": "Supporting constructions used in the proof; no exact duplicate of the chart theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback₁|pullbackHom|pullback.*[Ii]so",
+   "date": "2026-10-13",
+   "results": "Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Cover/Over.lean",
+   "verdict": "Supporting constructions used in the proof; no exact duplicate of the chart theorem."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartUpperTailLimitComparisons.lean",
+  "declaration": "AlgebraicGeometry.affine_chart_upper_tail_limit_comparisons",
+  "declarations": [
+   "AlgebraicGeometry.affine_chart_upper_tail_limit_comparisons"
+  ],
+  "statement": "theorem affine_chart_upper_tail_limit_comparisons {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec)) (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) (V : Xi.OpenCover.{u}) (a : V.I₀) : let D := upperTailChartDiagram R i (V.f a ≫ f) let d := upperTailChartCone R c i (V.f a ≫ f) let W := V.pullback₁ (pullback.fst f (c.π.app (op i))) let Z := W.X a ∃ z : d.pt ≅ Z, ∀ j : {j : I // i ≤ j}, let U : (pullback f (Spec.map (R.map (homOfLE j.property)))).OpenCover.{u} := V.pullback₁ (pullback.fst f (Spec.map (R.map (homOfLE j.property)))) let p := baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE j.property)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j.val)) (c.w (homOfLE j.property).op)) let Y := (U.pullback₁ p).X a ∃ (e : D.obj (op j) ≅ U.X a) (h : Y ≅ Z), h.hom ≫ W.f a = (U.pullback₁ p).f a ∧ h.hom ≫ z.inv ≫ d.π.app (op j) ≫ e.hom = U.pullbackHom p a",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T151703-L-924803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T151703-L-924803",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

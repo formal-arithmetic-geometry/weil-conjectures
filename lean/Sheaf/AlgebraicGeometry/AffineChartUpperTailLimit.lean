@@ -6,6 +6,7 @@ Authors: SHEAF group U4
 module
 
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
+import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitComparisons
 
 /-! # The affine chart limit over an upper tail
 
@@ -64,6 +65,16 @@ theorem exists_affine_chart_upper_tail_limit
         let Y := (U.pullback₁ p).X a
         ∃ (e : D.obj (op j) ≅ U.X a) (h : Y ≅ Z),
           h.hom ≫ W.f a = (U.pullback₁ p).f a ∧
-          h.hom ≫ z.inv ≫ d.π.app (op j) ≫ e.hom = U.pullbackHom p a := by sorry
+          h.hom ≫ z.inv ≫ d.π.app (op j) ≫ e.hom = U.pullbackHom p a := by
+  let D := upperTailChartDiagram R i (V.f a ≫ f)
+  let d := upperTailChartCone R c i (V.f a ≫ f)
+  have hd : Nonempty (IsLimit d) := upperTailChartCone_isLimit R c hc i (V.f a ≫ f)
+  have haD : ∀ j, IsAffine (D.obj j) := by
+    intro j
+    let : IsAffine (V.X a) := ha
+    change IsAffine (pullback (Spec.map (R.map (homOfLE j.unop.property))) (V.f a ≫ f))
+    infer_instance
+  obtain ⟨z, hz⟩ := affine_chart_upper_tail_limit_comparisons R c i f V a
+  exact ⟨D, d, hd, haD, z, hz⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,119 @@
+{
+ "id": "new-affine-chart-upper-tail-limit-data",
+ "kind": "statement",
+ "title": "The explicit upper-tail base-change cone is limiting",
+ "statement": "Let I be a directed preorder, R : I -> CommRingCat a diagram and c a limiting cone of R.op followed by Spec. Fix i in I and any g : A -> Spec(R_i). Define upperTailSpectrumOver on J.op, J = {j | i <= j}, by Spec(R_j) -> Spec(R_i), and upperTailSpectrumOverCone by the legs of c. Define upperTailChartDiagram and upperTailChartCone by pulling this diagram and cone back along g in the slice and then forgetting to Scheme. The explicitly constructed cone is limiting. The underlying vertex is the actual pullback of c.pi_i and g; no existential witness supplies any definition.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Stacks Tags 01ZR, 0095 and 0097"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct the spectrum diagram and its cone in the slice using R.map and c.w. The displayed diagram and cone are then literal images under Over.pullback g and Over.forget A, not choices from a theorem.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "J is nonempty (i belongs to it) and directed. Its inclusion t in I is final by Monotone.final_functor_iff, since every k has a common upper bound with i. Functor.Initial.isLimitWhiskerEquiv restricts hc along t.op. Identify the underlying slice cone with that restriction through the identity-component natural isomorphism. The forgetful functor reflects limits, giving the limiting slice cone. Over.pullback g is a right adjoint and preserves limits. IsCofiltered.isConnected and preservation of connected limits by the slice forgetful functor finish the proof.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 01ZR (affine reduction); Mathlib.CategoryTheory.Filtered.Final; Mathlib.CategoryTheory.Limits.Constructions.Over.Connected",
+  "place": "R3 second reading: explicit pullback construction, cofinality and preservation/reflection of limits; fully proved."
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartUpperTailLimit",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-affine-chart-upper-tail-limit",
+   "place": "Affine chart upper-tail construction"
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cofinal upper tail of a directed preorder preserves an inverse limit of schemes after base change",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a limit cone to the opposite of the cofinal upper interval of a directed preorder",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.SmallObject.coconeOfLE, Preorder.limitConeOfIsGLB_cone, CategoryTheory.isCofilteredOrEmpty_of_directed_ge, InverseSystem.limit, Alexandrov.lowerCone, Preorder.instHasLimitsOfShape, CategoryTheory.isCofiltered_of_directed_ge_nonempty, Preorder.coneOfLowerBound",
+   "verdict": "Supporting constructions used in the proof; no exact duplicate of the chart theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.pullback",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Over.pullback, CategoryTheory.Over.instIsRightAdjointPullback, CategoryTheory.Over.pullbackIsRightAdjoint, CategoryTheory.Over.mapPullbackAdj, CategoryTheory.Over.faithful_pullback, CategoryTheory.Over.pullbackId, CategoryTheory.Over.pullback_obj_left, CategoryTheory.Over.starPullbackIsoStar",
+   "verdict": "Supporting constructions used in the proof; no exact duplicate of the chart theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "isLimitWhiskerEquiv|final_functor_iff|isConnected|isRightAdjoint|PreservesLimitsOfShape",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean",
+   "verdict": "Supporting constructions used in the proof; no exact duplicate of the chart theorem."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartUpperTailLimitData.lean",
+  "declaration": "AlgebraicGeometry.upperTailChartCone_isLimit",
+  "declarations": [
+   "AlgebraicGeometry.upperTailSpectrumOver",
+   "AlgebraicGeometry.upperTailSpectrumOverCone",
+   "AlgebraicGeometry.upperTailChartDiagram",
+   "AlgebraicGeometry.upperTailChartCone",
+   "AlgebraicGeometry.upperTailChartCone_isLimit"
+  ],
+  "statement": "theorem upperTailChartCone_isLimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) (i : I) {A : Scheme.{u}} (g : A ⟶ Spec (R.obj i)) : Nonempty (IsLimit (upperTailChartCone R c i g))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T151703-L-924803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T151703-L-924803",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
