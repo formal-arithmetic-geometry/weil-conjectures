@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-ring-extension-finite-support-product",
+ "kind": "statement",
+ "title": "Scalar extension of a finite-support limiting product",
+ "statement": "Let $A,B$ be commutative rings, $\\varphi:A\\to B$ a ring map, and $F:\\operatorname{RingSiteModules}(A)\\to\\operatorname{RingSiteModules}(B)$ a functor whose object function agrees with the specified scalar extension [def-pc-perfect-rhom-base-change-map]. Let $M_p$ be $A$-module sheaves indexed by $p\\in\\mathbb Z$, and $\\pi_p:T\\to M_p$ a limiting product fan. Assume there are integers $a,b$ such that $M_p$ is zero whenever $p<a$ or $b<p$. Then there are projections $\\rho_p:F(T)\\to F(M_p)$ forming a limiting product fan, with $\\rho_p(b\\otimes x)=b\\otimes\\pi_p(x)$ at every site object. No condition on the action of $F$ on maps, or flatness of $B$, is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 0A6A (lemma-base-change-RHom), clause (1), via 0ATK (lemma-evaluate-isomorphism), finite-projective calculation"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate at the one object of the bottom-topology site. Sheafification is invertible there. Remove the zero factors outside the finite interval: restriction and extension by the unique zero-factor maps preserve the universal property.",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Commute ordinary tensor product with the finite product using TensorProduct.piRight (or piLeft followed by the tensor symmetry). Transport the limiting fan and its pure-tensor formula through the sheafification unit and the object equalities for F. The empty interval is included.",
+   "uses": [
+    "lem-weil-pbc-tensor-finite-product",
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "lem-weil-pbc-tensor-finite-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Detailed expansion of the finite-product and pure-tensor steps of Lemma 0A6A (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension preserves finite products of modules and tensor pure generators determine linear maps",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T06:37:19Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension preserves finite products of modules and tensor pure generators determine linear maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.exists_eq_tmul_of_forall\", \"PiTensorProduct.ext\", \"TensorProduct.AlgebraTensorModule.ext\", \"TensorProduct.isTensorProduct\", \"TensorProduct.exists_finsupp_left\", \"PiTensorProduct.ext_iff\", \"TensorProduct.exists_finsupp_right\", \"TensorProduct.exists_multiset\"], \"digest\": \"1c121efca4f91490\"}",
+   "verdict": "Candidates inspected; no exact sheaf finite-support product or internal-Hom extensionality theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRingsHom|hom_ext",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T06:38:33Z\", \"tool\": \"grep\", \"query\": \"changeOfRingsHom|hom_ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/Gal.lean\", \"Mathlib/NumberTheory/Cyclotomic/Gal.lean\", \"Mathlib/RingTheory/QuotSMulTop.lean\", \"Mathlib/RingTheory/QuotSMulTop.lean\", \"Mathlib/Probability/Kernel/Category/Stoch.lean\", \"Mathlib/Probability/Kernel/Category/SFinKer.lean\", \"Mathlib/RingTheory/FreeCommRing.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\"], \"digest\": \"814a15be52f66d7d\"}",
+   "verdict": "Candidates inspected; no exact sheaf finite-support product or internal-Hom extensionality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.piRight",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T06:38:34Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct.piRight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"TensorProduct.piRight\", \"TensorProduct.piRight_symm_apply\", \"TensorProduct.piRight_symm_single\", \"TensorProduct.piRight_apply\"], \"digest\": \"a3bd72ddf5fcbda1\"}",
+   "verdict": "Candidates inspected; no exact sheaf finite-support product or internal-Hom extensionality theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product commutes with finite products and maps from scalar extension are determined by pure tensors",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T06:44:20Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product commutes with finite products and maps from scalar extension are determined by pure tensors\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedRingHomExtensionDegree",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 proof through 0AA7 clause (1), expanded 0A6A (1): parent step 2: one degree of the finite-product Hom-complex comparison",
+   "via": [
+    "lem-pc-bounded-ring-hom-extension-degree",
+    "lem-pc-perfect-ring-hom-scalar-extension",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingExtensionFiniteSupportProduct",
+  "file": "lean/Sheaf/Algebra/Homology/RingExtensionFiniteSupportProduct.lean",
+  "declaration": "CategoryTheory.ringExtension_finiteSupport_product",
+  "statement": "theorem ringExtension_finiteSupport_product\n    {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B)\n    (F : RingSiteModules A ⥤ RingSiteModules B)\n    (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings (ringSiteMap φ) M)\n    (M : ℤ → RingSiteModules A) (T : RingSiteModules A) (π : ∀ p, T ⟶ M p)\n    (hπ : IsLimit (Fan.mk T π))\n    (hb : ∃ a b : ℤ, ∀ p : ℤ, p < a ∨ b < p → IsZero (M p)) :\n    ∃ ρ : ∀ p, F.obj T ⟶ F.obj (M p),\n      Nonempty (IsLimit (Fan.mk (F.obj T) ρ)) ∧\n      ∀ (p : ℤ) (U : (Discrete PUnit.{u + 1})ᵒᵖ) (b : B) (x : T.val.obj U),\n        (ρ p).val.app U (ringExtensionPure φ F hF T U b x) =\n          ringExtensionPure φ F hF (M p) U b ((π p).val.app U x)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T082352-L-1638370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T082352-L-1638370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
