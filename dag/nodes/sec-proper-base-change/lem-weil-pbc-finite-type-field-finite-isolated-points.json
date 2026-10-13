@@ -33,7 +33,7 @@
  ],
  "proof": [
   {
-   "text": "The field $k$ is Noetherian because its only ideals are $0$ and $k$. Applying [lem-weil-pbc-finite-type-algebra-noetherian] to the finite type map $k\\to A$ shows that $A$ is Noetherian.",
+   "text": "The field k is Noetherian. Apply Algebra.FiniteType.isNoetherianRing k A, the Mathlib declaration of [lem-weil-pbc-finite-type-algebra-noetherian], to obtain IsNoetherianRing A.",
    "uses": [
     "lem-weil-pbc-finite-type-algebra-noetherian"
    ],
@@ -44,7 +44,7 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], the Noetherian ring $A$ has a finite set of minimal prime ideals.",
+   "text": "PrimeSpectrum.finite_setOfPred_isMin A packages finiteness of minimal primes [lem-weil-pbc-noetherian-finitely-many-minimal-primes] and injectivity of the map from spectrum points to their prime ideals. Hence the set of minimal spectrum points is finite.",
    "uses": [
     "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
    ],
@@ -55,18 +55,16 @@
    }
   },
   {
-   "text": "Let $\\mathfrak q$ be a prime whose singleton is open. By the basic-open basis [lem-weil-pbc-spec-localization-away-basic-open], there is $f\\in A$ with $\\mathfrak q\\in D(f)\\subseteq\\{\\mathfrak q\\}$, so $D(f)=\\{\\mathfrak q\\}$. If $\\mathfrak p\\subseteq\\mathfrak q$ is any prime, then $f\\notin\\mathfrak q$ implies $f\\notin\\mathfrak p$, hence $\\mathfrak p\\in D(f)=\\{\\mathfrak q\\}$ and $\\mathfrak p=\\mathfrak q$. Thus every isolated prime is minimal.",
-   "uses": [
-    "lem-weil-pbc-spec-localization-away-basic-open"
-   ],
-   "elementary": false,
+   "text": "An open singleton is stable under generalization by IsOpen.stableUnderGeneralization. PrimeSpectrum.stableUnderGeneralization_singleton identifies this condition with membership of the associated ideal in minimalPrimes A, and PrimeSpectrum.isMin_iff identifies it with minimality of the spectrum point. This is the basic-open minimality argument already packaged in Mathlib; no localization result is used.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Algebra, Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), proof lines 40362-40368, where isolated points of the finite-type fibre are counted; the minimality argument uses Lemma Tag 00E0 (lemma-Zariski-topology), part (14)"
    }
   },
   {
-   "text": "The set of isolated primes, including the isolated closed primes counted in the source, is therefore a subset of the finite set of minimal primes from step 2, and is finite.",
+   "text": "Using Set.Finite.subset, include the set of points with open singleton in the finite set of minimal spectrum points from step 2. The types and topologies of Spec (CommRingCat.of A) and PrimeSpectrum A are definitionally equal.",
    "uses": [
     "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
    ],
@@ -79,13 +77,12 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-spec-localization-away-basic-open"
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), proof lines 40384-40404; its isolated closed points are a subset of the isolated points counted here, whose finiteness follows from the Noetherian finite-minimal-prime argument"
+  "place": "Algebra, Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), proof lines 40384-40404; its isolated closed points are a subset of the isolated points counted here, whose finiteness follows from the Noetherian finite-minimal-prime argument; formalized by H4 using Mathlib finite_setOfPred_isMin and stableUnderGeneralization_singleton to package the finite-minimal-prime argument"
  },
  "mathlib_searches": [
   {
@@ -164,5 +161,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T111854-L-3053183",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

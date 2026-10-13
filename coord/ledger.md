@@ -12128,3 +12128,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/H3/Sheaf.RingTheory.PowerSeriesSubringFiniteBasis (stage 3; reviewer PASS; first push; landing 20261013T111853-L-3052825 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:18 L: merged deliver/H3/Sheaf.RingTheory.PrincipalPrimeQuotientFractionFinite (stage 3; reviewer PASS; first push; landing 20261013T111853-L-3052929 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/H4/Sheaf.AlgebraicGeometry.AffineOpenSupportedTargetModel (stage 3; reviewer PASS; first push; landing 20261013T111854-L-3053076 (interface); batch 20261013T111833; modules 3; new nodes 2)
+- 11:18 L: merged deliver/H4/Sheaf.AlgebraicGeometry.FiniteIsolatedPointsOfFiniteType (stage 3; reviewer PASS; first push; landing 20261013T111854-L-3053183 (proof); batch 20261013T111833; modules 1; new nodes 0)

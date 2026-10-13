@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.FiniteType
 
+import Mathlib.RingTheory.Spectrum.Prime.Noetherian
+
 /-!
 # Finitely many isolated points of a finite type algebra over a field
 
@@ -31,16 +33,21 @@ Proof:
    `lem-weil-pbc-finite-type-algebra-noetherian`.
 2. The set of minimal prime ideals is finite by
    `lem-weil-pbc-noetherian-finitely-many-minimal-primes`.
-3. If `{q}` is open, the basic-open basis from
-   `lem-weil-pbc-spec-localization-away-basic-open` supplies `f` with `D(f) = {q}`.
-   For any prime `p` contained in `q`, the fact that `f` is not in `q` implies it is
-   not in `p`, so `p` lies in `D(f)` and equals `q`. Thus `q` is minimal.
+3. An open singleton is stable under generalization. By
+   `PrimeSpectrum.stableUnderGeneralization_singleton` and `PrimeSpectrum.isMin_iff`,
+   its point is minimal; these Mathlib lemmas package the basic-open argument.
 4. The isolated points form a subset of the finite set of minimal primes from step 2,
    hence are finite. This includes the isolated closed points counted in Tag 00UK. -/
 theorem Spec.finite_setOf_isOpen_singleton_of_finiteType
     (k : Type u) [Field k] (A : Type v) [CommRing A] [Algebra k A]
     [Algebra.FiniteType k A] :
     {q : Spec (CommRingCat.of A) | IsOpen ({q} : Set (Spec (CommRingCat.of A)))}.Finite := by
-  sorry
+  have : IsNoetherianRing A := Algebra.FiniteType.isNoetherianRing k A
+  change {q : PrimeSpectrum A | IsOpen ({q} : Set (PrimeSpectrum A))}.Finite
+  refine (PrimeSpectrum.finite_setOfPred_isMin A).subset ?_
+  intro q hq
+  change IsOpen ({q} : Set (PrimeSpectrum A)) at hq
+  exact PrimeSpectrum.isMin_iff.mpr
+    (PrimeSpectrum.stableUnderGeneralization_singleton.mp hq.stableUnderGeneralization)
 
 end AlgebraicGeometry
