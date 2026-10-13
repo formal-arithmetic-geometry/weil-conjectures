@@ -14,40 +14,43 @@
  },
  "proof": [
   {
-   "text": "In degrees $p$ and $q=p+1$, form the two short exact sequences of resolution complexes $0\\to B^p\\to Z^p\\to H^p\\to0$ and $0\\to Z^p\\to I^p\\to B^q\\to0$ and the corresponding sequences for $J$. Their augmentations come from the single bicomplex augmentations. Exactness of $F$ preserves the sequences and augmented quasi-isomorphisms. The hypothesis on the incoming boundary map $b$, stated after precomposing with $K^{p-1}\\to B^p(K)$, is the genuine boundary augmentation square because this map is epic and remains epic under $F$. Evaluation in a resolution degree is exact; hence the row sequences are degreewise short exact. All needed target columns are injective resolutions by the explicitly local quasi-isomorphism and termwise injectivity assumptions.",
+   "text": "Apply [lem-weil-pbc-ce-comparison-cycle-stage] to obtain an augmented cycle map $y$ whose incoming equation is stated after precomposition with toCycles.",
+   "uses": [
+    "lem-weil-pbc-ce-comparison-cycle-stage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ce-comparison-object-stage] to $y$, obtaining the augmented object map $x$ that commutes with the cycle inclusions.",
+   "uses": [
+    "lem-weil-pbc-ce-comparison-object-stage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the category of resolution complexes, the sequence $0\\to Z^p(I)\\to I^p\\to\\operatorname{Im}(d_I^{p,q})\\to0$ is short exact: the first map is the kernel of the differential, the last its image factor, and exactness is reflected across the monomorphic image inclusion. Apply $G$ to this short exact sequence. Since the cycle square implies that $x$ followed by the target outgoing image factor kills the source cycle inclusion, the cokernel universal property constructs $c$ with $G(\\operatorname{factorThruImage}(d_I^{p,q}))c=x\\operatorname{factorThruImage}(d_J^{p,q})$, in diagrammatic composition order. Thus no further comparison existence statement is needed for $c$.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Lift the homology augmentation through the monomorphic quasi-isomorphism from $F(H^p(K))[0]$ into the source homology resolution, into the termwise injective target homology resolution, using [lem-weil-pbc-lift-along-injective-quasi-iso] (Tag 013P(2)). Apply [lem-weil-pbc-horseshoe-morphism-lift-exact-source] to the boundary/cycle/homology sequences with this homology map and the prescribed boundary map $b$. This produces an augmented cycle comparison commuting with both endpoint inclusions.",
-   "uses": [
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
-   ],
-   "elementary": false
+   "text": "Precompose the desired incoming image.\\iota square with the preserved epimorphism $G(\\operatorname{factorThruImage}(d_I^{p-1,p}))$. Rewrite the differential as toCycles followed by iCycles, use the object cycle square, then the cycle-stage incoming square. Cancel this epimorphism to prove the incoming image square.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Independently lift the outgoing boundary augmentation to the injective outgoing boundary column of $J$ by [lem-weil-pbc-lift-along-injective-quasi-iso], obtaining $c$. Apply [lem-weil-pbc-horseshoe-morphism-lift-exact-source] to the cycle/object/outgoing-boundary short exact sequences, prescribing the cycle map of the previous step and this same map $c$. Its middle map $x$ has the required object augmentation and outgoing factorThruImage equation.",
-   "uses": [
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compose the incoming endpoint equation of the object horseshoe with the boundary-to-cycle inclusion and use the incoming endpoint equation of the cycle horseshoe to get the equation for image.ι. Retain the outgoing augmentation square of $c$. These are exactly the four displayed conclusions. Since $q-1=p$, the displayed eqToHom maps merely identify the same original-object column with that indexed by $q-1$. No induction or assembly of all original-object columns occurs in this lemma.",
+   "text": "Evaluate the defining cokernel equation for $c$ in resolution degree zero and precompose with the mapped object augmentation. The augmented object equation for $x$ gives the outgoing boundary augmentation equation. Use $q-1=p$ to identify the displayed transports. Together with the object augmentation and incoming image square, these are exactly the four conclusions.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
-  "lem-weil-pbc-lift-along-injective-quasi-iso"
+  "lem-weil-pbc-ce-comparison-cycle-stage",
+  "lem-weil-pbc-ce-comparison-object-stage"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 015H, 015I and 015K; the local comparison step of lem-weil-pbc-ce-augmented-comparison, Step 2"
+  "place": "Tags 015I and 015K; two alternating comparison stages; outgoing boundary map constructed by the cokernel universal property (Lean proof by K2)"
  },
  "mathlib_searches": [
   {
@@ -132,9 +135,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T031555-L-3576083",
+  "landing": "20261013T045537-L-131063",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

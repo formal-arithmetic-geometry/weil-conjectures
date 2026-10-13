@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Homology.HomologicalBicomplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Mathlib.Algebra.Homology.ModelCategory.Injective
-import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource
+import Sheaf.CategoryTheory.CartanEilenbergComparisonCycleStage
+import Sheaf.CategoryTheory.CartanEilenbergComparisonObjectStage
 
 /-! # One column step in Cartan–Eilenberg comparison
 
@@ -23,6 +23,28 @@ universe v₁ v₂ u₁ u₂
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+private theorem shortExact_cycles_image
+    {C : Type*} [Category* C] [Abelian C] (T : CochainComplex C ℤ) (p q : ℤ)
+    (hq : q = p + 1) :
+    ∃ h : T.iCycles p ≫ factorThruImage (T.d p q) = 0,
+      (ShortComplex.mk (T.iCycles p) (factorThruImage (T.d p q)) h).ShortExact := by
+  have hz : T.iCycles p ≫ factorThruImage (T.d p q) = 0 := by
+    apply (cancel_mono (image.ι (T.d p q))).1
+    rw [Category.assoc, image.fac, HomologicalComplex.iCycles_d, zero_comp]
+  let S := ShortComplex.mk (T.iCycles p) (factorThruImage (T.d p q)) hz
+  let R := ShortComplex.mk (T.iCycles p) (T.d p q) (T.iCycles_d p q)
+  let φ : S ⟶ R :=
+    { τ₁ := 𝟙 _
+      τ₂ := 𝟙 _
+      τ₃ := image.ι (T.d p q)
+      comm₁₂ := by simp [S, R]
+      comm₂₃ := by simp [S, R] }
+  have he : R.Exact :=
+    ShortComplex.exact_of_f_is_kernel _ (T.cyclesIsKernel p q (by simpa using hq.symm))
+  exact ⟨hz, { exact := (ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ).2 he
+               mono_f := inferInstance
+               epi_g := inferInstance }⟩
 
 /-- Extend a prescribed augmented boundary comparison through one complex degree.
 The conclusion concerns just the column in degree `p` and its outgoing boundary;
@@ -110,6 +132,44 @@ theorem exists_cartanEilenberg_comparison_column_step
           (fun k : ℤ ↦ (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X k))
           (by omega : q - 1 = p)) ≫ x ≫
         eqToHom (congrArg (fun k : ℤ ↦ J.X k) (by omega : p = q - 1)) ≫
-          factorThruImage (J.d (q - 1) q) := by sorry
+          factorThruImage (J.d (q - 1) q) := by
+  have hqp : q - 1 = p := by omega
+  subst p
+  let p : ℤ := q - 1
+  let G := F.mapHomologicalComplex (ComplexShape.up ℕ)
+  obtain ⟨y, hy, hby⟩ := exists_cartanEilenberg_comparison_cycle_stage
+    F K L u p I eI hIres J eJ hJinj' hJres b hb
+  obtain ⟨x, hx, hyx⟩ := exists_cartanEilenberg_comparison_object_stage
+    F K L u p q hq I eI hIcol hIres.1 hIout J eJ hJcol hJinj
+    (fun n ↦ (hJinj' n).1) hJres.1 hJout hJoutInj y hy
+  obtain ⟨hzI, hSI⟩ := shortExact_cycles_image I p q hq
+  obtain ⟨hzJ, _hSJ⟩ := shortExact_cycles_image J p q hq
+  have hz : G.map (I.iCycles p) ≫ x ≫ factorThruImage (J.d p q) = 0 := by
+    rw [← Category.assoc, hyx, Category.assoc, hzJ, comp_zero]
+  obtain ⟨c, hxc⟩ := CokernelCofork.IsColimit.desc'
+    (hSI.map_of_exact G).gIsCokernel (x ≫ factorThruImage (J.d p q)) hz
+  change G.map (factorThruImage (I.d p q)) ≫ c =
+    x ≫ factorThruImage (J.d p q) at hxc
+  have hbx : G.map (image.ι (I.d (p - 1) p)) ≫ x =
+      b ≫ image.ι (J.d (p - 1) p) := by
+    apply (cancel_epi (G.map (factorThruImage (I.d (p - 1) p)))).1
+    calc
+      G.map (factorThruImage (I.d (p - 1) p)) ≫
+          G.map (image.ι (I.d (p - 1) p)) ≫ x =
+          G.map (I.d (p - 1) p) ≫ x := by
+        rw [← G.map_comp_assoc, image.fac]
+      _ = G.map (I.toCycles (p - 1) p) ≫ G.map (I.iCycles p) ≫ x := by
+        rw [← G.map_comp_assoc, HomologicalComplex.toCycles_i]
+      _ = G.map (I.toCycles (p - 1) p) ≫ y ≫ J.iCycles p := by rw [hyx]
+      _ = G.map (factorThruImage (I.d (p - 1) p)) ≫ b ≫
+          image.ι (J.d (p - 1) p) := hby
+  refine ⟨x, c, hx, ?_, hbx, ?_⟩
+  · have hc₀ := HomologicalComplex.congr_hom hxc 0
+    change F.map ((factorThruImage (I.d p q)).f 0) ≫ c.f 0 =
+      x.f 0 ≫ (factorThruImage (J.d p q)).f 0 at hc₀
+    rw [← Category.assoc, F.map_comp, Category.assoc, hc₀,
+      ← Category.assoc, hx, Category.assoc, Category.assoc]
+  · rw [eqToHom_refl, Category.id_comp, eqToHom_refl, Category.id_comp]
+    exact hxc
 
 end CategoryTheory

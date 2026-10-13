@@ -11130,3 +11130,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/K1/Sheaf.AlgebraicGeometry.AffineAlternatingCechResolutionExchange (stage 3; reviewer PASS; first push; landing 20261013T045536-L-130456 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:55 L: merged deliver/K1/Sheaf.AlgebraicGeometry.Cohomology.OpenImmersionCoefficientUnit (stage 3; reviewer PASS; first push; landing 20261013T045536-L-130600 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:55 L: merged deliver/K2/Sheaf.AlgebraicGeometry.FormalKernelGradedActionExists (stage 3; reviewer PASS; first push; landing 20261013T045537-L-130855 (interface); batch 20261013T045507; modules 3; new nodes 2)
+- 04:55 L: merged deliver/K2/Sheaf.CategoryTheory.CartanEilenbergComparisonColumnStep (stage 3; reviewer PASS; first push; landing 20261013T045537-L-131063 (interface); batch 20261013T045507; modules 3; new nodes 2)
