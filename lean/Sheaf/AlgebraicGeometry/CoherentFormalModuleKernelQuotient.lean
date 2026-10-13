@@ -1,13 +1,14 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Mathlib.RingTheory.Filtration
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientAdicBound
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientInclusionBound
+
+/-! # Quotient coherent formal kernels after enlarging the bound
+Source: Stacks Project, Lemma 087X, claims (b)--(c).
+-/
+
+set_option backward.isDefEq.respectTransparency false
 
 @[expose] public section
 universe u
@@ -18,18 +19,13 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Lemma 087X, claim (c) and the eventual kernel calculation,
 under the stabilized-image equality supplied by claims (a)--(b).
-The proof is deferred to the corresponding DAG node.
+The bound is enlarged to satisfy the Artin--Rees condition for the kernel in the source.
+Proof: enlarge c to an eventual adicness bound. Construct
+K from the explicit shifted quotient system and its proved adicness, and construct its
+map to F by cokernel descent. Identity level isomorphisms give the transition and map
+compatibility equations. Monicity of j and cokernel descent prove kernel vanishing.
 (blueprint: lem-weil-pbc-formal-kernel-quotient-aux).
 -/
--- STATEMENT-DISPUTED: image stabilization does not supply the Artin--Rees bound
--- for the kernel inside the source. Take X = Spec Z, I = (2), F_n = Z/2^(n+1),
--- H_n = Z/2, and alpha the reduction. The termwise kernels form S with
--- S_n = 2Z/2^(n+1)Z; their transitions are surjective, so hc and hS hold for c = 0.
--- Every S_n is annihilated by 2^(n+1), hence its indicated quotient is S_n itself.
--- The conclusion would give K_0 = 0 and K_1 = Z/2. But the defining comparison
--- K_1 / 2K_1 = K_0 would identify Z/2 with 0, a contradiction.
--- Stacks 087X chooses c for BOTH image stabilization and the inclusion
--- ker(f) intersect I^r M <= I^(r-c) ker(f); only the first is assumed here.
 theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)
@@ -45,20 +41,39 @@ theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian 
         F.obj.map (homOfLE (Nat.le_add_right m c)).op),
       e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫
         F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) :
-    ∃ (K : CoherentFormalModule X I) (ι : K ⟶ F)
-      (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + c))) ≅
+    ∃ d : ℕ, c ≤ d ∧ ∃ (K : CoherentFormalModule X I) (ι : K ⟶ F)
+      (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + d))) ≅
         K.obj.obj (op n)),
       (∀ n : ℕ,
-        formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + c))) ≫
+        formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + d))) ≫
             (e (n + 1)).hom ≫ K.obj.map (homOfLE (Nat.le_succ n)).op =
-          S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) c)).op ≫
-            formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom) ∧
+          S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) d)).op ≫
+            formalModuleQuotientπ I (n + 1) (S.obj (op (n + d))) ≫ (e n).hom) ∧
       (∀ n : ℕ,
-        formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫
+        formalModuleQuotientπ I (n + 1) (S.obj (op (n + d))) ≫
             (e n).hom ≫ ι.hom.app (op n) =
-          j.app (op (n + c)) ≫ F.obj.map (homOfLE (Nat.le_add_right n c)).op) ∧
-      (∀ n : ℕ, kernel.ι (ι.hom.app (op (n + c))) ≫
-        K.obj.map (homOfLE (Nat.le_add_right n c)).op = 0) := by
-  sorry
+          j.app (op (n + d)) ≫ F.obj.map (homOfLE (Nat.le_add_right n d)).op) ∧
+      (∀ n : ℕ, kernel.ι (ι.hom.app (op (n + d))) ≫
+        K.obj.map (homOfLE (Nat.le_add_right n d)).op = 0) := by
+  obtain ⟨a, ha⟩ := coherentFormalModule_kernel_quotient_adic_bound I F H α c S j hc hS
+  let d := max c a
+  have hca : max c a ≤ d := by dsimp [d]; omega
+  let K : CoherentFormalModule X I := ⟨formalShiftedQuotient I S d, ha d hca⟩
+  let ι : K ⟶ F := ObjectProperty.homMk (formalShiftedQuotientι I F S j d)
+  refine ⟨d, by dsimp [d]; omega, K, ι, fun n ↦ Iso.refl _, ?_, ?_, ?_⟩
+  · intro n
+    change formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + d))) ≫ 𝟙 _ ≫
+        formalModuleQuotientMap I
+          (S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) d)).op)
+          (Nat.succ_le_succ (Nat.le_succ n)) = _
+    simp [formalModuleQuotientπ, formalModuleQuotientMap]
+  · intro n
+    simpa only [ι, ObjectProperty.homMk, Iso.refl_hom, Category.id_comp] using
+      formalShiftedQuotientι_comp I F S j d n
+  · have hj (m : ℕ) : Mono (j.app (op m)) := by
+      obtain ⟨a, ha⟩ := hS m
+      rw [← ha]
+      infer_instance
+    exact coherentFormalModule_kernel_quotient_inclusion_bound I F S j hj d
 
 end AlgebraicGeometry

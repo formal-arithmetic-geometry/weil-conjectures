@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-formal-shifted-quotient",
+ "kind": "definition",
+ "title": "Explicit shifted quotient system and descended inclusion",
+ "statement": "def formalShiftedQuotient {X : Scheme.{u}} (I : X.IdealSheafData) (S : ℕᵒᵖ ⥤ X.Modules) (d : ℕ) : ℕᵒᵖ ⥤ X.Modules The functor is defined explicitly from quotient reductions. Given a coherent formal module F and a natural transformation j : S to F.obj, formalShiftedQuotientι is the canonical descended map to F.obj with component equation formalShiftedQuotientι_comp.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (b)--(d); checked at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Construct the quotient objects and reduce the shifted transitions with formalModuleQuotientMap. Its identity and composition laws prove the functor laws.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For j : S to F.obj, multiplication by I^(n+1) followed by j_(n+d) and the transition to F_n factors through the zero ideal product of F_n. Cokernel descent constructs formalShiftedQuotientι. Cancel quotient projections and use naturality of j and the functor laws to prove naturality; cokernel.π_desc gives the component factorization equation.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (b)--(d); checked at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal module stabilized kernel image quotient Artin Rees",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees stabilized kernel images quotients form coherent adic inverse system",
+   "results": "AdicCompletion, transitionMap, submodule, IsAdicComplete, and lifting lemmas; no sheaf inverse-system comparison theorem. Checked source library with rg as well.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalShiftedQuotient|kernel_quotient|IsCoherentFormalModule",
+   "results": "msearch grep returned zero hits; direct rg found the assigned quotient statement and its sole construction caller, no matching completed proof. The cokernel laws and subobject isomorphism are in the shared library.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotient",
+  "group": "V2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Lemma 087X, shifted stabilized-image quotients and claim (c), used by lem-weil-pbc-formal-kernel-quotient-aux",
+   "via": [
+    "lem-weil-pbc-formal-kernel-quotient-aux"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleShiftedQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleShiftedQuotient.lean",
+  "declaration": "AlgebraicGeometry.formalShiftedQuotient",
+  "statement": "def formalShiftedQuotient {X : Scheme.{u}} (I : X.IdealSheafData) (S : ℕᵒᵖ ⥤ X.Modules) (d : ℕ) : ℕᵒᵖ ⥤ X.Modules",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-bb77b",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T045611-L-139346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-bb77b",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T045611-L-139346",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs and DAG records matched against the change record and Stacks 087X; six modules and direct importers compile; original caller failure reproduced; adaptation minimal; axioms checked; targets unchanged."
+ }
+}

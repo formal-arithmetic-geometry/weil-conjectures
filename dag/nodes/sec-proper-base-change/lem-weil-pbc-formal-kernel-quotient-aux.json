@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Quotient construction auxiliary",
- "statement": "theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) : ∃ (K : CoherentFormalModule X I) (ι : K ⟶ F) (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + c))) ≅ K.obj.obj (op n)), (∀ n : ℕ, formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + c))) ≫ (e (n + 1)).hom ≫ K.obj.map (homOfLE (Nat.le_succ n)).op = S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) c)).op ≫ formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom) ∧ (∀ n : ℕ, formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom ≫ ι.hom.app (op n) = j.app (op (n + c)) ≫ F.obj.map (homOfLE (Nat.le_add_right n c)).op) ∧ (∀ n : ℕ, kernel.ι (ι.hom.app (op (n + c))) ≫ K.obj.map (homOfLE (Nat.le_add_right n c)).op = 0)",
+ "statement": "theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) : ∃ d : ℕ, c ≤ d ∧ ∃ (K : CoherentFormalModule X I) (ι : K ⟶ F) (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + d))) ≅ K.obj.obj (op n)), (∀ n : ℕ, formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + d))) ≫ (e (n + 1)).hom ≫ K.obj.map (homOfLE (Nat.le_succ n)).op = S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) d)).op ≫ formalModuleQuotientπ I (n + 1) (S.obj (op (n + d))) ≫ (e n).hom) ∧ (∀ n : ℕ, formalModuleQuotientπ I (n + 1) (S.obj (op (n + d))) ≫ (e n).hom ≫ ι.hom.app (op n) = j.app (op (n + d)) ≫ F.obj.map (homOfLE (Nat.le_add_right n d)).op) ∧ (∀ n : ℕ, kernel.ι (ι.hom.app (op (n + d))) ≫ K.obj.map (homOfLE (Nat.le_add_right n d)).op = 0)",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Lemma 087X, claims (a)--(c) and Artin--Rees calculation"
@@ -25,34 +25,32 @@
  ],
  "proof": [
   {
-   "text": "Use the stabilized image equality together with the affine formal-module equivalence and Artin--Rees calculation to construct the quotient system and prove eventual kernel vanishing.",
+   "text": "Apply eventual adicness of the explicit shifted quotient and enlarge the input stabilization bound c to d = max c b. Package the explicitly constructed functor as K with that proof. Define iota by the explicit descended inclusion and take identity level isomorphisms. Cokernel projection equations prove the transition and inclusion equations.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-artin-rees",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-formal-kernel-quotient-adic-bound",
+    "lem-weil-pbc-formal-shifted-quotient"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Each component of j is monic by hS. Apply the proved cokernel-descent kernel-vanishing theorem.",
+   "uses": [
+    "lem-weil-pbc-formal-kernel-quotient-inclusion-bound"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-artin-rees",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+  "lem-weil-pbc-formal-kernel-quotient-adic-bound",
+  "lem-weil-pbc-formal-kernel-quotient-inclusion-bound",
+  "lem-weil-pbc-formal-shifted-quotient"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "J3",
+  "group": "V2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X, claims (a)--(c) and Artin--Rees calculation"
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (b)--(d); checked at https://stacks.math.columbia.edu/tag/087X"
  },
  "mathlib_searches": [
   {
@@ -92,9 +90,9 @@
   "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotient",
   "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelQuotient.lean",
   "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_quotient_aux",
-  "statement": "theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) : ∃ (K : CoherentFormalModule X I) (ι : K ⟶ F) (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + c))) ≅ K.obj.obj (op n)), (∀ n : ℕ, formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + c))) ≫ (e (n + 1)).hom ≫ K.obj.map (homOfLE (Nat.le_succ n)).op = S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) c)).op ≫ formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom) ∧ (∀ n : ℕ, formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom ≫ ι.hom.app (op n) = j.app (op (n + c)) ≫ F.obj.map (homOfLE (Nat.le_add_right n c)).op) ∧ (∀ n : ℕ, kernel.ι (ι.hom.app (op (n + c))) ≫ K.obj.map (homOfLE (Nat.le_add_right n c)).op = 0)",
+  "statement": "theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) : ∃ d : ℕ, c ≤ d ∧ ∃ (K : CoherentFormalModule X I) (ι : K ⟶ F) (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + d))) ≅ K.obj.obj (op n)), (∀ n : ℕ, formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + d))) ≫ (e (n + 1)).hom ≫ K.obj.map (homOfLE (Nat.le_succ n)).op = S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) d)).op ≫ formalModuleQuotientπ I (n + 1) (S.obj (op (n + d))) ≫ (e n).hom) ∧ (∀ n : ℕ, formalModuleQuotientπ I (n + 1) (S.obj (op (n + d))) ≫ (e n).hom ≫ ι.hom.app (op n) = j.app (op (n + d)) ≫ F.obj.map (homOfLE (Nat.le_add_right n d)).op) ∧ (∀ n : ℕ, kernel.ι (ι.hom.app (op (n + d))) ≫ K.obj.map (homOfLE (Nat.le_add_right n d)).op = 0)",
   "branch": "sheaf-dag",
-  "by": "J3",
+  "by": "V2",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -110,17 +108,46 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-e6e9c",
-  "group": "R2",
+  "reviewer": "X-bb77b",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T001227-L-2305847",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module and report matched against packet, repository diff, Stacks 087X, and clean lcompile result",
-  "sorry_before": [
-   "AlgebraicGeometry.coherentFormalModule_kernel_quotient_aux"
+  "landing": "20261013T045611-L-139346",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs and DAG records matched against the change record and Stacks 087X; six modules and direct importers compile; original caller failure reproduced; adaptation minimal; axioms checked; targets unchanged."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "V2 stage 2",
+  "old_statement": "theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) : ∃ (K : CoherentFormalModule X I) (ι : K ⟶ F) (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + c))) ≅ K.obj.obj (op n)), (∀ n : ℕ, formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + c))) ≫ (e (n + 1)).hom ≫ K.obj.map (homOfLE (Nat.le_succ n)).op = S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) c)).op ≫ formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom) ∧ (∀ n : ℕ, formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom ≫ ι.hom.app (op n) = j.app (op (n + c)) ≫ F.obj.map (homOfLE (Nat.le_add_right n c)).op) ∧ (∀ n : ℕ, kernel.ι (ι.hom.app (op (n + c))) ≫ K.obj.map (homOfLE (Nat.le_add_right n c)).op = 0)",
+  "what": "Image stabilization alone does not imply the kernel Artin--Rees bound. For Spec Z, I=(2), the reduction of the quotient system Z/2^(n+1) to the constant Z/2 system has stabilized termwise kernels already at c=0, but their prescribed quotients have levels 0 and Z/2 and cannot be adic. Allow an output d>=c chosen for the source-kernel Artin--Rees bound; this is what Stacks 087X does. No target signature changes.",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (b)--(d); checked at https://stacks.math.columbia.edu/tag/087X"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Use the stabilized image equality together with the affine formal-module equivalence and Artin--Rees calculation to construct the quotient system and prove eventual kernel vanishing.",
+    "uses": [
+     "lem-weil-pbc-coherent-formal-modules-affine",
+     "lem-weil-pbc-adic-completion-noetherian",
+     "lem-weil-pbc-artin-rees",
+     "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+     "lem-weil-pbc-quasi-coherent-module-kernel",
+     "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    ],
+    "elementary": false
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.coherentFormalModule_kernel_quotient_aux"
+  "old_proof_deps": [
+   "lem-weil-pbc-coherent-formal-modules-affine",
+   "lem-weil-pbc-adic-completion-noetherian",
+   "lem-weil-pbc-artin-rees",
+   "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+   "lem-weil-pbc-quasi-coherent-module-kernel",
+   "lem-weil-pbc-quasi-coherent-module-cokernel-image"
   ]
  }
 }

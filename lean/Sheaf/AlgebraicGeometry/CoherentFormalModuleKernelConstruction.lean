@@ -92,8 +92,31 @@ theorem coherentFormalModule_kernel_construction {X : Scheme.{u}} [IsNoetherian 
             K.obj.map (homOfLE (Nat.le_add_right n c)).op = 0) := by
   obtain ⟨c, hc, S, j, hS⟩ :=
     coherentFormalModule_kernel_stabilized_aux I F H α
-  obtain ⟨K, ι, e, heq, hι, hker⟩ :=
+  obtain ⟨d, hcd, K, ι, e, heq, hι, hker⟩ :=
     coherentFormalModule_kernel_quotient_aux I F H α c S j hc hS
-  exact ⟨c, hc, S, j, hS, K, ι, e, heq, hι, hker⟩
+  have hd (l m : ℕ) (h : m + d ≤ l) :
+      Subobject.mk
+        (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫
+          F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m d) h)).op)) =
+      Subobject.mk
+        (Abelian.image.ι (kernel.ι (α.hom.app (op (m + d))) ≫
+          F.obj.map (homOfLE (Nat.le_add_right m d)).op)) := by
+    exact (hc l m (by omega)).trans (hc (m + d) m (by omega)).symm
+  have hSd (m : ℕ) : ∃ a : S.obj (op m) ≅
+      Abelian.image (kernel.ι (α.hom.app (op (m + d))) ≫
+        F.obj.map (homOfLE (Nat.le_add_right m d)).op),
+      a.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + d))) ≫
+        F.obj.map (homOfLE (Nat.le_add_right m d)).op) = j.app (op m) := by
+    obtain ⟨a, ha⟩ := hS m
+    let b := Subobject.isoOfMkEqMk
+      (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫
+        F.obj.map (homOfLE (Nat.le_add_right m c)).op))
+      (Abelian.image.ι (kernel.ι (α.hom.app (op (m + d))) ≫
+        F.obj.map (homOfLE (Nat.le_add_right m d)).op))
+      (hc (m + d) m (by omega)).symm
+    refine ⟨a ≪≫ b, ?_⟩
+    simpa only [Iso.trans_hom, Category.assoc, b, Subobject.isoOfMkEqMk_hom,
+      Subobject.ofMkLEMk_comp] using ha
+  exact ⟨d, hd, S, j, hSd, K, ι, e, heq, hι, hker⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-quotient-comparison-bound",
+ "kind": "statement",
+ "title": "Eventual successive quotient comparisons",
+ "statement": "theorem coherentFormalModule_kernel_quotient_comparison_bound {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) : ∃ b : ℕ, ∀ d : ℕ, max c b ≤ d → ∀ n : ℕ, ∃ e : formalModuleQuotient I (n + 1) ((formalShiftedQuotient I S d).obj (op (n + 1))) ≅ (formalShiftedQuotient I S d).obj (op n), formalModuleQuotientπ I (n + 1) ((formalShiftedQuotient I S d).obj (op (n + 1))) ≫ e.hom = (formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (b)--(d); checked at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-formal-shifted-quotient",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "On a finite affine open cover, use the coherent formal-module equivalence to identify alpha with a map f : M to N of finite modules over the completed Noetherian ring. Artin--Rees on its image identifies the eventual images in F_m with L/(L intersect I^(m+1) M), where L = ker f. Since hc stabilizes at m+c, and hS identifies its representative with j_m, these identifications hold for S_m and respect its transitions. Kernels and images are coherent, so the affine quotient-section calculation applies.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-artin-rees",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Artin--Rees on L in M gives an affine bound b for L intersect I^(r+b) M contained in I^r L. Take their maximum. For all d at least max(c,b), the explicit shifted quotient has affine sections L/I^(n+1) L. Its transition is the ordinary quotient transition, so taking its quotient by I^(n+1) gives the preceding term. These canonical comparisons are unique by their factorization equations with epimorphic projections; they agree on overlaps and glue to the asserted sheaf isomorphism.",
+   "uses": [
+    "lem-weil-pbc-artin-rees",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-formal-shifted-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-formal-shifted-quotient",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (b)--(d); checked at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal module stabilized kernel image quotient Artin Rees",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees stabilized kernel images quotients form coherent adic inverse system",
+   "results": "AdicCompletion, transitionMap, submodule, IsAdicComplete, and lifting lemmas; no sheaf inverse-system comparison theorem. Checked source library with rg as well.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalShiftedQuotient|kernel_quotient|IsCoherentFormalModule",
+   "results": "msearch grep returned zero hits; direct rg found the assigned quotient statement and its sole construction caller, no matching completed proof. The cokernel laws and subobject isomorphism are in the shared library.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotient",
+  "group": "V2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Lemma 087X, shifted stabilized-image quotients and claim (c), used by lem-weil-pbc-formal-kernel-quotient-aux",
+   "via": [
+    "lem-weil-pbc-formal-kernel-quotient-aux"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientComparisonBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelQuotientComparisonBound.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_quotient_comparison_bound",
+  "statement": "theorem coherentFormalModule_kernel_quotient_comparison_bound {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) : ∃ b : ℕ, ∀ d : ℕ, max c b ≤ d → ∀ n : ℕ, ∃ e : formalModuleQuotient I (n + 1) ((formalShiftedQuotient I S d).obj (op (n + 1))) ≅ (formalShiftedQuotient I S d).obj (op n), formalModuleQuotientπ I (n + 1) ((formalShiftedQuotient I S d).obj (op (n + 1))) ≫ e.hom = (formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-bb77b",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T045611-L-139346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-bb77b",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T045611-L-139346",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs and DAG records matched against the change record and Stacks 087X; six modules and direct importers compile; original caller failure reproduced; adaptation minimal; axioms checked; targets unchanged."
+ }
+}

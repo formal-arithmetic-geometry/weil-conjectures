@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-quotient-adic-bound",
+ "kind": "statement",
+ "title": "Eventual coherent adicness of the explicit quotient",
+ "statement": "theorem coherentFormalModule_kernel_quotient_adic_bound {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) : ∃ b : ℕ, ∀ d : ℕ, max c b ≤ d → IsCoherentFormalModule I (formalShiftedQuotient I S d)",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (b)--(d); checked at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-formal-shifted-quotient",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Coherent kernel/cokernel closure proves that Abelian.image of each kernel-transition map is coherent. Transport quasi-coherence and finite type across hS using isFiniteType_of_epi. The already proved formalCompletionSystem_coherent gives coherence of each quotient. The multiplication-cokernel calculation gives annihilation by its defining ideal power.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-weil-pbc-coherent-formal-module",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose the eventual comparison bound and combine those isomorphisms with coherence and annihilation, the three clauses of IsCoherentFormalModule.",
+   "uses": [
+    "lem-weil-pbc-formal-kernel-quotient-comparison-bound"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-formal-kernel-quotient-comparison-bound",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (b)--(d); checked at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal module stabilized kernel image quotient Artin Rees",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees stabilized kernel images quotients form coherent adic inverse system",
+   "results": "AdicCompletion, transitionMap, submodule, IsAdicComplete, and lifting lemmas; no sheaf inverse-system comparison theorem. Checked source library with rg as well.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalShiftedQuotient|kernel_quotient|IsCoherentFormalModule",
+   "results": "msearch grep returned zero hits; direct rg found the assigned quotient statement and its sole construction caller, no matching completed proof. The cokernel laws and subobject isomorphism are in the shared library.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotient",
+  "group": "V2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Lemma 087X, shifted stabilized-image quotients and claim (c), used by lem-weil-pbc-formal-kernel-quotient-aux",
+   "via": [
+    "lem-weil-pbc-formal-kernel-quotient-aux"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientAdicBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelQuotientAdicBound.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_quotient_adic_bound",
+  "statement": "theorem coherentFormalModule_kernel_quotient_adic_bound {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) : ∃ b : ℕ, ∀ d : ℕ, max c b ≤ d → IsCoherentFormalModule I (formalShiftedQuotient I S d)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-bb77b",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T045611-L-139346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-bb77b",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T045611-L-139346",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs and DAG records matched against the change record and Stacks 087X; six modules and direct importers compile; original caller failure reproduced; adaptation minimal; axioms checked; targets unchanged."
+ }
+}
