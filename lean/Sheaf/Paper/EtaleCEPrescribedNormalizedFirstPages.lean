@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
 public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+import Sheaf.Paper.EtaleCENormalizedRepresentativeCohomology
+import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
 
 /-! # Prescribed normalized CE pages and their first-page computation
 
@@ -20,6 +22,111 @@ universe uNatural
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem firstPage_descend
+    {C : Type*} [Category C] [Abelian C]
+    (T T' : CochainComplex C ℤ) (F : DecreasingFiltration T) (F' : DecreasingFiltration T')
+    (b : T ⟶ T')
+    (hb : ∀ q : ℤ, ∃ s : (F.step q : CochainComplex C ℤ) ⟶
+        (F'.step q : CochainComplex C ℤ), s ≫ (F'.step q).arrow = (F.step q).arrow ≫ b)
+    (p q : ℤ) {S S' V V' : C}
+    (α : S ≅ filteredComplexPageObject T F 1 (q, p))
+    (β : S' ≅ filteredComplexPageObject T' F' 1 (q, p))
+    (M : S ⟶ S') (k : S ⟶ V) (k' : S' ⟶ V') (c : V ⟶ V')
+    (hM : ∀ (A : C)
+      (x : A ⟶ (F.step q : CochainComplex C ℤ).X (q + p))
+      (y : A ⟶ (F'.step q : CochainComplex C ℤ).X (q + p))
+      (z : A ⟶ (F.complexCycles q (q + p) 1 : C))
+      (z' : A ⟶ (F'.complexCycles q (q + p) 1 : C)),
+      x ≫ (F.step q).arrow.f (q + p) ≫ b.f (q + p) = y ≫ (F'.step q).arrow.f (q + p) →
+      z ≫ (F.complexCycles q (q + p) 1).arrow =
+        x ≫ (F.complexQuotientπ q (q + 1) (by omega)).f (q + p) →
+      z' ≫ (F'.complexCycles q (q + p) 1).arrow =
+        y ≫ (F'.complexQuotientπ q (q + 1) (by omega)).f (q + p) →
+      z ≫ filteredComplexPageπ T F 1 (q, p) ≫ α.inv ≫ M =
+        z' ≫ filteredComplexPageπ T' F' 1 (q, p) ≫ β.inv)
+    (hc : ∀ (A : C)
+      (x : A ⟶ (F.step q : CochainComplex C ℤ).X (q + p))
+      (y : A ⟶ (F'.step q : CochainComplex C ℤ).X (q + p))
+      (z : A ⟶ (F.complexCycles q (q + p) 1 : C))
+      (z' : A ⟶ (F'.complexCycles q (q + p) 1 : C)),
+      x ≫ (F.step q).arrow.f (q + p) ≫ b.f (q + p) = y ≫ (F'.step q).arrow.f (q + p) →
+      z ≫ (F.complexCycles q (q + p) 1).arrow =
+        x ≫ (F.complexQuotientπ q (q + 1) (by omega)).f (q + p) →
+      z' ≫ (F'.complexCycles q (q + p) 1).arrow =
+        y ≫ (F'.complexQuotientπ q (q + 1) (by omega)).f (q + p) →
+      z ≫ filteredComplexPageπ T F 1 (q, p) ≫ α.inv ≫ k ≫ c =
+        z' ≫ filteredComplexPageπ T' F' 1 (q, p) ≫ β.inv ≫ k') :
+    M ≫ k' = k ≫ c := by
+  classical
+  choose s hs using hb
+  have hcover := filteredComplex_differential_representatives_cover T F 1
+      (q, p) (q + 1, p) (by ext <;> simp)
+  dsimp only [Prod.fst, Prod.snd] at hcover
+  rw [add_right_comm q 1 p] at hcover
+  obtain ⟨A, x, w, z, zw, hepi, hxw, hz, hzw⟩ := hcover
+  let n := q + p
+  have : Epi z := hepi
+  have : Epi (filteredComplexPageπ T F 1 (q, p)) := by
+    unfold filteredComplexPageπ
+    infer_instance
+  let y := x ≫ (s q).f (q + p)
+  have hsi : (s q).f (q + p) ≫ (F'.step q).arrow.f (q + p) =
+      (F.step q).arrow.f (q + p) ≫ b.f (q + p) := by
+    exact congrArg (fun α ↦ α.f (q + p)) (hs q)
+  have hxy : x ≫ (F.step q).arrow.f (q + p) ≫ b.f (q + p) =
+      y ≫ (F'.step q).arrow.f (q + p) := by
+    simp only [y, Category.assoc, hsi]
+  have hsi' (k l : ℤ) : (s k).f l ≫ (F'.step k).arrow.f l =
+      (F.step k).arrow.f l ≫ b.f l := by
+    exact congrArg (fun α ↦ α.f l) (hs k)
+  have hdy : (y ≫ (F'.step q).arrow.f n) ≫ T'.d n (n + 1) =
+      (w ≫ (s (q + 1)).f (n + 1)) ≫ (F'.step (q + 1)).arrow.f (n + 1) := by
+    calc
+      _ = (x ≫ (F.step q).arrow.f n ≫ b.f n) ≫ T'.d n (n + 1) :=
+        congrArg (fun t ↦ t ≫ T'.d n (n + 1)) hxy.symm
+      _ = (x ≫ (F.step q).arrow.f n ≫ T.d n (n + 1)) ≫ b.f (n + 1) := by
+        simp only [Category.assoc, b.comm]
+      _ = (w ≫ (F.step (q + 1)).arrow.f (n + 1)) ≫ b.f (n + 1) :=
+        congrArg (fun t ↦ t ≫ b.f (n + 1)) hxw
+      _ = _ := by simp only [Category.assoc, hsi']
+  let R := F'.complexStep q n ⊓
+    (Subobject.pullback (T'.d n (n + 1))).obj
+      (F'.complexStep (q + 1) (n + 1))
+  let f' := (F'.step q).arrow.f n
+  let g' := (F'.complexQuotientπ q (q + 1) (by omega)).f n
+  have hyR : R.Factors (y ≫ f') := by
+    apply (Subobject.inf_factors _).mpr
+    constructor
+    · exact imageSubobject_factors_comp_self _ _
+    · apply (pullback_factors_iff _ _ _).mpr
+      rw [hdy]
+      exact imageSubobject_factors_comp_self _ _
+  let W := (Subobject.pullback f').obj (R ⊔ F'.complexStep (q + 1) n)
+  have hyW : W.Factors y := (pullback_factors_iff _ _ _).mpr
+    (Subobject.sup_factors_of_factors_left hyR)
+  let z' := Subobject.factorThru W y hyW ≫ (Subobject.imageFactorisation g' W).F.e
+  have hz' : z' ≫ (F'.complexCycles q (q + p) 1).arrow =
+      y ≫ (F'.complexQuotientπ q (q + 1) (by omega)).f (q + p) := by
+    change z' ≫ ((Subobject.«exists» g').obj W).arrow = _
+    dsimp only [z']
+    rw [Category.assoc, ← Subobject.imageFactorisation_F_m,
+      (Subobject.imageFactorisation g' W).F.fac]
+    simp only [← Category.assoc, Subobject.factorThru_arrow]
+    rfl
+  have hmap := hM A x y z z' hxy hz hz'
+  have hcoh := hc A x y z z' hxy hz hz'
+  apply (cancel_epi (z ≫ filteredComplexPageπ T F 1 (q, p) ≫ α.inv)).1
+  calc
+    _ = z' ≫ filteredComplexPageπ T' F' 1 (q, p) ≫ β.inv ≫ k' := by
+      simpa only [Category.assoc] using congrArg (fun t ↦ t ≫ k') hmap
+    _ = _ := by simpa only [Category.assoc] using hcoh.symm
+
+-- The omitted page bounds are closed numeral inequalities; avoid scanning the CE context.
+local macro_rules | `(tactic| lia) => `(tactic| decide)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent normalized page and CE comparison families together.
 /-- Assemble presentations on prescribed CE resolutions with normalized quotient pages,
@@ -166,6 +273,28 @@ theorem exists_etaleCE_prescribed_normalized_first_pages
           M.f (q, (p : ℤ)) ≫ (D'.firstPageIso p q).hom =
             (D.firstPageIso p q).hom ≫
               AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp
-                (cohomologyMap f (K.obj.X q) p)) := by sorry
+                (cohomologyMap f (K.obj.X q) p)) := by
+  classical
+  obtain ⟨P, δ, j, hI, hn, hc⟩ :=
+    exists_etaleCE_normalized_representative_cohomology I a hbelow hrows hterms
+      hhorizontal hquasi
+  refine ⟨P, δ, j, hI, hn, ?_⟩
+  intro X Y f K L v D D' φ hφ u hu b hb M hM p q
+  refine firstPage_descend (C := AddCommGrpCat.{uNatural + 1})
+    (S := (D.sequence.page 1 (by decide)).X (q, (p : ℤ)))
+    (S' := (D'.sequence.page 1 (by decide)).X (q, (p : ℤ)))
+    (V := AddCommGrpCat.of (Sheaf.H (K.obj.X q) p))
+    (V' := AddCommGrpCat.of (Sheaf.H (L.obj.X q) p))
+    D.sectionsTotal D'.sectionsTotal D.L D'.L b hb (p : ℤ) q
+    (HomologicalComplex.Hom.isoApp (j X K 1 (by decide)) (q, (p : ℤ)))
+    (HomologicalComplex.Hom.isoApp (j Y L 1 (by decide)) (q, (p : ℤ)))
+    (M.f (q, (p : ℤ))) (D.firstPageIso p q).hom (D'.firstPageIso p q).hom
+    (AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp
+      (cohomologyMap f (K.obj.X q) p)))
+    ?_ ?_
+  · intro A x y z z' hxy hz hz'
+    exact hM A q (p : ℤ) x y z z' hxy hz hz'
+  · intro A x y z z' hxy hz hz'
+    exact hc f K L v φ hφ u hu A p q x y z z' hxy hz hz'
 
 end AlgebraicGeometry.Etale

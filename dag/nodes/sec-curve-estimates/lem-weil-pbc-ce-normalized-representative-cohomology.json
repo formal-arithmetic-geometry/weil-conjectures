@@ -1,0 +1,148 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-ce-stationary-page-naturality",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "lem-sp-filtered-complex-normalized-homology",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "lem-weil-pbc-ce-normalized-representative-cohomology",
+ "title": "Normalized CE cohomology on individual filtered cycle representatives",
+ "statement": "For every scheme $X$ and bounded-below integer cochain complex $K$ of abelian etale sheaves [def-weil-pbc-scheme-conventions, def-weil-pbc-etale-sheaves], prescribe an augmented bicomplex $a(X,K):K\\to I(X,K)$ with complex degrees in $\\mathbb Z$ and resolution degrees in $\\mathbb N$ [def-sp-double-complex-total, def-sp-injective-resolutions]. Assume individual lower bounds in complex degree, injectivity of all terms and all horizontal cycle, boundary and homology terms, and quasi-isomorphisms on augmented rows and on their horizontal cycle, boundary and homology complexes. There exist simultaneous presentations P, positive-page representative differentials delta and comparison isomorphisms j retaining the prescribed I and normalized successor homology comparisons. For each scheme map f, coefficient-complex map v, augmented row comparison phi and diagonal-compatible sheaf-total map u, let b be the conjugated sections lift. Given any test object A, degree p in N, degree q in Z, filtered representatives x,y and graded cycle maps z,z' whose equations identify y with bx and z,z' with their graded projections, the source quotient class composed with j inverse, firstPageIso and Sheaf.H.map(v^q,p) after cohomologyMap(f,K^q,p) equals the target quotient class composed with j inverse and firstPageIso. No filtration-restriction hypothesis and no supplied first-page map M occur; this is only the local representative calculation.",
+ "source": {
+  "document": "Stacks Project, Derived Categories and Homological Algebra",
+  "place": "Tags 015J, 015K, 012K and 06XR; steps 1–3 of lem-weil-pbc-ce-prescribed-normalized-first-pages, before descent from representative classes to an arbitrary quotient-page map."
+ },
+ "proof": [
+  {
+   "text": "Form the degreewise finite flipped sections total, its second filtration and the augmentation, resolution comparison and transported homology-image filtration on the prescribed I,a. Retain the prescribed I, rather than choosing another CE resolution.",
+   "uses": [
+    "thm-sp-if-e1"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use actual boundary cokernels and the unique representative differential on every positive page. Use the unique normalized successor comparison. Adjoin the graded page zero with its homology comparison; retain the signed row computation.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-normalized-homology",
+    "lem-sp-filtered-complex-graded-homology",
+    "lem-sp-cartan-eilenberg-row-pages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose ordinaryComparison through the explicit Ext-to-sections identification, comparing each prescribed injective row with the chosen resolution. Its coefficient naturality fills ordinary_naturality. The diagonal equation computes the graded map as the sections pullback unit followed by the row map; the augmentation equation identifies the resulting homology map with Ext pullback followed by the coefficient map. The equal signed factors commute with the additive map and cancel. For every pair of related filtered cycle representatives, compose their quotient classes with these row identifications. The resulting equality is an equality from the test object to ordinary sheaf cohomology, not an assertion about an arbitrary first-page map.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "def-weil-pbc-ext-resolution-sections-iso",
+    "lem-weil-pbc-ext-pullback-resolution-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ext-resolution-sections-iso",
+  "lem-sp-cartan-eilenberg-row-pages",
+  "lem-sp-filtered-complex-graded-homology",
+  "lem-sp-filtered-complex-normalized-homology",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-weil-pbc-ext-pullback-resolution-sections",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "thm-sp-if-e1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Derived Categories and Homological Algebra",
+  "place": "Tags 015J, 015K, 012K and 06XR; steps 1–3 of lem-weil-pbc-ce-prescribed-normalized-first-pages, before descent from representative classes to an arbitrary quotient-page map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartan Eilenberg spectral sequence first page naturality from filtered cycle representatives",
+   "date": "2026-10-13",
+   "results": "8 hits: homology and homology-sequence naturality, Dold-Kan naturality; none constructs normalized CE presentations or the signed Ext row comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohomologicalSpectralSequence\"",
+   "date": "2026-10-13",
+   "results": "6 spectral sequence type declarations; no CE representative cohomology theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CartanEilenberg.*[Nn]aturality|filteredComplex.*representatives.*cover",
+   "date": "2026-10-13",
+   "results": "msearch: no hits. Repository rg: differential representative covers and quotient components handle generic filtered descent, not the sheaf cohomology computation.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg spectral sequence first page naturality on cycle representatives",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCEPrescribedNormalizedFirstPages",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercohomology-uniform-bound",
+   "place": "Tags 015J, 015K, 012K and 06XR; steps 1–3 of lem-weil-pbc-ce-prescribed-normalized-first-pages, before descent from representative classes to an arbitrary quotient-page map.",
+   "via": [
+    "lem-weil-pbc-ce-prescribed-normalized-first-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCENormalizedRepresentativeCohomology",
+  "file": "lean/Sheaf/Paper/EtaleCENormalizedRepresentativeCohomology.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleCE_normalized_representative_cohomology",
+  "statement": "theorem exists_etaleCE_normalized_representative_cohomology\n    (I : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n      HomologicalComplex₂ (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})\n        (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (a : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n      ((CochainComplex.single₀\n        (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex\n         (ComplexShape.up ℤ)).obj K.obj ⟶ I X K)\n    (hbelow : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n      ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero ((I X K).X s))\n    (hrows : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n      (s : ℤ), QuasiIso ((a X K).f s))\n    (hterms : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n      (s : ℤ) (r : ℕ), Injective (((I X K).X s).X r))\n    (hhorizontal : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n      (s : ℤ) (r : ℕ),\n      Injective (((I X K).cycles s).X r) ∧\n      Injective ((image ((I X K).d (s - 1) s)).X r) ∧\n      Injective (((I X K).homology s).X r))\n    (hquasi : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n      (s : ℤ),\n      QuasiIso (HomologicalComplex.cyclesMap (a X K) s) ∧\n      QuasiIso (image.map (Arrow.homMk' ((a X K).f (s - 1)) ((a X K).f s)\n        ((a X K).comm (s - 1) s))) ∧\n      QuasiIso (HomologicalComplex.homologyMap (a X K) s)) :\n    ∃ (P : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n        EtaleTermwiseHypercohomology X K)\n      (δ : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (r : ℤ) (hr : 1 ≤ r),\n        FilteredComplexPageDifferential (P X K).sectionsTotal (P X K).L r)\n      (j : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (r : ℤ) (hr : 1 ≤ r), (P X K).sequence.page r hr ≅ (δ X K r hr).page),\n      (∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n        (P X K).I = I X K) ∧\n      (∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (r : ℤ) (hr : 1 ≤ r) (pq : ℤ × ℤ),\n        FilteredComplexHomologyNormalized (P X K).sectionsTotal (P X K).L r (δ X K r hr) pq\n          ((HomologicalComplex.homologyFunctor AddCommGrpCat.{uNatural + 1}\n            (ComplexShape.up' (r, 1 - r)) pq).mapIso (j X K r hr).symm ≪≫\n            (P X K).sequence.iso r (r + 1) pq rfl hr ≪≫\n            (HomologicalComplex.eval AddCommGrpCat.{uNatural + 1}\n              (ComplexShape.up' (r + 1, 1 - (r + 1))) pq).mapIso\n                (j X K (r + 1) (by omega)))) ∧\n      ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n    (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n    (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),\n      let D := P X K\n      let D' := P Y L\n      ∀ (φ : (((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℕ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj D.I ⟶ D'.I)\n    (hφ : ∀ q : ℤ,\n      (upperStar AddCommGrpCat.{uNatural + 1} f).map\n          ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.obj.X q)).inv ≫\n            (D.a.f q).f 0) ≫ (φ.f q).f 0 =\n        v.f q ≫\n          (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.obj.X q)).inv ≫\n            (D'.a.f q).f 0)\n    (u : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj D.sheafTotal ⟶ D'.sheafTotal)\n    (hu : ∀ (m : ℕ) (q n : ℤ) (h : (m : ℤ) + q = n),\n        (upperStar AddCommGrpCat.{uNatural + 1} f).map\n            ((HomologicalComplex.extendXIso\n              (((𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex\n                (ComplexShape.up ℕ)).obj (D.I.X q))\n              ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫\n                (((CartanEilenbergPresentation.mappedFunctor\n                  (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj\n                    D.I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) q n h) ≫ u.f n =\n          (φ.f q).f m ≫\n            (HomologicalComplex.extendXIso\n              (((𝟭 (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex\n                (ComplexShape.up ℕ)).obj (D'.I.X q))\n              ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫\n                (((CartanEilenbergPresentation.mappedFunctor\n                  (𝟭 (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj\n                    D'.I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) q n h),\n      let b := D.totalSectionsIso.hom ≫ ceSectionsLift f u ≫ D'.totalSectionsIso.inv\n      ∀ (A : AddCommGrpCat.{uNatural + 1}) (p : ℕ) (q : ℤ)\n        (x : A ⟶ (D.L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ).X\n          (q + (p : ℤ)))\n        (y : A ⟶ (D'.L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ).X\n          (q + (p : ℤ)))\n        (z : A ⟶ (D.L.complexCycles q (q + (p : ℤ)) 1 : AddCommGrpCat.{uNatural + 1}))\n        (z' : A ⟶ (D'.L.complexCycles q (q + (p : ℤ)) 1 : AddCommGrpCat.{uNatural + 1})),\n        x ≫ (D.L.step q).arrow.f (q + (p : ℤ)) ≫ b.f (q + (p : ℤ)) =\n          y ≫ (D'.L.step q).arrow.f (q + (p : ℤ)) →\n        z ≫ (D.L.complexCycles q (q + (p : ℤ)) 1).arrow =\n          x ≫ (D.L.complexQuotientπ q (q + 1) (by omega)).f (q + (p : ℤ)) →\n        z' ≫ (D'.L.complexCycles q (q + (p : ℤ)) 1).arrow =\n          y ≫ (D'.L.complexQuotientπ q (q + 1) (by omega)).f (q + (p : ℤ)) →\n        z ≫ filteredComplexPageπ D.sectionsTotal D.L 1 (q, (p : ℤ)) ≫\n            (j X K 1 (by omega)).inv.f (q, (p : ℤ)) ≫ (D.firstPageIso p q).hom ≫\n              AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp\n                (cohomologyMap f (K.obj.X q) p)) =\n          z' ≫ filteredComplexPageπ D'.sectionsTotal D'.L 1 (q, (p : ℤ)) ≫\n            (j Y L 1 (by omega)).inv.f (q, (p : ℤ)) ≫\n              (D'.firstPageIso p q).hom",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3d21e",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T123213-L-3679556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3d21e",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T123213-L-3679556",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile successfully; the existing theorem signature is byte-for-byte unchanged, the new named sorry matches its node, and the direct importer compiles against the delivered modules."
+ }
+}

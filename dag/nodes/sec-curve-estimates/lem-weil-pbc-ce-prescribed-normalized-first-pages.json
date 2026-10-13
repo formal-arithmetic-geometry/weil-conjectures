@@ -22,56 +22,35 @@
  },
  "proof": [
   {
-   "text": "Form the degreewise finite flipped sections total, its second filtration and the augmentation, resolution comparison and transported homology-image filtration on the prescribed I,a. Retain the prescribed I, rather than choosing another CE resolution.",
+   "text": "Apply exists_etaleCE_normalized_representative_cohomology to obtain prescribed presentations, normalized successor comparisons, and the ordinary cohomology calculation on related filtered cycle representatives.",
    "uses": [
-    "thm-sp-if-e1"
+    "lem-weil-pbc-ce-normalized-representative-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Use actual boundary cokernels and the unique representative differential on every positive page. Use the unique normalized successor comparison. Adjoin the graded page zero with its homology comparison; retain the signed row computation.",
-   "uses": [
-    "lem-sp-filtered-complex-page-differential",
-    "lem-sp-filtered-complex-normalized-homology",
-    "lem-sp-filtered-complex-graded-homology",
-    "lem-sp-cartan-eilenberg-row-pages"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose ordinaryComparison through the explicit Ext-to-sections identification, comparing each prescribed injective row with the chosen resolution. Its coefficient naturality fills ordinary_naturality. The diagonal equation computes the graded map as the sections pullback unit followed by the row map; the augmentation equation identifies the resulting homology map with Ext pullback followed by the coefficient map. The equal signed factors commute with the additive map and cancel.",
-   "uses": [
-    "lem-weil-pbc-sheafH-ext-derived-comparison",
-    "def-weil-pbc-ext-resolution-sections-iso",
-    "lem-weil-pbc-ext-pullback-resolution-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For an arbitrary first-page map M satisfying the representative equation, use an epic cover of graded cycles by filtered representatives. The target graded-cycle inclusion is monic and the page projection epic, so M equals the row map just computed. This statement does not construct a compatible sequence of higher-page maps.",
+   "text": "Choose restrictions s of b to the filtration steps. Take an epic source graded-cycle representative cover at (q,p), with a simultaneous representative of its differential. Compose both representatives with s; the chain-map equation and the restriction equations show that the image representative has differential in the target (q+1)-step. Factor it through the pullback of the intersection defining target cycle representatives, then through the graded image to obtain z'. This supplies target representatives without constructing any higher-page map.",
    "uses": [
     "lem-sp-filtered-complex-differential-representatives-cover"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the supplied representative equation for M and postcompose with the target firstPageIso. The local cohomology computation identifies this with the source firstPageIso followed by cohomology pullback and the coefficient map. Cancel the epic source graded-cycle cover, the boundary-cokernel projection, and the first-page comparison inverse. The private generic descent lemma implements these factorizations and cancellations.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-ext-resolution-sections-iso",
-  "lem-sp-cartan-eilenberg-row-pages",
-  "lem-sp-filtered-complex-differential-representatives-cover",
-  "lem-sp-filtered-complex-graded-homology",
-  "lem-sp-filtered-complex-normalized-homology",
-  "lem-sp-filtered-complex-page-differential",
-  "lem-weil-pbc-ext-pullback-resolution-sections",
-  "lem-weil-pbc-sheafH-ext-derived-comparison",
-  "thm-sp-if-e1"
+  "lem-weil-pbc-ce-normalized-representative-cohomology",
+  "lem-sp-filtered-complex-differential-representatives-cover"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R3",
+  "group": "X2",
   "date": "2026-10-13",
-  "document": "Stacks Project, Tags 015J, 015K and 012K",
-  "place": "Tags 015J (first spectral sequence computation), 015K, and 012K (lemma-spectral-sequence-filtered-complex). Steps 1 and 3 of lem-weil-pbc-ce-prescribed-quotient-page-descent, separating presentation/first-page computation from higher-page descent."
+  "document": "Stacks Project, Derived Categories and Homological Algebra",
+  "place": "Tags 015J, 015K, 012K and 06XR; reduce construction and row computation to the local representative-cohomology node, then descend by the epic filtered-cycle representative cover, explicit target image factorization and cancellation of the boundary-cokernel projection."
  },
  "mathlib_searches": [
   {
@@ -152,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R3",
+  "reviewer": "X-3d21e",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T100115-L-2483175",
+  "landing": "20261013T123213-L-3679556",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile successfully; the existing theorem signature is byte-for-byte unchanged, the new named sorry matches its node, and the direct importer compiles against the delivered modules."
  }
 }
