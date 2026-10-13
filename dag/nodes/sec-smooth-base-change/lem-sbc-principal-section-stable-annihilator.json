@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-principal-section-stable-annihilator",
+ "kind": "statement",
+ "title": "Uniform annihilator bound for a principal section",
+ "statement": "Let X be a Noetherian scheme, meaning a quasi-compact locally Noetherian scheme [def-pc-scheme, def-weil-pbc-noetherian-ring], and let g be in Gamma(X,O_X). There exists c in the natural numbers such that for every open V of X, every natural k, and every s in Gamma(V,O_X), the equality (g|V)^k s=0 implies (g|V)^c s=0.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01YB, second paragraph (stabilization of power annihilators), with Tags 01PO and 01Y8."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "For a Noetherian ring A and g in A, apply monotone_stabilizes_iff_noetherian to the increasing submodules ker(multiplication by g^k). If c is the stabilization index, all kernels lie in the cth kernel: use stabilization for k at least c and monotonicity for k at most c.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "This bound survives every localization A to B. Write a section s of B with denominator d and numerator a. If g^k s=0, IsLocalization.exists_of_eq gives a denominator e with e*g^k*a=0 in A. The bound in A kills e*a by g^c. Map back to B and cancel the units e and d to get g^c s=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compactness and the affine-open basis give a finite affine cover of X. Choose a stabilization exponent on each chart and let c be their finite maximum. Increase the chart bounds to c by multiplying by a further power of g.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an open V and a section s killed by g^k, refine its intersection with the finite affine cover by basic opens. IsAffineOpen.isLocalization_basicOpen and the preceding localization calculation show that g^c s restricts to zero on every such basic open. Sheaf separatedness gives g^c s=0 on V. Empty X and V are included by the empty-cover case.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01YB, second paragraph (stabilization of power annihilators), with Tags 01PO and 01Y8.; direct Lean proof from Mathlib and the cited library theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "annihilator.*stabili|stabili.*annihilator|eventually_iSup_ker_pow_eq",
+   "date": "2026-10-14",
+   "results": "3 hits: Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/RingTheory/Noetherian/Defs.lean, Mathlib/RingTheory/Artinian/Module.lean",
+   "verdict": "No exact theorem. Relevant Mathlib APIs are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian scheme a single power of a global section kills every local section killed by any power of that global section",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover",
+   "verdict": "No exact theorem. Relevant Mathlib APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a Noetherian scheme a single power of a global section kills every local section killed by any power of that global section",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Unavailable; no absence conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalRestrictionKernel",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: purity across a regular special divisor; the depth-three punctured principal-quotient lifting input, Tags 0BLS (complete case), 0BM6, 09ZL, 0AVY, 0A02; full faithfulness of punctured principal-quotient restriction; Scalar formal sections on a depth-three complete local puncture; Principal formal sections as an element of the adic completion; finite-stage Eventual kernel vanishing for principal puncture restriction; Uniform annihilator bound for a principal section",
+   "via": [
+    "lem-sbc-punctured-principal-restriction-kernel",
+    "lem-sbc-punctured-principal-completion-comparison",
+    "lem-sbc-completed-punctured-quotient-fully-faithful",
+    "lem-sbc-depth-three-completed-quotient-lift",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity",
+    "lem-sbc-complete-punctured-principal-formal-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalSectionStableAnnihilator",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalSectionStableAnnihilator.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_principal_section_stable_annihilator",
+  "statement": "theorem exists_principal_section_stable_annihilator\n    (X : Scheme.{u}) [IsNoetherian X] (g : Γ(X, ⊤)) :\n    ∃ c : ℕ, ∀ (V : X.Opens) (k : ℕ) (s : Γ(X, V)),\n      (X.presheaf.map (homOfLE le_top).op g) ^ k * s = 0 →\n      (X.presheaf.map (homOfLE le_top).op g) ^ c * s = 0",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T181123-L-2607328",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T181123-L-2607328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

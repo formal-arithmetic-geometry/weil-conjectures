@@ -1,0 +1,123 @@
+{
+ "id": "lem-sbc-principal-thickening-local-division",
+ "kind": "statement",
+ "title": "Local divisibility in a principal thickening kernel",
+ "statement": "Let R be a commutative ring, g an element of R, and W an open subscheme of Spec R [def-pc-scheme]. For k a natural number let W_k be openThickening for R to R/(g) [lem-sbc-finite-etale-adic-sections-transfer]. If a is a global section of O_W restricting to zero on W_k, then every point x of W has an open neighbourhood V in W and b in Gamma(V,O_W) such that a|V=(g|V)^(k+1)b. Here g|W is the canonical restriction through GammaSpecIso.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01QQ and 01JU, affine closed subschemes and quotient base change; ordinary quotient sheaf of Tag 0H3E."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sbc-finite-etale-adic-sections-transfer"
+ ],
+ "proof": [
+  {
+   "text": "Put K=ker(R to R/(g))^(k+1). Apply quotientBaseChange_closedImmersion_ideal to W to obtain the closed immersion i:W_k to W and the formula ker(i.app V)=K extended to Gamma(V,O_W) for every affine open V of W. This is exactly the existing quotient base-change theorem, specialized to a principal power.",
+   "uses": [
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "lem-sbc-finite-etale-adic-sections-transfer"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an affine neighbourhood V of x. Naturality restricts the zero image of a to V, placing a|V in ker(i.app V). The quotient kernel is (g), and Ideal.span_singleton_pow identifies K with (g^(k+1)). Ideal.map_span and Ideal.mem_span_singleton give the desired coefficient b. The appLE formula identifies the generator with the restriction of the canonical section g|W.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finite-etale-adic-sections-transfer",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01QQ and 01JU, affine closed subschemes and quotient base change; ordinary quotient sheaf of Tag 0H3E.; direct Lean proof from Mathlib and the cited library theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "principal.*divis|divis.*principal|ker.*(thicken|subscheme)|annihilator.*(pow|stabili)",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean",
+   "verdict": "No exact theorem. Relevant Mathlib APIs are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section killed on a closed subscheme defined by a principal ideal is locally divisible by its generator",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, AlgebraicGeometry.IsAffineOpen.mem_ideal_iff, AlgebraicGeometry.Scheme.IdealSheafData.map_ideal_basicOpen, ModuleCat.Tilde.sectionsSubmodule, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "verdict": "No exact theorem. Relevant Mathlib APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section killed on a closed subscheme defined by a principal ideal is locally divisible by its generator",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Unavailable; no absence conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalRestrictionKernel",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: purity across a regular special divisor; the depth-three punctured principal-quotient lifting input, Tags 0BLS (complete case), 0BM6, 09ZL, 0AVY, 0A02; full faithfulness of punctured principal-quotient restriction; Scalar formal sections on a depth-three complete local puncture; Principal formal sections as an element of the adic completion; finite-stage Eventual kernel vanishing for principal puncture restriction; Local divisibility in a principal thickening kernel",
+   "via": [
+    "lem-sbc-punctured-principal-restriction-kernel",
+    "lem-sbc-punctured-principal-completion-comparison",
+    "lem-sbc-completed-punctured-quotient-fully-faithful",
+    "lem-sbc-depth-three-completed-quotient-lift",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity",
+    "lem-sbc-complete-punctured-principal-formal-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningLocalDivision",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PrincipalThickeningLocalDivision.lean",
+  "declaration": "AlgebraicGeometry.Scheme.principal_thickening_local_division",
+  "statement": "theorem principal_thickening_local_division\n    (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens)\n    (k : ℕ) (a : Γ(W.toScheme, ⊤))\n    (ha : (FiniteEtale.Adic.openThickeningMap\n      (Ideal.Quotient.mk (Ideal.span {g})) W k).appTop a = 0) :\n    ∀ x : W.toScheme, ∃ (V : W.toScheme.Opens), x ∈ V ∧\n      ∃ b : Γ(W.toScheme, V),\n        W.toScheme.presheaf.map (homOfLE le_top).op a =\n          (W.toScheme.presheaf.map (homOfLE le_top).op\n            (((ΓSpecIso (.of R)).inv ≫ W.ι.appTop) g)) ^ (k + 1) * b",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T181123-L-2607328",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T181123-L-2607328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
