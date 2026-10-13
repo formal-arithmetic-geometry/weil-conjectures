@@ -10,7 +10,9 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.Algebra.FinitePresentationColimit
+import Mathlib.LinearAlgebra.TensorProduct.Basis
+import Sheaf.Algebra.Homology.FinitePresentationPreorderColimitModel
+import Sheaf.Algebra.Homology.FinitePresentationColimitRetraction
 
 /-! # Descent of one finite projective module
 
@@ -54,6 +56,46 @@ theorem exists_finite_projective_module_model_of_directed_colimit
     (hprojective : Module.Projective (colimit F : CommRingCat.{u}) X) :
     ∃ (i : I) (M : ModuleCat.{u} (F.obj i)),
       Module.Finite (F.obj i) M ∧ Module.Projective (F.obj i) M ∧
-      Nonempty ((extendScalars (colimit.ι F i).hom).obj M ≅ X) := by sorry
+      Nonempty ((extendScalars (colimit.ι F i).hom).obj M ≅ X) := by
+  classical
+  let A := (colimit F : CommRingCat.{u})
+  have : Module.Finite A X := hfinite
+  have : Module.Projective A X := hprojective
+  have hfp := Module.finitePresentation_of_projective A X
+  obtain ⟨i, M, hM, ⟨eM⟩⟩ :=
+    exists_finitePresentation_model_of_preorder_colimit F X hfp
+  obtain ⟨n, r, s, _, _, hsr⟩ := Module.Finite.exists_comp_eq_id_of_projective A X
+  let N := ModuleCat.of (F.obj i) (Fin n → F.obj i)
+  let ri := (colimit.ι F i).hom
+  let : Algebra (F.obj i) A := ri.toAlgebra
+  let b := (Pi.basisFun (F.obj i) (Fin n)).baseChange A
+  let eN : (extendScalars ri).obj N ≅ ModuleCat.of A (Fin n → A) :=
+    b.equivFun.toModuleIso
+  let sA := eM.hom ≫ ModuleCat.ofHom s ≫ eN.inv
+  let rA := eN.hom ≫ ModuleCat.ofHom r ≫ eM.inv
+  have hsrA : sA ≫ rA = 𝟙 _ := by
+    have hlin : ModuleCat.ofHom s ≫ ModuleCat.ofHom r = 𝟙 X := by
+      exact ModuleCat.hom_ext hsr
+    simp only [sA, rA, Category.assoc, Iso.inv_hom_id_assoc]
+    rw [← Category.assoc (ModuleCat.ofHom s) (ModuleCat.ofHom r), hlin]
+    simp
+  have hN : Module.FinitePresentation (F.obj i) N := inferInstance
+  obtain ⟨j, hij, s', r', hsplit, ⟨e⟩⟩ :=
+    exists_retraction_model_of_directed_colimit F i M N hM hN sA rA hsrA
+  let rij := (F.map (homOfLE hij)).hom
+  let : Algebra (F.obj i) (F.obj j) := rij.toAlgebra
+  let b' := (Pi.basisFun (F.obj i) (Fin n)).baseChange (F.obj j)
+  have : Module.Free (F.obj j) ((extendScalars rij).obj N) :=
+    Module.Free.of_basis b'
+  have hsplit' : r'.hom.comp s'.hom = LinearMap.id :=
+    congrArg ModuleCat.Hom.hom hsplit
+  have hproj : Module.Projective (F.obj j) ((extendScalars rij).obj M) :=
+    Module.Projective.of_split s'.hom r'.hom hsplit'
+  have : Module.Finite (F.obj j) ((extendScalars rij).obj N) :=
+    Module.Finite.of_basis b'
+  have hfin : Module.Finite (F.obj j) ((extendScalars rij).obj M) :=
+    Module.Finite.of_surjective r'.hom
+      (LinearMap.surjective_of_comp_eq_id _ _ hsplit')
+  exact ⟨j, (extendScalars rij).obj M, hfin, hproj, ⟨e ≪≫ eM⟩⟩
 
 end ModuleCat

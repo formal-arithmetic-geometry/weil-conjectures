@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-fp-preorder-colimit-model",
+ "kind": "statement",
+ "title": "Finitely presented stage model for a directed preorder",
+ "statement": "Let $I$ be a nonempty directed preorder and $F:I\\to\\mathrm{CommRing}$ a diagram with colimit $A$ [def-weil-pbc-category-colimit]. For every finitely presented $A$-module $X$ [def-sc-finitely-presented-module], there exist $i\\in I$ and a finitely presented $F(i)$-module $M$ with $M\\otimes_{F(i)}A\\cong X$ along the canonical colimit map.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7, label algebra-lemma-colimit-category-fp-modules, object clause (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Take the thin skeleton T of the preorder I. ThinSkeleton.equivalence identifies T with I, and transports filteredness. T is a nonempty directed partial order. Precompose F with the representative functor E:T→I. Functor.Final.colimitIso supplies q:colimit(E⋙F)≅colimit F, satisfying cocone compatibility.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extend X along q.inv. Finite presentation is preserved by scalar extension. Apply the object clause of [lem-pc-fp-module-map-descent-affine] to this module and E⋙F, obtaining t, M and eM.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cocone compatibility identifies q.hom composed with the stage map with the original colimit map at E(t). Apply extendScalarsComp to compare these scalar extensions. Apply the extended eM and cancel extension along q.inv followed by q.hom, using q.inv_hom_id and extendScalarsId. Their composite gives the required model at E(t).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 05N7, label algebra-lemma-colimit-category-fp-modules, object clause (1); detailed transport and retraction argument by P4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented modules over a directed preorder ring colimit have a model at a stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented modules over a directed preorder ring colimit have a model at a stage",
+   "results": "FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂, ModuleCat.FilteredColimits.M.mk_surjective, ModuleCat.directLimitIsColimit, ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.colimitCoconeIsColimit, ModuleCat.FilteredColimits.colimitCocone, FGModuleCat.instHasColimitsOfShapeOfFinCategory, ModuleCat.FilteredColimits.colimitModule",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*colimit|FinitePresentation.*preorder",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteProjectiveModuleColimitDescent",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF affine approximation: descent of individual finite projective terms; Tag 05N7, label algebra-lemma-colimit-category-fp-modules, object clause (1)",
+   "via": [
+    "lem-pc-finite-projective-module-colimit-descent",
+    "lem-pc-finite-projective-graded-colimit-descent",
+    "lem-pc-affine-perfect-colimit-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FinitePresentationPreorderColimitModel",
+  "file": "lean/Sheaf/Algebra/Homology/FinitePresentationPreorderColimitModel.lean",
+  "declaration": "ModuleCat.exists_finitePresentation_model_of_preorder_colimit",
+  "statement": "theorem exists_finitePresentation_model_of_preorder_colimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (F : I ⥤ CommRingCat.{u}) [HasColimit F]\n    (X : ModuleCat.{u} (colimit F : CommRingCat.{u}))\n    (hX : Module.FinitePresentation (colimit F : CommRingCat.{u}) X) :\n    ∃ (i : I) (M : ModuleCat.{u} (F.obj i)),\n      Module.FinitePresentation (F.obj i) M ∧\n      Nonempty ((extendScalars (colimit.ι F i).hom).obj M ≅ X)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100052-L-2475720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100052-L-2475720",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

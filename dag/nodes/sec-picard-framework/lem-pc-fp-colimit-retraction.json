@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-fp-colimit-retraction",
+ "kind": "statement",
+ "title": "Descent of a retraction between fixed finitely presented models",
+ "statement": "Let $I$ be a nonempty directed preorder and $F:I\\to\\mathrm{CommRing}$ have colimit $A$ [def-weil-pbc-category-colimit]. Fix $i\\in I$ and finitely presented $F(i)$-modules $M,N$ [def-sc-finitely-presented-module]. Given $A$-linear maps $s:M_A\\to N_A$ and $r:N_A\\to M_A$ with $r\\circ s=\\mathrm{id}_{M_A}$, where $M_A=M\\otimes_{F(i)}A$ and similarly for $N_A$, there exist $j\\ge i$ and maps $s_j:M_j\\to N_j$, $r_j:N_j\\to M_j$ with $r_j\\circ s_j=\\mathrm{id}_{M_j}$ and an isomorphism $M_j\\otimes_{F(j)}A\\cong M_A$. Here $M_j=M\\otimes_{F(i)}F(j)$ and similarly for $N_j$, with all scalar extensions along diagram or colimit maps.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, first proof paragraph, using Algebra Tag 05N7 (2) and (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Replace I by its antisymmetrization, transport F and the fixed stage models along the equivalence, and identify the colimits. A stage above the quotient class of i yields a stage above i after choosing representatives, since equivalence of indices means inequalities in both directions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the map clause of [lem-pc-fp-module-map-descent-affine] to s and r separately and extend both descended maps to a common upper stage. Scalar extension preserves finite presentation. The comparison isomorphisms of that clause agree with extendScalarsComp: both send 1 tensor m to 1 tensor (1 tensor m), and such tensors generate. Thus the base change of the composite of the descended maps is the identity.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the equality clause of [lem-pc-fp-module-map-descent-affine] to that composite and the identity. At the resulting further stage functoriality gives the retraction identity. The extendScalarsComp comparison gives the required isomorphism for M. Transport back along the indexing equivalence and the colimit ring isomorphism.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, first proof paragraph, using Algebra Tag 05N7 (2) and (3); detailed transport and retraction argument by P4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented modules and retractions descend over directed colimits of commutative rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split retraction between base changes of finitely presented modules descends to a later stage of a directed ring colimit",
+   "results": "FinitePresentation.of_isBaseChange, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, Module.Flat.exists_factorization_of_isFinitelyPresented, Module.FinitePresentation.trans, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, Module.finitePresentation_of_split_exact, Module.Presentation.restrictScalars, Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "retraction.*colimit|retract.*descent|finitePresentation.*preorder",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteProjectiveModuleColimitDescent",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF affine approximation: descent of individual finite projective terms; Tag 0BC7, label more-algebra-lemma-colimit-perfect, first proof paragraph, using Algebra Tag 05N7 (2) and (3)",
+   "via": [
+    "lem-pc-finite-projective-module-colimit-descent",
+    "lem-pc-finite-projective-graded-colimit-descent",
+    "lem-pc-affine-perfect-colimit-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FinitePresentationColimitRetraction",
+  "file": "lean/Sheaf/Algebra/Homology/FinitePresentationColimitRetraction.lean",
+  "declaration": "ModuleCat.exists_retraction_model_of_directed_colimit",
+  "statement": "theorem exists_retraction_model_of_directed_colimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (F : I ⥤ CommRingCat.{u}) [HasColimit F]\n    (i : I) (M N : ModuleCat.{u} (F.obj i))\n    (hM : Module.FinitePresentation (F.obj i) M)\n    (hN : Module.FinitePresentation (F.obj i) N)\n    (s : (extendScalars (colimit.ι F i).hom).obj M ⟶\n      (extendScalars (colimit.ι F i).hom).obj N)\n    (r : (extendScalars (colimit.ι F i).hom).obj N ⟶\n      (extendScalars (colimit.ι F i).hom).obj M)\n    (hsr : s ≫ r = 𝟙 _) :\n    ∃ (j : I) (hij : i ≤ j),\n      let E := extendScalars (F.map (homOfLE hij)).hom\n      ∃ (s' : E.obj M ⟶ E.obj N) (r' : E.obj N ⟶ E.obj M),\n        s' ≫ r' = 𝟙 _ ∧\n        Nonempty ((extendScalars (colimit.ι F j).hom).obj (E.obj M) ≅\n          (extendScalars (colimit.ι F i).hom).obj M)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100052-L-2475720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100052-L-2475720",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
