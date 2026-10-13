@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-finite-rank-coefficient-correction",
+ "kind": "statement",
+ "title": "Finite-rank error after adjusting a coefficient section",
+ "statement": "Let $k\\subseteq K$ be fields of characteristic $p>0$ [def-pc-field-extension]. Let $\\Lambda$ be a commutative local $k$-algebra, with maximal ideal $\\mathfrak m$, and let $r:\\Lambda\\to K$ be a ring map compatible with the $k$-structures and with kernel $\\mathfrak m$. Fix a finite subset $t\\subset\\Lambda$ spanning $\\mathfrak m$ as an ideal. Let $I\\subseteq\\mathfrak m$ be an ideal with $\\mathfrak mI=0$. Let $\\sigma_0:K\\to\\Lambda$ be a section of $r$ and $c_0\\subset K$ a finite subset. Let $\\psi:k\\to\\Lambda$ be a ring map equal to the structure map $i$ modulo $I$, whose values lie in $\\operatorname{Subring.closure}(t\\cup\\sigma_0(k(c_0)))$. Assume $H_1(L_{K/k})$ is finite dimensional over $K$ [def-weil-pbc-smooth-ring-map]. Then there exist a section $\\sigma:K\\to\\Lambda$ of $r$, unchanged from $\\sigma_0$ modulo $I$, and a finite subset $f\\subset I$, such that for each $a\\in k$ there is $b\\in\\operatorname{Subring.closure}(t\\cup\\sigma(k(c_0)))$ with $i(a)-b\\in\\operatorname{span}_k(f)$. Here derivations and their universal modules are as in [def-weil-pbc-kahler-differentials], and span uses the given $k$-algebra action on $\\Lambda$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FG, proof of the coefficient-field claim (read at https://stacks.math.columbia.edu/tag/07FG)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "The condition mI=0 equips I with its canonical K-vector-space action through r. The difference theta=i-psi lands in I, and expanding the product identity shows it is a derivation over the prime field. Choose a differential basis dy_j of Omega_k over the prime field, using that differentials span and that a spanning family contains a basis.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Jacobi--Zariski sequence at K tensor Omega_k identifies the kernel of the differential map with the image of H1(K/k). It is finite dimensional, so a finite subset J0 of the extended differential basis supports the kernel. Linear independence of the full basis implies independence of the images dy_j outside J0.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend these independent images to a K-basis of Omega_K. Define a K-linear map to I agreeing with theta on the chosen basis vectors outside J0 and zero on additional vectors. Compose with the universal derivation to obtain D:K to I. Then theta-D restricted to k is supported on J0, and its values are in the k-span of the finite set f_j given by its values at dy_j for j in J0.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set sigma=sigma0+D. Because I squared is zero and mI=0, direct expansion proves it is a ring map and a section, with the same reduction modulo I. For an expression representing psi(a) in the generated subring, replace sigma0 coefficients by sigma coefficients. Products involving a positive-degree t term have zero correction because t lies in m. The constant correction equals D(r(psi(a)))=D(algebraMap k K a). This identity is independent of the expression; it can be proved by induction on subring closure, using the product rule for D. The new expression b lies in the same finite coefficient closure for sigma. Its difference from i(a) is theta(a)-D(a), which belongs to span_k(f_j).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-jacobi-zariski-homology-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FG: discrepancy derivation, Jacobi--Zariski finite support, choice of D, and the finite error family"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derivation on a field extends to a larger field up to a finite rank error when first cotangent homology is finite dimensional",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a derivation from k to K except on a finite dimensional subspace using the finite dimensional kernel of the map on Kahler differentials",
+   "results": "KaehlerDifferential.derivationQuotKerTotal, span_range_derivation, endEquivDerivation; characteristic-zero differential-field extension lemmas. No finite-error extension theorem.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Dd]erivation|[Dd]erivation.*finite|finite.*mapBaseChange",
+   "results": "Characteristic-zero differential fields and Lie derivations only. Blueprint search derivation: six unrelated nodes; search 07FG: zero blueprint nodes.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NilpotentCoefficientAdjustment",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07FG: discrepancy derivation, Jacobi--Zariski finite support, choice of D, and the finite error family",
+   "via": [
+    "lem-weil-pbc-nilpotent-coefficient-adjustment",
+    "lem-weil-pbc-artinian-coefficient-presentation",
+    "lem-weil-pbc-popescu-artinian-flat-subalgebras",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteRankCoefficientCorrection",
+  "file": "lean/Sheaf/RingTheory/FiniteRankCoefficientCorrection.lean",
+  "declaration": "Algebra.exists_finite_rank_coefficient_correction",
+  "statement": "theorem exists_finite_rank_coefficient_correction (k : Type u) [Field k] (K : Type w) [Field K] [Algebra k K] (Λ : Type v) [CommRing Λ] [Algebra k Λ] [IsLocalRing Λ] (r : Λ →+* K) (hker : RingHom.ker r = IsLocalRing.maximalIdeal Λ) (hcomm : r.comp (algebraMap k Λ) = algebraMap k K) (t : Finset Λ) (ht : Ideal.span (t : Set Λ) = IsLocalRing.maximalIdeal Λ) (I : Ideal Λ) (hI : I ≤ RingHom.ker r) (hkill : IsLocalRing.maximalIdeal Λ * I = ⊥) (σ0 : K →+* Λ) (hσ0 : r.comp σ0 = RingHom.id K) (c0 : Finset K) (ψ : k →+* Λ) (hψ : (Ideal.Quotient.mk I).comp ψ = (Ideal.Quotient.mk I).comp (algebraMap k Λ)) (hψmem : ∀ a : k, ψ a ∈ Subring.closure ((t : Set Λ) ∪ σ0 '' (IntermediateField.adjoin k (c0 : Set K) : Set K))) (p : ℕ) [CharP k p] (hp : 0 < p) (hH : Module.Finite K (H1Cotangent k K)) : ∃ (σ : K →+* Λ) (f : Finset Λ), r.comp σ = RingHom.id K ∧ (Ideal.Quotient.mk I).comp σ = (Ideal.Quotient.mk I).comp σ0 ∧ (f : Set Λ) ⊆ I ∧ (∀ a : k, ∃ b : Λ, b ∈ Subring.closure ((t : Set Λ) ∪ σ '' (IntermediateField.adjoin k (c0 : Set K) : Set K)) ∧ algebraMap k Λ a - b ∈ Submodule.span k (f : Set Λ))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100052-L-2475470",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100052-L-2475470",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-square-zero-coefficient-adjustment",
+ "kind": "statement",
+ "title": "Lift a finite coefficient model through an annihilated ideal",
+ "statement": "Let $k\\subseteq K$ be fields [def-pc-field-extension], with $k$ of characteristic $p>0$. Let $\\Lambda$ be a commutative local $k$-algebra with nilpotent maximal ideal $\\mathfrak m$, and let $r:\\Lambda\\to K$ be a surjective ring map compatible with the $k$-structures and with kernel $\\mathfrak m$. Fix a finite subset $t\\subset\\Lambda$ spanning $\\mathfrak m$ as an ideal. Let $I\\subseteq\\mathfrak m$ be an ideal with $\\mathfrak mI=0$. Suppose $\\sigma\\prime:K\\to\\Lambda/I$ is a section of the induced map to $K$, and a finite subset $c\\prime\\subset K$ satisfies $i\\prime(k)\\subseteq\\operatorname{Subring.closure}(q(t)\\cup\\sigma\\prime(k(c\\prime)))$, where $q:\\Lambda\\to\\Lambda/I$ and $i\\prime$ is the structure map. Assume $H_1(L_{K/k})$ is finite dimensional over $K$ [def-weil-pbc-smooth-ring-map]. Then there exist a section $\\sigma:K\\to\\Lambda$ of $r$ and a finite subset $c\\subset K$ such that $q\\sigma=\\sigma\\prime$ and $i(k)\\subseteq\\operatorname{Subring.closure}(t\\cup\\sigma(k(c)))$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FG, proof of the coefficient-field claim (read at https://stacks.math.columbia.edu/tag/07FG)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Since I lies in m and mI=0, I squared is zero. Characteristic transfers from k to K, and p vanishes in Lambda. Lift sigma prime through I with exponent 2 by the characteristic-p field lifting theorem. Composing with r shows the lift sigma0 is a section.",
+   "uses": [
+    "lem-weil-pbc-field-char-p-nilpotent-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put S=Subring.closure(t union sigma0(k(c prime))), f:S to Lambda/I the restricted quotient map, J=ker f. The image of S is exactly the assumed quotient closure by RingHom.map_closure, hence contains the image of k. The ring map k to range f, composed with the inverse first-isomorphism equivalence S/J to range f, gives g:k to S/J. The kernel J lies in the contraction of m, so nilpotence of m makes J nilpotent. The characteristic-p field lifting theorem lifts g to S, giving a ring map psi:k to Lambda contained in S and equal to the structure map modulo I.",
+   "uses": [
+    "lem-weil-pbc-field-char-p-nilpotent-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite-rank coefficient correction to sigma0 and psi. It returns a section sigma, unchanged modulo I, and a finite set f contained in I. For every a in k there is b in the original coefficient closure for sigma such that i(a)-b lies in span_k(f).",
+   "uses": [
+    "lem-weil-pbc-finite-rank-coefficient-correction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the closure of t union range sigma is all of Lambda. Let S be this closure and J the contraction of m to S. As t spans m, J.map=S to Lambda gives m. J is nilpotent. More generally, any module M annihilated by I^N is I-adically complete: the congruence modulo I^N M is equality, so a compatible adic sequence stabilizes at N and separation follows at N. Apply this proved private helper to the regular modules S and Lambda, using nilpotence of J and m respectively. The section supplies surjectivity of S to Lambda/m. Apply complete-source surjectivity to obtain S=Lambda.",
+   "uses": [
+    "lem-weil-pbc-complete-source-surjective-mod-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Closure induction (generators, zero, one, sums, negation and products) shows that any element of this closure uses only finitely many coefficients of K. Induction over the finite error set takes the union of these finite coefficient sets to form d. Enlarge c prime to c=c prime union d.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let C be the resulting coefficient closure. For x in I and a in k, i(a)-sigma(a mod m) lies in m, so (i(a)-sigma(a mod m))*x=0. Thus a smul x=sigma(a mod m)*x belongs to C whenever x does. The residue of a lies in k(c). Induction on span_k(f) now gives membership in C and I, including the scalar case. Add the contained error i(a)-b to b to obtain i(a) in C. The equality of reduced sections follows from the two lift equalities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-char-p-nilpotent-lifting",
+  "lem-weil-pbc-finite-rank-coefficient-correction",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FG: lifting sigma prime and tau prime, finite-error adjustment, and final coefficient enlargement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inductive coefficient field adjustment across the final square zero power of the maximal ideal",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient field section in a local ring modulo the last nonzero power of the maximal ideal can be adjusted and lifted to capture the base field with finitely many coefficients",
+   "results": "Eight unrelated PowerSeries Weierstrass lemmas; no adjusted section lift.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*coefficient|coefficient.*adjustment|square_zero.*section",
+   "results": "Unrelated coefficient lemmas. Local rg found only the assigned claim and its parent; no square-zero lift preserving a specified section.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NilpotentCoefficientAdjustment",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07FG: lifting sigma prime and tau prime, finite-error adjustment, and final coefficient enlargement",
+   "via": [
+    "lem-weil-pbc-nilpotent-coefficient-adjustment",
+    "lem-weil-pbc-artinian-coefficient-presentation",
+    "lem-weil-pbc-popescu-artinian-flat-subalgebras",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SquareZeroCoefficientAdjustment",
+  "file": "lean/Sheaf/RingTheory/SquareZeroCoefficientAdjustment.lean",
+  "declaration": "Algebra.exists_square_zero_coefficient_adjustment",
+  "statement": "theorem exists_square_zero_coefficient_adjustment (k : Type u) [Field k] (K : Type w) [Field K] [Algebra k K] (Λ : Type v) [CommRing Λ] [Algebra k Λ] [IsLocalRing Λ] (r : Λ →+* K) (_hr : Function.Surjective r) (hker : RingHom.ker r = IsLocalRing.maximalIdeal Λ) (hcomm : r.comp (algebraMap k Λ) = algebraMap k K) (t : Finset Λ) (ht : Ideal.span (t : Set Λ) = IsLocalRing.maximalIdeal Λ) (hnil : IsNilpotent (IsLocalRing.maximalIdeal Λ)) (I : Ideal Λ) (hI : I ≤ RingHom.ker r) (hkill : IsLocalRing.maximalIdeal Λ * I = ⊥) (σ' : K →+* Λ ⧸ I) (c' : Finset K) (hσ' : (Ideal.Quotient.lift I r (fun _ hx ↦ hI hx)).comp σ' = RingHom.id K) (hc' : ∀ a : k, algebraMap k (Λ ⧸ I) a ∈ Subring.closure ((Ideal.Quotient.mk I) '' (t : Set Λ) ∪ σ' '' (IntermediateField.adjoin k (c' : Set K) : Set K))) (p : ℕ) [CharP k p] (hp : 0 < p) (hH : Module.Finite K (H1Cotangent k K)) : ∃ (σ : K →+* Λ) (c : Finset K), r.comp σ = RingHom.id K ∧ (Ideal.Quotient.mk I).comp σ = σ' ∧ (∀ a : k, algebraMap k Λ a ∈ Subring.closure ((t : Set Λ) ∪ σ '' (IntermediateField.adjoin k (c : Set K) : Set K)))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100052-L-2475470",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100052-L-2475470",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Sheaf.RingTheory.ExistsLiftOfFieldCharP
-import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import Sheaf.RingTheory.SquareZeroCoefficientAdjustment
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Finite coefficient adjustment for a nilpotent local algebra
@@ -25,6 +25,94 @@ set_option autoImplicit false
 universe u v
 
 namespace Algebra
+
+-- Keep the residue field fixed during induction, so no cotangent-homology transport
+-- is needed when passing to a quotient of the local ring.
+private theorem exists_coefficient_adjustment_of_pow_eq_bot
+    (k : Type u) [Field k] (K : Type v) [Field K] [Algebra k K]
+    (p : ℕ) [CharP k p] (hp : 0 < p)
+    (hH : Module.Finite K (H1Cotangent k K)) (n : ℕ) :
+    ∀ (Λ : Type v) [CommRing Λ] [Algebra k Λ] [IsLocalRing Λ]
+      (r : Λ →+* K), Function.Surjective r →
+      RingHom.ker r = IsLocalRing.maximalIdeal Λ →
+      r.comp (algebraMap k Λ) = algebraMap k K →
+      ∀ (t : Finset Λ), Ideal.span (t : Set Λ) = IsLocalRing.maximalIdeal Λ →
+      IsLocalRing.maximalIdeal Λ ^ n = ⊥ →
+      ∃ (σ : K →+* Λ) (c : Finset K),
+        r.comp σ = RingHom.id K ∧
+        (∀ a : k, algebraMap k Λ a ∈ Subring.closure ((t : Set Λ) ∪
+          σ '' (IntermediateField.adjoin k (c : Set K) : Set K))) := by
+  classical
+  induction n with
+  | zero =>
+      intro Λ _ _ _ r hr hker hcomm t ht hn
+      simp [Ideal.one_eq_top] at hn
+  | succ n ih =>
+      intro Λ _ _ _ r hr hker hcomm t ht hn
+      by_cases hn0 : n = 0
+      · have hm : IsLocalRing.maximalIdeal Λ = ⊥ := by simpa [hn0] using hn
+        have hinj : Function.Injective r :=
+          (RingHom.injective_iff_ker_eq_bot r).mpr (hker.trans hm)
+        let e := RingEquiv.ofBijective r ⟨hinj, hr⟩
+        refine ⟨e.symm.toRingHom, ∅, ?_, ?_⟩
+        · ext a
+          exact e.apply_symm_apply a
+        · intro a
+          have ha : algebraMap k Λ a = e.symm (algebraMap k K a) := by
+            apply hinj
+            exact (RingHom.congr_fun hcomm a).trans (e.apply_symm_apply _).symm
+          rw [ha]
+          apply Subring.subset_closure
+          exact Or.inr ⟨algebraMap k K a, IntermediateField.algebraMap_mem _ a, rfl⟩
+      · let I := IsLocalRing.maximalIdeal Λ ^ n
+        have hI : I ≤ RingHom.ker r := by
+          rw [hker]
+          exact Ideal.pow_le_self hn0
+        have hIne : I ≠ ⊤ := by
+          intro htop
+          have hle : (⊤ : Ideal Λ) ≤ IsLocalRing.maximalIdeal Λ := by
+            simpa [htop, hker] using hI
+          exact (IsLocalRing.maximalIdeal.isMaximal Λ).ne_top (top_le_iff.mp hle)
+        let : Nontrivial (Λ ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr hIne
+        let q := Ideal.Quotient.mk I
+        let : IsLocalRing (Λ ⧸ I) :=
+          IsLocalRing.of_surjective' q Ideal.Quotient.mk_surjective
+        let r' := Ideal.Quotient.lift I r (fun x hx ↦ hI hx)
+        have hr' : Function.Surjective r' := by
+          intro a
+          obtain ⟨b, rfl⟩ := hr a
+          exact ⟨q b, rfl⟩
+        have hmap : (IsLocalRing.maximalIdeal Λ).map q =
+            IsLocalRing.maximalIdeal (Λ ⧸ I) :=
+          IsLocalRing.map_maximalIdeal_of_surjective q Ideal.Quotient.mk_surjective
+        have hker' : RingHom.ker r' = IsLocalRing.maximalIdeal (Λ ⧸ I) := by
+          rw [Ideal.ker_quotient_lift, hker]
+          exact hmap
+        have hcomm' : r'.comp (algebraMap k (Λ ⧸ I)) = algebraMap k K := by
+          ext a
+          change r (algebraMap k Λ a) = algebraMap k K a
+          exact RingHom.congr_fun hcomm a
+        let t' := t.image q
+        have ht' : Ideal.span (t' : Set (Λ ⧸ I)) =
+            IsLocalRing.maximalIdeal (Λ ⧸ I) := by
+          rw [← hmap, ← ht, Ideal.map_span]
+          simp [t']
+        have hn' : IsLocalRing.maximalIdeal (Λ ⧸ I) ^ n = ⊥ := by
+          rw [← hmap, ← Ideal.map_pow]
+          exact Ideal.map_quotient_self I
+        obtain ⟨σ', c', hσ', hc'⟩ :=
+          ih (Λ ⧸ I) r' hr' hker' hcomm' t' ht' hn'
+        have hkill : IsLocalRing.maximalIdeal Λ * I = ⊥ := by
+          change IsLocalRing.maximalIdeal Λ * IsLocalRing.maximalIdeal Λ ^ n = ⊥
+          rw [← pow_succ']
+          exact hn
+        have hc'' : ∀ a : k, algebraMap k (Λ ⧸ I) a ∈
+            Subring.closure (q '' (t : Set Λ) ∪
+              σ' '' (IntermediateField.adjoin k (c' : Set K) : Set K)) := by
+          simpa [t'] using hc'
+        obtain ⟨σ, c, hσ, _, hc⟩ := exists_square_zero_coefficient_adjustment
+          k K Λ r hr hker hcomm t ht ⟨n + 1, hn⟩ I hI hkill σ' c' hσ' hc'' p hp hH
+        exact ⟨σ, c, hσ, hc⟩
 
 /-- Adjust the coefficient section for a fixed generating family of a nilpotent maximal ideal.
 The section need not preserve the base-field algebra structure. The containment is in
@@ -77,6 +165,13 @@ theorem exists_nilpotent_coefficient_adjustment
       (IsLocalRing.residue Λ).comp σ = RingHom.id _ ∧
       (∀ a : k, algebraMap k Λ a ∈ Subring.closure ((t : Set Λ) ∪
         σ '' (IntermediateField.adjoin k (c : Set (IsLocalRing.ResidueField Λ)) :
-          Set (IsLocalRing.ResidueField Λ)))) := by sorry
+          Set (IsLocalRing.ResidueField Λ)))) := by
+  obtain ⟨n, hn⟩ := hnil
+  exact exists_coefficient_adjustment_of_pow_eq_bot k (IsLocalRing.ResidueField Λ)
+    p hp hH n Λ (IsLocalRing.residue Λ) IsLocalRing.residue_surjective
+    IsLocalRing.ker_residue (by
+      ext a
+      exact (IsScalarTower.algebraMap_apply k Λ (IsLocalRing.ResidueField Λ) a).symm)
+    t ht hn
 
 end Algebra
