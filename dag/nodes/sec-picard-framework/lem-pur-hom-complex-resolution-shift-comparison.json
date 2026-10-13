@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-hom-complex-resolution-shift-comparison",
+ "kind": "statement",
+ "title": "Localized Hom comparison for shifted functorial resolutions",
+ "statement": "On a small ringed site (C,J,R), let K be its cochain-complex category [def-pc-cochain-complex-modules], Q:K → D(R) the derived localization [def-weil-abstract-derived-category], and H its Hom-complex bifunctor [def-pur-hom-complex]. Given a functor I:K → K and natural transformation eta:id → I such that each eta_M is a quasi-isomorphism [def-pc-quasi-iso-modules] and I(M) is K-injective [def-pur-kinjective-complex], for every integer n there is a natural isomorphism (id × (I followed by shift(n))) followed by H and Q to (id × (shift(n) followed by I)) followed by H and Q.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0A95 and Sections 21.34--21.35 (Tags 0A8X and 08JA); functorial resolution comparison"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put S=shift(n). The natural transformations alpha=eta_(I(M)[n]) and beta=I(eta_M[n]) give the zigzag I(M)[n] → I(I(M)[n]) ← I(M[n]). Alpha is a quasi-isomorphism by assumption; beta is one because eta_(M[n]) followed by beta equals eta_M[n] followed by eta_(I(M)[n]), and two-out-of-three applies. Mathlib supplies preservation of quasi-isomorphisms and K-injectivity under shifts.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "All three vertices are K-injective. Apply quasiIso_homComplex_map to each arrow and the identity on L. DerivedCategory.Q inverts the resulting quasi-isomorphisms; NatTrans.isIso_iff_isIso_app makes both whiskered natural transformations isomorphisms. Compose asIso(alpha) with asIso(beta).symm.",
+   "uses": [
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rhom-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0A95 and Sections 21.34--21.35 (Tags 0A8X and 08JA); functorial resolution comparison; explicit signed calculation or resolution zigzag written by K3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between internal Hom complexes shifted in the second argument",
+   "results": "Eight hits: generic shift isomorphisms and ordinary HomComplex Cochain rightShiftAddEquiv/rightShift_v. None constructs a sheaf-valued Hom-complex isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso\"",
+   "results": "Generic Functor.CommShift comparison, used for DerivedCategory.Q; no instance for the sheaf-valued homComplexFunctor.",
+   "date": "2026-10-13",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*shift|shift.*homComplex; resolution shift in Mathlib, lean/Sheaf, lean/WeilConjectures, dag/nodes",
+   "results": "The derived left/right/simultaneous comparisons are upper nodes; no chain-level sheaf Hom shift or arbitrary-resolution zigzag comparison. Mathlib KInjective has shift preservation, used in the proved resolution lemma.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate; ingredients used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism between the sheaf valued Hom complex shifted and the Hom complex with shifted target",
+   "results": "Unavailable: Internal Server Error; no result or verdict inferred.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedInternalHomShiftRight",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-derived-internal-hom-shift-comparison",
+   "place": "Localized Hom comparison for shifted functorial resolutions",
+   "via": [
+    "lem-pur-derived-internal-hom-shift-right"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexResolutionShiftComparison",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexResolutionShiftComparison.lean",
+  "declaration": "CategoryTheory.homComplex_resolution_shift_comparison",
+  "statement": "theorem homComplex_resolution_shift_comparison\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))]\n    (I : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ ⥤\n      CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (η : 𝟭 _ ⟶ I)\n    (hI : ∀ M, QuasiIso (η.app M) ∧ (I.obj M).IsKInjective) (n : ℤ) :\n    Nonempty (\n      (𝟭 _).prod (I ⋙ shiftFunctor _ n) ⋙\n        Functor.uncurry.obj (homComplexFunctor (C := C) (J := J) (R := R)) ⋙\n          DerivedCategory.Q ≅\n      (𝟭 _).prod (shiftFunctor _ n ⋙ I) ⋙\n        Functor.uncurry.obj (homComplexFunctor (C := C) (J := J) (R := R)) ⋙\n          DerivedCategory.Q)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T133226-L-4193302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T133226-L-4193302",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
