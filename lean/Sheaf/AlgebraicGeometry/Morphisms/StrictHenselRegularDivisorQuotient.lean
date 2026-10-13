@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientNoetherian
+import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular
 
 /-! # The regular divisor quotient of the canonical strict henselization
 Source: Stacks Project, Tag 0EYG, strict henselization paragraph; Tags 06LN and 05WS.
@@ -42,6 +44,8 @@ theorem strictHenselization_regular_divisor_quotient
     IsNoetherianRing (strictHenselizationRing barY) ∧
       IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧
       IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
-  sorry
+  have hN := strictHenselizationRing_noetherian_of_regular R barY b hb
+  have hQ := strictHenselizationRing_regular_divisor_quotient R f barY b hb hg
+  exact ⟨hN, hQ.1, hQ.2⟩
 
 end AlgebraicGeometry.Scheme
