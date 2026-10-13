@@ -2,26 +2,32 @@
  "id": "lem-pd-glued-effective-model-charts-pullback",
  "kind": "statement",
  "title": "Cartesianity of glued model charts",
- "statement": "theorem glued_model_chart_pullbacks : each glued chart square is a pullback under the local cartesian hypotheses.",
+ "statement": "Let $p:X\\to Y$ be a morphism of schemes and let $V\\to X$ and $W_i\\to Y$, $W_0\\to Y$ be schemes over their indicated bases [def-weil-scheme-over-base]. Let $U_i\\subseteq V$ be open subschemes and $q_i:U_i\\to W_i$, $q_0:V\\to W_0$, $j_i:W_i\\to W_0$ be morphisms. Suppose the local squares $(q_i,U_i\\to X,W_i\\to Y,p)$ are cartesian [def-pc-fibre-product], each $j_i$ is an open immersion [def-weil-open-immersion], the $j_i$ jointly cover $W_0$, each $j_i$ is over $Y$, and $q_i j_i=(U_i\\to V)q_0$. Suppose also that $q_0^{-1}(j_i(W_i))=U_i$ for every $i$, as supplied by the descended overlap gluing construction. Then each chart square $(q_i,U_i\\to V,j_i,q_0)$ is cartesian. The last inverse-image assumption is indispensable for arbitrary commuting charts; the local cartesian, covering, and over-base hypotheses are retained but unnecessary for this open-immersion criterion.",
  "source": {
   "document": "Stacks Project",
   "place": "Descent, Tag 0AP4, proof"
  },
  "stmt_deps": [
-  "lem-pd-glued-effective-model-charts"
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
  ],
  "proof": [
   {
-   "text": "STATEMENT-DISPUTED: arbitrary target open charts and commuting maps need not be glued from the descended overlaps. The singleton identity chart on X and the first component U of V=X coproduct X, with q₀ the fold map, meet the displayed hypotheses but the chart square is not cartesian. Actual gluing must establish the inverse-image equalities first; the corrected single-chart criterion then applies indexwise. The unchanged caller is left disputed rather than proving a false inverse-image lemma.",
-   "uses": [],
-   "elementary": false
+   "text": "For each index install the given open-immersion instance of j_i. The source inclusion U_i -> V is an open immersion with opensRange U_i. The supplied inverse-image equality therefore satisfies Mathlib IsOpenImmersion.isPullback; its commuting-square equation is the symmetric hcomm i. This proves the chart square cartesian directly. Empty index types are vacuous and empty opens require no separate argument.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-open-immersion"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "Y3 counterexample; N4 forced caller check",
-  "place": "Original caller fails after adding the missing inverse-image hypothesis to glued_model_chart_pullback_single"
+  "document": "Stacks Project, Tag 0AP4; Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+  "place": "Chart-square verification, IsOpenImmersion.isPullback; Lean proof by E3"
  },
  "mathlib_searches": [
   {
@@ -84,10 +90,10 @@
   "module": "Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback",
   "file": "lean/Sheaf/AlgebraicGeometry/GluedEffectiveModelChartsPullback.lean",
   "declaration": "CategoryTheory.Over.DescentDatum.glued_model_chart_pullbacks",
-  "statement": "theorem glued_model_chart_pullbacks\n    {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}\n    {I : Type u} (U : I → V.left.Opens) (W : I → Over Y)\n    (q : ∀ i, (U i).toScheme ⟶ (W i).left)\n    (W₀ : Over Y) (q₀ : V.left ⟶ W₀.left)\n    (j : ∀ i, (W i).left ⟶ W₀.left)\n    (hcart : ∀ i, IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p)\n    (hopen : ∀ i, IsOpenImmersion (j i))\n    (hcover : ∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w)\n    (hover : ∀ i, j i ≫ W₀.hom = (W i).hom)\n    (hcomm : ∀ i, q i ≫ j i = (U i).ι ≫ q₀) :\n    ∀ i, IsPullback (q i) (U i).ι (j i) q₀",
+  "statement": "theorem glued_model_chart_pullbacks\n    {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}\n    {I : Type u} (U : I → V.left.Opens) (W : I → Over Y)\n    (q : ∀ i, (U i).toScheme ⟶ (W i).left)\n    (W₀ : Over Y) (q₀ : V.left ⟶ W₀.left)\n    (j : ∀ i, (W i).left ⟶ W₀.left)\n    (hcart : ∀ i, IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p)\n    (hopen : ∀ i, IsOpenImmersion (j i))\n    (hcover : ∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w)\n    (hover : ∀ i, j i ≫ W₀.hom = (W i).hom)\n    (hcomm : ∀ i, q i ≫ j i = (U i).ι ≫ q₀)\n    (hpreimage : ∀ i, q₀ ⁻¹ᵁ (j i).opensRange = U i) :\n    ∀ i, IsPullback (q i) (U i).ι (j i) q₀",
   "branch": "sheaf-dag",
-  "by": "U2",
-  "date": "2026-10-12"
+  "by": "E3",
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -102,11 +108,33 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-1f36a",
-  "group": "N4",
+  "reviewer": "X-3db9c",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T201805-L-3975293",
+  "landing": "20261013T211058-L-390145",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules, corrected theorem, forced caller adaptation, node metadata, report, compilation, and axiom probes match the stage-3 requirements."
+  "note": "independent Codex review: Delivered files, DAG records, change record, forced adaptation, original/adapted importer compilations, pruning checks, and axiom probes matched the stage-3 brief."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "E3 stage 2",
+  "old_statement": "theorem glued_model_chart_pullbacks : each glued chart square is a pullback under the local cartesian hypotheses.",
+  "what": "The existing STATEMENT-DISPUTED counterexample shows that arbitrary commuting charts need not be cartesian. Add the necessary inverse-image equality. It is now proved from the actual descended overlaps in the sole Lean caller, whose statement is unchanged. The item is an intermediate criterion, not a target or a realized unit statement. Replace its circular statement dependency on the existential caller with the definitions actually used.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Descent, Tag 0AP4, proof"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "lem-pd-glued-effective-model-charts"
+  ],
+  "old_proof": [
+   {
+    "text": "STATEMENT-DISPUTED: arbitrary target open charts and commuting maps need not be glued from the descended overlaps. The singleton identity chart on X and the first component U of V=X coproduct X, with q₀ the fold map, meet the displayed hypotheses but the chart square is not cartesian. Actual gluing must establish the inverse-image equalities first; the corrected single-chart criterion then applies indexwise. The unchanged caller is left disputed rather than proving a false inverse-image lemma.",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": []
  }
 }
