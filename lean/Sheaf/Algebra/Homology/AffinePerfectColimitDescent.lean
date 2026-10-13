@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.Algebra.Homology.FiniteProjectiveGradedColimitDescent
+import Sheaf.Algebra.Homology.AffineDifferentialColimitDescent
+import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Affine descent of bounded finite projective complexes
 
@@ -55,6 +57,35 @@ theorem exists_finite_projective_model_of_directed_colimit
       (∀ n : ℤ, Module.Projective (F.obj i) (Pi.X n)) ∧
       Nonempty (((ModuleCat.extendScalars (colimit.ι F i).hom).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj Pi ≅ P) := by
-  sorry
+  obtain ⟨a, b, hzero⟩ := hbounded
+  obtain ⟨i, M, hMzero, hMfinite, hMprojective, ⟨e⟩⟩ :=
+    ModuleCat.exists_finite_projective_graded_model_of_directed_colimit
+      F P.X a b hzero hfinite hprojective
+  have hMfp (n : ℤ) : Module.FinitePresentation (F.obj i) (M n) := by
+    let := hMfinite n
+    let := hMprojective n
+    exact Module.finitePresentation_of_projective (F.obj i) (M n)
+  obtain ⟨j, hij, d, e', hshape, hsquare, hcomm⟩ :=
+    exists_differentials_on_graded_model_of_directed_colimit F P i M a b hMzero hMfp e
+  let G := ModuleCat.extendScalars (F.map (homOfLE hij)).hom
+  let Q : CochainComplex (ModuleCat.{u} (F.obj j)) ℤ :=
+    { X := fun n ↦ G.obj (M n)
+      d := d
+      shape := hshape
+      d_comp_d' := fun m n k _ _ ↦ hsquare m n k }
+  refine ⟨j, Q, ⟨a, b, ?_⟩, ?_, ?_, ?_⟩
+  · intro n hn
+    exact G.map_isZero (hMzero n hn)
+  · intro n
+    let := hMfinite n
+    let : Algebra (F.obj i) (F.obj j) := (F.map (homOfLE hij)).hom.toAlgebra
+    change Module.Finite (F.obj j) (TensorProduct (F.obj i) (F.obj j) (M n))
+    infer_instance
+  · intro n
+    let := hMprojective n
+    let : Algebra (F.obj i) (F.obj j) := (F.map (homOfLE hij)).hom.toAlgebra
+    change Module.Projective (F.obj j) (TensorProduct (F.obj i) (F.obj j) (M n))
+    infer_instance
+  · exact ⟨HomologicalComplex.Hom.isoOfComponents e' (fun m n _ ↦ hcomm m n)⟩
 
 end CochainComplex

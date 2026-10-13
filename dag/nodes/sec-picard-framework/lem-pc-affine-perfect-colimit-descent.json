@@ -23,55 +23,56 @@
  ],
  "proof": [
   {
-   "text": "Choose integers $a\\le b$ outside which $P^\\bullet$ is zero, and write its finitely many nonzero terms as finite projective modules $P^r$ with differentials $d^r:P^r\\to P^{r+1}$. The finite list of terms and maps is the affine data of the given bounded complex.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-pc-finite-projective-graded-colimit-descent] to the underlying graded family P.X and the given bounds to obtain fixed bounded finite projective term models M at a stage i.",
+   "uses": [
+    "lem-pc-finite-projective-graded-colimit-descent"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.76.18 (Tag 0BC7), proof, reduction to a bounded complex and its finitely many module and differential data"
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
    }
   },
   {
-   "text": "Each $P^r$ is finite projective, hence finitely presented (Algebra, Lemma 00NX; Mathlib `Module.finitePresentation_of_projective`). By [lem-pc-fp-module-map-descent-affine] (modules) there are $i$ and finitely presented $A_i$-modules $M^r$ with isomorphisms $M^r\\otimes_{A_i}A\\cong P^r$; directedness gives one $i$ for the finitely many $r$. Since $P^r$ is finite projective, a surjection $A^{n}\\to P^r$ splits [def-weil-pbc-projective-module], giving $\\iota:P^r\\to A^n$, $\\sigma:A^n\\to P^r$ with $\\sigma\\iota=\\mathrm{id}$; here $A^n=A_i^n\\otimes_{A_i}A$. By [lem-pc-fp-module-map-descent-affine] (maps) $\\iota,\\sigma$ are base changes of maps $\\iota_j,\\sigma_j$ between $M^r\\otimes_{A_i}A_j$ and $A_j^n$ at some $j\\ge i$, and by its third clause (equality) $\\sigma_j\\iota_j=\\mathrm{id}$ after a later stage, since both sides become $\\mathrm{id}_{P^r}$ over $A$. Then $P_j^r:=M^r\\otimes_{A_i}A_j$ is a direct summand of $A_j^n$, hence finite projective, with $P_j^r\\otimes_{A_j}A\\cong P^r$. One common stage $j$ serves all $r$ (directedness); rename it $i$.",
+   "text": "Each Mⁿ is finitely presented by Mathlib Module.finitePresentation_of_projective. Apply [lem-pc-affine-differential-colimit-descent] to these fixed models and the term isomorphisms. It returns j≥i, differentials on the scalar extensions of M, shape and square-zero equations, and compatible term isomorphisms.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine",
+    "lem-pc-affine-differential-colimit-descent",
     "def-weil-pbc-projective-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.76.18 (Tag 0BC7), proof: finitely presented modules form the colimit category (Algebra 05N7/0G8P) and finite projectives are summands of finite free modules (Algebra 00NX)"
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
    }
   },
   {
-   "text": "With the term models $P_i^r$ of Step 2 fixed, apply [lem-pc-fp-module-map-descent-affine] (maps) to each of the finitely many differentials $d^r:P^r\\to P^{r+1}$ and pass to one common later index $j$ (directedness): this gives $A_j$-linear maps $d_j^r:P_i^r\\otimes_{A_i}A_j\\to P_i^{r+1}\\otimes_{A_i}A_j$ whose base changes to $A$ are the $d^r$. The composite $d_j^{r+1}d_j^r$ and the zero map both base change to $d^{r+1}d^r=0$, so by the third clause (equality) of [lem-pc-fp-module-map-descent-affine] they agree after a later stage; one stage serves the finitely many $r$. Rename it $i$.",
-   "uses": [
-    "lem-pc-fp-module-map-descent-affine"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.76.18 (Tag 0BC7), proof, descent of the differential matrices and the finitely many relations $d^{r+1}d^r=0$"
-   }
-  },
-  {
-   "text": "The resulting bounded complex $P_i^\\bullet$ has finite projective terms and squares to zero. The chosen termwise base-change isomorphisms carry its differentials to those of $P^\\bullet$, hence assemble to an isomorphism of complexes $P_i^\\bullet\\otimes_{A_i}A\\cong P^\\bullet$.",
+   "text": "Construct Q as a HomologicalComplex with these prescribed scalar-extended terms, returned differentials, shape, and square-zero proofs. Scalar extension preserves zero objects (Functor.map_isZero), finite generation (Module.Finite.base_change), and projectivity (Module.Projective.tensorProduct), proving all three term properties with the same bounds.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 15.76.18 (Tag 0BC7), conclusion of the affine complex descent argument"
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
+   }
+  },
+  {
+   "text": "Use HomologicalComplex.Hom.isoOfComponents on the returned compatible term isomorphisms to obtain the complex base-change isomorphism. Return Q and its three term properties.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-finite-projective-graded-colimit-descent",
+  "lem-pc-affine-differential-colimit-descent",
   "def-weil-pbc-projective-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.76.18, Tag 0BC7, affine complex case"
+  "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1); H3 stage-3 Lean assembly from separate term and differential descent statements"
  },
  "mathlib_searches": [
   {
@@ -151,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T024035-L-3334742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

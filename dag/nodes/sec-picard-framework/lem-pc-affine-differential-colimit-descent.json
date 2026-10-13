@@ -1,0 +1,156 @@
+{
+ "id": "lem-pc-affine-differential-colimit-descent",
+ "kind": "statement",
+ "title": "Differential and square-zero descent on fixed graded term models",
+ "statement": "Let $I$ be a nonempty directed preorder, $F:I\\to\\mathrm{CommRing}$ a diagram with colimit $A$ [def-weil-pbc-category-colimit], and $P^\\bullet$ a cochain complex of $A$-modules (objects $P^n$ and maps $d_P^{mn}$, zero unless $m+1=n$, with all successive composites zero). Fix $i\\in I$, finitely presented $F(i)$-modules $M^n$ [def-sc-finitely-presented-module], integers $a,b$ such that $M^n=0$ for $n<a$ or $b<n$, and isomorphisms $e_n:M^n\\otimes_{F(i)}A\\cong P^n$. There exist $j\\ge i$, maps $d_j^{mn}:M^m\\otimes_{F(i)}F(j)\\to M^n\\otimes_{F(i)}F(j)$, and isomorphisms $e'_n:(M^n\\otimes_{F(i)}F(j))\\otimes_{F(j)}A\\cong P^n$, such that $d_j^{mn}=0$ unless $m+1=n$, $d_j^{mn}d_j^{nk}=0$ for every $m,n,k$, and $e'_n\\circ(d_j^{mn}\\otimes A)=d_P^{mn}\\circ e'_m$. The terms are the prescribed scalar extensions of M; no new term objects or finite-projectivity assertion are supplied.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Reduce the preorder indexing category to its antisymmetrization; retain the fixed initial index and its image. A later quotient index lifts to an actual j≥i because comparison in the quotient is equivalent to comparison between representatives.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
+   }
+  },
+  {
+   "text": "Conjugate each d_Pⁿ,ⁿ⁺¹ by eₙ and eₙ₊₁ to a map between the base changes of the fixed M terms. Only adjacent pairs contained in [a,b] matter, since every other relevant source or target is zero. Apply the map clause of [lem-pc-fp-module-map-descent-affine] to this finite list. Choose one common upper stage and transport the maps there using the canonical iterated scalar-extension isomorphisms. Those isomorphisms, composed with eₙ, provide one coherent family e′ for all maps.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
+   }
+  },
+  {
+   "text": "At this common stage every consecutive composite becomes zero over A by the compatibility squares and d_P²=0. The stage terms remain finitely presented. Apply the equality clause of [lem-pc-fp-module-map-descent-affine] to each such composite and zero, then pass to one common upper stage for the finitely many equations. Transport the same maps and term isomorphisms to it.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
+   }
+  },
+  {
+   "text": "Set all nonadjacent maps and the adjacent maps meeting a degree outside [a,b] to zero. Since scalar extension preserves zero objects, their compatibility squares hold automatically. All composites are zero: the nontrivial adjacent cases were imposed at the previous step, and the other cases have a zero factor. For an empty interval choose j=i and zero maps throughout.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1); H3 expands the finite-data argument and preorder reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite collection of finitely presented modules and maps between them descends along a directed colimit of commutative rings",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No absence verdict is inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded graded family of finite projective modules descends along a directed colimit of rings with fixed support bounds",
+   "results": "Module.DirectLimit.exists_of and exists_of₂; ModuleCat.directLimitIsColimit and directLimitCocone: these concern elements or fixed-ring colimits, not finite projective term descent or compatible differential descent.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, ModuleCat.extendScalars",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CochainComplex.*descen|graded.*descen|descen.*differential|finite.*projective.*colimit",
+   "results": "Mathlib has only graded component/map descent. Repository search finds only the current affine theorem and sheaf complex descent with additional Noetherian hypotheses. Blueprint searches for finite projective colimit and differential descent give no matches.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffinePerfectColimitDescent",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF proof, affine approximation: descend differentials on fixed term models and impose their finitely many square-zero relations",
+   "via": [
+    "lem-pc-affine-perfect-colimit-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AffineDifferentialColimitDescent",
+  "file": "lean/Sheaf/Algebra/Homology/AffineDifferentialColimitDescent.lean",
+  "declaration": "CochainComplex.exists_differentials_on_graded_model_of_directed_colimit",
+  "statement": "theorem exists_differentials_on_graded_model_of_directed_colimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (P : CochainComplex (ModuleCat.{u} (colimit F : CommRingCat.{u})) ℤ) (i : I) (M : ℤ → ModuleCat.{u} (F.obj i)) (a b : ℤ) (hzero : ∀ n : ℤ, n < a ∨ b < n → IsZero (M n)) (hfp : ∀ n : ℤ, Module.FinitePresentation (F.obj i) (M n)) (e : ∀ n : ℤ, (ModuleCat.extendScalars (colimit.ι F i).hom).obj (M n) ≅ P.X n) : ∃ (j : I) (hij : i ≤ j), let G := ModuleCat.extendScalars (F.map (homOfLE hij)).hom let E := ModuleCat.extendScalars (colimit.ι F j).hom ∃ (d : ∀ m n : ℤ, G.obj (M m) ⟶ G.obj (M n)) (e' : ∀ n : ℤ, E.obj (G.obj (M n)) ≅ P.X n), (∀ m n : ℤ, ¬ (ComplexShape.up ℤ).Rel m n → d m n = 0) ∧ (∀ m n k : ℤ, d m n ≫ d n k = 0) ∧ (∀ m n : ℤ, (e' m).hom ≫ P.d m n = E.map (d m n) ≫ (e' n).hom)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T024035-L-3334742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T024035-L-3334742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
