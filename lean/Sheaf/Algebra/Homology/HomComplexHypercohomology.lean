@@ -11,8 +11,8 @@ public import Mathlib.CategoryTheory.Functor.Currying
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.HomComplexGlobalCochains
-import Sheaf.Algebra.Homology.HomComplexProjections
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopy
+import Mathlib.Algebra.Category.Grp.EpiMono
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-!
@@ -27,6 +27,32 @@ Source: Stacks Project, Tags 08JA, 0A95, and 0A96.
 universe u w
 open CategoryTheory Opposite
 namespace CategoryTheory
+
+private theorem bijective_precomp_quotient
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    {K L T : CochainComplex A ℤ} (t : K ⟶ L) [QuasiIso t] [T.IsKInjective] :
+    Function.Bijective (fun f :
+      (HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj L ⟶
+        (HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj T ↦
+      (HomotopyCategory.quotient A (ComplexShape.up ℤ)).map t ≫ f) := by
+  let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let a := DerivedCategory.Qh.map (q.map t)
+  have ha : IsIso a := by
+    change IsIso ((q ⋙ DerivedCategory.Qh).map t)
+    exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso A) t).2 inferInstance
+  have hK := CochainComplex.IsKInjective.Qh_map_bijective (q.obj K) T
+  have hL := CochainComplex.IsKInjective.Qh_map_bijective (q.obj L) T
+  constructor
+  · intro f g h
+    apply hL.injective
+    apply (cancel_epi a).mp
+    change DerivedCategory.Qh.map (q.map t) ≫ _ = _
+    simpa only [a, q, Functor.map_comp] using congrArg DerivedCategory.Qh.map h
+  · intro g
+    obtain ⟨f, hf⟩ := hL.surjective (inv a ≫ DerivedCategory.Qh.map g)
+    refine ⟨f, hK.injective ?_⟩
+    rw [Functor.map_comp, hf]
+    exact IsIso.hom_inv_id_assoc a _
 
 /-- Zeroth hypercohomology of the sheaf Hom complex into K-injectives computes
 homotopy classes, naturally in the source and in any functorial K-injective target.
@@ -75,6 +101,78 @@ theorem homComplex_hypercohomology
         DerivedCategory.Q ⋙ ringedSiteZerothHypercohomology J R) ≅
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).op).prod
           (I ⋙ HomotopyCategory.quotient _ (ComplexShape.up ℤ)) ⋙
-        Functor.uncurry.obj preadditiveCoyoneda) := by sorry
+        Functor.uncurry.obj preadditiveCoyoneda) := by
+  classical
+  let A := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+  let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let := HasDerivedCategory.standard AddCommGrpCat.{u}
+  let Γ : A ⥤ AddCommGrpCat.{u} := preadditiveCoyoneda.obj
+    (op (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))
+  let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℤ) 0
+  let Hd := DerivedCategory.homologyFunctor AddCommGrpCat.{u} 0
+  let G := Γ.mapHomologicalComplex (ComplexShape.up ℤ)
+  let e : q ⋙ Γ.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ≅
+      G ⋙ DerivedCategory.Q :=
+    Functor.isoWhiskerRight (Γ.mapHomotopyCategoryFactors (ComplexShape.up ℤ))
+      DerivedCategory.Qh ≪≫
+    Functor.isoWhiskerLeft G (DerivedCategory.quotientCompQhIso AddCommGrpCat.{u})
+  let α : G ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ Γ.rightDerivedFunctor :=
+    e.inv ≫ Functor.whiskerLeft q Γ.rightDerivedFunctorUnit ≫
+      (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso A)
+        Γ.rightDerivedFunctor).hom
+  let β : G ⋙ H ⟶ DerivedCategory.Q ⋙ Γ.rightDerivedFunctor ⋙ Hd :=
+    (Functor.isoWhiskerLeft G
+      (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{u} 0)).inv ≫
+        Functor.whiskerRight α Hd
+  have hβ (T : CochainComplex A ℤ) [T.IsKInjective] : IsIso (β.app T) := by
+    dsimp [β, α]
+    infer_instance
+  let P := (𝟭 (CochainComplex A ℤ)ᵒᵖ).prod I
+  let F := P ⋙ Functor.uncurry.obj (homComplexFunctor (R := R))
+  let γ := Functor.whiskerLeft F β
+  obtain ⟨c⟩ := homComplex_global_homotopy J R
+  let c' := Functor.associator P (Functor.uncurry.obj (homComplexFunctor (R := R)))
+    (G ⋙ H) ≪≫ Functor.isoWhiskerLeft P c
+  have hγ : ∀ X, IsIso (γ.app X) := by
+    rintro ⟨L, M⟩
+    obtain ⟨K, t, hK, _, ht, _⟩ := CochainComplex.exists_isKFlatResolution L.unop
+    let := ht
+    let := hI M
+    let f : (L, M) ⟶ (op K, M) := (t.op, 𝟙 M)
+    have hflat : (homComplex (R := R) K (I.obj M)).IsKInjective :=
+      CochainComplex.isKInjective_homComplex_of_isKFlat K (I.obj M) hK
+    have hright : IsIso ((F ⋙ DerivedCategory.Q ⋙ Γ.rightDerivedFunctor ⋙ Hd).map f) := by
+      have hf : QuasiIso (F.map f) := by
+        change QuasiIso (((homComplexFunctor (R := R)).map t.op).app (I.obj M) ≫
+          ((homComplexFunctor (R := R)).obj (op K)).map (I.map (𝟙 M)))
+        rw [I.map_id]
+        exact quasiIso_homComplex_map (𝟙 (I.obj M)) t
+      let := hf
+      change IsIso (Hd.map (Γ.rightDerivedFunctor.map (DerivedCategory.Q.map (F.map f))))
+      infer_instance
+    have hleft : IsIso ((F ⋙ G ⋙ H).map f) := by
+      apply (NatIso.isIso_map_iff c' f).mpr
+      rw [ConcreteCategory.isIso_iff_bijective]
+      change Function.Bijective (fun g ↦ (q.map t ≫ g) ≫ q.map (I.map (𝟙 M)))
+      simpa only [I.map_id, q.map_id, Category.comp_id] using
+        bijective_precomp_quotient (T := I.obj M) t
+    let := hleft
+    let := hright
+    dsimp only [homComplex] at hflat
+    let := hflat
+    have : IsIso (γ.app (op K, M)) := by
+      dsimp only [γ, Functor.whiskerLeft_app, F, P, Functor.comp_obj,
+        Functor.prod_obj, Functor.id_obj, Functor.uncurry_obj_obj]
+      exact hβ _
+    have hn := γ.naturality f
+    have : IsIso (γ.app (L, M) ≫
+        (F ⋙ DerivedCategory.Q ⋙ Γ.rightDerivedFunctor ⋙ Hd).map f) := by
+      rw [← hn]
+      infer_instance
+    exact IsIso.of_isIso_comp_right (γ.app (L, M))
+      ((F ⋙ DerivedCategory.Q ⋙ Γ.rightDerivedFunctor ⋙ Hd).map f)
+  let : IsIso γ := (NatTrans.isIso_iff_isIso_app γ).mpr hγ
+  exact ⟨(asIso γ).symm ≪≫ c'⟩
 
 end CategoryTheory

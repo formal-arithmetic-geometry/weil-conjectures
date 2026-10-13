@@ -11990,3 +11990,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/T2/Sheaf.AlgebraicGeometry.AffineSheafificationTensorVanishingTest (stage 3; reviewer PASS; first push; landing 20261013T100133-L-2489242 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/T2/Sheaf.AlgebraicGeometry.GabberH0ZariskiTargetComparison (stage 3; reviewer PASS; first push; landing 20261013T100134-L-2489400 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/T2/Sheaf.AlgebraicGeometry.KInjectiveAlternatingCechAugmentationQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T100134-L-2489512 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:01 L: merged deliver/T3/Sheaf.Algebra.Homology.HomComplexHypercohomology (stage 3; reviewer PASS; first push; landing 20261013T100135-L-2489693 (interface); batch 20261013T095923; modules 2; new nodes 1)

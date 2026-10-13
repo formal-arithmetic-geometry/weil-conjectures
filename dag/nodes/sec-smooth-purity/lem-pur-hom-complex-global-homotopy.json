@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-hom-complex-global-homotopy",
+ "kind": "statement",
+ "title": "Ordinary global Hom-complex cohomology computes homotopy classes naturally",
+ "statement": "Let C be a small category with Grothendieck topology J and R a sheaf of commutative rings. Let A be its category of module sheaves [def-weil-sheaf-of-modules-category], and let L and M vary over integer-indexed cochain complexes in A [def-pc-cochain-complex-modules]. Write Γ = Hom_A(R,-) for global sections, applied termwise, and q for passage to the homotopy category (chain maps modulo homotopy). There is an additive natural isomorphism H⁰(Γ(Hom•(L,M))) ≅ Hom_K(A)(L,M), contravariant in L and covariant in M, where the sheaf Hom complex is [def-pur-hom-complex]. The left side is ordinary complex cohomology, not right-derived global sections. No boundedness, K-flatness or K-injectivity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Equation 0A8Z (sites-cohomology-equation-global-cohomology-hom-complex), degree zero; global computation in Lemma 08JA. Read at https://stacks.math.columbia.edu/tag/0A8Z and https://stacks.math.columbia.edu/tag/08JA."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the projections of [lem-sc-hom-complex-projections] to construct the additive degreewise global-cochain equivalences of [lem-pur-hom-complex-global-cochains]. Use a single family of projections for all pairs of complexes. The differential projection formula proves compatibility with the external Hom differential. The map projection formula proves compatibility with precomposition and postcomposition, since homObjMap acts on global sections by ordinary composition.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-pur-hom-complex-global-cochains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply degree-zero homology to this natural chain-complex identification. Mathlib CochainComplex.HomComplex.homologyAddEquiv identifies external Hom homology with cocycles modulo coboundaries. CohomologyClass.homAddEquiv at zero, followed by the shift-zero isomorphism, identifies this with Hom in the homotopy category. On chain-map representatives the comparison sends precomposition and postcomposition to composition, and every class has a representative; hence it is natural. Assemble with NatIso.ofComponents. Zero complexes give zero groups, and products permit unbounded complexes.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "lem-pur-hom-complex-global-cochains",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Equation 0A8Z (sites-cohomology-equation-global-cohomology-hom-complex), degree zero; global computation in Lemma 08JA. Read at https://stacks.math.columbia.edu/tag/0A8Z and https://stacks.math.columbia.edu/tag/08JA.",
+  "description": "T3: degree-zero natural version of Equation 0A8Z, expanded using the existing product projection and global cochain comparisons and Mathlib external Hom cohomology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary zeroth cohomology of global sections of sheaf Hom complex is naturally homotopy classes of chain maps",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary zeroth cohomology of global sections of sheaf Hom complex naturally equals homotopy classes of chain maps",
+   "results": "CohomologyClass.homAddEquiv, toHom_mk and leftHomologyData compute the external Hom complex only; no sheaf global-section natural comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.homologyAddEquiv",
+   "results": "External Hom-complex homology additive equivalence, without sheaf global-section comparison or bifunctor naturality.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex_global_homotopy|homologyAddEquiv|homComplex_global_cochains",
+   "results": "msearch grep finds Mathlib HomComplexCohomology.lean:216 only; repository rg finds global cochains objectwise and local-sections comparisons, no ordinary global-cohomology natural isomorphism. Blueprint search global cohomology Hom complex returns zero matches.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomComplexHypercohomology",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "The global-cochain computation in the proof of derived internal Hom, before deriving global sections: Equation 0A8Z, degree zero.",
+   "via": [
+    "lem-pur-hom-complex-hypercohomology",
+    "lem-pur-rhom-global-sections",
+    "def-pur-derived-internal-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexGlobalHomotopy",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexGlobalHomotopy.lean",
+  "declaration": "CategoryTheory.homComplex_global_homotopy",
+  "statement": "theorem homComplex_global_homotopy\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R\n    let Γ := preadditiveCoyoneda.obj (op (SheafOfModules.unit R₀))\n    let q := HomotopyCategory.quotient (SheafOfModules.{u} R₀) (ComplexShape.up ℤ)\n    Nonempty ((Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙\n        Γ.mapHomologicalComplex (ComplexShape.up ℤ) ⋙\n          HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℤ) 0) ≅\n      q.op.prod q ⋙ Functor.uncurry.obj preadditiveCoyoneda)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T100135-L-2489693",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T100135-L-2489693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
