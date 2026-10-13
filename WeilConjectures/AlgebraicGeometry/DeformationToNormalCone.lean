@@ -58,7 +58,8 @@ subscheme of `𝔸¹_B` whose underlying set is the complement of the zero secti
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`
+- `AlgebraicGeometry.Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj`
+- `AlgebraicGeometry.Scheme.Hom.normalConeData`
 -/
 
 @[expose] public section
@@ -662,13 +663,15 @@ lemma basicOpen_appLE {X' Y' : Scheme.{u}} (f : X' ⟶ Y') {W : Y'.Opens} {U : X
     X'.basicOpen (f.appLE W U e r) = U ⊓ f ⁻¹ᵁ Y'.basicOpen r := by
   rw [Scheme.Hom.appLE, CommRingCat.comp_apply, Scheme.basicOpen_res, Scheme.preimage_basicOpen]
 
-/-- **Charts along the section.** Near a point `s(b)` there are étale coordinates on `V` over `B`
-in which `s` is the origin, and on the corresponding chart `g̃` is smooth. -/
-lemma exists_chart_of_mem_range (d : ℕ) [SmoothOfRelativeDimension d g] [IsClosedImmersion s]
-    (hs : s ≫ g = 𝟙 B) (b : B) :
-    ∃ U : V.AffineZariskiSite, s b ∈ U.1 ∧ SmoothOfRelativeDimension d
-      (colimit.ι (relativeGluingData s.ker.coequifibered_toReesPresheaf).functor U ≫
-        deformationSpaceProj g s) := by
+/-- **Étale coordinates along the section.** Near a point `s(b)` there are an affine open
+`W ∋ b` of `B` and an affine open `U ⊆ g⁻¹ W` of `V` with `s⁻¹ U = W`, together with étale
+coordinates `ψ : Γ(W)[X₁, …, X_d] ⟶ Γ(U)` over `Γ(W)` generating the ideal of the section. -/
+lemma exists_etale_coordinates_of_mem_range (d : ℕ) [SmoothOfRelativeDimension d g]
+    [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) (b : B) :
+    ∃ (W : B.Opens) (_ : IsAffineOpen W) (U : V.AffineZariskiSite) (hUW : U.1 ≤ g ⁻¹ᵁ W),
+      b ∈ W ∧ s ⁻¹ᵁ U.1 = W ∧ ∃ ψ : MvPolynomial (Fin d) Γ(B, W) →+* Γ(V, U.1), ψ.Etale ∧
+        ψ.comp MvPolynomial.C = (g.appLE W U.1 hUW).hom ∧
+        s.ker.siteIdeal U = (Ideal.mvPolynomialOrigin Γ(B, W) (Fin d)).map ψ := by
   have hgs : ∀ b, g (s b) = b := fun b ↦ by rw [← Scheme.Hom.comp_apply, hs]; rfl
   obtain ⟨W₀, hW₀, U₀, hU₀, hvU₀, -, hUW₀, hQ₀⟩ :=
     exists_isStandardSmooth_appLE_basicOpen g d (s b) ⊤ trivial
@@ -701,30 +704,40 @@ lemma exists_chart_of_mem_range (d : ℕ) [SmoothOfRelativeDimension d g] [IsClo
     erw [B.presheaf.map_id]
     rfl
   obtain ⟨φ, hφf, hφ⟩ := hQ.exists_etale_mvPolynomial
-  obtain ⟨a, hσa, H⟩ := exists_smoothOfRelativeDimension_extendedReesAlgebra_of_section f.hom σ.hom
-    hσf φ hφ hφf
+  obtain ⟨a, hσa, H⟩ := exists_etale_coordinates_of_section f.hom σ.hom hσf φ hφ hφf
   have hσ : σ = s.app U ≫ B.presheaf.map (eqToHom hsU.symm).op := rfl
   have hinj : Function.Injective (B.presheaf.map (eqToHom hsU.symm).op).hom :=
     (ConcreteCategory.bijective_of_isIso _).1
   set U' := V.basicOpen a
   have hU' : IsAffineOpen U' := hU.basicOpen a
   have hU'W : U' ≤ g ⁻¹ᵁ W := (V.basicOpen_le a).trans hUW
-  refine ⟨⟨U', hU'⟩, ?_, smoothOfRelativeDimension_ι_deformationSpaceProj d ⟨U', hU'⟩ hW hU'W ?_⟩
-  · have hb : b ∈ B.basicOpen (σ a) := by
+  have := hU.isLocalization_basicOpen a
+  obtain ⟨ψ, hψ, hψf, hJ⟩ := H Γ(V, U')
+  refine ⟨W, hW, ⟨U', hU'⟩, hU'W, hbc, ?_, ψ, hψ, ?_, ?_⟩
+  · have hb : B.basicOpen (σ a) = W := by
       rw [hσa, Scheme.basicOpen_of_isUnit _ isUnit_one]
-      exact hbc
     rw [hσ, CommRingCat.comp_apply, Scheme.basicOpen_res, ← Scheme.preimage_basicOpen] at hb
-    exact hb.2
-  · have := hU.isLocalization_basicOpen a
-    have hI : s.ker.siteIdeal ⟨U', hU'⟩ =
-        (RingHom.ker σ.hom).map (algebraMap Γ(V, U) Γ(V, U')) := by
-      rw [hσ, CommRingCat.hom_comp, RingHom.ker_comp_of_injective _ hinj,
-        ← Scheme.Hom.ker_apply s ⟨U, hU⟩]
-      exact (s.ker.map_ideal_basicOpen ⟨U, hU⟩ a).symm
-    have hf : (g.appLE W U' hU'W).hom = (algebraMap Γ(V, U) Γ(V, U')).comp f.hom := by
-      rw [RingHom.algebraMap_toAlgebra, ← CommRingCat.hom_comp, Scheme.Hom.appLE_map]
-    rw [hI, hf]
-    exact H Γ(V, U')
+    refine le_antisymm ((s.preimage_mono (V.basicOpen_le a)).trans hsU.le) ?_
+    exact hb.ge.trans inf_le_right
+  · rw [hψf, RingHom.algebraMap_toAlgebra, ← CommRingCat.hom_comp, Scheme.Hom.appLE_map]
+  · rw [← hJ, hσ, CommRingCat.hom_comp, RingHom.ker_comp_of_injective _ hinj,
+      ← Scheme.Hom.ker_apply s ⟨U, hU⟩]
+    exact (s.ker.map_ideal_basicOpen ⟨U, hU⟩ a).symm
+
+/-- **Charts along the section.** Near a point `s(b)` there are étale coordinates on `V` over `B`
+in which `s` is the origin, and on the corresponding chart `g̃` is smooth. -/
+lemma exists_chart_of_mem_range (d : ℕ) [SmoothOfRelativeDimension d g] [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 B) (b : B) :
+    ∃ U : V.AffineZariskiSite, s b ∈ U.1 ∧ SmoothOfRelativeDimension d
+      (colimit.ι (relativeGluingData s.ker.coequifibered_toReesPresheaf).functor U ≫
+        deformationSpaceProj g s) := by
+  obtain ⟨W, hW, U, hUW, hbW, hsU, ψ, hψ, hψf, hI⟩ :=
+    exists_etale_coordinates_of_mem_range g s d hs b
+  refine ⟨U, ?_, smoothOfRelativeDimension_ι_deformationSpaceProj d U hW hUW ?_⟩
+  · change b ∈ s ⁻¹ᵁ U.1
+    rwa [hsU]
+  · rw [hI]
+    exact smoothOfRelativeDimension_extendedReesAlgebra_of_etale _ _ hψ hψf
 
 end Charts
 
@@ -824,53 +837,6 @@ lemma hasCompactification_deformationSpaceProj (d : ℕ) [SmoothOfRelativeDimens
   (NagataCompactification (deformationSpaceProj g s)).hasCompactification
 
 end Separated
-
-/-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
-
-**Existence of the deformation to the normal cone.** Let `g : V ⟶ B` be smooth of pure
-relative dimension `d` with a closed section `s`, and let `N_s ⟶ B` be the normal cone of `s`
-(`AlgebraicGeometry.Scheme.Hom.normalConeData`) with its zero section. Then the deformation
-datum of `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` exists, with fibre `N_s`
-over `t = 0`: the deformation space is the relative spectrum `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` of the
-extended Rees algebra of the ideal `I` of `s`. Its fibre over `t = 1` is `V` and over `t = 0` the
-normal cone, over the punctured line it is `V ×_B 𝔾_{m,B}`, and `g̃` is smooth of relative
-dimension `d`. As `g` is separated and quasi-compact over a quasi-compact quasi-separated base,
-`g̃` is separated and compactifiable.
-
-TODO: the étale-local coordinates (`exists_etale_coordinates`, clauses (2), (4) and (5)) are not
-yet constructed; the charts of `smoothOfRelativeDimension_deformationSpaceProj` are their
-Zariski-local form. -/
-theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
-    [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] [CompactSpace B]
-    [QuasiSeparatedSpace B] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
-    Nonempty (DeformationToNormalConeData d g s (normalConeData d hs)) :=
-  have := smoothOfRelativeDimension_deformationSpaceProj d g s hs
-  have hm : ((puncturedLine B).ι ≫ s.deformationSpaceSection) ≫ deformationSpaceProj g s =
-      𝟙 _ ≫ (puncturedLine B).ι := by
-    rw [Category.assoc, deformationSpaceSection_deformationSpaceProj hs, Category.comp_id,
-      Category.id_comp]
-  have P := isPullback_deformationSpaceGeneric g s
-  ⟨{ scheme := s.ker.deformationSpace
-     proj := deformationSpaceProj g s
-     sect := s.deformationSpaceSection
-     sect_comp_proj := deformationSpaceSection_deformationSpaceProj hs
-     smoothOfRelativeDimension_proj := this
-     isSeparated_proj := inferInstance
-     hasCompactification_proj := hasCompactification_deformationSpaceProj g s d hs
-     oneFibre := deformationSpaceOneFibre g s
-     isPullback_oneFibre := isPullback_deformationSpaceOneFibre g s
-     comp_oneFibre := comp_deformationSpaceOneFibre hs
-     zeroFibre := s.ker.normalConeToDeformationSpace
-     isPullback_zeroFibre := isPullback_normalConeToDeformationSpace g s
-     comp_zeroFibre := normalConeZeroSection_comp_normalConeToDeformationSpace
-     puncturedLine := puncturedLine B
-     coe_puncturedLine := coe_puncturedLine B
-     generic := deformationSpaceGeneric g s
-     isPullback_generic := P
-     exists_sect_generic := ⟨P.lift _ _ hm, by
-       rw [← deformationSpaceGeneric_toBase g s, P.lift_fst_assoc, Category.assoc,
-         deformationSpaceSection_toBase, Category.assoc], P.lift_snd _ _ _, P.lift_fst _ _ _⟩
-     exists_etale_coordinates := sorry }⟩
 
 end Scheme.Hom
 
