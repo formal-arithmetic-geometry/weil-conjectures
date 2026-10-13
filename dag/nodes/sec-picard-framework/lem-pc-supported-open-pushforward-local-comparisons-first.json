@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-supported-open-pushforward-local-comparisons-first",
+ "kind": "statement",
+ "title": "First local comparison component",
+ "statement": "Let X be a scheme, U an open, T a closed subset contained in U, and V = X minus T. With derived restriction and direct image [def-pc-derived-category, def-pc-derived-direct-image], for every adjunction restriction ⊣ R(U.ι)_* and every E whose cohomology stalks vanish outside T, the adjunction unit at E becomes invertible on both U and V.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DF (Lemma 20.33.6), restriction computations using Tags 08FE and 08BS"
+ },
+ "stmt_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Full faithfulness of open direct image and the triangle identity make restriction of the unit to U invertible. On V, supported E restricts to zero, and the open restriction/direct-image comparison identifies the other endpoint with the image of the zero restriction on U intersect V. The unit on V is therefore between zero objects. Stalkwise vanishing detects zero cohomology, and cohomology detects zero derived objects. These arguments include empty U and T.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "N1",
+  "reason": "Separate the independent unit and left/right comparison obligations in Tag 08DF; second reading supplied complete component arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of adjunction unit open immersion derived category fully faithful direct image",
+   "results": "Eight Mathlib underived restriction/direct-image hits, including restrictAdjunction and its invertible counit; no supported derived local comparison.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.isIso_map_unit",
+   "results": "No hits; unknown identifier.",
+   "date": "2026-10-13",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "supported_open_pushforward_local_comparisons|isZero.*overFunctor|overFunctor.*isZero",
+   "results": "No Mathlib hits; repository search finds the parent and its importer, and generic support-triangle arguments with extra quasi-coherence and compactness hypotheses.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate component."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived object supported on a closed subset of an open subscheme has invertible restriction of the open direct image adjunction unit and of the extension by zero comparison",
+   "results": "Service unavailable: Internal Server Error; used LeanFinder, Loogle and Mathlib grep instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedOpenPushforwardLocalComparisons",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction: supported open pushforward and recovery of supported objects; Local supported comparison maps",
+   "via": [
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-perfect-generation-open-induction-step",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedOpenPushforwardLocalComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedOpenPushforwardLocalComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.supported_open_pushforward_local_comparisons_first",
+  "statement": "theorem supported_open_pushforward_local_comparisons_first (X : Scheme.{u}) (U : X.Opens)\n    (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))\n    (V : X.Opens) (hV : (V : Set X) = Tᶜ)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] :\n    (∀ (adj : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)\n        (E : schemeDerivedCategory X),\n      (∀ (n : ℤ) (x : X), x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E).val.presheaf x))) →\n      ∀ W : X.Opens, W = U ∨ W = V →\n        IsIso ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) W).mapDerivedCategory.map (adj.unit.app E)))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T015603-L-3023568",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T015603-L-3023568",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
