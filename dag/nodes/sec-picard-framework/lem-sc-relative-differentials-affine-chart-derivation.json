@@ -1,0 +1,112 @@
+{
+ "id": "lem-sc-relative-differentials-affine-chart-derivation",
+ "kind": "statement",
+ "title": "Affine chart comparison preserves the universal derivation",
+ "statement": "Let f : X → S be a scheme morphism [def-sc-relative-differential-sheaf], U and V affine opens of X and S with U contained in the inverse image of V. There exists an isomorphism T from Ω(X/S) restricted along U.fromSpec to Ω(Spec Γ(X,U)/Spec Γ(S,V)), equal to the composite of relativeDifferentialsRestrictIso, relativeDifferentialsCongr along SpecMap_appLE_fromSpec, and relativeDifferentialsCompIso. For every b in Γ(Spec Γ(X,U), top), T inverse sends d(b) to d((U.fromSpec.appIso top) inverse b). The equality uniquely determines T; no surjectivity is asserted.",
+ "stmt_deps": [
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01UM and 01UT; Lemma 29.33.3 (01US), differential compatibility under restriction"
+ },
+ "proof": [
+  {
+   "text": "Take T to be the explicitly specified composite. Its inverse on d(b) is computed in three steps: relativeDifferentialsCompIso uses relativeDifferentialsHomEquiv_symm_app_d to preserve d; equality induction for relativeDifferentialsCongr preserves d; relativeDifferentialsToRestrict_app_d computes the inverse restriction comparison as d((fromSpec.appIso top).inv b). Compose these identities. The equality defining T is reflexivity.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S2",
+  "date": "2026-10-13",
+  "note": "Lean-level expansion of the restriction compatibility in Stacks Tag 01US (Lemma 29.33.3), used in the first sentence of the proof of Tag 01UT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "relative differentials commute with restriction along open immersions and preserve the universal derivation",
+   "results": "8 hits: PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom, AlgebraicGeometry.Scheme.Hom.appIso_hom, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom, \"relativeDifferentials\"",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials.*(Congr|CompIso|RestrictIso)|Differentials.*app_d",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of the sheaf of relative differentials preserves the universal derivation under open immersions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapSurjective",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-relative-differentials-affine-sections-map-surjective",
+   "place": "compatibility of affine-chart transport with derivations"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineChartDerivation",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDifferentialsAffineChartDerivation.lean",
+  "declaration": "AlgebraicGeometry.relativeDifferentials_affine_chart_derivation",
+  "statement": "theorem relativeDifferentials_affine_chart_derivation (f : X ⟶ S)\n    (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :\n    ∃ T : f.relativeDifferentials.restrict U.2.fromSpec ≅\n        (Spec.map (f.appLE V.1 U.1 hUV)).relativeDifferentials,\n      T = f.relativeDifferentialsRestrictIso U.2.fromSpec ≪≫\n        Scheme.Hom.relativeDifferentialsCongr _\n          (IsAffineOpen.SpecMap_appLE_fromSpec f V.2 U.2 hUV).symm ≪≫\n        Scheme.Hom.relativeDifferentialsCompIso _ _ ∧\n    ∀ b : Γ(Spec Γ(X, U.1), ⊤),\n      T.inv.val.app (op ⊤)\n        ((Spec.map (f.appLE V.1 U.1 hUV)).relativeDifferentialsDerivation.d b) =\n          f.relativeDifferentialsDerivation.d ((U.2.fromSpec.appIso ⊤).inv b)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T045600-L-136850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T045600-L-136850",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

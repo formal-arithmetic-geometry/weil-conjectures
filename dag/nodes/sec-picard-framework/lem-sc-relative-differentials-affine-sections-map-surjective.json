@@ -14,7 +14,24 @@
  ],
  "proof": [
   {
-   "text": "Use the affine comparison calculation for relative differentials to represent every section by a Kähler differential.",
+   "text": "Use the affine-chart derivation compatibility to obtain the explicitly determined comparison T and its action on d. Define the transport from sections of the restricted sheaf back to U using restrictAppIso and restriction across the equality of the chart image and U. The transport is linear by restrictAppIso_fromSpec_smul, Scheme.Modules.map_smul and functoriality.",
+   "uses": [
+    "lem-sc-relative-differentials-affine-chart-derivation",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the spectrum sections map, the inverse of T on sections, and this linear transport. relativeDifferentialsSpecΓHom_d, chart compatibility, ΓSpecIso_inv_map_appIso_inv and naturality show that it sends D(a) to d(a). The compatibility assumption he and KaehlerDifferential.ext identify it with e.",
+   "uses": [
+    "lem-sc-relative-differentials-affine-chart-derivation",
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a section y on U, restrict it to the chart image and apply restrictAppIso.inv. Lift along moduleSpecΓFunctor.map T.inv, then along relativeDifferentialsSpecΓHom; both are isomorphisms and hence surjective. The two restriction maps between U and the chart image compose to identity. Substitution into the established factorization gives e(x)=y.",
    "uses": [
     "def-sc-relative-differential-sheaf",
     "def-weil-pbc-kahler-differentials"
@@ -24,12 +41,14 @@
  ],
  "proof_deps": [
   "def-sc-relative-differential-sheaf",
-  "def-weil-pbc-kahler-differentials"
+  "def-weil-pbc-kahler-differentials",
+  "lem-sc-relative-differentials-affine-chart-derivation"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 01UT"
+  "by": "worker",
+  "group": "S2",
+  "date": "2026-10-13",
+  "note": "Explicit affine-chart transport and universal derivation extensionality; only chart derivation compatibility is split off. No unit-level route change."
  },
  "mathlib_searches": [
   {
@@ -104,12 +123,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T4",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T230803-L-1911109",
+  "landing": "20261013T045600-L-136850",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
