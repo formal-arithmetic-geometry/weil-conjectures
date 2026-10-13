@@ -1,0 +1,157 @@
+{
+ "id": "lem-sc-pseudo-coherent-fiber-bounded-above-model",
+ "kind": "statement",
+ "title": "A local bounded-above finite-free algebraic model of all derived fibre degrees",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $E\\in D(\\mathcal O_X)$ [def-pc-derived-category] a pseudo-coherent complex [def-pur-pseudo-coherent-complex], and $x\\in X$. There exist an open neighbourhood $U$ of $x$, a commutative ring $A$, a homeomorphism $e:U\\simeq\\operatorname{Spec} A$, a complex $F$ of finite free $A$-modules, and an integer $b$, with $F^n=0$ for $n>b$, such that for every integer $j$ and every $z\\in U$ the derived-fibre Betti number [def-sc-derived-fiber-betti] satisfies $\\beta_j(E,z)=\\dim_{\\kappa(e(z))}H^j(F\\otimes_A\\kappa(e(z)))$. No lower bound on $F$ is asserted.",
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI, proof, affine reduction and stupid truncation; https://stacks.math.columbia.edu/tag/0BDI"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof": [
+  {
+   "text": "At x use pseudo-coherence to obtain a bounded-above finite-free sheaf representative on an open neighbourhood. Shrink inside it to an affine open, restrict the complex and its derived isomorphism, and transport to Spec A. Open restriction preserves the free terms and upper bound. Apply affine_finiteFree_sheaf_complex_lift to obtain the bounded-above algebraic complex F, its finite-free terms and the associated-sheaf comparison.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-affine-finite-free-sheaf-complex-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every finite-free term is flat. Apply the bounded-above flat derived-pullback comparison at each residue field, factoring through the open inclusion. Evaluation on the one-point residue spectrum computes homology, and the residue-field isomorphism of the affine chart transports its scalar action. Taking finrank gives the equality for every j and z, using the same F. The sheaf-to-open-scheme and scalar transports are the outstanding glue in this node.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "def-sc-derived-fiber-betti"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-affine-finite-free-sheaf-complex-lift",
+  "lem-pc-flat-complex-derived-pullback",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI, proof, affine reduction and stupid truncation; https://stacks.math.columbia.edu/tag/0BDI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded above finite free algebraic complex locally computes derived fibers of a pseudo coherent complex",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine open a pseudo coherent complex has a bounded above complex of finite free modules whose residue field tensor homology computes derived fiber Betti numbers",
+   "results": "8 hits, including exists_appTop_map_eq_zero_of_isAffine_of_isLimit and DerivedCategory.isGE_iff; none computes these local derived fibres.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.stupidTrunc",
+   "results": "12 hits for stupidTrunc, its term isomorphisms, zero terms, and induced maps; no tensor-homology comparison or local pseudo-coherent model.",
+   "date": "2026-10-13",
+   "verdict": "components used for truncation"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.*coherent.*(fiber|fibre)|bounded.*finite.*free.*complex; stupidTrunc and homology in Mathlib AlgebraicGeometry and Algebra/Homology, and repo WeilConjectures/Sheaf",
+   "results": "No exact local model theorem. Mathlib supplies stupidTruncXIso, extend_d_eq, restriction_d_eq, ShortComplex.isoMk, homologyMapIso. The original target is the only local finite-free fibre model in Sheaf; the existing affine lift does not compute fibres. Blueprint search for finite free fibre, bounded finite free, and pseudo coherent fibre found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "components only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of pseudo coherent object to affine chart computes residue field cohomology using finite free resolution",
+   "results": "Second reader: 8 hits, affine transition-limit sections and residue_descResidueField; none gives a local representative or the required homology comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stupidTrunc\", \"homology\"",
+   "results": "Second reader: zero hits. Read StupidTrunc.lean; it supplies term isomorphisms and maps, not this residue-homology theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Rr]esidue|[Rr]esidue.*[Hh]omology|[Ff]iber.*[Mm]odel|[Ff]initeFree.*[Cc]omplex|[Pp]seudoCoherent",
+   "results": "Second reader searched lean/Sheaf and lean/WeilConjectures. Read AffinePseudoCoherentLift and KFlatStalkResidueCohomology. The former produces a sheaf lift with extra affine/compact hypotheses; the latter assumes a global K-flat representative and computes stalk extension. Neither supplies the local algebraic model. Direct-image finite-free complexes need proper-flat hypotheses.",
+   "date": "2026-10-13",
+   "verdict": "related components, no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PseudoCoherentFiberFiniteFreeModel",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BDI, proof, bounded-above finite-free affine representative before stupid truncation; local-model part of lem-sc-pseudo-coherent-fiber-finite-free-model",
+   "via": [
+    "lem-sc-pseudo-coherent-fiber-finite-free-model",
+    "lem-sc-perfect-jump-loci",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentFiberBoundedAboveModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentFiberBoundedAboveModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_pseudoCoherent_fiber_boundedAbove_model",
+  "statement": "theorem exists_pseudoCoherent_fiber_boundedAbove_model (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ x : X, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (X.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory X) (hE : IsPseudoCoherent X E) (x : X) :\n    ∃ U : X.Opens, x ∈ U ∧\n      ∃ (A : Type u) (_ : CommRing A) (e : ↥(U : Set X) ≃ₜ PrimeSpectrum A)\n        (F : CochainComplex (ModuleCat.{u} A) ℤ) (b : ℤ),\n        F.IsStrictlyLE b ∧\n        (∀ n : ℤ, Module.Free A (F.X n) ∧ Module.Finite A (F.X n)) ∧\n        ∀ (i : ℤ) (z : U), derivedFiberBetti X E i z =\n          Module.finrank (e z).asIdeal.ResidueField\n            ((((ModuleCat.extendScalars\n              (algebraMap A (e z).asIdeal.ResidueField)).mapHomologicalComplex\n                (ComplexShape.up ℤ)).obj F).homology i)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T100007-L-2463074",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T100007-L-2463074",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-bounded-finite-free-fiber-model",
+ "kind": "statement",
+ "title": "Bounded finite-free replacement for one degree of residue-field homology",
+ "statement": "Let $A$ be a commutative ring, $F$ a cochain complex of $A$-modules, $b\\in\\mathbb Z$ an upper support bound ($F^n=0$ for $n>b$), and suppose every term of $F$ is finite free. For any $i\\in\\mathbb Z$ there is a bounded complex $K$ of finite free $A$-modules such that, for every prime $p\\in\\operatorname{Spec} A$, $\\dim_{\\kappa(p)}H^i(F\\otimes_A\\kappa(p))=\\dim_{\\kappa(p)}H^i(K\\otimes_A\\kappa(p))$.",
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI, proof, affine reduction and stupid truncation; https://stacks.math.columbia.edu/tag/0BDI"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct K concretely as F.stupidTrunc of embeddingUpIntGE (i-1). Mathlib instances give lower bound i-1 and preserve the upper support bound b. This does not require i-1 <= b.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Below i-1 its terms are zero (isZero_stupidTrunc_X), hence subsingleton and finite free of rank zero. In retained degrees stupidTruncXIso is a module isomorphism to F; transport Free and Finite with Module.Free.of_equiv and Module.Finite.equiv.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use extend_d_eq and restriction_d_eq to prove the term isomorphisms commute with differentials between retained degrees. Map the term isomorphisms through extension of scalars and use map_comp to retain these commutation equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "In degrees i-1, i, i+1 these isomorphisms define a ShortComplex.isoMk. Convert from explicit to canonical indices using isoSc′. ShortComplex.homologyMapIso yields the homology isomorphism; its underlying linear equivalence has equal finrank. This establishes the desired equality at every prime.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI, proof, affine reduction and stupid truncation; https://stacks.math.columbia.edu/tag/0BDI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded above finite free algebraic complex locally computes derived fibers of a pseudo coherent complex",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine open a pseudo coherent complex has a bounded above complex of finite free modules whose residue field tensor homology computes derived fiber Betti numbers",
+   "results": "8 hits, including exists_appTop_map_eq_zero_of_isAffine_of_isLimit and DerivedCategory.isGE_iff; none computes these local derived fibres.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.stupidTrunc",
+   "results": "12 hits for stupidTrunc, its term isomorphisms, zero terms, and induced maps; no tensor-homology comparison or local pseudo-coherent model.",
+   "date": "2026-10-13",
+   "verdict": "components used for truncation"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.*coherent.*(fiber|fibre)|bounded.*finite.*free.*complex; stupidTrunc and homology in Mathlib AlgebraicGeometry and Algebra/Homology, and repo WeilConjectures/Sheaf",
+   "results": "No exact local model theorem. Mathlib supplies stupidTruncXIso, extend_d_eq, restriction_d_eq, ShortComplex.isoMk, homologyMapIso. The original target is the only local finite-free fibre model in Sheaf; the existing affine lift does not compute fibres. Blueprint search for finite free fibre, bounded finite free, and pseudo coherent fibre found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "components only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of pseudo coherent object to affine chart computes residue field cohomology using finite free resolution",
+   "results": "Second reader: 8 hits, affine transition-limit sections and residue_descResidueField; none gives a local representative or the required homology comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stupidTrunc\", \"homology\"",
+   "results": "Second reader: zero hits. Read StupidTrunc.lean; it supplies term isomorphisms and maps, not this residue-homology theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Rr]esidue|[Rr]esidue.*[Hh]omology|[Ff]iber.*[Mm]odel|[Ff]initeFree.*[Cc]omplex|[Pp]seudoCoherent",
+   "results": "Second reader searched lean/Sheaf and lean/WeilConjectures. Read AffinePseudoCoherentLift and KFlatStalkResidueCohomology. The former produces a sheaf lift with extra affine/compact hypotheses; the latter assumes a global K-flat representative and computes stalk extension. Neither supplies the local algebraic model. Direct-image finite-free complexes need proper-flat hypotheses.",
+   "date": "2026-10-13",
+   "verdict": "related components, no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PseudoCoherentFiberFiniteFreeModel",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BDI, proof, stupid truncation below i-1; algebraic part of lem-sc-pseudo-coherent-fiber-finite-free-model",
+   "via": [
+    "lem-sc-pseudo-coherent-fiber-finite-free-model",
+    "lem-sc-perfect-jump-loci",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedFiniteFreeFiberModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedFiniteFreeFiberModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_bounded_finiteFree_fiber_model",
+  "statement": "theorem exists_bounded_finiteFree_fiber_model (A : Type u) [CommRing A]\n    (F : CochainComplex (ModuleCat.{u} A) ℤ) (b : ℤ) (hb : F.IsStrictlyLE b)\n    (hfree : ∀ n : ℤ, Module.Free A (F.X n) ∧ Module.Finite A (F.X n)) (i : ℤ) :\n    ∃ K : CochainComplex (ModuleCat.{u} A) ℤ,\n      (∃ a c : ℤ, K.IsStrictlyGE a ∧ K.IsStrictlyLE c) ∧\n      (∀ n : ℤ, Module.Free A (K.X n) ∧ Module.Finite A (K.X n)) ∧\n      ∀ p : PrimeSpectrum A,\n        Module.finrank p.asIdeal.ResidueField\n          ((((ModuleCat.extendScalars (algebraMap A p.asIdeal.ResidueField)).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj F).homology i) =\n        Module.finrank p.asIdeal.ResidueField\n          ((((ModuleCat.extendScalars (algebraMap A p.asIdeal.ResidueField)).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K).homology i)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T100007-L-2463074",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T100007-L-2463074",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

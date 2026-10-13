@@ -13,8 +13,8 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.AffineFiniteFreeSheafComplexLift
+import Sheaf.AlgebraicGeometry.PseudoCoherentFiberBoundedAboveModel
+import Sheaf.AlgebraicGeometry.BoundedFiniteFreeFiberModel
 
 /-! # Finite free models for one degree of derived fibres
 
@@ -67,6 +67,14 @@ theorem exists_pseudoCoherent_fiber_finiteFree_model (X : Scheme.{u})
           Module.finrank (e z).asIdeal.ResidueField
             ((((ModuleCat.extendScalars
               (algebraMap A (e z).asIdeal.ResidueField)).mapHomologicalComplex
-                (ComplexShape.up ℤ)).obj K).homology i) := by sorry
+                (ComplexShape.up ℤ)).obj K).homology i) := by
+  obtain ⟨U, hx, A, inst, e, F, b, hb, hfree, hfiber⟩ :=
+    exists_pseudoCoherent_fiber_boundedAbove_model X E hE x
+  let := inst
+  obtain ⟨K, hbounded, hKfree, hcompare⟩ :=
+    exists_bounded_finiteFree_fiber_model A F b hb hfree i
+  refine ⟨U, hx, A, inst, e, K, hbounded, hKfree, ?_⟩
+  intro z
+  exact (hfiber i z).trans (hcompare (e z))
 
 end AlgebraicGeometry.Scheme
