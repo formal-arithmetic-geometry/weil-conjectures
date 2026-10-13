@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-formal-module-quotient-affine-projection",
+ "kind": "statement",
+ "title": "Affine formal quotient projections are surjective with ideal-power kernel",
+ "statement": "Let A be a commutative ring, I an ideal of A, and J the ideal sheaf on Spec A associated with I through ΓSpecIso. Let M be any A-module and m>0. The linear map p from M to the A-module of global sections of formalModuleQuotient J m (tilde M), defined as the tilde/global-sections unit followed by global sections of formalModuleQuotientπ, is surjective and its kernel is I^m M. This uses the explicit products, powers and cokernel of def-weil-pbc-coherent-formal-module.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01I8 and 01IC; Tag 087W in coherent.tex, affine module correspondence"
+ },
+ "proof": [
+  {
+   "text": "Identify M with Γ(Spec A, tilde M) using the tilde unit. The global ideal of ofIdealTop is I transported by ΓSpecIso. Induct on m>0: the range of the first power inclusion is J.ideal, and the successor range is J.ideal times the preceding range, giving J.ideal^m. The tensor-sections multiplication formula identifies the range of the power inclusion acting on tilde M with J.ideal^m times all its sections.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal power and its product with tilde M are quasi-coherent by induction using quasi-coherence of products. Apply the affine cokernel-image theorem to this multiplication inclusion: its cokernel projection is surjective on global sections and has kernel precisely the range computed in the first step. Transport the equality of submodules and the surjectivity through the tilde unit and ΓSpecIso. This gives exactly p and I^m M.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01I8 and 01IC; explicit positive-power induction and affine unit transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections affine quasi coherent sheaf quotient kernel ideal module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of affine sheaf quotient is module quotient by ideal power",
+   "results": "Scheme.IdealSheafData.subschemeObjIso, isLocalization_away, ofIdealTop_ideal, glueDataObj; localCohomology.ringModIdeals. None states the arbitrary-module explicit formal quotient projection comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "surject|ker|cokernel in Mathlib/AlgebraicGeometry/Modules/Tilde.lean; formalModuleQuotient.*(ker|surject) in lean/Sheaf and lean/WeilConjectures",
+   "results": "Tilde.lean provides the unit and preservation of cokernels; no exact formal quotient projection theorem. Existing ideal_times_quasiCoherent_affine_sections provides power ranges but not the full transported quotient projection statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineQuotientCone",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-formal-modules-affine-complete",
+   "place": "Tag 087W implicit converse: affine sheaf quotients correspond to module quotients; step 2 of the quotient cone node",
+   "via": [
+    "lem-weil-pbc-coherent-formal-modules-affine-complete",
+    "lem-weil-pbc-coherent-formal-modules-affine-quotient-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalModuleQuotientAffineProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalModuleQuotientAffineProjection.lean",
+  "declaration": "AlgebraicGeometry.formalModuleQuotient_affine_projection",
+  "statement": "theorem formalModuleQuotient_affine_projection\n    (A : Type u) [CommRing A] (I : Ideal A)\n    (J : (Spec (CommRingCat.of A)).IdealSheafData)\n    (hJ : J = Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom))\n    (M : ModuleCat.{u} A) (m : ℕ) (hm : 0 < m) :\n    let p := (tilde.toTildeΓNatIso (R := CommRingCat.of A)).hom.app M ≫\n      (moduleSpecΓFunctor (R := CommRingCat.of A)).map\n        (formalModuleQuotientπ J m ((tilde.functor (CommRingCat.of A)).obj M))\n    Function.Surjective p ∧ LinearMap.ker p.hom = I ^ m • (⊤ : Submodule A M)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T031553-L-3574960",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T031553-L-3574960",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

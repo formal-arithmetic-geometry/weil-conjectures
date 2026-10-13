@@ -14,40 +14,46 @@
  },
  "proof": [
   {
-   "text": "Put K=I B. Completion modulo powers identifies B/K^m with A/I^m and makes B K-adically complete. The completion is Noetherian, and the completion-tensor formula makes every finite B-module N K-adically complete. Extended-ideal powers acting on N agree with I-powers after restriction to A.",
+   "text": "Set B=AdicCompletion I A and M=N restricted to A. B is Noetherian and complete for I.map(algebraMap). Apply finite_module_complete_over_complete_noetherian to N.property, then IsAdicComplete.map_algebraMap_iff to obtain IsAdicComplete I M. No choice of new module data is made.",
    "uses": [
-    "lem-weil-pbc-module-completion-complete",
     "lem-weil-pbc-adic-completion-noetherian",
     "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "lem-weil-pbc-module-completion-complete",
     "def-weil-pbc-adic-completion"
    ],
    "elementary": false
   },
   {
-   "text": "The affine unit and ideal-product/cokernel comparison identify the explicit projections with N -> N/I^(n+1)N and transitions with reductions. Completeness gives their limit property. If r and a have equal residues, r-a belongs to K^(n+1), so (r-a)x is killed by this projection, proving the scalar formula.",
+   "text": "Apply the affine projection comparison at each n+1 to the explicitly constructed cone c. The first isomorphism theorem gives e_n:M/I^(n+1)M ≃ D_n with e_n([x])=c.π_n(x). Surjectivity of c.π_(n+1) and c.w identify the transitions through these e_n with factorPow. For each cone s set f_n=e_n.symm composed with s.π_n. Its successor compatibility follows from s.w. Apply IsAdicComplete.StrictMono.lift for a(n)=n+1. The mk_lift formula and injectivity of e_n.symm prove the cone equations; eq_lift proves uniqueness. This constructs IsLimit c, as in the private proved helper isLimit_of_complete_quotient_projections.",
    "uses": [
+    "lem-weil-pbc-formal-module-quotient-affine-projection",
     "def-weil-pbc-coherent-formal-modules-affine-quotient-cone",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-module-completion-complete"
+    "def-weil-pbc-adic-completion"
    ],
    "elementary": false
+  },
+  {
+   "text": "If evalₐ r is the residue of a, evaluation kills r-algebraMap a. The completion kernel formula puts this difference in I^(n+1) times B. Induction on ideal-module products and smul_assoc puts its product with x in I^(n+1)M. The affine projection kernel formula kills this product. Expand sub_smul and map_sub; A-linearity of the projection gives π(r*x)=a*π(x).",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-formal-module-quotient-affine-projection"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-completion-complete",
   "lem-weil-pbc-adic-completion-noetherian",
   "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-module-completion-complete",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-coherent-formal-modules-affine-quotient-cone",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+  "lem-weil-pbc-formal-module-quotient-affine-projection",
+  "def-weil-pbc-coherent-formal-modules-affine-quotient-cone"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N4",
+  "group": "U3",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 087W implicit converse; 0316, 05GG and 00MA (3); second reader constructed the cone and categorical comparison explicitly"
+  "place": "Tag 087W implicit converse; Mathlib StrictMono.lift and eq_lift; Tags 05GG and 00MA (3)"
  },
  "mathlib_searches": [
   {
@@ -121,12 +127,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T235555-L-2201710",
+  "landing": "20261013T031553-L-3574960",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
