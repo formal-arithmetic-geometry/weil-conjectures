@@ -1,0 +1,130 @@
+{
+ "id": "lem-sp-finite-cycle-derived-comparison",
+ "kind": "statement",
+ "title": "Original-g coherence with the finite derived-D lift",
+ "statement": "Let C be an abelian category and X a type-zero bigraded exact couple [def-sp-exact-couple]. Let I_n(p,q):D_n(p,q)\\to D(p,q) be a family of monomorphisms, with I_0 the identity and I_{n+1} the derived-D inclusion followed by I_n. Fix r natural and p,q integer. Suppose initialG(p,q) factors through the finite cycle subobject Z_r(p,q) [def-sp-convergence]. For any e:D(p,q)\\to D_r(p-r,q+r) whose composite with I_r(p-r,q+r) is alphaIter r(p,q), the composite of e, derived g_r, and the canonical endpoint transport to E_r(p,q) equals the factorization of initialG through Z_r followed by the canonical projection Z_r\\to E_r. No zero-D or half-plane hypothesis is required.",
+ "source": {
+  "document": "Stacks Project, homology.tex",
+  "place": "Tag 011R, lemma-derived-exact-couple, induced g; Tag 0AMJ, remark-shifted-exact-couple, induced shifted g and its footnote",
+  "external": [
+   {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
+    "place": "proof paragraph 2, original-g projection through finite successive images"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "For a type-zero bigraded exact couple X [def-sp-exact-couple], construct canonical epimorphisms e_n from original D(p,q) to D_n(p-n,q+n): at zero use the endpoint identity; at a successor use e_n and the image epimorphism of incoming alpha_n with the canonical bidegree transports. Induction on the prescribed recurrence of I and DerivedMaps.alpha_comm proves I commutes with original alpha. Thus e_n followed by I_n is alphaIter n [def-sp-convergence], using associativity and the equality of the appended and prepended recurrences. Any e in the statement equals e_n by cancellation of monic I_n.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n for the g equation. At zero the composite is initialG, and projection_zero and factorThru_arrow identify it with the stated cycle projection [def-sp-convergence]. For the successor derive the factorization through Z_n from hg through Z_(n+1) using Z_decreasing. The new factorThru followed by ofLE equals the old factorThru, because their composites with the monic arrow of Z_n both equal initialG.",
+   "uses": [
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "DerivedMaps.g_comm [def-sp-exact-couple] identifies e_(n+1) followed by g_(n+1) with transported e_n followed by gToCycles and derivedEProjection. The previous induction equality and cycleLift_comm [def-sp-convergence] say that the latter kernel lift and the new initialG factorThru followed by cycleLift have equal composites with kernel.ι. Cancel this monic inclusion, compose with derivedEProjection, and use projection_succ. Compose endpoint eqToHom maps by their equality proofs to obtain the claimed target (p,q). Replace the canonical e_n by the supplied e using the uniqueness proved in the first step.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-exact-couple"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, homology.tex",
+  "place": "K3 induction expanding the induced-g construction of Tags 011R and 0AMJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "original exact couple g map compared with finite derived g through image epimorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical epimorphism onto iterated alpha image identifies original g with derived exact couple g",
+   "results": "8 hits: CategoryTheory.ShortComplex.Exact.g_desc, CategoryTheory.ShortComplex.Exact.g_desc_assoc, CategoryTheory.ShortComplex.ShortExact.δ_eq, CategoryTheory.ShortComplex.Exact.exact_up_to_refinements, CategoryTheory.ShortComplex.SnakeInput.φ₁_L₂_f, SnakeLemma.δ'_eq, CategoryTheory.ShortComplex.SnakeInput.δ_eq, CategoryTheory.ShortComplex.Exact.desc'",
+   "date": "2026-10-13",
+   "verdict": "no exact-couple comparison match"
+  },
+  {
+   "tool": "grep",
+   "query": "ExactCouple|BigradedExactCouple|alphaIter",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact-couple comparison match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FiniteCycleKernelPresentation",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-half-plane-convergence",
+   "place": "proof paragraph 2: g_r(alpha^r y) equals the class of original g(y) in the finite cycle quotient",
+   "via": [
+    "lem-sp-finite-cycle-kernel-presentation",
+    "lem-sp-finite-page-image-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteCycleDerivedComparison",
+  "file": "lean/Sheaf/CategoryTheory/FiniteCycleDerivedComparison.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.finiteCycle_derived_comparison",
+  "statement": "theorem finiteCycle_derived_comparison (X : BigradedExactCouple C 0)\n    (I : ∀ (n : ℕ) (p q : ℤ), (X.pageCouple n).D p q ⟶ X.D p q)\n    (hI0 : ∀ p q : ℤ, I 0 p q = 𝟙 _)\n    (hIs : ∀ (n : ℕ) (p q : ℤ), I (n + 1) p q =\n      (X.pageCouple n).derivedDInclusion p q ≫ I n p q)\n    (hImono : ∀ (n : ℕ) (p q : ℤ), Mono (I n p q))\n    (r : ℕ) (p q : ℤ)\n    (hg : (X.cycleBoundaryTower.Z r p q).Factors (X.initialG p q))\n    (e : X.D p q ⟶ (X.pageCouple r).D (p - r) (q + r))\n    (he : e ≫ I r (p - r) (q + r) = X.alphaIter r p q) :\n    e ≫ (X.pageCouple r).g (p - r) (q + r) ≫\n        eqToHom (by congr 1 <;> omega) =\n      (X.cycleBoundaryTower.Z r p q).factorThru (X.initialG p q) hg ≫\n        X.cycleBoundaryTower.projection r p q",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T033004-L-3677095",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T033004-L-3677095",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

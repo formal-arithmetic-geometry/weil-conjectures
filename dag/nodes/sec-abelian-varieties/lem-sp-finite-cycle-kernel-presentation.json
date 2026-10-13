@@ -19,39 +19,47 @@
  ],
  "proof": [
   {
-   "text": "Construct the canonical epimorphisms e_n from original D(p,q) to D_n(p-n,q+n) by identity at zero and successive image epimorphisms of restricted alpha. Using pageCouple_image, compose each with the canonical monic inclusion and obtain alphaIter n by induction.",
+   "text": "Use pageCouple_image of [lem-sp-derived-couple-exact]. Identify its recursively prescribed incoming powers A with incomingAlphaIter by induction. The outgoing alphaIter r has the same image as incomingAlphaIter r at its endpoint, because their source and target transports are isomorphisms. Consequently its image equals the image of the monic I_r. Subobject.isoOfMkEqMk identifies these image domains. Compose the actual image epimorphism of alphaIter with this isomorphism to construct e, prove it epic, and prove e followed by I_r equals alphaIter. No arbitrary witness of existence is used as data.",
    "uses": [
-    "def-sp-exact-couple",
-    "lem-sp-derived-couple-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Induct on n to identify e_n followed by transported derived g with the finite factorThru(initialG) followed by projection n. At zero apply projection_zero. At a successor apply DerivedMaps.g_comm, cancel the kernel inclusion using cycleLift_comm, and apply projection_succ. The cycle arrow is mono so the chosen lift equals factorThru. The successor cycle lift restricts to the preceding one by cancellation of its cycle arrow.",
-   "uses": [
-    "def-sp-exact-couple",
+    "lem-sp-derived-couple-exact",
     "def-sp-convergence"
    ],
    "elementary": false
   },
   {
-   "text": "Exactness identifies the kernel of g_n with the incoming restricted-alpha image. Under the monic inclusion I_n its image is incomingAlphaIter(n+1), by the successor image recurrence. Pulling this back along e_n, whose inclusion composite is alphaIter n, gives the displayed kernel formula. The zero following D term makes f_n zero, hence exactness makes g_n epic. Since e_n is epic, the canonical finite cycle map is epic.",
+   "text": "Apply [lem-sp-finite-cycle-derived-comparison] to this e to identify e followed by transported derived g with the prescribed initialG lift followed by the finite cycle projection.",
+   "uses": [
+    "lem-sp-finite-cycle-derived-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At the endpoint (p-r,q+r), exact_g identifies the kernel of derived g with the incoming restricted-alpha image. Its monic pushforward along I_r is the image of I_(r+1), by the successor recurrence and cancellation of the epic alpha-image factorization. The pageCouple_image equality identifies this with incomingAlphaIter(r+1). Mathlib pullback_equalizer, specialized to g and zero, proves ker(e followed by g) is the pullback of ker(g) along e. Pullback composition and pullback_map_self for monic I_r now give the asserted pullback along alphaIter r.",
    "uses": [
     "def-sp-exact-couple",
+    "def-sp-convergence",
     "lem-sp-derived-couple-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "The zero following D term makes the following f zero. Exact_f therefore says image(g) is top. The image inclusion kills the cokernel projection, so cancellation of the top arrow makes that projection zero; Abelian.epi_of_cokernel_pi_eq_zero proves g epic. Its composite with the constructed epic e and the endpoint isomorphism is epic. Combine this with the kernel identity.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-convergence",
   "def-sp-exact-couple",
-  "lem-sp-derived-couple-exact"
+  "lem-sp-derived-couple-exact",
+  "lem-sp-finite-cycle-derived-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
-  "place": "proof paragraph 2; Y3 expansion of the finite intrinsic kernel and normalized colimit calculation"
+  "place": "K3: image-isomorphism construction of the epic finite-D lift; exact_f and exact_g yield the quotient presentation; only original-g coherence is split off"
  },
  "mathlib_searches": [
   {
@@ -122,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T011939-L-2767212",
+  "landing": "20261013T033004-L-3677095",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
