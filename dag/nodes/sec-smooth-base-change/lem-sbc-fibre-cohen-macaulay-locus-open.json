@@ -20,21 +20,57 @@
  },
  "proof": [
   {
-   "text": "Cover the base by affine opens and then the inverse images by affine source opens. The flat locally finitely presented morphism on each such affine chart is a flat finitely presented ring map. Its fibres are of finite type over residue fields, hence locally Noetherian. The local ring at the point of a chart fibre agrees with the scheme fibre stalk.",
-   "uses": [],
+   "text": "Prove preservation of self-module depth under local ring isomorphisms directly from the definition: the maximal ideal maps to the maximal ideal, and mapping a regular sequence along the isomorphism preserves regularity and length. Apply both directions and antisymmetry to the suprema defining depth. Krull dimension is invariant under ring isomorphisms by Mathlib.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
    "elementary": false
   },
   {
-   "text": "For the flat finitely presented affine algebra, Tag 00RI gives an open fibre Cohen-Macaulay locus. In these Noetherian local fibre rings the self-module Cohen-Macaulay condition of Tag 00N8 is precisely that regular-sequence depth equals Krull dimension. Thus the depth-equals-dimension locus is open on every affine chart. The chart opens agree because the condition is a property of the fibre local ring; their union is the desired locus. This is also the argument of Tag 045U (1), (2). The empty source gives the empty open set.",
-   "uses": [],
+   "text": "For a source open immersion i:U to X, form the pullback map from the fibre of i followed by f to the corresponding fibre of f. It is an open immersion by MorphismProperty.pullbackMap. Its composite with the original fibre inclusion is the source fibre inclusion followed by i, so it sends asFiber x to asFiber (i x), by injectivity of the original fibre inclusion. Its stalk map is an isomorphism. Apply the first step to obtain equivalence of the two depth-equals-dimension conditions. This is fibre_locus_source_iff in Lean.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a base open immersion i:V to T, pull f back along i. Mathlib isPullback_fiberToSpecResidueField_of_isPullback gives the pullback square on scheme fibres. The residue-field map of an open immersion is an isomorphism, so its base change identifies the two fibres. Transport the base point by the pullback commutativity equation, check the image of asFiber using the fibre inclusions, and apply the induced stalk isomorphism and the first step. This is fibre_locus_base_iff in Lean.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "When the base is affine, cover the source by its Mathlib affineCover. The composites of the cover maps with f are flat and locally of finite presentation, with affine source and target. Apply the affine fibre-locus theorem to each composite and the source comparison from the second step. Each preimage of the desired locus is open. The locus equals the union of the images of these preimages because the cover is jointly surjective. Each image is open because the cover map is an open immersion.",
+   "uses": [
+    "lem-sbc-affine-fibre-cohen-macaulay-locus-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary base, pull back its affineCover along f. Each pullback morphism to the affine cover member is flat and locally of finite presentation by stability under base change, so the previous step applies. The base comparison from the third step identifies its locus with the preimage of the original locus under the source cover map. Again the locus is the union of open images of open preimages under this jointly surjective open cover. This argument also covers the empty source or base: the union is empty.",
+   "uses": [
+    "lem-sbc-affine-fibre-cohen-macaulay-locus-open"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-module-stalk",
+  "lem-sbc-affine-fibre-cohen-macaulay-locus-open"
+ ],
  "proof_origin": {
-  "by": "agent P3",
+  "by": "agent U2",
   "document": "Stacks Project",
-  "place": "Tag 045U (1), (2), following its affine input Tag 00RI; the depth formulation uses Tag 00N8."
+  "place": "Tag 045U (1), (2): affine-cover reduction. The source and base fibre comparisons, ring-isomorphism invariance of depth, and open-cover gluing are proved directly from Mathlib in Lean; Tag 00RI remains the separate affine input."
  },
  "mathlib_searches": [
   {
@@ -115,9 +151,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T142900-L-499040",
+  "landing": "20261013T145125-L-697701",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

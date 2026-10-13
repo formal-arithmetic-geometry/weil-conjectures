@@ -1,0 +1,159 @@
+{
+ "id": "lem-sbc-affine-fibre-cohen-macaulay-locus-open",
+ "kind": "statement",
+ "title": "Openness of the fibre Cohen-Macaulay locus between affine schemes",
+ "statement": "Let $X,T$ be affine schemes [def-pc-scheme; def-weil-affine-spectrum], meaning schemes isomorphic to spectra of commutative rings. Let $f:X\\to T$ be flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. The set of points $y\\in X$ where the depth [def-weil-pbc-depth] of the local ring of the fibre $X_{f(y)}$ at $y$ [def-pc-scheme-fibre; def-weil-pbc-module-stalk] equals its Krull dimension [def-weil-pbc-krull-dimension-ring] is open in $X$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00RI and 00RH (affine openness), 00N8 (Cohen-Macaulay self-module); https://stacks.math.columbia.edu/tag/00RI and https://stacks.math.columbia.edu/tag/00RH, read 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-depth",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Identify the affine schemes with Spec B and Spec A. The coordinate map A to B is flat and finitely presented. At q over p, the fibre stalk is B_q tensor_A kappa(p). This is a Noetherian local ring: it is a localization of the finite-type kappa(p)-algebra B tensor_A kappa(p). In this local ring the self-module Cohen-Macaulay condition is equality of depth and Krull dimension. The locus is empty if B is the zero ring.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-pbc-depth",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a point q of the Cohen-Macaulay locus, let d be the dimension of its fibre at q. The quasi-finite-over-polynomial theorem, Tag 00QE, supplies a principal neighborhood and a quasi-finite A-algebra map A[t_1,...,t_d] to its coordinate ring. On the fibre over p the map from the polynomial local ring to B_q tensor_A kappa(p) is flat: the polynomial local ring is regular, the target is Cohen-Macaulay, the closed fibre is zero-dimensional by quasi-finiteness, and their dimensions agree by the finite-type dimension formula and equality of residue-field transcendence degrees (the residue extension is finite). Thus miracle flatness applies. This is the forward implication of Tag 00RE, with its dimension check explicitly included.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+    "lem-weil-pbc-miracle-flatness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize A at p and the polynomial ring at the prime below q. The local maps are essentially of finite presentation, B_q is nonzero and finitely presented as a module over itself, it is A_p-flat, and the preceding step gives flatness on the closed fibre. Apply the fibrewise flatness criterion, Tag 00R7, to obtain flatness of B_q over the polynomial local ring. The coordinate map from the polynomial ring is finitely presented (adjoin its finitely many prescribed variable images to a finite presentation of B over A). Openness of flatness, Tag 00RC, supplies a further principal neighborhood on which this map is flat.",
+   "uses": [
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-openness-of-flatness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every prime r in that neighborhood, base change the polynomial map to kappa(r intersect A) and localize. This is a flat local map from a regular polynomial local ring, with Artinian closed fibre by quasi-finiteness. A regular system of parameters of the source remains regular in the target by flatness; its quotient is zero-dimensional. The depth formula gives target depth equal to source dimension, and the local dimension formula gives target dimension equal to source dimension because the closed fibre has dimension zero. Thus the fibre local ring is Cohen-Macaulay. This is the reverse implication in Tag 00RE. The principal neighborhood is contained in the desired locus, so the locus is the union of such open neighborhoods; transport back along the affine scheme isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-depth",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-criterion-flatness-fibre",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 00RI and 00RH, with the affine identifications in 045U (1), (2); proof in words follows the read sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Cohen Macaulay locus in fibres of a flat finitely presented algebra is open",
+   "date": "2026-10-13",
+   "results": "8 hits: Algebra.HasGoingDown.of_flat, Algebra.isOpen_smoothLocus, PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, Algebra.isOpen_unramifiedLocus, RingHom.Flat.ofLocalizationPrime, Module.freeLocus_eq_univ, RingHom.Flat.propertyIsLocal, Module.isOpen_freeLocus",
+   "verdict": "No fibre Cohen-Macaulay openness theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|cohen.?macaulay",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No fibre Cohen-Macaulay openness theorem found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre Cohen Macaulay locus of a flat finitely presented morphism between affine schemes is open",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: the fibre Cohen-Macaulay locus input used in the generic fibre shrinking route; specifically the affine openness input in the proof of lem-sbc-fibre-cohen-macaulay-locus-open (Tag 00RI).",
+   "via": [
+    "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "lem-sbc-restricted-fibre-cohen-macaulay-locus-open",
+    "lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk",
+    "lem-sbc-flat-fibre-dimension-strata-core",
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-sbc-flat-fibre-component-dimension-specialization-open",
+    "lem-sbc-flat-fibre-component-dimension-specialization",
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFibreCohenMacaulayLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFibreCohenMacaulayLocus.lean",
+  "declaration": "AlgebraicGeometry.isOpen_fibre_depth_eq_ringKrullDim_of_isAffine",
+  "statement": "theorem isOpen_fibre_depth_eq_ringKrullDim_of_isAffine\n    {X T : Scheme.{u}} [IsAffine X] [IsAffine T]\n    (f : X ⟶ T) [Flat f] [LocallyOfFinitePresentation f] :\n    IsOpen {y : X |\n      (IsLocalRing.depth (R := (f.fiber (f y)).presheaf.stalk (f.asFiber y))\n        ((f.fiber (f y)).presheaf.stalk (f.asFiber y)) : WithBot ℕ∞) =\n          ringKrullDim ((f.fiber (f y)).presheaf.stalk (f.asFiber y))}",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T145125-L-697701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T145125-L-697701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
