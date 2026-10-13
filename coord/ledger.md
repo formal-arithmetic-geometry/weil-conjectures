@@ -11586,3 +11586,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:26 L: returned deliver/E3/Sheaf.RingTheory.ComparisonMapBaseChangeSystem (reviewer RETURN: (reviewer X-aec48, head aec48f28c) E1/E2 (brief point 4): RingHom.exists_comparison_map_base_change_system remains false)
 - 07:27 L: returned deliver/W2/Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation (reviewer RETURN: (reviewer X-4596e, head 4596e600b) H4 (stage 3 §3, one definition per notion): in lean/Sheaf/AlgebraicGeometry/HigherDir)
 - 07:28 L: returned deliver/A3/Sheaf.Algebra.Homology.RingTensorCohomology (reviewer RETURN: (reviewer X-3cba1, head 3cba1206c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Rin)
+- 07:29 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeSquare (reviewer RETURN: (reviewer X-c9328, head c9328e27f) B2: Four new node statements are not self-contained. In dag/nodes/sec-picard-framewor)
