@@ -1,0 +1,136 @@
+{
+ "id": "lem-etale-proper-derived-direct-image-adjoint",
+ "kind": "statement",
+ "title": "Right adjoint to proper étale derived direct image with finite coefficients",
+ "statement": "Let X and Y be schemes and g : X → Y a proper morphism. Let Λ be a finite commutative ring. On the ordinary unbounded derived categories of étale sheaves of Λ-modules of [def-weil-pbc-derived-categories], the total right derived functor Rg_* of the sheaf direct image admits a right adjoint. Neither X nor Y is assumed Noetherian or quasi-compact.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean",
+  "place": "docstring of isLeftAdjoint_rightDerivedLowerShriek, proper factor; Stacks Project Tag 0F5Y, injectives-proposition-brown",
+  "external": [
+   {
+    "document": "https://stacks.math.columbia.edu/tag/0F5Y",
+    "place": "Proposition 19.15.2, injectives-proposition-brown"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Work on a quasi-compact affine open of Y. Properness makes its inverse image quasi-compact and quasi-separated. Finite type gives a finite bound e for geometric fibre dimensions. Proper base change and the torsion cohomological-dimension theorem give R^q g_* F = 0 for q > 2e. The geometric fibres are quasi-compact and quasi-separated, so their cohomology commutes with filtered colimits. The stalk formula and conservative geometric stalks imply that all higher direct images commute with filtered colimits and hence with coproducts.",
+   "uses": [
+    "cor-weil-pbc-geometric-fiber-finite",
+    "thm-sc-finite-type-torsion-cd",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-amplitude unbounded coproduct argument on each affine open. The restriction of derived direct image to such an open is the derived direct image of the restricted proper map: restriction to an open is exact and preserves injectives, because it has an exact extension-by-zero left adjoint. Thus the global coproduct comparison restricts to an isomorphism on every affine open. Restriction detects isomorphisms of cohomology sheaves, and therefore of derived objects; hence Rg_* preserves coproducts globally. This argument needs only local finite amplitude, not a uniform global fibre-dimension bound.",
+   "uses": [
+    "lem-exc-direct-image-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source is the unbounded derived category of a Grothendieck abelian category of étale module sheaves. Apply Stacks Project Tag 0F5Y, injectives-proposition-brown, to the exact coproduct-preserving Rg_*. Objectwise representability of Hom(Rg_*(-), K), followed by Yoneda, gives its right adjoint. This is the remaining Brown-representability part of the proper-factor argument.",
+   "uses": [
+    "lem-grothendieck-derived-brown-right-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-weil-pbc-geometric-fiber-finite",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-exc-direct-image-coproducts",
+  "lem-grothendieck-derived-brown-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean",
+  "place": "docstring of isLeftAdjoint_rightDerivedLowerShriek, proper factor; Stacks Project Tag 0F5Y, injectives-proposition-brown"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper derived direct image admits a right adjoint for etale torsion sheaves",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image for a proper morphism of schemes with finite torsion coefficients admits a right adjoint",
+   "results": "Eight hits for underived module pushforward and pullback adjunctions; none gives the required exceptional adjoint.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftAdjoint\"",
+   "results": "IsLeftAdjoint, Adjunction.isLeftAdjoint and Functor.isLeftAdjoint_comp are available; no geometric proper-derived adjoint.",
+   "verdict": "composition tool found",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|IsLeftAdjoint.*rightDerived|rightDerived.*IsLeftAdjoint",
+   "results": "Mathlib search returned irrelevant Brown-name hits; local rg found only compactly-generated Brown representability, not the Grothendieck-abellian version.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proof, first paragraph: extension by zero followed by proper derived direct image and Brown representability"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProperDerivedDirectImageAdjoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProperDerivedDirectImageAdjoint.lean",
+  "declaration": "AlgebraicGeometry.Etale.isLeftAdjoint_proper_rightDerivedLowerStar",
+  "statement": "theorem isLeftAdjoint_proper_rightDerivedLowerStar\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsProper g] :\n    (R((g)_*[ModuleCat.{u + 1} Λ])).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4c761",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T150349-L-808767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4c761",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T150349-L-808767",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet and compile successfully; signatures, DAG records, sorry inventory, report, and axioms satisfy the stage-3 review rules."
+ }
+}

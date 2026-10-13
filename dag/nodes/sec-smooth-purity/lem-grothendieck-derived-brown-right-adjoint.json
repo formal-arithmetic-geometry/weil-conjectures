@@ -1,0 +1,112 @@
+{
+ "id": "lem-grothendieck-derived-brown-right-adjoint",
+ "kind": "statement",
+ "title": "Grothendieck derived Brown right adjoint",
+ "statement": "Let A be a Grothendieck abelian category [def-sp-grothendieck-abelian], D(A) its ordinary unbounded derived category [def-weil-abstract-derived-category], and T a triangulated category [def-weil-triangulated-category]. An exact functor F : D(A) → T that preserves arbitrary set-indexed coproducts admits a right adjoint. Coproducts and Hom sets are understood in a common indexing universe; no compact generation of D(A), boundedness, or geometric hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F5Y",
+  "place": "Proposition 19.15.2, injectives-proposition-brown"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "for each target object Y, the additive functor H(W) = Hom(F(W), Y) is cohomological by exactness and takes coproducts to products. The Grothendieck Brown argument represents H as follows. Present the abelian category by the Gabriel-Popescu exact localization L from modules over a ring R. Its derived right adjoint RG is fully faithful and L RG is the identity. The functor H L is represented by a module complex E, by Brown representability for the compact generator R. In the triangle M → E → RG(L(E)) → M[1], L(M) = 0, so Hom(M, E) = H(L(M)) = 0. Thus E → RG(L(E)) is a split monomorphism. Via the localization adjunction, H is consequently a natural direct summand of Hom(-, L(E)). The derived category is idempotent complete, so this summand is represented. Finally Yoneda assembles the representing objects for all Y into a functor and the natural representing bijections give the right adjunction. This is the argument of Tags 0F5X and 0F5Y; no compact-generation assertion for D(A) is used.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0F5Y",
+    "place": "injectives-proposition-brown, proof, with the representability argument of Tag 0F5X"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0F5Y",
+  "place": "injectives-proposition-brown"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Brown representability right adjoint Grothendieck abelian unbounded derived category",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact coproduct preserving functor from the unbounded derived category of a Grothendieck abelian category has a right adjoint",
+   "results": "Eight hits: abelian transfer, Ext maps, HasExt and exact derived functors; none is the adjoint criterion.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGrothendieckAbelian\", \"IsLeftAdjoint\"",
+   "results": "Only IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, an underived module embedding adjunction.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|brown|grothendieckDerived_hasRightAdjoint",
+   "results": "Mathlib gives only irrelevant name matches. Local DAG/source search gives compactly generated Brown results, not Grothendieck derived Brown. No existing node with Tag 0F5X or this theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proof, first paragraph: Brown representability for the proper derived direct image",
+   "via": [
+    "lem-etale-proper-derived-direct-image-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckDerivedBrownRightAdjoint.lean",
+  "declaration": "CategoryTheory.grothendieckDerived_hasRightAdjoint",
+  "statement": "theorem grothendieckDerived_hasRightAdjoint\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    {D : Type uD} [Category.{vD} D] [HasZeroObject D] [HasShift D ℤ]\n    [Preadditive D]\n    [∀ n : ℤ, (shiftFunctor D n).Additive]\n    [Pretriangulated D] [IsTriangulated D]\n    [HasCoproducts.{max w vA vD} D]\n    (F : DerivedCategory A ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]\n    [HasCoproducts.{max w vA vD} (DerivedCategory A)]\n    (hF : ∀ I : Type (max w vA vD),\n      PreservesColimitsOfShape (Discrete I) F) :\n    F.IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4c761",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T150349-L-808767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4c761",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T150349-L-808767",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet and compile successfully; signatures, DAG records, sorry inventory, report, and axioms satisfy the stage-3 review rules."
+ }
+}

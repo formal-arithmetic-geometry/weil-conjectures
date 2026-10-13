@@ -1,0 +1,118 @@
+{
+ "id": "lem-etale-lower-shriek-adjoint-from-compactification",
+ "kind": "statement",
+ "title": "Ambient exceptional adjoint by composition of compactification factors",
+ "statement": "Let X and Y be schemes, f : X → Y a morphism admitting a compactification, and Λ a finite commutative ring. The functor Rf_! on ordinary unbounded derived categories of étale Λ-module sheaves is a left adjoint. Here Rf_! is exactly the source-library functor D(i_!) ⋙ Rg_* for the chosen compactification (i,g).",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean",
+  "place": "isLeftAdjoint_rightDerivedLowerShriek and its docstring"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Let c be HasCompactification.compactification f. The source-library openImmersionLowerShriekAdjunction gives i_! ⊣ restriction. The exactness instances for i_! and the existing mapDerivedCategoryRightDerivedAdjunction give D(i_!) ⊣ R(restriction); hence D(i_!) is a left adjoint. These are direct applications of existing library declarations, without any new geometric input.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The proper morphism c.g has a derived direct image that is a left adjoint by lem-etale-proper-derived-direct-image-adjoint.",
+   "uses": [
+    "lem-etale-proper-derived-direct-image-adjoint"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold the chosen-compactification definition of Rf_!. It is D(i_!) ⋙ Rg_*. Functor.isLeftAdjoint_comp combines the two left-adjoint instances, proving the original instance unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-etale-proper-derived-direct-image-adjoint"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean",
+  "place": "isLeftAdjoint_rightDerivedLowerShriek and its docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper derived direct image admits a right adjoint for etale torsion sheaves",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image for a proper morphism of schemes with finite torsion coefficients admits a right adjoint",
+   "results": "Eight hits for underived module pushforward and pullback adjunctions; none gives the required exceptional adjoint.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftAdjoint\"",
+   "results": "IsLeftAdjoint, Adjunction.isLeftAdjoint and Functor.isLeftAdjoint_comp are available; no geometric proper-derived adjoint.",
+   "verdict": "composition tool found",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|IsLeftAdjoint.*rightDerived|rightDerived.*IsLeftAdjoint",
+   "results": "Mathlib search returned irrelevant Brown-name hits; local rg found only compactly-generated Brown representability, not the Grothendieck-abellian version.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proof, first paragraph: extension by zero followed by proper derived direct image and Brown representability"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean",
+  "declaration": "AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek",
+  "statement": "instance isLeftAdjoint_rightDerivedLowerShriek [Finite Λ] :\n    (R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4c761",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T150349-L-808767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4c761",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T150349-L-808767",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet and compile successfully; signatures, DAG records, sorry inventory, report, and axioms satisfy the stage-3 review rules."
+ }
+}

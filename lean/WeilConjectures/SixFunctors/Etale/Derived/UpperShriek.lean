@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
+import Sheaf.AlgebraicGeometry.EtaleProperDerivedDirectImageAdjoint
+
 /-!
 
 # Derived Upper Shriek
@@ -94,10 +96,17 @@ cohomological dimension, locally on `Y` bounded by twice the fibre dimension of 
 cohomology sheaves commute with filtered colimits, so `Rg_*` preserves coproducts on the
 unbounded derived category. Brown representability for the derived category of the
 Grothendieck abelian category of étale sheaves of `Λ`-modules (Stacks `0F5Y`) then gives the
-right adjoint [SGA 4, Exp. XVIII, Thm 3.1.4]. -/
+right adjoint [SGA 4, Exp. XVIII, Thm 3.1.4].
+(blueprint: lem-etale-lower-shriek-adjoint-from-compactification) -/
 instance isLeftAdjoint_rightDerivedLowerShriek [Finite Λ] :
-    (R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint :=
-  sorry
+    (R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint := by
+  let c := HasCompactification.compactification f
+  let := (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+    (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} Λ) c.i)).isLeftAdjoint
+  let := isLeftAdjoint_proper_rightDerivedLowerStar Λ c.g
+  change (((c.i)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategory ⋙
+    ((c.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor).IsLeftAdjoint
+  infer_instance
 
 end TorsionCoefficients
 
@@ -164,6 +173,9 @@ lemma plus_rightDerivedUpperShriek_obj [HasBoundedBelowUpperShriek A f]
 below objects. The second half holds because `Rf_!` has finite cohomological amplitude, bounded
 by twice the fibre dimension of the compactification: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}`
 then `Rf^!` sends `D^{≥ 0}` into `D^{≥ -N}`, by adjunction [SGA 4, Exp. XVIII, 3.1.7]. -/
+-- STATEMENT-DISPUTED: fibre dimensions need not have a uniform global bound.
+-- The proper map ⨿ₙ Pⁿ → ⨿ₙ Spec ℂ has Rf^! Λ of cohomological degrees -2n.
+-- Thus a degree-zero object can have an exceptional inverse image outside D⁺.
 instance hasBoundedBelowUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
   plus_rightDerivedUpperShriek_obj := sorry
