@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-closed-fibre-interior-component",
+ "kind": "statement",
+ "title": "Common component and dimension at a closed fibre interior point",
+ "statement": "Let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion], $f:X\\to T$ any scheme morphism, and $z\\in Z$. Suppose that the point $f.\\operatorname{asFiber}(i(z))$ of the ordinary fibre [def-pc-scheme-fibre] is a generic point [def-sc-generic-point] of an irreducible component [def-weil-irreducible-components] and belongs to the interior of the inverse image of $i(Z)$ in this fibre. Then $z$, as a point of the fibre of $f\\circ i$, is generic in an irreducible component of that fibre, and the local topological dimensions [def-kun-topological-dimension-at-point] of the two fibres at these points are equal.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054X, second proof paragraph, common component point and equality of special-fibre dimensions."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical map of ordinary fibres by pullback.map. Pullback pasting shows that it is a base change of i, hence a closed immersion. Scheme.Pullback.range_map identifies its range with the inverse image of i(Z). The map sends the fibre point of z to the fibre point of i(z).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a closed embedding j and a point a whose image is component generic, the image of every irreducible set containing closure {a} is contained in closure {j(a)} by component maximality. Closedness identifies the latter closure with the image of closure {a}; injectivity then gives maximality of closure {a}. This is the private, proved component_of_embedding lemma.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For an embedding, preimages of target open neighbourhoods give dim_a(source) <= dim_j(a)(target). In the reverse direction, represent a source open as a preimage of a target open, intersect the target open with the interior of the range, and compare dimensions via the embedding onto its range. This proves the private local_dimension_eq_of_embedding_interior lemma without any sorry. Apply it to the closed fibre immersion.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 054X, second proof paragraph, common component point and equality of special-fibre dimensions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|generalizingMap",
+   "digest": "b912c55e623a78b5",
+   "date": "2026-10-13",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean",
+   "verdict": "no exact match; supporting topology and flatness APIs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented morphism, relative local dimension is preserved by a generalization of a generic point of a fibre component",
+   "digest": "5094b270eca2b0c7",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.Flat, AlgebraicGeometry.UniversallyOpen.of_flat",
+   "verdict": "no exact match; supporting topology and flatness APIs only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nowhere dense closed subscheme of a scheme locally of finite type over a field has strictly smaller local dimension at every point",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subset with nonempty interior in a noetherian sober space contains a generic point of an irreducible component",
+   "digest": "673c87f5162b7662",
+   "date": "2026-10-13",
+   "results": "8 hits: QuasiSober.sober, IsIrreducible.isGenericPoint_genericPoint, quasiSober_iff, genericPoints.ofComponent, genericPoints.isGenericPoint_ofComponent, genericPoints.component, IsIrreducible.genericPoint, IsIrreducible.closure_genericPoint",
+   "verdict": "no exact match; supporting topology and flatness APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "dimAt|KrullDim.*[Ll]t|[Ll]t.*KrullDim",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no exact match; supporting topology and flatness APIs only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatClosedFibreInterior",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: spreading the generic closed-fibre geometry; the Tag 054X density argument after the generic-flatness preparation. Specifically: Common component and dimension at a closed fibre interior point.",
+   "via": [
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedFibreInteriorComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedFibreInteriorComponent.lean",
+  "declaration": "AlgebraicGeometry.common_fibre_component_dimension_of_mem_interior",
+  "statement": "theorem common_fibre_component_dimension_of_mem_interior\n    {Z X T : Scheme.{u}} (f : X ⟶ T) (i : Z ⟶ X) [IsClosedImmersion i]\n    (z : Z)\n    (hinterior : f.asFiber (i z) ∈\n      interior ((f.fiberι (f (i z))) ⁻¹' Set.range i))\n    (hcomponent : f.asFiber (i z) ∈ genericPoints (f.fiber (f (i z)))) :\n    (i ≫ f).asFiber z ∈ genericPoints ((i ≫ f).fiber ((i ≫ f) z)) ∧\n      topologicalKrullDimAt ((i ≫ f).asFiber z) =\n        topologicalKrullDimAt (f.asFiber (i z))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T111901-L-3055754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T111901-L-3055754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

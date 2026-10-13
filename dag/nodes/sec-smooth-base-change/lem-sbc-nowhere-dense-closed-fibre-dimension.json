@@ -1,0 +1,143 @@
+{
+ "id": "lem-sbc-nowhere-dense-closed-fibre-dimension",
+ "kind": "statement",
+ "title": "Strict local dimension drop in a nowhere dense closed fibre",
+ "statement": "Let $f:X\\to T$ be locally of finite type and quasi-compact [def-weil-finite-type-morphism], let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion], and let $t\\in T$. Suppose the inverse image of $i(Z)$ in the ordinary fibre $X_t$ [def-pc-scheme-fibre] has empty interior. For every $z\\in Z$ with $(f\\circ i)(z)=t$, the local topological dimension [def-kun-topological-dimension-at-point] of $Z_t$ at $z$ is strictly smaller than the local topological dimension of $X_t$ at $i(z)$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054X, final dimension contradiction; Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field) and Tag 00OS, local dimension and finite type domain dimension."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Work in an affine neighbourhood of i(z) in the finite type scheme X_t over the residue field. Its closed inverse image in Z_t is affine and finite type over the same field. The affine local-dimension component formula expresses the dimension at each point as the maximum of the dimensions of components through that point.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each closed-fibre component maps to a closed irreducible subset of an ambient component. Empty interior excludes equality with an ambient component, since the finite union of the other ambient components has open complement meeting that component. Append the ambient component to a maximal irreducible chain in the proper closed subset to obtain a strict dimension inequality.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The closed-fibre component dimensions are bounded strictly by dimensions of ambient components through i(z). Finite type over a field gives finite dimensions, and there are finitely many components. Taking the finite attained maximum and using locality gives the asserted strict inequality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dimension-at-point-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 054X, final dimension contradiction; Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field) and Tag 00OS, local dimension and finite type domain dimension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|generalizingMap",
+   "digest": "b912c55e623a78b5",
+   "date": "2026-10-13",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean",
+   "verdict": "no exact match; supporting topology and flatness APIs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented morphism, relative local dimension is preserved by a generalization of a generic point of a fibre component",
+   "digest": "5094b270eca2b0c7",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.Flat, AlgebraicGeometry.UniversallyOpen.of_flat",
+   "verdict": "no exact match; supporting topology and flatness APIs only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nowhere dense closed subscheme of a scheme locally of finite type over a field has strictly smaller local dimension at every point",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subset with nonempty interior in a noetherian sober space contains a generic point of an irreducible component",
+   "digest": "673c87f5162b7662",
+   "date": "2026-10-13",
+   "results": "8 hits: QuasiSober.sober, IsIrreducible.isGenericPoint_genericPoint, quasiSober_iff, genericPoints.ofComponent, genericPoints.isGenericPoint_ofComponent, genericPoints.component, IsIrreducible.genericPoint, IsIrreducible.closure_genericPoint",
+   "verdict": "no exact match; supporting topology and flatness APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "dimAt|KrullDim.*[Ll]t|[Ll]t.*KrullDim",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no exact match; supporting topology and flatness APIs only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatClosedFibreInterior",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: spreading the generic closed-fibre geometry; the Tag 054X density argument after the generic-flatness preparation. Specifically: Strict local dimension drop in a nowhere dense closed fibre.",
+   "via": [
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NowhereDenseClosedFibreDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/NowhereDenseClosedFibreDimension.lean",
+  "declaration": "AlgebraicGeometry.fibre_dimension_lt_of_closed_interior_eq_empty",
+  "statement": "theorem fibre_dimension_lt_of_closed_interior_eq_empty\n    {Z X T : Scheme.{u}} (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]\n    (i : Z ⟶ X) [IsClosedImmersion i] (t : T)\n    (h : interior ((f.fiberι t) ⁻¹' Set.range i) = ∅)\n    (z : Z) (hz : (i ≫ f) z = t) :\n    topologicalKrullDimAt ((i ≫ f).asFiber z) <\n      topologicalKrullDimAt (f.asFiber (i z))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T111901-L-3055754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T111901-L-3055754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
