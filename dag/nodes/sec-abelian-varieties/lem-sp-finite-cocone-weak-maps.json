@@ -21,22 +21,51 @@
  ],
  "proof": [
   {
-   "text": "Use the finite diagonal tail bounds to propagate isomorphisms and zero terms through the canonical derived-couple recursion, then form stationary greatest-lower-bound and least-upper-bound subobjects.",
+   "text": "Extract the upper zero and invertible left tails from hA. Apply finiteCocone_limitCycles to identify L.Z with image initialG, and finiteCocone_limitBoundaries to identify L.B with the direct image of the transported cocone kernel.",
+   "uses": [
+    "lem-sp-finite-cocone-limit-cycles",
+    "lem-sp-finite-cocone-limit-boundaries",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The initial-g image equality makes its factorization into L.Z epic; composing with the cokernel projection gives an epic toPageInfinity. The image projection and cokernel projection defining toGradedPiece are epic. For a quotient B <= Z, its pulled-back kernel is B because a mono is the kernel of its cokernel.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove pullback of the direct image of S along f equals ker f sup S: lift along the image epimorphism after an epimorphic refinement, subtract the S-lift, factor the difference through ker f, and descend the resulting containment by cancellation of the refinement epi. The opposite inclusion is the image-pullback adjunction and the zero kernel composite.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness identifies ker initialG with the incoming alpha image. The cocone equation sends this image to the next cocone image. The two quotient-kernel calculations therefore give ker initialG sup ker j and ker j sup ker initialG. Commutativity of sup gives identical kernels and assembles WeaklyConvergesTo.",
    "uses": [
     "def-sp-exact-couple",
     "def-sp-convergence"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-exact-couple",
-  "def-sp-convergence"
+  "lem-sp-finite-cocone-limit-cycles",
+  "lem-sp-finite-cocone-limit-boundaries",
+  "def-sp-convergence",
+  "def-sp-abelian",
+  "lem-sp-abelian-refinements",
+  "def-sp-exact-couple"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 012W"
+  "place": "Tag 011T boundary formula and Tag 012W finite-tail argument; abelian quotient/kernel reduction written by F2, checked in the second reading."
  },
  "mathlib_searches": [
   {
@@ -100,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T225338-L-1815821",
+  "landing": "20261013T022412-L-3212499",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

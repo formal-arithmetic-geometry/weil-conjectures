@@ -1,0 +1,127 @@
+{
+ "id": "lem-sp-finite-cocone-limit-cycles",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Finite-filtration convergence argument: upper-tail stationary cycles, as used in the canonical quotient comparison",
+   "via": [
+    "thm-sp-spectral-object-yields-canonical-pages",
+    "lem-sp-finite-cocone-exact-couple",
+    "lem-sp-finite-cocone-weak-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "FiniteCoconeLimitCycles",
+ "statement": "For a type-zero bigraded exact couple [def-sp-exact-couple], any limiting subobjects L [def-sp-convergence], and a regular cycle tower, if on every total-degree diagonal the D terms vanish for all sufficiently large first indices, then L.Z(p,q) equals the image of the transported initial g at every integer bidegree (p,q).",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 011T and 012W"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Use the uniquely prescribed image/inclusion families of pageCouple_image_prefix. Induct on r with projection_zero, projection_succ, cycleLift_comm and DerivedMaps.f_comm to identify projection_r followed by f_r and I_r with the cycle inclusion followed by initial f.",
+   "uses": [
+    "lem-sp-derived-couple-image-prefix",
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose r so the incoming r-fold alpha source at (p+2,q-1) lies beyond the zero bound on total degree p+q+1. The image identity and monicity force I_r=0. The preceding equation forces initial f to vanish on Z_r, hence on L.Z by its GLB property. Exactness, with type-zero transports, gives L.Z <= ker f = im initialG. The theorem g_factors_limitCycles gives the reverse inequality.",
+   "uses": [
+    "lem-sp-derived-couple-image-prefix",
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-derived-couple-image-prefix",
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 011T finite cycle/boundary formulas; Tag 012W finite-tail motivation. Direct proof/expanded induction written by F2; sources read online in second reading because literature is absent locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact couple limiting cycles equal image of g when incoming alpha iterates eventually have zero source",
+   "results": "Related generic exactness/snake lemmas: HomologicalComplex.cycles_left_exact, CategoryTheory.ComposableArrows.Exact.opcyclesIsoCycles_hom_fac, CategoryTheory.ComposableArrows.IsComplex.opcyclesToCycles_fac, CategoryTheory.ComposableArrows.IsComplex.cokerToKer'_fac, HomologicalComplex.image_to_eq_image, HomologicalComplex.HomologySequence.composableArrows₃_exact, CategoryTheory.ComposableArrows.Exact.cokerToKer', CategoryTheory.ComposableArrows.Exact.opcyclesIsoCycles_hom_fac_assoc",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exact couple\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundar.*alpha|alpha.*boundar|exactCouple",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact couple finite tails limiting cycles and boundaries",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FiniteCoconeWeakMaps",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteCoconeLimitCycles",
+  "file": "lean/Sheaf/CategoryTheory/FiniteCoconeLimitCycles.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.finiteCocone_limitCycles",
+  "statement": "theorem finiteCocone_limitCycles\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (X : BigradedExactCouple C 0) (L : X.LimitSubobjects) (hreg : X.IsRegular)\n    (hzero : ∀ n : ℤ, ∃ b : ℤ, ∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P)))\n    (p q : ℤ) : L.Z p q = imageSubobject (X.initialG p q)",
+  "branch": "sheaf-dag",
+  "date": "2026-10-13",
+  "existing": false,
+  "by": "F2"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T022412-L-3212499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T022412-L-3212499",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
