@@ -15,26 +15,28 @@
  },
  "proof": [
   {
-   "text": "The restriction square is cartesian and the affine chart is an isomorphism, so g is proper by stability of properness under base change and composition. Restriction preserves coherence by its local definition, or by quasi-coherence and finite type on the locally Noetherian restricted scheme.",
+   "text": "Properness of the restricted morphism and its composition with the affine chart is supplied by Mathlib instances. LocallyOfFiniteType.isLocallyNoetherian makes X locally Noetherian. Apply isCoherent_iff_isQuasicoherent_and_isFiniteType to F, restrict quasi-coherence by Mathlib and finite type by the proved finiteType_restrict helper in QuasicoherentFiniteTypeAffine (through import all), then apply the same criterion on V.toScheme.",
    "uses": [
-    "pqf-lem-coherent-ft-locnoeth"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "On the affine scheme U.toScheme, compare ideals on the top open using Scheme.IdealSheafData.ext_of_isAffine. The formula ideal_comap_of_isOpenImmersion computes the top ideal of J.comap U.ι as J(U) transported by the restriction ring isomorphism; ofIdealTop_ideal computes the top ideal of the spectrum ideal as I.map (ΓSpecIso R).inv.hom. The isoSpec appTop identity identifies these ring transports. Finally comap_comp and the restriction-square equation V.ι ≫ f = (f ∣_ U) ≫ U.ι identify the two comaps on Z. This is the affine ideal correspondence of Tags 01I8 and 01IC specialized to the given chart; no ideal-product assertion is used here.",
+   "text": "Identify J.comap U.ι with the spectrum ideal comapped along hU.isoSpec.hom using ext_of_isAffine. Compute both top ideals by ideal_comap_of_isOpenImmersion. Turn the comap along the inverse ring isomorphism into a map by Ideal.map_comap_of_equiv. Expand ofIdealTop_ideal and compose ideal maps. The formula appIso_hom, naturality, and isoSpec_hom_appTop cancel ΓSpecIso with its inverse. All remaining presheaf maps represent the unique inclusion U.ι(image top) into U; J.map_ideal gives equality. Apply comap_comp and morphismRestrict_ι to deduce the displayed equality on V.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Pushforward over U evaluates F on f^(-1)U. The restriction top isomorphism identifies these sections with global sections of P. The formula for the affine chart appTop identifies the g-induced R-action, giving a. This uses only the section formula for restriction, not formal functions.",
+   "text": "Construct affineRestrictionSectionsIso for arbitrary X-modules, with no coherence or properness hypothesis. Its underlying additive components are M.presheaf.mapIso of the equality V.ι(image top)=V. The proved affine_restriction_appTop helper identifies the R-action; map_comp_smul and smul_restrictAppIso_hom prove linearity. Naturality follows from the naturality of the underlying presheaf morphism. Taking the component at F supplies a. All data are explicit restriction maps, with no choice from an existence statement.",
    "uses": [
     "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": true
   },
   {
-   "text": "For every exponent, use the proved restrictionQuotientIso and restrictionQuotientIso_pi helpers in TorsionControlledFormalRestriction through import all: restriction preserves ideal products, powers and cokernels, and the cokernel comparison is characterized by its quotient projection. Taking sections gives b_n and its displayed equation. The proved restrictionCompletionIso assembles these maps into b; alternatively cancel each quotient epimorphism to prove the transition squares.",
+   "text": "Use the proved restrictionCompletionIso and restrictionQuotientIso_π helpers in TorsionControlledFormalRestriction through import all. Whisker restrictionCompletionIso with G, reassociate, whisker the inverse section comparison with the original completion system, and reassociate again to obtain b. At each level combine G.map of the two quotient maps with functoriality, apply restrictionQuotientIso_π, then use naturality of the section comparison and cancel its hom with its inverse. This proves the required projection equation without invoking formal functions, limits, or the torsionControlled_formal_restriction theorem.",
    "uses": [
     "lem-weil-pbc-torsion-controlled-formal-restriction"
    ],
@@ -43,6 +45,7 @@
  ],
  "proof_deps": [
   "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "lem-weil-pbc-torsion-controlled-formal-restriction"
  ],
@@ -135,10 +138,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T062531-L-735837",
-  "kind": "interface",
+  "landing": "20261013T082348-L-1637046",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

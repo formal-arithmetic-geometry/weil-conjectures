@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import all Sheaf.AlgebraicGeometry.TorsionControlledFormalRestriction
+import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # The affine restriction dictionary for formal functions
 
@@ -23,6 +26,47 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
+private theorem affine_restriction_appTop {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (U : Y.Opens) (hU : IsAffineOpen U) :
+    (Scheme.ΓSpecIso Γ(Y, U)).inv ≫ ((f ∣_ U) ≫ hU.isoSpec.hom).appTop =
+      f.app U ≫ X.presheaf.map (eqToHom (f ⁻¹ᵁ U).ι_image_top).op := by
+  rw [Scheme.Hom.comp_appTop, IsAffineOpen.isoSpec_hom_appTop,
+    ← Category.assoc, Iso.inv_hom_id_assoc]
+  rw [morphismRestrict_appTop]
+  simp only [Scheme.Opens.topIso_inv]
+  rw [← Category.assoc, Scheme.Hom.naturality]
+  simp only [Category.assoc, ← Functor.map_comp]
+  congr 2
+
+private noncomputable def affineRestrictionSectionsIso {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (U : Y.Opens) (hU : IsAffineOpen U) :
+    Scheme.Modules.pushforward f ⋙ SheafOfModules.evaluation Y.ringCatSheaf (op U) ≅
+      Scheme.Modules.restrictFunctor (f ⁻¹ᵁ U).ι ⋙
+        (RingedSpace.globalSectionsFunctor (f ⁻¹ᵁ U).toScheme.toRingedSpace ⋙
+          ModuleCat.restrictScalars
+            ((Scheme.ΓSpecIso Γ(Y, U)).inv ≫ ((f ∣_ U) ≫ hU.isoSpec.hom).appTop).hom) := by
+  let V := f ⁻¹ᵁ U
+  refine NatIso.ofComponents (fun M ↦ ModuleCat.isoMk
+    (M.presheaf.mapIso (eqToIso V.ι_image_top).op) ?_) ?_
+  · intro r
+    change M.presheaf.map (eqToHom V.ι_image_top).op ≫
+      (M.restrict V.ι).smul
+        (((Scheme.ΓSpecIso Γ(Y, U)).inv ≫ ((f ∣_ U) ≫ hU.isoSpec.hom).appTop).hom r) =
+      M.smul ((f.app U).hom r) ≫ M.presheaf.map (eqToHom V.ι_image_top).op
+    rw [affine_restriction_appTop]
+    have hr := Scheme.Modules.smul_restrictAppIso_hom V.ι M ⊤
+      ((f.app U ≫ X.presheaf.map (eqToHom V.ι_image_top).op).hom r)
+    simp only [Scheme.Modules.restrictAppIso, Iso.refl_hom, Category.comp_id,
+      Category.id_comp, Scheme.Opens.ι_appIso, Iso.refl_inv] at hr
+    erw [hr]
+    exact (M.map_comp_smul (eqToHom V.ι_image_top) ((f.app U).hom r)).symm
+  · intro M N t
+    apply (Functor.map_injective (forget₂ (ModuleCat Γ(Y, U)) Ab))
+    change t.app V ≫ N.presheaf.map (eqToHom V.ι_image_top).op =
+      M.presheaf.map (eqToHom V.ι_image_top).op ≫ t.app (V.ι ''ᵁ ⊤)
+    exact (t.mapPresheaf.naturality _).symm
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The affine chart identifies the original sections and quotient system with the
 sections and quotient system of the restricted proper morphism to a spectrum.
 This is a finite-level dictionary; it asserts no completion or limit isomorphism.
@@ -69,6 +113,85 @@ theorem formalFunctions_affine_restriction_dictionary
         ∃ b : formalCompletionSystem K P ⋙ G ≅ T ⋙ E,
           ∀ n : ℕ, a.hom ≫ G.map (formalModuleQuotientπ K (n + 1) P) ≫
             b.hom.app (op n) = E.map ((Scheme.Modules.pushforward f).map
-              (formalModuleQuotientπ (J.comap f) (n + 1) F.obj)) := by sorry
+              (formalModuleQuotientπ (J.comap f) (n + 1) F.obj)) := by
+  dsimp only
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have hproper : IsProper ((f ∣_ U) ≫ hU.isoSpec.hom) := inferInstance
+  have hcoh : RingedSpace.IsCoherent (f ⁻¹ᵁ U).toScheme.toRingedSpace
+      ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ U).ι).obj F.obj) := by
+    have hF := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+      X F.obj).mp F.property
+    have : F.obj.IsQuasicoherent := hF.1
+    have : F.obj.IsFiniteType := hF.2
+    exact (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType _ _).mpr
+      ⟨inferInstance, Scheme.Modules.finiteType_restrict _ _⟩
+  have hideal : (J.comap f).comap (f ⁻¹ᵁ U).ι =
+      (Scheme.IdealSheafData.ofIdealTop
+        ((J.ideal ⟨U, hU⟩).map (Scheme.ΓSpecIso Γ(Y, U)).inv.hom)).comap
+        ((f ∣_ U) ≫ hU.isoSpec.hom) := by
+    let Q := Scheme.IdealSheafData.ofIdealTop
+      ((J.ideal ⟨U, hU⟩).map (Scheme.ΓSpecIso Γ(Y, U)).inv.hom)
+    have hc : J.comap U.ι = Q.comap hU.isoSpec.hom := by
+      let : IsAffine U.toScheme := hU
+      apply Scheme.IdealSheafData.ext_of_isAffine
+      rw [Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion,
+        Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion]
+      simp only [Scheme.Opens.ι_appIso, Iso.refl_inv]
+      change (J.ideal ⟨U.ι ''ᵁ ⊤, _⟩).comap (RingHom.id Γ(Y, U.ι ''ᵁ ⊤)) =
+        (Q.ideal ⟨hU.isoSpec.hom ''ᵁ ⊤, _⟩).comap
+          (hU.isoSpec.hom.appIso ⊤).inv.hom
+      simp only [Ideal.comap_id]
+      have hu : U.ι ''ᵁ ⊤ = U := U.ι_image_top
+      change _ = (Q.ideal ⟨hU.isoSpec.hom ''ᵁ ⊤, _⟩).comap
+        (hU.isoSpec.hom.appIso ⊤).commRingCatIsoToRingEquiv.symm.toRingHom
+      erw [← Ideal.map_comap_of_equiv
+        (hU.isoSpec.hom.appIso ⊤).commRingCatIsoToRingEquiv]
+      simp only [Q, Scheme.IdealSheafData.ofIdealTop_ideal, Ideal.map_map,
+        ← CommRingCat.hom_comp]
+      change J.ideal ⟨U.ι ''ᵁ ⊤, _⟩ = (J.ideal ⟨U, hU⟩).map
+        ((Scheme.ΓSpecIso Γ(Y, U)).inv ≫
+          (Spec Γ(Y, U)).presheaf.map (homOfLE le_top).op ≫
+          (hU.isoSpec.hom.appIso ⊤).hom).hom
+      rw [Scheme.Hom.appIso_hom]
+      rw [Scheme.Hom.naturality_assoc]
+      rw [show hU.isoSpec.hom.app ⊤ = hU.isoSpec.hom.appTop from rfl,
+        IsAffineOpen.isoSpec_hom_appTop]
+      simp only [Category.assoc, Iso.inv_hom_id_assoc, Scheme.Opens.topIso_inv,
+        Scheme.Opens.toScheme_presheaf_map, ← Functor.map_comp]
+      convert (J.map_ideal
+        (U := ⟨U.ι ''ᵁ ⊤, (isAffineOpen_top U.toScheme).image_of_isOpenImmersion U.ι⟩)
+        (V := ⟨U, hU⟩) hu.le).symm using 1
+      congr 3
+    change (J.comap f).comap (f ⁻¹ᵁ U).ι = Q.comap _
+    rw [← Scheme.IdealSheafData.comap_comp,
+      ← morphismRestrict_ι, Scheme.IdealSheafData.comap_comp, hc,
+      ← Scheme.IdealSheafData.comap_comp]
+  refine ⟨hproper, hcoh, hideal, ?_⟩
+  have hF := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    X F.obj).mp F.property
+  have : F.obj.IsQuasicoherent := hF.1
+  let V := f ⁻¹ᵁ U
+  let R := Scheme.Modules.restrictFunctor V.ι
+  let G := RingedSpace.globalSectionsFunctor V.toScheme.toRingedSpace ⋙
+    ModuleCat.restrictScalars
+      ((Scheme.ΓSpecIso Γ(Y, U)).inv ≫ ((f ∣_ U) ≫ hU.isoSpec.hom).appTop).hom
+  let E := SheafOfModules.evaluation Y.ringCatSheaf (op U)
+  let S := formalCompletionSystem (J.comap f) F.obj
+  let e := affineRestrictionSectionsIso f U hU
+  let c := restrictionCompletionIso (J.comap f) F.obj V
+  let b := Functor.isoWhiskerRight c G ≪≫ Functor.associator S R G ≪≫
+    Functor.isoWhiskerLeft S e.symm ≪≫
+    (Functor.associator S (Scheme.Modules.pushforward f) E).symm
+  refine ⟨e.app F.obj, b, ?_⟩
+  intro n
+  change e.hom.app F.obj ≫ G.map (formalModuleQuotientπ ((J.comap f).comap V.ι)
+      (n + 1) (R.obj F.obj)) ≫
+      G.map (restrictionQuotientIso (J.comap f) F.obj V (n + 1)).hom ≫
+      e.inv.app (formalModuleQuotient (J.comap f) (n + 1) F.obj) = _
+  rw [← Category.assoc (G.map _) (G.map _) (e.inv.app _),
+    ← G.map_comp, restrictionQuotientIso_π]
+  rw [← Category.assoc]
+  erw [← e.hom.naturality]
+  simp
 
 end AlgebraicGeometry
