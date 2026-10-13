@@ -15,48 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Filter E by successive stupid truncations between its lower and upper bounds. The inclusions have single-term finite-free quotients and split in every degree. Precomposition in the Hom-complex bifunctor therefore gives short exact sequences of Hom complexes. The differential formula in def-pur-hom-complex makes these maps chain maps. This is a finite induction; terms outside the finite interval are zero.",
+   "text": "Prove by induction on the nonnegative width d of a support interval [a,a+d]. At d=0 the source is supported in one degree, so single_supported_finiteFree_hom_qc proves the assertion. Finite freeness is only needed on the support interval.",
    "uses": [
-    "def-pur-hom-complex"
+    "lem-sc-single-supported-finite-free-hom-qc"
    ],
    "elementary": false
   },
   {
-   "text": "For a source concentrated in one degree with finite free term O^r, the Hom complex is a shift of r copies of I. Finite-free internal Hom is naturally a finite direct sum and is exact; its cohomology is the corresponding finite direct sum of H^j(I). Finite sums of quasi-coherent sheaves are quasi-coherent. This includes r=0.",
+   "text": "At the successor step, take the actual stupid tail T = E.stupidTrunc(embeddingUpIntGE(a+1)). The tail has width d: outside its embedding range its terms are zero, and inside its range stupidTruncXIso identifies them with E. These isomorphisms also preserve the finite-free identifications. Apply the induction hypothesis to T. The established exists_homComplex_stupid_tail_shortExact applied to the identity of I gives a short exact sequence with end terms isomorphic to Hom(single(E^a,a),I) and Hom(T,I), and middle term isomorphic to Hom(E,I). The first end has quasi-coherent cohomology by the one-column lemma, and the other by induction.",
    "uses": [
-    "lem-sc-finite-free-internal-hom-exact",
-    "lem-weil-pbc-quasi-coherent-module-direct-sum"
+    "def-pur-hom-complex",
+    "lem-pc-stupid-tail-hom-short-exact",
+    "lem-sc-single-supported-finite-free-hom-qc"
    ],
    "elementary": false
   },
   {
-   "text": "Use the long exact cohomology sequence of each degreewise split short exact sequence of Hom complexes. For a short exact sequence A -> B -> C of Hom complexes, the long exact sequence gives 0 -> coker(delta^(n-1)) -> H^n(B) -> ker(delta^n) -> 0, where delta^(n-1): H^(n-1)(C) -> H^n(A) and delta^n: H^n(C) -> H^(n+1)(A) are the connecting maps. Thus the cokernel is the subobject and the kernel is the quotient. Kernel, cokernel and extension closure of quasi-coherent sheaves proves the induction step. Transport through the exact equivalence between the localized sheaf-of-modules site over U and sheaves of modules on U.toScheme; quasi-coherence is preserved in both directions since presentations correspond. The induction ends after the finite number of source degrees, regardless of target bounds.",
+   "text": "Use localized_complex_qc_homology_extension to conclude for the middle term, and transport through the homology functor applied to the arrow-source isomorphism. For arbitrary bounds a,b, set d=(b-a).toNat; support outside [a,a+d] follows from the original bound by integer arithmetic. This also handles b<a and zero support without requiring a separate zero-complex theorem.",
    "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
-    "lem-pc-quasi-coherent-extension",
-    "def-pc-derived-category"
+    "lem-sc-localized-complex-qc-homology-extension"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-category",
   "def-pur-hom-complex",
-  "lem-pc-quasi-coherent-extension",
-  "lem-sc-finite-free-internal-hom-exact",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
-  "lem-weil-pbc-quasi-coherent-module-direct-sum",
-  "lem-weil-pbc-quasi-coherent-module-kernel"
+  "lem-pc-stupid-tail-hom-short-exact",
+  "lem-sc-localized-complex-qc-homology-extension",
+  "lem-sc-single-supported-finite-free-hom-qc"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "D2",
+  "by": "agent",
+  "group": "T1",
   "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Explication of the finite-source case of Tag 0A6H (2) by the finite-column Hom calculation of Tag 08I5."
+  "place": "Tag 0A6H (2), implemented finite-source induction using Tag 08I5 and long exact cohomology."
  },
  "mathlib_searches": [
   {
@@ -136,9 +129,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T031533-L-3569021",
+  "landing": "20261013T100128-L-2487707",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

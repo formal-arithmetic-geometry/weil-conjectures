@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-single-supported-finite-free-homology-iso",
+ "kind": "statement",
+ "title": "Cohomology of Hom from a single supported finite free complex",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an open, and $E,I$ integer-indexed complexes of module sheaves on the localized open site [def-weil-sheaf-of-modules-category]. Fix integers $k,n$. Suppose $E^i=0$ for every $i\\ne k$, and choose an isomorphism $E^k\\cong\\mathcal O_U^{\\oplus r}$ with $r\\in\\mathbf N$. Then $H^n(\\mathcal Hom^\\bullet(E,I))\\cong\\bigoplus_{\\mathrm{Fin}(r)}H^{k+n}(I)$ [def-pur-hom-complex]. No boundedness or quasi-coherence of $I$ is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08I5, finite-free column calculation in the proof; Tag 0A8X, product Hom differential."
+ },
+ "proof": [
+  {
+   "text": "Use the product-limit projections supplied by homComplex_projections_exists. All factors except source degree k are zero, since internal Hom from zero is zero. Construct the inverse to projection by a product lift with the identity in degree k and zero in the other degrees. The fan uniqueness principle proves both inverse identities. The source differential E.d k (k+1) is zero because E^(k+1) is zero, so the differential formula identifies the three-term Hom complex at n with internal Hom from E^k applied to the three-term target complex at k+n.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Internal Hom from the chosen finite free module is additive and preserves short exact sequences by finiteFreeInternalHomExact. Mathlib Functor.exact_tfae converts this to preservation of homology. Transport homology through the three-term complex isomorphism using homologyIsoSc', ShortComplex.homologyMapIso and mapHomologyIso. Finally precompose with the finite-free identification and use the proved source-library homObjFreeIso and the finite biproduct/coproduct isomorphism. Rank zero is covered by the same finite biproduct calculation.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 08I5, finite-free column calculation in the proof; Tag 0A8X, product Hom differential.",
+  "description": "Implemented and compiled in Lean from the cited calculation and existing proved library tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cohomology of a finite free one-term sheaf Hom complex is a finite direct sum of target cohomology",
+   "results": "Service unavailable: Internal Server Error. Supplemented with LeanFinder, Loogle and local source searches.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex supported in a single degree with finite free term has internal Hom cohomology isomorphic to a finite direct sum of target cohomology",
+   "results": "Eight hits: external cochain single-complex equivalences and sheaf/group cohomology tools; no matching internal sheaf Hom theorem or localized quasi-coherent cohomology closure theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.mapHomologyIso",
+   "results": "Unknown identifier ShortComplex.mapHomologyIso in service index; local source confirms and supplies it. No exact theorem found by the service.",
+   "date": "2026-10-13",
+   "verdict": "ingredients, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObjFreeIso|homologyIsoSc.|prop_of_exact_of_exact_of_exact",
+   "results": "Mathlib homologyIsoSc', ShortComplex.mapHomologyIso, exact_tfae, homology_exact₁/₂/₃; source homObjFreeIso, isQuasicoherent_sigma, kernel/cokernel closure; library five-term object-property lemma and extension closure. Read their signatures and used them.",
+   "date": "2026-10-13",
+   "verdict": "ingredients used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeHomComplexQCCohomology",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-column proof of quasi-coherence of Hom from a bounded finite free complex",
+   "via": [
+    "lem-sc-finite-free-hom-complex-qc-cohomology",
+    "new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc-cohomology",
+    "new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc",
+    "lem-sc-rhom-supported-qcoherent-pseudo-part",
+    "lem-sc-rhom-supported-qcoherent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleSupportedFiniteFreeHomologyIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleSupportedFiniteFreeHomologyIso.lean",
+  "declaration": "AlgebraicGeometry.single_supported_finiteFree_homology_iso",
+  "statement": "theorem single_supported_finiteFree_homology_iso\n    (X : Scheme.{u}) (U : X.Opens)\n    (E I : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (k : ℤ) (hE : ∀ i : ℤ, i ≠ k → IsZero (E.X i))\n    (r : ℕ) (hfree : E.X k ≅ SheafOfModules.free\n      (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin r))) (n : ℤ) :\n    Nonempty (((homComplex (R := X.toRingedSpace.sheaf.over U) E I).homology n) ≅\n      ∐ (fun _ : ULift.{u} (Fin r) ↦ I.homology (k + n)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100128-L-2487707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100128-L-2487707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-localized-complex-qc-homology-extension",
+ "kind": "statement",
+ "title": "Extension closure of quasi-coherent cohomology on a localized open site",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an open, and $0\\to A\\to B\\to C\\to0$ a short exact sequence of integer-indexed complexes of module sheaves on the localized open site over $U$ [def-weil-sheaf-of-modules-category]. If every $H^j(A)$ and $H^j(C)$ is quasi-coherent [pqf-def-coherent], then every $H^n(B)$ is quasi-coherent. None of the complexes need be bounded.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 0117 (long exact cohomology sequence) and 01IE (extension closure); kernel and cokernel closure on the open subscheme."
+ },
+ "proof": [
+  {
+   "text": "Transport the exact five-term cohomology sequence to U.toScheme through Scheme.Modules.overEquiv. The equivalence and its inverse preserve quasi-coherence: both are pushforwards along continuous equivalences of localized open sites and carry the unit module to the unit module.",
+   "uses": [
+    "def-pc-derived-category",
+    "pqf-def-coherent",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the quasi-coherent object property on U.toScheme.Modules. Kernel, cokernel and extension closure give its weak Serre-class instances. Use the proved ObjectProperty.prop_of_exact_of_exact_of_exact on the transported five terms H^(n-1)(C), H^n(A), H^n(B), H^n(C), H^(n+1)(A). This is the cokernel-as-subobject and kernel-as-quotient argument. Transport the result back by the inverse equivalence and its unit isomorphism.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-pc-quasi-coherent-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-quasi-coherent-extension",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0117 (long exact cohomology sequence) and 01IE (extension closure); kernel and cokernel closure on the open subscheme.",
+  "description": "Implemented and compiled in Lean from the cited calculation and existing proved library tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quasi-coherent cohomology is closed under short exact sequences of complexes on a scheme",
+   "results": "Service unavailable: Internal Server Error. Supplemented with LeanFinder, Loogle and local source searches.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-coherent cohomology of the middle complex in a short exact sequence of complexes of module sheaves when both end complexes have quasi-coherent cohomology",
+   "results": "Eight hits: external cochain single-complex equivalences and sheaf/group cohomology tools; no matching internal sheaf Hom theorem or localized quasi-coherent cohomology closure theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.homology_exact₂",
+   "results": "The service returned CategoryTheory.ShortComplex.ShortExact.homology_exact₂ in Mathlib.Algebra.Homology.HomologySequence. Read the signature and used it with homology_exact₁ and homology_exact₃.",
+   "date": "2026-10-13",
+   "verdict": "ingredients, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology_exact.|isQuasicoherent_sigma|isQuasicoherent_of_shortExact",
+   "results": "Mathlib homologyIsoSc', ShortComplex.mapHomologyIso, exact_tfae, homology_exact₁/₂/₃; source homObjFreeIso, isQuasicoherent_sigma, kernel/cokernel closure; library five-term object-property lemma and extension closure. Read their signatures and used them.",
+   "date": "2026-10-13",
+   "verdict": "ingredients used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeHomComplexQCCohomology",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-column proof of quasi-coherence of Hom from a bounded finite free complex",
+   "via": [
+    "lem-sc-finite-free-hom-complex-qc-cohomology",
+    "new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc-cohomology",
+    "new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc",
+    "lem-sc-rhom-supported-qcoherent-pseudo-part",
+    "lem-sc-rhom-supported-qcoherent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedComplexQCHomologyExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedComplexQCHomologyExtension.lean",
+  "declaration": "AlgebraicGeometry.localized_complex_qc_homology_extension",
+  "statement": "theorem localized_complex_qc_homology_extension\n    (X : Scheme.{u}) (U : X.Opens)\n    (S : ShortComplex (CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ))\n    (hS : S.ShortExact)\n    (h₁ : ∀ i : ℤ, (S.X₁.homology i).IsQuasicoherent)\n    (h₃ : ∀ i : ℤ, (S.X₃.homology i).IsQuasicoherent) (n : ℤ) :\n    (S.X₂.homology n).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100128-L-2487707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100128-L-2487707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
