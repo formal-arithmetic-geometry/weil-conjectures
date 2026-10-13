@@ -10,27 +10,62 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct local algebraizations on a finite affine cover from the componentwise annihilation hypothesis, then glue the compatible maps and completion isomorphisms.",
+   "text": "Cover X by all affine opens. Construct Hlocal as the actual restriction of H, with its coherence obtained from locality. Restrict N by the explicit termwise formal restriction functor. Each open subscheme is Noetherian because its topology is a subspace of the Noetherian space X.",
    "uses": [
-    "lem-weil-pbc-formal-systems-annihilated-by-power"
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0889(1), reduction to affine opens"
+   }
   },
   {
-   "text": "Take a common positive upper bound for the local exponents; ideal-power monotonicity transfers the local annihilation to the coherent global kernel and cokernel.",
+   "text": "Choose the canonical quotient-projection-normalized comparison on each open using the restriction dictionary. Its bound clause gives the restricted component kernel and cokernel annihilation with the original exponent t.",
    "uses": [
-    "lem-weil-pbc-formal-systems-annihilated-by-power"
+    "lem-weil-pbc-torsion-controlled-formal-restriction"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 0887 and 0888"
+   }
+  },
+  {
+   "text": "Apply the affine algebraization theorem to each restricted coherent formal map. Forget the full-subcategory inclusion of beta and apply congrArg to the underlying natural transformation in its factorization equation; this provides precisely the local triples needed for descent.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-affine-algebraization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0889(1), affine construction"
+   }
+  },
+  {
+   "text": "Apply descent to the actual open cover, restricted coherent modules, canonical comparisons and supplied local triples, obtaining the global factorization and common positive annihilation exponent.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-algebraization-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0889(1), Zariski descent"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-formal-systems-annihilated-by-power"
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-torsion-controlled-formal-restriction",
+  "lem-weil-pbc-torsion-controlled-affine-algebraization",
+  "lem-weil-pbc-torsion-controlled-algebraization-descent"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0889(1), construction after Remark 0888; affine lifting and formal gluing"
+  "place": "Tag 0889(1); Lean assembly from open restriction, affine construction and descent"
  },
  "mathlib_searches": [
   {
@@ -104,12 +139,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T223404-L-1636443",
+  "landing": "20261013T010621-L-2673439",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-torsion-controlled-formal-restriction",
+ "kind": "statement",
+ "title": "Canonical open restriction and transport of a component annihilation bound",
+ "statement": "Let $X$ be Noetherian, $J$ ideal sheaf data, $H$ a coherent module, $N$ a coherent formal module, and $\\delta:N\\to\\widehat H$ a map [def-weil-pbc-coherent-formal-module]. Let $U\\subseteq X$ be open and $H_U$ a coherent module whose underlying module equals $H|_U$. Fix $t\\geq0$ annihilating every component kernel and cokernel of $\\delta$. There exists an isomorphism $\\gamma:(\\widehat H)|_U\\simeq\\widehat {H_U}$ of inverse systems, characterized by $q_n|_U\\circ\\gamma_n=q_{U,n}$ after identifying $H_U=H|_U$, and the same power $(J|_U)^t$ annihilates every component kernel and cokernel of $\\delta|_U\\circ\\gamma$. Restrictions mean [lem-weil-pbc-module-restriction-open-immersion-colimits].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 087X, 0887 and Remark 0888; Modules 01AG and 01CB"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof": [
+  {
+   "text": "Restriction is exact and commutes with tensor multiplication and its image. Induct on the exponent to identify restricted ideal-power products with those of the comapped ideal. Apply the two cokernel universal properties to each quotient, obtaining inverse comparison maps specified by their quotient projection equations. Cancel the quotient epimorphisms to prove transition compatibility; these comparisons form gamma.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-formal-systems-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 0887, 087X; Modules 01AG and 01CB"
+   }
+  },
+  {
+   "text": "Restriction carries kernels and cokernels to kernels and cokernels. Restrict the two zero ideal products. The ideal-power comparison identifies them with zero products by the comapped ideal. Postcomposition by each invertible gamma component induces kernel and cokernel isomorphisms, which transport the same bound t.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Remark 0888; Modules 01AG and 01CB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-formal-systems-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 087X, 0887 and Remark 0888; Modules 01AG and 01CB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of coherent sheaf completions to open subschemes preserves an ideal power annihilation bound",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical restriction of a coherent sheaf completion to an open subscheme commutes with ideal power quotients and preserves annihilation of kernels and cokernels",
+   "results": "; ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, AlgebraicGeometry.Scheme.IdealSheafData.map_ideal, ModuleCat.Tilde.res_apply, ModuleCat.Tilde.res_const, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsionControlled_(affine_algebraization|formal_restriction|algebraization_descent)|completion.*restrict|restrict.*completion",
+   "results": "; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/Topology/Algebra/Valued/ValuedField.lean, Mathlib/Topology/Algebra/Valued/ValuedField.lean, Mathlib/Topology/Algebra/Valued/ValuedField.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/RingHom.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledEasyAlgebraizationBridge",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tags 087X, 0887 and Remark 0888; Modules 01AG and 01CB",
+   "via": [
+    "new-stage3-torsion-controlled-easy-algebraization-bridge",
+    "lem-weil-pbc-torsion-controlled-algebraization-construction",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TorsionControlledFormalRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionControlledFormalRestriction.lean",
+  "declaration": "AlgebraicGeometry.torsionControlled_formal_restriction",
+  "statement": "theorem torsionControlled_formal_restriction\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    (H : CoherentModules X) (N : CoherentFormalModule X J)\n    (δ : N ⟶ (completion X J).obj H) (U : X.Opens)\n    (Hlocal : CoherentModules U.toScheme)\n    (hH : Hlocal.obj = (Scheme.Modules.restrictFunctor U.ι).obj H.obj)\n    (t : ℕ) (hbound : ∀ n : ℕ,\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι t).2\n        (kernel (δ.hom.app (op n)))) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι t).2\n        (cokernel (δ.hom.app (op n))))) :\n    ∃ γ : ((completion X J).obj H).obj ⋙ Scheme.Modules.restrictFunctor U.ι ≅\n        formalCompletionSystem (J.comap U.ι) Hlocal.obj,\n      (∀ n : ℕ,\n        (Scheme.Modules.restrictFunctor U.ι).map\n            (formalModuleQuotientπ J (n + 1) H.obj) ≫ γ.hom.app (op n) =\n          eqToHom hH.symm ≫ formalModuleQuotientπ (J.comap U.ι) (n + 1) Hlocal.obj) ∧\n      (∀ n : ℕ,\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower (J.comap U.ι).toModulesι t).2\n          (kernel ((Functor.whiskerRight δ.hom (Scheme.Modules.restrictFunctor U.ι) ≫\n            γ.hom).app (op n)))) ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower (J.comap U.ι).toModulesι t).2\n          (cokernel ((Functor.whiskerRight δ.hom (Scheme.Modules.restrictFunctor U.ι) ≫\n            γ.hom).app (op n)))))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T010621-L-2673439",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T010621-L-2673439",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
