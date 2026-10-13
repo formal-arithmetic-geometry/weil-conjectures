@@ -14,9 +14,10 @@ public import WeilConjectures.FourierTransform.Defs
 # The Fourier transform on relative affine space
 
 The Fourier–Deligne transform on relative affine space
-(`AlgebraicGeometry.Etale.affineFourierTransform`), its values on the constant sheaf and on the
-skyscraper at the zero section, and Fourier inversion
-(`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_inv`).
+(`AlgebraicGeometry.Etale.affineFourierTransform`), its value on the skyscraper at the zero
+section, and the comparison of the transforms for `ψ` and `ψ⁻¹`
+(`AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_inv`). Its value on the constant
+sheaf is in `WeilConjectures.FourierTransform.AffineSpace.Unit`.
 -/
 
 @[expose] public section
@@ -49,32 +50,6 @@ noncomputable def affineFourierTransform (Ψ : AddChar (ZMod p) Λ) :
 noncomputable def skyscraperZero :
     DerivedCategory (Sheaf (𝔸(n; S)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   (R((zeroSection n S)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _)
-
-/-- The Fourier–Deligne transform of the constant sheaf on `𝔸(n; S)` is the skyscraper at
-the origin of the dual, Tate twisted and shifted by the relative dimension `r = #n`:
-
-`FT_ψ(Λ) ≅ δ₀(-r)[-r]`.
-
-On the affine line, the blueprint's case, this reads `FT_ψ(Λ) ≅ δ₀(-1)[-1]`.
-
-The character must be **nontrivial** in the strong sense that `Ψ 1 - 1` is a unit of `Λ`:
-the proof uses `H_c^*(𝔸¹, ℒ_ψ) = 0`, and the `ψ`-isotypic part of `H_c^*(𝔸¹, Λ)` is killed
-by `Ψ 1 - 1`. For `Ψ = 1` the kernel is the constant sheaf and the transform of `Λ` is
-`Λ(-r)[-r]`, supported everywhere. Asking `Ψ ≠ 1` is not enough when `Λ` is not a domain:
-for `Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the transform has the trivial-character transform as a
-factor.
-
-Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
-`[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `sk-prop-first-formula`) -/
-theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
-    [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
-    (hΨ : IsUnit (Ψ 1 - 1)) :
-    Nonempty ((affineFourierTransform Λ n S Ψ).obj (𝟙_ _) ≅
-        (shiftFunctor _ (-(Fintype.card n : ℤ))).obj
-          ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj
-            (skyscraperZero Λ n S))) :=
-  sorry
 
 /-- The Fourier–Deligne transform of the skyscraper at the origin of `𝔸(n; S)` is the
 constant sheaf, shifted by the relative dimension `r = #n`:
