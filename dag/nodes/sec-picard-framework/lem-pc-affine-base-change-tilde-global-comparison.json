@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-affine-base-change-tilde-global-comparison",
+ "kind": "statement",
+ "title": "Global mate square for explicit affine tensor coordinates",
+ "statement": "Let R,A,R',A' be commutative rings with R-algebra structures on A,R' and a structure map A tensor_R R' to A'. Let phi_g':A to A' and phi_f':R' to A' be its restrictions and assume their spectrum square is cartesian. Let M be an A-K-flat unbounded complex, K a quasi-coherent derived object on Spec A, e:Q(tilde M) isomorphic to K, L=Lg'^*K quasi-coherent and its counit on tilde M invertible. For any tensor cohomology model m and integer i, use the explicit U and a of [def-pc-affine-base-change-tilde-coordinates] with canonical target coordinate b. There exist a natural affine direct-image cohomology presentation d:Gamma H^i(-), restricted to R' and associated sheaf, isomorphic to H^i(Rf'_*(-)), and eU:tilde(restrict_R' U) isomorphic to H^i(Lg^*Rf_*K), with eU.hom followed by cohomology of the canonical base-change mate equal to tilde(restrict_R' a) followed by d at L. No stalk or localization conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJ8 affine proof and equation-bc; Tags 06Y6, 08IB, 01I9 and 01HV"
+ },
+ "stmt_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-base-change",
+  "def-pc-module-kflat-complex",
+  "lem-pc-affine-derived-cohomology-presentation"
+ ],
+ "proof": [
+  {
+   "text": "The universal property of m.derived and m.counit compares its R-K-flat span with the affine derived scalar-extension computation. Exact tilde and the cartesian tensor-algebra isomorphism give eU on the prescribed module U.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-pc-affine-base-change-tilde-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine higher-direct-image vanishing supplies hacyc in the natural unbounded derived pushforward cohomology theorem. Compose that natural isomorphism with the tilde/Gamma counit on quasi-coherent cohomology and the natural pushforward/restriction-of-scalars section comparison. This constructs d naturally on the whole quasi-coherent derived category, not merely at L.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "lem-pc-affine-derived-cohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the common K-flat span the tensor-pullback unit equation identifies the scheme derived mate with the ring comparison. Use m.comparison_eq and m.localized_eq to identify its D-extension with the prescribed a. The target coordinate b uses the same inverse counit and e. Apply homology to obtain the global square.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-pc-affine-base-change-tilde-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-base-change-map",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, affine proof and equation-bc",
+  "note": "Makes the scheme-to-ring bridge explicit; official Stacks source consulted."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of affine derived base change is computed by module tensor cohomology with compatibility under stalk localization",
+   "results": "Service unavailable: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine derived base change cohomology module model compatible with localization of K flat complexes",
+   "results": "Returned cotangent-complex base change and H1Cotangent localization, not arbitrary unbounded derived module cohomology or scheme mates.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde",
+   "results": "tilde.functor, tilde.map, tilde.toStalk and their ordinary naturality; reused ordinary tilde and stalk machinery.",
+   "verdict": "no exact derived comparison",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*PreservesHomology|preservesFiniteLimits_tilde|affine.*baseChange.*cohomology; Mathlib AlgebraicGeometry Modules and project Sheaf/WeilConjectures",
+   "results": "No public exact statement. Existing private exact-tilde proofs in AffinePseudoCoherentRHomQuasiCoherent and AffinePrincipalCoverQuasiIsoDetection reused. Existing BaseDerivedTensorCohomologyModel and tensorPullback-tilde comparison reused. Blueprint search affine base change cohomology returned zero matches.",
+   "verdict": "no duplicate; reuse existing definitions",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineBaseChangeTildeSourceModel",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine base-change cohomology computation and its displayed localization formula.",
+   "via": [
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineBaseChangeTildeGlobalComparison",
+  "file": "lean/Sheaf/Algebra/Homology/AffineBaseChangeTildeGlobalComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_affineBaseChangeTildeGlobalComparison",
+  "declarations": [
+   "AlgebraicGeometry.exists_affineBaseChangeTildeGlobalComparison"
+  ],
+  "statement": "theorem exists_affineBaseChangeTildeGlobalComparison (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A'] [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A'] [HasDerivedCategory.{wM} (ModuleCat.{u} R)] [HasDerivedCategory.{wM} (ModuleCat.{u} R')] (φg' : A →+* A') (φf' : R' →+* A') (hφg' : (algebraMap (A ⊗[R] R') A').comp (algebraMap A (A ⊗[R] R')) = φg') (hφf' : (algebraMap (A ⊗[R] R') A').comp Algebra.TensorProduct.includeRight.toRingHom = φf') (sq : IsPullback (Spec.map (CommRingCat.ofHom φg')) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom (algebraMap R A))) (Spec.map (CommRingCat.ofHom (algebraMap R R')))) (K : schemeDerivedCategory (Spec (.of A))) (hK : schemeDerivedQCohProperty (Spec (.of A)) K) (hL : schemeDerivedQCohProperty (Spec (.of A')) ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K)) (M : CochainComplex (ModuleCat.{u} A) ℤ) (hM : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat M) (e : DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) ≅ K) (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ) (m : ModuleCat.BaseDerivedTensorCohomologyModel R A R' M A') : ∃ d : affineDerivedCohomologyModules A' i ⋙ (ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R')) ≅ (schemeDerivedQCohProperty (Spec (.of A'))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf')) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i, let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩ let V := (affineDerivedCohomologyModules A' i).obj L let F := ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R') let H := DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i let U := affineBaseChangeTildeModule R A R' A' M m i let b := affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i let a := affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i V b ∃ eU : F.obj U ≅ H.obj ((derivedPullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).obj ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom (algebraMap R A)))).obj K)), eU.hom ≫ H.map (schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom (algebraMap R A))) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom (algebraMap R R'))) (Spec.map (CommRingCat.ofHom φg')) sq.w K) = F.map a ≫ d.hom.app L",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T141532-L-381038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T141532-L-381038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

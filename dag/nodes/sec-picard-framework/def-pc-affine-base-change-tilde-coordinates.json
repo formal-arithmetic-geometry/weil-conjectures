@@ -1,0 +1,122 @@
+{
+ "id": "def-pc-affine-base-change-tilde-coordinates",
+ "kind": "definition",
+ "title": "Explicit affine base-change module and target coordinates",
+ "statement": "Let A to D be a map of commutative rings, M an unbounded A-module complex, K a derived object on Spec A, e:Q(tilde M) isomorphic to K, and assume the canonical pullback counit on tilde M is invertible. Define the D-linear target coordinate b:H^i(D tensor_A M) isomorphic to Gamma H^i(Lg' *K) by exact tilde homology, the termwise tensor-pullback isomorphism, inverse universal counit, and e. Further let R,A,B,D be commutative rings with R-algebra structures on A,B and a tensor-algebra structure on D, and let m be a BaseDerivedTensorCohomologyModel for M. Define U by extending m.cohomology i from A tensor_R B to D. Given phi:A to D equal to the composite tensor-algebra map, define a:U to V as m.localizedComparison i, transport the target complex along that equality, followed by any specified target cohomology coordinate b. These are actual composites of existing maps, not arbitrary existential witnesses.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJ8 affine proof and equation-bc; Tags 06Y6, 08IB, 01I9 and 01HV"
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "def-pc-affine-base-change-into-pullback",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of affine derived base change is computed by module tensor cohomology with compatibility under stalk localization",
+   "results": "Service unavailable: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine derived base change cohomology module model compatible with localization of K flat complexes",
+   "results": "Returned cotangent-complex base change and H1Cotangent localization, not arbitrary unbounded derived module cohomology or scheme mates.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde",
+   "results": "tilde.functor, tilde.map, tilde.toStalk and their ordinary naturality; reused ordinary tilde and stalk machinery.",
+   "verdict": "no exact derived comparison",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*PreservesHomology|preservesFiniteLimits_tilde|affine.*baseChange.*cohomology; Mathlib AlgebraicGeometry Modules and project Sheaf/WeilConjectures",
+   "results": "No public exact statement. Existing private exact-tilde proofs in AffinePseudoCoherentRHomQuasiCoherent and AffinePrincipalCoverQuasiIsoDetection reused. Existing BaseDerivedTensorCohomologyModel and tensorPullback-tilde comparison reused. Blueprint search affine base change cohomology returned zero matches.",
+   "verdict": "no duplicate; reuse existing definitions",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineBaseChangeTildeSourceModel",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine base-change cohomology computation and its displayed localization formula.",
+   "via": [
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates",
+  "file": "lean/Sheaf/Algebra/Homology/AffineBaseChangeTildeCoordinates.lean",
+  "declaration": "AlgebraicGeometry.affineBaseChangeTildeCohomologyIso",
+  "declarations": [
+   "AlgebraicGeometry.affineBaseChangeTilde_preservesZero",
+   "AlgebraicGeometry.tilde_preservesHomology",
+   "AlgebraicGeometry.affineBaseChangeTildeCohomologyIso",
+   "AlgebraicGeometry.affineBaseChangeTildeModule",
+   "AlgebraicGeometry.affineBaseChangeTildeModuleMap"
+  ],
+  "statement": "def affineBaseChangeTildeCohomologyIso (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A') (K : schemeDerivedCategory (Spec (.of A))) (M : CochainComplex (ModuleCat.{u} A) ℤ) (e : DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) ≅ K) (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ) : (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M).homology i ≅ (moduleSpecΓFunctor (R := .of A')).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace)) i).obj ((derivedPullback (Spec.map (CommRingCat.ofHom φ))).obj K))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T141532-L-381038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T141532-L-381038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

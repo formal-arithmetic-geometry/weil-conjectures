@@ -14,11 +14,11 @@
  },
  "proof_origin": {
   "by": "agent",
-  "group": "V3",
+  "group": "R3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 0DJ8, 06Z0 and 06Y6",
-  "note": "Source consulted at the official Stacks tags; separates affine module computation from representative independence."
+  "place": "Tag 0DJ8 affine cohomology and localization formulas",
+  "note": "Lean constructs the tensor-algebra source and arrow, then combines two strictly partial comparisons on those identical coordinates. No definition or existing statement changes."
  },
  "mathlib_searches": [
   {
@@ -74,45 +74,27 @@
  ],
  "proof": [
   {
-   "text": "Compute the scheme base-change mate on the R- and A-K-flat module comparison span using the affine derived pullback/tensor formula and the universal counits.",
+   "text": "Reflect the cartesian Spec square to a pushout of commutative rings. Mathlib tensor-product pushout uniqueness constructs its algebra map to A' and proves that its two restrictions are the supplied ring maps. Instantiate the existing canonical base-derived tensor model m.",
    "uses": [
-    "lem-pc-affine-derived-base-change-comparison-map",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "def-pc-derived-base-change-map"
+    "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
   },
   {
-   "text": "Lift source and target cohomology to the tensor-algebra modules, transport the cartesian algebra to A', and use exact tilde and the natural affine direct-image cohomology comparison to obtain U,a,eU,d and the global square.",
+   "text": "Use the explicit cohomology coordinates, module U and arrow a. Apply the global comparison to m to obtain d,eU and the global square. Apply the stalk comparison to that same m,U,a. Package these shared witnesses to prove the original existential and conjunction.",
    "uses": [
-    "lem-pc-affine-derived-base-change-comparison-map",
-    "new-affine-qcoh-derived-equivalence-core",
-    "lem-pc-affine-derived-cohomology-presentation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Localize the same span at p. Exact localization and tilde stalks identify it with the canonical stalk model. The localized_eq and counit equations give the source-only map and its localized square.",
-   "uses": [
-    "lem-pc-affine-derived-base-change-comparison-map",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-spec-tilde-stalk-localization",
-    "def-pc-base-derived-tensor-cohomology-model",
-    "def-pc-affine-base-change-into-pullback"
+    "def-pc-affine-base-change-tilde-coordinates",
+    "lem-pc-affine-base-change-tilde-global-comparison",
+    "lem-pc-affine-base-change-tilde-stalk-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-affine-base-change-into-pullback",
+  "def-pc-affine-base-change-tilde-coordinates",
   "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-derived-base-change-map",
-  "lem-pc-affine-derived-base-change-comparison-map",
-  "lem-pc-affine-derived-cohomology-presentation",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-spec-tilde-stalk-localization",
-  "new-affine-qcoh-derived-equivalence-core"
+  "lem-pc-affine-base-change-tilde-global-comparison",
+  "lem-pc-affine-base-change-tilde-stalk-comparison"
  ],
  "blueprint": {
   "is": null,
@@ -148,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-87b5c",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T130037-L-3924354",
+  "landing": "20261013T141532-L-381038",
   "kind": "interface",
-  "note": "independent Codex review: Lean signatures, unchanged definition body, and proof route match the DAG and change record; remaining lemmas agree with [Stacks 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8). All four delivered modules and direct importer Sheaf.Algebra.Homology.AffineBaseChangeCohomologyModel compile cleanly; axioms conform."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

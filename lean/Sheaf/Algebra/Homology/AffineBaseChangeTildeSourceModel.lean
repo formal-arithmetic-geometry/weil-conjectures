@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.AffineDerivedCohomologyPresentation
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.Algebra.Homology.AffineBaseChangeIntoPullback
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.AffineBaseChangeTildeGlobalComparison
+import Sheaf.Algebra.Homology.AffineBaseChangeTildeStalkComparison
 
 /-! # Affine base change computed on a module K-flat resolution
 
@@ -101,7 +103,32 @@ theorem exists_affineBaseChangeTildeSourceModel
         ∃ lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk r).left,
           ∀ x, affineDerivedCohomologyStalkIso A' i p L
             (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x) := by
-  sorry
+  let : Algebra R A := φf.toAlgebra
+  let : Algebra R R' := φg.toAlgebra
+  have hs : IsPushout (CommRingCat.ofHom φf) (CommRingCat.ofHom φg)
+      (CommRingCat.ofHom φg') (CommRingCat.ofHom φf') :=
+    (IsPullback.of_map_of_faithful Scheme.Spec sq).unop.flip
+  let ht := CommRingCat.isPushout_tensorProduct R A R'
+  let τ := ht.isoIsPushout (CommRingCat.of A) (CommRingCat.of R') hs
+  let : Algebra (TensorProduct R A R') A' := τ.hom.hom.toAlgebra
+  have hφg' : (algebraMap (TensorProduct R A R') A').comp
+      (algebraMap A (TensorProduct R A R')) = φg' := by
+    exact congrArg CommRingCat.Hom.hom
+      (IsPushout.inl_isoIsPushout_hom (CommRingCat.of A) (CommRingCat.of R') ht hs)
+  have hφf' : (algebraMap (TensorProduct R A R') A').comp
+      Algebra.TensorProduct.includeRight.toRingHom = φf' := by
+    exact congrArg CommRingCat.Hom.hom
+      (IsPushout.inr_isoIsPushout_hom (CommRingCat.of A) (CommRingCat.of R') ht hs)
+  let := HasDerivedCategory.standard (ModuleCat.{u} R)
+  let := HasDerivedCategory.standard (ModuleCat.{u} R')
+  let m := ModuleCat.baseDerivedTensorCohomologyModel R A R' M A'
+  obtain ⟨d, eU, ha⟩ := exists_affineBaseChangeTildeGlobalComparison
+    R A R' A' φg' φf' hφg' hφf' sq K hK hL M hM e hc i m
+  refine ⟨d, affineBaseChangeTildeModule R A R' A' M m i,
+    affineBaseChangeTildeModuleMap R A R' A' M m φg' hφg' i _
+      (affineBaseChangeTildeCohomologyIso A A' φg' K M e hc i), eU, ha, ?_⟩
+  exact affineBaseChangeTildeModuleMap_localized
+    R A R' A' φg' φf' hφg' hφf' sq K hK hL M hM e hc i m
 
 
 end AlgebraicGeometry
