@@ -9,6 +9,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.CoherentOpenSectionCarrier
+import Sheaf.AlgebraicGeometry.CoherentIdealPowerTorsionFreeProduct
 
 /-! # An ideal-power-torsion-free carrier of an open section
 
@@ -32,7 +34,7 @@ Proof: The section defines a map from the structure module on U. Its image is
 quasi-coherent and finite type. Extend this image to a finite-type quasi-coherent
 submodule H of E by 01PF; on a Noetherian scheme H is coherent by 01XZ. The section
 therefore lifts to H(U). For each n take the quasi-coherent annihilator H_n of I^n.
-These form an increasing chain, so 0CYW gives r with H_n contained in H_r for all n.
+These form an increasing chain, so 01Y8 gives r with H_n contained in H_r for all n.
 Set T = H_r. Artin-Rees 01YA supplies c such that I^(r+c)H intersects T in zero,
 since that intersection is contained in I^r T = 0. Set G = I^(r+c)H with its
 canonical inclusion into E. It is quasi-coherent. On U the ideal is the structure
@@ -53,6 +55,19 @@ theorem exists_idealPower_torsionFree_section_carrier
         (∀ (V : X.Opens) (h : V ≤ W)
           (b : (idealSheafPower I.toModulesι n).1.val.obj (op V)),
           ((idealSheafPower I.toModulesι n).2.val.app (op V) b : Γ(X, V)) •
-            G.val.map (homOfLE h).op x = 0) → x = 0 := by sorry
+            G.val.map (homOfLE h).op x = 0) → x = 0 := by
+  obtain ⟨H, h, t, hqc, hcoh, hm, ht⟩ :=
+    exists_coherent_open_section_carrier E U s
+  have : H.IsQuasicoherent := hqc
+  have : Mono h := hm
+  obtain ⟨k, hP, hj, hbij, htf⟩ :=
+    exists_coherent_idealPower_torsionFree_product I H hcoh U hI
+  let P := idealModuleProduct (idealSheafPower I.toModulesι k).2 H
+  let j : P ⟶ H := idealModuleProductι (idealSheafPower I.toModulesι k).2 H
+  have : Mono j := hj
+  obtain ⟨z, hz⟩ := hbij.2 t
+  refine ⟨P, j ≫ h, z, hP, inferInstance, ?_, htf⟩
+  change h.val.app (op U) (j.val.app (op U) z) = s
+  rw [hz, ht]
 
 end AlgebraicGeometry.Scheme.Modules
