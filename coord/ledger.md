@@ -12913,3 +12913,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:03 L: merged deliver/H4/Sheaf.AlgebraicGeometry.OpenRestrictionClosedMonoidal (stage 3; reviewer PASS; first push; landing 20261013T150351-L-809497 (interface); batch 20261013T150347; modules 4; new nodes 3)
 - 15:03 L: merged deliver/H4/Sheaf.AlgebraicGeometry.PrincipalOpenCechCoordinateMap (stage 3; reviewer PASS; first push; landing 20261013T150352-L-809730 (interface); batch 20261013T150347; modules 4; new nodes 3)
 - 15:03 L: merged deliver/Q2/Sheaf.Algebra.Homology.AffineBaseChangeTildeGlobalComparison (stage 3; reviewer PASS; first push; landing 20261013T150352-L-809845 (interface); batch 20261013T150347; modules 3; new nodes 2)
+- 15:03 L: merged deliver/Q3/Sheaf.Paper.EtaleCENormalizedRowPresentations (stage 3; reviewer PASS; first push; landing 20261013T150352-L-810046 (proof); batch 20261013T150347; modules 1; new nodes 0)

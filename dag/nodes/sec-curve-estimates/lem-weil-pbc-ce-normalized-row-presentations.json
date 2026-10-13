@@ -16,47 +16,67 @@
  ],
  "proof": [
   {
-   "text": "Obtain the second filtration and canonical abutment data from exists_hypercohomology_firstPage for the prescribed I,a and canonical K-injective resolution of K. Retain I,a and transport c and its finite image filtration through resolutionEtaleCohomologyIso. The augmentation and total comparison retain their summand formulas.",
+   "text": "Use cartanEilenberg_second_filtration to obtain the prescribed second filtration, its graded page zero and the finite image-filtration transport. Use cartanEilenberg_total_resolution, the canonical grothendieckKInjectiveResolutionChoice, kInjective_computes and cartanEilenberg_mapped_total_iso to construct the augmentation, comparison and sections map with their summand equations. Compose its homology isomorphism with resolutionEtaleCohomologyIso and apply the image-filtration transport to this specific composite.",
    "uses": [
-    "thm-sp-if-e1"
+    "lem-sp-cartan-eilenberg-second-filtration",
+    "lem-sp-cartan-eilenberg-total-resolution",
+    "lem-sp-cartan-eilenberg-mapped-total",
+    "lem-sp-kinjective-computes",
+    "def-weil-pbc-termwise-hypercohomology-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Construct the positive pages using their unique representative differentials and successor isomorphisms using their unique normalized homology comparisons. Adjoin the graded page zero via filteredComplex_graded_homology. Its first-page differential and negative-degree vanishing are the second-filtration row calculation.",
+   "text": "Choose the uniquely specified representative differential on each positive concrete quotient page. Adjoin the existing graded page zero using filteredComplex_graded_homology. Define every positive successor comparison by conjugating the unique normalized homology isomorphism with the page-equality isomorphisms. The transport back cancels these isomorphisms and gives normalization. The degreewise second-filtration step is zero in negative complementary degrees; its graded quotient, cycles and page cokernel are then zero.",
    "uses": [
     "lem-sp-filtered-complex-page-differential",
     "lem-sp-filtered-complex-normalized-homology",
     "lem-sp-filtered-complex-graded-homology",
-    "lem-sp-cartan-eilenberg-row-pages"
+    "lem-sp-second-filtration-row-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Use the concrete signedRowComparison followed by the inverse row resolution isoRightDerivedObj as eDerived, and isoRightDerivedObj followed by ceRowOrdinaryIso as ordinaryComparison. Their inverse and hom cancel in firstPageIso. Coefficient naturality of the explicit ordinary comparison gives ordinary_naturality; the unsigned signed-row differential and right-derived naturality give dDerived. Assemble the structure fields and the identity positive-page comparisons j. All constructions use actual cokernels and extend-by-zero rows, including p=0, zero rows, negative q and empty diagonals.",
+   "text": "Retrieve the canonical row comparison and its step, cycle and homology-projection equations. Apply the representative differential to the row cycles and the explicit total differential calculation row_cycle_total_d; cancel the epic cycle-to-page projection. Multiply by (-1)^(pq), whose successive ratio is (-1)^p, to remove the totalization sign. Compose with the inverse injective-row isoRightDerivedObj and use its naturality to prove dDerived.",
    "uses": [
-    "def-weil-pbc-ce-canonical-row-comparison",
+    "lem-sp-second-filtration-row-cycle-comparison",
+    "lem-sp-second-filtration-signed-first-page",
+    "def-weil-pbc-ce-canonical-row-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove coefficient naturality of ceRowOrdinaryIso locally: reuse the proved extClass_naturality and classSectionsIso_naturality implementation lemmas, then the natural mapExtendIso and extendHomologyIso equations. Compose isoRightDerivedObj with this explicit ordinary comparison and use right-derived naturality to obtain ordinary_naturality. Assemble all presentation fields. The inverse and hom of the row-resolution comparison cancel, leaving precisely signedRowComparison followed by ceRowOrdinaryIso. Choose the pointwise witnesses simultaneously; the prescribed bicomplex remains definitionally unchanged. No new unproved statement is used.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
     "lem-weil-pbc-ce-row-ordinary-naturality",
-    "lem-sp-cartan-eilenberg-row-pages"
+    "def-weil-pbc-ce-canonical-row-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-ce-canonical-row-comparison",
-  "lem-sp-cartan-eilenberg-row-pages",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-cartan-eilenberg-second-filtration",
+  "lem-sp-cartan-eilenberg-total-resolution",
   "lem-sp-filtered-complex-graded-homology",
   "lem-sp-filtered-complex-normalized-homology",
   "lem-sp-filtered-complex-page-differential",
+  "lem-sp-kinjective-computes",
+  "lem-sp-second-filtration-row-cohomology",
+  "lem-sp-second-filtration-row-cycle-comparison",
+  "lem-sp-second-filtration-signed-first-page",
   "lem-weil-pbc-ce-row-ordinary-naturality",
-  "thm-sp-if-e1"
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "C3",
+  "group": "Q3",
   "date": "2026-10-13",
-  "document": "Stacks Project, Tags 015J, 015K and 012K",
-  "place": "Normalized CE pages and signed row representatives"
+  "document": "Stacks Project, Tags 015J, 015K, 0130, 012K and 06XR",
+  "place": "Prescribed CE total, concrete normalized pages and canonical signed row comparisons; implemented with existing proved library constructions"
  },
  "mathlib_searches": [
   {
@@ -130,10 +150,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T142852-L-496113",
-  "kind": "interface",
+  "landing": "20261013T150352-L-810046",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
