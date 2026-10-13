@@ -14,31 +14,42 @@
  ],
  "proof": [
   {
-   "text": "On sections the inverse balanced maps m tensor (b tensor n) to (b m) tensor n and m tensor n to m tensor (1 tensor n) commute with restrictions and are inverse by tensor induction. The module-level cancellation theorem supplies this identity without flatness.",
+   "text": "Obtain the balanced contraction psi with its formula on m tensor eta(b tensor n).",
    "uses": [
-    "lem-pc-tensor-restrict-extend-module-natural",
-    "def-pur-sheaf-tensor-product"
+    "lem-pc-balanced-sheaf-tensor-contraction"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Tensor commutes with module sheafification. Forgetting coefficients identifies both module sheafifications with abelian sheafification, so the sectionwise maps give inverse abelian-sheaf maps. The formula in the hypothesis identifies phi with the canonical map by the tensor and sheafification universal properties. The forgetful functor to abelian sheaves reflects isomorphisms.",
+   "text": "For phi followed by psi, tensorObjIsoSheafification and the module sheafification adjunction reduce equality to original pure tensors. Apply hphi and the contraction formula with b=1; one_smul gives the identity.",
    "uses": [
-    "lem-pc-sites-module-sheafification-tensor",
+    "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For psi followed by phi, original-section extensionality reduces equality to m tensor eta(b tensor n). The contraction formula followed by hphi gives (b m) tensor eta(1 tensor n). Tensor balancing, B-linearity of the extension sheafification unit, and b*1=b identify this with m tensor eta(b tensor n).",
+   "uses": [
+    "lem-pc-balanced-sheaf-tensor-original-sections-ext"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the two proved composite identities to supply the inverse required by IsIso phi.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-tensor-restrict-extend-module-natural",
+  "lem-pc-balanced-sheaf-tensor-contraction",
   "def-pur-sheaf-tensor-product",
-  "lem-pc-sites-module-sheafification-tensor",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-balanced-sheaf-tensor-original-sections-ext"
  ],
  "proof_origin": {
-  "by": "worker",
-  "reason": "Isolates invertibility only; the parent constructs the map, proves its section formula and proves both naturality equations in Lean."
+  "by": "agent",
+  "reason": "R3 realizes both inverse identities directly in Lean, with a sectionwise balanced contraction and a proved original-section extensionality lemma. The module-level naturality and general two-presheaf tensor/sheafification theorems are not used."
  },
  "mathlib_searches": [
   {
@@ -120,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-07f14",
-  "group": "N4",
+  "reviewer": "COMPILER",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T152018-L-953911",
+  "landing": "20261013T165649-L-1810847",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivery modules compiled cleanly, the target signature was unchanged, the sole remaining sorry was named and documented, and the direct importer compiled."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

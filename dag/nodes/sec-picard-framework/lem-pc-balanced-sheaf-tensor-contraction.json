@@ -1,0 +1,156 @@
+{
+ "id": "lem-pc-balanced-sheaf-tensor-contraction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DE proof: construction of the reverse ordinary balanced tensor map after sheafification",
+   "via": [
+    "lem-pc-balanced-sheaf-tensor-comparison-isIso",
+    "lem-pc-relative-tensor-pullback-balanced-naturality",
+    "lem-pc-relative-tensor-pullback-complex-comparison",
+    "lem-pc-relative-tensor-pullback-homology-comparison",
+    "lem-pc-relative-tor-pullback-tensor-lower-bound",
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Balanced contraction on sheaf tensors",
+ "statement": "Let $Z$ be a topological space, $R,B$ sheaves of commutative rings, and $\\alpha:R\\to B$ a unital morphism. Let $M$ be a $B$-module sheaf and $N$ an $R$-module sheaf [def-weil-sheaf-of-modules-category]. Put $H=\\operatorname{Res}_{\\alpha}$ and $E=(U\\mapsto B(U)\\otimes_{R(U)}N(U))^\\#$ [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification]. Write $p_R,p_B$ for the pure tensor maps and $\\eta$ for the sheafification unit. There exists an $R$-module-sheaf morphism $\\psi:H(M\\otimes_B E)\\to H(M)\\otimes_R N$ such that for every open $U$ and sections $m,b,n$, $\\psi(p_B(m,\\eta(b\\otimes n)))=p_R(bm,n)$. No inverse identity is part of this assertion, and there are no flatness, finiteness or nonzero assumptions.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08DE, proof, ordinary balanced identity; Tag 0GMW, tensor and sheafification. Read at https://stacks.math.columbia.edu/tag/08DE and https://stacks.math.columbia.edu/tag/0GMW."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Construct the section contraction with Mathlib TensorProduct.AlgebraTensorModule.cancelBaseChange, restricting its linear equivalence to R(U). Its pure tensor formula is (b m) tensor n. Two tensor inductions show naturality: restrictions preserve multiplication, and restriction of b m is restriction(b) restriction(m).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction of scalars commutes with sheafification up to the canonical map extending the restricted B-sheafification unit. Forget to abelian sheaves: both associated objects are the same sheafification, and the underlying comparison is the identity by the abelian adjunction. The forgetful functor reflects isomorphisms.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor M.val with the sheafification unit of the extension presheaf. This unit is inverted by sheafification and W_whiskerLeft preserves this property. Sheafify and compose with tensorObjIsoSheafification.inv, obtaining an isomorphism from the sheafification of the original balanced presheaf tensor onto M tensor_B E.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict this isomorphism, invert it and the preceding restriction-sheafification comparison, then compose with R-sheafification of the presheaf contraction and tensorObjIsoSheafification.inv. Naturality of the two units and the section contraction formula give exactly the stated section formula.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "Expanded the ordinary balanced identity in Tag 08DE and the universal-property argument of Tag 0GMW into the explicit Lean sheafification and localization interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module tensor contraction of extension scalars sends m tensor b tensor n to b m tensor n",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A balanced contraction from restricted sheaf tensor with extension of scalars to the tensor of restricted modules",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap and tensorObj_map_tmul; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; no mixed sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|sheafificationCompToSheaf|restrictScalars.*sheafification in Mathlib/Algebra/Category/ModuleCat and TensorProduct/Tower.lean",
+   "results": "TensorProduct.AlgebraTensorModule.cancelBaseChange; PresheafOfModules.sheafificationCompToSheaf; no coefficient-restricted sheaf tensor contraction or original-section extensionality statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf",
+   "results": "Faithfulness and reflection of isomorphisms of toSheaf, and sheafificationCompToSheaf; no mixed-coefficient tensor contraction or original-section extensionality theorem.",
+   "date": "2026-10-14",
+   "verdict": "Second reader: existing ingredients used; no duplicate result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.BalancedTensorContraction",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/BalancedTensorContraction.lean",
+  "declaration": "SheafOfModules.exists_balancedTensorContraction",
+  "statement": "theorem exists_balancedTensorContraction (α : R ⟶ B)\n    (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R)) :\n    ∃ ψ : (restrictScalars (𝓻 α)).obj\n        ((monoidalCategory B).tensorObj M (changeOfRings.{u, u, u} α N)) ⟶\n      (monoidalCategory R).tensorObj ((restrictScalars (𝓻 α)).obj M) N,\n      ∀ (W : (Opens Z)ᵒᵖ) (m : M.val.obj W) (b : B.obj.obj W) (n : N.val.obj W),\n      ψ.val.app W\n        ((tensorObjIsoSheafification M (changeOfRings.{u, u, u} α N)).inv.val.app W\n        (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n          (M.val ⊗ (changeOfRings.{u, u, u} α N).val)).app W\n            (m ⊗ₜ[B.obj.obj W]\n              ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n                (changeOfRingsPresheaf.{u, u, u} α N)).app W\n                  (b ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] n)))) =\n      (tensorObjIsoSheafification ((restrictScalars (𝓻 α)).obj M) N).inv.val.app W\n        (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 R).obj)).unit.app\n          (((restrictScalars (𝓻 α)).obj M).val ⊗ N.val)).app W\n            ((b • m) ⊗ₜ[R.obj.obj W] n))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T165649-L-1810847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T165649-L-1810847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

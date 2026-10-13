@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-balanced-sheaf-tensor-original-sections-ext",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0GMW universal-property proof: uniqueness of maps after tensoring with a sheafified extension presheaf",
+   "via": [
+    "lem-pc-balanced-sheaf-tensor-comparison-isIso",
+    "lem-pc-relative-tensor-pullback-balanced-naturality",
+    "lem-pc-relative-tensor-pullback-complex-comparison",
+    "lem-pc-relative-tensor-pullback-homology-comparison",
+    "lem-pc-relative-tor-pullback-tensor-lower-bound",
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Original-section extensionality for restricted balanced sheaf tensors",
+ "statement": "Let $Z,R,B,\\alpha,M,N,H,E,p_B,\\eta$ have the meanings of the module-sheaf and tensor constructions [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification]: $Z$ is a topological space, $\\alpha:R\\to B$ is a unital map of commutative ring sheaves, $M$ is a $B$-module sheaf, $N,H$ are $R$-module sheaves, and $E$ is the sheafification of $U\\mapsto B(U)\\otimes_{R(U)}N(U)$. If $f,g:\\operatorname{Res}_{\\alpha}(M\\otimes_B E)\\to H$ are $R$-linear sheaf morphisms agreeing on $p_B(m,\\eta(b\\otimes n))$ for every open $U$ and sections $m\\in M(U)$, $b\\in B(U)$, $n\\in N(U)$, then $f=g$. The maps need not be $B$-linear. No flatness or nonzero assumptions are imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08DE, proof, ordinary balanced identity; Tag 0GMW, tensor and sheafification. Read at https://stacks.math.columbia.edu/tag/08DE and https://stacks.math.columbia.edu/tag/0GMW."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "The extension presheaf unit is inverted by sheafification, by the module sheafification adjunction with fully faithful right adjoint. W_whiskerLeft makes its tensor with M.val inverted as well. Compose the sheafified tensor map with tensorObjIsoSheafification.inv and restrict scalars to obtain an isomorphism q onto the source of f and g.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cancel q, then use faithfulness of the functor to abelian sheaves and injectivity of the abelian-sheafification adjunction to test the maps on original presheaf sections. Restriction of scalars changes no underlying abelian presheaf.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on the outer B-tensor and inner R-tensor. Zero and sums use additivity; naturality of the module sheafification unit reduces a pure double tensor m tensor (b tensor n) to the assumed original-section equality.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "Expanded the ordinary balanced identity in Tag 08DE and the universal-property argument of Tag 0GMW into the explicit Lean sheafification and localization interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module tensor contraction of extension scalars sends m tensor b tensor n to b m tensor n",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A balanced contraction from restricted sheaf tensor with extension of scalars to the tensor of restricted modules",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap and tensorObj_map_tmul; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; no mixed sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|sheafificationCompToSheaf|restrictScalars.*sheafification in Mathlib/Algebra/Category/ModuleCat and TensorProduct/Tower.lean",
+   "results": "TensorProduct.AlgebraTensorModule.cancelBaseChange; PresheafOfModules.sheafificationCompToSheaf; no coefficient-restricted sheaf tensor contraction or original-section extensionality statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf",
+   "results": "Faithfulness and reflection of isomorphisms of toSheaf, and sheafificationCompToSheaf; no mixed-coefficient tensor contraction or original-section extensionality theorem.",
+   "date": "2026-10-14",
+   "verdict": "Second reader: existing ingredients used; no duplicate result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.BalancedTensorOriginalSectionsExt",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/BalancedTensorOriginalSectionsExt.lean",
+  "declaration": "SheafOfModules.balancedTensor_originalSections_hom_ext",
+  "statement": "theorem balancedTensor_originalSections_hom_ext (α : R ⟶ B)\n    (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R))\n    {H : SheafOfModules.{u} (𝓡 R)}\n    {f g : (restrictScalars (𝓻 α)).obj\n        ((monoidalCategory B).tensorObj M (changeOfRings.{u, u, u} α N)) ⟶ H}\n    (h : ∀ (W : (Opens Z)ᵒᵖ) (m : M.val.obj W)\n      (b : B.obj.obj W) (n : N.val.obj W),\n      f.val.app W\n        ((tensorObjIsoSheafification M (changeOfRings.{u, u, u} α N)).inv.val.app W\n        (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n          (M.val ⊗ (changeOfRings.{u, u, u} α N).val)).app W\n            (m ⊗ₜ[B.obj.obj W]\n              ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n                (changeOfRingsPresheaf.{u, u, u} α N)).app W\n                  (b ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] n)))) =\n      g.val.app W\n        ((tensorObjIsoSheafification M (changeOfRings.{u, u, u} α N)).inv.val.app W\n        (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n          (M.val ⊗ (changeOfRings.{u, u, u} α N).val)).app W\n            (m ⊗ₜ[B.obj.obj W]\n              ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n                (changeOfRingsPresheaf.{u, u, u} α N)).app W\n                  (b ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] n))))) :\n    f = g",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T165649-L-1810847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T165649-L-1810847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
