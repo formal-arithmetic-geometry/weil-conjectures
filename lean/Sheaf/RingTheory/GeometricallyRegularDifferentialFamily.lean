@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.GRing
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.RingTheory.Kaehler.Basic
+import Sheaf.RingTheory.PthRootResidueDimensionBalance
+import Mathlib.LinearAlgebra.Dimension.OrzechProperty
 
 /-!
 # Finite independent differential families in geometrically regular local algebras
@@ -58,6 +60,39 @@ theorem linearIndependent_residueField_differentials_of_isGeometricallyRegular
       LinearIndependent (IsLocalRing.ResidueField A) (fun i ↦
         (1 : IsLocalRing.ResidueField A) ⊗ₜ[A]
           KaehlerDifferential.D (ZMod p) A (algebraMap k A (a i))) := by
-  sorry
+  classical
+  let := ZMod.algebra k p
+  let := ((algebraMap k A).comp (algebraMap (ZMod p) k)).toAlgebra
+  intro hind
+  let := Fintype.ofFinite ι
+  let n := Fintype.card ι
+  let e : Fin n ≃ ι := (Fintype.equivFin ι).symm
+  let a' : Fin n → k := a ∘ e
+  have hind' : LinearIndependent k (fun i ↦ KaehlerDifferential.D (ZMod p) k (a' i)) :=
+    hind.comp e e.injective
+  let B := pthRootAlgebra p n A (fun i ↦ algebraMap k A (a' i))
+  obtain ⟨hlocal, hmap, hker, hcoker⟩ :=
+    pthRoot_residue_differentials p n A (fun i ↦ algebraMap k A (a' i))
+  let : IsLocalRing B := hlocal
+  have : IsLocalHom (algebraMap A B) := hmap
+  let L := IsLocalRing.ResidueField B
+  have hbalance := pthRoot_residue_dimension_balance k A p hA n a' hind'
+  have hext : LinearIndependent L (fun i : Fin n ↦
+      (1 : L) ⊗ₜ[A] KaehlerDifferential.D (ZMod p) A (algebraMap k A (a' i))) := by
+    apply linearIndependent_iff_card_eq_finrank_span.mpr
+    rw [Fintype.card_fin]
+    change n = Module.finrank L (Submodule.span L (Set.range (fun i : Fin n ↦
+      (1 : L) ⊗ₜ[A] KaehlerDifferential.D (ZMod p) A (algebraMap k A (a' i)))))
+    rw [← hker, hbalance, hcoker]
+  let K := IsLocalRing.ResidueField A
+  let M := KaehlerDifferential (ZMod p) A
+  let f : K ⊗[A] M →ₗ[K] L ⊗[A] M :=
+    TensorProduct.AlgebraTensorModule.map
+      ((Algebra.linearMap K L) : K →ₗ[K] L) (LinearMap.id : M →ₗ[A] M)
+  have hdown : LinearIndependent K (fun i : Fin n ↦
+      (1 : K) ⊗ₜ[A] KaehlerDifferential.D (ZMod p) A (algebraMap k A (a' i))) := by
+    apply LinearIndependent.of_comp f
+    simpa [f, Function.comp_def] using hext.restrict_scalars' K
+  exact (linearIndependent_equiv e).mp hdown
 
 end Algebra

@@ -14,108 +14,36 @@
  ],
  "proof": [
   {
-   "text": "If I is empty, independence is immediate. Otherwise enumerate I by Fin n. Use the trivial finite purely inseparable extension to obtain regularity of A and identify its conormal dimension d; the universe lift of k and tensor left-unit equivalence implement the trivial extension.",
+   "text": "Enumerate the finite index type by Fin n using Fintype.equivFin, and pull back the given independent differential family along the enumeration.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-pth-root-residue-differentials] to the coefficient images in A. Obtain the actual local p-root quotient B, its local coefficient map, the residue field L, the span description of ker beta and dim coker beta=n.",
    "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "def-weil-pbc-g-ring",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-regular-local-cotangent-dimension"
+    "lem-weil-pbc-pth-root-residue-differentials"
    ],
    "elementary": false
   },
   {
-   "text": "*The extension $k'$.* By [lem-weil-pbc-pth-roots-extension-degree] the subfield $k(a_1^{1/p},\\dots,a_n^{1/p})$ of an algebraic closure of $k$ has degree $p^n$. Let $k'=k[x_1,\\dots,x_n]/(x_1^p-a_1,\\dots,x_n^p-a_n)$ [def-weil-pbc-mv-polynomial-ring]. Using $x_j^p=a_j$, $k'$ is spanned over $k$ by the $p^n$ monomials $x^e$, $0\\le e_j<p$, so $\\dim_kk'\\le p^n$; the $k$-algebra map $k'\\to k(a_1^{1/p},\\dots,a_n^{1/p})$, $x_j\\mapsto a_j^{1/p}$, is surjective (its image $k[a_1^{1/p},\\dots,a_n^{1/p}]$ is a field, being a domain finite over $k$ [lem-weil-pbc-finite-dimensional-domain-is-field], and contains the generators). Comparing dimensions it is an isomorphism: $k'$ is a field with $[k':k]=p^n$. For $y=\\sum_e\\lambda_ex^e\\in k'$, $y^p=\\sum_e\\lambda_e^pa^e\\in k$ ($p$-th power is additive in characteristic $p$), so $k'/k$ is finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension].",
+   "text": "Apply [lem-weil-pbc-pth-root-residue-dimension-balance] to geometric regularity and the enumerated independent base-field family. Substitute the kernel span and cokernel dimension into its equality. linearIndependent_iff_card_eq_finrank_span now proves that the displayed n vectors are L-linearly independent.",
    "uses": [
-    "lem-weil-pbc-pth-roots-extension-degree",
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-finite-dimensional-domain-is-field",
-    "def-weil-pbc-finite-purely-inseparable-extension"
+    "lem-weil-pbc-pth-root-residue-dimension-balance"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (2) => (4) (lines 8789-8793): 'Consider the field extension k' = k(a_1^{1/p}, ..., a_n^{1/p}). By Algebra, Lemma 07DZ we see that k' = k[x_1, ..., x_n]/(x_1^p - a_1, ..., x_n^p - a_n)'"
-   }
+   "elementary": false
   },
   {
-   "text": "*The ring $A'$ and its dimension.* Put $A'=A\\otimes_kk'\\cong A[x_1,\\dots,x_n]/(x_1^p-a_1,\\dots,x_n^p-a_n)$ (tensoring the presentation of step 2 with $A$). By [lem-weil-pbc-purely-inseparable-base-change-local-ring]: $A\\to A'$ is finite and free, $A'$ is a Noetherian local ring whose maximal ideal $\\mathfrak m'$ is the only prime containing $\\mathfrak mA'$, and $K'=A'/\\mathfrak m'$ is a finite extension of $K$, with $A'/\\mathfrak mA'\\cong K\\otimes_kk'$ finite dimensional over $K$. By geometric regularity [def-weil-pbc-g-ring] ($k'/k$ finite purely inseparable, step 2) $A'$ is regular, hence a regular local ring [def-weil-regular-scheme]. By [lem-weil-pbc-flat-height-formula] for the flat map $A\\to A'$ [def-weil-pbc-flat-ring-map] and $\\mathfrak m'$ over $\\mathfrak m$, $\\dim A'=\\dim A+\\dim A'/\\mathfrak mA'$; every prime of the finite-dimensional $K$-algebra $A'/\\mathfrak mA'$ is maximal (a domain finite over $K$ is a field [lem-weil-pbc-finite-dimensional-domain-is-field]), so $\\dim A'/\\mathfrak mA'=0$ and $\\dim A'=d$. By [lem-weil-pbc-regular-local-cotangent-dimension] $\\dim_{K'}\\mathfrak m'/\\mathfrak m'^2=d$.",
+   "text": "The local coefficient map induces the field extension K=ResidueField A → L=ResidueField B. Construct the K-linear tensor map f with AlgebraTensorModule.map applied to Algebra.linearMap K L and the identity on Omega[A/F_p]. Restrict L-linear independence to K using LinearIndependent.restrict_scalars′, then descend along f with LinearIndependent.of_comp. The map sends 1 tensor da_i to 1 tensor da_i because the field map preserves 1. Reindex back using linearIndependent_equiv. The same proof covers the empty family.",
    "uses": [
-    "lem-weil-pbc-purely-inseparable-base-change-local-ring",
-    "def-weil-pbc-g-ring",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-flat-height-formula",
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-finite-dimensional-domain-is-field",
-    "lem-weil-pbc-regular-local-cotangent-dimension"
+    "def-weil-pbc-kahler-differentials"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (3) => (1) (lines 8716-8750: 'A' is a local ring ... since A -> A' is finite flat we see that dim(A) = dim(A')') and proof of (2) => (4) ('By assumption A' is regular (and of the same dimension as A, see above)')"
-   }
-  },
-  {
-   "text": "*The map $\\beta$.* By [lem-weil-pbc-pth-root-presentation-differentials] for $A$ and the images of $a_1,\\dots,a_n$ in $A$: the sequence $A'^{\\oplus n}\\xrightarrow{\\varepsilon}A'\\otimes_A\\Omega_{A/\\mathbf F_p}\\xrightarrow{w}\\Omega_{A'/\\mathbf F_p}\\xrightarrow{z}\\Omega_{A'/A}\\to0$, $\\varepsilon(e_j)=1\\otimes\\mathrm da_j$, is exact and $\\Omega_{A'/A}$ is free on $\\mathrm dx_1,\\dots,\\mathrm dx_n$. Let $N=\\operatorname{im}w=\\ker z$. As $\\Omega_{A'/A}$ is free, $0\\to N\\to\\Omega_{A'/\\mathbf F_p}\\to\\Omega_{A'/A}\\to0$ splits and stays exact after $-\\otimes_{A'}K'$; and $A'^{\\oplus n}\\to A'\\otimes_A\\Omega_{A/\\mathbf F_p}\\to N\\to0$ stays exact after $-\\otimes_{A'}K'$ (right exactness of $\\otimes$). Splicing, and using $(A'\\otimes_A\\Omega_{A/\\mathbf F_p})\\otimes_{A'}K'=K'\\otimes_A\\Omega_{A/\\mathbf F_p}$, we get an exact sequence of $K'$-vector spaces $K'^{\\oplus n}\\xrightarrow{\\varepsilon'}K'\\otimes_A\\Omega_{A/\\mathbf F_p}\\xrightarrow{\\beta}K'\\otimes_{A'}\\Omega_{A'/\\mathbf F_p}\\to K'^{\\oplus n}\\to0$, $\\varepsilon'(e_j)=1\\otimes\\mathrm da_j$, $\\beta(x\\otimes\\mathrm da)=x\\otimes\\mathrm d(a\\otimes1)$. Hence $\\ker\\beta$ is spanned by $1\\otimes\\mathrm da_1,\\dots,1\\otimes\\mathrm da_n$, so $\\dim\\ker\\beta\\le n$ with equality iff these are $K'$-linearly independent, and $\\dim\\operatorname{coker}\\beta=n$.",
-   "uses": [
-    "lem-weil-pbc-pth-root-presentation-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (2) => (4) (lines 8793-8825): NL_{A'/A}, the Jacobi-Zariski sequence for F_p -> A -> A', 'As Omega_{A'/A} is free (hence flat) we get on tensoring with K' an exact sequence ... We conclude that the elements da_j (x) 1 generate Ker(beta)'"
-   }
-  },
-  {
-   "text": "*The conormal rows.* Let $(B,\\mathfrak n,L)$ be a local $\\mathbf F_p$-algebra; we apply this to $(A,\\mathfrak m,K)$ and $(A',\\mathfrak m',K')$. The Jacobi-Zariski sequence of $\\mathbf F_p\\to B\\to L$ [lem-weil-pbc-jacobi-zariski-homology-sequence] is exact: $H_1(L_{L/\\mathbf F_p})\\to H_1(L_{L/B})\\xrightarrow{\\partial_B}L\\otimes_B\\Omega_{B/\\mathbf F_p}\\xrightarrow{w}\\Omega_{L/\\mathbf F_p}\\to\\Omega_{L/B}\\to0$. Here $H_1(L_{L/\\mathbf F_p})=0$ [lem-weil-pbc-field-char-p-h1-cotangent-vanishing], $\\Omega_{L/B}=0$ and $\\theta:H_1(L_{L/B})\\cong\\mathfrak n/\\mathfrak n^2$ [lem-weil-pbc-jacobi-zariski-surjection-h1], and $\\partial_B=\\delta\\circ\\theta$ with $\\delta(f)=1\\otimes\\mathrm df$ (the case $S=B$ of [lem-weil-pbc-jacobi-zariski-connecting-map-naturality]; there $\\iota$ is the identity by [lem-weil-pbc-nl-presentation-h1-functoriality] (2)). Hence $0\\to\\mathfrak n/\\mathfrak n^2\\xrightarrow{\\delta}L\\otimes_B\\Omega_{B/\\mathbf F_p}\\xrightarrow{w}\\Omega_{L/\\mathbf F_p}\\to0$ is exact. For $B=A$ tensor this sequence of $K$-vector spaces with $K'$ over $K$ (exact, as $K'$ is a free $K$-module): $0\\to\\mathfrak m/\\mathfrak m^2\\otimes_KK'\\to K'\\otimes_A\\Omega_{A/\\mathbf F_p}\\to K'\\otimes_K\\Omega_{K/\\mathbf F_p}\\to0$ is exact.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence",
-    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-    "lem-weil-pbc-jacobi-zariski-surjection-h1",
-    "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
-    "lem-weil-pbc-nl-presentation-h1-functoriality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (2) => (4) (line 8826, the rows of the 'big diagram', which are the Jacobi-Zariski sequences of F_p -> A -> K and F_p -> A' -> K' as in the equivalence (3) <=> (4), using H_1(L_{K/F_p}) = 0)"
-   }
-  },
-  {
-   "text": "*The map $\\gamma$.* Let $\\gamma:K'\\otimes_K\\Omega_{K/\\mathbf F_p}\\to\\Omega_{K'/\\mathbf F_p}$, $x\\otimes\\mathrm db\\mapsto x\\,\\mathrm db$. The Jacobi-Zariski sequence of $\\mathbf F_p\\to K\\to K'$ [lem-weil-pbc-jacobi-zariski-homology-sequence], $H_1(L_{K'/\\mathbf F_p})\\to H_1(L_{K'/K})\\xrightarrow{\\partial}K'\\otimes_K\\Omega_{K/\\mathbf F_p}\\xrightarrow{\\gamma}\\Omega_{K'/\\mathbf F_p}\\to\\Omega_{K'/K}\\to0$, is exact and $H_1(L_{K'/\\mathbf F_p})=0$ [lem-weil-pbc-field-char-p-h1-cotangent-vanishing]; so $\\ker\\gamma\\cong H_1(L_{K'/K})$ and $\\operatorname{coker}\\gamma\\cong\\Omega_{K'/K}$. Since $K'/K$ is finite (step 3, [lem-weil-pbc-purely-inseparable-base-change-local-ring]), [lem-weil-pbc-cartier-equality] gives $\\dim_{K'}\\Omega_{K'/K}=\\dim_{K'}H_1(L_{K'/K})<\\infty$. So $\\ker\\gamma$ and $\\operatorname{coker}\\gamma$ have the same finite dimension.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence",
-    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-    "lem-weil-pbc-purely-inseparable-base-change-local-ring",
-    "lem-weil-pbc-cartier-equality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (2) => (4) (line 8840): 'By Lemma 07E1 and the Jacobi-Zariski sequence for F_p -> K -> K' we see that the kernel and cokernel of gamma have the same finite dimension'"
-   }
-  },
-  {
-   "text": "*Snake lemma.* Consider the commutative diagram of $K'$-vector spaces with exact rows $0\\to\\mathfrak m/\\mathfrak m^2\\otimes_KK'\\to K'\\otimes_A\\Omega_{A/\\mathbf F_p}\\to K'\\otimes_K\\Omega_{K/\\mathbf F_p}\\to0$ and $0\\to\\mathfrak m'/\\mathfrak m'^2\\to K'\\otimes_{A'}\\Omega_{A'/\\mathbf F_p}\\to\\Omega_{K'/\\mathbf F_p}\\to0$ (step 5) and vertical maps $\\alpha$ (induced by $A\\to A'$, which maps $\\mathfrak m$ into $\\mathfrak m'$), $\\beta$ (step 4), $\\gamma$ (step 6). The squares commute because $\\Omega_{A/\\mathbf F_p}\\to\\Omega_{A'/\\mathbf F_p}$, $\\mathrm db\\mapsto\\mathrm d(b\\otimes1)$, is compatible with $\\mathrm d$ and with the residue maps [def-weil-pbc-kahler-differentials]: $\\beta(1\\otimes\\mathrm df)=1\\otimes\\mathrm d(f\\otimes1)=\\delta'(\\alpha(f))$ for $f\\in\\mathfrak m$, and $\\gamma(1\\otimes\\mathrm d\\bar b)=\\mathrm d\\bar b=w'(\\beta(1\\otimes\\mathrm db))$ for $b\\in A$. The snake lemma [lem-weil-pbc-snake-lemma-modules] gives an exact sequence $0\\to\\ker\\alpha\\to\\ker\\beta\\to\\ker\\gamma\\to\\operatorname{coker}\\alpha\\to\\operatorname{coker}\\beta\\to\\operatorname{coker}\\gamma\\to0$ of finite-dimensional $K'$-vector spaces: $\\alpha$ goes between spaces of the same dimension $d$ (steps 1, 3), so $\\dim\\ker\\alpha=\\dim\\operatorname{coker}\\alpha$; $\\dim\\ker\\gamma=\\dim\\operatorname{coker}\\gamma<\\infty$ (step 6); $\\dim\\ker\\beta\\le n$, $\\dim\\operatorname{coker}\\beta=n$ (step 4). The alternating sum of dimensions in a finite exact sequence of finite-dimensional vector spaces is $0$, so $\\dim\\ker\\beta-\\dim\\operatorname{coker}\\beta=(\\dim\\ker\\alpha-\\dim\\operatorname{coker}\\alpha)+(\\dim\\ker\\gamma-\\dim\\operatorname{coker}\\gamma)=0$, i.e. $\\dim\\ker\\beta=n$.",
-   "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-snake-lemma-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07E5 (proposition-characterization-geometrically-regular, line 8697), proof of (2) => (4) (lines 8826-8845): the big diagram with alpha, beta, gamma; 'By assumption A' is regular ... hence the kernel and cokernel of alpha have the same dimension. It follows that the kernel and cokernel of beta have the same dimension which is what we wanted to show'"
-   }
-  },
-  {
-   "text": "The n vectors $1\\otimes\\mathrm da_i$ span $\\ker\\beta$, whose dimension is n by the preceding step. A spanning family of n vectors in an n-dimensional vector space is a basis, hence independent over $K\\prime$. A relation with coefficients in $K$ remains such a relation after extension to $K\\prime$; injectivity of the field map $K\\to K\\prime$ forces every coefficient to vanish. Thus the original family is independent over K. Reindexing by the chosen finite enumeration proves the assertion for I.",
-   "uses": [],
    "elementary": true
   }
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Proposition Tag 07E5, proposition-characterization-geometrically-regular, proof of (2) => (4), finite family a_1,...,a_n and the big conormal diagram (original item steps 4-10)"
+  "place": "Tag 07E5 (2) => (4), final spanning/dimension/independence argument, with residue-field descent and finite reindexing proved in Lean by P3; the p-root residue presentation is proved in a new module, and locality and conormal dimension balance are separate sourced obligations. Read online at https://stacks.math.columbia.edu/tag/07E5."
  },
  "mathlib_searches": [
   {
@@ -181,25 +109,9 @@
   }
  },
  "proof_deps": [
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-g-ring",
   "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-cartier-equality",
-  "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-  "lem-weil-pbc-finite-dimensional-domain-is-field",
-  "lem-weil-pbc-flat-height-formula",
-  "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
-  "lem-weil-pbc-jacobi-zariski-homology-sequence",
-  "lem-weil-pbc-jacobi-zariski-surjection-h1",
-  "lem-weil-pbc-nl-presentation-h1-functoriality",
-  "lem-weil-pbc-pth-root-presentation-differentials",
-  "lem-weil-pbc-pth-roots-extension-degree",
-  "lem-weil-pbc-purely-inseparable-base-change-local-ring",
-  "lem-weil-pbc-regular-local-cotangent-dimension",
-  "lem-weil-pbc-snake-lemma-modules"
+  "lem-weil-pbc-pth-root-residue-differentials",
+  "lem-weil-pbc-pth-root-residue-dimension-balance"
  ],
  "lean": {
   "module": "Sheaf.RingTheory.GeometricallyRegularDifferentialFamily",
@@ -225,9 +137,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T054223-L-444607",
+  "landing": "20261013T082401-L-1642632",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
