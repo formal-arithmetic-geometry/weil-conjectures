@@ -1,0 +1,209 @@
+{
+ "id": "lem-weil-pbc-formal-completion-affine-kernel",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine kernel part of the proof of completion exactness (0881)",
+   "via": [
+    "lem-weil-pbc-formal-completion-exact",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The affine kernel fork of a completed coherent short exact sequence",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], $\\mathcal I$ a quasi-coherent sheaf of ideals, and $C:\\mathit{Coh}(\\mathcal O_X)\\to\\mathit{Coh}(X,\\mathcal I)$ the canonical positive-power quotient completion functor [def-weil-pbc-coherent-formal-module]. Let $h$ certify that $C$ is additive [def-weil-pbc-additive-functor]. Let $U\\subseteq X$ be an affine open [def-weil-affine-spectrum], regarded as a Noetherian open subscheme. Let $\\rho:\\mathit{Coh}(X,\\mathcal I)\\to\\mathit{Coh}(U,\\mathcal I|_U)$ be a zero-preserving functor whose composite with the full inverse-system inclusion equals termwise open restriction [lem-weil-pbc-coherent-formal-modules-local-exactness]. For any short exact sequence $0\\to\\mathcal F_1\\xrightarrow{f}\\mathcal F_2\\xrightarrow{g}\\mathcal F_3\\to0$ in $\\mathit{Coh}(\\mathcal O_X)$ [def-weil-pbc-exact-sequence], the fork $\\rho(C\\mathcal F_1)\\xrightarrow{\\rho(Cf)}\\rho(C\\mathcal F_2)\\xrightarrow{\\rho(Cg)}\\rho(C\\mathcal F_3)$ is a kernel fork in $\\mathit{Coh}(U,\\mathcal I|_U)$: every arrow into $\\rho(C\\mathcal F_2)$ killed by $\\rho(Cg)$ factors uniquely through $\\rho(Cf)$. The statement asserts only this kernel universal property on affine opens, and makes no assertion that $\\rho(Cg)$ is epimorphic.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine part of the proof; Lemma 087W (lemma-inverse-systems-affine); Algebra, Lemma 00MB (lemma-completion-flat) (2)"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-additive-functor",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-coherent-formal-modules-local-exactness",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the coherent short exact sequence to the affine open U. The coherent full inclusion creates kernels and cokernels, and open restriction preserves them. Taking affine sections gives an exact sequence of finite modules over A = Gamma(U, O_X): kernels are sectionwise and quasi-coherent cokernels have surjective affine sections. Coherence supplies quasi-coherence and finite affine sections.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-abelian-full-subcategory-exact",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-sheaf-of-modules-category",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine part of the proof; Lemma 087W (lemma-inverse-systems-affine); Algebra, Lemma 00MB (lemma-completion-flat) (2)"
+   }
+  },
+  {
+   "text": "Restriction commutes with the product by the ideal and, inductively, by its positive powers, and with quotient cokernels. The affine ideal-product and quotient formulas identify the sections of the restricted completed system with M/I^(n+1)M, including the quotient transition maps and reductions of the original arrows. The equality specifying rho after the full inclusion identifies rho of the completed complex with these systems.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine part of the proof; Lemma 087W (lemma-inverse-systems-affine); Algebra, Lemma 00MB (lemma-completion-flat) (2)"
+   }
+  },
+  {
+   "text": "Identify the affine open with Spec(A). The affine tilde-sections adjunction identifies the restricted quasi-coherent ideal with the ideal I_U of its affine sections. The equivalence for coherent formal modules and its natural limit cones then identify the three restricted completed systems and their arrows with the completions of the finite A-modules and the induced completion-linear maps.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine part of the proof; Lemma 087W (lemma-inverse-systems-affine); Algebra, Lemma 00MB (lemma-completion-flat) (2)"
+   }
+  },
+  {
+   "text": "Apply injectivity and middle exactness of adic completion on finite modules. These give the kernel universal property of the first completed arrow in modules over the completed ring. The completed ring is Noetherian and the three modules are finite; the finite-module full inclusion creates kernels, so this fork is also limiting in the category of finite modules.",
+   "uses": [
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-finite-modules-noetherian-abelian",
+    "lem-weil-pbc-abelian-full-subcategory-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine part of the proof; Lemma 087W (lemma-inverse-systems-affine); Algebra, Lemma 00MB (lemma-completion-flat) (2)"
+   }
+  },
+  {
+   "text": "Transport this limiting fork through the inverse affine equivalence, which preserves limits. The natural identification in the preceding steps identifies it with the fork of the restricted completed arrows; invariance of limiting cones under isomorphism gives the required kernel universal property. No termwise injectivity or global short exactness is asserted.",
+   "uses": [
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine part of the proof; Lemma 087W (lemma-inverse-systems-affine); Algebra, Lemma 00MB (lemma-completion-flat) (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-abelian-full-subcategory-exact",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-modules-noetherian-abelian",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine part of the proof; Lemma 087W (lemma-inverse-systems-affine); Algebra, Lemma 00MB (lemma-completion-flat) (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent formal completion preserves kernels on affine Noetherian schemes",
+   "results": "The service returned Internal Server Error; no search result was available.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal completion of coherent sheaves has the kernel universal property on an affine open",
+   "results": "Eight results concerned affine scheme ideal kernels and affine transition limits (Scheme.ker_of_isAffine, exists_appTop_map_eq_zero_of_isAffine_of_isLimit, and related declarations); none states the coherent formal kernel property.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.map_injective|AdicCompletion.map_exact",
+   "results": "Mathlib/RingTheory/AdicCompletion/Exactness.lean has the finite-module completion results; there is no sheaf-level kernel comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalCompletionExact",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalCompletionAffineKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalCompletionAffineKernel.lean",
+  "declaration": "AlgebraicGeometry.formalCompletion_affine_kernel",
+  "statement": "theorem formalCompletion_affine_kernel (X : Scheme.{u}) [IsNoetherian X]\n    (I : X.IdealSheafData) (h : (completion X I).Additive)\n    (U : X.Opens) [IsNoetherian U.toScheme] (hU : IsAffineOpen U)\n    (ρ : CoherentFormalModule X I ⥤ CoherentFormalModule U.toScheme (I.comap U.ι))\n    (hz : ρ.PreservesZeroMorphisms)\n    (hρ : ρ ⋙ (IsCoherentFormalModule (I.comap U.ι)).ι =\n      (IsCoherentFormalModule I).ι ⋙\n        (Functor.whiskeringRight ℕᵒᵖ X.Modules U.toScheme.Modules).obj\n          (Scheme.Modules.restrictFunctor U.ι))\n    (S : ShortComplex (CoherentModules X)) (hS : S.ShortExact) :\n    let T := @ShortComplex.map _ _ _ _ _ _ S (completion X I)\n      (@Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ (completion X I) h)\n    let V := @ShortComplex.map _ _ _ _ _ _ T ρ hz\n    Nonempty (IsLimit (KernelFork.ofι V.f V.zero))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T015612-L-3026269",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T015612-L-3026269",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
