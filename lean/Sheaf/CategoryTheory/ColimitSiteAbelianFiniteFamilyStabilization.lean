@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
+import Sheaf.CategoryTheory.ColimitSiteAbelianFiniteFamilyStabilizationNonempty
 
 /-! # Stabilization of finite abelian stage families
 
@@ -116,6 +117,18 @@ theorem colimit_site_abelian_finite_family_stabilization
               r ≫ (V.ι.app t.right).toFunctor.map g ∧
             (α t').hom.app (op Z') (y' g' hg') =
               (ColimitSiteStageImage.target F P V Q i G).obj.map r.op
-                ((α t).hom.app (op Z) (y g hg)) := by sorry
+                ((α t).hom.app (op Z) (y g hg)) := by
+  classical
+  by_cases hne : Nonempty T.uncurry
+  · exact colimit_site_abelian_finite_family_stabilization_nonempty
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback
+      i G α hα t W T hT hne y hy
+  · let y0 := y
+    have hy0 : y0.Compatible := by
+      intro Z₁ Z₂ Z g₁ g₂ f₁ f₂ hf₁ hf₂ heq
+      exact False.elim (hne ⟨⟨Z₁, f₁⟩, hf₁⟩)
+    refine ⟨t, W, T, hT, rfl, y0, hy0, ?_⟩
+    intro Z g hg
+    exact False.elim (hne ⟨⟨Z, g⟩, hg⟩)
 
 end CategoryTheory

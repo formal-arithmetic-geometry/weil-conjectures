@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-colimit-site-abelian-finite-family-stabilization-nonempty",
+ "kind": "statement",
+ "title": "Nonempty finite abelian family stabilization",
+ "statement": "Let $J$ be a small filtered category and $F:J\\to\\mathrm{Cat}$ a diagram of small categories [def-weil-pbc-category-colimit]. Let $P_j$ be stage precoverages [def-weil-pbc-sites-and-cohomology] with isomorphism covers, finite indexed base-change and composition stability [def-weil-pbc-finite-precoverage], and covering pullbacks. Suppose every covering presieve has finitely many arrows, transition functors send covers to covers, preserve pullbacks of covering arrows, and are continuous for the generated topologies. Let $V$ be a cocone with object and arrow set cocones colimiting [def-weil-pbc-arrows-functor]. Let $Q$ be a precoverage on $V.pt$ with the same finite closure, isomorphism-cover, and covering-pullback properties. Assume its covers are exactly transported stage covers, each $V_j$ preserves covering pullbacks and is continuous. Fix $i$ and an abelian sheaf $G$ on $P_i$. Write $A_t=F(t.hom)^{-1}G$ for $t\\in\\mathrm{Under}(i)$, and $H=V_i^{-1}G$. Let $\\alpha_t:A_t\\to V_t^*H$ be sheaf morphisms whose composites with the stage adjunction units agree, componentwise as arrows, with the $V_i$ adjunction unit. Assume the presieve $T$ below is nonempty. Fix $t\\in\\mathrm{Under}(i)$, an object $W\\in F(t.right)$, a covering presieve $T\\in P_{t.right}(W)$ and an $A_t$-valued family $y$ on $T$. Suppose the family $g\\mapsto\\alpha_t(y_g)$ is compatible on $T$ as a family in the restriction of $H$ along $V_t$. Then there exist $t'\\in\\mathrm{Under}(i)$, $W'\\in F(t'.right)$, a cover $T'\\in P_{t'.right}(W')$, an equality $h:V_{t'}W'=V_tW$, and a compatible $A_{t'}$-valued family $y'$ on $T'$ such that for every $g':Z'\\to W'$ in $T'$ there are $g:Z\\to W$ in $T$ and $r:V_{t'}Z'\\to V_tZ$ with $V_{t'}(g')\\circ h=r\\circ V_t(g)$ and $\\alpha_{t'}(y'_{g'})=H(r)(\\alpha_t(y_g))$. No sieve or generated-section family on the colimit site is given, and no global amalgamation is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-finite-precoverage",
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-colimit-site-abelian-stage-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, finite-cover matching equalizer paragraph, restricted to a nonempty finite presieve"
+ },
+ "proof": [
+  {
+   "text": "Use the finite pairwise pullback equalities, unit-compatible adjunction comparison, finite source-unit zero detection, and filteredness to obtain a common transition where all compatibility equations vanish; transport the family and factor arrows by cocone naturality.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-abelian-finite-family-stabilization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-site-abelian-finite-family-stabilization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, finite-cover matching equalizer and adjunction paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite family of inverse image sections whose images are matching becomes matching after refinement of its filtered stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite stage family whose images in the colimit inverse image are compatible becomes compatible after passing to a later filtered stage",
+   "results": "CategoryTheory.IsFiltered.sup_exists; CategoryTheory.IsFiltered.toSup_commutes; CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered; CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit; CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'; CategoryTheory.Functor.IsEventuallyConstantFrom.hasColimit; CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable; CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit",
+   "date": "2026-10-13",
+   "verdict": "Generic filtered-colimit or matching-family tools only; no filtered-site abelian family lift/stabilization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "FamilyOfElements.*Compatible|exists_familyOfElements",
+   "results": "Mathlib/CategoryTheory/Sites/SheafOfTypes.lean; Mathlib/CategoryTheory/Sites/SheafOfTypes.lean; Mathlib/CategoryTheory/Sites/SheafOfTypes.lean; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean; Mathlib/CategoryTheory/Sites/Coherent/CoherentSheaves.lean; Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean; Mathlib/CategoryTheory/Sites/Sheaf.lean; Mathlib/CategoryTheory/Sites/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic filtered-colimit or matching-family tools only; no filtered-site abelian family lift/stabilization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteAbelianFiniteFamilyStabilization",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-abelian-finite-family-stabilization",
+   "place": "Tag 0A35 nonempty-cover case",
+   "via": [
+    "lem-weil-pbc-colimit-site-abelian-finite-family-stabilization"
+   ]
+  }
+ },
+ "same_as": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteAbelianFiniteFamilyStabilizationNonempty",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteAbelianFiniteFamilyStabilizationNonempty.lean",
+  "declaration": "CategoryTheory.colimit_site_abelian_finite_family_stabilization_nonempty",
+  "statement": "theorem colimit_site_abelian_finite_family_stabilization_nonempty (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u}) (P : ∀ j : J, Precoverage (F.obj j)) [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderFiniteComposition] [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks] (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → Finite R.uncurry) (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X), R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X)) (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (F.map a).toFunctor) [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck] (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V)) (harrows : IsColimit (Cat.arrows.mapCocone V)) (Q : Precoverage V.pt) [Q.HasIsos] [Q.IsStableUnderFiniteComposition] [Q.IsStableUnderFiniteBaseChange] [Q.HasPullbacks] (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔ ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y), S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)) (hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (V.ι.app j).toFunctor)) [∀ j : J, (V.ι.app j).toFunctor.IsContinuous (P j).toGrothendieck Q.toGrothendieck] (i : J) (G : Sheaf (P i).toGrothendieck AddCommGrpCat.{u}) (α : ∀ t : Under i, (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶ ((V.ι.app t.right).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P t.right).toGrothendieck Q.toGrothendieck).obj ((sheafPullback (V.ι.app i).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck Q.toGrothendieck).obj G)) (hα : ∀ (t : Under i) (X : F.obj i), Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app (op X) ≫ (α t).hom.app (op ((F.map t.hom).toFunctor.obj X))) = Arrow.mk (((sheafAdjunctionContinuous (V.ι.app i).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X))) (t : Under i) (W : F.obj t.right) (T : Presieve W) (hT : T ∈ P t.right W) (hTnonempty : Nonempty T.uncurry) (y : T.FamilyOfElements (((sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj ⋙ forget AddCommGrpCat.{u})) (hy : (show T.FamilyOfElements ((V.ι.app t.right).toFunctor.op ⋙ (ColimitSiteStageImage.target F P V Q i G).obj ⋙ forget AddCommGrpCat.{u}) from fun {Z} g hg ↦ (α t).hom.app (op Z) (y g hg)).Compatible) : ∃ (t' : Under i) (W' : F.obj t'.right) (T' : Presieve W'), T' ∈ P t'.right W' ∧ ∃ (hW : (V.ι.app t'.right).toFunctor.obj W' = (V.ι.app t.right).toFunctor.obj W) (y' : T'.FamilyOfElements (((sheafPullback (F.map t'.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P t'.right).toGrothendieck).obj G).obj ⋙ forget AddCommGrpCat.{u})), y'.Compatible ∧ ∀ {Z' : F.obj t'.right} (g' : Z' ⟶ W') (hg' : T' g'), ∃ (Z : F.obj t.right) (g : Z ⟶ W) (hg : T g) (r : (V.ι.app t'.right).toFunctor.obj Z' ⟶ (V.ι.app t.right).toFunctor.obj Z), (V.ι.app t'.right).toFunctor.map g' ≫ eqToHom hW = r ≫ (V.ι.app t.right).toFunctor.map g ∧ (α t').hom.app (op Z') (y' g' hg') = (ColimitSiteStageImage.target F P V Q i G).obj.map r.op ((α t).hom.app (op Z) (y g hg))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T004022-L-2490577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T004022-L-2490577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
