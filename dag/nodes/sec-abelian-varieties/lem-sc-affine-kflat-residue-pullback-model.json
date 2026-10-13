@@ -15,37 +15,49 @@
  ],
  "proof": [
   {
-   "text": "Factor the residue point through U. Use the canonical exact over-site and affine restriction equivalences to transport the supplied model to Q(tilde F) on Spec A. Open restriction commutes with derived pullback. The exact functors defining affinePerfectSheafification, not an arbitrary existential equivalence, are used in these identifications.",
-   "uses": [
-    "lem-pc-affine-localized-site-derived-transport",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Form the explicit field isomorphism e from the residue maps of the open immersion and the affine chart and Spec.residueFieldIso. Residue-point naturality and Spec.map_residueFieldIso_inv_eq_fromSpecResidueField identify the two residue morphisms. Spec.algebraMap_residueFieldIso_inv and naturality of evaluation identify A -> kappa_X(z) with e.inv composed with algebraMap A kappa(p).",
+   "text": "Factor the residue point through U using the inverse of its residue-field map. Residue-point naturality and Spec.map_residueFieldIso_inv_eq_fromSpecResidueField identify g followed by the affine chart with Spec.map of the composite A -> kappa(p) -> kappa_X(z), where the second map is e.inv. These are equalities of the actual morphisms, not identifications through an unspecified equivalence.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply derivedPullback_tilde_iso with the identity K-flat resolution of F. Transport the resulting termwise residue-extension complex along the field isomorphism: pullback along a field isomorphism is exact scalar transport and agrees with restrictScalars e.hom. Compose the derived isomorphisms from the preceding steps. The scalar-change tilde comparison is the ordinary affine formula specialized to an isomorphism.",
+   "text": "Termwise tilde F is K-flat by lem-pc-affine-tilde-kflat, after converting the categorical module K-flat predicate using the proved homotopy-category acyclicity criterion. Pull it back along the chart using lem-pc-kflat-pullback-preservation. The chart restriction functor is naturally isomorphic to tensor pullback by the two adjunctions. Cancel the canonical over-site equivalence and its inverse in affinePerfectSheafification. Mapping these natural isomorphisms to complexes transports K-flatness to the supplied local model. Transport K-flatness through the existing private Scheme.Modules.kFlat_of_iso from FlatModelFiniteFreeComparison, imported for the proof with import all; do not redeclare it.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sc-local-kflat-pullback-model to the supplied model and the factored residue point. This computes the ambient derived pullback as Q of ordinary pullback of the transported complex on U, with no chosen derived affine equivalence and no new boundedness assumption.",
+   "uses": [
+    "lem-sc-local-kflat-pullback-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose ordinary pullbacks along g and the affine chart and apply the natural tilde/base-change comparison lem-weil-pbc-tilde-pullback-base-change to the identified spectrum morphism. Extension of scalars along e.inv is naturally isomorphic to restriction along e.hom: both are left adjoint to restriction along e.inv, using the module equivalence of a ring isomorphism. The scalar-extension composition isomorphism therefore rewrites extension along A -> kappa_X(z) as extension to kappa(p) followed by restriction along e.hom. Lift the resulting natural isomorphism degreewise to complexes, map it with Q, and compose with the local-model isomorphism.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-localized-site-derived-transport",
-  "lem-pc-affine-derived-pullback-tensor-tilde"
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-local-kflat-pullback-model",
+  "lem-weil-pbc-tilde-pullback-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N4",
+  "group": "F1",
   "date": "2026-10-13",
-  "document": "Stacks Project, Derived Categories of Schemes",
-  "place": "Tags 0BDI (affine reduction) and 08DW(2) (affine derived pullback)",
-  "note": "Separates the derived-object computation from the proved K-flatness and homology/rank steps."
+  "document": "Stacks Project",
+  "place": "Tags 08DW, 08DV, 06YC, 06YJ and 01I9; Mathlib residue-point naturality and extension/restriction adjunctions",
+  "note": "Uses the K-flat counit after canonical local restriction and the ordinary affine base-change formula; avoids the underspecified existential derived affine equivalence. Repair: reuses the existing Modules.kFlat_of_iso instead of duplicating its proof."
  },
  "mathlib_searches": [
   {
@@ -154,11 +166,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N4",
+  "reviewer": "X-48de5",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T124313-L-3777151",
+  "landing": "20261013T152728-L-1015279",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files and DAG records matched against the packet, repository baseline, compiler, importers, signatures, and axioms."
  }
 }

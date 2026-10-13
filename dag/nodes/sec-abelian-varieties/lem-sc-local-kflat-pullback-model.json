@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-local-kflat-pullback-model",
+ "kind": "statement",
+ "title": "Derived pullback from a supplied K-flat model on an open",
+ "statement": "Let f:T→X be a morphism of schemes [def-pc-scheme], U an open of X, and g:T→U.toScheme a morphism with g followed by U.ι equal to f. Choose ambient derived categories [def-pc-derived-category] for X and T and a derived category for the localized module site of U, with common morphism universe w. Let E be an object of D(O_X), and K a complex of modules on the localized site of U. Suppose restriction of E to that site is isomorphic to Q(K), and that the complex obtained from K by the canonical Modules.overEquiv U functor is K-flat [def-pc-kflat-complex] on U.toScheme. Then Lf*E [def-pc-derived-pullback] is isomorphic to Q of the complex obtained by applying Modules.overEquiv U followed by ordinary Modules.pullback g termwise to K. No boundedness, affineness, or quasi-coherence condition is imposed.",
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes and Cohomology of Sheaves",
+  "place": "Tag 08DW, proof (compatibility with restriction to open subschemes), and Tag 06YJ, final sentence (computation on K-flat complexes); https://stacks.math.columbia.edu/tag/08DW and https://stacks.math.columbia.edu/tag/06YJ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Set W to the whole open of T, b=W.ι, and r=f.resLE U W. The factorization through U implies W≤f inverse-image U, and cancellation of the monomorphism U.ι gives b followed by g equal to r. Choose standard derived categories on the two open subschemes, independently of ambient universe w. Exact restriction followed by the whole-open over equivalence is an equivalence, as seen explicitly by restricting along b and its inverse. Its induced derived functor therefore reflects isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use lem-pc-derived-pullback-open-restriction-universes and the localization factorization of the canonical over equivalence to transport the supplied model to Q(P), where P is K transported to U.toScheme. The K-flat counit from def-pc-derived-pullback computes Lr*Q(P) as Q of termwise tensor pullback. The adjunction of lem-pc-module-pullback-adjunction and the ordinary module-pullback adjunction identify this with Q of ordinary pullback r applied termwise to P.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "def-pc-derived-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The overFunctorEquiv for W, its identification with ordinary pullback b, the ordinary pullback-composition isomorphism, and b followed by g equal to r identify restriction of the proposed right-hand complex with the same complex on W. Lift this natural isomorphism termwise and through Q. Compose with the previous comparison and reflect the resulting isomorphism through the fully faithful derived whole-open restriction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "def-pc-derived-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 08DW and 06YJ",
+  "note": "Explicitly expands the canonical local-model restriction argument and handles independent localization universes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedPullback.*local|local.*kFlat.*model|kFlat.*pullback",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No existing local derived K-flat model comparison; ordinary module pullback API only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback computed by a K-flat representative on an open subscheme through which the morphism factors",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Flat.instFstScheme; AlgebraicGeometry.Flat.instSndScheme; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Hom.flat_appLE; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l",
+   "date": "2026-10-13",
+   "verdict": "No existing local derived K-flat model comparison; ordinary module pullback API only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"KFlat\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No existing local derived K-flat model comparison; ordinary module pullback API only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback of a local K-flat model along a morphism factoring through an open subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BDI affine reduction: the derived-object computation preceding cohomology and Betti ranks; canonical open restriction step",
+   "via": [
+    "lem-sc-affine-kflat-residue-pullback-model",
+    "lem-sc-affine-bounded-above-fiber-betti-comparison",
+    "lem-sc-pseudo-coherent-fiber-bounded-above-model",
+    "lem-sc-pseudo-coherent-fiber-finite-free-model",
+    "lem-sc-perfect-jump-loci",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalKFlatPullbackModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalKFlatPullbackModel.lean",
+  "declaration": "AlgebraicGeometry.derivedPullback_local_kFlat_model",
+  "statement": "theorem derivedPullback_local_kFlat_model {T X : Scheme.{u}} (f : T ⟶ X)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (g : T ⟶ U.toScheme) (hcomp : g ≫ U.ι = f)\n    (E : schemeDerivedCategory X)\n    (K : CochainComplex (SheafOfModules.{u}\n      ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hK : CochainComplex.IsKFlat (R := U.toScheme.sheaf)\n      (((Scheme.Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K))\n    (hmodel : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅\n        DerivedCategory.Q.obj K)) :\n    Nonempty ((derivedPullback f).obj E ≅ DerivedCategory.Q.obj\n      ((Functor.mapHomologicalComplex\n        ((Scheme.Modules.overEquiv U).functor ⋙ Scheme.Modules.pullback g) (.up ℤ)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-48de5",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T152728-L-1015279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-48de5",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T152728-L-1015279",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files and DAG records matched against the packet, repository baseline, compiler, importers, signatures, and axioms."
+ }
+}
