@@ -9,8 +9,7 @@ public import Mathlib.Algebra.Homology.HomologicalBicomplex
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Mathlib.Algebra.Homology.ModelCategory.Injective
-import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource
+import Sheaf.CategoryTheory.CartanEilenbergComparisonColumnStep
 
 /-! # Augmented comparison of Cartan–Eilenberg resolutions
 
@@ -89,6 +88,105 @@ theorem exists_cartanEilenberg_augmented_comparison
       F.map ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.X p)).inv ≫
           (eI.f p).f 0) ≫ (φ.f p).f 0 =
         u.f p ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.X p)).inv ≫
-          (eJ.f p).f 0 := by sorry
+          (eJ.f p).f 0 := by
+  classical
+  dsimp only
+  let G := F.mapHomologicalComplex (ComplexShape.up ℕ)
+  let aI (p : ℤ) :=
+    (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.X p)).inv ≫ (eI.f p).f 0
+  let aJ (p : ℤ) :=
+    (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.X p)).inv ≫ (eJ.f p).f 0
+  obtain ⟨iI, hiI⟩ := hIbelow
+  obtain ⟨iJ, hiJ⟩ := hJbelow
+  let i := min iI iJ
+  have zi (p : ℤ) (hp : p < i) : IsZero (I.X p) := hiI p (by omega)
+  have zj (p : ℤ) (hp : p < i) : IsZero (J.X p) := hiJ p (by omega)
+  let P (n : ℕ) : ℤ := i + n
+  let BI (n : ℕ) := image (I.d (P n - 1) (P n))
+  let BJ (n : ℕ) := image (J.d (P n - 1) (P n))
+  let Bound (n : ℕ) := {b : G.obj (BI n) ⟶ BJ n //
+    F.map (aI (P n - 1) ≫ (factorThruImage (I.d (P n - 1) (P n))).f 0) ≫ b.f 0 =
+      u.f (P n - 1) ≫ aJ (P n - 1) ≫
+        (factorThruImage (J.d (P n - 1) (P n))).f 0}
+  let Col (n : ℕ) := G.obj (I.X (P n)) ⟶ J.X (P n)
+  let Good (n : ℕ) (b : Bound n) (c : Bound (n + 1)) (x : Col n) : Prop :=
+    (F.map (aI (P n)) ≫ x.f 0 = u.f (P n) ≫ aJ (P n)) ∧
+    (G.map (image.ι (I.d (P n - 1) (P n))) ≫ x =
+      b.val ≫ image.ι (J.d (P n - 1) (P n))) ∧
+    (G.map (factorThruImage (I.d (P (n + 1) - 1) (P (n + 1)))) ≫ c.val =
+      eqToHom (congrArg (fun k : ℤ ↦ G.obj (I.X k)) (by dsimp only [P]; omega)) ≫ x ≫
+        eqToHom (congrArg (fun k : ℤ ↦ J.X k) (by dsimp only [P]; omega)) ≫
+        factorThruImage (J.d (P (n + 1) - 1) (P (n + 1))))
+  have extend (n : ℕ) (b : Bound n) :
+      ∃ c : Bound (n + 1), ∃ x : Col n, Good n b c x := by
+    obtain ⟨x, c, hx, hc, hin, hout⟩ :=
+      exists_cartanEilenberg_comparison_column_step F K L u (P n) (P (n + 1))
+        (by dsimp only [P]; omega) I eI (hIcol _) (hIres _) ((hIres _).2.1)
+        J eJ (hJcol _) (hJinj _) (hJinj' _) (hJres _) ((hJres _).2.1)
+        (fun k ↦ (hJinj' _ k).2.1) b.val
+          (by simpa only [aI, aJ, Category.assoc] using b.property)
+    refine ⟨⟨c, ?_⟩, x, hx, hin, hout⟩
+    simpa only [aI, aJ, Category.assoc] using hc
+  let b0 : Bound 0 := ⟨0, by
+    have hz : eJ.f (P 0 - 1) = 0 := (zj _ (by dsimp [P]; omega)).eq_of_tgt _ _
+    simp [aJ, hz]⟩
+  let transition (n : ℕ) (b : Bound n) :
+      Σ c : Bound (n + 1), {x : Col n // Good n b c x} :=
+    ⟨(extend n b).choose, (extend n b).choose_spec.choose,
+      (extend n b).choose_spec.choose_spec⟩
+  let bs : ∀ n : ℕ, Bound n := Nat.rec b0 (fun n b ↦ (transition n b).1)
+  let xs (n : ℕ) : Col n := (transition n (bs n)).2.val
+  have good (n : ℕ) : Good n (bs n) (bs (n + 1)) (xs n) :=
+    (transition n (bs n)).2.property
+  have aug (n : ℕ) : F.map (aI (P n)) ≫ (xs n).f 0 = u.f (P n) ≫ aJ (P n) :=
+    (good n).1
+  have comm (n : ℕ) : xs n ≫ J.d (P n) (P (n + 1)) =
+      G.map (I.d (P n) (P (n + 1))) ≫ xs (n + 1) := by
+    have pp : P (n + 1) - 1 = P n := by dsimp [P]; omega
+    have hout := (good n).2.2
+    have hin := (good (n + 1)).2.1
+    have fac := congrArg (fun f ↦ f ≫ image.ι
+      (J.d (P (n + 1) - 1) (P (n + 1)))) hout
+    rw [Category.assoc, ← hin, ← Category.assoc, ← G.map_comp, image.fac] at fac
+    simp only [Category.assoc, image.fac] at fac
+    have transport (r p q : ℤ) (h : r = p)
+        (x : G.obj (I.X p) ⟶ J.X p) (y : G.obj (I.X q) ⟶ J.X q)
+        (hh : eqToHom (congrArg (fun k : ℤ ↦ G.obj (I.X k)) h) ≫ x ≫
+          eqToHom (congrArg (fun k : ℤ ↦ J.X k) h.symm) ≫ J.d r q =
+            G.map (I.d r q) ≫ y) : x ≫ J.d p q = G.map (I.d p q) ≫ y := by
+      subst r
+      simpa only [eqToHom_refl, Category.id_comp, Category.comp_id] using hh
+    exact transport _ _ _ pp (xs n) (xs (n + 1)) fac.symm
+  let φp (p : ℤ) : G.obj (I.X p) ⟶ J.X p :=
+    if hp : p < i then 0 else
+      eqToHom (congrArg (fun k : ℤ ↦ G.obj (I.X k)) (by dsimp only [P]; omega)) ≫
+        xs (p - i).toNat ≫
+        eqToHom (congrArg (fun k : ℤ ↦ J.X k) (by dsimp only [P]; omega))
+  have φP (n : ℕ) : φp (P n) = xs n := by
+    have h : ¬ P n < i := by dsimp [P]; omega
+    have hn : (P n - i).toNat = n := by dsimp [P]; omega
+    simp [φp, h, hn]
+  refine ⟨{ f := φp, comm' := ?_ }, ?_⟩
+  · intro p q hpq
+    have pq : q = p + 1 := by simpa only [ComplexShape.up_Rel] using hpq.symm
+    subst q
+    change φp p ≫ J.d p (p + 1) = G.map (I.d p (p + 1)) ≫ φp (p + 1)
+    by_cases hp : p < i
+    · have hz : G.map (I.d p (p + 1)) = 0 := by
+        rw [(zi p hp).eq_of_src (I.d p (p + 1)) 0, G.map_zero]
+      simp [φp, hp, hz]
+    · have pn : P (p - i).toNat = p := by dsimp [P]; omega
+      have qn : P ((p - i).toNat + 1) = p + 1 := by dsimp [P]; omega
+      have hh := comm (p - i).toNat
+      rw [← φP, ← φP, pn, qn] at hh
+      exact hh
+  · intro p
+    change F.map (aI p) ≫ (φp p).f 0 = u.f p ≫ aJ p
+    by_cases hp : p < i
+    · have hz : eJ.f p = 0 := (zj p hp).eq_of_tgt _ _
+      simp [φp, hp, aJ, hz]
+    · have pn : P (p - i).toNat = p := by dsimp [P]; omega
+      rw [← pn, φP]
+      exact aug (p - i).toNat
 
 end CategoryTheory

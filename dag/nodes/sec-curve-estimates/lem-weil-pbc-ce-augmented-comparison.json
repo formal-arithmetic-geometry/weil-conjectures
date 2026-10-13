@@ -14,34 +14,30 @@
  },
  "proof": [
   {
-   "text": "For every degree $q$, decompose the bounded-below complex into the exact sequences $0\\to Z^q\\to K^q\\to B^{q+1}\\to0$ and $0\\to B^q\\to Z^q\\to H^q(K)\\to0$, and make the same decompositions for $L$. Exactness of $F$ carries these sequences and the exact augmented rows of $I_K$ to exact sequences and exact augmented rows of $F(I_K)$. The six Cartan--Eilenberg conditions stated in the item give the required injective-resolution rows for $J_L$, and for its $Z$, $B$, and $H_{II}$ pieces. Source injectivity is not needed: augmented exact source columns suffice.",
+   "text": "Choose $i=\\min(i_I,i_J)$. For $P(n)=i+n$, retain an augmented boundary map in degree $P(n)$ as the inductive state. At $n=0$ take the zero boundary map: the target original-object column in degree $i-1$ is zero, so its augmentation gives the required boundary equation.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "We construct the row maps by induction on $q$, along the sequence $0\\to B^q\\to Z^q\\to H^q\\to0$, $0\\to Z^q\\to K^q\\to B^{q+1}\\to0$ of Step 1. The induction claim at $q$ is that a map $\\varphi_B^q$ from the row $F(\\operatorname{Im}(d_{II}:I_K^{\\bullet,q-1}\\to I_K^{\\bullet,q}))$ to the corresponding row of $J_L$ has been constructed, compatible with the augmentations (through $u$). Below the lowest nonzero degree all rows are zero, and in the lowest degree $B^q=0$, so $\\varphi_B^q=0$ starts the induction. Given $\\varphi_B^q$: (a) the $H^q$ row map $\\varphi_H^q$ is obtained from [lem-weil-pbc-lift-along-injective-quasi-iso], applied to the augmentation $F(H^q(K))[0]\\to F(H^q_{II}(I_K))$, which is a monomorphic quasi-isomorphism because $0\\to F(H^q(K))\\to F(H^q_{II}(I_K)^{0})\\to F(H^q_{II}(I_K)^{1})\\to\\cdots$ is exact, and to the map $F(H^q(K))\\to H^q(L)\\to H^q_{II}(J_L)^{0}$ into the bounded-below injective complex $H^q_{II}(J_L)$; (b) the $Z^q$ row map $\\varphi_Z^q$ is the middle map $\\varphi_B$ given by [lem-weil-pbc-horseshoe-morphism-lift-exact-source] for the short exact sequence of exact augmented complexes $0\\to F(B^q\\text{-row})\\to F(Z^q\\text{-row})\\to F(H^q\\text{-row})\\to0$ over $0\\to F(B^q)\\to F(Z^q)\\to F(H^q(K))\\to0$, the target horseshoe $0\\to B^q\\text{-row}\\to Z^q\\text{-row}\\to H^q_{II}\\text{-row}$ of $J_L$ (injective resolutions by (4)--(6), degreewise exact, zero for $p<0$ by (2)) and the endpoint maps $\\varphi_B^q,\\varphi_H^q$; (c) the $B^{q+1}$ row map $\\varphi_B^{q+1}$ is obtained from [lem-weil-pbc-lift-along-injective-quasi-iso] exactly as in (a), for the row $F(\\operatorname{Im}(d_{II}:I_K^{\\bullet,q}\\to I_K^{\\bullet,q+1}))$ augmented by $F(B^{q+1})$; (d) the $K^q$ row map $\\phi^{\\bullet,q}$ is the middle map $\\varphi_B$ given by [lem-weil-pbc-horseshoe-morphism-lift-exact-source] for $0\\to F(Z^q\\text{-row})\\to F(I_K^{\\bullet,q})\\to F(B^{q+1}\\text{-row})\\to0$ over $0\\to F(Z^q)\\to F(K^q)\\to F(B^{q+1})\\to0$, the target horseshoe given by (3)--(5), and the endpoint maps $\\varphi_Z^q,\\varphi_B^{q+1}$. Each row map is chosen exactly once: $\\varphi_B$ and $\\varphi_H$ by the quasi-isomorphism lift, $\\varphi_Z$ and $\\phi^{\\bullet,q}$ as horseshoe middle maps, so the three-term compatibilities of (b) and (d) hold for the maps actually used, and $\\varphi_B^{q+1}$ continues the induction.",
+   "text": "Apply [lem-weil-pbc-ce-comparison-column-step] to the retained boundary map in degree $P(n)$. Obtain an augmented original-object comparison $x_n$ and an outgoing boundary comparison $b_{n+1}$, with both image inclusion/factorization squares. Package these together and recursively retain exactly that $b_{n+1}$ using Nat.rec. Thus the map used as outgoing boundary at stage $n$ is definitionally the incoming map at stage $n+1$. The local lemma uses just the stated resolution data in degrees $P(n)$ and $P(n)+1$.",
    "uses": [
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
+    "lem-weil-pbc-ce-comparison-column-step"
    ],
    "elementary": false
   },
   {
-   "text": "Each chosen original-object column map is a chain map in resolution degree. In complex degree p the source horizontal differential factors through its boundary column in degree p+1 and its cycle column in degree p+1; the target differential has the analogous factorization through the target boundary and cycle columns. The endpoint squares of the original-column horseshoe lift, the cycle-column horseshoe lift, and the retained boundary comparison show that each factor commutes with the chosen maps. Thus the column maps commute with the horizontal differential. They assemble into a bicomplex morphism; their augmentation equations give the displayed degree-zero identity via singleObjXSelf.",
-   "uses": [
-    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
-   ],
-   "elementary": false
+   "text": "Compose the outgoing factorThruImage square at stage $n$ with image.ι and substitute the incoming image.ι square at stage $n+1$. Functoriality of $G=F.mapHomologicalComplex$ and image.fac give $x_n d_J=G(d_I)x_{n+1}$. Remove the $P(n+1)-1=P(n)$ transports by equality elimination. Define all column maps below $i$ as zero; horizontal commutation there follows because the source column is zero, including the transition into degree $i$. Extend the chosen maps above $i$ to all integer indices using $(p-i).toNat$, and assemble them with HomologicalComplex.Hom. The original augmentation equations hold above $i$ by the local lemma and below $i$ because the target column is zero. This proves the unchanged displayed conclusion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
-  "lem-weil-pbc-lift-along-injective-quasi-iso"
+  "lem-weil-pbc-ce-comparison-column-step"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Definition Tag 015H (definition-cartan-eilenberg), Lemma Tag 015I (lemma-cartan-eilenberg), and Remark Tag 015K (remark-functorial-ss)"
+  "place": "Tags 015H, 015I and 015K; one-column horseshoe extension followed by explicit Nat.rec and image.fac assembly (V1, 2026-10-13)"
  },
  "mathlib_searches": [
   {
@@ -117,12 +113,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T085337-L-38717",
+  "landing": "20261013T031555-L-3576083",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

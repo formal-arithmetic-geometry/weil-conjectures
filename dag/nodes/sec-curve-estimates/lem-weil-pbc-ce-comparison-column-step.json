@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-ce-comparison-column-step",
+ "kind": "statement",
+ "title": "One-column extension of a prescribed Cartan–Eilenberg boundary comparison",
+ "statement": "Let $A,B$ be abelian categories [def-sp-abelian], $F:A\\to B$ exact and additive, $K,L$ complexes indexed by $\\mathbf Z$, and $u:F(K)\\to L$ a chain map. Let $I,J$ be bicomplexes with horizontal index $\\mathbf Z$ and resolution index $\\mathbf N$ [def-sp-double-complex-total], augmented by $e_I:K[0]\\to I$ and $e_J:L[0]\\to J$. Fix $p\\in\\mathbf Z$ and $q=p+1$. Assume the augmented original-object, cycle, boundary and homology columns in degree $p$, and the outgoing boundary column $\\operatorname{Im}(d^{q-1,q})$, are quasi-isomorphisms. Assume the corresponding terms of $J$ are injective [def-sp-injective-resolutions]. Put $\\varepsilon_I^r=\\mathrm{singleObjXSelf}^{-1}\\circ(e_I^r)^0$ and define $\\varepsilon_J^r$ similarly, and $G=F$ applied to resolution complexes. Given a chain map $b:G(\\operatorname{Im}(d_I^{p-1,p}))\\to\\operatorname{Im}(d_J^{p-1,p})$ with $b^0 F(\\operatorname{factorThruImage}(d_I^{p-1,p})^0\\varepsilon_I^{p-1})=\\operatorname{factorThruImage}(d_J^{p-1,p})^0\\varepsilon_J^{p-1}u^{p-1}$, there exist chain maps $x:G(I^p)\\to J^p$ and $c:G(\\operatorname{Im}(d_I^{q-1,q}))\\to\\operatorname{Im}(d_J^{q-1,q})$ such that $x^0F(\\varepsilon_I^p)=\\varepsilon_J^pu^p$, $c$ obeys the same boundary augmentation equation at $q$, $xG(\\operatorname{image.\\iota}(d_I^{p-1,p}))=\\operatorname{image.\\iota}(d_J^{p-1,p})b$, and $cG(\\operatorname{factorThruImage}(d_I^{q-1,q}))=\\operatorname{factorThruImage}(d_J^{q-1,q})x$, identifying columns $p=q-1$ with the displayed eqToHom maps. No comparisons in other original-object columns or boundedness hypotheses are asserted.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition Tag 015H (definition-cartan-eilenberg), Lemma Tag 015I (lemma-cartan-eilenberg), and Remark Tag 015K (remark-functorial-ss)"
+ },
+ "proof": [
+  {
+   "text": "In degrees $p$ and $q=p+1$, form the two short exact sequences of resolution complexes $0\\to B^p\\to Z^p\\to H^p\\to0$ and $0\\to Z^p\\to I^p\\to B^q\\to0$ and the corresponding sequences for $J$. Their augmentations come from the single bicomplex augmentations. Exactness of $F$ preserves the sequences and augmented quasi-isomorphisms. The hypothesis on the incoming boundary map $b$, stated after precomposing with $K^{p-1}\\to B^p(K)$, is the genuine boundary augmentation square because this map is epic and remains epic under $F$. Evaluation in a resolution degree is exact; hence the row sequences are degreewise short exact. All needed target columns are injective resolutions by the explicitly local quasi-isomorphism and termwise injectivity assumptions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the homology augmentation through the monomorphic quasi-isomorphism from $F(H^p(K))[0]$ into the source homology resolution, into the termwise injective target homology resolution, using [lem-weil-pbc-lift-along-injective-quasi-iso] (Tag 013P(2)). Apply [lem-weil-pbc-horseshoe-morphism-lift-exact-source] to the boundary/cycle/homology sequences with this homology map and the prescribed boundary map $b$. This produces an augmented cycle comparison commuting with both endpoint inclusions.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Independently lift the outgoing boundary augmentation to the injective outgoing boundary column of $J$ by [lem-weil-pbc-lift-along-injective-quasi-iso], obtaining $c$. Apply [lem-weil-pbc-horseshoe-morphism-lift-exact-source] to the cycle/object/outgoing-boundary short exact sequences, prescribing the cycle map of the previous step and this same map $c$. Its middle map $x$ has the required object augmentation and outgoing factorThruImage equation.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the incoming endpoint equation of the object horseshoe with the boundary-to-cycle inclusion and use the incoming endpoint equation of the cycle horseshoe to get the equation for image.ι. Retain the outgoing augmentation square of $c$. These are exactly the four displayed conclusions. Since $q-1=p$, the displayed eqToHom maps merely identify the same original-object column with that indexed by $q-1$. No induction or assembly of all original-object columns occurs in this lemma.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
+  "lem-weil-pbc-lift-along-injective-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015H, 015I and 015K; the local comparison step of lem-weil-pbc-ce-augmented-comparison, Step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartan Eilenberg comparison morphism exact additive functor augmented bicomplex injective resolutions",
+   "results": "Returned 8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq. No one-column Cartan–Eilenberg comparison statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cartan.*eilenberg|factorThruImage_comp_image|factorThruImage.*ι",
+   "results": "Returned 2 hits: Mathlib/Algebra/Homology/Opposite.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean. No one-column Cartan–Eilenberg comparison statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparison morphism Cartan Eilenberg resolution compatible boundary cycle maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the naturality of the complex-continuity input to the sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; comparison construction, Steps 1-3; the one-degree extension within Step 2",
+   "via": [
+    "lem-weil-pbc-ce-augmented-comparison",
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergComparisonColumnStep",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergComparisonColumnStep.lean",
+  "declaration": "CategoryTheory.exists_cartanEilenberg_comparison_column_step",
+  "statement": "theorem exists_cartanEilenberg_comparison_column_step {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] (K : CochainComplex A ℤ) (L : CochainComplex B ℤ) (u : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ L) (p q : ℤ) (hq : q = p + 1) (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (eI : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ I) (hIcol : QuasiIso (eI.f p)) (hIres : QuasiIso (HomologicalComplex.cyclesMap eI p) ∧ QuasiIso (image.map (Arrow.homMk' (eI.f (p - 1)) (eI.f p) (eI.comm (p - 1) p))) ∧ QuasiIso (HomologicalComplex.homologyMap eI p)) (hIout : QuasiIso (image.map (Arrow.homMk' (eI.f (q - 1)) (eI.f q) (eI.comm (q - 1) q)))) (J : HomologicalComplex₂ B (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (eJ : ((CochainComplex.single₀ B).mapHomologicalComplex (ComplexShape.up ℤ)).obj L ⟶ J) (hJcol : QuasiIso (eJ.f p)) (hJinj : ∀ n : ℕ, Injective ((J.X p).X n)) (hJinj' : ∀ n : ℕ, Injective ((J.cycles p).X n) ∧ Injective ((image (J.d (p - 1) p)).X n) ∧ Injective ((J.homology p).X n)) (hJres : QuasiIso (HomologicalComplex.cyclesMap eJ p) ∧ QuasiIso (image.map (Arrow.homMk' (eJ.f (p - 1)) (eJ.f p) (eJ.comm (p - 1) p))) ∧ QuasiIso (HomologicalComplex.homologyMap eJ p)) (hJout : QuasiIso (image.map (Arrow.homMk' (eJ.f (q - 1)) (eJ.f q) (eJ.comm (q - 1) q)))) (hJoutInj : ∀ n : ℕ, Injective ((image (J.d (q - 1) q)).X n)) (b : (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (image (I.d (p - 1) p)) ⟶ image (J.d (p - 1) p)) (hb : F.map ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.X (p - 1))).inv ≫ (eI.f (p - 1)).f 0 ≫ (factorThruImage (I.d (p - 1) p)).f 0) ≫ b.f 0 = u.f (p - 1) ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.X (p - 1))).inv ≫ (eJ.f (p - 1)).f 0 ≫ (factorThruImage (J.d (p - 1) p)).f 0) : ∃ (x : (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X p) ⟶ J.X p) (c : (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (image (I.d (q - 1) q)) ⟶ image (J.d (q - 1) q)), (F.map ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.X p)).inv ≫ (eI.f p).f 0) ≫ x.f 0 = u.f p ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.X p)).inv ≫ (eJ.f p).f 0) ∧ (F.map ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.X (q - 1))).inv ≫ (eI.f (q - 1)).f 0 ≫ (factorThruImage (I.d (q - 1) q)).f 0) ≫ c.f 0 = u.f (q - 1) ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.X (q - 1))).inv ≫ (eJ.f (q - 1)).f 0 ≫ (factorThruImage (J.d (q - 1) q)).f 0) ∧ (F.mapHomologicalComplex (ComplexShape.up ℕ)).map (image.ι (I.d (p - 1) p)) ≫ x = b ≫ image.ι (J.d (p - 1) p) ∧ (F.mapHomologicalComplex (ComplexShape.up ℕ)).map (factorThruImage (I.d (q - 1) q)) ≫ c = eqToHom (congrArg (fun k : ℤ ↦ (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X k)) (by omega : q - 1 = p)) ≫ x ≫ eqToHom (congrArg (fun k : ℤ ↦ J.X k) (by omega : p = q - 1)) ≫ factorThruImage (J.d (q - 1) q)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T031555-L-3576083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T031555-L-3576083",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
