@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-external-constant-sections-tensor-map",
+ "kind": "statement",
+ "title": "Balanced constant tensor section presheaf morphism",
+ "statement": "Let k be a field [def-weil-field], X and Y schemes [def-pc-scheme], f:X → Spec(k), g:Y → Spec(k), and F and G sheaves of modules [def-weil-sheaf-of-modules-category]. There exists an O_Y-linear presheaf morphism from picardConstantSectionsTensor k Y g Gamma(X,F) G [lem-sc-picard-constant-sections-tensor-basis] to the underlying presheaf of pr2_*(externalCupCoefficients f g F G) [pqf-def-cohomology]. At every open V of Y, its component is bijective if and only if externalSectionsComponent f g F G V [lem-sc-external-sections-components] is bijective. There are no quasi-coherence, compactness, or affine-diagonal assumptions. All objects lie in the same universe.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-picard-constant-sections-tensor-basis",
+  "pqf-def-cohomology",
+  "lem-sc-external-sections-components"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, affine-open degree-zero calculation; read at https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "proof": [
+  {
+   "text": "At V identify the scalar-extension tensor coefficient value with Gamma(X,F) tensor_k G(V): (a tensor s) tensor t maps to s tensor (a*t), and the inverse sends s tensor t to (1 tensor s) tensor t. Balance and tensor induction prove inverse identities. Compose with the explicit external section component. Its second projection unit and multiplication on tensor sections prove O_Y(V)-linearity. Restriction compatibility of the balanced maps and externalSectionsComponent_naturality assemble a presheaf morphism. The scalar actions on its target agree by the pullback square. Composition with the balanced bijection gives exactly the asserted equivalence of bijectivity. The same formulas hold on empty opens and zero modules.",
+   "uses": [
+    "lem-sc-external-sections-components",
+    "lem-sc-picard-constant-sections-tensor-basis",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-external-sections-components",
+  "lem-sc-picard-constant-sections-tensor-basis",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "J3 stage 3",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, ordinary external degree-zero tensor comparison; source read at https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "externalSectionsComponent|picardConstantSectionsTensor",
+   "results": "0 hits: ",
+   "verdict": "No exact external tensor section morphism; assembly and scalar-extension ingredients only.",
+   "available": true,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of constant global sections tensor coefficients maps naturally to external direct image sections",
+   "results": "8 hits: ModuleCat.Tilde.res_const, PresheafOfModules.Monoidal.tensorObjMap, AlgebraicGeometry.Scheme.Modules.map_smul, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, PresheafOfModules.Monoidal.tensorObj_map_tmul, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, PresheafOfModules.Monoidal.tensorObj",
+   "verdict": "No exact external tensor section morphism; assembly and scalar-extension ingredients only.",
+   "available": true,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.isoMk",
+   "results": "3 hits: PresheafOfModules.isoMk, PresheafOfModules.isoMk_hom_app, PresheafOfModules.isoMk_inv_app",
+   "verdict": "No exact external tensor section morphism; assembly and scalar-extension ingredients only.",
+   "available": true,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The external section tensor product induces a structure sheaf linear presheaf morphism from scalar extended constant global sections tensored with the second coefficient sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "available": false,
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardTensorComparison",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The ordinary degree-zero external coefficient tensor comparison in the Kunneth calculation used for the cube theorem",
+   "via": [
+    "lem-sc-picard-external-coefficients-pushforward-tensor-comparison",
+    "lem-sc-picard-external-coefficients-pushforward-coproduct-comparison",
+    "lem-sc-picard-external-coefficients-pushforward-coproduct",
+    "lem-sc-picard-external-coefficients-direct-images",
+    "lem-sc-picard-external-coefficients-acyclic",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExternalConstantSectionsTensorMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExternalConstantSectionsTensorMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_external_constant_sections_tensor_map",
+  "statement": "theorem exists_external_constant_sections_tensor_map\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) (G : Y.Modules) :\n    ∃ φ : picardConstantSectionsTensor k Y g (scalarObj f F (op ⊤)) G ⟶\n      ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj\n        (externalCupCoefficients f g F G)).val,\n      ∀ V : Y.Opens, Function.Bijective (φ.app (op V)) ↔\n        Function.Bijective (externalSectionsComponent f g F G V)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T134801-L-129798",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T134801-L-129798",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

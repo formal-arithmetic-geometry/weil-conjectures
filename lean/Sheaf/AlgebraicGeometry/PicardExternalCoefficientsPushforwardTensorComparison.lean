@@ -8,8 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.PicardConstantSectionsTensor
 public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.ExternalConstantSectionsTensorMap
 import Sheaf.AlgebraicGeometry.ExternalSectionsOpenComparison
 import Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffineRight
+import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Affine comparison with the constant global-sections tensor presheaf
 
@@ -56,6 +58,30 @@ theorem exists_external_constant_sections_tensor_comparison
       (PresheafOfModules.pushforward₀
         (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V)) Y.ringCatSheaf.obj).obj
         ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj
-          (externalCupCoefficients f g F G)).val) := by sorry
+          (externalCupCoefficients f g F G)).val)  := by
+  classical
+  obtain ⟨φ, hφ⟩ := exists_external_constant_sections_tensor_map k X Y f g F G
+  let A := (PresheafOfModules.pushforward₀
+    (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V)) Y.ringCatSheaf.obj)
+  have hb (V : Y.Opens) (hV : IsAffineOpen V) :
+      Function.Bijective (externalSectionsComponent f g F G V) := by
+    let : IsAffine V.toScheme := hV
+    let : (G.restrict V.ι).IsQuasicoherent := isQuasicoherent_restrictFunctor V.ι G
+    obtain ⟨eS, eT, he⟩ := externalSectionsComponent_openComparison f g F G V
+    have ht := externalGlobalSectionsTensor_bijective_of_isAffine_right
+      k X V.toScheme f (V.ι ≫ g) F (G.restrict V.ι)
+    have hh : Function.Bijective (externalSectionsComponent f g F G V ≫ eT.hom) := by
+      rw [he]
+      exact ht.comp eS.toLinearEquiv.bijective
+    exact (eT.toLinearEquiv.bijective.of_comp_iff'
+      (externalSectionsComponent f g F G V)).mp hh
+  have hi (V : (ObjectProperty.FullSubcategory
+      (fun V : Y.Opens ↦ IsAffineOpen V))ᵒᵖ) :
+      IsIso ((A.map φ).app V) := by
+    apply (ConcreteCategory.isIso_iff_bijective _).mpr
+    exact (hφ V.unop.obj).mpr (hb V.unop.obj V.unop.property)
+  let := hi
+  exact ⟨PresheafOfModules.isoMk (fun V ↦ asIso ((A.map φ).app V))
+    (by intro U V i; exact (A.map φ).naturality i)⟩
 
 end AlgebraicGeometry.Scheme.Modules
