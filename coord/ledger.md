@@ -13374,7 +13374,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:01 L: merged deliver/K2/Sheaf.AlgebraicGeometry.DerivedPullbackCompositionTensorKFlat (stage 3; reviewer PASS; first push; landing 20261013T190142-L-3216802 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/K2/Sheaf.AlgebraicGeometry.OpenRestrictedComparisonCore (stage 3; reviewer PASS; first push; landing 20261013T190142-L-3216944 (interface); batch 20261013T190131; modules 3; new nodes 2)
 - 19:01 L: merged deliver/K4/Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricDirect (stage 3; reviewer PASS; first push; landing 20261013T190143-L-3217106 (interface); batch 20261013T190131; modules 4; new nodes 3)
-- 19:01 L: merged deliver/K4/Sheaf.AlgebraicGeometry.ScalarExternalCupModuleComparison (stage 3; reviewer PASS; after a return; landing 20261013T190143-L-3217210 (interface); batch 20261013T190131; modules 3; new nodes 0; change records: coord/changes/scalar-external-cup-module-comparison.md)
 - 19:01 L: merged deliver/M1/Sheaf.Algebra.Homology.FiniteStripConeGradedMapSplitEpi (stage 3; reviewer PASS; after a return; landing 20261013T190144-L-3217385 (interface); batch 20261013T190131; modules 2; new nodes 0; change records: coord/changes/finiteStripGradedMap_factorThru_epi.md)
 - 19:01 L: merged deliver/M1/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetractCore (stage 3; reviewer PASS; first push; landing 20261013T190144-L-3217550 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/M1/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureTriangleCore (stage 3; reviewer PASS; first push; landing 20261013T190145-L-3217659 (interface); batch 20261013T190131; modules 2; new nodes 1)
@@ -13395,7 +13394,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ModuleCohomologyExtEdgeComparison (stage 3; reviewer PASS; first push; landing 20261013T190152-L-3220210 (interface); batch 20261013T190131; modules 3; new nodes 2)
 - 19:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.OpenPinnedTensorCounitTransport (stage 3; reviewer PASS; first push; landing 20261013T190152-L-3220432 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/S3/Sheaf.Algebra.Homology.LocalizedTensorComparisonShift (stage 3; reviewer PASS; first push; landing 20261013T190153-L-3220602 (interface); batch 20261013T190131; modules 2; new nodes 1)
-- 19:01 L: merged deliver/S3/Sheaf.Paper.CechCupResolutionRepresentatives (stage 3; reviewer PASS; after a return; landing 20261013T190153-L-3220739 (interface); batch 20261013T190131; modules 6; new nodes 5)
 - 19:01 L: merged deliver/S4/Sheaf.Algebra.Homology.AffineOrdinaryTensorStalkCoordinates (stage 3; reviewer PASS; first push; landing 20261013T190154-L-3220846 (proof); batch 20261013T190131; modules 1; new nodes 0)
 - 19:01 L: merged deliver/T2/Sheaf.AlgebraicGeometry.HorizontalInverseSquareFixedPasting (stage 3; reviewer PASS; first push; landing 20261013T190154-L-3221033 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/T2/Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounit (stage 3; reviewer PASS; after a return; landing 20261013T190155-L-3221152 (interface); batch 20261013T190131; modules 3; new nodes 2; change records: coord/changes/IsomorphicSingleTensorCounitImports.md)
@@ -13441,3 +13439,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:56 L: returned deliver/N4/Sheaf.Paper.ModuleCupEqualDerivedMapsClass (reviewer RETURN: (reviewer X-8cb69, head 8cb693e9d) C1/C4: In dag/nodes/sec-abelian-varieties/lem-sc-module-cup-derived-homology-tensor.j)
 - 19:59 L: returned deliver/A2/Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization (reviewer RETURN: (reviewer X-c6dc2, head c6dc22a59) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Sc)
 - 20:06 L: returned deliver/M1/Sheaf.Paper.CechRefinementResolutionBeta (reviewer RETURN: (reviewer X-20216, head 20216302b) A — stages/3-proving-and-pruning.md §4 forbids splitting a proof to meet the compiler)
+
+- 04:08 L: batch 20261013T190131 dependency take-out

@@ -1,105 +1,107 @@
 {
- "id": "lem-sc-scalar-cup-module-cup-compatibility",
- "kind": "statement",
- "title": "Scalar cup agrees with ordinary module cup",
- "statement": "For any scheme over a field, scalarCohomologyCup of two classes equals an ordinary module cup characterized by IsModuleCupProduct.",
- "stmt_deps": [
-  "def-sc-field-linear-module-cohomology-operations",
-  "def-sc-module-cohomology-cup-product",
-  "def-weil-pbc-module-cohomology-fmap"
- ],
- "source": {
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 01F7 and 0FKV, resolution cup comparison"
- },
- "proof": [
-  {
-   "text": "The proof is the compatible injective-resolution comparison described in the declaration docstring: identify scalar Ext classes with module resolution cycles via evaluation at the unit, compare pullback or signed tensor pairing, and transport through the canonical cohomology comparison maps. Resolution independence removes choices.",
-   "uses": [
+  "id": "lem-sc-scalar-cup-module-cup-compatibility",
+  "kind": "statement",
+  "title": "Scalar cup agrees with ordinary module cup",
+  "statement": "For any scheme over a field, scalarCohomologyCup of two classes equals an ordinary module cup characterized by IsModuleCupProduct.",
+  "stmt_deps": [
     "def-sc-field-linear-module-cohomology-operations",
-    "def-sc-module-cohomology-cup-product"
-   ],
-   "elementary": false
+    "def-sc-module-cohomology-cup-product",
+    "def-weil-pbc-module-cohomology-fmap"
+  ],
+  "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01F7 and 0FKV, resolution cup comparison"
+  },
+  "proof": [
+    {
+      "text": "The proof is the compatible injective-resolution comparison described in the declaration docstring: identify scalar Ext classes with module resolution cycles via evaluation at the unit, compare pullback or signed tensor pairing, and transport through the canonical cohomology comparison maps. Resolution independence removes choices.",
+      "uses": [
+        "def-sc-field-linear-module-cohomology-operations",
+        "def-sc-module-cohomology-cup-product",
+        "def-weil-pbc-module-cohomology-fmap"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-module-cohomology-cup-product",
+    "def-weil-pbc-module-cohomology-fmap"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "document": "Stacks Project",
+    "place": "Tags 01F7 and 0FKV, resolution cup comparison"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "scalar cup module comparison",
+      "results": "service unavailable",
+      "verdict": "unavailable",
+      "date": "2026-10-14"
+    },
+    {
+      "tool": "loogle",
+      "query": "IsModuleCupProduct",
+      "results": "No match",
+      "verdict": "no match",
+      "date": "2026-10-14"
+    },
+    {
+      "tool": "grep",
+      "query": "scalarCohomologyCup moduleCohomologyPullback",
+      "results": "No match",
+      "verdict": "no match",
+      "date": "2026-10-14"
+    }
+  ],
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.ScalarExternalCupModuleComparison",
+    "date": "2026-10-14",
+    "group": "U2"
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-cube",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-scalar-external-cup-module-comparison",
+      "place": "Parent proof steps 1 and 2",
+      "via": []
+    },
+    "same_as": []
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility",
+    "file": "lean/Sheaf/AlgebraicGeometry/ScalarCupModuleCupCompatibility.lean",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCup_moduleCup_compatibility",
+    "statement": "theorem scalarCup_moduleCup_compatibility {k : Type w} [Field k] {X : Scheme.{w}} (f : X ⟶ Spec (CommRingCat.of k)) (F G : X.Modules) (p q : ℕ) (cup : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace q).obj G →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) (hcup : IsModuleCupProduct F G p q cup) (a : scalarCohomology f F p) (b : scalarCohomology f G q) : scalarCohomologyCup f F G p q a b = cup a b",
+    "branch": "sheaf-dag",
+    "by": "U2",
+    "date": "2026-10-14"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "U2",
+    "result": "pass",
+    "landing": "20261013T172659-L-2101278",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "U2",
+    "result": "pass",
+    "landing": "20261013T172659-L-2101278",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations",
-  "def-sc-module-cohomology-cup-product"
- ],
- "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tags 01F7 and 0FKV, resolution cup comparison"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "scalar cup module comparison",
-   "results": "service unavailable",
-   "verdict": "unavailable",
-   "date": "2026-10-14"
-  },
-  {
-   "tool": "loogle",
-   "query": "IsModuleCupProduct",
-   "results": "No match",
-   "verdict": "no match",
-   "date": "2026-10-14"
-  },
-  {
-   "tool": "grep",
-   "query": "scalarCohomologyCup moduleCohomologyPullback",
-   "results": "No match",
-   "verdict": "no match",
-   "date": "2026-10-14"
-  }
- ],
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.ScalarExternalCupModuleComparison",
-  "date": "2026-10-14",
-  "group": "U2"
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-scalar-external-cup-module-comparison",
-   "place": "Parent proof steps 1 and 2",
-   "via": []
-  },
-  "same_as": []
- },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility",
-  "file": "lean/Sheaf/AlgebraicGeometry/ScalarCupModuleCupCompatibility.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCup_moduleCup_compatibility",
-  "statement": "theorem scalarCup_moduleCup_compatibility {k : Type w} [Field k] {X : Scheme.{w}} (f : X ⟶ Spec (CommRingCat.of k)) (F G : X.Modules) (p q : ℕ) (cup : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace q).obj G →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) (hcup : IsModuleCupProduct F G p q cup) (a : scalarCohomology f F p) (b : scalarCohomology f G q) : scalarCohomologyCup f F G p q a b = cup a b",
-  "branch": "sheaf-dag",
-  "by": "K4",
-  "date": "2026-10-14"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
-  "result": "pass",
-  "landing": "20261013T172659-L-2101278",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K4",
-  "result": "pass",
-  "landing": "20261013T190143-L-3217210",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }
