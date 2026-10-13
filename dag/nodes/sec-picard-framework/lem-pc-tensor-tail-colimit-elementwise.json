@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-tensor-tail-colimit-elementwise",
+ "kind": "statement",
+ "title": "Tensor representatives and eventual zero for an arbitrary colimit on a cofinal tail",
+ "statement": "Let I be a directed preorder, F:I→CommRing a diagram, and (C,ι) any colimit cocone [def-weil-pbc-category-colimit]. Fix i₀≤k and an F(i₀)-module M₀. Give C and F(j) for j≥k their F(i₀)-algebra structures via ι_i₀ and F(i₀→j). Every element of C⊗_{F(i₀)}M₀ comes from F(j)⊗_{F(i₀)}M₀ at some j≥k. If an element of a stage j≥k maps to zero, its image is zero at a later l≥j. All tensor maps are induced by the diagram maps and identity on M₀; no finiteness or flatness is assumed. The module universe may differ from the ring and index universe.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00D6, 00D7 and 00DD; tensor-colimit argument used in Tag 02JO (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the nonempty directed upper tail J={j:k≤j}. Give A_j=F(j) its F(i₀)-algebra structure using i₀≤k≤j. Functoriality gives linear transition maps f and the cocone gives linear maps α to C, with the directed-system and compatibility identities.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Module.DirectLimit.lift to define g from the module direct limit to C. Concrete.isColimit_exists_rep gives a representative of any c∈C; moving above k proves surjectivity. Concrete.isColimit_exists_of_rep_eq gives a common stage for equal representatives; Module.DirectLimit.of_f proves injectivity. Thus LinearEquiv.ofBijective g identifies this module direct limit with C.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the inverse of TensorProduct.directLimitLeft with the tensor of that linear equivalence. On each stage tensor, tensor induction and the pure-tensor formula for directLimitLeft show that the resulting equivalence is α.rTensor M₀.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the inverse image of a limit tensor by Module.DirectLimit.exists_of. If a stage tensor maps to zero, injectivity of the constructed equivalence makes its direct-limit class zero; Module.DirectLimit.of.zero_exact gives a later stage where it vanishes. All subtype inequalities are transported back to I.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00D6, 00D7 and 00DD; tensor-colimit argument used in Tag 02JO (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor products over an arbitrary directed ring colimit have representatives and eventual vanishing on every cofinal upper tail",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor products over an arbitrary directed ring colimit have representatives and eventual vanishing on every cofinal upper tail",
+   "results": "8 hits: Submodule.FG.rTensor.directLimit_apply; Submodule.FG.lTensor.directLimit_apply; DirectedSystem.rTensor; DirectedSystem.lTensor; TensorProduct.toDirectLimit; Submodule.FG.lTensor.directLimit_apply'; TensorProduct.directLimitRight; Submodule.FG.rTensor.directLimit_apply'",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "directLimitLeft|isColimit_exists_of_rep_eq|zero_exact",
+   "results": "16 hits: Mathlib/Algebra/Colimit/Module.lean; Mathlib/Algebra/Colimit/Module.lean; Mathlib/Algebra/Colimit/Module.lean; Mathlib/Algebra/Colimit/TensorProduct.lean; Mathlib/Algebra/Colimit/TensorProduct.lean; Mathlib/Algebra/Colimit/Ring.lean; Mathlib/Algebra/Colimit/Ring.lean; Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompatibleModuleModelDescent",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Compatible module model descent, proof step 1: the ring tensors on the cofinal tail have representatives and eventual equality, for the specified cocone rather than the chosen categorical colimit.",
+   "via": [
+    "lem-pc-compatible-module-model-descent",
+    "lem-pc-fp-module-tensor-model-comparison",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TensorTailColimitElementwise",
+  "file": "lean/Sheaf/RingTheory/TensorTailColimitElementwise.lean",
+  "declaration": "TensorProduct.tensorTailColimitElementwise",
+  "statement": "theorem tensorTailColimitElementwise\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)\n    (i₀ : I) (M₀ : Type w) [AddCommGroup M₀] [Module (F.obj i₀) M₀] (k : I) (hik : i₀ ≤ k) :\n    let S := F.obj i₀\n    let R := c.pt\n    letI : Algebra S R := (c.ι.app i₀).hom.toAlgebra\n    (∀ x : R ⊗[S] M₀, ∃ (i : I) (h : k ≤ i),\n      letI : Algebra S (F.obj i) := (F.map (homOfLE (hik.trans h))).hom.toAlgebra\n      let αᵢ : F.obj i →ₐ[S] R :=\n        { (c.ι.app i).hom with\n          commutes' := fun s ↦\n            congrArg (fun f : F.obj i₀ ⟶ c.pt ↦ f s) (c.w (homOfLE (hik.trans h))) }\n      ∃ t : F.obj i ⊗[S] M₀, αᵢ.toLinearMap.rTensor M₀ t = x) ∧\n    (∀ (i : I) (h : k ≤ i),\n      letI : Algebra S (F.obj i) := (F.map (homOfLE (hik.trans h))).hom.toAlgebra\n      let αᵢ : F.obj i →ₐ[S] R :=\n        { (c.ι.app i).hom with\n          commutes' := fun s ↦\n            congrArg (fun f : F.obj i₀ ⟶ c.pt ↦ f s) (c.w (homOfLE (hik.trans h))) }\n      ∀ t : F.obj i ⊗[S] M₀, αᵢ.toLinearMap.rTensor M₀ t = 0 →\n        ∃ (i' : I) (h' : i ≤ i'),\n          letI : Algebra S (F.obj i') := (F.map (homOfLE (hik.trans (h.trans h')))).hom.toAlgebra\n          let αᵢ'ᵢ : F.obj i →ₐ[S] F.obj i' :=\n            { (F.map (homOfLE h')).hom with\n              commutes' := fun s ↦\n                congrArg (fun f : F.obj i₀ ⟶ F.obj i' ↦ f s)\n                  (F.map_comp (homOfLE (hik.trans h)) (homOfLE h')).symm }\n          αᵢ'ᵢ.toLinearMap.rTensor M₀ t = 0)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T111935-L-3067800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T111935-L-3067800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

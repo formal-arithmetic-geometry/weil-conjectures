@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-elementwise-fp-module-equiv-descent",
+ "kind": "statement",
+ "title": "Isomorphism descent for fixed finitely presented modules from an elementwise ring colimit",
+ "statement": "Let J be a directed preorder and A_j commutative rings, with ring maps f_jl for j≤l satisfying f_jj=id and f_lm∘f_jl=f_jm. Let C be a commutative ring with compatible ring maps g_j:A_j→C. Assume every c∈C is g_j(a) for some j,a, and if g_j(a)=0 then f_jl(a)=0 at some l≥j. Fix i∈J and finitely presented A_i-modules P,N [def-sc-finitely-presented-module]. Give C and A_j (j≥i) their A_i-algebra structures using g_i and f_ij. If C⊗_{A_i}P≃_C C⊗_{A_i}N, there is a j≥i such that A_j⊗_{A_i}P≃_{A_j}A_j⊗_{A_i}N. The ring, index and two module universes are independent. This statement descends to one stage only; it assumes no tensor presentation of the ring diagram, no auxiliary coefficient rings and no flatness.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7 (2), (3); Tags 00D6 and 00DD"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "The transition maps define a ring diagram with cocone (C,g). To verify its colimit property, define the map to any other compatible cocone on a representative g_j(a). Two representatives with the same image can be moved to a common stage; their difference vanishes in C, hence vanishes later by the zero assumption, so their images in the other cocone agree. Addition, multiplication, zero and one are preserved by choosing a common stage; uniqueness follows from the representative assumption. The same argument restricts to any upper tail. For a preorder use its poset reflection and choose one representative per class: mutually comparable transition maps are inverse by the system laws. Choose a common maximum universe and use ULift on the rings, indices and modules to fit the categorical interface; ULift equivalences transport the eventual conclusion back.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the map-descent clause of finitePresentation_descent_directedColimit to the given equivalence and its inverse. Move both descended maps to a common stage. Their extensions agree with the original maps, because the canonical comparison isomorphisms satisfy the unit-tensor equations and these determine a scalar-extension map.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stage modules remain finitely presented by base change. Each composite becomes the identity after scalar extension to C. Apply the equality clause of finitePresentation_descent_directedColimit to each composite and the appropriate identity. Take a common upper bound for these two eventual equalities. Base change preserves composition and identity, so the two maps there are inverse. Their linear equivalence is the required conclusion.",
+   "uses": [
+    "lem-pc-fp-module-base-change",
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-base-change",
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7 (2), (3); Tags 00D6 and 00DD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism between base changes of finitely presented modules over an elementwise directed ring colimit descends to a stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between base changes of finitely presented modules over an elementwise directed ring colimit descends to a stage",
+   "results": "8 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; FinitePresentation.of_isBaseChange; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; CommRingCat.preservesColimit_coyoneda_of_finitePresentation; Module.FinitePresentation.trans; ModuleCat.FilteredColimits.colimitCoconeIsColimit; preservesColimit_coyoneda_of_finitePresentation",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*equiv.*colimit|equiv.*descent|FinitePresentation.*colimit",
+   "results": "12 hits: Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/IsStack.lean; Mathlib/CategoryTheory/Sites/Descent/IsStack.lean; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean",
+   "date": "2026-10-13",
+   "verdict": "component lemmas only; no exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompatibleModuleModelDescent",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Compatible module model descent, proof step 3: descend the equivalence of two fixed finitely presented modules after forming the coefficient-ring colimit.",
+   "via": [
+    "lem-pc-compatible-module-model-descent",
+    "lem-pc-fp-module-tensor-model-comparison",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ElementwiseFpModuleEquivDescent",
+  "file": "lean/Sheaf/RingTheory/ElementwiseFpModuleEquivDescent.lean",
+  "declaration": "AlgebraicGeometry.exists_stage_equiv_of_elementwise_colimit",
+  "statement": "theorem exists_stage_equiv_of_elementwise_colimit\n    {J : Type v} [Preorder J] [IsDirectedOrder J]\n    (A : J → Type u) [∀ j, CommRing (A j)]\n    (f : ∀ (j l : J), j ≤ l → A j →+* A l)\n    (hself : ∀ j, f j j le_rfl = RingHom.id (A j))\n    (hcomp : ∀ j l m (hjl : j ≤ l) (hlm : l ≤ m),\n      (f l m hlm).comp (f j l hjl) = f j m (hjl.trans hlm))\n    (C : Type w) [CommRing C] (g : ∀ j, A j →+* C)\n    (hg : ∀ j l (hjl : j ≤ l), (g l).comp (f j l hjl) = g j)\n    (hsurj : ∀ c : C, ∃ j a, g j a = c)\n    (hzero : ∀ j a, g j a = 0 → ∃ (l : J) (hjl : j ≤ l), f j l hjl a = 0)\n    (i : J) (P : Type x) (N : Type y) [AddCommMonoid P] [AddCommMonoid N]\n    [Module (A i) P] [Module (A i) N]\n    [Module.FinitePresentation (A i) P] [Module.FinitePresentation (A i) N]\n    (e : letI : Algebra (A i) C := (g i).toAlgebra\n      Nonempty (C ⊗[A i] P ≃ₗ[C] C ⊗[A i] N)) :\n    ∃ (j : J) (hij : i ≤ j),\n      letI : Algebra (A i) (A j) := (f i j hij).toAlgebra\n      Nonempty (A j ⊗[A i] P ≃ₗ[A j] A j ⊗[A i] N)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T111935-L-3067800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T111935-L-3067800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

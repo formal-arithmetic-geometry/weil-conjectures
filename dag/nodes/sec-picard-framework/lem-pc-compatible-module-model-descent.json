@@ -13,61 +13,43 @@
  ],
  "proof": [
   {
-   "text": "On the cofinal tail above k, the algebras B_j = F(j) tensor B have colimit\n   c.pt tensor B. The compatibility assumptions make them Q-algebras and make\n   their coprojections Q-linear. This colimit assertion follows by tensor\n   representatives and eventual equality. If the index is only a preorder,\n   take its poset reflection: mutually comparable indices give inverse ring\n   maps, so both the diagram and its colimit descend up to canonical isomorphism.",
+   "text": "Construct on the upper tail J={j:k≤j} the rings E_j=F(j)⊗_{F(i)}B, their transition ring maps f_jl and their maps g_j to Y=C⊗_{F(i)}B. Verify identity, composition and compatibility by induction on tensors. Apply tensorTailColimitElementwise with module B to obtain representatives of Y and eventual zero of the E_j.",
    "uses": [
-    "lem-weil-pbc-directed-colimit-base-change-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-criterion"
+    "lem-pc-tensor-tail-colimit-elementwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
-   }
+   "elementary": false
   },
   {
-   "text": "At k the modules B_k tensor_Q L and B_k tensor_B M are finitely presented\n   over B_k, by finite presentation under base change. Their base changes to\n   the colimit are the two modules in eM, by tensor cancellation.",
+   "text": "At the initial tail stage k, put P=E_k⊗_Q L and N=E_k⊗_B M. Mathlib finite-presentation base-change instances make both finitely presented E_k-modules. Compatibility hqC and right tensor inclusion give the scalar towers Q→E_k→Y and B→E_k→Y. Tensor cancellation transports eM to an equivalence Y⊗_{E_k}P≃Y⊗_{E_k}N.",
    "uses": [
     "lem-pc-fp-module-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply Tag 05N7 (2) to eM and its inverse, take a common later stage, and apply\n   part (3) to their two composites and the identity maps. At a common upper\n   bound the descended maps are inverse, hence define a linear equivalence.",
+   "text": "Apply exists_stage_equiv_of_elementwise_colimit to the raw ring system and P,N. At the returned stage j₀, hq and compatibility of right inclusion supply the scalar towers; the proved private helper cancel_comparison identifies the two iterated tensors with E_j₀⊗_Q L and E_j₀⊗_B M.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-elementwise-fp-module-equiv-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
-   }
+   "elementary": false
   },
   {
-   "text": "Base change this equivalence to every later stage. Compatibility of q\n   and tensor cancellation identify those modules with the displayed ones.\n   Transport from the poset reflection to original indices if necessary.\n   Empty presentations and zero modules need no separate argument, and no\n   flatness is used to descend maps, equalities, or inverse identities.",
+   "text": "For every later original index j, base change the stage equivalence along f_j₀j. Apply cancel_comparison again using hq and right-inclusion compatibility. Proof irrelevance identifies the different witnesses of the inequalities used in the target statement. This proves the eventual conclusion without a poset reflection in this module.",
    "uses": [
     "lem-pc-fp-module-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-elementwise-fp-module-equiv-descent",
   "lem-pc-fp-module-base-change",
-  "lem-pc-fp-module-map-descent-affine",
-  "lem-weil-pbc-directed-colimit-base-change-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-criterion"
+  "lem-pc-tensor-tail-colimit-elementwise"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+  "place": "Tags 05N7 (2), (3), 00DD and 02JO (3); tensor cancellation and compatible coefficient actions made explicit"
  },
  "mathlib_searches": [
   {
@@ -148,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T100055-L-2476642",
+  "landing": "20261013T111935-L-3067800",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
