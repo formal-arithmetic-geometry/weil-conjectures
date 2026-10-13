@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechSortingOperators
+import Sheaf.AlgebraicGeometry.PrefixDeletionExistence
+import Sheaf.AlgebraicGeometry.PrefixDeletionRestrictions
 
 /-!
 # The unsigned prefix-deletion correspondence
@@ -79,6 +81,15 @@ theorem cechPrefixDeletionBijection {I : Type v} [LinearOrder I] (p : ℕ)
             y.1.1.succAbove (y.1.2.1 k)) ∧
         (∀ k : Fin (p + 1),
           x.1.2.2.1 ((⟨x.1.2.2.2.val, hr⟩ : Fin (p + 2)).succAbove k) =
-            y.1.1.succAbove (y.1.2.2.2 k)) := by sorry
+            y.1.1.succAbove (y.1.2.2.2 k)) := by
+  obtain ⟨e, he⟩ := prefixDeletionExistence p t
+  refine ⟨e, ?_⟩
+  intro x
+  let y := e x
+  obtain ⟨ha, ⟨hr₀, hb⟩⟩ := he x
+  obtain ⟨hr, hσ, hτ⟩ := prefixDeletionRestrictions p t e he x
+  have hb' : x.1.2.2.1 ⟨x.1.2.2.2.val, hr⟩ = y.1.1 := by
+    simpa using hb
+  exact ⟨ha, hr, hb', hσ, hτ⟩
 
 end AlgebraicGeometry.Scheme

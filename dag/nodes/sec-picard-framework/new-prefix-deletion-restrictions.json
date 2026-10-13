@@ -1,0 +1,118 @@
+{
+ "id": "new-prefix-deletion-restrictions",
+ "kind": "statement",
+ "title": "Restriction identities for prefix deletion",
+ "statement": "Let I be linearly ordered, p≥0, n=p+2, t:Fin(n)→I, and let O,N be the outgoing/incoming filtered subtypes described by stable sorting and partial sorting [def-pc-alternating-cech-sorting-operators]: O consists of (σ,a,τ,r) with σ,τ permutations of Fin(n), a:Fin(n), r:Fin(n+1), σ stable for t, τ partial sorted with prefix a, and r<a. N consists of (j,ρ,b,η) with j:Fin(n), ρ,η permutations of Fin(n-1), b:Fin(n-1), ρ stable for t∘j.succAbove, η partial sorted with prefix b, and (t(j),j) strictly preceding (t(j.succAbove(ρ(b))),j.succAbove(ρ(b))) lexicographically. For any equivalence e:O≃N satisfying a=b+1, r<n and τ(r)=j for every e(σ,a,τ,r)=(j,ρ,b,η), the following hold for every such x and every k:Fin(n-1): σ(r.succAbove(k))=j.succAbove(ρ(k)) and τ(r.succAbove(k))=j.succAbove(η(k)). The two restrictions follow from the base facts and uniqueness of stable and partial sorting, without using any particular construction of e.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, prefix-deletion correspondence"
+ },
+ "stmt_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "For each x, the base facts and prefix agreement give σ(r)=τ(r)=j and a=b+1. Delete position r and label j, obtaining genuine restricted permutations ρ₀ and η₀ through successor bijections.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction ρ₀ is stable for t∘j.succAbove and therefore equals ρ by uniqueness of the strictly lexicographically ordered enumeration of the pairs (value,label). The restriction η₀ has prefix b equal to ρ and an increasing tail, so equals η by uniqueness of the increasing enumeration of the complementary labels. Their restriction equations give the result. This proof applies to any equivalence satisfying the base facts, not just a constructed deletion equivalence.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "B3 second reader",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, explicit deletion/insertion argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict a permutation to the complement of one position and its image, preserving stable sorted prefixes",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict. Other search kinds and source grep completed.",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deleting one entry of a sorted finite tuple preserves stable sorting and restricts the sorting permutation",
+   "results": "8 hits: Tuple.sort, ordered list insertion/erasure, and Fin.removeNth lemmas; none states this filtered prefix-deletion correspondence or its restriction identities.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Fin.succAbove, Equiv.Perm",
+   "results": "5 hits: cycleRange/cycleIcc successor identities and decomposeFin'Symm successor identities; useful permutation infrastructure but no stable/partial sorting correspondence.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "removeNth|decomposeFin|succAbove.*equiv|eq_sort_iff",
+   "results": "25 Mathlib hits including finSuccAboveEquiv and decomposeFin. Local library contains cechPartialSort_existsUnique and sorting proofs via Tuple.eq_sort_iff but no prefix-deletion theorem except the open item. These uniqueness results are useful to prove the restrictions, not substitutes for it.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechPrefixDeletionBijection",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-alternating-cech-prefix-deletion-bijection",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrefixDeletionRestrictions",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrefixDeletionRestrictions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.prefixDeletionRestrictions",
+  "statement": "theorem prefixDeletionRestrictions {I : Type v} [LinearOrder I] (p : ℕ)\n    (t : Fin (p + 2) → I)\n    (e : ({x : Equiv.Perm (Fin (p + 2)) × Fin (p + 2) ×\n      Equiv.Perm (Fin (p + 2)) × Fin (p + 3) //\n    (cechStableSort t x.1 ∧ cechPartialSort x.1 x.2.2.1 x.2.1) ∧\n      x.2.2.2.val < x.2.1.val}) ≃\n      ({y : Fin (p + 2) × Equiv.Perm (Fin (p + 1)) × Fin (p + 1) ×\n      Equiv.Perm (Fin (p + 1)) //\n    (cechStableSort (t ∘ y.1.succAbove) y.2.1 ∧\n      cechPartialSort y.2.1 y.2.2.2 y.2.2.1) ∧\n    (t y.1 < t (y.1.succAbove (y.2.1 y.2.2.1)) ∨\n      (t y.1 = t (y.1.succAbove (y.2.1 y.2.2.1)) ∧\n        y.1 < y.1.succAbove (y.2.1 y.2.2.1)))}))\n    (h : ∀ x, let y := e x\n      x.1.2.1.val = y.1.2.2.1.val + 1 ∧\n      ∃ hr : x.1.2.2.2.val < p + 2,\n        x.1.2.2.1 ⟨x.1.2.2.2.val, hr⟩ = y.1.1) :\n    ∀ x,\n      let y := e x\n      ∃ hr : x.1.2.2.2.val < p + 2,\n        (∀ k : Fin (p + 1),\n          x.1.1 ((⟨x.1.2.2.2.val, hr⟩ : Fin (p + 2)).succAbove k) =\n            y.1.1.succAbove (y.1.2.1 k)) ∧\n        (∀ k : Fin (p + 1),\n          x.1.2.2.1 ((⟨x.1.2.2.2.val, hr⟩ : Fin (p + 2)).succAbove k) =\n            y.1.1.succAbove (y.1.2.2.2 k))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T015544-L-3016720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T015544-L-3016720",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
