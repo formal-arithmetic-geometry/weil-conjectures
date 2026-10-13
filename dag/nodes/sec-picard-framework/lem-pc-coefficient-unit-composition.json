@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-coefficient-unit-composition",
+ "kind": "statement",
+ "title": "Composition compatibility of abelian coefficient units",
+ "statement": "Let $g:Z\\to Y$ and $f:Y\\to X$ be morphisms of schemes, and $M$ an $\\mathcal O_X$-module. Let $\\alpha_f(M):f^{-1}U_X(M)\\to U_Y(f^*M)$ be the abelian adjunct of the module pullback unit [def-pc-flat-cohomology-comparison]. Choose the abelian composition isomorphism $c:g^{-1}f^{-1}\\cong (f\\circ g)^{-1}$ by Adjunction.leftAdjointCompIso for the pullback/pushforward adjunctions and the identity comparison on direct images. Let $t:g^*f^*M\\cong(f\\circ g)^*M$ be Scheme.Modules.pullbackComp. Then $U_Z(t)\\circ\\alpha_g(f^*M)\\circ g^{-1}(\\alpha_f(M))=\\alpha_{f\\circ g}(M)\\circ c_{U_X(M)}$. No open-immersion or flatness hypothesis is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7; WeilConjectures/AlgebraicGeometry/Modules/PullbackUnit.lean",
+  "place": "Functoriality of pullback and f-maps; pullbackUnit_comp_app, lines 43-56, and Mathlib Adjunction.leftAdjointCompIso."
+ },
+ "stmt_deps": [
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the composite abelian pullback/pushforward hom equivalence to both sides. By homEquiv_naturality_left and homEquiv_naturality_right and the definition of coeff, the left adjunct is the composite of the two underlying module units followed by the pushforward of the underlying module composition comparison.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The conjugation identity unit_conjugateEquiv_symm for leftAdjointCompIso identifies the right adjunct with the underlying module unit for f composed with g. On each open these adjuncts agree by pullbackUnit_comp_app followed by the module comparison and its inverse; direct-image composition is the identity on sections. Sheaf morphism extensionality and injectivity of the abelian hom equivalence finish the proof.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01F7; WeilConjectures/AlgebraicGeometry/Modules/PullbackUnit.lean",
+  "place": "Functoriality of pullback and f-maps; pullbackUnit_comp_app, lines 43-56, and Mathlib Adjunction.leftAdjointCompIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of free abelian sheaf represented by an open, coefficient unit open immersion is isomorphism, pullback composition coefficient units",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The abelian adjoint of the module pullback unit is an isomorphism for open immersions",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.morphismRestrictOpensRange",
+   "date": "2026-10-13",
+   "verdict": "API candidates read; no complete matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackUnit|sheafPullbackIso|leftAdjointCompIso|Coyoneda.ext",
+   "results": "Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Yoneda.lean",
+   "date": "2026-10-13",
+   "verdict": "API candidates read; no complete matching theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of the forgetful functor from sheaves of modules to abelian sheaves with composition of inverse image adjunction units",
+   "results": "SheafOfModules.toSheafCompSheafToPresheafIso, PresheafOfModules.sheafificationCompForgetCompToPresheaf, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-13",
+   "verdict": "Second reading: related interfaces, no matching complete theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionData",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "quasi-separated case: Mayer--Vietoris and induction on affine opens; degree-zero restriction identifications in the Ext presentation",
+   "via": [
+    "lem-pc-open-restriction-data",
+    "lem-pc-open-free-ext-transport",
+    "lem-pc-open-free-ext-comparison",
+    "lem-pc-cohomology-mayer-vietoris-ext-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.InverseImageCoefficientComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/InverseImageCoefficientComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coefficientUnit_comp",
+  "statement": "theorem coefficientUnit_comp (g : Z ⟶ Y) (f : Y ⟶ X) (M : X.Modules) :\n    (invImage g).map (coefficientUnit f M) ≫\n        coefficientUnit g ((pullback f).obj M) ≫\n        (SheafOfModules.toSheaf Z.ringCatSheaf).map ((pullbackComp g f).hom.app M) =\n      (invImageComp g f).hom.app ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) ≫\n        coefficientUnit (g ≫ f) M",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b6229",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T011938-L-2767011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b6229",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T011938-L-2767011",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivery with its DAG statements and proof dependencies; existing signatures and definition are unchanged. All three modules and direct importer MayerVietorisOpenRestrictionBijective compile cleanly; axioms match the two documented deferred obligations."
+ }
+}

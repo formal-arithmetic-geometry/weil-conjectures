@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-open-coefficient-unit-iso",
+ "kind": "statement",
+ "title": "Invertibility of the open-immersion coefficient unit",
+ "statement": "Let $j:Y\\to X$ be an open immersion of schemes and $M$ an $\\mathcal O_X$-module. Let $U_X$ and $U_Y$ forget modules to abelian sheaves. The abelian adjunct of the module pullback unit $M\\to j_*j^*M$ [def-pc-flat-cohomology-comparison], namely $j^{-1}U_X(M)\\to U_Y(j^*M)$, is an isomorphism. This holds for every module, without flatness or quasi-coherence.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/04J0",
+  "place": "Lemma 18.20.1, lemma-localize-morphism-ringed-sites, final parenthetical: inverse image and module pullback agree for localization morphisms; open-subscheme specialization."
+ },
+ "stmt_deps": [
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use Topology.IsOpenEmbedding.sheafPullbackIso to identify abelian inverse image with restriction on opens. Use Scheme.Modules.restrictFunctorIsoPullback to identify module restriction with module pullback. The underlying abelian sheaf of the explicit module restriction is the explicit abelian restriction, since j.appIso is invertible.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module unit is the restriction unit followed by restrictFunctorIsoPullback (pullbackUnit_eq_of_isOpenImmersion in the source library). Take abelian adjuncts. The restriction unit is adjunct to the identity of restriction; hence the coefficient map is exactly the composite of the two isomorphisms from the first step. Therefore it is invertible, also on empty schemes and for zero modules.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/04J0",
+  "place": "Lemma 18.20.1, lemma-localize-morphism-ringed-sites, final parenthetical: inverse image and module pullback agree for localization morphisms; open-subscheme specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of free abelian sheaf represented by an open, coefficient unit open immersion is isomorphism, pullback composition coefficient units",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The abelian adjoint of the module pullback unit is an isomorphism for open immersions",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.morphismRestrictOpensRange",
+   "date": "2026-10-13",
+   "verdict": "API candidates read; no complete matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackUnit|sheafPullbackIso|leftAdjointCompIso|Coyoneda.ext",
+   "results": "Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Yoneda.lean",
+   "date": "2026-10-13",
+   "verdict": "API candidates read; no complete matching theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a sheaf of modules under an open embedding commutes with forgetting to sheaves of abelian groups",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app",
+   "date": "2026-10-13",
+   "verdict": "Second reading: related interfaces, no matching complete theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionData",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "quasi-separated case: Mayer--Vietoris and induction on affine opens; degree-zero restriction identifications in the Ext presentation",
+   "via": [
+    "lem-pc-open-restriction-data",
+    "lem-pc-open-free-ext-transport",
+    "lem-pc-open-free-ext-comparison",
+    "lem-pc-cohomology-mayer-vietoris-ext-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.OpenImmersionCoefficientUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/OpenImmersionCoefficientUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coefficientUnit_isIso_of_isOpenImmersion",
+  "statement": "theorem coefficientUnit_isIso_of_isOpenImmersion (j : Y ⟶ X) [IsOpenImmersion j]\n    (M : X.Modules) : IsIso (coefficientUnit j M)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b6229",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T011938-L-2767011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b6229",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T011938-L-2767011",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivery with its DAG statements and proof dependencies; existing signatures and definition are unchanged. All three modules and direct importer MayerVietorisOpenRestrictionBijective compile cleanly; axioms match the two documented deferred obligations."
+ }
+}

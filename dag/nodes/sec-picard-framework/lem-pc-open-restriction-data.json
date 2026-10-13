@@ -13,38 +13,40 @@
  ],
  "proof": [
   {
-   "text": "Restriction along the open inclusion identifies the represented free sheaf with the free sheaf on the top open, by the free/forgetful, sheafification and section adjunctions. This gives e. Identify inverse image of the underlying coefficient sheaf with the underlying module restriction; choose d to be the abelian adjoint of the pullback unit. Naturality for multiplication by a global section gives its R-scalar square.",
+   "text": "Apply the free-sheaf inverse-image theorem to j=W.ι and W, and identify j^{-1}W with the top open by extensionality.",
+   "uses": [
+    "lem-pc-inverse-image-open-free-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct k using the pullback lift. Its first and second projection identities are pullback.lift_fst and lift_snd. Regard it as a pullback.map to infer that it is an open immersion. Use the open coefficient-unit isomorphism at j and k to obtain d and the first factor of d′. Construct the module comparison t by pullbackComp, pullbackCongr and inverse pullbackComp, and the abelian comparison c by invImageComp, invImageCongr and inverse invImageComp. Define d′ by composing the coefficient isomorphism with the forgotten t.",
    "uses": [
     "def-pc-flat-cohomology-comparison",
-    "lem-pc-free-mayer-vietoris-short-exact",
-    "lem-weil-pbc-zariski-extension-by-zero-adjunction"
+    "lem-pc-open-coefficient-unit-iso",
+    "lem-pc-coefficient-unit-composition"
    ],
    "elementary": false
   },
   {
-   "text": "The two composites of inverse images are left adjoints to the same direct-image composite because p composed with k equals j composed with p_W. Their unique adjunction comparison gives c. The module pullback composition comparisons for the same equality give d′; their naturality for sections from Spec S gives the S-scalar square.",
+   "text": "The R-scalar equation follows from coeff_naturality, pushforward_map_smulHom and smulHom_naturality for the module unit, together with comp_appTop. For the S-scalar equation apply the same calculation at k, then smulHom_naturality for t. The second projection identity, on global sections, identifies the scalars. For the coefficient square use coefficientUnit_comp on both paths. Transport across the equality k≫p=q≫j (proved by equality induction in coefficientUnit_congr), and cancel the inverse abelian and module composition comparisons. The code proves all these equations without a new scalar or square hypothesis.",
    "uses": [
-    "def-pc-flat-cohomology-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compose the two module pullback units in each route of the cartesian square. Under the composition comparison these units agree, since both are adjoint to the identity on the same pullback module. Applying the abelian adjunction and cancelling its unit/counit identities gives d′ composed with J′(phi) equal to phi_W composed with G_W(d) composed with c_F. Empty opens and zero modules give zero coefficient sheaves, and the argument also covers the top open.",
-   "uses": [
-    "def-pc-flat-cohomology-comparison"
+    "def-pc-flat-cohomology-comparison",
+    "lem-pc-coefficient-unit-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-flat-cohomology-comparison",
-  "lem-pc-free-mayer-vietoris-short-exact",
-  "lem-weil-pbc-zariski-extension-by-zero-adjunction"
+  "lem-pc-coefficient-unit-composition",
+  "lem-pc-inverse-image-open-free-sheaf",
+  "lem-pc-open-coefficient-unit-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/00A7; https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/04J0; https://stacks.math.columbia.edu/tag/01F7",
-  "place": "Open restriction and extension adjunction (00A7, 03DI); localization of morphisms of ringed sites (04J0); coefficient units and functoriality (01F7). The scalar and coefficient squares are the degree-zero specialization of these constructions."
+  "place": "X3: constructive restriction data and proved scalar/coefficient glue, from two smaller general coefficient lemmas and a free-sheaf inverse-image theorem."
  },
  "mathlib_searches": [
   {
@@ -117,13 +119,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "X-b6229",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T194144-L-466176",
+  "landing": "20261013T011938-L-2767011",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivery with its DAG statements and proof dependencies; existing signatures and definition are unchanged. All three modules and direct importer MayerVietorisOpenRestrictionBijective compile cleanly; axioms match the two documented deferred obligations."
  }
 }
