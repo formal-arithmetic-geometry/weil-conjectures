@@ -1,0 +1,134 @@
+{
+ "id": "new-w2-additive-cech-common-representative",
+ "kind": "statement",
+ "title": "Common augmentation representatives for additive etale Cech cohomology",
+ "statement": "Let X be a quasi-compact separated scheme [def-pc-scheme], U a finite open covering with all positive tuple intersections affine, I an injective resolution [def-sp-injective-resolutions] of the lifted additive structure sheaf [def-sc-etale-additive-structure-restriction], n a nonnegative integer, and s a degree-n cycle of its global section complex. Using the alpha, beta and total complex T of [def-pbc-etale-additive-cech-normalization], there exist an ordinary unit Cech cycle z [lem-pc-flat-cech-base-change] and total cycles t_alpha,t_beta with iCycles(t_alpha)=alpha(iCycles(s)), iCycles(t_beta)=beta(iCycles(z)), and equal total homology classes.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, separated affine cover proof; Tags 01EQ and 01FD, augmented double-complex construction and naturality."
+ },
+ "proof": [
+  {
+   "text": "Restrictions to open subschemes preserve injectives, so the augmented Čech\nrows of each resolution term are exact for the covering U. Hence alpha is a\nquasi-isomorphism. On each finite intersection, the additive structure sheaf has\nvanishing positive cohomology by affine quasi-coherent acyclicity. Consequently\nbeta is a quasi-isomorphism by the first-quadrant double-complex comparison.\nThe coordinate identification by restrictFunctorΓ and the additive universe lift\nidentifies its source with the ordinary unit Čech complex. Alpha sends s to a\ncycle tα. Surjectivity of beta on homology gives a coefficient homology class\nwith image [tα]. Lift this class to a coefficient cycle z, and apply beta to get\ntβ. The chain-map identities give the two cycle equations, and the chosen\nclass gives [tα]=[tβ]. At degree zero the same argument is the augmented kernel\ncalculation; an empty covering covers only the empty scheme and all groups are\nzero. No normalized equivalence or scalar action on sheaf cohomology is used.",
+   "uses": [
+    "lem-sc-etale-open-cech-injective-augmentation",
+    "lem-sc-etale-affine-open-cech-resolution-columns"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-open-cech-injective-augmentation",
+  "lem-sc-etale-affine-open-cech-resolution-columns"
+ ],
+ "proof_origin": {
+  "by": "W2 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Component-level form of the augmented double-complex diagram, with Tag 03P2 affine vanishing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology comparison is natural in coefficient multiplication and has augmentation cycle representatives",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech resolution augmentations common cycle representatives and natural coefficient endomorphisms",
+   "results": "8 hits on alternating face maps and Dold-Kan normalized complexes; no additive etale augmentation representative lemma.",
+   "verdict": "No replacement for the fixed alpha and beta components.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "additiveCechAlpha|additiveCechBeta|homologyπ_naturality",
+   "results": "25 Mathlib hits give naturality of homology projection. Local repository alpha and beta occur only in their definitions. Existing total comparison and affine-column theorems give abstract comparisons, not the specified component equations.",
+   "verdict": "Use the projection epi API directly in the upper proof; split the missing component-level arguments.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a cycle in the total complex of an acyclic augmented double complex can be represented by a cycle in the bottom row",
+   "results": "8 hits: cyclesMk, i_cyclesMk, liftCycles, liftCycles', liftCycles_i and toCycles APIs. None identifies the fixed additive etale alpha/beta components.",
+   "verdict": "Second reading: useful cycle constructors, no replacement for either split statement.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"hom\"",
+   "results": "12 hits including InjectiveResolution.Hom, Hom.hom, Hom.ι_comp_hom, Hom.ι_f_zero_comp_hom_f_zero, descIdHomotopy and descCompHomotopy. These give the augmentation-preserving comparison map but not the fixed coefficient-coordinate identities.",
+   "verdict": "Second reading: reuse resolution comparison when proving transport; it does not close the statement directly.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*quasiIso|quasiIso.*total|homologyMap.*smul; local: additiveCechAlpha|additiveCechBeta",
+   "results": "6 Mathlib hits in homology linearity, including leftHomologyMap_smul. Local definitions occur in EtaleAdditiveCechNormalization; abstract total comparison supplies a Nonempty isomorphism without the required component normalization.",
+   "verdict": "Second reading: no exact duplicate; retain component-level existence and naturality reductions.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedScalar",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison in the smooth-curve proper base-change argument: Scalar compatibility of augmentation-normalized additive etale Cech edges.",
+   "via": [
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCommonRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechCommonRepresentative.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.additiveCech_common_representative",
+  "statement": "theorem additiveCech_common_representative\n    (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]\n    {ι : Type u} [Finite ι] (U : ι → X.Opens)\n    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (hcover : iSup U = ⊤)\n    (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ)\n    (s : (additiveCechGlobal I).cycles n) :\n    ∃ (z : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).cycles n)\n      (tα tβ : (additiveCechTotal U I).cycles n),\n      (additiveCechTotal U I).iCycles n tα =\n        additiveCechAlpha U I n ((additiveCechGlobal I).iCycles n s) ∧\n      (additiveCechTotal U I).iCycles n tβ = additiveCechBeta U I n\n        ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z) ∧\n      (additiveCechTotal U I).homologyπ n tα =\n        (additiveCechTotal U I).homologyπ n tβ",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T122231-L-3592126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T122231-L-3592126",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCommonRepresentative
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechScalarTransport
+import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-! # Scalar action on normalized additive étale Čech edges
 Source: Stacks Project, Tags 03P2 and 01EQ. -/
@@ -53,6 +56,24 @@ theorem etaleAdditiveCech_normalized_scalar
     (a : Sheaf.H X.etaleAdditiveSheaf n ≃+
       (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homology n)
     (ha : IsEtaleAdditiveCechNormalized U n a) :
-    ∀ r x, a (Sheaf.H.map (μ r) n x) = r • a x := by sorry
+    ∀ r x, a (Sheaf.H.map (μ r) n x) = r • a x := by
+  classical
+  intro r x
+  let I := injectiveResolution X.etaleAdditiveSheaf
+  obtain ⟨c⟩ := Etale.exists_resolutionSection_canonical_comparison X.etaleAdditiveSheaf I
+  obtain ⟨s, hs⟩ :=
+    (AddCommGrpCat.epi_iff_surjective ((additiveCechGlobal I).homologyπ n)).mp
+      inferInstance ((c.globalEquiv n).symm x)
+  have hx : c.globalEquiv n ((additiveCechGlobal I).homologyπ n s) = x := by
+    rw [hs, AddEquiv.apply_symm_apply]
+  obtain ⟨z, tα, tβ, hα, hβ, ht⟩ :=
+    additiveCech_common_representative X U hU hcover I n s
+  have haz := ha I c s z tα tβ hα hβ ht
+  rw [hx] at haz
+  obtain ⟨s', z', tα', tβ', hα', hβ', ht', hs', hz'⟩ :=
+    additiveCech_scalar_transport X U μ hμ I c n r s z tα tβ hα hβ ht
+  have haz' := ha I c s' z' tα' tβ' hα' hβ' ht'
+  rw [hs', hx, hz', ← haz] at haz'
+  exact haz'
 
 end AlgebraicGeometry.Scheme.Modules

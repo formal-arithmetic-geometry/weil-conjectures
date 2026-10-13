@@ -12402,3 +12402,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:22 L: merged deliver/M2/Sheaf.AlgebraicGeometry.BottomFreeChainPullbackSquare (stage 3; reviewer PASS; first push; landing 20261013T122230-L-3591606 (interface); batch 20261013T122226; modules 2; new nodes 1)
 - 12:22 L: merged deliver/P1/Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison (stage 3; reviewer PASS; first push; landing 20261013T122231-L-3591766 (proof); batch 20261013T122226; modules 1; new nodes 0)
 - 12:22 L: merged deliver/R4/Sheaf.Paper.AffineOpenInverseImageFiniteLocalLifts (stage 3; reviewer PASS; first push; landing 20261013T122231-L-3591864 (interface); batch 20261013T122226; modules 3; new nodes 2)
+- 12:22 L: merged deliver/W2/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedScalar (stage 3; reviewer PASS; first push; landing 20261013T122231-L-3592126 (interface); batch 20261013T122226; modules 3; new nodes 2)
