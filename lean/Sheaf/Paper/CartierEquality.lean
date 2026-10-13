@@ -74,6 +74,7 @@ theorem cartier_equality
     rwa [hr]
   obtain ⟨n, c, f, hcn, hnc, hlen, hreg, ι, hι, hfrac, hA, e, he⟩ :=
     FieldTheory.exists_completeIntersection_fractionField_model k K hgens s.card x hx
+  have := hA
   obtain ⟨δ, ⟨eH⟩, ⟨eΩ⟩⟩ :=
     exists_fractionField_completeIntersection_cotangent_model k K n f hreg e
   have hH : Module.Finite K (H1Cotangent k K) := Module.Finite.equiv eH.symm
