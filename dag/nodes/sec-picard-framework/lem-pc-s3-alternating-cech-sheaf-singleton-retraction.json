@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-s3-alternating-cech-sheaf-singleton-retraction",
+ "kind": "statement",
+ "title": "Singleton projection retracts the local augmentation in degree zero",
+ "statement": "Let $X$ be a scheme, $r\\in\\mathbb N$, $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$, $G$ an $\\mathcal O_X$-module, and $i:\\operatorname{Fin}(r)$. Use the explicit complex and augmentation [def-pc-s3-alternating-cech-sheaf-construction]. Write $S$ for $G[0]$ extended by zero to integer degrees, $C$ for the integer extension of the alternating complex, and $F$ for restriction to $U_i$. Write $a:F(S)\\to F(C)$ for the restricted extended augmentation. There is a module morphism $\\pi:F(C^0)\\to F(S^0)$ with $a^0\\pi=1_{F(S^0)}$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02FU, local insertion and degree-zero projection; ordered adaptation using Tag 01FM; parent insertion-homotopy proof"
+ },
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof": [
+  {
+   "text": "Project the degree-zero product of intersection presheaves to the singleton\nwhose unique index is i. On a test open V contained in U i, its intersection with\nU i is V, so the singleton restriction is identified with the identity of G(V).\nThese identifications are linear and natural under restrictions. Sheafify the\nprojection and restrict it to U i. Sheafification of G.val is identified with G\nby the sheafification counit, inverse to its unit on sheaves. Thus projection\nfollowing augmentation is the identity. Extend to integer degrees: degree zero\nis unchanged, up to the canonical extendXIso and its functorial image. Transport\nthe preceding retraction across these isomorphisms. For r=0 there is no i; for an\nempty U i all the modules in question are zero and the assertion still holds.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02FU insertion; Tag 01FM ordered convention; detailed ordered adaptation and retraction adjustment by F4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "singleton projection retracts the alternating Cech augmentation and signed insertion contracts its kernel",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero singleton projection is a left inverse of the sheafified alternating Cech augmentation restricted to that open",
+   "results": "Eight sheaf-section and plus-construction hits; none gives the singleton projection for this explicitly constructed complex. Semantic insertion search found extra-degeneracy and Dold-Kan homotopies for different complexes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"homotopy\"",
+   "results": "Zero hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*homotopy|homotopy.*cech; retract|insertion|contract in *Cech*.lean",
+   "results": "Mathlib search has no local increasing-tuple sheaf contraction. Source library has all-tuple exactness and monomial all-tuple homotopy; these do not identify the explicit sheafified increasing-tuple differential or augmentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafInsertionHomotopy",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Local insertion contraction: singleton projection and signed face cancellation",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-insertion-homotopy",
+    "lem-pc-s3-alternating-cech-sheaf-local-contraction",
+    "lem-pc-s3-affine-alternating-cech-augmented-construction",
+    "lem-pc-s3-affine-alternating-cech-resolution-core",
+    "lem-pc-affine-alternating-cech-exchange-resolution",
+    "lem-pc-affine-alternating-cech-pinned-mate",
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSheafSingletonRetraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSheafSingletonRetraction.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheafAugmentation_restrict_degreeZero_retraction",
+  "statement": "theorem alternatingCechSheafAugmentation_restrict_degreeZero_retraction\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :\n    let F := Scheme.Modules.restrictFunctor (U i).ι\n    let A := ((CochainComplex.single₀ X.Modules).obj G).extend\n      ComplexShape.embeddingUpNat\n    let C := (alternatingCechSheafComplex U G).extend ComplexShape.embeddingUpNat\n    let a := (F.mapHomologicalComplex (ComplexShape.up ℤ)).map\n      (HomologicalComplex.extendMap (alternatingCechSheafAugmentation U G)\n        ComplexShape.embeddingUpNat)\n    ∃ π : F.obj (C.X 0) ⟶ F.obj (A.X 0), a.f 0 ≫ π = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T095952-L-2458444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T095952-L-2458444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
