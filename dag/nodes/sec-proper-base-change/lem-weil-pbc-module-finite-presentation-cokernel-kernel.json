@@ -1,0 +1,138 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-module-finite-presentation-cokernel-kernel",
+ "kind": "statement",
+ "title": "Finite-type relations for the quotient of a finite presentation",
+ "statement": "Let X be a ringed space, U an open subset, and f : G → H a morphism of module sheaves [def-weil-sheaf-of-modules-category]. Assume G is of finite type. For any finite global presentation P of H restricted to U [def-weil-pbc-module-finite-type-presentation], the kernel of the composite of its finite-free generator epimorphism with the restriction of the cokernel map of f is of finite type. No global finite presentation of H is assumed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 0H96 (lemma-cokernel-finite-finite-presentation), lines 1431-1450; used in Properties, Lemma 01PJ, lines 3112-3116"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "The relations of P generate M = kernel(P.generators.π) by an epimorphism from a finite free module, so M is of finite type. Restrict G to U; finite type is preserved by restriction. The image I of f|U is an epi image of that finite-type source. Let N be the kernel of the composite generator map with c|U, where c is the cokernel map of f. The generator map restricts to N → I. It is epi because sections of I locally lift along the generator epi, and every such lift lies in N. Its kernel is M: all kernels are sectionwise, so the vanishing equation is exactly that of M. Hence 0 → M → N → I → 0 is short exact. Apply finite-type closure under extensions to obtain N of finite type. This is steps 3–5 of the original Stacks argument.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-image-extension",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-finite-type-image-extension",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 0H96 (label lemma-cokernel-finite-finite-presentation), proof, lines 1440-1454; tag verified in stacks-project/tags/tags (0H96,modules-lemma-cokernel-finite-finite-presentation)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of finite free generator epimorphism composed with cokernel map of finite type sheaf is finite type",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; zero hits returned. Other search services and source grep used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of finite free presentation map composed with cokernel of finite type sheaf is finite type",
+   "results": "Eight hits: finite-presentation definitions, finite Presentation class, and finite-type implication. No kernel composite theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "Five hits: definition, constructors, finite-type and quasicoherent implications, exists_quasicoherentData; no kernel composite theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg finitePresentation_of_generators_kernel and IsFinitePresentation.*cokernel in Mathlib, lean/WeilConjectures, lean/Sheaf",
+   "results": "Found a proved private generators/kernel construction in CoherentFiniteTypeLocallyNoetherian, used for the final construction; no arbitrary ringed-space finite-type kernel composite theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial match; helper construction reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-finite-presentation-cokernel",
+   "place": "steps 3–5: finite type of the preimage of the image in a finite free presentation",
+   "via": [
+    "lem-weil-pbc-module-finite-presentation-cokernel",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernelKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFinitePresentationCokernelKernel.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.kernel_composite_cokernel_isFiniteType",
+  "statement": "theorem kernel_composite_cokernel_isFiniteType (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X) {G H : SheafOfModules.{u} (moduleRings X)} (f : G ⟶ H) [G.IsFiniteType] (P : (H.over U).Presentation) [P.IsFinite] : (kernel (P.generators.π ≫ (SheafOfModules.overFunctor (moduleRings X) U).map (cokernel.π f))).IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T011926-L-2762705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T011926-L-2762705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
