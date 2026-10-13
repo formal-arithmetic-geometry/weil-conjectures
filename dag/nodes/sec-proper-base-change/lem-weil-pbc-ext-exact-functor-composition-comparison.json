@@ -107,11 +107,12 @@
   "existing": false,
   "module": "Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison",
   "file": "lean/Sheaf/CategoryTheory/ExtExactFunctorCompositionComparison.lean",
-  "declaration": "CategoryTheory.Abelian.Ext.exactFunctorCompositionComparison",
-  "statement": "theorem exactFunctorCompositionComparison\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    [Abelian C] [Abelian D] [Abelian E]\n    [HasExt.{w} C] [HasExt.{w} D] [HasExt.{w} E]\n    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)\n    [F.Additive] [G.Additive] [H.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (e : H ≅ F ⋙ G) {X Y : C} {n : ℕ} (x : Ext.{w} X Y n) :\n    (x.mapExactFunctor H).comp (Ext.mk₀ (e.hom.app Y)) (add_zero n) =\n      (Ext.mk₀ (e.hom.app X)).comp\n        ((x.mapExactFunctor F).mapExactFunctor G) (zero_add n)",
+  "declaration": "CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_eq",
+  "statement": "theorem mapExactFunctor_comp_mk₀_eq\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    [Abelian C] [Abelian D] [Abelian E]\n    [HasExt.{w} C] [HasExt.{w} D] [HasExt.{w} E]\n    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)\n    [F.Additive] [G.Additive] [H.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (e : H ≅ F ⋙ G) {X Y : C} {n : ℕ} (x : Ext.{w} X Y n) :\n    (x.mapExactFunctor H).comp (Ext.mk₀ (e.hom.app Y)) (add_zero n) =\n      (Ext.mk₀ (e.hom.app X)).comp\n        ((x.mapExactFunctor F).mapExactFunctor G) (zero_add n)",
   "branch": "sheaf-dag",
   "by": "K1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "P4 upstream review repair: canonical name mapExactFunctor_comp_mk₀_eq; no EnoughInjectives hypothesis. The cited upstream declaration is absent from this checkout, so the general proof is retained in the held module."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -124,13 +125,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-a8100",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261012T032608-L-1414923",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T201806-L-3975819",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proof, node declaration, change record, report, and eight direct importers compile successfully; signatures, axioms, dependencies, and review requirements match."
  }
 }

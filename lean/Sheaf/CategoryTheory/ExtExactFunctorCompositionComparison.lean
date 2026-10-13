@@ -55,7 +55,7 @@ The degree-zero components are precisely Ext.mk₀ of e.hom.app. The comparison 
 single complexes and the shift isomorphisms cancel on both sides, giving the equality.
 (blueprint: lem-weil-pbc-ext-exact-functor-composition-comparison)
 -/
-theorem exactFunctorCompositionComparison
+theorem mapExactFunctor_comp_mk₀_eq
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
     [HasExt.{w} C] [HasExt.{w} D] [HasExt.{w} E]
@@ -156,4 +156,20 @@ theorem exactFunctorCompositionComparison
       Category.assoc] at hh
     simp only [← Functor.commShiftIso_hom_naturality_assoc] at hh
     exact hh
+/-- Deprecated compatibility alias; use `mapExactFunctor_comp_mk₀_eq`. -/
+ theorem exactFunctorCompositionComparison
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasExt.{w} C] [HasExt.{w} D] [HasExt.{w} E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    [F.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (e : H ≅ F ⋙ G) {X Y : C} {n : ℕ} (x : Ext.{w} X Y n) :
+    ((x.mapExactFunctor H).comp (Ext.mk₀ (e.hom.app Y)) (add_zero n)) =
+      (Ext.mk₀ (e.hom.app X)).comp
+        ((x.mapExactFunctor F).mapExactFunctor G) (zero_add n) := by
+  exact mapExactFunctor_comp_mk₀_eq F G H e x
+
 end CategoryTheory.Abelian.Ext
