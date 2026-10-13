@@ -19,23 +19,58 @@
  ],
  "proof": [
   {
-   "text": "A Noetherian normal local domain of dimension at most one is either a\nfield or a DVR. In the field case V is empty; take the empty scheme E, whose\nmorphism to L is finite etale, whose local rings are vacuously normal, and whose\nempty open is dense. The two restrictions to the empty open are isomorphic.\nIn the DVR case, smoothness implies flatness, so the special fibre is an\neffective Cartier divisor. It is regular, since it is smooth over the residue\nfield. Smoothness and geometric connectedness make this nonempty fibre\nintegral. Since W contains x on the fibre, W contains its generic point. The\nfinite etale model n on W shows that the punctured cover is unramified there;\nthis is the only codimension-one point on that divisor. Away from the divisor\nthe cover is already etale. Apply Tag 0EYE to obtain a finite etale E over L and\nan isomorphism of its restriction with the punctured cover. Smoothness over a\nnormal base makes L normal; etale ascent then makes all local rings of E normal\n(Tag 033C). The puncture is dense in E: a uniformizer is a nonzerodivisor on L\nby flatness over the DVR, and remains a nonzerodivisor on E by etale flatness.\nThus its vanishing locus contains no irreducible component of the locally\nNoetherian scheme E. Choose the restriction isomorphism in the direction\nfrom N to E; its compatibility with their structure maps gives the equation.\nThis theorem asserts existence only; no definition selects a witness.",
+   "text": "Split on IsField A. In the field case its spectrum has one point, so hV makes V empty. Take E to be the empty open subscheme of L and p its inclusion. The inclusion is finite etale; normality and density are vacuous. Both restrictions are empty schemes, and their initial-object isomorphism has the required composition equation. This branch is fully proved in Lean.",
    "uses": [
-    "lem-weil-pbc-smooth-over-normal-ring-normal",
-    "lem-weil-pbc-etale-over-normal-ring-normal"
+    "def-weil-affine-spectrum",
+    "def-weil-etale-morphism",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In the nonfield case, ringKrullDim A ≤ 1 makes every nonzero prime maximal (Mathlib Ideal.IsPrime.isMaximal_of_ne_bot). Normality and Noetherianity then give IsDedekindDomain A, and IsDiscreteValuationRing.TFAE supplies the DVR structure. Apply [lem-sbc-dvr-punctured-cover-purity] to obtain p:E→L finite etale and the restriction isomorphism. The private trait_isDVR helper and the assembly are fully proved.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pbc-normal-ring",
+    "def-weil-pbc-noetherian-ring",
+    "lem-sbc-dvr-punctured-cover-purity"
    ],
    "elementary": false
+  },
+  {
+   "text": "The composite p≫q is smooth. Its base Spec A has normal domain stalks by localization of A [lem-weil-pbc-localization-normal-domain]. In the private smooth_normal_stalks helper, choose affine neighborhoods in source and target, transfer base-stalk normality to prime localizations of the base chart, apply [lem-weil-pbc-smooth-over-normal-ring-normal] to the smooth chart map, and transfer the two properties from the source chart localization back to its stalk. This proves normal domain stalks of E without using the separate etale-normality theorem.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-smooth-over-normal-ring-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The zero prime of the nonfield local domain differs from its closed point, so hV makes V nonempty. Spec A is irreducible and V is open, hence V is dense. The smooth composite p≫q is an open map. Apply Mathlib Dense.preimage and rewrite Scheme.Hom.comp_preimage to obtain the required dense puncture of E. Assemble finiteness, etaleness, normality, density and the compatible restriction isomorphism. All of this step is proved in Lean.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sbc-dvr-punctured-cover-purity",
+  "lem-weil-pbc-localization-normal-domain",
   "lem-weil-pbc-smooth-over-normal-ring-normal",
-  "lem-weil-pbc-etale-over-normal-ring-normal"
+  "def-sbc-smooth-morphisms"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "U1",
+  "by": "S3",
   "document": "Stacks Project",
-  "place": "Tags 0EYE and 0EYJ, trait paragraph; Tag 033C for normality"
+  "place": "Tags 0EYE and 0EYJ, trait paragraphs; 033C for normality, 00PD for the DVR criterion, and 01UA for openness. Lean proves the field branch, normality, and density; DVR purity is split off."
  },
  "mathlib_searches": [
   {
@@ -109,13 +144,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-02391",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T235558-L-2202589",
+  "landing": "20261013T015614-L-3026987",
   "kind": "interface",
-  "note": "independent Codex review: Delivered declarations, node signatures, proofs, imports, report, and direct importer match the review requirements and compile cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

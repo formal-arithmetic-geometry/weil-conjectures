@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-dvr-punctured-cover-purity",
+ "kind": "statement",
+ "title": "The DVR purity step for a punctured finite etale cover",
+ "statement": "Let A be a discrete valuation ring [def-sc-discrete-valuation-ring]. Let q:L→Spec A [def-weil-affine-spectrum, def-weil-pbc-scheme-conventions] be smooth with geometrically connected fibres [def-sbc-smooth-morphisms]. Let V be the open complement of the closed point. Let n:N→L be finite [def-weil-finite-integral-morphism] and etale on q⁻¹V [def-weil-etale-morphism]. Suppose W is an open of L containing a point x of the special fibre and n is etale on W. Then there are a finite etale morphism p:E→L and an isomorphism N|q⁻¹V ≅ E|q⁻¹V commuting with the maps to q⁻¹V. Neither normality of E nor density of its puncture is part of this statement. No quasi-compactness or quasi-separatedness assumption on q is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYE (Lemma 58.31.3); Tag 0EYJ (Lemma 58.31.8), first two paragraphs of the proof"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer of the DVR A. Smoothness gives flatness, so its pullback defines the special fibre D as an effective Cartier divisor. The DVR is Noetherian; smoothness is locally of finite type, hence L is locally Noetherian. D is smooth over the residue field, so it is regular. This is the geometric setup in the first paragraph of Tag 0EYJ.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The special fibre is geometrically connected and contains x, so it is connected and nonempty. A regular locally Noetherian scheme has disjoint open irreducible components: on each normal Noetherian affine chart the finitely many minimal-prime components cannot meet because the local rings are domains. Connectedness leaves one component, so D is integral. W meets D and hence contains its generic point. The finite etale model n on W extends the punctured cover near that point and witnesses absence of ramification there. This is the only codimension-one point of L on D, because D is an integral effective Cartier divisor. Thus the punctured cover is unramified over L in codimension one, as in the second paragraph of Tag 0EYJ.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Tag 0EYE to L, its regular effective Cartier divisor D, and the finite etale cover n restricted to q⁻¹V=L\\D. It gives a finite etale p:E→L with the required restriction isomorphism. Orient that isomorphism from the restriction of N to that of E. The isomorphism is over the open, which gives the displayed composition equality. The theorem asserts existence; no definition chooses an arbitrary witness. The empty cover is included by Tag 0EYE.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "S3",
+  "document": "Stacks Project",
+  "place": "Tag 0EYE (Lemma 58.31.3); Tag 0EYJ (Lemma 58.31.8), first two paragraphs of the proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite etale cover over the punctured spectrum of a smooth scheme over a discrete valuation ring extends if it is etale near the generic point of the special fibre",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth schemes over a normal local domain have normal local rings and finite etale covers extend over a regular divisor",
+   "results": "Eight hits: smooth chart existence and smoothness equivalences, etale/smooth loci and etale implies smooth; none states extension across a regular divisor.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|Cartier.*[Ee]tale|[Ee]tale.*Cartier; rg of 0EYE and trait extension in lean/Sheaf, lean/WeilConjectures, and dag/nodes; blueprint_refs.py search regular Cartier and 0EYE",
+   "results": "msearch grep: zero hits in Mathlib. Blueprint search: zero blueprint nodes. The local trait extension and finite-normal trait purity are the parent and its importer, respectively; importing either here would be circular. No independent purity extension declaration was found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.TraitEtaleExtension",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: purity across the regular effective Cartier special fibre, before normality and density of the extension",
+   "via": [
+    "lem-sbc-trait-etale-extension",
+    "lem-sbc-finite-normal-trait-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DvrPuncturedCoverPurity",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DvrPuncturedCoverPurity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_etale_extension_of_dvr_neighbourhood",
+  "statement": "theorem exists_finite_etale_extension_of_dvr_neighbourhood\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    {L N : Scheme.{u}} (q : L ⟶ Spec (.of A))\n    [Smooth q] [GeometricallyConnected q]\n    (V : (Spec (.of A)).Opens)\n    (hV : ∀ t : Spec (.of A), t ∈ V ↔ t ≠ IsLocalRing.closedPoint A)\n    (n : N ⟶ L) [IsFinite n]\n    (het : Etale (n ∣_ (q ⁻¹ᵁ V)))\n    (W : L.Opens) (x : L) (hx : x ∈ W)\n    (hqx : q x = IsLocalRing.closedPoint A) (hW : Etale (n ∣_ W)) :\n    ∃ (E : Scheme.{u}) (p : E ⟶ L), IsFinite p ∧ Etale p ∧\n      ∃ e : (n ⁻¹ᵁ (q ⁻¹ᵁ V)).toScheme ≅ (p ⁻¹ᵁ (q ⁻¹ᵁ V)).toScheme,\n        e.hom ≫ (p ∣_ (q ⁻¹ᵁ V)) = n ∣_ (q ⁻¹ᵁ V)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T015614-L-3026987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T015614-L-3026987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
