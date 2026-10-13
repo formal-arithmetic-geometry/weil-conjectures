@@ -14,7 +14,15 @@
  },
  "proof": [
   {
-   "text": "evaluate each categorical product of section complexes in degree q. Its\nprojections exhibit a product of the section modules in that degree, since evaluation\npreserves products. Nonempty subsets have cardinalities between 1 and r, so only\nrows 0 through r-1 are nonzero. The diagonal coproduct therefore has finite support.\nFor each subset J, put its coordinate in the unique summand p=card(J)-1,\nq=n+1-card(J), using the inverse of e p and the degreewise product identification.\nSum these finitely many coordinate insertions. This is an inverse of the displayed\nmap: after a subset projection only its own row survives, and on each coproduct\nsummand all its product projections are recovered. Empty rows are zero objects;\nfor r=0 both families are empty and the same argument identifies zero modules.\nThe proof uses no differential or boundedness of F.",
+   "text": "Evaluate each product column in degree q. Mathlib preservation of products by HomologicalComplex.eval makes piComparison invertible. Construct rowRetract by restricting the explicit subset coordinates to the row, transporting their degrees, and composing with the inverse product comparison. Projection extensionality proves that row inclusion followed by its retraction is the identity, that inclusion followed by another row retraction is zero, and that retraction followed by inclusion is the coordinate mask for that row.",
+   "uses": [
+    "def-sc-principal-cech-columns",
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let rows be the finite image of J ↦ |J|-1 on nonempty subsets of Fin r. Define the inverse regrouping map as the sum over rows of rowRetract, followed by the inverse column isomorphism e_p in degree n-p and the canonical diagonal total inclusion. For regrouping followed by this inverse, use total.hom_ext and the same-row and different-row identities; if p is not in rows, its product index is empty and its evaluated column, hence the source summand, is zero. For the other composite, use the coordinate mask and sum_eq_single at |J|-1. This includes r=0, arbitrary integer total degrees, and arbitrary F, without horizontal compatibility or boundedness.",
    "uses": [
     "def-sc-principal-cech-columns",
     "def-sc-principal-open-alternating-total",
@@ -31,7 +39,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D1; explicit reconstruction of assigned comparison steps 2"
+  "place": "Tag 08D1; explicit degreewise finite-row inverse using product comparison and diagonal coproduct universal properties; proved by K4 and independently checked in the K4 second reading"
  },
  "mathlib_searches": [
   {
@@ -113,10 +121,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T065121-L-902242",
-  "kind": "interface",
+  "landing": "20261013T082354-L-1639532",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
