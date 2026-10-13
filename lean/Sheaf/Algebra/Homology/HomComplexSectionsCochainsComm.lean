@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
-import Sheaf.Algebra.Homology.HomComplex
 
 /-!
 # Section projections respect the external Hom differential
@@ -22,6 +21,55 @@ universe u v
 open CategoryTheory Opposite
 namespace CategoryTheory
 
+private lemma section_sub_units
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    {R₀ : Sheaf J RingCat.{max u v}} (U : C)
+    {M N : SheafOfModules.{max u v} R₀} (f g : M ⟶ N)
+    (n : ℤˣ) (x : M.val.obj (op U)) :
+    ((f - n • g).val.app (op U)) x =
+      (f.val.app (op U)) x - n • (g.val.app (op U)) x := by
+  let V := SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U)
+  change (V.map (f - n • g)).hom x = _
+  rw [Functor.map_sub]
+  simp only [Units.smul_def, Functor.map_zsmul, ModuleCat.hom_sub,
+    ModuleCat.hom_zsmul, LinearMap.sub_apply, LinearMap.smul_apply]
+  rfl
+
+private lemma sheaf_units_smul_val
+    {D : Type u} [Category.{v} D] {K : GrothendieckTopology D}
+    {R₀ : Sheaf K RingCat.{max u v}}
+    {M N : SheafOfModules.{max u v} R₀} (n : ℤˣ) (f : M ⟶ N) :
+    (n • f).val = n • f.val := by
+  change (SheafOfModules.forget R₀).map (n • f) = _
+  simp only [Units.smul_def, Functor.map_zsmul]
+  rfl
+
+private lemma sheaf_add_units_app
+    {D : Type u} [Category.{v} D] {K : GrothendieckTopology D}
+    {R₀ : Sheaf K RingCat.{max u v}}
+    {M N : SheafOfModules.{max u v} R₀} (f g : M ⟶ N) (n : ℤˣ) (W : Dᵒᵖ) :
+    (f + n • g).val.app W = f.val.app W + n • g.val.app W := by
+  rw [SheafOfModules.add_val, sheaf_units_smul_val, PresheafOfModules.add_app]
+  simp only [Units.smul_def, PresheafOfModules.zsmul_app]
+
+private lemma section_sub_units_component
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{max u v}) (U : C)
+    {A B M : SheafOfModules.{max u v}
+      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)}
+    (f g : M ⟶ SheafOfModules.homObj (R := R) A B) (n : ℤˣ)
+    (x : M.val.obj (op U)) (W : (Over U)ᵒᵖ) :
+    (((f - n • g).val.app (op U)) x).app W =
+      ((f.val.app (op U)) x).app W - n • ((g.val.app (op U)) x).app W := by
+  rw [section_sub_units]
+  change (((f.val.app (op U)) x - (n : ℤ) • (g.val.app (op U)) x) :
+    (PresheafOfModules.restrictOver R.obj U).obj A.val ⟶
+      (PresheafOfModules.restrictOver R.obj U).obj B.val).app W = _
+  rw [PresheafOfModules.sub_app, PresheafOfModules.zsmul_app]
+  rfl
+
+set_option maxHeartbeats 400000 in
+-- Evaluating chosen Hom-complex projections requires extra elaboration heartbeats.
 /-- Any degreewise identification given by the section projections respects differentials.
 Source: Stacks Project, Tag 0A8X, differential of the Hom complex; Tag 0A8Y.
 (blueprint: lem-pur-hom-complex-sections-cochains-comm)
@@ -61,6 +109,28 @@ theorem homComplex_sections_cochains_comm
         ((e n x).v p q hpq).val.app W =
           (((π L I n p q hpq).val.app (op U)) x).app W) →
       ∀ (i j : ℤ), i + 1 = j → ∀ x : S.X i,
-        e j (S.d i j x) = CochainComplex.HomComplex.δ i j (e i x) := by sorry
+        e j (S.d i j x) = CochainComplex.HomComplex.δ i j (e i x) := by
+  classical
+  intro R₀ E res S π e he i j hij x
+  apply CochainComplex.HomComplex.Cochain.ext
+  intro p q hpq
+  apply SheafOfModules.hom_ext
+  ext W y
+  rw [he]
+  have hd := (Classical.choose_spec (Classical.choose_spec
+    (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))).2.1
+    L I i j p q (p + i) (p + 1) hij hpq rfl (by omega)
+  change (homComplex (R := R) L I).d i j ≫ π L I j p q hpq = _ at hd
+  have hx := congrArg (fun f ↦ ((f.val.app (op U)) x).app W) hd
+  conv_rhs at hx =>
+    rw [section_sub_units_component]
+  conv_rhs =>
+    rw [CochainComplex.HomComplex.δ_v i j hij (e i x) p q hpq
+      (p + i) (p + 1) (by omega) rfl]
+  simp only [sheaf_add_units_app, SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, he]
+  have hs : j.negOnePow = -i.negOnePow := by rw [← hij, Int.negOnePow_succ]
+  simp only [hs, Units.neg_smul, ← sub_eq_add_neg]
+  exact congrArg (fun f ↦ f.hom y) hx
 
 end CategoryTheory
