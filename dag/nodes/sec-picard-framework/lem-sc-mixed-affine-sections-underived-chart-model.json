@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-mixed-affine-sections-underived-chart-model",
+ "kind": "statement",
+ "title": "Ordinary affine chart extension and sections comparison with its unit equation",
+ "statement": "Let $g:T\\to S$ be a morphism between affine schemes [def-pc-scheme]. Put $F_S=\\widetilde{(-)}\\circ(S.toSpec\\Gamma)^*$, where the second operation is exact restriction along the canonical spectrum chart [lem-weil-pbc-affine-tilde-gamma-adjunction, lem-weil-pbc-module-restriction-open-immersion-colimits]. Let $H=\\Gamma_S$ and $J=\\Gamma_T$ be ordinary module-valued global sections [def-sc-ringed-space-module-cohomology], $E$ be extension of scalars along $g.appTop$, $R$ be scalar restriction, and $K$ be the fixed tensor pullback [lem-pc-module-pullback-adjunction]. There is a natural isomorphism $c:F_SH E\\cong F_SKJ$ such that for every $\\Gamma(S,\\mathcal O_S)$-module $N$, the extension unit at $H(F_S(N))$ followed by $R(c_N)$ equals $H$ applied to the fixed tensor-pullback unit at $F_S(N)$. The usual direct-image/sections identification is literally the identity on sections and scalars in this equation. No flatness, nonemptiness, or finite generation hypothesis is imposed. The functor order and full unit equation are recorded verbatim in lean.statement.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Schemes Tags 01I7, 01I9 and 01IB; Tag 08DW(2) ordinary affine calculation; Tag 0AA7 canonical scalar-extension transpose"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Identify Gamma_X with pushforward along X.toSpecGamma followed by moduleSpecGamma. This is identity on sections. For a global function a, its scalar action on the latter is obtained by GammaSpecIso.inv followed by X.toSpecGamma.appTop = GammaSpecIso.hom. The composite is identity, so these actions agree. Naturality on sheaf maps is reflexivity. Compose tilde.adjunction with the restriction adjunction and transport its right adjoint by this concrete sections isomorphism. Restriction along X.toSpecGamma has inverse restriction along X.isoSpec.inv, using restrictFunctorComp and the chart inverse equations. Hence the chart tilde functor is fully faithful and this transported adjunction has invertible unit.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 01I9, 06Z0 and 08DW(2), affine model calculation"
+   }
+  },
+  {
+   "text": "Compose the S chart adjunction with the fixed tensor pullback/direct-image adjunction. Direct image then S-sections is definitionally T-sections followed by restriction along g.appTop. Its right adjoint therefore coincides with that of extension followed by the T chart functor. Let theta be leftAdjointUniq from extension followed by T-chart to S-chart followed by tensor pullback. Define c by the inverse S chart unit under extension, then the T chart unit under extension, then T-sections of theta. Each factor is an isomorphism. Naturality of the extension unit at the inverse S unit moves it to the front. The unit_leftAdjointUniq_hom_app equation then turns the remaining factors into the S chart unit followed by sections of the tensor-pullback unit. Cancel the S chart unit against its inverse. This is exactly the claimed equation, as checked by the complete Lean proof.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 01I9, 06Z0 and 08DW(2), affine model calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Schemes Tags 01I7, 01I9 and 01IB; Tag 08DW(2) ordinary affine calculation; Tag 0AA7 canonical scalar-extension transpose; explicit ordinary-adjunction and localization calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension and global sections comparison for affine scheme pullback is computed by localizing its ordinary unit equation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived affine global sections of pullback on K flat modules agrees with derived extension of scalars and its adjunction unit",
+   "results": "Eight hits, including Scheme.Modules.pullbackPushforwardAdjunction and SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. These are ordinary adjunction tools, not a chart-model mixed-universe factorization.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointUniq",
+   "results": "Unknown identifier for the unqualified name; direct source inspection confirms CategoryTheory.Adjunction.leftAdjointUniq and its unit equation.",
+   "date": "2026-10-13",
+   "verdict": "generic adjoint uniqueness tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|restrictFunctor.*adjunction|toSpecΓ.*tilde",
+   "results": "Mathlib.CategoryTheory.Adjunction.Unique and Mathlib.AlgebraicGeometry.Modules.Sheaf give the uniqueness and restriction tools. Project AffineExtensionSectionsUnderivedModel and AffineExtensionSectionsModelFactorization use Spec bases and transported base-ring actions; the latter fixes one derived universe. No exact Gamma-ring chart and independent-universe statements.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedAffineSectionsKFlatComparisonIso",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 affine identification of beta: Ordinary affine chart extension and sections comparison with its unit equation; parent K-flat comparison proof steps 1 and 2",
+   "via": [
+    "lem-sc-mixed-affine-sections-kflat-comparison-isIso",
+    "lem-sc-mixed-affine-sections-pullback-mate",
+    "lem-sc-proper-flat-image-global-hom-base-change-isIso",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedAffineSectionsUnderivedChartModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedAffineSectionsUnderivedChartModel.lean",
+  "declaration": "AlgebraicGeometry.exists_mixedAffineSections_underived_chart_model",
+  "statement": "theorem exists_mixedAffineSections_underived_chart_model\n    {S T : Scheme.{u}} [IsAffine S] [IsAffine T] (g : T ⟶ S) :\n    let F : ModuleCat.{u} Γ(S, ⊤) ⥤\n        SheafOfModules.{u} (moduleRings S.toRingedSpace) :=\n      tilde.functor Γ(S, ⊤) ⋙ Scheme.Modules.restrictFunctor S.toSpecΓ\n    let H := RingedSpace.globalSectionsFunctor S.toRingedSpace\n    let J := RingedSpace.globalSectionsFunctor T.toRingedSpace\n    let E := ModuleCat.extendScalars.{u, u, u} g.appTop.hom\n    let K : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings T.toRingedSpace) := Scheme.Modules.tensorPullback g\n    ∃ c : F ⋙ H ⋙ E ≅ F ⋙ K ⋙ J,\n      ∀ N : ModuleCat.{u} Γ(S, ⊤),\n        (ModuleCat.extendRestrictScalarsAdj g.appTop.hom).unit.app (H.obj (F.obj N)) ≫\n          (ModuleCat.restrictScalars.{u} g.appTop.hom).map (c.hom.app N) =\n        H.map ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app\n          (F.obj N))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T140819-L-313677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T140819-L-313677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
