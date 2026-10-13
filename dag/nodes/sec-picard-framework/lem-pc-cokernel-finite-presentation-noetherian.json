@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-cokernel-finite-presentation-noetherian",
+ "kind": "statement",
+ "title": "Finitely presented cokernels on locally Noetherian schemes",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth]. Let $M,N$ be quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], with $N$ of finite presentation [def-weil-pbc-module-finite-type-presentation]. For every $\\mathcal O_X$-linear morphism $\\varphi:M\\to N$, the categorical cokernel of $\\varphi$ is of finite presentation.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01Y1 (cohomology-lemma-coherent-sub-quotient), quotient clause, together with Tag 01XZ; exact finite-presentation form proved in lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentCokernel.lean, lines 79-107"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing closed source declaration AlgebraicGeometry.Scheme.Modules.isFinitePresentation_cokernel with the same scheme and morphism. Its proof computes the cokernel of quasi-coherent modules on affine opens by exact restriction and the tilde equivalence. Sections of N on each Noetherian affine open are finite; their quotient giving cokernel sections is finite by Module.Finite.of_surjective. A finite module over a Noetherian ring has a finite presentation. The affine tilde comparison and locality of finite presentation glue these finite presentations. This records an already proved source-library result, without adding a Lean declaration or any proof hole.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentCokernel.lean",
+  "place": "isFinitePresentation_cokernel, lines 79-107"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cokernels of maps between finitely presented quasicoherent sheaves on a locally Noetherian scheme are finitely presented",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cokernels of maps between finitely presented quasicoherent sheaves on a locally Noetherian scheme are finitely presented",
+   "results": "No exact Mathlib match; hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib match; closed source-library match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFinitePresentation_cokernel",
+   "results": "No Mathlib hits. Repository search finds the closed source declaration isFinitePresentation_cokernel in WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel, lines 79-107.",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib match; closed source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "right adjoint commutes with direct sums: proper perfect pushforward, checking bounded coherent cohomology in condition (1) of Tag 08EV; local cohomology quotient in part (1) of Tag 0FXU",
+   "via": [
+    "lem-pc-perfect-noetherian-cohomology",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.isFinitePresentation_cokernel",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel",
+     "line": 79
+    }
+   ]
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFinitePresentation_cokernel",
+  "statement": "theorem isFinitePresentation_cokernel [IsLocallyNoetherian X] {M N : X.Modules}\n    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]\n    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) N]\n    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) N] (φ : M ⟶ N) :\n    SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) (cokernel φ)",
+  "branch": "slopmaster2",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T033009-L-3678827",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T033009-L-3678827",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

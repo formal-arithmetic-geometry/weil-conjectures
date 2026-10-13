@@ -16,37 +16,46 @@
  ],
  "proof": [
   {
-   "text": "Choose the strictly perfect neighbourhoods supplied by [def-pc-perfect-complex]. Refine by affine opens and by finite free trivializations of the finitely many projective terms. Over these Noetherian affine rings kernels, images and quotients of the finite module terms are finite. Exact restriction computes the local cohomology as these subquotients. Thus each local cohomology sheaf is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth]. Coherence glues by [lem-weil-pbc-coherent-module-local-on-open-cover].",
+   "text": "Choose the open neighbourhood U(x), strictly perfect model K(x), and derived isomorphism from [def-pc-perfect-complex]. Transport K(x) through Modules.overEquiv U(x). A finite free module has the zero-relations finite presentation. Each term retract M of a finite free N is explicitly isomorphic to the kernel of 1 - π ≫ ι on N; its inverse is kernel.ι ≫ π. Apply [lem-pqf-kernel-finite-presentation-noetherian] to obtain finite presentation of every model term. This avoids refining to affine and finite-free trivializations.",
    "uses": [
     "def-pc-perfect-complex",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-coherent-module-local-on-open-cover"
+    "lem-pqf-kernel-finite-presentation-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma perfect-lemma-perfect-on-noetherian (Tag 0FXU), part (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "Quasi-compactness selects a finite subcover. Take a minimum of the lower term bounds and a maximum of the upper term bounds, using 0,0 for an empty cover. Outside this interval each restricted cohomology sheaf is zero. Sheaf section extensionality makes the global cohomology sheaf zero. This gives the claimed bounds.",
+   "text": "For each degree, express model cohomology as the cokernel of the lift of the incoming differential to the kernel of the outgoing differential (ShortComplex.homologyIsoCokernelLift). The kernel is finitely presented by [lem-pqf-kernel-finite-presentation-noetherian]; its quotient is finitely presented by [lem-pc-cokernel-finite-presentation-noetherian].",
+   "uses": [
+    "lem-pqf-kernel-finite-presentation-noetherian",
+    "lem-pc-cokernel-finite-presentation-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose Modules.overFunctorEquiv, overFunctor.mapDerivedCategoryHomologyFunctorIso, the given derived isomorphism, DerivedCategory.homologyFunctorFactors, and overEquiv.functor.mapHomologicalComplexHomologyIso. This explicitly identifies restriction of global cohomology with model cohomology. Transport its finite presentation through the inverse overEquiv and glue with SheafOfModules.IsFinitePresentation.of_coversTop, the locality of the finite-presentation definition [def-weil-pbc-module-finite-type-presentation]. Finite presentation implies quasi-coherence and finite type, so [pqf-lem-coherent-ft-locnoeth] yields global coherence.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A zero term has zero homology by ShortComplex.isZero_homology_of_isZero_X₂; the same comparison gives local cohomology bounds a(x), b(x). Compactness gives a finite set t of covering neighbourhoods. Put N = sup over t of |a(x)| + |b(x)|. Then -N ≤ a(x) and b(x) ≤ N for each selected x. For i outside [-N,N], every selected restriction of H^i(E) vanishes. Modules.isZero_of_iSup_eq_top, proved by section extensionality, yields global vanishing. If X is empty, t is empty and N=0, giving bounds 0,0.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma perfect-lemma-perfect-on-noetherian (Tag 0FXU), part (1)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
-  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-pc-cokernel-finite-presentation-noetherian",
+  "lem-pqf-kernel-finite-presentation-noetherian",
   "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma perfect-lemma-perfect-on-noetherian (Tag 0FXU), part (1)"
+  "place": "Tag 0FXU, part (1): explicit kernel presentation of direct summands, local homology cokernel, finite-presentation gluing, and finite-cover bounds; source-library kernel/cokernel results replace affine refinements."
  },
  "mathlib_searches": [
   {
@@ -123,13 +132,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T194108-L-454138",
-  "kind": "interface",
+  "landing": "20261013T033009-L-3678827",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
