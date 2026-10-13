@@ -12,20 +12,25 @@
  ],
  "proof": [
   {
-   "text": "Construct the map on homology in the category of O_Y(Y)-modules. Every component map of sheaves is linear on sections; restriction of scalars makes the comparison map linear. Homology and the resolution comparison isomorphisms preserve linearity, and the inverse of the quasi-isomorphism-induced linear isomorphism is linear.",
+   "text": "Apply ModuleCohomologyFMapData.map_semilinear to obtain a semilinear map f over h.appTop.hom together with pointwise equality to D.map p.",
    "uses": [
-    "def-weil-pbc-module-cohomology-fmap"
+    "lem-weil-pbc-module-cohomology-fmap-semilinear-lift"
    ],
    "elementary": false
+  },
+  {
+   "text": "Convert f to a morphism into the restriction of scalars using Mathlib ModuleCat.semilinearMapAddEquiv. Its underlying function is f by definition, so extensionality and the pointwise equality identify its image under the forgetful functor with D.map p.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-cohomology-fmap"
+  "lem-weil-pbc-module-cohomology-fmap-semilinear-lift"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Remark 01FB, expanded linearity argument."
+  "place": "Remark 01FB; reuse the existing semilinear-lift theorem and Mathlib ModuleCat.semilinearMapAddEquiv to bundle the linear morphism."
  },
  "mathlib_searches": [
   {
@@ -94,13 +99,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261012T235554-L-2201324",
-  "kind": "interface",
+  "landing": "20261013T003203-L-2430746",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "blueprint": {

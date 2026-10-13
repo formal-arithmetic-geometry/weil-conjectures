@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapSemilinear
 
 /-! Linearity of the map attached to explicit cohomology-map data.
 
@@ -38,6 +39,9 @@ theorem moduleCohomologyFMapData_map_linear
           (ModuleCat.restrictScalars h.appTop.hom).obj
             ((X.toRingedSpace.moduleCohomology p).obj F),
       (forget₂ _ AddCommGrpCat).map L = D.map p := by
-  sorry
+  obtain ⟨f, hf⟩ := D.map_semilinear p
+  refine ⟨ModuleCat.semilinearMapAddEquiv h.appTop.hom _ _ f, ?_⟩
+  ext x
+  exact hf x
 
 end AlgebraicGeometry.Scheme.Modules
