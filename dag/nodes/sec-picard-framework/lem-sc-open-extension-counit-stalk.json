@@ -17,27 +17,41 @@
  },
  "proof": [
   {
-   "text": "Use the direct-sum extension presheaf followed by module sheafification to construct the canonical left adjoint to restriction. At a point outside W all neighborhoods have no morphism into W, so the direct-sum extension values vanish. At a point inside W neighborhoods contained in W are cofinal; the counit on those neighborhoods is the identity, and sheafification preserves stalks. Thus the outside stalk vanishes and the inside counit stalk is an isomorphism.",
+   "text": "Restriction has the right adjoint overPushforwardOverAdj. Over.forget W is fully faithful because opens form a thin category, hence Over.forgetAdjStar W has invertible unit. The right-adjoint counit is restriction along this unit and is therefore invertible on sections. Mathlib Adjunction.Triple.isIso_unit_iff_isIso_counit makes the specified extension/restriction unit invertible. The right triangle identity expresses the restricted counit as its inverse.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For x in W, whisker the underlying abelian presheaf counit with the image-open functor of W. Each component is the image under evaluation and forgetting of a restricted counit component, hence is invertible. Apply the stalk functor on W. The source and target restrictStalkIso comparisons conjugate this map to the global counit stalk map; prove the equality by stalk_hom_ext, restrictStalkIso_hom_eq_germ and stalkFunctor_map_germ. Cancel the source comparison to obtain the desired isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the outside clause, specialize localizedModule_adjunction_exact to the opens precoverage and X.sheaf, rewriting its generated Grothendieck topology to Opens.grothendieckTopology X. This yields an adjunction for the direct-sum module extension followed by sheafification. If x is outside W, every neighborhood V of x has no arrow V to W. The empty direct sum has only its zero element; representing stalk elements by germs proves the underlying presheaf stalk is zero. The stalk isomorphism induced by the sheafification unit transports this to the sheafified extension.",
    "uses": [
-    "lem-sc-topological-extension-by-zero-stalks"
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-weil-pbc-stalk-sheafification-space"
    ],
    "elementary": false
   },
   {
-   "text": "Adjunction uniqueness identifies any specified left adjoint S with the canonical extension by zero. The uniqueness isomorphism commutes with the adjunction counits (Mathlib Adjunction.leftAdjointUniq_hom_app_counit). Apply T_x, and transport zero objects and isomorphisms across the resulting component isomorphism.",
+   "text": "Apply Adjunction.leftAdjointUniq to the specified adjunction and the canonical extension adjunction, evaluate at the restriction of F, and map this isomorphism through the underlying abelian stalk functor. Transport the zero-object property using IsZero.of_iso. Only the outside clause needs this comparison.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-topological-extension-by-zero-stalks"
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-extension-by-zero-presheaf",
+  "lem-weil-pbc-stalk-sheafification-space"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q1",
+  "group": "R2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tag 00A7; spell out the omitted stalk calculation and adjunction uniqueness"
+  "place": "Tag 00A7 (2)-(4); inside proof via the adjoint-triple criterion and restriction-stalk comparisons, outside by direct-sum germs and adjunction uniqueness"
  },
  "created": {
   "by": "worker",
@@ -104,10 +118,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T003200-L-2429752",
-  "kind": "interface",
+  "landing": "20261013T011933-L-2765507",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
