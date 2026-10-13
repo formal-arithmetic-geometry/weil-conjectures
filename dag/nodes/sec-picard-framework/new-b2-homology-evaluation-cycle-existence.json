@@ -14,30 +14,65 @@
  },
  "proof": [
   {
-   "text": "Write P = Hom(T,J). Its product projection defines the bilinear pairing\nfrom P-cycles in degree n and T-cycles in degree -n to J in degree zero. For a\nHom cocycle phi and T-cycle z, the component differential equation gives\n d_J(phi(z)) = (-1)^n phi(d_T(z)) = 0.\nThus this pairing factors through J-cycles by their kernel universal property.\nIf phi = d_Hom(psi), with psi of degree n-1, evaluation on z is d_J(psi(z)),\nsince d_T(z)=0. If z=d_T(y), the cocycle equation in degree -n-1 gives\n phi(z)=(-1)^n d_J(phi(y)). Both values vanish after projecting to H^0(J).\nThe resulting bilinear pairing into H^0(J) therefore annihilates both boundary\nsubsheaves. Descend successively through the two cokernels defining homology.\nThese constructions commute with restriction because the product projections,\ndifferentials and universal-property factorizations do. Curry the pairing by\ninternal Hom to obtain e. Its value on representatives is exactly the asserted\ncycle formula. No cohomology concentration or finite-free hypothesis is needed.\nFor rank zero, zero complexes, or an empty open, the same universal properties\nproduce the zero pairing and the formula still holds.",
+   "text": "Apply homComplex_projections_exists to the chosen Hom-complex. Its differential equation is the only property of the projections used. In the private algebraic helpers the complex and projections are abstract parameters, preventing reduction of the large chosen bifunctor.",
    "uses": [
     "new-b2-homology-evaluation-definitions",
     "def-pur-hom-complex",
-    "def-pur-sheaf-hom",
     "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the degree-n projection at (-n,0) to cycles of both complexes. Apply the Hom differential equation at (-n,1), then the source-cycle equation, to show that postcomposition with d_J is zero. Uncurry by the tensor-Hom adjunction, lift into J-cycles by HomologicalComplex.liftCycles, and curry back. Naturality of tensorHomEquiv gives its equation after the inclusion into J^0.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the cycle lift with J.homologyπ. For a Hom boundary the differential formula at degree n-1 evaluated on a T-cycle gives the lift through J.toCycles (-1) 0. For a T boundary the cocycle equation at source degree -n-1 gives the same lift multiplied by n.negOnePow. Cancel the mono obtained by applying internal Hom to J.iCycles. In both cases J.toCycles_comp_homologyπ makes the result zero. The sign is its own inverse by Int.units_mul_self.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend first through P.homologyIsCokernel. The resulting map still kills T boundaries by cancellation of the epi P.homologyπ. For the T quotient, uncurry the map and apply CokernelCofork.mapIsColimit to tensorRight, which preserves colimits because it is a left adjoint. Its cokernel descent, curried back, is e. The two cofork factorization identities give (P.homologyπ >> e) >> homObjMap T.homologyπ identity equal to the cycle pairing.",
+   "uses": [
+    "new-b2-homology-evaluation-definitions",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the preceding morphism identity at an open U and two cycle representatives. Evaluate the cycle lift identity as well. Evaluation preserves monos, so the value of the lift in J-cycles equals any supplied b with the same inclusion into J^0. Postcomposition with J.homologyπ gives exactly IsHomologyEvaluation. No sectionwise surjectivity of homologyπ or extra hypotheses are used.",
+   "uses": [
+    "new-b2-homology-evaluation-definitions",
+    "def-pur-sheaf-hom"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "new-b2-homology-evaluation-definitions",
   "def-pur-hom-complex",
   "def-pur-sheaf-hom",
-  "lem-sc-hom-complex-projections"
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-complex-projections",
+  "new-b2-homology-evaluation-definitions"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "B2",
+  "agent": "G4",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0A8X",
    "place": "sites-cohomology.tex, section-hom-complexes; cohomology.tex, section-internal-hom (08DH), complex evaluation; duality.tex, lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation."
-  }
+  },
+  "description": "Formal cycle and boundary calculation, with kernel and both cokernel descents through the existing tensor-Hom adjunction; the abstract projection theorem has been locally compiled without sorry."
  },
  "mathlib_searches": [
   {
@@ -112,11 +147,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-e5ea7",
-  "group": "B2",
+  "reviewer": "X-3bee2",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T172650-L-2097516",
+  "landing": "20261013T190140-L-3216235",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules, declarations, DAG nodes, change record, report, and required direct importers match the review rules and compile cleanly."
+  "note": "independent Codex review: Delivered module and node proof metadata match the target; delivered module and direct importer compile cleanly, with only allowed axioms and no remaining sorry"
  }
 }
