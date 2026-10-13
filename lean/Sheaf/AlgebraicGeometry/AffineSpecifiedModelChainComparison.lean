@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group P1
+Authors: SHEAF groups P1 and M2
 -/
 module
 
@@ -14,8 +14,9 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.AffineBaseChangeModelComparisonIsos
+import Sheaf.AlgebraicGeometry.AffineModelHomTransportAssembly
+import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Specified affine perfect models and base-change comparison
 Source: Stacks Project, perfect.tex, Tag 09RE, Tags 08EB, 06Z0 and 08DW.
@@ -27,6 +28,24 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
+private theorem scalarExtension_bounded_finite_projective
+    {A B : Type u} [CommRing A] [CommRing B] (r : A →+* B)
+    (M : CochainComplex (ModuleCat.{u} A) ℤ)
+    (hM : (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (M.X n)) ∧
+      ∀ n : ℤ, Module.Finite A (M.X n) ∧ Module.Projective A (M.X n)) :
+    let N := ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj M
+    (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (N.X n)) ∧
+      ∀ n : ℤ, Module.Finite B (N.X n) ∧ Module.Projective B (N.X n) := by
+  obtain ⟨⟨a, b, hz⟩, hp⟩ := hM
+  refine ⟨⟨a, b, fun n hn ↦ (ModuleCat.extendScalars r).map_isZero (hz n hn)⟩, ?_⟩
+  intro n
+  let := r.toAlgebra
+  have := (hp n).1
+  have := (hp n).2
+  change Module.Finite B (TensorProduct A B (M.X n)) ∧
+    Module.Projective B (TensorProduct A B (M.X n))
+  exact ⟨inferInstance, inferInstance⟩
+
 /-- Base-change comparison from genuine affine perfect models.
 Source: Stacks Project, perfect.tex, lemma-descend-homomorphisms, Tag 09RE;
 Tags 06Z0 and 08DW.
@@ -142,6 +161,30 @@ theorem exists_affineSpecifiedModelChainComparison
               E K f)) =
             perfectLimitMap R c s j.val.property
               (stage j (DerivedCategory.Q.map f))) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    classical
+    let hsheaf : ∀ Z : Scheme.{u},
+        HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) :=
+      inferInstance
+    let hmodule : ∀ A : CommRingCat.{u},
+        HasDerivedCategory.{u + 1} (ModuleCat.{u} A) := inferInstance
+    have hcomp := @exists_affineBaseChangeModelComparisonIsos.{u, w}
+      I inferInstance inferInstance R c hc i Y inferInstance s hsheaf
+      t e he P Q E₀ K₀ hE hK hPE hQK
+    let F : Set.Ici i ⥤ CommRingCat.{u} := affineBaseChangeRingDiagram R i Y s t
+    let r : Scheme.Γ.obj (.op Y) →+* F.obj ⟨i, le_rfl⟩ :=
+      affineBaseChangeInitialMap R i Y s t
+    refine ⟨F, r, ?_, ?_, ?_⟩
+    · exact scalarExtension_bounded_finite_projective r E₀ hE
+    · exact scalarExtension_bounded_finite_projective r K₀ hK
+    set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      have hHom := @exists_affineModelHomTransportAssembly.{u, w}
+        I inferInstance inferInstance R c i Y inferInstance s hsheaf hmodule
+        P Q F (colimit.cocone F)
+        (((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj E₀)
+        (((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj K₀) hcomp
+      exact hHom
 
 end AlgebraicGeometry

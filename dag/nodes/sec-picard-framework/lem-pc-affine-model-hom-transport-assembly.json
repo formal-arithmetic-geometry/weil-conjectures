@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-affine-model-hom-transport-assembly",
+ "kind": "statement",
+ "title": "Derived module Hom transport from coherent geometric object comparisons",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathrm{CommRing}$ a diagram, $c$ any cocone, $i\\in I$, $Y$ affine [def-pc-scheme], and $s:Y\\to\\operatorname{Spec}R(i)$. Assume scheme-derived categories with Hom universe $w$ and module-derived categories with Hom universe $u+1$ [def-pc-derived-category]. Let $P,Q\\in D(\\mathcal O_Y)$, let $F:\\{j\\mid i\\le j\\}\\to\\mathrm{CommRing}$ be any diagram, and let $C$ be any cocone on $F$ and $E,K$ arbitrary complexes over $F(i)$. At each stage $j$ let $E_j,K_j$ be their scalar extensions to $F(j)$, and let $E_\\infty,K_\\infty$ be their extensions to $C.pt$. Let $T_A$ denote termwise tilde from complexes over $A$ to complexes on $\\operatorname{Spec}A$. Assume derived equivalences $d_j:D(\\mathcal O_{\\operatorname{Spec}F(j)})\\simeq D(\\mathcal O_{Y\\times_{\\operatorname{Spec}R(i)}\\operatorname{Spec}R(j)})$ and the analogous $d_\\infty$, and isomorphisms $\\alpha E_j:d_j(Q(T_{F(j)}E_j))\\cong Lp_j^*P$, $\\alpha K_j:d_j(Q(T_{F(j)}K_j))\\cong Lp_j^*Q$, and $\\beta E,\\beta K$ at the limit, where $p_j,p_\\infty$ are the prescribed first pullback projections [def-pc-derived-pullback]. Define $C_j(f)=(\\alpha E_j)^{-1}\\circ d_j(Q(T_{F(j)}f))\\circ\\alpha K_j$ in Lean's left-to-right composition convention, and similarly $C_\\infty$. Assume $C_k(\\operatorname{scalarExtensionHom}_{j,k}(f))=\\operatorname{perfectStageMap}_{j,k}(C_j(f))$ and $C_\\infty(\\operatorname{scalarExtensionHom}_{j,\\infty}(f))=\\operatorname{perfectLimitMap}_j(C_j(f))$ for every chain map, with the maps and ring-map equalities of [def-pc-complex-scalar-extension-hom] and [lem-pc-perfect-hom-transport]. Then there are equivalences $\\operatorname{Hom}_{D(F(j))}(QE_j,QK_j)\\simeq\\operatorname{Hom}(Lp_j^*P,Lp_j^*Q)$ and the analogous limit equivalence satisfying those same two equations on localized chain maps. This asserts neither boundedness nor existence of the supplied geometric comparison data. The generic cocone C need not be colimiting; the supplied comparison data contain its two compatibility equations. In the specified affine model application C is the actual colimit cocone of F.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine Hom comparison; Tags 06Z0 and 08DW"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-complex-scalar-extension-hom",
+  "lem-pc-perfect-hom-transport",
+  "def-pc-affine-model-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "For any A,M,N use [lem-pc-affine-qcoh-derived-equivalence], the full inclusion of the quasi-coherent derived subcategory, and Iso.homCongr on its localization factorization. This produces the affine derived Hom equivalence. Naturality of the factorization, precomposed by its inverse component, proves its chain-map formula. This step is already proved by private exists_affineTildeHomEquiv in this module. Choose the resulting equivalences simultaneously for rings and pairs of complexes, then specialize to the stage rings and the abstract cocone point C.pt.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the arbitrary supplied diagram F and complexes E,K, at each stage compose that affine Hom equivalence with the fully faithful Hom equivalence of the supplied d(j), and conjugate by alphaE(j),alphaK(j); at the cocone point C.pt use dlim and betaE,betaK. On chain maps, the formula from step 1 identifies these composites with the sheafified conjugations of hcomp. Apply the assumed two coherence identities, using congruence under the functor maps, isomorphism conjugation and perfectStageMap/perfectLimitMap. No boundedness, ring-construction or geometric-comparison existence is claimed. This remaining combination is left as the named theorem with sorry; the private affine Hom equivalence and its chain-map formula in step 1 are proved. The explicit shared comparison-data predicate keeps the upper specialization from unfolding the whole nested formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine Hom comparison; Tags 06Z0 and 08DW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural equivalence of derived Hom sets for affine bounded projective complexes compatible with extension of scalars and scheme pullback",
+   "results": "Hits: CategoryTheory.ProjectiveResolution.isoExt, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.Abelian.Ext.homEquiv, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv_apply",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "Hits: ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "Under.pushout",
+   "results": "loogle: unknown identifier 'Under.pushout'",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative ring diagram obtained by pushing out a directed diagram along a map from its initial stage",
+   "results": "Hits: CategoryTheory.SmallObject.attachCellsιFunctorObj, CategoryTheory.SmallObject.functorObj, CategoryTheory.SmallObject.πFunctorObj, CategoryTheory.SmallObject.ιFunctorObj, CategoryTheory.SmallObject.functorObj_isPushout, CategoryTheory.SmallObject.ρFunctorObj, CommRingCat.pushoutCoconeIsColimit, HomotopicalAlgebra.AttachCells",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "affineBaseChangeRingDiagram|exists_affineBaseChangeModelComparisonIsos|exists_affineTildeHomEquiv",
+   "results": "Hits: ",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine derived scalar extension comparison natural on chain maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout ring diagram on the upper tail of a preorder",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpecifiedModelChainComparison",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-pc-affine-specified-model-chain-comparison, proof steps 2–3: affine derived Hom equivalence and transport",
+   "via": [
+    "lem-pc-affine-specified-model-chain-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModelHomTransportAssembly",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModelHomTransportAssembly.lean",
+  "declaration": "AlgebraicGeometry.exists_affineModelHomTransportAssembly",
+  "statement": "theorem exists_affineModelHomTransportAssembly\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    (i : I) (Y : Scheme.{u}) [IsAffine Y] (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ A : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} A)]\n    (P Q : schemeDerivedCategory Y)\n    (F : Set.Ici i ⥤ CommRingCat.{u}) (C : Cocone F)\n    (E K : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ)\n    (hcomp : affineModelComparisonData R c i Y s P Q F C E K) :\n      ∃ (stage : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n          (DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n           DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)) ≃\n          ((derivedPullback (pullback.fst s\n            (Spec.map (R.map (homOfLE j.val.property))))).obj P ⟶\n           (derivedPullback (pullback.fst s\n            (Spec.map (R.map (homOfLE j.val.property))))).obj Q))\n        (limit :\n          (DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (C.ι.app ⟨i, le_rfl⟩).hom) (.up ℤ)).obj E) ⟶\n           DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (C.ι.app ⟨i, le_rfl⟩).hom) (.up ℤ)).obj K)) ≃\n          ((derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj P ⟶\n           (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj Q)),\n        (∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k)\n          (f : ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)),\n          stage k (DerivedCategory.Q.map (CochainComplex.scalarExtensionHom\n              (F.map (homOfLE j.property)).hom (F.map (homOfLE hjk)).hom\n              (F.map (homOfLE k.property)).hom\n              (congrArg CommRingCat.Hom.hom (F.map_comp\n                (homOfLE j.property) (homOfLE hjk))) E K f)) =\n            perfectStageMap R s j.val.property hjk\n              (stage j (DerivedCategory.Q.map f))) ∧\n        (∀ (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i))\n          (f : ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)),\n          limit (DerivedCategory.Q.map (CochainComplex.scalarExtensionHom\n              (F.map (homOfLE j.property)).hom (C.ι.app j.val).hom\n              (C.ι.app ⟨i, le_rfl⟩).hom\n              (congrArg CommRingCat.Hom.hom (C.w (homOfLE j.property)).symm)\n              E K f)) =\n            perfectLimitMap R c s j.val.property\n              (stage j (DerivedCategory.Q.map f)))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T190145-L-3217805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T190145-L-3217805",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

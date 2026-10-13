@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-affine-base-change-model-comparison-isos",
+ "kind": "statement",
+ "title": "Coherent geometric object isomorphisms for specified affine models",
+ "statement": "Let I be a directed preorder, R:I→CommRing a diagram, c a colimiting cocone, and i∈I. Let Y be affine [def-pc-scheme], s:Y→Spec R(i), and assume scheme derived categories with Hom universe w [def-pc-derived-category]. Set B=Γ(Y). Supply t:Spec B≅Y and a derived equivalence e:D(O_Spec B)≌D(O_Y), with a localization isomorphism he:Q⋙e.functor≅(termwise pushforward along t.hom)⋙Q [lem-pc-scheme-iso-derived-equivalence]. Let P,Q∈D(O_Y), let E₀,K₀ be bounded complexes of finite projective B-modules, and supply hPE:e.inverse(P)≅Q(tilde E₀) and hQK:e.inverse(Q)≅Q(tilde K₀). Form the explicit F,r of [def-pc-affine-base-change-ring-diagram] and E=r*E₀,K=r*K₀. For j in the nested tail put E_j=F(i)→F(j) scalar extension of E and K_j similarly; put E_∞,K_∞ for their scalar extensions to colimit F. There exist equivalences d_j:D(O_Spec F(j))≌D(O_(Y×_Spec R(i) Spec R(j))) and d_∞:D(O_Spec colimit F)≌D(O_(Y×_Spec R(i) Spec c.pt)), and object isomorphisms αE_j:d_j(Q(tilde E_j))≅pullback_j P, αK_j:d_j(Q(tilde K_j))≅pullback_j Q, βE:d_∞(Q(tilde E_∞))≅pullback_∞ P, βK:d_∞(Q(tilde K_∞))≅pullback_∞ Q. Define the sheafified chain-map expressions C_j(f)=αE_j.inv ≫ d_j.map(Q.map(tilde.map f)) ≫ αK_j.hom and C_∞(g)=βE.inv ≫ d_∞.map(Q.map(tilde.map g)) ≫ βK.hom. For every chain map f:E_j→K_j and j≤k, C_k(scalarExtensionHom(j,k,f))=perfectStageMap(R,s,j,k)(C_j(f)). Also C_∞(scalarExtensionHom(j,∞,f))=perfectLimitMap(R,c,s,j)(C_j(f)), with scalarExtensionHom and the pinned geometric maps exactly as in [def-pc-complex-scalar-extension-hom] and [lem-pc-perfect-hom-transport]. There is no choice of module-derived categories and no assertion of module-derived Hom equivalence in this statement.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine calculation; Tag 08DW(2); Tag 0D5S (cohomology.tex) for pinned composition comparisons"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-complex-scalar-extension-hom",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-scheme-iso-derived-equivalence",
+  "def-pc-affine-base-change-ring-diagram",
+  "def-pc-affine-model-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "For B=Γ(Y) and a=Spec.preimage(t.hom≫s), use the explicit diagram of [def-pc-affine-base-change-ring-diagram]. At each j its pushout is B tensor over R(i) with R(j). Spec converts its pushout square into a pullback square, and t identifies its B vertex with Y. The r vertex map is invertible because R(id_i) is invertible. The order tail is nonempty and final. Restrict hc to the tail, push out its cocone (a left-adjoint operation), and forget from Under B (which creates connected colimits). This identifies colimit F with the pushout along c.ι(i), compatibly with the injections. Spec then identifies Spec(colimit F) with the prescribed limit pullback.",
+   "uses": [
+    "def-pc-affine-base-change-ring-diagram",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-pc-scheme-iso-derived-equivalence] on those scheme isomorphisms to obtain d(j) and dlim. Extend E₀,K₀ along r and each subsequent ring map. Scalar extension preserves bounds and projective terms; their upper support bound and termwise projective-implies-flat give K-flatness by [lem-pc-module-bounded-flat-kflat] and the homotopy-category kFlat criterion. Apply [lem-pc-affine-derived-pullback-tensor-tilde] to identify pullback of their associated sheaves with associated sheaves of their extensions. Compose with the scheme transports, the supplied factorization he, hPE,hQK, and the counit of e. This constructs the displayed object isomorphisms αE,αK,βE,βK in the appropriate geometric categories.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-scheme-iso-derived-equivalence",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a chain map f, naturality of the tilde/base-change comparison and of the K-flat derived-pullback counit identifies the extended sheaf map with geometric pullback. Reassociate the two scalar extensions; their conjugated chain map is scalarExtensionHom. The derived composition comparison is uniquely pinned by the composite counit, hence equals the fixed comparison of [lem-pc-ringed-spaces-derived-pullback-composition]. Cancel each adjacent comparison and inverse. The conjugated finite-stage and colimit identities are the two equations in the Lean signature, with perfectStageMap and perfectLimitMap [lem-pc-perfect-hom-transport]. This applies to zero rings, zero complexes and empty spectra; no morphism-descent assertion is used.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-ring-diagram",
+  "def-pc-scheme",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-scheme-iso-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine calculation; Tag 08DW(2); Tag 0D5S (cohomology.tex) for pinned composition comparisons; expansion of the existing comparison plan with explicit categorical transports"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural equivalence of derived Hom sets for affine bounded projective complexes compatible with extension of scalars and scheme pullback",
+   "results": "Hits: CategoryTheory.ProjectiveResolution.isoExt, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.Abelian.Ext.homEquiv, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv_apply",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "Hits: ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "Under.pushout",
+   "results": "loogle: unknown identifier 'Under.pushout'",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative ring diagram obtained by pushing out a directed diagram along a map from its initial stage",
+   "results": "Hits: CategoryTheory.SmallObject.attachCellsιFunctorObj, CategoryTheory.SmallObject.functorObj, CategoryTheory.SmallObject.πFunctorObj, CategoryTheory.SmallObject.ιFunctorObj, CategoryTheory.SmallObject.functorObj_isPushout, CategoryTheory.SmallObject.ρFunctorObj, CommRingCat.pushoutCoconeIsColimit, HomotopicalAlgebra.AttachCells",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "affineBaseChangeRingDiagram|exists_affineBaseChangeModelComparisonIsos|exists_affineTildeHomEquiv",
+   "results": "Hits: ",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison statement; existing generic constructions reused where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine derived scalar extension comparison natural on chain maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout ring diagram on the upper tail of a preorder",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpecifiedModelChainComparison",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-pc-affine-specified-model-chain-comparison, proof steps 1–3",
+   "via": [
+    "lem-pc-affine-specified-model-chain-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseChangeModelComparisonIsos",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseChangeModelComparisonIsos.lean",
+  "declaration": "AlgebraicGeometry.exists_affineBaseChangeModelComparisonIsos",
+  "statement": "theorem exists_affineBaseChangeModelComparisonIsos\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Y : Scheme.{u}) [IsAffine Y] (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (t : Spec (Scheme.Γ.obj (.op Y)) ≅ Y)\n    (e : schemeDerivedCategory (Spec (Scheme.Γ.obj (.op Y))) ≌ schemeDerivedCategory Y)\n    (he : DerivedCategory.Q ⋙ e.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward t.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (P Q : schemeDerivedCategory Y)\n    (E₀ K₀ : CochainComplex (ModuleCat.{u} (Scheme.Γ.obj (.op Y))) ℤ)\n    (hE : (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E₀.X n)) ∧\n      ∀ n : ℤ, Module.Finite (Scheme.Γ.obj (.op Y)) (E₀.X n) ∧\n        Module.Projective (Scheme.Γ.obj (.op Y)) (E₀.X n))\n    (hK : (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (K₀.X n)) ∧\n      ∀ n : ℤ, Module.Finite (Scheme.Γ.obj (.op Y)) (K₀.X n) ∧\n        Module.Projective (Scheme.Γ.obj (.op Y)) (K₀.X n))\n    (hPE : e.inverse.obj P ≅ DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Scheme.Γ.obj (.op Y)))\n        (SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n        _ _ _ _ (@id (ModuleCat.{u} (Scheme.Γ.obj (.op Y)) ⥤\n                  SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n                  (tilde.functor (Scheme.Γ.obj (.op Y))))\n        ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj E₀))\n    (hQK : e.inverse.obj Q ≅ DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Scheme.Γ.obj (.op Y)))\n        (SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n        _ _ _ _ (@id (ModuleCat.{u} (Scheme.Γ.obj (.op Y)) ⥤\n                  SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n                  (tilde.functor (Scheme.Γ.obj (.op Y))))\n        ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj K₀)) :\n    let F := affineBaseChangeRingDiagram R i Y s t\n    let r := affineBaseChangeInitialMap R i Y s t\n    let E := ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj E₀\n    let K := ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj K₀\n    affineModelComparisonData R c i Y s P Q F (colimit.cocone F) E K",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T190145-L-3217805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T190145-L-3217805",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
