@@ -1,0 +1,84 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group T4
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Sheaf.RingTheory.Depth
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestriction
+import Sheaf.RingTheory.PowerSeriesQuotientVariables
+
+/-! # Sections on a finite power-series thickening
+
+Source: Stacks Project, Tag 0EY9, the first displayed calculation.
+(blueprint: lem-sbc-power-series-punctured-finite-thickening-sections)
+-/
+
+@[expose] public section
+
+universe u
+open CategoryTheory Limits
+namespace AlgebraicGeometry.Scheme
+
+/-- Restricting quotient power series to the punctured finite thickening is surjective.
+
+Source: Stacks Project, Tag 0EY9, the finite-index part of the first displayed calculation.
+(blueprint: lem-sbc-power-series-punctured-finite-thickening-sections)
+
+Proof: The existing quotient_first_variables_kernels theorem identifies the
+variables ideal with ker(constantCoeff).
+The existing finite-index restriction theorem identifies B/I^(n+1) with sections
+on the pullback of V along the quotient spectrum map. The pullback symmetry
+isomorphism followed by pullbackRestrictIsoRestrict identifies that scheme with
+the inverse-image open q inverse-image V. Its inverse induces an isomorphism
+on global sections, so composing preserves surjectivity. The identity of its
+inverse followed by pullback.snd with the open inclusion, and contravariant
+functoriality of appTop, show that this composition is the displayed canonical
+restriction. Thus no new Hartogs or finite-free calculation is needed here.
+-/
+theorem surjective_powerSeries_punctured_thickening_sections
+    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
+    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)
+    (d : ℕ) (hd : 0 < d)
+    (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens)
+    (hV : ∀ x : Spec (.of A),
+      (Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d)))) x ∈ V ↔
+        x ≠ IsLocalRing.closedPoint A)
+    (n : ℕ) :
+    let I : Ideal (MvPowerSeries (Fin d) A) := Ideal.span (Set.range MvPowerSeries.X)
+    let q := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))
+    Function.Surjective
+      (((ΓSpecIso (.of (MvPowerSeries (Fin d) A ⧸ I ^ (n + 1)))).inv ≫
+        (q ⁻¹ᵁ V).ι.appTop).hom) := by
+  classical
+  dsimp only
+  let B := MvPowerSeries (Fin d) A
+  let f := MvPowerSeries.constantCoeff (σ := Fin d) (R := A)
+  have hI : RingHom.ker f =
+      Ideal.span (Set.range (MvPowerSeries.X : Fin d → B)) := by
+    exact (MvPowerSeries.quotient_first_variables_kernels A d 0 (Nat.zero_le d)).2
+  rw [← hI]
+  let q := FiniteEtale.Adic.baseMap f n
+  let e := pullbackSymmetry V.ι q ≪≫ pullbackRestrictIsoRestrict q V
+  have hfac : e.inv ≫ pullback.snd V.ι q = (q ⁻¹ᵁ V).ι := by
+    simp [e]
+  have he : Function.Surjective e.inv.appTop.hom := by
+    exact (ConcreteCategory.bijective_of_isIso e.inv.appTop).2
+  have hk := (bijective_powerSeries_punctured_thickening_restriction
+    A hdepth d hd V hV n).2
+  have hsurj := he.comp hk
+  have hmap : (ΓSpecIso (.of (B ⧸ RingHom.ker f ^ (n + 1)))).inv ≫
+      (pullback.snd V.ι q).appTop ≫ e.inv.appTop =
+      (ΓSpecIso (.of (B ⧸ RingHom.ker f ^ (n + 1)))).inv ≫
+        (q ⁻¹ᵁ V).ι.appTop := by
+    rw [← Scheme.Hom.comp_appTop, hfac]
+  change Function.Surjective
+    (((ΓSpecIso (.of (B ⧸ RingHom.ker f ^ (n + 1)))).inv ≫
+      (q ⁻¹ᵁ V).ι.appTop).hom)
+  rw [← hmap]
+  exact hsurj
+
+end AlgebraicGeometry.Scheme

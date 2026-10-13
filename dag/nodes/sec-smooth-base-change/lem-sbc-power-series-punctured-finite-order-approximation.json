@@ -15,36 +15,34 @@
  ],
  "proof": [
   {
-   "text": "For n=0 take b=0 since every zeroth ideal power is the unit ideal. For n>0, the monomials of total degree less than n give mutually inverse A-linear coefficient and finite-sum maps between B/I^n and a finite direct sum of copies of A. Pushing the intersection of Spec(B/I^n) with V forward under its finite affine map to U gives the corresponding finite direct sum of copies of O_U. Depth-two Hartogs applied to the structure module of Spec(A) identifies its sections on U with A. Thus the canonical map B/I^n to sections of this thickening is bijective.",
+   "text": "For order zero take b=0: the zeroth ideal power is the unit ideal. For order n+1, restrict s along the quotient-power thickening q restricted to V. The canonical quotient-section restriction is surjective by the finite-thickening sections transport lemma. Choose the quotient class a of the pullback and lift a to b using Ideal.Quotient.mk_surjective.",
    "uses": [
-    "lem-sbc-depth-two-hartogs-restriction"
+    "lem-sbc-power-series-punctured-finite-thickening-sections"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Restrict s to this thickening, use the bijection of the preceding step to obtain its quotient class, and lift the class along the surjective quotient map B to B/I^n.",
+   "text": "Naturality of ΓSpecIso and morphismRestrict_ι identifies pullback of r(b) with the restriction of the quotient class of b, hence with pullback of s. Subtracting gives zero pullback of s-r(b).",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "At x with prime p, put q=constantCoeff inverse-image(p). The canonical localization coordinates identify the zero-section stalk map with B_q to A_p, whose kernel is I B_q. Indeed a numerator killed in A_p is killed modulo I by a denominator outside p, and that denominator also lies outside q. Open restriction preserves stalks. Localization commutes with ideal powers and quotients, so the thickening stalk is B_q/(I B_q)^n. Equality of the restricted section and the representative at this stalk gives g_x(s-r(b)) in J_x^n.",
+   "text": "Apply the thickening-kernel comparison to the section s-r(b). Its zero pullback gives precisely the asserted membership of every germ in the n-th power of the restricted zero-section stalk kernel.",
    "uses": [
-    "lem-weil-pbc-spec-map-stalk-localization",
-    "lem-weil-pbc-affine-open-stalk-localization"
+    "lem-sbc-power-series-punctured-thickening-kernel"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-depth-two-hartogs-restriction",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-spec-map-stalk-localization"
+  "lem-sbc-power-series-punctured-finite-thickening-sections",
+  "lem-sbc-power-series-punctured-thickening-kernel"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "G1",
+  "by": "T4",
   "document": "Stacks Project",
-  "place": "Tag 0EY9 (lemma-fully-faithful-power-series-over-depth2), first displayed inverse-limit calculation at a fixed index, before taking the inverse limit; the subsequent comparison of rings"
+  "place": "Tag 0EY9, first displayed calculation at a fixed finite index: existing finite-thickening restriction transported to the inverse-image open; quotient lift and naturality assembled with the proved kernel comparison in Lean"
  },
  "mathlib_searches": [
   {
@@ -140,9 +138,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T143545-L-560515",
+  "landing": "20261013T152730-L-1015933",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

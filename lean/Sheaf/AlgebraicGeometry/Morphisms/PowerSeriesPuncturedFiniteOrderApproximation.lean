@@ -8,7 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteThickeningSections
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningKernel
 
 /-! # Finite-order approximation on the punctured zero section
 
@@ -58,6 +59,40 @@ theorem exists_powerSeries_punctured_finite_order_approximation
     ∀ (s : Γ(V.toScheme, ⊤)) (n : ℕ), ∃ b : MvPowerSeries (Fin d) A,
       ∀ x : (z ⁻¹ᵁ V).toScheme,
         (V.toScheme.presheaf.Γgerm ((z ∣_ V) x)).hom (s - r b) ∈
-          (RingHom.ker ((z ∣_ V).stalkMap x).hom) ^ n := by sorry
-
+          (RingHom.ker ((z ∣_ V).stalkMap x).hom) ^ n := by
+  dsimp only
+  intro s n
+  cases n with
+  | zero =>
+    refine ⟨0, ?_⟩
+    intro x
+    simp
+  | succ n =>
+    let B := MvPowerSeries (Fin d) A
+    let I : Ideal B := Ideal.span (Set.range MvPowerSeries.X)
+    let q := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))
+    let r := ((ΓSpecIso (.of B)).inv ≫ V.ι.appTop).hom
+    let t := ((q ∣_ V).appTop).hom
+    obtain ⟨a, ha⟩ := surjective_powerSeries_punctured_thickening_sections
+      A hdepth d hd V hV n (t s)
+    obtain ⟨b, hb⟩ := Ideal.Quotient.mk_surjective a
+    have hres : V.ι.appTop ≫ (q ∣_ V).appTop =
+        q.appTop ≫ (q ⁻¹ᵁ V).ι.appTop := by
+      simpa only [Scheme.Hom.comp_appTop] using
+        congrArg Scheme.Hom.appTop (morphismRestrict_ι q V)
+    have hcomp : (ΓSpecIso (.of B)).inv ≫ V.ι.appTop ≫ (q ∣_ V).appTop =
+        CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))) ≫
+          (ΓSpecIso (.of (B ⧸ I ^ (n + 1)))).inv ≫ (q ⁻¹ᵁ V).ι.appTop := by
+      rw [hres, ← Category.assoc, ← ΓSpecIso_inv_naturality, Category.assoc]
+    have heq : t (r b) = t s := by
+      have h := RingHom.congr_fun (congrArg CommRingCat.Hom.hom hcomp) b
+      change t (r b) =
+        (((ΓSpecIso (.of (B ⧸ I ^ (n + 1)))).inv ≫ (q ⁻¹ᵁ V).ι.appTop).hom)
+          ((Ideal.Quotient.mk (I ^ (n + 1))) b) at h
+      rw [hb] at h
+      exact h.trans ha
+    refine ⟨b, ?_⟩
+    apply powerSeries_punctured_germs_mem_pow_of_thickening_zero A d V (n + 1) (s - r b)
+    change t (s - r b) = 0
+    rw [map_sub, heq, sub_self]
 end AlgebraicGeometry.Scheme
