@@ -11581,3 +11581,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: merged deliver/W2/Sheaf.AlgebraicGeometry.HigherDirectImageResolutionNaturality (stage 3; reviewer PASS; first push; landing 20261013T072411-L-1126731 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:24 L: merged deliver/W4/Sheaf.AlgebraicGeometry.QcOpenDerivedLift (stage 3; reviewer PASS; first push; landing 20261013T072412-L-1126834 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:24 L: merged deliver/X2/Sheaf.Algebra.FiniteProjectiveTorAcyclic (stage 3; reviewer PASS; first push; landing 20261013T072412-L-1126932 (proof); batch 20261013T072335; modules 1; new nodes 0)
+- 07:24 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PullbackStalkTensorFlat (stage 3; reviewer PASS; first push; landing 20261013T072412-L-1127037 (proof); batch 20261013T072335; modules 1; new nodes 0)
