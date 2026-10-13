@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "Represent successive syzygies by kernels. Exactness gives the short exact sequences 0 → N_{j+1} → F_j → N_j → 0, with N_0 linearly equivalent to M and N_{d-e} to K. Each kernel is finite by the Noetherian submodule theorem.",
+   "text": "Put n=d-e and f_i=S.map(i,i+1). Use N_i=range(f_i), for 1≤i≤n+1. The objects S_i, 1≤i≤n+2, are finite by the hypotheses and the terminal equivalence to M. Images are finite as quotients; kernels inside finite middle terms are finite by the Noetherian submodule theorem. Exactness identifies N_i with ker(f_{i+1}).",
    "uses": [
     "def-weil-pbc-exact-sequence",
     "lem-weil-pbc-noetherian-submodule-finite"
@@ -24,7 +24,7 @@
    "elementary": false
   },
   {
-   "text": "For each nonzero finite free F_j, choose a finite basis and transport regular sequences on R componentwise to the finite power. Regularity and depth are invariant under linear equivalence. Taking suprema shows depth(F_j) ≥ depth(R) ≥ d.",
+   "text": "Depth is invariant under linear equivalence: map the maximal-ideal multiple through the equivalence and transport every regular sequence. A subsingleton finite module has depth infinity directly from the definition. For a nonzero finite free module F, use a finite basis to identify F with a finite power of R. Mathlib RingTheory.Sequence.IsWeaklyRegular.of_flat transfers a weakly regular sequence to this flat R-algebra; isWeaklyRegular_map_algebraMap_iff restricts scalars back to R, and Nakayama gives regularity for sequences in the maximal ideal. Inclusion of regular-sequence length sets gives depth(F)≥depth(R).",
    "uses": [
     "def-weil-pbc-free-module",
     "def-weil-pbc-regular-sequence",
@@ -33,7 +33,7 @@
    "elementary": true
   },
   {
-   "text": "Induct to show depth(N_j) ≥ min(d,e+j) for nonzero N_j. The initial case is depth(M)=e. For three nonzero terms apply part (3) of the depth lemma. A zero quotient identifies the next syzygy with the free middle term. A zero middle term forces its kernel zero. A zero kernel makes the assertion vacuous, with the next step handled by the zero-quotient case.",
+   "text": "For every finite middle module B and map g, the sequence 0→ker(g)→B→range(g)→0 gives depth(ker(g))≥min(depth(B),depth(range(g))+1). If all terms are nonzero this is part (3) of the depth lemma. A zero kernel has infinite depth. A zero middle term forces its kernel zero by injectivity. A zero image makes the kernel inclusion bijective, so invariance of depth proves the same inequality.",
    "uses": [
     "lem-weil-pbc-depth-in-ses",
     "def-weil-pbc-depth"
@@ -41,7 +41,7 @@
    "elementary": false
   },
   {
-   "text": "At j=d-e the minimum equals d since e≤d. Nontriviality of K supplies the desired lower bound. For d=e, exactness with zero endpoints gives K ≃ M directly.",
+   "text": "Exactness and the terminal zero object make f_{n+1} surjective, identifying N_{n+1} with M, so its depth is e. Descending induction on i proves depth(N_i)≥min(d,e+n+1-i). At each step use the preceding kernel inequality, the free middle term bound, and min(d,a+1)≤min(d,a)+1. The initial zero object makes f_1 injective, identifying K with N_1. Since e+n=d, the bound at i=1 is d. This also covers n=0, with no free middle terms.",
    "uses": [
     "def-weil-pbc-exact-sequence",
     "def-weil-pbc-depth"
@@ -60,7 +60,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 00NG, 00NE and 00LX(3); explicit syzygy induction, including zero terms, reviewed and written out by T3 second reader."
+  "place": "Tags 00NG, 00NE and 00LX(3); M1 stage-3 Lean proof using image syzygies, descending induction, and explicit zero-term cases. Independently checked by M1 second reader: unchanged statement, zero-term cases, induction indices, and standard axioms only."
  },
  "mathlib_searches": [
   {
@@ -140,13 +140,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "X-c7e6d",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T225331-L-1813427",
+  "landing": "20261013T010617-L-2671622",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node, report, and change record matched the packet; clean compilation and direct importer check passed, with allowed axioms only."
  }
 }
