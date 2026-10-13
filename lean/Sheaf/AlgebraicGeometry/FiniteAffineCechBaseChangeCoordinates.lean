@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.AdditiveAlternatingCechCoordinates
+import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientBaseChange
 
 /-! # Local section formulas for the pulled-back finite affine Čech model
 
@@ -22,6 +22,8 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the nested complex functors and dependent coordinate sums needs this budget.
 /-- The pulled-back specified model has the ordered section formulas, naturally on all
 opens and linearly over their local rings. This is a termwise statement, before homology.
 Source: Stacks Project, Tag 02KE, affine Čech terms and arbitrary base change.
@@ -79,6 +81,35 @@ theorem finiteAffineCech_baseChange_coordinates {X T : Scheme.{u}} (f : X ⟶ T)
         ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
           M.presheaf.map (homOfLE (inf_le_inf
             (alternatingCechIntersection_face_le (fun i ↦ W₀ ⟨i⟩) p t j) le_rfl)).op
-              (a p B s ((Fin.succAboveOrderEmb j).trans t))) := by sorry
+              (a p B s ((Fin.succAboveOrderEmb j).trans t))) := by
+  classical
+  let G := (F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat
+  let H := ModuleCat.restrictScalars
+    (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫
+      ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom) ⋙
+    tilde.functor Γ(U.toScheme, ⊤) ⋙
+    Modules.pullback U.toScheme.toSpecΓ ⋙ Modules.pullback g
+  let L := (H.mapHomologicalComplex _).obj
+    ((alternatingCechComplex V G).extend ComplexShape.embeddingUpNat)
+  obtain ⟨e, en, el, ed⟩ := additive_alternatingCech_coordinates V G H
+  obtain ⟨c, cn, cl, cf⟩ :=
+    finiteAffineCech_coefficient_baseChange f F U hU V hV g g' f' sq W₀ hW
+  refine ⟨fun p B ↦ (e p B).trans (AddEquiv.piCongrRight fun t ↦ c p t B), ?_, ?_, ?_⟩
+  · intro p B C i s t
+    change c p t B (e p B ((L.X (p : ℤ)).presheaf.map i.op s) t) = _
+    rw [en]
+    exact cn p t i _
+  · intro p B b s t
+    change c p t B (e p B (b • s) t) = _
+    rw [el]
+    exact cl p t B b _
+  · intro p B s t
+    change c (p + 1) t B (e (p + 1) B ((L.d (p : ℤ) ((p + 1 : ℕ) : ℤ)).app B s) t) = _
+    rw [ed, map_sum]
+    apply Finset.sum_congr rfl
+    intro j _
+    rw [map_zsmul, cf]
+    rfl
+
 
 end AlgebraicGeometry.Scheme.Modules

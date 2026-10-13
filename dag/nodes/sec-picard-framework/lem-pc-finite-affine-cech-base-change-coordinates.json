@@ -17,47 +17,31 @@
  },
  "proof": [
   {
-   "text": "Put Y = f inverse image U. Since f is separated and U affine, Y is separated. Each increasing tuple has nonempty length, so its intersection Z is an affine open of Y. The supplied pullback square identifies the new intersection with Z times_U Tprime. The intersection base-change theorem shows its map to Tprime is affine. Consequently its inverse image over an affine B in Tprime is affine.",
+   "text": "Set G to the restricted coefficient presheaf and H to the three functors in the model followed by base pullback. The definition of the model identifies K with H applied to the extended alternating complex. Apply additive_alternatingCech_coordinates to obtain the finite-product coordinates e and their restriction, scalar and differential equations.",
    "uses": [
-    "lem-pc-finite-affine-cech-intersection-base-change"
+    "def-pc-finite-affine-cech-model",
+    "lem-pc-additive-alternating-cech-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the affine pullback section formula to F restricted to Z and the base-changed affine intersection over B. Identify its section ring with Gamma(B,O) tensor over Gamma(U,O) Gamma(Z,O). Associativity of tensor products gives its coefficient module as Gamma(B,O) tensor over Gamma(U,O) Gamma(Z,F). The map sends b tensor s to b times the restriction of the pullback-unit image of s. On the source side the GammaSpecIso scalar restriction and final affine-chart pullback in finiteAffineCechModel give this same tensor module.",
+   "text": "Apply the individual coefficient comparison to obtain c for each tuple. Define a on each open as e followed by the product of the c maps. Rewrite using restriction and scalar equations for e and c to obtain the first two clauses. For the differential, rewrite using the signed sum equation for e, distribute c across the sum and integer scalars, and apply its single-face restriction equation in each summand. This is the explicit Lean proof.",
    "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "def-pc-finite-affine-cech-model"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the finite type of increasing tuples, tensor preserves the product: finite products are finite direct sums, and the componentwise tensor map has inverse given by summing the inclusions. Thus the individual affine coefficient isomorphisms assemble into a bijective additive coordinate map on each affine B. The face maps and section restrictions commute with this map on pure tensors by naturality of the pullback unit and functoriality of restrictions; extend by additivity to all tensors. The pure-tensor map is Gamma(B,O)-linear. Signed face sums therefore commute with these coordinates. Extension from natural degrees identifies the terms at integer p and their differentials.",
-   "uses": [
-    "def-sc-alternating-cech-total-complex"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The affine-basis coordinate maps and their inverses agree on overlaps: restrict first to an affine basis of each overlap and use their already checked restriction equations. The sheaf gluing axiom extends the coordinates and their inverses to all B. Linearity, naturality and the signed differential identity are sheaf-local equations, so hold on all opens. If a coefficient intersection is empty its sections are zero; if r is zero or p+1 exceeds r the product index is empty, hence both terms are zero.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "lem-pc-finite-affine-cech-coefficient-base-change"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-finite-affine-cech-model",
-  "def-sc-alternating-cech-total-complex",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pc-finite-affine-cech-intersection-base-change",
-  "lem-weil-pbc-module-pullback-affine-sections"
+  "lem-pc-additive-alternating-cech-coordinates",
+  "lem-pc-finite-affine-cech-coefficient-base-change"
  ],
  "proof_origin": {
-  "by": "worker A2",
+  "by": "worker Q3",
   "document": "Stacks Project",
-  "place": "Coherence unit part (a), the termwise finite affine Cech calculation before taking homology; Tag 02KE, Lemma 30.5.1 and termwise calculation in proof of Lemma 30.5.2 (https://stacks.math.columbia.edu/tag/02KE)",
-  "note": "Explicit module-sheaf formulation of the cited constructions, by A2"
+  "place": "Tag 02KE, Lemma 30.5.1 and termwise calculation in Lemma 30.5.2",
+  "note": "One geometric coefficient hole split off; the additive finite-product theorem is proved, and the target combines its equations with the coefficient comparison in Lean."
  },
  "mathlib_searches": [
   {
@@ -150,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T045509-L-123673",
+  "landing": "20261013T060424-L-584921",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

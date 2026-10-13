@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-additive-alternating-cech-coordinates",
+ "kind": "statement",
+ "title": "Finite product coordinates for additive alternating Cech complexes",
+ "statement": "Let Y and S be schemes, V_i a finite family of opens of Y, G a presheaf of global-ring modules, and H an additive functor from modules over Gamma(Y,O) to module sheaves on S. For L obtained by applying H to the alternating section complex extended to integer degrees [def-sc-alternating-cech-total-complex], there are additive equivalences on every open B of S from L in degree p to the product over increasing tuples t of sections on B of H(G(intersection V_t)). They commute with restriction of B, are Gamma(B,O)-linear, and send the differential to the signed sum of the H-images of coefficient face restrictions. This includes empty products.",
+ "stmt_deps": [
+  "def-sc-alternating-cech-total-complex",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02KE, termwise finite Cech calculation"
+ },
+ "proof": [
+  {
+   "text": "The function module in degree p is the explicit categorical product of its coefficient modules by ModuleCat.productConeIsLimit. The additive functor followed by section evaluation preserves finite products; isLimitFanMkObjOfIsLimit and conePointUniqueUpToIso give the bijectivity of the projection map. Compose it with the section map of H applied to extendXIso. Every coordinate is the section map of a module-sheaf morphism, giving naturality and local linearity.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the explicitly defined alternatingCechDifferential and compose it with each projection. This is a finite sum of signed coefficient restriction maps composed with projections. Use extend_d_eq, functoriality, and additivity of H to transport the equality to L. Evaluation of morphisms on sections is additive, so evaluating this equality gives the asserted signed sum.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 02KE, termwise finite Cech calculation",
+  "note": "Fully proved in Lean by finite product universal properties and explicit expansion of the differential."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite product coordinates for additive alternating Cech complexes",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Additive finite product coordinates",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCech coordinates",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite product coordinates for additive alternating Cech complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.productConeIsLimit",
+   "results": "ModuleCat.productConeIsLimit",
+   "date": "2026-10-13",
+   "verdict": "related infrastructure found; no exact match for the stated coordinate interface"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*baseChange|baseChange.*pushforward|preservesFiniteProducts.*additive",
+   "results": "Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean",
+   "date": "2026-10-13",
+   "verdict": "related infrastructure found; no exact match for the stated coordinate interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechBaseChangeCoordinates",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), termwise finite affine Cech calculation",
+   "via": [
+    "lem-pc-finite-affine-cech-base-change-coordinates",
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AdditiveAlternatingCechCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdditiveAlternatingCechCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.additive_alternatingCech_coordinates",
+  "statement": "theorem additive_alternatingCech_coordinates {Y S : Scheme.{u}} {r : ℕ}\n    (V : Fin r → Y.Opens)\n    (G : Y.Opensᵒᵖ ⥤ ModuleCat.{u} Γ(Y, ⊤))\n    (H : ModuleCat.{u} Γ(Y, ⊤) ⥤ S.Modules) [H.Additive] :\n    let L := (H.mapHomologicalComplex _).obj\n      ((alternatingCechComplex V G).extend ComplexShape.embeddingUpNat)\n    ∃ e : ∀ (p : ℕ) (B : S.Opens), Γ(L.X (p : ℤ), B) ≃+\n        (∀ t : Fin (p + 1) ↪o Fin r,\n          Γ(H.obj (G.obj (op (alternatingCechIntersection V t))), B)),\n      (∀ (p : ℕ) {B C : S.Opens} (i : B ⟶ C)\n        (s : Γ(L.X (p : ℤ), C)) (t : Fin (p + 1) ↪o Fin r),\n        e p B ((L.X (p : ℤ)).presheaf.map i.op s) t =\n          (H.obj (G.obj (op (alternatingCechIntersection V t)))).presheaf.map i.op\n            (e p C s t)) ∧\n      (∀ (p : ℕ) (B : S.Opens) (b : Γ(S, B))\n        (s : Γ(L.X (p : ℤ), B)) (t : Fin (p + 1) ↪o Fin r),\n        e p B (b • s) t = b • e p B s t) ∧\n      (∀ (p : ℕ) (B : S.Opens) (s : Γ(L.X (p : ℤ), B))\n        (t : Fin (p + 2) ↪o Fin r),\n        e (p + 1) B ((L.d (p : ℤ) ((p + 1 : ℕ) : ℤ)).app B s) t =\n          ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •\n            (H.map (G.map (homOfLE\n              (alternatingCechIntersection_face_le V p t j)).op)).app B\n                (e p B s ((Fin.succAboveOrderEmb j).trans t)))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T060424-L-584921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T060424-L-584921",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

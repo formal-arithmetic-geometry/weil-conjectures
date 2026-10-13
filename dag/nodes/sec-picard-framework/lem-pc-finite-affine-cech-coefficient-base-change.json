@@ -1,0 +1,167 @@
+{
+ "id": "lem-pc-finite-affine-cech-coefficient-base-change",
+ "kind": "statement",
+ "title": "Affine coefficient section base change",
+ "statement": "Let f:X to T be separated, F a quasi-coherent module sheaf on X, U an affine open of T, and V_i a finite family of affine opens of f inverse image U. Let g:Tprime to U, gprime:Xprime to X and fprime:Xprime to Tprime form a cartesian square with f and g followed by the inclusion of U. Put W_i=gprime inverse image of the image of V_i under the inclusion of f inverse image U in X; put Y=f inverse image U, G the global-ring presheaf underlying F restricted to Y [def-weil-sheaf-of-modules-category]. Let H be the composite of restriction of scalars along GammaSpecIso followed by the map of f restricted to U, tilde over Gamma(U,O), pullback along the canonical affine chart U to Spec Gamma(U,O), and pullback along g [def-pc-finite-affine-cech-model]. For each natural p and increasing tuple t, the sections on every B of H(G(intersection V_t)) are additively equivalent to the sections of M=gprime pullback F on intersection W_t intersect fprime inverse image B. These coefficient equivalences commute with restrictions of B, turn the Gamma(B,O) action into multiplication by the restricted fprime pullback of scalars, and commute with each single face restriction. No products, complexes, or differential sums occur.",
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-finite-affine-cech-model",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02KE, Lemma 30.5.1"
+ },
+ "proof": [
+  {
+   "text": "Separatedness over affine U makes every nonempty finite intersection Z of the V_i affine. Apply the affine intersection base-change statement to Z. Its base change has an affine map to Tprime, hence its inverse image over affine B is affine. The given equations for W identify this inverse image with intersection W_t intersect fprime inverse image B.",
+   "uses": [
+    "lem-pc-finite-affine-cech-intersection-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On affine B use the affine pullback section comparison for F restricted to Z. Both its base-changed coefficient sections and the sections of H(G(Z)) identify with Gamma(B,O) tensor over Gamma(U,O) Gamma(Z,F). The ring maps from GammaSpecIso and the canonical affine chart are the same structural maps. Tensor associativity identifies the two presentations; the comparison sends b tensor s to b times the pullback of s. Its inverse comes from the bijective affine pullback comparison.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-finite-affine-cech-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the pullback unit and restriction functor gives compatibility on pure tensors under restriction of B and of Z to a smaller affine intersection. Multiplication on the first tensor factor gives the local scalar formula. Extend the equations by additivity to every tensor. On overlaps restrict to affine basis subopens; the equations give agreement of the maps and their inverses. The sheaf gluing axiom gives maps and inverse maps on all B; their identities and the three equations are sheaf-local and therefore hold there. Empty coefficient intersections give zero sections. When r=0 or p+1 exceeds r there is no tuple, so no coefficient to construct.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-affine-cech-intersection-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-pc-finite-affine-cech-model",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 02KE, Lemma 30.5.1",
+  "note": "Intermediate statement split from the target proof; it is strictly one part of the termwise coordinate argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine coefficient section base change",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Additive finite product coordinates",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCech coordinates",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine coefficient section base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi coherent pushforward affine morphism base change tensor sections",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj; AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map; AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom; SheafOfModules.pushforward_map_val; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+   "date": "2026-10-13",
+   "verdict": "related infrastructure found; no exact match for the stated coordinate interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pullbackId; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.pullbackCongr; AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-13",
+   "verdict": "related infrastructure found; no exact match for the stated coordinate interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechBaseChangeCoordinates",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), termwise finite affine Cech calculation",
+   "via": [
+    "lem-pc-finite-affine-cech-base-change-coordinates",
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineCechCoefficientBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteAffineCech_coefficient_baseChange",
+  "statement": "theorem finiteAffineCech_coefficient_baseChange {X T : Scheme.{u}} (f : X ⟶ T)\n    [IsSeparated f] (F : X.Modules) [F.IsQuasicoherent]\n    (U : T.Opens) (hU : IsAffineOpen U) {r : ℕ}\n    (V : Fin r → (f ⁻¹ᵁ U).toScheme.Opens) (hV : ∀ i, IsAffineOpen (V i))\n    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n    (sq : IsPullback g' f' f (g ≫ U.ι))\n    (W₀ : ULift.{u} (Fin r) → X'.Opens)\n    (hW : ∀ i, W₀ i = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ V i.down)) :\n    let G := (F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat\n    let H := ModuleCat.restrictScalars\n      (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫\n        ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom) ⋙\n      tilde.functor Γ(U.toScheme, ⊤) ⋙\n      Modules.pullback U.toScheme.toSpecΓ ⋙ Modules.pullback g\n    let M := (Modules.pullback g').obj F\n    ∃ c : ∀ (p : ℕ) (t : Fin (p + 1) ↪o Fin r) (B : T'.Opens),\n      Γ(H.obj (G.obj (op (alternatingCechIntersection V t))), B) ≃+\n        Γ(M, alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t ⊓ f' ⁻¹ᵁ B),\n      (∀ (p : ℕ) (t : Fin (p + 1) ↪o Fin r) {B C : T'.Opens} (i : B ⟶ C)\n        (s : Γ(H.obj (G.obj (op (alternatingCechIntersection V t))), C)),\n        c p t B ((H.obj (G.obj (op (alternatingCechIntersection V t)))).presheaf.map\n          i.op s) = M.presheaf.map (homOfLE (inf_le_inf le_rfl\n            ((TopologicalSpace.Opens.map f'.base).map i).le)).op (c p t C s)) ∧\n      (∀ (p : ℕ) (t : Fin (p + 1) ↪o Fin r) (B : T'.Opens) (b : Γ(T', B))\n        (s : Γ(H.obj (G.obj (op (alternatingCechIntersection V t))), B)),\n        c p t B (b • s) =\n          X'.presheaf.map (homOfLE (show\n            alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t ⊓ f' ⁻¹ᵁ B ≤ f' ⁻¹ᵁ B\n              from inf_le_right)).op (f'.app B b) • c p t B s) ∧\n      (∀ (p : ℕ) (t : Fin (p + 2) ↪o Fin r) (j : Fin (p + 2)) (B : T'.Opens)\n        (s : Γ(H.obj (G.obj (op (alternatingCechIntersection V\n          ((Fin.succAboveOrderEmb j).trans t)))), B)),\n        c (p + 1) t B\n          ((H.map (G.map (homOfLE\n            (alternatingCechIntersection_face_le V p t j)).op)).app B s) =\n          M.presheaf.map (homOfLE (inf_le_inf\n            (alternatingCechIntersection_face_le (fun i ↦ W₀ ⟨i⟩) p t j) le_rfl)).op\n              (c p ((Fin.succAboveOrderEmb j).trans t) B s))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T060424-L-584921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T060424-L-584921",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
