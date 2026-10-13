@@ -12,8 +12,10 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Module.TransferInstance
+import Sheaf.RingTheory.LocalizedRingColimitComparison
+import Sheaf.RingTheory.LocalizedModuleColimitComparison
+import Sheaf.RingTheory.FlatSemilinearEquiv
 
 /-! # Canonical diagrams localized at contracted primes
 
@@ -252,6 +254,109 @@ theorem localized_approximation_colimits
         @Module.Flat (Localization.AtPrime (q.asIdeal.comap (algebraMap R S)))
           (LocalizedModule q.asIdeal.primeCompl M) _ _
           (Module.compHom _ (Localization.localRingHom
-            (q.asIdeal.comap (algebraMap R S)) q.asIdeal (algebraMap R S) rfl))) := by sorry
+            (q.asIdeal.comap (algebraMap R S)) q.asIdeal (algebraMap R S) rfl))) := by
+  classical
+  dsimp
+  let Aq := primeRingDiagram A (η ≫ κ) q
+  let Bq := primeRingDiagram B κ q
+  let Nq := primeModuleDiagram B κ q D hs
+  obtain ⟨eB, heB⟩ := localizedRingColimitComparison B Bq κ hB q.asIdeal
+    (fun i ↦ q.asIdeal.comap (κ.app i).hom) (fun _ ↦ rfl)
+    (fun _ ↦ RingEquiv.refl _) (by
+      intro i j f x
+      exact Localization.localRingHom_to_map _ _ _
+        (contractedPrime_map B κ q i j f) x)
+  let g : ∀ i, Nq.obj i →+ LocalizedModule q.asIdeal.primeCompl M := fun i ↦
+    primeModuleMap _ _ (κ.app i).hom rfl (ν.app i).hom (hν i)
+  obtain ⟨eN, heN⟩ := localizedModuleColimitComparison B D Nq κ ν hB hD hs hν q
+    (fun _ ↦ AddEquiv.refl _) (by
+      intro i j f x s
+      exact ⟨⟨(B.map f).hom s, by
+        change (B.map f).hom s ∉ q.asIdeal.comap (κ.app j).hom
+        change (s : B.obj i) ∉ (q.asIdeal.comap (κ.app j).hom).comap (B.map f).hom
+        rw [← contractedPrime_map B κ q i j f]
+        exact s.property⟩, rfl,
+        primeModuleMap_mk _ _ (B.map f).hom
+          (contractedPrime_map B κ q i j f) (D.map f).hom (hs i j f) x s⟩)
+    g (by
+      intro i x s
+      exact primeModuleMap_mk (R := B.obj i) (S := S) (M := D.obj i) (N := M)
+        _ _ (κ.app i).hom rfl (ν.app i).hom (hν i) x s)
+  let τ : Aq ⟶ Bq :=
+    { app := fun i ↦ CommRingCat.ofHom (primeDiagramHom A B η κ q i)
+      naturality := fun i j f ↦ by
+        apply CommRingCat.hom_ext
+        exact (primeDiagramHom_naturality A B η κ q i j f).symm }
+  let ψ : (colimit Aq : CommRingCat.{u}) →+* (colimit Bq : CommRingCat.{u}) :=
+    (colim.map τ).hom
+  let : Module (colimit Bq : CommRingCat.{u}) (LocalizedModule q.asIdeal.primeCompl M) :=
+    Module.compHom _ eB.toRingHom
+  let act := eN.module (colimit Bq : CommRingCat.{u})
+  have hψ : ∀ i, ψ.comp (colimit.ι Aq i).hom =
+      (colimit.ι Bq i).hom.comp (primeDiagramHom A B η κ q i) := by
+    intro i
+    exact congrArg CommRingCat.Hom.hom (colimit.ι_map τ i)
+  refine ⟨ψ, act, hψ, ?_, ?_⟩
+  · intro i b x
+    apply eN.injective
+    change eN ((colimit.ι Nq i).hom (b • x)) =
+      eN (eN.symm (eB ((colimit.ι Bq i).hom b) • eN ((colimit.ι Nq i).hom x)))
+    rw [eN.apply_symm_apply, heN, heN, heB]
+    exact primeModuleMap_smul (R := B.obj i) (S := S) (M := D.obj i) (N := M)
+      _ _ (κ.app i).hom rfl (ν.app i).hom (hν i) b x
+  · let p := q.asIdeal.comap (algebraMap R S)
+    have hp : ∀ i, q.asIdeal.comap ((η ≫ κ).app i).hom = p.comap (π.app i).hom := by
+      intro i
+      change q.asIdeal.comap ((η.app i ≫ κ.app i).hom) =
+        (q.asIdeal.comap (algebraMap R S)).comap (π.app i).hom
+      rw [hη i, Ideal.comap_comap]
+      rfl
+    obtain ⟨eA, heA⟩ := localizedRingColimitComparison A Aq π hA p
+      (fun i ↦ q.asIdeal.comap ((η ≫ κ).app i).hom) hp
+      (fun _ ↦ RingEquiv.refl _) (by
+        intro i j f x
+        exact Localization.localRingHom_to_map _ _ _
+          (contractedPrime_map A (η ≫ κ) q i j f) x)
+    let ℓ := Localization.localRingHom p q.asIdeal (algebraMap R S) rfl
+    have square : eB.toRingHom.comp ψ = ℓ.comp eA.toRingHom := by
+      suffices hh : CommRingCat.ofHom (eB.toRingHom.comp ψ) =
+          CommRingCat.ofHom (ℓ.comp eA.toRingHom) from congrArg CommRingCat.Hom.hom hh
+      apply colimit.hom_ext
+      intro i
+      apply CommRingCat.hom_ext
+      apply IsLocalization.ringHom_ext (q.asIdeal.comap ((η ≫ κ).app i).hom).primeCompl
+      ext x
+      change eB (ψ ((colimit.ι Aq i).hom (algebraMap _ _ x))) =
+        ℓ (eA ((colimit.ι Aq i).hom (algebraMap _ _ x)))
+      have hψx := DFunLike.congr_fun (hψ i) (algebraMap _ _ x)
+      rw [RingHom.comp_apply, RingHom.comp_apply] at hψx
+      rw [hψx, heB, heA]
+      change Localization.localRingHom _ _ (κ.app i).hom rfl
+        (primeDiagramHom A B η κ q i (algebraMap _ _ x)) =
+        ℓ (Localization.localRingHom _ _ (π.app i).hom (hp i) (algebraMap _ _ x))
+      rw [show primeDiagramHom A B η κ q i (algebraMap _ _ x) =
+        algebraMap _ _ ((η.app i).hom x) from
+        Localization.localRingHom_to_map _ _ (η.app i).hom rfl x]
+      dsimp only [ℓ]
+      rw [Localization.localRingHom_to_map, Localization.localRingHom_to_map]
+      change algebraMap S (Localization.AtPrime q.asIdeal)
+          ((κ.app i).hom ((η.app i).hom x)) =
+        Localization.localRingHom p q.asIdeal (algebraMap R S) rfl
+          (algebraMap R (Localization.AtPrime p) ((π.app i).hom x))
+      rw [Localization.localRingHom_to_map]
+      exact congrArg (algebraMap S (Localization.AtPrime q.asIdeal))
+        (ConcreteCategory.congr_hom (hη i) x)
+    let : Module (colimit Bq : CommRingCat.{u})
+        (colimit Nq : AddCommGrpCat.{max u v}) := act
+    let : Module (colimit Aq : CommRingCat.{u}) (colimit Nq : AddCommGrpCat.{max u v}) :=
+      Module.compHom _ ψ
+    let : Module (Localization.AtPrime p) (LocalizedModule q.asIdeal.primeCompl M) :=
+      Module.compHom _ ℓ
+    apply Module.Flat.semilinearEquiv_iff eA eN
+    intro r x
+    change eN (eN.symm (eB (ψ r) • eN x)) = ℓ (eA r) • eN x
+    rw [eN.apply_symm_apply]
+    exact congrArg (fun b ↦ b • eN x) (DFunLike.congr_fun square r)
+
 
 end Algebra

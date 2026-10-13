@@ -1,0 +1,228 @@
+{
+ "id": "lem-pc-localized-ring-colimit-comparison",
+ "kind": "statement",
+ "title": "Localized ring colimit comparison",
+ "statement": "Let Λ be a nonempty directed preorder, F and L diagrams of commutative rings, and κ a colimit cocone from F to T. Let p be a prime of T, p_i prime ideals of F_i equal to the contractions of p. Suppose specified ring equivalences e_i identify L_i with (F_i)_{p_i}, and the transitions under those equivalences agree on numerator-one elements with the transitions of F. Then there is a ring equivalence e: colim L ≃ T_p whose value on every coprojection of z is the canonical local map induced by κ_i applied to e_i(z). Colimits and localization are [def-weil-pbc-category-colimit] and [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), first paragraph: localized system and its limit; Tag 037D, proof first paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Local fraction maps form a cocone: the numerator transition identity extends uniquely to all fractions because denominators are units.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift a numerator and denominator to a common stage through κ to prove surjectivity. Lift a multiplier outside p and descend the zero cross difference to a later stage to prove injectivity. The resulting bijective ring comparison gives the required ring equivalence and coprojection formula.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 02JO and 037D; read online https://stacks.math.columbia.edu/tag/02JO and https://stacks.math.columbia.edu/tag/037D; detailed fraction argument supplied in Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flatness is preserved by a semilinear equivalence over a ring isomorphism",
+   "results": "Module.Flat.of_linearEquiv, Module.FaithfullyFlat.of_linearEquiv, RingHom.Flat.respectsIso, Module.Flat.of_shrink, Module.Flat.shrink, RingHom.FaithfullyFlat.respectsIso, Module.Flat.of_ulift, Module.Flat.trans",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, RingEquiv",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of rings localized at contractions of a prime is the localization of the colimit",
+   "results": "Localization.AtPrime.mapPiEvalRingHom, IsLocalization.isLocalization_isLocalization_atPrime_isLocalization, Localization.AtPrime.mapPiEvalRingHom_comp_algebraMap, IsLocalization.isLocalization_atPrime_localization_atPrime, Localization.AtPrime.mapPiEvalRingHom_algebraMap_apply, instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization, PrimeSpectrum.piLocalizationToMaximal_comp_toPiLocalization, PrimeSpectrum.mapPiLocalization",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*colimit|colimit.*localiz",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of modules with varying scalar rings commute with localization at compatible prime ideals",
+   "results": "IsLocalizedModule.AtPrime, ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor, ModuleCat.FilteredColimits.colimitCoconeIsColimit, LocalizedModule.AtPrime, ModuleCat.FilteredColimits.colimitCocone, ModuleCat.FilteredColimits.colimitModule, IsLocalizedModule.map_linearMap_of_isLocalization, ModuleCat.FilteredColimits.colimit",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, CategoryTheory.Limits.colimit",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization commutes with filtered colimits of rings and semilinear modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport scalar multiplication through additive equivalence and ring equivalence module structure",
+   "results": "AddEquiv.module, Equiv.module, Equiv.linearEquiv, Equiv.smul, Equiv.distribSMul, Equiv.smul_def, Shrink.instModule, Equiv.moduleIsTorsionFree",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, RingEquiv",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat modules are invariant under a semilinear additive equivalence with respect to an isomorphism of scalar rings",
+   "results": "Module.Flat.of_linearEquiv, Module.FaithfullyFlat.of_linearEquiv, Module.Flat.of_shrink, Module.Flat.shrink, RingHom.Flat.respectsIso, Module.Flat.of_ulift, RingHom.FaithfullyFlat.respectsIso, Module.Flat.ulift",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, IsColimit",
+   "results": "loogle: unknown identifier 'IsColimit'",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "LocalizedModule.*colimit|colimit.*LocalizedModule",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Localization.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a filtered diagram of commutative rings with a supplied colimit cocone, localizing each ring at the inverse image of a prime gives a canonical ring equivalence between its colimit and the localization of the cocone point",
+   "results": "IsLocalization.localizationLocalizationAtPrimeIsoLocalization, PrimeSpectrum.piLocalizationToMaximal_comp_toPiLocalization, IsLocalization.isLocalization_isLocalization_atPrime_isLocalization, Localization.AtPrime.mapPiEvalRingHom, Localization.AtPrime.mapPiEvalRingHom_comp_algebraMap, IsLocalization.isLocalization_atPrime_localization_atPrime, PrimeSpectrum.piLocalizationToMaximalEquiv, LocalSubring.ofPrimeEquiv",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of additive groups with semilinear module transition maps over a varying filtered diagram of rings commutes with a supplied colimit cocone",
+   "results": "ModuleCat.FilteredColimits.colimitCocone, ModuleCat.FilteredColimits.colimit_add_mk_eq, ModuleCat.FilteredColimits.M.mk_map, ModuleCat.FilteredColimits.coconeMorphism, ModuleCat.FilteredColimits.colimit_add_mk_eq', ModuleCat.FilteredColimits.colimitCoconeIsColimit, ModuleCat.FilteredColimits.colimitDesc, ModuleCat.FilteredColimits.M",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localRingHom.*colimit|colimit.*localRingHom",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, AddEquiv",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, LinearEquiv",
+   "results": "Module.Flat.of_linearEquiv, Module.Flat.equiv_iff, Submodule.toBaseChange.toLinearEquiv, Submodule.toBaseChange.toLinearEquiv_symm_apply, Submodule.toBaseChange.toLinearEquiv_apply, LinearMap.kerLTensorEquivOfSurjective, LinearMap.tensorKerEquiv, LinearMap.tensorKerEquivOfSurjective_symm_tmul",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LocalizedApproximationColimits",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Flat-model approximation: Tag 02JO (1), first paragraph: localized system and its limit; Tag 037D, proof first paragraph",
+   "via": [
+    "lem-pc-finite-type-approximation-flat-point",
+    "lem-pc-finite-type-approximation-flat-loci",
+    "lem-pc-flat-module-tensor-model",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedRingColimitComparison",
+  "file": "lean/Sheaf/RingTheory/LocalizedRingColimitComparison.lean",
+  "declaration": "Algebra.localizedRingColimitComparison",
+  "statement": "theorem localizedRingColimitComparison\n    {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]\n    {T : Type u} [CommRing T] (F L : Λ ⥤ CommRingCat.{u})\n    (κ : F ⟶ (Functor.const Λ).obj (CommRingCat.of T))\n    (hF : Nonempty (IsColimit (Cocone.mk (CommRingCat.of T) κ)))\n    (p : Ideal T) [p.IsPrime] (pᵢ : ∀ i, Ideal (F.obj i)) [∀ i, (pᵢ i).IsPrime]\n    (hp : ∀ i, pᵢ i = p.comap (κ.app i).hom)\n    (eᵢ : ∀ i, L.obj i ≃+* Localization.AtPrime (pᵢ i))\n    (hm : ∀ (i j : Λ) (f : i ⟶ j) (x : F.obj i),\n      eᵢ j ((L.map f).hom ((eᵢ i).symm (algebraMap _ _ x))) =\n        algebraMap _ _ ((F.map f).hom x)) :\n    ∃ e : (colimit L : CommRingCat.{u}) ≃+* Localization.AtPrime p,\n      ∀ i (z : L.obj i), e ((colimit.ι L i).hom z) =\n        Localization.localRingHom (pᵢ i) p (κ.app i).hom (hp i) (eᵢ i z)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T151139-L-879098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T151139-L-879098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

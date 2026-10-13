@@ -12940,3 +12940,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:11 L: merged deliver/U2/Sheaf.RingTheory.PolynomialSuccessorTorBound (stage 3; reviewer PASS; first push; landing 20261013T151137-L-878528 (interface); batch 20261013T151129; modules 3; new nodes 2)
 - 15:11 L: merged deliver/V1/Sheaf.AlgebraicGeometry.AffineSpectrumComparisonSourceTransport (stage 3; reviewer PASS; first push; landing 20261013T151138-L-878690 (interface); batch 20261013T151129; modules 3; new nodes 2)
 - 15:11 L: merged deliver/V3/Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetCoordinates (stage 3; reviewer PASS; first push; landing 20261013T151138-L-878956 (interface); batch 20261013T151129; modules 5; new nodes 4)
+- 15:11 L: merged deliver/X2/Sheaf.RingTheory.LocalizedApproximationColimits (stage 3; reviewer PASS; first push; landing 20261013T151139-L-879098 (interface); batch 20261013T151129; modules 4; new nodes 3)
