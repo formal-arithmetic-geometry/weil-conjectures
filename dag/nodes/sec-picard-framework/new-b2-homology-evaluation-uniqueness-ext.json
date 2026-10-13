@@ -1,0 +1,134 @@
+{
+ "id": "new-b2-homology-evaluation-uniqueness-ext",
+ "kind": "statement",
+ "title": "Uniqueness from local cycle lifts",
+ "statement": "Let X be a scheme [def-pc-scheme], T and J integer cochain complexes of O_X-modules [def-pc-cochain-complex-modules], n an integer, and e,e' morphisms from H^n(Hom(T,J)) to internal Hom(H^(-n)(T),H^0(J)). Suppose both satisfy the cycle formula [new-b2-homology-evaluation-definitions]. Suppose also that on every open U, for every Hom cocycle φ and T-cycle z, the projected evaluation of their inclusions at the identity slice object admits a lift to J.cycles 0(U). Then e=e'.",
+ "stmt_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DH",
+  "place": "Internal Hom as morphisms after restriction; uniqueness on local homology representatives, implemented by categorical epimorphism cancellation."
+ },
+ "proof": [
+  {
+   "text": "Cancel the epimorphism P.homologyπ n, with P=Hom(T,J), and fix a cycle section φ over U. Regard the two internal-Hom sections as morphisms on the site over U. The overFunctor preserves finite colimits and therefore preserves the epimorphism T.homologyπ (-n). Cancel this restricted epimorphism.",
+   "uses": [
+    "new-b2-homology-evaluation-definitions",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At a slice object V -> U and a T-cycle z on V, restrict φ to V. The assumed lift b makes both cycle formulas equal the homology class of b. Naturality of the homology projection and of e and e' identifies those identity-slice evaluations with the components on V -> U. Extensionality for module morphisms gives the required equality.",
+   "uses": [
+    "new-b2-homology-evaluation-definitions",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V3",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/08DH",
+   "place": "Internal Hom as morphisms after restriction; uniqueness on local homology representatives, implemented by categorical epimorphism cancellation."
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homObjMap.*epi|homObj.*ext|homologyπ.*epi",
+   "results": "Mathlib/CategoryTheory/Functor/FunctorHom.lean; Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+   "date": "2026-10-14",
+   "verdict": "Useful universal properties; no exact match to this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cancel_epi",
+   "results": "CategoryTheory.cancel_epi; CategoryTheory.Limits.PushoutCocone.isColimitOfFactors; imageToKernel_epi_comp",
+   "date": "2026-10-14",
+   "verdict": "Useful universal properties; no exact match to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition by an epimorphism is injective on sections of the sheaf of module morphisms over an open subset",
+   "results": "PresheafOfModules.mono_iff_surjective; PresheafOfModules.injective_of_mono; PresheafOfModules.mono_of_injective; SheafOfModules.GeneratingSections.opEpi_comp; CategoryTheory.Sheaf.mono_of_injective; CategoryTheory.Sheaf.mono_of_isLocallyInjective; PresheafOfModules.instEpiModuleCatCarrierObjOppositeRingCatApp; PresheafOfModules.IsLocallyInjective",
+   "date": "2026-10-14",
+   "verdict": "Useful universal properties; no exact match to this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.cyclesIsKernel",
+   "results": "HomologicalComplex.cyclesIsKernel",
+   "date": "2026-10-14",
+   "verdict": "Useful universal properties; no exact match to this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Hom complex cocycle evaluated on a cycle lies in the kernel of the target differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomologyEvaluationUniqueness",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-b2-homology-evaluation-uniqueness",
+   "place": "Intermediate step of the uniqueness proof.",
+   "via": [
+    "new-b2-homology-evaluation-uniqueness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomologyEvaluationUniquenessExt",
+  "file": "lean/Sheaf/Algebra/Homology/HomologyEvaluationUniquenessExt.lean",
+  "declaration": "CategoryTheory.homologyEvaluation_unique_of_cycle_of_local_lifts",
+  "statement": "theorem homologyEvaluation_unique_of_cycle_of_local_lifts (X : AlgebraicGeometry.Scheme.{u}) (T J : CochainComplex X.Modules ℤ) (n : ℤ) (e e' : (homComplex (R := X.sheaf) T J).homology n ⟶ SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0)) (he : IsHomologyEvaluation X T J n e) (he' : IsHomologyEvaluation X T J n e') (hlift : ∀ (U : X.Opens) (φ : ((homComplex (R := X.sheaf) T J).cycles n).val.obj (op U)) (z : (T.cycles (-n)).val.obj (op U)), ∃ b : (J.cycles 0).val.obj (op U), (J.iCycles 0).val.app (op U) b = ((homologyEvaluationProjection X T J n).val.app (op U) (((homComplex (R := X.sheaf) T J).iCycles n).val.app (op U) φ)).app (op (Over.mk (𝟙 U))) (((T.iCycles (-n)).val.app (op U)) z)) : e = e'",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T190201-L-3223740",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T190201-L-3223740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

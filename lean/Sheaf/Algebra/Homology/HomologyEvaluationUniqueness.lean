@@ -6,6 +6,8 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
+import Sheaf.Algebra.Homology.HomologyEvaluationLocalCycleLift
+import Sheaf.Algebra.Homology.HomologyEvaluationUniquenessExt
 
 /-! # A step in the construction of homology evaluation -/
 
@@ -39,6 +41,8 @@ theorem homologyEvaluation_unique_of_cycle (X : AlgebraicGeometry.Scheme.{u})
     (e e' : (homComplex (R := X.sheaf) T J).homology n ⟶
       SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0))
     (he : IsHomologyEvaluation X T J n e)
-    (he' : IsHomologyEvaluation X T J n e') : e = e' := by sorry
+    (he' : IsHomologyEvaluation X T J n e') : e = e' := by
+  apply homologyEvaluation_unique_of_cycle_of_local_lifts X T J n e e' he he'
+  exact homologyEvaluation_local_cycle_lift X T J n
 
 end CategoryTheory
