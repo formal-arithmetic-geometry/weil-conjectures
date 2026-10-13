@@ -13218,3 +13218,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:02 L: returned deliver/J2/Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate (reviewer RETURN: (reviewer X-1c4fa, head 1c4facdac) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pi)
 
 - 01:08 L: batch 20261013T165635 dependency take-out
+- 17:13 L: returned deliver/R4/Sheaf.AlgebraicGeometry.SelfTorConormalDualChart (reviewer RETURN: (reviewer X-db33c, head db33c9532) 4: `selfTor_conormal_dual_chart_iso` asserts `IsIso` for `dualMap (0 : exteriorSheaf )
