@@ -91,15 +91,16 @@
  ],
  "proof": [
   {
-   "text": "The single structure sheaf is bounded above and flat termwise; compute its derived pullback by the invertible counit and the single-complex comparison, retaining the tensor-pulled source.",
+   "text": "Construct α_t from canonicalSinglePullbackMap followed by the single of the inverse tensor-to-ordinary adjunction comparison. The structure sheaf is invertible, so the existing canonicalSinglePullbackMap invertibility theorem shows α_t is invertible. Define a_t=asIso α_t. No object or map is chosen from mere existence.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback"
+    "lem-pc-canonical-single-pullback-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Evaluate the pinned composition lift counit equation at that single. The termwise single comparison identifies the underived composition with the source restriction isomorphism. Transport along the composite equality.",
+   "text": "Apply the canonical termwise single-map composition equation at the structure sheaf. Precompose both sides with c.inv; the inverse-hom identity cancels c.hom and gives the required coherence. The source restriction is definitionally the stated single-map composite.",
    "uses": [
+    "lem-sc-picard-termwise-single-map-composition",
     "def-sc-picard-termwise-models",
     "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
@@ -107,15 +108,16 @@
   }
  ],
  "proof_deps": [
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-sc-picard-termwise-single-map-composition",
   "def-sc-picard-termwise-models",
-  "lem-pc-flat-complex-derived-pullback",
   "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
-  "by": "agent P2",
+  "by": "agent K3",
   "document": "Stacks Project",
-  "place": "Tags 06YJ, 0D5S and 08DW",
-  "description": "Extracted the indicated part of the existing termwise comparison proof; the categorical combination is proved in Lean."
+  "place": "Tags 06YJ and 0D5S",
+  "description": "Constructed the canonical comparison using the existing invertible-module single theorem; reduced only the map-level composition calculation, for arbitrary modules, to a new node. This is a decomposition, not a net reduction of holes."
  },
  "lean": {
   "existing": false,
@@ -140,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-17429",
-  "group": "P2",
+  "reviewer": "COMPILER",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T140823-L-315528",
+  "landing": "20261013T145121-L-696515",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem and extracted definitions against the originals, coherence statements against their nodes and sources, and proof dependencies against the Lean; all four modules and the sole direct importer compiled cleanly, with permitted axioms only and expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

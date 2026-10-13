@@ -1,0 +1,174 @@
+{
+ "id": "lem-sc-picard-termwise-single-map-composition",
+ "kind": "statement",
+ "title": "Composition equation for canonical termwise maps on arbitrary singles",
+ "statement": "Fix derived categories [def-pc-derived-category] for all schemes [def-pc-scheme]. For maps i:T′→T, t:T→W, t′:T′→W with ht:i;t=t′ and any O_W-module M, let α_t(M) be canonicalSinglePullbackMap [lem-pc-canonical-single-pullback-comparison] followed by the degree-zero single of the inverse adjunction-preserving tensor-to-ordinary pullback comparison. Thus α_t(M):Lt*(M[0])→Q((t_tensor* M)[0]) is a constructed morphism, without any flatness assumption. Let u be the single of tensorPullbackCompositionIso(i,t,t′,ht) [def-pc-tensor-pullback-composition-iso], followed by the inverse singleMapHomologicalComplex comparison for i, and let η_i be picardTermwiseCounit [def-sc-picard-termwise-models]. For the pinned derived composition c [lem-pc-ringed-spaces-derived-pullback-composition], transported along ht, c.hom(M[0]);α_t′(M);Q(u.hom)=Li*(α_t(M));η_i((t_tensor* M)[0]). No invertibility of α is asserted.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-sc-picard-termwise-models",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology; Mathlib derived-functor API",
+  "place": "Tags 06YJ and 0D5S; Functor.leftDerived_fac_app; quotientCompQhIso naturality"
+ },
+ "proof": [
+  {
+   "text": "Expand the constructed termwise single map. Cancel the forward and inverse single images of leftAdjointUniq. The remaining map is the pinned homotopy counit followed by the quotient of singleMapHomologicalComplex.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the defining leftDerivedLift counit factorization of the pinned derived composition at the homotopy single of M. Naturality of the second counit moves the first single comparison through it; the single-complex composition calculation identifies the termwise comparison. Equivalently use canonicalSinglePullbackComposition and cancel the ordinary-to-tensor target comparisons.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-composition",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand picardTermwiseCounit and use naturality of quotientCompQhIso to express the homotopy equality on complexes. Its identity quotient factors cancel. The resulting source restriction is exactly the single of tensorPullbackCompositionIso followed by the inverse single comparison. Transport along ht; proof irrelevance identifies its equality transports. Zero modules and empty schemes use the same categorical equations.",
+   "uses": [
+    "def-sc-picard-termwise-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-canonical-single-pullback-composition",
+  "def-sc-picard-termwise-models",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent K3",
+  "document": "Stacks Project",
+  "place": "Tags 06YJ and 0D5S",
+  "description": "Agent-written complex-coordinate calculation of the defining counit factorization, following the existing canonicalSinglePullbackComposition proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived pullback counit on a single module is compatible with composition of tensor pullbacks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctorIsoCompQ",
+   "results": "Nine hits: the single comparison and its app identities, plus derived exact-functor single comparisons; no pinned tensor counit composition equation.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and composition of derived pullback counits on a single module",
+   "results": "Eight hits about underived sheaf pullback composition and adjunctions, not this pinned derived equation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleMapHomologicalComplex",
+   "results": "Nine Mathlib hits in Additive, HomotopyCategory/SingleFunctors and resolutions. Library search found canonicalSinglePullbackComposition: it ends in the ordinary single, whereas this equation retains the tensor single and complex counit. Blueprint search found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "existing theorem is an ingredient; complex-coordinate transport remains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of derived counit with composition evaluated on a single complex",
+   "results": "Eight hits, including mapDerivedCategoryFactorsh_hom_app and derived adjunction counits. Exact functor API requires exactness and does not give the pinned tensor-pullback equation for arbitrary morphisms.",
+   "date": "2026-10-13",
+   "verdict": "independent second reading: ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerived_fac_app",
+   "results": "Unknown identifier in the search service; the declaration was instead read in the local compiled-version source through canonicalSinglePullbackComposition.",
+   "date": "2026-10-13",
+   "verdict": "search service did not index this declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*composition|composition.*counit",
+   "results": "Eleven generic adjunction hits. Local lean/ search of picardTermwiseCounit and composition identifies canonicalSinglePullbackComposition as the closest proved result, with ordinary rather than tensor single targets.",
+   "date": "2026-10-13",
+   "verdict": "independent second reading: no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardTermwiseSourceCoherence",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Termwise source comparison, composition counit equation (the source-coherence proof, step 2)",
+   "via": [
+    "lem-sc-picard-termwise-source-coherence",
+    "lem-sc-picard-termwise-model-comparison",
+    "lem-sc-picard-connective-model-comparison",
+    "lem-sc-picard-scalar-derived-cycles",
+    "lem-sc-picard-scalar-model-cycles-realization",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardTermwiseSingleMapComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardTermwiseSingleMap_composition",
+  "statement": "theorem picardTermwiseSingleMap_composition\n    {W T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)\n    (ht : i ≫ t = t') (M : W.Modules) :\n    let : (Modules.tensorPullback i).Additive :=\n      (Classical.choose (Modules.exists_tensorPullbackAdjunction i)).left_adjoint_additive\n    let u := (CochainComplex.singleFunctor\n      (SheafOfModules.{v} (moduleRings T'.toRingedSpace)) 0).mapIso\n        ((Modules.tensorPullbackCompositionIso i t t' ht).app M) ≪≫\n      ((HomologicalComplex.singleMapHomologicalComplex\n        (Modules.tensorPullback i) (.up ℤ) 0).app ((Modules.tensorPullback t).obj M)).symm\n    let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) i t ≪≫\n        eqToIso (congrArg (fun g : T' ⟶ W ↦ derivedPullback g) ht)\n    c.hom.app ((DerivedCategory.singleFunctor\n      (SheafOfModules.{v} (moduleRings W.toRingedSpace)) 0).obj M) ≫\n        picardTermwiseSingleMap t' M ≫ DerivedCategory.Q.map u.hom =\n      (derivedPullback i).map (picardTermwiseSingleMap t M) ≫\n        (picardTermwiseCounit i).app ((CochainComplex.singleFunctor\n          (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 0).obj\n            ((Modules.tensorPullback t).obj M))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T145121-L-696515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T145121-L-696515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
