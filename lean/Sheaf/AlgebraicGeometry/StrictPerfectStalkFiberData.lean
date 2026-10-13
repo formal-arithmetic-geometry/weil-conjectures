@@ -11,10 +11,9 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackModuleModel
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.LocalStrictPerfectStalkProjectiveModel
+import Sheaf.AlgebraicGeometry.StalkFreeResidueCohomologyComparison
+import Mathlib.RingTheory.LocalRing.Module
 
 /-! # Strictly perfect stalks and derived residue cohomology
 
@@ -46,9 +45,11 @@ Proof:
    preserved because stalks preserve zero objects. This gives hK.
 3. The finite-free representative chosen by hK is bounded above, hence K-flat. Termwise
    extension along O_X,x -> kappa(x) computes its derived residue tensor product.
-   The residue-field point factors through V and through Spec O_X,x. Associativity of
-   derived pullback and the affine module/sheaf correspondence identify its degree-i
-   homology with derivedFiberCohomology X E i x. This identification is linear over
+   Resolve G by a K-flat sheaf complex. Its stalk is K-flat, and the tensor-pullback
+   stalk formula identifies its residue pullback with residue extension of its stalk.
+   Sections on the one-point residue spectrum are exact. Derived invariance of
+   residue tensor therefore identifies the chosen model's degree-i homology with
+   derivedFiberCohomology X E i x. This identification is linear over
    kappa(x) = IsLocalRing.ResidueField O_X,x. Transport hfin across the linear
    isomorphism, and use invariance of finrank to obtain the displayed equality.
 The computation concerns every bounded-above finite-free representative of the same
@@ -85,7 +86,31 @@ theorem strictPerfect_stalk_fiberData
         Module.finrank (IsLocalRing.ResidueField (X.presheaf.stalk x))
           ((((ModuleCat.extendScalars
             (IsLocalRing.residue (X.presheaf.stalk x))).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) := by sorry
+            (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) := by
+  classical
+  obtain ⟨L, a, b, hbound, hterms, eL⟩ :=
+    exists_localStrictPerfect_stalk_projective_model X E x G eG hlocal
+  have hb : L.IsStrictlyLE b := (L.isStrictlyLE_iff b).2
+    (fun j hj ↦ hbound j (Or.inr hj))
+  have hfree (j : ℤ) : Module.Free (X.presheaf.stalk x) (L.X j) := by
+    have := (hterms j).1
+    have := (hterms j).2
+    exact Module.free_of_flat_of_isLocalRing
+  have hK : DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj
+      (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj G)) :=
+    ⟨L, b, hb, fun j ↦ ⟨hfree j, (hterms j).1⟩, eL⟩
+  obtain ⟨c, hc, hcterms, ⟨ec⟩⟩ := Classical.choose_spec hK
+  have hcomparison (i : ℤ) :=
+    nonempty_stalkFree_residueCohomology_linearEquiv X E x G eG
+      (Classical.choose hK) c hc (fun j ↦ (hcterms j).1) ec i
+  refine ⟨hK, ?_, ?_⟩
+  · intro i
+    have : Module.Finite (IsLocalRing.ResidueField (X.presheaf.stalk x))
+        (derivedFiberCohomology X E i x) := hfin i
+    exact Module.Finite.equiv (Classical.choice (hcomparison i))
+  · intro i
+    exact (Classical.choice (hcomparison i)).finrank_eq
 
 end
 end AlgebraicGeometry.Scheme

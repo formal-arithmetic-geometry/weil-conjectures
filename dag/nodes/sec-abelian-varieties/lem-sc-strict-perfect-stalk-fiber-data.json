@@ -17,47 +17,42 @@
  ],
  "proof": [
   {
-   "text": "Choose the strictly perfect representative P on V from hlocal. Restriction to V\n   followed by its stalk at x agrees with taking the stalk on X, since neighbourhoods\n   contained in V are cofinal. Stalks are exact, hence preserve quasi-isomorphisms and\n   derived isomorphisms. Apply this to eG and the comparison of P with E restricted to V.",
+   "text": "Apply exists_localStrictPerfect_stalk_projective_model to eG and hlocal, obtaining L, bounds a,b, finite projective terms, and the derived stalk comparison. The upper bound supplies L.IsStrictlyLE b via isStrictlyLE_iff.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-module-stalk-functor",
-    "lem-weil-pbc-module-stalk-exact"
+    "lem-sc-local-strict-perfect-stalk-projective-model"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The stalk of a rank-m free sheaf is the free stalk module of rank m. Apply stalks to\n   the retractions in IsStrictlyPerfect: the terms of the resulting bounded complex\n   are finite projective over the local ring O_X,x, hence finite free. Its bounds are\n   preserved because stalks preserve zero objects. This gives hK.",
+   "text": "For each degree use projective-implies-flat (Mathlib Module.Flat.of_projective) and finite-flat local freeness (Module.free_of_flat_of_isLocalRing). Assemble L, its upper bound, finite-free terms and derived comparison into hK : IsPseudoCoherent Q(G_x).",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-ring-pseudo-coherent-complex"
+    "lem-weil-pbc-finite-flat-local-free",
+    "def-pc-ring-pseudo-coherent-complex",
+    "def-weil-pbc-projective-module"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The finite-free representative chosen by hK is bounded above, hence K-flat. Termwise\n   extension along O_X,x -> kappa(x) computes its derived residue tensor product.\n   The residue-field point factors through V and through Spec O_X,x. Associativity of\n   derived pullback and the affine module/sheaf correspondence identify its degree-i\n   homology with derivedFiberCohomology X E i x. This identification is linear over\n   kappa(x) = IsLocalRing.ResidueField O_X,x. Transport hfin across the linear\n   isomorphism, and use invariance of finrank to obtain the displayed equality.\nThe computation concerns every bounded-above finite-free representative of the same\nderived object: K-flatness makes residue cohomology invariant under its derived comparison.\nIt therefore applies to Classical.choose hK. No rank-minimal model is constructed here.",
+   "text": "Destructure Classical.choose_spec hK to recover the upper bound, free terms and derived comparison of Classical.choose hK. Apply the bounded-above free residue-cohomology comparison to this chosen complex in each degree. Install hfin i over the definitionally equal ring residue field and transport it by Module.Finite.equiv. LinearEquiv.finrank_eq gives the Betti equality by unfolding its definition. Return hK with both families of conclusions.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-affine-derived-pullback-module-model",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-sc-stalk-free-residue-cohomology-comparison",
     "def-sc-derived-fiber-betti"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "def-pc-module-stalk-functor",
-  "lem-weil-pbc-module-stalk-exact",
+  "lem-sc-local-strict-perfect-stalk-projective-model",
+  "lem-weil-pbc-finite-flat-local-free",
   "def-pc-ring-pseudo-coherent-complex",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-affine-derived-pullback-module-model",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-weil-pbc-projective-module",
+  "lem-sc-stalk-free-residue-cohomology-comparison",
   "def-sc-derived-fiber-betti"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BCD, local-ring paragraph; Tags 08EB, 06YB and 01AG, stalk and residue comparison; H2 expands the scheme/stalk interface in the existing proof plan"
+  "place": "Tag 0BCD local-ring argument; C4 decomposes local projective stalk construction and residue comparison, and proves local freeness and finite-dimensional transport in Lean"
  },
  "mathlib_searches": [
   {
@@ -156,9 +151,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261013T015556-L-3021423",
+  "landing": "20261013T032956-L-3674228",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
