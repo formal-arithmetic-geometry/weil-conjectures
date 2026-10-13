@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-power-series-depth-two-base-change",
+ "kind": "statement",
+ "title": "Finite depth-two power-series extension is a base change from the coefficient ring",
+ "statement": "Let $B$ be a Noetherian local ring of depth at least two [def-weil-pbc-noetherian-ring, def-weil-pbc-depth], $n>0$, and $T=\\operatorname{Spec}(B[[X_1,\\ldots,X_n]])$ [def-weil-affine-spectrum, def-weil-pbc-multivariate-power-series]. Let $V\\subsetneq T$ be open [def-weil-pbc-scheme-conventions], containing every prime whose contraction is not the maximal ideal of $B$. Let $p:E\\to T$ be finite [def-weil-finite-integral-morphism], etale on $V$ [def-weil-etale-morphism], with every stalk above $T\\setminus V$ of depth at least two. There exist a finite morphism $g:Y\\to\\operatorname{Spec}B$ and $a:E\\to Y$ forming a cartesian square with $p$ and the constants-induced $T\\to\\operatorname{Spec}B$ [def-pc-fibre-product]. No etaleness of $g$ or $p$, nor any point of $V$ above the closed point, is asserted or assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYA, construction of Psi before final descent; Tags 0EY9 and 0EY6(2),(a),(b)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-multivariate-power-series",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Let U be the punctured spectrum of B, and R its power-series ring.\nThe zero section intersects V in U: haway includes U, and a proper open of\nSpec R cannot contain its closed point. Restrict p to this zero section and\nextend that finite etale U-scheme by the canonical depth-two construction\n0EY6. Write Y for the finite B-scheme obtained. Over the inverse image of U,\n0EY9 identifies p with the pullback of Y: both restrict to the same cover of\nU along the zero section. By flat base change 0EY6(a) and change of opens\n0EY6(b), the canonical extension of this restriction is the base change of Y.\nThe supplied p is itself the canonical extension, by its finite and boundary\ndepth conditions and uniqueness 0EY6(2). The resulting isomorphism with the\nbase change gives a projection a and the asserted cartesian square. The empty\ncover yields Y empty. Etaleness of Y and any point over the closed point of B\nare not used in this identification.",
+   "uses": [
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-depth-two-finite-extension-uniqueness",
+    "lem-sbc-mv-power-series-constants-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-depth-two-finite-extension",
+  "lem-sbc-depth-two-finite-extension-uniqueness",
+  "lem-sbc-mv-power-series-constants-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 0EYA, construction of Psi before final descent; Tags 0EY9 and 0EY6(2),(a),(b); Lean assembly by W4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite depth two extension of a finite etale cover of a punctured power series open is a base change from the coefficient ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite algebra over power series ring canonical depth two extension is tensor product with base ring",
+   "results": "8 hits: Algebra.Smooth.exists_subalgebra_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Algebra.Smooth.exists_subalgebra_fg, Algebra.Smooth.exists_finiteType, Algebra.FiniteType.baseChange, Algebra.EssFiniteType.baseChange, PowerSeries.fg_iff_of_isPrime, Algebra.FinitePresentation.baseChange",
+   "date": "2026-10-13",
+   "verdict": "no exact match; ingredients used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "power.series.*(etale|tensor)|depth.*base.change",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match; ingredients used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesFiniteEtaleExtension",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two paragraph of sbc-thm-spreading-finite-etale-galois: purity on the power-series completion and the finite depth-two extension of the punctured cover. Finite depth-two power-series extension is a base change from the coefficient ring",
+   "via": [
+    "lem-sbc-power-series-finite-etale-extension",
+    "lem-sbc-power-series-test-finite-extension-flat",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesDepthTwoBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesDepthTwoBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_base_of_power_series_depth_two",
+  "statement": "theorem exists_finite_base_of_power_series_depth_two\n    (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := B) B)\n    (n : ℕ) (hn : 0 < n)\n    (V : (Spec (.of (MvPowerSeries (Fin n) B))).Opens) (hproper : V ≠ ⊤)\n    (haway : ∀ v, (Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n)))) v ≠\n      IsLocalRing.closedPoint B → v ∈ V)\n    {E : Scheme.{u}} (p : E ⟶ Spec (.of (MvPowerSeries (Fin n) B)))\n    [IsFinite p] [Etale (p ∣_ V)]\n    (hboundary : ∀ z : E, p z ∉ V →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z)) :\n    ∃ (Y : Scheme.{u}) (g : Y ⟶ Spec (.of B)) (a : E ⟶ Y),\n      IsFinite g ∧ IsPullback a p g\n        (Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n))))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T100216-L-2501588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T100216-L-2501588",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

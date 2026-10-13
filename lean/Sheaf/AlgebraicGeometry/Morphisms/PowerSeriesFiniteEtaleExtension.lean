@@ -10,8 +10,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
+import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.RingTheory.MvPowerSeriesFlat
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesDepthTwoBaseChange
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleDescentNearClosedPoint
 
 /-!
 # Extending finite etale covers of a power-series open
@@ -64,6 +68,62 @@ theorem exists_finite_etale_extension_of_power_series_open
       IsFinite p ∧ Etale p ∧
       (∀ z : E, p z ∉ V →
         (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z)) ∧
-      ∃ e : (p ⁻¹ᵁ V).toScheme ≅ X, e.hom ≫ f = p ∣_ V := by sorry
+      ∃ e : (p ⁻¹ᵁ V).toScheme ≅ X, e.hom ≫ f = p ∣_ V := by
+  let t := Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n) (R := B)))
+  have : Flat t := Flat.SpecMap_iff.mpr (MvPowerSeries.constants_flat B n)
+  have hboundary : ∀ y : Spec (.of (MvPowerSeries (Fin n) B)), y ∉ V →
+      (2 : ℕ∞) ≤ IsLocalRing.depth
+        (R := (Spec (.of (MvPowerSeries (Fin n) B))).presheaf.stalk y)
+        ((Spec (.of (MvPowerSeries (Fin n) B))).presheaf.stalk y) := by
+    intro y hy
+    have hty : t y = IsLocalRing.closedPoint B := by
+      by_contra hne
+      exact hy (haway y hne)
+    have hbase : (2 : ℕ∞) ≤ IsLocalRing.depth
+        (R := (Spec (.of B)).presheaf.stalk (t y))
+        ((Spec (.of B)).presheaf.stalk (t y)) := by
+      rw [hty]
+      let e : B ≃+* (Spec (.of B)).presheaf.stalk (IsLocalRing.closedPoint B) :=
+        (IsLocalization.atUnits B (IsLocalRing.maximalIdeal B).primeCompl
+          (S := Localization.AtPrime (IsLocalRing.maximalIdeal B)) (by
+            intro x hx
+            change IsUnit x
+            simpa only [Ideal.mem_primeCompl_iff, IsLocalRing.mem_maximalIdeal,
+              mem_nonunits_iff, not_not] using hx)).toRingEquiv.trans
+          (StructureSheaf.stalkIso B (IsLocalRing.closedPoint B)).toRingEquiv
+      let : IsLocalHom e.toRingHom := IsLocalHom.of_surjective _ e.surjective
+      obtain ⟨_, hlocal, _, hedepth⟩ :=
+        IsLocalRing.depth_eq_add_of_flat_local e.toRingHom
+          (RingHom.Flat.of_bijective e.bijective)
+      rw [hedepth]
+      exact hdepth.trans le_self_add
+    obtain ⟨_, hlocal, _, hd⟩ :=
+      IsLocalRing.depth_eq_add_of_flat_local (t.stalkMap y).hom (Flat.stalkMap t y)
+    rw [hd]
+    exact hbase.trans le_self_add
+  obtain ⟨E, p, hp, hE, e, he⟩ := exists_finite_extension_of_depth_two V hboundary f
+  have : IsFinite p := hp
+  have : Etale (p ∣_ V) := by
+    rw [← he]
+    infer_instance
+  have hpet : Etale p := by
+    by_cases hV : V = ⊤
+    · apply IsZariskiLocalAtTarget.of_iSup_eq_top (P := @Etale)
+        (fun _ : Unit ↦ V) (by simp [hV])
+      exact fun _ ↦ inferInstance
+    · obtain ⟨Y, g, a, hg, H⟩ :=
+        exists_finite_base_of_power_series_depth_two B hdepth n hn V hV haway p hE
+      have : IsFinite g := hg
+      obtain ⟨v, hv, hideal⟩ := hgeneric
+      have hclosed : t v = IsLocalRing.closedPoint B := by
+        apply PrimeSpectrum.ext
+        change v.asIdeal.comap (MvPowerSeries.C (σ := Fin n)) =
+          IsLocalRing.maximalIdeal B
+        rw [hideal]
+        exact Ideal.comap_map_eq_self_of_isMaximal _ (hideal ▸ v.isPrime.ne_top)
+      have : Etale g :=
+        etale_of_flat_base_change_near_closed_point B g t a p H V v hv hclosed
+      exact MorphismProperty.of_isPullback (P := @Etale) H inferInstance
+  exact ⟨E, p, hp, hpet, hE, e, he⟩
 
 end AlgebraicGeometry.Scheme
