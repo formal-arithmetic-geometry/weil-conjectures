@@ -16,25 +16,38 @@
  },
  "proof": [
   {
-   "text": "Use scalar reverse maps on affine sections, transport through the comparison square, pass to inverse limits, and reflect zero through the closed-immersion completion equivalence.",
+   "text": "At fixed e,n, regard alpha_n as a map of coherent modules. Apply coherentMap_reduction_torsion_coker with reduction ideal K and annihilating ideal K. The hypothesis hα n supplies both required annihilation conditions, giving K^(2t) annihilation of its reduction modulo K^(e+1).",
    "uses": [
-    "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal",
-    "lem-weil-pbc-formal-systems-annihilated-by-power",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+    "lem-weil-pbc-coherent-map-reduction-torsion-coker"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate σ and θ at e,n. The comparison-square equation gives cokernel.mapIso. Tensor this isomorphism on the left by the ideal-power module. Multiplication naturality gives an isomorphism of arrows via Arrow.isoMk. Mathlib Limits.im.mapIso identifies their images; IsZero.of_iso transfers the ideal-product bound. This is implemented directly in the target proof, with no duplicated epimorphism helper.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The coherent terms of delta_e are killed by K^(e+1), by the defining adic conditions of N and the completion of H. Apply completion_thickening_cokernel_reflection with q=e+1, s=2t, and hthick at e+1 to the bounds from the preceding step. Rewrite 2*(2*t)=4*t.",
+   "uses": [
+    "lem-weil-pbc-completion-thickening-cokernel-reflection",
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal",
-  "lem-weil-pbc-formal-systems-annihilated-by-power",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence"
+  "lem-weil-pbc-coherent-map-reduction-torsion-coker",
+  "lem-weil-pbc-completion-thickening-cokernel-reflection",
+  "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "U3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tags 088A and 0888",
-  "note": "Strict conjunct split."
+  "place": "Tag 088A, successive K^(2t) and K^(4t) bounds; Tag 0888, reduction argument",
+  "note": "Cokernel-only route: use the existing proved quotient reduction bound, write the isomorphism transport in Lean, and isolate fixed-thickening reflection as one generic lemma. Repair of returned delivery: removed duplicate private product_zero_of_epi; transport now uses Mathlib Arrow.isoMk, Limits.im.mapIso and IsZero.of_iso directly."
  },
  "mathlib_searches": [
   {
@@ -108,12 +121,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T231634-L-1961922",
+  "landing": "20261013T024050-L-3339689",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

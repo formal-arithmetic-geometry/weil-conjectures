@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-completion-thickening-cokernel-reflection",
+ "kind": "lemma",
+ "title": "Completion reflects cokernel torsion on a fixed closed thickening",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], let $I,K$ be quasi-coherent ideal sheaves [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme], and let $q,s\\geq1$. Assume for every Noetherian instance on $Z=V(K^q)$ that completion of coherent modules on $Z$ with respect to $I\\mathcal O_Z$ [def-nagata-extended-ideal, def-weil-pbc-coherent-formal-module] is an equivalence. Let $F,G$ be coherent modules and $a:F\\to G$ a morphism, with $K^qF=K^qG=0$. If for every $n\\geq0$ the ordinary cokernel of $F/I^{n+1}F\\to G/I^{n+1}G$ is annihilated by $K^s$, then the ordinary cokernel of $a$ is annihilated by $K^{2s}$. All cokernels and ideal products are in the ambient category of sheaf modules.",
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "def-nagata-extended-ideal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), second use of Remark 0888; Tag 087T identifies coherent modules on a closed thickening; proof expanded using right exactness for the cokernel alone"
+ },
+ "proof": [
+  {
+   "text": "Descend F,G and a through the closed-immersion equivalence for Z=V(K^q). The hypotheses hF,hG provide support; full faithfulness descends the map. Its natural completion comparison and closed-pushforward quotient comparison identify the reductions of a upstairs and downstairs, including the action of the extended ideal K.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let Q be the coherent cokernel of the descended map. Completion is an equivalence and thus preserves cokernels. The canonical formal cokernel is termwise cokernel, so the reduced cokernel bounds imply every component of Q completion is killed by the extended ideal K^s. On affine opens, completion of finite modules is naturally tensoring with the completed ring and is exact. Therefore completion carries the image of the ideal action K^s tensor Q to Q to the corresponding completed image. That image is zero at all formal levels by the preceding bound. The coherent ideal product consequently has zero completion.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-coherent-formal-cokernel-canonical",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completion equivalence on Z reflects the zero coherent ideal product. Closed pushforward and its ideal-power comparison identify this vanishing with K^s coker(a)=0 on X. The power inclusion K^(2s) into K^s, supplied by formalModuleQuotient_factor at the identity of coker(a), then gives K^(2s) coker(a)=0.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
+    "lem-weil-pbc-formal-module-ideal-power-factor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-formal-cokernel-canonical",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-formal-module-ideal-power-factor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, reflection after the first reduction bound; Tag 0888",
+  "note": "Fixed-map cokernel-only specialization of the reflection step, expanded through exact completion and the ideal-action image."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Annihilation of cokernel of coherent sheaf morphism reflected by completion equivalence on a closed subscheme",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_π, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit. No exact fixed-thickening coherent-map reflection result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.cokernel.mapIso",
+   "results": "3 hits: CategoryTheory.Limits.cokernel.mapIso, CategoryTheory.Limits.cokernel.mapIso_hom, CategoryTheory.Limits.cokernel.mapIso_inv. No exact fixed-thickening coherent-map reflection result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*annihilat|annihilat.*completion",
+   "results": "0 hits: . No exact fixed-thickening coherent-map reflection result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion equivalence reflects ideal annihilation of cokernels of coherent module maps on a closed subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_torsion_cokernel",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 088A: reflect the completed K^(2t) cokernel estimate on the fixed closed thickening to obtain K^(4t)",
+   "via": [
+    "lem-weil-pbc-devissage-second-adic-system-torsion-cokernel",
+    "lem-weil-pbc-devissage-second-adic-system-core",
+    "lem-weil-pbc-devissage-second-adic-system",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompletionThickeningCokernelReflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletionThickeningCokernelReflection.lean",
+  "declaration": "AlgebraicGeometry.completion_thickening_cokernel_reflection",
+  "statement": "theorem completion_thickening_cokernel_reflection\n    {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)\n    (q : ℕ) (hq : 1 ≤ q)\n    (hcomplete : ∀ hZ : IsNoetherian (K ^ q).subscheme,\n      Functor.IsEquivalence\n        (@completion ((K ^ q).subscheme) hZ (I.comap (K ^ q).subschemeι)))\n    (F G : CoherentModules X) (a : F ⟶ G)\n    (hF : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι q).2\n      F.obj))\n    (hG : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι q).2\n      G.obj))\n    (s : ℕ) (hs : 1 ≤ s)\n    (hred : ∀ n : ℕ,\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι s).2\n        (cokernel (formalModuleQuotientMap I a.hom (Nat.le_refl (n + 1)))))) :\n    IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (2 * s)).2\n      (cokernel a.hom))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T024050-L-3339689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T024050-L-3339689",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
