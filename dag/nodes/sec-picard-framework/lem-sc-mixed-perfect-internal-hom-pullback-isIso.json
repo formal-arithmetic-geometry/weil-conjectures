@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-mixed-perfect-internal-hom-pullback-isIso",
+ "kind": "statement",
+ "title": "Perfect evaluation-mate internal Hom pullback without global scalars",
+ "statement": "Let $g:T\\to X$ be a scheme morphism [def-pc-scheme], let $M,N\\in D(\\mathcal O_X)$ [def-pc-derived-category], and assume $M$ perfect [def-pc-perfect-complex]. The canonical evaluation-mate arrow $Lg^*R\\mathcal Hom_X(M,N)\\to R\\mathcal Hom_T(Lg^*M,Lg^*N)$ is invertible. The map transposes pullback of evaluation under [def-pc-canonical-derived-tensor-hom-bijection], preceded by the inverse tensor comparison [lem-sc-mixed-hom-tensor-pullback-iso]. This is a theorem solely in sheaf derived categories and does not require a module-category localization in the same universe.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08I3 and Example 0FPC; also perfect.tex, Tag 0AA7, case (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "proof": [
+  {
+   "text": "locally resolve M by a bounded complex of finite projective modules. The\ncanonical tensor-Hom equivalence computes evaluation on this representative.\nRHom(M,N) is N tensored with the finite-projective dual of M, even for unbounded\nN. Termwise pullback preserves finite-projective duals and their evaluation.\nThe canonical tensor pullback comparison, normalized to the shared derived\ncounit, identifies pullback of this tensor with tensor of the pulled-back factors.\nConsequently the displayed adjunct is the finite-projective tensor-Hom\nisomorphism on every such neighbourhood. Compatibility with restriction and\ncohomology shows it is globally invertible. Equivalently, transport the perfect\ndual's exact evaluation/coevaluation pairing through strong monoidal pullback;\nthe triangle identities identify its adjunct with this map. Applying the\ninjective tensor-Hom equivalence checks the equality: both evaluations are\npullback of evaluation preceded by the inverse canonical tensor comparison.\nFor M=0 or an empty source the map is the unique isomorphism between zero objects.",
+   "uses": [
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-mixed-hom-tensor-pullback-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J1",
+  "date": "2026-10-13",
+  "note": "Specialized from the cited Stacks argument; source read online because the local tex is unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine derived sections intertwine scalar extension adjunction and the sheaf base change mate",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of global derived Hom out of a perfect complex under flat affine base change",
+   "results": "8 hits, Ext and exact-functor maps; no exact derived sheaf comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*Tor|Tor.*flat|flat.*Tor",
+   "results": "25 unrelated Mathlib hits; direct project reads found TorSymmetry and the equal-universe affine comparison, but no independent-universe comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor preserves dualizable object internal hom evaluation mate isomorphism",
+   "results": "Found rigid mate evaluation identities, no derived sheaf comparison.",
+   "date": "2026-10-13",
+   "verdict": "independent second reading: no exact replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.rightAdjointUniq",
+   "results": "The service could not resolve this identifier; no hits.",
+   "date": "2026-10-13",
+   "verdict": "independent second reading: no exact replacement"
+  },
+  {
+   "tool": "grep",
+   "query": "monoidal_adjunct_isIso; internalHom.*pullback",
+   "results": "Found PerfectInternalHomPullbackIsIso and its generic private helper in repository sources. The public theorem requires equal localization universes, and the cached theorem still uses sorry and does not expose the newer private helper. No duplicate helper was written.",
+   "date": "2026-10-13",
+   "verdict": "independent second reading: no exact replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatAffineGlobalHomComparison",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 case (1), flat affine global Hom comparison: Perfect evaluation-mate internal Hom pullback without global scalars",
+   "via": [
+    "lem-sc-flat-affine-global-hom-comparison",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedPerfectInternalHomPullbackIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedPerfectInternalHomPullbackIsIso.lean",
+  "declaration": "AlgebraicGeometry.mixedPerfect_internalHom_pullback_isIso",
+  "statement": "theorem mixedPerfect_internalHom_pullback_isIso\n    {T X : Scheme.{u}} (g : T ⟶ X)\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (M N : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M) :\n    IsIso\n      (((schemeDerivedTensorHomEquiv T)\n        ((derivedPullback g).obj\n          ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op M, N)))\n        ((derivedPullback g).obj M) ((derivedPullback g).obj N)).symm\n        ((mixedHomTensorPullbackIso g).inv.app\n            ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op M, N), M) ≫\n          (derivedPullback g).map\n            ((schemeDerivedTensorHomEquiv X)\n              ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op M, N))\n              M N (𝟙 _))))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100009-L-2463735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100009-L-2463735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

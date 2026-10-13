@@ -10,7 +10,14 @@ public import Sheaf.AlgebraicGeometry.MixedHomTensorPullbackIso
 public import Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
 public import Sheaf.AlgebraicGeometry.MixedGlobalExtension
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Sheaf.AlgebraicGeometry.AffineMorphismHomOutOfPerfect
+import all Sheaf.AlgebraicGeometry.AffineMorphismHomOutOfPerfect
+import Sheaf.AlgebraicGeometry.FlatPullbackTorIndependent
+import Sheaf.AlgebraicGeometry.MixedAffineSectionsBaseChangeMate
+import Sheaf.AlgebraicGeometry.MixedPerfectInternalHomPullbackIsIso
+import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
+import Sheaf.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
 
 /-! # Scalar-extension comparison for global Hom over arbitrary affine bases
 Source: Stacks Project, perfect.tex, Tag 0AA7.
@@ -94,6 +101,57 @@ theorem mixedAffineGlobalHomBaseChangeMap_isIso
     [∀ U : X.Opens,
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (M N : schemeDerivedQCohCategory X) (hM : Scheme.IsPerfect X M.obj) :
-    IsIso (mixedAffineGlobalHomBaseChangeMap f g M.obj N.obj) := by sorry
+    IsIso (mixedAffineGlobalHomBaseChangeMap f g M.obj N.obj) := by
+  classical
+  let H := (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op M.obj, N.obj)
+  let L := (derivedInternalHom (Opens.grothendieckTopology (pullback f g : Scheme.{u}))
+    (pullback f g).sheaf).obj
+      (op ((derivedPullback (pullback.fst f g)).obj M.obj),
+        (derivedPullback (pullback.fst f g)).obj N.obj)
+  let θ : (derivedPullback (pullback.fst f g)).obj H ⟶ L :=
+    ((schemeDerivedTensorHomEquiv (pullback f g))
+      ((derivedPullback (pullback.fst f g)).obj H)
+      ((derivedPullback (pullback.fst f g)).obj M.obj)
+      ((derivedPullback (pullback.fst f g)).obj N.obj)).symm
+      ((mixedHomTensorPullbackIso (pullback.fst f g)).inv.app (H, M.obj) ≫
+        (derivedPullback (pullback.fst f g)).map
+          ((schemeDerivedTensorHomEquiv X) H M.obj N.obj (𝟙 _)))
+  have hθ : IsIso θ :=
+    mixedPerfect_internalHom_pullback_isIso (pullback.fst f g) M.obj N.obj hM
+  have hH : schemeDerivedQCohProperty X H :=
+    rhom_supported_quasiCoherent_perfect_part X M.obj N.obj N.property hM
+  have hpush : schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj H) :=
+    schemeDerivedDirectImage_preserves_QCoh f H hH
+  obtain ⟨adj, s, adj', hadj, _, _, hadj'⟩ := scheme_derivedInternalHom_adjunction X
+  obtain ⟨D, _, _, _, hDperfect, comparison, _, hcompN, _, _⟩ :=
+    perfect_rhom_tensor_comparison X M N hM adj hadj adj' hadj'
+  have : IsIso (comparison N) := hcompN
+  let e : D.obj ⊗ N.obj ≅ H := s D.obj N.obj ≪≫ asIso (comparison N)
+  have hTor := flat_pullback_torIndependent f g
+  have hbc := torIndependent_perfect_tensor_baseChange f g hTor
+    D.obj N.obj hDperfect N.property
+  have hnatural := baseChangeMap_naturality f (pullback.snd f g) g
+    (pullback.fst f g) pullback.condition e.hom
+  have : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
+      pullback.condition (D.obj ⊗ N.obj)) := hbc
+  have hhom : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
+      (pullback.fst f g) pullback.condition H) := by
+    have : IsIso ((derivedPullback g).map ((schemeDerivedDirectImage f).map e.hom) ≫
+        schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
+          pullback.condition H) := by
+      rw [hnatural]
+      infer_instance
+    exact IsIso.of_isIso_comp_left
+      ((derivedPullback g).map ((schemeDerivedDirectImage f).map e.hom)) _
+  obtain ⟨a, d, hmate⟩ := exists_mixedAffineSectionsBaseChangeMate f g H hpush
+  let m := (schemeHomPullbackAdjunction (pullback.fst f g)).homEquiv H L θ
+  have hm := hmate L m
+  have htranspose :
+      ((schemeHomPullbackAdjunction (pullback.fst f g)).homEquiv H L).symm m = θ :=
+    Equiv.symm_apply_apply _ θ
+  rw [htranspose] at hm
+  change mixedAffineGlobalHomBaseChangeMap f g M.obj N.obj = _ at hm
+  rw [hm]
+  infer_instance
 
 end AlgebraicGeometry

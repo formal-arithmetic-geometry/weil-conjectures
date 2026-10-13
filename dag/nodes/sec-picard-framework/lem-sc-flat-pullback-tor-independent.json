@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-flat-pullback-tor-independent",
+ "kind": "statement",
+ "title": "Flat morphisms give stalkwise Tor independence",
+ "statement": "Let $f:X\\to S$ be a flat morphism of schemes [def-weil-flat-morphism], and let $g:T\\to S$ be any scheme morphism. For every $x\\in X$, $t\\in T$ with $f(x)=g(t)$, and every $i>0$, the module $\\operatorname{Tor}_i^{\\mathcal O_{S,f(x)}}(\\mathcal O_{X,x},\\mathcal O_{T,t})$ is zero, with the actual stalk-map scalar structures and the base-point transport of [def-pc-pullback-stalk-tensor-comparison].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00M3 (Tor symmetry); perfect.tex, Tags 08IB and 0AA7, case (1) (application to scheme base change)"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-pc-pullback-stalk-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "the left stalk is flat over the base stalk by the stalk criterion for flat\nmorphisms. By symmetry of Tor, resolve the other stalk by projectives and tensor\nwith the flat left stalk. Tensoring preserves the exactness of the resolution\nin positive degrees. Its positive homology is therefore zero. Transport through\nTor symmetry and the projective-resolution computation of Tor. This applies to\nall pairs over the same base point; the right stalk's transported scalar action\nrequires no flatness assumption. For an empty scheme there are no such pairs.",
+   "uses": [
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J1",
+  "date": "2026-10-13",
+  "note": "Specialized from the cited Stacks argument; source read online because the local tex is unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine derived sections intertwine scalar extension adjunction and the sheaf base change mate",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of global derived Hom out of a perfect complex under flat affine base change",
+   "results": "8 hits, Ext and exact-functor maps; no exact derived sheaf comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*Tor|Tor.*flat|flat.*Tor",
+   "results": "25 unrelated Mathlib hits; direct project reads found TorSymmetry and the equal-universe affine comparison, but no independent-universe comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat module higher Tor vanish tensor projective resolution exact homology zero",
+   "results": "Found rTensor_shortComplex_exact and projective Tor vanishing. Flat need not be projective; the supplied proof already uses the exactness lemma.",
+   "date": "2026-10-13",
+   "verdict": "independent second reading: no exact replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"IsZero\"",
+   "results": "Found isZero_Tor'_succ_of_projective; too strong an assumption for flat stalks.",
+   "date": "2026-10-13",
+   "verdict": "independent second reading: no exact replacement"
+  },
+  {
+   "tool": "grep",
+   "query": "rTensor_shortComplex_exact; Flat.*Tor; Tor.*Flat",
+   "results": "Direct rg of Mathlib RingTheory/Flat/CategoryTheory.lean and CategoryTheory/Monoidal/Tor.lean found the exactness lemma and a TODO to relate flatness with Tor. Direct rg of lean/ found no flat_pullback_torIndependent equivalent.",
+   "date": "2026-10-13",
+   "verdict": "independent second reading: no exact replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatAffineGlobalHomComparison",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 case (1), flat affine global Hom comparison: Flat morphisms give stalkwise Tor independence",
+   "via": [
+    "lem-sc-flat-affine-global-hom-comparison",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatPullbackTorIndependent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatPullbackTorIndependent.lean",
+  "declaration": "AlgebraicGeometry.flat_pullback_torIndependent",
+  "statement": "theorem flat_pullback_torIndependent {X S T : Scheme.{u}}\n    (f : X ⟶ S) (g : T ⟶ S) [Flat f] :\n    PullbackStalkTensor.IsTorIndependent f g",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100009-L-2463735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100009-L-2463735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
