@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.FourierInversion
 public import WeilConjectures.WeilSheaf.FourierTateTwist
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.StalkFunctor
@@ -228,13 +229,19 @@ end LeftTExact
 
 end WeilComplex
 
-/-- **Fourier inversion** on the line: `FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`.
+/-- **Fourier inversion** on the line: `FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`, the shifts
+`[-2][1][1]` of `nonempty_iso_fourierTransform_comp_inv` cancelled.
 (blueprint: `lem-fd-inversion`) -/
 theorem nonempty_fourierTransform_comp_fourierTransform_inv_iso
     (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
     Nonempty (fourierTransform ψ ⋙ fourierTransform ψ⁻¹ ≅
       WeilComplex.tateTwist k₀ l (affineLine k₀) (-1)) :=
-  sorry
+  ⟨(nonempty_iso_fourierTransform_comp_inv ψ hψ).some ≪≫
+    Functor.isoWhiskerLeft (WeilComplex.tateTwist k₀ l (affineLine k₀) (-1))
+      (Functor.isoWhiskerLeft (shiftFunctor _ (-2 : ℤ))
+        (shiftFunctorAdd' (WeilComplex k₀ l (affineLine k₀)) (1 : ℤ) 1 2 (by norm_num)).symm ≪≫
+        shiftFunctorCompIsoId _ (-2 : ℤ) 2 (by norm_num)) ≪≫
+    Functor.rightUnitor _⟩
 
 /-- `FT_ψ` lowers the lower bound of the amplitude by at most one: `pr₁^*` and the tensor
 product with the lisse kernel are exact, `Rpr₂!` is left t-exact, and the shift `[1]` lowers

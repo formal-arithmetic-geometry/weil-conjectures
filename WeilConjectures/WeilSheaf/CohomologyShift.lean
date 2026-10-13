@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.Reduction.Weights
+public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.HomologyShift
 
@@ -49,5 +51,12 @@ noncomputable def compactlySupportedCohomologyShiftEquiv (K : WeilComplex k₀ l
   WeilSheaf.globalSectionsEquivOfIso ((homologySheaf n).mapIso
       (((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).commShiftIso a).app K) ≪≫
     homologySheafShiftIso _ a n n' h)
+
+/-- The compactly supported cohomology of a shifted Weil complex: `H_c^r(L[1]) ≅ H_c^{r+1}(L)`,
+the direct image with compact support commuting with shifts. -/
+theorem nonempty_equiv_compactlySupportedCohomology_shift (L : WeilComplex k₀ l X) (r : ℤ) :
+    Nonempty (((L⟦(1 : ℤ)⟧).compactlySupportedCohomology r).Equiv
+      (L.compactlySupportedCohomology (r + 1))) :=
+  ⟨compactlySupportedCohomologyShiftEquiv L 1 r (r + 1) (add_comm 1 r)⟩
 
 end AlgebraicGeometry.WeilComplex

@@ -209,7 +209,7 @@ theorem exists_forall_norm_sum_traceFunction_boundarySheaf_le (ψ : AddChar k₀
       ‖ι (∑ᶠ x : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
           (FiniteField.galoisExtension k₀ n),
         D.boundarySheaf.traceFunction n x * ψ (Algebra.trace k₀ (FiniteField.galoisExtension k₀ n)
-          (affineLine.fieldPointCoord x * affineLine.fieldPointCoord y)))‖ ≤
+          (AffineSpace.fieldPointsEquiv k₀ _ x * AffineSpace.fieldPointsEquiv k₀ _ y)))‖ ≤
         C * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n := by
   classical
   have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
@@ -253,7 +253,7 @@ theorem exists_forall_norm_sum_traceFunction_boundarySheaf_le (ψ : AddChar k₀
   -- each term is at most `N q^{nw/2}`
   have hterm (x) (hx : x ∈ hs.toFinset) : ‖ι (D.boundarySheaf.traceFunction n x *
       ψ (Algebra.trace k₀ (FiniteField.galoisExtension k₀ n)
-        (affineLine.fieldPointCoord x * affineLine.fieldPointCoord y)))‖ ≤
+        (AffineSpace.fieldPointsEquiv k₀ _ x * AffineSpace.fieldPointsEquiv k₀ _ y)))‖ ≤
       N * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n := by
     rw [map_mul, norm_mul, norm_map_addChar, mul_one]
     refine (norm_map_traceFunction_le hB n x).trans ?_
@@ -274,15 +274,35 @@ theorem exists_forall_norm_sum_traceFunction_boundarySheaf_le (ψ : AddChar k₀
       _ ≤ _ := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).card_fieldPoints_base_eq_le _ x.2
   calc ‖∑ x ∈ hs.toFinset, ι (D.boundarySheaf.traceFunction n x *
         ψ (Algebra.trace k₀ (FiniteField.galoisExtension k₀ n)
-          (affineLine.fieldPointCoord x * affineLine.fieldPointCoord y)))‖
+          (AffineSpace.fieldPointsEquiv k₀ _ x * AffineSpace.fieldPointsEquiv k₀ _ y)))‖
       ≤ ∑ x ∈ hs.toFinset, ‖ι (D.boundarySheaf.traceFunction n x *
         ψ (Algebra.trace k₀ (FiniteField.galoisExtension k₀ n)
-          (affineLine.fieldPointCoord x * affineLine.fieldPointCoord y)))‖ := norm_sum_le _ _
+          (AffineSpace.fieldPointsEquiv k₀ _ x * AffineSpace.fieldPointsEquiv k₀ _ y)))‖ := norm_sum_le _ _
     _ ≤ ∑ _x ∈ hs.toFinset, N * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n := Finset.sum_le_sum hterm
     _ = hs.toFinset.card * (N * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n) := by
         rw [Finset.sum_const, nsmul_eq_mul]
     _ ≤ d * (N * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n) := by gcongr
     _ = _ := by ring
+
+/-- The Fourier trace formula as a sum over the rational points of the affine line:
+`t_{FT_ψ(K)}(y) = -∑_x t_K(x) ψ(Tr(x y))`. -/
+private lemma traceFunction_fourierTransform_eq_neg_finsum (ψ : AddChar k₀ (PadicAlgCl l))
+    (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : n ≠ 0)
+    (y : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
+      (FiniteField.galoisExtension k₀ n)) :
+    ((fourierTransform ψ).obj K).traceFunction n y =
+      -∑ᶠ x : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
+          (FiniteField.galoisExtension k₀ n),
+        K.traceFunction n x * ψ (Algebra.trace k₀ (FiniteField.galoisExtension k₀ n)
+          (AffineSpace.fieldPointsEquiv k₀ _ x * AffineSpace.fieldPointsEquiv k₀ _ y)) := by
+  have : Finite (FiniteField.galoisExtension k₀ n) := Module.finite_of_finite k₀
+  have : Fintype (FiniteField.galoisExtension k₀ n) := Fintype.ofFinite _
+  have h := WeilComplex.traceFunction_fourierTransform ψ K hn
+    (AffineSpace.fieldPointsEquiv k₀ _ y)
+  simp only [WeilComplex.affineLineTraceFunction, Equiv.symm_apply_apply] at h
+  rw [h, FiniteField.fourierTransform, ← finsum_eq_sum_of_fintype,
+    ← finsum_comp_equiv (AffineSpace.fieldPointsEquiv k₀ _)]
+  simp only [Equiv.symm_apply_apply]
 
 /-- **The transform of the boundary sheaf has weights at most `w`** (Step 4 of
 `prop-fd-zero-extension-comparison`): if `FT_ψ(B) ≅ B'[1]` and `M` has weights at most `w`, then
@@ -300,7 +320,7 @@ theorem hasWeightsAtMost_of_iso_fourierTransform (ψ : AddChar k₀ (PadicAlgCl 
   refine B'.hasWeightsAtMost_of_forall_norm_traceFunction_le (C := C) fun n hn y ↦ ?_
   have h := WeilComplex.traceFunction_eq_of_iso e n y
   rw [WeilComplex.traceFunction_toShiftedComplex,
-    WeilComplex.traceFunction_fourierTransform ψ _ hn] at h
+    traceFunction_fourierTransform_eq_neg_finsum ψ _ hn] at h
   simp only [WeilComplex.traceFunction_toComplex] at h
   rw [← neg_inj.1 h]
   exact hC n y
