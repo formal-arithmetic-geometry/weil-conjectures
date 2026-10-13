@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-coherent-completion-over-normalization",
+ "kind": "lemma",
+ "title": "Coherent completion on an open over-site with normalized projections",
+ "statement": "Let $X$ be Noetherian, $J$ ideal sheaf data, and $H$ a coherent module [def-weil-pbc-coherent-formal-module]. For any open $W$, put $E=\\operatorname{overEquiv}(W)$. The module $E(H|_{\\operatorname{Over}(W)})$ is coherent. There exists an isomorphism of systems $c:E((H^\\wedge)|_{\\operatorname{Over}(W)})\\cong (E(H|_{\\operatorname{Over}(W)}))^\\wedge$, with ideal $J|_W$, such that for every $n$, $E(\\pi_{H,n}|_W)c_n=\\pi_{E(H|_W),n}$. No affineness, nonemptiness, or covering hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), first sentence of proof: Zariski locality by uniqueness; completion functor equation 0880"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Restrict H along W.ι using coherent_module_local_on_open_cover. Transfer coherence through overFunctorEquiv: use the locally Noetherian criterion; quasi-coherence is invariant under isomorphism and local finite generating sections transfer along its inverse.",
+   "uses": [
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply torsionControlled_formal_restriction to the identity of the completion of H, exponent zero. Its kernel and cokernel are zero and their ideal-power products are zero by the monic product inclusions. This supplies a normalized restriction-system comparison.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-formal-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker overFunctorEquiv with the completion system, then compose the supplied comparison and the completion of the inverse module isomorphism. Naturality of overFunctorEquiv, the supplied projection equation, cokernel.π_desc, and cancellation of the module isomorphism prove the displayed projection normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-torsion-controlled-formal-restriction",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1) and equation 0880; explicit over-site assembly by K2 from proved library helpers"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent local model restricts to a smaller open with its torsion kernel and cokernel bounds and normalized completion projections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a coherent module to an open is coherent and normalized completion commutes with that restriction",
+   "results": "ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.res_apply, ModuleCat.Tilde.res_const, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.restrictFunctorΓ, CategoryTheory.Sheaf.ΓRes_map, CategoryTheory.Sheaf.ΓRes_map_assoc",
+   "date": "2026-10-13",
+   "verdict": "No exact packaged local-model theorem; reuse the library quotient and restriction helpers with Mathlib over-site equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "overMapCompOverEquiv|restrictionCompletionComparison|restriction_bound",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact packaged local-model theorem; reuse the library quotient and restriction helpers with Mathlib over-site equivalences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionCommonOpenComparisonMap",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Restriction and normalization steps of the common-open comparison argument",
+   "via": [
+    "lem-weil-pbc-torsion-common-open-comparison-map",
+    "new-stage3-torsion-controlled-overlap-cocycle",
+    "new-stage3-torsion-controlled-algebraization-local-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentCompletionOverNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentCompletionOverNormalization.lean",
+  "declaration": "AlgebraicGeometry.coherentCompletion_over_normalization",
+  "statement": "theorem coherentCompletion_over_normalization\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    (H : CoherentModules X) (W : X.Opens) :\n    RingedSpace.IsCoherent W.toScheme.toRingedSpace\n      ((Scheme.Modules.overEquiv W).functor.obj (H.obj.over W)) ∧\n    ∃ c : (formalCompletionSystem J H.obj ⋙\n        SheafOfModules.overFunctor (moduleRings X.toRingedSpace) W ⋙\n        (Scheme.Modules.overEquiv W).functor) ≅\n      formalCompletionSystem (J.comap W.ι)\n        ((Scheme.Modules.overEquiv W).functor.obj (H.obj.over W)),\n      ∀ n : ℕᵒᵖ,\n        (Scheme.Modules.overEquiv W).functor.map\n            ((formalModuleQuotientπ J (n.unop + 1) H.obj).over W) ≫ c.hom.app n =\n          formalModuleQuotientπ (J.comap W.ι) (n.unop + 1)\n            ((Scheme.Modules.overEquiv W).functor.obj (H.obj.over W))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T123207-L-3677530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T123207-L-3677530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
