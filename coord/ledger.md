@@ -11896,3 +11896,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/M3/Sheaf.AlgebraicGeometry.UniversalThickeningOverlapGlueData (stage 3; reviewer PASS; after a return; landing 20261013T100033-L-2470390 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:00 L: merged deliver/M4/Sheaf.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread (stage 3; reviewer PASS; first push; landing 20261013T100034-L-2470521 (interface); batch 20261013T095923; modules 5; new nodes 4)
 - 10:00 L: merged deliver/M4/Sheaf.AlgebraicGeometry.PicardExternalCupRightCechDiagram (stage 3; reviewer PASS; first push; landing 20261013T100034-L-2470760 (interface); batch 20261013T095923; modules 4; new nodes 3)
+- 10:00 L: merged deliver/M4/Sheaf.AlgebraicGeometry.ProjectiveClassReducedSplitting (stage 3; reviewer PASS; first push; landing 20261013T100035-L-2470953 (proof); batch 20261013T095923; modules 1; new nodes 0)

@@ -10,26 +10,46 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Lift the reduced projection P2/IP2 -> T/IT to a map g : P2 -> T by projectivity of P2. The class-surjectivity hypothesis makes g surjective. Split g by projectivity of T. Its kernel U belongs to the class by the summand condition.",
+   "text": "Use the class member P supplied by hlast and the isomorphism P ≅ P ⊞ 0 ≅ P × 0 to deduce that zero belongs to the class by hclosed. No identification of the reduction of the last object is needed in the remaining argument.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The composite P1 -> P2 -> U is invertible modulo I. It is surjective by the class-surjectivity hypothesis and splits because U is projective. Its kernel V belongs to the class, and reduction of the split sequence shows V/IV = 0.",
+   "text": "The unit M -> restrictScalars(extendScalars(M)) for R -> R/I is surjective: TensorProduct.quotTensorEquivQuotSMul identifies it with the surjective quotient map M -> M/(I M). This is proved in the private helper quotient_unit_surjective.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Zero belongs to the class as a summand of P1. Apply the surjectivity condition to zero -> V to get V = 0. The composite P1 -> U is therefore invertible, giving a retraction of P1 -> P2. Thus the given right-exact sequence is short exact and split. Its last object belongs to the class by the summand condition.",
+   "text": "Any morphism between reductions of modules whose source is projective lifts to an R-linear map. Apply Projective.factors to the adjoint of the reduced map and the surjective unit of the target, then use injectivity of the adjunction homEquiv and naturality of the unit. This is the private helper lift_reduced_morphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a map a : P -> Q of class members whose reduction is invertible, hsurj makes a surjective. Projectivity of Q provides a section. The exact kernel sequence therefore splits by ShortComplex.Splitting.ofExactOfSection. Its middle object is isomorphic to ker(a) ⊞ Q, and hclosed, after the biproduct braiding, puts ker(a) in the class.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The reduction of the kernel inclusion is zero because its composite with the invertible reduction of a is zero. It is also a split monomorphism by functorially mapping the splitting. Hence the reduced kernel is zero (IsZero.of_mono_eq_zero). The reduced map 0 -> ker(a) is surjective, so hsurj makes the original zero map surjective. Thus ker(a) is zero, a is mono, and a is an isomorphism by balancedness. Together with the previous step this proves the private helper isIso_of_reduced_isIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let s be the given reduced splitting and lift its retraction s.r to r : S.X2 -> S.X1, using projectivity of S.X2 and lift_reduced_morphism. Functoriality and s.f_r show that the reduction of S.f followed by r is the identity. Apply isIso_of_reduced_isIso to the endomorphism S.f followed by r of the class member S.X1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose r with the inverse of S.f followed by r to get an actual retraction t of S.f. Apply ShortComplex.Splitting.ofExactOfRetraction with hexact and hepi. Its shortExact theorem gives the first conclusion. Its isoBinaryBiproduct, composed with ModuleCat.biprodIsoProd, identifies S.X2 with S.X1 × S.X3; hclosed applied to hfirst and hmiddle gives S.X3 in the class.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BCA, final split-injectivity paragraph (step 5)"
+  "place": "M4, 2026-10-13: shortened Tag 0BCA final paragraph by lifting the reduced retraction directly; uses the source kernel-vanishing argument for reflection of isomorphisms. Complete Lean proof from Mathlib only."
  },
  "mathlib_searches": [
   {
@@ -107,10 +127,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T082407-L-1645659",
-  "kind": "interface",
+  "landing": "20261013T100035-L-2470953",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
