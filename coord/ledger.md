@@ -12276,3 +12276,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:33 L: merged deliver/K2/Sheaf.AlgebraicGeometry.ZeroBottomArrowPullbackLocal (stage 3; reviewer PASS; first push; landing 20261013T113347-L-3185573 (interface); batch 20261013T113333; modules 3; new nodes 2)
 - 11:33 L: merged deliver/K3/Sheaf.Paper.BoundaryCechCompatibility (stage 3; reviewer PASS; first push; landing 20261013T113347-L-3185703 (proof); batch 20261013T113333; modules 1; new nodes 0)
 - 11:33 L: merged deliver/K3/Sheaf.Paper.SquareZeroHorseshoeBoundaryLeibniz (stage 3; reviewer PASS; first push; landing 20261013T113348-L-3185851 (proof); batch 20261013T113333; modules 1; new nodes 0)
+- 11:33 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffineRight (stage 3; reviewer PASS; first push; landing 20261013T113348-L-3185949 (interface); batch 20261013T113333; modules 3; new nodes 2)

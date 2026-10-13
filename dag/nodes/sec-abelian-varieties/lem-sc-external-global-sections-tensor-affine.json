@@ -1,0 +1,171 @@
+{
+ "id": "lem-sc-external-global-sections-tensor-affine",
+ "kind": "statement",
+ "title": "External tensor sections on two affine factors",
+ "statement": "Let $k$ be a field [def-weil-field], let $f:X\\to\\operatorname{Spec} k$ and $g:Y\\to\\operatorname{Spec} k$ be structure morphisms of affine schemes [def-pc-scheme], and let $F,G$ be quasi-coherent module sheaves [pqf-def-coherent]. The canonical map [def-sc-scalar-global-sections-comparison] $\\Gamma(X,F)\\otimes_k\\Gamma(Y,G)\\to\\Gamma(X\\times_kY,\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G)$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, affine case and canonical maps preceding equation-kunneth-on-cech; read at https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-scalar-global-sections-comparison",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical affine charts of X and Y and the spectrum fibre-product formula to identify the product with Spec(A tensor_k B), where A=Gamma(X,O) and B=Gamma(Y,O). The affine pullback comparisons identify projection-pullback sections with scalar extensions of M=Gamma(X,F) and N=Gamma(Y,G). The affine sheaf-tensor comparison identifies external coefficient sections with their tensor product over A tensor_k B.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The balanced map (m tensor b) tensor (a tensor n) -> (a*m) tensor (b*n) is inverse to m tensor n -> (m tensor 1) tensor (1 tensor n). Check balance over A, B and A tensor_k B, and use tensor induction for the inverse identities. The pure-tensor formulas of the affine comparisons show that the resulting inverse map is the canonical external section map. Tensor induction gives equality for all tensors. These identities include zero rings, empty affine schemes and zero modules.",
+   "uses": [
+    "def-sc-scalar-global-sections-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scalar-global-sections-comparison",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED; explicit affine algebra or symmetry verification for the canonical degree-zero maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "globalSections.*tensor|tensor.*globalSections",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No assembled scheme external-section comparison; only general tensor, sheaf descent, or fibre-product carrier tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of external tensor product of quasicoherent sheaves on two affine schemes are tensor product of modules",
+   "date": "2026-10-13",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorHom_app, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.monoidalCategory, CategoryTheory.Sheaf.tensorProd_isSheaf",
+   "verdict": "No assembled scheme external-section comparison; only general tensor, sheaf descent, or fibre-product carrier tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Function.Bijective",
+   "date": "2026-10-13",
+   "results": "12 hits: TensorProduct.map_bijective, LinearMap.lTensor_bij_iff_rTensor_bij, Algebra.TensorProduct.includeRight_bijective, Algebra.TensorProduct.includeLeft_bijective, LinearMap.mul'_bijective_of_surjective, Algebra.TensorProduct.map_bijective, IsAzumaya.bij, IsAzumaya.mk",
+   "verdict": "No assembled scheme external-section comparison; only general tensor, sheaf descent, or fibre-product carrier tools."
+  },
+  {
+   "tool": "grep",
+   "query": "external.*swap|swap.*external|external.*[Ss]ection",
+   "date": "2026-10-13",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean",
+   "verdict": "No assembled scheme external-section comparison; only general tensor, sheaf descent, or fibre-product carrier tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Swapping two factors of a scheme fibre product identifies external tensor product global sections and exchanges pure tensors",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of external tensor product of quasi-coherent sheaves on affine schemes over field",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear equivalence on global sections of external tensor product exchanging the two scheme factors",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc",
+   "verdict": "No assembled scheme external-section comparison; only general tensor, sheaf descent, or fibre-product carrier tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf descent for bijectivity of external section tensor comparison from finite cover of first factor",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj, SheafOfModules.bijective_pushforwardSections, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_bijective_toPullbackObj, PresheafOfModules.homEquivOfIsLocallyBijective, PresheafOfModules.homEquivOfIsLocallyBijective_apply, CategoryTheory.Presieve.isSheafFor_ofArrows_iff_bijective_toCompabible, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "verdict": "No assembled scheme external-section comparison; only general tensor, sheaf descent, or fibre-product carrier tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffineRight",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Affine chart and factor-exchange steps of the degree-zero finite-cover argument",
+   "via": [
+    "lem-sc-external-global-sections-tensor-bijective",
+    "lem-sc-picard-external-cup-zero-tensor",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-external-global-sections-tensor-affine-right"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExternalGlobalSectionsTensorAffine.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.externalGlobalSectionsTensor_bijective_of_isAffine",
+  "statement": "theorem externalGlobalSectionsTensor_bijective_of_isAffine\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [IsAffine X] [IsAffine Y]\n    (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] :\n    Function.Bijective (externalGlobalSectionsTensor f g F G)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T113348-L-3185949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T113348-L-3185949",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
