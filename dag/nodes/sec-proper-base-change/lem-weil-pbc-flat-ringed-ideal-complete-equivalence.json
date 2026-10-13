@@ -25,60 +25,174 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r$ for restriction of scalars. It is exact and conservative on module sheaves: kernels are sectionwise kernels with the inherited action, and cokernels are the same sheafifications of abelian presheaf cokernels before and after restriction. Thus it preserves cohomology and quasi-isomorphisms of complexes, induces $r:D(\\mathcal B)\\to D(\\mathcal O)$ by localization, and reflects isomorphisms (the cone has zero cohomology precisely when its underlying abelian sheaves do). By [lem-weil-pbc-restriction-local-completeness], $r$ preserves and reflects the local completeness conditions, so it restricts to a functor between the stated full subcategories.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-restriction-local-completeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), first paragraph; Tag 099C (lemma-restriction-derived-complete)."
+   }
+  },
+  {
+   "text": "Restriction to a slice is exact on underlying abelian sheaves by [lem-weil-pbc-site-restriction-exact]. By the kernel and cokernel description in [def-weil-sheaf-of-modules-category], this also proves exactness for module sheaves; consequently restriction preserves cohomology, quasi-isomorphisms, and quotient sheaves. Choose the augmented complex $\\epsilon:K^\\bullet\\to\\mathcal O[0]$ supplied by [lem-weil-pbc-extended-cech-completion-model]. Put $K_B^\\bullet=K^\\bullet\\otimes_{\\mathcal O}\\mathcal B$, with augmentation $\\epsilon_B(x\\otimes b)=\\varphi(\\epsilon(x))b$, and let $u:K^\\bullet\\to rK_B^\\bullet$ be $x\\mapsto x\\otimes1$. These are chain maps and $r\\epsilon_B\\circ u=\\varphi\\circ\\epsilon$. Flatness means tensoring is exact; applying this to the kernel/image sequences of any differential shows that this termwise tensor functor preserves cohomology and quasi-isomorphisms. On a slice where $\\mathcal J$ has generators $f_1,\\ldots,f_r$, the augmented local description of $K$ therefore identifies $u$ with the comparison of extended Čech complexes: on each localization the identification sends $(a/f^n)\\otimes b$ to $\\varphi(a)b/\\varphi(f)^n$, with inverse $b/\\varphi(f)^n\\mapsto(1/f^n)\\otimes b$. The balancing relation and the relation making $f$ invertible show that these maps are well-defined and mutually inverse; sheafification gives the asserted sheaf maps. Finite products here are finite direct sums, so this also identifies all terms and differentials. The quotient-isomorphism hypothesis restricts to the slice, and flatness restricts to the slice by [lem-weil-pbc-slice-restriction-flat]. Apply [lem-weil-pbc-flat-extended-cech-comparison] there. Thus $u$ is locally a quasi-isomorphism and hence globally one: each cohomology kernel/cokernel sheaf vanishes on a covering family of these slices.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-completion-model",
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-weil-pbc-flat-extended-cech-comparison",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-site-restriction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099I, construction of K and K prime; Tag 099H (lemma-map-identifies-koszul-and-cech-complexes)."
+   }
+  },
+  {
+   "text": "Fix this complex $K_B^\\bullet$. For $E$ represented by $E^\\bullet$, take the functorial K-injective replacement $E^\\bullet\\to I(E)^\\bullet$ of [def-pur-derived-internal-hom] and define $F(E)$ by $\\mathcal Hom^\\bullet_{\\mathcal O}(rK_B^\\bullet,I(E)^\\bullet)$, giving it a $\\mathcal B$-action by $(b h)(k)=h(bk)$. This is an action because $1h=h$, $(bc)h=b(ch)$ and addition distributes; restrictions commute with it, and the Hom differential is $\\mathcal B$-linear since $d(bk)=b\\,dk$. Maps are induced by the functorial maps of $I(E)$ and are $\\mathcal B$-linear. For a quasi-isomorphism $v:E^\\bullet\\to\\widetilde E^\\bullet$, naturality gives $I(v)q_E=q_{\\widetilde E}v$; since both replacement maps and $v$ are quasi-isomorphisms, two-out-of-three makes $I(v)$ a quasi-isomorphism between K-injective complexes. Apply [lem-pur-rhom-well-defined] with $s=I(v)$ and $t=\\mathrm{id}_{rK_B}$. Thus these Hom maps are quasi-isomorphisms when $E^\\bullet\\to\\widetilde E^\\bullet$ is one; they are so over $\\mathcal B$ because the underlying abelian cohomology sheaves are unchanged. Hence localization gives a functor $F:D(\\mathcal O)\\to D(\\mathcal B)$, whose restriction is naturally $rF(E)=R\\mathcal Hom_{\\mathcal O}(rK_B,E)$. This constructs the coefficient action and the functor; no equivalence or completeness is being assumed.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099I, displayed construction E prime = R SheafHom(r(K prime), E), with its coefficient action made explicit."
+   }
+  },
+  {
+   "text": "Precomposition with $u$ gives a natural isomorphism $\\theta_E:rF(E)\\to R\\mathcal Hom_{\\mathcal O}(K,E)$: $u$ is the quasi-isomorphism proved in step 2 and [lem-pur-rhom-well-defined] applies with $t=u$ and $s=\\mathrm{id}_{I(E)}$, where the target replacement $I(E)$ is K-injective by [def-pur-derived-internal-hom]. For locally derived complete $E$, the completion unit $\\eta_E:E\\to R\\mathcal Hom_{\\mathcal O}(K,E)$ is an isomorphism by [lem-weil-pbc-extended-cech-completion-model]. Set $\\alpha_E=\\theta_E^{-1}\\eta_E:E\\to rF(E)$. It is a natural isomorphism. Its target is locally derived $\\mathcal J$-complete since its source is; [lem-weil-pbc-restriction-local-completeness] then makes $F(E)$ locally derived $\\mathcal J\\mathcal B$-complete. Thus $F$ restricts to the proposed inverse functor and $\\alpha$ gives one of the two required natural isomorphisms.",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-restriction-local-completeness",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099I, paragraph following the formula for E prime; Tag 099F, completion unit for a complete object."
+   }
+  },
+  {
+   "text": "For a locally derived complete $M\\in D(\\mathcal B)$ construct $\\beta_M:M\\to F(rM)$ as follows. On a representing complex and its O-linear replacement $q:rM^\\bullet\\to I(rM)^\\bullet$, send a homogeneous $m$ to the Hom cochain $k\\mapsto q(\\epsilon_B(k)m)$ (zero on degrees of $k$ other than zero). For $m$ of degree $n$, the Hom differential is $d_I\\beta(m)(k)-(-1)^n\\beta(m)(d_Kk)$. If $k$ has degree zero, this is $q(\\epsilon_B(k)d_Mm)$; if $k$ has degree $-1$, the second term vanishes because $\\epsilon_Bd_K=0$; in all other degrees both terms vanish. Therefore $d_{\\mathrm{Hom}}\\beta(m)=\\beta(d_Mm)$. It is a chain map; it is B-linear because $\\epsilon_B(bk)=b\\epsilon_B(k)$, so $\\beta_M(bm)(k)=q(\\epsilon_B(k)bm)=\\beta_M(m)(bk)$. Functoriality of $q$ makes it natural in chain maps, and the localization property in step 3 makes it natural in derived morphisms. Precomposing this cochain with $u$ yields $x\\mapsto q(\\varphi(\\epsilon(x))m)=\\epsilon(x)q(m)$, exactly the cochain defining $\\eta_{rM}$ by precomposition with $\\epsilon$. Thus $\\theta_{rM}\\circ r(\\beta_M)=\\eta_{rM}$ and $r(\\beta_M)=\\alpha_{rM}$. Step 4 applies since $rM$ is complete by [lem-weil-pbc-restriction-local-completeness]. Hence $r(\\beta_M)$ is an isomorphism. The conservativity proved in step 1 implies that $\\beta_M$ is an isomorphism. The natural isomorphisms $\\mathrm{id}\\cong rF$ and $\\mathrm{id}\\cong Fr$ exhibit the asserted equivalence. This is the omitted final compatibility check in the source.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-restriction-local-completeness",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099I, last displayed composite and final sentence (Details omitted), expanded by the augmentation-evaluation formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-restriction-local-completeness",
+  "lem-weil-pbc-extended-cech-completion-model",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-weil-pbc-flat-extended-cech-comparison",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "lem-weil-pbc-site-restriction-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), including an explicit verification of its omitted final compatibility."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A flat map of sheaves of rings inducing isomorphism modulo a finite type ideal gives equivalence of derived complete categories under restriction of scalars",
-   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod, localCohomology.diagram, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.isFinitePresentation, PresheafOfModules.sheafificationCompForgetCompToPresheaf, SheafOfModules.IsFinitePresentation",
+   "query": "Flat ringed site homomorphism isomorphic modulo finite type ideal induces equivalence of locally derived complete sheaf module categories",
+   "results": "AdicCompletion.flat_of_isNoetherian (Mathlib/RingTheory/AdicCompletion/AsTensorProduct); Module.flat_of_isLocalized_span (Mathlib/RingTheory/Flat/Localization); Module.flat_of_localized_span (Mathlib/RingTheory/Flat/Localization); CategoryTheory.compatiblePreservingOfFlat (Mathlib/CategoryTheory/Sites/CoverPreserving); ModuleCat.preservesFiniteLimits_extendScalars_of_flat (Mathlib/Algebra/Category/ModuleCat/Descent); Module.flat_of_localized_maximal (Mathlib/RingTheory/Flat/Localization); RingHom.Flat.propertyIsLocal (Mathlib/RingTheory/RingHom/Flat); AlgebraicGeometry.Flat.instHasRingHomPropertyFlat (Mathlib/AlgebraicGeometry/Morphisms/Flat)",
    "date": "2026-10-14",
-   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+   "verdict": "no match: these hits concern ordinary module completion, underived sheaf functors, local cohomology of modules, or unrelated topology; none states the specified ringed-site derived assertion."
   },
   {
    "tool": "leanfinder",
-   "query": "Restriction of scalars along flat coefficient extension unchanged modulo ideal is equivalence on derived adically complete sheaves",
-   "results": "AdicCompletion.congr, AdicCompletion.flat_of_isNoetherian, AdicCompletion.congr_apply, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct, AdicCompletion.ofLinearEquiv",
+   "query": "Restriction of scalars equivalence for adically derived complete complexes over flat sheaves of rings",
+   "results": "AdicCompletion.flat_of_isNoetherian (Mathlib/RingTheory/AdicCompletion/AsTensorProduct); AdicCompletion.ofTensorProduct (Mathlib/RingTheory/AdicCompletion/AsTensorProduct); AdicCompletion.ofTensorProductEquivOfFiniteNoetherian (Mathlib/RingTheory/AdicCompletion/AsTensorProduct); AdicCompletion.congr (Mathlib/RingTheory/AdicCompletion/Functoriality); AdicCompletion.module (Mathlib/RingTheory/AdicCompletion/Algebra); AdicCompletion.instModuleOfIsScalarTower (Mathlib/RingTheory/AdicCompletion/Basic); AdicCompletion.tensor_map_id_left_eq_map (Mathlib/RingTheory/AdicCompletion/AsTensorProduct); AdicCompletion.ofLinearEquiv (Mathlib/RingTheory/AdicCompletion/Basic)",
    "date": "2026-10-14",
-   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+   "verdict": "no match: these hits concern ordinary module completion, underived sheaf functors, local cohomology of modules, or unrelated topology; none states the specified ringed-site derived assertion."
   },
   {
    "tool": "loogle",
    "query": "\"AdicCompletion\", \"equiv\"",
-   "results": "AdicCompletion.ofLinearEquiv, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.ofLinearEquiv_symm_of, AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.ofAlgEquiv, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.ofAlgEquiv_symm_of, AdicCompletion.of_ofAlgEquiv_symm",
+   "results": "AdicCompletion.ofLinearEquiv (Mathlib.RingTheory.AdicCompletion.Basic); AdicCompletion.ofLinearEquiv_apply (Mathlib.RingTheory.AdicCompletion.Basic); AdicCompletion.ofLinearEquiv_symm_of (Mathlib.RingTheory.AdicCompletion.Basic); AdicCompletion.of_ofLinearEquiv_symm (Mathlib.RingTheory.AdicCompletion.Basic); AdicCompletion.ofAlgEquiv (Mathlib.RingTheory.AdicCompletion.Algebra); AdicCompletion.ofAlgEquiv_apply (Mathlib.RingTheory.AdicCompletion.Algebra); AdicCompletion.ofAlgEquiv_symm_of (Mathlib.RingTheory.AdicCompletion.Algebra); AdicCompletion.of_ofAlgEquiv_symm (Mathlib.RingTheory.AdicCompletion.Algebra); AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ (Mathlib.RingTheory.AdicCompletion.Algebra); AdicCompletion.mk_ofAlgEquiv_symm (Mathlib.RingTheory.AdicCompletion.Algebra); AdicCompletion.mk_smul_top_ofAlgEquiv_symm (Mathlib.RingTheory.AdicCompletion.Algebra); AdicCompletion.piEquivOfFintype (Mathlib.RingTheory.AdicCompletion.Functoriality)",
    "date": "2026-10-14",
-   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+   "verdict": "no match: these hits concern ordinary module completion, underived sheaf functors, local cohomology of modules, or unrelated topology; none states the specified ringed-site derived assertion."
   },
   {
    "tool": "grep",
-   "query": "derivedComplete|derived.complete|complete.*restriction|restriction.*complete",
-   "results": "Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/Order/ConditionallyCompleteLattice/Basic.lean, Mathlib/Analysis/Normed/Operator/Compact/Basic.lean",
+   "query": "derivedComplete|derivedCompletion|complete.*restriction|restriction.*complete",
+   "results": "Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean:416 (For `i ≠ w₀`, the image of `completeBasis K i` by the natural restriction map); Mathlib/Order/ConditionallyCompleteLattice/Basic.lean:156 (/-- A complete lattice is a conditionally complete lattice, as there are no restrictions); Mathlib/Analysis/Normed/Operator/Compact/Basic.lean:341 (/-- If a compact operator preserves a complete submodule, its restriction to that submodule is)",
    "date": "2026-10-14",
-   "verdict": "no match: the returned declarations do not state this ringed-site, Koszul pro-system, or strict derived-tower theorem; ordinary module completion and site flatness are different statements."
+   "verdict": "no match: these hits concern ordinary module completion, underived sheaf functors, local cohomology of modules, or unrelated topology; none states the specified ringed-site derived assertion."
   },
   {
    "tool": "leansearch",
-   "query": "Equivalence on derived complete ringed site modules for flat ring sheaf homomorphism",
+   "query": "Equivalence between derived complete module sheaves under a flat ring sheaf extension",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Restriction of scalars gives equivalence between derived adically complete module categories for a flat ring homomorphism isomorphic modulo ideal",
-   "results": "AdicCompletion.congr, AdicCompletion.ofLinearEquiv, AdicCompletion.congr_apply, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.flat_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.module, AdicCompletion.instModuleOfIsScalarTower",
-   "date": "2026-10-14",
-   "verdict": "no match: returned types concern ordinary adic completion, local cohomology, finite-range derived category fractions, or ordinary module flatness; none states the ringed-site or Koszul tower assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-constant-completion-equivalence",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "worker": "stage1",
+  "summary": "Statement retained, verified against 099I and the internal-Hom form of 0999 using 0997. Three smaller source lemmas are statement-only dependencies: the global augmented Čech completion model, flat Čech comparison, and preservation/reflection of local completeness. Explicitly constructed the B-action on the inverse functor, proved descent through quasi-isomorphisms, and filled the omitted augmentation-evaluation comparison in the last paragraph of 099I. No Noetherian, boundedness, or exact-products assumption was introduced.",
+  "blueprint": "Realizes the Detailed form final comparison in def-weil-pbc-completed-pullback via lem-weil-pbc-constant-completion-equivalence: equivalence between constant and completed coefficient categories. Steps follow the 099I construction used for that coefficient equivalence; the three new nodes supply its strictly smaller 099C/099E/099F/099H inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic invariance of Hom complexes under quasi-isomorphisms with K-injective target, used to descend the explicit B-action functor and to invert precomposition with u. No lemma of this unit supplies that unbounded internal-Hom construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Generic exactness of restriction to a slice on underlying abelian sheaves, used in step 2 to restrict the local derived descriptions and quotient hypothesis and detect the comparison on cohomology. The unit has no statement giving this site-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-well-defined",
+  "lem-weil-pbc-site-restriction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-94e24b093",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-94e24b093 (reviewer sub-agent of L); spot-checked: Read all mathematics and checked Stacks 0997, 099C/E/F/H/I and 0E8J. All four new statements and the explicit inverse-functor compatibility are sound. Repaired C1 in step 2 by citing existing slice-restriction exactness; corrected item JSON and full review.md written. Statements unchanged; no nodes dropped. Accepted Hom-invariance and slice-exactness tool uses.; 1 file(s) fixed by the reviewer"
+ }
 }

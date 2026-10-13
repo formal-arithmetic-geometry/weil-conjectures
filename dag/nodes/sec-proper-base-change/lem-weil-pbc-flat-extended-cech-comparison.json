@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-pbc-flat-extended-cech-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, final Stacks comparison: flat constant-to-completed comparison, specifically the extended Čech quasi-isomorphism used by 099I to compare its two coefficient rings.",
+   "via": [
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Flat extension identifies extended localization Čech complexes",
+ "statement": "Let $\\mathcal C$ be a small site, $\\varphi:\\mathcal O\\to\\mathcal B$ a morphism of sheaves of commutative rings, and $f_1,\\ldots,f_r$ global sections of $\\mathcal O$, with $r\\geq0$. Assume $\\mathcal B$ is flat over $\\mathcal O$ [def-pc-flat-sheaf-modules] and $\\mathcal O/(f_1,\\ldots,f_r)\\mathcal O\\to\\mathcal B/(\\varphi(f_1),\\ldots,\\varphi(f_r))\\mathcal B$ is an isomorphism of ring sheaves. $C(\\mathcal O;f_1,\\ldots,f_r)$ denotes the extended alternating localization complex: its degree zero is $\\mathcal O$, its degree $q$ for $1\\leq q\\leq r$ is $\\prod_{i_1<\\cdots<i_q}\\mathcal O[1/(f_{i_1}\\cdots f_{i_q})]$, and all other terms are zero. The differential is the alternating sum of localization maps, and its augmentation to $\\mathcal O[0]$ is the identity in degree zero and zero in other degrees. For $r=0$ it is $\\mathcal O[0]$. Define $C(\\mathcal B;\\varphi(f_1),\\ldots,\\varphi(f_r))$ by the same formula. The map induced termwise by $\\varphi$, $$C(\\mathcal O;f_1,\\ldots,f_r)\\longrightarrow\\operatorname{Res}_{\\varphi}C(\\mathcal B;\\varphi(f_1),\\ldots,\\varphi(f_r)),$$ is a quasi-isomorphism in $D(\\mathcal O)$ [def-weil-abstract-derived-category, def-pc-quasi-iso-modules]. Here module sheaves and restriction of scalars are [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars].",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099H (lemma-map-identifies-koszul-and-cech-complexes)."
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-quasi-iso-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat map of sheaves of rings isomorphism modulo finitely generated ideal identifies extended alternating Cech complexes by quasi isomorphism",
+   "results": "Rep.standardComplex.quasiIso_forget₂_εToSingle₀ (Mathlib/RepresentationTheory/Homological/Resolution); localCohomology.diagram (Mathlib/Algebra/Homology/LocalCohomology); Module.flat_of_isLocalized_span (Mathlib/RingTheory/Flat/Localization); CategoryTheory.compatiblePreservingOfFlat (Mathlib/CategoryTheory/Sites/CoverPreserving); Module.Flat.of_forall_exists_factorization (Mathlib/RingTheory/Flat/EquationalCriterion); SheafOfModules.Presentation.map (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); Module.flat_of_localized_span (Mathlib/RingTheory/Flat/Localization); Module.Flat.iff_forall_exists_factorization (Mathlib/RingTheory/Flat/EquationalCriterion)",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern ordinary module completion, underived sheaf functors, local cohomology of modules, or unrelated topology; none states the specified ringed-site derived assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Augmented localization Cech complexes invariant under flat extension unchanged on closed quotient",
+   "results": "Module.flat_of_isLocalized_span (Mathlib/RingTheory/Flat/Localization); Module.flat_of_localized_span (Mathlib/RingTheory/Flat/Localization); RingHom.Flat.ofLocalizationSpanTarget (Mathlib/RingTheory/RingHom/Flat); RingHom.Flat.propertyIsLocal (Mathlib/RingTheory/RingHom/Flat); Module.flat_iff_of_isLocalization (Mathlib/RingTheory/Flat/Localization); RingHom.Flat.ofLocalizationPrime (Mathlib/RingTheory/RingHom/Flat); Module.flat_of_localized_maximal (Mathlib/RingTheory/Flat/Localization); Module.flat_of_isLocalized_maximal (Mathlib/RingTheory/Flat/Localization)",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern ordinary module completion, underived sheaf functors, local cohomology of modules, or unrelated topology; none states the specified ringed-site derived assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern ordinary module completion, underived sheaf functors, local cohomology of modules, or unrelated topology; none states the specified ringed-site derived assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul|extended.*[Cc]ech|[Cc]ech.*flat",
+   "results": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean:16 (This file defines covariant derivatives (aka Koszul connections) on vector bundles over manifolds.); Mathlib/RingTheory/Regular/RegularSequence.lean:21 (TODO: Koszul regular sequences, `H_1`-regular sequences, quasi-regular sequences, depth.); Mathlib/Algebra/Homology/LocalCohomology.lean:45 (    * the characterization as the limit of Koszul homology)",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern ordinary module completion, underived sheaf functors, local cohomology of modules, or unrelated topology; none states the specified ringed-site derived assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat ring sheaf extension modulo an ideal gives quasi isomorphism of extended Cech complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of commutative ring sheaves identical modulo an ideal induces quasi-isomorphism on stable Koszul complexes",
+   "results": "CochainComplex.cm5b.instQuasiIsoIntP; Algebra.Smooth.flat; Rep.standardComplex.quasiIso_forget₂_εToSingle₀; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; CategoryTheory.InjectiveResolution.instQuasiIsoIntι'; Module.flat_of_isLocalized_span; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+   "date": "2026-10-14",
+   "verdict": "no match: inspected returned declarations; sheaf adjunctions, ordinary adic-completion scalar actions, flatness criteria and generic quasi-isomorphisms do not state this ringed-site derived-completeness assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi isomorphism of localization complexes under flat scalar extension isomorphic modulo ideal",
+   "results": "Module.flat_of_isLocalized_span; Module.flat_iff_of_isLocalization; Module.flat_of_localized_span; Module.Flat.of_isLocalizedModule; Module.flat_of_localized_maximal; Module.flat_of_isLocalized_maximal; HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso; Module.Flat.localizedModule",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; ordinary module flatness, underived module-sheaf functors, Ext-colimit local cohomology and generic categorical localization do not state this ringed-site assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
