@@ -33,4 +33,39 @@ theorem affineOpenSections_exists_canonical_transformation
             rw [Category.id_comp]
             exact hp j))
           (by exact pullback.lift_snd _ _ _)).op) := by
-  sorry
+  have _ := hc
+  let σ (j : J) : Scheme.Etale.mk (𝟙 c.pt) ⟶ p.Etale.obj (D.obj j) :=
+    MorphismProperty.Over.homMk
+      (pullback.lift (c.π.app j) (𝟙 c.pt) (by
+        change c.π.app j ≫ (D.obj j).hom = 𝟙 c.pt ≫ p
+        rw [Category.id_comp]
+        exact hp j))
+      (by exact pullback.lift_snd _ _ _)
+  have hσ {i j : J} (f : i ⟶ j) : σ i ≫ p.Etale.map (D.map f) = σ j := by
+    apply MorphismProperty.Over.Hom.ext
+    change (σ i).left ≫ (p.Etale.map (D.map f)).left = (σ j).left
+    apply pullback.hom_ext
+    · rw [Category.assoc, Scheme.Hom.etale_map_left_comp_fst]
+      change pullback.lift _ _ _ ≫ pullback.fst _ _ ≫ _ =
+        pullback.lift _ _ _ ≫ pullback.fst _ _
+      rw [pullback.lift_fst_assoc, pullback.lift_fst]
+      exact c.w f
+    · rw [Category.assoc, Scheme.Hom.etale_map_left_comp_snd]
+      change pullback.lift _ _ _ ≫ pullback.snd _ _ =
+        pullback.lift _ _ _ ≫ pullback.snd _ _
+      simp only [pullback.lift_snd]
+  refine ⟨{
+    app := fun j ↦ (hH.unit.app F).hom.app (op (D.obj j.unop)) ≫
+      (H.obj F).obj.map (σ j.unop).op
+    naturality := ?_ }, fun j ↦ rfl⟩
+  intro i j f
+  dsimp only [Functor.comp_map, Functor.op_map, Functor.const_obj_obj,
+    Functor.const_obj_map]
+  have hu : F.obj.map (D.map f.unop).op ≫
+      (hH.unit.app F).hom.app (op (D.obj j.unop)) =
+      (hH.unit.app F).hom.app (op (D.obj i.unop)) ≫
+        (H.obj F).obj.map (p.Etale.map (D.map f.unop)).op :=
+    (hH.unit.app F).hom.naturality _
+  rw [Category.comp_id, ← Category.assoc, hu, Category.assoc, ← Functor.map_comp]
+  congr 1
+  exact congrArg (fun g ↦ (H.obj F).obj.map g.op) (hσ f.unop)
