@@ -24,88 +24,74 @@
  ],
  "proof": [
   {
-   "text": "Notation. By [def-sp-abelian] $\\mathcal A$ has finite biproducts. For $m\\ge1$ fix the biproduct $E(T)_m=\\prod_{n=1}^mT_n$ with projections $\\mathrm{pr}_n$ and injections $\\mathrm{in}_n$, satisfying $\\mathrm{pr}_n\\mathrm{in}_n=\\mathrm{id}$, $\\mathrm{pr}_k\\mathrm{in}_n=0$ for $k\\neq n$ and $\\sum_{n\\le m}\\mathrm{in}_n\\mathrm{pr}_n=\\mathrm{id}$ (the identities of [def-weil-additive-category], iterated); for $m=1$ it is $T_1$, and the empty product $\\prod_{n<1}T_n$ is the zero object. A morphism $Y\\to\\prod_{n\\le m}T_n$ is determined by its components $\\mathrm{pr}_n\\circ(-)$, and composition is bilinear [def-weil-preadditive-category]. We identify $\\prod_{n\\le m+1}T_n=\\big(\\prod_{n\\le m}T_n\\big)\\oplus T_{m+1}$; the transition map $e_m:E(T)_{m+1}\\to E(T)_m$ is the morphism with $\\mathrm{pr}_ne_m=\\mathrm{pr}_n$ for $n\\le m$. From the definition of $f_{m,n}$ [def-weil-inverse-system]: $f_{m+1,n}=f_{m,n}\\circ f_m$ for $n\\le m$, and $f_{m,m}=\\mathrm{id}$.",
+   "text": "Construct E(T) at index n as the finite product over Fin (n+1), with transition Pi.lift of the castSucc projections, using Mathlib Functor.ofOpSequence. Define E(phi) with NatTrans.ofOpSequence and componentwise Pi.map. Product extensionality proves transition compatibility and the identity and composition laws. Define j using Pi.lift of the original tower maps. Functor.map_comp proves it is a tower morphism, and NatTrans.naturality proves naturality in T. The termwise isomorphisms e are Iso.refl.",
    "uses": [
     "def-sp-abelian",
-    "def-weil-additive-category",
-    "def-weil-preadditive-category",
     "def-weil-inverse-system"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 070M (lemma-difficulty-K-injectives), proof: the decompositions $I_{n+1}^p=C_{n+1}^p\\oplus I_n^p$ (agent-written realization)"
+    "place": "agent-written replacement step; it plays the role of the direct sum decompositions I_{n+1}^p = C_{n+1}^p ⊕ I_n^p in the proof of Lemma Tag 070M (lemma-difficulty-K-injectives)"
    }
   },
   {
-   "text": "$E$ is an additive functor. For $\\varphi:T\\to T'$, $E(\\varphi)_m$ is the morphism with $\\mathrm{pr}_nE(\\varphi)_m=\\varphi_n\\mathrm{pr}_n$ ($n\\le m$). It is a morphism of inverse systems [def-weil-inverse-system]: for $n\\le m$, $\\mathrm{pr}_ne'_mE(\\varphi)_{m+1}=\\mathrm{pr}_nE(\\varphi)_{m+1}=\\varphi_n\\mathrm{pr}_n=\\varphi_n\\mathrm{pr}_ne_m=\\mathrm{pr}_nE(\\varphi)_me_m$. Comparing components, $E(\\mathrm{id})=\\mathrm{id}$, $E(\\psi\\varphi)=E(\\psi)E(\\varphi)$ (as $\\mathrm{pr}_nE(\\psi)_mE(\\varphi)_m=\\psi_n\\mathrm{pr}_nE(\\varphi)_m=\\psi_n\\varphi_n\\mathrm{pr}_n$), and, by bilinearity of composition [def-weil-preadditive-category], $\\mathrm{pr}_nE(\\varphi+\\psi)_m=(\\varphi_n+\\psi_n)\\mathrm{pr}_n=\\mathrm{pr}_n(E(\\varphi)_m+E(\\psi)_m)$, so $E(\\varphi+\\psi)=E(\\varphi)+E(\\psi)$ for the levelwise sum.",
+   "text": "A section of each envelope transition is Pi.lift with the old projections on castSucc and zero on Fin.last. Comparing product projections verifies the section equation. The final projection retracts each component of j, since the corresponding original tower map is an identity, giving IsSplitMono and hence Mono.",
    "uses": [
-    "def-weil-inverse-system",
+    "def-sp-abelian",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "agent-written replacement step; it plays the role of the direct sum decompositions I_{n+1}^p = C_{n+1}^p ⊕ I_n^p in the proof of Lemma Tag 070M (lemma-difficulty-K-injectives)"
+   }
+  },
+  {
+   "text": "Product extensionality and bilinearity of composition prove E(phi+psi)=E(phi)+E(psi) componentwise.",
+   "uses": [
     "def-weil-preadditive-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 070M (lemma-difficulty-K-injectives), proof: the decompositions $I_{n+1}^p=C_{n+1}^p\\oplus I_n^p$ (agent-written realization)"
+    "place": "agent-written replacement step; it plays the role of the direct sum decompositions I_{n+1}^p = C_{n+1}^p ⊕ I_n^p in the proof of Lemma Tag 070M (lemma-difficulty-K-injectives)"
    }
   },
   {
-   "text": "$E(T)$ is split. Let $\\sigma_m=\\mathrm{in}^{(m+1)}_{\\le m}:E(T)_m\\to E(T)_{m+1}$ be the injection of the summand $\\prod_{n\\le m}T_n$ of $E(T)_{m+1}=\\big(\\prod_{n\\le m}T_n\\big)\\oplus T_{m+1}$, i.e. $\\mathrm{pr}_n\\sigma_m=\\mathrm{pr}_n$ for $n\\le m$ and $\\mathrm{pr}_{m+1}\\sigma_m=0$. Then $\\mathrm{pr}_ne_m\\sigma_m=\\mathrm{pr}_n\\sigma_m=\\mathrm{pr}_n$ for all $n\\le m$, so $e_m\\sigma_m=\\mathrm{id}_{E(T)_m}$ and every transition map of $E(T)$ has a right inverse.",
+   "text": "For any split mono f:X→Y with retraction r, put p=id_Y-rf (Lean composition r ≫ f). Then fp=0, so p descends along the cokernel projection q to a map d:coker(f)→Y. The identity qd=p and pq=q imply dq=id by epimorphic cancellation of q. Thus q is split epi. Evaluation preserves cokernels in the tower category, so PreservesCokernel.iso transports this splitting to each component of the tower cokernel projection.",
    "uses": [
-    "def-weil-additive-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 070M (lemma-difficulty-K-injectives), proof: the decompositions $I_{n+1}^p=C_{n+1}^p\\oplus I_n^p$ (agent-written realization)"
-   }
-  },
-  {
-   "text": "$j_T$ is a natural monomorphism of inverse systems. (a) Morphism of inverse systems: for $n\\le m$, $\\mathrm{pr}_ne_mj_{T,m+1}=\\mathrm{pr}_nj_{T,m+1}=f_{m+1,n}=f_{m,n}f_m=\\mathrm{pr}_nj_{T,m}f_m$ (Step 1), so $e_mj_{T,m+1}=j_{T,m}f_m$. (b) Naturality: for $\\varphi:T\\to T'$ and $n\\le m$, iterating $f'_k\\varphi_{k+1}=\\varphi_kf_k$ ($k=n,\\dots,m-1$) gives $f'_{m,n}\\varphi_m=\\varphi_nf_{m,n}$, hence $\\mathrm{pr}_nE(\\varphi)_mj_{T,m}=\\varphi_nf_{m,n}=f'_{m,n}\\varphi_m=\\mathrm{pr}_nj_{T',m}\\varphi_m$, i.e. $E(\\varphi)\\circ j_T=j_{T'}\\circ\\varphi$. (c) Mono: $\\mathrm{pr}_mj_{T,m}=f_{m,m}=\\mathrm{id}_{T_m}$, so $j_{T,m}$ has a left inverse and is a monomorphism ($j_{T,m}a=j_{T,m}b\\Rightarrow a=\\mathrm{pr}_mj_{T,m}a=\\mathrm{pr}_mj_{T,m}b=b$). By [lem-weil-tower-category-levelwise-abelian], $j_T$ is then a monomorphism of $\\operatorname{Tow}(\\mathcal A)$ and its cokernel there is the levelwise cokernel $C(T)$ with the induced transition maps.",
-   "uses": [
-    "def-weil-inverse-system",
+    "def-weil-preadditive-category",
     "lem-weil-tower-category-levelwise-abelian"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 070M (lemma-difficulty-K-injectives), proof: the decompositions $I_{n+1}^p=C_{n+1}^p\\oplus I_n^p$ (agent-written realization)"
+    "place": "agent-written replacement step; it plays the role of the direct sum decompositions I_{n+1}^p = C_{n+1}^p ⊕ I_n^p in the proof of Lemma Tag 070M (lemma-difficulty-K-injectives)"
    }
   },
   {
-   "text": "The cokernel at level $m$. Let $\\theta_m:E(T)_m\\to E(T)_m$ be given by $\\mathrm{pr}_n\\theta_m=\\mathrm{pr}_n-f_{m,n}\\mathrm{pr}_m$ for $n<m$ and $\\mathrm{pr}_m\\theta_m=\\mathrm{pr}_m$ (in elements: $(t_n)_{n\\le m}\\mapsto((t_n-f_{m,n}t_m)_{n<m},t_m)$). It is an automorphism, with inverse $\\theta'_m$ given by $\\mathrm{pr}_n\\theta'_m=\\mathrm{pr}_n+f_{m,n}\\mathrm{pr}_m$ ($n<m$), $\\mathrm{pr}_m\\theta'_m=\\mathrm{pr}_m$: componentwise, $\\mathrm{pr}_n\\theta_m\\theta'_m=\\mathrm{pr}_n+f_{m,n}\\mathrm{pr}_m-f_{m,n}\\mathrm{pr}_m=\\mathrm{pr}_n$, and likewise for $\\theta'_m\\theta_m$. Moreover $\\mathrm{pr}_n\\theta_mj_{T,m}=f_{m,n}-f_{m,n}f_{m,m}=0$ for $n<m$ and $\\mathrm{pr}_m\\theta_mj_{T,m}=\\mathrm{id}$, so $\\theta_mj_{T,m}=\\mathrm{in}_m$, the injection of the summand $T_m$ in $E(T)_m=T_m\\oplus\\prod_{n<m}T_n$. In a biproduct $A\\oplus B$ the projection $p_B$ is a cokernel of $i_A$ [def-weil-additive-category]: $p_Bi_A=0$, and if $gi_A=0$ then $g=g(i_Ap_A+i_Bp_B)=(gi_B)p_B$, uniquely since $p_Bi_B=\\mathrm{id}$ makes $p_B$ an epimorphism. Transporting along $\\theta_m$: $\\pi_m:=p_{<m}\\theta_m:E(T)_m\\to\\prod_{n<m}T_n$, i.e. $\\mathrm{pr}_n\\pi_m=\\mathrm{pr}_n-f_{m,n}\\mathrm{pr}_m$ ($n<m$), is a cokernel of $j_{T,m}=\\theta_m^{-1}\\mathrm{in}_m$ (a morphism $g$ kills $j_{T,m}$ iff $g\\theta_m^{-1}$ kills $\\mathrm{in}_m$). So $0\\to T_m\\xrightarrow{j_{T,m}}E(T)_m\\xrightarrow{\\pi_m}\\prod_{n<m}T_n\\to0$ is split exact and we may take $C(T)_m=\\prod_{n<m}T_n$ ($C(T)_1=0$). This is the source's $I_{n+1}^p=C_{n+1}^p\\oplus I_n^p$ in this situation: $E(T)_m=j_{T,m}(T_m)\\oplus\\theta_m^{-1}(\\prod_{n<m}T_n)$.",
+   "text": "Write q:E(T)→coker(j_T), let b:E(T)_(n+1)→E(T)_n be the envelope transition and c the induced cokernel transition. Choose the known sections t of q_n and s of b. The morphism t ≫ s ≫ q_(n+1) is a section of c: naturality gives q_(n+1) ≫ c=b ≫ q_n, hence (t ≫ s ≫ q_(n+1)) ≫ c=t ≫ s ≫ b ≫ q_n=t ≫ q_n=id. This proves the final assertion without identifying the cokernel with an earlier-factor product.",
    "uses": [
-    "def-weil-additive-category"
+    "lem-weil-tower-category-levelwise-abelian"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 070M (lemma-difficulty-K-injectives), proof: the decompositions $I_{n+1}^p=C_{n+1}^p\\oplus I_n^p$ (agent-written realization)"
-   }
-  },
-  {
-   "text": "$C(T)$ is split. The induced transition map $c_m:C(T)_{m+1}=\\prod_{n\\le m}T_n\\to C(T)_m=\\prod_{n<m}T_n$ is the unique morphism with $c_m\\pi_{m+1}=\\pi_me_m$ (it exists by Step 5, as $\\pi_me_mj_{T,m+1}=\\pi_mj_{T,m}f_m=0$ by Step 4(a)). We claim $c_m=\\pi_m$ (on $\\prod_{n\\le m}T_n=E(T)_m$). Indeed, for $n<m$, using $f_{m+1,n}=f_{m,n}f_m$ and $f_{m+1,m}=f_m$: $\\mathrm{pr}_n\\pi_m\\pi_{m+1}=\\mathrm{pr}_n\\pi_{m+1}-f_{m,n}\\mathrm{pr}_m\\pi_{m+1}=(\\mathrm{pr}_n-f_{m+1,n}\\mathrm{pr}_{m+1})-f_{m,n}(\\mathrm{pr}_m-f_m\\mathrm{pr}_{m+1})=\\mathrm{pr}_n-f_{m,n}\\mathrm{pr}_m=\\mathrm{pr}_n\\pi_me_m$ (the last as $\\mathrm{pr}_ke_m=\\mathrm{pr}_k$ for $k\\le m$), so $\\pi_m\\pi_{m+1}=\\pi_me_m$ and $c_m=\\pi_m$ by uniqueness. Let $\\kappa_m:\\prod_{n<m}T_n\\to\\prod_{n\\le m}T_n$ be the injection of the summand ($\\mathrm{pr}_n\\kappa_m=\\mathrm{pr}_n$ for $n<m$, $\\mathrm{pr}_m\\kappa_m=0$); then $\\mathrm{pr}_n\\pi_m\\kappa_m=\\mathrm{pr}_n-f_{m,n}\\cdot0=\\mathrm{pr}_n$, so $c_m\\kappa_m=\\mathrm{id}$. Any other choice of the cokernels $\\operatorname{coker}j_{T,m}$ is isomorphic to this one by isomorphisms compatible with the induced transition maps (uniqueness of cokernels and of the induced maps), and conjugating $\\kappa_m$ by these isomorphisms gives right inverses there. Hence $C(T)$ is a split inverse system, which completes the proof.",
-   "uses": [
-    "def-weil-additive-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 070M (lemma-difficulty-K-injectives), proof: the decompositions $I_{n+1}^p=C_{n+1}^p\\oplus I_n^p$ (agent-written realization)"
+    "place": "agent-written replacement step; it plays the role of the direct sum decompositions I_{n+1}^p = C_{n+1}^p ⊕ I_n^p in the proof of Lemma Tag 070M (lemma-difficulty-K-injectives)"
    }
   }
  ],
  "proof_deps": [
   "def-sp-abelian",
-  "def-weil-additive-category",
-  "def-weil-preadditive-category",
   "def-weil-inverse-system",
+  "def-weil-preadditive-category",
   "lem-weil-tower-category-levelwise-abelian"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "pattern of the proof of Lemma 070M (lemma-difficulty-K-injectives): direct sum decompositions $I_{n+1}^p=C_{n+1}^p\\oplus I_n^p$; the envelope construction is agent-written"
+  "place": "agent-written replacement step; it plays the role of the direct sum decompositions I_{n+1}^p = C_{n+1}^p ⊕ I_n^p in the proof of Lemma Tag 070M (lemma-difficulty-K-injectives); T1 stage-3 realization: finite-product construction, with the cokernel-coordinate argument replaced by the elementary split-cokernel universal-property argument"
  },
  "mathlib_searches": [
   {
@@ -221,5 +207,15 @@
   "group": "R1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-863f9",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T082414-L-1648425",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged tower_split_envelope signature matches the node’s finite-product envelope, natural embedding, additivity, monomorphisms and split cokernel; only proof fields changed. Delivered module and sole direct importer Sheaf.Algebra.Homology.TowerSplitComplexReplacement compile cleanly against revised exports. All eleven declarations use only propext, Classical.choice and Quot.sound; no sorry remains."
  }
 }
