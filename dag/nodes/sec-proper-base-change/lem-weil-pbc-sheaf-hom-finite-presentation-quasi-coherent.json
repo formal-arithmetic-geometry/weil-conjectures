@@ -37,67 +37,64 @@
  ],
  "proof": [
   {
-   "text": "Fix $x\\in X$. By [def-weil-pbc-module-finite-type-presentation](2), choose an open neighbourhood $U$ of $x$, integers $m,n\\ge0$, and $a:\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}$ with cokernel map $b:\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$ (composing the chosen cokernel with its isomorphism to $\\mathcal G|_U$). By [lem-weil-pbc-module-restriction-open-immersion-colimits](2), $\\mathcal F|_U$ is quasi-coherent. For every open $W\\subseteq U$, part (1) of that same node preserves the cokernel diagram, so $b|_W$ is a cokernel of $a|_W$. The free modules restrict to $\\mathcal O_W^{\\oplus m}$ and $\\mathcal O_W^{\\oplus n}$: their sections and restrictions are the same componentwise ones on opens contained in $W$.",
+   "text": "Obtain Mathlib QuasicoherentData p for G with every presentation finite. Its family p.X covers X. For each i, put U=p.X i and P=p.presentation i. Reindex the finite generator and relation types by Fin of their cardinalities; identify the free sheaves with finite biproducts of the restricted unit via biproduct.isoCoproduct and Sigma.reindex. Conjugate the presentation map and its cokernel map by these isomorphisms. P.isColimit and IsCokernel.ofIso prove that the conjugated cokernel is G.over U.",
    "uses": [
-    "def-weil-pbc-module-finite-type-presentation",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CQ, finite-presentation kernel calculation"
+   }
+  },
+  {
+   "text": "Apply homObj_locally_kernel_of_local_presentation to that specified presentation. It yields a map alpha between the n-fold and m-fold sums of F.restrict U.ι and an isomorphism from the restriction of Hom(G,F) to kernel alpha. This existing proved theorem performs the contravariant internal Hom kernel calculation and restriction comparison without requiring coherence of G or F.",
+   "uses": [
+    "lem-weil-pbc-coherent-hom-local-kernel-from-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules 01CQ, lemma-internal-hom-locally-kernel-direct-sum, first assertion, using its local finite presentation"
+    "place": "Modules, Lemma 01CQ, finite-presentation kernel calculation"
    }
   },
   {
-   "text": "Put $\\mathcal E=\\mathcal F|_U$. Every finite sum $\\mathcal E^{\\oplus r}$ is quasi-coherent: for $r=0$, the zero module is the sectionwise kernel of $\\operatorname{id}_{\\mathcal E}$, hence quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]; for $r+1$, its sectionwise decomposition $\\mathcal E^{\\oplus(r+1)}=\\mathcal E^{\\oplus r}\\oplus\\mathcal E$ and [lem-weil-pbc-quasi-coherent-module-direct-sum] give the induction step. In particular both the $n$-fold and $m$-fold sums are quasi-coherent, including zero ranks.",
+   "text": "The restriction F.restrict U.ι is quasi-coherent. Each finite biproduct of this module is isomorphic to its coproduct indexed by ULift (Fin r), using biproduct.isoCoproduct and Sigma.reindex. Apply the proved isQuasicoherent_sigma, which includes the empty index type. Thus the source and target of alpha are quasi-coherent. Apply isQuasicoherent_kernel alpha and transport across the kernel isomorphism.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-direct-sum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "01LA, section-quasi-coherent, items (3), (5), (10)"
-   }
-  },
-  {
-   "text": "Write $a(e_k)=\\sum_{i=1}^n a_{ik}e_i$, with $a_{ik}\\in\\mathcal O_X(U)$, and define the morphism $A:\\mathcal E^{\\oplus n}\\to\\mathcal E^{\\oplus m}$ on an open $W\\subseteq U$ by $A_W((s_i))=(\\sum_i a_{ik}|_W s_i)_k$. It is linear and commutes with restriction by this formula. An $\\mathcal O_W$-linear morphism $\\chi:\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W$ is uniquely determined by $s_i=\\chi_W(e_i)$, by [def-weil-pbc-module-finite-type-presentation]. It annihilates $a|_W$ exactly when $A_W((s_i))=0$. Since $b|_W$ is a cokernel, such a $\\chi$ factors uniquely as $\\psi\\circ b|_W$, where $\\psi:\\mathcal G|_W\\to\\mathcal F|_W$. Thus $\\psi\\mapsto(\\psi_W(b_W(e_i)))_i$ is a linear bijection from $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)(W)$ to $\\ker A_W$. Its formula commutes with restriction; the inverse does too by uniqueness of factorization. Hence [def-pur-sheaf-hom] identifies the restriction of the Hom sheaf to $U$ with the sectionwise kernel $\\ker A$. By [lem-weil-pbc-quasi-coherent-module-kernel] and Step 2 this kernel is quasi-coherent.",
-   "uses": [
-    "def-weil-pbc-module-finite-type-presentation",
-    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
     "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules 01CQ, lemma-internal-hom-locally-kernel-direct-sum, first assertion (finite presentation calculation); Schemes 01LA, item (10)"
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 01LA, items (3), (5), (10), and locality"
    }
   },
   {
-   "text": "For the arbitrary point $x$, quasi-coherence of the Hom sheaf on $U$ supplies an affine neighbourhood $V\\subseteq U$ of $x$ on which it is $\\widetilde M$ for a module $M$, by [pqf-def-coherent]. Since $U$ is open in $X$, $V$ is also an affine open neighbourhood in $X$ and the restriction of the original Hom sheaf to $V$ is the same sheaf. Every $x$ therefore has the affine neighbourhood required by [pqf-def-coherent], proving the claim.",
+   "text": "Transport the local quasi-coherence back through the inverse of overEquiv U: it is the pushforward along the site equivalence and preserves quasi-coherent presentations by Mathlib isQuasicoherent_pushforward_of_isLeftAdjoint, with sheafOfModulesEquivOverInverseUnit providing the unit comparison. The inverse image of the component of overFunctorEquiv U followed by the inverse unit of overEquiv U identifies this object with Hom(G,F).over U. Finally use Mathlib IsQuasicoherent.of_coversTop with p.X and p.coversTop to conclude quasi-coherence globally.",
    "uses": [
-    "pqf-def-coherent",
     "def-pur-sheaf-hom"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "01LA, section-quasi-coherent, locality and item (10)"
+    "place": "Schemes, Section 01LA, items (3), (5), (10), and locality"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-coherent-hom-local-kernel-from-presentation",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
   "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-direct-sum",
-  "def-pur-sheaf-hom",
-  "pqf-def-coherent"
+  "def-pur-sheaf-hom"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "01LA, section-quasi-coherent, item (10), via Modules 01CQ, lemma-internal-hom-locally-kernel-direct-sum"
+  "place": "Section 01LA, item (10), via Modules Lemma 01CQ. Lean implementation M4, 2026-10-13: existing HomLocalKernelOfPresentation; finite biproducts via proved coproduct closure; Mathlib presentation transport and locality."
  },
  "mathlib_searches": [
   {
@@ -196,5 +193,15 @@
   "group": "E1",
   "result": "pass",
   "note": "X : Scheme.{u}; G F : X.Modules; G finite presentation = Mathlib IsFinitePresentation (clause 2); F IsQuasicoherent (STATE COHERENT SHEAVES); Hom = recorded SheafOfModules.homObj (R := X.sheaf) G F as landed CoherentSheafHom; conclusion IsQuasicoherent; node unchanged except lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T034207-L-3766968",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
