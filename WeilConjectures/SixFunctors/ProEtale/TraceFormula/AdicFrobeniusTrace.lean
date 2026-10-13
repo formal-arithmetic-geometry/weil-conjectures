@@ -67,8 +67,6 @@ namespace AlgebraicGeometry.ProEtale
 section Generic
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] [Finite Λ] [Finite Λ'] (ρ : Λ →+* Λ')
-  [Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} Λ)]
-  [Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} Λ')]
   [DerivedBraiding (ModuleCat.{u + 1} Λ)] [DerivedBraiding (ModuleCat.{u + 1} Λ')]
   {s X X' : Scheme.{u}} {aX : X ⟶ s} {aX' : X' ⟶ s} [IsGeometric aX] [IsGeometric aX']
   [HasCompactification aX] [HasCompactification aX']

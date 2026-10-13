@@ -117,8 +117,7 @@ end Stalk
 
 section Global
 
-variable [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} (R ⧸ I ^ n))]
-  [∀ n, DerivedBraiding (ModuleCat.{u + 1} (R ⧸ I ^ n))]
+variable [∀ n, DerivedBraiding (ModuleCat.{u + 1} (R ⧸ I ^ n))]
   (G : ∀ n, GeometricOperations (ModuleCat.{u + 1} (R ⧸ I ^ n)) (Spec (.of k)))
   (m : ℕ) [IsProper (endPow Φ m)]
   (δ : ∀ n : ℕ, Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) (levelρ I n) ⋙
@@ -144,6 +143,7 @@ lemma globalOperator_weilComplex_graph (n : ℕ) :
       (G n).properPullback (endPow Φ m) (endPow_comp hΦ m) (S.constructibleFiniteTor n) ≫
         (rightDerivedLowerShriek (ModuleCat.{u + 1} (R ⧸ I ^ n)) aX).map
           (iterCoeff Φ (F.coeff n) m) := by
+  haveI : IsProper ((F.weilComplex n).frobeniusIterate m) := ‹IsProper (endPow Φ m)›
   rw [Correspondence.globalOperator_ofGraph, weilComplex_coeffIterate]
   rfl
 
@@ -209,17 +209,14 @@ theorem exists_isLift_of_isCompatible {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.I
 
 section Trace
 
-variable [Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} R)]
-  [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} (R ⧸ I ^ n))]
-  [BraidedCategory (DerivedCategory (ModuleCat.{u + 1} R))]
-  [∀ n, BraidedCategory (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ n)))]
-  (hβ : (β_ ((𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))⟦(1 : ℤ)⟧)
-    ((𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))⟦(1 : ℤ)⟧)).hom = -𝟙 _)
-  (hβA : ∀ n, (β_ ((𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ n))))⟦(1 : ℤ)⟧)
-    ((𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ n))))⟦(1 : ℤ)⟧)).hom = -𝟙 _)
-  [HasRightDual c.pt] [∀ n, HasRightDual (T.obj n)]
+/-! The braiding of the derived categories is the Koszul braiding
+`DerivedCategory.braidedCategory` of the derived tensor product. -/
 
-include hϖ hI hc hβ hβA in
+attribute [local instance] DerivedCategory.braidedCategory
+
+variable [HasRightDual c.pt] [∀ n, HasRightDual (T.obj n)]
+
+include hϖ hI hc in
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4): the categorical trace
 `tr_R(V ∣ P)` of a lift `V` of a compatible family `f` reduces modulo `Iⁿ⁺¹` to the traces
 `tr_{R ⧸ Iⁿ⁺¹}(f n ∣ P_n)`, so that it is the element `(tr(f n ∣ P_n))_n` of
@@ -233,9 +230,9 @@ theorem exists_trace_eq_of_isLift_of_isCompatible {f : ∀ n, T.obj n ⟶ T.obj 
           (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1)))))) (levelπ I n r) :=
   have := isLocalRing_quotient_pow_of_mem hϖ hI
   T.exists_trace_eq_of_isLift levelπ_surjective (ker_levelπ hI) exists_levelπ_eq
-    eq_zero_of_forall_levelπ_eq_zero hc hβ (fun n ↦ hβA (n + 1)) hf hV
+    eq_zero_of_forall_levelπ_eq_zero hc hf hV
 
-include hϖ hI hc hβ hβA in
+include hϖ hI hc in
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4): the categorical trace of a lift
 of a compatible family does not depend on the lift. -/
 theorem trace_eq_of_isLift_of_isCompatible {f : ∀ n, T.obj n ⟶ T.obj n}
@@ -244,7 +241,7 @@ theorem trace_eq_of_isLift_of_isCompatible {f : ∀ n, T.obj n ⟶ T.obj n}
     MonoidalCategory.trace V = MonoidalCategory.trace V' :=
   have := isLocalRing_quotient_pow_of_mem hϖ hI
   T.trace_eq_of_isLift levelπ_surjective (ker_levelπ hI) exists_levelπ_eq
-    eq_zero_of_forall_levelπ_eq_zero hc hβ (fun n ↦ hβA (n + 1)) hf hV hV'
+    eq_zero_of_forall_levelπ_eq_zero hc hf hV hV'
 
 end Trace
 
@@ -287,8 +284,7 @@ end Stalk
 
 section Global
 
-variable [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u + 1} (R ⧸ I ^ n))]
-  [∀ n, DerivedBraiding (ModuleCat.{u + 1} (R ⧸ I ^ n))]
+variable [∀ n, DerivedBraiding (ModuleCat.{u + 1} (R ⧸ I ^ n))]
   (G : ∀ n, GeometricOperations (ModuleCat.{u + 1} (R ⧸ I ^ n)) (Spec (.of k)))
   (m : ℕ) [IsProper (endPow Φ m)]
   (δ : ∀ n : ℕ, Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) (levelρ I n) ⋙

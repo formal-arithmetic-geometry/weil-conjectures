@@ -450,20 +450,17 @@ theorem exists_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f) :
 
 section Trace
 
+/-! The braiding of the derived categories is the Koszul braiding
+`DerivedCategory.braidedCategory` of the derived tensor product. -/
+
+attribute [local instance] DerivedCategory.braidedCategory
+
 variable [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
   [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u} (A n))]
-  [BraidedCategory (DerivedCategory (ModuleCat.{u} R))]
-  [∀ n, BraidedCategory (DerivedCategory (ModuleCat.{u} (A n)))]
-  (hβ : (β_ ((𝟙_ (DerivedCategory (ModuleCat.{u} R)))⟦(1 : ℤ)⟧)
-    ((𝟙_ (DerivedCategory (ModuleCat.{u} R)))⟦(1 : ℤ)⟧)).hom = -𝟙 _)
-  (hβA : ∀ n, (β_ ((𝟙_ (DerivedCategory (ModuleCat.{u} (A n))))⟦(1 : ℤ)⟧)
-    ((𝟙_ (DerivedCategory (ModuleCat.{u} (A n))))⟦(1 : ℤ)⟧)).hom = -𝟙 _)
   [HasRightDual c.pt] [∀ n, HasRightDual (T.obj n)]
 
 omit [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u} (A n))]
-  [∀ n, BraidedCategory (DerivedCategory (ModuleCat.{u} (A n)))]
   [∀ n, HasRightDual (T.obj n)] in
-include hβ in
 variable {T} in
 /-- The trace of an endomorphism `V` of the point of the cone is the alternating sum of the
 traces of a chain-level representative of `V` on the matrix complex `L` of a matrix model. -/
@@ -472,13 +469,13 @@ lemma MatrixModel.trace_eq (m : T.MatrixModel c) (V : c.pt ⟶ c.pt) (G : m.L.co
     MonoidalCategory.trace V = algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
       (∑ i ∈ Finset.Icc m.lo m.hi,
         (i.negOnePow : ℤ) • LinearMap.trace R (m.L.complex.X i) (G.f i).hom) :=
-  DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace hβ m.L.complex G _
+  DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace m.L.complex G _
     (fun _ hi ↦ m.L.isZero_complex_X (m.r_eq_zero hi)) (fun _ ↦ inferInstance)
     (fun _ ↦ inferInstance) c.pt V m.iso.symm (by rw [Iso.symm_hom, hG, Iso.inv_hom_id_assoc])
 
 omit [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
-  [BraidedCategory (DerivedCategory (ModuleCat.{u} R))] [HasRightDual c.pt] in
-include hπ hker hβA in
+  [HasRightDual c.pt] in
+include hπ hker in
 variable {T} in
 /-- The trace of `f n`, for a family `f` lifted by `V`, is the reduction of the alternating sum of
 the traces of a chain-level representative of `V` on the matrix complex `L`. -/
@@ -490,7 +487,7 @@ lemma MatrixModel.trace_f_eq (m : T.MatrixModel c) {f : ∀ n, T.obj n ⟶ T.obj
         (π n (∑ i ∈ Finset.Icc m.lo m.hi,
           (i.negOnePow : ℤ) • LinearMap.trace R (m.L.complex.X i) (G.f i).hom)) := by
   rw [MatrixComplex.map_sum_negOnePow_trace (π n) (m.L_map n) G]
-  exact DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace (hβA n) _ _ _
+  exact DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace _ _ _
     (fun _ hi ↦ (m.level n).M.isZero_complex_X (m.r_eq_zero hi)) (fun _ ↦ inferInstance)
     (fun _ ↦ inferInstance) (T.obj n) (f n) (m.level n).iso.symm (by
       rw [Iso.symm_hom, Iso.comp_inv_eq, Category.assoc, m.Q_map_mapHom_comp hπ hker hV G hG n,
@@ -498,7 +495,7 @@ lemma MatrixModel.trace_f_eq (m : T.MatrixModel c) {f : ∀ n, T.obj n ⟶ T.obj
 
 -- The compatibility `hf` of the blueprint statement is not needed.
 set_option linter.unusedVariables false in
-include hπ hker hcomplete hsep hc hβ hβA in
+include hπ hker hcomplete hsep hc in
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4): the categorical trace of a lift
 `V` of a compatible family `f` reduces to the traces of the `f n`: there is `r : R` with
 `tr_R(V ∣ P) = r` and `tr_{A n}(f n ∣ Q n) = r mod ϖⁿ⁺¹` for all `n`. -/
@@ -512,12 +509,12 @@ theorem exists_trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCom
   have := m.L.isStrictlyLE_complex m.hi m.r_hi
   obtain ⟨G, hG⟩ := DerivedCategory.Q_map_surjective_of_projective m.L.complex m.L.complex m.hi
     (m.iso.hom ≫ V ≫ m.iso.inv)
-  exact ⟨_, m.trace_eq hβ V G hG, m.trace_f_eq hπ hker hβA hV G hG⟩
+  exact ⟨_, m.trace_eq V G hG, m.trace_f_eq hπ hker hV G hG⟩
 
--- The compatibility `hf` and the hypothesis `hβA` of the blueprint statement are not needed.
+-- The compatibility `hf` of the blueprint statement is not needed.
 set_option linter.unusedVariables false in
 set_option linter.unusedSectionVars false in
-include hπ hker hcomplete hsep hc hβ hβA in
+include hπ hker hcomplete hsep hc in
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4): the categorical trace of a lift
 of a compatible family does not depend on the lift. -/
 theorem trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f)
@@ -529,7 +526,7 @@ theorem trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible
     (m.iso.hom ≫ V ≫ m.iso.inv)
   obtain ⟨G', hG'⟩ := DerivedCategory.Q_map_surjective_of_projective m.L.complex m.L.complex
     m.hi (m.iso.hom ≫ V' ≫ m.iso.inv)
-  rw [m.trace_eq hβ V G hG, m.trace_eq hβ V' G' hG']
+  rw [m.trace_eq V G hG, m.trace_eq V' G' hG']
   congr 1
   refine MatrixComplex.eq_of_forall_π hsep fun n ↦ ?_
   rw [MatrixComplex.map_sum_negOnePow_trace (π n) (m.L_map n) G,
