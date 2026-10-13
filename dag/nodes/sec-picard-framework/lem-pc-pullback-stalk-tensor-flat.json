@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-pullback-stalk-tensor-flat",
+ "kind": "statement",
+ "title": "Fibre-product stalk is flat over the tensor of stalks",
+ "statement": "Let $f:X\\to S$ and $g:T\\to S$ be morphisms of schemes [def-pc-scheme], and $z\\in X\\times_S T$ [def-pc-base-change] have projections $x,t$ and common image $s$. Put $R=\\mathcal O_{S,s}$, $A=\\mathcal O_{X,x}$, $B=\\mathcal O_{T,t}$, $C=\\mathcal O_{X\\times_S T,z}$. Give $A$ and $B$ their $R$-algebra structures via the scheme stalk maps, transporting the latter along $f(x)=g(t)$. Give $C$ its $A\\otimes_R B$-algebra structure whose restrictions to $A$ and $B$ are the two projection stalk maps. Then $C$ is flat over $A\\otimes_R B$ [def-weil-pbc-flat-ring-map].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/examples.tex",
+  "place": "Tag 0FLS, section-structure-sheaf-fibre-product, paragraph on can_z; affine fibre products Tag 01I4; localization flatness Tag 00HT (1)"
+ },
+ "proof": [
+  {
+   "text": "Choose affine neighbourhoods Spec R0 of s, Spec A0 of x, Spec B0 of t, the latter two mapping into the first. The resulting open neighbourhood of z is Spec(A0 tensor over R0 B0), by affine fibre products. Its local ring C is the localization at the prime P of z.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "R,A,B are the localizations of R0,A0,B0 at the projected primes. Inverting the images of the complements of the A0 and B0 primes in A0 tensor over R0 B0 gives A tensor over R B: denominators from the complement of the R0 prime are already units in A and B. These images avoid P, so C is a further localization. Tensor extensionality and the four structure-map equations identify this localization map with the chosen algebra map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Localizations are flat, proving the assertion.",
+   "uses": [
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-flat"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/examples.tex",
+  "place": "Tag 0FLS, section-structure-sheaf-fibre-product, paragraph on can_z; affine fibre products Tag 01I4; localization flatness Tag 00HT (1); detailed Lean argument/reduction by J1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk ring of a scheme fibre product is flat over the tensor product of the stalk rings over the base stalk ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The local ring of the fibre product of schemes is a localization of the tensor product of the two local rings over the base local ring",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.SpecTensorTo_SpecOfPoint, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(flat|localization)|(flat|localization).*stalk",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTorIndependentFlatComplex",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tor-independence of the pullback of the base-flat complex, checked on stalks (Tag 0A1D, Tag 0DJ8 (1))",
+   "via": [
+    "lem-pc-derived-pullback-tor-independent-flat-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackStalkTensorFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackStalkTensorFlat.lean",
+  "declaration": "AlgebraicGeometry.pullback_stalk_tensor_flat",
+  "statement": "theorem pullback_stalk_tensor_flat\n    {S T X : Scheme.{u}} (g : T ⟶ S) (f : X ⟶ S)\n    (x' : ↥(pullback f g))\n    [Algebra (S.presheaf.stalk (f ((pullback.fst f g) x'))) (X.presheaf.stalk ((pullback.fst f g)\n      x'))] [Algebra (S.presheaf.stalk (f ((pullback.fst f g) x'))) (T.presheaf.stalk\n      ((pullback.snd f g) x'))] [Algebra ((X.presheaf.stalk ((pullback.fst f g) x'))\n      ⊗[(S.presheaf.stalk (f ((pullback.fst f g) x')))] (T.presheaf.stalk ((pullback.snd f g)\n      x'))) ((pullback f g).presheaf.stalk x')]\n    (hRA : algebraMap (S.presheaf.stalk (f ((pullback.fst f g) x'))) (X.presheaf.stalk\n      ((pullback.fst f g) x')) = (f.stalkMap ((pullback.fst f g) x')).hom)\n    (hRB : algebraMap (S.presheaf.stalk (f ((pullback.fst f g) x'))) (T.presheaf.stalk\n      ((pullback.snd f g) x')) =\n      (g.stalkMap ((pullback.snd f g) x')).hom.comp (S.presheaf.stalkCongr (Inseparable.of_eq\n        (congrArg (fun φ : pullback f g ⟶ S => φ x') pullback.condition))).hom.hom)\n    (hAC : (algebraMap ((X.presheaf.stalk ((pullback.fst f g) x')) ⊗[(S.presheaf.stalk (f\n      ((pullback.fst f g) x')))] (T.presheaf.stalk ((pullback.snd f g) x'))) ((pullback f\n      g).presheaf.stalk x')).comp (algebraMap (X.presheaf.stalk ((pullback.fst f g) x'))\n      ((X.presheaf.stalk ((pullback.fst f g) x')) ⊗[(S.presheaf.stalk (f ((pullback.fst f g)\n      x')))] (T.presheaf.stalk ((pullback.snd f g) x')))) =\n      ((pullback.fst f g).stalkMap x').hom)\n    (hBC : (algebraMap ((X.presheaf.stalk ((pullback.fst f g) x')) ⊗[(S.presheaf.stalk (f\n      ((pullback.fst f g) x')))] (T.presheaf.stalk ((pullback.snd f g) x'))) ((pullback f\n      g).presheaf.stalk x')).comp\n      Algebra.TensorProduct.includeRight.toRingHom =\n        ((pullback.snd f g).stalkMap x').hom)\n    : Module.Flat\n      ((X.presheaf.stalk ((pullback.fst f g) x'))\n        ⊗[S.presheaf.stalk (f ((pullback.fst f g) x'))]\n        (T.presheaf.stalk ((pullback.snd f g) x')))\n      ((pullback f g).presheaf.stalk x')",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T045533-L-129766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T045533-L-129766",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

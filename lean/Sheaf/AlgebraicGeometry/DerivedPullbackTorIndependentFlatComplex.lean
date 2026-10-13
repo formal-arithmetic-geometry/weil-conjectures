@@ -9,7 +9,9 @@ public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRings
+import Sheaf.Algebra.Homology.FlatBaseDerivedTensorComparison
+import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
+import Sheaf.AlgebraicGeometry.PullbackStalkTensorFlat
 
 /-! # Stalkwise Tor-independence of base-flat complexes
 
@@ -100,6 +102,23 @@ theorem derivedPullback_torIndependent_flat_complex
       (((RingedSpace.moduleStalkFunctor X.toRingedSpace ((pullback.fst f g)
       x')).mapHomologicalComplex (.up ℤ)).obj G) ((pullback f g).presheaf.stalk x')) :
     ∀ i : ℤ, IsIso (M.localizedComparison i) := by
-  sorry
+  have _hqc := hqc
+  let Q := ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+    ((pullback.fst f g) x')).mapHomologicalComplex (.up ℤ)).obj G
+  let P := ((ModuleCat.restrictScalars
+    (algebraMap (S.presheaf.stalk (f ((pullback.fst f g) x')))
+      (X.presheaf.stalk ((pullback.fst f g) x')))).mapHomologicalComplex (.up ℤ)).obj Q
+  have hb : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i) := by
+    obtain ⟨b, hb⟩ := hbounded
+    refine ⟨b, fun i hi ↦ ?_⟩
+    exact (ModuleCat.restrictScalars _).map_isZero
+      ((RingedSpace.moduleStalkFunctor X.toRingedSpace _).map_isZero (hb i hi))
+  have hf : ∀ i : ℤ,
+      Module.Flat (S.presheaf.stalk (f ((pullback.fst f g) x'))) (P.X i) := by
+    intro i
+    exact relative_flat_module_stalk f (G.X i) (hflat i) _ hRA
+  have hK := CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat P hb hf
+  have hC := pullback_stalk_tensor_flat g f x' hRA hRB hAC hBC
+  exact ModuleCat.localizedComparison_isIso_of_kFlat_flat Q hK hC M
 
 end AlgebraicGeometry

@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-relative-flat-module-stalk",
+ "kind": "statement",
+ "title": "Relative affine flatness gives flat module stalks",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and $G$ an $\\mathcal O_X$-module. Suppose $G$ is affine-locally flat over $S$ [def-pc-scheme-module-flat-over]: for every pair of affine opens $U\\subseteq X$, $V\\subseteq S$ with $f(U)\\subseteq V$, $G(U)$ is flat over $\\mathcal O_S(V)$ via the scheme section map. For $x\\in X$, give $\\mathcal O_{X,x}$ its $\\mathcal O_{S,f(x)}$-algebra structure via the stalk map of $f$. Then the module stalk $G_x$ [def-pc-module-stalk-functor], restricted along this map, is flat over $\\mathcal O_{S,f(x)}$. No quasi-coherence assumption is required for this implication.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-module-stalk-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01U2, section-flat; Tag 01U4, lemma-flat-at-point; Algebra Tags 00H9 and 00HT"
+ },
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood V of f(x), set A = O(V), R = O_{S,f(x)} and M = G_x. Restrict the R-action of M to A via germs. Since R is the localization of A at the prime of f(x), Module.flat_iff_of_isLocalization reduces R-flatness to A-flatness.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let N be the affine neighbourhoods U of x contained in the inverse image of V. It is nonempty and cofiltered, by affine refinement of intersections. The inclusion from its opposite into opposite neighbourhoods is final, since every neighbourhood has such a refinement.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct F on N opposite with objects G(U) and A-action through f.appLE. The restrictions are A-linear by appLE_map and map_smul. Germ maps form a cocone to M: germ_smul, germ_stalkMap_apply and germ_res_apply establish linearity. After forgetting to abelian groups, finality identifies this with the usual stalk colimit. The forgetful functor reflects colimits, hence it is a colimit of A-modules.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The hypothesis IsFlatOver gives A-flatness of every F(U). Apply ModuleCat.filteredColimit_flat and transfer flatness along the canonical linear equivalence between colimit F and M. This finishes the localization reduction.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-flat-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-flat-over-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01U2, section-flat; Tag 01U4, lemma-flat-at-point; Algebra Tags 00H9 and 00HT; detailed Lean argument/reduction by J1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of schemes a module sheaf with relatively flat affine sections has a flat stalk over the base stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules with flat affine sections over the base scheme has flat stalks over the base stalk ring",
+   "results": "8 hits: AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Flat.*stalk|stalk.*Flat|flat.*stalk|stalk.*flat",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTorIndependentFlatComplex",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tor-independence of the pullback of the base-flat complex, checked on stalks (Tag 0A1D, Tag 0DJ8 (1))",
+   "via": [
+    "lem-pc-derived-pullback-tor-independent-flat-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFlatModuleStalk.lean",
+  "declaration": "AlgebraicGeometry.relative_flat_module_stalk",
+  "statement": "theorem relative_flat_module_stalk {S X : Scheme.{u}} (f : X ⟶ S)\n    (G : X.Modules) (hflat : G.IsFlatOver f) (x : X)\n    [Algebra (S.presheaf.stalk (f x)) (X.presheaf.stalk x)]\n    (hRA : algebraMap (S.presheaf.stalk (f x)) (X.presheaf.stalk x) = (f.stalkMap x).hom) :\n    Module.Flat (S.presheaf.stalk (f x))\n      ((ModuleCat.restrictScalars (algebraMap (S.presheaf.stalk (f x))\n        (X.presheaf.stalk x))).obj\n        ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T045533-L-129766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T045533-L-129766",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
