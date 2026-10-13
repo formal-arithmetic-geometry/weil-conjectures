@@ -11,53 +11,43 @@
  },
  "kind": "statement",
  "title": "One-component Ext degree characterization",
- "statement": "For every commutative ring R, module X in ModuleCat (max u v) R, and natural n, the explicit bounded-projective-resolution predicate [def-weil-pbc-finite-global-dimension] agrees with Mathlib projective dimension at most n: HasProjectiveResolutionLE X n ↔ CategoryTheory.HasProjectiveDimensionLE X n. The latter is Mathlib's Ext-vanishing predicate, not a chosen projective resolution.",
+ "statement": "For every abelian category C with enough projectives, object X and natural n, existence of a projective resolution supported in degrees at most n agrees with Mathlib projective dimension at most n: (∃ P : ProjectiveResolution X, ∀ i, n < i → IsZero (P.complex.X i)) ↔ HasProjectiveDimensionLE X n.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 065R"
  },
- "stmt_deps": [
-  "def-weil-pbc-finite-global-dimension"
- ],
+ "stmt_deps": [],
  "proof": [
   {
    "text": "Unpack the bounded resolution P. For any degree i >= n+1 and any target Y, use Mathlib ProjectiveResolution.extMk_surjective to represent an Ext class by a cocycle from P_i. Its source is zero by the support bound, so extMk_zero makes the class zero. HasProjectiveDimensionLT.mk packages this as Mathlib projective dimension at most n.",
    "uses": [
-    "def-weil-pbc-finite-global-dimension",
     "def-pc-ext"
    ],
    "elementary": true
   },
   {
    "text": "Conversely induct on n. At n=0 use Mathlib projective_iff_hasProjectiveDimensionLE_zero and ProjectiveResolution.self to obtain a resolution concentrated in degree zero.",
-   "uses": [
-    "def-weil-pbc-finite-global-dimension"
-   ],
+   "uses": [],
    "elementary": true
   },
   {
    "text": "At a successor form the kernel short exact sequence of Projective.π X. Mathlib ShortExact.hasProjectiveDimensionLT_X₃_iff transfers the dimension bound to its kernel. Apply induction to obtain an actual bounded resolution Q of that kernel.",
-   "uses": [
-    "def-weil-pbc-finite-global-dimension"
-   ],
+   "uses": [],
    "elementary": true
   },
   {
    "text": "Augment Q with the projective middle term using ChainComplex.augment. Transport exactness at degrees zero and one along the epimorphic augmentation of Q and the monomorphic kernel inclusion; higher exactness comes from Q. Build the augmentation quasi-isomorphism and ProjectiveResolution structure explicitly. Shift Q's zero-term bound to get the desired support bound.",
-   "uses": [
-    "def-weil-pbc-finite-global-dimension"
-   ],
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-ext",
-  "def-weil-pbc-finite-global-dimension"
+  "def-pc-ext"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 065R (1)--(3); X2 repair reuses Mathlib dimension criteria and shifting, retaining only the explicit resolution construction."
+  "place": "Tag 065R (1)--(3); generic explicit bounded-resolution construction"
  },
  "mathlib_searches": [
   {
@@ -97,9 +87,9 @@
   "module": "Sheaf.RingTheory.ProjectiveResolutionExtDegree",
   "declaration": "ModuleCat.projective_resolution_ext_degree",
   "file": "lean/Sheaf/RingTheory/ProjectiveResolutionExtDegree.lean",
-  "statement": "theorem projective_resolution_ext_degree {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (n : ℕ) : HasProjectiveResolutionLE X n ↔ HasProjectiveDimensionLE X n",
+  "statement": "theorem projective_resolution_ext_degree {C : Type u} [Category.{v} C] [Abelian C] [EnoughProjectives C] (X : C) (n : ℕ) : (∃ P : ProjectiveResolution X, ∀ i : ℕ, n < i → Limits.IsZero (P.complex.X i)) ↔ HasProjectiveDimensionLE X n",
   "branch": "sheaf-dag",
-  "by": "X2",
+  "by": "Y3",
   "date": "2026-10-14",
   "existing": false
  },
@@ -116,63 +106,45 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-f9d64",
-  "group": "X2",
+  "reviewer": "X-48453",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T201812-L-3978380",
+  "landing": "20261013T222423-L-1230348",
   "kind": "interface",
-  "note": "independent Codex review: Matched packet claims against delivered files, repository diffs, clean compilation, reproduced forced-adaptation failures, adapted importer compilation, and permitted axiom checks."
+  "note": "independent Codex review: Delivered files matched the packet and change record; all modules and direct importers compiled, forced adaptation failure was reproduced, adapted module compiled, and axiom checks passed."
  },
  "statement_change": {
   "date": "2026-10-14",
-  "by": "X2 stage 2",
-  "old_statement": "A bounded projective resolution of a module is equivalent to vanishing of Ext in degree Nat.succ n against every module: for every commutative ring R, module X, and natural n, HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat (max u v) R, Subsingleton (Abelian.Ext X Y (Nat.succ n)) using HasExt.standard.",
-  "what": "Replace the duplicate single-degree Ext criterion by the missing explicit-resolution/Mathlib-dimension bridge. Ext criteria and dimension shifting are reused from Mathlib. The old name is retained to keep the existing node attachment; all three direct callers are adapted with unchanged signatures. The prior Nat.succ spelling repair did not address the duplicate proof.",
+  "by": "Y3 stage 2",
+  "old_statement": "For every commutative ring R, module X in ModuleCat (max u v) R, and natural n, the explicit bounded-projective-resolution predicate [def-weil-pbc-finite-global-dimension] agrees with Mathlib projective dimension at most n: HasProjectiveResolutionLE X n ↔ CategoryTheory.HasProjectiveDimensionLE X n. The latter is Mathlib's Ext-vanishing predicate, not a chosen projective resolution.",
+  "what": "Upstream repair #1428: replace the duplicate module-specific Ext criterion with the generic explicit bounded-projective-resolution/dimension bridge.",
   "source": {
    "document": "coord/upstream-review-20261013.md",
-   "place": "#1428 duplicate projective-dimension cluster"
+   "place": "#1428 ProjectiveResolutionExtDegree duplicate review"
   },
   "citers": [
    {
     "id": "lem-pc-affine-polynomial-resolution-of-stalkwise",
     "holds": true,
-    "note": "The caller statement stays identical; adapt the proof to use the dimension bridge and Mathlib Ext criteria."
+    "note": "Uses the repaired bridge."
+   },
+   {
+    "id": "lem-weil-pbc-projective-dimension-ext-characterization",
+    "holds": true,
+    "note": "Uses the repaired bridge."
    },
    {
     "id": "lem-weil-pbc-projective-resolution-ext-all-degrees",
     "holds": true,
-    "note": "The caller statement stays identical; adapt the proof to use the dimension bridge and Mathlib Ext criteria."
+    "note": "Uses the repaired bridge."
    }
   ],
-  "previous": {
-   "date": "2026-10-14",
-   "by": "C1 stage 2",
-   "old_statement": "A bounded projective resolution of a module is equivalent to vanishing of Ext in degree n + 1 against every module: for every commutative ring R, module X, and natural n, HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat (max u v) R, Subsingleton (Abelian.Ext X Y (n + 1)) using HasExt.standard.",
-   "what": "Use Nat.succ n for the Ext degree. This is definitionally equal to n + 1, so the mathematical statement and all callers are unchanged. The repair review's claimed duplicate is not applicable: HasProjectiveResolutionLE is the library's explicit bounded-resolution predicate, whereas Mathlib HasProjectiveDimensionLE is an Ext-vanishing typeclass; no Mathlib declaration has the delivered theorem's statement.",
-   "source": {
-    "document": "coord/upstream-review-20261013.md",
-    "place": "#1428, projective-dimension cluster"
-   },
-   "citers": [
-    {
-     "id": "lem-pc-affine-polynomial-resolution-of-stalkwise",
-     "holds": true,
-     "note": "The caller uses the theorem to obtain an explicit ProjectiveResolution; Nat.succ n is definitionally equal to n + 1."
-    },
-    {
-     "id": "lem-weil-pbc-projective-resolution-ext-all-degrees",
-     "holds": true,
-     "note": "The caller rewrites the degree arithmetic; the definitionally equal spelling preserves elaboration."
-    }
-   ]
-  },
   "old_stmt_deps": [
-   "def-weil-pbc-finite-global-dimension",
-   "def-pc-ext"
+   "def-weil-pbc-finite-global-dimension"
   ],
   "old_proof": [
    {
-    "text": "Forward implication: unpack a projective resolution P supported in degrees at most n. Mathlib ProjectiveResolution.extMk_surjective represents every class in Ext^(n+1)(X,Y) by a cocycle from P_(n+1). That term is zero, so the cocycle is zero and extMk_zero makes the class zero. Any two classes therefore agree.",
+    "text": "Unpack the bounded resolution P. For any degree i >= n+1 and any target Y, use Mathlib ProjectiveResolution.extMk_surjective to represent an Ext class by a cocycle from P_i. Its source is zero by the support bound, so extMk_zero makes the class zero. HasProjectiveDimensionLT.mk packages this as Mathlib projective dimension at most n.",
     "uses": [
      "def-weil-pbc-finite-global-dimension",
      "def-pc-ext"
@@ -180,31 +152,21 @@
     "elementary": true
    },
    {
-    "text": "Reverse implication: induct on n, generalizing X. For n=0 the projective Ext-one criterion makes X projective. ProjectiveResolution.self X is a resolution concentrated in degree zero, hence has the required bound.",
-    "uses": [
-     "lem-weil-pbc-projective-ext-criterion",
-     "def-weil-pbc-finite-global-dimension"
-    ],
-    "elementary": true
-   },
-   {
-    "text": "For the successor case use the standard projective epimorphism Projective.π X and its kernel short exact sequence S. For a class a in Ext^(n+1)(S.X₁,Y), the connecting class in Ext^(n+2)(X,Y) is zero by the hypothesis. The contravariant long exact sequence writes a as the precomposition of a class from the projective S.X₂. That class is zero by positive-degree projective Ext vanishing. Thus the induction hypothesis supplies an actual bounded projective resolution Q of S.X₁.",
-    "uses": [
-     "lem-weil-pbc-ext-long-exact-first-variable",
-     "lem-weil-pbc-projective-ext-criterion",
-     "def-weil-pbc-finite-global-dimension"
-    ],
-    "elementary": true
-   },
-   {
-    "text": "Splice explicitly using ChainComplex.augment: put S.X₂ in degree zero and Q_i in degree i+1, with first differential Q.π.f 0 followed by S.f and augmentation S.g. ShortComplex.exact_iff_of_epi_of_isIso_of_mono transports exactness from S to degree zero (Q.π.f 0 is epic), and from the cokernel presentation of Q to degree one (S.f is monic). Higher exactness is inherited from Q.",
+    "text": "Conversely induct on n. At n=0 use Mathlib projective_iff_hasProjectiveDimensionLE_zero and ProjectiveResolution.self to obtain a resolution concentrated in degree zero.",
     "uses": [
      "def-weil-pbc-finite-global-dimension"
     ],
     "elementary": true
    },
    {
-    "text": "Build the projective resolution structure. In degree zero ChainComplex.quasiIsoAt₀_iff and ShortComplex.quasiIso_iff_of_zeros' identify the augmentation quasi-isomorphism condition with exactness and epimorphy. In every positive degree quasiIsoAt_iff_exactAt' reduces it to the exactness just established. Projectivity follows term by term from S.X₂ and Q; the bound above n+1 follows by shifting the bound on Q. This completes the induction without postponed construction data.",
+    "text": "At a successor form the kernel short exact sequence of Projective.π X. Mathlib ShortExact.hasProjectiveDimensionLT_X₃_iff transfers the dimension bound to its kernel. Apply induction to obtain an actual bounded resolution Q of that kernel.",
+    "uses": [
+     "def-weil-pbc-finite-global-dimension"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "Augment Q with the projective middle term using ChainComplex.augment. Transport exactness at degrees zero and one along the epimorphic augmentation of Q and the monomorphic kernel inclusion; higher exactness comes from Q. Build the augmentation quasi-isomorphism and ProjectiveResolution structure explicitly. Shift Q's zero-term bound to get the desired support bound.",
     "uses": [
      "def-weil-pbc-finite-global-dimension"
     ],
@@ -212,10 +174,103 @@
    }
   ],
   "old_proof_deps": [
-   "def-weil-pbc-finite-global-dimension",
    "def-pc-ext",
-   "lem-weil-pbc-projective-ext-criterion",
-   "lem-weil-pbc-ext-long-exact-first-variable"
-  ]
+   "def-weil-pbc-finite-global-dimension"
+  ],
+  "previous": {
+   "date": "2026-10-14",
+   "by": "X2 stage 2",
+   "old_statement": "A bounded projective resolution of a module is equivalent to vanishing of Ext in degree Nat.succ n against every module: for every commutative ring R, module X, and natural n, HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat (max u v) R, Subsingleton (Abelian.Ext X Y (Nat.succ n)) using HasExt.standard.",
+   "what": "Replace the duplicate single-degree Ext criterion by the missing explicit-resolution/Mathlib-dimension bridge. Ext criteria and dimension shifting are reused from Mathlib. The old name is retained to keep the existing node attachment; all three direct callers are adapted with unchanged signatures. The prior Nat.succ spelling repair did not address the duplicate proof.",
+   "source": {
+    "document": "coord/upstream-review-20261013.md",
+    "place": "#1428 duplicate projective-dimension cluster"
+   },
+   "citers": [
+    {
+     "id": "lem-pc-affine-polynomial-resolution-of-stalkwise",
+     "holds": true,
+     "note": "The caller statement stays identical; adapt the proof to use the dimension bridge and Mathlib Ext criteria."
+    },
+    {
+     "id": "lem-weil-pbc-projective-resolution-ext-all-degrees",
+     "holds": true,
+     "note": "The caller statement stays identical; adapt the proof to use the dimension bridge and Mathlib Ext criteria."
+    }
+   ],
+   "previous": {
+    "date": "2026-10-14",
+    "by": "C1 stage 2",
+    "old_statement": "A bounded projective resolution of a module is equivalent to vanishing of Ext in degree n + 1 against every module: for every commutative ring R, module X, and natural n, HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat (max u v) R, Subsingleton (Abelian.Ext X Y (n + 1)) using HasExt.standard.",
+    "what": "Use Nat.succ n for the Ext degree. This is definitionally equal to n + 1, so the mathematical statement and all callers are unchanged. The repair review's claimed duplicate is not applicable: HasProjectiveResolutionLE is the library's explicit bounded-resolution predicate, whereas Mathlib HasProjectiveDimensionLE is an Ext-vanishing typeclass; no Mathlib declaration has the delivered theorem's statement.",
+    "source": {
+     "document": "coord/upstream-review-20261013.md",
+     "place": "#1428, projective-dimension cluster"
+    },
+    "citers": [
+     {
+      "id": "lem-pc-affine-polynomial-resolution-of-stalkwise",
+      "holds": true,
+      "note": "The caller uses the theorem to obtain an explicit ProjectiveResolution; Nat.succ n is definitionally equal to n + 1."
+     },
+     {
+      "id": "lem-weil-pbc-projective-resolution-ext-all-degrees",
+      "holds": true,
+      "note": "The caller rewrites the degree arithmetic; the definitionally equal spelling preserves elaboration."
+     }
+    ]
+   },
+   "old_stmt_deps": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-pc-ext"
+   ],
+   "old_proof": [
+    {
+     "text": "Forward implication: unpack a projective resolution P supported in degrees at most n. Mathlib ProjectiveResolution.extMk_surjective represents every class in Ext^(n+1)(X,Y) by a cocycle from P_(n+1). That term is zero, so the cocycle is zero and extMk_zero makes the class zero. Any two classes therefore agree.",
+     "uses": [
+      "def-weil-pbc-finite-global-dimension",
+      "def-pc-ext"
+     ],
+     "elementary": true
+    },
+    {
+     "text": "Reverse implication: induct on n, generalizing X. For n=0 the projective Ext-one criterion makes X projective. ProjectiveResolution.self X is a resolution concentrated in degree zero, hence has the required bound.",
+     "uses": [
+      "lem-weil-pbc-projective-ext-criterion",
+      "def-weil-pbc-finite-global-dimension"
+     ],
+     "elementary": true
+    },
+    {
+     "text": "For the successor case use the standard projective epimorphism Projective.π X and its kernel short exact sequence S. For a class a in Ext^(n+1)(S.X₁,Y), the connecting class in Ext^(n+2)(X,Y) is zero by the hypothesis. The contravariant long exact sequence writes a as the precomposition of a class from the projective S.X₂. That class is zero by positive-degree projective Ext vanishing. Thus the induction hypothesis supplies an actual bounded projective resolution Q of S.X₁.",
+     "uses": [
+      "lem-weil-pbc-ext-long-exact-first-variable",
+      "lem-weil-pbc-projective-ext-criterion",
+      "def-weil-pbc-finite-global-dimension"
+     ],
+     "elementary": true
+    },
+    {
+     "text": "Splice explicitly using ChainComplex.augment: put S.X₂ in degree zero and Q_i in degree i+1, with first differential Q.π.f 0 followed by S.f and augmentation S.g. ShortComplex.exact_iff_of_epi_of_isIso_of_mono transports exactness from S to degree zero (Q.π.f 0 is epic), and from the cokernel presentation of Q to degree one (S.f is monic). Higher exactness is inherited from Q.",
+     "uses": [
+      "def-weil-pbc-finite-global-dimension"
+     ],
+     "elementary": true
+    },
+    {
+     "text": "Build the projective resolution structure. In degree zero ChainComplex.quasiIsoAt₀_iff and ShortComplex.quasiIso_iff_of_zeros' identify the augmentation quasi-isomorphism condition with exactness and epimorphy. In every positive degree quasiIsoAt_iff_exactAt' reduces it to the exactness just established. Projectivity follows term by term from S.X₂ and Q; the bound above n+1 follows by shifting the bound on Q. This completes the induction without postponed construction data.",
+     "uses": [
+      "def-weil-pbc-finite-global-dimension"
+     ],
+     "elementary": true
+    }
+   ],
+   "old_proof_deps": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-pc-ext",
+    "lem-weil-pbc-projective-ext-criterion",
+    "lem-weil-pbc-ext-long-exact-first-variable"
+   ]
+  }
  }
 }

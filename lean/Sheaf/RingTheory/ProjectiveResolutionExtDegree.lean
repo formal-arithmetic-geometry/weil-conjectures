@@ -1,28 +1,50 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Y3
+-/
 module
-public import Sheaf.RingTheory.GlobalDimension
-public import Mathlib.Algebra.Category.ModuleCat.Abelian
-public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+
 public import Mathlib.CategoryTheory.Abelian.Projective.Dimension
+public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 import Mathlib.CategoryTheory.Abelian.Projective.Ext
 import Mathlib.Algebra.Homology.Augment
+
+/-!
+# Projective dimension and bounded projective resolutions
+
+Mathlib's Ext-vanishing dimension predicate is equivalent to the existence of an
+actual projective resolution supported in degrees at most the given bound.
+Source: Stacks Project, Algebra, Lemma 065R, parts (1)--(3).
+-/
+
 @[expose] public section
+
 universe u v
+
 open CategoryTheory
 namespace ModuleCat
-/-- The explicit bounded-resolution predicate agrees with Mathlib's projective-dimension
-predicate. Unlike the Ext criteria already in Mathlib, the reverse implication constructs
-an actual bounded projective resolution. Induct on the bound: at zero use the identity
-resolution of a projective object; at a successor use Mathlib's dimension shifting for
-the kernel of a projective epimorphism and augment its shorter resolution. Exactness,
-projectivity and the support bound of the augmented complex give the required resolution.
-The forward implication represents Ext classes by cocycles on the zero resolution terms
-and applies Mathlib's `HasProjectiveDimensionLT.mk`.
-Source: Stacks Project, Algebra, Lemma 065R, parts (1)--(3).
+
+/-- In an abelian category with enough projectives, an object has a projective resolution
+supported in degrees at most `n` precisely when its projective dimension is at most `n`.
+
+Proof: represent Ext classes by cocycles on a bounded resolution. Above the bound,
+the source of each cocycle is zero, so Mathlib's projective dimension criterion applies.
+Conversely, induct on `n`. At zero use the identity resolution of a projective object.
+At a successor take the kernel of a projective epimorphism, use Mathlib's dimension
+shifting to apply induction to that kernel, then augment its resolution by the
+projective middle term. Exactness in degrees zero and one follows from the kernel
+sequence; higher exactness and the support bound follow from the shorter resolution.
+This constructs the complex and augmentation, rather than restating Ext vanishing.
+Source: Stacks Project, Algebra, Lemma 065R, parts (1)--(3); the proof uses only the
+abelian-category axioms and enough projectives.
 (blueprint: lem-weil-pbc-projective-resolution-ext-degree). -/
 theorem projective_resolution_ext_degree
-    {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (n : ℕ) :
-    HasProjectiveResolutionLE X n ↔ HasProjectiveDimensionLE X n := by
-  let := HasExt.standard (ModuleCat.{max u v} R)
+    {C : Type u} [Category.{v} C] [Abelian C] [EnoughProjectives C]
+    (X : C) (n : ℕ) :
+    (∃ P : ProjectiveResolution X, ∀ i : ℕ, n < i → Limits.IsZero (P.complex.X i)) ↔
+      HasProjectiveDimensionLE X n := by
+  let := HasExt.standard C
   constructor
   · rintro ⟨P, hP⟩
     apply HasProjectiveDimensionLT.mk
@@ -66,7 +88,10 @@ theorem projective_resolution_ext_degree
         cases i with
         | zero =>
           rw [ChainComplex.quasiIsoAt₀_iff, ShortComplex.quasiIso_iff_of_zeros']
-          · exact ⟨hzero, by change Epi S.g; infer_instance⟩
+          · dsimp [HomologicalComplex.shortComplexFunctor', HomologicalComplex.sc']
+            simp only [π, ChainComplex.toSingle₀Equiv_symm_apply_f_zero]
+            change (ShortComplex.mk δ S.g hδ).Exact ∧ Epi S.g
+            exact ⟨hzero, inferInstance⟩
           all_goals rfl
         | succ i =>
           rw [quasiIsoAt_iff_exactAt']
@@ -89,4 +114,5 @@ theorem projective_resolution_ext_degree
       cases i with
       | zero => omega
       | succ i => exact hQ i (by omega)
+
 end ModuleCat
