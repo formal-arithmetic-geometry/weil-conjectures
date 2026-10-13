@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverOnDivisorCharts
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts
 
 /-!
 # Cyclic orbit charts for a cover split by a root extension
@@ -72,6 +74,18 @@ theorem root_split_cover_cyclic_chart_model
           (algebraMap S (∀ k : Fin m,
             AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C (φ g))) (φ g))
         ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅ V.toScheme,
-          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ)) := by sorry
+          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ)) := by
+  classical
+  dsimp
+  intro δ hδ
+  by_cases hy : g ∈ y.asIdeal
+  · obtain ⟨S, ψ, z, hψ, hz, m, e, he, γ, hγ⟩ :=
+      root_split_cover_on_divisor_charts R g n hn hg p hj d y hy δ hδ
+    refine ⟨S, ψ, z, hψ, hz, m, e, he, γ, hγ⟩
+  · obtain ⟨S, φ, z, hφ, hz, hunit, γ, hγ⟩ :=
+      root_split_cover_away_divisor_charts R g n hn p hj d y hy δ hδ
+    refine ⟨S, φ, z, hφ, hz, d, fun _ ↦ 1, ?_, γ, hγ⟩
+    intro k
+    exact ⟨Nat.zero_lt_one, by simp⟩
 
 end AlgebraicGeometry.Scheme

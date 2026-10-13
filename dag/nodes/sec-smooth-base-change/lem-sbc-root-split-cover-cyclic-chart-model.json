@@ -14,16 +14,29 @@
  ],
  "proof": [
   {
-   "text": "Descend finiteness and etaleness from the faithfully flat punctured root cover.\nAt a divisor point, strict henselization makes the root cover a connected cyclic torsor:\nregularity of the divisor makes its equation prime, and Hensel lifts roots of unity.\nThe splitting induces a cyclic action on Fin d. Decompose into orbits of lengths e.\nThe orbit of length e is the intermediate root extension with root t^(n/e), as follows\nby comparing invariant fraction fields and normal integral closures. Thus e divides n\nand is a positive unit. Descend the finite collection of orbit isomorphisms, their\ninverses, and their projection identities to an affine pointed etale neighborhood.\nKeep the equation equal to the image of g. Away from the divisor, that image is a unit:\nsplit the finite etale cover etale locally and use e=1 for each component. The empty\ncover uses m=0. Spec of the product, restricted to the basic open, assembles the orbit\ncharts. This lemma supplies the model; etale preservation of regularity is separate.",
-   "uses": [],
-   "elementary": false
+   "text": "Split on whether g belongs to the prime ideal of y. In the on-divisor branch apply lem-sbc-root-split-cover-on-divisor-charts, which gives exactly the requested model without changing the equation.",
+   "uses": [
+    "lem-sbc-root-split-cover-on-divisor-charts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If g does not belong to the prime of y, apply lem-sbc-root-split-cover-away-divisor-charts. Take m=d and e(k)=1. Positivity and invertibility of all exponents follow from positivity and invertibility of 1. The supplied chart and projection identity are exactly the desired ones.",
+   "uses": [
+    "lem-sbc-root-split-cover-away-divisor-charts"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-root-split-cover-on-divisor-charts",
+  "lem-sbc-root-split-cover-away-divisor-charts"
+ ],
  "proof_origin": {
-  "by": "agent",
+  "kind": "from-document",
+  "by": "K3",
   "document": "Stacks Project",
-  "place": "0EYG, cyclic descent and finite presentation descent"
+  "place": "Tag 0EYG, first proof paragraph (off the divisor), and intermediate-root classification (on the divisor); case assembly formalized in Lean."
  },
  "mathlib_searches": [
   {
@@ -119,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T125011-L-3837291",
+  "landing": "20261013T133745-L-44394",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
