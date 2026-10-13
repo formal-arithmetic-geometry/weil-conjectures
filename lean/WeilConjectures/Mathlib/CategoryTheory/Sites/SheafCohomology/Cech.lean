@@ -11,7 +11,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 import Sheaf.CategoryTheory.CechResolutionColumns
 import Sheaf.CategoryTheory.CechResolutionTotal
-import Sheaf.CategoryTheory.CechResolutionDoubleComplex
+import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Mathlib.Algebra.Category.Grp.AB
 
 /-!
 # The Čech-to-derived spectral sequence
@@ -42,16 +44,16 @@ restriction of `P` to `Over X`.
 
 ## Implementation notes
 
-The general statement `exists_cechToDerivedSpectralSequence` allows a large site, a covering
-indexed by `ι : Type w` and cohomology computed in `AddCommGrpCat.{w}`. The proof through the
-double complex `C^p(𝔘, I^q)` needs an injective resolution of `F`, and the groups `I^q(V)` are
-only `v`-small, so it is carried out under `EnoughInjectives (Sheaf J AddCommGrpCat.{v})` with
-`w = v`.
+The statement `exists_cechToDerivedSpectralSequence` records the source's
+small-site convention by assuming `EssentiallySmall.{v} C`. Its covering indices,
+cohomology groups and sheaf values are all in universe `v`. Enough injectives
+follows from Grothendieck abelianness; it is not an additional hypothesis there.
+The two helpers allow arbitrary `C`, assuming enough injectives explicitly.
 -/
 
 @[expose] public section
 
-universe w v u
+universe v u
 
 namespace CategoryTheory
 
@@ -62,35 +64,43 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasFiniteWidePullbacks C]
   [HasSheafify J AddCommGrpCat.{v}]
 
-/-- **The Čech-to-derived spectral sequence.** Let `C` be a site with fibre products, `X : C` and
-`𝔘 = {π i : U i ⟶ X}` a family of morphisms generating a covering sieve of `X`. For an abelian
-sheaf `F` on `C` there is a first quadrant cohomological spectral sequence with
-`E₂^{p, q} ≅ Ȟ^p(𝔘, ℋ^q(F))` abutting to `H^{p + q}(X, F)`, where `ℋ^q(F)` is the presheaf
-`V ↦ H^q(V, F)`.
+/-- **The Čech-to-derived spectral sequence on an essentially small site.**
+Let `C` be an essentially `v`-small site with fibre products, `X : C`, and
+`𝔘 = {π i : U i ⟶ X}` a `v`-small family generating a covering sieve. For an
+abelian sheaf `F` there is a first quadrant cohomological spectral sequence with
+`E₂^{p, q} ≅ Ȟ^p(𝔘, ℋ^q(F))` abutting to `H^{p + q}(X, F)`.
 
-The `E₂`-term is the `p`-th cohomology of the Čech complex of the family `fun i ↦ Over.mk (π i)`
-of objects of `Over X` with coefficients in the restriction of `ℋ^q(F)` to `Over X`.
+The `E₂`-term is the cohomology of Mathlib's Čech complex on `Over X`, with
+coefficients in the restriction of the cohomology presheaf.
 
-Source: blueprint sk-thm-picard-cech, Steps 1--4; Stacks Tag 03AZ.
-Proof plan: construct a derived-section model compatible with this large site's
-independent coefficient and covering-index universe. Apply the Čech functor
-termwise to form a first-quadrant bicomplex. Exact products identify its column
-homology with the Čech complex of the cohomology presheaves. Acyclic augmented
-rows identify total homology with derived sections. Apply the first bicomplex
-spectral sequence, compose its second-page comparison with column homology,
-and transport the finite-degree abutment along the total comparison.
-STATEMENT-DISPUTED: the required general model is not supplied by HasExt alone;
-the repaired equal-universe helper additionally assumes EnoughInjectives.
-The general realization step remains unresolved, with no counterexample claimed.
+Source: Stacks Tags 03AZ and 00VI; blueprint sk-thm-picard-cech, Steps 1--4.
+The smallness assumption records the source's site convention (00VI). The
+category of abelian sheaves is Grothendieck abelian, hence has enough injectives.
+Choose an injective resolution and form its Čech double complex. Exact products
+identify column cohomology with the Čech complex of the cohomology presheaf;
+injective Čech acyclicity identifies total cohomology with sheaf cohomology.
+Apply the first bicomplex spectral sequence and transport these identifications.
+This corrects the previous unsupported large-site, independent-universe assertion;
+it does not claim that assertion follows from `HasExt` alone.
 (blueprint: lem-sc-cech-spectral) -/
-theorem Sheaf.exists_cechToDerivedSpectralSequence [HasExt.{w} (Sheaf J AddCommGrpCat.{v})]
+theorem Sheaf.exists_cechToDerivedSpectralSequence [EssentiallySmall.{v} C]
+    [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
     (F : Sheaf J AddCommGrpCat.{v}) (X : C)
-    {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
-    ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{w},
+    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
+    ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{v},
       (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
         ((cechComplexFunctor fun i ↦ Over.mk (π i)).obj
           ((Over.forget X).op ⋙ F.cohomologyPresheaf q)).homology p)) ∧
-      E.AbutsTo fun n ↦ F.H' n X := by sorry
+      E.AbutsTo fun n ↦ F.H' n X := by
+  let := Sheaf.isGrothendieckAbelian_of_essentiallySmall' J AddCommGrpCat.{v}
+  let I := injectiveResolution F
+  let D := Sheaf.cechResolutionDoubleComplex I X π
+  obtain ⟨E, hE₂, hE⟩ := D.exists_spectralSequence
+  refine ⟨E, fun p q ↦ ?_, hE.of_nonempty_iso fun n ↦
+    Sheaf.cechResolutionDoubleComplex_total I X π hπ n⟩
+  obtain ⟨e⟩ := hE₂ p q
+  exact ⟨e ≪≫ (HomologicalComplex.homologyFunctor _ _ p).mapIso
+    (Sheaf.cechResolutionDoubleComplex_columns I X π q).some⟩
 
 /-- **The Čech double complex of a covering.** Let `𝔘 = {π i : U i ⟶ X}` generate a covering
 sieve of `X` and let `F` be an abelian sheaf, on a site whose abelian sheaves have enough
@@ -100,9 +110,11 @@ injectives. There is a first quadrant double complex `D` of abelian groups such 
   presheaf `ℋ^q(F) : V ↦ H^q(V, F)`;
 * the total complex of `D` computes the cohomology `H^n(X, F)`.
 
-It is `D^{p, q} = C^p(𝔘, I^q)` for an injective resolution `F → I^•`: restricting `I^•` to
-`V = U i₀ ×[X] ⋯ ×[X] U iₚ` is again an injective resolution, so the columns compute
-`C^p(𝔘, ℋ^q(F))` (Step 2), and the Čech complex of the injective sheaf `I^q` is a resolution of
+It is `D^{p, q} = C^p(𝔘, I^q)` for an injective resolution `F → I^•`. The
+sheafification/free-abelian Yoneda adjunction identifies evaluation at each
+`V = U i₀ ×[X] ⋯ ×[X] U iₚ` with Hom from its free abelian sheaf. Computing Ext
+with `I^•` and commuting cohomology with products gives the columns
+`C^p(𝔘, ℋ^q(F))` (Step 2). The Čech complex of the injective sheaf `I^q` resolves
 `I^q(X)` (Stacks `03F6`, `03AW`), so the total complex computes `H^n(I^•(X)) = H^n(X, F)`
 (Step 3).
 
@@ -125,9 +137,10 @@ theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
   · exact fun q ↦ Sheaf.cechResolutionDoubleComplex_columns I X π q
   · exact fun n ↦ Sheaf.cechResolutionDoubleComplex_total I X π hπ n
 
-/-- **The Čech-to-derived spectral sequence, with enough injectives.** The special case of
-`Sheaf.exists_cechToDerivedSpectralSequence` where abelian sheaves on `C` have enough injectives,
-the covering is indexed by `ι : Type v` and cohomology is computed in `AddCommGrpCat.{v}`.
+/-- **The Čech-to-derived spectral sequence, with enough injectives.** The
+spectral-sequence conclusion on any site whose abelian sheaves have enough injectives,
+with covering indices and cohomology in universe `v`. Unlike the small-site theorem,
+this helper assumes enough injectives directly and needs no smallness of the site.
 
 It is the first spectral sequence of the double complex `Sheaf.exists_cechDoubleComplex`.
 

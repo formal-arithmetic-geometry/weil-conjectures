@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "The Cech-to-cohomology spectral sequence",
- "statement": "Let $\\mathcal C$ be a site, let $X$ be an object of $\\mathcal C$, let $\\mathfrak U=\\{U_i\\to X\\}_{i\\in I}$ be a covering, and let $F$ be an abelian sheaf on $\\mathcal C$. There is a convergent first-quadrant spectral sequence\n\n$$\nE_2^{p,q}=\\check H^p(\\mathfrak U,\\underline H^q(F))\\Longrightarrow H^{p+q}(X,F),\n$$\n\nwhere $\\underline H^q(F)$ is the presheaf $V\\mapsto H^q(V,F)$ and $\\check H^p(\\mathfrak U,-)$ is Cech cohomology with respect to the covering $\\mathfrak U$.",
+ "statement": "Let $\\mathcal C$ be an essentially $v$-small category with $v$-small Hom sets and finite wide pullbacks, and let $J$ be a Grothendieck topology on $\\mathcal C$ for which sheafification of $v$-small abelian-group-valued presheaves exists. Let $F$ be such an abelian sheaf, $X\\in\\mathcal C$, and $\\mathfrak U=\\{\\pi_i:U_i\\to X\\}_{i\\in I}$ a $v$-small family generating a $J$-covering sieve. Computing Ext in universe $v$, there exists a first-quadrant cohomological spectral sequence with $E_2^{p,q}\\cong\\check H^p(\\mathfrak U,\\underline H^q(F))$ abutting to $H^{p+q}(X,F)$, where $\\underline H^q(F)$ is the presheaf $V\\mapsto H^q(V,F)$ and $\\check H^p$ is the cohomology of the alternating Cech complex of the covering. The essential smallness records the small-site convention of Stacks Tag 00VI.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
   "place": "node lem-sc-cech-spectral, order 600"
@@ -18,12 +18,29 @@
  ],
  "proof": [
   {
-   "text": "Construct a suitable derived-section model and Cech bicomplex on the large site in the independent coefficient/index universe. This step is unresolved under HasExt alone. The repaired equal-universe helper assumes EnoughInjectives and therefore cannot be used here without additional justified theory.",
-   "uses": [],
+   "text": "Use Sheaf.isGrothendieckAbelian_of_essentiallySmall' with AddCommGrpCat and Mathlib's Grothendieck-category enough-injectives instance. Form injectiveResolution F and its specified Cech resolution double complex. This is valid under the source's small-site convention, unlike the previous HasExt-only general model.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-sc-cech-resolution-double-complex"
+   ],
    "elementary": false
   },
   {
-   "text": "Apply the first double-complex spectral sequence, compose its E2 isomorphisms with homology of the column isomorphisms, and transport the abutment along the total homology isomorphisms.",
+   "text": "The column theorem identifies inner cohomology as a complex with the Cech complex of the cohomology presheaf, including the horizontal differential.",
+   "uses": [
+    "lem-sc-cech-resolution-columns"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The total theorem identifies total homology with F.Hprime using injective Cech row acyclicity and the section-complex comparison for the same injective resolution.",
+   "uses": [
+    "lem-sc-cech-resolution-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_spectralSequence to that double complex. Compose each second-page isomorphism with the homology-functor image of the column isomorphism. Transport the abutment using AbutsTo.of_nonempty_iso and the total isomorphisms. This preserves all four steps of the unit route.",
    "uses": [
     "thm-sp-double-complex-spectral-sequences"
    ],
@@ -31,12 +48,16 @@
   }
  ],
  "proof_deps": [
+  "def-sc-cech-resolution-double-complex",
+  "lem-sc-cech-resolution-columns",
+  "lem-sc-cech-resolution-total",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
   "thm-sp-double-complex-spectral-sequences"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
-  "place": "E2 forced repair: retain the general statement unchanged and withdraw the application of the newly restricted helper; large-site independent-universe realization remains open"
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/03AZ",
+  "place": "Lemma 21.10.6, with the small-site convention of 00VI; the equivalent injective-resolution double-complex route follows blueprint sk-thm-picard-cech Steps 1--4."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -53,10 +74,14 @@
  "lean": {
   "module": "WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech",
   "declaration": "CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence",
-  "branch": "slopmaster2",
-  "line": 72,
+  "branch": "sheaf-dag",
+  "line": 86,
   "sorry_free": false,
-  "body_lines": 1
+  "body_lines": 9,
+  "statement": "theorem Sheaf.exists_cechToDerivedSpectralSequence [EssentiallySmall.{v} C]\n    [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]\n    (F : Sheaf J AddCommGrpCat.{v}) (X : C)\n    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :\n    ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{v},\n      (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅\n        ((cechComplexFunctor fun i ↦ Over.mk (π i)).obj\n          ((Over.forget X).op ⋙ F.cohomologyPresheaf q)).homology p)) ∧\n      E.AbutsTo fun n ↦ F.H' n X",
+  "note": "Local hole closed for the explicitly corrected small-site statement; transitive sorryAx remains in the bicomplex spectral-sequence theory. The two existing enough-injectives helper signatures and proofs are preserved.",
+  "by": "M1",
+  "date": "2026-10-13"
  },
  "blueprint_lean": [
   "CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence"
@@ -169,11 +194,65 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-6a78b",
-  "group": "V2",
+  "reviewer": "X-2ebad",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T003202-L-2430493",
+  "landing": "20261013T072357-L-1122241",
   "kind": "interface",
-  "note": "independent Codex review: Matched the alias with the corrected node and change record; verified unchanged caller signatures, minimal forced adaptation, DAG dependencies, report repair, compilation and axioms."
+  "note": "independent Codex review: Matched the corrected Lean signature and proof with the node, source convention, change record, complete downstream list, unit route, report, compilation and axiom checks; targets and helper signatures remain unchanged."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "M1 stage 2",
+  "old_statement": "Let $\\mathcal C$ be a site, let $X$ be an object of $\\mathcal C$, let $\\mathfrak U=\\{U_i\\to X\\}_{i\\in I}$ be a covering, and let $F$ be an abelian sheaf on $\\mathcal C$. There is a convergent first-quadrant spectral sequence\n\n$$\nE_2^{p,q}=\\check H^p(\\mathfrak U,\\underline H^q(F))\\Longrightarrow H^{p+q}(X,F),\n$$\n\nwhere $\\underline H^q(F)$ is the presheaf $V\\mapsto H^q(V,F)$ and $\\check H^p(\\mathfrak U,-)$ is Cech cohomology with respect to the covering $\\mathfrak U$.",
+  "what": "Source-encoding correction under brief step 5: Stacks 00VI disallows big sites. The former Lean claim permitted an arbitrary large C and an independent universe w under HasExt alone, exceeding the source and lacking a valid realization model. Record the small-site convention using EssentiallySmall in coefficient universe v; use v for covering indices and Ext, and derive enough injectives rather than adding it as an assumption. This is an interface correction, not a proof of the former generality.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/00VI",
+   "place": "Remark 7.6.3, read with Lemma 21.10.6 (03AZ)"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-pic-tangent-space",
+    "holds": true,
+    "note": "This citer concerns schemes and their small Zariski/open sites, with coverings and coefficients in the site universe. The corrected small-site spectral sequence suffices. Its existing Lean statement, definitions and proof remain unchanged; no Lean application of the former arbitrary-large-site declaration occurs."
+   },
+   {
+    "id": "lem-sc-p1-monomial",
+    "holds": true,
+    "note": "This citer concerns schemes and their small Zariski/open sites, with coverings and coefficients in the site universe. The corrected small-site spectral sequence suffices. Its existing Lean statement, definitions and proof remain unchanged; no Lean application of the former arbitrary-large-site declaration occurs."
+   },
+   {
+    "id": "lem-pc-cech-computes",
+    "holds": true,
+    "note": "This citer concerns schemes and their small Zariski/open sites, with coverings and coefficients in the site universe. The corrected small-site spectral sequence suffices. Its existing Lean statement, definitions and proof remain unchanged; no Lean application of the former arbitrary-large-site declaration occurs."
+   },
+   {
+    "id": "lem-pc-flat-base-change-cohom",
+    "holds": true,
+    "note": "This citer concerns schemes and their small Zariski/open sites, with coverings and coefficients in the site universe. The corrected small-site spectral sequence suffices. Its existing Lean statement, definitions and proof remain unchanged; no Lean application of the former arbitrary-large-site declaration occurs."
+   },
+   {
+    "id": "lem-sc-cech-h1-injective",
+    "holds": true,
+    "note": "This citer concerns schemes and their small Zariski/open sites, with coverings and coefficients in the site universe. The corrected small-site spectral sequence suffices. Its existing Lean statement, definitions and proof remain unchanged; no Lean application of the former arbitrary-large-site declaration occurs."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Construct a suitable derived-section model and Cech bicomplex on the large site in the independent coefficient/index universe. This step is unresolved under HasExt alone. The repaired equal-universe helper assumes EnoughInjectives and therefore cannot be used here without additional justified theory.",
+    "uses": [],
+    "elementary": false
+   },
+   {
+    "text": "Apply the first double-complex spectral sequence, compose its E2 isomorphisms with homology of the column isomorphisms, and transport the abutment along the total homology isomorphisms.",
+    "uses": [
+     "thm-sp-double-complex-spectral-sequences"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "thm-sp-double-complex-spectral-sequences"
+  ]
  }
 }
