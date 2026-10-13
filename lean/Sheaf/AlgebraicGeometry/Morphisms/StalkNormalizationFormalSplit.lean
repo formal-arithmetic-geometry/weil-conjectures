@@ -19,12 +19,10 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
-import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
-import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
-import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense
-import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.RingTheory.NormalLocalDepthTwo
-import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFullyFaithful
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalBoundaryDepths
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedSplit
+import Mathlib.RingTheory.MvPowerSeries.Equiv
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Splitting the normalization on a compatible power-series test
@@ -103,6 +101,20 @@ theorem GaloisCover.exists_stalk_normalization_formal_split {S C : Scheme.{u}}
       Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d))) ≫ t = τ →
       ∃ e : pullback n t ≅
         ∐ (fun _ : G ↦ Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s)))),
-        e.hom ≫ Sigma.desc (fun _ : G ↦ 𝟙 _) = pullback.snd n t := by sorry
+        e.hom ≫ Sigma.desc (fun _ : G ↦ 𝟙 _) = pullback.snd n t := by
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  dsimp only
+  intro hn d t ht hb hz
+  let : IsFinite (pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
+      (pullback.fst c (S.fromSpecStalk s))) := hn
+  obtain ⟨hr, hp⟩ := GaloisCover.stalk_normalization_formal_boundary_depths
+    hS c G U PA s hs hmin hdepth hn d t ht hb
+  obtain ⟨e, he⟩ := GaloisCover.exists_stalk_normalization_formal_punctured_split
+    hS c σ hσ G q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ
+    s hs hmin hdepth hn d t ht hb hz
+  exact iso_of_finite_depth_two_extensions _ _ _ hr hp e he
 
 end AlgebraicGeometry.Scheme

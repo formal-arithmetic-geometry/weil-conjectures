@@ -12688,3 +12688,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:48 L: merged deliver/J3/Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardTensorComparison (stage 3; reviewer PASS; first push; landing 20261013T134801-L-129798 (interface); batch 20261013T134758; modules 2; new nodes 1)
 - 13:48 L: merged deliver/N1/Sheaf.Algebra.Homology.DerivedInternalHomShiftLeft (stage 3; reviewer PASS; first push; landing 20261013T134802-L-129974 (interface); batch 20261013T134758; modules 2; new nodes 1)
 - 13:48 L: merged deliver/N4/Sheaf.AlgebraicGeometry.PicardExternalRectangleSections (stage 3; reviewer PASS; first push; landing 20261013T134802-L-130119 (interface); batch 20261013T134758; modules 2; new nodes 1)
+- 13:48 L: merged deliver/S4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalSplit (stage 3; reviewer PASS; first push; landing 20261013T134803-L-130281 (interface); batch 20261013T134758; modules 3; new nodes 2)
