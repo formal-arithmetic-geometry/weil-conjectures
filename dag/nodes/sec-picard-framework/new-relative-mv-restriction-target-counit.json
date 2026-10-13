@@ -1,0 +1,117 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY (remark-base-change), 08BV (lemma-unbounded-mayer-vietoris), and 08HZ (lemma-unbounded-relative-mayer-vietoris)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "new-relative-mv-restriction-target-counit",
+ "title": "Target transpose of relative restriction in counit normal form",
+ "statement": "Let g′:X′→X, f′:X′→S′, f:X→S and g:S′→S be a cartesian square of schemes [def-pc-scheme, def-pc-base-change], and work in the unbounded derived O-module categories [def-pc-derived-category, def-pc-derived-pullback]. Fix K∈D(O_X) and W⊆U. Write j=U→X, l=W→X, k=W→U, p=W′→X′ and q=W′→W, where W′=X′×_X W. Use the canonical comparisons and pinned adjunctions of [def-pc-relative-mv-maps]. Put A=R(jf)_*Lj*K, C=Rj_*Lj*K, and c:Lk*Lj*≅Ll* (including the transport k j=l). Define δ:L(lf)*A→Ll*K by the composite (relativeMVComp l f)⁻¹_A, then Ll* of the composite Lf*((relativeMVImageComp j f)⁻¹_{Lj*K}) followed by the f-counit at C, then c⁻¹_C, then Lk* of the j-counit at Lj*K, then c_K. Define τ:L(pf′)*Lg*A→Lp*Lg′*K by the pullback square comparison L(pf′)*Lg*→Lq*L(lf)* at A, then Lq*(δ), then the coefficient comparison Lq*Ll*K→Lp*Lg′*K from q l=p g′. All equality transports are the projection equalities, and all comparison maps are the canonical ones, not unspecified isomorphisms. The adjoint transpose under L(pf′)*⊣R(pf′)_* of the target path of the relative restriction square, with K′=Lg′*K and coefficient map its identity, is τ. The source path is Lg*(relative restriction W⊆U) followed by the W local base-change arrow; the target path is the U local base-change arrow followed by restriction W′⊆U′. Only the target path is asserted to have this normal form; equality to the other path is not an assumption or conclusion. Equal opens, empty opens and zero complexes are included.",
+ "proof": [
+  {
+   "text": "Transpose only the target path under L(W'→S') adjoint to R(W'→S').\nExpand its relative restriction and remove the right-adjoint composition\ncomparisons by their defining mate equations. Transpose the U base-change\nmap using 08HY. Move the counit for U'→X' through the coefficient comparison\nby naturality and use both triangle identities to cancel the intermediate\nadjunction unit. The remaining factors are pullbacks of the counits for f\nand U→X. Apply the associativity coherence of relativeMVComp to the triples\nW→U→X→S and W'→U'→X'→S'. The identities for relativeMVOpenLift with each\nprojection, together with Scheme.homOfLE_ι, identify the resulting composites\nof scheme morphisms. Thus the equality transports in the comparisons agree\nby proof irrelevance. After canceling inverse comparison pairs, the outside\nfactors are the W square comparison and the W coefficient comparison, and\nthe inside factors are exactly the displayed restricted f and U counits.\nThis is the displayed normal form, independent of computing the source path.\nThe same equations apply for W=U, empty opens and zero complexes.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-relative-mv-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-relative-mv-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY, 08BV, 08HZ; target-path adjoint calculation in new-relative-mv-second."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVRestrictionSecond",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-relative-mv-second",
+   "place": "Target half of the counit-transpose calculation; coefficient naturality is proved in the parent module."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVRestrictionTargetCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVRestrictionTargetCounit.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_restriction_target_counit",
+  "statement": "theorem relativeMV_restriction_target_counit\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (W U : X.Opens) (i : W ≤ U) :\n    let A := (schemeDerivedDirectImage (U.ι ≫ f)).obj ((derivedPullback U.ι).obj K)\n    let c := relativeMVComp (X.homOfLE i) U.ι ≪≫\n      eqToIso (congrArg (fun t : W.toScheme ⟶ X ↦ derivedPullback t)\n        (Scheme.homOfLE_ι X i))\n    let t := (relativeMVComp (pullback.fst g' W.ι ≫ f') g).hom.app A ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj A)\n        (show pullback.snd g' W.ι ≫ (W.ι ≫ f) =\n            (pullback.fst g' W.ι ≫ f') ≫ g by\n          rw [← pullback.condition_assoc, Category.assoc, hpull.w, ← Category.assoc]).symm) ≫\n      (relativeMVComp (pullback.snd g' W.ι) (W.ι ≫ f)).inv.app A ≫\n      (derivedPullback (pullback.snd g' W.ι)).map\n        ((relativeMVComp W.ι f).inv.app A ≫\n          (derivedPullback W.ι).map\n            ((derivedPullback f).map\n                ((relativeMVImageComp U.ι f).inv.app ((derivedPullback U.ι).obj K)) ≫\n              (relativeMVAdj f).counit.app\n                ((schemeDerivedDirectImage U.ι).obj ((derivedPullback U.ι).obj K))) ≫\n          c.inv.app ((schemeDerivedDirectImage U.ι).obj ((derivedPullback U.ι).obj K)) ≫\n          (derivedPullback (X.homOfLE i)).map\n            ((relativeMVAdj U.ι).counit.app ((derivedPullback U.ι).obj K)) ≫\n          c.hom.app K) ≫\n      (relativeMVComp (pullback.snd g' W.ι) W.ι).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)\n        (pullback.condition (f := g') (g := W.ι)).symm) ≫\n      (relativeMVComp (pullback.fst g' W.ι) g').inv.app K\n    ((relativeMVAdj (pullback.fst g' W.ι ≫ f')).homEquiv _ _).symm\n      ((relativeMVLocalArrow f f' g g' hpull K ((derivedPullback g').obj K)\n          (𝟙 _) U).hom ≫\n        relativeMVRestriction (relativeMVOpenLift g' i) (pullback.fst g' U.ι)\n          (pullback.fst g' W.ι) (pullback.lift_fst _ _ _) f'\n          ((derivedPullback g').obj K)) = t",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical base change map commutes with restriction to an open subscheme for the identity coefficient morphism",
+   "results": "8 hits, only underived scheme restriction and restriction identity isomorphisms.",
+   "date": "2026-10-13",
+   "verdict": "No derived counit normal form."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "Adjunction.homEquiv_naturality_right in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-13",
+   "verdict": "Building block, not the composite derived counit calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeMV|homEquiv_naturality",
+   "results": "Generic adjunction naturality occurrences, no exact derived normal form in Mathlib; RelativeMVMaps gives the definitions in the project.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change and adjunction counits commute with restriction to open subschemes",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T134401-L-96057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T134401-L-96057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
