@@ -1,0 +1,165 @@
+{
+ "id": "lem-pc-derived-hom-pushforward-kflat-model",
+ "kind": "statement",
+ "title": "Derived Hom pushforward on fixed K-flat and K-injective representatives",
+ "statement": "Let i:Z -> Y be a morphism of schemes [def-pc-scheme], with any supplied derived category D(O_Y) [def-pc-derived-category]. Assume the tensor pullback i* [def-pc-module-pullback] is additive. Let P be a K-flat cochain complex of O_Y-modules [def-pc-cochain-complex-modules, def-pc-kflat-complex] and J a K-injective cochain complex of O_Z-modules [def-pur-kinjective-complex]. Write F for termwise ordinary module pushforward and T=i*P termwise. Then RHom_Y(Q(P),Q(F(J))) [def-pur-derived-internal-hom] is isomorphic to Q(F(Hom(T,J))) [def-pur-hom-complex] in the supplied D(O_Y). The theorem does not require a specified derived category on Z or a closed immersion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DH",
+  "place": "Internal hom in the derived category, the tensor/Hom adjunction and pullback evaluation mate of Remark 08I3; Tags 06YC and 0A96 for K-flat pullback and K-injective Hom, and 079P for direct-image representatives."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "When the derived categories on Z and Y share a localization universe, use the specification of exists_derivedPullback. Its underived representative functor equals the recorded tensor pullback by Functor.ext, and its counit is an isomorphism on P. Compose with the quotient/homotopy comparison isomorphisms to obtain Li*Q(P) isomorphic to Q(T).",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback preserves K-flatness, so T is K-flat. Hom(T,J) is K-injective. The direct-image resolution computation at the identity quasi-isomorphisms of J and Hom(T,J) represents their derived direct images by their actual termwise pushforwards.",
+   "uses": [
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the supplied internal-Hom pullback/direct-image adjunction isomorphism d at (Q(P),Q(J)). Replace Ri*Q(J) by Q(F(J)). The internal-Hom representative theorem replaces RHom_Z(Li*Q(P),Q(J)) by Q(Hom(T,J)), using the comparison from step 1 and K-injectivity of J. Apply Ri* to this isomorphism and finish with the computation from step 2. This is the complete private same-localization proof.",
+   "uses": [
+    "lem-pc-derived-internal-hom-pullback-adjunction",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose standard localizations on Z and Y and apply the preceding proof there. Mathlib Localization.uniq and compUniqFunctor compare the standard Q on Y with the supplied Q. Compute internal Hom in both localizations using the same functorial K-injective replacement I of F(J); the two derivedInternalHom_comparison components identify both Hom objects with Q of the identical complex Hom(P,I(F(J))). The Q comparison transports the standard isomorphism back to the supplied category. Compose these explicit isomorphisms; no hypothesis about the supplied universe or localization on Z is introduced.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pur-derived-internal-hom",
+  "lem-pc-derived-internal-hom-pullback-adjunction",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pur-hom-kflat-into-kinjective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V2",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/08DH",
+   "place": "Internal hom in the derived category, the tensor/Hom adjunction and pullback evaluation mate of Remark 08I3; Tags 06YC and 0A96 for K-flat pullback and K-injective Hom, and 079P for direct-image representatives."
+  },
+  "note": "Complete Lean proof from existing declarations; no new sorry. Identity maps, empty schemes, and zero complexes are covered."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom into pushforward of a K-injective complex computed by pushforward of Hom from a K-flat tensor pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom into the pushforward of a K injective complex is computed by pushing forward Hom from the tensor pullback of a K flat complex",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, Ext, CategoryTheory.Tor', CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Tor'_obj_obj; no exact match to the new theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*homology|homology.*pushforward|derivedInternalHom.*representative",
+   "results": "0 hits: ; no exact match to the new theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfExtPushforwardHomology",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-duality branch, quotient-coefficient Koszul calculation: common resolution models for the self-Ext Hom computation and the self-Tor tensor computation, before evaluation or conormal comparison. Specifically steps 1 and 3: fixed K-flat/K-injective comparisons before taking homology.",
+   "via": [
+    "lem-sc-self-ext-tor-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-self-ext-tor-resolution-model",
+    "new-j3-self-ext-tor-core",
+    "lem-pc-self-ext-pushforward-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedHomPushforwardKFlatModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedHomPushforwardKFlatModel.lean",
+  "declaration": "AlgebraicGeometry.nonempty_derivedHom_pushforward_kFlat_model",
+  "statement": "theorem nonempty_derivedHom_pushforward_kFlat_model\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [hY : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [(Scheme.Modules.tensorPullback i).Additive]\n    (P : CochainComplex Y.Modules ℤ) (J : CochainComplex Z.Modules ℤ)\n    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) (hJ : J.IsKInjective) :\n    let F := (Scheme.Modules.pushforward i).mapHomologicalComplex (.up ℤ)\n    let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P\n    Nonempty (((derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf).obj\n      (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj (F.obj J))) ≅\n        DerivedCategory.Q.obj (F.obj (homComplex (R := Z.sheaf) T J)))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211119-L-397112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211119-L-397112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

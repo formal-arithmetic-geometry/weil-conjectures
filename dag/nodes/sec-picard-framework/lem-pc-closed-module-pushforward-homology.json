@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-closed-module-pushforward-homology",
+ "kind": "statement",
+ "title": "Ordinary closed module pushforward preserves homology",
+ "statement": "For schemes Z and Y [def-pc-scheme] and a closed immersion i:Z -> Y [def-weil-closed-immersion], the ordinary module pushforward i_*:Mod(O_Z) -> Mod(O_Y) [def-pc-module-pullback] preserves homology of every short complex: its canonical homology comparison is an isomorphism. This is ordinary O_Y-module pushforward, not pushforward into modules over the direct-image algebra.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08KS",
+  "place": "Modules, lemma-closed-immersion-push-pull, exactness assertion; local lifting proof uses the closed embedding and empty-cover sheaf axiom."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the abelian-sheaf epimorphism/local-surjectivity criterion. For an epimorphism on Z and a section over the inverse image of an ambient open W, lift near a point x of Z. Since i is inducing, the source open on which it lifts is the inverse image of some ambient open V. On V intersect W the restricted lift solves the lifting problem. At a point outside the closed image, the open complement has empty inverse image; target sections are zero by the sheaf axiom, and zero is a lift. This proves preservation of epimorphisms for underlying abelian sheaves in the private helper.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source-library instance SheafOfModules.preservesFiniteColimits_toSheaf makes forgetting scalars preserve epimorphisms; faithfulness reflects them. Forgetting after ordinary module pushforward is definitionally abelian pushforward after forgetting, so the first step proves preservation of module epimorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Ordinary module pushforward is a right adjoint, hence preserves kernels. Apply Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V2",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/08KS",
+   "place": "Modules, lemma-closed-immersion-push-pull, exactness assertion; local lifting proof uses the closed embedding and empty-cover sheaf axiom."
+  },
+  "note": "Complete Lean proof from existing declarations; no new sorry. Identity maps, empty schemes, and zero complexes are covered."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion of schemes has exact pushforward on sheaves of modules, commuting with homology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed embedding pushforward of sheaves of modules preserves homology",
+   "results": "8 hits: SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforward, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp; no exact match to the new theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*PreservesHomology|PreservesHomology.*pushforward",
+   "results": "0 hits: ; no exact match to the new theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfExtPushforwardHomology",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-duality branch, quotient-coefficient Koszul calculation: common resolution models for the self-Ext Hom computation and the self-Tor tensor computation, before evaluation or conormal comparison. Specifically step 2: exactness on ordinary module sheaves and its homology comparison.",
+   "via": [
+    "lem-sc-self-ext-tor-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-self-ext-tor-resolution-model",
+    "new-j3-self-ext-tor-core",
+    "lem-pc-self-ext-pushforward-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedModulePushforwardHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedModulePushforwardHomology.lean",
+  "declaration": "AlgebraicGeometry.closed_modulePushforward_preservesHomology",
+  "statement": "theorem closed_modulePushforward_preservesHomology\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :\n    (Scheme.Modules.pushforward i).PreservesHomology",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211119-L-397112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211119-L-397112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

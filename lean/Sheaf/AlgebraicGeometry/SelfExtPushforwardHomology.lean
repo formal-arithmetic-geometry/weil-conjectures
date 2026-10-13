@@ -10,8 +10,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackAdjunction
-import Sheaf.Topology.ClosedImmersionPushforwardExact
+import Sheaf.AlgebraicGeometry.DerivedHomPushforwardKFlatModel
+import Sheaf.AlgebraicGeometry.ClosedModulePushforwardHomology
 
 /-! # Closed-immersion self-Ext on fixed resolution representatives
 
@@ -68,6 +68,39 @@ theorem nonempty_selfExt_pushforward_homology
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj
         (H.obj (op (S.obj B), S.obj B))) ≅
       (Scheme.Modules.pushforward i).obj ((homComplex (R := Z.sheaf) T J).homology k))
-    := by sorry
+    := by
+  let Q := DerivedCategory.Q (C :=
+    SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+  let F := Scheme.Modules.pushforward i
+  let Fc := F.mapHomologicalComplex (.up ℤ)
+  let B := F.obj (SheafOfModules.unit Z.ringCatSheaf)
+  let S := DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0
+  let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf
+  let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P
+  let C : CochainComplex Z.Modules ℤ := homComplex (R := Z.sheaf) T J
+  let : F.PreservesHomology := closed_modulePushforward_preservesHomology i
+  let : QuasiIso a := hP.1
+  let : QuasiIso b := hb
+  have ha : IsIso (Q.map a) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) a).2 inferInstance
+  have hf : IsIso (Q.map (Fc.map b)) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (Fc.map b)).2 inferInstance
+  let ea : Q.obj P ≅ S.obj B := asIso (Q.map a)
+  let eb : S.obj B ≅ Q.obj (Fc.obj J) :=
+    (Q.mapIso
+      ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).app
+        (SheafOfModules.unit Z.ringCatSheaf))).symm ≪≫
+      asIso (Q.map (Fc.map b))
+  obtain ⟨e⟩ := nonempty_derivedHom_pushforward_kFlat_model i P J hP.2 hJ
+  let h := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k
+  exact ⟨h.mapIso (H.mapIso (ea.op.prod eb) ≪≫ e) ≪≫
+    (DerivedCategory.homologyFunctorFactors
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).app
+      (Fc.obj (homComplex (R := Z.sheaf) T J)) ≪≫
+    (C.sc k).mapHomologyIso F⟩
 
 end AlgebraicGeometry
