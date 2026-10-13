@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-section-acyclic-incoming-kernel-image",
+ "kind": "statement",
+ "title": "Acyclic incoming kernels and images by dimension shifting",
+ "statement": "Let $Y$ be a scheme, $V\\subseteq Y$ an open, and $K^\\bullet$ a cochain complex of $\\mathcal O_Y$-modules concentrated in nonnegative degrees [def-weil-sheaf-of-modules-category]. Write $H^r(V,M|_V)$ for module right-derived global sections on $V$ [def-sc-ringed-space-module-cohomology]. Suppose $H^r(V,K^n|_V)=0$ and $H^r(V,\\mathcal H^n(K)|_V)=0$ for all $n\\geq 0$ and $r>0$. Let $f_p$ be the incoming map of the short complex computing degree-$p$ homology: $f_p=d^{p-1}$ for $p>0$ and $f_0=0:K^0\\to K^0$. Then $H^r(V,(\\ker f_p)|_V)=0$ and $H^r(V,(\\operatorname{im} f_p)|_V)=0$ for all $p\\geq0$ and $r>0$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015B; https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Tag 015B, lemma-higher-derived-functors, long exact sequence; dimension shifting in the cycle and boundary short exact sequences associated to Tag 015J"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct the short exact sequences $0\\to B^n\\to Z^n\\to\\mathcal H^n(K)\\to0$ and $0\\to Z^n\\to K^n\\to B^{n+1}\\to0$, where $Z^n=\\ker d^n$, $B^0=0$ and $B^{n+1}=\\operatorname{im}d^n$. Use the kernel/cokernel universal properties and the epi-mono image factorization. Open restriction preserves both sequences: the proved source instance AlgebraicGeometry.Scheme.Modules.preservesLimitsOfSize_restrictFunctor provides finite limits, and the restriction adjunction provides finite colimits.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the full long exact sequence of module right-derived sections to the restricted sequences. Starting at $B^0=0$, induct on $n$: acyclicity of $B^n$ and $\\mathcal H^n(K)$ makes $Z^n$ acyclic by exactness at its positive cohomology; acyclicity of $Z^n$ and $K^n$ makes $B^{n+1}$ acyclic by the exact piece $H^r(K^n)\\to H^r(B^{n+1})\\to H^{r+1}(Z^n)$ for $r>0$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For $p>0$, identify the incoming kernel with $Z^{p-1}$ and image with $B^p$. For $p=0$, use the zero differential, whose kernel is $K^0$ and image is zero. Transport vanishing through the kernel and image isomorphisms and through the cohomology functor.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 015B, 015J and 01E4",
+  "place": "Tag 015B, lemma-higher-derived-functors, long exact sequence; dimension shifting in the cycle and boundary short exact sequences associated to Tag 015J; dimension-shifting and short-complex argument written by T2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a short complex of sheaves, vanishing of first cohomology of the kernel and image of the incoming differential implies sections commute with homology",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonnegative complex whose terms and homology are acyclic for a left exact functor, its cycles and boundaries are acyclic by dimension shifting",
+   "results": "8 hits, including HomologicalComplex.acyclic_iff, cycles_left_exact and shortExact_iff_degreewise_shortExact; no acyclicity-of-objects dimension-shifting statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso",
+   "results": "9 hits, including ShortComplex.mapHomologyIso, LeftHomologyData.mapHomologyIso_eq, homologyMap_mapNatTrans and NatTrans.app_homology. These assume homology preservation and do not establish it from local first-cohomology vanishing.",
+   "date": "2026-10-13",
+   "verdict": "useful comparison infrastructure, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cycles.*acyclic|acyclic.*cycles|kernel.*rightDerived|rightDerived.*kernel",
+   "results": "1 hit in Mathlib/Combinatorics/SimpleGraph/Acyclic.lean, unrelated. Direct rg of the project found no theorem asserting acyclicity of cycles/boundaries or the local short-complex section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionCohomologyThetaAcyclic",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local reduction in the flat base-change input to the formal-functions stalk comparison: normalized source and target cohomology identifications before choosing a lift. Source affine dictionary: normalized affine Leray edge before tensor extension. Tags 01F4 (2), 01XJ (1), 01E4 and 01E5; affine degeneration and normalization on cocycles; generic section/homology comparison: collapse both Cartan--Eilenberg spectral sequences after establishing term and homology acyclicity; local section/homology comparison, Tag 015B, lemma-higher-derived-functors, long exact sequence; dimension shifting in the cycle and boundary short exact sequences associated to Tag 015J",
+   "via": [
+    "lem-pc-section-cohomology-theta-acyclic",
+    "lem-pc-affine-resolution-section-bijective",
+    "new-affine-cohomology-section-equiv",
+    "new-flat-base-change-affine-source",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionAcyclicIncomingKernelImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionAcyclicIncomingKernelImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.section_acyclic_incoming_kernel_image",
+  "statement": "theorem section_acyclic_incoming_kernel_image\n    {Y : Scheme.{u}} (K : CochainComplex Y.Modules ℕ) (V : Y.Opens)\n    (hterms : ∀ (n r : ℕ), 0 < r →\n      IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace r).obj\n        ((restrictFunctor V.ι).obj (K.X n))))\n    (hhomology : ∀ (n r : ℕ), 0 < r →\n      IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace r).obj\n        ((restrictFunctor V.ι).obj (K.homology n)))) :\n    ∀ (p r : ℕ), 0 < r →\n      IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace r).obj\n        ((restrictFunctor V.ι).obj (kernel (K.sc p).f))) ∧\n      IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace r).obj\n        ((restrictFunctor V.ι).obj (image (K.sc p).f)))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T072406-L-1125327",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T072406-L-1125327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

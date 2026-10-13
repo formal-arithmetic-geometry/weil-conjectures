@@ -14,24 +14,16 @@
  ],
  "proof": [
   {
-   "text": "Restrict the nonnegative complex K to V. Restriction is exact, so its homology is the restriction of the homology of K. Form a Cartan--Eilenberg resolution. The first hypercohomology spectral sequence has E1 terms H^r(V,K^n|V); the term-vanishing hypothesis kills rows r>0, so its abutment is H^p(K(V)).",
+   "text": "Use dimension shifting to prove section-acyclicity of every incoming kernel and image. Specialize at degree $p$ and cohomological degree one to obtain the two local hypotheses for the short complex $K.sc\\,p$.",
    "uses": [
-    "thm-sp-if-e1",
-    "lem-sp-cartan-eilenberg-total-resolution",
-    "lem-weil-pbc-ce-resolution-all-lower-bounds"
+    "lem-pc-section-acyclic-incoming-kernel-image"
    ],
    "elementary": false
   },
   {
-   "text": "The second hypercohomology spectral sequence has E2 terms H^r(V,H^n(K)|V). The homology-vanishing hypothesis kills columns r>0. Thus the same abutment is Gamma(V,H^p(K)). Nonnegative support gives finite filtrations in each total degree, so both edge comparisons are isomorphisms.",
+   "text": "Apply the local short-complex section comparison to $K.sc\\,p$. Its adjoint sheafification/counit formula is definitionally sectionCohomologyTheta evaluated at $V$, because homology of a cochain complex and homologyMap in degree $p$ are defined using this short complex. This proves the original isomorphism statement unchanged.",
    "uses": [
-    "thm-sp-truncation-e2"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The composite edge sends a section cocycle to its image under the homology projection. The augmentation of the double resolution preserves that representative. Exact sheafification and its counit identify this cocycle map with sectionCohomologyTheta; exact evaluation identifies its presheaf-homology source with H^p(K(V)). Therefore theta evaluated at V is an isomorphism. Degree zero uses the kernel and augmentation; for empty V all sections are zero.",
-   "uses": [
+    "lem-pc-short-complex-section-comparison",
     "def-weil-pbc-flat-base-change-open-choices"
    ],
    "elementary": false
@@ -39,15 +31,13 @@
  ],
  "proof_deps": [
   "def-weil-pbc-flat-base-change-open-choices",
-  "lem-sp-cartan-eilenberg-total-resolution",
-  "lem-weil-pbc-ce-resolution-all-lower-bounds",
-  "thm-sp-if-e1",
-  "thm-sp-truncation-e2"
+  "lem-pc-section-acyclic-incoming-kernel-image",
+  "lem-pc-short-complex-section-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, Tags 015J and 01E4",
-  "place": "Specialization of both spectral sequences to section-acyclic terms and homology, with explicit cocycle identification"
+  "by": "worker T2",
+  "document": "Stacks Project, Tags 015B and 01E4",
+  "place": "Dimension shifting in the two cycle/boundary exact sequences, then the local short-complex section comparison; a route below the unit level, without hypercohomology spectral sequences"
  },
  "mathlib_searches": [
   {
@@ -144,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T054212-L-441438",
+  "landing": "20261013T072406-L-1125327",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

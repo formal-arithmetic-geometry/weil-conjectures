@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-short-complex-section-comparison",
+ "kind": "statement",
+ "title": "Local section comparison of a short complex from first-cohomology vanishing",
+ "statement": "Let $Y$ be a scheme, $V\\subseteq Y$ an open, and $S=(M_1\\xrightarrow f M_2\\xrightarrow g M_3)$ a short complex of $\\mathcal O_Y$-modules, so $gf=0$ [def-weil-sheaf-of-modules-category]. Let $U$ forget the sheaf condition, $L$ be exact sheafification, and $\\epsilon:LU\\to\\mathrm{id}$ their adjunction counit. Homology means $\\ker g/\\operatorname{im}f$. Suppose $H^1(V,(\\ker f)|_V)=0$ and $H^1(V,(\\operatorname{im} f)|_V)=0$, with module right-derived global sections [def-sc-ringed-space-module-cohomology]. Form $c:L\\mathcal H(US)\\to\\mathcal H(S)$ by the inverse exact-sheafification homology comparison $L\\mathcal H(US)\\to\\mathcal H(LUS)$ followed by $\\mathcal H(\\epsilon_S)$. Then evaluation over $V$ of the adjoint $\\mathcal H(US)\\to U\\mathcal H(S)$ of $c$ is an isomorphism of additive groups. No acyclicity of the three terms or the homology object, and no surrounding complex, is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015B; https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Tags 015B (initial long exact sequence) and 01E4, lemma-higher-direct-images, canonical homology/sheafification comparison"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Put $Z=\\ker g$, $B=\\operatorname{im}f$, and $N=\\ker f$. Restriction to $V$ is exact. The initial long exact sequence for $0\\to N\\to M_1\\to B\\to0$ and $H^1(V,N)=0$ give surjectivity of $\\Gamma(V,M_1)\\to\\Gamma(V,B)$. The sequence for $0\\to B\\to Z\\to\\mathcal H(S)\\to0$ and $H^1(V,B)=0$ gives surjectivity of $\\Gamma(V,Z)\\to\\Gamma(V,\\mathcal H(S))$ with kernel $\\Gamma(V,B)$. Identify derived degree zero with ordinary sections using Functor.rightDerivedZeroIsoSelf.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Left exactness of sections identifies $\\Gamma(V,Z)$ with the kernel of $\\Gamma(V,g)$. The two surjections identify $\\Gamma(V,\\mathcal H(S))$ with the cokernel of the incoming map to that kernel. Exact evaluation of presheaves identifies the source with the homology of the section short complex, giving an isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify this isomorphism with the displayed adjunction-defined map. The exact-sheafification homology comparison takes a sheafified cycle class to the class of that cycle. The counit returns its representative to $S$, and the adjunction unit sheafifies the original presheaf class. Thus the composite sends a section cycle to its class in $\\mathcal H(S)$. Precompose both maps with the epimorphic homology projection from section cycles; their equality there is this calculation, so they are equal. The zero incoming map and empty open are covered by the same kernel and cokernel universal properties.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 015B, 015J and 01E4",
+  "place": "Tags 015B (initial long exact sequence) and 01E4, lemma-higher-direct-images, canonical homology/sheafification comparison; dimension-shifting and short-complex argument written by T2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a short complex of sheaves, vanishing of first cohomology of the kernel and image of the incoming differential implies sections commute with homology",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor preserves homology of a short complex if the kernel and image of its first differential have vanishing first right derived functor",
+   "results": "8 hits, including Functor.preservesHomology_of_map_exact, ShortComplex.Exact.map and Functor.preservesHomologyOfExact. These concern global exact functors or assume preservation; none establishes this local section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso",
+   "results": "9 hits, including ShortComplex.mapHomologyIso, LeftHomologyData.mapHomologyIso_eq, homologyMap_mapNatTrans and NatTrans.app_homology. These assume homology preservation and do not establish it from local first-cohomology vanishing.",
+   "date": "2026-10-13",
+   "verdict": "useful comparison infrastructure, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cycles.*acyclic|acyclic.*cycles|kernel.*rightDerived|rightDerived.*kernel",
+   "results": "1 hit in Mathlib/Combinatorics/SimpleGraph/Acyclic.lean, unrelated. Direct rg of the project found no theorem asserting acyclicity of cycles/boundaries or the local short-complex section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionCohomologyThetaAcyclic",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local reduction in the flat base-change input to the formal-functions stalk comparison: normalized source and target cohomology identifications before choosing a lift. Source affine dictionary: normalized affine Leray edge before tensor extension. Tags 01F4 (2), 01XJ (1), 01E4 and 01E5; affine degeneration and normalization on cocycles; generic section/homology comparison: collapse both Cartan--Eilenberg spectral sequences after establishing term and homology acyclicity; local section/homology comparison, Tags 015B (initial long exact sequence) and 01E4, lemma-higher-direct-images, canonical homology/sheafification comparison",
+   "via": [
+    "lem-pc-section-cohomology-theta-acyclic",
+    "lem-pc-affine-resolution-section-bijective",
+    "new-affine-cohomology-section-equiv",
+    "new-flat-base-change-affine-source",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ShortComplexSectionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ShortComplexSectionComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.shortComplex_sectionComparison_isIso",
+  "statement": "theorem shortComplex_sectionComparison_isIso\n    {Y : Scheme.{u}} (S : ShortComplex (SheafOfModules.{u} Y.ringCatSheaf))\n    (V : Y.Opens)\n    (hkernel : IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace 1).obj\n      ((restrictFunctor V.ι).obj (kernel S.f))))\n    (himage : IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace 1).obj\n      ((restrictFunctor V.ι).obj (image S.f)))) :\n    IsIso (((PresheafOfModules.toPresheaf.{u} Y.ringCatSheaf.obj).map\n      ((PresheafOfModules.sheafificationAdjunction.{u} (𝟙 Y.ringCatSheaf.obj)).homEquiv\n        (S.map (SheafOfModules.forget.{u} Y.ringCatSheaf)).homology S.homology\n        (((S.map (SheafOfModules.forget.{u} Y.ringCatSheaf)).mapHomologyIso\n          (PresheafOfModules.sheafification.{u} (𝟙 Y.ringCatSheaf.obj))).inv ≫\n          ShortComplex.homologyMap (S.mapNatTrans\n            (PresheafOfModules.sheafificationAdjunction.{u}\n              (𝟙 Y.ringCatSheaf.obj)).counit)))).app (op V))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T072406-L-1125327",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T072406-L-1125327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
