@@ -20,11 +20,145 @@
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-bounded-constructible-tower",
-  "def-weil-proetale-constructible-sheaf"
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $P_n$ is finite, it is Noetherian. Apply [lem-weil-pbc-finite-ring-constructible-derived-origin] to $M_n$ with its interval $[a,b]$. This proves the first conclusion and gives bounded constructible etale witnesses $K_n$ with $\\nu_T^*K_n\\simeq M_n$. Derived tensor commutes with inverse image by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Thus the etale source $K_{n+1}\\otimes^L_{P_{n+1}}P_n$ pulls back to the supplied normalized $M_n$, which is bounded. Exactness and the sheaf unit isomorphism in [prop-weil-pbc-site-comparison-finite-level] imply that inverse image commutes with cohomology and detects zero sheaves; hence this etale source is bounded as well. Full faithfulness on $D^+$ in [thm-weil-pbc-site-comparison] now lifts each normalization and its inverse uniquely, as well as the transitions after restricting to the higher coefficient ring. Faithfulness carries the given quotient cocycle to the etale witnesses. We do not apply bounded-below full faithfulness to a potentially unbounded derived tensor without first checking its bound.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived; compatible etale witnesses"
+   }
+  },
+  {
+   "text": "Choose the finite stratifications witnessing constructibility of the finitely many sheaves $\\mathcal H^q(K_1)$, $a\\leq q\\leq b$, and intersect their strata. Finite intersections of locally closed subsets are locally closed, and these intersections form a finite partition; give them the iterated fibre-product subscheme structures. Refine to connected strata. A Noetherian space has finitely many irreducible components, each connected, so its connected components are finite unions of those components; their complements are closed, hence they are open and closed. Thus this refinement remains finite and locally closed. On every resulting connected stratum $S$, the cohomology of $K_1|_S$ is finite lisse. The empty scheme has the empty partition and the zero complex as its local model.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AI constructible criterion; elementary finite refinement"
+   }
+  },
+  {
+   "text": "Fix a stratum $S$ and a level $n$. Put $B=P_n$ and $J=I/I^n$. The complex $K_n|_S$ is bounded above, and its derived reduction to $B/J=P_1$ is $K_1|_S$ by repeated normalization and its cocycle. Apply [lem-weil-pbc-nilpotent-reduction-lissity]. Since $J^n=0$, it follows that every cohomology sheaf of $K_n|_S$ is locally constant of finite type. Over the finite ring $P_n$ these stalks are finite sets. The original interval $[a,b]$ is preserved by the exact inverse image along the immersion. This uses no finite Tor bound over $P_n$.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, lemma-locally-constant-bounded, with the nilpotent ideal I/I^n"
+   }
+  },
+  {
+   "text": "Choose a geometric point $\\bar s$ of the nonempty connected $S$ and let $E_n=(K_n|_S)_{\\bar s}$. Stalks are exact by [prop-weil-pbc-geometric-stalks-exact] and are inverse images at the geometric point by [lem-kun-stalk-as-pullback]; the tensor-pullback theorem therefore makes them commute with derived scalar extension; hence $E_n$ has finite cohomology in $[a,b]$, and the stalks of the normalizations give $E_{n+1}\\otimes^L_{P_{n+1}}P_n\\simeq E_n$ with the same cocycle. By [lem-weil-pbc-finite-ring-derived-local-constancy], each $K_n|_S$ is locally isomorphic to $\\underline E_n$ and its sheaf $\\mathcal I_n$ of such isomorphisms is finite locally constant with nonempty stalks. Apply [lem-weil-pbc-compatible-finite-derived-trivializations] to these sheaves and the two normalized systems. It gives a pro-etale covering $U\\to S$ and simultaneously compatible isomorphisms $h_n:\\underline E_n|_U\\simeq M_n|_U$. Restrictions of the witnesses agree with the witnesses on the stratum by [lem-weil-pbc-comparison-pullback].",
+   "uses": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-compatible-finite-derived-trivializations",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-kun-stalk-as-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Agent finite-isomorphism-sheaf variant of Tag 09BV, lemma-weird; constant models from Tag 094G"
+   }
+  },
+  {
+   "text": "Put $C=\\widehat A=\\varprojlim P_n$ and $J=IC$. The ring is Noetherian and $J$-adically complete by [lem-weil-pbc-completion-noetherian-quotient-noetherian], since $A/I$ is Noetherian and $I$ is finitely generated. Its quotients $C/J^n=P_n$ are the completion quotient identities of [lem-weil-pbc-constant-completion-equivalence], applied on the one-point site. Apply [lem-weil-pbc-pseudocoherent-normalized-algebra-tower] to the algebraic system $E_n$. It supplies a pseudo-coherent $E=R\\varprojlim E_n$ and compatible reduction isomorphisms $E\\otimes_C^L P_n\\simeq E_n$. The Noetherian finite-cohomology hypothesis for $E_1$ holds because $P_1$ is finite and $E_1$ is bounded.",
+   "uses": [
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-pseudocoherent-normalized-algebra-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09AV and 066E; algebra.tex Tag 05GH"
+   }
+  },
+  {
+   "text": "Each group $H^q(E_n)$ is finite. By [lem-weil-pbc-mittag-leffler], its inverse system has $\\varprojlim{}^1=0$. The Milnor exact sequence [lem-pc-derived-limit-milnor-sequence] therefore identifies $H^q(E)$ with $\\varprojlim H^q(E_n)$, so $E$ has cohomology only in $[a,b]$. Choose a bounded-above finite free representative $P^\\bullet\\to E$ with $P^q=0$ for $q>b$ by [lem-pc-pseudo-coherent-bounded-finite-free-model]. Set $Q^q=P^q$ for $a<q\\leq b$, $Q^a=\\operatorname{coker}(P^{a-1}\\to P^a)$, and $Q^q=0$ otherwise. The differential out of $Q^a$ is well-defined because $d^a d^{a-1}=0$. The quotient map $P\\to Q$ induces the same cohomology in degrees $q\\geq a$ and kills an acyclic lower tail because $H^q(P)=0$ for $q<a$; it is a quasi-isomorphism. Thus $Q$ is a single bounded complex of finite $C$-modules in $[a,b]$. Its first term need not be projective. The construction does not tensor the truncation underived.",
+   "uses": [
+    "lem-weil-pbc-mittag-leffler",
+    "lem-pc-derived-limit-milnor-sequence",
+    "lem-pc-pseudo-coherent-bounded-finite-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KY Milnor sequence, Tag 064U finite free representative; elementary good truncation"
+   }
+  },
+  {
+   "text": "On each covering member $U$ realize $Q$ termwise by $L=c_U(Q)$ using [lem-weil-pbc-completed-constant-finite-complex-realization]. It is supported in $[a,b]$ and its terms are adic lisse of finite type. Regard it as an $A_T|_U$-complex by the projection-induced coefficient map. The relative clause of that lemma gives natural compatible isomorphisms $t_n:L\\otimes^L_{A_T|_U}R_n|_U\\simeq\\underline{E_n}|_U$. This explicitly uses the restricted completed coefficient ring, not an equality between its inverse image and a completed ring formed anew on $U$. All the reduction cohomology sheaves are constant finite $P_n$-module sheaves because $E_n$ has finite cohomology. The interval for terms is the same $[a,b]$ on all strata and covering members.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-finite-complex-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Agent completed-constant realization; Tag 09BV completed local models"
+   }
+  },
+  {
+   "text": "Define $e_n=t_n^{-1}h_n^{-1}:M_n|_U\\simeq L\\otimes^L_{A_T|_U}R_n|_U$. The equation for the compatible trivializations is $h_n\\eta_n=\\rho_n(h_{n+1}\\otimes^L R_n)$. Naturality of the realization isomorphisms gives $t_n\\sigma_n=\\eta_n(t_{n+1}\\otimes^L R_n)$. Substituting the definition of $e_n$ into these two equations gives $e_n\\rho_n=\\sigma_n(e_{n+1}\\otimes^L R_n)$, exactly the normalization-compatibility equation of [def-weil-pbc-bounded-constructible-tower]. The common stratification, covering and complexes constructed above satisfy every clause of that definition, with $d_0=a,d_1=b$.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-compatible-finite-derived-trivializations",
+    "lem-weil-pbc-completed-constant-finite-complex-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Agent assembly, compatibility equation and all clauses of the tower definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison",
+  "def-constructible-stratification",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-nilpotent-reduction-lissity",
+  "lem-weil-pbc-finite-ring-derived-local-constancy",
+  "lem-weil-pbc-compatible-finite-derived-trivializations",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-stalk-as-pullback",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
+  "lem-weil-pbc-mittag-leffler",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-weil-pbc-completed-constant-finite-complex-realization",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Assembly of 09AL, 094I, finite derived isomorphism descent, 09AV, and completed constant realization; 09C6/09C7 finite-Tor theorems are not applied"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,15 +201,109 @@
    "results": "; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniformly bounded normalized constructible tower of complexes over finite adic quotient rings has a common bounded finite type adic lisse local complex",
+   "results": "8 hits: AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.flat_of_isNoetherian, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.map_exact, localCohomology, Hausdorffification",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effectivity of bounded constructible inverse systems of complexes modulo powers of an ideal without finite Tor dimension",
+   "results": "8 hits: localCohomology, Hausdorffification, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.map_exact, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, AdicCompletion.exists_smodEq_pow_add_one_smul, localCohomology.ofSelfLERadical",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"AdicCompletion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*tower|adic.*lisse",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern ambient categories, ordinary completion or finite sets, not this sheaf/derived assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A uniformly bounded normalized constructible tower of complexes over finite adic quotient rings has a common bounded finite type adic lisse local complex",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-weil-pbc-amplification-proper",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-normalized-constructible-local-effectivity",
+  "worker": "stage1",
+  "summary": "Separated arbitrary finite-ring etale comparison, nilpotent propagation, finite derived local constancy, compatible finite-isomorphism descent, algebraic pseudo-coherent reconstruction, and relative completed-constant realization. Common stratification uses only level one; finite coefficient rings supply Mittag-Leffler. Good truncation produces nonprojective finite-type local terms in the common interval. No finite-Tor hypothesis or coefficient-category identification was added.",
+  "blueprint": "Amplification proof (c), the missing inference from bounded normalized etale-origin levels to common compatible bounded finite-type local models.",
+  "tool_uses": [
+   {
+    "node": "def-constructible-stratification",
+    "why": "Generic algebraic/derived tool: Stratifications; no same-unit statement supplies this assertion."
+   },
+   {
+    "node": "def-weil-pbc-geometric-stalks",
+    "why": "Generic algebraic/derived tool: Geometric stalks; no same-unit statement supplies this assertion."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic algebraic/derived tool: Exactness of geometric stalks; no same-unit statement supplies this assertion."
+   },
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Generic algebraic/derived tool: A stalk is inverse image to a geometric point; no same-unit statement supplies this assertion."
+   },
+   {
+    "node": "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "why": "Generic algebraic/derived tool: Adic completion is Noetherian when the quotient is Noetherian and the ideal finitely generated; no same-unit statement supplies this assertion."
+   },
+   {
+    "node": "lem-weil-pbc-mittag-leffler",
+    "why": "Generic algebraic/derived tool: Mittag--Leffler vanishing; no same-unit statement supplies this assertion."
+   },
+   {
+    "node": "lem-pc-derived-limit-milnor-sequence",
+    "why": "Generic algebraic/derived tool: Milnor exact sequence for a derived inverse limit; no same-unit statement supplies this assertion."
+   },
+   {
+    "node": "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "why": "Generic algebraic/derived tool: Bounded-above finite-free model at a cohomological upper bound; no same-unit statement supplies this assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-constructible-stratification",
+  "def-weil-pbc-geometric-stalks",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-stalk-as-pullback",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-mittag-leffler",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-076d28b89",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-076d28b89 (reviewer sub-agent of L); spot-checked: Read the complete item, report, six new nodes, unit route, cited DAG statements, and source passages including Tags 09AL, 09BU--09BX, 094G--094I, 09AV, 066E, 064U, 00MB, and 05GH. Checked every proof step, hypotheses, coefficient morphisms, edge cases, searches, duplicates, and nonprojective local terms. No faults or repairs found; review written to review.md."
+ }
 }
