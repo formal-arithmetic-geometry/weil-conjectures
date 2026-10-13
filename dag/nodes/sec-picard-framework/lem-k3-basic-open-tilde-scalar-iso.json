@@ -1,0 +1,134 @@
+{
+ "id": "lem-k3-basic-open-tilde-scalar-iso",
+ "kind": "statement",
+ "title": "Scalar action becomes invertible on a basic open",
+ "statement": "Let A be any commutative ring, a ∈ A, and K any integer-indexed cochain complex of A-modules. Apply the tilde functor on Spec A [def-pc-scheme] degreewise and restrict the resulting complex of structure-sheaf modules [def-weil-sheaf-of-modules-category] to D(a). The image of the scalar chain endomorphism a times id_K is an isomorphism of complexes. No Koszul, boundedness, regularity, or finiteness condition is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HR, Section 26.5, especially Lemmas 26.5.1 and 26.5.4; basic-open vanishing used in Tag 09IR; read at https://stacks.math.columbia.edu/tag/01HR and https://stacks.math.columbia.edu/tag/09IR"
+ },
+ "proof": [
+  {
+   "text": "The structure sheaf on D(a) contains the inverse of a, compatibly on every smaller open. This is the localization description in Tag 01HR. Mathlib Scheme.Modules.isUnit_algebraMap_end_of_le_basicOpen already proves that scalar multiplication is a unit endomorphism on sections over every open contained in D(a).",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The image under tilde of a times an A-module identity acts on sections by multiplication by a: use the localization formula for tilde.map, or prove the equality on each localized fraction. Multiplication by the inverse section is therefore its inverse on the restricted module sheaf, and commutes with every restriction map.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Do this in every degree of K. The inverse maps commute with the differentials by linearity over the structure sheaf, giving an inverse chain map; equivalently use Mathlib HomologicalComplex.Hom.isIso_of_components after proving that every component is an isomorphism. If a=0, D(a) is empty and all the relevant sheaves are zero. The argument also permits the zero ring and the zero complex.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HR, Section 26.5, especially Lemmas 26.5.1 and 26.5.4; basic-open vanishing used in Tag 09IR; read at https://stacks.math.columbia.edu/tag/01HR and https://stacks.math.columbia.edu/tag/09IR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a Koszul generator is chain homotopic to zero, and invertible on the sheafified complex over its basic open",
+   "results": "ModuleCat.Tilde.isUnit_toStalk; RingedSpace.isUnit_res_basicOpen; no Koszul homotopy or complex-map match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.isUnit_algebraMap_end_of_le_basicOpen",
+   "results": "Found sectionwise unit scalar action on an open contained in D(a), in Mathlib.AlgebraicGeometry.Modules.Tilde. It does not identify the image of the scalar chain map under tilde and overFunctor.",
+   "date": "2026-10-13",
+   "verdict": "useful component lemma, not the complete statement"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*homotopy|isUnit_algebraMap_end_of_le_basicOpen",
+   "results": "Mathlib.AlgebraicGeometry.Modules.Tilde:108,121,252,270,284; no Koszul homotopy declaration. Local rg also found no generator homotopy in WeilConjectures or Sheaf.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul generator multiplication null homotopic, scalar multiplication on sheafified complex invertible over basic open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "status": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulBasicOpenExact",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction: Koszul complexes vanish on the basic-open complement; generator homotopy and basic-open scalar inversion",
+   "via": [
+    "lem-pc-koszul-restriction-zero-base",
+    "lem-pc-koszul-restriction-zero",
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-pc-derived-qcoh-perfect-generation",
+    "lem-r4-koszul-basic-open-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BasicOpenTildeScalarIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/BasicOpenTildeScalarIso.lean",
+  "declaration": "AlgebraicGeometry.basicOpen_tilde_scalar_isIso",
+  "statement": "theorem basicOpen_tilde_scalar_isIso\n    (A : Type u) [CommRing A] (a : A) (K : CochainComplex (ModuleCat.{u} A) ℤ) :\n    IsIso\n      (((SheafOfModules.overFunctor.{u}\n        (moduleRings (Spec (.of A)).toRingedSpace)\n        (PrimeSpectrum.basicOpen a)).mapHomologicalComplex (ComplexShape.up ℤ)).map\n        ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n          (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          _ _ _ _ (tilde.functor (.of A))\n          ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).map\n          (a • 𝟙 K)))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T031544-L-3571854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T031544-L-3571854",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
