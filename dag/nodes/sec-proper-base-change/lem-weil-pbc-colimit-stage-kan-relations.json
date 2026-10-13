@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-colimit-stage-kan-relations",
+ "kind": "statement",
+ "title": "Eventual equality of compatible stagewise Kan representatives",
+ "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone whose object and arrow cocones are colimits of sets [def-weil-pbc-category-colimit, def-weil-pbc-arrows-functor]. Fix $i\\in J$. For $t\\in\\mathrm{Under}(i)$, let $A_t:F(t.\\mathrm{right})^{\\mathrm{op}}\\to\\mathrm{Sets}$ be a presheaf. For $c:t\\to t'$ let $\\theta_c:A_t\\to F(c.\\mathrm{right})^{\\mathrm{op}}\\star A_{t'}$ be a natural transformation, where $\\star$ denotes precomposition. Assume identity and composition hold componentwise as objects of $\\mathrm{Arrow}(\\mathrm{Sets})$, including the endpoint transports from $F$. Let $B:\\mathrm{Under}(i)\\to\\mathrm{PSh}(V.\\mathrm{pt})$ and $\\beta_t:A_t\\to V_t^{\\mathrm{op}}\\star B_t$ exhibit $B_t$ as a left Kan extension along $V_t^{\\mathrm{op}}$, with $V_t=V_{t.\\mathrm{right}}$. A left Kan extension here means that composing with $\\beta_t$ bijects natural transformations $B_t\\to T$ with natural transformations $A_t\\to V_t^{\\mathrm{op}}\\star T$ for every presheaf $T$ on $V.\\mathrm{pt}$. Assume $\\beta_t$ followed by $B(c)$ equals $\\theta_c$ followed by $\\beta_{t'}$ componentwise in $\\mathrm{Arrow}(\\mathrm{Sets})$. Fix $j,k\\in J$ and $a:i\\to k$, $b:j\\to k$. Let $s=\\mathrm{Under.map}(a):\\mathrm{Under}(k)\\to\\mathrm{Under}(i)$ send $(k\\xrightarrow{t.\\mathrm{hom}}l)$ to $(i\\xrightarrow{a\\,;\\,t.\\mathrm{hom}}l)$, and write $g_t=F(b\\,;\\,t.\\mathrm{hom})$, where a semicolon means composition in diagram order. Let $D:\\mathrm{Under}(k)\\to\\mathrm{PSh}(F(j))$ be a diagram with isomorphisms $e_t:D_t\\cong g_t^{\\mathrm{op}}\\star A_{s(t)}$. Assume $D(c)_U\\,;\\,e_{t',U}=e_{t,U}\\,;\\,\\theta_{s(c),g_t^{\\mathrm{op}}(U)}$ in $\\mathrm{Arrow}(\\mathrm{Sets})$ for every $c:t\\to t'$ and $U\\in F(j)^{\\mathrm{op}}$. Let $\\nu$ be a cocone on $D$ with vertex $V_j^{\\mathrm{op}}\\star\\operatorname{colim}B$. Assume $\\nu_{t,U}$ is, in $\\mathrm{Arrow}(\\mathrm{Sets})$, the composite of $e_{t,U}$, the component of $\\beta_{s(t)}$ at $g_t^{\\mathrm{op}}(U)$, and the outer coprojection for $B$ at $V_{t.\\mathrm{right}}^{\\mathrm{op}}(g_t^{\\mathrm{op}}(U))$. Then equality of two stage sections in the vertex is detected at a common refinement: for every $U\\in F(j)^{\\mathrm{op}}$, $t,t'\\in\\mathrm{Under}(k)$, $x\\in D_t(U)$ and $x'\\in D_{t'}(U)$, if $\\nu_{t,U}(x)=\\nu_{t',U}(x')$, there are $r\\in\\mathrm{Under}(k)$, $c:t\\to r$ and $c':t'\\to r$ with $D(c)_U(x)=D(c')_U(x')$. Only this relation criterion is asserted, not existence of representatives or a colimit universal property.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula and adjunction paragraph; read at https://stacks.math.columbia.edu/tag/0A35"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Prove Under.map a final using the dual filtered finality criterion: receive each object by choosing a common successor with k and equalizing the competing maps from i; equalize parallel arrows by their underlying right maps. Evaluate the outer colimit after whiskering by this final functor. Normalize the beta-unit composites to Y=V_j(U) with V.w transports. The formulas hbeta_map and hD make these maps compatible; hnu and naturality of the coprojections recover the cocone maps. Filtered-set eventual equality gives equality of two beta-unit images at a common r in Under k.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula and adjunction paragraph; read at https://stacks.math.columbia.edu/tag/0A35"
+   }
+  },
+  {
+   "text": "Apply the existing raw_section_kan_unit_relations with base k, stage r, presheaves A composed with Under.map a and theta restricted along that functor. Cancel endpoint transport before applying it. It gives equality of theta-images at a further q in Under k. The hD formula and injectivity of e_q convert this to equality of the D-transitions. Functoriality gives the requested composite arrows. Neither theta coherence hypothesis is needed by this reduction.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-kan-unit-relations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula and adjunction paragraph; read at https://stacks.math.columbia.edu/tag/0A35"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-colimit-site-kan-unit-relations",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), arbitrary-object section formula and adjunction paragraph; read at https://stacks.math.columbia.edu/tag/0A35; expanded independence-of-choices verification, following step 2 of lem-weil-pbc-colimit-stage-kan-cocone; second reading M3: reduction to existing raw_section_kan_unit_relations using final Under.map a and outer filtered-set equality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of stage sections in a filtered colimit of left Kan extensions holds after a common stage refinement",
+   "results": "Service unavailable: Internal Server Error. No result could be inspected.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of unit representatives in a filtered colimit of left Kan extensions implies equality after a common stage refinement",
+   "results": "Eight hits, including Functor.ιColimitType_eq_iff_of_isFiltered, Types.FilteredColimit.isColimit_eq_iff' and pointwise Kan-extension unit formulas. These address a single filtered set diagram or pointwise Kan presentation, not lifting its finite relations through a diagram of categories.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FilteredColimit.isColimit_eq_iff\"",
+   "results": "Two hits: Types.FilteredColimit.isColimit_eq_iff and isColimit_eq_iff'. Both are used for set equality after refinement but neither proves the stagewise Kan relation calculation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "raw_section_relations|stage_kan.*relations|IsLeftKanExtension.*eq_iff",
+   "results": "No Mathlib hits. Local rg found raw_section_relations, whose stage data are sheaf pullbacks from a single fixed G and whose object lies at stage i; its signature does not accept the arbitrary presheaves A or independent stage j used here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kan.*(unit|inject|relation)|costructuredArrow.*colimit; rg on lean/Sheaf/CategoryTheory/ColimitSiteKanUnitRelations.lean",
+   "results": "Mathlib grep returned only Kan unit and pointwise presentation lemmas. Local source review found CategoryTheory.raw_section_kan_unit_relations, whose presheaf interface is generic; used it to prove this relation reduction rather than leaving a new sorry.",
+   "date": "2026-10-13",
+   "verdict": "existing strictly smaller lemma used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitStageKanCocone",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-of-sites-reduced",
+   "place": "Tag 0A35 arbitrary-object section formula, independence of the chosen stage and representative; finite Kan and outer-colimit relation calculation (step 2 of lem-weil-pbc-colimit-stage-kan-cocone)",
+   "via": [
+    "lem-weil-pbc-colimit-stage-kan-cocone",
+    "lem-weil-pbc-colimit-site-raw-stage-restriction",
+    "lem-weil-pbc-colimit-site-raw-section-separated",
+    "lem-weil-pbc-colimit-site-raw-section-sheaf",
+    "lem-weil-pbc-colimit-site-set-section-eventual-equality",
+    "lem-weil-pbc-colimit-site-set-section-presentation",
+    "lem-weil-pbc-colimit-site-set-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitStageKanRelations",
+  "file": "lean/Sheaf/CategoryTheory/ColimitStageKanRelations.lean",
+  "declaration": "CategoryTheory.stage_kan_cocone_relations",
+  "statement": "theorem stage_kan_cocone_relations\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (i : J) (A : ∀ t : Under i, (F.obj t.right)ᵒᵖ ⥤ Type u)\n    (θ : ∀ (t t' : Under i) (c : t ⟶ t'),\n      A t ⟶ (F.map c.right).toFunctor.op ⋙ A t')\n    (hθid : ∀ (t : Under i) (X : (F.obj t.right)ᵒᵖ),\n      Arrow.mk ((θ t t (𝟙 t)).app X) = Arrow.mk (𝟙 ((A t).obj X)))\n    (hθcomp : ∀ (t t' t'' : Under i) (c : t ⟶ t') (d : t' ⟶ t'')\n        (X : (F.obj t.right)ᵒᵖ),\n      Arrow.mk ((θ t t' c).app X ≫\n        (θ t' t'' d).app ((F.map c.right).toFunctor.op.obj X)) =\n      Arrow.mk ((θ t t'' (c ≫ d)).app X))\n    (B : Under i ⥤ (V.ptᵒᵖ ⥤ Type u))\n    (β : ∀ t : Under i, A t ⟶ (V.ι.app t.right).toFunctor.op ⋙ B.obj t)\n    (hβ : ∀ t : Under i, (B.obj t).IsLeftKanExtension (β t))\n    (hβmap : ∀ (t t' : Under i) (c : t ⟶ t') (X : F.obj t.right),\n      Arrow.mk ((β t).app (op X) ≫\n        (B.map c).app (op ((V.ι.app t.right).toFunctor.obj X))) =\n      Arrow.mk ((θ t t' c).app (op X) ≫\n        (β t').app (op ((F.map c.right).toFunctor.obj X))))\n    (j k : J) (a : i ⟶ k) (b : j ⟶ k)\n    (D : Under k ⥤ ((F.obj j)ᵒᵖ ⥤ Type u))\n    (e : ∀ t : Under k, D.obj t ≅\n      (F.map (b ≫ t.hom)).toFunctor.op ⋙ A ((Under.map a).obj t))\n    (hD : ∀ (t t' : Under k) (c : t ⟶ t') (U : (F.obj j)ᵒᵖ),\n      Arrow.mk ((D.map c).app U ≫ (e t').hom.app U) =\n      Arrow.mk ((e t).hom.app U ≫\n        (θ ((Under.map a).obj t) ((Under.map a).obj t') ((Under.map a).map c)).app\n          ((F.map (b ≫ t.hom)).toFunctor.op.obj U)))\n    (ν : Cocone D)\n    (hpt : ν.pt = (V.ι.app j).toFunctor.op ⋙ colimit B)\n    (hν : ∀ (t : Under k) (U : (F.obj j)ᵒᵖ),\n      Arrow.mk ((ν.ι.app t).app U) =\n      Arrow.mk ((e t).hom.app U ≫\n        (β ((Under.map a).obj t)).app ((F.map (b ≫ t.hom)).toFunctor.op.obj U) ≫\n        (colimit.ι B ((Under.map a).obj t)).app\n          ((V.ι.app t.right).toFunctor.op.obj\n            ((F.map (b ≫ t.hom)).toFunctor.op.obj U)))) :\n    ∀ (U : (F.obj j)ᵒᵖ) (t t' : Under k)\n      (x : (D.obj t).obj U) (x' : (D.obj t').obj U),\n      (ν.ι.app t).app U x = (ν.ι.app t').app U x' →\n        ∃ (r : Under k) (c : t ⟶ r) (c' : t' ⟶ r),\n          (D.map c).app U x = (D.map c').app U x'",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T045543-L-132584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T045543-L-132584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
