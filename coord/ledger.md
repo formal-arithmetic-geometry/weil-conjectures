@@ -11859,3 +11859,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/J1/Sheaf.AlgebraicGeometry.FlatAffineGlobalHomComparison (stage 3; reviewer PASS; first push; landing 20261013T100009-L-2463735 (interface); batch 20261013T095923; modules 4; new nodes 3)
 - 10:00 L: merged deliver/J1/Sheaf.AlgebraicGeometry.RestrictedGlobalHomShiftedEquiv (stage 3; reviewer PASS; first push; landing 20261013T100010-L-2463950 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/J1/Sheaf.RingTheory.FinitePresentationModuleDiagram (stage 3; reviewer PASS; first push; landing 20261013T100010-L-2464147 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:00 L: merged deliver/J1/Sheaf.RingTheory.LocalizedBaseChangeIdealKernelSpan (stage 3; reviewer PASS; first push; landing 20261013T100011-L-2464385 (interface); batch 20261013T095923; modules 3; new nodes 2)

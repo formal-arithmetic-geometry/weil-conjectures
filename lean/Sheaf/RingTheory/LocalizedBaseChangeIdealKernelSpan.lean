@@ -9,6 +9,9 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Localization.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+
+import Sheaf.RingTheory.BaseChangeIdealKernelGenerators
+import Sheaf.RingTheory.LocalizationIdealKernelGenerators
 import Sheaf.Algebra.TorOneSurjectiveChangeRings
 import Sheaf.RingTheory.TorIdealKernelNaturality
 import Sheaf.RingTheory.TorOneSurjectiveFlatMiddle
@@ -88,6 +91,39 @@ theorem mem_span_ideal_kernel_localized_baseChange
           TensorProduct.comm R' (I.map (algebraMap R R')) (S' ⊗[S] M) (θ k)) ''
           (LinearMap.ker (TensorProduct.lift ((LinearMap.lsmul R M).comp I.subtype)) :
             Set (I ⊗[R] M))) := by
-  sorry
+  obtain ⟨θN, hθN, hgenN⟩ := exists_baseChange_ideal_kernel_generators (R' := R') I M hquot
+  obtain ⟨α, hα, hgenα⟩ := exists_localization_ideal_kernel_generators (S' := S') I M hloc
+  let P := Submodule.span S'
+    ((fun k : I ⊗[R] M ↦
+      TensorProduct.comm R' (I.map (algebraMap R R')) (S' ⊗[S] M) (θ k)) ''
+      (LinearMap.ker (TensorProduct.lift ((LinearMap.lsmul R M).comp I.subtype)) :
+        Set (I ⊗[R] M)))
+  have hcompat (k : I ⊗[R] M) :
+      α (TensorProduct.comm R' (I.map (algebraMap R R')) (R' ⊗[R] M) (θN k)) =
+        TensorProduct.comm R' (I.map (algebraMap R R')) (S' ⊗[S] M) (θ k) := by
+    induction k using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a x => simp [hθN, hθ, hα]
+    | add a b ha hb => simp [ha, hb]
+  have htransport (y : (I.map (algebraMap R R')) ⊗[R'] (R' ⊗[R] M))
+      (hy : TensorProduct.lift
+        ((LinearMap.lsmul R' (R' ⊗[R] M)).comp
+          (I.map (algebraMap R R')).subtype) y = 0) :
+      α (TensorProduct.comm R' (I.map (algebraMap R R')) (R' ⊗[R] M) y) ∈ P := by
+    have hmem := hgenN y hy
+    refine Submodule.span_induction (p := fun x _ ↦ α x ∈ P) ?_ ?_ ?_ ?_ hmem
+    · rintro x ⟨k, hk, rfl⟩
+      rw [hcompat]
+      exact Submodule.subset_span ⟨k, hk, rfl⟩
+    · simp
+    · intro x y _ _ hx hy
+      simpa using P.add_mem hx hy
+    · intro r x _ hx
+      rw [α.map_smul]
+      simpa only [IsScalarTower.algebraMap_smul] using
+        P.smul_mem (algebraMap R' S' r) hx
+  apply Submodule.span_le.mpr _ (hgenα z hz)
+  rintro _ ⟨y, hy, rfl⟩
+  exact htransport y hy
 
 end Module
