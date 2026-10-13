@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-coefficient-section-map-linear",
+ "kind": "statement",
+ "title": "Linearity of the explicit coefficient section map",
+ "statement": "Let $f:X\\to T$ be a morphism of schemes, $F$ an $\\mathcal O_X$-module, $U\\subseteq T$ open, $Y=f^{-1}U$, $Z\\subseteq Y$ open, and $A=\\Gamma(U,\\mathcal O_U)$. Let $g:T'\\to U$, $g':X'\\to X$, $f':X'\\to T'$ satisfy $g'f=f'gU.\\iota$, and let $W=g'^{-1}(Y.\\iota(Z))$. Use the module and pullback conventions of [def-weil-sheaf-of-modules-category], [def-pc-module-pullback] and the coefficient scalar convention of [def-pc-finite-affine-cech-model]. Set $N=F|_Y(Z)$ restricted to $A$ along $\\Gamma\\mathrm{SpecIso}^{-1}$ followed by $(f|_U\\circ U.\\mathrm{toSpecGamma}).\\mathrm{appTop}$, and $P=(U.\\mathrm{toSpecGamma})_*g_*(W.\\iota\\circ f')_*(g'^*F|_W)$. Put $B=g^{-1}(U.\\mathrm{toSpecGamma}^{-1}(\\mathrm{Spec}(A)))$ and $L=W.\\iota((W.\\iota\\circ f')^{-1}B)$. Define $k:N\\to\\Gamma(\\mathrm{Spec}(A),P)$ by identifying $s$ with $F(Y.\\iota(Z))$, applying the pullback unit for $g'$, and restricting to $L$. Then $k(as)=a k(s)$, where the target scalar structure is the global-section module structure transported through $\\Gamma\\mathrm{SpecIso}^{-1}$. The additive map $k$ is a concrete construction; this theorem supplies only its linearity.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02KE, termwise Cech map; Tag 01I6, Lemma 26.7.1; Tags 0096 and 0097, module adjunction and composition"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pc-finite-affine-cech-model"
+ ],
+ "proof": [
+  {
+   "text": "The source scalar is first restricted along the global structural map and\nthen to Z. The restriction identification transports it through the inverse of\nY.ι.appIso. The pullback unit is linear over the section ring on Y.ι(Z), with\ntarget scalars transported by g'. Restricting to the support transports it once\nmore. On the target the scalar is transported successively by GammaSpecIso.inv,\nU.toSpecGamma, g, fprime and W.ι, followed by W.ι.appIso.inv. Naturality of the\nstructure maps, the equality gprime f = fprime g U.ι, and the inverse identities\nof appIso identify these two composites. Thus both scalar actions agree. Empty\nopens cause no exception since restriction maps and linearity remain defined.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02KE, termwise Cech map, with the adjunction details supplied explicitly",
+  "note": "N4: explicit mate construction and its separate scalar, generator and face calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.fromTildeΓ",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Modules.fromTildeΓ, AlgebraicGeometry.isIso_fromTildeΓ_iff, AlgebraicGeometry.isIso_fromTildeΓ_iff_isLocalizing, AlgebraicGeometry.instIsIsoModulesSpecFromTildeΓUnitOpensCarrierCarrierCommRingCatRingCatSheaf, AlgebraicGeometry.isIso_fromTildeΓ_pushforward, AlgebraicGeometry.Scheme.Modules.toOpen_fromTildeΓ_app, AlgebraicGeometry.Scheme.Modules.toOpen_fromTildeΓ_app_assoc, AlgebraicGeometry.isIso_fromTildeΓ_of_presentation",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only; no exact normalized comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated module sheaf pullback map to a module sheaf induced by a linear map on global sections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.Hom.mapPresheaf, AlgebraicGeometry.Scheme.Modules.mapPresheaf_app, AlgebraicGeometry.Scheme.Modules.toPresheaf_map, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.Hom.app, PresheafOfModules.pushforward_obj_map_apply', PresheafOfModules.pushforward_obj_map_apply",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only; no exact normalized comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Linearity and naturality of the section map induced by the pullback adjunction unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|toOpen_fromTildeΓ|appLE_comp_appLE",
+   "results": "25 hits: Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only; no exact normalized comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), termwise finite affine Cech calculation",
+   "via": [
+    "lem-pc-finite-affine-cech-coefficient-comparison-map",
+    "lem-pc-finite-affine-cech-coefficient-base-change",
+    "lem-pc-finite-affine-cech-base-change-coordinates",
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonConstruction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coefficientSectionAddMap_linear",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.coefficientSectionAddMap",
+   "AlgebraicGeometry.Scheme.Modules.coefficientSectionAddMap_linear",
+   "AlgebraicGeometry.Scheme.Modules.coefficientSectionLinearMap",
+   "AlgebraicGeometry.Scheme.Modules.coefficientComparisonMorphism"
+  ],
+  "statement": "theorem coefficientSectionAddMap_linear {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens) {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T') (w : g' ≫ f = f' ≫ (g ≫ U.ι)) (W : X'.Opens) (hW : W = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ Z)) : let N := (ModuleCat.restrictScalars (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫ ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom)).obj ((F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat.obj (op Z)) let P := moduleSpecΓFunctor.obj ((pushforward U.toScheme.toSpecΓ).obj ((pushforward g).obj ((pushforward (W.ι ≫ f')).obj (((pullback g').obj F).restrict W.ι)))) ∀ (a : Γ(U.toScheme, ⊤)) (s : N), coefficientSectionAddMap f F U Z g g' f' w W hW (a • s) = a • (show P from coefficientSectionAddMap f F U Z g g' f' w W hW s)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T100044-L-2473620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T100044-L-2473620",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

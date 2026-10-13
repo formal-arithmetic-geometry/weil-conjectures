@@ -6,6 +6,8 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
+import Sheaf.AlgebraicGeometry.CoefficientComparisonMorphismGenerator
+import Sheaf.AlgebraicGeometry.CoefficientComparisonMorphismFaces
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 
 /-! # Canonical generators for affine coefficient comparison
@@ -195,7 +197,18 @@ theorem exists_coefficientComparison_maps {X T : Scheme.{u}} (f : X ⟶ T)
         M.presheaf.map (homOfLE (inf_le_inf
           (alternatingCechIntersection_face_le (fun i ↦ W₀ ⟨i⟩) p t j) le_rfl)).op
             ((coefficientSupportIso f' M (W p ((Fin.succAboveOrderEmb j).trans t)) B).hom
-              ((q p ((Fin.succAboveOrderEmb j).trans t)).app B s))) := by sorry
+              ((q p ((Fin.succAboveOrderEmb j).trans t)).app B s))) := by
+  let q := fun (p : ℕ) (t : Fin (p + 1) ↪o Fin r) ↦
+    coefficientComparisonMorphism f F U (alternatingCechIntersection V t)
+      g g' f' w (alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t)
+      (coefficientIntersection_preimage _ V g' W₀ hW p t)
+  refine ⟨q, ?_, ?_⟩
+  · intro p t s
+    exact coefficientComparisonMorphism_generator f F U (alternatingCechIntersection V t)
+      g g' f' w (alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t)
+      (coefficientIntersection_preimage _ V g' W₀ hW p t) s
+  · exact coefficientComparisonMorphism_faces f F U V g g' f' w W₀
+      (coefficientIntersection_preimage _ V g' W₀ hW)
 
 end
 end AlgebraicGeometry.Scheme.Modules
