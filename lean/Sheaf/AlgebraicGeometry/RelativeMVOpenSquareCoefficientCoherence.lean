@@ -6,6 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+import Sheaf.AlgebraicGeometry.CanonicalRelativeMVOpenSquareCoefficientCoherence
 
 /-! # Coefficient coherence for one nested open square
 
@@ -75,6 +76,10 @@ theorem relativeMV_open_square_coefficient_coherence
     (derivedPullback (pullback.snd g' W.ι)).map (c.hom.app N) ≫ t N =
       d.hom.app ((derivedPullback U.ι).obj N) ≫
         (derivedPullback (relativeMVOpenLift g' i)).map (s N) ≫
-        c'.hom.app ((derivedPullback g').obj N) := by sorry
+        c'.hom.app ((derivedPullback g').obj N)  := by
+  intro N
+  rw [hc, hc', hs N, ht N, hd]
+  exact canonical_relativeMV_open_square_coefficient_coherence g' W U i N
+
 
 end AlgebraicGeometry
