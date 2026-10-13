@@ -434,6 +434,11 @@ def finish_result(included, commit, text, elapsed, preempted, source_id, red_tre
         clear_alert()
         print(f"GREEN in {result['seconds']} s; {len(ids)} landing(s) verified; compiled files published.")
         return 0
+    if not built and re.search(r"no space left on device|resource exhausted|Cannot allocate memory|out of memory", text):
+        # an infrastructure failure says nothing about the sources: not cached, not attributed, rebuilt by the loop
+        print("INFRASTRUCTURE failure (disk or memory); nothing recorded, the same sources will be rebuilt.", flush=True)
+        time.sleep(120)
+        return 1
     failing = sorted(set(failing_modules(text)) | {c["module"] for c in checks})
     sus = suspects(failing, included)
     result.update(result="red", source_fingerprint=source_id, failing=failing, errors=errors[:30], suspects=sus, included=sorted(ids), batch_checks=checks)
