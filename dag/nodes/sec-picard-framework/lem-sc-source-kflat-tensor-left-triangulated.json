@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-source-kflat-tensor-left-triangulated",
+ "kind": "statement",
+ "title": "Derived tensor by a K-flat homotopy model is triangulated",
+ "statement": "Let $C$ be an abelian monoidal category with additive tensor, with a chosen derived category $D(C)$ [def-weil-abstract-derived-category], the coproduct and good tensor hypotheses required to form total tensor complexes, and the left derivability structure of K-flat objects in its homotopy category. A homotopy object $S$ is K-flat here if tensoring on either side preserves quasi-isomorphisms. Suppose $S$ is K-flat. Then $Q_h(S)\\otimes^{\\mathbf L}-$ commutes with integer shifts and preserves distinguished triangles, using the shift comparison induced by the K-flat derived tensor counit. This is the derived tensor, not an arbitrary monoidal structure.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Shift.lean",
+  "place": "DerivedCategory.commShiftTensorLeftQhObj and isTriangulated_tensorLeftQhObj, lines 120-175; Stacks Tag 06YU"
+ },
+ "proof": [
+  {
+   "text": "The K-flat counit identifies Qh followed by tensoring with Qh(S) with tensoring by S followed by Qh. The latter composite is triangulated and commutes with shifts. The universal property of localization transports its shift comparison across the counit. Since Qh is a triangulated localization and is essentially surjective on arrows, its distinguished triangles determine distinguishedness in the localized category. Apply Functor.isTriangulated_of_precomp_iso to the counit. This is the existing source proof, valid with independent derived-category universe.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/Shift.lean",
+  "place": "existing proved isTriangulated_tensorLeftQhObj"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring with a K-flat object in a derived category is a triangulated functor",
+   "results": "HTTP Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorLeft\", \"IsTriangulated\"",
+   "results": "0 hits.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorLeft.*IsTriangulated|IsTriangulated.*tensorLeft",
+   "results": "0 hits in Mathlib. Source Shift.lean theorem reused.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHypercohomologyGap",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: tensor the truncation triangle to prove the tensor cohomology gap",
+   "via": [
+    "lem-sc-perfect-hypercohomology-gap"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift",
+  "declaration": "DerivedCategory.isTriangulated_tensorLeftQhObj",
+  "statement": "lemma isTriangulated_tensorLeftQhObj\n    (hP : (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).kFlat P) :\n    letI := commShiftTensorLeftQhObj P hP\n    ((curriedTensor (DerivedCategory C)).obj (Qh.obj P)).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13",
+  "note": "Existing proved generic source declaration. All ambient variables are at Shift.lean:69-78. No new module or hole."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "DerivedCategory.isTriangulated_tensorLeftQhObj"
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T100159-L-2496663",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T100159-L-2496663",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

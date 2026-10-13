@@ -27,53 +27,54 @@
  ],
  "proof": [
   {
-   "text": "Let U be an affine open of X on which P|_U is isomorphic in D(\\mathcal O_U) to a strictly perfect complex Q^\\bullet [def-pc-perfect-complex]. Each Q^p is a direct summand of a finite free \\mathcal O_U-module, hence flat [def-pc-flat-sheaf-modules] (elementary), and Q^\\bullet is bounded, so Q^\\bullet is K-flat [lem-pc-bounded-above-flat-kflat, def-pc-kflat-complex]. Derived tensor product commutes with restriction to the open U, and restriction preserves K-flatness (elementary: for an acyclic complex \\mathcal F^\\bullet on U the extension by zero j_!\\mathcal F^\\bullet is acyclic and \\mathrm{Tot}(j_!\\mathcal F^\\bullet\\otimes K^\\bullet)|_U=\\mathrm{Tot}(\\mathcal F^\\bullet\\otimes K^\\bullet|_U)). Hence for every complex M of \\mathcal O_X-modules, (P\\otimes^{\\mathbf L}M)|_U is represented by the total tensor complex \\mathrm{Tot}(Q^\\bullet\\otimes M|_U) [def-pc-tensor-complex-sheaves]. In particular (P\\otimes^{\\mathbf L}L)|_U\\cong\\mathrm{Tot}(Q^\\bullet\\otimes L|_U), and, applying the Tor-amplitude hypothesis to the \\mathcal O_X-module \\mathcal G=H^q(L), H^p(Q^\\bullet\\otimes H^q(L)|_U)=0 for every q and every p\\notin[u,v].",
+   "text": "Evaluate lem-pc-kflat-derived-tensor-comparison on constant one-object families. The singleFunctorIsoCompQ and homologyFunctorFactors comparisons turn hTor into the source torAmplitudeIn predicate. The scheme tensor has functorial flat resolutions by def-pc-scheme-derived-tensor-structure.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-bounded-above-flat-kflat",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-kflat-derived-tensor-comparison",
+    "def-pc-scheme-derived-tensor-structure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09M4, proof, spectral sequence after the sentence 'Say K^\\vee has tor amplitude in [a,b]'"
-   }
+   "elementary": false
   },
   {
-   "text": "Filter K^\\bullet=\\mathrm{Tot}(Q^\\bullet\\otimes L|_U) by Q-degree: F^pK^n=\\bigoplus_{i\\ge p}Q^i\\otimes L^{n-i}|_U. These are subcomplexes, and the filtration is bounded because Q^\\bullet is bounded; \\mathrm{gr}^pK^\\bullet=Q^p\\otimes L|_U[-p]. The bounded filtered-complex spectral sequence [thm-sp-spectral-object-yields] has E_1^{p,q}=H^{p+q}(\\mathrm{gr}^pK^\\bullet)=H^q(Q^p\\otimes L|_U)=Q^p\\otimes H^q(L)|_U, the last equality because Q^p is flat so Q^p\\otimes- is exact (elementary). The differential d_1, the connecting map of 0\\to\\mathrm{gr}^{p+1}\\to F^p/F^{p+2}\\to\\mathrm{gr}^p\\to0, is induced by the differential of Q^\\bullet, so E_2^{p,q}=H^p(Q^\\bullet\\otimes H^q(L)|_U), which vanishes for p\\notin[u,v] by Step 1. Now assume H^q(L)=0 for every q in [j-v,j-u]. For p+q=j, either p\\notin[u,v] and E_2^{p,q}=0, or p\\in[u,v], so q=j-p\\in[j-v,j-u] and already E_1^{p,q}=0. Later pages are subquotients, so E_\\infty^{p,j-p}=0 for all p, and by the convergence clause of [thm-sp-spectral-object-yields] all graded pieces of the finite filtration on H^j(K^\\bullet) vanish.",
-   "uses": [
-    "thm-sp-spectral-object-yields"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09M4, proof, spectral sequence vanishing in the Tor-amplitude gap"
-   }
-  },
-  {
-   "text": "A finite filtration whose associated graded objects are all zero is zero, so H^j((P\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U)=H^j(P\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U=0. Such affine opens U cover X and vanishing of a sheaf is local, so H^j(P\\otimes^{\\mathbf L}_{\\mathcal O_X}L)=0.",
+   "text": "Set A=tau_{<j-b} L and B=tau_{>=j-b} L. A has cohomology only at degrees at most j-b-1. B is zero below j-b and its cohomology in surviving degrees is that of L, by the long exact homology sequence of the truncation triangle. The gap hypothesis therefore gives B >= j-a+1. This argument needs no interval ordering, including a>b. Integer inequalities are discharged by omega.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09M4, proof, final spectral-sequence conclusion"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sc-source-tor-amplitude-upper-tensor-bound to A: P tensor A <= b+j-b-1=j-1. Apply lem-sc-source-tor-amplitude-lower-tensor-bound to B: P tensor B >= a+j-a+1=j+1. Both degree-j cohomology objects are zero.",
+   "uses": [
+    "lem-sc-source-tor-amplitude-upper-tensor-bound",
+    "lem-sc-source-tor-amplitude-lower-tensor-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain a bounded flat model S of P from lem-sc-source-tor-amplitude-flat-model. It is categorically K-flat by CochainComplex.kFlat_of_bounded_of_flat. Apply lem-sc-source-kflat-tensor-left-triangulated to its homotopy quotient and transport the shift comparison and triangulatedness through its isomorphism to P. Tensor the truncation distinguished triangle. Exactness in degree j and zero outer terms force H^j(P tensor L)=0. The model-dependent shift comparison avoids the upstream global shift instance tying the Grothendieck and derived universes.",
+   "uses": [
+    "lem-sc-source-tor-amplitude-flat-model",
+    "lem-sc-source-kflat-tensor-left-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply hTor to H^0(L) at a-1 to obtain a K-flat representative K of P; its existing witness is used only inside this proposition. Take any quotient preimage N of L. Evaluate lem-pc-kflat-derived-tensor-comparison on K,N, and combine its inverse with the representing isomorphisms. Transport the zero homology through homologyFunctorFactors and package K,N to prove precisely the existing existential tensor vanishing predicate.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-bounded-above-flat-kflat",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "thm-sp-spectral-object-yields"
+  "lem-pc-kflat-derived-tensor-comparison",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-sc-source-tor-amplitude-upper-tensor-bound",
+  "lem-sc-source-tor-amplitude-lower-tensor-bound",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "lem-sc-source-kflat-tensor-left-triangulated"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09M4, proof, spectral sequence after the sentence 'Say K^\\vee has tor amplitude in [a,b]'"
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "Source tensor bounds and canonical truncation triangle; replaces the below-unit spectral sequence route of Stacks Tag 09M4."
  },
  "mathlib_searches": [
   {
@@ -162,5 +163,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T100159-L-2496663",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

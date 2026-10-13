@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-source-tor-amplitude-flat-model",
+ "kind": "statement",
+ "title": "A bounded flat model of finite Tor amplitude",
+ "statement": "Let $C$ be a braided closed monoidal Grothendieck abelian category whose tensor is additive in each variable, with functorial flat resolutions and a chosen derived category $D(C)$ [def-weil-abstract-derived-category]. Equip $D(C)$ with the K-flat derived tensor product. An object of $C$ is flat when tensoring with it is exact. For $K\\in D(C)$ and integers $a,b$, say that $K$ has Tor amplitude in $[a,b]$ when $H^i(K\\otimes^{\\mathbf L}F[0])=0$ for every $F\\in C$ and every $i<a$ or $b<i$. Then any such $K$ is isomorphic to $Q(S)$ for a complex $S$ of flat objects with $S^i=0$ for $i<a$ or $b<i$.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn; bounded flat model and derived tensor bounds, cf. Stacks Tags 0654 and 06Y7"
+ },
+ "proof": [
+  {
+   "text": "Test the amplitude on the tensor unit to bound K. Choose a bounded-above flat resolution vanishing above b. Its good truncation below a still represents K. The term in degree a is the opcycles of the resolution; the Tor test in degree a-1 makes that opcycles object flat by the categorical Tor criterion. All remaining terms are flat or zero. This is the already proved generic source theorem, read at FlatModel.lean:260-297.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn (existing proved source) no new Lean statement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An object of finite Tor amplitude has a bounded flat model and tensoring a bounded above or bounded below object adds the bounds",
+   "results": "HTTP Internal Server Error; no mathematical verdict.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\"",
+   "results": "0 hits. The generic source FlatModel declarations are reused.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|isLE_tensor|isGE_tensor",
+   "results": "0 Mathlib hits. Source FlatModel.lean supplies the required proved declarations.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHypercohomologyGap",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: choose the truncation index sufficiently negative so the extension class into the bounded quasi-coherent tail vanishes; tensor cohomology gap via truncation instead of the spectral sequence",
+   "via": [
+    "lem-sc-perfect-hypercohomology-gap"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+  "declaration": "DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn",
+  "statement": "lemma exists_iso_Q_obj_flat_of_torAmplitudeIn {a b : ℤ} {K : DerivedCategory C}\n    (hK : torAmplitudeIn C a b K) :\n    ∃ (P : CochainComplex C ℤ) (_ : P.IsStrictlyGE a) (_ : P.IsStrictlyLE b),\n      (∀ n, ObjectProperty.flat (P.X n)) ∧ Nonempty (Q.obj P ≅ K)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13",
+  "note": "Existing proved generic source declaration. The ambient category assumptions are the variables at FlatModel.lean:195-199; no module or sorry is added."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn"
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T100159-L-2496663",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T100159-L-2496663",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
