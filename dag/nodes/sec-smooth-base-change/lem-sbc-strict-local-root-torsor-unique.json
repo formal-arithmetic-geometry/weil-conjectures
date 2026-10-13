@@ -10,22 +10,32 @@
  },
  "proof": [
   {
-   "text": "Strict henselianity lifts each of the n simple roots of X^n - 1 from the separably closed residue field to H; distinct lifted roots differ by units and exhaust rootsOfUnity n H. The root t of C has nonzero images under a and b because their h-images are nonzero. Their ratio is therefore an n-th root of unity in Ω, hence the image of exactly one lifted ζ in H. Evaluation on the H-algebra generators proves the displayed equality, and the same ratio argument proves uniqueness.",
+   "text": "Let t be the adjoined root and q the common restriction of a and b to H. The defining relation gives t^n=h. The nonzero h-image implies a(t) is nonzero, and agreement on H gives b(t)^n=a(t)^n. Therefore b(t)/a(t) is an nth root of unity in Ω.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply strict_local_roots_of_unity to obtain cardinality n for rootsOfUnity n H and that every nonidentity root differs from 1 by a unit. The map restrictRootsOfUnity q n has trivial kernel: an element mapped to 1 would send this unit difference to zero in the field Ω. Thus the map is injective. Mathlib card_rootsOfUnity bounds the cardinality of rootsOfUnity n Ω by n; Function.Injective.bijective_of_nat_card_le now makes the map surjective. Lift the ratio b(t)/a(t) to a root ζ in H.",
    "uses": [
-    "lem-sbc-root-algebra-regular-at-root"
+    "lem-sbc-strict-local-roots-of-unity"
    ],
    "elementary": false
+  },
+  {
+   "text": "The definition of rootRotation sends t to ζt and fixes every constant. AdjoinRoot.ringHom_ext reduces a composed with this rotation equals b to the common restriction on H and q(ζ)a(t)=b(t), which follows by multiplying the ratio by a(t). Any other rotation giving b has the same q-image after cancellation of nonzero a(t); injectivity of the root-group map gives equality with ζ. These checks also cover n=1 without a separate case.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-root-algebra-regular-at-root"
+  "lem-sbc-strict-local-roots-of-unity"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "J2",
+  "by": "agent",
+  "group": "D2",
   "document": "Stacks Project",
-  "place": "Tag 0EYG and Tag 09EV",
-  "note": "Intermediate theorem split from parent proof."
+  "place": "Tags 0EYG and 09EV, root-of-unity comparison in the standard root cover",
+  "note": "Lean proof of the existing ratio argument, using the proved strict-local roots-of-unity input and Mathlib finite cardinality bounds. No root-algebra regularity is needed."
  },
  "mathlib_searches": [
   {
@@ -93,10 +103,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T161729-L-1460480",
-  "kind": "interface",
+  "landing": "20261013T163534-L-1619560",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
