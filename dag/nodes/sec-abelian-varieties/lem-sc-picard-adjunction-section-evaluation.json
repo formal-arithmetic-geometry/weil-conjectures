@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-picard-adjunction-section-evaluation",
+ "kind": "statement",
+ "title": "picardAdjunctionSectionEvaluation",
+ "statement": "Let p:Z \\to Y be a scheme morphism, F:Y.Modules \\to Z.Modules a functor, and adj:F \\dashv p_* an adjunction [lem-pc-module-pullback-adjunction]. Let e:F(O_Y) \\cong O_Z be an isomorphism whose adjoint transpose is the canonical structure map O_Y \\to p_*O_Z. For any O_Z-module N and module morphism n:O_Z \\to N, evaluate adj(e.hom followed by n) at 1 on the top open of Y and restrict from p inverse-top to top of Z. The result equals n(1) on top of Z.",
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes and Cohomology of Sheaves",
+  "place": "Tags 0B91 clause (2), 08HY, 0D5S; parent proof step 2: canonical mates and evaluation give the successive-base-change equation"
+ },
+ "stmt_deps": [
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use right naturality of the adjunction Hom equivalence, then its specified value on e. The structure-sheaf map preserves one. Naturality of n for top into inverse-top and map_one identify the value after restriction with n(1) at top.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 08HY and 0D5S; adjunction and the parent restriction calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homEquiv.*unit|unit.*naturality",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no theorem for the fixed construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no theorem for the fixed construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived base change map respects composition of base change squares",
+   "results": "8 hits: IsBaseChange.comp, IsBaseChange.of_comp, LinearMap.baseChange_comp, IsBaseChange.linearMapLeftRightHom_comp, IsBaseChange.comp_iff, IsBaseChange.linearMapLeftRightHom_comp_apply, LinearMap.baseChange_baseChange, LinearEquiv.baseChange_trans",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no theorem for the fixed construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules evaluation at one of the adjunction transpose of a unit morphism commutes with pullback and global section restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDirectImageSectionMapRestriction",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "parent proof step 2: canonical mates and evaluation give the successive-base-change equation",
+   "via": [
+    "lem-sc-picard-direct-image-section-map-restriction",
+    "lem-sc-picard-direct-image-section-naturality",
+    "lem-sc-picard-direct-image-test-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardAdjunctionSectionEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardAdjunctionSectionEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardAdjunctionSectionEvaluation",
+  "statement": "theorem picardAdjunctionSectionEvaluation\n    {Y Z : Scheme.{v}} (p : Z ⟶ Y) (F : Y.Modules ⥤ Z.Modules)\n    (adj : F ⊣ Modules.pushforward p)\n    (e : F.obj (SheafOfModules.unit Y.ringCatSheaf) ≅\n      SheafOfModules.unit Z.ringCatSheaf)\n    (he : adj.homEquiv _ _ e.hom =\n      SheafOfModules.unitToPushforwardObjUnit p.toRingCatSheafHom)\n    (N : Z.Modules) (n : SheafOfModules.unit Z.ringCatSheaf ⟶ N) :\n    N.presheaf.map (homOfLE p.preimage_top.ge).op\n      ((adj.homEquiv _ _ (e.hom ≫ n)).val.app (Opposite.op ⊤) (1 : Γ(Y, ⊤))) =\n        n.val.app (Opposite.op ⊤) (1 : Γ(Z, ⊤))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T142851-L-495662",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T142851-L-495662",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
