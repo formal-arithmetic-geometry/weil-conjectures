@@ -28,13 +28,18 @@ open CategoryTheory Opposite TopologicalSpace AlgebraicGeometry
 
 namespace SheafOfModules
 
-variable (X : RingedSpace.{u_sky}) (x : X)
+variable (X : RingedSpace.{u_sky, u_sky}) (x : X)
+
+/-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
+The section type before bundling the coefficient module, shared with scheme skyscrapers. -/
+abbrev ringedSkyscraperSectionsType (I : Type u_sky) (V : Opens X) : Type u_sky :=
+  PLift (x ∈ V) → I
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 Sections are functions from the proposition that the open contains the chosen point:
 a copy of the module when inhabited, and the zero group when empty. -/
 abbrev RingedSkyscraperSections (M : ModuleCat.{u_sky} (X.presheaf.stalk x))
-    (V : Opens X) : Type u_sky := PLift (x ∈ V) → M
+    (V : Opens X) : Type u_sky := ringedSkyscraperSectionsType X x M V
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 Scalars act through the germ at the point, componentwise on sections. -/
@@ -52,15 +57,20 @@ noncomputable instance ringedSkyscraperSectionsModule
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 The underlying abelian presheaf has restriction given by precomposition of membership proofs. -/
-abbrev ringedSkyscraperPresheafAb (M : ModuleCat.{u_sky} (X.presheaf.stalk x)) :
+abbrev ringedSkyscraperPresheafAbOfType (I : Type u_sky) [AddCommGroup I] :
     (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u_sky} where
-  obj V := AddCommGrpCat.of (RingedSkyscraperSections X x M V.unop)
+  obj V := AddCommGrpCat.of (ringedSkyscraperSectionsType X x I V.unop)
   map f := AddCommGrpCat.ofHom
     { toFun := fun s h ↦ s ⟨f.unop.le h.down⟩
       map_zero' := rfl
       map_add' := fun _ _ ↦ rfl }
   map_id _ := rfl
   map_comp _ _ := rfl
+
+/-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
+The common abelian skyscraper construction applied to a bundled stalk module. -/
+abbrev ringedSkyscraperPresheafAb (M : ModuleCat.{u_sky} (X.presheaf.stalk x)) :
+    (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u_sky} := ringedSkyscraperPresheafAbOfType X x M
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 The module structure on the bundled abelian presheaf values is the germ scalar action. -/
@@ -93,15 +103,14 @@ The skyscraper presheaf is a sheaf. Proof: on a cover, all components whose open
 have the same value by compatibility on intersections. This common value glues the family;
 when the open excludes x there is a unique section. Uniqueness follows on a cover member
 containing x, or from the empty domain of the section function. -/
-theorem ringedSkyscraperPresheafAb_isSheaf
-    (M : ModuleCat.{u_sky} (X.presheaf.stalk x)) :
-    Presheaf.IsSheaf (Opens.grothendieckTopology X) (ringedSkyscraperPresheafAb X x M) := by
+theorem ringedSkyscraperPresheafAbOfType_isSheaf (I : Type u_sky) [AddCommGroup I] :
+    Presheaf.IsSheaf (Opens.grothendieckTopology X) (ringedSkyscraperPresheafAbOfType X x I) := by
   classical
-  apply (TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing
-    (ringedSkyscraperPresheafAb X x M)).mpr
+  apply (TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing (X := X.carrier)
+    (ringedSkyscraperPresheafAbOfType X x I)).mpr
   intro ι U sf hsf
   choose index index_spec using fun h : PLift (x ∈ iSup U) ↦ Opens.mem_iSup.mp h.down
-  let s : RingedSkyscraperSections X x M (iSup U) :=
+  let s : ringedSkyscraperSectionsType X x I (iSup U) :=
     fun h ↦ sf (index h) ⟨index_spec h⟩
   refine ⟨s, ?_, ?_⟩
   · intro i
@@ -113,9 +122,16 @@ theorem ringedSkyscraperPresheafAb_isSheaf
     exact congrFun (ht (index h)) ⟨index_spec h⟩
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
+Sheafness is inherited from the common abelian skyscraper construction. -/
+theorem ringedSkyscraperPresheafAb_isSheaf
+    (M : ModuleCat.{u_sky} (X.presheaf.stalk x)) :
+    Presheaf.IsSheaf (Opens.grothendieckTopology X) (ringedSkyscraperPresheafAb X x M) :=
+  ringedSkyscraperPresheafAbOfType_isSheaf X x M
+
+/-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 The skyscraper module, with its concrete section data and germ scalar action. -/
 noncomputable abbrev ringedModuleSkyscraper
-    (M : ModuleCat.{u_sky} (X.presheaf.stalk x)) : SheafOfModules.{u_sky}
+    (M : ModuleCat.{u_sky} (X.presheaf.stalk x)) : SheafOfModules.{u_sky, u_sky}
       ((sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u_sky} RingCat.{u_sky})).obj X.sheaf) where
   val := PresheafOfModules.ofPresheaf (ringedSkyscraperPresheafAb X x M)
@@ -159,7 +175,7 @@ theorem ringedModuleSkyscraperMap_comp
 The skyscraper functor from stalk modules to sheaves of modules on the ringed space.
 Its extension by `Functor.mapHomologicalComplex` is the termwise skyscraper complex. -/
 noncomputable def ringedModuleSkyscraperFunctor :
-    ModuleCat.{u_sky} (X.presheaf.stalk x) ⥤ SheafOfModules.{u_sky}
+    ModuleCat.{u_sky} (X.presheaf.stalk x) ⥤ SheafOfModules.{u_sky, u_sky}
       ((sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u_sky} RingCat.{u_sky})).obj X.sheaf) where
   obj M := ringedModuleSkyscraper X x M
