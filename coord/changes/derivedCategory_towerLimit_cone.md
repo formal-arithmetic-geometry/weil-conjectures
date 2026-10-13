@@ -2,14 +2,28 @@
 
 ## Reason
 
-The repository already landed the upstream repair removing derived-category,
-exactness, enough-injectives, and K-injectivity hypotheses. This follow-up repair
-removes the remaining unused `Abelian` assumption; the second reader also removed
-the first worker's unnecessary `Preadditive` assumption. The Mathlib construction only
-needs zero morphisms to form cochain complexes, countable products
-to provide the two required products, and equalizers for the equalizer construction.
+Upstream review #1424 identified that the former theorem carried derived-category,
+exactness, enough-injectives, and K-injectivity hypotheses unused by its conclusion.
+The delivered theorem retains `Abelian A` and `HasCountableProducts A`: countable
+products lift to cochain complexes, and abelianness supplies their equalizers.
+Mathlib's `hasLimit_of_equalizer_and_product` then constructs the required limit.
+The final proof supplies `I.asFunctor` explicitly to `limit.cone` and `limit.isLimit`
+instead of leaving these arguments as elaboration placeholders.
 
 ## Old
+
+```lean
+theorem derivedCategory_towerLimit_cone
+    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
+    [HasCountableProducts A] [CountableAB4Star A]
+    (hP : HasCountableProducts (DerivedCategory A)) :
+    letI : HasCountableProducts (DerivedCategory A) := hP
+    ∀ (_ : EnoughInjectives A)
+      (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective],
+      ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)
+```
+
+## New
 
 ```lean
 theorem derivedCategory_towerLimit_cone
@@ -18,30 +32,12 @@ theorem derivedCategory_towerLimit_cone
       ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)
 ```
 
-## New
-
-```lean
-theorem derivedCategory_towerLimit_cone
-    (A : Type u) [Category.{v} A] [HasZeroMorphisms A]
-    [HasCountableProducts A] [HasEqualizers A] :
-    ∀ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ),
-      ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)
-```
-
 ## Users
 
 | module | group holding it | effect |
-| --- | --- | --- |
-| Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone | P2 | Reviewed generalization; no target statement or definition changes. |
-| Sheaf.CategoryTheory.Triangulated.DerivedLimitTower | unclaimed | Existing Abelian assumptions synthesize the generalized assumptions; no source change required. |
-
-The read-only downstream check finds 1566 transitive importers and exactly these
-two textual users (including the theorem itself). The only direct importer is
-DerivedLimitTower, whose unchanged proof compiles against the new signature. All
-transitive statements retain their text and definitions. The cone node realizes no
-unit statement or step, and its sole DAG citer remains valid. No target meaning
-review is reopened.
+|---|---|---|
+| Sheaf.CategoryTheory.Triangulated.DerivedLimitTower | unclaimed | Its existing Abelian/countable-products context supplies the delivered hypotheses; no caller statement change is needed. |
 
 ## Status
 
-landed 20261013T211110-L-394062 2026-10-13 (merge of deliver/P2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone)
+landed 20261013T222416-L-1227657 2026-10-13 (merge of deliver/T3/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone)
