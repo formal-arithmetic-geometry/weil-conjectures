@@ -27,67 +27,62 @@
  ],
  "proof": [
   {
-   "text": "Regard $M$ as a complex of $R$-modules and choose a K-flat $R$-resolution $e:E\\to M$ [lem-pc-kflat-resolution]. For any complex $T$ of $R$-modules choose a K-flat $R$-resolution $f:F\\to T$. Clause (2) of [lem-pc-derived-tensor-second-factor-functor] represents $M\\otimes_R^{\\mathbf L}T$ in $D(A)$ by $\\operatorname{Tot}(F\\otimes_R M)$, with its strict $A$-action through $M$. After forgetting the $A$-action, the two maps $$\\operatorname{Tot}(F\\otimes_R M)\\xleftarrow{1_F\\otimes e}\\operatorname{Tot}(F\\otimes_R E)\\xrightarrow{f\\otimes 1_E}\\operatorname{Tot}(T\\otimes_R E)$$ are quasi-isomorphisms of $R$-complexes. Indeed, the cones of $e$ and $f$ are acyclic by [lem-pur-quasi-iso-cone-acyclic]; the cone of each tensor map is its tensor with that acyclic cone by [lem-pc-tensor-mapping-cone-iso], up to the sign symmetry of total tensor complexes. The K-flatness of $F$ and $E$ [def-pc-kflat-complex] makes both tensor cones acyclic. Thus this zigzag gives a canonical identification in $D(R)$ between the underlying complex of $M\\otimes_R^{\\mathbf L}T$ and $\\operatorname{Tot}(T\\otimes_R E)$.",
+   "text": "Use the ordinary-module reduced functorial flat resolution L and its augmentation s from ModuleCat.hasFunctorialFlatResolution and Abelian.LeftResolution.resolutionFunctor. Their source-library proofs show that L(N) is K-flat and s(N) is a quasi-isomorphism. For the restricted fixed complex S(M), put E=L(S(M)) and e=s(S(M)). The computation clause of lem-pc-derived-tensor-second-factor-functor makes the natural comparison epsilon invertible at each L(N). Whiskering epsilon with L, composing with the inverse of the derived image of s, and applying homologyFunctorFactors identifies H(M) naturally with the ordinary cohomology of B(L(-),M). All resolution data come from the proved source construction, not from an unproved existence statement.",
    "uses": [
-    "lem-pc-kflat-resolution",
     "lem-pc-derived-tensor-second-factor-functor",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "lem-pc-tensor-mapping-cone-iso",
-    "def-pc-kflat-complex"
+    "def-pc-module-kflat-complex"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 06Y6 and 06Y0, balanced K-flat comparison"
+    "place": "Tag 06Y6; source implementation WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution and WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat"
    }
   },
   {
-   "text": "Apply Step 1 to every $T=N_i$ and to $T=N$. The comparison zigzags commute with every chain map $T\\to T'$ when the same resolution $E\\to M$ is held fixed: the total tensor maps $1_F\\otimes e$ and $f\\otimes 1_E$ are natural for maps of resolutions, and the canonical comparison between K-flat resolutions in [lem-pc-derived-tensor-second-factor-functor] (2) removes the choices of $F$. Consequently the maps induced by $\\iota_i$ correspond in $D(R)$ to the actual chain maps $\\operatorname{Tot}(N_i\\otimes_R E)\\to\\operatorname{Tot}(N\\otimes_R E)$. On the one-point site, [lem-pc-module-filtered-colimits-tensor] gives a chain isomorphism $$\\varinjlim_i\\operatorname{Tot}(N_i\\otimes_R E)\\cong\\operatorname{Tot}((\\varinjlim_iN_i)\\otimes_R E)=\\operatorname{Tot}(N\\otimes_R E),$$ under which the structure maps are precisely $\\operatorname{Tot}(\\iota_i\\otimes 1_E)$.",
+   "text": "Restriction of scalars preserves homology by ModuleCat.preservesHomology_restrictScalars, hence mapHomologicalComplexHomologyIso compares homology before and after restriction. Apply lem-pc-mixed-tensor-restriction-comparison to identify the restricted B(L(N),M) with L(N) tensor S(M), naturally in N. Tensoring e with the K-flat L(N) gives a quasi-isomorphism L(N) tensor E -> L(N) tensor S(M); tensoring s(N) with the K-flat E gives a quasi-isomorphism L(N) tensor E -> N tensor E. The source kFlat.whiskerLeft and kFlat.whiskerRight are precisely these assertions. Apply cohomology, use NatTrans.isIso_iff_isIso_app, and compose the resulting natural isomorphisms. This is the private proved balancedModel lemma: H(M) followed by restriction is naturally isomorphic to tensorRight E followed by ordinary degree-n homology.",
    "uses": [
-    "lem-pc-derived-tensor-second-factor-functor",
-    "lem-pc-module-filtered-colimits-tensor"
+    "lem-pc-mixed-tensor-restriction-comparison",
+    "def-pc-module-kflat-complex"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YR, proof, termwise tensor-colimit interchange; specialized here to modules on the one-point site"
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06Y0 and 06Y6, balanced K-flat zigzag"
    }
   },
   {
-   "text": "The exactness clause of [lem-pc-module-filtered-colimits-tensor] on the one-point site says filtered colimits of $R$-modules are exact. Apply it in the three consecutive degrees $n-1,n,n+1$ of the complexes $\\operatorname{Tot}(N_i\\otimes_R E)$: exactness preserves the kernel of $d^n$ and the image of $d^{n-1}$, so it identifies $\\varinjlim_i\\ker(d_i^n)/\\operatorname{im}(d_i^{n-1})$ with $\\ker(d^n)/\\operatorname{im}(d^{n-1})$. With Step 2 this is the canonical isomorphism $\\varinjlim_iH^n(\\operatorname{Tot}(N_i\\otimes_R E))\\cong H^n(\\operatorname{Tot}(N\\otimes_R E))$ of $R$-modules. The calculation is valid for every integer $n$ without boundedness assumptions.",
+   "text": "The tensor-Hom adjunction and braiding give colimit preservation by tensorRight of every coefficient module. The proved source instance Functor.instPreservesColimitsOfShapeFlipObjMap₂HomologicalComplex in BifunctorColimits then gives preservation by tensorRight E on unbounded complexes. ModuleCat AB5, obtained from exact filtered colimits of abelian groups, makes the filtered colimit functor preserve homology. For a diagram F of short complexes, let K be its image under ShortComplex.functorEquivalence.inverse. The evaluation homology isomorphisms identify K.homology with F followed by short-complex homology; K.mapHomologyIso colim identifies its colimit with the homology of the degreewise colimit. Their naturality at the colimit coprojections proves preservation of the actual colimit cocone. Evaluation in the three adjacent degrees makes shortComplexFunctor preserve colimits. Compose and transport via HomologicalComplex.homologyFunctorIso to obtain preservation by ordinary complex homology. Thus tensorRight E followed by degree-n homology preserves filtered colimits.",
    "uses": [
-    "lem-pc-module-filtered-colimits-tensor"
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00DB (directed colimits commute with homology), applied degreewise to filtered diagrams"
+    "place": "Tag 00DB; ModuleCat.AB and the proved source BifunctorColimits instances"
    }
   },
   {
-   "text": "Combine Step 3 with the canonical zigzags of Step 1. By Step 2, the resulting $R$-module isomorphism is induced by the original coprojection maps under the functor of [lem-pc-derived-tensor-second-factor-functor], so it is the displayed canonical map in the statement. That map is $A$-linear because each map $H^n(M\\otimes_R^{\\mathbf L}\\iota_i)$ is $A$-linear, and a bijective $A$-linear map has an $A$-linear inverse. Its naturality in the diagram follows from functoriality of tensor, colimits, and cohomology. For a chain map $u:M\\to M'$ of $A$-complexes, clause (3) of [lem-pc-derived-tensor-second-factor-functor] gives a natural transformation represented on each K-flat resolution $F$ by $1_F\\otimes u$; its compatibility with the coprojections $\\iota_i$ makes the square between the two canonical colimit maps commute. Thus their inverses are natural in $M$ as well.",
+   "text": "Transport preservation in step 3 through the natural isomorphism of step 2. Restriction of scalars preserves colimits and reflects isomorphisms, so reflectsColimitsOfShape_of_reflectsIsomorphisms and preservesColimitsOfShape_of_reflects_of_preserves show that H(M) itself preserves filtered colimits. The canonical map colimit.post is consequently invertible. Its coprojection equation is colimit.ι_post. For naturality in M, apply colimit.hom_ext, colimit.ι_map_assoc and colimit.ι_post, then use naturality of the whiskered T.map g. Naturality in diagrams is the symmetry of colimit.map_post. These prove all four clauses of the original Lean statement, without any change in coefficients, universes, or hypotheses.",
    "uses": [
     "lem-pc-derived-tensor-second-factor-functor"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6, functoriality and independence of K-flat resolutions, combined with Tag 00DB"
+    "place": "Tag 06Y6, functoriality, combined with Tag 00DB"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
   "lem-pc-derived-tensor-second-factor-functor",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pc-tensor-mapping-cone-iso",
-  "def-pc-kflat-complex",
-  "lem-pc-module-filtered-colimits-tensor"
+  "def-pc-module-kflat-complex",
+  "lem-pc-mixed-tensor-restriction-comparison",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 06Y6 and 06Y0, combined with Tags 06YR and 00DB"
+  "place": "Tags 06Y6 and 06Y0, combined with Tag 00DB; implemented by D2 using proved ordinary-module functorial K-flat resolutions and the mixed-tensor restriction comparison, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -197,5 +192,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T082335-L-1632418",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -11617,3 +11617,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/C3/Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCycleClassEpi (stage 3; reviewer PASS; first push; landing 20261013T082334-L-1631922 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:23 L: merged deliver/C4/Sheaf.Algebra.Homology.SingleComplexAffineBaseChange (stage 3; reviewer PASS; first push; landing 20261013T082335-L-1632118 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:23 L: merged deliver/C4/Sheaf.AlgebraicGeometry.PicardExternalCupLeftHomologyLadder (stage 3; reviewer PASS; first push; landing 20261013T082335-L-1632272 (interface); batch 20261013T082326; modules 2; new nodes 1)
+- 08:23 L: merged deliver/D2/Sheaf.Algebra.Homology.FilteredColimitDerivedTensor (stage 3; reviewer PASS; first push; landing 20261013T082335-L-1632418 (proof); batch 20261013T082326; modules 1; new nodes 0)
