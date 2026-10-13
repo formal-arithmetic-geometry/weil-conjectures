@@ -1,0 +1,103 @@
+{
+ "id": "new-stage3-gabriel-popescu-abelian-core",
+ "kind": "statement",
+ "title": "Gabriel Popescu abelian core",
+ "statement": "theorem gabriel_popescu_abelian_core\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    [HasCoproducts.{max w vA vH} (DerivedCategory A)] :\n    ∃ (S : Type w) (rS : Ring S),\n      letI := rS\n      ∃ hD : HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S),\n      letI := hD\n      ∃ (F : ModuleCat.{max w vH} S ⥤ A) (U : A ⥤ ModuleCat.{max w vH} S)\n        (adj₀ : F ⊣ U) (addF : F.Additive)\n        (limF : PreservesFiniteLimits F) (colimF : PreservesFiniteColimits F),\n      let _ := addF\n      let _ := limF\n      let _ := colimF\n      IsIso adj₀.counit",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F5V",
+  "place": "injectives-lemma-gabriel-popescu; Tag 0F5X first paragraph; Tag 05NU for Baer criterion in the size extension"
+ },
+ "proof": [
+  {
+   "text": "Construct the small Gabriel–Popescu module presentation using a separator, then extend the exact left adjoint and invertible counit to the displayed universe by the Baer-criterion argument.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0F5V",
+  "place": "Abelian separator, large-coproduct, counit and exactness component of the parent presentation proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Gabriel Popescu Grothendieck abelian category compact generator derived module category universe lift",
+   "results": "8 hits: CategoryTheory.Abelian.freyd_mitchell, CategoryTheory.Abelian.FreydMitchell.functor, instHasExtModuleCatOfSmall, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Abelian.FreydMitchell.EmbeddingRing, CategoryTheory.Abelian.FreydMitchell.instNonemptyAsSmall, CategoryTheory.IsGrothendieckAbelian.hasExt, instIsGrothendieckAbelianModuleCat. No common universe-extended Gabriel–Popescu and compact-source package.",
+   "date": "2026-10-14",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsGrothendieckAbelian.tensorObj",
+   "results": "4 hits: CategoryTheory.IsGrothendieckAbelian.tensorObj, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.preservesFiniteLimits, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction. No common universe-extended Gabriel–Popescu and compact-source package.",
+   "date": "2026-10-14",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "GabrielPopescu|grothendieckDerived.*presentation|IsCompactlyGeneratedTriangulated",
+   "results": "5 hits: Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean. No common universe-extended Gabriel–Popescu and compact-source package.",
+   "date": "2026-10-14",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian Grothendieck category is an exact localization of modules over a ring",
+   "results": "Service unavailable: Internal Server Error. Rechecked by second reader.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "F3",
+  "date": "2026-10-14",
+  "item": "Sheaf.CategoryTheory.GrothendieckDerivedGabrielPopescuPresentation"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-c3-grothendieck-derived-gabriel-popescu-presentation",
+   "place": "stage-3 decomposition",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GabrielPopescuAbelianCore",
+  "file": "lean/Sheaf/CategoryTheory/GabrielPopescuAbelianCore.lean",
+  "declaration": "CategoryTheory.gabriel_popescu_abelian_core",
+  "statement": "theorem gabriel_popescu_abelian_core\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    [HasCoproducts.{max w vA vH} (DerivedCategory A)] :\n    ∃ (S : Type w) (rS : Ring S),\n      letI := rS\n      ∃ hD : HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S),\n      letI := hD\n      ∃ (F : ModuleCat.{max w vH} S ⥤ A) (U : A ⥤ ModuleCat.{max w vH} S)\n        (adj₀ : F ⊣ U) (addF : F.Additive)\n        (limF : PreservesFiniteLimits F) (colimF : PreservesFiniteColimits F),\n      let _ := addF\n      let _ := limF\n      let _ := colimF\n      IsIso adj₀.counit",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-62b11",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T222404-L-1223076",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-62b11",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T222404-L-1223076",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the DAG and recorded statements; all delivered modules and the direct importer compile cleanly, with only the two documented component sorry declarations remaining."
+ }
+}

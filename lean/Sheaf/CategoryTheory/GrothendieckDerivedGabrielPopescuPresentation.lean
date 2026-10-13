@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Equivalence
+import Sheaf.CategoryTheory.GabrielPopescuAbelianCore
+import Sheaf.CategoryTheory.CompactDerivedSourceCore
 
 /-! # A common module presentation for compact generation and exact localization
 
@@ -23,6 +25,8 @@ universe w uA vA vH
 open CategoryTheory.Limits
 
 namespace CategoryTheory
+
+set_option linter.style.haveILetI false
 
 /-- The Gabriel--Popescu abelian presentation and the compact triangulated source use
 one and the same module category, linked by a triangulated equivalence.
@@ -83,6 +87,27 @@ theorem grothendieckDerived_gabriel_popescu_presentation
         (se : e.functor.CommShift ℤ),
       letI := se
       e.functor.IsTriangulated := by
-  sorry
+  have hcore :
+      ∃ (S : Type w) (rS : Ring S),
+        letI := rS
+        ∃ hD : HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S),
+        letI := hD
+        ∃ (F : ModuleCat.{max w vH} S ⥤ A) (U : A ⥤ ModuleCat.{max w vH} S)
+          (adj₀ : F ⊣ U) (addF : F.Additive)
+          (limF : PreservesFiniteLimits F) (colimF : PreservesFiniteColimits F),
+        let _ := addF
+        let _ := limF
+        let _ := colimF
+        IsIso adj₀.counit := by
+    exact gabriel_popescu_abelian_core (A := A)
+  obtain ⟨S, rS, hD, F, U, adj₀, addF, limF, colimF, hc⟩ := hcore
+  letI := rS
+  letI := hD
+  letI := addF
+  letI := limF
+  letI := colimF
+  refine ⟨S, rS, hD, F, U, adj₀, addF, limF, colimF, hc, ?_⟩
+  exact compact_derived_source_core (A := A) (S := S)
+
 
 end CategoryTheory
