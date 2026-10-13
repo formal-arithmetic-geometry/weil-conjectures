@@ -1,0 +1,109 @@
+{
+ "id": "lem-sbc-punctured-dvr-normalization-stalk-torsion-free-injective",
+ "kind": "statement",
+ "title": "Injectivity of the localized normalization stalk map",
+ "statement": "Let X be locally Noetherian, U an open, p:P -> U finite etale, x a normalization point outside U, and O_{X,s} a domain and DVR. Then the induced map from the base stalk to the normalization stalk is injective.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-relative-normalization",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0307, 035I and 0539"
+ },
+ "proof": [
+  {
+   "text": "Localize at the DVR stalk and use the affine description of relative normalization; the chosen local ring is a localization at a prime of the integral closure in a finite product of fields.",
+   "uses": [
+    "lem-sbc-normalization-stalk-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normalization-stalk-base-change"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "G3",
+  "document": "Stacks Project",
+  "place": "Tags 0307, 035I and 0539"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalization stalk is domain finite etale punctured DVR",
+   "date": "2026-10-14",
+   "results": "service unavailable",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization stalk domain integral closure DVR",
+   "date": "2026-10-14",
+   "results": "no exact scheme-level theorem",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*stalk.*IsDomain|stalkMap.*Injective",
+   "date": "2026-10-14",
+   "results": "no exact theorem in Mathlib",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkTorsionFree",
+  "date": "2026-10-14",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-punctured-dvr-normalization-stalk-torsion-free",
+   "place": "intermediate theorem",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkMapInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedDvrNormalizationStalkMapInjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_dvr_normalization_stalkMap_injective",
+  "statement": "theorem punctured_dvr_normalization_stalkMap_injective\n    {X : Scheme.{u}} [IsLocallyNoetherian X] (U : X.Opens)\n    {P : Scheme.{u}} (p : P ⟶ U.toScheme) [IsFinite p] (hetale : Etale p)\n    (x : (p ≫ U.ι).normalization)\n    (hs : (p ≫ U.ι).fromNormalization x ∉ U)\n    [IsDomain (X.presheaf.stalk ((p ≫ U.ι).fromNormalization x))]\n    [IsDiscreteValuationRing (X.presheaf.stalk ((p ≫ U.ι).fromNormalization x))] :\n    Function.Injective ((p ≫ U.ι).fromNormalization.stalkMap x).hom",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T211103-L-391661",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T211103-L-391661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
