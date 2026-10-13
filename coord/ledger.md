@@ -11473,3 +11473,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:51 L: merged deliver/X2/Sheaf.AlgebraicGeometry.PrincipalCechBicomplexComparison (stage 3; reviewer PASS; first push; landing 20261013T065121-L-902242 (interface); batch 20261013T065054; modules 4; new nodes 3)
 - 06:51 L: merged deliver/Y2/Sheaf.Paper.AffinePerfectKoszulPrincipalUnitIso (stage 3; reviewer PASS; first push; landing 20261013T065122-L-902370 (proof); batch 20261013T065054; modules 1; new nodes 0)
 - 06:56 L: returned deliver/E2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (reviewer RETURN: (reviewer X-f3256, head f325690da) C1/C3: PuncturedCompletionFiniteEtaleFullyFaithful.lean lines 45–47 invokes the non-e)
+- 06:59 L: returned deliver/J2/Sheaf.AlgebraicGeometry.BoundedOrdinaryEvaluationAssembly (reviewer RETURN: (reviewer X-cf53d, head cf53d7e97) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Bo)
