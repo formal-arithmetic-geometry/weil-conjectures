@@ -1,0 +1,110 @@
+{
+ "id": "lem-sc-principal-open-cech-subset-insertion-vertical",
+ "kind": "statement",
+ "title": "Vertical differential of explicit subset insertion",
+ "statement": "Let A be a commutative ring, r a natural number, f:Fin r → A, and J an integer cochain complex of module sheaves on Spec A. Use the explicit subset coordinates, insertion, restriction and union V of [def-sc-principal-open-cech-subset-insertion]. Let U_i be the preimage in V of D(f_i), K the tuple bicomplex [def-sc-alternating-cech-total-complex] of the restricted complex, and H the forgetful functor to additive groups. For every n and coordinate function s, H(K.D₂(n,n+1))(insert_n(s)) equals insert_(n+1) of the function with S coordinate (-1)^(|S|-1) times the differential of J from degree n+1-|S| to degree n+2-|S| applied to s_S. There is no horizontal face term.",
+ "stmt_deps": [
+  "def-sc-principal-open-cech-subset-insertion",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1 and equation-global-sections-to-alternating-cech (08C0); Tag 01FG, ordered-complex differential preceding Definition 20.23.2; coordinate verification of the vertical part of the parent proof. Read online at https://stacks.math.columbia.edu/tag/08C1, https://stacks.math.columbia.edu/tag/08C0 and https://stacks.math.columbia.edu/tag/01FG."
+ },
+ "proof": [
+  {
+   "text": "Expand the finite sum defining insertion. For a subset S put p=|S|-1 and\nq=n+1-|S|. Apply Mathlib's `ι_D₂` and `d₂_eq` to its total summand inclusion.\nThe latter sends the summand to (p,q+1) with sign p.negOnePow. Extension by zero\nidentifies the column p with the increasing-tuple product; coefficient maps act\ncomponentwise on that product. Thus the map sends the single tuple supported at\nS to the same single tuple with its coefficient differentiated. Naturality of the\nthree factors of principalSubsetSectionTransport (open equality transport,\nrestrictAppIso inverse, and overFunctorEquiv inverse) moves that coefficient map\nbefore section transport. Each factor is natural in the module morphism J.d.\nSince p is nonnegative, its sign acts as (-1 : A)^(|S|-1). The equation\nq+1=n+2-|S| identifies the coefficient degrees. Distribute the finite sum and\nreassemble it as insertion of the vertical coordinate function. For an empty\nindex family the sum is zero; singletons have sign one. The Lean proof proves section-transport naturality directly from mapPresheaf and overFunctorEquiv naturality, uses extendMap_f to identify the vertical coefficient map, and proves its action on Pi.single by evaluating each tuple. Int.cast_negOnePow_natCast converts the total sign, and additive maps preserve its integer action.",
+   "uses": [
+    "def-sc-principal-open-cech-subset-insertion",
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-principal-open-cech-subset-insertion",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1 and equation-global-sections-to-alternating-cech (08C0); Tag 01FG, ordered-complex differential preceding Definition 20.23.2; coordinate verification of the vertical part of the parent proof. Read online at https://stacks.math.columbia.edu/tag/08C1, https://stacks.math.columbia.edu/tag/08C0 and https://stacks.math.columbia.edu/tag/01FG."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "differential total complex sum horizontal vertical differentials insertion finite subset Cech",
+   "results": "{\"t\": \"2026-10-13T15:13:47Z\", \"tool\": \"leanfinder\", \"query\": \"differential total complex sum horizontal vertical differentials insertion finite subset Cech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex₂.totalAux.ιMapObj_D₁\", \"HomologicalComplex₂.totalAux.d₁_eq\", \"HomologicalComplex₂.d₁_eq\", \"HomologicalComplex₂.ι_D₁\", \"HomologicalComplex₂.totalAux.d₁_eq'\", \"HomologicalComplex₂.totalAux.ιMapObj_D₂\", \"HomologicalComplex₂.totalAux.d₂_eq\", \"HomologicalComplex₂.d₁\"], \"digest\": \"846a35be7664cf94\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic total-differential and inclusion identities found; no explicit subset-coordinate identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total_d",
+   "results": "{\"t\": \"2026-10-13T15:13:58Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex₂.total_d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomologicalComplex₂.total_d\"], \"digest\": \"0209a3495b5517ad\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic total-differential and inclusion identities found; no explicit subset-coordinate identity."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma total_d|def D₁|def D₂",
+   "results": "{\"t\": \"2026-10-13T15:13:58Z\", \"tool\": \"grep\", \"query\": \"lemma total_d|def D₁|def D₂\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree.lean\"], \"digest\": \"f200c6e54cf00bc8\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic total-differential and inclusion identities found; no explicit subset-coordinate identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "vertical differential of total complex finite subset insertion Cech coefficient differential",
+   "results": "{\"t\": \"2026-10-13T15:16:09Z\", \"tool\": \"leansearch\", \"query\": \"vertical differential of total complex finite subset insertion Cech coefficient differential\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionDifferential",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-principal-open-cech-subset-insertion-differential",
+   "place": "Vertical part of the explicit coordinate differential verification"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionVertical",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSubsetInsertionVertical.lean",
+  "declaration": "AlgebraicGeometry.principalSubsetInsertion_vertical",
+  "statement": "theorem principalSubsetInsertion_vertical\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex (Spec (.of A)).Modules ℤ) :\n    let V := principalSubsetUnion A r f\n    let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)\n    let K := (alternatingCechDoubleFunctor U).obj (principalSubsetRestriction A r f J)\n    let H := forget₂\n      (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat\n    let D := principalSubsetOpen A r f\n    ∀ (n : ℤ) (s : principalSubsetCoordinates A r f J n),\n      (H.map (K.D₂ (ComplexShape.up ℤ) n (n + 1)))\n        (principalSubsetInsertion A r f J n s) =\n      principalSubsetInsertion A r f J (n + 1) (fun S ↦\n          (-1 : A) ^ (S.val.card - 1) •\n            (modulesSpecToSheaf.map\n              (J.d (n + 1 - (S.val.card : ℤ)) (n + 1 + 1 - (S.val.card : ℤ)))).hom.app\n                (op (D S.val)) (s S))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T155945-L-1306767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T155945-L-1306767",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

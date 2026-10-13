@@ -6,6 +6,8 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionVertical
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionHorizontal
 
 /-! # Properties of explicit subset insertion
 
@@ -61,6 +63,25 @@ theorem principalSubsetInsertion_differential
                 ((modulesSpecToSheaf.map
                   (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app
                     (op (D (S.val.erase j.val))) (s ⟨S.val.erase j.val, h⟩))
-          else 0) := by sorry
+          else 0) := by
+  classical
+  intro D hle he n s
+  let V := principalSubsetUnion A r f
+  let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)
+  let K := (alternatingCechDoubleFunctor U).obj (principalSubsetRestriction A r f J)
+  let H := forget₂
+    (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat
+  change (H.map ((K.total (ComplexShape.up ℤ)).d n (n + 1)))
+    (principalSubsetInsertion A r f J n s) = _
+  rw [HomologicalComplex₂.total_d, H.map_add]
+  change (H.map (K.D₁ (ComplexShape.up ℤ) n (n + 1)))
+      (principalSubsetInsertion A r f J n s) +
+    (H.map (K.D₂ (ComplexShape.up ℤ) n (n + 1)))
+      (principalSubsetInsertion A r f J n s) = _
+  rw [principalSubsetInsertion_horizontal A r f J hle he n s,
+    principalSubsetInsertion_vertical A r f J n s]
+  exact (add_comm _ _).trans ((map_add (principalSubsetInsertion A r f J (n + 1)).hom
+    _ _).symm)
+
 
 end AlgebraicGeometry
