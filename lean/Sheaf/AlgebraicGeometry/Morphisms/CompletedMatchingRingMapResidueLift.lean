@@ -6,10 +6,23 @@ Authors: SHEAF group Q2
 module
 public import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
+import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapResidueQuotientSurjective
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
+
+private theorem residue_lift_of_quotient_surjective
+    {R S : Type u} [CommRing R] [CommRing S]
+    (g : R →+* S) (I : Ideal S)
+    (h : Function.Surjective (fun a : R => Ideal.Quotient.mk I (g a))) :
+    ∀ b : S, ∃ a : R, g a - b ∈ I := by
+  intro b
+  obtain ⟨a, ha⟩ := h (Ideal.Quotient.mk I b)
+  refine ⟨a, ?_⟩
+  apply Ideal.Quotient.eq_zero_iff_mem.mp
+  rw [map_sub]
+  exact sub_eq_zero.mpr ha
 
 /-- Every completed section lifts modulo the extended maximal ideal.
 Source: Stacks Project, Tags 0BLH and 05ER, applied to the residue quotient.
@@ -41,6 +54,12 @@ theorem completedRingMap_residue_lift
     ∀ b : Γ(E, ⊤), ∃ a, D.completedRingMap a - b ∈
       (IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal A) A)).map
         (((ΓSpecIso (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))).inv ≫
-          s.appTop).hom) := by sorry
+          s.appTop).hom) := by
+  let C := AdicCompletion (IsLocalRing.maximalIdeal A) A
+  let I : Ideal (Γ(E, ⊤)) := (IsLocalRing.maximalIdeal C).map
+    (((ΓSpecIso (.of C)).inv ≫ s.appTop).hom)
+  have hq := D.completedRingMap_residue_quotient_surjective hU
+  intro b
+  exact residue_lift_of_quotient_surjective D.completedRingMap.hom I hq b
 
 end AlgebraicGeometry.Scheme.CompletionGluingData

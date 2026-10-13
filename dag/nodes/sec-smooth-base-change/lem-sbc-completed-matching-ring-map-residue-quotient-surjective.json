@@ -1,0 +1,111 @@
+{
+ "id": "lem-sbc-completed-matching-ring-map-residue-quotient-surjective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-completed-matching-ring-map-residue-lift",
+   "place": "residue approximation in the finite-module Nakayama reduction"
+  }
+ },
+ "kind": "statement",
+ "title": "Completed matching sections surject modulo the maximal ideal",
+ "statement": "In the hypotheses of completedRingMap_residue_lift, the completed comparison induces a surjection onto the quotient of Γ(E, ⊤) by the image of the completed maximal ideal.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BLH and 05ER; canonical H0 comparison reduced modulo the maximal ideal"
+ },
+ "stmt_deps": [
+  "def-sbc-completed-matching-ring-map",
+  "def-sbc-punctured-completion-matching-sections"
+ ],
+ "proof": [
+  {
+   "text": "Reduce the canonical H0 comparison of formal glueing modulo the maximal ideal.",
+   "uses": [
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "def-sbc-completed-matching-ring-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-formal-glueing-equivalence",
+  "def-sbc-completed-matching-ring-map"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "M1",
+  "document": "Stacks Project",
+  "place": "Tags 0BLH and 05ER"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "surjective map to ideal quotient representative",
+   "results": "No exact matching formal-gluing declaration found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; use the stated formal-gluing comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective (fun a => Ideal.Quotient.mk I (g a))",
+   "results": "No exact match used.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; use the stated formal-gluing comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "residue quotient surjective completedRingMap",
+   "results": "No existing declaration found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; use the stated formal-gluing comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "surjective residue quotient map formal glueing",
+   "results": "Service unavailable; no verdict.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapResidueLift",
+  "date": "2026-10-14",
+  "group": "M1"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapResidueQuotientSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CompletedMatchingRingMapResidueQuotientSurjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.completedRingMap_residue_quotient_surjective",
+  "statement": "theorem completedRingMap_residue_quotient_surjective\n    {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) :\n    let P : CommRingCat := pushout D.baseMap (CommRingCat.ofHom\n      (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)))\n    Function.Surjective (fun a : P =>\n      Ideal.Quotient.mk\n        ((IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal A) A)).map\n          (((ΓSpecIso (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))).inv ≫\n            s.appTop).hom)) (D.completedRingMap a))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T172656-L-2100083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T172656-L-2100083",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
