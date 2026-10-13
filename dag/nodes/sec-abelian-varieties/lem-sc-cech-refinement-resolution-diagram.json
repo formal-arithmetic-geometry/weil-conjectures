@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-cech-refinement-resolution-diagram",
+ "kind": "statement",
+ "title": "Refinement augmentation and global-sections squares on resolution total homology",
+ "statement": "Let $f:X\\prime\\to X$ be a scheme morphism [def-pc-scheme], $U$ an open cover of $X$, $U\\prime$ an arbitrary family of opens of $X\\prime$, and $c$ a specified index map with $U\\prime_i\\subset f^{-1}(U_{c(i)})$. Let $F$ be a quasi-coherent module [pqf-def-coherent], $p\\geq0$, and $\\gamma$ a cochain map with the prescribed tuple formula [def-sc-cech-refinement-cochain-map]. Assume enough injectives for the module categories and additivity of global sections. Let $D$ be any resolution data [def-weil-pbc-module-cohomology-fmap] for the tensor-pullback adjunction unit: resolutions $D.J$ of $F$ and $D.I$ of $f^*F$, an injective complex $D.K$, a quasi-isomorphism $\\lambda:f_*D.I\\to D.K$, an augmented lift $b:D.J\\to D.K$, and the pinned sections comparison $a$. Put $r=e_J^{-1}H(\\Gamma b)H(a\\Gamma\\lambda)^{-1}e_I$, where $e_J,e_I$ are the forgetting-scalars homology identifications. Then there exists an additive map $t:H^p(\\operatorname{Tot}\\check C(U,D.J))\\to H^p(\\operatorname{Tot}\\check C(U\\prime,D.I))$, after forgetting scalars, satisfying $H(\\beta_U)t=H(\\gamma)H(\\beta_{U\\prime})$ and $H(\\alpha_U)t=rH(\\alpha_{U\\prime})$. Here $\\alpha,\\beta$ are the restriction and augmentation maps [def-sc-module-cech-comparison]. No covering hypothesis on $U\\prime$ and no canonical Cech comparison are assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-module-cech-comparison",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Stacks Tag 01FD"
+ },
+ "proof": [
+  {
+   "text": "Form the four Cech double complexes B, B-prime, B-double-prime and A of Tag 01FD using D.J, D.K, the pushforward of D.I and D.I. The maps are induced by D.beta, D.lambda, and the prescribed tuplewise pullback/restriction formula. Functoriality and restriction naturality verify the two chain directions and total signs.",
+   "uses": [
+    "def-sc-cech-refinement-cochain-map",
+    "def-sc-module-cech-comparison",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every intersection of source opens, sections of D.lambda are a quasi-isomorphism, by acyclicity of pushforwards of injectives and of injectives. Apply the first-quadrant total column comparison (with transposition to place resolution columns correctly) to obtain an invertible map on total homology B-double-prime -> B-prime. Compose the map from B to B-prime, this inverse, and the refinement map to A to construct t.",
+   "uses": [
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The augmentation compatibility equation in D makes the pentagon commute; its tuplewise formula is hgamma. Take homology and transport through forgetting scalars to obtain H(beta_B) composed with t = H(gamma) composed with H(beta_A). Restriction naturality gives the global-section squares. The pinned section comparison D.a identifies global sections of D.I and of its pushforward. Inverting the global-sections map of D.lambda gives exactly the displayed raw sections map r and hence the second square.",
+   "uses": [
+    "def-sc-cech-refinement-cochain-map",
+    "def-sc-module-cech-comparison",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-module-cech-comparison",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-sc-first-quadrant-total-column-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FD, Lemma 20.15.1 and its resolution diagram, specialized to the adjunction unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the Cech to sheaf cohomology comparison under a scheme morphism and refinement of open covers",
+   "results": "8 hits: TopCat.Sheaf.interUnionPullbackConeLift_right, TopCat.Sheaf.interUnionPullbackConeLift_left, AlgebraicGeometry.Scheme.Hom.naturality_assoc, TopCat.Presheaf.SheafConditionEqualizerProducts.w, AlgebraicGeometry.Scheme.Hom.naturality, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE'; none states the resolution augmentation diagram.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"homology\"",
+   "results": "0 hits: ; none states the resolution augmentation diagram.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(refine|comparison)|refine.*cech",
+   "results": "2 hits: Mathlib/Topology/ExtremallyDisconnected.lean, Mathlib/Topology/Separation/CompletelyRegular.lean; none states the resolution augmentation diagram.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A refinement of open covers gives a commutative augmentation and global section diagram for injective resolutions of a ringed space map",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechRefinementComparisonSquare",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general theorem of the cube; Kunneth comparison on the special fibre",
+   "via": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-cech-refinement-comparison-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechRefinementResolutionDiagram",
+  "file": "lean/Sheaf/Paper/CechRefinementResolutionDiagram.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cechRefinement_resolution_diagram",
+  "statement": "theorem exists_cechRefinement_resolution_diagram (X X' : Scheme.{v}) (f : X' ⟶ X)\n    {ι ι' : Type v} (U : ι → X.Opens) (hU : iSup U = ⊤)\n    (U' : ι' → X'.Opens)\n    (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i))\n    (F : X.Modules) [F.IsQuasicoherent]\n    [EnoughInjectives X.Modules] [EnoughInjectives X'.Modules]\n    [(RingedSpace.globalSectionsFunctor X.toRingedSpace).Additive]\n    [(RingedSpace.globalSectionsFunctor X'.toRingedSpace).Additive] (p : ℕ)\n    (gamma : ((forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj ((cechComplexFunctor U).obj F.presheafModuleCat) ⟶\n      ((forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj\n          ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat))\n    (hgamma : IsCechRefinementMap f U U' refine hrefine F gamma)\n    (D : ModuleCohomologyFMapData f F ((tensorPullback f).obj F)\n      ((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F)) :\n    let r := (((RingedSpace.globalSectionsComplex D.J).sc p).mapHomologyIso\n        (forget₂ _ AddCommGrpCat)).inv ≫\n      HomologicalComplex.homologyMap\n        (((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n          forget₂ _ AddCommGrpCat).mapHomologicalComplex (ComplexShape.up ℕ)).map D.β) p ≫\n      inv (I := D.invertible p) (HomologicalComplex.homologyMap (D.a.hom ≫\n        ((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n          forget₂ _ AddCommGrpCat).mapHomologicalComplex (ComplexShape.up ℕ)).map D.lambda) p) ≫\n      (((RingedSpace.globalSectionsComplex D.I).sc p).mapHomologyIso\n        (forget₂ _ AddCommGrpCat)).hom\n    ∃ t : (forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat).obj\n        (((moduleCechDouble U D.J).total (ComplexShape.up ℕ)).homology p) ⟶\n      (forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat).obj\n        (((moduleCechDouble U' D.I).total (ComplexShape.up ℕ)).homology p),\n      (forget₂ _ AddCommGrpCat).map\n          (HomologicalComplex.homologyMap (moduleCechBeta U D.J) p) ≫ t =\n        cechRefinementHomology gamma p ≫ (forget₂ _ AddCommGrpCat).map\n          (HomologicalComplex.homologyMap (moduleCechBeta U' D.I) p) ∧\n      (forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat).map\n          (HomologicalComplex.homologyMap (moduleCechAlpha U D.J) p) ≫ t =\n        r ≫ (forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat).map\n          (HomologicalComplex.homologyMap (moduleCechAlpha U' D.I) p)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T165646-L-1809827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T165646-L-1809827",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
