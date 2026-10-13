@@ -13371,7 +13371,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:01 L: merged deliver/G4/Sheaf.Algebra.Homology.HomologyEvaluationCycleExistence (stage 3; reviewer PASS; first push; landing 20261013T190140-L-3216235 (interface); batch 20261013T190131; modules 1; new nodes 0; change records: coord/changes/HomologyEvaluationCycleExistence-instances.md)
 - 19:01 L: merged deliver/H3/Sheaf.Paper.FiniteStructureProductCompatibility (stage 3; reviewer PASS; after a return; landing 20261013T190140-L-3216345 (interface); batch 20261013T190131; modules 2; new nodes 0; change records: coord/changes/finite_structure_product_compatibility.md)
 - 19:01 L: merged deliver/H4/Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisColumns (stage 3; reviewer PASS; first push; landing 20261013T190141-L-3216494 (interface); batch 20261013T190131; modules 3; new nodes 2)
-- 19:01 L: merged deliver/H4/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf (stage 3; reviewer PASS; after a return; landing 20261013T190141-L-3216641 (interface); batch 20261013T190131; modules 1; new nodes 0; change records: coord/changes/H4-cohomology-presheaf-instance-sharing.md)
 - 19:01 L: merged deliver/K2/Sheaf.AlgebraicGeometry.DerivedPullbackCompositionTensorKFlat (stage 3; reviewer PASS; first push; landing 20261013T190142-L-3216802 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/K2/Sheaf.AlgebraicGeometry.OpenRestrictedComparisonCore (stage 3; reviewer PASS; first push; landing 20261013T190142-L-3216944 (interface); batch 20261013T190131; modules 3; new nodes 2)
 - 19:01 L: merged deliver/K4/Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricDirect (stage 3; reviewer PASS; first push; landing 20261013T190143-L-3217106 (interface); batch 20261013T190131; modules 4; new nodes 3)
@@ -13425,3 +13424,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:12 L: returned deliver/D3/Sheaf.RingTheory.SelfTorConormalRegularIso (reviewer RETURN: (reviewer X-fcce5, head fcce566fe) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.SelfTorCo)
 - 19:15 L: returned deliver/C1/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (reviewer RETURN: (reviewer X-2527f, head 2527f78d2) E1/E2, review point 4: picardScalarCech_externalCup_core remains false. With R=Q[t], )
 - 19:18 L: returned deliver/P3/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-fb036, head fb036c918) E2 (brief §4): IdealKernelElementDescent.lean:99 replaces the existing proof with `θ )
+
+- 03:19 L: batch 20261013T190131 dependency take-out
