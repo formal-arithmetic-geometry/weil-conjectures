@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeComparison
 import Sheaf.AlgebraicGeometry.EtaleTensorSections
 import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
+import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorPureCofaceFixed
 
 /-! # Pure-tensor coface formula for singleton sections
 Source: Stacks Project, Tag 03P2, the tensor differential formula.
@@ -58,7 +59,9 @@ theorem singletonTensorDegreeComparison_pure_coface
       ((singletonTensorForget U.left).map
         ((Algebra.TensorProduct.amitsurCosimplicialObject Γ(U.left, ⊤) Γ(W.left, ⊤)
           Γ((Modules.tensorPullback U.hom).obj F, ⊤)).δ j) ≫ (e (n + 1)).hom)
-            (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b)) := by sorry
+            (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b)) := by
+  intro n j m b
+  exact singletonTensorDegreeComparison_pure_coface_fixed X F U W g e he n j m b
 
 end
 end AlgebraicGeometry.Scheme

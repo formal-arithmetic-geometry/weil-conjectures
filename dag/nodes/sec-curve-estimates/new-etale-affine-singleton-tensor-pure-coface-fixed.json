@@ -1,0 +1,96 @@
+{
+ "id": "new-etale-affine-singleton-tensor-pure-coface-fixed",
+ "kind": "statement",
+ "title": "Fixed-degree pure-tensor coface equation",
+ "statement": "For fixed n and j, the normalized singleton tensor comparison commutes with the j-th coface on a pure tensor.",
+ "stmt_deps": [
+  "new-etale-affine-singleton-tensor-pure-cofaces"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03P2"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the singleton product and compare the two coface composites using the normalization formula and restriction functoriality.",
+   "uses": [
+    "new-etale-affine-singleton-tensor-pure-cofaces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-etale-affine-singleton-tensor-pure-cofaces"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 03P2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fixed degree pure tensor coface compatibility",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "singleton tensor coface pure tensor",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "amitsurCosimplicialObject",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorPureCofaces",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-etale-affine-singleton-tensor-pure-cofaces",
+   "place": "fixed-degree component",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorPureCofaceFixed",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineSingletonTensorPureCofaceFixed.lean",
+  "declaration": "AlgebraicGeometry.Scheme.singletonTensorDegreeComparison_pure_coface_fixed",
+  "statement": "theorem singletonTensorDegreeComparison_pure_coface_fixed\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U W : X.Etale) (g : W ⟶ U)\n    (e : ∀ n : ℕ, (singletonTensorAmitsur X F U W g).X n ≅\n      (singletonTensorCech X F U W g).X n)\n    (he : ∀ n, IsSingletonTensorDegreeComparison X F U W g n (e n))\n    (n : ℕ) (j : Fin (n + 2))\n      (m : Γ((Modules.tensorPullback U.hom).obj F, ⊤))\n      (b : Fin (n + 1) → Γ(W.left, ⊤)) :\n    letI : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra\n    ((e n).hom ≫ (singletonTensorCechCosimplicial X F U W g).δ j)\n        (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b)) =\n      ((singletonTensorForget U.left).map\n        ((Algebra.TensorProduct.amitsurCosimplicialObject Γ(U.left, ⊤) Γ(W.left, ⊤)\n          Γ((Modules.tensorPullback U.hom).obj F, ⊤)).δ j) ≫ (e (n + 1)).hom)\n            (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T003158-L-2429296",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T003158-L-2429296",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
