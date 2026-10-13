@@ -1,0 +1,150 @@
+{
+ "id": "lem-sc-horizontal-duality-mate-commutativity",
+ "kind": "statement",
+ "title": "Commutativity of horizontal duality mates with constructed endpoint comparisons",
+ "statement": "Let f:X→Y be qcqs, g:Y′→Y and h:Z→Y′ morphisms with Y,Y′,Z qcqs, and fix derived module categories in one universe [def-pc-derived-category, def-weil-pbc-scheme-conventions]. Let X′=X×_Y Y′, P=X′×_{Y′} Z, Q=X×_Y Z [def-pc-fibre-product], and let e:P≅Q be canonical pullback associativity. Choose a,a′,d,c right adjoints to the lifted derived direct images for X→Y, X′→Y′, P→Z, Q→Z, with supplied adjunctions [lem-pc-qcqs-derived-direct-image-right-adjoint]. Assume ordinary derived base change for (f,g), (X′→Y′,h), and (f,h≫g) is invertible on every quasi-coherent input [def-pc-derived-base-change-map]. For K∈D_QCoh(Y), let μ,ν,λ be their respective canonical duality mates [def-sc-duality-equation-base-change-map], with ν evaluated at Lg* K. Let O=L(pr₁:P→X′)*μ≫ν and G=L(e.hom)*λ, as actual morphisms in D(O_P). Let s be the constructed source endpoint isomorphism and r the constructed target endpoint isomorphism of [lem-sc-horizontal-duality-mate-comparisons], using the supplied adjunctions and their pinned composition comparisons. Then O≫r.hom=s.hom≫G. Neither μ nor ν nor λ is assumed invertible. No open subschemes or arbitrary supplied endpoint isomorphisms occur. This statement asserts only this fixed morphism equality; it supplies neither endpoint constructions nor an arrow isomorphism.",
+ "source": {
+  "document": "Stacks Project, Duality for Schemes and Cohomology of Sheaves",
+  "place": "duality.tex, Tag 0ATR, Lemma 48.5.2 proof diagram and final conjugate equality; cohomology.tex, Tag 0ATM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "def-pc-derived-base-change-map",
+  "def-sc-duality-equation-base-change-map",
+  "def-pc-derived-pullback",
+  "lem-sc-horizontal-duality-mate-comparisons"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "status": "split",
+ "proof": [
+  {
+   "text": "Expand the three canonical dualityEquationBaseChangeMap terms into base unit, inverse conjugate of ordinary base change, and top counit. Characterize the constructed right-adjoint uniqueness comparison by its counit compatibility. Naturality moves units past the conjugates; the composite-adjunction formulas and the middle triangle identity reduce the asserted equality to equality of the outer conjugate with the composite of the two square conjugates.",
+   "uses": [
+    "def-sc-duality-equation-base-change-map",
+    "lem-sc-horizontal-duality-mate-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove horizontal ordinary base-change pasting (Stacks Tag 0ATM) by transposing under the outer pullback/direct-image adjunction. Substitute the counit descriptions of the ordinary base-change maps. Pullback-composition associativity identifies both transposes with the same pullback of the counit of f. Injectivity of the Hom equivalence proves equality. Apply conjugateEquiv composition and inversion: conjugation reverses the order and inversion reverses it back. The remaining factors are exactly s.hom and r.hom, giving the displayed equality without inverting any duality mate. This argument includes identity base maps by the unit laws, zero complexes, and empty schemes.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-sc-horizontal-duality-mate-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-duality-equation-base-change-map",
+  "lem-sc-horizontal-duality-mate-comparisons",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "V4",
+  "date": "2026-10-13",
+  "note": "Lean construction of the endpoint comparisons and the fixed-comparison equality from the numbered steps of lem-sc-horizontal-duality-mate-pasting; following Stacks Tags 0ATR and 0ATM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "horizontal composition of base change maps for right adjoints and mates",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv_hcomp",
+   "results": "loogle: unknown identifier 'mateEquiv_hcomp'",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "horizontal.*[Mm]ate|rightAdjointUniq|mateEquiv_hcomp",
+   "results": "25 hits: Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical isomorphisms comparing endpoints of horizontal base change mates from derived pullback composition and uniqueness of right adjoints",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse conjugate of derived base change commutes with horizontal composition under canonical right adjoint comparisons",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.conjugateEquiv_symm_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.conjugateEquiv_symm_comp_assoc, CategoryTheory.conjugateEquiv_symm_comm, CategoryTheory.conjugateEquiv_comp, CategoryTheory.conjugateEquiv_comm",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley transformations composition coherence pullback equivalences dualizing functor",
+   "results": "Second reader: chosen-pullback composition/counit laws and presheaf pullbackComp, no specialized fixed scheme-derived duality mate equality.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Second reader: right-adjoint uniqueness and unit/counit compatibility laws; already used in endpoint construction, not the specialized equality.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HorizontalDualityMatePasting",
+  "group": "V4",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Horizontal duality mate pasting in the new-base open restriction comparison: Commutativity of horizontal duality mates with constructed endpoint comparisons.",
+   "via": [
+    "lem-sc-horizontal-duality-mate-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HorizontalDualityMateCommutativity",
+  "file": "lean/Sheaf/AlgebraicGeometry/HorizontalDualityMateCommutativity.lean",
+  "declaration": "AlgebraicGeometry.horizontal_duality_mate_commutativity",
+  "declarations": [
+   "AlgebraicGeometry.horizontal_duality_mate_commutativity"
+  ],
+  "statement": "theorem horizontal_duality_mate_commutativity\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y Y' Z : Scheme.{u}}\n    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (g : Y' ⟶ Y) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (a' : schemeDerivedQCohCategory Y' ⥤ schemeDerivedQCohCategory (pullback f g))\n    (adjf : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y\n          (QuasiCompact.compactSpace_of_compactSpace f)\n          (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f _ _).fst E.obj E.property) ⊣ a)\n    (adjf' : (schemeDerivedQCohProperty Y').lift\n      ((schemeDerivedQCohProperty (pullback f g)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f g)) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n          (pullback.snd f g) _ _).fst E.obj E.property) ⊣ a')\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition E.obj))\n    (K : schemeDerivedQCohCategory Y)\n    [CompactSpace Z] [QuasiSeparatedSpace Z]\n    (h : Z ⟶ Y')\n    (c : schemeDerivedQCohCategory Z ⥤\n      schemeDerivedQCohCategory (pullback f (h ≫ g)))\n    (adjc : (schemeDerivedQCohProperty Z).lift\n      ((schemeDerivedQCohProperty (pullback f (h ≫ g))).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f (h ≫ g))) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))) _ _ _ _\n          (pullback.snd f (h ≫ g)) _ _).fst E.obj E.property) ⊣ c)\n    (hβh : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f (h ≫ g)) (h ≫ g)\n        (pullback.fst f (h ≫ g)) pullback.condition E.obj))\n    (d : schemeDerivedQCohCategory Z ⥤\n      schemeDerivedQCohCategory (pullback (pullback.snd f g) h))\n    (adjd : (schemeDerivedQCohProperty Z).lift\n      ((schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd (pullback.snd f g) h)) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h))\n          _ _ _ _ (pullback.snd (pullback.snd f g) h) _ _).fst E.obj E.property) ⊣ d)\n    (hβ₂ : ∀ E : schemeDerivedQCohCategory (pullback f g),\n      IsIso (schemeDerivedBaseChangeMap (pullback.snd f g)\n        (pullback.snd (pullback.snd f g) h) h\n        (pullback.fst (pullback.snd f g) h) pullback.condition E.obj)) :\n    let O := Arrow.mk\n      ((derivedPullback (pullback.fst (pullback.snd f g) h)).map\n        ((schemeDerivedQCohProperty (pullback f g)).ι.map\n            (@dualityEquationBaseChangeMap _ X Y Y'\n              (QuasiCompact.compactSpace_of_compactSpace f)\n              (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _\n              f g a a' adjf adjf' hβ K)) ≫\n        ((schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.map\n            (@dualityEquationBaseChangeMap _ (pullback f g) Y' Z\n              (QuasiCompact.compactSpace_of_compactSpace (pullback.snd f g))\n              (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n              (pullback.snd f g) h a' d adjf' adjd hβ₂\n              (((schemeDerivedQCohProperty Y').lift\n                ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback g)\n                (fun E ↦ (derivedPullback_tensor_preserve_QCoh g).1\n                  E.obj E.property)).obj K))))\n    let G := Arrow.mk ((derivedPullback (pullbackLeftPullbackSndIso f g h).hom).map\n        ((schemeDerivedQCohProperty (pullback f (h ≫ g))).ι.map\n            (@dualityEquationBaseChangeMap _ X Y Z\n              (QuasiCompact.compactSpace_of_compactSpace f)\n              (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _\n              f (h ≫ g) a c adjf adjc hβh K)))\n    O.hom ≫ (horizontalMateTargetIso f g h c d adjc adjd K).hom =\n      (horizontalMateSourceIso f g h (a.obj K).obj).hom ≫ G.hom",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T125014-L-3838608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T125014-L-3838608",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,8 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.CategoryTheory.Comma.Arrow
 
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+import Sheaf.AlgebraicGeometry.HorizontalDualityMateCommutativity
 
 /-! # Horizontal pasting of canonical duality mates
 
@@ -111,6 +110,10 @@ theorem horizontal_duality_mate_pasting
             (@dualityEquationBaseChangeMap _ X Y Z
               (QuasiCompact.compactSpace_of_compactSpace f)
               (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _
-              f (h ≫ g) a c adjf adjc hβh K)))) := by sorry
+              f (h ≫ g) a c adjf adjc hβh K)))) := by
+  exact ⟨Arrow.isoMk (horizontalMateSourceIso f g h (a.obj K).obj)
+    (horizontalMateTargetIso f g h c d adjc adjd K)
+    (horizontal_duality_mate_commutativity g f a a' adjf adjf' hβ K h c adjc
+      hβh d adjd hβ₂).symm⟩
 
 end AlgebraicGeometry
