@@ -62,16 +62,53 @@
  },
  "proof": [
   {
-   "text": "On a bounded-above finite-free source and a bounded-below target, the Hom complex is zero below the difference of the bounds; restriction identifies this with the sheaf RHom locally.",
+   "text": "At x unpack pseudo-coherence to obtain U containing x and a complex P representing K restricted to U, with P^i=0 for i>b. Finite freeness is not needed for this bound-only conjunct.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact restriction commutes with derived cohomology, so the lower bound a on L is also a lower bound on L restricted to U. By the canonical derived-category t-structure choose a strictly bounded-below representative G of that restriction.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the bounded-below injective-resolution theorem on the localized ringed site to G. Obtain a quasi-isomorphism G to a K-injective complex I with I^j=0 for j<m. The bound m may differ from a, which suffices for the existential conclusion.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For n<m-b and every p, either p>b, so P^p=0, or p<=b, so p+n<m and I^(p+n)=0. Internal Hom with a zero source or target is zero, by linear-map extensionality. The product cone of homComplex_exists then shows Hom(P,I)^n=0. Thus Hom(P,I) is strictly >=m-b and Q(Hom(P,I)) has zero cohomology below m-b.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The K-injective representative comparison derivedInternalHom_obj_iso computes the local RHom as Q(Hom(P,I)). Use derivedInternalHom_restrict_open and exact restriction of homology to transport this vanishing to the restriction of the global RHom cohomology. Return U and m-b.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "lem-sc-bounded-below-injective-resolution",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-derived-internal-hom",
+  "lem-sc-derived-internal-hom-restrict-open"
+ ],
  "proof_origin": {
-  "by": "worker A2",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A6H, clause (1)"
+  "by": "worker P2, second reading",
+  "document": "Stacks Project, https://stacks.math.columbia.edu/tag/0A6H; https://stacks.math.columbia.edu/tag/07A5",
+  "place": "Clause (1), lower-bound component: direct bounded-above/bounded-below Hom-complex argument with an injective target; open restriction"
  },
  "lean": {
   "existing": false,
@@ -94,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T223357-L-1633991",
-  "kind": "interface",
+  "landing": "20261013T003159-L-2429538",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

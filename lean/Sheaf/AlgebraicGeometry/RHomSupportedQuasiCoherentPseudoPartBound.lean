@@ -2,7 +2,8 @@ module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
 
 @[expose] public section
 
@@ -11,6 +12,56 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
+
+private theorem homObj_isZero_of_source
+    {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
+    (P Z : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    (hP : IsZero P) : IsZero (SheafOfModules.homObj (R := R) P Z) := by
+  apply (IsZero.iff_id_eq_zero _).mpr
+  rw [← SheafOfModules.homObjMap_id (R := R) (M := P) (N := Z), hP.eq_zero_of_src (𝟙 P)]
+  apply SheafOfModules.hom_ext
+  ext X φ : 3
+  change (PresheafOfModules.restrictOver R.obj X.unop).map 0 ≫ φ ≫
+    (PresheafOfModules.restrictOver R.obj X.unop).map (𝟙 Z.val) = 0
+  ext W x
+  change (φ.app W).hom 0 = 0
+  exact map_zero _
+
+private theorem homObj_isZero_of_target
+    {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
+    (P Z : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    (hZ : IsZero Z) : IsZero (SheafOfModules.homObj (R := R) P Z) := by
+  apply (IsZero.iff_id_eq_zero _).mpr
+  rw [← SheafOfModules.homObjMap_id (R := R) (M := P) (N := Z), hZ.eq_zero_of_tgt (𝟙 Z)]
+  apply SheafOfModules.hom_ext
+  ext X φ : 3
+  change (PresheafOfModules.restrictOver R.obj X.unop).map (𝟙 P.val) ≫ φ ≫
+    (PresheafOfModules.restrictOver R.obj X.unop).map 0 = 0
+  ext W x
+  rfl
+
+private theorem homComplex_isStrictlyGE
+    {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
+    (P I : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
+    (b m : ℤ) (hP : ∀ i : ℤ, b < i → IsZero (P.X i))
+    [I.IsStrictlyGE m] : (homComplex (R := R) P I).IsStrictlyGE (m - b) := by
+  rw [CochainComplex.isStrictlyGE_iff]
+  intro n hn
+  obtain ⟨π, hπ, _, _⟩ := Classical.choose_spec
+    (homComplex_exists (C := C) (J := J) (R := R))
+  apply (IsZero.iff_id_eq_zero _).mpr
+  apply (hπ P I n).some.hom_ext
+  intro j
+  by_cases hj : b < j.as
+  · exact (homObj_isZero_of_source J R _ _ (hP j.as hj)).eq_of_tgt _ _
+  · exact (homObj_isZero_of_target J R _ _
+      (I.isZero_of_isStrictlyGE m (j.as + n) (by omega))).eq_of_tgt _ _
 
 /-- The local lower-bound component of the pseudo-coherent internal-Hom lemma.
 
@@ -34,6 +85,51 @@ theorem rhom_supported_quasiCoherent_pseudo_part_bound
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj
             ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
               X.toRingedSpace.sheaf).obj (op K, L)))) := by
-  sorry
+  -- The lower bound itself does not require quasi-coherence.
+  have _hQC := hL
+  intro x
+  obtain ⟨U, hxU, P, hPbound, _hPfinite, ⟨eP⟩⟩ := hK x
+  obtain ⟨b, hb⟩ := hPbound
+  obtain ⟨a, ha⟩ := hGE
+  let D := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
+  let QU := DerivedCategory.Q (C := D)
+  let F := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
+  have hLU : (F.mapDerivedCategory.obj L).IsGE a := by
+    rw [DerivedCategory.isGE_iff]
+    intro n hn
+    exact (F.map_isZero ((DerivedCategory.isGE_iff L a).mp ha n hn)).of_iso
+      ((F.mapDerivedCategoryHomologyFunctorIso n).app L).symm
+  let := hLU
+  obtain ⟨G, hG, ⟨eG⟩⟩ :=
+    (F.mapDerivedCategory.obj L).exists_iso_Q_obj_of_isGE a
+  let := hG
+  obtain ⟨I, i, hi, ⟨m, hm⟩, _hIinj, hI⟩ :=
+    SheafOfModules.exists_boundedBelow_injective_resolution
+      ((Opens.grothendieckTopology X.toRingedSpace).over U)
+      (X.toRingedSpace.sheaf.over U) G ⟨a, hG⟩
+  let := hi
+  let := hm
+  let := hI
+  let eI : QU.obj I ≅ F.mapDerivedCategory.obj L :=
+    (asIso (QU.map i)).symm ≪≫ eG.symm
+  obtain ⟨eH⟩ := @derivedInternalHom_obj_iso.{u, w} (Over U) _
+    ((Opens.grothendieckTopology X.toRingedSpace).over U)
+    (X.toRingedSpace.sheaf.over U)
+    (inferInstanceAs (HasDerivedCategory.{w} D))
+    (F.mapDerivedCategory.obj K) (F.mapDerivedCategory.obj L) P I inferInstance eP.symm eI
+  obtain ⟨eR⟩ := derivedInternalHom_restrict_open X.toRingedSpace U K L
+  have hHom := homComplex_isStrictlyGE
+    ((Opens.grothendieckTopology X.toRingedSpace).over U)
+    (X.toRingedSpace.sheaf.over U) P I b m hb
+  let := hHom
+  have hQ : (QU.obj
+      (homComplex (R := X.toRingedSpace.sheaf.over U) P I)).IsGE (m - b) :=
+    inferInstance
+  refine ⟨U, hxU, m - b, ?_⟩
+  intro n hn
+  have hzero := (DerivedCategory.isGE_iff _ (m - b)).mp hQ n hn
+  exact hzero.of_iso
+    (((F.mapDerivedCategoryHomologyFunctorIso n).app _) ≪≫
+      (DerivedCategory.homologyFunctor D n).mapIso (eR.symm ≪≫ eH))
 
 end AlgebraicGeometry
