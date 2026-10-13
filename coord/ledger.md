@@ -12287,3 +12287,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:33 L: merged deliver/R4/Sheaf.AlgebraicGeometry.ProjChartRestrictionIsLocalized (stage 3; reviewer PASS; first push; landing 20261013T113351-L-3186880 (proof); batch 20261013T113333; modules 1; new nodes 0)
 - 11:33 L: merged deliver/R4/Sheaf.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComparisons (stage 3; reviewer PASS; first push; landing 20261013T113352-L-3187030 (interface); batch 20261013T113333; modules 3; new nodes 2)
 - 11:33 L: merged deliver/S1/Sheaf.AlgebraicGeometry.AffineExtensionSectionsUnit (stage 3; reviewer PASS; first push; landing 20261013T113352-L-3187179 (interface); batch 20261013T113333; modules 3; new nodes 2)
+- 11:33 L: merged deliver/S1/Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation (stage 3; reviewer PASS; after a return; landing 20261013T113353-L-3187331 (interface); batch 20261013T113333; modules 2; new nodes 1)

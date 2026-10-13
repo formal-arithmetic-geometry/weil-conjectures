@@ -1,0 +1,155 @@
+{
+ "id": "lem-sc-supported-perfect-factorization",
+ "kind": "statement",
+ "title": "Perfect factorization of maps to supported quasi-coherent complexes",
+ "statement": "Let Y be a quasi-compact quasi-separated scheme [def-pc-scheme], let V be a quasi-compact open, and work in its derived category [def-pc-derived-category]. Let P be perfect [def-pc-perfect-complex], and let K have quasi-coherent cohomology and zero derived restriction to V. Every map f:P → K factors as P → R → K, where R is perfect and its derived restriction to V is zero.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A9C",
+  "place": "Proof, finite perfect factorization paragraph, generalized from the structure sheaf to any perfect source; Tags 0E4G, 094A and 09SP"
+ },
+ "proof": [
+  {
+   "text": "Perfect P has quasi-coherent cohomology. Let A=D_QCoh(Y), install its triangulated and isomorphism-closed structures and its universe-u coproducts, which agree with ambient coproducts. Restriction vanishing of K implies vanishing of each homology stalk on V, using the existing private stalk_subsingleton_of_restriction_zero from SupportedKoszulRelativeDetector, accessed with import all. Choose a supported perfect generator G and the supplied telescope of K starting with zero.",
+   "uses": [
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-supported-qcoh-triangulated",
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-derived-qcoh-closed-coproducts",
+    "lem-sc-supported-derived-generated-perfect",
+    "lem-pc-supported-koszul-relative-detector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "P is compact in A. Reindex the ambient countable cofan by ULift natural numbers in universe u. Its point is in A by coproduct closure; restrict the ambient colimit universal property to A. Lift the telescope triangle to A with its inclusion shift comparison. The canonical identity-minus-transition map is conjugate to the supplied identity-minus-s. Apply compact_hom_hocolim with compact source P and target K; surjectivity and Types.jointly_surjective give one stage map whose composite into K is f.",
+   "uses": [
+    "lem-pc-perfect-object-compact",
+    "lem-pc-compact-hom-hocolim",
+    "lem-pc-derived-qcoh-closed-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The initial zero stage is the empty coproduct of shifts of G. Lift each ambient attaching cofan with the existing private ambient_shift_coproduct_iso from CompactGeneratorAmbientThick (accessed with import all), and lift its triangle to A using closure under triangles and inclusion shift comparisons. Inverse rotation makes the attaching object a coproduct of shifts G[m-1]. Apply compact_factorThrough_thickClosure with singleton compact family G to the finite-stage map. It factors through Q in the thick envelope of a finite coproduct of G. This handles stage zero without a separate case split.",
+   "uses": [
+    "lem-pc-perfect-object-compact",
+    "lem-sc-supported-factor-through-thick",
+    "lem-sc-compact-generator-ambient-thick"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing private perfect_thick_property from DerivedQCohCompactRepresentatives, accessed with import all, to give the perfect objects their triangulated retract-closed property. Its proof uses perfect_of_iso and perfect_thick_closure, including the split retract triangle and the zero object as a retract of G; none of these helper proofs is copied here. The property of restricting to zero on V is also triangulated and retract-closed: restriction commutes with shifts and distinguished triangles, and maps retract equations. G has this property by supported_derived_restriction_zero. Intersect the properties and pull back to A. Finite products and the finite biproduct/coproduct isomorphisms put the finite sum of G in this property. The universal property of triangEnvelope puts Q there. Compose Q to the finite stage with its map into K, and use the two factorization equations.",
+   "uses": [
+    "lem-pc-perfect-thick-closure",
+    "lem-pc-supported-derived-restriction-zero",
+    "lem-sc-derived-qcoh-compact-is-perfect"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-perfect-qcoherent",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-sc-supported-derived-generated-perfect",
+  "lem-pc-supported-koszul-relative-detector",
+  "lem-pc-perfect-object-compact",
+  "lem-pc-compact-hom-hocolim",
+  "lem-sc-supported-factor-through-thick",
+  "lem-sc-compact-generator-ambient-thick",
+  "lem-pc-perfect-thick-closure",
+  "lem-pc-supported-derived-restriction-zero",
+  "lem-sc-derived-qcoh-compact-is-perfect"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S1",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0A9C",
+  "place": "Finite factorization argument; generalized telescope transport, with existing private coproduct, perfect thick-property and stalk helpers reused through import all rather than reproved"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a compact object to a supported derived complex factors through a perfect complex supported on the same closed subset",
+   "results": "Eight hits about derived fractions and bounded representatives, no support-preserving perfect factorization.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompactObject",
+   "results": "Unknown identifier; no hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "factorThrough.*thick|supported.*perfect.*factor",
+   "results": "Mathlib: no hits. Local library: CompactGeneratorAmbientThick only handles the identity of a compact telescope target; its private transport proof was generalized here to an arbitrary compact-source map.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a perfect complex to a quasi-coherent complex supported on a closed subset factors through a perfect complex supported there",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pseudo-coherent-support-annihilation",
+   "place": "Steps 2 and 3, finite factorization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedPerfectFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedPerfectFactorization.lean",
+  "declaration": "AlgebraicGeometry.supported_perfect_factorization",
+  "statement": "theorem supported_perfect_factorization (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] (V : Y.Opens) [CompactSpace (V : Set Y)] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (P K : schemeDerivedCategory Y) (hP : Scheme.IsPerfect Y P) (hK : schemeDerivedQCohProperty Y K) (hzero : IsZero ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V).mapDerivedCategory.obj K)) (f : P ⟶ K) : ∃ (R : schemeDerivedCategory Y) (a : P ⟶ R) (b : R ⟶ K), Scheme.IsPerfect Y R ∧ IsZero ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V).mapDerivedCategory.obj R) ∧ a ≫ b = f",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T113353-L-3187331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T113353-L-3187331",
+  "kind": "interface"
+ }
+}

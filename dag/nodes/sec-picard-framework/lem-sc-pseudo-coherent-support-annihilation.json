@@ -1,187 +1,171 @@
 {
-  "id": "lem-sc-pseudo-coherent-support-annihilation",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "proper-flat support proof: a pseudo-coherent map to a complex supported on the complement is killed by a perfect complex equal to the unit on the open",
-      "via": [
-        "lem-sc-proper-flat-right-adjoint-open-support"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-pseudo-coherent-support-annihilation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: a pseudo-coherent map to a complex supported on the complement is killed by a perfect complex equal to the unit on the open",
+   "via": [
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
   },
-  "kind": "statement",
-  "title": "Perfect annihilator for a map to a supported complex",
-  "statement": "Let Y be quasi-compact and quasi-separated [def-pc-scheme], let V be a quasi-compact open, and let T=Y\\setminus V. For a morphism alpha:P\\to Q in D_QCoh(Y) [def-pc-derived-category], assume either (i) P is perfect [def-pc-perfect-complex] and Q is supported on T, or (ii) P is pseudo-coherent [def-pur-pseudo-coherent-complex], Q is supported on T, and Q is bounded below. Then there is a morphism I\\to\\mathcal O_Y from a perfect complex I that is an isomorphism on V and for which I\\otimes^L P\\to Q, the composite of the tensor action with alpha, is zero.",
-  "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9C (Lemma map-from-pseudo-coherent-to-complex-with-support)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Perfect annihilator for a map to a supported complex",
+ "statement": "Let Y be quasi-compact and quasi-separated [def-pc-scheme], let V be a quasi-compact open, and let T=Y\\setminus V. For a morphism alpha:P\\to Q in D_QCoh(Y) [def-pc-derived-category], assume either (i) P is perfect [def-pc-perfect-complex] and Q is supported on T, or (ii) P is pseudo-coherent [def-pur-pseudo-coherent-complex], Q is supported on T, and Q is bounded below. Then there is a morphism I\\to\\mathcal O_Y from a perfect complex I that is an isomorphism on V and for which I\\otimes^L P\\to Q, the composite of the tensor action with alpha, is zero.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A9C (Lemma map-from-pseudo-coherent-to-complex-with-support)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Use rhom_supported_quasiCoherent with the unchanged perfect/pseudo-coherent disjunction, converting the cohomological bound to IsGE via DerivedCategory.isGE_iff. Stalk vanishing of Q on V makes each restricted homology sheaf zero by section_ext. Apply the internal-Hom support clause to the closed complement of V; homology detects zero, so K=RHom(P,Q) is quasi-coherent and has zero derived restriction to V.",
+   "uses": [
+    "lem-sc-rhom-supported-qcoherent"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-pc-derived-category",
-    "def-pc-perfect-complex",
-    "def-pur-pseudo-coherent-complex",
+  {
+   "text": "Apply scheme_derivedInternalHom_adjunction and transpose the map leftUnitor followed by alpha to a:unit → K. The tensor unit is perfect: at every point choose the top open and the single complex of the rank-one free module. Apply supported_perfect_factorization to a, obtaining unit → R → K with R perfect and zero on V. This proved helper realizes the original generator telescope, compact Hom, and finite thick factorization steps in D_QCoh(Y).",
+   "uses": [
+    "lem-sc-derived-internal-hom-adjunction",
+    "lem-sc-supported-perfect-factorization",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Complete unit → R to a distinguished triangle and inverse-rotate it to I → unit → R → I[1]. Two-out-of-three gives perfectness of I. Exact restriction maps this triangle to a distinguished triangle whose third vertex is zero, so its first arrow is invertible. The consecutive-composite equation and the factorization of a give i ≫ a = 0.",
+   "uses": [
+    "lem-pc-perfect-two-out-of-three"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize adjunction naturality to i in the first variable and identities in the other variables. This equates the adjunct of i ≫ a with i whiskered by P followed by the adjunct of a. The shared K-flat derived tensor is additive, using DerivedCategory.monoidalPreadditive with the same local sheaf tensor/closedness/flat-resolution instances used in schemeDerivedTensorMonoidal; hence its whiskering of zero is zero. Naturality with the zero source endomorphism proves that the adjunct of zero is zero even though the adjunction interface is only an Equiv. The inverse-equivalence equation identifies the adjunct of a with leftUnitor followed by alpha, giving exactly the unchanged conclusion.",
+   "uses": [
+    "lem-sc-derived-internal-hom-adjunction",
     "def-pc-scheme-derived-tensor-structure"
-  ],
-  "proof": [
-    {
-      "text": "Put K=R\\mathcal H om(P,Q). By [lem-sc-rhom-supported-qcoherent], in case (ii) K is quasi-coherent and bounded below, and in case (i) it is quasi-coherent; because Q is supported on T and internal Hom commutes with restriction to opens, K is supported on T. The morphism alpha corresponds by tensor-Hom adjunction to a morphism a:\\mathcal O_Y[0]\\to K.",
-      "uses": [
-        "lem-sc-rhom-supported-qcoherent"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Tag 0A9C proof, first paragraph"
-      }
-    },
-    {
-      "text": "The existing supported-generation statement [lem-sc-supported-derived-generated-perfect] supplies a perfect E supported on T and writes K as a sequential derived colimit 0=K_0\\to K_1\\to\\cdots in D_QCoh(Y) whose successive cones are direct sums of shifts of E. The object \\mathcal O_Y[0] is perfect, hence compact in D_QCoh(Y) by [lem-pc-perfect-object-compact]. Applying the compact-Hom hocolim statement [lem-pc-compact-hom-hocolim] in C=D_QCoh(Y) to K=\\mathcal O_Y[0], the map a is represented by a map a_n:\\mathcal O_Y[0]\\to K_n at some finite stage n.",
-      "uses": [
-        "lem-sc-supported-derived-generated-perfect",
-        "lem-pc-perfect-object-compact",
-        "lem-pc-compact-hom-hocolim"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0E4G (Lemma 48.4.3), proof, together with Derived Categories Tag 094A"
-      }
-    },
-    {
-      "text": "If n=0 then a_n=0 and a factors through Q'=0. Otherwise apply [lem-sc-supported-factor-through-thick] in the ambient category C=D_QCoh(Y) (which has arbitrary direct sums) to the one-element family E, which is compact by [lem-pc-perfect-object-compact], and to the sequence X_m=K_m (m>=1): rotating the triangle K_m\\to K_{m+1}\\to C_m\\to K_m[1] with C_m a direct sum of shifts of E gives C_m[-1]\\to K_m\\to K_{m+1}\\to C_m, so Z_m=C_m[-1] is a direct sum of shifts of E, and X_1=K_1\\cong C_0 is one as well. With the compact source \\mathcal O_Y[0], the map a_n factors as \\mathcal O_Y[0]\\to Q'\\to K_n with Q' in the thick subcategory generated by a finite direct sum of copies of E. Since E is perfect, Q' is perfect by [lem-pc-perfect-thick-closure] (triangulated subcategories of D_QCoh(Y) have their triangles distinguished in D(\\mathcal O_Y)). The same operations preserve support on T: shifts and sums preserve vanishing after restriction to V, cones do so by the long exact cohomology sequence, and direct summands do so by restriction. Hence Q' is perfect and supported on T, and a factors through Q'.",
-      "uses": [
-        "lem-sc-supported-factor-through-thick",
-        "lem-pc-perfect-object-compact",
-        "lem-pc-perfect-thick-closure",
-        "lem-sc-supported-derived-generated-perfect"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 09SP (Lemma lemma-factor-through), with the supported-generator properties from Tag 0E4G"
-      }
-    },
-    {
-      "text": "Complete \\mathcal O_Y[0]\\to Q' to a distinguished triangle I\\to\\mathcal O_Y[0]\\to Q'\\to I[1]. Restriction to V is triangulated, and Q'|_V=0 because Q' is supported on T=Y\\setminus V, so I\\to\\mathcal O_Y[0] restricts to an isomorphism on V. Since \\mathcal O_Y[0] and Q' are perfect, I is perfect by [lem-pc-perfect-thick-closure] (1). The composite I\\to\\mathcal O_Y[0]\\to Q'\\to K is zero because a factors through Q'.",
-      "uses": [
-        "lem-pc-perfect-thick-closure"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Tag 0A9C proof, final paragraph"
-      }
-    },
-    {
-      "text": "Under the tensor-Hom adjunction, the map I\\to K is exactly the composite I\\otimes^L P\\to Q induced by alpha. Its vanishing therefore gives the required zero composite, while Step 4 gives the perfect complex and the isomorphism over V.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Tag 0A9C proof, first and final paragraphs"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-rhom-supported-qcoherent",
-    "lem-sc-supported-derived-generated-perfect",
-    "lem-pc-perfect-object-compact",
-    "lem-pc-compact-hom-hocolim",
-    "lem-sc-supported-factor-through-thick",
-    "lem-pc-perfect-thick-closure"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9C proof"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "pseudo-coherent complex map to supported complex perfect annihilator open",
-      "results": "Generic derived-category support declarations only; no derived support-annihilator theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "PseudoCoherent support annihilator perfect complex",
-      "results": "0 hits; Unknown identifier PseudoCoherent",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "pseudo-coherent.*support|support.*annihilat",
-      "results": "0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "perfect complex annihilates map to complex supported outside open",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-proper-flat-right-adjoint-open-support",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-pseudo-coherent-support-annihilation",
-    "worker": "stage1",
-    "summary": "Repaired the Tag 0A9C split by dropping duplicate supported-generator and hocolim children, correcting the internal-Hom source to Tag 0A6H, and restoring a self-contained generic Tag 09SP finite-thick-factorization node. Steps 2 and 3 now cite the existing supported-generation and compact-Hom nodes plus the repaired 09SP node.",
-    "blueprint": "The five steps realize the Tag 0A9C proof: internal-Hom reduction; the existing supported generator and compact factorization; finite thick factorization via Tag 09SP; the triangle; and tensor-Hom translation.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-psa2544",
-    "group": "K1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psa2544 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 20:46 return: all four points repaired (false hocolim node and duplicate generator node dropped; Step 2 cites existing lem-sc-supported-derived-generated-perfect and lem-pc-compact-hom-hocolim; 09SP restored as self-contained lem-sc-supported-factor-through-thick and cited in Step 3; sources now 0A6H, 09SN/09SP/094A). Statements of all cited nodes read; 09SP proof read against the new node; rotation of the existing node's cone triangles into the 09SN form checked; n=0 case. FIX more, RETURN less: (1) C4 dag/nodes/sec-picard-framework/lem-sc-supported-factor-through-thick.json: the hypothesis that the coproduct of the E_i is a generator fails in the ambient D_QCoh(Y) where Step 3 applies it (E generates only the T-supported part, and O_Y[0] is not in it); 09SP's proof never uses generation, so the hypothesis and def-pc-generators were dropped from the statement. (2) C1 item Steps 2-3: compactness of O_Y[0] and of E in D_QCoh(Y) now cites existing lem-pc-perfect-object-compact (Tag 09M1). (3) C1 item Steps 3-4: closure of perfect complexes under cones and direct summands was uncited and is not elementary; added statement-only node lem-pc-perfect-thick-closure (Cohomology 08CR, 08CS; leanfinder no match) and cited it. The Second reading by K1 missed all three.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation",
-    "declaration": "AlgebraicGeometry.exists_perfect_annihilator",
-    "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentSupportAnnihilation.lean",
-    "statement": "theorem exists_perfect_annihilator (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] (V : Y.Opens) [CompactSpace (V : Set Y)] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (P Q : schemeDerivedQCohCategory Y) (α : P ⟶ Q) (hcase : Scheme.IsPerfect Y P.obj ∨ Scheme.IsPseudoCoherent Y P.obj ∧ ∃ n : ℤ, ∀ k : ℤ, k < n → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj Q.obj)) (hQ : ∀ (k : ℤ) (x : Y), x ∈ V → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj Q.obj).val.presheaf x))) : ∃ (I : schemeDerivedCategory Y) (i : I ⟶ 𝟙_ (schemeDerivedCategory Y)), Scheme.IsPerfect Y I ∧ IsIso ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V).mapDerivedCategory.map i) ∧ i ▷ P.obj ≫ (λ_ P.obj).hom ≫ α.hom = 0",
-    "branch": "sheaf-dag",
-    "by": "F1",
-    "date": "2026-10-11",
-    "existing": false,
-    "fixed_by": "R-psa"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-psa",
-    "group": "F1",
-    "result": "fix",
-    "note": "Y qcqs, V qc open, P,Q in D_QCoh (schemeDerivedQCohCategory), case (i)/(ii) disjunction with Q bounded below in (ii), Q supported on Y\\V stalkwise on all H^k, conclusion: perfect I, i : I -> unit of schemeDerivedTensorMonoidal, iso over V, i>P;lambda;alpha = 0; dropped duplicate new node(s) def-sc-derived-tensor-annihilates (--drop-nodes; not merged, the item points at the landed declaration)"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-sc-rhom-supported-qcoherent",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-sc-supported-perfect-factorization",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-two-out-of-three",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S1",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0A9C",
+  "place": "Same five-step route, with Steps 2–3 assembled in a fully proved SupportedPerfectFactorization module; zero initial stage realized by an empty coproduct"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pseudo-coherent complex map to supported complex perfect annihilator open",
+   "results": "Generic derived-category support declarations only; no derived support-annihilator theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PseudoCoherent support annihilator perfect complex",
+   "results": "0 hits; Unknown identifier PseudoCoherent",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo-coherent.*support|support.*annihilat",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "perfect complex annihilates map to complex supported outside open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-proper-flat-right-adjoint-open-support",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-pseudo-coherent-support-annihilation",
+  "worker": "stage1",
+  "summary": "Repaired the Tag 0A9C split by dropping duplicate supported-generator and hocolim children, correcting the internal-Hom source to Tag 0A6H, and restoring a self-contained generic Tag 09SP finite-thick-factorization node. Steps 2 and 3 now cite the existing supported-generation and compact-Hom nodes plus the repaired 09SP node.",
+  "blueprint": "The five steps realize the Tag 0A9C proof: internal-Hom reduction; the existing supported generator and compact factorization; finite thick factorization via Tag 09SP; the triangle; and tensor-Hom translation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-psa2544",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psa2544 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 20:46 return: all four points repaired (false hocolim node and duplicate generator node dropped; Step 2 cites existing lem-sc-supported-derived-generated-perfect and lem-pc-compact-hom-hocolim; 09SP restored as self-contained lem-sc-supported-factor-through-thick and cited in Step 3; sources now 0A6H, 09SN/09SP/094A). Statements of all cited nodes read; 09SP proof read against the new node; rotation of the existing node's cone triangles into the 09SN form checked; n=0 case. FIX more, RETURN less: (1) C4 dag/nodes/sec-picard-framework/lem-sc-supported-factor-through-thick.json: the hypothesis that the coproduct of the E_i is a generator fails in the ambient D_QCoh(Y) where Step 3 applies it (E generates only the T-supported part, and O_Y[0] is not in it); 09SP's proof never uses generation, so the hypothesis and def-pc-generators were dropped from the statement. (2) C1 item Steps 2-3: compactness of O_Y[0] and of E in D_QCoh(Y) now cites existing lem-pc-perfect-object-compact (Tag 09M1). (3) C1 item Steps 3-4: closure of perfect complexes under cones and direct summands was uncited and is not elementary; added statement-only node lem-pc-perfect-thick-closure (Cohomology 08CR, 08CS; leanfinder no match) and cited it. The Second reading by K1 missed all three.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation",
+  "declaration": "AlgebraicGeometry.exists_perfect_annihilator",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentSupportAnnihilation.lean",
+  "statement": "theorem exists_perfect_annihilator (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] (V : Y.Opens) [CompactSpace (V : Set Y)] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (P Q : schemeDerivedQCohCategory Y) (α : P ⟶ Q) (hcase : Scheme.IsPerfect Y P.obj ∨ Scheme.IsPseudoCoherent Y P.obj ∧ ∃ n : ℤ, ∀ k : ℤ, k < n → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj Q.obj)) (hQ : ∀ (k : ℤ) (x : Y), x ∈ V → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj Q.obj).val.presheaf x))) : ∃ (I : schemeDerivedCategory Y) (i : I ⟶ 𝟙_ (schemeDerivedCategory Y)), Scheme.IsPerfect Y I ∧ IsIso ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V).mapDerivedCategory.map i) ∧ i ▷ P.obj ≫ (λ_ P.obj).hom ≫ α.hom = 0",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-psa"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psa",
+  "group": "F1",
+  "result": "fix",
+  "note": "Y qcqs, V qc open, P,Q in D_QCoh (schemeDerivedQCohCategory), case (i)/(ii) disjunction with Q bounded below in (ii), Q supported on Y\\V stalkwise on all H^k, conclusion: perfect I, i : I -> unit of schemeDerivedTensorMonoidal, iso over V, i>P;lambda;alpha = 0; dropped duplicate new node(s) def-sc-derived-tensor-annihilates (--drop-nodes; not merged, the item points at the landed declaration)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T113353-L-3187331",
+  "kind": "interface"
+ }
 }
