@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-flat-descent-chart-comparison",
+ "kind": "statement",
+ "title": "A single finite-presentation chart and its stage and limit tensor spectra",
+ "statement": "Let $I$ be a directed preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Scheme}$ an inverse system of schemes [def-pc-scheme] with affine transitions [pqf-def-affine-morphism], and $c$ a limiting cone [def-weil-pbc-category-colimit]. Fix $i_0\\in I$, schemes $X_0,Y_0$ over $D(i_0)$, and a locally finitely presented morphism $f_0:X_0\\to Y_0$ over that base [def-pc-fibre-product, def-sbc-locally-finite-presentation]. Write $g_0:Y_0\\to D(i_0)$ for the structure map. Fix affine opens $W_0\\subset D(i_0)$, $V_0\\subset Y_0$, $U_0\\subset X_0$ [lem-weil-pbc-affine-open-spec-points], with $V_0\\subset g_0^{-1}(W_0)$ and $U_0\\subset f_0^{-1}(V_0)$. Put $J=\\{i\\in I:i_0\\le i\\}$ and $j_0=(i_0,\\mathrm{refl})$. There exists a chart $a$ over $(J,j_0)$ [def-weil-pbc-flat-descent-chart]. For each $j\\in J$, put $q=D(j\\to i_0)$, let $f_q$ be the base change of $f_0$, and let $R=a.\\mathrm{rings}(j)$ with its $a.\\mathrm{rings}(j_0)$-algebra structure induced by the transition. There exist opens $V$ in the pulled-back target and $U$ in the pulled-back source, with $U\\subset f_q^{-1}(V)$, such that $U=p_X^{-1}(U_0)$ and the restricted arrow $f_q|_U:U\\to V$ is isomorphic to $\\operatorname{Spec}(\\mathrm{id}_R\\otimes a.\\mathrm{map})$ [lem-weil-pbc-fibre-product-affine-spectra]. For $q=c.\\pi(i_0)$ and $R=\\operatorname{colim}a.\\mathrm{rings}$, equipped with the coprojection algebra structure, such opens and an arrow isomorphism also exist; no source-open equality is required for this last clause. No flatness hypothesis or conclusion and no compactness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 04AI (lemma-descend-flat-finite-presentation), first paragraph; Situation 081D and affine limit Tag 01YW"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-pbc-flat-descent-chart",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof": [
+  {
+   "text": "Use exists_affineOpen_directedRingSystem for W₀, obtaining the ring diagram F, initial spectrum isomorphism e₀, every compatible stage presentation and the compatible colimit presentation.",
+   "uses": [
+    "lem-weil-pbc-affine-open-directed-ring-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let f=f₀.resLE V₀ U₀ and q=(g₀.resLE W₀ V₀)≫e₀.hom. Construct B=Γ(V₀.toScheme,⊤), C=Γ(U₀.toScheme,⊤), aB=((ΓSpecIso R).inv≫q.appTop).hom, aC=f.appTop.hom.comp aB, and φ=f.appTop with the resulting R-algebra structures. φ is an algebra map by reflexivity. Local finite presentation is preserved by restriction, so finitePresentation_appLE at the two top affine opens gives φ.toRingHom.FinitePresentation. The isoSpec naturality and the Γ-Spec triangle identity give the compatible spectrum models.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build a from the actual rings, algebras and φ. Apply affine_triple_tensor_base_change at each stage with its ring transition algebra and spectrum presentation. Apply it at the limit with the coprojection algebra and the colimit spectrum presentation, discarding only the unneeded source-open equality there.",
+   "uses": [
+    "lem-weil-pbc-affine-triple-tensor-base-change",
+    "def-weil-pbc-flat-descent-chart"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-directed-ring-system",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-triple-tensor-base-change",
+  "def-weil-pbc-flat-descent-chart"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 04AI (lemma-descend-flat-finite-presentation), first paragraph; Situation 081D and affine limit Tag 01YW",
+  "note": "Q4 formal proof, following the affine reduction in 04AI; tensor-pullback transport adapted from the proved private tensor_pullback_arrow in AffineBasePieceTensorBaseChangeInstance.lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine open triple tensor product base change spectrum compatible morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change restrictions to affine source and target opens gives tensor product spectrum morphism",
+   "results": "pullbackSpecIso_hom_base and projection identities; no theorem identifying the restricted arrow for an independently chosen source open",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso|arrowResLEAppIso",
+   "results": "Restrict.lean:861 arrowResLEAppIso; Pullbacks.lean tensor spectrum isomorphisms. Source-library AffineBasePieceTensorBaseChangeInstance.lean has a proved tensor_pullback_arrow private helper, whose proof is reused; its open comparison assumes the full inverse image source open.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatDescentAffineCharts",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Affine reduction in steps 1–4 of lem-weil-pbc-flat-descent-affine-charts, serving the finite-cover descent branch of the constructible H1 representation. A single finite-presentation chart and its stage and limit tensor spectra",
+   "via": [
+    "lem-weil-pbc-flat-descent-affine-charts",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatDescentChartComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatDescentChartComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_descent_chart_comparison",
+  "statement": "theorem exists_flat_descent_chart_comparison\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀)\n    [LocallyOfFinitePresentation f₀.left]\n    (W₀ : (D.obj (op i₀)).Opens) (V₀ : Y₀.left.Opens) (U₀ : X₀.left.Opens)\n    (hW : IsAffineOpen W₀) (hV : IsAffineOpen V₀) (hU : IsAffineOpen U₀)\n    (hVW : V₀ ≤ Y₀.hom ⁻¹ᵁ W₀) (hUV : U₀ ≤ f₀.left ⁻¹ᵁ V₀) :\n    ∃ a : FlatDescentChart {i : I // i₀ ≤ i} ⟨i₀, le_rfl⟩,\n      letI := a.sourceAlgebra\n      letI := a.targetAlgebra\n      (∀ j : {i : I // i₀ ≤ i},\n        let q := D.map (homOfLE j.property).op\n        let F := ((Over.pullback q).map f₀).left\n        let R := a.rings.obj j\n        letI := (a.rings.map (homOfLE (show (⟨i₀, le_rfl⟩ : {i : I // i₀ ≤ i}) ≤ j\n          from j.property))).hom.toAlgebra\n        ∃ (V : ((Over.pullback q).obj Y₀).left.Opens)\n          (U : ((Over.pullback q).obj X₀).left.Opens) (h : U ≤ F ⁻¹ᵁ V),\n          U = (pullback.fst X₀.hom q) ⁻¹ᵁ U₀ ∧\n          Nonempty (Arrow.mk (F.resLE V U h) ≅\n            Arrow.mk (Spec.map (CommRingCat.ofHom\n              (Algebra.TensorProduct.map (Algebra.ofId R R) a.map).toRingHom)))) ∧\n      (let q := c.π.app (op i₀)\n        let F := ((Over.pullback q).map f₀).left\n        let R := colimit a.rings\n        letI := (colimit.ι a.rings ⟨i₀, le_rfl⟩).hom.toAlgebra\n        ∃ (V : ((Over.pullback q).obj Y₀).left.Opens)\n          (U : ((Over.pullback q).obj X₀).left.Opens) (h : U ≤ F ⁻¹ᵁ V),\n          Nonempty (Arrow.mk (F.resLE V U h) ≅\n            Arrow.mk (Spec.map (CommRingCat.ofHom\n              (Algebra.TensorProduct.map (Algebra.ofId R R) a.map).toRingHom))))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-da571",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T015609-L-3025423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-da571",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T015609-L-3025423",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements, definitions and proofs with their DAG nodes, original interfaces, change record and unit route; verified clean delivery/importer compilation and permitted axioms."
+ }
+}

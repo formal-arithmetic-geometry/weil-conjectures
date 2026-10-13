@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-affine-triple-tensor-base-change",
+ "kind": "statement",
+ "title": "Tensor base change of an independently chosen open affine triple",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X_0,Y_0$ be schemes over $S$, and let $f_0:X_0\\to Y_0$ be an $S$-morphism [def-pc-fibre-product]. Write $g_0:Y_0\\to S$ for the structure map. Let $W_0\\subset S$, $V_0\\subset Y_0$, $U_0\\subset X_0$ be opens with $V_0\\subset g_0^{-1}(W_0)$ and $U_0\\subset f_0^{-1}(V_0)$. Let $R,B,C$ be commutative rings, with $R$-algebra structures on $B,C$, and let $\\phi:B\\to C$ be an $R$-algebra map. Suppose isomorphisms $e_0:W_0\\cong\\operatorname{Spec}R$, $e_B:V_0\\cong\\operatorname{Spec}B$, $e_C:U_0\\cong\\operatorname{Spec}C$ [lem-weil-pbc-affine-open-spec-points, def-weil-affine-spectrum] identify the restricted structure map $V_0\\to W_0$ with $\\operatorname{Spec}(R\\to B)$ and the restricted map $U_0\\to V_0$ with $\\operatorname{Spec}\\phi$. Let $t:T\\to S$ be any scheme map, $A$ an $R$-algebra, and $e_A:t^{-1}(W_0)\\cong\\operatorname{Spec}A$ an isomorphism identifying the restricted map $t^{-1}(W_0)\\to W_0$ with $\\operatorname{Spec}(R\\to A)$. Put $X_T=X_0\\times_S T$, $Y_T=Y_0\\times_S T$ and let $f_T:X_T\\to Y_T$ be the base change of $f_0$, with first source projection $p_X:X_T\\to X_0$. There exist opens $V\\subset Y_T$, $U\\subset X_T$ with $U\\subset f_T^{-1}(V)$, such that $U=p_X^{-1}(U_0)$ and the arrow $f_T|_U:U\\to V$ is isomorphic to $\\operatorname{Spec}(\\mathrm{id}_A\\otimes\\phi):\\operatorname{Spec}(A\\otimes_R C)\\to\\operatorname{Spec}(A\\otimes_R B)$ [lem-weil-pbc-fibre-product-affine-spectra]. No flatness, finite presentation, affineness of $t$, or directed-system assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 04AI (lemma-descend-flat-finite-presentation), first paragraph; Schemes Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof": [
+  {
+   "text": "Set VT=pY⁻¹(V₀), UT=pX⁻¹(U₀), WT=t⁻¹(W₀). The original containment and the Over commuting equation show U₀ lies over W₀. The pullback equations give VT and UT contained in the inverse image of WT under the second projections, and UT⊆fT⁻¹(VT). Apply Scheme.Hom.isPullback_resLE to the two original pullback squares. Their intersection condition simplifies by these containments. Their induced maps to W₀ are respectively q=g₀.resLE and g≫q with g=f₀.resLE; equality is checked after the mono W₀.ι. Their isoPullback maps yield an arrow isomorphism from fT.resLE to the morphism between the two pullbacks of g over WT. Its commuting square is checked by pullback.hom_ext; both first and second projection identities follow after composing with the corresponding open inclusion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing private tensor_pullback_arrow theorem from Sheaf.AlgebraicGeometry.AffineBasePieceTensorBaseChangeInstance, made available by a proof-only import all. Its arguments are g=f₀.resLE, q=g₀.resLE, s=t.resLE, the four spectrum models, and hB.symm, hC.symm, ht. The theorem transports the pullback arrow to Spec(id_A ⊗ φ). Compose this arrow isomorphism with the geometric restriction comparison of step 1 and retain UT=pX⁻¹(U₀). This reuses the tensor transport ingredient of the cited node without applying its more specialized open-chart conclusion.",
+   "uses": [
+    "lem-weil-pbc-affine-base-piece-tensor-base-change-instance"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-affine-base-piece-tensor-base-change-instance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 04AI (lemma-descend-flat-finite-presentation), first paragraph; Schemes Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes)",
+  "note": "Q4 repair: geometric restriction comparison followed by the existing private tensor_pullback_arrow theorem via proof-only import all of AffineBasePieceTensorBaseChangeInstance; the duplicate helper was deleted."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine open triple tensor product base change spectrum compatible morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change restrictions to affine source and target opens gives tensor product spectrum morphism",
+   "results": "pullbackSpecIso_hom_base and projection identities; no theorem identifying the restricted arrow for an independently chosen source open",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso|arrowResLEAppIso",
+   "results": "Restrict.lean:861 arrowResLEAppIso; Pullbacks.lean tensor spectrum isomorphisms. Source-library AffineBasePieceTensorBaseChangeInstance.lean has a proved tensor_pullback_arrow private helper, whose proof is reused; its open comparison assumes the full inverse image source open.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatDescentAffineCharts",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Affine reduction in steps 1–4 of lem-weil-pbc-flat-descent-affine-charts, serving the finite-cover descent branch of the constructible H1 representation. Tensor base change of an independently chosen open affine triple",
+   "via": [
+    "lem-weil-pbc-flat-descent-affine-charts",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTripleTensorBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTripleTensorBaseChange.lean",
+  "declaration": "AlgebraicGeometry.affine_triple_tensor_base_change",
+  "statement": "theorem affine_triple_tensor_base_change\n    {S : Scheme.{u}} (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)\n    (W₀ : S.Opens) (V₀ : Y₀.left.Opens) (U₀ : X₀.left.Opens)\n    (hVW : V₀ ≤ Y₀.hom ⁻¹ᵁ W₀) (hUV : U₀ ≤ f₀.left ⁻¹ᵁ V₀)\n    (R B C : CommRingCat.{u}) [Algebra R B] [Algebra R C]\n    (φ : B →ₐ[R] C)\n    (e0 : W₀.toScheme ≅ Spec R) (eB : V₀.toScheme ≅ Spec B)\n    (eC : U₀.toScheme ≅ Spec C)\n    (hB : eB.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R B)) =\n      Y₀.hom.resLE W₀ V₀ hVW ≫ e0.hom)\n    (hC : eC.hom ≫ Spec.map (CommRingCat.ofHom φ.toRingHom) =\n      f₀.left.resLE V₀ U₀ hUV ≫ eB.hom)\n    (T : Scheme.{u}) (t : T ⟶ S) (A : CommRingCat.{u}) [Algebra R A]\n    (eA : (t ⁻¹ᵁ W₀).toScheme ≅ Spec A)\n    (ht : t.resLE W₀ _ le_rfl ≫ e0.hom =\n      eA.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R A))) :\n    let F := ((Over.pullback t).map f₀).left\n    ∃ (V : ((Over.pullback t).obj Y₀).left.Opens)\n      (U : ((Over.pullback t).obj X₀).left.Opens) (h : U ≤ F ⁻¹ᵁ V),\n      U = (pullback.fst X₀.hom t) ⁻¹ᵁ U₀ ∧\n      Nonempty (Arrow.mk (F.resLE V U h) ≅\n        Arrow.mk (Spec.map (CommRingCat.ofHom\n          (Algebra.TensorProduct.map (Algebra.ofId A A) φ).toRingHom)))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-da571",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T015609-L-3025423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-da571",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T015609-L-3025423",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements, definitions and proofs with their DAG nodes, original interfaces, change record and unit route; verified clean delivery/importer compilation and permitted axioms."
+ }
+}
