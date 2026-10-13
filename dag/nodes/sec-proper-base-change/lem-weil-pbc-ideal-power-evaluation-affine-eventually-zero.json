@@ -18,51 +18,80 @@
  ],
  "proof": [
   {
-   "text": "On the chosen affine open V identify the quasi-coherent ideal and module with their affine section modules, and P_n with the nth power of a finitely generated ideal J. No finite cover is chosen here. The general monic quasi-coherent structure-module subobject must be treated via its affine section image; the existing ideal-times statement is directly stated for IdealSheafData, so an identification with that model is required.",
+   "text": "Reuse Scheme.Modules.multiplication_range and Scheme.Modules.powers_qc from IdealTimesQuasiCoherentAffineSections via proof-only import all. The multiplication range applies to an arbitrary quasi-coherent structure-module map, without conversion to IdealSheafData. Induct on the recursive powers to compute their inclusion image as J^n, including degree zero. FormalPolynomialPowerLifts gives injectivity of the power inclusions.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
-   }
-  },
-  {
-   "text": "For generators f_i of J, evaluation on D(f_i) is phi(f_i^n)/f_i^n. Vanishing and the localization zero criterion give a common k with phi(f_i^(n+k))=0 for all i. A sufficiently high degree monomial contains one of these pure powers, so phi vanishes on a higher ideal power. For the zero ideal take a positive power directly.",
-   "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
-   }
-  },
-  {
-   "text": "After the affine algebra calculation kills a power J^m with m at least n, identify the prescribed r with the ideal-power inclusion by monicity. The affine tilde/Gamma equivalence turns the zero linear map into the zero sheaf morphism over V. This concerns only one affine open and uses no quasi-compactness of the ambient scheme.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
     "lem-weil-pbc-formal-polynomial-power-lifts"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, injectivity argument, and Lemma 01PQ; read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+   }
+  },
+  {
+   "text": "Reuse Scheme.Modules.finite_sections_of_finiteType from AffineSectionCoverTwistGeneration via proof-only import all. The image ideal J of the finite affine section module is finitely generated. Ideal.FG.pow gives finite generation of J^n; injectivity and the computed inclusion image give finiteness of Gamma(P_n,V), and hence of the image of phi_V.",
+   "uses": [
+    "lem-weil-pbc-affine-section-cover-twist-generation",
+    "lem-weil-pbc-formal-polynomial-power-lifts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, injectivity argument, and Lemma 01PQ; read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+   }
+  },
+  {
+   "text": "For f in J, its germ at any x in D(f) is a unit in the image of the ideal stalk inclusion. Identify the unit-module stalk with the local ring using ideal_module_product_stalk; multiplying the germ preimage by the inverse unit and any desired scalar proves stalk surjectivity. Therefore D(f) is contained in U. On any W contained in U, the restricted one section has power-inclusion image 1. Injectivity of the power inclusion identifies every section s with j_n(s) times that section. Linearity and naturality then show phi_W(s)=0.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-formal-polynomial-power-lifts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, injectivity argument, and Lemma 01PQ; read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+   }
+  },
+  {
+   "text": "Every element y of the finite image of phi_V restricts to zero on D(f), so basic-open localization supplies a power of f killing y. Reuse AlgebraicGeometry.mem_radical_annihilator_of_pow_torsion from CoherentAffineMapSupportRadical via proof-only import all to put f in the radical of the image annihilator. Thus J is contained in that radical. Mathlib Ideal.exists_pow_le_of_le_radical_of_fg gives k with J^k contained in the annihilator.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "lem-weil-pbc-coherent-affine-map-support-radical"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, injectivity argument, and Lemma 01PQ; read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+   }
+  },
+  {
+   "text": "Let m=n+k. Mapping J^k times Gamma(P_n,V) through the injective inclusion j_n gives J^k J^n=J^m. The compatibility equation for the prescribed r implies its affine section image is contained in J^k times Gamma(P_n,V). Linearity and the annihilator containment therefore make phi composed with r zero on every affine section. A quasi-coherent source localizes on basic opens: clearing denominators shows the map zero there because the basic-open scalar is a unit. Cover each subopen of V by basic opens and use sheaf separatedness to prove the morphism over V is zero. This yields m>=n and covers n=0, J=0, and the empty affine open.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, injectivity argument, and Lemma 01PQ; read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-formal-polynomial-power-lifts"
+  "lem-weil-pbc-formal-polynomial-power-lifts",
+  "lem-weil-pbc-affine-section-cover-twist-generation",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-weil-pbc-coherent-affine-map-support-radical"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "H2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lemma 01PM, proof of injectivity of the first arrow; Lemma 01PQ, first proof paragraph. Source text read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+  "place": "Lemma 01PM, injectivity argument, and Lemma 01PQ; read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ.",
+  "note": "Repair of the duplicate-helper return: reuse all three existing private theorems via proof-only import all, and also reuse the existing powers_qc helper. All remaining local helpers are proved; no additional sorry."
  },
  "mathlib_searches": [
   {
@@ -153,10 +182,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T054234-L-448217",
-  "kind": "interface",
+  "landing": "20261013T100002-L-2461522",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
