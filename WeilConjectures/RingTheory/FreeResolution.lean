@@ -69,7 +69,6 @@ theorem exists_finite_free_resolution (R : Type*) [Ring R] [IsNoetherianRing R] 
   refine ⟨fun i => (stage i).1, ε, fun i => (stage i).2.subtype ∘ₗ g (stage i).1 (stage i).2,
     hε, hrange 0, fun i => ?_⟩
   rw [hrange (i + 1), LinearMap.ker_comp, Submodule.ker_subtype, Submodule.comap_bot]
-  rfl
 
 /-- **A complex of free modules maps to a resolution** (Stacks 00LS, part (1)).
 Let `φ : M → N` be a linear map, `⋯ → N₂ → N₁ → N₀ → N → 0` an exact sequence (with
