@@ -6,6 +6,7 @@ Authors: SHEAF group T3
 module
 
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 
 /-! # Transport of open-site stalk comparisons through further restriction
 
@@ -20,6 +21,68 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 noncomputable section
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem descend_iso
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (R : C ⥤ D) (P : D ⥤ C) (adj : R ⊣ P) [IsIso adj.counit]
+    (F G : D ⥤ E) (a : R ⋙ F ≅ R ⋙ G) :
+    ∃ d : F ≅ G, ∀ M : C, d.hom.app (R.obj M) = a.hom.app M := by
+  let e := asIso adj.counit
+  let d : F ≅ G :=
+    F.leftUnitor.symm ≪≫ Functor.isoWhiskerRight e.symm F ≪≫
+      Functor.associator P R F ≪≫ Functor.isoWhiskerLeft P a ≪≫
+      (Functor.associator P R G).symm ≪≫ Functor.isoWhiskerRight e G ≪≫
+      G.leftUnitor
+  refine ⟨d, ?_⟩
+  intro M
+  dsimp [d]
+  simp only [Category.id_comp, Category.comp_id]
+  simp only [e, asIso_hom, asIso_inv, NatIso.isIso_inv_app]
+  change F.map (inv (adj.counit.app (R.obj M))) ≫
+    a.hom.app (P.obj (R.obj M)) ≫ G.map (adj.counit.app (R.obj M)) = a.hom.app M
+  have h := adj.left_triangle_components M
+  have hi : inv (adj.counit.app (R.obj M)) = R.map (adj.unit.app M) := by
+    apply (cancel_mono (adj.counit.app (R.obj M))).1
+    simp [h]
+  have hn := a.hom.naturality (adj.unit.app M)
+  change F.map (R.map (adj.unit.app M)) ≫ a.hom.app (P.obj (R.obj M)) =
+    a.hom.app M ≫ G.map (R.map (adj.unit.app M)) at hn
+  rw [hi, ← Category.assoc, hn, Category.assoc,
+    ← G.map_comp, h, G.map_id]
+  exact Category.comp_id _
+
+private theorem restriction_comp_iso
+    (X : Scheme.{u}) (U V W : X.Opens) (hVU : V ≤ U) (hWV : W ≤ V) (hWU : W ≤ U) :
+    Nonempty (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU) ⋙
+      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWV) ≅
+      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU)) := by
+  refine ⟨NatIso.ofComponents (fun M ↦ ?_) ?_⟩
+  · exact Iso.refl _
+  · intro M N f
+    rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem restriction_adjunction
+    (X : Scheme.{u}) (U V : X.Opens) (hVU : V ≤ U) :
+    ∃ P : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V) ⥤
+        SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),
+      ∃ adj : SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+          (homOfLE hVU) ⊣ P, IsIso adj.counit := by
+  let A := Modules.overEquiv U
+  let B := Modules.overEquiv V
+  let j := X.homOfLE hVU
+  let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU)
+  let P := B.functor ⋙ Modules.pushforward j ⋙ A.inverse
+  let e : (A.functor ⋙ Modules.restrictFunctor j) ⋙ B.inverse ≅ R :=
+    Functor.isoWhiskerRight (Modules.overMapCompOverEquiv (homOfLE hVU)).symm B.inverse ≪≫
+      Functor.associator R B.functor B.inverse ≪≫
+      Functor.isoWhiskerLeft R B.unitIso.symm ≪≫ R.rightUnitor
+  let adj : R ⊣ P :=
+    ((A.toAdjunction.comp (Modules.restrictAdjunction j)).comp B.symm.toAdjunction).ofNatIsoLeft e
+  have : P.Full := inferInstance
+  have : P.Faithful := inferInstance
+  exact ⟨P, adj, inferInstance⟩
 
 /-- Choose comparison coordinates before any module or map. An arbitrary comparison
 on an intermediate open can be transported through a further restriction.
@@ -73,7 +136,31 @@ theorem exists_openStalk_restriction_transport
           ∀ M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),
             (openModuleStalkFunctor X W ⟨x, hxW⟩).map (c.hom.app M) ≫
                 (e W hxW hWU).hom.app M =
-              d.hom.app (R.obj M) ≫ a.hom.app M := by sorry
+              d.hom.app (R.obj M) ≫ a.hom.app M := by
+  classical
+  -- Any family of comparisons works: descend its composite with a.inv along restriction.
+  -- This avoids a separate coherence theorem for canonical germ comparisons.
+  let e := fun (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U) ↦
+    (nonempty_openModuleStalkRestrictionComparison X U W hWU x hxU hxW).some
+  refine ⟨e, ?_⟩
+  intro V hxV hVU a W hxW hWV hWU
+  dsimp only
+  let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU)
+  let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWV)
+  let S := openModuleStalkFunctor X W ⟨x, hxW⟩
+  let T := openModuleStalkFunctor X V ⟨x, hxV⟩
+  obtain ⟨c⟩ := restriction_comp_iso X U V W hVU hWV hWU
+  obtain ⟨J, adj, h⟩ := restriction_adjunction X U V hVU
+  let t : R ⋙ (Q ⋙ S) ≅ R ⋙ T :=
+    (Functor.associator R Q S).symm ≪≫ Functor.isoWhiskerRight c S ≪≫
+      e W hxW hWU ≪≫ a.symm
+  obtain ⟨d, hd⟩ := descend_iso R J adj (Q ⋙ S) T t
+  refine ⟨c, d, ?_⟩
+  intro M
+  rw [hd M]
+  dsimp [t]
+  simp only [Category.id_comp, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  rfl
 
 end
 end AlgebraicGeometry.Scheme

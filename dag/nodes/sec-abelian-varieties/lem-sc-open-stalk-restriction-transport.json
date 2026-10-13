@@ -14,34 +14,40 @@
  ],
  "proof": [
   {
-   "text": "Choose the canonical open-site stalk comparisons using the germ maps and their scalar linearity. These comparisons exist independently of any modules or maps. Identify iterated restriction with direct restriction by the sectionwise identity. The canonical comparisons compose because each composite sends a section germ to the same ambient germ.",
+   "text": "For every x in W contained in U, choose a natural isomorphism e_W using nonempty_openModuleStalkRestrictionComparison. The choice is made for all W before introducing V, a, or any module. Iterated slice restriction R followed by Q is naturally isomorphic to direct restriction P: the component is the identity because overMap evaluates at the same composite inclusion; naturality is reflexivity. No canonical germ-composition law is needed.",
    "uses": [
     "lem-sc-open-module-stalk-restriction-comparison",
-    "new-module-restriction-stalk-components",
+    "def-pur-localized-ringed-site",
     "def-sc-open-module-stalk-functor"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the Mathlib open-immersion restriction/pushforward adjunction and its invertible counit through the slice/open equivalences. If R is restriction U to V, P its right adjoint, epsilon its counit, a the given comparison and e0 the canonical comparison, define b on the V stalk functor S as S(epsilon) inverse followed by e0 whiskered by P, a inverse whiskered by P, and S(epsilon). Naturality at the adjunction unit and the triangle identity give b_(R M) followed by a_M = e0_M. Composing the canonical W-to-V comparison with b gives d. Combining this equality with the canonical germ-composition formula gives the displayed law for c and d. This is independent of freeness and works for equal opens and zero modules.",
+   "text": "Transport the Mathlib adjunction Modules.restrictAdjunction through Modules.overEquiv U and Modules.overEquiv V, using overMapCompOverEquiv. Its right adjoint J is the composite of the V site equivalence, open-immersion pushforward, and the inverse U site equivalence. All three are fully faithful, hence J is fully faithful and the transported adjunction has invertible counit epsilon.",
    "uses": [
     "def-pur-localized-ringed-site"
    ],
    "elementary": false
+  },
+  {
+   "text": "For any adjunction R left adjoint to J with invertible counit epsilon, an isomorphism t:R F to R G descends to d:F to G by the composite F(epsilon inverse), t whiskered by J, G(epsilon). Naturality supplies d. At R M, the triangle identity identifies epsilon inverse with R(unit_M), and naturality of t at unit_M gives d_(R M)=t_M. Apply this elementary calculation with F=Q followed by the W stalk, G=the V stalk, and t=the associator inverse followed by the W-stalk image of c, followed by e_W, followed by a inverse. The component formula and cancellation a inverse followed by a equals identity give the required equality. The calculation covers equal opens and zero modules; x in W excludes an empty W.",
+   "uses": [
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-open-module-stalk-restriction-comparison",
-  "new-module-restriction-stalk-components",
-  "def-sc-open-module-stalk-functor",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "def-sc-open-module-stalk-functor"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "T3",
+  "group": "N2",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Sheaves Tags 00A0 (3),(5) and 0096; naturality and triangle-identity coordinate extension, written by T3. Mathlib Scheme.Modules.restrictAdjunction and its invertible counit realize the adjunction."
+  "place": "Sheaves Tags 00A0 (3),(5) and 0096, read online on 2026-10-13; Mathlib Modules.overEquiv, overMapCompOverEquiv, restrictAdjunction and pushforward fully faithful instances. The direct descent calculation from naturality and the adjunction triangle identity is written by N2 and proved as a private helper."
  },
  "mathlib_searches": [
   {
@@ -133,10 +139,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T123548-L-3712376",
-  "kind": "interface",
+  "landing": "20261013T141531-L-380405",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
