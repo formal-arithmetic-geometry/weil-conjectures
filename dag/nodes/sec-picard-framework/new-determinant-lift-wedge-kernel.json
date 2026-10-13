@@ -13,37 +13,33 @@
  ],
  "proof": [
   {
-   "text": "For each open, multiply exterior-algebra elements after applying the exterior map of S.f to the first factor. This product has degree r1+r3, reindexed by hr to degree r2. It is linear on the tensor of the two exterior powers and sends pure tensors of wedges to the concatenated wedge. On pure wedges, naturality is the formula for exterior restrictions and naturality of S.f; pure wedges span, so naturality holds everywhere. Sheafification and its monoidal comparison give w with the displayed formula.",
+   "text": "Apply exteriorSheaf_wedgeMap_exists to S.f with degrees r1, r3, r2 and hr. This gives w and exactly the concatenated-wedge formula required in the conclusion, without using the quotient or exactness.",
    "uses": [
-    "def-sc-sheaf-exterior-power"
+    "lem-sc-exterior-sheaf-wedge-map"
    ],
    "elementary": false
   },
   {
-   "text": "The displayed formula characterizes q uniquely: apply exteriorTensor_lift_hom_ext with the identity epi of S.X2. Therefore q is the tensor of the identity with the exterior map of S.g. Trivialize S.X1 locally. Exactness identifies ker(S.g) with im(S.f). The kernel of the exterior quotient is generated locally by wedges with one factor in im(S.f): for ordinary modules, the exterior power of a quotient is the quotient of the exterior power by precisely these relations; sheafification transfers this description, using local lifts for finite tuples. Tensor right exactness gives the same generators for ker(q).",
+   "text": "Apply determinant_wedge_quotient_factor to the given q and the constructed w, using hq and the formula for w. The short exactness and locally free rank hypotheses match verbatim. Obtain a morphism phi from the quotient tensor with q followed by phi equal to w.",
    "uses": [
-    "lem-sc-exterior-tensor-lift-hom-ext",
-    "def-sc-sheaf-exterior-power"
+    "lem-sc-determinant-wedge-quotient-factor"
    ],
    "elementary": false
   },
   {
-   "text": "After wedging any of these kernel generators with r1 first-term factors, its image under w contains r1+1 factors from S.X1. Expand in a local basis of size r1. Every monomial repeats a basis vector and is zero by alternation; the free exterior-power basis theorem gives this vanishing above rank. Hence kernel.ι q composed with w vanishes locally, and the separatedness of the target sheaf gives global zero. For r3=0, the quotient exterior map is identity and its kernel is zero. For r1=0, S.X1=0 locally and S.g is an isomorphism. The argument also covers the zero ring and the empty open.",
-   "uses": [
-    "lem-weil-pbc-exterior-power-free-basis"
-   ],
-   "elementary": false
+   "text": "Rewrite w as q followed by phi. Associativity rewrites kernel.ι(q) followed by w as (kernel.ι(q) followed by q) followed by phi. The kernel condition makes the first composite zero, and zero_comp makes the whole composite zero. Pair this equality with the unchanged formula for w.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-sheaf-exterior-power",
-  "lem-sc-exterior-tensor-lift-hom-ext",
-  "lem-weil-pbc-exterior-power-free-basis"
+  "lem-sc-exterior-sheaf-wedge-map",
+  "lem-sc-determinant-wedge-quotient-factor"
  ],
  "proof_origin": {
-  "by": "R4 stage3",
+  "by": "F4 stage3",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph; agent-written descent decomposition of the existing recorded wedge proof"
+  "place": "Proof of (*), determinant paragraph; reuse existing wedge construction and quotient factorization, followed by the categorical kernel condition"
  },
  "mathlib_searches": [
   {
@@ -112,10 +108,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T004027-L-2492071",
-  "kind": "interface",
+  "landing": "20261013T015551-L-3019478",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

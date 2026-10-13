@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafWedgeMapExists
+import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeQuotientFactor
 
 /-!
 # The wedge of lifts annihilates the quotient kernel
@@ -67,6 +69,9 @@ theorem determinant_liftWedge_kernel_exists {X : Scheme.{v}} (S : ShortComplex X
               (exteriorSheafSection S.X₂ r₃ U c)) =
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
-  sorry
+  obtain ⟨w, hw⟩ := exteriorSheaf_wedgeMap_exists S.f r₁ r₃ r₂ hr
+  obtain ⟨φ, hφ⟩ := determinant_wedge_quotient_factor S hS r₁ r₂ r₃ hr q w hq hw
+  refine ⟨w, ?_, hw⟩
+  rw [← hφ, ← Category.assoc, kernel.condition, zero_comp]
 
 end AlgebraicGeometry.Scheme.Modules
