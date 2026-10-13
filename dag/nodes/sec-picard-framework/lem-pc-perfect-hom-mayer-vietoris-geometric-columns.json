@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-perfect-hom-mayer-vietoris-geometric-columns",
+ "kind": "statement",
+ "title": "Local recognition of the geometric outer columns",
+ "statement": "Let I be a directed preorder, R:I→CommRing a diagram with cocone c and i∈I. Let s₀:X→Spec(R_i) be locally finitely presented and qcqs, with X a scheme [def-pc-scheme], U,V opens of X, U compact and V affine. Let t:Y→X be an open immersion with image U∪V, and s:Y→Spec(R_i) locally finitely presented and qcqs with s=t≫s₀. Assume fixed-universe derived categories [def-pc-derived-category] for every scheme and every localized module site on an open of Y. Let P,Q∈D(O_Y) be perfect [def-pc-perfect-complex]. Let F:tail(≥i)→D(O_Y), d a cocone, and h:PerfectHomPushPullData(R,c,s,Q,F,d), supplying natural representing equivalences for every testing object, quasi-coherence, and pinned stage/cocone transport [lem-pc-perfect-hom-push-pull-cocone]. Let A be any PerfectHomMVFamily on the preimages of U,V [lem-pc-perfect-hom-mayer-vietoris-diagram]. Form its actual triangle diagram D=A.diagram(F,h.stageQCoh) and cocone d'=A.cocone(F,d,h.stageQCoh,h.limitQCoh), and the canonical five-term additive Hom rows [lem-pc-perfect-hom-triangle-row-presentations]. For each r∈Fin(5) with r≠2, the canonical abelian-group colimit comparison from column r of D to column r of d' has PerfectHomLocalMap(R,c,i,X,s₀,U,V,-) [def-pc-perfect-hom-local-map]. Only these explicit geometric outer objects and maps are eligible. No claim is made for an arbitrary distinguished triangle cocone, and no central Hom or distinguishedness conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer–Vietoris induction step; cohomology.tex Tags 079W, 0D5S and 08BW; online tags read 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-transport",
+  "def-weil-pbc-category-colimit",
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "lem-pc-perfect-hom-mayer-vietoris-diagram",
+  "def-pc-perfect-hom-local-map",
+  "lem-pc-perfect-hom-triangle-row-presentations"
+ ],
+ "proof": [
+  {
+   "text": "Pull U,V and their intersection back to Y. Compactness and quasi-separatedness give compact opens. The composites into X have ranges U,V and U∩V. Their maps to Spec(R_i) are locally finitely presented and qcqs. Restriction preserves the perfect pairs and the shifts by -1.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-perfect-thick-closure",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the representing equivalences and their naturality in every testing object to identify F and its cocone with the direct-image/pullback representing cocone by Yoneda. The stage/cocone transport equations identify the whole cocone uniquely. Restrict to each of the three opens using the sectionwise and right-derived-unit-pinned open/direct-image comparisons. Adjunction and these comparisons identify the restricted maps with local perfectStageMap and perfectLimitMap.",
+   "uses": [
+    "lem-pc-perfect-hom-push-pull-cocone",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Read the outer objects and morphisms from A.triangle and A.map: the odd outer columns are the intersection terms; the even outer columns are the two-open biproduct terms, with shifts -1 and 0. Use open adjunction, the shift/direct-image comparison, and Hom into a biproduct to identify them naturally with the local Hom diagrams and their products. The boundary is unused.",
+   "uses": [
+    "lem-pc-perfect-hom-mayer-vietoris-diagram",
+    "lem-pc-perfect-hom-triangle-row-presentations",
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present each restricted Hom set diagram with perfect_hom_stage_colimit. Forgetful functors of abelian groups preserve filtered colimits, and filtered set colimits commute with binary products. Extend the stage and apex equivalences to the colimits, pinned on stage inclusions. Apply the basic, prod and equiv constructors of PerfectHomLocalMap. The pinning equations give the required comparison on every representative. Empty opens have zero groups, so the same proof applies.",
+   "uses": [
+    "lem-pc-perfect-hom-stage-colimit",
+    "def-pc-perfect-hom-local-comparison",
+    "def-pc-perfect-hom-local-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-hom-local-comparison",
+  "def-pc-perfect-hom-local-map",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-perfect-hom-mayer-vietoris-diagram",
+  "lem-pc-perfect-hom-push-pull-cocone",
+  "lem-pc-perfect-hom-stage-colimit",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-perfect-hom-triangle-row-presentations",
+  "lem-pc-perfect-thick-closure",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-adjoint"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A4",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 09RE and 08BW; elementary categorical assembly written by A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback Hom functors represented by derived direct image, natural transformations produce a cocone by Yoneda",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial Mayer Vietoris distinguished triangle cocone derived direct image pullback adjunction",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda",
+   "verdict": "No packaged geometric cocone; generic constructions and colimit tools are available.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.hom_ext",
+   "results": "CategoryTheory.Pretriangulated.Triangle.hom_ext",
+   "verdict": "No packaged geometric cocone; generic constructions and colimit tools are available.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFilteredColimits.*forget|prod.*colimit|colimit.*prod",
+   "results": "Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean",
+   "verdict": "No packaged geometric cocone; generic constructions and colimit tools are available.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisTriangleCocone",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer–Vietoris induction: Local recognition of the geometric outer columns",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-triangle-cocone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisColumns",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomMayerVietorisColumns.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_mayerVietoris_geometric_columns",
+  "declarations": [
+   "AlgebraicGeometry.perfect_hom_mayerVietoris_geometric_columns"
+  ],
+  "statement": "theorem perfect_hom_mayerVietoris_geometric_columns {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V) (Y : Scheme.{u}) (t : Y ⟶ X) [IsOpenImmersion t] (ht : t.opensRange = U ⊔ V) (s : Y ⟶ Spec (R.obj i)) (hs : s = t ≫ s₀) [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s] [∀ W : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))] (P Q : schemeDerivedCategory Y) (hP : Y.IsPerfect P) (hQ : Y.IsPerfect Q) (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F) (h : PerfectHomPushPullData R c s Q F d) (A : PerfectHomMVFamily Y (t ⁻¹ᵁ U) (t ⁻¹ᵁ V)) : ∀ (r : Fin 5), r.val ≠ 2 → PerfectHomLocalMap R c i X s₀ U V (colimit.desc ((A.diagram F h.stageQCoh ⋙ perfectHomTriangleRowFunctor Y P).flip.obj r) ⟨(perfectHomTriangleRow Y P (A.cocone F d h.stageQCoh h.limitQCoh).pt).obj r, (perfectHomTriangleRowCoconeMap Y P (A.diagram F h.stageQCoh) (A.cocone F d h.stageQCoh h.limitQCoh)).app r⟩)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T172649-L-2097300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T172649-L-2097300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

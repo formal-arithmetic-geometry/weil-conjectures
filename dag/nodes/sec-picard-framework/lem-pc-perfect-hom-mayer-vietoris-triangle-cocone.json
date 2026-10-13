@@ -19,79 +19,51 @@
  ],
  "proof": [
   {
-   "text": "Pull U,V back to Y and each stage and limit scheme. The cover is exhaustive since t has range U∪V. The schemes are qcqs over affine bases; compactness of the cover and quasi-separatedness give compact overlaps. Pullback and restriction preserve the strictly perfect local models. Shifts remain perfect, and perfect objects have quasi-coherent cohomology.",
-   "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-localized-pullback-perfect-model",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-perfect-thick-closure",
-    "lem-sc-perfect-qcoherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
-   }
+   "text": "Since s and s₀ are qcqs over affine schemes, Y is compact and quasi-separated and X is quasi-separated. The open immersion t is quasi-compact. Its preimages of U,V are compact and cover Y by the range equation.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Construct the K-injective Mayer–Vietoris distinguished triangle of Q at each stage and at the limit. Push these triangles to Y using the triangulated derived direct image of the projection. Their first objects are the direct images of the stage pullbacks of Q. No Hom row or short-complex presentation is constructed at this step.",
+   "text": "Construct the quasi-coherent representing cocone F,d₀ with its universally natural Hom equivalences and pinned transition/cocone equations.",
    "uses": [
-    "lem-pc-derived-mayer-vietoris-triangle",
-    "lem-pc-ringed-spaces-derived-adjoint"
+    "lem-pc-perfect-hom-push-pull-cocone"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
-   }
+   "elementary": false
   },
   {
-   "text": "For a transition apply the unit Q_j→Rh_*Lh*Q_j and Mayer–Vietoris naturality, including the boundary. The direct-image comparison must be the lift pinned by its derivation unit, not an arbitrary choice of an isomorphism. Uniqueness of the derived lift proves its identity and composition equations, since the underived direct-image comparisons have those equations. This gives a functor D of distinguished triangles in D(O_Y) and a cocone d with distinguished apex. Stage and limit Hom adjunctions, followed by the zero-shift comparison, give e and b. The adjunct of f followed by the unit is pullback(f) followed by pullback of the unit and the counit; the triangle identity cancels the last two factors. Counit-pinned pullback composition comparisons then give exactly perfectStageMap and perfectLimitMap as the two stated formulas.",
+   "text": "Apply schemeDerived_mayerVietoris_naturality on the preimage cover. Package the units, boundary, distinguishedness and prescribed component equations into a natural family A. The proved A.diagram and A.cocone constructions give D,d and all functor/cocone laws; distinguishedness follows objectwise.",
    "uses": [
     "lem-pc-derived-mayer-vietoris-functorial",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-perfect-hom-transport"
+    "lem-pc-perfect-hom-mayer-vietoris-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the canonical Hom row construction to D and d. The outer columns identify by open adjunction with Hom of the restricted perfect pairs, with Q shifted by -1 in the first two columns. Use perfect_hom_stage_colimit for their set diagrams. Underlying-set preservation of filtered group colimits and finite-product preservation identify the intersection column comparisons with basic local comparisons and the two-open columns with products. Transport by the adjunction and shift equivalences using PerfectHomLocalMap.equiv. Empty opens give zero local groups. Neither filtered-colimit exactness nor local continuity is asserted.",
+   "text": "Compose the representing equivalences with ULift and the zero-shift isomorphism. Naturality of shiftFunctorZero and the representing pinning equations give exactly perfectStageMap and perfectLimitMap.",
    "uses": [
-    "lem-pc-perfect-hom-stage-colimit",
-    "def-pc-perfect-hom-local-comparison",
-    "def-pc-perfect-hom-local-map",
-    "lem-pc-perfect-hom-triangle-row-presentations"
+    "lem-pc-perfect-hom-push-pull-cocone"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply local outer-column recognition to this actual geometric family and representing cocone. Its hypotheses specify the outer objects and maps; no assertion about arbitrary triangle cocones is used.",
+   "uses": [
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "def-pc-perfect-hom-local-comparison",
-  "def-pc-perfect-hom-local-map",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
   "lem-pc-derived-mayer-vietoris-functorial",
-  "lem-pc-derived-mayer-vietoris-triangle",
-  "lem-pc-localized-pullback-perfect-model",
-  "lem-pc-perfect-hom-stage-colimit",
-  "lem-pc-perfect-hom-transport",
-  "lem-pc-perfect-hom-triangle-row-presentations",
-  "lem-pc-perfect-thick-closure",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-perfect-qcoherent"
+  "lem-pc-perfect-hom-mayer-vietoris-diagram",
+  "lem-pc-perfect-hom-mayer-vietoris-geometric-columns",
+  "lem-pc-perfect-hom-push-pull-cocone"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q4",
+  "group": "A4",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 09RE and 08BW"
+  "place": "Tag 09RE Mayer–Vietoris induction and cohomology.tex Tag 08BW; adjunction/Yoneda and triangle assembly formalized by A4"
  },
  "mathlib_searches": [
   {
@@ -168,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-1e30d",
-  "group": "Q4",
+  "reviewer": "COMPILER",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T151702-L-924504",
+  "landing": "20261013T172649-L-2097300",
   "kind": "interface",
-  "note": "independent Codex review: Matched all three delivered Lean modules with their DAG statements and proof records; existing signature and public imports are unchanged, all modules compile cleanly, and axioms are standard except for the explicitly reported geometric sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-perfect-hom-push-pull-cocone",
+ "kind": "statement",
+ "title": "A representing cocone for the stage pullback Hom functors",
+ "statement": "Let I be a preorder, R:I→CommRing a ring diagram, c a cocone and i∈I. Let Y be a scheme [def-pc-scheme] with s:Y→Spec(R_i). Assume fixed-universe derived categories [def-pc-derived-category] for every scheme and for each localized module site on an open of Y. For Q∈D(O_Y) perfect [def-pc-perfect-complex], there are F:tail(≥i)→D(O_Y) and a cocone d. Each F_j and d.pt has quasi-coherent cohomology. There are equivalences e_j,M:Hom(M,F_j)≃Hom(Lpi_j* M,Lpi_j* Q) and b_M:Hom(M,d.pt)≃Hom(Lpi_inf* M,Lpi_inf* Q) for every M∈D(O_Y), where pi_j:Y×Spec(R_j)→Y and pi_inf:Y×Spec(c.pt)→Y are the projections. Both are natural under precomposition: e_j,M(g∘f)=Lpi_j*(g)∘e_j,N(f), and similarly for b. Postcomposition with F(j≤k) corresponds to perfectStageMap, and postcomposition with d_j corresponds to perfectLimitMap [lem-pc-perfect-hom-transport]. PerfectHomPushPullData packages exactly these quasi-coherence, equivalence, naturality and transport clauses; it is constructed from given data, not from an existence witness. No triangles, covers, group colimits, directedness, finite presentation or IsColimit(c) are asserted or required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer–Vietoris induction step; cohomology.tex Tags 079W, 0D5S and 08BW; online tags read 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-transport",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "At each stage take B_j=Rpi_j*Lpi_j*Q and at the limit take B_inf=Rpi_inf*Lpi_inf*Q. The derived adjunction gives e and b, naturally in M.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of perfectHomComparison in the testing object gives naturality of perfectStageMap and perfectLimitMap under precomposition. Conjugate by e and b and evaluate at the identity of B_j to construct representing transition maps and cocone legs. Naturality at f:M→B_j gives f followed by the representing arrow equals the conjugated transport of f.",
+   "uses": [
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The identity equation is read from perfect_hom_stage_colimit at an identity arrow. perfectHomMap_trans gives composition; perfectLimitMap_stage gives cocone compatibility. Applying the injective adjunction equivalences verifies the functor and cocone laws and their pinning equations.",
+   "uses": [
+    "lem-pc-perfect-hom-stage-colimit",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Perfect Q has quasi-coherent cohomology. Derived pullback preserves it. Both projections are affine, hence qcqs; their derived direct images preserve quasi-coherent cohomology. This proves the two quasi-coherence fields.",
+   "uses": [
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-perfect-hom-stage-colimit",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-sc-perfect-qcoherent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A4",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 09RE and 08BW; elementary categorical assembly written by A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback Hom functors represented by derived direct image, natural transformations produce a cocone by Yoneda",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial Mayer Vietoris distinguished triangle cocone derived direct image pullback adjunction",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda",
+   "verdict": "No packaged geometric cocone; generic constructions and colimit tools are available.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.hom_ext",
+   "results": "CategoryTheory.Pretriangulated.Triangle.hom_ext",
+   "verdict": "No packaged geometric cocone; generic constructions and colimit tools are available.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFilteredColimits.*forget|prod.*colimit|colimit.*prod",
+   "results": "Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean",
+   "verdict": "No packaged geometric cocone; generic constructions and colimit tools are available.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisTriangleCocone",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer–Vietoris induction: A representing cocone for the stage pullback Hom functors",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-triangle-cocone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomPushPullCocone.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_pushPull_cocone",
+  "declarations": [
+   "AlgebraicGeometry.PerfectHomPushPullData",
+   "AlgebraicGeometry.perfect_hom_pushPull_cocone"
+  ],
+  "statement": "theorem perfect_hom_pushPull_cocone [∀ W : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))] (Q : schemeDerivedCategory Y) (hQ : Y.IsPerfect Q) : ∃ (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F), Nonempty (PerfectHomPushPullData R c s Q F d)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T172649-L-2097300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T172649-L-2097300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

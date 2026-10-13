@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-perfect-hom-mayer-vietoris-diagram",
+ "kind": "statement",
+ "title": "Functor and cocone of geometric Mayer–Vietoris triangles",
+ "statement": "Let Y be a scheme [def-pc-scheme] with fixed-universe derived category D(O_Y) [def-pc-derived-category], and such categories on all its open subschemes. Fix opens U,V. A PerfectHomMVFamily consists of restriction/direct-image adjunctions for U,V and U∩V, boundary maps δ_E:Rj_(U∩V)*E|_(U∩V)→E[1], distinguishedness of the triangles E→Rj_U*E|_U⊕Rj_V*E|_V→Rj_(U∩V)*E|_(U∩V)→E[1] for quasi-coherent E, and natural triangle morphisms whose components are φ, the direct sum of restricted direct images of φ, and the intersection restricted direct image of φ [lem-pc-derived-mayer-vietoris-functorial]. Given any category J, functor F:J→D(O_Y) with quasi-coherent objects and cocone d with quasi-coherent apex, the family defines a functor D:J→Triangle(D(O_Y)) with D_j=MV(F_j), and a cocone MV(d). The first components are exactly F.map and d.ι; the outer components are exactly those specified by restriction and direct image. The three components uniquely determine every triangle morphism. Identity, composition and cocone laws follow without any choices of unpinned morphisms.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer–Vietoris induction step; cohomology.tex Tags 079W, 0D5S and 08BW; online tags read 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-weil-pbc-category-colimit",
+  "lem-pc-derived-mayer-vietoris-functorial"
+ ],
+ "proof": [
+  {
+   "text": "Write the triangle explicitly using the two units, difference of the restriction maps, and the supplied boundary. For a morphism of quasi-coherent objects choose the naturality witness. Its three prescribed components determine it uniquely by Triangle.hom_ext.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-functorial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Check identity and composition separately on the three components. The first is the original arrow; each outer component is a functor image, and biprod.map respects identity and composition by its two projection equations. Triangle.hom_ext gives equality of the triangle morphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply these maps to F and its cocone legs. The proved identity/composition equations give the functor, and the original cocone equation gives the new cocone equation. Distinguishedness is retained objectwise.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-mayer-vietoris-functorial"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A4",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 09RE and 08BW; elementary categorical assembly written by A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback Hom functors represented by derived direct image, natural transformations produce a cocone by Yoneda",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial Mayer Vietoris distinguished triangle cocone derived direct image pullback adjunction",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda",
+   "verdict": "No packaged geometric cocone; generic constructions and colimit tools are available.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.hom_ext",
+   "results": "CategoryTheory.Pretriangulated.Triangle.hom_ext",
+   "verdict": "No packaged geometric cocone; generic constructions and colimit tools are available.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFilteredColimits.*forget|prod.*colimit|colimit.*prod",
+   "results": "Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean",
+   "verdict": "No packaged geometric cocone; generic constructions and colimit tools are available.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisTriangleCocone",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer–Vietoris induction: Functor and cocone of geometric Mayer–Vietoris triangles",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-triangle-cocone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomMayerVietorisDiagram.lean",
+  "declaration": "AlgebraicGeometry.PerfectHomMVFamily.diagram",
+  "declarations": [
+   "AlgebraicGeometry.perfectHomMVTriangle",
+   "AlgebraicGeometry.PerfectHomMVFamily",
+   "AlgebraicGeometry.PerfectHomMVFamily.triangle",
+   "AlgebraicGeometry.PerfectHomMVFamily.map",
+   "AlgebraicGeometry.PerfectHomMVFamily.map_hom₁",
+   "AlgebraicGeometry.PerfectHomMVFamily.map_hom₂",
+   "AlgebraicGeometry.PerfectHomMVFamily.map_hom₃",
+   "AlgebraicGeometry.PerfectHomMVFamily.map_id",
+   "AlgebraicGeometry.PerfectHomMVFamily.map_comp",
+   "AlgebraicGeometry.PerfectHomMVFamily.diagram",
+   "AlgebraicGeometry.PerfectHomMVFamily.cocone"
+  ],
+  "statement": "def diagram (F : J ⥤ schemeDerivedCategory Y) (hF : ∀ j, schemeDerivedQCohProperty Y (F.obj j)) : J ⥤ Triangle (schemeDerivedCategory Y)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T172649-L-2097300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T172649-L-2097300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

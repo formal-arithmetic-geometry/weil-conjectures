@@ -13243,3 +13243,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 01:23 L: batch 20261013T171508 dependency take-out
 - 17:25 L: returned deliver/U1/Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem (reviewer RETURN: (reviewer X-dba85, head dba856f32) E2: `restricted_affine_stage_naturality` is false as stated. Take a two-element direc)
+- 17:26 L: merged deliver/A4/Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisTriangleCocone (stage 3; reviewer PASS; first push; landing 20261013T172649-L-2097300 (interface); batch 20261013T172648; modules 4; new nodes 3)
