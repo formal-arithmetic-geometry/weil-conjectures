@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import Sheaf.Algebra.Homology.FiniteFreeZeroHomologyEvaluationIso
+import Sheaf.Algebra.Homology.FiniteFreeZeroHomologyEvaluationCycles
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Evaluation for finite-free complexes with zero differentials
@@ -89,6 +91,10 @@ theorem finiteFreeZero_homologyEvaluation
         P.iCycles n ≫ π ≫ SheafOfModules.homObjMap (R := R) (E.iCycles (-n)) (𝟙 _) ∧
       c ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.homologyπ 0) =
         P.homologyπ n ≫ f ≫ SheafOfModules.homObjMap (R := R) (E.homologyπ (-n)) (𝟙 _) := by
-  sorry
+  dsimp
+  obtain ⟨f, c, hc₁, hc₂⟩ := finiteFreeZero_homologyEvaluation_cycles R E K n hzero
+  have hf := finiteFreeZero_homologyEvaluation_iso R E K n hK hzero hsupp hfree
+    f c hc₁ hc₂
+  exact ⟨f, hf, c, hc₁, hc₂⟩
 
 end CategoryTheory
