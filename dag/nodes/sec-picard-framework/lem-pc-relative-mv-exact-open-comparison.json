@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-relative-mv-exact-open-comparison",
+ "kind": "lemma",
+ "title": "Exact-open comparison respects restriction along one inclusion",
+ "statement": "Assume the derived module categories of all schemes exist [def-pc-derived-category]. Let f:X→S, K∈D(O_X), and W≤U be opens of X. Use the fixed exact open adjunctions and exact nested restriction maps [def-pc-rf-mv-base-change-components, def-pc-derived-open-restriction-maps]. Define E(f,W,K):Rf*RjW*rW(K)≅R(jW≫f)*LjW(K) by applying Rf*RjW* to the component of leftAdjointUniq from the exact open adjunction to relativeMVAdj jW, followed by relativeMVImageComp jW f [def-pc-relative-mv-maps]. Then Rf*(the exact U-to-W restriction)≫E(f,W,K).hom equals E(f,U,K).hom≫relativeMVRestriction(X.homOfLE i,U.ι,W.ι,Scheme.homOfLE_ι X i,f,K). The construction also carries Rf* of the exact unit to relativeMVUnit.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-relative-mv-maps",
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris), 08HY (remark-base-change); perfect.tex, Tag 0DJ9 (lemma-single-complex-base-change), vertex identifications in the induction diagram"
+ },
+ "proof": [
+  {
+   "text": "Construct E using leftAdjointUniq and relativeMVImageComp. The unit identity of leftAdjointUniq, mapped by Rf*, proves the unit formula.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "def-pc-rf-mv-base-change-components"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary adjunctions and a comparison L_U⋙H≅L_W, naturality and the U triangle identity show that the restricted-counit transpose composed with the U unit equals the W unit. Apply this to exact restriction and pinned pullback. Adjoint uniqueness preserves the units. Open derived direct image is fully faithful: the underived open adjunction preserves K-injectives and its counit is invertible, so fully faithful right derivation gives the assertion. Thus restriction to U of its unit is invertible by the triangle identity. Factor restriction to W through U using exact nested restriction composition; this also sends the U unit to an isomorphism. The W Hom equivalence and cancellation of this mapped unit make precomposition by the U unit injective for maps into RjW objects. Cancel it to identify the two restriction maps. Map by Rf*, insert the two relativeMVImageComp factors and cancel the U comparison with its inverse. All these calculations are proved as private helpers in the module.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-rf-mv-base-change-components",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-relative-mv-maps",
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV and 08HZ; T4: proved unit cancellation via fully faithful derived open direct image; no pinned composition coherence required"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between left adjoints to the same right adjoint compatible with unit and counit",
+   "results": "Eight hits, including Adjunction.leftAdjointUniq and unit_leftAdjointUniq_hom_app. These supply the object comparison and unit identity but do not compare exact nested restrictions or pasted scheme base-change maps.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve hits: uniqueness, its unit and counit equations, and transitivity. No exact-open relative restriction or inverse-image-open mate identity.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBiprod|leftAdjointUniq|pullbackRestrictIsoRestrict",
+   "results": "Twenty-five msearch hits. Read Adjunction/Unique.lean, Limits/Preserves/Shapes/Biproducts.lean and AlgebraicGeometry/Restrict.lean. The scheme pullback-open iso and categorical assembly exist; no complete derived one-open comparison. Local rg over both library roots finds no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived open restriction adjunction comparison compatible with restriction along nested opens and base change",
+   "results": "Service unavailable: Internal Server Error; zero hits returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVPinnedVertexComparisons",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: identify the relative Mayer--Vietoris open vertices and the local base-change component by the pinned adjunction comparisons",
+   "via": [
+    "lem-pc-relative-mv-pinned-vertex-comparisons",
+    "lem-pc-relative-mv-cone-presentation",
+    "lem-pc-relative-mv-pinned-triangle-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVExactOpenComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVExactOpenComparison.lean",
+  "declaration": "AlgebraicGeometry.relativeMVExactOpenIso_restriction",
+  "statement": "theorem relativeMVExactOpenIso_restriction {X S : Scheme.{u}} (f : X ⟶ S)\n    {W U : X.Opens} (i : W ≤ U) (K : schemeDerivedCategory X) :\n    (schemeDerivedDirectImage f).map\n        (schemeDerivedOpenDirectImageRestriction X (homOfLE i)\n          (mvOpenRestrictionAdjunction X U) (mvOpenRestrictionAdjunction X W) K) ≫\n      (relativeMVExactOpenIso f W K).hom =\n    (relativeMVExactOpenIso f U K).hom ≫\n      relativeMVRestriction (X.homOfLE i) U.ι W.ι (Scheme.homOfLE_ι X i) f K",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.relativeMVExactOpenIso",
+   "AlgebraicGeometry.relativeMVExactOpenIso_unit",
+   "AlgebraicGeometry.relativeMVExactOpenIso_restriction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T155943-L-1306208",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T155943-L-1306208",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

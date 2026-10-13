@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-relative-mv-inverse-open-comparisons",
+ "kind": "lemma",
+ "title": "Individual inverse-image open comparisons with units, restrictions and pasted mates",
+ "statement": "Let g′:X′→X, f′:X′→S′, f:X→S and g:S′→S be cartesian, with derived module categories on all schemes [def-pc-derived-category], K∈D(O_X), K′∈D(O_X′), and φ:Lg′K→K′. There is a family e(W):Rf′*Rj(g′⁻¹W)*r(g′⁻¹W)(K′)≅relativeMVLocalArrow(W).right [def-pc-relative-mv-maps, def-pc-rf-mv-base-change-components]. For every open W it sends Rf′* of the exact-open unit to relativeMVUnit(pullback.fst g′ W.ι,f′,K′). For each inclusion W≤U it sends Rf′* of exact restriction to relativeMVRestriction along relativeMVOpenLift g′ i. For every W, mvBaseChangeOpenMap(W)≫e(W).hom equals Lg* of the explicitly constructed E(f,W,K).hom [lem-pc-relative-mv-exact-open-comparison] followed by relativeMVLocalArrow(W).hom. There are no biproducts, cover conditions, triangle boundaries or distinguishedness assertions in this statement.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-relative-mv-maps",
+  "def-pc-rf-mv-base-change-components",
+  "lem-pc-relative-mv-exact-open-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris), 08HY (remark-base-change); perfect.tex, Tag 0DJ9 (lemma-single-complex-base-change), vertex identifications in the induction diagram"
+ },
+ "proof": [
+  {
+   "text": "Use pullbackRestrictIsoRestrict to identify each chosen pullback with its inverse-image open preserving both projections [lem-weil-pbc-open-preimage-fibre-product]. Derive this scheme iso and compare exact restriction and pullback by left-adjoint uniqueness. Compose the direct-image comparison with relativeMVImageComp. This constructs e. The unit identities for uniqueness and adjunction composition give the unit formula. For W≤U, pullback hom-ext identifies the transported inclusion with relativeMVOpenLift. Transpose the restriction maps and apply the uniqueness counit equation and canonical composition coherence to get the restriction formula.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-pc-rf-mv-base-change-components",
+    "def-pc-relative-mv-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the two base-change factors in mvBaseChangeOpenMap as mates of pulled-back counits. Substitute the composite-adjunction counit. Naturality moves φ to the last factor and both triangle identities cancel the intervening unit-counit pairs. Pullback composition associativity and the equality of the two projection composites identify the remaining comparison with the equality transport in relativeMVLocalArrow. The preceding source factor is precisely mapped E(f,W,K). No assumption on the open or object map was used; empty opens and zero maps satisfy the same equations.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-rf-mv-base-change-components",
+    "def-pc-relative-mv-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-relative-mv-exact-open-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-relative-mv-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-base-change-map",
+  "lem-pc-relative-mv-exact-open-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV, 08HZ and 08HY; expanded one-open adjunction and mate calculation, T4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between left adjoints to the same right adjoint compatible with unit and counit",
+   "results": "Eight hits, including Adjunction.leftAdjointUniq and unit_leftAdjointUniq_hom_app. These supply the object comparison and unit identity but do not compare exact nested restrictions or pasted scheme base-change maps.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve hits: uniqueness, its unit and counit equations, and transitivity. No exact-open relative restriction or inverse-image-open mate identity.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBiprod|leftAdjointUniq|pullbackRestrictIsoRestrict",
+   "results": "Twenty-five msearch hits. Read Adjunction/Unique.lean, Limits/Preserves/Shapes/Biproducts.lean and AlgebraicGeometry/Restrict.lean. The scheme pullback-open iso and categorical assembly exist; no complete derived one-open comparison. Local rg over both library roots finds no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived open restriction adjunction comparison compatible with restriction along nested opens and base change",
+   "results": "Service unavailable: Internal Server Error; zero hits returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVPinnedVertexComparisons",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: identify the relative Mayer--Vietoris open vertices and the local base-change component by the pinned adjunction comparisons",
+   "via": [
+    "lem-pc-relative-mv-pinned-vertex-comparisons",
+    "lem-pc-relative-mv-cone-presentation",
+    "lem-pc-relative-mv-pinned-triangle-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVInverseOpenComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVInverseOpenComparisons.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_inverse_open_comparisons",
+  "statement": "theorem relativeMV_inverse_open_comparisons\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') :\n    ∃ e : ∀ W : X.Opens,\n      (schemeDerivedDirectImage f').obj\n        ((schemeDerivedDirectImage (g' ⁻¹ᵁ W).ι).obj\n          ((schemeOpenRestriction X' (g' ⁻¹ᵁ W)).mapDerivedCategory.obj K')) ≅\n        (relativeMVLocalArrow f f' g g' hpull K K' φ W).right,\n      (∀ W : X.Opens,\n        (schemeDerivedDirectImage f').map\n            ((mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ W)).unit.app K') ≫ (e W).hom =\n          relativeMVUnit (pullback.fst g' W.ι) f' K') ∧\n      (∀ (W U : X.Opens) (i : W ≤ U),\n        (schemeDerivedDirectImage f').map\n            (schemeDerivedOpenDirectImageRestriction X'\n              ((TopologicalSpace.Opens.map g'.base).map (homOfLE i))\n              (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ U))\n              (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ W)) K') ≫ (e W).hom =\n          (e U).hom ≫ relativeMVRestriction (relativeMVOpenLift g' i)\n            (pullback.fst g' U.ι) (pullback.fst g' W.ι)\n            (pullback.lift_fst _ _ _) f' K') ∧\n      (∀ W : X.Opens,\n        mvBaseChangeOpenMap f f' g g' hpull.w K K' φ W ≫ (e W).hom =\n          ((derivedPullback g).mapIso (relativeMVExactOpenIso f W K)).hom ≫\n            (relativeMVLocalArrow f f' g g' hpull K K' φ W).hom)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T155943-L-1306208",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T155943-L-1306208",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
+import Sheaf.AlgebraicGeometry.RelativeMVInverseOpenComparisons
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Pinned relative Mayer--Vietoris vertex comparisons
 
@@ -24,6 +27,36 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
 
+private theorem map_lift_comparison
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    (F : C ⥤ D) [F.Additive] {A U V : C} {U' V' : D}
+    [PreservesBinaryBiproduct U V F]
+    (eU : F.obj U ≅ U') (eV : F.obj V ≅ V')
+    (u : A ⟶ U) (v : A ⟶ V) :
+    F.map (biprod.lift u v) ≫ (F.mapBiprod U V ≪≫ biprod.mapIso eU eV).hom =
+      biprod.lift (F.map u ≫ eU.hom) (F.map v ≫ eV.hom) := by
+  rw [Iso.trans_hom, ← Category.assoc, biprod.map_lift_mapBiprod]
+  ext <;> simp [biprod.mapIso, Category.assoc]
+
+private theorem map_desc_comparison
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    (F : C ⥤ D) [F.Additive] {U V W : C} {U' V' W' : D}
+    [PreservesBinaryBiproduct U V F]
+    (eU : F.obj U ≅ U') (eV : F.obj V ≅ V') (eW : F.obj W ≅ W')
+    (rU : U ⟶ W) (rV : V ⟶ W) (sU : U' ⟶ W') (sV : V' ⟶ W')
+    (hU : F.map rU ≫ eW.hom = eU.hom ≫ sU)
+    (hV : F.map rV ≫ eW.hom = eV.hom ≫ sV) :
+    F.map (biprod.desc rU (-rV)) ≫ eW.hom =
+      (F.mapBiprod U V ≪≫ biprod.mapIso eU eV).hom ≫ biprod.desc sU (-sV) := by
+  apply (cancel_epi (F.mapBiprod U V).inv).mp
+  simp only [Iso.trans_hom, ← Category.assoc, Iso.inv_hom_id, Category.id_comp,
+    biprod.mapBiprod_inv_map_desc]
+  ext <;> simp [biprod.mapIso, hU, hV]
+
+set_option maxHeartbeats 1000000 in
+-- Elaborating the four derived-category vertex comparisons needs a larger budget.
 /-- Vertex comparisons for the canonical exact-restriction presentation of the
 relative Mayer--Vietoris rows. The overlap component satisfies the vertical-pasting
 identity. No boundary, distinguishedness, or morphism of triangles is asserted.
@@ -80,6 +113,52 @@ theorem relativeMV_pinned_vertex_comparisons
       G.map T'.mor₁ ≫ e₂'.hom = relativeMVTargetFirst g' f' U V K' ∧
       G.map T'.mor₂ ≫ e₃'.hom = e₂'.hom ≫ relativeMVTargetSecond g' f' U V K' ∧
       mvBaseChangeOpenMap f f' g g' hpull.w K K' φ (U ⊓ V) ≫ e₃'.hom =
-        e₃.hom ≫ (a (U ⊓ V)).hom := by sorry
+        e₃.hom ≫ (a (U ⊓ V)).hom := by
+  classical
+  have : (derivedPullback g).IsLeftAdjoint := (relativeMVAdj g).isLeftAdjoint
+  have : (schemeDerivedDirectImage f).IsRightAdjoint := (relativeMVAdj f).isRightAdjoint
+  have : (schemeDerivedDirectImage f').IsRightAdjoint := (relativeMVAdj f').isRightAdjoint
+  have : (derivedPullback g).Additive := by
+    have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (derivedPullback g)
+    exact Functor.additive_of_preservesBinaryBiproducts _
+  have : (schemeDerivedDirectImage f).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  have : (schemeDerivedDirectImage f').Additive :=
+    Functor.additive_of_preserves_binary_products _
+  dsimp only
+  let F := schemeDerivedDirectImage f ⋙ derivedPullback g
+  let G := schemeDerivedDirectImage f'
+  have : PreservesBinaryBiproducts F := preservesBinaryBiproducts_of_preservesBiproducts F
+  have : PreservesBinaryBiproducts G := preservesBinaryBiproducts_of_preservesBiproducts G
+  let s (W : X.Opens) := (derivedPullback g).mapIso (relativeMVExactOpenIso f W K)
+  obtain ⟨t, htUnit, htRestriction, htPaste⟩ :=
+    relativeMV_inverse_open_comparisons f f' g g' hpull K K' φ
+  refine ⟨F.mapBiprod _ _ ≪≫ biprod.mapIso (s U) (s V), s (U ⊓ V),
+    G.mapBiprod _ _ ≪≫ biprod.mapIso (t U) (t V), t (U ⊓ V), ?_, ?_, ?_, ?_,
+    htPaste (U ⊓ V)⟩
+  · change F.map (biprod.lift _ _) ≫ _ = _
+    rw [map_lift_comparison]
+    change biprod.lift
+      ((derivedPullback g).map ((schemeDerivedDirectImage f).map
+        ((mvOpenRestrictionAdjunction X U).unit.app K)) ≫ (s U).hom)
+      ((derivedPullback g).map ((schemeDerivedDirectImage f).map
+        ((mvOpenRestrictionAdjunction X V).unit.app K)) ≫ (s V).hom) = _
+    simp only [s, Functor.mapIso_hom, ← Functor.map_comp, relativeMVExactOpenIso_unit]
+    rfl
+  · change F.map (biprod.desc _ (-_)) ≫ _ = _
+    apply map_desc_comparison
+    · simpa only [F, s, Functor.comp_map, Functor.mapIso_hom, Functor.map_comp] using
+        congrArg ((derivedPullback g).map)
+          (relativeMVExactOpenIso_restriction f (W := U ⊓ V) (U := U) inf_le_left K)
+    · simpa only [F, s, Functor.comp_map, Functor.mapIso_hom, Functor.map_comp] using
+        congrArg ((derivedPullback g).map)
+          (relativeMVExactOpenIso_restriction f (W := U ⊓ V) (U := V) inf_le_right K)
+  · change G.map (biprod.lift _ _) ≫ _ = _
+    rw [map_lift_comparison, htUnit U, htUnit V]
+    rfl
+  · change G.map (biprod.desc _ (-_)) ≫ _ = _
+    apply map_desc_comparison
+    · exact htRestriction (U ⊓ V) U inf_le_left
+    · exact htRestriction (U ⊓ V) V inf_le_right
 
 end AlgebraicGeometry
