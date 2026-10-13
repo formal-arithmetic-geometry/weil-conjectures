@@ -154,7 +154,7 @@ variable (L : _root_.DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology
 /-- On a separably closed point, the homology of the derived global sections is the value of
 the quasi-inverse of the constant sheaf functor on the homology sheaves:
 `Hⁿ(RΓ(s, L)) ≅ F⁻¹(Hⁿ L)`. -/
-noncomputable def homologyRightDerivedGlobalSectionsIsoOfIsSepClosed (n : ℤ) :
+noncomputable def homologyRightDerivedGlobalSectionsIsoPointConstantSheafInv (n : ℤ) :
     (_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) n).obj
         ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj L) ≅
       (pointConstantSheaf Λ k).inv.obj ((_root_.DerivedCategory.homologyFunctor _ n).obj L) :=
@@ -170,7 +170,8 @@ theorem moduleFinite_homology_rightDerivedGlobalSections_of_isSepClosed (n : ℤ
     Module.Finite Λ ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) n).obj
       ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj L)) :=
   have := moduleFinite_pointConstantSheaf_inv_obj _ hL
-  Module.Finite.equiv (homologyRightDerivedGlobalSectionsIsoOfIsSepClosed L n).toLinearEquiv.symm
+  Module.Finite.equiv
+    (homologyRightDerivedGlobalSectionsIsoPointConstantSheafInv L n).toLinearEquiv.symm
 
 /-- On a separably closed point, `RΓ(s, L)` has homology concentrated in `[a, b]` if `L` has. -/
 theorem homologyConcentratedIn_rightDerivedGlobalSections_of_isSepClosed {a b : ℤ}
@@ -181,28 +182,12 @@ theorem homologyConcentratedIn_rightDerivedGlobalSections_of_isSepClosed {a b : 
       IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) q).obj
         ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj L)) :=
     ((pointConstantSheaf Λ k).inv.map_isZero hq).of_iso
-      (homologyRightDerivedGlobalSectionsIsoOfIsSepClosed L q)
+      (homologyRightDerivedGlobalSectionsIsoPointConstantSheafInv L q)
   obtain ⟨h₁, h₂⟩ := hL
   exact ⟨(_root_.DerivedCategory.isGE_iff _ a).2 fun q hq ↦
       key q ((_root_.DerivedCategory.isGE_iff L a).1 h₁ q hq),
     (_root_.DerivedCategory.isLE_iff _ b).2 fun q hq ↦
       key q ((_root_.DerivedCategory.isLE_iff L b).1 h₂ q hq)⟩
-
-/-- On a separably closed point, `RΓ(s, L)` has Tor amplitude in `[a, b]` if `L` has. For a
-`Λ`-module `M`, the derived constant sheaf functor `D(F)`, a monoidal equivalence, carries
-`RΓ(s, L) ⊗ᴸ M` to `L ⊗ᴸ M_s`, which has homology concentrated in `[a, b]`. -/
-theorem torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed {a b : ℤ}
-    (hL : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (Spec (.of k)) a b L) :
-    _root_.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) a b
-      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj L) := by
-  let F := pointConstantSheaf Λ k
-  let eC : F.mapDerivedCategory.obj
-      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj L) ≅ L :=
-    F.mapDerivedCategory.mapIso ((rightDerivedGlobalSectionsIsoMapDerivedCategoryInv _ _).app L) ≪≫
-      F.asEquivalence.mapDerivedCategory.counitIso.app L
-  exact _root_.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory F _
-    ((DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) (Spec (.of k)) a b).prop_of_iso
-      eC.symm hL)
 
 /-- On a separably closed point `s = Spec k`, the derived global sections `RΓ(s, L)` of an
 object `L ∈ Dctf(s, Λ)` are a perfect complex of `Λ`-modules, for `Λ` Noetherian. -/
@@ -216,6 +201,6 @@ theorem isPerfect_rightDerivedGlobalSections_of_isSepClosed [IsNoetherianRing Λ
       ⟨c, d, homologyConcentratedIn_rightDerivedGlobalSections_of_isSepClosed L hcd⟩)
     (fun n ↦ moduleFinite_homology_rightDerivedGlobalSections_of_isSepClosed L n
       (Scheme.IsConstructibleSheaf.isFiniteSheaf (hc n)))
-    ⟨a, b, torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed L hta⟩
+    ⟨a, b, torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed hta⟩
 
 end AlgebraicGeometry.Etale
