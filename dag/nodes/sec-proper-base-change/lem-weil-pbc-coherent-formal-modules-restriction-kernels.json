@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-modules-restriction-kernels",
+ "kind": "statement",
+ "title": "Open restriction preserves formal kernels before abelianness",
+ "statement": "Let $X$ be Noetherian, let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent ideal sheaf, and let $U\\subseteq X$ be an open subscheme which is Noetherian. For every morphism $\\alpha:F\\to G$ in $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module], the actual termwise restriction functor of [lem-weil-pbc-coherent-formal-modules-restriction-objects] preserves the kernel diagram $(\\alpha,0)$. This is preservation of categorical formal kernels, not levelwise kernels, and assumes no abelian structure.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (a)--(d), affine comparison paragraph and final sentence; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+ ],
+ "proof": [
+  {
+   "text": "Take the stabilized-image and quotient construction of the formal kernel. Restrict its inverse systems, maps, and equations to U, using the actual restriction functor on formal objects.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (a)--(d), affine comparison paragraph and final sentence; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "Module restriction is exact. Kernels and image sheaves restrict termwise; on affine sections ideal powers, multiplication images and quotients restrict to the corresponding constructions for the comapped ideal. Thus the original stabilization bound remains valid and its quotient construction restricts with the same inclusion and transition equations.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (a)--(d), affine comparison paragraph and final sentence; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "The factorization and uniqueness argument in claims (d) applies on U to this restricted construction: epi source transitions give factorization through the stabilized images and their quotients, and the Artin--Rees bound makes higher-level inclusion kernels transition to zero. Hence the restricted kernel fork is limiting. Every other limiting fork is isomorphic to it, which proves preservation independently of the choice of kernel.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (a)--(d), affine comparison paragraph and final sentence; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-module-kernel",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (a)--(d), affine comparison paragraph and final sentence; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open subscheme preserves kernels of coherent formal modules without assuming abelianness",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open subscheme preserves kernels of coherent formal modules without assuming abelianness",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.kerFunctor_map, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.IdealSheafData.map_ker, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.kerFunctor_obj",
+   "verdict": "no matching coherent formal module theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "coherentFormal.*(kernel|Kernel)|restriction.*preservesKernel",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no matching coherent formal module theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImageRestrictAffineMono",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Affine coimage-image calculation: Open restriction preserves formal kernels before abelianness",
+   "via": [
+    "lem-weil-pbc-coherent-formal-coimage-image-affine-mono",
+    "lem-weil-pbc-coherent-formal-coimage-image-affine"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionKernels",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesRestrictionKernels.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_restriction_preservesKernel",
+  "statement": "theorem coherentFormalModules_restriction_preservesKernel {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (U : X.Opens) [IsNoetherian U.toScheme] {F G : CoherentFormalModule X I} (α : F ⟶ G) : PreservesLimit (parallelPair α 0) (coherentFormalModulesRestriction I U)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T010618-L-2672073",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T010618-L-2672073",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

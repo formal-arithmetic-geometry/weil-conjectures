@@ -10,7 +10,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X, affine first-isomorphism calculation"
+  "place": "Lemma 087X affine Coim=Im paragraph; P4 Lean assembly using affine equivalence, scheme-isomorphism transport, kernel restriction and proved cokernel restriction."
  },
  "mathlib_searches": [
   {
@@ -59,19 +59,58 @@
  "statement": "Under the hypotheses of the affine coimage-image comparison, the restriction of its level n component to an affine open is a monomorphism.",
  "proof": [
   {
-   "text": "The affine equivalence identifies the comparison with the module first-isomorphism map, which is injectivity; restriction and associated sheaf preserve this property, and universal kernel/cokernel identifications transport it.",
+   "text": "For the affine open U, use its canonical isomorphism with Spec of its global sections. Transport the formal category along this scheme isomorphism. The transported ideal is ofIdealTop of the ideal obtained by the Gamma-Spec ring isomorphism; this is checked by ext_of_isAffine and Ideal.map_map. Compose the resulting equivalence with the existing affine equivalence to finite modules over the adic completion.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-coherent-formal-module-kernel",
+    "lem-weil-pbc-coherent-formal-modules-iso-equivalence",
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (a)--(d), affine comparison paragraph and final sentence; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "The completion is Noetherian. Mathlib FGModuleCat.instAbelian and abelianOfEquivalence give an abelian structure on the affine formal category, using its given preadditive structure. Finite products are transported across the equivalence by Adjunction.hasLimitsOfShape_of_equivalence.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (a)--(d), affine comparison paragraph and final sentence; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "Use the new restriction-kernel statement for alpha and its cokernel projection. Cokernel preservation for alpha and its kernel inclusion is proved from ambient cokernel closure: the source full-subcategory inclusion preserves the two cokernels; module restriction is a left adjoint, and whiskering preserves colimits. The target full-subcategory inclusion reflects colimits.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-restriction-kernels",
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects",
     "lem-weil-pbc-coherent-formal-cokernel-closure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (a)--(d), affine comparison paragraph and final sentence; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "Mathlib PreservesCoimage.hom_coimageImageComparison conjugates the restricted comparison to the comparison of the restricted arrow. The latter is invertible in the affine formal category. IsIso.of_isIso_fac_right makes the restricted comparison invertible. Apply the full-subcategory inclusion followed by level evaluation, whose image is definitionally the required termwise module restriction. An isomorphism is monic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (a)--(d), affine comparison paragraph and final sentence; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-coherent-formal-cokernel-closure",
   "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-formal-module-kernel",
-  "lem-weil-pbc-coherent-formal-cokernel-closure"
+  "lem-weil-pbc-coherent-formal-modules-iso-equivalence",
+  "lem-weil-pbc-coherent-formal-modules-restriction-kernels",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects"
  ],
  "lean": {
   "existing": false,
@@ -94,12 +133,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261012T230752-L-1907175",
+  "landing": "20261013T010618-L-2672073",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
