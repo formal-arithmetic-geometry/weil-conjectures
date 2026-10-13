@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-finite-structure-adjoint-transitions",
+ "kind": "statement",
+ "title": "Transition compatibility for explicit adjoints of a module system",
+ "statement": "Let X, S_n, Y_n be schemes [def-pc-scheme], j_n:S_n→X, p_n:Y_n→S_n, i_n:S_n→S_(n+1), g_n:Y_n→Y_(n+1). Assume i_n≫j_(n+1)=j_n, g_n≫p_(n+1)=p_n≫i_n, and g_n≫(p_(n+1)≫j_(n+1))=p_n≫j_n. Let c_n be the inverse of the explicit mate tensorPullbackCompositionIso [def-pc-tensor-pullback-composition-iso]. For an X-module G and maps a_n:j_n^*G→p_(n,*)O_Yn [def-pc-module-pullback], assume i_n^*(a_(n+1)) followed by structure-sheaf base change equals c_n(G) followed by a_n [lem-weil-pbc-module-base-change-map-algebra]. Define t_n:G→(p_n≫j_n)_*O_Yn as the adjunction unit, j_(n,*)(a_n), and pushforward composition. Then g_n.appLE(t_(n+1)(x))=t_n(x) on every open U and section x of G(U). No finite, proper, coherent, cartesian or invertible hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks 09ZT multiplication paragraph, expanded using 088E, 088F and 0CYS; read https://stacks.math.columbia.edu/tag/09ZT on 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-weil-pbc-module-base-change-map-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply unit_conjugateEquiv_symm to the pinned adjunctions and canonical pushforward comparison. Cancel c inverse followed by c to obtain the composite unit equation.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the adjunction for i of the compatibility equation and push it forward along j. Naturality moves a through the unit; moduleBaseChangeMap_algebra identifies the adjoint base-change composite with the structure map of g. Naturality of the pushforward comparison and the mate unit equation simplify the right side.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-algebra",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the module equation on U and x. Pushforward composition is the identity on sections. PushforwardCongr is a restriction between equal inverse-image opens; combine these restrictions by functoriality. The resulting open morphism is appLE, by uniqueness of morphisms in a poset. This is implemented as Subsingleton.elim in Lean.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-base-change-map-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks 09ZT multiplication paragraph, expanded using 088E, 088F and 0CYS; read https://stacks.math.columbia.edu/tag/09ZT on 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent module with compatible commutative algebra structures on its infinitesimal reductions admits a commutative algebra sheaf structure by Grothendieck existence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift compatible commutative algebra structures on coherent modules by full faithfulness of completion",
+   "results": "AdicCompletion instances and IsAdicComplete.liftAlgHom; no exact sheaf result.",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf algebraization theorem; component mate equations available."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "Adjunction.Unique unit equation, valid for explicitly constructed comparisons.",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf algebraization theorem; component mate equations available."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackCompositionIso|unit_leftAdjointUniq_hom_app",
+   "results": "Existing TensorPullbackCompositionIso and Mathlib adjunction formulas.",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf algebraization theorem; component mate equations available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStructureAlgebraOperationsLift",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-structure-algebra-operations-lift",
+   "place": "Algebra construction and adjoint-transition parts of its proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteStructureAdjointTransitions",
+  "file": "lean/Sheaf/Paper/FiniteStructureAdjointTransitions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteStructureAdjoint_transitions",
+  "statement": "theorem finiteStructureAdjoint_transitions (X : Scheme.{u}) (S Y : ℕ → Scheme.{u}) (j : ∀ n, S n ⟶ X) (p : ∀ n, Y n ⟶ S n) (i : ∀ n, S n ⟶ S (n + 1)) (g : ∀ n, Y n ⟶ Y (n + 1)) (wj : ∀ n, i n ≫ j (n + 1) = j n) (wp : ∀ n, g n ≫ p (n + 1) = p n ≫ i n) (w : ∀ n, g n ≫ (p (n + 1) ≫ j (n + 1)) = p n ≫ j n) (c : ∀ n, tensorPullback (j (n + 1)) ⋙ tensorPullback (i n) ≅ tensorPullback (j n)) (hc : ∀ n, c n = (tensorPullbackCompositionIso (i n) (j (n + 1)) (j n) (wj n)).symm) (G : X.Modules) (a : ∀ n, (tensorPullback (j n)).obj G ⟶ (pushforward (p n)).obj (SheafOfModules.unit (Y n).ringCatSheaf)) (ha : ∀ n, (tensorPullback (i n)).map (a (n + 1)) ≫ (moduleBaseChangeMap (p (n + 1)) (p n) (i n) (g n) (wp n) (SheafOfModules.unit (Y (n + 1)).ringCatSheaf) ≫ (pushforward (p n)).map (tensorPullbackObjUnitToUnit (g n))) = (c n).hom.app G ≫ a n) : ∀ (n : ℕ) (U : X.Opens) (x : Γ(G, U)), ((g n).appLE ((p (n + 1) ≫ j (n + 1)) ⁻¹ᵁ U) ((p n ≫ j n) ⁻¹ᵁ U) (by rw [← Scheme.Hom.comp_preimage, w n])).hom ((finiteStructureAdjoint (j (n + 1)) (p (n + 1)) G (a (n + 1))).app U x) = (finiteStructureAdjoint (j n) (p n) G (a n)).app U x",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-0f31d",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T130749-L-3985816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-0f31d",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T130749-L-3985816",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivery packet, recorded statement change, Lean files, forced adaptation, compilation results, imports, declarations, and report against the stage-3 review rules."
+ }
+}

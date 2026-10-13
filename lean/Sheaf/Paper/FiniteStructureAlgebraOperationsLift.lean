@@ -13,17 +13,11 @@ public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 
-import Sheaf.AlgebraicGeometry.GrothendieckExistence
-import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Sheaf.Paper.FiniteStructureAlgebraAdjointsConstruct
+import Sheaf.Paper.FiniteStructureAdjointTransitions
 
 /-! # Algebra structures on algebraized finite direct images
 
@@ -39,17 +33,15 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 
 set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
--- STATEMENT-DISPUTED: hc selects an arbitrary natural module isomorphism from Nonempty.
--- It supplies no compatibility with the canonical tensor-pullback adjunction units.
--- Such compatibility is essential for transporting the units in the proof below.
--- Negating a composition comparison preserves natural invertibility, but can make
--- compatible module maps alternate in sign; these cannot all be unital algebra maps.
--- See report.md for the Lean-checked obstruction and the precise scope of this dispute.
 /-- Lift multiplication and unit and produce the compatible adjoint algebra maps.
 Source: Stacks Project, Tag 09ZT, multiplication paragraph, expanded using 088E,
 088F and 0CYS. This is the algebra-operations part only; it makes no assertion
@@ -98,9 +90,6 @@ theorem finite_structure_algebra_operations_lift
       (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅
       Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
       (Ideal.Quotient.mk (I ^ (n + 1)))))))
-    (hc : ∀ n : ℕ, c n = (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
-      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 +
-      1)))))))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n)))
     (Yn : ℕ → Scheme.{u})
     (fnY : ∀ n, Yn n ⟶ pullback f
       (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))
@@ -123,7 +112,12 @@ theorem finite_structure_algebra_operations_lift
           (hcart n).flip.w (SheafOfModules.unit (Yn (n + 1)).ringCatSheaf) ≫
           (Scheme.Modules.pushforward (fnY n)).map
             (Scheme.Modules.tensorPullbackObjUnitToUnit (gn n))) =
-        (c n).hom.app G ≫ (ψ n).hom) :
+        (c n).hom.app G ≫ (ψ n).hom)
+    (hc : ∀ n : ℕ, c n = (Scheme.Modules.tensorPullbackCompositionIso (i n)
+      (pullback.fst f (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))
+      (pullback.fst f (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1)))))) (hi n)).symm) :
     ∃ B : X.CommAlgebraSheaf, ∃ e : B.toModule ≅ G,
       ∃ b : ∀ n, B ⟶ 𝒪⁎(fnY n ≫ pullback.fst f
           (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))),
@@ -147,6 +141,37 @@ theorem finite_structure_algebra_operations_lift
               ((fnY n ≫ pullback.fst f
                 (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) ⁻¹ᵁ U)
               (by rw [← Scheme.Hom.comp_preimage, hw n]) =
-            (b n).right.hom.app (op U)) := by sorry
+            (b n).right.hom.app (op U)) := by
+  have H :=
+    finite_structure_algebra_adjoints_construct A I X f i hi hp c hc
+      Yn fnY gn hcart hw G hG hproper ψ hψ
+  rcases H with ⟨B, e, b, hb⟩
+  let j := fun n ↦ pullback.fst f
+    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
+  let a := fun n ↦ (Scheme.Modules.tensorPullback (j n)).map e.hom ≫ (ψ n).hom
+  have ha : ∀ n, (Scheme.Modules.tensorPullback (i n)).map (a (n + 1)) ≫
+      (Scheme.Modules.moduleBaseChangeMap (fnY (n + 1)) (fnY n) (i n) (gn n)
+        (hcart n).flip.w (SheafOfModules.unit (Yn (n + 1)).ringCatSheaf) ≫
+        (Scheme.Modules.pushforward (fnY n)).map
+          (Scheme.Modules.tensorPullbackObjUnitToUnit (gn n))) =
+      (c n).hom.app B.toModule ≫ a n := by
+    intro n
+    dsimp only [a]
+    rw [Functor.map_comp, Category.assoc, hψ]
+    rw [← Category.assoc]
+    exact congrArg (fun q ↦ q ≫ (ψ n).hom) ((c n).hom.naturality e.hom)
+  have ht := Scheme.Modules.finiteStructureAdjoint_transitions X _ Yn j fnY i gn
+    hi (fun n ↦ (hcart n).flip.w) hw c hc B.toModule a ha
+  refine ⟨B, e, b, ?_, ?_⟩
+  · intro n U x
+    exact hb n U x
+  · intro n U
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro x
+    change ((gn n).appLE _ _ _).hom (((b (n + 1)).right.hom.app (op U)).hom x) =
+      ((b n).right.hom.app (op U)).hom x
+    rw [hb (n + 1) U x, hb n U x]
+    exact ht n U x
 
 end AlgebraicGeometry

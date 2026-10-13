@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-finite-structure-algebra-operations-lift",
  "kind": "statement",
  "title": "Lift algebra operations and compatible adjoints, without affine quotient sections",
- "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], complete for an ideal $I$ [def-weil-pbc-adically-complete-ring], and let $f:X\\to\\operatorname{Spec}A$ be separated and finite type. Write $X_n=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I^{n+1})$ and $j_n:X_n\\to X$. Let $i_n:X_n\\to X_{n+1}$ be the canonical transition immersion, specified by both pullback projection equations. Let $c_n:i_n^*j_{n+1}^*\\cong j_n^*$ be the canonical composition comparison of tensor pullback [def-pc-module-pullback]. Let $p_n:Y_n\\to X_n$ be finite, with $g_n:Y_n\\to Y_{n+1}$ giving cartesian transition squares and $j_{n+1}\\circ p_{n+1}\\circ g_n=j_n\\circ p_n$. Let $G$ be a coherent module [pqf-def-coherent] on $X$ with support proper over $A$ [def-weil-pbc-closed-subset-proper-over-base], and suppose isomorphisms $\\psi_n:j_n^*G\\cong p_{n,*}\\mathcal O_{Y_n}$ commute with $c_n$ and the canonical affine base-change maps followed by the structure-sheaf pullback maps [lem-weil-pbc-affine-pushforward-base-change]. Then there exist an algebra sheaf B [def-weil-pbc-comm-algebra-sheaf], an explicit underlying-module isomorphism e:B.toModule ≅ G, and algebra maps b_n:B -> (j_n p_n)_* O_Yn. On each open U and each x in B(U), b_n(U)(x) is the composite of the tensor-pullback adjunction unit at B.toModule, j_n^*(e.hom), psi_n.hom, and the canonical pushforward-composition comparison. These b_n commute with g_n on every open. There is no affine quotient-ring assertion.",
+ "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], complete for an ideal $I$ [def-weil-pbc-adically-complete-ring], and let $f:X\\to\\operatorname{Spec}A$ be separated and finite type. Write $X_n=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I^{n+1})$ and $j_n:X_n\\to X$. Let $i_n:X_n\\to X_{n+1}$ be the canonical transition immersion, specified by both pullback projection equations. Let $c_n:i_n^*j_{n+1}^*\\cong j_n^*$ be the inverse of the explicit mate tensorPullbackCompositionIso built from the pinned adjunctions [def-pc-tensor-pullback-composition-iso]. Let $p_n:Y_n\\to X_n$ be finite, with $g_n:Y_n\\to Y_{n+1}$ giving cartesian transition squares and $j_{n+1}\\circ p_{n+1}\\circ g_n=j_n\\circ p_n$. Let $G$ be a coherent module [pqf-def-coherent] on $X$ with support proper over $A$ [def-weil-pbc-closed-subset-proper-over-base], and suppose isomorphisms $\\psi_n:j_n^*G\\cong p_{n,*}\\mathcal O_{Y_n}$ commute with $c_n$ and the canonical affine base-change maps followed by the structure-sheaf pullback maps [lem-weil-pbc-affine-pushforward-base-change]. Then there exist an algebra sheaf B [def-weil-pbc-comm-algebra-sheaf], an explicit underlying-module isomorphism e:B.toModule ≅ G, and algebra maps b_n:B -> (j_n p_n)_* O_Yn. On each open U and each x in B(U), b_n(U)(x) is the composite of the tensor-pullback adjunction unit at B.toModule, j_n^*(e.hom), psi_n.hom, and the canonical pushforward-composition comparison. These b_n commute with g_n on every open. There is no affine quotient-ring assertion.",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Stacks 09ZT multiplication paragraph, expanded by 088E, 088F and 0CYS; read online at https://stacks.math.columbia.edu/tag/09ZT"
@@ -18,66 +18,34 @@
   "pqf-def-coherent",
   "def-weil-pbc-closed-subset-proper-over-base",
   "def-pc-module-pullback",
-  "lem-weil-pbc-affine-pushforward-base-change"
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-pc-tensor-pullback-composition-iso"
  ],
  "proof": [
   {
-   "text": "Choose a proper closed subscheme annihilating G. Its ideal also annihilates the tensor square and cube and the structure sheaf quotient; quasi-coherence and the finite-type affine criterion make these coherent.",
+   "text": "Apply the algebra construction lemma to obtain B, e and b with their explicit adjoint section formula.",
    "uses": [
-    "lem-weil-pbc-module-support-proper-over-base",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-finite-structure-algebra-adjoints-construct"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor pullback and its canonical comparison commute with multiplication, unit and the monoidal constraints. Conjugate the canonical finite direct-image multiplications by psi; the displayed compatibility equation makes the family compatible.",
+   "text": "Precompose psi with pullback of e.hom. Functoriality and naturality of c transport hpsi to this new family. Apply the general adjoint-transition lemma to B.toModule. Ring-hom extensionality and the section formulas give the required transition equality.",
    "uses": [
-    "lem-weil-pbc-module-pullback-tensor",
-    "lem-weil-pbc-module-tensor-symmetric-monoidal",
-    "lem-weil-pbc-affine-pushforward-base-change"
+    "lem-weil-pbc-finite-structure-adjoint-transitions"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Use full faithfulness of Grothendieck existence on the tensor square and the supporting structure-sheaf quotient to lift multiplication and unit uniquely. Faithfulness on the tensor cube, square and G checks associativity, commutativity and both unit identities. Equip the additive sheaf of G with these operations, yielding a commutative ring sheaf and its structure map. Its underlying module is isomorphic to G.",
-   "uses": [
-    "prop-weil-pbc-grothendieck-existence",
-    "def-weil-pbc-comm-algebra-sheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take the adjoints of the transported psi as the algebra maps b. The multiplication and unit comparisons make them ring maps. The adjunction unit and pushforward-composition comparison give their displayed section formula; apply adjunction to hpsi, using hc, to obtain transition compatibility on every open. No quotient-section assertion is included in this step.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-affine-pushforward-base-change"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-support-proper-over-base",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-module-pullback-tensor",
-  "lem-weil-pbc-module-tensor-symmetric-monoidal",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "prop-weil-pbc-grothendieck-existence",
-  "def-weil-pbc-comm-algebra-sheaf",
-  "def-pc-module-pullback"
+  "lem-weil-pbc-finite-structure-algebra-adjoints-construct",
+  "lem-weil-pbc-finite-structure-adjoint-transitions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Stacks 09ZT multiplication paragraph, expanded by 088E, 088F and 0CYS; read online at https://stacks.math.columbia.edu/tag/09ZT",
-  "note": "Expanded source argument; Lean docstring spells out the construction and edge cases."
+  "place": "Stacks 09ZT multiplication paragraph, expanded using 088E, 088F and 0CYS; read https://stacks.math.columbia.edu/tag/09ZT on 2026-10-13",
+  "note": "C4 corrects the comparison normalization; the transition calculation is proved by explicit adjunction mates."
  },
  "mathlib_searches": [
   {
@@ -143,7 +111,7 @@
   "module": "Sheaf.Paper.FiniteStructureAlgebraOperationsLift",
   "file": "lean/Sheaf/Paper/FiniteStructureAlgebraOperationsLift.lean",
   "declaration": "AlgebraicGeometry.finite_structure_algebra_operations_lift",
-  "statement": "theorem finite_structure_algebra_operations_lift\n    (A : Type u) [CommRing A] (I : Ideal A)\n    [IsNoetherianRing A] [IsAdicComplete I A]\n    (X : Scheme.{u}) (f : X ⟶ Spec (.of A))\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (i : ∀ n : ℕ, pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ⟶\n      pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))\n    (hi : ∀ n : ℕ, i n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n\n      + 1 + 1))))) = pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +\n      1))))))\n    (hp : ∀ n : ℕ, i n ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n\n      + 1 + 1))))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +\n      1))))) ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I :=\n      I) (Nat.le_succ (n + 1))))))\n    (c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom\n      (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅\n      Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom\n      (Ideal.Quotient.mk (I ^ (n + 1)))))))\n    (hc : ∀ n : ℕ, c n = (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 +\n      1)))))))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n)))\n    (Yn : ℕ → Scheme.{u})\n    (fnY : ∀ n, Yn n ⟶ pullback f\n      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))\n    [∀ n, IsFinite (fnY n)]\n    (gn : ∀ n, Yn n ⟶ Yn (n + 1))\n    (hcart : ∀ n, IsPullback (fnY n) (gn n) (i n) (fnY (n + 1)))\n    (hw : ∀ n, gn n ≫ (fnY (n + 1) ≫ pullback.fst f\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) =\n      fnY n ≫ pullback.fst f\n        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))\n    (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G)\n    (hproper : Scheme.Modules.HasSupportProperOver f G)\n    (ψ : ∀ n, (Scheme.Modules.tensorPullback (pullback.fst f\n      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G ≅\n        (Scheme.Modules.pushforward (fnY n)).obj\n          (SheafOfModules.unit (Yn n).ringCatSheaf))\n    (hψ : ∀ n,\n      (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫\n        (Scheme.Modules.moduleBaseChangeMap (fnY (n + 1)) (fnY n) (i n) (gn n)\n          (hcart n).flip.w (SheafOfModules.unit (Yn (n + 1)).ringCatSheaf) ≫\n          (Scheme.Modules.pushforward (fnY n)).map\n            (Scheme.Modules.tensorPullbackObjUnitToUnit (gn n))) =\n        (c n).hom.app G ≫ (ψ n).hom) :\n    ∃ B : X.CommAlgebraSheaf, ∃ e : B.toModule ≅ G,\n      ∃ b : ∀ n, B ⟶ 𝒪⁎(fnY n ≫ pullback.fst f\n          (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))),\n        (∀ (n : ℕ) (U : X.Opens) (x : B.right.obj.obj (op U)),\n          ((b n).right.hom.app (op U)).hom x =\n            ((Scheme.Modules.pushforwardComp (fnY n) (pullback.fst f\n                (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).hom.app\n              (SheafOfModules.unit (Yn n).ringCatSheaf)).app U\n                (((Scheme.Modules.pushforward (pullback.fst f\n                    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).map\n                  ((Scheme.Modules.tensorPullback (pullback.fst f\n                    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).map\n                      e.hom ≫ (ψ n).hom)).app U\n                  (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction\n                    (pullback.fst f (Spec.map (CommRingCat.ofHom\n                      (Ideal.Quotient.mk (I ^ (n + 1)))))))).unit.app B.toModule).app U x))) ∧\n        (∀ (n : ℕ) (U : X.Opens),\n          (b (n + 1)).right.hom.app (op U) ≫\n            (gn n).appLE ((fnY (n + 1) ≫ pullback.fst f\n              (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⁻¹ᵁ U)\n              ((fnY n ≫ pullback.fst f\n                (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) ⁻¹ᵁ U)\n              (by rw [← Scheme.Hom.comp_preimage, hw n]) =\n            (b n).right.hom.app (op U))",
+  "statement": "theorem finite_structure_algebra_operations_lift (A : Type u) [CommRing A] (I : Ideal A) [IsNoetherianRing A] [IsAdicComplete I A] (X : Scheme.{u}) (f : X ⟶ Spec (.of A)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (i : ∀ n : ℕ, pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ⟶ pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) (hi : ∀ n : ℕ, i n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) = pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) (hp : ∀ n : ℕ, i n ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) (Nat.le_succ (n + 1)))))) (c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅ Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))) (Yn : ℕ → Scheme.{u}) (fnY : ∀ n, Yn n ⟶ pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) [∀ n, IsFinite (fnY n)] (gn : ∀ n, Yn n ⟶ Yn (n + 1)) (hcart : ∀ n, IsPullback (fnY n) (gn n) (i n) (fnY (n + 1))) (hw : ∀ n, gn n ≫ (fnY (n + 1) ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) = fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (hproper : Scheme.Modules.HasSupportProperOver f G) (ψ : ∀ n, (Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G ≅ (Scheme.Modules.pushforward (fnY n)).obj (SheafOfModules.unit (Yn n).ringCatSheaf)) (hψ : ∀ n, (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫ (Scheme.Modules.moduleBaseChangeMap (fnY (n + 1)) (fnY n) (i n) (gn n) (hcart n).flip.w (SheafOfModules.unit (Yn (n + 1)).ringCatSheaf) ≫ (Scheme.Modules.pushforward (fnY n)).map (Scheme.Modules.tensorPullbackObjUnitToUnit (gn n))) = (c n).hom.app G ≫ (ψ n).hom) (hc : ∀ n : ℕ, c n = (Scheme.Modules.tensorPullbackCompositionIso (i n) (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) (hi n)).symm) : ∃ B : X.CommAlgebraSheaf, ∃ e : B.toModule ≅ G, ∃ b : ∀ n, B ⟶ 𝒪⁎(fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))), (∀ (n : ℕ) (U : X.Opens) (x : B.right.obj.obj (op U)), ((b n).right.hom.app (op U)).hom x = ((Scheme.Modules.pushforwardComp (fnY n) (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).hom.app (SheafOfModules.unit (Yn n).ringCatSheaf)).app U (((Scheme.Modules.pushforward (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).map ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).map e.hom ≫ (ψ n).hom)).app U (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))))).unit.app B.toModule).app U x))) ∧ (∀ (n : ℕ) (U : X.Opens), (b (n + 1)).right.hom.app (op U) ≫ (gn n).appLE ((fnY (n + 1) ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⁻¹ᵁ U) ((fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) ⁻¹ᵁ U) (by rw [← Scheme.Hom.comp_preimage, hw n]) = (b n).right.hom.app (op U))",
   "branch": "sheaf-dag",
   "by": "U3",
   "date": "2026-10-12"
@@ -161,17 +129,94 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-c16e8",
-  "group": "A2",
+  "reviewer": "X-0f31d",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261013T111835-L-3046278",
-  "kind": "proof",
-  "note": "independent Codex review: Matched the dispute-only comment and report against the unchanged Lean declaration, node and comparison interfaces; compilation and axiom checks pass.",
-  "sorry_before": [
-   "AlgebraicGeometry.finite_structure_algebra_operations_lift"
+  "landing": "20261013T130749-L-3985816",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivery packet, recorded statement change, Lean files, forced adaptation, compilation results, imports, declarations, and report against the stage-3 review rules."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "C4 stage 2",
+  "old_statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], complete for an ideal $I$ [def-weil-pbc-adically-complete-ring], and let $f:X\\to\\operatorname{Spec}A$ be separated and finite type. Write $X_n=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I^{n+1})$ and $j_n:X_n\\to X$. Let $i_n:X_n\\to X_{n+1}$ be the canonical transition immersion, specified by both pullback projection equations. Let $c_n:i_n^*j_{n+1}^*\\cong j_n^*$ be the canonical composition comparison of tensor pullback [def-pc-module-pullback]. Let $p_n:Y_n\\to X_n$ be finite, with $g_n:Y_n\\to Y_{n+1}$ giving cartesian transition squares and $j_{n+1}\\circ p_{n+1}\\circ g_n=j_n\\circ p_n$. Let $G$ be a coherent module [pqf-def-coherent] on $X$ with support proper over $A$ [def-weil-pbc-closed-subset-proper-over-base], and suppose isomorphisms $\\psi_n:j_n^*G\\cong p_{n,*}\\mathcal O_{Y_n}$ commute with $c_n$ and the canonical affine base-change maps followed by the structure-sheaf pullback maps [lem-weil-pbc-affine-pushforward-base-change]. Then there exist an algebra sheaf B [def-weil-pbc-comm-algebra-sheaf], an explicit underlying-module isomorphism e:B.toModule ≅ G, and algebra maps b_n:B -> (j_n p_n)_* O_Yn. On each open U and each x in B(U), b_n(U)(x) is the composite of the tensor-pullback adjunction unit at B.toModule, j_n^*(e.hom), psi_n.hom, and the canonical pushforward-composition comparison. These b_n commute with g_n on every open. There is no affine quotient-ring assertion.",
+  "what": "The old hc chooses a bare Nonempty isomorphism without adjunction normalization. Replace it by the explicit mate of the pinned adjunctions, as the intended canonical comparison requires. No target changes.",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Stacks 09ZT multiplication paragraph, expanded using 088E, 088F and 0CYS; read https://stacks.math.columbia.edu/tag/09ZT on 2026-10-13"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-finite-structure-algebra-lift",
+    "holds": true,
+    "note": "The caller statement and its conclusion are unchanged, but its obsolete normalization hypothesis does not supply the corrected one. Its proof is reopened and marked disputed; the forced adaptation keeps every existing signature and visibility."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.finite_structure_algebra_operations_lift"
+  "old_stmt_deps": [
+   "def-weil-pbc-noetherian-ring",
+   "def-weil-pbc-adically-complete-ring",
+   "def-weil-proper-morphism",
+   "def-weil-finite-type-morphism",
+   "def-pc-base-change",
+   "def-weil-finite-integral-morphism",
+   "def-weil-pbc-comm-algebra-sheaf",
+   "pqf-def-coherent",
+   "def-weil-pbc-closed-subset-proper-over-base",
+   "def-pc-module-pullback",
+   "lem-weil-pbc-affine-pushforward-base-change"
+  ],
+  "old_proof": [
+   {
+    "text": "Choose a proper closed subscheme annihilating G. Its ideal also annihilates the tensor square and cube and the structure sheaf quotient; quasi-coherence and the finite-type affine criterion make these coherent.",
+    "uses": [
+     "lem-weil-pbc-module-support-proper-over-base",
+     "def-sbc-closed-immersion-ideal-sheaf",
+     "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+     "lem-weil-pbc-quasi-coherent-finite-type-affine",
+     "pqf-lem-coherent-ft-locnoeth",
+     "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Tensor pullback and its canonical comparison commute with multiplication, unit and the monoidal constraints. Conjugate the canonical finite direct-image multiplications by psi; the displayed compatibility equation makes the family compatible.",
+    "uses": [
+     "lem-weil-pbc-module-pullback-tensor",
+     "lem-weil-pbc-module-tensor-symmetric-monoidal",
+     "lem-weil-pbc-affine-pushforward-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use full faithfulness of Grothendieck existence on the tensor square and the supporting structure-sheaf quotient to lift multiplication and unit uniquely. Faithfulness on the tensor cube, square and G checks associativity, commutativity and both unit identities. Equip the additive sheaf of G with these operations, yielding a commutative ring sheaf and its structure map. Its underlying module is isomorphic to G.",
+    "uses": [
+     "prop-weil-pbc-grothendieck-existence",
+     "def-weil-pbc-comm-algebra-sheaf"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Take the adjoints of the transported psi as the algebra maps b. The multiplication and unit comparisons make them ring maps. The adjunction unit and pushforward-composition comparison give their displayed section formula; apply adjunction to hpsi, using hc, to obtain transition compatibility on every open. No quotient-section assertion is included in this step.",
+    "uses": [
+     "def-pc-module-pullback",
+     "lem-weil-pbc-affine-pushforward-base-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-module-support-proper-over-base",
+   "def-sbc-closed-immersion-ideal-sheaf",
+   "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+   "lem-weil-pbc-quasi-coherent-finite-type-affine",
+   "pqf-lem-coherent-ft-locnoeth",
+   "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+   "lem-weil-pbc-module-pullback-tensor",
+   "lem-weil-pbc-module-tensor-symmetric-monoidal",
+   "lem-weil-pbc-affine-pushforward-base-change",
+   "prop-weil-pbc-grothendieck-existence",
+   "def-weil-pbc-comm-algebra-sheaf",
+   "def-pc-module-pullback"
   ]
  }
 }
