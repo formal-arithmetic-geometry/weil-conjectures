@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-mixed-sections-square-comparison-coherence",
+ "kind": "statement",
+ "title": "Coherence of normalized mixed sections comparisons",
+ "statement": "For arbitrary scheme morphisms f:X→Y and g:Y′→Y [def-pc-scheme] and every derived object F on their pullback [def-pc-derived-category], the normalized mixed global-sections comparisons [lem-sc-mixed-global-sections-direct-image-iso] commute with the conjugate under the pinned adjunctions [def-pc-derived-base-change-map] of the fixed derived pullback-composition comparison [lem-pc-ringed-spaces-derived-pullback-composition]. Explicitly, writing δ for that conjugate, c_h for the Leray comparison, G_Z for derived global sections, S_h for scalar restriction and q:S_gX;S_f≅S_f′;S_g for the scalar-square comparison [def-pc-global-hom-pullback-comparison], one has G_Y(δ_F);(c_g)_(Rf′_*F);S_g((c_f′)_F)=(c_f)_(RgX_*F);S_f((c_gX)_F);q_(G_X′F). No pullback units or base-change maps occur, and the sheaf and module localization universes are independent.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-derived-base-change-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY, 0D5T and 0D5W"
+ },
+ "proof": [
+  {
+   "text": "Transpose the fixed left-derived pullback composition comparisons under the pinned derived adjunctions. Their defining left-derived counit equations and the pinned Hom-equivalence normalization identify the conjugate delta with the canonical right-derived comparison of the identity underived pushforward square. Its inverse satisfies the pasted right-derived-unit equation.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalized mixed global sections comparisons and their right-derived-unit equations. Naturality and the scalar-square comparison reduce both composites to the same underived map on K-injective representatives; right-derived uniqueness transports the equality to every derived object.",
+   "uses": [
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "def-pc-global-hom-pullback-comparison",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "def-pc-global-hom-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-13",
+  "note": "Intermediate coherence statement isolated from the mixed sections unit-square proof; source Tags 08HY, 0D5T and 0B6I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction base change mate unit commutative square compatibility",
+   "results": "CategoryTheory.unit_mateEquiv_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_conjugateEquiv",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*unit|unit.*conjugateEquiv",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived functor composition comparisons commute with adjunction mates and global sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mixed-sections-base-change-unit-square",
+   "place": "Proof step 2: normalized Leray comparison coherence"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedSectionsSquareComparisonCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedSectionsSquareComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.mixedSections_square_comparison_coherence",
+  "statement": "theorem mixedSections_square_comparison_coherence\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)\n    (F : schemeDerivedCategory (pullback f g)) :\n    let a := fun {A D : Scheme.{u}} (h : A ⟶ D) ↦ schemeHomPullbackAdjunction h\n    let p := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    let k := p (pullback.snd f g) g ≪≫\n      eqToIso (congrArg (fun h ↦ derivedPullback h)\n        (pullback.condition (f := f) (g := g)).symm) ≪≫\n          (p (pullback.fst f g) f).symm\n    let δ := conjugateEquiv ((a f).comp (a (pullback.fst f g)))\n      ((a g).comp (a (pullback.snd f g))) k.hom\n    (schemeDerivedGlobalSections Y).map (δ.app F) ≫\n        (mixedGlobalSectionsDirectImageIso g).hom.app\n          ((schemeDerivedDirectImage (pullback.snd f g)).obj F) ≫\n        (schemeGlobalScalarRestriction g).map\n          ((mixedGlobalSectionsDirectImageIso (pullback.snd f g)).hom.app F) =\n      (mixedGlobalSectionsDirectImageIso f).hom.app\n          ((schemeDerivedDirectImage (pullback.fst f g)).obj F) ≫\n        (schemeGlobalScalarRestriction f).map\n          ((mixedGlobalSectionsDirectImageIso (pullback.fst f g)).hom.app F) ≫\n        (schemeGlobalScalarSquareIso f (pullback.snd f g) g (pullback.fst f g)\n          pullback.condition).hom.app ((schemeDerivedGlobalSections (pullback f g)).obj F)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T125445-L-3874320",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T125445-L-3874320",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

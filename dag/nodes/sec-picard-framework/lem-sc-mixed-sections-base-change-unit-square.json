@@ -17,17 +17,17 @@
  ],
  "proof": [
   {
-   "text": "Expand canonical base change as the f-prime adjunct of pullback composition followed by pullback of the counit for f. Transpose with the g-unit, move units by naturality, and cancel the f-unit and counit by the triangle identity. The remaining sheaf map is the g_X-unit followed by the canonical derived direct-image composition comparison.",
+   "text": "Apply the abstract unit_mateEquiv identity twice, using iterated_mateEquiv_conjugateEquiv, to the canonical derived pullback-composition square. Unfold the fixed base-change map to identify its adjunct with that mate. This proves the sheaf-level unit square without any sections comparison.",
    "uses": [
     "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
   },
   {
-   "text": "Apply derived sections. On underived sections the Leray comparisons are identity, and the two scalar actions agree by pullback.condition. The right-derived-unit equations for Leray and composition identify both pasted comparisons on K-injective representatives, then on the full derived categories by right-derived uniqueness. The identity scalar comparison is schemeGlobalScalarSquareIso, giving the displayed equation.",
+   "text": "Apply derived global sections to the sheaf-level unit square. The proved private categorical pasting lemma mixed_sections_paste combines naturality of mixedGlobalSectionsDirectImageIso g at base change, mixedSections_square_comparison_coherence at Lg_X* E, and naturality of mixedGlobalSectionsDirectImageIso f at the g_X-unit, using functoriality and associativity. Instantiating that lemma gives the displayed equality without expensive repeated unfolding of the scheme-derived definitions.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-sc-mixed-sections-square-comparison-coherence",
     "lem-sc-mixed-global-sections-direct-image-iso",
     "def-pc-global-hom-pullback-comparison"
    ],
@@ -36,15 +36,16 @@
  ],
  "proof_deps": [
   "def-pc-derived-base-change-map",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-mixed-sections-square-comparison-coherence",
   "lem-sc-mixed-global-sections-direct-image-iso",
   "def-pc-global-hom-pullback-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "V4",
+  "by": "worker",
+  "group": "B3",
   "date": "2026-10-13",
-  "note": "Explicit intermediate step of the parent proof; cited Stacks sources read online, refining their constructions to pinned Lean comparisons and independent localization universes."
+  "note": "Complete Lean mate-unit and categorical naturality proof; normalized sections comparison coherence is split into a strictly smaller intermediate theorem. The private pasting helper keeps compilation below the single-file time limit."
  },
  "mathlib_searches": [
   {
@@ -132,9 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T113357-L-3188895",
-  "kind": "interface"
+  "landing": "20261013T125445-L-3874320",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

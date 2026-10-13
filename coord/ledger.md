@@ -12529,3 +12529,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:50 L: merged deliver/Y3/Sheaf.Paper.CechHorseshoeLiftClass (stage 3; reviewer PASS; first push; landing 20261013T125017-L-3839209 (interface); batch 20261013T125004; modules 2; new nodes 1)
 - 12:50 L: returned deliver/Q4/Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange (reviewer RETURN: (reviewer X-3935d, head 3935d42e2) H10 / reader gate: Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeSurjective)
 - 12:54 L: merged deliver/A2/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryComponentNaturality (stage 3; reviewer PASS; first push; landing 20261013T125444-L-3874183 (proof); batch 20261013T125443; modules 1; new nodes 0)
+- 12:54 L: merged deliver/B3/Sheaf.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare (stage 3; reviewer PASS; first push; landing 20261013T125445-L-3874320 (interface); batch 20261013T125443; modules 2; new nodes 1)
