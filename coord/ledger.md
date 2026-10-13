@@ -13120,3 +13120,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:17 L: merged deliver/H1/Sheaf.Paper.ModuleCupGodementCosimplicialExists (stage 3; reviewer PASS; first push; landing 20261013T161729-L-1460232 (interface); batch 20261013T161725; modules 3; new nodes 2)
 - 16:17 L: merged deliver/H3/Sheaf.Algebra.Homology.AffineBaseChangeOrdinaryStalkComparison (stage 3; reviewer PASS; first push; landing 20261013T161729-L-1460333 (interface); batch 20261013T161725; modules 3; new nodes 2)
 - 16:17 L: merged deliver/J2/Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorProperties (stage 3; reviewer PASS; first push; landing 20261013T161729-L-1460480 (interface); batch 20261013T161725; modules 3; new nodes 2)
+- 16:17 L: merged deliver/K1/Sheaf.RingTheory.PointedEtaleFiltered (stage 3; reviewer PASS; first push; landing 20261013T161730-L-1460648 (proof); batch 20261013T161725; modules 1; new nodes 0)

@@ -12,20 +12,40 @@
  ],
  "proof": [
   {
-   "text": "Identity, tensor-product successors, and the iterated tensor equalizer construction establish filteredness.",
+   "text": "The identity R-algebra equipped with the structural map to K is an object, so the category is nonempty.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For two pointed etale R-algebras S and T, form their pushout over R in CommAlgCat R. The structural maps to K agree on R, so the pushout universal property gives its pointing. Base change followed by composition makes this pushout etale over R, and its inclusions are pointed maps from S and T.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples"
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false
+  },
+  {
+   "text": "For parallel pointed maps f,g:S to T, let E be their pushout T tensor_S T and let D be T tensor_R T. There are maps m:D to E from the two inclusions, and d:D to T from the identity on both factors. Form U as the pushout of m and d. Maps between etale R-algebras are etale: hence the inclusion T to E, the multiplication d, the base change E to U, and their composites show that U is etale over R. The equalities of the pointings after f and g give E to K; the maps E to K and T to K agree on D and therefore give U to K.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write l,r:T to E for its two inclusions, k:E to U, and h:T to U for the final inclusion. The pushout equations give l followed by k = h and r followed by k = h. Since f followed by l = g followed by r, composition with k gives f followed by h = g followed by h. The map h respects the pointing by the last pushout equation. These constructions provide the three fields of IsFiltered; morphism extensionality lifts the ring-algebra equality to the full subcategory.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-triples"
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-composition-cancellation"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 04GW"
+  "place": "Tag 04GW, filteredness paragraphs; direct pointed-algebra pushout construction using Mathlib"
  },
  "mathlib_searches": [
   {
@@ -100,10 +120,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T155933-L-1302495",
-  "kind": "interface",
+  "landing": "20261013T161730-L-1460648",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
