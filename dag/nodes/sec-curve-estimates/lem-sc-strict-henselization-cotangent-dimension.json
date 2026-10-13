@@ -25,51 +25,49 @@
  ],
  "proof": [
   {
-   "text": "Use the strict-henselization triples description [lem-weil-pbc-strict-henselization-triples] with $\\mathfrak p=\\mathfrak m$ and $K=\\kappa^{\\mathrm{sep}}$. It identifies $R^{\\mathrm{sh}}$ with the colimit ring $C$, whose maximal ideal is $\\mathfrak m_C=\\mathfrak mR^{\\mathrm{sh}}$, and identifies its residue field with $\\kappa^{\\mathrm{sep}}$. The canonical map $R\\to R^{\\mathrm{sh}}$ is flat by faithful flatness [lem-sc-strict-henselization-faithfully-flat].",
+   "text": "Apply Algebra.strictHenselization_local_maximalIdeal to the given pointed-algebra strict henselization. It supplies an IsLocalRing instance on C and maximalIdeal C = (maximalIdeal R).map (algebraMap R C). Use IsStrictHenselization.triples_presentation to present this same C as a universal cocone of the residue-triple diagram, with the original structural map. Apply strictHenselization_faithfullyFlat to that cocone and convert its ring-hom faithful flatness into Module.FaithfullyFlat R C; in particular C is flat over R.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-ring-strict-henselization-local-maximal-ideal",
+    "lem-sc-strict-henselization-triples-presentation",
     "lem-sc-strict-henselization-faithfully-flat"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LN (lemma-henselization-regular), proof: use the strict henselization map and Tag 07QM part (1); algebra.tex Tags 04GW and 04GP for the maximal ideal and residue field"
+    "place": "Tag 07QM (1)-(2); pointed-algebra/triples comparison from algebra.tex Tag 04GW"
    }
   },
   {
-   "text": "Apply the conormal flat-base-change isomorphism [lem-weil-pbc-ideal-cotangent-flat-base-change-ring] to the flat map $R\\to R^{\\mathrm{sh}}$ and the ideal $\\mathfrak m$. Since the extended ideal is $\\mathfrak mR^{\\mathrm{sh}}=\\mathfrak m^{\\mathrm{sh}}$ by Step 1, it gives a canonical $R^{\\mathrm{sh}}$-linear isomorphism $(\\mathfrak m/\\mathfrak m^2)\\otimes_R R^{\\mathrm{sh}}\\xrightarrow{\\sim}\\mathfrak m^{\\mathrm{sh}}/(\\mathfrak m^{\\mathrm{sh}})^2$.",
+   "text": "Specialize Mathlib Ideal.tensorCotangentHom_injective_of_flat and Ideal.tensorCotangentHom_surjective to the base algebra R itself and the flat algebra C. They give bijectivity of C tensor_R I.Cotangent to the cotangent module of I extended to C tensor_R R. Transport the extended ideal and its cotangent module along Algebra.TensorProduct.rid R C C. The induced map on cotangent modules is bijective because the map induced by the inverse algebra equivalence is a two-sided inverse; check both compositions on the surjective maps Ideal.toCotangent. On pure tensors of cotangent classes, the composite is exactly LinearMap.liftBaseChange C (Ideal.mapCotangent I J (Algebra.ofId R C) h). Set I = maximalIdeal R and J = maximalIdeal C, using the equality from Step 1. This proves the exact canonical-map bijectivity in the statement.",
    "uses": [
-    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
-    "lem-sc-strict-henselization-faithfully-flat",
-    "lem-weil-pbc-strict-henselization-triples"
+    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma Tag 0473 (morphisms-lemma-conormal-functorial-flat), affine conormal calculation, specialized to the maximal ideal and strict henselization"
+    "place": "Tag 0473, affine conormal calculation"
    }
   },
   {
-   "text": "The $R$-action on $\\mathfrak m/\\mathfrak m^2$ factors through $R/\\mathfrak m=\\kappa$, while the $R^{\\mathrm{sh}}$-action on the target factors through $R^{\\mathrm{sh}}/\\mathfrak m^{\\mathrm{sh}}=\\kappa^{\\mathrm{sep}}$ by Step 1. Therefore the isomorphism of Step 2 is canonically the displayed base-change map $(\\mathfrak m/\\mathfrak m^2)\\otimes_{\\kappa}\\kappa^{\\mathrm{sep}}\\to\\mathfrak m^{\\mathrm{sh}}/(\\mathfrak m^{\\mathrm{sh}})^2$. A vector-space isomorphism preserves dimension, giving the final equality.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-triples"
-   ],
+   "text": "The maximal-ideal containment makes algebraMap R C a local homomorphism, so Mathlib supplies the canonical residue-field algebra structure. Turn the bijective C-linear map of Step 2 into a linear equivalence and base change it to the residue field l of C. The tensor associativity/cancellation equivalence identifies its source with l tensor_R CotangentSpace R. Surjectivity of R to its residue field k gives compatible scalar actions, hence a canonical l-linear equivalence from l tensor_k CotangentSpace R to l tensor_R CotangentSpace R. Similarly surjectivity of C to l identifies l tensor_C CotangentSpace C with CotangentSpace C. Compose these equivalences. Module.finrank_baseChange and LinearEquiv.finrank_eq give the asserted equality. No finite-dimensionality assumption is necessary for this finrank comparison.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LN, final minimal-generator/cotangent-space comparison; the scalar-factorization and dimension conclusion are elementary"
+    "place": "Tag 06LN, cotangent/minimal-generator comparison; elementary residue-field scalar extension"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
+  "lem-sc-strict-henselization-triples-presentation",
   "lem-sc-strict-henselization-faithfully-flat",
   "lem-weil-pbc-ideal-cotangent-flat-base-change-ring"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 06LN (lemma-henselization-regular), proof via minimal generators and Tag 07QM parts (1)-(2), with conormal base change Tag 0473"
+  "place": "Tag 06LN via Tag 07QM (1)-(2), with affine conormal base change Tag 0473; Lean transport through the existing local-maximal-ideal and triples-presentation lemmas, and elementary tensor scalar compatibility, by M4"
  },
  "mathlib_searches": [
   {
@@ -172,5 +170,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T171513-L-1981803",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
