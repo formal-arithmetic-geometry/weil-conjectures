@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-picard-constant-tensor-balanced-sections",
+ "kind": "statement",
+ "title": "Balanced sections of scalar-extended constant tensor coefficients",
+ "statement": "Let k be a field, Y a scheme, g:Y → Spec(k), M a k-module, and G a Y-module. Using the constant scalar-extension tensor presheaf and scalar restriction of sections [lem-sc-picard-constant-sections-tensor-basis], there exist additive equivalences e_V: (picardConstantSectionsTensor k Y g M G)(V) ≃ M tensor_k G(V) for every open V. For every a in O_Y(V), s in M, and t in G(V), e_V(a • e_V⁻¹(s tensor t)) = s tensor (a • t). For every restriction V ⊆ U and section x over U, e_V(res(x)) = (id_M tensor res)(e_U(x)).",
+ "stmt_deps": [
+  "lem-sc-picard-constant-sections-tensor-basis"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, degree-zero tensor calculation"
+ },
+ "proof": [
+  {
+   "text": "Construct the pointwise scalar-extension presheaf E(V)=O_Y(V) tensor_k M with restriction on the first factor. Its Hom equivalence with maps from constant M to scalar restriction, given by evaluation at 1 tensor s and extension a tensor s ↦ a times the image of s, identifies E with the chosen pullback by uniqueness of representing objects. After tensoring this natural isomorphism with G, use the balanced maps (a tensor s) tensor t ↦ s tensor (a*t) and s tensor t ↦ (1 tensor s) tensor t. Tensor relations make the maps well-defined and tensor induction proves the inverse identities. Multiplication by a structure-ring section acts on t. Restriction acts on the ring coefficient and t, so the same formulas prove the restriction identity.",
+   "uses": [
+    "lem-sc-picard-constant-sections-tensor-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-constant-sections-tensor-basis"
+ ],
+ "proof_origin": {
+  "by": "U4 worker; second reader supplied the representing-object identification",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, scalar tensor coefficient calculation; algebraic expansion written by agents, not a quotation of the geometric Kunneth theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product after extension of scalars is isomorphic to tensor product with restricted scalars",
+   "results": "Internal Server Error",
+   "available": false,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars of presheaf modules along identity computed pointwise tensor product",
+   "results": "PresheafOfModules.map_id, ModuleCat.extendScalarsId, PresheafOfModules.Monoidal.tensorObj; no sectionwise pullback comparison",
+   "verdict": "ingredients only; no exact match",
+   "available": true,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraTensorModule.cancelBaseChange",
+   "results": "unknown identifier in service index",
+   "verdict": "service did not resolve the declaration; local grep located it",
+   "available": true,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|leftAdjointUniq|extendScalars.*[Aa]dj",
+   "results": "Mathlib.LinearAlgebra.TensorProduct.Tower: AlgebraTensorModule.cancelBaseChange; Mathlib.CategoryTheory.Adjunction.Unique: Adjunction.leftAdjointUniq. Local presheaf Pullback defines the chosen adjoint; no exact pointwise comparison. Searched lean/Sheaf and found no duplicate balanced equivalence.",
+   "verdict": "algebraic cancellation available, but representing-object and naturality comparison still needed",
+   "available": true,
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExternalConstantSectionsTensorMap",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-external-constant-sections-tensor-map",
+   "place": "balanced section calculation",
+   "via": [
+    "lem-sc-external-constant-sections-tensor-map"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardConstantTensorBalancedSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardConstantTensorBalancedSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_picard_constant_tensor_balanced_sections",
+  "statement": "theorem exists_picard_constant_tensor_balanced_sections\n    (k : Type w) [Field k] (Y : Scheme.{w})\n    (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules) :\n    ∃ e : ∀ V : Y.Opens,\n        (picardConstantSectionsTensor k Y g M G).obj (op V) ≃+\n          (M ⊗[k] scalarObj g G (op V)),\n      (∀ (V : Y.Opens) (a : Γ(Y, V)) (s : M) (t : scalarObj g G (op V)),\n        e V (a • (e V).symm (s ⊗ₜ[k] t)) =\n          s ⊗ₜ[k] (show scalarObj g G (op V) from a • (show G.val.obj (op V) from t))) ∧\n      (∀ {U V : Y.Opensᵒᵖ} (i : U ⟶ V)\n          (x : (picardConstantSectionsTensor k Y g M G).obj U),\n        e V.unop ((picardConstantSectionsTensor k Y g M G).map i x) =\n          ((scalarPresheaf g G ⋙ MonoidalCategory.tensorLeft M).map i) (e U.unop x))",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T141534-L-381502",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T141534-L-381502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
