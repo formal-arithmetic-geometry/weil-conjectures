@@ -692,7 +692,6 @@ public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.SpreadOut
 public import WeilConjectures.AlgebraicGeometry.TorsionAbelianBaseChange
 public import WeilConjectures.AlgebraicGeometry.TorsionAbelianBaseChangeCancellation
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
-public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyRest
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.BaseChange
