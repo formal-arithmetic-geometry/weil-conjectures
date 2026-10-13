@@ -131,7 +131,6 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeNorm
 public import WeilConjectures.AlgebraicGeometry.Bertini
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.CechNerve
-public import WeilConjectures.AlgebraicGeometry.ChowFactorization
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.EmbeddingOver
@@ -284,7 +283,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GenericPoi
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.Induction
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.Specialization
-public import WeilConjectures.AlgebraicGeometry.EtaleInjectiveRetract
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeSections
@@ -588,16 +586,12 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceBaseChangeReduction
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Mul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Sheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
-public import WeilConjectures.AlgebraicGeometry.ProperBaseChangeCompositionStability
-public import WeilConjectures.AlgebraicGeometry.ProperBaseChangeTargetLocality
-public import WeilConjectures.AlgebraicGeometry.QcqsHigherDirectImage
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.RelativeGluing.BaseChange
@@ -695,14 +689,11 @@ public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSections
 public import WeilConjectures.AlgebraicGeometry.Sites.ZariskiSite
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.StalkAut
-public import WeilConjectures.AlgebraicGeometry.SymmetricProductPolynomial
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.CrossIdeal
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Slices
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.SpreadOut
-public import WeilConjectures.AlgebraicGeometry.TorsionAbelianBaseChange
-public import WeilConjectures.AlgebraicGeometry.TorsionAbelianBaseChangeCancellation
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
