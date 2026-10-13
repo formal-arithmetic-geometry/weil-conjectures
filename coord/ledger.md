@@ -12831,3 +12831,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:29 L: merged deliver/W4/Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncationsInjective (stage 3; reviewer PASS; first push; landing 20261013T142908-L-502061 (proof); batch 20261013T142848; modules 1; new nodes 0)
 - 14:29 L: merged deliver/X3/Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisStageRows (stage 3; reviewer PASS; first push; landing 20261013T142908-L-502179 (interface); batch 20261013T142848; modules 3; new nodes 2)
 - 14:29 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.OrdinaryEvaluationComponentFactorization (stage 3; reviewer PASS; first push; landing 20261013T142909-L-502335 (proof); batch 20261013T142848; modules 1; new nodes 0)
+- 14:33 L: returned deliver/U3/Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison (reviewer RETURN: (reviewer X-6c63c, head 6c63c3a37) B3: In dag/nodes/sec-picard-framework/lem-pc-standard-flat-single-base-change.json li)
