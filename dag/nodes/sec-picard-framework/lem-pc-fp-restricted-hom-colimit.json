@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-fp-restricted-hom-colimit",
+ "kind": "statement",
+ "title": "Uncurried maps from a finite presentation lift into a stage tensor module",
+ "statement": "Let $I$ be a nonempty directed partially ordered set, $F:I\\to\\mathrm{CRing}$ a functor, $A=\\operatorname{colim}_I F$ [def-weil-pbc-category-colimit], $i\\in I$, and $M,N$ be $F_i$-modules in a common universe containing the ring universe. Assume $M$ is finitely presented [def-sc-finitely-presented-module]. Given an $F_i$-linear map $h:M\\to\\operatorname{Res}_{F_i}^{A}(A\\otimes_{F_i}N)$, there exist $j\\ge i$ and an $F_i$-linear map $a:M\\to\\operatorname{Res}_{F_i}^{F_j}(F_j\\otimes_{F_i}N)$. For every $A$-linear isomorphism $e:A\\otimes_{F_i}N\\to A\\otimes_{F_j}(F_j\\otimes_{F_i}N)$ which sends $1\\otimes n$ to $1\\otimes(1\\otimes n)$, one has $e(h(x))=1\\otimes a(x)$ for every $x\\in M$. There is no finite-presentation assumption on $N$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05LI, algebra-lemma-module-map-property-in-colimit, proof of (3)"
+ },
+ "stmt_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Take finite generators of M and finite generators of the relation kernel, using finite presentation. Write their images under h as finite sums of pure tensors. Lift the finitely many ring coefficients to one stage j above i, giving tentative generator images in Fj tensor N.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finitely many relation combinations of the tentative images become zero over A. Apply eventual finite tensor vanishing to these elements of Fj tensor N, using the canonical comparison of successive tensor products. Enlarge j once so that all relations vanish. The tentative images then induce an Fi-linear map a from M.",
+   "uses": [
+    "lem-pc-finite-tensor-vanishing-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A comparison e with the stated unit-tensor formula agrees on arbitrary pure tensors by A-linearity, and hence on finite sums. Check e(h(x))=1 tensor a(x) on the chosen generators, then on their Fi-span, which is M.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-pc-finite-tensor-vanishing-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05LI, algebra-lemma-module-map-property-in-colimit, proof of (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Maps from finitely presented modules into tensor products commute with directed colimits of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear maps from a finitely presented module into tensor products with a directed colimit of rings lift to a later stage",
+   "results": "Submodule.FG.lTensor.directLimit_apply'; Submodule.FG.rTensor.directLimit_apply'; Submodule.FG.rTensor.directLimit_apply; Submodule.FG.lTensor.directLimit_apply; Submodule.FG.rTensor.directLimit; TensorProduct.fromDirectLimit; Submodule.FG.lTensor.directLimit; TensorProduct.toDirectLimit",
+   "date": "2026-10-13",
+   "verdict": "No exact match; constructions only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*cokernel.*colimit|exists.*restricted.*hom|tensor.*vanish.*colimit",
+   "results": "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; constructions only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.FinitePresentationColimit",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Finite-presentation module descent, Tag 05LI, algebra-lemma-module-map-property-in-colimit, proof of (3)",
+   "via": [
+    "lem-pc-fp-module-map-descent-affine"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.FinitePresentationRestrictedHomColimit",
+  "file": "lean/Sheaf/Algebra/FinitePresentationRestrictedHomColimit.lean",
+  "declaration": "ModuleCat.exists_stage_restricted_hom",
+  "statement": "theorem exists_stage_restricted_hom\n    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat) (i : I) (M N : ModuleCat.{max u v} (F.obj i))\n    [Module.FinitePresentation (F.obj i) M]\n    (h : M ⟶ (restrictScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj\n      ((extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj N)) :\n    ∃ (j : I) (hij : i ≤ j),\n      let rij := CommRingCat.Hom.hom (F.map (homOfLE hij))\n      let rj := CommRingCat.Hom.hom (colimit.ι F j)\n      let ri := CommRingCat.Hom.hom (colimit.ι F i)\n      ∃ (a : M ⟶ (restrictScalars rij).obj ((extendScalars rij).obj N)),\n        ∀ (e : (extendScalars ri).obj N ≅\n          (extendScalars rj).obj ((extendScalars rij).obj N)),\n          (∀ n : N, e.hom ((1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj i, ri] n) =\n            (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj]\n              ((1 : ↑(F.obj j)) ⊗ₜ[F.obj i, rij] n)) →\n          ∀ m : M, e.hom (h m) =\n            (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj] (a m)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-54aec",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T100207-L-2499385",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-54aec",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T100207-L-2499385",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures and proofs with their DAG nodes, the recorded universe correction, and Stacks sources https://stacks.math.columbia.edu/tag/05N7 and https://stacks.math.columbia.edu/tag/05LI; four delivery modules and seven direct importers compile cleanly; axiom checks agree with the two declared remaining holes."
+ }
+}

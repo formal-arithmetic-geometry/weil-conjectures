@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-finite-relation-cokernel-colimit",
+ "kind": "statement",
+ "title": "Finite relation cokernels descend along a directed ring colimit",
+ "statement": "Let $I$ be a nonempty directed partially ordered set, $F:I\\to\\mathrm{CRing}$ a functor, and $A=\\operatorname{colim}_I F$ [def-weil-pbc-category-colimit]. For natural numbers $m,n$ and an $A$-linear map $q:A^m\\to A^n$, there exist $i\\in I$ and an $F_i$-linear map $q_i:F_i^m\\to F_i^n$ such that extension of scalars along $F_i\\to A$ identifies $F_i^n/\\operatorname{im}(q_i)$ with $A^n/\\operatorname{im}(q)$. The quotients may be transported to any module universe containing the ring universe using the canonical universe-lift equivalence. No module finite-presentation hypothesis or conclusion is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7, algebra-lemma-colimit-category-fp-modules, proof of (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Use the standard finite bases to write q as an n by m matrix. Lift its finitely many entries to a common stage by the elementwise representation criterion and directedness. Define qi by the represented matrix.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensoring a cokernel presentation is right exact. Identify the extensions of the two finite free modules by their standard bases. Under these identifications the represented matrix becomes q; the induced quotient comparison is an isomorphism. Transport through the canonical ULift linear equivalences when a larger module universe is requested.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7, algebra-lemma-colimit-category-fp-modules, proof of (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite relation matrix cokernels descend along directed colimits of commutative rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented modules over a directed colimit of rings descend to a stage by lifting a finite presentation matrix",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂; ModuleCat.FilteredColimits.M.mk_surjective; Module.FinitePresentation.exists_fin; isFinitelyPresentable; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; ModuleCat.directLimitIsColimit; Module.FinitePresentation.trans",
+   "date": "2026-10-13",
+   "verdict": "No exact match; constructions only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*cokernel.*colimit|exists.*restricted.*hom|tensor.*vanish.*colimit",
+   "results": "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; constructions only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.FinitePresentationColimit",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Finite-presentation module descent, Tag 05N7, algebra-lemma-colimit-category-fp-modules, proof of (1)",
+   "via": [
+    "lem-pc-fp-module-map-descent-affine"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.FiniteRelationCokernelColimit",
+  "file": "lean/Sheaf/Algebra/FiniteRelationCokernelColimit.lean",
+  "declaration": "ModuleCat.exists_stage_finite_relation_cokernel",
+  "statement": "theorem exists_stage_finite_relation_cokernel\n    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat) (n m : ℕ)\n    (q : (Fin m → (colimit F : CommRingCat)) →ₗ[(colimit F : CommRingCat)]\n      (Fin n → (colimit F : CommRingCat))) :\n    ∃ (i : I) (qi : (Fin m → F.obj i) →ₗ[F.obj i] (Fin n → F.obj i)),\n      Nonempty ((extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj\n        (ModuleCat.of (F.obj i) (ULift.{v} ((Fin n → F.obj i) ⧸ LinearMap.range qi))) ≅\n        ModuleCat.of (colimit F : CommRingCat)\n          (ULift.{v} ((Fin n → (colimit F : CommRingCat)) ⧸ LinearMap.range q)))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-54aec",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T100207-L-2499385",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-54aec",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T100207-L-2499385",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures and proofs with their DAG nodes, the recorded universe correction, and Stacks sources https://stacks.math.columbia.edu/tag/05N7 and https://stacks.math.columbia.edu/tag/05LI; four delivery modules and seven direct importers compile cleanly; axiom checks agree with the two declared remaining holes."
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-finite-tensor-vanishing-colimit",
+ "kind": "statement",
+ "title": "Finite lists of stage module elements vanish at a common later tensor stage",
+ "statement": "Let $I$ be a nonempty directed partially ordered set, $F:I\\to\\mathrm{CRing}$ a functor, and $A=\\operatorname{colim}_I F$ [def-weil-pbc-category-colimit]. Fix $i\\in I$, an arbitrary $F_i$-module $N$, and a finite subset $s\\subset N$. If $1\\otimes n=0$ in $A\\otimes_{F_i}N$ for every $n\\in s$, there exists $j\\ge i$ such that $1\\otimes n=0$ in $F_j\\otimes_{F_i}N$ for every $n\\in s$. No generation or presentation assumption on $N$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05LI, algebra-lemma-module-map-property-in-colimit, proof of (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the eventual-zero clause of TensorProduct.directedColimitBaseChangeElementwise with base stage i to the tensor 1 tensor n at i. Its image is the final unit tensor, hence is zero by the hypothesis. The resulting transition image is the unit tensor at a later stage.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The linear tensor map induced by the stage ring homomorphism sends a unit tensor to the same unit tensor at the later stage and sends zero to zero. Induction on s, combining the singleton stage and the remaining finite set stage at a common upper bound, proves simultaneous vanishing. For the empty set take i.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-directed-colimit-base-change-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05LI (1); second reading by V4 realizes the tensor-colimit step with the existing proved directed base-change elementwise theorem, then finite-set induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely many elements of a module that vanish after tensoring with a directed colimit of rings vanish at one later stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many module elements vanish at a later stage if their unit tensors vanish over the directed ring colimit",
+   "results": "TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective; Submodule.FG.lTensor.directLimit_apply'; Submodule.FG.rTensor.directLimit_apply'; TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero_of_rTensor_injective; TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero; TensorProduct.vanishesTrivially_iff_sum_tmul_eq_zero_of_rTensor_injective; Submodule.FG.rTensor.directLimit_apply; Submodule.FG.lTensor.directLimit_apply",
+   "date": "2026-10-13",
+   "verdict": "No exact match; constructions only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*cokernel.*colimit|exists.*restricted.*hom|tensor.*vanish.*colimit",
+   "results": "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; constructions only"
+  },
+  {
+   "tool": "grep",
+   "query": "directed-colimit-base-change-elementwise; tensor.*eventual; tensor.*zero in lean/Sheaf/Paper and dag/nodes",
+   "results": "TensorProduct.directedColimitBaseChangeElementwise in Sheaf.Paper.DirectedColimitBaseChangeElementwise is proved and supplies eventual zero for one tensor. Used to prove this finite-set corollary in the second reading.",
+   "date": "2026-10-13",
+   "verdict": "existing library theorem used; no new hole"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.FinitePresentationColimit",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Finite-presentation module descent, Tag 05LI, algebra-lemma-module-map-property-in-colimit, proof of (1)",
+   "via": [
+    "lem-pc-fp-module-map-descent-affine"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.FiniteTensorVanishingColimit",
+  "file": "lean/Sheaf/Algebra/FiniteTensorVanishingColimit.lean",
+  "declaration": "ModuleCat.exists_stage_finite_tensor_vanishing",
+  "statement": "theorem exists_stage_finite_tensor_vanishing\n    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat) (i : I) (N : ModuleCat (F.obj i)) (s : Finset N)\n    (hs : ∀ n ∈ s,\n      (1 : ↑(colimit F)) ⊗ₜ[F.obj i,CommRingCat.Hom.hom (colimit.ι F i)] n = 0) :\n    ∃ (j : I) (hij : i ≤ j), ∀ n ∈ s,\n      (1 : F.obj j) ⊗ₜ[F.obj i,CommRingCat.Hom.hom (F.map (homOfLE hij))] n = 0",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-54aec",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T100207-L-2499385",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-54aec",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T100207-L-2499385",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures and proofs with their DAG nodes, the recorded universe correction, and Stacks sources https://stacks.math.columbia.edu/tag/05N7 and https://stacks.math.columbia.edu/tag/05LI; four delivery modules and seven direct importers compile cleanly; axiom checks agree with the two declared remaining holes."
+ }
+}

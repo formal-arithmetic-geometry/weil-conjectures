@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Finite-presentation modules over a filtered colimit of rings",
- "statement": "Let I be a directed set and let (A_i)_{i\\in I} be a directed system of commutative rings with colimit A [def-weil-pbc-category-colimit]. Then the category of finitely presented A-modules [def-sc-finitely-presented-module] is the colimit, under extension of scalars, of the categories of finitely presented A_i-modules: every finitely presented A-module is isomorphic to M_i\\otimes_{A_i}A for some i and finitely presented M_i; every A-linear map between two such fixed base changes is the base change of an A_j-linear map between their base changes at some j\\ge i; and two maps at a stage that become equal over A become equal after passage to a later stage.",
+ "statement": "Let I be a directed set and let (A_i)_{i\\in I} be a directed system of commutative rings with colimit A [def-weil-pbc-category-colimit]. Then the category of finitely presented A-modules [def-sc-finitely-presented-module] is the colimit, under extension of scalars, of the categories of finitely presented A_i-modules: every finitely presented A-module is isomorphic to M_i\\otimes_{A_i}A for some i and finitely presented M_i; every A-linear map between two such fixed base changes is the base change of an A_j-linear map between their base changes at some j\\ge i; and two maps at a stage that become equal over A become equal after passage to a later stage. Universe convention in Lean: for rings in $\\mathrm{Type}\\ u$, the three clauses independently use modules in $\\mathrm{Type}\\ (\\max(u,v))$, $\\mathrm{Type}\\ (\\max(u,w))$, and $\\mathrm{Type}\\ (\\max(u,z))$; each stage model and its extension have the same module universe.",
  "source": {
   "document": "literature/stacks-project/limits.tex",
   "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, first proof (affine case) via Algebra, Lemma algebra-lemma-colimit-category-fp-modules"
@@ -22,46 +22,36 @@
  ],
  "proof": [
   {
-   "text": "Choose a finite presentation A^{\\oplus m} \\to A^{\\oplus n} \\to M \\to 0. The matrix entries have representatives in some A_i by the elementwise description of the filtered colimit. Let M_i be the cokernel of the represented matrix over A_i. After tensoring its presentation with A, the matrix is the original one, so M_i\\otimes_{A_i}A is canonically isomorphic to M.",
+   "text": "Choose a finite free presentation with Mathlib Module.FinitePresentation.exists_fin'. Apply finite relation cokernel descent to its relation map. Construct the stage module as the ULift of the quotient by the range of the descended relation map. Prove finite presentation by the surjective quotient map and the finitely generated range of a map from a finite free module. Identify its final extension with N using exactness and the quotient-by-kernel linear equivalence.",
    "uses": [
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-pc-finite-relation-cokernel-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7, proof of (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix a stage i and finitely presented A_i-modules M_i,N_i, with presentations A_i^r \\xrightarrow{R_M} A_i^s \\to M_i \\to 0 and A_i^p \\xrightarrow{R_N} A_i^q \\to N_i \\to 0. For an A-linear map M_i\\otimes_{A_i}A \\to N_i\\otimes_{A_i}A, choose coefficient vectors in A^q for the images of the s generators of M_i and lift their finitely many entries to one later stage A_j by clause (1) of [lem-pc-filtered-colimit-commrings-elementwise]. For each of the finitely many columns of R_M, its image under the proposed map is zero in (N_i\\otimes_{A_i}A)=\\operatorname{coker}(R_N\\otimes A); therefore its coefficient vector d_t in A^q is in the image of R_N\\otimes A, so choose b_t\\in A^p with d_t=(R_N\\otimes A)b_t. Lift all entries of the finitely many b_t to a common later stage j by clause (1), and let d_t^{(j)}\\in A_j^q be the combination of the lifted generator vectors with coefficients the t-th column of R_M, so that d_t^{(j)} maps to d_t. Each coordinate of d_t^{(j)}-R_Nb_t (lifted b_t) then maps to zero in A, so clause (2), applied to comparison with 0 and then combined by directedness, makes all these finitely many coordinate equalities hold at one further stage j'. The lifted generator vectors therefore kill the relations R_M there and define an A_{j'}-linear map M_i\\otimes_{A_i}A_{j'}\\to N_i\\otimes_{A_i}A_{j'} whose base change is the given map.",
+   "text": "Uncurry f by the extension-restriction adjunction. Apply restricted Hom lifting. Construct eM and eN from extendScalarsComp and colimit cocone compatibility; Mathlib gives their pure-tensor equations. Curry the lifted map a to g. Prove the required square using ExtendScalars.hom_ext, the equation for eM, the formula for extension on pure tensors, and the lifting equation for eN.",
    "uses": [
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-pc-fp-restricted-hom-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7, proof of (2), via Lemma module-map-property-in-colimit"
-   }
+   "elementary": false
   },
   {
-   "text": "For two A_i-linear maps M_i \\rightrightarrows N_i whose base changes to A are equal, use a finite presentation A_i^p \\xrightarrow{R_N} A_i^q \\to N_i\\to0 and compare their values on finite generators of M_i. For each generator, the difference \\varphi(x_k)-\\psi(x_k)\\in N_i is the image of a coefficient vector c_k\\in A_i^q, and the class of the image of c_k in A^q is zero in (N_i\\otimes_{A_i}A)=\\operatorname{coker}(R_N\\otimes A); hence choose b_k\\in A^p with (image of c_k)=(R_N\\otimes A)b_k. Lift all entries of the finitely many b_k to one stage by clause (1) of [lem-pc-filtered-colimit-commrings-elementwise]. Each coordinate of c_k-R_Nb_k (c_k pushed to that stage) maps to zero in A, and clause (2), followed by a common directed enlargement, makes all these coordinate equalities hold at one later stage. The differences then vanish in N_i\\otimes_{A_i}A_{j'} on generators, j' that stage, so the two maps become equal after passage to that stage.",
+   "text": "Choose finite generators s of M using Module.Finite.fg_top. The hypothesis on f and g implies that unit tensors of f(m)-g(m), for m in s, vanish over A. Apply finite tensor vanishing to their finite image set. At the resulting stage, the uncurried extensions agree on s, so LinearMap.ext_on makes them equal. Injectivity of the adjunction Hom equivalence gives equality of the extended maps.",
    "uses": [
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-pc-finite-tensor-vanishing-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7, proof of (3), via Lemma module-map-property-in-colimit"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-filtered-colimit-commrings-elementwise"
+  "lem-pc-finite-relation-cokernel-colimit",
+  "lem-pc-fp-restricted-hom-colimit",
+  "lem-pc-finite-tensor-vanishing-colimit"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7"
+  "place": "Tags 05N7 and 05LI, finite relation cokernels, uncurried maps, and finite generator differences; Lean assembly by V4"
  },
  "mathlib_searches": [
   {
@@ -123,10 +113,10 @@
   "module": "Sheaf.Algebra.FinitePresentationColimit",
   "declaration": "ModuleCat.finitePresentation_descent_directedColimit",
   "file": "lean/Sheaf/Algebra/FinitePresentationColimit.lean",
-  "statement": "theorem finitePresentation_descent_directedColimit {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat) : (∀ (N : ModuleCat (colimit F : CommRingCat)), Module.FinitePresentation (colimit F : CommRingCat) N → ∃ (i : I) (M : ModuleCat (F.obj i)), Module.FinitePresentation (F.obj i) M ∧ Nonempty ((extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj M ≅ N)) ∧ (∀ (i : I) (M N : ModuleCat (F.obj i)), Module.FinitePresentation (F.obj i) M → Module.FinitePresentation (F.obj i) N → ∀ (f : (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj M ⟶ (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj N), ∃ (j : I) (hij : i ≤ j), let rij := CommRingCat.Hom.hom (F.map (homOfLE hij)) let rj := CommRingCat.Hom.hom (colimit.ι F j) let ri := CommRingCat.Hom.hom (colimit.ι F i) ∃ (g : (extendScalars rij).obj M ⟶ (extendScalars rij).obj N) (eM : (extendScalars ri).obj M ≅ (extendScalars rj).obj ((extendScalars rij).obj M)) (eN : (extendScalars ri).obj N ≅ (extendScalars rj).obj ((extendScalars rij).obj N)), (∀ m : M, eM.hom ((1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj i, ri] m) = (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj] ((1 : ↑(F.obj j)) ⊗ₜ[F.obj i, rij] m)) ∧ (∀ n : N, eN.hom ((1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj i, ri] n) = (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj] ((1 : ↑(F.obj j)) ⊗ₜ[F.obj i, rij] n)) ∧ f ≫ eN.hom = eM.hom ≫ (extendScalars rj).map g) ∧ (∀ (i : I) (M N : ModuleCat (F.obj i)), Module.FinitePresentation (F.obj i) M → Module.FinitePresentation (F.obj i) N → ∀ (f g : M ⟶ N), (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).map f = (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).map g → ∃ (j : I) (hij : i ≤ j), (extendScalars (CommRingCat.Hom.hom (F.map (homOfLE hij)))).map f = (extendScalars (CommRingCat.Hom.hom (F.map (homOfLE hij)))).map g)",
+  "statement": "theorem finitePresentation_descent_directedColimit\n    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat) :\n    (∀ (N : ModuleCat.{max u v} (colimit F : CommRingCat)),\n      Module.FinitePresentation (colimit F : CommRingCat) N →\n      ∃ (i : I) (M : ModuleCat.{max u v} (F.obj i)), Module.FinitePresentation (F.obj i) M ∧\n        Nonempty ((extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj M ≅ N)) ∧\n    (∀ (i : I) (M N : ModuleCat.{max u w} (F.obj i)),\n      Module.FinitePresentation (F.obj i) M →\n      Module.FinitePresentation (F.obj i) N →\n      ∀ (f : (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj M ⟶\n          (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj N),\n        ∃ (j : I) (hij : i ≤ j),\n          let rij := CommRingCat.Hom.hom (F.map (homOfLE hij))\n          let rj := CommRingCat.Hom.hom (colimit.ι F j)\n          let ri := CommRingCat.Hom.hom (colimit.ι F i)\n          ∃ (g : (extendScalars rij).obj M ⟶ (extendScalars rij).obj N)\n            (eM : (extendScalars ri).obj M ≅\n              (extendScalars rj).obj ((extendScalars rij).obj M))\n            (eN : (extendScalars ri).obj N ≅\n              (extendScalars rj).obj ((extendScalars rij).obj N)),\n            (∀ m : M,\n              eM.hom ((1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj i, ri] m) =\n                (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj]\n                  ((1 : ↑(F.obj j)) ⊗ₜ[F.obj i, rij] m)) ∧\n            (∀ n : N,\n              eN.hom ((1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj i, ri] n) =\n                (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj]\n                  ((1 : ↑(F.obj j)) ⊗ₜ[F.obj i, rij] n)) ∧\n            f ≫ eN.hom = eM.hom ≫ (extendScalars rj).map g) ∧\n    (∀ (i : I) (M N : ModuleCat.{max u z} (F.obj i)),\n      Module.FinitePresentation (F.obj i) M →\n      Module.FinitePresentation (F.obj i) N →\n      ∀ (f g : M ⟶ N),\n        (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).map f =\n          (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).map g →\n        ∃ (j : I) (hij : i ≤ j),\n          (extendScalars (CommRingCat.Hom.hom (F.map (homOfLE hij)))).map f =\n            (extendScalars (CommRingCat.Hom.hom (F.map (homOfLE hij)))).map g)",
   "branch": "sheaf-dag",
-  "by": "E1",
-  "date": "2026-10-11",
+  "by": "V4",
+  "date": "2026-10-13",
   "existing": false
  },
  "reviewed_lean": {
@@ -148,5 +138,100 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "V4 stage 2",
+  "old_statement": "Let I be a directed set and let (A_i)_{i\\in I} be a directed system of commutative rings with colimit A [def-weil-pbc-category-colimit]. Then the category of finitely presented A-modules [def-sc-finitely-presented-module] is the colimit, under extension of scalars, of the categories of finitely presented A_i-modules: every finitely presented A-module is isomorphic to M_i\\otimes_{A_i}A for some i and finitely presented M_i; every A-linear map between two such fixed base changes is the base change of an A_j-linear map between their base changes at some j\\ge i; and two maps at a stage that become equal over A become equal after passage to a later stage.",
+  "what": "The original Lean independently generalizes hidden module universes. In the object clause the final module is in max(u,v) but the requested stage model is in v, which need not contain the ring universe u. A constant directed diagram of a field whose cardinality exceeds that of any Type v carrier has no nonzero Type v module, whereas its regular module is finitely presented. Explicit module universes max(u,v), max(u,w), max(u,z) repair this source-mismatched size constraint. Ring, index, and all algebraic hypotheses and conclusions are unchanged.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Tag 05N7, algebra-lemma-colimit-category-fp-modules, all clauses; stage modules and scalar extensions in a common universe"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-affine-differential-colimit-descent",
+    "holds": true,
+    "note": "The mathematical object, map, and eventual-equality clauses are preserved; intended same-universe ring/module uses specialize v=w=z=u. No existing Lean proof calls the declaration."
+   },
+   {
+    "id": "lem-pc-affine-flat-module-descent",
+    "holds": true,
+    "note": "The mathematical object, map, and eventual-equality clauses are preserved; intended same-universe ring/module uses specialize v=w=z=u. No existing Lean proof calls the declaration."
+   },
+   {
+    "id": "lem-pc-affine-perfect-chain-map-descent",
+    "holds": true,
+    "note": "The mathematical object, map, and eventual-equality clauses are preserved; intended same-universe ring/module uses specialize v=w=z=u. No existing Lean proof calls the declaration."
+   },
+   {
+    "id": "lem-pc-affine-perfect-homotopy-descent",
+    "holds": true,
+    "note": "The mathematical object, map, and eventual-equality clauses are preserved; intended same-universe ring/module uses specialize v=w=z=u. No existing Lean proof calls the declaration."
+   },
+   {
+    "id": "lem-pc-finite-projective-graded-colimit-descent",
+    "holds": true,
+    "note": "The mathematical object, map, and eventual-equality clauses are preserved; intended same-universe ring/module uses specialize v=w=z=u. No existing Lean proof calls the declaration."
+   },
+   {
+    "id": "lem-pc-fp-module-map-descent",
+    "holds": true,
+    "note": "The mathematical object, map, and eventual-equality clauses are preserved; intended same-universe ring/module uses specialize v=w=z=u. No existing Lean proof calls the declaration."
+   },
+   {
+    "id": "lem-sc-bounded-free-stalk-complex-local-lift",
+    "holds": true,
+    "note": "The mathematical object, map, and eventual-equality clauses are preserved; intended same-universe ring/module uses specialize v=w=z=u. No existing Lean proof calls the declaration."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Choose a finite presentation A^{\\oplus m} \\to A^{\\oplus n} \\to M \\to 0. The matrix entries have representatives in some A_i by the elementwise description of the filtered colimit. Let M_i be the cokernel of the represented matrix over A_i. After tensoring its presentation with A, the matrix is the original one, so M_i\\otimes_{A_i}A is canonically isomorphic to M.",
+    "uses": [
+     "lem-pc-filtered-colimit-commrings-elementwise"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/algebra.tex",
+     "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7, proof of (1)"
+    }
+   },
+   {
+    "text": "Fix a stage i and finitely presented A_i-modules M_i,N_i, with presentations A_i^r \\xrightarrow{R_M} A_i^s \\to M_i \\to 0 and A_i^p \\xrightarrow{R_N} A_i^q \\to N_i \\to 0. For an A-linear map M_i\\otimes_{A_i}A \\to N_i\\otimes_{A_i}A, choose coefficient vectors in A^q for the images of the s generators of M_i and lift their finitely many entries to one later stage A_j by clause (1) of [lem-pc-filtered-colimit-commrings-elementwise]. For each of the finitely many columns of R_M, its image under the proposed map is zero in (N_i\\otimes_{A_i}A)=\\operatorname{coker}(R_N\\otimes A); therefore its coefficient vector d_t in A^q is in the image of R_N\\otimes A, so choose b_t\\in A^p with d_t=(R_N\\otimes A)b_t. Lift all entries of the finitely many b_t to a common later stage j by clause (1), and let d_t^{(j)}\\in A_j^q be the combination of the lifted generator vectors with coefficients the t-th column of R_M, so that d_t^{(j)} maps to d_t. Each coordinate of d_t^{(j)}-R_Nb_t (lifted b_t) then maps to zero in A, so clause (2), applied to comparison with 0 and then combined by directedness, makes all these finitely many coordinate equalities hold at one further stage j'. The lifted generator vectors therefore kill the relations R_M there and define an A_{j'}-linear map M_i\\otimes_{A_i}A_{j'}\\to N_i\\otimes_{A_i}A_{j'} whose base change is the given map.",
+    "uses": [
+     "lem-pc-filtered-colimit-commrings-elementwise"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/algebra.tex",
+     "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7, proof of (2), via Lemma module-map-property-in-colimit"
+    }
+   },
+   {
+    "text": "For two A_i-linear maps M_i \\rightrightarrows N_i whose base changes to A are equal, use a finite presentation A_i^p \\xrightarrow{R_N} A_i^q \\to N_i\\to0 and compare their values on finite generators of M_i. For each generator, the difference \\varphi(x_k)-\\psi(x_k)\\in N_i is the image of a coefficient vector c_k\\in A_i^q, and the class of the image of c_k in A^q is zero in (N_i\\otimes_{A_i}A)=\\operatorname{coker}(R_N\\otimes A); hence choose b_k\\in A^p with (image of c_k)=(R_N\\otimes A)b_k. Lift all entries of the finitely many b_k to one stage by clause (1) of [lem-pc-filtered-colimit-commrings-elementwise]. Each coordinate of c_k-R_Nb_k (c_k pushed to that stage) maps to zero in A, and clause (2), followed by a common directed enlargement, makes all these coordinate equalities hold at one later stage. The differences then vanish in N_i\\otimes_{A_i}A_{j'} on generators, j' that stage, so the two maps become equal after passage to that stage.",
+    "uses": [
+     "lem-pc-filtered-colimit-commrings-elementwise"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/algebra.tex",
+     "place": "Algebra, Lemma algebra-lemma-colimit-category-fp-modules, Tag 05N7, proof of (3), via Lemma module-map-property-in-colimit"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-filtered-colimit-commrings-elementwise"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-54aec",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T100207-L-2499385",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures and proofs with their DAG nodes, the recorded universe correction, and Stacks sources https://stacks.math.columbia.edu/tag/05N7 and https://stacks.math.columbia.edu/tag/05LI; four delivery modules and seven direct importers compile cleanly; axiom checks agree with the two declared remaining holes."
  }
 }
