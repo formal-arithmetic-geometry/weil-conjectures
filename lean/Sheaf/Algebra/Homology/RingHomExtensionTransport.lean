@@ -22,6 +22,134 @@ open CategoryTheory CategoryTheory.Limits Opposite TensorProduct
 
 namespace CategoryTheory
 
+private theorem point_eq (U : (Discrete PUnit.{u + 1})ᵒᵖ) :
+    U = op ⟨PUnit.unit⟩ := by
+  rcases U with ⟨⟨⟨⟩⟩⟩
+  rfl
+
+private theorem slice_eq (W : (Over (⟨PUnit.unit⟩ : Discrete PUnit.{u + 1}))ᵒᵖ) :
+    W = op (Over.mk (𝟙 (⟨PUnit.unit⟩ : Discrete PUnit.{u + 1}))) := by
+  rcases W with ⟨⟨⟨⟨⟩⟩, ⟨⟨⟩⟩, f⟩⟩
+  rfl
+
+private noncomputable def pointLift {A : Type u} [CommRing A]
+    (M N : RingSiteModules A)
+    (f : M.val.obj (op ⟨PUnit.unit⟩) →ₗ[A] N.val.obj (op ⟨PUnit.unit⟩)) : M ⟶ N where
+  val :=
+    { app := fun U ↦ by
+        have hU := point_eq U
+        subst U
+        exact ModuleCat.ofHom f
+      naturality := by
+        intro U V i
+        have hU := point_eq U
+        subst U
+        have hV := point_eq V
+        subst V
+        have hi : i = 𝟙 (op (⟨PUnit.unit⟩ : Discrete PUnit.{u + 1})) :=
+          Subsingleton.elim _ _
+        subst i
+        ext x
+        simp }
+
+private noncomputable def pointHomEquiv {A : Type u} [CommRing A]
+    (M N : RingSiteModules A) :
+    (SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf A) M N).val.obj
+      (op ⟨PUnit.unit⟩) ≃ₗ[A]
+        (M.val.obj (op ⟨PUnit.unit⟩) →ₗ[A] N.val.obj (op ⟨PUnit.unit⟩)) where
+  toFun f := (f.app (op (Over.mk (𝟙 _)))).hom
+  invFun f :=
+    { app := fun W ↦ by
+        rw [slice_eq W]
+        exact ModuleCat.ofHom f
+      naturality := by
+        intro U V i
+        have hU := slice_eq U
+        subst U
+        have hV := slice_eq V
+        subst V
+        have hi : i = 𝟙 _ := by
+          apply Quiver.Hom.unop_inj
+          ext
+          apply Subsingleton.elim
+        subst i
+        ext x
+        simp
+        rfl }
+  left_inv f := by
+    apply PresheafOfModules.hom_ext
+    intro W
+    rw [slice_eq W]
+    rfl
+  right_inv f := rfl
+  map_add' f g := rfl
+  map_smul' a f := by
+    ext x
+    rfl
+
+private noncomputable def pointExtensionEquiv
+    {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B)
+    (F : RingSiteModules A ⥤ RingSiteModules B)
+    (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings (ringSiteMap φ) M)
+    (M : RingSiteModules A) :
+    letI := φ.toAlgebra
+    B ⊗[A] M.val.obj (op ⟨PUnit.unit⟩) ≃ₗ[B]
+      (F.obj M).val.obj (op ⟨PUnit.unit⟩) := by
+  letI := φ.toAlgebra
+  let T := SheafOfModules.changeOfRingsPresheaf.{u} (ringSiteMap φ) M
+  let η := toSheafify ⊥ T.presheaf
+  have : IsIso η := isIso_toSheafify ⊥ (Presheaf.isSheaf_bot _)
+  let α := (eqToHom (hF M).symm).val.app (op ⟨PUnit.unit⟩)
+  have : IsIso α := by
+    change IsIso ((SheafOfModules.evaluation _ _).map (eqToHom (hF M).symm))
+    infer_instance
+  let e : B ⊗[A] M.val.obj (op ⟨PUnit.unit⟩) →ₗ[B]
+      (SheafOfModules.changeOfRings (ringSiteMap φ) M).val.obj (op ⟨PUnit.unit⟩) :=
+    ((PresheafOfModules.sheafificationAdjunction (𝟙 _)).unit.app T).app
+      (op ⟨PUnit.unit⟩) |>.hom
+  exact (LinearEquiv.ofBijective e
+    (ConcreteCategory.bijective_of_isIso (η.app (op ⟨PUnit.unit⟩)))).trans
+    (LinearEquiv.ofBijective α.hom (ConcreteCategory.bijective_of_isIso α))
+
+private theorem pointExtensionEquiv_tmul
+    {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B)
+    (F : RingSiteModules A ⥤ RingSiteModules B)
+    (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings (ringSiteMap φ) M)
+    (M : RingSiteModules A) (b : B) (x : M.val.obj (op ⟨PUnit.unit⟩)) :
+    letI := φ.toAlgebra
+    pointExtensionEquiv φ F hF M (b ⊗ₜ[A] x) =
+      ringExtensionPure φ F hF M (op ⟨PUnit.unit⟩) b x := by
+  rfl
+
+private theorem pointLift_isIso_iff {A : Type u} [CommRing A]
+    (M N : RingSiteModules A)
+    (f : M.val.obj (op ⟨PUnit.unit⟩) →ₗ[A] N.val.obj (op ⟨PUnit.unit⟩)) :
+    IsIso (pointLift M N f) ↔ Function.Bijective f := by
+  constructor
+  · intro h
+    have := h
+    exact ConcreteCategory.bijective_of_isIso
+      ((SheafOfModules.evaluation _ (op ⟨PUnit.unit⟩)).map (pointLift M N f))
+  · intro h
+    let e := LinearEquiv.ofBijective f h
+    refine ⟨⟨pointLift N M e.symm.toLinearMap, ?_, ?_⟩⟩
+    · apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro U
+      have hU := point_eq U
+      subst U
+      ext x
+      exact e.symm_apply_apply x
+    · apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro U
+      have hU := point_eq U
+      subst U
+      ext x
+      exact e.apply_symm_apply x
+
+-- The unchanged signature names a nondependent forall hypothesis `hk`.
+set_option linter.unusedVariables false in
 /-- Transport a normalized ordinary module comparison to the one-point site.
 No finite-generation, projectivity, flatness, or invertibility assumption is made.
 Invertibility of the transported map is equivalent to bijectivity of the module map.
@@ -77,6 +205,36 @@ theorem ringHomExtension_transport
         ((g.val.app U (ringExtensionPure φ F hF _ U b f)).app
           (op (Over.mk (𝟙 U.unop)))) (ringExtensionPure φ F hF M U c x) =
         ringExtensionPure φ F hF N U (b * c) ((f.app (op (Over.mk (𝟙 U.unop)))) x) := by
-  sorry
+  let := φ.toAlgebra
+  intro k hk
+  let H := SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf A) M N
+  let HB := SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf B)
+    (F.obj M) (F.obj N)
+  let eM := pointExtensionEquiv φ F hF M
+  let eN := pointExtensionEquiv φ F hF N
+  let eH := pointExtensionEquiv φ F hF H
+  let eA := pointHomEquiv M N
+  let eB := pointHomEquiv (F.obj M) (F.obj N)
+  let eS := eH.symm.trans
+    (AlgebraTensorModule.congr (LinearEquiv.refl B B) eA)
+  let eT := (LinearEquiv.arrowCongr eM eN).trans eB.symm
+  let l := eT.toLinearMap.comp (k.comp eS.toLinearMap)
+  refine ⟨pointLift (F.obj H) HB l, ?_, ?_⟩
+  · rw [pointLift_isIso_iff]
+    change Function.Bijective (eT ∘ k ∘ eS) ↔ Function.Bijective k
+    exact (Function.Bijective.of_comp_iff' eT.bijective (k ∘ eS)).trans
+      (Function.Bijective.of_comp_iff k eS.bijective)
+  · intro U b c f x
+    have hU := point_eq U
+    subst U
+    change (eB (l (ringExtensionPure φ F hF H _ b f)))
+      (ringExtensionPure φ F hF M _ c x) = _
+    rw [← pointExtensionEquiv_tmul φ F hF H,
+      ← pointExtensionEquiv_tmul φ F hF M,
+      ← pointExtensionEquiv_tmul φ F hF N]
+    change eN (k ((AlgebraTensorModule.congr (LinearEquiv.refl B B) eA)
+      (eH.symm (eH (b ⊗ₜ[A] f)))) (eM.symm (eM (c ⊗ₜ[A] x)))) = _
+    rw [eH.symm_apply_apply, eM.symm_apply_apply, AlgebraTensorModule.congr_tmul]
+    exact congrArg eN (hk b c (eA f) x)
 
 end CategoryTheory

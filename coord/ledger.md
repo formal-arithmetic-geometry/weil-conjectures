@@ -11910,3 +11910,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/N3/Sheaf.AlgebraicGeometry.RelativeMayerVietoris (stage 3; reviewer PASS; first push; landing 20261013T100042-L-2473012 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/N4/Sheaf.Algebra.Homology.PerfectRingDualTermFlat (stage 3; reviewer PASS; first push; landing 20261013T100042-L-2473192 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:00 L: merged deliver/N4/Sheaf.Algebra.Homology.RingExtensionFiniteSupportProduct (stage 3; reviewer PASS; first push; landing 20261013T100043-L-2473297 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:00 L: merged deliver/N4/Sheaf.Algebra.Homology.RingHomExtensionTransport (stage 3; reviewer PASS; first push; landing 20261013T100043-L-2473445 (proof); batch 20261013T095923; modules 1; new nodes 0)

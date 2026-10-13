@@ -12,21 +12,21 @@
  ],
  "proof": [
   {
-   "text": "Evaluation at the unique object is an equivalence from sheaves of modules on the one-object bottom-topology site to modules. The inverse takes constant modules; every presheaf is a sheaf. The unique arrows between objects induce inverse restriction maps by the presheaf laws. The slice has the same property, so identity-slice evaluation identifies internal-Hom sections with ordinary linear maps. The inverse sends a linear map to its conjugates by the restriction isomorphisms; naturality proves both inverse identities.",
+   "text": "Construct point_eq and slice_eq by eliminating the singleton objects. Construct pointLift by using the supplied linear map at every object; after substituting point_eq, every arrow is the identity and naturality is the presheaf identity law. Construct pointHomEquiv by evaluating at the identity slice object and taking the constant-component inverse. Substituting slice_eq proves naturality and both inverse identities; addition and scalar multiplication are componentwise.",
    "uses": [
     "def-pc-perfect-rhom-base-change-map"
    ],
    "elementary": false
   },
   {
-   "text": "The change-of-rings presheaf evaluates to B tensor_A M(*). Its sheafification unit is invertible (Presheaf.isSheaf_bot and CategoryTheory.isIso_toSheafify) and B-linear (the module sheafification unit). Composing its component with eqToHom(hF(M).symm) gives a B-linear equivalence sending b tensor x to ringExtensionPure. Apply this to M, N, and internal Hom.",
+   "text": "Construct pointExtensionEquiv from the component of the module sheafification unit and eqToHom(hF(M).symm). The change-of-rings presheaf has value B tensor_A M(*). Presheaf.isSheaf_bot and isIso_toSheafify show its sheafification unit is invertible, so ConcreteCategory.bijective_of_isIso gives the bijectivity required by LinearEquiv.ofBijective. The equality transport is likewise invertible. Their composite sends b tensor x to ringExtensionPure by definitional equality (pointExtensionEquiv_tmul).",
    "uses": [
     "def-pc-perfect-rhom-base-change-map"
    ],
    "elementary": false
   },
   {
-   "text": "Conjugate k by the source and target identifications from the preceding two steps. Full faithfulness of evaluation gives the sheaf map g. Evaluation reflects isomorphisms, and the conjugating maps are linear equivalences, hence IsIso g iff k is bijective. The pure-tensor identity at the unique object is hk under those identifications. Naturality of g, internal Hom, the unit and pure tensors restricts that identity to every U. This argument uses no projectivity or finiteness assumption.",
+   "text": "Tensor pointHomEquiv M N using AlgebraTensorModule.congr, and compose with the inverse pointExtensionEquiv for internal Hom to obtain the source equivalence eS. Compose LinearEquiv.arrowCongr eM eN with the inverse B internal-Hom equivalence to obtain eT. Set l = eT composed with k composed with eS, and g = pointLift l. Prove pointLift_isIso_iff: evaluate an isomorphism for the forward implication; for the reverse implication lift the inverse LinearEquiv.ofBijective and verify both inverse equations at the unique object. Cancel the bijective eS and eT to get IsIso g iff k is bijective. Substitute point_eq for arbitrary U, rewrite pure tensors using pointExtensionEquiv_tmul, cancel the equivalences, and apply congrArg eN to hk.",
    "uses": [],
    "elementary": true
   }
@@ -37,7 +37,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "equation-base-change-RHom and Lemma 0A6A; one-point-site realization in parent step 1"
+  "place": "equation-base-change-RHom and Lemma 0A6A; one-point-site realization in parent step 1; explicit singleton evaluation and scalar-extension conjugation proof by N4, second reading 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -116,10 +116,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T082352-L-1638500",
-  "kind": "interface",
+  "landing": "20261013T100043-L-2473445",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
