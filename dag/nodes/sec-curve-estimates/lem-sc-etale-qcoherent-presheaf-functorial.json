@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "Clause 1. $\\rho_g$ is the composite of $g^*:\\Gamma(U,u^*\\mathcal F)\\to\\Gamma(U',g^*u^*\\mathcal F)$ and of the map on global sections of the $\\mathcal O_{U'}$-module isomorphism $c_{g,u,\\mathcal F}:g^*u^*\\mathcal F\\to(u\\circ g)^*\\mathcal F=u'^*\\mathcal F$. By step 1 (i) the first is additive with $g^*(as)=g^\\sharp(a)\\,g^*s$ for $a\\in\\Gamma(U,\\mathcal O_U)$; the second is $\\Gamma(U',\\mathcal O_{U'})$-linear. Hence $\\rho_g$ is additive and $\\rho_g(as)=c_{g,u}(g^\\sharp(a)\\,g^*s)=g^\\sharp(a)\\,\\rho_g(s)$.",
+   "text": "Clause 1. $\\rho_g$ is the composite of $g^*:\\Gamma(U,u^*\\mathcal F)\\to\\Gamma(U',g^*u^*\\mathcal F)$ and of the map on global sections of the $\\mathcal O_{U'}$-module isomorphism $c_{g,u,\\mathcal F}:g^*u^*\\mathcal F\\to(u\\circ g)^*\\mathcal F=u'^*\\mathcal F$. By step 1 (i) the first is additive with $g^*(as)=g^\\sharp(a)\\,g^*s$ for $a\\in\\Gamma(U,\\mathcal O_U)$; the second is $\\Gamma(U',\\mathcal O_{U'})$-linear. Hence $\\rho_g$ is additive and $\\rho_g(as)=c_{g,u}(g^\\sharp(a)\\,g^*s)=g^\\sharp(a)\\,\\rho_g(s)$. Lean implementation E3: restrictionOfAdjunction_smul proves the pointwise calculation for an arbitrary family L_f left adjoint to f_*. It rewrites the inverse-image-of-top restriction by sectionsUnit_eq, applies Mathlib Scheme.Modules.Hom.app_smul to the adjunction unit (the pushforward scalar action is restriction through g-sharp), and then applies Hom.app_smul to the comparison and equality-transport module maps. smulHom_eq_iff proves that the original universally quantified pointwise equation is equivalent to M.smul(a) composed with rho equalling rho composed with N.smul(g-sharp(a)). restrictionOfAdjunction_smulHom uses this equivalence. The public etaleTensorSectionsRestriction_smul specializes that additive-map equation to the pinned tensor adjunctions. The pointwise specialization otherwise exceeds the single-file kernel checking limit; there are no callers of the old pointwise signature. No mathematical hypothesis or conclusion, and no definition, changes; the interface change is recorded in coord/changes/etale-tensor-restriction-semilinearity-map-form.md.",
    "uses": [
     "lem-pc-module-pullback-adjunction",
     "def-pc-module-pullback"
@@ -112,7 +112,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 03DR, equation (35.8.1), functoriality implicit in the source; G2 formalized the identity clause via Mathlib normalized left-adjoint composition and the conjugate-unit equation. Semilinearity and composition retain the existing plan. T1 formalized clause 3 through the conjugate-unit equation, section naturality, Mathlib associativity and equality transport; clause 1 semilinearity is still open."
+  "place": "Tag 03DR, equation (35.8.1), functoriality implicit in the source; G2 formalized the identity clause via Mathlib normalized left-adjoint composition and the conjugate-unit equation. Semilinearity and composition retain the existing plan. T1 formalized clause 3 through the conjugate-unit equation, section naturality, Mathlib associativity and equality transport; E3 formalized clause 1 using module-map linearity and the equivalent equality of multiplication endomorphisms, with its equivalence to the original pointwise formulation proved by smulHom_eq_iff."
  },
  "mathlib_searches": [
   {
@@ -200,7 +200,7 @@
   "by": "N1",
   "date": "2026-10-11",
   "existing": false,
-  "note": "The presheaf is given as explicit data. Its restrictions are abelian-group homomorphisms; the three named sorry theorems state semilinearity, identity, and composition. The pullback and adjunction are the recorded tensor formula and canonical unit, not Mathlib abstract pullback."
+  "note": "The presheaf is explicit data, using the recorded tensor pullback and canonical adjunction unit. Its restrictions are abelian-group homomorphisms. Identity, composition and semilinearity are proved. Semilinearity is stated as equality of additive maps intertwining multiplication endomorphisms, equivalent to the original pointwise statement by the proved private lemma smulHom_eq_iff. See coord/changes/etale-tensor-restriction-semilinearity-map-form.md."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -213,11 +213,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T1",
+  "reviewer": "X-10aca",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T045603-L-137522",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T072345-L-1117686",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered semilinearity map equation with the node’s pointwise clause and recorded interface change; clean compilation and axiom checks confirm the proof uses only propext, Classical.choice and Quot.sound."
  }
 }

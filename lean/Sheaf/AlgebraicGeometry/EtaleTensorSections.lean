@@ -31,6 +31,13 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+attribute [local irreducible] tensorPullback tensorPullbackObj
+-- Keep scalar instances in terms of scheme modules during elaboration.
+attribute [local instance 2000]
+  instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
 /-- The composition isomorphism normalized by the canonical tensor-pullback units.
 It is the conjugate of the sectionwise pushforward composition identification.
 Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
@@ -57,6 +64,9 @@ def etaleTensorSectionsRestriction {X : Scheme.{u}} (F : X.Modules)
   tensorSectionsUnit g.left ((tensorPullback U.hom).obj F) ≫
     ((tensorSectionsComp g.left U.hom).hom.app F).app ⊤ ≫
     (eqToHom (congrArg (fun f ↦ (tensorPullback f).obj F) g.w)).app ⊤
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- The identity case of normalized left-adjoint composition.
 Source: Stacks, Tag 03DR; Mathlib `Adjunction.leftAdjointCompIso_comp_id`
@@ -285,19 +295,69 @@ private theorem restrictionOfAdjunction_comp
   have h := tripleSections L adj a b c F
   simpa only [eqToHom_refl, Hom.id_app, Category.comp_id] using h
 
+/-- Semilinearity of restrictions for arbitrary adjoints of scheme pushforward.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem restrictionOfAdjunction_smul
+    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
+    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
+    {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (d : A ⟶ C)
+    (p : a ≫ b = d) (F : C.Modules) (r : Γ(B, ⊤)) (s : Γ((L b).obj F, ⊤)) :
+    restrictionOfAdjunction L adj a b d p F ((((L b).obj F).smul r).hom s) =
+      (((L d).obj F).smul (a.appTop r)).hom (restrictionOfAdjunction L adj a b d p F s) := by
+  change restrictionOfAdjunction L adj a b d p F (r • s) =
+    a.appTop r • restrictionOfAdjunction L adj a b d p F s
+  have hu : sectionsUnitOfAdjunction a (L a) (adj a) ((L b).obj F) (r • s) =
+      a.appTop r • sectionsUnitOfAdjunction a (L a) (adj a) ((L b).obj F) s := by
+    rw [sectionsUnit_eq]
+    exact Hom.app_smul ((adj a).unit.app ((L b).obj F)) r s
+  unfold restrictionOfAdjunction
+  simp only [AddCommGrpCat.comp_apply, hu]
+  erw [Hom.app_smul, Hom.app_smul]
+  rfl
+
+/-- Equality of multiplication endomorphisms is exactly pointwise semilinearity.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem smulHom_eq_iff {A B : Scheme.{u}} (M : B.Modules) (N : A.Modules)
+    (ρ : Γ(M, ⊤) ⟶ Γ(N, ⊤)) (r : Γ(B, ⊤)) (t : Γ(A, ⊤)) :
+    M.smul r ≫ ρ = ρ ≫ N.smul t ↔ ∀ s, ρ (r • s) = t • ρ s := by
+  constructor
+  · intro h s
+    exact congrArg (fun φ ↦ φ.hom s) h
+  · intro h
+    ext s
+    exact h s
+
+/-- The semilinearity equation as an equality of additive maps.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem restrictionOfAdjunction_smulHom
+    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
+    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
+    {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (d : A ⟶ C)
+    (p : a ≫ b = d) (F : C.Modules) (r : Γ(B, ⊤)) :
+    ((L b).obj F).smul r ≫ restrictionOfAdjunction L adj a b d p F =
+      restrictionOfAdjunction L adj a b d p F ≫ ((L d).obj F).smul (a.appTop r) := by
+  apply (smulHom_eq_iff ((L b).obj F) ((L d).obj F)
+    (restrictionOfAdjunction L adj a b d p F) r (a.appTop r)).mpr
+  intro s
+  exact restrictionOfAdjunction_smul L adj a b d p F r s
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
 /-- Restriction is semilinear over the map on global functions.
 Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial).
 Proof: the unit is a module morphism into pushforward, whose scalar action is through
 `g^♯`. Thus section pullback is additive and semilinear. The composition isomorphism
 and the transport are module morphisms on the source scheme, hence are linear there. -/
 theorem etaleTensorSectionsRestriction_smul {X : Scheme.{u}} (F : X.Modules)
-    {U V : X.Etale} (g : V ⟶ U) (a : Γ(U.left, ⊤))
-    (s : Γ((tensorPullback U.hom).obj F, ⊤)) :
-    etaleTensorSectionsRestriction F g (a • s) =
-      g.left.appTop a • etaleTensorSectionsRestriction F g s := by
-  sorry
+    {U V : X.Etale} (g : V ⟶ U) (a : Γ(U.left, ⊤)) :
+    ((tensorPullback U.hom).obj F).smul a ≫ etaleTensorSectionsRestriction F g =
+      etaleTensorSectionsRestriction F g ≫
+        ((tensorPullback V.hom).obj F).smul (g.left.appTop a) := by
+  exact restrictionOfAdjunction_smulHom (@tensorPullback)
+    (fun {A B} f ↦ Classical.choose (exists_tensorPullbackAdjunction f))
+    g.left U.hom V.hom g.w F a
 
-attribute [local irreducible] tensorPullback tensorPullbackObj
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
