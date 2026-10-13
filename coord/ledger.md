@@ -10502,3 +10502,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:50 L: returned deliver/K4/Sheaf.AlgebraicGeometry.CoherentCokernelRelationsLocal (reviewer RETURN: (reviewer X-6acd0, head 6acd0cac5) E2 / review point 4: In lean/Sheaf/AlgebraicGeometry/CoherentCokernelRelationsLocal.l)
 - 01:51 L: returned deliver/E1/Sheaf.AlgebraicGeometry.ComponentsFiniteSeparableDescent (reviewer RETURN: (reviewer X-82c4d, head 82c4d4209) C1: In dag/nodes/sec-smooth-base-change/new-lem-sbc-finite-field-closed-component-des)
 - 01:51 L: returned deliver/J4/Sheaf.Algebra.LimitFinitePresentation (reviewer RETURN: (reviewer X-e5e0a, head e5e0a455a) B9: Repair blueprint provenance in both dag/nodes/sec-proper-base-change/lem-weil-pbc)
+- 01:55 L: returned deliver/A4/Sheaf.AlgebraicGeometry.CoherentStalkMapExtends (reviewer RETURN: (the landing tools, head cf2173a6a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
