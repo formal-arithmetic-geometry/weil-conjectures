@@ -13,9 +13,55 @@
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 08CX, section-koszul, equation-system; Tag 08DC, equation-comparison"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For koszulOpenTail_square cancel the two negative signs using Preadditive.neg_comp and comp_neg, then apply ExteriorAlgebra.koszulBoundary_comp at degree n+1 from [def-weil-pbc-koszul-complex]. For the augmentation cycle, reassociate the composite, apply the same square-zero theorem at degree zero, and compose zero with the degree-zero exterior-power isomorphism.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove that exteriorPower.map agrees after subtype inclusion with ExteriorAlgebra.map: use exteriorPower.linearMap_ext and check the identity on exteriorPower.ιMulti via map_apply_ιMulti and ιMulti_apply_coe. Prove naturality of contraction for linear forms phi, psi and a linear endomorphism g with psi.comp g = phi by CliffordAlgebra.left_induction: scalar elements contract to zero; addition follows from linearity; for iota(v)*x apply contractLeft_ι_mul, the induction hypothesis, multiplicativity and scalar compatibility of ExteriorAlgebra.map, and psi(g(v))=phi(v). This uses the contraction model of [def-weil-pbc-koszul-complex].",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check on each Finsupp.single i x that the form for exponent a+1 composed with the diagonal for b-a is the form for b+1, using b-a+(a+1)=b+1 when a<=b and pow_add. For koszulOpenTransitionComponent_comm, if n=m+1 cancel the negative signs, include the exterior powers into the exterior algebra, and apply contraction naturality from the preceding step. Otherwise both differentials vanish by HomologicalComplex.shape.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For koszulOpenTilde_additive_proof, the maps of the transported functor are the tilde maps; tilde.map_add supplies the Additive field directly. No new sheaf-theoretic result is required.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check on Finsupp.single that diagonal exponent zero is the identity and that diagonals for c-b and b-a compose to the one for c-a; use c-b+(b-a)=c-a and pow_add. ExteriorPower.map_id and map_comp give identity and composition for the chain maps, by HomologicalComplex.hom_ext. HomologicalComplex.extendMap_id and extendMap_comp, termwise tilde functor laws, and DerivedCategory.Q functor laws transport these to koszulOpenMap_laws in [def-pc-derived-category].",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply function extensionality to each equation in koszulOpenHomDiagram_laws. The identity clause is koszulOpenMap_laws followed by Category.id_comp. The composition clause is Category.assoc and the composition clause of koszulOpenMap_laws. These give the existing directed Hom functor fields.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08CX and 08DC: complete Lean verification of the existing construction; contraction naturality by exterior-algebra induction, diagonal power laws, and functorial transport. Group Q4, 2026-10-13."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -139,5 +185,15 @@
   "group": "M1",
   "result": "fix",
   "note": "A,r,f,U=koszulOpen; E in D_QCoh; I_e=tail K^{i-1} neg diff, aug K1->K0, transitions f^(b-a) wedge (checked commute with d and aug); triangle I->O->K; IsPerfect; u_e|_U iso via two-sided v; colimit Hom(I_e,E)->Hom(O_U,E|_U) with fixed legs; FIX: restriction now overFunctor ⋙ (Scheme.Modules.overEquiv U).functor as sibling map-lift"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T015609-L-3025533",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
