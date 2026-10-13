@@ -16,42 +16,37 @@
  },
  "proof": [
   {
-   "text": "Use the open stalk ring isomorphisms and the same-germ semilinear restriction-stalk map, degreewise on P, to identify the compatible ring/complex coordinates of the two comparison models.",
+   "text": "Obtain eR,eA,eB,eD,q,t and their algebra and pure-tensor compatibility together with the geometric ordinary target homology equation. No base-derived source or comparison map occurs in this geometric statement.",
    "uses": [
-    "lem-pc-open-restriction-stalk-extension-iso"
+    "lem-pc-open-restricted-tensor-coordinate-data"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the universal base-derived tensor and its localized comparison across these coordinates. The generic counit-compatible ring-isomorphism square constructs the source isomorphism l.",
+   "text": "Instantiate exists_baseDerivedTensor_ringIso_square with the actual two cohomologyModel objects, the ring isomorphisms, q, and t. This constructs the source isomorphism l and proves the localizedComparison square with the inverse exact restrictScalars homology isomorphism.",
    "uses": [
     "lem-pc-base-derived-tensor-ring-iso-naturality"
    ],
    "elementary": false
   },
   {
-   "text": "The same-germ pullback-stalk formula and exact-stalk/restriction homology identify the target chain transport with eta followed by d. Compose the equations to obtain the square before inverse pullback counits.",
+   "text": "Postcompose that equation by the forward restrictScalars homology isomorphism, the restricted tensorStalkIso homology and exact-stalk homology inverse, and HU(d.inv). Cancel the restrictScalars factors, substitute the geometric target equation, and cancel HU(d.hom);HU(d.inv). Functor.map_comp and associativity identify the remaining factors with comparisonIntoTensorPullback and yield the required equation, reversed.",
    "uses": [
-    "lem-weil-pbc-module-stalk-pullback",
-    "def-pc-open-derived-stalk-iso",
-    "def-pc-open-restricted-tensor-complex-iso"
+    "lem-pc-open-restricted-tensor-coordinate-data"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-open-restriction-stalk-extension-iso",
-  "lem-pc-base-derived-tensor-ring-iso-naturality",
-  "lem-weil-pbc-module-stalk-pullback",
-  "def-pc-open-derived-stalk-iso",
-  "def-pc-open-restricted-tensor-complex-iso"
+  "lem-pc-open-restricted-tensor-coordinate-data",
+  "lem-pc-base-derived-tensor-ring-iso-naturality"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "G2",
+  "group": "B4",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "Tag 0DJ8, locality of equation-bc; Tag 0098, stalks of pullback; Tag 0D5U, exact restriction. Strict ordinary part of the canonical square."
+  "place": "Locality of equation-bc: geometric open coordinates from Tags 0098 and 0D5U; existing universal ring-isomorphism square plus categorical composition and inverse cancellation."
  },
  "mathlib_searches": [
   {
@@ -125,9 +120,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261013T201749-L-3969378",
+  "landing": "20261013T211053-L-388504",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
