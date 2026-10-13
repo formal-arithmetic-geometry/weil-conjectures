@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone
-import Sheaf.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
+import Sheaf.AlgebraicGeometry.TailOpenCohomologyLegNaturality
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
@@ -126,6 +126,38 @@ theorem etale_limit_open_cohomology_cocone_degree
       (∀ (j k : Set.Ici i₀) (f : j ⟶ k), K.map f =
         (eK j).hom ≫ tailOpenCohomologyMapDegree D g₀ W F φ n f ≫ (eK k).inv) ∧
       ∃ (ι : K ⟶ (Functor.const (Set.Ici i₀)).obj BW),
-        ∀ j, ι.app j = (eK j).hom ≫ tailOpenCohomologyLegDegree D c g₀ W F G eG L n j := by sorry
+        ∀ j, ι.app j = (eK j).hom ≫ tailOpenCohomologyLegDegree D c g₀ W F G eG L n j := by
+  obtain ⟨hid, hcomp⟩ := tailOpenCohomologyArrow_laws D F φ hidentity hcomposition
+    i₀ g₀ W n
+  let K : Set.Ici i₀ ⥤ AddCommGrpCat.{u + 1} :=
+    { obj := fun j ↦ AddCommGrpCat.of (Sheaf.H
+        ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ W j).ι).obj (F j.val)) n)
+      map := fun f ↦ tailOpenCohomologyArrow D g₀ W F φ n f
+      map_id := hid
+      map_comp := fun f g ↦ hcomp _ _ _ f g }
+  let ι : K ⟶ (Functor.const (Set.Ici i₀)).obj
+      (AddCommGrpCat.of (Sheaf.H
+        ((upperStar AddCommGrpCat.{u + 1}
+          ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι).obj L.pt) n)) :=
+    { app := fun j ↦ tailOpenCohomologyCoconeLeg D c g₀ W F G eG L n j
+      naturality := by
+        intro j k f
+        change tailOpenCohomologyArrow D g₀ W F φ n f ≫
+          tailOpenCohomologyCoconeLeg D c g₀ W F G eG L n k =
+          tailOpenCohomologyCoconeLeg D c g₀ W F G eG L n j ≫ 𝟙 _
+        rw [Category.comp_id]
+        exact tailOpenCohomologyCoconeLeg_naturality D c F φ G eG hG L i₀ g₀ W n j k f }
+  refine ⟨K, fun _ ↦ Iso.refl _, ?_, ι, ?_⟩
+  · intro j k f
+    change tailOpenCohomologyArrow D g₀ W F φ n f =
+      𝟙 _ ≫ tailOpenCohomologyMapDegree D g₀ W F φ n f ≫ 𝟙 _
+    rw [Category.id_comp, Category.comp_id]
+    rfl
+  · intro j
+    change tailOpenCohomologyCoconeLeg D c g₀ W F G eG L n j =
+      𝟙 _ ≫ tailOpenCohomologyLegDegree D c g₀ W F G eG L n j
+    rw [Category.id_comp]
+    rfl
+
 
 end AlgebraicGeometry.Etale

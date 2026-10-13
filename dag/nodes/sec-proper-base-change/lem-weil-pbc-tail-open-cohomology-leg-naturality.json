@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-tail-open-cohomology-leg-naturality",
+ "kind": "statement",
+ "title": "Restricted cohomology leg naturality",
+ "statement": "Let $I$ be a nonempty directed preorder and $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ an inverse diagram of schemes [def-pc-scheme]. Let $F_i$ be abelian sheaves [def-weil-pbc-abelian-etale-sheaves] on $D_i$, with inverse-image coefficient transitions $\\varphi_f:D(f^{\\mathrm{op}})^*F_i\\to F_j$ [def-weil-pbc-inverse-image]. Let $c$ be a cone on $D$ [def-weil-pbc-category-colimit], $G:I\\to\\operatorname{Ab}(c.pt_{\\acute et})$ a functor, and $eG_i:G_i\\cong c_i^*F_i$ isomorphisms such that $G(f)$ is $eG_i$, followed by the canonical inverse-image composition comparison and $c_j^*\\varphi_f$, followed by $eG_j^{-1}$. Let $L$ be a cocone on $G$. Fix a scheme $X$, an index $i_0\\in I$, a morphism $g_0:D_{i_0}\\to X$, and an open $W\\subseteq X$. Put $J=I_{\\ge i_0}$ and $W_j=(D(j\\to i_0);g_0)^{-1}W$. For $f:j\\to k$ in $J$, restrict $D(f^{\\mathrm{op}})$ to $W_k\\to W_j$. The coefficient map is the inverse-image composition comparison across this commuting restriction square followed by restriction of $\\varphi_f$. For $n\\in\\mathbb N$, let $T_W^n(f)$ be cohomology pullback along this restricted scheme map followed by cohomology of the coefficient map [def-weil-pbc-etale-cohomology, def-weil-pbc-cohomology-pullback]. Put $W_L=(c_{i_0};g_0)^{-1}W$. Let $\\lambda_W^n(j)$ be cohomology pullback along the restricted projection $W_L\\to W_j$, followed by cohomology of the inverse-image square coefficient map formed from $eG_j^{-1}\\mathbin{;}L_j$. Then for every $f:j\\to k$, $T_W^n(f)\\mathbin{;}\\lambda_W^n(k)=\\lambda_W^n(j)$. No identity or composition equations for $\\varphi$ are assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01F7, cohomology-equation-functorial and functoriality in the coefficient map; the coherent system in etale-cohomology.tex Tag 09YQ (theorem-colimit) supplies the application, not additional hypotheses."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-stage-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Precompose L.w by eG_j.inv and substitute hG. Cancel eG inverses to obtain the original coefficient leg equation. Restrict along the limit-open inclusion. The cone equation proves restricted projection composition after cancelling the stage-open inclusion. Naturality and vertical pasting identify the restricted transition square followed by the projection square with the projection square at j. Apply cohomology pullback composition, coefficient naturality and H.map composition to get the required equality. Empty opens and zero coefficients require no extra assumptions.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-limit-open-cohomology-cocone",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-limit-open-cohomology-cocone",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "E2 stage 3 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YQ and 01F7: routine restricted coefficient square coherence written out by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology pullback naturality composition restricted sheaves",
+   "results": "Internal Server Error: service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology pullback functoriality restricted open subschemes coefficient maps",
+   "results": "Eight scheme restriction hits; none states these laws. Loogle upperStarComp was unknown.",
+   "date": "2026-10-13",
+   "verdict": "No specialized theorem found"
+  },
+  {
+   "tool": "grep",
+   "query": "tailOpenCohomology.*(laws|naturality); cohomology.*(pullback|comp); squareUpperStar",
+   "results": "No specialized law in Mathlib or library; project has general cohomology diagram theorem and square compatibility. Blueprint search restricted cohomology returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "Need specialized coherence statements"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Canonical restricted open cocone construction: Restricted cohomology leg naturality.",
+   "via": [
+    "lem-weil-pbc-etale-limit-open-cohomology-cocone-degree",
+    "lem-weil-pbc-etale-limit-binary-successor-cocone-segment",
+    "lem-weil-pbc-etale-limit-binary-geometric-ladder",
+    "lem-weil-pbc-etale-limit-binary-comparison-ladder",
+    "lem-weil-pbc-etale-limit-binary-eventual-zero",
+    "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TailOpenCohomologyLegNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/TailOpenCohomologyLegNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.tailOpenCohomologyCoconeLeg_naturality",
+  "statement": "theorem tailOpenCohomologyCoconeLeg_naturality\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G)\n    {X : Scheme.{u}} (i₀ : I) (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens) (n : ℕ)\n    (j k : Set.Ici i₀) (f : j ⟶ k) :\n    tailOpenCohomologyArrow D g₀ W F φ n f ≫\n      tailOpenCohomologyCoconeLeg D c g₀ W F G eG L n k =\n      tailOpenCohomologyCoconeLeg D c g₀ W F G eG L n j",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T095942-L-2455124",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T095942-L-2455124",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
