@@ -14,33 +14,40 @@
  ],
  "proof": [
   {
-   "text": "Restrict to an affine open and apply the affine equivalence to interpret the formal maps as maps of finite completed modules.",
-   "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exactness of completion identifies ker(b^) with T^. Since J^s T=0, the canonical completion map identifies T^ with T. The prescribed separating quotient is injective on that kernel.",
-   "uses": [
-    "lem-weil-pbc-completion-exact-finite-modules"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The difference f−g has image in this kernel by the composition equation. Its n-th component is zero, so injectivity of T→Q/J^(n+1)Q kills the difference. Transport back to the affine formal systems, then check equality locally on an affine cover at every component.",
+   "text": "Write T = ker(b). For every m >= n, the separating map T -> Q/J^(n+1)Q factors through the quotient projection T -> T/J^(m+1)T. Monomorphy of the composite makes this projection mono; as a cokernel projection it is epi. In the abelian module category it is therefore an isomorphism. The quotient identities then make all transitions of the completion of T at and above n isomorphisms. This uses hsep directly; hker is not needed once hsep is assumed.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Coherent kernel closure makes T an object of CoherentModules X. The ordinary kernel fork lifts to a limiting kernel fork in this full subcategory by its universal property. Exactness of completion and the Mathlib exact-functor criterion imply preservation of finite limits, so its mapped kernel fork is limiting in the coherent formal category. Compatibility of preadditive structures uses Mathlib subsingleton_preadditive_of_hasBinaryBiproducts directly. Transport exactness along uniqueness of zero-morphism structures using congrArg₂ on the predicate quantifying over its zero-preservation witness; no duplicate auxiliary theorem is declared.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-formal-completion-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison equality kills the composite of f-g with the completion of b. Lift f-g through the completed kernel fork. At n its composite with the completed inclusion is zero by hlevel. The inverse quotient projection of T identifies this equation with a zero composite with the separating map; cancel that mono and then the inverse quotient projection to make the factor at n zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For m >= n, naturality and cancellation of the invertible transition in completed T show that the factor at m is zero. For m < n, naturality and the epimorphic transition M_n -> M_m show it is zero. All coherent formal transitions are epimorphic by formalTransition_epi. Componentwise extensionality makes the factor zero; its kernel-factorization equation gives f-g=0 and hence f=g.",
+   "uses": [
+    "lem-weil-pbc-formal-kernel-factorization"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-completion-exact-finite-modules"
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-formal-completion-exact",
+  "lem-weil-pbc-formal-kernel-factorization"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0889(1), finite-graph comparison repair"
+  "place": "Tags 0889 and 088A uniqueness, using exactness Tag 0881; categorical proof written by C1 from the existing Lean declarations"
  },
  "mathlib_searches": [
   {
@@ -123,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b3649",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T054236-L-448895",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, constructions and proof dependencies with the nodes and change record; all four modules and the adapted direct importer compile cleanly, the original caller fails at the removed theorem, and axiom checks show only permitted axioms plus expected sorryAx."
+  "landing": "20261013T072339-L-1115110",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
