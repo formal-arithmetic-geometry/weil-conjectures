@@ -7,6 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.PolynomialChartFibreStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparisonForward
+import Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparisonReverse
 
 /-! # Flatness comparison for a polynomial chart and its closed fibre
 
@@ -47,6 +49,9 @@ theorem polynomial_chart_stalk_flat_comparison
     [LocallyOfFinitePresentation e]
     (he : e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = U.ι ≫ f)
     (x : U.toScheme) :
-    (e.stalkMap x).hom.Flat ↔ (PolynomialChart.stalkMap f U n e he x).Flat := by sorry
+    (e.stalkMap x).hom.Flat ↔ (PolynomialChart.stalkMap f U n e he x).Flat := by
+  constructor
+  · exact polynomial_chart_stalk_flat_comparison_forward f U n e he x
+  · exact polynomial_chart_stalk_flat_comparison_reverse f U n e he x
 
 end AlgebraicGeometry

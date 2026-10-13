@@ -1,0 +1,168 @@
+{
+ "id": "lem-sbc-polynomial-chart-stalk-flat-comparison-forward",
+ "kind": "statement",
+ "title": "Forward flatness comparison for polynomial chart stalks",
+ "statement": "theorem polynomial_chart_stalk_flat_comparison_forward {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T) [Flat f] [LocallyOfFinitePresentation f] (U : X.Opens) [IsAffine U.toScheme] (n : ℕ) (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T) [LocallyOfFinitePresentation e] (he : e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = U.ι ≫ f) (x : U.toScheme) : (e.stalkMap x).hom.Flat → (PolynomialChart.stalkMap f U n e he x).Flat",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 00RH, application of the local criterion in Tag 00R7; arbitrary base rings allowed."
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-nagata-relative-affine-space",
+  "lem-sbc-polynomial-chart-canonical-fibre-stalk",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Construct the local tower of stalk rings and identify the closed-fibre map with the canonical polynomial chart map; apply base change and localization for the forward direction.",
+   "uses": [
+    "lem-sbc-polynomial-chart-canonical-fibre-stalk",
+    "lem-weil-pbc-criterion-flatness-fibre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-polynomial-chart-canonical-fibre-stalk",
+  "lem-weil-pbc-criterion-flatness-fibre"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 00R7 and 00RH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite polynomial chart has a regular polynomial fibre local ring mapping to the fibre stalk with zero dimensional closed fibre and equivalent flatness",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, RingHom.smooth_iff_locally_isStandardSmooth, RingHom.Smooth.locally_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, IsRegularLocalRing",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*stalk|stalk.*fiber|polynomial_chart_local",
+   "date": "2026-10-13",
+   "results": "25 hits: Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/Sheafify.lean, Mathlib/Topology/Sheaves/Sheafify.lean, Mathlib/Topology/Sheaves/Sheafify.lean",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_flat_closedFiber|flat.*fiber.*stalk|stalk.*fiber.*flat",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "fibre_dimensions|fiber_dimensions|stalk_flat_comparison|flat_closedFiber",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi finite map into polynomial n space over a field, the fibre local dimension equals the stalk dimension plus the common residue transcendence degree, and n equals the polynomial stalk dimension plus that degree",
+   "date": "2026-10-13",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmooth.relativeDimension, Algebra.QuasiFinite.finite_fiber, IsLocalRing.finrank_quotient_map, Module.rankAtStalk_eq, Ideal.inertiaDeg, Algebra.quasiFinite_iff, Ideal.finrank_quotient_map",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a locally finitely presented polynomial chart stalk is equivalent to flatness of its closed fibre stalk map when the source is flat over the base",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.of_stalkMap, RingHom.Flat.propertyIsLocal, Algebra.Smooth.flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, RingHom.Flat.localRingHom, RingHom.Flat.ofLocalizationPrime",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat, IsLocalHom",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Hom.stalkMap",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a polynomial chart stalk is equivalent to flatness of its closed fibre stalk for a flat finitely presented source",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi finite polynomial chart fibre stalk dimensions and a common finite residue transcendence degree over the base field",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct the canonical local map from a polynomial fibre stalk to the fibre stalk using the chart base change and open immersion stalk isomorphism",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparison",
+  "date": "2026-10-14",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-polynomial-chart-stalk-flat-comparison"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparisonForward",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolynomialChartStalkFlatComparisonForward.lean",
+  "declaration": "AlgebraicGeometry.polynomial_chart_stalk_flat_comparison_forward",
+  "statement": "theorem polynomial_chart_stalk_flat_comparison_forward\n    {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)\n    [Flat f] [LocallyOfFinitePresentation f]\n    (U : X.Opens) [IsAffine U.toScheme] (n : ℕ)\n    (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T)\n    [LocallyOfFinitePresentation e]\n    (he : e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = U.ι ≫ f)\n    (x : U.toScheme) :\n    (e.stalkMap x).hom.Flat → (PolynomialChart.stalkMap f U n e he x).Flat",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T171509-L-1980487",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T171509-L-1980487",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

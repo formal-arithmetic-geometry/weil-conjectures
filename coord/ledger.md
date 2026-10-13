@@ -13220,3 +13220,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:08 L: batch 20261013T165635 dependency take-out
 - 17:13 L: returned deliver/R4/Sheaf.AlgebraicGeometry.SelfTorConormalDualChart (reviewer RETURN: (reviewer X-db33c, head db33c9532) 4: `selfTor_conormal_dual_chart_iso` asserts `IsIso` for `dualMap (0 : exteriorSheaf )
 - 17:14 L: returned deliver/H3/Sheaf.Paper.FiniteStructureProductCompatibility (reviewer RETURN: (reviewer X-87fac, head 87fac13c4) C5 (brief §5, pruning): The already-imported AlgebraicGeometry.finite_structure_produ)
+- 17:15 L: merged deliver/B2/Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparison (stage 3; reviewer PASS; first push; landing 20261013T171509-L-1980487 (interface); batch 20261013T171508; modules 3; new nodes 2)
