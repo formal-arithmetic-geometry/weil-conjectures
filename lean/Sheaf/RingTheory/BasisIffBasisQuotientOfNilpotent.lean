@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.LocalRing.Module
 import Sheaf.RingTheory.NakayamaNilpotent
+import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import Mathlib.LinearAlgebra.TensorProduct.Basis
 
 /-!
 # Lifting bases over a local ring with nilpotent maximal ideal
@@ -28,21 +30,18 @@ of the module or finiteness of the index type is assumed.
 Source: Stacks Project, Algebra, Lemma 10.101.1, Tag 051F
 (blueprint: lem-weil-pbc-local-artinian-basis-when-flat).
 
-Proof: Let F be the direct sum of copies of R indexed by A, and let phi : F -> M send each
-standard basis vector to x a. Modulo the maximal ideal m, F/mF is the direct sum of copies
-of R/m, and the reduced map sends the standard basis to the classes of x a. Thus the two
-basis assertions say that the reduced map and phi, respectively, are bijective.
-If phi is bijective, it carries mF onto mM and induces the required quotient isomorphism.
-Conversely, bijectivity of the reduced map implies surjectivity of phi by Nakayama for a
-nilpotent ideal (lem-weil-pbc-nakayama-nilpotent), without a finiteness assumption.
-Put K = ker phi. The short exact sequence 0 -> K -> F -> M -> 0
-(def-weil-pbc-exact-sequence) stays exact after tensoring with R/m, by flatness of M
-(def-weil-pbc-flat-ring-map and lem-weil-pbc-flat-quotient-tensor-injective, Tag 00HL).
-The natural identifications (R/m) tensor P = P/mP for P = K, F, M
-(lem-weil-pbc-tensor-over-quotient-ring) give an exact sequence of the quotients.
-Since the reduced phi is injective, K/mK = 0. Nakayama for the nilpotent ideal again
-(lem-weil-pbc-nakayama-nilpotent, applied to 0 -> K) gives K = 0. Therefore phi is also
-injective, hence bijective, proving the other basis assertion. -/
+Proof: Identify (R/m) tensor M with M/mM by
+TensorProduct.quotTensorEquivQuotSMul, upgraded to an R/m-linear equivalence using
+surjectivity of R -> R/m. A basis of M reduces to a basis by Basis.baseChange and
+this equivalence. Conversely, transport a basis of M/mM to (R/m) tensor M.
+Mathlib's Module.IsLocalRing.linearIndependent_of_flat shows that the lifted
+family x is R-linearly independent, without any finiteness assumption.
+Let L be the R-span of x. Since R -> R/m is surjective, the R-span of the reduced
+family is also all of M/mM (Submodule.restrictScalars_span). Thus the image of
+L under M -> M/mM is all of M/mM, and the induced map L/mL -> M/mM is surjective.
+Apply nilpotent Nakayama (lem-weil-pbc-nakayama-nilpotent) to the inclusion L -> M
+to obtain L = M. Basis.mk combines this spanning assertion with independence,
+and its value at each index is x at that index. -/
 theorem basis_iff_basisQuotient_of_nilpotent
     {R : Type u} [CommRing R] [IsLocalRing R]
     {M : Type v} [AddCommGroup M] [Module R M] [Module.Flat R M]
@@ -51,6 +50,56 @@ theorem basis_iff_basisQuotient_of_nilpotent
       (M ⧸ (IsLocalRing.maximalIdeal R • (⊤ : Submodule R M))),
       ∀ a : A, b a = (IsLocalRing.maximalIdeal R • (⊤ : Submodule R M)).mkQ (x a)) ↔
     (∃ b : Basis A R M, ∀ a : A, b a = x a) := by
-  sorry
+  classical
+  let I := IsLocalRing.maximalIdeal R
+  let Q := I • (⊤ : Submodule R M)
+  let e : TensorProduct R (R ⧸ I) M ≃ₗ[R ⧸ I] (M ⧸ Q) :=
+    (TensorProduct.quotTensorEquivQuotSMul M I).extendScalarsOfSurjective
+      (Ideal.Quotient.mk_surjective (I := I))
+  constructor
+  · rintro ⟨b, hb⟩
+    have hx : (fun a ↦ Q.mkQ (x a)) = b := funext fun a ↦ (hb a).symm
+    have hli : LinearIndependent R x := by
+      have ht : (fun a ↦ e.symm (b a)) =
+          TensorProduct.mk R (R ⧸ I) M 1 ∘ x := by
+        funext a
+        rw [hb a]
+        rfl
+      have hi := (b.map e.symm).linearIndependent
+      change LinearIndependent (R ⧸ I) (fun a ↦ e.symm (b a)) at hi
+      rw [ht] at hi
+      exact Module.IsLocalRing.linearIndependent_of_flat x hi
+    let L := Submodule.span R (Set.range x)
+    have hspan : Submodule.span R (Set.range (fun a ↦ Q.mkQ (x a))) = ⊤ := by
+      rw [hx, ← Submodule.restrictScalars_span R (R ⧸ I)
+        (Ideal.Quotient.mk_surjective (I := I)), b.span_eq]
+      rfl
+    have hmap : L.map Q.mkQ = ⊤ := by
+      change (Submodule.span R (Set.range x)).map Q.mkQ = ⊤
+      rw [Submodule.map_span, ← Set.range_comp]
+      exact hspan
+    have hsurj : Function.Surjective (Q.mkQ.comp L.subtype) := by
+      apply LinearMap.range_eq_top.mp
+      simpa only [LinearMap.range_comp, Submodule.range_subtype] using hmap
+    have hmod : Function.Surjective
+        ((I • ⊤ : Submodule R L).mapQ Q L.subtype
+          (Submodule.smul_top_le_comap_smul_top I L.subtype)) := by
+      intro y
+      obtain ⟨z, hz⟩ := hsurj y
+      exact ⟨(I • ⊤ : Submodule R L).mkQ z, hz⟩
+    have hI : ∃ k : ℕ, 0 < k ∧ I ^ k = ⊥ := by
+      obtain ⟨k, hk⟩ := hm
+      exact ⟨k + 1, Nat.succ_pos _, by rw [pow_succ, hk, zero_mul]; rfl⟩
+    have hL := RingTheory.surjective_of_surjective_mod_nilpotent R L M I L.subtype hI hmod
+    have htop : L = ⊤ := by
+      simpa only [Submodule.range_subtype] using LinearMap.range_eq_top.mpr hL
+    exact ⟨Basis.mk hli htop.ge, fun a ↦ Basis.mk_apply _ _ a⟩
+  · rintro ⟨b, hb⟩
+    refine ⟨(b.baseChange (R ⧸ I)).map e, ?_⟩
+    intro a
+    change (TensorProduct.quotTensorEquivQuotSMul M I)
+      ((b.baseChange (R ⧸ I)) a) = Q.mkQ (x a)
+    simpa only [Basis.baseChange_apply, hb a, Submodule.mkQ_apply] using
+      TensorProduct.quotTensorEquivQuotSMul_mk_one_tmul I (x a)
 
 end Module
