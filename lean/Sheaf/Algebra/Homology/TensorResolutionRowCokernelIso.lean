@@ -48,7 +48,8 @@ private noncomputable def rowAugmentation {R : Type u} [CommRing R]
       ((tensorRight M).mapHomologicalComplex (.down ℕ)).obj Q.complex where
   f q := (P.π.f 0 ⊗ₘ 𝟙 (Q.complex.X q)) ≫ (β_ M (Q.complex.X q)).hom
   comm' q q' h := by
-    simp only [tensorBicomplex, ofGradedObject_X_d,
+    simp only [tensorBicomplex, Functor.mapBifunctorHomologicalComplex_obj_obj_X_d,
+    curriedTensor_obj_map, ← id_tensorHom,
       Functor.mapHomologicalComplex_obj_d, Functor.flip_obj_map, curriedTensor_map_app,
       ← tensorHom_id]
     rw [Category.assoc, ← BraidedCategory.braiding_naturality]
@@ -61,7 +62,8 @@ private theorem rowAugmentation_zero {R : Type u} [CommRing R]
     (tensorBicomplex P.complex Q.complex).d 1 0 ≫ rowAugmentation P Q = 0 := by
   ext q
   simp only [HomologicalComplex.comp_f, rowAugmentation, tensorBicomplex,
-    ofGradedObject_d_f, ← Category.assoc, tensorHom_comp_tensorHom,
+    Functor.mapBifunctorHomologicalComplex_obj_obj_d_f, curriedTensor_map_app, ← tensorHom_id,
+    ← Category.assoc, tensorHom_comp_tensorHom,
     Category.comp_id, ProjectiveResolution.complex_d_comp_π_f_zero,
     HomologicalComplex.zero_f]
   simp
@@ -141,6 +143,11 @@ theorem tensorResolutionRowCokernelIso (R : Type u) [CommRing R] :
   rw [HomologicalComplex.p_opcyclesMap, Category.assoc,
     HomologicalComplex.p_descOpcycles]
   ext q : 1
+  simp only [HomologicalComplex.comp_f, tensorBicomplexMap,
+    Functor.mapBifunctorHomologicalComplex_map_app_f_f,
+    Functor.mapBifunctorHomologicalComplex_obj_map_f_f, curriedTensor_map_app,
+    curriedTensor_obj_map, ← tensorHom_id, ← id_tensorHom, tensorHom_comp_tensorHom,
+    Category.comp_id, Category.id_comp]
   change (((P.π.f 0 ⊗ₘ 𝟙 (Q.complex.X q)) ≫ (β_ M (Q.complex.X q)).hom) ≫
     ((b.f q ⊗ₘ 𝟙 M) ≫ (𝟙 (Q'.complex.X q) ⊗ₘ f))) =
       (a.f 0 ⊗ₘ b.f q) ≫ (P'.π.f 0 ⊗ₘ 𝟙 (Q'.complex.X q)) ≫

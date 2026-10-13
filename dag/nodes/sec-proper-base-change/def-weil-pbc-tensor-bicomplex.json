@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Apply HomologicalComplex₂.ofGradedObject to the displayed terms and differentials. Tensor functoriality and the chain-complex identities prove the square-zero, shape and commuting-square conditions. Use homMk for the termwise map, and mapHomologicalComplex followed by NatTrans.mapHomologicalComplex for chainTensorMap.",
+   "text": "Use Mathlib Functor.mapBifunctorHomologicalComplex with curriedTensor to construct the unsigned bicomplex. Its terms are P_p tensor Q_q, and its two differentials are tensoring the respective differential with the identity. Map the first chain map and then the second using this bifunctor; tensor functoriality gives a_p tensor b_q. Retain mapHomologicalComplex followed by NatTrans.mapHomologicalComplex for chainTensorMap.",
    "uses": [
     "def-weil-pbc-chain-complex-tensor-module",
     "def-weil-pbc-module-tensor-product"
@@ -28,7 +28,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00M3, proof and functoriality paragraph, using projective resolutions (flatness and lifting suffice)"
+  "place": "Tag 00M3, proof and functoriality paragraph; canonical implementation via Mathlib.Algebra.Homology.Bifunctor"
  },
  "mathlib_searches": [
   {
@@ -87,10 +87,10 @@
   "module": "Sheaf.Algebra.Homology.TensorBicomplex",
   "file": "lean/Sheaf/Algebra/Homology/TensorBicomplex.lean",
   "declaration": "HomologicalComplex₂.tensorBicomplex",
-  "statement": "def tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) : HomologicalComplex₂ (ModuleCat.{u} R) (.down ℕ) (.down ℕ)",
+  "statement": "abbrev tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) : HomologicalComplex₂ (ModuleCat.{u} R) (.down ℕ) (.down ℕ)",
   "branch": "sheaf-dag",
-  "by": "G2",
-  "date": "2026-10-12",
+  "by": "N2",
+  "date": "2026-10-14",
   "declarations": [
    "HomologicalComplex₂.tensorBicomplex",
    "HomologicalComplex₂.tensorBicomplexMap",
@@ -108,13 +108,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "X-4d3ad",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T085241-L-15527",
+  "landing": "20261013T201804-L-3975120",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile cleanly; target and declaration interfaces, forced adaptations, imports, DAG metadata, report, and axioms satisfy the review requirements."
  }
 }

@@ -43,7 +43,8 @@ private def columnAugmentation {R : Type u} [CommRing R]
       ((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P where
   f p := 𝟙 (P.X p) ⊗ₘ Q.π.f 0
   comm' p p' h := by
-    simp only [tensorBicomplex, flip_X_d, ofGradedObject_d_f,
+    simp only [tensorBicomplex, flip_X_d, Functor.mapBifunctorHomologicalComplex_obj_obj_d_f,
+    curriedTensor_map_app, ← tensorHom_id,
       Functor.mapHomologicalComplex_obj_d, Functor.flip_obj_map, curriedTensor_map_app,
       ← tensorHom_id,
       tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id]
@@ -53,7 +54,8 @@ private theorem columnAugmentation_zero {R : Type u} [CommRing R]
     (tensorBicomplex P Q.complex).flip.d 1 0 ≫ columnAugmentation P Q = 0 := by
   ext p
   simp only [HomologicalComplex.comp_f, columnAugmentation, flip_d_f,
-    tensorBicomplex, ofGradedObject_X_d, tensorHom_comp_tensorHom,
+    tensorBicomplex, Functor.mapBifunctorHomologicalComplex_obj_obj_X_d, curriedTensor_obj_map,
+    ← id_tensorHom, tensorHom_comp_tensorHom,
     Category.comp_id, ProjectiveResolution.complex_d_comp_π_f_zero,
     HomologicalComplex.zero_f]
   simp
@@ -94,7 +96,8 @@ private noncomputable def rowAugmentation {R : Type u} [CommRing R]
       ((tensorRight M).mapHomologicalComplex (.down ℕ)).obj Q.complex where
   f q := (ε.f 0 ⊗ₘ 𝟙 (Q.complex.X q)) ≫ (β_ M (Q.complex.X q)).hom
   comm' q q' h := by
-    simp only [tensorBicomplex, ofGradedObject_X_d,
+    simp only [tensorBicomplex, Functor.mapBifunctorHomologicalComplex_obj_obj_X_d,
+    curriedTensor_obj_map, ← id_tensorHom,
       Functor.mapHomologicalComplex_obj_d, Functor.flip_obj_map, curriedTensor_map_app,
       ← tensorHom_id]
     rw [Category.assoc, ← BraidedCategory.braiding_naturality]
@@ -109,7 +112,8 @@ private theorem rowAugmentation_zero {R : Type u} [CommRing R]
     (tensorBicomplex P Q.complex).d 1 0 ≫ rowAugmentation P ε Q = 0 := by
   ext q
   simp only [HomologicalComplex.comp_f, rowAugmentation, tensorBicomplex,
-    ofGradedObject_d_f, ← Category.assoc, tensorHom_comp_tensorHom,
+    Functor.mapBifunctorHomologicalComplex_obj_obj_d_f, curriedTensor_map_app, ← tensorHom_id,
+    ← Category.assoc, tensorHom_comp_tensorHom,
     Category.comp_id, augmentation_zero ε,
     HomologicalComplex.zero_f]
   simp
@@ -207,7 +211,7 @@ theorem flatResolution_torComparison
       (∀ (p q : ℕ), 0 < q →
         (ShortComplex.mk (((tensorBicomplex F Q.complex).X p).d (q + 1) q)
           (((tensorBicomplex F Q.complex).X p).d q (q - 1))
-          (by simp)).Exact) := by
+          (by exact ((tensorBicomplex F Q.complex).X p).d_comp_d _ _ _)).Exact) := by
     constructor
     · intro p q hp
       cases p with

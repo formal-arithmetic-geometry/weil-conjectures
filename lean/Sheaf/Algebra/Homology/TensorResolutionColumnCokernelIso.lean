@@ -34,7 +34,8 @@ private def columnAugmentation {R : Type u} [CommRing R]
       ((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P.complex where
   f p := 𝟙 (P.complex.X p) ⊗ₘ Q.π.f 0
   comm' p p' h := by
-    simp only [tensorBicomplex, flip_X_d, ofGradedObject_d_f,
+    simp only [tensorBicomplex, flip_X_d, Functor.mapBifunctorHomologicalComplex_obj_obj_d_f,
+    curriedTensor_map_app, ← tensorHom_id,
       Functor.mapHomologicalComplex_obj_d, Functor.flip_obj_map, curriedTensor_map_app,
       ← tensorHom_id,
       tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id]
@@ -44,7 +45,8 @@ private theorem columnAugmentation_zero {R : Type u} [CommRing R]
     (tensorBicomplex P.complex Q.complex).flip.d 1 0 ≫ columnAugmentation P Q = 0 := by
   ext p
   simp only [HomologicalComplex.comp_f, columnAugmentation, flip_d_f,
-    tensorBicomplex, ofGradedObject_X_d, tensorHom_comp_tensorHom,
+    tensorBicomplex, Functor.mapBifunctorHomologicalComplex_obj_obj_X_d, curriedTensor_obj_map,
+    ← id_tensorHom, tensorHom_comp_tensorHom,
     Category.comp_id, ProjectiveResolution.complex_d_comp_π_f_zero,
     HomologicalComplex.zero_f]
   simp
@@ -118,7 +120,9 @@ theorem tensorResolutionColumnCokernelIso (R : Type u) [CommRing R] :
   ext p
   simp only [HomologicalComplex.comp_f, columnAugmentation, chainTensorMap,
     Functor.mapHomologicalComplex_map_f, NatTrans.mapHomologicalComplex_app_f,
-    Functor.flip_obj_map, curriedTensor_map_app, ← tensorHom_id, tensorBicomplexMap, homMk_f_f,
+    Functor.flip_obj_map, curriedTensor_map_app, ← tensorHom_id, tensorBicomplexMap,
+    Functor.mapBifunctorHomologicalComplex_map_app_f_f,
+    Functor.mapBifunctorHomologicalComplex_obj_map_f_f,
     flipFunctor_map_f_f, Functor.flip_map_app, curriedTensor_obj_map, ← id_tensorHom,
     tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id, hb]
 
