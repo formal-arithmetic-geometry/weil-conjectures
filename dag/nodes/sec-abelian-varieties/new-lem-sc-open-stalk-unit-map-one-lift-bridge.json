@@ -25,16 +25,16 @@
  ],
  "proof": [
   {
-   "text": "Take V=U.ι image A. The canonical isomorphism between V.toScheme and A.toScheme transports the given f. Conjugate by Modules.overMapCompOverEquiv and take the preimage under Modules.overEquiv V to obtain k. This uses only the supplied local morphism, not a lifting theorem.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Take the canonical natural restriction-stalk comparison. Represent each stalk vector by a germ on a neighbourhood and use the assumed equation hf, Mathlib germ_restrictStalkNatIso_hom_app, and the slice equivalence. The composite stalk-ring map gives linearity after scalar restriction. Postcompose the resulting S(k) a_N = a_F restrictScalars(q) with a_N inverse.",
+   "text": "Set V=U.ι image A. Copy the base map of U.ι.isoImage A so its value at the marked point is definitionally the marked point of V. Restriction along this isomorphism is an equivalence, with unit and counit obtained from Modules.restrictFunctorComp, restrictFunctorCongr and restrictFunctorId. Compose it with Modules.overEquiv V to obtain the fully faithful functor D from slice sheaves on V to module sheaves on A. Modules.overMapCompOverEquiv and the equality e.hom followed by homOfLE(V≤U)=A.ι give b:R D ≅ E_U restrict A. Define k as D.preimage of b_F followed by f followed by b_N inverse. Use the proved restrictionStalkLinearNatIso helper of OpenModuleStalkRestrictionComparison for e.hom and A.ι. The equality e.hom followed by V.ι=A.ι followed by U.ι identifies the two composite stalk ring maps. Whisker the two linear comparisons, b and restrictScalarsComp/restrictScalarsCongr to obtain a. Its formula, naturality of the comparison, D.map_preimage and the restriction-stalk germ formula show that conjugating S(k) by a sends each germ of a section over B in A to the germ of f.app B on that section. This entire construction is the proved private exists_slice_hom_with_subscheme_germ_formula helper; it contains no remaining obligations.",
    "uses": [
     "lem-sc-open-module-stalk-restriction-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Cancel the component a_N from the desired equality and compare the underlying functions on a stalk element m. The additive isomorphism Modules.restrictStalkNatIso A.ι supplies a preimage of a_F(m) on the stalk of the restriction to A. Presheaf.exists_germ_eq represents that preimage by a section s over an open B containing the marked point of A. Modules.germ_restrictStalkNatIso_hom_app identifies its image with the germ of s on A.ι image B. Apply the private transport helper germ formula and the supplied equation hf B hxB s, then cancel a_F inverse followed by a_F. This proves the requested equation after restriction of scalars without changing any hypotheses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -42,10 +42,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B4",
+  "group": "P3",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Sheaves Tag 00A0 (3); pure interface transport argument expanded by the second reader, without a local existence assertion."
+  "place": "Sheaves Lemma 6.31.1, Tag 00A0 (2)-(3), including modules; formal transport via Mathlib natural isomorphisms and the existing proved linear restriction-stalk comparison, followed by germ representation and the supplied hf."
  },
  "lean": {
   "existing": false,
@@ -120,10 +120,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T140812-L-311310",
-  "kind": "interface",
+  "landing": "20261013T143550-L-562318",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
