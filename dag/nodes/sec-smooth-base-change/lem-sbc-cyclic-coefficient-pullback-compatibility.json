@@ -12,22 +12,33 @@
  ],
  "proof": [
   {
-   "text": "Expand the defining comparison and use naturality of pullback on Ext and the universal section.",
+   "text": "The base-change map g satisfies g followed by the first projection for W equals the first projection for V, by pullback.map_fst and the identity laws. Generalize the named composite k and its equality proof, then substitute k, to apply constantPullbackCompositionCoherence without a dependent rewrite of upperStarComp.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-etale-cohomology"
+    "lem-weil-pbc-constant-pullback-composition-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Iso.ext to the resulting equality of homs of composed isomorphisms and apply congrArg Iso.inv. This gives upperStar(g).map(cf.hom) followed by cg.hom equals the inverse upperStarComp component followed by cv.hom.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use cohomologyMap_map, the already proved coefficient naturality law in the module of def-weil-pbc-cohomology-pullback, to commute H.map(cf.hom) past cohomologyMap g. Sheaf.H.map_comp_apply combines the two coefficient maps. Substitute the coefficient morphism equality and use Sheaf.H.map_comp_apply again to obtain the stated equality.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-cohomology"
+  "lem-weil-pbc-constant-pullback-composition-coherence",
+  "def-weil-pbc-cohomology-pullback"
  ],
  "proof_origin": {
-  "by": "worker S2",
-  "document": "Stacks Project Tag 03Q8",
-  "place": "composition coherence for constant sheaves"
+  "by": "worker X3",
+  "document": "Stacks Project Tags 03Q8 and 03CB; existing constantPullbackCompositionCoherence",
+  "place": "Constant coefficient comparison, followed by naturality in coefficients and functoriality of Sheaf.H.map"
  },
  "mathlib_searches": [
   {
@@ -110,10 +121,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T224518-L-1475069",
-  "kind": "interface",
+  "landing": "20261013T231551-L-1823620",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
