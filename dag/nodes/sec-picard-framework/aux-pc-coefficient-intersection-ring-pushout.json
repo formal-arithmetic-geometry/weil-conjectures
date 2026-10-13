@@ -1,0 +1,137 @@
+{
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientTargetTensorDecoder",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor product of base changed rings tensored with a module over the original ring is the base change of that module",
+   "results": "['TensorProduct.isBaseChange', 'isBaseChange_tensorProduct_map', 'LinearEquiv.baseChange_tmul', 'LinearMap.rTensor_baseChange', 'IsBaseChange.tensorEquiv', 'LinearMap.baseChange_eq_ltensor', 'TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul', 'LinearMap.baseChange_tmul']",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found; no exact combined statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPushout.cancelBaseChange",
+   "results": "loogle: unknown identifier 'IsPushout.cancelBaseChange'",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found; no exact combined statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPushout.cancelBaseChange|isPushout_appTop_of_isPullback",
+   "results": "['Mathlib/AlgebraicGeometry/Morphisms/Affine.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean', 'Mathlib/RingTheory/IsTensorProduct.lean', 'Mathlib/RingTheory/IsTensorProduct.lean', 'Mathlib/RingTheory/IsTensorProduct.lean', 'Mathlib/RingTheory/IsTensorProduct.lean', 'Mathlib/RingTheory/IsTensorProduct.lean', 'Mathlib/RingTheory/RingHom/Flat.lean']",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found; no exact combined statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent module pullback affine sections tensor product unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coordinate rings of a cartesian square restricted to affine opens form a pushout",
+   "results": "['AlgebraicGeometry.isPullback_SpecMap_pushout', 'AlgebraicGeometry.isPullback_Spec_map_pushout', 'AlgebraicGeometry.isPullback_Spec_map_isPushout', 'AlgebraicGeometry.isPullback_SpecMap_of_isPushout', 'AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ', 'AlgebraicGeometry.AffineSpace.isPullback_map', 'AlgebraicGeometry.AffineSpace.over_over', 'AlgebraicGeometry.Scheme.Pullback.affine_hasPullback']",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found; no exact combined statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isPushout_appTop_of_isPullback",
+   "results": "['AlgebraicGeometry.isPushout_appTop_of_isPullback']",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found; no exact combined statement."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), affine coefficient computation: the balanced map back sends (r tensor d) tensor n to r tensor (d*n).",
+   "via": [
+    "lem-pc-coefficient-target-tensor-injective",
+    "lem-pc-coefficient-target-affine-tensor-presentation",
+    "lem-pc-finite-affine-cech-coefficient-comparison-bijective",
+    "lem-pc-finite-affine-cech-coefficient-base-change",
+    "lem-pc-finite-affine-cech-base-change-coordinates",
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 02KG, 01I9, 01IA and 0097",
+  "note": "Affine ring pushout and affine pullback sections separated before Mathlib tensor cancellation."
+ },
+ "id": "aux-pc-coefficient-intersection-ring-pushout",
+ "kind": "statement",
+ "title": "Affine coefficient intersection ring pushout",
+ "statement": "Let f:X -> T be a separated morphism of schemes, U an affine open of T, Z an affine open of Y=f inverse image U, and g:Tprime -> U, gprime:Xprime -> X, fprime:Xprime -> Tprime a cartesian square over f and g followed by U. Let W=gprime inverse image of the image of Z in X, and let B be an affine open of Tprime. Set I=W intersect fprime inverse image B, A=Gamma(U,O), D=Gamma(Y,Z,O), R=Gamma(Tprime,B,O), and S=Gamma(Xprime,I,O). Use the explicit maps A -> D and D -> S of [def-pc-coefficient-intersection-ring-data], A -> R induced by g and R -> S induced by fprime. Give S its A-algebra via A -> R -> S. The A-D-S and A-R-S scalar towers hold, and S is the pushout of the commutative A-algebras R and D, in the sense that the natural R-algebra homomorphism R tensor_A D -> S is bijective.",
+ "stmt_deps": [
+  "def-pc-coefficient-intersection-ring-data",
+  "def-pc-morphism-conventions",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 02KG (affine computation), 01I9, 01IA and 0097"
+ },
+ "proof": [
+  {
+   "text": "Use the restricted lift k and its projection equation to prove k inverse image Z = W. The original square restricted to U is cartesian. Apply Mathlib isIso_pushoutSection_of_isAffineOpen and isIso_pushoutSection_iff to this square on top, Z, B and I. Simplify coefficientBaseRingMap using appTop, appLE and GammaSpecIso cancellation. Commutativity of the resulting pushout gives IsScalarTower A D S; IsScalarTower A R S is definitional. Convert the categorical ring pushout to Algebra.IsPushout with CommRingCat.isPushout_iff_isPushout. This is a complete Lean proof with no new holes.",
+   "uses": [
+    "def-pc-coefficient-intersection-ring-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-coefficient-intersection-ring-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientIntersectionRingPushout",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientIntersectionRingPushout.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coefficientIntersection_ring_pushout",
+  "statement": "theorem coefficientIntersection_ring_pushout\n    {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]\n    (U : T.Opens) (hU : IsAffineOpen U)\n    (Z : (f ⁻¹ᵁ U).toScheme.Opens) (hZ : IsAffineOpen Z)\n    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n    (sq : IsPullback g' f' f (g ≫ U.ι))\n    (W : X'.Opens) (hW : W = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ Z))\n    (B : T'.Opens) (hB : IsAffineOpen B) :\n    let A := Γ(U.toScheme, ⊤)\n    let R := Γ(T', B)\n    let D := Γ((f ⁻¹ᵁ U).toScheme, Z)\n    let S := Γ(X', W ⊓ f' ⁻¹ᵁ B)\n    let : Algebra A R := (g.appLE ⊤ B (by simp)).hom.toAlgebra\n    let : Algebra A D := (coefficientBaseRingMap f U Z).toAlgebra\n    let : Algebra D S := (coefficientIntersectionRingMap f U Z g g' f' sq W hW B).toAlgebra\n    let : Algebra R S := (f'.appLE B (W ⊓ f' ⁻¹ᵁ B) inf_le_right).hom.toAlgebra\n    let : Algebra A S := ((f'.appLE B (W ⊓ f' ⁻¹ᵁ B) inf_le_right).hom.comp\n      (g.appLE ⊤ B (by simp)).hom).toAlgebra\n    ∃ hD : IsScalarTower A D S, letI := hD\n      ∃ hR : IsScalarTower A R S, letI := hR\n        Algebra.IsPushout A R D S",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T132435-L-4128020",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T132435-L-4128020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
+import Sheaf.AlgebraicGeometry.CoefficientIntersectionRingPushout
+import Sheaf.AlgebraicGeometry.CoefficientIntersectionSectionModel
 
 /-! # Injective of the coefficient tensor map
 
@@ -72,8 +72,47 @@ theorem exists_coefficientTarget_tensor_decoder
           (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op
             (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s))) =
           (1 : Γ(T', B)) ⊗ₜ[Γ(U.toScheme, ⊤)] s := by
-  sorry
-
+  classical
+  dsimp only
+  let A := Γ(U.toScheme, ⊤)
+  let R := Γ(T', B)
+  let D := Γ((f ⁻¹ᵁ U).toScheme, Z)
+  let I := W ⊓ f' ⁻¹ᵁ B
+  let S := Γ(X', I)
+  let : Algebra A R := (g.appLE ⊤ B (by simp)).hom.toAlgebra
+  let : Algebra A D := (coefficientBaseRingMap f U Z).toAlgebra
+  let : Algebra D S :=
+    (coefficientIntersectionRingMap f U Z g g' f' sq W hW B).toAlgebra
+  let : Algebra R S := (f'.appLE B I inf_le_right).hom.toAlgebra
+  let : Algebra A S := ((f'.appLE B I inf_le_right).hom.comp
+    (g.appLE ⊤ B (by simp)).hom).toAlgebra
+  let N : Type u := Γ(F.restrict (f ⁻¹ᵁ U).ι, Z)
+  let : Module A N := Module.compHom _ (coefficientBaseRingMap f U Z)
+  let M := (pullback g').obj F
+  have : IsScalarTower A D N := IsScalarTower.of_algebraMap_smul (fun _ _ ↦ rfl)
+  obtain ⟨hD, hR, hP⟩ :=
+    coefficientIntersection_ring_pushout f U hU Z hZ g g' f' sq W hW B hB
+  let := hD
+  let := hR
+  let := hP
+  let : Module R Γ(M, I) := Module.compHom _ (f'.appLE B I inf_le_right).hom
+  have : IsScalarTower R S Γ(M, I) :=
+    IsScalarTower.of_algebraMap_smul (fun _ _ ↦ rfl)
+  let support : Γ((pushforward (W.ι ≫ f')).obj (M.restrict W.ι), B) →ₗ[R] Γ(M, I) :=
+    { toFun := (coefficientSupportIso f' M W B).hom
+      map_add' := by intros; exact map_add _ _ _
+      map_smul' := by
+        intro r s
+        exact coefficientSupportIso_smul f' M W B r s }
+  obtain ⟨e, he⟩ :=
+    exists_coefficientIntersection_section_model f F U hU Z hZ g g' f' sq W hW B hB
+  let c := (Algebra.IsPushout.cancelBaseChange A R D S N).toLinearMap
+  refine ⟨c.comp ((e.restrictScalars R).comp support), ?_⟩
+  intro s
+  change c (e ((coefficientSupportIso f' M W B).hom
+    ((coefficientSupportIso f' M W B).inv _))) = _
+  rw [Iso.inv_hom_id_apply, he]
+  exact Algebra.IsPushout.cancelBaseChange_tmul A R D S N s
 
 end
 end AlgebraicGeometry.Scheme.Modules
