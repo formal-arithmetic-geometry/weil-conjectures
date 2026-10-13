@@ -91,6 +91,15 @@ noncomputable def upperStarStalkIso {X : Scheme.{u}} (f : X ⟶ Y) (y : Spec (.o
     (stalkFunctor l (y ≫ f)).obj G ≅ (stalkFunctor l y).obj ((f)^*[_].obj G) :=
   (Sheaf.Γ _ _).mapIso ((upperStarComp _ y f).app G)
 
+omit [IsSepClosed Ω] in
+/-- The identification `Γ(Spec Ω, (y ≫ f)^* G) ≅ Γ(Spec Ω, y^* f^* G)` is natural in `G`. -/
+lemma upperStarStalkIso_hom_naturality {X : Scheme.{u}} (f : X ⟶ Y) (y : Spec (.of Ω) ⟶ X)
+    {G H : Sheaf (Scheme.ProEt.topology Y) (WeilCoefficients.{u} l)} (φ : G ⟶ H) :
+    (stalkFunctor l (y ≫ f)).map φ ≫ (upperStarStalkIso l f y H).hom =
+      (upperStarStalkIso l f y G).hom ≫ (stalkFunctor l y).map ((f)^*[_].map φ) := by
+  simp only [upperStarStalkIso, Functor.mapIso_hom, Iso.app_hom, Functor.comp_map,
+    ← Functor.map_comp, (upperStarComp _ y f).hom.naturality]
+
 /-- The pullback of a lisse sheaf, as a lisse sheaf. -/
 noncomputable abbrev LisseSheaf.upperStar {X : Scheme.{u}} (f : X ⟶ Y) (G : LisseSheaf l Y) :
     LisseSheaf l X :=
