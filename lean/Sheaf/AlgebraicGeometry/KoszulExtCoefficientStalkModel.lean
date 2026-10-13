@@ -13,14 +13,8 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.RingTheory.KoszulProjectiveResolution
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Mathlib.LinearAlgebra.ExteriorPower.Basis
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Algebra.Homology.InverseImageStalkScalarTransport
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
+import Sheaf.AlgebraicGeometry.KoszulExtCoefficientAffineModel
+import Sheaf.AlgebraicGeometry.AffineModelTensorPullbackStalk
 
 /-! # A commuting stalk model for Koszul coefficient reduction
 
@@ -105,6 +99,9 @@ theorem koszulExtCoefficient_stalk_model
         (HomologicalComplex.homologyMap
           (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) m).hom.baseChange R
             (eF x) := by
-  sorry
+  obtain ⟨eF, eG, hcomm⟩ :=
+    koszulExtCoefficient_affine_model i n m U f hf hreg a ha
+  obtain ⟨τ, hτ⟩ := exists_affine_model_tensorPullback_stalk i V z U hzU
+  exact ⟨τ _ _ eF, τ _ _ eG, hτ _ _ _ _ _ _ eF eG hcomm⟩
 
 end AlgebraicGeometry

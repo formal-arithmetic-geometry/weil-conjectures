@@ -1,0 +1,163 @@
+{
+ "id": "new-k1-koszul-ext-coefficient-affine-model",
+ "kind": "statement",
+ "title": "Affine sheaf-level Koszul Ext coefficient square",
+ "statement": "For a closed immersion i:Z→Y [def-weil-closed-immersion, def-pc-scheme], with the supplied derived category [def-pc-derived-category, def-pur-derived-internal-hom], an affine open U, a Koszul-regular length-n sequence generating I=ker(i)(U) [def-weil-pbc-koszul-regular-sequence, def-sbc-closed-immersion-ideal-sheaf], and m≥0 independent of n, let F and G be the degree-m derived internal Hom sheaves with coefficients O_Y and i_*O_Z. Let c:F→G be induced by the actual adjunction-unit map a. Let T be associated-module sheafification followed by the affine chart restriction. Then there exist sheaf isomorphisms eF:F|_U≅T(H^m(Hom(K,A))) and eG:G|_U≅T(H^m(Hom(K,A/I))) such that c|_U followed by eG equals eF followed by T(H^m(coefficient reduction)) [new-j3-koszul-quotient-coefficient-complex]. No pullback, stalk or scalar extension is asserted. Associated-module sheafification is the functor tilde whose principal-open sections are module localization [lem-weil-pbc-spec-module-tilde-sections]; sheaf modules and the signed dual complex are [def-weil-sheaf-of-modules-category, def-sc-koszul-dual-complex].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "new-j3-koszul-quotient-coefficient-complex",
+  "def-sc-koszul-dual-complex",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, affine finite free Koszul Hom calculation and coefficient morphism"
+ },
+ "proof": [
+  {
+   "text": "Sheafify the quotient-augmented Koszul resolution on the closed immersion affine chart; exterior terms give a bounded finite free complex.",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute restricted derived internal Hom with this resolution, using a common K-injective comparison for both coefficients. Naturality identifies the actual coefficient morphism with reduction of values.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model",
+    "new-j3-koszul-quotient-coefficient-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact associated-module sheafification commutes with cohomology. Transport homology and the morphism to obtain the two isomorphisms and the square.",
+   "uses": [
+    "lem-sc-tilde-preserves-finite-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-j3-koszul-projective-resolution",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model",
+  "new-j3-koszul-quotient-coefficient-complex",
+  "lem-sc-tilde-preserves-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "K1",
+  "group": "K1",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, affine finite free Koszul Hom calculation and coefficient morphism",
+  "note": "Strict part of the original stalk model: affine derived computation separated from underived tensor stalk transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A regular closed immersion dual Koszul cohomology gives sheaf Ext naturally in the coefficient module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular closed immersion dual Koszul cohomology gives sheaf Ext, naturally in coefficient module quotient",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom; ",
+   "date": "2026-10-13",
+   "verdict": "No exact assembled comparison; component declarations inspected locally."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.Tilde.stalkIso",
+   "results": "0 hits: ; loogle: unknown identifier 'ModuleCat.Tilde.stalkIso'",
+   "date": "2026-10-13",
+   "verdict": "No exact assembled comparison; component declarations inspected locally."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkIso|pullback.*tilde",
+   "results": "25 hits: Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean; ",
+   "date": "2026-10-13",
+   "verdict": "No exact assembled comparison; component declarations inspected locally."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology sheaf of internal Hom from a finite locally free resolution and functoriality in the second variable",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, LightCondensed.ihom_map_val_app, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.map_ιFree_mapFree_hom",
+   "date": "2026-10-13",
+   "verdict": "Second reader: component APIs only, no exact assembled comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkModel",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-j3-koszul-ext-coefficient-stalk-model",
+   "place": "Affine sheaf-level Koszul Ext coefficient square",
+   "via": [
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulExtCoefficientAffineModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulExtCoefficientAffineModel.lean",
+  "declaration": "AlgebraicGeometry.koszulExtCoefficient_affine_model",
+  "statement": "theorem koszulExtCoefficient_affine_model\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (n m : ℕ)\n    (U : Y.affineOpens) (f : Fin n → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f)\n    (a : SheafOfModules.unit Y.ringCatSheaf ⟶\n      (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))\n    (ha : a = (Scheme.Modules.pullbackPushforwardAdjunction i).unit.app _ ≫\n      (Scheme.Modules.pushforward i).map (Scheme.Modules.pullbackObjUnitIso i).hom) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let F := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (m : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj (SheafOfModules.unit Y.ringCatSheaf)))\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (m : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let c : F ⟶ G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (m : ℤ)).map\n        (H.map (𝟙 (op (S.obj B)), S.map a))\n    let A := (Γ(Y, U.1) : Type u)\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let P := (ExteriorAlgebra.koszulDualComplex A n f).homology m\n    let Q := (ExteriorAlgebra.koszulQuotientDualComplex A (i.ker.ideal U) n f).homology m\n    let q := HomologicalComplex.homologyMap\n      (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) m\n    ∃ (eF : (Scheme.Modules.restrictFunctor U.1.ι).obj F ≅ T.obj P)\n      (eG : (Scheme.Modules.restrictFunctor U.1.ι).obj G ≅ T.obj Q),\n      (Scheme.Modules.restrictFunctor U.1.ι).map c ≫ eG.hom = eF.hom ≫ T.map q",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T123207-L-3677424",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T123207-L-3677424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
