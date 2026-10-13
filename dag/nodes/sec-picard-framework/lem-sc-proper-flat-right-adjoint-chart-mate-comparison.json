@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-proper-flat-right-adjoint-chart-mate-comparison",
+ "kind": "statement",
+ "title": "Arrow comparison between a restricted global mate and an affine-chart mate",
+ "statement": "Let $f:X\\to Y$ be proper, flat and locally of finite presentation, and let $g:Y'\\to Y$, with $Y,Y'$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions, def-weil-proper-morphism, def-weil-flat-morphism]. Let $X'=X\\times_Y Y'$ [def-pc-fibre-product], and let $a,a'$ be right adjoints of the canonical lifted derived direct images [def-pc-derived-category, def-pc-derived-direct-image, lem-pc-qcqs-derived-direct-image-right-adjoint]. Assume the ordinary canonical derived base-change maps are invertible on every quasi-coherent complex [def-pc-derived-base-change-map]. Fix $K\\in D_{QCoh}(Y)$ and affine opens $V\\subset Y$, $W\\subset Y'$ with $W\\subset g^{-1}(V)$. Put $U=f^{-1}(V)$ and $U'=f'^{-1}(W)$; assume the (automatic) compactness and quasi-separatedness of $U$. Let $f_V:U\\to V$ be the restriction and $g_W:W\\to V$ the induced map. Let $b,b'$ be any right adjoints to the canonical lifted direct images of $f_V$ and the projection $U\\times_V W\\to W$, with their adjunctions, and assume ordinary derived base change for this chart square on every quasi-coherent complex. Let $q:U'\\to U\\times_V W$ have composites with the two projections and the open inclusions $U\\to X$, $W\\to Y'$ equal to $U'\\to X'\\to X$ and $U'\\to X'\\to Y'$, respectively. Then, in the arrow category of $D(\\mathcal O_{U'})$, there exists an isomorphism from the restriction to $U'$ of the ambient image of the global canonical mate at $K$ to the image under $Lq^*$ of the ambient image of the chart canonical mate at $LV^*K$ [def-sc-duality-equation-base-change-map, def-pc-derived-open-restriction-maps, def-pc-derived-pullback]. No invertibility of either mate is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Remark 48.6.1 (Tag 0E9S), with Tag 0E4J and equation-base-change-map"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "def-pc-derived-base-change-map",
+  "def-sc-duality-equation-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The two projection equations identify q with the isomorphism of the two pullback models of the open U prime. To see this, the pullback universal property first identifies the map to U and the map to W because the open inclusions are monomorphisms. Pasting the original pullback square with the open squares shows U prime has the same pullback universal property. Restriction to an open agrees with its derived pullback.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply proper-flat restriction compatibility to the two given global right adjoints. The open-unit maps are invertible. In the open base-change formula, the other comparison arrows are isomorphisms from right-adjoint uniqueness and the open counit. They identify the restricted global right adjoints with the supplied local right adjoints b and b prime, irrespective of their choices. Combining with pullback composition and q gives isomorphisms between the source objects and between the target objects of the two asserted arrows.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-restriction-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the mate as pullback of a applied to the unit, followed by pullback of the inverse conjugate of ordinary base change, followed by the counit. For the two ways of horizontally pasting the open squares with the global square, the composed units and counits are equal after the composition comparisons by the adjunction triangle identities. The ordinary base-change map restricts to the chart map, since both are obtained from the same pullback composition isomorphisms and adjunctions. Thus their conjugates, and their inverses, intertwine the endpoint comparisons in the previous step. This gives the commutative square of mates in Remark 48.6.1, and its vertical arrows are invertible, hence an isomorphism in the arrow category. No step uses invertibility of the mate itself.",
+   "uses": [
+    "def-sc-duality-equation-base-change-map",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-flat-right-adjoint-restriction-open",
+  "def-sc-duality-equation-base-change-map",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Remark 48.6.1 (Tag 0E9S), with Tag 0E4J and equation-base-change-map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of proper flat right adjoint base change to affine open subschemes canonical mate",
+   "results": "8 hits: underived Scheme.Modules.restrictAdjunction, pullbackPushforwardAdjunction, restriction counit isomorphism, and flat_appLE variants; no derived chart-mate comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Adjunction",
+   "results": "12 generic adjunction/equivalence/fully faithful results; no scheme-derived chart-mate comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived right adjoint base change mate comparison restriction affine opens",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*restrict|basechange.*chart|restrict.*mate",
+   "results": "25 Mathlib hits, all unrelated ring/module restrictions or topology. Direct rg of library and DAG finds the parent chart/global theorem, underived module mate comparisons and the open-unit theorem; none has this arrow-comparison signature. Blueprint searches for 0E9S and restriction adjoint found no duplicate scheme-derived comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeChart",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Reduction to affine bases in the proper-flat right-adjoint base-change formula used in the diagonal counit identity: compatibility of the canonical mate with affine open restriction (Remark 48.6.1).",
+   "via": [
+    "lem-sc-proper-flat-right-adjoint-basechange-chart",
+    "lem-sc-proper-flat-right-adjoint-basechange-global",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointChartMateComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatRightAdjointChartMateComparison.lean",
+  "declaration": "AlgebraicGeometry.proper_flat_rightAdjoint_chart_mate_comparison",
+  "statement": "theorem proper_flat_rightAdjoint_chart_mate_comparison\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y Y' : Scheme.{u}}\n    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (g : Y' ⟶ Y) (f : X ⟶ Y) [IsProper f] [Flat f] [LocallyOfFinitePresentation f]\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (a' : schemeDerivedQCohCategory Y' ⥤ schemeDerivedQCohCategory (pullback f g))\n    (adjf : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y\n          (QuasiCompact.compactSpace_of_compactSpace f)\n          (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f _ _).fst E.obj E.property) ⊣ a)\n    (adjf' : (schemeDerivedQCohProperty Y').lift\n      ((schemeDerivedQCohProperty (pullback f g)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f g)) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n          (pullback.snd f g) _ _).fst E.obj E.property) ⊣ a')\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition E.obj))\n    (K : schemeDerivedQCohCategory Y)\n    (V : Y.Opens) (W : Y'.Opens) (hWV : W ≤ g ⁻¹ᵁ V)\n    [IsAffine V.toScheme] [IsAffine W.toScheme]\n    [CompactSpace (f ⁻¹ᵁ V).toScheme] [QuasiSeparatedSpace (f ⁻¹ᵁ V).toScheme]\n    (b : schemeDerivedQCohCategory V.toScheme ⥤\n      schemeDerivedQCohCategory (f ⁻¹ᵁ V).toScheme)\n    (b' : schemeDerivedQCohCategory W.toScheme ⥤\n      schemeDerivedQCohCategory (pullback (f ∣_ V) (g.resLE V W hWV)))\n    (adjb : (schemeDerivedQCohProperty V.toScheme).lift\n      ((schemeDerivedQCohProperty (f ⁻¹ᵁ V).toScheme).ι ⋙\n        schemeDerivedDirectImage (f ∣_ V))\n      (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ (f ∣_ V)).fst\n        E.obj E.property) ⊣ b)\n    (adjb' : (schemeDerivedQCohProperty W.toScheme).lift\n      ((schemeDerivedQCohProperty (pullback (f ∣_ V) (g.resLE V W hWV))).ι ⋙\n        schemeDerivedDirectImage (pullback.snd (f ∣_ V) (g.resLE V W hWV)))\n      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n        (quasiSeparatedSpace_of_quasiSeparated\n          (pullback.snd (f ∣_ V) (g.resLE V W hWV))) _ _ _ _\n        (pullback.snd (f ∣_ V) (g.resLE V W hWV)) _ _).fst E.obj E.property) ⊣ b')\n    (hβV : ∀ E : schemeDerivedQCohCategory (f ⁻¹ᵁ V).toScheme,\n      IsIso (schemeDerivedBaseChangeMap (f ∣_ V)\n        (pullback.snd (f ∣_ V) (g.resLE V W hWV)) (g.resLE V W hWV)\n        (pullback.fst (f ∣_ V) (g.resLE V W hWV)) pullback.condition E.obj))\n    (q : ((pullback.snd f g) ⁻¹ᵁ W).toScheme ⟶\n      pullback (f ∣_ V) (g.resLE V W hWV))\n    (hq₁ : q ≫ pullback.fst (f ∣_ V) (g.resLE V W hWV) ≫ (f ⁻¹ᵁ V).ι =\n      ((pullback.snd f g) ⁻¹ᵁ W).ι ≫ pullback.fst f g)\n    (hq₂ : q ≫ pullback.snd (f ∣_ V) (g.resLE V W hWV) ≫ W.ι =\n      ((pullback.snd f g) ⁻¹ᵁ W).ι ≫ pullback.snd f g) :\n    Nonempty (Arrow.mk\n      ((schemeOpenRestriction (pullback f g) ((pullback.snd f g) ⁻¹ᵁ W)).mapDerivedCategory.map\n        ((schemeDerivedQCohProperty (pullback f g)).ι.map\n          (@dualityEquationBaseChangeMap _ X Y Y'\n            (QuasiCompact.compactSpace_of_compactSpace f)\n            (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _\n            f g a a' adjf adjf' hβ K))) ≅\n      Arrow.mk ((derivedPullback q).map\n        ((schemeDerivedQCohProperty (pullback (f ∣_ V) (g.resLE V W hWV))).ι.map\n          (dualityEquationBaseChangeMap (f ∣_ V) (g.resLE V W hWV) b b' adjb adjb' hβV\n            ⟨(derivedPullback V.ι).obj K.obj,\n              (derivedPullback_tensor_preserve_QCoh V.ι).1 K.obj K.property⟩))))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T032956-L-3674032",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T032956-L-3674032",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

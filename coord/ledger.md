@@ -10910,3 +10910,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:29 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.RestrictedAffineComplexSystem (reviewer RETURN: (the landing tools, head a2101b476) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 03:29 L: returned deliver/R2/Sheaf.CategoryTheory.ColimitSiteRawFiniteSectionsLift (reviewer RETURN: (the landing tools, head a5468cf1d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 03:29 L: merged deliver/B3/Sheaf.Algebra.Homology.ModuleHomComplex (stage 3; reviewer PASS; first push; landing 20261013T032955-L-3673836 (proof); batch 20261013T032954; modules 1; new nodes 0)
+- 03:29 L: merged deliver/B4/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeChart (stage 3; reviewer PASS; first push; landing 20261013T032956-L-3674032 (interface); batch 20261013T032954; modules 2; new nodes 1)

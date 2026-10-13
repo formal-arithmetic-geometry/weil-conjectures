@@ -22,24 +22,43 @@
  ],
  "proof": [
   {
-   "text": "1. Let V and W be the given affine opens with W contained in g inverse(V). Set U=f inverse(V) and U prime=f prime inverse(W). The restricted proper-flat finitely presented maps are qcqs. The ordinary derived base-change map on the chart square is the restriction of beta after the canonical direct-image and pullback restriction comparisons, so hβ supplies its invertibility. Restriction also preserves quasi-coherent cohomology.\n\n2. Use proper_flat_rightAdjoint_restriction_open on f and f prime, with their given adjunctions and the canonical open restriction adjunctions, to make the open-unit arrows invertible. In equation (48.4.1.1), the other arrows come from right-adjoint uniqueness and the open counit and are canonical isomorphisms. Thus identify restriction of a(K) with the right adjoint for U to V applied to K restricted to V; do the same for a prime and W.\n\n3. Paste the two open squares horizontally with the original square. The mate construction is compatible with this pasting: the composite units and counits give the pasted mate, by the triangle identities; conjugation of invertible beta commutes with restriction and inversion. Remark 48.6.1 therefore identifies the restricted global map, up to the invertible comparisons of the preceding step, with the canonical mate for U to V and W to V. Apply haffine to that square and K restricted to V. Its mate is invertible, so the restricted global map is invertible. There is no descent or covering step in this assertion.",
+   "text": "Install the affine-scheme structures on V and W. Restrict f to fV:U to V and restrict g to gW:W to V. Properness supplies compactness of U and quasi-separatedness. The inclusion W <= g inverse(V), together with the global pullback equation, gives U prime <= gX inverse(U). The resLE maps r:U prime to U and s:U prime to W commute over V by cancellation of V inclusion and the global pullback equation. Construct q as pullback.lift r s; its two projection equations follow from the pullback lift equations and resLE_comp_ι.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply qcqs derived direct-image right-adjoint existence to fV and to its base change along gW. Use the right adjoints and adjunctions selected by Functor.rightAdjoint and Adjunction.ofIsLeftAdjoint. These objects are determined up to their canonical right-adjoint isomorphism.",
    "uses": [
-    "lem-sc-proper-flat-right-adjoint-restriction-open"
+    "lem-pc-qcqs-derived-direct-image-right-adjoint"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AAB and Remark 48.6.1 (Tag 0E9S)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Obtain ordinary derived base change on the local square from proper_flat_rightAdjoint_baseChange_hβ, using properness, flatness and finite presentation of fV. Define KV as derived pullback of K along V inclusion; preservation of quasi-coherent cohomology supplies its property. Apply the given haffine to fV, gW, the two local right adjoints and KV to obtain invertibility of the local mate.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-basechange-hbeta",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the chart-mate arrow comparison with the explicitly constructed q and its projection equations. The ambient inclusion and derivedPullback q preserve isomorphisms, so the transported local mate is invertible. Arrow.isIso_iff_isIso_of_isIso transfers this property across the comparison arrow isomorphism to the restricted global mate.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-chart-mate-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-proper-flat-right-adjoint-restriction-open"
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-sc-proper-flat-right-adjoint-basechange-hbeta",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-sc-proper-flat-right-adjoint-chart-mate-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AAB and Remark 48.6.1 (Tag 0E9S)"
+  "place": "Tag 0AAB; affine chart reduction via Remark 48.6.1 (Tag 0E9S). Lean implementation by B4."
  },
  "mathlib_searches": [
   {
@@ -116,9 +135,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M4",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261013T015602-L-3023242",
+  "landing": "20261013T032956-L-3674032",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -10,7 +10,8 @@ public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointChartMateComparison
 
 /-! # Proper-flat right-adjoint base change on one affine chart
 
@@ -96,6 +97,64 @@ theorem proper_flat_rightAdjoint_baseChange_chart
         (@dualityEquationBaseChangeMap _ X Y Y'
           (QuasiCompact.compactSpace_of_compactSpace f)
           (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _
-          f g a a' adjf adjf' hβ K))) := by sorry
+          f g a a' adjf adjf' hβ K))) := by
+  classical
+  let : IsAffine V.toScheme := hV
+  let : IsAffine W.toScheme := hW
+  let fV := f ∣_ V
+  let gW := g.resLE V W hWV
+  let : CompactSpace (f ⁻¹ᵁ V).toScheme :=
+    QuasiCompact.compactSpace_of_compactSpace fV
+  let : QuasiSeparatedSpace (f ⁻¹ᵁ V).toScheme :=
+    quasiSeparatedSpace_of_quasiSeparated fV
+  have hUV : (pullback.snd f g) ⁻¹ᵁ W ≤
+      (pullback.fst f g) ⁻¹ᵁ (f ⁻¹ᵁ V) := by
+    calc
+      _ ≤ (pullback.snd f g) ⁻¹ᵁ (g ⁻¹ᵁ V) :=
+        (pullback.snd f g).preimage_mono hWV
+      _ = _ := by
+        rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, pullback.condition]
+  let r := (pullback.fst f g).resLE (f ⁻¹ᵁ V) ((pullback.snd f g) ⁻¹ᵁ W) hUV
+  let s := pullback.snd f g ∣_ W
+  have hrs : r ≫ fV = s ≫ gW := by
+    apply (cancel_mono V.ι).mp
+    simp only [Category.assoc, fV, gW, r, s, morphismRestrict_ι,
+      Scheme.Hom.resLE_comp_ι, Scheme.Hom.resLE_comp_ι_assoc]
+    simp only [← Category.assoc, pullback.condition]
+    simp only [morphismRestrict_ι]
+  let q := pullback.lift r s hrs
+  let FV := (schemeDerivedQCohProperty V.toScheme).lift
+    ((schemeDerivedQCohProperty (f ⁻¹ᵁ V).toScheme).ι ⋙ schemeDerivedDirectImage fV)
+    (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ fV).fst E.obj E.property)
+  have : FV.IsLeftAdjoint :=
+    (schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ fV).choose_spec
+  let b := FV.rightAdjoint
+  let adjb := Adjunction.ofIsLeftAdjoint FV
+  let : QuasiSeparatedSpace (pullback fV gW : Scheme.{u}) :=
+    quasiSeparatedSpace_of_quasiSeparated (pullback.snd fV gW)
+  let FV' := (schemeDerivedQCohProperty W.toScheme).lift
+    ((schemeDerivedQCohProperty (pullback fV gW)).ι ⋙
+      schemeDerivedDirectImage (pullback.snd fV gW))
+    (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _
+      (pullback.snd fV gW)).fst E.obj E.property)
+  have : FV'.IsLeftAdjoint :=
+    (schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ (pullback.snd fV gW)).choose_spec
+  let b' := FV'.rightAdjoint
+  let adjb' := Adjunction.ofIsLeftAdjoint FV'
+  have hβV := proper_flat_rightAdjoint_baseChange_hβ gW fV
+  let KV : schemeDerivedQCohCategory V.toScheme :=
+    ⟨(derivedPullback V.ι).obj K.obj,
+      (derivedPullback_tensor_preserve_QCoh V.ι).1 K.obj K.property⟩
+  have : IsIso (dualityEquationBaseChangeMap fV gW b b' adjb adjb' hβV KV) :=
+    haffine gW fV b b' adjb adjb' hβV KV
+  obtain ⟨c⟩ := proper_flat_rightAdjoint_chart_mate_comparison g f a a' adjf adjf' hβ
+    K V W hWV b b' adjb adjb' hβV q
+    (by
+      change q ≫ pullback.fst fV gW ≫ _ = _
+      simp [q, r])
+    (by
+      change q ≫ pullback.snd fV gW ≫ _ = _
+      simp [q, s])
+  exact (Arrow.isIso_iff_isIso_of_isIso c.hom).mpr (by infer_instance)
 
 end AlgebraicGeometry
