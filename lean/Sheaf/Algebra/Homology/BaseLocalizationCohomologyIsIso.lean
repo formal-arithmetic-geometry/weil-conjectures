@@ -5,6 +5,11 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Algebra.Homology.BaseLocalizationMap
+import Sheaf.Algebra.Homology.LocalizationRestrictionKFlat
+import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+import Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # B-linear invertibility of base localization
 
@@ -50,6 +55,46 @@ theorem baseLocalizationCohomologyMap_isIso
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
     (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) (i : ℤ) :
-    IsIso (baseLocalizationCohomologyMap R Rp B A D S Q L K i) := by sorry
+    IsIso (baseLocalizationCohomologyMap R Rp B A D S Q L K i) := by
+  classical
+  have (T : Type u) [CommRing T] (N : ModuleCat.{u} T) :
+      CategoryTheory.Limits.PreservesColimitsOfShape ℤ
+        ((MonoidalCategory.curriedTensor (ModuleCat.{u} T)).flip.obj N) :=
+    inferInstanceAs (CategoryTheory.Limits.PreservesColimitsOfShape ℤ
+      (MonoidalCategory.tensorRight N))
+  have (T : Type u) [CommRing T] :
+      CategoryTheory.HasExactColimitsOfShape ℤ (ModuleCat.{u} T) :=
+    CategoryTheory.HasExactColimitsOfShape.of_domain_equivalence (ModuleCat.{u} T)
+      (AsSmall.equiv (C := ℤ)).symm
+  have (T : Type u) [CommRing T] (f : T →+* B) :
+      (ModuleCat.extendScalars f).PreservesKFlatQuasiIso :=
+    ⟨fun hP hP' a ↦ CochainComplex.scalarExtension_quasiIso_of_kFlat f a
+      (show QuasiIso a from inferInstance) hP hP'⟩
+  let r := ModuleCat.restrictScalars.{u} (algebraMap R Rp)
+  have hε : (r.mapDerivedCategory ⋙ L.derived).IsLeftDerivedFunctor
+      (baseLocalizationCounit R Rp B A D S Q L)
+      (HomotopyCategory.quasiIso (ModuleCat.{u} Rp) (.up ℤ)) := by
+    apply (Functor.isLeftDerivedFunctor_iff_isIso_app_of_kFlat
+      (ModuleCat.extendScalars (algebraMap Rp B)) _).2
+    intro P hP
+    have hPr := ModuleCat.kFlat_restrictScalars_of_isLocalization S P hP
+    have hc := (Functor.isLeftDerivedFunctor_iff_isIso_app_of_kFlat
+      (ModuleCat.extendScalars (algebraMap R B)) L.counit).1 L.universal _ hPr
+    dsimp only [baseLocalizationCounit]
+    simp only [NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Category.id_comp]
+    have hc' : IsIso (L.counit.app
+        ((r.mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ _).obj P))) := by
+      exact (NatTrans.isIso_app_iff_of_iso L.counit
+        ((r.mapHomotopyCategoryFactors (.up ℤ)).app P)).2 hc
+    infer_instance
+  let := K.universal
+  have hη : IsIso (baseLocalizationDerivedMap R Rp B A D S Q L K) := by
+    exact (K.derived.isLeftDerivedFunctor_iff_isIso_leftDerivedLift K.counit
+      (HomotopyCategory.quasiIso (ModuleCat.{u} Rp) (.up ℤ)) _ _).1 hε
+  dsimp only [baseLocalizationCohomologyMap]
+  infer_instance
 
 end RingTensorCohomology

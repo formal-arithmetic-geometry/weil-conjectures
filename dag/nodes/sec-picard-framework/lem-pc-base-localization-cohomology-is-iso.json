@@ -12,24 +12,38 @@
  ],
  "proof": [
   {
-   "text": "choose a K-flat Rp-resolution P of the restricted input Q. Restriction to R\npreserves K-flatness: tensor an acyclic R-complex with Rp, use exactness of localization,\nand identify its tensor with P by associativity. Apply the K-flat counit theorem to\nboth universal derived functors on P. The counit equation for the universal lift,\nand the ordinary localization tensor isomorphism, then make the lift on P invertible.\nThe augmentation P to Q is a quasi-isomorphism over both bases; naturality transports\ninvertibility to Q. Apply the B-homology functor and conjugate by the two model\ncohomology isomorphisms. This is exactly baseLocalizationCohomologyMap. Identity\nlocalization gives model transport; when S contains zero, both cohomologies are zero.\nNo algebra structures on D over A or B, and no flatness of D, are needed.",
+   "text": "Restriction of a K-flat Rp-complex to R is K-flat by lem-pc-localization-restriction-kflat. The existing scalarExtension_quasiIso_of_kFlat supplies PreservesKFlatQuasiIso for extension to B over either base. ModuleCat has functorial flat resolutions and exact countable colimits, so the source-library characterization isLeftDerivedFunctor_iff_isIso_app_of_kFlat applies. Applied to L.universal it makes L.counit invertible at each restricted K-flat complex.",
+   "uses": [
+    "lem-pc-localization-restriction-kflat",
+    "lem-sc-kflat-scalar-extension-derived-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The counit baseLocalizationCounit at a K-flat Rp-complex is a composite of associators, the restriction derived-category factor isomorphism mapped by L.derived, L.counit at the restricted complex, and the ordinary localization tensor isomorphism mapped by Qh. All factors are invertible. NatTrans.isIso_app_iff_of_iso transports the counit component along mapHomotopyCategoryFactors. Apply the K-flat universal characterization over Rp: restriction.mapDerivedCategory followed by L.derived is a left derived functor with this counit.",
    "uses": [
     "lem-pc-base-localization-map",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-pc-kflat-scalar-extension-counit"
+    "lem-pc-localization-restriction-kflat"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift to K.universal and the universal counit just proved. This makes the entire natural transformation baseLocalizationDerivedMap an isomorphism. In baseLocalizationCohomologyMap, the model cohomology isomorphisms, the image of the input isomorphism under L.derived, the component of this lift, and their image under B-homology are all isomorphisms. The composite is therefore an isomorphism in every degree.",
+   "uses": [
+    "lem-pc-base-localization-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-base-localization-map",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-pc-kflat-scalar-extension-counit"
+  "lem-pc-localization-restriction-kflat",
+  "lem-sc-kflat-scalar-extension-derived-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ8 affine localization identity; Tag 06Y6 universal counit and localization tensor identity"
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6 (derived change of rings), with algebra.tex Tag 00CS (exact localization). Official Stacks pages read online; this clone has no literature sources.; Tag 0DJ8 affine localization identity. R4 Lean proof uses the K-flat counit characterization and uniqueness of universal derived functors directly, without choosing another resolution."
  },
  "mathlib_searches": [
   {
@@ -136,9 +150,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T231541-L-1819412",
+  "landing": "20261013T234519-L-2166288",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
