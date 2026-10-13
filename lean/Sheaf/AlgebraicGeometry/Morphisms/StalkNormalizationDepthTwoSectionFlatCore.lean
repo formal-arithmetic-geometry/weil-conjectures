@@ -13,6 +13,15 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+/- STATEMENT-DISPUTED: The cover need not split over the section. Take c and sigma
+both the identity of Spec A, where A = Q[x^2,xy,y^2], and U the complement of the
+vertex m = (x^2,xy,y^2). The restriction of Spec Q[x,y] to U is finite etale.
+A_m has depth two, but its relative normalization B = Q[x,y] localized over A_m
+is not flat: its generic rank is two and B/mB has basis 1,x,y, hence dimension
+three. Thus no flat neighbourhood of the section closed point exists.
+Tag 0EYJ uses the omitted rational-point hypothesis to split the section cover.
+See report.md, Second reading by N2, for verification of every hypothesis. -/
+
 /-- The formal-neighbourhood flatness calculation for a finite etale model over a
 smooth family.  This is the local algebraic core of the depth-two section argument.
 
