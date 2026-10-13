@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-etale-limit-scalar-section-colimit",
+ "kind": "statement",
+ "title": "Colimit comparison for descended scalar section groups",
+ "statement": "In the setting of lem-weil-pbc-etale-limit-scalar-section-zero-eventually, suppose the displayed section maps rho and mu satisfy their identity, composition and cocone laws. Construct the functor A:J -> AddCommGrpCat with A_j=F_j(Tj) and A(a)=rho_a and the cocone C with point L.pt(Tlim) and legs mu_j. Then C satisfies the colimit universal property. This statement concerns that universal property only; it asserts no eventual vanishing criterion. All data are constructed from the given section maps, and only the proof of the universal property is postponed. The notions are those of def-pc-scheme, def-weil-pbc-scheme-conventions, def-weil-pbc-category-colimit, def-weil-pbc-etale-site, def-weil-pbc-inverse-image, def-weil-pbc-abelian-etale-sheaves, def-pc-fibre-product.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Sites Tag 09YN, lemma-colimit; Etale Cohomology Tag 09YQ, affine-site realization; Cohomology on Sites Tag 09YP, degree zero."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Base change T0 along the final directed tail. The limit of these base changes is Tlim. On affine pieces use the full affine etale site colimit and its sheaf equivalence to present inverse-image sections at the limit as filtered colimits of sections at later stages.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-affine-etale-site-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Insert the inverse-image presentations into the sectionwise colimit of G. Descent of objects, arrows and equalities makes the simultaneous refinements filtered and the diagonal final. Flatten the resulting iterated colimit. The adjunction units and projection equations identify its transitions and legs with rho and mu.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites",
+    "lem-weil-pbc-colimit-of-sites-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a finite affine cover of qcqs T0 and finite affine covers of pairwise intersections. The sheaf matching-family equalizers compute sections. Filtered colimits of abelian groups commute with finite products and equalizers, so the affine comparisons give the asserted colimit universal property on T0. Finality of the tail identifies the sheaf colimit with L. The empty-cover case gives zero groups.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-colimit-of-sites-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Sites Tag 09YN, lemma-colimit; Etale Cohomology Tag 09YQ, affine-site realization; Cohomology on Sites Tag 09YP, degree zero. Specialization and explicit unit formulas written by S4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image adjunction units and pullback composition give functorial transition maps on sections of varying etale sheaves",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a compatible system of etale abelian sheaves on an inverse limit is zero if and only if it becomes zero at a later stage",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit and exists_app_map_eq_zero_of_isLimit concern structure sheaves, not arbitrary etale abelian sheaves. No matching geometric comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar_sections|scalar.*colimit|zero_eventually|section.*cocone|section.*laws; upperStarComp.*unit",
+   "date": "2026-10-13",
+   "results": "SectionContinuity gives a fixed-base sheaf result; ColimitSites and ColimitSiteAbelianSectionUniversality give fixed-sheaf inverse-image presentations. Coherence has upperStarId_hom_app_unit_app and upperStarComp_hom_app_unit_app, but no laws for this varying sheaf system."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionZeroEventually",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Step 3 of the acyclic-replacement plan, scalar continuity used in the finite Cech-complex comparison of 09YP.",
+   "via": [
+    "lem-weil-pbc-etale-limit-finite-cech-colimit",
+    "lem-weil-pbc-etale-limit-finite-cech-complex-colimit",
+    "lem-weil-pbc-etale-limit-injective-colimit-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitScalarSectionColimit.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_scalar_section_colimit",
+  "statement": "theorem etale_limit_scalar_section_colimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    (i₀ : I) (T₀ : (D.obj (op i₀)).Etale)\n    [CompactSpace T₀.left] [QuasiSeparatedSpace T₀.left] :\n    let J := {j : I // i₀ ≤ j}\n    let Tj := fun j : J ↦\n      (MorphismProperty.Over.pullback @Etale ⊤\n        (D.map (homOfLE j.property).op)).obj T₀\n    let Tlim := (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj T₀\n    ∀ (γ : ∀ (j k : J) (a : j ⟶ k),\n        (MorphismProperty.Over.pullback @Etale ⊤\n          (D.map (show j.val ⟶ k.val from a).op)).obj (Tj j) ≅ Tj k)\n      (δ : ∀ j : J,\n        (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op j.val))).obj (Tj j) ≅ Tlim),\n      (∀ (j k : J) (a : j ⟶ k),\n        (γ j k a).hom.left ≫ pullback.fst T₀.hom (D.map (homOfLE k.property).op) =\n          pullback.fst (Tj j).hom (D.map (show j.val ⟶ k.val from a).op) ≫\n            pullback.fst T₀.hom (D.map (homOfLE j.property).op)) →\n      (∀ j : J,\n        (δ j).hom.left ≫ pullback.fst T₀.hom (c.π.app (op i₀)) =\n          pullback.fst (Tj j).hom (c.π.app (op j.val)) ≫\n            pullback.fst T₀.hom (D.map (homOfLE j.property).op)) →\n    let ρ := fun (j k : J) (a : j ⟶ k) ↦\n      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n        (D.map (show j.val ⟶ k.val from a).op)).unit.app (F j.val)).hom.app (op (Tj j)) ≫\n        (φ (show j.val ⟶ k.val from a)).hom.app\n          (op ((MorphismProperty.Over.pullback @Etale ⊤\n            (D.map (show j.val ⟶ k.val from a).op)).obj (Tj j))) ≫\n        (F k.val).obj.map (γ j k a).inv.op\n    let μ := fun j : J ↦\n      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n        (c.π.app (op j.val))).unit.app (F j.val)).hom.app (op (Tj j)) ≫\n        (eG j.val).inv.hom.app\n          (op ((MorphismProperty.Over.pullback @Etale ⊤\n            (c.π.app (op j.val))).obj (Tj j))) ≫\n        (L.ι.app j.val).hom.app\n          (op ((MorphismProperty.Over.pullback @Etale ⊤\n            (c.π.app (op j.val))).obj (Tj j))) ≫\n        L.pt.obj.map (δ j).inv.op\n    ∀ (hid : ∀ j : J, ρ j j (𝟙 j) = 𝟙 _)\n      (hcomp : ∀ (j k l : J) (a : j ⟶ k) (b : k ⟶ l),\n        ρ j l (a ≫ b) = ρ j k a ≫ ρ k l b)\n      (hleg : ∀ (j k : J) (a : j ⟶ k), ρ j k a ≫ μ k = μ j),\n    let A : J ⥤ AddCommGrpCat.{u + 1} :=\n      { obj := fun j ↦ (F j.val).obj.obj (op (Tj j))\n        map := fun a ↦ ρ _ _ a\n        map_id := hid\n        map_comp := hcomp _ _ _ }\n    let C : Cocone A :=\n      { pt := L.pt.obj.obj (op Tlim)\n        ι := { app := μ\n               naturality := fun j k a ↦ by simpa using hleg j k a } }\n    Nonempty (IsColimit C)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T004028-L-2492424",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T004028-L-2492424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

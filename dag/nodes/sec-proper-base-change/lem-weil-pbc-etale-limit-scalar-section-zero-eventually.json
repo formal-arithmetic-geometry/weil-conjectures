@@ -18,24 +18,33 @@
  ],
  "proof": [
   {
-   "text": "Apply the same scalar continuity construction as the parent node and retain the indicated conjunct. The affine étale presentation and filtered section colimit identify the corresponding map with the displayed formula.",
+   "text": "Use scalar-section-map-laws to construct the stage-section functor A and the cocone C with precisely the given rho and mu.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-colimit-of-sites-sections"
+    "lem-weil-pbc-etale-limit-scalar-section-map-laws"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply scalar-section-colimit to prove the universal property of C.",
+   "uses": [
+    "lem-weil-pbc-etale-limit-scalar-section-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tail J is nonempty and directed: choose i0 itself, and a common upper bound of any two stages. The forgetful functor on abelian groups preserves filtered colimits, also at the smaller index universe. From mu_j(z)=0=mu_j(0), Mathlib CategoryTheory.Limits.IsColimit.eq_iff' produces one later arrow a with rho_a(z)=rho_a(0). Additivity makes the right hand side zero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-of-sites-sections"
+  "lem-weil-pbc-etale-limit-scalar-section-map-laws",
+  "lem-weil-pbc-etale-limit-scalar-section-colimit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 09YN and 09YQ",
-  "place": "Conjunct decomposition of scalar section continuity."
+  "document": "Stacks Project, Tags 09YN and 09YQ; Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered",
+  "place": "S4 reduction to map coherence and the colimit universal property, followed by IsColimit.eq_iff'."
  },
  "mathlib_searches": [
   {
@@ -112,12 +121,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261012T234217-L-2124709",
+  "landing": "20261013T004028-L-2492424",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
