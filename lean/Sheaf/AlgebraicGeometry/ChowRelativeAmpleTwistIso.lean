@@ -3,7 +3,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import Sheaf.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.Ample
 
 
 /-! Auxiliary decomposition for Chow relative ampleness. -/
@@ -35,6 +34,15 @@ theorem chow_relative_ample_twist_iso (m : ℕ) (S Z X' : Scheme.{u})
               (ULift.{u} (Fin (m + 1))) Z)).obj
               (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))
                 (ULift.{u} ℤ)) 1)))) := by
-  sorry
+  obtain ⟨eS⟩ := Scheme.Modules.nonempty_tensorPullbackComp j
+    (ProjectiveSpace.toProjInt (ULift.{u} (Fin (m + 1))) S)
+  obtain ⟨eZ⟩ := Scheme.Modules.nonempty_tensorPullbackComp
+    (ProjectiveSpace.liftBaseChange π j hj)
+    (ProjectiveSpace.toProjInt (ULift.{u} (Fin (m + 1))) Z)
+  let L := Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))
+    (ULift.{u} ℤ)) 1
+  exact ⟨(eS.app L).symm ≪≫
+    eqToIso (congrArg (fun f ↦ (Scheme.Modules.tensorPullback f).obj L)
+      (ProjectiveSpace.liftBaseChange_toProjInt π j hj).symm) ≪≫ eZ.app L⟩
 
 end AlgebraicGeometry

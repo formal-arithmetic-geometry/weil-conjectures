@@ -9,9 +9,9 @@
  },
  "proof_origin": {
   "by": "worker",
-  "group": "T2",
+  "group": "A2",
   "date": "2026-10-13",
-  "text": "Decomposition of the two conjuncts of the parent theorem; each component is the corresponding independent part of the Stacks argument."
+  "text": "Direct Lean proof by composite tensor pullback and the equality liftBaseChange_toProjInt, realizing the functoriality component of the Chow paragraph of Stacks Tag 02O5. The former backward reference to the parent theorem is removed."
  },
  "mathlib_match": null,
  "blueprint": {
@@ -25,15 +25,28 @@
  },
  "stmt_deps": [],
  "proof_deps": [
-  "lem-pc-chow-relative-ample-twist"
+  "lem-pc-module-pullback-identity-composition",
+  "def-nagata-projective-space-base-change"
  ],
  "proof": [
   {
-   "text": "This component is a strict conjunct of the parent conclusion and follows by the tensor-pullback functoriality argument in Stacks Tag 02O5.",
+   "text": "Apply Scheme.Modules.nonempty_tensorPullbackComp to j and ProjectiveSpace.toProjInt over S, and to ProjectiveSpace.liftBaseChange π j hj and ProjectiveSpace.toProjInt over Z. Evaluate both natural isomorphisms at the integral Proj twist O(1). The first inverse identifies the left-hand iterated pullback with pullback along its composite; the second identifies pullback along its composite with the right-hand iterated pullback.",
    "uses": [
-    "lem-pc-chow-relative-ample-twist"
+    "lem-pc-module-pullback-identity-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "The defining projective-space base-change lift has the same composite to the integral projective model as j: ProjectiveSpace.liftBaseChange_toProjInt π j hj. This equality follows by rewriting map_toProjInt and liftBaseChange_map_assoc, the two fibre-product projection equations of projective space by base change [def-nagata-projective-space-base-change]. Apply congrArg to the functor assigning the tensor pullback of O(1), and use eqToIso for the resulting equality of module objects.",
+   "uses": [
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the inverse of the first evaluated comparison, the equality isomorphism from step 2, and the second evaluated comparison. Wrap this isomorphism in Nonempty. No properness or immersion property is used in this functorial identification; those hypotheses stay unchanged for compatibility with the parent statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "created": {
@@ -96,13 +109,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T2",
+  "reviewer": "X-ae6cd",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T225330-L-1813231",
+  "landing": "20261013T000043-L-2230744",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node metadata, change record, report, full compile, axioms, and direct importer all match the stage-3 review requirements."
  }
 }
