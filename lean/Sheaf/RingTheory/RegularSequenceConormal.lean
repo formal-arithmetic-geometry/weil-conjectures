@@ -22,76 +22,118 @@ universe u
 
 namespace RingTheory.Sequence
 
+private theorem zero_relation_coefficients
+    (R : Type u) [CommRing R] (c : ℕ) (f : Fin c → R)
+    (hreg : IsWeaklyRegular R (List.ofFn f)) (a : Fin c → R)
+    (hrel : ∑ i, a i * f i = 0) : ∀ i, a i ∈ Ideal.span (Set.range f) := by
+  classical
+  induction c with
+  | zero => exact fun i ↦ Fin.elim0 i
+  | succ c ih =>
+    let g : Fin c → R := fun i ↦ f i.castSucc
+    let K := Ideal.span (Set.range g)
+    let J := Ideal.span (Set.range f)
+    have hof : Ideal.ofList (List.ofFn g) = K := by
+      exact congrArg Ideal.span (Set.ext (List.mem_ofFn' g))
+    have hsplit := (isWeaklyRegular_append_iff R (List.ofFn g) [f (Fin.last c)]).mp
+      (by simpa only [List.ofFn_succ', List.concat_eq_append] using hreg)
+    have hprefix : IsWeaklyRegular R (List.ofFn g) := hsplit.1
+    have hlast : IsSMulRegular (R ⧸ K) (f (Fin.last c)) := by
+      have ht := (isWeaklyRegular_singleton_iff _ _).mp hsplit.2
+      change IsSMulRegular (R ⧸ (Ideal.ofList (List.ofFn g) • (⊤ : Ideal R)))
+        (f (Fin.last c)) at ht
+      rw [hof, Ideal.smul_eq_mul, Ideal.mul_top] at ht
+      exact ht
+    have hle : K ≤ J := by
+      apply Ideal.span_le.mpr
+      rintro _ ⟨i, rfl⟩
+      exact Ideal.subset_span ⟨i.castSucc, rfl⟩
+    have htmem : a (Fin.last c) * f (Fin.last c) ∈ K := by
+      rw [Fin.sum_univ_castSucc] at hrel
+      have hp : (∑ i : Fin c, a i.castSucc * g i) ∈ K :=
+        K.sum_mem fun i _ ↦ K.mul_mem_left _ (Ideal.subset_span ⟨i, rfl⟩)
+      have he : a (Fin.last c) * f (Fin.last c) =
+          -(∑ i : Fin c, a i.castSucc * g i) := by
+        exact eq_neg_of_add_eq_zero_right hrel
+      rw [he]
+      exact K.neg_mem hp
+    have hamem : a (Fin.last c) ∈ K := by
+      apply Ideal.Quotient.eq_zero_iff_mem.mp
+      apply hlast.right_eq_zero_of_smul
+      change Ideal.Quotient.mk K (f (Fin.last c) * a (Fin.last c)) = 0
+      exact Ideal.Quotient.eq_zero_iff_mem.mpr (by simpa [mul_comm] using htmem)
+    obtain ⟨b, hb⟩ := Ideal.mem_span_range_iff_exists_fun.mp hamem
+    have hz : (∑ i : Fin c, (a i.castSucc + f (Fin.last c) * b i) * g i) = 0 := by
+      simp only [add_mul, Finset.sum_add_distrib, mul_assoc, ← Finset.mul_sum, hb]
+      simpa [Fin.sum_univ_castSucc, g, mul_comm] using hrel
+    have hm := ih g hprefix (fun i ↦ a i.castSucc + f (Fin.last c) * b i) hz
+    intro i
+    refine Fin.lastCases ?_ (fun j ↦ ?_) i
+    · exact hle hamem
+    · have hprod : f (Fin.last c) * b j ∈ J :=
+        J.mul_mem_right _ (Ideal.subset_span ⟨Fin.last c, rfl⟩)
+      simpa only [add_sub_cancel_right] using J.sub_mem (hle (hm j)) hprod
+
+/-- If a linear combination of a weakly regular sequence belongs to the square of its
+ideal, each coefficient belongs to the ideal.
+
+Source: Stacks Project, Algebra, Lemma 00LN (1), the degree-one case of the proof.
+
+Proof: first prove the assertion for a relation equal to zero, by induction on the length.
+For the empty sequence there are no coefficients. Write the nonempty sequence as a prefix
+and a last element t, and let K be the ideal of the prefix. The relation implies a_last * t
+belongs to K. Weak regularity makes multiplication by t injective on R/K, so a_last belongs
+to K. Express a_last as a sum of b_i * f_i over the prefix. Substituting gives the zero
+relation with prefix coefficients a_i + t * b_i. The induction hypothesis puts these in K;
+since t * b_i belongs to the full ideal J, each a_i belongs to J, as does a_last.
+For a relation in J^2, express its value as a sum of d_i * f_i with d_i in J: expand one
+factor of each product of two elements of J in the generators and collect coefficients.
+Subtract this expression from the given relation. The zero-relation assertion gives
+ a_i - d_i in J, and addition of d_i gives a_i in J. This also covers the empty sequence,
+unit generators (where J is the whole ring), and the zero ring.
+-/
+private theorem weaklyRegular_relation_coefficients
+    (R : Type u) [CommRing R] (c : ℕ) (f : Fin c → R)
+    (hreg : IsWeaklyRegular R (List.ofFn f)) (a : Fin c → R)
+    (hrel : (∑ i, a i * f i) ∈ Ideal.span (Set.range f) ^ 2) :
+    ∀ i, a i ∈ Ideal.span (Set.range f) := by
+  classical
+  let J := Ideal.span (Set.range f)
+  have hrep : ∀ x ∈ J ^ 2, ∃ b : Fin c → R,
+      (∀ i, b i ∈ J) ∧ ∑ i, b i * f i = x := by
+    intro x hx
+    rw [pow_two, ← Ideal.smul_eq_mul] at hx
+    refine Submodule.smul_induction_on hx ?_ ?_
+    · intro x hx y hy
+      obtain ⟨b, hb⟩ := Ideal.mem_span_range_iff_exists_fun.mp hy
+      refine ⟨fun i ↦ x * b i, fun i ↦ J.mul_mem_right _ hx, ?_⟩
+      simp only [mul_assoc, ← Finset.mul_sum, hb, smul_eq_mul]
+    · intro x y hx hy
+      obtain ⟨b, hb, he⟩ := hx
+      obtain ⟨d, hd, hf⟩ := hy
+      refine ⟨fun i ↦ b i + d i, fun i ↦ J.add_mem (hb i) (hd i), ?_⟩
+      simp only [add_mul, Finset.sum_add_distrib, he, hf]
+  obtain ⟨b, hb, he⟩ := hrep _ hrel
+  have hz : ∑ i, (a i - b i) * f i = 0 := by
+    simp only [sub_mul, Finset.sum_sub_distrib, he, sub_self]
+  have hm := zero_relation_coefficients R c f hreg (fun i ↦ a i - b i) hz
+  intro i
+  simpa only [sub_add_cancel] using J.add_mem (hm i) (hb i)
+
 /-- The classes of a regular sequence form a basis of its conormal module.
 
 Source: Stacks Project, Algebra, Lemma 00LN (1) and Definition 061P in degree one.
 (blueprint: lem-weil-pbc-regular-sequence-conormal-free)
 
-Proof (the five steps of the DAG node, following the source):
-1. *Notation and the claim proved by induction on $c$.* For a multi-index
-$I=(i_1,\dots,i_c)\in\mathbb Z_{\ge0}^c$ write $|I|=i_1+\dots+i_c$ and $f^I=f_1^{i_1}\cdots
-f_c^{i_c}$. Since $J$ is generated by $f_1,\dots,f_c$, the ideal $J^n$ is generated by the
-monomials $f^I$ with $|I|=n$, so every element of $J^{n+1}=J\cdot J^n$ has the form
-$\sum_{|I|=n}b_If^I$ with all $b_I\in J$. We prove, by induction on $c\ge0$, the claim $Q(c)$:
-*for every commutative ring $R$, every regular sequence $f_1,\dots,f_c$ in $R$ with
-$J=(f_1,\dots,f_c)$, every $n\ge0$ and every family $(a_I)_{|I|=n}$ of elements of $R$ with
-$\sum_{|I|=n}a_If^I\in J^{n+1}$, all $a_I$ lie in $J$* (this is the injectivity, in degree $n$, of
-the map $R/J[X_1,\dots,X_c]\to\bigoplus_nJ^n/J^{n+1}$, $X^I\mapsto f^I$, i.e. quasi-regularity,
-Definition 061P). Reduction: given such a relation, write $\sum_{|I|=n}a_If^I=\sum_{|I|=n}b_If^I$
-with $b_I\in J$; then $\sum_{|I|=n}(a_I-b_I)f^I=0$, and $a_I\in J$ if and only if $a_I-b_I\in J$.
-So it suffices to prove $Q(c)$ for relations $\sum_{|I|=n}a_If^I=0$. For $c=0$ the only
-multi-index is $I=()$ with $|I|=0$, so only $n=0$ gives a nonempty family, and there the
-hypothesis $a_{()}\cdot1\in J^1=J$ is the conclusion; so $Q(0)$ holds. Let now $c\ge1$ and assume
-$Q(c-1)$.
-
-2. *The shorter sequence.* Put $J'=(f_1,\dots,f_{c-1})$. By [def-weil-pbc-regular-sequence],
-$f_1,\dots,f_{c-1}$ is a regular sequence in $R$: condition (1) for $i\le c-1$ is condition (1)
-for the given sequence, and $R/J'\neq0$ because $R/J'$ surjects onto $R/J\neq0$. Moreover
-condition (1) for $i=c$ says that $f_c$ is a nonzerodivisor on $R/J'$; by induction on $m$ this
-gives: if $x\in R$ and $f_c^mx\in J'$ for some $m\ge0$, then $x\in J'$ (from
-$f_c\cdot(f_c^{m-1}x)\in J'$ get $f_c^{m-1}x\in J'$). Hence $Q(c-1)$ applies to $R$, the sequence
-$f_1,\dots,f_{c-1}$ and the ideal $J'$.
-
-3. *The inner induction.* Fix $n\ge0$. Primed multi-indices $I'=(i_1,\dots,i_{c-1})$ involve only
-$f_1,\dots,f_{c-1}$, so $f^{I'}\in J'^{|I'|}$. For $l\in\{0,\dots,n\}$ let $P(l)$ be the claim:
-*whenever $(a_{I',e})_{0\le e\le l,\ |I'|=n-e}$ are elements of $R$ with
-$\sum_{e=0}^l\bigl(\sum_{|I'|=n-e}a_{I',e}f^{I'}\bigr)f_c^e=0$, all $a_{I',e}$ lie in $J$.* We
-prove $P(l)$ by induction on $l$, both base and step by the following argument. Take such a
-relation. For $e\le l-1$ the term $\bigl(\sum_{|I'|=n-e}a_{I',e}f^{I'}\bigr)f_c^e$ lies in
-$J'^{\,n-e}\subseteq J'^{\,n-l+1}$ (as $n-e\ge n-l+1$), so the relation gives
-$\sum_{|I'|=n-l}(f_c^la_{I',l})f^{I'}\in J'^{\,n-l+1}$. By $Q(c-1)$ (step 2) in degree $n-l$,
-$f_c^la_{I',l}\in J'$ for every $I'$, and by step 2 again $a_{I',l}\in J'\subseteq J$. If $l=0$
-these are all the coefficients and $P(0)$ is proved. If $l\ge1$, assume $P(l-1)$. Write
-$a_{I',l}=\sum_{k=1}^{c-1}g_{I',k}f_k$ with $g_{I',k}\in R$, and for $|K'|=n-l+1$ put $b_{K'}=\sum
-g_{I',k}$, the sum over the pairs $(I',k)$ with $|I'|=n-l$, $1\le k\le c-1$ and
-$I'+\varepsilon_k=K'$ ($\varepsilon_k$ the $k$-th unit multi-index), so that $f_kf^{I'}=f^{K'}$.
-Then
-$\bigl(\sum_{|I'|=n-l}a_{I',l}f^{I'}\bigr)f_c^l=\bigl(\sum_{|K'|=n-l+1}f_cb_{K'}f^{K'}\bigr)f_c^{l
--1}$,
-and the relation becomes
-$\bigl(\sum_{|K'|=n-l+1}(a_{K',l-1}+f_cb_{K'})f^{K'}\bigr)f_c^{l-1}+\sum_{e=0}^{l-2}\bigl(\sum_{|I
-'|=n-e}a_{I',e}f^{I'}\bigr)f_c^e=0$,
-a relation of the form in $P(l-1)$. By $P(l-1)$, $a_{K',l-1}+f_cb_{K'}\in J$, hence $a_{K',l-1}\in
-J$ since $f_c\in J$, and $a_{I',e}\in J$ for $e\le l-2$. Together with $a_{I',l}\in J$ this proves
-$P(l)$.
-
-4. *Conclusion of the induction on $c$.* Let $\sum_{|I|=n}a_If^I=0$ (step 1). Every multi-index of
-$c$ entries is $I=(I',e)$ with $I'$ primed, $e=i_c\in\{0,\dots,n\}$ and $|I'|=n-e$, and
-$f^I=f^{I'}f_c^e$. Putting $a_{I',e}=a_{(I',e)}$ the relation reads
-$\sum_{e=0}^n\bigl(\sum_{|I'|=n-e}a_{I',e}f^{I'}\bigr)f_c^e=0$, so $P(n)$ (step 3) gives $a_I\in
-J$ for all $I$. This proves $Q(c)$, and by induction $Q(c)$ holds for all $c$ (Lemma 00LN (1): a
-regular sequence is quasi-regular).
-
-5. *Degree $1$: the basis of $J/J^2$.* $J/J^2$ is an $R$-module killed by $J$, hence an
-$R/J$-module, with $\bar r\cdot(x\bmod J^2)=rx\bmod J^2$. Generation: every $x\in J$ is
-$\sum_ir_if_i$ with $r_i\in R$, so $x\bmod J^2=\sum_i\bar r_i\,(f_i\bmod J^2)$. Uniqueness: if
-$\sum_i\rho_i(f_i\bmod J^2)=\sum_i\sigma_i(f_i\bmod J^2)$ with $\rho_i,\sigma_i\in R/J$, choose
-lifts $r_i$ of $\rho_i-\sigma_i$; then $\sum_ir_if_i\in J^2$. The multi-indices with $|I|=1$ are
-the unit vectors $\varepsilon_i$, with $f^{\varepsilon_i}=f_i$, so $Q(c)$ with $n=1$ (step 4)
-gives $r_i\in J$, i.e. $\rho_i=\sigma_i$. So every element of $J/J^2$ is in exactly one way an
-$R/J$-linear combination of $f_1\bmod J^2,\dots,f_c\bmod J^2$: this family is a basis and $J/J^2$
-is free [def-weil-pbc-free-module], and $(\rho_i)_i\mapsto\sum_i\rho_i(f_i\bmod J^2)$ is an
-isomorphism $(R/J)^{\oplus c}\cong J/J^2$.
+Proof: use the degree-one specialization of the source's argument. A zero relation on a
+weakly regular sequence has all coefficients in its ideal: induct on the length, cancel
+the last generator modulo the prefix ideal, express its coefficient in the prefix, and
+apply induction to the resulting prefix relation. Expand an element of the square ideal
+with coefficients in the ideal and subtract it to deduce the same coefficient assertion
+for relations in the square ideal. Lift coefficients from R/J to R; this assertion gives
+linear independence of the conormal classes. Every element of J is a linear combination
+of the generators, so their conormal classes span. Construct the basis from independence
+and spanning; its representation map gives the asserted linear equivalence and freeness.
 -/
 theorem regularSequence_conormal_free
     (R : Type u) [CommRing R] (c : ℕ) (f : Fin c → R)
@@ -104,6 +146,42 @@ theorem regularSequence_conormal_free
           ⟨f i, Ideal.subset_span ⟨i, rfl⟩⟩) ∧
     Nonempty ((Ideal.span (Set.range f)).Cotangent ≃ₗ[R ⧸ Ideal.span (Set.range f)]
       (Fin c →₀ (R ⧸ Ideal.span (Set.range f)))) := by
-  sorry
+  classical
+  let J := Ideal.span (Set.range f)
+  let g : Fin c → J := fun i ↦ ⟨f i, Ideal.subset_span ⟨i, rfl⟩⟩
+  let v : Fin c → J.Cotangent := fun i ↦ J.toCotangent (g i)
+  have hcomb (a : Fin c → R) :
+      (∑ i, Ideal.Quotient.mk J (a i) • v i) = J.toCotangent (∑ i, a i • g i) := by
+    rw [map_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [map_smul]
+    exact IsScalarTower.algebraMap_smul (R ⧸ J) (a i) (v i)
+  have hli : LinearIndependent (R ⧸ J) v := by
+    apply Fintype.linearIndependent_iff.mpr
+    intro a ha
+    choose r hr using fun i ↦ Ideal.Quotient.mk_surjective (a i)
+    have hzero : J.toCotangent (∑ i, r i • g i) = 0 := by
+      rw [← hcomb]
+      simpa only [hr] using ha
+    have hrel : (∑ i, r i * f i) ∈ J ^ 2 := by
+      simpa [g] using (J.toCotangent_eq_zero _).mp hzero
+    have hmem := weaklyRegular_relation_coefficients R c f hreg.toIsWeaklyRegular r hrel
+    intro i
+    rw [← hr i]
+    exact Ideal.Quotient.eq_zero_iff_mem.mpr (hmem i)
+  have hspan : ⊤ ≤ Submodule.span (R ⧸ J) (Set.range v) := by
+    intro x _
+    obtain ⟨y, rfl⟩ := J.toCotangent_surjective x
+    obtain ⟨a, ha⟩ := Ideal.mem_span_range_iff_exists_fun.mp y.property
+    have hy : (∑ i, a i • g i) = y := by
+      apply Subtype.ext
+      simpa [g] using ha
+    rw [← hy, ← hcomb]
+    exact Submodule.sum_mem _ fun i _ ↦
+      Submodule.smul_mem _ _ (Submodule.subset_span ⟨i, rfl⟩)
+  let b := Module.Basis.mk hli hspan
+  exact ⟨Module.Free.of_basis b, ⟨b, fun i ↦ Module.Basis.mk_apply hli hspan i⟩,
+    ⟨b.repr⟩⟩
 
 end RingTheory.Sequence
