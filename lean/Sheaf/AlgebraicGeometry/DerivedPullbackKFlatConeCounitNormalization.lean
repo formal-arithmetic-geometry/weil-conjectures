@@ -13,6 +13,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Sheaf.AlgebraicGeometry.DerivedPullbackKFlatCounitData
+import Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitEquality
 
 /-! # K-flat counit connecting-map normalization
 
@@ -90,6 +92,9 @@ theorem exists_derivedPullback_kFlat_cone_counit_normalization
                   ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) T.obj₁) ≪≫
                 tensorIso e (Iso.refl _) ≪≫
                 schemeCanonicalShiftUnitIso Z ((derivedPullback f).obj T.obj₁)).hom ≫
-                  (ε.app C.obj₁)⟦(1 : ℤ)⟧' := by sorry
+                  (ε.app C.obj₁)⟦(1 : ℤ)⟧'  := by
+  obtain ⟨e, ε, hε⟩ := exists_derivedPullback_kFlat_counit_data f
+  refine ⟨e, ε, hε, ?_⟩
+  exact derivedPullback_kFlat_cone_counit_eq f e ε
 
 end AlgebraicGeometry
