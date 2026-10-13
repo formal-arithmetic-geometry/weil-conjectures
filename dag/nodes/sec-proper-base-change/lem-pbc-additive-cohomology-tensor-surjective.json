@@ -15,40 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Identify G and G' with the lifted associated structure sheaves by their natural section coordinates. The section scalar formulas determine the scalar endomorphisms uniquely, so the scalar-natural coefficient and etale/Zariski comparisons give the structural scalar actions on cohomology.",
+   "text": "Apply the existing additive etale/Zariski pullback comparison square in degree one to obtain linear equivalences e and e' with ordinary unit-module cohomology and its categorical base change. IsCurve supplies separatedness and quasi-compactness; QuasiCompact.compactSpace_of_compactSpace f supplies CompactSpace C, as required by the current comparison-square signature.",
    "uses": [
-    "lem-sc-etale-tensor-unit-sections-natural",
-    "lem-sc-etale-qcoherent-source-comparison-natural"
+    "lem-pbc-additive-cohomology-base-change-square"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a finite affine cover of C; quasi-compactness and separatedness follow from IsCurve. All finite intersections and their inverse images on C' are affine. Affine tensor sections identify the pulled-back Cech complex with k' tensor the original. The adjoint section formula hq and the natural inverse-image Cech comparison identify the induced cohomology map with H(q) after canonical etale Ext pullback. Its tensor-linear extension is β because the two maps agree on all pure tensors.",
+   "text": "Let M be the unit module and t=id tensor e, the k'-linear equivalence on tensor products. For a pure tensor b tensor x, hβ and linearity of e' give e'(β(b tensor x))=b times e'(H(q)(pullback x)). The square identifies the last expression with b times H.baseChangeLinear(e(x)), which is by definition H.baseChange(b tensor e(x)). Zero and addition extend this identity to all tensors by tensor induction.",
    "uses": [
-    "lem-pc-flat-cech-base-change",
-    "lem-pc-affine-cech-inverse-image"
+    "def-pc-flat-cohomology-comparison"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Represent each target class by a cocycle of the pulled-back Cech complex. Exactness of tensoring over k writes its corresponding tensor cycle as a finite sum of pure tensors of original cycles. The tensor of their original cohomology classes maps to the chosen target class under β. This proves surjectivity. The unique isomorphism to the categorical pullback transports the construction to the displayed square.",
+   "text": "The unit module is quasi-coherent, C is quasi-compact, f is separated and the field extension is flat. Apply the existing separated flat cohomology base-change theorem to obtain surjectivity of B=H.baseChange. For y in H1(G'), take z with B(z)=e'(y). Then β(t inverse(z))=y by the preceding identity and injectivity of e'.",
    "uses": [
-    "lem-pc-flat-cech-cohomology-square"
+    "lem-pc-flat-cohomology-separated"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-cech-inverse-image",
-  "lem-pc-flat-cech-base-change",
-  "lem-pc-flat-cech-cohomology-square",
-  "lem-sc-etale-qcoherent-source-comparison-natural",
-  "lem-sc-etale-tensor-unit-sections-natural"
+  "def-pc-flat-cohomology-comparison",
+  "lem-pbc-additive-cohomology-base-change-square",
+  "lem-pc-flat-cohomology-separated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/02KH",
-  "place": "Separated-case Cech proof, surjective component, with coefficient/etale comparison from 03P2."
+  "place": "V2 repair: reuse the current proved additive comparison square and the separated flat cohomology base-change theorem; transport by tensor induction. No comparison module or new node is delivered."
  },
  "mathlib_searches": [
   {
@@ -148,10 +144,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T054245-L-451773",
-  "kind": "interface",
+  "landing": "20261013T100157-L-2495899",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

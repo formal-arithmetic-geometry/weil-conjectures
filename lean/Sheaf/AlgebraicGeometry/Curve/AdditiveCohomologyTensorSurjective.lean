@@ -7,11 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage
-import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
-import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechNaturality
-import Sheaf.AlgebraicGeometry.EtaleQcoherentSourceComparisonNatural
-import Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
+
+import Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyBaseChangeSquare
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
 
 /-! # Surjectivity of additive cohomology tensor pullback -/
 
@@ -89,6 +87,30 @@ theorem additive_cohomology_tensor_surjective
     (β : (k' ⊗[k] Sheaf.H G 1) →ₗ[k'] Sheaf.H G' 1)
     (hβ : ∀ (b : k') (x : Sheaf.H G 1),
       β (b ⊗ₜ[k] x) = b • Sheaf.H.map q 1 (Etale.cohomologyMap ι' G 1 x)) :
-    Function.Surjective β := by sorry
+    Function.Surjective β := by
+  classical
+  let M := SheafOfModules.unit C.ringCatSheaf
+  let : M.IsQuasicoherent := SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
+  let : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  obtain ⟨e, e', he⟩ := Scheme.Modules.exists_additive_cohomology_baseChange_square
+    f h 1 G G' a a' ha ha' q hq hscalar hscalar'
+  let t : (k' ⊗[k] Sheaf.H G 1) ≃ₗ[k'] (k' ⊗[k] Scheme.Modules.HOver f M 1) :=
+    TensorProduct.AlgebraTensorModule.congr (LinearEquiv.refl k' k') e
+  let B := Scheme.Modules.H.baseChange (S := k') f M 1
+  have hcomm (z : k' ⊗[k] Sheaf.H G 1) : e' (β z) = B (t z) := by
+    induction z using TensorProduct.induction_on with
+    | zero => simp only [map_zero]
+    | tmul b x =>
+      rw [hβ, e'.map_smul, he]
+      change b • Scheme.Modules.H.baseChangeLinear (S := k') f M 1 (e x) =
+        B (b ⊗ₜ[k] e x)
+      rfl
+    | add z w hz hw => simp only [map_add, hz, hw]
+  intro y
+  obtain ⟨z, hz⟩ :=
+    (Scheme.Modules.H.baseChange_bijective_of_isSeparated (S := k') f M 1).surjective
+      (e' y)
+  refine ⟨t.symm z, e'.injective ?_⟩
+  rw [hcomm, t.apply_symm_apply, hz]
 
 end AlgebraicGeometry.IsCurve
