@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.CategoryTheory.Endofunctor.Algebra
+public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 
@@ -213,6 +214,66 @@ lemma mapOfNatIso_map_hom_f (e : L ⋙ G ≅ F ⋙ L) {K L' : IsoAlgebra F} (φ 
   rfl
 
 end Map
+
+section Map₂
+
+variable {F₁ : C ⥤ C} {F₂ : D ⥤ D}
+
+/-- A pair of algebras with invertible structure morphism, for `F₁` and `F₂`, is an algebra with
+invertible structure morphism for the product endofunctor `F₁.prod F₂`, with structure
+isomorphism `Φ_K × Φ_L`. -/
+noncomputable def prod : IsoAlgebra F₁ × IsoAlgebra F₂ ⥤ IsoAlgebra (F₁.prod F₂) where
+  obj KL := mk (KL.1.carrier, KL.2.carrier) (KL.1.str.prod KL.2.str)
+  map {KL KL'} φ := ObjectProperty.homMk
+    { f := (φ.1.hom.f, φ.2.hom.f)
+      h := Prod.ext φ.1.hom.h φ.2.hom.h }
+
+@[simp]
+lemma prod_obj_carrier (KL : IsoAlgebra F₁ × IsoAlgebra F₂) :
+    (prod.obj KL).carrier = (KL.1.carrier, KL.2.carrier) :=
+  rfl
+
+@[simp]
+lemma prod_obj_str (KL : IsoAlgebra F₁ × IsoAlgebra F₂) :
+    (prod.obj KL).str = KL.1.str.prod KL.2.str :=
+  mk_str _ _
+
+variable {E : Type*} [Category* E] {G : E ⥤ E} (B : C ⥤ D ⥤ E)
+
+/-- Transport of algebras with invertible structure morphism along a bifunctor
+`B : C ⥤ D ⥤ E` equipped with a commutation isomorphism
+`e_{a,b} : G (B a b) ≅ B (F₁ a) (F₂ b)`, natural in `a` and `b` (an isomorphism of functors
+`C × D ⥤ E`): the pair `(K, L)` is sent to `B K L` with the structure isomorphism
+
+```
+             e                  B Φ_K Φ_L
+G (B K L) -------> B (F₁ K) (F₂ L) ---------> B K L
+```
+
+It is the one-variable transport `mapOfNatIso e` along `uncurry B`, applied to the product
+algebra `prod.obj (K, L)` and curried. This is the transport of Weil structures along a tensor
+product. -/
+noncomputable def mapOfNatIso₂
+    (e : Functor.uncurry.obj B ⋙ G ≅ F₁.prod F₂ ⋙ Functor.uncurry.obj B) :
+    IsoAlgebra F₁ ⥤ IsoAlgebra F₂ ⥤ IsoAlgebra G :=
+  Functor.curry.obj (prod ⋙ mapOfNatIso e)
+
+@[simp]
+lemma mapOfNatIso₂_obj_obj_carrier
+    (e : Functor.uncurry.obj B ⋙ G ≅ F₁.prod F₂ ⋙ Functor.uncurry.obj B)
+    (K : IsoAlgebra F₁) (L : IsoAlgebra F₂) :
+    (((mapOfNatIso₂ B e).obj K).obj L).carrier = (B.obj K.carrier).obj L.carrier :=
+  rfl
+
+lemma mapOfNatIso₂_obj_obj_str
+    (e : Functor.uncurry.obj B ⋙ G ≅ F₁.prod F₂ ⋙ Functor.uncurry.obj B)
+    (K : IsoAlgebra F₁) (L : IsoAlgebra F₂) :
+    (((mapOfNatIso₂ B e).obj K).obj L).str =
+      e.app (K.carrier, L.carrier) ≪≫ (Functor.uncurry.obj B).mapIso (K.str.prod L.str) := by
+  ext
+  simp [mapOfNatIso₂]
+
+end Map₂
 
 end IsoAlgebra
 
