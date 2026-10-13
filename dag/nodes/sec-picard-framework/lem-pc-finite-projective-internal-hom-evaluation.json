@@ -5,9 +5,11 @@
   "place": "Tag 08DQ, lemma-dual-perfect-complex, last two displayed sums and the final finite-free/direct-summand evaluation calculation; Tag 08DM, lemma-Rhom-strictly-perfect, finite sum versus product calculation"
  },
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DQ, lemma-dual-perfect-complex, last two displayed sums and the final finite-free/direct-summand evaluation calculation; Tag 08DM, lemma-Rhom-strictly-perfect, finite sum versus product calculation"
+  "place": "Tag 08DQ finite-free/direct-summand evaluation calculation; implemented using source tensor-Hom naturality, rigid unit comparison and the biproduct identity"
  },
  "mathlib_searches": [
   {
@@ -102,24 +104,41 @@
  ],
  "proof": [
   {
-   "text": "For E free of rank m, use the canonical finite-sum Hom identifications and coordinate equations of lem-sc-finite-free-internal-hom-exact (take the split sequence B --id--> B --> 0). Tensoring B with the free dual gives the finite coproduct of m copies of B. Evaluate the comparison on each basis vector: the j-th projection and i-th inclusion compose to id_B when i=j and zero otherwise. The finite biproduct identification therefore makes the comparison the identity, and supplies its inverse. This includes m=0.",
+   "text": "Prove precomposition naturality directly from tensorHomEquiv_whiskerLeft_comp and tensorHomEquiv_whiskerRight_comp, braiding naturality and associator naturality. The underlying evaluation obeys E tensor Hom(f,R) followed by evaluation = f tensor Hom(F,R) followed by evaluation. These identities give naturality of moduleDualEvaluation in E.",
    "uses": [
-    "lem-sc-finite-free-internal-hom-exact",
     "lem-pc-sheaf-modules-tensor-closed"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Precomposition with p and i induces retractions on Hom(E,R) and Hom(E,B); their composites are identities because p composed with i is the identity on E. Naturality of the tensor-Hom equivalence makes the free comparison a map between these split idempotents. Its inverse commutes with the idempotents by composing the naturality equality with the free inverse. Project that inverse from the free Hom to B tensor the dual of E. Both composites are identities by the retraction equation.",
+   "text": "Identify moduleDualEvaluation with braiding followed by the source MonoidalClosed.ihomUnitTensorToIhom. Uncurry both sides; the two hexagon identities, symmetry, and braiding naturality with evaluation identify the composites. For E the unit, source MonoidalClosed.isIso_ihomUnitTensorToIhom applies to the canonical exact pairing of the unit with itself, proving unit evaluation invertible.",
    "uses": [
     "lem-pc-sheaf-modules-tensor-closed"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For I = ULift (Fin m), identify free I with the biproduct of I copies of the unit using biproduct.isoCoproduct. Write i_j: R to free I and p_j: free I to R for its inclusions and projections, so sum_j p_j followed by i_j = identity on free I. The inverse to evaluation is sum_j Hom(i_j,B) followed by inverse unit evaluation followed by B tensor Hom(p_j,R). Naturality reduces either inverse equation to the sum of Hom(p_j followed by i_j,-). Additivity of the source internal Hom functor (InternalHomFree) and of tensorLeft (MonoidalFree) turns this sum into Hom(identity,-), and hence the identity. Use the universe-polymorphic IsBilimit.total for the biproduct equation. Empty I gives the zero-object case without an extra hypothesis.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Given i:E to free I and p:free I to E with i followed by p = identity, set the inverse to Hom(p,B) followed by inverse free evaluation followed by B tensor Hom(i,R). Apply the proved naturality twice. The free inverse equations cancel the middle maps, and Hom functoriality together with i followed by p = identity makes both composites identities. This constructs the inverse without choosing any data from an unproved existence theorem.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sc-finite-free-internal-hom-exact"
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
  ],
  "lean": {
   "existing": false,
@@ -148,11 +167,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-632c3",
-  "group": "C2",
+  "reviewer": "COMPILER",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T045517-L-125548",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures, constructions and proof composition match the three nodes, source calculations, change record and report; compilation and reader-gate checks pass."
+  "landing": "20261013T062521-L-732531",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
