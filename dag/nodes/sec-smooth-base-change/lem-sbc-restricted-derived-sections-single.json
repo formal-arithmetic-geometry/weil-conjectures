@@ -15,12 +15,25 @@
  ],
  "proof": [
   {
-   "text": "Expand the transformation as the derived unit and Leray, followed by the\nrestriction-composition isomorphism. Move the source single comparison past the\nunit and Leray using naturality. On the actual single complex, factorization of\nexact inverse image through Q identifies the resulting map with the derived\nunit and Leray followed by mapDerivedCategoryFactors. The restriction comparison\non the single is Q of mapCochainComplexSingleFunctor followed by the single of\nupperStarComp(q,r) inverse and upperStarComp(r',a). Its naturality for the arbitrary\ncoefficient map supplies the last factor r'^* phi. Compose and cancel the single\ncomparison inverses. No coefficient is assumed invertible; the zero sheaf and\nempty scheme give the same identities. No shift or homology comparison is used.",
+   "text": "For an exact additive functor L, write its derived single comparison as mapDerivedCategoryFactors on the actual degree-zero complex followed by Q of mapCochainComplexSingleFunctor. This is Mathlib mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app after cancellation. The Evaluation.singleIso hom is the right-derived section functor applied to this comparison, since the Plus inclusion and singleFunctorIsoCompQ comparisons are identities.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For exact L,M, show compatibility of the derived single comparison with mapDerivedCategoryCompIso using mapDerivedCategoryCompIso_fac and naturality of mapDerivedCategoryFactors. For an isomorphism e of exact functors, use mapDerivedCategoryNatIso_fac for compatibility of its derived image with singles. The two required identities on complexes are checked degreewise: at degree zero the maps are identities or e.hom.app, and away from zero the target is a zero object. Combine these identities for the square L=r^*, M=q^*, A=a^*, B=r-prime^* and e=upperStarComp(q,r) inverse followed by upperStarComp(r-prime,a). Naturality of the single comparison for B incorporates the arbitrary coefficient morphism phi. The underived composite e.hom.app F followed by B.map phi is definitionally rawAffineRestrictedCoefficient.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the right-derived global-section functor to the square identity and use naturality of derivedSectionPullback for the source single comparison. Substitute the localization factorization for the remaining q^* single comparison. This gives the claimed equality before homology. The calculation works for any natural transformation with the type of derivedSectionPullback; no expansion of its unit and Leray definition or zeroth-cohomology computation is necessary. Finally use the proved compatibility of mapDerivedCategoryPlusSingleFunctor with the inclusion to identify the original bounded-below source formula. No invertibility of phi is used.",
    "uses": [
     "lem-sbc-restricted-derived-section-zero-comparison",
-    "def-sbc-raw-restricted-cohomology-comparison-map",
-    "def-sbc-raw-affine-restricted-cohomology",
-    "lem-weil-pbc-inverse-image-composition"
+    "def-sbc-raw-restricted-cohomology-comparison-map"
    ],
    "elementary": false
   }
@@ -32,9 +45,9 @@
   "lem-weil-pbc-inverse-image-composition"
  ],
  "proof_origin": {
-  "by": "agent W3",
-  "document": "Stacks Project and parent proof plan",
-  "place": "Expanded compatibility calculation; the sources give the derived adjunction and restriction constructions."
+  "by": "agent Q2",
+  "document": "Stacks Project, Tags 07A6, 0D6F and 03Q8; existing Mathlib and WeilConjectures localization constructions",
+  "place": "Explicit categorical compatibility calculation: mapDerivedCategoryCompIso_fac, mapDerivedCategoryNatIso_fac, degreewise single comparisons, and naturality. The source tags supply the constructions; the identity is proved directly from their Lean definitions."
  },
  "mathlib_searches": [
   {
@@ -121,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T054245-L-451674",
-  "kind": "interface",
+  "landing": "20261013T082405-L-1644613",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
