@@ -8,6 +8,10 @@ module
 public import Sheaf.RingTheory.ArtinianCoefficientPresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.EssentialFiniteness
+import Sheaf.RingTheory.ArtinianCoefficientEventualFlatness
+import Sheaf.RingTheory.ArtinianCoefficientSubalgebraStructure
+import Sheaf.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 
 /-!
 # Descent of Artinian presentations to finite coefficient fields
@@ -70,6 +74,48 @@ theorem exists_artinian_coefficient_descent
           Ideal.map (artinianCoefficientSubalgebra k Λ σ t s).val.toRingHom
             (@IsLocalRing.maximalIdeal (artinianCoefficientSubalgebra k Λ σ t s) _ hA) =
               IsLocalRing.maximalIdeal Λ ∧
-          EssFiniteType k (artinianCoefficientSubalgebra k Λ σ t s) := by sorry
+          EssFiniteType k (artinianCoefficientSubalgebra k Λ σ t s) := by
+  classical
+  obtain ⟨d, hflat⟩ := exists_artinian_coefficient_eventual_flatness k Λ σ t c hσ ht hc
+  refine ⟨c ∪ d, Finset.subset_union_left, ?_⟩
+  intro s hs
+  have hcs : c ⊆ s := fun x hx ↦ hs (Finset.mem_union_left d hx)
+  have hds : d ⊆ s := fun x hx ↦ hs (Finset.mem_union_right c hx)
+  have hfield : IntermediateField.adjoin k (c : Set (IsLocalRing.ResidueField Λ)) ≤
+      IntermediateField.adjoin k (s : Set (IsLocalRing.ResidueField Λ)) :=
+    IntermediateField.adjoin.mono k _ _ hcs
+  have hcoeff : ∀ a : k, algebraMap k Λ a ∈ Subring.closure ((t : Set Λ) ∪
+      σ '' (IntermediateField.adjoin k (s : Set (IsLocalRing.ResidueField Λ)) :
+        Set (IsLocalRing.ResidueField Λ))) := fun a ↦
+    Subring.closure_mono (Set.union_subset_union_right _ (Set.image_mono hfield)) (hc a)
+  have htmem : (t : Set Λ) ⊆ IsLocalRing.maximalIdeal Λ := by
+    rw [← ht]
+    exact Ideal.subset_span
+  obtain ⟨hA, hArt, hmax, ⟨e⟩⟩ :=
+    artinian_coefficient_subalgebra_structure k Λ σ t s hσ htmem hcoeff
+  let A := artinianCoefficientSubalgebra k Λ σ t s
+  have hmap : Ideal.map A.val.toRingHom (IsLocalRing.maximalIdeal A) =
+      IsLocalRing.maximalIdeal Λ := by
+    apply le_antisymm
+    · rw [hmax]
+      exact Ideal.map_comap_le
+    · rw [← ht]
+      apply Ideal.span_le.mpr
+      intro x hx
+      have hxA : x ∈ A := Algebra.subset_adjoin (Or.inl hx)
+      have hxm : (⟨x, hxA⟩ : A) ∈ IsLocalRing.maximalIdeal A := by
+        rw [hmax]
+        exact htmem hx
+      exact Ideal.mem_map_of_mem A.val.toRingHom hxm
+  have hF : EssFiniteType k
+      (IntermediateField.adjoin k (s : Set (IsLocalRing.ResidueField Λ))) :=
+    IntermediateField.essFiniteType_iff.mpr (IntermediateField.fg_adjoin_finset s)
+  have hres : EssFiniteType k (IsLocalRing.ResidueField A) :=
+    (EssFiniteType.iff_of_algEquiv e).mpr hF
+  have hess : EssFiniteType k A := by
+    apply RingHom.essFiniteType_algebraMap.mp
+    apply RingHom.essFiniteType_of_artinian_local_residue
+    exact (RingHom.essFiniteType_algebraMap).mpr hres
+  exact ⟨hA, hArt, hflat s hds hcs, hmap, hess⟩
 
 end Algebra
