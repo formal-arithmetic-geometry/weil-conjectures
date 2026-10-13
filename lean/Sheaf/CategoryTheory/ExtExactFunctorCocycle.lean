@@ -19,6 +19,7 @@ open CategoryTheory CochainComplex HomComplex Limits Abelian
 
 namespace CategoryTheory.InjectiveResolution
 
+set_option backward.isDefEq.respectTransparency false in
 /-- An exact functor sends the roof of a single cocycle to the roof of its image.
 Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA.
 (blueprint: lem-weil-pbc-ext-exact-functor-cocycle)
@@ -55,6 +56,79 @@ theorem ext_mapExactFunctor_cocycle
       (zero_add q) =
     R'.extEquivCohomologyClass.symm
       (.mk (Cocycle.fromSingleMk (α ≫ L.map a ≫ φ.f (q : ℤ))
-        (zero_add (q : ℤ)) _ rfl ha')) := by sorry
+        (zero_add (q : ℤ)) _ rfl ha')) := by
+  let := HasDerivedCategory.standard C
+  let := HasDerivedCategory.standard D
+  have hsource : (L.mapDerivedCategorySingleFunctor 0).inv.app A ≫
+      L.mapDerivedCategoryFactors.hom.app ((singleFunctor C 0).obj A) =
+      DerivedCategory.Q.map ((L.mapCochainComplexSingleFunctor 0).inv.app A) := by
+    simpa only [singleFunctor] using!
+      L.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app A
+  have hden : L.mapDerivedCategoryFactors.inv.app R.cochainComplex ≫
+      L.mapDerivedCategory.map (inv (DerivedCategory.Q.map R.ι')) ≫
+      (L.mapDerivedCategorySingleFunctor 0).hom.app B =
+      DerivedCategory.Q.map φ ≫ inv (DerivedCategory.Q.map R'.ι') := by
+    rw [← cancel_epi (DerivedCategory.Q.map
+      ((L.mapHomologicalComplex (.up ℤ)).map R.ι'))]
+    erw [L.mapDerivedCategoryFactors.inv.naturality_assoc,
+      ← L.mapDerivedCategory.map_comp_assoc, IsIso.hom_inv_id,
+      L.mapDerivedCategory.map_id, Category.id_comp]
+    have hh := DerivedCategory.Q_map_eq_of_homotopy D hφ.some
+    rw [Functor.map_comp, Functor.map_comp] at hh
+    rw [reassoc_of% hh, IsIso.hom_inv_id, Category.comp_id]
+    simpa only [singleFunctor] using!
+      L.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app B
+  have hnum : (singleFunctor D 0).map α ≫
+      (L.mapCochainComplexSingleFunctor 0).inv.app A ≫
+      ShiftedHom.map (Cocycle.equivHomShift.symm
+        (Cocycle.fromSingleMk a (zero_add (q : ℤ)) _ rfl ha))
+          (L.mapHomologicalComplex (.up ℤ)) ≫ φ⟦(q : ℤ)⟧' =
+      Cocycle.equivHomShift.symm
+        (Cocycle.fromSingleMk (α ≫ L.map a ≫ φ.f (q : ℤ))
+          (zero_add (q : ℤ)) _ rfl ha') := by
+    apply HomologicalComplex.from_single_hom_ext
+    dsimp [ShiftedHom.map]
+    simp only [singleFunctor, singleFunctors, Functor.comp_obj, shiftFunctor_obj_X',
+      HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
+      HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+      Category.id_comp, Functor.mapCochainComplexSingleFunctor,
+      HomologicalComplex.singleMapHomologicalComplex, NatIso.ofComponents_inv_app,
+      ↓reduceDIte, eqToHom_refl, Cocycle.equivHomShift_symm_apply,
+      Functor.mapHomologicalComplex_map_f, Cocycle.homOf_f, Cocycle.rightShift_coe,
+      Cocycle.fromSingleMk_coe, zero_add, Cochain.rightShift_v, Cochain.fromSingleMk_v,
+      shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq, eqToIso.inv, Functor.map_comp,
+      Category.comp_id, Category.assoc, eqToHom_naturality]
+    erw [Category.id_comp, eqToHom_map]
+  ext
+  simp only [Ext.comp_hom, Ext.mk₀_hom, Ext.mapExactFunctor_hom,
+    extEquivCohomologyClass_symm_mk_hom]
+  simp only [DerivedCategory.singleFunctorIsoCompQ, Iso.refl_hom, Iso.refl_inv,
+    NatTrans.id_app, ShiftedHom.mk₀_id_comp,
+    ShiftedHom.map_comp, ShiftedHom.map_mk₀]
+  simp only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀, Category.assoc]
+  rw [← ShiftedHom.comp_map,
+    ← ShiftedHom.map_naturality_2 _ L.mapDerivedCategoryFactors]
+  simp only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀, Category.assoc]
+  erw [reassoc_of% hsource]
+  erw [Category.comp_id, Category.comp_id]
+  erw [← Functor.map_comp, ← Functor.map_comp, hden, Functor.map_comp]
+  rw [ShiftedHom.comp_map]
+  have hnum' :
+      (ShiftedHom.mk₀ 0 rfl ((singleFunctor D 0).map α ≫
+        (L.mapCochainComplexSingleFunctor 0).inv.app A)).comp
+        ((ShiftedHom.map (Cocycle.equivHomShift.symm
+          (Cocycle.fromSingleMk a (zero_add (q : ℤ)) _ rfl ha))
+            (L.mapHomologicalComplex (.up ℤ))).comp
+              (ShiftedHom.mk₀ 0 rfl φ) (zero_add _)) (add_zero _) =
+      Cocycle.equivHomShift.symm
+        (Cocycle.fromSingleMk (α ≫ L.map a ≫ φ.f (q : ℤ))
+          (zero_add (q : ℤ)) _ rfl ha') := by
+    simpa only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀, Category.assoc] using hnum
+  have hn := congrArg (fun f => ShiftedHom.map f DerivedCategory.Q) hnum'
+  rw [ShiftedHom.map_comp, ShiftedHom.map_comp,
+    ShiftedHom.map_mk₀, ShiftedHom.map_mk₀] at hn
+  simp only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀,
+    Functor.map_comp, Category.assoc] at hn
+  erw [reassoc_of% hn]
 
 end CategoryTheory.InjectiveResolution
