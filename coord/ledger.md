@@ -12501,3 +12501,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:43 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FlatModuleDescentPreorderStage (stage 3; reviewer PASS; first push; landing 20261013T124319-L-3779094 (proof); batch 20261013T124305; modules 1; new nodes 0)
 - 12:46 L: returned deliver/F3/Sheaf.Algebra.Homology.HomTensorDegreewiseIso (reviewer RETURN: (reviewer X-118fb, head 118fbb0ca) the reviewer passed it, but the landing failed: izedExt, CategoryTheory.LocalTensorHo)
 - 12:49 L: returned deliver/T4/Sheaf.AlgebraicGeometry.DerivedPullbackTensorShiftKFlatOne (reviewer RETURN: (reviewer X-1e12c, head 1e12c4f3c) E5: DerivedPullbackTensorShiftKFlatOneMixed.lean:27–38 and its node's proof[0] lack a)
+- 12:50 L: merged deliver/B2/Sheaf.AlgebraicGeometry.SectionCohomologyUnitComparisons (stage 3; reviewer PASS; first push; landing 20261013T125006-L-3835519 (interface); batch 20261013T125004; modules 2; new nodes 1)

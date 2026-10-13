@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.SectionCohomologyUntwistedComparisons
+import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
 
 /-! # Tensor-unit comparisons for raw section cohomology
 
@@ -22,6 +24,73 @@ set_option autoImplicit false
 open CategoryTheory MonoidalCategory Opposite
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+private theorem unit_nonvanishing (Y : Scheme.{u}) (b : Γ(Y, ⊤)) :
+    nonvanishingLocus (𝟙_ Y.Modules) (unitSectionsEquiv ⊤ b) = Y.basicOpen b := by
+  set_option backward.isDefEq.respectTransparency.types false in
+    ext x
+    rw [mem_nonvanishingLocus_iff_generatesAt]
+    exact generatesAt_iff_mem_basicOpen (isFreeGenerator_one ⊤)
+      (by
+        rw [presheaf_map_id_apply]
+        exact unitSectionsEquiv_eq_smul_one b) trivial
+
+private noncomputable def unitPowIso (Y : Scheme.{u}) :
+    ∀ n : ℕ, (𝟙_ Y.Modules).tensorPow n ≅ 𝟙_ Y.Modules
+  | 0 => Iso.refl _
+  | n + 1 => (Iso.refl _ ⊗ᵢ unitPowIso Y n) ≪≫ λ_ _
+
+private noncomputable def unitTwistIso {Y : Scheme.{u}} (G : Y.Modules) (n : ℕ) :
+    G ⊗ (𝟙_ Y.Modules).tensorPow n ≅ G :=
+  (Iso.refl G ⊗ᵢ unitPowIso Y n) ≪≫ ρ_ G
+
+private theorem unitPowIso_section (Y : Scheme.{u}) (b : Γ(Y, ⊤)) (n : ℕ)
+    (V : Y.Opens) :
+    (unitPowIso Y n).hom.app V
+      (tensorPowSectionOne (homOfGlobalSection (𝟙_ Y.Modules) (unitSectionsEquiv ⊤ b))
+        n V) = unitSectionsEquiv V ((Y.presheaf.map (homOfLE le_top).op).hom b ^ n) := by
+  set_option backward.isDefEq.respectTransparency.types false in
+    induction n with
+    | zero => simp [unitPowIso, tensorPowSectionOne_zero]
+    | succ n ih =>
+      rw [tensorPowSectionOne_succ]
+      dsimp only [tensorPow]
+      simp only [unitPowIso, Iso.trans_hom, tensorIso_hom, Iso.refl_hom, Hom.comp_app,
+        ConcreteCategory.comp_apply, tensorHom_app_tmulSection, Hom.id_app]
+      rw [ih]
+      simp only [ConcreteCategory.id_apply]
+      change (λ_ (𝟙_ Y.Modules)).hom.app V
+        (tmulSection ((homOfGlobalSection (𝟙_ Y.Modules)
+          (unitSectionsEquiv ⊤ b)).app V (1 : Γ(Y, V)))
+          (unitSectionsEquiv V ((Y.presheaf.map (homOfLE le_top).op).hom b ^ n))) = _
+      rw [homOfGlobalSection_app_one, presheaf_map_unitSectionsEquiv,
+        leftUnitor_hom_app_tmulSection]
+      change ((Y.presheaf.map (homOfLE le_top).op).hom b) *
+        ((Y.presheaf.map (homOfLE le_top).op).hom b) ^ n =
+          ((Y.presheaf.map (homOfLE le_top).op).hom b) ^ (n + 1)
+      exact (pow_succ' _ _).symm
+
+private theorem unitTwistIso_section {Y : Scheme.{u}} (G : Y.Modules)
+    (b : Γ(Y, ⊤)) (n : ℕ) :
+    (ρ_ G).inv ≫ G ◁ tensorPowSection
+        (homOfGlobalSection (𝟙_ Y.Modules) (unitSectionsEquiv ⊤ b)) n ≫
+          (unitTwistIso G n).hom =
+      (ρ_ G).inv ≫ G ◁ homOfGlobalSection (𝟙_ Y.Modules)
+        (unitSectionsEquiv ⊤ (b ^ n)) ≫ (ρ_ G).hom := by
+  set_option backward.isDefEq.respectTransparency.types false in
+    apply hom_ext
+    intro V
+    ext z
+    simp only [Hom.comp_app, ConcreteCategory.comp_apply]
+    rw [rightUnitor_inv_app, whiskerLeft_app_tmulSection]
+    simp only [unitTwistIso, Iso.trans_hom, tensorIso_hom, Iso.refl_hom, Hom.comp_app,
+      ConcreteCategory.comp_apply, tensorHom_app_tmulSection, Hom.id_app]
+    rw [unitPowIso_section, rightUnitor_hom_app_tmulSection]
+    rw [whiskerLeft_app_tmulSection]
+    change _ • z = (ρ_ G).hom.app V (tmulSection z
+      ((homOfGlobalSection (𝟙_ Y.Modules) (unitSectionsEquiv ⊤ (b ^ n))).app V (1 : Γ(Y, V))))
+    rw [homOfGlobalSection_app_one, presheaf_map_unitSectionsEquiv,
+      rightUnitor_hom_app_tmulSection, map_pow]
 
 /-- Evaluation of a pushforward resolution agrees with derived sections on the inverse
 image open, compatibly with restriction and multiplication by a tensor power of a function.
@@ -77,6 +146,48 @@ theorem sectionCohomology_unit_comparisons {X T : Scheme.{u}}
           (G ⊗ L.tensorPow n : Y.Modules)),
         d n ((RingedSpace.openModuleCohomologyRestriction Y.toRingedSpace q
           (homOfLE (le_top : U ≤ ⊤))).app (G ⊗ L.tensorPow n : Y.Modules) ξ) =
-            (P.map (homOfLE (T.basicOpen_le a)).op).hom (c n ξ)) := by sorry
+            (P.map (homOfLE (T.basicOpen_le a)).op).hom (c n ξ)) := by
+  set_option backward.isDefEq.respectTransparency.types false in
+    let Y := (f ⁻¹ᵁ W).toScheme
+    let G := (restrictFunctor (f ⁻¹ᵁ W).ι).obj F
+    let L := 𝟙_ Y.Modules
+    let b := ((f.app W) ≫ (f ⁻¹ᵁ W).topIso.inv).hom a
+    let s : Γ(L, ⊤) := unitSectionsEquiv ⊤ b
+    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+    let P := sectionCohomologyPresheaf K q
+    let : Module Γ(T, W) (P.obj (op (T.basicOpen a))) :=
+      Module.compHom _ (T.presheaf.map (homOfLE (T.basicOpen_le a)).op).hom
+    dsimp only
+    intro U hU
+    have hUb : U = Y.basicOpen b := by
+      apply SetLike.coe_injective
+      exact hU.trans (unit_nonvanishing Y b)
+    have hImage : (f ⁻¹ᵁ W).ι ''ᵁ U = f ⁻¹ᵁ T.basicOpen a := by
+      rw [hUb]
+      change (f ⁻¹ᵁ W).ι ''ᵁ (f ⁻¹ᵁ W).toScheme.basicOpen
+        ((f ⁻¹ᵁ W).topIso.inv ((f.app W).hom a)) = _
+      rw [Scheme.Opens.ι_image_basicOpen_topIso_inv, ← Scheme.preimage_basicOpen]
+    obtain ⟨e, t, hscalar, hres⟩ :=
+      sectionCohomology_untwisted_comparisons f F I q W (T.basicOpen a)
+        (T.basicOpen_le a) U hImage
+    let HT := RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤
+    let HU := RingedSpace.openModuleCohomology Y.toRingedSpace q U
+    let c (n : ℕ) := ((HT.mapIso (unitTwistIso G n)).addCommGroupIsoToAddEquiv).trans t
+    let d (n : ℕ) := ((HU.mapIso (unitTwistIso G n)).addCommGroupIsoToAddEquiv).trans e
+    refine ⟨e, c, d, ?_, ?_⟩
+    · intro n z
+      change e (HU.map (unitTwistIso G n).hom
+        (HU.map ((ρ_ G).inv ≫ G ◁ tensorPowSection (homOfGlobalSection L s) n) z)) = _
+      rw [← ConcreteCategory.comp_apply, ← HU.map_comp]
+      rw [Category.assoc, unitTwistIso_section]
+      simpa only [map_pow] using hscalar (a ^ n) z
+    · intro n ξ
+      let α := RingedSpace.openModuleCohomologyRestriction Y.toRingedSpace q
+        (homOfLE (le_top : U ≤ ⊤))
+      change e (HU.map (unitTwistIso G n).hom (α.app _ ξ)) =
+        (P.map (homOfLE (T.basicOpen_le a)).op).hom
+          (t (HT.map (unitTwistIso G n).hom ξ))
+      rw [← ConcreteCategory.comp_apply, ← α.naturality, ConcreteCategory.comp_apply]
+      exact hres _
 
 end AlgebraicGeometry.Scheme.Modules
