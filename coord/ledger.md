@@ -12190,3 +12190,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/R3/Sheaf.CategoryTheory.RightDerivedSingleUnitShiftTransport (stage 3; reviewer PASS; first push; landing 20261013T111918-L-3061397 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/R3/Sheaf.RingTheory.FormalGlueingCanonicalFunctor (stage 3; reviewer PASS; first push; landing 20261013T111919-L-3061569 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/R4/Sheaf.AlgebraicGeometry.CoherentKernelIdealProductCompletionZero (stage 3; reviewer PASS; first push; landing 20261013T111919-L-3061700 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/R4/Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineGenerators (stage 3; reviewer PASS; first push; landing 20261013T111919-L-3061870 (interface); batch 20261013T111833; modules 2; new nodes 1)

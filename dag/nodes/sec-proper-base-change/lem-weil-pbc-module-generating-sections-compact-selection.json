@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-module-generating-sections-compact-selection",
+ "kind": "statement",
+ "title": "Finite subfamilies of global generators on a compact open",
+ "statement": "Let X be a scheme [def-pc-scheme], V and K opens with K contained in V and K compact [def-weil-pbc-quasi-compact-scheme]. Let H be an O_X-module [def-weil-sheaf-of-modules-category] of finite type on K [def-weil-pbc-module-finite-type-presentation], and let sigma be a specified global generating family for H restricted to V (an epimorphism from the free sheaf on sigma.I). There is a finite subset S of sigma.I such that the free map on S, followed by the given generating epimorphism, becomes epimorphic upon restriction from V to K. Neither V affine nor H quasi-coherent is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BB (17.9.7), proof: local finite generators, local lifts and finite subcover, specialized to the directed union of finite-generated image subsheaves of a specified global generating family; Lemma 01B8 (17.9.4). Read online at https://stacks.math.columbia.edu/tag/01BB and https://stacks.math.columbia.edu/tag/01B8."
+ },
+ "proof": [
+  {
+   "text": "For x in K, choose finitely many local generators of H on a neighbourhood inside K. The epimorphism from the specified global free sheaf locally lifts them. Each germ of a section of the free sheaf is a finite linear combination of its basis germs: the free sheaf is the filtered colimit of its finite sub-coproducts, and stalks commute with filtered colimits. The finitely many lifts therefore have a common finite support S_x. Their germ identities hold on a common smaller neighbourhood; on that neighbourhood the finite-support map is epi because its image contains every local generator. This is the local lifting argument of Stacks 01B8 and 01BB. No finite presentation, affine localization, or quasi-coherence is used.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "lem-weil-pbc-module-stalk-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The neighbourhoods just constructed cover K. Choose finitely many using compactness, and let S be the union of their finite supports. For each selected neighbourhood, the free map for S_x factors through the free map for S. Thus the latter is epi on every selected neighbourhood. Local surjectivity, equivalently surjectivity on stalks, proves that its restriction to K is epi. The slice restriction functor and its free-module comparison identify this with the overMap expression in Lean. When K is empty choose the empty finset; if the original index type is empty, its epimorphism already identifies H on V with zero.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-weil-pbc-locally-surjective-iff-stalks",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "lem-weil-pbc-module-stalk-filtered-colimit",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-locally-surjective-iff-stalks",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 01BB, proof, finite-cover argument applied to finite subsets of a global generating family; the local shrinking is Lemma 01B8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type sheaf on a compact topological space has a finite subfamily of any global generating family that generates",
+   "date": "2026-10-13",
+   "results": "8 hits: SheafOfModules.GeneratingSections.IsFiniteType.finite, CategoryTheory.presheafIsGeneratedBy_of_isFinite, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.Presentation.IsFinite.isFiniteType_generators",
+   "verdict": "No matching compact selection theorem. Related generator definitions only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A global generating family of a finite type sheaf of modules contains a finite subfamily generating on a quasi compact open",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "note": "Service unavailable; no absence verdict from this search."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*subfamily|generat.*compact|compact.*generat",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No matching compact selection theorem. Related generator definitions only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.GeneratingSections, Finset",
+   "date": "2026-10-13",
+   "results": "Second reading: 0 hits. LeanFinder independently searched surjections from infinite free sheaves through finitely many summands; returned generator and finite-presentation definitions, no compact-selection result. Source review ruled out the invertible-only FiniteGlobalGeneratingFamily and FiniteSectionsCover.",
+   "verdict": "No duplicate or directly applicable result found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineGenerators",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Finite selection of global generators in the affine-union construction, after constructing a global generating family by the affine tilde counit.",
+   "via": [
+    "lem-weil-pbc-module-finite-type-affine-generators",
+    "lem-weil-pbc-module-finite-type-affine-capture",
+    "lem-weil-pbc-module-finite-type-affine-union",
+    "lem-weil-pbc-module-finite-type-affine-enlargement",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleGeneratingSectionsCompactSelection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleGeneratingSectionsCompactSelection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finset_generatingSections_on_compact",
+  "statement": "theorem exists_finset_generatingSections_on_compact\n    (X : Scheme.{u}) (V K : X.Opens) (hK : IsCompact (K : Set X)) (hKV : K ≤ V)\n    (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    [(H.over K).IsFiniteType] (σ : (H.over V).GeneratingSections) :\n    ∃ S : Finset σ.I,\n      Epi ((SheafOfModules.overMap (moduleRings X.toRingedSpace) (homOfLE hKV)).map\n        (SheafOfModules.freeMap (R := (moduleRings X.toRingedSpace).over V)\n          ((↑) : S → σ.I) ≫ σ.π))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T111919-L-3061870",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T111919-L-3061870",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

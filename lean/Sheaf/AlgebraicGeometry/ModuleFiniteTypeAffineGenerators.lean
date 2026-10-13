@@ -6,6 +6,8 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.ModuleGeneratingSectionsCompactSelection
 
 /-! # Finite affine sections generating on a compact open
 
@@ -20,6 +22,21 @@ universe u
 open CategoryTheory AlgebraicGeometry SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+private theorem exists_affine_generatingSections
+    (X : Scheme.{u}) (V : X.affineOpens)
+    (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [H.IsQuasicoherent] :
+    Nonempty (H.over V.1).GeneratingSections := by
+  let H' : X.Modules := H
+  let M := H'.restrict V.2.fromSpec
+  have : M.IsQuasicoherent := inferInstance
+  have : IsIso M.fromTildeΓ := inferInstance
+  let P := (presentationTilde
+    ((modulesSpecToSheaf.obj M).presheaf.obj (.op ⊤)) .univ (by simp) _
+    (Submodule.span_eq _)).ofIsIso M.fromTildeΓ
+  let Q := presentationOverOfRestrict V.2.fromSpec.opensRange
+    (presentationRestrictOpensRange V.2.fromSpec P)
+  exact V.2.opensRange_fromSpec ▸ ⟨Q.generators⟩
 
 /-- Finitely many sections on an affine open generate a quasi-coherent module on a
 compact open where it is of finite type.
@@ -50,6 +67,19 @@ theorem exists_finiteType_affine_generators
     ∃ (n : ℕ) (φ : SheafOfModules.free
         (R := (moduleRings X.toRingedSpace).over V.1) (ULift.{u} (Fin n)) ⟶ H.over V.1),
       Epi ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
-        (homOfLE hKV)).map φ) := by sorry
+        (homOfLE hKV)).map φ) := by
+  classical
+  obtain ⟨σ⟩ := exists_affine_generatingSections X V H
+  obtain ⟨S, hS⟩ := exists_finset_generatingSections_on_compact X V.1 K hK hKV H σ
+  let e : ULift.{u} (Fin (Fintype.card S)) ≃ S :=
+    Equiv.ulift.trans (Fintype.equivFin S).symm
+  let R := moduleRings X.toRingedSpace
+  let T := SheafOfModules.overMap R (homOfLE hKV)
+  let f := SheafOfModules.freeMap (R := R.over V.1) ((↑) : S → σ.I) ≫ σ.π
+  let g := ((SheafOfModules.freeFunctor (R := R.over V.1)).mapIso e.toIso).hom
+  have : Epi (T.map f) := hS
+  refine ⟨Fintype.card S, g ≫ f, ?_⟩
+  rw [T.map_comp]
+  infer_instance
 
 end AlgebraicGeometry.Scheme.Modules
