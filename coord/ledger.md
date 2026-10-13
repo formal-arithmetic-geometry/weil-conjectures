@@ -12325,3 +12325,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:50 L: merged deliver/P4/Sheaf.AlgebraicGeometry.EtaleOpenSquareDiagramIdentity (stage 3; reviewer PASS; first push; landing 20261013T115028-L-3325539 (proof); batch 20261013T115020; modules 1; new nodes 0)
 - 11:50 L: merged deliver/R1/Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact (stage 3; reviewer PASS; first push; landing 20261013T115028-L-3325733 (interface); batch 20261013T115020; modules 3; new nodes 2)
 - 11:50 L: merged deliver/R1/Sheaf.AlgebraicGeometry.PicardExternalRightCechComparison (stage 3; reviewer PASS; first push; landing 20261013T115029-L-3325857 (interface); batch 20261013T115020; modules 4; new nodes 3)
+- 11:50 L: merged deliver/R2/Sheaf.AlgebraicGeometry.AffineRegularStalkComparisonBijective (stage 3; reviewer PASS; first push; landing 20261013T115029-L-3326006 (proof); batch 20261013T115020; modules 1; new nodes 0)
