@@ -12,32 +12,44 @@
  ],
  "proof": [
   {
-   "text": "Choose a quasi-isomorphism E -> reduction(K0) using bounded-above projectivity and the bijection from homotopy to derived morphisms. Its cone C is bounded above and acyclic. Cone terms are sums of reductions of class members, hence are reductions of class members.",
+   "text": "Reduced E terms are projective by the extension/restriction adjunction. E is K-projective; use the proved upstream CochainComplex.IsKProjective.exists_Q_map_eq (which applies Qh_map_bijective and chooses a chain representative) to represent the inverse supplied derived isomorphism, and reflect its derived isomorphism to a quasi-isomorphism.",
    "uses": [
     "lem-pc-ring-derived-map-representative"
    ],
    "elementary": false
   },
   {
-   "text": "For any supplied A lifting C, restriction of scalars makes A -> C a termwise surjective quasi-isomorphism of R-complexes. Use K-projectivity of K0 to lift its canonical map to C up to homotopy. Lift the correcting homotopy termwise and subtract its boundary to make the square commute strictly.",
+   "text": "Use the actual mapping cone and its proved bound, acyclicity and reduced class terms.",
    "uses": [
-    "lem-pc-ring-derived-map-representative"
+    "lem-sc-complex-lift-cone-properties"
    ],
    "elementary": false
   },
   {
-   "text": "Take the cokernel complex B of the strict map K0 -> A. The sequence is right exact and B is bounded above. Extension of scalars preserves this cokernel. Its reduced first arrow is the cone inclusion, so its cokernel is E[1]; the cone sequence splits in each degree. This gives the claimed diagram, without asserting injectivity over R.",
-   "uses": [],
-   "elementary": true
+   "text": "For a supplied reduced-cone lift A, strictly lift the cone inclusion using its null-homotopy into the acyclic cone.",
+   "uses": [
+    "lem-sc-complex-lift-strict-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual ShortComplex.cokernelSequence of this strict map. Its exactness and epimorphism are Mathlib facts. Its third object is bounded above since each evaluated cokernel projection is epi out of the bounded-above A. The reduced-cokernel comparison supplies its isomorphism to E[1] and degreewise splitting. The middle object is exactly the supplied A, so its acyclicity and class terms are the hypotheses.",
+   "uses": [
+    "lem-sc-complex-lift-cone-cokernel"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-ring-derived-map-representative"
+  "lem-pc-ring-derived-map-representative",
+  "lem-sc-complex-lift-cone-properties",
+  "lem-sc-complex-lift-strict-map",
+  "lem-sc-complex-lift-cone-cokernel"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BCA, cone construction and dotted-arrow paragraphs (steps 1, 2, 4, and the right-exact part of step 6)"
+  "place": "Tag 0BCA, cone, dotted-arrow and cokernel paragraphs; strict lifting via null-homotopy into the acyclic cone"
  },
  "mathlib_searches": [
   {
@@ -115,9 +127,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T082407-L-1645659",
+  "landing": "20261013T100211-L-2500331",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

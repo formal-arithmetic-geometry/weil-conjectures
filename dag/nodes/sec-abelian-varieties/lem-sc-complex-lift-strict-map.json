@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-complex-lift-strict-map",
+ "kind": "statement",
+ "title": "Strict lifting of a reduced map into an acyclic complex",
+ "statement": "Let $R$ be a commutative ring, $I$ an ideal, $K$ a bounded-above complex of projective $R$-modules, and $A$ any $R$-complex. Let $C$ be an acyclic $R/I$-complex and $e:(R/I)\\otimes_R A\\cong C$ an isomorphism of complexes. Every map $\\iota:(R/I)\\otimes_R K\\to C$ has a strict lift $f:K\\to A$ satisfying $((R/I)\\otimes_R f)\\circ e=\\iota$, with composition in diagrammatic order. No acyclicity or boundedness of $A$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project, Tag 0BCA, dotted-arrow paragraph, using the null-homotopy into the acyclic cone"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The reduced K is bounded above because extension of scalars preserves zero objects. Its terms are projective by the extension/restriction adjunction, whose right adjoint preserves epimorphisms. Therefore reduced K is K-projective and the map to acyclic C has a homotopy H to zero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The adjunction unit from an R-module to its restricted reduction is surjective: TensorProduct.mk_surjective applies since the quotient ring map is surjective. For each component of H composed with e inverse, use the adjunction and projectivity of the K term to factor it through this unit. Adjunction naturality shows that the resulting component reduces, followed by e, to H.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Take Homotopy.nullHomotopicMap of this lifted family. Compatibility with additive functors and postcomposition identifies its reduction followed by e with nullHomotopicMap H.hom. The defining homotopy equation gives precisely the supplied map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCA, dotted-arrow paragraph, using the null-homotopy into the acyclic cone"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strict lift chain map bounded above projective complex through degreewise surjective quasi-isomorphism",
+   "results": "CochainComplex.isKProjective_of_projective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b, CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.IsKProjective; APIs used in the complete Lean proof, no exact one-line match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict lift chain map bounded above projective complex through degreewise surjective quasi-isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*[Qq]uasi|[Qq]uasi.*lift|nonempty_homotopy_zero",
+   "results": "Mathlib/AlgebraicTopology/Quasicategory/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean, Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; APIs used in the complete Lean proof, no exact one-line match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective",
+   "results": "CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, HomotopyEquiv.isKProjective, CochainComplex.isKProjective_of_iso, CochainComplex.isKProjective_iff_of_iso, CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX, CochainComplex.instIsKProjectiveObjIntShiftFunctor, CochainComplex.isKProjective_shift_iff; APIs used in the complete Lean proof, no exact one-line match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComplexLiftAcyclicEnlargement",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "dotted-arrow paragraph, using the null-homotopy into the acyclic cone",
+   "via": [
+    "lem-sc-complex-lift-acyclic-enlargement",
+    "lem-sc-complex-lift-class-projective",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComplexLiftStrictMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComplexLiftStrictMap.lean",
+  "declaration": "AlgebraicGeometry.exists_complex_lift_strict_map",
+  "statement": "theorem exists_complex_lift_strict_map (R : Type u) [CommRing R] (I : Ideal R) (K A : CochainComplex (ModuleCat.{max u v} R) ℤ) (hKbound : ∃ b : ℤ, K.IsStrictlyLE b) (hKproj : ∀ i : ℤ, Projective (K.X i)) (C : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (hC : C.Acyclic) (e : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj A ≅ C) (ι : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ C) : ∃ f : K ⟶ A, ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).map f ≫ e.hom = ι",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100211-L-2500331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100211-L-2500331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

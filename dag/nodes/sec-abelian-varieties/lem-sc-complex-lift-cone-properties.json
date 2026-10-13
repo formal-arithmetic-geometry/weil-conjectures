@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-complex-lift-cone-properties",
+ "kind": "statement",
+ "title": "Bounded acyclic reduced cone with class terms",
+ "statement": "Let $R$ be a commutative ring, $I$ an ideal, and $\\mathcal P$ a class of $R$-modules closed under binary sums in the precise sense that $P_1\\in\\mathcal P$ and $P_{12}\\in\\mathcal P$ if and only if $P_1,P_2\\in\\mathcal P$ whenever $P_{12}\\cong P_1\\times P_2$. Let $K$ be a bounded-above complex with terms in $\\mathcal P$, and $E$ a bounded-above $R/I$-complex whose terms are isomorphic to reductions of class members. For any quasi-isomorphism $\\delta:E\\to (R/I)\\otimes_R K$, its actual mapping cone is bounded above, acyclic, and each cone term is isomorphic to the reduction of a class member.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project, Tag 0BCA, cone construction paragraph"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the maximum of the two bounds; the cone term at i is the biproduct of E at i+1 and reduced K at i, hence vanishes above this bound.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The distinguished cone triangle and the identification of quasi-isomorphisms with morphisms having acyclic cone prove acyclicity (Mathlib HomotopyCategory.quasiIso_eq_trW_subcategoryAcyclic).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose P reducing to E at i+1. The closure equivalence puts the actual biproduct P plus K at i in the class. Extension of scalars preserves binary coproducts and zero morphisms, hence binary biproducts. Compose the mapBiprod isomorphism with eP and homotopyCofiber.XIsoBiprod to identify its reduction with the cone term.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCA, cone construction paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "mapping cone of a quasi-isomorphism bounded above complexes terms direct sums",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingConeHomOfDegreewiseSplitXIso, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingConeHomOfDegreewiseSplitIso_hom_f, CochainComplex.cm5b.p, CochainComplex.mappingConeHomOfDegreewiseSplitIso, CochainComplex.mappingCone.mapHomologicalComplexXIso; APIs used in the complete Lean proof, no exact one-line match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "mapping cone of a quasi-isomorphism bounded above complexes terms direct sums",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*acyclic|acyclic.*mappingCone|isZero_X_iff",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean; APIs used in the complete Lean proof, no exact one-line match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.isZero_X_iff",
+   "results": "CochainComplex.mappingCone.isZero_X_iff; APIs used in the complete Lean proof, no exact one-line match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComplexLiftAcyclicEnlargement",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "cone construction paragraph",
+   "via": [
+    "lem-sc-complex-lift-acyclic-enlargement",
+    "lem-sc-complex-lift-class-projective",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComplexLiftConeProperties",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComplexLiftConeProperties.lean",
+  "declaration": "AlgebraicGeometry.complex_lift_cone_properties",
+  "statement": "theorem complex_lift_cone_properties (R : Type u) [CommRing R] (I : Ideal R) (Pclass : Set (ModuleCat.{max u v} R)) (E : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (K : CochainComplex (ModuleCat.{max u v} R) ℤ) (hclosed : ∀ P₁ P₂ P₁₂ : ModuleCat.{max u v} R, Nonempty (P₁₂ ≅ ModuleCat.of R (P₁ × P₂)) → (P₁ ∈ Pclass ∧ P₁₂ ∈ Pclass ↔ P₁ ∈ Pclass ∧ P₂ ∈ Pclass)) (hKbound : ∃ b : ℤ, K.IsStrictlyLE b) (hKterms : ∀ i : ℤ, K.X i ∈ Pclass) (hEbound : ∃ b : ℤ, E.IsStrictlyLE b) (hEterms : ∀ i : ℤ, ∃ P : ModuleCat.{max u v} R, P ∈ Pclass ∧ Nonempty (E.X i ≅ (ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P)) (δ : E ⟶ ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) [QuasiIso δ] : (∃ b : ℤ, (CochainComplex.mappingCone δ).IsStrictlyLE b) ∧ (CochainComplex.mappingCone δ).Acyclic ∧ ∀ i : ℤ, ∃ P : ModuleCat.{max u v} R, P ∈ Pclass ∧ Nonempty ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P ≅ (CochainComplex.mappingCone δ).X i)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100211-L-2500331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100211-L-2500331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

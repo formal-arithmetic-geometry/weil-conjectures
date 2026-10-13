@@ -12,7 +12,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Sheaf.AlgebraicGeometry.ComplexLiftConeProperties
+import Sheaf.AlgebraicGeometry.ComplexLiftStrictMap
+import Sheaf.AlgebraicGeometry.ComplexLiftConeCokernel
 
 /-! # Acyclic enlargement with prescribed reduced cokernel
 
@@ -26,6 +29,37 @@ universe u v w w'
 open CategoryTheory
 
 namespace AlgebraicGeometry
+
+private theorem exists_quasiIso_of_derived_iso
+    {D : Type*} [Category D] [Abelian D] [HasDerivedCategory D]
+    (K L : CochainComplex D ℤ) [K.IsKProjective]
+    (e : DerivedCategory.Q.obj K ≅ DerivedCategory.Q.obj L) :
+    ∃ f : K ⟶ L, QuasiIso f := by
+  obtain ⟨f, heq⟩ := CochainComplex.IsKProjective.exists_Q_map_eq K L e.hom
+  refine ⟨f, (DerivedCategory.isIso_Q_map_iff_quasiIso D f).mp ?_⟩
+  rw [heq]
+  infer_instance
+
+private theorem reduced_term_projective
+    (R : Type u) [CommRing R] (I : Ideal R)
+    (P : ModuleCat.{max u v} R) (hP : Projective P) :
+    Projective ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P) := by
+  exact (ModuleCat.extendRestrictScalarsAdj (Ideal.Quotient.mk I)).map_projective P hP
+
+private theorem cokernel_bounded_above
+    {D : Type*} [Category D] [Abelian D]
+    {K A : CochainComplex D ℤ} (f : K ⟶ A)
+    (hA : ∃ b : ℤ, A.IsStrictlyLE b) :
+    ∃ b : ℤ, (Limits.cokernel f).IsStrictlyLE b := by
+  obtain ⟨b, hb⟩ := hA
+  let := hb
+  refine ⟨b, (CochainComplex.isStrictlyLE_iff _ _).mpr ?_⟩
+  intro i hi
+  let π := (Limits.cokernel.π f).f i
+  have : Epi π := inferInstance
+  rw [Limits.IsZero.iff_id_eq_zero]
+  apply (cancel_epi π).mp
+  exact (A.isZero_of_isStrictlyLE b i hi).eq_of_src _ _
 
 /-- Construct an acyclic cone and a cokernel sequence for any acyclic lift of it.
 
@@ -84,6 +118,29 @@ theorem exists_complex_lift_acyclic_enlargement
             (((S.map (HomologicalComplex.eval (ModuleCat.{max u v} R)
               (ComplexShape.up ℤ) i)).map
                 (ModuleCat.extendScalars (Ideal.Quotient.mk I))).Splitting) := by
-  sorry
+  classical
+  obtain ⟨eD⟩ := hderived
+  obtain ⟨bE, hbE⟩ := hEbound
+  let := hbE
+  have hEproj : ∀ i : ℤ, Projective (E.X i) := by
+    intro i
+    obtain ⟨P, hP, ⟨eP⟩⟩ := hEterms i
+    exact Projective.of_iso eP.symm (reduced_term_projective R I P (hproj P hP))
+  let := hEproj
+  let := CochainComplex.isKProjective_of_projective E bE
+  obtain ⟨δ, hδ⟩ := exists_quasiIso_of_derived_iso E _ eD.symm
+  let := hδ
+  obtain ⟨hCbound, hCacyclic, hCterms⟩ := complex_lift_cone_properties R I Pclass E K₀
+    hclosed hKbound hKterms ⟨bE, hbE⟩ hEterms δ
+  refine ⟨CochainComplex.mappingCone δ, hCbound, hCacyclic, hCterms, ?_⟩
+  intro A hAbound hAacyclic hAterms hAC
+  obtain ⟨eAC⟩ := hAC
+  obtain ⟨f, hf⟩ := exists_complex_lift_strict_map R I K₀ A hKbound
+    (fun i ↦ hproj (K₀.X i) (hKterms i)) _ hCacyclic eAC
+    (CochainComplex.mappingCone.inr δ)
+  obtain ⟨hBiso, hsplit⟩ := complex_lift_cone_cokernel R I E K₀ A δ eAC f hf
+  refine ⟨ShortComplex.cokernelSequence f, rfl, ShortComplex.cokernelSequence_exact f,
+    inferInstance, hAacyclic, hAterms, ?_, hBiso, hsplit⟩
+  exact cokernel_bounded_above f hAbound
 
 end AlgebraicGeometry

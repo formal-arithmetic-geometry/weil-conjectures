@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-complex-lift-cone-cokernel",
+ "kind": "statement",
+ "title": "Reduction of the cokernel of a strict cone-inclusion lift",
+ "statement": "Let $R$ be a commutative ring, $I$ an ideal, $E$ an $R/I$-complex, and $K,A$ complexes of $R$-modules. Let $\\delta:E\\to (R/I)\\otimes_R K$ be any chain map, and $e:(R/I)\\otimes_R A\\cong\\operatorname{Cone}(\\delta)$ an isomorphism. Suppose $f:K\\to A$ reduces, after e, to the cone inclusion. Then the reduction of the actual cokernel complex of f is isomorphic to $E[1]$. The reduction of the actual cokernel sequence of f is split in every degree. Neither injectivity of f nor acyclicity of any complex is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project, Tag 0BCA, cokernel paragraph"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The rotated cone short complex is degreewise split by mappingCone.triangleRotateShortComplexSplitting. It is short exact, so its second arrow is a cokernel of its first arrow.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Extension of scalars preserves cokernels of complexes. Compose PreservesCokernel.iso with cokernel.mapIso from the strict-square equality and the unique isomorphism to the rotated cone short complex cokernel. This gives the reduced cokernel isomorphism to E[1].",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel comparison, the commuting-square induced cokernel map, and the cokernel universal-property isomorphism commute with projections. Build a ShortComplex.isoMk from the reduced cokernel sequence to the rotated cone sequence. Evaluate and transport its splitting to obtain the asserted degreewise splittings.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCA, cokernel paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars cokernel of mapping cone inclusion split exact",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars cokernel of mapping cone inclusion split exact",
+   "results": "CochainComplex.mappingCone.triangleRotateShortComplexSplitting, CochainComplex.mappingConeHomOfDegreewiseSplitXIso, CochainComplex.mappingCone.triangleRotateShortComplexSplitting_r, CochainComplex.mappingCone.triangleRotateShortComplexSplitting_s, CochainComplex.mappingConeHomOfDegreewiseSplitIso, CochainComplex.mappingConeHomOfDegreewiseSplitIso_hom_f, CochainComplex.mappingCone.decomp_from, CochainComplex.mappingCone.decomp_to; APIs used in the complete Lean proof, no exact one-line match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernelSequence|map_inr|Splitting",
+   "results": "Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean; APIs used in the complete Lean proof, no exact one-line match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.cokernelSequence",
+   "results": "CategoryTheory.ShortComplex.cokernelSequence, CategoryTheory.ShortComplex.cokernelSequence_exact, CategoryTheory.ShortComplex.cokernelSequence_X₁, CategoryTheory.ShortComplex.cokernelSequence_X₂, CategoryTheory.ShortComplex.cokernelSequence_f, CategoryTheory.ShortComplex.cokernelSequence_X₃, CategoryTheory.ShortComplex.instEpiGCokernelSequence, CategoryTheory.ShortComplex.cokernelSequence_g; APIs used in the complete Lean proof, no exact one-line match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComplexLiftAcyclicEnlargement",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "cokernel paragraph",
+   "via": [
+    "lem-sc-complex-lift-acyclic-enlargement",
+    "lem-sc-complex-lift-class-projective",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComplexLiftConeCokernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComplexLiftConeCokernel.lean",
+  "declaration": "AlgebraicGeometry.complex_lift_cone_cokernel",
+  "statement": "theorem complex_lift_cone_cokernel (R : Type u) [CommRing R] (I : Ideal R) (E : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (K A : CochainComplex (ModuleCat.{max u v} R) ℤ) (δ : E ⟶ ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) (e : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj A ≅ CochainComplex.mappingCone δ) (f : K ⟶ A) (hf : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).map f ≫ e.hom = CochainComplex.mappingCone.inr δ) : Nonempty (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (Limits.cokernel f) ≅ E⟦(1 : ℤ)⟧) ∧ ∀ i : ℤ, Nonempty ((((ShortComplex.cokernelSequence f).map (HomologicalComplex.eval (ModuleCat.{max u v} R) (ComplexShape.up ℤ) i)).map (ModuleCat.extendScalars (Ideal.Quotient.mk I))).Splitting)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100211-L-2500331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100211-L-2500331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
