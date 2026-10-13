@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-affine-ordinary-tensor-stalk-coordinates",
+ "kind": "statement",
+ "title": "Ordinary tensor target coordinates before the derived stalk presentation",
+ "statement": "Let R,A,R',A' be commutative rings with the algebra structures and compatible maps of a cartesian spectrum square as in [def-pc-affine-base-change-tilde-coordinates]. Let M be any complex of A-modules, i an integer and p a prime of A'. Put P=tilde M, C=A' tensor_A M, N=tilde C, T=g'^*P, and s the module stalk functor at p. Let rho be the scalar map to the fourth stalk obtained from [def-pc-single-complex-base-change-stalk-condition]. Construct affineTildeHomologyLocalization:H^i(C)_p to H^i(N_p) from exact tilde homology, localization of tilde stalks and [lem-pc-affine-derived-cohomology-presentation]. There exists a chain isomorphism tau:N_p to tensorComplex(p,P) which sends the germ of 1 tensor x to 1 tensor the germ of x in every degree. For every localized cohomology class y, affineTensorPullbackHomologyStalkIso(y) equals affineRepresentativeStalkIso(T).inv applied to homology(tensorStalkIso) applied to homology(tau) applied to affineTildeHomologyLocalization(y). No K-flatness and no base-derived source model are assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Ordinary target of the affine comparison; Tags 01I9, 01HV and 01AG"
+ },
+ "stmt_deps": [
+  "def-pc-affine-base-change-tilde-coordinates",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-pc-affine-tensor-pullback-stalk-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Construct affineTildeHomologyLocalization from IsLocalizedModule.iso for StructureSheaf.toStalkₗ, followed by the stalk of the exact tilde homology isomorphism and homologyFunctorFactors, and affineRepresentativeStalkIso. This construction is provided explicitly in Lean without a hole.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "def-pc-affine-base-change-tilde-coordinates",
+    "lem-pc-affine-derived-cohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical tensor-pullback/tilde comparison gives T isomorphic to N. Apply stalk complexes to its inverse and compose with tensorStalkIso inverse to obtain tau. The unit equation for the tilde comparison and the germ equation for tensor-pullback stalks show that tau sends germ(1 tensor x) to 1 tensor germ(x). Such germs generate after scalar extension and localization, so the formula fixes the chain map.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of exact stalk homology and the homologyFunctorFactors equation to the stalk of T isomorphic to N. Expand affineTensorPullbackHomologyStalkIso into its localization, exact tilde homology and stalk comparison factors. Cancel the tensorStalkIso inverse in tau. The resulting three factors are exactly affineTildeHomologyLocalization followed by homology(tau), homology(tensorStalkIso) and affineRepresentativeStalkIso inverse, proving the displayed identity. No source cohomology model is used.",
+   "uses": [
+    "lem-pc-affine-derived-cohomology-presentation",
+    "lem-pc-affine-tensor-pullback-stalk-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-pc-affine-base-change-tilde-coordinates",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-affine-tensor-pullback-stalk-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Explicit interface decomposition of the affine localization argument, preserving its source/target construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk localization tilde homology of tensor pullback agrees with pure tensor germ comparison",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary scalar extension complex tilde stalk localization tensor pullback homology coordinates",
+   "results": "ModuleCat.Tilde.stalkIso, localizationToStalk, toStalk_comp_stalkToFiberLinearMap; StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom. Signatures inspected: these identify individual stalk modules, not the chain-level comparison and cohomology square here.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; reuse the localization and tilde interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|tensorStalkIso in Mathlib, WeilConjectures and Sheaf; tensor localization in imported blueprint",
+   "results": "Mathlib has ShortComplex.mapHomologyIso and its naturality; no localizedComparison or tensorStalkIso match. Sheaf has DerivedTensorLocalizationCohomology, SingleComplexBaseChangeStalkCondition, AffineTensorPullbackStalkCoordinates and AffineTildeStalkTensorComparison; none states the combined square or coordinate equation with the specified tau. Blueprint search: no matching blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "No existing declaration supplies the claimed intermediate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineBaseChangeOrdinaryStalkComparison",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Ordinary target of the affine comparison; Tags 01I9, 01HV and 01AG",
+   "via": [
+    "lem-pc-affine-base-change-ordinary-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-stalk-comparison",
+    "lem-pc-affine-base-change-tilde-source-model",
+    "lem-pc-affine-base-change-source-model",
+    "lem-pc-affine-base-change-cohomology-model",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineOrdinaryTensorStalkCoordinates",
+  "file": "lean/Sheaf/Algebra/Homology/AffineOrdinaryTensorStalkCoordinates.lean",
+  "declaration": "AlgebraicGeometry.exists_affineOrdinaryTensorStalkCoordinates",
+  "declarations": [
+   "AlgebraicGeometry.affineTildeHomologyLocalization",
+   "AlgebraicGeometry.exists_affineOrdinaryTensorStalkCoordinates"
+  ],
+  "statement": "theorem exists_affineOrdinaryTensorStalkCoordinates\n    (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']\n    [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']\n    (φg' : A →+* A') (φf' : R' →+* A')\n    (hφg' : (algebraMap (A ⊗[R] R') A').comp\n      (algebraMap A (A ⊗[R] R')) = φg')\n    (hφf' : (algebraMap (A ⊗[R] R') A').comp\n      Algebra.TensorProduct.includeRight.toRingHom = φf')\n    (sq : IsPullback (Spec.map (CommRingCat.ofHom φg')) (Spec.map (CommRingCat.ofHom φf'))\n      (Spec.map (CommRingCat.ofHom (algebraMap R A)))\n      (Spec.map (CommRingCat.ofHom (algebraMap R R'))))\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (i : ℤ) :\n    let P := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (@id (ModuleCat.{u} A ⥤\n        SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)\n    let T := ((Scheme.Modules.tensorPullback\n      (Spec.map (CommRingCat.ofHom φg'))).mapHomologicalComplex (.up ℤ)).obj P\n    let C := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M\n    (p : PrimeSpectrum A') →\n      let f := Spec.map (CommRingCat.ofHom (algebraMap R A))\n      let f' := Spec.map (CommRingCat.ofHom φf')\n      let g := Spec.map (CommRingCat.ofHom (algebraMap R R'))\n      let g' := Spec.map (CommRingCat.ofHom φg')\n      letI := SingleComplexBaseChange.leftAlgebra f g' p\n      letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq p\n      letI := (SingleComplexBaseChange.tensorMap f f' g g' sq p).toAlgebra\n      letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.R f g' p))\n      letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' p))\n      let N := ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n        (@id (ModuleCat.{u} A' ⥤\n          SheafOfModules.{u} (moduleRings (Spec (.of A')).toRingedSpace))\n            (tilde.functor (.of A'))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj C)\n      let s := RingedSpace.moduleStalkFunctor (Spec (.of A')).toRingedSpace p\n      let ρ := (SingleComplexBaseChange.tensorMap f f' g g' sq p).comp\n        (algebraMap (SingleComplexBaseChange.A g' p)\n          (SingleComplexBaseChange.A g' p ⊗[SingleComplexBaseChange.R f g' p]\n            SingleComplexBaseChange.B f' p))\n      ∃ τ : (s.mapHomologicalComplex (.up ℤ)).obj N ≅\n          SingleComplexBaseChange.tensorComplex f f' g g' sq p P,\n        (∀ (j : ℤ) (x : M.X j),\n          τ.hom.f j (TopCat.Presheaf.germ (N.X j).val.presheaf ⊤ p trivial\n            (tilde.toOpen (R := .of A') (C.X j) ⊤ ((1 : A') ⊗ₜ[A, φg'] x))) =\n            (1 : (Spec (.of A')).presheaf.stalk p) ⊗ₜ[SingleComplexBaseChange.A g' p, ρ]\n              (TopCat.Presheaf.germ (P.X j).val.presheaf ⊤ (g' p) trivial\n                (tilde.toOpen (R := .of A) (M.X j) ⊤ x))) ∧\n        ∀ y, affineTensorPullbackHomologyStalkIso A A' φg' M p i y =\n          (affineRepresentativeStalkIso (Spec (.of A')) p T i).inv\n            (HomologicalComplex.homologyMap\n              (SingleComplexBaseChange.tensorStalkIso f f' g g' sq p P).hom i\n                (HomologicalComplex.homologyMap τ.hom i\n                  (affineTildeHomologyLocalization A' C p i y)))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T161729-L-1460333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T161729-L-1460333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.AffineLocalizedTensorStalkSquare
 
 /-! # AffineBaseChangeOrdinaryStalkComparison
 
@@ -26,6 +27,8 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option maxHeartbeats 1600000 in
+-- Matching the stalk-model composites unfolds several derived and homology functors.
 /-- Localize the tensor comparison before passing through the derived pullback counit.
 Source: Stacks Project, Tag 0DJ8, affine displayed localization identity;
 Tags 06Y6, 01HV and 01I9.
@@ -91,6 +94,17 @@ theorem exists_affineBaseChangeOrdinaryStalkComparison
           (affineRepresentativeStalkIso (Spec (.of A')) p T i).inv
       ∃ lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk q).left,
         ∀ x, affineTensorPullbackHomologyStalkIso A A' φg' M p i
-          (LocalizedModule.map p.asIdeal.primeCompl a₀.hom x) = q (lU x) := by sorry
+          (LocalizedModule.map p.asIdeal.primeCompl a₀.hom x) = q (lU x) := by
+  dsimp only
+  intro p
+  obtain ⟨τ, hτ, hcoord⟩ := exists_affineOrdinaryTensorStalkCoordinates
+    R A R' A' φg' φf' hφg' hφf' sq M i p
+  obtain ⟨lU, hsquare⟩ := exists_affineLocalizedTensorStalkSquare
+    R A R' A' φg' φf' hφg' hφf' sq M hM i m p τ hτ
+  refine ⟨lU, ?_⟩
+  intro x
+  rw [hcoord, hsquare]
+  simp only [ModuleCat.comp_apply]
+  rfl
 
 end AlgebraicGeometry

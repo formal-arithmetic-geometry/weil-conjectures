@@ -13118,3 +13118,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:17 L: merged deliver/F4/Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive (stage 3; reviewer PASS; first push; landing 20261013T161728-L-1460027 (interface); batch 20261013T161725; modules 3; new nodes 2)
 - 16:17 L: merged deliver/G2/Sheaf.Algebra.Homology.UniversalH0SplitDifferential (stage 3; reviewer PASS; first push; landing 20261013T161728-L-1460130 (interface); batch 20261013T161725; modules 2; new nodes 1)
 - 16:17 L: merged deliver/H1/Sheaf.Paper.ModuleCupGodementCosimplicialExists (stage 3; reviewer PASS; first push; landing 20261013T161729-L-1460232 (interface); batch 20261013T161725; modules 3; new nodes 2)
+- 16:17 L: merged deliver/H3/Sheaf.Algebra.Homology.AffineBaseChangeOrdinaryStalkComparison (stage 3; reviewer PASS; first push; landing 20261013T161729-L-1460333 (interface); batch 20261013T161725; modules 3; new nodes 2)
