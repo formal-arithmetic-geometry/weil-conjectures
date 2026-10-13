@@ -13,7 +13,7 @@
  },
  "proof": [
   {
-   "text": "The comparison for the constant integer sheaf along g followed by f agrees with the comparison for g followed by inverseImage(g) of the comparison for f and invImageComp(g,f) at the constant sheaf. Under the composite constant-sections and inverse-image adjunctions both are adjoint to the same sections map; injectivity of the hom equivalence proves coherence.",
+   "text": "Prove the elementary adjunct formula constant_adjunct_invImage from constantSheafsheafPullbackIso: rewrite its inverse as the reversed leftAdjointUniq, use homEquiv_naturality_right and homEquiv_leftAdjointUniq_hom_app, then expand the transported composite hom equivalence. Unit naturality gives the adjunct of constIso(f).inv followed by invImage(f).map(m) as the adjunct of m followed by the inverse-image unit evaluated at the top open. Apply the constant-sheaf hom equivalence on Z to the desired inverse comparison identity. Use that formula twice, homEquiv_naturality_right, and unit_conjugateEquiv_symm for the inverse component of invImageComp. Evaluate the composite-unit identity at the top open using comp_unit_app. Injectivity proves constIso(g).inv followed by invImage(g).map(constIso(f).inv) equals constIso(g followed by f).inv followed by invImageComp(g,f).inv at the constant integer sheaf. Only the definitions in the two cited nodes are used; coefficientUnit_comp is not needed.",
    "uses": [
     "def-pc-flat-cohomology-comparison",
     "lem-pc-coefficient-unit-composition"
@@ -21,7 +21,7 @@
    "elementary": false
   },
   {
-   "text": "Expand Sheaf.H.mapFunctor as precomposition by the inverse constant comparison and exact-functor action on Ext. Use exactFunctorCompositionComparison for the natural isomorphism invImageComp, Ext.mapExactFunctor_comp and Ext.mapExactFunctor_mk₀ to move the degree-zero source and target comparisons through the two exact-functor actions. Ext composition associativity, cancellation of the comparison isomorphisms and the constant coherence identity identify the two classes. Works for identities, all degrees and zero sheaves.",
+   "text": "Apply exactFunctorCompositionComparison to invImage(f), invImage(g), invImage(g followed by f), the inverse of invImageComp, and the original class x. Expand Sheaf.H.map_apply and Sheaf.H.mapFunctor_apply, move the degree-zero constant comparison through the exact functor using Ext.mapExactFunctor_comp and Ext.mapExactFunctor_mk₀, and combine the two degree-zero classes with mk₀_comp_mk₀_assoc. Substitute the inverse constant-comparison identity from step 1, separate its two degree-zero factors again, and use exactFunctorCompositionComparison backwards. Ext.comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, inv_hom_id_app and comp_mk₀_id cancel the target comparisons. This proves the original equality for all degrees and classes without coefficient assumptions or new holes.",
    "uses": [
     "lem-weil-pbc-ext-exact-functor-composition-comparison"
    ],
@@ -36,7 +36,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01F7",
-  "place": "Explicit adjunction and Ext argument for the original composition proof step."
+  "place": "cohomology-equation-functorial; T4 Lean proof of the original two-step adjunction and Ext plan, using Mathlib adjunction uniqueness and the already proved exactFunctorCompositionComparison."
  },
  "mathlib_searches": [
   {
@@ -116,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-69838",
-  "group": "C3",
+  "reviewer": "COMPILER",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T181054-L-2598405",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target signature and existing declaration interfaces are unchanged; direct importer also compiles against the delivered modules; nodes, report, change record, and documented sorry agree."
+  "landing": "20261013T190156-L-3221950",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
