@@ -3,24 +3,82 @@
  "blueprint": {
   "is": "def-weil-pbc-intrinsic-koszul-completion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Intrinsic Koszul completion",
- "statement": "Let\n\n$$\nQ_m:=K(\\Lambda;f_1^m,\\ldots,f_r^m)\n$$\n\nbe the Koszul complex in degrees $[-r,0]$. Its map $Q_{m+1}\\to Q_m$ is\nthe tensor product, over $j$, of the two-term chain maps whose degree-zero\ncomponent is the identity and whose degree-minus-one component is\nmultiplication by $f_j$. Define\n\n$$\nK^{\\wedge,\\mathrm{Kos}}:=\nR\\varprojlim_m(K\\otimes^L_\\Lambda Q_m).\n$$\n\nThe augmentations $\\Lambda\\to Q_m$ give\n$\\kappa_K:K\\to K^{\\wedge,\\mathrm{Kos}}$. Call $K$ intrinsically derived\n$I$-complete when $\\kappa_K$ is an isomorphism; below, ``derived\n$I$-complete'' always means this intrinsic condition.",
+ "statement": "Let $X$ be a scheme with its small pro-etale site and constant coefficient sheaves [def-weil-pbc-proetale-site]. Let $\\Lambda$ be a commutative Noetherian ring, let $r\\geq0$, let $I=(f_1,\\ldots,f_r)\\subseteq\\Lambda$, and let $K\\in D(X_{\\mathrm{proet}},\\Lambda)$. Assume the coefficient hypotheses of [def-weil-pbc-complete-coefficient-datum]: $\\Lambda/I$ is torsion as an additive group and each $\\Lambda/I^n$, $n\\geq1$, in degree zero is perfect over $\\Lambda$.\n\nFor $m\\geq1$, let $Q_m=K(\\Lambda;f_1^m,\\ldots,f_r^m)$ be the Koszul complex [def-weil-pbc-koszul-complex], reindexed by $Q_m^{-a}=K_a(\\Lambda;f_1^m,\\ldots,f_r^m)$, with the same differential, in cohomological degrees $[-r,0]$. Its transition $t_m:Q_{m+1}\\to Q_m$ is the exterior-algebra map sending $e_j$ to $f_je_j$; equivalently it is the tensor product of the two-term maps with degree-zero component the identity and degree-minus-one component multiplication by $f_j$. Write $u_m:\\Lambda[0]\\to Q_m$ for the degree-zero identity map (the unit).\n\nFix a K-flat representative $C$ of $K$ using [lem-pc-kflat-resolution], and let $M_m=C\\otimes_{\\Lambda_X}(Q_m)_X$, with the total tensor differential [def-weil-derived-tensor]. Here $(Q_m)_X$ denotes the complex of constant sheaves. Let $P=\\prod_{m\\geq1}M_m$ be the termwise product complex and let $s:P\\to P$ have components $\\operatorname{pr}_m s=(1_C\\otimes t_m)\\operatorname{pr}_{m+1}$. Countable products are exact on this site [lem-weil-proetale-countable-products-exact], and their termwise products represent derived products [lem-weil-derived-limit-products-core]. Define the intrinsic Koszul completion, using this fixed complex model, by\n$$K^{\\wedge,\\mathrm{Kos}}:=\\operatorname{Cone}(1-s:P\\to P)[-1]=R\\varprojlim_m(K\\otimes^L_\\Lambda(Q_m)_X).$$\nThe cone and shift are those of [def-weil-abstract-derived-category]; $R\\varprojlim$ here denotes this specified cone model of the general derived limit [def-weil-derived-limit], applied to the Koszul tower. Explicitly its degree-$a$ term is $P^{a-1}\\oplus P^a$ with differential $(y,x)\\mapsto(-d_Py-(1-s)x,d_Px)$.\n\nLet $a:C\\to P$ have components $c\\mapsto c\\otimes1$ induced by the units $u_m$. Define $\\kappa_K:K\\to K^{\\wedge,\\mathrm{Kos}}$ to be the derived class of the chain map $C\\to\\operatorname{Cone}(1-s)[-1]$, $c\\mapsto(0,a(c))$. Call $K$ intrinsically derived $I$-complete when $\\kappa_K$ is an isomorphism; below, “derived $I$-complete” means this intrinsic condition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-intrinsic-koszul-completion.md",
   "place": "node def-weil-pbc-intrinsic-koszul-completion, order 1257"
  },
  "stmt_deps": [
-  "def-weil-pbc-adic-derived-inverse-limit"
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-derived-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "intrinsic derived Koszul completion as derived inverse limit of tensor products with Koszul complexes",
+   "results": "CategoryTheory.Tor, CategoryTheory.Tor_obj, Algebra.FormallySmooth.projective_kaehlerDifferential, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, localCohomology.diagram, derivationQuotKerSq, PresheafOfModules.DifferentialsConstruction.isUniversal'",
+   "date": "2026-10-14",
+   "verdict": "no exact match: generic Tor, cones, editor/topological completion, or unrelated Koszul terminology do not define this sheaf-derived Koszul completion"
+  },
+  {
+   "tool": "loogle",
+   "query": "ExteriorAlgebra.koszulComplex, DerivedCategory, inverse limit",
+   "results": "loogle: unknown identifier 'ExteriorAlgebra.koszulComplex'",
+   "date": "2026-10-14",
+   "verdict": "invalid pattern; no evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "koszulComplex|derived inverse limit|R\\varprojlim",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no exact match: generic Tor, cones, editor/topological completion, or unrelated Koszul terminology do not define this sheaf-derived Koszul completion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define intrinsic derived I-completion using the derived inverse limit of K tensor the Koszul complexes of powers of generators",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|homotopyLimit|homotopy_limit",
+   "results": "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match: generic Tor, cones, editor/topological completion, or unrelated Koszul terminology do not define this sheaf-derived Koszul completion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping cone of identity minus shift on a product of cochain complexes defines sequential homotopy limit",
+   "results": "CochainComplex.mappingCone, CochainComplex.instHasHomotopyCofiberOfHasBinaryBiproductXHAddOfNat, HomotopyCategory.composableArrowsFunctor_obj, CochainComplex.cm5b.homotopyEquiv, CochainComplex.MappingConeCompHomotopyEquiv.inv, CochainComplex.mappingConeCompHomotopyEquiv, CochainComplex.MappingConeCompHomotopyEquiv.hom, CochainComplex.mappingCone.rotateHomotopyEquiv",
+   "date": "2026-10-14",
+   "verdict": "no exact match: generic Tor, cones, editor/topological completion, or unrelated Koszul terminology do not define this sheaf-derived Koszul completion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"completion\"",
+   "results": "Lean.Elab.CompletionInfo, Lean.Elab.CompletionInfo.namespaceId, Lean.Elab.CompletionInfo.option, Lean.Elab.CompletionInfo.tactic, Lean.Elab.Info.ofCompletionInfo, Lean.Elab.CompletionInfo.errorName, Lean.Elab.CompletionInfo.dot, Lean.Elab.CompletionInfo.dotId",
+   "date": "2026-10-14",
+   "verdict": "no exact match: generic Tor, cones, editor/topological completion, or unrelated Koszul terminology do not define this sheaf-derived Koszul completion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +102,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-intrinsic-koszul-completion",
+  "worker": "stage1",
+  "summary": "Introduced the full coefficient hypotheses and the constant sheaf and cohomological conventions. Specified a K-flat complex model, the termwise product cone, and the completion unit explicitly; replaced the quotient-tower-only adic-limit dependency by the general derived-limit and existing product/cone nodes. No new nodes.",
+  "blueprint": "Entire intrinsic-completion definition, with the cone model from the preceding blueprint adic-derived-inverse-limit definition: Koszul transition maps, derived tensor tower, shifted product cone, unit and completeness predicate. The fixed complex model supplies the map that a mere triangulated Roos triangle does not select.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-49aca8e33",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-49aca8e33 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. Koszul transitions, shifted-cone signs, unit map and exact-product hypotheses agree; empty generators and zero-divisor cases check out. No new nodes, repairs or target weakening. Constant coefficients remain distinct from the master targets’ condensed categories. Detailed checks are in review.md."
+ }
 }
