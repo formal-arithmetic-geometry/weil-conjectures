@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-derived-open-hom-scalar-mayer-vietoris",
+ "kind": "statement",
+ "title": "Scalar compatible derived Hom boundary on any open union",
+ "statement": "Let X be a scheme [def-pc-scheme] and E,E\\prime objects of D(O_X) [def-pc-derived-category]. Assume the derived categories on X and all its localized open sites exist in a common Hom universe. For opens U,V and integer k, write R_A for derived localized-site restriction [lem-sc-derived-hom-mayer-vietoris]. There exists an additive boundary delta:Hom(R_(U intersect V) E,R_(U intersect V)(E\\prime[k-1])) -> Hom(R_(U union V) E,R_(U union V)(E\\prime[k])). Every morphism on the union whose two canonical restrictions vanish is in the image of delta. For every global function r with action [def-sc-derived-global-scalar] and overlap morphism gamma, delta(R_(U intersect V)(r id_E) composed with gamma)=R_(U union V)(r id_E) composed with delta(gamma). No support, perfectness or quasi-coherence condition is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BW, negative Ext boundary, with scalar naturality used in Tag 08EJ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-derived-global-scalar",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-derived-hom-mayer-vietoris] on the open union W=U union V, using the exact equivalence between its module sheaves and the localized-site carrier over W. Associativity of restriction identifies restrictions to U,V and their intersection with the canonical derivedOpenHomRestriction maps. The canonical restriction/shift comparisons and shift-addition isomorphism identify the negative overlap Ext for E\\prime[k] with Hom to the restriction of E\\prime[k-1]. Exactness at Hom on W gives the displayed image assertion.",
+   "uses": [
+    "lem-sc-derived-hom-mayer-vietoris",
+    "lem-pc-open-derived-restriction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the proof via the distinguished open-cover triangle, the boundary is precomposition by its connecting morphism followed by the derived extension/restriction adjunction. Both the triangle and the adjunction Hom equivalence are natural in the source. Apply naturality to r times identity on E; on each open its restriction is multiplication by the restricted section. This gives scalar equivariance of the same additive boundary. The shift identifications are natural and do not change that equation. This argument applies for empty opens, all integers k and any r, without any cohomology support hypothesis.",
+   "uses": [
+    "lem-sc-open-hom-triangle-realization",
+    "def-sc-derived-global-scalar"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-hom-mayer-vietoris",
+  "lem-pc-open-derived-restriction-comparison",
+  "lem-sc-open-hom-triangle-realization",
+  "def-sc-derived-global-scalar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-13",
+  "note": "Detailed expansion of the indicated Stacks proof paragraph; the affine and scalar-boundary tasks are strictly separate from the global induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris derived Hom connecting map commutes with precomposition endomorphisms",
+   "results": "Mathlib results give sheaf short complexes and snake-boundary naturality, not this unbounded derived Hom boundary.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "Found overFunctor, overFunctorMap and Modules.overFunctorEquiv; none supplies scalar-compatible derived Hom boundary.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Mayer.Vietoris.*(linear|scalar)|scalar.*Mayer.Vietoris",
+   "results": "No Mathlib matches. Existing project derived_hom_mayer_vietoris asserts an additive boundary and exactness, with no scalar naturality; no whole-blueprint node states this extra interface.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris derived Hom connecting map is linear over global functions",
+   "results": "Service unavailable: Internal Server Error; recorded by msearch.py. LeanFinder, Loogle and source grep were used instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectIntoSupportPowerTorsion",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof, Mayer--Vietoris globalization of annihilation; scalar naturality of the overlap boundary",
+   "via": [
+    "lem-sc-perfect-into-support-on-T",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenHomScalarMayerVietoris",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenHomScalarMayerVietoris.lean",
+  "declaration": "AlgebraicGeometry.derived_open_hom_scalar_mayer_vietoris",
+  "statement": "theorem derived_open_hom_scalar_mayer_vietoris\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (U V : X.Opens) (E E' : schemeDerivedCategory X) (k : ℤ) :\n    let R := fun W : X.Opens ↦\n      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory\n    ∃ δ : ((R (U ⊓ V)).obj E ⟶ (R (U ⊓ V)).obj (E'⟦k - 1⟧)) →+\n        ((R (U ⊔ V)).obj E ⟶ (R (U ⊔ V)).obj (E'⟦k⟧)),\n      (∀ β : (R (U ⊔ V)).obj E ⟶ (R (U ⊔ V)).obj (E'⟦k⟧),\n        derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_left) β = 0 →\n        derivedOpenHomRestriction X.toRingedSpace (homOfLE le_sup_right) β = 0 →\n        ∃ γ, δ γ = β) ∧\n      ∀ (r : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u})) γ,\n        δ ((R (U ⊓ V)).map (schemeDerivedScalar X r (𝟙 E)) ≫ γ) =\n          (R (U ⊔ V)).map (schemeDerivedScalar X r (𝟙 E)) ≫ δ γ",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045606-L-138144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045606-L-138144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

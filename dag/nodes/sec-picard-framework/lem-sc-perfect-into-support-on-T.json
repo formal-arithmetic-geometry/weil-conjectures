@@ -26,40 +26,37 @@
  ],
  "proof": [
   {
-   "text": "Affine case, X=Spec(A), f in A. By the affine equivalence D(A)=D_QCoh(X) [lem-pc-affine-qcoh-derived-equivalence] and [lem-pc-perfect-affine-bounded-projective], E is represented by a bounded complex P^bullet of finite projective A-modules and E' by a complex M^bullet of A-modules. Induct on the number of nonzero terms of P^bullet, for all alpha and all E' at once (a shift E'[k] of E' is again in D_QCoh and supported on T). If t is the largest index with P^t nonzero, the stupid-truncation triangle P^t[-t] \\to P^bullet \\to sigma_{<=t-1}P^bullet \\to P^t[-t+1] gives an exact sequence Hom(sigma_{<=t-1}P^bullet,E') \\to Hom(P^bullet,E') \\to Hom(P^t[-t],E') of A-modules (Hom(-,E') is cohomological, and the maps are A-linear). If f^a kills the image of alpha in the right-hand group, then f^a alpha comes from some beta in the left-hand group, and f^b beta=0 by induction, so f^{a+b} alpha=0. This reduces to P^bullet a single finite projective module P in degree 0 (after shifting E'). Then Hom_{D(A)}(P,M^bullet)=H^0(Hom_A(P,M^bullet))=Hom_A(P,H^0(M^bullet)) because Hom_A(P,-) is exact. The cohomology sheaf H^0(E') is the sheaf associated with H^0(M^bullet) and vanishes on D(f) by hypothesis, so H^0(M^bullet)_f=0, i.e. every element of H^0(M^bullet) is killed by a power of f. The images of finitely many generators of P are killed by one power f^n, hence f^n alpha=0.",
+   "text": "Fix f,E,E\\prime satisfying the hypotheses. For every open U define P(U) to mean: for all integers k and all local morphisms beta:R_U E -> R_U(E\\prime[k]), some power of f times the source identity kills beta by precomposition. The affine case is [lem-sc-perfect-support-affine-open-torsion]. It is essential to quantify over arbitrary local morphisms and all shifts, since the Mayer--Vietoris lift need not be the restriction of a global map.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-perfect-affine-bounded-projective"
+    "lem-sc-perfect-support-affine-open-torsion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EJ, affine proof using perfect-affine and stupid truncations"
-   }
+   "elementary": false
   },
   {
-   "text": "Globalization. For a quasi-compact open W of X let P(W) be the statement of the lemma on W (all morphisms alpha:E\\to E' in D_QCoh(O_W) with E perfect and E' supported on T intersect W, with f|_W). P holds for affine W by the previous step. Let W=U union V with U quasi-compact open, V affine open, and P true on U, V and U intersect V (the overlap is quasi-compact because X is quasi-separated). Given alpha on W, restrictions of perfect objects are perfect and of objects supported on T are supported on T, so there is an a with f^a alpha|_U=0 and f^a alpha|_V=0. The Mayer–Vietoris long exact sequence for Hom [lem-sc-derived-hom-mayer-vietoris] gives exactness of Hom(E|_{U\\cap V},E'|_{U\\cap V}[-1]) \\to Hom(E,E') \\to Hom(E|_U,E'|_U)\\oplus Hom(E|_V,E'|_V), with Gamma(W,O_W)-linear maps; hence f^a alpha is the image of some beta:E|_{U\\cap V}\\to E'[-1]|_{U\\cap V}. Since E'[-1] is supported on T, P(U intersect V) gives f^b beta=0, so f^{a+b} alpha=0. Thus P holds on U union V, and the induction principle on the quasi-compact quasi-separated scheme X [lem-sc-invert-s-cohomology-induction] gives P(X).",
+   "text": "For a union U union V, take local annihilating exponents a,b for the two restrictions of beta. Restricted scalar identities multiply according to f^(a+b)=f^a f^b; naturality of the canonical derived restriction comparison moves precomposition through restriction. Thus f^(a+b) beta has both restrictions zero. Apply [lem-sc-derived-open-hom-scalar-mayer-vietoris] to lift it to gamma on U intersect V with target shifted by k-1. P(U intersect V) supplies c killing gamma. Scalar equivariance of the additive boundary gives f^(c+a+b) beta=delta(0)=0. The Lean proof carries out all these equalities, including choosing the order of a,b that kills each restriction.",
    "uses": [
-    "lem-sc-derived-hom-mayer-vietoris",
+    "lem-sc-derived-open-hom-scalar-mayer-vietoris"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-invert-s-cohomology-induction] to P and specialize to the top open. At the top, restriction of module sheaves is an equivalence: Modules.overFunctorEquiv identifies it with restriction along X.topIso.hom, whose inverse is restriction along X.topIso.inv; restrictFunctorComp, restrictFunctorCongr and restrictFunctorId give the two inverse isomorphisms. Its exact derived functor is therefore faithful. Apply P(top) in shift zero to the restriction of alpha followed by the inverse zero-shift isomorphism. Faithfulness reflects zero; cancel the zero-shift isomorphism, and identify precomposition by f^n times identity with schemeDerivedScalar X (f^n) alpha.hom. All these comparisons are proved in Lean in this module.",
+   "uses": [
     "lem-sc-invert-s-cohomology-induction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EJ, proof, Mayer–Vietoris and induction-principle reduction"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-perfect-affine-bounded-projective",
-  "lem-sc-derived-hom-mayer-vietoris",
+  "lem-sc-perfect-support-affine-open-torsion",
+  "lem-sc-derived-open-hom-scalar-mayer-vietoris",
   "lem-sc-invert-s-cohomology-induction"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EJ (Lemma 36.13.9)"
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-13",
+  "note": "Compiled Lean reduction of Tag 08EJ: arbitrary local shifted Hom induction, exponent addition and boundary equivariance; two strictly partial intermediate statements remain."
  },
  "mathlib_searches": [
   {
@@ -161,5 +158,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045606-L-138144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

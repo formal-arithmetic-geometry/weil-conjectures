@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-perfect-support-affine-open-torsion",
+ "kind": "statement",
+ "title": "Power torsion for arbitrary local Hom on an affine open",
+ "statement": "Let X be a scheme [def-pc-scheme], f a global function with derived scalar action [def-sc-derived-global-scalar], and E,E\\prime objects of D_QCoh(O_X) [def-pc-derived-category]. Suppose E is perfect [def-pc-perfect-complex] and every cohomology stalk of E\\prime outside V(f) is zero. For an affine open U, write R_U for derived localized-site restriction [lem-sc-derived-hom-mayer-vietoris]. For every integer k and every morphism beta:R_U E -> R_U(E\\prime[k]), there is n>=0 with R_U(f^n id_E) composed with beta equal to zero. No quasi-compactness or quasi-separatedness of X is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EJ, affine paragraph, applied on an affine open"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-derived-global-scalar",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pc-open-derived-restriction-comparison] to compare localized-site restriction with the open subscheme: quasi-coherence and the stalkwise support condition restrict. Perfectness restricts by intersecting the neighbourhoods of its defining strictly perfect local models with U and restricting their finite-free retractions. Identify U with Spec of its ring of sections. These exact restriction and scheme-isomorphism comparisons carry multiplication by f to multiplication by its restricted section.",
+   "uses": [
+    "lem-pc-open-derived-restriction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-pc-affine-qcoh-derived-equivalence] and [lem-pc-perfect-affine-bounded-projective] to obtain a bounded finite-projective model of the source. Induct on its number of nonzero terms, simultaneously for all shifts of the target. The stupid-truncation triangle at the highest nonzero term gives an exact Hom sequence. A power killing the single-term image makes the map lift from the shorter model; induction kills the lift by a second power, and the sum of the exponents kills the map.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite projective module P in degree zero, derived Hom to M is Hom(P,H^0(M)), because Hom(P,-) is exact. The support condition gives H^0(M)_f=0, so every element of H^0(M) is killed by some power of f. Choose finitely many generators of P and take the maximum of exponents killing their images. This kills the whole map. Shifts only change the cohomology degree. Transport the equality back through the exact equivalences; scalar multiplication is precomposition by the restricted scalar identity. The empty affine open and zero model have zero Hom groups.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-open-derived-restriction-comparison",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-perfect-affine-bounded-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-13",
+  "note": "Detailed expansion of the indicated Stacks proof paragraph; the affine and scalar-boundary tasks are strictly separate from the global induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a perfect complex on an affine scheme into a complex supported on V(f) is annihilated by a power of f",
+   "results": "Eight results concern structure-sheaf sections and localization; none concerns arbitrary derived Hom from perfect complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Q, Module.Projective",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*support|support.*torsion",
+   "results": "Mathlib has module support lemmas and ordinary section-power torsion, no affine perfect derived-Hom theorem. Whole blueprint search for 08EJ finds the parent and its scalar definition, not this affine local-Hom statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a perfect complex on an affine scheme into a complex supported on V(f) are killed by a power of f",
+   "results": "Service unavailable: Internal Server Error; recorded by msearch.py. LeanFinder, Loogle and source grep were used instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectIntoSupportPowerTorsion",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof, affine power-annihilation argument; the affine base case of lem-sc-perfect-into-support-on-T",
+   "via": [
+    "lem-sc-perfect-into-support-on-T",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectSupportAffineOpenTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectSupportAffineOpenTorsion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_support_affine_open_torsion",
+  "statement": "theorem perfect_support_affine_open_torsion\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (f : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}))\n    (E E' : schemeDerivedQCohCategory X)\n    (hE : X.IsPerfect E.obj)\n    (hSupport : ∀ (i : ℤ) (x : X), x ∉ X.zeroLocus (U := ⊤) {f.val (op ⊤)} →\n      Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E'.obj).val.presheaf x)))\n    (U : X.Opens) (hU : IsAffineOpen U) :\n    let R := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory\n    ∀ (k : ℤ) (β : R.obj E.obj ⟶ R.obj (E'.obj⟦k⟧)),\n      ∃ n : ℕ, R.map (schemeDerivedScalar X (f ^ n) (𝟙 E.obj)) ≫ β = 0",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045606-L-138144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045606-L-138144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
