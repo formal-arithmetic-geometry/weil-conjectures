@@ -18,26 +18,26 @@
  },
  "proof": [
   {
-   "text": "Set Pg and P0 to the termwise pullbacks. Specialize affineSpectrum_representative_map_eq to K=Q(P), Kprime=Q(Pg), coefficient the gprime counit, and Coordinates with identity chain map and identity representative isomorphisms. Use the inverse exact iso-pullback complex counits for e and eprime. Their required equations follow by unfolding the quotient factors and the identity mapHomotopyCategoryFactors at P and Pg.",
+   "text": "Specialize affineSpectrum_composition_counit_square at gprime and P. Its termwise comparison is definitionally affineSpectrumTensorComplexIso. Unfold isoPullbackComplexCounitIso, quotientCompQhIso and mapHomotopyCategoryFactors: all auxiliary components are identity maps, so the exact complex counit components equal the pinned derived counit components at the homotopy image.",
    "uses": [
-    "lem-pc-affine-spectrum-representative-map",
-    "lem-pc-iso-pullback-stalk-cohomology"
+    "lem-pc-affine-spectrum-composition-counit-square",
+    "lem-pc-iso-pullback-stalk-cohomology",
+    "def-pc-tensor-pullback-composition-iso"
    ],
    "elementary": true
   },
   {
-   "text": "The specialized equation is c0;Q(alpha.hom);eprime.inv = Lg0prime(ej.inv);a.hom;Ljprime(c). Cancel a.hom and Ljprime(c). Composition with inverses cancels c0 and Q(alpha), yielding the claimed inverse equation. Only functoriality and the two inverse identities for each isomorphism remain.",
+   "text": "Write the resulting equation as e.hom;c.hom;a.hom=d.hom;b.hom;f.hom, where e and b are functorially mapped counit isomorphisms, a is Q of the termwise comparison, d is the affine derived comparison, c uses hcQ, and f is the exact isoSpec complex counit. Postcompose the desired inverse equation by d.hom;b.hom;f.hom, use the square, and cancel the inverse-hom pairs. The common right factor is an isomorphism and hence mono.",
    "uses": [
-    "def-pc-affine-spectrum-derived-coordinates",
-    "def-pc-tensor-pullback-composition-iso"
+    "def-pc-affine-spectrum-derived-coordinates"
    ],
    "elementary": true
   }
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/0D5S",
-  "place": "A4 specialization of the existing canonical representative-map equation and categorical inversion"
+  "place": "A2 second reading: direct composition counit factorization, identity normalization and inverse cancellation"
  },
  "mathlib_searches": [
   {
@@ -112,7 +112,7 @@
  "proof_deps": [
   "def-pc-affine-spectrum-derived-coordinates",
   "def-pc-tensor-pullback-composition-iso",
-  "lem-pc-affine-spectrum-representative-map",
+  "lem-pc-affine-spectrum-composition-counit-square",
   "lem-pc-iso-pullback-stalk-cohomology"
  ],
  "reviewed": {
@@ -128,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
+  "reviewer": "X-eaa96",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T160708-L-1370479",
+  "landing": "20261013T190133-L-3213617",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and node statement with the composition-counit proof, updated proof dependencies, and report; delivery and sole direct importer AffineSpectrumCanonicalComparisonSquare compile cleanly; axioms are exactly propext, Classical.choice, Quot.sound."
  }
 }
