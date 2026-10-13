@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
+import Sheaf.AlgebraicGeometry.AffineAlgebraCanonicalComparisonIdentification
 
 /-! # Invertibility of the canonical affine direct-image homology comparison
 
@@ -46,6 +47,10 @@ theorem affineAlgebraCounitHomologyComparison_isIso
     (a : P ⊣ RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f))
     (I : CochainComplex (SheafOfModules.{v} (moduleRings X.toRingedSpace)) ℤ)
     [I.IsKInjective] (hI : ∀ n : ℤ, (I.homology n).IsQuasicoherent) (n : ℤ) :
-    IsIso (affineAlgebraCounitHomologyComparison f P a I n) := by sorry
+    IsIso (affineAlgebraCounitHomologyComparison f P a I n) := by
+  obtain ⟨e, he⟩ := affine_algebra_kinjective_canonical_comparison_identification
+    f P a I hI n
+  rw [← he]
+  infer_instance
 
 end AlgebraicGeometry
