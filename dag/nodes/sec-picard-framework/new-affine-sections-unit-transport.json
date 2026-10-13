@@ -14,12 +14,12 @@
  ],
  "proof": [
   {
-   "text": "S.toSpecΓ is an isomorphism. Restriction along it and its inverse are mutually inverse by restrictFunctorComp, restrictFunctorCongr and restrictFunctorId, hence form an exact equivalence E preserving K-injective complexes. Evaluating restrictAppIso at top gives E followed by sections on S naturally isomorphic to G. The scalar identification uses toSpecΓ_appTop and the inverse of ΓSpecIso.",
+   "text": "Construct the restriction equivalence E using restrictFunctorComp, restrictFunctorCongr and restrictFunctorId for S.toSpecΓ and its inverse. Independently construct the equivalence of pushforward functors along this isomorphism. Uniqueness of left adjoints identifies E with pushforward along the inverse. Evaluation at top then gives E followed by global sections on S naturally isomorphic to G. The scalar actions agree because (inv S.toSpecΓ).appTop = inv S.toSpecΓ.appTop and toSpecΓ_appTop identifies the latter inverse with ΓSpecIso.inv. This is implemented by the proved private constructions affineRestrictionEquivalence and affineSectionsIso.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Choose a K-injective resolution C -> I. E(C) -> E(I) is again such a resolution. In these resolution models the two unit components are the localized maps G(C -> I) and Γ_S(E(C -> I)). Naturality of the preceding isomorphism conjugates them by invertible endpoint maps. Thus invertibility of the former implies that of the latter. Uniqueness of the right derived functor, compatible with its unit, carries this conclusion to the chosen derived categories. This is a formal resolution calculation and does not invoke affine acyclicity or the tilde unit theorem.",
+   "text": "Take a K-injective resolution s : C → I, using the sheaf-module Grothendieck instance and the existing HasKInjectiveResolutions API. The proved private criterion unit_iso_iff_resolution follows from naturality of the right-derived unit: its component at I is invertible, and the right-derived functor sends Qh(s) to an isomorphism, so its component at C is invertible exactly when Qh(F(s)) is. Apply this to G and the supplied hypothesis. Map the sections natural isomorphism to homotopy categories and postcompose with Qh; NatIso.isIso_map_iff transports invertibility of G(s) to (E followed by sections)(s). The homotopy-category composition isomorphism identifies this with sections(E(s)). Since the additive equivalence E preserves K-injectivity and quasi-isomorphisms, the same criterion for global sections on S and E(s) gives the conclusion. This uses only naturality and localization for the chosen derived categories, with no comparison of arbitrary chosen resolution objects.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist"
    ],
@@ -32,7 +32,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 06Z0; formal exact-equivalence transport written by F1 second reader"
+  "place": "Tag 06Z0, derived sections context; exact-equivalence transport and naturality calculation formalized by H3, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -104,10 +104,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T153459-L-1084852",
-  "kind": "interface",
+  "landing": "20261013T155934-L-1302706",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
