@@ -10,14 +10,9 @@ public import Sheaf.RingTheory.PopescuResolution
 public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.AlgebraicGeometry.Ogoma
+import Sheaf.RingTheory.PopescuRescalingData
+import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import Sheaf.RingTheory.EssentiallySmoothBaseChange
-import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import Sheaf.RingTheory.RegularSequencePowers
 
 /-!
 # Simultaneous rescaling of an existing Artinian coefficient chart
@@ -32,50 +27,84 @@ set_option autoImplicit false
 universe u v w
 namespace Algebra
 
+private theorem essentiallySmooth_equiv_target
+    {B : Type u} {D E : Type (max u v)} [CommRing B] [CommRing D] [CommRing E]
+    [Algebra B D] [Algebra B E] (e : D ≃ₐ[B] E)
+    (h : EssentiallySmooth B D) : EssentiallySmooth B E := by
+  rcases h with ⟨P, hP, hBP, hPsmooth, T, ⟨eD⟩⟩
+  exact ⟨P, hP, hBP, hPsmooth, T, ⟨e.symm.trans eD⟩⟩
+
+private theorem essentiallySmooth_equiv_source
+    {R B : Type u} {D : Type v} [CommRing R] [CommRing B] [CommRing D]
+    [Algebra B D] (e : R ≃+* B) (h : EssentiallySmooth B D) :
+    letI : Algebra R D := ((algebraMap B D).comp e.toRingHom).toAlgebra
+    EssentiallySmooth R D := by
+  let : Algebra R B := e.toRingHom.toAlgebra
+  let : Algebra R D := ((algebraMap B D).comp e.toRingHom).toAlgebra
+  have : IsScalarTower R B D := IsScalarTower.of_algebraMap_eq' rfl
+  rcases h with ⟨P, hP, hBP, hPsmooth, T, ⟨eD⟩⟩
+  let : CommRing P := hP
+  let : Algebra B P := hBP
+  let : Algebra R P := ((algebraMap B P).comp e.toRingHom).toAlgebra
+  have : IsScalarTower R B P := IsScalarTower.of_algebraMap_eq' rfl
+  have : Smooth R R := by constructor <;> infer_instance
+  let eR : R ≃ₐ[R] B := { e with commutes' := fun _ ↦ rfl }
+  have : Smooth R B := Smooth.of_equiv eR
+  have : Smooth B P := hPsmooth
+  have hRP : Smooth R P := Smooth.comp R B P
+  exact ⟨P, hP, inferInstance, hRP, T, ⟨eD.restrictScalars R⟩⟩
+
+private theorem essentiallySmooth_polynomial
+    {B : Type u} {D : Type (max u v)} [CommRing B] [CommRing D] [Algebra B D]
+    (d : ℕ) (h : EssentiallySmooth B D) :
+    letI : Algebra (MvPolynomial (Fin d) B) (MvPolynomial (Fin d) D) :=
+      (MvPolynomial.map (algebraMap B D)).toAlgebra
+    EssentiallySmooth (MvPolynomial (Fin d) B) (MvPolynomial (Fin d) D) := by
+  let : Algebra (MvPolynomial (Fin d) B) (MvPolynomial (Fin d) D) :=
+    (MvPolynomial.map (algebraMap B D)).toAlgebra
+  let Q := MvPolynomial (Fin d) B
+  let T := _root_.TensorProduct B Q D
+  let e : T ≃+* MvPolynomial (Fin d) D :=
+    (Algebra.TensorProduct.comm B Q D).toRingEquiv.trans
+      (MvPolynomial.algebraTensorAlgEquiv B D).toRingEquiv
+  let eQ : T ≃ₐ[Q] MvPolynomial (Fin d) D :=
+    { e with
+      commutes' := by
+        intro q
+        change MvPolynomial.algebraTensorAlgEquiv B D (_root_.TensorProduct.tmul B (1 : D) q) =
+          MvPolynomial.map (algebraMap B D) q
+        simp }
+  exact essentiallySmooth_equiv_target eQ (essentiallySmooth_baseChange h)
+
 /-- Construct the rescaled coefficient algebra before padding the parameter list and
 comparing powers of its parameter ideals. Source: Stacks Project, Smoothing Ring Maps,
 Lemma 07FJ, steps 10--13, 15 and 25.
 (blueprint: lem-weil-pbc-popescu-unpadded-coefficient-chart).
 
-Proof: The source of the flat local chart is regular of dimension d, by smooth ascent
-from the field and the flat height formula with zero-dimensional closed fibre. Choose
-d polynomial representatives of a regular system of parameters. Their images generate
-the maximal ideal of L, since the original contracted prime extends to that ideal.
-Adjoin d polynomial variables t_i and put rho_i = u_i t_i. Apply Ogoma successively
-on the quotients by preceding (8c)-th powers, using regularity of permutations and powers
-after localization. This rescales u_i by units of the original prime localization and
-produces the first kernel equalities without changing the parameter ideal.
+Proof: The rescaling-data theorem gives the parameters, kernel equalities, ideal H,
+coefficient ring D', its flat local map and coefficient lifts. It also retains a
+coefficient quotient B, essential smoothness of D' over B, and the k-algebra
+identification e : R/H^n ≃ B[t_i], with n = N+d(8c). It supplies polynomial
+coefficient-map and evaluation identities, without algebra structures on D'[t_i].
 
-The map g₀ is faithfully flat and injective. The generator inclusions and the
-surjective presentation f therefore lift α modulo the maximal-ideal power to D₀.
-Induct on the parameters. Faithful-flat ideal contraction writes u_i^N as a linear
-combination of the singular-ideal generators in the current coefficient algebra.
-Lift the coefficients d_j to c_j in L. The error epsilon lies in m_L^n, where
-n=N+d(8c), and m_L^n is contained in m_L^(n-N) times the singular ideal.
-Write epsilon=sum a_j c'_j with c'_j in m_L^(n-N). Multiplying by u_i^N gives
-u_i^(2N)=sum a_j w_j, with w_j=u_i^N(c_j+c'_j). The correction u_i^N c'_j
-vanishes modulo m_L^n, so every w_j has residue in the coefficient algebra.
-Choose s₀ outside q and v_j in Λ with w_j=v_j/s₀. Choose s₁ outside q
-annihilating s₀u_i^(2N)-sum v_j α(a_j), and set s=s₀s₁ and
-μ_j=s^(2N-1)s₁v_j. Then (su_i)^(2N)=sum μ_j α(a_j) in Λ and
-μ_j/s^(2N)=w_j in L. Apply 07FI to include a positive power of s,
-replacing s and μ_j by the correspondingly rescaled expressions. Apply Ogoma
-on Λ modulo preceding parameter powers, and apply 07FI again to include a power of
-its clearing factor. This yields δ_i outside q and ell(i,j), all with residue classes
-in the enlarged Artinian coefficient algebra. Extensions preserve earlier equations.
+Set E=D'[t_i]. The coefficient homomorphism B[t_i]→E composed with e defines
+θ:R/H^n→E as a k-algebra homomorphism. Its composite χ with the quotient map gives
+the R-algebra structure. Composition with S→R gives the S-algebra structure.
+These explicit maps prove the R→R/H^n→E and S→R→E scalar towers; k-linearity
+proves the k→S→E tower. The canonical polynomial structure supplies k→D'→E.
 
-Evaluate t_i at δ_i. Let H be the extension to R of the initial contracted prime.
-The t_i become units in Q, so rho_i generate HQ; their images generate the maximal
-ideal of L. Use K=m_L^(N+d(8c)) and I₀=H^(N+d(8c)). Locality makes the included δ_i
-units. Polynomial base change of the essentially smooth coefficient algebra gives
-E and its R/I₀-algebra structure. Composition with the original localization is
-essentially smooth. The structural and evaluation maps agree on coefficients and
-all old and added variables. Retain the lifted A-map, parameters and coefficients.
-Finally transport the essentially finite type coefficient algebra to Type(max u v)
-using its finite presentation and localization, and reindex the finite polynomial
-variables as Fin m. For d=0 the parameter ideals are zero; the same constructions
-use no added variables or rescaling steps. No padding or powered-ideal containment
-is included in this statement. -/
+Base change of the essentially smooth B-algebra D' gives an essentially smooth
+B[t_i]-algebra B[t_i]⊗_B D'. Tensor commutativity followed by the polynomial tensor
+identification is a B[t_i]-algebra equivalence from this tensor product to E, with
+structure map given by coefficient mapping. Transport the smooth localization
+presentation to E. Restrict it along e: the equivalence R/H^n→B[t_i] is smooth,
+and smooth composition gives a smooth R/H^n-algebra presentation of the same
+localization. This proves essential smoothness of E over R/H^n.
+
+The supplied polynomial identities are now exactly the required S-generator and
+R-evaluation identities by the definitions of θ, χ and the S-map. Retain the
+A-map, coefficient lifts, localness and flatness unchanged. No positive-d assumption
+is used: the zero-variable polynomial tensor equivalence also applies when d=0. -/
 theorem exists_popescu_unpadded_coefficient_chart
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]
@@ -185,6 +214,56 @@ theorem exists_popescu_unpadded_coefficient_chart
               (algebraMap R E z) =
               Ideal.Quotient.mk K (algebraMap Λ L (algebraMap R Λ z))) ∧
             (∀ x, g (f₀ x) = Ideal.Quotient.mk K (algebraMap Λ L (α x))) ∧
-            (∀ ij, g (coeff ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by sorry
+            (∀ ij, g (coeff ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by
+  obtain ⟨m, algRΛ, towerkRΛ, algSR, towerkSR, algSΛ, towerSRΛ, towerkSΛ,
+    ell, rho, hrho, heq, hmem, hkerR, hkerΛ, H, hHQ, hHL, B, ringB, algkB,
+    D', ringD, localD, artD, algkD, algBD, towerkBD, e, hsmoothB,
+    f₀, g, u₀, δ, coeff, localLK, localg, hgflat, hX, hev, hf₀, hcoeff⟩ :=
+    exists_popescu_rescaling_data p hp α q hreg N hN hpower d hd s a ha c hc
+      r f hf m₀ φ₀ ψ₀ hψ₀ hideal₀ hflat₀ D₀ g₀ hsmooth₀ hgflat₀ hfactor₀ hinc₀
+  let S := MvPolynomial (Fin d) k
+  let R := MvPolynomial (Fin m) k
+  let : Algebra R Λ := algRΛ
+  have : IsScalarTower k R Λ := towerkRΛ
+  let : Algebra S R := algSR
+  have : IsScalarTower k S R := towerkSR
+  let : Algebra S Λ := algSΛ
+  have : IsScalarTower S R Λ := towerSRΛ
+  have : IsScalarTower k S Λ := towerkSΛ
+  let : CommRing B := ringB
+  let : Algebra k B := algkB
+  let : CommRing D' := ringD
+  have : IsLocalRing D' := localD
+  have : IsArtinianRing D' := artD
+  let : Algebra k D' := algkD
+  let : Algebra B D' := algBD
+  have : IsScalarTower k B D' := towerkBD
+  let I₀ := H ^ (N + d * (8 * c))
+  let E := MvPolynomial (Fin d) D'
+  let θ : (R ⧸ I₀) →ₐ[k] E :=
+    (MvPolynomial.mapAlgHom (IsScalarTower.toAlgHom k B D')).comp e.toAlgHom
+  let χ : R →ₐ[k] E := θ.comp (Ideal.Quotient.mkₐ k I₀)
+  let : Algebra R E := χ.toRingHom.toAlgebra
+  let : Algebra (R ⧸ I₀) E := θ.toRingHom.toAlgebra
+  have : IsScalarTower R (R ⧸ I₀) E := IsScalarTower.of_algebraMap_eq' rfl
+  let η : S →ₐ[k] E := χ.comp (IsScalarTower.toAlgHom k S R)
+  let algSE : Algebra S E := η.toRingHom.toAlgebra
+  have : IsScalarTower S R E := IsScalarTower.of_algebraMap_eq' rfl
+  have : IsScalarTower k S E := IsScalarTower.of_algebraMap_eq fun x ↦
+    (η.commutes x).symm
+  let : Algebra (MvPolynomial (Fin d) B) E :=
+    (MvPolynomial.map (algebraMap B D')).toAlgebra
+  have hsmooth : EssentiallySmooth (R ⧸ I₀) E :=
+    essentiallySmooth_equiv_source e.toRingEquiv (essentiallySmooth_polynomial d hsmoothB)
+  refine ⟨m, algRΛ, towerkRΛ, algSR, towerkSR, algSΛ, towerSRΛ, towerkSΛ,
+    ell, rho, hrho, heq, hmem, hkerR, hkerΛ, H, hHQ, hHL, D', ringD,
+    localD, artD, algkD, inferInstance, inferInstance, inferInstance,
+    algSE, inferInstance, inferInstance, inferInstance, hsmooth,
+    inferInstance, f₀, g, u₀, δ, coeff, localLK, localg, hgflat, ?_, ?_, hf₀, hcoeff⟩
+  · intro i
+    exact hX i
+  · intro z
+    exact hev z
+
 
 end Algebra

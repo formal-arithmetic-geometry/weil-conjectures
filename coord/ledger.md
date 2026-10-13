@@ -11611,3 +11611,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/B4/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero (stage 3; reviewer PASS; after a return; landing 20261013T082332-L-1631097 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/B4/Sheaf.AlgebraicGeometry.SingleComplexQcqsInduction (stage 3; reviewer PASS; first push; landing 20261013T082332-L-1631244 (interface); batch 20261013T082326; modules 6; new nodes 5)
 - 08:23 L: merged deliver/C1/Sheaf.AlgebraicGeometry.OrderedCechModuleProjectionLift (stage 3; reviewer PASS; first push; landing 20261013T082333-L-1631447 (interface); batch 20261013T082326; modules 3; new nodes 2)
+- 08:23 L: merged deliver/C1/Sheaf.RingTheory.PopescuUnpaddedCoefficientChart (stage 3; reviewer PASS; first push; landing 20261013T082333-L-1631597 (interface); batch 20261013T082326; modules 2; new nodes 1)
