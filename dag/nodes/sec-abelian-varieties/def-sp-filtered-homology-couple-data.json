@@ -1,0 +1,116 @@
+{
+ "id": "def-sp-filtered-homology-couple-data",
+ "kind": "definition",
+ "title": "Explicit homology terms and filtration maps",
+ "statement": "Let $C$ be abelian [def-sp-abelian], $K$ a cochain complex, and $F$ a decreasing filtration by subcomplexes [def-sp-filtration]. Put $D^{P,Q}=H^{P+Q}(F^{-Q}K)$ and $E^{P,Q}=H^{P+Q}(\\operatorname{gr}^{-Q}K)$ [def-sp-filtered-complex-subquotients]. The map $\\alpha:D^{P,Q}\\to D^{P-1,Q+1}$ is homology of the inclusion $F^{-Q}K\\to F^{-(Q+1)}K$. The map $g:D^{P,Q}\\to E^{P,Q}$ is homology of the graded projection. The map $f:E^{P,Q}\\to D^{P+2,Q-1}$ is the connecting homomorphism of $0\\to F^{-Q+1}K\\to F^{-Q}K\\to\\operatorname{gr}^{-Q}K\\to0$. This sequence is short exact because the inclusion is mono and the projection is its cokernel. The targets are identified by the integer equalities $P-1+(Q+1)=P+Q$, $-(Q-1)=-Q+1$ and $P+2+(Q-1)=P+Q+1$. In the Lean map $g$, its target is expressed as $(P+0,Q-0)$, with the equality transport. These are explicit homology maps and connecting morphisms, not data selected from an existence assertion.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tag 012K, successive-step quotient sequences; Tag 011Q, exact couples"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tag 012K, successive-step quotient sequences; Tag 011Q, exact couples",
+  "note": "Componentwise formulation and explicit index transports; no countable direct sums."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homology exact couple of filtered cochain complex and representative quotient pages",
+   "date": "2026-10-13",
+   "results": "8 hits: CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CochainComplex.exactAt_of_isLE, CochainComplex.cm5b, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CochainComplex.isKInjective_of_injective_aux, CochainComplex.exactAt_of_isGE, CochainComplex.isLE_iff, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.ShortExact.homology_exact₁",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'ShortComplex.ShortExact.homology_exact₁'",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*[Cc]ouple|[Cc]ouple.*filtered",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact couple of filtered cochain complexes with representative quotient page differential",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredQuotientCanonicalStructure",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Tag 012K, successive-step quotient sequences; Tag 011Q, exact couples; construction steps 1--2, via the pointwise quotient-canonical-structure lemma",
+   "via": [
+    "lem-sp-filtered-quotient-canonical-structure",
+    "lem-sp-filtered-quotient-page-realization",
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredHomologyCoupleData",
+  "file": "lean/Sheaf/CategoryTheory/FilteredHomologyCoupleData.lean",
+  "declaration": "CategoryTheory.filteredHomologyD",
+  "statement": "abbrev filteredHomologyD (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (P Q : ℤ) : C",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.filteredStep_shortExact",
+   "CategoryTheory.filteredHomologyD",
+   "CategoryTheory.filteredHomologyE",
+   "CategoryTheory.filteredHomologyAlpha",
+   "CategoryTheory.filteredHomologyF",
+   "CategoryTheory.filteredHomologyG"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fef74",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T072340-L-1115686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fef74",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T072340-L-1115686",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements and dependencies; existing signature unchanged; all six modules and direct importer FilteredQuotientPageRealization compile cleanly; axioms and three documented postponed lemmas satisfy the brief."
+ }
+}

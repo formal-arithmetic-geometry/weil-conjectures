@@ -17,44 +17,38 @@
  ],
  "proof": [
   {
-   "text": "For the fixed filtered object U form the successive-step short exact sequences. Their homology long exact sequences give a type-zero exact couple X with D(P,Q)=H^(P+Q)(F^(-Q)U), E(P,Q)=H^(P+Q)(gr^(-Q)U), alpha the inclusion, initialG the projection and f the connecting map. Exactness supplies all three exactness and zero-composite conditions.",
+   "text": "Apply the first connecting comparison to D_1. Compose hd with eH at the target and use associativity to obtain the first displayed differential equation, keeping the same i,j and short exact proof.",
    "uses": [
-    "def-sp-exact-couple",
-    "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients"
+    "lem-sp-filtered-quotient-first-connecting"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Iterate derivation. At stage s and reindexed position (2p+q,-p), differentiate representatives to identify the derived E term with Z_(s+1)/B_(s+1). A representative is killed precisely when its differential can be corrected by a current boundary to lie one step deeper; an incoming differential gives precisely the new boundary. The kernel/image quotient comparison gives the induction to the next derived term. At each stage the differential is x to dx, and hence equals D by uniqueness. Compose with eZ inverse; hd yields eC and the differential equation. This uses only the pages and differentials of E, not its successor homology isomorphisms.",
+   "text": "Take the concrete homology couple X and its identity D comparisons. Obtain eQ and its initial normalization and differential equations from the derived quotient comparison. Define eC=eQ followed by eZ inverse, in the proof of the existential statement. The alpha comparison follows by definition of the explicit inclusion map.",
    "uses": [
-    "def-sp-exact-couple",
-    "def-sp-filtered-complex-subquotients",
-    "lem-sp-filtered-complex-page-differential"
+    "def-sp-filtered-homology-exact-couple",
+    "lem-sp-filtered-homology-couple-quotient-pages"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "At page one cancel the epic composite z followed by the boundary cokernel projection in hH to identify eH with canonical graded homology. The two maps in gr^(p+1) to F^p/F^(p+2) to gr^p are the quotient-induced maps. Their connecting homomorphism differentiates a lifted representative, so equals D_1; transport by hd and eH to get the required first differential. The initially chosen alpha and initialG are already the actual inclusion and quotient maps; their construction gives their displayed equations after index transport.",
+   "text": "In the initialG equation expand eC, substitute the base eQ normalization, cancel eZ inverse/hom and eH inverse/hom, and compose the index equality morphisms. For the derived differential equation postcompose with the epic-and-monic page isomorphism eZ hom, rewrite hd, cancel eZ inverse/hom, and apply the eQ differential equation.",
    "uses": [
-    "def-sp-filtered-complex-subquotients",
-    "def-sp-exact-couple",
-    "lem-sp-filtered-complex-page-differential"
+    "lem-sp-filtered-homology-couple-quotient-pages"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-exact-couple",
-  "def-sp-filtered-complex-subquotients",
-  "def-sp-filtration",
-  "lem-sp-filtered-complex-page-differential"
+  "def-sp-filtered-homology-exact-couple",
+  "lem-sp-filtered-homology-couple-quotient-pages",
+  "lem-sp-filtered-quotient-first-connecting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Homological Algebra",
-  "place": "Tag 012K, Lemmas 12.24.2 and 12.24.3(1); blueprint exact-couple construction steps 1--2",
-  "note": "Componentwise expansion of the cited construction in an arbitrary abelian category; no direct sums or stabilization."
+  "place": "Tag 012K, Lemmas 12.24.2 and 12.24.3(1); blueprint construction steps 1--2",
+  "note": "Lean reduction to explicit homology-map exactness, derived quotient comparisons, and first connecting comparison, composed by an unchanged-statement proof."
  },
  "mathlib_searches": [
   {
@@ -133,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "X-fef74",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T002007-L-2357816",
+  "landing": "20261013T072340-L-1115686",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean with node statements and dependencies; existing signature unchanged; all six modules and direct importer FilteredQuotientPageRealization compile cleanly; axioms and three documented postponed lemmas satisfy the brief."
  }
 }

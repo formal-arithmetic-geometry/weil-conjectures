@@ -1,0 +1,120 @@
+{
+ "id": "lem-sp-filtered-homology-couple-exactness",
+ "kind": "statement",
+ "title": "Exactness of the explicit filtered homology maps",
+ "statement": "For every abelian category $C$ [def-sp-abelian], cochain complex $K$ and decreasing filtration $F$, the explicitly defined maps $\\alpha,f,g$ of [def-sp-filtered-homology-couple-data] have zero consecutive composites and are exact at every term: $\\operatorname{im}f^{P,Q}=\\ker\\alpha^{P+2,Q-1}$, $\\operatorname{im}g^{P,Q}=\\ker f^{P,Q}$, and $\\operatorname{im}\\alpha^{P,Q}=\\ker g^{P-1,Q+1}$. All comparisons include the integer-index equality transports fixed in that definition. No assertion about a derived couple or a quotient-page comparison is made.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tags 012K and 011Q; homology long exact sequence of successive filtration steps"
+ },
+ "stmt_deps": [
+  "def-sp-filtered-homology-couple-data",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "The successive-step short complex is short exact by filteredStep_shortExact. Apply Mathlib ShortComplex.ShortExact.homology_exact₁, homology_exact₂, homology_exact₃ and δ_comp, comp_δ (Mathlib/Algebra/Homology/HomologySequence.lean, lines 295--325). The original inclusion-projection composite is zero, so functoriality of homology gives its zero composite. Transport the resulting three homology short complexes by eqToIso using the displayed integer identities, and apply ShortComplex.exact_iff_image_eq_kernel. This gives the six equations for the explicitly fixed maps.",
+   "uses": [
+    "def-sp-filtered-homology-couple-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-homology-couple-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tags 012K and 011Q; homology long exact sequence of successive filtration steps",
+  "note": "Componentwise formulation and explicit index transports; no countable direct sums."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homology exact couple of filtered cochain complex and representative quotient pages",
+   "date": "2026-10-13",
+   "results": "8 hits: CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CochainComplex.exactAt_of_isLE, CochainComplex.cm5b, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CochainComplex.isKInjective_of_injective_aux, CochainComplex.exactAt_of_isGE, CochainComplex.isLE_iff, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.ShortExact.homology_exact₁",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'ShortComplex.ShortExact.homology_exact₁'",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*[Cc]ouple|[Cc]ouple.*filtered",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact couple of filtered cochain complexes with representative quotient page differential",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredQuotientCanonicalStructure",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Tags 012K and 011Q; homology long exact sequence of successive filtration steps; construction steps 1--2, via the pointwise quotient-canonical-structure lemma",
+   "via": [
+    "lem-sp-filtered-quotient-canonical-structure",
+    "lem-sp-filtered-quotient-page-realization",
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredHomologyCoupleExactness",
+  "file": "lean/Sheaf/CategoryTheory/FilteredHomologyCoupleExactness.lean",
+  "declaration": "CategoryTheory.filteredHomologyCouple_exact",
+  "statement": "theorem filteredHomologyCouple_exact (C : Type u) [Category.{v} C] [Abelian C] (K : CochainComplex C ℤ) (F : DecreasingFiltration K) : (∀ P Q, filteredHomologyF K F P Q ≫ filteredHomologyAlpha K F (P + 2) (Q - 1) = 0) ∧ (∀ P Q, filteredHomologyG K F P Q ≫ filteredHomologyF K F (P + (0 : ℕ)) (Q - (0 : ℕ)) = 0) ∧ (∀ P Q, filteredHomologyAlpha K F P Q ≫ filteredHomologyG K F (P - 1) (Q + 1) = 0) ∧ (∀ P Q, imageSubobject (filteredHomologyF K F P Q) = kernelSubobject (filteredHomologyAlpha K F (P + 2) (Q - 1))) ∧ (∀ P Q, imageSubobject (filteredHomologyG K F P Q) = kernelSubobject (filteredHomologyF K F (P + (0 : ℕ)) (Q - (0 : ℕ)))) ∧ (∀ P Q, imageSubobject (filteredHomologyAlpha K F P Q) = kernelSubobject (filteredHomologyG K F (P - 1) (Q + 1)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.filteredHomologyCouple_exact"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fef74",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T072340-L-1115686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fef74",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T072340-L-1115686",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements and dependencies; existing signature unchanged; all six modules and direct importer FilteredQuotientPageRealization compile cleanly; axioms and three documented postponed lemmas satisfy the brief."
+ }
+}

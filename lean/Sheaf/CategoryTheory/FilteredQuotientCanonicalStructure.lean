@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
+
+import Sheaf.CategoryTheory.FilteredHomologyCoupleQuotientPages
+import Sheaf.CategoryTheory.FilteredQuotientFirstConnecting
 /-!
 # Exact-couple comparison for representative quotient differentials
 
@@ -19,10 +22,13 @@ Source: Stacks Project, Tag 012K, cycle-boundary construction and first differen
 
 @[expose] public section
 
+set_option backward.isDefEq.respectTransparency false
+
 universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory
 
+set_option linter.unusedVariables false in
 /-- Identify canonical quotient differentials with the filtered homology exact couple.
 Source: Stacks Project, Tag 012K, Lemma 12.24.2 and the first differential in 12.24.3;
 blueprint thm-sp-spectral-object-yields, construction steps 1--2.
@@ -133,6 +139,44 @@ theorem filteredQuotient_canonical_structure
                   (p + (s + 1), q - (s + 1) + 1) =
               (X.pageCouple s).d (2 * p + q) (-p) ≫
                 eqToHom (by congr 1 <;> omega) ≫
-                  (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom)) := by sorry
+                  (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom)) := by
+  classical
+  constructor
+  · intro p q
+    obtain ⟨i, j, hij, hS, hi, hj, hδ⟩ :=
+      filteredQuotient_first_connecting C hBZ eH hH U (D 1 (by omega)) p q
+    refine ⟨i, j, hij, hS, hi, hj, ?_⟩
+    simpa only [Iso.trans_hom, Category.assoc] using
+      (congrArg (fun f ↦ f ≫ (eH U (p + 1) q).hom)
+        (hd p q (p + 1) q 1 (by omega))).trans
+        (by rw [Category.assoc, hδ])
+  · obtain ⟨eQ, hbase, hQ⟩ := filteredHomologyCouple_quotient_pages C hBZ eH hH U D
+    let X := filteredHomologyExactCouple U.obj.obj U.obj.filtration
+    let eC := fun (s : ℕ) (p q : ℤ) ↦
+      eQ s p q ≪≫ (eZ p q (s + 1) (by omega)).symm
+    refine ⟨X, fun _ _ ↦ Iso.refl _, eC, ?_, ?_, ?_⟩
+    · intro P Q
+      dsimp [X, filteredHomologyExactCouple, filteredHomologyAlpha, filteredHomologyD,
+        filteredHomologyE, filteredHomologyG]
+      simp only [Category.id_comp, Category.comp_id]
+    · intro P Q
+      dsimp only [eC]
+      simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
+      rw [eq_of_heq (hbase (-Q) (P + 2 * Q))]
+      simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
+      dsimp only [filteredHomologyEIso, eqToIso]
+      dsimp [X, filteredHomologyExactCouple, BigradedExactCouple.initialG,
+        filteredHomologyAlpha, filteredHomologyD,
+        filteredHomologyE, filteredHomologyG]
+      simp only [Category.assoc, Iso.inv_hom_id_assoc, eqToHom_trans, eqToHom_refl,
+        Category.comp_id, Category.id_comp]
+    · intro s p q
+      apply (cancel_mono (eZ (p + (s + 1)) (q - (s + 1) + 1)
+        (s + 1) (by omega)).hom).1
+      dsimp only [eC]
+      simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
+      rw [hd]
+      simp only [← Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      simpa only [X, Category.assoc] using hQ s p q
 
 end CategoryTheory
