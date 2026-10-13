@@ -1,0 +1,159 @@
+{
+ "id": "lem-pc-perfect-relative-tensor-locally-bounded",
+ "kind": "statement",
+ "title": "Local bounds for the relative tensor homology of a perfect complex",
+ "statement": "Let X,Y be schemes [def-pc-scheme] with Y Noetherian [pqf-def-locnoeth], and let f:X→Y be locally of finite type and stalkwise of finite Tor dimension [def-pc-perfect-morphism]. Let E in D(O_X) [def-pc-derived-category] be perfect [def-pc-perfect-complex]. Fix a complex K representing E, a K-flat complex P of f⁻¹O_Y-modules [def-pc-kflat-complex], and a quasi-isomorphism q:P→K restricted along f⁻¹O_Y→O_X [def-pc-quasi-iso-modules]. For each x in X there exist an open neighbourhood U containing x and integers a≤b such that, for every f⁻¹O_Y-module sheaf F, every degree i<a or b<i, and every y in U, the underlying abelian-group stalk at y of H^i(Tot(P tensor F[0])) is zero. X need not be quasi-compact; the bound is uniform on U and for all F.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 069C ((3) implies (2)) and 0B6G (condition (3)); Cohomology Tag 09U9; online text https://stacks.math.columbia.edu/tag/069C and https://stacks.math.columbia.edu/tag/0B6G"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-perfect-morphism",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "A locally finite type morphism to a Noetherian scheme is pseudo-coherent. Tag 069C applies to the stalkwise hypothesis [def-pc-perfect-morphism], giving around each point an open neighbourhood on which the structure sheaf has Tor amplitude [-d,0] over the inverse-image structure sheaf. Its proof uses a finite polynomial presentation, pseudo-coherence over that polynomial ring, and the finite global dimension of its fibres to turn stalkwise perfectness into perfectness on an open neighbourhood. This is the essential geometric step; no compactness is assumed.",
+   "uses": [
+    "def-pc-perfect-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 069C ((3) implies (2)) and 0B6G (condition (3)); Cohomology Tag 09U9; online text https://stacks.math.columbia.edu/tag/069C and https://stacks.math.columbia.edu/tag/0B6G"
+   }
+  },
+  {
+   "text": "Intersect that neighbourhood with a strictly perfect neighbourhood for E [def-pc-perfect-complex]. Choose [r,s] containing the degrees of the bounded model. Each term is a retract of a finite free structure module and therefore has Tor amplitude [-d,0] after scalar restriction. The finite filtration by terms, with quotients the terms shifted into their respective degrees, gives amplitude [r-d,s] for the entire complex by the long exact sequences of tensor cohomology. Enlarge the endpoints if necessary so the interval is ordered. The neighbourhood and interval are independent of the test module.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 069C ((3) implies (2)) and 0B6G (condition (3)); Cohomology Tag 09U9; online text https://stacks.math.columbia.edu/tag/069C and https://stacks.math.columbia.edu/tag/0B6G"
+   }
+  },
+  {
+   "text": "The prescribed quasi-isomorphism q from K-flat P [def-pc-kflat-complex, def-pc-quasi-iso-modules] computes the scalar-restricted derived tensor of K, hence that of E through the given representative isomorphism. Apply the K-flat stalk criterion [lem-pc-kflat-stalk-criterion] to the ringed space (X,f⁻¹O_Y) to obtain K-flat stalk complexes. At each stalk, compare to a common K-flat replacement of the scalar-restricted bounded model. K-flat model independence [lem-pc-kflat-tensor-quasi-iso] (transported from the one-point-site module presentation), exactness of restriction and stalks, and stalk compatibility with total tensor identify its tensor homology stalks with those of the local bounded model. They therefore vanish in every degree outside the chosen interval. For a zero local model use [0,0]; an empty scheme has no points to check.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-quasi-iso-modules",
+    "lem-pc-kflat-tensor-quasi-iso",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-stalk-tensor-complex",
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 069C ((3) implies (2)) and 0B6G (condition (3)); Cohomology Tag 09U9; online text https://stacks.math.columbia.edu/tag/069C and https://stacks.math.columbia.edu/tag/0B6G"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-perfect-complex",
+  "def-pc-perfect-morphism",
+  "def-pc-quasi-iso-modules",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-kflat-tensor-quasi-iso",
+  "lem-pc-stalk-tensor-complex",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Expanded local part of Tags 069C and 0B6G, checked against their online text; local checkout of literature is absent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local Tor amplitude of a perfect complex along a morphism with finite Tor dimension on stalks",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complex relative finite Tor dimension stalkwise finite Tor dimension",
+   "results": "Only projective/injective dimension and derived t-structure results (HasProjectiveDimensionLT.mk, HasInjectiveDimensionLT.mk, DerivedCategory.isGE_Q_obj_iff); none states local relative Tor bounds.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg finite.*[Tt]or|[Tt]or.*dimension in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology; rg HasFiniteTorDimensionOver|HasStalkwiseFiniteTorDimension in both library roots",
+   "results": "No Mathlib relative Tor-bound theorem. The library has only the assigned relative theorem and its callers. The absolute local/global Tor lemmas concern O_X tensor, not f⁻¹O_Y tensor, so do not apply. No duplicate found in the blueprint search for finite tor.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "verification of relative finite Tor dimension for the proper perfect pushforward: the local geometric and bounded-complex parts before the finite-subcover argument",
+   "via": [
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectRelativeTensorLocallyBounded",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectRelativeTensorLocallyBounded.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_relativeTensor_locally_bounded",
+  "statement": "theorem perfect_relativeTensor_locally_bounded\n    {X Y : Scheme.{u}} [IsNoetherian Y]\n    (f : X ⟶ Y) [LocallyOfFiniteType f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (hperfect : HasStalkwiseFiniteTorDimension f)\n    (E : schemeDerivedCategory X) (hE : IsPerfect X E)\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (e : Nonempty (DerivedCategory.Q.obj K ≅ E))\n    (P : CochainComplex (SheafOfModules.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj\n        (TopCat.Sheaf.inverseImageRing f.base Y.sheaf))) ℤ)\n    (hP : CochainComplex.IsKFlat (R := TopCat.Sheaf.inverseImageRing f.base Y.sheaf) P)\n    (q : P ⟶ ((SheafOfModules.restrictScalars\n      ((sheafCompose (Opens.grothendieckTopology X)\n        (forget₂ CommRingCat.{u} RingCat.{u})).map\n          (Modules.tensorPullbackRingMap f))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K) (hq : QuasiIso q) :\n    ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ ∃ a b : ℤ, a ≤ b ∧\n      ∀ F : SheafOfModules.{u} ((sheafCompose\n          (Opens.grothendieckTopology X)\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj\n            (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)),\n        ∀ i : ℤ, i < a ∨ b < i → ∀ y : X, y ∈ U →\n          IsZero ((TopCat.Sheaf.forget AddCommGrpCat.{u} X.carrier ⋙\n            TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} y).obj\n              ((SheafOfModules.toSheaf _).obj\n                ((CochainComplex.mapBifunctor P\n                  ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)\n                  (@MonoidalCategory.curriedTensor _ _ (SheafOfModules.monoidalCategory\n                    (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)))).homology i)))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T034201-L-3765196",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T034201-L-3765196",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

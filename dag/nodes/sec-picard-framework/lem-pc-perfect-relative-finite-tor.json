@@ -17,38 +17,30 @@
  ],
  "proof": [
   {
-   "text": "Local finite type over a Noetherian base implies pseudo-coherence of f. Apply the stalk criterion for perfect morphisms (Tag 069C, lemma-check-perfect-stalks, (3) implies (2)) to [def-pc-perfect-morphism]. This gives neighbourhoods where the structure sheaf has finite Tor amplitude over the inverse-image structure sheaf. The pseudo-coherence hypothesis is essential: compactness alone does not bound pointwise Tor dimensions.",
+   "text": "Choose a complex K representing E by essential surjectivity of DerivedCategory.Q. Apply [lem-pc-kflat-resolution] to the scalar restriction of K to get P, its K-flatness and a quasi-isomorphism q. Apply [lem-pc-perfect-relative-tensor-locally-bounded] to these prescribed models to obtain U_x, a_x, b_x and vanishing of all test tensor homology stalks on U_x.",
    "uses": [
-    "def-pc-perfect-morphism"
+    "lem-pc-kflat-resolution",
+    "lem-pc-perfect-relative-tensor-locally-bounded"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G), condition (3), and lemma-check-perfect-stalks (Tag 069C)"
-   }
+   "elementary": false
   },
   {
-   "text": "Intersect these neighbourhoods with the strictly perfect neighbourhoods of E [def-pc-perfect-complex]. If the local model has terms in [r,s] and the structure sheaf has amplitude [-d,0], finite free terms and their retracts have amplitude [-d,0]. Filter the bounded complex by its terms and use the long exact sequences of derived tensor cohomology to obtain amplitude [r-d,s]. Choose a finite subcover of X and enclose these intervals in one interval [a,b], with a≤b. A global representative and a K-flat resolution of its scalar restriction then compute every relative tensor product; its cohomology outside [a,b] vanishes locally and hence globally. These are precisely the witnesses in [def-pc-finite-tor-dimension-over]. Empty X and the zero complex permit [0,0].",
+   "text": "Quasi-compactness gives a finite subcover t of the U_x. Induction on finite sets, starting with [0,0] and extending endpoints by min and max, produces c≤d with c≤a_x and b_x≤d for each x in t. For every y, choose a selected U_x containing it. A degree outside [c,d] is outside [a_x,b_x], so the local theorem makes its tensor homology stalk at y zero. Mathlib TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero makes the underlying abelian sheaf zero; faithfulness of SheafOfModules.toSheaf then makes the module sheaf zero. K,P,q,c,d are exactly the witnesses required by [def-pc-finite-tor-dimension-over]. If X is empty, the subcover is empty and the induction supplies [0,0], with the stalk condition vacuous.",
    "uses": [
-    "def-pc-perfect-complex",
     "def-pc-finite-tor-dimension-over"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G), condition (3), and lemma-check-perfect-stalks (Tag 069C)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-finite-tor-dimension-over",
-  "def-pc-perfect-complex",
-  "def-pc-perfect-morphism"
+  "lem-pc-kflat-resolution",
+  "lem-pc-perfect-relative-tensor-locally-bounded"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G), condition (3), and lemma-check-perfect-stalks (Tag 069C)"
+  "place": "Lean assembly of the local part of Tags 069C/0B6G, K-flat resolutions (06YS), and the finite-subcover/stalk-detection argument (09U9)"
  },
  "mathlib_searches": [
   {
@@ -125,12 +117,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261012T194108-L-454138",
+  "landing": "20261013T034201-L-3765196",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
