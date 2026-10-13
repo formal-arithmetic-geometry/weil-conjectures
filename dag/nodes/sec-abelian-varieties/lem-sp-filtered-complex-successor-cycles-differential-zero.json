@@ -1,0 +1,127 @@
+{
+ "id": "lem-sp-filtered-complex-successor-cycles-differential-zero",
+ "kind": "statement",
+ "title": "Successor cycles are killed by page differential",
+ "statement": "For an abelian category C, a cochain complex K with decreasing filtration F, an integer r ≥ 1, differential data D on its concrete r-page, a bidegree pq, and an inclusion hZ of graded (r+1)-cycles into graded r-cycles, the composite of hZ, the r-page quotient projection, and the outgoing page differential is zero.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle and differential formulas"
+ },
+ "proof": [
+  {
+   "text": "Take unquotiented successor-cycle representatives R. Their graded image is the successor-cycle subobject, since the added next filtration step projects to zero. Thus the image factorization gives an epimorphism x onto successor cycles. The differential of R factors through F^(p+r+1), so its projection to gr^(p+r) is zero by the cokernel equation. Apply D.on_representatives with source x followed by hZ and zero target cycle. Cancel x to obtain the asserted zero composite.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "successor cycles page differential zero",
+   "results": "No direct match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.liftCycles",
+   "results": "Generic liftCycles found",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "successor_cycles_differential_zero",
+   "results": "No existing declaration",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "successor filtered cycles inclusion composed with page differential is zero",
+   "results": "No direct match; generic homological complex kernel lemmas only",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesDifferentialZero",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexSuccessorCyclesDifferentialZero.lean",
+  "declaration": "CategoryTheory.filteredComplex_successor_cycles_differential_zero",
+  "statement": "theorem filteredComplex_successor_cycles_differential_zero\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)\n    (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ)\n    (hZ : F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) ≤\n      F.complexCycles pq.1 (pq.1 + pq.2) r) :\n    (Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq) ≫\n        D.page.d pq ((ComplexShape.up' (r, 1 - r)).next pq) = 0",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCoverExists",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-filtered-complex-successor-cycles-cover-exists",
+   "place": "Outgoing differential annihilation step",
+   "via": [
+    "lem-sp-filtered-complex-page-differential"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T001613-L-2329994",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T001613-L-2329994",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

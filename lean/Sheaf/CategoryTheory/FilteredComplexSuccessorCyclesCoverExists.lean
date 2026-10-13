@@ -2,6 +2,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesDifferentialZero
 
 @[expose] public section
 universe v u
@@ -32,6 +33,12 @@ theorem filteredComplex_successor_cycles_cover_exists
       F.complexCycles pq.1 (pq.1 + pq.2) r) :
     ∃ f : (F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) : C) ⟶ D.page.cycles pq,
       f ≫ D.page.iCycles pq =
-        Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq := by sorry
+        Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq := by
+  let a := Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq
+  have ha : a ≫ D.page.d pq ((ComplexShape.up' (r, 1 - r)).next pq) = 0 := by
+    exact filteredComplex_successor_cycles_differential_zero K F r hr D pq hZ
+  let f := D.page.liftCycles a ((ComplexShape.up' (r, 1 - r)).next pq) rfl ha
+  refine ⟨f, ?_⟩
+  exact D.page.liftCycles_i a _ rfl ha
 
 end CategoryTheory
