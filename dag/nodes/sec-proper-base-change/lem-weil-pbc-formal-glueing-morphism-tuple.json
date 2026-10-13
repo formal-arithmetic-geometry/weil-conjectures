@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Transport the prime and chart maps of z along the equalities identifying X and Y with canonical objects. Restriction of the canonical R_f-module chart gives its original R-module structure by algebraMap_smul. The supplied HEqs identify the transported maps with p and c_i, and the structural maps with compare and swap.",
+   "text": "Identify the restricted canonical chart modules with localize (f i) M and localize (f i) N by Module.ext' and algebraMap_smul. Transport each prime compatibility equation along the prime and chart object equalities using prime_compat_transport, and each overlap equation using chart_compat_transport. After substitution, eq_of_heq turns the supplied structural-map and component-map HEqs into equalities. The resulting equations involve only compare, swap, p and c_i.",
    "uses": [
     "def-weil-pbc-formal-glueing-data",
     "def-weil-pbc-module-localization-away"
@@ -23,7 +23,7 @@
    "elementary": true
   },
   {
-   "text": "For m in M, evaluate prime compatibility at (1 tensor m)/1. The comparison formula sends this to 1 tensor (m/1), and base change of c_i sends that to 1 tensor c_i(m/1). The localized eta map on c_i(m/1) has the same image under comparison: this follows on n/1 from the comparison formula, and on every fraction from the localization universal property. Injectivity of compare therefore gives equality of the localized prime value and localized eta(c_i(m/1)). Every first component of beta vanishes.",
+   "text": "Evaluate transported prime compatibility at (1 tensor m)/1. IsLocalizedModule.map_LocalizedModules identifies the localized prime map with p(1 tensor m)/1. The denominator-one compare_properties formula on M and the definition of extendMapR identify the other side with 1 tensor c_i(m/1). For any n in N_fi, localized fraction induction and the pure-tensor fraction formula compare_properties prove compare(eta_fi(n)) = 1 tensor n (private helper compare_eta). Apply injectivity of compare from compare_properties to obtain equality of p(1 tensor m)/1 and eta_fi(c_i(m/1)). Their difference is zero.",
    "uses": [
     "def-weil-pbc-formal-glueing-data",
     "lem-weil-pbc-formal-glueing-canonical-maps",
@@ -33,11 +33,12 @@
    "elementary": false
   },
   {
-   "text": "Evaluate chart compatibility at (m/1)/1. The swap fixes this element, giving swap(n_i/1)=n_j/1, where n_i=c_i(m/1). Write n_i=x/f_i^a and n_j=y/f_j^b. The swap formula gives (x/1)/f_i^a=(y/f_j^b)/1. Clearing the outer denominator and then the inner denominator gives c,d with f_j^d f_i^c (f_j^b x-f_i^a y)=0 in N. In N_(fi*fj), the two canonical images have difference with numerator f_i^b f_j^a(f_j^b x-f_i^a y) and denominator (f_i*f_j)^(a+b). Multiplication by (f_i*f_j)^(c+d) annihilates the numerator, so the difference is zero. This proves every overlap component of beta vanishes without cancellation in N.",
+   "text": "Evaluate transported overlap compatibility at (m/1)/1. Localization of c_i sends this to c_i(m/1)/1, and exists_swap fixes the double denominator-one element of M, so swap(n_i/1)=n_j/1. To pass to N_(fi*fj), let rho_i and rho_j be the lifts of N -> N_(fi*fj) through localization at fi and fj. The divisor-unit theorem localizationAway_map_units_of_dvd allows lifting rho_i once more through fj, obtaining L_ij:(N_fi)_fj -> N_(fi*fj), and lifting rho_j through fi, obtaining L_ji. Two successive applications of IsLocalizedModule.ext show L_ji composed with swap = L_ij: on (n/1)/1 the swap fixes the element and each lift sends the image of n to n/1 by IsLocalizedModule.lift_apply. Apply L_ji to swap(n_i/1)=n_j/1, rewrite with this map equality and lift_apply, and obtain rho_i(n_i)=rho_j(n_j). This proves each overlap difference zero without fraction arithmetic or scalar cancellation.",
    "uses": [
     "def-weil-pbc-formal-glueing-data",
     "lem-weil-pbc-formal-glueing-canonical-maps",
-    "def-weil-pbc-module-localization-away"
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-cover-module-exact"
    ],
    "elementary": false
   },
@@ -51,12 +52,13 @@
   "def-weil-pbc-formal-glueing-data",
   "def-weil-pbc-module-localization-away",
   "lem-weil-pbc-formal-glueing-canonical-maps",
-  "def-weil-module-base-change"
+  "def-weil-module-base-change",
+  "lem-weil-pbc-cover-module-exact"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "U4 stage-3 worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "C4 spells out the kernel calculation implicit in Remark 05EL; denominator clearing follows steps 2–3 of the parent morphism-lifting node."
+  "place": "Remark 05EL, morphism compatibility; complex preceding 05EK. Prime calculation follows the canonical comparison fraction formula. The overlap calculation uses two successive localization universal properties (Algebra 07K0) instead of the original denominator-clearing plan."
  },
  "mathlib_searches": [
   {
@@ -142,10 +144,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T111839-L-3048355",
-  "kind": "interface",
+  "landing": "20261013T115033-L-3327320",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
