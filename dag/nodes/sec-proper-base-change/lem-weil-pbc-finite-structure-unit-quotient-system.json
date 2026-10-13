@@ -22,53 +22,64 @@
  ],
  "proof": [
   {
-   "text": "X is Noetherian since it is finite type over the Noetherian affine base. Coherence gives quasi-coherence and finite type. Choose the scheme-theoretic support Z of G, defined by its annihilator J; it is proper over A. Construct Q as the pushforward of O_Z and q as its structure map (the quotient O_X to O_X/J). Finite pushforward gives coherence, and its support is proper.",
+   "text": "X is locally Noetherian as locally finite type over Spec A. Apply the coherence criterion to G and take the scheme-theoretic supporting closed immersion k:Z -> X from the annihilator/support conjunct of module_support_proper_over_base. Its properness follows from hproper. Construct Q=k_*O_Z and q=the structure module map. Finite pushforward gives coherence and finite_structure_proper_support gives proper support.",
    "uses": [
-    "lem-weil-pbc-module-support-proper-over-base",
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-finite-pushforward-coherent"
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-finite-structure-proper-support"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor pullback is a left adjoint, hence preserves the quotient. The image of J annihilates j_n^*G and therefore p_n,*O_Yn through psi_n. Acting on 1 shows its structure map kills J. Factor the structure map through j_n^*Q by the cokernel universal property and compose with psi_n inverse to obtain v_n.",
+   "text": "The closed-immersion unit is epi by closedImmersion_unit_quotient. Compare its chosen adjunction with the pinned adjunction, and compose with pushforward of the canonical structure-unit isomorphism; its unit characterization proves that q is epi. The new supported-unit kernel theorem says that j_n^*kernel(q) is killed by the canonical structure unit into p_n,*O_Yn. Since tensor pullback is an additive left adjoint, it preserves the cokernel presentation of q. Descend the structure unit through j_n^*q by the mapped cokernel universal property, then compose with psi_n inverse to construct v_n.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "lem-weil-pbc-module-pullback-ideal-product-image",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
     "lem-weil-pbc-module-pullback-structure-sheaf",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-finite-structure-supported-unit-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "Both sides of the compatibility equation agree after precomposition with the epimorphic pullback of q: base change preserves the structure map, hpsi identifies the transition of G, and the pinned composition comparison matches the canonical composite unit. Cancel that epimorphism. The canonical adjunction sends r to 1 tensor r, so evaluating the factored map after q on any open gives precisely the structure ring map of p_n followed by j_n. This also proves the displayed scalar formula.",
+   "text": "Prove the canonical structure-unit composition identity from unit_conjugateEquiv_symm and the pinned mate definition. After applying the composite adjunction Hom equivalence and pushforward comparison, both sides are the scheme composite structure map. For compatibility, cancel psi_n and precompose with the epi i_n^*j_(n+1)^*q. Naturality of c_n and the two quotient descent equations reduce the comparison to preservation of units by moduleBaseChangeMap_algebra. That unit identity and hpsi_n identify the two sides. hp and hw are not needed for this calculation.",
    "uses": [
-    "lem-weil-pbc-affine-pushforward-base-change",
     "def-pc-tensor-pullback-composition-iso",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-base-change-map-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the adjunction unit identifies q followed by the adjoint of v_n psi_n with the adjoint of the canonical reduced structure unit. The structure-unit characterization and pushforward composition identify this adjoint with the structure map for p_n followed by j_n. Evaluate the module equality on U and r. Assemble Q, q, v and the two proved equations into the required existential statement.",
+   "uses": [
     "lem-weil-pbc-finite-structure-adjoint-transitions",
-    "lem-weil-pbc-module-pullback-structure-sheaf"
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-support-proper-over-base",
   "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-support-proper-over-base",
   "lem-weil-pbc-finite-pushforward-coherent",
-  "lem-pc-module-pullback-adjunction",
-  "lem-weil-pbc-module-pullback-ideal-product-image",
+  "lem-weil-pbc-finite-structure-proper-support",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
   "lem-weil-pbc-module-pullback-structure-sheaf",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-finite-structure-supported-unit-kernel",
   "def-pc-tensor-pullback-composition-iso",
+  "lem-weil-pbc-module-base-change-map-algebra",
   "lem-weil-pbc-finite-structure-adjoint-transitions"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R1",
+  "group": "E2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09ZT, algebra structure paragraph: reduced unit factorization, expanded using 0CYS, 01XZ, 01Y6, 0096 and affine base change; official Stacks pages read 2026-10-13."
+  "place": "Tag 09ZT, algebra structure paragraph, expanded local unit factorization using Modules Tags 01BG and 0096 and the closed-immersion quotient; official pages read 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -147,9 +158,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T151703-L-924613",
+  "landing": "20261013T160710-L-1371353",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
