@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-open-restriction-adjunction-hom-descent",
+ "kind": "statement",
+ "title": "Coherent Hom equivalences for the descended adjunction",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism [def-pc-scheme] with derived pullback $F$ [def-pc-derived-pullback], direct image $G$ [def-pc-derived-direct-image] and an arbitrary supplied adjunction $p:F\\dashv G$. Fix an open $U\\subset Y$ and use small derived localizations on $U$ and $f^{-1}U$ [def-pc-derived-category]. Write $R_X,R_Y$ for derived restriction [def-pc-derived-open-restriction-maps] and $F_o,G_o$ for pullback and direct image of $f|_U$. There exist an adjunction $q:F_o\\dashv G_o$ and natural isomorphisms $\\alpha:FR_X\\cong R_YF_o$, $\\beta:GR_Y\\cong R_XG_o$ such that for every $A\\in D(Y)$, $B\\in D(X)$ and $v:FA\\to B$, $R_Y(p(v))\\circ\\beta_B= q(\\alpha_A^{-1}\\circ R_X(v))$, with compositions in diagrammatic order. This is a Hom-equivalence identity independent of tensor and quasi-coherence.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Tag 08EU locality, the adjunction-descent step; Tag 08FE restriction comparison."
+ },
+ "proof": [
+  {
+   "text": "Use the localization theorem for the two exact open restrictions.",
+   "uses": [
+    "lem-pc-derived-open-restriction-is-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the pullback and direct-image restriction isomorphisms with small local derived universes. Rewrite resLE at the full inverse-image open as morphismRestrict.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Treat these isomorphisms as CatCommSq structures and localize the supplied adjunction using Mathlib Adjunction.localization. Expand both Hom equivalences as unit followed by right-adjoint map. Its localization_unit_app formula, cancellation of alpha with its inverse, and naturality of beta give the displayed identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-open-restriction-is-localization",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 08EU locality, the adjunction-descent step; Tag 08FE restriction comparison.",
+  "note": "Expansion of the locality argument into the named categorical step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An adjunction descends through localization functors with fully faithful right adjoints and compatible pullback and direct image functors",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction descends through localization functors with fully faithful right adjoints and compatible pullback and direct image functors",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.isLocalization_rightAdjoint, CategoryTheory.Adjunction.isLocalization_leftAdjoint, CategoryTheory.Adjunction.isLocalization_rightAdjoint', CategoryTheory.Adjunction.isLocalization_leftAdjoint', CategoryTheory.Adjunction.isLocalization', CategoryTheory.Adjunction.isLocalization, CategoryTheory.Localization.LeftBousfield.isLocalization; no scheme-derived coherent descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "(localization.*adjunction|adjunction.*localization|tensor.*counit)",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean; no scheme-derived coherent descent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EU locality, the adjunction-descent step; Tag 08FE restriction comparison.",
+   "via": [
+    "lem-pc-derived-projection-mate-open-restriction-comparison",
+    "lem-pc-qcqs-derived-projection-iso-universes",
+    "lem-pc-proper-support-derived-projection-formula",
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionAdjunctionHomDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionAdjunctionHomDescent.lean",
+  "declaration": "AlgebraicGeometry.exists_openRestriction_adjunction_hom_descent",
+  "statement": "theorem exists_openRestriction_adjunction_hom_descent\n    (p : derivedPullback f ⊣ schemeDerivedDirectImage f) :\n    let rX := (schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory\n    let rY := (schemeOpenRestriction Y U).mapDerivedCategory\n    ∃ (q : derivedPullback (f ∣_ U) ⊣ schemeDerivedDirectImage (f ∣_ U))\n      (alpha : derivedPullback f ⋙ rX ≅ rY ⋙ derivedPullback (f ∣_ U))\n      (beta : schemeDerivedDirectImage f ⋙ rY ≅ rX ⋙ schemeDerivedDirectImage (f ∣_ U)),\n      ∀ (A : schemeDerivedCategory Y) (B : schemeDerivedCategory X)\n        (v : (derivedPullback f).obj A ⟶ B),\n        rY.map (p.homEquiv A B v) ≫ beta.hom.app B =\n          q.homEquiv (rY.obj A) (rX.obj B) (alpha.inv.app A ≫ rX.map v)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-77c27",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T142855-L-497118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-77c27",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T142855-L-497118",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements and proofs with node records, dependencies, change record and report; all four modules and sole direct importer compile cleanly; axioms are standard, with sorryAx only for the documented tensor-descent dependency."
+ }
+}

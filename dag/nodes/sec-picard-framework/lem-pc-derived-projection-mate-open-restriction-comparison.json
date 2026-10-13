@@ -17,68 +17,42 @@
  ],
  "proof": [
   {
-   "text": "Use hZ and hg to identify the supplied source and morphism with the explicit inverse-image open and f restricted to U. Use exact restriction to set N=rY(M) and E=rX(L). They have quasi-coherent cohomology by the open restriction criterion in every degree.",
+   "text": "Use hZ and hg to identify g with the canonical restricted morphism. Construct N and E as the actual restrictions of M and L. Apply the quasi-coherence restriction criterion in every degree and Mathlib isQuasicoherent_over.",
    "uses": [
-    "def-pc-derived-open-restriction-maps",
     "lem-pc-derived-open-restriction-qcoh-iff"
    ],
    "elementary": false
   },
   {
-   "text": "First choose local derived categories in the ambient universe using the open localization and adjunction interfaces. For an open inclusion j, derived direct image followed by exact restriction is the identity: compute on a K-injective representative, whose restriction remains K-injective, and use the underived restriction counit. Hence the open restriction right adjoints are fully faithful, and restriction is a localization. The recorded pullback/tensor restriction comparisons and direct-image restriction comparison identify the two bifunctors of the projection mate with bifunctors on the local categories.",
+   "text": "Obtain the descended adjunction q and coherent pullback/direct-image comparisons alpha and beta.",
    "uses": [
-    "lem-pc-derived-open-localization-universe",
-    "lem-pc-open-derived-localization-adjunction",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-open-restriction-adjunction-hom-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Descend t by evaluating it on the fully faithful right adjoints of the two open restrictions and conjugating by the invertible localization counits. Its naturality at the localization units shows that this descended isomorphism agrees with the restriction of t on arbitrary global inputs. Descend p in the same way: its Hom equivalence on local inputs is obtained by using these right adjoints, the original Hom equivalence, and the restriction/pullback and restriction/direct-image comparisons. These equivalences are natural and define q. The triangle identities follow from those of p and the localization counits.",
+   "text": "Obtain the descended tensor comparison s, tensor restriction comparisons rhoX/rhoY and their equation before transposition.",
    "uses": [
-    "lem-pc-open-derived-localization-adjunction",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-open-restriction-tensor-counit-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the local categories to the fixed small localizations in universe u using uniqueness of localization. The universal properties of the chosen derived pullback, direct image and K-flat tensor identify the transported functors with the displayed functors, so q and the descended tensor isomorphism s have the required types.",
-   "uses": [
-    "def-pc-derived-category",
-    "def-pc-derived-pullback",
-    "def-pc-derived-direct-image",
-    "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Let a identify rY(M tensor Rf(L)) with N tensor Rg(E), and b identify rY(Rf(F(M) tensor L)) with Rg(Fg(N) tensor E), using respectively tensor/direct-image and direct-image/tensor/pullback restriction comparisons. Expand the adjunction transpose as its unit followed by direct image of the input morphism. Compatibility of the descended unit and counit and naturality of t at the localization units give rY(pi) followed by b = a followed by the local mate. Thus the pair (a,b) is the required arrow isomorphism. This compares arrows without using their invertibility. Empty U gives the same comparisons in the zero module categories.",
-   "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-restrict-derived-direct-image-open"
-   ],
-   "elementary": false
+   "text": "Define a by tensor restriction followed by beta, c by tensor restriction followed by alpha, and b by beta followed by local direct image of c. The Hom-equivalence identity, q.homEquiv_naturality_right, the tensor/counit equation and q.homEquiv_naturality_left show that the mate square commutes. Arrow.isoMk then gives the required arrow isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-open-restriction-maps",
   "lem-pc-derived-open-restriction-qcoh-iff",
-  "lem-pc-derived-open-localization-universe",
-  "lem-pc-open-derived-localization-adjunction",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-restrict-derived-direct-image-open",
-  "def-pc-derived-category",
-  "def-pc-derived-pullback",
-  "def-pc-derived-direct-image",
-  "def-pc-scheme-derived-tensor-structure"
+  "lem-pc-open-restriction-adjunction-hom-descent",
+  "lem-pc-open-restriction-tensor-counit-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 08EU locality and Tag 08FE restriction comparison",
-  "note": "J2: expansion of the local comparison, separating comparison of arrows from invertibility; explicit inverse-image geometry is constructed by the caller."
+  "place": "Tags 08EU and 08FE",
+  "note": "F2: explicit quasi-coherent restrictions and categorical mate square; coherent adjunction descent and tensor/counit descent are separated."
  },
  "mathlib_searches": [
   {
@@ -158,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J2",
+  "reviewer": "X-77c27",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T111856-L-3053766",
+  "landing": "20261013T142855-L-497118",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean statements and proofs with node records, dependencies, change record and report; all four modules and sole direct importer compile cleanly; axioms are standard, with sorryAx only for the documented tensor-descent dependency."
  }
 }

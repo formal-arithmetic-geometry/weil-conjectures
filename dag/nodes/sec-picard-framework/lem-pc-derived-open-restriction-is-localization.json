@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-derived-open-restriction-is-localization",
+ "kind": "statement",
+ "title": "Derived open restriction is a localization",
+ "statement": "For a scheme $X$ [def-pc-scheme], an open $U$ and independently chosen derived localizations $D(X)$ and $D(U)$ [def-pc-derived-category], let $R:D(X)\\to D(U)$ be exact derived open restriction [def-pc-derived-open-restriction-maps]. Then $R$ is a localization at precisely the morphisms whose images under $R$ are isomorphisms. No compactness, separation, boundedness or quasi-coherence hypothesis is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Tag 08EU locality, expanded using exact extension by zero (Tags 08BT, 08BS and 00A7)."
+ },
+ "proof": [
+  {
+   "text": "Use the exact extension-by-zero/restriction adjunction on module sheaves over U, and compose it with the inverse of the equivalence between modules on the localized site and on the open subscheme. Both resulting functors are exact.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of extension by zero is naturally the identity. Whisker this comparison with the module equivalence to obtain an isomorphism between the composite of the chosen left and right adjoints and the identity.",
+   "uses": [
+    "lem-pc-open-extension-restriction-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the termwise adjunction at quasi-isomorphisms using Mathlib Adjunction.localization and the exact-functor factorization isomorphisms. Exact-functor composition and identity isomorphisms transport the preceding composite isomorphism to the derived categories, even with independent localization universes. Mathlib Adjunction.fullyFaithfulLOfCompIsoId makes the derived left adjoint fully faithful; Adjunction.isLocalization' gives the assertion for derived restriction. Empty opens are included.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-open-extension-restriction-iso",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 08EU locality, expanded using exact extension by zero (Tags 08BT, 08BS and 00A7).",
+  "note": "Expansion of the locality argument into the named categorical step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of sheaves of modules to an open subset is a localization with fully faithful right adjoint",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction of sheaves of modules to an open subset is a localization with fully faithful right adjoint",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.sheafificationAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafification, PresheafOfModules.sheafificationCompToSheaf, AlgebraicGeometry.Scheme.Modules.restrictAdjunction; no scheme-derived coherent descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "(isIso_unit_of_iso|fullyFaithfulLOfCompIsoId|isLocalization)",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "results": "3 hits: Mathlib/CategoryTheory/Monad/Adjunction.lean, Mathlib/CategoryTheory/Monad/Adjunction.lean, Mathlib/CategoryTheory/Monad/Adjunction.lean; no scheme-derived coherent descent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EU locality, expanded using exact extension by zero (Tags 08BT, 08BS and 00A7).",
+   "via": [
+    "lem-pc-derived-projection-mate-open-restriction-comparison",
+    "lem-pc-qcqs-derived-projection-iso-universes",
+    "lem-pc-proper-support-derived-projection-formula",
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenRestrictionLocalization.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedOpenRestriction_isLocalization",
+  "statement": "theorem schemeDerivedOpenRestriction_isLocalization (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :\n    let R := (schemeOpenRestriction X U).mapDerivedCategory\n    R.IsLocalization\n      ((MorphismProperty.isomorphisms (schemeDerivedCategory U.toScheme)).inverseImage R)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-77c27",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T142855-L-497118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-77c27",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T142855-L-497118",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements and proofs with node records, dependencies, change record and report; all four modules and sole direct importer compile cleanly; axioms are standard, with sorryAx only for the documented tensor-descent dependency."
+ }
+}

@@ -11,6 +11,9 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Comma.Arrow
+import Sheaf.AlgebraicGeometry.OpenRestrictionAdjunctionHomDescent
+import Sheaf.AlgebraicGeometry.OpenRestrictionTensorCounitDescent
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Open restriction comparison for derived projection mates
 
@@ -22,8 +25,37 @@ Source: Stacks Project, Tag 08EU, first sentence of the proof, and Tag 08FE.
 
 universe u w
 open CategoryTheory MonoidalCategory
+set_option synthInstance.maxSize 2048
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
 namespace AlgebraicGeometry
 
+attribute [local irreducible] derivedPullback schemeDerivedTensorMonoidal
+  HasDerivedCategory.ofIsGrothendieckAbelian Functor.mapDerivedCategory
+  DerivedCategory.homologyFunctor
+
+private theorem mate_square
+    {C D CO DO : Type*} [Category* C] [Category* D] [Category* CO] [Category* DO]
+    {F : C ⥤ D} {G : D ⥤ C} {FO : CO ⥤ DO} {GO : DO ⥤ CO}
+    {rX : D ⥤ DO} {rY : C ⥤ CO}
+    (p : F ⊣ G) (q : FO ⊣ GO)
+    (alpha : F ⋙ rX ≅ rY ⋙ FO) (beta : G ⋙ rY ≅ rX ⋙ GO)
+    {A : C} {B : D} {N : CO} {E : DO}
+    (v : F.obj A ⟶ B) (vo : FO.obj N ⟶ E)
+    (a : rY.obj A ≅ N) (c : rX.obj B ≅ E)
+    (hHom : rY.map (p.homEquiv A B v) ≫ beta.hom.app B =
+      q.homEquiv (rY.obj A) (rX.obj B) (alpha.inv.app A ≫ rX.map v))
+    (hTensor : alpha.inv.app A ≫ rX.map v ≫ c.hom = FO.map a.hom ≫ vo) :
+    a.hom ≫ q.homEquiv N E vo =
+      rY.map (p.homEquiv A B v) ≫ (beta.app B ≪≫ GO.mapIso c).hom := by
+  symm
+  dsimp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
+  rw [← Category.assoc, hHom, ← q.homEquiv_naturality_right,
+    Category.assoc, hTensor, q.homEquiv_naturality_left]
+
+set_option maxHeartbeats 800000 in
+-- Keep the fixed localizations opaque during comparison of functor types.
 /-- Restriction of a projection mate to a target open is isomorphic, as an
 arrow, to a projection mate for the inverse-image source over that open, using the
 shared small localizations.
@@ -81,6 +113,53 @@ theorem exists_derivedProjectionMate_openRestriction_comparison
           Arrow.mk (q.homEquiv (N.obj ⊗ (schemeDerivedDirectImage g).obj E.obj)
             ((derivedPullback g).obj N.obj ⊗ E.obj)
               (s.hom.app (N.obj, (schemeDerivedDirectImage g).obj E.obj) ≫
-                (𝟙 ((derivedPullback g).obj N.obj) ⊗ₘ q.counit.app E.obj)))) := by sorry
+                (𝟙 ((derivedPullback g).obj N.obj) ⊗ₘ q.counit.app E.obj)))) := by
+  rename_i hX hY
+  subst Z
+  have hg' : g = f ∣_ U := eq_of_heq hg
+  subst g
+  let hXO : HasDerivedCategory.{u}
+      (SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ U).toScheme.toRingedSpace)) :=
+    HasDerivedCategory.ofIsGrothendieckAbelian _
+  let hYO : HasDerivedCategory.{u}
+      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
+    HasDerivedCategory.ofIsGrothendieckAbelian _
+  let rX : schemeDerivedCategory X ⥤ schemeDerivedCategory (f ⁻¹ᵁ U).toScheme :=
+    (schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory
+  let rY : schemeDerivedCategory Y ⥤ schemeDerivedCategory U.toScheme :=
+    (schemeOpenRestriction Y U).mapDerivedCategory
+  have hdesc := @exists_openRestriction_adjunction_hom_descent.{u, w}
+    X Y f U hX hY hXO hYO p
+  rcases hdesc with ⟨q, alpha, beta, hHom⟩
+  have ht := @exists_openRestriction_tensor_counit_descent.{u, w}
+    X Y f U hX hY hXO hYO p t
+  have ht' := ht q alpha beta hHom
+  rcases ht' with ⟨s, rhoY, rhoX, hTensor⟩
+  let N : schemeDerivedQCohCategory U.toScheme := ⟨rY.obj M.obj, by
+    apply (@schemeDerivedQCoh_openRestriction_iff.{u, w, u} Y U hY hYO M.obj).2
+    intro n
+    have := M.property n
+    exact SheafOfModules.isQuasicoherent_over
+      (C := Y.Opens) (J := Opens.grothendieckTopology Y)
+      (R := moduleRings Y.toRingedSpace) _ U⟩
+  let E : schemeDerivedQCohCategory (f ⁻¹ᵁ U).toScheme := ⟨rX.obj L.obj, by
+    apply (@schemeDerivedQCoh_openRestriction_iff.{u, w, u} X (f ⁻¹ᵁ U) hX hXO L.obj).2
+    intro n
+    have := L.property n
+    exact SheafOfModules.isQuasicoherent_over
+      (C := X.Opens) (J := Opens.grothendieckTopology X)
+      (R := moduleRings X.toRingedSpace) _ (f ⁻¹ᵁ U)⟩
+  let a : rY.obj (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj) ≅
+      N.obj ⊗ (schemeDerivedDirectImage (f ∣_ U)).obj E.obj :=
+    rhoY.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≪≫
+      tensorIso (Iso.refl _) (beta.app L.obj)
+  let c : rX.obj ((derivedPullback f).obj M.obj ⊗ L.obj) ≅
+      (derivedPullback (f ∣_ U)).obj N.obj ⊗ E.obj :=
+    rhoX.app ((derivedPullback f).obj M.obj, L.obj) ≪≫
+      tensorIso (alpha.app M.obj) (Iso.refl _)
+  let b := beta.app ((derivedPullback f).obj M.obj ⊗ L.obj) ≪≫
+    (schemeDerivedDirectImage (f ∣_ U)).mapIso c
+  refine ⟨q, s, N, E, ⟨Arrow.isoMk a b ?_⟩⟩
+  exact mate_square p q alpha beta _ _ a c (hHom _ _ _) (hTensor M.obj L.obj)
 
 end AlgebraicGeometry
