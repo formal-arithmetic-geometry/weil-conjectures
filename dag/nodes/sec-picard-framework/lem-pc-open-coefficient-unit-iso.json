@@ -12,14 +12,14 @@
  ],
  "proof": [
   {
-   "text": "Use Topology.IsOpenEmbedding.sheafPullbackIso to identify abelian inverse image with restriction on opens. Use Scheme.Modules.restrictFunctorIsoPullback to identify module restriction with module pullback. The underlying abelian sheaf of the explicit module restriction is the explicit abelian restriction, since j.appIso is invertible.",
+   "text": "Lift the image/preimage adjunction on opens to abelian sheaves with Adjunction.sheafPushforwardContinuous. Its left adjoint is naive restriction, definitionally the underlying abelian sheaf of module restriction. Its unit is definitionally the image under toSheaf of the module restriction unit (check each open). Compare this left adjoint with invImage using Adjunction.leftAdjointUniq; the comparison is an isomorphism.",
    "uses": [
     "def-pc-flat-cohomology-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The module unit is the restriction unit followed by restrictFunctorIsoPullback (pullbackUnit_eq_of_isOpenImmersion in the source library). Take abelian adjuncts. The restriction unit is adjunct to the identity of restriction; hence the coefficient map is exactly the composite of the two isomorphisms from the first step. Therefore it is invertible, also on empty schemes and for zero modules.",
+   "text": "Apply the abelian adjunction hom equivalence to the coefficient unit and to the composite of the leftAdjointUniq comparison with the forgotten restrictFunctorIsoPullback comparison. Naturality on the right and homEquiv_leftAdjointUniq_hom_app identify the latter adjunct with the forgotten restriction unit followed by the forgotten pushforward comparison. The equality pullbackUnit_eq_of_isOpenImmersion identifies it with the forgotten module pullback unit, which is the adjunct of coefficientUnit by definition. Injectivity gives equality of the coefficient unit with a composite of two isomorphisms; infer its IsIso instance.",
    "uses": [
     "def-pc-flat-cohomology-comparison"
    ],
@@ -32,7 +32,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/04J0",
-  "place": "Lemma 18.20.1, lemma-localize-morphism-ringed-sites, final parenthetical: inverse image and module pullback agree for localization morphisms; open-subscheme specialization."
+  "place": "Localization equality in the final parenthetical; Lean realization by K1 using Adjunction.sheafPushforwardContinuous and leftAdjointUniq, and the existing module restriction unit comparison."
  },
  "mathlib_searches": [
   {
@@ -112,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b6229",
-  "group": "X3",
+  "reviewer": "COMPILER",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T011938-L-2767011",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the delivery with its DAG statements and proof dependencies; existing signatures and definition are unchanged. All three modules and direct importer MayerVietorisOpenRestrictionBijective compile cleanly; axioms match the two documented deferred obligations."
+  "landing": "20261013T045536-L-130600",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
