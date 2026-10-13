@@ -2251,6 +2251,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjection
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.CoefficientChange
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.CoefficientChangeTrace
