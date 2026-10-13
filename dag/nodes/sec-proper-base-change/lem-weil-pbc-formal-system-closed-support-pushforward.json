@@ -18,36 +18,58 @@
  },
  "proof": [
   {
-   "text": "Identify Y with the open range U of j via j.isoOpensRange, and transport each module and transition through this isomorphism. The closed subset T lies in U. Apply coherent pushforward on an open to each coherent F_n; its direct image is coherent on X and zero on X minus T. Direct-image composition identifies this with the actual j_*F_n.",
+   "text": "For each term F_n factor j as its isomorphism onto U = j.opensRange followed by U.ι. Finite coherent pushforward applies to the isomorphism. Transport the closed support hypothesis through that isomorphism using pushforward_support_subset_of_closed_support and the closed preimage of T. Apply pushforward_coherent_on_open on U and transport coherence along pushforwardComp and pushforwardCongr. The coherence criterion gives quasi-coherence of every actual j_*F_n.",
    "uses": [
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "new-closed-support-pushforward-support",
     "lem-weil-pbc-pushforward-coherent-on-open",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let L be tensorPullback j, R be pushforward j, and adj an adjunction L ⊣ R. Since R is fully faithful for an open immersion, its counit at F_n is an isomorphism. Transport the given zero ideal-power product to L(R(F_n)) through this counit, using the existing product-zero-under-monomorphism calculation of CoherentFormalModule. modulePullbackIdealPowerProductImage then says the image of the pulled-back ambient product inclusion is zero. Hence that pulled-back inclusion is zero. The adjunction hom equivalence detects that the original inclusion into R(F_n) is zero; its monicity proves the ambient product object is zero.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-module-pullback-ideal-power-product-image",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove directly that the restriction adjunction unit of any X-module supported in T is an isomorphism. On U, restrict further along j.isoOpensRange.inv and use the adjunction triangle with its invertible counit. On T.compl, both the source and the restriction-then-pushforward target have zero sections: sheaf section extensionality and the support hypothesis give zero stalks at every relevant point. The two opens cover X. Transfer restriction isomorphisms through overFunctorEquiv and apply sheaf_module_isIso_iff_isIso_over_open_cover. This whole local argument is proved as a private helper, with no additional hole.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For G = R(F_n) and Q = G/K^mG, the stalk quotient projection is surjective by module_stalk_exact. Thus support(Q) is contained in support(G), hence in T by pushforward_support_subset_of_closed_support. Step 3 makes the restriction unit at Q invertible; uniqueness of left adjoints transports this to the tensor-pullback unit. Reuse the proved private powerQuotientIso and its projection equation from FormalSystemsPullback: L(Q) is the quotient of L(G) by the extended ideal power. Apply the fixed-exponent quotient functor to the invertible counit L(G) ≅ F_n. Composing the unit at Q with the direct image of these two quotient isomorphisms gives Q ≅ R(F_n/(K.comap j)^mF_n). Naturality of the unit, powerQuotientIso_π, quotientMap_π, and the right adjunction triangle prove the equation with the quotient projection. No arbitrary existence witness or new unproved statement enters this construction.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "new-closed-support-pushforward-support",
+    "lem-weil-pbc-formal-systems-pullback",
+    "def-weil-pbc-coherent-formal-module",
     "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "On U the natural restriction/direct-image counit identifies the direct-image system with F, and identifies the restricted ideal with K.comap j. Restriction preserves cokernels and ideal-power multiplication images, so the given annihilation and quotient-transition identities hold there. On X minus T the system is zero, hence so are its ideal-power products and quotient objects.",
+   "text": "For each n apply step 4 with m = n+1 and the term F_(n+1), then compose the resulting isomorphism with R.mapIso of the given formal-system quotient-to-F_n isomorphism. The projection equation of step 4, functoriality of R, and the given transition equation identify its composite with the actual pushed-forward transition map. Together with steps 1 and 2 this constructs the three conjuncts of IsCoherentFormalModule K (F ⋙ pushforward j) with the original statement unchanged.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-module-pullback-ideal-power-product-image",
     "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": false
-  },
-  {
-   "text": "U and X minus T cover X. The multiplication images are zero on both opens and therefore globally. By multiplication naturality, each transition kills the indicated ideal-power multiplication image since its target is annihilated. Factor it through the cokernel projection. The factor is an isomorphism on U by the given quotient-transition condition and on X minus T between zero objects. It is an isomorphism globally by the sheaf-module open-cover isomorphism criterion. The factor equations with the quotient projections hold by the cokernel construction. Together with coherence these give precisely IsCoherentFormalModule K of the direct-image system.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "R3 worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Details of the sentence that the extended system is an object of Coh in Theorem 088E, following Lemma 0CYJ; read at https://stacks.math.columbia.edu/tag/088E and https://stacks.math.columbia.edu/tag/0CYJ"
+  "place": "Theorem 088E, closed-support direct-image paragraph, using Lemma 0CYJ. Complete Lean proof via the supported restriction unit and the existing proved pullback quotient comparison; all private helpers proved, no new nodes or holes."
  },
  "mathlib_searches": [
   {
@@ -114,13 +136,19 @@
   }
  },
  "proof_deps": [
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "new-closed-support-pushforward-support",
   "lem-weil-pbc-pushforward-coherent-on-open",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "pqf-lem-coherent-ft-locnoeth",
   "def-pc-module-pullback",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-module-pullback-ideal-power-product-image",
   "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-module-pullback-ideal-power-product-image",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-formal-systems-pullback"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -136,10 +164,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T024038-L-3335713",
-  "kind": "interface",
+  "landing": "20261013T072404-L-1124467",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
