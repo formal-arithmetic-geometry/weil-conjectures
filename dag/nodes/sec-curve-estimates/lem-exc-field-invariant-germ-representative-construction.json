@@ -16,31 +16,49 @@
  ],
  "proof": [
   {
-   "text": "Joint surjectivity of the stalk injections gives a section representing the germ in a pointed etale neighbourhood. Its component containing the point is the spectrum of a finite separable field P/K, by the etale fibre theorem over K. Restrict the section to this component.",
+   "text": "Represent the germ m by (X,x,z) using Point.toPresheafFiber_jointly_surjective. Factor x through the spectrum of the residue field at its image t with SpecToEquivOfField and descResidueField_stalkClosedPointTo_fromSpecResidueField. The source theorem Scheme.Hom.etale_residueFieldMap makes the extension over the residue field of Spec K finite separable. The canonical residue-field spectrum of the unique point of Spec K is isomorphic to Spec K: it is a surjective closed immersion into a reduced scheme. Thus the composite Spec κ(t) → X → Spec K is etale and κ(t)/K is finite separable. Spec full faithfulness and the triangle x over s show that the embedding κ(t) → Ω is K-linear.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-sc-etale-residue-field-map-etale-tool"
    ],
    "elementary": false
   },
   {
-   "text": "Factor the embedding of P into Omega through Ks, since separable elements lie in the embedded separable closure. Adjoin the conjugates of finite K-bases of P and L in Ks to obtain a finite Galois intermediate field E containing both. Pull back the section from Spec P to Spec E; the canonical inclusions specify the lift and naturality preserves its germ.",
+   "text": "Factor the embedding of κ(t) into Ω through Ks. The extension Ω/Ks is algebraic and Ks is separably closed. Elementwise, each finite extension Ks(a) inside Ω is purely inseparable, so an element a separable over Ks belongs to Ks. Apply this to the image of each element of κ(t), which is separable over K and hence over Ks. Lean uses the general Mathlib instance Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed and IsPurelyInseparable.inseparable, followed by IsSeparable.tower_top. Choose the preimages; injectivity of Ks → Ω proves they preserve zero, one, sums, products and K-scalars. The image field P of this embedding is finite over K by its algebra equivalence with κ(t). This gives a pointed etale-site morphism Spec P → X.",
    "uses": [
-    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
-    "def-weil-pbc-geometric-stalks"
+    "def-kun-separably-closed",
+    "lem-kun-sep-closed-finite-extension-purely-inseparable"
    ],
    "elementary": false
+  },
+  {
+   "text": "Form the finite compositum P ⊔ L in Ks and its normal closure E over K inside Ks. Mathlib IntermediateField.finiteDimensional_sup, normalClosure.is_finiteDimensional, IsGalois.normalClosure and IntermediateField.le_normalClosure construct a finite Galois intermediate field containing both P and L. This is the normal-closure construction underlying the finite-set-in-finite-Galois-subextension node (Stacks 09DT and 0EXM), applied to generators of the finite compositum, without explicitly choosing bases.",
+   "uses": [
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let y be the canonical lift induced by E → Ks → Ω and pull z back along Spec E → Spec P → X. Spec.map_comp and composition of the inclusions show that the induced lift on X equals x. Apply Point.toPresheafFiber_w_apply to the pullback section, then rewrite by this equality of lifts. Its germ is m, giving the conclusion with the original statement unchanged.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-sc-etale-residue-field-map-etale-tool",
+  "def-kun-separably-closed",
+  "lem-kun-sep-closed-finite-extension-purely-inseparable",
   "lem-weil-pbc-finite-set-in-finite-galois-subextension"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JM, direct proof, specialized to the canonical lifts over L; second-reader formal reduction G3"
+  "place": "Tag 04JM direct proof, finite separable then finite Galois neighbourhood steps; 02G8(1) residue-field shortcut; 09DT and 0EXM normal closure. Fully checked Lean proof by Q1, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -139,13 +157,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T230756-L-1908434",
-  "kind": "interface",
+  "landing": "20261013T004336-L-2509762",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
