@@ -12381,3 +12381,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:12 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ResidueRankModelDifferential (stage 3; reviewer PASS; first push; landing 20261013T121225-L-3507132 (interface); batch 20261013T121219; modules 2; new nodes 1)
 - 12:15 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ResolutionUnitTwistComparison (stage 3; reviewer PASS; first push; landing 20261013T121508-L-3528888 (interface); batch 20261013T121507; modules 3; new nodes 2)
 - 12:15 L: merged deliver/C1/Sheaf.AlgebraicGeometry.PicardTensorSquareConjugacy (stage 3; reviewer PASS; first push; landing 20261013T121509-L-3529036 (proof); batch 20261013T121507; modules 1; new nodes 0)
+- 12:15 L: merged deliver/D2/Sheaf.RingTheory.PowerSeriesResidueMonomialBasis (stage 3; reviewer PASS; first push; landing 20261013T121509-L-3529159 (proof); batch 20261013T121507; modules 1; new nodes 0)

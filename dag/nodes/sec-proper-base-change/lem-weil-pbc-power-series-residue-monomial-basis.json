@@ -15,15 +15,15 @@
  ],
  "proof": [
   {
-   "text": "For every series exponent a and polynomial exponent g divide all coordinates by the positive integer p to get a=p*A+e and g=p*G+h with residues below p. Expand the coefficient at (a,g) uniquely in the supplied K-basis b. For each triple (q,e,h) form a column whose coefficient at (p*A,p*G) is the q coordinate of the coefficient at (p*A+e,p*G+h), and is zero at all other exponents.",
+   "text": "Split each finite-variable exponent coordinatewise into a p-divisible exponent and a residue below p, using quotient and remainder. For a power series phi and an index (q,e), construct the column as the actual coefficient function whose value at a p-divisible exponent a is the q coordinate under b.repr of coeff(a+e,phi), embedded from K into k, and whose other coefficients are zero. These columns have coefficients in K and p-divisible support. Comparing coefficients using monomial multiplication and basis reconstruction proves that phi is the finite sum of the columns times the coefficient-residue monomials.",
    "uses": [
-    "def-weil-pbc-multivariate-power-series",
-    "def-weil-pbc-free-module"
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-multivariate-power-series"
    ],
    "elementary": false
   },
   {
-   "text": "The column has coefficients in K and exponents divisible by p, so lies in S by hS. It is a polynomial: its possible polynomial exponents G are quotients of the finitely many polynomial exponents of the original element. Since Q and both residue sets are finite, only finitely many columns are needed. Multiplication by the displayed residue monomials shifts each column back to its original exponents; coefficientwise comparison proves spanning.",
+   "text": "For each monomial y^g phi in the finite polynomial support, split g=d+h with d divisible by p and h a residue vector. Apply the series decomposition to phi. Each monomial y^d times a series column belongs to S by hS; multiplying it by the displayed residue monomial with index (q,e,h) gives the corresponding term of y^g phi. Every polynomial monomial therefore lies in the S-span, and the finite polynomial support decomposition proves spanning. This avoids constructing a polynomial column by regrouping all polynomial exponents.",
    "uses": [
     "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-multivariate-power-series"
@@ -31,7 +31,7 @@
    "elementary": false
   },
   {
-   "text": "In a finite relation of these monomials over S, compare the coefficient at (p*A+e,p*G+h). Divisibility of the column supports selects exactly the terms with residues (e,h). The resulting relation in b has coefficients in K, so every coordinate is zero. Varying all exponents and using hS proves each column is zero. Thus the monomials are independent and spanning, yielding a basis with the displayed values.",
+   "text": "For a finite S-linear combination of the residue monomials, compare its coefficient at (a+e,g+h), where a and g are divisible by p. The monomial coefficient formulas and support divisibility force any contributing summand to have residues exactly (e,h): reducing the exponent equation modulo p and using bounds below p proves this. Its coefficient is the scalar column coefficient times b(q). Applying b.repr and taking the q coordinate recovers precisely that scalar column coefficient. In a zero relation this is zero at every divisible exponent; hS makes every other coefficient zero. Extensionality of power series, polynomials, subring elements, and finitely supported functions proves linear independence. Apply Module.Basis.mk to independence and spanning; Module.Basis.mk_apply gives the required displayed basis values.",
    "uses": [
     "def-weil-pbc-free-module",
     "def-weil-pbc-mv-polynomial-ring",
@@ -48,7 +48,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07P5 proof"
+  "place": "Tag 07P5 finiteness argument, expanded by D2 into coefficientwise series decomposition, finite polynomial support spanning, and residue coefficient recovery"
  },
  "mathlib_searches": [
   {
@@ -126,10 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T111853-L-3052825",
-  "kind": "interface",
+  "landing": "20261013T121509-L-3529159",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
