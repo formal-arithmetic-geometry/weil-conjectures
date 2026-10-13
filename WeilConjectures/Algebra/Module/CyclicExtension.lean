@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Ideal.Operations
 public import Mathlib.LinearAlgebra.Quotient.Basic
 public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
-public import Mathlib.Algebra.Exact
+public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # Extensions of `A ⧸ (f₁, …, fₜ)` by explicit Koszul cycles
@@ -87,7 +87,7 @@ theorem isAdmissible_iff {x : Fin t → P} :
   · intro h
     have hx : x ∈ koszulCycles f P := fun i j => by
       have := h (f i • Pi.single j 1 - f j • Pi.single i 1) (by
-        simp [sub_mul, Finset.sum_sub_distrib, Pi.single_apply, mul_comm])
+        simp [Pi.single_apply, mul_sub, Finset.sum_sub_distrib, mul_comm])
       simpa [sub_smul, Finset.sum_sub_distrib, Pi.single_apply, smul_smul, sub_eq_zero,
         mul_comm] using this
     refine ⟨hx, fun m hm => ?_⟩
@@ -123,7 +123,8 @@ noncomputable def Extension.proj (x : Fin t → P) :
   (extensionRelations f x).liftQ ((Ideal.span (Set.range f)).mkQ ∘ₗ LinearMap.snd A P A) (by
     rw [extensionRelations, span_le, Set.range_subset_iff]
     intro i
-    simpa using Ideal.subset_span ⟨i, rfl⟩)
+    have hi : f i ∈ Ideal.span (Set.range f) := Ideal.subset_span ⟨i, rfl⟩
+    simpa using hi)
 
 @[simp]
 theorem Extension.inl_apply (x : Fin t → P) (p : P) :
@@ -150,6 +151,7 @@ theorem Extension.exact_of_isAdmissible {x : Fin t → P} (hx : IsAdmissible f x
     intro p hp
     rw [inl_apply, Submodule.Quotient.mk_eq_zero, mem_extensionRelations_iff] at hp
     obtain ⟨b, hb₁, hb₂⟩ := hp
+    simp only at hb₁ hb₂
     rw [← hb₁]
     exact isAdmissible_iff.mp hx b (neg_eq_zero.mp hb₂)
   · intro y
@@ -165,7 +167,7 @@ theorem Extension.exact_of_isAdmissible {x : Fin t → P} (hx : IsAdmissible f x
       · rintro ⟨q, hq⟩
         rw [inl_apply, Submodule.Quotient.eq, mem_extensionRelations_iff] at hq
         obtain ⟨b, -, hb⟩ := hq
-        exact ⟨-b, by simpa [Finset.sum_neg_distrib, neg_mul] using hb⟩
+        exact ⟨b, by simpa using hb⟩
   · intro z
     induction z using Submodule.Quotient.induction_on with
     | H a => exact ⟨Submodule.Quotient.mk (0, a), rfl⟩
