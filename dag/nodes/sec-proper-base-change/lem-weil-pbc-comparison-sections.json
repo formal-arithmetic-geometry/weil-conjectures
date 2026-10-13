@@ -3,43 +3,61 @@
  "blueprint": {
   "is": "lem-weil-pbc-comparison-sections",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sections of the comparison inverse image",
- "statement": "Let $X$ be affine, let $F$ be an etale module sheaf, and write a basis object\nas $U=\\varprojlim_i U_i$ with $U_i/X$ affine etale of finite presentation.\nThen naturally\n\n$$\n (\\nu_X^*F)(U)=\\Gamma(U_{\\Et},F|_U)\n             =\\varinjlim_i F(U_i).\n$$\n\nThe restriction $F|_U$ is the scheme inverse image. The same section formula\nholds for sheaves of sets.",
+ "statement": "Let $X$ be affine, let $F$ be an etale module sheaf, and write a basis object\nas $U=\\varprojlim_i U_i$ with $U_i/X$ affine etale of finite presentation.\nThen naturally\n\n$$\n (\nu_X^*F)(U)=\\Gamma(U_{\\Et},F|_U)\n             =\\varinjlim_i F(U_i).\n$$\n\nThe restriction $F|_U$ is the scheme inverse image. The same section formula\nholds for sheaves of sets.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-sections.md",
   "place": "node lem-weil-pbc-comparison-sections, order 1283"
  },
  "stmt_deps": [
   "def-weil-pbc-ind-etale-basis",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-sheaf-of-sets"
  ],
  "proof": [
   {
-   "text": "Define $P_F(U)=\\Gamma(U_{\\Et},F|_U)$ on the basis. The second equality in the\nstatement is the continuity of sections at an inverse limit; restriction of\nan etale sheaf to an etale object is evaluation on its slice. We verify that\n$P_F$ is already a sheaf for the finer topology. Let $\\{V_a\\to U\\}$ be a\nfinite basis covering. By the stability lemma for ind-etale algebras write\n$V_a=\\varprojlim_\\lambda V_{a,\\lambda}$, with each $V_{a,\\lambda}\\to U$\naffine etale of finite presentation. Every finite choice of stages still\ncovers $U$, because its images contain the images of the covering $V_a$'s.\nThe fibre products in each degree of [def-weil-pbc-cover-cech] commute with\nthese inverse limits. Section continuity, applied on these fibre products to\n$F|_U$, therefore writes their section groups as the filtered colimit of the\nfinite-stage section groups. Finite products and kernels commute with\nfiltered colimits of modules. The etale sheaf equalizer at each finite stage\nconsequently proves the covering equalizer for $P_F$. By\n[lem-weil-pbc-ind-etale-basis], it extends to the full site.",
+   "text": "Define $P_F(U)=\\Gamma(U_{\\Et},F|_U)$, with restrictions induced by scheme inverse image. Choose a stage $i_0$ of the given presentation and pass to its cofinal upper tail. Apply [lem-weil-pbc-etale-section-continuity] with schemes $U_i$, initial sheaf $F|_{U_{i_0}}$, and terminal etale object $W_{i_0}=U_{i_0}$. All schemes are affine, hence qcqs, and their transitions are affine. By [lem-weil-pbc-etale-inverse-image-restriction], the stage sections are $F(U_i)$, and the units give precisely the restriction transition maps. Thus $P_F(U)=\\varinjlim_i F(U_i)$ naturally in $F$. For sets use [lem-weil-pbc-sets-etale-section-continuity] and [lem-weil-pbc-sets-etale-inverse-image-restriction] with the identical choices.\n\nWe check the sheaf condition on the basis. By [lem-weil-pbc-ind-etale-basis] it suffices to check finite basis coverings $\\{V_a\\to U\\}_{a=1}^m$. Every $V_a\\to U$ is ind-etale by the assertion about maps between ind-etale algebras in [lem-weil-pbc-ind-etale-stability]. The definition [def-weil-pbc-ind-etale-algebra] gives $V_a=\\varprojlim_\\lambda V_{a,\\lambda}$ with $V_{a,\\lambda}\\to U$ affine etale of finite presentation. The product of the finitely many filtered stage index categories is filtered. At every tuple of stages the family $\\{V_{a,\\lambda_a}\\to U\\}_a$ covers $U$: a point of $U$ lifts to some $V_a$ and hence to that stage $V_{a,\\lambda_a}$. For each pair $(a,b)$, its fibre products have limit $V_a\\times_U V_b$, by the universal property of the fibre product and limit. They and all stages are affine. Apply the same section-continuity lemmas to $F|_U$ on each of these systems. The sheaf equalizer at each stage has left term $\\Gamma(U_{\\Et},F|_U)$, middle term $\\prod_a\\Gamma((V_{a,\\lambda_a})_{\\Et},F|_{V_{a,\\lambda_a}})$ and right term the product over $(a,b)$ of the sections on the fibre products, as in [def-weil-pbc-cover-cech].\n\nHere is the finite-limit calculation on underlying sets. Finitely many representatives can be moved to one common stage. If their images under the two arrows agree in the colimit, finitely many equalities hold at a common later stage; the stage sheaf equalizer then supplies a unique section over $U$. If two such sections become equal on every $V_a$, these finitely many equalities also hold at a common stage, where separatedness makes the sections equal. This proves the required equalizer, both for sets and modules (the bijection respects the sectionwise module operations). The empty cover can only cover empty $U$, where the sheaf section set is a singleton and the module is zero. The basis lemma now extends this basis sheaf uniquely to the full pro-etale site.",
    "uses": [
     "def-weil-pbc-cover-cech",
-    "lem-weil-pbc-ind-etale-basis"
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-etale-section-continuity",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-ind-etale-stability"
    ],
    "elementary": false
   },
   {
-   "text": "We identify it with the inverse image by its adjunction, so no comparison of\nderived categories is being assumed here. Given $F\\to\\nu_{X,*}G$, each\npresentation gives compatible maps $F(U_i)\\to G(U_i)\\to G(U)$, hence\n$P_F(U)\\to G(U)$. These maps are natural on the basis: a map from a limit to\na finite-presentation affine object factors through a stage, and equalities\nof factorizations hold later, by the descent of finite-presentation data at\nan inverse limit. Conversely a map $P_F\\to G$ restricts to $F\\to\\nu_{X,*}G$,\nsince $P_F(U_i)=F(U_i)$ on etale objects. These constructions are inverse, as\nevery section of $P_F(U)$ is represented at a stage. They give precisely the\nadjunction of [def-weil-pbc-site-comparison-morphism], proving the formula.\nThe sheaf and adjunction arguments use only finite products, equalizers, and\nfiltered colimits, and hence apply to sets too.",
+   "text": "Identify this sheaf with $\nu_X^*F$ by its adjunction [def-weil-pbc-site-comparison-morphism]. Given $\\alpha:F\\to\nu_{X,*}G$, each presentation gives compatible maps $F(U_i)\\xrightarrow{\\alpha_{U_i}}G(U_i)\\to G(U)$ and hence $P_F(U)\\to G(U)$.\n\nFor completeness the naturality and independence of presentations require the following finite-stage argument. Write $X=\\operatorname{Spec}A$ and $U=\\operatorname{Spec}(\\varinjlim_i B_i)$. For an affine finite-presentation $X$-scheme $T=\\operatorname{Spec}C$, a map $U\\to T$ corresponds to $C\\to\\varinjlim_i B_i$. It factors through a $B_i$ by [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit]. Two factorizations with the same limit map agree at a later stage: move their finitely many algebra generators to a common stage, then move to a further stage where their images agree; agreement on generators implies agreement on the entire algebra. Thus for $h:U\\to V$ and a stage $V_j$ of a presentation of $V$, $U\\to V\\to V_j$ factors as $U\\to U_i\\to V_j$. A section $t\\in F(V_j)$ consequently restricts to the representative $t|_{U_i}$ of its image in $P_F(U)$. Naturality of $\\alpha$ and restriction in $G$ makes the resulting square commute. Eventual equality makes this independent of the factorization, and applying the construction to the identity map between two presentations proves independence of the presentation. This also checks the identity and composition laws for the colimit description of $P_F$.\n\nConversely a morphism $\\beta:P_F\\to G$ restricts to $F\\to\nu_{X,*}G$ on affine etale finite-presentation objects, where the restriction lemmas of step 1 identify $P_F(T)=F(T)$. By [lem-weil-pbc-affine-etale-site-topos] these affine objects determine sheaves and their morphisms on the etale site. Since $X$ is affine, an affine etale $X$-scheme is of finite presentation: its morphism is affine (hence quasi-compact and quasi-separated) and etale (hence locally of finite presentation). Thus the morphism extends uniquely to that site. Starting with $\\alpha$, the constant presentation of $T$ recovers $\\alpha_T$. Starting with $\\beta$, every section on a basis $U$ comes from a stage $U_i$, and naturality of $\\beta$ along $U\\to U_i$ recovers its original value on that representative. The constructions are therefore inverse, naturally in $F$ and $G$. Uniqueness of the left adjoint identifies $P_F$ with $\nu_X^*F$. This proves both equalities; for sets the same adjunction argument uses the set-valued continuity already established in step 1.",
    "uses": [
-    "def-weil-pbc-site-comparison-morphism"
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-affine-etale-site-topos"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-cover-cech",
-  "lem-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-weil-pbc-etale-inverse-image-restriction",
   "lem-weil-pbc-etale-section-continuity",
-  "lem-weil-pbc-ind-etale-stability"
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-sets-etale-section-continuity",
+  "lem-weil-pbc-affine-etale-site-topos"
  ],
  "proof_origin": {
   "by": "agent",
@@ -48,7 +66,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -84,5 +102,59 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-comparison-sections",
+  "worker": "stage1",
+  "summary": "Second reader repaired the sets-continuity and finite-stage citations, expanded the finite equalizer calculation and adjunction naturality, and retained the blueprint two-paragraph route. No new nodes.",
+  "blueprint": "The two steps realize the two paragraphs of the blueprint proof: finite-stage Cech sheaf verification and identification with the comparison inverse image by adjunction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-section-continuity",
+    "why": "Generic etale inverse-image restriction or continuity theorem used as a black box; this supplies the set-valued or abelian section input required by the same blueprint argument."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-section-continuity",
+    "why": "Generic etale inverse-image restriction or continuity theorem used as a black box; this supplies the set-valued or abelian section input required by the same blueprint argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic etale inverse-image restriction or continuity theorem used as a black box; this supplies the set-valued or abelian section input required by the same blueprint argument."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "why": "Generic etale inverse-image restriction or continuity theorem used as a black box; this supplies the set-valued or abelian section input required by the same blueprint argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic etale inverse-image restriction or continuity theorem used as a black box; this supplies the set-valued or abelian section input required by the same blueprint argument."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "why": "Generic etale inverse-image restriction or continuity theorem used as a black box; this supplies the set-valued or abelian section input required by the same blueprint argument."
+   },
+   {
+    "node": "lem-weil-pbc-affine-etale-site-topos",
+    "why": "Generic affine etale basis equivalence used to extend the adjunction morphism from affine etale objects; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-weil-pbc-sets-etale-section-continuity",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-affine-etale-site-topos"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-0fe8c6d36",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-0fe8c6d36 (reviewer sub-agent of L); spot-checked: Reviewed item, both proof steps, all cited nodes and source locations, coefficient categories, base-change adjunction, DAG route, and edge cases. No defects found; review.md written."
+ }
 }
