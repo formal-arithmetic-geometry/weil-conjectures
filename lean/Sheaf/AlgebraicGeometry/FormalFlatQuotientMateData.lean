@@ -11,9 +11,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
-import Sheaf.AlgebraicGeometry.FormalSystemsPullback
-import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
-import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
+import Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized
+import Sheaf.AlgebraicGeometry.OrdinaryFlatExchangePrescribedAdjunction
+import Sheaf.AlgebraicGeometry.FormalSystemExchangeMateCompatibility
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Ordinary flat quotient comparisons and adjunction mates
 
@@ -25,6 +27,24 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
+
+private theorem exchange_projection
+    {C D E A : Type*} [Category C] [Category D] [Category E] [Category A]
+    (P : C ⥤ D) (T : D ⥤ E) (U : C ⥤ A) (Q : A ⥤ E)
+    (B : P ⋙ T ⟶ U ⋙ Q) {M N : C} {M₀ N₀ : A}
+    (hM : M₀ = U.obj M) (π : M ⟶ N) (π₀ : M₀ ⟶ N₀)
+    (e : U.obj N ≅ N₀) [IsIso (B.app M)]
+    (he : U.map π ≫ e.hom = eqToHom hM.symm ≫ π₀) :
+    (Q.map (eqToHom hM) ≫ inv (B.app M)) ≫ T.map (P.map π) ≫
+      (B.app N ≫ Q.map e.hom) = Q.map π₀ := by
+  have hn := B.naturality π
+  dsimp only [Functor.comp_map] at hn
+  simp only [Category.assoc]
+  rw [← Category.assoc (T.map (P.map π)) (B.app N), hn]
+  simp only [Category.assoc, IsIso.inv_hom_id_assoc]
+  rw [← Q.map_comp, he, Q.map_comp]
+  rw [← Category.assoc, ← Q.map_comp]
+  simp
 
 /-- Flat base change transports an algebraization isomorphism and its adjunction mate,
 and its termwise comparison respects the quotient projections before completion of
@@ -78,6 +98,66 @@ theorem formal_flat_quotient_mate_data
             (adj.unit.app (G.obj.obj (op n)) ≫
               (Scheme.Modules.pushforward f).map (β.hom.app (op n))) ≫ t.app (op n) =
         adjR.unit.app (G₀.obj.obj (op n)) ≫
-          (Scheme.Modules.pushforward p).map (β₀.hom.app (op n))) := by sorry
+          (Scheme.Modules.pushforward p).map (β₀.hom.app (op n))) := by
+  classical
+  subst I
+  let : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+  let adjR := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))
+  let c : Scheme.Modules.tensorPullback g ⋙ Scheme.Modules.tensorPullback (pullback.snd f g) ≅
+      Scheme.Modules.tensorPullback f ⋙ Scheme.Modules.tensorPullback (pullback.fst f g) :=
+    (conjugateIsoEquiv
+      (adj.comp (Classical.choose
+        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.fst f g))))
+      ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp adjR)).symm
+        (Scheme.Modules.pushforwardComp (pullback.fst f g) f ≪≫
+          Scheme.Modules.pushforwardCongr pullback.condition ≪≫
+          (Scheme.Modules.pushforwardComp (pullback.snd f g) g).symm)
+  let B : Scheme.Modules.pushforward f ⋙ Scheme.Modules.tensorPullback g ⟶
+      Scheme.Modules.tensorPullback (pullback.fst f g) ⋙
+        Scheme.Modules.pushforward (pullback.snd f g) :=
+    { app := fun M ↦ Scheme.Modules.moduleBaseChangeMap f (pullback.snd f g) g
+        (pullback.fst f g) pullback.condition M
+      naturality := fun _ _ a ↦
+        Scheme.Modules.moduleBaseChangeMap_naturality f (pullback.snd f g) g
+          (pullback.fst f g) pullback.condition a }
+  have hB (M : X.Modules) (hM : M.IsQuasicoherent) : IsIso (B.app M) :=
+    (ordinary_flat_exchange_prescribed_adjunction f g adj).1 M hM
+  have hmate (N : Y.Modules) :
+      (Scheme.Modules.tensorPullback g).map (adj.unit.app N) ≫
+        B.app ((Scheme.Modules.tensorPullback f).obj N) =
+      adjR.unit.app ((Scheme.Modules.tensorPullback g).obj N) ≫
+        (Scheme.Modules.pushforward (pullback.snd f g)).map (c.hom.app N) :=
+    (ordinary_flat_exchange_prescribed_adjunction f g adj).2 N
+  have hJ : (J.comap f).comap (pullback.fst f g) = (J.comap g).comap (pullback.snd f g) := by
+    rw [← Scheme.IdealSheafData.comap_comp, ← Scheme.IdealSheafData.comap_comp]
+    exact congrArg J.comap pullback.condition
+  obtain ⟨e, he⟩ := exists_formalCompletionPullback_normalized
+    (pullback.fst f g) (J.comap f) F ((J.comap g).comap (pullback.snd f g)) hJ F₀.obj hF
+  obtain ⟨β₀, t, ht, hunit⟩ := formal_system_exchange_mate_compatibility
+    (Scheme.Modules.tensorPullback f) (Scheme.Modules.pushforward f)
+    (Scheme.Modules.tensorPullback g) (Scheme.Modules.tensorPullback (pullback.fst f g))
+    (Scheme.Modules.tensorPullback (pullback.snd f g))
+    (Scheme.Modules.pushforward (pullback.snd f g)) adj adjR c B hmate
+    G.obj G₀.obj hG (formalCompletionSystem (J.comap f) F.obj)
+    (formalCompletionSystem ((J.comap g).comap (pullback.snd f g)) F₀.obj) β e
+  have hFqc : F.obj.IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType _ _).mp F.property).1
+  let : IsIso (B.app F.obj) := hB F.obj hFqc
+  let b : (Scheme.Modules.pushforward (pullback.snd f g)).obj F₀.obj ≅
+      (Scheme.Modules.tensorPullback g).obj ((Scheme.Modules.pushforward f).obj F.obj) :=
+    (Scheme.Modules.pushforward (pullback.snd f g)).mapIso (eqToIso hF) ≪≫
+      (asIso (B.app F.obj)).symm
+  refine ⟨adjR, β₀, b, t, ?_, hunit⟩
+  rw [ht]
+  intro n
+  exact exchange_projection (Scheme.Modules.pushforward f)
+      (Scheme.Modules.tensorPullback g) (Scheme.Modules.tensorPullback (pullback.fst f g))
+      (Scheme.Modules.pushforward (pullback.snd f g)) B
+      (M := F.obj) (N := formalModuleQuotient (J.comap f) (n + 1) F.obj)
+      (M₀ := F₀.obj)
+      (N₀ := formalModuleQuotient ((J.comap g).comap (pullback.snd f g)) (n + 1) F₀.obj) hF
+      (formalModuleQuotientπ (J.comap f) (n + 1) F.obj)
+      (formalModuleQuotientπ ((J.comap g).comap (pullback.snd f g)) (n + 1) F₀.obj)
+      (e.app (op n)) (he n)
 
 end AlgebraicGeometry

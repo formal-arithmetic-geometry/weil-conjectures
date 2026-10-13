@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-formal-system-exchange-mate-compatibility",
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "title": "Transport of an objectwise mate identity to diagrams",
+ "statement": "Let $L:\\mathcal D\\to\\mathcal C$, $P:\\mathcal C\\to\\mathcal D$, $T:\\mathcal D\\to\\mathcal E$, $U:\\mathcal C\\to\\mathcal A$, $R:\\mathcal E\\to\\mathcal A$, $Q:\\mathcal A\\to\\mathcal E$ be functors with adjunctions $a:L\\dashv P$, $a_R:R\\dashv Q$ [def-weil-pbc-adjunction-conjugate]. Let $c:T\\circ R\\simeq L\\circ U$ and $B:P\\circ T\\to U\\circ Q$ (diagrammatic composition) satisfy $T(\\eta^a_N) B_{LN}=\\eta^{a_R}_{TN}Q(c_N)$ for every $N\\in\\mathcal D$. Let $G,G_0,H,H_0$ be diagrams indexed by $\\mathbf N^{op}$ in $\\mathcal D,\\mathcal E,\\mathcal C,\\mathcal A$, respectively, with $h_G:G_0=G\\circ T$, $\\beta:G\\circ L\\simeq H$, and $e:H\\circ U\\simeq H_0$. Then there exist $\\beta_0:G_0\\circ R\\simeq H_0$ and $t:(H\\circ P)\\circ T\\to H_0\\circ Q$. The map $t$ equals the whiskered $B$ followed by $Q(e)$, and for every level $n$, $h_{G,n}T(\\eta^a_{G_n}P(\\beta_n))t_n=\\eta^{a_R}_{G_{0,n}}Q(\\beta_{0,n})$. No invertibility assumption on $B$ is required.",
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02N7",
+  "place": "Adjunction mate construction; Tag 0B65 for naturality and conjugation"
+ },
+ "proof": [
+  {
+   "text": "Construct beta zero by composing R(eqToIso hG), G(c), U(beta) and e. Construct t as H(B) followed by Q(e), so its normalization equality is reflexive. Evaluate at n and expand the component of beta zero and t. Functoriality expands T of the composite unit and beta. Naturality of B at beta moves beta after B at L(G_n). Substitute the given objectwise mate identity. Naturality of the R-adjunction unit at eqToHom hG moves this component to Q(R(-)) following the new unit. Functoriality of Q and associativity identify the result with Q(beta zero_n). These steps are recorded in the private proved helper exchange_unit, followed by the component formula for beta zero.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02N7",
+  "place": "Naturality and functoriality of the mate construction; explicit diagram transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction mate unit identity along isomorphisms of inverse diagrams",
+   "results": "LeanFinder returned eight generic mate equivalence tools: mateEquiv, unit_mateEquiv, mateEquiv_apply, unit_mateEquiv_symm, mateEquiv_counit, Bicategory.toNatTrans_mateEquiv, mateEquiv_counit_symm and mateEquiv_symm_apply. None states the transported diagram identity.",
+   "date": "2026-10-13",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "results": "Adjunction.unit_naturality supplies the only nontrivial local identity; the diagram result is composed from it and naturality.",
+   "date": "2026-10-13",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*mate|mate.*formal|unit.*naturality",
+   "results": "Local library search found formal comparison statements and generic unit naturality, but no separately usable diagram transport lemma. Mathlib has the whiskering component equations and unit naturality.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport an adjunction mate unit identity along isomorphisms of inverse diagrams",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFlatQuotientMateData",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Formal quotient mate data: levelwise naturality assembly of the second displayed equation",
+   "via": [
+    "lem-weil-pbc-formal-flat-quotient-mate-data",
+    "lem-weil-pbc-formal-comparison-flat-transport-square",
+    "lem-weil-pbc-formal-comparison-completed-affine-data",
+    "lem-weil-pbc-formal-comparison-completed-affine-restriction-iso",
+    "lem-weil-pbc-formal-comparison-completed-affine-model",
+    "lem-weil-pbc-formal-systems-push-pull-affine-annihilation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalSystemExchangeMateCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSystemExchangeMateCompatibility.lean",
+  "declaration": "AlgebraicGeometry.formal_system_exchange_mate_compatibility",
+  "statement": "theorem formal_system_exchange_mate_compatibility\n    {C D E A : Type*} [Category C] [Category D] [Category E] [Category A]\n    (L : D ⥤ C) (P : C ⥤ D) (T : D ⥤ E) (U : C ⥤ A)\n    (R : E ⥤ A) (Q : A ⥤ E) (adj : L ⊣ P) (adjR : R ⊣ Q)\n    (c : T ⋙ R ≅ L ⋙ U) (B : P ⋙ T ⟶ U ⋙ Q)\n    (hmate : ∀ N : D, T.map (adj.unit.app N) ≫ B.app (L.obj N) =\n      adjR.unit.app (T.obj N) ≫ Q.map (c.hom.app N))\n    (G : ℕᵒᵖ ⥤ D) (G₀ : ℕᵒᵖ ⥤ E) (hG : G₀ = G ⋙ T)\n    (H : ℕᵒᵖ ⥤ C) (H₀ : ℕᵒᵖ ⥤ A) (β : G ⋙ L ≅ H) (e : H ⋙ U ≅ H₀) :\n    ∃ (β₀ : G₀ ⋙ R ≅ H₀) (t : (H ⋙ P) ⋙ T ⟶ H₀ ⋙ Q),\n      t = Functor.whiskerLeft H B ≫ Functor.whiskerRight e.hom Q ∧\n      (∀ n : ℕ, (eqToHom hG).app (op n) ≫\n          T.map (adj.unit.app (G.obj (op n)) ≫ P.map (β.hom.app (op n))) ≫\n            t.app (op n) =\n        adjR.unit.app (G₀.obj (op n)) ≫ Q.map (β₀.hom.app (op n)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T142853-L-496460",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T142853-L-496460",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
