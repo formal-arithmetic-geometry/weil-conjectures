@@ -16,53 +16,54 @@
  ],
  "proof": [
   {
-   "text": "The constant-sheaf functor is the constant-presheaf functor followed by sheafification. Both are left adjoints, so preserve the coefficient colimit. This follows directly by composing their Hom adjunctions.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Restrict to an affine etale object U of X. U is qcqs, and Y times_X U is qcqs by base-change permanence of h. Pullback of each constant coefficient is the constant coefficient on this scheme. All identifications are natural in the coefficient group.",
+   "text": "Define the coefficient functor P_hq using the actual shifted preadditive Yoneda functor and restriction along the free represented sheaf functor. Restrict it to the affine etale site. On each affine object U its pullback V=U times_X Y is qcqs by permanence of h.",
    "uses": [
     "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lemma-constructible-pullback-constant"
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
    "elementary": false
   },
   {
-   "text": "Apply coefficient-size filtered etale cohomology continuity to the constant sheaf diagram on each such qcqs pullback. This retains the given cocone vertex and its original mapped legs. The canonical comparison commutes with restrictions in U since it is induced by these coprojections.",
+   "text": "The coefficient-natural raw evaluation isomorphism identifies P_hq evaluated at U with inverse image to V followed by ordinary derived cohomology in degree q. Inverse image is a left adjoint, so preserves colimits. Apply etaleCohomology_isColimit_large_filtered on V; it retains the original cocone. Pointwise preservation implies preservation by the presheaf functor restricted to the affine site.",
    "uses": [
-    "lem-pbc-u2-sheafH-large-filtered-colimit-derived"
+    "lem-sbc-abelian-higher-image-evaluation-functor-iso",
+    "lem-pbc-u2-sheafH-large-filtered-colimit-derived",
+    "def-weil-pbc-inverse-image"
    ],
    "elementary": false
   },
   {
-   "text": "Use the natural sheafified cohomology-presheaf formula for higher direct images. On the affine basis the preceding pointwise comparison is an isomorphism; sheafification is a left adjoint and transports the colimit. Restriction to the affine etale basis is an equivalence, so its inverse transports this colimit to the small etale site. This proves the stated functor preserves the original mapped cocone, not just an objectwise isomorphism.",
+   "text": "Affine-site sheafification preserves colimits. Dense-subsite sheafification compatibility identifies this functor with small-site sheafification followed by restriction. Restriction is an equivalence, and therefore reflects colimits. Hence P_hq followed by small-site sheafification preserves the filtered colimits.",
    "uses": [
-    "sbc-lem-higher-direct-image-presheaf",
     "def-weil-pbc-sheafification",
     "lem-weil-pbc-affine-etale-induced-sheaf-equivalence"
    ],
    "elementary": false
+  },
+  {
+   "text": "Transport preservation along the coefficient-natural sheafification functor comparison. This gives preservation by the abelian higher-image functor on all coefficient sheaves. Compose with the constant-sheaf functor, a left adjoint. No pullback-constant comparison is needed, since the preceding preservation argument works for all sheaves.",
+   "uses": [
+    "lem-sbc-abelian-higher-image-sheafification-functor-iso",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
   "def-weil-pbc-sheafification",
   "lem-pbc-u2-sheafH-large-filtered-colimit-derived",
+  "lem-sbc-abelian-higher-image-evaluation-functor-iso",
+  "lem-sbc-abelian-higher-image-sheafification-functor-iso",
   "lem-weil-pbc-affine-etale-induced-sheaf-equivalence",
   "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lemma-constructible-pullback-constant",
-  "sbc-lem-higher-direct-image-presheaf"
+  "lem-weil-pbc-qcqs-morphism-permanence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, etale-cohomology.tex and sites-cohomology.tex",
-  "place": "Tag 03Q5 (lemma-colimit), Tag 0739 (lemma-colim-works-over-collection), and Tag 03Q8 (lemma-higher-direct-images); filtered-union step 2 of lem-sbc-constant-module-higher-direct-image-cyclic-reduction."
+  "document": "Stacks Project, Tags 03Q5, 0739, 03Q8",
+  "place": "Affine-site transport of filtered continuity; coefficient-natural comparison bridges isolated as two proper subarguments."
  },
  "mathlib_searches": [
   {
@@ -113,7 +114,7 @@
   "module": "Sheaf.AlgebraicGeometry.ConstantAbelianHigherDirectImageFilteredColimit",
   "file": "lean/Sheaf/AlgebraicGeometry/ConstantAbelianHigherDirectImageFilteredColimit.lean",
   "declaration": "AlgebraicGeometry.Etale.preservesColimitsOfShape_constantAbelianHigherDirectImage",
-  "statement": "theorem preservesColimitsOfShape_constantAbelianHigherDirectImage\n    {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]\n    (q : ℕ) (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] :\n    PreservesColimitsOfShape I\n      (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n        DerivedCategory.Plus.singleFunctor\n          (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙\n        rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h ⋙\n        DerivedCategory.Plus.homologyFunctor\n          (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ))",
+  "statement": "theorem preservesColimitsOfShape_constantAbelianHigherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℕ) (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] : PreservesColimitsOfShape I (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙ rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h ⋙ DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ))",
   "branch": "sheaf-dag",
   "by": "C2",
   "date": "2026-10-14"
@@ -132,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T201739-L-3965589",
+  "landing": "20261013T215601-L-896862",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
