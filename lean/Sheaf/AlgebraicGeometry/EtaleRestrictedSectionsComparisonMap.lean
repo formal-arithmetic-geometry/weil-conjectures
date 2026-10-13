@@ -20,6 +20,55 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem restricted_iso_formula
+    (X : Scheme.{u})
+    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (T : EtaleTermwiseHypercohomology X K) (q : ℤ)
+    (m : ℕ) (s n : ℤ) (h : (m : ℤ) + s = n) :
+    (((CartanEilenbergPresentation.mappedFunctor
+      (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1})).obj
+        (etaleRestrictedBicomplex X K T q)).flip).ιTotal
+          (ComplexShape.up ℤ) (m : ℤ) s n h ≫
+      (etaleCEMappedTotalIso (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1})
+        (etaleRestrictedBicomplex X K T q)
+        (etaleRestrictedBicomplex_below X K T q)).hom.f n =
+    (HomologicalComplex.extendXIso
+      (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℕ)).obj ((etaleRestrictedBicomplex X K T q).X s))
+      ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).hom ≫
+    (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+      ((HomologicalComplex.extendXIso
+        (((𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})).mapHomologicalComplex
+          (ComplexShape.up ℕ)).obj ((etaleRestrictedBicomplex X K T q).X s))
+        ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫
+        (((CartanEilenbergPresentation.mappedFunctor
+          (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))).obj
+            (etaleRestrictedBicomplex X K T q)).flip).ιTotal
+              (ComplexShape.up ℤ) (m : ℤ) s n h) := by
+  classical
+  dsimp only [etaleCEMappedTotalIso, Iso.trans_hom, HomologicalComplex.comp_f]
+  rw [HomologicalComplex₂.total.mapIso_hom]
+  rw [← Category.assoc, HomologicalComplex₂.ιTotal_map, Category.assoc]
+  dsimp only [HomologicalComplex₂.mapTotalIso, HomologicalComplex.Hom.isoOfComponents]
+  rw [HomologicalComplex₂.ι_mapTotalXIso_hom]
+  have hr : ComplexShape.embeddingUpNat.r (m : ℤ) = some m :=
+    ComplexShape.embeddingUpNat.r_f m
+  have hx := HomologicalComplex.mapExtendX_hom_eq
+    ((etaleRestrictedBicomplex X K T q).X s)
+    (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}) hr
+  simp only [HomologicalComplex₂.flipFunctor, NatIso.mapHomologicalComplex,
+    ComplexShape.Embedding.mapExtendFunctorNatIso, HomologicalComplex.mapExtendIso]
+  change (HomologicalComplex.mapExtendX ((etaleRestrictedBicomplex X K T q).X s)
+    (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (ComplexShape.embeddingUpNat.r (m : ℤ))).inv ≫ _ = _
+  rw [hx]
+  simp only [HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso,
+    eqToIso, Functor.map_comp, eqToHom_map]
+  rw [← Category.assoc, eqToHom_trans]
+
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The complex map obtained by sections of the restricted resolution comparison
 is the prescribed sections inclusion followed by the full comparison.
 Source: Stacks Project, Tag 015J, proof remark (3).
@@ -44,6 +93,39 @@ theorem etaleRestrictedSections_comparison_map
     ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
       (ComplexShape.up ℤ)).map
         (etaleRestrictedTotalInclusion X K T q ≫ T.comparison) =
-      etaleRestrictedSectionsInclusion X K T q ≫ T.w := by sorry
+      etaleRestrictedSectionsInclusion X K T q ≫ T.w := by
+  classical
+  let F := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let e := etaleCEMappedTotalIso F (etaleRestrictedBicomplex X K T q)
+    (etaleRestrictedBicomplex_below X K T q)
+  apply (cancel_epi e.hom).1
+  simp only [etaleRestrictedSectionsInclusion, e, F, Category.assoc, Iso.hom_inv_id_assoc]
+  apply HomologicalComplex.hom_ext
+  intro n
+  apply HomologicalComplex₂.total.hom_ext
+  intro r s h
+  by_cases hr : 0 ≤ r
+  · obtain ⟨m, rfl⟩ := Int.eq_ofNat_of_zero_le hr
+    dsimp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+    rw [← Category.assoc, restricted_iso_formula X K T q m s n h]
+    dsimp only [etaleRestrictedMappedInclusion]
+    rw [HomologicalComplex₂.ιTotal_map_assoc]
+    erw [T.w_formula m s n h]
+    simp only [Functor.map_comp, Functor.mapHomologicalComplex_map_f,
+      HomologicalComplex.comp_f, Category.assoc]
+    dsimp only [etaleRestrictedTotalInclusion]
+    simp only [← Functor.map_comp]
+    erw [HomologicalComplex₂.ιTotal_map_assoc]
+    simp only [Functor.map_comp]
+    dsimp [HomologicalComplex₂.flipFunctor, CartanEilenbergPresentation.mappedFunctor]
+    erw [HomologicalComplex.extendMap_f _ ComplexShape.embeddingUpNat
+      (i := m) (i' := (m : ℤ)) rfl]
+    erw [HomologicalComplex.extendMap_f _ ComplexShape.embeddingUpNat
+      (i := m) (i' := (m : ℤ)) rfl]
+    simp only [HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso,
+      Functor.map_comp, Category.assoc]
+    simp [← Functor.map_comp]
+  · exact (HomologicalComplex.isZero_extend_X _ ComplexShape.embeddingUpNat r
+      (fun m hm ↦ by change (m : ℤ) = r at hm; omega)).eq_of_src _ _
 
 end AlgebraicGeometry.Etale
