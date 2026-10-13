@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSignedComplex
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSingletonAugmentation
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechCoefficientMap
 
 /-! # Functorial subset Čech coordinate construction
 
@@ -113,6 +116,13 @@ theorem principalOpenCech_coordinate_map_exists
       (∀ (n : ℤ) (s : T.X n) (S : {S : Finset (Fin r) // S.Nonempty}),
         (τ₁ n).hom (b.f n s) S =
           (modulesSpecToSheaf.map (g.f (n + 1 - (S.val.card : ℤ)))).hom.app
-            (op (D S.val)) ((τ n).hom s S)) := by sorry
+            (op (D S.val)) ((τ n).hom s S)) := by
+  intro V D T τ hle hls he hes K₁ σ₁ hT hK
+  obtain ⟨T₁, τ₁, hT₁⟩ := principalOpenCech_signed_complex_exists A r f I hle he
+  obtain ⟨α₁, hα₁⟩ := principalOpenCech_singleton_augmentation_exists
+    A r f I hle hls he hes K₁ σ₁ T₁ τ₁ hT₁ hK
+  obtain ⟨b, hb⟩ := principalOpenCech_coefficient_map_exists
+    A r f J I g T τ hle he T₁ τ₁ hT hT₁
+  exact ⟨T₁, τ₁, α₁, b, hT₁, hα₁, hb⟩
 
 end AlgebraicGeometry
