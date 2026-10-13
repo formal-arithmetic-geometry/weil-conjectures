@@ -23,75 +23,33 @@
  ],
  "proof": [
   {
-   "text": "(Morphisms from the spectrum of a field.) For a field $K$ and a scheme $X$, by [lem-weil-pbc-morphism-from-spec-field] a morphism $g:\\operatorname{Spec}K\\to X$ is the same as a pair $(x,\\varphi)$ of a point $x\\in X$ and a field homomorphism $\\varphi:\\kappa(x)\\to K$, via $g=j_x\\circ\\operatorname{Spec}(\\varphi)$, where $j_x:\\operatorname{Spec}\\kappa(x)\\to X$ is the canonical morphism; write $g=(x,\\varphi)$. Two rules follow. (i) If $h:X\\to Y$ is a morphism and $r_x:\\kappa(h(x))\\to\\kappa(x)$ the induced map of residue fields, then $h\\circ(x,\\varphi)=(h(x),\\varphi\\circ r_x)$: by [lem-weil-pbc-residue-field-point-naturality] $h\\circ j_x=j_{h(x)}\\circ\\operatorname{Spec}(r_x)$, so $h\\circ g=j_{h(x)}\\circ\\operatorname{Spec}(r_x)\\circ\\operatorname{Spec}(\\varphi)=j_{h(x)}\\circ\\operatorname{Spec}(\\varphi\\circ r_x)$ ($\\operatorname{Spec}$ is a contravariant functor [def-weil-affine-spectrum]), and the pair is read off by the uniqueness in [lem-weil-pbc-morphism-from-spec-field]. (ii) The scheme $\\operatorname{Spec}k'$ has a single point $\\xi'$, whose residue field is $k'$ itself with $j_{\\xi'}=\\mathrm{id}$ (the field-spectrum identification, or directly Spec.homEquiv); hence by [lem-weil-pbc-morphism-from-spec-field] the morphism $a$ is $a=\\operatorname{Spec}(\\alpha)$ for a unique field homomorphism $\\alpha:k'\\to k$, which is injective (a ring map between fields). For every $g=(x,\\varphi):\\operatorname{Spec}k'\\to X$ we get $g\\circ a=j_x\\circ\\operatorname{Spec}(\\varphi)\\circ\\operatorname{Spec}(\\alpha)=j_x\\circ\\operatorname{Spec}(\\alpha\\circ\\varphi)$, i.e. $g\\circ a=(x,\\alpha\\circ\\varphi)$. Consequently precomposition with $a$ is injective on morphisms $\\operatorname{Spec}k'\\to X$: if $(x_1,\\alpha\\circ\\varphi_1)=(x_2,\\alpha\\circ\\varphi_2)$ then $x_1=x_2$ and $\\varphi_1=\\varphi_2$ because $\\alpha$ is injective.",
+   "text": "Write a = Spec.map beta using Spec.map_surjective. For each etale U over S, injectivity of precomposition on its pointed lifts follows by Over.OverMorphism.ext and Scheme.SpecMap_comp_injective beta [lem-exc-field-point-precomposition-injective]. The equality of images gives equality of the underlying scheme maps, and hence equality in the slice category.",
    "uses": [
-    "lem-weil-pbc-morphism-from-spec-field",
-    "lem-weil-pbc-residue-field-point-naturality",
-    "def-weil-affine-spectrum",
-    "def-weil-residue-field"
+    "lem-exc-field-point-precomposition-injective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, lines 3416-3441): 'the functor above is clearly an equivalence'; written out here"
-   }
+   "elementary": false
   },
   {
-   "text": "(Lifts as field embeddings.) Write $\\bar s'=(s,\\beta')$ with $s\\in S$ and $\\beta':\\kappa(s)\\to k'$ [def-weil-geometric-point]. By step 1 (ii), $\\bar s=\\bar s'\\circ a=(s,\\alpha\\circ\\beta')$, so $\\bar s$ lies over the same point $s$. Let $f:U\\to S$ be an object of $S_{\\Et}$ [def-weil-pbc-etale-site]. By step 1 (i), a morphism $\\bar u'=(u,\\varphi'):\\operatorname{Spec}k'\\to U$ satisfies $f\\circ\\bar u'=\\bar s'$ iff $f(u)=s$ and $\\varphi'\\circ r_u=\\beta'$, where $r_u:\\kappa(s)\\to\\kappa(u)$ is induced by $f$; likewise $\\bar u=(u,\\varphi):\\operatorname{Spec}k\\to U$ is a lift of $\\bar s$ iff $f(u)=s$ and $\\varphi\\circ r_u=\\alpha\\circ\\beta'$. So the pointed etale neighbourhoods of $\\bar s'$ (resp. $\\bar s$) [def-weil-pbc-pointed-etale-neighbourhoods] with underlying $U$ are the triples $(U,u,\\varphi')$ (resp. $(U,u,\\varphi)$) as above, and the rule $\\Phi:(U,\\bar u')\\mapsto(U,\\bar u'\\circ a)$ of the statement is $(U,u,\\varphi')\\mapsto(U,u,\\alpha\\circ\\varphi')$ (step 1 (ii)); in particular $(U,\\bar u'\\circ a)$ is a pointed etale neighbourhood of $\\bar s$, as the statement says.",
+   "text": "For a lift x of s to U, ha gives x.left ≫ U.hom = Spec.map beta ≫ s'. Apply U.hom.exists_SpecMap_comp_eq_of_isSepClosed [lem-exc-etale-lift-separably-closed-factorization] to obtain y with Spec.map beta ≫ y = x.left and y ≫ U.hom = s'. Over.homMk y is the required preimage. Thus each component of alpha is bijective. Algebraically closed fields are separably closed, so the upstream lemma applies.",
    "uses": [
-    "def-weil-geometric-point",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-pointed-etale-neighbourhoods"
+    "lem-exc-etale-lift-separably-closed-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, lines 3416-3441): 'the functor above is clearly an equivalence'; written out here"
-   }
+   "elementary": false
   },
   {
-   "text": "($\\Phi$ is bijective on objects.) Fix $U$. Injectivity: $\\alpha\\circ\\varphi'_1=\\alpha\\circ\\varphi'_2$ implies $\\varphi'_1=\\varphi'_2$ since $\\alpha$ is injective. Surjectivity: let $(U,u,\\varphi)$ be a pointed etale neighbourhood of $\\bar s$, so $f(u)=s$ and $\\varphi\\circ r_u=\\alpha\\circ\\beta'$. Since $f$ is etale, $\\kappa(u)$ is separable algebraic over $\\kappa(s)$ through $r_u$ [lem-weil-pbc-etale-residue-field-extension-separable], [def-weil-pbc-separable-algebraic-extension]. Let $y\\in\\kappa(u)$ and let $P=\\sum c_iT^i\\in\\kappa(s)[T]$ be nonzero with $\\sum r_u(c_i)y^i=0$. Applying $\\varphi$ gives $\\sum\\alpha(\\beta'(c_i))\\varphi(y)^i=0$, and the polynomial $\\sum\\alpha(\\beta'(c_i))T^i$ has coefficients in $\\alpha(k')$ and is nonzero ($\\alpha\\circ\\beta'$ is injective). So $\\varphi(y)$ is algebraic over $\\alpha(k')$, and since $k'$ is algebraically closed [def-weil-algebraic-closure], $\\varphi(y)\\in\\alpha(k')$ by [lem-weil-pbc-algebraic-over-algebraically-closed-subfield]. Hence $\\varphi(\\kappa(u))\\subseteq\\alpha(k')$; as $\\alpha:k'\\to\\alpha(k')$ is a bijective ring map, $\\varphi':=\\alpha^{-1}\\circ\\varphi:\\kappa(u)\\to k'$ is a field homomorphism with $\\alpha\\circ\\varphi'=\\varphi$, and $\\alpha\\circ(\\varphi'\\circ r_u)=\\varphi\\circ r_u=\\alpha\\circ\\beta'$ gives $\\varphi'\\circ r_u=\\beta'$ by injectivity of $\\alpha$. So $(U,u,\\varphi')$ is a pointed etale neighbourhood of $\\bar s'$ with $\\Phi(U,u,\\varphi')=(U,u,\\varphi)$.",
-   "uses": [
-    "lem-weil-pbc-etale-residue-field-extension-separable",
-    "def-weil-pbc-separable-algebraic-extension",
-    "def-weil-algebraic-closure",
-    "lem-weil-pbc-algebraic-over-algebraically-closed-subfield"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, lines 3416-3441): 'the functor above is clearly an equivalence'; written out here"
-   }
-  },
-  {
-   "text": "($\\Phi$ is an isomorphism of categories.) A morphism $(U,\\bar u')\\to(V,\\bar v')$ of pointed etale neighbourhoods of $\\bar s'$ is an $S$-morphism $h:U\\to V$ with $h\\circ\\bar u'=\\bar v'$; a morphism $(U,\\bar u'\\circ a)\\to(V,\\bar v'\\circ a)$ of pointed etale neighbourhoods of $\\bar s$ is an $S$-morphism $h$ with $h\\circ\\bar u'\\circ a=\\bar v'\\circ a$ [def-weil-pbc-pointed-etale-neighbourhoods]. By the injectivity of precomposition with $a$ (step 1 (ii), applied to $X=V$) the two conditions on $h$ are equivalent. Hence $\\Phi$, defined on morphisms by $h\\mapsto h$, is a functor that is bijective on every set of morphisms and (step 3) on objects: an isomorphism of categories $\\mathcal N_{\\bar s'}\\to\\mathcal N_{\\bar s}$, compatible with the functors to $S_{\\Et}$ forgetting the lift. (This is the equivalence asserted in Stacks 04FN, in the stronger form of an isomorphism.)",
-   "uses": [
-    "def-weil-pbc-pointed-etale-neighbourhoods"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, lines 3416-3441): 'the functor above is clearly an equivalence'; written out here"
-   }
+   "text": "ConcreteCategory.isIso_iff_bijective and NatIso.isIso_of_isIso_app turn componentwise bijectivity into IsIso alpha. Apply the proved generic construction NatIso.mapElements (asIso alpha), whose forward functor is definitionally CategoryOfElements.map alpha, and use its isEquivalence_functor. The construction preserves the underlying etale objects and arrows.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-morphism-from-spec-field",
-  "lem-weil-pbc-residue-field-point-naturality",
-  "def-weil-affine-spectrum",
-  "def-weil-residue-field",
-  "def-weil-geometric-point",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-pointed-etale-neighbourhoods",
-  "lem-weil-pbc-etale-residue-field-extension-separable",
-  "def-weil-pbc-separable-algebraic-extension",
-  "def-weil-algebraic-closure",
-  "lem-weil-pbc-algebraic-over-algebraically-closed-subfield"
+  "lem-exc-field-point-precomposition-injective",
+  "lem-exc-etale-lift-separably-closed-factorization"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, line 3416): the canonical map of stalks of a morphism of geometric points, 'since the functor above is clearly an equivalence ... this canonical map is an isomorphism of stalk functors'; used in the paragraph before Definition 04FS (line 3984); second reading: field embedding argument for the equivalence, Mathlib final-functor colimit comparison for both stalk clauses."
+  "by": "worker G2, second reading",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/EtaleFiniteRefinement/GeometricLifts.lean",
+  "place": "Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed; Scheme.SpecMap_comp_injective in WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField; NatIso.mapElements in WeilConjectures.Mathlib.CategoryTheory.Elements. These proved tools implement the field-embedding argument of Stacks Tag 04FN without new holes."
  },
  "mathlib_searches": [
   {
@@ -166,13 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
   "group": "G2",
   "result": "pass",
-  "landing": "20261012T231635-L-1962268",
-  "kind": "interface",
+  "landing": "20261013T002007-L-2357917",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
