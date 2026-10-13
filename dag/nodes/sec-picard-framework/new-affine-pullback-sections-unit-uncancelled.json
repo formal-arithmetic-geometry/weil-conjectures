@@ -1,0 +1,120 @@
+{
+ "id": "new-affine-pullback-sections-unit-uncancelled",
+ "kind": "statement",
+ "title": "Uncancelled affine sections identity for the normalized pullback unit",
+ "statement": "Let $R,B$ be commutative rings, $g:\\operatorname{Spec}(B)\\to\\operatorname{Spec}(R)$, $P=g^*$ additive tensor pullback, $U$ restriction along the affine coordinate ring map, $\\Gamma_R,\\Gamma_B$ the affine sections functors, and $\\eta_P$ the ordinary adjunction unit [lem-pc-module-pullback-adjunction, def-pc-affine-global-hom-base-change-map]. Let $v:g_*\\Gamma_R\\simeq\\Gamma_BU$ and $r:Rg_*R\\Gamma_R\\simeq R\\Gamma_BU_D$ satisfy precisely hr in lean.statement. For every unbounded sheaf complex $K$, set $PK=P(K)$ and $Y=\\Gamma_B(PK)$. Write $c_R(K)$ and $c_B(PK)$ for affineModelSectionsComparison and $d_g(K)$ for affineModelPullbackComparison, the fixed counit transport [lem-pc-ringed-spaces-derived-pullback-composition]. Then $c_R(K)\\,R\\Gamma_R(\\eta_g(QK))\\,r_{Lg^*(QK)}\\,U_D(R\\Gamma_B(d_g(K)))=Q(\\Gamma_R(\\eta_P(K))\\,v_{PK})\\,\\kappa_U^{-1}(Y)\\,U_D(c_B(PK))$. No K-flatness, invertibility of the displayed maps, or choices of model isomorphism are assumed.",
+ "stmt_deps": [
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-module-kflat-complex",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 (lemma-affine-compare-bounded), 08DV (lemma-affine-K-flat), 08DW(2) (lemma-quasi-coherence-pullback), and 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect); normalized derived adjunction unit calculation"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the pinned Hom equivalence in exists_schemeDerivedAdjunction at the identity of termwise pullback to obtain the derived-unit/counit factorization. Transport this equation along Q/Qh, apply derived R-sections and precompose with the sections comparison. Naturality moves the comparison across the localized ordinary unit; the definition of rightDerivedFunctorCompUnit combines the two successive right-derived units.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-affine-global-hom-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of r moves the fixed pullback counit across its component. Apply hr to the homotopy object represented by PK. The exact restriction/derived comparison is unit-compatible by its rightDerivedUnique construction; naturality of mapDerivedCategoryFactors and quotientCompQhIso converts the resulting expression into the right hand side shown in lean.statement.",
+   "uses": [
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-affine-global-hom-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Explicit formalization of step 2 (unit identity before cancellation) of new-affine-pullback-sections-model-unit; Mathlib derived adjunction unit factorization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived adjunction unit factorization and invertibility on K flat affine models",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "date": "2026-10-13",
+   "verdict": "Relevant generic ingredients only; no exact affine comparison identity or invertibility theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|kFlat_iff_preserves_acyclic",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-13",
+   "verdict": "Relevant generic ingredients only; no exact affine comparison identity or invertibility theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePullbackSectionsModelUnit",
+  "group": "R2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 affine extension and sections unit argument: Derived model factorization of an underived affine unit comparison; Pullback adjunction unit on a K-flat affine sections model; Uncancelled affine sections identity for the normalized pullback unit",
+   "via": [
+    "new-affine-pullback-sections-model-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePullbackSectionsUnitUncancelled",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePullbackSectionsUnitUncancelled.lean",
+  "declaration": "AlgebraicGeometry.affinePullbackSections_unit_uncancelled",
+  "statement": "theorem affinePullbackSections_unit_uncancelled\n    {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)\n    (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙\n        affineGlobalSections (𝟙 (Spec R)) ≅\n      affineGlobalSections (𝟙 (Spec B)) ⋙\n        ModuleCat.restrictScalars.{u} (affineBaseRingMap g))\n    (r : schemeDerivedDirectImage g ⋙ affineDerivedGlobalSections (𝟙 (Spec R)) ≅\n      affineDerivedGlobalSections (𝟙 (Spec B)) ⋙\n        (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory)\n    (hr : ∀ J : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace)) (ComplexShape.up ℤ),\n      (Functor.rightDerivedFunctorCompUnit\n          (RingedSpace.moduleDirectImage g.toLRSHom.toShHom)\n          (affineGlobalSections (𝟙 (Spec R)))).app J ≫\n        (affineGlobalSectionsDerivedIso (𝟙 (Spec R))).hom.app\n          ((schemeDerivedDirectImage g).obj (DerivedCategory.Qh.obj J)) ≫\n        r.hom.app (DerivedCategory.Qh.obj J) =\n      DerivedCategory.Qh.map ((v.hom.mapHomotopyCategory (ComplexShape.up ℤ)).app J) ≫\n        (affineGlobalSections (𝟙 (Spec B)) ⋙\n          ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).rightDerivedFunctorUnit.app J ≫\n        (Functor.rightDerivedFunctorCompMapDerivedCategoryIso\n            (affineGlobalSections (𝟙 (Spec B)))\n            (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)) ≪≫\n          Functor.isoWhiskerRight (affineGlobalSectionsDerivedIso (𝟙 (Spec B)))\n            (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory).hom.app\n          (DerivedCategory.Qh.obj J))\n    [(Scheme.Modules.tensorPullback g).Additive]\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace)) ℤ) :\n    let P := Scheme.Modules.tensorPullback g\n    let U := ModuleCat.restrictScalars.{u} (affineBaseRingMap g)\n    let adjP := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)\n    let PK := (P.mapHomologicalComplex (.up ℤ)).obj K\n    let Y := ((affineGlobalSections (𝟙 (Spec B))).mapHomologicalComplex (.up ℤ)).obj PK\n    affineModelSectionsComparison R K ≫\n        (affineDerivedGlobalSections (𝟙 (Spec R))).map\n          ((canonicalPullbackAdjunction g).unit.app (DerivedCategory.Q.obj K)) ≫\n        r.hom.app ((derivedPullback g).obj (DerivedCategory.Q.obj K)) ≫\n        U.mapDerivedCategory.map\n          ((affineDerivedGlobalSections (𝟙 (Spec B))).map\n            (affineModelPullbackComparison g K)) =\n      DerivedCategory.Q.map\n        (((affineGlobalSections (𝟙 (Spec R))).mapHomologicalComplex (.up ℤ)).map\n            ((adjP.mapHomologicalComplex (.up ℤ)).unit.app K) ≫\n          (v.hom.mapHomologicalComplex (.up ℤ)).app PK) ≫\n        U.mapDerivedCategoryFactors.inv.app Y ≫\n        U.mapDerivedCategory.map (affineModelSectionsComparison B PK)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T153936-L-1123914",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T153936-L-1123914",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

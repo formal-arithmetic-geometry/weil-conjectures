@@ -1,0 +1,132 @@
+{
+ "id": "new-affine-pullback-model-comparisons-isIso",
+ "kind": "statement",
+ "title": "Invertibility of the two fixed affine pullback model comparisons",
+ "statement": "Let $R,B$ be commutative rings, $g:\\operatorname{Spec}(B)\\to\\operatorname{Spec}(R)$, and $M$ a K-flat unbounded cochain complex of $R$-modules [def-pc-module-kflat-complex]. Assume additive associated-sheaf and tensor-pullback functors [lem-weil-pbc-affine-tilde-gamma-adjunction, lem-pc-module-pullback-adjunction]. Put $K=\\widetilde M$ and $PK=g^*K$. The fixed left-derived counit of [lem-pc-ringed-spaces-derived-pullback-composition], transported along the canonical $Q/Q_h$ isomorphisms, gives $d:Lg^*(QK)\\to Q(PK)$. The canonical sections map $c:Q(\\Gamma_B(PK))\\to R\\Gamma_B(Q(PK))$ uses the right-derived unit and exact scalar restriction of [def-pc-affine-global-hom-base-change-map]. Both $d$ and $c$ are isomorphisms, for the exact definitions affineModelPullbackComparison and affineModelSectionsComparison in lean.file.",
+ "stmt_deps": [
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-module-kflat-complex",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 (lemma-affine-compare-bounded), 08DV (lemma-affine-K-flat), 08DW(2) (lemma-quasi-coherence-pullback), and 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect); normalized derived adjunction unit calculation"
+ },
+ "proof": [
+  {
+   "text": "Translate generic module K-flatness to the acyclic tensor criterion on the homotopy quotient; apply isKFlat_tilde. The K-flat counit of exists_derivedPullback is invertible. Uniqueness of left-derived functors transfers invertibility to the fixed counit used in exists_derivedPullbackComposition, and the Q/Qh transports preserve it.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-pc-affine-tilde-kflat",
+    "def-pc-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Full faithfulness of Spec writes g as Spec.map of its ring map. Transport the natural tensor-pullback/tilde isomorphism to complexes and homotopy objects. Naturality of the right-derived sections unit transfers its invertibility from the scalar-extended tilde complex; affineTildeDerivedSectionsUnit_isIso applies without boundedness. Compose with the invertible Q/Qh transports and affineGlobalSectionsDerivedIso.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "new-affine-tilde-derived-sections-unit-isIso",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "lem-pc-affine-tilde-kflat",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "new-affine-tilde-derived-sections-unit-isIso",
+  "def-pc-affine-global-hom-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Explicit formalization of step 1 (fixed comparisons) of new-affine-pullback-sections-model-unit; Mathlib derived adjunction unit factorization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived adjunction unit factorization and invertibility on K flat affine models",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "date": "2026-10-13",
+   "verdict": "Relevant generic ingredients only; no exact affine comparison identity or invertibility theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|kFlat_iff_preserves_acyclic",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-13",
+   "verdict": "Relevant generic ingredients only; no exact affine comparison identity or invertibility theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePullbackSectionsModelUnit",
+  "group": "R2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 affine extension and sections unit argument: Derived model factorization of an underived affine unit comparison; Pullback adjunction unit on a K-flat affine sections model; Invertibility of the two fixed affine pullback model comparisons",
+   "via": [
+    "new-affine-pullback-sections-model-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePullbackModelComparisonsIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePullbackModelComparisonsIsIso.lean",
+  "declaration": "AlgebraicGeometry.affinePullbackModelComparisons_isIso",
+  "statement": "theorem affinePullbackModelComparisons_isIso\n    {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)\n    [hT : (tilde.functor R).Additive] [hP : (Scheme.Modules.tensorPullback g).Additive]\n    (M : CochainComplex (ModuleCat.{u} R) ℤ)\n    (hM : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat M) :\n    let K := (@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n      (tilde.functor R) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M\n    IsIso (affineModelPullbackComparison g K) ∧\n      IsIso (affineModelSectionsComparison B\n        (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.affineModelSectionsComparison",
+   "AlgebraicGeometry.affineModelPullbackComparison",
+   "AlgebraicGeometry.affinePullbackModelComparisons_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T153936-L-1123914",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T153936-L-1123914",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
