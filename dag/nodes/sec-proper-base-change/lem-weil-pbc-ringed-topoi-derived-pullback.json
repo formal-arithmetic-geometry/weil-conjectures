@@ -25,9 +25,76 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal A=\\operatorname{Mod}(R)$. Termwise module pullback induces an additive functor $T:K(R)\\to K(S)$: an additive functor sends a chain homotopy $h$ to $u^*h$, preserving the identity $f-g=dh+hd$. It is exact on homotopy categories, since shifts and mapping cones are formed from finite direct sums and the differential matrices, which additive pullback preserves, including their signs. Put $F=Q_S\\circ T:K(R)\\to D(S)$; this is exact because localization sends each cone triangle to a distinguished triangle [def-weil-abstract-derived-category]. Let $\\mathcal P$ be the class of K-flat complexes with flat terms. By [lem-pc-kflat-resolution], every complex admits a quasi-isomorphism from an object of $\\mathcal P$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, proof; Tag 06YS (lemma-K-flat-resolution)"
+   }
+  },
+  {
+   "text": "Let $s:P\\to P'$ be a quasi-isomorphism between objects of $\\mathcal P$. Inverse image on module sheaves preserves kernels by finite-limit preservation and cokernels by colimit preservation: [lem-weil-pbc-ringed-topoi-module-adjunction] applied to the identity coefficient map makes $u^{-1}$ on modules a left adjoint, so it preserves their coequalizers. Kernels are computed on underlying sheaves, and $u^{-1}$ preserves their finite-limit diagrams. Thus it preserves images (kernels of cokernels) and the quotients defining cohomology, giving $H^n(u^{-1}P)=u^{-1}H^n(P)$ and the corresponding equality on maps. Consequently $u^{-1}s$ is a quasi-isomorphism. By [lem-weil-pbc-ringed-topos-kflat-pullback] applied to $(u,\\operatorname{id}_{u^{-1}R})$, the complexes $u^{-1}P,u^{-1}P'$ are K-flat with flat terms. Apply [lem-pur-change-of-rings-kflat-quasi-iso] to $u^{-1}R\\to S$ to conclude that $T(s)=u^*s$ is a quasi-isomorphism. Here the extension-of-scalars convention $u^{-1}P\\otimes_{u^{-1}R}S$ agrees with $S\\otimes_{u^{-1}R}u^{-1}P$ by the natural map $x\\otimes a\\mapsto a\\otimes x$, whose inverse has the same formula; these maps commute with the differentials and with $s$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, proof of quasi-isomorphism preservation; Tag 0G7E (lemma-pullback-K-flat); Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side)"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-left-derived-from-kflat-class] with $F=Q_S\\circ T$ and the class $\\mathcal P$. Its first hypothesis is step 1. Its second hypothesis holds because step 2 says $T(s)$ is a quasi-isomorphism and $Q_S$ inverts quasi-isomorphisms [def-weil-abstract-derived-category], so $F(s)$ is an isomorphism. The criterion supplies an everywhere-defined exact left derived functor $Lu^*:D(R)\\to D(S)$ with its canonical natural transformation $\\epsilon:Lu^*\\circ Q_R\\to Q_S\\circ T$ and an isomorphism $\\epsilon_P$ for every $P\\in\\mathcal P$. Together with step 2 this proves the first two assertions.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (derived-lemma-find-existence-computes), dual part, and Tag 05SE"
+   }
+  },
+  {
+   "text": "For a quasi-isomorphism $p:P\\to A$ with $P\\in\\mathcal P$, define $\\alpha_p=\\epsilon_P\\circ Lu^*(Q_Rp)^{-1}$. Both factors are invertible, by localization and step 3, so $\\alpha_p:Lu^*(Q_RA)\\to Q_S(TP)$ is the claimed isomorphism. For a map of resolutions $(a,b):(P\\xrightarrow p A)\\to(P'\\xrightarrow {p'} A')$, the equality $p'a=bp$ implies $Lu^*(Q_Ra)\\,Lu^*(Q_Rp)^{-1}=Lu^*(Q_Rp')^{-1}\\,Lu^*(Q_Rb)$. Naturality of $\\epsilon$ gives $Q_S(Ta)\\epsilon_P=\\epsilon_{P'}Lu^*(Q_Ra)$, hence $Q_S(Ta)\\alpha_p=\\alpha_{p'}Lu^*(Q_Rb)$. This proves naturality without requiring that a chain map between arbitrary resolutions be chosen. For two resolutions $p:P\\to A$ and $q:Q\\to A$, their comparison in $D(S)$ is $C_{q,p}=\\alpha_q\\alpha_p^{-1}$. If $qa=p$, the preceding equality gives $C_{q,p}=Q_S(Ta)$. For a third resolution $r$, $C_{r,q}C_{q,p}=\\alpha_r\\alpha_q^{-1}\\alpha_q\\alpha_p^{-1}=C_{r,p}$ and $C_{p,p}=\\operatorname{id}$, proving compatibility with composition.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, final computation and functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change, with derived.tex Tags 06XN and 05SE"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,12 +133,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "worker": "stage1",
+  "summary": "No new nodes were needed. The proof is split into the exact homotopy-level pullback construction, quasi-isomorphism preservation on K-flat flat-term complexes via the existing ringed-topos K-flat pullback and change-of-rings lemmas, application of the existing resolving-class left-derived-functor theorem, and the canonical resolution comparison and functoriality.",
+  "blueprint": "Realizes the ancestor def-weil-pbc-four-corners clauses choosing a K-flat representative and computing E by termwise pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "The general ringed-topos route requires quasi-isomorphism preservation after extension of scalars along u^{-1}R→S; the proper-base-change unit has no replacement for this generic derived change-of-rings fact."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "The item is precisely the generic resolving-class construction of an everywhere-defined left derived functor, which the proper-base-change route does not restate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-e715d8b19",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-e715d8b19 (reviewer sub-agent of L); spot-checked: Read the item, unit route, cited nodes, and Stacks Tags 06YY, 06YS, 06YT, 0G7E, 06XN, and 05SE in full. All hypotheses, coefficient categories, pullback direction, K-flat arguments, counit localization, naturality, composition, and edge cases check. No duplicate or false statement found; no repair is needed. Review written to review.md."
+ }
 }
