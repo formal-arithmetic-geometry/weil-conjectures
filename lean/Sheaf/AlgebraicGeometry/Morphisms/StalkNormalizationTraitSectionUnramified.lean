@@ -15,6 +15,10 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionMaximalIdeal
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionResidueSeparable
+import Sheaf.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
+
 /-!
 # Unramifiedness along a split trait section
 
@@ -82,6 +86,36 @@ theorem GaloisCover.stalk_normalization_trait_section_unramified {S C : Scheme.{
       (pullback.fst c a) : Scheme.{u}),
       n x = τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) →
       ∃ V : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
-        (pullback.fst c a)).Opens, x ∈ V ∧ FormallyUnramified (V.ι ≫ n) := by sorry
+        (pullback.fst c a)).Opens, x ∈ V ∧ FormallyUnramified (V.ι ≫ n) := by
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  dsimp only
+  intro hn x hx
+  have := hn
+  have hm := GaloisCover.stalk_normalization_trait_section_maximalIdeal
+    hS c σ hσ G hG q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ s hs hmin hdvr hn x hx
+  have hr := GaloisCover.stalk_normalization_trait_section_residue_separable
+    hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ s hs hmin hdvr hn x hx
+  let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
+    (pullback.fst c (S.fromSpecStalk s))
+  apply FormallyUnramified.exists_neighbourhood_of_stalkMap n x
+  algebraize [(n.stalkMap x).hom]
+  have : IsLocalHom
+      (algebraMap ((pullback c (S.fromSpecStalk s)).presheaf.stalk (n x))
+        ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
+          (pullback.fst c (S.fromSpecStalk s))).presheaf.stalk x)) :=
+    inferInstanceAs <| IsLocalHom (n.stalkMap x).hom
+  have : Algebra.EssFiniteType
+      ((pullback c (S.fromSpecStalk s)).presheaf.stalk (n x))
+      ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
+        (pullback.fst c (S.fromSpecStalk s))).presheaf.stalk x) := by
+    rw [← RingHom.essFiniteType_algebraMap, RingHom.algebraMap_toAlgebra]
+    exact LocallyOfFiniteType.stalkMap n x
+  have := hr
+  rw [← RingHom.algebraMap_toAlgebra (n.stalkMap x).hom,
+    RingHom.formallyUnramified_algebraMap]
+  exact Algebra.FormallyUnramified.of_map_maximalIdeal hm
 
 end AlgebraicGeometry.Scheme

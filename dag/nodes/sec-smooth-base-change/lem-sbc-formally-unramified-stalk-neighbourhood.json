@@ -1,0 +1,105 @@
+{
+ "id": "lem-sbc-formally-unramified-stalk-neighbourhood",
+ "kind": "statement",
+ "title": "An unramified stalk has an unramified source neighbourhood",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes locally of finite type [def-weil-pbc-scheme-conventions]. Let $x\\in X$. If the local ring map $\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$ is formally unramified, then there exists an open $V\\subset X$ containing $x$ such that $V\\to X\\to Y$ is formally unramified.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02GF, equivalence of (1) and (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine neighbourhoods Spec B of x and Spec A of f(x), with B of finite\ntype over A. The module of differentials of B over A is finite. The stalk hypothesis\nsays its localization at the prime of x is zero: localization of A to its image prime\nhas zero differentials, and localization of differentials on B is compatible with the\nstalk map. Finite generation gives an element g outside the prime annihilating the\nmodule. Thus B[1/g] has zero relative differentials over A. The affine criterion gives\nformal unramifiedness on this basic open. Composing with the open immersion Spec A\ninto the target gives the asserted neighbourhood.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "H1",
+  "document": "Stacks Project",
+  "place": "Tag 02GF, equivalence of (1) and (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unramified locus of a finite type morphism is open and can be checked on local ring maps at points",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal unramifiedness of a scheme morphism stalk map implies existence of a formally unramified source open neighbourhood",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified, Algebra.basicOpen_subset_unramifiedLocus_iff",
+   "date": "2026-10-13",
+   "verdict": "used the algebraic openness/localization criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyUnramified.of_map_maximalIdeal",
+   "results": "1 hits: Algebra.FormallyUnramified.of_map_maximalIdeal",
+   "date": "2026-10-13",
+   "verdict": "used the algebraic openness/localization criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_formallyUnramified_of_isUnramifiedAt|isOpen_unramifiedLocus",
+   "results": "6 hits: Mathlib/RingTheory/Unramified/LocalStructure.lean, Mathlib/RingTheory/Unramified/Locus.lean, Mathlib/RingTheory/Unramified/Locus.lean, Mathlib/RingTheory/Unramified/Locus.lean, Mathlib/RingTheory/Unramified/Locus.lean, Mathlib/RingTheory/Unramified/Locus.lean",
+   "date": "2026-10-13",
+   "verdict": "used the algebraic openness/localization criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionUnramified",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-stalk-normalization-trait-section-unramified",
+   "place": "Tag 02GF, equivalence of (1) and (3)",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FormallyUnramifiedStalkNeighbourhood.lean",
+  "declaration": "AlgebraicGeometry.FormallyUnramified.exists_neighbourhood_of_stalkMap",
+  "statement": "theorem FormallyUnramified.exists_neighbourhood_of_stalkMap\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] (x : X)\n    (hx : (f.stalkMap x).hom.FormallyUnramified) :\n    ∃ V : X.Opens, x ∈ V ∧ FormallyUnramified (V.ι ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T022415-L-3213755",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T022415-L-3213755",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
