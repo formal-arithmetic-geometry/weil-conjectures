@@ -21,6 +21,7 @@ public import Mathlib.Topology.Sheaves.Functors
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Adjunction
 import Sheaf.AlgebraicGeometry.ModuleResolutionHomologyExt
+import Mathlib.Algebra.Homology.ConcreteCategory
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
@@ -39,7 +40,7 @@ and tensor operations on sheaves of k-vector spaces back to these cohomology mod
 
 @[expose] public section
 
-universe u
+universe u w w' v v' u' t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open TopologicalSpace
 open scoped TensorProduct
@@ -50,6 +51,22 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 variable {k : Type u} [Field k] {X : Scheme.{u}}
 variable (f : X ⟶ Spec (CommRingCat.of k))
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem ext_transport_smul
+    {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C]
+    {D : Type u'} [Category.{v'} D] [Abelian D] [HasExt.{w'} D]
+    {R : Type t} [Ring R] [Linear R D]
+    (S : C ⥤ D) [S.Additive] [PreservesFiniteLimits S] [PreservesFiniteColimits S]
+    {A B : C} {T : D} (η : T ⟶ S.obj A) (τ : A ⟶ A)
+    (r : R) (h : η ≫ S.map τ = r • η) (n : ℕ) (a : Abelian.Ext A B n) :
+    (Abelian.Ext.mk₀ η).comp
+        (((Abelian.Ext.mk₀ τ).comp a (zero_add n)).mapExactFunctor S) (zero_add n) =
+      r • (Abelian.Ext.mk₀ η).comp (a.mapExactFunctor S) (zero_add n) := by
+  rw [Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀,
+    ← Abelian.Ext.comp_assoc_of_second_deg_zero, Abelian.Ext.mk₀_comp_mk₀,
+    h, Abelian.Ext.mk₀_smul, Abelian.Ext.smul_comp]
+
 /-- scalar Map.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
@@ -477,6 +494,111 @@ theorem scalarCohomologyExtMap_add (F : SheafOfModules.{u} X.ringCatSheaf) (n : 
         ((scalarFunctor f).mapExtAddHom (SheafOfModules.unit X.ringCatSheaf) F n)).comp
           (moduleExtEquiv F n).toAddMonoidHom).map_add a b
 
+attribute [local irreducible] scalarMap scalarUnitLinear
+
+-- Multiplication on the structure sheaf by a scalar global section.
+private def scalarUnitEndomorphism (r : k) :
+    SheafOfModules.unit X.ringCatSheaf ⟶ SheafOfModules.unit X.ringCatSheaf :=
+  (SheafOfModules.unit X.ringCatSheaf).unitHomEquiv.symm
+    ((SheafOfModules.unit X.ringCatSheaf).val.sectionsMk
+      (fun U ↦ scalarMap f U.unop r) (by
+        intro U V i
+        change (X.presheaf.map i).hom (scalarMap f U.unop r) = scalarMap f V.unop r
+        simp only [scalarMap, RingHom.comp_apply]
+        change (X.presheaf.map (homOfLE (le_top (a := U.unop))).op ≫
+          X.presheaf.map i) _ = _
+        rw [← X.presheaf.map_comp]
+        rfl))
+
+private theorem scalarUnitEndomorphism_apply (r : k) (U : (Opens X)ᵒᵖ)
+    (s : Γ(X, U.unop)) :
+    (scalarUnitEndomorphism f r).val.app U s = s * scalarMap f U.unop r := by
+  rfl
+
+attribute [local irreducible] scalarUnitEndomorphism
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem scalarUnitEndomorphism_comp (r : k) :
+    scalarUnitMorphism f ≫ (scalarFunctor f).map (scalarUnitEndomorphism f r) =
+      r • scalarUnitMorphism f := by
+  let adj := constantSheafAdj (Opens.grothendieckTopology X) (ModuleCat.{u} k)
+    isTerminalTop
+  let v := (adj.homEquiv (ModuleCat.of k k)
+    (scalarSheaf f (SheafOfModules.unit X.ringCatSheaf))).symm (scalarUnitLinear f)
+  have he : adj.homEquiv _ _ v = scalarUnitLinear f :=
+    (adj.homEquiv _ _).apply_symm_apply _
+  have hv : v ≫ scalarHom f (scalarUnitEndomorphism f r) = r • v := by
+    apply (adj.homEquiv _ _).injective
+    erw [adj.homEquiv_naturality_right, he]
+    have hmap : adj.homEquiv _ _ (r • v) = r • adj.homEquiv _ _ v := by
+      rw [adj.homEquiv_unit, adj.homEquiv_unit]
+      change adj.unit.app (ModuleCat.of k k) ≫ (r • v.hom.app (op ⊤)) =
+        r • (adj.unit.app (ModuleCat.of k k) ≫ v.hom.app (op ⊤))
+      exact Linear.comp_smul _ _ _ _ r _
+    rw [hmap, he]
+    change scalarUnitLinear f ≫ (scalarHom f (scalarUnitEndomorphism f r)).hom.app
+      (op ⊤) = r • scalarUnitLinear f
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro s
+    unfold scalarUnitLinear
+    change (scalarUnitEndomorphism f r).val.app (op ⊤) (scalarMap f ⊤ s) =
+      scalarMap f ⊤ r * scalarMap f ⊤ s
+    rw [scalarUnitEndomorphism_apply, mul_comm]
+  unfold scalarUnitMorphism scalarFunctor
+  change (constantScalarUnitIso.inv ≫ v) ≫ scalarHom f (scalarUnitEndomorphism f r) =
+    r • (constantScalarUnitIso.inv ≫ v)
+  exact (Category.assoc _ _ _).trans
+    ((congrArg (fun w ↦ constantScalarUnitIso.inv ≫ w) hv).trans
+      (Linear.comp_smul _ _ _ _ r _))
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem moduleExtEquiv_scalar (F : SheafOfModules.{u} X.ringCatSheaf)
+    (n : ℕ) (r : k) (a : scalarCohomology f F n) :
+    moduleExtEquiv F n (r • a) =
+      (Abelian.Ext.mk₀ (scalarUnitEndomorphism f r)).comp (moduleExtEquiv F n a)
+        (zero_add n) := by
+  let I := injectiveResolution F
+  let K := RingedSpace.globalSectionsComplex I
+  let Γ := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  obtain ⟨φ, hφ, heφ⟩ := I.extMk_surjective (moduleExtEquiv F n a) (n + 1) rfl
+  let x := φ.val.app (op ⊤) (1 : Γ(X, ⊤))
+  have hx : K.d n (n + 1) x = 0 := by
+    exact congrArg (fun t ↦ t.val.app (op ⊤) (1 : Γ(X, ⊤))) hφ
+  let c : K.cycles n := K.cyclesMk x (n + 1) (by simp) hx
+  have hc : φ.val.app (op ⊤) (1 : Γ(X, ⊤)) = K.iCycles n c :=
+    (K.i_cyclesMk x (n + 1) (by simp) hx).symm
+  have he (c : K.cycles n) (φ : SheafOfModules.unit X.ringCatSheaf ⟶ I.cocomplex.X n)
+      (hφ : φ ≫ I.cocomplex.d n (n + 1) = 0)
+      (hc : φ.val.app (op ⊤) (1 : Γ(X, ⊤)) = K.iCycles n c) :
+      moduleExtEquiv F n ((I.isoRightDerivedObj Γ n).inv (K.homologyπ n c)) =
+        I.extMk φ (n + 1) rfl hφ := by
+    with_unfolding_all exact Classical.choose_spec (exists_moduleExtEquiv F n) I c φ hφ hc
+  have ha : (I.isoRightDerivedObj Γ n).inv (K.homologyπ n c) = a :=
+    (moduleExtEquiv F n).injective ((he c φ hφ hc).trans heφ)
+  let t : ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) := scalarMap f ⊤ r
+  have har : (I.isoRightDerivedObj Γ n).inv (K.homologyπ n (t • c)) = r • a := by
+    erw [(K.homologyπ n).hom.map_smul, (I.isoRightDerivedObj Γ n).inv.hom.map_smul, ha]
+    rfl
+  have hrc : (scalarUnitEndomorphism f r ≫ φ).val.app (op ⊤) (1 : Γ(X, ⊤)) =
+      K.iCycles n (t • c) := by
+    erw [(K.iCycles n).hom.map_smul, ← hc]
+    change (φ.val.app (op ⊤))
+      ((scalarUnitEndomorphism f r).val.app (op ⊤) (1 : Γ(X, ⊤))) = _
+    erw [scalarUnitEndomorphism_apply, one_mul]
+    set_option backward.isDefEq.respectTransparency false in
+      simpa only [smul_eq_mul, mul_one] using
+        (φ.val.app (op ⊤)).hom.map_smul t (1 : Γ(X, ⊤))
+  rw [← har, he (t • c) (scalarUnitEndomorphism f r ≫ φ)
+    (by rw [Category.assoc, hφ, comp_zero]) hrc]
+  exact (I.mk₀_comp_extMk φ (n + 1) rfl hφ (scalarUnitEndomorphism f r)).symm.trans
+    (congrArg (fun x ↦ (Abelian.Ext.mk₀ (scalarUnitEndomorphism f r)).comp x
+      (zero_add n)) heφ)
+
+attribute [local irreducible] scalarSheaf
+
 /-- scalar Cohomology Ext Map smul.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -485,7 +607,16 @@ transport on Ext and precomposition by the scalar-unit morphism. Compose these m
 theorem scalarCohomologyExtMap_smul (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
     (r : k) (a : scalarCohomology f F n) :
     scalarCohomologyExtMap f F n (r • a) = r • scalarCohomologyExtMap f F n a := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+    set_option backward.isDefEq.respectTransparency.types false in
+      unfold scalarCohomologyExtMap scalarExtMap
+      rw [moduleExtEquiv_scalar f F n r a]
+      exact ext_transport_smul.{u + 1, u, u + 1, u, u, u + 1, u}
+        (C := SheafOfModules.{u} X.ringCatSheaf) (D := KSheaf X k)
+        (R := k) (A := SheafOfModules.unit X.ringCatSheaf) (B := F)
+        (T := 𝟙_ (KSheaf X k)) (scalarFunctor f) (scalarUnitMorphism f)
+        (scalarUnitEndomorphism f r) r (scalarUnitEndomorphism_comp f r) n
+        (moduleExtEquiv F n a)
 
 /-- scalar Cohomology Ext Map bijective.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
