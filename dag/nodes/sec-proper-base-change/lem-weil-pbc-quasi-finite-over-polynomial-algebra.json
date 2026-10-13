@@ -38,53 +38,64 @@
  ],
  "proof": [
   {
-   "text": "Set $k=\\kappa(\\mathfrak p)$ and $F=S\\otimes_Rk$. This is a finite type $k$-algebra: if $x_1,\\ldots,x_N$ generate $S$ over $R$, their images generate $F$ over $k$ [lem-weil-pbc-quasi-finite-four-rings]. The prime $\\mathfrak Q$ exists by [lem-weil-pbc-fibre-ring-primes-bijection], so $F\\ne0$. By the definition of dimension at a point [def-kun-topological-dimension-at-point], choose an open neighbourhood $U$ of $\\mathfrak Q$ in $\\operatorname{Spec}F$ of dimension exactly $n$: dimensions of open neighbourhoods are integers at least $n$, and one attains their infimum $n$. Basic opens form a basis, so take $D(a)$ with $\\mathfrak Q\\in D(a)\\subseteq U$. By [lem-weil-pbc-fibre-ring-localization-quotient], each $a\\in F$ can be written as the image of $s\\in S$ divided by an element of $R\\setminus\\mathfrak p$, which is a unit of $F$; hence $D(a)=D(\\bar s)$. Choose $g_0=s\\notin\\mathfrak q$. The localization $F_{\\bar g_0}=S_{g_0}\\otimes_Rk$ has spectrum $D(\\bar g_0)$, of dimension at most $n$ because it is contained in $U$, and at least $n$ because it is an open neighbourhood of $\\mathfrak Q$. Thus its dimension is exactly $n$.",
+   "text": "The private helper exists_away_fibre_dimension_eq puts p=q cap R, F=kappa(p) tensor_R S, and Q=preimageHomeomorphFiber(q). The inverse fibre homeomorphism followed by subtype inclusion identifies Spec F with an embedded subspace of Spec S (Mathlib PrimeSpectrum.preimageHomeomorphFiber). The well order on WithBot ENat makes the infimum of dimensions of open neighbourhoods attained, using ciInf_mem. Write the minimizing neighbourhood as the inverse image of an open V of Spec S under this embedding. Choose a basic open D(g0) in V containing q. Its inverse image is D(1 tensor g0), which has dimension at most the minimizing neighbourhood by subspace monotonicity and at least dim_Q Spec F by the defining infimum. The base-change equivalence IsLocalization.Away.tensorProductEquivTMulRight and the localization spectrum homeomorphism then give dim Spec(kappa(p) tensor_R S_g0)=n. The range theorem localization_away_comap_range supplies q0 in Spec S_g0 contracting to q.",
    "uses": [
-    "lem-weil-pbc-quasi-finite-four-rings",
     "lem-weil-pbc-fibre-ring-primes-bijection",
     "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-fibre-ring-localization-quotient",
     "def-weil-affine-spectrum",
     "def-weil-ring-localization-away"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Lemma 00QE, first paragraph, lines 31183-31198; Remark 00E6, label remark-fundamental-diagram"
+    "place": "Algebra, Lemma Tag 00QE, proof; checked at https://stacks.math.columbia.edu/tag/00QE because this machine has no literature checkout"
    }
   },
   {
-   "text": "Put $T=S_{g_0}\\otimes_Rk$; it is nonzero, finite type over $k$ and has Krull dimension $n$ (step 1). Apply [lem-weil-pbc-noether-normalization-field] to get an injective finite $k$-algebra map $k[Y_1,\\ldots,Y_d]\\to T$; [lem-zl-noether-normalization-dimension] gives $d=\\dim T=n$. Let $y_i$ be the image of $Y_i$. Write each $y_i$ as $s_i/g_0^{e_i}\\otimes 1/u_i$ with $s_i\\in S$ and $u_i\\in R\\setminus\\mathfrak p$, using the localization description of $T$ [lem-weil-pbc-fibre-ring-localization-quotient]. Replace $y_i$ by $y_i'=(u_i/1)y_i=s_i/g_0^{e_i}\\otimes1$. Scaling variables by the nonzero scalars $u_i/1\\in k$ is an automorphism of $k[Y_1,\\ldots,Y_n]$ [def-weil-pbc-mv-polynomial-ring], so the subalgebra $k[y_1',\\ldots,y_n']$ equals $k[y_1,\\ldots,y_n]$ and $T$ remains finite over it. The elements $s_i/g_0^{e_i}\\in S_{g_0}$ therefore define an $R$-algebra map $A=R[t_1,\\ldots,t_n]\\to S_{g_0}$ whose base change along $R\\to k$ is finite. The source's stronger choice from the integer polynomial subalgebra is unnecessary for these lifts.",
+   "text": "The private helper exists_polynomial_isQuasiFiniteAtPrime_of_fibre_dimension applies exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq to the nonzero finite-type fibre F=kappa(p) tensor_R S_g0. Its nontriviality follows from the point Q. For each normalized variable image y_i, Ideal.Fiber.exists_smul_eq_one_tmul gives u_i not in p and s_i in S_g0 with u_i*y_i=1 tensor s_i. Define units v_i in kappa(p) from these u_i. The aeval map X_i -> C(v_i)*X_i has inverse X_i -> C(v_i inverse)*X_i, as checked with MvPolynomial.algHom_ext. Composing the finite normalization map with this automorphism remains finite and sends X_i to 1 tensor s_i. The real coordinate map is f0=aeval s. The original finite generators give finite type over the polynomial algebra via FiniteType.of_restrictScalars_finiteType.",
    "uses": [
     "lem-weil-pbc-noether-normalization-field",
     "lem-zl-noether-normalization-dimension",
     "lem-weil-pbc-fibre-ring-localization-quotient",
-    "def-weil-pbc-mv-polynomial-ring"
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finite-type-algebra"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Lemma 00QE, second paragraph, lines 31200-31210, invoking Noether normalization Lemma 00OY; the scalar-rescaling argument makes its lifting clause explicit"
+    "place": "Algebra, Lemma Tag 00QE, proof; checked at https://stacks.math.columbia.edu/tag/00QE because this machine has no literature checkout"
    }
   },
   {
-   "text": "Let $\\mathfrak q_0=\\mathfrak qS_{g_0}$ and $P=A^{-1}(\\mathfrak q_0)$. The fibre ring of $A\\to S_{g_0}$ at $P$ is $C=S_{g_0}\\otimes_A\\kappa(P)\\cong T\\otimes_{k[t_1,\\ldots,t_n]}\\kappa(P)$: the contraction $P\\cap R=\\mathfrak p$ makes $\\kappa(P)$ a $k[t]$-algebra, and the two tensor products impose the same $R$- and $t_i$-relations. Since $T$ is a finite $k[t]$-module (step 2), $C$ is finite-dimensional over $\\kappa(P)$. By [lem-weil-pbc-finite-dim-algebra-artinian], $C$ is Artinian. Every prime of $C$ is maximal: its quotient is a finite-dimensional domain over a field, so multiplication by each nonzero element is injective and hence surjective, making the quotient a field. Thus $\\dim\\operatorname{Spec}C=0$; [lem-weil-pbc-finite-type-dim-zero-artinian] makes its spectrum discrete. In particular the prime of $C$ corresponding to $\\mathfrak q_0$ is isolated, so $A\\to S_{g_0}$ is quasi-finite at $\\mathfrak q_0$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. It is finite type: the original generators of $S$ over $R$, together with $g_0^{-1}$, generate $S_{g_0}$ over $A$ [def-weil-pbc-finite-type-algebra].",
+   "text": "Let A=R[t_1,...,t_n] and Ak=kappa(p) tensor_R A. MvPolynomial.algebraTensorAlgEquiv identifies Ak with kappa(p)[t_1,...,t_n]. Composing this equivalence with the rescaled finite normalization makes F finite over Ak. Equality of the two maps A -> F is proved on coefficients and variables with MvPolynomial.ringHom_ext; it gives a commuting square on spectra. Both vertical maps Spec F -> Spec S_g0 and Spec Ak -> Spec A are embeddings furnished by the fibre homeomorphisms. Every prime in the fibre of Spec S_g0 -> Spec A through q0 lies over p in Spec R, hence lifts to Spec F. The private topological lemma isOpen_singleton_fiber_of_embedding therefore identifies this whole fibre with the fibre upstairs: restrict the embedding to the inverse-image fibre and prove its surjectivity using the covering condition; the resulting homeomorphism transports open singletons. The finite Ak-algebra F is quasi-finite by Mathlib, so quasiFiniteAt_iff_isOpen_singleton_fiber makes the upstairs singleton open. This yields IsQuasiFiniteAtPrime A S_g0 q0, without the original scheme-level zero-dimensional Artinian lemma.",
    "uses": [
-    "lem-weil-pbc-finite-dim-algebra-artinian",
-    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-fibre-ring-primes-bijection",
     "def-weil-pbc-ring-map-quasi-finite-at-prime",
     "def-weil-pbc-finite-type-algebra"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Lemma 00QE, second paragraph, lines 31208-31212 ('In particular, S is quasi-finite ... at q'); the finite-fibre and isolated-point argument is written out"
+    "place": "Algebra, Lemma Tag 00QE, proof; checked at https://stacks.math.columbia.edu/tag/00QE because this machine has no literature checkout"
    }
   },
   {
-   "text": "By [lem-weil-pbc-ring-quasi-finite-locus-open] applied to $A\\to S_{g_0}$ and $\\mathfrak q_0$, choose $h\\in S_{g_0}\\setminus\\mathfrak q_0$ such that $A\\to(S_{g_0})_h$ is quasi-finite at every prime. Write $h=b/g_0^m$ with $b\\in S\\setminus\\mathfrak q$ and put $g=g_0b\\notin\\mathfrak q$. There is a canonical $A$-algebra isomorphism $(S_{g_0})_h\\cong S_g$: both localizations invert $g_0$ and $b$, and $g_0b$ is invertible exactly when both factors are. Under this isomorphism the map $A\\to S_g$ is finite type (the old generators and $g^{-1}$ generate it) and quasi-finite at every prime, as required.",
+   "text": "The private equivalence isQuasiFiniteAtPrime_iff_quasiFiniteAt transports the defining open singleton across preimageHomeomorphFiber and applies Mathlib quasiFiniteAt_iff_isOpen_singleton_fiber. Use the resulting QuasiFiniteAt A q0 directly in Mathlib QuasiFiniteAt.exists_fg_and_exists_notMem_and_awayMap_bijective (ZariskisMainTheorem): it supplies a finite A-subalgebra Sprime and r in Sprime outside q0, with bijective awayMap from Sprime_r to (S_g0)_r. Module finiteness gives QuasiFinite A Sprime, preserved by localization and the surjective awayMap. Thus the further localization T is quasi-finite at every prime. This uses the already proved Mathlib finite-subalgebra theorem directly instead of the project openness theorem.",
    "uses": [
-    "lem-weil-pbc-ring-quasi-finite-locus-open",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00QE, proof; checked at https://stacks.math.columbia.edu/tag/00QE because this machine has no literature checkout"
+   }
+  },
+  {
+   "text": "Put h=r in S_g0 and b=(IsLocalization.Away.sec g0 h).1. Mathlib associated_sec_fst says that the image of b is associated to h. If b were in q, its image would be in q0 and Ideal.mem_iff_of_associated would put h in q0, a contradiction. Hence g=g0*b avoids q. IsLocalization.Away.mul_of_associated makes T a localization of S away from g. IsLocalization.algEquiv gives T equiv S_g. Compose f0 with the canonical S_g0 -> T and this equivalence, restricted to R, to obtain the requested R-algebra map f. FiniteType.of_restrictScalars_finiteType proves finite type over A. Regard the equivalence as an A-algebra equivalence using the constructed f; for each prime qprime of S_g, contract it to T and transport QuasiFiniteAt using of_surjectiveOnStalks and the surjectivity of the equivalence. Finally isQuasiFiniteAtPrime_iff_quasiFiniteAt gives the requested isolated-fibre-point property. All definitions are genuine constructions; the proof only eliminates existential witnesses in a theorem.",
+   "uses": [
     "def-weil-ring-localization-away",
     "def-weil-pbc-finite-type-algebra",
     "def-weil-pbc-ring-map-quasi-finite-at-prime"
@@ -92,30 +103,27 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Lemma 00QE, final sentence, lines 31211-31215, invoking Lemma 00QA"
+    "place": "Algebra, Lemma Tag 00QE, proof; checked at https://stacks.math.columbia.edu/tag/00QE because this machine has no literature checkout"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-quasi-finite-four-rings",
   "lem-weil-pbc-fibre-ring-primes-bijection",
   "def-kun-topological-dimension-at-point",
-  "lem-weil-pbc-fibre-ring-localization-quotient",
   "def-weil-affine-spectrum",
   "def-weil-ring-localization-away",
   "lem-weil-pbc-noether-normalization-field",
   "lem-zl-noether-normalization-dimension",
+  "lem-weil-pbc-fibre-ring-localization-quotient",
   "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-finite-dim-algebra-artinian",
-  "lem-weil-pbc-finite-type-dim-zero-artinian",
-  "def-weil-pbc-ring-map-quasi-finite-at-prime",
   "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-ring-quasi-finite-locus-open"
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00QE, label lemma-quasi-finite-over-polynomial-algebra, proof lines 31183-31215"
+  "place": "Algebra, Lemma Tag 00QE, proof; checked at https://stacks.math.columbia.edu/tag/00QE because this machine has no literature checkout; the final openness step is implemented directly with the proved finite-subalgebra form of Zariski main in Mathlib, and the finite-fibre step by an explicit homeomorphism of fibres"
  },
  "mathlib_searches": [
   {
@@ -196,5 +204,15 @@
   "group": "E1",
   "result": "pass",
   "note": "FiniteType R S, prime q, fibre point via preimageHomeomorphFiber on p.Fiber S, topologicalKrullDimAt = n, g ∉ q, R-algHom MvPolynomial (Fin n) R → Away g, FiniteType + IsQuasiFiniteAtPrime at all q' under f.toAlgebra"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T082350-L-1637705",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
