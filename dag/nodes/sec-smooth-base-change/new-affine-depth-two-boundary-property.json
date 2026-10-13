@@ -1,0 +1,94 @@
+{
+ "id": "new-affine-depth-two-boundary-property",
+ "kind": "statement",
+ "title": "Affine depth two boundary property",
+ "statement": "theorem affine_depth_two_boundary_property (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens) (hboundary : ∀ x : Spec A, x ∉ W → (2 : ℕ∞) ≤ IsLocalRing.depth (R := (Spec A).presheaf.stalk x) ((Spec A).presheaf.stalk x)) (H : (Spec A).Modules) (hqc : H.IsQuasicoherent) (hfin : ∀ V : (Spec A).Opens, IsAffineOpen V → Module.Finite ((Spec A).presheaf.obj (op V)) (H.val.obj (op V))) : ∀ x : Spec A, x ∉ W → ∃ hfinite : Module.Finite ((Spec A).presheaf.stalk x) (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x), letI := hfinite; (2 : ℕ∞) ≤ IsLocalRing.depth (R := (Spec A).presheaf.stalk x) (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x)",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY6"
+ },
+ "proof": [
+  {
+   "text": "Use a finite free presentation of the double dual kernel and regular-pair injectivity; Nakayama gives depth two.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M3",
+  "document": "Stacks Project",
+  "place": "Tag 0EY6"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoLocallyFreeModel",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-depth-two-locally-free-model",
+   "place": "decomposition"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineDepthTwoBoundaryProperty.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_depth_two_boundary_property",
+  "statement": "theorem affine_depth_two_boundary_property\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)\n    (hboundary : ∀ x : Spec A, x ∉ W →\n      (2 : ℕ∞) ≤ IsLocalRing.depth\n        (R := (Spec A).presheaf.stalk x) ((Spec A).presheaf.stalk x))\n    (H : (Spec A).Modules) (hqc : H.IsQuasicoherent)\n    (hfin : ∀ V : (Spec A).Opens, IsAffineOpen V →\n      Module.Finite ((Spec A).presheaf.obj (op V)) (H.val.obj (op V))) :\n    ∀ x : Spec A, x ∉ W →\n      ∃ hfinite : Module.Finite ((Spec A).presheaf.stalk x)\n          (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x),\n        letI := hfinite\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := (Spec A).presheaf.stalk x)\n          (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite locally free affine extension",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsFiniteLocallyFree",
+   "results": "component lemmas only",
+   "date": "2026-10-13",
+   "verdict": "no exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "depth two locally free",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact statement"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T111903-L-3056389",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T111903-L-3056389",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

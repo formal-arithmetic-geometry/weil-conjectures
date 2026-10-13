@@ -11,8 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Sheaf.RingTheory.Depth
 
-import Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension
-import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.Morphisms.AffineLocallyFreeModelCore
+import Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty
 
 /-! # A coherent depth-two model of a finite locally free module on an affine open
 
@@ -73,6 +73,10 @@ theorem exists_affine_depth_two_locally_free_model
           letI := hfinite
           (2 : ℕ∞) ≤ IsLocalRing.depth (R := (Spec A).presheaf.stalk x)
             (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x)) ∧
-      Nonempty (Modules.restrict H W.ι ≅ P) := by sorry
+      Nonempty (Modules.restrict H W.ι ≅ P) := by
+  obtain ⟨H, hHqc, hHfin, hHres⟩ :=
+    exists_affine_locally_free_model_core A W P
+  refine ⟨H, hHqc, hHfin, ?_, hHres⟩
+  exact affine_depth_two_boundary_property A W hboundary H hHqc hHfin
 
 end AlgebraicGeometry.Scheme

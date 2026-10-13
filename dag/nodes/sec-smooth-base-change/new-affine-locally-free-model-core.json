@@ -1,0 +1,94 @@
+{
+ "id": "new-affine-locally-free-model-core",
+ "kind": "statement",
+ "title": "Affine locally free extension core",
+ "statement": "theorem exists_affine_locally_free_model_core (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens) (P : W.toScheme.Modules) [P.IsFiniteLocallyFree] : ∃ H : (Spec A).Modules, H.IsQuasicoherent ∧ (∀ V : (Spec A).Opens, IsAffineOpen V → Module.Finite ((Spec A).presheaf.obj (op V)) (H.val.obj (op V))) ∧ Nonempty (Modules.restrict H W.ι ≅ P)",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0G41(2), 0EY6"
+ },
+ "proof": [
+  {
+   "text": "Finite presentation extension and affine module identification produce H; transport the finite locally free restriction isomorphism.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M3",
+  "document": "Stacks Project",
+  "place": "Tags 0G41(2), 0EY6"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoLocallyFreeModel",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-depth-two-locally-free-model",
+   "place": "decomposition"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineLocallyFreeModelCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineLocallyFreeModelCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_locally_free_model_core",
+  "statement": "theorem exists_affine_locally_free_model_core\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)\n    (P : W.toScheme.Modules) [P.IsFiniteLocallyFree] :\n    ∃ H : (Spec A).Modules,\n      H.IsQuasicoherent ∧\n      (∀ V : (Spec A).Opens, IsAffineOpen V →\n        Module.Finite ((Spec A).presheaf.obj (op V)) (H.val.obj (op V))) ∧\n      Nonempty (Modules.restrict H W.ι ≅ P)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite locally free affine extension",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsFiniteLocallyFree",
+   "results": "component lemmas only",
+   "date": "2026-10-13",
+   "verdict": "no exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "depth two locally free",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact statement"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T111903-L-3056389",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T111903-L-3056389",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
