@@ -18,48 +18,50 @@
  ],
  "proof": [
   {
-   "text": "Set F = k(x) and L_i = F(b_j : j < i). Algebraicity over F follows from the transcendence-basis hypothesis. For each b_i choose its monic minimal polynomial over L_i, of positive degree e_i. The simple extension quotient and its power basis, followed by Basis.smulTower, give the independent bounded products of b_i over F in K.",
+   "text": "Set F=k(x). The transcendence-basis hypothesis gives Algebra.IsAlgebraic F K, hence all b_i are integral over F. Apply exists_algebraicTower_triangularRelations to obtain monic q_i over F in preceding variables, their vanishing, and independent bounded products.",
    "uses": [
     "def-weil-pbc-transcendence-basis",
-    "def-weil-algebraic-element",
-    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-tower-product-basis"
+    "lem-weil-pbc-algebraic-tower-triangular-relations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+    "place": "Proof of Tag 07BV, first assertion: inductive monic polynomial relations over the rational function field; field tower ingredients in Tags 09G1, 09GN and 09G9."
    }
   },
   {
-   "text": "Expand the minimal-polynomial coefficients in preceding product bases and replace the preceding b_j by variables. Algebraic independence identifies k[X] with k[x], whose fraction field is F. Take the product h of all coefficient denominators; it is nonzero. Lift coefficients a/h^n to a(X)T^n, keeping the leading coefficient exactly one. The lifted monic polynomial p_i has degree e_i. Assign y to x, inverse h(x), and b. Every equation vanishes because h(x) is nonzero and each minimal polynomial vanishes. Empty families use h=1; d=0 gives F=k, and repeated or inseparable generators cause no problem.",
+   "text": "Apply exists_triangularRelations_denominatorLift to q_i and algebraic independence of x. Obtain h nonzero and monic p_i of unchanged degrees, with their coefficient evaluation identities. Use e_i=natDegree(q_i), so the independent product family is unchanged.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-triangular-relations-denominator-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion: choosing one h for all polynomial coefficients; Tag 08JZ, localization variable evaluating to inverse h."
+   }
+  },
+  {
+   "text": "Define y explicitly by testing whether its index is less than d, equal to d, or greater than d: use x, inverse h(x), and the appropriately shifted b, respectively. Algebraic independence gives h(x) nonzero, so the localization equation evaluates to h(x)h(x) inverse minus 1=0. For each remaining list equation, restrict y to the coefficient variables, use the coefficient map equality, and apply Polynomial.hom_eval₂ and eval_map to its original vanishing q_i(b_i)=0. Return the constructed data and its independent products.",
+   "uses": [
     "def-weil-pbc-triangular-field-model-equations"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+    "place": "Proof of Tag 07BV, first assertion: choosing one h for all polynomial coefficients; Tag 08JZ, localization variable evaluating to inverse h."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-transcendence-basis",
-  "def-weil-algebraic-element",
-  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-tower-product-basis",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-polynomial-ring-domain",
-  "def-weil-pbc-triangular-field-model-equations"
+  "def-weil-pbc-triangular-field-model-equations",
+  "lem-weil-pbc-algebraic-tower-triangular-relations",
+  "lem-weil-pbc-triangular-relations-denominator-lift"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Proof of Tag 07BV, first assertion, triangular minimal polynomials and denominator clearing; Tag 08JZ, localization presentation. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ because the local literature checkout is absent."
+  "place": "Proof of Tag 07BV, first assertion, with explicit coordinate/evaluation assembly and only independence of tower products; Tag 08JZ localization equation. Both intermediate steps are completely proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -153,11 +155,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d0af7",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T113357-L-3188781",
+  "landing": "20261013T122227-L-3590768",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and node statements; all three delivered modules and the direct importer compiled successfully, including the required reduced-public-import reader check. No target signature or existing declaration changed; remaining sorrys are the two named, documented split lemmas."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

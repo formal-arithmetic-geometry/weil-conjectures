@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-algebraic-tower-triangular-relations",
+ "kind": "statement",
+ "title": "Monic triangular relations and independent bounded products over an algebraic base field",
+ "statement": "Let F and K be fields with an F-algebra structure [def-pc-field-extension], and let b:Fin m→K be a finite family of elements integral over F [def-weil-algebraic-element]. There are monic polynomials q_i in F[Z_j:j<i][Y_i] [def-weil-pbc-mv-polynomial-ring, def-weil-polynomial-ring], indexed by i:Fin m, such that evaluating Z_j at b_j and Y_i at b_i gives zero. The products ∏_i b_i^{a_i}, indexed by a:(i:Fin m)→Fin(natDegree(q_i)), are linearly independent over F [def-weil-pbc-free-module]. This statement does not assert a spanning property or any localization.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV, first assertion: inductive monic polynomial relations over the rational function field; field tower ingredients in Tags 09G1, 09GN and 09G9. Read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ; the local source checkout is absent."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the finite family length. The empty family has the sole product 1, which is independent in the nonzero field K.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion: inductive monic polynomial relations over the rational function field; field tower ingredients in Tags 09G1, 09GN and 09G9."
+   }
+  },
+  {
+   "text": "At a successor let L be the intermediate field generated over F by the preceding elements. Their integrality implies that L equals their generated subalgebra (IntermediateField.adjoin_toSubalgebra_of_isAlgebraic), so evaluation of multivariate polynomials onto L is surjective. The last element is integral over L. Lift its minimal polynomial coefficientwise along this surjection, preserving monicity and natural degree, using Polynomial.lifts_and_natDegree_eq_and_monic. Polynomial.eval₂_map and minpoly.aeval prove vanishing of the lifted last relation. Keep the preceding triangular relations.",
+   "uses": [
+    "def-weil-algebraic-element",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion: inductive monic polynomial relations over the rational function field; field tower ingredients in Tags 09G1, 09GN and 09G9."
+   }
+  },
+  {
+   "text": "Powers of the last element below its minimal-polynomial degree are L-independent, the independence part of the simple algebraic extension power basis, implemented directly by Mathlib linearIndependent_pow.",
+   "uses": [
+    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion: inductive monic polynomial relations over the rational function field; field tower ingredients in Tags 09G1, 09GN and 09G9."
+   }
+  },
+  {
+   "text": "Regard the preceding bounded products as elements of L. Their independence follows from that of their images in K by LinearIndependent.of_comp. Mathlib linearIndependent_smul combines this family with the L-independent new powers. Map a full exponent tuple to its initial tuple and last exponent; this map is injective by Fin.lastCases. LinearIndependent.comp and Fin.prod_univ_castSucc identify its product family with the required bounded products. No spanning assertion or quotient presentation is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Tag 07BV, first assertion: inductive monic polynomial relations over the rational function field; field tower ingredients in Tags 09G1, 09GN and 09G9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-element",
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Proof of Tag 07BV, first assertion: inductive monic polynomial relations over the rational function field; field tower ingredients in Tags 09G1, 09GN and 09G9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite algebraic tower monic triangular relations independent bounded monomials",
+   "results": "Service returned Internal Server Error; no absence conclusion is drawn.",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite algebraic tower triangular monic polynomial relations linearly independent bounded monomials",
+   "results": "linearIndependent_pow, PowerBasis.exists_eq_aeval, AdjoinRoot.powerBasisAux, IsAdjoinRootMonic.basis; only ingredients.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no combined assertion. These Mathlib results are used in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.smulTower",
+   "results": "Module.Basis.smulTower and smulTower_apply; the proof needs only independence, handled directly by linearIndependent_smul.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no combined assertion. These Mathlib results are used in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent_pow|linearIndependent_smul|lifts_and_natDegree_eq_and_monic",
+   "results": "Mathlib.RingTheory.PowerBasis:414 linearIndependent_pow; Mathlib.RingTheory.AlgebraTower:97 linearIndependent_smul; Mathlib.Algebra.Polynomial.Lifts:192 lifts_and_natDegree_eq_and_monic.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no combined assertion. These Mathlib results are used in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.TriangularFieldModelData",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof of Tag 07BV, first assertion: inductive monic polynomial relations over the rational function field; field tower ingredients in Tags 09G1, 09GN and 09G9.",
+   "via": [
+    "lem-weil-pbc-triangular-field-model-data",
+    "lem-weil-pbc-triangular-field-model-evaluation-kernel",
+    "lem-weil-pbc-triangular-field-model-presentation",
+    "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+    "lem-weil-pbc-cartier-equality",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.AlgebraicTowerTriangularRelations",
+  "file": "lean/Sheaf/FieldTheory/AlgebraicTowerTriangularRelations.lean",
+  "declaration": "FieldTheory.exists_algebraicTower_triangularRelations",
+  "statement": "theorem exists_algebraicTower_triangularRelations\n    (F : Type u) (K : Type v) [Field F] [Field K] [Algebra F K]\n    (m : ℕ) (b : Fin m → K) (hb : ∀ i, IsIntegral F (b i)) :\n    ∃ q : (i : Fin m) → Polynomial (MvPolynomial (Fin i.val) F),\n      (∀ i, (q i).Monic) ∧\n      (∀ i, Polynomial.eval₂\n        (MvPolynomial.aeval (fun j : Fin i.val ↦ b ⟨j.val, by omega⟩)).toRingHom\n        (b i) (q i) = 0) ∧\n      LinearIndependent F\n        (fun a : ((i : Fin m) → Fin ((q i).natDegree)) ↦ ∏ i, b i ^ (a i).val)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T122227-L-3590768",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T122227-L-3590768",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
