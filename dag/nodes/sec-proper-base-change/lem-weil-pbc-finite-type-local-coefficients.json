@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-finite-type-local-coefficients",
+ "kind": "statement",
+ "title": "Finite type module sheaves have finite local coefficient expansions",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and $\\mathcal F$ a finite type sheaf of modules [def-weil-pbc-module-finite-type-presentation]. For each $x\\in X$ there are an open neighbourhood $U$, an integer $n\\geq0$, and sections $s_j\\in\\mathcal F(U)$ indexed by $\\mathrm{Fin}(n)$ such that for every open $W\\subseteq U$, section $t\\in\\mathcal F(W)$, and point $y\\in W$, there is an open neighbourhood $V$ of $y$ contained in $W$ and coefficients $a_j\\in\\mathcal O_X(V)$ with $t|_V=\\sum_j a_j(s_j|_V)$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Definition 01B5, proof of Lemma 01B8, and local lifting in Section 01AF, Lemma 01AG"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite local generators data from finite type and a member U of its covering containing x. Evaluate its generating sections at the terminal object of Over U and reindex the finite family by Fin n.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The generating map from the free sheaf to F.over U is epi. Forget to abelian sheaves, which preserves epimorphisms, and apply the local-surjectivity criterion. The covering sieve on Over U corresponds to a covering sieve of opens; choose a member V containing y and a preimage z of the restriction of t. The Lean proof uses Mathlib Sheaf.isLocallySurjective_iff_epi' and Sieve.overEquiv directly, not the project local-lifting lemma.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The free sheaf on a finite family is a biproduct of unit sheaves. Its total identity writes z as the sum of inclusions of its coordinates. Linearity of the generating map identifies its image with the stated sum of coordinate multiples of restricted generators. This includes the zero-generator and empty-open cases.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "note": "Agent expansion of the finite generating epimorphism in Stacks 01B5 and 01B8 using Mathlib restricted-site generators and finite biproducts; source text not installed on this worker machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite generating sections of sheaf of modules local linear combinations of sections",
+   "results": "Service unavailable: Internal Server Error (two attempts).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite generating sections sheaf modules local coefficients linear combinations",
+   "results": "IsFiniteType.exists_localGeneratorsData, LocalGeneratorsData.generators, GeneratingSections.s in Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators",
+   "date": "2026-10-13",
+   "verdict": "No direct coefficient statement; these supply finite generating epimorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "rg GeneratingSections|finite.*surjective.*stalk Mathlib/Algebra/Category/ModuleCat/Sheaf and lean/WeilConjectures",
+   "results": "Generators.lean provides generating epimorphisms; Free.lean freeHomEquiv and Preadditive/Biproducts.lean IsBilimit.total supply the coordinate argument. No exact statement.",
+   "date": "2026-10-13",
+   "verdict": "No match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.FiniteTypeSurjectiveNearStalk",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), through the citation of Cohomology of Schemes Lemma 01Y3 in lem-weil-pbc-coherent-generic-point-ideal-inclusion; this node is the input 'Modules, Lemma 01B8' of the proof of 01Y3, used for its parts (1), (2) and (3); finite generators and local coefficients in steps 1 and 3 of lem-weil-pbc-module-finite-type-surjective-on-stalk",
+   "via": [
+    "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+    "lem-weil-pbc-coherent-local-isomorphism",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.Topology.FiniteTypeLocalCoefficients",
+  "file": "lean/Sheaf/Topology/FiniteTypeLocalCoefficients.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_finite_type_local_coefficients",
+  "statement": "theorem exists_finite_type_local_coefficients (X : RingedSpace.{u}) (F : SheafOfModules.{u} (moduleRings X)) (x : X) [F.IsFiniteType] : ∃ (U : Opens X), x ∈ U ∧ ∃ (n : ℕ) (s : Fin n → F.val.obj (op U)), ∀ (W : Opens X) (hW : W ≤ U) (t : F.val.obj (op W)) (y : X), y ∈ W → ∃ (V : Opens X) (hV : V ≤ W), y ∈ V ∧ ∃ a : Fin n → (moduleRings X).obj.obj (op V), F.val.map (homOfLE hV).op t = ∑ j, a j • F.val.map (homOfLE (hV.trans hW)).op (s j)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T100001-L-2461106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T100001-L-2461106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11844,3 +11844,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:59 L: merged deliver/H1/Sheaf.AlgebraicGeometry.EtaleLimitOpenRestrictedSystem (stage 3; reviewer PASS; first push; landing 20261013T095959-L-2460598 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/H1/Sheaf.AlgebraicGeometry.FixedAbelianDescendedSectionLift (stage 3; reviewer PASS; after a return; landing 20261013T095959-L-2460817 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:00 L: merged deliver/H1/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps (stage 3; reviewer PASS; after a return; landing 20261013T100000-L-2460952 (interface); batch 20261013T095923; modules 2; new nodes 1)
+- 10:00 L: merged deliver/H1/Sheaf.Topology.FiniteTypeSurjectiveNearStalk (stage 3; reviewer PASS; first push; landing 20261013T100001-L-2461106 (interface); batch 20261013T095923; modules 2; new nodes 1)
