@@ -17,57 +17,55 @@
  ],
  "proof": [
   {
-   "text": "1. Choose V, P and its derived comparison from hlocal. The category of opens over V\n   is equivalent to the open-subspace site of V. At x, neighbourhoods contained in V\n   are cofinal among all neighbourhoods. Germ restriction therefore identifies both\n   the stalk ring and the stalk modules of a restricted sheaf with their stalks on X.\n   This identification commutes with all sheaf morphisms, hence with differentials.",
+   "text": "Destructure hlocal to choose V, its point y=(x,hx), P, its strict-perfect bounds a,b and eP. Set S=openModuleStalkFunctor X V y and construct L termwise as S(P). Preservation of zero morphisms gives preservation of zero objects, hence the bounds for L.",
    "uses": [
     "def-pc-perfect-complex",
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the finite-generation helper, the unit-stalk isomorphism in ideal_module_product_stalk, the equivalence of the over site with the open subscheme and restrictionScalarsIsoOfEquiv identify S(unit) with the ambient stalk ring. PreservesCoproduct.iso takes S(free ULift(Fin m)) to the coproduct of m copies of S(unit). Reindex by Equiv.ulift.symm, identify the finite coproduct with its biproduct and use ModuleCat.biproductIsoPi. Module.Finite.equiv transfers finite generation of the finite product to S(free). This also works for m=0.",
+   "uses": [
+    "def-sc-open-module-stalk-functor",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In each degree apply S to the two maps of the finite-free retraction supplied by IsStrictlyPerfect. Functor.map_comp and map_id verify the retraction equation. The finite free stalk is projective by openModuleStalk_free_projective, so Retract.projective and the ModuleCat comparison instance give Module.Projective of L.X j. The retraction equation explicitly gives surjectivity of S(pi); Module.Finite.of_surjective and the preceding helper give finite generation.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-sc-open-module-stalk-functor",
+    "lem-sc-open-module-stalk-free-projective",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the exactness instances of S and Mathlib Functor.mapDerivedCategoryFactors to map eP and eG, obtaining Q(L) isomorphic to Q(S(R(G))), where R is open restriction. Apply nonempty_restriction_stalk_extension_iso to G. Use the chain isomorphism induced by Modules.overFunctorEquiv to identify over-site restriction with open-subscheme restriction. Restrict the resulting extension-stalk comparison back along the open immersion stalk-ring map. That map is an isomorphism, hence its scalar restriction is an equivalence and the extension/restriction adjunction unit is invertible. Its termwise chain isomorphism cancels the scalar extension. Compose these chain isomorphisms and apply Q.mapIso to obtain the stated derived isomorphism. The exact-functor API allows the two morphism universes to differ.",
+   "uses": [
+    "def-sc-open-module-stalk-functor",
+    "lem-pc-open-restriction-stalk-extension-iso",
+    "def-pc-derived-category",
     "def-pc-module-stalk-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tags 00A0(3), 01AG, 08C4 and 08CM: open restriction, exact stalks and strictly perfect complexes"
-   }
-  },
-  {
-   "text": "2. Apply the stalk functor termwise to P to obtain L over O_X,x. Stalks preserve zero\n   objects, so the lower and upper bounds of P give the same bounds for L. Stalks\n   commute with finite coproducts, and the germ of the unit module is the stalk ring.\n   Consequently the stalk of the finite free sheaf on Fin m is the free module of\n   rank m. Apply stalks to each retraction in IsStrictlyPerfect. Its composite is\n   the identity by functoriality. Thus every L.X j is a retract of a finite free\n   module: it is finite and projective, without using local-ring freeness yet.",
-   "uses": [
-    "def-pc-perfect-complex",
-    "def-weil-pbc-free-module",
-    "def-weil-finitely-generated-module",
-    "def-weil-pbc-projective-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tags 00A0(3), 01AG, 08C4 and 08CM: open restriction, exact stalks and strictly perfect complexes"
-   }
-  },
-  {
-   "text": "3. Stalks are exact by Tag 01AG, so preserve quasi-isomorphisms. Their termwise\n   functor descends to the derived localization. Apply it to the local comparison,\n   and compose with the cofinal germ comparison and eG. This gives Q(L) isomorphic\n   to Q(G_x). This last argument uses the universal property of localization; the\n   morphism universes v and w can differ, since it only transports an isomorphism\n   between the represented objects, not an equivalence of the entire categories.\nNo residue fibre, finiteness of its cohomology, or minimal model is asserted here.\nFor a zero representative all terms and their retracts are zero.",
-   "uses": [
-    "lem-weil-pbc-module-stalk-exact",
-    "def-pc-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tags 00A0(3), 01AG, 08C4 and 08CM: open restriction, exact stalks and strictly perfect complexes"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
-  "def-pc-module-stalk-functor",
-  "def-weil-pbc-free-module",
-  "def-weil-finitely-generated-module",
-  "def-weil-pbc-projective-module",
-  "lem-weil-pbc-module-stalk-exact",
-  "def-pc-derived-category"
+  "def-sc-open-module-stalk-functor",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-sc-open-module-stalk-free-projective",
+  "lem-pc-open-restriction-stalk-extension-iso",
+  "def-pc-derived-category",
+  "def-pc-module-stalk-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tags 00A0(3), 01AG, 08C4 and 08CM: open restriction, exact stalks and strictly perfect complexes; C4 writes out the stalk/localization interface from these source arguments"
+  "place": "Tags 00A0(3), 01AG, 08C4 and 08CM: open restriction, exact stalks and strictly perfect complexes; E2 implements the explicit open-stalk construction, finite coproduct/retraction arguments and exact-functor derived comparison in Lean"
  },
  "mathlib_searches": [
   {
@@ -148,10 +146,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T032956-L-3674228",
-  "kind": "interface",
+  "landing": "20261013T054213-L-441749",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
