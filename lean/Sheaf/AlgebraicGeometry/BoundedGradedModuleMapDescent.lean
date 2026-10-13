@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent
-import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
+import Sheaf.AlgebraicGeometry.BoundedGradedFamilyDescent
+import Sheaf.AlgebraicGeometry.BoundedGradedMapCompatibility
 
 /-! # Descent of bounded graded modules and successive maps
 
@@ -71,6 +71,17 @@ theorem bounded_graded_module_map_descent
             (T := Over.mk (Spec.map (R.map (homOfLE hij))))
             (T' := Over.mk (c.π.app (op i)))
             (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (δ n) ≫
-              (e (n + 1)).hom = (e n).hom ≫ d n := by sorry
+              (e (n + 1)).hom = (e n).hom ≫ d n := by
+  classical
+  obtain ⟨j, hij, F, hFz, hFfp, hFqc, ⟨e⟩⟩ :=
+    bounded_graded_family_descent R c hc i f M a b hM_zero hM_fp hM_qc
+  let φ := fun n ↦ (e n).hom ≫ d n ≫ (e (n + 1)).inv
+  obtain ⟨k, _, hik, G, δ, hGz, hGfp, hGqc, t, ht⟩ :=
+    bounded_graded_map_compatibility R c hc i f a b j hij F hFz hFfp hFqc φ
+  refine ⟨k, hik, G, δ, hGz, hGfp, hGqc, fun n ↦ t n ≪≫ e n, ?_⟩
+  intro n
+  dsimp only [Iso.trans_hom]
+  rw [← Category.assoc, ht n]
+  simp [φ, Category.assoc]
 
 end AlgebraicGeometry
