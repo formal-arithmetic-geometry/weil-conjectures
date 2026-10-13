@@ -1,0 +1,160 @@
+{
+ "id": "lem-sc-picard-external-cup-shift-right",
+ "kind": "statement",
+ "title": "Successor step in the right external cup coefficient bound",
+ "statement": "Let $k$ be a field [def-weil-field], $X,Y$ quasi-compact $k$-schemes [def-pc-scheme] with affine diagonals, and $F,G$ quasi-coherent modules [pqf-def-coherent]. Use the scalar resolution models [lem-sc-picard-kunneth-resolution-model] and normalization [lem-sc-picard-external-cup-cochain]. Write $H^p$ for module right-derived global sections [def-sc-ringed-space-module-cohomology]. Fix $F$ and $d\\in\\mathbb N$. Suppose that for every quasi-coherent $G\\prime$ with $H^p(Y,G\\prime)=0$ whenever $d<p$, every normalized realization has invertible homology in every natural degree. If $H^p(Y,G)=0$ whenever $d+1<p$, then every normalized realization for $(F,G)$ has invertible homology in every natural degree.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Tag 0BED proof after equation 33.29.1.1: exact coefficient sequences, two dimension-shifting inductions and acyclic Leray base case"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-picard-external-cup-cochain"
+ ],
+ "proof": [
+  {
+   "text": "For the coefficient being shifted, equip the scheme with its given k-structure, embed the module in an acyclic quasi-coherent E, and take the quasi-coherent cokernel Q. The long exact module cohomology sequence identifies H^p(Q) with H^(p+1) of the original module for p>0. For d<p one has p>0 and d+1<p+1, so Q has bound d. E also has bound d. This includes d=0 and zero modules.",
+   "uses": [
+    "lem-sc-picard-qcoh-universal-delta-embedding",
+    "pqf-def-coherent",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose finite affine covers and the product cover. Sections on affine intersections are exact on quasi-coherent modules; the section pullback and tensor formulas identify product sections with tensors of factor sections. Field tensor is exact. Hence the signed refinement/cup comparisons form a map of short exact sequences of complexes, in the coefficient being shifted. The affine Cech comparisons and their naturality identify the long exact homology ladder with the external cup comparison, including connecting maps.",
+   "uses": [
+    "pqf-lem-affine-vanishing",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-sc-cech-comparison-natural",
+    "lem-sc-picard-cech-cup-pullback-compat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take normalized realizations for E and Q from the cochain existence theorem and apply the supplied bound-d induction hypothesis to both in every natural degree. Tensor Kunneth cycle spanning and normalization identify their homology maps with the transported Cech comparisons. The five lemma makes the comparison for the original coefficient invertible. The same spanning and normalization argument identifies any specified c with that comparison, so H(c) is invertible. This proves exactly one successor step and does not assume the conclusion for unbounded coefficients.",
+   "uses": [
+    "lem-sc-picard-external-cup-cochain",
+    "lem-sc-picard-kunneth-resolution-model",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-sc-cech-comparison-natural",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-sc-picard-cech-cup-pullback-compat",
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-picard-qcoh-universal-delta-embedding",
+  "lem-sc-qcoh-cech-total-tensor-nat-iso",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "pqf-def-coherent",
+  "pqf-lem-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth; F1 made the acyclic base and individual bounded dimension-shifting steps explicit, including transport to arbitrary normalized resolution-model maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent acyclic sheaves external cup product over a field induces homology isomorphism",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension shifting external cup comparison using short exact coefficient sequences and bounded cohomology",
+   "results": "Eight matches concerning group cohomology short exact sequences and Ext connecting morphisms; no quasi-coherent external cup comparison.",
+   "date": "2026-10-13",
+   "verdict": "No matching comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|dimension.shift",
+   "results": "Mathlib Ext dimension shifting and homotopy category acyclicity; no quasi-coherent external cup comparison. Local rg of lean/Sheaf, lean/WeilConjectures and dag/nodes found the existing acyclic embedding and finite bound, but no acyclic external cup base or successor statements.",
+   "date": "2026-10-13",
+   "verdict": "No matching statement; use the existing bound and embedding nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap, CategoryTheory.IsIso",
+   "results": "Six generic matches: isomorphisms induce homology isomorphisms, quasiIsoAt iff isIso homologyMap, truncation and homology-sequence lemmas. None proves the geometric external cup comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact comparison theorem; generic homology tools support the planned exact-sequence argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupQuasiIso",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Right coefficient induction step in Tag 0BED after equation-kunneth-on-cech",
+   "via": [
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupShiftRight",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupShiftRight.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCupCochain_isIso_shiftRight",
+  "statement": "theorem picardExternalCupCochain_isIso_shiftRight\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [CompactSpace Y]\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    (F : X.Modules) [F.IsQuasicoherent] (d : ℕ)\n    (ih : ∀ (G' : Y.Modules) [G'.IsQuasicoherent],\n      (∀ p : ℕ, d < p →\n        IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj G')) →\n      ∀ (c' : picardExternalTotal f g F G' ⟶\n        picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G')),\n        IsPicardExternalCupCochain f g F G' c' → ∀ n : ℕ,\n          IsIso (HomologicalComplex.homologyMap c' (n : ℤ)))\n    (G : Y.Modules) [G.IsQuasicoherent]\n    (hG : ∀ p : ℕ, d + 1 < p →\n      IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj G))\n    (c : picardExternalTotal f g F G ⟶\n      picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G))\n    (hc : IsPicardExternalCupCochain f g F G c) (n : ℕ) :\n    IsIso (HomologicalComplex.homologyMap c (n : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T045524-L-127495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T045524-L-127495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

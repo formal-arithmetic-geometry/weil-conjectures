@@ -8,19 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
-import Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
+import Sheaf.AlgebraicGeometry.PicardExternalCupAcyclic
+import Sheaf.AlgebraicGeometry.PicardExternalCupShiftLeft
+import Sheaf.AlgebraicGeometry.PicardExternalCupShiftRight
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteCohomologicalDimension
-import Sheaf.Paper.CechComparisonMapNaturality
-import Sheaf.Paper.CechCupPullbackCompat
-import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.Algebra.Homology.TensorKunnethNat
 
 /-! # Geometric invertibility of the normalized external cup comparison
 
@@ -84,6 +75,50 @@ theorem picardExternalCupCochain_isIso
     (c : picardExternalTotal f g F G ⟶
       picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G))
     (hc : IsPicardExternalCupCochain f g F G c) (n : ℕ) :
-    IsIso (HomologicalComplex.homologyMap c (n : ℤ)) := by sorry
+    IsIso (HomologicalComplex.homologyMap c (n : ℤ)) := by
+  let : X.Over (Spec (CommRingCat.of k)) := ⟨f⟩
+  have : IsAffineHom (pullback.diagonal (X ↘ Spec (CommRingCat.of k))) := by
+    change IsAffineHom (pullback.diagonal f)
+    infer_instance
+  let : Y.Over (Spec (CommRingCat.of k)) := ⟨g⟩
+  have : IsAffineHom (pullback.diagonal (Y ↘ Spec (CommRingCat.of k))) := by
+    change IsAffineHom (pullback.diagonal g)
+    infer_instance
+  obtain ⟨dX, hdX⟩ := exists_quasicoherent_cohomology_bound k X
+  obtain ⟨dY, hdY⟩ := exists_quasicoherent_cohomology_bound k Y
+  have acyclic_left (F' : X.Modules) [F'.IsQuasicoherent]
+      (hF' : ∀ p : ℕ, 0 < p →
+        IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F')) :
+      ∀ (d : ℕ) (G' : Y.Modules) [G'.IsQuasicoherent],
+        (∀ p : ℕ, d < p →
+          IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj G')) →
+        ∀ (c' : picardExternalTotal f g F' G' ⟶
+          picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F' G')),
+          IsPicardExternalCupCochain f g F' G' c' → ∀ n : ℕ,
+            IsIso (HomologicalComplex.homologyMap c' (n : ℤ)) := by
+    intro d
+    induction d with
+    | zero =>
+      intro G' _ hG' c' hc' n'
+      exact picardExternalCupCochain_isIso_of_acyclic k X Y f g F' G' hF' hG' c' hc' n'
+    | succ d ih =>
+      intro G' _ hG' c' hc' n'
+      exact picardExternalCupCochain_isIso_shiftRight k X Y f g F' d ih G' hG' c' hc' n'
+  have bounded_left : ∀ (d : ℕ) (F' : X.Modules) [F'.IsQuasicoherent],
+      (∀ p : ℕ, d < p →
+        IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F')) →
+      ∀ (c' : picardExternalTotal f g F' G ⟶
+        picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F' G)),
+        IsPicardExternalCupCochain f g F' G c' → ∀ n : ℕ,
+          IsIso (HomologicalComplex.homologyMap c' (n : ℤ)) := by
+    intro d
+    induction d with
+    | zero =>
+      intro F' _ hF' c' hc' n'
+      exact acyclic_left F' hF' dY G (hdY G) c' hc' n'
+    | succ d ih =>
+      intro F' _ hF' c' hc' n'
+      exact picardExternalCupCochain_isIso_shiftLeft k X Y f g G d ih F' hF' c' hc' n'
+  exact bounded_left dX F (hdX F) c hc n
 
 end AlgebraicGeometry.Scheme.Modules
