@@ -1,0 +1,114 @@
+{
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tags 08HY, 08DW and 0D5S; derived tensor composition and restriction"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Factorization equations for derived tensor composition, exact restriction and singles"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryCompIso|mapDerivedCategorySingleFunctor",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "verdict": "Constituents only; no full pinned restriction square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived counit commutes with exact restriction and tensor pullback composition",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit",
+   "verdict": "Constituents only; no full pinned restriction square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_singleFunctor_obj, CategoryTheory.Functor.mapDerivedCategoryIdIso_inv_app_singleFunctor_obj, CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj, CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj_assoc, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app_assoc",
+   "verdict": "Constituents only; no full pinned restriction square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "left derived counit compatibility with exact open restriction and tensor composition",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounit",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "mathlib_match": null,
+ "id": "lem-pc-open-pinned-single-tensor-restriction-factors",
+ "kind": "statement",
+ "title": "Termwise single restriction factor identities",
+ "statement": "For a module M and a commuting open square, (1) the exact restriction homotopy factorization followed by Qh of its mapped-single comparison equals the exact derived single restriction comparison; (2) restriction of Qh of the mapped-single comparison for tensor pullback k, followed by the constructed target isomorphism, equals the exact restriction factorization, Qh of the homotopy tensor restriction isomorphism, Qh of tensor pullback j applied to the restriction single comparison, and Qh of the mapped-single comparison for j, in that order. These are termwise identities, with no derived tensor counit. Definitions and ingredients: [def-pc-open-pinned-single-tensor-restriction-iso], [def-pc-derived-open-restriction-maps].",
+ "stmt_deps": [
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Expand mapDerivedCategorySingleFunctor and mapDerivedCategoryFactorsh and cancel quotientCompQhIso factors to prove (1). For (2), use naturality of the exact restriction factorization to move the localized mapped-single comparison past it; then expand the homotopy composition isomorphisms and use singleMapHomologicalComplex naturality and composition compatibility. In degree zero the maps agree by the constructed underived tensor restriction isomorphism; in other degrees they are maps between zero objects. Apply the quotient and Qh.",
+   "uses": [
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-open-pinned-single-tensor-restriction-iso"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-pinned-single-degree-zero-counit",
+   "place": "Termwise single restriction factor identities"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenPinnedSingleTensorRestrictionFactors.lean",
+  "declaration": "AlgebraicGeometry.open_pinned_single_tensor_restriction_factors",
+  "declarations": [
+   "AlgebraicGeometry.open_pinned_single_tensor_restriction_factors"
+  ],
+  "statement": "theorem open_pinned_single_tensor_restriction_factors [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive] {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme) (hj : j ≫ U.ι = U'.ι ≫ k) (M : X.Modules) : let P := (HomotopyCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M let H := (schemeOpenRestriction X U).obj M let qR := (HomotopyCategory.quotient _ (.up ℤ)).map ((HomologicalComplex.singleMapHomologicalComplex (schemeOpenRestriction X U) (.up ℤ) 0).hom.app M) let qk := (HomotopyCategory.quotient _ (.up ℤ)).map ((HomologicalComplex.singleMapHomologicalComplex (Scheme.Modules.tensorPullback k) (.up ℤ) 0).hom.app M) let qj := (HomotopyCategory.quotient _ (.up ℤ)).map ((HomologicalComplex.singleMapHomologicalComplex (Scheme.Modules.tensorPullback j) (.up ℤ) 0).hom.app H) (schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app P ≫ DerivedCategory.Qh.map qR = ((schemeOpenRestriction X U).mapDerivedCategorySingleFunctor 0).hom.app M ∧ (schemeOpenRestriction X' U').mapDerivedCategory.map (DerivedCategory.Qh.map qk) ≫ (openPinnedSingleTargetRestrictionIso k U U' j hj).hom.app M = (schemeOpenRestriction X' U').mapDerivedCategoryFactorsh.hom.app ((Scheme.Modules.tensorPullback k).mapHomotopyCategory (.up ℤ) |>.obj P) ≫ DerivedCategory.Qh.map ((openPinnedHomotopyTensorRestrictionIso k U U' j hj).hom.app P) ≫ DerivedCategory.Qh.map ((Scheme.Modules.tensorPullback j).mapHomotopyCategory (.up ℤ) |>.map qR) ≫ DerivedCategory.Qh.map qj",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T155943-L-1306083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T155943-L-1306083",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

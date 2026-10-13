@@ -2,6 +2,8 @@
 module
 public import Sheaf.AlgebraicGeometry.PinnedSingleBaseChangeShift
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
+import Sheaf.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction
+import Sheaf.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors
 
 /-! # Restriction of the pinned single tensor counit
 Source: Stacks Project, Tags 08DW, 08IB and 08HY.
@@ -31,6 +33,26 @@ def openPinnedSingleDegreeZeroCounit
       ((HomologicalComplex.singleMapHomologicalComplex
         (Scheme.Modules.tensorPullback k) (ComplexShape.up ℤ) 0).hom.app M))
 
+private theorem assembleCounitSquare
+    {C : Type*} [Category C] {A B C₀ D E F G H I J : C}
+    (a : A ⟶ B) (b : B ⟶ C₀) (c : C₀ ⟶ D) (d : D ⟶ E)
+    (e : C₀ ⟶ F) (f : F ⟶ G) (g : G ⟶ H) (h : H ⟶ E)
+    (i : A ⟶ I) (j : I ⟶ G) (k : I ⟶ J) (l : J ⟶ H) (s : A ⟶ J)
+    (hT : c ≫ d = e ≫ f ≫ g ≫ h)
+    (hc : a ≫ b ≫ e ≫ f = i ≫ j)
+    (hn : k ≫ l = j ≫ g) (hR : i ≫ k = s) :
+    a ≫ (b ≫ c) ≫ d = s ≫ l ≫ h := by
+  calc
+    a ≫ (b ≫ c) ≫ d = a ≫ b ≫ e ≫ f ≫ g ≫ h := by
+      rw [Category.assoc, hT]
+    _ = (a ≫ b ≫ e ≫ f) ≫ g ≫ h := by simp only [Category.assoc]
+    _ = i ≫ j ≫ g ≫ h := by rw [hc, Category.assoc]
+    _ = i ≫ k ≫ l ≫ h := by rw [← Category.assoc j, ← hn, Category.assoc]
+    _ = s ≫ l ≫ h := by rw [← Category.assoc i, hR]
+
+set_option maxHeartbeats 800000 in
+-- Nested derived and homotopy comparisons require additional typeclass reduction.
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of the pinned counit, before applying any direct image.
 Source: Stacks Project, Tags 08DW, 08IB and 08HY.
 (blueprint: lem-pc-open-pinned-single-degree-zero-counit).
@@ -68,6 +90,29 @@ theorem open_pinned_single_degree_zero_counit_square
             (𝟙 _) U U' j hj ≫
           (schemeOpenRestriction X' U').mapDerivedCategory.map
             (openPinnedSingleDegreeZeroCounit k M) ≫ t.hom.app M =
-          (derivedPullback j).map s ≫ openPinnedSingleDegreeZeroCounit j H := by sorry
+          (derivedPullback j).map s ≫ openPinnedSingleDegreeZeroCounit j H := by
+  let P := (HomotopyCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0)
+  let t := openPinnedSingleTargetRestrictionIso.{u, w} k U U' j hj
+  refine ⟨t, ?_⟩
+  intro M
+  obtain ⟨hR, hT⟩ := open_pinned_single_tensor_restriction_factors.{u, w} k U U' j hj M
+  have hc := open_pinned_counit_homotopy_restriction.{u, w} k U U' j hj (P.obj M)
+  let qR := (HomotopyCategory.quotient _ (.up ℤ)).map
+    ((HomologicalComplex.singleMapHomologicalComplex
+      (schemeOpenRestriction X U) (.up ℤ) 0).hom.app M)
+  let qj := (HomotopyCategory.quotient _ (.up ℤ)).map
+    ((HomologicalComplex.singleMapHomologicalComplex
+      (Scheme.Modules.tensorPullback j) (.up ℤ) 0).hom.app
+        ((schemeOpenRestriction X U).obj M))
+  have hn := (pinnedPullbackCounit.{u, w} j).naturality qR
+  dsimp only [Functor.comp_map] at hn
+  have hR' := (Functor.map_comp (derivedPullback j)
+    ((schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app (P.obj M))
+    (DerivedCategory.Qh.map qR)).symm.trans
+      (congrArg (fun f ↦ (derivedPullback j).map f) hR)
+  dsimp only [openPinnedSingleDegreeZeroCounit]
+  rw [Functor.map_comp]
+  exact assembleCounitSquare _ _ _ _ _ _ _ _ _ _ _ _ _ hT hc hn hR'
 
 end AlgebraicGeometry
