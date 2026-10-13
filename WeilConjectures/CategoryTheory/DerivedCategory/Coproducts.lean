@@ -48,7 +48,7 @@ noncomputable def Cofan.isColimitOfBijective {C : Type*} [Category* C] {J : Type
     IsColimit c :=
   Cofan.IsColimit.mk c (fun t ↦ ((h t.pt).2 t.inj).choose)
     (fun t j ↦ congrFun ((h t.pt).2 t.inj).choose_spec j)
-    (fun t m hm ↦ (h t.pt).1 ((funext hm).trans ((h t.pt).2 t.inj).choose_spec.symm))
+    (fun t _ hm ↦ (h t.pt).1 ((funext hm).trans ((h t.pt).2 t.inj).choose_spec.symm))
 
 lemma Cofan.bijective_of_isColimit {C : Type*} [Category* C] {J : Type*} {X : J → C}
     {c : Cofan X} (hc : IsColimit c) (T : C) :
@@ -108,14 +108,13 @@ noncomputable def isColimitHomologyMapCoconeColimitCocone (F : J ⥤ ShortComple
     NatIso.ofComponents (fun j ↦ S.mapHomologyIso ((evaluation J C).obj j)) (fun {j j'} f ↦ by
       have := NatTrans.app_homology ((evaluation J C).map f) S
       dsimp at this ⊢
-      rw [this, Iso.hom_inv_id_assoc]
+      erw [this, Iso.hom_inv_id_assoc]
       rfl)
   refine ((IsColimit.precomposeHomEquiv e _).symm (colimit.isColimit _)).ofIsoColimit
-    (Cocones.ext (S.mapHomologyIso colim).symm fun j ↦ ?_)
+    (Cocone.ext (S.mapHomologyIso colim).symm fun j ↦ ?_)
   have := homologyMap_mapNatTrans (S := S) (evaluationToColim j)
-  dsimp [e] at this ⊢
-  rw [this]
-  rfl
+  simp only [evaluationToColim_app] at this
+  exact (Category.assoc _ _ _).trans (this.symm.trans rfl)
 
 instance preservesColimitsOfShape_homologyFunctor :
     PreservesColimitsOfShape J (homologyFunctor C) :=
@@ -165,10 +164,11 @@ lemma preservesColimitsOfShape_discrete_of_isColimit_cofan {A B : Type*} [Catego
     PreservesColimitsOfShape (Discrete J) Φ := by
   refine ⟨fun {G} ↦ ?_⟩
   let X : J → A := fun j ↦ G.obj ⟨j⟩
-  suffices PreservesColimit (Discrete.functor X) Φ from
-    preservesColimit_of_iso_diagram Φ (Discrete.natIso fun _ ↦ Iso.refl _ : _ ≅ G)
-  exact preservesColimit_of_preserves_colimit_cocone (coproductIsCoproduct X)
-    ((isColimitMapCoconeCofanMkEquiv Φ X _).symm (h X))
+  have : PreservesColimit (Discrete.functor X) Φ :=
+    preservesColimit_of_preserves_colimit_cocone (coproductIsCoproduct X)
+      ((isColimitMapCoconeCofanMkEquiv Φ X _).symm (h X))
+  exact preservesColimit_of_iso_diagram Φ
+    (Discrete.natIso fun _ ↦ Iso.refl _ : Discrete.functor X ≅ G)
 
 end CategoryTheory.Limits
 
@@ -180,25 +180,29 @@ variable {C : Type*} [Category* C] [Preadditive C] {J : Type*}
   (hc : IsColimit (Cofan.mk P ι))
 
 include hc in
+/-- The degree `p` component of a coproduct cofan of complexes is a coproduct cofan. -/
+noncomputable def isColimitCofanX (p : ℤ) : IsColimit (Cofan.mk (P.X p) fun j ↦ (ι j).f p) :=
+  isColimitCofanMkObjOfIsColimit (HomologicalComplex.eval C _ p) _ _ hc
+
+@[reassoc (attr := simp)]
+lemma ι_f_desc_isColimitCofanX (p : ℤ) {T : C} (f : ∀ j, (K j).X p ⟶ T) (j : J) :
+    (ι j).f p ≫ Cofan.IsColimit.desc (isColimitCofanX hc p) f = f j :=
+  Cofan.IsColimit.fac (isColimitCofanX hc p) f j
+
 /-- Homotopies glue along a coproduct of complexes. -/
 noncomputable def homotopyOfIsColimitCofan {L : CochainComplex C ℤ} {φ ψ : P ⟶ L}
     (h : ∀ j, Homotopy (ι j ≫ φ) (ι j ≫ ψ)) : Homotopy φ ψ where
-  hom p q := Cofan.IsColimit.desc
-    (isColimitCofanMkObjOfIsColimit (HomologicalComplex.eval C _ p) _ _ hc)
-    fun j ↦ (h j).hom p q
-  zero p q hpq := Cofan.IsColimit.hom_ext
-    (isColimitCofanMkObjOfIsColimit (HomologicalComplex.eval C _ p) _ _ hc) _ _ fun j ↦ by
-      simp [Cofan.IsColimit.fac, (h j).zero p q hpq]
-  comm p := Cofan.IsColimit.hom_ext
-    (isColimitCofanMkObjOfIsColimit (HomologicalComplex.eval C _ p) _ _ hc) _ _ fun j ↦ by
-      have hj := (h j).comm p
-      have h₁ : (ComplexShape.up ℤ).Rel p (p + 1) := rfl
-      have h₂ : (ComplexShape.up ℤ).Rel (p - 1) p := by simp
-      rw [dNext_eq _ h₁, prevD_eq _ h₂] at hj ⊢
-      simp only [cofan_mk_inj, HomologicalComplex.eval_map, Preadditive.comp_add,
-        HomologicalComplex.Hom.comm_assoc, HomologicalComplex.comp_f] at hj ⊢
-      erw [Cofan.IsColimit.fac, Cofan.IsColimit.fac_assoc]
-      exact hj
+  hom p q := Cofan.IsColimit.desc (isColimitCofanX hc p) fun j ↦ (h j).hom p q
+  zero p q hpq := Cofan.IsColimit.hom_ext (isColimitCofanX hc p) _ _ fun j ↦ by
+    simp [(h j).zero p q hpq]
+  comm p := Cofan.IsColimit.hom_ext (isColimitCofanX hc p) _ _ fun j ↦ by
+    have hj := (h j).comm p
+    have h₁ : (ComplexShape.up ℤ).Rel p (p + 1) := rfl
+    have h₂ : (ComplexShape.up ℤ).Rel (p - 1) p := by simp
+    rw [dNext_eq _ h₁, prevD_eq _ h₂] at hj ⊢
+    simp only [cofan_mk_inj, Preadditive.comp_add, HomologicalComplex.Hom.comm_assoc,
+      ι_f_desc_isColimitCofanX, ι_f_desc_isColimitCofanX_assoc, HomologicalComplex.comp_f] at hj ⊢
+    exact hj
 
 include hc in
 /-- The quotient functor to the homotopy category preserves coproducts. -/
@@ -234,12 +238,13 @@ end HomotopyCategory
 namespace DerivedCategory
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
-  [HasKInjectiveResolutions C]
+  [Abelian.HasKInjectiveResolutions C]
 
 lemma exists_iso_Qh_obj_of_isKInjective (Y : DerivedCategory C) :
     ∃ (L : CochainComplex C ℤ) (_ : L.IsKInjective),
       Nonempty (Y ≅ Qh.obj ((HomotopyCategory.quotient _ _).obj L)) := by
-  obtain ⟨L, hL, i, -, hi⟩ := HasKInjectiveResolutions.exists_isKInjective (Q.objPreimage Y)
+  obtain ⟨L, hL, i, -, hi⟩ :=
+    Abelian.HasKInjectiveResolutions.exists_isKInjective (Q.objPreimage Y)
   have : IsIso (Q.map i) := by rwa [isIso_Q_map_iff_quasiIso]
   exact ⟨L, hL, ⟨(Q.objObjPreimageIso Y).symm ≪≫ asIso (Q.map i) ≪≫
     ((quotientCompQhIso C).app L).symm⟩⟩
@@ -254,12 +259,14 @@ noncomputable def isColimitQhCofan {X : J → HomotopyCategory C (.up ℤ)}
   Cofan.isColimitOfBijective _ fun T ↦ by
     obtain ⟨L, _, ⟨e⟩⟩ := exists_iso_Qh_obj_of_isKInjective T
     refine Cofan.bijective_of_iso _ e ?_
-    have hQh (Y : HomotopyCategory C (.up ℤ)) := CochainComplex.IsKInjective.Qh_map_bijective Y L
+    set M := (HomotopyCategory.quotient C (.up ℤ)).obj L
+    have hQh (Y : HomotopyCategory C (.up ℤ)) : Function.Bijective (Qh.map : (Y ⟶ M) → _) :=
+      CochainComplex.IsKInjective.Qh_map_bijective Y L
     rw [← Function.Bijective.of_comp_iff _ (hQh P)]
-    have : ((fun (g : Qh.obj P ⟶ _) (j : J) ↦ (Cofan.mk (Qh.obj P) fun j ↦ Qh.map (ι j)).inj j ≫ g)
-        ∘ fun g ↦ Qh.map g) =
-        (fun (f : ∀ j, X j ⟶ _) (j : J) ↦ Qh.map (f j)) ∘
-          fun (g : P ⟶ _) (j : J) ↦ (Cofan.mk P ι).inj j ≫ g := by
+    have : ((fun (g : Qh.obj P ⟶ Qh.obj M) (j : J) ↦
+          (Cofan.mk (Qh.obj P) fun j ↦ Qh.map (ι j)).inj j ≫ g) ∘ (Qh.map : (P ⟶ M) → _)) =
+        (fun (f : ∀ j, X j ⟶ M) (j : J) ↦ Qh.map (f j)) ∘
+          fun (g : P ⟶ M) (j : J) ↦ (Cofan.mk P ι).inj j ≫ g := by
       ext g j
       simp
     rw [this]
@@ -289,14 +296,14 @@ end DerivedCategory
 namespace CategoryTheory.Functor
 
 variable {C₁ C₂ : Type*} [Category* C₁] [Abelian C₁] [Category* C₂] [Abelian C₂]
-  [HasDerivedCategory C₁] [HasDerivedCategory C₂] [HasKInjectiveResolutions C₂]
+  [HasDerivedCategory C₁] [HasDerivedCategory C₂] [Abelian.HasKInjectiveResolutions C₂]
   (F : C₁ ⥤ C₂) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   {J : Type*} [HasColimitsOfShape (Discrete J) C₁] [HasColimitsOfShape (Discrete J) C₂]
   [PreservesColimitsOfShape (Discrete J) F]
 
 /-- The functor induced on derived categories by an exact functor preserving coproducts of
 shape `J` preserves coproducts of shape `J`. -/
-instance preservesColimitsOfShape_mapDerivedCategory [HasKInjectiveResolutions C₁] :
+instance preservesColimitsOfShape_mapDerivedCategory [Abelian.HasKInjectiveResolutions C₁] :
     PreservesColimitsOfShape (Discrete J) F.mapDerivedCategory :=
   have := preservesColimitsOfShape_of_natIso F.mapDerivedCategoryFactors.symm
   preservesColimitsOfShape_discrete_of_essSurj DerivedCategory.Q _

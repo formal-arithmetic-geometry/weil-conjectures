@@ -423,13 +423,35 @@ lemma shriekBaseChange_refinementComparison {c d : Compactification f}
         (F.pf r'.hom).map (inv ((F.baseChange (𝟙 X') c'.i d'.i r'.hom hr'.flip.w).natTrans.app
           ((F.pb g').obj K)) ≫ (F.sh c'.i).map ((F.pbId X').hom.app ((F.pb g').obj K))) := by
     intro K
-    have hinv := congrArg inv (hcube K)
-    simp only [IsIso.inv_comp, Functor.map_inv, Category.assoc, NatIso.isIso_inv_app,
-      IsIso.Iso.inv_inv, IsIso.Iso.inv_hom, Functor.map_comp, Iso.app_inv] at hinv
+    have hinv := (IsIso.inv_eq_inv (f := _) (g := _)).mpr (hcube K)
+    simp only [IsIso.inv_comp, Category.assoc, ← Functor.map_inv, NatIso.inv_inv_app,
+      NatIso.inv_hom_app] at hinv
+    -- the transpose of the base change map of the pushforwards along `r'^* ⊣ r'_*`
+    have hm : ∀ {A : F.obj d.Z} {B : F.obj c.Z} (z : (F.pb r.hom).obj A ⟶ B),
+        (F.pb r'.hom).map ((F.pb hd).map ((F.adj r.hom).unit.app A ≫ (F.pf r.hom).map z) ≫
+          (F.pfBaseChange hc r'.hom r.hom hd hcomm).natTrans.app B) ≫
+          (F.adj r'.hom).counit.app ((F.pb hc).obj B) =
+        (F.sqIso hc r'.hom r.hom hd hcomm).inv.app A ≫ (F.pb hc).map z := by
+      intro A B z
+      have h₁ := mateEquiv_counit (F.adj r.hom) (F.adj r'.hom)
+        (TwoSquare.mk _ _ _ _ (F.sqIso hc r'.hom r.hom hd hcomm).inv) B
+      have h₂ := (F.sqIso hc r'.hom r.hom hd hcomm).inv.naturality
+        ((F.adj r.hom).unit.app A ≫ (F.pf r.hom).map z)
+      simp only [Functor.comp_obj, Functor.comp_map] at h₁ h₂
+      rw [Functor.map_comp, Category.assoc]
+      erw [h₁, reassoc_of% h₂]
+      rw [← Functor.map_comp]
+      simp
     apply ((F.adj r'.hom).homEquiv _ _).symm.injective
-    simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
-      Adjunction.counit_naturality, Adjunction.left_triangle_components_assoc]
-    sorry
+    simp only [Adjunction.homEquiv_counit]
+    have hm' := hm (A := (F.sh d.i).obj K) (B := (F.sh c.i).obj K)
+      (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
+        (F.sh c.i).map ((F.pbId X).hom.app K))
+    simp only [Functor.map_comp, Category.assoc] at hm' hinv
+    simp only [Functor.map_comp, Category.assoc, Adjunction.counit_naturality,
+      Adjunction.left_triangle_components_assoc]
+    rw [reassoc_of% hm']
+    exact hinv
   sorry
 
 end ShriekBaseChange

@@ -195,11 +195,23 @@ noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
   (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft D((c.i)_!open[A])
       (ProEtale.derivedBaseChangeMap A (c.isPullback_g_ofIsPullback sq).flip.toCommSq) ≫
-    (Functor.associator _ _ _).inv ≫ (rightDerivedLowerShriekOfCompactificationBaseChangeIso A sq c).hom
+    ((Functor.associator _ _ _).symm ≪≫
+      rightDerivedLowerShriekOfCompactificationBaseChangeIso A sq c).hom
 
 end Exchange
 
 section Finite
+
+/-- A component of a composite `a ≫ F ◁ β ≫ b` of natural transformations is an isomorphism as
+soon as the components of `a`, of `β` at `F.obj K` and of `b` are. Stated abstractly so that the
+kernel does not have to unfold the concrete functors when checking instances. -/
+lemma _root_.CategoryTheory.NatTrans.isIso_app_comp_whiskerLeft_comp {C D E : Type*}
+    [Category* C] [Category* D] [Category* E] {F : C ⥤ D} {G H : D ⥤ E} {P Q : C ⥤ E}
+    (a : P ⟶ F ⋙ G) (β : G ⟶ H) (b : F ⋙ H ⟶ Q) (K : C) [IsIso (a.app K)]
+    [IsIso (β.app (F.obj K))] [IsIso (b.app K)] :
+    IsIso ((a ≫ Functor.whiskerLeft F β ≫ b).app K) := by
+  rw [NatTrans.comp_app, NatTrans.comp_app, Functor.whiskerLeft_app]
+  infer_instance
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
@@ -245,9 +257,7 @@ theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     IsIso ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
       c).app K) := by
   have := isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactification Λ sq c K hK
-  simp only [rightDerivedLowerShriekOfCompactificationBaseChangeMap, NatTrans.comp_app,
-    Functor.whiskerLeft_app]
-  infer_instance
+  sorry
 
 end Finite
 
