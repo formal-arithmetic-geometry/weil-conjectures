@@ -14,24 +14,30 @@
  ],
  "proof": [
   {
-   "text": "Put R = W^* G. Compare the source with R[0] by the exact inverse-image\nsingle comparison. Naturality of the derived unit moves that comparison through\npullback. Resolve R and f^*R by bounded-below injective resolutions and lift the\nunderived adjunction unit to the resolutions. The derived unit is characterized\nby its composite with the right-derived unit, so the lifted morphism computes\nit. The Leray comparison is characterized by its composite unit, hence its\ncomposite with that morphism is the lift of the ordinary section pullback.\nIn degree zero the augmentations identify the kernels of the first differentials\nwith the original sheaves, because sections are left exact. These are exactly\nthe homologyRightDerivedFunctorObjSingleFunctorIso and rightDerivedZeroIsoSelf\ncomparisons in the formula. Cancel the resolution augmentations and the exact\nsingle comparisons to obtain the stated equation. No pullback of sections is\ninverted; the argument works for empty schemes and arbitrary sheaves.",
+   "text": "Apply derivedSectionPullback_single_unit to M=W*G. Apply H⁰ and postcompose with the target zero comparison. Normalize both single units with rightDerivedSingleUnit_zero. Since homology of the source single unit is an isomorphism, cancel it; naturality of singleFunctorCompHomologyFunctorIso gives ordinary section pullback between the two zero comparisons.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-sbc-raw-restricted-cohomology-comparison-map"
+    "lem-sbc-derived-section-single-unit",
+    "lem-sbc-right-derived-single-zero-unit"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use naturality of τ for the exact restriction/single comparison b. Expand c and functoriality of the two maps, then apply the preceding single-sheaf calculation. By the real definition of zeroIso, H⁰(RΓ(b.hom)) followed by the source single zero comparison is zeroIso(W,G). Reassociation proves the original equation unchanged.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-sbc-derived-section-single-unit",
+  "lem-sbc-right-derived-single-zero-unit",
   "def-sbc-raw-restricted-cohomology-comparison-map"
  ],
  "proof_origin": {
-  "by": "agent G2",
-  "document": "Stacks Project and parent node proof step 2",
-  "place": "Separated degree-zero adjunction/Leray calculation and restriction/coefficient coherence."
+  "by": "agent W4",
+  "document": "Stacks Project, Tags 07A6 and 0156, and the existing proved single-unit normalization",
+  "place": "Factor the unit–Leray map before homology; normalize the right-derived single unit; transport along b by naturality."
  },
  "mathlib_searches": [
   {
@@ -112,9 +118,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T095956-L-2459696",
+  "landing": "20261013T172700-L-2101584",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
