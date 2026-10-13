@@ -12855,3 +12855,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:35 L: merged deliver/W4/Sheaf.AlgebraicGeometry.FinitePresentationAffineSectionsRealization (stage 3; reviewer PASS; after a return; landing 20261013T143551-L-562855 (interface); batch 20261013T143541; modules 1; new nodes 0; change records: coord/changes/finite-presentation-probe-linter.md)
 
 - 22:47 L: batch 20261013T144152 withdrawn: take-out conflict: repair claim already held by C3
+- 14:48 L: returned deliver/F1/Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel (reviewer RETURN: (reviewer X-62ccc, head 62ccc3923) H9: In lean/Sheaf/AlgebraicGeometry/LocalKFlatPullbackModel.lean, change `public impo)
