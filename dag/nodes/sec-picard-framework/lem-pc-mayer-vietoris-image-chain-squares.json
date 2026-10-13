@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-mayer-vietoris-image-chain-squares",
+ "kind": "statement",
+ "title": "Restriction-induced chain components commute with the MV arrows",
+ "statement": "For h:X→Y, opens U,V of Y, complexes I on X and J on Y and any chain map f:h_*I→J, use the explicit components of [def-pc-mayer-vietoris-image-chain-data]. Let b be the biproduct lift of h_* of the two projections followed by the U and V components. Then h_* of the Mayer–Vietoris pair of units followed by b equals f followed by the pair of units of J; h_* of the difference of restrictions followed by the intersection component equals b followed by the difference of restrictions of J. No cover or injectivity hypotheses are needed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV, 08FE, 079V and 0D5T"
+ },
+ "stmt_deps": [
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-kinjective-mayer-vietoris-data"
+ ],
+ "proof": [
+  {
+   "text": "On every test open A and in every degree, the sectionwise comparison identifies I(h⁻¹(A∩W)) with I(h⁻¹A∩h⁻¹W). Its scalar action is the restriction formula for h-sharp. It commutes with all restriction maps, hence with both restriction units.",
+   "uses": [
+    "def-pc-mayer-vietoris-image-chain-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality with respect to f gives the two unit-component equations. The biproduct universal property gives the first square. Apply the same restriction calculation to U∩V⊆U and U∩V⊆V; additivity carries their difference to the second square. This works also for empty and repeated opens.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data",
+    "def-pc-mayer-vietoris-image-chain-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-mayer-vietoris-image-chain-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "C4",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV, 08FE, 079V and 0D5T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor localization unit compatibility with composition and natural isomorphisms",
+   "results": "CategoryTheory.Functor.rightDerived_fac_assoc; CategoryTheory.Functor.rightDerived_fac_app_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.Functor.rightDerived_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc; CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc; CategoryTheory.Functor.rightDerived_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|UnderivedOpenRestriction|OpenImageLocalization",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open restriction and direct image comparison commute with localization and Mayer Vietoris restriction maps",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection",
+  "date": "2026-10-14",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-image-resolution-comparison-intersection",
+   "place": "restriction-induced chain map and localization comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisImageChainSquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisImageChainSquares.lean",
+  "declaration": "AlgebraicGeometry.schemeMV_image_chain_squares",
+  "statement": "theorem schemeMV_image_chain_squares\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (f : ((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (.up ℤ)).obj I ⟶ J) :\n    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (.up ℤ)\n    let b := biprod.lift\n      (F.map biprod.fst ≫ schemeMVImageComponent h U I J f)\n      (F.map biprod.snd ≫ schemeMVImageComponent h V I J f)\n    (F.map (schemeMayerVietorisF X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) I) ≫ b =\n      f ≫ schemeMayerVietorisF Y U V J) ∧\n    (F.map (schemeMayerVietorisG X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) I) ≫\n        schemeMVImageComponent h (U ⊓ V) I J f =\n      b ≫ schemeMayerVietorisG Y U V J)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e969",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T222359-L-1221444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e969",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T222359-L-1221444",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean declarations with node signatures and documented correction; all six modules and the direct importer compile cleanly, the original consumer fails as reported, adaptation is minimal, and printed axioms match the two disclosed compatibility holes."
+ }
+}

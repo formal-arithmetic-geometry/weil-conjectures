@@ -12,21 +12,25 @@
  ],
  "proof": [
   {
-   "text": "Construct the comparison on the fixed K-injective resolutions and use naturality of the right-derived unit and sectionwise open restriction comparison.",
+   "text": "Use Mathlib fullness into the fixed K-injective target to obtain a normalized chain map. Construct its restriction-induced Mayer–Vietoris morphism. Its first component is definitionally that same chain map, and its intersection component satisfies the corrected transport identity.",
    "uses": [
-    "def-pc-derived-mayer-vietoris-canonical-data"
+    "lem-pc-mayer-vietoris-normalized-chain-map",
+    "def-pc-mayer-vietoris-image-chain-map",
+    "lem-pc-mayer-vietoris-image-resolution-comparison-intersection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-mayer-vietoris-canonical-data"
+  "lem-pc-mayer-vietoris-normalized-chain-map",
+  "def-pc-mayer-vietoris-image-chain-map",
+  "lem-pc-mayer-vietoris-image-resolution-comparison-intersection"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "M1",
+  "by": "agent",
+  "agent": "C4",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": " Tags 08BV"
+  "place": "Tags 08BV, 08FE, 079V and 0D5T"
  },
  "mathlib_searches": [
   {
@@ -74,7 +78,7 @@
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparison",
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisImageResolutionComparison.lean",
-  "declaration": "AlgebraicGeometry.schemeMV_image_resolution_comparison_components",
+  "declaration": "AlgebraicGeometry.schemeMV_image_resolution_comparison",
   "statement": "theorem schemeMV_image_resolution_comparison\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (E : schemeDerivedCategory X)\n    [(schemeOpenModuleImageComplex X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))\n      (schemeMVResolution X E)).IsKInjective] :\n    let I := schemeMVResolution X E\n    let J := schemeMVResolution Y ((schemeDerivedDirectImage h).obj E)\n    let S := schemeMayerVietorisComplex X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) I\n    let T := schemeMayerVietorisComplex Y U V J\n    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    ∃ m : S.map F ⟶ T,\n      (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom I).hom ≫\n          DerivedCategory.Q.map m.τ₁ ≫\n          (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).hom =\n        (schemeDerivedDirectImage h).map (schemeMVResolutionIso X E).hom ∧\n      (schemeDerivedDirectImage h).map\n          (((schemeMVDerivedRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))) ⋙\n              schemeDerivedDirectImage ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)).ι).map\n              (schemeMVResolutionIso X E).inv ≫\n            (schemeOpenModuleImageComplexComparison X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)) I\n              (schemeMVAdjunction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)))).inv) ≫\n          (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom\n            (schemeOpenModuleImageComplex X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)) I)).hom ≫\n          DerivedCategory.Q.map m.τ₃ =\n        (schemeMVOpenComparison h (U ⊓ V) E).hom ≫\n          (((schemeMVDerivedRestriction Y (U ⊓ V)) ⋙\n              schemeDerivedDirectImage (U ⊓ V).ι).map\n              (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).inv ≫\n            (schemeOpenModuleImageComplexComparison Y (U ⊓ V) J\n              (schemeMVAdjunction Y (U ⊓ V))).inv)",
   "branch": "sheaf-dag",
   "by": "M1",
@@ -93,11 +97,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
+  "reviewer": "X-2e969",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261013T201805-L-3975473",
+  "landing": "20261013T222359-L-1221444",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched Lean declarations with node signatures and documented correction; all six modules and the direct importer compile cleanly, the original consumer fails as reported, adaptation is minimal, and printed axioms match the two disclosed compatibility holes."
  }
 }

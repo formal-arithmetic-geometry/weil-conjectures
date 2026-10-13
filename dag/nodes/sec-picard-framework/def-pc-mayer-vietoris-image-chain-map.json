@@ -1,0 +1,107 @@
+{
+ "id": "def-pc-mayer-vietoris-image-chain-map",
+ "kind": "definition",
+ "title": "Explicit morphism of Mayer–Vietoris short complexes",
+ "statement": "Let h:X→Y be a morphism of schemes, U,V opens of Y, I a complex on X, J a complex on Y, and f:h_*I→J a chain map. The image components of [def-pc-mayer-vietoris-image-chain-data] define a short-complex morphism h_*MV(I,h⁻¹U,h⁻¹V)→MV(J,U,V). Its first component is f, its middle component is the biproduct lift of the two mapped projections followed by the U and V image components, and its third component is the U∩V image component. The squares are supplied by [lem-pc-mayer-vietoris-image-chain-squares].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV, 08FE, 079V and 0D5T"
+ },
+ "stmt_deps": [
+  "def-pc-mayer-vietoris-image-chain-data"
+ ],
+ "proof": [
+  {
+   "text": "Fix the three components by the stated formulas. Use the two commuting-square equations of [lem-pc-mayer-vietoris-image-chain-squares] to supply only the propositional fields of ShortComplex.homMk; no data is chosen from an existence theorem.",
+   "uses": [
+    "def-pc-mayer-vietoris-image-chain-data",
+    "lem-pc-mayer-vietoris-image-chain-squares"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-mayer-vietoris-image-chain-data",
+  "lem-pc-mayer-vietoris-image-chain-squares"
+ ],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor localization unit compatibility with composition and natural isomorphisms",
+   "results": "CategoryTheory.Functor.rightDerived_fac_assoc; CategoryTheory.Functor.rightDerived_fac_app_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.Functor.rightDerived_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc; CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc; CategoryTheory.Functor.rightDerived_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|UnderivedOpenRestriction|OpenImageLocalization",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open restriction and direct image comparison commute with localization and Mayer Vietoris restriction maps",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection",
+  "date": "2026-10-14",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-image-resolution-comparison-intersection",
+   "place": "restriction-induced chain map and localization comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisImageChainMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisImageChainMap.lean",
+  "declaration": "AlgebraicGeometry.schemeMVImageChainMap",
+  "statement": "def schemeMVImageChainMap {X Y : Scheme.{u}} (h : X ⟶ Y) (U V : Y.Opens)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (f : ((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (.up ℤ)).obj I ⟶ J) :\n    (schemeMayerVietorisComplex X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) I).map\n        ((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex (.up ℤ)) ⟶\n      schemeMayerVietorisComplex Y U V J",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e969",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T222359-L-1221444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e969",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T222359-L-1221444",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean declarations with node signatures and documented correction; all six modules and the direct importer compile cleanly, the original consumer fails as reported, adaptation is minimal, and printed axioms match the two disclosed compatibility holes."
+ }
+}

@@ -2,31 +2,39 @@
  "id": "lem-pc-mayer-vietoris-image-resolution-comparison-intersection",
  "kind": "statement",
  "title": "Intersection component of direct-image Mayer–Vietoris comparison",
- "statement": "For a scheme morphism, opens U,V, and any morphism of the mapped Mayer–Vietoris complexes, the normalized direct-image comparison on the inverse-image intersection equals the normalized comparison on U intersect V.",
+ "statement": "For a scheme morphism h:X→Y, opens U,V of Y and E∈D(O_X), choose any normalized chain map f:h_*I→J between the fixed resolutions, meaning phi_I.hom ≫ Q(f) ≫ resolutionIso_J.hom = Rh_*(resolutionIso_I.hom). Such a chain map exists by fullness of localization into K-injective J. Construct m with first component f, middle component the biproduct lift of the explicitly restriction-induced U and V maps, and third component the explicitly restriction-induced U∩V map of [def-pc-mayer-vietoris-image-chain-data]. Assuming the inverse-image intersection complex is K-injective, this constructed m satisfies the normalized intersection comparison identity of [def-pc-derived-mayer-vietoris-canonical-data]. No assertion is made for arbitrary morphisms of the short complexes.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tags 08FE and 0D5T"
  },
  "stmt_deps": [
-  "def-pc-derived-mayer-vietoris-canonical-data"
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-mayer-vietoris-image-chain-map"
  ],
  "proof": [
   {
-   "text": "Apply naturality of derived open restriction and direct image comparison to the supplied complex morphism, then use the defining equations of the fixed resolution isomorphisms.",
+   "text": "The third component of [def-pc-mayer-vietoris-image-chain-map] is the explicit intersection component. Factor it using schemeMVImageComponent_factor. Cancel the target open-image computation isomorphism and apply naturality of the general open-image localization map. The source-only compatibility identity then moves the source computation to the canonical derived comparison. Normalization of f, after cancellation of the target resolution isomorphism, says Rh_*(resolutionIso_I.inv) ≫ phi_I.hom ≫ Q(f) = resolutionIso_J.inv. Apply the derived open-image functor to this equation and obtain the desired identity.",
    "uses": [
+    "def-pc-mayer-vietoris-image-chain-map",
+    "def-pc-mayer-vietoris-image-chain-data",
+    "lem-pc-mayer-vietoris-image-localization-compatibility",
     "def-pc-derived-mayer-vietoris-canonical-data"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-mayer-vietoris-image-chain-map",
+  "def-pc-mayer-vietoris-image-chain-data",
+  "lem-pc-mayer-vietoris-image-localization-compatibility",
   "def-pc-derived-mayer-vietoris-canonical-data"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "P2",
+  "by": "agent",
+  "agent": "C4",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08FE and 0D5T"
+  "place": "Tags 08BV, 08FE, 079V and 0D5T"
  },
  "mathlib_searches": [
   {
@@ -75,9 +83,9 @@
   "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection",
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisImageResolutionComparisonIntersection.lean",
   "declaration": "AlgebraicGeometry.schemeMV_image_resolution_comparison_intersection",
-  "statement": "theorem schemeMV_image_resolution_comparison_intersection\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (E : schemeDerivedCategory X)\n    [(schemeOpenModuleImageComplex X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))\n      (schemeMVResolution X E)).IsKInjective] :\n    let I := schemeMVResolution X E\n    let J := schemeMVResolution Y ((schemeDerivedDirectImage h).obj E)\n    let S := schemeMayerVietorisComplex X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) I\n    let T := schemeMayerVietorisComplex Y U V J\n    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    ∀ m : S.map F ⟶ T,\n      (schemeDerivedDirectImage h).map\n          (((schemeMVDerivedRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))) ⋙\n              schemeDerivedDirectImage ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)).ι).map\n              (schemeMVResolutionIso X E).inv ≫\n            (schemeOpenModuleImageComplexComparison X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)) I\n              (schemeMVAdjunction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)))).inv) ≫\n          (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom\n            (schemeOpenModuleImageComplex X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)) I)).hom ≫\n          DerivedCategory.Q.map m.τ₃ =\n        (schemeMVOpenComparison h (U ⊓ V) E).hom ≫\n          (((schemeMVDerivedRestriction Y (U ⊓ V)) ⋙\n              schemeDerivedDirectImage (U ⊓ V).ι).map\n              (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).inv ≫\n            (schemeOpenModuleImageComplexComparison Y (U ⊓ V) J\n              (schemeMVAdjunction Y (U ⊓ V))).inv)",
+  "statement": "theorem schemeMV_image_resolution_comparison_intersection\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (E : schemeDerivedCategory X)\n    (f : ((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (.up ℤ)).obj (schemeMVResolution X E) ⟶\n        schemeMVResolution Y ((schemeDerivedDirectImage h).obj E))\n    (hf : (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom\n        (schemeMVResolution X E)).hom ≫ DerivedCategory.Q.map f ≫\n        (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).hom =\n      (schemeDerivedDirectImage h).map (schemeMVResolutionIso X E).hom)\n    [(schemeOpenModuleImageComplex X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))\n      (schemeMVResolution X E)).IsKInjective] :\n    let I := schemeMVResolution X E\n    let J := schemeMVResolution Y ((schemeDerivedDirectImage h).obj E)\n    let m := schemeMVImageChainMap (h := h) U V I J f\n    (schemeDerivedDirectImage h).map\n        (((schemeMVDerivedRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))) ⋙\n            schemeDerivedDirectImage ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)).ι).map\n            (schemeMVResolutionIso X E).inv ≫\n          (schemeOpenModuleImageComplexComparison X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)) I\n            (schemeMVAdjunction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)))).inv) ≫\n        (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom\n          (schemeOpenModuleImageComplex X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)) I)).hom ≫\n        DerivedCategory.Q.map m.τ₃ =\n      (schemeMVOpenComparison h (U ⊓ V) E).hom ≫\n        (((schemeMVDerivedRestriction Y (U ⊓ V)) ⋙\n            schemeDerivedDirectImage (U ⊓ V).ι).map\n            (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).inv ≫\n          (schemeOpenModuleImageComplexComparison Y (U ⊓ V) J\n            (schemeMVAdjunction Y (U ⊓ V))).inv)",
   "branch": "sheaf-dag",
-  "by": "P2",
+  "by": "C4",
   "date": "2026-10-14"
  },
  "reviewed": {
@@ -93,11 +101,37 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
+  "reviewer": "X-2e969",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261013T201805-L-3975473",
+  "landing": "20261013T222359-L-1221444",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched Lean declarations with node signatures and documented correction; all six modules and the direct importer compile cleanly, the original consumer fails as reported, adaptation is minimal, and printed axioms match the two disclosed compatibility holes."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "C4 stage 2",
+  "old_statement": "For a scheme morphism, opens U,V, and any morphism of the mapped Mayer–Vietoris complexes, the normalized direct-image comparison on the inverse-image intersection equals the normalized comparison on U intersect V.",
+  "what": "The old arbitrary-morphism claim is false: h=id, U=V=top, nonzero E and m=0 gives zero equal to an isomorphism. Replace it by an identity for the explicitly constructed restriction-induced morphism from a normalized chain map, as required by review point 4. The second reading proves the corrected identity by reduction to the source-only compatibility and open-image naturality; two strictly smaller compatibility holes remain.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tags 08BV, 08FE, 079V and 0D5T"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-pc-derived-mayer-vietoris-canonical-data"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply naturality of derived open restriction and direct image comparison to the supplied complex morphism, then use the defining equations of the fixed resolution isomorphisms.",
+    "uses": [
+     "def-pc-derived-mayer-vietoris-canonical-data"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-pc-derived-mayer-vietoris-canonical-data"
+  ]
  }
 }

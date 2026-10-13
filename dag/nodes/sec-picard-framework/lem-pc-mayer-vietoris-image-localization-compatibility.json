@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-mayer-vietoris-image-localization-compatibility",
+ "kind": "statement",
+ "title": "Source-only localization compatibility of the sectionwise image comparison",
+ "statement": "Let h:X→Y, W⊆Y, I a K-injective complex on X such that j_{h⁻¹W,*}r_{h⁻¹W}I is K-injective, and e:QI≅E any representation. Use [def-pc-mayer-vietoris-image-chain-data] and [def-pc-derived-mayer-vietoris-canonical-data]. Starting at Rh_* of the derived open image of E, transport by e.inv and the inverse open-image computation, then the direct-image computation and the localized sectionwise isomorphism, then the general open-image localization map on h_*I. This composite equals schemeMVOpenComparison(h,W,E) followed by the derived open-image functor applied to Rh_*(e.inv) followed by the computation isomorphism of I. There is no target resolution or normalized chain map in this statement.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV, 08FE, 079V and 0D5T"
+ },
+ "stmt_deps": [
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "Express all computation maps as inverse right-derived units, and express exact restriction by its localization comparison. Expand the sectionwise image isomorphism into the pushforward composition comparisons and the restriction/direct-image comparison.",
+   "uses": [
+    "def-pc-mayer-vietoris-image-chain-data",
+    "def-pc-open-image-complex-comparison-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the unit equations for rightDerivedFunctorCompMapDerivedCategoryIso, rightDerivedFunctorNatIso and rightDerivedFunctorCompIso. The composite is precisely the determining unit equation for the canonical direct-image composition and open-restriction comparisons. Uniqueness in the derived universal property gives the identity on I. The comparison on h_*I is a general localization map, so K-injectivity of that image is not asserted. Transport along e by naturality.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-mayer-vietoris-image-chain-data",
+  "def-pc-open-image-complex-comparison-iso",
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "C4",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV, 08FE, 079V and 0D5T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor localization unit compatibility with composition and natural isomorphisms",
+   "results": "CategoryTheory.Functor.rightDerived_fac_assoc; CategoryTheory.Functor.rightDerived_fac_app_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.Functor.rightDerived_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc; CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc; CategoryTheory.Functor.rightDerived_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|UnderivedOpenRestriction|OpenImageLocalization",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open restriction and direct image comparison commute with localization and Mayer Vietoris restriction maps",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection",
+  "date": "2026-10-14",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-image-resolution-comparison-intersection",
+   "place": "restriction-induced chain map and localization comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisImageLocalizationCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisImageLocalizationCompatibility.lean",
+  "declaration": "AlgebraicGeometry.schemeMV_image_localization_compatibility",
+  "statement": "theorem schemeMV_image_localization_compatibility\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    [I.IsKInjective] [(schemeOpenModuleImageComplex X (h ⁻¹ᵁ W) I).IsKInjective]\n    (E : schemeDerivedCategory X) (e : DerivedCategory.Q.obj I ≅ E) :\n    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (.up ℤ)\n    let H := (schemeMVDerivedRestriction Y W) ⋙ schemeDerivedDirectImage W.ι\n    (schemeDerivedDirectImage h).map\n        ((((schemeMVDerivedRestriction X (h ⁻¹ᵁ W)) ⋙\n            schemeDerivedDirectImage (h ⁻¹ᵁ W).ι).map e.inv) ≫\n          (schemeOpenModuleImageComplexComparison X (h ⁻¹ᵁ W) I\n            (schemeMVAdjunction X (h ⁻¹ᵁ W))).inv) ≫\n      (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom\n        (schemeOpenModuleImageComplex X (h ⁻¹ᵁ W) I)).hom ≫\n      DerivedCategory.Q.map (schemeMVImageComponent h W I (F.obj I) (𝟙 _)) ≫\n      schemeMVOpenImageLocalization Y W (F.obj I) =\n    (schemeMVOpenComparison h W E).hom ≫\n      H.map ((schemeDerivedDirectImage h).map e.inv ≫\n        (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom I).hom)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e969",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T222359-L-1221444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e969",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T222359-L-1221444",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean declarations with node signatures and documented correction; all six modules and the direct importer compile cleanly, the original consumer fails as reported, adaptation is minimal, and printed axioms match the two disclosed compatibility holes."
+ }
+}

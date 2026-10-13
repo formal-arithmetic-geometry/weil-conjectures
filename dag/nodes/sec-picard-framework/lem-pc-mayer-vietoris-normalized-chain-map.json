@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-mayer-vietoris-normalized-chain-map",
+ "kind": "statement",
+ "title": "Normalized chain representative for direct image",
+ "statement": "Let h:X→Y be a morphism of schemes and E an object of the derived category of modules on X. For the fixed K-injective resolutions I of E and J of Rh_*E from [def-pc-derived-mayer-vietoris-canonical-data], there exists a chain map f:h_*I→J with phi_I.hom ≫ Q(f) ≫ resolutionIso_J.hom = Rh_*(resolutionIso_I.hom). No K-injectivity of h_*I is assumed. Here phi_I:Rh_*(QI)≅Q(h_*I) is the canonical K-injective direct-image computation isomorphism, and resolutionIso_I:QI≅E and resolutionIso_J:QJ≅Rh_*E are the fixed resolution isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE and 0D5T"
+ },
+ "stmt_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "Compose phi_I.inv, Rh_*(resolutionIso_I.hom), and resolutionIso_J.inv to obtain a morphism Q(h_*I)→QJ. By [lem-weil-pbc-kinjective-hom-derived] represent it in the homotopy category, because J is K-injective. Fullness of the homotopy quotient gives a chain map. Naturality of quotientCompQhIso identifies its localization with the desired morphism; cancel the two isomorphisms.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "C4",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE and 0D5T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor localization unit compatibility with composition and natural isomorphisms",
+   "results": "CategoryTheory.Functor.rightDerived_fac_assoc; CategoryTheory.Functor.rightDerived_fac_app_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.Functor.rightDerived_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc; CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc; CategoryTheory.Functor.rightDerived_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|UnderivedOpenRestriction|OpenImageLocalization",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-14",
+   "verdict": "partial matches; no exact new compatibility statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open restriction and direct image comparison commute with localization and Mayer Vietoris restriction maps",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": "CochainComplex.IsKInjective.Qh_map_bijective (Mathlib.Algebra.Homology.DerivedCategory.KInjective): Qh.map is bijective on maps into a K-injective complex.",
+   "date": "2026-10-14",
+   "verdict": "match for the fullness step"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection",
+  "date": "2026-10-14",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-image-resolution-comparison-intersection",
+   "place": "explicit construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisImageChainMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisImageChainMap.lean",
+  "declaration": "AlgebraicGeometry.schemeMV_normalized_chain_map_exists",
+  "statement": "theorem schemeMV_normalized_chain_map_exists\n    (X Y : Scheme.{u}) (h : X ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (E : schemeDerivedCategory X)\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))] :\n    ∃ f : ((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (.up ℤ)).obj (schemeMVResolution X E) ⟶\n        schemeMVResolution Y ((schemeDerivedDirectImage h).obj E),\n      (RingedSpace.derivedModuleDirectImageKInjectiveIso h.toLRSHom.toShHom\n        (schemeMVResolution X E)).hom ≫ DerivedCategory.Q.map f ≫\n        (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).hom =\n      (schemeDerivedDirectImage h).map (schemeMVResolutionIso X E).hom",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e969",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T222359-L-1221444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e969",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T222359-L-1221444",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean declarations with node signatures and documented correction; all six modules and the direct importer compile cleanly, the original consumer fails as reported, adaptation is minimal, and printed axioms match the two disclosed compatibility holes."
+ }
+}
