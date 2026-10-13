@@ -10373,3 +10373,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:50 L: merged deliver/Q2/Sheaf.RingTheory.ColimitFlatRingMap (stage 3; reviewer PASS; first push; landing 20261013T005055-L-2551420 (proof); batch 20261013T005052; modules 1; new nodes 0)
 - 00:50 L: merged deliver/T3/Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientDifferential (stage 3; reviewer PASS; first push; landing 20261013T005055-L-2551525 (proof); batch 20261013T005052; modules 1; new nodes 0)
 - 00:50 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.FiniteFreeStalkFiniteMatrixLift (stage 3; reviewer PASS; first push; landing 20261013T005055-L-2551622 (proof); batch 20261013T005052; modules 1; new nodes 0)
+- 00:52 L: returned deliver/N1/Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionSucc (reviewer RETURN: (reviewer X-36cf5, head 36cf56b41) Point 2: In coord/changes/WellOrderedUnionProjectiveDimensionSucc-imports.md, replace)
