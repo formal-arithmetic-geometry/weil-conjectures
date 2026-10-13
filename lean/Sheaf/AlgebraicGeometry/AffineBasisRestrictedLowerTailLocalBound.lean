@@ -11,9 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
-import Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBoundAux
 
 /-! # Local cohomological bound for a restricted lower tail
 Source: Stacks Project, Tags 0D64, 01E1 and 03FD.
@@ -58,6 +56,11 @@ theorem affineBasisRestrictedLowerTail_local_bound
         IsZero ((RingedSpace.openModuleCohomology V.toScheme.toRingedSpace p U).obj
           ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) q).obj E)) := by
-  sorry
+  dsimp only
+  let B : Set (Opens V.toScheme) := V.toScheme.affineOpens
+  refine ⟨B, ?_, ?_⟩
+  · exact V.toScheme.isBasis_affineOpens
+  · intro U hU p hp q hq
+    apply affineBasisRestrictedLowerTail_local_vanishing X V hV F hhomology a U hU p hp q hq
 
 end AlgebraicGeometry

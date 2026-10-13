@@ -13131,3 +13131,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:24 L: merged deliver/A2/Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate (stage 3; reviewer PASS; first push; landing 20261013T162408-L-1518522 (proof); batch 20261013T162406; modules 1; new nodes 0)
 - 16:24 L: merged deliver/A4/Sheaf.Algebra.Homology.FiniteStripConeGradedMapEpi (stage 3; reviewer PASS; first push; landing 20261013T162408-L-1518626 (interface); batch 20261013T162406; modules 2; new nodes 1)
 - 16:24 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingPuncturedIso (stage 3; reviewer PASS; first push; landing 20261013T162408-L-1518728 (interface); batch 20261013T162406; modules 2; new nodes 1)
+- 16:24 L: merged deliver/B4/Sheaf.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound (stage 3; reviewer PASS; first push; landing 20261013T162409-L-1518831 (interface); batch 20261013T162406; modules 2; new nodes 1)
