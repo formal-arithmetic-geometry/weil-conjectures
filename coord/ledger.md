@@ -10568,3 +10568,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/M4/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeGlobal (stage 3; reviewer PASS; first push; landing 20261013T015602-L-3023242 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:56 L: merged deliver/N1/Sheaf.AlgebraicGeometry.EtaleCohomologyNaturalDerivedEvaluation (stage 3; reviewer PASS; first push; landing 20261013T015603-L-3023459 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:56 L: merged deliver/N1/Sheaf.AlgebraicGeometry.SupportedOpenPushforwardLocalComparisons (stage 3; reviewer PASS; first push; landing 20261013T015603-L-3023568 (proof); batch 20261013T015540; modules 1; new nodes 2)
+- 01:56 L: merged deliver/N2/Sheaf.AlgebraicGeometry.CoherentFormalModulesIsoEquivalence (stage 3; reviewer PASS; first push; landing 20261013T015603-L-3023685 (proof); batch 20261013T015540; modules 1; new nodes 0)

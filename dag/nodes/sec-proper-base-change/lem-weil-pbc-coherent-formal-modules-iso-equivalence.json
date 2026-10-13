@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Apply the formal-system pullback construction to e inverse and to e. Its equations with the full-subcategory inclusions specify the termwise module pullbacks and their maps, and give functors between the two formal categories.",
+   "text": "By Scheme.IdealSheafData.comap_comp, e.hom_inv_id and comap_id, the twice transported ideal (I.comap e.inv).comap e.hom equals I. Apply exists_formalSystemsPullback to e.inv and I, and to e.hom and I.comap e.inv, rewriting the latter result by this ideal equality. This gives functors P and Q between the formal categories, with equations hP and hQ identifying their composites with the full-subcategory inclusions with termwise tensor pullback.",
    "uses": [
     "lem-weil-pbc-formal-systems-pullback"
    ],
@@ -23,18 +23,18 @@
    }
   },
   {
-   "text": "Comap of ideals along the inverse composites is the original ideal. The pullback composition and identity isomorphisms yield natural isomorphisms between the two composites of the functors and the identity functors. Invariance of the three formal object conditions under natural isomorphism permits restricting these isomorphisms to the full subcategories.",
+   "text": "Apply nonempty_tensorPullbackComp to (e.hom,e.inv) and (e.inv,e.hom). Rewrite the composite scheme maps using e.hom_inv_id and e.inv_hom_id, then compose the inverse comparison isomorphisms with nonempty_tensorPullbackId. The result is natural isomorphisms tensorPullback e.inv followed by tensorPullback e.hom to the identity on X.Modules, and the reverse composite to the identity on Y.Modules. Map these natural isomorphisms through Functor.whiskeringRight to obtain the corresponding isomorphisms on inverse systems.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-iso-invariant"
+    "lem-pc-module-pullback-identity-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Section 0EHN, definition of coherent formal modules; Lemma 087W affine presentation and Lemma 0887 pullback of formal systems, specialized to inverse scheme isomorphisms"
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0097, lemma-push-pull-composition-modules; identity case by uniqueness of left adjoints"
    }
   },
   {
-   "text": "The restricted functors and the two natural isomorphisms define the equivalence, by Equivalence.mk. This is equivalence data for inverse scheme isomorphisms, not a use of abelianness or of the coimage-image conclusion.",
+   "text": "Rewrite the inclusions of the composites P followed by Q and Q followed by P using functor associativity and hP,hQ. Whisker the inverse-system comparison isomorphisms on the left with the respective full-subcategory inclusions, then compose with the functor unitors. This produces natural isomorphisms from each composite followed by its inclusion to the identity followed by that inclusion. Apply Functor.fullyFaithfulCancelRight to the inclusions to lift both isomorphisms into the formal categories. The inverse of the first lift is the unit; the second lift is the counit. Equivalence.mk P Q packages them into the required equivalence. No separate isomorphism-invariance lemma is needed because both functors already land in the required full subcategories.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -44,13 +44,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-iso-invariant",
-  "lem-weil-pbc-formal-systems-pullback"
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-pc-module-pullback-identity-composition"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Section 0EHN, definition of coherent formal modules; Lemma 087W affine presentation and Lemma 0887 pullback of formal systems, specialized to inverse scheme isomorphisms"
+  "by": "agent",
+  "agent": "N2",
+  "date": "2026-10-13",
+  "based_on": "Stacks 0887 termwise formal pullback and 0097 module pullback composition; existing node plan, with full faithfulness lifting the unit and counit instead of a separate isomorphism-invariance invocation."
  },
  "mathlib_searches": [
   {
@@ -121,10 +122,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T010618-L-2672073",
-  "kind": "interface",
+  "landing": "20261013T015603-L-3023685",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
