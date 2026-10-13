@@ -19,77 +19,49 @@
  ],
  "proof": [
   {
-   "text": "Restrict G to U and transport the over-site complex L to the open subscheme. Each L term is a retract of a finite free module, hence flat over the structure sheaf. Its upper degree bound gives K-flatness. Exact monoidal open restriction, eL and eK identify the total tensor of L with the restriction of G as a representative of the restriction of QK. Transport back to the open site.",
+   "text": "Use the actual construction strictPerfectRelativeTensorComplex f U L G as T. This is the ordinary signed total tensor on the open site, restricted along the base-ring map; no existential representative is chosen.",
    "uses": [
-    "def-pc-perfect-complex",
+    "def-pc-strict-perfect-relative-tensor-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For n outside [a+c,b+d], each summand indexed by p+q=n has p outside [a,b] or q outside [c,d] (omega, also for reversed intervals). Functor.map_isZero transports hGb through open restriction. Tensoring either zero term gives a zero summand. HomologicalComplex.mapBifunctor.hom_ext proves the identity of the total term is zero. Functor.map_isZero transports that zero term through scalar restriction. This is the private proved helper relativeTensorComplex_bound.",
+   "uses": [
     "def-pc-tensor-complex-sheaves",
-    "lem-pc-kflat-closure",
-    "lem-pc-derived-tensor-open-restriction-universes",
-    "lem-pc-kflat-derived-tensor-comparison"
+    "def-pc-strict-perfect-relative-tensor-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
-   }
+   "elementary": true
   },
   {
-   "text": "For each p+q=n outside [a+c,b+d], either p is outside [a,b] or q outside [c,d]. The corresponding tensor summand is zero. The direct-sum universal property shows that the total term is zero. Restriction and restriction of scalars preserve zero objects.",
+   "text": "Apply strictPerfect_relativeTensor_terms_flat to obtain flatness of every T term. The upper half of the proved support bound gives the bounded-above hypothesis b+d. Apply isKFlat_of_boundedAbove_flat on the base-ring localized site.",
    "uses": [
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-strict-perfect-relative-tensor-terms-flat",
+    "lem-pc-bounded-above-flat-kflat-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
-   }
+   "elementary": true
   },
   {
-   "text": "Fix a point x and an affine base neighbourhood of f(x). Affine opens of X containing x inside its preimage give a filtered neighbourhood basis. The affine-local flatness hypothesis makes the G term sections flat over the base section ring. Their colimit is the stalk, still flat. Localization of the base section ring gives flatness over the base stalk. Tensoring G with finite-free retracts gives finite sums and retracts of these flat modules; hence every term of the scalar-restricted total complex T is flat over the inverse-image base ring. Its boundedness gives K-flatness.",
+   "text": "Apply strictPerfect_relativeTensor_roof to the prescribed eK, hL and eL. Its common complex H and two quasi-isomorphisms have exactly the endpoints in the conclusion. Assemble T,H, the proved interval bound, K-flatness and both roof legs in the existential conjunction.",
    "uses": [
-    "def-pc-scheme-module-flat-over",
-    "lem-weil-pbc-filtered-colimit-flat-modules",
-    "def-pc-perfect-complex",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-kflat-closure"
+    "lem-pc-strict-perfect-relative-tensor-roof"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
-   }
-  },
-  {
-   "text": "Restriction of scalars is exact, so it transports the representative isomorphism to the derived category of base-ring modules on U. Represent this isomorphism by a roof H to the restricted scalar complex K and H to T in the homotopy category. Choose actual chain maps representing both legs. Each leg is a quasi-isomorphism since the roof represents an isomorphism and derived homology reflects this. These witnesses occur only inside an existential proposition; no persistent object is defined by choosing an arbitrary witness.",
-   "uses": [
-    "def-pc-derived-category",
-    "def-pc-quasi-iso-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
+  "def-pc-strict-perfect-relative-tensor-complex",
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-closure",
-  "lem-pc-derived-tensor-open-restriction-universes",
-  "lem-pc-kflat-derived-tensor-comparison",
-  "def-pc-scheme-module-flat-over",
-  "lem-weil-pbc-filtered-colimit-flat-modules",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-derived-category",
-  "def-pc-quasi-iso-modules"
+  "lem-pc-strict-perfect-relative-tensor-terms-flat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-strict-perfect-relative-tensor-roof"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R2",
+  "group": "W4",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Local relative Tor calculation needed for perfect direct image, split into a bounded base-ring model and a later model-independent homology comparison; original node proof steps 1 and 2."
+  "place": "Tags 0DJQ and 08CI; explicit construction and Lean proof of original step 2, with original steps 1/4 and 3 isolated as roof and flatness statements."
  },
  "mathlib_searches": [
   {
@@ -174,11 +146,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R2",
+  "reviewer": "X-d5efe",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T100112-L-2482330",
+  "landing": "20261013T115034-L-3327719",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and delivered Lean declarations with their DAG nodes; checked the construction, support proof, two named deferred lemmas, change record and report; all four modules and the sole direct importer StrictPerfectTensorRelativeTorBound compile, with expected axioms only."
  }
 }

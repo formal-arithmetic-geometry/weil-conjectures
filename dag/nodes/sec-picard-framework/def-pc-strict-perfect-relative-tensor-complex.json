@@ -1,0 +1,118 @@
+{
+ "id": "def-pc-strict-perfect-relative-tensor-complex",
+ "kind": "definition",
+ "title": "Explicit scalar-restricted tensor complex on an open site",
+ "statement": "Let f:X→S be a morphism of schemes [def-pc-scheme], U an open of X, L a complex of O_X restricted to the open site over U, and G a complex of O_X-modules. Define T by restricting G to U, taking the signed direct-sum total tensor L tensor G|_U [def-pc-tensor-complex-sheaves], and restricting scalars along the restriction to U of the canonical ring map f inverse-image O_S→O_X [def-pc-module-pullback]. Thus T is a complex of (f inverse-image O_S)|_U-modules. No perfection, flatness, bound or choice of derived representative enters this definition.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0DJQ and 08CI, local ordinary tensor model; original proof step 1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W4",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0DJQ and 08CI, local ordinary tensor model; original proof step 1; explicit stage-3 reduction of lem-pc-strict-perfect-relative-tensor-model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded tensor complex strictly perfect flat sheaves K flat relative model",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.iff_lTensor_exact', Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.Flat.iff_rTensor_exact', Module.Flat.of_flat_tensorProduct, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no complete relative model theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, IsZero",
+   "results": "loogle: unknown identifier 'IsZero'",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no complete relative model theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "strictPerfect|relativeTensor|isKFlat_of_boundedAbove_flat",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no complete relative model theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "total tensor of a strictly perfect complex and a relatively flat complex has flat terms and represents derived tensor on an open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isZero",
+   "results": "1 hits: CategoryTheory.Functor.map_isZero",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no complete relative model theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor|HasRightCalculusOfFractions",
+   "results": "25 hits: Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no complete relative model theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorModel",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-strict-perfect-relative-tensor-model",
+   "place": "Tags 0DJQ and 08CI, local ordinary tensor model; original proof step 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictPerfectRelativeTensorComplex.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictPerfectRelativeTensorComplex",
+  "statement": "def strictPerfectRelativeTensorComplex {X S : Scheme.{u}} (f : X ⟶ S) (U : X.Opens) (L : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) : CochainComplex (SheafOfModules.{u} ((sheafCompose ((Opens.grothendieckTopology X).over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj ((TopCat.Sheaf.inverseImageRing f.base S.sheaf).over U))) ℤ",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d5efe",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T115034-L-3327719",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d5efe",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T115034-L-3327719",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and delivered Lean declarations with their DAG nodes; checked the construction, support proof, two named deferred lemmas, change record and report; all four modules and the sole direct importer StrictPerfectTensorRelativeTorBound compile, with expected axioms only."
+ }
+}
