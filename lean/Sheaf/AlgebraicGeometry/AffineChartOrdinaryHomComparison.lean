@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Order.Antisymmetrization
+import Sheaf.AlgebraicGeometry.AffineChartCanonicalHomNaturality
 
 /-! # Hom comparisons for the explicit affine chart ring diagram
 
@@ -149,6 +150,39 @@ theorem affine_chart_ordinary_hom_comparison
             (∀ n : Q, eQ.hom ((1 : ↑(colimit F)) ⊗ₜ[F.obj t, r₀] n) =
               (1 : ↑(colimit F)) ⊗ₜ[F.obj x, r₁] ((1 : ↑(F.obj x)) ⊗ₜ[F.obj t, r] n)) →
             φ ≫ eQ.hom = eP.hom ≫ (ModuleCat.extendScalars r₁).map s →
-            chartOrdinaryMapRecovery q p q₀ w U a M N (α φ) (β s) := by sorry
+            chartOrdinaryMapRecovery q p q₀ w U a M N (α φ) (β s) := by
+  classical
+  let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))
+  let F := ordinaryChartRings R j g
+  let t := ordinaryChartStart j
+  let P := ordinaryChartBaseModule R j g M
+  let Q := ordinaryChartBaseModule R j g N
+  obtain ⟨α, hα⟩ := affine_chart_canonical_hom_naturality
+    R c hc i f j hij U a ha M N hMq hNq
+  refine ⟨α, ?_⟩
+  intro x htx
+  obtain ⟨β, hβ⟩ := hα x htx
+  refine ⟨β, ?_⟩
+  intro φ s eP eQ hP hQ hs
+  have heP : eP = colimitScalarExtensionComp F (homOfLE htx) P := by
+    apply Iso.ext
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro m
+    exact (hP m).trans (colimitScalarExtensionComp_one_tmul F (homOfLE htx) P m).symm
+  have heQ : eQ = colimitScalarExtensionComp F (homOfLE htx) Q := by
+    apply Iso.ext
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro n
+    exact (hQ n).trans (colimitScalarExtensionComp_one_tmul F (homOfLE htx) Q n).symm
+  have hφ : φ = (colimitScalarExtensionComp F (homOfLE htx) P).hom ≫
+      (ModuleCat.extendScalars (colimit.ι F x).hom).map s ≫
+      (colimitScalarExtensionComp F (homOfLE htx) Q).inv := by
+    calc
+      φ = (φ ≫ eQ.hom) ≫ eQ.inv := by simp
+      _ = (eP.hom ≫ (ModuleCat.extendScalars (colimit.ι F x).hom).map s) ≫
+          eQ.inv := by rw [hs]
+      _ = _ := by rw [heP, heQ]; rfl
+  rw [hφ]
+  exact hβ s
 
 end AlgebraicGeometry

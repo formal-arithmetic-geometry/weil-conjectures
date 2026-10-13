@@ -1,0 +1,168 @@
+{
+ "id": "lem-pc-affine-chart-canonical-hom-naturality",
+ "kind": "statement",
+ "title": "Canonical scalar-extension naturality of affine chart Hom comparisons",
+ "statement": "Let I be a directed preorder, R a diagram of commutative rings, c an affine limiting cone of its opposite spectrum diagram, i <= j, f:Xi to Spec R(i), U an open cover of the j-base change, and a an affine chart. Let M,N be quasi-coherent modules on U(a). Define the quotient tail J, its monotone representative rep, its starting class t, the chart ring diagram F and the actual starting pullback section modules P,Q as in the explicit constructions in the Lean statement. There exist Hom equivalences alpha at colimit F and beta at each x >= t. For every stage scalar-extension map s, transporting its further scalar extension back by the canonical composition isomorphisms colimitScalarExtensionComp gives a map whose alpha-image satisfies chartOrdinaryMapRecovery with beta(s). There are no arbitrary composition isomorphisms, no independently given limit map phi, no algebraic square hypothesis and no finite-presentation assumption.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01ZR first affine proof; Tag 01I6 affine quasi-coherent equivalence; Tags 0095 and 0096 pullback functoriality"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-category-colimit",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "pqf-def-coherent",
+  "def-pc-chart-ordinary-map-recovery",
+  "new-affine-chart-upper-tail-limit-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply upperTailChartCone_isLimit. The partial-order quotient is equivalent to the tail, so reindexing preserves the limit. All stages and the vertex are affine by affine base change. Affine spectrum/global sections duality identifies the vertex ring with colimit F. Pullback pasting identifies these charts with the ordinary direct and stage charts. The starting representative is equivalent to j, and thus gives an isomorphic starting chart.",
+   "uses": [
+    "new-affine-chart-upper-tail-limit-data",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the affine quasi-coherent equivalence (Stacks 26.7.5) and its functorial pullback/scalar-extension identification (26.7.3). The actual section modules B(M),B(N) at the starting chart reconstruct M,N. Extend them to the stage and colimit rings. Fully faithfulness gives the two Hom equivalences alpha,beta from these canonical object comparisons.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each stage map s, tensor associativity and the cocone equation give colimitScalarExtensionComp. Under the affine equivalence, conjugating the further scalar extension by these canonical isomorphisms is ordinary pullback of beta(s). Pullback composition coherence, followed by pullback along the canonical lift from the iterated chart to the direct chart, gives chartOrdinaryMapRecovery. Its lift_snd equation identifies the comparison with the d in that predicate. This only treats the canonical image of s; uniqueness of arbitrary normalized composition isomorphisms and cancellation of the algebraic square are handled in the parent theorem.",
+   "uses": [
+    "def-pc-chart-ordinary-map-recovery",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-chart-ordinary-map-recovery",
+  "def-pc-fibre-product",
+  "new-affine-chart-upper-tail-limit-data",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tag 01ZR first affine proof; Tag 01I6, Lemmas 26.7.3 and 26.7.5; Tags 0095 and 0096. Specialized geometric part of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme quasicoherent modules equivalence modules global sections pullback extension of scalars",
+   "date": "2026-10-14",
+   "results": "Pullback-pushforward adjunction and pullback APIs; no exact chart comparison naturality.",
+   "verdict": "Supporting APIs, no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "date": "2026-10-14",
+   "results": "extendScalarsComp, extendScalarsComp_hom_app_one_tmul and scalar-extension coherence; these prove the algebraic normalization but not geometric chart naturality.",
+   "verdict": "Supporting APIs, no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*[Ff]ull|[Ff]ullyFaithful.*tilde",
+   "date": "2026-10-14",
+   "results": "Mathlib tilde.fullyFaithfulFunctor; project affine module correspondence and affine pullback section APIs. None provides the stated canonical chart Hom naturality. Whole DAG search found the parent comparison and derived comparisons only.",
+   "verdict": "Supporting APIs, no duplicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the affine quasi coherent module Hom equivalence with respect to extension of scalars",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "Unavailable; no absence verdict inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi coherent affine scheme pullback global sections tensor product natural isomorphism",
+   "date": "2026-10-14",
+   "results": "pullbackPushforwardAdjunction, isPullback_toSpecΓ_toSpecΓ and spectrum tensor pullback comparisons; no explicit chart Hom naturality theorem.",
+   "verdict": "Supporting APIs only; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"pullback\"",
+   "date": "2026-10-14",
+   "results": "Pullback adjunction Hom formulas for free sheaves, and an unrelated subobject classifier formula.",
+   "verdict": "No exact chart comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(iso|equiv|tensor)|fullyFaithful|extendScalars",
+   "date": "2026-10-14",
+   "results": "Modules.Sheaf fully faithful forgetful functor and Modules.Tilde fully faithful associated sheaf functor. Upstream PullbackTilde supplies tildePullbackIso and pullbackSpecΓEquiv but not the inverse-limit/chart identifications or their composite naturality.",
+   "verdict": "Supporting APIs, not a duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartOrdinaryHomComparison",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: affine first proof of Tag 01ZR; canonical affine Hom comparison and pullback functoriality",
+   "via": [
+    "lem-pc-affine-chart-ordinary-hom-comparison",
+    "lem-pc-affine-chart-ordinary-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartCanonicalHomNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartCanonicalHomNaturality.lean",
+  "declaration": "AlgebraicGeometry.affine_chart_canonical_hom_naturality",
+  "declarations": [
+   "AlgebraicGeometry.scalarExtensionCompOfEq",
+   "AlgebraicGeometry.scalarExtensionCompOfEq_one_tmul",
+   "AlgebraicGeometry.colimitScalarExtensionComp",
+   "AlgebraicGeometry.colimitScalarExtensionComp_one_tmul",
+   "AlgebraicGeometry.affine_chart_canonical_hom_naturality"
+  ],
+  "statement": "theorem affine_chart_canonical_hom_naturality\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    (a : U.I₀) (ha : IsAffine (U.X a))\n    (M N : (U.X a).Modules)\n    (hMq : M.IsQuasicoherent)\n    (hNq : N.IsQuasicoherent)\n    :\n    let rep := (OrderEmbedding.ofAntisymmetrization\n      (α := {k : I // j ≤ k})).monotone.functor\n    let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))\n    let F := rep ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ\n    let t := toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})\n    let B : (U.X a).Modules → ModuleCat.{u} (F.obj t) := fun L ↦ by\n      let k := rep.obj t\n      let r := Spec.map (R.map (homOfLE k.property))\n      change ModuleCat.{u} Γ(pullback r g, ⊤)\n      exact ModuleCat.of _ Γ((Scheme.Modules.pullback (pullback.snd r g)).obj L, ⊤)\n    let P := B M\n    let Q := B N\n    let r₀ := (colimit.ι F t).hom\n    let q₀ := baseChangeMap f\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (c.π.app (op i)))\n      (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n    ∃ α : ((ModuleCat.extendScalars r₀).obj P ⟶\n        (ModuleCat.extendScalars r₀).obj Q) ≃\n      ((Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj M ⟶\n        (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj N),\n      ∀ (x : Antisymmetrization {k : I // j ≤ k} (· ≤ ·)) (htx : t ≤ x),\n        let k := (rep.obj x).val\n        let hjk := (rep.obj x).property\n        let q := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n        let q₀ := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n        let w : p ≫ q = q₀ := by\n          rw [← baseChangeMap_comp]\n          congr 1\n          ext\n          simpa using c.w (homOfLE hjk).op\n        let r := (F.map (homOfLE htx)).hom\n        let r₁ := (colimit.ι F x).hom\n        ∃ β : ((ModuleCat.extendScalars r).obj P ⟶\n            (ModuleCat.extendScalars r).obj Q) ≃\n          ((Scheme.Modules.pullback (U.pullbackHom q a)).obj M ⟶\n            (Scheme.Modules.pullback (U.pullbackHom q a)).obj N),\n          ∀ (s : (ModuleCat.extendScalars r).obj P ⟶\n              (ModuleCat.extendScalars r).obj Q),\n            chartOrdinaryMapRecovery q p q₀ w U a M N\n              (α ((colimitScalarExtensionComp F (homOfLE htx) P).hom ≫\n                (ModuleCat.extendScalars r₁).map s ≫\n                (colimitScalarExtensionComp F (homOfLE htx) Q).inv)) (β s)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T215609-L-899843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T215609-L-899843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
