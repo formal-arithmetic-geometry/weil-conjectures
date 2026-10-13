@@ -12,8 +12,7 @@ public import Mathlib.RingTheory.IsTensorProduct
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
 import Sheaf.RingTheory.LimitModuleFinitePresentation
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-import Sheaf.RingTheory.ColimitEventuallyFlat
+import Sheaf.RingTheory.IntegerApproximationFlatPointStage
 
 /-!
 # Noetherian approximation at a flat point
@@ -73,6 +72,101 @@ theorem exists_noetherian_model_flat_at_prime
       IsNoetherianRing A ∧ Algebra.FiniteType A B ∧ Module.Finite B N ∧
       Algebra.IsPushout A R B S ∧ Nonempty (S ⊗[B] N ≃ₗ[S] M) ∧
       Module.Flat A
-        (LocalizedModule (q.asIdeal.comap (algebraMap B S)).primeCompl N) := by sorry
+        (LocalizedModule (q.asIdeal.comap (algebraMap B S)).primeCompl N) := by
+  classical
+  let R' := ULift.{max u v w} R
+  let S' := ULift.{max u v w} S
+  let M' := ULift.{max u v w} M
+  let : Algebra R' S' := ULift.algebra' R S'
+  have : Algebra.FinitePresentation R' S' := by
+    apply RingHom.finitePresentation_algebraMap.mp
+    exact (RingHom.FinitePresentation.of_bijective
+      (f := (ULift.ringEquiv : S' ≃+* S).symm.toRingHom)
+      (ULift.ringEquiv.symm.bijective)).comp
+      ((RingHom.finitePresentation_algebraMap.mpr
+        (inferInstance : Algebra.FinitePresentation R S)).comp
+        (RingHom.FinitePresentation.of_bijective
+          (f := (ULift.ringEquiv : R' ≃+* R).toRingHom) ULift.ringEquiv.bijective))
+  let : Algebra S' S := ULift.algebra' S S
+  have : Module.FinitePresentation S' S := by
+    let e : S' ≃ₗ[S'] S :=
+      { ULift.ringEquiv.toAddEquiv with
+        map_smul' := fun _ _ ↦ rfl }
+    exact Module.FinitePresentation.of_equiv e
+  have : Module.FinitePresentation S' M := Module.FinitePresentation.trans S' M S
+  have : Module.FinitePresentation S' M' :=
+    Module.FinitePresentation.of_equiv (ULift.moduleEquiv.symm)
+  obtain ⟨Λ, hpo, hne, hdir, A, B, η, π, κ, D, ν, hmod, hmodel⟩ :=
+    Algebra.limitModuleFinitePresentation R' S' M'
+  let := hpo
+  let := hne
+  let := hdir
+  let := hmod
+  rcases hmodel with ⟨hAcol, hBcol, hDcol, hcomm, hscalar, hν, hAft, hBft,
+    hDfin, htransB, htransD, hfinalB, hfinalD, _⟩
+  obtain ⟨i, hflat⟩ := Algebra.exists_flat_integer_approximation_stage_at_prime R S M
+    A B η π κ D ν
+    ⟨hAcol, hBcol, hDcol, hcomm, hscalar, hν, hAft, hBft,
+      hDfin, htransB, htransD⟩ q hq
+  let : Algebra (A.obj i) (B.obj i) := (η.app i).hom.toAlgebra
+  let : Algebra (A.obj i) R :=
+    (ULift.ringEquiv.toRingHom.comp (π.app i).hom).toAlgebra
+  let : Algebra (B.obj i) S :=
+    (ULift.ringEquiv.toRingHom.comp (κ.app i).hom).toAlgebra
+  let : Algebra (A.obj i) S := ((algebraMap R S).comp (algebraMap (A.obj i) R)).toAlgebra
+  have : IsScalarTower (A.obj i) R S := IsScalarTower.of_algebraMap_eq' rfl
+  have : IsScalarTower (A.obj i) (B.obj i) S := by
+    apply IsScalarTower.of_algebraMap_eq'
+    ext a
+    exact congrArg ULift.down (CategoryTheory.ConcreteCategory.congr_hom (hcomm i).symm a)
+  let : Module (A.obj i) (D.obj i) := Module.compHom (D.obj i) (η.app i).hom
+  have : IsScalarTower (A.obj i) (B.obj i) (D.obj i) :=
+    IsScalarTower.of_compHom _ _ _
+  have : Algebra.FiniteType ℤ (A.obj i) := hAft i
+  have hnoeth : IsNoetherianRing (A.obj i) := Algebra.FiniteType.isNoetherianRing ℤ _
+  have hft : Algebra.FiniteType (A.obj i) (B.obj i) := hBft i
+  have hfin : Module.Finite (B.obj i) (D.obj i) := hDfin i
+  refine ⟨A.obj i, B.obj i, D.obj i, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, inferInstance, hnoeth, hft, hfin, ?_, ?_,
+    hflat⟩
+  · let : Algebra (A.obj i) R' := (π.app i).hom.toAlgebra
+    obtain ⟨er, her⟩ := hfinalB i
+    let eLift := Algebra.TensorProduct.congr (AlgEquiv.refl (R := A.obj i) (A₁ := B.obj i))
+      (ULift.algEquiv (R := A.obj i) (A := R))
+    let er' := eLift.symm.toRingEquiv.trans (er.trans ULift.ringEquiv)
+    let ec := (Algebra.TensorProduct.comm (A.obj i) R (B.obj i)).toRingEquiv.trans er'
+    have hec (r : R) (b : B.obj i) :
+        ec (r ⊗ₜ[A.obj i] b) = algebraMap R S r * algebraMap (B.obj i) S b := by
+      change (er (b ⊗ₜ[A.obj i] (ULift.up r))).down = _
+      rw [her]
+      change _ * algebraMap R S r = algebraMap R S r * _
+      exact mul_comm _ _
+    let e : R ⊗[A.obj i] B.obj i ≃ₐ[R] S :=
+      { ec with commutes' := fun r ↦ by simpa using hec r 1 }
+    constructor
+    apply IsBaseChange.of_equiv e.toLinearEquiv
+    intro b
+    change ec ((1 : R) ⊗ₜ[A.obj i] b) = algebraMap (B.obj i) S b
+    simpa using hec 1 b
+  · let : Algebra (B.obj i) S' := (κ.app i).hom.toAlgebra
+    have : IsScalarTower (B.obj i) S S' := IsScalarTower.of_algebraMap_eq' (by
+      ext b
+      rfl)
+    obtain ⟨em, _⟩ := hfinalD i
+    let eLift := TensorProduct.congr (ULift.moduleEquiv (R := B.obj i) (M := S))
+      (LinearEquiv.refl (B.obj i) (D.obj i))
+    let eLiftS : S' ⊗[B.obj i] D.obj i ≃ₗ[S] S ⊗[B.obj i] D.obj i :=
+      { eLift.toAddEquiv with
+        map_smul' := fun s x ↦ by
+          induction x using TensorProduct.induction_on with
+          | zero => simp
+          | add x y hx hy =>
+              change eLift (s • (x + y)) = s • eLift (x + y)
+              change eLift (s • x) = s • eLift x at hx
+              change eLift (s • y) = s • eLift y at hy
+              rw [smul_add, map_add, map_add, smul_add, hx, hy]
+          | tmul t n => rfl }
+    exact ⟨eLiftS.symm.trans ((em.restrictScalars S).trans (ULift.moduleEquiv (R := S)))⟩
 
 end Module

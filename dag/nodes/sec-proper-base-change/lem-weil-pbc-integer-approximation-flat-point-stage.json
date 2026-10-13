@@ -1,0 +1,170 @@
+{
+ "id": "lem-weil-pbc-integer-approximation-flat-point-stage",
+ "kind": "statement",
+ "title": "A flat point occurs in a supplied finite-type integer approximation",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings and let $M$ be an $S$-module with its restricted $R$-action [def-weil-pbc-flat-ring-map]. Let $U$ be the maximum of their universes and lift $R,S,M$ to $U$ by the canonical $\\mathrm{ULift}$ equivalences. Suppose a nonempty directed preorder $\\Lambda$ in $U$ indexes ring diagrams $A_i\\to B_i$ and abelian groups $D_i$, with $B_i$-module structures, compatible ring cocones to the lifted $R,S$, and a compatible additive cocone to the lifted $M$. Assume these three cocones are colimits [def-weil-pbc-category-colimit], the ring squares commute, and both the module transitions and module cocone maps are semilinear for the top-ring maps. Assume $A_i$ is finite type over $\\mathbf Z$, $B_i$ is finite type over $A_i$ [def-weil-pbc-finite-type-algebra], $D_i$ is finite over $B_i$ [def-weil-finitely-generated-module], and the canonical transition maps $B_i\\otimes_{A_i}A_j\\to B_j$ and $B_j\\otimes_{B_i}D_i\\to D_j$ are isomorphisms for $i\\le j$ [def-weil-pbc-module-tensor-product]. For any prime $q$ of $S$ [def-weil-pbc-localization-at-prime] such that $M_q$ is flat over $R$, there is $i$ such that $(D_i)_{q_i}$ is flat over $A_i$, with the restricted action, where $q_i$ is the contraction of $q$ along $B_i\\to\\mathrm{ULift}(S)\\to S$. No final tensor equivalence, finite presentation of the limit, or open flat locus is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Theorem Tag 00RC (theorem-openness-flatness), first reduction paragraph: the localized approximation satisfies Tag 00QX and Tag 00R6 gives a stage flat at the contracted prime; also Tag 00R1 (lemma-limit-module-finite-presentation)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Let p be the contraction of q to R. Contract q and p to each supplied stage, using the maps to the lifted limits followed by the canonical down equivalences. Cocone naturality and commutativity of the square identify the contractions along every transition. Localize the two ring diagrams. The localization-at-prime colimit theorem identifies their colimits with R_p and S_q, transporting the supplied colimit cocones through the lift equivalences. The transition and stage maps between these local rings are local because they contract the indicated maximal ideals.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the stage modules at their contracted top primes with the canonical fraction maps. Their scalar compatibility follows on fractions from the supplied semilinearity. Numerators and denominators lift to a common stage by the ring and group colimit representative criteria. Equal fractions are witnessed by a multiplier outside the contracted prime; lift that multiplier and descend its zero relation to a common later stage by the eventual-equality criterion. Thus the localized group colimit is M_q, compatibly with the localized limit top-ring action.",
+   "uses": [
+    "def-weil-directed-colimit-abelian-groups",
+    "lem-weil-pbc-filtered-colimit-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stage base rings are Noetherian by finite type over the integers; the top stage rings are Noetherian by finite type over their bases. Their prime localizations are Noetherian local rings. The localized stage modules remain finite. Localize the supplied transition ring tensor equivalence: the localized later top ring is a further localization of the base change of the earlier local top ring. Tensor-localization compatibility similarly localizes the supplied transition module equivalence. These verify the ring-localization and module-base-change hypotheses of exists_flat_stage.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed R-flatness of M_q is equivalent to flatness over R_p. Transport it to the canonical localized colimit. Apply RingTheory.exists_flat_stage (Tag 00R6), using the localized Noetherian local diagrams and tensor comparisons just constructed. At the resulting stage, flatness over the localized stage base implies flatness over the unlocalized base by the localization-flatness equivalence. This is precisely the selected stage module localized at the contraction of q along its original top-ring map.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-colimit-eventually-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-colimit-eventually-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Theorem Tag 00RC (theorem-openness-flatness), first reduction paragraph; lift and tensor comparison details made explicit by X3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a directed finite type integer algebra module approximation a flat localized limit module is flat at a contracted prime at some stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat point of a finitely presented module descends to a noetherian finite type integer model",
+   "results": "Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; Algebra.Smooth.flat_of_isNoetherianRing; Module.Flat.exists_factorization_of_isFinitelyPresented; Module.finitePresentation_of_finite. None selects a flat stage of a supplied diagram.",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, LocalizedModule",
+   "results": "Module.Flat.localizedModule; Module.flat_of_localized_maximal. These concern a fixed module and not a supplied approximation.",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*point.*stage|stage.*flat.*point|exists_fg_flat_localization_tensor|flat.*approximation",
+   "results": "Mathlib grep via msearch.py for flat.*stage|stage.*flat|flat.*approximation|approximation.*flat returned 0 hits. Library searches found RingTheory.exists_flat_stage, which uses already-localized diagrams; Algebra.exists_flat_finiteType_approximation_loci, which requires a globally flat limit and imports OpenFlatLocus, reaching the present item; and Module.exists_fg_flat_localization_tensor, which concerns a globally flat base-changed algebra rather than a module flat at one prime. Blueprint searches for flat point, 00RC and 00R6 found no imported matching node.",
+   "date": "2026-10-13",
+   "verdict": "New stage-selection interface needed for steps 2-4 of the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FlatPointNoetherianModel",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The flat-point noetherian-model reduction, steps 2-4: select a flat contracted-prime stage of the supplied finite-type integer approximation. Serves the constructible-generation reduction in the second paragraph of the blueprint ancestor proof.",
+   "via": [
+    "lem-weil-pbc-flat-point-noetherian-model",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.IntegerApproximationFlatPointStage",
+  "file": "lean/Sheaf/RingTheory/IntegerApproximationFlatPointStage.lean",
+  "declaration": "Algebra.exists_flat_integer_approximation_stage_at_prime",
+  "statement": "theorem exists_flat_integer_approximation_stage_at_prime\n    (R : Type u) (S : Type v) (M : Type w)\n    [CommRing R] [CommRing S] [Algebra R S]\n    [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] :\n    let R' := ULift.{max u v w} R\n    let S' := ULift.{max u v w} S\n    let M' := ULift.{max u v w} M\n    letI : Algebra R' S' := ULift.algebra' R S'\n    ∀\n    {Λ : Type (max u v w)} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]\n    (A B : Λ ⥤ CommRingCat.{max u v w}) (η : A ⟶ B)\n      (π : A ⟶ (Functor.const Λ).obj (CommRingCat.of R'))\n      (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S'))\n      (D : Λ ⥤ AddCommGrpCat.{max u v w})\n      (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M'))\n    [∀ i : Λ, Module (B.obj i) (D.obj i)]\n    (hmodel :\n      -- (1) the three colimits, compatible with `R' → S'` and the module actions\n      Nonempty (IsColimit (Cocone.mk (CommRingCat.of R') π)) ∧\n      Nonempty (IsColimit (Cocone.mk (CommRingCat.of S') κ)) ∧\n      Nonempty (IsColimit (Cocone.mk (AddCommGrpCat.of M') ν)) ∧\n      (∀ i, η.app i ≫ κ.app i = π.app i ≫ CommRingCat.ofHom (algebraMap R' S')) ∧\n      (∀ (i j : Λ) (h : i ≤ j) (y : B.obj i) (x : D.obj i),\n        (D.map (homOfLE h)).hom (y • x) =\n          (B.map (homOfLE h)).hom y • (D.map (homOfLE h)).hom x) ∧\n      (∀ i (y : B.obj i) (x : D.obj i),\n        (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M') (ν.app i)) (y • x) =\n          (@CommRingCat.Hom.hom _ (CommRingCat.of S') (κ.app i)) y •\n            (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M') (ν.app i)) x) ∧\n      -- (2) finiteness of the stages\n      (∀ i, Algebra.FiniteType ℤ (A.obj i)) ∧\n      (∀ i, letI := (η.app i).hom.toAlgebra; Algebra.FiniteType (A.obj i) (B.obj i)) ∧\n      (∀ i, Module.Finite (B.obj i) (D.obj i)) ∧\n      -- (3) transition base changes\n      (∀ (i j : Λ) (h : i ≤ j),\n        letI := (η.app i).hom.toAlgebra\n        letI := (A.map (homOfLE h)).hom.toAlgebra\n        ∃ e : B.obj i ⊗[A.obj i] A.obj j ≃+* B.obj j,\n          ∀ (x : B.obj i) (y : A.obj j),\n            e (x ⊗ₜ[A.obj i] y) = (B.map (homOfLE h)).hom x * (η.app j).hom y) ∧\n      (∀ (i j : Λ) (h : i ≤ j),\n        letI := (B.map (homOfLE h)).hom.toAlgebra\n        ∃ e : B.obj j ⊗[B.obj i] D.obj i ≃ₗ[B.obj j] D.obj j,\n          ∀ (y : B.obj j) (x : D.obj i),\n            e (y ⊗ₜ[B.obj i] x) = y • (D.map (homOfLE h)).hom x))\n    (q : PrimeSpectrum S)\n    (hq : Module.Flat R (LocalizedModule q.asIdeal.primeCompl M)),\n    ∃ i : Λ,\n      letI : Algebra (A.obj i) (B.obj i) := (η.app i).hom.toAlgebra\n      letI : Module (A.obj i) (D.obj i) := Module.compHom (D.obj i) (η.app i).hom\n      letI : IsScalarTower (A.obj i) (B.obj i) (D.obj i) :=\n        IsScalarTower.of_compHom _ _ _\n      Module.Flat (A.obj i)\n        (LocalizedModule\n          (q.asIdeal.comap (ULift.ringEquiv.toRingHom.comp (κ.app i).hom)).primeCompl\n          (D.obj i))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T111944-L-3070658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T111944-L-3070658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

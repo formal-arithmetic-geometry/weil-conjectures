@@ -18,42 +18,29 @@
  ],
  "proof": [
   {
-   "text": "After transporting to a common universe if necessary, apply the simultaneous algebra-module approximation theorem (00R1). Contract q and its inverse image in R along the stage coprojections. Each stage base is finite type over the integers and thus Noetherian; the stage top rings are finite type over the bases and the modules are finite.",
+   "text": "Lift R, S and M to the maximum universe. The ring maps between a ring and its lift are bijective, so finite presentation transports by composition. For the module, identify S with its lift as a rank-one module and apply Module.FinitePresentation.trans, then transport along ULift.moduleEquiv. Apply Algebra.limitModuleFinitePresentation to the lifted input, obtaining the directed finite-type integer approximation and its canonical final ring and module tensor equivalences.",
+   "uses": [
+    "lem-weil-pbc-limit-module-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the flat-point stage-selection theorem to this supplied approximation and the original flat point q. It returns a stage i whose module localized at the contraction of q is flat over the stage base.",
+   "uses": [
+    "lem-weil-pbc-integer-approximation-flat-point-stage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give the stage rings their canonical algebra structures via the stage maps followed by ULift.down. The compatibility square yields both scalar towers. The base stage is finite type over the integers, hence Noetherian; the top stage is finite type over the base and its module is finite.",
    "uses": [
     "lem-weil-pbc-limit-module-finite-presentation",
-    "def-weil-pbc-noetherian-ring",
     "lem-weil-pbc-finite-type-algebra-noetherian"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the systems at these contracted primes. The ring colimits are the corresponding localizations of R and S. Fractions in the module colimit come from a common stage, and equal fractions are witnessed by a multiplier outside the prime and an equality which holds at a later stage. This identifies the module colimit with M_q.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-localization-at-prime",
-    "lem-weil-pbc-limit-module-finite-presentation",
-    "def-weil-directed-colimit-abelian-groups"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Localized transitions are local since later primes contract to earlier primes. Localized rings are Noetherian local rings, and localized modules remain finite. Localize the canonical ring and module base-change isomorphisms of 00R1. The later prime complement supplies the further localization required by 00R6; tensor-localization compatibility gives its module base-change hypothesis.",
-   "uses": [
-    "lem-weil-pbc-limit-module-finite-presentation",
-    "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-localization-tensor-over-base"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use equivalence of flatness over the base and its prime localization to apply 00R6. It gives a stage whose localized module is flat over the localized base, hence also over the unlocalized base.",
-   "uses": [
-    "lem-weil-pbc-flat-over-localization",
-    "lem-weil-pbc-colimit-eventually-flat"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take A, B and N from that stage. The canonical limit base-change isomorphisms give the tensor pushout and M = S tensor_B N, compatible with the restricted scalar actions. Transporting these rings and the finite module to the maximum universe preserves all of the assertions.",
+   "text": "Transport the final ring tensor equivalence across the lift equivalences and tensor symmetry. Its pure-tensor formula makes it an R-algebra equivalence R tensor_A B = S; IsBaseChange.of_equiv then proves the algebra pushout. Transport the final module tensor equivalence using TensorProduct.congr with ULift.moduleEquiv on the S factor. Tensor induction proves S-linearity of this transport; compose with the restricted final equivalence and ULift.moduleEquiv on M. These constructions give S tensor_B N = M and preserve the scalar actions in the selected stage-flatness conclusion.",
    "uses": [
     "lem-weil-pbc-limit-module-finite-presentation"
    ],
@@ -62,19 +49,13 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-limit-module-finite-presentation",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
-  "def-weil-directed-colimit-abelian-groups",
-  "lem-weil-pbc-localization-tensor-product",
-  "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-flat-over-localization",
-  "lem-weil-pbc-colimit-eventually-flat"
+  "lem-weil-pbc-integer-approximation-flat-point-stage",
+  "lem-weil-pbc-finite-type-algebra-noetherian"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Theorem Tag 00RC, first reduction paragraph, lines 33427-33451; Lemmas Tags 00R1 and 00R6"
+  "place": "Theorem Tag 00RC (theorem-openness-flatness), first reduction paragraph; Tag 00R1 (lemma-limit-module-finite-presentation); explicit Lean universe and tensor transports by X3"
  },
  "mathlib_searches": [
   {
@@ -166,9 +147,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T100139-L-2490531",
+  "landing": "20261013T111944-L-3070658",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
