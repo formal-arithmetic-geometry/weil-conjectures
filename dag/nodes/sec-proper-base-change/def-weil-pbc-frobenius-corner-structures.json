@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-weil-pbc-frobenius-corner-structures",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Weil structures on the four finite corners",
@@ -13,14 +13,46 @@
   "place": "node def-weil-pbc-frobenius-corner-structures, order 1333"
  },
  "stmt_deps": [
-  "def-weil-pbc-frobenius-tower-datum"
+  "def-weil-pbc-frobenius-tower-datum",
+  "def-weil-pbc-level-map-corners",
+  "def-weil-pbc-level-map-arrows",
+  "lemma-weil-pbc-perfect-projection-formula"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weil structures on four finite corners Frobenius pullback derived category",
+   "results": "WittVector.IsocrystalEquiv; WittVector.Isocrystal; WittVector.Isocrystal.frob; related WittVector isocrystal declarations in Mathlib/RingTheory/WittVector/Isocrystal",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, IsIso, derived category Frobenius",
+   "results": "0 hits; query parser reported unknown identifier 'IsIso'",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|Weil structure|projection formula Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil structure induced on four corners by Frobenius exchange maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +76,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-frobenius-corner-structures",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against the master blueprint and its Frobenius tower and level-corner dependencies. No proof steps or child nodes are needed because this is a definition; all four Weil structures and their typing are retained exactly.",
+  "blueprint": "Realizes the complete definition clause: construction of vartheta_{E,n}, Theta_{B,n}, Theta_{D,n}, and transport to Theta_{A,n}, Theta_{C,n}."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-dd602dc3c",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-dd602dc3c (reviewer sub-agent of L); spot-checked: Formulas and source checks pass, but stmt_deps omitted the existing corner, arrow, and perfect projection-formula nodes needed to type A_n,B_n,C_n,D_n and h_n,h'_n. Corrected JSON is under fixes/dag/nodes/sec-proper-base-change/; review.md records all checks.; 1 file(s) fixed by the reviewer"
+ }
 }
