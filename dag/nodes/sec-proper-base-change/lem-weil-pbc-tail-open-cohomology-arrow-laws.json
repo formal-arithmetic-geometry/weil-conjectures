@@ -19,24 +19,48 @@
  ],
  "proof": [
   {
-   "text": "Cancel the stage-open inclusions to prove identity and reversed composition of restricted scheme maps. Substitute hidentity and cancel the inverse-image left and right unit comparisons. For composites substitute hcomposition. Naturality moves the coefficient transition past the second square comparison, and vertical pasting identifies the comparisons with the composite square. Cohomology identity, pullback composition, coefficient naturality and H.map composition give the stated equalities. Empty opens and zero coefficients require no extra assumptions.",
+   "text": "Use the existing explicit tailOpenDiagram, tailOpenSheaf, and tailOpenCoefficient constructions for E, F-prime, and psi. The geometry functor laws are proved in tailOpenDiagram by cancellation of the monomorphic stage-open inclusions and D.map_id and D.map_comp. No cone or restricted limit coefficient is used.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-etale-limit-open-cohomology-cocone",
+    "lem-weil-pbc-etale-limit-open-restricted-system",
+    "lem-weil-pbc-etale-limit-open-cohomology-cocone"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply openSquareCoefficient_diagram_identity to D, E, the tail inclusion on objects, and the stage-open inclusions. This gives the restricted coefficient identity law. The square equality is resLE_comp_ι, and the sheaf and coefficient identifications are definitional.",
+   "uses": [
+    "lem-weil-pbc-open-square-diagram-identity",
+    "lem-weil-pbc-etale-limit-open-cohomology-cocone"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the generic square-coefficient composition calculation privately: apply squareUpperStarIso_paste_vert_hom at F, expand whiskering and vertical pasting, cancel the mapped inverse/hom composition, and move the first coefficient map across the second square comparison by naturality. Specialize to the two tail transitions and substitute hcomposition; subsingleton equality identifies the preorder morphisms.",
+   "uses": [
+    "lem-weil-pbc-square-iso-pasting",
+    "lem-weil-pbc-etale-limit-open-cohomology-cocone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the identity cohomology arrow, substitute the restricted coefficient identity, transport the cohomology pullback using the generic functor_transport_map lemma, and apply the identity clause of cohomologyPullbackFunctorial. Prove the pointwise coefficientCohomology_composition calculation privately from H.map_comp_apply twice, pullback composition transported along the specified equality, and coefficient naturality cohomologyMap_map. For the tail composite substitute hcomp and apply that pointwise calculation; extensionality gives equality of AddCommGrpCat arrows. Both clauses cover empty opens, zero coefficients and repeated indices with the same functorial equations.",
+   "uses": [
     "lem-weil-pbc-cohomology-pullback-functorial"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-limit-open-restricted-system",
   "lem-weil-pbc-etale-limit-open-cohomology-cocone",
+  "lem-weil-pbc-open-square-diagram-identity",
+  "lem-weil-pbc-square-iso-pasting",
   "lem-weil-pbc-cohomology-pullback-functorial"
  ],
  "proof_origin": {
-  "by": "E2 stage 3 worker",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 09YQ and 01F7: routine restricted coefficient square coherence written out by the worker."
+  "by": "A2 stage 3 worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01F7, cohomology-equation-functorial; explicit restriction and coefficient-square calculation using the library vertical pasting theorem, as for the coherent systems of Tag 09YQ. Sources read at https://stacks.math.columbia.edu/tag/01F7 and https://stacks.math.columbia.edu/tag/09YQ because the literature texts are not present in this clone."
  },
  "mathlib_searches": [
   {
@@ -122,10 +146,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T095942-L-2455124",
-  "kind": "interface",
+  "landing": "20261013T122726-L-3631704",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

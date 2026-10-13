@@ -12409,3 +12409,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:24 L: merged deliver/K4/Sheaf.RingTheory.PopescuPolynomialKernelParameters (stage 3; reviewer PASS; first push; landing 20261013T122444-L-3609985 (interface); batch 20261013T122442; modules 2; new nodes 1)
 - 12:24 L: merged deliver/U4/Sheaf.RingTheory.FormalGlueingExtensionTransport (stage 3; reviewer PASS; first push; landing 20261013T122445-L-3610139 (proof); batch 20261013T122442; modules 1; new nodes 0)
 - 12:24 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FinitelyPresentedComplexDescent (stage 3; reviewer PASS; after a return; landing 20261013T122445-L-3610301 (interface); batch 20261013T122442; modules 2; new nodes 1)
+- 12:27 L: merged deliver/A2/Sheaf.AlgebraicGeometry.TailOpenCohomologyArrowLaws (stage 3; reviewer PASS; first push; landing 20261013T122726-L-3631704 (proof); batch 20261013T122724; modules 1; new nodes 0)
