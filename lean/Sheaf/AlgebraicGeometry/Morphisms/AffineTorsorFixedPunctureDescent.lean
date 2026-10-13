@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentCore
 
 /-! # Descent along a connected affine torsor on a principal open
 
@@ -85,6 +86,14 @@ theorem affine_torsor_fixed_puncture_descent
       let q := Spec.map (CommRingCat.ofHom (algebraMap H B))
       let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H B (ι g))
       ∃ θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme,
-        θ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by sorry
+        θ.hom ≫ V.ι ≫ q =
+        pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by
+  dsimp
+  intro hEt hrot T t k hk d δ hδ
+  obtain ⟨m, Kp, hd, hKp⟩ := affine_torsor_orbit_data d
+  let K : Fin m → Subgroup G := fun _ => ⊥
+  obtain ⟨θ, hθ⟩ := affine_torsor_fixed_orbits
+    R H g ι C G ρ hρone hρmul hne p j hj m K d hd hEt hrot T t k hk δ hδ
+  exact ⟨m, K, θ, hθ⟩
 
 end AlgebraicGeometry.Scheme
