@@ -34,24 +34,23 @@ principal localizations are specified on every fraction, for every choice of the
 The functor and its chosen colimit `colimit F` are identified with these rings and maps by
 the displayed isomorphisms; these merely transport the diagram, rather than change its objects.
 
-Proof (the node's seven steps):
-1. Reflexivity uses the factor 1, and transitivity multiplies factors. The product `f * g`
-   belongs to `S` and is an upper bound; `1 ∈ S`, and parallel arrows are equal.
-2. If `g = f * h`, the image of `f` in `P_g` has inverse `h/g`. The universal property
-   (lem-weil-pbc-localization-away-universal-property) gives the unique transition ring map,
-   with fraction formula `a/f^n ↦ a*h^n/g^n`. Uniqueness of the inverse gives independence of h.
-3. Identity and composition follow from uniqueness of maps agreeing on the original ring.
-4. Elements of `S` become units in the localization (def-weil-pbc-module-localization).
-   The same universal property gives the maps kappa, their fraction formula, their compatibility,
-   and their composites with the original localization maps.
-5. Every fraction `a/s` comes from `P_s`. Equal fractions at stages `s,s'` admit a witness
-   `t ∈ S` annihilating their cross difference. At the common stage `s*s'*t` their images agree,
-   by the equality criterion in def-weil-ring-localization-away.
-6. Given any cocone, send a fraction to its image from any representing stage. Step 5 makes
-   this well defined. Moving two representatives to a common stage proves additivity and
-   multiplicativity; using the stage 1 proves preservation of the unit.
-7. Every element comes from a stage, so the induced ring map is unique. This is the colimit
-   universal property (def-weil-pbc-category-colimit). -/
+Proof (Stacks 00CR's universal-property hint, specialized to rings):
+1. Use divisibility for the preorder. The product `f * g` is a common upper bound,
+   and `1 ∈ S`, so the associated category is filtered.
+2. Construct `rho` by `IsLocalization.Away.lift`: a divisor of the unit `g` is a unit.
+   The fraction formula follows by multiplying by the image of `g^n` and using
+   `IsLocalization.mk'_spec`; the construction does not choose a factor `h`.
+3. Construct `kappa` by the same universal property, since every element of `S` becomes
+   a unit. Its fraction formula follows from `mk'_spec` as well.
+4. Ring homomorphisms out of a localization are determined on the original ring.
+   This proves the identity, composition, and cocone compatibility equations.
+5. For an arbitrary cocone, compose its component at `1` with the map from `P`.
+   Naturality along `1 ≤ f` identifies this composite with the one at every `f`.
+   Thus it sends `f` to a unit, witnessed by the component at `f`, and extends to
+   `S⁻¹P` by `IsLocalization.lift`. Extensionality on `P` proves factorization
+   through every component and uniqueness, giving a colimit cocone.
+6. Take the identity object isomorphisms for the diagram, and use uniqueness of
+   colimits to identify its chosen colimit with `S⁻¹P`, preserving the coprojections. -/
 theorem localization_colimit_principalLocalizations
     (P : Type u) [CommRing P] (S : Submonoid P) :
     ∃ p : Preorder S,
@@ -86,6 +85,123 @@ theorem localization_colimit_principalLocalizations
           (∀ (f g : S) (l : f ≤ g),
             (e f).inv ≫ F.map (homOfLE l) ≫ (e g).hom = ofHom (rho f g l)) ∧
           (∀ f : S, (e f).inv ≫ colimit.ι F f ≫ eL.hom = ofHom (kappa f)) := by
-  sorry
+  classical
+  let p : Preorder S :=
+    { le := fun f g => (f : P) ∣ (g : P)
+      le_refl := fun f => dvd_refl _
+      le_trans := fun _ _ _ h k => h.trans k }
+  refine ⟨p, ?_⟩
+  let : Preorder S := p
+  have bounds (f g : S) : f ≤ f * g ∧ g ≤ f * g :=
+    ⟨⟨g, rfl⟩, ⟨f, mul_comm _ _⟩⟩
+  have directed : IsDirected S (· ≤ ·) :=
+    ⟨fun f g => ⟨f * g, (bounds f g).1, (bounds f g).2⟩⟩
+  let rho (f g : S) (l : f ≤ g) :
+      Localization.Away (f : P) →+* Localization.Away (g : P) :=
+    IsLocalization.Away.lift (f : P)
+      (IsLocalization.Away.isUnit_of_dvd (g : P) l)
+  let kappa (f : S) : Localization.Away (f : P) →+* LocalizedModule S P :=
+    IsLocalization.Away.lift (f : P) (IsLocalization.map_units (LocalizedModule S P) f)
+  have hrho (f g : S) (l : f ≤ g) (a : P) :
+      rho f g l (algebraMap P _ a) = algebraMap P _ a :=
+    IsLocalization.Away.lift_eq _ _ _
+  have hkappa (f : S) (a : P) :
+      kappa f (algebraMap P _ a) = algebraMap P _ a :=
+    IsLocalization.Away.lift_eq _ _ _
+  have hid (f : S) (l : f ≤ f) : rho f f l = RingHom.id _ := by
+    apply IsLocalization.ringHom_ext (Submonoid.powers (f : P))
+    ext a
+    exact hrho f f l a
+  have hcomp (f g k : S) (l : f ≤ g) (m : g ≤ k) :
+      (rho g k m).comp (rho f g l) = rho f k (le_trans l m) := by
+    apply IsLocalization.ringHom_ext (Submonoid.powers (f : P))
+    ext a
+    simp only [RingHom.comp_apply, hrho]
+  have hcompat (f g : S) (l : f ≤ g) :
+      (kappa g).comp (rho f g l) = kappa f := by
+    apply IsLocalization.ringHom_ext (Submonoid.powers (f : P))
+    ext a
+    simp only [RingHom.comp_apply, hrho, hkappa]
+  refine ⟨fun _ _ => Iff.rfl, bounds, directed, inferInstance, rho, kappa,
+    ?_, hid, hcomp, ?_, hcompat, ?_, ?_⟩
+  · intro f g l h a n hfg
+    apply IsLocalization.eq_mk'_iff_mul_eq.mpr
+    change rho f g l _ * algebraMap P _ ((g : P) ^ n) =
+      algebraMap P _ (a * h ^ n)
+    have hpow : (g : P) ^ n = (f : P) ^ n * h ^ n := by rw [hfg, mul_pow]
+    rw [hpow, map_mul, ← mul_assoc, ← hrho f g l ((f : P) ^ n),
+      ← map_mul, IsLocalization.mk'_spec, hrho f g l a, ← map_mul]
+  · intro f a n
+    change kappa f _ = Localization.mk a (f ^ n)
+    rw [Localization.mk_eq_mk']
+    apply IsLocalization.eq_mk'_iff_mul_eq.mpr
+    change kappa f _ * algebraMap P _ ((f : P) ^ n) = algebraMap P _ a
+    rw [← hkappa f ((f : P) ^ n), ← map_mul, IsLocalization.mk'_spec, hkappa]
+  · intro f
+    ext a
+    exact hkappa f a
+  · let F : S ⥤ CommRingCat.{u} :=
+      { obj := fun f => .of (Localization.Away (f : P))
+        map := fun {f g} l => ofHom (rho f g (leOfHom l))
+        map_id := fun f => by
+          apply CommRingCat.hom_ext
+          exact hid f (le_refl f)
+        map_comp := fun {f g k} l m => by
+          apply CommRingCat.hom_ext
+          exact (hcomp f g k (leOfHom l) (leOfHom m)).symm }
+    let c : Cocone F :=
+      { pt := .of (LocalizedModule S P)
+        ι :=
+          { app := fun f => ofHom (kappa f)
+            naturality := fun {f g} l => by
+              apply CommRingCat.hom_ext
+              change (kappa g).comp (rho f g (leOfHom l)) = kappa f
+              exact hcompat f g (leOfHom l) } }
+    let base (s : Cocone F) : P →+* s.pt :=
+      (s.ι.app (1 : S)).hom.comp (algebraMap P (Localization.Away (1 : P)))
+    have hbase (s : Cocone F) (f : S) :
+        (s.ι.app f).hom.comp (algebraMap P (Localization.Away (f : P))) = base s := by
+      ext a
+      have l : (1 : S) ≤ f := ⟨(f : P), (one_mul _).symm⟩
+      have w := ConcreteCategory.congr_hom (s.w (homOfLE l))
+        (algebraMap P (Localization.Away (1 : P)) a)
+      change (s.ι.app f).hom (rho 1 f l (algebraMap P _ a)) = base s a at w
+      rw [hrho 1 f l a] at w
+      exact w
+    have hunits (s : Cocone F) (f : S) : IsUnit (base s (f : P)) := by
+      rw [← hbase s f]
+      exact (IsLocalization.Away.algebraMap_isUnit (S := Localization.Away (f : P))
+        (f : P)).map (s.ι.app f).hom
+    have hc : IsColimit c :=
+      { desc := fun s => ofHom (IsLocalization.lift (S := LocalizedModule S P) (hunits s))
+        fac := fun s f => by
+          apply CommRingCat.hom_ext
+          apply IsLocalization.ringHom_ext (Submonoid.powers (f : P))
+          ext a
+          change IsLocalization.lift (hunits s) (kappa f (algebraMap P _ a)) =
+            (s.ι.app f).hom (algebraMap P _ a)
+          rw [hkappa, IsLocalization.lift_eq]
+          exact (RingHom.congr_fun (hbase s f) a).symm
+        uniq := fun s m hm => by
+          apply CommRingCat.hom_ext
+          apply IsLocalization.ringHom_ext S
+          ext a
+          change m.hom (algebraMap P (LocalizedModule S P) a) =
+            IsLocalization.lift (hunits s) (algebraMap P (LocalizedModule S P) a)
+          rw [IsLocalization.lift_eq]
+          have w := ConcreteCategory.congr_hom (hm (1 : S))
+            (algebraMap P (Localization.Away (1 : P)) a)
+          change m.hom (kappa 1 (algebraMap P _ a)) = base s a at w
+          rw [hkappa] at w
+          exact w }
+    refine ⟨F, fun f => Iso.refl _,
+      (colimit.isColimit F).coconePointUniqueUpToIso hc, ?_, ?_⟩
+    · intro f g l
+      simp [F]
+    · intro f
+      change 𝟙 _ ≫ colimit.ι F f ≫
+        ((colimit.isColimit F).coconePointUniqueUpToIso hc).hom = c.ι.app f
+      rw [Category.id_comp]
+      exact (colimit.isColimit F).comp_coconePointUniqueUpToIso_hom hc f
 
 end CommRingCat

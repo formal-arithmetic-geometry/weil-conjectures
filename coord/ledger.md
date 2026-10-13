@@ -10231,3 +10231,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:12 L: returned deliver/H1/Sheaf.AlgebraicGeometry.CompletionInternalHomAffineSectionsLift (reviewer RETURN: (the landing tools, head 8952427fc) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 00:12 L: merged deliver/A3/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractions (stage 3; reviewer PASS; first push; landing 20261013T001225-L-2305084 (interface); batch 20261013T001224; modules 3; new nodes 2)
 - 00:12 L: merged deliver/C3/Sheaf.RingTheory.ArtinianTranscendentalLocalizationProperties (stage 3; reviewer PASS; first push; landing 20261013T001226-L-2305244 (proof); batch 20261013T001224; modules 1; new nodes 0)
+- 00:12 L: merged deliver/J4/Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations (stage 3; reviewer PASS; after a return; landing 20261013T001226-L-2305393 (proof); batch 20261013T001224; modules 1; new nodes 0)

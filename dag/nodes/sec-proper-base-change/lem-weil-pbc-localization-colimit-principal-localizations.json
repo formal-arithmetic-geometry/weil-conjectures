@@ -30,18 +30,18 @@
  ],
  "proof": [
   {
-   "text": "*(1) The preorder is directed and filtered.* For $f\\in S$, $f=f\\cdot1$, so $f\\le f$; if $g=fh$ and $k=gh'$ then $k=f(hh')$, so $\\le$ is a preorder. For $f,f'\\in S$, $ff'\\in S$ ($S$ is multiplicative) and $ff'=f\\cdot f'=f'\\cdot f$, so $f\\le ff'$ and $f'\\le ff'$. Regard $(S,\\le)$ as a category $J$ with exactly one arrow $f\\to g$ when $f\\le g$ and none otherwise; it is small ($S$ is a set). It is filtered in the sense of [def-weil-pbc-category-colimit]: it is nonempty ($1\\in S$), any two objects $f,f'$ map to the common object $ff'$, and two parallel arrows $f\\to g$ are equal, hence equalized by the identity of $g$.",
+   "text": "Equip S with divisibility: f <= g iff g = fh for some h in P. Reflexivity and transitivity are dvd_refl and dvd_trans. Both f and g divide fg. These bounds give IsDirected, and the nonempty subtype S (containing 1) gives IsFiltered by the Mathlib preorder instance.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), proof 'Omitted. Hint: use the universal property'; written by an agent"
+    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), stated there for an $R$-module $M$ ($S^{-1}M=\\colim_{f\\in S}M_f$, same preorder and transition maps), proof 'Omitted. Hint: use the universal property'; here the case $M=P$ with the ring structure"
    }
   },
   {
-   "text": "*(2) The transition maps.* Let $f\\le g$ in $S$ and $h\\in P$ with $g=fh$. In $P_g$ [def-weil-ring-localization-away] one has $(f/1)(h/g)=fh/g=g/g=1$ (as $g\\cdot1-1\\cdot g=0$), so the image $f/1$ of $f$ under the localization map $P\\to P_g$, $a\\mapsto a/1$, is a unit with inverse $h/g$; since the inverse of a unit is unique, $h/g=h'/g$ in $P_g$ for every $h'$ with $g=fh'$. By [lem-weil-pbc-localization-away-universal-property] (applied to $R=P$, the element $f$, and the ring map $P\\to P_g$, $a\\mapsto a/1$) there is a unique ring homomorphism $\\rho_{fg}:P_f\\to P_g$ with $\\rho_{fg}(a/1)=a/1$ for all $a\\in P$, and it is $\\rho_{fg}(a/f^e)=(a/1)(f/1)^{-e}=(a/1)(h/g)^e=ah^e/g^e$. So the formula of the statement defines a well defined ring homomorphism, and it does not depend on the choice of $h$: $\\rho_{fg}$ is characterized by $\\rho_{fg}(a/1)=a/1$, in which $h$ does not occur (equivalently $ah^e/g^e=(a/1)(h/g)^e=(a/1)(h'/g)^e=ah'^e/g^e$).",
+   "text": "For f <= g, the image of f in P_g is a unit because it divides the unit image of g (IsLocalization.Away.isUnit_of_dvd). Construct rho_fg by IsLocalization.Away.lift, without choosing a factor. It agrees with the original ring map. For any g = fh, multiply the proposed fraction formula by the image of g^n: use g^n = f^n h^n, agreement on P, and mk'_spec to obtain the image of ah^n. The fraction equality criterion eq_mk'_iff_mul_eq proves the formula, independently of the choice of h.",
    "uses": [
     "def-weil-ring-localization-away",
     "lem-weil-pbc-localization-away-universal-property"
@@ -49,22 +49,25 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), proof 'Omitted. Hint: use the universal property'; written by an agent"
+    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), stated there for an $R$-module $M$ ($S^{-1}M=\\colim_{f\\in S}M_f$, same preorder and transition maps), proof 'Omitted. Hint: use the universal property'; here the case $M=P$ with the ring structure"
    }
   },
   {
-   "text": "*(2) Functoriality.* $\\mathrm{id}_{P_f}$ is a ring homomorphism with $a/1\\mapsto a/1$, so by the uniqueness in [lem-weil-pbc-localization-away-universal-property] (two ring homomorphisms out of $P_f$ that agree on all $a/1$ are equal) $\\rho_{ff}=\\mathrm{id}$. For $f\\le g\\le k$, $\\rho_{gk}\\circ\\rho_{fg}$ and $\\rho_{fk}$ are ring homomorphisms $P_f\\to P_k$ that both send $a/1$ to $a/1$ (step 2), so they are equal by the same uniqueness. Hence $f\\mapsto P_f$, $(f\\le g)\\mapsto\\rho_{fg}$ is a functor $J\\to$ commutative rings.",
+   "text": "Construct kappa_f by IsLocalization.Away.lift because f belongs to S and hence becomes a unit in S^{-1}P. The resulting map agrees on P with its localization map. Its fraction formula follows by multiplying by f^n, applying mk'_spec, and identifying the ring fraction Localization.mk with LocalizedModule.mk. IsLocalization.ringHom_ext proves rho_ff = id, rho_gk composed with rho_fg = rho_fk, and kappa_g composed with rho_fg = kappa_f, since all of these equations hold on P. These equations define the functor F and cocone c with point S^{-1}P.",
    "uses": [
-    "lem-weil-pbc-localization-away-universal-property"
+    "def-weil-pbc-module-localization",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), proof 'Omitted. Hint: use the universal property'; written by an agent"
+    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), stated there for an $R$-module $M$ ($S^{-1}M=\\colim_{f\\in S}M_f$, same preorder and transition maps), proof 'Omitted. Hint: use the universal property'; here the case $M=P$ with the ring structure"
    }
   },
   {
-   "text": "*(3) The cocone $\\kappa$, and the last clause.* By [def-weil-pbc-module-localization] with $M=P$, $S^{-1}P$ is a commutative ring with $(a/s)+(b/t)=(ta+sb)/st$, $(a/s)(b/t)=ab/st$, unit $1/1$, and the localization map $\\lambda:P\\to S^{-1}P$, $a\\mapsto a/1$, is a ring homomorphism; for $s\\in S$, $(s/1)(1/s)=s/s=1/1$, so $\\lambda(s)$ is a unit with inverse $1/s$. In particular for $f\\in S$, $\\lambda(f)$ is a unit, and [lem-weil-pbc-localization-away-universal-property] gives a unique ring homomorphism $\\kappa_f:P_f\\to S^{-1}P$ with $\\kappa_f(a/1)=a/1$, namely $\\kappa_f(a/f^e)=(a/1)(1/f)^e=a/f^e$. The property $\\kappa_f(a/1)=a/1$ is the last clause: $\\kappa_f$ composed with $P\\to P_f$ is $\\lambda$. For $f\\le g$, $\\kappa_g\\circ\\rho_{fg}$ and $\\kappa_f$ are ring homomorphisms $P_f\\to S^{-1}P$ both sending $a/1$ to $a/1$ (step 2), so they are equal by the uniqueness in [lem-weil-pbc-localization-away-universal-property]. Thus $(S^{-1}P,(\\kappa_f)_{f\\in S})$ is a cocone on the functor of step 3 [def-weil-pbc-category-colimit].",
+   "text": "Given an arbitrary cocone s on F, let b : P -> s.pt be its component at 1 composed with P -> P_1. For every f in S, naturality along 1 <= f and the agreement of rho_1f on P show that s_f composed with P -> P_f equals b. Consequently b(f) is a unit: the image of f is a unit in P_f, and ring homomorphisms preserve units. IsLocalization.lift therefore constructs a ring homomorphism d : S^{-1}P -> s.pt. The composites d composed with kappa_f and s_f agree on P by lift_eq and the displayed equality with b, so ringHom_ext for P_f proves factorization. If m is another factorization, the equation for the component at 1 forces m to agree with d on P; ringHom_ext for S^{-1}P proves uniqueness. This is IsColimit c directly; no common-refinement or arbitrary fraction representative is needed.",
    "uses": [
     "def-weil-pbc-module-localization",
     "lem-weil-pbc-localization-away-universal-property",
@@ -73,39 +76,18 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), proof 'Omitted. Hint: use the universal property'; written by an agent"
+    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), stated there for an $R$-module $M$ ($S^{-1}M=\\colim_{f\\in S}M_f$, same preorder and transition maps), proof 'Omitted. Hint: use the universal property'; here the case $M=P$ with the ring structure"
    }
   },
   {
-   "text": "*Every element comes from some $P_s$, and two elements with the same image agree at a common later stage.* (i) Every $x\\in S^{-1}P$ is $a/s$ with $a\\in P$, $s\\in S$, so $x=\\kappa_s(a/s)$ (the element $a/s^1$ of $P_s$; step 4). (ii) Let $s,s'\\in S$, $y=a/s^e\\in P_s$, $y'=a'/s'^{e'}\\in P_{s'}$ with $\\kappa_s(y)=\\kappa_{s'}(y')$, i.e. $a/s^e=a'/s'^{e'}$ in $S^{-1}P$; by [def-weil-pbc-module-localization] there is $u\\in S$ with $u(as'^{e'}-a's^e)=0$. Put $t=ss'u\\in S$; then $s\\le t$ ($t=s\\cdot s'u$) and $s'\\le t$ ($t=s'\\cdot su$), and by step 2 $\\rho_{st}(y)=a(s'u)^e/t^e$, $\\rho_{s't}(y')=a'(su)^{e'}/t^{e'}$. These are equal in $P_t$ [def-weil-ring-localization-away]: $a(s'u)^et^{e'}-a'(su)^{e'}t^e=a\\,s'^eu^e\\,s^{e'}s'^{e'}u^{e'}-a'\\,s^{e'}u^{e'}\\,s^es'^eu^e=s^{e'}s'^eu^{e+e'}(as'^{e'}-a's^e)$, and multiplying by $t=ss'u$ gives $ss'^{1+e}s^{e'}u^{e+e'}\\cdot u(as'^{e'}-a's^e)=0$, which is the criterion $t^1(\\cdots)=0$.",
-   "uses": [
-    "def-weil-pbc-module-localization",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), proof 'Omitted. Hint: use the universal property'; written by an agent"
-   }
-  },
-  {
-   "text": "*(3) Existence of the induced map.* Let $(T,(\\varphi_f)_{f\\in S})$ be a cocone: ring homomorphisms $\\varphi_f:P_f\\to T$ with $\\varphi_g\\circ\\rho_{fg}=\\varphi_f$ for $f\\le g$. For $x\\in S^{-1}P$ choose $s\\in S$, $y\\in P_s$ with $\\kappa_s(y)=x$ (step 5 (i)) and put $\\varphi(x)=\\varphi_s(y)$. This does not depend on the choice: if also $\\kappa_{s'}(y')=x$, take $t$ as in step 5 (ii); then $\\varphi_s(y)=\\varphi_t(\\rho_{st}(y))=\\varphi_t(\\rho_{s't}(y'))=\\varphi_{s'}(y')$. By construction $\\varphi\\circ\\kappa_f=\\varphi_f$ for every $f\\in S$. $\\varphi$ is a ring homomorphism: given $x=\\kappa_s(y)$, $x'=\\kappa_{s'}(y')$, let $t=ss'$ (so $s,s'\\le t$, step 1); by step 4, $x=\\kappa_t(\\rho_{st}(y))$ and $x'=\\kappa_t(\\rho_{s't}(y'))$, so, $\\kappa_t$ being a ring homomorphism, $x+x'=\\kappa_t(\\rho_{st}(y)+\\rho_{s't}(y'))$ and $xx'=\\kappa_t(\\rho_{st}(y)\\rho_{s't}(y'))$; hence $\\varphi(x+x')=\\varphi_t(\\rho_{st}(y))+\\varphi_t(\\rho_{s't}(y'))=\\varphi(x)+\\varphi(x')$ and likewise $\\varphi(xx')=\\varphi(x)\\varphi(x')$, and $\\varphi(1)=\\varphi(\\kappa_1(1))=\\varphi_1(1)=1$ ($1\\in S$).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), proof 'Omitted. Hint: use the universal property'; written by an agent"
-   }
-  },
-  {
-   "text": "*(3) Uniqueness, and conclusion.* If $\\psi:S^{-1}P\\to T$ is any ring homomorphism with $\\psi\\circ\\kappa_f=\\varphi_f$ for all $f\\in S$, then for $x=\\kappa_s(y)$ (step 5 (i)) $\\psi(x)=\\varphi_s(y)=\\varphi(x)$, so $\\psi=\\varphi$. Together with steps 4 and 6 this says that the cocone $(S^{-1}P,(\\kappa_f))$ has the universal property of [def-weil-pbc-category-colimit]: $S^{-1}P=\\varinjlim_{f\\in S}P_f$ in the category of commutative rings, a filtered colimit by step 1.",
+   "text": "Use identity object isomorphisms e_f for F. The colimit-point uniqueness isomorphism between the chosen colimit cocone and c gives eL : colimit F -> S^{-1}P. Its coprojection equation is comp_coconePointUniqueUpToIso_hom. Thus both displayed diagram and coprojection identifications hold.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), proof 'Omitted. Hint: use the universal property'; written by an agent"
+    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), stated there for an $R$-module $M$ ($S^{-1}M=\\colim_{f\\in S}M_f$, same preorder and transition maps), proof 'Omitted. Hint: use the universal property'; here the case $M=P$ with the ring structure"
    }
   }
  ],
@@ -118,7 +100,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243), proof 'Omitted. Hint: Use the universal property of Lemma lemma-universal-property-localization-module'; proof written by an agent, for the ring case M=P, using the universal property of P -> P_f"
+  "place": "Stacks Tag 00CR, universal-property hint, ring case; direct Lean proof by J4 using Mathlib IsLocalization.lift and ringHom_ext. The universal-property argument replaces the common-refinement step and representative construction."
  },
  "mathlib_searches": [
   {
@@ -230,5 +212,15 @@
   "group": "G1",
   "result": "fix",
   "note": "P CommRing/S Submonoid arbitrary (0∈S, zero ring ok); divisibility preorder with factor in P via ∃ Preorder + iff; (1) f,g≤fg, IsDirected, IsFiltered; (2) rho ring homs with a/f^n↦ah^n/g^n for every h, id, comp; functor via e; (3) kappa formula mk a (f^n), compat, colimit F≅LocalizedModule S P with legs kappa (fixed from Cocone/IsColimit); moreover algebraMap = mk a 1 (rfl)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T001226-L-2305393",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
