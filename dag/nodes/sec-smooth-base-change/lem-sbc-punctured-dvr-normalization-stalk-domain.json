@@ -17,22 +17,46 @@
  },
  "proof": [
   {
-   "text": "Localize at the DVR stalk and use the affine description of relative normalization; the chosen local ring is a localization at a prime of the integral closure in a finite product of fields.",
+   "text": "Put f = p composed with the open immersion U -> X and s = f.fromNormalization(x). Let A = O(X,s), a0 = X.fromSpecStalk(s), L = X times_X Spec A (using the identity of X), and a = pullback.fst(id_X,a0). The second projection d identifies L with Spec A. The DVR A is an integrally closed domain. Each stalk of Spec A is a prime localization, hence an integrally closed domain. Transport across d to show that L is integral with integrally closed stalks. These are the canonical stalk localization maps; no noncanonical algebraic object is chosen.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let g = pullback.snd(f,a). Since f is etale, g is smooth. On affine smooth charts over the integral normal L, the base section ring is an integrally closed domain by Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk. Apply RingHom.Smooth.isNormalRing and transport normal prime localizations of the source chart section ring to source stalks via IsLocalization.algEquiv. This proves that every source stalk of g is a normal domain. The source is locally Noetherian because g is locally of finite type over L.",
    "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply relativeNormalization_normal_stalks to g to conclude that g.normalization has domain stalks. Apply Hom.isIso_normalizationPullback_stalk to id_X, f and s: its comparison e identifies g.normalization with N times_X L, where N = f.normalization.",
+   "uses": [
+    "lem-sbc-relative-normalization-normal-stalks",
     "lem-sbc-normalization-stalk-base-change"
    ],
    "elementary": false
+  },
+  {
+   "text": "The canonical map Spec O(N,x) -> N and Spec of the stalk map of f.fromNormalization give a map into N times_X L by two pullback lifts. The closed point maps to a point y with first projection x. Let z = e.inv(y). Transport the domain property of O(g.normalization,z) through the isomorphism e to O(N times_X L,y). The first projection N times_X L -> N is flat, since it is a base change of a, which is a base change of the flat canonical stalk morphism a0. Its stalk map at y is a flat local ring map, hence faithfully flat and injective. Domainhood descends along this injection, giving IsDomain O(N,x). No preimmersion or surjectivity of stalk maps is needed. The outside-U hypothesis is retained but unused.",
+   "uses": [
+    "lem-sbc-canonical-stalk-spectrum-flat"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-normalization-stalk-base-change"
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-sbc-relative-normalization-normal-stalks",
+  "lem-sbc-normalization-stalk-base-change",
+  "lem-sbc-canonical-stalk-spectrum-flat"
  ],
  "proof_origin": {
   "kind": "from-document",
   "by": "worker",
-  "group": "G3",
-  "document": "Stacks Project",
-  "place": "Tags 0307, 035I and 0539"
+  "group": "C1",
+  "document": "Stacks Project; existing library affine normality argument",
+  "place": "Tags 0307, 035I, 035L and 033C; normal_stalks_of_smooth_integral_base in StalkNormalizationBoundaryDimensionTwoTransfer.lean",
+  "note": "Complete Lean proof using normality after stalk base change and faithfully flat descent of domainhood; no new sorry."
  },
  "mathlib_searches": [
   {
@@ -100,10 +124,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T211103-L-391661",
-  "kind": "interface",
+  "landing": "20261013T215555-L-894391",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
