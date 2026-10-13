@@ -19,26 +19,34 @@
  ],
  "proof": [
   {
-   "text": "Let C be the maximal-ideal completion and g the image of f. It is complete Noetherian local. Since g belongs to its maximal ideal, it is also (g)-adically complete: a (g)-adic Cauchy sequence is maximal-ideal-adically Cauchy and each ideal (g)^n is closed, so the limit has every required residue. Krull intersection gives uniqueness. Tag 0ALJ makes (C,(g)) henselian.",
+   "text": "Put C = AdicCompletion(m_A,A). Apply lem-weil-pbc-adic-completion-noetherian to get Noetherianity; Mathlib AdicCompletion.LocalRing gives its local-ring structure, maximal ideal m_C = m_A C, and m_C-adic completeness. For g, the image of f, the assumption f in m_A implies J=(g) is contained in m_C.",
    "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
     "def-weil-pbc-adic-completion",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-henselian-terminology"
+    "def-weil-pbc-noetherian-ring"
    ],
    "elementary": false
   },
   {
-   "text": "The map A→C induces A/(f)→C/(g). Base change r₀ to Spec(C/(g)). Tag 09ZL lifts this finite etale cover to a finite etale E→Spec C with the specified quotient identification.",
+   "text": "The proved private helper complete_subideal establishes J-adic completeness for every ideal J contained in the maximal ideal of a complete Noetherian local ring R. A J-adic Cauchy sequence is maximal-ideal-adically Cauchy and has a limit L. Fix n and put N=J^n R. The finite R-module R/N is maximal-ideal-adically Hausdorff by lem-weil-pbc-krull-intersection-jacobson, as packaged by Mathlib IsHausdorff. For each k, take l=max(n,k): the sequence residues at n and l agree modulo N, while the residue at l and L agree modulo m^k. Mapping the latter congruence into R/N proves that the residues at n and L agree modulo every m^k, hence are equal. Thus L has the prescribed residue modulo every J^n. J-adic separatedness follows from J^n contained in m^n. This applies also to J=0.",
    "uses": [
-    "def-weil-etale-morphism",
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the quotient map A/(f) to C/J with Ideal.quotientMap; its composite with A to A/(f) equals A to C to C/J. On spectra let k:Spec(C/J) to Spec(A/(f)), i and j the quotient inclusions, and c the completion morphism; then j followed by c equals k followed by i. Base change the supplied r0 along k. It is finite etale by base change stability. Apply lem-weil-pbc-finite-etale-lifting-complete to C, J and the proper identity of Spec C, transporting Spec(C/J) to the chosen pullback of that identity and j. Obtain a finite etale s:E to Spec C. Transport its closed-fibre isomorphism back using pullback.map and cancellation of the canonical fibre isomorphism. This gives eg:pullback(s,j) isomorphic to pullback(r0,k), with eg.hom followed by the second projection equal to the second projection of pullback(s,j). Only essential surjectivity of the complete-base lifting input is used.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-lifting-complete",
     "def-weil-finite-integral-morphism",
-    "def-weil-pbc-henselian-terminology",
+    "def-weil-etale-morphism",
     "def-pc-fibre-product"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict the quotient identification to W₀ and base change the supplied isomorphism e₀ to W₀. Associativity of fibre products identifies the two sides with (Y×_U W)×_W W₀ and s⁻¹(W)×_W W₀. Compose the isomorphisms. They are over W₀, giving exactly the projection equality. The same argument includes f=0, U empty, and empty covers.",
+   "text": "Put V=i inverse-image U, W=c inverse-image U, W0=j inverse-image W. The commuting square gives W0=k inverse-image V and a morphism v:W0 to V with v followed by the open inclusion equal to W0 inclusion followed by k. Cancellation of U inclusion gives (j restricted to W) followed by (c restricted to U) equal to v followed by (i restricted to U). Use pullbackLeftPullbackSndIso and pullback.congrHom to identify the left-hand double pullback with the base change along v of pullback(q,i restricted to U). The proved private helper base_change_iso base changes the supplied e0 to identify this with pullback(r0 restricted to V,v). The proved private helper restrict_pullback_iso, by horizontal pasting with isPullback_morphismRestrict, identifies the latter with pullback(r0,v followed by V inclusion). Rewrite by the equation for v, undo associativity, and base change eg inverse along W0 inclusion. Restore associativity and the restriction square for s and W to obtain pullback(s restricted to W,j restricted to W). Compose these isomorphisms. Each helper and each associativity isomorphism satisfies its second-projection equation; simplification of those equations proves exactly the required final projection equality. No depth, nonzero element or nonempty-open hypothesis is used.",
    "uses": [
     "def-pc-fibre-product"
    ],
@@ -50,14 +58,16 @@
   "def-weil-etale-morphism",
   "def-weil-finite-integral-morphism",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-etale-lifting-complete",
+  "lem-weil-pbc-krull-intersection-jacobson"
  ],
  "proof_origin": {
   "kind": "from-source",
-  "by": "T3",
-  "document": "Stacks Project",
-  "place": "Tag 0BLS, complete-case lifting paragraph; Tag 09ZL; Tag 0ALJ"
+  "by": "A2",
+  "document": "Stacks Project and pinned Mathlib",
+  "place": "Tag 0BLS complete-case lifting; Tag 0GS2 complete Noetherian essential-surjectivity paragraph; Tag 00IQ via Mathlib IsHausdorff; formal pullback transport written by A2"
  },
  "mathlib_searches": [
   {
@@ -142,10 +152,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T154358-L-1163507",
-  "kind": "interface",
+  "landing": "20261013T160707-L-1370328",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
