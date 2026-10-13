@@ -16,69 +16,46 @@
  ],
  "proof": [
   {
-   "text": "Because Spec(R_i) is quasi-compact and f is quasi-compact, X_i is quasi-compact. Choose a finite affine open cover U_b, b in Fin(n), using [lem-weil-pbc-qcqs-finite-affine-open-cover]. Set B_b = Gamma(U_b,O_X), N_b = Gamma(U_b,M), and let a_b be f on sections, composed with the canonical R_i-isomorphism for global sections of Spec(R_i). Local finite presentation makes B_b a finitely presented R_i-algebra by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. The modules N_b are finitely presented over B_b by [lem-weil-pbc-finite-presentation-affine-sections]. These are actual section rings and modules, not data chosen in definitions from a holed existence statement.",
+   "text": "Quasi-compactness of f over the affine base gives CompactSpace X_i. Choose one affine neighbourhood per point and extract a finite subcover indexed by Fin(n), realizing [lem-weil-pbc-qcqs-finite-affine-open-cover]. Construct B_b and N_b as actual sections and a_b as GammaSpecIso.inv followed by f.appLE. Use [lem-weil-pbc-lfp-affine-opens-finite-presentation] and composition with the bijective spectrum-sections map for algebra finite presentation. Use [lem-weil-pbc-finite-presentation-affine-sections] for module finite presentation. No algebra or module data is chosen from an unproved theorem.",
    "uses": [
     "lem-weil-pbc-qcqs-finite-affine-open-cover",
     "lem-weil-pbc-lfp-affine-opens-finite-presentation",
     "lem-weil-pbc-finite-presentation-affine-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 32.10.4, Tag 05LY, finite affine reduction, specialized to Y_i = S_i; Properties Tag 01PC; Morphisms Tag 01U4"
-   }
+   "elementary": false
   },
   {
-   "text": "Let C be the point of the chosen colimit cocone of R. The affine-limit comparison [lem-weil-pbc-limit-affine-transition-affine-comparison], together with the natural isomorphisms Gamma(Spec(R_k)) = R_k, identifies c.pt with Spec(C). The uniqueness equations for a colimit identify its coprojections with the ring maps corresponding to the cone projections. For any later k, and for C, the inverse images of U_b are spectra of T tensor_{R_i} B_b by [lem-weil-pbc-fibre-product-affine-spectra]. The affine pullback sections theorem [lem-weil-pbc-module-pullback-affine-sections] identifies the pulled-back module with T tensor_{R_i} N_b, with the base-ring action induced by the second pullback projection.",
-   "uses": [
-    "lem-weil-pbc-limit-affine-transition-affine-comparison",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 32.10.4, Tag 05LY, finite affine reduction, specialized to Y_i = S_i; Properties Tag 01PC; Morphisms Tag 01U4"
-   }
+   "text": "Spec preserves limits as a right adjoint. Apply isLimitOfPreserves Scheme.Spec to the opposite of colimit.isColimit R. Uniqueness against hc gives e: c.pt = Spec(colimit R), and conePointUniqueUpToIso_hom_comp gives e.hom followed by Spec of the coprojection equal to the prescribed cone projection. This direct three-line categorical proof avoids the general affine-transition limit theorem.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For T = C and for T = R_k, put D_T = T tensor_{R_i} R_i. The maps t tensor r to t*a(r), and t to t tensor 1, are inverse ring isomorphisms D_T = T; the tensor balancing relations show that their composites are identity. After restricting N_b along a_b, the induced tensor module D_T tensor_{R_i} N_b is canonically T tensor_{R_i} N_b, with all scalar actions respected. Transport limit flatness on each chart across these isomorphisms to obtain the displayed flat limit module.",
+   "text": "Apply the forward direction of [lem-pc-affine-cover-module-tensor-flat-criterion] to the constructed cover, the colimit coprojection, e and its projection equation. The supplied hflat gives every required limit tensor flatness assertion.",
    "uses": [
-    "def-pc-scheme-module-flat-over"
+    "lem-pc-affine-cover-module-tensor-flat-criterion"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01U4, affine-section characterization (1) implies (2), with tensor-unit identifications"
-   }
+   "elementary": true
   },
   {
-   "text": "At any stage k, flatness of the displayed D_{R_k}-modules transports to flatness of the chart sections over R_k. For every point of a chart, localization preserves flatness over the localized base ring. Since the pulled-back affine charts cover the stage source, all relative module stalks are flat. For an arbitrary affine source test open over an affine base test open, quasi-coherence identifies its localized section modules with these stalks. The prime-local criterion [lem-pc-affine-sections-flat-over-base] then makes its section module flat over the base test ring, which is precisely [def-pc-scheme-module-flat-over]. This proves the stage implication, without applying any eventual descent theorem. If X_i is empty choose n=0; every source base change is empty and its sections are zero modules. Zero rings and zero modules satisfy the same comparison formulas.",
+   "text": "At each k >= i apply the reverse direction of [lem-pc-affine-cover-module-tensor-flat-criterion] with q = R.map(homOfLE hik), p = Spec.map q and e the identity of Spec(R_k). The tensor hypotheses give precisely the stage IsFlatOver conclusion. No eventual descent is used.",
    "uses": [
-    "lem-pc-affine-sections-flat-over-base",
-    "def-pc-scheme-module-flat-over"
+    "lem-pc-affine-cover-module-tensor-flat-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma 29.26.2, Tag 01U4, (4) implies (2) via stalks; Algebra Tag 00HT"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-module-flat-over",
-  "lem-pc-affine-sections-flat-over-base",
-  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-pc-affine-cover-module-tensor-flat-criterion",
   "lem-weil-pbc-finite-presentation-affine-sections",
   "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-  "lem-weil-pbc-limit-affine-transition-affine-comparison",
-  "lem-weil-pbc-module-pullback-affine-sections",
   "lem-weil-pbc-qcqs-finite-affine-open-cover"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma 32.10.4, Tag 05LY, finite affine reduction, specialized to Y_i = S_i; Properties Tag 01PC; Morphisms Tag 01U4"
+  "by": "agent",
+  "group": "X3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/05LY",
+  "place": "Finite affine reduction, specialized to target equal to base; explicit chart construction and categorical Spec-colimit comparison, using the fixed-cover criterion."
  },
  "mathlib_searches": [
   {
@@ -168,9 +145,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T082334-L-1631820",
+  "landing": "20261013T100220-L-2502659",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

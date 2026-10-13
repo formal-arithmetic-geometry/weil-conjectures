@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-affine-cover-module-tensor-flat-criterion",
+ "kind": "statement",
+ "title": "Affine-cover criterion for tensor module flatness after base change",
+ "statement": "Let $A,T$ be commutative rings, $X,Y$ schemes [def-pc-scheme], $f:X\\to\\operatorname{Spec}(A)$ a morphism, and $M$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Let $U_b$, $b\\in\\operatorname{Fin}(n)$, be specified affine opens covering $X$. Set $a_b:A\\to\\Gamma(X,U_b)$ to the map induced by $f$, using the canonical spectrum-sections isomorphism. Let $q:A\\to T$, $p:Y\\to\\operatorname{Spec}(A)$, and $e:Y\\simeq\\operatorname{Spec}(T)$ satisfy $\\operatorname{Spec}(q)\\circ e=p$. Put $D=T\\otimes_A A$, with the right $A$-algebra structure, and restrict $\\Gamma(M,U_b)$ along $a_b$. The tensor pullback of $M$ [def-pc-module-pullback] to $X\\times_{\\operatorname{Spec}(A)}Y$ is flat over $Y$ [def-pc-scheme-module-flat-over] if and only if every $D\\otimes_A\\Gamma(M,U_b)$ is flat over $D$. No finiteness of section rings or modules, limit diagram, or eventual-flatness assertion is assumed or concluded.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01U4",
+  "place": "Morphisms, lemma-flat-module, (2) equivalent to (4); Algebra Tag 00HT, prime-local criterion; Limits Tag 05LY, affine-local reduction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "proof": [
+  {
+   "text": "For each specified affine U_b, the inverse image in X times_{Spec A} Y is affine, using Y = Spec T over Spec A and [lem-weil-pbc-fibre-product-affine-spectra]. Its actual section ring identifies with T tensor_A Gamma(X,U_b), with the base action given by the second projection. By [lem-weil-pbc-module-pullback-affine-sections], quasi-coherent pullback sections identify with T tensor_A Gamma(M,U_b), respecting that action. Locally this pullback is the associated sheaf of the tensor module, so it is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The maps T tensor_A A -> T, t tensor r -> t*q(r), and T -> T tensor_A A, t -> t tensor 1, are inverse. Tensor balancing proves the inverse equations and A-linearity for the right A-algebra action. Tensoring gives a scalar-compatible isomorphism (T tensor_A A) tensor_A Gamma(M,U_b) = T tensor_A Gamma(M,U_b). Transport flatness along these ring and module isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If the pullback is relatively flat, evaluate [def-pc-scheme-module-flat-over] on each pulled-back affine chart and the whole affine base Y. The preceding comparisons give the displayed tensor flatness.",
+   "uses": [
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conversely, tensor flatness makes each chart section module T-flat. Localize at each point; [lem-pc-affine-sections-flat-over-base] makes its stalk flat over the corresponding base local ring. The pulled-back charts cover, since U_b cover X. For an arbitrary affine source open over an affine base open, quasi-coherence identifies localizations of its section module with these stalks. Apply [lem-pc-affine-sections-flat-over-base], namely Module.flat_iff_of_isLocalization and Module.flat_of_isLocalized_maximal, to obtain every IsFlatOver test directly. The equation he guarantees agreement of the structural maps and scalar actions through e. An empty cover forces X empty, and all stalk tests are vacuous; zero rings and zero modules satisfy the same formulas.",
+   "uses": [
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-module-flat-over",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/01U4",
+  "place": "Morphisms, lemma-flat-module, (2) equivalent to (4); Algebra Tag 00HT, prime-local criterion; Limits Tag 05LY, affine-local reduction",
+  "by": "agent",
+  "group": "X3",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent sheaf of modules is relatively flat after base change if and only if its affine cover section tensor products are flat modules",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a quasi coherent module on a scheme over an affine base can be checked on tensor scalar extensions of sections on a finite affine open cover",
+   "results": "Eight hits, including AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.flat_iff, Module.Flat.of_flat_tensorProduct and Module.Flat.iff_flat_tensorProduct. The scheme results concern flat morphisms; the module results concern faithfully flat algebraic descent. None supplies the quasi-coherent affine-cover tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.IsFlatOver",
+   "results": "Unknown identifier; zero hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlatOver|tensorPullback.*flat|flat.*tensorPullback",
+   "results": "msearch Mathlib grep: zero hits. Direct library searches found RelativeFlatOfStalks, RelativeFlatModuleStalk and ModulePullbackAffineSections; these supply constituents but not the specified-cover criterion.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatModuleDescentAffineCharts",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 05LY affine reduction in noetherian approximation: fixed affine-cover module comparisons and source-local flatness gluing before algebraic eventual descent.",
+   "via": [
+    "lem-pc-flat-module-descent-affine-charts",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCoverModuleTensorFlatCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoverModuleTensorFlatCriterion.lean",
+  "declaration": "AlgebraicGeometry.affine_cover_module_tensor_flat_criterion",
+  "statement": "theorem affine_cover_module_tensor_flat_criterion (A T : CommRingCat.{u}) {X Y : Scheme.{u}} (f : X ⟶ Spec A) (M : X.Modules) [M.IsQuasicoherent] {n : ℕ} (U : Fin n → X.affineOpens) (hcover : ∀ x : X, ∃ b, x ∈ (U b).1) (q : A ⟶ T) (p : Y ⟶ Spec A) (e : Y ≅ Spec T) (he : e.hom ≫ Spec.map q = p) : let a := fun b ↦ ((Scheme.ΓSpecIso A).inv ≫ f.appLE ⊤ (U b).1 (by simp)).hom Scheme.Modules.IsFlatOver ((Scheme.Modules.tensorPullback (pullback.fst f p)).obj M) (pullback.snd f p) ↔ (∀ b, letI : Module (A : Type u) Γ(M, (U b).1) := Module.compHom _ (a b) letI : Algebra (A : Type u) (T : Type u) := q.hom.toAlgebra letI : Algebra (A : Type u) ((T : Type u) ⊗[(A : Type u)] (A : Type u)) := Algebra.TensorProduct.rightAlgebra letI : Module (A : Type u) ((T : Type u) ⊗[(A : Type u)] (A : Type u)) := Algebra.toModule Module.Flat ((T : Type u) ⊗[(A : Type u)] (A : Type u)) (((T : Type u) ⊗[(A : Type u)] (A : Type u)) ⊗[(A : Type u)] Γ(M, (U b).1)))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T100220-L-2502659",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T100220-L-2502659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

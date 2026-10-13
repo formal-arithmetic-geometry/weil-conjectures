@@ -12,9 +12,10 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+import Sheaf.AlgebraicGeometry.AffineCoverModuleTensorFlatCriterion
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Affine module comparisons for eventual flatness
 
@@ -101,6 +102,46 @@ theorem exists_flat_module_descent_affine_charts
             Scheme.Modules.IsFlatOver
               ((Scheme.Modules.tensorPullback
                 (pullback.fst f (Spec.map (R.map (homOfLE hik))))).obj M)
-              (pullback.snd f (Spec.map (R.map (homOfLE hik))))) := by sorry
+              (pullback.snd f (Spec.map (R.map (homOfLE hik))))) := by
+  classical
+  let : CompactSpace Xi := QuasiCompact.compactSpace_of_compactSpace f
+  have h (x : Xi) : ∃ U : Xi.affineOpens, x ∈ U.1 := by
+    obtain ⟨U, hU, hx, _⟩ := exists_isAffineOpen_mem_and_subset
+      (show x ∈ (⊤ : Xi.Opens) from trivial)
+    exact ⟨⟨U, hU⟩, hx⟩
+  choose V hx using h
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover
+    (fun x : Xi ↦ ((V x).1 : Set Xi)) (fun x ↦ (V x).1.isOpen)
+    (by intro x _; exact Set.mem_iUnion.mpr ⟨x, hx x⟩)
+  let ef := Fintype.equivFin t
+  let U : Fin (Fintype.card t) → Xi.affineOpens := fun b ↦ V (ef.symm b)
+  have hcover : ∀ x : Xi, ∃ b, x ∈ (U b).1 := by
+    intro x
+    obtain ⟨y, hyt, hxy⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
+    exact ⟨ef ⟨y, hyt⟩, by simpa [U] using hxy⟩
+  let B : Fin (Fintype.card t) → CommRingCat.{u} := fun b ↦ Γ(Xi, (U b).1)
+  let N : (b : Fin (Fintype.card t)) → ModuleCat.{u} (B b) :=
+    fun b ↦ ModuleCat.of (B b) Γ(M, (U b).1)
+  let a := fun b ↦ ((Scheme.ΓSpecIso (R.obj i)).inv ≫
+    f.appLE ⊤ (U b).1 (by simp)).hom
+  refine ⟨Fintype.card t, B, N, a, ?_, ?_, ?_, ?_⟩
+  · intro b
+    change (a b).FinitePresentation
+    exact (f.finitePresentation_appLE (isAffineOpen_top _) (U b).2 (by simp)).comp
+      (RingHom.FinitePresentation.of_bijective
+        (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (R.obj i)).inv))
+  · intro b
+    exact Scheme.Modules.finitePresentation_sections_of_isFinitePresentation M (U b).2
+  · let cs := Scheme.Spec.mapCone (colimit.cocone R).op
+    have hs : IsLimit cs := isLimitOfPreserves Scheme.Spec (colimit.isColimit R).op
+    let e := hc.conePointUniqueUpToIso hs
+    have he : e.hom ≫ Spec.map ((colimit.cocone R).ι.app i) = c.π.app (op i) :=
+      hc.conePointUniqueUpToIso_hom_comp hs (op i)
+    exact (affine_cover_module_tensor_flat_criterion (R.obj i) _ f M U hcover
+      ((colimit.cocone R).ι.app i) (c.π.app (op i)) e he).mp hflat
+  · intro k hik hstage
+    exact (affine_cover_module_tensor_flat_criterion (R.obj i) (R.obj k) f M U hcover
+      (R.map (homOfLE hik)) (Spec.map (R.map (homOfLE hik))) (Iso.refl _) (by simp)).mpr
+      hstage
 
 end AlgebraicGeometry
