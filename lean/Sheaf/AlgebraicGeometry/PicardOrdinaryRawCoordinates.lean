@@ -8,8 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.PicardOrdinaryAffineDifferentialFrames
+import Sheaf.AlgebraicGeometry.PicardTensorFrameRestriction
+import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Raw scalar coordinates and differential formulas
 
@@ -22,6 +23,27 @@ set_option autoImplicit false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+private lemma residueLift_appTop (W : Scheme.{v}) (w : W)
+    (U : W.Opens) (hwU : w ∈ U) (a : Γ(W, U)) :
+    (ΓSpecIso (W.residueField w)).hom
+      ((picardResidueLift W w U hwU).appTop (U.topIso.inv a)) =
+        W.evaluation U w hwU a := by
+  have hp : picardResidueLift W w U hwU =
+      Spec.map (W.residue w) ≫ U.fromSpecStalkOfMem w hwU := by
+    apply (cancel_mono U.ι).mp
+    rw [picardResidueLift_comp, Category.assoc, Opens.fromSpecStalkOfMem_ι]
+    rfl
+  have hc : picardResidueLift W w U hwU ≫ U.toSpecΓ =
+      Spec.map (W.presheaf.germ U w hwU ≫ W.residue w) := by
+    rw [hp, Category.assoc, Opens.fromSpecStalkOfMem_toSpecΓ, ← Spec.map_comp]
+  have h := congrArg (fun g ↦ g.appTop ≫ (ΓSpecIso (W.residueField w)).hom) hc
+  simp only [Hom.comp_appTop, Opens.toSpecΓ_appTop, Category.assoc,
+    ΓSpecIso_naturality] at h
+  have he := ConcreteCategory.congr_hom h ((ΓSpecIso Γ(W, U)).inv a)
+  have heval : W.evaluation U w hwU a = W.residue w (W.presheaf.germ U w hwU a) := rfl
+  rw [heval]
+  simpa only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply] using he
 
 /-- Affine bases give raw morphism coordinates compatible with residue restriction.
 Unlike cycle lifting, this calculation does not assume that the coefficients vanish
@@ -86,6 +108,51 @@ theorem picard_ordinary_raw_coordinates
         b (picardOrdinaryModelRestriction W U K (picardResidueLift W w V hwV)
           V.ι (W.fromSpecResidueField w) (W.homOfLE hVU) p
           (picardResidueLift_comp W w V hwV) hs f) =
-            W.evaluation V w hwV (c V hVU f) := by sorry
+            W.evaluation V w hwV (c V hVU f) := by
+  classical
+  obtain ⟨q0, q1, hq⟩ :=
+    picard_ordinary_affine_differential_frames W U hU m d K hK e0 e1 hd
+  let p := picardResidueLift W w U hwU
+  let β := (ΓSpecIso (W.residueField w)).commRingCatIsoToRingEquiv.toAddEquiv
+  let γ (V : W.Opens) := V.topIso.commRingCatIsoToRingEquiv.toAddEquiv
+  let b := (Modules.picardTensorScalarCoordinate (W.fromSpecResidueField w) p q0).trans β
+  let b1 := (Modules.picardTensorVectorCoordinate (W.fromSpecResidueField w) p m q1).trans
+    (AddEquiv.piCongrRight fun _ : Fin m ↦ β)
+  let c (V : W.Opens) (hVU : V ≤ U) :=
+    (Modules.picardTensorScalarCoordinate V.ι (W.homOfLE hVU) q0).trans (γ V)
+  let c1 (V : W.Opens) (hVU : V ≤ U) :=
+    (Modules.picardTensorVectorCoordinate V.ι (W.homOfLE hVU) m q1).trans
+      (AddEquiv.piCongrRight fun _ : Fin m ↦ γ V)
+  refine ⟨b, b1, c, c1, ?_, ?_, ?_⟩
+  · intro f
+    have hf := Modules.picardTensorFrame_map (W.fromSpecResidueField w) p q0 m q1
+      ((Modules.overEquiv U).functor.map (K.d 0 1)) f
+    change (fun i ↦ β
+      (Modules.picardTensorVectorCoordinate (W.fromSpecResidueField w) p m q1
+        (f ≫ (Modules.tensorPullback p).map
+          ((Modules.overEquiv U).functor.map (K.d 0 1))) i)) = _
+    rw [hf]
+    ext i
+    change (ΓSpecIso (W.residueField w)).hom
+      (Modules.picardTensorScalarCoordinate (W.fromSpecResidueField w) p q0 f *
+        p.appTop _) = _
+    rw [map_mul, hq i, residueLift_appTop]
+    rfl
+  · intro V hVU f
+    have hf := Modules.picardTensorFrame_map V.ι (W.homOfLE hVU) q0 m q1
+      ((Modules.overEquiv U).functor.map (K.d 0 1)) f
+    change (fun i ↦ γ V
+      (Modules.picardTensorVectorCoordinate V.ι (W.homOfLE hVU) m q1
+        (f ≫ (Modules.tensorPullback (W.homOfLE hVU)).map
+          ((Modules.overEquiv U).functor.map (K.d 0 1))) i)) = _
+    rw [hf]
+    ext i
+    change V.topIso.hom
+      (Modules.picardTensorScalarCoordinate V.ι (W.homOfLE hVU) q0 f *
+        (W.homOfLE hVU).appTop _) = _
+    rw [map_mul, hq i, homOfLE_appTop_topIso_inv, Iso.inv_hom_id_apply]
+    rfl
+  · intro V hwV hVU hs f
+    exact picardTensorFrame_restriction W w U hwU K q0 V hwV hVU hs f
 
 end AlgebraicGeometry.Scheme

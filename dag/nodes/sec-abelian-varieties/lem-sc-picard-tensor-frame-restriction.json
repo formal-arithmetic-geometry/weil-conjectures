@@ -1,0 +1,168 @@
+{
+ "id": "lem-sc-picard-tensor-frame-restriction",
+ "kind": "statement",
+ "title": "Rank-one tensor coordinates commute with raw residue restriction",
+ "statement": "Let W be a scheme, w a point in an open U, and K a cochain complex on the localized module site over U [def-sc-picard-ordinary-model-cycles]. Suppose q:A(K^0)≅O_U. For any open V⊆U containing w and any equality p_V followed by V→U=p_U between the residue lifts of [def-sc-picard-derived-model-sections], raw restriction sends f in Hom((V→W)*O_W,(V→U)*A(K^0)) to the raw residue morphism. Its explicit scalar tensor coordinate, transported by ΓSpecIso κ(w), equals evaluation at w of the scalar coordinate of f transported by V.topIso. Coordinates are exactly the constructions of [lem-sc-picard-tensor-frame-map]. No affineness, perfectness, differential or cycle condition is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0096, composition of tensor adjunctions; Tag 0BF2, residue degree-zero calculation"
+ },
+ "stmt_deps": [
+  "def-sc-picard-ordinary-model-cycles",
+  "def-sc-picard-derived-model-sections",
+  "def-weil-residue-field",
+  "lem-sc-picard-tensor-frame-map"
+ ],
+ "proof": [
+  {
+   "text": "Write L_g for tensorPullback g and epsilon_g for the pinned tensor-unit isomorphism. For i≫g=g′ let A_g:L_g′≅L_g⋙L_i be exactly the comparison defining raw restriction. Apply the direct adjunction homEquiv to A_g.hom.app O≫L_i.map epsilon_g≫epsilon_i. The mate unit equation, naturality, pushforwardComp and pushforwardCongr give g-sharp followed by g_*(i-sharp), which is g′-sharp sectionwise. The defining adjunct of epsilon_g′ is the same, hence injectivity gives A_g.hom.app O≫L_i.map epsilon_g≫epsilon_i=epsilon_g′.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-sc-picard-ordinary-model-cycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let n=epsilon_t.inv≫f≫L_s.map q.hom≫epsilon_s. Naturality of A_s with respect to q, followed by the compatibility from step 1 for t and s, identifies the normalized raw restriction with epsilon_i.inv≫L_i.map n≫epsilon_i. The tensor-unit adjunction calculation evaluates this endomorphism at one as i.appTop(n(1)). Thus only the ring-map evaluation remains.",
+   "uses": [
+    "lem-sc-picard-tensor-frame-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The residue lift factors as Spec of the residue quotient followed by the stalk lift to V. On global sections, composing the stalk lift with V.toSpecΓ is Spec of the germ map. After ΓSpecIso and V.topIso, this is precisely evaluation. Substitute in the preceding coordinate identity.",
+   "uses": [
+    "def-sc-picard-derived-model-sections",
+    "def-weil-residue-field"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-derived-model-sections",
+  "def-sc-picard-ordinary-model-cycles",
+  "def-weil-residue-field",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-picard-tensor-frame-map",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0096, composition of tensor adjunctions; Tag 0BF2, residue degree-zero calculation",
+  "description": "F4 expands the raw coordinate proof into explicit frames and tensor-coordinate calculations."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0096, composition of tensor adjunctions; Tag 0BF2, residue degree-zero calculation",
+   "via": [
+    "lem-sc-picard-ordinary-raw-coordinates",
+    "lem-sc-picard-ordinary-scalar-coordinates",
+    "lem-sc-picard-scalar-derived-cycles",
+    "lem-sc-picard-scalar-model-cycles-realization",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardOrdinaryRawCoordinates",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unitHomEquiv|isIso_fromTildeΓ_of_isQuasicoherent",
+   "results": "['Mathlib/AlgebraicGeometry/Modules/Tilde.lean', 'Mathlib/AlgebraicGeometry/Modules/Tilde.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean']",
+   "date": "2026-10-13",
+   "verdict": "ingredients; no exact simultaneous result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine quasi coherent sheaf basis gives scalar coordinates for tensor pullback with residue evaluation",
+   "results": "['SheafOfModules.QuasicoherentData.localGeneratorsData_generators', 'ModuleCat.Tilde.exists_const', 'ModuleCat.Tilde.res_const', 'AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen', 'AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux', 'SheafOfModules.sectionMap_freeMap_freeSection', 'ModuleCat.Tilde.res_apply', 'ModuleCat.Tilde.toOpen']",
+   "date": "2026-10-13",
+   "verdict": "ingredients; no exact simultaneous result"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "['SheafOfModules.unitHomEquiv', 'SheafOfModules.unitHomEquiv_comp_apply', 'SheafOfModules.unitHomEquiv_symm_comp', 'SheafOfModules.unitHomEquiv_apply_coe', 'SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply', 'SheafOfModules.pushforwardSections_unitHomEquiv']",
+   "date": "2026-10-13",
+   "verdict": "ingredients; no exact simultaneous result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf frames on an affine scheme and tensor pullback of structure sheaf morphisms compatible with residue restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison for composition of left adjoints commutes with adjoint structure maps of sheaf tensor pullback",
+   "results": "['SheafOfModules.pullbackComp', 'SheafOfModules.PullbackConstruction.adjunction', 'PresheafOfModules.pullbackComp', 'SheafOfModules.pullbackIso', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit', 'SheafOfModules.sheafificationCompPullback', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit', 'SheafOfModules.pullbackObjUnitToUnit']",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact rank-one raw residue compatibility theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "conjugateEquiv_unit",
+   "results": "[] loogle: unknown identifier 'conjugateEquiv_unit'",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact rank-one raw residue compatibility theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp_hom_app_app|unit_conjugateEquiv|conjugateIsoEquiv",
+   "results": "['Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/Condensed/Light/Small.lean', 'Mathlib/Condensed/Light/Small.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean', 'Mathlib/CategoryTheory/Shift/Adjunction.lean', 'Mathlib/CategoryTheory/Shift/Adjunction.lean']",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact rank-one raw residue compatibility theorem"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardTensorFrameRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardTensorFrameRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardTensorFrame_restriction",
+  "statement": "theorem picardTensorFrame_restriction (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (q : (Modules.overEquiv U).functor.obj (K.X 0) ≅ Modules.unit U.toScheme) (V : W.Opens) (hwV : w ∈ V) (hVU : V ≤ U) (hs : picardResidueLift W w V hwV ≫ W.homOfLE hVU = picardResidueLift W w U hwU) (f : (Modules.tensorPullback V.ι).obj (Modules.unit W) ⟶ (Modules.tensorPullback (W.homOfLE hVU)).obj ((Modules.overEquiv U).functor.obj (K.X 0))) : (ΓSpecIso (W.residueField w)).hom (Modules.picardTensorScalarCoordinate (W.fromSpecResidueField w) (picardResidueLift W w U hwU) q (picardOrdinaryModelRestriction W U K (picardResidueLift W w V hwV) V.ι (W.fromSpecResidueField w) (W.homOfLE hVU) (picardResidueLift W w U hwU) (picardResidueLift_comp W w V hwV) hs f)) = W.evaluation V w hwV (V.topIso.hom (Modules.picardTensorScalarCoordinate V.ι (W.homOfLE hVU) q f))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T133744-L-44073",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T133744-L-44073",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-picard-ordinary-affine-differential-frames",
+ "kind": "statement",
+ "title": "Sheaf frames realizing the affine differential column",
+ "statement": "Let W be a scheme, U an affine open, m a natural number, d in Γ(W,U)^m, and K a strictly perfect cochain complex on the localized module site over U [def-pc-perfect-complex]. Given section bases e0:Γ(K^0) ≃ Γ(W,U) and e1:Γ(K^1) ≃ Γ(W,U)^m identifying the section differential with a ↦ a d, there exist sheaf isomorphisms q0:A(K^0) ≅ O_U and q1:A(K^1) ≅ O_U^(ULift(Fin m)), where A is the open-site equivalence of [def-sc-picard-ordinary-model-cycles]. The column obtained by conjugating A(K.d 0 1) with these frames and evaluating its global section map at 1 has i-th entry U.topIso.inv(d i). No pullback morphism, residue field or cycle condition occurs.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BF2, finite-free complex calculation; finite-projective module algebra"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-complex",
+  "def-sc-picard-ordinary-model-cycles"
+ ],
+ "proof": [
+  {
+   "text": "Maps from the unit sheaf are sections at the terminal object. Maps from a free sheaf, and hence from any retract of it, are determined by their terminal section maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Send the free coordinate generators to the inverse images under the given section basis. The resulting sheaf map is bijective on terminal sections. Construct its inverse by lifting the generators of a free sheaf of which the term is a retract and composing with the retract inclusion. Terminal-section extensionality proves both inverse identities.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply this construction to e0 and e1. Transport the isomorphisms through the open-site equivalence, which preserves the unit, free coproducts and coordinate projections. Evaluate hd at one and transport the coefficients using U.topIso inverse. This also covers m=0 and requires no affine tilde equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0BF2, finite-free complex calculation; finite-projective module algebra",
+  "description": "F4 expands the raw coordinate proof into explicit frames and tensor-coordinate calculations."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, finite-free complex calculation; finite-projective module algebra",
+   "via": [
+    "lem-sc-picard-ordinary-raw-coordinates",
+    "lem-sc-picard-ordinary-scalar-coordinates",
+    "lem-sc-picard-scalar-derived-cycles",
+    "lem-sc-picard-scalar-model-cycles-realization",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardOrdinaryRawCoordinates",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unitHomEquiv|isIso_fromTildeΓ_of_isQuasicoherent",
+   "results": "['Mathlib/AlgebraicGeometry/Modules/Tilde.lean', 'Mathlib/AlgebraicGeometry/Modules/Tilde.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean']",
+   "date": "2026-10-13",
+   "verdict": "ingredients; no exact simultaneous result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine quasi coherent sheaf basis gives scalar coordinates for tensor pullback with residue evaluation",
+   "results": "['SheafOfModules.QuasicoherentData.localGeneratorsData_generators', 'ModuleCat.Tilde.exists_const', 'ModuleCat.Tilde.res_const', 'AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen', 'AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux', 'SheafOfModules.sectionMap_freeMap_freeSection', 'ModuleCat.Tilde.res_apply', 'ModuleCat.Tilde.toOpen']",
+   "date": "2026-10-13",
+   "verdict": "ingredients; no exact simultaneous result"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "['SheafOfModules.unitHomEquiv', 'SheafOfModules.unitHomEquiv_comp_apply', 'SheafOfModules.unitHomEquiv_symm_comp', 'SheafOfModules.unitHomEquiv_apply_coe', 'SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply', 'SheafOfModules.pushforwardSections_unitHomEquiv']",
+   "date": "2026-10-13",
+   "verdict": "ingredients; no exact simultaneous result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf frames on an affine scheme and tensor pullback of structure sheaf morphisms compatible with residue restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardOrdinaryAffineDifferentialFrames",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardOrdinaryAffineDifferentialFrames.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_ordinary_affine_differential_frames",
+  "statement": "theorem picard_ordinary_affine_differential_frames (W : Scheme.{v}) (U : W.Opens) (_hU : IsAffineOpen U) (m : ℕ) (d : Fin m → Γ(W, U)) (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hK : IsStrictlyPerfect W U K) (e0 : (K.X 0).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] Γ(W, U)) (e1 : (K.X 1).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] (Fin m → Γ(W, U))) (hd : ∀ a : Γ(W, U), e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm a)) = a • d) : ∃ (q0 : (Modules.overEquiv U).functor.obj (K.X 0) ≅ Modules.unit U.toScheme) (q1 : (Modules.overEquiv U).functor.obj (K.X 1) ≅ SheafOfModules.free (R := U.toScheme.ringCatSheaf) (ULift.{v} (Fin m))), ∀ i : Fin m, Modules.freeSectionsEquiv (ULift.{v} (Fin m)) (Modules.Hom.app (q0.inv ≫ (Modules.overEquiv U).functor.map (K.d 0 1) ≫ q1.hom) ⊤ (1 : Γ(U.toScheme, ⊤))) ⟨i⟩ = U.topIso.inv (d i)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T133744-L-44073",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T133744-L-44073",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
