@@ -1,0 +1,145 @@
+{
+ "id": "lem-sbc-generic-flat-finite-presentation",
+ "kind": "statement",
+ "title": "Generic flatness and local finite presentation over an integral base",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes, locally of finite type and quasi-compact [def-weil-finite-type-morphism], with $S$ integral [def-pc-integral-scheme]. There exists a nonempty open subscheme $U\\subseteq S$ such that the restricted morphism $f^{-1}(U)\\to U$ is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. No noetherianity or separatedness is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 052A, Proposition 29.28.1, structure-sheaf case; Tag 051T, Lemma 10.118.3."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-integral-scheme",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonempty affine open Spec A of the integral base. A is a domain. Quasi-compactness gives a finite affine cover Spec B_i of its inverse image, with each B_i a finite type A-algebra.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Stacks Tag 051T to each B_i with the finite B_i-module M=B_i. It gives a nonzero a_i in A such that the localized algebra is free as an A_{a_i}-module and finitely presented as an A_{a_i}-algebra. This works over arbitrary domains: present B_i by a finite-variable polynomial algebra, lift finitely many generators of the generic relation module over the fraction field, and form the finitely presented approximation B_i_prime. Tag 051S makes this approximation free after inverting a nonzero element. Its surjection to B_i is an isomorphism generically; its kernel is then zero since a free module over a domain injects into its fraction-field extension. Thus the approximation equals B_i on that basic open.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Invert the product of the finitely many a_i. It is nonzero, so the basic open U is nonempty. Localization preserves flatness and finite presentation. On each restricted affine source chart both properties hold, so flatness and local finite presentation of the map follow from locality on the source. For an empty inverse image use the empty product 1, and both properties are vacuous.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-integral-scheme",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 052A and 051T, proofs read at https://stacks.math.columbia.edu/tag/052A and https://stacks.math.columbia.edu/tag/051T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite type morphism to an integral scheme is flat and locally of finite presentation over a nonempty open subset",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism to an integral scheme is flat and locally of finite presentation over a nonempty open subset",
+   "digest": "3731db16513c1228",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*flat|flat.*generic|exists.*finitePresentation",
+   "digest": "645ddeb15d6a5353",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericClosedSubsetFibreNonempty",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 055G, nonempty-intersection image argument: make the closed-subscheme map flat and finitely presented before taking its open image.",
+   "via": [
+    "lem-sbc-generic-closed-subset-fibre-nonempty",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread",
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open",
+    "lem-sbc-generic-geometrically-connected-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFlatFinitePresentation.lean",
+  "declaration": "AlgebraicGeometry.exists_nonempty_open_flat_finitePresentation_restrict",
+  "statement": "theorem exists_nonempty_open_flat_finitePresentation_restrict {X S : Scheme.{u}} [IsIntegral S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] : ∃ U : S.Opens, (U : Set S).Nonempty ∧ Flat (f ∣_ U) ∧ LocallyOfFinitePresentation (f ∣_ U)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T015600-L-3022759",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T015600-L-3022759",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
