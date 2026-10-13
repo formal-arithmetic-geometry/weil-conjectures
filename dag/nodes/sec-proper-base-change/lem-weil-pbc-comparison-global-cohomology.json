@@ -3,33 +3,51 @@
  "blueprint": {
   "is": "lem-weil-pbc-comparison-global-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Comparison of global cohomology",
- "statement": "For finite $\\Lambda$ and $K\\in\\Dplus(T_{\\Et},\\Lambda)$, the derived unit\ninduces a natural isomorphism\n\n$$\n R\\Gamma(T_{\\Et},K)\\xrightarrow{\\sim}\n R\\Gamma(T_{\\Proet},\\nu_T^*K).\n$$\n\nBoth functors are ordinary derived sections.",
+ "statement": "For a scheme $T$, finite $\\Lambda$ and $K\\in\\Dplus(T_{\\Et},\\Lambda)$, the derived unit\ninduces a natural isomorphism\n\n$$\n R\\Gamma(T_{\\Et},K)\\xrightarrow{\\sim}\n R\\Gamma(T_{\\Proet},\\nu_T^*K).\n$$\n\nBoth functors are ordinary derived sections.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-global-cohomology.md",
   "place": "node lem-weil-pbc-comparison-global-cohomology, order 1287"
  },
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-site-comparison-morphism"
  ],
  "proof": [
   {
-   "text": "Since $\\nu_T^*$ is exact by\n[prop-weil-pbc-site-comparison-finite-level], its right adjoint $\\nu_{T,*}$\nin [def-weil-pbc-site-comparison-morphism] preserves injectives. For an\ninjective pro-etale resolution $J^\\bullet$ of a bounded-below complex,\n$\\nu_{T,*}J^\\bullet$ therefore computes its derived direct image and the\nsubsequent derived sections. Underived evaluation on the final object gives\n$\\Gamma(T_{\\Et},\\nu_{T,*}J^r)=\\Gamma(T_{\\Proet},J^r)$. Thus\n$R\\Gamma_{\\Et}R\\nu_{T,*}=R\\Gamma_{\\Proet}$. Apply this identity to the\nderived unit, which is an isomorphism by [thm-weil-pbc-site-comparison].",
+   "text": "For a bounded-below complex J of pro-etale Λ-module sheaves, exactness of ν_T^* from [prop-weil-pbc-site-comparison-finite-level] implies that its right adjoint ν_{T,*} preserves injectives. Resolving J by injectives, ν_{T,*} computes the derived direct image, and evaluation on the final object identifies Γ(T_Et,ν_{T,*}J^r) with Γ(T_Proet,J^r) termwise. Therefore the derived-sections identity RΓ(T_Et,Rν_{T,*}J) ≅ RΓ(T_Proet,J) is the preceding node.",
    "uses": [
     "prop-weil-pbc-site-comparison-finite-level",
     "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-derived-sections-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-global-cohomology.md",
+    "place": "Proof, first paragraph through “Thus RΓ_Et Rν_{T,*}=RΓ_Proet.”"
+   }
+  },
+  {
+   "text": "Apply that identity to J=ν_T^*K. The derived unit K→Rν_{T,*}ν_T^*K is an isomorphism by [thm-weil-pbc-site-comparison], so applying RΓ(T_Et,−) gives the claimed natural isomorphism RΓ(T_Et,K) ≅ RΓ(T_Proet,ν_T^*K).",
+   "uses": [
+    "lem-weil-pbc-derived-sections-pushforward",
     "thm-weil-pbc-site-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-global-cohomology.md",
+    "place": "Proof, final sentence “Apply this identity to the derived unit...”"
+   }
   }
  ],
  "proof_deps": [
   "prop-weil-pbc-site-comparison-finite-level",
   "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-derived-sections-pushforward",
   "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
@@ -39,7 +57,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +87,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-comparison-global-cohomology",
+  "worker": "stage1",
+  "summary": "Audited the comparison lemma against its blueprint proof and split out the generic derived global-sections identity for Rν_{T,*}; the item then applies it to ν_T^*K and the bounded-below derived unit isomorphism. Existing comparison, finite-level exactness, and site-comparison theorem nodes are cited directly. No Lean declaration states the item exactly.",
+  "blueprint": "The first proof paragraph is realized by lem-weil-pbc-derived-sections-pushforward and item step 1; the final application to the derived unit is item step 2."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-385aceae8",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-385aceae8 (reviewer sub-agent of L); spot-checked: The mathematics and source route check out. Repair the new node’s incorrect citation of the étale derived-category definition for a pro-étale complex, add the exact pro-étale module dependency, define both derived section functors at terminal objects, and add complete created metadata. Corrected JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-derived-sections-pushforward.json; full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
