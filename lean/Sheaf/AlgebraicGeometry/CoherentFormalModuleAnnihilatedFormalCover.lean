@@ -9,6 +9,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.RingTheory.Ideal.Operations
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitAnnihilators
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineProjections
+import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+
 /-! # Annihilation of formal kernels and cokernels on an affine cover
 
 Source: Stacks Project, Lemmas 087W and 087X, and Remark 0888.
@@ -22,24 +27,67 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private theorem formal_annihilation_iff_limit
+    (X : Scheme.{u}) [IsNoetherian X] (I K : X.IdealSheafData)
+    (M : CoherentFormalModule X I) (J : Type v) (U : J → X.affineOpens)
+    (hcover : (⨆ j, (U j).1) = ⊤) (t : ℕ) :
+    (∀ n : ℕ, IsZero (Scheme.idealModuleProduct
+      (Scheme.idealSheafPower K.toModulesι t).2 (M.obj.obj (op n)))) ↔
+    ∀ j : J, K.ideal (U j) ^ t ≤ Module.annihilator Γ(X, (U j).1)
+      (limit (M.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op (U j).1)) :
+        ModuleCat Γ(X, (U j).1)) := by
+  have hS : ∀ x : X, ∃ V ∈ Set.range U, x ∈ V.1 := by
+    intro x
+    have hx : x ∈ (⨆ j, (U j).1) := by rw [hcover]; trivial
+    obtain ⟨j, hj⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+    exact ⟨U j, ⟨j, rfl⟩, hj⟩
+  have qc (n : ℕ) : (M.obj.obj (op n)).IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+      (M.property.1 n)).1
+  have level (n : ℕ) :
+      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
+        (M.obj.obj (op n))) ↔
+      ∀ j : J, K.ideal (U j) ^ t ≤
+        Module.annihilator Γ(X, (U j).1) Γ(M.obj.obj (op n), (U j).1) := by
+    have := qc n
+    rw [Scheme.idealPowerProduct_isZero_iff_affine_cover X _ K (Set.range U) hS t]
+    exact ⟨fun h j ↦ h (U j) ⟨j, rfl⟩, fun h V ⟨j, hj⟩ ↦ hj ▸ h j⟩
+  constructor
+  · intro h j a ha
+    apply Module.mem_annihilator.mpr
+    intro x
+    apply Concrete.limit_ext
+      (M.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op (U j).1))
+    intro n
+    obtain ⟨n⟩ := n
+    simpa only [map_smul, map_zero] using
+      Module.mem_annihilator.mp ((level n).mp (h n) j ha)
+        (limit.π (M.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op (U j).1))
+          (op n) x)
+  · intro h n
+    apply (level n).mpr
+    intro j a ha
+    apply Module.mem_annihilator.mpr
+    intro x
+    obtain ⟨y, rfl⟩ := (coherentFormalModule_affine_projections X I M (U j) n).1 x
+    simpa only [map_smul, map_zero] using congrArg
+      (limit.π (M.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op (U j).1)) (op n))
+      (Module.mem_annihilator.mp (h j ha) y)
+
 /-- On any affine open cover, a fixed positive power kills a formal kernel and cokernel
 exactly when its section ideals kill the kernels and cokernels of the affine limit maps.
 Source: Stacks Project, Lemmas 087W and 087X (the affine description of the kernel)
 (blueprint: lem-weil-pbc-formal-annihilation-kernel-cokernel-cover).
 
 Proof:
-1. Exact restriction to each open preserves the given limiting fork and colimiting
-   cofork. The affine equivalence identifies their objects with the finite completed
-   kernel T and cokernel Q of the affine inverse-limit map.
-2. Under that equivalence their level n+1 objects are the tilde sheaves of
-   T/I^(n+1)T and Q/I^(n+1)Q. The ideal-product section criterion identifies vanishing
-   of the K^t-products with annihilation of these quotients by K(U)^t.
-3. If K(U)^t kills T and Q, it kills every such quotient. Conversely, if it kills all
-   quotients, every scalar product lies in the intersection of all I^(n+1)-powers
-   of T or Q. Those intersections are zero: finite modules over the Noetherian
-   completed ring are adically complete and separated. Thus it kills T and Q.
-4. Vanishing of these quasi-coherent ideal-product sheaves is local on the supplied
-   cover. Apply step 3 on each member and glue, retaining the same exponent t.
+1. The defining quotient isomorphisms give surjective transition maps on affine
+   sections. Sequential inverse-limit surjectivity gives surjective projections.
+2. The affine-cover ideal-product criterion detects each level's annihilation.
+   Limit extensionality shows that annihilation at every level kills the limit;
+   surjectivity of its projections proves the converse.
+3. The affine-limit annihilator comparison identifies the limits of the formal
+   kernel and cokernel with the linear kernel and cokernel for this test. Apply
+   the equalities on each member of the cover and combine both conditions.
 In particular the formal kernel is not asserted to be the termwise kernel.
 For an empty index type covering X, X is empty and both sides hold. -/
 theorem coherentFormalModule_annihilated_formal_cover
@@ -62,6 +110,29 @@ theorem coherentFormalModule_annihilated_formal_cover
           SheafOfModules.evaluation X.ringCatSheaf (op (U j).1)) :
           ModuleCat Γ(X, (U j).1)) ⧸ LinearMap.range
           (lim.map (Functor.whiskerRight α.hom
-            (SheafOfModules.evaluation X.ringCatSheaf (op (U j).1)))).hom)) := by sorry
+            (SheafOfModules.evaluation X.ringCatSheaf (op (U j).1)))).hom)) := by
+  obtain ⟨t, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt ht)
+  have hk' := formal_annihilation_iff_limit X I K k.pt J U hcover (t + 1)
+  have hc' := formal_annihilation_iff_limit X I K c.pt J U hcover (t + 1)
+  constructor
+  · intro h j
+    have hkj := hk'.mp (fun n ↦ (h n).1) j
+    have hcj := hc'.mp (fun n ↦ (h n).2) j
+    obtain ⟨ek, ec⟩ := coherentFormalModule_limit_annihilators X I F G α k c hk hc (U j)
+    exact ⟨ek ▸ hkj, ec ▸ hcj⟩
+  · intro h
+    have hkj : ∀ j, K.ideal (U j) ^ (t + 1) ≤ Module.annihilator Γ(X, (U j).1)
+        (limit (k.pt.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op (U j).1)) :
+          ModuleCat Γ(X, (U j).1)) := by
+      intro j
+      rw [(coherentFormalModule_limit_annihilators X I F G α k c hk hc (U j)).1]
+      exact (h j).1
+    have hcj : ∀ j, K.ideal (U j) ^ (t + 1) ≤ Module.annihilator Γ(X, (U j).1)
+        (limit (c.pt.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op (U j).1)) :
+          ModuleCat Γ(X, (U j).1)) := by
+      intro j
+      rw [(coherentFormalModule_limit_annihilators X I F G α k c hk hc (U j)).2]
+      exact (h j).2
+    exact fun n ↦ ⟨hk'.mpr hkj n, hc'.mpr hcj n⟩
 
 end AlgebraicGeometry

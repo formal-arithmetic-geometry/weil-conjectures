@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-cokernel-limit-annihilators",
+ "kind": "statement",
+ "title": "Annihilators of affine limits of formal kernels and cokernels",
+ "statement": "Let $X$ be a Noetherian scheme, $I$ a quasi-coherent ideal, $F,G$ coherent formal $I$-modules [def-weil-pbc-coherent-formal-module], and $\\alpha:F\\to G$. Let $k,c$ be a limiting kernel fork and colimiting cokernel cofork [lem-weil-pbc-coherent-formal-modules-abelian]. For any affine open $V$, put $L(M)=\\varprojlim_n\\Gamma(V,M_{n+1})$, an $A=\\Gamma(V,\\mathcal O_X)$-module [lem-weil-pbc-coherent-formal-modules-affine]. Then $\\operatorname{Ann}_A L(k)=\\operatorname{Ann}_A\\operatorname{Ker}(L(\\alpha))$ and $\\operatorname{Ann}_A L(c)=\\operatorname{Ann}_A\\operatorname{Coker}(L(\\alpha))$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), affine kernel description and exact restriction, together with Lemma 087W (lemma-inverse-systems-affine); verified at https://stacks.math.columbia.edu/tag/087X and https://stacks.math.columbia.edu/tag/087W"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-coherent-formal-modules-affine"
+ ],
+ "proof": [
+  {
+   "text": "Exact restriction to V preserves the given limiting fork and colimiting cofork.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-local-exactness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify V with Spec of A. The affine equivalence has underlying A-module the inverse limit of sections and is natural on morphisms. Equivalences preserve kernels and cokernels; finite modules over the Noetherian completion are closed under them, and restriction of scalars preserves both operations. This gives A-linear isomorphisms from L(k) and L(c) to the linear kernel and cokernel of L(alpha).",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply LinearEquiv.annihilator_eq to both linear isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-modules-local-exactness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W and Lemma 087X, affine kernel/cokernel calculation; https://stacks.math.columbia.edu/tag/087X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "annihilator.*(limit|kernel)|limit.*annihilator",
+   "results": "Mathlib/LinearAlgebra/Dual/Defs.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; linear annihilator transport is available"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv.annihilator_eq",
+   "results": "LinearEquiv.annihilator_eq",
+   "date": "2026-10-13",
+   "verdict": "no exact match; linear annihilator transport is available"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functor inverse limit affine coherent formal modules preserves kernel cokernel annihilator",
+   "results": "Condensed.instAB4StarCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB5CondensedMod, Condensed.instAB4CondensedMod, instAbelianCondensedMod, localCohomology.diagram, LightCondensed.instCountableAB4StarLightCondMod, CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteLimitsModuleCatEmbeddingRingFunctor",
+   "date": "2026-10-13",
+   "verdict": "no exact match; linear annihilator transport is available"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine section inverse limit functor on coherent adic systems preserves kernels and cokernels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedFormalCover",
+  "group": "R1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of the essential-surjectivity split, through the annihilation criterion (Remark 0888)",
+   "via": [
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitAnnihilators",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleLimitAnnihilators.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_limit_annihilators",
+  "statement": "theorem coherentFormalModule_limit_annihilators\n    (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)\n    (F G : CoherentFormalModule X I) (α : F ⟶ G)\n    (k : KernelFork α) (c : CokernelCofork α) (hk : IsLimit k) (hc : IsColimit c)\n    (V : X.affineOpens) :\n    Module.annihilator Γ(X, V.1)\n      (limit (k.pt.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op V.1)) :\n        ModuleCat Γ(X, V.1)) =\n      Module.annihilator Γ(X, V.1) (LinearMap.ker\n        (lim.map (Functor.whiskerRight α.hom\n          (SheafOfModules.evaluation X.ringCatSheaf (op V.1)))).hom) ∧\n    Module.annihilator Γ(X, V.1)\n      (limit (c.pt.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op V.1)) :\n        ModuleCat Γ(X, V.1)) =\n      Module.annihilator Γ(X, V.1)\n        (↥(limit (G.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op V.1)) :\n          ModuleCat Γ(X, V.1)) ⧸ LinearMap.range\n          (lim.map (Functor.whiskerRight α.hom\n            (SheafOfModules.evaluation X.ringCatSheaf (op V.1)))).hom)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T022426-L-3217928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T022426-L-3217928",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
