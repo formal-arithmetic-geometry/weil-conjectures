@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-scalar-pullback-tensor-coefficient",
+ "kind": "statement",
+ "title": "Scalar pullback and tensor coefficient square",
+ "statement": "Let $k$ be a field, $f:X\\to\\operatorname{Spec}k$, $g:Y\\to\\operatorname{Spec}k$, $t:Y\\to X$ with $t\\circ f=g$ in diagrammatic order, and $F,G$ arbitrary $\\mathcal O_X$-modules. Write $S_f$ for restriction to scalar sheaves, $T$ for inverse image of scalar sheaves, $j_F:TS_fF\\to S_gt^*F$ for scalarPullbackCoefficient, and $\\mu_f:S_fF\\otimes_k S_fG\\to S_f(F\\otimes_{\\mathcal O_X}G)$ for scalarTensorCoefficient [def-sc-field-linear-module-cohomology-operations]. Let $\\tau:t^*(F\\otimes G)\\to t^*F\\otimes t^*G$ be the normalized comparison [lem-weil-pbc-module-pullback-tensor]. For the oplax comparison $\\delta$ obtained from the inverse-image/direct-image adjunction, the equality of scalar sheaf morphisms $T(\\mu_f)\\circ j_{F\\otimes G}\\circ S_g(\\tau)=\\delta_{S_fF,S_fG}\\circ(j_F\\otimes_k j_G)\\circ\\mu_g$ holds, in diagrammatic order. It contains no Ext classes or cohomology degrees.",
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tag 01F7; Modules Tag 01CD, normalized tensor pullback section identity. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages."
+ },
+ "proof": [
+  {
+   "text": "Apply the inverse-image/direct-image adjunction to the two morphisms. Precompose their underlying presheaf morphisms with the tensorator of the sheaf inclusion. Evaluate over each open U on a pure tensor s tensor r. The defining adjunction identity for scalarPullbackCoefficient identifies each factor with the normalized module pullback unit applied to s or r. The section formula for scalarTensorCoefficient sends a pure tensor to tmulSection s r. The section normalization of module_pullback_tensor sends the unit applied to this tensor section to the tensor of the two unit sections. The oplax comparison is the mate of the lax tensor comparison for direct image, so its adjoint gives precisely the same tensor of unit sections. Thus both composites agree on pure tensors. The linear tensor universal property extends the equality to presheaf tensors, and the sheafification adjunction extends it to the sheaf tensor. Finally injectivity of the inverse-image adjunction gives the displayed coefficient square. Empty schemes and zero modules require no exception: all these section identities hold.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tag 01F7; Modules Tag 01CD, normalized tensor pullback section identity. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages.",
+  "note": "Extracted strict part of the original node argument; specialization to the actual Lean definitions written by M1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of Ext under exact monoidal functors and natural transformations",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image tensor comparison commutes with the coefficient map from scalar sheaves to pullback of modules",
+   "results": "Eight results about module pullback on free modules and presheaf tensor maps. None gives this scalar coefficient square.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp_mapExactFunctor",
+   "results": "Generic composition transport lemma found; does not state this compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup.*pullback|Cup.*naturality|sheafPullback.*[Mm]onoidal; scalarCohomologyExtEquiv.*[Nn]atur",
+   "results": "No matching Mathlib theorem. Local library has scalar operation definitions and cohomology naturality statements requiring other hypotheses; no declaration of this step.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarCupPullbackNaturality",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof, Kunneth pullback functoriality: scalar cup product naturality under pullback; Scalar pullback and tensor coefficient square",
+   "via": [
+    "lem-sc-scalar-cup-pullback-naturality",
+    "lem-sc-scalar-cup-pullback-coefficient-naturality",
+    "lem-sc-picard-kunneth-qcoh-functoriality",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarPullbackTensorCoefficient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarPullbackTensorCoefficient.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarPullbackCoefficient_tensor",
+  "statement": "theorem scalarPullbackCoefficient_tensor (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) (t : Y ⟶ X) (ht : t ≫ f = g) (F G : X.Modules) : (scalarInverseImage t).map (scalarTensorCoefficient f F G) ≫ scalarPullbackCoefficient f g t ht (@id X.Modules (F ⊗ G)) ≫ scalarHom g ((Classical.choose (module_pullback_tensor t)) F G).hom = ((Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k) (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).leftAdjointOplaxMonoidal.δ (scalarSheaf f F) (scalarSheaf f G) ≫ (scalarPullbackCoefficient f g t ht F ⊗ₘ scalarPullbackCoefficient f g t ht G) ≫ scalarTensorCoefficient g ((tensorPullback t).obj F) ((tensorPullback t).obj G)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T045539-L-131692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T045539-L-131692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

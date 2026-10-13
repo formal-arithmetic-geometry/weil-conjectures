@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-scalar-cohomology-ext-coefficient-naturality",
+ "kind": "statement",
+ "title": "Naturality of the scalar cohomology to Ext comparison",
+ "statement": "Let $k$ be a field, $f:X\\to\\operatorname{Spec}k$, $F,G$ arbitrary $\\mathcal O_X$-modules, and $\\phi:F\\to G$. For the recorded right-derived-functor scalar cohomology, scalar sheaf coefficient map $S_f(\\phi)$, and comparison $e_{F,n}:H_k^n(X,F)\\cong\\operatorname{Ext}^n(\\mathbf1,S_fF)$ [def-sc-field-linear-module-cohomology-operations], every $n\\in\\mathbb N$ and $a\\in H_k^n(X,F)$ satisfy $e_{G,n}(H_k^n(\\phi)(a))=e_{F,n}(a)\\cdot\\operatorname{Ext}^0(S_f(\\phi))$. This compares a single coefficient morphism and involves neither cup products nor scheme pullbacks.",
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tags 01DZ and 01F7, injective-resolution comparison and coefficient functoriality. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages."
+ },
+ "proof": [
+  {
+   "text": "Lift a coefficient morphism to a comparison map of injective resolutions. The right-derived-functor coefficient map is induced by the global-sections map of this comparison. Evaluation at 1 identifies the global-sections complex with Hom from the structure sheaf, naturally in the resolution: every O-linear comparison map takes the image of 1 to the image of the corresponding section. The cocycle formula specifying moduleExtEquiv therefore intertwines the derived coefficient map with postcomposition by the degree-zero Ext class of the coefficient morphism. Every cohomology class has a cocycle representative, so this proves naturality of moduleExtEquiv. Exact restriction to scalar sheaves preserves Yoneda composition and sends the degree-zero coefficient map to scalarHom. Precompose by scalarUnitMorphism and use associativity of Yoneda composition. This gives naturality of scalarCohomologyExtMap, hence of its AddEquiv.ofBijective wrapper scalarCohomologyExtEquiv. This argument applies also in degree zero and for zero coefficients or the empty scheme.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tags 01DZ and 01F7, injective-resolution comparison and coefficient functoriality. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages.",
+  "note": "Extracted strict part of the original node argument; specialization to the actual Lean definitions written by M1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of Ext under exact monoidal functors and natural transformations",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The comparison between derived sheaf cohomology and Ext from the structure sheaf is natural in coefficient morphisms",
+   "results": "Eight results including InjectiveResolution.extEquivCohomologyClass_extMk and Sheaf.ΓHomEquiv_naturality_right. None compares this recorded module-derived cohomology with scalar Ext.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp_mapExactFunctor",
+   "results": "Generic composition transport lemma found; does not state this compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup.*pullback|Cup.*naturality|sheafPullback.*[Mm]onoidal; scalarCohomologyExtEquiv.*[Nn]atur",
+   "results": "No matching Mathlib theorem. Local library has scalar operation definitions and cohomology naturality statements requiring other hypotheses; no declaration of this step.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarCupPullbackNaturality",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof, Kunneth pullback functoriality: scalar cup product naturality under pullback; Naturality of the scalar cohomology to Ext comparison",
+   "via": [
+    "lem-sc-scalar-cup-pullback-naturality",
+    "lem-sc-scalar-cup-pullback-coefficient-naturality",
+    "lem-sc-picard-kunneth-qcoh-functoriality",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarCohomologyExtCoefficientNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCohomologyExtEquiv_map",
+  "statement": "theorem scalarCohomologyExtEquiv_map (f : X ⟶ Spec (CommRingCat.of k)) {F G : X.Modules} (φ : F ⟶ G) (n : ℕ) (a : scalarCohomology f F n) : scalarCohomologyExtEquiv f G n (scalarCohomologyMap f φ n a) = (scalarCohomologyExtEquiv f F n a).comp (Abelian.Ext.mk₀ (scalarHom f φ)) (add_zero n)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T045539-L-131692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T045539-L-131692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

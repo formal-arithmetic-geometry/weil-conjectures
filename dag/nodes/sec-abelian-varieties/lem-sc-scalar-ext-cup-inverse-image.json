@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-scalar-ext-cup-inverse-image",
+ "kind": "statement",
+ "title": "Exact inverse image transports the scalar Ext tensor pairing",
+ "statement": "Let $k$ be a field, $X,Y$ schemes, and $t:Y\\to X$. Use the scalar sheaf category, exact inverse image $T$, unit isomorphism $u:T\\mathbf1_X\\cong\\mathbf1_Y$, and Yoneda tensor pairing $c$ of [def-sc-field-linear-module-cohomology-operations]. Let $\\delta_{A,B}:T(A\\otimes_k B)\\to TA\\otimes_k TB$ be the oplax tensor comparison obtained by taking the mate of the canonical lax tensor structure on sheaf direct image under its inverse-image adjunction. For arbitrary scalar sheaves $A,B$ on $X$, $A\\prime,B\\prime$ on $Y$, maps $\\phi:TA\\to A\\prime$, $\\psi:TB\\to B\\prime$, and $a\\in\\operatorname{Ext}^p(\\mathbf1_X,A)$, $b\\in\\operatorname{Ext}^q(\\mathbf1_X,B)$, one has $(u^{-1})^*T(c(a,b))\\cdot\\operatorname{Ext}^0(\\delta_{A,B}\\circ(\\phi\\otimes\\psi))=c((u^{-1})^*T(a)\\cdot\\operatorname{Ext}^0(\\phi),(u^{-1})^*T(b)\\cdot\\operatorname{Ext}^0(\\psi))$, where the displayed composites are in diagrammatic order and have degree $p+q$. No scheme-module coefficient comparison or derived-cohomology map is involved.",
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tags 01FD, 07MB, 0FKV; generic exact inverse-image and tensor pairing argument. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages."
+ },
+ "proof": [
+  {
+   "text": "The inverse image of sheaves of k-vector spaces is exact and its canonical oplax tensor comparison is an isomorphism: on stalks it is the identity on the k-tensor of the two stalks. The unit comparison identifies the inverse image of the constant sheaf k with the constant sheaf k. This is the same comparison as scalarInverseUnitIso, since both are the adjoint of the constant section 1. Expand scalarExtCup as its two tensor-functor transports and Yoneda composition. Exact-functor transport preserves composition and degree-zero morphisms. The oplax tensor comparison intertwines inverse image followed by each tensor functor with the corresponding tensor functor followed by inverse image. Apply naturality of Ext transport under these comparison transformations. The oplax left-unitor identity identifies the initial degree-zero morphism, and associativity of Ext composition gives the equality before postcomposition by phi and psi. Naturality of tensoring under phi and psi moves these degree-zero morphisms to the two inputs. Equivalently, apply inverse image to the signed resolution tensor pairing of Tag 07MB and then the two coefficient morphisms; exactness and Tag 0FKV identify both augmentations. No signs change, since all comparison maps have degree zero. The same identities apply in degree zero, for zero sheaves and on empty schemes.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tags 01FD, 07MB, 0FKV; generic exact inverse-image and tensor pairing argument. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages.",
+  "note": "Extracted strict part of the original node argument; specialization to the actual Lean definitions written by M1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of Ext under exact monoidal functors and natural transformations",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of sheaves preserves the Yoneda tensor cup product",
+   "results": "Eight results concerning monoidal sheaf structures, tensorators and module pullback comparisons. None gives the Ext tensor-pairing identity.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp_mapExactFunctor",
+   "results": "Generic composition transport lemma found; does not state this compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup.*pullback|Cup.*naturality|sheafPullback.*[Mm]onoidal; scalarCohomologyExtEquiv.*[Nn]atur",
+   "results": "No matching Mathlib theorem. Local library has scalar operation definitions and cohomology naturality statements requiring other hypotheses; no declaration of this step.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarCupPullbackNaturality",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof, Kunneth pullback functoriality: scalar cup product naturality under pullback; Exact inverse image transports the scalar Ext tensor pairing",
+   "via": [
+    "lem-sc-scalar-cup-pullback-naturality",
+    "lem-sc-scalar-cup-pullback-coefficient-naturality",
+    "lem-sc-picard-kunneth-qcoh-functoriality",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarExtCupInverseImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarExtCup_inverseImage",
+  "statement": "theorem scalarExtCup_inverseImage (t : Y ⟶ X) (A B : KSheaf X k) (A' B' : KSheaf Y k) (φ : (scalarInverseImage t).obj A ⟶ A') (ψ : (scalarInverseImage t).obj B ⟶ B') (p q : ℕ) (a : Abelian.Ext.{w + 1} (𝟙_ (KSheaf X k)) A p) (b : Abelian.Ext.{w + 1} (𝟙_ (KSheaf X k)) B q) : ((Abelian.Ext.mk₀ (scalarInverseUnitIso t).inv).comp ((scalarExtCup a b).mapExactFunctor (scalarInverseImage t)) (zero_add (p + q))).comp (Abelian.Ext.mk₀ (((Opens.map t.base).sheafAdjunctionContinuous (ModuleCat.{w} k) (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)).leftAdjointOplaxMonoidal.δ A B ≫ (φ ⊗ₘ ψ))) (add_zero (p + q)) = scalarExtCup (((Abelian.Ext.mk₀ (scalarInverseUnitIso t).inv).comp (a.mapExactFunctor (scalarInverseImage t)) (zero_add p)).comp (Abelian.Ext.mk₀ φ) (add_zero p)) (((Abelian.Ext.mk₀ (scalarInverseUnitIso t).inv).comp (b.mapExactFunctor (scalarInverseImage t)) (zero_add q)).comp (Abelian.Ext.mk₀ ψ) (add_zero q))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T045539-L-131692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T045539-L-131692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

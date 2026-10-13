@@ -6,6 +6,9 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
+import Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage
+import Sheaf.AlgebraicGeometry.ScalarPullbackTensorCoefficient
 
 /-! # ScalarCupPullbackNaturality
 
@@ -19,7 +22,6 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
-
 /-- Pullback carries a scalar cup product to the cup of the pulled-back classes.
 Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV; Modules, Tag 01CD.
 (blueprint: lem-sc-scalar-cup-pullback-naturality).
@@ -58,7 +60,33 @@ theorem scalarCup_pullback_naturality
           (scalarCohomologyCup f F G p q a b)) =
       scalarCohomologyCup g ((tensorPullback t).obj F) ((tensorPullback t).obj G) p q
         (scalarCohomologyPullback f g t ht F p a)
-        (scalarCohomologyPullback f g t ht G q b) := by sorry
+        (scalarCohomologyPullback f g t ht G q b) := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  let : MonoidalCategory (KSheaf X k) := Sheaf.monoidalCategory _ _
+  let : MonoidalCategory (KSheaf Y k) := Sheaf.monoidalCategory _ _
+  let : HasExt.{w + 1} (KSheaf X k) := HasExt.standard (KSheaf X k)
+  let : HasExt.{w + 1} (KSheaf Y k) := HasExt.standard (KSheaf Y k)
+  apply (scalarCohomologyExtEquiv g _ (p + q)).injective
+  rw [scalarCohomologyExtEquiv_map]
+  unfold scalarCohomologyPullback scalarCohomologyCup
+  simp only [id_eq, AddEquiv.apply_symm_apply]
+  rw [Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀]
+  simp only [Abelian.Ext.comp_assoc_of_third_deg_zero,
+    Abelian.Ext.mk₀_comp_mk₀, Category.assoc]
+  erw [scalarPullbackCoefficient_tensor f g t ht F G]
+  have h := scalarExtCup_inverseImage t (scalarSheaf f F) (scalarSheaf f G)
+    (scalarSheaf g ((tensorPullback t).obj F)) (scalarSheaf g ((tensorPullback t).obj G))
+    (scalarPullbackCoefficient f g t ht F) (scalarPullbackCoefficient f g t ht G) p q
+    (scalarCohomologyExtEquiv f F p a) (scalarCohomologyExtEquiv f G q b)
+  have h' := congrArg
+    (fun c : Abelian.Ext.{w + 1} (𝟙_ (KSheaf Y k))
+        (scalarSheaf g ((tensorPullback t).obj F) ⊗
+          scalarSheaf g ((tensorPullback t).obj G)) (p + q) ↦
+      c.comp (Abelian.Ext.mk₀ (scalarTensorCoefficient g ((tensorPullback t).obj F)
+        ((tensorPullback t).obj G))) (add_zero (p + q))) h
+  simpa only [Abelian.Ext.comp_assoc_of_third_deg_zero,
+    Abelian.Ext.mk₀_comp_mk₀, Category.assoc] using h'
 
 end
 end AlgebraicGeometry.Scheme.Modules
