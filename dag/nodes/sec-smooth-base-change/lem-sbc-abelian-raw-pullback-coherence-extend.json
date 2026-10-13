@@ -16,27 +16,52 @@
  ],
  "proof": [
   {
-   "text": "Evaluate on a class at a test object using the prescribed component equations. Expand the two five-factor raw formulas. Single-comparison naturality cancels the intermediate inverse/direct pair. Derived inverse-image composition is natural and commutes with shifts, and agrees with underived composition on single complexes. Apply inverse-image associativity to the source and coefficient factors, and cone naturality to identify the composite scheme map with the i-th cone leg.",
+   "text": "Transport d, hprime and hsecond along wd, wa and wb to reduce to composable a, b, h. Prove the five-factor equality first with an arbitrary Grothendieck abelian coefficient category and arbitrary source sheaf M on S; this keeps concrete abelian-group instance constructions out of the kernel calculation. Specialize M to the represented free sheaf used by the raw presheaf, and the coefficient category to abelian groups. These are actual functors and actual morphisms, with no chosen existence witnesses.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Write P=a inverse image, Q=b inverse image, R=(b;a) inverse image, sigmaP, sigmaQ, sigmaR for their single-complex comparison isomorphisms, kappa for upperStarComp(b,a), and theta for upperStarPlusComp(b,a). The existing generic plus_single_comp and plus_single_natIso give sigmaR.hom;single(kappa);sigmaQ.inv = theta;D(Q)(sigmaP.hom), after cancelling sigmaQ.hom. This is h_sigma. The existing private plusNatIso_commShift and plusCompIso_commShift, imported with import all, show theta.hom commutes with shifts. No adjunction transition theorem or unproved coherence statement is used.",
    "uses": [
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-sbc-abelian-pullback-single-composition"
+    "lem-sbc-pullback-single-comp",
+    "lem-sbc-abelian-derived-transition-shift"
    ],
    "elementary": false
   },
   {
-   "text": "Let C be the upperStarComp component in hH and P the j-th cone-leg pullback. The composite coefficient is C;P(φ_f);eH_j^{-1};ι_j. Precompose H(f);ι_j=ι_i with eH_i^{-1} and substitute hH. Cancel eH_i^{-1};eH_i to obtain C;P(φ_f);eH_j^{-1};ι_j=eH_i^{-1};ι_i. Thus the composite raw formula is the i-th cone-leg formula. Use hβ and extensionality to conclude.",
+   "text": "For source sheaf M, apply the already proved source-library upperStarComp_assoc' in WeilConjectures.SixFunctors.BaseChange.Pasting to b,a,h and evaluate on M. It says the b versus a;h source comparison followed by Q of the a versus h source comparison equals the b;a versus h comparison followed by kappa. Move the former comparison through sigmaQ.inv by naturality, precompose h_sigma with sigmaR.inv, and postcompose with D(Q)(sigmaP.inv). Cancelling sigmaR.inv;hom and the mapped sigmaP.hom;inv gives y;D(Q)(x)=zprime;theta at the source. The private generic lemma singleComparison_source performs exactly these elementary categorical rewrites.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose h_sigma at F with sigmaQ.hom(P F), cancelling sigmaQ.inv;hom. Naturality of sigmaQ.hom at phi then gives theta;D(Q)(sigmaP.hom;single(phi));sigmaQ.hom;single(psi) = sigmaR.hom;single(kappa;Q(phi);psi). This is singleComparison_target, the unshifted coefficient equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand the outer functor over the inner five factors. The private generic shiftedHom_comp first moves the Q shift comparison through the shifted inner coefficient morphism by naturality, then uses the source equality. Naturality of theta moves theta past the class z. NatTrans.shift_app_comm, together with the formula for the shift comparison of a composite functor, moves theta through the two shift comparisons. Functoriality of shift combines the three shifted coefficient factors, and the coefficient equality identifies them with the direct coefficient. These are precisely the direct five factors. Scheme-equality witnesses agree by proof irrelevance. The calculation works for identities, zero coefficients or classes, empty schemes, and p=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precompose colimit.w H f with (eH i).inv and substitute hH f. Associativity and the inverse-hom cancellation for eH i show that upperStarComp followed by pullback of phi f followed by (eH j).inv followed by colimit.ι H j equals (eH i).inv followed by colimit.ι H i. This is the coefficient equality hc in the Lean proof. No assumption on phi identities or composites enters.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use natural-transformation and group-homomorphism extensionality. At op V and a class t, substitute hbeta j, htau f, and hbeta i. Apply the arbitrary-coefficient raw composition theorem to the transition and the j-th cone leg, using congrArg Over.Hom.left of cone naturality for their composite. Rewrite its coefficient using hc. The resulting class is the i-th cone-leg raw pullback, so the two components agree.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-derived-inverse-image-composition",
-  "lem-sbc-abelian-pullback-single-composition"
+  "lem-sbc-pullback-single-comp",
+  "lem-sbc-abelian-derived-transition-shift"
  ],
  "proof_origin": {
-  "by": "W2",
-  "document": "Stacks Project",
-  "place": "Tag 09Z1 canonical maps; second reading W2: explicit five-factor derived-Hom argument using existing derived coherence and single-complex comparison, then colimit.w for the cocone part."
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09Z1; https://stacks.math.columbia.edu/tag/03CB; WeilConjectures.SixFunctors.BaseChange.Pasting; Mathlib.CategoryTheory.Shift.CommShift",
+  "place": "J2: explicit generic category-theoretic source, coefficient and shifted-Hom calculation, completely proved in Lean from existing single-complex and shift-comparison helpers. The references motivate the canonical maps; the five-factor elaboration is written by the agent. The composition calculation is private in AbelianRawPullbackCoherenceExtend; colimit.w and isomorphism cancellation finish the original cocone law. Concurrent public composition module and node are preserved unchanged."
  },
  "mathlib_searches": [
   {
@@ -128,10 +153,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261013T015622-L-3029563",
-  "kind": "interface",
+  "landing": "20261013T072353-L-1120863",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
