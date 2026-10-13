@@ -12567,3 +12567,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:03 L: merged deliver/U2/Sheaf.AlgebraicGeometry.KoszulSelfExtDualExteriorConormal (stage 3; reviewer PASS; first push; landing 20261013T130350-L-3952540 (interface); batch 20261013T130345; modules 3; new nodes 2)
 - 13:03 L: merged deliver/W3/Sheaf.Paper.BoundaryHorseshoeBoundaryIdentification (stage 3; reviewer PASS; first push; landing 20261013T130350-L-3952688 (proof); batch 20261013T130345; modules 1; new nodes 0)
 - 13:03 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FinitePresentationAffineChartModels (stage 3; reviewer PASS; first push; landing 20261013T130351-L-3952794 (interface); batch 20261013T130345; modules 3; new nodes 2)
+- 13:03 L: merged deliver/Y2/Sheaf.Paper.ModuleCupRealizationEvaluation (stage 3; reviewer PASS; first push; landing 20261013T130351-L-3952900 (interface); batch 20261013T130345; modules 2; new nodes 1)
