@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-module-cup-resolution-augmentation",
+ "kind": "statement",
+ "title": "A realization respects the coefficient augmentations",
+ "statement": "For a scheme X, module sheaves F,G, resolution pairing D [def-sc-module-cup-resolution-data], and t satisfying D.Realizes t [def-sc-module-cup-realization-complex-data], let aF,aG,aT be the actual extended cochain augmentations, from the appropriate degree-zero single complexes to the extended resolutions. Then (aF tensor aG) followed by t equals the canonical single-tensor isomorphism [lem-sc-module-cup-canonical-hzero-identification] followed by aT. This is an equality of cochain maps before localization, not an equality of derived maps or H-zero maps.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Cohomology of Sheaves, section-cup-product: construction before Lemma 20.31.3 and its global specialization"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-realization-complex-data",
+  "lem-sc-module-cup-canonical-hzero-identification",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "The source tensor of single complexes is concentrated in degree zero; all other components vanish. Identify its degree-zero summand with F tensor G. Test equality on elementary tensors of sections over every open, using the tensor/sheafification universal property. Realizes at bidegree (0,0) followed by augmentation_pair identifies the two values. The extension/single and tensor/single isomorphisms have their canonical degree-zero components, so the resulting sheaf morphism equality is precisely the stated equation. Apply degreewise extensionality.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "A2 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "construction before Lemma 20.31.3, separating cochain assembly from augmentation compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear sheaf cochain pairings induce a tensor complex morphism compatible with augmentations",
+   "results": "8 hits including HomologicalComplex.tensorHom, HomologicalComplex.ιTensorObj, HomologicalComplex.tensorObj and mapping-cone cochains; no sectionwise realization theorem.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ_natural",
+   "results": "0 hits; unknown identifier. Direct source reading subsequently found this theorem in Mathlib.CategoryTheory.Monoidal.Functor.",
+   "date": "2026-10-13",
+   "verdict": "source lemma useful for localization glue"
+  },
+  {
+   "tool": "grep",
+   "query": "CupResolutionPairing|moduleCup_resolution_augmentation|mapBifunctorDesc",
+   "results": "3 hits: HomologicalComplex.mapBifunctorDesc and its inclusion equation in Mathlib.Algebra.Homology.Bifunctor; no existing sheaf realization or augmentation theorem.",
+   "date": "2026-10-13",
+   "verdict": "assembly infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sectionwise bilinear pairing of sheaf complexes satisfying Leibniz defines a cochain map from the tensor complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural bilinear morphisms of sheaves induce chain maps on total tensor products",
+   "results": "8 hits: tensorHom, presheaf tensorHom and its application, tensorObj_map_tmul, tensorObjMap, ιTensorObj, tensorObj, HasTensor; infrastructure only, no realization or augmentation theorem.",
+   "date": "2026-10-13",
+   "verdict": "independent second reader: no duplicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιTensorObj",
+   "results": "3 hits: ιTensorObj, rightUnitor_inv, leftUnitor_inv; no cochain realization or augmentation compatibility.",
+   "date": "2026-10-13",
+   "verdict": "independent second reader: infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*single|single.*tensor|sheafification.*hom_ext",
+   "results": "25 broad Mathlib hits, none the sheaf cochain obligations. Direct source search of lean/Sheaf and lean/WeilConjectures found only the original parent and its consumers; TensorSection supplies section and sheafification infrastructure.",
+   "date": "2026-10-13",
+   "verdict": "independent second reader: no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupResolutionRealization",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Sole proof step: application of the general theorem of the cube; the module-cohomology cup-product compatibility used downstream in its Picard/Kunneth argument.",
+   "via": [
+    "lem-sc-module-cup-resolution-realization",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupResolutionAugmentation",
+  "file": "lean/Sheaf/Paper/ModuleCupResolutionAugmentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_resolution_augmentation",
+  "statement": "theorem moduleCup_resolution_augmentation {F G : X.Modules} (D : CupResolutionPairing F G) (t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex) (ht : D.Realizes t) : (CategoryTheory.MonoidalCategory.tensorHom (C := CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) ((HomologicalComplex.extendSingleIso ComplexShape.embeddingUpNat F 0 0 rfl).inv ≫ HomologicalComplex.extendMap D.left.augmentation ComplexShape.embeddingUpNat) ((HomologicalComplex.extendSingleIso ComplexShape.embeddingUpNat G 0 0 rfl).inv ≫ HomologicalComplex.extendMap D.right.augmentation ComplexShape.embeddingUpNat)) ≫ t = (DerivedCategory.moduleCup_singleTensorIso (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)) F G).hom ≫ (HomologicalComplex.extendSingleIso ComplexShape.embeddingUpNat (F ⊗ G) 0 0 rfl).inv ≫ HomologicalComplex.extendMap D.target.augmentation ComplexShape.embeddingUpNat",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9128e",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T143543-L-559734",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9128e",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T143543-L-559734",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, constructions, proof and remaining obligations with the nodes and Stacks 0FKU; all four delivered modules and direct importers ModuleCupEqualDerivedMapsClass, ModuleCupRealizationEvaluation and ModuleCupResolutionInvariance compile cleanly; axioms are standard plus sorryAx for the two reported holes and their parent."
+ }
+}

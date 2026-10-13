@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-module-cup-resolution-existence",
+ "kind": "statement",
+ "title": "Existence of a cochain realization",
+ "statement": "For a scheme X, module sheaves F,G and a computing resolution pairing D [def-sc-module-cup-resolution-data], there exists a cochain morphism t from the tensor of the extended input complexes to the extended target satisfying D.Realizes t [def-sc-module-cup-realization-complex-data].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Cohomology of Sheaves, section-cup-product: construction before Lemma 20.31.3 and its global specialization"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-realization-complex-data",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "For each pair of nonnegative degrees, linearize the sectionwise bilinear map by the tensor universal property. Restriction compatibility gives a presheaf morphism; the sheafification adjunction gives a sheaf morphism. Identify the extended terms with the original terms. For a negative degree use the zero-factor map. Assemble by the total tensor coproduct universal property. On each summand the cochain-map condition is exactly Leibniz, with the prescribed total sign. The coproduct inclusion equation gives the required section formula.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "A2 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "construction before Lemma 20.31.3, separating cochain assembly from augmentation compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear sheaf cochain pairings induce a tensor complex morphism compatible with augmentations",
+   "results": "8 hits including HomologicalComplex.tensorHom, HomologicalComplex.ιTensorObj, HomologicalComplex.tensorObj and mapping-cone cochains; no sectionwise realization theorem.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ_natural",
+   "results": "0 hits; unknown identifier. Direct source reading subsequently found this theorem in Mathlib.CategoryTheory.Monoidal.Functor.",
+   "date": "2026-10-13",
+   "verdict": "source lemma useful for localization glue"
+  },
+  {
+   "tool": "grep",
+   "query": "CupResolutionPairing|moduleCup_resolution_augmentation|mapBifunctorDesc",
+   "results": "3 hits: HomologicalComplex.mapBifunctorDesc and its inclusion equation in Mathlib.Algebra.Homology.Bifunctor; no existing sheaf realization or augmentation theorem.",
+   "date": "2026-10-13",
+   "verdict": "assembly infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sectionwise bilinear pairing of sheaf complexes satisfying Leibniz defines a cochain map from the tensor complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural bilinear morphisms of sheaves induce chain maps on total tensor products",
+   "results": "8 hits: tensorHom, presheaf tensorHom and its application, tensorObj_map_tmul, tensorObjMap, ιTensorObj, tensorObj, HasTensor; infrastructure only, no realization or augmentation theorem.",
+   "date": "2026-10-13",
+   "verdict": "independent second reader: no duplicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιTensorObj",
+   "results": "3 hits: ιTensorObj, rightUnitor_inv, leftUnitor_inv; no cochain realization or augmentation compatibility.",
+   "date": "2026-10-13",
+   "verdict": "independent second reader: infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*single|single.*tensor|sheafification.*hom_ext",
+   "results": "25 broad Mathlib hits, none the sheaf cochain obligations. Direct source search of lean/Sheaf and lean/WeilConjectures found only the original parent and its consumers; TensorSection supplies section and sheafification infrastructure.",
+   "date": "2026-10-13",
+   "verdict": "independent second reader: no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupResolutionRealization",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Sole proof step: application of the general theorem of the cube; the module-cohomology cup-product compatibility used downstream in its Picard/Kunneth argument.",
+   "via": [
+    "lem-sc-module-cup-resolution-realization",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupResolutionExistence",
+  "file": "lean/Sheaf/Paper/ModuleCupResolutionExistence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_resolution_realization_exists",
+  "statement": "theorem moduleCup_resolution_realization_exists {F G : X.Modules} (D : CupResolutionPairing F G) : ∃ t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex, D.Realizes t",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9128e",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T143543-L-559734",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9128e",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T143543-L-559734",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, constructions, proof and remaining obligations with the nodes and Stacks 0FKU; all four delivered modules and direct importers ModuleCupEqualDerivedMapsClass, ModuleCupRealizationEvaluation and ModuleCupResolutionInvariance compile cleanly; axioms are standard plus sorryAx for the two reported holes and their parent."
+ }
+}

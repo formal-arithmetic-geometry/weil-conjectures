@@ -16,44 +16,30 @@
  ],
  "proof": [
   {
-   "text": "Extend by zero. The localized augmentation is explicitly Q of the inverse extension/single isomorphism followed by the extended augmentation. The original augmentation is a quasi-isomorphism, extension preserves it, and Q inverts it. This is proved in CupAcyclicResolution.derivedAugmentation_isIso.",
+   "text": "Choose a realizing cochain morphism by the existence theorem. The cochain augmentation compatibility theorem identifies the composite of the tensor of input augmentations with this morphism.",
    "uses": [
-    "def-sc-module-cup-resolution-data"
+    "lem-sc-module-cup-resolution-existence",
+    "lem-sc-module-cup-resolution-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the lax monoidal comparison rewrites the derived composite as Q of the cochain augmentation composite. Apply the cochain equality and cancel Q of the target augmentation with its inverse. This proves equality of the derived maps themselves; applying H-zero gives the requested equality.",
+   "uses": [
+    "def-sc-module-cup-realization-complex-data"
    ],
    "elementary": true
-  },
-  {
-   "text": "The tensor universal property gives a sheaf morphism in each nonnegative bidegree from the restriction-compatible bilinear sections. Assemble these on the coproduct defining each total tensor term. Leibniz is the cochain-map equation; negative-degree summands have a zero factor. Thus there is a t with D.Realizes t.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "def-sc-module-cup-resolution-data"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use a nonpositive flat model of F[0] to compute H-zero of the displayed derived composite. The canonical comparison transport equation and the right-exact tensor cokernel calculation identify this with the ordinary tensor. Naturality and augmentation_pair make its ordinary tensor map the identity, so the H-zero maps agree.",
-   "uses": [
-    "lem-sc-module-cup-hzero-identification",
-    "lem-sc-module-cup-canonical-hzero-identification",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-sc-module-cup-resolution-data"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-derived-tensor-structure",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-sc-module-cup-resolution-data",
-  "lem-sc-module-cup-canonical-hzero-identification",
-  "lem-sc-module-cup-hzero-identification"
+  "lem-sc-module-cup-resolution-existence",
+  "lem-sc-module-cup-resolution-augmentation",
+  "def-sc-module-cup-realization-complex-data"
  ],
  "proof_origin": {
-  "by": "F4 stage-3 worker",
+  "by": "A2 stage-3 worker",
   "document": "https://stacks.math.columbia.edu/tag/0FKU",
-  "place": "Steps of the resolution-invariance argument, separated before the injectivity of H-zero step"
+  "place": "cochain augmentation compatibility and lax monoidal naturality; no flat-model H-zero calculation needed"
  },
  "mathlib_searches": [
   {
@@ -169,11 +155,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F4",
+  "reviewer": "X-9128e",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T121840-L-3558440",
+  "landing": "20261013T143543-L-559734",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched Lean signatures, constructions, proof and remaining obligations with the nodes and Stacks 0FKU; all four delivered modules and direct importers ModuleCupEqualDerivedMapsClass, ModuleCupRealizationEvaluation and ModuleCupResolutionInvariance compile cleanly; axioms are standard plus sorryAx for the two reported holes and their parent."
  }
 }
