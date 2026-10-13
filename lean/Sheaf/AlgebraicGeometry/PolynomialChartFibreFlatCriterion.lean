@@ -13,6 +13,14 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Sheaf.RingTheory.Depth
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
+import Sheaf.AlgebraicGeometry.PolynomialChartLocalAlgebra
+import Sheaf.RingTheory.MiracleFlatness
+import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
+import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+
 /-! # Fibre flatness on a quasi-finite polynomial chart
 
 Source: Stacks Project, Tags 00RE and 00R7, as used in Tag 00RH.
@@ -24,6 +32,32 @@ Source: Stacks Project, Tags 00RE and 00R7, as used in Tag 00RH.
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry
+
+private theorem regular_local_depth_eq (R : Type u) [CommRing R]
+    [IsRegularLocalRing R] (d : ℕ) (hd : ringKrullDim R = (d : WithBot ℕ∞)) :
+    IsLocalRing.depth (R := R) R = (d : ℕ∞) := by
+  classical
+  have hu := IsLocalRing.depth_le_supportDim (R := R) R
+  rw [Module.supportDim_self_eq_ringKrullDim, hd] at hu
+  apply le_antisymm (WithBot.coe_le_coe.mp hu)
+  obtain ⟨s, hcard, hspan⟩ :=
+    Submodule.FG.exists_span_finset_card_eq_spanFinrank
+      (show (IsLocalRing.maximalIdeal R).FG from
+        (IsLocalRing.maximalIdeal R).fg_of_isNoetherianRing)
+  have hlen : s.toList.length = d := by
+    have h := IsRegularLocalRing.spanFinrank_maximalIdeal (R := R)
+    rw [hd] at h
+    have hsd : (IsLocalRing.maximalIdeal R).spanFinrank = d := by exact_mod_cast h
+    simpa [hsd] using hcard
+  have hrs : IsLocalRing.IsRegularSystemOfParameters s.toList :=
+    ⟨by simpa using hspan, by rw [hlen, hd]⟩
+  have hreg := (IsRegularLocalRing.isRegular_and_quotients_of_generators R d hd
+    s.toList hrs).1
+  unfold IsLocalRing.depth Ideal.depth
+  split
+  · exact le_top
+  · apply le_sSup
+    exact ⟨s.toList, hreg, fun x hx ↦ hrs.1 ▸ Ideal.subset_span hx, by rw [hlen]⟩
 
 /-- Flatness on a quasi-finite polynomial chart is equivalent to Cohen-Macaulayness
 of the original fibre stalk together with the expected dimension of its fibre.
@@ -64,6 +98,49 @@ theorem polynomial_chart_flat_stalk_iff_fibre_depth_and_dimension
           (R := (f.fiber (f (U.ι x))).presheaf.stalk (f.asFiber (U.ι x)))
           ((f.fiber (f (U.ι x))).presheaf.stalk (f.asFiber (U.ι x))) : WithBot ℕ∞) =
         ringKrullDim ((f.fiber (f (U.ι x))).presheaf.stalk (f.asFiber (U.ι x))) ∧
-      topologicalKrullDimAt (f.asFiber (U.ι x)) = (n : WithBot ℕ∞) := by sorry
+      topologicalKrullDimAt (f.asFiber (U.ι x)) = (n : WithBot ℕ∞) := by
+  let S := (f.fiber (f (U.ι x))).presheaf.stalk (f.asFiber (U.ι x))
+  obtain ⟨R, hR, φ, hφ, d, r, t, hS, hd, hr, hzero, hle, htop, hn, hflat⟩ :=
+    polynomial_chart_local_algebra f U n e he x
+  let := hR
+  let := hφ
+  let := hS
+  change (e.stalkMap x).hom.Flat ↔
+    (IsLocalRing.depth (R := S) S : WithBot ℕ∞) = ringKrullDim S ∧ _
+  constructor
+  · intro hf
+    have hf' := hflat.mp hf
+    have hfaith : φ.FaithfullyFlat := by
+      let : Algebra R S := φ.toAlgebra
+      have : Module.Flat R S := hf'
+      exact Module.FaithfullyFlat.of_flat_of_isLocalHom
+    have hdimle := φ.ringKrullDim_le_of_faithfullyFlat_of_isLocalHom hfaith
+    have hdim : ringKrullDim S = ringKrullDim R :=
+      le_antisymm (by rw [hr, hd]; exact_mod_cast hle) hdimle
+    have hrd : r = d := by exact_mod_cast hr.symm.trans (hdim.trans hd)
+    obtain ⟨_, hlocal, _, hdepth⟩ := IsLocalRing.depth_eq_add_of_flat_local φ hf'
+    let := hlocal
+    have hfdepth := IsLocalRing.depth_le_supportDim
+      (R := S ⧸ (IsLocalRing.maximalIdeal R).map φ)
+      (S ⧸ (IsLocalRing.maximalIdeal R).map φ)
+    rw [Module.supportDim_self_eq_ringKrullDim, hzero] at hfdepth
+    have hfzero : IsLocalRing.depth (R := S ⧸ (IsLocalRing.maximalIdeal R).map φ)
+        (S ⧸ (IsLocalRing.maximalIdeal R).map φ) = 0 :=
+      le_antisymm (WithBot.coe_le_coe.mp hfdepth) zero_le
+    rw [regular_local_depth_eq R d hd, hfzero, add_zero] at hdepth
+    refine ⟨?_, ?_⟩
+    · calc
+        (IsLocalRing.depth (R := S) S : WithBot ℕ∞) =
+            ((d : ℕ∞) : WithBot ℕ∞) := congrArg (fun z : ℕ∞ ↦ (z : WithBot ℕ∞)) hdepth
+        _ = ringKrullDim S := by rw [hdim, hd]; simp
+    · rw [htop, hrd, hn]
+  · rintro ⟨hdepth, hdim⟩
+    have hsum : r + t = n := by exact_mod_cast htop.symm.trans hdim
+    have hrd : r = d := by omega
+    have hdepth' : IsLocalRing.depth (R := S) S = (r : ℕ∞) :=
+      WithBot.coe_injective (hdepth.trans hr)
+    apply hflat.mpr
+    apply RingHom.flat_of_regular_of_depth_ge φ r hr (by rw [hdepth'])
+    rw [hzero, add_zero, hr, hd, hrd]
 
 end AlgebraicGeometry

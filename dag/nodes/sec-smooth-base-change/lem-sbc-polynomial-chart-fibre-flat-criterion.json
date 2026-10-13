@@ -22,69 +22,51 @@
  ],
  "proof": [
   {
-   "text": "Work in A = Gamma(T) and B = Gamma(U), with P = A[t_1,...,t_n]. The factorization is an A-algebra map P to B. The open immersion U into X induces open immersions of fibres and isomorphisms of their stalks; dimension at a point agrees with dimension at that point in an open subspace. Thus compute both invariants using B tensor_A kappa(p), where p is the contraction of the prime of x. Localization and tensor base change identify the fibre stalk and the source polynomial fibre local ring.",
+   "text": "Apply the geometric local-algebra comparison to obtain a regular local source R, a local map phi to the actual fibre stalk S, and finite dimensions d and r with a shared residue transcendence degree t. It identifies original stalk flatness with phi-flatness, gives closed-fibre dimension zero and r<=d, and gives fibre dimension r+t and n=d+t.",
    "uses": [
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-spec-map-stalk-localization",
-    "lem-weil-pbc-dimension-at-point-open-subspace"
+    "lem-sbc-polynomial-chart-local-algebra"
    ],
    "elementary": false
   },
   {
-   "text": "The polynomial fibre local ring is regular. The target fibre local ring is Noetherian, since B tensor_A kappa(p) is finite type over a field. Quasi-finiteness gives an isolated point of the closed fibre, hence an Artinian local closed fibre and a finite residue extension. The two residue-field transcendence degrees are equal. The dimension-at-point formula and the hypothesis that the target fibre dimension at x is n give equality of source and target local dimensions. Cohen-Macaulayness of the target is exactly its depth equality, so miracle flatness gives flatness of the fibre local map. The Artinian closed-fibre assertion can also be obtained directly from the Artinian fibre instance in Mathlib/RingTheory/QuasiFinite/Basic.lean:77, since the chart map is quasi-finite; localization preserves the Artinian property.",
+   "text": "Prove depth(R)=d directly in Lean. Choose a minimal finite generating set of its maximal ideal, turn it into a regular system of parameters of length d, and use the regular-generators theorem. Its regular sequence witnesses depth at least d by the definition of depth. The depth-support dimension bound for R over itself gives the opposite inequality.",
    "uses": [
-    "lem-weil-pbc-polynomial-ring-field-regular-ring",
-    "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
-    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-    "lem-weil-pbc-miracle-flatness"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Localize the base at p. The two local algebras are essentially finitely presented over A_p, and B_x is nonzero and finitely presented over itself. It is A_p-flat by flatness of f, and its closed fibre is flat over the polynomial closed fibre by the preceding step. The fibrewise flatness criterion gives flatness of the polynomial stalk map.",
-   "uses": [
-    "lem-weil-pbc-criterion-flatness-fibre"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Conversely a flat polynomial stalk map remains flat after base change to kappa(p). Its regular local source and Artinian closed fibre have depths equal to their respective dimensions, the latter zero. The flat local depth formula computes target depth as source dimension. The quasi-finite dimension inequality and faithful-flat local dimension inequality give equality of source and target dimensions (a nonzero flat local map is faithfully flat). Thus target depth equals dimension. The finite residue extension and the field dimension-at-point formula give fibre dimension n; affine n-space has dimension at each point n. For the regular local source, a regular system of parameters gives depth at least dimension, and depth-le-support-dimension gives the reverse inequality. For the nonzero Artinian local closed fibre the same inequality and dimension zero give depth zero.",
-   "uses": [
-    "lem-weil-pbc-flat-local-depth-formula",
     "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-depth-le-support-dimension",
-    "lem-weil-pbc-dimension-inequality-quasi-finite",
-    "lem-sc-faithfully-flat-local-dimension",
+    "lem-weil-pbc-depth-le-support-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the forward direction, phi is flat local, hence faithfully flat, so d<=r. Together with r<=d this gives r=d and thus fibre dimension n. The flat local depth formula provides a local structure on the closed fibre and computes depth(S) as depth(R)+depth(closed fibre). The depth-support dimension bound on that nonzero closed fibre of dimension zero gives depth zero. Hence depth(S)=d=dim(S). All comparisons and arithmetic are written in Lean.",
+   "uses": [
     "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-    "lem-weil-pbc-standard-smooth-over-field-dimension-at-points"
+    "lem-sc-faithfully-flat-local-dimension",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-depth-le-support-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the reverse direction, fibre dimension n means r+t=d+t and therefore r=d by natural-number cancellation. The given depth equality supplies depth(S)>=r. Since the closed fibre has dimension zero, dim(S)=dim(R)+dim(closed fibre). Apply miracle flatness to phi and transport flatness back using the geometric comparison.",
+   "uses": [
+    "lem-weil-pbc-miracle-flatness"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-spec-map-stalk-localization",
-  "lem-weil-pbc-dimension-at-point-open-subspace",
-  "lem-weil-pbc-polynomial-ring-field-regular-ring",
-  "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
-  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-  "lem-weil-pbc-miracle-flatness",
-  "lem-weil-pbc-criterion-flatness-fibre",
-  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-polynomial-chart-local-algebra",
   "lem-weil-pbc-regular-local-generators-regular-sequence",
   "lem-weil-pbc-depth-le-support-dimension",
-  "lem-weil-pbc-dimension-inequality-quasi-finite",
-  "lem-sc-faithfully-flat-local-dimension",
   "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points"
+  "lem-sc-faithfully-flat-local-dimension",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-miracle-flatness"
  ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Tags 00RE and 00R7 as used in Tag 00RH, with the dimension comparison and affine fibre identifications written out."
+  "place": "Tags 00RE and 00R7 as used in 00RH. The geometric comparison is split into lem-sbc-polynomial-chart-local-algebra; the regular-depth, closed-fibre-depth, faithful-flat dimension and miracle-flatness combination is fully written in Lean by C4."
  },
  "mathlib_searches": [
   {
@@ -169,9 +151,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261013T151701-L-924231",
+  "landing": "20261013T155930-L-1301361",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
