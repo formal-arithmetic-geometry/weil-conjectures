@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof paragraph 1: finite disjoint unions of qcqs pro-etale objects and their representable/evaluation comparisons.",
+   "place": "Proof paragraph 1, sentence \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\": auxiliary finite-disjoint-union geometry used by the pro-etale finite-stage hypercovering argument, through lem-weil-pbc-proetale-qcqs-finite-family-geometry.",
    "via": [
     "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
    ]
@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Finite coproducts and evaluation on finite disjoint unions",
- "statement": "Let X be a scheme [def-pc-scheme] and let X_proetale be its pro-etale site [def-weil-pbc-proetale-site]. Let I be a finite set and, for each i in I, let V_i be a quasi-compact and quasi-separated object of X_proetale [def-weil-pbc-scheme-conventions]. The scheme disjoint union V=\\coprod_{i\\in I}V_i exists in the qcqs subsite and is affine when every V_i is affine. Writing h_W=Hom_X(-,W) for the representable presheaf, the canonical morphism of sheaves of sets \\coprod_{i\\in I}h_{V_i}\\to h_V is an isomorphism, and for every sheaf of sets F on X_proetale the induced map F(V)\\to\\prod_{i\\in I}F(V_i) is a natural bijection, including the empty family I=\\varnothing, where V=\\varnothing and F(∅) is a singleton.",
+ "statement": "Let X be a scheme [def-pc-scheme] and let X_proetale be its pro-etale site [def-weil-pbc-proetale-site]. Let I be a finite set and, for each i in I, let V_i be a quasi-compact and quasi-separated object of X_proetale [def-weil-pbc-scheme-conventions]. The scheme disjoint union V=\\coprod_{i\\in I}V_i exists in the qcqs subsite and is affine when every V_i is affine. Writing h_W=Hom_X(-,W) for the representable presheaf, the canonical morphism of sheaves of sets [def-weil-pbc-sites-and-cohomology], with the coproduct taken in that category [def-weil-pbc-category-colimit], \\coprod_{i\\in I}h_{V_i}\\to h_V is an isomorphism, and for every sheaf of sets F on X_proetale the induced map F(V)\\to\\prod_{i\\in I}F(V_i) is a natural bijection, including the empty family I=\\varnothing, where V=\\varnothing and F(∅) is a singleton.",
  "source": {
   "document": "literature/stacks-project/proetale.tex; literature/stacks-project/hypercovering.tex",
   "place": "Tag 0F4P, proof of lemma-weakly-contractible-cover; Tag 0DB1, remark-take-unions-hypercovering-X, hypotheses (a)–(c)"
@@ -23,13 +23,84 @@
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-scheme-coproduct-family] to construct $V=\\coprod_i V_i$, the morphism $V\\to X$, and the pairwise disjoint clopen coprojections $\\iota_i$. Clause (1) of [lem-weil-pbc-finite-coproduct-lfp-qcqs] makes $V$ qcqs. If $V_i\\cong\\operatorname{Spec}A_i$ for all $i$, [lem-weil-pbc-finite-affine-coproduct-spectrum] identifies $V$ with $\\operatorname{Spec}(\\prod_i A_i)$. For the empty index set this is the spectrum of the zero ring, namely the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/proetale.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), 01KO (lemma-characterize-quasi-separated); Tag 0F4P (lemma-weakly-contractible-cover), finite-union paragraph"
+   }
+  },
+  {
+   "text": "The structural map $V\\to X$ is weakly etale: at $v\\in V_i$ its stalk map is the stalk map of $V_i\\to X$, so it is flat; near $\\Delta(v)$ the open subscheme $V_i\\times_X V_i$ of $V\\times_X V$ identifies the diagonal stalk map with that of $V_i\\to X$, so the diagonal is flat as well. This checks the two defining conditions of [def-weil-weakly-etale-morphism] using [def-weil-flat-morphism]. Likewise each clopen inclusion $V_i\\to V$ has identity stalk maps and diagonal an isomorphism, hence is weakly etale. The empty scheme has no points, so both flatness conditions are vacuous. Finite unions of bounded schemes remain in the chosen universe [def-weil-size-convention]; after taking the chosen skeleton, $V$ is therefore an object of the qcqs full subcategory of [def-weil-pbc-proetale-site].",
+   "uses": [
+    "def-weil-weakly-etale-morphism",
+    "def-weil-flat-morphism",
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F4P (lemma-weakly-contractible-cover); Tag 094P (definition-weakly-etale)"
+   }
+  },
+  {
+   "text": "The family $\\{V_i\\to V\\}$ covers in [def-weil-pbc-proetale-site]: for an affine open $A\\subset V$, each $A\\cap V_i$ is clopen in $A$, hence quasi-compact; take a finite affine open cover of each $A\\cap V_i$ and combine these finitely many covers. Their images cover $A$, which verifies the stated covering criterion. The empty family covers the empty scheme by the same criterion. The equalizer sheaf axiom in [def-weil-pbc-sites-and-cohomology] applied to that empty cover gives $F(\\varnothing)$ a single element. For the cover of $V$, the overlaps $V_i\\times_V V_j$ are empty for $i\\ne j$ and $V_i$ for $i=j$. Off-diagonal compatibility is automatic because $F(\\varnothing)$ is a singleton; on-diagonal both maps are the identity. Thus every tuple in $\\prod_i F(V_i)$ glues uniquely to a section of $F(V)$, proving the asserted bijection. For a morphism $\\eta:F\\to G$, naturality gives $G(\\iota_i)\\eta_V=\\eta_{V_i}F(\\iota_i)$ for each $i$, proving naturality of the bijection.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex",
+    "place": "Tag 0F4P (lemma-weakly-contractible-cover), first proof paragraph; Tag 00VM (definition-sheaf)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-proetale-subcanonical], $h_V$ and each $h_{V_i}$ are sheaves. Since sheaves form a full subcategory of presheaves [def-weil-pbc-sites-and-cohomology], [lem-galois-yoneda-hom-bijection] identifies restriction along $h_{\\iota_i}$ with $F(\\iota_i)$ under $\\operatorname{Hom}(h_W,F)\\cong F(W)$. Step 3 therefore gives, for every sheaf $F$, the bijection $\\operatorname{Hom}(h_V,F)\\cong\\prod_i\\operatorname{Hom}(h_{V_i},F)$ induced by the coprojections. This is precisely the coproduct universal property [def-weil-pbc-category-colimit]. Hence $h_V$, with these coprojections, is their coproduct in sheaves; the canonical morphism from any chosen coproduct has inverse supplied by its universal property, and both composites are identities because their restrictions to all coprojections are identities. This also proves the empty-family assertion: $h_{\\varnothing}$ is initial in sheaves.",
+   "uses": [
+    "lem-weil-pbc-proetale-subcanonical",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/hypercovering.tex",
+    "place": "Tag 098Z (lemma-proetale-subcanonical); Tag 0DB1 (remark-take-unions-hypercovering-X), auxiliary representable-union comparison; Yoneda and the coproduct universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-galois-yoneda-hom-bijection",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/schemes.tex; literature/stacks-project/sites.tex",
+  "place": "Tag 0F4P (lemma-weakly-contractible-cover), disjoint-union argument; Tags 01JB, 01JC, 01KO, 098Z, 00VM; explicit coproduct universal-property argument for the auxiliary comparison used with Hypercovering Tag 0DB1"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
   "by": "worker",
@@ -40,31 +111,67 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "qcqs pro etale subsite site fibre products equalizers finite limits scheme",
-   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology; smallEtaleTopology; smallEtalePretopology; etalePretopology; grothendieckTopology; instHasPullbacksEtale; smallGrothendieckTopology; unrelated affine-transition result",
+   "query": "finite disjoint union pro etale schemes representable sheaf coproduct evaluation product",
+   "results": "AlgebraicGeometry.Scheme.coprodPresheafObjIso; AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall; AlgebraicGeometry.instHasFiniteCoproductsScheme; AlgebraicGeometry.isEmpty_pullback_sigmaι_of_ne; AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty; AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite; AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall; AlgebraicGeometry.instFinitaryExtensiveScheme",
    "date": "2026-10-14",
-   "verdict": "no match"
+   "verdict": "no match: these concern scheme coproducts, not pro-etale representable sheaf/evaluation comparison"
   },
   {
    "tool": "loogle",
    "query": "GrothendieckTopology, HasFiniteLimits, subcanonical",
-   "results": "0 hit(s) | loogle: unknown identifier 'GrothendieckTopology'",
+   "results": "0 hits; unknown identifier GrothendieckTopology",
    "date": "2026-10-14",
-   "verdict": "unavailable"
+   "verdict": "unavailable: invalid query (unknown identifier), not evidence of absence"
   },
   {
    "tool": "grep",
-   "query": "proetale|subcanonical|finite.*coproduct in Mathlib/AlgebraicGeometry",
+   "query": "proetale|subcanonical|finite.*coproduct [Mathlib/AlgebraicGeometry]",
    "results": "0 hits",
    "date": "2026-10-14",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "qcqs pro etale subsite site fibre products equalizers finite limits scheme",
+   "query": "finite disjoint union pro etale schemes representable sheaf coproduct evaluation product",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteCoproducts|isSheaf.*[Cc]oproduct|[Ss]heaf.*[Cc]oproduct",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/EffectiveEpi/Extensive.lean",
+   "date": "2026-10-14",
+   "verdict": "candidate only: general extensive-site or coproduct-preservation infrastructure requires the geometric and sheaf hypotheses established in this split"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf Yoneda embedding preserves finite coproducts extensive topology disjoint covers",
+   "results": "8 hits: CategoryTheory.extensiveTopology.isSheaf_yoneda_obj, CategoryTheory.SheafOfTypes.finitary_extensive, CategoryTheory.extensiveTopology.subcanonical, CategoryTheory.isSheafFor_extensive_of_preservesFiniteProducts, CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify, CategoryTheory.instPreservesColimitsOfShapeSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreservesFiniteProductsColim, CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts, CategoryTheory.Presieve.isSheaf_iff_preservesFiniteProducts",
+   "date": "2026-10-14",
+   "verdict": "candidate only: general extensive-site or coproduct-preservation infrastructure requires the geometric and sheaf hypotheses established in this split"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isSheaf\", \"coproduct\"",
+   "results": "2 hits: instPreservesFiniteCoproductsSheafTypeUliftYonedaOfPreservesFiniteProductsOppositeObjFunctorIsSheaf, instPreservesFiniteCoproductsSheafTypeYonedaOfPreservesFiniteProductsOppositeObjFunctorIsSheaf",
+   "date": "2026-10-14",
+   "verdict": "candidate only: general extensive-site or coproduct-preservation infrastructure requires the geometric and sheaf hypotheses established in this split"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+  "worker": "stage1",
+  "summary": "Construct the finite scheme coproduct using existing scheme lemmas; verify weak etaleness at stalks and the covering criterion; compute the sheaf equalizer, including the empty cover; prove the representable coproduct universal property via Yoneda. No new nodes.",
+  "blueprint": "Proof paragraph 1, sentence \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\": auxiliary finite-disjoint-union geometry used by the pro-etale finite-stage hypercovering argument, through lem-weil-pbc-proetale-qcqs-finite-family-geometry."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-31933f894",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-31933f894 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, cited nodes, sources, route, edge cases, searches, and duplicate candidates. The finite coproduct, qcqs/affine claims, weak-etale checks, covering/equalizer argument, empty-family case, and Yoneda coproduct comparison are correct. Record lem-weil-pbc-finite-coproduct-lfp-qcqs as an accepted maintainer tool_use at merge. Review written to review.md."
+ }
 }
