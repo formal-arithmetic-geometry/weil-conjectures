@@ -10,6 +10,15 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
 
+import Sheaf.AlgebraicGeometry.FormalCompletionAffineNaturalComparison
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Abelian.Subcategory
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+
 /-! # Affine comparison of the completed arrows
 
 Source: Stacks Project, Lemma 0881, affine identification in its proof, and Lemma 087W.
@@ -24,6 +33,70 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private def affineSections (X : Scheme.{u}) (U : X.Opens) :
+    CoherentModules X ⥤ ModuleCat.{u} Γ(X, U) :=
+  ObjectProperty.ι (C := X.Modules) (RingedSpace.IsCoherent X.toRingedSpace) ⋙
+    SheafOfModules.evaluation X.ringCatSheaf (op U)
+
+private instance (X : Scheme.{u}) (U : X.Opens) :
+    (affineSections X U).PreservesZeroMorphisms where
+  map_zero _ _ := rfl
+
+private theorem coherent_inclusion_shortExact (X : Scheme.{u})
+    (S : ShortComplex (CoherentModules X)) (hS : S.ShortExact) :
+    (S.map (ObjectProperty.ι (C := X.Modules)
+      (RingedSpace.IsCoherent X.toRingedSpace))).ShortExact :=
+  open scoped ZeroObject in by
+    let P : ObjectProperty X.Modules := RingedSpace.IsCoherent X.toRingedSpace
+    have h := RingedSpace.coherent_kernel_cokernel_sum X.toRingedSpace
+    have : P.ContainsZero := ⟨_, isZero_zero _, h.2.2.2.1⟩
+    have : P.IsClosedUnderKernels := by
+      constructor
+      rintro _ ⟨f, k, hk, hF, hG⟩
+      exact h.2.2.2.2 _ _ ((kernelIsKernel f).conePointUniqueUpToIso hk)
+        (h.1 _ _ f hF hG).1
+    have : P.IsClosedUnderCokernels := by
+      constructor
+      rintro _ ⟨f, k, hk, hF, hG⟩
+      exact h.2.2.2.2 _ _ ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
+        (h.1 _ _ f hF hG).2
+    have : P.ι.PreservesHomology :=
+      ⟨fun {_ _} f ↦ P.preservesKernels_ι f, fun {_ _} f ↦ P.preservesCokernels_ι f⟩
+    have := P.preservesMonomorphisms_ι_of_isNormalEpiCategory
+    have := P.preservesEpimorphisms_ι_of_isNormalMonoCategory
+    have := hS.mono_f
+    have := hS.epi_g
+    exact hS.map P.ι
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem coherent_affine_sections_shortExact (X : Scheme.{u}) [IsNoetherian X]
+    (U : X.Opens) (hU : IsAffineOpen U)
+    (S : ShortComplex (CoherentModules X)) (hS : S.ShortExact) :
+    (S.map (affineSections X U)).ShortExact := by
+  let T := S.map (ObjectProperty.ι (C := X.Modules) (RingedSpace.IsCoherent X.toRingedSpace))
+  have hT := coherent_inclusion_shortExact X S hS
+  let : (SheafOfModules.toSheaf.{u} X.ringCatSheaf).PreservesZeroMorphisms :=
+    ⟨fun _ _ ↦ rfl⟩
+  let B := T.map (SheafOfModules.toSheaf.{u} X.ringCatSheaf)
+  have : PreservesFiniteLimits (SheafOfModules.toSheaf.{u} X.ringCatSheaf) := by
+    apply preservesFiniteLimits_of_reflects_of_preserves _
+      (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+  have : PreservesFiniteColimits (SheafOfModules.toSheaf.{u} X.ringCatSheaf) :=
+    SheafOfModules.preservesFiniteColimits_toSheaf X.ringCatSheaf
+  have hB : B.ShortExact := hT.map_of_exact (SheafOfModules.toSheaf.{u} X.ringCatSheaf)
+  have : S.X₁.obj.IsQuasicoherent :=
+    (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp S.X₁.property |>.1
+  refine ShortComplex.ShortExact.mk' ?_ ?_ ?_
+  · apply (ShortComplex.moduleCat_exact_iff _).mpr
+    intro x hx
+    exact TopCat.Sheaf.exists_app_f_eq hB (op U) x hx
+  · apply (ModuleCat.mono_iff_injective _).mpr
+    exact TopCat.Sheaf.injective_app_f hB (op U)
+  · apply (ModuleCat.epi_iff_surjective _).mpr
+    exact Scheme.Modules.surjective_app_of_cechAcyclicOnAffines hB
+      (Scheme.Modules.cechAcyclicOnAffines_of_isQuasicoherent S.X₁.obj) hU
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The restricted completed arrows identify with adic completions of an original
 short exact module sequence. This is a comparison statement: it asserts neither
 injectivity nor exactness of the completed maps.
@@ -80,6 +153,22 @@ theorem formalCompletion_affine_comparison (X : Scheme.{u}) [IsNoetherian X]
           (e₂ : F.obj V.X₂ ≃ₗ[A] AdicCompletion J M.X₂)
           (e₃ : F.obj V.X₃ ≃ₗ[A] AdicCompletion J M.X₃),
           (∀ x, e₂ ((F.map V.f) x) = AdicCompletion.map J M.f.hom (e₁ x)) ∧
-          (∀ x, e₃ ((F.map V.g) x) = AdicCompletion.map J M.g.hom (e₂ x)) := by sorry
+          (∀ x, e₃ ((F.map V.g) x) = AdicCompletion.map J M.g.hom (e₂ x)) := by
+  let A := Γ(X, U)
+  have hA : IsNoetherianRing A := IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
+  let M := S.map (affineSections X U)
+  have hM : M.ShortExact := coherent_affine_sections_shortExact X U hU S hS
+  have hfinite : Module.Finite A M.X₂ := by
+    have hcoh := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+      X S.X₂.obj).mp S.X₂.property
+    have : S.X₂.obj.IsQuasicoherent := hcoh.1
+    have : S.X₂.obj.IsFiniteType := hcoh.2
+    exact Scheme.Modules.finite_sections_of_finiteType S.X₂.obj hU
+  obtain ⟨F, hF, hr, e, he⟩ :=
+    formalCompletion_affine_natural_comparison X I U hU ρ hρ
+  refine ⟨A, inferInstance, hA, I.ideal ⟨U, hU⟩, M, hfinite, hM,
+    F, hF, hr, e S.X₁, e S.X₂, e S.X₃, ?_, ?_⟩
+  · exact he S.X₁ S.X₂ S.f
+  · exact he S.X₂ S.X₃ S.g
 
 end AlgebraicGeometry

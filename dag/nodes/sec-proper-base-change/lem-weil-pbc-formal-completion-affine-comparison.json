@@ -19,62 +19,31 @@
  ],
  "proof": [
   {
-   "text": "Take A to be the ring of sections of the affine open U, and J the sections of the restricted quasi-coherent ideal. The ring is Noetherian. The coherent inclusion preserves kernels and cokernels. Restriction to an open is sectionwise on its open site, preserves kernels and is a left adjoint, hence preserves cokernels. Affine sections of the restricted coherent sequence form a short exact complex M; its middle term is finite by coherence and the affine finite-type criterion.",
+   "text": "Construct M as the evaluation on U of S under the coherent inclusion. Closure of coherent modules under kernels and cokernels proves that the inclusion preserves short exactness. Pass to underlying abelian sheaves. Left exactness gives sectionwise injectivity and middle exactness, and the source library’s Cech acyclicity of quasi-coherent modules gives surjectivity over affine U. The locally Noetherian coherence criterion gives quasi-coherence and finite type of the middle sheaf. Apply the existing private theorem Scheme.Modules.finite_sections_of_finiteType in QuasicoherentFiniteTypeAffine, accessed with a proof-only import all, to make the middle section module finite directly.",
    "uses": [
-    "pqf-def-locnoeth",
     "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
     "lem-weil-pbc-abelian-full-subcategory-exact",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
     "lem-weil-pbc-quasi-coherent-finite-type-affine"
    ],
    "elementary": false
   },
   {
-   "text": "Use the canonical affine isomorphism U ≅ Spec A to transport formal systems. The restricted ideal becomes the ideal sheaf associated to J by the tilde-sections adjunction. Apply the affine formal-module equivalence E. Compose E.functor with the full finite-module inclusion and scalar restriction from the completion to A, obtaining F. Naturality of E's limit cones implies preservation of zero. The equivalence and full inclusion reflect limits by full faithfulness. Scalar restriction preserves limits and reflects isomorphisms (ModuleCat.restrictScalars); since the completed ModuleCat has limits, reflectsLimitsOfShape_of_reflectsIsomorphisms gives its reflection of parallel-pair limits. Reflection is stable under composition.",
+   "text": "The ring A = Gamma(X,U) is Noetherian by the locally Noetherian affine-section criterion. Set J = I(U). Apply the natural affine comparison to rho, then take e at the three objects of S. Its naturality for S.f and S.g gives the two arrow equations. Combine these data with the finite middle term and the proved short exactness of M.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-coherent-formal-modules-affine"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Open restriction identifies products by I and, inductively, by its positive powers with the products by the restricted ideal powers; it preserves their quotient cokernels. The affine quotient and ideal-power formulas identify sections with M_i/J^(n+1)M_i and their arrows with reductions of M.f and M.g. The equality hρ identifies these systems with V after the formal-system inclusion.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The specified natural limit cones of E identify F.obj V.X_i with the inverse limits of the positive-power quotients of M_i. The inverse-limit definition of AdicCompletion uses also the initial zero quotient; adjoining or deleting that coordinate does not change the limit. Uniqueness of the limit comparison supplies the three A-linear equivalences e_i. On each quotient projection the induced completion map equals the reduction of the original map. Naturality of the cones and their jointly monomorphic projections give the displayed two equations.",
-   "uses": [
-    "def-weil-pbc-adic-completion",
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-formal-completion-affine-natural-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "pqf-def-locnoeth",
   "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
   "lem-weil-pbc-abelian-full-subcategory-exact",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "def-weil-pbc-adic-completion"
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-formal-completion-affine-natural-comparison"
  ],
  "proof_origin": {
   "by": "document",
@@ -154,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K2",
+  "reviewer": "X-4a1ac",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T031543-L-3571748",
+  "landing": "20261013T060414-L-582171",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, node statements, proofs, report, and direct importer matched against the packet and base; all compile cleanly."
  }
 }
