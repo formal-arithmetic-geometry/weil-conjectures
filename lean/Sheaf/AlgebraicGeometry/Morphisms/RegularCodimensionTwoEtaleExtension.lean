@@ -10,6 +10,11 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
+import Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteFlatStalk
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
+import Sheaf.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified
+
 /-!
 # Extending finite etale covers across a regular codimension-two boundary
 
@@ -22,6 +27,37 @@ Source: Stacks Project, Tags 0BMA, 0EY7, 0EY6 and 0H2W.
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
+
+private theorem depth_two_of_regular_local (R : Type u) [CommRing R]
+    [IsRegularLocalRing R] (hdim : (2 : WithBot ℕ∞) ≤ ringKrullDim R) :
+    (2 : ℕ∞) ≤ IsLocalRing.depth (R := R) R := by
+  classical
+  let m := IsLocalRing.maximalIdeal R
+  obtain ⟨s, hcard, hs⟩ :=
+    (IsNoetherian.noetherian m).exists_span_finset_card_eq_spanFinrank
+  let rs := s.toList
+  have hspan : Ideal.span {x | x ∈ rs} = m := by
+    simpa [rs] using hs
+  have hdim' : ringKrullDim R = (rs.length : WithBot ℕ∞) := by
+    simpa [rs, hcard, m] using
+      (IsRegularLocalRing.spanFinrank_maximalIdeal (R := R)).symm
+  have hparams : IsLocalRing.IsRegularSystemOfParameters rs := ⟨hspan, hdim'.symm⟩
+  have hreg := (IsRegularLocalRing.isRegular_and_quotients_of_generators
+    R rs.length hdim' rs hparams).1
+  have hdepth : (rs.length : ℕ∞) ≤ IsLocalRing.depth (R := R) R := by
+    unfold IsLocalRing.depth Ideal.depth
+    split_ifs
+    · exact le_top
+    · apply le_sSup
+      refine ⟨rs, hreg, ?_, rfl⟩
+      intro x hx
+      change x ∈ m
+      rw [← hspan]
+      exact Ideal.subset_span hx
+  have htwo : (2 : ℕ∞) ≤ (rs.length : ℕ∞) := by
+    rw [hdim'] at hdim
+    exact WithBot.coe_le_coe.mp hdim
+  exact htwo.trans hdepth
 
 /-- A finite etale cover of an open extends across a regular boundary whose
 local rings have dimension at least two.
@@ -54,6 +90,30 @@ theorem exists_finite_etale_extension_of_regular_codimension_two_boundary
       (2 : WithBot ℕ∞) ≤ ringKrullDim (L.presheaf.stalk z))
     (q : Y ⟶ V.toScheme) [IsFinite q] [Etale q] :
     ∃ (E : Scheme.{u}) (p : E ⟶ L), IsFinite p ∧ Etale p ∧
-      ∃ e : Y ≅ (p ⁻¹ᵁ V).toScheme, e.hom ≫ (p ∣_ V) = q := by sorry
+      ∃ e : Y ≅ (p ⁻¹ᵁ V).toScheme, e.hom ≫ (p ∣_ V) = q := by
+  have hdepth : ∀ z : L, z ∉ V →
+      (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk z) (L.presheaf.stalk z) := by
+    intro z hz
+    obtain ⟨hreg, hdim⟩ := hboundary z hz
+    let := hreg
+    exact depth_two_of_regular_local _ hdim
+  obtain ⟨E, p, hp, hE, e, he⟩ := exists_finite_extension_of_depth_two V hdepth q
+  let := hp
+  have : Etale (p ∣_ V) := by
+    rw [← he]
+    infer_instance
+  have : Flat p := by
+    apply Flat.of_stalkMap
+    intro z
+    by_cases hz : p z ∈ V
+    · let zV : (p ⁻¹ᵁ V).toScheme := ⟨z, hz⟩
+      exact (RingHom.Flat.respectsIso.arrow_mk_iso_iff
+        (morphismRestrictStalkMap p V zV)).mp (Flat.stalkMap (p ∣_ V) zV)
+    · exact flat_stalk_of_regular_codimension_two_depth_two_extension V hboundary p hE z hz
+  have : FormallyUnramified p :=
+    formallyUnramified_of_flat_depth_two_finite_extension V p hE
+  refine ⟨E, p, hp, Etale.of_formallyUnramified_of_flat p, e.symm, ?_⟩
+  rw [← he]
+  simp
 
 end AlgebraicGeometry.Scheme
