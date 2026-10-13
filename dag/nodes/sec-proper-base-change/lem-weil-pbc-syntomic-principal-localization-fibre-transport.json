@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Contraction through the scalar tower gives p₁ = p. With k = κ(p), put F = k ⊗_R S and a = 1 ⊗ g. Base change identifies F₁ = k ⊗_R S_g with F_a via φ(x ⊗ s) = x ⊗ (s/1).",
+   "text": "Contraction through the scalar tower gives p₁ = p. Transport the fibre neighbourhood hypothesis along this equality. Put k = κ(p), F = k ⊗_R S and a = 1 ⊗ g. Mathlib IsLocalization.Away.tensorProductEquivTMulRight identifies F₁ = k ⊗_R S_g with F_a as a k-algebra; its pure-tensor formula identifies the image of 1 ⊗ s with the localization of 1 ⊗ s.",
    "uses": [
     "def-weil-ring-localization-away",
     "lem-weil-pbc-localization-tensor-over-base"
@@ -22,18 +22,20 @@
    "elementary": false
   },
   {
-   "text": "The canonical local-ring and residue-field isomorphisms for the localization S → S_g commute with the maps from S and k. Hence the defining residue-field maps of the canonical fibre primes commute with φ, and their kernels satisfy φ⁻¹(Q₁) = Q. For the given witness h take h₁ = φ(h); h₁ is outside Q₁.",
+   "text": "Let Q₁ be the canonical fibre prime of q₁ and let Qg be its inverse image under the algebra equivalence F_a ≃ F₁. The inverse of PrimeSpectrum.preimageEquivFiber contracts along the right tensor inclusion. Contracting Qg further along F → F_a and then S → F gives q, by the pure-tensor formula and the given contraction q₁ ∩ S = q. Injectivity of the inverse fibre equivalence therefore gives Qg ∩ F = Q. For the witness h outside Q, the image b = h/1 is outside Qg; its image h₁ in F₁ is outside Q₁.",
    "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso"
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "By the universal property of inverting a and h, (F₁)_{h₁} is a k-algebra isomorphic to (F_h)_{a/1}. The latter is a global complete intersection by principal-localization stability. Transport its zero-ring clause or its polynomial-quotient presentation and Krull dimension along this algebra isomorphism.",
+   "text": "Put Fh = F_h. Mathlib IsLocalization.Away.mul and mul' make both (F_a)_{h/1} and (F_h)_{a/1} localizations of F away from ah. IsLocalization.algEquiv and restrictScalars identify them as k-algebras. Apply principal-localization stability to the given global complete intersection F_h. IsLocalization.algEquivOfAlgEquiv lifts F_a ≃ F₁ to the localizations at b and h₁. For both algebra-equivalence transports, use the existing private Algebra.globalCI_equiv from Sheaf.RingTheory.SmoothLocalCompleteIntersection, made available by a proof-only import all. This helper composes the presentation equivalence, transports Krull dimension by the induced spectrum homeomorphism, and preserves the zero-ring clause; the smooth-algebra theorem itself is not applied.",
    "uses": [
     "lem-weil-pbc-localization-of-localization",
     "lem-weil-pbc-global-complete-intersection-principal-localization",
-    "def-weil-pbc-complete-intersection-over-field"
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-smooth-over-field-local-complete-intersection"
    ],
    "elementary": false
   }
@@ -41,15 +43,16 @@
  "proof_deps": [
   "def-weil-ring-localization-away",
   "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-localization-of-localization",
   "lem-weil-pbc-global-complete-intersection-principal-localization",
-  "def-weil-pbc-complete-intersection-over-field"
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-smooth-over-field-local-complete-intersection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Explicit justification by C3 of 00SY (3) => (2), first replacement by S_g, using 00SA (1) for the fibre neighbourhood"
+  "place": "E3 Lean proof of 00SY (3) => (2), first replacement by S_g, and 00SA (1); canonical fibre-prime comparison via Mathlib preimageEquivFiber instead of residue-field isomorphisms. Repair of returned delivery: reuse Algebra.globalCI_equiv via import all rather than duplicating its proof."
  },
  "mathlib_searches": [
   {
@@ -146,10 +149,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T004332-L-2508417",
-  "kind": "interface",
+  "landing": "20261013T031535-L-3569700",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
