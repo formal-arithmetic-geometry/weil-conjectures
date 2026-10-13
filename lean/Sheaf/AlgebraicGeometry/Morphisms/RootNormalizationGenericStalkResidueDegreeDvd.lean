@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Localization.Ideal
 
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
+import Sheaf.AlgebraicGeometry.Morphisms.NormalizationResidueDegreeDvdCore
 
 /-! # Residue degrees of root normalization at the divisor generic point
 
@@ -26,6 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
 /-- The normalization residue degree at the root divisor divides the torsor group order.
 
 Source: Stacks Project, Tag 09EB (Galois DVR degree formula) and Tag 0307
@@ -85,6 +86,18 @@ theorem root_normalization_generic_stalk_residue_degree_dvd
       ∀ (x : a.normalization), a.fromNormalization x = j η →
         letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra
         Module.finrank (N.residueField (a.fromNormalization x))
-          (a.normalization.residueField x) ∣ Nat.card G := by sorry
+          (a.normalization.residueField x) ∣ Nat.card G := by
+  dsimp only
+  intro hroot hN hp hEtale hNorm D j hD hDi hj hcomp η hη x hx
+  let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C (b.hom f))
+  let N := Spec (CommRingCat.of A)
+  let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A (b.hom f))
+  let q := Spec.map (CommRingCat.ofHom (algebraMap H A))
+  let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)
+  let a := p ≫ V.ι
+  exact normalization_residue_degree_dvd_core (V := V.toScheme) G p a hEtale hNorm j hD hDi hj V (by
+    intro z
+    change z ∈ V ↔ z ∉ Set.range j
+    exact hcomp z) η hη x hx
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,121 @@
+{
+ "id": "lem-sbc-root-normalization-generic-stalk-residue-degree-dvd-core",
+ "kind": "statement",
+ "title": "Abstract normalization residue degree divisibility calculation",
+ "statement": "theorem normalization_residue_degree_dvd_core {N V P D : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G] (p : P ⟶ V) [IsFinite p] (a : P ⟶ N) [QuasiCompact a] [QuasiSeparated a] (hEtale : Etale p) (hNorm : IsFinite a.fromNormalization) (j : D ⟶ N) (hD : IsRegular D) (hDi : IsIntegral D) (hj : IsEffectiveCartierCenter j) (O : N.Opens) (hcomp : ∀ z : N, z ∈ O ↔ z ∉ Set.range j) (η : D) (hη : IsGenericPoint η Set.univ) (x : a.normalization) (hx : a.fromNormalization x = j η) : letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra Module.finrank (N.residueField (a.fromNormalization x)) (a.normalization.residueField x) ∣ Nat.card G",
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-residue-field",
+  "def-weil-vector-space-dimension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09EB"
+ },
+ "proof": [
+  {
+   "text": "Localize at the generic Cartier point and identify the normalization stalk with the integral closure of the resulting DVR.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The generic finite etale algebra splits into Galois factors whose degrees divide the finite group order.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Galois DVR degree formula [L:K]=r*e*f to conclude that each residue degree f divides the group order.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "D3",
+  "document": "Stacks Project",
+  "place": "Tag 09EB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue degree normalization finite etale",
+   "date": "2026-10-14",
+   "results": "Unavailable: service unavailable",
+   "verdict": "Unavailable; other searches used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue degree divides Galois group order DVR",
+   "date": "2026-10-14",
+   "results": "No complete scheme theorem; algebraic ramification ingredients only",
+   "verdict": "Intermediate theorem required"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank _ _ ∣ Nat.card _",
+   "date": "2026-10-14",
+   "results": "No hits",
+   "verdict": "Intermediate theorem required"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*degree|finrank.*dvd",
+   "date": "2026-10-14",
+   "results": "No hits",
+   "verdict": "Intermediate theorem required"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkResidueDegreeDvd",
+  "date": "2026-10-14",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-normalization-generic-stalk-residue-degree-dvd",
+   "place": "Galois DVR degree calculation"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalizationResidueDegreeDvdCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalizationResidueDegreeDvdCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.normalization_residue_degree_dvd_core",
+  "statement": "theorem normalization_residue_degree_dvd_core {N V P D : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G] (p : P ⟶ V) [IsFinite p] (a : P ⟶ N) [QuasiCompact a] [QuasiSeparated a] (hEtale : Etale p) (hNorm : IsFinite a.fromNormalization) (j : D ⟶ N) (hD : IsRegular D) (hDi : IsIntegral D) (hj : IsEffectiveCartierCenter j) (O : N.Opens) (hcomp : ∀ z : N, z ∈ O ↔ z ∉ Set.range j) (η : D) (hη : IsGenericPoint η Set.univ) (x : a.normalization) (hx : a.fromNormalization x = j η) : letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra Module.finrank (N.residueField (a.fromNormalization x)) (a.normalization.residueField x) ∣ Nat.card G",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T222400-L-1221756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T222400-L-1221756",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
