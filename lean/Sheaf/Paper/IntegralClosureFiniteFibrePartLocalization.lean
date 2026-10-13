@@ -125,7 +125,7 @@ theorem integralClosure_finiteFibrePart_localization
     A B I C₁ C₂ e hcompat
   obtain ⟨U, hTU, hIso⟩ := exists_isIso_neighborhood_of_awayMap_bijective ι T (by
     intro p hp
-    exact Algebra.zariskisMainProperty_of_isQuasiFiniteAtPrime A B p.asIdeal (hqf p hp))
+    exact Algebra.zariskisMainProperty_of_isQuasiFiniteAtPrime A B p (hqf p hp))
   obtain ⟨q, hq, _, _, ε', hε', himage, _, hmap,
       C₁', C₂', inst₁, inst₂, e', f₁, f₂, he', hprod⟩ :=
     AlgebraicGeometry.integralClosure_finiteFibre_image_clopen I e hcompat U hIso hTU

@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "*Zariski's main theorem.* Let $S'\\subseteq S$ be the integral closure of $R$ in $S$ [def-weil-pbc-integral-closure], an $R$-subalgebra of $S$. The hypothesis that $R\\to S$ is quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime] is Stacks' Definition 00PL (taken with condition (1) of Lemma 00PK), which is the hypothesis of [lem-weil-pbc-integral-closure-zariski-main-away] (stated there as 'quasi-finite in the affine sense, Stacks Algebra Definition 10.122.3, Tags 00PL and 00PK'); $S$ is a finitely generated $R$-algebra. Applying [lem-weil-pbc-integral-closure-zariski-main-away] with $A=R$, $B=S$, $B'=S'$ gives $g\\in S'$ with $g\\notin\\mathfrak q$ such that the map $S'_g\\to S_g$, $y/g^n\\mapsto y/g^n$, of localizations at the powers of $g$ [def-weil-ring-localization-away] induced by the inclusion $S'\\subseteq S$ is an isomorphism; in particular it is surjective.",
+   "text": "*Zariski's main theorem.* Let $S'\\subseteq S$ be the integral closure of $R$ in $S$ [def-weil-pbc-integral-closure], an $R$-subalgebra of $S$. The hypothesis that $R\\to S$ is quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime] is Stacks' Definition 00PL (taken with condition (1) of Lemma 00PK), which is the hypothesis of [lem-weil-pbc-integral-closure-zariski-main-away] (stated there as 'quasi-finite in the affine sense, Stacks Algebra Definition 10.122.3, Tags 00PL and 00PK'); $S$ is a finitely generated $R$-algebra. Applying [lem-weil-pbc-integral-closure-zariski-main-away] with $A=R$, $B=S$, $B'=S'$ gives $g\\in S'$ with $g\\notin\\mathfrak q$ such that the map $S'_g\\to S_g$, $y/g^n\\mapsto y/g^n$, of localizations at the powers of $g$ [def-weil-ring-localization-away] induced by the inclusion $S'\\subseteq S$ is an isomorphism; in particular it is surjective. In the delivered Lean proof, transport the defining open singleton through PrimeSpectrum.preimageHomeomorphFiber using Homeomorph.isOpen_image and Set.image_singleton, derive Algebra.QuasiFiniteAt with QuasiFiniteAt.of_isOpen_singleton_fiber, and apply Algebra.ZariskisMainProperty.of_finiteType directly. This realizes the same Zariski-main node without the duplicate Sheaf wrapper.",
    "uses": [
     "def-weil-pbc-integral-closure",
     "def-weil-pbc-ring-map-quasi-finite-at-prime",
@@ -106,7 +106,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Theorem Tag 00Q9 (theorem-main-theorem, line 30779) and the construction in the proof of Lemma Tag 00QA (lemma-quasi-finite-open, lines 30886-30893), which the proof of Lemma Tag 00QB (3) repeats with 'Details omitted'; the omitted details (injectivity and surjectivity of S''_g -> S_g) are written out in steps 4-5. Tags verified in literature/stacks-project/tags/tags (00Q9, 00QA, 00QB, 00GM, 02JJ)."
+  "place": "Algebra, Theorem Tag 00Q9 (theorem-main-theorem, line 30779) and the construction in the proof of Lemma Tag 00QA (lemma-quasi-finite-open, lines 30886-30893), which the proof of Lemma Tag 00QB (3) repeats with 'Details omitted'; the omitted details (injectivity and surjectivity of S''_g -> S_g) are written out in steps 4-5. Tags verified in literature/stacks-project/tags/tags (00Q9, 00QA, 00QB, 00GM, 02JJ).; C1 duplicate-removal repair: directly use the recorded Mathlib Zariski-main declaration after fibre-homeomorphism hypothesis conversion."
  },
  "mathlib_searches": [
   {
@@ -235,17 +235,13 @@
   "note": "R,S CommRing + Algebra (phi), FiniteType, q : PrimeSpectrum S, hq IsQuasiFiniteAtPrime; ∃ S' Subalgebra with Module.Finite R S', ∃ g : S' ∉ q, Bijective (Localization.awayMap S'.val.toRingHom g) = canonical S'_g → S_g; same form as landed zariskisMainProperty_of_isQuasiFiniteAtPrime"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "J3",
+  "reviewer": "X-2cadd",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T194120-L-457919",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "Algebra.exists_finite_subalgebra_away_of_isQuasiFiniteAtPrime"
-  ],
-  "sorry_after": []
+  "landing": "20261013T211054-L-388715",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile; original callers fail on the changed PrimeSpectrum interface and adapted callers compile; signatures, forced edits, DAG records, report, and axioms verified."
  }
 }

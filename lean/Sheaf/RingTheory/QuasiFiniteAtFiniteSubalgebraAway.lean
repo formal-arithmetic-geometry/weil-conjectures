@@ -53,7 +53,7 @@ theorem exists_finite_subalgebra_away_of_isQuasiFiniteAtPrime
       ∃ g : S', g.1 ∉ q.asIdeal ∧
         Function.Bijective (Localization.awayMap S'.val.toRingHom g) := by
   have H : ZariskisMainProperty R q.asIdeal :=
-    zariskisMainProperty_of_isQuasiFiniteAtPrime R S q.asIdeal hq
+    zariskisMainProperty_of_isQuasiFiniteAtPrime R S q hq
   obtain ⟨S', hS', g, hg, hbij⟩ :=
     H.exists_fg_and_exists_notMem_and_awayMap_bijective q.asIdeal
   exact ⟨S', Module.Finite.of_fg hS', g, hg, hbij⟩

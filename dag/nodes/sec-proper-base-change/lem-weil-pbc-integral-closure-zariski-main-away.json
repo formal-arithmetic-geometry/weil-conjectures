@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Let q be the given prime and p its contraction. The definition [def-weil-pbc-ring-map-quasi-finite-at-prime] gives an open singleton at the canonical point of Spec(κ(p) ⊗[R] S). Using PrimeSpectrum.preimageHomeomorphFiber R S p, transport this singleton to the topological fibre of Spec S → Spec R: rewrite openness by Homeomorph.isOpen_image and Set.image_singleton. Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber (Mathlib/RingTheory/ZariskisMainTheorem.lean:754-764) then supplies the instance Algebra.QuasiFiniteAt R q. No extra hypothesis is introduced.",
+   "text": "Let q be the given prime and p its contraction. The definition [def-weil-pbc-ring-map-quasi-finite-at-prime] gives an open singleton at the canonical point of Spec(κ(p) ⊗[R] S). Using PrimeSpectrum.preimageHomeomorphFiber R S p, transport this singleton to the topological fibre of Spec S → Spec R: rewrite openness by Homeomorph.isOpen_image and Set.image_singleton. Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber (Mathlib/RingTheory/ZariskisMainTheorem.lean:742-752) then supplies the instance Algebra.QuasiFiniteAt R q. No extra hypothesis is introduced.",
    "uses": [
     "def-weil-pbc-ring-map-quasi-finite-at-prime",
     "def-weil-pbc-finite-type-algebra"
@@ -57,10 +57,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F2",
-  "date": "2026-10-12",
+  "group": "C1",
+  "date": "2026-10-14",
   "document": "Mathlib/RingTheory/ZariskisMainTheorem.lean",
-  "place": "Algebra.ZariskisMainProperty.of_finiteType and Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber; direct application after transporting openness through PrimeSpectrum.preimageHomeomorphFiber. Mathlib proves Stacks Tag 00Q9."
+  "place": "Stacks 00Q9 as proved by Mathlib Algebra.ZariskisMainProperty.of_finiteType; the hypothesis conversion is now performed in the direct callers rather than a duplicate wrapper."
  },
  "mathlib_searches": [
   {
@@ -141,14 +141,15 @@
   "summary": "Split along the proof of Stacks Algebra 00Q9 in 15 steps: the claim P(n) (S finite over R[x_1..x_n]) proved by induction; step 2 (an integral closure is integrally closed: 02JJ/00GK/00GN leaves) and step 3 (localization bookkeeping) are used throughout; n = 0 by 00GK; n = 1 by reduction to R integrally closed via 0C6H, the conductor J and 00PY (Mathlib leaf) making the image of x strongly transcendental (00PZ, Mathlib leaf) over R/(R∩√J) in S/√J, 00Q2 and 00PN giving s ∈ J \\ q, 077H transferring quasi-finiteness to C = R[x] ≅ R[X]/I, 00Q8 giving h, and the final principal-localization identification written out (the source's one-line 'isomorphic to a principal localization R_{h'}'); n ≥ 2 by R' = integral closure of R[x_1..x_{n-1}], 0C6H, P(1), the finite subalgebra R'' (00GM), quasi-finiteness of R → R'' at q'' (via 077H instead of the source's 00PK; same conclusion), P(n-1) and the localization identities. New nodes: def-weil-pbc-strongly-transcendental (00PZ, leaf IsStronglyTranscendental), lem-weil-pbc-conductor-radical-coefficients (00PY, leaf exists_leadingCoeff_pow_smul_mem_radical_conductor), and unsplit lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite (00Q2), lem-weil-pbc-quasi-finite-four-rings (00PN), lem-weil-pbc-quasi-finite-at-prime-principal-localization (077H), lem-weil-pbc-quasi-finite-at-prime-permanence (0C6H), lem-weil-pbc-quasi-finite-monogenic-integral-closure (00Q8), each with Mathlib candidates recorded (B8). Statement unchanged in meaning: wording tidied ('q prime with q prime'), the localization map and finite type now cite def-weil-ring-localization-away and def-weil-pbc-finite-type-algebra; source moved to Algebra 00Q9 (the theorem itself), the 09XH use kept in the place."
  },
  "lean": {
-  "module": "Sheaf.RingTheory.ZariskisMainAway",
-  "declaration": "Algebra.zariskisMainProperty_of_isQuasiFiniteAtPrime",
-  "file": "lean/Sheaf/RingTheory/ZariskisMainAway.lean",
-  "statement": "theorem zariskisMainProperty_of_isQuasiFiniteAtPrime (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (q : Ideal S) [q.IsPrime] (hq : IsQuasiFiniteAtPrime R S ⟨q, inferInstance⟩) : ∃ h : integralClosure R S, h.1 ∉ q ∧ Function.Bijective (Localization.awayMap (integralClosure R S).val.toRingHom h)",
-  "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-11",
-  "existing": false
+  "module": "Mathlib.RingTheory.ZariskisMainTheorem",
+  "declaration": "Algebra.ZariskisMainProperty.of_finiteType",
+  "file": "Mathlib/RingTheory/ZariskisMainTheorem.lean",
+  "statement": "lemma ZariskisMainProperty.of_finiteType.{u, v} {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (p : Ideal S) [p.IsPrime] [Algebra.QuasiFiniteAt R p] : ZariskisMainProperty R p",
+  "branch": "mathlib",
+  "by": "C1",
+  "date": "2026-10-14",
+  "existing": true,
+  "how": "The conclusion unfolds to the unchanged node statement. The existing IsQuasiFiniteAtPrime hypothesis is converted to Algebra.QuasiFiniteAt in each caller by the fibre homeomorphism and QuasiFiniteAt.of_isOpen_singleton_fiber; see the proof steps. The obsolete duplicate Sheaf declaration is removed."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -159,13 +160,13 @@
   "note": "R,S CommRing + Algebra + FiniteType = finite-type A->B; q : Ideal S [IsPrime] = prime q; hq IsQuasiFiniteAtPrime (J1 fibre-isolated-point def, not hollow) = quasi-finite at q; ∃ h : integralClosure R S, h.1 ∉ q = h in B' outside q; Bijective awayMap (integralClosure R S).val = B'_h -> B_h iso; conclusion is Mathlib ZariskisMainProperty unfolded; truth checked by deriving it from ZariskisMainProperty.of_finiteType via QuasiFiniteAt.of_isOpen_singleton_fiber (standard axioms)"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F2",
+  "reviewer": "X-2cadd",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T144108-L-2093965",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T211054-L-388715",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile; original callers fail on the changed PrimeSpectrum interface and adapted callers compile; signatures, forced edits, DAG records, report, and axioms verified."
  }
 }

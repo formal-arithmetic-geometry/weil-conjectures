@@ -50,7 +50,7 @@ theorem ringKrullDim_le_of_isQuasiFiniteAtPrime
   let T := integralClosure R S
   let q' := q.asIdeal.under T
   have hmain : ZariskisMainProperty R q.asIdeal :=
-    zariskisMainProperty_of_isQuasiFiniteAtPrime R S q.asIdeal hq
+    zariskisMainProperty_of_isQuasiFiniteAtPrime R S q hq
   obtain ⟨r, hrq, hrT, hr⟩ := zariskisMainProperty_iff.mp hmain
   have hsat : T.saturation (q.asIdeal.primeCompl ⊓ T.toSubmonoid) (by simp) = ⊤ := by
     apply top_le_iff.mp

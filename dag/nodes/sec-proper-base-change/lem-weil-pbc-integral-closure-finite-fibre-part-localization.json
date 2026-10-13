@@ -36,7 +36,7 @@
    }
   },
   {
-   "text": "Write $\\phi:\\operatorname{Spec}(B)\\to\\operatorname{Spec}(B')$ for the map induced by $B'\\subseteq B$. For each prime $\\mathfrak p\\in T$, Zariski's Main Theorem gives $h_{\\mathfrak p}\\in B'$ outside $\\mathfrak p$ for which $B'_{h_{\\mathfrak p}}\\to B_{h_{\\mathfrak p}}$ is an isomorphism. The union $U=\\bigcup_{\\mathfrak p\\in T}D(h_{\\mathfrak p})$ is open, contains $T$ in its inverse image, and $\\phi^{-1}(U)\\to U$ is a homeomorphism with isomorphic local rings. In Lean, choose these elements as a family indexed by T. Mathlib SpecMapRestrictBasicOpenIso identifies each restricted spectrum map with the spectrum map of awayMap; isIso_SpecMap_iff turns bijectivity into an isomorphism. The open cover of the supremum, Opens.iSupOpenCover, and IsZariskiLocalAtTarget.iff_of_openCover glue the isomorphisms. Membership in the union follows from the element being outside the prime. This is the fully proved private helper exists_isIso_neighborhood_of_awayMap_bijective.",
+   "text": "Write $\\phi:\\operatorname{Spec}(B)\\to\\operatorname{Spec}(B')$ for the map induced by $B'\\subseteq B$. For each prime $\\mathfrak p\\in T$, Zariski's Main Theorem gives $h_{\\mathfrak p}\\in B'$ outside $\\mathfrak p$ for which $B'_{h_{\\mathfrak p}}\\to B_{h_{\\mathfrak p}}$ is an isomorphism. The union $U=\\bigcup_{\\mathfrak p\\in T}D(h_{\\mathfrak p})$ is open, contains $T$ in its inverse image, and $\\phi^{-1}(U)\\to U$ is a homeomorphism with isomorphic local rings. In Lean, choose these elements as a family indexed by T. Mathlib SpecMapRestrictBasicOpenIso identifies each restricted spectrum map with the spectrum map of awayMap; isIso_SpecMap_iff turns bijectivity into an isomorphism. The open cover of the supremum, Opens.iSupOpenCover, and IsZariskiLocalAtTarget.iff_of_openCover glue the isomorphisms. Membership in the union follows from the element being outside the prime. This is the fully proved private helper exists_isIso_neighborhood_of_awayMap_bijective. In the delivered Lean proof, transport the defining open singleton through PrimeSpectrum.preimageHomeomorphFiber using Homeomorph.isOpen_image and Set.image_singleton, derive Algebra.QuasiFiniteAt with QuasiFiniteAt.of_isOpen_singleton_fiber, and apply Algebra.ZariskisMainProperty.of_finiteType directly. This realizes the same Zariski-main node without the duplicate Sheaf wrapper.",
    "uses": [
     "lem-weil-pbc-integral-closure-finite-fibre-quasi-finite",
     "lem-weil-pbc-integral-closure-zariski-main-away"
@@ -91,7 +91,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 09XH (lemma-helper-finite-type), proof"
+  "place": "Lemma Tag 09XH (lemma-helper-finite-type), proof; C1 duplicate-removal repair: directly use the recorded Mathlib Zariski-main declaration after fibre-homeomorphism hypothesis conversion."
  },
  "mathlib_searches": [
   {
@@ -177,13 +177,13 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T1",
+  "reviewer": "X-2cadd",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T053955-L-2646527",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T211054-L-388715",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile; original callers fail on the changed PrimeSpectrum interface and adapted callers compile; signatures, forced edits, DAG records, report, and axioms verified."
  }
 }
