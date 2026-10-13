@@ -11164,3 +11164,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/R3/Sheaf.Paper.NoetherianApproximation (stage 3; reviewer PASS; first push; landing 20261013T045558-L-136300 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:55 L: merged deliver/R3/Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPartialLocalFlat (stage 3; reviewer PASS; first push; landing 20261013T045558-L-136485 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:55 L: merged deliver/S1/Sheaf.AlgebraicGeometry.EpiOverFunctor (stage 3; reviewer PASS; first push; landing 20261013T045559-L-136613 (proof); batch 20261013T045507; modules 1; new nodes 0)
+- 04:56 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointDirectSums (stage 3; reviewer PASS; first push; landing 20261013T045600-L-136724 (interface); batch 20261013T045507; modules 2; new nodes 1)

@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-proper-flat-derived-direct-image-perfect-universes",
+ "kind": "statement",
+ "title": "Proper flat perfect direct image in independently supplied derived models",
+ "statement": "Let f:X→Y be a proper, flat, locally finitely presented morphism of schemes [def-weil-proper-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Supply derived categories of module sheaves on X and Y with possibly different Hom universes, and derived categories on their respective localized open sites [def-pc-derived-category]. For every perfect object E of D(O_X) [def-pc-perfect-complex], the shared derived direct image Rf_*E [def-pc-derived-direct-image] is perfect on Y. Neither quasi-compactness of Y nor a right adjoint is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma 36.30.4(1), Tag 0B91 (https://stacks.math.columbia.edu/tag/0B91), its proof using Lemma 36.30.1, Tag 0A1H"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the universal property of derived localization to compare the supplied derived categories, including those on opens, with standard K-injective models in a common sufficiently large Hom universe. Exact restriction commutes with the localization equivalences, so local strictly perfect representatives are preserved and reflected. Derived direct image commutes with these equivalences by its K-injective construction. The statement concerns an already supplied object E; no arbitrary object is chosen from an unproved existence assertion.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the common models apply lem-pc-proper-support-perfect-direct-image with the given perfect object E and G=O_X concentrated in degree zero. G is bounded. Its terms are finitely presented; the nonzero term is flat over Y because f is flat and has proper support because f is proper. Zero terms are finitely presented and flat and have empty proper support. Properness supplies quasi-compactness and quasi-separatedness of f, and local finite presentation combined with quasi-compactness is finite presentation. The tensor-unit isomorphism E tensor^L O_X ≅ E identifies the first conclusion with perfectness of Rf_*E.",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the conclusion back to the supplied model on Y, using the compatible equivalences on its opens. Each local strictly perfect representative of Rf_*E remains a representative there. Thus the conclusion holds with the original independent Hom universes. The argument also covers the empty scheme and E=0.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-proper-support-perfect-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0B91 proof, with explicit localization-universe transport; source read at https://stacks.math.columbia.edu/tag/0B91 on 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of a perfect complex under a proper flat finitely presented scheme morphism is perfect",
+   "results": "8 hits for scheme flatness and stability; no derived-perfect direct-image theorem. Library ProperSupportPerfectDirectImage requires a common Hom universe and global derived-category instances. ProperFlatSingleDerivedDirectImagePerfect applies to a single sheaf, not an arbitrary perfect complex.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPerfect",
+   "results": "No hits; Mathlib does not know the project-specific IsPerfect identifier.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*flat.*perfect|perfect.*proper.*flat",
+   "results": "msearch Mathlib grep: zero hits; rg over library and DAG finds only narrower sheaf statements and the common-universe proper-support theorem. Blueprint search for 0B91 returns no blueprint nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper flat finitely presented derived pushforward preserves perfect complexes",
+   "results": "Service unavailable: Internal Server Error. Recorded as unavailable; other search kinds and direct library/DAG grep were completed.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointDirectSums",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the direct-sum preservation input: perfectness of proper flat direct images before the adjunction Hom calculation",
+   "via": [
+    "lem-sc-proper-flat-right-adjoint-direct-sums",
+    "lem-sc-proper-flat-right-adjoint-restriction-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatDerivedDirectImagePerfect.lean",
+  "declaration": "AlgebraicGeometry.properFlat_derivedDirectImage_perfect",
+  "statement": "theorem properFlat_derivedDirectImage_perfect\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [IsProper f] [Flat f] [LocallyOfFinitePresentation f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ U : Y.Opens,\n      HasDerivedCategory.{wY} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X) (hE : Scheme.IsPerfect X E) :\n    Scheme.IsPerfect Y ((schemeDerivedDirectImage f).obj E)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T045600-L-136724",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T045600-L-136724",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

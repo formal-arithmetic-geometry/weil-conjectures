@@ -28,50 +28,47 @@
  ],
  "proof": [
   {
-   "text": "Since f is proper and Y is quasi-compact and quasi-separated, X is quasi-compact and quasi-separated, so the statements about D_QCoh below apply on X as well as on Y. Let P be any perfect object of D_QCoh(X). Apply [lem-pc-proper-support-perfect-direct-image] with $E=P$ and $\\mathcal G^\\bullet=\\mathcal O_X$ in degree 0: $\\mathcal O_X$ is of finite presentation, flat over Y because f is flat, and its support X is proper over Y because f is proper; as $P\\otimes^L\\mathcal O_X=P$, this gives that Rf_*P is perfect on Y (Stacks 0B91 argument). By [lem-pc-perfect-object-compact] on Y it is compact. Therefore for every family (K_i) in D_QCoh(Y), the canonical map $\\bigoplus_i \\operatorname{Hom}(Rf_*P,K_i) \\to \\operatorname{Hom}(Rf_*P,\\bigoplus_i K_i)$ is an isomorphism.",
+   "text": "Properness over qcqs Y supplies CompactSpace X and QuasiSeparatedSpace X by Mathlib. Choose derived-category localization structures on opens using nonempty_derivedOpenLocalization (these structures are unique up to the localization equivalences used downstream). Perfect direct image in the independently supplied models is properFlat_derivedDirectImage_perfect. Transport it along hF.app P, and apply perfectObjectCompact on X and Y to every perfect P and its F-image.",
    "uses": [
-    "lem-pc-proper-support-perfect-direct-image",
+    "lem-pc-derived-open-localization-universe",
+    "lem-sc-proper-flat-derived-direct-image-perfect-universes",
     "lem-pc-perfect-object-compact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4H (Lemma 48.12.1), proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $u:\\bigoplus_i a(K_i)\\to a(\\bigoplus_i K_i)$ be the canonical morphism induced by the coproduct inclusions and functoriality of a. Adjunction gives $\\operatorname{Hom}(P,a(\\bigoplus_i K_i))\\cong\\operatorname{Hom}(Rf_*P,\\bigoplus_i K_i)$ and $\\operatorname{Hom}(P,a(K_i))\\cong\\operatorname{Hom}(Rf_*P,K_i)$. By [lem-pc-perfect-object-compact], P is compact, so $\\operatorname{Hom}(P,\\bigoplus_i a(K_i))\\cong\\bigoplus_i\\operatorname{Hom}(P,a(K_i))$; by Step 1 and the compactness of $Rf_*P$, the resulting map to $\\operatorname{Hom}(P,a(\\bigoplus_i K_i))$ is an isomorphism for every perfect P.",
+   "text": "Choose the existing small family G of representatives of perfect objects, each compact and with compact F-image. The private compact_tests_small calculation identifies the Hom map of sigmaComparison a K using adj.homAddEquiv, the DirectSum maps, and the two compactness bijections. Naturality on each coprojection proves the commuting square, and bijectivity of the other maps proves bijectivity of Hom(G s, sigmaComparison a K).",
    "uses": [
-    "lem-pc-proper-support-perfect-direct-image",
-    "lem-pc-perfect-object-compact"
+    "lem-pc-perfect-complexes-compact-set",
+    "lem-pc-perfect-object-compact",
+    "lem-pc-derived-qcoh-direct-sums"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4H (Lemma 48.12.1), adjunction Hom calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Let C be the cone of u. By Step 2 and the long exact Hom sequence, $\\operatorname{Hom}(P[n],C)=0$ for every perfect P and every $n\\in\\mathbf Z$. The class of A with $\\operatorname{Hom}(A[n],C)=0$ for all n is closed under shifts, cones, retracts, and arbitrary direct sums, and contains all perfect objects. By [lem-pc-derived-qcoh-perfect-generation] it contains every object, hence it contains C; the identity of C is zero and C=0. Thus u is an isomorphism, so a commutes with the family of direct sums.",
+   "text": "The supported perfect generator with total support supplies the inherited triangulated structure. Perfect generation and the representative family imply weak generation via schemeDerivedQCoh_representatives_generate. The private perfect_test_detection transfers the Hom bijections to all perfect objects by representative isomorphisms. Shifts preserve perfection by explicit reindexing of the local strictly perfect complexes. Complete a tested morphism g to a distinguished triangle. Shift adjunction, exactness of Hom, and the assumed bijections show every map from a shifted perfect object to its cone is zero. Weak generation forces the cone to be zero, so g is an isomorphism. Apply this to sigmaComparison a K, and PreservesCoproduct.of_iso_comparison followed by preservesColimitsOfShape_of_discrete proves preservation for each I:Type u, including I empty.",
    "uses": [
-    "lem-pc-derived-qcoh-perfect-generation"
+    "lem-pc-supported-perfect-generator",
+    "lem-pc-derived-qcoh-perfect-generation",
+    "lem-pc-derived-qcoh-representatives-generate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4H (Lemma 48.12.1), conclusion after the Hom calculation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-proper-support-perfect-direct-image",
+  "lem-pc-derived-open-localization-universe",
+  "lem-sc-proper-flat-derived-direct-image-perfect-universes",
   "lem-pc-perfect-object-compact",
-  "lem-pc-derived-qcoh-perfect-generation"
+  "lem-pc-perfect-complexes-compact-set",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-supported-perfect-generator",
+  "lem-pc-derived-qcoh-perfect-generation",
+  "lem-pc-derived-qcoh-representatives-generate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0E4H (Lemma 48.12.1); local source unavailable"
+  "place": "Lemma 48.12.1, Tag 0E4H; explicit Lean compact-test square and cone detection, with the Tag 0B91 model-universe specialization split off. Source read at https://stacks.math.columbia.edu/tag/0E4H on 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -153,5 +150,15 @@
   "group": "U1",
   "result": "pass",
   "note": "qcqs Y=CompactSpace+QuasiSeparatedSpace; proper/flat/fp=IsProper+Flat+LFP (qcqs f from proper); Rf_* on D_QCoh = F with hF iso to schemeDerivedDirectImage on schemeDerivedQCohProperty; a right adjoint via adj; all set-indexed sums = forall I : Type u, PreservesColimitsOfShape (Discrete I) a; only the item's node changed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T045600-L-136724",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
