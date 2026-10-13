@@ -154,6 +154,7 @@ end Stages
 
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D}
 
+set_option maxHeartbeats 1000000 in
 open Scheme.Modules in
 /-- **Modules of finite presentation descend to a finite stage** (Stacks, Tag 01ZR). Let `{Dⱼ}`
 be a cofiltered system of quasi-compact separated schemes with affine transition morphisms and
@@ -399,6 +400,32 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
         (hgf₁ := rfl) (hgf₂ := rfl) (hg'f₁ := hy₁) (hg'f₂ := hy₃),
       ← pullHom_pullHom (g := (opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)))
         (hgf₁ := rfl) (hgf₂ := rfl) (hg'f₁ := hy₁) (hg'f₂ := hy₃), h]
+  -- Step 7: the descent datum at `k₂` is effective.
+  have hsup₂ : ⨆ a : s, (g₂ ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
+    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hUtop,
+      Scheme.Hom.preimage_top]
+  have hsupL : ⨆ a : s, (gL ⁻¹ᵁ U a).ι.opensRange = ⊤ := by
+    simp only [Scheme.Opens.opensRange_ι, ← Scheme.Hom.preimage_iSup, hUtop,
+      Scheme.Hom.preimage_top]
+  obtain ⟨𝒢, -, ⟨e₂⟩⟩ := exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology
+    (fun a : s ↦ (g₂ ⁻¹ᵁ U a).ι) (ofArrows_mem_fpqcTopology_of_isOpenImmersion _ hsup₂)
+    (DescentData'.ofGlue (preimageChosenPullback₃ U g₂) μ₂ N H₂ hself₂ hcoc₂).descentData
+    (fun a ↦ by
+      haveI := hN a
+      change ((Modules.pullback (μ₂ a)).obj (N a)).IsQuasicoherent
+      infer_instance)
+  -- Step 8: the glued module is of finite presentation.
+  have h𝒢 : (𝒢 : (D.obj k₂.left).Modules).IsFinitePresentation := by
+    refine isFinitePresentation_of_isOpenImmersion _ (fun a : s ↦ (g₂ ⁻¹ᵁ U a).ι) hsup₂
+      fun a ↦ ?_
+    haveI := hN a
+    have e₂a : (Modules.pullback (g₂ ⁻¹ᵁ U a).ι).obj (𝒢 : (D.obj k₂.left).Modules) ≅
+        (Modules.pullback (μ₂ a)).obj (N a) :=
+      { hom := e₂.hom.hom a
+        inv := e₂.inv.hom a
+        hom_inv_id := by rw [← DescentData.comp_hom, e₂.hom_inv_id]; rfl
+        inv_hom_id := by rw [← DescentData.comp_hom, e₂.inv_hom_id]; rfl }
+    exact isFinitePresentation_of_iso e₂a.symm
   sorry
 
 end AlgebraicGeometry
