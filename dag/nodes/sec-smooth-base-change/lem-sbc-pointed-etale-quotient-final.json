@@ -1,0 +1,124 @@
+{
+ "id": "lem-sbc-pointed-etale-quotient-final",
+ "kind": "lemma",
+ "title": "Finality of pointed etale extension of scalars",
+ "statement": "Let A and B be commutative local rings in one universe, and let pi:A\\to B be surjective. Let K and L be separable closures of their residue fields, with algebra structures over A and B factoring through those residue fields, as in [def-sc-ring-strict-henselization]. Let P_A and P_B be the full categories of etale algebras over A and B equipped with a map to K and L, respectively, and let D_A,D_B forget the point. Let H:CommAlgCat(A)\\to CommAlgCat(B) be extension of scalars, explicitly the equivalences with categories of rings under A and B composed with pushout along pi. There exists a final functor F:P_A\\to P_B and a natural isomorphism D_A H\\cong F D_B.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 05WS; pointed-algebra proof recorded in lem-sbc-strict-henselization-surjective-quotient"
+ },
+ "stmt_deps": [
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Identify the residue fields using the first and third isomorphism theorems. Identify the two separable closures over that field. Base change pointed etale algebras through this comparison, and use stability of etaleness under base change to construct F and the underlying diagram comparison.",
+   "uses": [
+    "lem-weil-pbc-quotient-residue-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify B with A/ker π. Apply [lem-exc-etale-algebra-lift] to the pointed etale B-algebra T to obtain an etale A-algebra S and its specified reduction isomorphism. Compose the reduction with T -> L and the residue-compatible isomorphism L -> K to point S. The inverse reduction isomorphism supplies T -> F(S), giving an object of (T down F).",
+   "uses": [
+    "lem-exc-etale-algebra-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two objects of (T down F), tensor their lifted A-algebras and multiply their K-points. The two maps from T agree at the point. The etale diagonal is open, so a principal neighbourhood equalizes the maps. Lift and invert its denominator in the A-tensor product. This provides a common refinement. Thus every comma category is nonempty and connected, proving finality.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quotient-residue-field",
+  "lem-exc-etale-algebra-lift",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F1",
+  "document": "Stacks Project",
+  "place": "Tag 05WS; pointed-algebra proof recorded in lem-sbc-strict-henselization-surjective-quotient"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "surjective local ring map induces a final functor on pointed etale algebras",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor from etale algebras pointed in separable closures under a surjective local ring map is final",
+   "date": "2026-10-14",
+   "results": "Etale.exists_subalgebra_fg, IsStandardEtale.of_surjective; no pointed finality theorem",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointed.*[Ff]inal|[Ff]inal.*pointed|pushout.*[Qq]uotient",
+   "date": "2026-10-14",
+   "results": "No pointed finality result in Mathlib; source library has no IsStrictHenselization quotient result",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StrictHenselizationSurjectiveQuotientCore",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait strict-henselization divisor quotient: the quotient strict henselization construction",
+   "via": [
+    "lem-sbc-strict-henselization-surjective-quotient-core",
+    "lem-sbc-strict-henselization-surjective-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PointedEtaleQuotientFinal",
+  "file": "lean/Sheaf/RingTheory/PointedEtaleQuotientFinal.lean",
+  "declaration": "Algebra.pointedEtaleQuotient_final",
+  "statement": "theorem pointedEtaleQuotient_final\n    (A K B L : Type u) [CommRing A] [IsLocalRing A] [Field K]\n    [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]\n    [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K]\n    [CommRing B] [IsLocalRing B] [Field L]\n    [Algebra (IsLocalRing.ResidueField B) L]\n    [IsSepClosure (IsLocalRing.ResidueField B) L]\n    [Algebra B L] [IsScalarTower B (IsLocalRing.ResidueField B) L]\n    (π : A →+* B) (hπ : Function.Surjective π) :\n    let P : ObjectProperty (Over (CommAlgCat.of A K)) := fun X ↦ Etale A X.left\n    let Q : ObjectProperty (Over (CommAlgCat.of B L)) := fun X ↦ Etale B X.left\n    ∃ F : P.FullSubcategory ⥤ Q.FullSubcategory, F.Final ∧\n      Nonempty ((P.ι ⋙ Over.forget (CommAlgCat.of A K)) ⋙ quotientBaseChange π ≅\n        F ⋙ (Q.ι ⋙ Over.forget (CommAlgCat.of B L)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8ea20",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T215603-L-897456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8ea20",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T215603-L-897456",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG statements and change record; all modules compiled, forced adaptation failed in the original caller and succeeded in the adapted caller, and no prohibited declarations or extra interface changes were found."
+ }
+}

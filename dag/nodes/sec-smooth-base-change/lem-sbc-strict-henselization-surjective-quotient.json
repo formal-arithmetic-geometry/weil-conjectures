@@ -12,32 +12,29 @@
  ],
  "proof": [
   {
-   "text": "Identify B with A/I by the first isomorphism theorem. Its residue field is canonically that of A, so transport the given separable closure and let its B-action factor through the residue field.",
+   "text": "Obtain the field, separable-closure and compatible scalar structures from strictHenselization_surjective_quotient_data. Install these instances; the arbitrary quotient action returned there is not used in the final conclusion.",
    "uses": [
-    "lem-weil-pbc-quotient-residue-field"
+    "lem-sbc-strict-henselization-surjective-quotient-data"
    ],
    "elementary": false
   },
   {
-   "text": "Base change of pointed etale A-algebras to B is final. For a pointed etale B-algebra S choose a standard etale principal neighbourhood at its distinguished prime and lift its coefficients and inverted Jacobian determinant to A; this provides an arrow S to a base-changed object. For two such arrows take the tensor product of their lifted A-algebras with its induced point in K. The two resulting maps from S agree at that point. The diagonal of an etale algebra is open, so a principal neighbourhood equalizes them; lift its denominator and invert it in the A-tensor product. This proves the comma category nonempty and connected.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Extension of scalars is left adjoint and preserves the universal cocone giving C. Its new vertex B tensor_A C is the explicit quotient C/IC. Finality identifies this with the universal pointed etale B-algebra cocone. This is exactly the predicate IsStrictHenselization, with the B-map obtained from the explicit quotient construction.",
-   "uses": [],
+   "text": "Apply the corrected strictHenselization_surjective_quotient_core to obtain the constructed B-action on C/IC and its strict-henselization proof, and package these with the field structures.",
+   "uses": [
+    "lem-sbc-strict-henselization-surjective-quotient-core"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-quotient-residue-field"
+  "lem-sbc-strict-henselization-surjective-quotient-data",
+  "lem-sbc-strict-henselization-surjective-quotient-core"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "U2",
+  "group": "F1",
   "document": "Stacks Project",
-  "place": "Tag 05WS, algebra.tex, lemma-quotient-strict-henselization. The pointed-etale finality argument is written by U2 for the project colimit definition.",
-  "note": "The pointed-colimit arguments are written out by U2 from the cited source; the geometric comparison reuses the comparison calculation in StrictHenselizationChartMaximalIdeal without using its maximal-ideal theorem."
+  "place": "Tag 05WS; assembly from the data and corrected core declarations"
  },
  "mathlib_searches": [
   {
@@ -111,15 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E3",
+  "reviewer": "X-8ea20",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T190138-L-3215587",
+  "landing": "20261013T215603-L-897456",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "Algebra.IsStrictHenselization.surjective_quotient"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Delivered files matched their DAG statements and change record; all modules compiled, forced adaptation failed in the original caller and succeeded in the adapted caller, and no prohibited declarations or extra interface changes were found."
  }
 }

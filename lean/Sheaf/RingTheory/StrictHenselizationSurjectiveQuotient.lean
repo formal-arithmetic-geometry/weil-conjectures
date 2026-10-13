@@ -70,7 +70,8 @@ theorem IsStrictHenselization.surjective_quotient
   letI : Algebra B L := bL
   letI : IsScalarTower B (IsLocalRing.ResidueField B) L := tL
   letI : Algebra B (C ⧸ I.map (algebraMap A C)) := qB
-  exact ⟨L, fL, aL, sL, bL, tL, qB,
-    strictHenselization_surjective_quotient_core A K C B L hC π hπ I hI hker⟩
+  obtain ⟨qB', hq⟩ :=
+    strictHenselization_surjective_quotient_core A K C B L hC π hπ I hI hker
+  exact ⟨L, fL, aL, sL, bL, tL, qB', hq⟩
 
 end Algebra

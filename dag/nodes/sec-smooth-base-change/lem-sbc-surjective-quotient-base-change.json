@@ -1,0 +1,118 @@
+{
+ "id": "lem-sbc-surjective-quotient-base-change",
+ "kind": "lemma",
+ "title": "Explicit quotient vertex of extension of scalars",
+ "statement": "Let A,B,C be commutative rings in one universe, C an A-algebra, pi:A\\to B a surjective ring homomorphism, and I=ker(pi). Put Q=C/IC, where IC=I.map(A\\to C). Define H:CommAlgCat(A)\\to CommAlgCat(B) by the equivalence with rings under A, pushout along pi, and the inverse equivalence for B. There exists a B-algebra structure on Q and an isomorphism H(C)\\cong Q in CommAlgCat(B).",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 05WS; pointed-algebra proof recorded in lem-sbc-strict-henselization-surjective-quotient"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The map A to C/IC kills I. Descend it uniquely along the surjection pi using RingHom.liftOfSurjective; its kernel condition follows from Ideal.le_comap_map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define the B-algebra action by this descended ring map. The quotient map C to C/IC and the descended map B to C/IC agree on A.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any compatible maps C to T and B to T, the first map kills IC by Ideal.map_le_iff_le_comap and the kernel equation. Ideal.Quotient.lift supplies the unique map from C/IC to T.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check the two factorization equations; the B equation can be checked after pi by surjectivity. Uniqueness follows from surjectivity of C to C/IC. PushoutCocone.isColimitAux verifies the universal property.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use uniqueness of pushouts to obtain an isomorphism under B, then map it through the inverse equivalence to CommAlgCat(B).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F1",
+  "document": "Stacks Project",
+  "place": "Tag 05WS; pointed-algebra proof recorded in lem-sbc-strict-henselization-surjective-quotient"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushout of a surjective commutative ring map is a quotient by the extended kernel ideal",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommRingCat\", \"IsPushout\"",
+   "date": "2026-10-14",
+   "results": "CommRingCat.isPushout_tensorProduct; no categorical quotient-action interface matching this statement",
+   "verdict": "nearby tensor presentation only"
+  },
+  {
+   "tool": "grep",
+   "query": "pushout.*[Qq]uotient",
+   "date": "2026-10-14",
+   "results": "Types pushout as quotient; no ring quotient interface. Existing lem-weil-pbc-tensor-quotient-base-change is a tensor equivalence, not the pushout-under-B interface used here.",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StrictHenselizationSurjectiveQuotientCore",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait strict-henselization divisor quotient: the quotient strict henselization construction",
+   "via": [
+    "lem-sbc-strict-henselization-surjective-quotient-core",
+    "lem-sbc-strict-henselization-surjective-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SurjectiveQuotientBaseChange",
+  "file": "lean/Sheaf/RingTheory/SurjectiveQuotientBaseChange.lean",
+  "declaration": "Algebra.quotientBaseChange_obj_iso",
+  "statement": "theorem quotientBaseChange_obj_iso\n    (A B C : Type u) [CommRing A] [CommRing B] [CommRing C] [Algebra A C]\n    (π : A →+* B) (hπ : Function.Surjective π)\n    (I : Ideal A) (hker : RingHom.ker π = I) :\n    ∃ (_ : Algebra B (C ⧸ I.map (algebraMap A C))),\n      Nonempty ((quotientBaseChange π).obj (CommAlgCat.of A C) ≅\n        CommAlgCat.of B (C ⧸ I.map (algebraMap A C)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8ea20",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T215603-L-897456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8ea20",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T215603-L-897456",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG statements and change record; all modules compiled, forced adaptation failed in the original caller and succeeded in the adapted caller, and no prohibited declarations or extra interface changes were found."
+ }
+}
