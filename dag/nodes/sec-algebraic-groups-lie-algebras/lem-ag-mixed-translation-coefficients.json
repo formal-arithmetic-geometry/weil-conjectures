@@ -13,29 +13,34 @@
  ],
  "proof": [
   {
-   "text": "Pull right translations back to G[epsilon][delta]. Their comorphisms act coefficientwise as 1+epsilon D_v and 1+delta D_w and fix both parameters. Their inverses are 1-epsilon D_v and 1-delta D_w, because the corresponding parameter squares vanish.",
+   "text": "By naturality of eta=epsilon delta, right translation by the mixed lift of t is G.dualNumbersMul followed by infinitesimal right translation by t. Prove this directly using precomposition preserving multiplication of group-scheme points. Its mixed coefficient on any open is D_t, as follows directly from the comorphism of dualNumbersMul.",
    "uses": [
     "def-sc-group-scheme",
     "def-sc-dual-numbers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the hypothesis of equality of points to obtain equality of their explicit universal right translations. Use the full four-operator section identity for the commutator.",
+   "uses": [
+    "lem-ag-two-parameter-translation-action"
    ],
    "elementary": false
   },
   {
-   "text": "Compose the four operators in the order of the stated group commutator. The surviving mixed coefficient is D_v D_w-D_w D_v. The assumed equality of points identifies this map with translation by t pulled back through eta=epsilon delta, whose mixed coefficient is D_t. Equality of section maps gives the equality on all opens.",
-   "uses": [
-    "def-sc-group-scheme",
-    "def-sc-dual-numbers"
-   ],
-   "elementary": false
+   "text": "Expand the four explicit coefficientwise operators on a constant section a. Additivity gives the mixed coefficient D_v(D_w(a))-D_w(D_v(a)); all repeated-parameter terms vanish. Compare with the coefficient D_t(a) and use extensionality over opens and sections. This algebra and the comparison are proved in Lean.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-group-scheme",
-  "def-sc-dual-numbers"
+  "def-sc-dual-numbers",
+  "lem-ag-two-parameter-translation-action"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "T2 worker",
+  "agent": "E4 worker",
   "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
   "place": "Lie-ring obligation docstrings, invariant-extension and mixed-coefficient steps (blueprint sk-d-tangent)."
  },
@@ -116,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T082415-L-1648546",
+  "landing": "20261013T095945-L-2456151",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

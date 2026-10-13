@@ -1,0 +1,143 @@
+{
+ "id": "lem-ag-two-parameter-translation-action",
+ "kind": "statement",
+ "title": "Four coefficientwise section operators for a two-parameter translation commutator",
+ "statement": "Let S be an arbitrary scheme and G/S a group scheme [def-sc-group-scheme]. Let v,w be points over S[epsilon] reducing to the identity [def-sc-dual-numbers]. For every open U of G put R=Gamma(U,O_G), and let D_v,D_w be the epsilon coefficients of right translation by v,w on R. Write a double dual number as (a00+epsilon a10)+delta(a01+epsilon a11). Define E_D to send its four coefficients to (a00,a10+D(a00),a01,a11+D(a01)), and F_D to send them to (a00,a10,a01+D(a00),a11+D(a10)). For z=v_epsilon w_delta v_epsilon^{-1} w_delta^{-1}, right translation of the universal G-point by z has, on every constant section a of R, comorphism E_{D_v}(F_{D_w}(E_{-D_v}(F_{-D_w}(a)))). This is equality in R[epsilon][delta], before mixed-coefficient extraction. The translation is the explicit product of the universal point and z pulled back along G[epsilon][delta] to S[epsilon][delta]. No affine, field, characteristic, or smoothness hypothesis is needed.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "place": "Lie-ring obligation docstrings, invariant-extension and mixed-coefficient steps (blueprint sk-d-tangent)."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Base change right translation by v to the double dual-number thickening. Its reduction is the identity and its epsilon coefficient on constants is D_v by construction. Being over the parameter scheme it fixes epsilon and delta, hence on four components it is the explicit epsilonSectionAction. Similarly translation by w is deltaSectionAction. The inverse operators use -D_v and -D_w, since epsilon squared and delta squared are zero.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Associativity of the group law identifies right translation by v_epsilon w_delta v_epsilon^{-1} w_delta^{-1} with successive right translations by the four factors. Contravariance orders their section operators with epsilonSectionAction D_v outermost. All underlying maps are identity since v and w reduce to the identity. Apply the composite to the constant section a on any open U. This proves the full double-dual-number section equality; no mixed coefficient is extracted.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E4 worker",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "place": "Lie-ring obligation docstrings, invariant-extension and mixed-coefficient steps (blueprint sk-d-tangent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The comorphism of right translation by an infinitesimal group scheme point acts coefficientwise on two independent dual number parameters",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On functions right translation by a two parameter infinitesimal commutator is composition of one plus epsilon D one plus delta E one minus epsilon D one minus delta E",
+   "results": "LeftInvariantDerivation commutator and invariance lemmas for manifolds; no scheme coefficientwise pullback identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "infinitesimal.*translation|translation.*infinitesimal",
+   "results": "Mathlib search: 0 hits. Project search: InvariantCoefficients gives the one-parameter definition, not this double-parameter section identity. Blueprint translation nodes concern ordinary rational points over a field.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback on regular functions for group scheme multiplication infinitesimal base change square zero extension",
+   "results": "Second reader: group-object pullback instances and multiplication formulas in Mathlib.AlgebraicGeometry.Pullbacks; no coefficientwise section-map identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TrivSqZeroExt, RingHom",
+   "results": "Second reader: inlHom, inlHom_apply, and algebraMap inclusion lemmas. These provide square-zero algebra, not the translation section-map identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualNumbers.*(app|map)|commutator.*(section|pullback)",
+   "results": "Second reader: Mathlib search returned zero hits. Local searches of GroupScheme.Basic, Lie.InfPoints, DiagonalDerivationCoefficients, and InvariantCoefficients found no full four-operator identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GroupScheme.MixedTranslationCoefficients",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Invariant-extension and mixed-commutator paragraph: describe the four section operators before extracting the mixed coefficient.",
+   "via": [
+    "lem-ag-mixed-translation-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TwoParameterTranslationAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TwoParameterTranslationAction.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.twoParameterRightTranslation_commutator_app",
+  "declarations": [
+   "AlgebraicGeometry.GrpObj.twoParameterRightTranslation",
+   "AlgebraicGeometry.GrpObj.epsilonSectionAction",
+   "AlgebraicGeometry.GrpObj.deltaSectionAction",
+   "AlgebraicGeometry.GrpObj.twoParameterRightTranslation_commutator_app"
+  ],
+  "statement": "theorem twoParameterRightTranslation_commutator_app\n    (v w : infPoints G) (U : G.left.Opens)\n    (e : U ≤ (twoParameterRightTranslation G\n      ((Scheme.dualNumbersProjεOver S ≫ v.1) * (Scheme.dualNumbersProjδOver S ≫ w.1) *\n        (Scheme.dualNumbersProjεOver S ≫ v.1)⁻¹ *\n          (Scheme.dualNumbersProjδOver S ≫ w.1)⁻¹)) ⁻¹ᵁ U)\n    (a : Γ(G.left, U)) :\n    (twoParameterRightTranslation G\n      ((Scheme.dualNumbersProjεOver S ≫ v.1) * (Scheme.dualNumbersProjδOver S ≫ w.1) *\n        (Scheme.dualNumbersProjεOver S ≫ v.1)⁻¹ *\n          (Scheme.dualNumbersProjδOver S ≫ w.1)⁻¹)).appLE U U e a =\n      epsilonSectionAction (invariantCoefficient G v U)\n        (deltaSectionAction (invariantCoefficient G w U)\n          (epsilonSectionAction (-invariantCoefficient G v U)\n            (deltaSectionAction (-invariantCoefficient G w U) (inl (inl a)))))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T095945-L-2456151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T095945-L-2456151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
