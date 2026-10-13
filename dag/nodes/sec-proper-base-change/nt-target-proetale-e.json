@@ -18,22 +18,108 @@
   "commit": "b26b15768858de9275b5b0f39420241c76652bfa"
  },
  "stmt_deps": [
-  "thm-weil-pbc-finite-extension",
-  "thm-weil-pbc-complete-proetale",
-  "thm-weil-pbc-finite-level-proetale",
-  "prop-weil-proet-finite-proper-base-change"
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For the four given separated finite-type $k$-schemes apply [lem-weil-pbc-condensed-e-realization]. Its hypotheses are exactly the prime $\\ell$, finite normed extension $E$, positive prime characteristic unequal to $\\ell$, and the stated scheme conditions. Obtain the equivalences $J_X,J_Y,J_{X'},J_{Y'}$, their essential surjectivity, and comparisons of the four pullbacks and direct images. In particular the source and target functors in [def-weil-pbc-condensed-e-module-category] restrict to the bounded constructible categories actually used by the archived declaration; the integral rationalized categories are not being identified with them by notation.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+    "place": "isIso_boundedConstructibleBaseChange_of_isProper; reduction described in the module docstring, realized via Bhatt–Scholze 6.8.14(2) and 6.8.15"
+   }
+  },
+  {
+   "text": "Apply [thm-weil-pbc-finite-extension] to this cartesian square with $f$ proper and an arbitrary object $M$ in its rationalized source category. It gives invertibility of the rational exchange $e_M:Lg_{\\mathrm{rat}}^*Rf_{\\mathrm{rat},*}M\\to Rf'_{\\mathrm{rat},*}Lg_{\\mathrm{rat}}'^*M$. These are exactly the rational functors appearing in the realization comparison, rather than the condensed-module functors presumed equal to them. No restriction on $g$ is used.",
+   "uses": [
+    "thm-weil-pbc-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+    "place": "isIso_boundedConstructibleBaseChange_of_isProper; reduction described in the module docstring, realized via Bhatt–Scholze 6.8.14(2) and 6.8.15"
+   }
+  },
+  {
+   "text": "The final clause of [lem-weil-pbc-condensed-e-realization] identifies the specified rationalized completed exchange with the adjunction mate; this is a substantive comparison input, rather than an inference from equivalence of categories alone. Identify the morphism, not just its endpoints. The archived map is the three-step composite in [def-weil-pbc-condensed-e-module-category]. Under the comparisons of [lem-weil-pbc-condensed-e-realization], its first factor is the image of the rational unit at $Lg_{\\mathrm{rat}}^*Rf_{\\mathrm{rat},*}M$, its middle factor is the image of the pullback-composition comparison for $f\\circ g'=g\\circ f'$, and its last factor is the image of the rational counit at $M$, whiskered by $Rf'_{\\mathrm{rat},*}Lg_{\\mathrm{rat}}'^*$. Preservation of composition by $J_{Y'}$ now gives $\\mathrm{BC}_{J_XM}=b_M\\circ J_{Y'}(e_M)\\circ a_M^{-1}$, where $a_M:J_{Y'}Lg_{\\mathrm{rat}}^*Rf_{\\mathrm{rat},*}M\\xrightarrow{\\sim}Lg_c^*Rf_{c,*}J_XM$ and $b_M:J_{Y'}Rf'_{\\mathrm{rat},*}Lg_{\\mathrm{rat}}'^*M\\xrightarrow{\\sim}Rf'_{c,*}Lg_c'^*J_XM$ are the comparison composites. Cancellation of adjacent comparison inverses in the unit, square and counit factors is the asserted equality.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-condensed-e-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+    "place": "isIso_boundedConstructibleBaseChange_of_isProper; reduction described in the module docstring, realized via Bhatt–Scholze 6.8.14(2) and 6.8.15"
+   }
+  },
+  {
+   "text": "The component at $J_XM$ has inverse $a_M\\circ J_{Y'}(e_M^{-1})\\circ b_M^{-1}$; functoriality and the two inverse identities for $e_M$ verify both composites are identities. For arbitrary $K$ choose $u:J_XM\\xrightarrow{\\sim}K$ using essential surjectivity from [lem-weil-pbc-condensed-e-realization]. Naturality gives $\\mathrm{BC}_K=B(u)\\circ\\mathrm{BC}_{J_XM}\\circ A(u)^{-1}$ for the two endpoint functors $A=Lg_c^*Rf_{c,*}$ and $B=Rf'_{c,*}Lg_c'^*$, so every component is invertible. The component inverses form a natural transformation: $B(v)\\mathrm{BC}_K=\\mathrm{BC}_{K'}A(v)$ implies $A(v)\\mathrm{BC}_K^{-1}=\\mathrm{BC}_{K'}^{-1}B(v)$ by composing with inverses on both sides. They therefore give an inverse to the specified natural transformation, proving the exact functor isomorphism required.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+    "place": "isIso_boundedConstructibleBaseChange_of_isProper; reduction described in the module docstring, realized via Bhatt–Scholze 6.8.14(2) and 6.8.15"
+   }
+  }
+ ],
  "proof_deps": [
-  "thm-weil-pbc-finite-extension",
-  "thm-weil-pbc-complete-proetale",
-  "thm-weil-pbc-finite-level-proetale",
-  "prop-weil-proet-finite-proper-base-change"
+  "lem-weil-pbc-condensed-e-realization",
+  "def-weil-pbc-condensed-e-module-category",
+  "thm-weil-pbc-finite-extension"
  ],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+  "place": "Module docstring reduction to integral/torsion coefficients, with the realization comparison made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change for bounded constructible pro-etale sheaves over a finite extension of the l-adic numbers",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proper direct image commutes with arbitrary base change for constructible complexes over Q_l",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, CategoryTheory.ExponentiableMorphism.comp_pushforward, AlgebraicGeometry.Scheme.Hom.isConstructible_image, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp', CategoryTheory.ExponentiableMorphism.pushforwardComp",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, \"baseChange\"",
+   "results": "6 hits: CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, CategoryTheory.TwoSquare.isIso_ranBaseChange_app, CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff, CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper_base_change|boundedConstructible|Dcons",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for constructible l-adic sheaves",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "launcher",
@@ -54,5 +140,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "nt-target-proetale-e",
+  "worker": "stage1",
+  "summary": "Preserved the exact archived statement and separated the condensed-module category from the seeded rationalized integral theorem. Added a definition and a realization comparison, used the existing finite-extension theorem, expanded the unit-square-counit identification, and constructed the componentwise and natural inverse. The realization bridge is stated as a genuine open lemma and includes the exact local-finite-presentation criterion.",
+  "blueprint": "Realizes the finite-extension blueprint proof paragraph, integral lattice plus rationalization, at the archived condensed E-coefficient target; all integral and finite-level proper-base-change work remains under the existing theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-be950a88c",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-be950a88c (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, master coefficient/category/map definitions, and Bhatt–Scholze source locations. All four proof steps are correctly typed; target hypotheses are preserved. The realization and completed-map comparisons are explicit unsplit obligations, not silently inferred from the seeded route. No delivery-specific repairs needed. Concrete checks and inherited DAG issues are recorded in review.md."
  }
 }
