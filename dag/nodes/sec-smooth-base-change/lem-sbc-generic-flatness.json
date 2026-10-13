@@ -14,21 +14,23 @@
  ],
  "proof": [
   {
-   "text": "Replace the integral base by a nonempty affine open Spec(A), where A is a domain. Quasi-compactness gives a finite affine cover Spec(B_i) of its inverse image. The coordinate A-algebras B_i are finite type. It suffices to invert one nonzero element of A making each B_i flat over A, since flatness is local on the source.",
+   "text": "Choose a point of the nonempty integral base and an affine-cover open V containing it. The open subscheme V is affine and integral. Restrict f to V; local finite type and quasi-compactness are preserved. The inverse image of V is quasi-compact because V is affine, so its affine cover has a finite subcover.",
    "uses": [
-    "def-weil-finite-type-morphism",
-    "def-weil-flat-morphism",
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the affine-chart lemma to each component of the finite affine source cover, obtaining nonzero sections a_i of the affine base and flatness over D(a_i). Each D(a_i) is nonempty because the integral base is reduced and a_i is nonzero; hence each contains its generic point. The finite intersection U of these basic opens is open and contains that generic point, including when the index set is empty.",
+   "uses": [
+    "lem-sbc-affine-chart-generic-flatness",
     "def-pc-integral-scheme"
    ],
    "elementary": true
   },
   {
-   "text": "For each B_i choose a surjection from a finite-variable polynomial A-algebra P. Let K be the fraction field of A. The ideal of relations after tensoring with K is finitely generated since K[t_1,...,t_n] is Noetherian. Lift finitely many generators to the relation ideal over A, and form the finitely presented quotient B_i_prime by these lifted relations. It surjects onto B_i and becomes isomorphic to it over K. Spread this finitely presented algebra to the subring A_0 of A generated over the integers by its finitely many coefficients. A_0 is a Noetherian domain. Apply Noetherian generic freeness to its finite type polynomial presentation, then base change to A: after inverting a nonzero a_i, B_i_prime is free as an A_{a_i}-module. The kernel of its surjection onto (B_i)_{a_i} becomes zero over K. A free module over a domain injects into its fraction-field extension, so this kernel is zero. Thus (B_i)_{a_i} is free and hence flat over A_{a_i}. This is the finite type algebra case of Tag 051T, including the finite-presentation descent argument of Tag 051S.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Invert the product a of the finitely many a_i. It is nonzero, so D(a) is a nonempty open in Spec(A), and hence an open in S. Localization preserves flatness, so all finitely many affine source charts over D(a) are flat. Flatness is local on the source, giving the desired restricted morphism. For an empty source cover the product is 1 and the assertion is vacuous.",
+   "text": "Restrict each flat chart further from D(a_i) to U, using the canonical isomorphism for nested restrictions. Pull back the finite source cover along the inclusion of f^{-1}(U). The pullback-symmetry and restriction isomorphisms identify its component maps with the restricted flat chart maps. Flatness is local at the source, so f restricted to U is flat. Finally push U into S along V.ι; its image is nonempty, and morphismRestrictRestrict transports flatness to the restriction of the original f to that image.",
    "uses": [
     "def-weil-flat-morphism"
    ],
@@ -36,15 +38,16 @@
   }
  ],
  "proof_deps": [
+  "def-pc-integral-scheme",
   "def-weil-finite-type-morphism",
   "def-weil-flat-morphism",
-  "def-pc-integral-scheme"
+  "lem-sbc-affine-chart-generic-flatness"
  ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Tag 052A, affine finite-cover argument, and Tag 051T, generic freeness proof",
-  "note": "Only flatness of the structure morphism is asserted, not the additional finite-presentation or coherent-module clauses."
+  "place": "Tag 052A, affine finite-cover argument; Tag 051T through lem-sbc-finite-type-algebra-generic-flatness",
+  "note": "The Lean proof uses a finite intersection of basic opens instead of their product and proves all geometric reduction and gluing steps. Only the coordinate-algebra generic-flatness step remains as a named theorem."
  },
  "mathlib_searches": [
   {
@@ -116,12 +119,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261012T232905-L-2043814",
+  "landing": "20261013T011929-L-2763998",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

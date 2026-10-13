@@ -1,0 +1,133 @@
+{
+ "id": "lem-sbc-affine-chart-generic-flatness",
+ "kind": "statement",
+ "title": "Generic flatness on one affine source chart",
+ "statement": "Let X and S be affine schemes [def-weil-affine-spectrum], let S be integral [def-pc-integral-scheme], and let f : X → S be locally of finite type [def-weil-finite-type-morphism]. There exists a nonzero global section a ∈ Γ(S, O_S) such that the restriction f^{-1}(D(a)) → D(a) is flat [def-weil-flat-morphism].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 052A, applying Tag 051T to the coordinate algebra of one affine source chart"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The global-section ring of S is a domain. The global-section map φ = f.appTop is finite type. Apply the algebraic generic-flatness statement to obtain a nonzero a and flatness of R → B → T for every localization T of B at φ(a).",
+   "uses": [
+    "lem-sbc-finite-type-algebra-generic-flatness",
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let V be the basic open D(φ(a)) of X. Mathlib Γ_restrict_isLocalization identifies Γ(V, top) as a localization of B at φ(a). The affine criterion HasRingHomProperty.iff_of_isAffine therefore proves Flat (V.ι ≫ f).",
+   "uses": [
+    "lem-sbc-finite-type-algebra-generic-flatness",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Scheme.preimage_basicOpen identifies V with f^{-1}(D(a)). The equality morphismRestrict_ι expresses V.ι ≫ f as the restricted morphism followed by D(a).ι. Flatness cancels the open immersion at the target via MorphismProperty.of_postcomp.",
+   "uses": [
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "lem-sbc-finite-type-algebra-generic-flatness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 052A, applying Tag 051T to the coordinate algebra of one affine source chart"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism between affine schemes with integral target is flat over a nonzero basic open of the target",
+   "results": "8 hits: AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Scheme.Hom.isIntegral_app, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.IsIntegralHom.isIntegral_app",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type morphism between affine schemes with integral target is flat over a nonzero basic open of the target",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*flat|exists.*nonzero.*flat|generic.*free",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFlatness",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: spreading the generic-fibre closed cover after generic flatness; Tag 052A, applying Tag 051T to the coordinate algebra of one affine source chart",
+   "via": [
+    "lem-sbc-generic-flatness",
+    "lem-sbc-generic-fibre-closed-cover-spread",
+    "lem-sbc-generic-fibre-component-spread",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineGenericFlatness",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGenericFlatness.lean",
+  "declaration": "AlgebraicGeometry.exists_nonzero_flat_restrict_basicOpen",
+  "statement": "theorem exists_nonzero_flat_restrict_basicOpen {X S : Scheme.{u}}\n    [IsAffine X] [IsAffine S] [IsIntegral S] (f : X ⟶ S) [LocallyOfFiniteType f] :\n    ∃ a : Γ(S, ⊤), a ≠ 0 ∧ Flat (f ∣_ S.basicOpen a)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T011929-L-2763998",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T011929-L-2763998",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
