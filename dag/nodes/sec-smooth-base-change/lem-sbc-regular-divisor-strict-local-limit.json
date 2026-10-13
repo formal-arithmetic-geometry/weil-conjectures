@@ -13,18 +13,50 @@
  ],
  "proof": [
   {
-   "text": "Proof: Localize R at y, choose a separable closure of its residue field, and\nform its strict henselization H as the filtered colimit of pointed etale\nneighbourhood algebras. Its structural map from R is ind-etale (localization\nis ind-etale, and so is this filtered etale colimit). H is strictly henselian\nlocal, and the contraction of its maximal ideal is y; take x to be its\nclosed point. The local ring of R at y is regular, so H is regular local\nby Tag 06LN. Flatness of R to H preserves injective multiplication by g.\nBecause g belongs to y, its image lies in the maximal ideal of H. The\nquotient H/(g) is the strict henselization of the localization of R/(g)\nat the image of y (Tag 05WS); it is regular local by Tag 06LN. These\nconstructions all stay in the universe of R using small representatives.",
-   "uses": [],
+   "text": "Take Ω to be the algebraic closure of κ(y), and barY to be its canonical geometric point of Spec R. Let H be the existing canonical pointed-neighbourhood colimit strictHenselizationRing barY. Apply strictHenselizationResidue, the residue clause of lem-weil-pbc-strict-henselization-functoriality, to obtain strict henselianity and the closed-point image. Take b to be the ring map recovered by full faithfulness of Spec from the canonical structural morphism. Spec.map b equals that morphism.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply strictHenselization_indEtale_of_affine_chart to the identity affine chart and identity presentation of Spec H. This proves b is ind-etale over R. The closed-point image is y; taking the asIdeal of this equality identifies contraction of the maximal ideal with y. Thus b(g) belongs to the maximal ideal, hence is not a unit.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strictHenselization_regular_divisor_quotient to g. It supplies regularity and a domain structure for H/(b(g)). A nonzero quotient of a local ring is local, so Mathlib IsLocalRing.of_surjective' and IsRegularLocalRing.of_isRegularRing_of_isLocalRing make this quotient regular local.",
+   "uses": [
+    "lem-sbc-strict-hensel-regular-divisor-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply that same comparison to 0: its hypotheses do not require a nonzerodivisor. Transport regularity of R to R/(0) using RingEquiv.quotientBot and Ideal.quotEquivOfEq. The image of zero is not a unit because H is nonzero. The comparison yields regularity of H/(0), which transports back to H. Since H is local, IsRegularLocalRing.of_isRegularRing_of_isLocalRing gives ambient regular locality.",
+   "uses": [
+    "lem-sbc-strict-hensel-regular-divisor-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give H the algebra structure induced by b. Ind-etaleness implies weak etaleness, hence flatness, by the upstream proved instance Algebra.IndEtale.weaklyEtale. Mathlib IsSMulRegular.of_flat transports the supplied injective multiplication by g. Assemble the preceding properties with the closed point of H. These are direct applications of existing instances and the flat base-change lemma.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-strict-hensel-regular-divisor-quotient",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "group": "S3",
+  "by": "worker",
+  "group": "D4",
   "document": "Stacks Project",
   "place": "Tag 0EYG, strict henselization paragraph; Tags 04GP, 04HX, 06LN and 05WS",
-  "note": "Specialization of the sourced argument; the scheme and cyclic-action glue is written out in the docstring."
+  "note": "Lean assembly using the existing canonical strict henselization, its affine-chart ind-etale lemma, and the existing regular quotient comparison twice (g and 0). The zero-quotient specialization and transport are written out by D4."
  },
  "mathlib_searches": [
   {
@@ -97,10 +129,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T145729-L-752344",
-  "kind": "interface",
+  "landing": "20261013T152438-L-991481",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
