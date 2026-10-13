@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.AffineSectionsFiniteTorOfStalkwise
+import Sheaf.AlgebraicGeometry.AffineSectionsTorBoundStalk
 
 /-! # Uniform stalk Tor bounds near a point
 
@@ -49,6 +51,14 @@ theorem stalkTorDimension_locally_uniform
         ∀ j : ℕ, d < j →
           IsZero (((Tor' (ModuleCat.{u} (Y.presheaf.stalk (f y))) j).obj
             ((ModuleCat.restrictScalars (f.stalkMap y).hom).obj
-              (ModuleCat.of (X.presheaf.stalk y) (X.presheaf.stalk y)))).obj M) := by sorry
+              (ModuleCat.of (X.presheaf.stalk y) (X.presheaf.stalk y)))).obj M) := by
+  intro x
+  obtain ⟨U, hU, hxU, _⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := Y) (x := f x) (U := ⊤) (by trivial)
+  obtain ⟨V, hV, hxV, e⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := X) (x := x) (U := f ⁻¹ᵁ U) hxU
+  obtain ⟨d, hd⟩ := affineSections_finiteTorDimension_of_stalkwise f hperfect U hU V hV e
+  refine ⟨V, hxV, d, ?_⟩
+  exact affineSections_torBound_stalk f U hU V hV e d hd
 
 end AlgebraicGeometry

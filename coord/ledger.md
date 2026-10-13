@@ -11525,3 +11525,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/G2/Sheaf.Algebra.Homology.FlatBaseDerivedTensorComparison (stage 3; reviewer PASS; after a return; landing 20261013T072349-L-1119368 (interface); batch 20261013T072335; modules 3; new nodes 2)
 - 07:23 L: merged deliver/G4/Sheaf.Paper.AffineOpenSectionsCanonicalColimitCore (stage 3; reviewer PASS; first push; landing 20261013T072349-L-1119523 (interface); batch 20261013T072335; modules 3; new nodes 2)
 - 07:23 L: merged deliver/H1/Sheaf.AlgebraicGeometry.LinearCechSheafConstruction (stage 3; reviewer PASS; after a return; landing 20261013T072350-L-1119724 (proof); batch 20261013T072335; modules 1; new nodes 0)
+- 07:23 L: merged deliver/H1/Sheaf.AlgebraicGeometry.StalkTorDimensionLocallyUniform (stage 3; reviewer PASS; first push; landing 20261013T072350-L-1119937 (interface); batch 20261013T072335; modules 3; new nodes 2)

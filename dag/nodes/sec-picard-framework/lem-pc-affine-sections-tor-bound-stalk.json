@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-affine-sections-tor-bound-stalk",
+ "kind": "statement",
+ "title": "An affine coordinate Tor bound is preserved at source and target stalks",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], and let $U\\subseteq Y$, $V\\subseteq X$ be affine opens with $V\\subseteq f^{-1}(U)$. Set $A=\\Gamma(U,\\mathcal O_Y)$ and $B=\\Gamma(V,\\mathcal O_X)$ with the induced map $A\\to B$. Fix $d\\in\\mathbf N$ and assume $\\operatorname{Tor}^A_j(B,N)=0$ for every $A$-module $N$ and every $j>d$. Then for every $y\\in V$, every $\\mathcal O_{Y,f(y)}$-module $M$ and every $j>d$, one has $\\operatorname{Tor}^{\\mathcal O_{Y,f(y)}}_j(\\mathcal O_{X,y},M)=0$, using the stalk homomorphism of $f$. No Noetherian or finite type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B67, lemma-tor-amplitude-localization, (1) implies (2), for B in degree zero; used in Tag 069C, lemma-check-perfect-stalks, (1) implies (2); https://stacks.math.columbia.edu/tag/0B67"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "write A = Γ(Y,U), B = Γ(X,V), and φ = f.appLE U V e. For y in V, let q be the prime of B corresponding to y and p its inverse image in A. The affine stalk isomorphisms identify the given stalk homomorphism with A_p to B_q; compatibility follows by composing the section-to-germ maps with φ. For any A_p-module M, restrict scalars to A. A projective A-resolution of B computes the Tor' groups in the hypothesis. Localizing this resolution at p is exact and gives a projective A_p-resolution of B tensor_A A_p. Its tensor with M agrees with the original resolution tensor_A M. Consequently these Tor groups vanish above d. To localize in the B variable at q, compute the same Tor groups instead with an A_p-projective resolution of M, using balancedness of Tor. Tensoring it with B tensor_A A_p gives a complex of B-modules. Localizing that complex at q is exact, commutes with homology, and replaces B tensor_A A_p by B_q. It therefore gives Tor_j over A_p of B_q and M equal to the localization of the already zero group. Transport across the affine stalk isomorphisms to obtain precisely the stated Tor' object with f.stalkMap y. No finite type or Noetherian hypothesis is needed. For V empty there is no y; for d = 0 this is the preservation of flatness under these localizations.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, lemma-tor-amplitude-localization, (1) implies (2), for B in degree zero; used in Tag 069C, lemma-check-perfect-stalks, (1) implies (2); https://stacks.math.columbia.edu/tag/0B67"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B67, lemma-tor-amplitude-localization, (1) implies (2), for B in degree zero; used in Tag 069C, lemma-check-perfect-stalks, (1) implies (2); https://stacks.math.columbia.edu/tag/0B67; source read online; argument expanded into the docstring by H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization preserves a fixed upper bound on Tor groups of an algebra over a commutative ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization preserves a fixed upper bound on Tor groups of an algebra over a commutative ring",
+   "results": "8 hits: CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, Rep.isZero_Tor_succ_of_projective, Module.free_of_lTensor_residueField_injective, exact_of_isLocalized_span, Module.flat_of_isLocalized_span, Module.mem_freeLocus_iff_tensor, CategoryTheory.HasProjectiveDimensionLT.mk",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\x27\\b|TorDimension|tor.dimension",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkTorDimensionLocallyUniform",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Relative finite Tor part of the proper perfect pushforward argument descending from lem-sc-finite-duality; step 1 of lem-pc-perfect-relative-tensor-locally-bounded (Tag 069C, stalkwise finite Tor dimension to a uniform neighbourhood bound). Step 2 of lem-pc-stalk-tor-dimension-locally-uniform: localization at source and image primes preserves the same Tor bound.",
+   "via": [
+    "lem-pc-stalk-tor-dimension-locally-uniform",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSectionsTorBoundStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSectionsTorBoundStalk.lean",
+  "declaration": "AlgebraicGeometry.affineSections_torBound_stalk",
+  "statement": "theorem affineSections_torBound_stalk\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (U : Y.Opens) (hU : IsAffineOpen U)\n    (V : X.Opens) (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U)\n    (d : ℕ)\n    (hbound : ∀ M : ModuleCat.{u} Γ(Y, U), ∀ j : ℕ, d < j →\n      IsZero (((Tor' (ModuleCat.{u} Γ(Y, U)) j).obj\n        ((ModuleCat.restrictScalars (f.appLE U V e).hom).obj\n          (ModuleCat.of Γ(X, V) Γ(X, V)))).obj M)) :\n    ∀ y : X, y ∈ V → ∀ M : ModuleCat.{u} (Y.presheaf.stalk (f y)),\n      ∀ j : ℕ, d < j →\n        IsZero (((Tor' (ModuleCat.{u} (Y.presheaf.stalk (f y))) j).obj\n          ((ModuleCat.restrictScalars (f.stalkMap y).hom).obj\n            (ModuleCat.of (X.presheaf.stalk y) (X.presheaf.stalk y)))).obj M)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T072350-L-1119937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T072350-L-1119937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

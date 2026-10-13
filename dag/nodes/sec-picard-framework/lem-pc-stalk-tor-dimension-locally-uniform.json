@@ -14,33 +14,28 @@
  ],
  "proof": [
   {
-   "text": "Around the point choose affine source and target neighbourhoods with source algebra B of finite type over the Noetherian target algebra A. Present B as a quotient of a finite polynomial algebra over A. Noetherianity makes B pseudo-coherent over this polynomial algebra. Use the stalkwise finite Tor hypothesis at primes of B. At polynomial primes not meeting the support the localized B-module is zero; at all others its Tor dimension over the corresponding A-localization is finite. Polynomial fibres have finite global dimension, so the localized B-modules are perfect over the localized polynomial algebras. The local criterion for pseudo-coherent modules yields a perfect polynomial module, hence a perfect ring map A to B. This is Tag 069C, implication (3) to (1).",
+   "text": "For x choose an affine target open U containing f(x). Choose an affine source open V containing x inside the preimage of U, using Mathlib exists_isAffineOpen_mem_and_subset twice. Apply affineSections_finiteTorDimension_of_stalkwise to the actual section map f.appLE U V e to obtain a finite Tor bound d for the coordinate algebra.",
    "uses": [
-    "def-pc-perfect-morphism"
+    "lem-pc-affine-sections-finite-tor-of-stalkwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 069C, lemma-check-perfect-stalks, implication (3) to (2) and (1) to (2); Cohomology Tag 09U9; https://stacks.math.columbia.edu/tag/069C"
-   }
+   "elementary": false
   },
   {
-   "text": "A perfect ring map gives a finite Tor bound d for B over A. Localizing at source and image primes preserves this bound. Thus every stalk in the chosen affine source neighbourhood has the same Tor vanishing above d for all target-stalk modules. This is Tag 069C, implication (1) to (2), or its stalk formulation via Tag 09U9. There is no point to check on an empty scheme; no finite cover of the entire source is used.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 069C, lemma-check-perfect-stalks, implication (3) to (2) and (1) to (2); Cohomology Tag 09U9; https://stacks.math.columbia.edu/tag/069C"
-   }
+   "text": "Apply affineSections_torBound_stalk with this same d and coordinate bound. It gives vanishing for every y in V and every target-stalk test module above d. Use V and its membership proof at x as the neighbourhood witnesses. No finite subcover of X is used.",
+   "uses": [
+    "lem-pc-affine-sections-tor-bound-stalk"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-morphism"
+  "lem-pc-affine-sections-finite-tor-of-stalkwise",
+  "lem-pc-affine-sections-tor-bound-stalk"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 069C, lemma-check-perfect-stalks, implication (3) to (2) and (1) to (2); Cohomology Tag 09U9; https://stacks.math.columbia.edu/tag/069C; source checked online; proof expanded by B3"
+  "place": "Tag 069C, lemma-check-perfect-stalks, (3) implies (1) and (1) implies (2); the original route split into coordinate Tor dimension and fixed-bound localization; Lean assembly by H1."
  },
  "mathlib_searches": [
   {
@@ -114,9 +109,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T045513-L-124618",
+  "landing": "20261013T072350-L-1119937",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
