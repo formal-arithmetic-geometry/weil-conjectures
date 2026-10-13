@@ -21,71 +21,33 @@
  },
  "proof": [
   {
-   "text": "On affine Koszul charts identify the closed preimage with Spec(A/I) and resolve its pushforward by the bounded finite free Koszul resolution. Only charts meeting Z are needed, since the conclusion is on Z.",
+   "text": "For the clopen rank-q stratum V, use hr and membership in V to compute the conormal finrank as q.toNat. Apply the constant-rank top Ext comparison with the restriction of hregular to V. Nonnegativity identifies the integer degree q.toNat with q.",
    "uses": [
-    "lem-sc-koszul-regular-closed-immersion-perfect"
+    "lem-sc-koszul-ext-constant-rank-top"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
-   }
+   "elementary": false
   },
   {
-   "text": "Restrict derived internal Hom to a chart and compute it by the bounded finite free Hom model into the structure sheaf in degree zero. Identify sheaf Hom of finite free associated modules with the associated module Hom complex. Extend the natural-index Koszul complexes by zero to integer degrees.",
+   "text": "The rank-support theorem identifies the whole pulled-back Ext sheaf with the pushforward of its restriction to V, via the open adjunction unit. Push forward the top-degree determinant isomorphism from the first step and compose with this support isomorphism. Unfold locallyRankedExteriorTerm in the nonnegative case to identify the result with the unchanged conclusion.",
    "uses": [
-    "lem-sc-derived-hom-finite-free-model",
-    "lem-sc-derived-internal-hom-restrict-open"
+    "lem-sc-koszul-ext-rank-support"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
-   }
-  },
-  {
-   "text": "Apply the canonical affine dual-Koszul comparison: the homology in degree q vanishes unless q is the length of the regular sequence, and in that degree it is the determinant of the conormal dual. The Koszul conormal basis localizes to a basis at points of Z, so hr identifies this length with the rank function. Shrink to its constant-rank neighborhood. The quotient-spectrum conormal identification identifies the algebraic I/I² with i*I and the affine determinant with the specified exterior sheaf. Pullback AFTER taking cohomology tensors the resulting A/I-module with A/I, canonically leaving it unchanged; no derived base-change assertion is made.",
-   "uses": [
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-sc-koszul-conormal-basis",
-    "lem-sc-affine-conormal-frame"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
-   }
-  },
-  {
-   "text": "The normalized local comparisons and inverses commute with localization and change of regular generators. Refine overlaps by affine standard opens and glue on Z by the sheaf condition. The rank-q stratum formula agrees with locallyRankedExteriorTerm. Empty source, rank zero, and empty rank strata satisfy the formula. No reconstruction on Y is asserted.",
-   "uses": [
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-sc-derived-internal-hom-restrict-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-koszul-regular-closed-immersion-perfect",
-  "lem-sc-derived-hom-finite-free-model",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-koszul-regular-sequence-dual-complex",
-  "lem-sc-koszul-conormal-basis",
-  "lem-sc-affine-conormal-frame"
+  "lem-sc-koszul-ext-constant-rank-top",
+  "lem-sc-koszul-ext-rank-support"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "F1",
+  "by": "agent",
+  "agent": "A2",
   "date": "2026-10-13",
   "based_on": {
    "document": "literature/stacks-project/duality.tex",
-   "place": "Tag 0BQZ, Lemma 48.15.5; Tag 0BUZ, Lemma 48.11.1"
+   "place": "Tag 0BQZ, lemma-regular-immersion-ext, Koszul cohomology calculation and local comparison"
   },
-  "note": "Part of scalar Ext comparison, with ideal action separated from the conormal calculation."
+  "note": "Koszul calculation follows the cited source; rank-support reconstruction is written explicitly using the open adjunction and stalks."
  },
  "mathlib_searches": [
   {
@@ -156,9 +118,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T031536-L-3570063",
-  "kind": "interface"
+  "landing": "20261013T045510-L-123855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

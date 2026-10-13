@@ -1,0 +1,164 @@
+{
+ "id": "lem-sc-koszul-ext-constant-rank-top",
+ "kind": "statement",
+ "title": "Top Koszul Ext on a constant-rank open",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], let $\\mathcal I$ be its kernel ideal sheaf [def-sbc-closed-immersion-ideal-sheaf], and let $C=i^*\\mathcal I$ be its tensor pullback [def-pc-module-pullback]. Use the derived category and derived internal Hom of [def-pc-derived-category, def-pur-derived-internal-hom], and write $F^q=H^q(R\\mathcal Hom_Y(i_*\\mathcal O_Z,\\mathcal O_Y))$. Let $V\\subseteq Z$ be open and $n\\in\\mathbb N$. Assume only for $z\\in V$ that an affine neighbourhood of $i(z)$ cuts out $i$ by a finite Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence] and that $\\operatorname{finrank}_{\\mathcal O_{Z,z}}C_z=n$ [def-pc-module-stalk-functor]. Set $N=\\mathcal Hom(C,\\mathcal O_Z)$ [def-pur-sheaf-hom]. Then $(i^*F^n)|_V\\cong\\bigwedge^n(N|_V)$, for the exterior sheaf [def-sc-sheaf-exterior-power]. No hypotheses are imposed away from V; the assertion is about top cohomology only.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-pc-module-stalk-functor",
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, lemma-regular-immersion-ext, Koszul cohomology calculation and local comparison"
+ },
+ "proof": [
+  {
+   "text": "Choose an affine Koszul chart at the point, set A to its section ring and I to the kernel ideal. The closed immersion gives the quotient-spectrum identification. The Koszul quotient augmentation is a quasi-isomorphism, and exact associated-module sheafification gives a finite free resolution of the restricted structure-sheaf pushforward. Terms above its length vanish by the exterior-power basis; extend the complex to integer degrees.",
+   "uses": [
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict derived internal Hom to the chart and compute it by the bounded finite free Hom model into the structure sheaf in degree zero. On standard affine opens, finite free coordinates identify sheaf Hom with associated module Hom and commute with restriction. Homology commutes with exact associated-module sheafification. Use the common K-injective Hom complex to compare the standard and supplied derived universes.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Koszul conormal basis and affine conormal frame identify the sequence length m with the finrank of C at the chosen point.",
+   "uses": [
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-affine-conormal-frame"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the open V the stalk-rank hypothesis gives m=n. The normalized dual Koszul comparison identifies degree-n cohomology with the quotient module exterior determinant of the dual conormal. Pullback is taken only after cohomology: tensoring an A/I-module with A/I preserves it canonically. The affine conormal identification turns I/I² into C on the closed preimage. The finite free coordinate formulas for internal Hom and exterior power give the specified sheaf exterior power.",
+   "uses": [
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-affine-conormal-frame",
+    "def-sc-sheaf-exterior-power",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The intrinsic Ext determinant comparisons commute with localization and changes of regular generators. Refine chart overlaps by affine standard opens. The comparisons and their inverses agree there and therefore glue by the sheaf condition on V. At n=0 the empty complex computes the structure sheaf, the zeroth exterior power; on empty V both sheaves are zero.",
+   "uses": [
+    "lem-sc-koszul-regular-sequence-dual-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-koszul-regular-sequence-dual-complex",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-affine-conormal-frame",
+  "def-sc-sheaf-exterior-power",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "A2",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Tag 0BQZ, lemma-regular-immersion-ext, Koszul cohomology calculation and local comparison"
+  },
+  "note": "Koszul calculation follows the cited source; rank-support reconstruction is written explicitly using the open adjunction and stalks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On a constant rank open, top Ext of a Koszul regular closed immersion is the exterior determinant of the conormal dual",
+   "results": "UNAVAILABLE: Internal Server Error; not evidence of absence.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "top Ext Koszul regular closed immersion constant rank conormal determinant",
+   "results": "Smooth locus and cotangent rank results; no Ext comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]xt.*[Dd]eterminant|[Kk]oszul.*conormal",
+   "results": "Four incidental matches in determinant/matrix code; no Ext determinant comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtPullback",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Scalar Koszul Ext comparison: Top Koszul Ext on a constant-rank open",
+   "via": [
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulExtConstantRankTop",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulExtConstantRankTop.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_ext_constantRank_top",
+  "statement": "theorem koszulRegularImmersion_ext_constantRank_top {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (V : Z.Opens) (n : ℕ) (hregular : ∀ z : Z, z ∈ V → ∃ U : Y.affineOpens, i z ∈ U.1 ∧ ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)), Ideal.span (Set.range f) = i.ker.ideal U ∧ RingTheory.Sequence.IsKoszulRegular f) (hVrank : ∀ z : Z, z ∈ V → Module.finrank (Z.presheaf.stalk z) ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)) = n) : let F : Y.Modules := (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))), (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit Y.ringCatSheaf))) Nonempty ((Scheme.Modules.restrictFunctor V.ι).obj ((Scheme.Modules.tensorPullback i).obj F) ≅ Scheme.Modules.exteriorSheaf ((Scheme.Modules.restrictFunctor V.ι).obj (SheafOfModules.homObj (R := Z.sheaf) ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) (SheafOfModules.unit Z.ringCatSheaf))) n)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T045510-L-123855",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T045510-L-123855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

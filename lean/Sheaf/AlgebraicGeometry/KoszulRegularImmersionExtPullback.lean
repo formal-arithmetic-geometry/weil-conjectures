@@ -15,12 +15,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
-import Sheaf.RingTheory.KoszulConormalBasis
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
+import Sheaf.AlgebraicGeometry.KoszulExtRankSupport
+import Sheaf.AlgebraicGeometry.KoszulExtConstantRankTop
 
 /-! # Pullback of scalar Ext to a Koszul-regular closed subscheme
 
@@ -93,6 +89,22 @@ theorem koszulRegularImmersion_ext_pullback
       (Scheme.Modules.locallyRankedExteriorTerm
       (SheafOfModules.homObj (R := Z.sheaf)
         ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
-        (SheafOfModules.unit Z.ringCatSheaf)) r q)) := by sorry
+        (SheafOfModules.unit Z.ringCatSheaf)) r q)) := by
+  dsimp only
+  let V := Scheme.Modules.exteriorRankOpen r q.toNat
+  have hVrank : ∀ z : Z, z ∈ V →
+      Module.finrank (Z.presheaf.stalk z)
+        ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj
+          ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)) = q.toNat := by
+    intro z hz
+    exact (hr z).symm.trans hz
+  obtain ⟨e⟩ := koszulRegularImmersion_ext_constantRank_top i V q.toNat
+    (fun z _ ↦ hregular z) hVrank
+  have hs := koszulRegularImmersion_ext_rankSupport i hregular r hr hq
+  rw [Int.toNat_of_nonneg hq] at e
+  dsimp only at hs
+  refine ⟨@asIso _ _ _ _ ((Scheme.Modules.restrictAdjunction V.ι).unit.app _) hs ≪≫
+    (Scheme.Modules.pushforward V.ι).mapIso e ≪≫ ?_⟩
+  exact eqToIso (by simp only [Scheme.Modules.locallyRankedExteriorTerm, if_pos hq, V])
 
 end AlgebraicGeometry

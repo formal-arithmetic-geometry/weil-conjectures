@@ -11081,3 +11081,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: returned deliver/V3/Sheaf.CategoryTheory.ColimitSiteAbelianPairwiseEventualMatching (reviewer RETURN: (the landing tools, head 8a48de6ee) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 04:55 L: returned deliver/X3/Sheaf.AlgebraicGeometry.ArtinReesAffineComparison (reviewer RETURN: (the landing tools, head 0bbc092ea) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 04:55 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FiniteAffineCechSectionBaseChange (stage 3; reviewer PASS; first push; landing 20261013T045509-L-123673 (interface); batch 20261013T045507; modules 3; new nodes 2)
+- 04:55 L: merged deliver/A2/Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtPullback (stage 3; reviewer PASS; first push; landing 20261013T045510-L-123855 (interface); batch 20261013T045507; modules 4; new nodes 3)
