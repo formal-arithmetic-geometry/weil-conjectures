@@ -12068,3 +12068,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: merged deliver/Y2/Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology (stage 3; reviewer PASS; first push; landing 20261013T100224-L-2504027 (interface); batch 20261013T095923; modules 4; new nodes 3)
 - 10:02 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AffineOpenLocalizedModel (stage 3; reviewer PASS; first push; landing 20261013T100224-L-2504251 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:02 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.DerivedOpenIntersectionMateIso (stage 3; reviewer PASS; first push; landing 20261013T100225-L-2504416 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:02 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq (stage 3; reviewer PASS; after a return; landing 20261013T100226-L-2504673 (proof); batch 20261013T095923; modules 1; new nodes 0)

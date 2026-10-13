@@ -18,27 +18,28 @@
  ],
  "proof": [
   {
-   "text": "Apply universal rank matching at h(t) for the identity and at t for h, getting local ranks r and s. The local stalk finrank calculation and scalar-extension invariance identify the source finrank with r and the target finrank with s. Use tensor-pullback composition and the associativity of base change to identify the target.",
+   "text": "Apply universal rank matching at h(t) for the identity and at t for h, getting local ranks r and s. For each local fixed-rank witness, compare tensor pullback with the ordinary left-adjoint pullback, pull the fixed-rank frame back to the inverse-image open, and use the finite-locally-free stalk finrank theorem there. The additive stalk comparison for open restriction is semilinear over the inverse open-immersion stalk-ring map, hence preserves rank and finrank. This computes the source finrank as r and the composite-base-change direct-image finrank as s. Tensor-pullback composition, pushforward composition and the adjunction unit along the associativity isomorphism identify the iterated target with that composite direct image. Reuse the existing private restriction_stalk_smul theorem from Modules.RestrictionStalkExtensionIso through a proof-only import all; do not restate it or inverse_stalkMap_germ.",
    "uses": [
     "def-sc-picard-universal-rank-match",
     "lem-sc-finite-locally-free-stalk-finrank",
-    "lem-weil-pbc-module-stalk-pullback",
     "lem-pc-module-pullback-identity-composition",
-    "def-pc-base-change"
+    "def-pc-base-change",
+    "lem-pc-open-restriction-stalk-extension-iso"
    ],
    "elementary": false
   },
   {
-   "text": "For a nonempty fibre over h(t), take x in it. The tensor product of kappa(x) and kappa(t) over kappa(h(t)) is nonzero by faithful flatness of field extensions. A prime of that tensor product yields a point y over x and t. The third clause of the two rank conditions gives rank r and rank s for the same pulled-back E at y. Pullback transports the frames, and the stalk finrank formula over the nonzero local ring gives r=s.",
+   "text": "Intersect the inverse image of the identity witness open with the h witness open. If h(t) belongs to the image of the projection X times_S T to T, choose a point x above it. Mathlib Scheme.Pullback.exists_preimage_pullback gives a point z of X times_S this intersection above the image of x in X and t. Canonical maps to the two reference fibre products and tensor-pullback composition transport both fixed-rank predicates to the same pulled-back E. Compute its stalk finrank at z twice using finiteLocallyFreeOfRank_stalk_finrank, giving r=s. Combine the source and target calculations. Reuse the existing private tensorRankComp theorem from PicardUniversalRankMatchConjunction through a proof-only import all to transport both ranks.",
    "uses": [
     "def-sc-picard-universal-rank-match",
     "lem-sc-finite-locally-free-stalk-finrank",
-    "lem-weil-pbc-module-stalk-pullback"
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sc-picard-universal-rank-match-conjunction"
    ],
    "elementary": false
   },
   {
-   "text": "For an empty fibre, properness of the projection gives an open neighbourhood of h(t) disjoint from its closed image. The direct image of either F vanishes on that open. Both the pullback and the base-changed direct image vanish on its inverse image, so both stalk finranks are zero. This avoids equating unconstrained ranks chosen on empty preimages.",
+   "text": "If h(t) does not belong to the proper projection image, its complement is an open neighbourhood. Every germ of the direct image at h(t) has a representative on a smaller open in that complement; its inverse image is empty and the module sheaf has singleton sections there by the empty-cover sheaf condition. Thus the stalk is subsingleton and its finrank is zero. Mathlib Scheme.Pullback.range_snd shows that t is outside the composite-base-change projection image as well, so its direct-image stalk also has finrank zero. The already computed local stalk finranks force r=0=s, finishing the comparison. Rank zero and empty test schemes need no additional hypotheses.",
    "uses": [
     "def-weil-proper-morphism"
    ],
@@ -48,16 +49,17 @@
  "proof_deps": [
   "def-sc-picard-universal-rank-match",
   "lem-sc-finite-locally-free-stalk-finrank",
-  "lem-weil-pbc-module-stalk-pullback",
   "lem-pc-module-pullback-identity-composition",
   "def-pc-base-change",
+  "lem-pc-open-restriction-stalk-extension-iso",
+  "lem-sc-picard-universal-rank-match-conjunction",
   "def-weil-proper-morphism"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
   "place": "local rank reduction, expanded using Tags 01C6 (local frames), 0098 (pullback stalks), and 0097 (composition); agent expansion of the original node argument",
-  "note": "Second-reader decomposition: this is only the numerical rank-comparison part."
+  "note": "Y2 complete Lean proof: pull back the fixed-rank frame before taking stalks; open-restriction semilinear rank comparison replaces the general tensor-pullback stalk formula. Nonempty fibres use Mathlib PullbackCarrier, empty fibres use the proper closed image and the sheaf condition. Repair of returned delivery: reuse the private semilinearity and composed tensor-rank helpers via import all, removing all three duplicate theorems and the now-unused Scheme.tensorComparison definition."
  },
  "mathlib_searches": [
   {
@@ -136,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-1727d",
-  "group": "V2",
+  "reviewer": "COMPILER",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261013T005859-L-2608019",
-  "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures with their nodes, verified only proof fields changed, and compiled the delivery plus its sole direct importer PicardRankMatchBaseChange; axiom probes show only standard axioms and the reported sorryAx dependencies."
+  "landing": "20261013T100226-L-2504673",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
