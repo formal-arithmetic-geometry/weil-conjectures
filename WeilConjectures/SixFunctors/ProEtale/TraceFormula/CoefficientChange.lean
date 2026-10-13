@@ -90,6 +90,37 @@ lemma constructibleFiniteTor_leftDerivedSheafExtendScalars_of_isGeometricHom {k 
 
 end Constructible
 
+omit [Finite S] in
+/-- Coefficient change of a twisted pullback: if `φ' : LΦ^* Ψ K ⟶ Ψ K` is the scalar extension
+of `φ : LΦ^* K ⟶ K`, then for a point `x` with `x ≫ Φ = x`, the composite
+`Lx^* Ψ K ≃ L(x ≫ Φ)^* Ψ K ≃ Lx^* LΦ^* Ψ K ──Lx^* φ'──▶ Lx^* Ψ K` is carried by
+`Lx^* Ψ K ≅ Ψ Lx^* K` to the scalar extension of the corresponding composite for `φ`. -/
+lemma leftDerivedUpperStarExtendScalarsIso_hom_app_comp_map_twist {s X : Scheme.{u}}
+    (x : s ⟶ X) (Φ : X ⟶ X) (hx : x ≫ Φ = x)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
+    (φ : (L((Φ)^*[ModuleCat.{u + 1} R])).obj K ⟶ K)
+    (φ' : (L((Φ)^*[ModuleCat.{u + 1} S])).obj ((L(sheafExtendScalars (algebraMap R S) X)).obj K) ⟶
+      (L(sheafExtendScalars (algebraMap R S) X)).obj K)
+    (hφ : φ' = (leftDerivedUpperStarExtendScalarsIso R S Φ).hom.app K ≫
+      (L(sheafExtendScalars (algebraMap R S) X)).map φ) :
+    ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} S) hx).inv.app
+          ((L(sheafExtendScalars (algebraMap R S) X)).obj K) ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} S) x Φ).hom.app
+          ((L(sheafExtendScalars (algebraMap R S) X)).obj K) ≫
+        (L((x)^*[ModuleCat.{u + 1} S])).map φ') ≫
+      (leftDerivedUpperStarExtendScalarsIso R S x).hom.app K =
+    (leftDerivedUpperStarExtendScalarsIso R S x).hom.app K ≫
+      (L(sheafExtendScalars (algebraMap R S) s)).map
+        ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} R) hx).inv.app K ≫
+          (leftDerivedUpperStarComp (ModuleCat.{u + 1} R) x Φ).hom.app K ≫
+          (L((x)^*[ModuleCat.{u + 1} R])).map φ) := by
+  subst hφ
+  have hnat := (leftDerivedUpperStarExtendScalarsIso R S x).hom.naturality φ
+  dsimp at hnat
+  simp only [Functor.map_comp, Category.assoc]
+  rw [leftDerivedUpperStarExtendScalarsIso_hom_app_congr_inv_assoc R S _ hx,
+    leftDerivedUpperStarExtendScalarsIso_hom_app_comp_assoc, ← hnat]
+
 namespace WeilComplex
 
 variable {R S} {s X : Scheme.{u}} {aX : X ⟶ s}
@@ -109,6 +140,7 @@ noncomputable def extendScalars (W : WeilComplex (A := ModuleCat.{u + 1} R) aX) 
 
 variable (W : WeilComplex (A := ModuleCat.{u + 1} R) aX)
 
+set_option linter.unusedSectionVars false in
 @[simp]
 lemma extendScalars_frobeniusIterate (m : ℕ) :
     (W.extendScalars S).frobeniusIterate m = W.frobeniusIterate m :=
@@ -118,13 +150,33 @@ instance isProper_extendScalars_frobeniusIterate (m : ℕ) [IsProper (W.frobeniu
     IsProper ((W.extendScalars S).frobeniusIterate m) :=
   ‹IsProper (W.frobeniusIterate m)›
 
+omit [Finite S] in
+/-- The coefficient morphism of the scalar extension is `Φ₁^* Ψ K ≅ Ψ Φ₁^* K ──Ψ φ──▶ Ψ K`. -/
+lemma extendScalars_coeff :
+    (W.extendScalars S).coeff =
+      (leftDerivedUpperStarExtendScalarsIso R S W.frobenius).hom.app W.obj ≫
+        (L(sheafExtendScalars (algebraMap R S) X)).map W.coeff :=
+  rfl
+
+set_option linter.unusedSectionVars false in
 /-- The iterated coefficient morphisms of the scalar extension are the scalar extensions of the
 iterated coefficient morphisms: `(Ψ φ)_m = Ψ (φ_m)` through `Φ_m^* Ψ K ≅ Ψ Φ_m^* K`. -/
 lemma coeffIterate_extendScalars (m : ℕ) :
     (W.extendScalars S).coeffIterate m =
       (leftDerivedUpperStarExtendScalarsIso R S (W.frobeniusIterate m)).hom.app W.obj ≫
-        (L(sheafExtendScalars (algebraMap R S) X)).map (W.coeffIterate m) :=
-  sorry
+        (L(sheafExtendScalars (algebraMap R S) X)).map (W.coeffIterate m) := by
+  induction m with
+  | zero => exact (leftDerivedUpperStarExtendScalarsIso_hom_app_id R S W.obj).symm
+  | succ m ih =>
+    have hnat := (leftDerivedUpperStarExtendScalarsIso R S W.frobenius).hom.naturality_assoc
+      (W.coeffIterate m) ((L(sheafExtendScalars (algebraMap R S) X)).map W.coeff)
+    dsimp at hnat
+    rw [coeffIterate_succ, coeffIterate_succ, ih, extendScalars_coeff]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [leftDerivedUpperStarExtendScalarsIso_hom_app_congr_assoc R S _
+        (W.frobeniusIterate_succ m),
+      leftDerivedUpperStarExtendScalarsIso_hom_app_comp_assoc, ← hnat]
+    rfl
 
 /-- **The stalk Frobenius commutes with coefficient change**: through
 `Lx^* Ψ K ≅ Ψ Lx^* K`, the stalk Frobenius `F_{x,m}` of the scalar extension `Ψ K` is the scalar
@@ -133,7 +185,7 @@ lemma stalkFrobenius_extendScalars (m : ℕ) (x : s ⟶ X) (hx : x ≫ W.frobeni
     (W.extendScalars S).stalkFrobenius m x hx =
       (leftDerivedUpperStarExtendScalarsIso R S x).hom.app W.obj ≫
         (L(sheafExtendScalars (algebraMap R S) s)).map (W.stalkFrobenius m x hx) ≫
-          (leftDerivedUpperStarExtendScalarsIso R S x).inv.app W.obj :=
+          (leftDerivedUpperStarExtendScalarsIso R S x).inv.app W.obj := by
   sorry
 
 end WeilComplex

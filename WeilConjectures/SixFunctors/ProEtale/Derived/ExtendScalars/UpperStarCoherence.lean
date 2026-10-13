@@ -191,7 +191,25 @@ lemma leftDerivedUpperStarExtendScalarsIso_hom_app_comp {T : Scheme.{u}} (g₁ :
       leftDerivedSheafExtendScalarsUpperStarCounit, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] at h₀ h₄ h₅ ⊢
     dsimp at h₂ h₃ h₆ h₇
-    sorry
+    have h₅' := congrArg (L((g₁)^*[ModuleCat.{u + 1} S])).map h₅
+    simp only [Functor.map_comp] at h₅'
+    have hinv : ((sheafExtendScalars (algebraMap R S) T).mapHomotopyCategory (.up ℤ)).map
+          ((NatTrans.mapHomotopyCategory
+            (ProEtale.upperStarComp (ModuleCat.{u + 1} R) g₁ g).hom (.up ℤ)).app K) ≫
+        ((sheafExtendScalars (algebraMap R S) T).mapHomotopyCategory (.up ℤ)).map
+          ((NatTrans.mapHomotopyCategory
+            (ProEtale.upperStarComp (ModuleCat.{u + 1} R) g₁ g).inv (.up ℤ)).app K) = 𝟙 _ := by
+      rw [← Functor.map_comp, ← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp,
+        Iso.hom_inv_id, NatTrans.mapHomotopyCategory_id, NatTrans.id_app,
+        CategoryTheory.Functor.map_id]
+    simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp]
+    rw [h₀, ← (L(sheafExtendScalars (algebraMap R S) T)).map_comp_assoc, h₁]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [h₂, ← reassoc_of% h₃]
+    erw [reassoc_of% h₄]
+    rw [reassoc_of% h₅', reassoc_of% h₆, ← reassoc_of% h₇,
+      reassoc_of% h₈, ← DerivedCategory.Qh.map_comp, ← DerivedCategory.Qh.map_comp,
+      ← DerivedCategory.Qh.map_comp, ← reassoc_of% h₉, hinv, Category.comp_id]
   have := NatTrans.congr_app key K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp] at this
@@ -209,6 +227,19 @@ lemma leftDerivedUpperStarExtendScalarsIso_hom_app_congr {g' : Z ⟶ Y} (h : g =
       (leftDerivedUpperStarCongr (ModuleCat.{u + 1} S) h).hom.app
           (L(sheafExtendScalars (algebraMap R S) Y).obj K) ≫
         (leftDerivedUpperStarExtendScalarsIso R S g').hom.app K := by
+  subst h
+  simp
+
+/-- The inverse form of `leftDerivedUpperStarExtendScalarsIso_hom_app_congr`. -/
+@[reassoc]
+lemma leftDerivedUpperStarExtendScalarsIso_hom_app_congr_inv {g' : Z ⟶ Y} (h : g = g')
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))) :
+    (leftDerivedUpperStarExtendScalarsIso R S g').hom.app K ≫
+        L(sheafExtendScalars (algebraMap R S) Z).map
+          ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} R) h).inv.app K) =
+      (leftDerivedUpperStarCongr (ModuleCat.{u + 1} S) h).inv.app
+          (L(sheafExtendScalars (algebraMap R S) Y).obj K) ≫
+        (leftDerivedUpperStarExtendScalarsIso R S g).hom.app K := by
   subst h
   simp
 

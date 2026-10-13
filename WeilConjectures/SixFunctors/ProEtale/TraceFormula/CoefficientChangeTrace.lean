@@ -122,17 +122,12 @@ theorem trace_stalkFrobenius_extendScalars (W : WeilComplex (A := ModuleCat.{u +
         (L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).map
           (MonoidalCategory.trace (W.stalkFrobenius m x hx)) ≫
         Functor.OplaxMonoidal.η (L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))) := by
-  letI : HasRightDual
-      ((L(sheafExtendScalars (algebraMap R S) X) ⋙ L((x)^*[ModuleCat.{u + 1} S])).obj W.obj) :=
-    inferInstanceAs (HasRightDual ((L((x)^*[ModuleCat.{u + 1} S])).obj (W.extendScalars S).obj))
-  letI : HasRightDual ((L((x)^*[ModuleCat.{u + 1} R]) ⋙
-      L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).obj W.obj) :=
-    inferInstanceAs (HasRightDual ((L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).obj
-      ((L((x)^*[ModuleCat.{u + 1} R])).obj W.obj)))
-  have h := MonoidalCategory.trace_conj ((leftDerivedUpperStarExtendScalarsIso R S x).app W.obj)
-    ((L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).map (W.stalkFrobenius m x hx))
   rw [W.stalkFrobenius_extendScalars m x hx]
-  exact h.trans (Functor.map_trace _ _)
+  exact (MonoidalCategory.trace_conj
+    (X := (L((x)^*[ModuleCat.{u + 1} S])).obj (W.extendScalars S).obj)
+    (Y := (L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).obj
+      ((L((x)^*[ModuleCat.{u + 1} R])).obj W.obj))
+    ((leftDerivedUpperStarExtendScalarsIso R S x).app W.obj) _).trans (Functor.map_trace _ _)
 
 /-- **Coefficient change of the global traces** (blueprint `thm-trf-finite-coefficient-map`):
 `ρ(tr_R(F_{c,m} ∣ RΓ_c(X, K))) = tr_S(F_{c,m} ∣ RΓ_c(X, Ψ K))`, where `ρ` is induced by the
