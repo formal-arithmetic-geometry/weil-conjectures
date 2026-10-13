@@ -18,45 +18,43 @@
  },
  "proof": [
   {
-   "text": "The affine closed immersion identifies i^{-1}(U) with Spec(A/I) over Spec(A). The Koszul quotient augmentation is a quasi-isomorphism by regularity. Apply the affine quotient resolution sheafification lemma to its nonnegative chain form and extend to integer cochain degrees. Its terms are finite free exterior powers, zero above n; the extension gives zero positive cochain terms and a bounded finite free resolution of restricted i_*O_Z.",
+   "text": "Apply exists_koszul_quotient_augmentation with the actual kernel ideal, hf and hreg. Apply affine_koszul_finite_free_resolution to this augmentation; retain the bounded-above property, finite free term isomorphisms and the quasi-isomorphism a to the restricted pushforward single complex.",
    "uses": [
     "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "lem-sc-affine-koszul-finite-free-resolution"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Restrict derived internal Hom to U. The bounded finite free Hom model into O_U in degree zero computes the resulting object. On standard opens, finite free coordinates identify sheaf Hom of a resolution term into O_U with the associated module Hom into A. Only the target degree-zero factor contributes to each total Hom degree. In degree k≥0 its differential is signed precomposition (-1)^(k+1) with the Koszul boundary, precisely koszulDualBoundary; negative-degree terms are zero. These coordinate identifications commute with localization, hence glue and give an isomorphism of complexes with the associated integer-indexed dual Koszul complex.",
+   "text": "Apply local_finite_free_scalar_homology to the restricted pushforward, the explicitly sheafified Koszul complex, its bounds and free terms, and a. This computes the restriction of scalar Ext by homology of Hom(E,O_U[0]), with no derived-universe instance on U assumed.",
    "uses": [
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-sc-derived-hom-finite-free-model"
+    "lem-sc-local-finite-free-scalar-homology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Associated sheafification is exact (its stalks are module localizations), so taking homology gives the associated sheaf of the module homology. Transport along the affine scheme isomorphism and the over-U module equivalence to obtain the displayed comparison. For the supplied derived universe, use the same K-injective resolution of the target in both that universe and the standard universe: derivedInternalHom_obj_iso identifies both cohomologies with the homology of the common Hom complex, so the comparison transports without assuming a derived category on U in the supplied universe. The empty sequence is the degree-zero structure sheaf and empty charts have the zero module category.",
+   "text": "Apply affine_koszul_hom_coordinates. Map the resulting module-sheaf isomorphism by the inverse over-U equivalence, then compose with the local scalar Hom comparison. The intermediate object is exactly the Hom complex homology, giving the unchanged asserted isomorphism.",
    "uses": [
-    "def-pur-derived-internal-hom"
+    "lem-sc-affine-koszul-hom-coordinates"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-koszul-regular-sequence-dual-complex",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-derived-hom-finite-free-model",
-  "def-pur-derived-internal-hom"
+  "lem-sc-affine-koszul-finite-free-resolution",
+  "lem-sc-local-finite-free-scalar-homology",
+  "lem-sc-affine-koszul-hom-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "H2",
+  "agent": "N1",
   "date": "2026-10-13",
   "based_on": {
    "document": "literature/stacks-project/duality.tex",
-   "place": "Tag 0BQZ, proof of Lemma 48.15.5"
+   "place": "Tag 0BQZ, proof of lemma-regular-immersion-ext, local finite free Hom computation; cohomology.tex Tag 08DM, Lemma 20.46.9"
   },
-  "note": "Source read at https://stacks.math.columbia.edu/tag/0BQZ; explicit coordinate and derived-universe glue expanded from the local Hom computation."
+  "note": "Stage-3 reduction: explicit augmentation, free bases and exact homology transport; two comparison glue statements remain."
  },
  "mathlib_searches": [
   {
@@ -138,9 +136,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T072351-L-1120076",
-  "kind": "interface"
+  "landing": "20261013T111905-L-3056807",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -12,10 +12,10 @@ public import Sheaf.RingTheory.KoszulDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
+import Sheaf.AlgebraicGeometry.LocalFiniteFreeScalarHomology
+import Sheaf.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
+import Sheaf.AlgebraicGeometry.AffineKoszulHomCoordinates
 
 /-! # Affine scalar Ext and dual Koszul cohomology
 
@@ -78,6 +78,17 @@ theorem affine_koszul_scalar_ext_comparison
       (Scheme.Modules.overEquiv U.1).inverse.obj
         ((tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).obj
           ((ExteriorAlgebra.koszulDualCochainComplex (Γ(Y, U.1) : Type u) n f).homology q)))
-    := by sorry
+    := by
+  obtain ⟨ε, hε, _⟩ := ExteriorAlgebra.exists_koszul_quotient_augmentation
+    (Γ(Y, U.1) : Type u) (i.ker.ideal U) n f hreg hf
+  let := hε
+  obtain ⟨hbounded, hfree, a, ha⟩ :=
+    affine_koszul_finite_free_resolution i U n f ε
+  let := ha
+  obtain ⟨e⟩ := local_finite_free_scalar_homology U.1
+    ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))
+    _ hbounded hfree a q
+  obtain ⟨c⟩ := affine_koszul_hom_coordinates U n f q
+  exact ⟨e ≪≫ (Scheme.Modules.overEquiv U.1).inverse.mapIso c⟩
 
 end AlgebraicGeometry
