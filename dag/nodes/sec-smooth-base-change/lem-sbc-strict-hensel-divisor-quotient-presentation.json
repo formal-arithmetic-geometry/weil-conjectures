@@ -16,40 +16,34 @@
  ],
  "proof": [
   {
-   "text": "Identify the geometric pointed-neighbourhood colimit with the algebraic strict henselization of the local ring R_y by the affine etale triples comparison and the strict henselization triples theorem. The comparison respects the structural R-map; faithfulness of Spec and hb identify it with b.",
+   "text": "Obtain the algebraic strict-henselization presentation of the geometric ring over R_q with its structural R-map equal to b.",
    "uses": [
-    "lem-weil-pbc-etale-local-ring-triples",
-    "lem-weil-pbc-strict-henselization-triples"
+    "lem-sbc-geometric-strict-henselization-local-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "The affine-chart maximal-ideal formula identifies the maximal ideal with yH. Since b(f) is a nonunit, the contraction of this ideal is y and f belongs to y. Thus y induces a prime p of R/(f).",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
-    "lem-weil-pbc-strict-henselization-triples"
-   ],
-   "elementary": false
+   "text": "If f were outside q, f/1 would be a unit in R_q. Its image under the local-base algebra map would be b(f), contradicting hg. Therefore f belongs to q.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Localizing the divisor quotient identifies (R/(f))_p with R_y/(f). Their residue fields are canonically isomorphic. The relative separable closure of this residue field in the geometric field supplies K and its local-base scalar action. Apply Stacks Tag 05WS to the principal ideal in R_y, which is contained in its maximal ideal: the quotient of its strict henselization is the strict henselization of R_y/(f). Transport that pointed-algebra colimit property through the localization/quotient isomorphism to obtain Algebra.IsStrictHenselization for H/(b(f)). This is the remaining quotient-comparison step left to prove in Lean.",
+   "text": "Apply the algebraic localized-divisor quotient theorem to this strict henselization and f in q.",
    "uses": [
-    "lem-weil-pbc-localization-at-prime-of-quotient"
+    "lem-sbc-algebraic-strict-henselization-localized-divisor-quotient"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-local-ring-triples",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
-  "lem-weil-pbc-strict-henselization-triples"
+  "lem-sbc-geometric-strict-henselization-local-presentation",
+  "lem-sbc-algebraic-strict-henselization-localized-divisor-quotient"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M1",
+  "group": "U2",
   "document": "Stacks Project",
-  "place": "Tags 04HX and 05WS; specialization to the principal divisor quotient"
+  "place": "Tags 04HX and 05WS; the intermediate localization and principal-ideal transport are proved in Lean. Nonunit contraction uses localization units, avoiding the chart maximal-ideal formula."
  },
  "mathlib_searches": [
   {
@@ -130,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T165644-L-1809137",
+  "landing": "20261013T181124-L-2607727",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

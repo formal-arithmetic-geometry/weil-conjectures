@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation
+import Sheaf.RingTheory.StrictHenselizationLocalizedDivisorQuotient
 
 /-! # Algebraic presentation of a strict henselization divisor quotient
 
@@ -58,6 +60,23 @@ theorem strictHenselizationRing_divisor_quotient_presentation
       (_ : Algebra (Localization.AtPrime p)
         (strictHenselizationRing barY ⧸ Ideal.span {b.hom f})),
       Algebra.IsStrictHenselization (Localization.AtPrime p) K
-        (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by sorry
+        (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
+  obtain ⟨q, hq, K, hK, ares, hsep, aK, htower, aH, hbase, hH⟩ :=
+    strictHenselizationRing_local_presentation R barY b hb
+  let := hq
+  let := hK
+  let := ares
+  let := hsep
+  let := aK
+  let := htower
+  let := aH
+  have hf : f ∈ q := by
+    by_contra hf
+    have hu : IsUnit (algebraMap R (Localization.AtPrime q) f) :=
+      IsLocalization.map_units (M := q.primeCompl) (Localization.AtPrime q) ⟨f, hf⟩
+    have hu' := hu.map (algebraMap (Localization.AtPrime q) (strictHenselizationRing barY))
+    rw [hbase f] at hu'
+    exact hg hu'
+  exact hH.localized_divisor_quotient R (strictHenselizationRing barY) q K b.hom hbase f hf
 
 end AlgebraicGeometry.Scheme

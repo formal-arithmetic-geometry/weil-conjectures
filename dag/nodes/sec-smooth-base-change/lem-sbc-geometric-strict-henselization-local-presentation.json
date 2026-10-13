@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-geometric-strict-henselization-local-presentation",
+ "kind": "statement",
+ "title": "Geometric strict henselization over a prime localization",
+ "statement": "Let $R$ be a commutative ring and $\\bar y:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ a geometric point with $\\Omega$ algebraically closed [def-weil-geometric-point]. Write $H$ for its geometric strict henselization ring [def-weil-pbc-strict-henselization-limit]. Let $b:R\\to H$ be a ring homomorphism whose spectrum is the structural morphism [def-weil-pbc-strict-henselization-structural-map]. There exist a prime ideal $q\\subset R$, a field $K$ which is a separable closure of the residue field of $A=R_q$ [def-weil-pbc-localization-at-prime], compatible residue-field and $A$-algebra structures on $K$, and an $A$-algebra structure on $H$ such that $A\\to H$ composed with $R\\to A$ equals $b$, and $H$ is an algebraic strict henselization of $A$ relative to $K$ [def-sc-ring-strict-henselization].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 04HX, etale-cohomology.tex, lemma-describe-etale-local-ring; Tag 04GW, algebra.tex, lemma-strict-henselization-different"
+ },
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine chart/triples comparison to identify the geometric coordinate-ring colimit with a colimit of residue triples, with all coordinate-ring legs and structural R-maps respected. The identity triple supplies the structural R-map by cocone naturality.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the small-model colimit isomorphism, the chart/triples colimit isomorphism, and uniqueness of colimits. On one representative of the affine chart the structural-map characterization identifies the transported R-map with b, using faithfulness of Spec and the assumed equality of spectra.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the local-base presentation theorem for the residue-triple colimit, with this ring isomorphism and the compatibility of its R-map.",
+   "uses": [
+    "lem-sbc-etale-triples-localized-strict-henselization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-etale-triples-localized-strict-henselization",
+  "lem-weil-pbc-etale-local-ring-triples"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U2",
+  "document": "Stacks Project",
+  "place": "Tag 04HX, etale-cohomology.tex, lemma-describe-etale-local-ring; Tag 04GW, algebra.tex, lemma-strict-henselization-different",
+  "note": "The pointed-colimit arguments are written out by U2 from the cited source; the geometric comparison reuses the comparison calculation in StrictHenselizationChartMaximalIdeal without using its maximal-ideal theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of strict henselization is strict henselization",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric strict henselization ring is algebraic strict henselization of prime localization with compatible structural map",
+   "date": "2026-10-14",
+   "results": "HenselianLocalRing.toIsLocalRing; AlgHom.IsArithFrobAt.isArithFrobAt_localize; instIsLocalHomAtPrimeRingHomAlgebraMap; Algebra.IsEtaleAt; HenselianLocalRing; AlgHom.IsArithFrobAt.localize; HenselianLocalRing.TFAE; instHenselianRingMaximalIdeal",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStrictHenselization|strictHenselization.*quotient|etaleResidueTriples",
+   "date": "2026-10-14",
+   "results": "0 hits",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselDivisorQuotientPresentation",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph, strict henselization divisor quotient: Geometric strict henselization over a prime localization",
+   "via": [
+    "lem-sbc-strict-hensel-divisor-quotient-presentation",
+    "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part-aux",
+    "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part",
+    "lem-sbc-strict-hensel-regular-divisor-quotient-regular",
+    "lem-sbc-strict-hensel-regular-divisor-quotient",
+    "lem-sbc-strict-hensel-root-purity-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationLocalPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationRing_local_presentation",
+  "statement": "theorem strictHenselizationRing_local_presentation\n    (R : CommRingCat.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    ∃ (q : Ideal R) (_ : q.IsPrime)\n      (K : Type u) (_ : Field K)\n      (_ : Algebra (IsLocalRing.ResidueField (Localization.AtPrime q)) K)\n      (_ : IsSepClosure (IsLocalRing.ResidueField (Localization.AtPrime q)) K)\n      (_ : Algebra (Localization.AtPrime q) K)\n      (_ : IsScalarTower (Localization.AtPrime q)\n        (IsLocalRing.ResidueField (Localization.AtPrime q)) K)\n      (_ : Algebra (Localization.AtPrime q) (strictHenselizationRing barY)),\n      (∀ r : R, algebraMap (Localization.AtPrime q) (strictHenselizationRing barY)\n        (algebraMap R (Localization.AtPrime q) r) = b.hom r) ∧\n      Algebra.IsStrictHenselization (Localization.AtPrime q) K\n        (strictHenselizationRing barY)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T181124-L-2607727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T181124-L-2607727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
