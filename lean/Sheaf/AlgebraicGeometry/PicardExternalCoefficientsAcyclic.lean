@@ -8,10 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsDirectImages
+import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
+import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
+import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.Paper.HigherDirectImagePresheaf
 
@@ -60,6 +63,50 @@ theorem picardExternalCupCoefficients_acyclic
     (hG : ∀ p : ℕ, 0 < p →
       IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj G)) (n : ℕ) (hn : 0 < n) :
     IsZero ((RingedSpace.moduleCohomology (Limits.pullback f g).toRingedSpace n).obj
-      (externalCupCoefficients f g F G)) := by sorry
+      (externalCupCoefficients f g F G)) := by
+  classical
+  let : EnoughInjectives (Limits.pullback f g).Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives
+      (Limits.pullback f g).toRingedSpace).2
+  let : EnoughInjectives Y.Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives Y.toRingedSpace).2
+  let D := RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom
+  let E := externalCupCoefficients f g F G
+  obtain ⟨hpositive, I, ι, ⟨hcoproduct⟩⟩ :=
+    picardExternalCupCoefficients_directImages k X Y f g F G hF
+  have : QuasiSeparated g := ⟨inferInstance⟩
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated g
+  have hzero (p : ℕ) (hp : 0 < p) :
+      IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj
+        ((D.rightDerived 0).obj E)) := by
+    let : Subsingleton ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj G) :=
+      ModuleCat.subsingleton_of_isZero (hG p hp)
+    have hb := Scheme.moduleCohomology_directSum_bijective Y I (fun _ ↦ G)
+      ((D.rightDerived 0).obj E) ι hcoproduct p
+    let : Subsingleton ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj
+        ((D.rightDerived 0).obj E)) := hb.surjective.subsingleton
+    exact ModuleCat.isZero_of_subsingleton _
+  have hcolumns (q p : ℕ) (hp : 0 < p) :
+      IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj
+        ((D.rightDerived q).obj E)) := by
+    cases q with
+    | zero => exact hzero p hp
+    | succ q =>
+      have : (RingedSpace.moduleCohomology Y.toRingedSpace p).Additive := by
+        dsimp [RingedSpace.moduleCohomology]
+        infer_instance
+      exact (RingedSpace.moduleCohomology Y.toRingedSpace p).map_isZero
+        (hpositive (q + 1) (Nat.succ_pos q))
+  obtain ⟨ε, _, hε⟩ := exists_lerayEdge_isIso_of_vanishing (pullback.snd f g)
+  have : IsIso ((ε n).app E) := hε E hcolumns n
+  have hz := (RingedSpace.globalSectionsFunctor Y.toRingedSpace).map_isZero
+    (hpositive n hn)
+  have hz' := (forget₂ _ AddCommGrpCat).map_isZero hz
+  have hs := (asIso ((ε n).app E)).isZero_iff.mpr hz'
+  have hs' := AddCommGrpCat.subsingleton_of_isZero hs
+  change Subsingleton ((RingedSpace.moduleCohomology
+    (Limits.pullback f g).toRingedSpace n).obj E) at hs'
+  let := hs'
+  exact ModuleCat.isZero_of_subsingleton _
 
 end AlgebraicGeometry.Scheme.Modules
