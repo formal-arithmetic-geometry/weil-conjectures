@@ -50,7 +50,8 @@ theorem of_isArtinianRing_of_residueField [IsArtinianRing S] [IsLocalRing S]
   let _ : Algebra L S := f.toAlgebra
   have hf (a : A) : f (algebraMap A L a) = a := IsLocalization.lift_eq _ _
   have : IsScalarTower R L S := .of_algebraMap_eq fun r ↦ by
-    rw [IsScalarTower.algebraMap_apply R A L, RingHom.algebraMap_toAlgebra, hf]
+    change _ = f (algebraMap R L r)
+    rw [IsScalarTower.algebraMap_apply R A L, hf]
     rfl
   have hsurj : Function.Surjective (algebraMap L (ResidueField S)) := by
     intro z
@@ -61,18 +62,23 @@ theorem of_isArtinianRing_of_residueField [IsArtinianRing S] [IsLocalRing S]
     have hau : IsUnit (a : S) := by
       rw [← residue_ne_zero_iff_isUnit]
       exact htu.ne_zero
-    refine ⟨IsLocalization.mk' L (⟨b, hb⟩ : A) (⟨⟨a, ha⟩, hau⟩ : M), ?_⟩
-    rw [IsScalarTower.algebraMap_apply L S, RingHom.algebraMap_toAlgebra]
+    let m : M := ⟨⟨a, ha⟩, (IsUnit.mem_submonoid_iff _).mpr hau⟩
+    refine ⟨IsLocalization.mk' L (⟨b, hb⟩ : A) m, ?_⟩
+    have key : f (IsLocalization.mk' L (⟨b, hb⟩ : A) m) * a = b := by
+      have := congrArg f (IsLocalization.mk'_spec L (⟨b, hb⟩ : A) m)
+      rwa [map_mul, hf, hf] at this
+    rw [IsScalarTower.algebraMap_apply L S]
     refine (htu.mul_left_inj).mp ?_
     rw [← hzb]
-    simp only [IsScalarTower.coe_toAlgHom', ResidueField.algebraMap_eq, ← map_mul]
-    congr 1
-    rw [IsLocalization.lift_mk'_spec]
+    conv_rhs => rw [← key]
+    simp only [ResidueField.algebraMap_eq, map_mul]
     rfl
   have : Module.Finite L (S ⧸ Ring.jacobson S) := by
     rw [ringJacobson_eq_maximalIdeal]
     exact .of_surjective (Algebra.linearMap L (ResidueField S)) hsurj
   have : Module.Finite L S := IsSemiprimaryRing.finite_of_isArtinian L S S
+  have : FiniteType R A := (Subalgebra.fg_iff_finiteType A).mp (Subalgebra.fg_adjoin_finset _)
+  have : EssFiniteType R L := inferInstance
   exact comp R L S
 
 end Algebra.EssFiniteType
