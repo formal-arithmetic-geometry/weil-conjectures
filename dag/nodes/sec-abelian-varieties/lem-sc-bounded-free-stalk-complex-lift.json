@@ -15,39 +15,39 @@
  ],
  "proof": [
   {
-   "text": "1. Fix bounds a,b. The stalk ring is nonzero, since it is local. A zero free module\n   over it has rank zero, so hfree implies d i = 0 outside [a,b], including when b < a.\n   Choose bases using hfree, and express the differentials as finite matrices. There\n   are only finitely many entries and finitely many equations for the square to vanish.",
+   "text": "Choose the termwise isomorphisms given by hfree and bounds a,b. A zero free stalk module has rank zero: otherwise evaluation of the constant zero and one functions at an element of Fin(d i) contradicts nontriviality of the stalk ring. Conjugate every differential by these termwise isomorphisms to construct a complex K whose terms are the standard free stalk modules. The isomorphism identities show that its differentials square to zero and define an isomorphism F ≅ K.",
    "uses": [
-    "def-pc-module-stalk-functor"
+    "def-pc-module-stalk-functor",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the standard-term affine-local matrix lift to K, its definitional term equalities and the proved rank-support condition. Obtain an affine neighbourhood U of x and a local bounded free complex L, with an isomorphism from K to the stalk of its ordinary direct image.",
+   "uses": [
+    "lem-sc-bounded-free-stalk-complex-local-lift"
    ],
    "elementary": false
   },
   {
-   "text": "2. Choose an affine neighbourhood of x. Its stalk is the prime localization of its\n   section ring, the filtered colimit of principal localizations (Tag 00CR). Lift all\n   entries to one principal neighbourhood. Every entry of each differential composite\n   has zero germ; shrink to a common later principal neighbourhood where these finitely\n   many entries vanish. Equivalently use the maps and equality clauses of finite\n   presentation descent. The rank-d i free modules and these matrices now define a\n   bounded free sheaf complex L on this affine open U. Its stalk complex is isomorphic\n   to F, since the chosen bases conjugate the differentials to their lifted matrices.",
-   "uses": [
-    "lem-weil-pbc-localization-colimit-principal-localizations",
-    "lem-pc-fp-module-map-descent-affine"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "3. Define H by the termwise ordinary direct image along U into X: on an open V its\n   sections are the sections of L on V intersect U, with scalars restricted from V.\n   Direct image is additive and preserves zero objects, so H is bounded. Its restriction\n   to U is L. Neighbourhoods contained in U are cofinal at x, so its stalk complex is\n   the stalk complex of L. These identifications give the free-term and stalk isomorphisms.\nNo comparison with another derived object is made. Empty spectra have no x; rank-zero\nterms and empty degree intervals require no entries or equations to lift.",
+   "text": "Construct H by applying ordinary open direct image degreewise to L. Sectionwise computation proves preservation of zero morphisms, so the functor preserves zero objects and H has the same bounds a,b. Prove that the counit of restriction/direct image is an isomorphism: Over.forget U is full in the poset of opens, its adjunction unit is invertible, and pushforwardNatIso makes the corresponding counit invertible. Compose this restriction isomorphism termwise with the free-term isomorphisms of L. Finally compose F ≅ K with the stalk-complex isomorphism obtained from the local lift.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pc-module-stalk-functor"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-module-stalk-functor",
-  "lem-weil-pbc-localization-colimit-principal-localizations",
-  "lem-pc-fp-module-map-descent-affine",
+  "def-pc-cochain-complex-modules",
+  "lem-sc-bounded-free-stalk-complex-local-lift",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BCD spreading paragraph and Tag 0BC7 finite presentation argument; Algebra Tag 00CR; ordinary module direct image; K2 expands the finite-matrix and scheme/stalk interfaces of the cited argument"
+  "place": "Tag 0BCD spreading paragraph and Tag 0BC7 finite presentation argument; Algebra Tag 00CR; ordinary module direct image; G3 proves rank support, conjugation to standard terms, and ordinary direct-image globalization, leaving only affine-local matrix spreading"
  },
  "mathlib_searches": [
   {
@@ -126,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261013T033004-L-3676957",
+  "landing": "20261013T060417-L-582948",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

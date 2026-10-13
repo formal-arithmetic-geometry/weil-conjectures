@@ -11351,3 +11351,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:04 L: merged deliver/E3/Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientLaws (stage 3; reviewer PASS; first push; landing 20261013T060416-L-582578 (interface); batch 20261013T060408; modules 4; new nodes 3)
 - 06:04 L: merged deliver/F3/Sheaf.AlgebraicGeometry.IdealPowerAnnihilatorSystem (stage 3; reviewer PASS; after a return; landing 20261013T060416-L-582679 (interface); batch 20261013T060408; modules 2; new nodes 1)
 - 06:04 L: merged deliver/F3/Sheaf.CategoryTheory.CompactGeneratorAmbientThick (stage 3; reviewer PASS; first push; landing 20261013T060416-L-582781 (proof); batch 20261013T060408; modules 1; new nodes 0)
+- 06:04 L: merged deliver/G3/Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLift (stage 3; reviewer PASS; first push; landing 20261013T060417-L-582948 (interface); batch 20261013T060408; modules 2; new nodes 1)
