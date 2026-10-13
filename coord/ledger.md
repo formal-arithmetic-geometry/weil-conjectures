@@ -10832,3 +10832,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:53 L: merged deliver/X3/Sheaf.RingTheory.ProjectiveResolutionKernelProjective (stage 3; reviewer PASS; first push; landing 20261013T025313-L-3426330 (proof); batch 20261013T025255; modules 1; new nodes 0)
 
 - 11:10 L: batch 20261013T025255 dependency take-out
+- 03:15 L: returned deliver/C1/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore (reviewer RETURN: (the landing tools, head d8cd9e6f9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
