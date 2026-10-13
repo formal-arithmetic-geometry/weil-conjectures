@@ -13,7 +13,29 @@
  },
  "proof": [
   {
-   "text": "Extend the natural-number comparison by zero to integer-indexed complexes and use exact-functor transport on the derived-category representative of extMk.",
+   "text": "Extend e by zero using comparisonExtension. At nonnegative indices conjugate e by the extension component isomorphisms; at negative indices the source is zero. The chain condition follows from e.comm. At degree zero he implies the augmentation equality by from_single_hom_ext.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the derived category cancel the image of the mapped augmentation, which is invertible because L is exact. Naturality of mapDerivedCategoryFactors and the single-complex comparison identify the denominator with Q(e) followed by the inverse target augmentation.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate a to the integer complex and verify its closedness from ha and the transported cocycle closedness from hc. By from_single_hom_ext, termwise functoriality and the shift comparison identify the mapped numerator followed by the shifted comparison with the numerator of L(a) followed by e in degree q.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand extMk_hom, mapExactFunctor_hom, comp_hom and mk₀_hom. Use ShiftedHom naturality for mapDerivedCategoryFactors to combine the numerator and denominator, substitute the preceding equalities, and cancel the component isomorphisms. Natural-to-integer successor casts agree. This proves the hom equality including q=0.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
@@ -21,13 +43,14 @@
   }
  ],
  "proof_deps": [
+  "def-sp-abelian",
   "def-sp-injective-resolutions"
  ],
  "proof_origin": {
   "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
   "place": "derived.tex lemma-morphisms-lift, Tag 013P; cohomology.tex remark-explain-arrow, Tag 01FB. The sections were fetched into scratchpad and read. Ext specialization uses Mathlib InjectiveResolution.extMk_hom and Ext.mapExactFunctor_hom.",
   "by": "agent",
-  "note": "Detailed specialization written by E2 from the cited sources; the original tex sections were read in the sandbox scratchpad."
+  "note": "R1: complete Lean roof calculation from Mathlib Ext and ShiftedHom APIs; follows the existing Stacks-derived route. Read the cited tex sections in the sandbox scratchpad. No new deferred theorem."
  },
  "mathlib_searches": [
   {
@@ -143,7 +166,7 @@
   "reviewer": "COMPILER",
   "group": "R1",
   "result": "pass",
-  "landing": "20261013T004026-L-2491972",
+  "landing": "20261013T045556-L-135739",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

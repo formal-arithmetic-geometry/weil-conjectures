@@ -1,46 +1,62 @@
 ## What changed
 
-Added the integer-indexed comparison construction and its degreewise commutation proof. The target theorem is now proved from the named derived-category hom equality intermediate theorem.
+Reviewed and retained the earlier complete proof of `exactFunctor_resolution_cocycle_hom` in
+`Sheaf.CategoryTheory.ExactFunctorResolutionCocycle`. The supplied comparison is extended
+by zero; its augmentation square identifies the denominator after derived localization.
+The from-single cocycle calculation identifies the numerator, and Mathlib's Ext/ShiftedHom
+formulas combine both equalities. All existing signatures, visibility and imports are unchanged.
+Updated both existing nodes' proof descriptions to match the implementation.
+
+The proof was guided by the already proved roof calculation in
+`Sheaf.CategoryTheory.ExtExactFunctorCocycle`, but does not import that module: its universes
+and coefficient hypotheses do not match this statement. The cited Stacks tex sections were
+fetched into the sandbox scratchpad and read. Compilation passes without warnings.
 
 ## Proved and sorry left
 
-`exactFunctor_resolution_cocycle` is proved. `exactFunctor_resolution_cocycle_hom` remains as a named `sorry` intermediate theorem, with node `lem-weil-pbc-exact-functor-resolution-cocycle-hom`.
+Closed one existing hole: `exactFunctor_resolution_cocycle_hom`
+(node `lem-weil-pbc-exact-functor-resolution-cocycle-hom`).
+`exactFunctor_resolution_cocycle` was already proved and now depends on a proved hom equality.
+No holes added or split off. No `sorry` remains in any delivered Lean file.
+A fresh single-file compilation passes without warnings. The delivery tool's axiom probe
+checks every declaration.
+
+The proof works at q = 0 and on zero objects without additional hypotheses. In negative
+integer degrees the comparison has zero source; it never assumes L preserves injectives.
 
 ## No longer needed
 
-No imports or stated dependencies were removed; the Mathlib imports remain needed for the Ext and derived-category APIs.
+None. Both existing public Mathlib imports support the unchanged statements and the proof.
+The outer node no longer directly lists `def-sp-abelian` or
+`def-sp-injective-resolutions` in its proof dependencies: both remain used through
+`lem-weil-pbc-exact-functor-resolution-cocycle-hom`. No node or module is pruned. No dependency on the separate
+`Sheaf.CategoryTheory.ExtExactFunctorCocycle` module is introduced.
+The unit `sk-thm-p1` and all its realized statements and steps are preserved.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The DAG plan omits the substantial integer-indexed extension and derived-category representative calculation. This delivery isolates that calculation as a strictly lower hom-level statement.
-
-## New nodes
-
-`lem-weil-pbc-exact-functor-resolution-cocycle-hom` records the derived-category hom equality used to prove the Ext equality.
-
-## Earlier second reading (a previous round; superseded)
-
-The item theorem has the original signature and is proved by `Abelian.Ext.ext` from the strictly lower hom-level statement. The comparison extension is degreewise checked, including negative degrees via zero objects. The new node records exactly the hom equality and keeps the blueprint route.
+The outer theorem's DAG description still described its original direct proof rather than
+its current call to `exactFunctor_resolution_cocycle_hom`; its proof dependency now records
+that existing helper. The hom node's original single proof step hid the augmentation,
+numerator and denominator calculations; these are now explicit in its proof description.
+No mathematical statement was changed. No new nodes or forced adaptations were needed.
 
 ## Second reading by R1
 
-1. I compared the delivered module with the repository version. The existing target declaration has the same
-   signature byte for byte; the only added declaration is the named lower hom equality recorded by the new node.
-   Verdict: passed.
-2. I compiled the module with `lcompile.py`. The file has no forbidden commands and no `sorry` in a definition;
-   the remaining `sorry` is exactly the named intermediate theorem listed above. The target proof uses
-   `Abelian.Ext.ext` and the intermediate hom equality, so its only additional axiom while that statement is open
-   is `sorryAx`. Verdict: passed subject to the declared split theorem.
-3. The split-off hom equality is a true specialization of the derived-category representative calculation and is
-   strictly stronger at the morphism level than the Ext equality, hence a valid lower statement. Its source,
-   proof route, node, and docstring are present, and it is not duplicated by the searched Mathlib or library APIs.
-   Verdict: passed.
-4. The proof follows the resolution-comparison route: the comparison is extended by zero to integer complexes,
-   with the negative-degree commutation discharged using zero objects. Both imports occur in public signatures and
-   remain necessary; no old dependency was removed. Verdict: passed.
-5. The new node's Lean declaration and statement match the module exactly, and its proof dependency is the
-   injective-resolution construction used by the extension. The unit route remains the resolution cocycle route.
-   Verdict: passed.
+1. Compared the delivered module with the repository version. All existing theorem signatures and
+   definitions are byte-for-byte unchanged; the only interface annotation added is a proof-local
+   transparency option, and the target statements are unchanged.
+2. Compiled the module with `lcompile.py`; it succeeds without errors or warnings. The delivered
+   file contains no `sorry`, `axiom`, `unsafe`, `opaque`, `extern`, or `implemented_by`. The proof
+   uses only ordinary Mathlib declarations; its axiom probe is covered by `deliver3.py`.
+3. The hom theorem is the only split-off statement. It is a strict derived-category hom equality,
+   sourced from Stacks Tags 013P and 01FB, and is not a restatement of the outer Ext equality.
+   No duplicate declaration was found in the local library or Mathlib search results.
+4. The proof follows the planned unit route: extension by zero, augmentation square, denominator
+   cancellation, cocycle numerator calculation, and the Ext/shift formulas. Existing imports are
+   used and no node or module was pruned.
+5. DAG proof steps and dependencies match the implemented helper proof and the outer theorem's
+   use of it; the unit `sk-thm-p1` realized route remains intact.
 
-I changed only the report by adding this review record. No Lean statement or proof was changed during second
-reading; the lower theorem remains intentionally split off with its documented source and node.
+Changed during second reading: added this audit section to satisfy the delivery report contract;
+no Lean statements or proof content were changed.

@@ -63,6 +63,7 @@ private lemma comparisonExtension_f
         (I.cochainComplexXIso q q rfl).inv := by
   simp [comparisonExtension]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The derived-category morphism equality underlying exact-functor cocycle transport.
 
 Source: Stacks Project, Derived Categories, Tag 013P; Cohomology, Tag 01FB.
@@ -84,7 +85,118 @@ theorem exactFunctor_resolution_cocycle_hom
     (hc : (L.map a ≫ e.f q) ≫ I.cocomplex.d q (q + 1) = 0) :
     (((R.extMk a (q + 1) rfl ha).mapExactFunctor L).comp
       (Abelian.Ext.mk₀ f) (add_zero q)).hom =
-      (I.extMk (L.map a ≫ e.f q) (q + 1) rfl hc).hom := by sorry
+      (I.extMk (L.map a ≫ e.f q) (q + 1) rfl hc).hom := by
+  let φ := comparisonExtension L R I e
+  have haug : (L.mapCochainComplexSingleFunctor 0).inv.app A ≫
+      (L.mapHomologicalComplex (.up ℤ)).map R.ι' ≫ φ =
+      (CochainComplex.singleFunctor D 0).map f ≫ I.ι' := by
+    apply HomologicalComplex.from_single_hom_ext
+    dsimp only [φ]
+    erw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, comparisonExtension_f]
+    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+      InjectiveResolution.ι'_f_zero, Functor.map_comp, Category.assoc]
+    simp only [Functor.mapCochainComplexSingleFunctor,
+      HomologicalComplex.singleMapHomologicalComplex, CochainComplex.singleFunctor,
+      CochainComplex.singleFunctors,
+      HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
+      HomologicalComplex.single_map_f_self, Category.assoc,
+      Functor.comp_obj, Int.cast_ofNat_Int, Iso.map_inv_hom_id_assoc,
+      eqToIso_refl, Iso.refl_hom, Iso.refl_inv]
+    erw [Category.id_comp, Category.id_comp, reassoc_of% he]
+    erw [L.map_id, Category.id_comp, Category.id_comp, Category.id_comp]
+  have hsource : (L.mapDerivedCategorySingleFunctor 0).inv.app P ≫
+      L.mapDerivedCategoryFactors.hom.app ((CochainComplex.singleFunctor C 0).obj P) =
+      DerivedCategory.Q.map ((L.mapCochainComplexSingleFunctor 0).inv.app P) := by
+    simpa only [CochainComplex.singleFunctor] using!
+      L.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app P
+  have hden : L.mapDerivedCategoryFactors.inv.app R.cochainComplex ≫
+      L.mapDerivedCategory.map (inv (DerivedCategory.Q.map R.ι')) ≫
+      (L.mapDerivedCategorySingleFunctor 0).hom.app A ≫
+      (DerivedCategory.singleFunctor D 0).map f =
+      DerivedCategory.Q.map φ ≫ inv (DerivedCategory.Q.map I.ι') := by
+    rw [← cancel_epi (DerivedCategory.Q.map
+      ((L.mapHomologicalComplex (.up ℤ)).map R.ι'))]
+    erw [L.mapDerivedCategoryFactors.inv.naturality_assoc,
+      ← L.mapDerivedCategory.map_comp_assoc, IsIso.hom_inv_id,
+      L.mapDerivedCategory.map_id, Category.id_comp]
+    have hs := L.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app A
+    simp only [CochainComplex.singleFunctor] at hs
+    erw [reassoc_of% hs]
+    rw [← cancel_epi (DerivedCategory.Q.map
+      ((L.mapCochainComplexSingleFunctor 0).inv.app A))]
+    simp only [← Functor.map_comp_assoc]
+    erw [haug]
+    simp [Functor.map_comp, DerivedCategory.singleFunctor, CochainComplex.singleFunctor]
+    rfl
+  let b := a ≫ (R.cochainComplexXIso q q rfl).inv
+  have hb : b ≫ R.cochainComplex.d (q : ℤ) ((q : ℤ) + 1) = 0 := by
+    simp [b, R.cochainComplex_d (q : ℤ) ((q : ℤ) + 1) q (q + 1) rfl (by simp),
+      reassoc_of% ha]
+  have hbc : (L.map b ≫ φ.f (q : ℤ)) ≫
+      I.cochainComplex.d (q : ℤ) ((q : ℤ) + 1) = 0 := by
+    simp only [b, φ, comparisonExtension_f, Functor.map_comp, Category.assoc,
+      Iso.map_inv_hom_id_assoc]
+    rw [I.cochainComplex_d (q : ℤ) ((q : ℤ) + 1) q (q + 1) rfl (by simp)]
+    simp only [Iso.inv_hom_id_assoc, reassoc_of% hc, zero_comp]
+  have hnum : (L.mapCochainComplexSingleFunctor 0).inv.app P ≫
+      ShiftedHom.map (CochainComplex.HomComplex.Cocycle.equivHomShift.symm
+        (CochainComplex.HomComplex.Cocycle.fromSingleMk b (zero_add (q : ℤ)) _ rfl hb))
+          (L.mapHomologicalComplex (.up ℤ)) ≫ φ⟦(q : ℤ)⟧' =
+      CochainComplex.HomComplex.Cocycle.equivHomShift.symm
+        (CochainComplex.HomComplex.Cocycle.fromSingleMk (L.map b ≫ φ.f (q : ℤ))
+          (zero_add (q : ℤ)) _ rfl hbc) := by
+    apply HomologicalComplex.from_single_hom_ext
+    dsimp [ShiftedHom.map]
+    simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors, Functor.comp_obj,
+      CochainComplex.shiftFunctor_obj_X',
+      HomologicalComplex.singleObjXSelf,
+      HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom,
+      Category.id_comp, Functor.mapCochainComplexSingleFunctor,
+      HomologicalComplex.singleMapHomologicalComplex, NatIso.ofComponents_inv_app,
+      ↓reduceDIte, eqToHom_refl, CochainComplex.HomComplex.Cocycle.equivHomShift_symm_apply,
+      Functor.mapHomologicalComplex_map_f, CochainComplex.HomComplex.Cocycle.homOf_f,
+      CochainComplex.HomComplex.Cocycle.rightShift_coe,
+      CochainComplex.HomComplex.Cocycle.fromSingleMk_coe, zero_add,
+      CochainComplex.HomComplex.Cochain.rightShift_v,
+      CochainComplex.HomComplex.Cochain.fromSingleMk_v,
+      CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq, eqToIso.inv,
+      Functor.map_comp,
+      Category.comp_id, Category.assoc, eqToHom_naturality]
+    erw [eqToHom_map]
+  simp only [Abelian.Ext.comp_hom, Abelian.Ext.mk₀_hom, Abelian.Ext.mapExactFunctor_hom,
+    InjectiveResolution.extMk_hom]
+  simp only [DerivedCategory.singleFunctorIsoCompQ, Iso.refl_hom, Iso.refl_inv,
+    NatTrans.id_app, ShiftedHom.mk₀_id_comp,
+    ShiftedHom.map_comp, ShiftedHom.map_mk₀]
+  simp only [ShiftedHom.comp_mk₀, Category.assoc]
+  rw [← ShiftedHom.comp_map,
+    ← ShiftedHom.map_naturality_2 _ L.mapDerivedCategoryFactors]
+  simp only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀, Category.assoc]
+  erw [reassoc_of% hsource]
+  erw [Category.comp_id, Category.comp_id]
+  erw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp, hden,
+    Functor.map_comp]
+  rw [ShiftedHom.comp_map]
+  have hnum' :
+      (ShiftedHom.mk₀ 0 rfl ((L.mapCochainComplexSingleFunctor 0).inv.app P)).comp
+        ((ShiftedHom.map (CochainComplex.HomComplex.Cocycle.equivHomShift.symm
+          (CochainComplex.HomComplex.Cocycle.fromSingleMk b (zero_add (q : ℤ)) _ rfl hb))
+            (L.mapHomologicalComplex (.up ℤ))).comp
+              (ShiftedHom.mk₀ 0 rfl φ) (zero_add _)) (add_zero _) =
+      CochainComplex.HomComplex.Cocycle.equivHomShift.symm
+        (CochainComplex.HomComplex.Cocycle.fromSingleMk (L.map b ≫ φ.f (q : ℤ))
+          (zero_add (q : ℤ)) _ rfl hbc) := by
+    simpa only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀, Category.assoc] using hnum
+  have hn := congrArg (fun t ↦ ShiftedHom.map t DerivedCategory.Q) hnum'
+  rw [ShiftedHom.map_comp, ShiftedHom.map_comp,
+    ShiftedHom.map_mk₀, ShiftedHom.map_mk₀] at hn
+  simp only [ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀] at hn
+  have hbφ : L.map b ≫ φ.f (q : ℤ) =
+      L.map a ≫ e.f q ≫ (I.cochainComplexXIso q q rfl).inv := by
+    simp [b, φ, comparisonExtension_f, Functor.map_comp]
+  simp only [hbφ] at hn
+  erw [reassoc_of% hn]
+  congr 3
 
 /-- An augmented chain comparison computes exact-functor transport of Ext,
 followed by the coefficient morphism lifted by that comparison.
