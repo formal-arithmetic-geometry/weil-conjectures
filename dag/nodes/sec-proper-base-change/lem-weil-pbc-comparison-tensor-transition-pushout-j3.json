@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-comparison-tensor-transition-pushout-j3",
+ "kind": "statement",
+ "title": "Pushout cancellation for tensor comparison transitions",
+ "statement": "Let I be a directed preorder, F:I→CommRingCat, i₀≤i, B₀,C₀ commutative F(i₀)-algebras, φ₀:B₀→C₀ an algebra map, and P,Q commutative rings with Q a P-algebra. On J={j | i≤j} suppose given P-actions on B_j=F(j)⊗_{F(i₀)}B₀, common-universe ring diagrams D,E, a natural transformation α:D→E, and ring equivalences d_j:D_j≃B_j⊗_P Q, c_j:E_j≃C_j=F(j)⊗_{F(i₀)}C₀. Assume D-transitions correspond under d to β_jk⊗id_Q for P-linear canonical tensor transitions β_jk and E-transitions correspond under c to canonical tensor maps. Assume χ_j=c_j α_j d_j⁻¹ restricts on B_j to φ_j=id⊗φ₀. Then every transition square with top α_j, left D_j→D_k, right E_j→E_k and bottom α_k is a pushout. Neither ψ nor a Q-coordinate formula is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 02JO (lemma-flat-finite-presentation-limit-flat), proof of (3), construction of Ψ; 00DD (lemma-tensor-product-colimit), canonical tensor legs. Online source read 2026-10-13."
+ },
+ "proof": [
+  {
+   "text": "Fix a transition j→k. Cancellation of iterated tensor products makes the two scalar-extension squares for B₀ and C₀ pushouts. Cancelling the B₀ square against the pasted C₀ square proves B_j,C_j,B_k,C_k is a pushout. This is formalized by the private canonical_tensor_comparison_pushout helper. For any cocone on α_j and the D-transition, its E_j leg, conjugated by c_j, gives f:C_j→T, and its D_k leg restricted along B_k→B_k⊗_P Q gives g:B_k→T. The cocone identity on b⊗1 and the left inclusion compatibility make f and g agree on B_j. The algebra pushout universal property constructs δ:C_k→T. Conjugate δ by c_k. Its E-transition factorization follows from δ on C_j. Its α_k factorization is checked on b⊗q: on b⊗1 it follows from δ on B_k; on 1⊗q it follows from naturality of α and the original cocone identity. Multiplicativity combines these two factors, and tensor induction extends the identity to every tensor. Any other factorization agrees with δ on the images of C_j and B_k. Every element of C_k is a sum of products of such images, by its scalar-extension pushout equivalence, so tensor induction proves uniqueness. No inverse of α, nonzero-ring, or flatness assumption is used; zero rings, Q=P, and singleton or nonskeletal tails are covered.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "date": "2026-10-13",
+  "place": "Canonical scalar-extension pushout cancellation, followed by explicit cocone descent and tensor induction for its two factorizations and uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible comparison between scalar extension tensor product diagrams has pushout transition squares by pushout cancellation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The square S tensor_R A to S tensor_R B over T tensor_R A to T tensor_R B is a pushout; pushout cancellation",
+   "results": "Algebra.IsPushout.cancelBaseChange_tmul, Algebra.IsPushout.cancelBaseChangeAux, Algebra.IsPushout.cancelBaseChange, Algebra.IsPushout.cancelBaseChange_symm_tmul, CommRingCat.pushout_inr_tensorProdObjIsoPushoutObj_inv_right_assoc, CommRingCat.pushout_inl_tensorProdObjIsoPushoutObj_inv_right_assoc, CommRingCat.isPushout_tensorProduct, Algebra.IsPushout.cancelBaseChangeAux_symm_tmul",
+   "date": "2026-10-13",
+   "verdict": "components only; no complete diagram theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPushout.of_left",
+   "results": "CategoryTheory.IsPushout.of_left",
+   "date": "2026-10-13",
+   "verdict": "components only; no complete diagram theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isPushout.*tensor|IsPushout.*(paste|of_right)",
+   "results": "Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-13",
+   "verdict": "components only; no complete diagram theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ComparisonTensorDiagrams",
+  "group": "J3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-comparison-tensor-diagrams-b4",
+   "place": "step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ComparisonTensorTransitionPushout",
+  "file": "lean/Sheaf/RingTheory/ComparisonTensorTransitionPushout.lean",
+  "declaration": "RingHom.comparison_tensor_transition_isPushout",
+  "statement": "theorem comparison_tensor_transition_isPushout\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{v})\n    (i₀ : I) (B₀ : Type w) (C₀ : Type x) [CommRing B₀] [CommRing C₀]\n    [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀]\n    (φ₀ : B₀ →ₐ[F.obj i₀] C₀)\n    (P Q : Type y) [CommRing P] [CommRing Q] [Algebra P Q]\n    (i : I) (hi : i₀ ≤ i)\n    (_aPi : letI := (F.map (homOfLE hi)).hom.toAlgebra\n      Algebra P (↥(F.obj i) ⊗[F.obj i₀] B₀)) :\n      let J := {j : I // i ≤ j}\n      ∀ (aPs : ∀ j : J,\n          letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n          Algebra P (↥(F.obj j.val) ⊗[F.obj i₀] B₀)),\n        ∀ (D E : J ⥤ CommRingCat.{max v w x y}) (α : D ⟶ E),\n          ∀ (d : ∀ j : J,\n              letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n              letI := aPs j\n              ↥(D.obj j) ≃+* (↥(F.obj j.val) ⊗[F.obj i₀] B₀) ⊗[P] Q),\n            ∀ (c : ∀ j : J,\n                letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n                ↥(E.obj j) ≃+* (↥(F.obj j.val) ⊗[F.obj i₀] C₀)),\n                  (∀ {j k : J} (r : j ⟶ k),\n                    letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n                    letI := (F.map (homOfLE (hi.trans k.property))).hom.toAlgebra\n                    letI := aPs j\n                    letI := aPs k\n                    ∃ β : (↥(F.obj j.val) ⊗[F.obj i₀] B₀) →ₐ[P]\n                        (↥(F.obj k.val) ⊗[F.obj i₀] B₀),\n                      (let αjk : F.obj j.val →ₐ[F.obj i₀] F.obj k.val :=\n                        { (F.map (homOfLE (leOfHom r))).hom with\n                          commutes' := fun s ↦\n                            congrArg (fun f : F.obj i₀ ⟶ F.obj k.val ↦ f s)\n                              (F.map_comp (homOfLE (hi.trans j.property))\n                                (homOfLE (leOfHom r))).symm };\n                        β.toRingHom =\n                          (Algebra.TensorProduct.map αjk\n                            (AlgHom.id (F.obj i₀) B₀)).toRingHom) ∧\n                      (d k).toRingHom.comp (D.map r).hom =\n                        (Algebra.TensorProduct.map β (AlgHom.id P Q)).toRingHom.comp\n                          (d j).toRingHom) →\n                  (∀ {j k : J} (r : j ⟶ k),\n                    letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n                    letI := (F.map (homOfLE (hi.trans k.property))).hom.toAlgebra\n                    let αjk : F.obj j.val →ₐ[F.obj i₀] F.obj k.val :=\n                        { (F.map (homOfLE (leOfHom r))).hom with\n                          commutes' := fun s ↦\n                            congrArg (fun f : F.obj i₀ ⟶ F.obj k.val ↦ f s)\n                              (F.map_comp (homOfLE (hi.trans j.property))\n                                (homOfLE (leOfHom r))).symm }\n                    (c k).toRingHom.comp (E.map r).hom =\n                      (Algebra.TensorProduct.map αjk (AlgHom.id (F.obj i₀) C₀)).toRingHom.comp\n                        (c j).toRingHom) →\n                  (∀ j : J,\n                  letI := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra\n                  letI := aPs j\n                  ((c j).toRingHom.comp ((α.app j).hom.comp (d j).symm.toRingHom)).comp\n                    (Algebra.TensorProduct.includeLeftRingHom (R := P)\n                      (A := ↥(F.obj j.val) ⊗[F.obj i₀] B₀) (B := Q)) =\n                    (Algebra.TensorProduct.map (Algebra.ofId (F.obj j.val) (F.obj j.val))\n                      φ₀).toRingHom) →\n                  (∀ {j k} (r : j ⟶ k), IsPushout (α.app j) (D.map r)\n                    (E.map r) (α.app k))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T141529-L-379658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T141529-L-379658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

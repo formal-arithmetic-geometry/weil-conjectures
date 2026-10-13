@@ -11,6 +11,12 @@ public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 
+import Sheaf.RingTheory.ComparisonTensorStageDiagrams
+
+import Sheaf.RingTheory.ComparisonTensorNaturalExtension
+
+import Sheaf.RingTheory.ComparisonTensorTransitionPushout
+
 /-! # Finite-stage tensor comparison diagrams
 Source: Stacks Project, Algebra, Tag 02JO (3), construction of Ψ, and Tag 00DD.
 (blueprint: lem-weil-pbc-comparison-tensor-diagrams-b4)
@@ -137,6 +143,15 @@ theorem exists_comparison_tensor_diagrams
                             (F.map_comp (homOfLE hi) (homOfLE j.property)).symm }
                     c j ((α.app j).hom ((d j).symm (1 ⊗ₜ[P] q))) =
                       Algebra.TensorProduct.map αij (AlgHom.id (F.obj i₀) C₀)
-                        (ψ (1 ⊗ₜ[P] q))) := by sorry
+                        (ψ (1 ⊗ₜ[P] q))) := by
+  obtain ⟨aPs, D, E, d, c, βs, hβs, hDt, hEt⟩ :=
+    exists_comparison_tensor_stage_diagrams F i₀ B₀ C₀ P Q i hi aPi
+  obtain ⟨α, hcompat, hQ⟩ :=
+    exists_comparison_tensor_natural_extension F i₀ B₀ C₀ φ₀ P Q i hi aPi ψ hψ
+      aPs D E d c βs hβs hDt hEt
+  refine ⟨aPs, D, E, α, d, c, βs, hβs, hDt, hEt, ?_, hcompat, hQ⟩
+  intro j k r
+  exact comparison_tensor_transition_isPushout F i₀ B₀ C₀ φ₀ P Q i hi aPi
+    aPs D E α d c hDt hEt hcompat r
 
 end RingHom
