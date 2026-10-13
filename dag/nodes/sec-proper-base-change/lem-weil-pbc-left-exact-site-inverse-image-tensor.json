@@ -26,67 +26,177 @@
   "def-weil-pbc-sheafification",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite-limit hypothesis gives the covering fibre-product comparisons in the definition of continuity, and cover preservation gives its other clause. The continuous-pushforward node therefore shows that precomposition R sends sheaves to sheaves. Apply the adjunction node in sets and in abelian groups: L is precisely sheafification of the left Kan extension along u^op and L is left adjoint to R. Smallness makes each comma category small, so its colimit exists in the stipulated larger universe.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "00WV definition-continuous; 00WW lemma-pushforward-sheaf; 00WX lemma-adjoint-sheaves"
+   }
+  },
+  {
+   "text": "The presheaf-pullback node (2) applies because C has finite limits and u preserves them: every comma category I_W^op is filtered and the set-valued Kan extension preserves finite limits. Inclusion of sheaves into presheaves preserves limits by the sectionwise-limits node, and sheafification preserves finite limits by the sheafification node. Their composite L therefore preserves finite limits. The left-adjoint-colimits node applied to the preceding adjunction gives all colimits. Thus the adjunction is a geometric morphism in the stated direction.",
+   "uses": [
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "00X3 lemma-directed; 00X5 lemma-directed-morphism; 00X6 proposition-get-morphism"
+   }
+  },
+  {
+   "text": "The preceding continuity and set-valued finite-limit preservation make u a morphism of sites, so the abelian-exactness node applies without adding a hypothesis: the abelian L is additive and preserves finite limits and finite colimits, hence short exact sequences. Its adjunction from step 1 also gives all colimits. The underlying-sheaf node identifies the underlying sets of abelian L with set-valued L. Its group operations are the images of the original operations: the adjunction unit is an abelian homomorphism, and uniqueness of adjuncts determines addition and zero after the product comparisons of step 2.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-site-pullback-abelian-underlying",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "04JC lemma-flat-pullback-exact, first paragraph; 03DC lemma-exactness-pushforward-pullback"
+   }
+  },
+  {
+   "text": "Write V for underlying sheaves of sets. A map from F tensor_Z G to an abelian sheaf H is uniquely a natural sectionwise Z-bilinear map VF times VG to VH: first use the ordinary sectionwise tensor universal property and then the sheafification adjunction. For any abelian sheaf H on D, set-valued adjunction and the product comparison give bijections Bilin(F,G,RH) = Bilin(LF,LG,H). Explicitly, b on the left has adjunct beta = epsilon_VH composed with Lb composed with the inverse of L(VF times VG) -> VLF times VLG; the inverse sends beta to Rbeta composed with (eta_VF,eta_VG). Naturality and the triangle identities make these inverse. Bilinearity is preserved in both directions: transpose the equation b(a+a_prime,c)=b(a,c)+b(a_prime,c) on VF times VF times VG, using preservation of this triple product and addition from step 3; transpose the equation in the second variable on VF times VG times VG. The zero equations transpose using the terminal object, and integer linearity follows from additivity. Thus Hom(L(F tensor_Z G),H) = Bilin(F,G,RH) = Bilin(LF,LG,H) = Hom(LF tensor_Z LG,H), naturally in H. Applying these bijections to identity maps gives mutually inverse tensor comparisons. The forward comparison is adjoint to (s,t) -> eta_F(s) tensor eta_G(t), fixing its normalization and naturality.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-site-pullback-abelian-underlying"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "03EL lemma-tensor-product-pullback, all Hom/Bilin equalities with the third equality expanded"
+   }
+  },
+  {
+   "text": "Define underline{Z} as sheafification of the constant presheaf Z. A map underline{Z} -> H is uniquely a compatible family h_U in H(U), the image of 1; equivalently it is a map from the terminal sheaf to VH. The sheafification adjunction, the abelian adjunction, the set adjunction and L(*) = * therefore give Hom(L underline{Z}_C,H) = Hom(underline{Z}_C,RH) = Hom(*_C,RVH) = Hom(*_D,VH) = Hom(underline{Z}_D,H). Identity maps give inverse unit comparisons. The comparison sends the pullback of 1 to 1 and, by additivity, the pullback of n to n for every integer n.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "03EL lemma-tensor-product-pullback specialized to the integer unit; explicit free-abelian-unit calculation"
+   }
+  },
+  {
+   "text": "The composition node supplies the adjunction-compatible inverse-image comparison for two composable site functors (with its labels relabelled to our orientation); its unit compatibility sends the generator eta_composite(s) to eta_second(eta_first(s)). The identity comparison sends eta_identity(s) to s by the triangle identity. To check the monoidal diagrams, take adjuncts and precompose with the universal bilinear map F times G -> F tensor_Z G: both composition routes send (s,t) to eta_second(eta_first(s)) tensor eta_second(eta_first(t)), and both identity routes send (s,t) to s tensor t. The unit routes send 1 to 1. These checks determine the maps because of the Hom/Bilin bijections of step 4 and the unit bijections of step 5; they do not assume that pullback sheaves are evaluated by precomposition. For associativity, after the same adjunction and universal-map reductions both routes send (s,t,r) to (eta(s) tensor eta(t)) tensor eta(r), identified with eta(s) tensor (eta(t) tensor eta(r)) by associativity. For symmetry both send (s,t) to eta(t) tensor eta(s). For the left and right unit diagrams both send (n,s) or (s,n) to n eta(s). The elementary identities for ordinary tensors descend through sheafification by its uniqueness property. Consequently the tensor and unit comparisons define a strong symmetric monoidal functor, and the composition and identity comparisons are monoidal.",
+   "uses": [
+    "lem-weil-pbc-site-morphism-composition",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "03CB lemma-composition-morphisms-sites; 03EL lemma-tensor-product-pullback; RefactorInstruction.tex Section 4 prop:pX"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-pullback-abelian-underlying",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00X6 proposition-get-morphism and sites-modules.tex Tag 03EL lemma-tensor-product-pullback; coherence on pure tensors follows the blueprint RefactorInstruction.tex Section 4 prop:pX"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A continuous finite limit preserving functor between small sites induces a geometric morphism with inverse image left Kan extension followed by sheafification",
-   "results": "; 8 hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.Functor.IsContinuous.op_comp_isSheaf_of_types, CategoryTheory.Functor.op_comp_isSheaf, CategoryTheory.Functor.op_comp_isSheaf_of_types, CategoryTheory.RanIsSheafOfIsCocontinuous.fac",
-   "date": "2026-10-14",
-   "verdict": "no match for the complete statement; candidates are discussed in report.md"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Sheaf pullback for a cover preserving representably flat functor preserves finite limits and tensor products of abelian sheaves",
-   "results": "; 8 hits: CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp, CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts",
-   "date": "2026-10-14",
-   "verdict": "no match for the complete statement; candidates are discussed in report.md"
+   "query": "continuous left exact functor of sites induces geometric morphism and exact symmetric monoidal inverse image",
+   "results": "; 8 hits: CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.Functor.IsContinuous, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.IsCocontinuous, CategoryTheory.Functor.inducedTopology_isCocontinuous, CategoryTheory.Functor.IsContinuous.op_comp_isSheaf_of_types, CategoryTheory.Functor.isContinuous_of_coverPreserving",
+   "date": "2026-10-13",
+   "verdict": "partial candidates only; no complete statement match"
   },
   {
    "tool": "loogle",
-   "query": "\"sheafPullback\", \"PreservesFiniteLimits\"",
-   "results": "; 3 hits: CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
-   "date": "2026-10-14",
-   "verdict": "no match for the complete statement; candidates are discussed in report.md"
+   "query": "sheafPullback PreservesFiniteLimits",
+   "results": "loogle: Unknown identifier `sheafPullback`; 0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "invalid identifier query; not evidence of absence"
   },
   {
    "tool": "grep",
-   "query": "preservesFiniteLimits_sheafPullback|instPreservesFiniteLimits.*[Ss]heaf|Monoidal.*[Ss]heafPullback|[Ss]heafPullback.*Monoidal",
+   "query": "sheafPullback.*tensor|tensor.*sheafPullback",
    "results": "; 0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match for the complete statement; candidates are discussed in report.md"
-  },
-  {
-   "tool": "grep",
-   "query": "instPreservesFiniteLimitsSheafSheafPullback|preservesFiniteLimits|sheafAdjunctionContinuous",
-   "results": "; 5 hits: 23, 59, 75, 82, 87",
-   "date": "2026-10-14",
-   "verdict": "no match for the complete statement; candidates are discussed in report.md"
-  },
-  {
-   "tool": "grep",
-   "query": "sheafPullback.*[Mm]onoidal|[Mm]onoidal.*sheafPullback|[Tt]ensor.*[Pp]ullback|[Pp]ullback.*[Tt]ensor",
-   "results": "; 0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match for the complete statement; candidates are discussed in report.md"
+   "date": "2026-10-13",
+   "verdict": "partial candidates only; no complete statement match"
   },
   {
    "tool": "leansearch",
-   "query": "Continuous left exact functor of small sites gives geometric inverse image exact and symmetric monoidal on abelian sheaves",
+   "query": "inverse image of abelian sheaves along a continuous left exact site functor preserves tensor products",
    "results": "service unavailable: Internal Server Error; 0 hits: ",
-   "date": "2026-10-14",
+   "date": "2026-10-13",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a geometric morphism preserves bilinear maps and tensor products of abelian group objects",
+   "results": "; 8 hits: CategoryTheory.Preadditive.commGrpEquivalence_inverse_map, CategoryTheory.Preadditive.toCommGrp_map, CategoryTheory.yonedaCommGrpGrp_map_app, CategoryTheory.Preadditive.commGrpEquivalence_functor_map_hom_hom_hom, CategoryTheory.yonedaCommGrpGrpObj_map, CommGrpCat.coyonedaType_obj_map, CommGrpCat.coyoneda_obj_map, Rep.MonoidalClosed.linearHomEquivComm_symm_hom",
+   "date": "2026-10-13",
+   "verdict": "partial candidates only; no complete statement match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\"",
+   "results": "; 10 hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+   "date": "2026-10-13",
+   "verdict": "partial candidates only; no complete statement match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|tensor.*[Bb]ilin|[Bb]ilin.*tensor",
+   "results": "; 10 hits: Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "date": "2026-10-13",
+   "verdict": "partial candidates only; no complete statement match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-profinite-point-pullback",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "worker": "stage1",
+  "summary": "Second reading repaired the missing set-valued finite-limit argument, bilinear adjunction, integer unit, and explicit coherence calculations using existing nodes only.",
+  "blueprint": "Realizes the coefficient-realization interface used by thm-weil-pbc-finite-extension: the general morphism-of-sites and sheaf tensor argument in RefactorInstruction.tex Section 4 prop:pX."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-d72b5ad77",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-d72b5ad77 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. Verified all six proof steps, tensor and unit comparisons, coherence, edge cases, and exact master coefficient/base-change interfaces. No circularity, duplicate split, missing non-elementary argument, or target weakening found. Review written to review.md; no fixes or tool_uses needed."
+ }
 }
