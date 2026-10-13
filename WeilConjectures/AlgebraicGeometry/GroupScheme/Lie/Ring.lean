@@ -129,6 +129,17 @@ theorem GrpObj.coe_infPointsEquivTangentGroup_apply (v : GrpObj.infPoints G) :
       inv dualNumbersToSpecOver ≫ (v : Scheme.dualNumbersOver _ ⟶ G) :=
   rfl
 
+/-- Through `(Spec R)[ε] ≅ Spec R[ε]`, scaling the infinitesimal by `c ∈ R` is `Spec` of
+`ε ↦ cε`. -/
+theorem dualNumbersScaleOver_comp_dualNumbersToSpecOver (c : R) :
+    Scheme.dualNumbersScaleOver (Spec (.of R)) ((Scheme.ΓSpecIso (.of R)).inv c) ≫
+        dualNumbersToSpecOver =
+      dualNumbersToSpecOver ≫
+        (Spec.map (CommRingCat.ofHom (DualNumber.scale c).toRingHom)).asOver (Spec (.of R)) := by
+  ext1
+  dsimp only [Over.comp_left, Scheme.dualNumbersScaleOver_left]
+  exact Scheme.dualNumbersScale_comp_dualNumbersToSpec (.of R) c
+
 /-! ### Tangent points -/
 
 namespace GrpObj

@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
+public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.LowerStarId
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.ZetaFunction.Examples

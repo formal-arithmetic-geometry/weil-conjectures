@@ -7,17 +7,20 @@ module
 
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExchangeMate
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.WeilSheaf.LowerStar
+public import WeilConjectures.WeilSheaf.OpenImmersion
 
 /-!
-# The adjunction `φ^* ⊣ φ_*` of pro-étale Weil sheaves
+# The adjunction `φ^* ⊣ φ_*` of Weil sheaves
 
 Let `φ : X ⟶ Y` be a morphism of `k₀`-schemes. The pullback and the pushforward of pro-étale
 Weil sheaves along `φ` are the pullback and the pushforward along the base change
 `φ̄ : X̄ ⟶ Ȳ`, with the Weil structures transported along the Frobenius exchange isomorphisms.
 These exchange isomorphisms are mates under `φ̄^* ⊣ φ̄_*`
 (`AlgebraicGeometry.ProEtale.mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv`), so
-the adjunction lifts to pro-étale Weil sheaves, with the unit and the counit of `φ̄^* ⊣ φ̄_*`.
+the adjunction lifts to pro-étale Weil sheaves, with the unit and the counit of `φ̄^* ⊣ φ̄_*`,
+and restricts to Weil sheaves.
 
 The base changes `ī`, `j̄` of morphisms `i`, `j` with complementary ranges again have
 complementary ranges (`AlgebraicGeometry.Scheme.Hom.isCompl_range_geometricFiberMap`).
@@ -28,6 +31,13 @@ complementary ranges (`AlgebraicGeometry.Scheme.Hom.isCompl_range_geometricFiber
   `φ^* ⊣ φ_*` of pro-étale Weil sheaves.
 - `AlgebraicGeometry.ProEtaleWeilSheaf.upperStarLowerStarAdjunction_counit_app_hom_f`: its
   counit is the counit of `φ̄^* ⊣ φ̄_*`; along an open immersion it is invertible.
+- `AlgebraicGeometry.WeilSheaf.upperStarLowerStarAdjunction`: `φ^* ⊣ φ_*` on Weil sheaves; its
+  unit and counit have the underlying morphisms of `ℓ`-adic sheaves of
+  `AlgebraicGeometry.ProEtale.adicUpperStarLowerStarAdjunction`.
+- `AlgebraicGeometry.WeilSheaf.isIso_of_isIso_hom_hom_f`: a morphism of Weil sheaves is an
+  isomorphism if its underlying morphism of `ℓ`-adic sheaves is.
+- `AlgebraicGeometry.WeilSheaf.isIso_upperStarLowerStarAdjunction_counit`: for a quasi-compact
+  open immersion `j`, the counit `j^* j_* ⟶ 𝟭` is an isomorphism.
 -/
 
 @[expose] public section
@@ -126,6 +136,65 @@ instance ProEtaleWeilSheaf.isIso_upperStarLowerStarAdjunction_counit (j : X ⟶ 
     inferInstanceAs (IsIso ((ProEtale.adicUpperStarLowerStarAdjunction l
       (Scheme.Hom.geometricFiberMap j (comp_over j _))).counit.app F.carrier))
   exact isIso_of_reflects_iso _ (IsoAlgebra.forget _)
+
+namespace WeilSheaf
+
+/-- A morphism of Weil sheaves is an isomorphism as soon as its underlying morphism of `ℓ`-adic
+sheaves is: the forgetful functors reflect isomorphisms. -/
+lemma isIso_of_isIso_hom_hom_f {F G : WeilSheaf k₀ l X} (f : F ⟶ G) [IsIso f.hom.hom.f] :
+    IsIso f := by
+  have : IsIso ((IsoAlgebra.forget _).map f.hom) := inferInstanceAs (IsIso f.hom.hom.f)
+  have : IsIso f.hom := isIso_of_reflects_iso _ (IsoAlgebra.forget _)
+  exact ⟨⟨ObjectProperty.homMk (inv f.hom), ObjectProperty.hom_ext _ (IsIso.hom_inv_id f.hom),
+    ObjectProperty.hom_ext _ (IsIso.inv_hom_id f.hom)⟩⟩
+
+variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
+  [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- The adjunction `φ^* ⊣ φ_*` of Weil sheaves: the adjunction `φ̄^* ⊣ φ̄_*` of `ℓ`-adic sheaves
+on the geometric fibres, whose unit and counit respect the Weil structures. -/
+noncomputable def upperStarLowerStarAdjunction :
+    upperStar (k₀ := k₀) (l := l) φ ⊣ lowerStar φ :=
+  ObjectProperty.liftFullSubcategoryAdjunction
+    (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l φ) _ _
+
+/-- The unit `F ⟶ φ_* φ^* F` of Weil sheaves is the unit of `φ̄^* ⊣ φ̄_*`. -/
+@[simp]
+lemma upperStarLowerStarAdjunction_unit_app_hom_hom_f (F : WeilSheaf k₀ l Y) :
+    ((upperStarLowerStarAdjunction φ).unit.app F).hom.hom.f =
+      (ProEtale.adicUpperStarLowerStarAdjunction l
+        (Scheme.Hom.geometricFiberMap φ (comp_over φ _))).unit.app F.obj.carrier :=
+  rfl
+
+/-- The counit `φ^* φ_* F ⟶ F` of Weil sheaves is the counit of `φ̄^* ⊣ φ̄_*`. -/
+@[simp]
+lemma upperStarLowerStarAdjunction_counit_app_hom_hom_f (F : WeilSheaf k₀ l X) :
+    ((upperStarLowerStarAdjunction φ).counit.app F).hom.hom.f =
+      (ProEtale.adicUpperStarLowerStarAdjunction l
+        (Scheme.Hom.geometricFiberMap φ (comp_over φ _))).counit.app F.obj.carrier :=
+  rfl
+
+/-- For a quasi-compact open immersion `j`, the counit `j^* j_* F ⟶ F` of Weil sheaves is an
+isomorphism, since the counit of `j̄^* ⊣ j̄_*` is. -/
+instance isIso_upperStarLowerStarAdjunction_counit_app {U : Scheme.{u}}
+    [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l U) :
+    IsIso ((upperStarLowerStarAdjunction (k₀ := k₀) (l := l) j).counit.app F) := by
+  have : IsIso ((upperStarLowerStarAdjunction (k₀ := k₀) (l := l) j).counit.app F).hom.hom.f := by
+    rw [upperStarLowerStarAdjunction_counit_app_hom_hom_f]
+    infer_instance
+  exact isIso_of_isIso_hom_hom_f _
+
+/-- For a quasi-compact open immersion `j`, the counit `j^* j_* ⟶ 𝟭` of Weil sheaves is an
+isomorphism. -/
+instance isIso_upperStarLowerStarAdjunction_counit {U : Scheme.{u}}
+    [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    IsIso (upperStarLowerStarAdjunction (k₀ := k₀) (l := l) j).counit :=
+  NatIso.isIso_of_isIso_app _
+
+end WeilSheaf
 
 end Adjunction
 

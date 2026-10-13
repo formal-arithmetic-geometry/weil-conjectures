@@ -56,4 +56,27 @@ theorem exists_comp_eq_of_isFinite_of_surjective (f : X ⟶ Y) [IsFinite f] [Sur
   obtain ⟨s, hs⟩ := exists_comp_eq_id_of_isFinite (pullback.snd f y)
   exact ⟨s ≫ pullback.fst f y, by rw [Category.assoc, pullback.condition, reassoc_of% hs]⟩
 
+/-- A global function on a reduced scheme `X` locally of finite type over an algebraically closed
+field `K` vanishes if it vanishes at every `K`-point of `X`: the `K`-points are the closed points,
+which are dense in every open subset of the Jacobson space `X`. -/
+theorem eq_zero_of_forall_appTop_eq_zero [IsReduced X] (f : X ⟶ Spec (.of K))
+    [LocallyOfFiniteType f] (a : Γ(X, ⊤))
+    (h : ∀ p : Spec (.of K) ⟶ X, p ≫ f = 𝟙 _ → p.appTop a = 0) : a = 0 := by
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  rw [← basicOpen_eq_bot_iff]
+  by_contra hne
+  obtain ⟨x, hxa, hx⟩ := nonempty_inter_closedPoints (Z := (X.basicOpen a : Set X))
+    (not_not.1 ((TopologicalSpace.Opens.not_nonempty_iff_eq_bot _).not.2 hne))
+    (X.basicOpen a).isOpen.isLocallyClosed
+  have hp := h _ (pointOfClosedPoint_comp f x hx)
+  have hmem : IsLocalRing.closedPoint K ∈ pointOfClosedPoint f x hx ⁻¹ᵁ X.basicOpen a := by
+    change pointOfClosedPoint f x hx (IsLocalRing.closedPoint K) ∈ X.basicOpen a
+    rwa [pointOfClosedPoint_apply]
+  rw [Scheme.preimage_basicOpen] at hmem
+  change IsLocalRing.closedPoint K ∈
+    (Spec (.of K)).basicOpen ((pointOfClosedPoint f x hx).appTop a)
+    at hmem
+  rw [hp, Scheme.basicOpen_zero] at hmem
+  exact hmem
+
 end AlgebraicGeometry
