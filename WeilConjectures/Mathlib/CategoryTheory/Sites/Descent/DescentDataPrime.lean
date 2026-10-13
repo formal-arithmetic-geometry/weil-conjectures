@@ -87,6 +87,55 @@ lemma pullHom_mapComp'_inv {S S' Y : C} (h : S' ⟶ S) (x : Y ⟶ S') (xh : Y �
   rw [F.mapComp'_inv_whiskerRight_mapComp'₀₂₃_inv_app _ _ _ _ _ _ rfl rfl (by cat_disch)]
   simp
 
+set_option backward.isDefEq.respectTransparency false in
+/-- `pullHom` of a morphism conjugated by the inverses of the comparison isomorphisms
+`mapComp'`. -/
+lemma pullHom_mapComp'_conj_symm ⦃X₁ X₂ X₁' X₂' : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄
+    ⦃M₂ : F.obj (.mk (op X₂))⦄ (p₁ : X₁' ⟶ X₁) (p₂ : X₂' ⟶ X₂) ⦃Y : C⦄ (r₁ : Y ⟶ X₁')
+    (r₂ : Y ⟶ X₂') (x₁ : Y ⟶ X₁) (x₂ : Y ⟶ X₂) (hx₁ : r₁ ≫ p₁ = x₁) (hx₂ : r₂ ≫ p₂ = x₂)
+    (ψ : (F.map r₁.op.toLoc).toFunctor.obj ((F.map p₁.op.toLoc).toFunctor.obj M₁) ⟶
+      (F.map r₂.op.toLoc).toFunctor.obj ((F.map p₂.op.toLoc).toFunctor.obj M₂))
+    ⦃Y' : C⦄ (l : Y' ⟶ Y) (z₁ : Y' ⟶ X₁') (z₂ : Y' ⟶ X₂') (hz₁ : l ≫ r₁ = z₁)
+    (hz₂ : l ≫ r₂ = z₂) (y₁ : Y' ⟶ X₁) (y₂ : Y' ⟶ X₂) (hy₁ : z₁ ≫ p₁ = y₁)
+    (hy₂ : z₂ ≫ p₂ = y₂) :
+    pullHom ((F.mapComp' p₁.op.toLoc r₁.op.toLoc x₁.op.toLoc
+        (op_toLoc_comp_eq hx₁)).hom.toNatTrans.app M₁ ≫ ψ ≫
+        (F.mapComp' p₂.op.toLoc r₂.op.toLoc x₂.op.toLoc
+          (op_toLoc_comp_eq hx₂)).inv.toNatTrans.app M₂) l y₁ y₂
+        (by rw [← hy₁, ← hx₁, ← hz₁, Category.assoc])
+        (by rw [← hy₂, ← hx₂, ← hz₂, Category.assoc]) =
+      (F.mapComp' p₁.op.toLoc z₁.op.toLoc y₁.op.toLoc
+          (op_toLoc_comp_eq hy₁)).hom.toNatTrans.app M₁ ≫
+        pullHom ψ l z₁ z₂ hz₁ hz₂ ≫
+        (F.mapComp' p₂.op.toLoc z₂.op.toLoc y₂.op.toLoc
+          (op_toLoc_comp_eq hy₂)).inv.toNatTrans.app M₂ := by
+  subst hx₁ hx₂ hz₁ hz₂ hy₁ hy₂
+  dsimp [pullHom]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [F.mapComp'₀₂₃_hom_comp_mapComp'_hom_whiskerRight_app_assoc _ _ _ _ _ _ rfl rfl
+      (by cat_disch),
+    F.mapComp'_inv_whiskerRight_mapComp'₀₂₃_inv_app _ _ _ _ _ _ rfl rfl (by cat_disch)]
+
+/-- Morphisms with equal pullbacks have equal `pullHom`s. -/
+lemma pullHom_eq_pullHom_of_map_eq ⦃X₁ X₂ : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄
+    ⦃M₂ : F.obj (.mk (op X₂))⦄ ⦃Y : C⦄ ⦃f₁ : Y ⟶ X₁⦄ ⦃f₂ : Y ⟶ X₂⦄
+    {φ φ' : (F.map f₁.op.toLoc).toFunctor.obj M₁ ⟶ (F.map f₂.op.toLoc).toFunctor.obj M₂}
+    ⦃Y' : C⦄ (g : Y' ⟶ Y) (gf₁ : Y' ⟶ X₁) (gf₂ : Y' ⟶ X₂) (hgf₁ : g ≫ f₁ = gf₁)
+    (hgf₂ : g ≫ f₂ = gf₂)
+    (h : (F.map g.op.toLoc).toFunctor.map φ = (F.map g.op.toLoc).toFunctor.map φ') :
+    pullHom φ g gf₁ gf₂ hgf₁ hgf₂ = pullHom φ' g gf₁ gf₂ hgf₁ hgf₂ := by
+  simp only [pullHom, h]
+
+/-- Morphisms with equal `pullHom`s have equal pullbacks. -/
+lemma map_eq_map_of_pullHom_eq ⦃X₁ X₂ : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄
+    ⦃M₂ : F.obj (.mk (op X₂))⦄ ⦃Y : C⦄ ⦃f₁ : Y ⟶ X₁⦄ ⦃f₂ : Y ⟶ X₂⦄
+    {φ φ' : (F.map f₁.op.toLoc).toFunctor.obj M₁ ⟶ (F.map f₂.op.toLoc).toFunctor.obj M₂}
+    ⦃Y' : C⦄ (g : Y' ⟶ Y) (gf₁ : Y' ⟶ X₁) (gf₂ : Y' ⟶ X₂) (hgf₁ : g ≫ f₁ = gf₁)
+    (hgf₂ : g ≫ f₂ = gf₂) (h : pullHom φ g gf₁ gf₂ hgf₁ hgf₂ = pullHom φ' g gf₁ gf₂ hgf₁ hgf₂) :
+    (F.map g.op.toLoc).toFunctor.map φ = (F.map g.op.toLoc).toFunctor.map φ' := by
+  rw [map_eq_pullHom φ g gf₁ gf₂ hgf₁ hgf₂, map_eq_pullHom φ' g gf₁ gf₂ hgf₁ hgf₂, h]
+
+
 end LocallyDiscreteOpToCat
 
 open LocallyDiscreteOpToCat

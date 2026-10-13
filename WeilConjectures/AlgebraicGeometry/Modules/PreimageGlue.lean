@@ -5,25 +5,26 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
 
 /-!
-# Gluing data for modules along preimages of an open cover
+# Gluing morphisms for modules along preimages of an open cover
 
-Let `U a` be a family of opens of a scheme `S` and `g : Z ⟶ S` a morphism. We consider gluing
-data for sheaves of modules on `Z` relative to the opens `g⁻¹ U a`, with the intersections
-`g⁻¹ (U a ⊓ U b)` and `g⁻¹ (U a ⊓ U b ⊓ U c)` as chosen (wide) pullbacks
-(`AlgebraicGeometry.Scheme.Modules.PreGlueData`), *without* the cocycle conditions.
-
-We also consider gluing morphisms for modules `O a` on the opens `G⁻¹ U a` of a fixed scheme
-`T` over `S`, given over the preimages of the intersections in any `h : Z ⟶ T`
-(`AlgebraicGeometry.Scheme.Modules.HomData`). Such data can be pulled back along any `Z' ⟶ Z`
-by `pullHom`, and the identity and cocycle conditions are compatible with these pullbacks.
+Let `U a` be a family of opens of a scheme `S` and let `O a` be modules on schemes `W a`. For a
+morphism `g : Z ⟶ S` together with morphisms `μ a : g⁻¹ U a ⟶ W a`, we consider *gluing
+morphisms* `H a b` between the pullbacks of `O a` and `O b` to `g⁻¹ (U a ⊓ U b)`
+(`AlgebraicGeometry.Scheme.Modules.GlueHom`), without the identity and cocycle conditions. The
+intersections `g⁻¹ (U a ⊓ U b)` and `g⁻¹ (U a ⊓ U b ⊓ U c)` are chosen (wide) pullbacks
+(`AlgebraicGeometry.Scheme.Modules.preimageChosenPullback`). Gluing morphisms can be pulled back
+along any morphism `h : Z' ⟶ Z` over `S` (`GlueHom.pull`), compatibly with the identity and
+cocycle conditions (`GlueHom.SelfCond`, `GlueHom.CocycleCond`). When these conditions hold, the
+gluing morphisms define a descent datum relative to the open cover `g⁻¹ U a` of `Z`
+(`CategoryTheory.Pseudofunctor.DescentData'.ofGlue`).
 
 This is used to glue modules descended to a finite stage of a cofiltered limit of schemes: the
-cocycle conditions only hold after passing to a later stage.
+modules `O a` live on (possibly different) stages, and the conditions only hold after passing to
+a later stage.
 -/
 
 @[expose] public section
@@ -31,90 +32,6 @@ cocycle conditions only hold after passing to a later stage.
 universe u
 
 open CategoryTheory Limits Opposite Pseudofunctor LocallyDiscreteOpToCat
-
-namespace CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
-
-variable {C : Type*} [Category* C] {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat}
-
-lemma op_toLoc_comp_eq {X Y Z : C} {f : X ⟶ Y} {g : Y ⟶ Z} {fg : X ⟶ Z} (h : f ≫ g = fg) :
-    g.op.toLoc ≫ f.op.toLoc = fg.op.toLoc := by
-  subst h
-  rfl
-
-set_option backward.isDefEq.respectTransparency false in
-/-- `pullHom` of a morphism conjugated by the comparison isomorphisms `mapComp'`. -/
-lemma pullHom_mapComp'_conj ⦃X₁ X₂ X₁' X₂' : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄
-    ⦃M₂ : F.obj (.mk (op X₂))⦄ (r₁ : X₁' ⟶ X₁) (r₂ : X₂' ⟶ X₂) ⦃Y : C⦄ (p₁ : Y ⟶ X₁')
-    (p₂ : Y ⟶ X₂') (x₁ : Y ⟶ X₁) (x₂ : Y ⟶ X₂) (hx₁ : p₁ ≫ r₁ = x₁) (hx₂ : p₂ ≫ r₂ = x₂)
-    (ψ : (F.map x₁.op.toLoc).toFunctor.obj M₁ ⟶ (F.map x₂.op.toLoc).toFunctor.obj M₂)
-    ⦃Y' : C⦄ (l : Y' ⟶ Y) (f₁ : Y' ⟶ X₁') (f₂ : Y' ⟶ X₂') (hl₁ : l ≫ p₁ = f₁)
-    (hl₂ : l ≫ p₂ = f₂) (y₁ : Y' ⟶ X₁) (y₂ : Y' ⟶ X₂) (hy₁ : f₁ ≫ r₁ = y₁)
-    (hy₂ : f₂ ≫ r₂ = y₂) :
-    pullHom ((F.mapComp' r₁.op.toLoc p₁.op.toLoc x₁.op.toLoc
-        (op_toLoc_comp_eq hx₁)).inv.toNatTrans.app M₁ ≫ ψ ≫
-        (F.mapComp' r₂.op.toLoc p₂.op.toLoc x₂.op.toLoc
-          (op_toLoc_comp_eq hx₂)).hom.toNatTrans.app M₂) l f₁ f₂ hl₁ hl₂ =
-      (F.mapComp' r₁.op.toLoc f₁.op.toLoc y₁.op.toLoc
-          (op_toLoc_comp_eq hy₁)).inv.toNatTrans.app M₁ ≫
-        pullHom ψ l y₁ y₂ (by rw [← hy₁, ← hx₁, ← hl₁, Category.assoc])
-          (by rw [← hy₂, ← hx₂, ← hl₂, Category.assoc]) ≫
-        (F.mapComp' r₂.op.toLoc f₂.op.toLoc y₂.op.toLoc
-          (op_toLoc_comp_eq hy₂)).hom.toNatTrans.app M₂ := by
-  subst hx₁ hx₂ hl₁ hl₂ hy₁ hy₂
-  dsimp [pullHom]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [F.mapComp'₀₁₃_inv_comp_mapComp'₀₂₃_hom_app_assoc _ _ _ _ _ _ rfl rfl (by cat_disch),
-    mapComp'₀₂₃_inv_comp_mapComp'₀₁₃_hom_app _ _ _ _ _ _ _ rfl rfl (by cat_disch)]
-
-set_option backward.isDefEq.respectTransparency false in
-/-- `pullHom` of a morphism conjugated by the inverses of the comparison isomorphisms
-`mapComp'`. -/
-lemma pullHom_mapComp'_conj_symm ⦃X₁ X₂ X₁' X₂' : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄
-    ⦃M₂ : F.obj (.mk (op X₂))⦄ (p₁ : X₁' ⟶ X₁) (p₂ : X₂' ⟶ X₂) ⦃Y : C⦄ (r₁ : Y ⟶ X₁')
-    (r₂ : Y ⟶ X₂') (x₁ : Y ⟶ X₁) (x₂ : Y ⟶ X₂) (hx₁ : r₁ ≫ p₁ = x₁) (hx₂ : r₂ ≫ p₂ = x₂)
-    (ψ : (F.map r₁.op.toLoc).toFunctor.obj ((F.map p₁.op.toLoc).toFunctor.obj M₁) ⟶
-      (F.map r₂.op.toLoc).toFunctor.obj ((F.map p₂.op.toLoc).toFunctor.obj M₂))
-    ⦃Y' : C⦄ (l : Y' ⟶ Y) (z₁ : Y' ⟶ X₁') (z₂ : Y' ⟶ X₂') (hz₁ : l ≫ r₁ = z₁)
-    (hz₂ : l ≫ r₂ = z₂) (y₁ : Y' ⟶ X₁) (y₂ : Y' ⟶ X₂) (hy₁ : z₁ ≫ p₁ = y₁)
-    (hy₂ : z₂ ≫ p₂ = y₂) :
-    pullHom ((F.mapComp' p₁.op.toLoc r₁.op.toLoc x₁.op.toLoc
-        (op_toLoc_comp_eq hx₁)).hom.toNatTrans.app M₁ ≫ ψ ≫
-        (F.mapComp' p₂.op.toLoc r₂.op.toLoc x₂.op.toLoc
-          (op_toLoc_comp_eq hx₂)).inv.toNatTrans.app M₂) l y₁ y₂
-        (by rw [← hy₁, ← hx₁, ← hz₁, Category.assoc])
-        (by rw [← hy₂, ← hx₂, ← hz₂, Category.assoc]) =
-      (F.mapComp' p₁.op.toLoc z₁.op.toLoc y₁.op.toLoc
-          (op_toLoc_comp_eq hy₁)).hom.toNatTrans.app M₁ ≫
-        pullHom ψ l z₁ z₂ hz₁ hz₂ ≫
-        (F.mapComp' p₂.op.toLoc z₂.op.toLoc y₂.op.toLoc
-          (op_toLoc_comp_eq hy₂)).inv.toNatTrans.app M₂ := by
-  subst hx₁ hx₂ hz₁ hz₂ hy₁ hy₂
-  dsimp [pullHom]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [F.mapComp'₀₂₃_hom_comp_mapComp'_hom_whiskerRight_app_assoc _ _ _ _ _ _ rfl rfl
-      (by cat_disch),
-    F.mapComp'_inv_whiskerRight_mapComp'₀₂₃_inv_app _ _ _ _ _ _ rfl rfl (by cat_disch)]
-
-/-- Morphisms with equal pullbacks have equal `pullHom`s. -/
-lemma pullHom_eq_pullHom_of_map_eq ⦃X₁ X₂ : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄
-    ⦃M₂ : F.obj (.mk (op X₂))⦄ ⦃Y : C⦄ ⦃f₁ : Y ⟶ X₁⦄ ⦃f₂ : Y ⟶ X₂⦄
-    {φ φ' : (F.map f₁.op.toLoc).toFunctor.obj M₁ ⟶ (F.map f₂.op.toLoc).toFunctor.obj M₂}
-    ⦃Y' : C⦄ (g : Y' ⟶ Y) (gf₁ : Y' ⟶ X₁) (gf₂ : Y' ⟶ X₂) (hgf₁ : g ≫ f₁ = gf₁)
-    (hgf₂ : g ≫ f₂ = gf₂)
-    (h : (F.map g.op.toLoc).toFunctor.map φ = (F.map g.op.toLoc).toFunctor.map φ') :
-    pullHom φ g gf₁ gf₂ hgf₁ hgf₂ = pullHom φ' g gf₁ gf₂ hgf₁ hgf₂ := by
-  simp only [pullHom, h]
-
-/-- Morphisms with equal `pullHom`s have equal pullbacks. -/
-lemma map_eq_map_of_pullHom_eq ⦃X₁ X₂ : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄
-    ⦃M₂ : F.obj (.mk (op X₂))⦄ ⦃Y : C⦄ ⦃f₁ : Y ⟶ X₁⦄ ⦃f₂ : Y ⟶ X₂⦄
-    {φ φ' : (F.map f₁.op.toLoc).toFunctor.obj M₁ ⟶ (F.map f₂.op.toLoc).toFunctor.obj M₂}
-    ⦃Y' : C⦄ (g : Y' ⟶ Y) (gf₁ : Y' ⟶ X₁) (gf₂ : Y' ⟶ X₂) (hgf₁ : g ≫ f₁ = gf₁)
-    (hgf₂ : g ≫ f₂ = gf₂) (h : pullHom φ g gf₁ gf₂ hgf₁ hgf₂ = pullHom φ' g gf₁ gf₂ hgf₁ hgf₂) :
-    (F.map g.op.toLoc).toFunctor.map φ = (F.map g.op.toLoc).toFunctor.map φ' := by
-  rw [map_eq_pullHom φ g gf₁ gf₂ hgf₁ hgf₂, map_eq_pullHom φ' g gf₁ gf₂ hgf₁ hgf₂, h]
-
-end CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -150,7 +67,17 @@ lemma resTo_resTo (h : Z ⟶ T) (hg : h ≫ G = g) {g' : Z' ⟶ S} (h₂ : Z' �
   rw [← cancel_mono (G ⁻¹ᵁ V).ι]
   simp [← hh]
 
+
+@[reassoc (attr := simp)]
+lemma resTo_homOfLE (h : Z ⟶ T) (hg : h ≫ G = g) {V V' W : S.Opens} (hWV : W ≤ V)
+    (hVV' : V ≤ V') :
+    resTo h hg hWV ≫ T.homOfLE (G.preimage_mono hVV') = resTo h hg (hWV.trans hVV') := by
+  rw [← cancel_mono (G ⁻¹ᵁ V').ι]
+  simp
+
 end Res
+
+section ChosenPullback
 
 variable {S : Scheme.{u}} {ι : Type u} (U : ι → S.Opens) {Z : Scheme.{u}} (g : Z ⟶ S)
 
@@ -200,52 +127,100 @@ noncomputable def preimageChosenPullback₃ (a b c : ι) :
   hp₁ := by simp
   hp₃ := by simp
 
-/-- **Gluing data without cocycle condition** for the opens `g⁻¹ U a` of `Z`: modules `obj a` on
-`g⁻¹ U a` and morphisms `hom a b` between their pullbacks to `g⁻¹ (U a ⊓ U b)`. -/
-structure PreGlueData where
-  /-- The modules on the opens `g⁻¹ U a`. -/
-  obj (a : ι) : modulesPseudofunctor.obj (.mk (op (g ⁻¹ᵁ U a).toScheme))
-  /-- The gluing morphisms on the intersections `g⁻¹ (U a ⊓ U b)`. -/
-  hom (a b : ι) :
-    (modulesPseudofunctor.map (preimageChosenPullback U g a b).p₁.op.toLoc).toFunctor.obj
-        (obj a) ⟶
-      (modulesPseudofunctor.map (preimageChosenPullback U g a b).p₂.op.toLoc).toFunctor.obj
-        (obj b)
+variable (a b c : ι)
 
-namespace PreGlueData
+@[simp]
+lemma preimageChosenPullback₃_p₁₂ :
+    (preimageChosenPullback₃ U g a b c).p₁₂ = Z.homOfLE (g.preimage_mono inf_le_left) := rfl
 
-variable {U g} (P : PreGlueData U g)
+@[simp]
+lemma preimageChosenPullback₃_p₂₃ :
+    (preimageChosenPullback₃ U g a b c).p₂₃ =
+      Z.homOfLE (g.preimage_mono (le_inf (inf_le_left.trans inf_le_right) inf_le_right)) := rfl
 
-/-- The morphism whose equality with the identity is the identity condition on `g⁻¹ U a`. -/
-noncomputable def selfMor (a : ι) :=
-  DescentData'.pullHom' (sq := preimageChosenPullback U g) P.hom (g ⁻¹ᵁ U a).ι (𝟙 _) (𝟙 _)
+@[simp]
+lemma preimageChosenPullback₃_p₁₃ :
+    (preimageChosenPullback₃ U g a b c).p₁₃ =
+      Z.homOfLE (g.preimage_mono (le_inf (inf_le_left.trans inf_le_left) inf_le_right)) := rfl
 
-/-- The left hand side of the cocycle condition on `g⁻¹ (U a ⊓ U b ⊓ U c)`. -/
-noncomputable def cocycleLeft (a b c : ι) :=
-  DescentData'.pullHom' (sq := preimageChosenPullback U g) P.hom
-      (preimageChosenPullback₃ U g a b c).p (preimageChosenPullback₃ U g a b c).p₁
-      (preimageChosenPullback₃ U g a b c).p₂ ≫
-    DescentData'.pullHom' (sq := preimageChosenPullback U g) P.hom
-      (preimageChosenPullback₃ U g a b c).p (preimageChosenPullback₃ U g a b c).p₂
-      (preimageChosenPullback₃ U g a b c).p₃
+@[simp]
+lemma preimageChosenPullback₃_p₂ :
+    (preimageChosenPullback₃ U g a b c).p₂ =
+      Z.homOfLE (g.preimage_mono (inf_le_left.trans inf_le_right)) := rfl
 
-/-- The right hand side of the cocycle condition on `g⁻¹ (U a ⊓ U b ⊓ U c)`. -/
-noncomputable def cocycleRight (a b c : ι) :=
-  DescentData'.pullHom' (sq := preimageChosenPullback U g) P.hom
-    (preimageChosenPullback₃ U g a b c).p (preimageChosenPullback₃ U g a b c).p₁
-    (preimageChosenPullback₃ U g a b c).p₃
+/-- The diagonal `g⁻¹ U a ⟶ g⁻¹ (U a ⊓ U a)`. -/
+noncomputable def preimageDiag (a : ι) :
+    (g ⁻¹ᵁ U a).toScheme ⟶ (preimageChosenPullback U g a a).pullback :=
+  Z.homOfLE (g.preimage_mono (le_inf le_rfl le_rfl))
 
-/-- The identity and cocycle conditions. -/
-structure IsCocycle : Prop where
-  selfMor_eq (a : ι) : P.selfMor a = 𝟙 _
-  cocycleLeft_eq (a b c : ι) : P.cocycleLeft a b c = P.cocycleRight a b c
+@[reassoc (attr := simp)]
+lemma preimageDiag_p₁ (a : ι) : preimageDiag U g a ≫ (preimageChosenPullback U g a a).p₁ = 𝟙 _ := by
+  simp [preimageDiag]
 
-set_option maxHeartbeats 20000 in
-example (D : modulesPseudofunctor.DescentData' (preimageChosenPullback U g)
-    (preimageChosenPullback₃ U g)) : PreGlueData U g where
-  obj := D.obj
-  hom a b := D.hom a b
+@[reassoc (attr := simp)]
+lemma preimageDiag_p₂ (a : ι) : preimageDiag U g a ≫ (preimageChosenPullback U g a a).p₂ = 𝟙 _ := by
+  simp [preimageDiag]
 
-end PreGlueData
+end ChosenPullback
+
+section ResTo
+
+/-! ### Restrictions of a morphism over `S` to the chosen pullbacks -/
+
+variable {S : Scheme.{u}} {ι : Type u} (U : ι → S.Opens) {Z Z' : Scheme.{u}} {g : Z ⟶ S}
+  {g' : Z' ⟶ S} (h : Z' ⟶ Z) (hg : h ≫ g = g') (a b c : ι)
+
+lemma resTo_p₁ : resTo h hg (le_refl (U a ⊓ U b)) ≫ (preimageChosenPullback U g a b).p₁ =
+    (preimageChosenPullback U g' a b).p₁ ≫ resTo h hg (le_refl (U a)) := by
+  rw [← cancel_mono (g ⁻¹ᵁ _).ι]
+  simp
+
+lemma resTo_p₂ : resTo h hg (le_refl (U a ⊓ U b)) ≫ (preimageChosenPullback U g a b).p₂ =
+    (preimageChosenPullback U g' a b).p₂ ≫ resTo h hg (le_refl (U b)) := by
+  rw [← cancel_mono (g ⁻¹ᵁ _).ι]
+  simp
+
+lemma resTo_p₁₂ :
+    resTo h hg (le_refl (U a ⊓ U b ⊓ U c)) ≫ (preimageChosenPullback₃ U g a b c).p₁₂ =
+      (preimageChosenPullback₃ U g' a b c).p₁₂ ≫ resTo h hg (le_refl (U a ⊓ U b)) := by
+  rw [← cancel_mono (g ⁻¹ᵁ _).ι]
+  simp
+
+lemma resTo_p₂₃ :
+    resTo h hg (le_refl (U a ⊓ U b ⊓ U c)) ≫ (preimageChosenPullback₃ U g a b c).p₂₃ =
+      (preimageChosenPullback₃ U g' a b c).p₂₃ ≫ resTo h hg (le_refl (U b ⊓ U c)) := by
+  rw [← cancel_mono (g ⁻¹ᵁ _).ι]
+  simp
+
+lemma resTo_p₁₃ :
+    resTo h hg (le_refl (U a ⊓ U b ⊓ U c)) ≫ (preimageChosenPullback₃ U g a b c).p₁₃ =
+      (preimageChosenPullback₃ U g' a b c).p₁₃ ≫ resTo h hg (le_refl (U a ⊓ U c)) := by
+  rw [← cancel_mono (g ⁻¹ᵁ _).ι]
+  simp
+
+lemma resTo_p₁' :
+    resTo h hg (le_refl (U a ⊓ U b ⊓ U c)) ≫ (preimageChosenPullback₃ U g a b c).p₁ =
+      (preimageChosenPullback₃ U g' a b c).p₁ ≫ resTo h hg (le_refl (U a)) := by
+  rw [← cancel_mono (g ⁻¹ᵁ _).ι]
+  simp
+
+lemma resTo_p₂' :
+    resTo h hg (le_refl (U a ⊓ U b ⊓ U c)) ≫ (preimageChosenPullback₃ U g a b c).p₂ =
+      (preimageChosenPullback₃ U g' a b c).p₂ ≫ resTo h hg (le_refl (U b)) := by
+  rw [← cancel_mono (g ⁻¹ᵁ _).ι]
+  simp
+
+lemma resTo_p₃' :
+    resTo h hg (le_refl (U a ⊓ U b ⊓ U c)) ≫ (preimageChosenPullback₃ U g a b c).p₃ =
+      (preimageChosenPullback₃ U g' a b c).p₃ ≫ resTo h hg (le_refl (U c)) := by
+  rw [← cancel_mono (g ⁻¹ᵁ _).ι]
+  simp
+
+lemma preimageDiag_resTo :
+    preimageDiag U g' a ≫ resTo h hg (le_refl (U a ⊓ U a)) =
+      resTo h hg (le_refl (U a)) ≫ preimageDiag U g a := by
+  simp [preimageDiag]
+
+end ResTo
 
 end AlgebraicGeometry.Scheme.Modules
