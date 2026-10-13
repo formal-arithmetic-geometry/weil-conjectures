@@ -1,0 +1,132 @@
+{
+ "id": "lem-pbc-additive-cohomology-linear-base-change",
+ "kind": "statement",
+ "title": "Canonical linear scalar extension of additive first etale cohomology",
+ "statement": "Let $k\\to k'$ be an algebra map of fields. Let $f:C\\to\\operatorname{Spec}k$ be a separated finite-type scheme of dimension at most one [def-sc-curves], and let $C'$ with maps $f',j$ be a displayed cartesian base change along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$. Let $G,G'$ be abelian sheaves on the respective small etale sites [def-weil-pbc-abelian-etale-sheaves], with natural additive section equivalences $a_U:G(U)\\simeq\\Gamma(U,\\mathcal O_U)$ and $a'_{U'}:G'(U')\\simeq\\Gamma(U',\\mathcal O_{U'})$. Let $q:j^*G\\to G'$ [def-weil-pbc-inverse-image] have adjoint section map given under these coordinates by structural pullback. Equip $H^1(G)$ and $H^1(G')$ [def-weil-pbc-etale-cohomology] with $k$- and $k'$-module structures, respectively. Assume that for every scalar there is a sheaf endomorphism which multiplies section coordinates by its structural image and induces that scalar action on cohomology. There exists a $k'$-linear equivalence $e:H^1(G')\\simeq k'\\otimes_k H^1(G)$ satisfying $e(H^1(q)(j^*x))=1\\otimes x$ for every $x\\in H^1(G)$. No finite-dimensionality, properness, smoothness, connectedness, or algebraic closedness is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "coherent-lemma-flat-base-change-cohomology, separated-case finite affine cover proof; Theorem 03P2, etale/Zariski comparison; Lemma 0A3P, first sentence of proof"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the unit-module section coordinates to identify each of G and G' with the lifted associated structure sheaf. IsCurve supplies quasi-compactness and separatedness for C, and these properties persist under the displayed base change. The section formulas determine every scalar sheaf map uniquely. The natural coefficient and ordinary-cohomology comparisons intertwine those maps and give linear comparisons for the given actions.",
+   "uses": [
+    "lem-sc-etale-tensor-unit-sections-natural",
+    "lem-sc-etale-qcoherent-source-comparison-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a finite affine open cover of C. Its intersections and their pullbacks to C' are affine. The affine tensor-section identifications identify the pulled-back cochain complex with scalar extension. The adjoint section formula hq says that the cochain map is s mapping to 1 tensor s. By the natural Cech/cohomology construction the induced map is H(q) composed with the canonical etale cohomology pullback, in the specified Ext model. Tensoring over a field is exact, giving the canonical linear isomorphism and its displayed normalization. Transport from the chosen pullback to the displayed square by the universal-property isomorphism.",
+   "uses": [
+    "lem-pc-cech-computes",
+    "lem-sc-flat-base-change-coherent",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-cech-computes",
+  "lem-sc-etale-qcoherent-source-comparison-natural",
+  "lem-sc-etale-tensor-unit-sections-natural",
+  "lem-sc-flat-base-change-coherent",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Separated-case finite affine cover proof and natural comparisons of 03P2; specialization and scalar hypotheses encoded by Q3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H.map",
+   "date": "2026-10-13",
+   "results": "0 hits; loogle: unknown identifier 'Sheaf.H.map'; ",
+   "verdict": "No exact canonical etale-cohomology scalar-extension comparison; general tensor and cohomology functor tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar compatible flat base change for first cohomology of the additive structure sheaf",
+   "date": "2026-10-13",
+   "results": "0 hits; service unavailable: ; ",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*tensor|tensor.*cohomology|H.*baseChange",
+   "date": "2026-10-13",
+   "results": "25 hits; ; Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean",
+   "verdict": "No exact canonical etale-cohomology scalar-extension comparison; general tensor and cohomology functor tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension isomorphism on first cohomology of the additive etale structure sheaf commutes with pullback",
+   "date": "2026-10-13",
+   "results": "0 hits; service unavailable: Internal Server Error; ",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv, TensorProduct",
+   "date": "2026-10-13",
+   "results": "12 hits; ; TensorProduct.comm, TensorProduct.comm_symm, TensorProduct.comm_trans_comm, TensorProduct.comm_tmul, TensorProduct.equivOfCompatibleSMul, TensorProduct.comm_symm_tmul, TensorProduct.comm_comm, TensorProduct.lift.equiv",
+   "verdict": "No exact canonical etale-cohomology scalar-extension comparison; general tensor and cohomology functor tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.AdditiveScalarBaseChange",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Characteristic-p proper base change: linear structure-sheaf comparison in the additive scalar base-change argument, steps 3 and 4."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyLinearBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/AdditiveCohomologyLinearBaseChange.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_additive_cohomology_linear_base_change",
+  "statement": "theorem exists_additive_cohomology_linear_base_change\n    {k k' : Type u}\n    [Field k] [Field k'] [Algebra k k']\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k))\n    [IsCurve f]\n    {C' : Scheme.{u}} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}\n    (h : IsPullback ι' f' f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))\n    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (G' : Sheaf C'.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (a' : ∀ U : C'.Etaleᵒᵖ, G'.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),\n      a V (G.obj.map g x) = g.unop.left.appTop (a U x))\n    (ha' : ∀ (U V : C'.Etaleᵒᵖ) (g : U ⟶ V) (x : G'.obj.obj U),\n      a' V (G'.obj.map g x) = g.unop.left.appTop (a' U x))\n    (q : (Etale.upperStar AddCommGrpCat.{u + 1} ι').obj G ⟶ G')\n    (hq : (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n        a' (Opposite.op ((MorphismProperty.Over.pullback @Etale ⊤ ι').obj U.unop))\n          (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} ι').homEquiv\n            G G' q).hom.app U x) =\n          (Limits.pullback.fst U.unop.hom ι').appTop (a U x)))\n    [Module k (Sheaf.H G 1)] [Module k' (Sheaf.H G' 1)]\n    (hscalar : ∀ c : k, ∃ μ : G ⟶ G,\n        (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n          let ρ : k →+* Γ(U.unop.left, ⊤) := U.unop.hom.appTop.hom.comp\n            (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)\n          a U (μ.hom.app U x) = a U x * ρ c) ∧\n        ∀ x : Sheaf.H G 1,\n          Sheaf.H.map μ 1 x = c • x)\n    (hscalar' : ∀ c : k', ∃ μ : G' ⟶ G',\n        (∀ (U : C'.Etaleᵒᵖ) (x : G'.obj.obj U),\n          let ρ : k' →+* Γ(U.unop.left, ⊤) := U.unop.hom.appTop.hom.comp\n            (f'.appTop.hom.comp (Scheme.ΓSpecIso (.of k')).inv.hom)\n          a' U (μ.hom.app U x) = a' U x * ρ c) ∧\n        ∀ x : Sheaf.H G' 1,\n          Sheaf.H.map μ 1 x = c • x) :\n    ∃ e : Sheaf.H G' 1 ≃ₗ[k'] (k' ⊗[k] Sheaf.H G 1),\n      ∀ x, e (Sheaf.H.map q 1 (Etale.cohomologyMap ι' G 1 x)) = 1 ⊗ₜ[k] x",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T045553-L-135077",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T045553-L-135077",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
