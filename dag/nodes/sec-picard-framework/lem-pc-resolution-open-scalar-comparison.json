@@ -15,40 +15,26 @@
  ],
  "proof": [
   {
-   "text": "Restrict the injective resolution to Y. The ringed-space restriction lemma gives an injective resolution on the over-site; the scheme overEquiv transports it to the restricted module G. Its section complex is identified degreewise by restrictAppIso with evaluation of f_*I on W. Compute open cohomology by isoRightDerivedObj and commute homology with exact evaluation and forgetting scalars. This gives c. Repeat on the principal inverse-image open to give d. All degreewise identifications are restriction of the original sections; naturality of the derived resolution comparisons gives the restriction equation.",
+   "text": "Construct the actual restricted resolution with pinned sections. Choose the explicitly constructed resolutionOpenComparison as c. Its restriction and scalar compatibility are independent statements about this fixed comparison, and pairing them gives the original statement unchanged. No data is chosen from an unproved theorem.",
    "uses": [
-    "lem-sc-ringed-space-restrict-injective-resolution",
-    "def-weil-pbc-flat-base-change-open-choices",
-    "def-sc-open-module-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the tensor unit, the nonvanishing/local-generation lemma identifies the locus of s with the basic open D(b). Its stalk basis sends s to the germ of b, which generates exactly when it is a unit. Pullback of basic opens identifies D(b) inside Y with the inverse image of D(a); this validates the principal-open evaluation used in the first step.",
-   "uses": [
-    "lem-sc-nonvanishing-iff-generates-at"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the pinned restricted-resolution sections comparison of the first step. The scalar-transport lemma says that multiplying by b in its source homology corresponds to multiplication by a in P(W). Apply it to a^n; the pullback ring map sends a^n to b^n. The chain map induced by G.smulHom(b^n) is multiplication by b^n in each restricted resolution degree, by naturality of scalar endomorphisms; isoRightDerivedObj naturality identifies its induced homology map with H^q(Y,smulHom(G,b^n)). This proves the scalar equation. The same maps work in degree zero, on empty opens, and for zero or unit a.",
-   "uses": [
-    "lem-pc-resolution-sections-homology-scalar"
+    "def-pc-resolution-open-comparison-map",
+    "lem-pc-restricted-resolution-sections-exist",
+    "lem-pc-resolution-open-restriction-core",
+    "lem-pc-resolution-open-scalar-core"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-ringed-space-restrict-injective-resolution",
-  "def-weil-pbc-flat-base-change-open-choices",
-  "def-sc-open-module-cohomology",
-  "lem-sc-nonvanishing-iff-generates-at",
-  "lem-pc-resolution-sections-homology-scalar"
+  "def-pc-resolution-open-comparison-map",
+  "lem-pc-restricted-resolution-sections-exist",
+  "lem-pc-resolution-open-restriction-core",
+  "lem-pc-resolution-open-scalar-core"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project, Tags 01E1, 01E4 and 09MR",
-  "place": "Tag 01E4, Lemma 20.7.3, evaluation of the pushed-forward resolution, with Tag 01E1 restriction and the scalar compatibility of the same section comparison"
+  "by": "worker E4",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E1 and 01E4; explicit map through the restricted injective resolution"
  },
  "mathlib_searches": [
   {
@@ -133,9 +119,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T121508-L-3528888",
+  "landing": "20261013T135101-L-155370",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-resolution-open-restriction-natural",
+ "kind": "statement",
+ "title": "Naturality of the fixed comparison for inverse-image opens",
+ "statement": "For every smaller base open V ≤ W and open U of Y=f inverse W whose inclusion image equals f inverse V, the fixed comparison c on top sections admits an additive comparison d on U commuting with restriction. This is a statement about [def-pc-resolution-open-comparison-map], [def-weil-pbc-flat-base-change-open-choices] and [def-sc-open-module-cohomology].\n\ntheorem resolution_open_restriction_natural {X T : Scheme.{u}}\n    (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F) (q : ℕ)\n    (W : T.Opens) (R : RestrictedResolutionSections I (f ⁻¹ᵁ W))\n    (V : T.Opens) (hVW : V ≤ W) (U : (f ⁻¹ᵁ W).toScheme.Opens)\n    (hU : (f ⁻¹ᵁ W).ι ''ᵁ U = f ⁻¹ᵁ V) :\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let P := sectionCohomologyPresheaf K q\n    let Y := (f ⁻¹ᵁ W).toScheme\n    let G := (restrictFunctor (f ⁻¹ᵁ W).ι).obj F\n    let c := resolutionOpenComparison f F I q W R\n    ∃ d : P.obj (op V) ≃+\n      (RingedSpace.openModuleCohomology Y.toRingedSpace q U).obj G,\n      ∀ x : P.obj (op W),\n        (RingedSpace.openModuleCohomologyRestriction Y.toRingedSpace q\n          (homOfLE (le_top : U ≤ ⊤))).app G (c x) =\n            d ((P.map (homOfLE hVW).op).hom x)",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Tags 01E1, 01E2 Equation 20.7.1.1 and 01E4"
+ },
+ "stmt_deps": [
+  "def-pc-resolution-open-comparison-map",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Compute U-open cohomology using the given R.resolution on Y, with no second restriction of injectives. Compose its right-derived section comparison, the U-section image of R.comparison, restrictAppIso followed by hU, and the exact evaluation/homology comparison; invert this isomorphism to define d. R.components pins the top comparison to resolutionOpenComparison. Naturality of R.comparison and the presheaf restriction maps gives the degreewise section-complex square. Apply ShortComplex.homologyMap_mapNatTrans and InjectiveResolution.rightDerived_app_eq, then cancel comparison inverses. This is the argument of the existing private rawOpenIso_restriction, generalized to an arbitrary pinned R.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-pc-resolution-open-comparison-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-pc-resolution-open-comparison-map"
+ ],
+ "proof_origin": {
+  "by": "second reader E4",
+  "document": "lean/Sheaf/AlgebraicGeometry/SectionCohomologyUntwistedComparisons.lean",
+  "place": "private rawOpenIso_restriction and homology_restriction_transport; generalized to R.comparison and R.components; Stacks Tags 01E1, 01E2 and 01E4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "smulHom_mul",
+   "results": "loogle: unknown identifier 'smulHom_mul'",
+   "date": "2026-10-13",
+   "verdict": "No matching complete comparison; use exact homology and derived naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of sections of a pushed forward injective resolution is naturally isomorphic to cohomology on the inverse image open, compatible with restriction and scalar multiplication",
+   "results": "8 matches; ['AlgebraicGeometry.Scheme.Modules.restrictFunctorComp', 'SheafOfModules.pushforwardNatIso_inv', 'SheafOfModules.pushforwardCongr_inv_app_val_app', 'SheafOfModules.pushforwardNatIso_hom', 'SheafOfModules.pushforwardCongr', 'SheafOfModules.pushforwardComp_inv_app_val_app', 'SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom', 'TopCat.Sheaf.pushforwardForgetIso']",
+   "date": "2026-10-13",
+   "verdict": "No matching complete comparison; use exact homology and derived naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|rightDerived.*naturality|mapHomologyIso",
+   "results": "6 matches; ['Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean']",
+   "date": "2026-10-13",
+   "verdict": "No matching complete comparison; use exact homology and derived naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A restricted injective resolution computes sheaf module cohomology on an open subset naturally in restrictions and scalar endomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived_app_eq|restrictAppIso.*naturality|openModuleSectionsRestriction",
+   "results": "1 matches; ['Mathlib/CategoryTheory/Abelian/RightDerived.lean']",
+   "date": "2026-10-13",
+   "verdict": "No complete public fixed-map theorem; use the existing local private restriction proof and Mathlib rightDerived_app_eq."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor of restriction of sections on open subsets computed using a fixed injective resolution commutes with restriction maps",
+   "results": "8 matches; ['CategoryTheory.Sheaf.ΓRes_map', 'CategoryTheory.Sheaf.ΓRes_map_assoc', 'TopCat.Sheaf.extend_hom_app', 'CategoryTheory.Sheaf.natTransΓRes_app', 'AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app', 'CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq', 'AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app', 'TopCat.Sheaf.restrictHomEquivHom']",
+   "date": "2026-10-13",
+   "verdict": "No complete public fixed-map theorem; use the existing local private restriction proof and Mathlib rightDerived_app_eq."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+   "results": "1 matches; ['CategoryTheory.InjectiveResolution.rightDerived_app_eq']",
+   "date": "2026-10-13",
+   "verdict": "No complete public fixed-map theorem; use the existing local private restriction proof and Mathlib rightDerived_app_eq."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ResolutionOpenScalarComparison",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-resolution-open-scalar-comparison",
+   "place": "Explicit fixed comparison and its two independent compatibilities",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResolutionOpenRestrictionNatural",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionOpenRestrictionNatural.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.resolution_open_restriction_natural",
+  "statement": "theorem resolution_open_restriction_natural {X T : Scheme.{u}}\n    (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F) (q : ℕ)\n    (W : T.Opens) (R : RestrictedResolutionSections I (f ⁻¹ᵁ W))\n    (V : T.Opens) (hVW : V ≤ W) (U : (f ⁻¹ᵁ W).toScheme.Opens)\n    (hU : (f ⁻¹ᵁ W).ι ''ᵁ U = f ⁻¹ᵁ V) :\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let P := sectionCohomologyPresheaf K q\n    let Y := (f ⁻¹ᵁ W).toScheme\n    let G := (restrictFunctor (f ⁻¹ᵁ W).ι).obj F\n    let c := resolutionOpenComparison f F I q W R\n    ∃ d : P.obj (op V) ≃+\n      (RingedSpace.openModuleCohomology Y.toRingedSpace q U).obj G,\n      ∀ x : P.obj (op W),\n        (RingedSpace.openModuleCohomologyRestriction Y.toRingedSpace q\n          (homOfLE (le_top : U ≤ ⊤))).app G (c x) =\n            d ((P.map (homOfLE hVW).op).hom x)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T135101-L-155370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T135101-L-155370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

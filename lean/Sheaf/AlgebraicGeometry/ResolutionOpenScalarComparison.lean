@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.AlgebraicGeometry.ResolutionOpenRestrictionCore
+import Sheaf.AlgebraicGeometry.ResolutionOpenScalarCore
+import Sheaf.AlgebraicGeometry.RestrictedResolutionSectionsExist
 
 /-! # Untwisted comparison of resolution sections
 
@@ -72,6 +75,11 @@ theorem resolution_open_scalar_comparison {X T : Scheme.{u}}
                 d ((P.map (homOfLE (T.basicOpen_le a)).op).hom x)) ∧
       (∀ (n : ℕ) (x : P.obj (op W)),
         (RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤).map
-          (G.smulHom (b ^ n)) (c x) = c (a ^ n • x)) := by sorry
+          (G.smulHom (b ^ n)) (c x) = c (a ^ n • x)) := by
+  dsimp
+  obtain ⟨R⟩ := restrictedResolutionSections_exists I (f ⁻¹ᵁ W)
+  refine ⟨resolutionOpenComparison f F I q W R, ?_, ?_⟩
+  · exact resolution_open_restriction_core f F I q W a R
+  · exact resolution_open_scalar_core f F I q W a R
 
 end AlgebraicGeometry.Scheme.Modules
