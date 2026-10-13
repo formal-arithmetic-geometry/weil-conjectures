@@ -10,21 +10,30 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "For each module X choose a projective resolution P. Form the first-quadrant double complex Hom(P,E), with horizontal precomposition differential and vertical postcomposition differential, and total differential d_horizontal + (-1)^i d_vertical in horizontal degree i. The edge maps from Hom(P,M) and Hom(X,E) are compatible with these differentials. The vertical augmented complexes are exact because P^i is projective; the horizontal augmented complexes are exact because E^j is injective. For the first edge, take its augmented total complex, with vertical augmentation degree -1. In each total degree the diagonal is finite. The lowest-horizontal-degree component of a total cocycle is a vertical cycle. Lift it by vertical exactness and subtract the signed total boundary of the lift. That component disappears and any new component lies one horizontal degree higher and one vertical degree lower. Repeat finitely often. At vertical degree -1, injectivity of the augmentation forces the final component to vanish. Thus every total cocycle is a boundary. Interchange horizontal and vertical for the other edge, using horizontal augmentation degree -1. Both edge maps are therefore quasi-isomorphisms. Mathlib ProjectiveResolution.isoExt computes the first edge cohomology as projective Ext. Compose its identification with the inverse of the second edge cohomology isomorphism. Every map is R-linear.",
-   "uses": [],
+   "text": "Construct Tot Hom(P,E) and both canonical augmentations as actual cochain maps. The cited projective-edge and injective-edge theorems prove these maps are quasi-isomorphisms, by exact Hom columns and the existing first-quadrant augmentation criterion. The projective module also proves precomposition compatibility of both edges.",
+   "uses": [
+    "lem-sbc-ext-projective-edge-quasi-iso",
+    "lem-sbc-ext-injective-edge-quasi-iso"
+   ],
    "elementary": false
   },
   {
-   "text": "Lift a morphism X′ → X to the chosen projective resolutions. Precomposition gives a map of double complexes compatible with both augmentations. The induced maps on edge cohomology thus commute with the constructed isomorphisms. Two projective comparison lifts are homotopic, and precomposition with a homotopy changes the cochain map by a cochain homotopy, hence does not change its cohomology map. The isomorphisms therefore form a natural isomorphism of functors on the opposite module category. In degree zero the edge maps are the usual Hom identification.",
-   "uses": [],
+   "text": "For each X choose Mathlib projectiveResolution X (whose existence is proved). Compose ProjectiveResolution.isoExt with homology of the projective edge and the inverse of homology of the injective edge. Prove naturality of isoExt by unopping isoLeftDerivedObj_inv_naturality and using homologyOp_hom_naturality, then cancelling the homologyUnop isomorphisms. For a morphism lift it using ProjectiveResolution.lift; lift_commutes_zero gives augmentation compatibility. Apply homology to the two proved edge squares. Cancel the invertible injective edge and substitute these squares and isoExt naturality. NatIso.ofComponents packages the resulting natural linear isomorphism. Every step is proved in Lean; no homotopy-coherence obligation is left.",
+   "uses": [
+    "lem-sbc-ext-projective-edge-quasi-iso",
+    "lem-sbc-ext-injective-edge-quasi-iso"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-ext-projective-edge-quasi-iso",
+  "lem-sbc-ext-injective-edge-quasi-iso"
+ ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tag 0954, proof of Lemma 47.8.2; explicit Mathlib comparison infrastructure"
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 0954, proof of Lemma 47.8.2; explicit total Hom edges, exact representable functors, FirstQuadrantAugmentation, and Mathlib isoLeftDerivedObj naturality; complete Lean proof by C2"
  },
  "mathlib_searches": [
   {
@@ -109,9 +118,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261013T222421-L-1229554",
+  "landing": "20261013T231531-L-1815745",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

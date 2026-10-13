@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-ext-injective-edge-quasi-iso",
+ "kind": "statement",
+ "title": "Injective edge of the resolution Hom double complex is a quasi-isomorphism",
+ "statement": "Let $R$ be a commutative ring and $X,M$ be $R$-modules. Let $P_\\bullet\\to X$ be a nonnegative projective resolution (each $P_i$ projective and the augmented chain complex exact), and let $M\\to E^\\bullet$ be an injective resolution [def-sp-injective-resolutions]. Form the first-quadrant double complex $K^{i,j}=\\operatorname{Hom}_R(P_i,E^j)$, with horizontal differential precomposition by $d_P$ and vertical differential postcomposition by $d_E$, and total complex [def-sp-double-complex-total] with differential $d_h+(-1)^i d_v$. The canonical cochain map $\\operatorname{Hom}_R(X,E^\\bullet)\\to\\operatorname{Tot}(K)$ whose component in degree $n$ is precomposition by $P_0\\to X$ followed by inclusion of the $(0,n)$ summand is a quasi-isomorphism, meaning it induces an isomorphism on every cohomology module.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0954, proof of Lemma 47.8.2, Ext computed by an injective resolution; explicit double-complex comparison"
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete total Hom complex and horizontal edge constructed in the projective-edge module. Define a:Hom(X,E)→K.X 0 using precomposition with P_0→X. Its composite with the next horizontal differential is zero by d_P followed by the augmentation being zero. Its total augmentation is exactly the injective edge.",
+   "uses": [
+    "lem-sbc-ext-projective-edge-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each injective E^n, linear Yoneda preserves limits and epimorphisms: these facts hold for its composite with the forgetful functor by representability and injectivity and reflect back to modules. It therefore preserves homology. Oppose P→X[0], which remains a quasi-isomorphism, then apply this exact functor. Identify the source with Hom(X,E^n)[0] by the identity at zero and the isomorphisms between zero objects in positive degrees. Equality with the required column augmentation follows from from_single_hom_ext and equality of the degree-zero component. This is proved from Mathlib in Lean.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the cited first-quadrant column augmentation criterion to K, a, the explicitly constructed injective edge and these column quasi-isomorphisms. This gives the desired edge quasi-isomorphism in all degrees, including zero.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-ext-projective-edge-quasi-iso",
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 0954 resolution computation; existing first-quadrant column augmentation criterion; all steps proved in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom double complex projective resolution injective resolution augmentation quasi-isomorphism",
+   "date": "2026-10-14",
+   "results": "8 hits, including CategoryTheory.ProjectiveResolution.quasiIso and CategoryTheory.InjectiveResolution.quasiIso; no Hom total edge comparison.",
+   "verdict": "Related augmentation infrastructure, used in the proof; no exact edge statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso",
+   "date": "2026-10-14",
+   "results": "12 hits, including QuasiIso, quasiIso_comp, quasiIso_of_isIso, quasiIso_of_comp_left, quasiIso_of_comp_right.",
+   "verdict": "Generic quasi-isomorphism infrastructure; no exact Hom edge statement."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*total|total.*quasiIso",
+   "date": "2026-10-14",
+   "results": "0 hits in the search service. Direct repository rg found HomologicalComplex₂.quasiIso_of_column_augmentation in Sheaf.Algebra.Homology.FirstQuadrantAugmentation, which is used.",
+   "verdict": "Use the existing library augmentation criterion with explicit exact Hom columns."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom double complex projective resolution injective resolution augmentation quasi-isomorphism",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ExtInjectiveResolutionComparison",
+  "date": "2026-10-14",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph, purity across a regular special divisor: depth-three punctured-spectrum H¹ vanishing used by principal-quotient lifting; the affine local-cohomology comparison step. Component: Projective Ext computed from an injective resolution. Resolution comparison proof step 1: horizontal augmented Hom complexes and the corresponding total edge.",
+   "via": [
+    "lem-sbc-ext-injective-resolution-comparison",
+    "lem-sbc-local-cohomology-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ExtInjectiveEdgeQuasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/ExtInjectiveEdgeQuasiIso.lean",
+  "declaration": "ModuleCat.resolutionHomInjectiveEdge_quasiIso",
+  "declarations": [
+   "ModuleCat.resolutionHomInjectiveEdge_quasiIso"
+  ],
+  "statement": "theorem resolutionHomInjectiveEdge_quasiIso\n    {R : Type u} [CommRing R] {X M : ModuleCat.{u} R}\n    (P : ProjectiveResolution X) (E : InjectiveResolution M) :\n    QuasiIso (resolutionHomInjectiveEdge P E)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T231531-L-1815745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T231531-L-1815745",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
