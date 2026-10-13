@@ -10951,3 +10951,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:30 L: merged deliver/Y2/Sheaf.RingTheory.PowerSeriesFieldCohenFsAdic (stage 3; reviewer PASS; first push; landing 20261013T033012-L-3679940 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:30 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified (stage 3; reviewer PASS; first push; landing 20261013T033013-L-3680041 (interface); batch 20261013T032954; modules 2; new nodes 1)
 - 03:37 L: returned deliver/K3/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (reviewer RETURN: (reviewer X-155b6, head 155b6f357) G1 / H3, review point 6: The earlier attachment-removal repair remains unapplied. In )
+- 03:39 L: returned deliver/U2/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (reviewer RETURN: (reviewer X-2cfcf, head 2cfcfc206) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Se)
