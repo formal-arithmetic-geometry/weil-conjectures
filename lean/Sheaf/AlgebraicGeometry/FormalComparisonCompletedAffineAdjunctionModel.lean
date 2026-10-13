@@ -11,13 +11,18 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Limits
+
+import Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineTransport
+import Sheaf.AlgebraicGeometry.FormalComparisonCompleteBaseAlgebraization
+import Sheaf.AlgebraicGeometry.CompletedAffineComplementBaseChange
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Mathlib.RingTheory.AdicCompletion.Completeness
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
 import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
 import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
 import Sheaf.AlgebraicGeometry.FormalSystemsPullback
 import Sheaf.AlgebraicGeometry.TheoremFormalFunctions
-import Sheaf.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 
 /-! # Algebraization of the completed affine comparison as an adjunction
@@ -35,6 +40,21 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private theorem compose_comparison_squares
+    {C D : Type*} [Category C] [Category D] (T : C ⥤ D)
+    {a b : D} {a₀ b₀ a₁ b₁ : C}
+    (m : a ⟶ b) (m₀ : a₀ ⟶ b₀) (m₁ : a₁ ⟶ b₁)
+    (s : a ⟶ T.obj a₀) (t : b ⟶ T.obj b₀)
+    (s₀ : a₀ ⟶ a₁) (t₀ : b₀ ⟶ b₁)
+    (ht : m ≫ t = s ≫ T.map m₀) (ha : m₀ ≫ t₀ = s₀ ≫ m₁) :
+    m ≫ (t ≫ T.map t₀) = (s ≫ T.map s₀) ≫ T.map m₁ := by
+  rw [← Category.assoc, ht, Category.assoc, ← T.map_comp, ha, T.map_comp,
+    Category.assoc]
+
+-- The unchanged statement names its existential coherence witness without using it.
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The completed affine comparison is the section map of an algebraized adjunction.
 This supplies an algebraized source, a proper morphism and an isomorphism on its
 pullback, together with the limit comparison square. It asserts no invertibility
@@ -110,6 +130,31 @@ theorem formalComparison_completed_affine_adjunction_model
           eA₀.hom ≫ (ModuleCat.restrictScalars (algebraMap B R)).map
             ((moduleSpecΓFunctor (R := CommRingCat.of R)).map
               (adjR.unit.app A₀.obj ≫ (Scheme.Modules.pushforward p).map b.hom)) := by
-  sorry
+  intro U
+  let B := Γ(Y, U.1)
+  let R := AdicCompletion (J.ideal U) B
+  let S := Spec (CommRingCat.of R)
+  let I := (J.ideal U).map (algebraMap B R)
+  let J₀ := Scheme.IdealSheafData.ofIdealTop
+    (I.map (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom)
+  let g : S ⟶ Y := Spec.map (CommRingCat.ofHom (algebraMap B R)) ≫
+    U.2.isoSpec.inv ≫ U.1.ι
+  let Z := pullback f g
+  let p : Z ⟶ S := pullback.snd f g
+  let T := ModuleCat.restrictScalars (algebraMap B R)
+  have : IsNoetherianRing B := IsLocallyNoetherian.component_noetherian U
+  have : IsNoetherianRing R := AdicCompletion.isNoetherianRing (J.ideal U)
+  have : IsAdicComplete I R :=
+    (IsAdicComplete.map_algebraMap_iff (J.ideal U) R).mpr
+      (AdicCompletion.isAdicComplete (IsNoetherian.noetherian (J.ideal U)))
+  obtain ⟨adjR, G₀, F₀, β₀, hD, κ₀, α₀, _, _, hκ₀, hα₀, eG, eD, ht⟩ :=
+    formalComparison_completed_affine_transport J f adj G F β h κ α hκ hα U
+  obtain ⟨A₀, b, eA₀, eD₀, ha⟩ :=
+    formalComparison_complete_base_algebraization I J₀ rfl p adjR G₀ F₀ β₀
+      hD κ₀ α₀ hκ₀ hα₀
+  refine ⟨Z, p, adjR, A₀, F₀, b, hD, inferInstance,
+    completedAffine_complement_base_change J K f hV U,
+    eG ≪≫ T.mapIso eA₀, eD ≪≫ T.mapIso eD₀, ?_⟩
+  exact compose_comparison_squares T _ _ _ _ _ _ _ ht ha
 
 end AlgebraicGeometry

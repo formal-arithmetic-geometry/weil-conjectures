@@ -11971,3 +11971,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage (stage 3; reviewer PASS; first push; landing 20261013T100121-L-2485574 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/S3/Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization (stage 3; reviewer PASS; first push; landing 20261013T100122-L-2485810 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/S3/Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientLeg (stage 3; reviewer PASS; first push; landing 20261013T100123-L-2485987 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:01 L: merged deliver/S3/Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineAdjunctionModel (stage 3; reviewer PASS; first push; landing 20261013T100123-L-2486255 (interface); batch 20261013T095923; modules 4; new nodes 3)
