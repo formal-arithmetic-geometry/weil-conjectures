@@ -675,6 +675,28 @@ variable [HasDerivedCategory.{wC}
   (SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace))]
   [HasDerivedCategory.{vC} (ModuleCat.{uC} A)]
 
+private def principalCechSectionsDerivedUnit
+    (U : (Spec (.of A)).Opens) :
+    (affineOpenSections A U).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
+        DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ (affineOpenSections A U).rightDerivedFunctor :=
+  let C := SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace)
+  let S := affineOpenSections A U
+  (Functor.isoWhiskerLeft (S.mapHomologicalComplex (ComplexShape.up ℤ))
+      (DerivedCategory.quotientCompQhIso (ModuleCat.{uC} A))).inv ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient C (ComplexShape.up ℤ))
+      S.rightDerivedFunctorUnit ≫
+    (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso C)
+      S.rightDerivedFunctor).hom
+
+private theorem principalCechSectionsDerivedUnit_iso
+    (U : (Spec (.of A)).Opens)
+    (J : CochainComplex
+      (SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
+    [J.IsKInjective] :
+    (principalCechSectionsDerivedUnit U).app J =
+      ((affineOpenSections A U).rightDerivedFunctorObjQIso J).inv := by
+  simp [principalCechSectionsDerivedUnit, Functor.rightDerivedFunctorObjQIso]
+
 /-- The canonical derived Čech comparison, characterized by every K-injective resolution.
 Source: Stacks, Tag 08C2 (blueprint: def-sc-principal-open-alternating-total).
 Proof: choose F → J a K-injective resolution. Invert the Čech augmentation on J,
@@ -696,7 +718,65 @@ theorem principalCechDerivedComparison_exists :
           ((affineOpenSections A (⨆ i, PrimeSpectrum.basicOpen (f i))).rightDerivedFunctorObjQIso
             J).hom ≫ DerivedCategory.Q.map ((principalCechAugmentation r f).app J) =
           DerivedCategory.Q.map ((principalCechFunctor r f).map i) := by
-  sorry
+  let C := SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace)
+  let S := affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))
+  let I := CochainComplex.kInjectiveResolutionFunctor.{uC} C
+  let η := CochainComplex.toKInjectiveResolution.{uC} C
+  let T := S.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q
+  let B := principalCechFunctor r f ⋙ DerivedCategory.Q
+  let D := DerivedCategory.Q ⋙ S.rightDerivedFunctor
+  let a : T ⟶ B := Functor.whiskerRight (principalCechAugmentation r f) DerivedCategory.Q
+  let b : T ⟶ D := principalCechSectionsDerivedUnit _
+  let ai := Functor.whiskerLeft I a
+  let d := Functor.whiskerRight η D
+  have hη (K : CochainComplex C ℤ) : QuasiIso (η.app K) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{uC} C K).2
+  have hai : IsIso ai := by
+    have (K : CochainComplex C ℤ) : IsIso (ai.app K) := by
+      change IsIso (DerivedCategory.Q.map ((principalCechAugmentation r f).app (I.obj K)))
+      have := principalCechAugmentation_quasiIso r f (I.obj K)
+      infer_instance
+    exact NatIso.isIso_of_isIso_app ai
+  have haI (K : CochainComplex C ℤ) : IsIso (a.app (I.obj K)) := by
+    change IsIso (ai.app K)
+    infer_instance
+  have hd : IsIso d := by
+    have (K : CochainComplex C ℤ) : IsIso (d.app K) := by
+      have := hη K
+      change IsIso (S.rightDerivedFunctor.map (DerivedCategory.Q.map (η.app K)))
+      infer_instance
+    exact NatIso.isIso_of_isIso_app d
+  let β : B ⟶ D := Functor.whiskerRight η B ≫ inv ai ≫
+    Functor.whiskerLeft I b ≫ inv d
+  have hab (K : CochainComplex C ℤ) : a.app K ≫ β.app K = b.app K := by
+    have := haI K
+    apply (cancel_mono (d.app K)).mp
+    simp only [β, NatTrans.comp_app, NatIso.isIso_inv_app]
+    change (a.app K ≫
+        (B.map (η.app K) ≫ inv (a.app (I.obj K)) ≫ b.app (I.obj K) ≫ inv (d.app K))) ≫
+          d.app K = b.app K ≫ d.app K
+    calc
+      _ = (a.app K ≫ B.map (η.app K)) ≫ inv (a.app (I.obj K)) ≫
+          b.app (I.obj K) := by simp [Category.assoc]
+      _ = (T.map (η.app K) ≫ a.app (I.obj K)) ≫ inv (a.app (I.obj K)) ≫
+          b.app (I.obj K) := by rw [a.naturality]; rfl
+      _ = T.map (η.app K) ≫ b.app (I.obj K) := by simp [Category.assoc]
+      _ = b.app K ≫ d.app K := b.naturality (η.app K)
+  refine ⟨β.app F, ?_⟩
+  intro J _ i _
+  have haJ : IsIso (a.app J) := by
+    have := principalCechAugmentation_quasiIso r f J
+    change IsIso (DerivedCategory.Q.map ((principalCechAugmentation r f).app J))
+    infer_instance
+  have hbJ : b.app J = (S.rightDerivedFunctorObjQIso J).inv :=
+    principalCechSectionsDerivedUnit_iso _ J
+  have he : β.app J ≫ (S.rightDerivedFunctorObjQIso J).hom ≫ a.app J = 𝟙 _ := by
+    apply (cancel_epi (a.app J)).mp
+    simp only [← Category.assoc, hab J, hbJ, Iso.inv_hom_id,
+      Category.id_comp, Category.comp_id]
+  change β.app F ≫ D.map i ≫ (S.rightDerivedFunctorObjQIso J).hom ≫ a.app J = B.map i
+  rw [← Category.assoc, ← Category.assoc, ← β.naturality i]
+  simp only [Category.assoc, he, Category.comp_id]
 
 /-- The canonical map Tot(Č_alt(U,F)) → RΓ(U,F), as a roof through a K-injective resolution.
 Source: Stacks, Tag 08D2 (blueprint: def-sc-principal-open-alternating-total). -/
