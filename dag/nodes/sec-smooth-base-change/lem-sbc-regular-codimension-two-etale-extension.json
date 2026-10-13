@@ -1,0 +1,147 @@
+{
+ "id": "lem-sbc-regular-codimension-two-etale-extension",
+ "kind": "statement",
+ "title": "Finite etale extension across a regular codimension-two boundary",
+ "statement": "Let $L$ be a locally Noetherian scheme, and $V\\subseteq L$ an open subset. Suppose that for every $z\\notin V$, the local ring $\\mathcal O_{L,z}$ is regular [def-weil-regular-scheme] and has Krull dimension [def-weil-pbc-krull-dimension-ring] at least two. For every finite [def-weil-finite-integral-morphism] etale [def-weil-etale-morphism] morphism $q:Y\\to V$, there is a finite etale morphism $p:E\\to L$ and an isomorphism $e:Y\\cong E\\times_L V$ over $V$; explicitly, $e\\circ p|_V=q$. No global quasi-compactness or quasi-separatedness is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BMA (pione-lemma-purity-regular); Tag 0EY7 (pione-lemma-purity-essentially-surjective); Tag 0H2W (final paragraph of the locally Noetherian extension theorem); Tag 0EY6(2), uniqueness by the depth-two extension identity"
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "A missing point has a regular local ring of dimension at least two, so purity holds for its punctured spectrum by 0BMA. The open V contains all generic and codimension-one points, since the dimension bound excludes them from the complement.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each Noetherian affine open, extend the finite etale cover by 0EY7: at a generic point of a component of the missing closed subset its local inverse image is the punctured spectrum; use local purity, spread the extension to a larger open, and continue by Noetherian induction. This is the final extension step used in 0H2W.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On overlaps the finite etale algebras are finite locally free. At each missing point the regular local ring has depth equal to its dimension, at least two, and the algebras as modules have the same depth bound. The depth-two extension identity identifies each algebra with the direct image of its restriction to V, as in 0EY6(2). Thus the given algebra isomorphism over V extends uniquely on overlaps. Uniqueness gives the cocycle condition, so descent glues the extensions and their isomorphism over V. Empty covers extend by the empty cover.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M2",
+  "document": "Stacks Project",
+  "place": "Tag 0BMA (pione-lemma-purity-regular); Tag 0EY7 (pione-lemma-purity-essentially-surjective); Tag 0H2W (final paragraph of the locally Noetherian extension theorem); Tag 0EY6(2), uniqueness by the depth-two extension identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale covers extend across regular codimension two boundary",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale cover extends across regular points of codimension at least two",
+   "results": "Eight hits concerning etale loci and presentations; no extension theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale",
+   "results": "Twelve hits concerning Etale, base-change stability, multiplicativity, and open immersions; no purity extension.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|codimension.*[Ee]tale|[Ee]tale.*codimension",
+   "results": "No Mathlib hits. Direct searches of both project roots found only stronger-context trait/depth-two results and ancestors that depend on this item.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularIntegralDivisorEtalePurity",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: the regular special divisor and the neighbourhood containing its generic point, followed by the purity extension (0EYE).",
+   "via": [
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoEtaleExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularCodimensionTwoEtaleExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_etale_extension_of_regular_codimension_two_boundary",
+  "statement": "theorem exists_finite_etale_extension_of_regular_codimension_two_boundary {L Y : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens) (hboundary : ∀ z : L, z ∉ V → IsRegularLocalRing (L.presheaf.stalk z) ∧ (2 : WithBot ℕ∞) ≤ ringKrullDim (L.presheaf.stalk z)) (q : Y ⟶ V.toScheme) [IsFinite q] [Etale q] : ∃ (E : Scheme.{u}) (p : E ⟶ L), IsFinite p ∧ Etale p ∧ ∃ e : Y ≅ (p ⁻¹ᵁ V).toScheme, e.hom ≫ (p ∣_ V) = q",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T100031-L-2469814",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T100031-L-2469814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
