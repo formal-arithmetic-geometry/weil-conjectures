@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-tensor-power-open-restriction-addition",
+ "kind": "statement",
+ "title": "Tensor-power addition comparison under open restriction",
+ "statement": "Let $j:Y\\to X$ be an open immersion of schemes [def-pc-scheme], $L$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], $n,b\\in\\mathbb N$, and $V\\subseteq Y$ open. Use restriction [lem-weil-pbc-module-restriction-open-immersion-colimits], tensor powers and their addition isomorphism $A_{n,b}:L^{\\otimes(n+b)}\\cong L^{\\otimes n}\\otimes L^{\\otimes b}$ [def-sc-invertible-module], and the canonical recursive comparison $P_n:(L^{\\otimes n})|_Y\\cong (L|_Y)^{\\otimes n}$ [def-sc-tensor-power-open-restriction-comparisons]. Write $r_k$ for the canonical section isomorphism from the restriction of $L^{\\otimes k}$ over $V$ to its ambient sections over $j(V)$. For any $z\\in\\Gamma(V,(L|_Y)^{\\otimes n})$ and $w\\in\\Gamma(V,(L|_Y)^{\\otimes b})$, one has $r_{n+b}(P_{n+b}^{-1}(A_{n,b,Y}^{-1}(z\\otimes w)))=A_{n,b,X}^{-1}(r_n(P_n^{-1}(z))\\otimes r_b(P_b^{-1}(w)))$. No section of $L$, invertibility, or quasi-coherence is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-sc-invertible-module",
+  "def-sc-tensor-power-open-restriction-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, lemma-tensor-product-pullback, iterated with unit and associator coherence. Official Stacks page https://stacks.math.columbia.edu/tag/01CD (proof omitted there; expanded here)."
+ },
+ "proof": [
+  {
+   "text": "The inverse tensor comparison of [def-sc-tensor-power-open-restriction-comparisons] carries a pure tensor of restricted sections to its ambient tensor by [lem-weil-pbc-module-restriction-tensor-comparison]. The sheaf tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] therefore identifies the naturality, associator and unitor diagrams as sheaf morphisms: both sides give the same ambient nested tensor, while the unit comparison transports scalars through the structure-ring isomorphism. Nested pure tensor checks extend by the iterated tensor universal property, without claiming global pure tensors generate all sections.",
+   "uses": [
+    "def-sc-tensor-power-open-restriction-comparisons",
+    "lem-weil-pbc-module-restriction-tensor-comparison",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n in the recursive tensorPowAddIso of [def-sc-invertible-module]. For n=0 its inverse is the left unitor and the transport from b to 0+b. Unit coherence and elimination of the equality give the commuting diagram with the recursive power comparisons. For n+1 its inverse is the associator followed by identity tensor the previous addition inverse and the transport from n+b+1 to (n+1)+b. Expand the recursive power comparisons, use associator coherence, naturality of the tensor comparison, and the induction hypothesis inside identity tensor. Eliminate exponent equality transports to finish. This proves the diagram for all n,b; evaluation on tmulSection z w over V yields the claimed equality for arbitrary sections of both powers.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-tensor-power-open-restriction-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-sc-tensor-power-open-restriction-comparisons",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-module-restriction-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, lemma-tensor-product-pullback, iterated with unit and associator coherence. Official Stacks page https://stacks.math.columbia.edu/tag/01CD (proof omitted there; expanded here)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorPowAddIso|restrictUnitIso",
+   "results": "; hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the recursively chosen restriction comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of module sheaves commutes with the canonical addition isomorphism between tensor powers",
+   "results": "; hits: SheafOfModules.instAdditiveRestrictScalars, ModuleCat.Tilde.res_apply, ModuleCat.Tilde.toOpen_res, SheafOfModules.ιFree_freeMap_assoc, PresheafOfModules.Monoidal.tensorObj, SheafOfModules.ιFree_mapFree_inv_assoc, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.freeHomEquiv_symm_comp",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the recursively chosen restriction comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "tensorPowAddIso",
+   "results": "loogle: unknown identifier 'tensorPowAddIso'; no hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the recursively chosen restriction comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an open immersion preserves the canonical tensor power addition isomorphism",
+   "results": "service unavailable: Internal Server Error; no hits",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionT",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-tensor-power-section-open-restriction",
+   "place": "Proof step 2 of the transition-map restriction argument: compatibility of recursive power comparisons with tensorPowAddIso, independent of the chosen section.",
+   "via": [
+    "lem-sc-tensor-power-section-open-restriction-T"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPowerOpenRestrictionAddition",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPowerOpenRestrictionAddition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.openRestrictionTensorPowIso_inv_add",
+  "statement": "theorem openRestrictionTensorPowIso_inv_add {X Y : Scheme.{u}} (j : Y ⟶ X)\n    [IsOpenImmersion j] (L : X.Modules) (n b : ℕ) (V : Y.Opens)\n    (z : Γ((L.restrict j).tensorPow n, V))\n    (w : Γ((L.restrict j).tensorPow b, V)) :\n    ((L.tensorPow (n + b)).restrictAppIso j V).hom\n        ((openRestrictionTensorPowIso j L (n + b)).inv.app V\n          (((L.restrict j).tensorPowAddIso n b).inv.app V (tmulSection z w))) =\n      (L.tensorPowAddIso n b).inv.app (j ''ᵁ V)\n        (tmulSection\n          (((L.tensorPow n).restrictAppIso j V).hom\n            ((openRestrictionTensorPowIso j L n).inv.app V z))\n          (((L.tensorPow b).restrictAppIso j V).hom\n            ((openRestrictionTensorPowIso j L b).inv.app V w)))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100152-L-2494364",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100152-L-2494364",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
