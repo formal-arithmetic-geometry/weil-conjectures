@@ -20,56 +20,50 @@
  ],
  "proof": [
   {
-   "text": "The affine Noetherian base and proper finite-type source are Noetherian. Apply Chow to the integral closed subscheme W. Its modification is projective both over W and over the base, with a common relatively ample invertible module L.",
+   "text": "The affine Noetherian base is Noetherian. Apply ChowModification to g=i followed by f, using its properness instances. Set Y, pi, N and j to the existing Chow construction, and construct L explicitly as the usual double pullback of the integral O(1). Obtain n, coherence and finite cohomology for G=i_* pi_* L^n from the specified-twist theorem.",
    "uses": [
     "lem-weil-pbc-chow-noetherian",
-    "lem-pc-chow-relative-ample"
+    "lem-pc-q2-chow-twist-finite-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Choose n with positive higher images of L^n under the modification zero. Set G = i_* pi_* L^n. Over affine opens of W, projective cohomology finiteness and quasi-coherent localization identify pi_* L^n with the sheaf associated to finite section modules, proving coherence independently of general proper coherence. Closed pushforward preserves coherence.",
+   "text": "The integral polynomial Proj twist is invertible; pullback and tensor powers preserve invertibility. Chow supplies U dense with pi restricted to U an isomorphism. Apply the birational-line stalk comparison to L^n to obtain e:G_xi additive-equivalent to kappa(xi), respecting quotient scalars.",
    "uses": [
-    "lem-pc-relative-kill-by-twisting",
-    "lem-pc-projective-coherent-finiteness",
-    "lem-pc-closed-immersion-coherent-cohomology",
-    "pqf-lem-coherent-ft-locnoeth"
+    "def-pc-projective-space-twist",
+    "lem-pc-q2-birational-line-pushforward-generic-stalk"
    ],
    "elementary": false
   },
   {
-   "text": "Leray for the modification, whose higher images vanish, identifies the cohomology of pi_* L^n with that of L^n. Closed pushforward identifies the cohomology of G with that of pi_* L^n. The latter is finite by projective cohomology finiteness over the affine base. These comparisons are linear for restriction of scalars along f.appTop.",
+   "text": "Coherence on the locally Noetherian X gives quasi-coherence and finite type, hence closed support. Closed pushforward gives zero stalks off i(W). The additive equivalence to the nontrivial residue field puts xi in the support. For every w in W, the generic point specializes to w; continuity of i and stability of closed sets under specialization put i(w) in the support. Thus the support equals i(W).",
    "uses": [
-    "lem-pc-derived-direct-image-composition",
-    "lem-pc-projective-coherent-finiteness",
-    "lem-pc-closed-immersion-coherent-cohomology"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-closed-pushforward-stalks"
    ],
    "elementary": false
   },
   {
-   "text": "At the generic point the modification is an isomorphism and L^n is invertible. Thus the generic stalk of G is a one-dimensional module over the residue field with the quotient scalar action; the maximal ideal acts by zero. Closed pushforward confines the support to i(W). This support is closed by coherence and contains the generic point, whose closure is i(W), so equality holds.",
-   "uses": [
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "lem-weil-pbc-finite-type-module-support-closed"
-   ],
-   "elementary": false
+   "text": "Residue(a)=0 for a in the maximal ideal; the scalar compatibility of e and injectivity give a v=0. Transfer the residue-field module structure through the additive equivalence e, retaining the existing additive group. The transported e is a linear equivalence, so compatibility and finrank_self give the desired scalar identity and dimension one. Combine these with the already obtained coherence, support equality and finite cohomology.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-chow-noetherian",
-  "lem-pc-chow-relative-ample",
-  "lem-pc-relative-kill-by-twisting",
-  "lem-pc-projective-coherent-finiteness",
-  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-q2-chow-twist-finite-cohomology",
+  "def-pc-projective-space-twist",
+  "lem-pc-q2-birational-line-pushforward-generic-stalk",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-pc-derived-direct-image-composition",
-  "lem-weil-pbc-closed-pushforward-stalks",
-  "lem-weil-pbc-finite-type-module-support-closed"
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-closed-pushforward-stalks"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project, coherent.tex",
-  "place": "Tag 02O5, proposition-proper-pushforward-coherent, Chow construction paragraphs"
+  "place": "Tag 02O5, proposition-proper-pushforward-coherent, Chow construction paragraphs",
+  "note": "Q2 formalized the assembly from the specified-twist finiteness and birational-line stalk comparison; the topological support and algebraic residue-module arguments are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -174,12 +168,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T184353-L-4023465",
+  "landing": "20261013T040756-L-3951330",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

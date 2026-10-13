@@ -11023,3 +11023,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/P1/Sheaf.CategoryTheory.FilteredQuotientPageMaps (stage 3; reviewer PASS; first push; landing 20261013T040755-L-3950950 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:07 L: merged deliver/P1/Sheaf.RingTheory.WellOrderedUnionProjectivePresentation (stage 3; reviewer PASS; first push; landing 20261013T040755-L-3951064 (interface); batch 20261013T040738; modules 3; new nodes 2)
 - 04:07 L: merged deliver/P2/Sheaf.AlgebraicGeometry.DerivedOpenGluing (stage 3; reviewer PASS; first push; landing 20261013T040756-L-3951170 (interface); batch 20261013T040738; modules 4; new nodes 3)
+- 04:07 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.ChowFiniteCohomologyWitness (stage 3; reviewer PASS; after a return; landing 20261013T040756-L-3951330 (interface); batch 20261013T040738; modules 3; new nodes 2)

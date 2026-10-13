@@ -1,0 +1,181 @@
+{
+ "id": "lem-pc-q2-chow-twist-finite-cohomology",
+ "kind": "statement",
+ "title": "Finite cohomology of a sufficiently large specified Chow twist",
+ "statement": "Let $f:X\\to T$ be proper [def-weil-proper-morphism], where $T$ is affine with Noetherian ring $R=\\Gamma(T,\\mathcal O_T)$. Let $i:W\\to X$ be a closed immersion [def-weil-closed-immersion], $\\pi:Y\\to W$ a proper morphism, $N$ a finite coordinate type, and $j:Y\\to\\mathbf P(N;T)$ a closed immersion with $j\\circ\\mathrm{pr}=\\pi\\circ i\\circ f$ in diagrammatic order [def-nagata-projective-space-base-change]. Set $L=j^*\\rho^*\\mathcal O_{\\mathbf P(N;\\mathbf Z)}(1)$, where $\\rho$ is the projection to the integral projective model and the twist is [def-pc-projective-space-twist], using module pullback [def-pc-module-pullback]. There exists $n\\in\\mathbf N$ such that $G_n=i_*\\pi_*(L^{\\otimes n})$ is coherent [pqf-def-coherent] and, for every $q\\geq0$, $H^q(X,G_n)$ [pqf-def-cohomology] is a finite $R$-module, with scalars restricted along $f.\\mathrm{appTop}$. Neither integrality of $W$ nor birationality of $\\pi$ is assumed.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 02O5, proposition-proper-pushforward-coherent, Chow construction paragraphs"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The graph (j, pi) is a closed immersion into projective space over W. Its twist agrees with L, making L relatively ample for pi and pi followed by i followed by f. Reindex finite nonempty coordinates by ULift (Fin (m+1)); empty coordinates give empty Y and zero modules.",
+   "uses": [
+    "lem-pc-chow-relative-ample"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine Noetherian T and the proper source and intermediate schemes are Noetherian. Apply relative Serre vanishing to the structure module to choose a common twist n with all positive higher images zero for both projective morphisms.",
+   "uses": [
+    "lem-pc-relative-kill-by-twisting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On affine opens of W, projective cohomology finiteness and quasi-coherent localization show that pi_* L^n is associated to a finite section module. The coherent/finite-type equivalence proves coherence independently of general proper coherence; closed pushforward preserves coherence.",
+   "uses": [
+    "lem-pc-projective-coherent-finiteness",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Leray for pi, whose positive images vanish, and exact closed pushforward identify H^q(X,G_n) with H^q(Y,L^n). Naturality with multiplication by global sections gives Gamma(T,top)-linear comparisons. Projective finiteness on the affine base and transport along these comparisons prove finiteness.",
+   "uses": [
+    "lem-pc-derived-direct-image-composition",
+    "lem-pc-projective-coherent-finiteness",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-chow-relative-ample",
+  "lem-pc-relative-kill-by-twisting",
+  "lem-pc-projective-coherent-finiteness",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-derived-direct-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 02O5, proposition-proper-pushforward-coherent, Chow construction paragraphs",
+  "note": "Q2 expanded the cited Chow-construction argument to the displayed interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of the pushforward of a high power of a relatively ample line bundle under a projective morphism is finite over a Noetherian base",
+   "results": {
+    "t": "2026-10-13T01:11:18Z",
+    "tool": "leansearch",
+    "query": "cohomology of the pushforward of a high power of a relatively ample line bundle under a projective morphism is finite over a Noetherian base",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a sufficiently high Chow twist pushed forward along a projective modification and a closed immersion is finite over an affine Noetherian base",
+   "results": {
+    "t": "2026-10-13T01:16:48Z",
+    "tool": "leanfinder",
+    "query": "Cohomology of a sufficiently high Chow twist pushed forward along a projective modification and a closed immersion is finite over an affine Noetherian base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finiteType_appLE",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite"
+    ],
+    "digest": "abff69792059beb8"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching theorem. The returned declarations do not state the specified scheme-module construction or stalk equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*finite|finite.*cohomology",
+   "results": {
+    "t": "2026-10-13T01:16:47Z",
+    "tool": "grep",
+    "query": "cohomology.*finite|finite.*cohomology",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching theorem. The returned declarations do not state the specified scheme-module construction or stalk equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowFiniteCohomologyWitness",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 02O5 proof: the paragraphs defining L and G=pi_* L^n and applying relative Leray and projective finiteness",
+   "via": [
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowTwistFiniteCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowTwistFiniteCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_chow_twist_finite_cohomology",
+  "statement": "theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}\n    (f : X ⟶ T) [IsProper f] [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]\n    (i : W ⟶ X) [IsClosedImmersion i] (π : Y ⟶ W) [IsProper π]\n    (N : Type u) [Finite N] (j : Y ⟶ ℙ(N; T)) [IsClosedImmersion j]\n    (hj : j ≫ (ℙ(N; T) ↘ T) = π ≫ i ≫ f) :\n    let L := (pullback j).obj\n      ((pullback (ProjectiveSpace.toProjInt N T)).obj\n        (Proj.twist (MvPolynomial.homogeneousSubmodule N (ULift.{u} ℤ)) 1))\n    ∃ n : ℕ,\n      RingedSpace.IsCoherent X.toRingedSpace\n        ((pushforward i).obj ((pushforward π).obj (L.tensorPow n))) ∧\n      (∀ q : ℕ,\n        letI : Module Γ(T, ⊤)\n          (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q) :=\n            Module.compHom _ f.appTop.hom\n        Module.Finite Γ(T, ⊤)\n          (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T040756-L-3951330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T040756-L-3951330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

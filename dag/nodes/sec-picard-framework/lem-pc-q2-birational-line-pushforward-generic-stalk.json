@@ -1,0 +1,183 @@
+{
+ "id": "lem-pc-q2-birational-line-pushforward-generic-stalk",
+ "kind": "statement",
+ "title": "Residue-field equivalence for a birational line pushforward",
+ "statement": "Let $i:W\\to X$ be a closed immersion [def-weil-closed-immersion] with $W$ integral [def-pc-integral-scheme]. Let $\\pi:Y\\to W$ be a morphism, $U\\subset W$ a dense open with $\\pi^{-1}(U)\\to U$ an isomorphism, and $L$ an invertible module on $Y$ [def-sc-invertible-module]. Set $\\eta=\\operatorname{genericPoint}W$ [def-sc-generic-point], $\\xi=i(\\eta)$ and $G=i_*\\pi_*L$. There exists an additive equivalence $e:G_\\xi\\simeq\\kappa(\\xi)$ between its module stalk [def-weil-pbc-module-stalk] and the residue field [def-weil-residue-field], such that for all $a\\in\\mathcal O_{X,\\xi}$ and $v\\in G_\\xi$, $e(a v)=\\operatorname{residue}(a)e(v)$. No Noetherian, projective, properness, or cohomology hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 02O5, proposition-proper-pushforward-coherent, Chow construction paragraphs"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-sc-invertible-module",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "The generic point belongs to U. Restriction of pi_* L to U is pushforward along the isomorphism pi restricted to U, hence is an invertible module. A local trivialization identifies its generic stalk linearly with O_{W,eta}.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "def-sc-generic-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic local ring of integral W is a field, so its residue quotient is an isomorphism. The closed pushforward stalk equivalence identifies the stalk of G at xi with that of pi_* L at eta, with scalars induced by i.stalkMap eta.",
+   "uses": [
+    "def-sc-function-field",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The surjective local stalk map of a closed immersion identifies the residue fields at eta and xi. Compose the preceding additive equivalences with the inverse residue-field map. Naturality of residue maps identifies the original scalar action with multiplication by residue(a).",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 02O5, proposition-proper-pushforward-coherent, Chow construction paragraphs",
+  "note": "Q2 expanded the cited Chow-construction argument to the displayed interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The generic stalk of the pushforward of an invertible sheaf along a morphism isomorphic on a dense open and then a closed immersion is the residue field with its quotient scalar action",
+   "results": {
+    "t": "2026-10-13T01:16:48Z",
+    "tool": "leansearch",
+    "query": "The generic stalk of the pushforward of an invertible sheaf along a morphism isomorphic on a dense open and then a closed immersion is the residue field with its quotient scalar action",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic stalk of birational pushforward invertible sheaf is residue field",
+   "results": {
+    "t": "2026-10-13T01:16:48Z",
+    "tool": "leanfinder",
+    "query": "generic stalk of birational pushforward invertible sheaf is residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.germToFunctionField",
+     "AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux",
+     "AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec",
+     "AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply",
+     "AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk",
+     "AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv",
+     "AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk",
+     "AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply"
+    ],
+    "digest": "606d2bc77f9e1bfd"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching theorem. The returned declarations do not state the specified scheme-module construction or stalk equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*pushforward|pushforward.*stalk",
+   "results": {
+    "t": "2026-10-13T01:16:47Z",
+    "tool": "grep",
+    "query": "stalk.*pushforward|pushforward.*stalk",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Spec.lean",
+     "Mathlib/AlgebraicGeometry/Spec.lean",
+     "Mathlib/AlgebraicGeometry/Spec.lean",
+     "Mathlib/AlgebraicGeometry/Spec.lean",
+     "Mathlib/AlgebraicGeometry/Spec.lean",
+     "Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean"
+    ],
+    "digest": "74c0385cef2937ed"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching theorem. The returned declarations do not state the specified scheme-module construction or stalk equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowFiniteCohomologyWitness",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 02O5 proof: property (a), the invertibility on the dense isomorphism open and the preceding closed-pushforward stalk identification",
+   "via": [
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BirationalLinePushforwardGenericStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalLinePushforwardGenericStalk.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.birational_line_pushforward_generic_stalk",
+  "statement": "theorem birational_line_pushforward_generic_stalk {X W Y : Scheme.{u}}\n    (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]\n    (π : Y ⟶ W) (U : W.Opens) (hU : Dense (U : Set W))\n    [IsIso (π ∣_ U)] (L : Y.Modules) [L.IsInvertible] :\n    ∃ e : ((RingedSpace.moduleStalkFunctor X.toRingedSpace\n        (i.base (genericPoint W))).obj ((pushforward i).obj ((pushforward π).obj L))) ≃+\n        X.residueField (i.base (genericPoint W)),\n      ∀ (a : X.presheaf.stalk (i.base (genericPoint W)))\n        (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace\n          (i.base (genericPoint W))).obj ((pushforward i).obj ((pushforward π).obj L))),\n        e (a • v) = (X.residue (i.base (genericPoint W))) a * e v",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T040756-L-3951330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T040756-L-3951330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
