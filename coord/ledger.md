@@ -13300,3 +13300,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:11 L: merged deliver/J2/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetract (stage 3; reviewer PASS; first push; landing 20261013T181102-L-2601300 (interface); batch 20261013T181050; modules 2; new nodes 1)
 - 18:11 L: merged deliver/J2/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureTriangle (stage 3; reviewer PASS; first push; landing 20261013T181102-L-2601465 (interface); batch 20261013T181050; modules 2; new nodes 1)
 - 18:11 L: merged deliver/J2/Sheaf.Algebra.Homology.LocalizedTensorComparisonShift (stage 3; reviewer PASS; first push; landing 20261013T181103-L-2601655 (proof); batch 20261013T181050; modules 1; new nodes 1)
+- 18:11 L: merged deliver/J3/Sheaf.AlgebraicGeometry.EtaleLimitOpenBoundaryTransform (stage 3; reviewer PASS; first push; landing 20261013T181104-L-2601848 (interface); batch 20261013T181050; modules 3; new nodes 2)

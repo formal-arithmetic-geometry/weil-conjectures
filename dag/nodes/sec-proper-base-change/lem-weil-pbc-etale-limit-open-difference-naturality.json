@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-etale-limit-open-difference-naturality",
+ "kind": "statement",
+ "title": "Difference of actual restrictions commutes with stage transitions and cone legs",
+ "statement": "Let I be a preorder, D:I^op → Sch [def-pc-scheme] a diagram with cone c [def-weil-pbc-category-colimit], and F_i abelian étale sheaves [def-weil-pbc-abelian-etale-sheaves]. For f:i→j let φ_f:D(f^op)^*F_i→F_j be arbitrary coefficient morphisms [def-weil-pbc-inverse-image]. Let G:I→Ab(c.pt_et) have specified isomorphisms eG_i:G_i≅c_i^*F_i, and L a cocone on G. Fix X, opens U,V [def-weil-pbc-scheme-conventions], q≥0, i₀∈I and g₀:D_i₀→X. Put J=I_{≥i₀}, g_j=D(j→i₀);g₀ and g_L=c_i₀;g₀. For W an open of X write W_j=g_j^{-1}W, W_L=g_L^{-1}W, A_W(j)=H^q(W_j,F_j|), A_W(L)=H^q(W_L,L.pt|) [def-weil-pbc-etale-cohomology]. Denote by T_W(f) and λ_W(j) the actual canonical restricted cohomology maps of tailOpenCohomologyMapDegree and tailOpenCohomologyLegDegree [lem-weil-pbc-etale-limit-open-cohomology-cocone-degree]: restricted pullback followed by the coefficient morphism obtained using inverse-image composition comparisons from φ_f or (eG_j)^-1;L_j, respectively [def-weil-pbc-cohomology-pullback]. Define d_j:A_U(j)×A_V(j)→A_{U∩V}(j) by d_j(x,y)=res_{U∩V,U}(x)-res_{U∩V,V}(y), with restrictions openCohomologyRestriction along the inverse-image inclusions; define d_L by the identical formula at g_L with coefficient L.pt. No identity/composition laws on φ or canonical-arrow formula for G are assumed. For every f:j→k and x,y, d_k(T_U(f)x,T_V(f)y)=T_{U∩V}(f)(d_j(x,y)); and for every j,x,y, d_L(λ_U(j)x,λ_V(j)y)=λ_{U∩V}(j)(d_j(x,y)). No covering condition is needed. The Lean statement presents the same differences as additive maps characterized on every input by these restriction formulas, which determine the maps uniquely by extensionality; it asserts their existence together with both naturality equations.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof and coefficient functoriality; Tag 09YQ, coherent-system restriction maps. Read at https://stacks.math.columbia.edu/tag/0A50 and https://stacks.math.columbia.edu/tag/09YQ; the compatibility extension is agent-written."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-stage-cohomology-comparison",
+  "lem-weil-pbc-etale-limit-open-cohomology-cocone-degree",
+  "lem-weil-pbc-open-cohomology-whole-restriction-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Construct the additive stage and limit maps by the two restriction maps composed with product projections, subtracting the second term. Their displayed equations specify every value and determine the data uniquely by AddMonoidHom.ext. For each of the inclusions U∩V≤U and U∩V≤V after inverse image, use nested-open restriction pullback naturality and coefficient naturality. The square maps are tailStageOpenMap, with openSquareCoefficient as the coefficient comparison. Expand the inverse-image composition isomorphisms; associativity and inverse cancellation identify restriction after the transition with the intersection transition after restriction.",
+   "uses": [
+    "lem-weil-pbc-open-cohomology-restriction-naturality",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Subtract the two component equalities. Since the intersection transition is an additive homomorphism, it carries the difference to the difference. Repeat the same calculation for the cone-projection square and coefficient (eG_j)^-1;L_j; the cone equation identifies the inverse-image limit opens. This proves both displayed equations without covering hypotheses.",
+   "uses": [
+    "lem-weil-pbc-open-cohomology-restriction-naturality",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-open-cohomology-restriction-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A50",
+  "place": "J3: explicit stage/cone specialization of the section-resolution construction and pullback/coefficient naturality; construction and exact equations written in the docstring. The difference data are fixed by explicit value equations, and used only inside the parent proof; no data definition chooses an arbitrary existence witness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of connecting homomorphisms for sheaf cohomology Mayer Vietoris under pullback",
+   "results": "UNAVAILABLE: Internal Server Error; no mathematical verdict obtained.",
+   "date": "2026-10-13",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris boundary natural transformation cohomology pullback open cover",
+   "results": "Eight site-square sheaf-condition and shortComplex results. None gives simultaneous canonical maps on the actual restricted stage groups.",
+   "date": "2026-10-13",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.δ",
+   "results": "δ, fromBiprod_δ, δ_toBiprod and their assoc variants for a fixed site square and sheaf. No cross-scheme naturality or simultaneous stage-family statement.",
+   "date": "2026-10-13",
+   "verdict": "Tools, no matching statement."
+  },
+  {
+   "tool": "grep",
+   "query": "rg naturality|def δ|theorem.*δ Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; rg openCohomologyRestriction|connecting_pullback in both Lean roots; blueprint_refs.py search Mayer-Vietoris",
+   "results": "Mathlib constructs a boundary for one square; no cross-site naturality lemma. The project gives nested-open pullback naturality and pairwise existential connecting pullback, but no canonical stage-difference formula or boundary family compatible with all arrows and cone legs. Blueprint search finds no matching imported node.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; specialize the cited project facts in the remaining proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitOpenBoundaryTransform",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Tag 0A50 functorial Mayer-Vietoris step of the injective restriction acyclicity argument, refined to actual stage maps before arbitrary diagram transport.",
+   "via": [
+    "lem-weil-pbc-etale-limit-open-boundary-transform",
+    "lem-weil-pbc-etale-limit-open-mayer-vietoris-maps",
+    "lem-weil-pbc-etale-limit-binary-successor-cocone-segment",
+    "lem-weil-pbc-etale-limit-binary-geometric-ladder",
+    "lem-weil-pbc-etale-limit-binary-comparison-ladder",
+    "lem-weil-pbc-etale-limit-binary-eventual-zero",
+    "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitOpenDifferenceNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitOpenDifferenceNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.tailOpenDifference_naturality",
+  "statement": "theorem tailOpenDifference_naturality\n    (X : Scheme.{u}) (U V : X.Opens)\n    {I : Type u} [Preorder I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (L : Cocone G) (q : ℕ) (i₀ : I) (g₀ : D.obj (op i₀) ⟶ X)\n    :\n    ∃ (d : ∀ j : Set.Ici i₀,\n      (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ U j).ι).obj\n        (F j.val)) q ×\n       Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ V j).ι).obj\n        (F j.val)) q) →+\n      Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ (U ⊓ V) j).ι).obj\n        (F j.val)) q)\n    (dL : (Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U).ι).obj L.pt) q ×\n      Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V).ι).obj L.pt) q) →+\n      Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V)).ι).obj L.pt) q),\n    (∀ j x, d j x =\n      openCohomologyRestriction (X := D.obj (op j.val))\n        (A := tailStageOpen D g₀ (U ⊓ V) j) (B := tailStageOpen D g₀ U j)\n        ((D.map (homOfLE j.property).op ≫ g₀).preimage_mono\n          (inf_le_left : U ⊓ V ≤ U)) (F j.val) q x.1 -\n      openCohomologyRestriction (X := D.obj (op j.val))\n        (A := tailStageOpen D g₀ (U ⊓ V) j) (B := tailStageOpen D g₀ V j)\n        ((D.map (homOfLE j.property).op ≫ g₀).preimage_mono\n          (inf_le_right : U ⊓ V ≤ V)) (F j.val) q x.2) ∧\n    (∀ x, dL x =\n      openCohomologyRestriction (X := c.pt)\n        (A := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V))\n        (B := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U)\n        ((c.π.app (op i₀) ≫ g₀).preimage_mono (inf_le_left : U ⊓ V ≤ U)) L.pt q x.1 -\n      openCohomologyRestriction (X := c.pt)\n        (A := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V))\n        (B := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V)\n        ((c.π.app (op i₀) ≫ g₀).preimage_mono (inf_le_right : U ⊓ V ≤ V)) L.pt q x.2) ∧\n    (∀ (j k : Set.Ici i₀) (f : j ⟶ k)\n      (x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D (X := X) (i₀ := i₀) g₀ U j).ι).obj (F j.val)) q)\n      (y : Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D (X := X) (i₀ := i₀) g₀ V j).ι).obj (F j.val)) q),\n      d k ((tailOpenCohomologyMapDegree D (X := X) (i₀ := i₀) g₀ U F φ q f).hom x,\n        (tailOpenCohomologyMapDegree D (X := X) (i₀ := i₀) g₀ V F φ q f).hom y) =\n      (tailOpenCohomologyMapDegree D (X := X) (i₀ := i₀) g₀ (U ⊓ V) F φ q f).hom (d j (x, y))) ∧\n    (∀ (j : Set.Ici i₀)\n      (x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D (X := X) (i₀ := i₀) g₀ U j).ι).obj (F j.val)) q)\n      (y : Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D (X := X) (i₀ := i₀) g₀ V j).ι).obj (F j.val)) q),\n      dL ((tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ U F G eG L q j).hom x,\n        (tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ V F G eG L q j).hom y) =\n      (tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ (U ⊓ V) F G eG L q j).hom\n        (d j (x, y)))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T181104-L-2601848",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T181104-L-2601848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
