@@ -12,7 +12,21 @@
  "statement": "For an etale arrow b : U → V over X and a sheaf F on the small etale site of X, the object sections comparison followed by restriction along the composition comparison equals the object sections comparison at V followed by globalSectionsUpperStarMap along b.left.",
  "proof": [
   {
-   "text": "Expand the explicit object-sections comparisons. Use naturality of the units of the upper/lower-star adjunctions and the coherence identity for upperStarComp. The remaining equality of arrows in the iterated pullback follows by pullback.hom_ext and the two defining projection formulas.",
+   "text": "Evaluate the unit/restriction comparison for U.hom on V and the identity object of U along the lift (b.left,id), and for V.hom on V along the diagonal. Adjunction.unit_leftAdjointUniq_hom_app and naturality identify their restrictions with F(b) followed by identity-object evaluation and with evaluation on V. Cancel the invertible restriction comparisons.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply upperStarComp_hom_app_unit_app for b.left, V.hom and U.hom, evaluated on V and restricted to the identity object of U. The two ways to paste the lift agree by the three pullback projections. Naturality of the b.left unit moves restriction along the V diagonal past that unit; substitute the two restriction identities from step 1.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand etaleObjectSectionsIso and globalSectionsUpperStarMap. The inverse terminal-object pullback comparison followed by the map from the identity object agrees with (b.left,id) followed by pullback of the map to the terminal object, by terminal uniqueness. Generalized terminal-evaluation compatibility with restriction along any arrow follows from the terminal adjunction calculation and Sheaf.ΓRes_map; specialize at identity arrows. Unit naturality and Sheaf.ΓRes_map identify global pullback with the pointwise unit. Move upperStarComp past terminal evaluation by naturality, cancel the terminal evaluation isomorphisms and compose the equality of step 2 with inverse terminal evaluation.",
    "uses": [
     "lem-weil-pbc-etale-object-sections-base-change"
    ],
@@ -20,12 +34,14 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-etale-object-sections-base-change"
  ],
  "proof_origin": {
-  "by": "worker decomposition of the source-stage naturality proof",
+  "by": "V4 stage-3 worker; direct unit and terminal-evaluation calculation",
   "document": "Stacks Project",
-  "place": "Tags 03Q9 and 03S2"
+  "place": "Tags 03S2 and 03Q9; localization unit comparison and inverse-image composition coherence. Uses the definition etaleObjectSectionsIso, not etaleObjectSections_baseChange."
  },
  "lean": {
   "existing": false,
@@ -85,13 +101,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
+  "reviewer": "X-dd1c7",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261012T223422-L-1642649",
+  "landing": "20261013T022434-L-3222848",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and delivered proof with its node and recorded dependencies; delivery and direct importer Sheaf.AlgebraicGeometry.SourceStageSectionsNaturality compile without errors or warnings; all four proved declarations use only propext, Classical.choice and Quot.sound."
  }
 }
