@@ -17,24 +17,23 @@
  ],
  "proof": [
   {
-   "text": "In total degree i the coproduct summands are P^p tensor N^q for p+q=i. By the [a,b] bounds of P, all summands with p outside this finite integer interval are zero, since tensorRight preserves zero objects. Delete these summands by the coproduct universal property. For each of the remaining finitely many p there is exactly one q=i-p.",
+   "text": "For a splitting F --ι--> G --π--> F with ι ≫ π = identity, define d = identity - π ≫ ι on G. The kernel of d is canonically isomorphic to F: its map to F is kernel.ι d ≫ π and the inverse is kernel.lift d ι. Check both identities using the splitting and kernel.condition. Kernel closure and isomorphism invariance from coherent_kernel_cokernel_sum prove that every retract of a coherent sheaf is coherent. This is the proved private helper coherent_retract.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Tensor the given finite-free retraction of P^p with N^q. Tensor preserves the splitting equation. Distribution over finite coproducts, the tensor-unit isomorphism and the definition of the free module identify the ambient tensor with a finite direct sum of N^q. This finite sum is coherent. Its retract is coherent: the splitting identifies the retract with the kernel of identity minus the split idempotent on the ambient coherent module. Kernel closure and isomorphism invariance therefore give coherence of each summand.",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
     "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The surviving sum is finite, so finite-sum closure and isomorphism invariance imply that the total degree-i term is coherent. If a>b every summand is zero and the total is zero, hence coherent. Empty schemes and zero ranks are included. No bound on N is needed because the fixed equation p+q=i already determines q.",
+   "text": "Extend the Fin-indexed coherent finite-sum clause to an arbitrary finite index type using Finite.exists_equiv_fin and biproduct.whiskerEquiv. The proved private helper coherent_biproduct includes the empty index case. Identify free(ULift(Fin m)) tensor G with the biproduct of m copies of G, using biproduct.isoCoproduct, tensorRight.mapBiproduct and the left unitor. The tensorRight additive and finite-biproduct-preservation instances are the existing source implementation in WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree; no application of the bundled tensorClosed theorem is needed. This proves the private helper coherent_free_tensor. Tensor each given splitting of P^p with N^q, check the splitting by Functor.map_comp and map_id, and apply coherent_retract to get coherent summands.",
    "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix total degree i and let J be the pairs (p,q) with p+q=i and p in Finset.Icc a b. Projection onto p injects J into that finite interval; uniqueness of q follows by integer arithmetic. Let F(j)=P^p tensor N^q, which is coherent by the preceding step, and hence its finite biproduct is coherent. Define backMap from this biproduct to the total term using biproduct.desc and ιMapBifunctor. Define forwardMap from the total term to this biproduct using mapBifunctorDesc: a summand in the interval maps by its biproduct inclusion, and one outside maps by zero. The composite forwardMap ≫ backMap is the identity by mapBifunctor.hom_ext: inside the interval use ι_mapBifunctorDesc and biproduct.ι_desc; outside, hPbounds and Functor.map_isZero for tensorRight show the source is zero, so its outgoing maps agree. Thus the total term is a retract of the coherent finite biproduct and is coherent by coherent_retract. The same construction handles a>b, rank zero, empty schemes and unbounded N.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
     "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
    "elementary": true
@@ -42,13 +41,14 @@
  ],
  "proof_deps": [
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-sheaf-modules-tensor-closed",
   "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "M1",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/0DJQ",
-  "place": "perfect.tex, label lemma-tensor-perfect (0DJQ), displayed finite sum in its proof; coherent.tex, label lemma-coherent-abelian-Noetherian (01Y0); explicit Lean assembly using existing comparison and closure declarations"
+  "place": "Finite-sum calculation in the proof of 0DJQ; coherent kernel and finite-sum closure from 01Y0/01BY. Lean assembly uses a retract of the surviving finite biproduct and the existing source tensorRight implementation."
  },
  "mathlib_searches": [
   {
@@ -119,10 +119,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T054216-L-442706",
-  "kind": "interface",
+  "landing": "20261013T072356-L-1122141",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

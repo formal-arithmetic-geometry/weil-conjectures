@@ -11540,3 +11540,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/K4/Sheaf.Algebra.Homology.OpenSupportedHomologyApproximation (stage 3; reviewer PASS; first push; landing 20261013T072355-L-1121813 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/K4/Sheaf.AlgebraicGeometry.PerfectComplexDescent (stage 3; reviewer PASS; first push; landing 20261013T072355-L-1121927 (interface); batch 20261013T072335; modules 4; new nodes 3)
 - 07:23 L: merged deliver/K4/Sheaf.RingTheory.ArtinianCoefficientPresentation (stage 3; reviewer PASS; first push; landing 20261013T072356-L-1122029 (interface); batch 20261013T072335; modules 2; new nodes 1)
+- 07:23 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FiniteRetractTensorComplexTerms (stage 3; reviewer PASS; first push; landing 20261013T072356-L-1122141 (proof); batch 20261013T072335; modules 1; new nodes 0)
