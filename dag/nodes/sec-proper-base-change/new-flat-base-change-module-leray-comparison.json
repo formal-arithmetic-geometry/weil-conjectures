@@ -1,0 +1,182 @@
+{
+ "id": "new-flat-base-change-module-leray-comparison",
+ "kind": "statement",
+ "title": "Affine target Leray comparison for the module cohomology unit map",
+ "statement": "Let f:X -> S be qcqs, g:S prime -> S any morphism, and F a quasi-coherent module. Let I,J,V,W,hV,hW,eVW and D be the resolutions, affine opens, containment and restricted-resolution choices [def-weil-pbc-flat-base-change-open-choices]. Assume the supplied A-algebra structure on B has algebraMap equal to the canonical section map g.appLE(V,W,eVW). Set A=Gamma(S,V), B=Gamma(S prime,W), h:f inverse V -> Spec A, N=pullback of F to f inverse V, T=(f inverse V)_B, M=N_B, and Q=R^p f prime_*(g prime tensor pullback F) [def-pc-flat-cohomology-comparison]. For any family E of additive equivalences from module derived sections to H on T, natural for every module morphism, there is a B-linear equivalence b:HOver(h_B,M,p) -> Gamma(Q,W). For every module cohomology class x of F restricted to f inverse V, apply module cohomology to the canonical restriction/pullback coefficient isomorphism, then apply the module cohomology h-map of baseChangeUnit, then E at M and b. The result equals restriction to W of D.targetClass(moduleCohomologyFMap(D.psi)(x)) [def-weil-pbc-module-cohomology-fmap]. No source E is supplied or constructed; H.baseChangeLinear does not occur in the statement. This is the chart/unit and normalized Leray part of the argument, before comparing module and Ext pullbacks.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01XK",
+  "place": "Lemma 30.4.6; cocycle description in Tag 01E4, Lemma 20.7.3; h-map functoriality in Tag 01FB, Remark 20.14.2; affine chart dictionary of Tag 02KH. Source read on the Stacks website on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-pc-flat-cohomology-comparison",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Use the fibre-product universal property, the affine chart isomorphisms V -> Spec Gamma(V) and W -> Spec Gamma(W), and W <= g inverse V to identify the chart Y_B with f prime inverse W. Pullback composition and restriction/pullback identification identify N_B with the restriction of g prime tensor pullback F. Comparing the two composite adjunction units using D.unit_square shows that the chart coefficient map equals D.psi followed by restriction to this smaller open.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-flat-cohomology-comparison",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functoriality of module cohomology h-maps transports the equality of the preceding coefficient maps. The resulting module cohomology class is the restriction to the chart of moduleCohomologyFMap(D.psi)(x); its source is first changed through the morphism restrictFunctorIsoPullback.hom.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change preserves qcqs and pullback preserves quasi-coherence. Apply the normalized affine resolution class bijectivity theorem to f prime over W. The augmentation and component equations of D.target ensure that restriction of its targetClass is the same cocycle class map on this chart, by theta and natural restriction of higher-image sections.",
+   "uses": [
+    "lem-pc-affine-resolution-section-bijective",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the chart identification, the affine class equivalence and E inverse at N_B. Naturality of E for the scalar endomorphisms and the scalar compatibility of the class map show B-linearity. The preceding map equality proves the displayed formula. No source Ext comparison or Ext pullback map is used in this step.",
+   "uses": [
+    "lem-pc-resolution-section-scalar-map",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All constructions use section complexes and augmentation-preserving comparisons. Degree zero, empty opens and zero coefficients require no exceptional choices and no invertibility of a cohomology pullback.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-pc-affine-resolution-section-bijective",
+  "lem-pc-resolution-section-scalar-map",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "P4 following document",
+  "document": "https://stacks.math.columbia.edu/tag/01XK",
+  "place": "Lemma 30.4.6; cocycle description in Tag 01E4, Lemma 20.7.3; h-map functoriality in Tag 01FB, Remark 20.14.2; affine chart dictionary of Tag 02KH. Source read on the Stacks website on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module cohomology agrees with abelian sheaf Ext cohomology naturally in ringed space morphisms",
+   "results": "Internal Server Error; service unavailable. No conclusion of absence.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of qcqs scheme over affine base agrees with higher direct image sections with cocycle normalized restriction compatibility",
+   "results": "8 hits, mainly affine transition limits and the affine Zariski site equivalence. None supplies the normalized class-map equality.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "target_leray|targetClass|resolutionSectionClass|leray.*normalized|source_comparison",
+   "results": "Read AffineResolutionSectionBijective, AffineCohomologySectionEquiv, AffineOpenHigherDirectImageSectionsIso, ModuleCohomologyFMapFunctorial and the original item. The first supplies bijectivity of a normalized affine class map, but none includes the identification of the scalar-extension chart and the restricted target class map. CanonicalModuleBaseChangeAffineChartComparison concerns a derived-object base-change map and assumes different data.",
+   "date": "2026-10-13",
+   "verdict": "chart/unit/gluing interface needed"
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|higherDirectImage|rightDerived.*sections",
+   "results": "Mathlib AlgebraicGeometry: no hits; no normalized affine chart/class theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"moduleCohomology\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local cohomology dictionary in the flat base-change input to the formal-functions stalk comparison, specifically the source and target section identifications before applying flat cohomology base change. Target affine chart and Leray comparison with common-complex cohomological pullback compatibility.; Affine target Leray comparison for the module cohomology unit map",
+   "via": [
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeModuleLerayComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flatBaseChange_module_leray_comparison",
+  "statement": "theorem exists_flatBaseChange_module_leray_comparison\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    [QuasiCompact f] [QuasiSeparated f]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution\n      ((Scheme.Modules.tensorPullback (pullback.snd g f)).obj F))\n    (p : ℕ) (V : S.Opens) (W : S'.Opens) (hV : IsAffineOpen V) (hW : IsAffineOpen W)\n    (eVW : W ≤ g ⁻¹ᵁ V)\n    (D : Scheme.Modules.FlatBaseChangeOpenChoices f g F I J V)\n    [Algebra Γ(S, V) Γ(S', W)]\n    (hAlgebra : algebraMap Γ(S, V) Γ(S', W) = (g.appLE V W eVW).hom) :\n    let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ\n    let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F\n    let Q := ((Scheme.Modules.pushforward (pullback.fst g f)).rightDerived p).obj\n      ((Scheme.Modules.tensorPullback (pullback.snd g f)).obj F)\n    ∀ E : ∀ M : (baseChangedScheme (S := Γ(S', W)) h).Modules,\n        ((RingedSpace.moduleCohomology\n          (baseChangedScheme (S := Γ(S', W)) h).toRingedSpace p).obj M) ≃+ H M p,\n      (∀ (M M' : (baseChangedScheme (S := Γ(S', W)) h).Modules) (φ : M ⟶ M')\n        (x : (RingedSpace.moduleCohomology\n          (baseChangedScheme (S := Γ(S', W)) h).toRingedSpace p).obj M),\n        E M' (((RingedSpace.moduleCohomology\n          (baseChangedScheme (S := Γ(S', W)) h).toRingedSpace p).map φ).hom x) =\n          H.map φ p (E M x)) →\n      ∃ b : HOver (baseChangeSnd (S := Γ(S', W)) h)\n          (baseChangedModule (S := Γ(S', W)) h N) p ≃ₗ[Γ(S', W)] Γ(Q, W),\n        ∀ x : (RingedSpace.moduleCohomology\n          (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n            ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F),\n          b (E (baseChangedModule (S := Γ(S', W)) h N)\n            (moduleCohomologyFMap (baseChangeFst (S := Γ(S', W)) h)\n              (baseChangeUnit (S := Γ(S', W)) h N) p\n              (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map\n                ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F).hom).hom x))) =\n            Q.presheaf.map (homOfLE eVW).op\n              (D.targetClass p\n                (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)\n                  ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p x))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T131950-L-4087892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T131950-L-4087892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

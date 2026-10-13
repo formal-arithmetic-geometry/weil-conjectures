@@ -1,0 +1,179 @@
+{
+ "id": "new-module-cohomology-ext-pullback-comparison",
+ "kind": "statement",
+ "title": "Natural module/Ext comparisons intertwining the scalar-extension unit",
+ "statement": "Let R and B be commutative rings in the scheme universe, with an R-algebra structure on B. Let h:Y -> Spec R be any scheme morphism and p a nonnegative integer [def-pc-flat-cohomology-comparison]. On Y and Y_B = Y times Spec B over Spec R there exist families E_M and E prime_L of additive equivalences from module derived sections to the ordinary Ext model H [pqf-def-cohomology], natural for every module morphism on the respective scheme. For every module N on Y and every module cohomology class x, E prime at N_B of the module cohomology map of the pullback unit applied to x equals H.baseChangeLinear(h,N,p)(E_N(x)) [def-weil-pbc-module-cohomology-fmap]. There are no quasi-coherence, qcqs or flatness assumptions. This concerns only the two cohomology models of the same unit map; it neither constructs a Leray equivalence nor mentions an ambient higher direct image.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03FD",
+  "place": "Lemma 21.12.4, normalized module/abelian comparison; Tag 01FB, Remark 20.14.2, the common resolution diagram; Tag 01F7 and the canonical map in Tag 02KH. Source read on the Stacks website on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "pqf-def-cohomology",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "On Y and Y_B construct the comparison using forgotten module injective resolutions, whose terms are acyclic for abelian sections. The same section complex computes both derived-section groups. Identify Ext from the sheafified free abelian representable at the top open with Ext from the constant integer sheaf by the section evaluation at 1. Normalize the comparison in degree zero by this identification; do not independently choose arbitrary natural equivalences on the two schemes.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-site-cohomology-right-derived-sections",
+    "lem-sc-module-cohomology-source-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a module morphism use an augmentation-preserving resolution lift on the common section complex. The induced map computes both cohomology functors; two such lifts are homotopic. This establishes naturality of each family E and E prime.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the base-change unit N -> (p_Y)_*N_B, use beta and lambda in the defining 01FB diagram. After forgetting modules the same section maps beta and mu compute the abelian h-map. Under the evaluation-at-1 normalization, exact inverse image on Ext followed by the adjoint coefficient map is this abelian h-map. Cancel the invertible cohomology map of mu; independence of the resolution choices gives E prime(N_B)(moduleCohomologyFMap(unit)(x)) = H.baseChangeLinear(E(N)(x)). No flatness is used: only abelian inverse image is exact, not module pullback.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Degree zero is the section unit. Zero modules and the empty scheme give zero section complexes; the same construction applies for the zero ring and for arbitrary, including nonflat, scalar extensions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-module-cohomology-fmap-functorial"
+ ],
+ "proof_origin": {
+  "by": "P4 following document",
+  "document": "https://stacks.math.columbia.edu/tag/03FD",
+  "place": "Lemma 21.12.4, normalized module/abelian comparison; Tag 01FB, Remark 20.14.2, the common resolution diagram; Tag 01F7 and the canonical map in Tag 02KH. Source read on the Stacks website on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module cohomology agrees with abelian sheaf Ext cohomology naturally in ringed space morphisms",
+   "results": "Internal Server Error; service unavailable. No conclusion of absence.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module cohomology and abelian Ext cohomology comparison commuting with a morphism of ringed spaces and coefficient h-map",
+   "results": "8 hits, including InjectiveResolution.extEquivCohomologyClass_extMk and its projective analogue; no comparison of module cohomology h-maps with inverse-image Ext.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedObjIsoOfResolution\"",
+   "results": "No results. The separate Sheaf.H.mapFunctor name query was unknown to the service.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomology.*mapFunctor|mapFunctor.*moduleCohomology; source_comparison; H.mapFunctor",
+   "results": "Read ModuleCohomologySourceComparison, ZariskiModuleAbelianCohomologyNatural and ModuleCohomologyFMapFunctorial. The first two supply within-scheme naturality, the third composition of module h-maps. None states the cross-model base-change equality. Mathlib and the adopted Ext library supply generic resolution and exact-functor Ext maps.",
+   "date": "2026-10-13",
+   "verdict": "new compatibility interface needed"
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*cohomology|cohomology.*sheaf",
+   "results": "Mathlib CategoryTheory/Sites: 16 hits; basic Ext cohomology and Mayer-Vietoris declarations, no module/h-map compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism from derived global sections of modules to Ext of constant integers compatible with change of ringed space",
+   "results": "8 hits: Sheaf.H, cohomologyPresheafFunctor, generic Ext/derived-category equivalences and toSheafCompSheafToPresheafIso. None identifies module h-maps with inverse-image Ext maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local cohomology dictionary in the flat base-change input to the formal-functions stalk comparison, specifically the source and target section identifications before applying flat cohomology base change. Target affine chart and Leray comparison with common-complex cohomological pullback compatibility.; Natural module/Ext comparisons intertwining the scalar-extension unit",
+   "via": [
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtPullbackComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyExtPullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_moduleCohomology_ext_pullback_comparison",
+  "statement": "theorem exists_moduleCohomology_ext_pullback_comparison\n    {R B : Type u} [CommRing R] [CommRing B] [Algebra R B]\n    {Y : Scheme.{u}} (h : Y ⟶ Spec (.of R)) (p : ℕ) :\n    ∃ E : ∀ M : Y.Modules,\n        ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj M) ≃+ H M p,\n      ∃ E' : ∀ M : (baseChangedScheme (S := B) h).Modules,\n        ((RingedSpace.moduleCohomology\n          (baseChangedScheme (S := B) h).toRingedSpace p).obj M) ≃+ H M p,\n        (∀ (M M' : Y.Modules) (φ : M ⟶ M')\n          (x : (RingedSpace.moduleCohomology Y.toRingedSpace p).obj M),\n          E M' (((RingedSpace.moduleCohomology Y.toRingedSpace p).map φ).hom x) =\n            H.map φ p (E M x)) ∧\n        (∀ (M M' : (baseChangedScheme (S := B) h).Modules) (φ : M ⟶ M')\n          (x : (RingedSpace.moduleCohomology\n            (baseChangedScheme (S := B) h).toRingedSpace p).obj M),\n          E' M' (((RingedSpace.moduleCohomology\n            (baseChangedScheme (S := B) h).toRingedSpace p).map φ).hom x) =\n            H.map φ p (E' M x)) ∧\n        (∀ (N : Y.Modules)\n          (x : (RingedSpace.moduleCohomology Y.toRingedSpace p).obj N),\n          E' (baseChangedModule (S := B) h N)\n            (moduleCohomologyFMap (baseChangeFst (S := B) h)\n              (baseChangeUnit (S := B) h N) p x) =\n            H.baseChangeLinear (S := B) h N p (E N x))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T131950-L-4087892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T131950-L-4087892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,17 +10,8 @@ public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Sheaf.AlgebraicGeometry.ModuleCohomologyExtPullbackComparison
+import Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison
 
 /-! # Target Leray comparison normalized against a natural source comparison
 
@@ -37,6 +28,10 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
+set_option linter.style.haveILetI false in
+-- Inline the canonical algebra to match the letI in the fixed statement.
+set_option maxHeartbeats 800000 in
+-- The section and Ext models require explicit derived-cohomology conversions.
 /-- Choose the natural source module/Ext comparison together with the target affine
 Leray equivalence, compatibly with the cohomological pullback. This does not construct
 or assume a source tensor comparison, nor assert invertibility of base change.
@@ -107,6 +102,37 @@ theorem exists_flatBaseChange_target_leray_comparison
                (D.targetClass p
                  (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                    ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (e0.symm xi)))) := by
-  sorry
+  classical
+  letI : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
+  intro h N Q
+  let T : Scheme.{u} := baseChangedScheme (S := Γ(S', W)) h
+  let M : T.Modules := baseChangedModule (S := Γ(S', W)) h N
+  let c := (restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F
+  obtain ⟨E, E', hE, hE', hmap⟩ := exists_moduleCohomology_ext_pullback_comparison
+    (B := Γ(S', W)) h p
+  let e0 : ((RingedSpace.moduleCohomology
+      (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj
+        ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+ HOver h N p :=
+    (E ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).trans
+    (H.mapLinearEquiv c p).toAddEquiv
+  refine ⟨E, hE, e0, rfl, ?_⟩
+  obtain ⟨b, hb⟩ := exists_flatBaseChange_module_leray_comparison
+    f g F I J p V W hV hW eVW D rfl E' hE'
+  refine ⟨b, ?_⟩
+  intro xi
+  generalize hxi : e0.symm xi = x
+  have hx : E N
+      (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)
+      = xi := by
+    rw [hE _ _ c.hom x]
+    exact (congrArg e0 hxi.symm).trans (e0.apply_symm_apply xi)
+  have hp := hmap N
+    (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)
+  have hb' := hb x
+  have hp' := congrArg (fun z : HOver (baseChangeSnd (S := Γ(S', W)) h) M p ↦ b z)
+    hp.symm
+  have hx' := congrArg (fun z : HOver h N p ↦
+    b (H.baseChangeLinear (S := Γ(S', W)) h N p z)) hx.symm
+  exact Eq.trans hx' (Eq.trans hp' hb')
 
 end AlgebraicGeometry.Scheme.Modules
