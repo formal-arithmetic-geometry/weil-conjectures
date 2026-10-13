@@ -13475,3 +13475,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:17 L: merged deliver/G2/Sheaf.AlgebraicGeometry.PerfectLocalModelsDescendedTransition (stage 3; reviewer PASS; first push; landing 20261013T201750-L-3969597 (interface); batch 20261013T201736; modules 4; new nodes 3)
 - 20:17 L: merged deliver/G2/Sheaf.AlgebraicGeometry.RectangleQCohComparisonLifts (stage 3; reviewer PASS; first push; landing 20261013T201750-L-3969707 (proof); batch 20261013T201736; modules 1; new nodes 0)
 - 20:17 L: merged deliver/G4/Sheaf.Algebra.Homology.AffineTensorCohomologyAdditiveScalarParts (stage 3; reviewer PASS; first push; landing 20261013T201751-L-3969808 (proof); batch 20261013T201736; modules 1; new nodes 0)
+- 20:17 L: merged deliver/G4/Sheaf.AlgebraicGeometry.Modules.PullbackFreeCoordinatesNaturality (stage 3; reviewer PASS; first push; landing 20261013T201751-L-3969910 (proof); batch 20261013T201736; modules 1; new nodes 0)
