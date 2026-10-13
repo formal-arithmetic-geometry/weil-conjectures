@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Detecting the zero germ of a local morphism by finite generation
 

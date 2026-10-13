@@ -10,6 +10,10 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+import Sheaf.FieldTheory.ExistsPBasis
+import Sheaf.FieldTheory.IntersectionSubfieldsDifferentials
+import Sheaf.RingTheory.KaehlerDifferentialZeroIffPow
+import Sheaf.RingTheory.PowerSeriesRingSubfields
 
 /-!
 # Finite coefficient subrings detect relative differentials

@@ -6,6 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.CategoryTheory.Abelian.RHomDerivedRoof
+import Sheaf.CategoryTheory.KInjectiveBridge
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!
 # Shift compatibility of the roof-normalized RHom comparison

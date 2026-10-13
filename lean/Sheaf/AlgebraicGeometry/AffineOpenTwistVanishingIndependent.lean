@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Vanishing of twists over one affine open
 

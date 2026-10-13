@@ -7,6 +7,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechNaturality
+import Sheaf.AlgebraicGeometry.EtaleQcoherentSourceComparisonNatural
+import Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
 
 /-! # Surjectivity of additive cohomology tensor pullback -/
 

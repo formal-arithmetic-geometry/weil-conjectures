@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Geometric cofaces of normalized singleton tensor sections
 Source: Stacks Project, Tag 03P2; Tag 03DR for section restrictions.

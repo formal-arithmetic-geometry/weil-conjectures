@@ -13,6 +13,7 @@ import Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Cohomology coordinates for affine derived base change
 

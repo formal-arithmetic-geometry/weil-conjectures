@@ -6,6 +6,8 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.BoundedOrdinaryEvaluationAssembly
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.HomComplexProjections
 
 /-! # The ordinary evaluation differential on one tensor summand
 

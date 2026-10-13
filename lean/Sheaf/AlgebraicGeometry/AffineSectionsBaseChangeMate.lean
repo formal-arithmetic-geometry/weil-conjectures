@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Affine sections and the mate of sheaf base change
 

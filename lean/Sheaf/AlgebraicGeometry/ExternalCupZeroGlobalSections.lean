@@ -6,6 +6,7 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
+import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 
 /-! # Degree-zero external cup on ordinary sections
 

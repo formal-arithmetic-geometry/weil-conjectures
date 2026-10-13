@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum
+import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Quasi-coherent cohomology of Hom from a finite free complex
 

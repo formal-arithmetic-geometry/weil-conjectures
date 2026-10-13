@@ -8,6 +8,9 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.CategoryTheory.ColimitSites
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Every section of the inverse image on the affine limit descends to an affine stage. -/
 

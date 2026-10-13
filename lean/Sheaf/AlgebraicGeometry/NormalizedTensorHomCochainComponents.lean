@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.NormalizedTensorHomCochains
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.HomTensorDegreewise
+import Sheaf.Algebra.Homology.NormalizedHomComplexGlobalCochains
 
 /-! # The pure-tensor component calculation for ordinary cochains
 

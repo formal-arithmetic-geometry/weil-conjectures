@@ -6,6 +6,7 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 
 /-! # Canonical generators for affine coefficient comparison
 

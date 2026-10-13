@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Sheaf.Algebra.Homology.ModuleStalkExact
 
 /-! # The localized comparison square for a quasi-isomorphism
 

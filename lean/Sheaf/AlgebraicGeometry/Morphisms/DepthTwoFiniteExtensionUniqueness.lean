@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.RingTheory.Depth
+import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 
 /-!
 # Uniqueness of finite extensions with depth two at the boundary

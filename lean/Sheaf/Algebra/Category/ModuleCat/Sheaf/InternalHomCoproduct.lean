@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-!
 # Internal Hom turns coproducts into products

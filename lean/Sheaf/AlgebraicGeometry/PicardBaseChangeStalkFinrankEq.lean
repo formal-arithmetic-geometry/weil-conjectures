@@ -4,6 +4,10 @@ public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 @[expose] public section
 

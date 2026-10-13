@@ -5,6 +5,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 
 /-! # Tensor pullback counit in one K-flat coordinate
 

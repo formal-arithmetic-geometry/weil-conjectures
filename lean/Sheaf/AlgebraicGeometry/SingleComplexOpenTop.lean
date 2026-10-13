@@ -6,6 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenComparison
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Normalization of the source-open comparison at the whole scheme
 

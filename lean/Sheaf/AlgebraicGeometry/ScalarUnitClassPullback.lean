@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
 
 /-! # Structure-sheaf pullback preserves the degree-zero class of one
 

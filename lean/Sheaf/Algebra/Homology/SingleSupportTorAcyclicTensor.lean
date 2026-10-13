@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
 
 /-!
 # The one-term Tor-acyclic tensor comparison

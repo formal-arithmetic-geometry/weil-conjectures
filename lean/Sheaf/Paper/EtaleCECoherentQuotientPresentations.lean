@@ -11,6 +11,8 @@ import Sheaf.CategoryTheory.CartanEilenbergExists
 import Sheaf.CategoryTheory.HypercohomologyFirstPage
 import Sheaf.CategoryTheory.FilteredComplexPageHomology
 import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Coherent quotient presentations and comparison of supplied first-page maps
 

@@ -6,6 +6,9 @@ Authors: SHEAF group H4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitCounit
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Unit laws on K-flat representatives
 

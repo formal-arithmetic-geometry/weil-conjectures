@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.FormalGlueingH0
 public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.Paper.FormalGlueingCanonicalMaps
+import Sheaf.RingTheory.FormalGlueingData
 
 /-!
 # Clearing denominators of a formal glueing chart section

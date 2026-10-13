@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation
 
 /-! # Spreading two inverse homotopies
 

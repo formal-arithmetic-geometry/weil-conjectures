@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Affine formal maps and inverse limits of sections
 

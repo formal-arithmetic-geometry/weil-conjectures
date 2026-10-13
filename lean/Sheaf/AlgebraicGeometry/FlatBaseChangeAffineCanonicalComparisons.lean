@@ -15,6 +15,9 @@ import Sheaf.Paper.HigherDirectImagePresheaf
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Canonical affine section comparisons before flat base change
 

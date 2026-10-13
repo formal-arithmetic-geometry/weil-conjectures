@@ -15,6 +15,7 @@ import Mathlib.CategoryTheory.Presentable.Directed
 import Sheaf.AlgebraicGeometry.FlatModuleDescent
 import Sheaf.AlgebraicGeometry.ProperSupportDescent
 import Sheaf.AlgebraicGeometry.TensorPullbackFlatProperSupport
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Refining an already chosen complex to flat terms with proper support

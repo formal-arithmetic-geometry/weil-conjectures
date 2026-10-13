@@ -6,6 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Sheaf.AlgebraicGeometry.Cohomology.InverseImageCoefficientComposition
+import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Transport of ordinary unit cohomology across a displayed cartesian square
 

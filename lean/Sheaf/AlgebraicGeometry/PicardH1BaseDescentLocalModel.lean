@@ -23,6 +23,10 @@ import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Local scalar models and degree-one comparison for Picard descent
 

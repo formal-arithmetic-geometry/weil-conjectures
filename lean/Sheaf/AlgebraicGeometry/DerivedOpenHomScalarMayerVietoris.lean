@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 import Sheaf.AlgebraicGeometry.OpenDerivedRestrictionComparison
+import Sheaf.Algebra.Homology.OpenHomTriangleRealization
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Scalar compatible Mayer--Vietoris on an open union
 

@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Exact.Basic
 import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Compatible Mayer--Vietoris maps on canonical open diagrams
 

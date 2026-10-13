@@ -11,6 +11,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 
 public import Mathlib.Algebra.Homology.Embedding.StupidTrunc
+import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 
 /-!
 # Gluing tensor comparisons along a stupid tail

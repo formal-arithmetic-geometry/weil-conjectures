@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Scalar extension of derived fibre cohomology
 

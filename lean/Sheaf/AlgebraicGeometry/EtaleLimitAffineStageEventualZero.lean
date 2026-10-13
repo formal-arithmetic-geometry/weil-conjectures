@@ -6,6 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero
 
 /-! # Finite-stage vanishing when one stage is affine
 

@@ -6,6 +6,7 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Source locality of one universal direct-image rank condition
 

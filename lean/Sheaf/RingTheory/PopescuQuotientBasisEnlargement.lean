@@ -10,6 +10,14 @@ public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.LinearAlgebra.Basis.Defs
+import Sheaf.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue
+import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
+import Sheaf.RingTheory.HenselianEtaleRetraction
+import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
+import Sheaf.RingTheory.LocalDimensionZeroHenselian
+import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
 # Enlargement before lifting generators

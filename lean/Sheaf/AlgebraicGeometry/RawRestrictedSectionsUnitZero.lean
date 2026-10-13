@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedHomotopySectionsIso
 import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
 
 /-! # Degree-zero normalization of the restricted sections unit
 

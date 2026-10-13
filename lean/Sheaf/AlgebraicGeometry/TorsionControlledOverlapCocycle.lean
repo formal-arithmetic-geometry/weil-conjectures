@@ -5,6 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExt
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.FormalSystemsPullback
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftExists
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Torsion-controlled local descent data
 

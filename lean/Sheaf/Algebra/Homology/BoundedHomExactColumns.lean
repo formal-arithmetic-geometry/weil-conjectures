@@ -3,6 +3,7 @@ module
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Finite-diagonal Hom totalization of exact columns is acyclic
 

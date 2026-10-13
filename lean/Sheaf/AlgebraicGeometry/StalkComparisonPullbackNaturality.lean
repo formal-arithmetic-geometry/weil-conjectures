@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.StalkComparisonSourceTransport
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Sheaf.Algebra.Homology.KFlatStalkCriterion
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 
 /-! # Naturality of the localized comparison into derived pullback
 

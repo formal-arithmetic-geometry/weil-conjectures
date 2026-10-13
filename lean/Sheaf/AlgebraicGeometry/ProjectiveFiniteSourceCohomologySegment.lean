@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 
 /-! # A finite-source cohomology segment for a projective embedding
 

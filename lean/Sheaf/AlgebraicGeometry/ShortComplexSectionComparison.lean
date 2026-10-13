@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-! # The section comparison for a short complex
 

@@ -8,6 +8,8 @@ module
 public import Sheaf.CategoryTheory.Abelian.NatComplexDerivedBoundary
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!
 # Comparing the derived image triangle with a fixed horseshoe

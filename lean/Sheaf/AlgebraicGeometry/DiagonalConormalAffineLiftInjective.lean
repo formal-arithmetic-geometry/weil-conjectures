@@ -6,6 +6,9 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
+import Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence
+import Sheaf.AlgebraicGeometry.DiagonalConormal
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Injectivity of the affine diagonal conormal lift
 

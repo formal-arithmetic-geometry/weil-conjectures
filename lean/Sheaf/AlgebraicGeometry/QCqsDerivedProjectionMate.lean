@@ -10,6 +10,15 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
+import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
+import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
+import Sheaf.AlgebraicGeometry.ProjectionFormulaLocality
+import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
 
 /-! # The quasi-coherent derived projection mate
 

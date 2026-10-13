@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.OrderedCechModuleProjectionLift
 public import Mathlib.Algebra.Homology.Homotopy
 import Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingIdentity
 import Sheaf.AlgebraicGeometry.AlternatingCechSecondSortingIdentity
+import Sheaf.AlgebraicGeometry.OrderedCechModuleCoordinates
 
 /-! # Sorting homotopy for the module Čech projection
 

@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone
 import Sheaf.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Canonical cohomology cocone on inverse-image opens
 

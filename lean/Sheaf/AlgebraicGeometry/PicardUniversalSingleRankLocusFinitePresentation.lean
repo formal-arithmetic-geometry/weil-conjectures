@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus
 import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
 /-! # A finitely presented locus for one universal direct-image rank condition
 

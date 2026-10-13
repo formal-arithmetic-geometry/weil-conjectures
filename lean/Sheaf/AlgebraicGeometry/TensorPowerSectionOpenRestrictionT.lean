@@ -6,6 +6,9 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 @[expose] public section
 

@@ -11,6 +11,11 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.Single
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 
 /-! # The relative Tor bound on a strictly perfect chart
 

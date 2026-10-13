@@ -6,6 +6,9 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.AlgebraicGeometry.PrincipalCechTotalRegrouping
+import Sheaf.AlgebraicGeometry.PrincipalCechColumns
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
+import Sheaf.CategoryTheory.DoubleComplexTotal
 
 /-! # Differential compatibility of the explicit regrouping
 

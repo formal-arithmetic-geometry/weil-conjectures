@@ -1,5 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.EtaleCoefficientInjectiveSystemData
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Canonical transitions for outgoing-arrow products
 

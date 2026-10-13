@@ -6,6 +6,12 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
+import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import Sheaf.AlgebraicGeometry.ExtPullbackResolutionSections
+import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
+import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
 
 /-! # Quotient-page descent on prescribed CE resolutions
 

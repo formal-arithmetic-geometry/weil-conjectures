@@ -6,6 +6,10 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomModel
+import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 
 /-! # Localized evaluation and chain-map composition
 

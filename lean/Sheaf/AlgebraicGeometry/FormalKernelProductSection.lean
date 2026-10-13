@@ -6,6 +6,8 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 
 /-! # A product section determined by local representatives
 

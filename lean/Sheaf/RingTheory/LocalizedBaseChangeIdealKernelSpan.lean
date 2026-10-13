@@ -9,6 +9,9 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Localization.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import Sheaf.Algebra.TorOneSurjectiveChangeRings
+import Sheaf.RingTheory.TorIdealKernelNaturality
+import Sheaf.RingTheory.TorOneSurjectiveFlatMiddle
 
 /-!
 # Generators of the ideal-tensor kernel after localized base change

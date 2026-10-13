@@ -7,6 +7,12 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.PthRootResidueDifferentials
+import Sheaf.FieldTheory.PthRootsExtensionDegree
+import Sheaf.Paper.CartierEquality
+import Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
+import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
 
 /-! # Dimension balance for p-root residue differential comparisons
 

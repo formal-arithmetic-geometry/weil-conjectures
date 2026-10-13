@@ -6,6 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Linear Leray comparison for an acyclic direct image
 

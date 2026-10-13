@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Zero kernel of the affine singleton tensor comparison
 

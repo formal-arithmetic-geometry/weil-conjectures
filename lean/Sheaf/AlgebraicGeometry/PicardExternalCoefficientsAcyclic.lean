@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.LerayDegenerateSections
+import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.Paper.HigherDirectImagePresheaf
 
 /-! # Acyclicity of external tensor coefficients
 

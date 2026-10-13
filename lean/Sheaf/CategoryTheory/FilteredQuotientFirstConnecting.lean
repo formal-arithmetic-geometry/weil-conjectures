@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 /-!
 # The first quotient-page differential as a connecting map
 

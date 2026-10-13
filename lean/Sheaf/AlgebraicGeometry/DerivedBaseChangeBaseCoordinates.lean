@@ -6,6 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Transport of the derived mate in its base coordinates
 

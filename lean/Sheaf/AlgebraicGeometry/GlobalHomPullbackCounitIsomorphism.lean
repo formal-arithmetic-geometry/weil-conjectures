@@ -6,6 +6,10 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
+import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
+import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-! # The fixed pullback-counit composite on global derived Hom
 

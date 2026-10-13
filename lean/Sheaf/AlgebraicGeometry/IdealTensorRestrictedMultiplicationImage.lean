@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 
 /-! # Image of multiplication restricted to an ideal multiple of a tensor product
 

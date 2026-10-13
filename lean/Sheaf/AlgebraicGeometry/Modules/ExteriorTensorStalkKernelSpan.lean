@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalk generators of an exterior tensor quotient kernel

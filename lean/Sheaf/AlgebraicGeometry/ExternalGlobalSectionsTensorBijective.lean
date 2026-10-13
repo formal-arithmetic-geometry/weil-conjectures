@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 
 /-! # External tensor product on global sections
 

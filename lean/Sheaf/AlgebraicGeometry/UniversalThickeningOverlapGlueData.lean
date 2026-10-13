@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
 public import Mathlib.AlgebraicGeometry.Gluing
+import Sheaf.AlgebraicGeometry.UniversalThickeningOpenPieces
 
 /-!
 # Overlap glue data for universal first order thickenings

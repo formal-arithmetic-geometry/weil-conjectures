@@ -13,6 +13,7 @@ public import Sheaf.Algebra.Homology.RhomGlobalSections
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
 import Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
+import Sheaf.Algebra.Homology.DerivedInternalHom
 
 /-! # Evaluation mate and its zeroth hypercohomology
 

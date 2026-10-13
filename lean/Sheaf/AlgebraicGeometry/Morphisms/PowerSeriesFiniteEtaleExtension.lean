@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.RingTheory.Depth
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
+import Sheaf.RingTheory.FlatLocalDepthFormula
 
 /-!
 # Extending finite etale covers of a power-series open

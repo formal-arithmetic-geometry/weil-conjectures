@@ -7,6 +7,18 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.Algebra.Homology.TensorKunnethNat
+import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.Paper.CechComparisonMapNaturality
+import Sheaf.Paper.CechCupProduct
+import Sheaf.Paper.CechCupPullbackCompat
+import Sheaf.Paper.CechRefinementCochainMap
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Short exact comparison complexes for external cup in the left coefficient
 

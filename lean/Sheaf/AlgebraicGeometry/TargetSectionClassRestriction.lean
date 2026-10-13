@@ -6,6 +6,10 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
 
 /-! # Restriction of target section classes
 

@@ -6,6 +6,9 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Transport of restricted section pullback through the shift comparison
 

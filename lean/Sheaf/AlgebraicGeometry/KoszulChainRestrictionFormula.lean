@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
 import Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnitIso
+import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # The restriction formula for a Koszul chain representative
 

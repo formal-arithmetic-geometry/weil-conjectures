@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Sheaf.Paper.DerivedSectionsLeftExactBottom
 
 /-! # Identifying section cohomology with the quotient of section cycles
 

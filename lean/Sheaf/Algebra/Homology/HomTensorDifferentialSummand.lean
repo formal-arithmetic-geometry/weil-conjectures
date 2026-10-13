@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.Algebra.Homology.HomTensorDegreewise
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.HomComplex
 
 /-!
 # Three-term expansion of the iterated Hom differential

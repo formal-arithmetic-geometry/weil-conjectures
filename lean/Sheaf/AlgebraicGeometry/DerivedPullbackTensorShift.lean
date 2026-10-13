@@ -11,6 +11,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Compatible tensor shifts for derived pullback
 

@@ -5,6 +5,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
+import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
+import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
+import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-!
 # The exchange square for global Hom comparisons

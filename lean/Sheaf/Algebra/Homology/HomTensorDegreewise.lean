@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.HomComplex
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-!
 # Degreewise currying for the Hom-total-tensor comparison

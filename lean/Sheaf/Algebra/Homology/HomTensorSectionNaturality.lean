@@ -6,6 +6,7 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.Algebra.Homology.HomTensorDegreewise
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Naturality of the canonical map to the sheaf tensor product

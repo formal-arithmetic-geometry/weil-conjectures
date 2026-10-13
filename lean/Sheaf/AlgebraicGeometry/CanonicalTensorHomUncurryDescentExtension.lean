@@ -6,6 +6,9 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+import Sheaf.Algebra.Homology.HomComplexGlobalCochains
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KInjectiveHomComplex
 
 @[expose] public section
 set_option autoImplicit false

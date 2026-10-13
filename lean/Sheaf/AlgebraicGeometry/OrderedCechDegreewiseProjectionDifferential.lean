@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OrderedCechDegreewiseProjection
 import Sheaf.AlgebraicGeometry.SignedCechExtension
+import Sheaf.AlgebraicGeometry.OrderedCechModuleCoordinates
 
 /-! # Differential compatibility of degreewise signed projection
 

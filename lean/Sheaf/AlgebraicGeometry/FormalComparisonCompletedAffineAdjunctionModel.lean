@@ -11,6 +11,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Limits
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
+import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
+import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
+import Sheaf.AlgebraicGeometry.FormalSystemsPullback
+import Sheaf.AlgebraicGeometry.TheoremFormalFunctions
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 
 /-! # Algebraization of the completed affine comparison as an adjunction
 

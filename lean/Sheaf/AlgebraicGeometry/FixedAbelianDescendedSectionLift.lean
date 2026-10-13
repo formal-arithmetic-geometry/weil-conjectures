@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.CategoryTheory.ColimitSites
 import Sheaf.CategoryTheory.ColimitSiteSections
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 
 /-! # Fixed-coefficient lifting on a descended qcqs étale object
 

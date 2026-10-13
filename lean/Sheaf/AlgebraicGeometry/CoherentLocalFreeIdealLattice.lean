@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Clearing denominators in a supplied local closed free model
 

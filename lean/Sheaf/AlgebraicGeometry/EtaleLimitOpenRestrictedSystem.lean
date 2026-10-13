@@ -6,6 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Explicit restriction of a coherent system to inverse-image opens
 

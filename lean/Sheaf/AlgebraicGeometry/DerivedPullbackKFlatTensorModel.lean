@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
+import Sheaf.Algebra.Homology.KFlatPullback
 
 /-! # Tensor comparison on K-flat representatives
 

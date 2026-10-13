@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyComparisonFamily
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 
 /-! # Pullback compatibility of the explicit unit comparison
 

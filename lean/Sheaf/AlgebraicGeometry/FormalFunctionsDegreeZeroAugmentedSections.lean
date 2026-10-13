@@ -6,6 +6,13 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
+import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
+import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Canonical theta on augmented sections
 

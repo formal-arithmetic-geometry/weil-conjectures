@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Derived and ordinary exchange on the right-derived unit
 

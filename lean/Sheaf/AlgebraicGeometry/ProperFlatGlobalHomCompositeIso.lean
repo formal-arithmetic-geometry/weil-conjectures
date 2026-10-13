@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.Algebra.Homology.BaseChangeRHomPerfect
 import Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage
 import Sheaf.AlgebraicGeometry.FlatPrecomposePus
+import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-! # The composite global Hom comparison through the right adjoint
 Source: Stacks Project, duality.tex, Tag 0AA8, equation duality-equation-iso.

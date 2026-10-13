@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.FiniteTorDimension
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
+import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 
 /-! # Tor bounds for an affine module model
 

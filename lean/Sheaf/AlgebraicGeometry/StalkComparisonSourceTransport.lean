@@ -8,6 +8,7 @@ public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Mathlib.Topology.Sheaves.Abelian
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Transport of the source of the stalk comparison
 

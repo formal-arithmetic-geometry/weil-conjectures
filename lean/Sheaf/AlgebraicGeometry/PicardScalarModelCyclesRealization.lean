@@ -16,6 +16,10 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
 import Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Realizing scalar cycles of a fixed perfect direct-image model
 

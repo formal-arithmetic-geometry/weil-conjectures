@@ -6,6 +6,9 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.PicardBaseChangeCounit
+import Sheaf.AlgebraicGeometry.PicardCanonicalBaseChange
+import Sheaf.AlgebraicGeometry.PicardCupProductMap
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Tensor and unit coherence for a pairing on a pullback square
 

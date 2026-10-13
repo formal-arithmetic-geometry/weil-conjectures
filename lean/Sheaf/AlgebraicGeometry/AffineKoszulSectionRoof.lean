@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Koszul representatives of sections on an affine open
 

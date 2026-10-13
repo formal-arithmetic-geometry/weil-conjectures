@@ -6,6 +6,8 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.RestrictedAffineCoefficientConstruction
+import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Concrete restricted affine coefficient constructions
 

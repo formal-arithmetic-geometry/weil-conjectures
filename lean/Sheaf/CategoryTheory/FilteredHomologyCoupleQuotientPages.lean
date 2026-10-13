@@ -8,6 +8,8 @@ module
 public import Sheaf.CategoryTheory.FilteredHomologyExactCouple
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.ExactCouple
 /-!
 # Derived homology-couple pages as representative quotients
 

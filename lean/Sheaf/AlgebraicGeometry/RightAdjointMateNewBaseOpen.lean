@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # One-open compatibility of right-adjoint mates
 

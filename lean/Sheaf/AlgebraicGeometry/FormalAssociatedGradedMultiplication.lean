@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # Bilinear multiplication on associated graded ideal sheaves
 

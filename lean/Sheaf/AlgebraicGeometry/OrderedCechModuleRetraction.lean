@@ -6,6 +6,7 @@ Authors: SHEAF group K2
 module
 
 public import Sheaf.AlgebraicGeometry.OrderedCechModuleCoordinates
+import Sheaf.AlgebraicGeometry.SignedCechExtension
 
 /-! # Split ordered restriction for module sheaves
 

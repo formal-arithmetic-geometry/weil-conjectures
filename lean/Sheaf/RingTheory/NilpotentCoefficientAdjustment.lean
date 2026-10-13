@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import Sheaf.RingTheory.ExistsLiftOfFieldCharP
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
 
 /-!
 # Finite coefficient adjustment for a nilpotent local algebra

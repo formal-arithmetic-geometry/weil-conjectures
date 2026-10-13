@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 
 /-!
 # Affine sections of the explicit formal quotient projection

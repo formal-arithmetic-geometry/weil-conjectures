@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
+import Sheaf.Algebra.Homology.ModuleHomComplex
+import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Normalized chain representatives for Koszul derived Hom
 

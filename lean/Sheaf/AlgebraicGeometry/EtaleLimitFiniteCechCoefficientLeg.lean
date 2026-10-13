@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 @[expose] public section
 universe u

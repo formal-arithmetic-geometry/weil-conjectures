@@ -6,6 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Base change and the restricted coefficient complex system
 
 Source: Stacks Project, Tag 09Z1 proof and Tag 0EZM.

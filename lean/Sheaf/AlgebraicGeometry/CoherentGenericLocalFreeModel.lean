@@ -10,6 +10,8 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhood
+import Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism
 
 /-! # A local free model along an integral closed subscheme
 

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechSheafConstruction
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 
 /-! # Global sections of the increasing-tuple sheaf complex
 

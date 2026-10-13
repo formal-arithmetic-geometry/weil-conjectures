@@ -5,6 +5,7 @@ Authors: SHEAF group U4
 -/
 module
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 /-! # Evaluation of the transported nested-open restriction
 
 Source: Stacks Project, Cohomology, Tag 08BV.

@@ -11,6 +11,10 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # Compatible comparison isomorphisms for an ordinary evaluation map
 

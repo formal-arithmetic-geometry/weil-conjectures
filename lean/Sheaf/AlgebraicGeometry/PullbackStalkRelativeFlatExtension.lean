@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Sheaf.AlgebraicGeometry.PullbackStalkTensorFlat
 
 /-! # Relative flat scalar extension to a fibre-product stalk
 

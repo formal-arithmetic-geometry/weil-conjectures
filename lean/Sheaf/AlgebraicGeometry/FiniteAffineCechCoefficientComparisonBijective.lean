@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Affine bijectivity of normalized coefficient comparisons
 

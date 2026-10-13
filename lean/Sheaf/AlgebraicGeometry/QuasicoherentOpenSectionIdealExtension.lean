@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
+import Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
+import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 
 /-! # Extending a quasi-coherent section from an ideal power
 

@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.PerfectDescentOnOpen
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.Algebra.Homology.AffinePerfectColimitDescent
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # PerfectDescentAffineOpen
 

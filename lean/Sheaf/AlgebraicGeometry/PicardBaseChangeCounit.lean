@@ -6,6 +6,8 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.PicardCanonicalBaseChange
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Counit formula for the canonical Picard base-change map
 

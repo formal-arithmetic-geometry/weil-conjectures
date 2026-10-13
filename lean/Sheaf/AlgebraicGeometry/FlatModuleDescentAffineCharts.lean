@@ -12,6 +12,9 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Affine module comparisons for eventual flatness
 

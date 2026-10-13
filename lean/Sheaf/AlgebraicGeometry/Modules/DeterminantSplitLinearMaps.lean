@@ -10,6 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafWedgeMapExists
 
 /-!
 # Linear part of the split determinant construction

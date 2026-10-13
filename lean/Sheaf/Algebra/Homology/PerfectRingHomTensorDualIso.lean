@@ -6,6 +6,8 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.Algebra.Homology.PerfectRingDualTermFlat
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
 
 /-! # Finite-projective Hom as the total tensor with the explicit dual
 

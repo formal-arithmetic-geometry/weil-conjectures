@@ -6,6 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
+import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 
 /-! # Realizing the canonical tensor comparison by a monoidal structure
 

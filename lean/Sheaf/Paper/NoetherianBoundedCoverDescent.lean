@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-! # Descending a bounded principal-open cover to a finite coefficient ring
 

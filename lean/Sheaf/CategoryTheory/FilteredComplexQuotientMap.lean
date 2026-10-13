@@ -6,6 +6,10 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.CategoryTheory.FilteredComplexQuotientCoherence
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.FilteredComplexBoundariesLECycles
+import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
+import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
 
 /-! # Descent of filtered maps to coherent quotient pages
 

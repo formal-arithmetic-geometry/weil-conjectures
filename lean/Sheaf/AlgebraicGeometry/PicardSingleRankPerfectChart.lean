@@ -13,6 +13,8 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.PicardFiberRankClopen
 
 /-! # Perfect charts for one direct-image rank condition
 

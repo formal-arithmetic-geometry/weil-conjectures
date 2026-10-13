@@ -8,6 +8,9 @@ public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage
+import Sheaf.AlgebraicGeometry.EtaleQcoherentSourceComparisonNatural
+import Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
 
 /-! # Canonical additive comparison and its inverse-image square
 

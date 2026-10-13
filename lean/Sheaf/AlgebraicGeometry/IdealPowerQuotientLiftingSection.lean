@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.IdealPowerEvaluationEventuallyZero
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
+import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Lifting sections into ideal-power annihilator quotients
 

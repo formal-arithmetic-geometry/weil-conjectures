@@ -6,6 +6,9 @@ Authors: SHEAF group D3
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
+import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Čech augmentation of a K-injective complex
 

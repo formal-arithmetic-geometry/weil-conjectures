@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Composition of scalar cohomology pullbacks
 

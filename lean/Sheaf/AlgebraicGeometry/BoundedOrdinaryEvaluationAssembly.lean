@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
+import Sheaf.Algebra.Homology.HomComplex
 
 /-! # Finite-support assembly of ordinary evaluation
 

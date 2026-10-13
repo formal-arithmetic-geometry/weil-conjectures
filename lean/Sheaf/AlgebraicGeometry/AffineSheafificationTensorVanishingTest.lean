@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+import Sheaf.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
+import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
+import Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor
 
 /-! # A global test sheaf for affine tensor cohomology
 

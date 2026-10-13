@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Ideal.Cotangent
+import Sheaf.AlgebraicGeometry.AffineConormalSections
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-! # Tensor coordinates before the second module pullback
 

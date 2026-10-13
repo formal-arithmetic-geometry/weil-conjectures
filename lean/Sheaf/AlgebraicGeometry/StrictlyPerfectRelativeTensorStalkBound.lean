@@ -13,6 +13,11 @@ public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Topology.Sheaves.Abelian
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatStalkCriterion
+import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.StalkTensorComplex
 
 /-! # Relative tensor bounds from a strictly perfect local model
 

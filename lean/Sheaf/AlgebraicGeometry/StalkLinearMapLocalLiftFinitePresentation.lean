@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Spreading one linear map of stalks from a finitely presented source
 

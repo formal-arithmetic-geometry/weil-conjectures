@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesIsoEquivalence
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # Natural affine comparison for coherent completion
 

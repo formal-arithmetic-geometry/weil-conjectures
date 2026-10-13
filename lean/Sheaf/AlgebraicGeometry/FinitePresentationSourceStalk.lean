@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Pi
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Finite presentations of module stalks
 

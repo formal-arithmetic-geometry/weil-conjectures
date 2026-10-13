@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+import Sheaf.Paper.DirectedColimitBaseChangeElementwise
 
 /-! # Extending a tensor comparison by base change
 

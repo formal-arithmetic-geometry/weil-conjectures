@@ -11,6 +11,8 @@ import Sheaf.AlgebraicGeometry.PerfectDescendMorphisms
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.DerivedOpenGluing
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # PerfectDescentOpenUnion
 

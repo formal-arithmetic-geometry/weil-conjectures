@@ -7,6 +7,8 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.RingTheory.NormalLocalDepthTwo
 
 @[expose] public section
 universe u

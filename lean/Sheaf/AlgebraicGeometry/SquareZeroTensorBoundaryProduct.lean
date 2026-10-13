@@ -7,6 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
+import Sheaf.AlgebraicGeometry.SectionBoundaryExact
+import Sheaf.Paper.BoundaryDerivationSquareZero
 
 /-! # The two-section product identity for transported tensor boundaries
 

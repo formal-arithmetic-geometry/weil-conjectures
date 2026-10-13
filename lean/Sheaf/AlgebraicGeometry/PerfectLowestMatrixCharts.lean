@@ -11,6 +11,8 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 
 /-! # Local matrix charts for lowest cohomology
 

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.Algebra.Homology.HomComplex
 
 /-! # Flat terms of the finite-projective ring dual
 

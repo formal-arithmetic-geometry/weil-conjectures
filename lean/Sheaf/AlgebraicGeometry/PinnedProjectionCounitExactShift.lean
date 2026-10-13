@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Exact shifts for a pinned projection followed by a counit
 

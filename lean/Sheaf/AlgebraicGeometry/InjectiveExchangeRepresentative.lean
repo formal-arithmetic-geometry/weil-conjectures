@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 
 /-! # Injective representative computation of the derived exchange
 

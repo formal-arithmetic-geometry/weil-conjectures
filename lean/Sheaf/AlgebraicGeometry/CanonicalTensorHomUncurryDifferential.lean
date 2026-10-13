@@ -6,6 +6,8 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomModel
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.HomComplex
 
 /-! # Differential compatibility of componentwise uncurrying
 

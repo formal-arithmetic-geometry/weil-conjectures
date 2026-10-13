@@ -6,6 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 
 /-! # The finite graph of a prescribed formal comparison map
 

@@ -6,6 +6,9 @@ Authors: SHEAF group G3
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
+import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The zero comparison for restricted derived section pullback
 

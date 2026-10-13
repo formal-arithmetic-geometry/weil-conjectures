@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 /-! # Relative Tor dimension bounds tensor with a derived pullback
 

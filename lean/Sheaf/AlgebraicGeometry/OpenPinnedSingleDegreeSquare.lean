@@ -4,6 +4,11 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeSquareRestrictionCommutes
 
 /-! # The geometric restriction square for the pinned single-complex counits
 Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.

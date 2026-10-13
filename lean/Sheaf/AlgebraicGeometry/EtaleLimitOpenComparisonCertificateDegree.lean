@@ -11,6 +11,7 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Geometric certificate for the canonical open comparison
 

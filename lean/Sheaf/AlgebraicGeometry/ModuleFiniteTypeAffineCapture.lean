@@ -6,6 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Finite-type capture on a compact open inside an affine open
 

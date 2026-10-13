@@ -6,6 +6,8 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
+import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
 
 /-! # Cup with one on one scheme is the identity on structure-sheaf H1
 
