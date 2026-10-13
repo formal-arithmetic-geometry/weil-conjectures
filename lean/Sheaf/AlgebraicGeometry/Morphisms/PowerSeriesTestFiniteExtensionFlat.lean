@@ -12,6 +12,9 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.RingTheory.Depth
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+import Mathlib.RingTheory.MvPowerSeries.Equiv
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesFiniteEtaleExtension
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
 
 /-!
 # Flatness of a finite depth-two extension on a power-series spectrum
@@ -55,6 +58,13 @@ theorem flat_of_power_series_depth_two_finite_extension
       IsLocalRing.closedPoint B → v ∈ V)
     (hgeneric : ∃ v, v ∈ V ∧ v.asIdeal =
       (IsLocalRing.maximalIdeal B).map (MvPowerSeries.C (σ := Fin n))) :
-    Flat r := by sorry
+    Flat r := by
+  obtain ⟨E, p, hp, het, hE, e, he⟩ :=
+    exists_finite_etale_extension_of_power_series_open B hdepth n hn V haway hgeneric (r ∣_ V)
+  have : IsFinite p := hp
+  have : Etale p := het
+  obtain ⟨i, hi⟩ := iso_of_finite_depth_two_extensions V r p hboundary hE e he
+  rw [← hi]
+  infer_instance
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,142 @@
+{
+ "id": "lem-sbc-depth-two-finite-extension-uniqueness",
+ "kind": "statement",
+ "title": "Isomorphism between finite extensions with depth two along the boundary",
+ "statement": "Let $L$ be a locally Noetherian scheme and $U\\subset L$ an open [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring]. Let $r:F\\to L$ and $p:E\\to L$ be finite morphisms [def-weil-finite-integral-morphism]. Suppose $\\operatorname{depth}\\mathcal O_{F,z}\\geq2$ when $r(z)\\notin U$, and $\\operatorname{depth}\\mathcal O_{E,z}\\geq2$ when $p(z)\\notin U$ [def-weil-pbc-depth]. Given an isomorphism $e:E\\times_L U\\cong F\\times_L U$ over $U$, there exists an isomorphism $i:F\\cong E$ over $L$, that is $p\\circ i=r$. Neither morphism is required to be etale, and no depth assumption on $L$ is imposed. The conclusion asserts existence of an isomorphism over $L$, not a separate uniqueness clause.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY6 (https://stacks.math.columbia.edu/tag/0EY6), converse in the proof of (2); Tags 0AUK and 0E9I"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The direct image algebras r_* O_F and p_* O_E are coherent because r and p are finite. At each boundary point y, localize a finite affine presentation of each algebra at y. The depth of this finite algebra as an O_L,y-module is the minimum of the depths of its local rings above y (0AUK). The two hypotheses thus give depth at least two for both algebra stalk modules; the zero module has infinite depth.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Writing j:U -> L, Hartogs (0E9I) makes each canonical restriction map A -> j_*(A restricted to U) an isomorphism. These maps preserve multiplication and the structure map from O_L, so they are algebra isomorphisms. The isomorphism e over U identifies the two restricted direct image algebras. Push it forward and compose with the canonical Hartogs isomorphisms to identify r_* O_F and p_* O_E as O_L-algebras. This is the converse argument of 0EY6(2), which needs only the source boundary depth bounds.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Finite morphisms are affine. The affine-morphism/structure-algebra equivalence lifts the preceding algebra isomorphism to an isomorphism i:F -> E over L. The equation in the category Over L is i.hom followed by p = r. No assertion about base depth or etaleness was used.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "C4",
+  "document": "Stacks Project",
+  "place": "Tag 0EY6 (https://stacks.math.columbia.edu/tag/0EY6), converse in the proof of (2); Tags 0AUK and 0E9I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite morphisms uniquely determined by restriction to an open with source stalk depth at least two",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two finite morphisms of locally Noetherian schemes with depth at least two above the complement of an open are isomorphic if their restrictions over that open are isomorphic",
+   "results": "8 hits: AlgebraicGeometry.morphismRestrictEq, AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq, AlgebraicGeometry.Scheme.isoOfEq_hom_ι_assoc, AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_hom_fac, AlgebraicGeometry.Scheme.isoOfEq, AlgebraicGeometry.Scheme.isoOfEq_hom_ι, AlgebraicGeometry.Scheme.isoOfEq_inv_ι_assoc, AlgebraicGeometry.instIsIsoSchemeMorphismRestrict; no matching extension or uniqueness theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*(unique|iso)|unique.*depth|MvPowerSeries.*(Flat|Noetherian)",
+   "results": "0 hits: ; no matching extension or uniqueness theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesTestFiniteExtensionFlat",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two paragraph of sbc-thm-spreading-finite-etale-galois: the unique finite extension having depth at least two along the complement (0EY6).",
+   "via": [
+    "lem-sbc-power-series-test-finite-extension-flat",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoFiniteExtensionUniqueness.lean",
+  "declaration": "AlgebraicGeometry.Scheme.iso_of_finite_depth_two_extensions",
+  "statement": "theorem iso_of_finite_depth_two_extensions\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    {F E : Scheme.{u}} (r : F ⟶ L) (p : E ⟶ L) [IsFinite r] [IsFinite p]\n    (hF : ∀ z : F, r z ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := F.presheaf.stalk z) (F.presheaf.stalk z))\n    (hE : ∀ z : E, p z ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z))\n    (e : (p ⁻¹ᵁ U).toScheme ≅ (r ⁻¹ᵁ U).toScheme)\n    (he : e.hom ≫ r ∣_ U = p ∣_ U) :\n    ∃ i : F ≅ E, i.hom ≫ p = r",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T072341-L-1115813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T072341-L-1115813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

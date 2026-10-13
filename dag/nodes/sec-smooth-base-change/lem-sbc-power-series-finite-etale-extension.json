@@ -1,0 +1,147 @@
+{
+ "id": "lem-sbc-power-series-finite-etale-extension",
+ "kind": "statement",
+ "title": "Finite etale extension of a cover of a power-series open, with boundary depth",
+ "statement": "Let $B$ be a Noetherian local commutative ring of depth at least two [def-weil-pbc-noetherian-ring, def-weil-pbc-depth], and let $n>0$. Set $T=\\operatorname{Spec}(B[[X_1,\\ldots,X_n]])$ [def-weil-affine-spectrum, def-weil-pbc-multivariate-power-series]. Let $V\\subset T$ be open [def-weil-pbc-scheme-conventions], containing every prime whose contraction to $B$ is not the maximal ideal $\\mathfrak m_B$, and containing the prime $\\mathfrak m_B B[[X_1,\\ldots,X_n]]$. For every finite etale morphism $f:X\\to V$ [def-weil-finite-integral-morphism, def-weil-etale-morphism], there exist a finite etale morphism $p:E\\to T$ and an isomorphism $e:E\\times_T V\\cong X$ over $V$. Moreover $\\operatorname{depth}\\mathcal O_{E,z}\\geq2$ for every $z\\in E$ with $p(z)\\notin V$. No previously supplied extension is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYA (https://stacks.math.columbia.edu/tag/0EYA), essential surjectivity; Tag 0EY6(1),(2),(a),(b); Tag 0337"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Write R = B[[X_1,...,X_n]]. At a point v outside V the contraction is m_B. The map B -> R_v is flat and local, so the flat local depth formula gives depth(R_v) >= depth(B) >= 2. Apply the finite depth-two extension theorem to f, obtaining a finite p:E -> T with the stated boundary depth and restriction isomorphism.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-sbc-depth-two-finite-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If V = T there is nothing to extend. Otherwise let U be the punctured spectrum of B. Pull f back to the zero section over U and denote the resulting cover by W0. The depth-two construction gives its finite B-algebra C0. Full faithfulness for power series on U times T (0EY9) identifies f on this open with the pullback of W0. Flat base change and change of opens for the canonical extension (0EY6(a),(b)) identify the finite R-algebra of E with C0 tensor_B R. These are precisely the identifications in the proof of 0EYA.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Put q = m_B R. This point belongs to V, so the localization of C0 tensor_B R at the base q is etale over R_q. The map B -> R_q is flat and local, hence faithfully flat. Etaleness descends along this map, giving that C0 is finite etale over B. Its base change E is finite etale over T. Retain the boundary depth and restriction isomorphism already supplied by the canonical extension. Empty covers yield the empty scheme, for which the boundary depth condition is vacuous.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-depth-two-finite-extension",
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "C4",
+  "document": "Stacks Project",
+  "place": "Tag 0EYA (https://stacks.math.columbia.edu/tag/0EYA), essential surjectivity; Tag 0EY6(1),(2),(a),(b); Tag 0337"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite etale cover of an open of the spectrum of a power series ring extends to a finite etale cover if the open contains the extended maximal ideal and all primes not over the closed point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale covers extend over spectrum of power series ring over a Noetherian local ring with depth at least two",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, StandardEtalePair.instEtaleRing, Algebra.Etale.exists_subalgebra_fg, StandardEtalePair.instFormallyEtaleRing, Algebra.Etale.finitePresentation, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.IsEtaleAt, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; no matching extension or uniqueness theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Hartogs|depth.{0,40}(finite|etale)|(finite|etale).{0,40}depth",
+   "results": "0 hits: ; no matching extension or uniqueness theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesTestFiniteExtensionFlat",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two paragraph of sbc-thm-spreading-finite-etale-galois: purity on the power-series completion and the finite depth-two extension of the punctured cover.",
+   "via": [
+    "lem-sbc-power-series-test-finite-extension-flat",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesFiniteEtaleExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesFiniteEtaleExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_etale_extension_of_power_series_open",
+  "statement": "theorem exists_finite_etale_extension_of_power_series_open\n    (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := B) B)\n    (n : ℕ) (hn : 0 < n)\n    (V : (Spec (.of (MvPowerSeries (Fin n) B))).Opens)\n    (haway : ∀ v, (Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n)))) v ≠\n      IsLocalRing.closedPoint B → v ∈ V)\n    (hgeneric : ∃ v, v ∈ V ∧ v.asIdeal =\n      (IsLocalRing.maximalIdeal B).map (MvPowerSeries.C (σ := Fin n)))\n    {X : Scheme.{u}} (f : X ⟶ V.toScheme) [IsFinite f] [Etale f] :\n    ∃ (E : Scheme.{u}) (p : E ⟶ Spec (.of (MvPowerSeries (Fin n) B))),\n      IsFinite p ∧ Etale p ∧\n      (∀ z : E, p z ∉ V →\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z)) ∧\n      ∃ e : (p ⁻¹ᵁ V).toScheme ≅ X, e.hom ≫ f = p ∣_ V",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T072341-L-1115813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T072341-L-1115813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
