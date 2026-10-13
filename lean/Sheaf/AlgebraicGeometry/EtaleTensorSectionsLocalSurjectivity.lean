@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
+import Sheaf.AlgebraicGeometry.EtaleTensorSectionsOpenLift
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-! # Local lifting of tensor sections of an epimorphism
 
@@ -51,7 +53,37 @@ theorem etaleTensorSections_locallySurjective {X : Scheme.{u}} {G H : X.Modules}
     (β : etaleTensorSectionsPresheaf G ⟶ etaleTensorSectionsPresheaf H)
     (hβ : ∀ U : X.Etaleᵒᵖ, β.app U = ((tensorPullback U.unop.hom).map ψ).app ⊤) :
     Presheaf.IsLocallySurjective X.smallEtaleTopology
-      (Functor.whiskerRight β AddCommGrpCat.uliftFunctor.{u + 1, u}) := by sorry
+      (Functor.whiskerRight β AddCommGrpCat.uliftFunctor.{u + 1, u}) := by
+  classical
+  constructor
+  intro U s
+  let A := tensorPullback U.hom
+  let adj := Classical.choose (exists_tensorPullbackAdjunction U.hom)
+  have : A.IsLeftAdjoint := adj.isLeftAdjoint
+  have : Epi (A.map ψ) := inferInstance
+  have hl := ((RingedSpace.module_exactness_local_lifting U.left.toRingedSpace).2.1
+    (A.obj G) (A.obj H) (A.map ψ)).2.mpr inferInstance
+  obtain ⟨I, V, hV, t, hcover, ht⟩ := hl ⊤ s.down
+  let Z : I → X.Etale := fun i ↦
+    Scheme.Etale.mk (Scheme.Opens.ι (show U.left.Opens from V i) ≫ U.hom)
+  let f : ∀ i, Z i ⟶ U := fun i ↦
+    MorphismProperty.Over.homMk (Scheme.Opens.ι (show U.left.Opens from V i)) rfl
+  have hmem : Sieve.ofArrows Z f ∈ X.smallEtaleTopology U := by
+    rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
+    apply Set.eq_univ_of_forall
+    intro x
+    have hx : x ∈ ⨆ i, V i := by rw [hcover]; trivial
+    obtain ⟨i, hi⟩ := Opens.mem_iSup.mp hx
+    exact Set.mem_iUnion.mpr ⟨i, ⟨⟨x, hi⟩, rfl⟩⟩
+  apply X.smallEtaleTopology.superset_covering _ hmem
+  rw [Sieve.ofArrows, Sieve.generate_le_iff]
+  rintro _ _ ⟨i⟩
+  obtain ⟨z, hz⟩ := etaleTensorSections_open_lift ψ U (V i) s.down (t i) (ht i)
+  refine ⟨ULift.up z, ?_⟩
+  apply ULift.ext
+  change β.app (op (Z i)) z = (etaleTensorSectionsPresheaf H).map (f i).op s.down
+  rw [hβ]
+  exact hz
 
 end
 end AlgebraicGeometry.Scheme.Modules

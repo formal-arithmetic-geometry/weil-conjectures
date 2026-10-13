@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-etale-tensor-sections-open-lift",
+ "kind": "statement",
+ "title": "Transport a Zariski-open lift to normalized etale tensor sections",
+ "statement": "For a scheme X [def-pc-scheme], a module morphism ψ : G → H, an etale object u : U → X, an open V in U, a global section s of u^*H and a section t of u^*G on V with (u^*ψ)(t) = s|V, there is a section z of (V → U → X)^*G on the whole open subscheme V whose image under (V → X)^*ψ equals the normalized tensor restriction of s. Tensor sections and their restrictions are [lem-sc-etale-qcoherent-presheaf-functorial]. There is no epi, quasi-coherence or covering assumption.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03DR",
+  "place": "Equation (35.8.0.1), with pullback adjunction Tag 0096 and restriction along open immersions"
+ },
+ "proof": [
+  {
+   "text": "By uniqueness of left adjoints, compare tensor pullback along V.ι with Mathlib restrictFunctor V.ι. Identify global sections of the restricted module with sections over V using V.ι_image_top. Naturality of the comparison commutes with ψ; the unit_leftAdjointUniq_hom_app equation identifies the restriction of a global section followed by this comparison with tensorSectionsUnit.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the comparison to t, then apply tensorSectionsComp V.ι U.hom on global sections. Naturality of tensorSectionsComp and the preceding naturality equation turn its image into the comparison of s|V, which is the normalized tensor restriction of s by the unit equation. This gives z and the required equality.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03DR",
+  "place": "Equation (35.8.0.1) and Tag 0096; Lean assembly by second reader J3, 2026-10-13, using Mathlib restrictAdjunction, restrictAdjunction_unit_app_app and Adjunction.unit_leftAdjointUniq_hom_app"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pullback of sheaves of modules along open immersion is restriction to open subset",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrict_obj; AlgebraicGeometry.Scheme.Modules.restrict_map; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app",
+   "verdict": "Generic restriction and adjunction tools found and used; no exact lift-transport theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "verdict": "Generic restriction and adjunction tools found and used; no exact lift-transport theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorSectionsUnit|etaleTensorSections_open_lift|restrictAdjunction_unit_app_app",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "verdict": "Generic restriction and adjunction tools found and used; no exact lift-transport theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local lift of a section on a Zariski open transports through the pullback restriction adjunction and composition isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsLocalSurjectivity",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-tensor-sections-local-surjectivity",
+   "place": "transport Zariski-local sections through normalized tensor restrictions in the local-lifting step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsOpenLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsOpenLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorSections_open_lift",
+  "statement": "theorem etaleTensorSections_open_lift {X : Scheme.{u}} {G H : X.Modules}\n    (ψ : G ⟶ H) (U : X.Etale) (V : U.left.Opens)\n    (s : Γ((tensorPullback U.hom).obj H, ⊤))\n    (t : Γ((tensorPullback U.hom).obj G, V))\n    (ht : ((tensorPullback U.hom).map ψ).app V t =\n      ((tensorPullback U.hom).obj H).presheaf.map (homOfLE (show V ≤ ⊤ from le_top)).op s) :\n    ∃ z : Γ((tensorPullback (V.ι ≫ U.hom)).obj G, ⊤),\n      ((tensorPullback (V.ι ≫ U.hom)).map ψ).app ⊤ z =\n        etaleTensorSectionsRestriction H\n          (MorphismProperty.Over.homMk V.ι rfl : Scheme.Etale.mk (V.ι ≫ U.hom) ⟶ U) s",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T060420-L-583680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T060420-L-583680",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
