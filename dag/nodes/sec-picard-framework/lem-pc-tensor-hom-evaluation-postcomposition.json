@@ -14,36 +14,35 @@
  ],
  "proof": [
   {
-   "text": "Evaluation is natural in its target. Compute c.inv by a map between the fixed\nK-injective target resolutions, after replacing the source by a quasi-isomorphic\ncomplex if needed. On each total tensor summand, Hom projection naturality and\nthe sheaf tensor-Hom adjunction identify evaluation after Hom postcomposition\nwith evaluation followed by the target map. The coproduct universal property\ngives equality of chain maps. Degree-minus-one uncurrying and the signed Hom\ndifferential show that the equality survives passage to homotopy classes. Apply Q\nand use naturality of the lax tensor comparison, the fixed Hom resolution\ncomparison, and the augmentation. Cancel the quasi-isomorphisms of the target\nmodels. A K-flat resolution of L reduces arbitrary L to the same computation,\nsince Hom into a K-injective and derived tensor invert this resolution. The\nargument uses no boundedness assumption and applies to zero objects and identity\ncomparisons.",
+   "text": "For a chain map f:M->N let h=HomComplex(id_L,I(f)). Apply schemeTensorHomUncurry_localized_evaluation twice: first to h as a change of the Hom input with target N fixed, then to identity Hom input with target map f. The two left sides agree, giving (Qh tensor id);mu;QU_N;v_N = mu;QU_M;v_M;Qf. Naturality of the fixed Localization.fac isomorphism j gives RHom(id, Qf);j_N = j_M;Qh. Tensor this equality with id_QL and reassociate to obtain E(L,M);Qf = (RHom(id,Qf) tensor id);E(L,N). This uses no K-flatness or homotopy lift.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pc-tensor-hom-uncurry-differential",
-    "lem-sc-hom-complex-projections",
-    "lem-pur-hom-complex-global-cochains",
+    "lem-pc-tensor-hom-uncurry-localized-evaluation",
     "def-pc-canonical-derived-tensor-hom-model",
-    "def-pc-derived-pullback-tensor-comparison"
+    "def-pur-derived-internal-hom",
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-tensor-hom-uncurry-differential"
    ],
    "elementary": false
+  },
+  {
+   "text": "Fix L and define the derived functor F(N)=RHom(QL,N) tensor QL by currying derivedInternalHom and composing with tensorRight(QL). The chain naturality proved above gives a natural transformation alpha:Q followed by F -> Q followed by identity whose component at M is E(L,M). Mathlib Localization.fullyFaithfulWhiskeringLeft gives a preimage beta:F->identity, and its map_preimage identity identifies beta at every Q(M) with exactly E(L,M). Apply beta.naturality to c.inv and substitute these component identities. This is the claimed equality, for all unbounded complexes and all isomorphisms c. Identity and zero complexes require no special cases.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pc-tensor-hom-uncurry-differential",
-  "lem-sc-hom-complex-projections",
-  "lem-pur-hom-complex-global-cochains",
+  "lem-pc-tensor-hom-uncurry-localized-evaluation",
   "def-pc-canonical-derived-tensor-hom-model",
-  "def-pc-derived-pullback-tensor-comparison"
+  "def-pur-derived-internal-hom",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-tensor-hom-uncurry-differential"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "B3",
+  "by": "worker",
+  "group": "C1",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 08DJ, 0A90, 0A96; one-variable specialization"
+  "place": "Tags 08DJ and 0A90 (read online); chain evaluation naturality, then Mathlib localization fully faithful whiskering to extend naturality to arbitrary derived morphisms"
  },
  "mathlib_searches": [
   {
@@ -138,10 +137,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T124307-L-3775034",
-  "kind": "interface",
+  "landing": "20261013T141522-L-377824",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
