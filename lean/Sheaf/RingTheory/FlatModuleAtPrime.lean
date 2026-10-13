@@ -32,6 +32,24 @@ theorem localizedModule_atPrime_of_flat {R A M : Type*} [CommRing R] [CommRing A
     @Module.Flat (Localization.AtPrime (q.comap (algebraMap R A)))
       (LocalizedModule q.primeCompl M) _ _
       (Module.compHom _ (Localization.localRingHom (q.comap (algebraMap R A)) q
-        (algebraMap R A) rfl)) := sorry
+        (algebraMap R A) rfl)) := by
+  let : Module R M := Module.compHom M (algebraMap R A)
+  let : AddCommGroup M := Module.addCommMonoidToAddCommGroup A
+  have : IsScalarTower R A M := IsScalarTower.of_compHom R A M
+  let p := q.comap (algebraMap R A)
+  let Rp := Localization.AtPrime p
+  let Mq := LocalizedModule q.primeCompl M
+  let : Module Rp Mq := Module.compHom Mq
+    (Localization.localRingHom p q (algebraMap R A) rfl)
+  have hloc : Module.Flat R Mq := localizedModule_of_algebra q.primeCompl hflat
+  have : IsScalarTower R Rp Mq := by
+    constructor
+    intro r s m
+    change Localization.localRingHom p q (algebraMap R A) rfl (r • s) • m =
+      r • (Localization.localRingHom p q (algebraMap R A) rfl s • m)
+    rw [Algebra.smul_def, map_mul, Localization.localRingHom_to_map, mul_smul]
+    rw [IsScalarTower.algebraMap_smul (R := A) (A := Localization.AtPrime q)]
+    rw [IsScalarTower.algebraMap_smul (R := R) (A := A)]
+  exact (Module.flat_iff_of_isLocalization Rp p.primeCompl Mq).mpr hloc
 
 end Module.Flat
