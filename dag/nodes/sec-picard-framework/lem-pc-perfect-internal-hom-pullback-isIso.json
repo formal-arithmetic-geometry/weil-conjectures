@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-perfect-internal-hom-pullback-isIso",
+ "kind": "statement",
+ "title": "Evaluation-defined internal Hom pullback is invertible for a perfect source",
+ "statement": "Let g:T→X be a morphism of schemes [def-pc-scheme], and M,K∈D(O_X) [def-pc-derived-category] with M perfect [def-pc-perfect-complex]. Let t be a natural tensor/pullback isomorphism whose forward maps satisfy IsCanonicalPullbackTensorComparison [def-pc-derived-pullback-tensor-comparison]. Use the fixed normalized tensor-Hom adjunctions b_X,b_T [def-pc-affine-global-hom-base-change-map]. Then the map Lg*RHom(M,K)→RHom(Lg*M,Lg*K) obtained by transposing t.inv_(RHom(M,K),M);Lg*(b_X(M).counit_K) under b_T(Lg*M) is invertible. Internal Hom and pullback are [def-pur-derived-internal-hom, def-pc-derived-pullback]. No quasi-coherence or boundedness assumption on K is needed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pur-derived-internal-hom",
+  "def-pc-derived-pullback",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-affine-global-hom-base-change-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08I3, evaluation-defined comparison; Example 0FPC, perfect duality"
+ },
+ "proof": [
+  {
+   "text": "Locally represent M by a bounded complex of finite projective modules.\nIts dual is perfect, and the tensor-Hom evaluation comparison identifies RHom(M,K)\nwith K tensor the dual of M, for arbitrary unbounded K. Equivalently use the exact\npairing and evaluation comparison of perfect_rhom_tensor_comparison.\nStrong monoidal derived pullback transports evaluation and coevaluation and both\ntriangle identities. The perfect-dual pullback comparison identifies the transported\ndual with the internal dual of Lg*M. The tensor-Hom evaluation comparison on the\nsource and target therefore identifies Lg*RHom(M,K) with RHom(Lg*M,Lg*K).\nTo identify the resulting isomorphism with the displayed arrow, apply the injective\ntensor-Hom equivalence on the target: its evaluation is pullback of evaluation,\nprecomposed with the inverse tensor comparison. The fixed canonical adjunctions\nhave exactly this evaluation normalization. Uniqueness of the canonical tensor\ncomparison identifies the supplied t with that of the monoidal pullback model.\nThus the displayed map is the constructed isomorphism and is invertible.",
+   "uses": [
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "def-pc-derived-pullback-monoidal-model",
+    "def-pc-derived-pullback-tensor-comparison",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark 08I3, evaluation-defined comparison; Example 0FPC, perfect duality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "def-pc-derived-pullback-monoidal-model",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-affine-global-hom-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08I3, evaluation-defined comparison; Example 0FPC, perfect duality; explicit normalization refinement of parent steps"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 case (1): Evaluation-defined internal Hom pullback is invertible for a perfect source",
+   "via": [
+    "lem-pc-affine-global-hom-base-change-factorization",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strong monoidal functor preserves internal Hom from dualizable perfect object canonical evaluation comparison isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor preserves internal Hom from dualizable perfect object canonical evaluation comparison isomorphism",
+   "results": "LeanFinder returned 8 hits: Cartesian closed expComparison results and tensorRightAdjunction/tensorLeftAdjunction. Cartesian hypotheses do not apply to derived tensor. Mathlib grep perfect.*internalHom|internalHom.*pullback|expComparison found Cartesian expComparison and unrelated Leibniz pullbacks, no perfect internal-Hom pullback theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "global.*Hom.*base|base.*global.*Hom; perfect.*internalHom|internalHom.*pullback|expComparison",
+   "results": "LeanFinder returned 8 hits: Cartesian closed expComparison results and tensorRightAdjunction/tensorLeftAdjunction. Cartesian hypotheses do not apply to derived tensor. Mathlib grep perfect.*internalHom|internalHom.*pullback|expComparison found Cartesian expComparison and unrelated Leibniz pullbacks, no perfect internal-Hom pullback theorem. Project and blueprint searches for 08I3 and 0AA7 found no duplicate of this interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectInternalHomPullbackIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectInternalHomPullbackIsIso.lean",
+  "declaration": "AlgebraicGeometry.perfect_internalHom_pullback_isIso",
+  "statement": "theorem perfect_internalHom_pullback_isIso\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]\n    {T X : Scheme.{u}} (g : T ⟶ X)\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M)\n    (t : tensor (schemeDerivedCategory X) ⋙ derivedPullback g ≅\n      (derivedPullback g).prod (derivedPullback g) ⋙ tensor (schemeDerivedCategory T))\n    (ht : IsCanonicalPullbackTensorComparison g (fun E K => t.hom.app (E, K))) :\n    IsIso\n      ((canonicalTensorHomAdjunction T ((derivedPullback g).obj M)).homEquiv\n        ((derivedPullback g).obj\n          ((derivedInternalHom (Opens.grothendieckTopology X)\n            X.toRingedSpace.sheaf).obj (op M, K))) ((derivedPullback g).obj K)\n        (t.inv.app\n            ((derivedInternalHom (Opens.grothendieckTopology X)\n              X.toRingedSpace.sheaf).obj (op M, K), M) ≫\n          (derivedPullback g).map ((canonicalTensorHomAdjunction X M).counit.app K)))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T054240-L-450177",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T054240-L-450177",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

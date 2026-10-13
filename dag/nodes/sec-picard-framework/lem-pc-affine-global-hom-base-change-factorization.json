@@ -33,84 +33,48 @@
  ],
  "proof": [
   {
-   "text": "Put H = R𝓗om_X(M,K). Internal Hom from a perfect complex preserves quasi-coherence, so H is in D_QCoh(X). Since f is qcqs, Rf_*H is in D_QCoh(S).",
+   "text": "Set H=RHom(M,K). Apply rhom_supported_quasiCoherent_perfect_part and schemeDerivedDirectImage_preserves_QCoh to obtain quasi-coherent cohomology of Rf_*H. The qcqs instances for f follow from the qcqs source and affine target.",
    "uses": [
     "lem-sc-rhom-supported-qcoherent-perfect-part",
     "lem-pc-derived-direct-image-preserves-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
-   }
+   "elementary": false
   },
   {
-   "text": "Derived direct-image composition gives the restricted-sections identification RΓ_X(H) = RΓ_S(Rf_*H), with the R-action from f. Use the isomorphism commuting with the right-derived units and the underived identity on sections.",
+   "text": "Extract the fixed pullback adjunction, tensor-Hom adjunctions, canonical tensor comparison t, gamma and normalized sections comparison s,c from choose_spec of exists_globalHomPullbackComparison. Substitute the adjunction normalization equalities. Put theta equal to the pullback/direct-image adjunct of gamma at (M,K). Its evaluation equation and perfect_internalHom_pullback_isIso show theta is invertible.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
-    "def-pc-global-derived-rhom",
-    "def-pc-affine-global-hom-base-change-map"
+    "def-pc-affine-global-hom-base-change-map",
+    "lem-pc-perfect-internal-hom-pullback-isIso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
-   }
+   "elementary": false
   },
   {
-   "text": "On the affine bases the quasi-coherent derived equivalence and the tilde/pullback comparison identify Lg^* with derived extension of scalars, by computing on K-flat module representatives. The extension/restriction adjunction descends from these representatives. Compare it with the fixed affineDerivedExtensionAdjunction by uniqueness of left adjoints to the same restriction functor; this preserves the unit. Combine with the preceding sections comparison to construct a.",
+   "text": "Apply exists_affineSectionsBaseChangeMate to H and its quasi-coherent pushforward with s,c and their normalization equations, obtaining a and the target sections natural isomorphism d. Define b as RΓ_S′ applied to Rf′_* of asIso(theta), followed by d at RHom(Lg_X*M,Lg_X*K). This is an isomorphism by functoriality.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "def-pc-affine-global-hom-base-change-map"
+    "lem-pc-affine-sections-base-change-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
-   }
+   "elementary": false
   },
   {
-   "text": "The perfect tensor-Hom comparison supplies the dual, evaluation and coevaluation exact pairing, and the perfect-dual pullback comparison. Strong monoidal pullback transports the exact pairing. Consequently the evaluation-mate map Lg_X^*H → R𝓗om_X′(Lg_X^*M,Lg_X^*K) is invertible: under the tensor-Hom adjunction its evaluation is the inverse tensor-pullback comparison followed by pullback of evaluation. Apply Rf′_* and RΓ_S′ and the unit-compatible direct-image composition isomorphism to construct b.",
+   "text": "Unfold affineGlobalHomBaseChangeMap, rewrite globalHomPullbackComparison by its defining equation, and specialize the mate identity to L=RHom(Lg_X*M,Lg_X*K) and m=gamma_(M,K). Its right hand side is definitionally a.hom;RΓ(BC_H);b.hom, proving the unchanged factorization.",
    "uses": [
-    "lem-pc-perfect-rhom-tensor-comparison",
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
-    "def-pc-affine-global-hom-base-change-map"
+    "def-pc-affine-global-hom-base-change-map",
+    "lem-pc-affine-sections-base-change-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
-   }
-  },
-  {
-   "text": "Transpose a.hom followed by RΓ_S′ of the fixed sheaf base-change map and b.hom under the derived extension/restriction adjunction. Source-unit compatibility, naturality and the triangle identities identify this transpose with restricted RΓ_X of the evaluation-mate map, followed by the sections/pushforward comparison on X′. Its evaluation and right-derived-unit equations identify it with globalHomPullbackComparison. Injectivity of the Hom equivalence gives the displayed equality. No Tor-independence assumption or invertibility of sheaf base change has been used.",
-   "uses": [
-    "def-pc-derived-base-change-map",
-    "def-pc-affine-global-hom-base-change-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AA7 (lemma-affine-morphism-and-hom-out-of-perfect), case (1), and cohomology.tex Tag 08I3 (cohomology-remark-prepare-fancy-base-change)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-rhom-supported-qcoherent-perfect-part",
   "lem-pc-derived-direct-image-preserves-qcoh",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "def-pc-global-derived-rhom",
   "def-pc-affine-global-hom-base-change-map",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-perfect-rhom-tensor-comparison",
-  "def-pc-derived-base-change-map"
+  "lem-pc-perfect-internal-hom-pullback-isIso",
+  "lem-pc-affine-sections-base-change-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AA7, lemma-affine-morphism-and-hom-out-of-perfect, case (1); refinement of the parent proof steps 3 and 4, retaining the fixed adjunctions and right-derived units"
+  "place": "Tag 0AA7 case (1), with 08I3; T3 Lean reduction through normalized sections mates and the perfect evaluation map, retaining both fixed adjunctions"
  },
  "mathlib_searches": [
   {
@@ -189,9 +153,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T040750-L-3949368",
+  "landing": "20261013T054240-L-450177",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

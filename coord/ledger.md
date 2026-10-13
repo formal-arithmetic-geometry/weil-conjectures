@@ -11306,3 +11306,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/T1/Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestriction (stage 3; reviewer PASS; first push; landing 20261013T054238-L-449864 (interface); batch 20261013T054206; modules 3; new nodes 3)
 - 05:42 L: merged deliver/T1/Sheaf.Paper.AffinePerfectKoszulPrincipalUnit (stage 3; reviewer PASS; first push; landing 20261013T054239-L-449974 (interface); batch 20261013T054206; modules 3; new nodes 2)
 - 05:42 L: merged deliver/T2/Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting (stage 3; reviewer PASS; first push; landing 20261013T054239-L-450076 (interface); batch 20261013T054206; modules 2; new nodes 1)
+- 05:42 L: merged deliver/T3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization (stage 3; reviewer PASS; first push; landing 20261013T054240-L-450177 (interface); batch 20261013T054206; modules 3; new nodes 2)

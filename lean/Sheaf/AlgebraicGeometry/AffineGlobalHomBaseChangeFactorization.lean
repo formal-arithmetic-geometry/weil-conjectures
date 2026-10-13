@@ -6,12 +6,10 @@ Authors: SHEAF group K4
 module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.AffineSectionsBaseChangeMate
+import Sheaf.AlgebraicGeometry.PerfectInternalHomPullbackIsIso
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
 import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 
 /-!
 # Affine global Hom comparison as sections of sheaf base change
@@ -28,6 +26,10 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 1200000 in
+-- The normalized adjunction equations expand the shared derived tensor instances.
 /-- The affine global Hom comparison is the sections of the sheaf base-change map
 on internal Hom, conjugated by the affine source comparison and the perfect-source
 internal-Hom pullback comparison. This statement makes no Tor-independence assumption
@@ -91,6 +93,45 @@ theorem affineGlobalHomBaseChange_factorization
         affineGlobalHomBaseChangeMap f g M K hM hK =
           a.hom ≫ Γ.map (schemeDerivedBaseChangeMap f (pullback.snd f g) g
             (pullback.fst f g) pullback.condition H) ≫ b.hom := by
-  sorry
+  classical
+  let H := (derivedInternalHom (Opens.grothendieckTopology X)
+    X.toRingedSpace.sheaf).obj (op M, K)
+  let L := (derivedInternalHom (Opens.grothendieckTopology (pullback f g).toRingedSpace)
+    (pullback f g).toRingedSpace.sheaf).obj
+      (op ((derivedPullback (pullback.fst f g)).obj M),
+        (derivedPullback (pullback.fst f g)).obj K)
+  let Γ := affineDerivedGlobalSections (𝟙 (Spec B))
+  obtain ⟨adj, bS, bT, t, γ, s, c, hadj, hbS, hbT, ht, hγ, hs, hc, hφ⟩ :=
+    Classical.choose_spec (exists_globalHomPullbackComparison f g M K hM hK)
+  subst adj
+  have hbSfun := funext hbS
+  have hbTfun := funext hbT
+  subst bS
+  subst bT
+  let θ : (derivedPullback (pullback.fst f g)).obj H ⟶ L :=
+    ((canonicalPullbackAdjunction (pullback.fst f g)).homEquiv H L).symm
+      (γ.app (op M, K))
+  have hθ : IsIso θ := by
+    have heval := hγ M K
+    change θ = _ at heval
+    rw [heval]
+    exact perfect_internalHom_pullback_isIso (pullback.fst f g) M K hM t ht
+  have hH : schemeDerivedQCohProperty X H :=
+    rhom_supported_quasiCoherent_perfect_part X M K hK hM
+  have hpush : schemeDerivedQCohProperty (Spec R)
+      ((schemeDerivedDirectImage f).obj H) :=
+    schemeDerivedDirectImage_preserves_QCoh f H hH
+  obtain ⟨a, d, hmate⟩ := exists_affineSectionsBaseChangeMate f g H hpush s c hs hc
+  let b : Γ.obj ((schemeDerivedDirectImage (pullback.snd f g)).obj
+        ((derivedPullback (pullback.fst f g)).obj H)) ≅
+      (schemeGlobalDerivedHomOver (pullback.snd f g)).obj
+        (op ((derivedPullback (pullback.fst f g)).obj M),
+          (derivedPullback (pullback.fst f g)).obj K) :=
+    Γ.mapIso ((schemeDerivedDirectImage (pullback.snd f g)).mapIso (asIso θ)) ≪≫ d.app L
+  refine ⟨a, b, ?_⟩
+  change globalHomPullbackComparison f g M K hM hK = _ at hφ
+  unfold affineGlobalHomBaseChangeMap
+  rw [hφ]
+  exact hmate L (γ.app (op M, K))
 
 end AlgebraicGeometry

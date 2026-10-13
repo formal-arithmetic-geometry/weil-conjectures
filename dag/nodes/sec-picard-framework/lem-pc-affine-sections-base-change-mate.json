@@ -1,0 +1,161 @@
+{
+ "id": "lem-pc-affine-sections-base-change-mate",
+ "kind": "statement",
+ "title": "Affine sections intertwine the two base-change mates",
+ "statement": "Let R and B be commutative rings, X a scheme, f:X→Spec R and g:Spec B→Spec R, with fibre product X′ and projections f′,g_X [def-pc-scheme, def-pc-fibre-product]. Use the fixed unbounded derived pullback and direct image [def-pc-derived-pullback, def-pc-derived-direct-image] and the fixed affine extension/restriction adjunction and restricted derived sections Γ_f [def-pc-affine-global-hom-base-change-map]. Let E∈D(O_X) with Rf_*E quasi-coherent [def-pc-derived-category]. Suppose s:(g_X)_*;Γ_f ≅ Γ_f′;restriction acts as identity on sections, and c:R(g_X)_*;RΓ_f ≅ RΓ_f′;derived restriction satisfies the right-derived-unit equation via s, exactly as displayed in the Lean signature. There exist an isomorphism a:extension(RΓ_f E) ≅ RΓ_S′(Lg*Rf_*E) and a natural isomorphism d:Rf′_*;RΓ_S′ ≅ RΓ_f′ such that for every L∈D(O_X′) and m:E→R(g_X)_*L, the extension/restriction adjunct of RΓ_f(m);c_L equals a.hom;RΓ_S′(BC_E);RΓ_S′(Rf′_*(adjunct_g_X(m)));d_L, where BC_E is the fixed sheaf base-change map [def-pc-derived-base-change-map]. No perfectness or Tor independence is assumed; neither m nor BC_E is asserted invertible.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-derived-base-change-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AA7, construction of canonical map; cohomology.tex Tags 08HY and 0D5T"
+ },
+ "proof": [
+  {
+   "text": "1. Derived direct-image composition and exact scalar restriction give a natural\n   isomorphism Rf'_* followed by RΓ over B with RΓ over f'. On sheaves it is the\n   identity on sections, and the composition of right-derived units specifies its\n   derived normalization. The same construction over R identifies RΓ over f with\n   RΓ over Spec R after Rf_*.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-pc-affine-global-hom-base-change-map",
+    "def-pc-global-derived-rhom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AA7, construction of canonical map; cohomology.tex Tags 08HY and 0D5T"
+   }
+  },
+  {
+   "text": "2. For Q = Rf_*E, use the affine quasi-coherent derived equivalence on Spec R\n   and Spec B. Resolve its module model by a K-flat complex. The tilde/pullback\n   formula identifies Lg*Q with tilde of extension of scalars. The extension and\n   restriction adjunction on these complexes descends to localization. Compare\n   the descended adjunction with the fixed affineDerivedExtensionAdjunction by\n   uniqueness of left adjoints to the fixed derived restriction functor. This\n   yields the source isomorphism a commuting with the adjunction units. Compose\n   with extension of the inverse sections/pushforward isomorphism of step 1.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AA7, construction of canonical map; cohomology.tex Tags 08HY and 0D5T"
+   }
+  },
+  {
+   "text": "3. Transpose the displayed right-hand composite under affine extension/restriction.\n   By the unit compatibility of a this is RΓ of the unit for Lg*, followed by\n   restriction of the sections of sheaf base change and of the mate of m.\n   Expand base change as the mate of pullback composition and the counit for f.\n   Naturality moves m past the counit; the triangle identities cancel the unit\n   and counit pairs. Direct-image composition identifies what remains with RΓ(m)\n   followed by the sections comparison for g_X. On K-injective models both\n   sections comparisons act as the identity on sections. The supplied underived\n   identity and right-derived-unit equation therefore identify this comparison\n   with c. Equality on all objects follows by the right-derived universal property.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-pc-derived-base-change-map",
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AA7, construction of canonical map; cohomology.tex Tags 08HY and 0D5T"
+   }
+  },
+  {
+   "text": "4. Apply injectivity of the affine adjunction Hom equivalence. The construction\n   of a and the target sections isomorphism does not depend on L or m, giving\n   the stated simultaneous equality.",
+   "uses": [
+    "def-pc-affine-global-hom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AA7, construction of canonical map; cohomology.tex Tags 08HY and 0D5T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-global-derived-rhom",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AA7, construction of canonical map; cohomology.tex Tags 08HY and 0D5T; explicit normalization refinement of parent steps"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 case (1): Affine sections intertwine the two base-change mates",
+   "via": [
+    "lem-pc-affine-global-hom-base-change-factorization",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived global sections affine extension restriction adjunction and base change mate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections affine extension restriction adjunction and base change mate",
+   "results": "LeanFinder returned 8 underived affine pullback/adjunction results, no normalized derived sections/base-change identity. Loogle Adjunction.homEquiv returned no hit. Mathlib grep global.*Hom.*base|base.*global.*Hom returned no hit.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "global.*Hom.*base|base.*global.*Hom; perfect.*internalHom|internalHom.*pullback|expComparison",
+   "results": "LeanFinder returned 8 underived affine pullback/adjunction results, no normalized derived sections/base-change identity. Loogle Adjunction.homEquiv returned no hit. Mathlib grep global.*Hom.*base|base.*global.*Hom returned no hit. Project and blueprint searches for 08I3 and 0AA7 found no duplicate of this interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSectionsBaseChangeMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSectionsBaseChangeMate.lean",
+  "declaration": "AlgebraicGeometry.exists_affineSectionsBaseChangeMate",
+  "statement": "theorem exists_affineSectionsBaseChangeMate\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]\n    {R B : CommRingCat.{u}} {X : Scheme.{u}}\n    (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)\n    (E : schemeDerivedCategory X)\n    (hE : schemeDerivedQCohProperty (Spec R) ((schemeDerivedDirectImage f).obj E))\n    (s : RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom ⋙\n        affineGlobalSections f ≅\n      affineGlobalSections (pullback.snd f g) ⋙\n        ModuleCat.restrictScalars.{u} (affineBaseRingMap g))\n    (c : schemeDerivedDirectImage (pullback.fst f g) ⋙\n        affineDerivedGlobalSections f ≅\n      affineDerivedGlobalSections (pullback.snd f g) ⋙\n        (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory)\n    (hs : ∀ (F : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))\n        (x : (affineGlobalSections (pullback.snd f g)).obj F),\n      (s.hom.app F) x = x)\n    (hc : ∀ J : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) (ComplexShape.up ℤ),\n      (Functor.rightDerivedFunctorCompUnit\n          (RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom)\n          (affineGlobalSections f)).app J ≫\n        (affineGlobalSectionsDerivedIso f).hom.app\n          ((schemeDerivedDirectImage (pullback.fst f g)).obj (DerivedCategory.Qh.obj J)) ≫\n        c.hom.app (DerivedCategory.Qh.obj J) =\n      DerivedCategory.Qh.map ((s.hom.mapHomotopyCategory (ComplexShape.up ℤ)).app J) ≫\n        (affineGlobalSections (pullback.snd f g) ⋙\n          ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).rightDerivedFunctorUnit.app J ≫\n        (affineBaseChangedSectionsDerivedIso f g).hom.app (DerivedCategory.Qh.obj J)) :\n    ∃ a : (affineDerivedExtension g).obj ((affineDerivedGlobalSections f).obj E) ≅\n        (affineDerivedGlobalSections (𝟙 (Spec B))).obj\n          ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)),\n      ∃ d : schemeDerivedDirectImage (pullback.snd f g) ⋙\n          affineDerivedGlobalSections (𝟙 (Spec B)) ≅\n          affineDerivedGlobalSections (pullback.snd f g),\n        ∀ (L : schemeDerivedCategory (pullback f g))\n          (m : E ⟶ (schemeDerivedDirectImage (pullback.fst f g)).obj L),\n          ((affineDerivedExtensionAdjunction g).homEquiv _ _).symm\n              ((affineDerivedGlobalSections f).map m ≫ c.hom.app L) =\n            a.hom ≫ (affineDerivedGlobalSections (𝟙 (Spec B))).map\n              (schemeDerivedBaseChangeMap f (pullback.snd f g) g\n                (pullback.fst f g) pullback.condition E) ≫\n              (affineDerivedGlobalSections (𝟙 (Spec B))).map\n                ((schemeDerivedDirectImage (pullback.snd f g)).map\n                  (((canonicalPullbackAdjunction (pullback.fst f g)).homEquiv E L).symm m)) ≫\n              d.hom.app L",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T054240-L-450177",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T054240-L-450177",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
