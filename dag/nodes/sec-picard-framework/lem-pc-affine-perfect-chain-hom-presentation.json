@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-affine-perfect-chain-hom-presentation",
+ "kind": "statement",
+ "title": "Chain-level affine perfect Hom presentation",
+ "statement": "Let I be a directed preorder, R:I\\to\\mathrm{CommRing} a diagram with colimiting cocone c, and i\\in I. Let Y be affine [def-pc-scheme] with s:Y\\to\\operatorname{Spec}(R_i) locally of finite presentation, quasi-compact and quasi-separated. Assume the scheme derived categories, their restrictions to opens of Y, and the standard module-derived categories exist [def-pc-derived-category]. Let P,Q\\in D(\\mathcal O_Y) be perfect [def-pc-perfect-complex]. Put J=\\{j\\mid i\\le j\\} and o=i\\in J. There exist a ring diagram F:J\\to\\mathrm{CommRing}, bounded finite-projective complexes E,K over F(o), a functor H:J_{\\ge o}\\to\\mathrm{Type}, and a cocone d of H. There are equivalences ident_j:H(j)\\simeq\\operatorname{Hom}_{D(F(j))}(E\\otimes F(j),K\\otimes F(j)) and e:d.pt\\simeq\\operatorname{Hom}_{D(\\operatorname{colim}F)}(E\\otimes\\operatorname{colim}F,K\\otimes\\operatorname{colim}F). On every chain-map representative these equivalences identify H's transition maps and d's cocone legs with canonical scalar extension, using its associativity comparison. There are also equivalences stage_j:H(j)\\simeq\\operatorname{Hom}_{D(\\mathcal O_{Y_j})}(P_j,Q_j) and limit:d.pt\\simeq\\operatorname{Hom}_{D(\\mathcal O_{Y_\\infty})}(P_\\infty,Q_\\infty), where Y_j and Y_\\infty are the specified pullbacks and P_j,Q_j their derived pullbacks [def-pc-derived-pullback]. For every chain map f between the scalar extensions of E and K at j, put x=ident_j^{-1}(Q(f)). Then stage_k(H(j\\to k)(x))=T_{j,k}(stage_j(x)) and limit(d_j(x))=T_{j,\\infty}(stage_j(x)), with T the canonical transports [lem-pc-perfect-hom-transport]. These two geometric equations are required only on chain-map representatives, not on arbitrary derived morphisms. No colimit property of d or descent assertion is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine part of lemma-descend-homomorphisms; Tags 08EB, 06Z0 and 08DW (online sources checked 2026-10-13)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-pullback",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof": [
+  {
+   "text": "Identify the affine scheme Y with Spec of its global sections. Form the coordinate-ring diagram on the tail above i by tensor extension and identify its colimit with the coordinate ring of the limit pullback. The identifications are induced by the universal properties of Spec, pullback and tensor product. Tensor extension is a left adjoint and preserves colimits.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport P and Q along Y.isoSpec using the exact scheme-isomorphism derived equivalence and its preservation of perfectness and quasi-coherent homology. The localized-site equivalences transfer the required open-site derived categories without changing their Hom universe. Apply the affine bounded-projective criterion, obtaining bounded finite-projective complexes E and K, and transport them through the canonical isomorphism B tensor over R(i) with R(i) equals B. The affine derived equivalence gives the stage and limit Hom equivalences after the affine pullback comparison computes scalar extension on these flat complexes.",
+   "uses": [
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-scheme-iso-derived-equivalence",
+    "lem-pc-scheme-iso-perfect-transport",
+    "lem-pc-scheme-iso-derived-qcoh",
+    "lem-pc-scheme-iso-derived-localizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the module-derived Hom diagram H and its scalar-extension cocone d, with identity module identifications ident and e. The scalar-extension associators give htransition and hcanonical. Conjugate the stage and limit Hom identifications by the affine tilde/pullback comparisons. Their naturality and the counit-pinned composition comparison identify them with perfectStageMap and perfectLimitMap. The resulting hstage and hlimit hold on chain-map representatives, independently of any descent theorem.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-scheme-iso-derived-equivalence",
+  "lem-pc-scheme-iso-derived-localizations",
+  "lem-pc-scheme-iso-derived-qcoh",
+  "lem-pc-scheme-iso-perfect-transport",
+  "lem-sc-perfect-qcoherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine part of lemma-descend-homomorphisms; Tags 08EB, 06Z0 and 08DW (online sources checked 2026-10-13); chain-level restriction of the affine comparison, W3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every derived morphism from a bounded complex of projective modules is represented by a chain map",
+   "results": "Found CochainComplex.IsKProjective.Qh_map_bijective, used in the parent proof. No combined affine chain-level presentation found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective.Qh_map_bijective",
+   "results": "Found K-projective localization bijection; not an affine sheaf/module comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*Hom.*Presentation|Q_map_surjective",
+   "results": "No Mathlib match. Existing project AffinePerfectHomColimit contains proven private chain representation helpers reused for the parent proof.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine perfect complexes have derived Hom presentations compatible with tensor scalar extension on chain maps",
+   "results": "Service unavailable: Internal Server Error; other search kinds and grep completed. No mathematical verdict inferred.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectHomPresentation",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-perfect-hom-presentation",
+   "place": "Affine calculation restricted to chain-map representatives; passage to all derived morphisms is proved by K-projective localization."
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectChainHomPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectChainHomPresentation.lean",
+  "declaration": "AlgebraicGeometry.exists_affinePerfectChainHomPresentation",
+  "statement": "theorem exists_affinePerfectChainHomPresentation\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Y : Scheme.{u}) [IsAffine Y] (s : Y ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ U : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    [∀ A : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} A)]\n    (P Q : schemeDerivedCategory Y) (hP : Y.IsPerfect P) (hQ : Y.IsPerfect Q) :\n    ∃ (F : Set.Ici i ⥤ CommRingCat.{u})\n      (E K : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ),\n      ((∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n)) ∧\n        ∀ n : ℤ, Module.Finite (F.obj ⟨i, le_rfl⟩) (E.X n) ∧\n          Module.Projective (F.obj ⟨i, le_rfl⟩) (E.X n)) ∧\n      ((∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (K.X n)) ∧\n        ∀ n : ℤ, Module.Finite (F.obj ⟨i, le_rfl⟩) (K.X n) ∧\n          Module.Projective (F.obj ⟨i, le_rfl⟩) (K.X n)) ∧\n      ∃ (H : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i) ⥤ Type (u + 1))\n        (ident : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), H.obj j ≃\n          (DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n           DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)))\n        (d : Cocone H)\n        (e : d.pt ≃\n          (DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (colimit.ι F ⟨i, le_rfl⟩).hom) (.up ℤ)).obj E) ⟶\n           DerivedCategory.Q.obj\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (colimit.ι F ⟨i, le_rfl⟩).hom) (.up ℤ)).obj K)))\n        (stage : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i), H.obj j ≃\n          ((derivedPullback (pullback.fst s\n            (Spec.map (R.map (homOfLE j.val.property))))).obj P ⟶\n           (derivedPullback (pullback.fst s\n            (Spec.map (R.map (homOfLE j.val.property))))).obj Q))\n        (limit : d.pt ≃\n          ((derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj P ⟶\n           (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj Q)),\n        (∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k)\n          (f : ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)),\n          ident k (H.map (homOfLE hjk) ((ident j).symm (DerivedCategory.Q.map f))) =\n            DerivedCategory.Q.map (CochainComplex.scalarExtensionHom\n              (F.map (homOfLE j.property)).hom (F.map (homOfLE hjk)).hom\n              (F.map (homOfLE k.property)).hom\n              (congrArg CommRingCat.Hom.hom (F.map_comp\n                (homOfLE j.property) (homOfLE hjk))) E K f)) ∧\n        (∀ (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i))\n          (f : ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)),\n          e (d.ι.app j ((ident j).symm (DerivedCategory.Q.map f))) =\n            DerivedCategory.Q.map (CochainComplex.scalarExtensionHom\n              (F.map (homOfLE j.property)).hom (colimit.ι F j.val).hom\n              (colimit.ι F ⟨i, le_rfl⟩).hom\n              (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE j.property)).symm)\n              E K f)) ∧\n        (∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k)\n          (f : ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)),\n          stage k (H.map (homOfLE hjk) ((ident j).symm (DerivedCategory.Q.map f))) =\n            perfectStageMap R s j.val.property hjk\n              (stage j ((ident j).symm (DerivedCategory.Q.map f)))) ∧\n        (∀ (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i))\n          (f : ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ⟶\n            ((Functor.mapHomologicalComplex\n              (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)),\n          limit (d.ι.app j ((ident j).symm (DerivedCategory.Q.map f))) =\n            perfectLimitMap R c s j.val.property\n              (stage j ((ident j).symm (DerivedCategory.Q.map f))))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T125015-L-3838845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T125015-L-3838845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

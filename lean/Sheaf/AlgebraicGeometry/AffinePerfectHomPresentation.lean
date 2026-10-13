@@ -12,10 +12,9 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.AlgebraicGeometry.AffinePerfectChainHomPresentation
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-! # Comparison of affine sheaf Hom transport with module scalar extension
 
@@ -29,6 +28,39 @@ Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation, using Tags
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+private theorem affinePresentation_scalarExtension_isKProjective
+    {R S : Type u} [CommRing R] [CommRing S] (r : R →+* S)
+    (P : CochainComplex (ModuleCat.{u} R) ℤ)
+    (hb : ∃ b : ℤ, ∀ n : ℤ, b < n → IsZero (P.X n))
+    (hp : ∀ n : ℤ, Module.Projective R (P.X n)) :
+    CochainComplex.IsKProjective
+      (((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj P) := by
+  obtain ⟨b, hb⟩ := hb
+  have (n : ℤ) : Module.Projective R (P.X n) := hp n
+  have (n : ℤ) : Projective
+      ((((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj P).X n) := by
+    exact (ModuleCat.extendRestrictScalarsAdj r).map_projective _ inferInstance
+  have : CochainComplex.IsStrictlyLE
+      (((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj P) b :=
+    (CochainComplex.isStrictlyLE_iff _ _).2
+      (fun n hn ↦ (ModuleCat.extendScalars r).map_isZero (hb n hn))
+  exact CochainComplex.isKProjective_of_projective _ b
+
+private theorem affinePresentation_Q_map_surjective
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory.{w} C]
+    (P L : CochainComplex C ℤ) [P.IsKProjective] :
+    Function.Surjective (DerivedCategory.Q.map : (P ⟶ L) → _) := by
+  intro f
+  obtain ⟨g, hg⟩ := (CochainComplex.IsKProjective.Qh_map_bijective P
+    ((HomotopyCategory.quotient _ _).obj L)).2
+    ((DerivedCategory.quotientCompQhIso C).hom.app P ≫ f ≫
+      (DerivedCategory.quotientCompQhIso C).inv.app L)
+  obtain ⟨g, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective g
+  refine ⟨g, ?_⟩
+  have h := congrArg (fun t ↦ (DerivedCategory.quotientCompQhIso C).inv.app P ≫
+    t ≫ (DerivedCategory.quotientCompQhIso C).hom.app L) hg
+  simpa using h
 
 /-- A perfect pair on an affine scheme admits a module-derived Hom presentation,
 compatible with both finite-stage transport and transport to the limit.
@@ -134,6 +166,24 @@ theorem exists_affinePerfectHomPresentation
             perfectStageMap R s j.val.property hjk (stage j f)) ∧
         (∀ (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (f : H.obj j),
           limit (d.ι.app j f) = perfectLimitMap R c s j.val.property (stage j f)) := by
-  sorry
+  obtain ⟨F, E, K, hE, hK, H, ident, d, e, stage, limit,
+    htransition, hcanonical, hstage, hlimit⟩ :=
+    exists_affinePerfectChainHomPresentation R c hc i Y s P Q hP hQ
+  have hrep (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (f : H.obj j) :
+      ∃ g, (ident j).symm (DerivedCategory.Q.map g) = f := by
+    obtain ⟨a, b, hb⟩ := hE.1
+    let := affinePresentation_scalarExtension_isKProjective
+      (F.map (homOfLE j.property)).hom E ⟨b, fun n hn ↦ hb n (Or.inr hn)⟩
+      (fun n ↦ (hE.2 n).2)
+    obtain ⟨g, hg⟩ := affinePresentation_Q_map_surjective _ _ (ident j f)
+    exact ⟨g, by rw [hg]; exact (ident j).symm_apply_apply f⟩
+  refine ⟨F, E, K, hE, hK, H, ident, d, e, stage, limit,
+    htransition, hcanonical, ?_, ?_⟩
+  · intro j k hjk f
+    obtain ⟨g, rfl⟩ := hrep j f
+    exact hstage j k hjk g
+  · intro j f
+    obtain ⟨g, rfl⟩ := hrep j f
+    exact hlimit j g
 
 end AlgebraicGeometry
