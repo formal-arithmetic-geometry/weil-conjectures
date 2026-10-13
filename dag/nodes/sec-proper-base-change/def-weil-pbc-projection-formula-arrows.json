@@ -3,24 +3,80 @@
  "blueprint": {
   "is": "def-weil-pbc-projection-formula-arrows",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Projection-formula arrows",
- "statement": "For a morphism of ringed topoi $h:\\mathcal T\\to\\mathcal S$, an object\n$E\\in D(\\mathcal T,\\Lambda)$, and a strict-perfect package $F^\\bullet$ on\n$\\mathcal S$, define\n\n$$\n\\pi_{h,E,F}:Rh_*E\\otimes^L_\\Lambda F^\\bullet\n\\longrightarrow Rh_*(E\\otimes^L_\\Lambda Lh^*F^\\bullet)\n$$\n\nto be adjoint to\n\n$$\nLh^*(Rh_*E\\otimes^LF^\\bullet)\n\\simeq Lh^*Rh_*E\\otimes^LLh^*F^\\bullet\n\\xrightarrow{\\epsilon_E\\otimes1}\nE\\otimes^LLh^*F^\\bullet.\n$$\n\nFor $F^r=\\Lambda^{N_r}$, let $\\rho_r$ be the inverse of the finite-sum\nidentification\n\n$$\n(Rh_*E)^{N_r}\\xrightarrow{\\pi_r}Rh_*(E^{N_r}).\n$$\n\nFor a projective term with the displayed splitting, define\n\n$$\n\\rho_{F^r}:=\n(Rh_*E\\otimes p_r)\\,\\rho_r\\,\nRh_*(1_E\\otimes h^*i_r).\n$$\n\nThe bounded totalization of the $\\rho_{F^r}$ is denoted\n$\\rho_{h,E,F}$.",
+ "statement": "Work with sites small in the chosen universe [def-weil-size-convention]. Let $h:(\\mathcal T,S)\\to(\\mathcal S,R)$ be a morphism of ringed topoi: an adjunction $h^{-1}\\dashv h_*$ with $h^{-1}$ preserving finite limits, together with a map of sheaves of commutative rings $h^{-1}R\\to S$. Module pullback is $h^*M=S\\otimes_{h^{-1}R}h^{-1}M$, left adjoint to module direct image $h_*$. Use the unbounded derived categories of module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category], derived tensor and $Lh^*$ computed by K-flat resolutions [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and $Rh_*$ computed by K-injective resolutions [prop-pur-kinjective-resolutions-exist, lem-weil-pbc-kinjective-total-derived]. The derived adjunction $Lh^*\\dashv Rh_*$ is the canonical one obtained from the ordinary module adjunction by [lem-pc-pre-derived-adjoint-functors-general]; write $\\varepsilon_E:Lh^*Rh_*E\\to E$ for its counit.\n\nLet $E\\in D(S)$ and let $F^\\bullet$ be a bounded complex of $R$-module sheaves with a strict-perfect package [def-weil-pbc-strict-perfect-coefficient-package], namely maps $i_r:F^r\\to R^{\\oplus N_r}$ and $p_r:R^{\\oplus N_r}\\to F^r$ with $p_ri_r=1$ and $N_r\\in\\mathbf N$. Define\n$$\n\\pi_{h,E,F}:Rh_*E\\otimes_R^{\\mathbf L}F^\\bullet\n\\longrightarrow Rh_*(E\\otimes_S^{\\mathbf L}Lh^*F^\\bullet)\n$$\nto be the adjunct of\n$$\nLh^*(Rh_*E\\otimes_R^{\\mathbf L}F^\\bullet)\n\\xrightarrow{\\sim}Lh^*Rh_*E\\otimes_S^{\\mathbf L}Lh^*F^\\bullet\n\\xrightarrow{\\varepsilon_E\\otimes1}E\\otimes_S^{\\mathbf L}Lh^*F^\\bullet.\n$$\nHere the first arrow is the canonical comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback].\n\nFor a free coefficient term $R^{\\oplus N}$ in degree zero, let $\\rho_N$ be the inverse of the finite-sum identification\n$$\n(Rh_*E)^{\\oplus N}\\xrightarrow{\\pi_N}Rh_*(E^{\\oplus N}).\n$$\nFinite sums here are finite products in the additive derived categories, and the right adjoint preserves them [lem-weil-pbc-right-adjoint-preserves-limits]. For a package term define the derived morphism\n$$\n\\rho_{F^r}=(1_{Rh_*E}\\otimes p_r)\\circ\\rho_{N_r}\\circ Rh_*(1_E\\otimes h^*i_r).\n$$\nThe tensor symbols in this display are derived tensor; the sheaves $F^r$ and $h^*F^r$ are flat retracts of finite free sheaves, so their ordinary pullbacks and tensor products compute these operations.\n\nThe following specifies the chain representatives used for bounded totalization. Fix a K-injective representative $I^\\bullet$ of $E$ using [prop-pur-kinjective-resolutions-exist], and put\n$$\nA=h_*I^\\bullet,\\qquad\nC=\\operatorname{Tot}(A\\otimes_R F^\\bullet),\\qquad\nJ=\\operatorname{Tot}(I^\\bullet\\otimes_S h^*F^\\bullet),\\qquad B=h_*J.\n$$\nUse the tensor total complexes of [def-pc-tensor-complex-sheaves], with differential $d_I\\otimes1+(-1)^a1\\otimes d_F$ on bidegree $(a,r)$. The complexes $F^\\bullet$ and $h^*F^\\bullet$ are K-flat by [lem-pc-bounded-above-flat-kflat-site, lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and $J$ is K-injective by [lem-weil-pbc-split-perfect-tensor-kinjective]. Thus $C$ and $B$ represent, respectively, $Rh_*E\\otimes_R^{\\mathbf L}F^\\bullet$ and $Rh_*(E\\otimes_S^{\\mathbf L}Lh^*F^\\bullet)$.\n\nFor an $S$-module sheaf $M$ and a retract $P$ of a finite free $R$-module sheaf, let\n$$\nt_{M,P}:h_*M\\otimes_R P\\longrightarrow h_*(M\\otimes_S h^*P)\n$$\nbe the ordinary adjunct of $\\varepsilon_M\\otimes1$ after the ordinary pullback-tensor identification [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. This identification sends $s\\otimes(m\\otimes p)$ to $(s\\otimes m)\\otimes(1\\otimes p)$, with inverse $(s\\otimes m)\\otimes(s'\\otimes p)\\mapsto ss'\\otimes(m\\otimes p)$. For $P=R^{\\oplus N}$, write $q_{M,N}$ for the inverse of the finite-product identification $t_{M,R^{\\oplus N}}$ [lem-weil-pbc-right-adjoint-preserves-limits]. Define actual module-sheaf maps\n$$\ns_{a,r}=(1_A\\otimes p_r)\\circ q_{I^a,N_r}\\circ h_*(1_{I^a}\\otimes h^*i_r):\nh_*(I^a\\otimes_S h^*F^r)\\longrightarrow A^a\\otimes_R F^r,\n$$\nwhere $1_A$ in bidegree $(a,r)$ means $1_{A^a}$. Use the chain map $s:B\\to C$ whose degree-$n$ component is $\\bigoplus_{a+r=n}s_{a,r}$, under the canonical finite-sum identification\n$$\nB^n\\cong\\bigoplus_{a+r=n}h_*(I^a\\otimes_S h^*F^r).\n$$\nThese sums are finite because $F^\\bullet$ is bounded. The ordinary counit is natural [lem-weil-pbc-termwise-adjunction-homotopy]. The splitting formulas give $s_{a,r}t_{I^a,F^r}=1$ and $t_{I^a,F^r}s_{a,r}=1$. Consequently, for each module map in either variable, the naturality equation $B(u)t=t'A(u)$ implies $s'B(u)=A(u)s$ by multiplication by the two inverses. Applied to $d_I$ and $d_F$, this specifies compatibility with both differentials; the indices are preserved, so both sides have the same sign $(-1)^a$. Define $\\rho_{h,E,F}$ to be the image of this finite-total chain map $s$ in $D(R)$, under the displayed identifications of $B$ and $C$. Its degreewise construction is the displayed $\\rho_{F^r}$ formula. This is the precise meaning of bounded totalization of those term maps.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-projection-formula-arrows.md",
   "place": "node def-weil-pbc-projection-formula-arrows, order 1264"
  },
  "stmt_deps": [
-  "def-weil-pbc-strict-perfect-coefficient-package"
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-split-perfect-tensor-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection formula adjunction derived tensor ringed topos",
+   "results": "LightCondensed.ihomPoints; CategoryTheory.ExponentiableMorphism.ev_def; related condensed/locally cartesian closed declarations, none states this derived ringed-topos definition",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula arrow for derived pushforward and pullback",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category pushforward tensor pullback adjunction",
+   "results": "SheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.pushforwardComp; related underived adjunction declarations, none states this definition",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive right adjoint commutes with tensoring by a bounded complex of finite projective modules",
+   "results": "8 hits: CategoryTheory.IsGrothendieckAbelian.tensorObj and its adjunction, plus LightCondensed internal projectivity tensor criteria; no derived ringed-topos arrow package.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"biproduct\"",
+   "results": "0 hits; valid query, no error.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|preservesBiproducts",
+   "results": "17 hits under Mathlib/: generic biproduct preservation in CategoryTheory/Preadditive/Biproducts.lean, AdditiveFunctor.lean and Limits/Preserves/Shapes/Biproducts.lean; no projection formula package.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +100,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-projection-formula-arrows",
+  "worker": "stage1",
+  "summary": "Second reading repairs the under-specified totalization by constructing actual module-sheaf maps on a K-injective representative, citing existing K-flat, K-injective and derived-adjunction results. Removed the new representative lemma: its inverse-totalization clause repeats the downstream theorem, and its derived representatives were unspecified. The finite-free and retract formulas are retained, with coefficient rings explicit and differential compatibility written out. No new nodes. Maintainer reading adds the existing underived ringed-topos module tensor comparison as an explicit statement dependency; the derived comparison statement alone does not provide that underived isomorphism.",
+  "blueprint": "Definition order 1264: adjoint arrow, finite-free inverse, projective splitting formula, bounded totalization. The last sentence is expanded using the actual term maps described in paragraphs 1–2 of the proof of blueprint lemma-weil-pbc-projection-formula-totalization, without citing that downstream node or using its derived inverse conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-02e7d051b",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-02e7d051b (reviewer sub-agent of L); spot-checked: Read the full definition, dependency statements, sources, and unit/chapter route. Retract inverses, chain models, differential signs, and edge cases check out. Added the existing underived pullback–tensor comparison citation; all 14 dependencies are acyclic relative to the item. No new nodes or target weakening. Corrected JSON and concrete source checks are recorded under fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
