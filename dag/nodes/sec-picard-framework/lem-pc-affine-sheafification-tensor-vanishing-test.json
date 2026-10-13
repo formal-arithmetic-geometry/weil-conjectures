@@ -15,25 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Let R = Gamma(S,U) and j = isoSpec.inv followed by the open inclusion U -> S. For the given spectrum module sheaf G, take the actual global sheaf F = j_*G. The open-immersion counit identifies j^*F with G (Mathlib Scheme.Modules.restrictFunctorAdjCounitIso). Unpack the assumed degree-i vanishing as a K-flat model C of K and zero degree-i cohomology of C tensor F[0].",
+   "text": "Put X = Spec Gamma(S,U), j = isoSpec.inv followed by U.ι, and R = Modules.restrictFunctor j. Unpack the given vanishing into a K-flat complex C, an isomorphism Q(C) ≅ K, and zero degree-i homology of Tot(C tensor (j_*G)[0]). Use isKFlat_restrict j to supply K-flatness of the explicit complex R(C).",
    "uses": [
-    "def-pc-derived-tensor-cohomology-vanishes"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Restrict C first to U and then along the affine spectrum isomorphism. Exactness transports the zero homology object. K-flatness is preserved by open restriction and by the spectrum isomorphism. Restriction commutes with total tensor, so after the counit identification this gives zero H^i of the restricted C tensor G[0]. Equivalently one may use the derived tensor restriction comparison and the exact-functor homology comparison to obtain the same vanishing.",
-   "uses": [
-    "lem-pc-derived-tensor-open-restriction-universes",
-    "lem-pc-open-restriction-kflat-model",
-    "lem-pc-open-restriction-total-tensor"
+    "def-pc-derived-tensor-cohomology-vanishes",
+    "lem-pc-kflat-open-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Use the affine localized-site derived transport and its comparison with termwise tilde. Apply its inverse to the given representing isomorphism hP, and compose with the localization factorization for restriction. The inverse identities for isoSpec and overEquiv identify the restricted C with Q(tilde P) in the spectrum derived category. The restricted K-flat C, this representing isomorphism, and the zero homology from the preceding step form the witness for the conclusion. These comparisons allow independent localization universes and do not require boundedness.",
+   "text": "Transport the existing strong monoidal structure of Modules.pullback j along restrictFunctorIsoPullback to R. The inverse tensorators are natural in both terms. In each bidegree form the tensorator isomorphism from R(C^p tensor N^q) to R(C^p) tensor R(N^q); its two naturality squares give the two differential compatibilities. Restriction preserves coproducts, so HomologicalComplex₂.mapTotalIso and total.mapIso give R(Tot(C tensor N)) ≅ Tot(R(C) tensor R(N)). This is the fully proved private helper restriction_totalTensor_iso, with no boundedness hypothesis. Restriction preserves finite limits and colimits, so the short-complex mapHomologyIso transports the original zero homology to R(Tot(C tensor N)). For N = (j_*G)[0], singleMapHomologicalComplex followed by restrictFunctorAdjCounitIso identifies R(N) with G[0]. Mapping this isomorphism through tensoring with R(C) and then homology gives the required zero tensor homology.",
    "uses": [
-    "lem-pc-affine-localized-site-derived-transport",
+    "lem-pc-scheme-pullback-monoidal-existing",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-module-restriction-open-immersion-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let O be over-site restriction, E = Modules.overEquiv U, V = restriction along isoSpec.hom, W = restriction along isoSpec.inv, H = E.functor followed by W, A = affinePerfectSheafification, and T = tilde.functor. The overFunctorEquiv and restrictFunctorComp comparisons give O followed by H ≅ R. Unfolding A, the counit of E and the inverse identities of isoSpec give A followed by H ≅ T. First compose O.mapDerivedCategoryFactors, O.mapDerivedCategory.mapIso of Q(C) ≅ K, and hP to obtain Q(O(C)) ≅ Q(A(P)). Apply H.mapDerivedCategory with localization universes w and wX, and conjugate by its factorization isomorphisms and the two complex-composition comparisons. This gives Q(R(C)) ≅ Q(T(P)). Together with the K-flatness and zero tensor homology already established, this is the witness required by schemeDerivedTensorCohomologyVanishes. All functors and complexes are explicit; no spectrum derived equivalence is chosen.",
+   "uses": [
+    "lem-pc-affine-perfect-module-model",
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "def-pc-derived-tensor-cohomology-vanishes"
    ],
    "elementary": false
@@ -41,15 +44,18 @@
  ],
  "proof_deps": [
   "def-pc-derived-tensor-cohomology-vanishes",
-  "lem-pc-derived-tensor-open-restriction-universes",
-  "lem-pc-open-restriction-kflat-model",
-  "lem-pc-open-restriction-total-tensor",
-  "lem-pc-affine-localized-site-derived-transport"
+  "lem-pc-kflat-open-restriction",
+  "lem-pc-scheme-pullback-monoidal-existing",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-pc-affine-perfect-module-model"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "T2",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/08DX",
-  "place": "Steps 1 and 2 of lem-pc-affine-sheafification-tor-amplitude; explicit single-test direct-image argument and localization comparison"
+  "place": "Exact open restriction and tensor, proof of (1); explicit inverse affine transport using Mathlib overFunctorEquiv, restrictFunctorComp, singleMapHomologicalComplex, mapDerivedCategoryFactors, and the existing source pullback monoidal structure."
  },
  "mathlib_searches": [
   {
@@ -128,9 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T065115-L-900613",
-  "kind": "interface"
+  "landing": "20261013T100133-L-2489242",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
