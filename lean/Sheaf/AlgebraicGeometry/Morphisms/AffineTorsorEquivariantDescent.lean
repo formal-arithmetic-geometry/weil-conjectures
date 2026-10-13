@@ -11,35 +11,43 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
+public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric
 
 /-! # Descent of a split cover to its equivariant function algebra -/
 
 @[expose] public section
 universe u
 set_option autoImplicit false
+set_option linter.unreachableTactic false
+set_option linter.unusedTactic false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Descent first gives the invariant algebra of the whole split cover, before
-any decomposition into orbits or stabilizers.
+/-- The equivariant function algebra is reconstructed from orbit representatives
+as the product of the corresponding stabilizer equalizers.
 
-Source: Stacks Project, Tag 03SF (Galois covers), and Tag 023R (affine descent).
-Proof: put h=ι(g). Faithful flatness makes D(h) in Spec C a surjective finite
-flat cover of D(h) in Spec H. It is etale by assumption, and the unique-rotation
-hypothesis makes the map from G copies of this cover to its self-fibre-product
-an isomorphism: both are finite etale and it is bijective on geometric fibres.
-Pull δ back along k to split Y over D(h) in Spec C into d components. This
-principal open is nonempty and connected since C is a domain and h is nonzero.
-The descent datum therefore permutes the components, and the cocycle law gives
-α : G →* Perm(Fin d), with the convention ρ a (f i)=f(α a i).
-Affine faithfully flat descent identifies the descended algebra with these
-equivariant functions in C[1/h]. They equal the localization of the explicitly
-constructed equivariant algebra in C: clear denominators simultaneously in the
-finite product, and use injectivity of C → C[1/h] to remove every factor of h
-from the equivariance equations. All algebra maps fix H, so the identification
-is in Over(Spec H). If d=0 both sides are empty. No orbit representatives,
-stabilizers, or product of fixed rings are asserted by this step.
-(blueprint: lem-sbc-affine-torsor-equivariant-descent) -/
+Source: Stacks Project, Tag 03SF (finite Galois covers).
+Proof: evaluate an equivariant function on one representative of each orbit.
+The equivariance equations determine all other coordinates uniquely by the group
+action. A coordinate at a representative is unrestricted exactly when it is
+fixed by its stabilizer, hence lies in the corresponding intersection of
+equalizers. Extending these coordinates along orbit representatives gives the
+inverse algebra map; the two maps are inverse by the orbit decomposition and
+preserve the H-algebra structures.
+(blueprint: lem-sbc-affine-torsor-equivariant-descent-algebra) -/
+theorem affine_torsor_equivariant_descent_algebra
+    (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
+    (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)
+    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))
+    (d : ℕ) (α : G →* Equiv.Perm (Fin d)) (D : FixedOrbitData G d)
+    (hD : D.action = α) :
+    Nonempty ((affineTorsorEquivariantAlgebra H C G ρ d α) ≃ₐ[H]
+      (∀ k : Fin D.m,
+        (⨅ ζ : D.stabilizer k,
+          AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C))) := by
+  sorry
+
 theorem affine_torsor_equivariant_descent
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
     (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]
@@ -71,6 +79,55 @@ theorem affine_torsor_equivariant_descent
       let V : (Spec (CommRingCat.of A)).Opens :=
         PrimeSpectrum.basicOpen (algebraMap H A (ι g))
       Nonempty (Over.mk (pullback.snd p (Spec.map (CommRingCat.ofHom ι))) ≅
-        Over.mk (V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H A)))) := by sorry
+        Over.mk (V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H A)))) := by
+  classical
+  dsimp only
+  intro hEt hrot T t k hk δ hδ
+  let α := fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne p T t k hk d δ hδ
+  have ha := fixedPunctureLabel_laws R H g ι C G ρ hρone hρmul hne p T t k hk d δ hδ
+  obtain ⟨D, hD⟩ := fixedOrbitData_of_action G d α
+  obtain ⟨θ, hθ⟩ := affine_torsor_fixed_orbits_geometric
+    R H g ι C G ρ hρone hρmul hne p j hj hEt hrot d D T t k hk δ hδ hD
+  obtain ⟨a⟩ := affine_torsor_equivariant_descent_algebra H C G ρ hρmul d α D hD
+  let A := affineTorsorEquivariantAlgebra H C G ρ d α
+  let B := ∀ k : Fin D.m,
+    (⨅ ζ : D.stabilizer k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+  let VA : (Spec (CommRingCat.of A)).Opens := PrimeSpectrum.basicOpen (algebraMap H A (ι g))
+  let VB : (Spec (CommRingCat.of B)).Opens := PrimeSpectrum.basicOpen (algebraMap H B (ι g))
+  let f := Spec.map (CommRingCat.ofHom a.symm.toRingHom)
+  have hf : IsIso f := by
+    change IsIso (Spec.map (a.symm.toRingEquiv.toCommRingCatIso.hom))
+    infer_instance
+  have hV : f ⁻¹ᵁ VB = VA := by
+    change PrimeSpectrum.basicOpen (a.symm (algebraMap H B (ι g))) = _
+    rw [a.symm.commutes]
+  let b : VA.toScheme ≅ VB.toScheme :=
+    (Spec (CommRingCat.of A)).isoOfEq hV.symm ≪≫ f.preimageIso VB
+  have hbase : f ≫ Spec.map (CommRingCat.ofHom (algebraMap H B)) =
+      Spec.map (CommRingCat.ofHom (algebraMap H A)) := by
+    rw [← Spec.map_comp]
+    congr 1
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro x
+    exact a.symm.commutes x
+  have hb : b.hom ≫ VB.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H B)) =
+      VA.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H A)) := by
+    simp only [b, Iso.trans_hom, Category.assoc, Hom.preimageIso_hom_ι_assoc]
+    rw [Scheme.isoOfEq_hom_ι_assoc, hbase]
+  refine ⟨α, ?_⟩
+  change Nonempty (Over.mk (pullback.snd p (Spec.map (CommRingCat.ofHom ι))) ≅
+    Over.mk (VA.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H A))))
+  let eθ : Over.mk (pullback.snd p (Spec.map (CommRingCat.ofHom ι))) ≅
+      Over.mk (VB.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H B))) :=
+    Over.isoMk θ hθ
+  let eb : Over.mk (VB.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H B))) ≅
+      Over.mk (VA.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H A))) :=
+    Over.isoMk b.symm (by
+      change b.symm.hom ≫ VA.ι ≫
+        Spec.map (CommRingCat.ofHom (algebraMap H A)) = _
+      rw [← hb]
+      simp)
+  exact ⟨eθ ≪≫ eb⟩
 
 end AlgebraicGeometry.Scheme

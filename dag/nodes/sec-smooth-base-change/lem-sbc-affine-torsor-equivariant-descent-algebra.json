@@ -1,0 +1,102 @@
+{
+ "id": "lem-sbc-affine-torsor-equivariant-descent-algebra",
+ "kind": "statement",
+ "title": "Algebraic reconstruction from orbit data",
+ "statement": "Let H and C be commutative rings with an H-algebra structure, G a group acting on C by H-algebra homomorphisms ρ, and d a natural number. Let α : G →* Equiv.Perm (Fin d), and let D be FixedOrbitData G d with D.action = α. Then the H-algebra of equivariant functions on Fin d is isomorphic to the product over orbit representatives k : Fin D.m of the intersections of equalizers of ρ ζ and the identity, over ζ in the stabilizer of k.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF"
+ },
+ "stmt_deps": [
+  "def-sbc-affine-torsor-equivariant-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Construct the equivariant algebra isomorphism by evaluation on orbit representatives and extension along the finite group action.",
+   "uses": [
+    "lem-sbc-affine-torsor-equivariant-orbit-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-affine-torsor-equivariant-orbit-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "document": "Stacks Project",
+  "place": "Tags 03SF (finite Galois covers), 023R (fpqc descent of quasi-coherent sheaves), 0245 (affine morphisms descend); injective localization in a domain",
+  "note": "Formalized construction and proof written by E3; the geometric descent reduction remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebra of equivariant functions on finite group set as product of stabilizer invariant rings",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivariant functions algebra product stabilizer invariants; split finite etale torsor descent",
+   "results": "FixedPoints.subalgebra, Algebra.IsInvariant, PreGaloisCategory.has_decomp_connected_components and fiberIsoQuotientStabilizer are ingredients, not this identification.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*function|fixed.*orbit|fixedPointsCoordFamilyEquiv|DescentDatum",
+   "results": "Mathlib GroupAction orbit quotient and cardinality lemmas; source TotallySplit fixedPointsCoordFamilyEquiv treats coordinate invariants without the semilinear action; source DescentAlgebra.descendedEquiv supplies affine descent, not the split-cover identification. Blueprint searches for equivariant functions and stabilizer found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantDescent",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-equivariant-descent",
+   "place": "algebraic orbit reconstruction"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorEquivariantDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorEquivariantDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_torsor_equivariant_descent_algebra",
+  "statement": "theorem affine_torsor_equivariant_descent_algebra (H C : Type u) [CommRing H] [CommRing C] [Algebra H C] (G : Type u) [Group G] (ρ : G → C →ₐ[H] C) (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b)) (d : ℕ) (α : G →* Equiv.Perm (Fin d)) (D : FixedOrbitData G d) (hD : D.action = α) : Nonempty ((affineTorsorEquivariantAlgebra H C G ρ d α) ≃ₐ[H] (∀ k : Fin D.m, (⨅ ζ : D.stabilizer k, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a7f47",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T234524-L-2168076",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a7f47",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T234524-L-2168076",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and new node match the packet and DAG; all delivered files compile cleanly, the direct importer compiles against the changed interface, signatures and target statements are unchanged, and the documented sorry is the only new hole."
+ }
+}
