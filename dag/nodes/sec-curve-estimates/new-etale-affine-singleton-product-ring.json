@@ -14,20 +14,26 @@
  },
  "proof": [
   {
-   "text": "Proof: take affine spectrum charts for U and W.  For one factor the product is W\nand the single-factor indexed tensor power is B.  Add one factor at a time using\nSpec(B) × Spec(C) = Spec(B tensor C) over Spec(A).  Associativity of tensor products\nand the universal property of the indexed tensor product identify the resulting\nring with the indexed tensor power.  The binary spectrum formula identifies each\nprojection with the corresponding tensor-factor inclusion.  Multiplying those\ninclusions gives the displayed pure-tensor equation.  The spectrum charts also\nprove affineness.  The induction starts with one factor, including n = 0; the zero\nring and the empty affine scheme require no extra hypotheses.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
+   "text": "Convert the product cone in Over U to a wide-pullback cone with Over.ConstructProducts.conesEquiv. The functor Etale.forget X composed with Over.forget X preserves this finite connected limit. Its vertices are U.left and the copies of W.left, all affine by the hypotheses. Apply Mathlib Scheme.isAffine_of_isLimit to prove affineness of the product.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Construct the wide-pushout cocone on the indexed tensor power: its base map is algebraMap and its factor maps are PiTensorProduct.singleAlgHom. For any competing cocone, its base map equips the vertex with an A-algebra structure, and cocone compatibility makes the factor maps A-algebra homomorphisms. PiTensorProduct.liftCommAlgHom supplies the unique map from the tensor power. Its singleAlgHom formula proves factorization and PiTensorProduct.algHom_ext proves uniqueness. This establishes the colimit universal property directly in Lean, in the private tensorCoconeIsColimit construction.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib preservesLimit_rightOp_Γ sends the affine wide-pullback limit cone to a limit in opposite commutative rings, hence a colimit cocone in commutative rings. Identify its diagram with the algebraMap diagram by WidePullbackShape.functorExt. Compare this colimit with the tensor-power cocone to obtain a ring isomorphism. The cocone identity at the base proves preservation of A-scalars, giving an A-algebra equivalence and then the stated linear equivalence. The identities at the factor vertices and PiTensorProduct.algHom_ext identify its map with liftCommAlgHom of the projection pullbacks; liftCommAlgHom_tprod gives the required product formula. This covers n = 0 and the zero-ring case without additional hypotheses.",
+   "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-fibre-product-affine-spectra"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 03P2 affine calculation expanded using the cited geometric lemmas"
+  "place": "Tags 01I4 and 01JQ: the affine universal-property argument, implemented with Mathlib affine-limit and global-sections preservation instead of binary induction."
  },
  "mathlib_searches": [
   {
@@ -101,11 +107,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
+  "reviewer": "X-84438",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T095930-L-2451490",
+  "landing": "20261013T121220-L-3505569",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, DAG node, change record, report, and both direct importers matched the stated changes and compiled successfully."
  }
 }
