@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws
 
 @[expose] public section
 universe u
@@ -16,6 +17,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
+set_option linter.unusedVariables false in
 /-- The identity law for prescribed descended Cech coefficient maps.
 Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed canonical
 Cech comparison. This is the identity part of the agent's explicit etale realization.
@@ -145,7 +147,34 @@ theorem etale_limit_finite_cech_coefficient_identity
               (op ((MorphismProperty.Over.pullback @Etale ⊤
                 (c.π.app (op j.val))).obj (Wj j n t))) ≫
             L.pt.obj.map (δ j n t).inv.op) →
-      (∀ j : J, m j j (𝟙 j) = 𝟙 (Cj j)) := by sorry
+      (∀ j : J, m j j (𝟙 j) = 𝟙 (Cj j)) := by
+  intro J B Blim Uj Vj fj W₀ pr₀ Wj Wlim Nj Nlim Pj Plim Cj CX
+    eNj eNlim γ δ hNj hNlim hγ hδ m l hm j
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply Pi.hom_ext
+  intro t
+  apply (cancel_mono ((F j.val).obj.map (eNj j n t).hom.op)).1
+  simp only [HomologicalComplex.id_f, Category.id_comp, Category.assoc]
+  change (m j j (𝟙 j)).f n ≫ Pi.π (Pj j n) t ≫
+      (F j.val).obj.map (eNj j n t).hom.op =
+    Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op
+  rw [hm.1 j j (𝟙 j) n t]
+  have hi := (etale_limit_scalar_section_map_laws D c F φ hidentity hcomposition
+    G eG hG L i₀ (W₀ n t)
+    (fun j k a ↦ γ j k a n t) (fun j ↦ δ j n t)
+    (fun j k a ↦ hγ j k a n t) (fun j ↦ hδ j n t)).1 j
+  have hi' :
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+        (D.map (show j.val ⟶ j.val from 𝟙 j).op)).unit.app (F j.val)).hom.app
+          (op (Wj j n t)) ≫
+      (φ (show j.val ⟶ j.val from 𝟙 j)).hom.app
+        (op ((MorphismProperty.Over.pullback @Etale ⊤
+          (D.map (show j.val ⟶ j.val from 𝟙 j).op)).obj (Wj j n t))) ≫
+      (F j.val).obj.map (γ j j (𝟙 j) n t).inv.op =
+        𝟙 ((F j.val).obj.obj (op (Wj j n t))) := hi
+  rw [hi', Category.comp_id]
+
 
 end AlgebraicGeometry.Etale
 

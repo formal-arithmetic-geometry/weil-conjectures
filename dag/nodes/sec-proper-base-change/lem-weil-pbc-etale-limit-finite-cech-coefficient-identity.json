@@ -20,30 +20,28 @@
  ],
  "proof": [
   {
-   "text": "Apply cochain-map extensionality degreewise, then product extensionality to the target tuple projections. The target isomorphism z has an invertible presheaf image, so it can be cancelled in every component calculation.",
+   "text": "Apply HomologicalComplex.Hom.ext and function extensionality in the degree. The degree term of the Cech complex is the product indexed by tuples t : Fin (n+1) -> K. Apply Pi.hom_ext, then cancel the mono given by the presheaf image of (eNj j n t).hom.op. The transition equation hm.1 for the identity arrow reduces the goal to the scalar identity precomposed with the tuple projection and this presheaf image.",
    "uses": [
     "def-weil-pbc-cech-complex"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "",
+   "text": "For each degree n and tuple t, specialize etale_limit_scalar_section_map_laws to T0 = W0 n t, gamma j k a = gamma j k a n t, and delta j = delta j n t. Its projection assumptions are exactly hgamma and hdelta at n,t, and all coefficient, cone and cocone assumptions are unchanged. Take the first conjunct at j: the unit, identity coefficient map and inverse gamma restriction compose to the identity on F_j(Wj j n t). Rewrite this scalar identity in the component equation, and simplify composition with the identity. No tuple exists when K is empty, so product extensionality covers that case vacuously.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-etale-limit-scalar-section-map-laws"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-cech-complex",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-etale-limit-scalar-section-map-laws"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 09YP canonical Cech comparison, explicit identity component calculation using the proved unit coherence."
+  "place": "Tag 09YP canonical Cech comparison, reduced tuplewise to the already proved scalar section-map identity (Sites Tags 03CB and 09YN). Written by R1, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -123,10 +121,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T060416-L-582578",
-  "kind": "interface",
+  "landing": "20261013T065116-L-900822",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
