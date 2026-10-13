@@ -145,7 +145,7 @@ theorem ringedModuleSkyscraperMap_id (M : ModuleCat.{u_sky} (X.presheaf.stalk x)
       (𝟙 (ringedModuleSkyscraper X x M) :
         ringedModuleSkyscraper X x M ⟶ ringedModuleSkyscraper X x M) := by
   ext V s
-  exact rfl
+  rfl
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 Skyscraper maps preserve composition. Proof: evaluate the two sides on a section and a
