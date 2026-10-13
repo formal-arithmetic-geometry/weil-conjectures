@@ -10,16 +10,50 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct the finite étale lift of the finite separable subextension of the residue fields, apply henselian étale retraction, and lift b through the residue quotient.",
+   "text": "Put k = κ(D), K = κ(S). Separability gives integrality and a monic separable minimal polynomial m of b. Lift m coefficientwise along the surjective residue map D→k, keeping it monic, using Polynomial.lifts_and_natDegree_eq_and_monic. Polynomial.aeval_map_algebraMap and derivative_map give F(b)=0 and F'(b)≠0 from minpoly.aeval and IsSeparable.aeval_derivative_ne_zero.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Take the standard étale pair (F,F'), with identity F'·1+F·0=(F')^1. The standard étale algebra P.Ring is étale and P.lift sends its generator to b in K. Replace it by E=ULift P.Ring to meet the requested universe; Etale.of_equiv transports étaleness. Call the resulting D-algebra map ψ:E→K.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Étale E/D is essentially finite type and formally unramified, hence quasi-finite by the instance in Mathlib.RingTheory.Unramified.LocalStructure. Module.Finite.of_quasiFinite makes E finite over the Artinian D, and IsArtinianRing.of_finite makes E Artinian.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The maximal ideal of S equals its nilradical by Ring.KrullDimLE.nilradical_eq_maximalIdeal, and is nilpotent by IsArtinianRing.isNilpotent_nilradical. Formal smoothness of E/D lifts ψ across S→κ(S): g=FormallySmooth.lift, with residue(g(x))=ψ(x) by FormallySmooth.mk_lift.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let q=ker ψ, a prime since K is a field, and D'=Localization.AtPrime q. IsArtinianRing.localization_surjective makes E→D' surjective, so Module.Finite.of_surjective gives finiteness over D. Over the Noetherian D, FinitePresentation.of_finiteType supplies finite presentation; localization preserves formal étaleness, so D'/D is étale.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For x outside q, ψ(x)≠0 implies g(x) is a unit by IsLocalRing.residue_ne_zero_iff_isUnit. Extend g to g':D'→S using IsLocalization.liftAlgHom. To show g' local, represent any element by y in E using surjectivity; if g'(y) is a unit then ψ(y)≠0, so its image in D' is a unit by IsLocalization.AtPrime.isUnit_to_map_iff. The algebra homomorphism identity supplies g'∘(D→D')=D→S; isLocalHom_of_comp and locality of D→S make D→D' local.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take d to be the localized image of the lifted generator e.symm P.X. IsLocalization.lift_eq, FormallySmooth.mk_lift, and StandardEtalePair.lift_X give residue(g'(d))=b. This proves every conjunction with the original universes and hypotheses unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-standard-etale-monic-derivative"
+ ],
  "proof_origin": {
-  "by": "U4",
+  "by": "C1",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Tag 07FI, finite étale extension and henselian factorization paragraphs"
+  "place": "Tag 07FI, finite étale residue capture paragraph; direct standard-étale/minimal-polynomial construction using Mathlib polynomial lifting, quasi-finite Artinian finiteness, nilpotent formal-smooth lifting, and Artinian localization (compiled 2026-10-13)."
  },
  "mathlib_searches": [
   {
@@ -84,13 +118,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T235558-L-2202701",
-  "kind": "interface",
+  "landing": "20261013T022407-L-3210860",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
