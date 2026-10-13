@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+import Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningSingleLift
 
 /-! # Lifting sections across a bounded gap of principal thickenings
 
@@ -61,6 +62,23 @@ theorem principal_thickening_sections_lift
         ((FiniteEtale.Adic.openThickeningTransition f W (n + k)).appTop t)) →
       ∀ n (t : Γ(FiniteEtale.Adic.openThickening f W (n + c), ⊤)),
         ∃ a : Γ(W.toScheme, ⊤),
-          (FiniteEtale.Adic.openThickeningMap f W n).appTop a = res n c t := by sorry
+          (FiniteEtale.Adic.openThickeningMap f W n).appTop a = res n c t := by
+  dsimp
+  intro res hzero hsucc n t
+  have hcanon : ∀ (k : ℕ) (t : Γ(FiniteEtale.Adic.openThickening
+      (Ideal.Quotient.mk (Ideal.span {g})) W (n + k), ⊤)),
+      res n k t = principalThickeningCanonical R g W n k t := by
+    intro k
+    induction k with
+    | zero =>
+        intro t
+        simpa [principalThickeningCanonical] using (hzero n t)
+    | succ k ih =>
+        intro t
+        rw [hsucc n k t, ih]
+        rfl
+  obtain ⟨a, ha⟩ := principal_thickening_single_lift R g W hH c hkill n t
+  refine ⟨a, ?_⟩
+  exact ha.trans (hcanon c t).symm
 
 end AlgebraicGeometry.Scheme

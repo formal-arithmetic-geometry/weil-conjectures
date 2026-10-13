@@ -1,0 +1,98 @@
+{
+ "id": "new-principal-thickening-single-lift",
+ "kind": "statement",
+ "title": "Canonical principal thickening section lift",
+ "statement": "For a commutative ring R, g in R, an open W of Spec R, a subsingleton H^1(W,O_W), a natural c, and the scalar power annihilation hypothesis, every section on the (n+c)-th principal thickening is the restriction of an ambient section at level n, where restriction is the canonical composite of consecutive transitions.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0H3D and 0H3E"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Use the two-term complex [F/T -> F] and the H^1 vanishing argument of Tag 0H3D to factor the quotient restriction through ambient sections.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "E1",
+  "document": "Stacks Project",
+  "place": "Tags 0H3D and 0H3E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global sections quotient sheaf H1 vanishing lift",
+   "results": "No exact match",
+   "date": "2026-10-14",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Subsingleton Modules.H section quotient",
+   "results": "No exact match",
+   "date": "2026-10-14",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "principal thickening section lift",
+   "results": "No exact match in Mathlib or library",
+   "date": "2026-10-14",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningSectionsLift",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-principal-thickening-sections-lift",
+   "place": "Proof step 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningSingleLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PrincipalThickeningSingleLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.principal_thickening_single_lift",
+  "statement": "theorem principal_thickening_single_lift\n    (R : Type u) [CommRing R] (g : R) (W : (Spec (.of R)).Opens)\n    (hH : Subsingleton (Modules.H (X := W.toScheme)\n      (SheafOfModules.unit W.toScheme.ringCatSheaf) 1))\n    (c : ℕ)\n    (hkill : ∀ (j : ℕ) (s : R), g ^ j * s = 0 → g ^ c * s = 0) :\n    ∀ n (t : Γ(FiniteEtale.Adic.openThickening\n      (Ideal.Quotient.mk (Ideal.span {g})) W (n + c), ⊤)),\n      ∃ a : Γ(W.toScheme, ⊤),\n        (FiniteEtale.Adic.openThickeningMap\n          (Ideal.Quotient.mk (Ideal.span {g})) W n).appTop a =\n          principalThickeningCanonical R g W n c t",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T201744-L-3967437",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T201744-L-3967437",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
