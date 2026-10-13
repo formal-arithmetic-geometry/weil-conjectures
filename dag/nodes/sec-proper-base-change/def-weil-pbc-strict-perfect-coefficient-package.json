@@ -3,22 +3,85 @@
  "blueprint": {
   "is": "def-weil-pbc-strict-perfect-coefficient-package",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Local strict-perfect coefficient package",
- "statement": "On a localization of a ringed topos, let $Q$ be represented by a bounded\ncomplex $F^\\bullet$ of finite projective $\\Lambda$-modules. A strict-perfect\npackage for this representation consists, for every $r$, of an integer\n$N_r$ and maps\n\n$$\nF^r\\xrightarrow{i_r}\\Lambda^{N_r}\n\\xrightarrow{p_r}F^r,\\qquad p_ri_r=1.\n$$\n\nWrite $e_r=i_rp_r$; then $e_r^2=e_r$, $p_re_r=p_r$, and $e_ri_r=i_r$.\nPerfectness means that such packages exist after a covering. When\n$Q\\in D(\\Lambda)$ is a perfect coefficient complex, one global package and\nits associated constant sheaf may be used.",
+ "statement": "Work with sites small in the chosen universe [def-weil-size-convention]. Let $(\\mathcal C,\\mathcal O)$ be a ringed site, where $\\mathcal O$ is a sheaf of commutative rings, with category of sheaves of modules $\\operatorname{Mod}(\\mathcal O)$ [def-weil-sheaf-of-modules-category]. For an object $U$ use the localized ringed site $(\\mathcal C/U,\\mathcal O_U)$ and restriction of modules [def-pur-localized-ringed-site]. Put $\\Lambda=\\mathcal O_U$ in the following local notation. Let $Q\\in D(\\operatorname{Mod}(\\Lambda))$ [def-weil-abstract-derived-category] be represented by a cochain complex $F^\\bullet$ [def-pc-cochain-complex-modules] with $F^r=0$ outside a finite interval. Here each $F^r$ is finite projective in the sheaf sense: it is a direct summand of a finite free sheaf $\\Lambda^{\\oplus n}$, whose sections are finite tuples of sections of $\\Lambda$.\n\nA strict-perfect coefficient package for this representation is the data, for each $r\\in\\mathbf Z$, of $N_r\\in\\mathbf N$ and $\\Lambda$-linear sheaf maps\n$$\nF^r\\xrightarrow{i_r}\\Lambda^{\\oplus N_r}\\xrightarrow{p_r}F^r,\n\\qquad p_r\\circ i_r=\\operatorname{id}_{F^r}.\n$$\nWrite $e_r=i_r\\circ p_r$. The splitting relation gives\n$$\ne_r\\circ e_r=e_r,\\qquad p_r\\circ e_r=p_r,\\qquad e_r\\circ i_r=i_r.\n$$\nThese are degreewise splittings, with no requirement that $i_r$ and $p_r$ form chain maps into a preassigned free complex. For a cochain complex $K^\\bullet$ of $\\mathcal O$-modules on $\\mathcal C$, the local perfectness condition is that for every object $V$ of $\\mathcal C$ there is a covering $\\{V_\\alpha\\to V\\}$ and, for each $\\alpha$, a quasi-isomorphism $F_\\alpha^\\bullet\\to K^\\bullet|_{V_\\alpha}$, where $F_\\alpha^\\bullet$ is bounded and each term is a direct summand of a finite free $\\mathcal O_{V_\\alpha}$-module, hence admits the package data above. An object $E\\in D(\\operatorname{Mod}(\\mathcal O))$ is perfect if it can be represented by such a $K^\\bullet$. Bounds and ranks may depend on the covering object.\n\nIn the coefficient-ring case, let $\\Lambda$ instead denote a commutative ring and let $Q\\in D(\\Lambda\\text{-}\\operatorname{Mod})$ be perfect [def-pc-perfect-ring-complex]. Choose a bounded representative $F^\\bullet$ of finitely generated [def-weil-finitely-generated-module] projective [def-weil-pbc-projective-module] $\\Lambda$-modules. A global coefficient package consists of the same data with ordinary linear maps and $\\Lambda^{\\oplus N_r}$ the free module with its standard finite basis [def-weil-pbc-free-module]. Its associated constant sheaf package on a site is obtained by sheafifying the constant presheaves termwise [def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification], including the differentials, $i_r$ and $p_r$. The coefficient sheaf here is the constant ring sheaf $\\underline\\Lambda$; finite-product preservation [lem-weil-pbc-sheafification-sets-exact] identifies $\\underline{\\Lambda^{\\oplus N_r}}$ with $\\underline\\Lambda^{\\oplus N_r}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-strict-perfect-coefficient-package.md",
   "place": "node def-weil-pbc-strict-perfect-coefficient-package, order 1263"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-perfect-ring-complex",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictly.?perfect|strictPerfect|exists.*retract|exists.*split",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete ringed-site strict-perfect package; finite projective module retractions alone are a component, not this definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective modules admits degreewise retractions from finite free modules, defining a strict perfect coefficient package",
+   "results": "CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt, Rep.standardComplex.x_projective, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.ofComplex, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete ringed-site strict-perfect package; finite projective module retractions alone are a component, not this definition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strictly perfect complex is a bounded complex of finite projective modules with chosen finite free retractions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Module.Finite",
+   "results": "IsAzumaya.mk, Module.Finite.exists_comp_eq_id_of_projective, Module.instIsReflexiveOfFiniteOfProjective, Module.dual_finite, Module.dual_projective, dualTensorHomEquiv, dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv, lTensorHomEquivHomLTensor",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete ringed-site strict-perfect package; finite projective module retractions alone are a component, not this definition"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect|exists_comp_eq_id_of_projective",
+   "results": "30",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete ringed-site strict-perfect package; finite projective module retractions alone are a component, not this definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex on a ringed site is locally represented by a bounded complex of direct summands of finite free sheaves with chosen sections and retractions",
+   "results": "CochainComplex.IsKProjective, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete ringed-site strict-perfect package; finite projective module retractions alone are a component, not this definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"perfect\"",
+   "results": "Aesop.ScriptGenerated.perfect, Aesop.Script.DynStructureM.State.perfect, Aesop.Script.StaticStructureM.State.perfect, Nat.Perfect, Nat.perfect_iff_sum_properDivisors, Nat.perfect_iff_sum_divisors_eq_two_mul, PerfectField, PerfectRing",
+   "date": "2026-10-14",
+   "verdict": "no match for the complete ringed-site strict-perfect package; finite projective module retractions alone are a component, not this definition"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -37,5 +100,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-strict-perfect-coefficient-package",
+  "worker": "stage1",
+  "summary": "Resolved the empty statement dependencies into existing nodes; made the localized sheaf meaning of finite projective explicit, distinguished it from the global coefficient-ring model, and corrected ranks to natural numbers. All package identities and the ring-module existence argument are elementary from the displayed data and cited definitions. No new nodes. Second reading separated the ambient perfectness condition from the localized input and wrote its quasi-isomorphism condition exactly as in 08G5.",
+  "blueprint": "Definition paragraph 1 and splitting display; paragraph 2 idempotent identities, local perfectness, and global constant-sheaf package. The node is a definition, so its split consists of statement dependencies, not a proof of a theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-ab475fbcc",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-ab475fbcc (reviewer sub-agent of L); spot-checked: Read the complete definition, report, twelve dependency statements, source passages, and unit/chapter route. Verified Stacks 08FL/08G5/0657, finite-projective retractions, idempotent identities, constant-sheaf construction, and edge cases. No new nodes or repairs needed. Checked master target hypotheses and base-change arrow; this definition asserts no comparison between ordinary constant and condensed coefficients. Detailed findings are in review.md."
+ }
 }
