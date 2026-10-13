@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Projective
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
+import Sheaf.AlgebraicGeometry.OpenModuleStalkClosedPushforwardHomology
 
 /-! # Bounded projective models of closed-pushforward stalks
 
@@ -26,6 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Taking stalks of a local strictly perfect model gives a bounded complex of projectives
 with the homology of the restricted source stalk in degree zero.
 
@@ -69,6 +70,22 @@ theorem strictPerfectClosedPushforward_stalkModel
       Nonempty (L.homology 0 ≅
         ((ModuleCat.restrictScalars (i.stalkMap x).hom).obj
           (ModuleCat.of (Z.presheaf.stalk x) (Z.presheaf.stalk x)))) ∧
-      (∀ j : ℤ, j ≠ 0 → IsZero (L.homology j)) := by sorry
+      (∀ j : ℤ, j ≠ 0 → IsZero (L.homology j)) := by
+  let S := openModuleStalkFunctor Y U ⟨i x, hx⟩
+  let L := (S.mapHomologicalComplex (.up ℤ)).obj K
+  obtain ⟨hzero, hother⟩ := openModuleStalk_closedPushforward_homology i x U hx K e
+  refine ⟨L, ?_, ?_, hzero, hother⟩
+  · obtain ⟨a, b, hab⟩ := hK.1
+    exact ⟨a, b, fun j hj ↦ S.map_isZero (hab j hj)⟩
+  · intro j
+    obtain ⟨m, ι, π, hιπ⟩ := hK.2 j
+    have : Projective (S.obj (SheafOfModules.free
+        (R := (moduleRings Y.toRingedSpace).over U) (ULift.{u} (Fin m)))) :=
+      openModuleStalk_free_projective Y U ⟨i x, hx⟩ m
+    exact (show Retract (L.X j) (S.obj (SheafOfModules.free
+      (R := (moduleRings Y.toRingedSpace).over U) (ULift.{u} (Fin m)))) from
+        ⟨S.map ι, S.map π, by
+          change S.map ι ≫ S.map π = 𝟙 (S.obj (K.X j))
+          rw [← S.map_comp, hιπ, S.map_id]⟩).projective
 
 end AlgebraicGeometry

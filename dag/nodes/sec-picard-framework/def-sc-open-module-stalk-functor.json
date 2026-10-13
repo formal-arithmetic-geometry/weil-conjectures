@@ -1,0 +1,122 @@
+{
+ "id": "def-sc-open-module-stalk-functor",
+ "kind": "definition",
+ "title": "The exact module stalk functor on the site over an open",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $U\\subseteq Y$ an open subscheme, $y\\in U$, and $j:U\\hookrightarrow Y$ its open immersion. On sheaves of modules on the slice site over $U$, define $S_{U,y}$ as the composite of the equivalence to $\\mathcal O_U$-module sheaves, the module stalk functor at $y$ [def-pc-module-stalk-functor], and restriction of scalars along $j^\\sharp_y:\\mathcal O_{Y,j(y)}\\to\\mathcal O_{U,y}$. This explicitly constructed functor takes values in $\\mathcal O_{Y,j(y)}$-modules and preserves zero morphisms, finite limits and finite colimits; it is additive.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Tag 01AG"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Construct the composite using Mathlib Scheme.Modules.overEquiv, moduleStalkFunctor, and ModuleCat.restrictScalars. The equivalence preserves binary products and is additive. Compose zero-morphism preservation.",
+   "uses": [
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The underlying abelian-sheaf functor preserves finite colimits by moduleSheaves_colimits_forgetful. Abelian sheaf stalks preserve finite limits and colimits. Forgetting stalk module structures reflects both; therefore module stalks preserve both.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose with the site equivalence and restriction of scalars, which preserve the same limits and colimits. Preservation of binary products implies additivity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01AG and the stalk constructions; https://stacks.math.columbia.edu/tag/01AG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk functor for sheaves of modules takes finite free sheaves to projective modules and commutes with homology on the site over an open neighbourhood",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk functor on sheaves of modules localized to an open neighbourhood preserves finite free modules and homology",
+   "results": "Affine tilde stalk localization declarations were returned; none gives this open-site module stalk comparison or projectivity statement.",
+   "date": "2026-10-13",
+   "verdict": "component results only"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorEquiv|stalk.*[Pp]rojective|[Pp]erfect.*stalk",
+   "results": "Mathlib Scheme.Modules.overFunctorEquiv and restrictStalkNatIso identify the sites and underlying abelian stalks. No public module-linear open-site natural comparison is stated. The source library supplies overEquivFunctorObjUnitIso. The public Scheme.ideal_module_product_stalk supplies the unit-stalk isomorphism by taking the identity inclusion and unit coefficient sheaf; no duplicate unit-stalk declaration is added. The public nonempty_restriction_stalk_extension_iso in Modules.RestrictionStalkExtensionIso supplies the coefficient isomorphism by applying it to a single complex, evaluating at zero, and cancelling scalars through the adjunction unit; no private helper is duplicated.",
+   "date": "2026-10-13",
+   "verdict": "use component declarations and existing proved helper; no full matching public theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The exact module stalk functor on the site over an open; steps of lem-sc-strict-perfect-closed-pushforward-stalk-model",
+   "via": [
+    "lem-sc-strict-perfect-closed-pushforward-stalk-model",
+    "lem-sc-strict-perfect-closed-pushforward-stalk-resolution",
+    "lem-sc-perfect-immersion-stalkwise-tor-bounds",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuleStalkFunctor.lean",
+  "declaration": "AlgebraicGeometry.openModuleStalkFunctor",
+  "statement": "def openModuleStalkFunctor (Y : Scheme.{u}) (U : Y.Opens) (y : U.toScheme) :\n    SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U) ⥤\n      ModuleCat.{u} (Y.presheaf.stalk (U.ι y))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T033008-L-3678518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T033008-L-3678518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

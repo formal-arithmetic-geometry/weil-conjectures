@@ -16,44 +16,39 @@
  ],
  "proof": [
   {
-   "text": "Take the termwise stalk complex on the localized open-subspace site. Neighbourhoods contained in U are cofinal at i(x), so this stalk is over A and restriction to U does not change it. The bounds of K give bounds of its stalk complex L.",
-   "uses": [
-    "def-pc-perfect-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Stalks preserve finite coproducts and take the unit sheaf to the regular module over the stalk ring. Apply the stalk functor to the two finite-free retraction maps of each term. The stalk term is then a retract of a finite free A-module and is projective.",
+   "text": "Define L as the degreewise image of K under the explicit open-site module stalk functor. The bounds in IsStrictlyPerfect pass to L because the functor preserves zero morphisms and hence zero objects.",
    "uses": [
     "def-pc-perfect-complex",
-    "lem-weil-pbc-module-stalk-exact"
+    "def-sc-open-module-stalk-functor"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Exactness of the stalk functor makes it preserve quasi-isomorphisms and descend to the derived localization. Apply it to the specified derived isomorphism e. The stalk of the restricted single sheaf has homology only in degree zero.",
+   "text": "For each term choose the finite-free retraction from IsStrictlyPerfect. Apply the stalk functor to its two maps; functoriality preserves the retraction identity. The image of the finite-free sheaf is projective by openModuleStalk_free_projective, and Retract.projective gives projectivity of the term of L.",
    "uses": [
-    "lem-weil-pbc-module-stalk-exact"
+    "def-pc-perfect-complex",
+    "lem-sc-open-module-stalk-free-projective"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply closedImmersion_pushforward_stalks to the unit sheaf. Its bijective germ map is linear through the stalk ring map and identifies the pushforward stalk with B. Compose it with the degree-zero homology identification to get H^0(L) isomorphic to B.",
+   "text": "Apply openModuleStalk_closedPushforward_homology to e, obtaining the coefficient isomorphism in degree zero and vanishing at all other degrees for this same constructed L. Combine with the bounds and termwise projectivity.",
    "uses": [
-    "lem-weil-pbc-closed-pushforward-stalks"
+    "lem-sc-open-module-stalk-closed-pushforward-homology"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
-  "lem-weil-pbc-closed-pushforward-stalks",
-  "lem-weil-pbc-module-stalk-exact"
+  "def-sc-open-module-stalk-functor",
+  "lem-sc-open-module-stalk-closed-pushforward-homology",
+  "lem-sc-open-module-stalk-free-projective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08C4 and 08CM; Modules 01AG and Sheaves 00AE; original stalk-resolution node steps 1-2"
+  "place": "Tags 08C4 and 08CM; Modules 01AG and Sheaves 00AE; original stalk-resolution node steps 1-2; T1 explicit functor/retract/derived-single proof, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -123,12 +118,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T202254-L-709422",
+  "landing": "20261013T033008-L-3678518",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
