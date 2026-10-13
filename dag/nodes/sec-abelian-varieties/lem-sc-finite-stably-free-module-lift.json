@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-finite-stably-free-module-lift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The term-lifting hypothesis in the finite stably free specialization of the general lifting lemma.",
+   "via": [
+    "lem-sc-pseudo-coherent-lift-stably-free-complex",
+    "lem-sc-perfect-h0-locally-closed",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Lifting a finite stably free module modulo a Jacobson ideal",
+ "statement": "Let R be a commutative ring and I an ideal such that every element of 1+I is a unit. Let E be a finite [def-weil-finitely-generated-module] stably free R/I-module, meaning E × F is free for some finite free module F [def-weil-pbc-free-module]. Then there is a finite stably free R-module P and an R/I-linear isomorphism E ≃ (R/I) ⊗_R P.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC5, lifting stably free modules"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite free complement F such that E × F is finite free. Use bases to construct finite free R-modules A and B reducing to E × F and F. Projectivity of A lifts the reduced projection to a linear map f : A → B, by lifting through the surjective quotient-tensor map B → (R/I) ⊗ B. Tensor extensionality identifies its reduced map with the prescribed projection.",
+   "uses": [
+    "lem-weil-pbc-free-module-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC5, lifting stably free modules"
+   }
+  },
+  {
+   "text": "The reduced projection is surjective, so surjectivity detection makes f surjective. Since B is free, it is projective and supplies a section g. Construct P=ker(f) and the map A → P sending x to x-g(f(x)). It retracts the inclusion. The explicit bijection P × B → A, (p,b) ↦ p+g(b), makes P finite stably free.",
+   "uses": [
+    "lem-sc-finite-module-surjective-mod-ideal",
+    "lem-weil-pbc-free-module-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC5, lifting stably free modules"
+   }
+  },
+  {
+   "text": "The retraction remains a retraction after base change, hence the reduced inclusion u : (R/I) ⊗ P → (R/I) ⊗ A is injective. Mathlib lTensor_exact, applied to the exact kernel sequence and the surjection f, identifies its image with the kernel of the reduced projection. Under (R/I) ⊗ A ≃ E × F this kernel is E × 0. Projection to E is therefore bijective on (R/I) ⊗ P and gives the claimed isomorphism.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC5, lifting stably free modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-module-projective",
+  "lem-sc-finite-module-surjective-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC5, lifting stably free modules",
+  "note": "Formal argument written by N3 from the cited Stacks argument and pinned Mathlib sources. Local literature copy absent; cited tags read on the Stacks website."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite stably free module lifts along a quotient by an ideal in the Jacobson radical",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsStablyFree.of_free_prod",
+   "results": "Module.IsStablyFree.of_free_prod",
+   "date": "2026-10-13",
+   "verdict": "Building blocks used in the proved Lean argument; no exact packaged statement."
+  },
+  {
+   "tool": "grep",
+   "query": "stably.free|IsStablyFree",
+   "results": "Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean; Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean; Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean; Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean; Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean; Mathlib/Algebra/Module/StablyFree/Basic.lean; Mathlib/Algebra/Module/StablyFree/Basic.lean; Mathlib/Algebra/Module/StablyFree/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "Building blocks used in the proved Lean argument; no exact packaged statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StablyFreeComplexLift",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.StablyFreeModuleLift",
+  "file": "lean/Sheaf/RingTheory/StablyFreeModuleLift.lean",
+  "declaration": "ModuleCat.exists_finite_stablyFree_lift",
+  "statement": "theorem exists_finite_stablyFree_lift\n    {R : Type u} [CommRing R] (I : Ideal R)\n    (hunits : ∀ x : I, IsUnit (1 + (x : R)))\n    (E : ModuleCat.{max u v} (R ⧸ I))\n    [Module.Finite (R ⧸ I) E] [Module.IsStablyFree (R ⧸ I) E] :\n    ∃ P : ModuleCat.{max u v} R,\n      (Module.Finite R P ∧ Module.IsStablyFree R P) ∧\n      Nonempty (E ≅ (ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T054230-L-446804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T054230-L-446804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

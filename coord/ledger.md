@@ -11281,3 +11281,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/N2/Sheaf.AlgebraicGeometry.AffineAlgebraCounitHomologyComparisonIsIso (stage 3; reviewer PASS; first push; landing 20261013T054229-L-446457 (interface); batch 20261013T054206; modules 2; new nodes 1)
 - 05:42 L: merged deliver/N3/Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection (stage 3; reviewer PASS; first push; landing 20261013T054229-L-446577 (proof); batch 20261013T054206; modules 1; new nodes 0)
 - 05:42 L: merged deliver/N3/Sheaf.RingTheory.RegularQuotientIdealIntersection (stage 3; reviewer PASS; first push; landing 20261013T054229-L-446690 (interface); batch 20261013T054206; modules 2; new nodes 1)
+- 05:42 L: merged deliver/N3/Sheaf.RingTheory.StablyFreeComplexLift (stage 3; reviewer PASS; first push; landing 20261013T054230-L-446804 (interface); batch 20261013T054206; modules 4; new nodes 3)

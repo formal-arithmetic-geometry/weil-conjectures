@@ -25,24 +25,59 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sc-complex-lift-class-projective] with $\\mathcal P$ the finite stably free $R$-modules. A finite stably free module is finite projective. The class is closed under direct summands and finite direct sums, and the short-exact two-out-of-three property follows because projective short exact sequences split. If a map in the class is surjective modulo $I$, its cokernel is finitely generated and vanishes modulo $I$, so Nakayama's lemma and the hypothesis that every element of $1+I$ is a unit make it zero. Every finite stably free $R/I$-module lifts to a finite stably free $R$-module by lifting a stable presentation $E\\oplus(R/I)^m\\cong(R/I)^n$ and taking the kernel of the lifted split projection. Finally, pseudo-coherence supplies a bounded-above finite-free representative of $K$, whose terms lie in $\\mathcal P$. Thus the general lemma gives a bounded-above complex of finite stably free $R$-modules representing $K$ and reducing termwise to $E^\\bullet$. For the final assertion (More on Algebra, Tag 0BC6), let $E^i\\cong(R/I)^{\\oplus n}$. Since $P^i$ is finite projective with $P^i/IP^i\\cong E^i$, lift the resulting surjection $R^{\\oplus n}\\to(R/I)^{\\oplus n}\\cong P^i/IP^i$ to a map $\\varphi:R^{\\oplus n}\\to P^i$. It is surjective modulo $I$, hence surjective by Nakayama's lemma (the cokernel is finite and vanishes modulo $I$), hence split as $P^i$ is projective: $R^{\\oplus n}\\cong P^i\\oplus N$ with $N=\\operatorname{Ker}\\varphi$ finite. Reducing modulo $I$, $(R/I)^{\\oplus n}\\cong P^i/IP^i\\oplus N/IN$ with $\\varphi$ modulo $I$ an isomorphism, so $N/IN=0$ and $N=0$ by Nakayama. Hence $P^i\\cong R^{\\oplus n}$ is free; this holds for every such $i$ simultaneously, with no further choice.",
+   "text": "Use the class of finite stably free modules. Mathlib makes stably free modules projective. Prove the binary-product class condition by choosing finite free stabilizations: stabilizations of M and N combine to one of M × N; if M and M × N are stably free, rearrange the stabilizations to stabilize N. Transfer finiteness and stable freeness along the given module isomorphism. This is the two-out-of-three property of Tag 0BC4, not closure under arbitrary direct summands.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.6, Tag 0BCB (lemma-lift-complex-stably-frees)"
+   }
+  },
+  {
+   "text": "Apply the finite-module surjectivity-detection lemma to maps of class members. Apply the finite stably free module-lifting theorem separately to each E.X i to supply the term-lifting hypothesis of the general complex-lifting lemma.",
+   "uses": [
+    "lem-sc-finite-module-surjective-mod-ideal",
+    "lem-sc-finite-stably-free-module-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.6, Tag 0BCB (lemma-lift-complex-stably-frees)"
+   }
+  },
+  {
+   "text": "Use exactly Classical.choose hK as the representative. Classical.choose_spec hK supplies its bound, finite free terms and derived isomorphism to K. Free modules are stably free, so this is a representative in the chosen class. The given hE is the required derived reduction isomorphism for this same representative. Apply lem-sc-complex-lift-class-projective with these verified hypotheses to obtain P, its bound, class terms, its derived isomorphism to K and a complex isomorphism from its reduction to E.",
    "uses": [
     "lem-sc-complex-lift-class-projective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.75.6, proof of lemma-lift-complex-stably-frees"
+    "place": "More on Algebra, Lemma 15.75.6, Tag 0BCB (lemma-lift-complex-stably-frees)"
+   }
+  },
+  {
+   "text": "Evaluate the complex reduction isomorphism at each i and transfer freeness from E.X i to the reduced term of P. Each term of P is finite stably free, hence projective. Apply the finite-projective freeness-detection theorem to this actual P.X i. This proves the free-term clause simultaneously without changing the selected complex.",
+   "uses": [
+    "lem-sc-finite-projective-free-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.6, Tag 0BCB (lemma-lift-complex-stably-frees)"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-complex-lift-class-projective"
+  "lem-sc-finite-module-surjective-mod-ideal",
+  "lem-sc-finite-stably-free-module-lift",
+  "lem-sc-complex-lift-class-projective",
+  "lem-sc-finite-projective-free-mod-ideal"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.75.6, Tag 0BCB"
+  "place": "Tag 0BCB, specialization of the general lifting theorem; formal proof written by N3 using Tags 0BC4, 0BC5 and 0BC6."
  },
  "mathlib_searches": [
   {
@@ -154,5 +189,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T054230-L-446804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-finite-module-surjective-mod-ideal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Surjectivity of the projective-class maps in the finite stably free specialization.",
+   "via": [
+    "lem-sc-pseudo-coherent-lift-stably-free-complex",
+    "lem-sc-perfect-h0-locally-closed",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Surjectivity detected modulo a Jacobson ideal",
+ "statement": "Let R be a commutative ring, I an ideal such that every 1+x with x in I is a unit, M an R-module, N a finitely generated R-module [def-weil-finitely-generated-module], and f : M → N an R-linear map. If (R/I) ⊗_R f is surjective, then f is surjective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00DV, Nakayama, applied in the proof of Tag 0BCB"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "For x in I and y in R, 1+xy is a unit by hypothesis, so Ideal.mem_jacobson_bot places I in the Jacobson radical. Use TensorProduct.quotTensorEquivQuotSMul to identify reduction with the quotient by I times the module. The quotient maps are surjective; the tensor map surjectivity gives surjectivity of M → N/IN.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV, Nakayama, applied in the proof of Tag 0BCB"
+   }
+  },
+  {
+   "text": "Apply Nakayama to N/range(f), which is finite and has zero reduction. In Lean this is the range formulation LinearMap.surjective_of_surjective_comp_mkQ. It gives surjectivity of f.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV, Nakayama, applied in the proof of Tag 0BCB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00DV, Nakayama, applied in the proof of Tag 0BCB",
+  "note": "Formal argument written by N3 from the cited Stacks argument and pinned Mathlib sources. Local literature copy absent; cited tags read on the Stacks website."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of a map of finite modules can be tested modulo an ideal in the Jacobson radical",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.surjective_of_surjective_comp_mkQ",
+   "results": "LinearMap.surjective_of_surjective_comp_mkQ",
+   "date": "2026-10-13",
+   "verdict": "Building blocks used in the proved Lean argument; no exact packaged statement."
+  },
+  {
+   "tool": "grep",
+   "query": "quotTensorEquivQuotSMul|surjective_of_surjective_comp_mkQ",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/Algebra/Module/SpanRankOperations.lean; Mathlib/RingTheory/Finiteness/NilpotentKer.lean",
+   "date": "2026-10-13",
+   "verdict": "Building blocks used in the proved Lean argument; no exact packaged statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StablyFreeComplexLift",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteModuleSurjectiveModIdeal",
+  "file": "lean/Sheaf/RingTheory/FiniteModuleSurjectiveModIdeal.lean",
+  "declaration": "ModuleCat.surjective_of_extendScalars_mod_ideal",
+  "statement": "theorem surjective_of_extendScalars_mod_ideal {R : Type u} [CommRing R]\n    (I : Ideal R) (hunits : ∀ x : I, IsUnit (1 + (x : R)))\n    (M N : ModuleCat.{max u v} R) [Module.Finite R N] (f : M ⟶ N)\n    (hf : Function.Surjective ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).map f)) :\n    Function.Surjective f",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T054230-L-446804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T054230-L-446804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-finite-projective-free-mod-ideal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The final assertion that every lifted term whose reduction is free is itself free.",
+   "via": [
+    "lem-sc-pseudo-coherent-lift-stably-free-complex",
+    "lem-sc-perfect-h0-locally-closed",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Freeness of a finite projective module detected modulo a Jacobson ideal",
+ "statement": "Let R be a commutative ring, I an ideal such that every element of 1+I is a unit, and P a finite [def-weil-finitely-generated-module] projective [def-weil-pbc-projective-module] R-module. If (R/I) ⊗_R P is free [def-weil-pbc-free-module], then P is free.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC6, isomorphism lifting, applied to a free module"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "The reduction of P is finite. Choose a finite basis and let A be the free R-module with the same basis index. Its reduced basis determines an isomorphism e : (R/I) ⊗ A ≃ (R/I) ⊗ P. Projectivity of A lifts the map A → P/IP through the surjective map P → P/IP. Tensor extensionality shows that the lift f has reduced map e.",
+   "uses": [
+    "lem-weil-pbc-free-module-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC6, isomorphism lifting, applied to a free module"
+   }
+  },
+  {
+   "text": "Since the reduction of f is surjective, the surjectivity-detection lemma makes f surjective. Projectivity of P gives a section g with fg=id. Reduction and injectivity of e give the second identity gf=id modulo I; surjectivity detection therefore makes gf surjective.",
+   "uses": [
+    "lem-sc-finite-module-surjective-mod-ideal",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC6, isomorphism lifting, applied to a free module"
+   }
+  },
+  {
+   "text": "The finite-module surjective-endomorphism theorem makes gf injective, hence f injective. Thus f is bijective and transfers freeness from A to P. The construction also covers zero rings and empty basis indices.",
+   "uses": [
+    "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC6, isomorphism lifting, applied to a free module"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-module-projective",
+  "lem-sc-finite-module-surjective-mod-ideal",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC6, isomorphism lifting, applied to a free module",
+  "note": "Formal argument written by N3 from the cited Stacks argument and pinned Mathlib sources. Local literature copy absent; cited tags read on the Stacks website."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite projective module whose quotient by an ideal in the Jacobson radical is free is free",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.projective_lifting_property",
+   "results": "Module.projective_lifting_property",
+   "date": "2026-10-13",
+   "verdict": "Building blocks used in the proved Lean argument; no exact packaged statement."
+  },
+  {
+   "tool": "grep",
+   "query": "quotTensorEquivQuotSMul|surjective_of_surjective_comp_mkQ",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/Algebra/Module/SpanRankOperations.lean; Mathlib/RingTheory/Finiteness/NilpotentKer.lean",
+   "date": "2026-10-13",
+   "verdict": "Building blocks used in the proved Lean argument; no exact packaged statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StablyFreeComplexLift",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteProjectiveFreeModIdeal",
+  "file": "lean/Sheaf/RingTheory/FiniteProjectiveFreeModIdeal.lean",
+  "declaration": "ModuleCat.free_of_free_extendScalars_mod_ideal",
+  "statement": "theorem free_of_free_extendScalars_mod_ideal\n    {R : Type u} [CommRing R] (I : Ideal R)\n    (hunits : ∀ x : I, IsUnit (1 + (x : R)))\n    (P : ModuleCat.{max u v} R) [Module.Finite R P] [Module.Projective R P]\n    [Module.Free (R ⧸ I) ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P)] :\n    Module.Free R P",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T054230-L-446804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T054230-L-446804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
