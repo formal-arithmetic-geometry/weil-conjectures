@@ -1,0 +1,156 @@
+{
+ "id": "lem-pc-perfect-hom-continuity-affine",
+ "kind": "statement",
+ "title": "Affine-open base case for perfect Hom continuity",
+ "statement": "Let $I$ be a preordered set, $R:I\\to\\mathrm{CommRing}$ a diagram, $c$ a cocone, $i\\in I$, and $s:X\\to\\operatorname{Spec}(R_i)$ a scheme morphism [def-pc-scheme]. Assume the scheme derived categories of [def-pc-derived-category] exist. In addition, suppose $I$ is directed, $c$ is colimiting, and $s$ is locally of finite presentation, quasi-compact and quasi-separated. For every affine open $U\\subseteq X$, the condition $\\mathcal C(U)$ of [def-pc-perfect-hom-continuity-on] holds.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-transport",
+  "def-pc-perfect-hom-continuity-on"
+ ],
+ "proof": [
+  {
+   "text": "Every open-immersion presentation Y of U is affine. Perfect complexes have quasi-coherent cohomology. Use the affine bounded-projective criterion and the affine derived equivalence to represent both by bounded finite-projective complexes of modules over the coordinate ring of Y.",
+   "uses": [
+    "def-pc-perfect-hom-continuity-on",
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
+   }
+  },
+  {
+   "text": "The base changes of Y have rings B_i tensor over R_i with R_j and c.pt; tensor extension preserves colimits. Since the model complexes have flat terms, affine derived pullback is ordinary scalar extension. Its natural tilde comparison identifies the Hom transport with the canonical conjugated maps, using counit-pinned composition coherence.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
+   }
+  },
+  {
+   "text": "Apply affine_perfect_hom_colimit to the identified module-derived Hom diagram. A common upper bound proves that every tail is cofinal, giving a representative above each j0. Injectivity and the filtered-set equality criterion give equality at some later k, and composition coherence propagates equality for all l at least k.",
+   "uses": [
+    "lem-pc-affine-perfect-hom-colimit",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-hom-continuity-on",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-perfect-hom-colimit",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-perfect-qcoherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine case; local literature copy absent, online source checked"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuity of morphisms of perfect complexes on affine opens and Mayer Vietoris gluing",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom sets of perfect complexes on qcqs schemes commute with filtered ring colimits",
+   "results": "AffineTransitionLimit global-sections colimit statements; no scheme-derived Hom continuity theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectHomContinuityOn|perfect.*hom.*colimit|hom.*mayer.*vietoris",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean connecting homomorphism; no perfect-Hom comparison theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomContinuity",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF full-faithfulness argument, via Tag 09RE: Affine-open base case for perfect Hom continuity",
+   "via": [
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-descend-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomContinuityAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomContinuityAffine.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_continuity_affine",
+  "statement": "theorem perfect_hom_continuity_affine {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (X : Scheme.{u}) (s : X ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (U : X.Opens) (hU : IsAffineOpen U) : PerfectHomContinuityOn R c i X s U",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T095935-L-2452929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T095935-L-2452929",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "id": "def-pc-perfect-hom-continuity-on",
+ "kind": "definition",
+ "title": "Open-local perfect Hom continuity condition",
+ "statement": "Let $I$ be a preordered set, $R:I\\to\\mathrm{CommRing}$ a diagram, $c$ a cocone, $i\\in I$, and $s:X\\to\\operatorname{Spec}(R_i)$ a scheme morphism [def-pc-scheme]. Assume the scheme derived categories of [def-pc-derived-category] exist. For an open $W\\subseteq X$, define $\\mathcal C(W)$ as follows. For every scheme $Y$, every open immersion $t:Y\\to X$ with open image exactly $W$, and every morphism $s_Y:Y\\to\\operatorname{Spec}(R_i)$ equal to $s\\circ t$, suppose $s_Y$ is locally of finite presentation, quasi-compact and quasi-separated and the derived categories on the localized open sites of $Y$ exist. For all perfect $P,Q\\in D(\\mathcal O_Y)$ [def-pc-perfect-complex], put $Y_j=Y\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_j)$ and $Y_\\infty=Y\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(c.pt)$, with $P_j,Q_j,P_\\infty,Q_\\infty$ their derived pullbacks [def-pc-derived-pullback]. Write $T_{j,k}$ and $T_{j,\\infty}$ for the canonical Hom transports [lem-pc-perfect-hom-transport]. Require both: (a) for every $j_0\\ge i$ and $\\varphi:P_\\infty\\to Q_\\infty$, there exist $j\\ge j_0$ and $a:P_j\\to Q_j$ with $T_{j,\\infty}(a)=\\varphi$; (b) for $j\\ge i$ and $a,b:P_j\\to Q_j$ with $T_{j,\\infty}(a)=T_{j,\\infty}(b)$, there exists $k\\ge j$ such that $T_{j,l}(a)=T_{j,l}(b)$ for every $l\\ge k$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-transport"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuity of morphisms of perfect complexes on affine opens and Mayer Vietoris gluing",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom sets of perfect complexes on qcqs schemes commute with filtered ring colimits",
+   "results": "AffineTransitionLimit global-sections colimit statements; no scheme-derived Hom continuity theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectHomContinuityOn|perfect.*hom.*colimit|hom.*mayer.*vietoris",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean connecting homomorphism; no perfect-Hom comparison theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomContinuity",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF full-faithfulness argument, via Tag 09RE: Open-local perfect Hom continuity condition",
+   "via": [
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-descend-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomContinuityOn",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomContinuityOn.lean",
+  "declaration": "AlgebraicGeometry.PerfectHomContinuityOn",
+  "statement": "def PerfectHomContinuityOn {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i)) [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (W : X.Opens) : Prop",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T095935-L-2452929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T095935-L-2452929",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

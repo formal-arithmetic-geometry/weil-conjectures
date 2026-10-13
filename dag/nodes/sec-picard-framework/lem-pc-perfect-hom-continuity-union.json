@@ -1,0 +1,162 @@
+{
+ "id": "lem-pc-perfect-hom-continuity-union",
+ "kind": "statement",
+ "title": "Affine-open adjoining step for perfect Hom continuity",
+ "statement": "Let $I$ be a preordered set, $R:I\\to\\mathrm{CommRing}$ a diagram, $c$ a cocone, $i\\in I$, and $s:X\\to\\operatorname{Spec}(R_i)$ a scheme morphism [def-pc-scheme]. Assume the scheme derived categories of [def-pc-derived-category] exist. In addition, suppose $I$ is directed, $c$ is colimiting, and $s$ is locally of finite presentation, quasi-compact and quasi-separated. Let $U,V\\subseteq X$ be opens, with $U$ quasi-compact and $V$ affine. If the conditions $\\mathcal C(U)$, $\\mathcal C(V)$ and $\\mathcal C(U\\cap V)$ of [def-pc-perfect-hom-continuity-on] hold, then $\\mathcal C(U\\cup V)$ holds.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-hom-transport",
+  "def-pc-perfect-hom-continuity-on"
+ ],
+ "proof": [
+  {
+   "text": "Let Y present U union V. Pull back the two opens to Y and to every ring stage and the colimit. Their intersection is quasi-compact by quasi-separatedness. Apply the derived Mayer--Vietoris triangle to Q, which has quasi-coherent cohomology, and use the open-immersion derived adjunction after applying Hom(P,-[n]).",
+   "uses": [
+    "def-pc-perfect-hom-continuity-on",
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
+   }
+  },
+  {
+   "text": "Restriction preserves perfectness by pulling back the local strictly-perfect models; shifting reindexes them. Thus the three hypotheses identify the local Hom colimits in every adjacent degree. For each affine transition h, use schemeDerived_mayerVietoris_directImage to compare the pushed-forward triangle with the triangle of Rh_*Lh^*Q. Its natural boundary applied to the adjunction unit Q to Rh_*Lh^*Q gives a comparison from the target triangle. Apply Hom(P,-[n]) and the derived adjunction. Identify the resulting local maps using open restriction and the middle map using the counit-pinned pullback composition comparisons. This yields the required morphism of long exact Hom sequences, including the boundary squares.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
+   }
+  },
+  {
+   "text": "Take filtered colimits of the exact abelian-group Hom sequences. Exactness is preserved. The five lemma, with the four neighbouring comparisons invertible by the local hypotheses, gives the global Hom comparison bijection. Tail cofinality gives representatives above any fixed j0. The filtered-set equality criterion gives equality at some k and transition coherence propagates it to every l at least k.",
+   "uses": [
+    "lem-weil-pbc-five-lemma",
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RE, lemma-descend-homomorphisms, proof (checked at https://stacks.math.columbia.edu/tag/09RE)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-perfect-hom-continuity-on",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-derived-mayer-vietoris-functorial",
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-perfect-qcoherent",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer--Vietoris induction step; local literature copy absent, online source checked; second reading uses the existing direct-image Mayer--Vietoris functoriality bridge with the adjunction unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuity of morphisms of perfect complexes on affine opens and Mayer Vietoris gluing",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom sets of perfect complexes on qcqs schemes commute with filtered ring colimits",
+   "results": "AffineTransitionLimit global-sections colimit statements; no scheme-derived Hom continuity theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectHomContinuityOn|perfect.*hom.*colimit|hom.*mayer.*vietoris",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean connecting homomorphism; no perfect-Hom comparison theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomContinuity",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF full-faithfulness argument, via Tag 09RE: Affine-open adjoining step for perfect Hom continuity",
+   "via": [
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-descend-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomContinuityUnion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomContinuityUnion.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_continuity_union",
+  "statement": "theorem perfect_hom_continuity_union {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (X : Scheme.{u}) (s : X ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V) (hcontU : PerfectHomContinuityOn R c i X s U) (hcontV : PerfectHomContinuityOn R c i X s V) (hcontUV : PerfectHomContinuityOn R c i X s (U ⊓ V)) : PerfectHomContinuityOn R c i X s (U ⊔ V)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T095935-L-2452929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T095935-L-2452929",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
