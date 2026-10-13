@@ -12445,3 +12445,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:32 L: merged deliver/T4/Sheaf.AlgebraicGeometry.Morphisms.DepthTwoAffineRestrictionSourceDepth (stage 3; reviewer PASS; first push; landing 20261013T123211-L-3678876 (proof); batch 20261013T123200; modules 1; new nodes 0)
 - 12:32 L: merged deliver/U2/Sheaf.AlgebraicGeometry.FlatFibreComponentDimensionSpecialization (stage 3; reviewer PASS; first push; landing 20261013T123212-L-3679028 (interface); batch 20261013T123200; modules 2; new nodes 1)
 - 12:32 L: merged deliver/V3/Sheaf.AlgebraicGeometry.RawModuleRestrictedAbelianNonnegative (stage 3; reviewer PASS; first push; landing 20261013T123212-L-3679197 (interface); batch 20261013T123200; modules 2; new nodes 1)
+- 12:32 L: merged deliver/W4/Sheaf.AlgebraicGeometry.FinitePresentationZeroMapAffineOpen (stage 3; reviewer PASS; first push; landing 20261013T123213-L-3679446 (interface); batch 20261013T123200; modules 3; new nodes 2)

@@ -14,41 +14,40 @@
  ],
  "proof": [
   {
-   "text": "Restrict the fixed models to the inverse image of the chosen affine open U of X_i. All later inverse images and the limit inverse image are affine, since the maps between the base spectra are affine. By the affine finite type criterion the source has finitely generated sections, and the target has finitely presented sections. The affine pullback-sections comparison identifies the maps with scalar extensions, naturally in the module morphism.",
+   "text": "The projection X_j to X_i is affine, being a base change of a morphism between affine spectra. Thus V=p_j^{-1}(U) is affine. Apply the finite affine pullback zero test to F on V, obtaining one finite testing family independent of every later stage.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-pc-affine-finite-type-pullback-zero-test",
+    "lem-weil-pbc-affine-morphism-permanence"
    ],
    "elementary": false
   },
   {
-   "text": "The coordinate rings of these affine inverse images form a directed colimit: Spec carries the colimit of the base rings to the given limit, the upper tail is cofinal, and tensor product with the coordinate ring of U commutes with colimits. Choose finite generators for the source. Present the target by a finite matrix P. Lift the image of each generator to a finite free vector. Its image at the limit is in the image of P. Represent the finitely many coefficients of the witnesses at one stage; then the finitely many entries of the resulting difference vectors are zero at a later common stage by the elementwise filtered-colimit equality criterion. Every generator consequently has zero image.",
+   "text": "Naturality of the tensor-pullback unit and the hypothesis that the pulled-back map delta is zero imply that the image delta(x) of each testing section x has zero unit image at the limit. Apply the one-section descent theorem to each such image.",
    "uses": [
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-pc-fp-section-affine-open-eventually-zero",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "The corresponding module homomorphism is zero, so its associated sheaf map is zero on every subopen. Further scalar extension preserves zero. The composition comparison for tensor pullback identifies further pullback with the direct pullback from the original stage. This gives the asserted vanishing on every subopen at every stage above the one chosen. Empty affines and zero modules are included.",
+   "text": "Choose an upper bound for the finitely many section bounds and for j. At every later k the pulled-back images of all testing sections vanish. The finite test implies that the map is zero on every open W contained in the inverse image of V under the transition X_k to X_j. The first projection identity for baseChangeMap identifies this inverse image with p_k^{-1}(U).",
    "uses": [
-    "lem-pc-module-pullback-identity-composition",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-pc-affine-finite-type-pullback-zero-test"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-filtered-colimit-commrings-elementwise",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-spec-colimit-limit"
+  "lem-pc-affine-finite-type-pullback-zero-test",
+  "lem-pc-fp-section-affine-open-eventually-zero",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-affine-morphism-permanence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
+  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument",
+  "note": "W4: Lean finite-generator argument, unit naturality, common bound, and affine sheaf test; one-section descent is the only new hole."
  },
  "mathlib_searches": [
   {
@@ -132,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T111933-L-3066783",
+  "landing": "20261013T123213-L-3679446",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
