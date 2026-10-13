@@ -3,39 +3,162 @@
  "blueprint": {
   "is": "sbc-lem-finite-range-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-range comparison",
- "statement": "If $H^q(K)=0$ outside $[a,b]$ and the comparison of the two\nhypercohomology spectral sequences of\n[def-weil-pbc-hypercohomology-filtrations] is an isomorphism on\nevery $E_2^{p,q}$, then it is an isomorphism on every abutment\n$H^n\\cong H^n$, and hence\n${\\operatorname{BC}}_{f,g}(K)$ is an isomorphism.",
+ "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$. All coefficients are abelian groups: let $K\\in D^+(\\Ab(X_{\\Et}))$ [def-weil-pbc-derived-categories], and let $a\\le b$ be integers with $\\mathcal H^q(K)=0$ for $q\\notin[a,b]$. Write $\\Phi=g^{-1}Rf_*$, $\\Psi=Rf'_*g'^{-1}$ and $\\Ex_\\square:\\Phi\\to\\Psi$ for the derived exchange transformation [def-weil-pbc-derived-exchange]. Let $\\varphi$ be the spectral-sequence morphism induced by $\\Ex_\\square$ on the two truncation couples [def-weil-pbc-truncation-exact-couples], whose spectral sequences are (2) and (3) of [def-weil-pbc-hypercohomology-filtrations]. If $\\varphi_2^{p,q}:g^{-1}R^pf_*\\mathcal H^q(K)\\to R^pf'_*g'^{-1}\\mathcal H^q(K)$ is an isomorphism for every $(p,q)$, then $\\varphi_\\infty^{p,q}$ and the induced map $\\mathcal H^n(\\Ex_{\\square,K}):\\mathcal H^n(g^{-1}Rf_*K)\\to\\mathcal H^n(Rf'_*g'^{-1}K)$ are isomorphisms for every $(p,q)$ and every $n$. Consequently $\\Ex_{\\square,K}$ is an isomorphism. In the exact master notation this is $\\operatorname{IsIso}((\\operatorname{Etale.baseChange}\\ \\Ab\\ \\mathsf{sq.toCommSq}).\\operatorname{app}K)$, where $\\mathsf{sq}:\\operatorname{IsPullback}(g',f',f,g)$ witnesses the same square and $K$ is viewed in $\\mathrm{DerivedCategory.Plus}(\\mathrm{Sheaf}(X_{\\Et},\\Ab))$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
   "place": "node sbc-lem-finite-range-comparison, order 1436"
  },
  "stmt_deps": [
-  "def-weil-pbc-hypercohomology-filtrations",
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-truncation-exact-couples",
+  "def-weil-pbc-hypercohomology-filtrations"
  ],
  "proof": [
   {
-   "text": "For a fixed total degree $n$, the abutment $H^n$ of\n[def-weil-pbc-hypercohomology-filtrations] has a finite filtration\nwith associated graded pieces the $E_\\infty^{p,q}$ with $p+q=n$, of\nwhich only those with $q\\in[a,b]$ are nontrivial; if the comparison is\nan isomorphism on every $E_2^{p,q}$ it is an isomorphism on every\n$E_\\infty^{p,q}$, hence by induction along the finite filtration on\n$H^n$.",
+   "text": "Construct $t_D^{p,q}=\\mathcal H^{p+q}(\\Ex_{\\square,\\tau_{\\le q}K})$ and $t_E^{p,q}=\\mathcal H^{p+q}(\\Ex_{\\square,\\mathcal H^q(K)[-q]})$. By [lem-weil-pbc-truncation-couple-morphism], both truncation couples are exact and these maps commute with all three structure maps, including the boundary. They therefore satisfy the exact-couple-morphism hypotheses of [lem-sp-couple-morphism], which gives compatible maps on every spectral-sequence page, not merely unrelated maps between entries. Clause (3) of [lem-weil-pbc-truncation-couple-morphism] identifies the initial components with the stated degree-$p$ exchange maps of $\\mathcal H^q(K)$. Thus this constructed morphism is the $\\varphi$ in the hypothesis.",
    "uses": [
-    "def-weil-pbc-hypercohomology-filtrations"
+    "lem-weil-pbc-truncation-couple-morphism",
+    "lem-sp-couple-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+    "place": "Proof: the comparison of the two hypercohomology spectral sequences, constructed explicitly"
+   }
+  },
+  {
+   "text": "The bound $\\mathcal H^q(K)=0$ outside $[a,b]$ implies the lower bound $q<a$ required by [lemma-weil-pbc-exact-couple-abutment]. Apply that lemma to the two couples and the map just constructed. Its clause (1) verifies $D^{p,q}=0$ for $q<a$ and $E_2^{p,q}=0$ unless $p\\ge0$ and $q\\ge a$, exactly the half-plane hypotheses required by [lem-sp-couple-morphism]. It supplies finite canonical abutment filtrations and existing limiting pages. Clause (2) supplies the isomorphisms $\\iota_n:D^{0,n}\\to\\mathcal H^n(\\Phi K)$ and $\\iota'_n:D'^{0,n}\\to\\mathcal H^n(\\Psi K)$ carrying these finite filtrations to the image filtrations on the desired abutments. Only finitely many $q\\in[a,b]$ can contribute in total degree $n$; if $n<a$, all those terms are zero.",
+   "uses": [
+    "lemma-weil-pbc-exact-couple-abutment"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+    "place": "Proof: finite filtration on each abutment and the bounds"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-page-induction] to the spectral-sequence morphism of Step 1, in the abelian category $\\Ab(Y'_{\\Et})$: the hypothesis supplies isomorphisms on every $E_2$ component, and Step 2 supplies the existing limiting pages. Hence every finite-page component and every $E_\\infty$ component is an isomorphism. Explicitly, the page induction starts with $\\varphi_2$; at a successor the componentwise inverse of $\\varphi_r$ commutes with the differential because $\\varphi_r d_r=d'_r\\varphi_r$, so it is an inverse map of page complexes. Homology and the compatible page-to-page isomorphisms give an inverse for $\\varphi_{r+1}$. The cycle and boundary subobjects defining the limiting pages are carried isomorphically by these maps. This direct page-comparison lemma has no directed-colimit hypotheses and needs no singleton-index construction.",
+   "uses": [
+    "lem-sp-page-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+    "place": "Proof: E2 isomorphisms imply Einfinity isomorphisms"
+   }
+  },
+  {
+   "text": "For fixed $n$, clause (3) of [lemma-weil-pbc-exact-couple-abutment] gives $\\iota'_n\\circ t_D^{0,n}=\\mathcal H^n(\\Ex_{\\square,K})\\circ\\iota_n$. Its clause (4) says that $u_n=\\mathcal H^n(\\Ex_{\\square,K})$ respects every step of the image filtrations and that its graded maps are precisely $\\varphi_\\infty^{p,n-p}$ under the canonical identifications. Thus $u_n$ is a morphism of the finite filtered abutments of Step 2, and all its graded maps are isomorphisms by Step 3. All hypotheses of [lem-sp-finite-filtration-induction] are now supplied, so $u_n$ is an isomorphism for each $n$ (no strictness hypothesis is needed).",
+   "uses": [
+    "lemma-weil-pbc-exact-couple-abutment",
+    "lem-sp-finite-filtration-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0127 (lemma-characterize-strict), finite-filtration induction; blueprint final clause"
+   }
+  },
+  {
+   "text": "Every geometric-stalk functor carries the cohomology-sheaf isomorphisms $u_n$ and their inverses to inverse maps. Apply [lem-weil-pbc-derived-stalk-conservative] on $Y'$ to $\\Ex_{\\square,K}:\\Phi K\\to\\Psi K$, whose two objects are bounded below as in [def-weil-pbc-derived-exchange]. It gives that $\\Ex_{\\square,K}$ itself is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-derived-stalk-conservative",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+    "place": "Proof: hence the derived comparison is an isomorphism"
+   }
+  },
+  {
+   "text": "Identify the arrow, rather than just its source and target. By [def-weil-pbc-derived-exchange], $\\Ex_{\\square,K}$ is the composite of the unit $\\eta_{f',g^{-1}Rf_*K}$, the square transport $Rf'_*\\theta^D_{\\square,Rf_*K}$, and the counit map $Rf'_*g'^{-1}\\varepsilon_{f,K}$. In exact master MorphismDefs.lean, Etale.baseChange_app expands the component into baseChangeUnitStep, baseChangeSquareStep and baseChangeCounitStep. Their component formulas are respectively these same unit, square transport, and counit, with $A=\\Ab$ and the commutative-square proof $\\mathsf{sq.toCommSq}$. The termwise exact abelian inverse images of [def-weil-pbc-derived-inverse-image] are the master's derived upper-star functors. Thus the composite equals the master component, on the same $K$, from $g^{-1}Rf_*K$ to $Rf'_*g'^{-1}K$. No $\\operatorname{ModuleCat}\\Lambda$ transformation is substituted. If one uses the alternate square notation of sbc-def-base-change-map, its letters must be renamed $(T,S,X,Y;g,f,e,h)=(X,Y,Y',X';f,g,g',f')$, so the old subscript would be $\\operatorname{BC}_{g,f}$; the statement instead names the master arrow explicitly.",
+   "uses": [
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
+    "place": "Proof final clause, expanded by agent; exact master factors read in /home/ubuntu/weil-newtargets-master/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/MorphismDefs.lean: baseChangeUnitStep_app (167), baseChangeSquareStep_hom_app (129), baseChangeCounitStep_app (184), baseChange and baseChange_app (200--209); archive copy wanted"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-hypercohomology-filtrations"
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-sp-couple-morphism",
+  "lem-sp-finite-filtration-induction",
+  "lem-sp-page-induction",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-truncation-couple-morphism",
+  "lemma-weil-pbc-exact-couple-abutment"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, expanded by existing exact-couple and page-comparison statements; master identification read from MorphismDefs.lean"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence comparison: isomorphism on E2 page implies isomorphism on E infinity and abutment with finite filtration",
+   "results": "HomologicalComplex homology-sequence lemmas and QuasiIso declarations; no theorem for convergent spectral-sequence abutment comparison",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSequence page homology isomorphism E2 E∞",
+   "results": "0 hits; query parser rejected the pattern",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*sequence.*comparison|finite.*filtration.*associated Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of convergent hypercohomology spectral sequences is an isomorphism on abutments if its E2 maps are isomorphisms",
+   "results": "CochainComplex.ConnectData.homologyIsoPos; HomologicalComplex.HomologySequence.isIso_homologyMap_τ₃; quasiIsoAt₀_iff; cm5b.instQuasiIsoIntP; quasiIsoAt_iff'; QuasiIsoAt; QuasiIso.quasiIsoAt; HomologySequence.quasiIso_τ₃. These are generic complex homology results, not spectral-sequence convergence.",
+   "date": "2026-10-14",
+   "verdict": "no match: spectral-sequence data or generic homology results only; no convergent abutment theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence",
+   "results": "CategoryTheory.SpectralSequence, SpectralSequence.Hom, page, pageFunctor, iso and related structure/projection declarations in Mathlib.Algebra.Homology.SpectralSequence.Basic; no abutment comparison.",
+   "date": "2026-10-14",
+   "verdict": "no match: spectral-sequence data or generic homology results only; no convergent abutment theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso|IsIso|convergen|abutment",
+   "results": "0 hits in the executed Mathlib grep.",
+   "date": "2026-10-14",
+   "verdict": "no match: spectral-sequence data or generic homology results only; no convergent abutment theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral sequence comparison isomorphism on E2 gives isomorphism on abutments",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -61,5 +184,54 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-finite-range-comparison",
+  "worker": "stage1",
+  "summary": "Repairs all returned gaps using the existing truncation-couple morphism, direct page induction, canonical abutment comparison, finite-filtration induction, and derived-stalk conservativity nodes. Removes the inapplicable filtered-colimit lemma, proves the final master Ab-arrow identification by expanding its three factors, and keeps the original general finite-range comparison hypotheses without adding smoothness or order-invertibility.",
+  "blueprint": "Realizes the entire sole proof paragraph: construct the comparison, finite filtration, E2-to-Einfinity, filtered abutment induction and the derived-arrow conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-couple-morphism",
+    "why": "Generic comparison construction on truncation triangles, needed for the assumed canonical morphism; this remark unit has no such construction."
+   },
+   {
+    "node": "lem-sp-couple-morphism",
+    "why": "Generic exact-couple functoriality and limiting graded-map compatibility; no lemma of the remark unit states it."
+   },
+   {
+    "node": "lemma-weil-pbc-exact-couple-abutment",
+    "why": "Generic identification and filteredness of the canonical exchange abutment, supplies the missing comparison hypotheses without a base-change isomorphism theorem."
+   },
+   {
+    "node": "lem-sp-page-induction",
+    "why": "Generic page comparison in any abelian category, preserving the blueprint E2-to-Einfinity route."
+   },
+   {
+    "node": "lem-sp-finite-filtration-induction",
+    "why": "Generic finite filtered-object isomorphism criterion explicitly required by the blueprint proof."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic detection of derived isomorphisms after the cohomology comparison; no such criterion in the remark unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-couple-morphism",
+  "lem-sp-couple-morphism",
+  "lemma-weil-pbc-exact-couple-abutment",
+  "lem-sp-page-induction",
+  "lem-sp-finite-filtration-induction",
+  "lem-weil-pbc-derived-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-f42038cbb",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-f42038cbb (reviewer sub-agent of L); spot-checked: Removed the unjustified “torsion cohomology” hypothesis from the item statement in fixes/dag/nodes/sec-smooth-base-change/sbc-lem-finite-range-comparison.json. The blueprint assumes only cohomology concentrated in [a,b], and torsion is unused by every proof step. All cited nodes, spectral-sequence arguments, edge cases, and the Ab-valued master base-change factors were checked.; 1 file(s) fixed by the reviewer"
+ }
 }
