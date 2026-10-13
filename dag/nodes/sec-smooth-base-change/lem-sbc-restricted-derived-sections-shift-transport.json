@@ -15,7 +15,12 @@
  ],
  "proof": [
   {
-   "text": "Write T and T' for restriction followed by derived global sections, L for\nD+(a^*), and tau for the derived pullback followed by the restriction-composition\ncomparison. The inverse-image adjunction on complexes is degreewise, so its unit\ncommutes with shifts. Localize that equality. The Leray comparison commutes with\nshifts because it is characterized by the composite right-derived unit, whose\nfactors commute with shifts. The comparison q^*r^* = r'^*a^* is induced from exact\nfunctors on complexes and also commutes with shifts. Whiskering and composing\nthese equalities proves shift compatibility of tau for the canonical composite\nshift structures on T and L followed by T'. Apply this identity at F[0].\nNaturality of the target shift comparison moves the arbitrary shifted morphism f\npast that comparison. Naturality of the homology shift isomorphism then identifies\nH^0 of the shifted composite with H^p of tau at F[0] followed by T'(f).\nExpand both shiftIso maps into their functor shift, homology shift and single\ncomparisons. Insert the inverse of the source single comparison immediately\nbefore the unshifted map; its product with that single comparison is the identity.\nAssociativity and functoriality give the displayed conjugation formula. This\nargument does not compute the unshifted map on any coefficient morphism and\nworks for any f, for p=0, and for an empty restricted scheme.",
+   "text": "Prove shift compatibility of the canonical right-derived unit by restricting it to K-injectives. Express that restriction using the K-injective equivalence unit, its counit, and rightDerivedFunctorIsoKInjectives.inv; naturality and the equivalence triangle identity identify the expression. These factors commute with shifts. Extend to every homotopy object using a quasi-isomorphism to a K-injective representative. This is canonical_unit_commShift, proved privately without new holes.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The derived restriction isomorphism commutes with shifts by the existing exact-functor composition and natural-isomorphism compatibility instances. The derived section pullback commutes with shifts because its adjunction unit does, and because the Leray comparison commutes with shifts when its three right-derived units do. Use Adjunction.commShift_rightDerivedFunctorUnit for the direct-image unit and the preceding private proof for both global-section units. Whisker and compose these compatibilities, inserting associators and the bounded-below lift comparison, to prove shift compatibility of tau.",
    "uses": [
     "lem-sbc-restricted-derived-section-zero-comparison",
     "def-sbc-raw-restricted-cohomology-comparison-map",
@@ -23,6 +28,19 @@
     "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "For arbitrary shift-compatible functors T, Tprime and L and a shift-compatible transformation tau, apply NatTrans.shift_app_comm at K and naturality of the target functor shift comparison at f. Apply zeroth homology and naturality of the homology shift isomorphism. Insert H^p(e.hom) followed by H^p(e.inv), whose composite is the identity, to obtain the conjugation formula. This is the private transport_homology lemma.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Specialize this generic calculation to Evaluation.functor and its explicit shiftIso and singleIso in abstract abelian categories (evaluation_shift_transport). Instantiate with the two exact etale restrictions and global-section functors and the preceding shift-compatible tau. All definitions reduce to those of the unchanged target formula. Doing the evaluation calculation abstractly avoids repeated unfolding of concrete sheaf-category constructions.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "lem-sbc-restricted-derived-section-zero-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -32,9 +50,9 @@
   "lem-weil-pbc-inverse-image-composition"
  ],
  "proof_origin": {
-  "by": "agent W3",
-  "document": "Stacks Project and parent proof plan",
-  "place": "The shift-coherence part of the parent proof, with arbitrary unshifted derived morphism and conjugation by the single comparison."
+  "by": "agent B3",
+  "document": "Stacks Project, Tags 07A6 and 0D6F; existing library shift compatibility lemmas",
+  "place": "The original shift-coherence and conjugation plan, implemented through K-injective equivalence, derived adjunction shift compatibility, and an abstract evaluation calculation."
  },
  "mathlib_searches": [
   {
@@ -120,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W3",
+  "reviewer": "X-f0b4c",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T054245-L-451674",
+  "landing": "20261013T095931-L-2451897",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node proof metadata, report, and documented local interface changes match the stated item; delivery and direct importer compile successfully, with permitted axioms only."
  }
 }
