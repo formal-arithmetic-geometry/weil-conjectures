@@ -6,7 +6,7 @@ Authors: SHEAF group R3
 module
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
+import Sheaf.AlgebraicGeometry.AffineOpenPushforwardExchange
 
 @[expose] public section
 set_option autoImplicit false
@@ -56,5 +56,51 @@ theorem affineAlternatingCech_resolution_exchange
     IsIso ((DerivedCategory.Qh (C := SheafOfModules.{u}
       (moduleRings (Spec B).toRingedSpace))).map
       ((moduleHomotopyBaseChange f (pullback.snd f g) g (pullback.fst f g)
-        pullback.condition).app D)) := by sorry
+        pullback.condition).app D)) := by
+  classical
+  obtain ⟨C, ⟨e⟩, hC⟩ := hterms
+  let F := Scheme.Modules.pushforward f ⋙ Scheme.Modules.tensorPullback g
+  let H := Scheme.Modules.tensorPullback (pullback.fst f g) ⋙
+    Scheme.Modules.pushforward (pullback.snd f g)
+  let α : F ⟶ H :=
+    { app := Scheme.Modules.moduleBaseChangeMap f (pullback.snd f g) g
+        (pullback.fst f g) pullback.condition
+      naturality := fun _ _ a ↦ Scheme.Modules.moduleBaseChangeMap_naturality
+        f (pullback.snd f g) g (pullback.fst f g) pullback.condition a }
+  have hα (k : ℤ) : IsIso (α.app (C.X k)) := by
+    obtain ⟨n, W, hW, ⟨eW⟩⟩ := hC k
+    let T : Fin n → X.Modules := fun j ↦
+      (Scheme.Modules.pushforward (W j).ι).obj (G.restrict (W j).ι)
+    have (j : Fin n) : IsIso (α.app (T j)) :=
+      affineOpen_pushforward_exchange f g G (W j) (hW j)
+    have eq : α.app (∏ᶜ T) ≫ piComparison H T =
+        piComparison F T ≫ Limits.Pi.map (fun j ↦ α.app (T j)) := by
+      apply Pi.hom_ext
+      intro j
+      simp only [Category.assoc, piComparison_comp_π, Pi.map_π]
+      rw [← Category.assoc, piComparison_comp_π]
+      exact (α.naturality (Pi.π T j)).symm
+    have : IsIso (α.app (∏ᶜ T) ≫ piComparison H T) := by
+      rw [eq]
+      infer_instance
+    have : IsIso (α.app (∏ᶜ T)) :=
+      (isIso_comp_right_iff _ (piComparison H T)).mp inferInstance
+    exact (NatTrans.isIso_app_iff_of_iso α eW).mpr inferInstance
+  have (k : ℤ) : IsIso (((NatTrans.mapHomologicalComplex α
+      (ComplexShape.up ℤ)).app C).f k) := hα k
+  have : IsIso ((NatTrans.mapHomologicalComplex α (ComplexShape.up ℤ)).app C) :=
+    HomologicalComplex.Hom.isIso_of_components _
+  have hq : IsIso ((NatTrans.mapHomotopyCategory α (ComplexShape.up ℤ)).app
+      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj C)) := by
+    change IsIso ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+      ((NatTrans.mapHomologicalComplex α (ComplexShape.up ℤ)).app C))
+    infer_instance
+  have : IsIso ((NatTrans.mapHomotopyCategory α (ComplexShape.up ℤ)).app D) :=
+    (NatTrans.isIso_app_iff_of_iso _ e).mpr hq
+  have : IsIso ((moduleHomotopyBaseChange f (pullback.snd f g) g
+      (pullback.fst f g) pullback.condition).app D) := by
+    dsimp only [moduleHomotopyBaseChange, NatTrans.comp_app]
+    change IsIso (_ ≫ (NatTrans.mapHomotopyCategory α (ComplexShape.up ℤ)).app D ≫ _)
+    infer_instance
+  infer_instance
 end AlgebraicGeometry

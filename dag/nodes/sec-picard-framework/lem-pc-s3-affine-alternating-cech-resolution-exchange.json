@@ -14,7 +14,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tags 02KG (affine arbitrary base change) and 02KH (finite affine Cech computation); expanded construction in the original exchange-resolution node docstring"
+  "place": "Tag 02KG for the affine factor; Mathlib finite products, isomorphisms of complexes and quotient functors for the formal lifting"
  },
  "mathlib_searches": [
   {
@@ -72,15 +72,20 @@
  "statement": "Fix shared derived categories [def-pc-derived-category], rings A and B, a separated f:X→Spec A, g:Spec B→Spec A, a quasi-coherent X-module G, and additive tensor pullbacks along g and p=pullback.fst f g. Suppose a homotopy complex D is isomorphic to the homotopy quotient of an integer cochain complex C. Suppose for each integer degree k there exist n and affine opens W:Fin n→X.Opens such that C.X k is isomorphic to the finite product of W_j.ι_*(G restricted to W_j), including n=0. Then the localized ordinary module exchange [lem-weil-pbc-module-base-change-map-open-restriction] for the pullback square of f and g, at D, is invertible.",
  "proof": [
   {
-   "text": "For an affine open W the inclusion j and f∘j are affine. Their ordinary exchange maps on G|W are invertible by affine pushforward base change. Transposing under the pullback adjunctions proves vertical pasting; cancel the invertible exchange for j to obtain invertibility for f on j_*G|W. Naturality transports this across the degreewise product identifications. Additive functors preserve finite biproducts, hence finite products, so exchange is degreewise invertible, also on empty products. Pass to the homotopy category and localization and transport across the specified representative isomorphism.",
+   "text": "Apply affineOpen_pushforward_exchange to each factor W_j.ι_*(G|W_j). Both exchange functors are additive, so their finite-product comparison maps are invertible. Naturality with each projection identifies exchange on the product with the product of the factor exchanges conjugated by the comparisons. This includes the empty product. Transport to C.X k across its specified isomorphism.",
    "uses": [
-    "lem-weil-pbc-affine-pushforward-base-change"
+    "lem-pc-s3-affine-open-pushforward-exchange"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use HomologicalComplex.Hom.isIso_of_components on NatTrans.mapHomologicalComplex of ordinary exchange. The quotient functor preserves this isomorphism. NatTrans.isIso_app_iff_of_iso transports it to D. The two composition identifications in moduleHomotopyBaseChange are isomorphisms, and DerivedCategory.Qh preserves the resulting isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-pushforward-base-change"
+  "lem-pc-s3-affine-open-pushforward-exchange"
  ],
  "lean": {
   "existing": false,
@@ -105,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-76fe2",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T015611-L-3026025",
+  "landing": "20261013T045536-L-130456",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged item signature and proof with its node, both new theorem signatures with their nodes and source arguments, and the recorded dependencies; all three modules and direct importer Sheaf.AlgebraicGeometry.AffineAlternatingCechPinnedMate compile cleanly, with only standard axioms and the two declared sorry dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
