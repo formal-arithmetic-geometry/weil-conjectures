@@ -1,0 +1,96 @@
+{
+ "id": "lem-sbc-flat-fibre-component-dimension-specialization-open",
+ "kind": "statement",
+ "title": "Open neighbourhood of constant fibre dimension",
+ "statement": "For a morphism flat and locally of finite presentation over an open U, a generic point x of a fibre component has an open neighbourhood V in X on which the local dimension of the corresponding fibres equals its value at x.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054T, fibre dimension is locally constant near a component generic point."
+ },
+ "proof": [
+  {
+   "text": "Apply the flat locally finitely presented fibre-dimension theorem on the restricted morphism and transport the resulting neighbourhood from the restricted fibre to X.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 054T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt",
+   "digest": "review-r3",
+   "date": "2026-10-13",
+   "results": "No existing fibrewise local-constancy theorem found.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat locally finitely presented fibre dimension locally constant near generic component point",
+   "digest": "review-r3",
+   "date": "2026-10-13",
+   "results": "Supporting Flat.generalizingMap and UniversallyOpen.of_flat only.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "topologicalKrullDimAt",
+   "digest": "review-r3",
+   "date": "2026-10-13",
+   "results": "No matching declaration.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatFibreComponentDimensionSpecialization",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-flat-fibre-component-dimension-specialization"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatFibreComponentDimensionSpecialization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatFibreComponentDimensionSpecialization.lean",
+  "declaration": "AlgebraicGeometry.exists_fibre_dimension_open_of_flat_restrict",
+  "statement": "theorem exists_fibre_dimension_open_of_flat_restrict\n    {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)\n    [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]\n    (x : X) (hx : f x ∈ U)\n    (hcomponent : f.asFiber x ∈ genericPoints (f.fiber (f x))) :\n    ∃ V : X.Opens, x ∈ V ∧\n      ∀ y ∈ V, topologicalKrullDimAt (f.asFiber y) =\n        topologicalKrullDimAt (f.asFiber x)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T115030-L-3326345",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T115030-L-3326345",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -21,6 +21,22 @@ universe u
 open CategoryTheory Topology
 namespace AlgebraicGeometry
 
+/-- A component point admits a neighbourhood on which the fibre dimension is constant.
+Source: Stacks Project, Tag 054T, the fibrewise dimension theorem used in Tag 054U.
+The proof restricts to the open base and applies the constructible constancy theorem
+for flat morphisms locally of finite presentation at a generic point of a fibre
+component, then transports the resulting open through the fibre identification.
+(blueprint: lem-sbc-flat-fibre-component-dimension-specialization-open) -/
+theorem exists_fibre_dimension_open_of_flat_restrict
+    {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
+    [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]
+    (x : X) (hx : f x ∈ U)
+    (hcomponent : f.asFiber x ∈ genericPoints (f.fiber (f x))) :
+    ∃ V : X.Opens, x ∈ V ∧
+      ∀ y ∈ V, topologicalKrullDimAt (f.asFiber y) =
+        topologicalKrullDimAt (f.asFiber x) := by
+  sorry
+
 /-- Local fibre dimension is constant along a generalization of a fibre component point.
 Source: Stacks Project, Tag 054U (lemma-dimension-fibre-specialization).
 Proof: restrict the base to U and the source to its inverse image. The original fibres
@@ -37,6 +53,10 @@ theorem fibre_dimension_eq_of_specializes_component_restrict
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]
     (x x' : X) (hx : f x ∈ U) (hx' : f x' ∈ U) (hsp : x' ⤳ x)
     (hcomponent : f.asFiber x ∈ genericPoints (f.fiber (f x))) :
-    topologicalKrullDimAt (f.asFiber x') = topologicalKrullDimAt (f.asFiber x) := by sorry
+    topologicalKrullDimAt (f.asFiber x') = topologicalKrullDimAt (f.asFiber x) := by
+  have _ := hx'
+  obtain ⟨V, hxV, hV⟩ := exists_fibre_dimension_open_of_flat_restrict
+    f U x hx hcomponent
+  exact hV x' (hsp.mem_open V.isOpen hxV)
 
 end AlgebraicGeometry
