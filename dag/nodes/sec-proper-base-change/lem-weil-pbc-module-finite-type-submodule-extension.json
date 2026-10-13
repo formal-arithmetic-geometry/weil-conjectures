@@ -33,123 +33,56 @@
  ],
  "proof": [
   {
-   "text": "*A finite affine cover.* By [lem-weil-pbc-affine-opens-basis] every point of $X$ has an affine open neighbourhood, so the affine opens cover $X$; since $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme], there are finitely many affine opens $V_1,\\dots,V_n$ ($n\\ge0$) with $X=U\\cup V_1\\cup\\dots\\cup V_n$. Put $W_0=U$ and $W_k=U\\cup V_1\\cup\\dots\\cup V_k$. Every $V_k$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], and a finite union of quasi-compact subsets is quasi-compact, so every $W_k$ is a quasi-compact open of $X$, and $W_n=X$.",
+   "text": "Apply the quasi-coherent extension theorem to the prescribed inclusion G into F.over U. The open immersion is quasi-compact since U is quasi-compact and X quasi-separated. Obtain a global quasi-coherent H, a map psi:H to F and an isomorphism alpha:H.over U to G commuting with the inclusion.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "def-weil-pbc-quasi-compact-scheme",
-    "lem-weil-pbc-affine-scheme-qcqs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PF (lemma-extend), proof, lines 2865-2894"
-   }
-  },
-  {
-   "text": "*Affine case, first part: a quasi-coherent extension.* In this and the next three steps fix a quasi-compact open $W\\subseteq X$, an affine open $V\\subseteq X$, put $W_V=W\\cap V$, and let $\\mathcal K\\subseteq\\mathcal F|_{W_V}$ be a quasi-coherent $\\mathcal O_{W_V}$-submodule of finite type; we construct a quasi-coherent submodule $\\mathcal K'\\subseteq\\mathcal F|_V$ of finite type with $\\mathcal K'|_{W_V}=\\mathcal K$. Since $V$ is affine it is quasi-compact [lem-weil-pbc-affine-scheme-qcqs], and since $X$ is quasi-compact and quasi-separated its underlying space is spectral [lem-weil-pbc-qcqs-scheme-spectral], so the intersection of two quasi-compact opens of $X$ is quasi-compact [def-weil-spectral-space]; hence $W_V$ is quasi-compact. The inclusion $j:W_V\\to V$ is quasi-compact: an affine open $T\\subseteq V$ is an affine open of $X$, hence quasi-compact, and $j^{-1}(T)=W\\cap T$ is quasi-compact by the same property of $X$. The $\\mathcal O_V$-module $\\mathcal F|_V$ is quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits] (2). Apply [lem-weil-pbc-quasi-coherent-extension-qc-open] to $j$, $\\mathcal F|_V$, $\\mathcal G=\\mathcal K$ and the inclusion $\\varphi:\\mathcal K\\to\\mathcal F|_{W_V}$: there are a quasi-coherent $\\mathcal O_V$-module $\\mathcal H_0$, an $\\mathcal O_V$-linear $\\psi:\\mathcal H_0\\to\\mathcal F|_V$ and an isomorphism $\\alpha:\\mathcal H_0|_{W_V}\\to\\mathcal K$ with $\\varphi\\circ\\alpha=\\psi|_{W_V}$. Let $\\mathcal H=\\operatorname{Im}\\psi\\subseteq\\mathcal F|_V$ (sections locally in the image of $\\psi$); it is a quasi-coherent submodule by [lem-weil-pbc-quasi-coherent-module-cokernel-image] (1), (2). Its definition is local, so for an open $T\\subseteq W_V$, $\\mathcal H(T)$ is the set of sections of $\\mathcal F(T)$ locally in the image of $\\psi|_{W_V}=\\varphi\\circ\\alpha$; as $\\alpha$ is an isomorphism this image is $\\mathcal K$ (locally, hence, $\\mathcal K$ being a sheaf, $\\mathcal H(T)=\\mathcal K(T)$). Thus $\\mathcal H|_{W_V}=\\mathcal K$.",
-   "uses": [
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "def-weil-spectral-space",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "lem-weil-pbc-quasi-coherent-extension-qc-open",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "def-weil-pbc-scheme-conventions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PF (lemma-extend), proof, lines 2865-2894"
+    "place": "Properties, Lemma 01PF (label lemma-extend), lines 2854-2894 with its proof; uses Lemma 01PE (lemma-extend-trivial) and Lemma 01PB (lemma-finite-type-module). Tags verified in stacks-project/tags/tags: 01PF,properties-lemma-extend; 01PE,properties-lemma-extend-trivial; 01PB,properties-lemma-finite-type-module"
    }
   },
   {
-   "text": "*Affine case, second part: local finite generation.* Let $R=\\mathcal O_X(V)$ and identify $V$ with $\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $N=\\mathcal H(V)$; by [lem-weil-pbc-affine-tilde-gamma-adjunction] (3) the counit $\\widetilde N\\to\\mathcal H$ is an isomorphism, so by [lem-weil-pbc-spec-module-tilde-sections] for every $f\\in R$ we have $\\mathcal H(D(f))\\cong N_f$ as $R_f$-modules, $n/f^k\\mapsto f^{-k}\\,n|_{D(f)}$. Let $u\\in W_V$. The principal opens $D(f)$ form a basis of the Zariski topology ($\\operatorname{Spec}R\\setminus V(I)=\\bigcup_{f\\in I}D(f)$), so there is $f\\in R$ with $u\\in D(f)\\subseteq W_V$. By [lem-weil-pbc-principal-localization-open-immersion] $D(f)$ is the image of the open immersion $\\operatorname{Spec}R_f\\to\\operatorname{Spec}R$, so $D(f)$ is an affine open of the scheme $W_V$ with $\\mathcal O(D(f))=R_f$. The restriction $\\mathcal K|_{D(f)}$ is of finite type (restrict the local generating sections of [def-weil-pbc-module-finite-type-presentation] (1) to the smaller opens; an epimorphism of sheaves stays one on a smaller open), so by [lem-weil-pbc-quasi-coherent-finite-type-affine] (a), applied to the scheme $W_V$, the quasi-coherent module $\\mathcal K$ and the affine open $D(f)$, the $R_f$-module $\\mathcal K(D(f))=\\mathcal H(D(f))\\cong N_f$ is finitely generated. Since $W_V$ is quasi-compact (step 2), finitely many such $D(f_1),\\dots,D(f_m)\\subseteq W_V$ cover $W_V$, and $N_{f_i}$ is generated by finitely many elements, which after multiplying numerators and denominators by powers of $f_i$ we write $x_{i,1}/f_i^e,\\dots,x_{i,r_i}/f_i^e$ with $x_{i,j}\\in N$ and one exponent $e$.",
+   "text": "Transport the finite local generators of G along alpha inverse, so H.over U is finite type. Apply global finite-type approximation to obtain a quasi-coherent finite-type E and a monomorphism j:E to H whose restriction to U is an isomorphism.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "def-weil-pbc-module-finite-type-presentation",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PF (lemma-extend), proof, lines 2865-2894"
-   }
-  },
-  {
-   "text": "*Affine case, third part: the finite type submodule.* Let $N'\\subseteq N$ be the $R$-submodule generated by all $x_{i,j}$; it is finitely generated. By the adjunction [lem-weil-pbc-affine-tilde-gamma-adjunction] (1) there is a unique $\\mathcal O_V$-linear $\\beta:\\widetilde{N'}\\to\\mathcal H$ with $\\beta_V\\circ\\tau_V$ equal to the inclusion $N'\\subseteq N=\\mathcal H(V)$. The module $\\widetilde{N'}$ is quasi-coherent [lem-weil-pbc-spec-module-tilde-sections] with $\\widetilde{N'}(V)\\cong N'$ [lem-weil-pbc-affine-tilde-gamma-adjunction] (2) finitely generated, so it is of finite type by [lem-weil-pbc-quasi-coherent-finite-type-affine] (a) (applied to the affine open $V$ of the scheme $V$). Let $\\mathcal K'=\\operatorname{Im}\\beta\\subseteq\\mathcal H\\subseteq\\mathcal F|_V$. It is a quasi-coherent submodule by [lem-weil-pbc-quasi-coherent-module-cokernel-image] (1), (2), and of finite type by [lem-weil-pbc-module-finite-type-image-extension] (1), as the image of a morphism whose source $\\widetilde{N'}$ is of finite type.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-module-finite-type-image-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PF (lemma-extend), proof, lines 2865-2894"
-   }
-  },
-  {
-   "text": "*Affine case, fourth part: $\\mathcal K'|_{W_V}=\\mathcal K$.* Fix $i$ and write $D_i=D(f_i)$. For each $j$, the section $\\beta_{D_i}(\\tau_{D_i}(x_{i,j}))=\\beta_V(\\tau_V(x_{i,j}))|_{D_i}=x_{i,j}|_{D_i}$ lies in $\\mathcal K'(D_i)$, which is an $\\mathcal O(D_i)=R_{f_i}$-submodule of $\\mathcal H(D_i)$; hence $\\mathcal K'(D_i)$ contains $f_i^{-e}x_{i,j}|_{D_i}$, which corresponds to the generator $x_{i,j}/f_i^e$ of $N_{f_i}$ under $\\mathcal H(D_i)\\cong N_{f_i}$ (step 3). So $\\mathcal K'(D_i)=\\mathcal H(D_i)$. The restrictions $\\mathcal K'|_{D_i}\\subseteq\\mathcal H|_{D_i}$ are quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits] (2) on the affine scheme $D_i\\cong\\operatorname{Spec}R_{f_i}$ [lem-weil-pbc-principal-localization-open-immersion], and the inclusion $\\iota:\\mathcal K'|_{D_i}\\to\\mathcal H|_{D_i}$ is bijective on global sections. By naturality of the counit in [lem-weil-pbc-affine-tilde-gamma-adjunction] (1), $\\iota\\circ\\varepsilon_{\\mathcal K'|_{D_i}}=\\varepsilon_{\\mathcal H|_{D_i}}\\circ\\widetilde{\\Gamma(\\iota)}$, where both counits are isomorphisms by (3) and $\\widetilde{\\Gamma(\\iota)}$ is an isomorphism as the image of one under a functor; so $\\iota$ is an isomorphism, i.e. $\\mathcal K'|_{D_i}=\\mathcal H|_{D_i}=\\mathcal K|_{D_i}$ (step 2). Finally the $D_i$ cover $W_V$: for an open $T\\subseteq W_V$ and $s\\in\\mathcal K(T)$, every $s|_{T\\cap D_i}$ lies in $\\mathcal K'(T\\cap D_i)$, so $s\\in\\mathcal K'(T)$ because $\\mathcal K'$ is a subsheaf of the sheaf $\\mathcal F|_V$; symmetrically $\\mathcal K'(T)\\subseteq\\mathcal K(T)$. Hence $\\mathcal K'|_{W_V}=\\mathcal K$.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PF (lemma-extend), proof, lines 2865-2894"
-   }
-  },
-  {
-   "text": "*One extension step (gluing).* Claim (E): if $W\\subseteq X$ is a quasi-compact open, $V\\subseteq X$ an affine open, and $\\mathcal G_W\\subseteq\\mathcal F|_W$ a quasi-coherent submodule of finite type, there is a quasi-coherent submodule $\\mathcal G''\\subseteq\\mathcal F|_{W\\cup V}$ of finite type with $\\mathcal G''|_W=\\mathcal G_W$. Indeed $\\mathcal K=\\mathcal G_W|_{W\\cap V}\\subseteq\\mathcal F|_{W\\cap V}$ is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits] (2) and of finite type (restriction, as in step 3), so steps 2–5 give a quasi-coherent submodule $\\mathcal K'\\subseteq\\mathcal F|_V$ of finite type with $\\mathcal K'|_{W\\cap V}=\\mathcal G_W|_{W\\cap V}$. For an open $T\\subseteq W\\cup V$ put $\\mathcal G''(T)=\\{s\\in\\mathcal F(T): s|_{T\\cap W}\\in\\mathcal G_W(T\\cap W),\\ s|_{T\\cap V}\\in\\mathcal K'(T\\cap V)\\}$. This is an $\\mathcal O_X(T)$-submodule, stable under restriction, and a sheaf (a section of $\\mathcal F$ glued from sections of $\\mathcal G''$ satisfies both conditions because $\\mathcal G_W$ and $\\mathcal K'$ are sheaves). For $T\\subseteq W$ and $s\\in\\mathcal G_W(T)$ we have $s|_{T\\cap V}\\in\\mathcal G_W(T\\cap V)=\\mathcal K'(T\\cap V)$ as $T\\cap V\\subseteq W\\cap V$; hence $\\mathcal G''|_W=\\mathcal G_W$, and in the same way $\\mathcal G''|_V=\\mathcal K'$. Quasi-coherence [pqf-def-coherent] (1) and finite type [def-weil-pbc-module-finite-type-presentation] (1) are conditions on a neighbourhood of each point; every point of $W\\cup V$ lies in $W$ or in $V$, where $\\mathcal G''$ restricts to $\\mathcal G_W$ or $\\mathcal K'$, which satisfy them on open neighbourhoods inside $W$ resp. $V$. So $\\mathcal G''$ is quasi-coherent of finite type.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "pqf-def-coherent",
+    "lem-weil-pbc-module-finite-type-global-approximation",
     "def-weil-pbc-module-finite-type-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PF (lemma-extend), proof, lines 2865-2894"
+    "place": "Properties, Lemma 01PF (label lemma-extend), lines 2854-2894 with its proof; uses Lemma 01PE (lemma-extend-trivial) and Lemma 01PB (lemma-finite-type-module). Tags verified in stacks-project/tags/tags: 01PF,properties-lemma-extend; 01PE,properties-lemma-extend-trivial; 01PB,properties-lemma-finite-type-module"
    }
   },
   {
-   "text": "*Induction on the number of affines.* With $W_k$ as in step 1 we show: for $k=0,\\dots,n$ there is a quasi-coherent submodule $\\mathcal G_k\\subseteq\\mathcal F|_{W_k}$ of finite type with $\\mathcal G_k|_U=\\mathcal G$. For $k=0$ take $\\mathcal G_0=\\mathcal G$. If $\\mathcal G_{k-1}$ is constructed, apply (E) of step 6 to the quasi-compact open $W=W_{k-1}$, the affine open $V=V_k$ and $\\mathcal G_W=\\mathcal G_{k-1}$: it gives $\\mathcal G_k\\subseteq\\mathcal F|_{W_k}$ quasi-coherent of finite type with $\\mathcal G_k|_{W_{k-1}}=\\mathcal G_{k-1}$, hence $\\mathcal G_k|_U=(\\mathcal G_k|_{W_{k-1}})|_U=\\mathcal G_{k-1}|_U=\\mathcal G$ since $U\\subseteq W_{k-1}$. As $W_n=X$, $\\mathcal G'=\\mathcal G_n$ is the required submodule of $\\mathcal F$.",
-   "uses": [],
-   "elementary": true,
+   "text": "Put r = j followed by psi and take its abelian image in F. The image is quasi-coherent and finite type by the existing image theorems. Restricted to U, r is the prescribed monomorphism preceded by the isomorphism j.over U followed by alpha. The restricted factorThruImage is therefore monic; open restriction preserves its epimorphicity. In the abelian category it is an isomorphism. Compose its inverse with j.over U and alpha to construct the required e, and cancel the restricted factorThruImage to verify compatibility with the inclusion.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-module-finite-type-image-extension",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PF (lemma-extend), proof, lines 2865-2894"
+    "place": "Properties, Lemma 01PF (label lemma-extend), lines 2854-2894 with its proof; uses Lemma 01PE (lemma-extend-trivial) and Lemma 01PB (lemma-finite-type-module). Tags verified in stacks-project/tags/tags: 01PF,properties-lemma-extend; 01PE,properties-lemma-extend-trivial; 01PB,properties-lemma-finite-type-module"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-opens-basis",
-  "def-weil-pbc-quasi-compact-scheme",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "def-weil-spectral-space",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "lem-weil-pbc-quasi-coherent-extension-qc-open",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-module-finite-type-global-approximation",
   "def-weil-pbc-module-finite-type-presentation",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
   "lem-weil-pbc-module-finite-type-image-extension",
-  "pqf-def-coherent"
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 01PF (lemma-extend), proof, lines 2865-2894"
+  "place": "Properties, Lemma 01PF (label lemma-extend), lines 2854-2894 with its proof; uses Lemma 01PE (lemma-extend-trivial) and Lemma 01PB (lemma-finite-type-module). Tags verified in stacks-project/tags/tags: 01PF,properties-lemma-extend; 01PE,properties-lemma-extend-trivial; 01PB,properties-lemma-finite-type-module"
  },
  "mathlib_searches": [
   {
@@ -233,7 +166,7 @@
   "module": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_quasicoherent_finiteType_submodule_extension",
   "file": "lean/Sheaf/AlgebraicGeometry/ModuleFiniteTypeSubmoduleExtension.lean",
-  "statement": "theorem exists_quasicoherent_finiteType_submodule_extension (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (U : X.Opens) (hU : IsCompact (U : Set X)) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] (G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) [G.IsQuasicoherent] [G.IsFiniteType] (ι : G ⟶ F.over U) [Mono ι] : ∃ (G' : SheafOfModules.{u} (moduleRings X.toRingedSpace)), G'.IsQuasicoherent ∧ G'.IsFiniteType ∧ ∃ (ι' : G' ⟶ F), Mono ι' ∧ ∃ (e : G'.over U ≅ G), (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).map ι' = e.hom ≫ ι",
+  "statement": "theorem exists_quasicoherent_finiteType_submodule_extension\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    (U : X.Opens) (hU : IsCompact (U : Set X))\n    (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent]\n    (G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n    [G.IsQuasicoherent] [G.IsFiniteType]\n    (ι : G ⟶ F.over U) [Mono ι] :\n    ∃ (G' : SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n      G'.IsQuasicoherent ∧ G'.IsFiniteType ∧\n        ∃ (ι' : G' ⟶ F), Mono ι' ∧ ∃ (e : G'.over U ≅ G),\n          (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).map ι' = e.hom ≫ ι",
   "branch": "sheaf-dag",
   "by": "K1",
   "date": "2026-10-11",
@@ -247,5 +180,15 @@
   "group": "K1",
   "result": "fix",
   "note": "X qcqs CompactSpace+QuasiSeparatedSpace; U qc open IsCompact; F qcoh; G qcoh+IsFiniteType on (moduleRings).over U with Mono ι into F.over U; conclusion G' qcoh+finite type, Mono ι', iso e on U compatible with inclusions (submodule equality); Mono not hollow (inferInstance fails); no let, all existentials tied; restated in H1 ef7bad70c form"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T040743-L-3947445",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

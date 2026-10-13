@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-module-finite-type-global-approximation",
+ "kind": "statement",
+ "title": "Finite-type approximation of an already global quasi-coherent module",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-pc-scheme, def-weil-pbc-scheme-conventions, def-weil-pbc-quasi-compact-scheme], $U\\subseteq X$ a quasi-compact open, and $\\mathcal H$ a quasi-coherent $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category, pqf-def-coherent]. Assume $\\mathcal H|_U$ is of finite type [def-weil-pbc-module-finite-type-presentation]. Then there exists a quasi-coherent finite-type $\\mathcal O_X$-module $\\mathcal E$ and a monomorphism $j:\\mathcal E\\to\\mathcal H$ such that $j|_U$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PF (label lemma-extend), lines 2854-2894 with its proof; uses Lemma 01PE (lemma-extend-trivial) and Lemma 01PB (lemma-finite-type-module). Tags verified in stacks-project/tags/tags: 01PF,properties-lemma-extend; 01PE,properties-lemma-extend-trivial; 01PB,properties-lemma-finite-type-module"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover of X by compactness and the affine basis. Finite unions of its members with U remain quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PF (label lemma-extend), lines 2854-2894 with its proof; uses Lemma 01PE (lemma-extend-trivial) and Lemma 01PB (lemma-finite-type-module). Tags verified in stacks-project/tags/tags: 01PF,properties-lemma-extend; 01PE,properties-lemma-extend-trivial; 01PB,properties-lemma-finite-type-module"
+   }
+  },
+  {
+   "text": "Induct over finite subsets t of the affine opens. The invariant is a global quasi-coherent module E, finite type on W = U union the opens of t, together with a monomorphism E to H whose restriction to U is an isomorphism. Initially take H and its identity. For an inserted affine V apply the affine enlargement theorem to E on W, then compose the two monomorphisms. Restricting an isomorphism on W to U preserves isomorphisms via overFunctorMap. The restrictions of the composite are isomorphisms by functoriality.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-affine-enlargement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PF (label lemma-extend), lines 2854-2894 with its proof; uses Lemma 01PE (lemma-extend-trivial) and Lemma 01PB (lemma-finite-type-module). Tags verified in stacks-project/tags/tags: 01PF,properties-lemma-extend; 01PE,properties-lemma-extend-trivial; 01PB,properties-lemma-finite-type-module"
+   }
+  },
+  {
+   "text": "For a finite affine cover, W is top. Descend the finite local generators of E.over top to E using the equivalence of iterated slice sites and the singleton top cover. This yields E.IsFiniteType with the same monomorphism and restriction isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PF (label lemma-extend), lines 2854-2894 with its proof; uses Lemma 01PE (lemma-extend-trivial) and Lemma 01PB (lemma-finite-type-module). Tags verified in stacks-project/tags/tags: 01PF,properties-lemma-extend; 01PE,properties-lemma-extend-trivial; 01PB,properties-lemma-finite-type-module"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-module-finite-type-affine-enlargement",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PF (label lemma-extend), lines 2854-2894 with its proof; uses Lemma 01PE (lemma-extend-trivial) and Lemma 01PB (lemma-finite-type-module). Tags verified in stacks-project/tags/tags: 01PF,properties-lemma-extend; 01PE,properties-lemma-extend-trivial; 01PB,properties-lemma-finite-type-module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global quasi coherent module finite type on a quasi compact open has a finite type quasi coherent submodule restricting isomorphically on that open",
+   "results": "IsFiniteType and local generator data; no submodule approximation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.LocalGeneratorsData",
+   "results": "Definitions, constructors and local generator data; no extension theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteType.*(global|approx)|finite.*subsheaf",
+   "results": "0 hits in Mathlib. Also rg of the project found only ideal-sheaf versions in WeilConjectures.Compactification.FiniteTypeExtension.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global quasi coherent module finite type on a quasi compact open has a finite type quasi coherent submodule restricting isomorphically on that open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation'); 01PF finite-type submodule extension, finite affine-cover induction (steps 1 and 7)",
+   "via": [
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFiniteTypeApproximation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finiteType_global_approximation",
+  "statement": "theorem exists_finiteType_global_approximation\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    (U : X.Opens) (hU : IsCompact (U : Set X))\n    (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [H.IsQuasicoherent]\n    [(H.over U).IsFiniteType] :\n    ∃ (E : SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n      E.IsQuasicoherent ∧ E.IsFiniteType ∧ ∃ (j : E ⟶ H),\n        Mono j ∧ IsIso ((SheafOfModules.overFunctor\n          (moduleRings X.toRingedSpace) U).map j)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T040743-L-3947445",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T040743-L-3947445",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
