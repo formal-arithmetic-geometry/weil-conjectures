@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-evaluation-free-diagram-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-adic-coefficient-datum",
+   "place": "First paragraph: the Grothendieck abelian category Tow_B(T) for arbitrary ring sheaf B_T; Free diagrams are left adjoint to evaluation.",
+   "via": [
+    "lem-weil-pbc-small-module-diagrams-grothendieck"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Free diagrams are left adjoint to evaluation",
+ "statement": "Let $J$ be a small category and let $\\mathcal A$ be a category admitting coproducts indexed by every set $\\operatorname{Hom}_J(j,k)$. For $j\\in J$ and $M\\in\\mathcal A$, define $L_j(M)$ by $L_j(M)(k)=\\coprod_{u:j\\to k}M$; its map on $v:k\\to k'$ sends the summand indexed by $u$ identically to the summand indexed by $v\\circ u$. For a morphism $t:M\\to N$, the component $L_j(t)_k$ sends each $M$ summand by $t$ to the $N$ summand with the same index. Then $L_j:\\mathcal A\\to\\operatorname{Fun}(J,\\mathcal A)$ is left adjoint to evaluation at $j$. Its natural bijection is $\\operatorname{Hom}(L_j(M),F)\\cong\\operatorname{Hom}(M,F(j))$, sending $a$ to $a_j\\circ\\iota_{\\operatorname{id}_j}$; the inverse sends $h:M\\to F(j)$ to the natural transformation whose component at $k$ is induced by the maps $F(u)\\circ h$ on the summands. These bijections commute with postcomposition by natural transformations. Colimits and their structure maps are as in [def-weil-pbc-category-colimit]; a coproduct is the colimit of the discrete diagram of its summands.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 079B (definition-grothendieck-conditions), generator ingredient for diagrams; agent construction. Exact adjunction and formulas are Mathlib/CategoryTheory/Adjunction/Evaluation.lean:38-67."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at an object of a small category has a left adjoint given by coproducts indexed by outgoing morphisms",
+   "results": "8 hits; CategoryTheory.evaluationIsRightAdjoint, CategoryTheory.evaluationLeftAdjoint_obj_obj, CategoryTheory.evaluationAdjunctionRight, CategoryTheory.evaluationLeftAdjoint_obj_map, CategoryTheory.Limits.sigmaConstAdj, CategoryTheory.evaluationLeftAdjoint, CategoryTheory.evaluationLeftAdjoint_map_app, CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-14",
+   "verdict": "Exact match to the explicit evaluation adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.evaluationAdjunctionRight",
+   "results": "3 hits; CategoryTheory.evaluationAdjunctionRight, CategoryTheory.evaluationAdjunctionRight_unit_app, CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-14",
+   "verdict": "Exact match to the explicit evaluation adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationLeftAdjoint|evaluationAdjunctionRight",
+   "results": "4 hits; 38, 54, 65, 70",
+   "date": "2026-10-14",
+   "verdict": "Exact match to the explicit evaluation adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free diagram functor is left adjoint to evaluation with natural Hom bijections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluationLeftAdjoint\"",
+   "results": "4 hits; CategoryTheory.evaluationLeftAdjoint, CategoryTheory.evaluationLeftAdjoint_obj_obj, CategoryTheory.evaluationLeftAdjoint_obj_map, CategoryTheory.evaluationLeftAdjoint_map_app",
+   "date": "2026-10-14",
+   "verdict": "Confirmed pinned declaration by source reading; search results alone are not a complete theorem match."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.evaluationAdjunctionRight",
+  "file": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+  "line": 54,
+  "how": "Exact: evaluationLeftAdjoint at lines 38-48 is the displayed coproduct functor; evaluationAdjunctionRight at lines 54-67 supplies precisely the displayed natural Hom bijection and inverse."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

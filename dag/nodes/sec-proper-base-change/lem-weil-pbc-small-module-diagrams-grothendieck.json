@@ -20,9 +20,92 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\Mod(\\mathcal O)$. Apply [lem-weil-pbc-ring-sheaves-grothendieck]: the site and the ring values are small in the specified universe, and this theorem uses left modules over arbitrary rings. Thus $\\mathcal A$ is abelian, has all small colimits and exact filtered colimits, and admits a generator $G$ detecting distinct parallel maps.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B (definition-grothendieck-conditions); Tag 079Q (remark-existence-D), ringed-site example. Agent extension to small diagrams, with explicit Mathlib ingredients cited as nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-functor-abelian-colimits] with this $\\mathcal A$ and the given small $J$. It supplies abelianness and all small colimits in $\\mathcal D=\\operatorname{Fun}(J,\\mathcal A)$. In particular the coproducts used below exist.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-functor-abelian-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B (definition-grothendieck-conditions); Tag 079Q (remark-existence-D), ringed-site example. Agent extension to small diagrams, with explicit Mathlib ingredients cited as nodes."
+   }
+  },
+  {
+   "text": "For each small filtered category $I$, the exact filtered colimits supplied in step 1 are colimits preserving finite limits. Apply [lem-weil-pbc-functor-exact-colimits] to this $I$ and $J$. The finite-limit hypothesis holds because $\\mathcal A$ is abelian. Consequently $\\mathcal D$ has exact $I$-colimits, for every such $I$, hence exact filtered colimits.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-functor-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B (definition-grothendieck-conditions); Tag 079Q (remark-existence-D), ringed-site example. Agent extension to small diagrams, with explicit Mathlib ingredients cited as nodes."
+   }
+  },
+  {
+   "text": "For each object $j$ of $J$, form $L_j(G)$ using [lem-weil-pbc-evaluation-free-diagram-adjunction]. All indexing sets $\\operatorname{Hom}_J(j,k)$ are small and $\\mathcal A$ has the required coproducts. Define $H=\\coprod_{j\\in\\operatorname{Ob}J}L_j(G)$ in $\\mathcal D$; this is a small coproduct by smallness of $J$ and step 2.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-functor-abelian-colimits",
+    "lem-weil-pbc-evaluation-free-diagram-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B (definition-grothendieck-conditions); Tag 079Q (remark-existence-D), ringed-site example. Agent extension to small diagrams, with explicit Mathlib ingredients cited as nodes."
+   }
+  },
+  {
+   "text": "To prove that $H$ is a generator, let $f,g:F\\to F'$ be distinct natural transformations. Some $j$ has $f_j\\ne g_j$. By the generator property of $G$, choose $h:G\\to F(j)$ with $f_j\\circ h\\ne g_j\\circ h$. The adjunction of [lem-weil-pbc-evaluation-free-diagram-adjunction] sends $h$ to $a:L_j(G)\\to F$; naturality in the target shows that $f\\circ a$ and $g\\circ a$ correspond to those two distinct maps and are therefore distinct. The coproduct universal property gives $b:H\\to F$ restricting to $a$ on the $j$ summand and to zero on every other summand. If $f\\circ b=g\\circ b$, precomposing with the $j$ coproduct injection would give $f\\circ a=g\\circ a$, a contradiction. Thus $H$ detects distinct parallel maps. If $J$ is empty, its functor category has exactly one morphism between any pair of objects, so the empty coproduct is a generator vacuously.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-functor-abelian-colimits",
+    "lem-weil-pbc-evaluation-free-diagram-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B (definition-grothendieck-conditions); Tag 079Q (remark-existence-D), ringed-site example. Agent extension to small diagrams, with explicit Mathlib ingredients cited as nodes."
+   }
+  },
+  {
+   "text": "We have proved that $\\mathcal D$ is abelian, has all small colimits and exact filtered colimits, and has a generator $H$. These are exactly the requirements of [def-sp-grothendieck-abelian], so $\\mathcal D$ is Grothendieck abelian.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B (definition-grothendieck-conditions); Tag 079Q (remark-existence-D), ringed-site example. Agent extension to small diagrams, with explicit Mathlib ingredients cited as nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-functor-abelian-colimits",
+  "lem-weil-pbc-functor-exact-colimits",
+  "lem-weil-pbc-evaluation-free-diagram-adjunction",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 079Q (remark-existence-D), final sentence, and Tag 079B (definition-grothendieck-conditions); explicit evaluation-left-adjoint generator construction for small diagrams."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -107,10 +190,52 @@
    "results": "3 hits; 88, 89, 90",
    "date": "2026-10-14",
    "verdict": "partial ingredients only: functor-category exact colimits and a separator are in Mathlib; the Grothendieck property for variable ring-sheaf modules is in the project source, not Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small functor category valued in sheaves of left modules over a possibly noncommutative ring sheaf is Grothendieck abelian",
+   "results": "8 hits; SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, instAbelianLightCondMod, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.sheafIsAbelian",
+   "date": "2026-10-14",
+   "verdict": "No complete match in pinned Mathlib; the exact diagram ingredients are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGrothendieckAbelian\", \"Functor\"",
+   "results": "7 hits; CategoryTheory.IsGrothendieckAbelian.exists_isIso_of_functor_from_monoOver, CategoryTheory.IsGrothendieckAbelian.instHasFunctorialFactorizationMonomorphismsRlp, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functor, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.instIsWellOrderContinuousFunctor, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver_obj, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver_map",
+   "date": "2026-10-14",
+   "verdict": "No complete match in pinned Mathlib; the exact diagram ingredients are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGrothendieckAbelian.*⥤|isGrothendieckAbelian|hasSeparator",
+   "results": "3 hits; 88, 89, 90",
+   "date": "2026-10-14",
+   "verdict": "No complete match in pinned Mathlib; the exact diagram ingredients are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small diagrams of module sheaves form a Grothendieck abelian category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of representations of a small category in a Grothendieck abelian category has AB5 and a generator",
+   "results": "8 hits; CategoryTheory.Abelian.freyd_mitchell, CategoryTheory.Limits.isGrothendieckAbelian_ind, Condensed.instAB5CondensedMod, CategoryTheory.IsGrothendieckAbelian, CategoryTheory.instAbelianInd, instAB5ModuleCat, CategoryTheory.IsGrothendieckAbelian.ab5OfSize, Condensed.instAB4CondensedMod",
+   "date": "2026-10-14",
+   "verdict": "No complete match in pinned Mathlib; the exact diagram ingredients are recorded as separate Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "AB5 and separator in categories of representations of an arbitrary small category",
+   "results": "8 hits; CategoryTheory.IsGrothendieckAbelian.hasSeparator, CategoryTheory.IsGrothendieckAbelian.GabrielPopescu.preservesFiniteLimits, CategoryTheory.IsGrothendieckAbelian.instHasCoseparator, CategoryTheory.Abelian.freyd_mitchell, Condensed.instAB5CondensedMod, CategoryTheory.IsGrothendieckAbelian.ab5OfSize, Condensed.instAB4CondensedMod, FDRep.instHasFiniteLimits",
+   "date": "2026-10-14",
+   "verdict": "No complete diagram-Grothendieck theorem among the returned hits; retain the explicit generator proof."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-weil-pbc-adic-coefficient-datum",
   "by": "worker",
@@ -126,5 +251,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-ring and arbitrary-small-diagram statement. Attached the closed project theorem for module sheaves through a smaller node, used three searched Mathlib leaves for functor-category ingredients, and wrote the generator proof using free evaluation adjoints and an explicit small coproduct. Checked empty J and noncommutative rings.",
+  "blueprint": "First paragraph of def-weil-pbc-adic-coefficient-datum: the assertion that Tow_B(T) is Grothendieck abelian for an arbitrary ring sheaf B_T; all six steps establish this via the stated small-diagram generalization."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-e0ff7d00d",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-e0ff7d00d (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Repairs are under fixes/: correct stale item citation 079A→079B; mark the explicit generator construction elementary:false; add required created/audit metadata to all four new child nodes, including the closed SheafOfModules.isGrothendieckAbelian attachment. Review written to review.md.; 5 file(s) fixed by the reviewer"
  }
 }
