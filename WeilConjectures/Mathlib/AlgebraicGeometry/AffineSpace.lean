@@ -1115,4 +1115,9 @@ lemma topologicalKrullDim_affineSpace_of_isAffine {S : Scheme.{u}} [IsAffine S]
     PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
     MvPolynomial.ringKrullDim_of_isNoetherianRing]
 
+open CategoryTheory in
+instance {S T : Scheme.{u}} (n : Type u) (f : S ⟶ T) [IsIso f] : IsIso (AffineSpace.map n f) :=
+  ⟨⟨AffineSpace.map n (inv f), by rw [← AffineSpace.map_comp, IsIso.hom_inv_id,
+    AffineSpace.map_id], by rw [← AffineSpace.map_comp, IsIso.inv_hom_id, AffineSpace.map_id]⟩⟩
+
 end AlgebraicGeometry
