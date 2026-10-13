@@ -80,10 +80,10 @@ theorem RingHom.PointsOver.exists_finset_cover (S : PointsOver φ B → Finset B
     ext F
     constructor
     · rintro ⟨ψ, rfl⟩
-      simp only [K, Set.mem_inter_iff, Set.mem_iInter, Set.mem_setOf_eq]
+      simp only [K, Set.mem_inter_iff, Set.mem_iInter, Set.mem_ofPred_eq]
       refine ⟨⟨map_one ψ.1, fun x y ↦ map_add ψ.1 x y, fun x y ↦ map_mul ψ.1 x y,
         fun a ↦ ψ.apply_algebraMap a⟩, fun b _ ↦ hER ψ b⟩
-    · simp only [K, Set.mem_inter_iff, Set.mem_iInter, Set.mem_setOf_eq]
+    · simp only [K, Set.mem_inter_iff, Set.mem_iInter, Set.mem_ofPred_eq]
       rintro ⟨⟨h1, hadd, hmul, halg⟩, -⟩
       have h0 : F 0 = 0 := by
         have := hadd 0 0

@@ -284,6 +284,7 @@ theorem Etale.overLowerStarMap_isColimit (W : S.Etale) [IsAffine W.left] :
     exact hf
 
 
+omit [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)] in
 include hc in
 /-- **The stalks of the derived direct images along `T = lim Tᵢ`**: at every geometric point
 of `S`, the stalk of `H^q(Rg_*(G|_T))` is the filtered colimit of the stalks of the
@@ -350,6 +351,7 @@ theorem Etale.presheafFiber_homologyFunctor_overLowerStarMap_limit (s : S) :
       ← Etale.shiftedHomSection_map, Point.toPresheafFiber_naturality_apply,
       ← Etale.shiftedHomSection_comp, hf, Etale.shiftedHomSection_zero, map_zero]
 
+omit [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)] in
 include hc in
 /-- **The stalks of the derived direct images along `T = lim Tᵢ`**, in terms of the fibre functor
 on sheaves: `AlgebraicGeometry.Etale.presheafFiber_homologyFunctor_overLowerStarMap_limit`. -/

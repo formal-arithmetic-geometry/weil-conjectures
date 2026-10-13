@@ -54,8 +54,8 @@ namespace Scheme.Hom.Nbhd
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
   {y : Spec (.of Ω) ⟶ Y}
 
--- the descent and the split neighbourhood are constructed in a single proof
 set_option maxHeartbeats 600000 in
+-- the descent and the split neighbourhood are constructed in a single proof
 /-- **Pointed lifting along an integral morphism.** -/
 theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
     {J : Type*} (P : J → StandardEtalePair Γ(pullback c₀.1.hom f, ⊤))
@@ -303,7 +303,7 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
         ← RingHom.comp_apply, hχ]
       rfl
     have hσt : σ (img t) = σt := by
-      letI : Algebra B₁ Ω := ((basePt f c₀ t).appTopPoint.comp (algebraMap B₁ B)).toAlgebra
+      let : Algebra B₁ Ω := ((basePt f c₀ t).appTopPoint.comp (algebraMap B₁ B)).toAlgebra
       let φ₁ : (Q₁ j₀).Ring →ₐ[B₁] Ω :=
         { σ (img t) with
           commutes' := fun b ↦ by
