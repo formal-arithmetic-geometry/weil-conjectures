@@ -14,7 +14,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35, finite-cover equalizer and adjunction paragraphs; source read online at https://stacks.math.columbia.edu/tag/0A35. The Lean existence argument remains open."
+  "place": "Tag 0A35, finite-cover equalizer and adjunction paragraphs (read at https://stacks.math.columbia.edu/tag/0A35); Q2 Lean proof via the existing raw matching lift, canonical comparison isomorphism, and stage sheaf gluing. Repair: reuse the two existing comparison helpers via import all; no duplicate helper proofs."
  },
  "mathlib_match": null,
  "status": "split",
@@ -52,27 +52,52 @@
  },
  "proof": [
   {
-   "text": "Proof: The cover R is finite by hfinite. Choose stage presentations of its finitely\nmany section values using the definition of colimitSiteStageImage. Lift their\npresenting objects and arrows, together with the cover, to one stage above i and j\nusing the object and arrow colimit hypotheses and filteredness. Stage adjunctions\nidentify the maps α with the canonical comparison maps: their composites with the\nunits agree by hα, and adjunction makes those composites determine the maps.\nEquality in the limit inverse-image sheaf is locally equality of presheaf\nrepresentatives. The exact description hQ of covers, finite composition, and\nhfinite let these local equalities be witnessed by finite stage covers. Lift\nthose witnesses to a common stage as well. Stage sheaf separatedness then makes\nthe finitely many matching equations hold on the pairwise covering pullbacks.\nThese pullbacks are preserved by hpullback and\nhVpullback. Equivalently, use that filtered colimits commute with the finite\nmatching-family equalizer, as in Tag 0A35. The transported cover remains covering\nby hcover. The sheaf at that stage therefore glues the family to a section z.\nIts image under α, restricted along the presentation of the cover's target,\nbelongs to colimitSiteStageImage by construction and restricts to each value of x.\nFor the empty cover the equalizer is the terminal set; the stage sheaf supplies\nits unique section by the same argument. Only existence on a mapped stage cover\nis asserted here; uniqueness and passage to the generated topology are separate.",
+   "text": "Obtain the canonical stage transition transformations from stage_section_transition_existence and evaluate them at G. Their adjunction unit equations uniquely determine these maps.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-colimit-site-stage-image",
-    "def-weil-pbc-finite-precoverage",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-filtered-colimit-categories",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+    "lem-weil-pbc-stage-section-transition-existence"
    ],
    "elementary": false
+  },
+  {
+   "text": "Construct the raw left-Kan-extension diagram B, its units beta, and the comparison cocone gamma using colimit_site_raw_section_diagram. Let phi be the induced presheaf colimit map to the limit inverse-image sheaf H.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-raw-section-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The raw colimit presheaf is a sheaf by colimit_site_raw_section_isSheaf. For each stage the sheafified comparison gamma is an isomorphism: uniqueness of the composite left adjoint identifies its adjunction transpose with the canonical composition isomorphism. Sheafification preserves the colimit, and the filtered under-category is connected, so the sheafified colimit comparison is an isomorphism. The two presheaves are already sheaves; naturality of their sheafification units therefore makes phi itself an isomorphism. Use the existing private theorems raw_comparison_iso and raw_colimit_comparison_iso from ColimitSiteSetSectionEventualEquality, made accessible by a proof-only import all. These helpers prove the adjunction and connected-colimit comparisons without using that module's eventual-equality conclusion.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-raw-section-sheaf",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-colimit-site-set-section-eventual-equality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse of phi pointwise to the underlying values of x. Naturality of this inverse and compatibility of x prove compatibility of the resulting raw family x-prime. Apply the existing raw matching-lift theorem to obtain a compatible stage family y, a covering presieve T, the target equality e, and its section-image equations. No stage amalgamation is supplied by this lemma.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-raw-section-matching-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stage inverse image is a sheaf, so Mathlib IsSheaf.isSheafFor_of_mem_precoverage gives an amalgamation w of y. Map w by alpha and restrict along eqToHom e.symm. The tuple (t,W,eqToHom e.symm,w) directly witnesses membership in colimitSiteStageImage. For each original covering arrow use the equality of the mapped presieve with ofArrows T to choose its stage index. Naturality of alpha and the stage gluing equation compute the restriction. Apply phi to the matching-lift image equation: the colimit coprojection equation and beta-gamma equation identify its left side with alpha(y), while phi composed with its inverse cancels on its right side. These equalities give exactly the original family value; subtype extensionality proves the required amalgamation.",
+   "uses": [
+    "def-weil-pbc-colimit-site-stage-image",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
   "def-weil-pbc-colimit-site-stage-image",
-  "def-weil-pbc-finite-precoverage",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-filtered-colimit-categories",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+  "lem-weil-pbc-colimit-site-raw-section-diagram",
+  "lem-weil-pbc-colimit-site-raw-section-matching-lift",
+  "lem-weil-pbc-colimit-site-raw-section-sheaf",
+  "lem-weil-pbc-colimit-site-set-section-eventual-equality",
+  "lem-weil-pbc-stage-section-transition-existence"
  ],
  "mathlib_searches": [
   {
@@ -114,13 +139,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T235113-L-2172271",
-  "kind": "interface",
+  "landing": "20261013T022423-L-3217256",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -10682,3 +10682,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.LocalDirectImageStalkNormalization (stage 3; reviewer PASS; first push; landing 20261013T022422-L-3216867 (interface); batch 20261013T022404; modules 2; new nodes 1)
 - 02:24 L: merged deliver/Q1/Sheaf.RingTheory.UnitMaximalMinorOfDepthZero (stage 3; reviewer PASS; first push; landing 20261013T022423-L-3217019 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.AlternatingCechTailDeletionCorrespondence (stage 3; reviewer PASS; first push; landing 20261013T022423-L-3217145 (proof); batch 20261013T022404; modules 1; new nodes 0)
+- 02:24 L: merged deliver/Q2/Sheaf.CategoryTheory.ColimitSiteStageImageAmalgamation (stage 3; reviewer PASS; after a return; landing 20261013T022423-L-3217256 (proof); batch 20261013T022404; modules 1; new nodes 0)
