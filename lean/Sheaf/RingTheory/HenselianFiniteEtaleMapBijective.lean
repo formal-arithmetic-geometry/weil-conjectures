@@ -8,8 +8,9 @@ module
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Etale.Finite
 
-import Sheaf.RingTheory.EtaleRetractionFiniteProductLocal
-import Sheaf.RingTheory.HenselianEtaleRetraction
+import Sheaf.RingTheory.FiniteOverHenselianLocalProduct
+import Sheaf.RingTheory.HenselianLocalTargetEtaleMaps
+import Mathlib.RingTheory.TensorProduct.Pi
 
 /-!
 # Morphisms of finite étale algebras over a henselian local ring
@@ -55,6 +56,68 @@ theorem bijective_baseChange_residueField_map_of_henselianLocalRing
         (S ⟶ T) →
           ((baseChange.{max u v} R (IsLocalRing.ResidueField R)).obj S ⟶
             (baseChange.{max u v} R (IsLocalRing.ResidueField R)).obj T)) := by
-  sorry
+  classical
+  obtain ⟨n, A, rings, algebras, henselian, localMaps, ⟨e⟩, hfin, _⟩ :=
+    HenselianLocalRing.finite_over_henselian_exists_algEquiv_pi R T
+  let := rings
+  let := algebras
+  let := henselian
+  have (i : Fin n) : Module.Finite R (A i) := hfin i
+  have hformal : Algebra.FormallyEtale R (∀ i, A i) :=
+    Algebra.FormallyEtale.of_equiv e
+  have (i : Fin n) : Algebra.FormallyEtale R (A i) :=
+    (Algebra.FormallyEtale.pi_iff A).mp hformal i
+  let k := IsLocalRing.ResidueField R
+  let e₀ : (TensorProduct R k T) ≃ₐ[k] (∀ i, TensorProduct R k (A i)) :=
+    (Algebra.TensorProduct.congr (AlgEquiv.refl : k ≃ₐ[k] k) e).trans
+      (Algebra.TensorProduct.piRight R k k A)
+  have hcomponent (f : S →ₐ[R] T) (x : TensorProduct R k S) (i : Fin n) :
+      e₀ (Algebra.TensorProduct.map (AlgHom.id k k) f x) i =
+        Algebra.TensorProduct.map (AlgHom.id k k)
+          ((Pi.evalAlgHom R A i).comp (e.toAlgHom.comp f)) x := by
+    induction x with
+    | zero => simp
+    | tmul a b => rfl
+    | add x y hx hy => simp_all only [map_add, Pi.add_apply]
+  have hlocal (i : Fin n) :=
+    Algebra.bijective_residueField_tensor_map_of_henselian_target R S (A i)
+  constructor
+  · intro f g hfg
+    have hi (i : Fin n) :
+        (Pi.evalAlgHom R A i).comp (e.toAlgHom.comp f.hom.hom) =
+          (Pi.evalAlgHom R A i).comp (e.toAlgHom.comp g.hom.hom) := by
+      apply (hlocal i).1
+      apply AlgHom.ext
+      intro x
+      have hh := congrArg (fun h ↦ (e₀ (h.hom.hom x)) i) hfg
+      change e₀ (Algebra.TensorProduct.map (AlgHom.id k k) f.hom.hom x) i =
+        e₀ (Algebra.TensorProduct.map (AlgHom.id k k) g.hom.hom x) i at hh
+      simpa only [hcomponent] using hh
+    apply InducedCategory.hom_ext
+    apply CommAlgCat.hom_ext
+    apply AlgHom.ext
+    intro x
+    apply e.injective
+    exact funext fun i ↦ DFunLike.congr_fun (hi i) x
+  · intro f₀
+    let fi (i : Fin n) : (TensorProduct R k S) →ₐ[k] (TensorProduct R k (A i)) :=
+      (Pi.evalAlgHom k (fun i ↦ TensorProduct R k (A i)) i).comp (e₀.toAlgHom.comp f₀.hom.hom)
+    choose f hf using fun i ↦ (hlocal i).2 (fi i)
+    let g : S →ₐ[R] T := e.symm.toAlgHom.comp (AlgHom.pi f)
+    refine ⟨⟨CommAlgCat.ofHom g⟩, ?_⟩
+    apply InducedCategory.hom_ext
+    apply CommAlgCat.hom_ext
+    apply AlgHom.ext
+    intro x
+    apply e₀.injective
+    funext i
+    have hh := DFunLike.congr_fun (hf i) x
+    change e₀ (Algebra.TensorProduct.map (AlgHom.id k k) g x) i = _
+    rw [hcomponent]
+    have hg : (Pi.evalAlgHom R A i).comp (e.toAlgHom.comp g) = f i := by
+      ext s
+      simp [g]
+    rw [hg]
+    exact hh
 
 end CommAlgCat.FiniteEtale

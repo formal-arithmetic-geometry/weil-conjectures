@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-henselian-local-target-etale-maps",
+ "kind": "statement",
+ "title": "Etale maps into a finite henselian local unramified target lift uniquely",
+ "statement": "Let R be a commutative local ring, S an etale R-algebra [def-weil-etale-morphism], and T a module-finite formally unramified R-algebra that is henselian local [def-weil-pbc-henselian-terminology]. Writing k for the residue field of R, the map Hom_R(S,T) to Hom_k(k tensor_R S,k tensor_R T), f maps to id_k tensor f, is bijective. R need not be henselian and S need not be module-finite.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GG, condition (8) and proof of (1) implies (8), applied over T; Tag 04GK full faithfulness local-target case; Tag 00UW (1) for m_R T=m_T. Sources checked online at the corresponding Stacks tag pages."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "A finite algebra T over a local ring R has all maximal ideals over the maximal ideal of R. Since T is henselian local, its structure map is local. By Mathlib Algebra.FormallyUnramified.map_maximalIdeal, m_R T = m_T. Identify k tensor_R T with T/m_R T by quotIdealMapEquivQuotTensor, then with the residue field l=T/m_T by quotientEquivAlgOfEq. Extend scalars along the surjective residue map R to k to get a k-algebra equivalence e. On 1 tensor t it is the residue of t.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-weil-pbc-etale-quotient-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an etale algebra C over a henselian local T and a T-algebra map chi:C to l, let q=ker chi. The map chi is surjective since it restricts to the surjective residue map of T; q is maximal and its contraction is m_T. The induced residue map from the residue field of T to that of q is injective as a field homomorphism. It is surjective: represent an element by c in C, choose t in T whose residue is chi(c), and use c minus the image of t in q. Apply the existing unique pointed etale retraction theorem at q. Its retraction sigma reduces exactly to chi by the same c minus t argument. Any lift tau of chi has inverse image of m_T equal to q, so uniqueness gives tau=sigma.",
+   "uses": [
+    "lem-weil-pbc-henselian-etale-retraction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change S to C=T tensor_R S; C is etale over T. TensorProduct.liftEquivRight identifies maps S to T with T-algebra maps C to T, and maps S to l with T-algebra maps C to l. A reduced map k tensor_R S to k tensor_R T, followed by e and restricted to S, yields such a point C to l. Lift it uniquely by the previous step and transport back to an R-algebra map S to T.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For injectivity, equality of two reduced maps implies equality of the residues of their values at every s, by applying e to 1 tensor s. Tensor induction shows their corresponding T-algebra maps lift the same point; uniqueness of the lift and injectivity of tensor adjunction give equality. For surjectivity, apply the residue-lifting identity to 1 tensor s. It proves equality of the lifted reduction and the given map on those elements. k-linearity gives equality on a tensor s for any a in k, and tensor induction gives equality everywhere. This includes the zero source; a zero target is excluded by HenselianLocalRing T.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-etale-quotient-base-change",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-etale-ring-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Q1 adaptation of the unique retraction criterion, Tag 04GG (8), to maps with a finite local target; the tensor adjunction and reduction identification are explicit Lean proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale algebra over a local ring has maps into a finite henselian local unramified algebra in bijection with maps after residue field base change",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from an etale algebra S over a local ring R to a finite henselian local unramified R algebra T lift uniquely from residue field base change",
+   "results": "StandardEtalePair.homEquiv and hom_ext, Ideal.ResidueField.algHom_ext, and square-zero lifting results; none is the local-target comparison. Loogle Algebra.FormallyUnramified, IsLocalRing.maximalIdeal found map_maximalIdeal, which is used for the residue identification.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; tools used in proof"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*target|target.*henselian|bijective.*residueField|residueField.*bijective in Mathlib/RingTheory and project RingTheory; blueprint_refs search henselian local morphisms and 04GG",
+   "results": "No existing local-target comparison. Existing unique pointed retraction and finite henselian decomposition read and used; Mathlib tensor adjunction, quotient and finite-product equivalences used. Blueprint searches returned no matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.HenselianFiniteEtaleMapBijective",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-henselian-finite-etale-equivalence",
+   "place": "Full-faithfulness local-target comparison; apply the 04GG (8) criterion after base change to the target instead of classifying tensor-product factors.",
+   "via": [
+    "lem-weil-pbc-henselian-finite-etale-map-bijective",
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-popescu-enlarge-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianLocalTargetEtaleMaps",
+  "file": "lean/Sheaf/RingTheory/HenselianLocalTargetEtaleMaps.lean",
+  "declaration": "Algebra.bijective_residueField_tensor_map_of_henselian_target",
+  "statement": "theorem bijective_residueField_tensor_map_of_henselian_target (R : Type u) [CommRing R] [IsLocalRing R] (S T : Type (max u v)) [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Etale R S] [FormallyUnramified R T] [Module.Finite R T] [HenselianLocalRing T] : Function.Bijective (fun f : S →ₐ[R] T ↦ (Algebra.TensorProduct.map (AlgHom.id (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField R)) f : (IsLocalRing.ResidueField R ⊗[R] S) →ₐ[IsLocalRing.ResidueField R] (IsLocalRing.ResidueField R ⊗[R] T)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T111912-L-3058898",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T111912-L-3058898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
