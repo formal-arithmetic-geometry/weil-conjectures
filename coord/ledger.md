@@ -11532,3 +11532,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/J1/Sheaf.AlgebraicGeometry.CokernelTuplePullbackLocalFreeCover (stage 3; reviewer PASS; first push; landing 20261013T072352-L-1120603 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/J1/Sheaf.Paper.TorsionModuleFlatBaseChangeIso (stage 3; reviewer PASS; first push; landing 20261013T072352-L-1120739 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/J2/Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherenceExtend (stage 3; reviewer PASS; after a return; landing 20261013T072353-L-1120863 (proof); batch 20261013T072335; modules 1; new nodes 0)
+- 07:23 L: merged deliver/J2/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential (stage 3; reviewer PASS; first push; landing 20261013T072353-L-1120999 (proof); batch 20261013T072335; modules 1; new nodes 0)
