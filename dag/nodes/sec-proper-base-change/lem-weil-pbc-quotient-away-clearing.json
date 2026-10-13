@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-quotient-away-clearing",
+ "kind": "statement",
+ "title": "Quotient localizations agree after killing the difference of ideals",
+ "statement": "Let $k,R$ be commutative rings and $R$ a $k$-algebra [def-weil-pbc-algebra-hom-quotient]. Let $J\\subseteq I$ be ideals of $R$ and $A,B\\in R$ with $Ax\\in J$ for every $x\\in I$. Then the principal localizations [def-weil-ring-localization-away] $(R/J)_{\\overline{AB}}$ and $(R/I)_{\\overline{AB}}$ are isomorphic as $k$-algebras. No nonzero or nontriviality assumption is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-ring-localization-away"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00SC (lemma-lci), proof of (2) implies (1), paragraph beginning with clearing the denominators d_i; source checked online and algebra.tex read in the sandbox scratchpad."
+ },
+ "proof": [
+  {
+   "text": "The quotient factor map R/J to R/I induces a map between the principal localizations, since AB maps to a unit; use Ideal.Quotient.factorₐ and IsLocalization.Away.liftAlgHom.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the localization of R/J, the product of the images of A and B is a unit, hence A is a unit. For x in I, the image of Ax is zero by the hypothesis. Cancel the unit A to deduce that x maps to zero. Ideal.Quotient.liftₐ therefore supplies a map R/I to the localization of R/J.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image of AB under that map is a unit, so extend it to the reverse localization map by IsLocalization.Away.liftAlgHom. The two composites fix the image of R, checked using the lift formulas. Quotient.algHom_ext and IsLocalization.algHom_ext imply both composites are identities. AlgEquiv.ofAlgHom gives the claimed equivalence, including the case B=0.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-localization-away-universal-property",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00SC (lemma-lci), proof of (2) implies (1), paragraph beginning with clearing the denominators d_i; source checked online and algebra.tex read in the sandbox scratchpad. General algebraic details expanded and proved directly in Lean by B3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For ideals J contained in I with A times I contained in J, quotient rings R/J and R/I have isomorphic localizations at the image of A times B",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If ideals J and I satisfy J contained in I and A times I contained in J then the localizations of R/J and R/I after inverting A B are isomorphic",
+   "results": "General localization equivalences, fractional ideal canonical equivalences and quotient maximal-ideal equivalences; no exact statement.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.liftAlgHom",
+   "results": "Algebra homomorphism universal property of principal localization, with the required scalar towers.",
+   "date": "2026-10-13",
+   "verdict": "Used directly in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization.Away.liftAlgHom|Quotient.factorₐ|quotient.*away.*equiv",
+   "results": "Quotient/Operations.lean line 426 gives factorₐ; localization lifts appear in several Mathlib proofs. Source of Away.liftAlgHom and quotient extensionality read directly.",
+   "date": "2026-10-13",
+   "verdict": "No exact combined theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LocalCompleteIntersectionPresentation",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "via": [
+    "lem-weil-pbc-lci-regular-sequence-global-complete-intersection-presentation",
+    "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+    "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+    "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ],
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); algebraic part of 00SC, identification of the quotient localizations before adjoining the inverse variable"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.QuotientAwayClearing",
+  "file": "lean/Sheaf/RingTheory/QuotientAwayClearing.lean",
+  "declaration": "Ideal.nonempty_quotient_away_equiv_of_clearing",
+  "statement": "theorem nonempty_quotient_away_equiv_of_clearing\n    {k : Type u} {R : Type v} [CommRing k] [CommRing R] [Algebra k R]\n    (J I : Ideal R) (hJI : J ≤ I) (A B : R)\n    (hclear : ∀ x ∈ I, A * x ∈ J) :\n    Nonempty (Localization.Away (Ideal.Quotient.mk J (A * B)) ≃ₐ[k]\n      Localization.Away (Ideal.Quotient.mk I (A * B)))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T031530-L-3568137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T031530-L-3568137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

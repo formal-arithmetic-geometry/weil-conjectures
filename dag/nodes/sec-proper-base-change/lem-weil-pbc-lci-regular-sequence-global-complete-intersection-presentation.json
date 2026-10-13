@@ -14,32 +14,30 @@
  },
  "proof": [
   {
-   "text": "Clear denominators in each local generator h_i to obtain F_i in I and s_i outside the inverse-image prime p. Unit rescaling preserves the localized generated ideal.",
+   "text": "The polynomial ring P over the field is Noetherian by Mathlib PrincipalIdealRing.isNoetherianRing and MvPolynomial.isNoetherianRing. Apply the common-multiplier theorem to I and p=q.comap(mk I), obtaining F_i in I and A outside p with A I contained in J=(F_i).",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "P is a Noetherian polynomial ring over a field. Take finitely many generators u_j of I and clear denominators in their membership in (F_i)P_p. Equality in localization gives v_j outside p with v_j u_j in (F_i). For A=product v_j, A I is contained in (F_i), and (F_i) is contained in I.",
-   "uses": [
+    "lem-weil-pbc-local-generators-clearing",
     "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-pbc-localization-at-prime"
+    "def-weil-pbc-noetherian-ring"
    ],
    "elementary": false
   },
   {
-   "text": "Let a be the image of A and lift an arbitrary b in P/I to B in P. Evaluation P[x] to (P/I)_(a*b) has kernel I P[x]+(ABx-1). For u in I the identity u=-u(ABx-1)+xB(Au) shows this kernel equals (F_i,ABx-1).",
+   "text": "Set a=mk I A; it is outside q by the definition of p. For any b in P/I choose a lift B in P by quotient surjectivity. Since J is contained in I and A I is contained in J, the quotient-away-clearing theorem identifies (P/J) localized at mk J (A B) with (P/I) localized at a*b.",
    "uses": [
-    "lem-weil-pbc-polynomial-coefficient-map-kernel",
-    "lem-weil-pbc-localization-away-polynomial-quotient",
-    "def-weil-ring-localization-away"
+    "lem-weil-pbc-quotient-away-clearing"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the algebra first isomorphism theorem and rename the n+1 variables and e+1 relations by Fin. a is outside q since A is outside its inverse image p. No dimension or regularity assertion is used.",
+   "text": "Apply the already proved inverse-variable presentation to the finite family F_i and polynomial A B. This presents the localization of P/J with Option(Fin n) variables and Option(Fin e) equations.",
+   "uses": [
+    "new-equation-count-localize-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finSuccEquiv and MvPolynomial.renameEquiv to reindex Option(Fin n) by Fin(n+1), and precompose the relation family with finSuccEquiv e. Its range is the image of the old relation range under the polynomial equivalence, by surjectivity of finSuccEquiv e. Ideal.map_span and Ideal.quotientEquivAlg give the reindexed quotient equivalence. Compose its inverse with the presentation and the quotient-localization comparison.",
    "uses": [
     "def-weil-pbc-mv-polynomial-ring"
    ],
@@ -47,17 +45,16 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-local-generators-clearing",
   "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-polynomial-coefficient-map-kernel",
-  "lem-weil-pbc-localization-away-polynomial-quotient",
-  "def-weil-ring-localization-away"
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-quotient-away-clearing",
+  "new-equation-count-localize-presentation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00SC, (2) implies (1), clearing denominators and the polynomial presentation; checked at https://stacks.math.columbia.edu/tag/00SC"
+  "place": "Algebra, Lemma 00SC (lemma-lci), proof of (2) implies (1), paragraph beginning with clearing the denominators d_i; source checked online and algebra.tex read in the sandbox scratchpad. General algebraic details expanded and proved directly in Lean by B3."
  },
  "mathlib_searches": [
   {
@@ -127,12 +124,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T230752-L-1906968",
+  "landing": "20261013T031530-L-3568137",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

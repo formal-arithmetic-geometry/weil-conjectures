@@ -3,6 +3,12 @@ module
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.RingTheory.Polynomial.Basic
+import Mathlib.RingTheory.PrincipalIdealDomain
+import Mathlib.Logic.Equiv.Fin.Basic
+import Sheaf.RingTheory.LocalGeneratorsClearing
+import Sheaf.RingTheory.QuotientAwayClearing
+import Sheaf.RingTheory.EquationCountLocalizePresentation
 
 /-!
 # Presentation of a principal localization from a local regular sequence
@@ -55,6 +61,42 @@ theorem exists_principal_localization_presentation_of_local_generators
         ∃ f : Fin (e + 1) → MvPolynomial (Fin (n + 1)) k,
           Nonempty ((MvPolynomial (Fin (n + 1)) k ⧸
             Ideal.span (Set.range f)) ≃ₐ[k] Localization.Away (a * b)) := by
-  sorry
+  classical
+  let : q.IsPrime := hq
+  let p := q.comap (Ideal.Quotient.mk I)
+  obtain ⟨F, A, hA, hFI, hclear⟩ :=
+    Ideal.exists_clearing_of_local_generators I p e h hgen
+  let J := Ideal.span (Set.range F)
+  have hJI : J ≤ I := Ideal.span_le.mpr (by
+    rintro _ ⟨i, rfl⟩
+    exact hFI i)
+  refine ⟨Ideal.Quotient.mk I A, hA, ?_⟩
+  intro b
+  obtain ⟨B, rfl⟩ := Ideal.Quotient.mk_surjective b
+  rw [← map_mul]
+  obtain ⟨comparison⟩ :=
+    Ideal.nonempty_quotient_away_equiv_of_clearing (k := k) J I hJI A B hclear
+  obtain ⟨pres, _, _⟩ := exists_localization_presentation k n e F (A * B)
+  let rel : Option (Fin e) → MvPolynomial (Option (Fin n)) k :=
+    Option.elim' (MvPolynomial.rename some (A * B) * MvPolynomial.X none - 1)
+      (fun i ↦ MvPolynomial.rename some (F i))
+  let ren := MvPolynomial.renameEquiv k (finSuccEquiv n).symm
+  let f : Fin (e + 1) → MvPolynomial (Fin (n + 1)) k :=
+    fun i ↦ ren (rel (finSuccEquiv e i))
+  have hrange : Set.range f = ren '' Set.range rel := by
+    ext x
+    constructor
+    · rintro ⟨i, rfl⟩
+      exact ⟨rel (finSuccEquiv e i), ⟨_, rfl⟩, rfl⟩
+    · rintro ⟨_, ⟨i, rfl⟩, rfl⟩
+      exact ⟨(finSuccEquiv e).symm i, by simp [f]⟩
+  have hmap : Ideal.span (Set.range f) =
+      Ideal.map ren.toRingHom (Ideal.span (Set.range rel)) := by
+    rw [Ideal.map_span]
+    exact congrArg Ideal.span hrange
+  let reindex := Ideal.quotientEquivAlg (Ideal.span (Set.range rel))
+    (Ideal.span (Set.range f)) ren hmap
+  refine ⟨f, ⟨?_⟩⟩
+  exact reindex.symm.trans (pres.trans comparison)
 
 end Algebra
