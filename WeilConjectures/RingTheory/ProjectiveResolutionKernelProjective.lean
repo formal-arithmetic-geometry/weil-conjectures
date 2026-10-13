@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.RingTheory.GlobalDimension
+import WeilConjectures.RingTheory.ProjectiveResolutionExtDegree
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 import Mathlib.CategoryTheory.Abelian.Projective.Dimension
@@ -114,15 +115,10 @@ theorem projective_kernel_of_partial_projective_resolution
     (hF : ∀ (i : ℕ) (hi : i < e + 1),
       Module.Projective R (S.obj' i (Nat.le_of_lt hi))) :
     Module.Projective R (kernel (C := ModuleCat.{max u v} R) (S.map' 0 1)) := by
-  have := HasExt.standard (ModuleCat.{max u v} R)
-  obtain ⟨P, hP⟩ := hM
-  have hdim : HasProjectiveDimensionLT S.right (e + 2) := by
-    apply HasProjectiveDimensionLT.mk
-    intro i hi Y x
-    obtain ⟨f, hf, rfl⟩ := P.extMk_surjective x (i + 1) (by omega)
-    have hfzero : f = 0 := (hP i (by omega)).eq_of_src _ _
-    subst f
-    exact P.extMk_zero _ _
+  have : HasProjectiveDimensionLE S.right d :=
+    (hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE _ d).mp hM
+  have hdim : HasProjectiveDimensionLT S.right (e + 2) :=
+    hasProjectiveDimensionLT_of_ge _ (d + 1) (e + 2) (by omega)
   have hcat : ∀ i (hi : i < e + 1),
       Projective (S.obj' i (Nat.le_of_lt hi)) := by
     intro i hi
@@ -171,25 +167,5 @@ theorem projective_of_exact_partial_projective_resolution
       have hp : CategoryTheory.Projective K := Projective.of_iso iso.symm hkcat
       let := hp
       infer_instance
-
-/-- A module admitting a length-zero projective resolution is projective.
-Source: Stacks Project, Algebra, proof of Lemma 00O5, case `d = 0`
-(blueprint: lem-weil-pbc-projective-resolution-kernel-projective).
-
-Proof (node Steps 2 and 9): the resolution is `0 → P_0 → M → 0`, so its
-augmentation is both injective and surjective. It gives an isomorphism from
-projective `P_0` to `M`; use lem-weil-pbc-projective-direct-summand (2). -/
-theorem projective_of_projective_resolution_length_zero
-    {R : Type u} [CommRing R] (M : ModuleCat.{max u v} R)
-    (hM : HasProjectiveResolutionLE M 0) : Module.Projective R M := by
-  obtain ⟨P, hP⟩ := hM
-  have hd : P.complex.d 1 0 = 0 := (hP 1 (by omega)).eq_of_src _ _
-  have hi : CategoryTheory.IsIso (P.π.f 0) :=
-    CategoryTheory.Limits.CokernelCofork.IsColimit.isIso_π
-      P.cokernelCofork P.isColimitCokernelCofork hd
-  have hp : CategoryTheory.Projective M :=
-    CategoryTheory.Projective.of_iso (CategoryTheory.asIso (P.π.f 0)) (P.projective 0)
-  let := hp
-  infer_instance
 
 end ModuleCat

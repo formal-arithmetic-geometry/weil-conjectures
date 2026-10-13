@@ -11,7 +11,8 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Algebra.Category.ModuleCat.Differentials.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import WeilConjectures.RingTheory.StandardSmoothDimensionAtPoints
+import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Differentials of a smooth morphism and fibre dimension
@@ -57,6 +58,49 @@ theorem smooth_differentials_free_rank_fibre_dimension
             x ∈ W ∧ IsAffineOpen V ∧ IsAffineOpen W ∧
               Nonempty (Module.Basis (Fin d) (Γ(X, W))
                 (CommRingCat.KaehlerDifferential (f.appLE V W hWV))) := by
-  sorry
+  classical
+  obtain ⟨U, hU, V, hV, hx, e, hf⟩ := (Smooth.iff_forall_exists_isStandardSmooth f).mp ‹_› x
+  let := (f.appLE U V e).hom.toAlgebra
+  obtain ⟨ι, σ, _, _, ⟨pres⟩⟩ := hf.out
+  have : Fintype ι := Fintype.ofFinite _
+  have : Fintype σ := Fintype.ofFinite _
+  refine ⟨pres.dimension, ?_, U, V, e, hx, hU, hV, ⟨?_⟩⟩
+  · have : IsAffine U := hU
+    have : IsAffine V := hV
+    have hres : SmoothOfRelativeDimension pres.dimension (f.resLE U V e) := by
+      rw [HasRingHomProperty.iff_of_isAffine (P := @SmoothOfRelativeDimension pres.dimension)]
+      have : (RingHom.toMorphismProperty (RingHom.Locally
+          (RingHom.IsStandardSmoothOfRelativeDimension pres.dimension))).RespectsIso :=
+        RingHom.toMorphismProperty_respectsIso_iff.mp <|
+          (HasRingHomProperty.isLocal_ringHomProperty
+            (@SmoothOfRelativeDimension pres.dimension)).respectsIso
+      exact (MorphismProperty.arrow_mk_iso_iff (RingHom.toMorphismProperty
+          (RingHom.Locally (RingHom.IsStandardSmoothOfRelativeDimension pres.dimension)))
+          (arrowResLEAppIso f U V e)).mpr
+        (RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _
+          (pres.isStandardSmoothOfRelativeDimension rfl))
+    let W := (f.fiberι (f x)) ⁻¹ᵁ V
+    have hW : f.asFiber x ∈ W := by
+      change f.fiberι _ (f.asFiber x) ∈ V
+      rwa [Scheme.Hom.fiberι_asFiber]
+    have : SmoothOfRelativeDimension pres.dimension (V.ι ≫ f) := by
+      rw [← Scheme.Hom.resLE_comp_ι f e]
+      have : SmoothOfRelativeDimension (pres.dimension + 0) (f.resLE U V e ≫ U.ι) :=
+        inferInstance
+      simpa using this
+    have hpb : IsPullback (f.fiberι (f x) ∣_ V) (W.ι ≫ f.fiberToSpecResidueField (f x))
+        (V.ι ≫ f) (S.fromSpecResidueField (f x)) :=
+      (isPullback_morphismRestrict (f.fiberι (f x)) V).paste_vert
+        (IsPullback.of_hasPullback _ _)
+    have : SmoothOfRelativeDimension pres.dimension
+        (W.ι ≫ f.fiberToSpecResidueField (f x)) := by
+      have := smoothOfRelativeDimension_isStableUnderBaseChange (n := pres.dimension)
+      exact MorphismProperty.of_isPullback hpb inferInstance
+    rw [← IsOpen.topologicalKrullDimAt_eq W.isOpen hW]
+    exact @topologicalKrullDimAt_eq_of_smoothOfRelativeDimension _ _ _
+      (W.ι ≫ f.fiberToSpecResidueField (f x)) pres.dimension this ⟨_, hW⟩
+  · refine pres.basisKaehler.reindex (Fintype.equivFinOfCardEq ?_)
+    simp only [Fintype.card_compl_set, Algebra.Presentation.dimension, Nat.card_eq_fintype_card,
+      Set.card_range_of_injective pres.map_inj]
 
 end AlgebraicGeometry

@@ -7,9 +7,8 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import WeilConjectures.AlgebraicGeometry.FpqcDescendQuasiCompact
-import WeilConjectures.AlgebraicGeometry.FpqcLocalOnBaseCriterion
-import WeilConjectures.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Descent of affine morphisms along fpqc coverings
@@ -59,6 +58,10 @@ theorem isAffineHom_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v}
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)
     (h : ∀ i, IsAffineHom (pullback.snd f (g i))) : IsAffineHom f := by
-  sorry
+  have := IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact
+  exact Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (P := @IsAffineHom)
+    (Precoverage.generate_mem_toGrothendieck hg) f
+    (fun i ↦ pullback.fst f (g i)) (fun i ↦ pullback.snd f (g i))
+    (fun i ↦ IsPullback.of_hasPullback f (g i)) h
 
 end AlgebraicGeometry

@@ -9,6 +9,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Limit
 
 /-! # Higher direct image transition compatibility
 
@@ -48,6 +50,25 @@ theorem higher_direct_image_transition_core_composition
             ((upperStarComp (ModuleCat.{u + 1} Λ) b a).hom.app F))) =
       higherDirectImageTransition Λ a h h' wa q F ≫
         higherDirectImageTransition Λ b h' h'' wb q
-          (((a)^*[ModuleCat.{u + 1} Λ]).obj F) := by sorry
+          (((a)^*[ModuleCat.{u + 1} Λ]).obj F) := by
+  have hc := lowerStarPlusTransition_comp Λ a b (b ≫ a) rfl h h' h'' wa wb
+    (by rw [Category.assoc, wa, wb]) ((DerivedCategory.Plus.singleFunctor _ 0).obj F)
+  have hs := upperStarCompDerivedPlus_hom_app_singleFunctor Λ b a (b ≫ a) rfl F
+  have hs' : (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) b a (b ≫ a) rfl).inv.app
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫
+      (((b ≫ a)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F ≫
+      (DerivedCategory.Plus.singleFunctor _ 0).map
+        ((upperStarComp (ModuleCat.{u + 1} Λ) b a (b ≫ a) rfl).hom.app F) =
+      D+((b)^*[ModuleCat.{u + 1} Λ]).map
+        ((((a)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F) ≫
+      (((b)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
+        (((a)^*[ModuleCat.{u + 1} Λ]).obj F) := by
+    rw [← hs, Iso.inv_hom_id_app_assoc]
+  simp only [higherDirectImageTransition, ← Functor.map_comp, Category.assoc]
+  congr 1
+  rw [reassoc_of% (lowerStarPlusTransition_naturality Λ b h' h'' wb
+    ((((a)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F)), ← hc]
+  simp only [Category.assoc, ← Functor.map_comp]
+  rw [hs']
 
 end AlgebraicGeometry.Etale

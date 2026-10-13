@@ -65,6 +65,21 @@ theorem krull_intersection_localization
     (p : Ideal R) [p.IsPrime] (hIp : I ≤ p) :
     let N : Submodule R M := ⨅ n : ℕ, I ^ n • ⊤
     ∃ f : R, f ∉ p ∧ Subsingleton (LocalizedModule.Away f N) := by
-  sorry
+  intro N
+  have hN : ∀ k, (I.stableFiltration ⊤ ⊓ I.trivialFiltration N).N k = N :=
+    fun k => inf_eq_right.mpr ((iInf_le _ k).trans <| le_of_eq <| by simp)
+  obtain ⟨f, hf₁, hf₂⟩ :=
+    Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul I N
+      (IsNoetherian.noetherian N) (by
+        obtain ⟨k, hk⟩ := (I.stableFiltration_stable ⊤).inter_right (I.trivialFiltration N)
+        have := hk k le_rfl
+        rw [hN, hN] at this
+        exact this.symm.le)
+  refine ⟨f, fun hf => ?_, ?_⟩
+  · exact (Ideal.IsPrime.ne_top ‹_›) ((Ideal.eq_top_iff_one _).2
+      (by simpa using p.sub_mem hf (hIp hf₁)))
+  · rw [LocalizedModule.subsingleton_iff]
+    rintro ⟨x, hx⟩
+    exact ⟨f, Submonoid.mem_powers f, Subtype.ext (hf₂ x hx)⟩
 
 end RingTheory

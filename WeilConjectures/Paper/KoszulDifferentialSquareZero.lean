@@ -49,7 +49,8 @@ theorem koszul_differential_square_zero
       ∀ (n : ℕ) (x : ⋀[R]^(n + 1) E),
         CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R E)) φ
           (CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R E)) φ
-            (x : ExteriorAlgebra R E)) = 0 := by
-  sorry
+            (x : ExteriorAlgebra R E)) = 0 :=
+  ⟨LinearMap.ext fun x => CliffordAlgebra.contractLeft_contractLeft (Q := 0) φ x,
+    fun _ x => CliffordAlgebra.contractLeft_contractLeft (Q := 0) φ (x : ExteriorAlgebra R E)⟩
 
 end ExteriorAlgebra

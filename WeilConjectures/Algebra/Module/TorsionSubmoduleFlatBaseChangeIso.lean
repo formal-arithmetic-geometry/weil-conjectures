@@ -71,4 +71,82 @@ theorem Ideal.primaryComponent_baseChange_bijective
       ((Ideal.primaryComponent.map I (TensorProduct.mk R S M 1)) :
         Ideal.primaryComponent M I →ₗ[R]
           Ideal.primaryComponent (S ⊗[R] M) I) := by
-  sorry
+  classical
+  have hflat' : Module.Flat R S := RingHom.flat_algebraMap_iff.mp hflat
+  set T := primaryComponent M I with hT
+  -- Step 6: `T → S ⊗ T` is bijective.
+  have hTbij : Function.Bijective (TensorProduct.mk R S T 1) := by
+    have htors : ∀ x : T, ∃ n : ℕ, 0 < n ∧ ∀ y : R, y ∈ I ^ n → y • x = 0 := by
+      intro x
+      obtain ⟨n, hn⟩ := (primaryComponent_mem M I (x : M)).mp x.2
+      refine ⟨n + 1, n.succ_pos, fun y hy ↦ Subtype.ext ?_⟩
+      exact (Submodule.mem_torsionBySet_iff _ _).mp hn
+        ⟨y, Ideal.pow_le_pow_right n.le_succ hy⟩
+    have h := RingTheory.torsionModule_flat_baseChange_bijective (T := T) (algebraMap R S)
+      hflat I ⟨RingEquiv.ofBijective _ hquot, fun r ↦ by
+        simp [Ideal.quotientMap_mk]⟩ htors
+    have hcomp : (Module.compHom S (algebraMap R S) : Module R S) = Algebra.toModule :=
+      Module.ext' _ _ fun r s ↦ (Algebra.smul_def r s).symm
+    rw [hcomp] at h
+    have hfun : ⇑(TensorProduct.mk R S T 1) =
+        (TensorProduct.comm R T S) ∘ fun x : T ↦ x ⊗ₜ[R] (1 : S) := by
+      funext x; simp
+    rw [hfun]
+    exact (TensorProduct.comm R T S).bijective.comp h
+  -- Step 5: `S ⊗ T → S ⊗ M` is injective by flatness.
+  have hinj : Function.Injective (T.subtype.lTensor S) :=
+    Module.Flat.lTensor_preserves_injective_linearMap _ T.injective_subtype
+  -- Steps 3–4: `S ⊗ (M ⧸ T)` has no `I`-torsion.
+  have hnotors : ∀ y : S ⊗[R] (M ⧸ T), (∀ a ∈ I, a • y = 0) → y = 0 := by
+    obtain ⟨s, hs⟩ := hI
+    let ψ : (M ⧸ T) →ₗ[R] (s → M ⧸ T) := LinearMap.pi fun k ↦ (k : R) • LinearMap.id
+    have hψ : Function.Injective ψ := by
+      rw [injective_iff_map_eq_zero]
+      intro x hx
+      apply eq_zero_of_annihilated_quotient_primaryComponent I ⟨s, hs⟩ x
+      have hle : I ≤ LinearMap.ker (LinearMap.toSpanSingleton R _ x) := by
+        rw [← hs, Ideal.span_le]
+        intro k hk
+        simpa [ψ] using congrFun hx ⟨k, hk⟩
+      intro a ha
+      simpa using hle ha
+    have hψ' := Module.Flat.lTensor_preserves_injective_linearMap (M := S) ψ hψ
+    have key : ∀ (k : s) (y : S ⊗[R] (M ⧸ T)),
+        TensorProduct.piRight R R S (fun _ : s ↦ M ⧸ T) (ψ.lTensor S y) k = (k : R) • y := by
+      intro k y
+      induction y using TensorProduct.induction_on with
+      | zero => simp
+      | tmul a b => simp [ψ, TensorProduct.tmul_smul]
+      | add a b ha hb => simp only [map_add, Pi.add_apply, ha, hb, smul_add]
+    intro y hy
+    apply hψ'
+    apply (TensorProduct.piRight R R S (fun _ : s ↦ M ⧸ T)).injective
+    rw [map_zero, map_zero]
+    funext k
+    rw [key, hy k (hs ▸ Ideal.subset_span k.2)]
+    rfl
+  have hnotors' : ∀ y : S ⊗[R] (M ⧸ T), y ∈ primaryComponent _ I → y = 0 := by
+    intro y hy
+    obtain ⟨n, hn⟩ := (primaryComponent_mem _ I y).mp hy
+    clear hy
+    induction n generalizing y with
+    | zero => simpa using (Submodule.mem_torsionBySet_iff _ _).mp hn ⟨1, by simp⟩
+    | succ n ih =>
+      apply ih
+      rw [Submodule.mem_torsionBySet_iff]
+      rintro ⟨a, ha⟩
+      apply hnotors
+      intro b hb
+      rw [smul_smul]
+      exact (Submodule.mem_torsionBySet_iff _ _).mp hn
+        ⟨b * a, by rw [pow_succ']; exact Ideal.mul_mem_mul hb ha⟩
+  -- Step 7: conclude.
+  constructor
+  · intro x y hxy
+    have h := congrArg Subtype.val hxy
+    exact hTbij.1 (hinj (by simpa using h))
+  · rintro ⟨y, hy⟩
+    have h0 : T.mkQ.lTensor S y = 0 := hnotors' _ (primaryComponent_map_mem I _ ⟨y, hy⟩)
+    obtain ⟨z, rfl⟩ := (lTensor_exact S (LinearMap.exact_subtype_mkQ T) T.mkQ_surjective y).mp h0
+    obtain ⟨t, rfl⟩ := hTbij.2 z
+    exact ⟨t, Subtype.ext (by simp)⟩

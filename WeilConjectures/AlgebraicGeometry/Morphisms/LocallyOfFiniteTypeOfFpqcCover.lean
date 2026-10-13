@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 import WeilConjectures.AlgebraicGeometry.FpqcLocalOnBaseCriterion
 
 /-!
@@ -47,6 +48,12 @@ theorem locallyOfFiniteType_of_fpqcCover
     (g : ∀ i, S' i ⟶ S) (hcover : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)
     (h : ∀ i, LocallyOfFiniteType (pullback.snd f (g i))) :
     LocallyOfFiniteType f := by
-  sorry
+  refine fpqc_local_on_base_criterion (P := @LocallyOfFiniteType) ?_ ?_ f g hcover h
+  · intro X S T f g _ hf
+    exact MorphismProperty.pullback_snd f g hf
+  · intro S T X _ _ f g hflat hsurj hlft
+    exact MorphismProperty.of_pullback_snd_of_descendsAlong
+      (P := @LocallyOfFiniteType) (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact)
+      ⟨⟨hsurj, hflat⟩, inferInstance⟩ hlft
 
 end AlgebraicGeometry

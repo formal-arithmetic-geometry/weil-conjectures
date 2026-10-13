@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.Separable
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.GroupWithZero.Basic
-import WeilConjectures.RingTheory.SeparablePolynomialQuotientReduced
+import Mathlib.RingTheory.Unramified.Field
 
 /-!
 # Reducedness of a finite separable extension tensored with a field
@@ -53,6 +53,10 @@ theorem isReduced_tensorProduct_of_finiteSeparable
     (L : Type u) (K : Type v) (E : Type w)
     [Field L] [Field K] [Field E] [Algebra L K] [Algebra L E]
     [FiniteDimensional L K] [Algebra.IsSeparable L K] : IsReduced (K ⊗[L] E) := by
-  sorry
+  have : FormallyUnramified L K := .of_isSeparable L K
+  have : EssFiniteType E (E ⊗[L] K) := .of_finiteType _ _
+  have := FormallyUnramified.isReduced_of_field E (E ⊗[L] K)
+  exact isReduced_of_injective (Algebra.TensorProduct.comm L K E).toRingHom
+    (Algebra.TensorProduct.comm L K E).injective
 
 end Algebra

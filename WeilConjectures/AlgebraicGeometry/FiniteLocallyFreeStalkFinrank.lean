@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Stalk finrank of a finite locally free module
 
@@ -222,7 +222,8 @@ private lemma sum_coordinate_basis {I : Type u} [Fintype I] [DecidableEq I]
     _ = m := he
 
 /-- A finite local trivialization induces an explicit linear equivalence on stalks. -/
-private noncomputable def localStalkEquiv {I : Type u} [Fintype I] [DecidableEq I]
+@[no_expose] noncomputable def localStalkEquiv (x : X) (U : X.Opens) (hx : x ∈ U) {I : Type u}
+    [Fintype I] [DecidableEq I]
     (e : M.over U ≅ SheafOfModules.free I) :
     M.presheaf.stalk x ≃ₗ[X.presheaf.stalk x] (I → X.presheaf.stalk x) :=
   LinearEquiv.ofBijective (LinearMap.pi fun j ↦

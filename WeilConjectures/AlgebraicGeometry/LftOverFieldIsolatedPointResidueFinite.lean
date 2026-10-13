@@ -10,8 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import WeilConjectures.ZetaSeries
-import WeilConjectures.RingTheory.IsolatedPrimeResidueFinite
-import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC
+import WeilConjectures.PointCount
 
 @[expose] public section
 
@@ -44,6 +43,8 @@ theorem lft_over_field_isolated_point_residue_finite
     (hy : IsOpen ({y} : Set Y)) :
     (letI := (g.residueFieldAlgebraMap y).toAlgebra
     FiniteDimensional k (Y.residueField y)) := by
-  sorry
+  have : JacobsonSpace Y := LocallyOfFiniteType.jacobsonSpace g
+  exact g.finite_residueField_of_isClosed y
+    (isClosed_singleton_of_isLocallyClosed_singleton hy.isLocallyClosed)
 
 end AlgebraicGeometry

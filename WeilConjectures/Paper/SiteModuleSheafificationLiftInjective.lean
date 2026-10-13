@@ -45,6 +45,25 @@ lemma site_module_sheafification_lift_injective
     (∀ (X : Cᵒᵖ), Function.Injective (((SheafOfModules.toSheaf R).map
       ((PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).symm f)).hom.app X)) ∧
       Mono ((PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).symm f) := by
-  sorry
+  have fac : CategoryTheory.toSheafify J P.presheaf ≫
+      ((SheafOfModules.toSheaf R).map
+        ((PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).symm f)).hom =
+      (PresheafOfModules.toPresheaf R.obj).map f :=
+    (PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def (𝟙 R.obj)
+      ((PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).symm f)).symm.trans
+      (congrArg (PresheafOfModules.toPresheaf R.obj).map
+        ((PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).apply_symm_apply f))
+  have : Presheaf.IsLocallyInjective J (CategoryTheory.toSheafify J P.presheaf ≫
+      ((SheafOfModules.toSheaf R).map
+        ((PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).symm f)).hom) := by
+    rw [fac]; assumption
+  have := Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective J
+    (CategoryTheory.toSheafify J P.presheaf)
+    ((SheafOfModules.toSheaf R).map
+        ((PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).symm f)).hom
+  have hinj := (Sheaf.isLocallyInjective_iff_injective _).1 this
+  refine ⟨hinj, ?_⟩
+  have := Sheaf.mono_of_injective _ hinj
+  exact (SheafOfModules.toSheaf R).mono_of_mono_map this
 
 end CategoryTheory

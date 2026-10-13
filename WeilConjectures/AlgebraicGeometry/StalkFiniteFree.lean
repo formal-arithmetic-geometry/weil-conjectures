@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 @[expose] public section
 universe u
 open CategoryTheory
@@ -30,5 +31,15 @@ theorem stalk_isFiniteFree_of_isFiniteLocallyFree
         ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj M) ∧
       Module.Finite (X.presheaf.stalk x)
         ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj M) := by
-  sorry
+  classical
+  obtain ⟨q, hq, hfin⟩ :=
+    (inferInstance : M.IsFiniteLocallyFree).exists_localGeneratorsData
+  obtain ⟨V, f, ⟨i, ⟨g⟩⟩, hxV⟩ := q.coversTop ⊤ x trivial
+  have hx : x ∈ q.X i := g.le hxV
+  have := hfin.isFiniteType i
+  have : Fintype (q.generators i).I := Fintype.ofFinite _
+  let E := localStalkEquiv M x (q.X i) hx (asIso (q.generators i).π).symm
+  change Module.Free (X.presheaf.stalk x) (M.presheaf.stalk x) ∧
+    Module.Finite (X.presheaf.stalk x) (M.presheaf.stalk x)
+  exact ⟨Module.Free.of_equiv E.symm, Module.Finite.equiv E.symm⟩
 end AlgebraicGeometry.Scheme.Modules

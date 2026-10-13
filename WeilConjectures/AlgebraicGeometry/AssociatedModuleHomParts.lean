@@ -16,6 +16,32 @@ open scoped ChangeOfRings
 namespace AlgebraicGeometry
 variable (X : SheafedSpace CommRingCat.{u})
 
+/-- A morphism out of the tensor presheaf `U ↦ O_X(U) ⊗_R M` is determined by its values on the
+global pure tensors `1 ⊗ m`: every `1 ⊗ m` over `U` is the restriction of `1 ⊗ m` over `X`,
+so naturality determines the component at `U` on generators
+(Stacks, Modules, Lemma 01BH (4); blueprint: associated-module-hom-injective). -/
+theorem associatedModulePresheaf_hom_ext
+    (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))))
+    {F : PresheafOfModules.{u} (associatedRingSheaf X).obj}
+    {h₁ h₂ : associatedModulePresheaf X M ⟶ F}
+    (h : ∀ m : M,
+      (ModuleCat.ExtendRestrictScalarsAdj.Unit.map
+          (associatedRestriction X (op (⊤ : Opens (X : Type u)))).hom ≫
+        (ModuleCat.restrictScalars _).map (h₁.app (op ⊤))) m =
+      (ModuleCat.ExtendRestrictScalarsAdj.Unit.map
+          (associatedRestriction X (op (⊤ : Opens (X : Type u)))).hom ≫
+        (ModuleCat.restrictScalars _).map (h₂.app (op ⊤))) m) :
+    h₁ = h₂ := by
+  ext1 U
+  apply ModuleCat.ExtendScalars.hom_ext
+  intro m
+  have hm := (Classical.choose_spec (associatedExtension_restriction_existsUnique X M
+    (homOfLE (le_top : U.unop ≤ ⊤)).op)).1 1 m
+  rw [map_one] at hm
+  rw [← hm]
+  erw [PresheafOfModules.naturality_apply, PresheafOfModules.naturality_apply, h m]
+  rfl
+
 /-- Injectivity part of the associated-module Hom correspondence
  (blueprint: associated-module-hom-injective).
 Source: Stacks Project, Modules, Lemma 01BH assertion (4).
@@ -31,7 +57,13 @@ theorem associatedModuleHom_injective
       (fun (φ : associatedModule X M ⟶ G) =>
         associatedModuleCanonicalSection X M ≫
           φ.val.app (op (⊤ : Opens (X : Type u)))) := by
-  sorry
+  intro φ ψ hφψ
+  have hσ : associatedModuleSheafificationMap X M ≫ ψ.val =
+      associatedModuleSheafificationMap X M ≫ φ.val :=
+    associatedModulePresheaf_hom_ext X M fun m ↦ (ConcreteCategory.congr_hom hφψ m).symm
+  obtain ⟨k, -, hk⟩ := associatedModuleSheafificationMap_universal X M G
+    (associatedModuleSheafificationMap X M ≫ φ.val)
+  exact (hk φ rfl).trans (hk ψ hσ).symm
 
 /-- Surjectivity part of the associated-module Hom correspondence
  (blueprint: associated-module-hom-surjective).

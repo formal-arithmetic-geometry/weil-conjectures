@@ -13,13 +13,16 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.RingTheory.Depth
+public import Mathlib.AlgebraicGeometry.Fiber
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/- Mathematical caveat: The cover need not split over the section. Take c and sigma
+/- Mathematical caveat: without the fibre-density hypothesis `hclosed` (the Tag 0EYJ input,
+cf. `hclosed` in `flat_of_smooth_local_depth_two_finite_extension`) the cover need not split
+over the section. Take c and sigma
 both the identity of Spec A, where A = Q[x^2,xy,y^2], and U the complement of the
 vertex m = (x^2,xy,y^2). The restriction of Spec Q[x,y] to U is finite etale.
 A_m has depth two, but its relative normalization B = Q[x,y] localized over A_m
@@ -45,6 +48,7 @@ theorem stalk_normalization_depth_two_section_flat_core {S C : Scheme.{u}}
     (U : S.Opens) (hηU : genericPoint S ∈ U)
     (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (s : S) (hs : s ∉ U)
+    (hclosed : Dense (↑((c.fiberι s) ⁻¹ᵁ (c ⁻¹ᵁ U)) : Set (c.fiber s)))
     (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth
       (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :

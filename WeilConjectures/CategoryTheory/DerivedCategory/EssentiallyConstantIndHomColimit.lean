@@ -9,6 +9,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstantInd
 public import Mathlib.CategoryTheory.Yoneda
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
+public import Mathlib.CategoryTheory.Limits.Types.ColimitTypeFiltered
 
 /-!
 # Hom into an essentially constant ind-diagram
@@ -52,6 +53,19 @@ theorem essentiallyConstantInd_hom_colimit_bijective
       ((F ⋙ coyoneda.obj (op Y)).descColimitType
         ((F ⋙ coyoneda.obj (op Y)).coconeTypesEquiv.symm
           ((coyoneda.obj (op Y)).mapCocone { pt := X, ι := h.2.choose }))) := by
-  sorry
+  have : IsFiltered J := h.1
+  obtain ⟨j₀, s, hs, hfac⟩ := h.2.choose_spec
+  set c := (F ⋙ coyoneda.obj (op Y)).coconeTypesEquiv.symm
+    ((coyoneda.obj (op Y)).mapCocone { pt := X, ι := h.2.choose }) with hc
+  have hι : ∀ (j : J) (f : Y ⟶ F.obj j), c.ι j f = f ≫ h.2.choose.app j := fun _ _ ↦ rfl
+  refine ⟨?_, fun g ↦ ⟨(F ⋙ coyoneda.obj (op Y)).ιColimitType j₀ (g ≫ s), ?_⟩⟩
+  · rw [Functor.CoconeTypes.descColimitType_injective_iff_of_isFiltered']
+    intro j f f' hff'
+    rw [hι, hι] at hff'
+    obtain ⟨k, a, b, hb⟩ := hfac j
+    refine ⟨k, b, ?_⟩
+    change f ≫ F.map b = f' ≫ F.map b
+    rw [hb, reassoc_of% hff']
+  · rw [Functor.descColimitType_ιColimitType_apply, hι, Category.assoc, hs, Category.comp_id]
 
 end CategoryTheory

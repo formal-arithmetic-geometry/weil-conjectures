@@ -12,6 +12,8 @@ public import Mathlib.Topology.Spectral.ConstructibleTopology
 public import Mathlib.Topology.Constructions
 import WeilConjectures.Topology.Spectral.ConstructibleTopologyHausdorff
 import WeilConjectures.Topology.SpectralMapConstructibleContinuous
+import WeilConjectures.Topology.SpectralLimitConstructibleClosedNonempty
+import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 
 /-!
 # Quasi-compact limits of constructibly closed subsets
@@ -25,6 +27,51 @@ Source: Stacks Project, Topology, Tag 0A2V, parts (1) and (2)
 universe u v w
 
 namespace Topology
+
+/-- Let `X` be the limit of an inverse system of Hausdorff spaces `Y i`, in the sense that
+compatible families are uniquely realized by points of `X`, and a map into `X` is continuous
+as soon as all its projections are. Then for compact subsets `Z i`, the set of points of `X`
+whose projections lie in every `Z i` is compact. -/
+theorem isCompact_limit_of_t2
+    {I : Type u} [Preorder I] (Y : I → Type v)
+    [tC : ∀ i : I, TopologicalSpace (Y i)] [hT2 : ∀ i : I, T2Space (Y i)]
+    (f : ∀ (i j : I), i ≤ j → Y j → Y i)
+    (hf : ∀ (i j : I) (h : i ≤ j), Continuous (f i j h))
+    {X : Type w} [TopologicalSpace X] (p : ∀ i : I, X → Y i)
+    (hp_compat : ∀ (i j : I) (h : i ≤ j) (x : X), f i j h (p j x) = p i x)
+    (hlimit : ∀ y : (∀ i : I, Y i),
+      (∀ (i j : I) (h : i ≤ j), f i j h (y j) = y i) →
+      ∃! x : X, ∀ i : I, p i x = y i)
+    (hcont : ∀ {T : Type (max u v)} [TopologicalSpace T] (φ : T → X),
+      (∀ i : I, Continuous (p i ∘ φ)) → Continuous φ)
+    (Z : ∀ i : I, Set (Y i)) (hZ : ∀ i : I, IsCompact (Z i)) :
+    IsCompact {x : X | ∀ i : I, p i x ∈ Z i} := by
+  let S : Set (∀ i : I, Y i) :=
+    Set.pi Set.univ Z ∩ {y | ∀ (i j : I) (h : i ≤ j), f i j h (y j) = y i}
+  have hS_closed : IsClosed S := by
+    refine (isClosed_set_pi fun i _ => (hZ i).isClosed).inter ?_
+    simp only [Set.ofPred_forall]
+    exact isClosed_iInter fun i => isClosed_iInter fun j => isClosed_iInter fun h =>
+      isClosed_eq ((hf i j h).comp (continuous_apply j)) (continuous_apply i)
+  have : CompactSpace S := isCompact_iff_compactSpace.mp
+    ((isCompact_univ_pi hZ).of_isClosed_subset hS_closed Set.inter_subset_left)
+  let φ : S → X := fun y => (hlimit y.1 y.2.2).exists.choose
+  have hφ : ∀ (y : S) (i : I), p i (φ y) = y.1 i := fun y =>
+    (hlimit y.1 y.2.2).exists.choose_spec
+  have hφc : Continuous φ := hcont φ fun i => by
+    have : p i ∘ φ = fun y : S => y.1 i := funext fun y => hφ y i
+    rw [this]
+    exact (continuous_apply i).comp continuous_subtype_val
+  convert isCompact_range hφc using 1
+  ext x
+  constructor
+  · intro hx
+    have hy : (fun i => p i x) ∈ S :=
+      ⟨fun i _ => hx i, fun i j h => hp_compat i j h x⟩
+    exact ⟨⟨_, hy⟩, (hlimit _ hy.2).unique (hφ ⟨_, hy⟩) fun _ => rfl⟩
+  · rintro ⟨y, rfl⟩ i
+    rw [hφ y i]
+    exact y.2.1 i trivial
 
 /-- For an inverse system of spectral spaces indexed by any preorder, constructibly closed
 compatible subsets have a quasi-compact limit, and the whole limit is quasi-compact.
@@ -55,9 +102,6 @@ theorem isCompact_limit_constructibleClosed
     [tY : ∀ i : I, TopologicalSpace (Y i)] [∀ i : I, SpectralSpace (Y i)]
     (f : ∀ (i j : I), i ≤ j → Y j → Y i)
     (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h))
-    (hf_id : ∀ (i : I) (x : Y i), f i i le_rfl x = x)
-    (hf_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : Y k),
-      f i j hij (f j k hjk x) = f i k (le_trans hij hjk) x)
     {X : Type w} [tX : TopologicalSpace X] (p : ∀ i : I, X → Y i)
     (hp : ∀ i : I, Continuous (p i))
     (hp_compat : ∀ (i j : I) (h : i ≤ j) (x : X), f i j h (p j x) = p i x)
@@ -66,9 +110,21 @@ theorem isCompact_limit_constructibleClosed
       ∃! x : X, ∀ i : I, p i x = y i)
     (htop : tX = ⨅ i : I, TopologicalSpace.induced (p i) (tY i))
     (Z : ∀ i : I, Set (Y i))
-    (hZ : ∀ i : I, IsClosed[constructibleTopology (Y i)] (Z i))
-    (hZ_compat : ∀ (i j : I) (h : i ≤ j), f i j h '' Z j ⊆ Z i) :
+    (hZ : ∀ i : I, IsClosed[constructibleTopology (Y i)] (Z i)) :
     IsCompact {x : X | ∀ i : I, p i x ∈ Z i} ∧ CompactSpace X := by
-  sorry
+  have key : ∀ Z' : ∀ i : I, Set (Y i),
+      (∀ i : I, IsClosed[constructibleTopology (Y i)] (Z' i)) →
+        IsCompact {x : X | ∀ i : I, p i x ∈ Z' i} := fun Z' hZ' =>
+    isCompact_limit_of_t2 (tC := fun i => constructibleTopology (Y i)) Y
+      (hT2 := fun i => t2Space_constructibleTopology (Y i)) f
+      (fun i j h => (hf i j h).continuous_constructibleTopology) p hp_compat hlimit
+      (fun φ hφ => by
+        subst htop
+        exact continuous_iInf_rng.2 fun i => continuous_induced_rng.2 <|
+          continuous_le_rng constructibleTopology_le (hφ i)) Z'
+      (fun i => @IsClosed.isCompact _ (constructibleTopology (Y i)) _
+        (compactSpace_constructibleTopology (Y i)) (hZ' i))
+  refine ⟨key Z hZ, isCompact_univ_iff.mp ?_⟩
+  simpa using key (fun _ => Set.univ) fun i => @isClosed_univ _ (constructibleTopology (Y i))
 
 end Topology

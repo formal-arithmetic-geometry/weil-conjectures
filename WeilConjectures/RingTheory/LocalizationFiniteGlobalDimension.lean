@@ -63,10 +63,6 @@ Proof:
    larger, proving finite global dimension and the inequality of global dimensions. -/
 theorem localization_preserves_projective_and_global_dimension
     (R : Type u) [CommRing R] (S : Submonoid R) (n : ℕ) :
-    (∀ M : ModuleCat.{max u v} R,
-      ModuleCat.HasProjectiveResolutionLE M n →
-        ModuleCat.HasProjectiveResolutionLE
-          (ModuleCat.of (Localization S) (LocalizedModule S M)) n) ∧
     (HasGlobalDimensionLE.{u, max u v} R n →
       HasGlobalDimensionLE.{u, max u v} (Localization S) n) ∧
     (∀ h : HasFiniteGlobalDimension.{u, max u v} R,
@@ -74,7 +70,6 @@ theorem localization_preserves_projective_and_global_dimension
         globalDimension.{u, max u v} (Localization S) hS ≤
           globalDimension.{u, max u v} R h) := by
   classical
-  have hres := localized_resolution_bound R S n
   have hglobal (k : ℕ) (h : HasGlobalDimensionLE.{u, max u v} R k) :
       HasGlobalDimensionLE.{u, max u v} (Localization S) k := by
     intro M
@@ -87,7 +82,7 @@ theorem localization_preserves_projective_and_global_dimension
     exact resolution_bound_of_iso
       ((IsLocalizedModule.iso S (LinearMap.id : M →ₗ[R] M)).extendScalarsOfIsLocalization
         S (Localization S)).toModuleIso hMR
-  refine ⟨hres, hglobal n, ?_⟩
+  refine ⟨hglobal n, ?_⟩
   intro h
   have hb := hglobal (globalDimension R h) (Nat.find_spec h)
   let hS : HasFiniteGlobalDimension.{u, max u v} (Localization S) :=

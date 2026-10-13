@@ -8,7 +8,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
-import WeilConjectures.AlgebraicGeometry.SpecFiniteProductFields
+import Mathlib.RingTheory.ZariskisMainTheorem
+import Mathlib.RingTheory.Unramified.LocalStructure
 
 /-!
 # Étale ring maps are quasi-finite at every prime
@@ -52,6 +53,14 @@ theorem finiteType_and_isQuasiFiniteAtPrime_of_etale
     ∃ hft : Algebra.FiniteType R S,
       letI := hft
       ∀ q : PrimeSpectrum S, Algebra.IsQuasiFiniteAtPrime R S q := by
-  sorry
+  have : Algebra.Etale R S := by
+    rw [← RingHom.etale_algebraMap]
+    exact (AlgebraicGeometry.HasRingHomProperty.Spec_iff (P := @AlgebraicGeometry.Etale)).mp h
+  refine ⟨inferInstance, fun q ↦ ?_⟩
+  have : Algebra.QuasiFiniteAt R q.asIdeal := inferInstance
+  have ho := (Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber q).mp this
+  unfold Algebra.IsQuasiFiniteAtPrime
+  simpa only [Set.image_singleton] using
+    (PrimeSpectrum.preimageHomeomorphFiber R S (q.comap (algebraMap R S))).isOpen_image.mpr ho
 
 end Algebra

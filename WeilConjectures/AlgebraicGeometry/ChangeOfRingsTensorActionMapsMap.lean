@@ -23,6 +23,8 @@ set_option hygiene false in
 local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj S
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The presheaf change-of-rings map exists with its section formula.
 Source: Stacks Project, Morphisms, proof of Lemma 01SB.
 (blueprint: lem-weil-pbc-change-of-rings-tensor-action-maps-map).
@@ -53,5 +55,48 @@ theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
         g.app (op W) (c ⊗ₜ[Y.presheaf.obj (op W)] p) =
           (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C.right).obj)).unit.app
             (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)).app (op W))
-            (c ⊗ₜ[B.right.obj.obj (op W), (φ.right.hom.app (op W)).hom] p) := by sorry
+            (c ⊗ₜ[B.right.obj.obj (op W), (φ.right.hom.app (op W)).hom] p) := by
+  classical
+  intro P₀ T
+  let K := (PresheafOfModules.restrictScalars (𝓻 C.hom).hom).obj
+    (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)
+  let η : K ⟶ T.val :=
+    (PresheafOfModules.restrictScalars (𝓻 C.hom).hom).map
+      ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C.right).obj)).unit.app
+        (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P))
+  have hφ (W : Y.Opensᵒᵖ) (r : Y.presheaf.obj W) :
+      φ.right.hom.app W (B.hom.hom.app W r) = C.hom.hom.app W r := by
+    rw [← Under.w φ]
+    rfl
+  let h (W : Y.Opensᵒᵖ) : C.right.obj.obj W →+ P.val.obj W →+ K.obj W :=
+    AddMonoidHom.mk' (fun c ↦ AddMonoidHom.mk'
+      (fun p ↦ c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p)
+      (fun p p' ↦ TensorProduct.tmul_add _ _ _))
+      (fun c c' ↦ AddMonoidHom.ext fun p ↦ TensorProduct.add_tmul _ _ _)
+  have hb (W : Y.Opensᵒᵖ) (r : Y.presheaf.obj W) (c : C.right.obj.obj W)
+      (p : P.val.obj W) :
+      h W (C.hom.hom.app W r * c) p = h W c (B.hom.hom.app W r • p) := by
+    sorry
+  let L (W : Y.Opensᵒᵖ) : (C.toModule.val ⊗ P₀.val).obj W →+ K.obj W :=
+    TensorProduct.liftAddHom (h W) (hb W)
+  let m : C.toModule.val ⊗ P₀.val ⟶ K :=
+    { app := fun W ↦ ModuleCat.ofHom (X := (C.toModule.val ⊗ P₀.val).obj W) (Y := K.obj W)
+        { toFun := L W
+          map_add' := (L W).map_add
+          map_smul' := by
+            intro r x
+            induction x using TensorProduct.induction_on with
+            | zero => simp
+            | tmul c p =>
+              sorry
+            | add x y hx hy => simpa only [smul_add, map_add] using congrArg₂ (· + ·) hx hy }
+      naturality := by
+        intro W V i
+        ext x
+        induction x using TensorProduct.induction_on with
+        | zero => simp
+        | tmul c p =>
+          sorry
+        | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy }
+  refine ⟨m ≫ η, fun W c p ↦ rfl⟩
 end AlgebraicGeometry.Scheme.Modules

@@ -17,6 +17,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
@@ -86,6 +88,30 @@ theorem isIso_derivedBaseChangeMapPlus_torsion_assembly
       ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app
         ((DerivedCategory.Plus.singleFunctor
           (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) := by
-  sorry
+  have hT : F.IsTorsion := (Scheme.isTorsionAbelianSheaf_characterizations F).1.1 hF
+  have hK : DerivedCategory.Plus.torsionHomology X
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F) := by
+    intro n
+    by_cases hn : n = 0
+    · subst hn
+      have : Scheme.IsTorsionSheaf F := (Scheme.isTorsionSheaf_iff_isTorsion F).2 hT
+      exact Scheme.IsTorsionSheaf.of_iso (F := F)
+        ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).app F).symm
+    · have hZ : IsZero ((DerivedCategory.Plus.homologyFunctor _ n).obj
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) :=
+        IsZero.of_iso (HomologicalComplex.isZero_single_obj_homology _ _ _ _ hn)
+          ((DerivedCategory.homologyFunctorFactors _ n).app _)
+      refine (Scheme.isTorsionSheaf_iff_isTorsion _).2
+        (Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_)
+      have : IsZero ((sheafToPresheaf _ _ ⋙ (evaluation _ _).obj U).obj
+          ((DerivedCategory.Plus.homologyFunctor _ n).obj
+            ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) :=
+        Functor.map_isZero _ hZ
+      have := AddCommGrpCat.isZero_iff_subsingleton.1 this
+      rw [@Subsingleton.elim _ this x 0]
+      exact IsOfFinAddOrder.zero
+  have h := isIso_baseChange_of_isProper sq _ hK
+  rw [baseChange_eq_derivedBaseChangeMapPlus] at h
+  exact ⟨h, fun _ ↦ inferInstance⟩
 
 end AlgebraicGeometry.Etale

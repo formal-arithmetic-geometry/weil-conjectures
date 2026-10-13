@@ -220,17 +220,17 @@ theorem exists_presheaf_ext_local_killing_witness
     (x : Ext ((presheafToSheaf J AddCommGrpCat).obj (P ⋙ AddCommGrpCat.free)) F q) :
     ∃ (E : Cᵒᵖ ⥤ Type v) (f : E ⟶ P),
       Presheaf.IsLocallySurjective J f ∧
-      ∃ h : (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
-        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0, True := by
+      (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
+        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0 := by
   obtain ⟨G, g, hg, hx⟩ := Ext.exists_epi_comp_eq_zero q hq x
   let : Epi g := hg
   obtain ⟨E, f, hf, l, hl⟩ := exists_presheaf_cover_lift P G g
-  refine ⟨E, f, hf, ?_, trivial⟩
+  refine ⟨E, f, hf, ?_⟩
   rw [← hl, ← Ext.mk₀_comp_mk₀_assoc, hx]
   simp
 
 /-- The local Ext killing conclusion. (blueprint: lem-sc-presheaf-free-ext-local-killing)
-Proof: apply the preceding Yoneda witness theorem and discard its trivial marker. -/
+Proof: apply the preceding Yoneda witness theorem. -/
 theorem exists_presheaf_ext_local_killing
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}]
@@ -240,8 +240,7 @@ theorem exists_presheaf_ext_local_killing
     (x : Ext ((presheafToSheaf J AddCommGrpCat).obj (P ⋙ AddCommGrpCat.free)) F q) :
     ∃ (E : Cᵒᵖ ⥤ Type v) (f : E ⟶ P), Presheaf.IsLocallySurjective J f ∧
       (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
-        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0 := by
-  obtain ⟨E, f, hf, h, _⟩ := exists_presheaf_ext_local_killing_witness F P q hq x
-  exact ⟨E, f, hf, h⟩
+        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0 :=
+  exists_presheaf_ext_local_killing_witness F P q hq x
 
 end CategoryTheory.Sheaf

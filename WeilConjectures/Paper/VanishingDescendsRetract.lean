@@ -70,6 +70,13 @@ theorem vanishing_descends_retract
             (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
             ((sheafCompose X.smallEtaleTopology
               (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj I)))) := by
-  sorry
+  intro q hq
+  let G := sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) ⋙
+    DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
+    rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h ⋙
+    DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) q
+  have : IsSplitMono (G.map ι) := .mk' ⟨G.map ρ, by rw [← G.map_comp, hρ, G.map_id]⟩
+  exact IsZero.of_mono (G.map ι) (hM q hq)
 
 end AlgebraicGeometry.Etale

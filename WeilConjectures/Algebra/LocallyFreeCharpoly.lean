@@ -7,6 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.CharpolyLocallyFree
+import Mathlib.RingTheory.Localization.BaseChange
+import Mathlib.LinearAlgebra.Charpoly.BaseChange
+import Mathlib.Algebra.Ring.ULift
+import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-! # Characteristic polynomial of a finite locally free module of constant rank
 
@@ -23,6 +27,71 @@ open scoped TensorProduct
 namespace Algebra
 
 variable {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
+
+private theorem charpoly_baseChange_tower
+    {A S T M : Type*} [CommRing A] [CommRing S] [CommRing T]
+    [Algebra A S] [Algebra A T] [Algebra S T] [IsScalarTower A S T]
+    [AddCommGroup M] [Module A M] {n : ℕ}
+    (b : Module.Basis (Fin n) S (S ⊗[A] M))
+    (e : Module.Basis (Fin n) T (T ⊗[A] M)) (φ : M →ₗ[A] M) :
+    (LinearMap.toMatrix b b (φ.baseChange S)).charpoly.map (algebraMap S T) =
+      (LinearMap.toMatrix e e (φ.baseChange T)).charpoly := by
+  have := Module.Free.of_basis b
+  have := Module.Finite.of_basis b
+  have := Module.Free.of_basis e
+  have := Module.Finite.of_basis e
+  let L := _root_.TensorProduct.AlgebraTensorModule.cancelBaseChange A S T T M
+  rw [LinearMap.charpoly_toMatrix, LinearMap.charpoly_toMatrix,
+    ← LinearMap.charpoly_baseChange, LinearMap.baseChange_baseChange]
+  change (L.symm.conj (φ.baseChange T)).charpoly = _
+  exact LinearEquiv.charpoly_conj _ _
+
+/-- The base-change characterization in universe `max u w` implies the one in universe `u`,
+by lifting each target ring along `ULift`. -/
+private theorem charpoly_char_ulift {n : ℕ} (φ : M →ₗ[A] M) (χ : Polynomial A)
+    (hP : ∀ (A' : Type (max u w)) [CommRing A'] (ρ : A →+* A'),
+        letI : Algebra A A' := RingHom.toAlgebra ρ;
+        ∀ e : Module.Basis (Fin n) A' (A' ⊗[A] M),
+          χ.map ρ = (LinearMap.toMatrix e e (φ.baseChange A')).charpoly)
+    (S : Type u) [CommRing S] (ρ₀ : A →+* S) :
+    letI : Algebra A S := RingHom.toAlgebra ρ₀;
+    ∀ b : Module.Basis (Fin n) S (S ⊗[A] M),
+      χ.map ρ₀ = (LinearMap.toMatrix b b (φ.baseChange S)).charpoly := by
+  let : Algebra A S := RingHom.toAlgebra ρ₀
+  intro b
+  let T := ULift.{w} S
+  let q : S →+* T := ULift.ringEquiv.symm.toRingHom
+  let ρ := q.comp ρ₀
+  let : Algebra S T := q.toAlgebra
+  let : Algebra A T := ρ.toAlgebra
+  let : Module S T := Algebra.toModule
+  let : Module A T := Algebra.toModule
+  let : SMul S T := (inferInstance : Module S T).toSMul
+  let : SMul A T := (inferInstance : Module A T).toSMul
+  have : IsScalarTower A S T :=
+    IsScalarTower.of_algebraMap_eq (R := A) (S := S) (A := T) fun x ↦ rfl
+  let e := (b.baseChange T).map
+    (_root_.TensorProduct.AlgebraTensorModule.cancelBaseChange A S T T M)
+  apply Polynomial.map_injective q ULift.ringEquiv.symm.injective
+  rw [Polynomial.map_map]
+  exact (hP T ρ e).trans (charpoly_baseChange_tower b e φ).symm
+
+/-- A local basis on `D(a)` gives a basis of the localization at any prime outside `a`. -/
+private theorem nonempty_basis_atPrime {n : ℕ} (p : Ideal A) [p.IsPrime] (a : A) (ha : a ∉ p)
+    (b : Module.Basis (Fin n) (Localization.Away a) (LocalizedModule.Away a M)) :
+    Nonempty (Module.Basis (Fin n) (Localization.AtPrime p)
+      (Localization.AtPrime p ⊗[A] M)) := by
+  let S := Localization.Away a
+  let T := Localization.AtPrime p
+  let q : S →+* T := IsLocalization.Away.lift a
+    (IsLocalization.map_units T (⟨a, ha⟩ : p.primeCompl))
+  let : Algebra S T := q.toAlgebra
+  have : IsScalarTower A S T := IsScalarTower.of_algebraMap_eq fun x ↦ by
+    change algebraMap A T x = q (algebraMap A S x)
+    simp only [q, IsLocalization.Away.lift_eq]
+  let b' := b.map (LocalizedModule.isBaseChange (Submonoid.powers a) M).equiv.symm
+  exact ⟨(b'.baseChange T).map
+    (_root_.TensorProduct.AlgebraTensorModule.cancelBaseChange A S T T M)⟩
 
 /-- The characteristic polynomial of a finite locally free module of constant rank.
 Source: Stacks Project, Tag 09XI, proof of (3)⇒(1)
@@ -70,7 +139,14 @@ theorem locallyFreeCharpoly_spec {n r : ℕ} (f : Fin r → A)
         ∑ k : Fin n, Polynomial.C (c k) * Polynomial.X ^ (k : ℕ)) ∧
     (∀ e : Module.Basis (Fin n) A M,
       locallyFreeCharpoly f hgen hfree φ = (LinearMap.toMatrix e e φ).charpoly) := by
-  sorry
+  intro P
+  have hu := Classical.choose_spec (charpoly_locallyFree_exists_unique.{u, v, u} f hgen hfree φ)
+  obtain ⟨χ, ⟨hPχ, huniq⟩, -, -⟩ :=
+    charpoly_locallyFree_exists_unique.{u, v, w} f hgen hfree φ
+  have heq : χ = locallyFreeCharpoly f hgen hfree φ :=
+    hu.1.2 χ fun S _ ρ₀ ↦ charpoly_char_ulift.{u, v, w} φ χ hPχ S ρ₀
+  subst heq
+  exact ⟨⟨hPχ, huniq⟩, hu.2.1, fun e ↦ hu.2.2 ⟨e⟩ e⟩
 
 /-- Over a nonzero ring the module determines its constant rank.
 Source: Stacks Project, Tag 09XI, proof of (3)⇒(1)
@@ -89,7 +165,18 @@ theorem locallyFree_constantRank_eq [Nontrivial A] {n m r s : ℕ}
     (hgfree : ∀ j : Fin s,
       ∃ _e : Module.Basis (Fin m) (Localization.Away (g j))
         (LocalizedModule.Away (g j) M), True) : n = m := by
-  sorry
+  obtain ⟨𝔪, h𝔪⟩ := Ideal.exists_maximal A
+  have hout {t : ℕ} (h : Fin t → A) (hh : Ideal.span (Set.range h) = ⊤) :
+      ∃ k, h k ∉ 𝔪 := by
+    by_contra! hk
+    refine h𝔪.ne_top (top_le_iff.mp (hh ▸ Ideal.span_le.mpr ?_))
+    rintro _ ⟨k, rfl⟩
+    exact hk k
+  obtain ⟨i, hi⟩ := hout f hfgen
+  obtain ⟨j, hj⟩ := hout g hggen
+  obtain ⟨b₁⟩ := nonempty_basis_atPrime (M := M) 𝔪 (f i) hi (hffree i).choose
+  obtain ⟨b₂⟩ := nonempty_basis_atPrime (M := M) 𝔪 (g j) hj (hgfree j).choose
+  simpa using Fintype.card_congr (b₁.indexEquiv b₂)
 
 /-- Independence of both the trivializing cover and the stated constant rank.
 Source: Stacks Project, Tag 09XI, proof of (3)⇒(1)

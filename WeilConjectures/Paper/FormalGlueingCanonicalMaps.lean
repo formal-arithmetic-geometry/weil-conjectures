@@ -48,8 +48,8 @@ theorem away_map_functorial {R : Type u} [CommRing R]
       (IsLocalizedModule.map T lQ' lQ'' h).comp (IsLocalizedModule.map T lQ lQ' k) ∧
     IsLocalizedModule.map T lQ' lQ'' (h + h') =
       IsLocalizedModule.map T lQ' lQ'' h + IsLocalizedModule.map T lQ' lQ'' h' ∧
-    IsLocalizedModule.map T lQ lQ LinearMap.id = LinearMap.id := by
-  sorry
+    IsLocalizedModule.map T lQ lQ LinearMap.id = LinearMap.id :=
+  ⟨IsLocalizedModule.map_comp' _ _ _ _ k h, map_add _ h h', IsLocalizedModule.map_id _ _⟩
 
 end LocalizedModule
 

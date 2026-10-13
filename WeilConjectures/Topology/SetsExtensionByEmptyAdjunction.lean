@@ -37,10 +37,6 @@ stalk criterion for sheaf isomorphisms.
 theorem extensionByEmpty_adjunction_stalks
     (G : TopCat.Sheaf (Type u) ((toTopCat X).obj U)) :
     Nonempty
-        (extensionByEmptyPresheaf U ⊣
-          (Presheaf.pullback (Type u) (inclusion' U) ⋙
-            presheafToSheaf (Opens.grothendieckTopology ((toTopCat X).obj U)) (Type u))) ∧
-      Nonempty
         (extensionByEmpty U ⊣ Sheaf.pullback (Type u) (inclusion' U)) ∧
       (∀ (x : X), x ∉ U →
         IsEmpty (ToType (((extensionByEmpty U).obj G).presheaf.stalk x))) ∧
