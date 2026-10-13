@@ -1,0 +1,161 @@
+{
+ "id": "lem-pc-raw-truncation-couple-naturality",
+ "kind": "statement",
+ "title": "Naturality of raw truncation maps for one derived morphism",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories [def-sp-grothendieck-abelian] admitting derived categories [def-weil-abstract-derived-category], and let $F:\\mathcal A\\to\\mathcal B$ be additive and left exact [def-sp-left-exact-additive]. For bounded-below complexes $K,N$ and any $c:QK\\to QN$, the raw truncation objects and maps [def-sp-truncation-couple] admit maps $t_D^{p,q},t_E^{p,q}$ commuting with $\\alpha,f,g$. They also commute with the canonical maps $D^{0,n}\\to H^n(RF(QK))$ induced by the truncation inclusion and with the explicit shift comparisons $E^{p,q}\\cong H^p(RF(H^q(K)[0]))$ for every integer $p$. In the latter square use the cohomology map of $c$ transported through homologyFunctorFactors. No exactness, bound, invertibility of the abutment maps, or choices for a family of objects are asserted. Exact Lean interface:\ntheorem raw_naturality (K N : CochainComplex.Plus A)\n    (c : DerivedCategory.Q.obj K.obj ⟶ DerivedCategory.Q.obj N.obj) :\n    ∃ (tD : ∀ p q : ℤ, D F K p q ⟶ D F N p q)\n      (tE : ∀ p q : ℤ, E F K p q ⟶ E F N p q),\n      (∀ p q : ℤ, tD p q ≫ alpha F N p q =\n        alpha F K p q ≫ tD (p - 1) (q + 1)) ∧\n      (∀ p q : ℤ, tE p q ≫ f F N p q = f F K p q ≫ tD (p + 2) (q - 1)) ∧\n      (∀ p q : ℤ, tD p q ≫ g F N p q = g F K p q ≫ tE p q) ∧\n      (∀ n : ℤ, tD 0 n ≫ abutmentMap F N n = abutmentMap F K n ≫\n        (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).map c) ∧\n      (∀ p q : ℤ, tE p q ≫ (singleIso F N p q).hom = (singleIso F K p q).hom ≫\n        (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n          DerivedCategory.homologyFunctor B p).map (homologyMap c q))",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08J5",
+  "place": "Remark 08J5 canonical truncation triangles; Tags 015J and 05TC for derived cohomology/shift conventions; step 4 of lem-pc-natural-bounded-below-truncation-couples."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-left-exact-additive",
+  "def-sp-truncation-couple"
+ ],
+ "proof": [
+  {
+   "text": "Descend tau<=q and H^q(-)[-q] along Q. At K,N define maps by conjugating the localization lift maps with fac. Apply RF, H^(p+q), and conjugate by the bridge to define tD,tE. The construction is independent of the proof that the functor inverts quasi-isomorphisms, by proof irrelevance.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-sp-kinjective-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the three squares of truncation_triangle to c. The first gives the alpha square at q+1, the second gives g at q, and the boundary square gives f at q via homologySequenceδ_naturality after RF.mapTriangle. Adjacent bridge factors cancel. Equality transports in total degree and truncation index commute with these maps by eqToHom_naturality.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the natural truncation inclusion tau<=n -> identity with liftNatTrans. Its naturality at c, conjugated by fac, is truncMap(c,n);Q(ι_N)=Q(ι_K);c. Apply RF and H^n, cancel bridge factors and the zero total-degree transport; this is the abutment equation. No invertibility of the inclusion is needed.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-sp-kinjective-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The single-functor shift comparison, RF shift comparison, and homology shift comparison form a natural isomorphism of functors on A. Apply its naturality to homologyMap(c,q). The descended single-cohomology functor is identified with H^q followed by singleFunctor via homologyFunctorFactors, so its conjugated map is singleFunctor.map(homologyMap(c,q)). Cancel bridge factors to obtain the E equation.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-kinjective-bridge",
+  "def-weil-abstract-derived-category",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08J5",
+  "place": "E1: expanded raw naturality subargument of step 4 of individual natural truncation couples."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial exact couple from canonical truncations of bounded below derived objects",
+   "results": "8 hits: CochainComplex.shortComplexTruncLE_shortExact, HomologicalComplex.shortComplexTruncLE_shortExact, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.homologySequence_exact₁, CategoryTheory.Functor.homologySequence_exact₂, CategoryTheory.Functor.homologySequence_exact₃, CategoryTheory.Functor.homologySequenceComposableArrows₅_exact",
+   "date": "2026-10-13",
+   "verdict": "No exact project raw-couple naturality statement; truncation and homology naturality provide ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "truncation.*couple|couple.*truncation",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact project raw-couple naturality statement; truncation and homology naturality provide ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncLE\", \"naturality\"",
+   "results": "6 hits: HomologicalComplex.ιTruncLE_naturality, HomologicalComplex.truncLE'ToRestriction_naturality, HomologicalComplex.ιTruncLE_naturality_assoc, HomologicalComplex.truncLE'ToRestriction_naturality_assoc, CochainComplex.ιTruncLE_naturality, CochainComplex.ιTruncLE_naturality_assoc",
+   "date": "2026-10-13",
+   "verdict": "No exact project raw-couple naturality statement; truncation and homology naturality provide ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the connecting morphism in the homology sequence of a distinguished triangle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.NaturalTruncationCouple",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Raw naturality subargument of individual truncation couples; canonical three triangle squares and D/E comparison equations",
+   "via": [
+    "lem-pc-natural-bounded-below-truncation-couples",
+    "lem-pc-coproduct-truncation-couple",
+    "lem-pc-bounded-below-coproduct-filtration",
+    "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TruncationCoupleNaturality",
+  "file": "lean/Sheaf/CategoryTheory/TruncationCoupleNaturality.lean",
+  "declaration": "CategoryTheory.TruncationCouple.raw_naturality",
+  "statement": "theorem raw_naturality (K N : CochainComplex.Plus A)\n    (c : DerivedCategory.Q.obj K.obj ⟶ DerivedCategory.Q.obj N.obj) :\n    ∃ (tD : ∀ p q : ℤ, D F K p q ⟶ D F N p q)\n      (tE : ∀ p q : ℤ, E F K p q ⟶ E F N p q),\n      (∀ p q : ℤ, tD p q ≫ alpha F N p q =\n        alpha F K p q ≫ tD (p - 1) (q + 1)) ∧\n      (∀ p q : ℤ, tE p q ≫ f F N p q = f F K p q ≫ tD (p + 2) (q - 1)) ∧\n      (∀ p q : ℤ, tD p q ≫ g F N p q = g F K p q ≫ tE p q) ∧\n      (∀ n : ℤ, tD 0 n ≫ abutmentMap F N n = abutmentMap F K n ≫\n        (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).map c) ∧\n      (∀ p q : ℤ, tE p q ≫ (singleIso F N p q).hom = (singleIso F K p q).hom ≫\n        (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n          DerivedCategory.homologyFunctor B p).map (homologyMap c q))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T031534-L-3569280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T031534-L-3569280",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

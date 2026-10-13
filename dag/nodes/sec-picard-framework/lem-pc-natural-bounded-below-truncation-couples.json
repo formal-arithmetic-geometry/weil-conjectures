@@ -16,52 +16,53 @@
  ],
  "proof": [
   {
-   "text": "Represent each derived object with cohomology zero below a by its canonical lower truncation at a and a bounded-below injective resolution. Transport along its derived isomorphism. Apply exists_truncationHypercohomology to each representative and retain only the exact couple and the D and E vanishing clauses; no convergence or filtration data is used. The bounded-below injective replacement is CochainComplex.Plus.exists_quasiIso_injective, recorded on lem-sc-bounded-below-injective-resolution-existence.",
+   "text": "Choose strictly bounded-below representatives using DerivedCategory.isGE_iff and exists_iso_Q_obj_of_isGE. Construct the exact couple with raw D, E, alpha, f, g from truncation_raw_exact. Transport the cohomological lower bound through homologyFunctorFactors and the representative isomorphism, and apply truncation_quadrant_vanishing. No additional injective replacement and no convergence data are used.",
    "uses": [
-    "thm-sp-truncation-e2",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category",
+    "lem-sp-truncation-raw-exact",
+    "lem-sp-truncation-quadrant-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use truncation_abutment_cocone for this explicit couple to prove the canonical abutmentMap is invertible. Compose its asIso with RF and homology of the representative isomorphism to obtain eD.",
+   "uses": [
+    "lem-sp-truncation-abutment-cocone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define singleIso explicitly by inverse bridge, the single-functor shift isomorphism, RF commutation with shifts and homology shift comparison. Compose it with the image of the representative cohomology comparison to obtain eE. These are existing natural isomorphisms, without the ordinary-derived-functor comparison.",
+   "uses": [
     "def-sp-kinjective-bridge",
-    "lem-sc-bounded-below-injective-resolution-existence"
+    "lem-pc-right-derived-functor-triangulated",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false
   },
   {
-   "text": "Use the canonical truncation inclusion in degree n to identify the D term at (0,n) with H^n RF of the representative. It is invertible by the canonical truncation corollary isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι. Transport through the Plus/unbounded derived-functor comparison and the chosen representative isomorphism to obtain eD.",
+   "text": "For c:M -> N, conjugate by the representative isomorphisms and apply raw_naturality to get tD and tE and all raw squares. Assemble CoupleMorphism from the alpha, f, g squares; the g square is reindexed by eqToHom_naturality for the zero bidegree. Compose the abutment square with RF homology of the representative isomorphism and cancel inverse/hom factors. For E, cancel homologyFunctorFactors and the representative inverse/hom factors inside homologyMap, then apply the single/RF/homology composite functor. This proves both displayed comparison equations.",
    "uses": [
-    "lem-weil-pbc-derived-functor-truncation-iso"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The single-functor shift identification, followed by RF shift commutation and the homology shift comparison, gives eE from the raw E object to H^p RF(H^r(M)[0]). Use the first part of the shift identification, omitting its final comparison to ordinary right derived functors. All factors are natural isomorphisms.",
-   "uses": [
-    "lem-sp-shift-identification",
-    "lem-weil-pbc-derived-direct-image-triangulated"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Given a morphism between two objects, lift it between their injective representatives. The functorial canonical truncation triangles provide the three squares, including the boundary square. Apply the triangulated RF and homology and transport by the bridge isomorphisms to obtain the couple morphism. Naturality of the truncation inclusion yields the eD square; naturality of the three shift factors yields the eE square. Choose the couples and comparisons once for every object; maps may be chosen separately, since no identity or composition law is asserted.",
-   "uses": [
-    "lem-weil-pbc-truncation-triangle",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-sp-shift-identification"
+    "lem-pc-raw-truncation-couple-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
   "def-sp-kinjective-bridge",
-  "lem-sc-bounded-below-injective-resolution-existence",
-  "lem-sp-shift-identification",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-weil-pbc-derived-functor-truncation-iso",
-  "lem-weil-pbc-truncation-triangle",
-  "thm-sp-truncation-e2"
+  "def-weil-abstract-derived-category",
+  "lem-pc-raw-truncation-couple-naturality",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sp-truncation-abutment-cocone",
+  "lem-sp-truncation-quadrant-vanishing",
+  "lem-sp-truncation-raw-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08J5",
-  "place": "Agent-written assembly of individual canonical truncation triangles, using Tags 015J and 05TC; no coproduct step."
+  "place": "E1: explicit raw exact-couple construction and transport along strictly bounded-below representatives; raw naturality is isolated, no spectral-sequence convergence or filtration."
  },
  "mathlib_searches": [
   {
@@ -150,12 +151,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T202249-L-707616",
+  "landing": "20261013T031534-L-3569280",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
