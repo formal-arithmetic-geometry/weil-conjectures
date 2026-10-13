@@ -125,25 +125,41 @@ lemma pullHom'_glueHom ⦃Y : C⦄ (q : Y ⟶ S) ⦃i₁ i₂ : ι⦄ (f₁ : Y 
   rw [pullHom'_eq_pullHom _ _ _ _ p hf₁ hf₂ hp₁ hp₂]
   exact pullHom_mapComp'_conj _ _ _ _ _ _ rfl rfl (H i₁ i₂) p f₁ f₂ hp₁ hp₂ y₁ y₂ hy₁ hy₂
 
+variable {μ O} in
+/-- The left hand side of the identity condition for gluing morphisms, along sections `d i` of
+the diagonals. -/
+noncomputable def glueSelfLHS (d : ∀ i, X i ⟶ (sq i i).pullback)
+    (hd₁ : ∀ i, d i ≫ (sq i i).p₁ = 𝟙 _) (hd₂ : ∀ i, d i ≫ (sq i i).p₂ = 𝟙 _) (i : ι) :=
+  pullHom (H i i) (d i) (μ i) (μ i) (by rw [reassoc_of% (hd₁ i)])
+    (by rw [reassoc_of% (hd₂ i)])
+
 variable {μ O H} in
 /-- The identity condition for gluing morphisms, along sections `d i` of the diagonals. -/
 def GlueSelf (d : ∀ i, X i ⟶ (sq i i).pullback) (hd₁ : ∀ i, d i ≫ (sq i i).p₁ = 𝟙 _)
     (hd₂ : ∀ i, d i ≫ (sq i i).p₂ = 𝟙 _) : Prop :=
-  ∀ i, pullHom (H i i) (d i) (μ i) (μ i) (by rw [reassoc_of% (hd₁ i)])
-    (by rw [reassoc_of% (hd₂ i)]) = 𝟙 _
+  ∀ i, glueSelfLHS H d hd₁ hd₂ i = 𝟙 _
 
 variable {μ O} in
-/-- The cocycle condition for gluing morphisms. -/
-def GlueCocycle : Prop :=
-  ∀ i₁ i₂ i₃, pullHom (H i₁ i₂) (sq₃ i₁ i₂ i₃).p₁₂ ((sq₃ i₁ i₂ i₃).p₁ ≫ μ i₁)
+/-- The left hand side of the cocycle condition for gluing morphisms. -/
+noncomputable def glueCocLHS (i₁ i₂ i₃ : ι) :=
+  pullHom (H i₁ i₂) (sq₃ i₁ i₂ i₃).p₁₂ ((sq₃ i₁ i₂ i₃).p₁ ≫ μ i₁)
       ((sq₃ i₁ i₂ i₃).p₂ ≫ μ i₂) (ChosenPullback₃.p₁₂_p₁_assoc _ _)
       (ChosenPullback₃.p₁₂_p₂_assoc _ _) ≫
     pullHom (H i₂ i₃) (sq₃ i₁ i₂ i₃).p₂₃ ((sq₃ i₁ i₂ i₃).p₂ ≫ μ i₂)
       ((sq₃ i₁ i₂ i₃).p₃ ≫ μ i₃) (ChosenPullback₃.p₂₃_p₂_assoc _ _)
-      (ChosenPullback₃.p₂₃_p₃_assoc _ _) =
-    pullHom (H i₁ i₃) (sq₃ i₁ i₂ i₃).p₁₃ ((sq₃ i₁ i₂ i₃).p₁ ≫ μ i₁)
+      (ChosenPullback₃.p₂₃_p₃_assoc _ _)
+
+variable {μ O} in
+/-- The right hand side of the cocycle condition for gluing morphisms. -/
+noncomputable def glueCocRHS (i₁ i₂ i₃ : ι) :=
+  pullHom (H i₁ i₃) (sq₃ i₁ i₂ i₃).p₁₃ ((sq₃ i₁ i₂ i₃).p₁ ≫ μ i₁)
       ((sq₃ i₁ i₂ i₃).p₃ ≫ μ i₃) (ChosenPullback₃.p₁₃_p₁_assoc _ _)
       (ChosenPullback₃.p₁₃_p₃_assoc _ _)
+
+variable {μ O} in
+/-- The cocycle condition for gluing morphisms. -/
+def GlueCocycle : Prop :=
+  ∀ i₁ i₂ i₃, glueCocLHS sq₃ H i₁ i₂ i₃ = glueCocRHS sq₃ H i₁ i₂ i₃
 
 variable {d : ∀ i, X i ⟶ (sq i i).pullback} {hd₁ : ∀ i, d i ≫ (sq i i).p₁ = 𝟙 _}
   {hd₂ : ∀ i, d i ≫ (sq i i).p₂ = 𝟙 _}
@@ -157,17 +173,21 @@ noncomputable def ofGlue (hself : GlueSelf (H := H) d hd₁ hd₂) (hcoc : GlueC
   obj i := (F.map (μ i).op.toLoc).toFunctor.obj (O i)
   hom := glueHom μ O H
   pullHom'_hom_self i := by
+    have hs := hself i
+    rw [glueSelfLHS] at hs
     rw [pullHom'_glueHom μ O H (f i) (𝟙 _) (𝟙 _) (Category.id_comp _) (Category.id_comp _)
-      (d i) (hd₁ i) (hd₂ i) (μ i) (μ i) (Category.id_comp _) (Category.id_comp _), hself i,
+      (d i) (hd₁ i) (hd₂ i) (μ i) (μ i) (Category.id_comp _) (Category.id_comp _), hs,
       Category.id_comp, Cat.Hom.inv_hom_id_toNatTrans_app]
     rfl
   pullHom'_hom_comp i₁ i₂ i₃ := by
+    have hc := hcoc i₁ i₂ i₃
+    rw [glueCocLHS, glueCocRHS] at hc
     rw [pullHom'_glueHom μ O H _ _ _ _ _ (sq₃ i₁ i₂ i₃).p₁₂ (ChosenPullback₃.p₁₂_p₁ _)
         (ChosenPullback₃.p₁₂_p₂ _) _ _ rfl rfl,
       pullHom'_glueHom μ O H _ _ _ _ _ (sq₃ i₁ i₂ i₃).p₂₃ (ChosenPullback₃.p₂₃_p₂ _)
         (ChosenPullback₃.p₂₃_p₃ _) _ _ rfl rfl,
       pullHom'_glueHom μ O H _ _ _ _ _ (sq₃ i₁ i₂ i₃).p₁₃ (ChosenPullback₃.p₁₃_p₁ _)
-        (ChosenPullback₃.p₁₃_p₃ _) _ _ rfl rfl, ← hcoc i₁ i₂ i₃]
+        (ChosenPullback₃.p₁₃_p₃ _) _ _ rfl rfl, ← hc]
     simp only [Category.assoc, Cat.Hom.hom_inv_id_toNatTrans_app_assoc]
 
 @[simp]
@@ -346,13 +366,14 @@ lemma glueSelf_isoGlueHom (d : ∀ i, X i ⟶ (sq i i).pullback)
     (hd₁ : ∀ i, d i ≫ (sq i i).p₁ = 𝟙 _) (hd₂ : ∀ i, d i ≫ (sq i i).p₂ = 𝟙 _) :
     GlueSelf (H := isoGlueHom sq ε) d hd₁ hd₂ := fun i ↦ by
   have hp : d i ≫ (sq i i).p = f i := by rw [← (sq i i).hp₁, reassoc_of% (hd₁ i)]
-  rw [isoGlueHom, pullHom_comp _ _ _ _ (f i) _ (by rw [reassoc_of% (hd₁ i)]) (by simp [hp])
+  rw [glueSelfLHS, isoGlueHom,
+    pullHom_comp _ _ _ _ (f i) _ (by rw [reassoc_of% (hd₁ i)]) (by simp [hp])
       (by rw [reassoc_of% (hd₂ i)]), pullHom_pullHom, pullHom_pullHom,
     pullHom_congr_left _ (hd₁ i) _ _ _ _, pullHom_congr_left (ε i).inv (hd₂ i) _ _ _ _,
     pullHom_id, pullHom_id, Iso.hom_inv_id]
 
 lemma glueCocycle_isoGlueHom : GlueCocycle sq₃ (isoGlueHom sq ε) := fun i₁ i₂ i₃ ↦ by
-  simp only [isoGlueHom]
+  simp only [glueCocLHS, glueCocRHS, isoGlueHom]
   rw [pullHom_comp _ _ _ _ (sq₃ i₁ i₂ i₃).p _ (ChosenPullback₃.p₁₂_p₁_assoc _ _) (by simp)
       (ChosenPullback₃.p₁₂_p₂_assoc _ _),
     pullHom_comp _ _ _ _ (sq₃ i₁ i₂ i₃).p _ (ChosenPullback₃.p₂₃_p₂_assoc _ _) (by simp)
@@ -369,6 +390,63 @@ lemma glueCocycle_isoGlueHom : GlueCocycle sq₃ (isoGlueHom sq ε) := fun i₁ 
     pullHom_congr_left (ε i₃).inv (ChosenPullback₃.p₁₃_p₃ (sq₃ i₁ i₂ i₃)) _ _ _ _]
 
 end IsoGlueHom
+
+section Pull
+
+variable {S' : C} {X' : ι → C} {f' : ∀ i, X' i ⟶ S'} {sq' : ∀ i j, ChosenPullback (f' i) (f' j)}
+  {r : ∀ i, X' i ⟶ X i} (r₂ : ∀ i j, (sq' i j).pullback ⟶ (sq i j).pullback)
+  (hr₂₁ : ∀ i j, r₂ i j ≫ (sq i j).p₁ = (sq' i j).p₁ ≫ r i)
+  (hr₂₂ : ∀ i j, r₂ i j ≫ (sq i j).p₂ = (sq' i j).p₂ ≫ r j)
+  {μ' : ∀ i, X' i ⟶ W i} (hμ : ∀ i, r i ≫ μ i = μ' i)
+
+/-- The pullback of gluing morphisms along morphisms `r₂ i j` between the chosen pullbacks of
+two families, compatible with morphisms `r i` between their members. -/
+noncomputable def pullGlue (i j : ι) :
+    (F.map ((sq' i j).p₁ ≫ μ' i).op.toLoc).toFunctor.obj (O i) ⟶
+      (F.map ((sq' i j).p₂ ≫ μ' j).op.toLoc).toFunctor.obj (O j) :=
+  pullHom (H i j) (r₂ i j) _ _ (by rw [reassoc_of% (hr₂₁ i j), hμ])
+    (by rw [reassoc_of% (hr₂₂ i j), hμ])
+
+lemma pullHom_glueSelfLHS (d' : ∀ i, X' i ⟶ (sq' i i).pullback)
+    (hd'₁ : ∀ i, d' i ≫ (sq' i i).p₁ = 𝟙 _) (hd'₂ : ∀ i, d' i ≫ (sq' i i).p₂ = 𝟙 _)
+    (hd : ∀ i, d' i ≫ r₂ i i = r i ≫ d i) (i : ι) :
+    pullHom (glueSelfLHS H d hd₁ hd₂ i) (r i) (μ' i) (μ' i) (hμ i) (hμ i) =
+      glueSelfLHS (pullGlue (H := H) r₂ hr₂₁ hr₂₂ hμ) d' hd'₁ hd'₂ i := by
+  rw [glueSelfLHS, glueSelfLHS, pullGlue, pullHom_pullHom, pullHom_pullHom]
+  exact pullHom_congr_left _ (hd i).symm _ _ _ _
+
+variable (sq₃) {sq₃' : ∀ i₁ i₂ i₃, ChosenPullback₃ (sq' i₁ i₂) (sq' i₂ i₃) (sq' i₁ i₃)}
+  (r₃ : ∀ i₁ i₂ i₃, (sq₃' i₁ i₂ i₃).pullback ⟶ (sq₃ i₁ i₂ i₃).pullback)
+  (h₁₂ : ∀ i₁ i₂ i₃, r₃ i₁ i₂ i₃ ≫ (sq₃ i₁ i₂ i₃).p₁₂ = (sq₃' i₁ i₂ i₃).p₁₂ ≫ r₂ i₁ i₂)
+  (h₂₃ : ∀ i₁ i₂ i₃, r₃ i₁ i₂ i₃ ≫ (sq₃ i₁ i₂ i₃).p₂₃ = (sq₃' i₁ i₂ i₃).p₂₃ ≫ r₂ i₂ i₃)
+  (h₁₃ : ∀ i₁ i₂ i₃, r₃ i₁ i₂ i₃ ≫ (sq₃ i₁ i₂ i₃).p₁₃ = (sq₃' i₁ i₂ i₃).p₁₃ ≫ r₂ i₁ i₃)
+  (hr₃₁ : ∀ i₁ i₂ i₃, r₃ i₁ i₂ i₃ ≫ (sq₃ i₁ i₂ i₃).p₁ = (sq₃' i₁ i₂ i₃).p₁ ≫ r i₁)
+  (hr₃₂ : ∀ i₁ i₂ i₃, r₃ i₁ i₂ i₃ ≫ (sq₃ i₁ i₂ i₃).p₂ = (sq₃' i₁ i₂ i₃).p₂ ≫ r i₂)
+  (hr₃₃ : ∀ i₁ i₂ i₃, r₃ i₁ i₂ i₃ ≫ (sq₃ i₁ i₂ i₃).p₃ = (sq₃' i₁ i₂ i₃).p₃ ≫ r i₃)
+
+include h₁₂ h₂₃ hr₃₂ in
+lemma pullHom_glueCocLHS (i₁ i₂ i₃ : ι) :
+    pullHom (glueCocLHS sq₃ H i₁ i₂ i₃) (r₃ i₁ i₂ i₃) ((sq₃' i₁ i₂ i₃).p₁ ≫ μ' i₁)
+        ((sq₃' i₁ i₂ i₃).p₃ ≫ μ' i₃) (by rw [reassoc_of% (hr₃₁ i₁ i₂ i₃), hμ])
+        (by rw [reassoc_of% (hr₃₃ i₁ i₂ i₃), hμ]) =
+      glueCocLHS sq₃' (pullGlue (H := H) r₂ hr₂₁ hr₂₂ hμ) i₁ i₂ i₃ := by
+  rw [glueCocLHS, glueCocLHS, pullHom_comp _ _ _ _ ((sq₃' i₁ i₂ i₃).p₂ ≫ μ' i₂) _
+    (by rw [reassoc_of% (hr₃₁ i₁ i₂ i₃), hμ]) (by rw [reassoc_of% (hr₃₂ i₁ i₂ i₃), hμ])
+    (by rw [reassoc_of% (hr₃₃ i₁ i₂ i₃), hμ]), pullGlue, pullGlue,
+    pullHom_pullHom, pullHom_pullHom, pullHom_pullHom, pullHom_pullHom]
+  exact congrArg₂ (· ≫ ·) (pullHom_congr_left _ (h₁₂ i₁ i₂ i₃) _ _ _ _)
+    (pullHom_congr_left _ (h₂₃ i₁ i₂ i₃) _ _ _ _)
+
+include h₁₃ in
+lemma pullHom_glueCocRHS (i₁ i₂ i₃ : ι) :
+    pullHom (glueCocRHS sq₃ H i₁ i₂ i₃) (r₃ i₁ i₂ i₃) ((sq₃' i₁ i₂ i₃).p₁ ≫ μ' i₁)
+        ((sq₃' i₁ i₂ i₃).p₃ ≫ μ' i₃) (by rw [reassoc_of% (hr₃₁ i₁ i₂ i₃), hμ])
+        (by rw [reassoc_of% (hr₃₃ i₁ i₂ i₃), hμ]) =
+      glueCocRHS sq₃' (pullGlue (H := H) r₂ hr₂₁ hr₂₂ hμ) i₁ i₂ i₃ := by
+  rw [glueCocRHS, glueCocRHS, pullGlue, pullHom_pullHom, pullHom_pullHom]
+  exact pullHom_congr_left _ (h₁₃ i₁ i₂ i₃) _ _ _ _
+
+end Pull
 
 end DescentData'
 
