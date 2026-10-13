@@ -9,9 +9,10 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineGlobalComparison
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.AffineFiniteTypeGeneratingSections
+import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # Affine formal maps and inverse limits of sections
 
@@ -28,6 +29,42 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+/-- A coherent affine tilde presentation has a finite module of coefficients.
+Source: Stacks Project, Tags 01IB, 01PB and 01XZ. -/
+private theorem finite_presentation_module
+    {X : Scheme.{u}} [IsNoetherian X] [IsAffine X]
+    (H : CoherentModules X) (P : ModuleCat.{u} Γ(X, ⊤))
+    (ε : (tilde.functor Γ(X, ⊤) ⋙ Scheme.Modules.pullback X.isoSpec.hom).obj P ≅ H.obj) :
+    Module.Finite Γ(X, ⊤) P := by
+  have hH := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    X H.obj).mp H.property
+  have : H.obj.IsQuasicoherent := hH.1
+  have : H.obj.IsFiniteType := hH.2
+  have : Module.Finite Γ(X, ⊤) Γ(H.obj, ⊤) :=
+    (Scheme.Modules.affine_finiteType_generatingSections X H.obj).1
+  let M := H.obj.restrict X.isoSpec.inv
+  let e₀ := Scheme.Modules.sectionsRestrictFromSpecLinearEquiv H.obj (isAffineOpen_top X)
+  have : Module.Finite Γ(X, ⊤) (moduleSpecΓFunctor.obj M) := by
+    apply Module.Finite.equiv
+      (show Γ(H.obj, ⊤) ≃ₗ[Γ(X, ⊤)] (moduleSpecΓFunctor.obj M) from ?_)
+    exact e₀.symm ≪≫ₗ (moduleSpecΓFunctor.mapIso
+      ((Scheme.Modules.restrictFunctorCongr (IsAffineOpen.fromSpec_top (X := X))).app
+        H.obj)).toLinearEquiv
+  let T := tilde.functor Γ(X, ⊤)
+  let R := Scheme.Modules.restrictFunctor X.isoSpec.inv
+  let e : T.obj P ≅ M :=
+    ((Scheme.Modules.restrictFunctorId (X := Spec Γ(X, ⊤))).app (T.obj P)).symm ≪≫
+    ((Scheme.Modules.restrictFunctorCongr X.isoSpec.inv_hom_id).app (T.obj P)).symm ≪≫
+    (Scheme.Modules.restrictFunctorComp X.isoSpec.inv X.isoSpec.hom).app (T.obj P) ≪≫
+    R.mapIso ((Scheme.Modules.restrictFunctorIsoPullback X.isoSpec.hom).app (T.obj P)) ≪≫
+    R.mapIso ε
+  let eP := (tilde.toTildeΓNatIso (R := Γ(X, ⊤))).app P ≪≫
+    moduleSpecΓFunctor.mapIso e
+  exact Module.Finite.equiv eP.toLinearEquiv.symm
+
+set_option maxHeartbeats 1000000 in
+-- The affine equivalence and two natural comparisons require extra elaboration heartbeats.
 /-- The affine dictionary identifies a formal morphism with a completed linear map,
 and identifies that map with the actual inverse limit of its section maps.
 No torsion hypothesis or annihilator conclusion is involved.
@@ -37,28 +74,22 @@ applying Remark 0888.
 (blueprint: lem-weil-pbc-affine-formal-map-limit-dictionary).
 
 Proof:
-1. Transport X and its ideal along X.isoSpec. The ideal of the top affine open
-   becomes I, so the transported formal systems satisfy the hypotheses of 087W.
-   Apply its equivalence to N. Let Q be the resulting finite S-module; its inverse
-   comparison, transported back to X, gives rho. The limit cone supplied by 087W
-   identifies its underlying A-module with the categorical limit of N's sections,
-   giving the A-linear equivalence a.
-2. The tilde presentation epsilon and coherence of H imply that P is finite over A.
-   Thus B = S tensor P is finite over S, and is complete for the extended ideal.
-   The inverse comparison of 087W, or the finite-module completion comparison of
-   00MA, identifies B with the limit of the section system C(B). Denote this
-   canonical A-linear equivalence by cB. Define b as cB followed by the limit map
-   of eta inverse and then by that of completion(epsilon). This uses the supplied
-   eta, even when it differs from the tensor unit; all three maps are invertible.
-3. Form the formal-system map f = rho inverse followed by delta, then by
-   completion(epsilon inverse), then by eta, from C(Q) to C(B). Fullness of the
-   affine equivalence, using its inverse comparison on Q and B, produces an
-   S-linear phi with C(phi) = f. Cancelling the isomorphisms gives the displayed
-   factorization of delta. Naturality of the specified limit cones gives
-   cB(phi(x)) = lim(C(phi))(a0(x)), where a0 compares Q with lim sections C(Q).
-   Take a to be a0 followed by lim(rho inverse). Applying lim(eta inverse) and
-   lim(completion(epsilon)) gives the required square with the actual section-limit
-   map of delta. No arbitrary linear bijection is substituted.
+1. Coherence makes the top sections of H finite. Restrict epsilon to Spec A, use
+   the tilde unit and the natural affine section comparison to identify P with
+   those sections. Hence P is finite over A and B = S tensor P is finite over S.
+2. Use the affine equivalence E from finite S-modules to coherent formal systems,
+   with its quotient-system comparison beta and section-limit comparison gamma.
+   Put Q = E.inverse(N) and let c : E(Q) isomorphic to N be the counit. Put
+   t = beta(B), followed by eta inverse and completion(epsilon). Lift t to the
+   coherent formal subcategory. Fullness gives psi : Q -> B whose image is
+   c.hom followed by delta and t inverse. Its underlying S-linear map is phi.
+   Set rho = c inverse followed by beta(Q). Naturality of beta and cancellation
+   of the counit and t give the displayed factorization.
+3. Define a as gamma(Q) followed by lim sections c, and b as gamma(B) followed by
+   lim sections t. These composites are A-linear equivalences. Naturality of
+   gamma for psi, followed by lim sections t, gives the commuting square, since
+   E(psi) followed by t equals c followed by delta. Evaluate this equality of
+   ModuleCat morphisms at x. The construction uses the given eta without changing it.
 These constructions use finite-module completeness over the Noetherian completed
 ring. For I=0 the quotient systems are constant, and for I=A all formal modules
 and limits are zero. Thus the same comparisons apply to these cases and to the
@@ -88,6 +119,70 @@ theorem affine_formal_map_limit_dictionary
           η.inv ≫ (formalCompletionFunctor J).map ε.hom ∧
         ∀ x : Q, b (φ x) =
           (lim.map (Functor.whiskerRight δ.hom
-            (SheafOfModules.evaluation X.ringCatSheaf (op ⊤)))).hom (a x) := by sorry
+            (SheafOfModules.evaluation X.ringCatSheaf (op ⊤)))).hom (a x) := by
+  classical
+  dsimp only
+  intro P ε η
+  let A := Γ(X, ⊤)
+  let I := J.ideal ⟨⊤, isAffineOpen_top X⟩
+  let S := AdicCompletion I A
+  let L := tilde.functor A ⋙ Scheme.Modules.pullback X.isoSpec.hom
+  let C := L ⋙ formalCompletionFunctor J
+  let R := ObjectProperty.ι (fun Q : ModuleCat.{u} S ↦ Module.Finite S Q) ⋙
+    ModuleCat.restrictScalars (algebraMap A S)
+  let ι := (IsCoherentFormalModule J).ι
+  let W := (Functor.whiskeringRight ℕᵒᵖ X.Modules (ModuleCat A)).obj
+    (SheafOfModules.evaluation X.ringCatSheaf (op ⊤))
+  let D := W ⋙ lim
+  have : Module.Finite A P := finite_presentation_module H P ε
+  have : Module.Finite S (S ⊗[A] P) := inferInstance
+  obtain ⟨E, ⟨β⟩, ⟨γ⟩⟩ := coherentFormalModules_affine_global_comparison X J
+  let Q := E.inverse.obj N
+  let := Module.restrictScalars A S Q.obj
+  let := IsScalarTower.restrictScalars A S Q.obj
+  let B : ObjectProperty.FullSubcategory
+      (fun Q : ModuleCat.{u} S ↦ Module.Finite S Q) :=
+    ⟨ModuleCat.of S (S ⊗[A] P), inferInstance⟩
+  let c := E.counitIso.app N
+  let t : (E.functor.obj B).obj ≅ ((completion X J).obj H).obj :=
+    β.app B ≪≫ η.symm ≪≫ (formalCompletionFunctor J).mapIso ε
+  let t' : E.functor.obj B ≅ (completion X J).obj H := ι.preimageIso t
+  let f : E.functor.obj Q ⟶ E.functor.obj B := c.hom ≫ δ ≫ t'.inv
+  let ψ : Q ⟶ B := E.functor.preimage f
+  have hψ : E.functor.map ψ = f := E.functor.map_preimage f
+  have hψt : ι.map (E.functor.map ψ) ≫ t.hom = ι.map c.hom ≫ δ.hom := by
+    rw [hψ]
+    change (ι.map c.hom ≫ δ.hom ≫ ι.map t'.inv) ≫ t.hom = _
+    have ht : ι.map t'.inv = t.inv := by simp [t', Functor.preimageIso]
+    rw [ht]
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  let ρ : N.obj ≅ C.obj (ModuleCat.of A Q.obj) :=
+    ι.mapIso c.symm ≪≫ β.app Q
+  let a : Q.obj ≃ₗ[A] ↥(limit (N.obj ⋙
+      SheafOfModules.evaluation X.ringCatSheaf (op ⊤)) : ModuleCat A) :=
+    (γ.app Q ≪≫ D.mapIso (ι.mapIso c)).toLinearEquiv
+  let b : (S ⊗[A] P) ≃ₗ[A] ↥(limit (((completion X J).obj H).obj ⋙
+      SheafOfModules.evaluation X.ringCatSheaf (op ⊤)) : ModuleCat A) :=
+    (γ.app B ≪≫ D.mapIso t).toLinearEquiv
+  refine ⟨Q.obj, ψ.hom.hom, ρ, a, b, ?_, ?_⟩
+  · symm
+    have hβ := β.hom.naturality ψ
+    change ι.map (E.functor.map ψ) ≫ (β.app B).hom =
+      (β.app Q).hom ≫ C.map (R.map ψ) at hβ
+    change (ι.map c.inv ≫ (β.app Q).hom) ≫ C.map (R.map ψ) ≫
+      η.inv ≫ (formalCompletionFunctor J).map ε.hom = δ.hom
+    rw [Category.assoc, ← Category.assoc (β.app Q).hom (C.map (R.map ψ)), ← hβ]
+    change ι.map c.inv ≫ ι.map (E.functor.map ψ) ≫ t.hom = δ.hom
+    rw [hψt, ← ι.map_comp_assoc, c.inv_hom_id]
+    simp
+  · have hγ := γ.hom.naturality ψ
+    change R.map ψ ≫ (γ.app B).hom =
+      (γ.app Q).hom ≫ D.map (ι.map (E.functor.map ψ)) at hγ
+    have hs : R.map ψ ≫ ((γ.app B).hom ≫ D.map t.hom) =
+        ((γ.app Q).hom ≫ D.map (ι.map c.hom)) ≫ D.map δ.hom := by
+      rw [← Category.assoc, hγ, Category.assoc, ← D.map_comp, hψt,
+        D.map_comp, Category.assoc]
+    intro x
+    exact congrArg (fun g ↦ g x) hs
 
 end AlgebraicGeometry
