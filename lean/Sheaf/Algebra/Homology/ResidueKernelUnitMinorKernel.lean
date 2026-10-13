@@ -6,6 +6,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 import Sheaf.Algebra.Homology.ResidueKernelUnitMinorMatrixCore
 import Sheaf.Algebra.Homology.ResidueKernelUnitMinorBaseChangeFree
+import Mathlib.RingTheory.TensorProduct.Finite
 @[expose] public section
 set_option autoImplicit false
 universe v
@@ -49,5 +50,15 @@ theorem residue_kernel_unit_minor_normal_form
           x) = ((eX x).1, g (eX x).2) := by
   let A := Localization.AtPrime 𝔭
   have hfree := residue_kernel_unit_minor_base_change_free R X Y hfX hfY hpX hpY 𝔭
-  exact residue_kernel_unit_minor_matrix_core R A X Y f hfree.1 hfree.2 𝔭 hres
+  let := hfX
+  let := hfY
+  exact residue_kernel_unit_minor_matrix_core R A X Y f hfree.1 hfree.2
+    (by
+      dsimp [extendScalars, ExtendScalars.obj', restrictScalars, RestrictScalars.obj']
+      let : Algebra R A := (algebraMap R A).toAlgebra
+      infer_instance)
+    (by
+      dsimp [extendScalars, ExtendScalars.obj', restrictScalars, RestrictScalars.obj']
+      let : Algebra R A := (algebraMap R A).toAlgebra
+      infer_instance) 𝔭 hres
 end ModuleCat

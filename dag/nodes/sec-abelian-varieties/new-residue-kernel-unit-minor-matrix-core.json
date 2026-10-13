@@ -36,19 +36,32 @@
  },
  "proof": [
   {
-   "text": "Choose bases for the finite free source and target. Over the residue field, rank-nullity and the one-dimensional kernel give rank one less than the source rank; select a nonzero maximal minor. Its determinant lifts to a unit, so elementary row and column operations over the local ring reduce the matrix to a diagonal identity block and a one-column map g. The selected and complementary coordinates provide U, C, and the stated linear equivalences.",
-   "uses": [],
+   "text": "Choose finite free coordinates and an invertible leading pivot B using new-residue-kernel-unit-minor-pivot. The remaining three blocks are arbitrary.",
+   "uses": [
+    "new-residue-kernel-unit-minor-pivot"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Write the coordinate map as F(u,a)=(B(u)+b(a),c(u)+d(a)). Construct the source automorphism sX(u,a)=(B(u)+b(a),a), whose inverse is (B inverse(u-b(a)),a), and the target automorphism sY(y,z)=(y,z-c(B inverse(y))), whose inverse changes the subtraction to addition. The explicit formulas prove linearity and the inverse identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define g=d-c composed with B inverse composed with b. Expand F and cancel c(u) to obtain sY(F(u,a))=((sX(u,a)).1,g((sX(u,a)).2)). Compose the old coordinate equivalences with sX and sY. Retain the free complementary module C from the pivot statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-residue-kernel-unit-minor-pivot"
+ ],
  "proof_origin": {
-  "by": "U4",
-  "group": "U4",
-  "date": "2026-10-14",
+  "by": "document",
   "document": "Stacks Project",
-  "place": "Tags 00NX and 00O0",
-  "note": "Stage-3 decomposition; standard unit-minor matrix argument from Stacks Tags 00NX and 00O0."
+  "place": "Tags 00O0 and 00NX, finite unit-minor argument; explicit block elimination",
+  "group": "H2",
+  "date": "2026-10-14"
  },
  "mathlib_searches": [
   {
@@ -87,7 +100,7 @@
   "module": "Sheaf.Algebra.Homology.ResidueKernelUnitMinorMatrixCore",
   "file": "lean/Sheaf/Algebra/Homology/ResidueKernelUnitMinorMatrixCore.lean",
   "declaration": "ModuleCat.residue_kernel_unit_minor_matrix_core",
-  "statement": "theorem residue_kernel_unit_minor_matrix_core (R : Type v) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] [IsLocalRing A] (X Y : ModuleCat.{v} R) (f : X ⟶ Y) (hX : Module.Free A ((ModuleCat.extendScalars (algebraMap R A)).obj X)) (hY : Module.Free A ((ModuleCat.extendScalars (algebraMap R A)).obj Y)) (𝔭 : Ideal R) [𝔭.IsPrime] (hres : Nonempty (LinearMap.ker ((ModuleCat.extendScalars ((IsLocalRing.residue A).comp (algebraMap R A))).map f).hom ≃ₗ[IsLocalRing.ResidueField A] IsLocalRing.ResidueField A)) : ∃ (U C : ModuleCat.{v} A) (g : A →ₗ[A] C), Module.Free A C ∧ ∃ (eX : ((ModuleCat.extendScalars (algebraMap R A)).obj X) ≃ₗ[A] (U × A)) (eY : ((ModuleCat.extendScalars (algebraMap R A)).obj Y) ≃ₗ[A] (U × C)), ∀ x, eY (((ModuleCat.extendScalars (algebraMap R A)).map f).hom x) = ((eX x).1, g (eX x).2)",
+  "statement": "theorem residue_kernel_unit_minor_matrix_core (R : Type v) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] [IsLocalRing A] (X Y : ModuleCat.{v} R) (f : X ⟶ Y) (hX : Module.Free A ((ModuleCat.extendScalars (algebraMap R A)).obj X)) (hY : Module.Free A ((ModuleCat.extendScalars (algebraMap R A)).obj Y)) (hfX : Module.Finite A ((ModuleCat.extendScalars (algebraMap R A)).obj X)) (hfY : Module.Finite A ((ModuleCat.extendScalars (algebraMap R A)).obj Y)) (𝔭 : Ideal R) [𝔭.IsPrime] (hres : Nonempty (LinearMap.ker ((ModuleCat.extendScalars ((IsLocalRing.residue A).comp (algebraMap R A))).map f).hom ≃ₗ[IsLocalRing.ResidueField A] IsLocalRing.ResidueField A)) : ∃ (U C : ModuleCat.{v} A) (g : A →ₗ[A] C), Module.Free A C ∧ ∃ (eX : ((ModuleCat.extendScalars (algebraMap R A)).obj X) ≃ₗ[A] (U × A)) (eY : ((ModuleCat.extendScalars (algebraMap R A)).obj Y) ≃ₗ[A] (U × C)), ∀ x, eY (((ModuleCat.extendScalars (algebraMap R A)).map f).hom x) = ((eX x).1, g (eX x).2)",
   "branch": "sheaf-dag",
   "by": "U4",
   "date": "2026-10-14"
@@ -106,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U4",
+  "reviewer": "X-80f82",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T190200-L-3223476",
+  "landing": "20261013T215606-L-898650",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, nodes, report, forced adaptation, and direct importer compile match the stated stage-3 requirements; lcompile.py --all succeeds without warnings."
  }
 }

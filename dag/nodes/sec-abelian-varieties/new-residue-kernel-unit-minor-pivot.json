@@ -1,0 +1,122 @@
+{
+ "id": "new-residue-kernel-unit-minor-pivot",
+ "kind": "statement",
+ "title": "Invertible leading pivot for a finite free map with residue kernel dimension one",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "statement": "Let R and A be commutative rings with an R-algebra structure on the local ring A. Let f : X → Y be an R-linear map. Suppose A ⊗_R X and A ⊗_R Y are finite free and the kernel of κ(A) ⊗_R f is isomorphic to κ(A). There exist A-modules U,C, with C free, coordinate equivalences A ⊗_R X ≃ U × A and A ⊗_R Y ≃ U × C, and an automorphism B of U, such that the first coordinate of f(u,0) is B(u). The off-diagonal and lower-right blocks are unrestricted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00NX and 00O0"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Choose finite bases and identify reduction of the scalar-extended matrix with the given residue map using tensor associativity. Rank-nullity shows that the source dimension n is positive and the matrix rank is n-1.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose independent columns and then rows forming a nonzero (n-1)-square residue minor. Its determinant lifts to a unit in A. Permute the chosen columns first, the single remaining column last, and the selected rows first with their complement last. Set U to A^(n-1) and C to the complementary coordinate module, which is free.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The selected square matrix defines an automorphism B, with inverse the adjugate times the inverse of its unit determinant. Evaluating the first component on (u,0) gives B(u). For n=1 the minor is empty with determinant 1; U=0 and B is the identity. This step does not eliminate any off-diagonal block.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 00O0, proof (1), selecting unit minors in finite bases; Tag 00NX for finite free coordinates"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite matrix over a field has a nonzero square minor whose size is its rank",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict recorded.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map between free modules over a local ring with one dimensional residue kernel splits off an identity block; finite generation required",
+   "results": "Module.exists_basis_of_basis_baseChange requires finite presentation; no direct rank-one pivot theorem.",
+   "date": "2026-10-14",
+   "verdict": "none"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_minor|invertible.*block|schur|Schur",
+   "results": "Found finiteFreeMap_residue_localization_strong (injective residue map), and Matrix.exists_submatrix_det_ne_zero_of_le_rank in WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank. Neither directly supplies the requested coordinate decompositions and tensor compatibility.",
+   "date": "2026-10-14",
+   "verdict": "partial"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ResidueKernelUnitMinorMatrixCore",
+  "date": "2026-10-14",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Finite-free residue unit-minor existence, before elimination of the off-diagonal blocks.",
+   "via": [
+    "new-residue-kernel-unit-minor-matrix-core",
+    "new-residue-kernel-unit-minor",
+    "new-universal-h0-cokernel-local-free",
+    "new-universal-h0-split-factorization",
+    "lem-sc-universal-h0-split-differential",
+    "lem-sc-connective-universal-h0-zero-differential",
+    "lem-sc-universal-h0-projective-normalization",
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ResidueKernelUnitMinorPivot",
+  "file": "lean/Sheaf/Algebra/Homology/ResidueKernelUnitMinorPivot.lean",
+  "declaration": "ModuleCat.residue_kernel_unit_minor_pivot",
+  "statement": "theorem residue_kernel_unit_minor_pivot (R : Type v) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] [IsLocalRing A] (X Y : ModuleCat.{v} R) (f : X ⟶ Y) (hX : Module.Free A ((ModuleCat.extendScalars (algebraMap R A)).obj X)) (hY : Module.Free A ((ModuleCat.extendScalars (algebraMap R A)).obj Y)) (hfX : Module.Finite A ((ModuleCat.extendScalars (algebraMap R A)).obj X)) (hfY : Module.Finite A ((ModuleCat.extendScalars (algebraMap R A)).obj Y)) (hres : Nonempty (LinearMap.ker ((ModuleCat.extendScalars ((IsLocalRing.residue A).comp (algebraMap R A))).map f).hom ≃ₗ[IsLocalRing.ResidueField A] IsLocalRing.ResidueField A)) : ∃ (U C : ModuleCat.{v} A), Module.Free A C ∧ ∃ (eX : ((ModuleCat.extendScalars (algebraMap R A)).obj X) ≃ₗ[A] (U × A)) (eY : ((ModuleCat.extendScalars (algebraMap R A)).obj Y) ≃ₗ[A] (U × C)) (B : U ≃ₗ[A] U), ∀ u, (eY (((ModuleCat.extendScalars (algebraMap R A)).map f).hom (eX.symm (u, 0)))).1 = B u",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-80f82",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T215606-L-898650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-80f82",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T215606-L-898650",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, nodes, report, forced adaptation, and direct importer compile match the stated stage-3 requirements; lcompile.py --all succeeds without warnings."
+ }
+}
