@@ -12,28 +12,38 @@
  ],
  "proof": [
   {
-   "text": "For outgoing (σ,a,τ,r), r<a<n gives j=σ(r)=τ(r). Restrict both permutations to the complements of r and j via the increasing successor bijections, and put b=a-1. Stable order, prefix agreement and increasing tails persist; the junction follows the omitted pair because r<a.",
+   "text": "Construct deletePerm by restricting a permutation to complementary subtypes and conjugating by complement equivalences. The private restriction identity is generalized to an arbitrary source-complement enumeration; increasing enumeration is its specialization here. Prove stable sorting is preserved by any square of strictly increasing position and label embeddings, then specialize to succAbove. The lexicographic comparison criterion is proved for arbitrary linearly ordered position and label types with a monotone key and increasing ties. When r<a and a=b+1, the restricted permutations retain prefix agreement and an increasing tail. At b the restricted stable permutation has the old entry at a, so the comparison criterion gives the incoming before condition. This defines prefix_delete with the required prefix-length and omitted-label facts.",
    "uses": [
     "def-pc-alternating-cech-sorting-operators"
    ],
    "elementary": false
   },
   {
-   "text": "For incoming (j,ρ,b,η), insert j into both permutations at its stable rank r. The before condition gives r≤b; set a=b+1. The resulting σ is stable and τ partial sorted. Deletion and insertion are inverse since the stable rank is unique. Thus this is an equivalence with a=b+1 and τ(r)=j. See the Lean docstring for the position and label inequalities and boundary cases.",
+   "text": "Prove prefix_delete injective: apply Mathlib Tuple.eq_sort_iff directly to identify the stable permutations; the prefix-length identity recovers a; apply ExistsUnique.unique directly to cechPartialSort_existsUnique to recover the other permutation; its injectivity and the omitted-label identity recover r.",
    "uses": [
-    "def-pc-alternating-cech-sorting-operators"
+    "def-pc-alternating-cech-sorting-operators",
+    "lem-pc-alternating-cech-partial-sort-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an incoming tuple (j,rho,b,eta), construct sigma=Tuple.sort t and set r=sigma.symm j. The increasing-restriction lemma and Tuple.eq_sort_iff identify its deletion with rho. The before condition and the general comparison criterion imply r<=b. Set a=b+1 and obtain the unique partial sort tau of sigma at a. Prefix deletion preserves partial sorting; apply ExistsUnique.unique directly to cechPartialSort_existsUnique to identify the deletion of tau with eta. The outgoing tuple (sigma,a,tau,r) therefore maps to the prescribed incoming tuple. Equiv.ofBijective completes the construction, and prefix_delete_spec supplies its two required facts.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "lem-pc-alternating-cech-partial-sort-unique"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-alternating-cech-sorting-operators"
+  "def-pc-alternating-cech-sorting-operators",
+  "lem-pc-alternating-cech-partial-sort-unique"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "B3 second reader",
+  "agent": "P4 (Codex)",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM, explicit deletion/insertion argument"
+  "place": "Tag 01FM, verification of cohomology-equation-first-homotopy; explicit prefix deletion, general increasing restrictions and direct reuse of unique sorting (repair of duplicate private helper statements)"
  },
  "mathlib_searches": [
   {
@@ -109,10 +119,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T015544-L-3016720",
-  "kind": "interface",
+  "landing": "20261013T072401-L-1123755",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
