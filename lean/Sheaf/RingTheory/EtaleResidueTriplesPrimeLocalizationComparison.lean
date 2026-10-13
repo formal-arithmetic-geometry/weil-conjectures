@@ -6,8 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
-import Sheaf.Paper.EtaleFiniteDataDescent
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeEquiv
 
 /-! # Comparison of residue-triple colimits across prime localization
 
@@ -74,6 +73,41 @@ theorem etaleResidueTriples_primeLocalization_comparison
         (Functor.const _).obj C),
       Nonempty (IsColimit (Cocone.mk C ι)) ∧
       ∀ t, t.α ≫ ι.app t =
-        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) C) := by sorry
+        CommRingCat.ofHom (algebraMap (Localization.AtPrime p.asIdeal) C) := by
+  classical
+  obtain ⟨E, hE, hR⟩ :=
+    etaleResidueTriples_primeLocalization_coconeEquiv R p K χ q ψ hψ hK
+  let η := c.ι ≫ (Functor.const _).map e.hom
+  let ι := E C η
+  have hη : IsColimit (Cocone.mk C η) := IsColimit.extendIso e.hom hc
+  have hι : IsColimit (Cocone.mk C ι) :=
+    { desc := fun s ↦ hη.desc (Cocone.mk s.pt ((E s.pt).symm s.ι))
+      fac := fun s t ↦ by
+        have h : η ≫ (Functor.const _).map
+            (hη.desc (Cocone.mk s.pt ((E s.pt).symm s.ι))) = (E s.pt).symm s.ι := by
+          apply NatTrans.ext
+          funext j
+          exact hη.fac _ j
+        have h' := congrArg (E s.pt) h
+        rw [hE, (E s.pt).apply_symm_apply] at h'
+        exact congrArg (fun x ↦ x.app t) h'
+      uniq := fun s m hm ↦ by
+        apply hη.uniq (Cocone.mk s.pt ((E s.pt).symm s.ι)) m
+        have h : ι ≫ (Functor.const _).map m = s.ι := by
+          apply NatTrans.ext
+          funext t
+          exact hm t
+        have h' : η ≫ (Functor.const _).map m = (E s.pt).symm s.ι := by
+          apply (E s.pt).injective
+          rw [hE, (E s.pt).apply_symm_apply]
+          exact h
+        intro t
+        exact congrArg (fun x ↦ x.app t) h' }
+  refine ⟨ι, ⟨hι⟩, ?_⟩
+  intro t
+  apply CommRingCat.hom_ext
+  apply IsLocalization.ringHom_ext (p.asIdeal.primeCompl)
+  ext r
+  exact (hR C η t r).trans (hC r).symm
 
 end AlgebraicGeometry.Scheme

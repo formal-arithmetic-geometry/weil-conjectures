@@ -13465,3 +13465,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:17 L: merged deliver/E3/Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackMateSections (stage 3; reviewer PASS; first push; landing 20261013T201745-L-3968049 (interface); batch 20261013T201736; modules 2; new nodes 1)
 - 20:17 L: merged deliver/E3/Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCompositionCounit (stage 3; reviewer PASS; first push; landing 20261013T201746-L-3968243 (interface); batch 20261013T201736; modules 5; new nodes 4)
 - 20:17 L: merged deliver/E4/Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization (stage 3; reviewer PASS; first push; landing 20261013T201746-L-3968356 (proof); batch 20261013T201736; modules 1; new nodes 3)
+- 20:17 L: merged deliver/F1/Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComparison (stage 3; reviewer PASS; first push; landing 20261013T201747-L-3968615 (interface); batch 20261013T201736; modules 2; new nodes 1)
