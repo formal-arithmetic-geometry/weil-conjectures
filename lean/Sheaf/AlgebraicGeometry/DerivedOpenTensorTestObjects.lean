@@ -5,6 +5,8 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.DerivedOpenTestObject
+import Sheaf.AlgebraicGeometry.DerivedOpenTensorHomBijective
 
 /-! # Tensor-stable test objects for derived open restriction
 Source: Stacks Project, Tags 00A7, 08BT and 06YB.
@@ -56,6 +58,10 @@ theorem exists_derivedOpen_tensorTestObject
         (∀ E : schemeDerivedCategory X,
           Function.Bijective (fun f : B ⟶ E ↦ R.map f)) ∧
         (∀ L E : schemeDerivedCategory X,
-          Function.Bijective (fun f : B ⊗ L ⟶ E ↦ R.map f)) := by sorry
+          Function.Bijective (fun f : B ⊗ L ⟶ E ↦ R.map f)) := by
+  dsimp
+  intro A
+  obtain ⟨B, hAB, hBE⟩ := exists_derivedOpen_testObject X U A
+  exact ⟨B, hAB, hBE, derivedOpen_tensorHom_bijective X U B hBE⟩
 
 end AlgebraicGeometry.Scheme
