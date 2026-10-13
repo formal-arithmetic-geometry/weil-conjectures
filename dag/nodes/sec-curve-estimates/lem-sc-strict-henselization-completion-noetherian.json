@@ -28,61 +28,46 @@
  ],
  "proof": [
   {
-   "text": "Put C=R^{\\mathrm{sh}} and I=\\mathfrak mC. By the strict henselization triples statement, C is local with maximal ideal I and residue field a separable closure of R/\\mathfrak m. Since R is Noetherian, \\mathfrak m is finitely generated, hence I is finitely generated; the residue field C/I is Noetherian. Applying the general completion criterion [lem-weil-pbc-completion-noetherian-quotient-noetherian] to (C,I) shows that \\widehat C is Noetherian.",
+   "text": "Apply the ring-predicate local-structure comparison to hC. It provides IsLocalRing C and maximalIdeal C = I, where I is the extension of the maximal ideal of A. The ideal I is finitely generated since maximalIdeal A is finitely generated and ideal map preserves finite generation. Rewrite C/I as the residue field of C, which is Noetherian. The quotient completion criterion now gives IsNoetherianRing (AdicCompletion I C).",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-ring-strict-henselization-local-maximal-ideal",
     "lem-weil-pbc-completion-noetherian-quotient-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ, proof part (a), paragraph beginning 'As m is finitely generated'"
-   }
+   "elementary": false
   },
   {
-   "text": "The canonical map C\\to\\widehat C is flat by [lem-sc-strict-henselization-completion-flat].",
+   "text": "Use the strict-henselization completion-flatness theorem and RingHom.flat_algebraMap_iff to obtain Module.Flat C (AdicCompletion I C).",
    "uses": [
     "lem-sc-strict-henselization-completion-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'"
-   }
+   "elementary": false
   },
   {
-   "text": "Locality of $C\\to\\widehat C$. Let $\\pi:\\widehat C\\to C/I$, $(x_n)_n\\mapsto x_1$, and $\\iota:C\\to\\widehat C$ the canonical map, so $\\pi\\circ\\iota$ is the quotient map $C\\to C/I$. Each $C/I^n$ is local with nilpotent maximal ideal $I/I^n$ (Step 1: $I$ is the maximal ideal of $C$), so $x_n\\in C/I^n$ is a unit iff its image $x_1\\in C/I$ is nonzero. Hence if $x=(x_n)\\in\\widehat C$ has $x_1\\ne0$, every $x_n$ is a unit and the inverses are compatible by uniqueness, so $x$ is a unit; the non-units are therefore exactly $\\ker\\pi$, a proper ideal. Thus $\\widehat C$ is local with maximal ideal $\\ker\\pi$, and $\\iota^{-1}(\\ker\\pi)=\\ker(C\\to C/I)=I$, so $\\iota$ is a local homomorphism.",
+   "text": "Rewrite I as maximalIdeal C and its finite-generation proof accordingly. Apply Mathlib AdicCompletion.isLocalRing_of_fg and AdicCompletion.algebraMap_isLocalHom_of_fg. These require only finite generation of the maximal ideal, not Noetherianity of C.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples"
+    "lem-sc-ring-strict-henselization-local-maximal-ideal"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ, part (a): (R^{sh})^\\wedge is a local ring; elementary inverse-limit argument"
-   }
+   "elementary": true
   },
   {
-   "text": "By Step 2 the map $C\\to\\widehat C$ is flat and by Step 3 it is a local homomorphism of local rings. Therefore it is faithfully flat by the flat-local faithfully-flat lemma [lem-pc-local-flat-faithful-flat-reflects-surjective].",
+   "text": "Register the flatness, completion locality and local-homomorphism proofs as local instances. Module.FaithfullyFlat.of_flat_of_isLocalHom (the existing flat-local Mathlib leaf) gives faithful flatness. Assemble the three conjuncts.",
    "uses": [
     "lem-pc-local-flat-faithful-flat-reflects-surjective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00HR (algebra-lemma-local-flat-ff)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
   "lem-weil-pbc-completion-noetherian-quotient-noetherian",
   "lem-sc-strict-henselization-completion-flat",
   "lem-pc-local-flat-faithful-flat-reflects-surjective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "W2",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof parts (a) and (c)"
+  "place": "Tag 06LJ(a),(c); ring-predicate comparison and Mathlib finite-generation completion-locality lemmas"
  },
  "mathlib_searches": [
   {
@@ -187,5 +172,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T153224-L-1060519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
