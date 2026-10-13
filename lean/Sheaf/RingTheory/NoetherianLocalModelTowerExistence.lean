@@ -9,6 +9,9 @@ public import Sheaf.RingTheory.NoetherianLocalModelTower
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.Paper.LimitTowerEssentiallyFinitePresentation
+import Sheaf.RingTheory.NoetherianLocalModelTowerOfCategoricalLimit
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
+import Mathlib.RingTheory.Localization.Basic
 
 /-!
 # Construction of a Noetherian local model tower
@@ -71,6 +74,68 @@ theorem exists_noetherian_localModelTower
     [Algebra.FinitePresentation R P] [Algebra.FinitePresentation R Q]
     (W : Submonoid P) (V : Submonoid Q) [IsLocalization W S] [IsLocalization V S']
     [Module.FinitePresentation S' M] :
-    Nonempty (NoetherianLocalModelTower R S S' M) := by sorry
+    Nonempty (NoetherianLocalModelTower R S S' M) := by
+  classical
+  let R₁ := ULift.{max u v w} R
+  let S₁ := ULift.{max u v w} S
+  let T₁ := ULift.{max u v w} S'
+  let α : R₁ →+* S₁ := (algebraMap R S).ulift
+  let β : S₁ →+* T₁ := (algebraMap S S').ulift
+  have : IsLocalHom (ULift.ringEquiv : R₁ ≃+* R).toRingHom :=
+    ⟨fun a h ↦ h.map (ULift.ringEquiv : R₁ ≃+* R).symm.toRingHom⟩
+  have : IsLocalHom (ULift.ringEquiv : S₁ ≃+* S).toRingHom :=
+    ⟨fun a h ↦ h.map (ULift.ringEquiv : S₁ ≃+* S).symm.toRingHom⟩
+  have : IsLocalHom (ULift.ringEquiv : T₁ ≃+* S').toRingHom :=
+    ⟨fun a h ↦ h.map (ULift.ringEquiv : T₁ ≃+* S').symm.toRingHom⟩
+  have : IsLocalRing R₁ := RingHom.domain_isLocalRing ULift.ringEquiv.toRingHom
+  have : IsLocalRing S₁ := RingHom.domain_isLocalRing ULift.ringEquiv.toRingHom
+  have : IsLocalRing T₁ := RingHom.domain_isLocalRing ULift.ringEquiv.toRingHom
+  have : IsLocalHom α := by dsimp [α, RingHom.ulift]; infer_instance
+  have : IsLocalHom β := by dsimp [β, RingHom.ulift]; infer_instance
+  let : Algebra R₁ P := ULift.algebra' R P
+  let : Algebra R₁ Q := ULift.algebra' R Q
+  have : Algebra.FinitePresentation R₁ P := by
+    apply RingHom.finitePresentation_algebraMap.mp
+    exact (RingHom.finitePresentation_algebraMap.mpr
+      (inferInstance : Algebra.FinitePresentation R P)).comp
+        (RingHom.FinitePresentation.of_bijective
+          (show Function.Bijective (ULift.ringEquiv : R₁ ≃+* R).toRingHom from
+            ULift.ringEquiv.bijective))
+  have : Algebra.FinitePresentation R₁ Q := by
+    apply RingHom.finitePresentation_algebraMap.mp
+    exact (RingHom.finitePresentation_algebraMap.mpr
+      (inferInstance : Algebra.FinitePresentation R Q)).comp
+        (RingHom.FinitePresentation.of_bijective
+          (show Function.Bijective (ULift.ringEquiv : R₁ ≃+* R).toRingHom from
+            ULift.ringEquiv.bijective))
+  let f : P →+* S₁ := ULift.ringEquiv.symm.toRingHom.comp (algebraMap P S)
+  let g : Q →+* T₁ := ULift.ringEquiv.symm.toRingHom.comp (algebraMap Q S')
+  have hf : f.comp (algebraMap R₁ P) = α := by
+    ext x
+    exact (IsScalarTower.algebraMap_apply R P S x.down).symm
+  have hg : g.comp (algebraMap R₁ Q) = β.comp α := by
+    ext x
+    exact (IsScalarTower.algebraMap_apply R Q S' x.down).symm.trans
+      (IsScalarTower.algebraMap_apply R S S' x.down)
+  have hS : letI := f.toAlgebra; IsLocalization W S₁ :=
+    (IsLocalization.isLocalization_iff_of_ringEquiv W
+      (ULift.ringEquiv : S₁ ≃+* S).symm).mp inferInstance
+  have hT : letI := g.toAlgebra; IsLocalization V T₁ :=
+    (IsLocalization.isLocalization_iff_of_ringEquiv V
+      (ULift.ringEquiv : T₁ ≃+* S').symm).mp inferInstance
+  let : Algebra T₁ S' := ULift.algebra' S' S'
+  have : Module.FinitePresentation T₁ S' := by
+    let e : T₁ ≃ₗ[T₁] S' :=
+      { ULift.ringEquiv.toAddEquiv with map_smul' := fun _ _ ↦ rfl }
+    exact Module.FinitePresentation.of_equiv e
+  have : Module.FinitePresentation T₁ M := Module.FinitePresentation.trans T₁ M S'
+  obtain ⟨n, K, e, hK⟩ := Module.FinitePresentation.exists_fin T₁ M
+  obtain ⟨m, H, hH⟩ := K.fg_iff_exists_fin_linearMap.mp hK
+  have hM : Nonempty (((Fin n → T₁) ⧸ LinearMap.range H) ≃ₗ[T₁] M) := by
+    rw [hH]
+    exact ⟨e.symm⟩
+  have hlimit := WeilConjectures.limit_tower_essentially_finite_presentation
+    α β P W f hf hS Q V g hg hT M m n H hM
+  exact noetherian_localModelTower_of_categoricalLimit R S S' M m n hlimit
 
 end Module

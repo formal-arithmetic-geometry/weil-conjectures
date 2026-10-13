@@ -1,0 +1,175 @@
+{
+ "id": "lem-weil-pbc-noetherian-local-model-tower-categorical-conversion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite-etale-lifting step 7 (essential surjectivity via 0GS2): approximation branch, criterion-flatness-fibre steps 1--8 and its limit localization comparisons; Existence of a Noetherian local model tower; conversion of an already supplied categorical system to the elementwise tower (parent proof steps 2–5)",
+   "via": [
+    "lem-weil-pbc-noetherian-local-model-tower-existence",
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Convert a categorical local limit system to a Noetherian model tower",
+ "statement": "Let R, S, S′ be commutative rings in universes u, v, w, with algebras R → S → S′, and let M in universe t be an S′-module with the compatible restricted S-action. Write R₁, S₁, T₁ for the ULift copies of R, S, S′ in universe max(u,v,w), and α, β for the lifted algebra maps. Fix natural numbers s and t. Assume a nonempty directed preorder Λ in universe max(u,v,w), functors A, B, C to commutative rings in that universe, stage maps ρ:A→B and σ:B→C, compatible cocones π,κ,κ′ to R₁,S₁,T₁, a functor D to abelian groups in the module universe, a cocone ν to M, and Cᵢ-module structures on Dᵢ. Assume all three ring diagrams consist of local rings, all stage, transition and limit ring maps are local, all squares and semilinearity identities hold, the four cocones are colimit cocones, Aᵢ is essentially of finite type over the integers and ρᵢ and σᵢ are essentially of finite type, and each Dᵢ is finite and a cokernel of an s-to-t finite matrix. Assume the middle- and top-ring transition base changes are localizations and module transition base changes are isomorphisms, specified on pure tensors. Finally assume the middle- and top-ring base changes to the limits are localizations and T₁ tensor over Cᵢ Dᵢ is isomorphic to M, again specified on pure tensors. These are precisely the categorical data in the conclusion of [lem-weil-pbc-limit-tower-essentially-finite-presentation], not an assumption that the existence theorem holds. Then a Noetherian local model tower [def-weil-pbc-noetherian-local-model-tower] for R,S,S′,M exists, with the universe bounds in that definition.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-local-model-tower",
+  "lem-weil-pbc-limit-tower-essentially-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Retain the supplied nonempty directed index, stage rings and stage modules. Define stage algebra maps by ρ and σ, base-to-top by their composition, and module actions by scalar restriction. The supplied essential finite type assertions, finite-type Noetherianity and localization Noetherianity show all stage rings are Noetherian. All local structures and module finiteness are supplied.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  },
+  {
+   "text": "Take transitions from functor maps and maps to the original rings by composing π, κ and κ′ with ULift.down. Functor laws and naturality give directed-system and compatibility laws. The elementwise filtered-colimit descriptions give representation and eventual equality for the ring cocones and module cocone; transport through the lift equivalences.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  },
+  {
+   "text": "Use the supplied middle-to-top and module transition comparisons. Base-change the middle-ring transition localization along the top-stage ring and compose it with the supplied top-ring transition localization. Tensor associativity identifies the source with Tᵢ tensor over Rᵢ Rⱼ, proving the base-to-top transition comparison.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  },
+  {
+   "text": "Transport the limit middle-ring localization through tensor symmetry and ULift.down and use its module-localization equivalence for baseLocalization. Set E = S tensor over Sᵢ Tᵢ and L = S tensor over Sᵢ Nᵢ. Give L the tensor E-action. The supplied top-ring limit comparison makes S′ a localization of E at a submonoid U. Localization-tensor compatibility identifies U⁻¹L with S′ tensor over E L; tensor associativity identifies this with S′ tensor over Tᵢ Nᵢ, whose supplied base-change equivalence identifies it with M. Restrict scalars to S to obtain moduleLocalization.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Convert a filtered colimit of local rings essentially of finite type over the integers and compatible module tensor comparisons into an elementwise directed Noetherian model system",
+   "results": "Module.DirectLimit.exists_of₂; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; localCohomology.hasColimitDiagram; Module.fgSystem.instDirectedSystemSubtypeSubmoduleFGMemValCoeLinearMapId; Module.DirectLimit.exists_of; Submodule.FG.lTensor.directedSystem; Submodule.FG.rTensor.directedSystem; localCohomology.ofDiagram",
+   "date": "2026-10-13",
+   "verdict": "no exact match; only component lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isColimit_exists_rep\"",
+   "results": "CategoryTheory.Limits.Concrete.isColimit_exists_rep; AlgebraicGeometry.SheafedSpace.isColimit_exists_rep",
+   "date": "2026-10-13",
+   "verdict": "no exact match; only component lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "noetherian.*(limit|tower)|EssFiniteType.*[Nn]oetherian|isColimit_rep_eq_iff_exists",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Unramified.lean; Mathlib/FieldTheory/Tower.lean; Mathlib/FieldTheory/Galois/Basic.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/RingTheory/LocalRing/Length.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; only component lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Convert a categorical filtered limit presentation of local rings and finite modules with localization tensor comparisons to a directed Noetherian local model tower",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianLocalModelTowerExistence",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NoetherianLocalModelTowerOfCategoricalLimit",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalModelTowerOfCategoricalLimit.lean",
+  "declaration": "Module.noetherian_localModelTower_of_categoricalLimit",
+  "statement": "theorem noetherian_localModelTower_of_categoricalLimit\n    (R : Type u) (S : Type v) (S' : Type w) (M : Type t)\n    [CommRing R] [CommRing S] [CommRing S'] [AddCommGroup M]\n    [Algebra R S] [Algebra S S'] [Module S' M] [Module S M]\n    [IsScalarTower S S' M] (s t : ℕ)\n    (h :\n      let R₁ := ULift.{max u v w} R\n      let S₁ := ULift.{max u v w} S\n      let T₁ := ULift.{max u v w} S'\n      let α : R₁ →+* S₁ := (algebraMap R S).ulift\n      let β : S₁ →+* T₁ := (algebraMap S S').ulift\n      ∃ (Λ : Type (max u v w)) (_ : Preorder Λ) (_ : Nonempty Λ) (_ : IsDirected Λ (· ≤ ·))\n        (A Bs C : Λ ⥤ CommRingCat.{max u v w}) (ρ : A ⟶ Bs) (σ : Bs ⟶ C)\n        (π : A ⟶ (Functor.const Λ).obj (CommRingCat.of R₁))\n        (κ : Bs ⟶ (Functor.const Λ).obj (CommRingCat.of S₁))\n        (κ' : C ⟶ (Functor.const Λ).obj (CommRingCat.of T₁))\n        (D : Λ ⥤ AddCommGrpCat.{t})\n        (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M))\n        (_ : ∀ i : Λ, Module (C.obj i) (D.obj i)),\n        -- local rings and local homomorphisms\n        (∀ i, IsLocalRing (A.obj i)) ∧ (∀ i, IsLocalRing (Bs.obj i)) ∧\n        (∀ i, IsLocalRing (C.obj i)) ∧\n        (∀ i, IsLocalHom (ρ.app i).hom) ∧ (∀ i, IsLocalHom (σ.app i).hom) ∧\n        (∀ (i j : Λ) (h : i ≤ j), IsLocalHom (A.map (homOfLE h)).hom) ∧\n        (∀ (i j : Λ) (h : i ≤ j), IsLocalHom (Bs.map (homOfLE h)).hom) ∧\n        (∀ (i j : Λ) (h : i ≤ j), IsLocalHom (C.map (homOfLE h)).hom) ∧\n        (∀ i, IsLocalHom (@CommRingCat.Hom.hom _ (CommRingCat.of R₁) (π.app i))) ∧\n        (∀ i, IsLocalHom (@CommRingCat.Hom.hom _ (CommRingCat.of S₁) (κ.app i))) ∧\n        (∀ i, IsLocalHom (@CommRingCat.Hom.hom _ (CommRingCat.of T₁) (κ'.app i))) ∧\n        -- the maps to `R₁, S₁, T₁` commute with `α, β`\n        (∀ i, ρ.app i ≫ κ.app i = π.app i ≫ CommRingCat.ofHom α) ∧\n        (∀ i, σ.app i ≫ κ'.app i = κ.app i ≫ CommRingCat.ofHom β) ∧\n        -- semilinearity of the module maps\n        (∀ (i j : Λ) (h : i ≤ j) (y : C.obj i) (x : D.obj i),\n          (D.map (homOfLE h)).hom (y • x) =\n            (C.map (homOfLE h)).hom y • (D.map (homOfLE h)).hom x) ∧\n        (∀ i (y : C.obj i) (x : D.obj i),\n          (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) (y • x) =\n            (@CommRingCat.Hom.hom _ (CommRingCat.of T₁) (κ'.app i)) y •\n              (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x) ∧\n        -- (1) the colimits\n        Nonempty (IsColimit (Cocone.mk (CommRingCat.of R₁) π)) ∧\n        Nonempty (IsColimit (Cocone.mk (CommRingCat.of S₁) κ)) ∧\n        Nonempty (IsColimit (Cocone.mk (CommRingCat.of T₁) κ')) ∧\n        Nonempty (IsColimit (Cocone.mk (AddCommGrpCat.of M) ν)) ∧\n        -- (2) essential finite type\n        (∀ i, (algebraMap ℤ (A.obj i)).EssFiniteType) ∧\n        (∀ i, (ρ.app i).hom.EssFiniteType) ∧\n        (∀ i, (σ.app i).hom.EssFiniteType) ∧\n        -- (3) finite generation, indeed cokernels of `t × s` matrices\n        (∀ i, Module.Finite (C.obj i) (D.obj i)) ∧\n        (∀ i, ∃ H₀ : (Fin s → C.obj i) →ₗ[C.obj i] (Fin t → C.obj i),\n          Nonempty (((Fin t → C.obj i) ⧸ LinearMap.range H₀) ≃ₗ[C.obj i] D.obj i)) ∧\n        -- (4) transition base changes\n        (∀ (i j : Λ) (h : i ≤ j),\n          letI := (ρ.app i).hom.toAlgebra\n          letI := (A.map (homOfLE h)).hom.toAlgebra\n          ∃ φ : Bs.obj i ⊗[A.obj i] A.obj j →+* Bs.obj j,\n            (∀ (x : Bs.obj i) (y : A.obj j),\n              φ (x ⊗ₜ[A.obj i] y) = (Bs.map (homOfLE h)).hom x * (ρ.app j).hom y) ∧\n            (letI := φ.toAlgebra\n             ∃ U : Submonoid (Bs.obj i ⊗[A.obj i] A.obj j), IsLocalization U (Bs.obj j))) ∧\n        (∀ (i j : Λ) (h : i ≤ j),\n          letI := (σ.app i).hom.toAlgebra\n          letI := (Bs.map (homOfLE h)).hom.toAlgebra\n          ∃ φ : C.obj i ⊗[Bs.obj i] Bs.obj j →+* C.obj j,\n            (∀ (x : C.obj i) (y : Bs.obj j),\n              φ (x ⊗ₜ[Bs.obj i] y) = (C.map (homOfLE h)).hom x * (σ.app j).hom y) ∧\n            (letI := φ.toAlgebra\n             ∃ U : Submonoid (C.obj i ⊗[Bs.obj i] Bs.obj j), IsLocalization U (C.obj j))) ∧\n        (∀ (i j : Λ) (h : i ≤ j),\n          letI := (C.map (homOfLE h)).hom.toAlgebra\n          ∃ e : C.obj j ⊗[C.obj i] D.obj i ≃ₗ[C.obj j] D.obj j,\n            ∀ (y : C.obj j) (x : D.obj i),\n              e (y ⊗ₜ[C.obj i] x) = y • (D.map (homOfLE h)).hom x) ∧\n        -- (5) base changes to the limit\n        (∀ i,\n          letI := (ρ.app i).hom.toAlgebra\n          letI := (@CommRingCat.Hom.hom _ (CommRingCat.of R₁) (π.app i)).toAlgebra\n          ∃ φ : Bs.obj i ⊗[A.obj i] R₁ →+* S₁,\n            (∀ (x : Bs.obj i) (y : R₁),\n              φ (x ⊗ₜ[A.obj i] y) =\n                (@CommRingCat.Hom.hom _ (CommRingCat.of S₁) (κ.app i)) x * α y) ∧\n            (letI := φ.toAlgebra\n             ∃ U : Submonoid (Bs.obj i ⊗[A.obj i] R₁), IsLocalization U S₁)) ∧\n        (∀ i,\n          letI := (σ.app i).hom.toAlgebra\n          letI := (@CommRingCat.Hom.hom _ (CommRingCat.of S₁) (κ.app i)).toAlgebra\n          ∃ φ : C.obj i ⊗[Bs.obj i] S₁ →+* T₁,\n            (∀ (x : C.obj i) (y : S₁),\n              φ (x ⊗ₜ[Bs.obj i] y) =\n                (@CommRingCat.Hom.hom _ (CommRingCat.of T₁) (κ'.app i)) x * β y) ∧\n            (letI := φ.toAlgebra\n             ∃ U : Submonoid (C.obj i ⊗[Bs.obj i] S₁), IsLocalization U T₁)) ∧\n        (∀ i,\n          letI := (@CommRingCat.Hom.hom _ (CommRingCat.of T₁) (κ'.app i)).toAlgebra\n          ∃ e : T₁ ⊗[C.obj i] D.obj i ≃ₗ[T₁] M,\n            ∀ (y : T₁) (x : D.obj i),\n              e (y ⊗ₜ[C.obj i] x) =\n                y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x)) :\n    Nonempty (NoetherianLocalModelTower R S S' M)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T231539-L-1818858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T231539-L-1818858",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

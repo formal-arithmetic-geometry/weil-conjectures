@@ -13,85 +13,40 @@
  ],
  "proof": [
   {
-   "text": "1. Lift the three rings to `Type (max u v w)` by `ULift`, transporting their ring,\n   algebra and local structures along the canonical ring equivalences. Transport the\n   localized presentations over `P` and `Q` by composition with these equivalences.\n   The module remains in `Type t`, with the transported top-ring action. A finite\n   presentation supplies a finite matrix whose cokernel is the module.",
-   "uses": [
-    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-localization-tensor-over-base"
-   ],
-   "elementary": false
+   "text": "Lift R,S,S′ to the common universe by ULift. Reflect units through the canonical ring equivalences to obtain local structures and local lifted maps. Restrict the P- and Q-algebra base along ULift.down; finite presentation is preserved by composition with a ring equivalence. Transport the two localization presentations to the lifted target rings. Extend the S′-module presentation across the rank-one scalar equivalence ULift S′ ≃ S′. Mathlib Module.FinitePresentation.exists_fin gives a finite free quotient M ≃ (Fin n → ULift S′)/K, and K.fg_iff_exists_fin_linearMap gives a matrix H with range K. Its quotient is therefore linearly equivalent to M. This entire step is proved in Lean, with no new hole.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
   },
   {
-   "text": "2. Apply `WeilConjectures.limit_tower_essentially_finite_presentation` to the lifted\n   tower and this matrix. Its rings are essentially of finite type successively over\n   the integers, hence Noetherian: finite type algebras over Noetherian rings are\n   Noetherian, as are their localizations. Restrict stage-module actions along the two\n   stage ring maps; all stage scalar towers then follow from composition.",
+   "text": "Apply WeilConjectures.limit_tower_essentially_finite_presentation to the lifted ring maps, transported algebra presentations and the constructed matrix presentation of M. This produces the categorical system, with its actual cocones, local and essential finite type assertions, and all transition and limit base-change comparisons.",
    "uses": [
-    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-localization-tensor-over-base"
+    "lem-weil-pbc-limit-tower-essentially-finite-presentation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
   },
   {
-   "text": "3. Use the functors' maps for the transitions, the specified colimit cocones for the\n   maps to the limit, and transport the latter through `ULift.down`. The elementwise\n   characterization of a filtered colimit supplies the four representation and eventual\n   equality clauses. Naturality supplies all commutative squares and semilinearity.",
+   "text": "Apply the categorical conversion theorem to this supplied system. This is the remaining strictly smaller step: it converts a system already constructed by the preceding theorem into the elementwise NoetherianLocalModelTower structure, rather than asserting existence of the entire system from finite presentation.",
    "uses": [
-    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-localization-tensor-over-base"
+    "lem-weil-pbc-noetherian-local-model-tower-categorical-conversion"
    ],
-   "elementary": false
-  },
-  {
-   "text": "4. Compose the middle- and top-ring transition localizations: tensor associativity,\n   localization base change and localization of a localization show that\n   `Tᵢ ⊗[Rᵢ] Rⱼ → Tⱼ` is a localization. The other transition clauses come directly\n   from the tower theorem.",
-   "uses": [
-    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-localization-tensor-over-base"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "5. Tensor symmetry converts the limit middle-ring localization to\n   `R ⊗[Rᵢ] Sᵢ`. A ring localization is its module localization. For the module put\n   `C = S ⊗[Sᵢ] Tᵢ`, acting canonically on `S ⊗[Sᵢ] Nᵢ`. The top-ring limit clause\n   identifies `S'` with a localization of `C`; its module clause identifies `M` with\n   `S' ⊗[Tᵢ] Nᵢ`. Tensor associativity and localization-tensor compatibility identify\n   this with the localization of `S ⊗[Sᵢ] Nᵢ` at the same submonoid, `S`-linearly.\n   Transport these comparisons through the lift equivalences. No flatness was used.",
-   "uses": [
-    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-localization-tensor-over-base"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a Noetherian local model tower"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-limit-tower-essentially-finite-presentation",
-  "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-of-localization",
-  "lem-weil-pbc-localization-tensor-over-base"
+  "lem-weil-pbc-noetherian-local-model-tower-categorical-conversion"
  ],
  "proof_origin": {
   "by": "document",
@@ -187,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T222423-L-1230145",
+  "landing": "20261013T231539-L-1818858",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
