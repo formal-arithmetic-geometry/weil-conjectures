@@ -1,0 +1,109 @@
+{
+ "id": "def-pc-local-map-recovery",
+ "kind": "definition",
+ "title": "Recovery equation for a prescribed local map family",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], $p:Y\\to X$ a morphism, and $U$ an open cover of $X$. Let $F,G$ be modules on $X$, let $\\delta:p^*F\\to p^*G$ be a morphism of tensor pullbacks [def-pc-module-pullback], and let $r_\\alpha$ be a morphism between the ordinary pullbacks of $F,G$ to each member $U_\\alpha$. Define recovery of $\\delta$ by $r$ to mean the following equation for every $\\alpha$. Write $V=p^*U$, $s_\\alpha:V_\\alpha\\to U_\\alpha$ for the cover map, and $t_\\alpha$ for the canonical restriction comparison [def-pc-open-cover-tensor-pullback-comparison]. Then $t_\\alpha^{-1}(F)\\circ s_\\alpha^*(r_\\alpha)\\circ t_\\alpha(G)=V_\\alpha^*(\\delta)$, where composition is written in diagrammatic order, from left to right. This is a predicate given by these displayed equalities; it chooses no morphism or witness.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-open-cover-tensor-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof, Zariski gluing; Sheaves on Spaces Tag 0095"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: the requirement that descended local maps recover the fixed limit map before Zariski gluing",
+   "via": [
+    "lem-pc-fp-local-map-overlap-compatibility",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "openCoverTensorPullbackComparison|localMapRecovery",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "No matching definition. The local library comparison defines the isomorphism, not its recovery equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equation saying a local family of module maps on an open cover recovers a fixed global map after pullback and the tensor restriction comparison",
+   "results": "ModuleCat.Tilde.toOpen_res, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, ModuleCat.Tilde.res_apply, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, ModuleCat.Tilde.res_const, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd",
+   "date": "2026-10-13",
+   "verdict": "No matching definition. The local library comparison defines the isomorphism, not its recovery equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-13",
+   "verdict": "No matching definition. The local library comparison defines the isomorphism, not its recovery equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equation for pulling back local module maps along an open cover and recovering a given global morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalMapRecovery",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalMapRecovery.lean",
+  "declaration": "AlgebraicGeometry.localMapRecovery",
+  "statement": "def localMapRecovery {X Y : Scheme.{u}} (p : Y ⟶ X) (U : X.OpenCover.{u}) (F G : X.Modules) (δ : (Scheme.Modules.tensorPullback p).obj F ⟶ (Scheme.Modules.tensorPullback p).obj G) (r : ∀ α, (Scheme.Modules.pullback (U.f α)).obj F ⟶ (Scheme.Modules.pullback (U.f α)).obj G) : Prop",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef5d4",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T190139-L-3216022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef5d4",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T190139-L-3216022",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean signatures with their nodes and the refactored formulas with the originals; all five modules and the sole direct importer compile cleanly; axioms are permitted, with sorryAx from the two documented obligations."
+ }
+}

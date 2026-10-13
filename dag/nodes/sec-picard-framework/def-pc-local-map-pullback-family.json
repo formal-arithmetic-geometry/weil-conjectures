@@ -1,0 +1,108 @@
+{
+ "id": "def-pc-local-map-pullback-family",
+ "kind": "definition",
+ "title": "The explicit pulled-back local map family",
+ "statement": "For schemes X,Y [def-pc-scheme], a map q:Y→X, and an open cover U_0 of X, let F,G be modules on X and F',G' modules on Y. Let κ:F'→q^*F and ρ:q^*G→G' be global maps, using tensor pullback [def-pc-module-pullback]. Given local maps r_0 between the ordinary restrictions of F and G to U_0, define a family on U=q^*U_0 between the ordinary restrictions of F' and G'. Its component is restriction of κ, followed by the inverse open-cover tensor restriction comparison [def-pc-open-cover-tensor-pullback-comparison], ordinary pullback of r_0 along the cover map U→U_0, the forward comparison, and restriction of ρ. This is a concrete five-map composite, with no existence choice.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-open-cover-tensor-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof, Zariski gluing and pullback of local maps"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackComp|toDescentData",
+   "results": "Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level overlap or recovery statement; existing naturality and pullback composition lemmas supply parts of the argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.naturality_2",
+   "results": "CategoryTheory.NatIso.naturality_2",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level overlap or recovery statement; existing naturality and pullback composition lemmas supply parts of the argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite family of local maps between finitely presented quasicoherent modules eventually agree on overlaps of an affine cover in a directed inverse limit of schemes",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.OpenCover.ext_elem, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level overlap or recovery statement; existing naturality and pullback composition lemmas supply parts of the argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback composition isomorphisms transport morphisms on an open cover compatibly with further base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Explicit pullback of the local map family before Zariski gluing",
+   "via": [
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalMapPullbackFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalMapPullbackFamily.lean",
+  "declaration": "AlgebraicGeometry.localMapPullbackFamily",
+  "statement": "def localMapPullbackFamily {X Y : Scheme.{u}} (q : Y ⟶ X) (U₀ : X.OpenCover.{u}) (F G : X.Modules) (F' G' : Y.Modules) (κ : F' ⟶ (Scheme.Modules.tensorPullback q).obj F) (ρ : (Scheme.Modules.tensorPullback q).obj G ⟶ G') (r₀ : ∀ α, (Scheme.Modules.pullback (U₀.f α)).obj F ⟶ (Scheme.Modules.pullback (U₀.f α)).obj G) : ∀ α, (Scheme.Modules.pullback ((U₀.pullback₁ q).f α)).obj F' ⟶ (Scheme.Modules.pullback ((U₀.pullback₁ q).f α)).obj G'",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef5d4",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T190139-L-3216022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef5d4",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T190139-L-3216022",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean signatures with their nodes and the refactored formulas with the originals; all five modules and the sole direct importer compile cleanly; axioms are permitted, with sorryAx from the two documented obligations."
+ }
+}

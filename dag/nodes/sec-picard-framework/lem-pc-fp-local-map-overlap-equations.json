@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-fp-local-map-overlap-equations",
+ "kind": "statement",
+ "title": "Eventual descent morphism for a fixed local map family",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathrm{CommRing}$ a functor with Noetherian rings $R_k$, and $c$ a limit cone of $R^{\\mathrm{op}}\\circ\\operatorname{Spec}$ with affine vertex $S$. Fix $i\\in I$ and a quasi-compact, quasi-separated, locally finitely presented morphism $f:X_i\\to\\operatorname{Spec}(R_i)$ [def-pc-scheme]. Put $X=X_i\\times_{\\operatorname{Spec}(R_i)} S$, and $X_j=X_i\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_j)$ for $j\\geq i$ [def-pc-base-change]. Fix $j\\geq i$, finitely presented quasi-coherent modules $F_j,G_j$ on $X_j$ [pqf-def-coherent], and a stage $k\\geq j$. Write X_t for the base change of X_i to Spec R_t. At stage k let A_0 be tensor pullback from X_j to X_k and B_0 tensor pullback from X_k to X. Let δ:B_0(A_0(F_j))→B_0(A_0(G_j)) be any global map. Let U_0 be a finite affine open cover of X_k and r_0 a family of maps between the restrictions of A_0(F_j) and A_0(G_j), whose limit pullbacks recover the restrictions of δ through the canonical restriction comparison [def-pc-open-cover-tensor-pullback-comparison]. There exists l≥k such that, writing q:X_l→X_k, U=q^*U_0, C=q^* for tensor pullback and Q for the ordinary restriction-to-descent-data functor, each member of U is affine. Moreover, for every two modules F',G' on X_l and global maps κ:F'→C(A_0(F_j)), ρ:C(A_0(G_j))→G', the family obtained by restricting κ, then applying the canonical restriction comparison to q^*r_0, and then restricting ρ is the component family of a descent morphism Q(F')→Q(G'). Its components equal this explicit family. No recovery assertion at stage l is made.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-local-map-pullback-family",
+  "def-pc-local-map-recovery"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof, agreement of local lifts on overlaps"
+ },
+ "proof": [
+  {
+   "text": "First substitute the equality identifying A₀ with module base change.\nAt stage k take the difference of the two restrictions of r₀ on each pairwise\nintersection of cover members. Their pullbacks to the limit agree, since both recover\nthe restriction of the same global map δ. Pullback composition identifies the two\nrestrictions, so their difference pulls back to zero. Quasi-separatedness makes each\nintersection quasi-compact. Restricted tensor pullbacks of Fj and Gj remain finitely\npresented and quasi-coherent. Apply finitePresentation_zero_map_descent to this\nintersection over Spec R_k, using the pullback universal properties to identify its\nidentity-stage and later base changes. There are finitely many pairs. Directedness\ngives one common later stage, and functors preserve zero maps, so all defects vanish\nthere. Every test scheme mapping to two cover members factors through their\nintersection. Pullback of its equality is the universal-test compatibility equation\nfor the displayed family of pulled-back maps. Assemble its descent morphism with\nthose components. The transition q is affine, as a base change of a map between\naffine schemes; hence the inverse images of the affine cover members are affine.\nFor arbitrary F', G', κ and ρ in the conclusion, compose this descent morphism on\nthe left with Q.map κ and on the right with Q.map ρ. The components of Q.map are\nordinary restriction of the maps; functoriality and associativity give exactly the\nfive displayed factors defining r. This uses no inverse or property of κ and ρ.\nThe component identities follow from the construction. Empty covers impose no\ncompatibility equations and use k itself. Empty intersections, zero modules and\nidentity transitions cause no exceptions. No new-stage recovery is asserted.",
+   "uses": [
+    "lem-pc-fp-zero-map-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-zero-map-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof, agreement of local lifts on overlaps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackComp|toDescentData",
+   "results": "Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level overlap or recovery statement; existing naturality and pullback composition lemmas supply parts of the argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.naturality_2",
+   "results": "CategoryTheory.NatIso.naturality_2",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level overlap or recovery statement; existing naturality and pullback composition lemmas supply parts of the argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite family of local maps between finitely presented quasicoherent modules eventually agree on overlaps of an affine cover in a directed inverse limit of schemes",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.OpenCover.ext_elem, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level overlap or recovery statement; existing naturality and pullback composition lemmas supply parts of the argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback composition isomorphisms transport morphisms on an open cover compatibly with further base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Eventual universal-test equations for a fixed local map family",
+   "via": [
+    "lem-pc-fp-module-map-descent",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-local-map-overlap-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapEquations",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalMapOverlapEquations.lean",
+  "declaration": "AlgebraicGeometry.finitePresentation_local_maps_eventual_overlap_equations",
+  "statement": "theorem finitePresentation_local_maps_eventual_overlap_equations {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : (∀ (j : I) (hij : i ≤ j) (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules), Fj.IsFinitePresentation → Fj.IsQuasicoherent → Gj.IsFinitePresentation → Gj.IsQuasicoherent → ∀ (k : I) (hjk : j ≤ k), ∀ (A₀ : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules ⥤ (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).Modules), A₀ = Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (Over.homMk (Spec.map (R.map (homOfLE hjk))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) → let B₀ := Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op)) ∀ δ : B₀.obj (A₀.obj Fj) ⟶ B₀.obj (A₀.obj Gj), ∀ (U₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u}), Finite U₀.I₀ → (∀ a, IsAffine (U₀.X a)) → let Q₀ := modulesPseudofunctor.toDescentData U₀.f let p₀ := baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op)) let V₀ := U₀.pullback₁ p₀ ∀ r₀ : ∀ a, (Q₀.obj (A₀.obj Fj)).obj a ⟶ (Q₀.obj (A₀.obj Gj)).obj a, localMapRecovery p₀ U₀ (A₀.obj Fj) (A₀.obj Gj) δ r₀ → ∃ (j' : I) (hkj' : k ≤ j'), let q := (baseChangeMap f (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkj')))))) (Over.homMk (Spec.map (R.map (homOfLE hkj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))); let U : (pullback f (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkj')))))).OpenCover.{u} := U₀.pullback₁ q let Q := modulesPseudofunctor.toDescentData U.f let C := Scheme.Modules.tensorPullback q (∀ α, IsAffine (U.X α)) ∧ (∀ (F' G' : (pullback f (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkj')))))).Modules) (κ : F' ⟶ C.obj (A₀.obj Fj)) (ρ : C.obj (A₀.obj Gj) ⟶ G'), let r : ∀ α, (Q.obj F').obj α ⟶ (Q.obj G').obj α := localMapPullbackFamily q U₀ (A₀.obj Fj) (A₀.obj Gj) F' G' κ ρ r₀ ∃ ψ : Q.obj F' ⟶ Q.obj G', ∀ α, ψ.hom α = r α))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef5d4",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T190139-L-3216022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef5d4",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T190139-L-3216022",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean signatures with their nodes and the refactored formulas with the originals; all five modules and the sole direct importer compile cleanly; axioms are permitted, with sorryAx from the two documented obligations."
+ }
+}

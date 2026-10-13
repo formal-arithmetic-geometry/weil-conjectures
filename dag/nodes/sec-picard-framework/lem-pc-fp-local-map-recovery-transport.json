@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-fp-local-map-recovery-transport",
+ "kind": "statement",
+ "title": "Recovery equations persist under an arbitrary later base change",
+ "statement": "Let X_0,X_1,X_2,Z be schemes [def-pc-scheme], with maps h:X_1→X_0, q:X_2→X_1, p:Z→X_2, b:Z→X_1, a:Z→X_0 and d:X_2→X_0. Assume p q=b, q h=d, b h=a and p d=a, where juxtaposition means composition from left to right. Let F,G be modules on X_0, and φ:a^*F→a^*G a morphism of tensor pullbacks [def-pc-module-pullback]. Let e_0:a^*≅h^* b^*, e:a^*≅d^* p^*, and z:d^*≅h^* q^* be supplied natural isomorphisms, each equal to the canonical tensor composition comparison for its displayed map equation [def-pc-tensor-pullback-composition-iso]. Let U_0 be an open cover of X_1, and r_0 a family of maps between the ordinary restrictions of h^*F and h^*G. Assume its pullback along b, conjugated by the restriction comparison [def-pc-open-cover-tensor-pullback-comparison], is the restriction of e_0^{-1} φ e_0 on every member of b^*U_0. Put U=q^*U_0, V=p^*U, A=d^*, and A_0=h^*. Define r on U by restricting z.hom on F, applying the inverse restriction comparison for q, pulling back r_0 along the cover map to U_0, applying the forward restriction comparison, and restricting z.inv on G. Then for every member of V, the pullback of r along p, conjugated by its restriction comparison, is the restriction of e.inv(F) φ e.hom(G). The cover is arbitrary, and no finite presentation, affine cover, directed stage, or descent-morphism assertion is assumed or concluded.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-local-map-pullback-family",
+  "def-pc-local-map-recovery"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof, base change of local lifts; Sheaves of Modules Tags 0095 and 0096"
+ },
+ "proof": [
+  {
+   "text": "First substitute the equalities identifying A₀, A and B with their\ntensor pullbacks. The three HEq hypotheses then become ordinary equalities of\nisomorphisms; substitute these canonicality equalities. The equation p followed\nby q equals b identifies the pullback of U₀ along b\nwith its iterated pullback along q and p, by the pullback universal property. On each\nmember of these identified covers, expand the displayed expression for r. Functoriality\nof ordinary pullback expands its five factors. The ordinary pullback composition\nisomorphisms combine the restrictions along the two paths to the same restriction.\nThe tensor comparison is the mate of pushforward composition under the tensor\nadjunctions, and the restriction comparison uses the unique comparison between tensor\nand ordinary left adjoints to pushforward. Composition of these mates is associative:\nexpanding their units and counits reduces both composites to the same pushforward\ncomposition by the two triangle identities. Thus the restriction comparisons cancel\nagainst the composition comparisons for q and p. The expression reduces to the\noriginal recovery equation transported along the identified covers. Substitute that\nequation. The same associativity identifies the remaining composite of e₀ and z with e,\nusing their three canonicality equations, and gives the required right side. All four\nmap equations have exactly the displayed source and target. No affineness, finiteness,\nor descent morphism is used. Empty covers are vacuous; zero maps and identity maps obey\nthe same functoriality and triangle identities.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, first proof, base change of local lifts; Sheaves of Modules Tags 0095 and 0096"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackComp|toDescentData",
+   "results": "Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level overlap or recovery statement; existing naturality and pullback composition lemmas supply parts of the argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.naturality_2",
+   "results": "CategoryTheory.NatIso.naturality_2",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level overlap or recovery statement; existing naturality and pullback composition lemmas supply parts of the argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite family of local maps between finitely presented quasicoherent modules eventually agree on overlaps of an affine cover in a directed inverse limit of schemes",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.OpenCover.ext_elem, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level overlap or recovery statement; existing naturality and pullback composition lemmas supply parts of the argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback composition isomorphisms transport morphisms on an open cover compatibly with further base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Recovery equations persist under an arbitrary later base change",
+   "via": [
+    "lem-pc-fp-module-map-descent",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-local-map-overlap-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapRecoveryTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalMapRecoveryTransport.lean",
+  "declaration": "AlgebraicGeometry.finitePresentation_local_maps_recovery_transport",
+  "statement": "theorem finitePresentation_local_maps_recovery_transport {X₀ X₁ X₂ Z : Scheme.{u}} (h : X₁ ⟶ X₀) (q : X₂ ⟶ X₁) (p : Z ⟶ X₂) (b : Z ⟶ X₁) (a : Z ⟶ X₀) (d : X₂ ⟶ X₀) (wpq : p ≫ q = b) (wqh : q ≫ h = d) (wbh : b ≫ h = a) (wpd : p ≫ d = a) (A₀ : X₀.Modules ⥤ X₁.Modules) (hA₀ : A₀ = Scheme.Modules.tensorPullback h) (A : X₀.Modules ⥤ X₂.Modules) (hA : A = Scheme.Modules.tensorPullback d) (B : X₀.Modules ⥤ Z.Modules) (hB : B = Scheme.Modules.tensorPullback a) (F G : X₀.Modules) (φ : B.obj F ⟶ B.obj G) (e₀ : B ≅ A₀ ⋙ Scheme.Modules.tensorPullback b) (he₀ : HEq e₀ (Scheme.Modules.tensorPullbackCompositionIso b h a wbh)) (e : B ≅ A ⋙ Scheme.Modules.tensorPullback p) (he : HEq e (Scheme.Modules.tensorPullbackCompositionIso p d a wpd)) (z : A ≅ A₀ ⋙ Scheme.Modules.tensorPullback q) (hz : HEq z (Scheme.Modules.tensorPullbackCompositionIso q h d wqh)) (U₀ : X₁.OpenCover.{u}) : let Q₀ := modulesPseudofunctor.toDescentData U₀.f ∀ (r₀ : ∀ α, (Q₀.obj (A₀.obj F)).obj α ⟶ (Q₀.obj (A₀.obj G)).obj α), localMapRecovery b U₀ (A₀.obj F) (A₀.obj G) (e₀.inv.app F ≫ φ ≫ e₀.hom.app G) r₀ → let U : X₂.OpenCover.{u} := U₀.pullback₁ q let V : Z.OpenCover.{u} := U.pullback₁ p let Q := modulesPseudofunctor.toDescentData U.f let r : ∀ α, (Q.obj (A.obj F)).obj α ⟶ (Q.obj (A.obj G)).obj α := localMapPullbackFamily q U₀ (A₀.obj F) (A₀.obj G) (A.obj F) (A.obj G) (z.hom.app F) (z.inv.app G) r₀ localMapRecovery p U (A.obj F) (A.obj G) (e.inv.app F ≫ φ ≫ e.hom.app G) r",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef5d4",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T190139-L-3216022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ef5d4",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T190139-L-3216022",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean signatures with their nodes and the refactored formulas with the originals; all five modules and the sole direct importer compile cleanly; axioms are permitted, with sorryAx from the two documented obligations."
+ }
+}
