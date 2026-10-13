@@ -15,12 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Choose K-flat resolutions K0→K and M0→M. Their total tensor is K-flat. Naturality of the ordinary inverse tensor constraint gives the rectangle after applying P. Naturality of α and of the lax tensor comparison of Qh identifies the right path with the normalized K0,M0 path followed by the tensor of the resolution maps. Naturality of δ identifies the corresponding left path. The K-flat normalization in lem-sc-module-cup-global-tensor-pullback makes these paths equal on K0,M0. Qh sends both resolution maps to isomorphisms; L and derived tensor preserve them. Cancel their tensor composite to obtain the displayed equality for K,M. Every object in the homotopy category has a complex representative, so the proof covers the formal statement.",
+   "text": "Represent K and M by complexes using HomotopyCategory.quotient_obj_surjective. Choose left resolutions R and S in the K-flat localizer morphism of the homotopy category, whose left derivability structure is supplied by the existing functorial flat-resolution instance. Their sources have K-flat complex representatives by HomotopyCategory.kFlat_quotient_obj_iff, and their resolution maps a and b are quasi-isomorphisms.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved generic lemma Functor.OplaxMonoidal.app_app_comp_tensorHom on the natural transformation Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans and the two resolution maps a and b. Its symmetric equality says that F.map(a tensor b) followed by the ordinary comparison equals the ordinary comparison at the K-flat sources followed by F.map(a) tensor F.map(b).",
+   "uses": [
+    "lem-sc-module-cup-global-tensor-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the upper/right composite using Functor.LaxMonoidal.μ_natural for Qh, naturality of α, and the preceding ordinary comparison equality. Transport the left/bottom composite using the hypothesis hnat, naturality of α in each variable, tensorHom_comp_tensorHom, and μ_natural for the target Qh. Both transports have the same final map Qh.map(F.map(a) tensor F.map(b)). These two path naturalities are proved in the private categorical helper tensorComparison_paths_natural, then specialized to the global ringed-space data.",
+   "uses": [
+    "lem-sc-module-cup-global-tensor-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The hypothesis hflat identifies the two composites at the K-flat source pair. Postcompose this equality with the common final map. Localization.inverts makes Qh.map(a) and Qh.map(b) isomorphisms; tensor and L preserve isomorphisms. Cancel the epimorphism L.map(Qh.map(a) tensor Qh.map(b)) using cancel_epi, obtaining the desired equality for K and M. No K-flatness of the total tensor is needed for this transport argument.",
    "uses": [
     "lem-sc-module-cup-global-tensor-pullback",
     "def-pc-scheme-derived-tensor-structure"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -28,9 +49,9 @@
   "def-pc-scheme-derived-tensor-structure"
  ],
  "proof_origin": {
-  "by": "G4 repair worker following the source",
+  "by": "E4 stage-3 worker following the source",
   "document": "https://stacks.math.columbia.edu/tag/0FP0",
-  "place": "Lemma 20.27.5"
+  "place": "Lemma 20.27.5; naturality and cancellation along K-flat resolutions"
  },
  "status": "split",
  "created": {
@@ -114,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-db1a8",
-  "group": "G4",
+  "reviewer": "COMPILER",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T153500-L-1085119",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered six-module set matches its DAG statements and report; all delivered modules and direct importer ModuleCupEqualDerivedMapsClass compile cleanly, with permitted sorryAx only through named open theorems."
+  "landing": "20261013T163534-L-1619665",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

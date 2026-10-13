@@ -13149,3 +13149,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:35 L: merged deliver/B3/Sheaf.AlgebraicGeometry.OpenExtensionProjectionFormula (stage 3; reviewer PASS; first push; landing 20261013T163533-L-1619350 (interface); batch 20261013T163531; modules 3; new nodes 2)
 - 16:35 L: merged deliver/C1/Sheaf.AlgebraicGeometry.AffinePullbackSectionsUnitUncancelled (stage 3; reviewer PASS; first push; landing 20261013T163533-L-1619454 (proof); batch 20261013T163531; modules 1; new nodes 0)
 - 16:35 L: merged deliver/D2/Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorUnique (stage 3; reviewer PASS; first push; landing 20261013T163534-L-1619560 (proof); batch 20261013T163531; modules 1; new nodes 0)
+- 16:35 L: merged deliver/E4/Sheaf.Paper.ModuleCupGlobalTensorComparison (stage 3; reviewer PASS; first push; landing 20261013T163534-L-1619665 (proof); batch 20261013T163531; modules 1; new nodes 0)
