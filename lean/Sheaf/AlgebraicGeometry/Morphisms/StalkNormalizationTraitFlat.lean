@@ -15,6 +15,10 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitCharts
+import Sheaf.AlgebraicGeometry.FlatOfFpqcCover
+import Mathlib.LinearAlgebra.StdBasis
+
 /-!
 # Flatness of tame local normalization
 
@@ -69,6 +73,33 @@ theorem GaloisCover.stalk_normalization_trait_flat {S C : Scheme.{u}}
         (inferInstance : QuasiCompact U.ι)
     let a := S.fromSpecStalk s
     let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
-    IsFinite n → Flat n := by sorry
+    IsFinite n → Flat n := by
+  classical
+  dsimp only
+  intro hn
+  obtain ⟨I, R, φ, hφ, hcover, hcharts⟩ :=
+    GaloisCover.stalk_normalization_trait_charts hS c G hG q j hCη Z U hηU jU PA
+      ψ hjU hψ s hs hmin hdvr hn
+  let (i : I) : Etale (φ i) := hφ i
+  have hfpqc : Presieve.ofArrows (fun i ↦ Spec (R i)) φ ∈
+      Scheme.fpqcPrecoverage (pullback c (S.fromSpecStalk s)) := by
+    apply Scheme.fppfPrecoverage_le_fpqcPrecoverage
+    rw [Scheme.fppfPrecoverage, Scheme.ofArrows_mem_precoverage_iff]
+    exact ⟨hcover, fun i ↦ ⟨inferInstance, inferInstance⟩⟩
+  apply flat_of_fpqc_cover _ (fun i ↦ Spec (R i)) φ hfpqc
+  intro i
+  obtain ⟨m, f, e, he, α, hα⟩ := hcharts i
+  let p (k : Fin m) : Polynomial (R i) := Polynomial.X ^ e k - Polynomial.C f
+  have hp (k : Fin m) : (p k).Monic :=
+    Polynomial.monic_X_pow_sub_C f (ne_of_gt (he k).1)
+  let (k : Fin m) : Module.Free (R i) (AdjoinRoot (p k)) := (hp k).free_adjoinRoot
+  have : Module.Free (R i) (∀ k : Fin m, AdjoinRoot (p k)) := inferInstance
+  have : Module.Flat (R i) (∀ k : Fin m, AdjoinRoot (p k)) := inferInstance
+  have hflat : Flat (Spec.map (CommRingCat.ofHom
+      (algebraMap (R i) (∀ k : Fin m, AdjoinRoot (p k))))) := by
+    rw [Flat.SpecMap_iff]
+    exact RingHom.flat_algebraMap_iff.mpr inferInstance
+  rw [← hα]
+  exact Flat.comp _ _
 
 end AlgebraicGeometry.Scheme
