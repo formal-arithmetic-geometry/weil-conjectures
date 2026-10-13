@@ -15,29 +15,25 @@
  },
  "proof": [
   {
-   "text": "The comparison of Tag 0097 is the unique isomorphism of left adjoints\nintertwining their units. The definition scalarPullbackCompIso uses precisely this\nisomorphism for the normalized tensor-pullback adjunctions. Consequently its\ninverse identifies the successive unit with the unit of the composite morphism.\nApply this on both paths a then b, and c then d. The equality h identifies the two\ncomposites; scalarPullbackSquareIso is the first inverse comparison followed by\nthis equality and the second comparison. Thus it intertwines the two composite\ncoefficient maps. The resolution construction of cohomology pullback in Tag 01FD\nrespects successive coefficient maps: compose the resolution lifts over the units;\nany two such lifts are homotopic, so their maps on cohomology agree. The natural\ninjective-resolution comparison to Ext used by scalarCohomologyExtEquiv transports\nthese maps to scalarCohomologyPullback, whose inverse-image coefficient is adjoint\nto the same normalized unit. Transporting the square equality back identifies its\ncoefficient change with scalarCohomologyMap. Proof irrelevance removes dependence\non the chosen proofs ha, hb, hc, hd and h. Identity morphisms give the unit\ncomparison, degree zero gives composition of section pullbacks, and zero modules\nor empty schemes give zero maps. No quasi-coherence or compactness is needed.",
+   "text": "Apply scalarCohomologyPullback_comp to a then b and to c then d. The equality h identifies pullback along the two composites; prove this equality transport by elimination of h and the identity law of the cohomology functor. The private scalarMap_three_iso combines these two composition identities: coefficient functoriality splits the square isomorphism into its three factors; the first inverse comparison gives the first composite pullback, equality transport gives the second composite pullback, and the second comparison cancels its inverse. All four algebra helpers are proved from Functor.map_comp, Functor.map_id, equality elimination and iso cancellation. The target signature and unit route are unchanged.",
    "uses": [
-    "def-sc-field-linear-module-cohomology-operations",
-    "lem-pc-module-pullback-identity-composition"
+    "lem-sc-scalar-cohomology-pullback-composition",
+    "def-sc-field-linear-module-cohomology-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology Tag 01FD (lemma-functoriality-cech), resolution lifts; Sheaves Tag 0097 (lemma-push-pull-composition-modules); lem-sc-picard-kunneth-qcoh Step 8. Official sources https://stacks.math.columbia.edu/tag/01FD and https://stacks.math.columbia.edu/tag/0097"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations",
-  "lem-pc-module-pullback-identity-composition"
+  "lem-sc-scalar-cohomology-pullback-composition",
+  "def-sc-field-linear-module-cohomology-operations"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "S4",
+  "group": "F1",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology Tag 01FD (lemma-functoriality-cech), resolution lifts; Sheaves Tag 0097 (lemma-push-pull-composition-modules); lem-sc-picard-kunneth-qcoh Step 8. Official sources https://stacks.math.columbia.edu/tag/01FD and https://stacks.math.columbia.edu/tag/0097",
-  "note": "Source argument specialized to the recorded scalar Ext comparisons; normalization glue written by S4."
+  "place": "Tag 01F7, cohomology-equation-functorial and Remark 20.14.2 (resolution construction); Sheaves Tag 0097, normalized pullback composition. Official sources https://stacks.math.columbia.edu/tag/01F7, https://stacks.math.columbia.edu/tag/01FD and https://stacks.math.columbia.edu/tag/0097",
+  "note": "One-path composition isolated as a strictly smaller obligation. Square transport and cancellation proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -137,12 +133,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T234224-L-2126777",
+  "landing": "20261013T025300-L-3422276",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
