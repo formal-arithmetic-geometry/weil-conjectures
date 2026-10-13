@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-relative-mv-cone-presentation",
+ "kind": "statement",
+ "title": "Strict mapping-cone model of relative Mayer--Vietoris",
+ "statement": "Let g′:X′→X, f′:X′→S′, f:X→S and g:S′→S form a cartesian square of schemes. Assume S,S′ affine and f quasi-compact and quasi-separated. Let K∈D_QCoh(O_X), K′∈D_QCoh(O_X′), and φ:L(g′)K→K′. Let U,V cover X with U,V and U∩V quasi-compact. There are chain maps t:A→B and t':A'→B' and a strictly commutative square (α,β) between them. The six localized objects A,B,Cone(t),A',B',Cone(t') are isomorphic to the global, biproduct, and overlap relative source and target objects of def-pc-relative-mv-maps. Under these six isomorphisms Q(t), Q(t'), and the two cone inclusions are the specified first and second restriction maps. Q(α) is the specified global arrow, and Q(mappingCone.map t t' α β) is the specified overlap arrow. No short exact presentation on S' is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV, 08HY and 08HZ; perfect.tex, Tag 0DJ9, induction diagram"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-triangulated-category",
+  "def-pc-relative-mv-maps"
+ ],
+ "proof": [
+  {
+   "text": "Choose K-injective representatives with injective terms, construct the restriction rows on the two covers, and represent the transposed object map by a strict chain map. Derive the finite arrow diagram as a whole using K-flat resolutions for pullback and K-injective resolutions for direct image; this yields a strict square of first maps. The affine base change keeps the covers compact.",
+   "uses": [
+    "lem-pc-kinjective-mayer-vietoris-presentation",
+    "lem-pc-derived-functor-termwise-split-ses-triangle",
+    "def-pc-derived-pullback",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone-to-quotient comparisons for the restriction rows identify both cones with the overlap derived objects. Transport the six vertex comparisons by uniqueness of right adjoints and the pinned composition mates. Naturality of units identifies first maps; transposed restricted counits identify second maps with the difference sign.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the base-change mate on the global complex and on the overlap restriction. The pullback projection equality and the chosen object map give the global α and functorial cone-map equations. Use these comparisons before cylinder replacement; empty opens have zero restriction complexes and repeated opens give split rows.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps",
+  "lem-pc-derived-functor-termwise-split-ses-triangle",
+  "lem-pc-kinjective-mayer-vietoris-presentation",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-morphism-affine-schemes-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Enhanced complex-level construction underlying Tags 08BV, 08HZ, and the base-change mate of 08HY; synthesis of the original node steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict mapping cone model of relative Mayer Vietoris base change diagram",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial relative Mayer Vietoris short exact sequences of complexes",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃",
+   "date": "2026-10-13",
+   "verdict": "partial matches only; no theorem giving the stated diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone|MayerVietoris",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "partial matches only; no theorem giving the stated diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVSESPresentation",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: chain-level construction underlying compatible relative Mayer--Vietoris boundaries",
+   "via": [
+    "lem-pc-relative-mv-ses-presentation",
+    "lem-pc-relative-mv-boundary-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVConePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVConePresentation.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_cone_presentation",
+  "statement": "theorem relativeMV_cone_presentation\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f]\n    (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K')\n    (U V : X.Opens)\n    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))\n    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) :\n    let a := relativeMVLocalArrow f f' g g' hpull K K' φ\n    let aX := relativeMVGlobalArrow f f' g g' hpull K K' φ\n    ∃ (A B A' B' : CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ)\n      (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶ B')\n      (hc : t ≫ β = α ≫ t')\n      (e₁ : DerivedCategory.Q.obj A ≅ aX.left)\n      (e₂ : DerivedCategory.Q.obj B ≅ (a U).left ⊞ (a V).left)\n      (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ (a (U ⊓ V)).left)\n      (e₁' : DerivedCategory.Q.obj A' ≅ aX.right)\n      (e₂' : DerivedCategory.Q.obj B' ≅ (a U).right ⊞ (a V).right)\n      (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ (a (U ⊓ V)).right),\n      DerivedCategory.Q.map t ≫ e₂.hom = e₁.hom ≫ relativeMVSourceFirst f g U V K ∧\n      DerivedCategory.Q.map (CochainComplex.mappingCone.inr t) ≫ e₃.hom =\n        e₂.hom ≫ relativeMVSourceSecond f g U V K ∧\n      DerivedCategory.Q.map t' ≫ e₂'.hom =\n        e₁'.hom ≫ relativeMVTargetFirst g' f' U V K' ∧\n      DerivedCategory.Q.map (CochainComplex.mappingCone.inr t') ≫ e₃'.hom =\n        e₂'.hom ≫ relativeMVTargetSecond g' f' U V K' ∧\n      DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ aX.hom ∧\n      DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ e₃'.hom =\n        e₃.hom ≫ (a (U ⊓ V)).hom",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T133744-L-44179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T133744-L-44179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

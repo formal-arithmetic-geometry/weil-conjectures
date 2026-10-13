@@ -9,16 +9,9 @@ public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+
+import Sheaf.AlgebraicGeometry.RelativeMVConePresentation
+import Sheaf.CategoryTheory.DerivedCategory.ConeDiagramSESPresentation
 
 /-! # Chain-level relative Mayer--Vietoris presentation
 
@@ -96,6 +89,26 @@ theorem relativeMV_ses_presentation
         e₂'.hom ≫ relativeMVTargetSecond g' f' U V K' ∧
       DerivedCategory.Q.map m.τ₁ ≫ e₁'.hom = e₁.hom ≫ aX.hom ∧
       DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ (a (U ⊓ V)).hom := by
-  sorry
+  obtain ⟨A, B, A', B', t, t', α, β, hc, e₁, e₂, e₃, e₁', e₂', e₃',
+    hf, hg, hf', hg', h₁, h₃⟩ :=
+    relativeMV_cone_presentation f f' g g' hpull K K' φ hK hK'
+      U V hUqc hVqc hUVqc hcover
+  obtain ⟨P, P', m, d₁, d₂, d₃, d₁', d₂', d₃', hP, hP',
+    kf, kg, kf', kg', k₁, k₃⟩ :=
+    cone_diagram_ses_presentation A B A' B' t t' α β hc
+  refine ⟨P, P', m, d₁ ≪≫ e₁, d₂ ≪≫ e₂, d₃ ≪≫ e₃,
+    d₁' ≪≫ e₁', d₂' ≪≫ e₂', d₃' ≪≫ e₃', hP, hP', ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · simpa only [Iso.trans_hom, Category.assoc, hf] using
+      congrArg (fun k ↦ k ≫ e₂.hom) kf
+  · simpa only [Iso.trans_hom, Category.assoc, hg] using
+      congrArg (fun k ↦ k ≫ e₃.hom) kg
+  · simpa only [Iso.trans_hom, Category.assoc, hf'] using
+      congrArg (fun k ↦ k ≫ e₂'.hom) kf'
+  · simpa only [Iso.trans_hom, Category.assoc, hg'] using
+      congrArg (fun k ↦ k ≫ e₃'.hom) kg'
+  · simpa only [Iso.trans_hom, Category.assoc, h₁] using
+      congrArg (fun k ↦ k ≫ e₁'.hom) k₁
+  · simpa only [Iso.trans_hom, Category.assoc, h₃] using
+      congrArg (fun k ↦ k ≫ e₃'.hom) k₃
 
 end AlgebraicGeometry
