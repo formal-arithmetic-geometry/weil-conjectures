@@ -16,66 +16,58 @@
  ],
  "proof": [
   {
-   "text": "Restriction to the open site is exact and commutes with tensor and arbitrary coproducts: sectionwise restriction commutes with the presheaf tensor and the same covering sieves sheafify on the localized site. It therefore commutes with totalization and homology. Regard R as the ring sheaf of the ringed space (X,R); open pullback preserves K-flatness. Thus the restriction of P is K-flat and its map to the restriction of Q is a quasi-isomorphism.",
+   "text": "Apply open_localized_restriction_isKFlat to P. Apply localizedModule_restriction_quasiIso to q. Thus restricted P is K-flat and its map to restricted Q is a quasi-isomorphism.",
    "uses": [
-    "lem-pur-localized-module-restriction-quasi-iso",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-kflat-pullback-preservation"
+    "lem-pc-open-localized-restriction-kflat",
+    "lem-pur-localized-module-restriction-quasi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
-   }
+   "elementary": false
   },
   {
-   "text": "The maps q restricted to U, s and t connect P restricted to U to T by a zigzag of quasi-isomorphisms. Use the calculus of fractions for the derived category to replace the zigzag by a common roof, and take a K-flat resolution of its source. Tensoring a quasi-isomorphism between K-flat complexes with any complex preserves quasi-isomorphisms: first resolve the second factor by a K-flat complex, then use the acyclic-cone criterion, the tensor-cone isomorphism and tensor symmetry for the three sides of the comparison square; the fourth side is invertible on homology by two-of-three. Apply this to F restricted to U, in degree zero.",
+   "text": "In the standard Mathlib derived category of module sheaves on the localized site, compose the images of restricted q, the inverse image of s, and the image of t. DerivedCategory.right_fac extracts a common roof from L to restricted P and T. The left leg is a quasi-isomorphism by the fraction theorem; the right leg is one because its image is the composite of the left leg with an isomorphism and Q reflects quasi-isomorphisms. Resolve L using exists_isKFlatResolution and compose its augmentation with the two roof legs.",
    "uses": [
-    "def-pc-derived-category",
     "lem-pc-kflat-resolution",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private site_kFlat_tensor_quasiIso proves the tensor comparison for every ringed site. For a quasi-isomorphism a and K-flat K, use the acyclic-cone criterion and mapBifunctorMappingCone₁Iso to show a tensor id_K is a quasi-isomorphism. The bicomplex braiding followed by mapBifunctorFlipIso gives the other variable. Resolve the arbitrary second factor by a K-flat complex. The naturality square has three quasi-isomorphism sides, and quasiIso_of_comp_left gives the fourth. Apply this to both composites from the K-flat resolution of L.",
+   "uses": [
     "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution",
     "lem-pc-tensor-mapping-cone-iso",
     "lem-pur-quasi-iso-cone-acyclic",
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
-   }
+   "elementary": false
   },
   {
-   "text": "Take homology of the resulting zigzag of quasi-isomorphisms. Compose these isomorphisms with the restriction-total-tensor and restriction-homology comparisons to obtain the claimed local homology isomorphism. No boundedness or scheme structure occurs in this comparison.",
+   "text": "Use open_localized_tensor_homology_iso for P and F. Take homology of the two tensor roof legs; they are isomorphisms by QuasiIso. Compose the open homology comparison with the inverse left-leg homology isomorphism and the right-leg homology isomorphism. This is the original unchanged conclusion.",
    "uses": [
-    "def-pc-quasi-iso-modules",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-open-localized-tensor-homology",
+    "def-pc-quasi-iso-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0DJQ, local tensor calculation in its proof; Tag 08CI, (2) to (1); Tags 06YH and 06YB"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-localized-module-restriction-quasi-iso",
-  "def-pur-sheaf-tensor-product",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-pullback-preservation",
-  "def-pc-derived-category",
-  "lem-pc-kflat-resolution",
   "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "lem-pc-open-localized-restriction-kflat",
+  "lem-pc-open-localized-tensor-homology",
   "lem-pc-tensor-mapping-cone-iso",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "def-pc-quasi-iso-modules"
+  "lem-pur-localized-module-restriction-quasi-iso",
+  "lem-pur-quasi-iso-cone-acyclic"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R2",
+  "group": "F2",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Local relative Tor verification for perfect direct image: independence of the global K-flat model and exact open restriction, original node proof step 3."
+  "place": "Tags 06YH and 06YT, common-roof independence and tensor comparison square; Mathlib DerivedCategory.right_fac; exact restriction and tensorRight(F) single-complex comparison. Original signatures unchanged."
  },
  "mathlib_searches": [
   {
@@ -175,9 +167,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T100112-L-2482330",
+  "landing": "20261013T121840-L-3558238",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

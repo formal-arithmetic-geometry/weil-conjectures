@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-open-localized-tensor-homology",
+ "kind": "statement",
+ "title": "Open restriction of ordinary tensor homology",
+ "statement": "Let $X$ be a topological space, $R$ a sheaf of commutative rings on its open site, $A$ the underlying ring sheaf, and $U$ an open. Let $V=\\operatorname{overFunctor}(A,U)$ [def-pur-localized-ringed-site]. For every unbounded cochain complex $P$ of $A$-modules [def-pc-cochain-complex-modules], sheaf $F$ of $A$-modules, and integer $i$, there is an isomorphism $V(H^i(\\operatorname{Tot}(P\\otimes_R F[0])))\\cong H^i(\\operatorname{Tot}(V(P)\\otimes_{R|_U}V(F)[0]))$, with homology as in [def-pc-acyclic-complex-modules] and total tensor as in [def-pc-tensor-complex-sheaves]. No K-flatness assumption is needed. The zero-map witness only constructs the termwise restriction functor.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03DH (sites-modules-section-localize); Tag 01CD (modules-lemma-tensor-product-pullback); local tensor calculation in Tag 0DJQ"
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Restriction is additive on sectionwise maps. Compose it with the exact forgetful functor to abelian sheaves; this composite is the forgetful functor followed by overPullback. Finite-limit preservation of overPullback and reflection of limits by the module forgetful functor prove finite-limit preservation of restriction. Finite colimits are preserved because overFunctor is pushforward along the cocontinuous over-forgetful functor with identity ring map, a left adjoint. Thus restriction preserves homology.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fixed F, specialize the natural tensor comparison to the pair (M,F) and its naturality to (f,id_F). This yields a natural isomorphism tensorRight(F) followed by V ≅ V followed by tensorRight(V(F)). Lift it to complexes by NatIso.mapHomologicalComplex and Functor.mapHomologicalComplexCompIso.",
+   "uses": [
+    "lem-pc-open-localized-tensor-natural"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The proved CochainComplex.mapBifunctorSingle₂Iso in WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle identifies total tensor with F[0] with the termwise tensorRight(F) functor, on both sites. Compose its restriction, the lifted natural comparison, and the inverse single comparison on the localized site. Apply the homology functor and prepend the inverse of ShortComplex.mapHomologyIso to get exactly the asserted isomorphism. This proof never requires a bound on P or comparison of infinite coproducts.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-acyclic-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-localized-ringed-site",
+  "lem-pc-open-localized-tensor-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 03DH (sites-modules-section-localize); Tag 01CD (modules-lemma-tensor-product-pullback); local tensor calculation in Tag 0DJQ; localized-site formulation and Lean assembly by F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules to the localized open site commutes with tensor products and homology",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact open restriction commutes with homology of the total tensor complex",
+   "results": "8 hits for restriction of the index shape of homological complexes, not open restriction of module sheaves.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*homology|homology.*tensor|overFunctor",
+   "results": "25 hits: overFunctor, overFunctorEquiv, ring-flatness tensor exactness, and group homology formulas. None is this localized-site module tensor homology comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Local relative Tor verification for perfect direct image: independence of the global K-flat model and exact open restriction, original node proof step 3.; open restriction part",
+   "via": [
+    "lem-pc-open-kflat-tensor-homology-comparison",
+    "lem-pc-strict-perfect-tensor-relative-tor-bound",
+    "lem-pc-perfect-tensor-finite-relative-tor",
+    "lem-pc-noetherian-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenRestrictionTensorHomology",
+  "file": "lean/Sheaf/Algebra/Homology/OpenRestrictionTensorHomology.lean",
+  "declaration": "CochainComplex.open_localized_tensor_homology_iso",
+  "statement": "theorem open_localized_tensor_homology_iso\n    {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})\n    (U : TopologicalSpace.Opens X)\n    (hzero : (SheafOfModules.overFunctor.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).PreservesZeroMorphisms)\n    (P : CochainComplex (SheafOfModules.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (i : ℤ) :\n    letI := hzero\n    Nonempty (((SheafOfModules.overFunctor.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).obj\n      ((mapBifunctor P ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)\n        (@curriedTensor _ _ (SheafOfModules.monoidalCategory R))).homology i)) ≅\n      ((mapBifunctor (C₁ := SheafOfModules.{u} ((sheafCompose\n        ((Opens.grothendieckTopology X).over U)\n        (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U)))\n        (((SheafOfModules.overFunctor.{u} ((sheafCompose\n        (Opens.grothendieckTopology X)\n        (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj P : CochainComplex (SheafOfModules.{u} ((sheafCompose\n          ((Opens.grothendieckTopology X).over U)\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) ℤ)\n        ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj\n          ((SheafOfModules.overFunctor.{u} ((sheafCompose\n            (Opens.grothendieckTopology X)\n            (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).obj F))\n        (@curriedTensor _ _ (SheafOfModules.monoidalCategory (R.over U)))).homology i))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T121840-L-3558238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T121840-L-3558238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

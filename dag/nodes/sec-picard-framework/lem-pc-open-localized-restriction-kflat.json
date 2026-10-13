@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-open-localized-restriction-kflat",
+ "kind": "statement",
+ "title": "K-flatness under localized open restriction",
+ "statement": "Let $X$ be a topological space, $R$ a sheaf of commutative rings on its open site, and $U$ an open. Write $A$ for the underlying ring sheaf and $V=\\operatorname{overFunctor}(A,U)$ for restriction to the localized ringed site [def-pur-localized-ringed-site]. For every unbounded cochain complex $P$ of $A$-modules [def-pc-cochain-complex-modules], if $P$ is K-flat over $R$ [def-pc-kflat-complex], then the termwise restricted complex $V(P)$ is K-flat over $R|_U$. The explicit zero-map-preservation witness only defines the map on complexes and imposes no additional mathematical hypothesis.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 06YB (cohomology-lemma-check-K-flat-stalks), applied to the open subspace; Tag 03DH (sites-modules-section-localize)"
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Identify opens of the subspace U with pairs (W, W ⊆ U). This gives an equivalence with Opens(X)/U: the forward map sends an open of U to its image, which is open in X since U is open, and the inverse takes the subspace intersection. The inclusion morphisms and union-cover conditions agree. The ring sheaf has values R(W) and the module restriction has values P(W). Thus the associated equivalence of module categories identifies termwise overFunctor with ordinary restriction to the open subspace.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For x in U, neighborhoods contained in U are cofinal among neighborhoods in X at x: replace any neighborhood W by W ∩ U. The same transition maps identify the stalk ring and each stalk module of the restriction with the original stalks. These identifications commute with differentials, tensor products and direct sums. By the forward stalk K-flat criterion the stalk complex of P at x is K-flat, so the restricted stalk complex is K-flat as well.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the reverse stalk criterion on the open subspace. Transport along the module-category equivalence from the first step, which identifies all acyclic test complexes and their total tensors, to conclude K-flatness on the localized site. If U is empty there are no stalks and the criterion is vacuous.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion",
+    "def-pc-kflat-complex",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-localized-ringed-site",
+  "lem-pc-kflat-stalk-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 06YB (cohomology-lemma-check-K-flat-stalks), applied to the open subspace; Tag 03DH (sites-modules-section-localize); localized-site formulation and Lean assembly by F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a K-flat complex to an open localized site is K-flat",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a K-flat complex to the localized site of an open subset is K-flat",
+   "results": "8 hits about flat scheme morphisms, representably flat functors and localization of flat modules, no K-flat complexes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "over.*[Tt]ensor|[Tt]ensor.*over|[Kk][Ff]lat.*restriction",
+   "results": "Mathlib sectionwise tensor and restriction results only. Library OpenRestrictionKFlatModel and IsKFlatRestriction assume schemes and transport to U.toScheme, so they do not apply to this arbitrary ring sheaf on a topological space.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Local relative Tor verification for perfect direct image: independence of the global K-flat model and exact open restriction, original node proof step 3.; open restriction part",
+   "via": [
+    "lem-pc-open-kflat-tensor-homology-comparison",
+    "lem-pc-strict-perfect-tensor-relative-tor-bound",
+    "lem-pc-perfect-tensor-finite-relative-tor",
+    "lem-pc-noetherian-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenRestrictionKFlat",
+  "file": "lean/Sheaf/Algebra/Homology/OpenRestrictionKFlat.lean",
+  "declaration": "CochainComplex.open_localized_restriction_isKFlat",
+  "statement": "theorem open_localized_restriction_isKFlat\n    {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})\n    (U : TopologicalSpace.Opens X)\n    (hzero : (SheafOfModules.overFunctor.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).PreservesZeroMorphisms)\n    (P : CochainComplex (SheafOfModules.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (hP : IsKFlat (R := R) P) :\n    letI := hzero\n    IsKFlat (R := R.over U)\n      (((SheafOfModules.overFunctor.{u} ((sheafCompose\n        (Opens.grothendieckTopology X)\n        (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T121840-L-3558238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T121840-L-3558238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
