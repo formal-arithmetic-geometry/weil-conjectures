@@ -1,0 +1,109 @@
+{
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCohomologyCupProduct",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "result used by the item proof",
+   "via": [
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module sheaf Godement Alexander Whitney cup pairing",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Alexander Whitney sheaf tensor cup",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement Alexander Whitney flasque tensor derived global cup",
+   "results": "No exact theorem in Mathlib or repository.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupDerivedTensorConnectivity",
+  "file": "lean/Sheaf/Paper/ModuleCupDerivedTensorConnectivity.lean",
+  "declaration": "DerivedCategory.moduleCup_derived_tensor_connectivity",
+  "statement": "theorem moduleCup_derived_tensor_connectivity (F G : C) :\n    (((singleFunctor C 0).obj F) ⊗ ((singleFunctor C 0).obj G)).IsLE 0",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "id": "lem-sc-module-cup-derived-tensor-connectivity",
+ "title": "Connectivity of the derived tensor",
+ "statement": "Let C be a braided closed monoidal Grothendieck abelian category with monoidal additivity, functorial flat resolutions and a derived category. For F,G in C the derived tensor of their degree-zero singleFunctor objects is in D≤0.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Cohomology of Sheaves, Section 20.31; derived tensor construction used in Lemma 20.31.3"
+ },
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the upstream proved DerivedCategory.isLE_tensor in WeilConjectures.CategoryTheory.DerivedCategory.FlatModel to (singleFunctor C 0).obj F, (singleFunctor C 0).obj G and bounds 0,0. The single objects have IsLE 0 by instance synthesis. simpa reduces 0+0 to 0. This is the complete one-line Lean specialization, not a new flat-resolution construction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "P3 repair of X-3869a",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.isLE_tensor, specialized to degree-zero singleFunctor objects and bounds 0,0 by simpa"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+ }
+}

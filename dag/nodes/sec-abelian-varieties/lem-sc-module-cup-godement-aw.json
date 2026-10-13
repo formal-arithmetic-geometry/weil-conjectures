@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCohomologyCupProduct",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "result used by the item proof",
+   "via": [
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module sheaf Godement Alexander Whitney cup pairing",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Alexander Whitney sheaf tensor cup",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement Alexander Whitney flasque tensor derived global cup",
+   "results": "No exact theorem in Mathlib or repository.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementPairing",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementPairing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_pairing",
+  "statement": "theorem moduleCup_godement_pairing (X : Scheme.{u}) (F G : X.Modules) :\n    letI : MonoidalPreadditive X.Modules :=\n      Classical.choice (SheafOfModules.tensorClosed X.sheaf).1\n    ∃ (K L M : CochainComplex X.Modules ℤ)\n      (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶ K)\n      (b : (CochainComplex.singleFunctor X.Modules 0).obj G ⟶ L)\n      (c : (CochainComplex.singleFunctor X.Modules 0).obj (F ⊗ G) ⟶ M),\n      QuasiIso a ∧ QuasiIso b ∧ QuasiIso c ∧\n      K.IsStrictlyGE 0 ∧ L.IsStrictlyGE 0 ∧ M.IsStrictlyGE 0 ∧\n      (∀ n : ℤ, TopCat.Sheaf.IsFlasque\n        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (K.X n))) ∧\n      (∀ n : ℤ, TopCat.Sheaf.IsFlasque\n        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (L.X n))) ∧\n      (∀ n : ℤ, TopCat.Sheaf.IsFlasque\n        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (M.X n))) ∧\n      ∃ t : HomologicalComplex.tensorObj K L ⟶ M,\n        ∀ (V : X.Opens)\n          (x : Γ(((CochainComplex.singleFunctor X.Modules 0).obj F).X 0, V))\n          (y : Γ(((CochainComplex.singleFunctor X.Modules 0).obj G).X 0, V)),\n          (t.f 0).val.app (op V)\n            ((HomologicalComplex.ιTensorObj K L 0 0 0 (by simp)).val.app (op V)\n              (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y))) =\n            (c.f 0).val.app (op V) (tmulSection x y)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "id": "lem-sc-module-cup-godement-aw",
+ "title": "Godement Alexander–Whitney module pairing",
+ "statement": "For a scheme X and module sheaves F,G, there exist nonnegative integer-indexed cochain complexes K,L,M of module sheaves, with flasque terms and quasi-isomorphic augmentations from F[0], G[0], and (F tensor G)[0], and a cochain map Tot(K tensor L) → M whose degree-zero section pairing agrees with tensoring sections under the augmentations.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Cohomology of Sheaves, Section 20.31; Godement/flasque construction in the proof of Lemma 20.31.4 (Tag 0FKV)"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the Godement resolution from products of stalks. The Alexander–Whitney front/back face formula is O-linear and natural under restriction; the cosimplicial identities give the signed Leibniz identity, while degree-zero augmentation identifies the product with the ordinary tensor.",
+   "uses": [
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "P3 stage-3 repair",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Cohomology of Sheaves, Section 20.31; Godement/flasque construction in the proof of Lemma 20.31.4 (Tag 0FKV)"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+ }
+}

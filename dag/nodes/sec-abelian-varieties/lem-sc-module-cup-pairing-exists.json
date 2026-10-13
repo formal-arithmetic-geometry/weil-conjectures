@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-module-cup-pairing-exists",
+ "kind": "statement",
+ "title": "Existence of a computing resolution pairing",
+ "statement": "For any scheme X and module sheaves F,G on X, there exists a CupResolutionPairing F G [def-sc-module-cup-resolution-data]. No cohomological degree, flatness or quasi-coherence hypothesis is required. This asserts only the existence of three computing resolutions and a sectionwise tensor chain pairing, not a cup product on cohomology or its uniqueness.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Cohomology of Sheaves, Section 20.31; Lemma 20.31.3 and the flasque-resolution proof of Lemma 20.31.4 (Tag 0FKV)"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "Take the existential nonnegative integer complexes K,L,M, their quasi-isomorphic augmentations and total tensor cochain map from moduleCup_godement_pairing; no specified or natural Godement model is assumed by this lemma. Restrict the complexes to natural degrees using their strictly nonnegative support. On each tensor summand and open, compose tensoring sections with the summand inclusion and the supplied cochain map. The cochain-map equation gives signed Leibniz, sheaf morphisms give restriction compatibility, and the degree-zero equation gives augmentation compatibility.",
+   "uses": [
+    "def-sc-module-cup-resolution-data",
+    "lem-sc-module-cup-godement-aw"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied terms are flasque and the supplied augmentations are quasi-isomorphisms. Extend each augmentation to a comparison with an injective resolution degree by degree. Use moduleCup_flasque_acyclicity for the terms, then the separately cited Leray acyclic-resolution criterion to show that global comparison homology maps are isomorphisms. Assemble the three computing resolutions and their section pairing into CupResolutionPairing.",
+   "uses": [
+    "def-sc-module-cup-resolution-data",
+    "def-sp-injective-resolutions",
+    "def-sc-ringed-space-module-cohomology",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-sc-module-cup-flasque-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-resolution-data",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sp-injective-resolutions",
+  "lem-sc-module-cup-flasque-acyclicity",
+  "lem-sc-module-cup-godement-aw",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "P3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Proof of the acyclic-resolution characterization, extracted from the item docstring and Section 20.31"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module cohomology cup product Godement resolution",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear cup product on cohomology of sheaves of modules computed by acyclic resolutions",
+   "results": "Eight sheaf H, cohomology-presheaf and HomComplex/Ext comparison hits; no computing paired resolution or independence of pairings theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ, Function.Surjective",
+   "results": "0 hits. Direct source search found ModuleCat.epi_iff_surjective and the module cycles/homology isomorphisms; used for proved descent helpers.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|CupResolutionPairing|exists_unique_moduleCupProduct in Mathlib, WeilConjectures, Sheaf and dag/nodes",
+   "results": "Only the item carries CupResolutionPairing; no reusable resolution-pairing construction or invariance theorem. Existing cup operations for field-linear coefficients have a different interface. Existing abelian flasque acyclicity does not directly give the module-valued computing pairing.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCohomologyCupProduct",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Existence of a computing resolution pairing",
+   "via": [
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupPairingExists",
+  "file": "lean/Sheaf/Paper/ModuleCupPairingExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_moduleCupResolutionPairing",
+  "statement": "theorem exists_moduleCupResolutionPairing {X : Scheme.{uM}} (F G : X.Modules) :\n    Nonempty (CupResolutionPairing F G)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+ }
+}

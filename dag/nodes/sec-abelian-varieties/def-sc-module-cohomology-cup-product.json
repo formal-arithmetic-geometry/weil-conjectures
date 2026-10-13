@@ -31,9 +31,50 @@
   "document": "literature/stacks-project/cohomology.tex",
   "place": "cohomology-section-cup-product; Tag 0FKV, cohomology-lemma-diagrams-commute and its Godement-resolution proof"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the computing resolution and pairing definitions now factored into the data module; their identities and fields are unchanged.",
+   "uses": [
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The homology projection is epi, and cycles conversion, comparison homology and injective-resolution identification are isomorphisms. ModuleCat.epi_iff_surjective therefore gives surjectivity of every computing resolution class map. Signed Leibniz applied to the two cocycles gives a target cocycle with the prescribed paired section; its subtype value determines it uniquely.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take one computing tensor pairing. Its sectionwise bilinear map restricts to cycles, and composing with the target class map is bilinear. Apply resolution invariance with D = E to show this map is constant on both fibres of the surjective input class maps. The proved bilinear_desc_surjective lemma constructs and verifies the descended bilinear map.",
+   "uses": [
+    "lem-sc-module-cup-pairing-exists",
+    "lem-sc-module-cup-resolution-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary second pairing E, lift its two input classes to cocycles for D and form their paired cycle. Resolution invariance identifies its output class with the prescribed output for E. This gives IsModuleCupProduct for the descended map.",
+   "uses": [
+    "lem-sc-module-cup-resolution-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To compare two maps satisfying the characterization, lift arbitrary input cohomology classes to cycles in D and form their paired cycle. Both maps take the same value, namely its output class. LinearMap extensionality in both variables proves uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-resolution-data",
+  "lem-sc-module-cup-pairing-exists",
+  "lem-sc-module-cup-resolution-invariance"
+ ],
+ "proof_origin": {
+  "by": "P3 stage-3 Lean worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Acyclic-resolution characterization; proved surjectivity, cycle product, bilinear descent and uniqueness, with computing-pairing existence and cross-resolution invariance split off"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -85,10 +126,6 @@
   "module": "Sheaf.Paper.ModuleCohomologyCupProduct",
   "declaration": "AlgebraicGeometry.Scheme.Modules.IsModuleCupProduct",
   "declarations": [
-   "AlgebraicGeometry.Scheme.Modules.cupCycleClass",
-   "AlgebraicGeometry.Scheme.Modules.CupAcyclicResolution",
-   "AlgebraicGeometry.Scheme.Modules.CupAcyclicResolution.class",
-   "AlgebraicGeometry.Scheme.Modules.CupResolutionPairing",
    "AlgebraicGeometry.Scheme.Modules.IsModuleCupProduct",
    "AlgebraicGeometry.Scheme.Modules.exists_unique_moduleCupProduct"
   ],
@@ -97,7 +134,8 @@
   "date": "2026-10-12",
   "file": "lean/Sheaf/Paper/ModuleCohomologyCupProduct.lean",
   "branch": "sheaf-dag",
-  "existing": false
+  "existing": false,
+  "note": "Resolution-data declarations moved verbatim to ModuleCupResolutionData and publicly re-exported here. IsModuleCupProduct and exists_unique_moduleCupProduct keep their signatures and meanings."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -114,5 +152,15 @@
   "group": "T1",
   "result": "pass",
   "note": "independent Codex review: Matched arbitrary covers, specified refinement, quasi-coherent coefficients, canonical comparisons, cup compatibility, inverse-comparison identification, and coefficient/pullback/composition naturality to the node; all three new definitions match their formulas. Both earlier-return points are repaired. Scratch compilation passed cleanly in 23.7 seconds."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
  }
 }

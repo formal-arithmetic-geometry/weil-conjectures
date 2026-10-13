@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCohomologyCupProduct",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "result used by the item proof",
+   "via": [
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "H zero canonical derived tensor comparison to ordinary tensor using flat resolutions",
+   "results": "Service unavailable: Internal Server Error; no search result or mathematical verdict.",
+   "date": "2026-10-13",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived tensor to ordinary tensor comparison induces an isomorphism on degree zero homology, with transport through a nonpositive flat resolution",
+   "results": "Eight Tor/projective-resolution/derived-single-H-zero results; none states this canonical unbounded tensor comparison with flat-model transport.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ",
+   "results": "Unknown identifier in hosted Loogle; no hits. Local source exposes the Q tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "QObjTensorSingleFunctorObjIso|QObjTensorQObjIsoOfKFlatLeft|singleMapHomologicalComplex|map₂HomologicalComplexFlipObjSingleIso",
+   "results": "Found real K-flat comparison and single-complex isomorphisms; used to specify transport. No canonical H-zero comparison theorem with this interface.",
+   "date": "2026-10-13",
+   "verdict": "partial API match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupCanonicalHZeroIdentification",
+  "file": "lean/Sheaf/Paper/ModuleCupCanonicalHZeroIdentification.lean",
+  "declaration": "DerivedCategory.moduleCup_canonical_hzero_identification",
+  "statement": "theorem moduleCup_canonical_hzero_identification (F G : C) :\n    let F₀ := (CochainComplex.singleFunctor C 0).obj F\n    let G₀ := (CochainComplex.singleFunctor C 0).obj G\n    let c := Functor.LaxMonoidal.μ Q F₀ G₀ ≫ Q.map (moduleCup_singleTensorIso F G).hom\n    IsIso ((homologyFunctor C 0).map c) ∧\n      ∀ (P : CochainComplex C ℤ) (p : P ⟶ F₀)\n        [P.IsStrictlyLE 0] [QuasiIso p]\n        (_hflat : ∀ i : ℤ, ObjectProperty.flat (P.X i))\n        (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P),\n        c =\n          (tensorIso (asIso (Q.map p)) (Iso.refl (Q.obj G₀))).inv ≫\n            (QObjTensorQObjIsoOfKFlatLeft P G₀ hP).hom ≫\n            Q.map (p ⊗ₘ 𝟙 G₀) ≫ Q.map (moduleCup_singleTensorIso F G).hom",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "id": "lem-sc-module-cup-canonical-hzero-identification",
+ "title": "Canonical derived-to-ordinary H-zero identification with flat-model transport",
+ "statement": "Let C be a braided closed monoidal Grothendieck abelian category with monoidal additivity, functorial flat resolutions and a derived category. For objects F,G let F₀,G₀ denote their single complexes in degree zero and e their canonical total-tensor/single-tensor isomorphism, constructed from map₂HomologicalComplexFlipObjSingleIso followed by singleMapHomologicalComplex. Set c=μ_Q(F₀,G₀) followed by Q(e.hom). H-zero(c) is invertible. For every strictly nonpositive termwise-flat K-flat resolution p:P→F₀, c equals the inverse of tensorIso(asIso(Qp),refl(QG₀)), followed by QObjTensorQObjIsoOfKFlatLeft(P,G₀), Q(p tensor id), and Q(e.hom). Thus the canonical comparison is precisely the transported flat-model augmentation, not an unspecified isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "Derived tensor product, flat-model construction and comparison to ordinary tensor"
+ },
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonpositive flat resolution; it is K-flat. The model H-zero identification follows from the cokernel calculation and right exactness of tensor. Naturality of the lax monoidal comparison of Q identifies its component with the explicitly recorded transport through the localized resolution and QObjTensorQObjIsoOfKFlatLeft. Tensoring Qp with the identity is an isomorphism; therefore transporting the model calculation gives invertibility of H-zero(c). The real single-tensor isomorphism e identifies the codomain with Q((F tensor G)[0]).",
+   "uses": [
+    "lem-sc-module-cup-hzero-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-hzero-identification"
+ ],
+ "proof_origin": {
+  "by": "P3 repair of X-3869a",
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "Derived tensor product, flat-model construction and comparison to ordinary tensor"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+ }
+}

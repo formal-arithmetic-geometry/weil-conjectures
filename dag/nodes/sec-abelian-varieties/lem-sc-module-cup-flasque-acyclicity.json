@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCohomologyCupProduct",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "result used by the item proof",
+   "via": [
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module sheaf Godement Alexander Whitney cup pairing",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Alexander Whitney sheaf tensor cup",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement Alexander Whitney flasque tensor derived global cup",
+   "results": "No exact theorem in Mathlib or repository.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupFlasqueAcyclicity",
+  "file": "lean/Sheaf/Paper/ModuleCupFlasqueAcyclicity.lean",
+  "declaration": "AlgebraicGeometry.moduleCup_flasque_acyclicity",
+  "statement": "theorem moduleCup_flasque_acyclicity (X : Scheme.{u})\n    (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    [TopCat.Sheaf.IsFlasque ((SheafOfModules.toSheaf\n      (moduleRings X.toRingedSpace)).obj F)] (q : ℕ) (hq : 0 < q) :\n    IsZero ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "id": "lem-sc-module-cup-flasque-acyclicity",
+ "title": "Module-valued flasque acyclicity",
+ "statement": "Let X be a scheme and F a module sheaf whose underlying abelian sheaf is flasque. For every natural q > 0, H^q(X,F) is a zero module.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E1",
+  "place": "Flasque acyclicity, together with module/abelian cohomology comparison Tag 03FD"
+ },
+ "stmt_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-zariski-flasque-acyclic"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the module/underlying-abelian cohomology isomorphism from module_cohomology_iso_underlying_abelian. Apply IsFlasque.subsingleton_H'_top in positive degree to the underlying sheaf. Transport subsingletonness along the injective additive equivalence supplied by the isomorphism. ModuleCat.isZero_iff_subsingleton gives the asserted zero module.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology",
+    "lem-sc-zariski-flasque-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-sc-zariski-flasque-acyclic"
+ ],
+ "proof_origin": {
+  "by": "P3 repair of X-3869a",
+  "document": "lean/Sheaf/Paper/ModuleCupFlasqueAcyclicity.lean",
+  "place": "Actual Lean proof via module_cohomology_iso_underlying_abelian and IsFlasque.subsingleton_H'_top; Stacks Tags 03FD and 01E1"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+ }
+}

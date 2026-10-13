@@ -1,0 +1,125 @@
+{
+ "id": "def-sc-module-cup-resolution-data",
+ "kind": "definition",
+ "title": "Computing resolutions, cycle classes and tensor-pairing data",
+ "statement": "Let X be a scheme [def-pc-scheme] with category of module sheaves [def-weil-sheaf-of-modules-category]. Use right-derived module cohomology [def-sc-ringed-space-module-cohomology], the sheaf tensor [def-pur-sheaf-tensor-product], injective resolutions [def-sp-injective-resolutions] and the signed total tensor convention [def-pc-tensor-complex-sheaves]. For a nonnegative module complex, cupCycleClass sends a vector in the kernel of the outgoing differential through the canonical cycles isomorphism and homology projection. A CupAcyclicResolution of F consists of a nonnegative resolution K, its quasi-isomorphic augmentation F[0] to K, an injective resolution I, and a comparison K to I extending the augmentation and inducing isomorphisms after taking global cohomology. Its class map is the resulting homology map followed by the inverse canonical injective-resolution identification. A CupResolutionPairing of F,G consists of such computing resolutions of F,G,F tensor G and sectionwise O-linear bilinear maps in degrees r,s into degree r+s. These commute with restriction, satisfy the signed total Leibniz rule, and extend the ordinary tensor of coefficient sections through the three augmentations in degree zero. These are exactly the existing resolution-data definitions formerly in ModuleCohomologyCupProduct, moved verbatim without redefining their notions.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Cohomology of Sheaves, Section 20.31; Lemma 20.31.3 and the flasque-resolution proof of Lemma 20.31.4 (Tag 0FKV)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-sp-injective-resolutions",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "P3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Proof of the acyclic-resolution characterization, extracted from the item docstring and Section 20.31"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module cohomology cup product Godement resolution",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear cup product on cohomology of sheaves of modules computed by acyclic resolutions",
+   "results": "Eight sheaf H, cohomology-presheaf and HomComplex/Ext comparison hits; no computing paired resolution or independence of pairings theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ, Function.Surjective",
+   "results": "0 hits. Direct source search found ModuleCat.epi_iff_surjective and the module cycles/homology isomorphisms; used for proved descent helpers.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|CupResolutionPairing|exists_unique_moduleCupProduct in Mathlib, WeilConjectures, Sheaf and dag/nodes",
+   "results": "Only the item carries CupResolutionPairing; no reusable resolution-pairing construction or invariance theorem. Existing cup operations for field-linear coefficients have a different interface. Existing abelian flasque acyclicity does not directly give the module-valued computing pairing.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCohomologyCupProduct",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Computing resolutions, cycle classes and tensor-pairing data",
+   "via": [
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupResolutionData",
+  "file": "lean/Sheaf/Paper/ModuleCupResolutionData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.CupResolutionPairing",
+  "statement": "structure CupResolutionPairing {X : Scheme.{uM}} (F G : X.Modules)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.cupCycleClass",
+   "AlgebraicGeometry.Scheme.Modules.CupAcyclicResolution",
+   "AlgebraicGeometry.Scheme.Modules.CupAcyclicResolution.class",
+   "AlgebraicGeometry.Scheme.Modules.CupResolutionPairing"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+ }
+}

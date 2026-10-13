@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCohomologyCupProduct",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "result used by the item proof",
+   "via": [
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module sheaf Godement Alexander Whitney cup pairing",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Alexander Whitney sheaf tensor cup",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement Alexander Whitney flasque tensor derived global cup",
+   "results": "No exact theorem in Mathlib or repository.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupHZeroIdentification",
+  "file": "lean/Sheaf/Paper/ModuleCupHZeroIdentification.lean",
+  "declaration": "DerivedCategory.moduleCup_hzero_identification",
+  "statement": "theorem moduleCup_hzero_identification (F G : C) (P : CochainComplex C ℤ)\n    (p : P ⟶ (CochainComplex.singleFunctor C 0).obj F)\n    [P.IsStrictlyLE 0] [QuasiIso p]\n    (_hflat : ∀ i : ℤ, ObjectProperty.flat (P.X i)) :\n    IsIso (HomologicalComplex.homologyMap\n      (((tensorRight G).mapHomologicalComplex (ComplexShape.up ℤ)).map p) 0)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "id": "lem-sc-module-cup-hzero-identification",
+ "title": "H-zero of a nonpositive termwise-flat tensor model",
+ "statement": "Let C be a braided closed monoidal abelian category with monoidal additivity. Let F,G be objects of C, P an integer cochain complex strictly supported in degrees ≤0, and p:P→F[0] a quasi-isomorphism. Assume every P^i is flat. Then the termwise tensor-with-G map induced by p is an isomorphism on degree-zero homology.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "Derived tensor flat-model construction; degree-zero cokernel calculation by right exactness"
+ },
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For a strictly nonpositive complex, H-zero is the cokernel of the differential from degree -1 to degree 0. The quasi-isomorphism p identifies this cokernel with F. Tensor with G preserves cokernels because it is a left adjoint. Thus the termwise tensor map induced by p is invertible on H-zero. This statement is about the model only; canonical derived transport is the separate canonical-identification node.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "P3 repair of X-3869a",
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "Derived tensor flat-model construction; degree-zero cokernel calculation by right exactness"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCohomologyCupProduct",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "result used by the item proof",
+   "via": [
+    "def-sc-module-cohomology-cup-product"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module sheaf Godement Alexander Whitney cup pairing",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Alexander Whitney sheaf tensor cup",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement Alexander Whitney flasque tensor derived global cup",
+   "results": "No exact theorem in Mathlib or repository.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupNaiveDerivedCompatibility",
+  "file": "lean/Sheaf/Paper/ModuleCupNaiveDerivedCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_naive_derived_compatibility",
+  "statement": "theorem moduleCup_naive_derived_compatibility :\n    let S := RingedSpace.globalSectionsFunctor X.toRingedSpace\n    let T := S.mapHomologicalComplex (ComplexShape.up ℤ)\n    let R := S.rightDerivedFunctor\n    ∃ μ : ∀ A B : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n        R.obj A ⊗ R.obj B ⟶ R.obj (A ⊗ B),\n      (∀ (A A' B B' : DerivedCategory\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n        (f : A ⟶ A') (g : B ⟶ B'),\n        (R.map f ⊗ₘ R.map g) ≫ μ A' B' = μ A B ≫ R.map (f ⊗ₘ g)) ∧\n      ∀ K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,\n        ∃ ν : T.obj K ⊗ T.obj L ⟶ T.obj (K ⊗ L),\n          (∀ (i j n : ℤ) (h : i + j = n)\n            (x : Γ(K.X i, ⊤)) (y : Γ(L.X j, ⊤)),\n            (ν.f n).hom\n              ((HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n h).hom\n                (TensorProduct.tmul Γ(X, ⊤) x y)) =\n              (HomologicalComplex.ιTensorObj K L i j n h).val.app (op ⊤)\n                (tmulSection x y)) ∧\n          (moduleCup_globalComparison X K ⊗ₘ moduleCup_globalComparison X L) ≫\n              μ (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) ≫\n              R.map (Functor.LaxMonoidal.μ DerivedCategory.Q K L) =\n            Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫\n              DerivedCategory.Q.map ν ≫ moduleCup_globalComparison X (K ⊗ L)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "id": "lem-sc-module-cup-naive-derived-compatibility",
+ "title": "Naive/derived global cup compatibility",
+ "statement": "For a scheme X let S be module global sections, T its termwise action on integer complexes, R its unbounded right derived functor, and β_K:Q(TK)→R(QK) its canonical unit transported via quotientCompQhIso. There exists a natural derived global cup family μ_{A,B}:R(A) tensor^L R(B)→R(A tensor^L B). For every pair of arbitrary integer complexes K,L there is a naive cochain map ν:Tot(TK tensor TL)→T(Tot(K tensor L)) which sends the (i,j)-summand pure tensor x tensor y to the section of the (i,j)-summand inclusion applied to tmulSection(x,y). In the six-object diagram, the top arrow is β_K tensor β_L, upper left downward arrow is μ_Q(TK,TL), middle left downward arrow is Qν, upper right downward arrow is μ_{QK,QL}, middle right downward arrow is R(μ_Q(K,L)), and bottom arrow is β_{K tensor L}. The two outer composites are equal. No equality or commutativity hypothesis is assumed. This is the global specialization to (X,O_X) → (pt,Γ(X,O_X)).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Cohomology of Sheaves, Section 20.31, Lemma 20.31.3 (naive/derived tensor compatibility), specialized to the morphism (X,O_X) → (pt,Γ(X,O_X))"
+ },
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural derived global cup by the derived pullback/direct-image adjunction for (X,O_X) → (pt,Γ(X,O_X)), using the tensor of counits. Build the naive cochain map on each tensor summand using tmulSection and the corresponding inclusion; signed Leibniz proves it is a cochain map. The canonical comparison arrows are right-derived units and the lax monoidal Q tensor maps, with quotientCompQhIso specifying their transport. Take adjoints of both outer composites in the six-object diagram. Naturality of derived-to-ordinary pullback and tensor comparisons reduces the equality to the ordinary adjunction formula for the naive cup. This is the polygon proof in Stacks Lemma 20.31.3 and its stated global specialization; no diagram equality is a hypothesis.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "P3 stage-3 repair",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Cohomology of Sheaves, Section 20.31, Lemma 20.31.3 (naive/derived tensor compatibility), specialized to the morphism (X,O_X) → (pt,Γ(X,O_X))"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-02feb",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100051-L-2475276",
+  "kind": "interface",
+  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+ }
+}
