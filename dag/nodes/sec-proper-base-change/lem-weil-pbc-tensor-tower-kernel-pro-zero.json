@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-tensor-tower-kernel-pro-zero",
+ "kind": "statement",
+ "title": "Tensor kernels of finite submodule inclusions are eventually killed in flat quotient towers",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, and $(M_n)_{n\\geq0}$ a tower of $A$-modules with $A$-linear transition maps. Assume $M_n$ is an $A/I^{n+1}$-module compatibly with its $A$-action and is flat over $A/I^{n+1}$ [def-weil-pbc-flat-ring-map]. Let $P$ be a finite $A$-module [def-weil-finitely-generated-module] and $K\\subseteq P$ a submodule. For every $n$ there is $m\\geq n$ such that the transition $K\\otimes_A M_m\\to K\\otimes_A M_n$ kills $\\ker(K\\otimes_A M_m\\to P\\otimes_A M_m)$. No surjectivity of the transitions is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proofs of Tags 0911 (lemma-tor-strictly-pro-zero) and 0912 (lemma-limit-flat), at the presentation-kernel level; Artin--Rees is Algebra Tag 00IN. Verified online at https://stacks.math.columbia.edu/tag/0911 and https://stacks.math.columbia.edu/tag/0912."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finite A-module P and K ⊆ P. Artin--Rees gives c such that K ∩ I^(n+c+1)P ⊆ I^(n+1)K for every n. Take m=n+c, J=I^(m+1), S=A/J.",
+   "uses": [
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The base-changed inclusion f:S ⊗ K → S ⊗ P has kernel represented by k ∈ K with k ∈ JP. Indeed the quotient-tensor equivalences identify 1 ⊗ k with k mod JK, and 1 ⊗ k maps to zero exactly when k ∈ JP. Every element of S ⊗ K has such a representative.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flatness of M_m over S makes M_m ⊗ ker f → M_m ⊗ (S ⊗ K) → M_m ⊗ (S ⊗ P) exact. Quotient cancellation and tensor symmetry identify the last map with K ⊗ M_m → P ⊗ M_m. The cancellation maps commute with that inclusion: on generators a ⊗ (s ⊗ k), both routes give sa ⊗ k.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An element in the tensor kernel therefore lifts to M_m ⊗ ker f. For each pure tensor a ⊗ [k] in this lift, Step 2 puts k ∈ K ∩ JP, and Step 1 puts k ∈ I^(n+1)K. The transition image is k ⊗ p_mn(a)=0: express k as a finite sum of ideal multiples, move the scalars to M_n, and use its quotient action. Tensor induction and additivity prove vanishing for the whole lift. This argument uses no surjectivity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proofs of Tags 0911 (lemma-tor-strictly-pro-zero) and 0912 (lemma-limit-flat), at the presentation-kernel level; Artin--Rees is Algebra Tag 00IN. Verified online at https://stacks.math.columbia.edu/tag/0911 and https://stacks.math.columbia.edu/tag/0912."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor kernels of inclusions of finite modules become zero along a tower of flat modules over ideal power quotients by Artin Rees",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees implies tensor kernels of a finite submodule inclusion eventually vanish for modules flat over ideal power quotients",
+   "results": "AdicCompletion.tensor_map_id_left_injective_of_injective; Module.Flat.iff_lift_lsmul_comp_subtype_injective; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; AdicCompletion.flat_of_isNoetherian; Module.Flat.ker_lTensor_eq; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact match for the general tower statement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_pow_inf_eq_pow_smul|quotTensorEquivQuotSMul|cancelBaseChange",
+   "results": "Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/Filtration.lean; Mathlib/RingTheory/Filtration.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/TotallySplit.lean; Mathlib/RingTheory/IsTensorProduct.lean; Mathlib/RingTheory/IsTensorProduct.lean",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact match for the general tower statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LimitFlatModules",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Steps 2--3 of the limit-flat proof: eventual vanishing of presentation tensor kernels",
+   "via": [
+    "lem-weil-pbc-limit-flat-modules",
+    "lem-weil-pbc-flat-module-completion-flat",
+    "lem-weil-pbc-flat-local-completion-iso",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TensorTowerKernelProZero",
+  "file": "lean/Sheaf/RingTheory/TensorTowerKernelProZero.lean",
+  "declaration": "ModuleCat.tensor_kernel_eventually_zero_of_flat_quotients",
+  "statement": "theorem tensor_kernel_eventually_zero_of_flat_quotients (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (F : ℕᵒᵖ ⥤ ModuleCat.{v} A) [∀ n : ℕ, Module (A ⧸ I ^ (n + 1)) (F.obj (op n))] [∀ n : ℕ, IsScalarTower A (A ⧸ I ^ (n + 1)) (F.obj (op n))] (hflat : ∀ n : ℕ, Module.Flat (A ⧸ I ^ (n + 1)) (F.obj (op n))) (P : Type u) [AddCommGroup P] [Module A P] [Module.Finite A P] (K : Submodule A P) (n : ℕ) : ∃ (m : ℕ) (hnm : n ≤ m), ∀ x : TensorProduct A K (F.obj (op m)), K.subtype.rTensor (F.obj (op m)) x = 0 → (F.map (homOfLE hnm).op).hom.lTensor K x = 0",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T154358-L-1163351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T154358-L-1163351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

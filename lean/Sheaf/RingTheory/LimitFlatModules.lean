@@ -10,10 +10,9 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Sheaf.Algebra.Homology.MittagLefflerLimitHomology
-import Sheaf.Paper.TorLongExactFirstVariable
-import Sheaf.RingTheory.FiniteFreeResolution
-import Sheaf.RingTheory.TorStrictlyProZero
+import Mathlib.RingTheory.Flat.Tensor
+import Sheaf.RingTheory.TensorTowerKernelProZero
+import Sheaf.RingTheory.TensorLimitOfProZeroKernels
 
 /-!
 # Inverse limits of flat modules over ideal-power quotients
@@ -41,31 +40,20 @@ in particular `I^(n+1)` annihilates this object. The tensor comparison is stated
 injectivity into the product and surjectivity onto its compatible sequences. Its
 `n`-th component is `1 ⊗ limit.π F (op n)`.
 
-Proof (Tag 0912), following the six steps of the DAG node:
-1. For a finite module `Q`, choose a finite free resolution using
-   `lem-weil-pbc-finite-free-resolution-noetherian`. By `def-weil-pbc-tor-modules` and
-   `lem-weil-pbc-tensor-right-exact`, its tensor complex has homology `Tor₁(Q,N)`
-   in degree 1 and `Q ⊗ N` in degree 0, naturally in `N`.
-2. By `lem-weil-pbc-tensor-over-quotient-ring` and flatness over the quotient, identify
-   `Tor₁(Q,M_n)` with `Tor₁(Q,A/Iⁿ) ⊗[A/Iⁿ] M_n`. Exactness of tensor and
-   `lem-weil-pbc-exact-functor-complex-cohomology` give this identification, compatible
-   with the transition maps (check on tensor generators).
-3. By `lem-weil-pbc-tor-strictly-pro-zero`, sufficiently long transition maps on
-   these Tor groups vanish. Thus their systems are Mittag-Leffler, essentially
-   constant with value zero, and have zero inverse limit.
-4. Apply `lem-weil-pbc-mittag-leffler-complex-limit-homology` to the finite-free
-   tensor complexes. Their termwise transitions are surjective. Finite free
-   tensor products commute with inverse limits, so degree-zero homology identifies
-   `Q ⊗ lim M_n` with `lim (Q ⊗ M_n)`. Tracing generators gives the stated canonical
-   comparison, natural in `Q`.
-5. By `lem-weil-pbc-flat-fg-ideal-criterion`, flatness reduces to injectivity after
-   tensoring injections between finite modules. Use the natural comparison from
-   step 4 to reduce this to injectivity of the corresponding inverse-limit map.
-6. For an injection `Q → Q'`, put `Q'' = coker(Q → Q')`. Apply
-   `lem-weil-pbc-tor-long-exact-first-variable` at every level. The Tor systems for
-   `Q'` and `Q''` have zero limits by step 3. Apply
-   `lem-weil-pbc-mittag-leffler-complex-limit-homology` again to conclude that the
-   limit map on tensors is injective. This proves flatness. -/
+Proof, using a presentation-level version of the argument of Tag 0912:
+1. Artin--Rees and flatness over the quotients show that tensor kernels of finite
+   submodule inclusions are eventually killed by tower transitions. This is
+   `tensor_kernel_eventually_zero_of_flat_quotients`, which needs no surjectivity.
+2. The general `tensor_limit_comparison_of_proZero_kernels` uses these kernels,
+   finite free presentations, recursive lifting and Mittag--Leffler fibres to prove
+   the canonical tensor comparison. It applies to every finite `Q`, with independent
+   universes for the ring, the tower, and `Q`.
+3. Apply the finitely generated ideal criterion for flatness. If `y ∈ J ⊗ lim F`
+   is killed by the inclusion into `A ⊗ lim F`, tensor naturality puts each
+   coordinate in the corresponding tensor kernel. For each n, choose a later m
+   whose transition kills that kernel. Compatibility of the limit projections
+   then makes the n-th coordinate zero. Injectivity of the comparison for `J`
+   gives `y = 0`, proving flatness. -/
 theorem limit_flat_of_flat_quotients
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (F : ℕᵒᵖ ⥤ ModuleCat.{v} A)
@@ -82,6 +70,29 @@ theorem limit_flat_of_flat_quotients
               = x n) →
             ∃ y : TensorProduct A Q (limit F : ModuleCat.{v} A),
               ∀ n : ℕ, (limit.π F (op n)).hom.lTensor Q y = x n := by
-  sorry
+  have hker := tensor_kernel_eventually_zero_of_flat_quotients A I F hflat
+  refine ⟨?_, tensor_limit_comparison_of_proZero_kernels A F hsurj hker⟩
+  apply Module.Flat.iff_rTensor_injective.mpr
+  intro J hJ
+  let : Module.Finite A J := Module.Finite.iff_fg.mpr hJ
+  apply (injective_iff_map_eq_zero _).mpr
+  intro y hy
+  apply (tensor_limit_comparison_of_proZero_kernels A F hsurj hker J).1
+  ext n
+  obtain ⟨m, hnm, hm⟩ := hker A J n
+  have hnat : J.subtype.rTensor (F.obj (op m))
+      ((limit.π F (op m)).hom.lTensor J y) =
+      (limit.π F (op m)).hom.lTensor A (J.subtype.rTensor (limit F : ModuleCat.{v} A) y) := by
+    clear hy
+    induction y using TensorProduct.induction_on with
+    | zero => simp
+    | tmul j t => rfl
+    | add x y hx hy => simp only [map_add, hx, hy]
+  have hz := hm ((limit.π F (op m)).hom.lTensor J y) (by rw [hnat, hy, map_zero])
+  have hw : (F.map (homOfLE hnm).op).hom.comp (limit.π F (op m)).hom =
+      (limit.π F (op n)).hom := by
+    exact congrArg ModuleCat.Hom.hom (limit.w F (homOfLE hnm).op)
+  simpa only [← LinearMap.lTensor_comp_apply, hw, LinearMap.pi_apply,
+    LinearMap.zero_apply, map_zero] using hz
 
 end ModuleCat

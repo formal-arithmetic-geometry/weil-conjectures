@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-tensor-limit-of-pro-zero-kernels",
+ "kind": "statement",
+ "title": "Finite tensor commutes with surjective towers with eventually zero tensor kernels",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and $(M_n)_{n\\geq0}$ a tower of $A$-modules with surjective $A$-linear transitions. Assume that for every finite $A$-module $P$ [def-weil-finitely-generated-module], every submodule $K\\subseteq P$ and every $n$, some transition $K\\otimes_A M_m\\to K\\otimes_A M_n$ with $m\\geq n$ kills $\\ker(K\\otimes_A M_m\\to P\\otimes_A M_m)$. Then for every finite $A$-module $Q$ the canonical map $Q\\otimes_A\\varprojlim_n M_n\\to\\prod_n(Q\\otimes_A M_n)$ is injective and has as its image exactly the compatible families. This criterion assumes no ideal, quotient-ring module structures or flatness.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Tag 0912 (lemma-limit-flat), first paragraph, rewritten using finite presentations and compatible preimage fibres; nonempty Mittag--Leffler fibres use Algebra Tag 0597 (lemma-ML)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Finite free tensor commutes with tower limits: identify A^d ⊗ N with N^d by TensorProduct.comm and piScalarRight. Apply the concrete module limit universal property separately to each of the finitely many coordinates. These identifications are natural for transitions and projections, by tensor induction. This is elementary coordinatewise construction: a compatible family of d-tuples is exactly a d-tuple of compatible families; equality is checked at each coordinate.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a finite Q choose a surjection p:A^d → Q and K=ker p. Given compatible x_n ∈ Q ⊗ M_n, construct lifts b_n ∈ A^d ⊗ M_n recursively. Given b_n and an arbitrary lift b′ at n+1, the transition of b′ minus b_n lies in ker(p ⊗ M_n). Tensor right exactness lifts this difference to K ⊗ M_n. Surjectivity of M_{n+1} → M_n gives a lift in K ⊗ M_{n+1}; subtract its image from b′. This gives a compatible lift. Step 1 then proves surjectivity of the comparison for every finite Q, over any commutative ring.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To prove injectivity, lift y ∈ Q ⊗ lim M to z ∈ A^d ⊗ lim M. If y has zero coordinates, every coordinate of z lies in the image of K ⊗ M_n by tensor right exactness. The preimage fibres E_n are nonempty. By the kernel hypothesis, for every n some m≥n kills the difference of any two preimages at m on transition to n. For any k≥n choose l≥m,k and a preimage at l. Its image at n equals that of each preimage at m. Thus im(E_m → E_n) ⊆ im(E_k → E_n), precisely the Mittag--Leffler condition. Nonempty ML fibres have a compatible section.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-ml-sets-tower-limit-nonempty"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Noetherianity makes K finite, so apply Step 2 to K to lift the compatible section to a ∈ K ⊗ lim M. The image of a in A^d ⊗ lim M equals z, by Step 1 and equality of every coordinate. Its image in Q ⊗ lim M is zero by tensor right exactness, so y=0. Subtract to obtain injectivity. Naturality on pure tensors proves that the comparison used throughout is exactly the canonical map in the statement.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-ml-sets-tower-limit-nonempty",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Tag 0912 (lemma-limit-flat), first paragraph, rewritten using finite presentations and compatible preimage fibres; nonempty Mittag--Leffler fibres use Algebra Tag 0597 (lemma-ML)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite tensor products commute with a surjective inverse tower when kernels of tensor submodule inclusions are pro zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product with a finitely presented module commutes with inverse limits of surjective module towers when tensor kernels of finite submodule inclusions are pro zero",
+   "results": "AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct_surjective_of_finite; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact match for the general tower statement"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*kernel.*zero|kernel.*tensor.*zero|[Tt]ensor.*[Ll]imit",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean; Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean; Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean; Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean; Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean; Mathlib/Algebra/Colimit/TensorProduct.lean; Mathlib/Algebra/Colimit/TensorProduct.lean; Mathlib/CategoryTheory/GradedObject/Monoidal.lean",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact match for the general tower statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LimitFlatModules",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Step 4 of the limit-flat proof: tensor comparison using presentation kernels instead of complexes",
+   "via": [
+    "lem-weil-pbc-limit-flat-modules",
+    "lem-weil-pbc-flat-module-completion-flat",
+    "lem-weil-pbc-flat-local-completion-iso",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TensorLimitOfProZeroKernels",
+  "file": "lean/Sheaf/RingTheory/TensorLimitOfProZeroKernels.lean",
+  "declaration": "ModuleCat.tensor_limit_comparison_of_proZero_kernels",
+  "statement": "theorem tensor_limit_comparison_of_proZero_kernels (A : Type u) [CommRing A] [IsNoetherianRing A] (F : ℕᵒᵖ ⥤ ModuleCat.{v} A) (hsurj : ∀ n : ℕ, Function.Surjective (F.map (homOfLE (Nat.le_succ n)).op).hom) (hker : ∀ (P : Type u) [AddCommGroup P] [Module A P] [Module.Finite A P] (K : Submodule A P) (n : ℕ), ∃ (m : ℕ) (hnm : n ≤ m), ∀ x : TensorProduct A K (F.obj (op m)), K.subtype.rTensor (F.obj (op m)) x = 0 → (F.map (homOfLE hnm).op).hom.lTensor K x = 0) (Q : Type w) [AddCommGroup Q] [Module A Q] [Module.Finite A Q] : Function.Injective (LinearMap.pi fun n : ℕ ↦ (limit.π F (op n)).hom.lTensor Q) ∧ ∀ x : ∀ n : ℕ, TensorProduct A Q (F.obj (op n)), (∀ n : ℕ, (F.map (homOfLE (Nat.le_succ n)).op).hom.lTensor Q (x (n + 1)) = x n) → ∃ y : TensorProduct A Q (limit F : ModuleCat.{v} A), ∀ n : ℕ, (limit.π F (op n)).hom.lTensor Q y = x n",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T154358-L-1163351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T154358-L-1163351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
