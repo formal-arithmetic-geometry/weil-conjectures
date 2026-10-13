@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-single-homology-shift-comparison",
+ "kind": "statement",
+ "title": "Single-object homology normalization commutes with shift",
+ "statement": "Let C be an abelian category with a chosen derived category [def-weil-abstract-derived-category], Y : C and n : ℤ. Write H₀ for H^0 on D⁺(C), and χ_i : H^i(single_i Y) ≅ Y for singleFunctorCompHomologyFunctorIso i. Define d : H^n(single_n Y) ≅ H^0(single_0 Y) by applying H^n to the inverse singleFunctors.shiftIso (-n) n 0, then applying H₀.shiftIso (-n) n 0. Then d.hom followed by χ_0.hom equals χ_n.hom. This concerns a single object in one abelian category, with no additive functor, enough-injectives assumption, cycles of a mapped complex, or derived unit.",
+ "source": {
+  "document": "Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors and Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence",
+  "place": "CochainComplex.singleFunctors.shiftIso; CochainComplex.ShiftSequence.shiftIso_hom_app; parent proof step 2, single-complex homology transport."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the fully faithful inclusion of D⁺(C) to identify its lifted single-functor shift with the derived single-functor shift. Use the induced shift-sequence comparison of quotient homology to transport to cochain complexes; naturality cancels the quotient homology comparison maps in inverse pairs.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the literal single complex, the inverse shift map followed by the homology shift is induced by a morphism of short complexes whose middle component is the identity on Y. The outer terms are zero, so their shift signs make no contribution. Compose with the epimorphic homology projection. Naturality of homologyπ and cyclesMap_i identifies both paths with iCycles followed by singleObjXSelf.hom. Cancel the projection. For n=0 the shift unit comparisons cancel; for Y zero the same natural maps apply.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors and Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence",
+  "place": "CochainComplex.singleFunctors.shiftIso; CochainComplex.ShiftSequence.shiftIso_hom_app; parent proof step 2, single-complex homology transport.",
+  "note": "Specialization of the parent shift/naturality calculation; the source cycles calculation is realized by the delivered Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "single object homology comparison is compatible with shifting a single complex to degree zero; right derived functor unit on single objects commutes with shift and homology",
+   "results": "UNAVAILABLE: service unavailable / Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functor unit on single complex compatibility with shift and homology; homologyFunctorSingleIso singleFunctors shiftIso compatibility",
+   "results": "DerivedCategory.singleFunctorCompHomologyFunctorIso, singleFunctorIsoCompQ, singleFunctorsPostcompQIso, HomologicalComplex.homologyFunctorSingleIso, CochainComplex.ShiftSequence.shiftIso, HomotopyCategory.homologyShiftIso_hom_app. Read signatures and constructions; these are constituent comparisons, not the specialized equations.",
+   "date": "2026-10-13",
+   "verdict": "No exact equation found. The source cycles calculation is proved from constituent comparisons and the new generic shift normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyShiftIso|shiftMap_homologyFunctor_map_Q|singleMapHomologicalComplex_hom_app_self; rightDerivedPlusSingleUnitHomology|rightDerivedFunctorPlusUnit.*shift",
+   "results": "Mathlib homology shift map and sole-term coefficient lemmas found; library unit CommShift instance found. No existing theorem states any of the three equations. Blueprint searches single homology, single unit shift, cycles single found no duplicate; derived unit found only global-cohomology comparison.",
+   "date": "2026-10-13",
+   "verdict": "Supporting constructions only; no duplicate node or specialized statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnitShift",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "Canonical single-complex unit normalization: Single-object homology normalization commutes with shift",
+   "via": [
+    "lem-pc-right-derived-canonical-single-unit-shift",
+    "lem-pc-right-derived-canonical-single-unit",
+    "lem-pc-right-derived-unit-single-degree",
+    "lem-pc-hypercohomology-left-edge-single-aux",
+    "lem-pc-hypercohomology-left-edge-single",
+    "lem-pc-hypercohomology-edge-cocycle-canonical",
+    "lem-pc-grothendieck-cocycle-comparison",
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SingleHomologyShiftComparison",
+  "file": "lean/Sheaf/CategoryTheory/SingleHomologyShiftComparison.lean",
+  "declaration": "singleFunctor_homology_shift_comparison",
+  "statement": "theorem singleFunctor_homology_shift_comparison (Y : C) (n : ℤ) : let H₀ := DerivedCategory.Plus.homologyFunctor C 0 let d := Functor.isoWhiskerRight ((DerivedCategory.Plus.singleFunctors C).shiftIso (-n) n 0 (by simp)).symm (H₀.shift n) ≪≫ Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor C 0) (H₀.shiftIso (-n) n 0 (by ring)) d.hom.app Y ≫ (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).hom.app Y = (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso n).hom.app Y",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T031534-L-3569398",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T031534-L-3569398",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

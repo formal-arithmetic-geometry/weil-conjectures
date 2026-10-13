@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import Sheaf.CategoryTheory.RightDerivedSingleUnitShiftTransport
+import Sheaf.CategoryTheory.MappedSingleCyclesShiftComparison
 
 @[expose] public section
 
@@ -56,6 +58,13 @@ theorem rightDerivedFunctorPlusUnit_canonical_single_shift (X : B) (n : ℕ) :
     GS.obj.iCycles n ≫
       G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) n X).hom ≫
       G.rightDerivedPlusSingleUnitHomology X := by
-  sorry
+  dsimp only
+  rw [rightDerivedPlusSingleUnit_shift_transport G X n]
+  simp only [← Category.assoc]
+  have hsource := mappedSingle_cycles_shift_comparison G X n
+  dsimp only at hsource
+  simp only [← Category.assoc] at hsource
+  rw [hsource]
+  simp only [Category.assoc, rightDerivedPlusSingleUnitHomology]
 
 end CategoryTheory.Functor

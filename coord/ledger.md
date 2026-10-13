@@ -10853,3 +10853,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/D2/Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQCCohomology (stage 3; reviewer PASS; after a return; landing 20261013T031533-L-3569021 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/D2/Sheaf.RingTheory.AdicFieldDifferentialsInjective (stage 3; reviewer PASS; first push; landing 20261013T031533-L-3569147 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/E1/Sheaf.CategoryTheory.NaturalTruncationCouple (stage 3; reviewer PASS; first push; landing 20261013T031534-L-3569280 (interface); batch 20261013T031526; modules 2; new nodes 1)
+- 03:15 L: merged deliver/E1/Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnitShift (stage 3; reviewer PASS; first push; landing 20261013T031534-L-3569398 (interface); batch 20261013T031526; modules 4; new nodes 3)
