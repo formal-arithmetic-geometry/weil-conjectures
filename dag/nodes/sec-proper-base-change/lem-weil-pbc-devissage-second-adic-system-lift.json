@@ -16,39 +16,28 @@
  },
  "proof": [
   {
-   "text": "For each e, form the coherent I-adic quotient system M_n/K^(e+1)M_n. On affine opens its coherence is finite generation of a quotient and its I-adic transition identities are successive quotient identities. Descend this supported system to Z_e=V(K^(e+1)) using the closed-immersion formal equivalence. Apply a quasi-inverse of the assumed completion equivalence, then coherent pushforward, to obtain G_e and its comparison with the quotient system. The equivalence determines the algebraization together with the comparison up to unique isomorphism.",
+   "text": "Apply grothendieckDevissage_secondAdicSystem_lift_data to construct the coherent K-adic system N and its doubly natural comparison sigma. Discard the unused placeholder map and True witness of that data-only construction.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+    "lem-weil-pbc-devissage-second-adic-system-lift-data"
    ],
    "elementary": false
   },
   {
-   "text": "The I-completion of G_(e+1)/K^(e+1)G_(e+1) is the level-e quotient system, by the equality of successive quotients and the canonical projection identities. Full faithfulness on Z_e identifies this quotient with G_e. Compose the quotient projection with this isomorphism to define the adjacent transition; define longer transitions by composition. Faithfulness proves that the comparisons commute with these transitions. Coherence, annihilation and the adjacent quotient isomorphisms give N in Coh(X,K). The comparisons assemble into the doubly natural sigma.",
+   "text": "Apply the corrected grothendieckDevissage_secondAdicSystem_lift_compatibility with the existing hthick to obtain delta and its comparison squares. Package N, delta, sigma and those squares. The source-based construction, caller statement and projection hypothesis htheta remain unchanged.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Reduce alpha modulo K^(e+1), then compose with theta inverse. Naturality makes it an I-adic morphism from completion_I(G_e) to completion_I(H/K^(e+1)H). Both terms descend to Z_e. Full faithfulness of completion on Z_e uniquely lifts it to delta_e. Faithfulness proves transition compatibility, so the delta_e form delta. Their lifted defining equations are precisely the stated comparison square. The projection identity on theta specifies the canonical quotient interchange.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+    "lem-weil-pbc-devissage-second-adic-system-lift-compatibility"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence"
+  "lem-weil-pbc-devissage-second-adic-system-lift-data",
+  "lem-weil-pbc-devissage-second-adic-system-lift-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 088A, lemma-existence-tricky: construction of G_e and the lifted comparison maps, before choosing t",
-  "note": "Read Tags 088A and 0888 online, and their coherent.tex source; categorical lifting and reflection steps expanded by G1."
+  "place": "Tag 088A, lemma-existence-tricky: construct the system and then lift its comparison maps; U3 forced caller adaptation requested by X-96860"
  },
  "mathlib_searches": [
   {
@@ -122,17 +111,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M3",
+  "reviewer": "X-c1338",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T232141-L-1993172",
+  "landing": "20261013T060427-L-585743",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_lift"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, the declared interface correction, Tag 088A, and the forced caller adaptation; verified compilation and axioms."
  }
 }
