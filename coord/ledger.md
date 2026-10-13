@@ -13887,3 +13887,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:32 L: returned deliver/C1/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionCore (reviewer RETURN: (reviewer X-7ffa6, head 7ffa6ee5f) C1: In lean/Sheaf/AlgebraicGeometry/UnionBoundedAboveModel.lean, replace `public impo)
 - 23:33 L: returned deliver/Y3/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (reviewer RETURN: (reviewer X-b03e4, head b03e441d7) F (reader gate/interface hazard): removing `CategoryTheory.Abelian.Ext.commShift_of_l)
 - 23:35 L: returned deliver/P2/Sheaf.Paper.LimitTowerOverLocalSystem (reviewer RETURN: (reviewer X-8b7d0, head 8b7d0717f) E2/G1: The earlier return remains unresolved. Both the clone and compiled library sti)
+- 23:36 L: returned deliver/B4/Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates (reviewer RETURN: (reviewer X-68cc3, head 68cc3158d) H10: `AffineOrdinaryTensorStalkCoordinates.lean` times out after 60 seconds under `lc)
