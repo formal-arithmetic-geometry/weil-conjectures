@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-koszul-base-change-iso",
+ "kind": "statement",
+ "title": "Koszul complexes commute with extension of scalars",
+ "statement": "Let A and S be commutative rings and S an A-algebra. For r a natural number and f:Fin r -> A, extension of scalars of the Koszul complex K_A(f) [def-weil-pbc-koszul-complex] is isomorphic, as a chain complex of S-modules, to K_S(algebraMap A S composed with f). No flatness or regularity hypothesis is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/062H",
+  "place": "Lemma 15.31.5, first complex identification in the proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "Equip each exterior power of the standard free module with Module.Basis.exteriorPower. Base change this basis to S and identify it with the exterior basis over S by their common subset index. The determinant coordinate formula and RingHom.map_det show that a tensor 1 with any basis-vector wedge maps to the same wedge over S.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the uniqueness and alternating wedge formula of the Koszul differential to identify the existing Clifford contraction boundary with its alternating formula on standard basis wedges. Tensor the formula and move its A coefficients through algebraMap to S. Linearity and the wedge identification give commutation with every differential. Assemble the component linear equivalences with HomologicalComplex.Hom.isoOfComponents.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-koszul-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/062H",
+  "place": "Lemma 15.31.5, first complex identification in the proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "koszul.*[Bb]ase|exteriorPower.*[Bb]ase|extendScalars.*[Ee]xterior",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars identifies the Koszul complex of a finite sequence with the Koszul complex of its images",
+   "results": "KaehlerDifferential.tensorKaehlerEquivBase; tensorKaehlerQuotKerSqEquiv; KaehlerDifferential.cotangentComplexBaseChange; Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; KaehlerDifferential.moduleBaseChange; KaehlerDifferential.moduleBaseChange'; tensorKaehlerQuotKerSqEquiv_tmul_D; Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, TensorProduct",
+   "results": "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left; Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right; LinearIndependent.tmul_of_flat_left; LinearIndependent.tmul_of_flat_right; TensorProduct.LinearIndepOn.tmul_of_flat_left; TensorProduct.LinearIndepOn.tmul_of_flat_right; TensorProduct.nontrivial_of_linearMap_injective_of_flat_left; TensorProduct.nontrivial_of_linearMap_injective_of_flat_right",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul complex commutes with extension of scalars",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulRegularFlatBaseChange",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-koszul-regular-flat-base-change",
+   "place": "Step 1: identification of complexes before using flatness",
+   "via": [
+    "lem-sc-koszul-regular-flat-base-change",
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulBaseChangeIso",
+  "file": "lean/Sheaf/RingTheory/KoszulBaseChangeIso.lean",
+  "declaration": "ExteriorAlgebra.nonempty_koszulBaseChangeIso",
+  "statement": "theorem nonempty_koszulBaseChangeIso (A S : Type u) [CommRing A] [CommRing S] [Algebra A S] (r : ℕ) (f : Fin r → A) : Nonempty (((ModuleCat.extendScalars (algebraMap A S)).mapHomologicalComplex (ComplexShape.down ℕ)).obj (koszulComplex A r f) ≅ koszulComplex S r (algebraMap A S ∘ f))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T011922-L-2761427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T011922-L-2761427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

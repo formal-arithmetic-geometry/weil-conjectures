@@ -14,16 +14,14 @@
  ],
  "proof": [
   {
-   "text": "In the standard exterior basis, use the contraction formula to express the boundary as a sum over removal of one generator, with coefficient (-1)^(i+2) f_i. Base change the basis and identify it with the exterior basis over S. Applying the ring map to the coefficients identifies the differentials and constructs a complex isomorphism from the tensor product complex to the restriction of the Koszul complex over S.",
+   "text": "Apply the explicit complex isomorphism between extension of scalars of K_A(f) and K_S(algebraMap A S composed with f).",
    "uses": [
-    "lem-weil-pbc-koszul-differential",
-    "lem-weil-pbc-exterior-power-free-basis",
-    "def-weil-pbc-koszul-complex"
+    "lem-sc-koszul-base-change-iso"
    ],
    "elementary": false
   },
   {
-   "text": "For each positive degree, the original short complex is exact by Koszul regularity. Tensoring with the flat module S preserves this exactness. Transport exactness through the complex isomorphism, then reflect it along faithful restriction of scalars. The resulting short complex over S is exact, so its homology is zero.",
+   "text": "For each nonzero degree, convert the assumed zero homology to exactness. Flatness makes ModuleCat.extendScalars preserve finite limits; it already preserves finite colimits. HomologicalComplex.ExactAt.map therefore preserves exactness. Transport exactness through the complex isomorphism and convert back to zero homology.",
    "uses": [
     "def-weil-pbc-flat-ring-map",
     "def-weil-pbc-koszul-regular-sequence"
@@ -33,15 +31,13 @@
  ],
  "proof_deps": [
   "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-koszul-complex",
   "def-weil-pbc-koszul-regular-sequence",
-  "lem-weil-pbc-exterior-power-free-basis",
-  "lem-weil-pbc-koszul-differential"
+  "lem-sc-koszul-base-change-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/062H",
-  "place": "Lemma 15.31.5, flat base change; the source argument made explicit in exterior basis coordinates"
+  "place": "Lemma 15.31.5; explicit complex isomorphism followed by Mathlib exact functor preservation"
  },
  "mathlib_searches": [
   {
@@ -110,13 +106,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b3c5c",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T223424-L-1643422",
+  "landing": "20261013T011922-L-2761427",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, node metadata, report, and lcompile.py --all result matched; the roof theorem’s STATEMENT-DISPUTED sign counterexample is valid."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
