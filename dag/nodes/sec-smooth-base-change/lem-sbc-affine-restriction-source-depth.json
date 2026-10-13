@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-affine-restriction-source-depth",
+ "kind": "statement",
+ "title": "Affine localization comparison for the injective restriction source",
+ "statement": "Let $L$ be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring], $U$ an open subscheme, $N$ a quasi-coherent module [pqf-def-coherent], and $V$ an affine open. Write $R=\\mathcal O_L(V)$ and $P=(j_*(N|_U))(V)$ for $j:U\\hookrightarrow L$. Let $S\\subseteq P$ be a finitely generated $R$-submodule and $p$ a prime ideal of $R$. Set $y=h_V.\\mathrm{fromSpec}(p)$, the corresponding point of $V$. Assume N is finite on affine opens, its stalks outside U have depth at least two [def-weil-pbc-depth], and the restriction unit is injective on all opens. Write $a:N(V)\\to P$ for this unit, assume $a(N(V))\\subseteq S$, and let $K=a(N(V))\\cap S$ viewed as a submodule of S. Then $K_p$ is finite over $R_p$ [def-weil-pbc-localization-at-prime, def-weil-pbc-module-localization]. If $y\\in U$, then $(S/K)_p=0$. If $y\\notin U$, then $\\operatorname{depth}_{R_p}(K_p)\\ge2$. No depth conclusion about $(S/K)_p$ at boundary points is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0E9I (lemma-depth-2); Tag 0AV8 (lemma-reflexive-isomorphism), local-isomorphism case; Tags 01IA, 01HV and 01LC"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Define M=N(V). Injectivity of a and the containment of its range in S give a linear equivalence M to K: m maps to a(m), with the S-membership witness from the containment; every k in K has an a-preimage and uniqueness follows from injectivity. Thus K is finite, and its localization is finite.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let y be the affine point of p. The affine ring stalk comparison identifies R_p with O_L,y. The quasi-coherent affine module stalk presentation identifies M_p with N_y, with the germ scalar action. After localizing M to K, these identify K_p with N_y semilinearly over the ring isomorphism. Mapping regular sequences through the ring isomorphism preserves their membership in the maximal ideal, injective multiplication at each quotient, and quotient nontriviality; hence it preserves depth. The assumed boundary depth bound therefore gives depth(K_p) at least two.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At y in U the restriction unit is an isomorphism on stalks, as restriction followed by open direct image restricts back to the original sheaf. The qcqs direct image is quasi-coherent. Identify its affine prime localization with its stalk by the same affine presentation. Then the composite M_p to S_p to P_p is an isomorphism and both inclusions are injective, so K_p to S_p is surjective. Localization of K to S to S/K is exact; its localized cokernel is therefore zero. The map comparisons are the natural germ maps and localization maps, so the composite is the given unit map.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "H2",
+  "document": "Stacks Project",
+  "place": "Tags 0E9I and 0AV8, affine source and interior comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen.isLocalization_stalk",
+   "results": "1 hits: AlgebraicGeometry.IsAffineOpen.isLocalization_stalk",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Tt]ensor|[Tt]ensor.*stalk|restrictAdjunction",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine restriction unit on quasi coherent modules localized at a prime is an isomorphism inside the open and has source of depth two outside",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoAffineFiniteQuotientDepth",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth >=2 extension paragraph: finite intermediate quotients in the boundary restriction surjectivity argument, before exhaustion by finite submodules. Affine source stalk depth and interior zero quotient before the depth lemma.",
+   "via": [
+    "lem-sbc-depth-two-affine-finite-quotient-depth",
+    "lem-sbc-depth-two-restriction-boundary-surjective",
+    "lem-sbc-depth-two-hartogs-restriction",
+    "lem-sbc-depth-two-hartogs-algebra-comparison",
+    "lem-sbc-depth-two-pushforward-coherence",
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoAffineRestrictionSourceDepth",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoAffineRestrictionSourceDepth.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_restriction_source_depth_comparison",
+  "statement": "theorem affine_restriction_source_depth_comparison {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens) (N : L.Modules) (hqc : N.IsQuasicoherent) (hsections : ∀ V : L.Opens, IsAffineOpen V → Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V))) (hdepth : ∀ y : L, y ∉ U → ∃ hfinite : Module.Finite (L.presheaf.stalk y) (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y), letI := hfinite (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y) (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) (hinj : ∀ V : L.Opens, Function.Injective (((Modules.restrictAdjunction U.ι).unit.app N).app V)) (V : L.Opens) (hV : IsAffineOpen V) (S : Submodule (L.presheaf.obj (op V)) (((Modules.pushforward U.ι).obj ((Modules.restrictFunctor U.ι).obj N)).val.obj (op V))) (hS : S.FG) (hMS : LinearMap.range (((Modules.restrictAdjunction U.ι).unit.app N).val.app (op V)).hom ≤ S) (p : Ideal (L.presheaf.obj (op V))) [p.IsPrime] : ∃ hfinite : Module.Finite (Localization.AtPrime p) (LocalizedModule.AtPrime p ((LinearMap.range (((Modules.restrictAdjunction U.ι).unit.app N).val.app (op V)).hom).comap S.subtype)), letI := hfinite (hV.fromSpec ⟨p, inferInstance⟩ ∈ U → Subsingleton (LocalizedModule.AtPrime p (S ⧸ (LinearMap.range (((Modules.restrictAdjunction U.ι).unit.app N).val.app (op V)).hom).comap S.subtype))) ∧ (hV.fromSpec ⟨p, inferInstance⟩ ∉ U → (2 : ℕ∞) ≤ IsLocalRing.depth (R := Localization.AtPrime p) (LocalizedModule.AtPrime p ((LinearMap.range (((Modules.restrictAdjunction U.ι).unit.app N).val.app (op V)).hom).comap S.subtype)))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T111852-L-3052350",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T111852-L-3052350",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
