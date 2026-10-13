@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-locally-bijective-finite-limit",
+ "kind": "statement",
+ "title": "Finite limits preserve local bijectivity of abelian presheaf maps",
+ "statement": "Let $(\\mathcal C,J)$ be a category with Grothendieck topology [def-weil-pbc-sites-and-cohomology], in arbitrary object and morphism universes, and let $K$ be a finite category (finitely many objects and arrows). For diagrams $F,G:K\\to (\\mathcal C^{\\mathrm{op}}\\to\\mathrm{Ab}_w)$ and a natural transformation $\\alpha:F\\to G$, assume each component $\\alpha_k$ is locally injective (two sections with equal images agree on a covering sieve) and locally surjective (every target section lifts on a covering sieve). Then the induced map $\\lim F\\to\\lim G$ is locally injective and locally surjective, with no relation between the site universes and $w$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00WJ; https://stacks.math.columbia.edu/tag/03CN",
+  "place": "00WJ, lemma-exactness-sheafification: finite common refinements underlying left exactness; 03CN, lemma-abelian-abelian: abelian-presheaf specialization. The componentwise local-refinement argument is the one in the parent node, now fully proved in Lean."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Finite families of covering sieves admit a covering sieve contained in every member, by induction using top_mem and intersection_covering. Limits of abelian presheaves are computed sectionwise: evaluation preserves limits, and the forgetful functor to types preserves limits. Concrete.isLimit_ext detects equality by projections, and Types.isLimitEquivSections constructs sections from compatible tuples.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If two source limit sections have equal images, their projections have equal component images by limMap_π. Obtain a common covering of their component equality sieves from local injectivity. Naturality of limit projections and joint injectivity show that the two sections agree on this covering, proving local injectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Given a target limit section, take a common covering inside the component image sieves and choose local component lifts. For each diagram arrow naturality of alpha and compatibility of the target tuple imply equality of the images of the two corresponding lifted source sections. Obtain a second common covering for these finitely many equality sieves using component local injectivity. The restricted lifts are compatible and define a source limit section by Types.isLimitEquivSections. Its image is the restricted target section by joint injectivity of projections. GrothendieckTopology.transitive gives the required covering image sieve. The empty diagram is included since the common covering of an empty family is the top sieve and an empty compatible tuple determines the terminal section.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "V3, a complete Lean implementation of the finite local lifting and equality-refinement argument stated in the parent node, adapted from Stacks 00WJ and 03CN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite limits of locally bijective maps of presheaves are locally bijective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite limits of natural transformations of abelian presheaves whose components are locally injective and locally surjective are locally bijective",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.instWEqualsLocallyBijectiveOfHasWeakSheafifyOfHasSheafComposeOfPreservesSheafificationOfReflectsIsomorphismsForget, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk', LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.iff, CategoryTheory.GrothendieckTopology.W_iff_isLocallyBijective, CategoryTheory.Presheaf.comp_isLocallyInjective_iff, CategoryTheory.GrothendieckTopology.W_of_isLocallyBijective, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall",
+   "date": "2026-10-13",
+   "verdict": "no match: results do not state finite-limit stability of local bijectivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"limMap\", \"IsLocallySurjective\"",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no match: results do not state finite-limit stability of local bijectivity"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyBijective_limMap|locally.*limMap|limMap.*[Ll]ocally",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no match: results do not state finite-limit stability of local bijectivity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "finite-free Hom exactness in the parenthetical Ext-vanishing argument: left exactness of the existing abelian reflector, finite common-refinement step",
+   "via": [
+    "lem-sc-finite-free-internal-hom-exact-sequence",
+    "lem-sc-weak-sheafify-addcommgrp-left-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.LocallyBijectiveFiniteLimit",
+  "file": "lean/Sheaf/CategoryTheory/Sites/LocallyBijectiveFiniteLimit.lean",
+  "declaration": "CategoryTheory.Presheaf.locallyBijective_limMap",
+  "statement": "theorem locallyBijective_limMap\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    {K : Type} [SmallCategory K] [FinCategory K]\n    {F G : K ⥤ (Cᵒᵖ ⥤ AddCommGrpCat.{w})} (α : F ⟶ G)\n    [∀ k, IsLocallyInjective J (α.app k)]\n    [∀ k, IsLocallySurjective J (α.app k)] :\n    IsLocallyInjective J (limMap α) ∧ IsLocallySurjective J (limMap α)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T111937-L-3068424",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T111937-L-3068424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

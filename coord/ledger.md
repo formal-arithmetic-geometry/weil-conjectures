@@ -12229,3 +12229,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/V2/Sheaf.AlgebraicGeometry.ProperFlatSingleOpenNoetherianComparison (stage 3; reviewer PASS; first push; landing 20261013T111936-L-3067908 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/V3/Sheaf.AlgebraicGeometry.PerfectOpenStalkRetractMapEquality (stage 3; reviewer PASS; first push; landing 20261013T111936-L-3068044 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/V3/Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal (stage 3; reviewer PASS; first push; landing 20261013T111937-L-3068253 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/V3/Sheaf.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact (stage 3; reviewer PASS; first push; landing 20261013T111937-L-3068424 (interface); batch 20261013T111833; modules 2; new nodes 1)
