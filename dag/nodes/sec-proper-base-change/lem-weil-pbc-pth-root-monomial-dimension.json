@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-pth-root-monomial-dimension",
+ "kind": "statement",
+ "title": "Reduced-monomial dimension bound for the p-root quotient",
+ "statement": "Let $k$ be a field, $p>0$, $n\\ge0$ and $a:\\operatorname{Fin}n\\to k$. The actual quotient $Q=k[X_i]/(X_i^p-a_i)$ [lem-weil-pbc-pth-root-algebra-local] is a finite-dimensional $k$-vector space, and $\\operatorname{finrank}_k Q\\le p^n$. No characteristic or differential independence is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07E5, proof of (2) => (4), first paragraph; Algebra 07DZ; monic division for the reduced-monomial bound. Read online at https://stacks.math.columbia.edu/tag/07E5 and https://stacks.math.columbia.edu/tag/07DZ (local checkout absent)."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-pth-root-algebra-local"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual quotient map q, whose defining relations give q(X_i)^p=a_i. For an exponent vector e put r_i=e_i mod p. The monomial formula and the identity e_i=p*(e_i/p)+r_i show that q(C(c)X^e)=(c*prod_i a_i^(e_i/p)) times prod_i q(X_i)^r_i. Each polynomial is a finite sum of these monomials, so the span of the family m indexed by Fin n -> Fin p is top. Fintype.linearCombination k m is surjective, proving Module.Finite. The surjective linear-map finrank inequality and the card of Fin n -> Fin p prove finrank <= p^n. This is a direct elementary calculation using quotient relations, exponent division and finite sums/products; it does not use monic-quotient freeness.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07E5, proof of (2) => (4), first paragraph; Algebra 07DZ; monic division for the reduced-monomial bound. Read online at https://stacks.math.columbia.edu/tag/07E5 and https://stacks.math.columbia.edu/tag/07DZ (local checkout absent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "polynomial quotient adjoining p-th roots with independent differentials is a finite purely inseparable field base change",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "polynomial quotient adjoining p-th roots of coefficients with linearly independent differentials is a field; multivariable quotient dimension at most p^n",
+   "results": "AdjoinRoot.instField and power bases for one-variable quotients; dimension searches returned Krull dimensions rather than vector space dimension. No complete match.",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pthRootAlgebra|algebraTensorAlgEquiv|tensorQuotientEquiv|powerBasisAux|reduced monomial in Mathlib, WeilConjectures, Sheaf, dag/nodes; blueprint_refs search p-th roots and monic",
+   "results": "Mathlib tensorQuotientEquiv, MvPolynomial.algebraTensorAlgEquiv, AdjoinRoot.powerBasisAux; Sheaf PthRootsExtensionDegree; no existing field quotient or multivariable reduced-monomial bound. No matching imported blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PthRootCotangentDimension",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); finite differential family argument in 07E5 (2) => (4), used for residue differential injectivity; Tag 07E5, proof of (2) => (4); read at https://stacks.math.columbia.edu/tag/07E5 because the local literature checkout is absent. The big conormal diagram and its snake sequence; original node steps 1-3 and 5-7.; Tag 07E5, proof of (2) => (4), construction of k prime and A prime and equality of their local dimensions; original item steps 1-3; Algebra 00ON for flat height equality; structural steps 1-2 of lem-weil-pbc-pth-root-cotangent-dimension",
+   "via": [
+    "lem-weil-pbc-pth-root-cotangent-dimension",
+    "lem-weil-pbc-pth-root-residue-dimension-balance",
+    "lem-weil-pbc-geometrically-regular-differential-family",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PthRootMonomialDimension",
+  "file": "lean/Sheaf/RingTheory/PthRootMonomialDimension.lean",
+  "declaration": "Algebra.pthRootAlgebra_finite_finrank_le",
+  "statement": "theorem pthRootAlgebra_finite_finrank_le\n    (k : Type u) [Field k] (p n : ℕ) (hp : 0 < p) (a : Fin n → k) :\n    Module.Finite k (pthRootAlgebra p n k a) ∧\n      Module.finrank k (pthRootAlgebra p n k a) ≤ p ^ n",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T115023-L-3323598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T115023-L-3323598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
