@@ -8,13 +8,7 @@ module
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Sheaf.AlgebraicGeometry.StageCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Restrict
-import Sheaf.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.AlgebraicGeometry.EtaleLimitOpenComparisonCertificate
 
 /-! # Comparison for one open in a cofinal tail
 
@@ -29,6 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to one quasi-compact open constructs its canonical comparison on the tail.
 
 Source: Stacks Project, Tag 09YQ, coherent systems on inverse limits, and Tag 01F7,
@@ -107,6 +102,55 @@ theorem etale_limit_single_open_comparison
         (cohomologyMap ((D.map (homOfLE j.property).op ≫ e.hom ≫ O.ι) ⁻¹ᵁ W).ι
           (F j.val) 0)) ∧
       StageCohomologyComparison allowed v ∧
-      (∀ j, r.app j ≫ colimit.ι K j ≫ v = B.ι.app j.val ≫ rW) := by sorry
+      (∀ j, r.app j ≫ colimit.ι K j ≫ v = B.ι.app j.val ≫ rW) := by
+  let g₀ := e.hom ≫ O.ι
+  obtain ⟨K, eK, hK, ι, hι⟩ := etale_limit_open_cohomology_cocone
+    D c F φ hidentity hcomposition G eG hG L i₀ g₀ W
+  let t : Set.Ici i₀ ⥤ I := (show Monotone (fun j : Set.Ici i₀ ↦ j.val) from
+    fun _ _ h ↦ h).functor
+  let r : t ⋙ H ⟶ K :=
+    { app := fun j ↦ (eH j.val).hom ≫
+        AddCommGrpCat.ofHom (cohomologyMap (tailStageOpen D g₀ W j).ι (F j.val) 0) ≫
+        (eK j).inv
+      naturality := by
+        intro j k f
+        have hs := openSquareCoefficient_cohomology
+          (D.map (homOfLE (show j.val ≤ k.val from f.le)).op)
+          (tailStageOpen D g₀ W j).ι (tailStageOpen D g₀ W k).ι
+          (tailStageOpenMap D g₀ W f)
+          (by simp only [tailStageOpenMap, Scheme.Hom.resLE_comp_ι])
+          (F j.val) (F k.val) (φ (homOfLE (show j.val ≤ k.val from f.le))) 0
+        change H.map (homOfLE (show j.val ≤ k.val from f.le)) ≫ _ = _
+        rw [hH, hK]
+        simp only [Category.assoc, Iso.inv_hom_id_assoc]
+        simpa only [tailOpenCohomologyMap, Category.assoc] using
+          congrArg (fun m ↦ (eH j.val).hom ≫ m ≫ (eK k).inv) hs.symm }
+  refine ⟨K, eK, r, colimit.desc K (Cocone.mk _ ι), ?_, ?_, ?_⟩
+  · intro j
+    simp only [r, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rfl
+  · exact etale_limit_open_comparison_certificate X O W hW hWO D c hc F φ
+      hidentity hcomposition G eG hG L hL i₀ e allowed hallowed K eK hK ι hι
+  · intro j
+    have hs := openSquareCoefficient_cohomology (c.π.app (op j.val))
+      (tailStageOpen D g₀ W j).ι ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι
+      (tailLimitOpenMap D c g₀ W j)
+      (by simp only [tailLimitOpenMap, Scheme.Hom.resLE_comp_ι])
+      (F j.val) L.pt ((eG j.val).inv ≫ L.ι.app j.val) 0
+    dsimp only [r, NatTrans.app]
+    rw [Category.assoc, colimit.ι_desc, hι]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    have ht := congrArg (fun m ↦ (eH j.val).hom ≫ m) hs
+    have hb := congrArg (fun m ↦ m ≫ AddCommGrpCat.ofHom
+      (cohomologyMap ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι L.pt 0)) (hB j.val)
+    calc
+      _ = (eH j.val).hom ≫
+          AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op j.val)) (F j.val) 0) ≫
+          AddCommGrpCat.ofHom (Sheaf.H.map ((eG j.val).inv ≫ L.ι.app j.val) 0) ≫
+          AddCommGrpCat.ofHom
+            (cohomologyMap ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι L.pt 0) := by
+        simpa only [tailOpenCohomologyLeg, Category.assoc] using ht
+      _ = _ := by simpa only [Category.assoc] using hb.symm
+
 
 end AlgebraicGeometry.Etale

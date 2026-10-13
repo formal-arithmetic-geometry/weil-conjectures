@@ -10665,3 +10665,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/H1/Sheaf.RingTheory.PopescuFlatCoordinatesSetup (stage 3; reviewer PASS; first push; landing 20261013T022415-L-3213986 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/H2/Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellationHomotopy (stage 3; reviewer PASS; first push; landing 20261013T022416-L-3214148 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/H2/Sheaf.RepresentationTheory.DiscreteContinuousFunctorialInjectives (stage 3; reviewer PASS; first push; landing 20261013T022416-L-3214358 (interface); batch 20261013T022404; modules 2; new nodes 1)
+- 02:24 L: merged deliver/H4/Sheaf.AlgebraicGeometry.EtaleLimitSingleOpenComparison (stage 3; reviewer PASS; first push; landing 20261013T022416-L-3214597 (interface); batch 20261013T022404; modules 3; new nodes 2)
