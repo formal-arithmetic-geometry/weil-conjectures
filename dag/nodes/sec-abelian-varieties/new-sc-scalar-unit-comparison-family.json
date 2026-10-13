@@ -13,30 +13,50 @@
  },
  "proof": [
   {
-   "text": "Resolve the unit module by injectives. Exact forgetting and acyclicity of forgotten injectives show that its underlying additive sections complex computes both cohomologies.",
-   "uses": [
-    "lem-sc-injective-module-abelian-acyclic-zariski"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The cocycle characterization of moduleExtEquiv evaluates at the unit section 1. Under the constant-integer sheaf adjunction, precomposition with the class of 1 evaluates the forgotten cocycle at the same section. Thus the explicitly defined map is the common-resolution homology isomorphism.",
+   "text": "For any coefficient module F, use unitHomEquiv and evaluation of compatible sections at the top open to identify maps from the module unit with global sections. Ext.mk₀_bijective and H.equiv₀ identify degree-zero Ext on both sides. Naturality of H.equiv₀ shows that forgetting and precomposing with the integer-unit class evaluates precisely at 1; hence this degree-zero comparison is bijective. These are the proved private helpers unitEvaluation_bijective and unitExtComparison_zero_bijective.",
    "uses": [
     "def-sc-field-linear-module-cohomology-operations",
     "def-sc-structure-sheaf-cohomology-pullback"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Embed F into the injective module I=Injective.under F and take its cokernel Q. Exact forgetting gives a short exact sequence of abelian sheaves. The module Ext¹(unit,I) vanishes by injectivity. Apply injective_module_abelian_acyclic at the top open in degree one for abelian vanishing; identify the free abelian representable of the top open with constant ULift Z, sheafify that explicit isomorphism, and precompose Ext to obtain Subsingleton H(T(I),1). This is the proved private helper forgottenInjective_H_one_subsingleton.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-weil-pbc-ext-injective-positive-vanishing",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Use the two covariant Ext exact sequences of 0→F→I→Q→0 in degrees 0 and 1. Ext.mapExactFunctor preserves composition, mk₀, and the short-exact extension class. Associativity with the fixed degree-zero unit class therefore makes the coefficient and boundary squares commute (unitExtComparison_comp). For injectivity, write a kernel class as δ(y), lift its forgotten y from I by exactness, lift that element to module Ext⁰ using degree-zero surjectivity, and use degree-zero injectivity to conclude y comes from I, so δ(y)=0. For surjectivity, lift an abelian class from Ext⁰(Z,T(Q)) using H¹(T(I))=0, lift that degree-zero class to module Ext⁰(unit,Q), and take its boundary. This proves unitExtComparison_one_bijective. The kernel-image lift at the cokernel term uses the already recorded covariant_sequence_exact₃ leaf [lem-weil-pbc-ext-covariant-boundary-exact]; the new full-window leaf supplies the exact₁ boundary lift as well.",
+   "uses": [
+    "lem-sc-abelian-ext-covariant-exact",
+    "lem-weil-pbc-ext-covariant-boundary-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the coefficient module F to the unit and compose the proved Ext comparison with the additive equivalence moduleExtEquiv. This composition is definitionally scalarUnitAbelianComparison. Bijectivity of an additive equivalence and of the Ext comparison gives the required theorem. No cocycle characterization or arbitrary chosen module/abelian natural isomorphism is used.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-injective-module-abelian-acyclic-zariski",
   "def-sc-field-linear-module-cohomology-operations",
-  "def-sc-structure-sheaf-cohomology-pullback"
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-ext-injective-positive-vanishing",
+  "lem-sc-abelian-ext-covariant-exact",
+  "lem-weil-pbc-ext-covariant-boundary-exact"
  ],
  "proof_origin": {
-  "by": "Y2 second reading",
-  "document": "Stacks Project, sites-cohomology.tex; cohomology.tex",
-  "place": "Tag 03FD; Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; explicit Ext comparison reduction"
+  "by": "Q3 worker",
+  "document": "Stacks Project, sites-cohomology.tex and derived.tex; Mathlib Ext API",
+  "place": "Tag 03FD: degree-one dimension shifting using injective acyclicity; Tag 06XP: covariant Ext exactness; explicitly normalized degree-zero comparison and Ext composition naturality"
  },
  "mathlib_searches": [
   {
@@ -111,10 +131,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T060431-L-586707",
-  "kind": "interface",
+  "landing": "20261013T082406-L-1645306",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

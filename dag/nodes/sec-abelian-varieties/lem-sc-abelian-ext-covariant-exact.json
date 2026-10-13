@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-abelian-ext-covariant-exact",
+ "kind": "statement",
+ "title": "Covariant Ext exact sequence in an abelian category",
+ "statement": "Let $\\mathcal A$ be an abelian category with small Ext groups [def-pc-ext], let $M$ be an object of $\\mathcal A$, and let $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be a short exact sequence. For natural numbers $n,m$ with $n+1=m$, the sequence $\\operatorname{Ext}^n(M,A)\\to\\operatorname{Ext}^n(M,B)\\to\\operatorname{Ext}^n(M,C)\\to\\operatorname{Ext}^m(M,A)\\to\\operatorname{Ext}^m(M,B)\\to\\operatorname{Ext}^m(M,C)$ is exact. The arrows within a degree are postcomposition with $f$ and $g$, and the connecting arrow is postcomposition with the extension class of the short exact sequence.",
+ "stmt_deps": [
+  "def-pc-ext"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XP, Section 13.27, paragraph following Lemma 13.27.3; read at https://stacks.math.columbia.edu/tag/06XP"
+ },
+ "proof": [
+  {
+   "text": "Apply Mathlib CategoryTheory.Abelian.Ext.covariantSequence_exact to M and the short exact sequence, in degrees n,m with n+1=m. The definition covariantSequence spells out the six arrows as postcomposition, including the extension-class boundary. The witness forms covariant_sequence_exact₁ and covariant_sequence_exact₃ used in the item are the corresponding exactness statements.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "Q3 worker",
+  "document": "Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences",
+  "place": "covariantSequence_exact and covariant_sequence_exact₁, covariant_sequence_exact₃"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "covariant long exact sequence of Ext in an abelian category",
+   "results": "Service unavailable: Internal Server Error. Loogle, LeanFinder and source grep used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.covariantSequence_exact",
+   "results": "Exact match with arbitrary abelian C, HasExt C, short exact S and n₀+1=n₁.",
+   "date": "2026-10-13",
+   "verdict": "exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Long exact sequence of Ext groups in the second variable in an arbitrary abelian category",
+   "results": "covariant_sequence_exact₁', covariant_sequence_exact₂' and covariant_sequence_exact₃' in Ext.ExactSequences.",
+   "date": "2026-10-13",
+   "verdict": "exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "covariant_sequence_exact|covariantSequence_exact in Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean; blueprint search Ext long exact",
+   "results": "Read covariantSequence_exact and the witness lemmas. No blueprint node found with the arbitrary-abelian-category statement; lem-weil-pbc-ext-long-exact-second-variable is specific to ModuleCat R.",
+   "date": "2026-10-13",
+   "verdict": "exact Mathlib match; existing DAG specialization insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "Second reading: covariant boundary, Ext kernel-image, covariantSequence_exact in dag/nodes and lean/",
+   "results": "Existing lem-weil-pbc-ext-covariant-boundary-exact records exact₃, now explicitly reused by the parent. It does not supply exact₁ or the six-term exact window; the new Mathlib leaf is not a duplicate. The ModuleCat specialization likewise does not supply arbitrary sheaf categories.",
+   "date": "2026-10-13",
+   "verdict": "existing boundary clause reused; full-window leaf still needed"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.covariantSequence_exact",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean",
+  "how": "The theorem states exactly the six-term window for any abelian category and short exact sequence. Its witness forms covariant_sequence_exact₁ and covariant_sequence_exact₃ close the two diagram chases."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarUnitCohomologyComparisonFamily",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF3 proof, degree-one Kunneth argument: the Tag 03FD comparison between module cohomology and abelian structure-sheaf cohomology; exactness needed for its degree-one dimension shift.",
+   "via": [
+    "new-sc-scalar-unit-comparison-family",
+    "lem-sc-scalar-unit-cohomology-pullback-comparison",
+    "lem-sc-picard-external-cup-unit-comparison",
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences",
+  "declaration": "CategoryTheory.Abelian.Ext.covariantSequence_exact",
+  "statement": "lemma covariantSequence_exact {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] (X : C) {S : ShortComplex C} (hS : S.ShortExact) (n₀ n₁ : ℕ) (h : n₀ + 1 = n₁) : (covariantSequence X hS n₀ n₁ h).Exact",
+  "branch": "mathlib",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T082406-L-1645306",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T082406-L-1645306",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
