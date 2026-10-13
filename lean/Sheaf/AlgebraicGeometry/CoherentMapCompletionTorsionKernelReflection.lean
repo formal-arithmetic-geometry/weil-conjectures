@@ -3,13 +3,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceCompletion
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedLimit
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+import Sheaf.AlgebraicGeometry.CoherentKernelIdealProductCompletionZero
+import Sheaf.AlgebraicGeometry.SupportedCoherentCompletionReflectsZero
 
 /-! # Reflecting kernel torsion from completion on a closed thickening
 
@@ -70,6 +66,19 @@ theorem coherentMap_completion_torsion_kernel_reflection
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι s).2
         (cokernel (formalModuleQuotientMap I a.hom (Nat.le_refl (n + 1)))))) :
     IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (2 * s)).2
-      (kernel a.hom)) := by sorry
+      (kernel a.hom)) := by
+  have _ := hG
+  have ha := coherentFormalModule_annihilated_affine_limit X I K
+    ((completion X I).obj F) ((completion X I).obj G) ((completion X I).map a) s hs h
+  obtain ⟨hcoh, hzero⟩ := coherentKernel_idealProduct_completion_zero I K F G a (2 * s)
+    (fun U ↦ (ha U).1)
+  let H : CoherentModules X := ⟨_, hcoh⟩
+  let j : H.obj ⟶ F.obj :=
+    Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι (2 * s)).2
+      (kernel a.hom) ≫ kernel.ι a.hom
+  have : Mono j := by
+    dsimp [j, Scheme.idealModuleProductι]
+    infer_instance
+  exact supportedCoherent_completion_reflects_zero I K q hq hcompletion F H j hF hzero
 
 end AlgebraicGeometry

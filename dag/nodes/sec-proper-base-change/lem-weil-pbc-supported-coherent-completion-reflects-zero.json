@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-supported-coherent-completion-reflects-zero",
+ "kind": "statement",
+ "title": "Completion equivalence on a closed thickening reflects zero coherent submodules",
+ "statement": "Let $X$ be Noetherian [pqf-def-locnoeth], $I,K$ quasi-coherent ideal sheaves, and $q\\geq1$. Put $Z=V(K^q)$. Assume completion with respect to $I\\mathcal O_Z$ is an equivalence for every Noetherian instance on $Z$ [def-weil-pbc-coherent-formal-module, def-nagata-extended-ideal]. Let $F,H$ be coherent modules and $j:H\\hookrightarrow F$ a monomorphism. If $K^qF=0$ and $H/I^{n+1}H=0$ for every $n\\geq0$, then $H=0$. Products and quotients use the shared image and cokernel definitions [def-weil-pbc-coherent-formal-module].",
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "def-nagata-extended-ideal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), proof, initial closed-immersion identification and second application of Remark 0888; Tag 087T and equation 0880."
+ },
+ "proof": [
+  {
+   "text": "On every affine open, the power-product zero criterion identifies K^qF=0 with annihilation of F(U) by K(U)^q. The inclusion j is injective on sections, so the same ideal annihilates H(U). The criterion at exponent one, the ideal-power section formula and ker(subscheme inclusion)=K^q identify H as supported on Z.",
+   "uses": [
+    "lem-weil-pbc-ideal-power-product-zero-affine-cover",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coherent closed-pushforward equivalence provides L on Z and an isomorphism H ≅ i_*L. Its natural completion comparison identifies the completed quotient diagram of H with the pushed completed diagram of L.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-coherent-formal-equivalence-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All components of the completed H diagram are zero. Evaluate the comparison at each level; fully faithful closed pushforward reflects zero. The full inclusion of coherent formal systems reflects zero, hence completion(L) is zero.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install the Noetherian instance on Z supplied by its closed immersion and use the assumed completion equivalence to reflect zero of L. The coherent inclusion and closed pushforward preserve zero, so the comparison isomorphism gives H=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-immersion-coherent-formal-equivalence-completion",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "lem-weil-pbc-ideal-power-product-zero-affine-cover",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), proof, initial closed-immersion identification and second application of Remark 0888; Tag 087T and equation 0880."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completion equivalence on a closed subscheme detects zero coherent modules supported on that closed subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent module whose adic completion is zero is zero when completion on its closed support is an equivalence",
+   "results": "8 hits: IsAdicComplete.subsingleton, IsAdicComplete.bot, isAdicComplete_iff, IsPrecomplete, IsAdicComplete, IsAdicComplete.toIsPrecomplete, IsAdicComplete.toIsHausdorff, AdicCompletion.mk_zero_of. No exact sheaf-level statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*(ker|map_injective)|isZero.*faithful",
+   "results": "21 hits: Mathlib/Algebra/Category/ModuleCat/Basic.lean, Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroObjects.lean, Mathlib/RingTheory/Perfectoid/BDeRham.lean, Mathlib/RingTheory/Perfectoid/BDeRham.lean, Mathlib/RingTheory/Smooth/AdicCompletion.lean, Mathlib/RingTheory/Smooth/AdicCompletion.lean, Mathlib/RingTheory/Smooth/Flat.lean. No exact sheaf-level statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentMapCompletionTorsionKernelReflection",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 088A (lemma-existence-tricky), proof, initial closed-immersion identification and second application of Remark 0888; Tag 087T and equation 0880.",
+   "via": [
+    "lem-weil-pbc-coherent-map-completion-torsion-kernel-reflection",
+    "lem-weil-pbc-devissage-second-adic-system-torsion-kernel",
+    "lem-weil-pbc-devissage-second-adic-system-core",
+    "lem-weil-pbc-devissage-second-adic-system",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedCoherentCompletionReflectsZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedCoherentCompletionReflectsZero.lean",
+  "declaration": "AlgebraicGeometry.supportedCoherent_completion_reflects_zero",
+  "statement": "theorem supportedCoherent_completion_reflects_zero {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData) (q : ℕ) (_hq : 1 ≤ q) (hcompletion : ∀ (hZ : IsNoetherian (K ^ q).subscheme), Functor.IsEquivalence (@completion ((K ^ q).subscheme) hZ (I.comap (K ^ q).subschemeι))) (F H : CoherentModules X) (j : H.obj ⟶ F.obj) [Mono j] (hF : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι q).2 F.obj)) (hH : ∀ n : ℕ, IsZero (formalModuleQuotient I (n + 1) H.obj)) : IsZero H.obj",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T031547-L-3572705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T031547-L-3572705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

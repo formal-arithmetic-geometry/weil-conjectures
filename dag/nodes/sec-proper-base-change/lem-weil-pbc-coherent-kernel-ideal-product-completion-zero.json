@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-coherent-kernel-ideal-product-completion-zero",
+ "kind": "statement",
+ "title": "Affine completed kernel annihilation makes the completed coherent ideal product zero",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], $I,K$ quasi-coherent ideal sheaves, and $a:F\\to G$ a morphism of coherent modules [def-weil-pbc-coherent-formal-module]. Let $t\\in\\mathbb N$. For every affine open $U$, take the inverse limit $a_U$ of the section maps of the $I$-adic quotient system of $a$ (positive level $n+1$). Suppose $K(U)^t$ annihilates $\\ker(a_U)$. Then $H=K^t\\ker(a)$, with the image definition of ideal product [def-weil-pbc-coherent-formal-module], is coherent and $H/I^{n+1}H=0$ for every $n\\geq0$. No completion equivalence or local faithfulness is assumed.",
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), second application of Remark 0888; affine finite-module calculation via Tag 087W and Algebra Tag 00MB. Read at https://stacks.math.columbia.edu/tag/088A, https://stacks.math.columbia.edu/tag/0888 and https://stacks.math.columbia.edu/tag/00MB."
+ },
+ "proof": [
+  {
+   "text": "Kernels of coherent maps are coherent. Ideal powers and their products are quasi-coherent; on the Noetherian affine basis the ideal product is finite. Thus H is coherent.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine sections identify the kernel and ideal product with the corresponding finite module kernel and ideal multiple. The natural identification of finite-module completion with tensoring by the flat completed ring preserves this kernel and the image defining the ideal product.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural affine-limit comparison identifies the completed section map with a_U. Its kernel is annihilated by K(U)^t, so the completed ideal product from the preceding step is zero. Every positive quotient is a quotient of that completion and hence has zero affine sections. The affine opens form a basis, so each quotient sheaf is zero.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), second application of Remark 0888; affine finite-module calculation via Tag 087W and Algebra Tag 00MB. Read at https://stacks.math.columbia.edu/tag/088A, https://stacks.math.columbia.edu/tag/0888 and https://stacks.math.columbia.edu/tag/00MB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If an ideal annihilates the kernel of an affine completed map then the completion of the ideal times its coherent kernel is zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic completion of a finite module preserves kernels and ideal multiples",
+   "results": "8 hits: AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, IsAdicComplete, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.of_apply, AdicCompletion, AdicCompletion.map_exact, AdicCompletion.submodule. No exact sheaf-level statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*(ker|map_injective)|isZero.*faithful",
+   "results": "21 hits: Mathlib/Algebra/Category/ModuleCat/Basic.lean, Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroObjects.lean, Mathlib/RingTheory/Perfectoid/BDeRham.lean, Mathlib/RingTheory/Perfectoid/BDeRham.lean, Mathlib/RingTheory/Smooth/AdicCompletion.lean, Mathlib/RingTheory/Smooth/AdicCompletion.lean, Mathlib/RingTheory/Smooth/Flat.lean. No exact sheaf-level statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentMapCompletionTorsionKernelReflection",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 088A (lemma-existence-tricky), second application of Remark 0888; affine finite-module calculation via Tag 087W and Algebra Tag 00MB. Read at https://stacks.math.columbia.edu/tag/088A, https://stacks.math.columbia.edu/tag/0888 and https://stacks.math.columbia.edu/tag/00MB.",
+   "via": [
+    "lem-weil-pbc-coherent-map-completion-torsion-kernel-reflection",
+    "lem-weil-pbc-devissage-second-adic-system-torsion-kernel",
+    "lem-weil-pbc-devissage-second-adic-system-core",
+    "lem-weil-pbc-devissage-second-adic-system",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentKernelIdealProductCompletionZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentKernelIdealProductCompletionZero.lean",
+  "declaration": "AlgebraicGeometry.coherentKernel_idealProduct_completion_zero",
+  "statement": "theorem coherentKernel_idealProduct_completion_zero {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData) (F G : CoherentModules X) (a : F ⟶ G) (t : ℕ) (h : ∀ U : X.affineOpens, K.ideal U ^ t ≤ Module.annihilator Γ(X, U.1) (LinearMap.ker (lim.map (Functor.whiskerRight ((completion X I).map a).hom (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom)) : RingedSpace.IsCoherent X.toRingedSpace (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (kernel a.hom)) ∧ ∀ n : ℕ, IsZero (formalModuleQuotient I (n + 1) (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (kernel a.hom)))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T031547-L-3572705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T031547-L-3572705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
