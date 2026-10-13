@@ -8,6 +8,9 @@ module
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Sheaf.RingTheory.CompleteIntersectionOverField
+import Sheaf.RingTheory.SyntomicFibreKernelGenerators
+import Sheaf.RingTheory.SyntomicLocalKernelIntersection
+import Mathlib.RingTheory.Nakayama
 
 /-!
 # Bounded generators of a syntomic presentation kernel at a prime
@@ -62,6 +65,32 @@ theorem exists_bounded_local_kernel_generators
         (Localization.AtPrime (q.asIdeal.comap φ.toRingHom))) (Ideal.span (Set.range f)) =
       Ideal.map (algebraMap _
         (Localization.AtPrime (q.asIdeal.comap φ.toRingHom))) (RingHom.ker φ.toRingHom) := by
-  sorry
+  obtain ⟨c, f, hcn, hfI, hgen⟩ :=
+    exists_bounded_fibre_kernel_generators q n φ hφ hci
+  refine ⟨c, f, hcn, hfI, ?_⟩
+  let A := Localization.AtPrime (q.asIdeal.comap φ.toRingHom)
+  let I : Ideal A := Ideal.map (algebraMap _ A) (RingHom.ker φ.toRingHom)
+  let J : Ideal A := Ideal.map (algebraMap _ A) (Ideal.span (Set.range f))
+  let m : Ideal A := Ideal.map (algebraMap R A) (q.asIdeal.comap (algebraMap R S))
+  have hJI : J ≤ I := Ideal.map_mono hfI
+  have hinter : I ⊓ m = m * I := syntomic_local_kernel_intersection q n φ hφ hflat
+  have hm : m ≤ IsLocalRing.maximalIdeal A := by
+    rw [Ideal.map_le_iff_le_comap]
+    intro r hr
+    apply (IsLocalization.AtPrime.to_map_mem_maximal_iff A
+      (q.asIdeal.comap φ.toRingHom) _).mpr
+    change φ (algebraMap R (MvPolynomial (Fin n) R) r) ∈ q.asIdeal
+    simpa only [φ.commutes] using (show (algebraMap R S) r ∈ q.asIdeal from hr)
+  have hsmall : I ≤ J ⊔ m * I := by
+    rw [← hinter]
+    intro x hx
+    obtain ⟨y, hy, z, hz, rfl⟩ := Submodule.mem_sup.mp (hgen hx)
+    have hzI : z ∈ I := by
+      simpa only [add_sub_cancel_left] using I.sub_mem hx (hJI hy)
+    exact Submodule.mem_sup.mpr ⟨y, hy, z, ⟨hzI, hz⟩, rfl⟩
+  apply le_antisymm hJI
+  apply Submodule.le_of_le_smul_of_le_jacobson_bot (hfg.map (algebraMap _ A))
+  · exact hm.trans (IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top).ge
+  · exact hsmall
 
 end Algebra

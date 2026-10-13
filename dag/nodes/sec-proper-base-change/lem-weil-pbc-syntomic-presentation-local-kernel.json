@@ -15,62 +15,30 @@
  },
  "proof": [
   {
-   "text": "Put p=q∩R, k=κ(p), P=R[x₁,…,xₙ], I=ker φ, and Q=φ⁻¹(q). Base change the quotient P/I≅S to k, identifying the fibre with k[x]/Ibar. The fibre-spectrum correspondence identifies the prime over q and its polynomial inverse image. Transport the principal complete-intersection neighbourhood through this identification. The conormal rank theorem gives rank c=n-d with d≤n at this fibre prime. Thus c≤n.",
+   "text": "Apply the bounded fibre-kernel generator theorem to obtain c≤n and equations f with J⊆I and IA⊆JA+pA. This step uses no flatness.",
    "uses": [
-    "lem-weil-pbc-lci-conormal-free-rank-codimension",
-    "lem-weil-pbc-fibre-ring-local-ring-iso",
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-tensor-quotient-base-change"
+    "lem-weil-pbc-syntomic-fibre-kernel-generators"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SY, proof of (3) implies (2), choice of equations and flatness/Nakayama paragraphs; Tag 00SC (lemma-lci), conormal rank"
-   }
+   "elementary": false
   },
   {
-   "text": "The images of elements of I span the fibre ideal Ibar, and hence span its conormal module and its residue-field quotient at the prime. Choose c such images forming a residue-field basis; lift them to f₁,…,f_c in I. Denominators from localization at the prime are units and can be cleared without changing the span. Nakayama applied to the finite fibre ideal shows that these fbar_i generate its localization. Let J=(f₁,…,f_c)⊆I.",
+   "text": "Apply the proved flat localized kernel intersection theorem to obtain IA∩pA=(pA)(IA). Set A=P_Q, I′=IA, J′=JA, m=pA. The algebra-map compatibility with φ proves m⊆maximalIdeal A. For x∈I′, use I′⊆J′+m to write x=y+z, with y∈J′ and z∈m. Since J′⊆I′, subtraction gives z∈I′∩m=mI′. Thus I′⊆J′+mI′. The ideal I′ is finite by Ideal.FG.map. Apply Mathlib Submodule.le_of_le_smul_of_le_jacobson_bot, using maximalIdeal A=jacobson ⊥, to get I′⊆J′. Together with J′⊆I′ this proves J′=I′. All scalar, containment, finite-generation and Nakayama glue is implemented in Lean.",
    "uses": [
-    "lem-weil-pbc-lci-conormal-free-rank-codimension",
+    "lem-weil-pbc-syntomic-local-kernel-intersection",
     "lem-weil-pbc-nakayama-local-generators"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SY, proof of (3) implies (2), choice of equations and flatness/Nakayama paragraphs; Tag 00SC (lemma-lci), conormal rank"
-   }
-  },
-  {
-   "text": "In A=P_Q the quotient A/IA identifies with S_q. The module K=IA/JA is finite because I is finitely generated. Regard the exact sequence 0→K→A/JA→S_q→0 as one over R_p. Flatness of S_q makes k⊗K→k⊗(A/JA) injective. Coefficient reduction identifies A/pA with the polynomial fibre local ring: clear the finitely many base denominators in polynomial coefficients to prove surjectivity, and use the kernel of R_p→k to identify the kernel. Thus the last two reductions are isomorphic by the local generation of Ibar proved above, so k⊗K=0, equivalently K=pK. The ideal pA lies in the maximal ideal of A. Consequently K equals the maximal ideal times K, and Nakayama for the finite A-module K (with an empty generating family) gives K=0. Therefore JA=IA, exactly the asserted equality of ideal maps.",
-   "uses": [
-    "lem-weil-pbc-localization-at-prime-of-quotient",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-flat-quotient-tensor-injective",
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-tensor-over-quotient-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00SY, proof of (3) implies (2), choice of equations and flatness/Nakayama paragraphs; Tag 00SC (lemma-lci), conormal rank"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-lci-conormal-free-rank-codimension",
-  "lem-weil-pbc-fibre-ring-local-ring-iso",
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-weil-pbc-tensor-quotient-base-change",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-flat-quotient-tensor-injective",
-  "lem-weil-pbc-tensor-over-quotient-ring"
+  "lem-weil-pbc-syntomic-fibre-kernel-generators",
+  "lem-weil-pbc-syntomic-local-kernel-intersection",
+  "lem-weil-pbc-nakayama-local-generators"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00SY, proof of (3) implies (2), choice of equations and flatness/Nakayama paragraphs; Tag 00SC (lemma-lci), conormal rank"
+  "place": "Tag 00SY, proof of (3) implies (2), equations and flatness paragraphs; Tag 00SC. Read at https://stacks.math.columbia.edu/tag/00SY and https://stacks.math.columbia.edu/tag/00SC.",
+  "by": "document"
  },
  "mathlib_searches": [
   {
@@ -150,9 +118,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T025306-L-3424295",
+  "landing": "20261013T045609-L-138775",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

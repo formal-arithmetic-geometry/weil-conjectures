@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-syntomic-fibre-kernel-generators",
+ "kind": "statement",
+ "title": "Bounded original equations generate the polynomial fibre kernel locally",
+ "statement": "Let $R,S$ be commutative rings, $S$ an $R$-algebra, $q\\in\\operatorname{Spec}S$, $n\\in\\mathbb N$, and $\\varphi:P=R[x_1,\\ldots,x_n]\\twoheadrightarrow S$ a surjective $R$-algebra map [def-weil-pbc-mv-polynomial-ring]. Write $p=q\\cap R$, $Q=\\varphi^{-1}(q)$, $I=\\ker\\varphi$, and $A=P_Q$ [def-weil-pbc-localization-at-prime]. Assume the prime of $\\kappa(p)\\otimes_R S$ corresponding to $q$ has a principal neighbourhood which is a global complete intersection over $\\kappa(p)$ [def-weil-pbc-complete-intersection-over-field]. Then there exist $c\\le n$ and $f_1,\\ldots,f_c\\in P$ such that $J=(f_1,\\ldots,f_c)\\subseteq I$ and $IA\\subseteq JA+pA$. No flatness or finite-generation hypothesis on $I$ is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SY, proof of (3) implies (2), equations and flatness paragraphs; Tag 00SC. Read at https://stacks.math.columbia.edu/tag/00SY and https://stacks.math.columbia.edu/tag/00SC."
+ },
+ "proof": [
+  {
+   "text": "Put p=q∩R, k=κ(p), P=R[x₁,…,xₙ], I=ker φ, and Q=φ⁻¹(q). Base change the quotient P/I≅S to k by right exactness (no flatness needed), identifying the fibre with k[x]/Ibar. The fibre-spectrum correspondence identifies the prime over q and its polynomial inverse image. Transport the principal complete-intersection neighbourhood through this identification. The conormal rank theorem gives rank c=n-d with d≤n at this fibre prime. Thus c≤n.",
+   "uses": [
+    "lem-weil-pbc-lci-conormal-free-rank-codimension",
+    "lem-weil-pbc-fibre-ring-local-ring-iso",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-tensor-quotient-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SY, proof of (3) implies (2), choice of equations and flatness/Nakayama paragraphs; Tag 00SC (lemma-lci), conormal rank"
+   }
+  },
+  {
+   "text": "The images of elements of I span the fibre ideal Ibar, and hence span its conormal module and its residue-field quotient at the prime. Choose c such images forming a residue-field basis; lift them to f₁,…,f_c in I. Denominators from localization at the prime are units and can be cleared without changing the span. Nakayama applied to the finite fibre ideal shows that these fbar_i generate its localization. Let J=(f₁,…,f_c)⊆I. The fibre polynomial ring is Noetherian, so its ideal is finite regardless of whether I is finite; hence Nakayama applies without finite generation of I.",
+   "uses": [
+    "lem-weil-pbc-lci-conormal-free-rank-codimension",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SY, proof of (3) implies (2), choice of equations and flatness/Nakayama paragraphs; Tag 00SC (lemma-lci), conormal rank"
+   }
+  },
+  {
+   "text": "The polynomial fibre local ring is A/pA, by the fibre-local-ring isomorphism together with polynomial scalar extension. The images of I and J therein are equal by the preceding step; taking inverse images gives IA ⊆ JA+pA. Equivalently each x∈IA differs from a member of JA by a member of pA. No flatness is used here.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-local-ring-iso",
+    "lem-weil-pbc-polynomial-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lci-conormal-free-rank-codimension",
+  "lem-weil-pbc-fibre-ring-local-ring-iso",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-nakayama-local-generators"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SY, proof of (3) implies (2), equations and flatness paragraphs; Tag 00SC. Read at https://stacks.math.columbia.edu/tag/00SY and https://stacks.math.columbia.edu/tag/00SC.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded generators of ideal at complete intersection fibre polynomial algebra",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat local algebra polynomial presentation complete intersection fibre bounded ideal generators",
+   "results": "Smooth and standard smooth presentation theorems only; no bounded fibre kernel generator theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bounded_local_kernel|conormal|local_kernel_generators|fiber.*generators; blueprint search local kernel and 00SY",
+   "results": "LciConormalFreeRankCodimension supplies the field conormal rank. No declaration supplies original kernel representatives generating modulo the base prime. Blueprint searches returned no matching node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SyntomicPresentationLocalKernel",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 00SY (3) implies (2): choose bounded equations generating on the closed fibre",
+   "via": [
+    "lem-weil-pbc-syntomic-presentation-local-kernel",
+    "lem-weil-pbc-syntomic-equation-count-comparison-core",
+    "lem-weil-pbc-syntomic-equation-count-comparison",
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SyntomicFibreKernelGenerators",
+  "file": "lean/Sheaf/RingTheory/SyntomicFibreKernelGenerators.lean",
+  "declaration": "Algebra.exists_bounded_fibre_kernel_generators",
+  "statement": "theorem exists_bounded_fibre_kernel_generators {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (q : PrimeSpectrum S) (n : ℕ) (φ : MvPolynomial (Fin n) R →ₐ[R] S) (hφ : Function.Surjective φ) (hci : ∃ h : (q.asIdeal.comap (algebraMap R S)).Fiber S, h ∉ (PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S)) ⟨q, rfl⟩).asIdeal ∧ IsGlobalCompleteIntersection (q.asIdeal.comap (algebraMap R S)).ResidueField (Localization.Away h)) : ∃ (c : ℕ) (f : Fin c → MvPolynomial (Fin n) R), c ≤ n ∧ Ideal.span (Set.range f) ≤ RingHom.ker φ.toRingHom ∧ Ideal.map (algebraMap _ (Localization.AtPrime (q.asIdeal.comap φ.toRingHom))) (RingHom.ker φ.toRingHom) ≤ Ideal.map (algebraMap _ (Localization.AtPrime (q.asIdeal.comap φ.toRingHom))) (Ideal.span (Set.range f)) ⊔ Ideal.map (algebraMap R (Localization.AtPrime (q.asIdeal.comap φ.toRingHom))) (q.asIdeal.comap (algebraMap R S))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T045609-L-138775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T045609-L-138775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
