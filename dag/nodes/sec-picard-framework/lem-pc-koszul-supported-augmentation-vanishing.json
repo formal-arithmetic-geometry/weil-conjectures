@@ -14,7 +14,7 @@
  },
  "proof": [
   {
-   "text": "Move source shift n to target shift -n. The resulting target still has quasi-coherent cohomology and zero restriction. Apply the canonical Koszul Hom colimit comparison of lem-sc-affine-perfect-open-represent-cohomology. Restriction followed by the inverse restricted augmentation sends the index-zero element u_0 composed with φ to zero because the restricted target is zero. The comparison is a colimit cocone, so this element equals the zero element in that colimit. For arbitrary universes, first choose standard localizations and represent E by a complex; transport Hom via uniqueness of localization and transport restriction via mapDerivedCategoryFactors. Compose restriction with Scheme.Modules.overEquiv when applying the comparison; this exact equivalence preserves zero.",
+   "text": "Move source shift n to target shift -n using the shift adjunction. Homology shift isomorphisms preserve quasi-coherence, and restriction commutes with shift, preserving the zero restriction. Represent the shifted target by a complex in the given localization, choose standard localizations, and transfer quasi-coherence and zero restriction via homology and mapDerivedCategoryFactors isomorphisms and uniqueness of localization. Compose restriction with the exact equivalence Scheme.Modules.overEquiv. Apply lem-sc-affine-perfect-open-represent-cohomology: its colimit point is a Hom set into the zero restricted target and is therefore a singleton. Transport the Hom diagram and its colimit via Localization.homEquiv, whose composition and map laws explicitly identify transitions. Use Functor.CoconeTypes to transport across different morphism universes, replacing the singleton point by PUnit in the requested universe. Consequently the index-zero element u_0 composed with the shifted map and the zero element have the same image in this colimit; no explicit comparison formula is needed.",
    "uses": [
     "lem-sc-affine-perfect-open-represent-cohomology"
    ],
@@ -25,8 +25,10 @@
    }
   },
   {
-   "text": "In a filtered colimit of sets, equality with zero at index zero is witnessed at a later index b. Apply Mathlib Types.FilteredColimit.isColimit_eq_iff' to the comparison cocone. The Hom diagram transition is precomposition with koszulOpenMap, which sends zero to zero. The augmentation compatibility supplied by represent-cohomology identifies the transitioned u_0 composed with φ with u_b composed with φ. Hence this last composite is zero. Move the shift back to the source. The empty family has a zero tail and kills every map immediately; the zero ring and zero target also satisfy the assertion.",
-   "uses": [],
+   "text": "Apply Mathlib Types.FilteredColimit.isColimit_eq_iff' to obtain equality at a later index b. Diagram transitions are precomposition with koszulOpenMap and preserve zero. Transfer the augmentation compatibility clause of lem-sc-affine-perfect-open-represent-cohomology from standard localization back to the chosen one by the uniqueness equivalence and its natural isomorphism. This identifies the transitioned composite with u_b followed by the shifted map, so it is zero. Naturality and injectivity of the shift adjunction Hom equivalence move the shift back to the source. No step assumes a nonempty family, nonzero ring, regularity, or nonvanishing entries.",
+   "uses": [
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
@@ -40,7 +42,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 08DC and 08DD, with explicit localization-universe and filtered-colimit glue"
+  "place": "Tags 08DC and 08DD, singleton Hom colimit with explicit localization-universe transport, augmentation compatibility, and filtered-colimit equality"
  },
  "mathlib_searches": [
   {
@@ -121,13 +123,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261012T202246-L-706606",
-  "kind": "interface",
+  "landing": "20261013T000047-L-2232179",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
