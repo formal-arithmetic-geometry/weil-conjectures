@@ -1,0 +1,114 @@
+{
+ "id": "def-sc-mixed-direct-image-tensor-pairing",
+ "kind": "definition",
+ "title": "Counit-defined direct-image tensor pairing",
+ "statement": "Let $h:T\\to S$ be a scheme morphism [def-pc-scheme], and write $F=Lh^*$ [def-pc-derived-pullback], $R=Rh_*$ [def-pc-derived-direct-image] on the sheaf derived categories [def-pc-derived-category]. With the fixed adjunction [lem-pc-global-hom-adjunction], counit $\\epsilon$, derived tensor [def-pc-scheme-derived-tensor-structure] and normalized tensorator $\\tau_h:F(A\\otimes B)\\simeq FA\\otimes FB$ [lem-sc-mixed-hom-tensor-pullback-iso], define $q_h(A,B):RA\\otimes RB\\to R(A\\otimes B)$ to be the adjoint of $\\tau_h(RA,RB);(\\epsilon_A\\otimes\\epsilon_B)$. This is a concrete construction, with no existence witness selected.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-global-hom-adjunction",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY and Lemma 079U; duality.tex Tag 0AA8 final comparison diagrams"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY and Lemma 079U; duality.tex Tag 0AA8 final comparison diagrams",
+  "note": "Refinement of the evaluation-mate argument; Tags 08HY, 079U and 0AA8 read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change natural transformation preserves the direct image tensor pairing as mate of monoidal pullback",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a monoidal natural transformation commutes with the lax monoidal tensor pairing on right adjoints",
+   "results": "Found Adjunction.rightAdjointLaxMonoidal_μ and counit compatibility in Mathlib.CategoryTheory.Monoidal.Functor, plus mateEquiv in Adjunction.Mates. CanonicalPullbackTensorMonoidalRealization supplies monoidal structures for the fixed pullback tensorators, but no existing declaration says the pinned pullback-composition comparisons are monoidal or directly gives the required base-change pairing identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact applicable match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*monoidal|monoidal.*baseChange; tensor pairing",
+   "results": "No Mathlib hits. Repository and blueprint search finds no direct-image tensor pairing base-change declaration. Existing InternalHomBaseChangeExchange has a different tensorator and an extra module-localization assumption.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedInternalHomBaseChangeExchange",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 final comparison diagrams: tensor compatibility underlying the internal Hom exchange",
+   "via": [
+    "lem-sc-mixed-internal-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-counit-transport",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedTensorPairingBaseChange.lean",
+  "declaration": "AlgebraicGeometry.mixedDirectImageTensorPairing",
+  "statement": "def mixedDirectImageTensorPairing {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (A B : schemeDerivedCategory X) :\n    (schemeDerivedDirectImage f).obj A ⊗ (schemeDerivedDirectImage f).obj B ⟶\n      (schemeDerivedDirectImage f).obj (A ⊗ B)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a3949",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T140815-L-312437",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a3949",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T140815-L-312437",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature and delivered declarations with their DAG nodes, proof dependencies, sources, and report; both modules and sole direct importer compiled cleanly; axiom checks passed with sorryAx only from open statements."
+ }
+}

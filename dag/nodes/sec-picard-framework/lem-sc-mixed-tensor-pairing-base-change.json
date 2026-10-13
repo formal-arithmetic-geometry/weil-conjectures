@@ -1,0 +1,157 @@
+{
+ "id": "lem-sc-mixed-tensor-pairing-base-change",
+ "kind": "statement",
+ "title": "Base change transports an arbitrary direct-image tensor pairing",
+ "statement": "Let $f:X\\to Y$, $g:Y^{\\prime}\\to Y$ be morphisms of schemes [def-pc-scheme], with fibre product projections $f^{\\prime},g_X$ [def-pc-fibre-product]. Write $R=Rf_*$, $R^{\\prime}=Rf^{\\prime}_*$ [def-pc-derived-direct-image], $L=Lg^*$, $L_X=Lg_X^*$ [def-pc-derived-pullback], and $\\beta:LR\\to R^{\\prime}L_X$ for the canonical mate [def-pc-derived-base-change-map]. Use the normalized pullback tensorators $\\tau$ [lem-sc-mixed-hom-tensor-pullback-iso] and the counit-defined pairing $q$ [def-sc-mixed-direct-image-tensor-pairing]. For all $A,B,C$ in the sheaf derived category of $X$ [def-pc-derived-category] and every $a:A\\otimes B\\to C$, $(\\beta_A\\otimes\\beta_B);q_{f^{\\prime}}(L_XA,L_XB);R^{\\prime}(\\tau_{g_X}^{-1};L_Xa)=\\tau_g^{-1};L(q_f(A,B);Ra);\\beta_C$. No base-change map is assumed invertible and no internal Hom is used.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "def-pc-derived-category",
+  "def-pc-derived-base-change-map",
+  "def-sc-mixed-direct-image-tensor-pairing",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY and Lemma 079U; duality.tex Tag 0AA8 final comparison diagrams"
+ },
+ "proof": [
+  {
+   "text": "Set a to the identity of A tensor B. Transpose the two sides under the f′ adjunction. Expand beta as the pullback-composition comparison followed by pulled-back f counit. Counit naturality and the f′ triangle identity reduce the two paths to the same tensor of f counits, up to compatibility of the pullback-composition comparison with the tensorators.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-sc-mixed-direct-image-tensor-pairing",
+    "lem-pc-global-hom-adjunction",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove that compatibility on K-flat representatives: the termwise pullback-composition comparison is the mate of the ordinary direct-image composition comparison, and the ordinary pullback tensor comparison sends pulled-back pure tensors to the tensor of their pulled-back sections. Both composition paths give those same sections. The normalization equations of the tensorators and composition comparisons transport this equation through their invertible derived counits. K-flat resolutions and naturality extend it to every A,B.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the identity by direct image of the pulled-back map a. Naturality of the base-change mate, obtained by applying counit and composition-comparison naturality to its definition, moves a to the right-hand path. Functoriality gives the displayed formula.",
+   "uses": [
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-sc-mixed-direct-image-tensor-pairing",
+  "lem-pc-global-hom-adjunction",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-tensor-product",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-mixed-hom-tensor-pullback-iso",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY and Lemma 079U; duality.tex Tag 0AA8 final comparison diagrams",
+  "note": "Refinement of the evaluation-mate argument; Tags 08HY, 079U and 0AA8 read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change natural transformation preserves the direct image tensor pairing as mate of monoidal pullback",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a monoidal natural transformation commutes with the lax monoidal tensor pairing on right adjoints",
+   "results": "Found Adjunction.rightAdjointLaxMonoidal_μ and counit compatibility in Mathlib.CategoryTheory.Monoidal.Functor, plus mateEquiv in Adjunction.Mates. CanonicalPullbackTensorMonoidalRealization supplies monoidal structures for the fixed pullback tensorators, but no existing declaration says the pinned pullback-composition comparisons are monoidal or directly gives the required base-change pairing identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact applicable match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*monoidal|monoidal.*baseChange; tensor pairing",
+   "results": "No Mathlib hits. Repository and blueprint search finds no direct-image tensor pairing base-change declaration. Existing InternalHomBaseChangeExchange has a different tensorator and an extra module-localization assumption.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedInternalHomBaseChangeExchange",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 final comparison diagrams: tensor compatibility underlying the internal Hom exchange",
+   "via": [
+    "lem-sc-mixed-internal-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-counit-transport",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedTensorPairingBaseChange.lean",
+  "declaration": "AlgebraicGeometry.mixedTensorPairing_baseChange",
+  "statement": "theorem mixedTensorPairing_baseChange\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)\n    (A B C : schemeDerivedCategory X) (a : A ⊗ B ⟶ C) :\n    (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition A ⊗ₘ\n      schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition B) ≫\n      mixedDirectImageTensorPairing (pullback.snd f g)\n        ((derivedPullback (pullback.fst f g)).obj A)\n        ((derivedPullback (pullback.fst f g)).obj B) ≫\n      (schemeDerivedDirectImage (pullback.snd f g)).map\n        ((mixedHomTensorPullbackIso (pullback.fst f g)).inv.app (A, B) ≫\n          (derivedPullback (pullback.fst f g)).map a) =\n    (mixedHomTensorPullbackIso g).inv.app\n        ((schemeDerivedDirectImage f).obj A, (schemeDerivedDirectImage f).obj B) ≫\n      (derivedPullback g).map\n        (mixedDirectImageTensorPairing f A B ≫ (schemeDerivedDirectImage f).map a) ≫\n      schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition C",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a3949",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T140815-L-312437",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a3949",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T140815-L-312437",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature and delivered declarations with their DAG nodes, proof dependencies, sources, and report; both modules and sole direct importer compiled cleanly; axiom checks passed with sorryAx only from open statements."
+ }
+}
