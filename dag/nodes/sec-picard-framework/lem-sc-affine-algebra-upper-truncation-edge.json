@@ -18,42 +18,43 @@
  ],
  "proof": [
   {
-   "text": "On inverse images of affine opens, positive right-derived sections vanish on quasi-coherent modules by affine vanishing and the module/source comparison. Sections preserve countable products. Apply the unbounded bound with N=1 to tau<=n-1 I; derived sections vanish in degrees n and n+1. The truncation triangle gives H^n(RGamma(A)) isomorphic to H^n(RGamma(tau>=n A)).",
+   "text": "Use the single-object derived identification to transport affine higher-image vanishing to positive homology of derived direct image on single quasi-coherent modules. For the affine morphism, positive higher direct images of quasi-coherent modules vanish. Apply the natural acyclic quasi-coherent derived-pushforward comparison to the canonical derived lower-truncation projection. Both its source and target have quasi-coherent homology, and its degree-n source homology is invertible. Naturality therefore makes degree-n derived pushforward of this projection invertible over O_Y. Restriction of scalars from f_*O_X to O_Y is exact and conservative: the underlying abelian sheaf is unchanged. Its derived-composition and homology comparisons transport and reflect this invertibility over f_*O_X.",
    "uses": [
-    "lem-pc-affine-vanishing",
-    "lem-sc-module-cohomology-source-comparison",
-    "lem-pc-unbounded-derived-functor-cohomological-bound"
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "lem-sp-derived-functor-single-identification"
    ],
    "elementary": false
   },
   {
-   "text": "The double truncation is H^n(I) placed in degree n. Single-object derived identification and the left-exact bottom comparison identify degree-n derived sections with sections of H^n(I). The maps commute with restriction and respect scalars, so glue over the affine basis to an isomorphism of direct-image-algebra module sheaves.",
+   "text": "Apply the lower-truncation cycle formula to F and I, obtaining the canonical bottom isomorphism b with its cycle-class identity. Compose b with degree-n derived direct image of the lower-truncation projection and of the upper-truncation inclusion. The first arrow is invertible by step 1, and the second by the left-exact upper-truncation derived comparison. Their composition is the required edge isomorphism e.",
    "uses": [
-    "lem-sp-derived-functor-single-identification",
-    "new-qcoh-sections-left-exact-bottom"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply naturality of the raw-to-derived unit to A -> tau>=n A. Its degree-n component is the quotient of cycles by boundaries. Invert the raw upper-truncation homology comparison. Kernel and cokernel uniqueness give the stated identity after the cokernel projection; these are precisely the factors defining upperTruncationBoundaryComparison.",
-   "uses": [
+    "lem-sc-derived-lower-truncation-cycle-formula",
     "lem-sc-left-exact-upper-truncation-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand upperTruncationBoundaryComparison. Naturality of the complex derived unit and of the localization homology factor isomorphism cancels the inverse raw upper-truncation homology map against the derived upper-truncation inclusion. The mapped left-homology-data identity identifies the cokernel projection followed by its homology isomorphism inverse with the cycle lift followed by the homology quotient; kernel uniqueness identifies this lift with the prescribed F of the cycle inclusion. The quotient-to-homotopy factor identity identifies the remaining localization comparisons with those in the lower-truncation cycle formula. Its cycle-class identity then proves cokernel.pi c e = F(h.pi). All constructions work for unbounded complexes, zero complexes, empty schemes and arbitrary integer n.",
+   "uses": [
+    "lem-sc-derived-lower-truncation-cycle-formula",
+    "lem-sc-left-exact-upper-truncation-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-vanishing",
-  "lem-sc-module-cohomology-source-comparison",
-  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
   "lem-sp-derived-functor-single-identification",
-  "new-qcoh-sections-left-exact-bottom",
+  "lem-sc-derived-lower-truncation-cycle-formula",
   "lem-sc-left-exact-upper-truncation-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW, proof cohomology display; Tag 08D4 (2),(3) with N=1; Tag 05TC"
+  "place": "Tags 0AVW, 08D4 and 05TC",
+  "note": "Uses the existing natural acyclic-pushforward comparison to detect invertibility and the existing lower-truncation cycle formula to preserve the canonical map identity; private abstract helpers avoid expanding geometric data in the composition proof."
  },
  "mathlib_searches": [
   {
@@ -139,10 +140,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T095950-L-2457526",
-  "kind": "interface",
+  "landing": "20261013T123546-L-3711749",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
