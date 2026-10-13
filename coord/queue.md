@@ -1,6 +1,6 @@
 # Work queue
 
-285 items; claim with `tools/claim.py next <group> [--stage N]`.
+282 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (22)
 
@@ -44,7 +44,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (255)
+## Stage 3: modules to prove (252)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -200,7 +200,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.KoszulOpenAugmentedIdentityClass` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.KoszulOpenStructureEvaluation` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.LocalFiniteFreeScalarHomology` | 23 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.MixedExtensionSectionsUnit` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.AffineLocallyFreeModelCore` | 23 | 1 | proof |
@@ -261,7 +260,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.CategoryTheory.Abelian.HorseshoeComparisonBoundary` | 24 | 1 | proof |
 | `Sheaf.RingTheory.FormalGlueingCanonicalFunctorObjects` | 24 | 1 | proof |
 | `Sheaf.RingTheory.FormalGlueingExtensionTransport` | 24 | 1 | proof |
-| `Sheaf.RingTheory.FormalGlueingInjectiveApproximation` | 24 | 1 | proof |
 | `Sheaf.RingTheory.TorLocalizationDenominators` | 24 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 25 | 1 | proof |
 | `Sheaf.Algebra.Homology.FiniteStripConeFiltration` | 25 | 1 | proof |
@@ -289,7 +287,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction` | 26 | 1 | proof |
 | `Sheaf.Paper.ModuleCupGodementPairing` | 26 | 1 | proof |
 | `Sheaf.Paper.ModuleCupNaiveDerivedCompatibility` | 26 | 1 | proof |
-| `Sheaf.RingTheory.FiniteRankDefectDerivation` | 26 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTensorCohomologyLocalizationIsos` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineOpenRealizationScalar` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedOpenUnionSESPresentation` | 27 | 1 | proof |
