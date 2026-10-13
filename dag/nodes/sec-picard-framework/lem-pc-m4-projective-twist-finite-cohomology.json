@@ -1,0 +1,180 @@
+{
+ "id": "lem-pc-m4-projective-twist-finite-cohomology",
+ "kind": "statement",
+ "title": "Finite cohomology of a projective twist over an affine Noetherian base",
+ "statement": "Let $T$ be an affine scheme [def-pc-scheme] with Noetherian ring $A=\\Gamma(T,\\mathcal O_T)$, and let $N$ be a finite coordinate type. For each integer $m$ and natural number $q$, the cohomology $H^q(\\mathbb P(N;T),\\mathcal O(m))$ [pqf-def-cohomology] of the projective twisting module [def-pc-projective-space-twist] is a finite $A$-module, with action restricted along the projective projection [def-nagata-projective-space-base-change].",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01XT, Lemma 30.8.1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-cohomology",
+  "def-pc-projective-space-twist",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Identify T with Spec A and transport the twist through the induced projective isomorphism. For at least two coordinates the monomial twist-cohomology formula gives finite free cohomology, since the sets of nonnegative or strictly negative integer exponent vectors with a fixed sum are finite. For one coordinate the single chart trivializes every twist and affine vanishing handles positive degree. For no coordinates the scheme is empty. Naturality under multiplication by A makes the comparison linear for restriction along the projection.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-pc-affine-vanishing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01XT, Lemma 30.8.1",
+  "note": "Affine-base and ring-valued extraction of the standard affine-cover monomial calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of twisting sheaves on projective space over a noetherian ring is finitely generated",
+   "results": {
+    "t": "2026-10-13T10:09:31Z",
+    "tool": "leanfinder",
+    "query": "Cohomology of twisting sheaves on projective space over a noetherian ring is finitely generated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential",
+     "AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "CochainComplex.isKProjective_of_projective",
+     "CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex",
+     "CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
+     "Rep.isZero_Tor_succ_of_projective",
+     "SheafOfModules.IsFiniteType",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType"
+    ],
+    "digest": "2622cdcecc6ea494"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match: results do not compute ring-valued projective twist cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite",
+   "results": {
+    "t": "2026-10-13T10:42:21Z",
+    "tool": "loogle",
+    "query": "Module.Finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Module.Finite",
+     "AddMonoid.FG.to_moduleFinite_nat",
+     "Module.Finite.iff_addMonoid_fg",
+     "Module.Finite.iff_addGroup_fg",
+     "AddMonoid.FG.to_moduleFinite_int",
+     "Module.Finite.fg_top",
+     "Module.Finite.of_fg_top",
+     "Module.finite_def"
+    ],
+    "digest": "481ee78a30d49f87"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match: results do not compute ring-valued projective twist cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*twist|twist.*finite",
+   "results": {
+    "t": "2026-10-13T10:42:21Z",
+    "tool": "grep",
+    "query": "finite.*twist|twist.*finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match: results do not compute ring-valued projective twist cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a twist on projective space over a commutative ring is a finite module",
+   "results": {
+    "t": "2026-10-13T10:55:06Z",
+    "tool": "leansearch",
+    "query": "Cohomology of a twist on projective space over a commutative ring is a finite module",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveFiniteCohomologyPresentation",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Proof of lem-pc-coherent-hi: compute the finite cohomology of a single twist in the projective-space case, before descending induction.",
+   "via": [
+    "lem-pc-p2-projective-finite-source-cohomology-segment",
+    "lem-pc-m1-projective-affine-finite-cohomology-independent",
+    "lem-pc-q2-chow-twist-finite-cohomology",
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveTwistFiniteCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveTwistFiniteCohomology.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.finite_H_twist_affine",
+  "statement": "theorem finite_H_twist_affine {T : Scheme.{u}} [IsAffine T]\n    [IsNoetherianRing Γ(T, ⊤)] (N : Type u) [Finite N] (m : ℤ) (q : ℕ) :\n    letI : Module Γ(T, ⊤) ((twist N T m).H q) :=\n      Module.compHom _ (ℙ(N; T) ↘ T).appTop.hom\n    Module.Finite Γ(T, ⊤) ((twist N T m).H q)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T111904-L-3056651",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T111904-L-3056651",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
