@@ -7,6 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.CechModuleSheafComparison
+import Sheaf.AlgebraicGeometry.CechModuleSheafTerms
 /-! # Construction of the augmented module-sheaf Čech complex
 
 Source: blueprint `lem-pc-cech-resolution`, displayed complex and proof paragraph 1.
@@ -73,6 +75,18 @@ theorem exists_augmented_cech_sheaf_complex
           F.presheafModuleCat.map (prod.snd : (∏ᶜ fun l => U (y l)) ⨯ V ⟶ V).op) ∧
       (∀ p : ℕ, Nonempty (D.X p ≅ ∏ᶜ fun y : Fin (p + 1) → ι =>
         (Scheme.Modules.pushforward (⨅ l, U (y l)).ι).obj (F.restrict (⨅ l, U (y l)).ι))) := by
-  sorry
+  obtain ⟨e, hd, ha⟩ := exists_cechModuleSheafComparison U F
+  let ε := (CochainComplex.fromSingle₀Equiv (cechModuleSheafComplex U F) F).symm
+    ⟨cechModuleSheafAugmentation₀ U F, cechModuleSheafAugmentation₀_comp_d U F⟩
+  refine ⟨cechModuleSheafComplex U F, ε, e, hd, ?_,
+    cechModuleSheafComplex_term_iso U F⟩
+  intro y V
+  have hε : (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 F).inv ≫
+      ε.f 0 = cechModuleSheafAugmentation₀ U F := by
+    dsimp [ε]
+    rw [CochainComplex.fromSingle₀Equiv_symm_apply_f_zero]
+    simp
+  rw [hε]
+  exact ha y V
 
 end AlgebraicGeometry

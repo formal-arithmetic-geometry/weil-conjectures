@@ -1,0 +1,150 @@
+{
+ "id": "lem-pc-cech-module-sheaf-terms",
+ "kind": "statement",
+ "title": "Pushforward description of each concrete module-sheaf Cech term",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a type in its universe, $U:I\\to X.\\mathrm{Opens}$ any family and $F$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Let $D$ be the concrete complex of [def-pc-cech-module-sheaf-functor]. For every $p\\in\\mathbb N$, there is an isomorphism of module sheaves $D^p\\simeq\\prod_{y:\\mathrm{Fin}(p+1)\\to I} j_{y,*}(F|_{\\bigcap_l U(y(l))})$, where $j_y$ is the open immersion of the indicated finite intersection into $X$. This includes empty $I$ and does not require a cover.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cech-module-sheaf-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use P and D of [def-pc-cech-module-sheaf-functor]. Compose overPushforwardOverAdj with the equivalence of module sheaves on the over site and the open subscheme. Transport the left adjoint by Scheme.Modules.overFunctorEquiv. Both this adjunction and Scheme.Modules.restrictAdjunction have left adjoint restriction, so Adjunction.rightAdjointUniq identifies their right adjoints. Evaluate this natural isomorphism on the equivalence image of F.over W, and compose with the equivalence unit and the mapped overFunctorEquiv component. This gives P(W) isomorphic to scheme pushforward of F restricted to W.",
+   "uses": [
+    "def-pc-cech-module-sheaf-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a finite family V of opens, the product maps to its infimum by le_iInf of its projections. The inverse is Pi.lift of the infimum inclusions. Both inverse identities hold because opens are a thin category. Apply P contravariantly to this isomorphism for every tuple y, then compose with the preceding pushforward identification at the infimum.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The degree-p object of D is definitionally the product of P at each tuple product. Pi.mapIso of the component isomorphisms gives the asserted term isomorphism. The universal property applies also when the tuple index type is empty.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cech-module-sheaf-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech|Cech",
+   "results": "15 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean",
+   "date": "2026-10-13",
+   "verdict": "Tools for construction found; no exact theorem for this scheme-module-sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construction of augmented Cech complex of sheaves of modules on open subsets",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, TopCat.Presheaf.SheafConditionEqualizerProducts.diagram, TopCat.Presheaf.SheafConditionEqualizerProducts.piOpens, TopCat.Presheaf.objPairwiseOfFamily, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor, TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCover_obj",
+   "date": "2026-10-13",
+   "verdict": "Tools for construction found; no exact theorem for this scheme-module-sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor",
+   "results": "1 hits: CategoryTheory.cechComplexFunctor",
+   "date": "2026-10-13",
+   "verdict": "Tools for construction found; no exact theorem for this scheme-module-sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor sending an open W to the module sheaf V maps to F(W intersection V), and its augmented Cech complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "overPushforwardOverAdj|pushforwardOver|piComparison_comp_π|restrictScalarsComp.App",
+   "results": "12 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-13",
+   "verdict": "Tools for construction found; no exact theorem for this scheme-module-sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "results": "1 hits: AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "date": "2026-10-13",
+   "verdict": "Tools for construction found; no exact theorem for this scheme-module-sheaf assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CechSheafConstruction",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-resolution",
+   "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation",
+   "via": [
+    "lem-pc-cech-sheaf-construction",
+    "lem-pc-cech-sheaf-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CechModuleSheafTerms",
+  "file": "lean/Sheaf/AlgebraicGeometry/CechModuleSheafTerms.lean",
+  "declaration": "AlgebraicGeometry.cechModuleSheafComplex_term_iso",
+  "statement": "theorem cechModuleSheafComplex_term_iso\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules) (p : ℕ) :\n    Nonempty ((cechModuleSheafComplex U F).X p ≅ ∏ᶜ fun y : Fin (p + 1) → ι =>\n      (Scheme.Modules.pushforward (⨅ l, U (y l)).ι).obj\n        (F.restrict (⨅ l, U (y l)).ι))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T045522-L-126983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T045522-L-126983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

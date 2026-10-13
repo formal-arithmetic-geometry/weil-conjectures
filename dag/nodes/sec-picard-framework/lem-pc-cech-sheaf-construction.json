@@ -12,17 +12,32 @@
  ],
  "proof": [
   {
-   "text": "Construct P(W)=j_W,*(F restricted to W). On V its sections are F(W intersection V), with scalar restriction from O_X(V). For W contained in Z, restriction from Z intersection V to W intersection V gives a module-sheaf map P(Z)->P(W). Naturality, identities and composition follow from F, yielding a functor on opposite opens. Apply cechComplexFunctor U in X.Modules.",
-   "uses": [],
+   "text": "Construct the opposite-opens module-sheaf functor, its concrete full Cech complex D and its degree-zero restriction map a as in [def-pc-cech-module-sheaf-functor]. Naturality of restriction makes both degree-zero coface composites equal. Expanding the first differential as the difference of these two cofaces proves a followed by d^0 equals zero.",
+   "uses": [
+    "def-pc-cech-module-sheaf-functor"
+   ],
    "elementary": true
   },
   {
-   "text": "Module-sheaf products are computed on sections. Restriction of scalars preserves these products. The product comparison isomorphisms give e_p, and their projection equations identify each coface, hence the alternating differentials. The product of restriction maps F->P(U_i) is killed by d^0, because the two restrictions to every double intersection coincide. The single_0 universal property supplies epsilon, and projection to y gives its prescribed coordinate. Finite categorical products of opens are canonically their intersections; transport P along these isomorphisms and use the product universal property for the term isomorphisms. Empty families use empty products and the unique augmentation.",
-   "uses": [],
+   "text": "Apply [lem-pc-cech-module-sheaf-comparison] to obtain the degreewise section isomorphisms, differential compatibility and coordinates of a. Use CochainComplex.fromSingle₀Equiv to extend the cocycle a to a chain map epsilon from F[0]. Its degree-zero component is a, by fromSingle₀Equiv_symm_apply_f_zero; singleObjXSelf is the identity in degree zero. This transfers the stated coordinate formula to epsilon. No object is chosen from an unproved theorem.",
+   "uses": [
+    "lem-pc-cech-module-sheaf-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-pc-cech-module-sheaf-terms] in each degree to obtain the final family of term isomorphisms. Package D, epsilon, the comparisons and these three proved clauses into the requested existential.",
+   "uses": [
+    "lem-pc-cech-module-sheaf-terms"
+   ],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-cech-module-sheaf-functor",
+  "lem-pc-cech-module-sheaf-comparison",
+  "lem-pc-cech-module-sheaf-terms"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
@@ -112,12 +127,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T225306-L-1803870",
+  "landing": "20261013T045522-L-126983",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
