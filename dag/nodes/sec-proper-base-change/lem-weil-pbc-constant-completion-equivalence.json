@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-constant-completion-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, comparison with Stacks 099N: passage from the completed coefficient sheaf A_T to the constant Noetherian coefficient sheaf used by Stacks.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Constant-to-completed coefficients on derived-complete categories",
+ "statement": "Let $\\mathcal C$ be a small site, let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let $I=(a_1,\\ldots,a_r)\\subset A$ be an ideal. Let $\\underline A$ and $\\underline{A/I^n}$ be the constant sheaves of rings [def-weil-pbc-constant-sheaf], and let $\\widehat A=\\varprojlim_{n\\geq1}\\underline{A/I^n}$, with its canonical map $\\underline A\\to\\widehat A$ and projections [def-pur-sheaf-inverse-limit]. Let $D(\\mathcal O)$ denote the derived category of sheaves of modules over a ring sheaf $\\mathcal O$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. An object $M\\in D(\\mathcal O)$ is derived $I$-complete if, for every object $U$ of $\\mathcal C$ and every local section $f\\in(I\\mathcal O)(U)$, one has $R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],M|_U)=0$ [def-pur-derived-internal-hom]; here $\\mathcal O_U$ denotes restriction to the slice site over $U$, and $\\mathcal O_U[1/f]$ is the sheafification of the presheaf of localizations, placed in degree zero.\n\nThe sheaf $\\widehat A$ is flat over $\\underline A$ (tensoring with it is exact), and for every $n\\geq1$ the projection induces a canonical isomorphism $\\widehat A/I^n\\widehat A\\cong\\underline{A/I^n}$. Restriction of scalars [def-pc-sheaf-restrict-scalars] along $\\underline A\\to\\widehat A$ induces an equivalence\n$$D_{\\mathrm{comp}}(\\widehat A,I\\widehat A)\\xrightarrow{\\sim}D_{\\mathrm{comp}}(\\underline A,I).$$\nFor every $M\\in D(\\widehat A)$, restriction of scalars and finite reduction have the canonical comparison isomorphism\n$$\\operatorname{Res}(M)\\otimes^L_{\\underline A}\\underline{A/I^n}\\cong M\\otimes^L_{\\widehat A}\\underline{A/I^n}$$\nin $D(\\underline{A/I^n})$, with derived change of rings as in [lem-pur-derived-change-of-rings]. These isomorphisms commute with $\\underline{A/I^{n+1}}\\to\\underline{A/I^n}$.\nLet $\\mathcal C'$ be a second small site and define $\\underline A'$, $\\underline{A/I^n}'$ and $\\widehat A'$ there by the same construction. Let $u:\\operatorname{Sh}(\\mathcal C')\\to\\operatorname{Sh}(\\mathcal C)$ be a morphism of topoi, meaning an adjoint pair $u^{-1}\\dashv u_*$ with $u^{-1}$ preserving finite limits. Identify $u^{-1}\\underline A=\\underline A'$ and $u^{-1}\\underline{A/I^n}=\\underline{A/I^n}'$ by the canonical constant-sheaf maps. Let $c:u^{-1}\\widehat A\\to\\widehat A'$ be the map induced by the finite projections. Write $Lu^*_{\\widehat A}$ for derived module pullback along $c$, and $Lu^*_{\\underline A}$ for constant-coefficient derived module pullback, computed on K-flat complexes with flat terms [def-pc-kflat-complex, lem-weil-pbc-diagram-kflat-replacements, lem-pur-left-derived-from-kflat-class]. For every $M\\in D(\\widehat A)$ there are canonical isomorphisms\n$$\\operatorname{Res}'(Lu^*_{\\widehat A}M)\\otimes^L_{\\underline A'}\\underline{A/I^n}'\\cong Lu^*_{\\underline A}(\\operatorname{Res}M\\otimes^L_{\\underline A}\\underline{A/I^n}).$$\nThese isomorphisms are in $D(\\underline{A/I^n}')$. They are natural in $M$ and $u$ and commute with the finite quotient transitions. The canonical comparison $Lu^*_{\\underline A}\\operatorname{Res}M\\to\\operatorname{Res}'(Lu^*_{\\widehat A}M)$ is induced on K-flat representatives by the scalar-extension map $u^{-1}M\\to u^{-1}M\\otimes_{u^{-1}\\widehat A}\\widehat A'$; its finite reductions are the inverses of the displayed isomorphisms. The quotient maps commute with this comparison.\n\nFor a strict inverse sequence of complexes, write $R\\lim$ for the total right derived inverse limit: take a K-injective resolution in the category of strict inverse sequences and then its termwise inverse limit; K-injectivity means that maps from acyclic tower complexes are null-homotopic [def-pur-kinjective-complex]. This fixes functorial models of the sequential derived limits [def-weil-derived-limit]. Restriction of scalars identifies the sequential derived limits of the finite-reduction towers above and carries the quotient-tower completion unit to the corresponding constant-coefficient completion unit. More explicitly, for $\\mathcal O=\\underline A$ or $\\widehat A$, put\n$$Q_m(\\mathcal O)=\\bigotimes_{j=1}^r[\\mathcal O\\xrightarrow{a_j^m}\\mathcal O]$$\nin degrees $[-r,0]$ [def-pc-tensor-complex-sheaves], with transition maps multiplication by $a_j$ in degree $-1$ and identity in degree $0$ in each factor. For $N\\in D(\\mathcal O)$ the canonical map\n$$N\\longrightarrow R\\lim_m(N\\otimes^L_{\\mathcal O}Q_m(\\mathcal O))$$\nis the derived-completion unit for the local completeness condition in the first paragraph. For these two coefficient sheaves the Koszul completion and $R\\lim_n(N\\otimes^L_{\\mathcal O}\\underline{A/I^n})$ are canonically isomorphic, respecting the units; restriction of scalars identifies these isomorphisms. In particular Koszul-derived completeness and the stated local completeness condition agree.\n",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099L (proetale-section-derived-completion-noetherian), opening paragraphs; flatness and quotients from Tag 093M (sites-modules-lemma-completion-flat) in sites-modules.tex; equivalence from Tag 099I (algebraization-lemma-restriction-derived-complete-equivalence) in algebraization.tex. The finite-reduction comparison is derived tensor reassociation with this flat coefficient extension. Naturality is the canonical derived tensor reassociation for the finite quotient maps. Koszul completion and its unit are Tag 0A0E (algebraization-lemma-derived-completion-koszul); comparison with finite quotients is Tag 099M (proetale-lemma-naive-completion). Restriction preserves derived limits since its exact derived functor is right adjoint to derived extension of scalars."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-derived-limit",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pur-left-derived-from-kflat-class",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars from the completed constant Noetherian ring sheaf induces an equivalence on derived complete complexes and preserves finite reductions",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.congr, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofLinearEquiv, AdicCompletion.flat_of_isNoetherian",
+   "date": "2026-10-14",
+   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"flat\"",
+   "results": "AdicCompletion.flat_of_isNoetherian",
+   "date": "2026-10-14",
+   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.complete|completed.*constant|constant.*completed",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of derived complete categories for a flat ring sheaf extension inducing an isomorphism modulo a finitely generated ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of ring sheaves which is unchanged modulo an ideal gives an equivalence of derived adically complete module categories",
+   "results": "AdicCompletion.flat_of_isNoetherian, AdicCompletion.congr, AdicCompletion.ofLinearEquiv, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.congr_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.module, AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-14",
+   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_isNoetherian|ofTensorProductEquivOfFiniteNoetherian",
+   "results": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: no statement of this ringed-site/strict-diagram result; abstract localization or ordinary module completion hits do not supply it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between derived complete modules over a sheaf of rings and its ideal adic completion",
+   "results": "AdicCompletion.ofLinearEquiv, AdicCompletion.module, IsAdicComplete.toIsPrecomplete, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.congr, AdicCompletion, AdicCompletion.of_bijective_iff, isAdicComplete_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary module completion and bounded or projective resolutions do not state the ringed-site diagram or derived-complete equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Cc]omplet|[Cc]omplet.*derived",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "no match: ordinary module completion and bounded or projective resolutions do not state the ringed-site diagram or derived-complete equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalar coefficients between sheaves over an adic ring and its completion is an equivalence on derived complete objects",
+   "results": "AdicCompletion.congr, AdicCompletion.ofLinearEquiv, AdicCompletion.ofLinearEquiv_apply, SheafOfModules.toSheafCompSheafToPresheafIso, AdicCompletion.congr_apply, AdicCompletion.module, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-14",
+   "verdict": "no match: hits are ordinary module completion, bounded/projective or injective resolutions, or unrelated Tape.flatMap; none states the sheaf-diagram or derived-complete coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"equiv\"",
+   "results": "AdicCompletion.ofLinearEquiv, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.ofLinearEquiv_symm_of, AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.ofAlgEquiv, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.ofAlgEquiv_symm_of, AdicCompletion.of_ofAlgEquiv_symm",
+   "date": "2026-10-14",
+   "verdict": "no match: hits are ordinary module completion, bounded/projective or injective resolutions, or unrelated Tape.flatMap; none states the sheaf-diagram or derived-complete coefficient theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "def-weil-pbc-completed-pullback",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
