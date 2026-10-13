@@ -14,18 +14,27 @@
  },
  "proof": [
   {
-   "text": "Use comparisonStalkHomologyIso_naturality on a and functoriality of forgetting scalars. This separates Q(a) from the inverse exact restriction factor on N.",
+   "text": "Cancel the forgotten representative comparison at N on the right. Expand comparisonStalkHomologyIso, comparisonStalkCohomology and openDerivedAdditiveStalkIso. This reduces the claim to the generic exact-functor identity representative_cohomology, with R the open restriction, L0 and L the stalk functors, F0 and F the forgetful functors, and gamma the given same-germ isomorphism. No statement or definition is changed.",
    "uses": [
-    "lem-pc-stalk-comparison-source-transport"
+    "def-pc-derived-open-restriction-maps",
+    "lem-pc-stalk-comparison-source-transport",
+    "def-pc-open-derived-additive-stalk-iso"
    ],
    "elementary": true
   },
   {
-   "text": "Expand openDerivedAdditiveStalkIso at Q(N). Use mapDerivedCategoryCompIso_fac for R,L0,F0 and L,F, and mapDerivedCategoryNatIso_fac for gamma, then mapDerivedCategoryHomologyFunctorIso_hom_app_Q for the forgetful functors. Cancel adjacent inverse localization factors. The remaining map is homology of gamma between the forgotten stalk complexes. The naturality of mapHomologyIso carries the stalk map of a through the source forgetful factor, and homologyMap_comp combines it with gamma.",
+   "text": "In representative_factors, use inverse localization-factor naturality on a first for L0 and then F0. Naturality of mapDerivedCategoryCompIso moves the inverse restriction factor past the composition comparison. Apply mapDerivedCategoryCompIso_fac and cancel its invertible factors for L0,F0 and R,L0 followed by F0. Apply the forward composition equation for L,F and mapDerivedCategoryNatIso_fac for gamma. The result is Q.map of the forgotten stalk map of a followed by the complex map of gamma. The private comp_factors_inv and comp_factors_hom are proved directly from mapDerivedCategoryCompIso_fac; their complex composition comparison is the identity componentwise.",
    "uses": [
-    "def-pc-open-derived-additive-stalk-iso",
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-open-derived-additive-stalk-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In representative_cohomology, naturality of mapDerivedCategoryHomologyFunctorIso moves the homology comparisons onto the localized stalk complexes. Evaluate the forward comparison with mapDerivedCategoryHomologyFunctorIso_hom_app_Q and derive the inverse evaluation by cancellation. Cancel the adjacent homology factors and apply homologyFunctorFactors naturality to the localized chain map from the previous step. Unfold mapHomologicalComplexHomologyIso to identify it with ShortComplex.mapHomologyIso. This gives the required homologyMap formula in every degree, for arbitrary M,N,a; it does not require invertibility of a or any vanishing or nonzero hypotheses.",
+   "uses": [
     "lem-pc-stalk-comparison-source-transport",
-    "def-pc-derived-open-restriction-maps"
+    "def-pc-open-derived-additive-stalk-iso"
    ],
    "elementary": false
   }
@@ -37,11 +46,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C3",
+  "group": "T2",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/015F",
-  "place": "The explicit exact localization factorization identities in the Lean sources named above.",
-  "note": "Makes steps 2 and 3 of the parent plan into independent representative coherence statements."
+  "place": "Derived Categories, Lemma 13.16.9 (exact functors on representatives); Tags 0098 and 08DW for stalk/open comparisons. Detailed coherence identities: Mathlib Algebra/Homology/DerivedCategory/ExactFunctor.lean and HomotopyCategory.lean; lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean.",
+  "note": "Complete Lean proof from exact localization and homology factorization identities. All generic helpers are private and proved; no new holes or interface changes."
  },
  "mathlib_searches": [
   {
@@ -118,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-04f94",
-  "group": "C3",
+  "reviewer": "COMPILER",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T215557-L-895137",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files and DAG records match the packet; all compile, the direct importer compiles, and axioms are within the allowed set plus the documented sorryAx."
+  "landing": "20261013T224520-L-1475817",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
