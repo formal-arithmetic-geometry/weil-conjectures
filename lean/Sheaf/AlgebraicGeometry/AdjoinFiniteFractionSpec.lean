@@ -1,10 +1,11 @@
 module
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Localization.FractionRing
-public import Mathlib.RingTheory.Spectrum.Maximal.Defs
-public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+import Mathlib.RingTheory.Localization.AsSubring
+import Mathlib.RingTheory.Spectrum.Prime.Topology
 @[expose] public section
 universe u v
 /-! Auxiliary adjoin construction for Varieties Lemma 09N2.
@@ -33,4 +34,32 @@ theorem exists_adjoin_finite_fraction_spec
         (∀ z : A, (g z : K) = z) ∧
         (∀ b : B, g (algebraMap B A b) = algebraMap B (integralClosure B K) b) ∧
         Function.Surjective (PrimeSpectrum.comap g) := by
-  sorry
+  let A := Algebra.adjoin B ({(x : K), (y : K)} : Set K)
+  have hA : A ≤ integralClosure B K := by
+    apply Algebra.adjoin_le
+    intro z hz
+    rcases hz with rfl | hz
+    · exact x.property
+    · rcases hz with rfl | hz
+      · exact y.property
+  have hfin : Module.Finite B A :=
+    Algebra.finite_adjoin_of_finite_of_isIntegral (Set.toFinite _) (by
+      intro z hz
+      exact hA (Algebra.subset_adjoin hz))
+  let g := (Subalgebra.inclusion hA).toRingHom
+  have hinj : Function.Injective g := Subalgebra.inclusion_injective hA
+  have hg : g.comp (algebraMap B A) = algebraMap B (integralClosure B K) := by
+    ext b
+    rfl
+  have hgint : g.IsIntegral := by
+    apply RingHom.IsIntegral.tower_top (algebraMap B A) g
+    rw [hg]
+    exact Algebra.IsIntegral.isIntegral
+  refine ⟨A, hfin, inferInstance, ?_, ?_, g, hinj, ?_, ?_,
+    hgint.comap_surjective hinj⟩
+  · exact Algebra.subset_adjoin (by simp)
+  · exact Algebra.subset_adjoin (by simp)
+  · intro z
+    rfl
+  · intro b
+    rfl
