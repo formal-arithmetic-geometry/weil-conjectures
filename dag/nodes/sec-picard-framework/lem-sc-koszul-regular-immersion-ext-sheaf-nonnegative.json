@@ -1,149 +1,176 @@
 {
- "kind": "statement",
- "source": {
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BQZ, affine Koszul calculation"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-closed-immersion",
-  "def-weil-pbc-koszul-regular-sequence",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "def-pc-module-pullback",
-  "def-pc-derived-category",
-  "def-pur-derived-internal-hom",
-  "def-pur-sheaf-hom",
-  "def-sc-locally-ranked-exterior-complex",
-  "def-pc-module-stalk-functor"
- ],
- "proof": [
-  {
-   "text": "The closed-immersion ideal acts trivially on scalar Ext, by the general ideal-action theorem.",
-   "uses": [
-    "lem-sc-closed-immersion-ext-ideal-action"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ, affine Koszul calculation"
   },
-  {
-   "text": "The pullback adjunction unit is epi and its kernel is the image of ideal multiplication. Since this multiplication is zero, its image inclusion is zero by cancellation of factorThruImage. The kernel universal property proves that the unit is mono, hence an isomorphism in the abelian category.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-unit-kernel",
-    "lem-sc-closed-immersion-ext-ideal-action"
-   ],
-   "elementary": true
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-module-pullback",
+    "def-pc-derived-category",
+    "def-pur-derived-internal-hom",
+    "def-pur-sheaf-hom",
+    "def-sc-locally-ranked-exterior-complex",
+    "def-pc-module-stalk-functor"
+  ],
+  "proof": [
+    {
+      "text": "Choose affine Koszul charts around Z. The quotient-spectrum description identifies the restricted pushforward structure sheaf with tilde(A/I). The local resolution clause of the perfect-immersion theorem yields a bounded finite free Koszul resolution. At points outside Z use an affine chart disjoint from the closed image, so that the first argument is zero. For the every-point hypothesis of the perfect theorem this is the acyclic Koszul complex on the unit generator of the unit ideal. Use standard derived categories for chart computations if the chosen universe does not supply them, and compare via the same Hom complex before taking homology.",
+      "uses": [
+        "lem-sc-koszul-regular-closed-immersion-perfect"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/duality.tex",
+        "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
+      }
+    },
+    {
+      "text": "Restrict derived internal Hom to a chart and compute it by the bounded finite free Hom model into the structure sheaf in degree zero. Identify sheaf Hom of finite free associated modules with the associated module Hom complex. Extend the natural-index Koszul complexes by zero to integer degrees.",
+      "uses": [
+        "lem-sc-derived-hom-finite-free-model",
+        "lem-sc-derived-internal-hom-restrict-open"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/duality.tex",
+        "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
+      }
+    },
+    {
+      "text": "Apply the canonical affine dual-Koszul comparison: the homology in degree q vanishes unless q is the length of the regular sequence, and in that degree it is the determinant of the conormal dual. The Koszul conormal basis localizes to a basis at points of Z, so hr identifies this length with the rank function. Shrink to its constant-rank neighborhood. The quotient-spectrum conormal identification identifies the algebraic I/I² with i*I and the affine determinant with the specified exterior sheaf.",
+      "uses": [
+        "lem-sc-koszul-regular-sequence-dual-complex",
+        "lem-sc-koszul-conormal-basis"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/duality.tex",
+        "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
+      }
+    },
+    {
+      "text": "The intrinsic comparison is independent of regular generators and commutes with localization. Compare on affine refinements of overlaps, and glue the cohomology-sheaf maps and their inverses, using the sheaf condition. Outside the closed image all cohomology vanishes. Thus in nonnegative degree q the resulting sheaf is extension by zero of the rank-q determinant, Rank zero and empty Z satisfy the same formulas.",
+      "uses": [
+        "lem-sc-koszul-regular-sequence-dual-complex",
+        "lem-sc-derived-internal-hom-restrict-open"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/duality.tex",
+        "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-koszul-regular-closed-immersion-perfect",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-koszul-conormal-basis"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "agent": "R4 second reader",
+    "date": "2026-10-13",
+    "based_on": {
+      "document": "literature/stacks-project/duality.tex",
+      "place": "Tag 0BQZ, affine Koszul calculation"
+    },
+    "note": "Negative branch proved by injective resolution; nonnegative branch remains the affine determinant comparison."
   },
-  {
-   "text": "Apply the conormal determinant comparison on Z, push its isomorphism forward, and compose it with the pullback-unit isomorphism. This gives exactly the unchanged scalar Ext statement on Y.",
-   "uses": [
-    "lem-sc-koszul-regular-immersion-ext-pullback"
-   ],
-   "elementary": true
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "derived sheaf Hom cohomology negative degree injective resolution",
+      "results": "UNAVAILABLE: Internal Server Error; no verdict inferred.",
+      "date": "2026-10-13"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "regular closed embedding sheaf Ext exterior conormal determinant",
+      "results": "Related sheaf Ext and K-injective declarations; no exact comparison. Local source search found homComplex_single_iso, which is used in the negative proof.",
+      "verdict": "partial match, used in negative branch",
+      "date": "2026-10-13"
+    },
+    {
+      "tool": "grep",
+      "query": "rg derivedInternalHom with IsGE, negative, isZero; koszulRegularImmersion_extSheaf and homComplex_single_iso in lean/Sheaf and lean/WeilConjectures",
+      "results": "No independent global determinant comparison. AffineRHomQuasiCoherent has extra Noetherian and finite-module hypotheses; finiteLocallyFree_derivedInternalHom_single requires a locally free source. HomComplexSingle provides the degreewise computation used here.",
+      "verdict": "no exact match; used degreewise Hom computation",
+      "date": "2026-10-13"
+    }
+  ],
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheaf",
+    "date": "2026-10-13",
+    "group": "R4"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Nonnegative affine Koszul comparison and cohomology-sheaf gluing",
+      "via": [
+        "lem-sc-koszul-regular-immersion-ext-sheaf",
+        "lem-sc-koszul-regular-immersion-derived-hom",
+        "lem-sc-smooth-proper-diagonal-koszul-dual",
+        "lem-sc-smooth-proper-relative-dualizing-general"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "id": "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+  "title": "Koszul-regular immersion Ext sheaf nonnegative-degree comparison (0 ≤ q)",
+  "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes, locally generated near every point of $Z$ by a finite Koszul-regular sequence. Use the scheme, ideal, module pullback, derived category and internal Hom of [def-pc-scheme], [def-weil-closed-immersion], [def-weil-pbc-koszul-regular-sequence], [def-sbc-closed-immersion-ideal-sheaf], [def-pc-module-pullback], [def-pc-derived-category], [def-pur-derived-internal-hom] and [def-pur-sheaf-hom]. Let $C=i^*\\mathcal I$, $N=\\mathcal Hom(C,\\mathcal O_Z)$ and let $r:Z\\to\\mathbb N$ be locally constant and equal to the stalk finrank of $C$, using [def-pc-module-stalk-functor]. For every integer $q \\geq 0$, $H^q(R\\mathcal Hom_Y(i_*\\mathcal O_Z,\\mathcal O_Y))\\cong i_*T^q$, where $T^q$ is the degree-$q$ term of [def-sc-locally-ranked-exterior-complex] applied to $N,r$: it is the direct image of $\\bigwedge^q(N|_{\\{r=q\\}})$ from the clopen rank-$q$ stratum for $q\\geq0$. This asserts only sheaf isomorphisms, not an isomorphism of derived objects.",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheafNonnegative",
+    "file": "lean/Sheaf/AlgebraicGeometry/KoszulRegularImmersionExtSheafNonnegative.lean",
+    "declaration": "AlgebraicGeometry.koszulRegularImmersion_extSheaf_nonnegative",
+    "statement": "theorem koszulRegularImmersion_extSheaf_nonnegative\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f)\n    (r : LocallyConstant Z ℕ)\n    (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z)\n      ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)))\n    {q : ℤ} (hq : 0 ≤ q) :\n    Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj\n        ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj\n          (op ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))),\n            (DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n                (SheafOfModules.unit Y.ringCatSheaf))) ≅\n      (Scheme.Modules.pushforward i).obj\n        (Scheme.Modules.locallyRankedExteriorTerm\n          (SheafOfModules.homObj (R := Z.sheaf)\n            ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)\n            (SheafOfModules.unit Z.ringCatSheaf)) r q))",
+    "branch": "sheaf-dag",
+    "by": "R4",
+    "date": "2026-10-13"
+  },
+  "mathlib_match": null,
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "R4",
+    "result": "pass",
+    "landing": "20261013T001615-L-2330786",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "R4",
+    "result": "pass",
+    "landing": "20261013T001615-L-2330786",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-sc-closed-immersion-ext-ideal-action",
-  "lem-weil-pbc-closed-immersion-unit-kernel",
-  "lem-sc-koszul-regular-immersion-ext-pullback"
- ],
- "proof_origin": {
-  "by": "worker",
-  "agent": "F1",
-  "date": "2026-10-13",
-  "based_on": {
-   "document": "literature/stacks-project/duality.tex",
-   "place": "Tag 0BQZ, Lemma 48.15.5; Tag 0BUZ, Lemma 48.11.1"
-  },
-  "note": "Separates proved ideal annihilation and ambient reconstruction from the remaining affine conormal calculation."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "derived sheaf Hom cohomology negative degree injective resolution",
-   "results": "UNAVAILABLE: Internal Server Error; no verdict inferred.",
-   "date": "2026-10-13"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "regular closed embedding sheaf Ext exterior conormal determinant",
-   "results": "Related sheaf Ext and K-injective declarations; no exact comparison. Local source search found homComplex_single_iso, which is used in the negative proof.",
-   "verdict": "partial match, used in negative branch",
-   "date": "2026-10-13"
-  },
-  {
-   "tool": "grep",
-   "query": "rg derivedInternalHom with IsGE, negative, isZero; koszulRegularImmersion_extSheaf and homComplex_single_iso in lean/Sheaf and lean/WeilConjectures",
-   "results": "No independent global determinant comparison. AffineRHomQuasiCoherent has extra Noetherian and finite-module hypotheses; finiteLocallyFree_derivedInternalHom_single requires a locally free source. HomComplexSingle provides the degreewise computation used here.",
-   "verdict": "no exact match; used degreewise Hom computation",
-   "date": "2026-10-13"
-  }
- ],
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheaf",
-  "date": "2026-10-13",
-  "group": "R4"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Nonnegative affine Koszul comparison and cohomology-sheaf gluing",
-   "via": [
-    "lem-sc-koszul-regular-immersion-ext-sheaf",
-    "lem-sc-koszul-regular-immersion-derived-hom",
-    "lem-sc-smooth-proper-diagonal-koszul-dual",
-    "lem-sc-smooth-proper-relative-dualizing-general"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "id": "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
- "title": "Koszul-regular immersion Ext sheaf nonnegative-degree comparison (0 ≤ q)",
- "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes, locally generated near every point of $Z$ by a finite Koszul-regular sequence. Use the scheme, ideal, module pullback, derived category and internal Hom of [def-pc-scheme], [def-weil-closed-immersion], [def-weil-pbc-koszul-regular-sequence], [def-sbc-closed-immersion-ideal-sheaf], [def-pc-module-pullback], [def-pc-derived-category], [def-pur-derived-internal-hom] and [def-pur-sheaf-hom]. Let $C=i^*\\mathcal I$, $N=\\mathcal Hom(C,\\mathcal O_Z)$ and let $r:Z\\to\\mathbb N$ be locally constant and equal to the stalk finrank of $C$, using [def-pc-module-stalk-functor]. For every integer $q \\geq 0$, $H^q(R\\mathcal Hom_Y(i_*\\mathcal O_Z,\\mathcal O_Y))\\cong i_*T^q$, where $T^q$ is the degree-$q$ term of [def-sc-locally-ranked-exterior-complex] applied to $N,r$: it is the direct image of $\\bigwedge^q(N|_{\\{r=q\\}})$ from the clopen rank-$q$ stratum for $q\\geq0$. This asserts only sheaf isomorphisms, not an isomorphism of derived objects.",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheafNonnegative",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulRegularImmersionExtSheafNonnegative.lean",
-  "declaration": "AlgebraicGeometry.koszulRegularImmersion_extSheaf_nonnegative",
-  "statement": "theorem koszulRegularImmersion_extSheaf_nonnegative\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f)\n    (r : LocallyConstant Z ℕ)\n    (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z)\n      ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)))\n    {q : ℤ} (hq : 0 ≤ q) :\n    Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj\n        ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj\n          (op ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))),\n            (DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n                (SheafOfModules.unit Y.ringCatSheaf))) ≅\n      (Scheme.Modules.pushforward i).obj\n        (Scheme.Modules.locallyRankedExteriorTerm\n          (SheafOfModules.homObj (R := Z.sheaf)\n            ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)\n            (SheafOfModules.unit Z.ringCatSheaf)) r q))",
-  "branch": "sheaf-dag",
-  "by": "R4",
-  "date": "2026-10-13"
- },
- "mathlib_match": null,
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R4",
-  "result": "pass",
-  "landing": "20261013T001615-L-2330786",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
-  "result": "pass",
-  "landing": "20261013T025300-L-3422143",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

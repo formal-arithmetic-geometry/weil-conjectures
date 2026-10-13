@@ -1,134 +1,134 @@
 {
- "id": "lem-pur-localized-hom-complex-boundaries",
- "kind": "lemma",
- "title": "Localized degree-minus-one boundaries are null-homotopies",
- "statement": "Let $C$ be a category with Grothendieck topology $J$, $R$ a sheaf of commutative rings, $U$ an object of $C$, and $L,I$ arbitrary integer-indexed cochain complexes of module sheaves. Write $S$ for the abelian-group complex of sections at $U$ of the Hom complex [def-pur-hom-complex], with its specified projections $\\pi$. Assume that restriction to $C/U$ preserves zero morphisms, and write $\\mathrm{res}$ for termwise restriction. For a cycle $z\\in Z^0(S)$ and a chain map $f:\\mathrm{res}(L)\\to\\mathrm{res}(I)$, assume that, for every integer $p$ and every object $W$ of $(C/U)^{\\mathrm{op}}$, the component $f^p$ evaluated at $W$ equals the evaluation at $W$ of $\\pi_{0,p,p}(\\iota z)$ at $U$. Then $f$ is null-homotopic if and only if there exists $x\\in S^{-1}$ with $\\mathrm{toCycles}(x)=z$. This concerns one cycle and one chain map and assumes no equivalence between all cycles and all maps.",
- "stmt_deps": [
-  "def-pur-hom-complex"
- ],
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8X, differential preceding Equation 0A8Y (degree zero); sites-cohomology-equation-cohomology-hom-complex"
- },
- "proof": [
-  {
-   "text": "Construct the component map e from degree-n sections to Mathlib HomComplex.Cochain of the restricted complexes, lifting each projected presheaf map to a sheaf map. The assumed component formula identifies e(iCycles(z)) with Cochain.ofHom(f).",
-   "uses": [
+  "id": "lem-pur-localized-hom-complex-boundaries",
+  "kind": "lemma",
+  "title": "Localized degree-minus-one boundaries are null-homotopies",
+  "statement": "Let $C$ be a category with Grothendieck topology $J$, $R$ a sheaf of commutative rings, $U$ an object of $C$, and $L,I$ arbitrary integer-indexed cochain complexes of module sheaves. Write $S$ for the abelian-group complex of sections at $U$ of the Hom complex [def-pur-hom-complex], with its specified projections $\\pi$. Assume that restriction to $C/U$ preserves zero morphisms, and write $\\mathrm{res}$ for termwise restriction. For a cycle $z\\in Z^0(S)$ and a chain map $f:\\mathrm{res}(L)\\to\\mathrm{res}(I)$, assume that, for every integer $p$ and every object $W$ of $(C/U)^{\\mathrm{op}}$, the component $f^p$ evaluated at $W$ equals the evaluation at $W$ of $\\pi_{0,p,p}(\\iota z)$ at $U$. Then $f$ is null-homotopic if and only if there exists $x\\in S^{-1}$ with $\\mathrm{toCycles}(x)=z$. This concerns one cycle and one chain map and assumes no equivalence between all cycles and all maps.",
+  "stmt_deps": [
     "def-pur-hom-complex"
-   ],
-   "elementary": false
+  ],
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, differential preceding Equation 0A8Y (degree zero); sites-cohomology-equation-cohomology-hom-complex"
   },
-  {
-   "text": "Forget to types and preserve the specified product fan. The fully faithful forgetful functor identifies cochains with the product of underlying restricted presheaf Hom sets. The universal property proves bijectivity of e, with the generic private fan_bijective helper.",
-   "uses": [
+  "proof": [
+    {
+      "text": "The product fan in degree -1 specified by homComplex_exists remains a limit after forgetting sheaves of modules, evaluating at U, and forgetting modules to abelian groups. Its projections identify each degree -1 section with a family of localized presheaf-module maps. The fully faithful forgetful functor lifts these to localized sheaf-module maps h_p from L^p to I^(p-1).",
+      "uses": [
+        "def-pur-hom-complex"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The differential projection identity of homComplex_exists in degrees -1 and 0 evaluates to h_p followed by d_I plus d_L followed by h_(p+1), since (-1)^(-1)=-1. Restriction and evaluation preserve sums and composition.",
+      "uses": [
+        "def-pur-hom-complex"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "If z=toCycles(x), then iCycles(z)=d(x). The specified component condition on f and the differential formula show that the localized maps associated to x satisfy the homotopy equation for f and zero. Put all nonadjacent-degree homotopy components equal to zero.",
+      "uses": [
+        "def-pur-hom-complex"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Conversely, the adjacent-degree components of a null-homotopy of f assemble to a section x by the limiting fan. The homotopy equation and the differential formula show that d(x) and iCycles(z) have the same product projections at U. Joint injectivity of the projections gives equality. Since iCycles is monic and iCycles(toCycles(x))=d(x), toCycles(x)=z. Zero complexes give zero groups; when both differentials are zero the homotopy equation forces f=0 and joint injectivity forces z=0.",
+      "uses": [
+        "def-pur-hom-complex"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-pur-hom-complex"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Expansion of the degree -1 differential argument preceding Equation 0A8Y; online source checked."
   },
-  {
-   "text": "Evaluate the specified differential projection formula at U in degrees -1 and 0. Simplify (-1).negOnePow=-1 and evaluate sums and compositions of module maps. Component extensionality gives e(d(x))=Mathlib HomComplex.δ(-1,0)(e(x)).",
-   "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "homologyπ|equivHomotopy|homotopic_iff",
+      "results": "Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean; Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/Refinements.lean; Mathlib/CategoryTheory/Abelian/Refinements.lean",
+      "date": "2026-10-12",
+      "verdict": "Related generic homology and homotopy APIs; no localized sheaf boundary comparison."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Hom complex zero homology is morphisms in homotopy category",
+      "results": "HomotopyCategory.quotient_map_eq_zero_iff; DerivedCategory.Q_map_eq_of_homotopy; HomotopyCategory.isZero_quotient_obj_iff; HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy; HomotopyCategory.homotopyOfEq; HomotopyCategory.homotopyOutMap; HomotopyCategory.quot_mk_eq_quotient_map; HomotopyCategory.quotient_inverts_homotopyEquivalences",
+      "date": "2026-10-12",
+      "verdict": "Related generic homology and homotopy APIs; no localized sheaf boundary comparison."
+    },
+    {
+      "tool": "loogle",
+      "query": "HomologicalComplex.homologyπ",
+      "results": "HomologicalComplex.homologyπ; HomologicalComplex.instEpiHomologyπ; HomologicalComplex.natTransHomologyπ_app; HomologicalComplex.homology_π_ι; CochainComplex.isIso_homologyπ₀; HomologicalComplex.isIso_homologyπ; HomologicalComplex.toCycles_comp_homologyπ; HomologicalComplex.homology_π_ι_assoc",
+      "date": "2026-10-12",
+      "verdict": "Related generic homology and homotopy APIs; no localized sheaf boundary comparison."
+    },
+    {
+      "tool": "leansearch",
+      "query": "boundaries in the sheaf Hom complex correspond to null homotopic localized chain maps",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-12",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Algebra.Homology.LocalizedHomComplexHomology",
+    "date": "2026-10-13",
+    "group": "X2"
   },
-  {
-   "text": "For a null-homotopy h, lift Cochain.ofHomotopy(h) using surjectivity of e. Mathlib δ_ofHomotopy and the cycle factorization toCycles_i identify d(x) with iCycles(z); injectivity of e and of iCycles imply toCycles(x)=z. Conversely, a boundary x satisfies the defining equation in Mathlib Cochain.equivHomotopy(f,0), yielding a null-homotopy.",
-   "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": false
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-derived-pullback-tensor-hom",
+      "place": "Degree-zero localized Hom comparison: the differential from degree -1 has exactly the null-homotopy formula.",
+      "via": [
+        "lem-pur-localized-hom-complex-homology-aux",
+        "lem-pur-localized-hom-complex-homotopy",
+        "lem-pur-rhom-into-kinjective-local"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Algebra.Homology.LocalizedHomComplexBoundaries",
+    "file": "lean/Sheaf/Algebra/Homology/LocalizedHomComplexBoundaries.lean",
+    "declaration": "CategoryTheory.localizedHomComplex_nullHomotopy_iff_boundary",
+    "statement": "theorem localizedHomComplex_nullHomotopy_iff_boundary\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)\n    (hzero : Functor.PreservesZeroMorphisms\n      (SheafOfModules.overFunctor.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let H := homComplex (R := R) L I\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj H\n    let := hzero\n    let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤\n        CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ :=\n      (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ)\n    ∀ (z : S.cycles 0) (f : res.obj L ⟶ res.obj I),\n      (∀ (p : ℤ) (W : (Over U)ᵒᵖ),\n        (f.f p).val.app W =\n          (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) →\n      (Nonempty (Homotopy f 0) ↔ ∃ x : S.X (-1), S.toCycles (-1) 0 x = z)",
+    "branch": "sheaf-dag",
+    "by": "X2",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "X2",
+    "result": "pass",
+    "landing": "20261013T002359-L-2377184",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "X2",
+    "result": "pass",
+    "landing": "20261013T002359-L-2377184",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "def-pur-hom-complex"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8X, differential preceding Equation 0A8Y (degree zero); checked https://stacks.math.columbia.edu/tag/0A8X. B2 formalization uses Mathlib HomComplex.Cochain.equivHomotopy and δ_ofHomotopy."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "homologyπ|equivHomotopy|homotopic_iff",
-   "results": "Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean; Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/Refinements.lean; Mathlib/CategoryTheory/Abelian/Refinements.lean",
-   "date": "2026-10-12",
-   "verdict": "Related generic homology and homotopy APIs; no localized sheaf boundary comparison."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Hom complex zero homology is morphisms in homotopy category",
-   "results": "HomotopyCategory.quotient_map_eq_zero_iff; DerivedCategory.Q_map_eq_of_homotopy; HomotopyCategory.isZero_quotient_obj_iff; HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy; HomotopyCategory.homotopyOfEq; HomotopyCategory.homotopyOutMap; HomotopyCategory.quot_mk_eq_quotient_map; HomotopyCategory.quotient_inverts_homotopyEquivalences",
-   "date": "2026-10-12",
-   "verdict": "Related generic homology and homotopy APIs; no localized sheaf boundary comparison."
-  },
-  {
-   "tool": "loogle",
-   "query": "HomologicalComplex.homologyπ",
-   "results": "HomologicalComplex.homologyπ; HomologicalComplex.instEpiHomologyπ; HomologicalComplex.natTransHomologyπ_app; HomologicalComplex.homology_π_ι; CochainComplex.isIso_homologyπ₀; HomologicalComplex.isIso_homologyπ; HomologicalComplex.toCycles_comp_homologyπ; HomologicalComplex.homology_π_ι_assoc",
-   "date": "2026-10-12",
-   "verdict": "Related generic homology and homotopy APIs; no localized sheaf boundary comparison."
-  },
-  {
-   "tool": "leansearch",
-   "query": "boundaries in the sheaf Hom complex correspond to null homotopic localized chain maps",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-12",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Algebra.Homology.LocalizedHomComplexHomology",
-  "date": "2026-10-13",
-  "group": "X2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-derived-pullback-tensor-hom",
-   "place": "Degree-zero localized Hom comparison: the differential from degree -1 has exactly the null-homotopy formula.",
-   "via": [
-    "lem-pur-localized-hom-complex-homology-aux",
-    "lem-pur-localized-hom-complex-homotopy",
-    "lem-pur-rhom-into-kinjective-local"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.LocalizedHomComplexBoundaries",
-  "file": "lean/Sheaf/Algebra/Homology/LocalizedHomComplexBoundaries.lean",
-  "declaration": "CategoryTheory.localizedHomComplex_nullHomotopy_iff_boundary",
-  "statement": "theorem localizedHomComplex_nullHomotopy_iff_boundary\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)\n    (hzero : Functor.PreservesZeroMorphisms\n      (SheafOfModules.overFunctor.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let H := homComplex (R := R) L I\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj H\n    let := hzero\n    let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤\n        CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ :=\n      (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ)\n    ∀ (z : S.cycles 0) (f : res.obj L ⟶ res.obj I),\n      (∀ (p : ℤ) (W : (Over U)ᵒᵖ),\n        (f.f p).val.app W =\n          (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) →\n      (Nonempty (Homotopy f 0) ↔ ∃ x : S.X (-1), S.toCycles (-1) 0 x = z)",
-  "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
-  "result": "pass",
-  "landing": "20261013T002359-L-2377184",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
-  "result": "pass",
-  "landing": "20261013T025257-L-3421344",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

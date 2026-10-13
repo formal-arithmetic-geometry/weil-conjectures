@@ -16,9 +16,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-import Sheaf.AlgebraicGeometry.ClosedImmersionExtIdealAction
-import Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtPullback
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
+import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
+import Sheaf.RingTheory.KoszulConormalBasis
 
 @[expose] public section
 
@@ -27,28 +29,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
-
-open MonoidalCategory in
-private theorem closedImmersion_unit_isIso_of_idealAction_eq_zero
-    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (F : Y.Modules)
-    (hF : i.ker.toModulesι ▷ F ≫ (λ_ F).hom = 0) :
-    let adj := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction i)
-    IsIso (adj.unit.app F) := by
-  let adj := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction i)
-  let μ : i.ker.toModules ⊗ F ⟶ F := i.ker.toModulesι ▷ F ≫ (λ_ F).hom
-  obtain ⟨hepi, w, ⟨hk⟩⟩ := Scheme.Modules.closedImmersion_unit_kernel i F
-  have hι : image.ι μ = 0 := by
-    apply (cancel_epi (factorThruImage μ)).mp
-    simpa only [image.fac, comp_zero] using hF
-  have : Epi (adj.unit.app F) := hepi
-  have : Mono (adj.unit.app F) := by
-    apply Preadditive.mono_of_cancel_zero
-    intro T a ha
-    obtain ⟨b, hb⟩ := KernelFork.IsLimit.lift' hk a ha
-    change b ≫ image.ι μ = a at hb
-    exact hb.symm.trans
-      ((congrArg (fun c : image μ ⟶ F ↦ b ≫ c) hι).trans (comp_zero))
-  exact isIso_of_mono_of_epi (adj.unit.app F)
 
 /-- In nonnegative degree, the scalar Ext sheaf is the direct image of the determinant
 on the degree-q rank stratum. This identifies sheaves, without reconstructing a derived object.
@@ -108,24 +88,7 @@ theorem koszulRegularImmersion_extSheaf_nonnegative
         (Scheme.Modules.locallyRankedExteriorTerm
           (SheafOfModules.homObj (R := Z.sheaf)
             ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
-            (SheafOfModules.unit Z.ringCatSheaf)) r q)) := by
-  open MonoidalCategory in
-  let F : Y.Modules := (DerivedCategory.homologyFunctor
-      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj
-        ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj
-          (op ((DerivedCategory.singleFunctor
-            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
-              ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))),
-            (DerivedCategory.singleFunctor
-              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
-                (SheafOfModules.unit Y.ringCatSheaf)))
-  let adj := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction i)
-  have hF : i.ker.toModulesι ▷ F ≫ (λ_ F).hom = 0 :=
-    closedImmersion_ext_idealAction_eq_zero i q
-  have : IsIso (adj.unit.app F) :=
-    closedImmersion_unit_isIso_of_idealAction_eq_zero i F hF
-  obtain ⟨e⟩ := koszulRegularImmersion_ext_pullback i hregular r hr hq
-  exact ⟨asIso (adj.unit.app F) ≪≫ (Scheme.Modules.pushforward i).mapIso e⟩
+            (SheafOfModules.unit Z.ringCatSheaf)) r q)) := by sorry
 
 
 end AlgebraicGeometry
