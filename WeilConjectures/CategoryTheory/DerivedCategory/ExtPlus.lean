@@ -153,8 +153,9 @@ lemma preservesColimitsOfShape_shiftedHom (A : C) (q : ℤ)
   · have (N : C) : Subsingleton ((singleFunctor C 0).obj A ⟶ ((singleFunctor C 0).obj N)⟦q⟧) :=
       subsingleton_shiftedHom_of_neg A N q hq
     refine ⟨isColimitOfReflects (CategoryTheory.forget AddCommGrpCat)
-      (Types.FilteredColimit.isColimitOf' _ _ (fun x ↦ ?_) (fun i x y _ ↦ ⟨i, 𝟙 i, Subsingleton.elim (α := (singleFunctor C 0).obj A ⟶
-        ((singleFunctor C 0).obj (D.obj i))⟦q⟧) _ _⟩))⟩
+      (Types.FilteredColimit.isColimitOf' _ _ (fun x ↦ ?_) (fun i x y _ ↦
+        ⟨i, 𝟙 i, Subsingleton.elim (α := (singleFunctor C 0).obj A ⟶
+          ((singleFunctor C 0).obj (D.obj i))⟦q⟧) _ _⟩))⟩
     obtain ⟨j⟩ := IsFiltered.nonempty (C := J)
     exact ⟨j, 0, Subsingleton.elim (α := (singleFunctor C 0).obj A ⟶
       ((singleFunctor C 0).obj c.pt)⟦q⟧) _ _⟩

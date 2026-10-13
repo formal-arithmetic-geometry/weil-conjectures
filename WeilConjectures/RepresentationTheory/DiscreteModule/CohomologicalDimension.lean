@@ -36,7 +36,7 @@ coinduced modules, that `H²` vanishes on such a union. Finally the coinduced mo
 
 @[expose] public section
 
-universe w u
+universe w u v
 
 open CategoryTheory Limits Action
 
@@ -164,11 +164,11 @@ abbrev trivialZMod : DiscreteModule.{w} G :=
 
 /-- The additive map `𝔽_ℓ ⟶ X`, `1 ↦ x`, for `x` killed by `ℓ`. -/
 def zmodHom {A : Type*} [AddCommGroup A] (x : A) (hx : ℓ • x = 0) :
-    ULift.{max u w} (ZMod ℓ) →+ A :=
+    ULift.{v} (ZMod ℓ) →+ A :=
   (ZMod.lift ℓ ⟨zmultiplesHom _ x, by simp [hx]⟩).comp AddEquiv.ulift.toAddMonoidHom
 
 lemma zmodHom_intCast {A : Type*} [AddCommGroup A] (x : A) (hx : ℓ • x = 0) (n : ℤ) :
-    zmodHom.{w, u} ℓ x hx (ULift.up (n : ZMod ℓ)) = n • x := by
+    zmodHom.{v} ℓ x hx (ULift.up (n : ZMod ℓ)) = n • x := by
   change ZMod.lift ℓ ⟨zmultiplesHom A x, by simp [hx]⟩ ((n : ZMod ℓ)) = n • x
   rw [ZMod.lift_coe]
   simp
@@ -177,19 +177,19 @@ lemma zmodHom_intCast {A : Type*} [AddCommGroup A] (x : A) (hx : ℓ • x = 0) 
 def ofInvariant (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ • x = 0)
     (hxg : ∀ g : G, (X.obj.ρ g).hom x = x) : trivialZMod.{w} G ℓ ⟶ X :=
   ObjectProperty.homMk
-    { hom := AddCommGrpCat.ofHom (zmodHom.{w, u} ℓ x hx)
+    { hom := AddCommGrpCat.ofHom (zmodHom.{max u w} ℓ x hx)
       comm g := AddCommGrpCat.ext fun a ↦ by
         obtain ⟨n, hn⟩ := ZMod.intCast_surjective a.down
         obtain rfl : a = ULift.up (n : ZMod ℓ) := ULift.ext _ _ hn.symm
-        change zmodHom.{w, u} ℓ x hx (ULift.up (n : ZMod ℓ)) =
-          (X.obj.ρ g).hom (zmodHom.{w, u} ℓ x hx (ULift.up (n : ZMod ℓ)))
+        change zmodHom.{max u w} ℓ x hx (ULift.up (n : ZMod ℓ)) =
+          (X.obj.ρ g).hom (zmodHom.{max u w} ℓ x hx (ULift.up (n : ZMod ℓ)))
         rw [zmodHom_intCast, map_zsmul, hxg g] }
 
 omit [IsTopologicalGroup G] in
 lemma ofInvariant_apply_intCast (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ • x = 0)
     (hxg : ∀ g : G, (X.obj.ρ g).hom x = x) (n : ℤ) :
     (ofInvariant ℓ X x hx hxg).hom.hom.hom (ULift.up (n : ZMod ℓ)) = n • x :=
-  zmodHom_intCast.{w, u} ℓ x hx n
+  zmodHom_intCast.{max u w} ℓ x hx n
 
 omit [IsTopologicalGroup G] in
 lemma injective_ofInvariant (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ • x = 0)

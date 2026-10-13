@@ -324,8 +324,9 @@ theorem exactAt_cechComplex_of_baseChange [Finite ι] (P : Cᵒᵖ ⥤ AddCommGr
         ← LinearMap.comp_apply, LinearMap.lTensor_comp_rTensor, LinearMap.rTensor_comp_lTensor]
     refine LinearMap.exact_iff.2 (le_antisymm (fun t ht ↦ ?_) ?_)
     · rw [LinearMap.mem_ker] at ht
-      have ha (a : ι) := (LinearMap.exact_iff.1 (hexa a)).le (x := TensorProduct.piRight A A _ B t a)
-        (by rw [LinearMap.mem_ker, ← hcomm, ht, map_zero, Pi.zero_apply])
+      have ha (a : ι) :=
+        (LinearMap.exact_iff.1 (hexa a)).le (x := TensorProduct.piRight A A _ B t a)
+          (by rw [LinearMap.mem_ker, ← hcomm, ht, map_zero, Pi.zero_apply])
       choose s hs using ha
       refine ⟨(TensorProduct.piRight A A _ B).symm s, (TensorProduct.piRight A A _ B).injective ?_⟩
       funext a

@@ -70,19 +70,25 @@ lemma etaleRestrict_eq (F : X.Modules) {V W : X.Etale} (g : W ⟶ V) (φ : Etale
     W.hom (MorphismProperty.Over.w g) (MorphismProperty.Over.w g)).symm
 
 set_option maxHeartbeats 1000000 in
+-- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 lemma etaleRestrict_id (F : X.Modules) (V : X.Etale) (φ : EtaleSections F V) :
     etaleRestrict F (𝟙 V) φ = φ :=
   (etaleRestrict_eq F (𝟙 V) φ).trans
-    (FunctorToTypes.map_id_apply (etaleHom (X := X) (unitObj X) F) φ)
+    (show (etaleHom (X := X) (unitObj X) F).map (𝟙 (op V)) φ = φ from
+      Functor.map_id_apply (F := TypeCat.Fun) (carrier := id) (etaleHom (X := X) (unitObj X) F)
+        (op V) φ)
 
 set_option maxHeartbeats 1000000 in
+-- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in
 lemma etaleRestrict_comp (F : X.Modules) {V W T : X.Etale} (g : W ⟶ V) (f : T ⟶ W)
     (φ : EtaleSections F V) :
     etaleRestrict F (f ≫ g) φ = etaleRestrict F f (etaleRestrict F g φ) :=
   (etaleRestrict_eq F (f ≫ g) φ).trans
-    ((FunctorToTypes.map_comp_apply (etaleHom (X := X) (unitObj X) F) g.op f.op φ).trans
+    ((show (etaleHom (X := X) (unitObj X) F).map (g.op ≫ f.op) φ = _ from
+      Functor.map_comp_apply (F := TypeCat.Fun) (carrier := id)
+        (etaleHom (X := X) (unitObj X) F) g.op f.op φ).trans
       ((etaleRestrict_eq F f _).trans
         (congrArg (fun x ↦ (etaleHom (X := X) (unitObj X) F).map f.op x)
           (etaleRestrict_eq F g φ))).symm)

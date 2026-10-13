@@ -10,7 +10,7 @@ public import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
@@ -267,7 +267,8 @@ lemma cohomologyForget₂AddEquiv_cohomologyRestrictOver {Y Z : Scheme.{u}} (pY 
           (Ext.mk₀ (inv (upperStarForget₂Comparison (ULift.{u + 1} ℤ) f _))) (add_zero q))
         (zero_add q) := by
     rw [Ext.mapExactFunctor_mapExactFunctor, Ext.mapExactFunctor_mapExactFunctor,
-      Ext.mapExactFunctor_eq_of_iso (asIso (upperStarForget₂ (ULift.{u + 1} ℤ) f).natTrans)]
+      Ext.mapExactFunctor_eq_of_iso
+        (asIso (upperStarForget₂ (ULift.{u + 1} ℤ) f).natTrans).symm]
     simp [upperStarForget₂_natTrans_app]
   have hres : cohomologyRestrictOver (ULift.{u + 1} ℤ) (f ≫ pZ) pZ f rfl G q x =
       (Ext.mk₀ ((constantSheafCompUpperStarIso (ULift.{u + 1} ℤ) f).inv.app _)).comp
