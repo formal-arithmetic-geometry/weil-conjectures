@@ -1,0 +1,128 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), Zariski locality and global torsion conclusion"
+ },
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationDescent",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "new-stage3-torsion-controlled-algebraization-descent-bound",
+ "title": "Uniform global torsion bound after descent",
+ "statement": "Let X be Noetherian, J ideal data, H and F coherent modules, and a:F→H. Let U_i be an open cover. Assume that for each i a positive power of J restricted to U_i annihilates both the restriction of kernel(a) and the restriction of cokernel(a). Then a single positive power of J annihilates kernel(a) and cokernel(a) globally.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Coherence gives quasi-coherence of F and H, and the existing kernel and cokernel theorems give quasi-coherence of their kernel and cokernel. Choose local exponents; compactness supplies a finite subcover. Set s = max 1 (sup of its exponents). For each module and cover member, formalModuleQuotient_factor applied to the identity factors the s-power inclusion through the local t-power inclusion. The latter product is zero, so the former monic inclusion is zero and its source is zero. idealPowerProduct_restrict_isZero_iff transfers this to the restriction of the global product. hom_eq_zero_of_restrict applied to the identity on the finite subcover proves the global product zero. The empty finite subcover uses s=1.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-weil-pbc-formal-module-ideal-power-factor",
+    "lem-weil-pbc-ideal-power-product-restriction-zero",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-formal-module-ideal-power-factor",
+  "lem-weil-pbc-ideal-power-product-restriction-zero",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), finite-cover torsion conclusion; explicit proof using existing power factorization and restriction-zero comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ideal product vanishes locally on an open cover implies vanishes globally",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZero, kernel",
+   "results": "Loogle returned 0 hits (unknown identifier IsZero).",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform global torsion bound after descent",
+   "results": "LeanFinder returned open-cover locality and nilpotence lemmas, including Scheme.isNilpotent_of_isNilpotent_cover; no module-product annihilation or torsion-controlled gluing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsionControlled_algebraization_descent",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsion-controlled-algebraization-descent",
+   "place": "decomposition of the descent proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationDescentBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionControlledAlgebraizationDescentBound.lean",
+  "declaration": "AlgebraicGeometry.torsionControlled_algebraization_descent_bound",
+  "statement": "theorem torsionControlled_algebraization_descent_bound\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    (H F : CoherentModules X) (a : F ⟶ H)\n    (ι : Type u) (U : ι → X.Opens) (hcover : (⨆ i, U i) = ⊤)\n    (hlocal : ∀ i, ∃ s : ℕ, 1 ≤ s ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower (J.comap (U i).ι).toModulesι s).2\n          ((Scheme.Modules.restrictFunctor (U i).ι).obj (kernel a.hom))) ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower (J.comap (U i).ι).toModulesι s).2\n          ((Scheme.Modules.restrictFunctor (U i).ι).obj (cokernel a.hom)))) :\n      ∃ s : ℕ, 1 ≤ s ∧\n        IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n          (kernel a.hom)) ∧\n        IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n          (cokernel a.hom))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T022429-L-3219585",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T022429-L-3219585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

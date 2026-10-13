@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationDescentGluing
+import Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationDescentBound
 
 /-! # Descent of already constructed torsion-controlled triples
 
@@ -75,6 +77,11 @@ theorem torsionControlled_algebraization_descent
         IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2
           (kernel a.hom)) ∧
         IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2
-          (cokernel a.hom))) := by sorry
+          (cokernel a.hom))) := by
+  obtain ⟨F, a, β, hfactor, hbound⟩ :=
+    torsionControlled_algebraization_descent_gluing J H N δ ι U hcover Hlocal hHlocal γ hγ hlocal
+  obtain ⟨s, hs, hsk, hsc⟩ :=
+    torsionControlled_algebraization_descent_bound J H F a ι U hcover hbound
+  exact ⟨F, a, β, hfactor, ⟨s, hs, hsk, hsc⟩⟩
 
 end AlgebraicGeometry
