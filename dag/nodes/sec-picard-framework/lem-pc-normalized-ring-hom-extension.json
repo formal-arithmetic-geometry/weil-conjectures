@@ -15,35 +15,31 @@
  ],
  "proof": [
   {
-   "text": "For every coordinate p of degree n, define the B-linear extended evaluation by (b tensor f)(c tensor x)=bc tensor f_p(x). Additivity, A-linearity of f_p and commutativity of B verify both tensor balancing relations. Slice restrictions commute with this formula. Transport through the sheafification unit and the specified object equalities of extension. Compose with each of the shared Hom-complex product projections, then use the target product universal property to assemble degree maps. This uses no assertion that tensor commutes with infinite products.",
+   "text": "For every degree use ringHomExtension_degrees_exists: extend source projections, compose with ordinary tensor-Hom, and lift through the target limiting fan. Choose the resulting degree maps and their formulas.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom"
+    "lem-pc-ring-hom-extension-degrees"
    ],
    "elementary": true
   },
   {
-   "text": "Verify the chain identity after every target product projection and on pure tensors. The given equality for F.map identifies extension of the differentials with their ordinary scalar-extension maps. In adjacent degrees the two contributions on both sides are bc tensor d_Q(f_p(x)) and minus (-1)^n bc tensor f_{p+1}(d_P(x)); additivity gives equality of their difference. In other degrees both differentials are zero. Pure tensors generate scalar extension on this bottom-topology site, and equality of product coordinates implies equality of the degree maps. Thus the assembled maps form the required chain map and have exactly the prescribed normalization.",
+   "text": "Apply ringHomExtension_differential to the chosen degree maps and formulas. Fill the f and comm' fields of HomologicalComplex.Hom with these maps and identities. Their normalization formulas supply the required evaluation clause.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pur-sheaf-tensor-product"
+    "lem-pc-ring-hom-extension-differential"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
-  "def-pur-sheaf-hom",
-  "def-pur-sheaf-tensor-product"
+  "lem-pc-ring-hom-extension-degrees",
+  "lem-pc-ring-hom-extension-differential"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "T3",
+  "group": "Q3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "equation-base-change-RHom; chain-level realization via sites-cohomology.tex, section-hom-complexes (Tag 0A8X)",
-  "note": "Explicit chain-level construction underlying the canonical derived map; the differential calculation is expanded here."
+  "note": "Construct degree maps and assemble the chain map using differential compatibility. Shared definitions relocated unchanged."
  },
  "mathlib_searches": [
   {
@@ -122,12 +118,6 @@
   "by": "T3",
   "date": "2026-10-13",
   "declarations": [
-   "CategoryTheory.RingSiteModules",
-   "CategoryTheory.ringSiteMap",
-   "CategoryTheory.ringHomComplexProjection",
-   "CategoryTheory.ringHomEvaluate",
-   "CategoryTheory.ringExtensionComplex",
-   "CategoryTheory.ringExtensionPure",
    "CategoryTheory.normalizedRingHomExtension_exists"
   ]
  },
@@ -144,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-4fee8",
-  "group": "T3",
+  "reviewer": "X-702c1",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T111927-L-3064663",
+  "landing": "20261013T151135-L-877768",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, unchanged relocated definitions, proof and remaining chain-map theorem with their DAG records; verified declared users, import compatibility, compilation and axioms."
+  "note": "independent Codex review: Matched Lean signatures, relocated definitions, degree construction and remaining differential lemma with the DAG and change record; all four modules and direct importer PerfectRHomBaseChangeMap compile cleanly, with permitted axioms and only the reported sorryAx dependency."
  }
 }

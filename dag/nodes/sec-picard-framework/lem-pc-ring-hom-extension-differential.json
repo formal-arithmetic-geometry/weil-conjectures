@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-ring-hom-extension-differential",
+ "kind": "statement",
+ "title": "Differential compatibility of normalized Hom degree maps",
+ "statement": "Let $A,B$ be commutative rings, $\\varphi:A\\to B$ a ring homomorphism, and $\\mathcal M_A,\\mathcal M_B$ the module-sheaf categories on the one-object bottom-topology site [def-weil-sheaf-of-modules-category]. Let $F:\\mathcal M_A\\to\\mathcal M_B$ be additive, with equalities $h_M:F(M)=\\operatorname{changeOfRings}_{\\varphi}(M)$ and $F(a)=h_M\\circ\\operatorname{changeOfRingsHom}_{\\varphi}(a)\\circ h_N^{-1}$ for every morphism $a:M\\to N$, where composition is written in diagrammatic order [def-pur-sheaf-tensor-product]. Let $F^\\bullet$ be termwise extension, $H_A,H_B$ the shared Hom complexes with their chosen product projections into internal Homs [def-pur-hom-complex, def-pur-sheaf-hom], and let $\\operatorname{pure}_M(b,x)$ and $\\operatorname{ev}_p$ denote the transported pure tensor and identity-slice evaluation [def-pc-ring-hom-extension-shared-definitions]. For arbitrary cochain complexes $P,Q$ in $\\mathcal M_A$, suppose morphisms $t_n:F(H_A(P,Q)^n)\\to H_B(F^\\bullet P,F^\\bullet Q)^n$ are supplied for every $n\\in\\mathbf Z$, satisfying $\\operatorname{ev}_p(t_n(\\operatorname{pure}_{H_A(P,Q)^n}(b,f)))(\\operatorname{pure}_{P^p}(c,x))=\\operatorname{pure}_{Q^{p+n}}(bc,\\operatorname{ev}_p(f)(x))$ for every $n,p\\in\\mathbf Z$, site object $U$, $b,c\\in B$, $f\\in H_A(P,Q)^n(U)$ and $x\\in P^p(U)$. Then for all $n,m\\in\\mathbf Z$, $t_n\\circ d_{H_B}^{n,m}=d_{F^\\bullet H_A}^{n,m}\\circ t_m$, in diagrammatic composition order. This asserts compatibility of the supplied maps, not their existence.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "equation-base-change-RHom; chain-level realization via sites-cohomology.tex, section-hom-complexes (Tag 0A8X)"
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-ring-hom-extension-shared-definitions",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Verify the chain identity after every target product projection and on pure tensors. The given equality for F.map identifies extension of the differentials with their ordinary scalar-extension maps. In adjacent degrees the two contributions on both sides are bc tensor d_Q(f_p(x)) and minus (-1)^n bc tensor f_{p+1}(d_P(x)); additivity gives equality of their difference. In other degrees both differentials are zero. Pure tensors generate scalar extension on this bottom-topology site, and equality of product coordinates implies equality of the degree maps. This proves differential compatibility of the supplied normalized maps; no new maps are chosen.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "equation-base-change-RHom; chain-level realization via sites-cohomology.tex, section-hom-complexes (Tag 0A8X)",
+  "note": "Realizes a part of the chain-level construction and verification of the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension has a normalized comparison on each degree of a Hom complex",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical scalar extension tensor hom map for arbitrary modules",
+   "results": "LinearMap.baseChangeHom, IsBaseChange.linearMapRightBaseChangeHom, LinearMap.liftBaseChange, ModuleCat.ExtendScalars.map_tmul; none assembles the chosen Hom-complex product or states its differential compatibility.",
+   "date": "2026-10-13",
+   "verdict": "Use ordinary tensor-Hom infrastructure; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Cc]hange|[Cc]hange.*homComplex",
+   "results": "0 hits. RingHomExtensionTransport depends on the parent theorem through PerfectRHomBaseChangeMap.",
+   "date": "2026-10-13",
+   "verdict": "No independent existing theorem for the two steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.NormalizedRingHomExtension",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Normalized ring Hom extension: Differential compatibility of normalized Hom degree maps",
+   "via": [
+    "lem-pc-normalized-ring-hom-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingHomExtensionDifferential",
+  "file": "lean/Sheaf/Algebra/Homology/RingHomExtensionDifferential.lean",
+  "declaration": "CategoryTheory.ringHomExtension_differential",
+  "statement": "theorem ringHomExtension_differential {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (F : RingSiteModules A ⥤ RingSiteModules B) (h : ∀ M, F.obj M = SheafOfModules.changeOfRings (ringSiteMap φ) M) (hm : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom (ringSiteMap φ) M f ≫ eqToHom (h N).symm) (hF : F.Additive) (P Q : CochainComplex (RingSiteModules A) ℤ) (t : ∀ n : ℤ, F.obj ((homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n) ⟶ (homComplex (R := CochainComplex.onePointRingSheaf B) ((ringExtensionComplex F hF).obj P) ((ringExtensionComplex F hF).obj Q)).X n) (ht : ∀ (n p : ℤ) (U : (Discrete PUnit.{u + 1})ᵒᵖ) (b c : B) (f : (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n |>.val.obj U) (x : (P.X p).val.obj U), ringHomEvaluate ((ringExtensionComplex F hF).obj P) ((ringExtensionComplex F hF).obj Q) n p U ((t n).val.app U (ringExtensionPure φ F h _ U b f)) (ringExtensionPure φ F h (P.X p) U c x) = ringExtensionPure φ F h (Q.X (p + n)) U (b * c) (ringHomEvaluate P Q n p U f x)) : ∀ n m : ℤ, t n ≫ (homComplex (R := CochainComplex.onePointRingSheaf B) ((ringExtensionComplex F hF).obj P) ((ringExtensionComplex F hF).obj Q)).d n m = ((ringExtensionComplex F hF).obj (homComplex (R := CochainComplex.onePointRingSheaf A) P Q)).d n m ≫ t m",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-702c1",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T151135-L-877768",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-702c1",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T151135-L-877768",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, relocated definitions, degree construction and remaining differential lemma with the DAG and change record; all four modules and direct importer PerfectRHomBaseChangeMap compile cleanly, with permitted axioms and only the reported sorryAx dependency."
+ }
+}
