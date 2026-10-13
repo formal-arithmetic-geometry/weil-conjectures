@@ -13287,7 +13287,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:10 L: merged deliver/C3/Sheaf.AlgebraicGeometry.Cohomology.CartesianUnitCohomologyPullbackComposition (stage 3; reviewer PASS; first push; landing 20261013T181054-L-2598405 (interface); batch 20261013T181050; modules 3; new nodes 2; change records: coord/changes/cartesian-unit-cohomology-local-elaboration.md)
 - 18:10 L: merged deliver/D4/Sheaf.Paper.GlobalTensorPullbackDerivedData (stage 3; reviewer PASS; first push; landing 20261013T181054-L-2598598 (interface); batch 20261013T181050; modules 3; new nodes 2)
 - 18:10 L: merged deliver/E1/Sheaf.Paper.FiniteStructureProductCore (stage 3; reviewer PASS; first push; landing 20261013T181055-L-2598894 (interface); batch 20261013T181050; modules 2; new nodes 1)
-- 18:10 L: merged deliver/F1/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (stage 3; reviewer PASS; after a return; landing 20261013T181056-L-2599078 (proof); batch 20261013T181050; modules 1; new nodes 1)
 - 18:10 L: merged deliver/F4/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureCoproduct (stage 3; reviewer PASS; first push; landing 20261013T181056-L-2599222 (proof); batch 20261013T181050; modules 1; new nodes 1)
 - 18:10 L: merged deliver/G2/Sheaf.AlgebraicGeometry.AffineSpectrumOrdinaryComparisonSquare (stage 3; reviewer PASS; first push; landing 20261013T181057-L-2599440 (interface); batch 20261013T181050; modules 3; new nodes 2)
 - 18:10 L: merged deliver/G4/Sheaf.Algebra.Homology.HomologyEvaluationLocalIso (stage 3; reviewer PASS; first push; landing 20261013T181057-L-2599640 (interface); batch 20261013T181050; modules 2; new nodes 1)
@@ -13320,7 +13319,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:11 L: merged deliver/M3/Sheaf.AlgebraicGeometry.AffineSpectrumPullbackSquareCoherence (stage 3; reviewer PASS; first push; landing 20261013T181114-L-2604725 (proof); batch 20261013T181050; modules 1; new nodes 0)
 - 18:11 L: merged deliver/M4/Sheaf.RingTheory.StrictHenselizationDimension (stage 3; reviewer PASS; first push; landing 20261013T181115-L-2604958 (interface); batch 20261013T181050; modules 1; new nodes 0; change records: coord/changes/strict-henselization-dimension-proof-imports.md)
 - 18:11 L: merged deliver/N3/Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapTorsionKernel (stage 3; reviewer PASS; first push; landing 20261013T181115-L-2605164 (proof); batch 20261013T181050; modules 1; new nodes 0)
-- 18:11 L: merged deliver/N3/Sheaf.AlgebraicGeometry.PicardModuleCechExternalPairing (stage 3; reviewer PASS; first push; landing 20261013T181116-L-2605423 (interface); batch 20261013T181050; modules 2; new nodes 2; change records: coord/changes/picard-module-cech-external-pairing-restore.md)
 - 18:11 L: merged deliver/N3/Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangePrefix (stage 3; reviewer PASS; first push; landing 20261013T181116-L-2605575 (proof); batch 20261013T181050; modules 1; new nodes 0)
 - 18:11 L: merged deliver/N3/Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangeTargetTranspose (stage 3; reviewer PASS; first push; landing 20261013T181117-L-2605680 (proof); batch 20261013T181050; modules 1; new nodes 0)
 - 18:11 L: merged deliver/P1/Sheaf.AlgebraicGeometry.AffineBasisDualMatrix (stage 3; reviewer PASS; first push; landing 20261013T181118-L-2605901 (proof); batch 20261013T181050; modules 1; new nodes 0)
@@ -13350,3 +13348,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:35 L: returned deliver/D3/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric (reviewer RETURN: (reviewer X-4e1f8, head 4e1f8ec54) E2 (brief point 4): affine_torsor_fixed_orbits_geometric remains false. Take R = H = )
 - 18:39 L: returned deliver/Q1/Sheaf.CategoryTheory.SiteSystemStrictificationData (reviewer RETURN: (reviewer X-7ed24, head 7ed24b610) E2 (brief §4): SiteSystemStrictification.lean:133 introduces `sorry` for a false stat)
 - 18:40 L: returned deliver/P1/Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare (reviewer RETURN: (reviewer X-a8638, head a863818d4) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Aff)
+
+- 02:41 L: batch 20261013T181050 dependency take-out
