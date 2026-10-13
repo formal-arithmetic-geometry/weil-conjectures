@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-affine-ideal-intersection-inclusion",
+ "kind": "statement",
+ "title": "Affine comparison of an ideal-product intersection inclusion",
+ "statement": "Let X be a scheme [def-pc-scheme], F and G quasi-coherent O_X-modules [pqf-def-coherent, def-weil-sheaf-of-modules-category], g:G \\to F a monomorphism, I a quasi-coherent ideal sheaf [def-sbc-closed-immersion-ideal-sheaf], U an affine open of X, and m,n nonnegative integers. Products and powers are the multiplication images and recursive powers of [lem-weil-pbc-ideal-module-product-stalk]. Suppose I(U)^m F(U) \\cap \\operatorname{image}(g(U)) is contained in g(U)(I(U)^n G(U)). Then for every open W contained in U, the intersection of the section ranges of I^m F \\to F and G \\to F is contained in the section range of I^n G \\to G \\to F. There is no Noetherian, coherence, finiteness or existence-of-a-bound hypothesis.",
+ "source": {
+  "document": "Stacks Project, coherent.tex and schemes.tex",
+  "place": "Tag 01YA, affine reduction in the proof; Tags 01I8 and 01IC, tensor and exact affine sheaf comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "On U, the ideal powers and their multiplication images on F and G are quasi-coherent, and their section ranges identify with the ordinary ideal-power multiples, including power zero as the unit ideal.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize the intersection as the kernel of G -> F/(I^m F). The kernel and quotient are quasi-coherent. On U the section module of this kernel is the inverse image under g(U) of I(U)^m F(U); its image in F(U) is the stated intersection. The affine exact sheaf comparison identifies the inclusion into F with the inclusion of this section submodule.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The algebraic inclusion defines a linear factorization through the image of I(U)^n G(U). Under the affine module/sheaf correspondence from Tags 01I8 and 01IC this gives a factorization of the corresponding subsheaf inclusions. Restrict it to W. Sections in the two ranges define a section of the pullback intersection by its universal property. Applying the factorization gives a section of I^n G mapping to the original section. Thus the required range inclusion holds, including empty opens and zero exponents.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 01YA, 01I8 and 01IC",
+  "place": "Fixed-exponent affine inclusion specialization of the geometric comparison in the proof of 01YA; no Artin-Rees or uniform bound used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine quasi coherent sheaf inclusion of ideal products follows from inclusion of section submodules",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inclusion of quasi coherent submodules on an affine scheme is equivalent to inclusion of their global sections",
+   "results": "Scheme.IdealSheafData.le_of_isAffine, le_def, le_of_iSup_eq_top; these compare ideal sheaves only, not arbitrary module intersections.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine intersection inclusion; ideal intersection inclusion; artin_rees_affine_comparison; exists_pow_inf_eq_pow_smul",
+   "results": "No blueprint node matches ideal intersection inclusion. Existing ArtinReesAffineComparison gives an equality for an Artin-Rees identity, not the general inclusion stated here; its source import closure reaches the assigned module. Mathlib Filtration gives only module Artin-Rees.",
+   "date": "2026-10-13",
+   "verdict": "no usable exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentKernelIdealIntersectionBound",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 01YB kernel Artin-Rees argument: convert fixed-exponent affine module inclusions into sheaf inclusions",
+   "via": [
+    "lem-pc-coherent-kernel-ideal-intersection-bound",
+    "lem-pc-ideal-power-tensor-image-lift",
+    "lem-pc-closed-structure-ambient-ideal-extension",
+    "lem-pc-local-closed-ideal-map-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineIdealIntersectionInclusion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineIdealIntersectionInclusion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_ideal_intersection_inclusion",
+  "statement": "theorem affine_ideal_intersection_inclusion {X : Scheme.{u}}\n    (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent]\n    (g : G ⟶ F) [Mono g] (I : X.IdealSheafData) (U : X.affineOpens) (m n : ℕ)\n    (hmodule : I.ideal U ^ m • (⊤ : Submodule Γ(X, U.1) Γ(F, U.1)) ⊓\n        LinearMap.range (g.val.app (.op U.1)).hom ≤\n      Submodule.map (g.val.app (.op U.1)).hom\n        (I.ideal U ^ n • (⊤ : Submodule Γ(X, U.1) Γ(G, U.1)))) :\n    ∀ W : X.Opens, W ≤ U.1 →\n      Set.range ((idealModuleProductι (idealSheafPower I.toModulesι m).2 F).app W) ∩\n          Set.range (g.app W) ⊆\n        Set.range ((idealModuleProductι (idealSheafPower I.toModulesι n).2 G ≫ g).app W)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100058-L-2477997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100058-L-2477997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
