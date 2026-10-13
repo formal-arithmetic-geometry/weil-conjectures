@@ -33,52 +33,34 @@
  ],
  "proof": [
   {
-   "text": "*Set-up: the identifications and the module structures.* $\\Mod(\\mathcal O_Y)$ and $\\Mod(\\mathcal O_X)$ have enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], and $H^p(Y,-)$ is the $p$-th right derived functor of the additive functor $\\Gamma(Y,-)$ on $\\Mod(\\mathcal O_Y)$ [pqf-def-cohomology]. So [lem-weil-pbc-derived-functor-map-via-lift] (with $v=\\Gamma(Y,-)$) gives, for every injective resolution $s_{\\mathcal G}:\\mathcal G\\to\\mathcal J^\\bullet$ with $\\mathcal J^n=0$ for $n<0$, an isomorphism $\\iota_{\\mathcal J}:H^p(Y,\\mathcal G)\\xrightarrow{\\sim}H^p(\\Gamma(Y,\\mathcal J^\\bullet))$, and for every morphism $u:\\mathcal G\\to\\mathcal G_1$, every such resolution $\\mathcal G_1\\to\\mathcal J_1^\\bullet$ and every morphism of complexes $t:\\mathcal J^\\bullet\\to\\mathcal J_1^\\bullet$ with $t^0s_{\\mathcal G}=s_{\\mathcal G_1}u$ one has $H^p(u)=\\iota_{\\mathcal J_1}^{-1}H^p(\\Gamma(Y,t))\\iota_{\\mathcal J}$; likewise on $X$. The identifications $H^p(Y,\\mathcal G)=H^p(\\Gamma(Y,\\mathcal J^\\bullet))$, $H^p(X,\\mathcal F)=H^p(\\Gamma(X,\\mathcal I^\\bullet))$ of [def-weil-pbc-module-cohomology-fmap] are $\\iota_{\\mathcal J}$, $\\iota_{\\mathcal I}$, so for the choices $(\\mathcal I^\\bullet,\\mathcal J^\\bullet,\\mathcal J'^\\bullet,\\lambda,\\beta)$ of that definition $\\varphi^*=\\iota_{\\mathcal I}^{-1}\\circ H^p(\\mu)^{-1}\\circ H^p(\\Gamma(Y,\\beta))\\circ\\iota_{\\mathcal J}$ with $\\mu=\\Gamma(Y,\\lambda)$. The module structure of the statement: each $\\Gamma(Y,\\mathcal J^n)=\\mathcal J^n(Y)$ is an $\\mathcal O_Y(Y)$-module and the differentials $d^n_Y$ are $\\mathcal O_Y(Y)$-linear (components of morphisms of $\\mathcal O_Y$-modules [def-weil-sheaf-of-modules-category]), so cycles, boundaries and $H^p(\\Gamma(Y,\\mathcal J^\\bullet))$ are $\\mathcal O_Y(Y)$-modules, and $H^p(Y,\\mathcal G)$ gets the structure transported by $\\iota_{\\mathcal J}$. It does not depend on $\\mathcal J^\\bullet$: for a second resolution $\\mathcal G\\to\\mathcal J_2^\\bullet$, [lem-weil-pbc-lift-along-injective-quasi-iso] (applied to the augmentation $\\mathcal G[0]\\to\\mathcal J^\\bullet$, a termwise monomorphism and quasi-isomorphism, and to $s_{\\mathcal G_2}:\\mathcal G[0]\\to\\mathcal J_2^\\bullet$) gives $t:\\mathcal J^\\bullet\\to\\mathcal J_2^\\bullet$ with $t^0s_{\\mathcal G}=s_{\\mathcal G_2}$, and the displayed formula for $u=\\mathrm{id}_{\\mathcal G}$ ($H^p(\\mathrm{id})=\\mathrm{id}$, $H^p(Y,-)$ being a functor) gives $\\iota_{\\mathcal J_2}=H^p(\\Gamma(Y,t))\\circ\\iota_{\\mathcal J}$, where $H^p(\\Gamma(Y,t))$ is $\\mathcal O_Y(Y)$-linear because every $t^n_Y$ is. The same holds on $X$ with $\\mathcal O_X(X)$.",
+   "text": "Global sections is evaluation at the whole space and preserves finite limits. Use enoughInjectives on X and Y and Mathlib Functor.rightDerivedZeroIsoSelf to construct the canonical isomorphisms eG and eF, whose inverses are the canonical augmentations.",
    "uses": [
     "lem-weil-pbc-scheme-modules-enough-injectives",
     "pqf-def-cohomology",
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "def-weil-pbc-module-cohomology-fmap",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-lift-along-injective-quasi-iso"
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): 'The complex on the bottom left represents $R\\Gamma(Y,\\mathcal G)$ and the complex on the top right represents $R\\Gamma(X,\\mathcal F)$'; Equation 01F9 (equation-functorial-derived) places the arrow in $D^+(\\mathcal O_Y(Y))$; comparison of resolutions: literature/stacks-project/derived.tex Lemma 013P (lemma-morphisms-lift)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Clause (2), degree zero.* $\\Gamma(Y,-)$ is additive and preserves kernels (kernels in $\\Mod(\\mathcal O_Y)$ are computed sectionwise [def-weil-sheaf-of-modules-category]), so it is left exact [def-sp-left-exact-additive], and by [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2) the map $\\mathcal G(Y)\\to H^0(\\Gamma(Y,\\mathcal J^\\bullet))=\\ker(d^0_Y)$, $s\\mapsto[s_{\\mathcal G}(s)]$, is an isomorphism (since $\\mathcal J^{-1}=0$, $H^0$ is the group of $0$-cycles); likewise $\\mathcal F(X)\\cong H^0(\\Gamma(X,\\mathcal I^\\bullet))$, $t\\mapsto[s_{\\mathcal F}(t)]$. These are the identifications of the statement (composed with $\\iota^{-1}$; by Step 1 a change of resolution $t:\\mathcal J^\\bullet\\to\\mathcal J_2^\\bullet$ sends $[s_{\\mathcal G}(s)]$ to $[t^0s_{\\mathcal G}(s)]=[s_{\\mathcal G_2}(s)]$, so they do not depend on the resolution). Let $s\\in\\mathcal G(Y)$ and $t=\\varphi_Y(s)\\in(h_*\\mathcal F)(Y)=\\mathcal F(h^{-1}Y)=\\mathcal F(X)$ [def-pc-module-pullback]. The element $s_{\\mathcal F,X}(t)\\in\\mathcal I^0(X)$ is a $0$-cycle ($d^0s_{\\mathcal F}=0$), and, since $(h_*s_{\\mathcal F})_Y=s_{\\mathcal F,X}$ and $\\mu^0=\\lambda^0_Y$, $\\mu^0(s_{\\mathcal F,X}(t))=(\\lambda^0\\circ h_*(s_{\\mathcal F})\\circ\\varphi)_Y(s)=(\\beta^0\\circ s_{\\mathcal G})_Y(s)=\\beta^0_Y(s_{\\mathcal G,Y}(s))$ by the defining equation of $\\beta$ [def-weil-pbc-module-cohomology-fmap]. So $H^0(\\mu)[s_{\\mathcal F}(t)]=H^0(\\Gamma(Y,\\beta))[s_{\\mathcal G}(s)]$, i.e. $H^0(\\mu)^{-1}H^0(\\Gamma(Y,\\beta))[s_{\\mathcal G}(s)]=[s_{\\mathcal F}(\\varphi_Y(s))]$: under the identifications, $\\varphi^*$ in degree $0$ is $s\\mapsto\\varphi_Y(s)$.",
+   "text": "Apply ModuleCohomologyFMapData.map_zero_augmentation to the datum selected in moduleCohomologyFMap. This gives a.inv followed by the cohomology map equal to the sections map followed by b.inv, where a and b are the forgotten eG and eF. Precompose the desired equality with a.inv, use this augmentation square, and cancel b.inv followed by b.hom.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-sp-left-exact-additive",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "def-pc-module-pullback",
-    "def-weil-pbc-module-cohomology-fmap"
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-cohomology-fmap-zero-augmentation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow), the commutative square (equation-choice) read in degree $0$ on global sections; not stated in Stacks, computation written by the agent"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-sp-left-exact-additive",
   "def-weil-pbc-module-cohomology-fmap",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-derived-functor-map-via-lift",
   "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-module-cohomology-fmap-zero-augmentation",
   "lem-weil-pbc-scheme-modules-enough-injectives",
   "pqf-def-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Parent argument, degree-zero clause, expanded in the new module docstring."
+  "place": "Remark 01FB degree-zero augmentation square, using the existing proved augmentation theorem and Mathlib rightDerivedZeroIsoSelf; second reading by D4."
  },
  "mathlib_searches": [
   {
@@ -154,13 +136,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261012T231643-L-1964425",
-  "kind": "interface",
+  "landing": "20261013T000906-L-2281223",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

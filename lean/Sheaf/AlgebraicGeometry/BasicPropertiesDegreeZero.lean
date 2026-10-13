@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
 
 /-! # DegreeZero property of module cohomology maps
 
@@ -18,6 +20,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
+set_option backward.isDefEq.respectTransparency false in
 /-- DegreeZero property of the cohomology map induced by an h-map.
 Source: Stacks Project, Cohomology of Sheaves, Tags 01F9, 01FA, 01FB;
 Derived Categories, Tags 013P, 013S, 05TG.
@@ -50,6 +53,29 @@ theorem moduleCohomologyFMap_basic_degree_zero {X Y : Scheme.{u}} (h : X ⟶ Y)
               ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).map φ) =
           moduleCohomologyFMap h φ 0 ≫
             (forget₂ _ AddCommGrpCat).map eF.hom := by
-  sorry
+  let S := RingedSpace.globalSectionsFunctor Y.toRingedSpace
+  let T := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  have : EnoughInjectives Y.Modules := enoughInjectives Y
+  have : EnoughInjectives X.Modules := enoughInjectives X
+  have : PreservesFiniteLimits S :=
+    inferInstanceAs (PreservesFiniteLimits
+      (SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op ⊤)))
+  have : PreservesFiniteLimits T :=
+    inferInstanceAs (PreservesFiniteLimits
+      (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
+  let eG := S.rightDerivedZeroIsoSelf.app G
+  let eF := T.rightDerivedZeroIsoSelf.app F
+  refine ⟨eG, eF, ?_⟩
+  let a := (forget₂ _ AddCommGrpCat).mapIso eG
+  let b := (forget₂ _ AddCommGrpCat).mapIso eF
+  have ha : a.inv ≫ moduleCohomologyFMap h φ 0 =
+      (forget₂ _ AddCommGrpCat).map (S.map φ) ≫ b.inv :=
+    ModuleCohomologyFMapData.map_zero_augmentation
+      (Classical.choice (moduleCohomologyFMapData_nonempty h G F φ))
+  change a.hom ≫ (forget₂ _ AddCommGrpCat).map (S.map φ) =
+    moduleCohomologyFMap h φ 0 ≫ b.hom
+  apply (cancel_epi a.inv).mp
+  rw [Iso.inv_hom_id_assoc, ← Category.assoc, ha, Category.assoc,
+    Iso.inv_hom_id, Category.comp_id]
 
 end AlgebraicGeometry.Scheme.Modules
