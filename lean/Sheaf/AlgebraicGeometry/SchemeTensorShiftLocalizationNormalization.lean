@@ -75,30 +75,78 @@ noncomputable def schemeTensorShiftTargetComparison
     μ DerivedCategory.Q P (T ⊗ U))⟦(1 : ℤ)⟧' ≫
     (DerivedCategory.Q.commShiftIso (1 : ℤ)).inv.app (P ⊗ (T ⊗ U))
 
-/-- Each route through shift and reassociation separately normalizes to its complex route.
-This does not assert that the two complex routes, or the two derived routes, agree.
-Source: Stacks Project, Tag 06YH, localization step of
-lem-sc-scheme-canonical-tensor-shift-associator-kflat-one.
-(blueprint: lem-sc-scheme-tensor-shift-localization-normalization).
+/- The target comparison is invertible for K-flat representatives.  The proof uses
+the K-flat localization comparison theorem: each tensorator involving a K-flat
+factor is an isomorphism, as are the shift comparison maps.  The displayed map is
+their composite, so `infer_instance` supplies its `IsIso` instance after unfolding.
+Source: Stacks Project, Tag 06YH, localization normalization calculation.
+(blueprint: aux-sc-target-comparison-isIso) -/
+theorem schemeTensorShift_targetComparison_isIso
+    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    letI := schemeCanonicalTensorShift X
+    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
+      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
+    IsIso (schemeTensorShiftTargetComparison X P T U) := by sorry
 
-Proof. The tensor comparison of Q is invertible when either factor is K-flat.
-Sheaf K-flatness implies the upstream two-sided condition: the defining acyclicity
-condition gives preservation on the right, and symmetry gives preservation on the
-left; the cone criterion gives preservation of quasi-isomorphisms. Apply this to
-P and T. The target comparison is a composition of shifted invertible tensor
-comparisons and the inverse localization shift comparison, hence is invertible.
-For the first formula, apply the lax monoidal associativity identity to the
-translated source, followed by the first-variable localization shift square for
-P and T tensor U. Naturality moves the inner tensor comparison through the shift.
-For the second formula, apply that shift square first to P,T and then to P tensor T,U,
-using K-flatness of the tensor of K-flat complexes. Apply lax monoidal associativity
-at P,T,U and naturality of the localization shift isomorphism. Functoriality combines
-the resulting localized maps into the displayed composites. No equality between
-these composites is used in either normalization. All comparisons are the ones
-used by IndependentTensorShift.commShift₂CurriedTensor, transported from quotient
-followed by Qh to Q via quotientCompQhIso. For zero factors and the empty scheme
-these formulas are the unique maps between zero objects; they do not require
-nonzero scalars or characteristic assumptions. -/
+/-- First route normalization component.  Expand `c` and `v`, then use lax
+monoidal associativity for `DerivedCategory.Q`.  Naturality of the shift
+commutation isomorphism moves the inner tensorator through the shift, and the
+localization shift square for `P` identifies the result with the shifted
+complex associator.  Functoriality of `Q` gives exactly the displayed equality.
+Source: Stacks Project, Tag 06YH, first localization normalization calculation.
+(blueprint: aux-sc-target-comparison-first) -/
+theorem schemeTensorShift_first_normalization
+    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    letI := schemeCanonicalTensorShift X
+    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
+      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
+    let A := DerivedCategory.Q.obj P
+    let K := DerivedCategory.Q.obj T
+    let M := DerivedCategory.Q.obj U
+    let c := schemeTensorShiftTargetComparison X P T U
+    let v := schemeTensorShiftSourceComparison X P T U
+    ((α_ (A⟦(1 : ℤ)⟧) K M).hom ≫
+        ((tensorRight (K ⊗ M)).commShiftIso (1 : ℤ)).hom.app A) ≫ c =
+      v ≫ DerivedCategory.Q.map ((α_ (P⟦(1 : ℤ)⟧) T U).hom ≫
+        (CochainComplex.mapBifunctorShift₁Iso P (T ⊗ U)
+          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom) := by sorry
+
+/-- Second route normalization component.  Apply the localization shift square
+first to `P,T` and then to `P ⊗ T,U`; K-flatness is preserved by tensoring.
+Use lax monoidal associativity and naturality of the shift comparison to move
+the two tensorators through the translated factors.  Their composite is the
+localized complex associator shown on the right, by functoriality of `Q`.
+Source: Stacks Project, Tag 06YH, second localization normalization calculation.
+(blueprint: aux-sc-target-comparison-second) -/
+theorem schemeTensorShift_second_normalization
+    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    letI := schemeCanonicalTensorShift X
+    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
+      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
+    let A := DerivedCategory.Q.obj P
+    let K := DerivedCategory.Q.obj T
+    let M := DerivedCategory.Q.obj U
+    let c := schemeTensorShiftTargetComparison X P T U
+    let v := schemeTensorShiftSourceComparison X P T U
+    ((((tensorRight K).commShiftIso (1 : ℤ)).hom.app A) ▷ M ≫
+        ((tensorRight M).commShiftIso (1 : ℤ)).hom.app (A ⊗ K) ≫
+        (α_ A K M).hom⟦(1 : ℤ)⟧') ≫ c =
+      v ≫ DerivedCategory.Q.map
+        ((CochainComplex.mapBifunctorShift₁Iso P T
+          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ▷ U ≫
+        (CochainComplex.mapBifunctorShift₁Iso (P ⊗ T) U
+          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ≫
+        (α_ P T U).hom⟦(1 : ℤ)⟧') := by sorry
+
 theorem schemeTensorShift_localization_normalization
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
@@ -126,6 +174,10 @@ theorem schemeTensorShift_localization_normalization
             (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ▷ U ≫
           (CochainComplex.mapBifunctorShift₁Iso (P ⊗ T) U
             (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ≫
-          (α_ P T U).hom⟦(1 : ℤ)⟧') := by sorry
+          (α_ P T U).hom⟦(1 : ℤ)⟧') := by
+  dsimp
+  exact ⟨schemeTensorShift_targetComparison_isIso X P T U hP hT hU,
+    schemeTensorShift_first_normalization X P T U hP hT hU,
+    schemeTensorShift_second_normalization X P T U hP hT hU⟩
 
 end AlgebraicGeometry

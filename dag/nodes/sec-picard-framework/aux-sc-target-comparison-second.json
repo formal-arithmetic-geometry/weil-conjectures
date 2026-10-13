@@ -1,0 +1,100 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "Localization normalization decomposition"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "Split components of localization normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Second localization normalization component",
+   "date": "2026-10-14",
+   "results": "No exact existing theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Second localization normalization component",
+   "date": "2026-10-14",
+   "results": "No exact existing theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTensorShift localization comparison",
+   "date": "2026-10-14",
+   "results": "No exact existing theorem found."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
+  "date": "2026-10-14",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-scheme-tensor-shift-localization-normalization",
+   "place": "component"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeTensorShiftLocalizationNormalization.lean",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-14",
+  "declaration": "AlgebraicGeometry.schemeTensorShift_second_normalization",
+  "statement": "theorem schemeTensorShift_second_normalization\n    (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)\n    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :\n    letI := schemeCanonicalTensorShift X\n    letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=\n      fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B\n    let A := DerivedCategory.Q.obj P\n    let K := DerivedCategory.Q.obj T\n    let M := DerivedCategory.Q.obj U\n    let c := schemeTensorShiftTargetComparison X P T U\n    let v := schemeTensorShiftSourceComparison X P T U\n    ((((tensorRight K).commShiftIso (1 : ℤ)).hom.app A) ▷ M ≫\n        ((tensorRight M).commShiftIso (1 : ℤ)).hom.app (A ⊗ K) ≫\n        (α_ A K M).hom⟦(1 : ℤ)⟧') ≫ c =\n      v ≫ DerivedCategory.Q.map\n        ((CochainComplex.mapBifunctorShift₁Iso P T\n          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ▷ U ≫\n        (CochainComplex.mapBifunctorShift₁Iso (P ⊗ T) U\n          (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))) 1).hom ≫\n        (α_ P T U).hom⟦(1 : ℤ)⟧')"
+ },
+ "id": "aux-sc-target-comparison-second",
+ "title": "Second localization normalization component",
+ "statement": "Second displayed normalization equality",
+ "stmt_deps": [
+  "lem-sc-scheme-tensor-shift-localization-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the localization shift square successively to P,T and P tensor T,U. K-flatness is preserved by tensoring. Lax monoidal associativity and naturality of the shift comparison identify the composite with the localized complex associator displayed in the statement.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-sc-scheme-canonical-tensor-shift",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-sc-scheme-canonical-tensor-shift",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T201746-L-3968356",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T201746-L-3968356",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
