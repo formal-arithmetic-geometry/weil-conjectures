@@ -41,7 +41,7 @@ restriction of scalars to `Λ`, and the reduction `K ⊗ᴸ_Λ A_n` through
 the derived base change `K ⊗ᴸ_Λ A_n ∈ D(X_ét, A_n)` is characterised by its universal property
 (`AlgebraicGeometry.Etale.IsDerivedBaseChange`): it is left adjoint to restriction of scalars.
 The comparison maps of the blueprint are only asserted to exist, as in
-`WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison`.
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison`.
 -/
 
 @[expose] public section

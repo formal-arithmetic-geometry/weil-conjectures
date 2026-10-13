@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Pullback of the constant `ℓ`-adic sheaf

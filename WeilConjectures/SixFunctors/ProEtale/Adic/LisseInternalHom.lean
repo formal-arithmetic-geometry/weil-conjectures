@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Conservative
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
 /-!

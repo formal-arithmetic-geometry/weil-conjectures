@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 
 /-!
 # Weakly étale base change for the pro-étale pushforward

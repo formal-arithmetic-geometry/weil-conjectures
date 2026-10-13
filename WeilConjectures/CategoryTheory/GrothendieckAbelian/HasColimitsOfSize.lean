@@ -44,7 +44,7 @@ size `u`, by `hasColimitsOfSizeShrink`.
 Instance search does not climb the universes here: discharging the hypothesis
 `HasColimitsOfSize.{u + 1, u + 1} A` through this very instance would require
 `Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules out. -/
-instance hasColimitsOfSize_of_succ (A : Type u') [Category.{u + 1} A]
+instance hasColimitsOfSize_of_succ_grothendieck (A : Type u') [Category.{u + 1} A]
     [HasColimitsOfSize.{u + 1, u + 1} A] : HasColimitsOfSize.{u, u} A :=
   hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} A
 

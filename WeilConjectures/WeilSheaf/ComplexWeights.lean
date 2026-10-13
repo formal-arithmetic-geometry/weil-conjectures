@@ -23,7 +23,7 @@ The lower half is not formalised. It needs, at the level of Weil complexes, the 
 complex `ω_Y` (the exceptional inverse image `Ra_Y^! ℚ̄_ℓ` with its canonical Weil structure)
 and the derived internal hom `RHom(K, ω_Y)` with arbitrary, not necessarily lisse, first
 argument. Neither exists for `AlgebraicGeometry.WeilComplex`: the exceptional inverse image and
-the Verdier dual of `WeilConjectures.SixFunctors.ProEtale.Derived.Duality` live on the derived
+the Verdier dual of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Duality` live on the derived
 category of pro-étale sheaves without Weil structure, and the only derived internal hom of Weil
 complexes is `AlgebraicGeometry.WeilComplex.ihomLisse`, out of a lisse Weil sheaf.
 

@@ -476,7 +476,7 @@ include f in
 lemma isInvertible_idealSheaf (E : closedPoints C →₀ ℕ) : (idealSheaf E).IsInvertible := by
   induction E using Finsupp.induction_linear with
   | zero => exact idealSheaf_zero (X := C) ▸ IdealSheafData.isInvertible_top
-  | add E E' hE hE' => exact idealSheaf_add E E' ▸ hE.mul hE'
+  | add E E' hE hE' => exact idealSheaf_add E E' ▸ hE.mul_effectiveCartier hE'
   | single P n =>
     exact idealSheaf_single P n ▸
       (isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow n
@@ -609,7 +609,7 @@ generator `a` of `I`. -/
 theorem IdealSheafData.IsInvertible.zeroLocus_toModulesOfLE_mul {I J : X.IdealSheafData}
     (hI : I.IsInvertible) (hJ : J.IsInvertible) :
     Modules.Hom.zeroLocus (IdealSheafData.toModulesOfLE (I.mul_le_left' J)) = J := by
-  have hIJ := hI.mul hJ
+  have hIJ := hI.mul_effectiveCartier hJ
   have := hI.isInvertible_toModules
   have := hIJ.isInvertible_toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
@@ -637,7 +637,7 @@ theorem IdealSheafData.IsInvertible.nonempty_toModules_iso_dual_tensorObj_mul
     {I J : X.IdealSheafData} (hI : I.IsInvertible) (hJ : J.IsInvertible) :
     Nonempty (I.toModules ≅ J.toModulesᵛ ⊗ (I * J).toModules) := by
   have := hI.isInvertible_toModules
-  have := (hI.mul hJ).isInvertible_toModules
+  have := (hI.mul_effectiveCartier hJ).isInvertible_toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
   have := Modules.IsInvertible.sheafOfModules_isInvertible (I * J).toModules
   have h := IdealSheafData.IsInvertible.zeroLocus_toModulesOfLE_mul hI hJ

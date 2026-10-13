@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSectionsMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSectionsMonoidal
 
 /-!
 # Global sections as morphisms out of the unit

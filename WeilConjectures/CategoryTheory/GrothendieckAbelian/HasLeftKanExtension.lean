@@ -73,7 +73,7 @@ along its opposite nor their left exactness comes from the combinatorics above:
 
 For an étale `g` both are also proved in
 `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`, and for a weakly étale `g` in
-`WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs`, via the adjunction
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs`, via the adjunction
 `MorphismProperty.Over.mapPullbackAdj`.
 
 -/
@@ -338,6 +338,11 @@ end AlgebraicGeometry.SmallSite
 
 namespace AlgebraicGeometry.Etale
 
+instance (priority := 10) hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {Z Y : Scheme.{u}} (g : Z ⟶ Y) (F : Y.Etaleᵒᵖ ⥤ A) :
+    (MorphismProperty.Over.pullback @Etale ⊤ g).op.HasLeftKanExtension F :=
+  inferInstance
+
 /-- Along the localization functor of `h : Etale f` with `f` a monomorphism, all pointwise
 left Kan extensions with values in a category with an initial object exist: the indexing
 comma categories are either empty or admit a terminal object. -/
@@ -396,6 +401,11 @@ end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.ProEtale
 
+instance (priority := 10) hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {Z Y : Scheme.{u}} (g : Z ⟶ Y) (F : Y.ProEtᵒᵖ ⥤ A) :
+    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op.HasLeftKanExtension F :=
+  inferInstance
+
 /-- Along the localization functor of `h : WeaklyEtale f` with `f` a monomorphism, all
 pointwise left Kan extensions with values in a category with an initial object exist: the
 indexing comma categories are either empty or admit a terminal object. -/
@@ -440,7 +450,7 @@ indexing comma categories of the pointwise left Kan extensions are filtered and 
 extension is computed by filtered colimits, which are exact in `A` by AB5. This is the case
 `P = @WeaklyEtale` of `MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback`. For a
 weakly étale `g` it is also proved in
-`WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` via the adjunction with the
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` via the adjunction with the
 localization functor. -/
 instance preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian
     (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]

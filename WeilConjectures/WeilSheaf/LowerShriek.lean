@@ -27,7 +27,7 @@ the total right derived functor of the pushforward `ḡ_*` of pro-étale Weil sh
 (`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerShriek`), for the compactification
 chosen by `AlgebraicGeometry.HasCompactification.compactification`. Forgetting the Weil
 structures it is the pro-étale `Rf̄_! = Rḡ_* ∘ ī_!` of
-`WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek`. Since the Frobenius is built into the
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek`. Since the Frobenius is built into the
 categories of pro-étale Weil sheaves, no transport of the compactification along the Frobenius
 is needed.
 
@@ -70,11 +70,11 @@ noncomputable abbrev Compactification.over {f : X ⟶ Y} (c : Compactification f
 
 attribute [local instance] Compactification.over
 
-instance Compactification.isOver_g {f : X ⟶ Y} (c : Compactification f) :
+instance Compactification.isOver_g_finiteField {f : X ⟶ Y} (c : Compactification f) :
     c.g.IsOver (Spec (CommRingCat.of k₀)) :=
   ⟨rfl⟩
 
-instance Compactification.isOver_i {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))]
+instance Compactification.isOver_i_finiteField {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))]
     (c : Compactification f) : c.i.IsOver (Spec (CommRingCat.of k₀)) :=
   ⟨show c.i ≫ c.g ≫ Y ↘ Spec (CommRingCat.of k₀) = _ by
     rw [← Category.assoc, ← c.comm, comp_over]⟩

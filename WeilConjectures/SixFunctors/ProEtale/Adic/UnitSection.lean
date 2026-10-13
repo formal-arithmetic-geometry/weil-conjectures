@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialRepresentation
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSectionsMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSectionsMonoidal
 
 /-!
 # The stalk of the constant `ℓ`-adic sheaf at a point with values in a field
