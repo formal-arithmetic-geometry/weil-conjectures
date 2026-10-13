@@ -14,43 +14,40 @@
  },
  "proof": [
   {
-   "text": "Form $0\\to B^p\\to Z^p\\to H^p\\to0$ in each bicomplex. The boundary inclusion is the factor of image.\\iota through cycles; its cokernel is homology. Evaluation is exact, so the sequence is degreewise short exact, and $G$ preserves it. The exact single-degree functor identifies the corresponding columns of $S_K,S_L$ with the single complexes on $B^p(K),Z^p(K),H^p(K)$ and the corresponding objects of $L$, naturally with respect to $u$ and the augmentations.",
+   "text": "Form the canonical boundary/cycles/homology ShortComplex of each horizontal complex. Prove its short exactness by the homology cokernel universal property and the epimorphism onto the boundary image. Build row morphisms under an exact functor using PreservesImage.iso, mapCyclesIso, and the canonical homology preservation isomorphism; verify the two row squares by including into the object column or projecting to homology. These constructions and their naturality are proved by private helpers in the assigned module.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The supplied boundary augmentation square is the true square on $B^p(K)$: compose that square with $F(K^{p-1}\\to B^p(K))$. Naturality of the augmentations gives exactly the assumed equation. This precomposition can be cancelled, since image factorization is epic in an abelian category and $F$ preserves epimorphisms.",
+   "text": "For the single bicomplexes S_K and S_L, prove that boundaries, cycles and homology columns vanish in positive resolution degrees, using their monomorphic inclusions or epimorphic homology projections. Construct the isomorphism from single_0 of the degree-zero object into each such column with fromSingle₀Equiv and degreewise isomorphisms. Evaluate the source row after applying F and the target row at zero, obtaining the coefficient rows. Transport the augmentations through the supported-column isomorphisms; exact functors preserve short exactness and the given quasi-isomorphisms. The comparison induced by u gives a morphism of coefficient rows. This preparation is completely proved by the private exists_cartanEilenberg_cycle_row_presentation theorem.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The given homology augmentation quasi-isomorphisms, transported through the single-degree identifications and $F$, are resolutions of $F(H^p(K))$ and $H^p(L)$. The source augmentation is monomorphic: its degree-zero component identifies with the kernel of the first differential, and its other components have zero source. Lift the homology map induced by $u$ into the termwise injective target homology column along this monomorphic quasi-isomorphism by [lem-weil-pbc-lift-along-injective-quasi-iso]. Nonnegative indexing supplies the required bounded-below condition.",
-   "uses": [
-    "lem-weil-pbc-lift-along-injective-quasi-iso"
-   ],
-   "elementary": false
+   "text": "Precompose the boundary augmentation square in degree zero with F of the epimorphism onto the incoming boundary of S_K. Image-factorization naturality for e_I, e_J and the single comparison identifies this equation with hb. Cancel the epimorphism. Since the coefficient single complex is zero in positive degrees, from_single_hom_ext gives the boundary augmentation square as a complex equation.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-horseshoe-morphism-lift-exact-source] to the boundary/cycles/homology short exact sequences, with prescribed endpoint maps $b$ and the homology lift. The target resolutions use the given augmented columns and their termwise injectivity; the source is an exact augmented row and need not have injective terms. The resulting middle map is $y$.",
+   "text": "Bundle the three target augmented columns as InjectiveResolution objects from hJinj and the transported hJres. The already proved source-library construction CategoryTheory.InjectiveResolution.descOfQuasiIso lifts the coefficient homology morphism from the exact augmented source homology column to the target homology resolution; descOfQuasiIso_commutes gives its augmentation square. Apply [lem-weil-pbc-horseshoe-morphism-lift-exact-source] with this endpoint and the prescribed incoming boundary endpoint. Its middle map is y, and it commutes with the augmentations and incoming row maps.",
    "uses": [
     "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
    ],
    "elementary": false
   },
   {
-   "text": "Compose its augmented cycle square with the target cycle inclusion. Naturality of the single-degree identifications gives the first formula as stated, on $S_K$ cycles in resolution degree zero. Compose its incoming square with the source factorThruImage and the target cycle inclusion; the factorization of the differential through its image and cycles gives the second formula. These operations do not choose any object-column map.",
+   "text": "Evaluate the middle augmentation square at zero, include into the target object column, and cancel the source degree-zero identification to obtain the first displayed equation. Compose the incoming row square with the image factor of the source differential and the target cycle inclusion. The boundary factorization through cycles yields the second displayed equation.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
   "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Explicit expansion of the alternating-row functoriality argument of Tags 015I and 015K, using Tag 013P(2) and the existing exact-source horseshoe comparison"
+  "place": "Tags 015I and 015K, boundary/cycles/homology row preparation; the homology endpoint is lifted using the proved source-library descOfQuasiIso construction (the single-source case of Tag 013P(2)), followed by the exact-source horseshoe comparison. Lean proof by V3, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -136,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T045537-L-131063",
-  "kind": "interface",
+  "landing": "20261013T100206-L-2499121",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
