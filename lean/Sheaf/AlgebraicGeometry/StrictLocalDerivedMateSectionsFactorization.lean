@@ -6,6 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate
+import Sheaf.AlgebraicGeometry.StrictLocalDerivedExchangeGlobalSections
 
 /-! # The derived mate on the complex of neighbourhood sections
 
@@ -78,6 +79,58 @@ theorem strictLocalComplexSectionRestriction_derivedMate {X S : Scheme.{v}}
         (.up ℤ)).app M) ≫
     (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫
     representativeSectionsComparison
-      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n := by sorry
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  set_option backward.defeqAttrib.useBackward true in
+  exact (by
+    intro i
+    have := strictHenselization_globalSections_preservesFiniteColimits s
+    let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
+    let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M
+    let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+      AddCommGrpCat.{v + 1}
+    let a := (NatTrans.mapHomologicalComplex (strictLocalSectionRestrictionNat s i)
+      (.up ℤ)).app L
+    let b := Functor.whiskerRight
+        (baseChangeMap AddCommGrpCat.{v + 1}
+          (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq) G ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft
+        (upperStar AddCommGrpCat.{v + 1}
+          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)))
+        (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1}
+          (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).hom
+    have hchain : (NatTrans.mapHomologicalComplex (strictLocalUnderivedMateSections f s i)
+        (.up ℤ)).app M = a ≫ (NatTrans.mapHomologicalComplex b (.up ℤ)).app M := by
+      ext k
+      simp [strictLocalUnderivedMateSections, a, b, M, L, G]
+    let H := DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n
+    let A := ((sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
+      (op ((strictLocalNeighbourhoods s).obj i))).mapHomologicalComplex (.up ℤ)
+    let c := representativeSectionsComparison
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n
+    let e := (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app
+      (A.obj L)
+    have hcore := strictLocalDerivedExchange_globalSections f s K n J q
+    have hh := congrArg (fun z ↦ e ≫ H.map (DerivedCategory.Q.map a) ≫ z) hcore
+    unfold strictLocalComplexSectionRestriction
+    dsimp only
+    calc
+      _ = e ≫ H.map (DerivedCategory.Q.map a) ≫
+          H.map (DerivedCategory.Q.map
+            ((NatTrans.mapHomologicalComplex b (.up ℤ)).app M)) ≫ c := by
+        convert hh using 1
+        · simp only [Functor.map_comp, Category.assoc]
+          rfl
+      _ = _ := by
+        rw [hchain]
+        have hn :=
+          (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.naturality
+          (a ≫ (NatTrans.mapHomologicalComplex b (.up ℤ)).app M)
+        dsimp only [Functor.comp_map] at hn
+        convert congrArg (fun z ↦ z ≫ c) hn.symm using 1 <;>
+          simp only [Functor.map_comp, Category.assoc] <;> rfl
+  )
 
 end AlgebraicGeometry.Etale

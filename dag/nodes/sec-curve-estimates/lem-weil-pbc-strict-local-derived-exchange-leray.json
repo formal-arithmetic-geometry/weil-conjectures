@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-strict-local-derived-exchange-leray",
+ "kind": "statement",
+ "title": "Derived exchange and Leray before homology",
+ "statement": "For f:X→S, a geometric point s, a bounded-below injective complex J and q:K≅Q(ιJ), the derived mate transported by the source direct-image isomorphism, followed by exact strict-local sections and Leray, equals localization of the underived exchange on global sections followed by the derived sections unit and transport by p^*q.inv. No neighbourhood restriction or homology is used.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, final injective-complex paragraph; details of the adjunction compatibility written by P1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-strict-local-mate-projection-data",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-injective-sections-pullback-comparison",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the derived mate computation on the injective representative and invert only its source direct-image unit. Transport along q and localization; then apply exact strict-local sections and the defining derived-composition/Leray factorization. The sections unit on the pulled-back complex is retained. This is steps 1 and 2 of the parent plan, before homology and neighbourhood restriction.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-strict-local-injective-source-comparison",
+    "lem-weil-pbc-injective-sections-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "lem-weil-pbc-injective-sections-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent M3",
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, final injective-complex paragraph; steps 1–2 of lem-weil-pbc-strict-local-derived-mate-sections-factorization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived base change mate and derived Leray factorization on global sections",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change mate factorization on complexes after global sections",
+   "results": "Generic localization and adjunction unit/counit factorization lemmas; no combined Leray/mate comparison.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac",
+   "results": "No hits (identifier is project-specific). Direct source inspection located the theorem in PlusAdjunction.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_app_fac|sectionsComparison_restriction_square",
+   "results": "msearch zero hits; direct rg located the generic mate factorization and sections restriction square. Neither states the combined comparison.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalDerivedMateSectionsFactorization",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-local-derived-mate-sections-factorization",
+   "place": "Derived mate factorization before neighbourhood restriction",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalDerivedExchangeLeray",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalDerivedExchangeLeray.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalDerivedExchange_leray",
+  "statement": "theorem strictLocalDerivedExchange_leray {X S : Scheme.{v}} (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (J : CochainComplex.Plus (InjectiveObject\n      (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})))\n    (q : K.obj ≅ DerivedCategory.Q.obj\n      (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) :\n    let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj\n    let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M\n    let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)\n    let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology\n      AddCommGrpCat.{v + 1}\n    let C := (U.mapHomologicalComplex (.up ℤ)).obj L\n    let b := Functor.whiskerRight\n        (baseChangeMap AddCommGrpCat.{v + 1}\n          (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq) G ≫\n      (Functor.associator _ _ _).hom ≫\n      Functor.whiskerLeft\n        (upperStar AddCommGrpCat.{v + 1}\n          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)))\n        (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1}\n          (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).hom\n    have := strictHenselization_globalSections_preservesFiniteColimits s\n    let P := upperStar AddCommGrpCat.{v + 1}\n      (pullback.fst f (Scheme.strictHenselizationStructuralMap s))\n    let Y := pullback f (Scheme.strictHenselizationStructuralMap s)\n    let F := lowerStar AddCommGrpCat.{v + 1}\n      (pullback.snd f (Scheme.strictHenselizationStructuralMap s))\n    let D := (P.mapHomologicalComplex (.up ℤ)).obj M\n    let T := P.mapDerivedCategoryPlus.obj K\n    let V := F.rightDerivedFunctorPlus.obj T\n    let ℓ := DerivedCategory.Plus.ι.map\n        (G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.inv.app V) ≫\n      G.rightDerivedFunctorPlusCompatibility.hom.app V ≫\n      G.rightDerivedFunctor.map (F.rightDerivedFunctorPlusCompatibility.hom.app T) ≫\n      (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{v + 1}\n        (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).hom.app T.obj\n    G.mapDerivedCategoryFactors.inv.app C ≫\n      G.mapDerivedCategory.map (U.mapDerivedCategoryFactors.inv.app L ≫\n        U.mapDerivedCategory.map (sourceInjectiveDirectImageIso f K J q).inv) ≫\n      G.mapDerivedCategory.map (DerivedCategory.Plus.ι.map\n        ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus\n          (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1}\n            (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus\n          (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}\n            (IsPullback.of_hasPullback f\n              (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).natTrans.app K)) ≫\n      ℓ =\n    DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex b (.up ℤ)).app M) ≫\n      (DerivedCategory.quotientCompQhIso AddCommGrpCat.{v + 1}).inv.app\n        (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).mapHomologicalComplex\n          (.up ℤ)).obj D) ≫\n      (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorUnit.app\n        ((HomotopyCategory.quotient _ _).obj D) ≫\n      (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctor.map\n        ((DerivedCategory.quotientCompQhIso _).hom.app D) ≫\n      (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctor.map\n        (P.mapDerivedCategoryFactors.inv.app M ≫ P.mapDerivedCategory.map q.inv)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T054227-L-445945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T054227-L-445945",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
