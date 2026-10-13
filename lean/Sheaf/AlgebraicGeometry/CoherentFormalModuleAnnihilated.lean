@@ -5,21 +5,17 @@ Authors: SHEAF group M1
 -/
 module
 
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleKernel
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleCokernel
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.Data.List.TFAE
 public import Mathlib.RingTheory.Ideal.Operations
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedLimit
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedFormalCover
+import Mathlib.Tactic.TFAE
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleKernel
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleCokernel
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 import Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Annihilation of kernels and cokernels of coherent formal module maps
 
@@ -42,21 +38,16 @@ Kernel forks and cokernel coforks express condition (4) without choosing an abel
 structure or particular representatives of the kernel and cokernel.
 Source: Stacks, Remark 0888 and Lemmas 087W, 087X
 (blueprint: lem-weil-pbc-formal-systems-annihilated-by-power).
-Proof, following the seven steps of the node:
-1. The affine equivalence (lem-weil-pbc-coherent-formal-modules-affine) identifies the
-limit projections and reductions modulo I^n with the component maps.
-2. Ideal products of quasi-coherent modules are computed on affine sections
-(lem-weil-pbc-ideal-times-quasi-coherent-affine-sections); annihilation is local.
-3. The reduction fact (lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal) gives
-(3) implies (1), with exponent 2t on each member of the cover.
-4. Its natural scalar quasi-inverses pass to the inverse limit and show (1) implies (2).
-5. Quasi-compactness gives a finite affine subcover. The maximum of its finitely many
-exponents proves (2) implies (3); on the empty scheme choose exponent 1.
-6. Exact affine restriction and the equivalence carry formal kernels and cokernels to
-module kernels and cokernels (lem-weil-pbc-coherent-formal-modules-abelian and
-lem-weil-pbc-coherent-formal-modules-local-exactness).
-7. Those finite completed modules are separated. Thus killing all their reductions
-is equivalent to killing the modules, giving (4) equivalent to (2) and (3).
+Proof:
+1. The fixed-exponent affine-limit lemma gives (1) implies (2), with exponent 2t.
+2. Quasi-compactness gives a finite affine subcover. The maximum of its finitely many
+   exponents, bounded below by 1, proves (2) implies (3), including the empty scheme.
+3. The existing double-exponent kernel and cokernel lemmas give (3) implies (1).
+4. Abelianness supplies canonical formal kernel and cokernel forks. The fixed-exponent
+   formal-cover criterion on the finite cover gives (3) implies (4).
+5. Apply that criterion on the cover of all affine opens to give (4) implies (2).
+These five implications assemble the TFAE. The two geometric criteria remain named
+open theorems in their own modules; this is a decomposition of the equivalence.
 -/
 theorem coherentFormalModule_annihilated_iff (X : Scheme.{u}) [IsNoetherian X]
     (I K : X.IdealSheafData) (F G : CoherentFormalModule X I) (α : F ⟶ G) :
@@ -94,13 +85,59 @@ theorem coherentFormalModule_annihilated_iff (X : Scheme.{u}) [IsNoetherian X]
           (k.pt.obj.obj (op n))) ∧
         IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
           (c.pt.obj.obj (op n))))] := by
-  sorry
+  classical
+  tfae_have 1 → 2 := by
+    rintro ⟨t, ht, h⟩ U
+    refine ⟨2 * t, by omega, ?_⟩
+    exact coherentFormalModule_annihilated_affine_limit X I K F G α t ht h U
+  tfae_have 2 → 3 := by
+    intro h
+    obtain ⟨s, hs, hcover⟩ :=
+      (isCompact_iff_finite_and_eq_biUnion_affineOpens (U := (⊤ : X.Opens))).mp
+        (by simpa using (isCompact_univ (X := X)))
+    let S := hs.toFinset
+    let e := S.equivFin
+    let U : Fin S.card → X.affineOpens := fun i ↦ (e.symm i).1
+    choose t ht hkill using h
+    let b := max 1 (S.sup t)
+    refine ⟨S.card, U, b, ?_, le_max_left _ _, ?_⟩
+    · apply le_antisymm le_top
+      rw [hcover]
+      refine iSup_le fun V ↦ iSup_le fun hV ↦ ?_
+      have hVS : V ∈ S := hs.mem_toFinset.mpr hV
+      exact le_iSup_of_le (e ⟨V, hVS⟩) (by simp [U])
+    · intro i
+      have hle : t (U i) ≤ b :=
+        (Finset.le_sup (e.symm i).2).trans (le_max_right _ _)
+      exact ⟨(Ideal.pow_le_pow_right hle).trans (hkill (U i)).1,
+        (Ideal.pow_le_pow_right hle).trans (hkill (U i)).2⟩
+  tfae_have 3 → 1 := by
+    rintro ⟨r, U, t, hcover, ht, h⟩
+    refine ⟨2 * t, by omega, ?_⟩
+    intro n
+    exact ⟨coherentFormalModule_annihilated_double_kernel X I K F G α r U t hcover ht h n,
+      coherentFormalModule_annihilated_double_cokernel X I K F G α r U t hcover ht h n⟩
+  tfae_have 3 → 4 := by
+    rintro ⟨r, U, t, hcover, ht, h⟩
+    have : Abelian (CoherentFormalModule X I) :=
+      (coherentFormalModule_abelian X I).1.some
+    let k := KernelFork.ofι (kernel.ι α) (kernel.condition α)
+    let c := CokernelCofork.ofπ (cokernel.π α) (cokernel.condition α)
+    refine ⟨k, c, ⟨kernelIsKernel α⟩, ⟨cokernelIsCokernel α⟩, t, ht, ?_⟩
+    exact (coherentFormalModule_annihilated_formal_cover X I K F G α k c
+      (kernelIsKernel α) (cokernelIsCokernel α) (Fin r) U hcover t ht).mpr h
+  tfae_have 4 → 2 := by
+    rintro ⟨k, c, ⟨hk⟩, ⟨hc⟩, t, ht, h⟩ U
+    refine ⟨t, ht, ?_⟩
+    exact (coherentFormalModule_annihilated_formal_cover X I K F G α k c hk hc
+      X.affineOpens id (iSup_affineOpens_eq_top X) t ht).mp h U
+  tfae_finish
 
 /-- The exponent t on a finite affine cover gives exponent 2t for every component.
 Source: Stacks, Remark 0888 (blueprint: lem-weil-pbc-formal-systems-annihilated-by-power).
-Proof: apply the reduction-modulo-ideal fact to the limit map on each affine with J=I^n
-(node step 3). The affine equivalence identifies the reductions with component maps
-(step 1), and local checking of ideal products gives the global result (step 2).
+Proof: pair the existing double-exponent kernel and cokernel conclusions at each level
+(node step 3). Those lemmas apply reduction modulo the adic ideal powers on affines
+and glue the resulting ideal-product vanishing over the cover.
 -/
 theorem coherentFormalModule_annihilated_double (X : Scheme.{u}) [IsNoetherian X]
     (I K : X.IdealSheafData) (F G : CoherentFormalModule X I) (α : F ⟶ G)

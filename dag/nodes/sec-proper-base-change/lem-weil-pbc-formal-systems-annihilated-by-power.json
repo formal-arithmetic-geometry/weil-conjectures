@@ -30,26 +30,60 @@
  ],
  "proof": [
   {
-   "text": "Apply the kernel component and the cokernel component independently at each level, then pair the results.",
+   "text": "From a uniform exponent t at every component, apply the affine-limit lemma separately on every affine U and choose the positive exponent 2t. This proves condition (1) implies (2).",
+   "uses": [
+    "lem-weil-pbc-formal-annihilation-affine-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract a finite affine subcover from quasi-compactness. Choose each local exponent, then take max(1, the supremum of the finitely many exponents). Ideal powers are antitone in the exponent, so this exponent works on the whole finite cover, including the empty-cover case. This proves (2) implies (3).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the kernel and cokernel finite-cover reduction lemmas at each level, pair their conclusions, and choose exponent 2t. This proves (3) implies (1), and also proves the separate double-exponent assertion.",
    "uses": [
     "lem-weil-pbc-formal-systems-annihilated-by-power-kernel",
     "lem-weil-pbc-formal-systems-annihilated-by-power-cokernel"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Remark 0888"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use abelianness to take the canonical formal kernel fork and cokernel cofork. Apply the fixed-exponent formal affine-cover criterion to the finite covering. This proves (3) implies (4).",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "lem-weil-pbc-formal-annihilation-kernel-cokernel-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same fixed-exponent criterion to the covering indexed by all affine opens. Each affine has the uniform exponent of (4). This proves (4) implies (2). The five implications assemble into the four-way TFAE.",
+   "uses": [
+    "lem-weil-pbc-formal-annihilation-kernel-cokernel-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The separate commutative-algebra reduction assertion is clause (c) of the scalar quasi-inverse and reduction theorem.",
+   "uses": [
+    "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-formal-annihilation-affine-limit",
   "lem-weil-pbc-formal-systems-annihilated-by-power-kernel",
-  "lem-weil-pbc-formal-systems-annihilated-by-power-cokernel"
+  "lem-weil-pbc-formal-systems-annihilated-by-power-cokernel",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-formal-annihilation-kernel-cokernel-cover",
+  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/coherentFormalModuleAnnihilated",
-  "place": "decomposition into kernel and cokernel components"
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 0888 and Lemmas 087W, 087X; Lean implication assembly by U4"
  },
  "mathlib_searches": [
   {
@@ -144,12 +178,12 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261012T223411-L-1638856",
+  "landing": "20261013T001617-L-2331371",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

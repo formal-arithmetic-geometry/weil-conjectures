@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-formal-annihilation-affine-limit",
+ "kind": "statement",
+ "title": "Uniform termwise annihilation implies doubled annihilation of an affine limit",
+ "statement": "Let $X$ be a Noetherian scheme, $\\mathcal I,\\mathcal K\\subseteq\\mathcal O_X$ quasi-coherent ideal sheaves, $F,G\\in\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module], and $\\alpha:F\\to G$ a morphism. Let $t\\geq1$ and assume $\\mathcal K^t\\operatorname{Ker}(\\alpha_{n+1})=\\mathcal K^t\\operatorname{Coker}(\\alpha_{n+1})=0$ for every $n\\in\\mathbb N$, using kernels and cokernels of sheaves of modules. For every affine open $U\\subseteq X$, let $\\alpha_U:\\varprojlim_n F_{n+1}(U)\\to\\varprojlim_n G_{n+1}(U)$ be the induced map [lem-weil-pbc-coherent-formal-modules-affine]. Then $\\mathcal K(U)^{2t}$ annihilates both $\\operatorname{Ker}(\\alpha_U)$ and $\\operatorname{Coker}(\\alpha_U)$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by), final paragraph, implication (1) implies (2); verified at https://stacks.math.columbia.edu/tag/0888"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-formal-modules-affine"
+ ],
+ "proof": [
+  {
+   "text": "On U, exact affine sections of coherent sheaves identify component kernels and cokernels with those of the section maps. The affine ideal-product calculation transfers the termwise hypothesis to annihilation by K(U)^t.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For f,g in K(U)^t, apply the canonical scalar quasi-inverse construction to each section map. The lifting formula makes the maps commute with every transition square, and both composites are multiplication by fg.",
+   "uses": [
+    "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse limit of the compatible scalar quasi-inverses. Joint monicity of the limit projections preserves both scalar-composite identities. Apply the converse scalar-composite criterion to obtain annihilation by K(U)^(2t).",
+   "uses": [
+    "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by), final paragraph, implication (1) implies (2); verified at https://stacks.math.columbia.edu/tag/0888"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "kernel and cokernel of coherent formal module map annihilated by ideal powers inverse limit",
+   "results": "Hausdorffification, Hausdorffification.of, localCohomology, AdicCompletion, AdicCompletion.incl, IsAdicComplete, AdicCompletion.transitionMap, AdicCompletion.of_apply",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilated.*(limit|affine)|TFAE.*annihilat",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent formal modules affine inverse limit kernel cokernel annihilated by an ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of the essential-surjectivity split, through the annihilation criterion (Remark 0888)",
+   "via": [
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleAnnihilatedLimit.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_annihilated_affine_limit",
+  "statement": "theorem coherentFormalModule_annihilated_affine_limit\n    (X : Scheme.{u}) [IsNoetherian X] (I K : X.IdealSheafData)\n    (F G : CoherentFormalModule X I) (α : F ⟶ G) (t : ℕ) (ht : 1 ≤ t)\n    (h : ∀ n : ℕ,\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n        (kernel (α.hom.app (op n)))) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n        (cokernel (α.hom.app (op n))))) (U : X.affineOpens) :\n    K.ideal U ^ (2 * t) ≤ Module.annihilator Γ(X, U.1) (LinearMap.ker\n      (lim.map (Functor.whiskerRight α.hom\n        (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom) ∧\n    K.ideal U ^ (2 * t) ≤ Module.annihilator Γ(X, U.1)\n      (↥(limit (G.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op U.1)) :\n        ModuleCat Γ(X, U.1)) ⧸ LinearMap.range\n        (lim.map (Functor.whiskerRight α.hom\n          (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T001617-L-2331371",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T001617-L-2331371",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
