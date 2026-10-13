@@ -1,0 +1,151 @@
+{
+ "id": "lem-pur-derived-internal-hom-shift-comparison",
+ "kind": "statement",
+ "title": "Shift comparison for internal derived Hom",
+ "statement": "On a small ringed site (C,O), let D(O) be its unbounded derived category [def-pur-derived-internal-hom]. There is a family e(P,Q,m,n): RHom(P,Q)[n-m] ≅ RHom(P[m],Q[n]) for every P,Q and integers m,n. For q:Q→Qprime, shifted(RHom(id_P,q)) followed by e(P,Qprime,m,n) equals e(P,Q,m,n) followed by RHom(id_(P[m]),q[n]). This is an isomorphism in D(O), before taking global sections or cohomology, with no boundedness or K-flatness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Sections 21.34 and 21.35, Hom-complex differential and representative computation (Tags 0A8X and 08JA); signed shift calculation in step 2 of lem-sc-global-hom-shifted-hypercohomology"
+ },
+ "stmt_deps": [
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Represent P by L and Q by a K-injective I, using functorial K-injective resolutions. The representative comparison identifies RHom(P,Q) with Q(Hom(L,I)). Shifts of I are K-injective by shifting the acyclic test complex in the defining null-homotopy condition.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For integers m,n,k, identify Hom(L,I)[n-m]^k with Hom(L[m],I[n])^k by reindexing r=p+m and multiplying the p-th component by (-1)^(m*k). The two differential formulas differ by (-1)^m; multiplying in consecutive degrees compensates for this factor. Reindexing backwards and applying the same sign is the inverse. Each map is a sheaf-module map and the construction commutes with postcomposition.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the chain isomorphism and transport through the representative comparisons. Maps between K-injective representatives compute derived morphisms; homotopic choices induce equal localized Hom-complex maps. Quasi-isomorphism invariance allows resolution changes, and postcomposition naturality of the signed reindexing yields shifted(RHom(P,q)) followed by e_Qprime = e_Q followed by RHom(P[m],q[n]).",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pur-rhom-well-defined",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Sections 21.34 and 21.35; explicit signed reindexing of the Hom-complex differential"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of shifted arguments is the shift of derived internal Hom",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of derived internal Hom shifted cohomology natural isomorphism",
+   "results": "Eight abstract HomComplex cochain/cohomology matches, including leftShiftAddEquiv and rightShiftAddEquiv. None provides a shift comparison of sheaf internal derived Hom.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso\"",
+   "results": "Generic shift-commuting-functor API; no instance for the two-variable internal derived Hom construction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom.*shift|homComplex.*shift in Mathlib, Sheaf and WeilConjectures",
+   "results": "Mathlib ordinary HomComplex shifts, but no internal derived Hom shift comparison. Blueprint search internal Hom finds bounded coefficient/sheaf-theoretic results, none for this unbounded O-module statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal sheaf Hom complex translation suspension natural chain isomorphism two variables",
+   "results": "Second reader: eight cochain shift evaluation/short-complex/commutation results; none compares internal derived Hom.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homComplex\", \"shift\"",
+   "results": "Second reader: CochainComplex.HomComplex.Cochain and Cocycle leftShift/rightShift and inverse identities. These concern graded groups of global morphisms, not the internal sheaf-valued derived Hom functor.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "internal.*[Ss]hift|[Ss]hift.*internal|homComplex.*[Ss]hift|[Ss]hift.*homComplex in lean/Sheaf, lean/WeilConjectures, and Mathlib/Algebra/Homology",
+   "results": "Second reader: only ordinary Mathlib HomComplexShift APIs; no existing derivedInternalHom shift statement. Read DerivedInternalHom representative comparisons and HomComplex differential/product construction; neither supplies the shift isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlobalHomShiftedHypercohomology",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The shifted global RHom identification used below the sheaf adjunction: the relative-degree shift comparison before taking global sections.",
+   "via": [
+    "lem-sc-global-hom-shifted-hypercohomology",
+    "lem-sc-restricted-global-hom-shifted-equiv"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DerivedInternalHomShiftComparison",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomShiftComparison.lean",
+  "declaration": "CategoryTheory.derivedInternalHom_shift_comparison",
+  "statement": "theorem derivedInternalHom_shift_comparison\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] :\n    ∃ e : ∀ (P Q : DerivedCategory (SheafOfModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) (m n : ℤ),\n      ((derivedInternalHom J R).obj (op P, Q))⟦n - m⟧ ≅\n        (derivedInternalHom J R).obj (op (P⟦m⟧), Q⟦n⟧),\n      ∀ (P Q Q' : DerivedCategory (SheafOfModules.{u}\n          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n        (m n : ℤ) (q : Q ⟶ Q'),\n        ((derivedInternalHom J R).map ((𝟙 P).op, q))⟦n - m⟧' ≫\n            (e P Q' m n).hom =\n          (e P Q m n).hom ≫\n            (derivedInternalHom J R).map ((𝟙 (P⟦m⟧)).op, q⟦n⟧')",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T111930-L-3065680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T111930-L-3065680",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
