@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-finite-free-bottom-differential-zero",
+ "kind": "statement",
+ "title": "A full-rank bottom kernel forces zero differential",
+ "statement": "Let $X$ be any scheme [def-pc-scheme], $K$ a cochain complex of structure-sheaf modules [def-pc-cochain-complex-modules], $a\\in\\mathbf Z$ and $r\\in\\mathbf N$. Assume $K^i=0$ for $i<a$, $K^a\\cong\\mathcal O_X^{\\oplus r}$, and $K^{a+1}\\cong\\mathcal O_X^{\\oplus n}$ for some $n\\in\\mathbf N$ [def-weil-pbc-free-module]. If $H^a(K)$ is finite locally free of rank $r$ [def-amb-finite-locally-free-module], then $d^a:K^a\\to K^{a+1}$ is zero. No reducedness or affine hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EWY",
+  "place": "Injective square finite-free maps; applied to the bottom kernel as in Tag 0BDL matrix-chart proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-free-module",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "As K^(a-1) is zero, the short-complex cycles-to-homology map is an isomorphism. Invert it to obtain a monomorphism j:H^a(K) to K^a with j followed by d^a zero. Trivialize H^a(K) on an open cover. Exact restriction preserves this monomorphism and equation, and preserves the fixed finite-free ranks. Thus each restricted j becomes a square monomorphism phi between rank-r free sheaves.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use freeSectionsEquiv to identify sections of phi with multiplication by its square matrix A. Evaluation preserves monomorphisms, so mulVec A is injective. The column/row linear-independence equivalence makes vecMul A injective. If B is the outgoing matrix, phi followed by the outgoing map zero gives B*A=0 on sections. Apply vecMul injectivity to each row of B to obtain B=0. A morphism from a free sheaf is determined by its global sections, so the outgoing restricted map is zero.",
+   "uses": [
+    "lem-sc-square-injective-free-map-dual-coker-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the restriction adjunction unit and the sheaf hom-ext theorem on the trivializing cover to conclude that d^a is zero globally. The same proof covers zero ranks and empty schemes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-cochain-complex-modules",
+  "lem-sc-square-injective-free-map-dual-coker-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EWY",
+  "place": "Injective square finite-free maps; applied to the bottom kernel as in Tag 0BDL matrix-chart proof",
+  "note": "M3 expanded the cited argument and checked the Lean combination locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homology.*[Ii]s[Ff]ree|[Kk]ernel.*[Ff]ree|ker.*rank|transpose.*injective",
+   "results": "25 hits: Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, Mathlib/LinearAlgebra/Matrix/ToLin.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex with universally free lowest cohomology has a local finite free model with zero bottom differential",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, Module.freeLocus_eq_univ_iff, CochainComplex.isKProjective_iff_leftOrthogonal, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes Tor amplitude derived fibre Betti vanishing and free homology rank",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapFreeIso|mapHomologicalComplexHomologyIso|linearIndependent_col_iff_row",
+   "results": "12 hits: Mathlib/LinearAlgebra/Matrix/Nonsingular.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above finite free complex on an open subscheme represents derived pullback termwise with the same ranks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free sheaf complex whose bottom cohomology is locally free of the same rank has zero first differential",
+   "results": "8 hits: CochainComplex.cm5b.I_d, SheafOfModules.relationsOfIsCokernelFree_I, CochainComplex.exactAt_succ_single_obj, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectUniversalLowestZeroModel",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construction of the locally closed free-cohomology loci; A full-rank bottom kernel forces zero differential",
+   "via": [
+    "lem-sc-perfect-universal-lowest-zero-model",
+    "lem-sc-perfect-universal-lowest-cohomology-pullback",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeBottomDifferentialZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeBottomDifferentialZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteFreeBottom_differential_zero",
+  "statement": "theorem finiteFreeBottom_differential_zero\n    (X : Scheme.{u})\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a : ℤ) (r : ℕ)\n    (hbelow : ∀ i : ℤ, i < a → IsZero (K.X i))\n    (hfirst : Nonempty (K.X a ≅ SheafOfModules.free\n      (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin r))))\n    (hnext : ∃ n : ℕ, Nonempty (K.X (a + 1) ≅ SheafOfModules.free\n      (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin n))))\n    (hhomology : SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} (K.homology a) r) :\n    K.d a (a + 1) = 0",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100032-L-2470097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100032-L-2470097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

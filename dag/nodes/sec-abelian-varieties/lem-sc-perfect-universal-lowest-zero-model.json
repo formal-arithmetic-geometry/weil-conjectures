@@ -20,47 +20,40 @@
  ],
  "proof": [
   {
-   "text": "At t test universal freeness on the residue-field morphism. Fibre Betti numbers commute with field extension, so the degree-a Betti number of E at h(t) is r. Tor amplitude gives vanishing below a: restrict to an affine chart and use the affine Tor-amplitude criterion to tensor with the residue field. This is local by the fixed-interval Tor-amplitude locality theorem. If b<a, all such fibres vanish and necessarily r=0 at every point of T. Choose the finite-free residue model; its term ranks below a vanish and its a-th term has rank r.",
+   "text": "Apply universalLowest_fiber_ranks to the residue-field tests supplied by hfree. Choose the existing finiteFreeResidueModel of E at h(t), whose term ranks equal the fibre Betti numbers.",
    "uses": [
-    "lem-sc-perfect-jump-loci",
-    "lem-pc-tor-amplitude-open-local",
-    "lem-pc-affine-tor-amplitude-criterion",
+    "lem-sc-universal-lowest-fiber-ranks",
     "lem-sc-perfect-finite-free-residue-model"
    ],
    "elementary": false
   },
   {
-   "text": "Pull this model to an affine neighbourhood of t in the inverse image of the chart. Bounded-above finite free terms are flat; the flat-complex counit and composition identify the pulled-back complex with Lh*E restricted to this neighbourhood. Tensor pullback preserves free terms, zero terms and the bound. Exact open pullback identifies its degree-a kernel with restricted degree-a homology.",
+   "text": "Apply finiteFreeResidueModel_pullback to this chosen model. Its term ranks are unchanged and its upper bound persists. For i<a the rank is zero; the free sheaf on the empty index type is zero, so all these terms vanish.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-open-pullback-homology"
+    "lem-sc-finite-free-residue-model-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "The identity test makes this kernel locally free of rank r. Shrink to trivialize it. Its inclusion into the first rank-r free term is an injective square free map. The cokernel has zero dual by 0EWY. Each coordinate of the outgoing differential factors through this cokernel; all coordinates vanish. Hence d^a=0. The representing derived isomorphism is retained after this shrinking. The empty T has no points, and r=0 gives a zero first term.",
+   "text": "Derived composition and the model isomorphism, followed by homologyFunctorFactors, identify homology of the new model with H^a(L(U.ι followed by h)^*E). The corresponding hfree test makes this homology locally free of rank r. Its degree-a term has that same rank. Apply finiteFreeBottom_differential_zero and assemble the bounds, vanishing, term ranks, and representing isomorphism.",
    "uses": [
-    "lem-sc-square-injective-free-map-dual-coker-zero"
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-sc-finite-free-bottom-differential-zero"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-tor-amplitude-criterion",
-  "lem-pc-derived-open-pullback-homology",
-  "lem-pc-flat-complex-derived-pullback",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-tor-amplitude-open-local",
+  "lem-sc-finite-free-bottom-differential-zero",
+  "lem-sc-finite-free-residue-model-pullback",
   "lem-sc-perfect-finite-free-residue-model",
-  "lem-sc-perfect-jump-loci",
-  "lem-sc-square-injective-free-map-dual-coker-zero"
+  "lem-sc-universal-lowest-fiber-ranks"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDL",
-  "place": "Matrix-chart proof, with Tags 0BCD and 0EWY; Tor-amplitude restriction from 08E9 and 09U8",
-  "note": "W2 made explicit a strictly separate part of the original matrix-chart argument."
+  "place": "M3 Lean reduction of the matrix-chart argument via fibre ranks, proved model transport and proved full-rank kernel vanishing; Tags 0BCD, 0EWY, 06YD, 06YJ and 08DW."
  },
  "mathlib_searches": [
   {
@@ -144,9 +137,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T045616-L-140222",
+  "landing": "20261013T100032-L-2470097",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

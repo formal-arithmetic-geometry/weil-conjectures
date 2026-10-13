@@ -10,13 +10,10 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
-import Sheaf.AlgebraicGeometry.PerfectJumpLoci
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.UniversalLowestFiberRanks
+import Sheaf.AlgebraicGeometry.FiniteFreeResidueModelPullback
+import Sheaf.AlgebraicGeometry.FiniteFreeBottomDifferentialZero
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Mathlib.LinearAlgebra.Matrix.Nonsingular
-import Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal
-import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
-import Sheaf.AlgebraicGeometry.DerivedOpenPullbackHomology
 
 /-! # Zero bottom differential on a universally free locus
 Source: Stacks Project, Tags 0BDL, 0BCD and 0EWY.
@@ -76,6 +73,43 @@ theorem perfectUniversalLowest_zero_model
         (∀ i : ℤ, ∃ n : ℕ, Nonempty (K.X i ≅ SheafOfModules.free
           (R := moduleRings U.toScheme.toRingedSpace) (ULift.{u} (Fin n)))) ∧
         Nonempty ((derivedPullback U.ι).obj ((derivedPullback h).obj E) ≅
-          DerivedCategory.Q.obj K) := by sorry
+          DerivedCategory.Q.obj K) := by
+  classical
+  intro t
+  obtain ⟨hbelowRank, hfirstRank⟩ := universalLowest_fiber_ranks S E hE a b hamp r T h
+    (fun t ↦ hfree (Spec (T.residueField t)) (T.fromSpecResidueField t)) t
+  obtain ⟨_, _, V, htV, _, K, ⟨l, c, hbound⟩, hRank, hmodel⟩ :=
+    exists_finiteFreeResidueModel S E hE (h t)
+  obtain ⟨U, htU, P, hPbound, hPrank, ⟨eP⟩⟩ := finiteFreeResidueModel_pullback
+    S E V K (fun i ↦ derivedFiberBetti S E i (h t))
+    ⟨c, fun i hi ↦ hbound i (Or.inr hi)⟩ hRank hmodel T h t htV
+  have hPbelow : ∀ i : ℤ, i < a → IsZero (P.X i) := by
+    intro i hi
+    obtain ⟨e⟩ := hPrank i
+    rw [hbelowRank i hi] at e
+    have hz : IsZero (SheafOfModules.free
+        (R := moduleRings U.toScheme.toRingedSpace) (ULift.{u} (Fin 0))) := by
+      apply (IsZero.iff_id_eq_zero _).2
+      apply (SheafOfModules.freeHomEquiv _).injective
+      funext j
+      exact Fin.elim0 j.down
+    exact hz.of_iso e
+  obtain ⟨_, _, _, comp, _⟩ := exists_derivedPullbackComposition.{u, w}
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) a
+  let eH : H.obj ((derivedPullback (U.ι ≫ h)).obj E) ≅ P.homology a :=
+    H.mapIso (((comp U.ι h).app E).symm ≪≫ eP) ≪≫
+      (DerivedCategory.homologyFunctorFactors _ a).app P
+  have : SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+      (H.obj ((derivedPullback (U.ι ≫ h)).obj E)) r := hfree U.toScheme U.ι
+  have hPhom : SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} (P.homology a) r :=
+    SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso eH
+  have hPfirst : Nonempty (P.X a ≅ SheafOfModules.free
+      (R := moduleRings U.toScheme.toRingedSpace) (ULift.{u} (Fin r))) := by
+    simpa only [hfirstRank] using hPrank a
+  have hd := finiteFreeBottom_differential_zero U.toScheme P a r hPbelow hPfirst
+    ⟨derivedFiberBetti S E (a + 1) (h t), hPrank (a + 1)⟩ hPhom
+  exact ⟨U, htU, P, hPbound, hPbelow, hd,
+    fun i ↦ ⟨derivedFiberBetti S E i (h t), hPrank i⟩, ⟨eP⟩⟩
 
 end AlgebraicGeometry.Scheme

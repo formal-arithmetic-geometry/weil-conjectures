@@ -1,0 +1,153 @@
+{
+ "id": "lem-sc-universal-lowest-fiber-ranks",
+ "kind": "statement",
+ "title": "Residue-field tests determine lowest fibre ranks",
+ "statement": "Let $S,T$ be schemes [def-pc-scheme], with derived categories in one universe [def-pc-derived-category], and $E\\in D(\\mathcal O_S)$ perfect [def-pc-perfect-complex]. Let $a,b\\in\\mathbf Z$, and assume $H^i(E\\otimes^{\\mathbf L}F)=0$ for every module sheaf $F$ and every $i<a$ or $b<i$ [def-pc-derived-tensor-cohomology-vanishes]. Fix $h:T\\to S$, $r\\in\\mathbf N$, and suppose $H^a(L(h\\circ i_t)^*E)$ is finite locally free of rank $r$ [def-amb-finite-locally-free-module] for every residue morphism $i_t:\\operatorname{Spec}\\kappa(t)\\to T$ [def-pc-derived-pullback]. Then at every $t\\in T$, $\\beta_i(E,h(t))=0$ for all $i<a$ and $\\beta_a(E,h(t))=r$ [def-sc-derived-fiber-betti]. No condition $a\\le b$ is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "First paragraph; Tag 0BDI base-change formula, Tag 09U8 Tor amplitude under pullback, Tag 08E9 affine criterion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-pullback",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof": [
+  {
+   "text": "Replace b by max(a,b). Extend any test sheaf on an affine open by open pushforward; its restriction is the original sheaf. Exact restriction commutes with tensor and homology, so the global Tor tests imply the same tests on that affine. A perfect local module representative satisfies the affine Tor-amplitude criterion. Tensor it with the residue field to get zero cohomology in every degree below a, hence zero Betti numbers there. This is the flat-representative pullback argument of Stacks 09U8, specialized to residue morphisms. No b>=a assumption is needed after enlarging b.",
+   "uses": [
+    "lem-pc-affine-tor-amplitude-criterion",
+    "def-pc-derived-tensor-cohomology-vanishes",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The residue-field test and derived composition identify the degree-a cohomology of the fibre of Lh*E as rank-r locally free on Spec kappa(t). A nonempty member of its trivializing open cover equals this one-point spectrum, so the sheaf is free of rank r. Its sections, with scalars transported along GammaSpecIso, have dimension r. Since perfect objects are pseudo-coherent, apply the base-change clause of the jump-loci theorem to identify this dimension with beta_a(E,h(t)).",
+   "uses": [
+    "lem-sc-perfect-jump-loci",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-perfect-complex",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-pullback",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-pc-perfect-complex",
+  "lem-pc-affine-tor-amplitude-criterion",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-perfect-jump-loci"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "First paragraph; Tag 0BDI base-change formula, Tag 09U8 Tor amplitude under pullback, Tag 08E9 affine criterion",
+  "note": "M3 expanded the cited argument and checked the Lean combination locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homology.*[Ii]s[Ff]ree|[Kk]ernel.*[Ff]ree|ker.*rank|transpose.*injective",
+   "results": "25 hits: Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, Mathlib/LinearAlgebra/Matrix/ToLin.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex with universally free lowest cohomology has a local finite free model with zero bottom differential",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, Module.freeLocus_eq_univ_iff, CochainComplex.isKProjective_iff_leftOrthogonal, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes Tor amplitude derived fibre Betti vanishing and free homology rank",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapFreeIso|mapHomologicalComplexHomologyIso|linearIndependent_col_iff_row",
+   "results": "12 hits: Mathlib/LinearAlgebra/Matrix/Nonsingular.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above finite free complex on an open subscheme represents derived pullback termwise with the same ranks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free sheaf complex whose bottom cohomology is locally free of the same rank has zero first differential",
+   "results": "8 hits: CochainComplex.cm5b.I_d, SheafOfModules.relationsOfIsCokernelFree_I, CochainComplex.exactAt_succ_single_obj, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectUniversalLowestZeroModel",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construction of the locally closed free-cohomology loci; Residue-field tests determine lowest fibre ranks",
+   "via": [
+    "lem-sc-perfect-universal-lowest-zero-model",
+    "lem-sc-perfect-universal-lowest-cohomology-pullback",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniversalLowestFiberRanks",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalLowestFiberRanks.lean",
+  "declaration": "AlgebraicGeometry.Scheme.universalLowest_fiber_ranks",
+  "statement": "theorem universalLowest_fiber_ranks\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (S : Scheme.{u})\n    [∀ U : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    (E : schemeDerivedCategory S) (hE : IsPerfect S E) (a b : ℤ)\n    (hamp : ∀ F : SheafOfModules.{u} (moduleRings S.toRingedSpace),\n      ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes S E F i)\n    (r : ℕ) (T : Scheme.{u}) (h : T ⟶ S)\n    (hres : ∀ t : T,\n      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n        ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (T.residueField t)).toRingedSpace)) a).obj\n            ((derivedPullback (T.fromSpecResidueField t ≫ h)).obj E)) r) :\n    ∀ t : T, (∀ i : ℤ, i < a → derivedFiberBetti S E i (h t) = 0) ∧\n      derivedFiberBetti S E a (h t) = r",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100032-L-2470097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100032-L-2470097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-finite-free-residue-model-pullback",
+ "kind": "statement",
+ "title": "Transport of a bounded-above finite-free open model",
+ "statement": "Let $h:T\\to S$ be a scheme morphism [def-pc-scheme], $E\\in D(\\mathcal O_S)$ [def-pc-derived-category], and $V\\subset S$ open. Let $K$ be a bounded-above cochain complex of module sheaves on the open site over $V$ [def-pc-cochain-complex-modules], representing $E|_V$. Fix $n:\\mathbf Z\\to\\mathbf N$ and isomorphisms $K^i\\cong\\mathcal O_V^{\\oplus n(i)}$ in every degree [def-weil-pbc-free-module]. Derived categories on schemes use one universe; those on the open sites of $S$ are supplied in that universe. For each $t\\in T$ with $h(t)\\in V$, there are an open neighbourhood $U$ of $t$ and a bounded-above complex $P$ on $U$ with $P^i\\cong\\mathcal O_U^{\\oplus n(i)}$ in every degree, and $L(U\\hookrightarrow T)^*Lh^*E\\cong Q(P)$ [def-pc-derived-pullback]. No Tor-amplitude or cohomology-rank hypothesis is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat termwise pullback; Tags 06YD and 08DW, bounded-flat and open-restriction comparisons"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Set U to the inverse image of V, and transport K to V.toScheme by the exact open-site equivalence A. The equivalence preserves free terms by mapFreeIso and identifies unit sheaves. It preserves zero objects, hence the upper bound. Every finite-free term is flat by flatness of coproducts of the tensor unit. The bounded-above flat criterion makes this transported complex K-flat.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the K-flat counit in exists_derivedPullback to the restricted morphism U.toScheme to V.toScheme. Identify tensor pullback with module pullback by uniqueness of left adjoints. Define P as its termwise pullback. Module pullback sends free terms to free terms with the same index types and sends zero terms to zero terms; the bounds and ranks follow.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A K-flat resolution of an arbitrary object identifies derived open pullback with exact open restriction followed by the open-site equivalence. Apply this to Lh*E, then apply the universe-aware derived pullback/open-restriction comparison. Transport the given representing isomorphism through the exact equivalence and the restricted derived pullback, and compose with the K-flat counit isomorphism. These explicit compositions give the required isomorphism to Q(P).",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-weil-pbc-free-module",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat termwise pullback; Tags 06YD and 08DW, bounded-flat and open-restriction comparisons",
+  "note": "M3 expanded the cited argument and checked the Lean combination locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homology.*[Ii]s[Ff]ree|[Kk]ernel.*[Ff]ree|ker.*rank|transpose.*injective",
+   "results": "25 hits: Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/Matrix/ConjTranspose.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, Mathlib/LinearAlgebra/Matrix/ToLin.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex with universally free lowest cohomology has a local finite free model with zero bottom differential",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, Module.freeLocus_eq_univ_iff, CochainComplex.isKProjective_iff_leftOrthogonal, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes Tor amplitude derived fibre Betti vanishing and free homology rank",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapFreeIso|mapHomologicalComplexHomologyIso|linearIndependent_col_iff_row",
+   "results": "12 hits: Mathlib/LinearAlgebra/Matrix/Nonsingular.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above finite free complex on an open subscheme represents derived pullback termwise with the same ranks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free sheaf complex whose bottom cohomology is locally free of the same rank has zero first differential",
+   "results": "8 hits: CochainComplex.cm5b.I_d, SheafOfModules.relationsOfIsCokernelFree_I, CochainComplex.exactAt_succ_single_obj, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectUniversalLowestZeroModel",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construction of the locally closed free-cohomology loci; Transport of a bounded-above finite-free open model",
+   "via": [
+    "lem-sc-perfect-universal-lowest-zero-model",
+    "lem-sc-perfect-universal-lowest-cohomology-pullback",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeResidueModelPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeResidueModelPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteFreeResidueModel_pullback",
+  "statement": "theorem finiteFreeResidueModel_pullback\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (S : Scheme.{u})\n    [∀ V : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over V))]\n    (E : schemeDerivedCategory S) (V : S.Opens)\n    (K : CochainComplex\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over V)) ℤ)\n    (n : ℤ → ℕ)\n    (hbounded : ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (K.X i))\n    (hrank : ∀ i : ℤ, Nonempty (K.X i ≅ SheafOfModules.free\n      (R := (moduleRings S.toRingedSpace).over V) (ULift.{u} (Fin (n i)))))\n    (hmodel : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings S.toRingedSpace) V).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K))\n    (T : Scheme.{u}) (h : T ⟶ S) (t : T) (ht : h t ∈ V) :\n    ∃ U : T.Opens, t ∈ U ∧\n      ∃ P : CochainComplex\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ,\n        (∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (P.X i)) ∧\n        (∀ i : ℤ, Nonempty (P.X i ≅ SheafOfModules.free\n          (R := moduleRings U.toScheme.toRingedSpace) (ULift.{u} (Fin (n i))))) ∧\n        Nonempty ((derivedPullback U.ι).obj ((derivedPullback h).obj E) ≅\n          DerivedCategory.Q.obj P)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100032-L-2470097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100032-L-2470097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
