@@ -10917,3 +10917,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:29 L: merged deliver/D4/Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence (stage 3; reviewer PASS; first push; landing 20261013T032957-L-3674666 (interface); batch 20261013T032954; modules 5; new nodes 4)
 - 03:29 L: merged deliver/E1/Sheaf.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacementCore (stage 3; reviewer PASS; first push; landing 20261013T032958-L-3674793 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:29 L: merged deliver/F3/Sheaf.AlgebraicGeometry.PerfectUniversalH0TruncationPullback (stage 3; reviewer PASS; first push; landing 20261013T032958-L-3675022 (interface); batch 20261013T032954; modules 3; new nodes 2)
+- 03:29 L: merged deliver/F4/Sheaf.Algebra.Homology.ModuleRestrictionStalkComponents (stage 3; reviewer PASS; first push; landing 20261013T032959-L-3675246 (proof); batch 20261013T032954; modules 1; new nodes 0)
