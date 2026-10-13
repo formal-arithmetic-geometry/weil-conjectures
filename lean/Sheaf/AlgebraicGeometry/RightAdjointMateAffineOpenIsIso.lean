@@ -6,8 +6,7 @@ Authors: SHEAF group H4
 module
 
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.ProperFlatOpenSquareMateIso
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
@@ -70,6 +69,8 @@ theorem rightAdjoint_mate_affineOpen_isIso
       (@dualityEquationBaseChangeMap _ X Y V.toScheme
         (QuasiCompact.compactSpace_of_compactSpace f)
         (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _
-        f V.ι a aV adjf adjV hβ₀ K)) := by sorry
+        f V.ι a aV adjf adjV hβ₀ K)) := by
+  have := proper_flat_openSquare_mate_isIso V f a aV adjf adjV hβ₀ K
+  infer_instance
 
 end AlgebraicGeometry
