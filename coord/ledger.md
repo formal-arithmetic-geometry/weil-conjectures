@@ -10287,3 +10287,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:31 L: merged deliver/B2/Sheaf.AlgebraicGeometry.SingleFiniteRetractSheafAffineTrivialization (stage 3; reviewer PASS; first push; landing 20261013T003154-L-2427903 (proof); batch 20261013T003152; modules 1; new nodes 0)
 - 00:31 L: merged deliver/B3/Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres (stage 3; reviewer PASS; first push; landing 20261013T003154-L-2428001 (proof); batch 20261013T003152; modules 1; new nodes 0)
 - 00:31 L: merged deliver/B3/Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisDegreewise (stage 3; reviewer PASS; first push; landing 20261013T003155-L-2428115 (interface); batch 20261013T003152; modules 2; new nodes 1)
+- 00:31 L: merged deliver/B3/Sheaf.AlgebraicGeometry.StalkRestrictionSubopenCompatibility (stage 3; reviewer PASS; after a return; landing 20261013T003155-L-2428213 (proof); batch 20261013T003152; modules 1; new nodes 0)
