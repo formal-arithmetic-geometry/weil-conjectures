@@ -7,10 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.AffinePerfectHomColimit
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.PerfectStalkDerivedHomLift
+import Sheaf.AlgebraicGeometry.PerfectStalkQuasiIsoDetection
 
 /-! # Extending a derived stalk isomorphism between existing local perfect models
 
@@ -25,6 +23,50 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
+private theorem restrict_strictlyPerfect_for_stalk_spread
+    (X : Scheme.{u}) (U V : X.Opens) (h : V ≤ U)
+    (K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
+    (hK : IsStrictlyPerfect X U K) :
+    IsStrictlyPerfect X V
+      (((SheafOfModules.overMap.{u}
+        (moduleRings X.toRingedSpace) (homOfLE h)).mapHomologicalComplex (.up ℤ)).obj K) := by
+  let T := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE h)
+  constructor
+  · obtain ⟨a, b, hab⟩ := hK.1
+    exact ⟨a, b, fun n hn ↦ T.map_isZero (hab n hn)⟩
+  · intro n
+    obtain ⟨m, i, r, hir⟩ := hK.2 n
+    let e := (SheafOfModules.mapFreeIso T (ULift.{u} (Fin m))
+      (SheafOfModules.overMapUnitIso (R := moduleRings X.toRingedSpace)
+        (homOfLE h)).symm).symm
+    refine ⟨m, T.map i ≫ e.hom, e.inv ≫ T.map r, ?_⟩
+    change (T.map i ≫ e.hom) ≫ e.inv ≫ T.map r = 𝟙 (T.obj (K.X n))
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, ← Functor.map_comp, hir]
+    exact T.map_id _
+
+private theorem restrict_model_for_stalk_spread (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    (U V : X.Opens) (h : V ≤ U) (E : schemeDerivedCategory X)
+    (K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
+    (e : (SheafOfModules.overFunctor.{u}
+      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K) :
+    Nonempty ((SheafOfModules.overFunctor.{u}
+      (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj
+        (((SheafOfModules.overMap.{u}
+          (moduleRings X.toRingedSpace) (homOfLE h)).mapHomologicalComplex (.up ℤ)).obj K)) := by
+  let T := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE h)
+  let A := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
+  have : PreservesFiniteLimits (A ⋙ T) := comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits (A ⋙ T) := comp_preservesFiniteColimits _ _
+  exact ⟨(Functor.mapDerivedCategoryNatIso
+    (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace)
+      (homOfLE h))).symm.app E ≪≫
+    (Functor.mapDerivedCategoryCompIso A T).app E ≪≫ T.mapDerivedCategory.mapIso e ≪≫
+      T.mapDerivedCategoryFactors.app K⟩
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Existing local perfect models with isomorphic derived stalks are isomorphic nearby.
 
 Source: Stacks Project, Tag 09RE, affine proof, and Tag 0BC7 (2), with Tags 00CR and 06Z0.
@@ -80,7 +122,54 @@ theorem exists_affine_restriction_iso_of_perfect_stalk_iso
             (moduleRings X.toRingedSpace) W).mapHomologicalComplex (.up ℤ)).obj G) ≅
         DerivedCategory.Q.obj
           (((SheafOfModules.overFunctor.{u}
-            (moduleRings X.toRingedSpace) W).mapHomologicalComplex (.up ℤ)).obj H)) := by sorry
+            (moduleRings X.toRingedSpace) W).mapHomologicalComplex (.up ℤ)).obj H)) := by
+  obtain ⟨O, hxO, P₀, hP₀, ⟨iG₀⟩⟩ := hlocal
+  obtain ⟨A, hA, hxA, hAO⟩ := exists_isAffineOpen_mem_and_subset (U := O ⊓ U) ⟨hxO, hxU⟩
+  have hAP : A ≤ O := hAO.trans inf_le_left
+  have hAU : A ≤ U := hAO.trans inf_le_right
+  let R := moduleRings X.toRingedSpace
+  let L := SheafOfModules.overMap.{u} R (homOfLE hAP : A ⟶ O)
+  let M := SheafOfModules.overMap.{u} R (homOfLE hAU : A ⟶ U)
+  let P := (L.mapHomologicalComplex (.up ℤ)).obj P₀
+  let H₀ := ((SheafOfModules.overFunctor.{u} R U).mapHomologicalComplex (.up ℤ)).obj H
+  let Q := (M.mapHomologicalComplex (.up ℤ)).obj H₀
+  have hP : IsStrictlyPerfect X A P := restrict_strictlyPerfect_for_stalk_spread X O A hAP P₀ hP₀
+  have hQ : IsStrictlyPerfect X A Q := restrict_strictlyPerfect_for_stalk_spread X U A hAU H₀ hH
+  obtain ⟨iG⟩ := restrict_model_for_stalk_spread X O A hAP (DerivedCategory.Q.obj G) P₀ iG₀
+  obtain ⟨iH⟩ := restrict_model_for_stalk_spread X U A hAU (DerivedCategory.Q.obj H) H₀
+    ((SheafOfModules.overFunctor.{u} R U).mapDerivedCategoryFactors.app H)
+  obtain ⟨V, hxV, hV, hVA, cG, cH, f, hf⟩ :=
+    exists_affine_perfect_stalk_hom_lift X x G H A hxA hA P Q hP hQ iG iH e.hom
+  let N := SheafOfModules.overMap.{u} R (homOfLE hVA : V ⟶ A)
+  let P' := (N.mapHomologicalComplex (.up ℤ)).obj P
+  let Q' := (N.mapHomologicalComplex (.up ℤ)).obj Q
+  have hP' : IsStrictlyPerfect X V P' := restrict_strictlyPerfect_for_stalk_spread X A V hVA P hP
+  have hQ' : IsStrictlyPerfect X V Q' := restrict_strictlyPerfect_for_stalk_spread X A V hVA Q hQ
+  let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V) ⥤
+      ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X V ⟨x, hxV⟩
+  have : S.PreservesZeroMorphisms :=
+    AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X V ⟨x, hxV⟩
+  have hfiso : IsIso (DerivedCategory.Q.map
+      ((S.mapHomologicalComplex (.up ℤ)).map f)) := by
+    rw [hf]
+    infer_instance
+  have hfquasi : QuasiIso
+      ((S.mapHomologicalComplex (.up ℤ)).map f) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mp hfiso
+  obtain ⟨W, hxW, hW, hWV, hfW⟩ :=
+    exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso
+      X V x hxV hV P' Q' hP' hQ' f hfquasi
+  obtain ⟨iG'⟩ := restrict_model_for_stalk_spread X A V hVA (DerivedCategory.Q.obj G) P iG
+  obtain ⟨iH'⟩ := restrict_model_for_stalk_spread X A V hVA (DerivedCategory.Q.obj H) Q iH
+  obtain ⟨g⟩ := restrict_model_for_stalk_spread X V W hWV (DerivedCategory.Q.obj G) P' iG'
+  obtain ⟨h⟩ := restrict_model_for_stalk_spread X V W hWV (DerivedCategory.Q.obj H) Q' iH'
+  let T := SheafOfModules.overMap.{u} R (homOfLE hWV : W ⟶ V)
+  let B := SheafOfModules.overFunctor.{u} R W
+  have : QuasiIso ((T.mapHomologicalComplex (.up ℤ)).map f) := hfW
+  let ef := asIso (DerivedCategory.Q.map ((T.mapHomologicalComplex (.up ℤ)).map f))
+  exact ⟨W, hxW, hW, hWV.trans (hVA.trans hAU),
+    ⟨(B.mapDerivedCategoryFactors.app G).symm ≪≫ g ≪≫ ef ≪≫ h.symm ≪≫
+      B.mapDerivedCategoryFactors.app H⟩⟩
 
 end
 end AlgebraicGeometry.Scheme

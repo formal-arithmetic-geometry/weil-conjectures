@@ -1,0 +1,132 @@
+{
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine full faithfulness; More on Algebra Tag 0BC7 (2); Tags 00CR and 06Z0"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectStalkDerivedIsoSpread",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: descent of a derived stalk morphism and detection of its quasi-isomorphism on a principal affine neighbourhood",
+   "via": [
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "id": "lem-sc-perfect-stalk-derived-hom-lift",
+ "kind": "statement",
+ "title": "Lifting a derived stalk morphism to a local chain map",
+ "statement": "For a scheme and a point, a derived morphism between the stalk complexes of two global complexes, each represented by strictly perfect models on an affine neighbourhood, is represented after a smaller affine restriction by a chain map between those models, with canonical derived stalk comparisons carrying that chain map to the given morphism. The models and the neighbourhood are part of the conclusion [def-pc-scheme] [def-pc-derived-category] [def-pc-module-stalk-functor] [def-pc-perfect-complex].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-module-stalk-functor",
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-pc-affine-perfect-hom-colimit",
+  "lem-pc-perfect-affine-map-representative"
+ ],
+ "proof": [
+  {
+   "text": "On an affine chart, finite-free retract presentations give bounded finite projective section complexes. Exact stalk comparisons identify their prime localizations with the stalk complexes. The localization at the prime is a filtered colimit of principal localizations; surjectivity of perfect Hom continuity descends the transported morphism to one principal stage. The affine derived equivalence and the chain-map representative theorem transport this representative back to the sheaf models and give the displayed equality.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-pc-affine-perfect-hom-colimit",
+    "lem-pc-perfect-affine-map-representative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-pc-affine-perfect-hom-colimit",
+  "lem-pc-perfect-affine-map-representative"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine proof, with Tags 0BC7 (2), 00CR and 06Z0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived stalk morphism between strictly perfect complexes on an affine scheme is represented by a chain map after restricting to a smaller affine neighborhood",
+   "results": "Service unavailable: Internal Server Error; no result.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived morphism between perfect complexes over a scheme stalk extends to an affine neighborhood",
+   "results": "Eight hits: ordinary stalk maps and affine germ lifting, but no derived perfect-complex lift.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"stalk\"; \"perfect\", \"stalk\"",
+   "results": "No hits for the combined query.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Hh]om.*lift|perfect.*[Qq]uasi[Ii]so|quasiIso.*stalk",
+   "results": "No existing module states the required derived chain-map lift or perfect stalk quasi-isomorphism neighbourhood result.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectStalkDerivedHomLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectStalkDerivedHomLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_stalk_hom_lift",
+  "statement": "theorem exists_affine_perfect_stalk_hom_lift (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ W : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))] (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))] (G H : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U) (P Q : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q) (iG : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj G) ≅ DerivedCategory.Q.obj P) (iH : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj H) ≅ DerivedCategory.Q.obj Q) (t : DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (ComplexShape.up ℤ)).obj G) ⟶ DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (ComplexShape.up ℤ)).obj H)) : ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (hVU : V ≤ U), let T := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ) let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V) ⥤ ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X V ⟨x, hxV⟩ letI : S.PreservesZeroMorphisms := AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X V ⟨x, hxV⟩ ∃ (cG : DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj (T.obj P)) ≅ DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (.up ℤ)).obj G)) (cH : DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj (T.obj Q)) ≅ DerivedCategory.Q.obj (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex (.up ℤ)).obj H)) (f : T.obj P ⟶ T.obj Q), DerivedCategory.Q.map ((S.mapHomologicalComplex (.up ℤ)).map f) = cG.hom ≫ t ≫ cH.inv",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T060424-L-584813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T060424-L-584813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
