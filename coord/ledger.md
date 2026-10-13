@@ -11581,3 +11581,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:57 L: batch 20261013T072335 dependency take-out
 - 08:05 L: returned deliver/N3/Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition (reviewer RETURN: (reviewer X-3e46c, head 3e46c2222) C4: In dag/nodes/sec-picard-framework/lem-pc-single-complex-tensor-stalk-coordinates.)
 - 08:08 L: returned deliver/H4/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf (reviewer RETURN: (reviewer X-f4010, head f4010640d) H10 (compile timeout; stage-3 reader gate and slow-compiles rule): Repair the instanc)
+- 08:09 L: returned deliver/W3/Sheaf.Algebra.Homology.HomComplexMappingConeDifferential (reviewer RETURN: (reviewer X-2c3c7, head 2c3c73aae) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Hom)
