@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-open-ordinary-tensor-germ-equation",
+ "kind": "statement",
+ "title": "Homology transport from the canonical open tensor-stalk chain square",
+ "statement": "For the ordinary tensor complexes of [def-pc-single-complex-base-change-stalk-condition], let tau be an additive chain iso whose degreewise composition with ambient tensorStalkIso equals restricted tensorStalkIso followed by the stalk of [def-pc-open-pinned-single-tensor-restriction-iso] inverse and the same-germ comparison gamma. Then forgetting restricted k0, applying stalk cohomology to [def-pc-single-complex-open-tensor-restriction-iso], and applying [def-pc-open-derived-additive-stalk-iso] equals the inverse forgetful homology factor, homologyMap(tau), ambient forgetful homology factor and forgotten ambient k. The k maps use comparisonStalkHomologyIso from [lem-pc-stalk-comparison-source-transport]. This is conditional only on an explicit chain-square identity, not arbitrary scalar or input coordinates.",
+ "stmt_deps": [
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-single-complex-open-tensor-restriction-iso",
+  "def-pc-open-derived-additive-stalk-iso",
+  "lem-pc-stalk-comparison-source-transport",
+  "def-pc-open-pinned-single-tensor-restriction-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); perfect.tex, equation-bc (Tag 0DJ7), ordinary target path; cohomology.tex, exact localization Tags 08HY and 08DW."
+ },
+ "proof": [
+  {
+   "text": "The degreewise hypothesis gives equality of the canonical additive chain composites by HomologicalComplex.Hom.ext. Apply homologyMap and its composition formula. ShortComplex.mapHomologyIso naturality moves both forgetful homology factors across tensorStalkIso.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand beta as Qh of the inverse pinned homotopy comparison followed by the inverse exact restriction factor. quotientCompQhIso naturality and mapDerivedCategoryFactorsh identify it with localization of the termwise inverse comparison. comparisonStalkHomologyIso_naturality identifies its stalk cohomology with homology of the stalk chain map.",
+   "uses": [
+    "def-pc-single-complex-open-tensor-restriction-iso",
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand nu and use mapDerivedCategoryCompIso_fac, mapDerivedCategoryNatIso_fac and mapDerivedCategoryHomologyFunctorIso_hom_app_Q to identify its value on the representative with homology of gamma. The factorization isomorphisms cancel. The chain-square homology equality, composed with inverse comparisonStalkHomologyIso at the two endpoints, is the conclusion.",
+   "uses": [
+    "def-pc-open-derived-additive-stalk-iso",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-derived-additive-stalk-iso",
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-single-complex-open-tensor-restriction-iso",
+  "lem-pc-stalk-comparison-source-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); perfect.tex, equation-bc (Tag 0DJ7), ordinary target path; cohomology.tex, exact localization Tags 08HY and 08DW.",
+  "note": "Second reader repaired the reduction: canonical degreewise chain square, then exact homology factorization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homology commutes with exact functor natural isomorphism and localization",
+   "date": "2026-10-14",
+   "results": "DerivedCategory.homologyFunctorFactors and homologyFunctorFactorsh; generic localization factorization declarations.",
+   "verdict": "No exact open tensor-stalk transport equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\", \"homologyMap\"",
+   "date": "2026-10-14",
+   "results": "No hits.",
+   "verdict": "Local source search supplies naturality constituents."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|mapDerivedCategoryNatIso_fac",
+   "date": "2026-10-14",
+   "results": "Mathlib restriction-stalk comparison and ShortComplex.mapHomologyIso_hom_naturality/inv_naturality; upstream ExactFunctor has mapDerivedCategoryNatIso_fac, mapDerivedCategoryCompIso_fac and mapDerivedCategoryHomologyFunctorIso_hom_app_Q.",
+   "verdict": "These prove factorization coherence; no ready-made equation with beta, nu and comparisonStalkHomologyIso."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain square of exact functors induces a commuting derived homology square through localization factorization isomorphisms",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenOrdinaryTensorGermTransport",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-ordinary-tensor-germ-transport",
+   "place": "ordinary open tensor restriction germ argument",
+   "via": [
+    "lem-pc-open-ordinary-tensor-germ-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenOrdinaryTensorGermEquation",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenOrdinaryTensorGermEquation.lean",
+  "declaration": "AlgebraicGeometry.openOrdinaryTensor_germ_transport_equation",
+  "statement": "theorem openOrdinaryTensor_germ_transport_equation [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (V : S.Opens) (V' : S'.Opens) (hV' : V' ≤ g ⁻¹ᵁ V) (j : (f' ⁻¹ᵁ V').toScheme ⟶ (f ⁻¹ᵁ V).toScheme) (hj : j ≫ (f ⁻¹ᵁ V).ι = (f' ⁻¹ᵁ V').ι ≫ g') (sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hV')) (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (z : (f' ⁻¹ᵁ V').toScheme) (i : ℤ) : letI : (schemeOpenRestriction X (f ⁻¹ᵁ V)).Additive := schemeOpenRestriction_additive X (f ⁻¹ᵁ V) letI : (schemeOpenRestriction X (f ⁻¹ᵁ V)).PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive _ let Q₀ := ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P let C₀ := C z let C₁ := C z.val let T₀ := tensorComplex (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀ let T := tensorComplex f f' g g' sq z.val P let F₀ := forget₂ (ModuleCat.{u} C₀) AddCommGrpCat.{u} let F := forget₂ (ModuleCat.{u} C₁) AddCommGrpCat.{u} let H₀ := comparisonStalkCohomology (f' ⁻¹ᵁ V').toScheme z i let β := singleComplexOpenTensorRestrictionMap g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj P let ν := openDerivedAdditiveStalkIso X' (f' ⁻¹ᵁ V') z i let k₀ := HomologicalComplex.homologyMap (tensorStalkIso (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀).hom i ≫ (comparisonStalkHomologyIso (f' ⁻¹ᵁ V').toScheme z (((Scheme.Modules.tensorPullback j).mapHomologicalComplex (.up ℤ)).obj Q₀) i).inv let k := HomologicalComplex.homologyMap (tensorStalkIso f f' g g' sq z.val P).hom i ≫ (comparisonStalkHomologyIso X' z.val (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) i).inv let L₀ := RingedSpace.moduleStalkFunctor (f' ⁻¹ᵁ V').toScheme.toRingedSpace z let γ := Functor.isoWhiskerRight (Scheme.Modules.overFunctorEquiv (f' ⁻¹ᵁ V')) (L₀ ⋙ F₀) ≪≫ Scheme.Modules.restrictStalkNatIso (f' ⁻¹ᵁ V').ι z ∀ (τ : (F₀.mapHomologicalComplex (.up ℤ)).obj T₀ ≅ (F.mapHomologicalComplex (.up ℤ)).obj T), (∀ n : ℤ, τ.hom.f n ≫ F.map ((tensorStalkIso f f' g g' sq z.val P).hom.f n) = F₀.map ((tensorStalkIso (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀).hom.f n) ≫ F₀.map (L₀.map ((openPinnedTensorRestrictionIso g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj).inv.app (P.X n))) ≫ γ.hom.app ((Scheme.Modules.tensorPullback g').obj (P.X n))) → F₀.map k₀ ≫ F₀.map (H₀.map β) ≫ ν.hom.app (DerivedCategory.Q.obj (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) = ((T₀.sc i).mapHomologyIso F₀).inv ≫ HomologicalComplex.homologyMap τ.hom i ≫ ((T.sc i).mapHomologyIso F).hom ≫ F.map k",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T190149-L-3219181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T190149-L-3219181",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

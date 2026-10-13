@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenTensorRestrictionIso
 public import Sheaf.AlgebraicGeometry.OpenDerivedAdditiveStalkIso
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Sheaf.AlgebraicGeometry.OpenOrdinaryTensorGermCoordinates
+import Sheaf.AlgebraicGeometry.OpenOrdinaryTensorGermEquation
 
 /-! # Germ coordinates for ordinary tensor restriction
 
@@ -26,6 +27,8 @@ open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
 
+set_option maxHeartbeats 1000000 in
+-- The target combines two large categorical transports and needs extra elaboration budget.
 /-- Open restriction identifies the ordinary tensor stalk complexes in germ
 coordinates. This concerns only ordinary tensor complexes, not the cohomology
 of a base-derived tensor or its comparison map.
@@ -131,6 +134,11 @@ theorem exists_openOrdinaryTensor_germ_transport
                 (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) =
             ((T₀.sc i).mapHomologyIso F₀).inv ≫
               HomologicalComplex.homologyMap τ.hom i ≫ ((T.sc i).mapHomologyIso F).hom ≫
-                F.map k := by sorry
+                F.map k := by
+  obtain ⟨eR, eA, eB, eC, hRA, hRB, hCA, hCB, α, hα, τ, hτ, hchain⟩ :=
+    exists_openOrdinaryTensor_germ_coordinates f f' g g' sq V V' hV' j hj sq₀ P z
+  refine ⟨eR, eA, eB, eC, hRA, hRB, hCA, hCB, α, hα, τ, hτ, ?_⟩
+  exact openOrdinaryTensor_germ_transport_equation f f' g g' sq V V' hV' j hj sq₀ P z i
+    τ hchain
 
 end AlgebraicGeometry
