@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-module-support-restriction-enlargement",
+ "kind": "statement",
+ "title": "Restrict a one-section factorization and enlarge its finite basis support",
+ "statement": "Let X be a scheme [def-pc-scheme], R an arbitrary sheaf of rings on its Zariski site, and V,U,W,Z opens with U contained in V, W contained in U, Z contained in U and Z contained in W. Let I be a type in the module universe and S,T finite subsets of I with S contained in T. In the module sheaf categories [def-weil-sheaf-of-modules-category], suppose b:unit(R|U) -> free_I(R|V)|U and a:unit(R|W) -> free_S(R|V)|W satisfy a followed by the restricted basis inclusion S -> I equals b restricted to W. Then restricting a to Z, composing with the restricted freeMap S -> T and then the restricted basis inclusion T -> I gives exactly b restricted directly from U to Z. The source is the restriction to Z of the unit over U. No neighbourhood, support or lift is asserted to exist or chosen; all these data are hypotheses.",
+ "source": {
+  "document": "Stacks Project, Sheaves of Modules",
+  "place": "Modules, Lemma 01BB, first paragraph of the proof, specialized to one section of a free module sheaf; Lemma 01AH (2). https://stacks.math.columbia.edu/tag/01BB and https://stacks.math.columbia.edu/tag/01AH."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "proof": [
+  {
+   "text": "Define inc:S -> T by the underlying index and the subset proof. Precomposing the composite freeMap inc followed by freeMap(T -> I) with each basis inclusion gives the same basis inclusion as freeMap(S -> I), by iotaFree_freeMap twice. Coproduct extensionality gives equality of these maps. Empty supports are included in the same extensionality calculation.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply overMap(Z -> W) to the assumed factorization equality and use Functor.map_comp. Iterated restriction along the open inclusions equals direct restriction: on each open contained in Z, both sides use the same original section module and the same linear map. Composition in the localized site Over of the preorder of opens agrees with the direct inclusion; homOfLE proof choices are irrelevant. The restriction of a unit is the unit, by overMapUnitIso (identity on components). These identities give the equality with b restricted directly from U to Z, in the explicitly typed source of the statement.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map the basis-inclusion equality from step 1 through overMap(Z -> V) and reassociate the composite with the restricted a. Substitute the restricted factorization from step 2. The result is precisely the displayed support-enlargement identity; only functoriality, basis extensionality and identities of direct and iterated restriction are used.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Sheaves of Modules",
+  "place": "Modules, Lemma 01BB, first paragraph of the proof, specialized to one section of a free module sheaf; Lemma 01AH (2). https://stacks.math.columbia.edu/tag/01BB and https://stacks.math.columbia.edu/tag/01AH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict a map from the unit sheaf into a finite free sheaf and enlarge its finite basis support",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.ιFree_freeMap",
+   "date": "2026-10-13",
+   "results": "SheafOfModules.iotaFree_freeMap in Mathlib.Algebra.Category.ModuleCat.Sheaf.Free gives the basis-inclusion identity. It does not state the restriction/enlargement equality.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "overMap.*comp|iotaFree_freeMap|freeMap.*comp in Mathlib module-sheaf Free and PushforwardContinuous; enlarge_restricted_unit_support and module-support-restriction-enlargement in the library and DAG",
+   "date": "2026-10-13",
+   "results": "Found free-map basis identities and overMapUnitIso. No existing combined restriction/enlargement declaration or DAG duplicate. Direct and iterated restrictions need identification in this statement.",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalSupport",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The finite-generation step of the affine-union construction in the H1 constructible representation: choose a finite support locally near each point before compactness selects a finite subcover. Part: Local finite support for maps with finite free source. Single-basis-image part: finite support of one germ and one local representative. Algebraic part: preservation of a supported lift under shrinking and enlargement of support.",
+   "via": [
+    "lem-weil-pbc-module-finite-free-local-support",
+    "lem-weil-pbc-module-generating-sections-local-selection",
+    "lem-weil-pbc-module-generating-sections-compact-selection",
+    "lem-weil-pbc-module-finite-type-affine-generators",
+    "lem-weil-pbc-module-finite-type-affine-capture",
+    "lem-weil-pbc-module-finite-type-affine-union",
+    "lem-weil-pbc-module-finite-type-affine-enlargement",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleSupportRestrictionEnlargement",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSupportRestrictionEnlargement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.enlarge_restricted_unit_support",
+  "statement": "theorem enlarge_restricted_unit_support\n    (X : Scheme.{u}) (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})\n    (V U W Z : X.Opens) (hUV : U ≤ V) (hWU : W ≤ U) (hZU : Z ≤ U) (hZW : Z ≤ W)\n    (I : Type u) (S T : Finset I) (hST : S ⊆ T)\n    (b : unit (R.over U) ⟶ (overMap R (homOfLE hUV)).obj (free (R := R.over V) I))\n    (a : unit (R.over W) ⟶\n      (overMap R (homOfLE (hWU.trans hUV))).obj (free (R := R.over V) S))\n    (ha : a ≫ (overMap R (homOfLE (hWU.trans hUV))).map\n        (freeMap (R := R.over V) ((↑) : S → I)) =\n      (overMap R (homOfLE hWU)).map b) :\n    (((overMap R (homOfLE hZW)).map a ≫\n        (overMap R (homOfLE (hZU.trans hUV))).map\n          (freeMap (R := R.over V) (fun j : S ↦ (⟨j.val, hST j.property⟩ : T)))) ≫\n        (overMap R (homOfLE (hZU.trans hUV))).map\n          (freeMap (R := R.over V) ((↑) : T → I)) :\n      (overMap R (homOfLE hZU)).obj (unit (R.over U)) ⟶\n        (overMap R (homOfLE (hZU.trans hUV))).obj (free (R := R.over V) I)) =\n      (overMap R (homOfLE hZU)).map b",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T161321-L-1423982",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T161321-L-1423982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
