@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-symmetric-conormal-presentation-transport",
+ "kind": "statement",
+ "title": "Conormal transport between equivalent canonical symmetric presentations",
+ "statement": "Let R and A be commutative rings with R-algebra A, and P a presentation of A with n variables and m relations [def-weil-pbc-finitely-presented-algebra]. Let M be any A-module with an A-linear equivalence e from P.toExtension.Cotangent to M. Put I=P.ker, B=R[Fin n]/I and C=Sym_B(I/I²) [lem-weil-pbc-symmetric-algebra-universal-property]. Define phi:R[Fin n][Fin m]→C by reducing coefficients to B and sending y_j to iota(class(P.relation j)). Define f:R[Fin(n+m)]→Sym_A(M) with variables reindexed by finSumFinEquiv, sending the first variables to the coefficient images of P.val and the last to iota(e(class(P.relation j))) [def-weil-pbc-mv-polynomial-ring]. For every proof that phi is surjective, there exist a ring equivalence rho:R[Fin(n+m)]/ker f ≃ C and a rho-semilinear equivalence (ker f)/(ker f)² ≃ (Extension.ofSurjective phi.toIntAlgHom hphi).Cotangent. R,A,M may lie in different universes; no projectivity or freeness assumption is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/07CE",
+  "place": "The polynomial symmetric presentation preceding equation (16.3.1.1), together with its invariance under the coefficient and conormal identifications; online proof read 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Identify P.Quotient with A by P.quotientEquiv and identify the conormal quotients by the identity on representatives. Compose with e. With the coefficient equivalence and this semilinear module equivalence, the symmetric algebra universal property defines a ring equivalence E from the literal symmetric algebra C to Sym_A(M). Construct its inverse from the inverse coefficient and module equivalences; both composites fix coefficients and degree-one generators, so they are identities.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let T be the ring equivalence from R[Fin(n+m)] to R[Fin n][Fin m] obtained by renaming with finSumFinEquiv.symm, swapping the sum indices, and applying the polynomial sumAlgEquiv. For a constant r, E(phi(T(C r))) is the structural image of r. For the variable indexed by finSumFinEquiv(Sum.inl j), both E(phi(T(-))) and f equal the coefficient image of P.val j. For the variable indexed by finSumFinEquiv(Sum.inr j), both equal iota(e(class(P.relation j))). Polynomial ring homomorphism extensionality proves E.comp phi.comp T = f.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since E is injective, T takes ker f exactly onto ker phi, and it takes their squares exactly onto each other. Restrict T and its inverse to the ideals and descend to the quotients by their squares; the resulting additive equivalence is semilinear for the induced quotient ring equivalence. Compose the scalar equivalence with phi.quotientKerEquivOfSurjective hphi to obtain rho. The literal ideal cotangent and (Extension.ofSurjective phi.toIntAlgHom hphi).Cotangent are the same quotient; their actions agree on polynomial representatives by Extension.Cotangent.val_smul'. Thus the descended equivalence has the required extension-cotangent codomain and scalar map rho. All quotient and equivalence constructions work for empty index sets and the zero ring.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/07CE",
+  "place": "Naturality argument expanding the coefficient identification and flattening step of the parent node; complete proof in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Conormal modules of symmetric algebra presentations are invariant under coefficient ring and module equivalences",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict inferred. Other kinds and source grep were used.",
+   "date": "2026-10-13",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalent coefficient rings and semilinearly equivalent modules give equivalent symmetric algebra polynomial presentation conormal modules",
+   "results": "IsSymmetricAlgebra.of_equiv and comp_equiv describe a fixed coefficient-ring equivalence; basis-based polynomial results require a free module. None gives the simultaneous coefficient-ring, module and kernel-conormal transport.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Cotangent, RingEquiv",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cotangent.*equiv|equiv.*Cotangent",
+   "results": "Ideal.cotangentEquivIdeal, tensorCotangentEquiv and Extension.cotangentEquivCotangentKer give nearby quotient, base-change and same-presentation equivalences. None states the simultaneous transport. Repository search also found no matching node or module.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SymmetricConormalFreePresentation",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-conormal-free-presentation",
+   "place": "Step 3: coefficient/module equivalence and polynomial reindexing, without the projective conormal calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SymmetricConormalPresentationTransport",
+  "file": "lean/Sheaf/RingTheory/SymmetricConormalPresentationTransport.lean",
+  "declaration": "Algebra.Presentation.symmetric_conormal_presentation_transport",
+  "statement": "theorem symmetric_conormal_presentation_transport\n    {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]\n    {n m : ℕ} (P : Algebra.Presentation R A (Fin n) (Fin m))\n    (M : Type w) [AddCommGroup M] [Module A M]\n    (e : P.toExtension.Cotangent ≃ₗ[A] M)\n    [Algebra R (SymmetricAlgebra A M)] [IsScalarTower R A (SymmetricAlgebra A M)] :\n    let I : Ideal (MvPolynomial (Fin n) R) := P.ker\n    let C := SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent\n    let φ : MvPolynomial (Fin m) (MvPolynomial (Fin n) R) →+* C :=\n      MvPolynomial.eval₂Hom ((algebraMap (MvPolynomial (Fin n) R ⧸ I) C).comp\n        (Ideal.Quotient.mk I))\n        (fun j ↦ SymmetricAlgebra.ι (MvPolynomial (Fin n) R ⧸ I) I.Cotangent\n          (I.toCotangent ⟨P.relation j, P.relation_mem_ker j⟩))\n    let f : MvPolynomial (Fin (n + m)) R →ₐ[R] SymmetricAlgebra A M :=\n      MvPolynomial.aeval (fun i ↦ Sum.elim\n        (fun j ↦ algebraMap A (SymmetricAlgebra A M) (P.val j))\n        (fun j ↦ SymmetricAlgebra.ι A M\n          (e (Extension.Cotangent.mk ⟨P.relation j, P.relation_mem_ker j⟩)))\n        (finSumFinEquiv.symm i))\n    ∀ hφ : Function.Surjective φ,\n      ∃ ρ : (MvPolynomial (Fin (n + m)) R ⧸ RingHom.ker f.toRingHom) ≃+* C,\n        Nonempty ((RingHom.ker f.toRingHom).Cotangent\n          ≃ₛₗ[(↑ρ : (MvPolynomial (Fin (n + m)) R ⧸ RingHom.ker f.toRingHom) →+* C)]\n          (Extension.ofSurjective φ.toIntAlgHom hφ).Cotangent)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T002011-L-2359145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T002011-L-2359145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

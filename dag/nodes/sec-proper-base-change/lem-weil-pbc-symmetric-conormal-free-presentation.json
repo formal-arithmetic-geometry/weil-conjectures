@@ -16,43 +16,45 @@
  ],
  "proof": [
   {
-   "text": "The m relation classes span the conormal module of the finite presentation P. Form the coordinate surjection q from A^m to this module; transport it along e to M. Because M is projective, q splits, with kernel K, and M × K is linearly equivalent to A^m. This also proves that K is finite projective.",
+   "text": "Put I=P.ker and B=R[x]/I. The identity on conormal representatives gives the semilinear equivalence conormalQuotientEquiv from I.Cotangent to P.toExtension.Cotangent over P.quotientEquiv. Its scalar compatibility is proved by quotient induction, algebraMap_smul and Extension.Cotangent.val_smul'. Composing with e and applying Module.Projective.of_equiv to the inverse gives projectivity of I.Cotangent over B.",
    "uses": [
-    "def-weil-pbc-projective-module",
-    "def-weil-pbc-finitely-presented-algebra"
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-projective-module"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Let I be the kernel of P, identify its quotient with A using P.quotientEquiv, and identify its conormal with M using e. Apply the symmetric-projective-presentation-conormal lemma to the finite relation generators, their coordinate map q, and the canonical maps from R[x][y] and A[y] to the symmetric algebra. The lemma gives the conormal of the first map as C ⊗_A (M × K), together with a linear equivalence from this tensor product to C^m.",
+   "text": "Define relation elements z in I and q by Pi.basisFun.constr. The basis evaluation formula gives q(Pi.single j 1)=I.toCotangent(z j). Define the literal polynomial ring map phi with eval₂Hom and the reduced map alpha with aeval. Their values on constants and variables are the required ones, by eval₂Hom_C, eval₂Hom_X' and aeval_X. Apply Algebra.symmetric_projective_presentation_conormal to these data and P.span_range_relation_eq_ker. Use its two final linear equivalences to transfer the freeness of Fin m → Sym_B(I.Cotangent) first to the tensor product and then to (Extension.ofSurjective phi hphi).Cotangent.",
    "uses": [
     "lem-weil-pbc-symmetric-projective-presentation-conormal",
-    "lem-weil-pbc-symmetric-algebra-universal-property"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the symmetric algebra universal property to transport the coefficient-ring quotient equivalence and e. Flatten the iterated polynomial ring, then reindex its n + m variables using finSumFinEquiv. On x variables and y variables the resulting map is exactly the aeval written in the statement, by polynomial-homomorphism extensionality. The ring equivalence transports the kernel and its square, hence their conormal quotient and its quotient-ring scalar action. The two conormal equivalences above transport the basis of C^m to a basis of the stated kernel conormal. No nonzero-ring assumption or positive index assumption is needed.",
-   "uses": [
-    "lem-weil-pbc-symmetric-algebra-universal-property",
     "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-free-module"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply symmetric_conormal_presentation_transport with the literal map's surjectivity. It supplies a scalar ring equivalence and a semilinear equivalence from the requested kernel conormal to the literal extension conormal. Apply Module.Free.of_equiv to the inverse of that semilinear equivalence. This proves exactly the stated Module.Free proposition, including all universes and empty-index cases.",
+   "uses": [
+    "lem-weil-pbc-symmetric-conormal-presentation-transport",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-projective-module",
   "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-projective-module",
   "lem-weil-pbc-symmetric-projective-presentation-conormal",
-  "lem-weil-pbc-symmetric-algebra-universal-property",
   "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-free-module"
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-symmetric-conormal-presentation-transport"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/smoothing.tex",
-  "place": "Proof of Lemma Tag 07CE, lines 357–414, at a = 1; polynomial surjection and equation-sequence. Online source checked at https://stacks.math.columbia.edu/tag/07CE."
+  "by": "agent",
+  "group": "V3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/07CE",
+  "place": "Equation (16.3.1.1) and projective splitting at a=1; Lean application of the existing literal-quotient theorem with a separate presentation-transport lemma."
  },
  "mathlib_searches": [
   {
@@ -142,12 +144,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T205630-L-932222",
+  "landing": "20261013T002011-L-2359145",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

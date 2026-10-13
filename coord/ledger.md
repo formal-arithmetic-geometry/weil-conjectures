@@ -10267,3 +10267,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:20 L: merged deliver/R1/Sheaf.RingTheory.Derivation.NonzeroDifferentialToDerivation (stage 3; reviewer PASS; first push; landing 20261013T002010-L-2358773 (proof); batch 20261013T002005; modules 1; new nodes 0)
 - 00:20 L: merged deliver/T2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlat (stage 3; reviewer PASS; first push; landing 20261013T002010-L-2358893 (interface); batch 20261013T002005; modules 2; new nodes 1)
 - 00:20 L: merged deliver/V3/Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight (stage 3; reviewer PASS; first push; landing 20261013T002011-L-2358999 (proof); batch 20261013T002005; modules 1; new nodes 0)
+- 00:20 L: merged deliver/V3/Sheaf.RingTheory.SymmetricConormalFreePresentation (stage 3; reviewer PASS; first push; landing 20261013T002011-L-2359145 (interface); batch 20261013T002005; modules 2; new nodes 1)
