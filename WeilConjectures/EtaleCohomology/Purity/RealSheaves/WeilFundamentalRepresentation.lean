@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPath
 public import WeilConjectures.RepresentationTheory.FiniteDimensionalRealization
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
@@ -564,6 +565,45 @@ theorem exists_fundamentalRep_linearEquiv (hM : M.IsEquivalenceAt B.t) (V : Type
     rw [fundamentalRep_frobLift]
     change e (frobStalk M B F hF v) = _
     rw [hfrob, LinearEquiv.apply_symm_apply]
+
+/-- The stalks of lisse Weil sheaves are finite-dimensional. -/
+instance (X : LisseWeilSheaf K l C) :
+    FiniteDimensional (PadicAlgCl l) (LisseMonodromy.StalkSpace B.t (X.obj.toLisse X.property)) :=
+  X.obj.finiteDimensional_stalkObj B.t
+
+variable (M) in
+/-- **The lisse sheaf–representation equivalence** at the level of the Weil fundamental
+representation (blueprint: `prop-wf-weil-sheaf-representation-equivalence`): if the monodromy
+at `t` is an equivalence (`cor-galois-lisse-representations`), the Weil fundamental
+representation is an equivalence between lisse Weil sheaves and lisse representations of the
+Weil group, under which every lisse Weil sheaf goes to a representation isomorphic to its Weil
+fundamental representation. -/
+theorem exists_equivalence_fundamentalRep (hM : M.IsEquivalenceAt B.t) :
+    ∃ e : LisseWeilSheaf K l C ≌ (W.isLisseRep l).FullSubcategory,
+      ∀ X : LisseWeilSheaf K l C, ∃ f : (e.functor.obj X).obj.V ≃ₗ[PadicAlgCl l]
+          LisseMonodromy.StalkSpace B.t (X.obj.toLisse X.property),
+        ∀ g v, f ((e.functor.obj X).obj.ρ g v) = fundamentalRep M D X.obj X.property g (f v) := by
+  refine Representation.exists_equivalence_of_realization W.geometric.subtype
+    (fun X : LisseWeilSheaf K l C ↦ LisseMonodromy.StalkSpace B.t (X.obj.toLisse X.property))
+    (fun X ↦ fundamentalRep M D X.obj X.property)
+    (fun X ↦ fundamentalRep_isContinuousOn D X.obj X.property hM)
+    (fun {X Y : LisseWeilSheaf K l C} (f : X ⟶ Y) ↦ stalkMap f.hom X.property Y.property)
+    (fun X ↦ ?_) (fun f g ↦ ?_)
+    (fun {X Y : LisseWeilSheaf K l C} (f : X ⟶ Y) w v ↦ stalkMap_fundamentalRep D f.hom _ _ w v)
+    (fun f f' h ↦ stalkMap_injective M hM f f' h)
+    (fun φ hφ ↦ exists_stalkMap_eq D hM φ hφ)
+    (fun V _ _ _ ρ hρ ↦ exists_fundamentalRep_linearEquiv D hM V ρ hρ) _ fun X ↦ ?_
+  · simp only [stalkMap]
+    rw [show WeilSheaf.toLisseMap (𝟙 X : X ⟶ X).hom X.property X.property = 𝟙 _ from rfl,
+      CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+    rfl
+  · simp only [stalkMap]
+    rw [show WeilSheaf.toLisseMap (f ≫ g).hom _ _ =
+      WeilSheaf.toLisseMap f.hom _ _ ≫ WeilSheaf.toLisseMap g.hom _ _ from rfl,
+      CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp]
+    rfl
+  · refine ⟨fun ⟨h₁, h₂⟩ ↦ ⟨h₁, fun φ v ↦ h₂.continuous_apply φ v⟩,
+      fun ⟨h₁, h₂⟩ ↦ ⟨h₁, WeilGroup.IsLisse.of_continuous_apply fun φ v ↦ h₂ φ v⟩⟩
 
 end WeilGroup
 
