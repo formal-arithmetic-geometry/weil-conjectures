@@ -7,7 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 public import Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
+import Sheaf.AlgebraicGeometry.MixedSectionsCompositionCoherence
 
 /-! # Coherence of mixed sections comparisons
 Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
@@ -22,10 +23,115 @@ set_option synthInstance.maxSize 2048
 universe u w wA
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
+private theorem composeComparisonSquare
+    {C D : Type*} [Category C] [Category D] (G : C ⥤ D)
+    {A B P Q : C} {T U V W : D}
+    (e₁ : A ≅ P) (e₂ : B ≅ Q) (t : P ⟶ Q)
+    (cP : G.obj P ⟶ T) (cQ : G.obj Q ⟶ U)
+    (s₁ : T ≅ V) (s₂ : U ≅ W) (s : T ⟶ U)
+    (cL : G.obj A ⟶ V) (cR : G.obj B ⟶ W)
+    (hl : cL = G.map e₁.hom ≫ cP ≫ s₁.hom)
+    (hr : cR = G.map e₂.hom ≫ cQ ≫ s₂.hom)
+    (ht : G.map t ≫ cQ = cP ≫ s) :
+    G.map (e₁.hom ≫ t ≫ e₂.inv) ≫ cR = cL ≫ s₁.inv ≫ s ≫ s₂.hom := by
+  rw [hl, hr]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← G.map_comp_assoc e₂.inv e₂.hom, e₂.inv_hom_id, G.map_id, Category.id_comp]
+  rw [reassoc_of% ht]
+  simp only [Iso.hom_inv_id_assoc]
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 
+private theorem mixedSections_eq_naturality
+    {A B : Scheme.{u}} (t t' : A ⟶ B) (h : t = t')
+    (F : schemeDerivedCategory A) :
+    (schemeDerivedGlobalSections B).map
+        ((eqToHom (congrArg (fun t ↦ schemeDerivedDirectImage t) h)).app F) ≫
+        (mixedGlobalSectionsDirectImageIso t').hom.app F =
+      (mixedGlobalSectionsDirectImageIso t).hom.app F ≫
+        (eqToHom (congrArg (fun t ↦ schemeGlobalScalarRestriction t) h)).app
+          ((schemeDerivedGlobalSections A).obj F) := by
+  subst t'
+  simp only [eqToHom_refl, NatTrans.id_app]
+  erw [CategoryTheory.Functor.map_id]
+  erw [Category.id_comp, Category.comp_id]
+
+set_option maxHeartbeats 800000 in
+-- Give the path calculation fixed natural transformations rather than expanded mate data.
+private theorem mixedSections_compare_paths
+    {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
+    (g : Y' ⟶ Y) (gX : X' ⟶ X) (comm : gX ≫ f = f' ≫ g)
+    (δ : schemeDerivedDirectImage gX ⋙ schemeDerivedDirectImage f ⟶
+      schemeDerivedDirectImage f' ⋙ schemeDerivedDirectImage g)
+    (hδ : δ = (schemeNormalizedDirectImageCompIso gX f).hom ≫
+      eqToHom (congrArg (fun t ↦ schemeDerivedDirectImage t) comm) ≫
+      (schemeNormalizedDirectImageCompIso f' g).inv)
+    (F : schemeDerivedCategory X') :
+    (schemeDerivedGlobalSections Y).map (δ.app F) ≫
+        (mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f').obj F) ≫
+        (schemeGlobalScalarRestriction g).map
+          ((mixedGlobalSectionsDirectImageIso f').hom.app F) =
+      (mixedGlobalSectionsDirectImageIso f).hom.app ((schemeDerivedDirectImage gX).obj F) ≫
+        (schemeGlobalScalarRestriction f).map
+          ((mixedGlobalSectionsDirectImageIso gX).hom.app F) ≫
+        (schemeGlobalScalarSquareIso f f' g gX comm).hom.app
+          ((schemeDerivedGlobalSections X').obj F) := by
+  let e₁ :=
+    schemeNormalizedDirectImageCompIso gX f
+  let e₂ :=
+    schemeNormalizedDirectImageCompIso f' g
+  have hl := mixedSections_composition_coherence gX f F
+  have hr := mixedSections_composition_coherence f' g F
+  dsimp only at hl hr
+  rw [hδ]
+  let S := (schemeDerivedGlobalSections X').obj F
+  have ht := mixedSections_eq_naturality (gX ≫ f)
+    (f' ≫ g) comm F
+  have h := composeComparisonSquare (schemeDerivedGlobalSections Y)
+    (e₁.app F) (e₂.app F)
+    ((eqToHom (congrArg (fun t ↦ schemeDerivedDirectImage t) comm)).app F)
+    ((mixedGlobalSectionsDirectImageIso (gX ≫ f)).hom.app F)
+    ((mixedGlobalSectionsDirectImageIso (f' ≫ g)).hom.app F)
+    ((schemeGlobalScalarRestrictionCompIso gX f).app S)
+    ((schemeGlobalScalarRestrictionCompIso f' g).app S)
+    ((eqToHom (congrArg (fun t ↦ schemeGlobalScalarRestriction t)
+      comm)).app S)
+    ((mixedGlobalSectionsDirectImageIso f).hom.app
+      ((schemeDerivedDirectImage gX).obj F) ≫
+      (schemeGlobalScalarRestriction f).map
+        ((mixedGlobalSectionsDirectImageIso gX).hom.app F))
+    ((mixedGlobalSectionsDirectImageIso g).hom.app
+      ((schemeDerivedDirectImage f').obj F) ≫
+      (schemeGlobalScalarRestriction g).map
+        ((mixedGlobalSectionsDirectImageIso f').hom.app F)) hl hr ht
+  calc
+    _ = (schemeDerivedGlobalSections Y).map
+        (e₁.hom.app F ≫
+          (eqToHom (congrArg (fun t ↦ schemeDerivedDirectImage t)
+            comm)).app F ≫ e₂.inv.app F) ≫
+        ((mixedGlobalSectionsDirectImageIso g).hom.app
+          ((schemeDerivedDirectImage f').obj F) ≫
+          (schemeGlobalScalarRestriction g).map
+            ((mixedGlobalSectionsDirectImageIso f').hom.app F)) := rfl
+    _ = ((mixedGlobalSectionsDirectImageIso f).hom.app
+          ((schemeDerivedDirectImage gX).obj F) ≫
+          (schemeGlobalScalarRestriction f).map
+            ((mixedGlobalSectionsDirectImageIso gX).hom.app F)) ≫
+        (schemeGlobalScalarRestrictionCompIso gX f).inv.app S ≫
+        (eqToHom (congrArg (fun t ↦ schemeGlobalScalarRestriction t)
+          comm)).app S ≫
+        (schemeGlobalScalarRestrictionCompIso f' g).hom.app S := h
+    _ = _ := by
+      dsimp only [S, schemeGlobalScalarSquareIso, Iso.trans_hom, Iso.symm_hom,
+        NatTrans.comp_app, eqToIso.hom]
+      simp only [Category.assoc]
+
+
+set_option backward.defeqAttrib.useBackward true in
+set_option maxHeartbeats 800000 in
+-- Checking canonical comparison choices expands derived-functor and sheaf instances.
 /-- Normalized Leray comparisons commute with the conjugate of the fixed pullback
 composition comparison. No pullback unit or base-change map occurs in this statement.
 Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY, with the normalized
@@ -76,6 +182,11 @@ theorem mixedSections_square_comparison_coherence
           ((mixedGlobalSectionsDirectImageIso (pullback.fst f g)).hom.app F) ≫
         (schemeGlobalScalarSquareIso f (pullback.snd f g) g (pullback.fst f g)
           pullback.condition).hom.app ((schemeDerivedGlobalSections (pullback f g)).obj F)
-    := by sorry
+    := by
+  dsimp only
+  apply mixedSections_compare_paths f (pullback.snd f g) g (pullback.fst f g)
+    pullback.condition _ _ F
+  exact derivedDirectImage_square_mate f (pullback.snd f g) g
+    (pullback.fst f g) pullback.condition
 
 end AlgebraicGeometry

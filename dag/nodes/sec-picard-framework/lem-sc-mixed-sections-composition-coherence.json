@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-mixed-sections-composition-coherence",
+ "kind": "statement",
+ "title": "Composition coherence of normalized mixed Leray comparisons",
+ "statement": "For schemes X,Y,Z [def-pc-scheme], morphisms f:X→Y and g:Y→Z and F in D(O_X) [def-pc-derived-category], with independent sheaf and module localization universes, write RΓ for derived global sections [def-pc-global-derived-rhom], c_h for the normalized mixed Leray comparison [lem-sc-mixed-global-sections-direct-image-iso], e(f,g) for the typed normalized direct-image composition comparison [lem-sc-derived-direct-image-square-mate] [lem-pc-ringed-spaces-derived-direct-image-composition], and s(f,g) for restriction along a composite [def-pc-global-hom-pullback-comparison]. Then c_g(Rf_*F);S_g(c_f(F))=RΓ_Z(e(f,g)_F);c_(f;g)(F);s(f,g)_(RΓ_X F). This concerns one composable path and does not assert any pullback-square mate identity.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-global-derived-rhom",
+  "lem-sc-derived-direct-image-square-mate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY, 0D5T and 0D5W; composition normalization"
+ },
+ "proof": [
+  {
+   "text": "Proof: Let J be a K-injective representative on X. Precompose both sides with the\npasted right-derived unit for f_* followed by g_* followed by global sections on Z.\nUse the unit equation of exists_derivedModuleDirectImageComposition and those of\nexists_mixedGlobalSectionsDirectImageIso for f, g and f followed by g. Naturality\nmoves the units past the composition comparisons. Exact scalar restriction allows\nits unit to move through localization. Both sides become the localization of the\nidentity map on sections over X: the underived Leray comparisons are identity on\nelements, and restriction along the composite has the same scalar action as the\ntwo successive restrictions. The mapDerivedCategoryCompIso in the scalar comparison\nrecords precisely this equality after localization. Direct image and global sections\nare acyclic on the required K-injective representatives, so the pasted unit is\ninvertible; cancel it. Transport the equality along a K-injective resolution to F.\nSheaf and module localization universes remain independent. For identities this is\nthe unit law, and zero objects and empty schemes require no additional assumption.",
+   "uses": [
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-pc-global-hom-pullback-comparison",
+    "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+    "lem-pc-direct-image-global-sections-kinjective-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+  "lem-pc-direct-image-global-sections-kinjective-acyclic"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H3",
+  "date": "2026-10-13",
+  "note": "Explicit normalization argument written from Stacks Tags 0D5T, 0D5W and 08HY; online source read because the local literature tree is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leray.*[Cc]omp|[Cc]omp.*leray|conjugate.*[Dd]erived",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic categorical tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived adjunction mates commute with composition of right derived functors and Leray global sections comparisons",
+   "results": "CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic categorical tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic categorical tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical Leray global sections comparison is compatible with composition of derived direct image functors and the canonical adjunction mate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedSectionsSquareComparisonCoherence",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mixed-sections-square-comparison-coherence",
+   "place": "Proof step 2: composition of normalized sections comparisons"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedSectionsCompositionCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedSectionsCompositionCoherence.lean",
+  "declaration": "AlgebraicGeometry.mixedSections_composition_coherence",
+  "statement": "theorem mixedSections_composition_coherence\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (F : schemeDerivedCategory X) :\n    let e : schemeDerivedDirectImage f ⋙ schemeDerivedDirectImage g ≅\n        schemeDerivedDirectImage (f ≫ g) :=\n      schemeNormalizedDirectImageCompIso f g\n    (mixedGlobalSectionsDirectImageIso g).hom.app ((schemeDerivedDirectImage f).obj F) ≫\n        (schemeGlobalScalarRestriction g).map\n          ((mixedGlobalSectionsDirectImageIso f).hom.app F) =\n      (schemeDerivedGlobalSections Z).map (e.hom.app F) ≫\n        (mixedGlobalSectionsDirectImageIso (f ≫ g)).hom.app F ≫\n        (schemeGlobalScalarRestrictionCompIso f g).hom.app\n          ((schemeDerivedGlobalSections X).obj F)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T142858-L-498265",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T142858-L-498265",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
