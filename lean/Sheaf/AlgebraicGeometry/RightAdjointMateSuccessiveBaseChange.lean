@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.CategoryTheory.Comma.Arrow
-import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.RectangleInverseBaseChangeMateTransport
 
 /-! # Right-adjoint mate for two successive base changes
 
@@ -21,6 +20,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Lifted functors and the two iterated pullbacks require extra definitional-equality checks.
 /-- The right-adjoint mate for the rectangle factors through the two square mates
 on the genuine iterated pullback. This assertion concerns only successive base
 changes, before identifying either pullback with an open restriction.
@@ -102,6 +103,31 @@ theorem rightAdjoint_mate_successive_baseChange
         (pullback.snd f g) h aS d adjS adjd hβI ⟨(derivedPullback g).obj K.obj,
         (derivedPullback_tensor_preserve_QCoh g).1 K.obj K.property⟩))
     ∃ (e₀ : G.left ≅ O.left) (e₁ : O.right ≅ H.left) (e₂ : G.right ≅ H.right),
-      G.hom ≫ e₂.hom = e₀.hom ≫ O.hom ≫ e₁.hom ≫ H.hom := by sorry
+      G.hom ≫ e₂.hom = e₀.hom ≫ O.hom ≫ e₁.hom ≫ H.hom := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  classical
+  intro G O H
+  let α := qcInverseBaseChange f g hβS
+  let δ := @qcInverseBaseChange _ (pullback f g) S T _
+    (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
+    (pullback.snd f g) _ _ h hβI
+  let e₀ := successiveBaseChangeSourceIso f g h k hk₁ (a.obj K).obj
+  obtain ⟨e₂, he⟩ := rectangle_inverseBaseChange_mate_transport
+    f g h a c d adja adjc adjd hβ hβS hβI K k hk₁ hk₂
+  have paste := congrArg (fun σ ↦ σ.app K) (mateEquiv_vcomp adja adjS adjd α δ)
+  simp only [TwoSquare.vComp_app] at paste
+  have hS := dualityEquationBaseChangeMap_eq_inverseSquareMate
+    f g a aS adja adjS hβS K
+  have hI := @dualityEquationBaseChangeMap_eq_inverseSquareMate _ (pullback f g) S T _
+    (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
+    (pullback.snd f g) _ _ h aS d adjS adjd hβI ((qcPullback g).obj K)
+  rw [← hS, ← hI] at paste
+  have hp := (schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.congr_map paste
+  simp only [Functor.map_comp] at hp
+  change _ = O.hom ≫ H.hom at hp
+  refine ⟨e₀, Iso.refl _, e₂, ?_⟩
+  simpa only [Functor.map_comp, Category.assoc, Iso.refl_hom,
+    Category.id_comp] using he.trans (congrArg (fun φ ↦ e₀.hom ≫ φ) hp)
 
 end AlgebraicGeometry

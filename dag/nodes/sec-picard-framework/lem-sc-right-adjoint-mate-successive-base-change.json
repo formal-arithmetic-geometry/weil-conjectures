@@ -19,47 +19,35 @@
  ],
  "proof": [
   {
-   "text": "The projection equations uniquely identify k with the iterated-pullback comparison. Pullback composition gives the source comparison. Direct-image composition and right-adjoint uniqueness give the middle and target comparisons, using the pasted units and counits of the specified adjunctions.",
+   "text": "Identify each fixed square second mate with the mate of its inverse ordinary square. The helper proof uses the iterated mates identity, so it does not assume invertibility of either second mate.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
-    "lem-cat-right-adjoint-composition"
+    "lem-sc-duality-base-change-inverse-square-mate"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose ordinary base change under the composite pullback/direct-image adjunction, using its counit formula. Pullback associativity identifies the two counit transposes for the rectangle and the pasted squares. Injectivity of the Hom equivalence proves the ordinary pasting identity.",
+   "text": "Construct e0 explicitly using successiveBaseChangeSourceIso from pullback composition and hk1. The rectangle comparison with the mate of the horizontally pasted inverse ordinary squares supplies e2 and the commuting square; it involves no middle right adjoint.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-derived-base-change-pasting",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-sc-rectangle-inverse-base-change-mate-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Expand the three second mates. Conjugation preserves composition; since all ordinary comparison components are invertible, it preserves their inverses. Move the conjugates through the units by naturality, then move the counits and cancel the middle unit/counit pair with the triangle identities. The remaining factors are e0, O, e1, H on one side and G,e2 on the other.",
-   "uses": [
-    "def-sc-duality-equation-base-change-map",
-    "lem-cat-right-adjoint-composition"
-   ],
-   "elementary": false
+   "text": "Apply Mathlib mateEquiv_vcomp under adja, adjS, adjd and evaluate at K. Rewrite the two components by the single-square formula and map the equality through the full-subcategory inclusion. The middle objects coincide definitionally, so take e1 to be the identity. Compose the resulting equality with the rectangle comparison and reassociate.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "def-sc-duality-equation-base-change-map",
-  "lem-cat-right-adjoint-composition",
-  "lem-pc-derived-base-change-pasting",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-sc-duality-base-change-inverse-square-mate",
+  "lem-sc-rectangle-inverse-base-change-mate-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K1",
+  "group": "E2",
   "date": "2026-10-13",
-  "document": "Stacks Project, Duality for Schemes",
-  "place": "Tag 0ATR, Lemma 48.5.2, diagram and final equality of the two conjugate composites; ordinary invertibility hypotheses replace the Tor-independence hypotheses which supply them",
-  "note": "Categorical specialization of the cited proof, retaining invertibility only of ordinary base change; Tor independence in the source supplies that premise and is not used otherwise."
+  "note": "Actual Lean reduction: inverse-square mate characterization (proved), Mathlib mateEquiv_vcomp, and a geometric rectangle transport statement without the middle right adjoint. No second mate is inverted.",
+  "document": "Stacks Project, Duality for Schemes"
  },
  "mathlib_searches": [
   {
@@ -135,9 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T113346-L-3185269",
-  "kind": "interface"
+  "landing": "20261013T123543-L-3710886",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
