@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-exterior-sheaf-map-exists",
+ "kind": "statement",
+ "title": "Exterior sheaf map induced by a module morphism",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M,N$ sheaves of $\\mathcal O_X$-modules, $f:M\\to N$ a morphism, and $n\\in\\mathbb N$. For the exterior sheaves and wedge sections [def-sc-sheaf-exterior-power], there exists $e:\\bigwedge^n M\\to\\bigwedge^n N$ such that for every open $U$ and tuple $a\\in M(U)^n$, $e_U(\\bigwedge_i a_i)=\\bigwedge_i f_U(a_i)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "On each open define the map by exteriorPower.map applied to the component of f. Its value on a pure wedge is the wedge of the component images.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Check naturality on pure wedges. The unique exterior restrictions take a wedge to the wedge of the restrictions, and naturality of f identifies the two resulting tuples. Pure wedges span, so exteriorPower.linearMap_ext gives the naturality equality.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the sheafification functor to this explicit presheaf morphism. Naturality of its adjunction unit, evaluated on the pure wedge, gives the asserted formula.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof_origin": {
+  "by": "agent H2",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts; explicit details following the preserved determinant proof in lem-sc-determinant-wedge-morphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exterior power functor on linear maps and multiplication of exterior powers descends through a quotient",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior power of a quotient module: wedging the full rank kernel with lifts defines a linear map independent of lifts",
+   "results": "exteriorPower.presentation.isPresentationCore, exteriorPower.presentation.relationsSolutionEquiv, exteriorPower.presentation, exteriorPower.alternatingMapLinearEquiv, ModuleCat.exteriorPower.desc_mk, ModuleCat.exteriorPower.mk, ModuleCat.exteriorPower.desc, ModuleCat.exteriorPower",
+   "date": "2026-10-12",
+   "verdict": "ordinary-module infrastructure; no sheaf-level match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.map",
+   "results": "exteriorPower.map, exteriorPower.map_id, exteriorPower.map_comp_ιMulti, exteriorPower.map_comp, exteriorPower.zeroEquiv_naturality, exteriorPower.subtype_comp_map_eq, exteriorPower.oneEquiv_naturality, exteriorPower.map_apply_ιMulti_family",
+   "date": "2026-10-12",
+   "verdict": "ordinary-module infrastructure; no sheaf-level match"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower|alternatingMapLinearEquiv",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean, Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean, Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean, Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean, Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean",
+   "date": "2026-10-12",
+   "verdict": "ordinary-module infrastructure; no sheaf-level match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocalAt",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts",
+   "via": [
+    "new-local-wedge-at",
+    "lem-sc-determinant-wedge-morphism-local-data",
+    "lem-sc-determinant-wedge-morphism",
+    "lem-sc-determinant-short-exact-exists",
+    "lem-sc-determinant-short-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafMapExists",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafMapExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_map_exists",
+  "statement": "theorem exteriorSheaf_map_exists {X : Scheme.{v}} {M N : X.Modules}\n    (f : M ⟶ N) (n : ℕ) :\n    ∃ e : exteriorSheaf M n ⟶ exteriorSheaf N n,\n      ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U)),\n        e.val.app (op U) (exteriorSheafSection M n U a) =\n          exteriorSheafSection N n U (fun i ↦ f.val.app (op U) (a i))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T004024-L-2491292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T004024-L-2491292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
