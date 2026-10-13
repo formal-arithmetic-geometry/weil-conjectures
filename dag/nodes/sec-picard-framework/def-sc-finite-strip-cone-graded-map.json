@@ -1,0 +1,133 @@
+{
+ "id": "def-sc-finite-strip-cone-graded-map",
+ "kind": "definition",
+ "title": "Canonical surviving diagonal map into the graded cone",
+ "statement": "Let C be an abelian category and K an integer commuting double cochain complex with total [def-sp-double-complex-total]. Let r be natural and assume K.X i is zero for i<0 or r<=i. Let A be an integer cochain complex, b:A→Tot(K), and f_p:single(A.X p,0)→K.flip.X p for every integer p. Let F be a decreasing filtration of Cone(b) [def-sp-filtered-complex-subquotients], whose degree-n step p is the join of the source image when p<=n+1 and the target diagonal images indexed by 0<=i<r and p<=n-i. The canonical map from Cone(f_p)^(n-p) to gr_F^p Cone(b)^n is the row-cone biproduct map of the single-source inclusion at n=p-1 and the target (n-p,p) total inclusion, factored through F.step p and composed with its cokernel projection. This is an explicit construction.",
+ "stmt_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4 second-variable variant; explicit cone refinement of lem-sc-finite-strip-cone-filtration, step 3"
+ },
+ "proof": [
+  {
+   "text": "Construct the supported single-source map by index transport when n+1=p and zero otherwise, and pair it with the (n-p,p) total inclusion using the row-cone biproduct. Prove tail factorization: the source image belongs to the tail at equality; the target image is one of its finite generators if 0<=n-p<r and is zero otherwise by horizontal support. Factor the resulting map through the image subobject. The evaluated filtration inclusion is mono, hence its epic image factor is also mono and is an isomorphism. Invert that factor and compose with the evaluated cokernel projection. All data are explicit; both facts used by the construction are proved in Lean.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": "G3 stage-3 explicit diagonal inclusion decomposition; source is the parent diagonal quotient proof.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "associated graded of a finite strip double complex mapping cone is the row cone",
+   "results": "8 hits: CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, CochainComplex.cm5b.p, CochainComplex.mappingCone, CochainComplex.mappingCone.decomp_to, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.decomp_from, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso",
+   "date": "2026-10-13",
+   "verdict": "generic constructors or component formulas only; no exact specialized comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.isoMk",
+   "results": "0 hits: ; loogle: unknown identifier 'ShortComplex.isoMk'",
+   "date": "2026-10-13",
+   "verdict": "generic constructors or component formulas only; no exact specialized comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedPiece|totalDesc|isoMk",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/Geometry/RingedSpace/SheafedSpace.lean, Mathlib/Geometry/RingedSpace/SheafedSpace.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "generic constructors or component formulas only; no exact specialized comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cokernel of consecutive tails in a finite direct sum is isomorphic to the complementary summand",
+   "results": "8 hits: CategoryTheory.Limits.cokernelBiproductFromSubtypeIso, CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_inv, CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_hom, CategoryTheory.Limits.cokernelBiproductιIso, CategoryTheory.Limits.cokernelBiproductιIso_hom, CategoryTheory.Limits.cokernelBiproductιIso_inv, CategoryTheory.Limits.instHasCokernelFromSubtype, CategoryTheory.Limits.cokernelBiprodInrIso",
+   "date": "2026-10-13",
+   "verdict": "generic constructors or component formulas only; no exact specialized comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"factorThruImageSubobject\", \"IsIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "generic constructors or component formulas only; no exact specialized comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernelBiproductFromSubtypeIso|isIso_factorThruImageSubobject",
+   "results": "1 hits: Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+   "date": "2026-10-13",
+   "verdict": "generic constructors or component formulas only; no exact specialized comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "total differential on a double complex summand splits into horizontal and vertical contributions",
+   "results": "8 hits: HomologicalComplex₂.total_d, HomologicalComplex.mapBifunctor.d_eq, HomologicalComplex₂.totalAux.d₁_eq, HomologicalComplex₂.d₁_eq, HomologicalComplex₂.d₁, HomologicalComplex₂.totalAux.d₁_eq', HomologicalComplex₂.d₂, HomologicalComplex₂.totalAux.d₂_eq",
+   "date": "2026-10-13",
+   "verdict": "generic constructors or component formulas only; no exact specialized comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated graded quotient of a finite strip total complex mapping cone is its horizontal row cone",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteStripConeFiltrationGradedPoint",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-strip-cone-filtration",
+   "place": "step 3, surviving diagonal quotient and its differential"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteStripConeGradedMap",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteStripConeGradedMap.lean",
+  "declaration": "HomologicalComplex₂.finiteStripGradedMap",
+  "statement": "def finiteStripGradedMap\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ) (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (F : DecreasingFiltration (CochainComplex.mappingCone b))\n    (hsteps : ∀ p n : ℤ, F.complexStep p n =\n      (if p ≤ n + 1 then imageSubobject\n        ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n      (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n        if p ≤ n - i then imageSubobject\n          (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n            (CochainComplex.mappingCone.inr b).f n) else ⊥))\n    (p n : ℤ) :\n    (CochainComplex.mappingCone (f p)).X (n - p) ⟶ (F.gradedPiece p).X n",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T153220-L-1059341",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T153220-L-1059341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.Algebra.Homology.FiniteStripConeGradedMapIsIso
+import Sheaf.Algebra.Homology.FiniteStripConeGradedMapDifferential
 
 /-! # Three-term comparison for the finite-strip cone filtration
 
@@ -70,6 +72,28 @@ theorem finite_strip_cone_filtration_graded_point
           (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫
             (CochainComplex.mappingCone.inr b).f n) else ⊥))
     (p n : ℤ) : Nonempty ((F.gradedPiece p).sc n ≅
-      (CochainComplex.mappingCone (f p)).sc (n - p)) := by sorry
+      (CochainComplex.mappingCone (f p)).sc (n - p)) := by
+  let g := fun m ↦ finiteStripGradedMap K r hsupport A b f F hsteps p m
+  have hg (m : ℤ) : IsIso (g m) :=
+    finiteStripGradedMap_isIso K r hsupport A b f F hsteps p m
+  have := hg (n - 1)
+  have := hg n
+  have := hg (n + 1)
+  let S : ShortComplex C :=
+    (HomologicalComplex.shortComplexFunctor' C (ComplexShape.up ℤ)
+      (n - 1 - p) (n - p) (n + 1 - p)).obj (CochainComplex.mappingCone (f p))
+  let T : ShortComplex C :=
+    (HomologicalComplex.shortComplexFunctor' C (ComplexShape.up ℤ)
+      (n - 1) n (n + 1)).obj (F.gradedPiece p)
+  have h₁₂ :=
+    finiteStripGradedMap_differential K r hsupport A a b hb f hf F hsteps p (n - 1)
+  have h₂₃ := finiteStripGradedMap_differential K r hsupport A a b hb f hf F hsteps p n
+  have hn : n - 1 + 1 = n := by omega
+  rw [hn] at h₁₂
+  have e : S ≅ T := ShortComplex.isoMk (asIso (g (n - 1))) (asIso (g n))
+    (asIso (g (n + 1))) (by simpa [g, S, T, HomologicalComplex.shortComplexFunctor'] using h₁₂)
+    (by simpa [g, S, T, HomologicalComplex.shortComplexFunctor'] using h₂₃)
+  simpa [S, T, HomologicalComplex.sc, HomologicalComplex.shortComplexFunctor,
+    sub_right_comm, sub_add_eq_add_sub] using (show Nonempty (T ≅ S) from ⟨e.symm⟩)
 
 end HomologicalComplex₂
