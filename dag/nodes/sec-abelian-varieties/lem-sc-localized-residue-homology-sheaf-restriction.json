@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-localized-residue-homology-sheaf-restriction",
+ "kind": "statement",
+ "title": "Open restriction comparison of residue homology sheaves",
+ "statement": "Let S be a scheme [def-pc-scheme], U an open subscheme and x a point of U. Supply derived module categories [def-pc-derived-category] on S, all over-sites and all residue schemes. Exact derived over-site restriction followed by the derived over-equivalence, derived pullback [def-pc-derived-pullback] to x, and degree-zero homology is naturally isomorphic to derived pullback from S to U.ι(x), degree-zero homology, and ordinary tensor pullback [def-pc-module-pullback] along Spec of the open immersion residue-field map [def-weil-residue-field]. The categories on U and its residue scheme use their standard localizations, independently of the supplied localization universe. No global-sections functor is applied in this statement.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 08DW and 0D5S"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Exact over-site restriction and overEquiv give tensor pullback to U. Uniqueness of localization compares the chosen derived over-site and the standard derived category of U; the independent-universe restriction comparison identifies this with derived open pullback.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The residue square commutes by Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField. Compose derived pullbacks on both sides using the derived composition comparison, transporting choices of localizations by uniqueness. The open immersion residue-field map is an isomorphism, so its tensor pullback is an exact equivalence. It commutes with homology, giving the stated sheaf-valued comparison before global sections. This construction is natural on K-flat representatives and descends through localization.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M4",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 08DW and 0D5S",
+  "note": "Assembly from the existing source-based comparisons; the source checkout is not present on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived residue homology sheaves commute with restriction to an open neighbourhood",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecMap_residueFieldMap_fromSpecResidueField\"",
+   "results": "Two hits in Mathlib.AlgebraicGeometry.ResidueField: the residue-square identity and its assoc variant. Read the source signature.",
+   "date": "2026-10-13",
+   "verdict": "The commuting square alone does not state the derived homology sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "residueFieldMap|mapDerivedCategoryCompIso|mapDerivedCategoryHomologyFunctorIso",
+   "results": "Twenty-five hits, mainly residue-field-map identities. Read DerivedCategory/ExactFunctor.lean and the existing derived restriction/composition module signatures.",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level residue restriction theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalizedResidueHomologyRestriction",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof: apply the general theorem of the cube; structure-sheaf pushforward input for its product morphism. Tag 0E62, perfect-lemma-proper-flat-h0, local argument; Tag 0BCD, lift-perfect-from-residue-field; Tag 0E62, local unit argument, with the fixed model shape of Tag 0BCD; nonzero residue coefficient in the fixed connective rank-one model; residue homology comparison and nonzero degree-zero coefficient, steps 1–2 of lem-sc-rank-one-residue-stalk-component; residue-stalk homology map comparison: proof step 2, restriction and residue composition; residue homology restriction, steps 1-2 and exact homology comparison",
+   "via": [
+    "lem-sc-localized-residue-homology-restriction",
+    "lem-sc-residue-stalk-homology-map-comparison",
+    "lem-sc-residue-homology-rank-one-coefficient",
+    "lem-sc-rank-one-residue-stalk-component",
+    "lem-sc-connective-rank-one-model-stalk",
+    "lem-sc-perfect-local-degree-zero-unit",
+    "lem-sc-proper-flat-structure-sheaf-stalk-surjective",
+    "lem-sc-proper-flat-structure-sheaf-stalk",
+    "lem-sc-proper-flat-global-sections-criterion",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedResidueHomologySheafRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedResidueHomologySheafRestriction.lean",
+  "declaration": "AlgebraicGeometry.nonempty_localizedResidueHomology_sheaf_restriction_iso",
+  "statement": "theorem nonempty_localizedResidueHomology_sheaf_restriction_iso (S : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ U : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    [∀ s : S, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (S.residueField s)).toRingedSpace))]\n    (U : S.Opens) (x : U.toScheme) :\n    letI : HasDerivedCategory.{u + 1} U.toScheme.Modules :=\n      HasDerivedCategory.standard _\n    letI : HasDerivedCategory.{u + 1}\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=\n      HasDerivedCategory.standard _\n    letI : HasDerivedCategory.{u + 1} (SheafOfModules.{u}\n        (moduleRings (Spec (U.toScheme.residueField x)).toRingedSpace)) :=\n      HasDerivedCategory.standard _\n    letI : (Scheme.Modules.overEquiv U).functor.Additive :=\n      Functor.additive_of_preserves_binary_products _\n    Nonempty\n      ((SheafOfModules.overFunctor.{u}\n          (moduleRings S.toRingedSpace) U).mapDerivedCategory ⋙\n        (Scheme.Modules.overEquiv U).functor.mapDerivedCategory.{w, u + 1} ⋙\n        derivedPullback.{u, u + 1} (U.toScheme.fromSpecResidueField x) ⋙\n        DerivedCategory.homologyFunctor\n          (SheafOfModules.{u}\n            (moduleRings (Spec (U.toScheme.residueField x)).toRingedSpace)) 0 ≅\n      derivedPullback (S.fromSpecResidueField (U.ι x)) ⋙\n        DerivedCategory.homologyFunctor\n          (SheafOfModules.{u}\n            (moduleRings (Spec (S.residueField (U.ι x))).toRingedSpace)) 0 ⋙\n        Scheme.Modules.tensorPullback (Spec.map (U.ι.residueFieldMap x)))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T121841-L-3558582",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T121841-L-3558582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
