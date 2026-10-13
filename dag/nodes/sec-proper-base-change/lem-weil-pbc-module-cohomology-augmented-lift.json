@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-augmented-lift",
+ "kind": "statement",
+ "title": "Cohomology of a fixed augmented lift into a pushed injective resolution",
+ "statement": "For any scheme map h:X→Y, modules G on Y and F on X, and an h-map φ:G→h_*F, fix injective resolutions I of F and J of G and a complex map k:J→h_*I with J.ι⁰ followed by k⁰ equal to φ followed by h_*(I.ι⁰). Let a be the canonical section-complex comparison Γ(X,I)≅Γ(Y,h_*I), characterized by its inverse degree components being restriction along h⁻¹top=top. For every p≥0 the cohomology map moduleCohomologyFMap h φ p is rG.hom followed by Hᵖ(Γ(Y,k)), Hᵖ(a).inv and rF.inv, where rG and rF are the resolution cohomology comparisons followed by inverse forgetful homology comparisons. No flatness or injectivity of h_*I is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FB, 01EZ and 01E4; fixed-lift computation in the restricted section formula"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Extend h_*I by zero and resolve it by a quasi-isomorphism lambda into a\nbounded below injective complex; truncate back to natural indices. Take beta\n= k followed by lambda. The augmentation of k supplies the compatibility\nfield of ModuleCohomologyFMapData, with the given resolutions I and J and the\ncanonical section comparison a. Sections of lambda are a quasi-isomorphism\nbecause I is termwise injective (Tag 01EZ); hence the invertibility field holds.\nIn the formula for the data's cohomology map expand beta, apply functoriality of\nhomology, and cancel the homology map of sections of lambda with its inverse.\nThe result is the displayed formula. Independence of resolution choices\nidentifies the data's map with moduleCohomologyFMap.",
+   "uses": [
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E2",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FB and 01EZ; Mathlib injective replacement and homology cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An augmented lift to a pushforward injective resolution computes the map on module sheaf cohomology",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoRightDerivedObj_hom_naturality\"",
+   "results": "Two right-derived naturality lemmas; they handle coefficient maps in one category, not the pushforward and restriction section transports.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only, no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical sections comparison transports a restricted augmented injective resolution lift to the original section complex map",
+   "results": "Eight injective resolution lift/augmentation lemmas; none supplies the restriction/direct-image comparison.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj_hom_naturality|pushforward_sections_iso|moduleCohomologyFMap_of",
+   "results": "RightDerived naturality in Mathlib; private section-comparison and natural-index replacement helpers in ModuleCohomologyFMap; no public fixed-lift formula. Blueprint searches for augmented lift and 01FB found no duplicate statement.",
+   "date": "2026-10-13",
+   "verdict": "No direct match or duplicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction to an open commutes with direct image and global sections of sheaves of modules",
+   "results": "Second reader: restrict_map, restrict_obj, restrictFunctorComp_hom_app_app and scheme restriction component formulas. Ingredients only; no fixed augmented-lift computation.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate of the new statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapExtendIso\"",
+   "results": "Second reader: zero hits from the service; local upstream ModuleCohomologyFMap uses mapExtendIso and quasiIso_extendMap_iff privately.",
+   "date": "2026-10-13",
+   "verdict": "No public replacement for the new formula."
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*pushforward|pushforward.*restrict|globalSections.*pushforward",
+   "results": "Second reader: Mathlib restrictFunctorAdjCounitIso and restrictAdjunction. Local library additionally has private pushforward_restrict_square in DirectImage.Sections, canonical private pushforward_sections_iso in ModuleCohomologyFMap and derived open-restriction theorem; none states the new chain-level equality or fixed-lift formula.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftHomology",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Flat base-change section formula: Cohomology of a fixed augmented lift into a pushed injective resolution",
+   "via": [
+    "lem-weil-pbc-flat-base-change-restricted-lift-homology",
+    "lem-weil-pbc-flat-base-change-resolution-sections",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-flat-base-change-map-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyAugmentedLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyAugmentedLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap_of_augmentedLift",
+  "statement": "theorem moduleCohomologyFMap_of_augmentedLift {X Y : Scheme.{uBC}} (h : X ⟶ Y)\n    {G : Y.Modules} {F : X.Modules} (φ : G ⟶ (pushforward h).obj F)\n    (I : InjectiveResolution F) (J : InjectiveResolution G)\n    (k : J.cocomplex ⟶\n      ((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)\n    (hk : J.ι.f 0 ≫ k.f 0 = φ ≫ (pushforward h).map (I.ι.f 0))\n    (a : ((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)).obj\n          I.cocomplex ≅\n      ((RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙\n        forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)).obj\n          (((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex))\n    (ha : ∀ n : ℕ, a.inv.f n = (Scheme.Modules.presheaf (I.cocomplex.X n)).map\n      (eqToHom (by simp) : (⊤ : X.Opens) ⟶ h ⁻¹ᵁ (⊤ : Y.Opens)).op)\n    (p : ℕ) :\n    letI := RingedSpace.globalSectionsFunctor_additive Y.toRingedSpace\n    letI := RingedSpace.globalSectionsFunctor_additive X.toRingedSpace\n    let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{uBC} (ComplexShape.up ℕ) p\n    let rG := (forget₂ _ AddCommGrpCat.{uBC}).mapIso\n      (J.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Y.toRingedSpace) p) ≪≫\n      (((RingedSpace.globalSectionsComplex J).sc p).mapHomologyIso\n        (forget₂ _ AddCommGrpCat.{uBC})).symm\n    let rF := (forget₂ _ AddCommGrpCat.{uBC}).mapIso\n      (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) p) ≪≫\n      (((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso\n        (forget₂ _ AddCommGrpCat.{uBC})).symm\n    rG.hom ≫ H.map (((RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙\n      forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)).map k) ≫\n        (H.mapIso a).inv ≫ rF.inv = moduleCohomologyFMap h φ p",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T125008-L-3835996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T125008-L-3835996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
