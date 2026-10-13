@@ -10,22 +10,24 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use the induced action on split labels and the supplied exact orbit data. Finite etale torsor descent identifies each orbit component with the quotient by its stabilizer. On rings this is the invariant subring of C[1/h]. Since C is a domain and h is nonzero, invariance of a/h^n implies invariance of a, so invariants commute with localization. Finite coproducts correspond to finite products of rings, and every identification is over H. See the complete proof in the Lean docstring.",
+   "text": "Convert complete and distinct orbit data, and its action equality hD, to the hypotheses of orbit-component descent. Obtain e to the coproduct of the invariant-subalgebra principal opens, with its over-H equation. Obtain f from the finite-product principal-open theorem. Compose e and f; associativity and the two equations give precisely the original projection equation.",
    "uses": [
-    "lem-sbc-affine-torsor-split-label-laws"
+    "lem-sbc-affine-torsor-orbit-component-descent",
+    "lem-sbc-finite-product-principal-open"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-affine-torsor-split-label-laws"
+  "lem-sbc-affine-torsor-orbit-component-descent",
+  "lem-sbc-finite-product-principal-open"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "D3",
-  "document": "Stacks Project",
-  "place": "Tags 03SF and 0EYG",
-  "note": "Repair of false arbitrary orbit parameters; restores the etale and unique-rotation torsor assumptions and includes projection compatibility. Geometric descent remains unproved."
+  "group": "R1",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 03SF and 0EYG; finite-product spectrum assembly",
+  "note": "Geometric component descent is isolated; finite-product assembly is proved separately, with the original over-H conclusion retained."
  },
  "mathlib_searches": [
   {
@@ -96,12 +98,12 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-3e7fd",
-  "group": "D3",
+  "reviewer": "COMPILER",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T222400-L-1221588",
+  "landing": "20261013T231542-L-1819874",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and constructions with their nodes, change records, source arguments, and report; both modules and the direct importer AffineTorsorFixedPunctureDescentCore compile cleanly, as does outer descent; axiom checks match the two reported holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-14",

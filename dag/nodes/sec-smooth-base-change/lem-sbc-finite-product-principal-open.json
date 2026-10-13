@@ -1,0 +1,105 @@
+{
+ "id": "lem-sbc-finite-product-principal-open",
+ "kind": "lemma",
+ "title": "Principal opens of finite product spectra",
+ "statement": "Let H be a commutative ring, h∈H, m a natural number, and F_i a family of commutative H-algebras indexed by Fin m. Put B=Π_i F_i, U_i=D(algebraMap H F_i h) in Spec F_i, and V=D(algebraMap H B h) in Spec B. There exists an isomorphism e:∐_i U_i≅V such that e.hom followed by V→Spec B→Spec H is the coproduct of the maps U_i→Spec F_i→Spec H. This includes m=0 and zero component rings.",
+ "source": {
+  "document": "Mathlib and Stacks Project",
+  "place": "Mathlib.AlgebraicGeometry.Limits: sigmaSpec, ι_sigmaSpec and its finite IsIso instance; Stacks Tag 01I1"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "the evaluation maps give sigmaSpec, which is an isomorphism for a finite\nindex set. The inverse image of D(h) under each evaluation is D(h_i), because\nprime-spectrum comap takes basic opens to basic opens. Restrict sigmaSpec to this\nopen. Restriction commutes with disjoint union, so the restricted source is the\ncoproduct of the component basic opens. This gives the isomorphism e. Composing\nwith the open inclusion gives the coproduct of component inclusions followed by\nthe evaluation maps. Composing further with Spec of the diagonal H-algebra map\nreduces each summand to its structural map, giving the equation by Sigma.hom_ext.\nThe empty-index case follows from sigmaSpec for the zero ring.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R1",
+  "document": "Mathlib and Stacks Project",
+  "place": "Mathlib.AlgebraicGeometry.Limits: sigmaSpec, ι_sigmaSpec and its finite IsIso instance; Stacks Tag 01I1",
+  "note": "Separate orbit-component descent from finite-product assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "spectrum finite product rings coproduct principal opens",
+   "results": "LeanSearch service unavailable; no result returned.",
+   "date": "2026-10-14",
+   "verdict": "unavailable: service returned Internal Server Error; no exact match established."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectrum finite product rings is coproduct spectra principal opens",
+   "results": "PrimeSpectrum.primeSpectrumProdOfSum, PrimeSpectrum.primeSpectrumProd, PrimeSpectrum.sigmaToPi, PrimeSpectrum.primeSpectrumProdHomeo, AlgebraicGeometry.coprodSpec_apply, PrimeSpectrum.primeSpectrumProd_symm_inr_asIdeal, PrimeSpectrum.primeSpectrumProd_symm_inl_asIdeal, PrimeSpectrum.sigmaToPi_asIdeal",
+   "date": "2026-10-14",
+   "verdict": "Related results; no exact match for the stated composite theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.sigmaSpec",
+   "results": "AlgebraicGeometry.instIsOpenImmersionSigmaSpec, AlgebraicGeometry.sigmaSpec, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.ι_sigmaSpec, AlgebraicGeometry.ι_sigmaSpec_assoc, AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec, AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec, AlgebraicGeometry.eq_top_of_sigmaSpec_subset_of_isCompact",
+   "date": "2026-10-14",
+   "verdict": "Related results; no exact match for the stated composite theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaSpec|basicOpenIsoSpecAway|fixed.*orbit.*descent",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "Related results; no exact match for the stated composite theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric",
+  "date": "2026-10-14",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-fixed-puncture-geometric",
+   "place": "finite coproducts correspond to finite products of rings",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteProductPrincipalOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteProductPrincipalOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_product_principal_open",
+  "statement": "theorem finite_product_principal_open (H : CommRingCat.{u}) (h : H) (m : ℕ) (F : Fin m → Type u) [∀ i, CommRing (F i)] [∀ i, Algebra H (F i)] : let B := ∀ i : Fin m, F i let U := fun i : Fin m ↦ PrimeSpectrum.basicOpen (algebraMap H (F i) h) let V := PrimeSpectrum.basicOpen (algebraMap H B h) ∃ e : (∐ fun i : Fin m ↦ Scheme.Opens.toScheme (X := Spec (CommRingCat.of (F i))) (U i)) ≅ Scheme.Opens.toScheme (X := Spec (CommRingCat.of B)) V, e.hom ≫ Scheme.Opens.ι (X := Spec (CommRingCat.of B)) V ≫ Spec.map (CommRingCat.ofHom (algebraMap H B)) = Sigma.desc (fun i : Fin m ↦ Scheme.Opens.ι (X := Spec (CommRingCat.of (F i))) (U i) ≫ Spec.map (CommRingCat.ofHom (algebraMap H (F i))))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T231542-L-1819874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T231542-L-1819874",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

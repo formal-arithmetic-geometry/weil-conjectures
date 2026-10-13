@@ -1,0 +1,111 @@
+{
+ "id": "lem-sbc-affine-torsor-orbit-component-descent",
+ "kind": "lemma",
+ "title": "Descent of individual fixed-orbit components",
+ "statement": "Let R,H be commutative rings, ι:R→H a ring map, g∈R, and C a domain H-algebra finite and faithfully flat over H. Put h=algebraMap H C (ι(g)) and assume h≠0. A finite group G acts by H-algebra maps ρ satisfying the identity and multiplication laws. Assume D(h)→Spec H is étale and any two field-valued points of C over H, on which h is nonzero, differ by a unique element of G. Let p:Y→Spec R factor as a finite étale map j:Y→D(g). Given t:T→Spec R, k:D(h)→T over Spec R, and an isomorphism δ:Y×T≅∐(Fin d) T over T, let A be the induced label action defined by [lem-sbc-affine-torsor-split-label-laws]. Suppose r:Fin m→Fin d meets every A-orbit exactly once, and K:Fin m→Subgroup G gives its exact stabilizers. Put F_i=intersection over ζ∈K_i of the equalizers of ρ(ζ) and identity in C. Then Y×Spec H is isomorphic over Spec H to the coproduct over Fin m of D(algebraMap H F_i (ι(g))) in Spec F_i.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF, Galois covers of connected schemes; Tag 0EYG, fixed-subalgebra construction"
+ },
+ "stmt_deps": [
+  "lem-sbc-affine-torsor-split-label-laws"
+ ],
+ "proof": [
+  {
+   "text": "put h = algebraMap H C (ι g). Finite faithful flatness gives a faithfully\nflat finite cover D(h) of D(ι g). The étale and unique-rotation conditions identify\nits fibre square with the disjoint union of its G deck transformations: the natural\nmap is finite étale and bijective on geometric fibres. Pull the supplied splitting\nback to D(h). Its connectedness (C is a domain and h is nonzero) makes each deck\ntransformation permute the split sections. Evaluation at the generic point is the\nspecified fixedPunctureDescentAction. Completeness and distinctness index exactly\nits orbits, and hstabilizer gives their stabilizers. Effective descent of finite\nétale schemes therefore identifies each component with the stabilizer quotient.\nIts coordinate ring is the invariant subring of C[1/h]. This is (C^K)[1/h]: write\nan invariant fraction as a/h^n; for each ζ in K, the difference ρ(ζ)(a)-a becomes\nzero after localization. Injectivity into C[1/h] implies the difference was zero.\nThe reverse inclusion follows because h comes from H. The basic-open/localization\nisomorphism identifies this component with D(h) in Spec(C^K). Taking the coproduct\nof these component identifications gives e. Every descent and localization map is\nover Spec H, so coproduct universality gives the stated structural-map equation.\nFor d = 0 completeness forces m = 0; both sides are empty. No product-spectrum\nidentification is used here.",
+   "uses": [
+    "lem-sbc-affine-torsor-split-label-laws"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-affine-torsor-split-label-laws"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R1",
+  "document": "Stacks Project",
+  "place": "Tag 03SF, Galois covers of connected schemes; Tag 0EYG, fixed-subalgebra construction",
+  "note": "Separate orbit-component descent from finite-product assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale torsor orbit stabilizer invariant subring descent",
+   "results": "LeanSearch service unavailable; no result returned.",
+   "date": "2026-10-14",
+   "verdict": "unavailable: service returned Internal Server Error; no exact match established."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale Galois torsor orbit stabilizer invariant subring descent",
+   "results": "Ideal.isPretransitive_of_isGaloisGroup, IsFractionRing.stabilizerHom_surjective, Ideal.isPretransitive_of_isGalois, IsGaloisGroup.to_isFractionRing, IsGaloisGroup.iff_isFractionRing, Ideal.exists_smul_eq_of_isGaloisGroup, Ideal.exists_map_eq_of_isGalois, IsGaloisGroup.of_isFractionRing",
+   "date": "2026-10-14",
+   "verdict": "Related results; no exact match for the stated composite theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgHom.equalizer",
+   "results": "AlgHom.equalizer, AlgHom.coe_equalizer, AlgHom.mem_equalizer, AlgHom.le_equalizer, AlgHom.equalizer_toSubmodule, AlgHom.equalizer_toSubsemiring, AlgHom.adjoin_le_equalizer, AlgHom.equalizer_same",
+   "date": "2026-10-14",
+   "verdict": "Related results; no exact match for the stated composite theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaSpec|basicOpenIsoSpecAway|fixed.*orbit.*descent",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "Related results; no exact match for the stated composite theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric",
+  "date": "2026-10-14",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-fixed-puncture-geometric",
+   "place": "individual stabilizer components",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorOrbitComponentDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorOrbitComponentDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_torsor_orbit_component_descent",
+  "statement": "theorem affine_torsor_orbit_component_descent (R H : CommRingCat.{u}) (g : R) (ι : R →+* H) (C : Type u) [CommRing C] [Algebra H C] [IsDomain C] [Module.Finite H C] [Module.FaithfullyFlat H C] (G : Type u) [Group G] [Finite G] (ρ : G → C →ₐ[H] C) (hρone : ρ 1 = AlgHom.id H C) (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b)) (hne : algebraMap H C (ι g) ≠ 0) {Y : Scheme.{u}} (p : Y ⟶ Spec R) (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g)) (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p) [IsFinite j] [Etale j] (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫ Spec.map (CommRingCat.ofHom (algebraMap H C)))) (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω), a.comp (algebraMap H C) = b.comp (algebraMap H C) → a (algebraMap H C (ι g)) ≠ 0 → ∃! ζ : G, a.comp (ρ ζ).toRingHom = b) (d m : ℕ) (r : Fin m → Fin d) (K : Fin m → Subgroup G) (T : Scheme.{u}) (t : T ⟶ Spec R) (k : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ⟶ T) (hk : k ≫ t = Scheme.Opens.ι (X := Spec (CommRingCat.of C)) (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫ Spec.map (CommRingCat.ofHom (algebraMap H C)) ≫ Spec.map (CommRingCat.ofHom ι)) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T) (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t) (hcomplete : ∀ x, ∃ i, ∃ ζ : G, fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne p T t k hk d δ hδ ζ (r i) = x) (hdistinct : ∀ i j, (∃ ζ : G, fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne p T t k hk d δ hδ ζ (r i) = r j) → i = j) (hstabilizer : ∀ i ζ, ζ ∈ K i ↔ fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne p T t k hk d δ hδ ζ (r i) = r i) : let F := fun i : Fin m ↦ (⨅ ζ : K i, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C) let U := fun i : Fin m ↦ PrimeSpectrum.basicOpen (algebraMap H (F i) (ι g)) ∃ e : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ ∐ fun i : Fin m ↦ Scheme.Opens.toScheme (X := Spec (CommRingCat.of (F i))) (U i), e.hom ≫ Sigma.desc (fun i : Fin m ↦ Scheme.Opens.ι (X := Spec (CommRingCat.of (F i))) (U i) ≫ Spec.map (CommRingCat.ofHom (algebraMap H (F i)))) = pullback.snd p (Spec.map (CommRingCat.ofHom ι))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T231542-L-1819874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T231542-L-1819874",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

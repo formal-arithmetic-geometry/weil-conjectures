@@ -5,6 +5,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 public import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction
+import Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorOrbitComponentDescent
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteProductPrincipalOpen
 import Mathlib.Data.Fintype.EquivFin
 import Mathlib.GroupTheory.GroupAction.Defs
 
@@ -133,6 +135,30 @@ theorem affine_torsor_fixed_orbits_geometric
     ∃ θ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅ V.toScheme,
       θ.hom ≫ V.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap H B)) =
         pullback.snd p (Spec.map (CommRingCat.ofHom ι)) := by
-  sorry
+  classical
+  dsimp only
+  let F := fun i : Fin D.m ↦
+    (⨅ ζ : D.stabilizer i,
+      AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)
+  obtain ⟨e, he⟩ := affine_torsor_orbit_component_descent R H g ι C G ρ hρone hρmul
+    hne p j hj hEt hrot d D.m D.representative D.stabilizer T t k hk δ hδ
+    (by
+      intro x
+      obtain ⟨i, hi⟩ := D.complete x
+      exact ⟨i, by simpa only [← hD] using (D.rel_spec _ _).mp hi⟩)
+    (by
+      intro i j hij
+      apply D.distinct i j
+      apply (D.rel_spec _ _).mpr
+      simpa only [hD] using hij)
+    (by
+      intro i ζ
+      simpa only [hD] using D.stabilizer_spec i ζ)
+  obtain ⟨f, hf⟩ := finite_product_principal_open H (ι g) D.m (fun i ↦ F i)
+  refine ⟨e ≪≫ f, ?_⟩
+  change (e.hom ≫ f.hom) ≫ _ ≫ _ = _
+  simp only [Category.assoc]
+  rw [hf]
+  exact he
 
 end AlgebraicGeometry.Scheme
