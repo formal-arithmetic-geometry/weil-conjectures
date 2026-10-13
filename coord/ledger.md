@@ -13428,3 +13428,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:19 L: batch 20261013T190131 dependency take-out
 - 19:20 L: returned deliver/M1/Sheaf.AlgebraicGeometry.TensorPullbackStalkSquare (reviewer RETURN: (reviewer X-56534, head 56534e675) B2 / stage-3 point 6: replace the entire node statement, proof, and proof_deps. Old s)
 - 19:20 L: returned deliver/D2/Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitEquality (reviewer RETURN: (reviewer X-b90ee, head b90eeca01) E2 / brief §4: the remaining theorem is false in the intended model. Take identity pu)
+- 19:23 L: returned deliver/P1/Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare (reviewer RETURN: (reviewer X-542b5, head 542b522b7) C5: lean/Sheaf/Algebra/Homology/FlatIteratedScalarExtensionHomologySquare.lean:98–145)
