@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-power-series-punctured-split-assembly",
+ "kind": "statement",
+ "title": "Lifting a finite etale splitting across fully faithful base change",
+ "statement": "Let B,W,E,F be schemes, z:W→B, p:E→B and r:F→B finite etale morphisms [def-weil-pbc-scheme-conventions, def-pc-fibre-product]. Suppose either z is an isomorphism, or the actual finite-etale pullback functor along z induces a bijection on every morphism set. Given an isomorphism e0:E×_B W≅F×_B W whose hom followed by the W-projection equals the W-projection on E×_B W, there is e:E≅F with e.hom followed by r equal to p.",
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 0EY9, categorical assembly of full faithfulness as used in Tag 0EYJ; Mathlib CategoryTheory/Functor/FullyFaithful.lean and the actual FiniteEtale.pullback functor."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "If z is an isomorphism, the first projections a:E×_B W→E and b:F×_B W→F are isomorphisms. Set e=a inverse followed by e0 followed by b. The pullback equations and the equation for e0 show e.hom followed by r equals p.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Otherwise make p and r objects P,Q of FiniteEtale B. The equation for e0 and its inverse makes their hom and inv morphisms f0,g0 between the pullback objects. Surjectivity lifts them to f:P→Q and g:Q→P. Functor.map_comp, map_id and the two inverse identities of e0 imply that f followed by g and g followed by f map to identities. Injectivity makes both composites identities. Extract the underlying scheme maps to build e; FiniteEtale.hom_left_comp gives its equation over B.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "D2",
+  "document": "Stacks Project and the Lean libraries",
+  "place": "Tag 0EY9, categorical assembly of full faithfulness as used in Tag 0EYJ; Mathlib CategoryTheory/Functor/FullyFaithful.lean and the actual FiniteEtale.pullback functor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale scheme cover is trivial when its generic fibre splits over a normal integral base",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fully faithful base change of finite etale covers lifts an isomorphism and its inverse",
+   "results": "8 results including Etale.forgetFullyFaithful and etale base-change stability. No geometric zero-slice split or normalization-test preparation theorem.",
+   "verdict": "no exact match; generic categorical tools used in the proved assembly",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "zero.slice.*split|punctured.*restriction|iso_of.*pullback|preimageIso; normalizationPullback|IsIntegralHom.*IsIso",
+   "results": "Read Mathlib CategoryTheory/Functor/FullyFaithful.lean and AlgebraicGeometry/Normalization.lean. FullyFaithful.preimageIso supplies the abstract categorical idea. Relative normalization commutes with smooth base change and IsIntegralHom supplies IsIso toNormalization; these prove the preparation. No declaration provides the geometric zero-slice splitting.",
+   "verdict": "component matches used for proved lemmas; no complete slice statement",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful.preimageIso",
+   "results": "0 hits: unknown identifier; the declaration was located and read by rg.",
+   "verdict": "no service match; local source provides the categorical tool",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedSplit",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Final local calculation: identify the punctured zero slice, split its section cover, and lift the splitting by full faithfulness.",
+   "via": [
+    "lem-sbc-stalk-normalization-formal-punctured-split",
+    "lem-sbc-stalk-normalization-formal-split",
+    "lem-sbc-stalk-normalization-split-formal-test",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSplitAssembly",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesPuncturedSplitAssembly.lean",
+  "declaration": "AlgebraicGeometry.Scheme.powerSeries_punctured_split_assembly",
+  "statement": "theorem powerSeries_punctured_split_assembly\n    {B W E F : Scheme.{u}} (z : W ⟶ B) (p : E ⟶ B) (r : F ⟶ B)\n    [IsFinite p] [Etale p] [IsFinite r] [Etale r]\n    (hfull : IsIso z ∨ ∀ P Q : B.FiniteEtale,\n      Function.Bijective ((FiniteEtale.pullback z).map (X := P) (Y := Q)))\n    (e₀ : pullback p z ≅ pullback r z)\n    (he₀ : e₀.hom ≫ pullback.snd r z = pullback.snd p z) :\n    ∃ e : E ≅ F, e.hom ≫ r = p",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T145117-L-694994",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T145117-L-694994",
+  "kind": "interface"
+ }
+}
