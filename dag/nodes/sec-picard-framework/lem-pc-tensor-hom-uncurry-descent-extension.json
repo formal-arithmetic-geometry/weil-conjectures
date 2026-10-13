@@ -1,165 +1,154 @@
 {
- "id": "lem-pc-tensor-hom-uncurry-descent-extension",
- "kind": "statement",
- "title": "Extension of normalized tensor-Hom values to derived objects",
- "statement": "For a scheme X with chosen derived category, let t be a family Hom(K,RHom(L,M)) to Hom(K tensor^L L,M) satisfying the representative localization equation for every K-flat P, arbitrary complexes L,M and chain map phi:P to Hom(L,I(M)). There exists a family s agreeing with t on precisely those normalized inputs and compatible with every isomorphism in K,L,M. Arbitrary values of t outside those inputs need not be preserved.",
- "source": {
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DJ; sites-cohomology.tex Tags 0A90, 0A96; verified at https://stacks.math.columbia.edu/tag/08DJ, https://stacks.math.columbia.edu/tag/0A90, https://stacks.math.columbia.edu/tag/0A96"
- },
- "stmt_deps": [
-  "def-pc-canonical-derived-tensor-hom-model",
-  "lem-pc-tensor-hom-uncurry-differential"
- ],
- "proof": [
-  {
-   "text": "For every derived input choose K-flat representatives P and Lc of K and L and a complex Mc representing M. The Hom complex Hom(Lc,I(Mc)) is K-injective. Lift the transported derived morphism first through the bijection on homotopy-category maps and then through the full quotient functor to a chain map phi. Naturality of quotientCompQhIso yields exactly the normalized input equation. This coverage step is proved as the private helper normalizedInput_exists.",
-   "uses": [
+  "id": "lem-pc-tensor-hom-uncurry-descent-extension",
+  "kind": "statement",
+  "title": "Extension of normalized tensor-Hom values to derived objects",
+  "statement": "For a scheme X with chosen derived category, let t be a family Hom(K,RHom(L,M)) to Hom(K tensor^L L,M) satisfying the representative localization equation for every K-flat P, arbitrary complexes L,M and chain map phi:P to Hom(L,I(M)). There exists a family s agreeing with t on precisely those normalized inputs and compatible with every isomorphism in K,L,M. Arbitrary values of t outside those inputs need not be preserved.",
+  "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DJ; sites-cohomology.tex Tags 0A90, 0A96; verified at https://stacks.math.columbia.edu/tag/08DJ, https://stacks.math.columbia.edu/tag/0A90, https://stacks.math.columbia.edu/tag/0A96"
+  },
+  "stmt_deps": [
+    "def-pc-canonical-derived-tensor-hom-model",
+    "lem-pc-tensor-hom-uncurry-differential"
+  ],
+  "proof": [
+    {
+      "text": "Choose complex representatives of the three derived objects and K-flat\nresolutions of the first two. Maps into Hom(Lc,I(M)) lift to chain maps modulo\nhomotopy because that Hom complex is K-injective. Evaluate t on these chain\ninputs and transport the answer along the chosen representative isomorphisms.\nThe normalization hypothesis expresses every value used here as localized\ncomponentwise evaluation, so it supplies homotopy invariance and compatibility\nunder changes of the chain lift. For changes of representatives, compute roofs\non common K-flat resolutions and K-injective targets. On each tensor summand,\nthe sheaf tensor-Hom adjunction and the Hom projections commute with pre- and\npostcomposition. The coproduct universal property gives the comparison identity\nfor evaluation. Localize it, use the naturality of the tensor model map, Hom\nresolution comparison and resolution augmentation, and cancel the invertible\nquasi-isomorphisms. This proves independence of representatives and the asserted\ntransport identity for arbitrary derived isomorphisms. If the input already has\nthe form in the agreement clause, use its given K-flat P. Resolve its possibly\nnon-K-flat L; both P tensor - and Hom(-,I(M)) invert this resolution and evaluation\ncommutes with it. Cancellation and ht give precisely agreement with t on that\ninput. The construction does not retain arbitrary values of t elsewhere. Identity\nisomorphisms, zero inputs and zero complexes satisfy the same comparison; no\nboundedness or naturality of the given t outside its normalized inputs is used.",
+      "uses": [
+        "lem-pc-tensor-hom-uncurry-differential",
+        "lem-pc-kflat-resolution",
+        "lem-pur-hom-kflat-into-kinjective",
+        "lem-weil-pbc-kinjective-hom-derived",
+        "lem-pur-hom-complex-global-cochains"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-pc-tensor-hom-uncurry-differential",
     "lem-pc-kflat-resolution",
     "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pur-hom-complex-global-cochains"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "group": "H1",
+    "date": "2026-10-13",
+    "document": "Stacks Project",
+    "place": "Tags 08DJ, 0A90, 0A96; representative construction and extension separated by H1"
   },
-  {
-   "text": "Use the normalized comparison theorem for the localized chain evaluations. A generic proved helper extendNormalizedValues forms the relation whose witnesses are normalized representatives and their three isomorphisms to the desired objects. Coverage makes every fiber nonempty. Comparing two witnesses by their composite representative isomorphisms and applying normalized comparison gives equality of outputs after cancelling invertible tensor and target maps; thus every fiber is a singleton. Choose that unique output. Identity witnesses establish normalization, and composing a witness with the three given isomorphisms establishes transport; uniqueness supplies the desired equation. The actual evaluation values use schemeTensorHomUncurry, whose chain-map construction uses the differential-compatibility theorem.",
-   "uses": [
-    "lem-pc-tensor-hom-uncurry-normalized-comparison",
-    "lem-pc-tensor-hom-uncurry-differential"
-   ],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "tensor.*[Ee]val|[Ee]val.*tensor|uncurry.*natur",
+      "results": [
+        "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
+        "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
+        "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
+        "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
+        "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
+        "Mathlib/Tactic/CategoryTheory/Monoidal/Normalize.lean",
+        "Mathlib/Tactic/CategoryTheory/Monoidal/Normalize.lean",
+        "Mathlib/Condensed/Light/InternallyProjective.lean"
+      ],
+      "date": "2026-10-13",
+      "verdict": "No normalized derived evaluation extension found. Tor statements concern homology objects; Localization.lift concerns functors and does not supply the normalized evaluation calculation."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Localization.lift",
+      "results": [
+        "CategoryTheory.Localization.lift",
+        "CategoryTheory.Localization.liftingLift",
+        "CategoryTheory.Localization.fac",
+        "CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac",
+        "CategoryTheory.Functor.instIsRightDerivedFunctorLiftInvFac"
+      ],
+      "date": "2026-10-13",
+      "verdict": "No normalized derived evaluation extension found. Tor statements concern homology objects; Localization.lift concerns functors and does not supply the normalized evaluation calculation."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Extend a tensor Hom evaluation map from K-flat complex representatives to derived objects independently of representative choices",
+      "results": [
+        "CategoryTheory.Tor'_map_app",
+        "CategoryTheory.Tor_map",
+        "CategoryTheory.Tor'_obj_map",
+        "CategoryTheory.Tor'",
+        "CategoryTheory.Tor'_obj_obj",
+        "CategoryTheory.Tor",
+        "CategoryTheory.Tor_obj",
+        "HomologicalComplex.HasGoodTensor₁₂"
+      ],
+      "date": "2026-10-13",
+      "verdict": "No normalized derived evaluation extension found. Tor statements concern homology objects; Localization.lift concerns functors and does not supply the normalized evaluation calculation."
+    },
+    {
+      "tool": "leansearch",
+      "query": "K-flat tensor Hom evaluation maps on complex representatives extend independently of choices to derived objects and commute with isomorphisms",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-13"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescent",
+    "date": "2026-10-13",
+    "group": "H1"
   },
-  {
-   "text": "Apply this helper to the actual normalized chain inputs and localized schemeTensorHomUncurry values. Its normalization equation, followed by the reverse of ht, gives agreement with t precisely on the inputs in the agreement clause. Its transport equation is the second required conjunct. The family is selected only within the theorem proof, after uniqueness has been proved; no definition chooses an undetermined existence witness.",
-   "uses": [],
-   "elementary": true
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-tensor-hom-uncurry-descent",
+      "place": "Independence of representatives and isomorphism transport step",
+      "via": [
+        "lem-pc-canonical-derived-tensor-hom-map-existence",
+        "def-pc-canonical-derived-tensor-hom-bijection",
+        "lem-sc-flat-precompose-pus",
+        "lem-sc-proper-flat-right-adjoint-affine-basechange",
+        "lem-sc-proper-flat-right-adjoint-basechange",
+        "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+        "lem-sc-smooth-proper-diagonal-pushforward-structure",
+        "lem-sc-smooth-proper-relative-dualizing-general",
+        "lem-sc-smooth-proper-curve-dualizing",
+        "lem-sc-finite-duality-trace"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentExtension",
+    "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentExtension.lean",
+    "declaration": "AlgebraicGeometry.exists_tensorHomUncurry_descent_extension",
+    "statement": "theorem exists_tensorHomUncurry_descent_extension (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (t : ∀ K L M : schemeDerivedCategory X,\n      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M))\n    (ht : ∀ (P L M : CochainComplex\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),\n        P.IsKFlat →\n        ∀ φ : P ⟶ homComplex (R := X.sheaf) L\n            ((schemeHomKInjectiveResolution X).obj M),\n          t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)\n              (DerivedCategory.Q.map φ ≫\n                (schemeDerivedInternalHomResolutionIso X L M).inv) =\n            pullbackTensorModelMap X P L ≫\n              DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫\n                schemeHomResolutionInverse X M) :\n    letI := schemeDerivedTensorMonoidal X\n    ∃ s : ∀ K L M : schemeDerivedCategory X,\n      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M),\n      (∀ (P L M : CochainComplex\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),\n        P.IsKFlat →\n        ∀ φ : P ⟶ homComplex (R := X.sheaf) L\n            ((schemeHomKInjectiveResolution X).obj M),\n          s (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)\n              (DerivedCategory.Q.map φ ≫\n                (schemeDerivedInternalHomResolutionIso X L M).inv) =\n            t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)\n              (DerivedCategory.Q.map φ ≫\n                (schemeDerivedInternalHomResolutionIso X L M).inv)) ∧\n    ∀ (K K' L L' M M' : schemeDerivedCategory X)\n      (a : K' ≅ K) (b : L' ≅ L) (c : M ≅ M')\n      (f : K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)),\n      s K' L' M' (a.hom ≫ f ≫\n        (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n          X.toRingedSpace.sheaf).map (b.hom.op, c.hom)) =\n        (a.hom ⊗ₘ b.hom) ≫ s K L M f ≫ c.hom",
+    "branch": "sheaf-dag",
+    "by": "H1",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "H1",
+    "result": "pass",
+    "landing": "20261013T060417-L-583063",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "H1",
+    "result": "pass",
+    "landing": "20261013T060417-L-583063",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-pc-tensor-hom-uncurry-differential",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pc-tensor-hom-uncurry-normalized-comparison"
- ],
- "proof_origin": {
-  "by": "worker",
-  "group": "P2",
-  "date": "2026-10-13",
-  "document": "Stacks Project",
-  "place": "Tags 08DJ, 0A90, 0A96; coverage and generic singleton-fiber transport proved in Lean; normalized comparison split off"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "tensor.*[Ee]val|[Ee]val.*tensor|uncurry.*natur",
-   "results": [
-    "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
-    "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
-    "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
-    "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
-    "Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean",
-    "Mathlib/Tactic/CategoryTheory/Monoidal/Normalize.lean",
-    "Mathlib/Tactic/CategoryTheory/Monoidal/Normalize.lean",
-    "Mathlib/Condensed/Light/InternallyProjective.lean"
-   ],
-   "date": "2026-10-13",
-   "verdict": "No normalized derived evaluation extension found. Tor statements concern homology objects; Localization.lift concerns functors and does not supply the normalized evaluation calculation."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Localization.lift",
-   "results": [
-    "CategoryTheory.Localization.lift",
-    "CategoryTheory.Localization.liftingLift",
-    "CategoryTheory.Localization.fac",
-    "CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac",
-    "CategoryTheory.Functor.instIsRightDerivedFunctorLiftInvFac"
-   ],
-   "date": "2026-10-13",
-   "verdict": "No normalized derived evaluation extension found. Tor statements concern homology objects; Localization.lift concerns functors and does not supply the normalized evaluation calculation."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Extend a tensor Hom evaluation map from K-flat complex representatives to derived objects independently of representative choices",
-   "results": [
-    "CategoryTheory.Tor'_map_app",
-    "CategoryTheory.Tor_map",
-    "CategoryTheory.Tor'_obj_map",
-    "CategoryTheory.Tor'",
-    "CategoryTheory.Tor'_obj_obj",
-    "CategoryTheory.Tor",
-    "CategoryTheory.Tor_obj",
-    "HomologicalComplex.HasGoodTensor₁₂"
-   ],
-   "date": "2026-10-13",
-   "verdict": "No normalized derived evaluation extension found. Tor statements concern homology objects; Localization.lift concerns functors and does not supply the normalized evaluation calculation."
-  },
-  {
-   "tool": "leansearch",
-   "query": "K-flat tensor Hom evaluation maps on complex representatives extend independently of choices to derived objects and commute with isomorphisms",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-13"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescent",
-  "date": "2026-10-13",
-  "group": "H1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-tensor-hom-uncurry-descent",
-   "place": "Independence of representatives and isomorphism transport step",
-   "via": [
-    "lem-pc-canonical-derived-tensor-hom-map-existence",
-    "def-pc-canonical-derived-tensor-hom-bijection",
-    "lem-sc-flat-precompose-pus",
-    "lem-sc-proper-flat-right-adjoint-affine-basechange",
-    "lem-sc-proper-flat-right-adjoint-basechange",
-    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
-    "lem-sc-smooth-proper-diagonal-pushforward-structure",
-    "lem-sc-smooth-proper-relative-dualizing-general",
-    "lem-sc-smooth-proper-curve-dualizing",
-    "lem-sc-finite-duality-trace"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentExtension",
-  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentExtension.lean",
-  "declaration": "AlgebraicGeometry.exists_tensorHomUncurry_descent_extension",
-  "statement": "theorem exists_tensorHomUncurry_descent_extension (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (t : ∀ K L M : schemeDerivedCategory X,\n      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M))\n    (ht : ∀ (P L M : CochainComplex\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),\n        P.IsKFlat →\n        ∀ φ : P ⟶ homComplex (R := X.sheaf) L\n            ((schemeHomKInjectiveResolution X).obj M),\n          t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)\n              (DerivedCategory.Q.map φ ≫\n                (schemeDerivedInternalHomResolutionIso X L M).inv) =\n            pullbackTensorModelMap X P L ≫\n              DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫\n                schemeHomResolutionInverse X M) :\n    letI := schemeDerivedTensorMonoidal X\n    ∃ s : ∀ K L M : schemeDerivedCategory X,\n      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M),\n      (∀ (P L M : CochainComplex\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),\n        P.IsKFlat →\n        ∀ φ : P ⟶ homComplex (R := X.sheaf) L\n            ((schemeHomKInjectiveResolution X).obj M),\n          s (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)\n              (DerivedCategory.Q.map φ ≫\n                (schemeDerivedInternalHomResolutionIso X L M).inv) =\n            t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)\n              (DerivedCategory.Q.map φ ≫\n                (schemeDerivedInternalHomResolutionIso X L M).inv)) ∧\n    ∀ (K K' L L' M M' : schemeDerivedCategory X)\n      (a : K' ≅ K) (b : L' ≅ L) (c : M ≅ M')\n      (f : K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)),\n      s K' L' M' (a.hom ≫ f ≫\n        (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n          X.toRingedSpace.sheaf).map (b.hom.op, c.hom)) =\n        (a.hom ⊗ₘ b.hom) ≫ s K L M f ≫ c.hom",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
-  "result": "pass",
-  "landing": "20261013T060417-L-583063",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
-  "result": "pass",
-  "landing": "20261013T065114-L-900278",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }
