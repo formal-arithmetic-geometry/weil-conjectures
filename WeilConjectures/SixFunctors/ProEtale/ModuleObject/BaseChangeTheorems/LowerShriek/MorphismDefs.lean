@@ -60,6 +60,15 @@ finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all
   inverse isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange`: the compact-support
   base-change morphism `Ex_!^c`.
+- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChangeCompactificationIso`: for a
+  cartesian square whose two vertical maps are the same `f`, the identification
+  `Rf_!^{c.baseChange sq} ≅ Rf_!^c` of the lower shrieks attached to the base-changed and the
+  original compactification.
+
+## Sorried input
+
+- `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChangeCompactificationIso`: an
+  instance of the independence of the lower shriek from the compactification.
 
 -/
 
@@ -253,5 +262,37 @@ lemma boundedConstructibleLowerShriekBaseChange_eq (c : Compactification f)
   by rw [boundedConstructibleLowerShriekBaseChange]
 
 end LowerShriek
+
+/-! ### The base-changed compactification of a square with the same vertical maps -/
+
+section CompactificationIso
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+  [IsSeparated (X ↘ Spec (.of k))]
+  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+  [IsSeparated (Y ↘ Spec (.of k))]
+  {f : X ⟶ Y} {g : Y ⟶ Y} {g' : X ⟶ X} [f.IsOver (Spec (.of k))]
+  [g.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
+
+/-- For a cartesian square `sq : IsPullback g' f f g` whose two vertical maps are the same
+morphism `f`, and a compactification `c` of `f`, the identification
+`Rf_!^{c'} ≅ Rf_!^c` on bounded constructible complexes of the lower shriek attached to the
+base-changed compactification `c' = c.baseChange sq` with the one attached to `c`. It is the
+input that turns the compact-support base-change isomorphism
+`Rf_!^c ⋙ Lg^* ≅ Lg'^* ⋙ Rf_!^{c'}` into a commutation isomorphism of `Rf_!^c` with `Lg^*` and
+`Lg'^*`, as needed for the Frobenius square of `f` (`g`, `g'` the Frobenius automorphisms).
+
+Both sides are lower shrieks of `f` for two compactifications, so this is an instance of the
+independence of the lower shriek from the compactification, which is not formalized; the
+isomorphism is currently `sorry`. -/
+@[no_expose]
+noncomputable def boundedConstructibleLowerShriekBaseChangeCompactificationIso
+    (c : Compactification f) (sq : IsPullback g' f f g) :
+    boundedConstructibleLowerShriekOfCompactification Λ ℓ k (c.baseChange sq) ≅
+      boundedConstructibleLowerShriekOfCompactification Λ ℓ k c :=
+  sorry
+
+end CompactificationIso
 
 end AlgebraicGeometry.ProEtale.CondensedRing
