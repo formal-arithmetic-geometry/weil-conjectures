@@ -16,22 +16,21 @@
  },
  "proof": [
   {
-   "text": "Fix l≥j,k. In Over(Spec R(i)) construct q:Tk→Tj, s:Tl→Tk and v:Tl→Tj from the ring maps, where Tr=Spec R(r) with its specified map to Spec R(i). Spec.map_comp and R.map_comp give s≫q=v. Cone naturality gives pl≫s=pk, pk≫q=h and pl≫v=h for the projections from c.pt. The baseChangeMap composition law gives the same triangles on fibre-product schemes. Write q,s,v for the induced maps. The cartesian chart squares give d:Ul(a)→Uk(a) with d≫Uk.f(a)=Ul.f(a)≫s and d≫Uj.pullbackHom(q,a)=Uj.pullbackHom(v,a). Compare restriction of v* with d* of restriction of q* using the first triangle, ordinary pullback composition and the tensor-to-ordinary comparison. Pull back the supplied rk along d and conjugate by this comparison to define rl.",
+   "text": "Fix l≥j,k. In Over(Spec R(i)) construct q:Tk→Tj, s:Tl→Tk and v:Tl→Tj from the ring maps, where Tr=Spec R(r) with its specified map to Spec R(i). Spec.map_comp and R.map_comp give s≫q=v. Cone naturality gives pl≫s=pk, pk≫q=h and pl≫v=h for the projections from c.pt. The baseChangeMap composition law gives the same triangles on fibre-product schemes. Write q,s,v for the induced maps. The cartesian chart squares give d:Ul(a)→Uk(a) with d≫Uk.f(a)=Ul.f(a)≫s and d≫Uj.pullbackHom(q,a)=Uj.pullbackHom(v,a). Compare restriction of v* with d* of restriction of q* using the first triangle, ordinary pullback composition and the tensor-to-ordinary comparison. Pull back the supplied rk along d and conjugate by this comparison to define rl. Use the explicitly constructed openCoverRefinementComparisons tuple to share alpha, beta, delta, ck and cl between the coherence statement and this proof.",
    "uses": [
     "def-pc-fibre-product",
     "lem-pc-module-pullback-adjunction",
     "def-pc-tensor-pullback-composition-iso",
     "def-pc-open-cover-tensor-pullback-comparison",
-    "def-pc-base-change"
+    "def-pc-base-change",
+    "def-pc-open-cover-refinement-comparisons"
    ],
    "elementary": false
   },
   {
-   "text": "At W, cartesian pasting gives a canonical isomorphism of the two iterated pulled-back charts. Their refinement triangle follows from pl≫s=pk. Pull back the recovery equation for rk along this refinement. Use naturality to move the comparison factors past rk, and associativity of pullback composition to identify the remaining factors with the canonical comparisons for pl and v. The comparisons are mates of the same pushforward composition under the pinned adjunctions, so their coherence follows from pushforward associativity. The resulting equation is exactly recovery for rl. Identity factorizations, empty charts, and zero modules are included.",
+   "text": "Pull the supplied recovery equation back along z. Write the canonical recovery comparisons as ck and cl. Apply lem-pc-open-cover-tensor-comparison-coherence to identify their composites with the refinement comparisons. Naturality of delta moves the chart morphism through this identity, and naturality of beta moves the restriction of φ. Cancel the comparison isomorphisms. This gives exactly recovery for the explicitly constructed rl; the private helper transport_chart_map carries this categorical calculation in Lean.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-tensor-pullback-composition-iso",
-    "def-pc-open-cover-tensor-pullback-comparison"
+    "lem-pc-open-cover-tensor-comparison-coherence"
    ],
    "elementary": false
   }
@@ -39,17 +38,19 @@
  "proof_deps": [
   "def-pc-base-change",
   "def-pc-fibre-product",
+  "def-pc-open-cover-refinement-comparisons",
   "def-pc-open-cover-tensor-pullback-comparison",
   "def-pc-tensor-pullback-composition-iso",
-  "lem-pc-module-pullback-adjunction"
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-open-cover-tensor-comparison-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C4",
+  "group": "F4",
   "date": "2026-10-14",
   "document": "Stacks Project",
   "place": "Tags 0095 and 0096, functoriality of module pullback; Tag 01ZR first proof; extension of a descended map to later stages in lem-pc-rf-perfect-base-change, Noetherian approximation",
-  "note": "The source gives the affine argument and functorial pullback. The displayed canonical-comparison details are expanded by C4; source read online at the cited tag pages."
+  "note": "Original geometric construction and naturality argument implemented in Lean; the pure canonical-comparison coherence identity is split off separately."
  },
  "mathlib_searches": [
   {
@@ -129,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
+  "reviewer": "X-6fcf5",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T172652-L-2098293",
+  "landing": "20261013T211102-L-391275",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged transport signature, explicit comparison constructions, coherence statement, and proof dependencies with their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile cleanly, with only permitted axioms and the documented sorryAx dependency."
  }
 }

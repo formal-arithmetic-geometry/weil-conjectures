@@ -1,0 +1,102 @@
+{
+ "id": "def-pc-module-recovery-comparison-iso",
+ "kind": "definition",
+ "title": "Composite of composition and restriction comparisons in a recovery equation",
+ "statement": "Let C,E,D,K,V be categories [def-nagata-category]. Let T:C→D, A:C→E, B:E→D, S:E→K, P:K→V and R:D→V be functors (assignments on objects and morphisms preserving identities and composition). Supply natural isomorphisms e:T≅A⋙B and t:S⋙P≅B⋙R, meaning invertible component maps commuting with functor maps. Define moduleRecoveryComparisonIso(T,A,B,S,P,R,e,t):T⋙R≅(A⋙S)⋙P as e whiskered on the right by R, followed by the associator from (A⋙B)⋙R to A⋙(B⋙R), followed by t inverse whiskered on the left by A, followed by the inverse associator to (A⋙S)⋙P. Here ⋙ denotes successive application of functors; whiskering means applying a functor to components or precomposing component indices. This is an explicit composite, not a chosen witness of an existence theorem.",
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Expanded canonical comparison construction in lem-pc-open-cover-map-lift-transport, proof steps 1 and 2 (Stacks Tags 0095 and 0096); Mathlib.CategoryTheory.Whiskering and Functor.Category, whiskering and associator constructions"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compose natural isomorphisms T iso A compose B and S compose P iso B compose R to obtain T compose R iso A compose S compose P",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose natural isomorphisms T iso A compose B and S compose P iso B compose R to obtain T compose R iso A compose S compose P",
+   "results": "CategoryTheory.NatIso.hcomp; CategoryTheory.NatIso.cancel_natIso_hom_right_assoc; CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight; CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight_assoc; CategoryTheory.NatIso.trans_app; CategoryTheory.CatCommSq.vComp_iso_hom_app; CategoryTheory.Iso.hom_inv_id_app_app_assoc; CategoryTheory.CatCommSq.iso; these supply the primitive operations. No named composite with this entire type was found.",
+   "date": "2026-10-14",
+   "verdict": "no exact named composite"
+  },
+  {
+   "tool": "grep",
+   "query": "isoWhiskerRight.*associator|isoWhiskerLeft.*symm",
+   "results": "Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/CategoryTheory/Shift/Quotient.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; these supply the primitive operations. No named composite with this entire type was found.",
+   "date": "2026-10-14",
+   "verdict": "no exact named composite"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenCoverMapLiftTransport",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "The composite of tensor composition with inverse chart comparison in lem-pc-open-cover-map-lift-transport, proof steps 1 and 2.",
+   "via": [
+    "lem-pc-open-cover-map-lift-transport",
+    "lem-pc-fp-one-chart-map-lift",
+    "lem-pc-fp-local-map-lifts",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleRecoveryComparisonIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleRecoveryComparisonIso.lean",
+  "declaration": "AlgebraicGeometry.moduleRecoveryComparisonIso",
+  "statement": "def moduleRecoveryComparisonIso\n    {C E D K V : Type*}\n    [Category* C] [Category* E] [Category* D] [Category* K] [Category* V]\n    (T : C ⥤ D) (A : C ⥤ E) (B : E ⥤ D) (S : E ⥤ K) (P : K ⥤ V) (R : D ⥤ V)\n    (e : T ≅ A ⋙ B) (t : S ⋙ P ≅ B ⋙ R) : T ⋙ R ≅ (A ⋙ S) ⋙ P",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6fcf5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T211102-L-391275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6fcf5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T211102-L-391275",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged transport signature, explicit comparison constructions, coherence statement, and proof dependencies with their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile cleanly, with only permitted axioms and the documented sorryAx dependency."
+ }
+}

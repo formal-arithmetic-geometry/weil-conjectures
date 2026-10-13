@@ -1,0 +1,106 @@
+{
+ "id": "def-pc-open-cover-refinement-comparisons",
+ "kind": "definition",
+ "title": "Explicit canonical comparison bundle for pulled-back chart refinement",
+ "statement": "Given schemes X,Y,Z,W [def-pc-scheme], maps q:Y→X, v:Z→X, h:W→X, pk:W→Y, pl:W→Z with pk≫q=h and pl≫v=h, an open cover U of X and a chart index a, form Uk=U pulled back along q, Ul=U pulled back along v, Vk=Uk pulled back along pk, Vl=Ul pulled back along pl. Supply d:Ul(a)→Uk(a) commuting with the maps to U(a), and z:Vl(a)→Vk(a) commuting both with d and with the maps to W. Write D,Pk,Pl,Zf,Rk,Rl for the ordinary module pullbacks along d,Vk→Uk,Vl→Ul,z,Vk→W,Vl→W [def-pc-module-pullback]; write Lk=q* followed by restriction to Uk(a), Ll=v* followed by restriction to Ul(a), and T=h*, using tensor pullback. Define openCoverRefinementComparisons to be the tuple (alpha,beta,delta,ck,cl) of isomorphisms Ll≅Lk⋙D, Rk⋙Zf≅Rl, Pk⋙Zf≅D⋙Pl, T⋙Rk≅Lk⋙Pk, T⋙Rl≅Ll⋙Pl, with alpha built from chart comparisons [def-pc-open-cover-tensor-pullback-comparison] and pullback composition/congruence along d, beta and delta from ordinary composition/congruence along z, and ck,cl from tensor composition [def-pc-tensor-pullback-composition-iso] and inverse chart comparison. The tuple is the explicit Lean construction; it asserts no coherence property. The two recovery comparisons ck and cl use the explicit composite [def-pc-module-recovery-comparison-iso] to share its expression with the categorical recovery calculation.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-module-recovery-comparison-iso"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096, functoriality of pullback; expanded canonical-comparison coherence step of lem-pc-open-cover-map-lift-transport, proof step 2"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherence of pullback composition isomorphisms for sheaves of modules and restriction to pulled back covers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and coherence of canonical pullback composition and restriction comparisons transports a sheaf module morphism along refinement of open charts",
+   "results": "TopCat.Sheaf.interUnionPullbackConeLift_left; TopCat.Sheaf.interUnionPullbackConeLift_right; CategoryTheory.Sheaf.ΓRes_map; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Hom.map_appLE; ModuleCat.Tilde.toOpen_res; no exact tensor/chart comparison coherence match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openCover.*coherence|tensorPullback.*associativity|pullback_assoc",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean; Mathlib/CategoryTheory/Sites/Over.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; no exact tensor/chart comparison coherence match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenCoverMapLiftTransport",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Explicit comparison constructions in steps 1 and 2 of lem-pc-open-cover-map-lift-transport; shared data for its coherence step.",
+   "via": [
+    "lem-pc-open-cover-map-lift-transport",
+    "lem-pc-fp-one-chart-map-lift",
+    "lem-pc-fp-local-map-lifts",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenCoverRefinementComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoverRefinementComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.openCoverRefinementComparisons",
+  "statement": "def openCoverRefinementComparisons\n    {X Y Z W : Scheme.{u}} (q : Y ⟶ X) (v : Z ⟶ X) (h : W ⟶ X)\n    (pk : W ⟶ Y) (pl : W ⟶ Z) (wk : pk ≫ q = h) (wl : pl ≫ v = h)\n    (U : X.OpenCover.{u}) (a : U.I₀)\n    (d : (U.pullback₁ v).X a ⟶ (U.pullback₁ q).X a)\n    (hd : d ≫ U.pullbackHom q a = U.pullbackHom v a)\n    (z : ((U.pullback₁ v).pullback₁ pl).X a ⟶\n      ((U.pullback₁ q).pullback₁ pk).X a)\n    (hz : z ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) pk a =\n      Scheme.Cover.pullbackHom (U.pullback₁ v) pl a ≫ d)\n    (hz0 : z ≫ ((U.pullback₁ q).pullback₁ pk).f a =\n      ((U.pullback₁ v).pullback₁ pl).f a)\n    :\n    let Uk : Y.OpenCover.{u} := U.pullback₁ q\n    let Ul : Z.OpenCover.{u} := U.pullback₁ v\n    let Vk : W.OpenCover.{u} := Uk.pullback₁ pk\n    let Vl : W.OpenCover.{u} := Ul.pullback₁ pl\n    let D := pullback d\n    let Pk := pullback (Uk.pullbackHom pk a)\n    let Pl := pullback (Ul.pullbackHom pl a)\n    let Zf := pullback z\n    let Rk := pullback (Vk.f a)\n    let Rl := pullback (Vl.f a)\n    let Lk := tensorPullback q ⋙ pullback (Uk.f a)\n    let Ll := tensorPullback v ⋙ pullback (Ul.f a)\n    (Ll ≅ Lk ⋙ D) × (Rk ⋙ Zf ≅ Rl) × (Pk ⋙ Zf ≅ D ⋙ Pl) ×\n      (tensorPullback h ⋙ Rk ≅ Lk ⋙ Pk) × (tensorPullback h ⋙ Rl ≅ Ll ⋙ Pl)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6fcf5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T211102-L-391275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6fcf5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T211102-L-391275",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged transport signature, explicit comparison constructions, coherence statement, and proof dependencies with their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile cleanly, with only permitted axioms and the documented sorryAx dependency."
+ }
+}

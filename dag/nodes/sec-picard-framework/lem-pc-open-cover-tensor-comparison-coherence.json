@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-open-cover-tensor-comparison-coherence",
+ "kind": "statement",
+ "title": "Coherence of tensor restriction comparisons under chart refinement",
+ "statement": "Let X,Y,Z,W be schemes [def-pc-scheme], q:Y→X, v:Z→X, h:W→X, pk:W→Y and pl:W→Z with pk≫q=h and pl≫v=h. Let U be an open cover of X and a a cover index. Set Uk=U pulled back along q, Ul=U pulled back along v, Vk=Uk pulled back along pk and Vl=Ul pulled back along pl. Supply d:Ul(a)→Uk(a) commuting with the maps to U(a), and z:Vl(a)→Vk(a) with z≫(Vk→Uk)=(Vl→Ul)≫d and z≫(Vk→W)=Vl→W. For ordinary module pullback [def-pc-module-pullback], write D=d*, Pk=(Vk→Uk)*, Pl=(Vl→Ul)*, Zf=z*, Rk=(Vk→W)* and Rl=(Vl→W)*; put Lk=q* followed by restriction to Uk(a), Ll=v* followed by restriction to Ul(a), where q*,v*,h* denote tensor pullback. Define alpha:Ll≅Lk⋙D using the restriction comparisons [def-pc-open-cover-tensor-pullback-comparison] and ordinary pullback composition along d; beta:Rk⋙Zf≅Rl using ordinary composition and the equation to W; delta:Pk⋙Zf≅D⋙Pl using ordinary composition and the refinement square. Define ck:h*⋙Rk≅Lk⋙Pk and cl:h*⋙Rl≅Ll⋙Pl by tensor composition [def-pc-tensor-pullback-composition-iso] followed by inverse restriction comparison. Then for every X-module M, Zf(ck_M)≫delta_(Lk M)≫Pl(alpha_M inverse)=beta_(h* M)≫cl_M. All comparisons are the explicit composition/congruence expressions in the Lean statement, rather than arbitrary isomorphisms. The five comparison isomorphisms are bundled by [def-pc-open-cover-refinement-comparisons].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-open-cover-refinement-comparisons",
+  "def-pc-module-recovery-comparison-iso"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096, functoriality of pullback; expanded canonical-comparison coherence step of lem-pc-open-cover-map-lift-transport, proof step 2"
+ },
+ "proof": [
+  {
+   "text": "For every scheme map b, let c_b be the unique comparison from its\nfixed tensor left adjoint to its ordinary pullback left adjoint. Transposing\nunder the fixed adjunctions shows that tensorPullbackCompositionIso(g,b,t,w)\nis the composite of c_t, congruence from t to g ≫ b, inverse ordinary pullback\ncomposition, and the inverses of c_b and c_g on the two functor factors:\nboth transposes are pushforwardComp(g,b) followed by pushforwardCongr(w).\nInjectivity of the adjunction conjugation gives this formula. The chart\ncomparison is, by its definition, ordinary composition/congruence followed by\nthe inverse of c_b on the base-map factor.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-open-cover-refinement-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute these formulas in alpha, ck and cl from the comparison bundle.\nFunctoriality moves each c_b through whiskering, and the adjacent c_b and\nc_b inverse factors cancel. The remaining assertion involves only ordinary\npullback composition and pullback congruence. Its two paths are the reassociated\npullbacks of the same map from Vl(a) to U(a): hz identifies the route through\nd and the chart map of Vk, hd identifies the route from Ul to U(a), and hz0\nidentifies the maps to W. Apply Scheme.Modules.pseudofunctor_associativity to\nthese reassociations; congruence along the stated scheme equalities identifies\nthe composites, independently of their equality proof witnesses. Restore the\ncancelled comparisons and evaluate at M. This proves precisely the displayed\nidentity, including identity refinements, empty charts and zero modules.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-open-cover-refinement-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-open-cover-refinement-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096",
+  "note": "Expanded mate/ordinary pullback coherence calculation from the original transport plan; not a verbatim theorem of Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherence of pullback composition isomorphisms for sheaves of modules and restriction to pulled back covers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and coherence of canonical pullback composition and restriction comparisons transports a sheaf module morphism along refinement of open charts",
+   "results": "TopCat.Sheaf.interUnionPullbackConeLift_left; TopCat.Sheaf.interUnionPullbackConeLift_right; CategoryTheory.Sheaf.ΓRes_map; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Hom.map_appLE; ModuleCat.Tilde.toOpen_res; no exact tensor/chart comparison coherence match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openCover.*coherence|tensorPullback.*associativity|pullback_assoc",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean; Mathlib/CategoryTheory/Sites/Over.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; no exact tensor/chart comparison coherence match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenCoverMapLiftTransport",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Canonical comparison coherence in the functorial transport of descended chart maps; proof step 2 of lem-pc-open-cover-map-lift-transport.",
+   "via": [
+    "lem-pc-open-cover-map-lift-transport",
+    "lem-pc-fp-one-chart-map-lift",
+    "lem-pc-fp-local-map-lifts",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenCoverTensorComparisonCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoverTensorComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.openCover_tensor_comparison_coherence",
+  "statement": "theorem openCover_tensor_comparison_coherence\n    {X Y Z W : Scheme.{u}} (q : Y ⟶ X) (v : Z ⟶ X) (h : W ⟶ X)\n    (pk : W ⟶ Y) (pl : W ⟶ Z) (wk : pk ≫ q = h) (wl : pl ≫ v = h)\n    (U : X.OpenCover.{u}) (a : U.I₀)\n    (d : (U.pullback₁ v).X a ⟶ (U.pullback₁ q).X a)\n    (hd : d ≫ U.pullbackHom q a = U.pullbackHom v a)\n    (z : ((U.pullback₁ v).pullback₁ pl).X a ⟶\n      ((U.pullback₁ q).pullback₁ pk).X a)\n    (hz : z ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) pk a =\n      Scheme.Cover.pullbackHom (U.pullback₁ v) pl a ≫ d)\n    (hz0 : z ≫ ((U.pullback₁ q).pullback₁ pk).f a =\n      ((U.pullback₁ v).pullback₁ pl).f a)\n    (M : X.Modules) :\n    let Uk : Y.OpenCover.{u} := U.pullback₁ q\n    let Ul : Z.OpenCover.{u} := U.pullback₁ v\n    let Vk : W.OpenCover.{u} := Uk.pullback₁ pk\n    let Vl : W.OpenCover.{u} := Ul.pullback₁ pl\n    let D := pullback d\n    let Pk := pullback (Uk.pullbackHom pk a)\n    let Pl := pullback (Ul.pullbackHom pl a)\n    let Zf := pullback z\n    let Rk := pullback (Vk.f a)\n    let Rl := pullback (Vl.f a)\n    let Lk := tensorPullback q ⋙ pullback (Uk.f a)\n    let Ll := tensorPullback v ⋙ pullback (Ul.f a)\n    let comparisons := openCoverRefinementComparisons q v h pk pl wk wl U a d hd z hz hz0\n    let alpha := comparisons.1\n    let beta := comparisons.2.1\n    let delta := comparisons.2.2.1\n    let ck := moduleRecoveryComparisonIso (tensorPullback h) (tensorPullback q)\n      (tensorPullback pk) (pullback (Uk.f a)) Pk Rk\n      (tensorPullbackCompositionIso pk q h wk) (openCoverTensorPullbackComparison pk Uk a)\n    let cl := moduleRecoveryComparisonIso (tensorPullback h) (tensorPullback v)\n      (tensorPullback pl) (pullback (Ul.f a)) Pl Rl\n      (tensorPullbackCompositionIso pl v h wl) (openCoverTensorPullbackComparison pl Ul a)\n    Zf.map (ck.hom.app M) ≫ delta.hom.app (Lk.obj M) ≫\n      Pl.map (alpha.inv.app M) = beta.hom.app ((tensorPullback h).obj M) ≫\n        cl.hom.app M",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6fcf5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T211102-L-391275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-6fcf5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T211102-L-391275",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged transport signature, explicit comparison constructions, coherence statement, and proof dependencies with their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile cleanly, with only permitted axioms and the documented sorryAx dependency."
+ }
+}
