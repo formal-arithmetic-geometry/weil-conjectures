@@ -1,0 +1,135 @@
+{
+ "id": "lem-sbc-trace-form-nondegenerate-iff-etale-field",
+ "kind": "statement",
+ "title": "Finite algebra trace nondegeneracy detects etaleness",
+ "statement": "Let K be a field and A a commutative K-algebra finite-dimensional as a K-vector space. The bilinear form (a,b)↦Tr_A/K(ab) is nondegenerate if and only if A is an etale K-algebra. A may be the zero algebra.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BJF, Lemma 49.3.1, fibre-algebra proof; https://stacks.math.columbia.edu/tag/0BJF"
+ },
+ "proof": [
+  {
+   "text": "For nilpotent a, each ab is nilpotent. Algebra.isNilpotent_trace_of_isNilpotent and reduction of K show Tr(ab)=0; left nondegeneracy therefore makes a zero. Install IsReduced A and IsArtinianRing A.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use IsArtinianRing.equivPi A, restricted to K, to identify A with its finite product of maximal-ideal quotient fields. Fix a factor i. If its trace map were zero, the element corresponding to Pi.single i 1 would pair to zero with all b, by trace_eq_of_algEquiv and the already proved source trace_pi_single. Nondegeneracy makes that element zero, contradicting its i-th coordinate being one.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The traceForm_nondegenerate_tfae field theorem converts nonzero trace on each factor to separability. Algebra.Etale.iff_exists_algEquiv_prod then proves the algebra etale.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Conversely install Algebra.Etale K A and apply the already proved source Algebra.Etale.exists_trace_mul_ne_zero to a hypothetical nonzero element in either radical. The right-radical case uses commutativity. This proves both halves of Nondegenerate, including the zero-algebra case.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "N1",
+  "document": "Stacks Project",
+  "place": "Tag 0BJF; Lean assembly of Mathlib and already proved source tools"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite dimensional commutative algebra trace form nondegenerate if and only if etale",
+   "results": "{\"t\": \"2026-10-13T10:13:57Z\", \"tool\": \"leanfinder\", \"query\": \"finite dimensional commutative algebra trace form nondegenerate if and only if etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"traceForm_nondegenerate_tfae\", \"traceForm_nondegenerate\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_isSeparable\", \"Algebra.Etale\", \"Algebra.trace_ne_zero\"], \"digest\": \"2de71a152edd3d2b\"}",
+   "date": "2026-10-13",
+   "verdict": "Related tools checked by source; no direct match for the whole statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.discr",
+   "results": "{\"t\": \"2026-10-13T10:13:58Z\", \"tool\": \"loogle\", \"query\": \"Algebra.discr\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.discr\", \"Algebra.discr_def\", \"Algebra.discr_zero_of_not_linearIndependent\", \"Algebra.discr_eq_discr_of_algEquiv\", \"Algebra.discr_eq_discr\", \"Algebra.discr_of_matrix_mulVec\", \"Algebra.discr_of_matrix_vecMul\", \"Algebra.discr_isIntegral\"], \"digest\": \"e1139cb198ddc581\"}",
+   "date": "2026-10-13",
+   "verdict": "Related tools checked by source; no direct match for the whole statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite dimensional commutative algebra trace form nondegenerate if and only if etale",
+   "results": "{\"t\": \"2026-10-13T10:53:06Z\", \"tool\": \"leansearch\", \"query\": \"finite dimensional commutative algebra trace form nondegenerate if and only if etale\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "traceForm.*[Ee]tale|[Ee]tale.*traceForm|exists_trace_mul_ne_zero|trace_pi_single",
+   "results": "WeilConjectures.Mathlib.RingTheory.Trace.Basic proves trace_pi_single and Etale.exists_trace_mul_ne_zero; these are used, avoiding a new proof of the converse.",
+   "date": "2026-10-13",
+   "verdict": "Source tools used in the proof; no duplicate whole-statement declaration found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.TraceDiscriminantEvaluationEtaleFibre",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two extension paragraph: the extension is etale exactly where it is flat (0EY6(3)); local ramification step using 0BJH. Local trace determinant vanishing and fibrewise etaleness criterion.",
+   "via": [
+    "lem-sbc-trace-discriminant-evaluation-etale-fibre",
+    "lem-sbc-trace-discriminant-fibre-etale-criterion",
+    "lem-sbc-finite-flat-discriminant-branch-support",
+    "lem-sbc-finite-flat-codimension-one-etale-neighbourhood",
+    "lem-sbc-flat-depth-two-finite-formally-unramified",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TraceFormEtaleField",
+  "file": "lean/Sheaf/RingTheory/TraceFormEtaleField.lean",
+  "declaration": "Algebra.traceForm_nondegenerate_iff_etale",
+  "statement": "theorem traceForm_nondegenerate_iff_etale\n    (K A : Type*) [Field K] [CommRing A] [Algebra K A] [Module.Finite K A] :\n    (traceForm K A).Nondegenerate ↔ Etale K A",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T111906-L-3057022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T111906-L-3057022",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
