@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
 public import Mathlib.Algebra.Group.End
+import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 
 /-!
 # Coefficients of infinitesimal right translations
@@ -167,6 +168,154 @@ private theorem invariantCoefficient_one : invariantCoefficient G 1 = 0 := by
     rfl
   exact h _ _ (infinitesimalRightTranslation_one G)
 
+private theorem infinitesimalRightTranslation_over (v : infPoints G) :
+    infinitesimalRightTranslation G v ≫ G.hom =
+      G.hom.dualNumbers ≫ S.dualNumbersProj := by
+  let X := Over.mk (G.left.dualNumbersProj ≫ G.hom)
+  let p : X ⟶ G := Over.homMk G.left.dualNumbersProj rfl
+  let q : X ⟶ G := Over.homMk (G.hom.dualNumbers ≫ v.1.left) (by
+    rw [Category.assoc, Over.w v.1]
+    exact Scheme.Hom.dualNumbers_comp_proj G.hom)
+  exact (Over.w (p * q)).trans (Scheme.Hom.dualNumbers_comp_proj G.hom).symm
+
+private noncomputable def liftedRightTranslation (v : infPoints G) :
+    G.left.dualNumbers ⟶ G.left.dualNumbers :=
+  (Scheme.isPullback_dualNumbersProj G.hom).lift
+    (infinitesimalRightTranslation G v) G.hom.dualNumbers
+    (infinitesimalRightTranslation_over G v)
+
+private theorem liftedRightTranslation_proj (v : infPoints G) :
+    liftedRightTranslation G v ≫ G.left.dualNumbersProj =
+      infinitesimalRightTranslation G v :=
+  (Scheme.isPullback_dualNumbersProj G.hom).lift_fst _ _ _
+
+private theorem liftedRightTranslation_over (v : infPoints G) :
+    liftedRightTranslation G v ≫ G.hom.dualNumbers = G.hom.dualNumbers :=
+  (Scheme.isPullback_dualNumbersProj G.hom).lift_snd _ _ _
+
+private theorem liftedRightTranslation_comp (v w : infPoints G) :
+    liftedRightTranslation G v ≫ infinitesimalRightTranslation G w =
+      infinitesimalRightTranslation G (v * w) := by
+  let X := Over.mk (G.left.dualNumbersProj ≫ G.hom)
+  let p : X ⟶ G := Over.homMk G.left.dualNumbersProj rfl
+  let k : X ⟶ Scheme.dualNumbersOver S := Over.homMk G.hom.dualNumbers
+    (Scheme.Hom.dualNumbers_comp_proj G.hom)
+  let F : X ⟶ X := Over.homMk (liftedRightTranslation G v) (by
+    change liftedRightTranslation G v ≫ G.left.dualNumbersProj ≫ G.hom = _
+    rw [← Category.assoc, liftedRightTranslation_proj]
+    exact (infinitesimalRightTranslation_over G v).trans
+      (Scheme.Hom.dualNumbers_comp_proj G.hom))
+  have hp : F ≫ p = p * (k ≫ v.1) := by
+    apply Over.OverMorphism.ext
+    exact liftedRightTranslation_proj G v
+  have hk : F ≫ k = k := by
+    apply Over.OverMorphism.ext
+    exact liftedRightTranslation_over G v
+  have h : F ≫ (p * (k ≫ w.1)) = p * (k ≫ (v.1 * w.1)) := by
+    rw [MonObj.comp_mul, hp, ← Category.assoc F k, hk, MonObj.comp_mul, mul_assoc]
+  exact congrArg Over.Hom.left h
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem dualNumbers_appLE_fst {X : Scheme.{u}} (m : X.dualNumbers ⟶ X)
+    (hm : X.dualNumbersι ≫ m = 𝟙 X) (U : X.Opens)
+    (e : U ≤ m ⁻¹ᵁ U) (a : Γ(X, U)) : (m.appLE U U e a).fst = a := by
+  have hb := congrArg (fun f : X ⟶ X ↦ f.base) hm
+  rcases m with ⟨⟨⟨mb, mc⟩, mp⟩⟩
+  change mb = 𝟙 _ at hb
+  subst mb
+  have h := ConcreteCategory.congr_hom (Scheme.Hom.congr_app hm U) a
+  simp only [Scheme.Hom.comp_app, eqToHom_refl, op_id, Scheme.Hom.id_app] at h
+  erw [X.presheaf.map_id, Category.comp_id] at h
+  simp only [Scheme.Hom.appLE, homOfLE_refl, op_id]
+  erw [X.dualNumbers.presheaf.map_id, Category.comp_id]
+  exact h
+
+private theorem liftedRightTranslation_base (v : infPoints G) :
+    (liftedRightTranslation G v).base = 𝟙 _ := by
+  have hm := congrArg (fun f : G.left ⟶ G.left ↦ f.base)
+    (infinitesimalRightTranslation_reduction G v)
+  have hF := congrArg (fun f : G.left.dualNumbers ⟶ G.left ↦ f.base)
+    (liftedRightTranslation_proj G v)
+  change (infinitesimalRightTranslation G v).base = 𝟙 _ at hm
+  change (liftedRightTranslation G v).base ≫ 𝟙 _ = _ at hF
+  exact (Category.comp_id _).symm.trans (hF.trans hm)
+
+private theorem liftedRightTranslation_preimage (v : infPoints G) (U : G.left.Opens) :
+    U ≤ liftedRightTranslation G v ⁻¹ᵁ U := by
+  change U ≤ (TopologicalSpace.Opens.map (liftedRightTranslation G v).base).obj U
+  rw [liftedRightTranslation_base G v]
+  exact le_rfl
+
+private theorem dualNumbers_map_eps {R T : Type u} [CommRing R] [CommRing T]
+    (f : R →+* T) : DualNumber.mapRingHom f (inr 1) = inr 1 := by
+  ext <;> simp
+
+private theorem liftedRightTranslation_eps (v : infPoints G) (U : G.left.Opens) :
+    (liftedRightTranslation G v).appLE U U (liftedRightTranslation_preimage G v U)
+      (inr 1) = inr 1 := by
+  let F := liftedRightTranslation G v
+  have htop : F.appTop (inr 1) = inr 1 := by
+    have h := ConcreteCategory.congr_hom
+      (Scheme.Hom.congr_app (liftedRightTranslation_over G v) ⊤)
+      (inr 1 : DualNumber Γ(S, ⊤))
+    simp only [Scheme.Hom.comp_app, eqToHom_refl, op_id] at h
+    erw [G.left.dualNumbers.presheaf.map_id, Category.comp_id] at h
+    change F.appTop (DualNumber.mapRingHom G.hom.appTop.hom (inr 1)) =
+      DualNumber.mapRingHom G.hom.appTop.hom (inr 1) at h
+    simpa only [dualNumbers_map_eps] using h
+  have h := ConcreteCategory.congr_hom
+    (F.map_appLE (liftedRightTranslation_preimage G v U)
+      (homOfLE le_top : U ⟶ ⊤).op) (inr 1 : DualNumber Γ(G.left, ⊤))
+  change F.appLE U U _ (DualNumber.mapRingHom
+      (G.left.presheaf.map (homOfLE le_top : U ⟶ ⊤).op).hom (inr 1)) =
+    DualNumber.mapRingHom (G.left.presheaf.map _).hom (F.appTop (inr 1)) at h
+  simpa only [dualNumbers_map_eps, htop] using h
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem liftedRightTranslation_inl (v : infPoints G) (U : G.left.Opens)
+    (a : Γ(G.left, U)) :
+    (liftedRightTranslation G v).appLE U U (liftedRightTranslation_preimage G v U)
+        (inl a) =
+      (infinitesimalRightTranslation G v).appLE U U
+        (infinitesimalRightTranslation_preimage G v U) a := by
+  have h := ConcreteCategory.congr_hom (Scheme.Hom.appLE_comp_appLE
+    (liftedRightTranslation G v) G.left.dualNumbersProj U U U le_rfl
+    (liftedRightTranslation_preimage G v U)) a
+  simp only [liftedRightTranslation_proj] at h
+  have hi : G.left.dualNumbersProj.appLE U U le_rfl a = inl a := by
+    simp only [Scheme.Hom.appLE, homOfLE_refl, op_id]
+    erw [G.left.dualNumbers.presheaf.map_id, Category.comp_id]
+    rfl
+  change (liftedRightTranslation G v).appLE U U _
+    (G.left.dualNumbersProj.appLE U U le_rfl a) = _ at h
+  rw [hi] at h
+  exact h
+
+private theorem liftedRightTranslation_snd (v : infPoints G) (U : G.left.Opens)
+    (x : DualNumber Γ(G.left, U)) :
+    ((liftedRightTranslation G v).appLE U U (liftedRightTranslation_preimage G v U)
+      x).snd = invariantCoefficient G v U x.fst + x.snd := by
+  let F : DualNumber Γ(G.left, U) →+* DualNumber Γ(G.left, U) :=
+    ((liftedRightTranslation G v).appLE U U
+      (liftedRightTranslation_preimage G v U)).hom
+  have hx : x = inl x.fst + inl x.snd * inr 1 := by ext <;> simp
+  have hf (a : Γ(G.left, U)) : (F (inl a)).fst = a := by
+    change ((liftedRightTranslation G v).appLE U U _ (inl a)).fst = a
+    rw [liftedRightTranslation_inl]
+    exact dualNumbers_appLE_fst _ (infinitesimalRightTranslation_reduction G v) U _ a
+  have he : F (inr 1) = inr 1 := liftedRightTranslation_eps G v U
+  have hs (a : Γ(G.left, U)) : (F (inl a)).snd = invariantCoefficient G v U a := by
+    change ((liftedRightTranslation G v).appLE U U _ (inl a)).snd = _
+    rw [liftedRightTranslation_inl]
+    rfl
+  change (F x).snd = _
+  calc
+    (F x).snd = (F (inl x.fst + inl x.snd * inr 1)).snd := congrArg (fun y ↦ (F y).snd) hx
+    _ = invariantCoefficient G v U x.fst + x.snd := by
+      rw [map_add, map_mul, he]
+      simp [hf, hs]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Multiplication of infinitesimal points adds the invariant coefficient operators.
 
 Source: the first coefficient step of the Lie-ring paragraph in
@@ -182,7 +331,21 @@ The coefficients are precisely the explicit `invariantCoefficient` maps, so they
 agree on every open. This works sheafwise on an arbitrary base scheme, including
 the empty scheme, and uses no division or characteristic assumption. -/
 theorem invariantCoefficient_mul (v w : infPoints G) :
-    invariantCoefficient G (v * w) = invariantCoefficient G v + invariantCoefficient G w := by sorry
+    invariantCoefficient G (v * w) = invariantCoefficient G v + invariantCoefficient G w := by
+  ext U a
+  have h := ConcreteCategory.congr_hom (Scheme.Hom.appLE_comp_appLE
+    (liftedRightTranslation G v) (infinitesimalRightTranslation G w) U U U
+    (infinitesimalRightTranslation_preimage G w U)
+    (liftedRightTranslation_preimage G v U)) a
+  simp only [liftedRightTranslation_comp] at h
+  change ((infinitesimalRightTranslation G (v * w)).appLE U U _ a).snd =
+    invariantCoefficient G v U a + invariantCoefficient G w U a
+  rw [← h]
+  change ((liftedRightTranslation G v).appLE U U _
+    ((infinitesimalRightTranslation G w).appLE U U _ a)).snd = _
+  rw [liftedRightTranslation_snd]
+  rw [dualNumbers_appLE_fst _ (infinitesimalRightTranslation_reduction G w)]
+  rfl
 
 /-- The explicit invariant coefficient operators form a faithful additive realization
 of infinitesimal points. -/

@@ -13,31 +13,38 @@
  ],
  "proof": [
   {
-   "text": "Construct the right translation of the universal point explicitly from the projection G[epsilon] to G and the pullback of v along G to S. Its zero section is the identity, so its comorphism is a + epsilon D_v(a) on each open.",
+   "text": "The already constructed right translation reduces to the identity and is over S. Apply Scheme.isPullback_dualNumbersProj to its structure morphism to obtain the unique lift to G[epsilon] with projection the right translation and structure map G.hom[epsilon]. This is liftedRightTranslation, whose two triangle equations are proved from IsPullback.lift_fst and lift_snd.",
    "uses": [
     "def-sc-group-scheme",
-    "def-sc-dual-numbers"
+    "lem-ag-dual-numbers-projection-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Associativity identifies translation by v*w with the successive translations by v and w over the same parameter. Their lifts fix epsilon. Composing a + epsilon D_v(a) and a + epsilon D_w(a) adds the two coefficients, since the cross term has epsilon squared. Take the coefficients on every open.",
+   "text": "In Over S write p for G[epsilon] to G and k for G[epsilon] to S[epsilon]. The lifted translation F_v satisfies F_v composed with p = p*(k composed with v) and F_v composed with k = k. Precomposition distributes over multiplication, and associativity gives F_v composed with translation_w = translation_(v*w). This is liftedRightTranslation_comp.",
    "uses": [
-    "def-sc-group-scheme",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Reduction to the identity proves that translation_v-sharp(a).fst=a on every open. The lift fixes epsilon globally because it commutes with G.hom[epsilon], which sends epsilon to epsilon; naturality gives the same assertion on every open. Its value on inl(a) equals translation_v-sharp(a) by the projection triangle. Expand x=inl(x.fst)+inl(x.snd)*inr(1): applying the ring map and taking snd gives D_v(x.fst)+x.snd. Apply this to translation_w-sharp(a), whose fst is a, and use appLE_comp_appLE and the preceding composition equation. Extensionality in U and a proves D_(v*w)=D_v+D_w. All these calculations are proved private helpers in the item.",
+   "uses": [
     "def-sc-dual-numbers"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-group-scheme",
+  "lem-ag-dual-numbers-projection-pullback",
   "def-sc-dual-numbers"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "T2 worker",
+  "agent": "Q3 worker",
   "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
-  "place": "Lie-ring obligation docstrings, invariant-extension and mixed-coefficient steps (blueprint sk-d-tangent)."
+  "place": "Invariant-extension coefficient-addition argument, implemented with the proved dual-number pullback theorem and sectionwise ring calculations"
  },
  "mathlib_searches": [
   {
@@ -116,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T082415-L-1648546",
-  "kind": "interface",
+  "landing": "20261013T100103-L-2479491",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

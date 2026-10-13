@@ -1,0 +1,128 @@
+{
+ "id": "lem-ag-dual-numbers-projection-pullback",
+ "kind": "statement",
+ "title": "The dual-number projection square is cartesian",
+ "statement": "Let $X,Y$ be arbitrary schemes [def-pc-scheme] and $f:X\\to Y$ any morphism. Write $p_X:X[\\epsilon]\\to X$ and $p_Y:Y[\\epsilon]\\to Y$ for the projections of the dual-number thickenings [def-sc-dual-numbers], and $f[\\epsilon]$ for the induced morphism. The square with top map $p_X$, left map $f[\\epsilon]$, right map $f$ and bottom map $p_Y$ is cartesian: $\\operatorname{IsPullback}(p_X,f[\\epsilon],f,p_Y)$. There are no finiteness, affineness, smoothness, or characteristic hypotheses.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/DualNumbersBaseChange.lean",
+  "place": "Scheme.isPullback_dualNumbersProj and its explicit square-zero evaluation construction, lines 46-243"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "For a scheme T and a square-zero global section t, construct T to T[epsilon] on each open by a+epsilon b mapping to a+tb, with identity base map. This is a ring homomorphism because t squared is zero and commutes with restrictions. It is local on stalks because a nilpotent perturbation preserves invertibility. Its composite with the projection is the identity. These are the proved evalSqZero, liftSqZero, liftSqZero_appLE and liftSqZero_comp_proj helpers in the source.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For h:T to Y[epsilon], let t=h-sharp(epsilon), which is square-zero. On each open decompose a dual number into inl(a)+inl(b)*inr(1). Naturality identifies the restriction of t with the image of inr(1), so h factors as the evaluation morphism followed by (h composed with p_Y)[epsilon]. The source proves this as eq_liftSqZero_comp_dualNumbers.",
+   "uses": [
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Given a commuting cone a:T to X and b:T to Y[epsilon], use evaluation at b-sharp(epsilon) followed by a[epsilon]. The preceding factorization and functoriality give both projection equations. For any other lift, its X projection is a and its epsilon image is determined by b because f[epsilon] preserves epsilon. The factorization therefore proves equality of the lifts. Apply the pullback-cone universal property; the source implements these three checks in isPullback_dualNumbersProj.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/DualNumbersBaseChange.lean",
+  "place": "Explicit evaluation construction and the proved pullback-cone universal property"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For any scheme morphism the dual number thickening commutes with base change",
+   "results": "Service unavailable: Internal Server Error; no results obtained.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism X to Y the dual number thickening X epsilon is the pullback of Y epsilon along X to Y",
+   "results": "Eight hits about general scheme pullbacks and affine space; no exact dual-number square. The existing project theorem Scheme.isPullback_dualNumbersProj gives the exact result.",
+   "date": "2026-10-13",
+   "verdict": "existing proved project match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.IsPullback",
+   "results": "Twelve hits for general pullbacks, open immersions and Spec; no exact dual-number square.",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback_dualNumbersProj|dualNumbers.*[Pp]ullback",
+   "results": "No Mathlib hit. Project rg finds Scheme.isPullback_dualNumbersProj in DualNumbersBaseChange.lean; no sorry occurs in that module. DAG search for the declaration and module finds no existing node. blueprint_refs search dual numbers finds no blueprint duplicate.",
+   "date": "2026-10-13",
+   "verdict": "existing proved project match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GroupScheme.InvariantCoefficients",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Invariant-extension paragraph: lifting infinitesimal translations over the same dual-number parameter",
+   "via": [
+    "lem-ag-invariant-coefficient-add"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.isPullback_dualNumbersProj",
+  "statement": "theorem isPullback_dualNumbersProj (f : X ⟶ Y) :\n    IsPullback X.dualNumbersProj f.dualNumbers f Y.dualNumbersProj",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100103-L-2479491",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T100103-L-2479491",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
