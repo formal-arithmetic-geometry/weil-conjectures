@@ -24,38 +24,30 @@
  ],
  "proof": [
   {
-   "text": "Choose $b$ with $E^i=0$ for $i>b$; for $n>b$ start with the zero tail. Inductively suppose a tail $P^n\\to P^{n+1}\\to\\cdots\\to P^b$ has been constructed, with a morphism of complexes to $E^\\bullet$, all $P^i\\in\\mathcal P$, the maps $P^i/IP^i\\to E^i$ isomorphisms, and exactness in degrees $\\geq n+1$. Working down from degree $b$, exactness and projectivity (1) split each short exact sequence of cycles and boundaries, so one can choose isomorphisms $P^i\\cong Z^i\\oplus Z^{i+1}$ under which $P^i\\to P^{i+1}$ is the projection onto $Z^{i+1}$ followed by the inclusion into $Z^{i+1}\\oplus Z^{i+2}$. Starting from $Z^{b+1}=0$ and applying (2) inductively from the top, every $Z^i$ lies in $\\mathcal P$.",
+   "text": "Construct the zero complex using the one-point module. The summand condition implies that it belongs to the class and that the class is closed under isomorphism. The zero comparison is an isomorphism above b. This initializes a finite tail at b+1.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.75.1, proof, construction of the split tail"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose $P^{n-1}\\in\\mathcal P$ and an isomorphism $P^{n-1}/IP^{n-1}\\cong E^{n-1}$, which exists because $E^{n-1}$ has the required form. Since $Z^n$ is a direct summand of $P^n$ and the image of $Z^{n}\\oplus Z^{n+1}\\to Z^{n+1}\\oplus Z^{n+2}$ is $Z^{n+1}$, exactness of $E^\\bullet$ at $E^n$ identifies $\\operatorname{im}(E^{n-1}\\to E^n)$ with $Z^n/IZ^n\\subset P^n/IP^n\\cong E^n$. As $P^{n-1}$ is projective (1), lift the composite $P^{n-1}\\to E^{n-1}\\to E^n$, which lands in $Z^n/IZ^n$, to a map $P^{n-1}\\to Z^n$. Its reduction modulo $I$ is surjective and $P^{n-1},Z^n\\in\\mathcal P$, so by (3) it is surjective. Appending $P^{n-1}\\to Z^n\\subset P^n$ to the tail gives a morphism of complexes to $E^\\bullet$ extending the diagram one degree to the left, with kernel of $P^n\\to P^{n+1}$ equal to $Z^n$ equal to the image of $P^{n-1}$; so exactness holds in all degrees $\\geq n$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.75.1, proof, lifting the next term"
-   }
+   "text": "Apply the one-degree extension lemma recursively, at left endpoints b+1-n for natural n. Keep the extension maps and their commuting reduction comparisons, giving a sequential diagram of complexes. Each term and differential stabilizes once its degree lies in the constructed tail.",
+   "uses": [
+    "lem-sc-acyclic-lift-tail-extension"
+   ],
+   "elementary": false
   },
   {
-   "text": "Repeat the preceding extension for $n=b+1,b,b-1,\\dots$. Since each step only adds a term on the left, the descending construction defines one complex $A^\\bullet$ with $A^i=0$ for $i>b$, every term in $\\mathcal P$, and reduction maps giving an isomorphism of complexes $A^\\bullet/IA^\\bullet\\cong E^\\bullet$. Exactness in each degree was established when the degree to its left was added, so $A^\\bullet$ is acyclic. Thus $A^\\bullet$ is the required bounded-above acyclic lift.",
+   "text": "Take the degreewise colimit of the sequential diagram. Mathlib eventual-constancy identifies each colimit term with a tail term, so it belongs to the class and is zero above b. For each degree choose a stage containing it and both adjacent degrees: the induced short-complex isomorphism transfers exactness. The compatible comparisons descend through the extension-of-scalars image of the colimit. Their components and the stabilized colimit inclusions are isomorphisms; hence the descended comparison is an isomorphism of complexes. All this assembly is proved directly in Lean, with no additional proof gaps.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.75.1, proof, final induction"
-   }
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-acyclic-lift-tail-extension"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.75.1, Tag 0BC9"
+  "place": "Tag 0BC9, descending induction; R1 formalizes the assembly with degreewise eventually constant colimits"
  },
  "mathlib_searches": [
   {
@@ -142,5 +134,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T082408-L-1646110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
