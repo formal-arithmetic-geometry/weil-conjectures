@@ -19,53 +19,30 @@
  ],
  "proof": [
   {
-   "text": "Choose a Noetherian affine neighbourhood W of p(z). Restrict the supplied finite morphism and V to W. Open-immersion stalk isomorphisms preserve target regularity, the target dimension bound, and source depth. Thus it suffices to prove flatness over W.",
+   "text": "Apply exists_finite_etale_depth_two_model to obtain a finite etale morphism r : F ⟶ L, a source depth-two boundary bound, and an isomorphism e of the restrictions over V commuting with p.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-regular-scheme",
-    "def-weil-pbc-krull-dimension-ring",
-    "def-weil-pbc-depth"
+    "lem-sbc-regular-codimension-two-finite-etale-model"
    ],
    "elementary": false
   },
   {
-   "text": "Every missing stalk of W is regular of dimension at least two, so local purity holds by 0BMA. Apply the argument of 0EY7 to the finite etale restriction of p: pick a generic point of a missing irreducible component, for which the local inverse image of the current open is punctured spectrum. Local purity extends its cover, spreading finite presentation and then finiteness and etaleness extends to an open containing the chosen point. Noetherian induction gives a finite etale r over all W.",
+   "text": "Use iso_of_finite_depth_two_extensions on r and p with e to obtain an isomorphism i : F ≅ E over L.",
    "uses": [
-    "def-weil-regular-scheme",
-    "def-weil-pbc-krull-dimension-ring",
-    "def-weil-finite-integral-morphism",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A regular system of parameters is a regular sequence, giving depth equal to dimension in the missing target stalks. Since r is etale, the flat local depth formula gives source depth at least two above the complement. Both the supplied p restricted to W and r are finite extensions of the same etale cover with source boundary depth at least two. The depth-two Hartogs identity in the proof of 0EY6(2) identifies both finite structure algebras with the direct image of the algebra on the open. The identity there therefore extends to an algebra isomorphism, inducing an isomorphism of the finite schemes over W. The existing regular-generator lemma supplies the regular sequence, depth_eq_add_of_flat_local supplies the depth lower bound for the Noetherian local stalk maps of r, and iso_of_finite_depth_two_extensions supplies the isomorphism; these existing statements are reused rather than restated.",
-   "uses": [
-    "def-weil-pbc-depth",
-    "def-weil-regular-scheme",
-    "def-weil-etale-morphism",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-flat-local-depth-formula",
     "lem-sbc-depth-two-finite-extension-uniqueness"
    ],
    "elementary": false
   },
   {
-   "text": "The finite etale morphism r is flat. Its isomorphism with the restriction of p gives flatness of the stalk map at z. Transport back along the open-immersion stalk isomorphisms. There is no z for an empty source, and no missing point if V equals L; the proof on W does not assume irreducibility or global quasi-compactness.",
-   "uses": [
-    "def-weil-flat-morphism",
-    "def-weil-etale-morphism"
-   ],
+   "text": "The equation i.hom ≫ p = r gives p = i.inv ≫ r. Since isomorphisms and etale morphisms are flat, Mathlib composition instances give Flat p; Flat.stalkMap gives the conclusion.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "G3",
+  "by": "J3",
   "document": "Stacks Project",
-  "place": "Tags 0BMA, 0EY7, 0EY6(2), localized to a Noetherian affine neighbourhood and applied to a supplied finite extension"
+  "place": "Tags 0BMA, 0EY7, 0EY6(2), reduced via the finite-etale model and existing depth-two uniqueness, then Mathlib flat composition and Flat.stalkMap"
  },
  "mathlib_searches": [
   {
@@ -146,8 +123,7 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-regular-scheme",
   "lem-sbc-depth-two-finite-extension-uniqueness",
-  "lem-weil-pbc-flat-local-depth-formula",
-  "lem-weil-pbc-regular-local-generators-regular-sequence"
+  "lem-sbc-regular-codimension-two-finite-etale-model"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -163,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T111850-L-3051892",
+  "landing": "20261013T123545-L-3711496",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

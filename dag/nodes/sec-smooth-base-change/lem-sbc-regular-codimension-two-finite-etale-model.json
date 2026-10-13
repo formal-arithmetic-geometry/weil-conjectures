@@ -1,0 +1,115 @@
+{
+ "id": "lem-sbc-regular-codimension-two-finite-etale-model",
+ "kind": "statement",
+ "title": "Finite etale model across a regular codimension-two boundary",
+ "statement": "Let L be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring] and V an open. Assume that every point of L outside V has a regular local stalk [def-weil-regular-scheme] of Krull dimension at least two [def-weil-pbc-krull-dimension-ring]. For any finite morphism p : E -> L [def-weil-finite-integral-morphism] whose restriction to V is etale [def-weil-etale-morphism], there is a finite etale morphism r : F -> L with source stalk depth at least two [def-weil-pbc-depth] above the complement of V and an isomorphism between the restrictions of p and r to V commuting with their structure maps. No source-depth assumption on p is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-depth",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BMA and 0EY7, with 0EY6(2) for gluing"
+ },
+ "proof": [
+  {
+   "text": "On Noetherian affine target opens, local purity (0BMA) and extension (0EY7) give finite etale models. The regular-generator lemma gives boundary target depth at least two and the flat local depth formula propagates it to the source. Hartogs uniqueness (0EY6(2)) identifies these models canonically on overlaps; its uniqueness ensures the cocycle, so they glue, with finiteness and etaleness local on the target.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-sbc-depth-two-finite-extension-uniqueness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-depth-two-finite-extension-uniqueness"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "J3",
+  "document": "Stacks Project",
+  "place": "Tags 0BMA and 0EY7, with 0EY6(2) for gluing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity|depth_two|Flat.stalkMap",
+   "results": "4 hits: ['Mathlib/AlgebraicGeometry/Morphisms/Flat.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Flat.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Flat.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Flat.lean']",
+   "date": "2026-10-13",
+   "verdict": "no purity extension theorem; flatness tools used directly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a finite etale cover across a regular boundary of codimension at least two",
+   "results": "8 hits: ['Algebra.isOpen_etaleLocus', 'Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial', 'RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial', 'AlgebraicGeometry.IsEtale.of_comp', 'Algebra.basicOpen_subset_etaleLocus_iff', 'Algebra.exists_etale_of_isEtaleAt', 'Algebra.basicOpen_subset_etaleLocus_iff_etale', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension']",
+   "date": "2026-10-13",
+   "verdict": "no purity extension theorem; flatness tools used directly"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat.stalkMap",
+   "results": "1 hits: ['AlgebraicGeometry.Flat.stalkMap']",
+   "date": "2026-10-13",
+   "verdict": "no purity extension theorem; flatness tools used directly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers extend over a regular closed subset of codimension at least two",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteFlatStalk",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-sbc-regular-codimension-two-finite-flat-stalk"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteEtaleModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularCodimensionTwoFiniteEtaleModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_etale_depth_two_model",
+  "statement": "theorem exists_finite_etale_depth_two_model\n    {L E : Scheme.{u}} [IsLocallyNoetherian L] (V : L.Opens)\n    (hboundary : ∀ y : L, y ∉ V → IsRegularLocalRing (L.presheaf.stalk y) ∧\n      (2 : WithBot ℕ∞) ≤ ringKrullDim (L.presheaf.stalk y))\n    (p : E ⟶ L) [IsFinite p] [Etale (p ∣_ V)] :\n    ∃ (F : Scheme.{u}) (r : F ⟶ L), IsFinite r ∧ Etale r ∧\n      (∀ z : F, r z ∉ V →\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := F.presheaf.stalk z) (F.presheaf.stalk z)) ∧\n      ∃ e : (p ⁻¹ᵁ V).toScheme ≅ (r ⁻¹ᵁ V).toScheme,\n        e.hom ≫ r ∣_ V = p ∣_ V",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T123545-L-3711496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T123545-L-3711496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

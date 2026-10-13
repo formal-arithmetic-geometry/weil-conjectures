@@ -11,9 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.RingTheory.Depth
 
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
+import Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteEtaleModel
 
 /-!
 # Flatness at a regular codimension-two boundary point
@@ -70,6 +69,18 @@ theorem flat_stalk_of_regular_codimension_two_depth_two_extension
     (hsource : ∀ z : E, p z ∉ V →
       (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z))
     (z : E) (hz : p z ∉ V) :
-    (p.stalkMap z).hom.Flat := by sorry
+    (p.stalkMap z).hom.Flat := by
+  have _ := hz
+  obtain ⟨F, r, hfin, het, hdepth, e, he⟩ :=
+    exists_finite_etale_depth_two_model V hboundary p
+  have : IsFinite r := hfin
+  have : Etale r := het
+  obtain ⟨i, hi⟩ := iso_of_finite_depth_two_extensions V r p hdepth hsource e he
+  have hp : p = i.inv ≫ r := by
+    rw [← hi, ← Category.assoc, i.inv_hom_id, Category.id_comp]
+  have : Flat p := by
+    rw [hp]
+    infer_instance
+  exact Flat.stalkMap p z
 
 end AlgebraicGeometry.Scheme
