@@ -16,50 +16,56 @@
  },
  "proof": [
   {
-   "text": "Descend F,G and a through the closed-immersion equivalence for Z=V(K^q). The hypotheses hF,hG provide support; full faithfulness descends the map. Its natural completion comparison and closed-pushforward quotient comparison identify the reductions of a upstairs and downstairs, including the action of the extended ideal K.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Let Q be the coherent cokernel of the descended map. Completion is an equivalence and thus preserves cokernels. The canonical formal cokernel is termwise cokernel, so the reduced cokernel bounds imply every component of Q completion is killed by the extended ideal K^s. On affine opens, completion of finite modules is naturally tensoring with the completed ring and is exact. Therefore completion carries the image of the ideal action K^s tensor Q to Q to the corresponding completed image. That image is zero at all formal levels by the preceding bound. The coherent ideal product consequently has zero completion.",
+   "text": "Put Q = cokernel(a) and B = K^s Q with inclusion j. Coherent cokernel closure makes Q coherent. Reuse the proved private idealSheafPower_quasicoherent and idealModuleProduct_quasicoherent lemmas of CoherentFormalModule to obtain quasi-coherence of B; the coherent submodule clause makes B coherent. Reuse idealModuleProduct_quotient_comp_zero_iff to pass K^q annihilation from G to Q, and idealModuleProduct_zero_of_mono to pass it to B. These existing lemmas use right exactness of tensor products and naturality of multiplication.",
    "uses": [
     "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-coherent-formal-cokernel-canonical",
-    "lem-weil-pbc-completion-finite-module-tensor",
-    "lem-weil-pbc-completion-exact-finite-modules",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   },
   {
-   "text": "The completion equivalence on Z reflects the zero coherent ideal product. Closed pushforward and its ideal-power comparison identify this vanishing with K^s coker(a)=0 on X. The power inclusion K^(2s) into K^s, supplied by formalModuleQuotient_factor at the identity of coker(a), then gives K^(2s) coker(a)=0.",
+   "text": "Set i:Z=V(K^q)→X. The power quotient comparison identifies each quotient by K^q with pushforward of tensor pullback, preserving the quotient projection as the adjunction unit. Annihilation makes that projection invertible. The unit-kernel comparison then gives support of Q and B on Z. Completion on Z followed by inclusion and termwise closed pushforward is faithful. The coherent closed-immersion equivalence, the natural completion comparison, and essential surjectivity of the equivalence transport this faithfulness to the completion functor on supported coherent modules of X.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
+    "lem-weil-pbc-closed-immersion-power-quotient",
+    "lem-weil-pbc-closed-immersion-unit-kernel",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every positive level, reduction of the epimorphism G→Q is epimorphic: its composite with the source quotient projection is the composite of G→Q with the target quotient projection. It kills the reduction of a, so factors through the reduced cokernel by cokernel.desc. This factor is epi by cancellation. Passing the given K^s annihilation through this epimorphism kills the ideal product of Q/I^(n+1)Q. formalModuleQuotient_factor applied to Q→Q/I^(n+1)Q gives j followed by that projection equal to zero. Cancel the source quotient projection in the definition of formalModuleQuotientMap to show that each component of the completion of j is zero.",
+   "uses": [
     "lem-weil-pbc-formal-module-ideal-power-factor"
    ],
    "elementary": false
+  },
+  {
+   "text": "View j and the zero map between supported coherent objects. Their completions agree componentwise, so the faithful functor of step 2 identifies them. Thus j=0; because j is mono, B is zero. Factor the inclusion K^(2s)Q through K^s Q using formalModuleQuotient_factor at the identity of Q and s≤2s. The lower inclusion is zero, hence the higher inclusion is zero and its monic source is zero.",
+   "uses": [
+    "lem-weil-pbc-formal-module-ideal-power-factor"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
   "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-coherent-formal-cokernel-canonical",
-  "lem-weil-pbc-completion-finite-module-tensor",
-  "lem-weil-pbc-completion-exact-finite-modules",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-formal-module-ideal-power-factor"
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-closed-immersion-power-quotient",
+  "lem-weil-pbc-closed-immersion-unit-kernel",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "lem-weil-pbc-formal-module-ideal-power-factor",
+  "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U3",
+  "group": "V2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 088A, reflection after the first reduction bound; Tag 0888",
-  "note": "Fixed-map cokernel-only specialization of the reflection step, expanded through exact completion and the ideal-action image."
+  "place": "Tag 088A (lemma-existence-tricky), identification of supported coherent categories and reflection of the second bound; Tag 087T",
+  "note": "Cokernel-only proof by right exactness of reduction and faithfulness on the supported category; the Lean proof avoids exactness of affine completion. Second reading reuses the already proved private ideal-product and power lemmas from CoherentFormalModule instead of duplicating them."
  },
  "mathlib_searches": [
   {
@@ -144,10 +150,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T024050-L-3339689",
-  "kind": "interface",
+  "landing": "20261013T045612-L-139492",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
