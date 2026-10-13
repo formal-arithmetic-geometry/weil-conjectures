@@ -1,11 +1,13 @@
 module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-public import Sheaf.Paper.StrictHenselizationLocalStructure
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart
+import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientDomainPart
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
+
 /-- Regularity and integrality of the divisor quotient in the canonical strict henselization.
 Source: Stacks Project, Tags 05WS and 06LN, using the local structure at the geometric point.
 The quotient is identified with the strict henselization of the regular local divisor ring.
@@ -21,5 +23,6 @@ theorem strictHenselizationRing_regular_divisor_quotient
     (hg : ¬ IsUnit (b.hom f)) :
     IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) ∧
       IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
-  sorry
+  exact ⟨strictHenselizationRing_regular_divisor_quotient_part R f barY b hb hg,
+    strictHenselizationRing_divisor_quotient_domain_part R f barY b hb hg⟩
 end AlgebraicGeometry.Scheme

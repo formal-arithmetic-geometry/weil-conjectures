@@ -1,0 +1,118 @@
+{
+ "id": "lem-sbc-strict-hensel-regular-divisor-quotient-domain-part",
+ "kind": "statement",
+ "title": "Domain property of strict henselization divisor quotient",
+ "statement": "Let R be a commutative regular ring and f in R such that R/(f) is regular. Let Ω be an algebraically closed field and barY : Spec Ω → Spec R a geometric point. Let b : R → strictHenselizationRing barY induce the canonical strict henselization structural morphism on spectra. If b(f) is not a unit, then strictHenselizationRing barY/(b(f)) is a domain.",
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 00NP (regular local rings are domains); local structure of the canonical strict henselization"
+ },
+ "proof": [
+  {
+   "text": "Use the proved canonical local structure theorem. The nonunit hypothesis and Ideal.span_singleton_eq_top make the principal ideal proper. Ideal.Quotient.nontrivial_iff and IsLocalRing.of_surjective' make its quotient nontrivial and local. Apply the regularity component and IsRegularLocalRing.of_isRegularRing_of_isLocalRing, followed by the proved upstream instance IsRegularLocalRing.isDomain.",
+   "uses": [
+    "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-strict-henselization-local-structure"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V3",
+  "document": "Stacks Project",
+  "place": "Tag 00NP (regular local rings are domains); local structure of the canonical strict henselization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHensel|StrictHensel",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact canonical quotient statement; generic regular-local conversion found, used in the domain proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization of the localization of a regular quotient ring remains regular",
+   "date": "2026-10-13",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, HenselianLocalRing.toIsLocalRing, HenselianLocalRing, instHenselianRingMaximalIdeal, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_smooth, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization",
+   "verdict": "No exact canonical quotient statement; generic regular-local conversion found, used in the domain proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, IsLocalRing",
+   "date": "2026-10-13",
+   "results": "1 hits: IsRegularLocalRing.of_isRegularRing_of_isLocalRing",
+   "verdict": "No exact canonical quotient statement; generic regular-local conversion found, used in the domain proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict henselization of a regular local ring and its regular divisor quotient",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-strict-hensel-regular-divisor-quotient-regular",
+   "place": "domain component",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientDomainPart",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotientDomainPart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationRing_divisor_quotient_domain_part",
+  "statement": "theorem strictHenselizationRing_divisor_quotient_domain_part\n    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY)\n    (hg : ¬ IsUnit (b.hom f)) :\n    IsDomain (strictHenselizationRing barY ⧸ Ideal.span {b.hom f})",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f32a5",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T160714-L-1372756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f32a5",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T160714-L-1372756",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their nodes; existing signature unchanged, delivery and sole direct importer compile cleanly, and axioms contain only permitted axioms plus expected sorryAx from the regularity component."
+ }
+}
