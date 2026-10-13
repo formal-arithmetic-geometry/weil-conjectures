@@ -16,33 +16,32 @@
  ],
  "proof": [
   {
-   "text": "Put A=truncLE n I and B=truncGE n A. Kernel preservation identifies H^n(F(A)) with H^n(F(I)). The derived comparison for I is invertible because a quasi-isomorphism between K-injectives is a homotopy equivalence, preserved by additive F.",
+   "text": "Preserve the kernel h.i under F. Its induced boundary map is F(h.f\\prime), by kernel uniqueness. Construct genuine left homology data for F(I) with cycle object F(h.K), homology object coker F(h.f\\prime), and projection cokernel.pi. The left-homology-data comparison yields an isomorphism a from that cokernel to H^n(F(I)), with cokernel.pi followed by a equal to the lifted cycle-class map. This is the fully proved private section_cycles_cokernel_iso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the canonical bottom comparison cycle formula to I, obtaining b:H^n(RF(tauGE n QI)) isomorphic to F(h.H), normalized by its formula on cycles. The right-derived unit on I is invertible since I is K-injective, using the existing right-derivability/K-injective instance. The homology of q=RF(s_I followed by truncGE projection) is invertible: s_I is an isomorphism and the homology of RF of the projection is exactly the hypothesis.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sc-derived-lower-truncation-cycle-formula"
    ],
    "elementary": false
   },
   {
-   "text": "Left exactness gives the upper-truncation isomorphism on H^n after deriving. Naturality makes the derived comparison for A invertible. The assumed lower-truncation isomorphism, transported through upper truncation, identifies H^n(RF(QA)) with H^n(RF(QB)). Bottom derived cohomology of B is F(H^n(I)).",
-   "uses": [
-    "new-qcoh-sections-left-exact-bottom"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In the natural comparison square for A to B, the degree-n map is the projection from cycles to homology. Kernel uniqueness identifies the cycles of F(I) with F(h.K); their boundaries are the image of F(h.f\\prime), so their quotient is the displayed cokernel. Its induced map is the composite isomorphism above: both have composite F(h.pi) with cokernel.pi, and cokernel uniqueness forces equality. Empty or zero objects and all integer degrees require no extra hypotheses.",
+   "text": "The composite a, homology factor comparisons, homology of the derived unit, homology of q, and b consists of isomorphisms. Precompose it with cokernel.pi; the equation for a and the cycle formula identify it with F(h.pi). Cancel the epic cokernel.pi to identify this composite with the actual cokernel.desc in the conclusion, then infer its IsIso instance.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-kinjective-hom-derived",
-  "new-qcoh-sections-left-exact-bottom"
+  "lem-sc-derived-lower-truncation-cycle-formula"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 0AVW and 08D4; official tag pages read online on 2026-10-13"
+  "place": "Tags 0AVW and 08D4; kernel/cokernel calculation proved in Lean, canonical bottom normalization isolated using Tag 05TC."
  },
  "mathlib_searches": [
   {
@@ -130,9 +129,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T082334-L-1631922",
+  "landing": "20261013T100124-L-2486469",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
