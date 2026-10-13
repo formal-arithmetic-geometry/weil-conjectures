@@ -13,20 +13,25 @@
  ],
  "proof": [
   {
-   "text": "Transport a short exact sequence across E. Its underlying sequence of\ninteger modules is short exact: kernels are invariant submodules and cokernels\nare quotient representations. Submodules inherit open stabilizers, and the\nstabilizer of a quotient class contains the open stabilizer of any lift.\nThe first cochain map is injective pointwise. Its image equals the kernel of\nthe second: choose a preimage through the first map at each value in that\nkernel. For surjectivity of the second cochain map, choose a lift of each\nvalue of a locally constant cochain through the coefficient surjection.\nPostcomposition with this set-theoretic choice preserves local constancy,\nsince a cochain is constant on an open neighborhood of every point.\nThe coefficient-map formula hm and the additive equivalences e transport\nthese three assertions to the evaluation of S.map C in AddCommGrpCat.\nThus the resulting short complex is short exact in every degree.",
+   "text": "Apply lem-exc-rg-open-stabilizer-adjoint to the integer representation category. Its inclusion U preserves monomorphisms and is a left adjoint. Compose E, U, the representation-to-module forgetful functor and the module-to-abelian-group forgetful functor to obtain F. Mathlib proves these functors preserve finite colimits; F also preserves monomorphisms and zero morphisms. Preservation of binary coproducts gives additivity. Functor.preservesHomology_of_preservesMonos_and_cokernels then gives preservation of homology. Apply ShortExact.map to obtain a short exact underlying coefficient sequence. The cited adjunction is a generic categorical tool, and does not replace any step of the blueprint unit.",
    "uses": [
-    "def-exc-discrete-modules-category"
+    "lem-exc-rg-open-stabilizer-adjoint"
    ],
    "elementary": false
+  },
+  {
+   "text": "Extract coefficient injectivity, kernel lifting and surjectivity by ShortComplex.ab_exact_iff and ShortExact.ab_injective_f/ab_surjective_g. For a cochain in the kernel define a set function on the middle coefficient group choosing a preimage of each element in the kernel, and zero elsewhere. Postcompose the cochain with this function using LocallyConstant.map. The coefficient-map formula hm and e transport this lift back to a preimage in the evaluated complex. Injectivity follows pointwise from coefficient injectivity. Surjectivity follows by postcomposing with Function.surjInv of the coefficient surjection. No compactness or finiteness is used, and Fin 0 is handled by the same proof. Use AddCommGrpCat.mono_iff_injective, epi_iff_surjective and ShortExact.mk' to assemble short exactness.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-exc-discrete-modules-category"
+  "lem-exc-rg-open-stabilizer-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG; the pointwise verification is supplied by F4 from the parent proof."
+  "place": "Tag 0DVG, short exact sequences of discrete modules; coefficient exactness via the inclusion adjunction of Tag 04JF. Lean proof by M2, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -101,10 +106,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T022413-L-3213047",
-  "kind": "interface",
+  "landing": "20261013T033005-L-3677508",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
