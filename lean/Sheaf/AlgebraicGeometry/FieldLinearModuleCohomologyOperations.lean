@@ -18,6 +18,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Functors
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.RingTheory.Flat.CategoryTheory
+import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
+import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Basic
 
 /-! # Field-linear cohomology, pullback and cup product of scheme modules
 
@@ -73,7 +77,17 @@ theorem scalarRestriction_linear (F : SheafOfModules.{u} X.ringCatSheaf)
           (Module.compHom _ (scalarMap f U.unop)).toSMul r x) : scalarObj f F V) =
         @SMul.smul k (F.val.obj V) (Module.compHom _ (scalarMap f V.unop)).toSMul r
         ((F.val.map i).hom.toAddMonoidHom x) := by
-  sorry
+  intro r x
+  change F.val.map i ((scalarMap f U.unop r) • (show F.val.obj U from x)) =
+    (scalarMap f V.unop r) • F.val.map i x
+  rw [F.val.map_smul]
+  congr 1
+  change (X.presheaf.map i).hom (scalarMap f U.unop r) = scalarMap f V.unop r
+  simp only [scalarMap, RingHom.comp_apply]
+  change (X.presheaf.map (homOfLE (le_top (a := U.unop))).op ≫
+    X.presheaf.map i) _ = _
+  rw [← X.presheaf.map_comp]
+  rfl
 /-- scalar Restriction.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
@@ -123,7 +137,9 @@ Proof: Restriction of scalars leaves the underlying sections and restriction map
 The gluing and uniqueness axioms for F therefore give the sheaf axiom for this presheaf. -/
 theorem scalarPresheaf_isSheaf (F : (SheafOfModules.{u} X.ringCatSheaf)) :
     Presheaf.IsSheaf (Opens.grothendieckTopology X) (scalarPresheaf f F) := by
-  sorry
+  apply Presheaf.isSheaf_of_isSheaf_comp _ _
+    (forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u})
+  exact F.isSheaf
 /-- scalar Sheaf.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
@@ -222,7 +238,14 @@ section and restriction map. Hence the canonical comparison with each finite lim
 a sectionwise isomorphism and therefore a sheaf isomorphism. -/
 @[instance] theorem scalarFunctor_preservesFiniteLimits :
     PreservesFiniteLimits (scalarFunctor f) := by
-  sorry
+  have : PreservesFiniteLimits (scalarFunctor f ⋙
+      sheafToPresheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k)) :=
+    preservesFiniteLimits_of_evaluation _ (fun U ↦ by
+      change PreservesFiniteLimits (SheafOfModules.evaluation X.ringCatSheaf U ⋙
+        ModuleCat.restrictScalars (scalarMap f U.unop))
+      exact comp_preservesFiniteLimits _ _)
+  exact preservesFiniteLimits_of_reflects_of_preserves (scalarFunctor f)
+    (sheafToPresheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k))
 /-- scalar Functor preserves Finite Colimits.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -411,7 +434,16 @@ Proof: Inverse image on sheaves is exact and additive. This follows from the sta
 formula and filtered-colimit exactness for vector spaces, and from its left adjunction. -/
 @[instance] theorem scalarInverseImage_additive (a : Y ⟶ X) :
     (scalarInverseImage (k := k) a).Additive := by
-  sorry
+  have hp : ((Opens.map a.base).sheafPushforwardContinuous
+      (ModuleCat.{u} k) (Opens.grothendieckTopology X)
+      (Opens.grothendieckTopology Y)).Additive := by
+    constructor
+    intro M N g h
+    ext U x
+    rfl
+  exact ((Opens.map a.base).sheafAdjunctionContinuous
+    (ModuleCat.{u} k) (Opens.grothendieckTopology X)
+    (Opens.grothendieckTopology Y)).left_adjoint_additive
 /-- scalar Inverse Image preserves Finite Limits.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -419,7 +451,10 @@ Proof: Inverse image on sheaves is exact and additive. This follows from the sta
 formula and filtered-colimit exactness for vector spaces, and from its left adjunction. -/
 @[instance] theorem scalarInverseImage_preservesFiniteLimits (a : Y ⟶ X) :
     PreservesFiniteLimits (scalarInverseImage (k := k) a) := by
-  sorry
+  have := lan_preservesFiniteLimits_of_flat (E := ModuleCat.{u} k) (Opens.map a.base)
+  exact Functor.sheafPullbackConstruction.preservesFiniteLimits
+    (Opens.map a.base) (ModuleCat.{u} k)
+    (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
 /-- scalar Inverse Image preserves Finite Colimits.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -427,7 +462,8 @@ Proof: Inverse image on sheaves is exact and additive. This follows from the sta
 formula and filtered-colimit exactness for vector spaces, and from its left adjunction. -/
 @[instance] theorem scalarInverseImage_preservesFiniteColimits (a : Y ⟶ X) :
     PreservesFiniteColimits (scalarInverseImage (k := k) a) := by
-  sorry
+  dsimp [scalarInverseImage, Functor.sheafPullback]
+  infer_instance
 
 local instance : MonoidalCategory (KSheaf Y k) := Sheaf.monoidalCategory _ _
 local instance : HasExt.{u + 1} (KSheaf Y k) := HasExt.standard (KSheaf Y k)
@@ -494,7 +530,20 @@ Proof: Tensoring sheaves of k-vector spaces is exact: check stalks, where tensor
 over the field k is exact. Exactness gives preservation of finite limits and colimits. -/
 @[instance] theorem scalarTensorLeftLimits (M : KSheaf X k) :
     PreservesFiniteLimits (tensorLeft M) := by
-  sorry
+  have : PreservesFiniteLimits (tensorLeft M.obj) :=
+    preservesFiniteLimits_of_evaluation _ (fun U ↦ by
+      have : PreservesFiniteLimits (tensorLeft (M.obj.obj U)) := inferInstance
+      change PreservesFiniteLimits
+        ((evaluation (Opens X)ᵒᵖ (ModuleCat.{u} k)).obj U ⋙ tensorLeft (M.obj.obj U))
+      exact comp_preservesFiniteLimits _ _)
+  have : PreservesFiniteLimits (tensorLeft M.obj ⋙
+      presheafToSheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k)) :=
+    comp_preservesFiniteLimits _ _
+  have : PreservesFiniteLimits (sheafToPresheaf (Opens.grothendieckTopology X)
+      (ModuleCat.{u} k) ⋙ tensorLeft M.obj ⋙
+      presheafToSheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k)) :=
+    comp_preservesFiniteLimits _ _
+  exact preservesFiniteLimits_of_natIso (Sheaf.tensorLeftIso M).symm
 /-- scalar Tensor Left Colimits.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -502,7 +551,13 @@ Proof: Tensoring sheaves of k-vector spaces is exact: check stalks, where tensor
 over the field k is exact. Exactness gives preservation of finite limits and colimits. -/
 @[instance] theorem scalarTensorLeftColimits (M : KSheaf X k) :
     PreservesFiniteColimits (tensorLeft M) := by
-  sorry
+  let : SymmetricCategory (KSheaf X k) := Sheaf.symmetricCategory _ _
+  let : MonoidalClosed ((Opens X)ᵒᵖ ⥤ ModuleCat.{u} k) :=
+    MonoidalClosed.FunctorCategory.monoidalClosed
+  let : MonoidalClosed (KSheaf X k) :=
+    Monoidal.Reflective.monoidalClosed
+      (CategoryTheory.sheafificationAdjunction (Opens.grothendieckTopology X) (ModuleCat.{u} k))
+  infer_instance
 /-- scalar Tensor Right Limits.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -510,7 +565,7 @@ Proof: Tensoring sheaves of k-vector spaces is exact: check stalks, where tensor
 over the field k is exact. Exactness gives preservation of finite limits and colimits. -/
 @[instance] theorem scalarTensorRightLimits (M : KSheaf X k) :
     PreservesFiniteLimits (tensorRight M) := by
-  sorry
+  exact preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
 /-- scalar Tensor Right Colimits.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -518,7 +573,7 @@ Proof: Tensoring sheaves of k-vector spaces is exact: check stalks, where tensor
 over the field k is exact. Exactness gives preservation of finite limits and colimits. -/
 @[instance] theorem scalarTensorRightColimits (M : KSheaf X k) :
     PreservesFiniteColimits (tensorRight M) := by
-  sorry
+  exact preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
 
 /-- scalar Ext Cup.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -580,6 +635,30 @@ def scalarTensorCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf) :
       (Opens.grothendieckTopology X) (ModuleCat.{u} k)).homEquiv _ _).symm
         (scalarTensorPresheafCoefficient f F G)
 
+attribute [local irreducible] scalarTensorCoefficient
+
+private theorem scalarTensorInclusionComparison (M N : KSheaf X k) :
+    Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)
+      (ModuleCat.{u} k)) M N ≫
+      (sheafToPresheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k)).map
+        ((Sheaf.tensorLeftIso M).hom.app N) =
+      (CategoryTheory.sheafificationAdjunction (Opens.grothendieckTopology X)
+        (ModuleCat.{u} k)).unit.app (M.obj ⊗ N.obj) := by
+  rw [Adjunction.rightAdjointLaxMonoidal_μ, Adjunction.homEquiv_unit,
+    Category.assoc, ← Functor.map_comp]
+  have hc : Functor.OplaxMonoidal.δ
+      (presheafToSheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k)) M.obj N.obj ≫
+      ((CategoryTheory.sheafificationAdjunction (Opens.grothendieckTopology X)
+        (ModuleCat.{u} k)).counit.app M ⊗ₘ
+      (CategoryTheory.sheafificationAdjunction (Opens.grothendieckTopology X)
+        (ModuleCat.{u} k)).counit.app N) ≫
+      (Sheaf.tensorLeftIso M).hom.app N = 𝟙 _ := by
+    simp [Sheaf.tensorLeftIso, Sheaf.presheafToSheafCompTensorLeftIso,
+      tensorHom_def, ← whisker_exchange_assoc, ← comp_whiskerRight_assoc]
+  simp only [Category.assoc] at *
+  erw [hc]
+  simp
+
 /-- The sheafified tensor coefficient sends pure tensors to tensor sections.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -593,7 +672,18 @@ theorem exists_scalarTensorCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf)
         (((Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)
           (ModuleCat.{u} k)) (scalarSheaf f F) (scalarSheaf f G)).app (op U))
             (s ⊗ₜ[k] t)) = tmulSection s t := by
-  sorry
+  have hc : Functor.LaxMonoidal.μ
+      (sheafToPresheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k))
+      (scalarSheaf f F) (scalarSheaf f G) ≫
+      (scalarTensorCoefficient f F G).hom = scalarTensorPresheafCoefficient f F G := by
+    unfold scalarTensorCoefficient
+    change _ ≫ (sheafToPresheaf (Opens.grothendieckTopology X)
+      (ModuleCat.{u} k)).map (_ ≫ _) = _
+    rw [Functor.map_comp, ← Category.assoc, scalarTensorInclusionComparison]
+    exact ((CategoryTheory.sheafificationAdjunction (Opens.grothendieckTopology X)
+      (ModuleCat.{u} k)).homEquiv _ _).apply_symm_apply _
+  intro U s t
+  exact ConcreteCategory.congr_hom (NatTrans.congr_app hc (op U)) (s ⊗ₜ[k] t)
 
 /-- scalar Cohomology Cup.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
