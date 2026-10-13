@@ -15,27 +15,25 @@
  },
  "proof": [
   {
-   "text": "Fix an injective resolution I and a Čech zero class x. Use extMk_surjective to represent c(x) by an Ext-zero cocycle a. Evaluate its adjoint at 1 and lift the resulting section to a cycle z; the cocycle condition makes this possible, and iCycles monicity gives uniqueness. Apply the degree-zero comparison predicate to x, a and z.",
+   "text": "For each Čech zero class x, let b be Ext.addEquiv₀(c(x)), a morphism from the constant integer sheaf to F, and let s be its adjoint evaluated at 1. Thus Ext.mk₀(b)=c(x), and functorHZeroIso sends c(x) to s. Fix the existing injectiveResolution F. The map a=b followed by I.ι.f 0 is a cocycle. Prove extMk(a)=Ext.mk₀(b) directly using InjectiveResolution.extMk_hom: the fromSingleMk cocycle corresponds under equivHomShift to the single-complex map of b followed by I.ι prime; after localization, I.ι prime cancels its inverse. Lift the section augmentation of s to a cycle z using liftCycles. Adjunction.homEquiv_naturality_right and liftCycles_i identify iCycles(z) with the adjoint of a evaluated at 1. Apply the assumed quotient equation hc to x,a,z.",
    "uses": [
     "def-pc-abelian-cech-comparison-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Since there are no negative terms, homologyπ in degree zero is invertible for both source and total complexes. Lift the equality to zero cycles, apply iCycles and project to the (0,0) summand. The explicit alpha and beta formulas say that the section of a restricts to the resolution augmentation of the compatible family represented by x. Glue x using cechCohomologyZeroIso; separatedness of I-zero identifies that section with the augmentation of the glued section.",
+   "text": "Prove the augmentation square on zero cohomology: restriction followed by H(beta) equals the section augmentation into cycles followed by homologyπ and H(alpha). Rewrite homologyπ_naturality, cancel the degree-zero total homology projection and cycle inclusion, and apply liftCycles_i. The remaining cochain equality is precisely restriction naturality of I.ι.f 0. Also prove H(beta) is monic: its degree-zero cochain component is the product of the sectionwise monomorphisms induced by I.ι.f 0, followed by a split-monic coproduct inclusion. Since no differential enters degree zero, Mathlib mono_homologyMap_of_mono_of_not_rel yields the claim. Comparing the augmentation square at s with the quotient equation and cancelling H(beta) gives x=toCechCohomologyZero(s).",
    "uses": [
-    "def-pc-abelian-cech-comparison-construction",
-    "lem-pc-topological-cech-zero-gluing-iso"
+    "def-pc-abelian-cech-comparison-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Exactness of the augmented injective resolution in degree zero factors a uniquely as b followed by I.ι.f 0, where b maps the constant integer sheaf to F. The Ext-zero cocycle formula identifies extMk(a) with Ext.mk₀ b, and functorHZeroIso evaluates b at 1. The restriction equality from the preceding step and monicity of I.ι.f 0 identify that section with the glued section. Cancel functorHZeroIso to obtain the desired equality on x, and conclude equality of additive morphisms by extensionality. The empty cover forces an empty space, where these groups are zero; the gluing theorem includes infinite covers.",
+   "text": "The covering condition makes toCechCohomologyZero the hom of cechCohomologyZeroIso. Apply its inverse to x=toCechCohomologyZero(s), obtaining s=cechCohomologyZeroIso.inv(x). This proves c followed by functorHZeroIso.hom equals cechCohomologyZeroIso.inv on every element. Cancel functorHZeroIso.hom to obtain the required equality of additive morphisms. The argument uses no nonempty or finite cover hypothesis and no quasi-isomorphism statement about alpha.",
    "uses": [
-    "def-pc-abelian-cech-comparison-construction",
     "lem-pc-topological-cech-zero-gluing-iso"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -45,7 +43,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Lemma 20.11.2"
+  "place": "Lemma 20.11.2, degree-zero augmentation square; M3 Lean proof using the Mathlib Ext-zero and homology APIs"
  },
  "mathlib_searches": [
   {
@@ -149,10 +147,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T010615-L-2671111",
-  "kind": "interface",
+  "landing": "20261013T025305-L-3423877",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
