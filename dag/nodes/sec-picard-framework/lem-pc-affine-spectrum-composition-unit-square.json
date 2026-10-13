@@ -14,13 +14,24 @@
  },
  "proof": [
   {
-   "text": "Proof: write h,h' for the two spectrum maps, v,v' for their inverses, and q\nfor Spec.map g'.appTop. Expand the forward comparison as c(g',h), transport\nalong g';h = h';q, and inverse c(h',q). Expand the inverse comparison as\nc(q,v), transport along q;v = v';g', and inverse c(v',g'). Apply the\nassociativity law to h',q,v: the inverse c(h',q) followed by h'* applied to\nc(q,v) becomes c(h',q;v) followed by inverse c(h';q,v), with the associativity\ntransport. Transport q;v to v';g' and h';q to g';h by the two naturality\nidentities. Apply associativity to h',v',g' to combine the inverse c(v',g')\nwith c(h',v') at g'* K. Apply associativity to g',h,v to combine c(g',h)\nwith the remaining inverse c(g';h,v). The resulting expression consists of\nc(g',h;v), transported using h;v=id, followed by the identity comparison,\nand the corresponding path using h';v'=id. The two unit laws for c identify\nthese with g'* applied to c(h,v) followed by i X. Naturality of i moves\nits component through the remaining comparison. All transport maps are\ninduced by equalities of the same composite scheme morphism, so proof\nirrelevance identifies them. Evaluating at K gives the displayed equality.",
+   "text": "Expand the forward and inverse affine comparisons into selected composition comparisons and equality transports. Identify isoSpec.hom with toSpecΓ while transporting the inverse-pair comparisons to the same identity morphism.",
    "uses": [
     "def-pc-affine-spectrum-direct-image-coordinates",
-    "def-pc-affine-spectrum-derived-coordinates",
+    "def-pc-affine-spectrum-derived-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the selected associativity law on (h′,v′,g′), (h′,q,v), and (g′,h,v), where h,h′ are the spectrum maps, v,v′ their inverses, and q is Spec.map g′.appTop. Transport all triple composites to g′ using the two spectrum naturality identities and h v = id, h′ v′ = id. Replace the identity-comparison components with the transported comparisons for (id,g′) and (g′,id) using the selected unit laws.",
+   "uses": [
     "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "Substitute the first associativity equation, cancel the mapped inverse comparison for (v′,g′), substitute the second equation, and cancel the inverse comparison for (h′,q). The third associativity equation proves the remaining equality. Equality transport proofs agree by proof irrelevance. These algebraic manipulations are proved in private helpers for abstract functors and then specialized to derived pullback.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -104,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K1",
+  "reviewer": "X-0ba6b",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T181107-L-2602702",
+  "landing": "20261013T215557-L-894959",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and selected comparisons with the node; checked coherence proof, node-only proof edits, report, and local attributes. Delivery and sole direct importer compile cleanly; all added declarations use only propext, Classical.choice, and Quot.sound."
  }
 }
