@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-free-restriction-tor-bound",
+ "kind": "statement",
+ "title": "Tor vanishing passes from the restricted regular algebra to restricted free modules",
+ "statement": "Let $A,B$ be commutative rings, $\\rho:A\\to B$ a ring map, $I$ any set, $M$ an $A$-module and $j\\in\\mathbf N$. If $\\operatorname{Tor}^A_j(B,M)=0$, then $\\operatorname{Tor}^A_j(B^{(I)},M)=0$, where both $B$ and the free $B$-module $B^{(I)}$ of finitely supported $B$-valued functions on $I$ are restricted along $\\rho$, and Tor is derived in its first argument [def-weil-pbc-tor-modules]. No finiteness assumption is made.",
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066K, lemma-tor-amplitude-change-rings (free module in degree zero); Tor symmetry: Algebra Tag 00M3, lemma-tor-left-right. Sources read at https://stacks.math.columbia.edu/tag/066K and the TorSymmetry node."
+ },
+ "proof": [
+  {
+   "text": "Identify restricted B-valued finitely supported functions on I with the direct sum of I copies of restricted B, by the identity on underlying functions; the A-actions agree coordinatewise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the Tor symmetry isomorphism to compute Tor by resolving M with projectives. Tensor commutes with direct sums, so the resulting chain complex is a direct sum of I copies of the complex computing Tor_j(M,B). A finite-support cycle is a finite-support collection of cycles. Exactness of the coordinate complexes in degree j allows a finite-support collection of boundaries to be chosen on precisely these indices, proving exactness of the direct-sum complex in degree j. This is valid in degree zero as well, where exactness means the cokernel is zero. Transport vanishing through the projective-resolution homology isomorphisms and Tor symmetry.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066K, lemma-tor-amplitude-change-rings (free module in degree zero); Tor symmetry: Algebra Tag 00M3, lemma-tor-left-right. Sources read at https://stacks.math.columbia.edu/tag/066K and the TorSymmetry node.",
+  "group": "D4",
+  "date": "2026-10-13",
+  "note": "Fixed-degree free-module part of the parent node plan, with the direct-sum exactness argument made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Cc]olimit|Tor.*[Cc]oproduct|Tor.*[Dd]irect[Ss]um",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/RingTheory/GradedAlgebra/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Algebra/Module/PID.lean, Mathlib/Algebra/Homology/Monoidal.lean",
+   "verdict": "No exact match; the returned Tor definitions and tensor-product direct-sum lemmas do not state derived Tor vanishing for restricted free modules.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor'",
+   "results": "5 hits: CategoryTheory.Tor', CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app",
+   "verdict": "No exact match; the returned Tor definitions and tensor-product direct-sum lemmas do not state derived Tor vanishing for restricted free modules.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor commutes with arbitrary direct sums of modules over a commutative ring",
+   "results": "8 hits: TensorProduct.directSumRight_comp_rTensor, TensorProduct.directLimitLeft, TensorProduct.directLimitRight, ModuleCat.instMonoidalPreadditive, CategoryTheory.Tor'_obj_obj, TensorProduct.directLimitLeft_rTensor_of, Submodule.FG.lTensor.directLimit, ModuleCat.MonoidalCategory.tensorObj_isAddCommGroup",
+   "verdict": "No exact match; the returned Tor definitions and tensor-product direct-sum lemmas do not state derived Tor vanishing for restricted free modules.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor of a direct sum of copies of a module is zero if Tor of that module is zero",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ProjectiveRestrictionTorBound",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Bounded-model Tor amplitude step below the proper perfect pushforward proof: free-module Tor calculation in the restricted-projective term argument.",
+   "via": [
+    "lem-pc-projective-restriction-tor-bound",
+    "lem-pc-bounded-projective-restriction-tor-amplitude",
+    "lem-pc-strictly-perfect-relative-tensor-stalk-bound",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FreeRestrictionTorBound",
+  "file": "lean/Sheaf/Algebra/Homology/FreeRestrictionTorBound.lean",
+  "declaration": "ModuleCat.free_restriction_tor_isZero",
+  "statement": "theorem free_restriction_tor_isZero\n    {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)\n    (I : Type u) (M : ModuleCat.{u} A) (j : ℕ)\n    (hTor :\n      IsZero (((Tor' (ModuleCat.{u} A) j).obj\n        ((restrictScalars ρ).obj (of B B))).obj M)) :\n    IsZero (((Tor' (ModuleCat.{u} A) j).obj\n        ((restrictScalars ρ).obj ((free B).obj I))).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T122726-L-3631940",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T122726-L-3631940",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
