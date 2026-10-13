@@ -18,42 +18,34 @@
  },
  "proof": [
   {
-   "text": "Use the localization interfaces for exact open restriction and the K-flat tensor restriction comparisons to construct natural rhoX and rhoY across the specified independent localizations.",
+   "text": "Obtain natural tensor restriction isomorphisms rhoX and rhoY for the two independently localized open restrictions.",
    "uses": [
-    "lem-pc-derived-open-restriction-is-localization",
-    "lem-pc-derived-tensor-open-restriction-universes",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-derived-tensor-open-restriction-natural"
    ],
    "elementary": false
   },
   {
-   "text": "The product of the two copies of target open restriction is a localization. Conjugate the restricted natural isomorphism t by rhoX, rhoY and alpha to identify it with an isomorphism between the precompositions of the two local tensor/pullback bifunctors. Full faithfulness of precomposition with the product localization lifts this isomorphism and its inverse uniquely to s; the factorization identity gives compatibility at every global pair. This uses no choice of right adjoint to open restriction.",
+   "text": "Use localization of target restriction and its product with itself. Conjugate t by rhoY inverse, alpha inverse, rhoX and the product alpha. Localization.liftNatIso descends this natural isomorphism to the local tensor comparison s. The liftNatTrans_app formula, followed by cancellation of rhoY and its inverse, gives the factorization identity.",
    "uses": [
-    "lem-pc-derived-open-restriction-is-localization",
-    "lem-pc-derived-pullback-open-restriction-universes"
+    "lem-pc-derived-open-restriction-is-localization"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the supplied Hom-equivalence identity with source object GB and input p.counit.app B, whose p-transpose is the identity. Injectivity of q.homEquiv identifies alpha.inv.app (GB) followed by the restricted counit with local pullback of beta.hom.app B followed by q.counit.app (rX B). Tensor naturality for beta, combined with the descent identity for t, gives the stated equation. This step does not apply q.homEquiv to the tensor morphisms. Empty opens are included.",
-   "uses": [
-    "lem-pc-open-restriction-adjunction-hom-descent"
-   ],
+   "text": "Apply the supplied Hom identity to the global counit; its transpose is the identity. Applying the inverse local Hom equivalence yields the counit restriction equation. Naturality of rhoX at (identity, global counit), the tensor composition law, the factorization identity, and naturality of s at (identity, beta) give the stated composite equation. All three generic helper theorems are proved locally in Lean.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-derived-open-restriction-is-localization",
-  "lem-pc-derived-pullback-open-restriction-universes",
-  "lem-pc-derived-tensor-open-restriction-universes",
-  "lem-pc-open-restriction-adjunction-hom-descent"
+  "lem-pc-derived-tensor-open-restriction-natural",
+  "lem-pc-derived-open-restriction-is-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 08EU locality, tensor/counit descent part of the open comparison; Tag 08FE.",
-  "note": "Expansion of the locality argument into the named categorical step."
+  "place": "Tags 06YH, 08EU and 08FE",
+  "note": "P4: natural tensor restriction isolated; product localization descent and counit/tensor composition proved by generic categorical helpers."
  },
  "mathlib_searches": [
   {
@@ -127,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-77c27",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T142855-L-497118",
+  "landing": "20261013T152019-L-954134",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements and proofs with node records, dependencies, change record and report; all four modules and sole direct importer compile cleanly; axioms are standard, with sorryAx only for the documented tensor-descent dependency."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
