@@ -11113,3 +11113,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/F1/Sheaf.RingTheory.FinitePresentationModelStage (stage 3; reviewer PASS; first push; landing 20261013T045525-L-127760 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:55 L: merged deliver/F2/Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact (stage 3; reviewer PASS; first push; landing 20261013T045526-L-127932 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:55 L: merged deliver/F2/Sheaf.AlgebraicGeometry.HigherDirectImageSectionTorsion (stage 3; reviewer PASS; first push; landing 20261013T045526-L-128091 (interface); batch 20261013T045507; modules 3; new nodes 2)
+- 04:55 L: merged deliver/F3/Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice (stage 3; reviewer PASS; after a return; landing 20261013T045527-L-128328 (interface); batch 20261013T045507; modules 4; new nodes 3)

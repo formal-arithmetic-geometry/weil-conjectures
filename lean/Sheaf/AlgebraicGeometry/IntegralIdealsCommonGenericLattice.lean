@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
+import Sheaf.AlgebraicGeometry.CoherentPushforwardIdeal
+import Sheaf.AlgebraicGeometry.CommonGenericLatticeMaps
 
 /-! # Generic common lattices for two integral ideal sheaves
 
@@ -60,6 +62,10 @@ theorem integral_ideals_common_generic_lattice {X W : Scheme.{u}}
       IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace
         (i.base (genericPoint W))).map b) ∧
       IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace
-        (i.base (genericPoint W))).map d)  := by sorry
+        (i.base (genericPoint W))).map d)  := by
+  obtain ⟨K, b, d, hK, hb, hd, hbξ, hdξ⟩ :=
+    exists_common_generic_lattice_maps i I J hI hJ
+  have hIcoh := coherent_pushforward_ideal i I
+  exact ⟨K, b, d, hIcoh, hK, hb, hd, hbξ, hdξ⟩
 
 end AlgebraicGeometry.Scheme.Modules

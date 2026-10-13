@@ -1,0 +1,193 @@
+{
+ "id": "lem-pc-f3-finite-pushforward-finite-type",
+ "kind": "statement",
+ "title": "Finite pushforward preserves quasi-coherence and finite type without Noetherian assumptions",
+ "statement": "Let $f:Y\\to X$ be a finite morphism of schemes [def-weil-finite-integral-morphism], [def-pc-scheme]. Let $F$ be a quasi-coherent $\\mathcal O_Y$-module of finite type [pqf-def-coherent]. Then $f_*F$ [def-pc-module-pullback] is quasi-coherent and of finite type. No Noetherian hypothesis on either scheme is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01Y6 (finite scalar restriction argument) and 01LC (quasi-coherent pushforward); the finite-type argument does not require Noetherianity"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-pullback"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "proof": [
+  {
+   "text": "Finite morphisms are affine, hence quasi-compact and quasi-separated. Apply the existing qcqs pushforward theorem to prove quasi-coherence of f_*F.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-pushforward-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction preserves finite local generators. Choose local generators q of F and pull the generating cover back along Over.forget U. Index the new cover by triples (V,i,G(V)->q.X(i)); the covering lifting property makes it cover the slice. Each iterated slice pushforward preserves colimits and the unit because its ring map is an identity and its underlying functor is cocontinuous. Map the generating epimorphism along that functor. Its unchanged finite indexing type proves finite type of F.over U. This is the explicit local-generator construction, not an appeal to a duplicate scheme restriction theorem.",
+   "uses": [
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over every affine open U of X, f inverse U is affine. The affine finite-type criterion applied to its restricted module gives finite sections over B=O_Y(f inverse U). Finite f makes B finite over A=O_X(U). The direct-image sections are the same group with A acting through f.app U. The scalar tower compatibility is definitional, and Module.Finite.trans makes these sections finite over A.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-finite-module-over-finite-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine finite-type criterion to the covering of X by all affine opens and the finiteness just proved. This gives finite type of the quasi-coherent pushforward. Pair the two conclusions. Empty affine opens and zero modules satisfy the same argument; no source or target Noetherianity is assumed.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "pqf-lem-pushforward-qcoh",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-finite-module-over-finite-algebra",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01Y6 (finite scalar restriction argument) and 01LC (quasi-coherent pushforward); the finite-type argument does not require Noetherianity"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isFiniteType.*pushforward|isFiniteType.*over",
+   "results": {
+    "t": "2026-10-13T04:15:30Z",
+    "tool": "grep",
+    "query": "isFiniteType.*pushforward|isFiniteType.*over",
+    "sub": "Algebra",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib theorem found; use existing qcqs pushforward and affine finite-type criteria, with the finite scalar restriction argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteType\", \"pushforward\"",
+   "results": {
+    "t": "2026-10-13T04:15:30Z",
+    "tool": "loogle",
+    "query": "\"IsFiniteType\", \"pushforward\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib theorem found; use existing qcqs pushforward and affine finite-type criteria, with the finite scalar restriction argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite pushforward preserves quasi coherent modules of finite type without Noetherian hypotheses",
+   "results": {
+    "t": "2026-10-13T04:15:30Z",
+    "tool": "leanfinder",
+    "query": "Finite pushforward preserves quasi coherent modules of finite type without Noetherian hypotheses",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.IsFiniteType",
+     "SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+     "SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+     "SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+     "SheafOfModules.isFinitePresentation"
+    ],
+    "digest": "6131447fb1036beb"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib theorem found; use existing qcqs pushforward and affine finite-type criteria, with the finite scalar restriction argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite pushforward preserves quasi coherent sheaves of finite type over arbitrary schemes without Noetherian hypotheses",
+   "results": {
+    "t": "2026-10-13T04:23:57Z",
+    "tool": "leansearch",
+    "query": "Finite pushforward preserves quasi coherent sheaves of finite type over arbitrary schemes without Noetherian hypotheses",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-r2-integral-ideals-common-generic-lattice",
+   "place": "finite pushforward of the intersection kernel in Tag 01YH, using the finite scalar restriction argument of Tag 01Y6",
+   "via": [
+    "lem-pc-r2-common-generic-lattice-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePushforwardFiniteType.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_and_isFiniteType_pushforward_of_isFinite",
+  "statement": "theorem isQuasicoherent_and_isFiniteType_pushforward_of_isFinite\n    {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] (F : Y.Modules)\n    [F.IsQuasicoherent] [F.IsFiniteType] :\n    ((pushforward f).obj F).IsQuasicoherent ∧ ((pushforward f).obj F).IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": "none",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T045527-L-128328",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T045527-L-128328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

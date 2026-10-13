@@ -1,0 +1,239 @@
+{
+ "id": "lem-pc-r2-common-generic-lattice-maps",
+ "kind": "statement",
+ "title": "CommonGenericLatticeMaps",
+ "statement": "Let $X$ be locally Noetherian, $i:W\\to X$ a closed immersion with $W$ integral, and $I,J$ nonzero quasi-coherent ideals on $W$. There are a coherent $K$ and monomorphisms $K\\to i_*J$, $K\\to i_*I$, both generic-stalk isomorphisms.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YH, lemma-property-irreducible, intersection comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-module-stalk"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "proof": [
+  {
+   "text": "If I is the zero ideal its affine module sections vanish; sheaf locality makes the module zero and pushforward preserves zero. Thus the pushed nonzero hypothesis implies I is nonzero. Construct L as kernel of I.toModulesι followed by J.toPushforwardSubscheme. Its kernel inclusion d is mono. Lift d followed by I.toModulesι into the kernel defining J to obtain b; the equality of composites and monicity of both inclusions make b mono.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The structure module and each pushed quotient structure module are coherent by finite pushforward. Coherent kernel closure first proves coherence of the ideal modules, then of the comparison kernel L. Apply the shared non-Noetherian finite-pushforward finite-type theorem, and the existing coherence criterion on the locally Noetherian target. Structure modules have finite presentation because they are invertible, and are quasi-coherent by the existing structure-module theorem. No duplicated finite-pushforward, structure-coherence, restriction or denominator theorem is declared.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-f3-finite-pushforward-finite-type"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic stalk inclusions of I and J are isomorphisms by the nonzero ideal generic stalk criterion. The quotient comparison for J is zero on that stalk, since its composite with the invertible inclusion is zero. Kernel-stalk exactness makes the generic kernel arrow d an epi and mono, hence an isomorphism. The equality of the composites with the ideal inclusions then makes b an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set K=i_*L and push the two maps forward. Finite pushforward preserves coherence and, as a right adjoint, preserves monomorphisms. The natural bijective closed-pushforward stalk comparisons conjugate each pushed map to its original generic stalk isomorphism. Apply the shared non-Noetherian finite-pushforward finite-type theorem, and the existing coherence criterion on the locally Noetherian target. Structure modules have finite presentation because they are invertible, and are quasi-coherent by the existing structure-module theorem. No duplicated finite-pushforward, structure-coherence, restriction or denominator theorem is declared.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-f3-finite-pushforward-finite-type"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-f3-finite-pushforward-finite-type",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YH; canonical kernel and stalk comparison construction, using the shared finite-type pushforward theorem without the cyclic finite-pushforward coherence import"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsQuasicoherent.*kernel|isLocallyNoetherian.*(of|source)|ideal_inf",
+   "results": {
+    "t": "2026-10-13T00:31:37Z",
+    "tool": "grep",
+    "query": "IsQuasicoherent.*kernel|isLocallyNoetherian.*(of|source)|ideal_inf",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+     "Mathlib/AlgebraicGeometry/SpreadingOut.lean",
+     "Mathlib/AlgebraicGeometry/Artinian.lean",
+     "Mathlib/AlgebraicGeometry/Artinian.lean",
+     "Mathlib/AlgebraicGeometry/Noetherian.lean"
+    ],
+    "digest": "d2d3a9af59a28b47"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching scheme-module theorem; use the existing finite-pushforward, kernel and stalk interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal subsheaf of the structure sheaf on a locally noetherian scheme is coherent and remains coherent under a finite morphism",
+   "results": {
+    "t": "2026-10-13T00:31:37Z",
+    "tool": "leanfinder",
+    "query": "An ideal subsheaf of the structure sheaf on a locally noetherian scheme is coherent and remains coherent under a finite morphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IdealSheafData",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal",
+     "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_ofIdeals_le"
+    ],
+    "digest": "bfef3c4a109b6ce0"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching scheme-module theorem; use the existing finite-pushforward, kernel and stalk interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IdealSheafData\", \"inf\"",
+   "results": {
+    "t": "2026-10-13T00:31:38Z",
+    "tool": "loogle",
+    "query": "\"IdealSheafData\", \"inf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf",
+     "AlgebraicGeometry.Scheme.IdealSheafData.radical_inf",
+     "AlgebraicGeometry.Scheme.IdealSheafData.inf_mul",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mul_inf",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_inf",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_iInf",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_biInf",
+     "AlgebraicGeometry.Scheme.IdealSheafData.map_inf"
+    ],
+    "digest": "c2ab64f299139338"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching scheme-module theorem; use the existing finite-pushforward, kernel and stalk interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalks preserve the intersection of two subsheaves and an isomorphism of stalks is preserved by direct image along a closed embedding",
+   "results": {
+    "t": "2026-10-13T00:44:21Z",
+    "tool": "leanfinder",
+    "query": "Stalks preserve the intersection of two subsheaves and an isomorphism of stalks is preserved by direct image along a closed embedding",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Opens.stalkIso",
+     "AlgebraicGeometry.Scheme.Opens.germ_stalkIso_inv",
+     "AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom",
+     "AlgebraicGeometry.Scheme.Hom.resLEStalkMap",
+     "AlgebraicGeometry.Scheme.Opens.germ_stalkIso_inv_assoc",
+     "AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom_assoc",
+     "AlgebraicGeometry.PresheafedSpace.restrictStalkIso",
+     "AlgebraicGeometry.morphismRestrictStalkMap"
+    ],
+    "digest": "99863a7bf45ee163"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching scheme-module theorem; use the existing finite-pushforward, kernel and stalk interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A kernel of a morphism between coherent sheaves on a locally noetherian scheme is coherent, and finite pushforward preserves coherent sheaves",
+   "results": {
+    "t": "2026-10-13T00:56:23Z",
+    "tool": "leansearch",
+    "query": "A kernel of a morphism between coherent sheaves on a locally noetherian scheme is coherent, and finite pushforward preserves coherent sheaves",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-r2-integral-ideals-common-generic-lattice",
+   "place": "Tag 01YH",
+   "via": [
+    "lem-pc-r2-integral-ideals-common-generic-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CommonGenericLatticeMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommonGenericLatticeMaps.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_common_generic_lattice_maps",
+  "statement": "theorem exists_common_generic_lattice_maps {X W : Scheme.{u}}\n    [IsLocallyNoetherian X] (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]\n    (I J : W.IdealSheafData) (hI : ¬ IsZero ((pushforward i).obj I.toModules))\n    (hJ : J ≠ ⊥) :\n    ∃ (K : X.Modules) (b : K ⟶ (pushforward i).obj J.toModules)\n      (d : K ⟶ (pushforward i).obj I.toModules),\n      RingedSpace.IsCoherent X.toRingedSpace K ∧ Mono b ∧ Mono d ∧\n      IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace\n        (i.base (genericPoint W))).map b) ∧\n      IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace\n        (i.base (genericPoint W))).map d)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": "none",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T045527-L-128328",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T045527-L-128328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
