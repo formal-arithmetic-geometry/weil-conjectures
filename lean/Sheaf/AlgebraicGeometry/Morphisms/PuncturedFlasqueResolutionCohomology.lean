@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedFlasqueResolutionComparison
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-! # Flasque associated-module resolutions compute cohomology on an open
@@ -42,6 +43,17 @@ theorem nonempty_open_h_addEquiv_injective_sections
     (I : InjectiveResolution (ModuleCat.of R R : ModuleCat.{u} R)) (n : ℕ) :
     Nonempty (Modules.H (X := W.toScheme)
       (SheafOfModules.unit W.toScheme.ringCatSheaf) n ≃+
-      ((puncturedSectionsComplex R W I.cocomplex).homology n).carrier) := by sorry
+      ((puncturedSectionsComplex R W I.cocomplex).homology n).carrier) := by
+  obtain ⟨f, g, hgf, hfg⟩ := punctured_flasque_resolution_comparison_maps R W I n
+  let e : Modules.H (X := W.toScheme)
+      (SheafOfModules.unit W.toScheme.ringCatSheaf) n ≃+
+      ((puncturedSectionsComplex R W I.cocomplex).homology n).carrier :=
+    { toEquiv :=
+        { toFun := f
+          invFun := g
+          left_inv := hgf
+          right_inv := hfg }
+      map_add' := f.map_add }
+  exact ⟨e⟩
 
 end AlgebraicGeometry.Scheme

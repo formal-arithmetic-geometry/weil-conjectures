@@ -1,0 +1,114 @@
+{
+ "id": "new-punctured-flasque-resolution-comparison",
+ "kind": "statement",
+ "title": "Comparison maps for punctured flasque resolution cohomology",
+ "statement": "For a commutative Noetherian ring R, an open W of Spec R, an injective resolution I of R, and n, there are additive homomorphisms between Modules.H of the unit module on W and the homology carrier of puncturedSectionsComplex R W I.cocomplex which are mutually inverse.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09T2 and 0A6T; acyclic-resolution comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-punctured-sections-complex"
+ ],
+ "proof": [
+  {
+   "text": "The associated sheaves of the injective resolution are flasque and form an exact resolution. The acyclic-resolution comparison supplies mutually inverse comparison maps, and sections identify with evaluation on W.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-sbc-punctured-sections-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-punctured-sections-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 09T2 and 0A6T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "acyclic resolution comparison sheaf cohomology sections homology",
+   "date": "2026-10-14",
+   "results": "No complete match; only generic Sheaf.H declarations.",
+   "verdict": "No direct theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H _ _ ≃+ _",
+   "date": "2026-10-14",
+   "results": "No complete match for the concrete punctured sections complex.",
+   "verdict": "No direct theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "flasque resolution cohomology sections",
+   "date": "2026-10-14",
+   "results": "Only generic flasque APIs in Mathlib.Topology.Sheaves.Flasque.",
+   "verdict": "No complete comparison declaration found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of flasque resolution computed by sections complex",
+   "date": "2026-10-14",
+   "results": "No direct theorem found; search service unavailable for the concrete construction.",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedFlasqueResolutionCohomology",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-punctured-flasque-resolution-cohomology",
+   "place": "intermediate comparison maps"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedFlasqueResolutionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedFlasqueResolutionComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_flasque_resolution_comparison_maps",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.punctured_flasque_resolution_comparison_maps"
+  ],
+  "statement": "theorem punctured_flasque_resolution_comparison_maps\n    (R : Type u) [CommRing R] [IsNoetherianRing R]\n    (W : (Spec (.of R)).Opens)\n    (I : InjectiveResolution (ModuleCat.of R R : ModuleCat.{u} R)) (n : ℕ) :\n    ∃ f : Modules.H (X := W.toScheme)\n        (SheafOfModules.unit W.toScheme.ringCatSheaf) n →+\n        ((puncturedSectionsComplex R W I.cocomplex).homology n).carrier,\n      ∃ g : ((puncturedSectionsComplex R W I.cocomplex).homology n).carrier →+\n        Modules.H (X := W.toScheme)\n          (SheafOfModules.unit W.toScheme.ringCatSheaf) n,\n      (Function.LeftInverse g f) ∧ (Function.RightInverse g f)",
+  "by": "E1",
+  "date": "2026-10-14",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T231534-L-1816823",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T231534-L-1816823",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
