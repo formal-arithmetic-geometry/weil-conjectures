@@ -34,9 +34,52 @@
   "def-pc-kflat-complex",
   "lem-pc-kflat-resolution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For ringHomReplacement_quasiIso, install the proved quasi-isomorphism of the functorial K-injective resolution map. Apply bounded exact-term Hom preservation to P with its original bounds, supplying exactness for every term by ringProjectiveInternalHomExact. Finite generation is not used. The resolution and bounded-Hom theorem are existing library declarations.",
+   "uses": [
+    "lem-pc-ring-projective-internal-hom-exact",
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For perfectRHomBaseChangeModel_exists, unpack the perfect-source hypothesis into P and its bounds, finiteness, projectivity and source isomorphism. Apply ringBoundedProjectiveExtension to obtain K-flatness of P and projectivity of its extension. Choose the ordinary complex representative Q0 of K provided by essential surjectivity of Q and a K-flat resolution s:Q→Q0. The derived image of s is invertible, so compose its asIso with the original representative isomorphism to obtain targetIso.",
+   "uses": [
+    "lem-pc-ring-bounded-projective-extension",
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The counit fields of d are isomorphisms on P and Q by their K-flatness. Unfold ringDerivedExtensionCounit: the other three factors are functor images of isomorphisms and quotient-factorization isomorphisms, so the composite is invertible. An additive functor preserves zero objects, giving the extended bounds directly from the same endpoints. Fill all fields of PerfectRHomBaseChangeModel with these values.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The existing localization/model-isomorphism and canonical map definitions remain unchanged. ringRHomBaseChangeData_exists remains an unfinished named theorem with the construction and differential calculation described in its original docstring.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-kflat-resolution",
+  "lem-pc-ring-bounded-projective-extension",
+  "lem-pc-ring-projective-internal-hom-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A clause (1)",
+  "note": "Partial stage-3 reduction: the Hom-replacement and model-existence holes are reduced to ordinary projective-Hom exactness and bounded-projective extension properties; normalized extension-data existence remains untouched."
+ },
  "mathlib_match": null,
  "status": "split",
  "created": {
@@ -129,5 +172,15 @@
   "group": "Q1",
   "result": "fix",
   "note": "rings A,B and phi; one-object site modules; E perfect via m.source bounded+Finite+Projective+sourceIso; K arbitrary; RHom = derivedInternalHom on onePointRingSheaf; derived extension d pinned by changeOfRings obj/map eqs, IsLeftDerivedFunctor, homMap_pure; conclusion IsIso of the canonical composite"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T054211-L-441333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

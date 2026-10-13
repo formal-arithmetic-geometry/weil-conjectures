@@ -11,6 +11,9 @@ public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
 public import Sheaf.Algebra.Homology.KFlatResolution
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Module.FinitePresentation
+import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import Sheaf.Algebra.Homology.RingProjectiveInternalHomExact
+import Sheaf.Algebra.Homology.RingBoundedProjectiveExtension
 
 /-! # The RHom scalar-extension comparison on perfect representatives
 
@@ -166,7 +169,13 @@ theorem ringHomReplacement_quasiIso {A : Type u} [CommRing A]
     (hp : ∀ n : ℤ, Module.Projective A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) :
     QuasiIso (((homComplexFunctor (R := CochainComplex.onePointRingSheaf A)).obj (op P)).map
       ((CochainComplex.toKInjectiveResolution.{u} (RingSiteModules A)).app Q)) := by
-  sorry
+  have : QuasiIso ((CochainComplex.toKInjectiveResolution.{u}
+      (RingSiteModules A)).app Q) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} (RingSiteModules A) Q).2
+  exact quasiIso_homComplex_map_of_bounded_exact_terms ⊥
+    (CochainComplex.onePointRingSheaf A) P hb
+    (fun n S hS ↦ SheafOfModules.ringProjectiveInternalHomExact (P.X n) (hp n) S hS)
+    ((CochainComplex.toKInjectiveResolution.{u} (RingSiteModules A)).app Q)
 
 /-- The canonical Hom-model isomorphism, obtained from the localization factorization and
 inverse of the Hom map induced by the functorial K-injective resolution. Source: Stacks,
@@ -255,7 +264,35 @@ theorem perfectRHomBaseChangeModel_exists {A B : Type u} [CommRing A] [CommRing 
       (∀ n : ℤ, Module.Projective A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) ∧
       Nonempty (DerivedCategory.Q.obj P ≅ E)) :
     Nonempty (PerfectRHomBaseChangeModel d E K) := by
-  sorry
+  obtain ⟨P, hb, hf, hp, ⟨eP⟩⟩ := hE
+  let := d.additive
+  obtain ⟨hP, hproj⟩ :=
+    CochainComplex.ringBoundedProjectiveExtension φ d.extension d.objects P hb hp
+  let Q₀ := DerivedCategory.Q.objPreimage K
+  obtain ⟨Q, s, hQ, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution Q₀
+  have : IsIso (DerivedCategory.Q.map s) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hs
+  have hc (T : CochainComplex (RingSiteModules A) ℤ) (hT : T.IsKFlat) :
+      IsIso (ringDerivedExtensionCounit d T) := by
+    have : IsIso (d.counit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj T)) :=
+      d.counit_kFlat T hT
+    dsimp only [ringDerivedExtensionCounit]
+    infer_instance
+  exact ⟨{
+    source := P
+    target := Q
+    bounded := hb
+    projective := hp
+    finite := hf
+    sourceIso := eP
+    targetIso := asIso (DerivedCategory.Q.map s) ≪≫ DerivedCategory.Q.objObjPreimageIso K
+    target_kFlat := hQ
+    extended_bounded := by
+      obtain ⟨a, b, hbound⟩ := hb
+      exact ⟨a, b, fun n hn ↦ d.extension.map_isZero (hbound n hn)⟩
+    extended_projective := hproj
+    source_counit := hc P hP
+    target_counit := hc Q hQ }⟩
 
 /-- The canonical base-change map for given extension data `d` and given perfect and K-flat
 representatives `m`. The two RHom identifications use the shared functorial K-injective
