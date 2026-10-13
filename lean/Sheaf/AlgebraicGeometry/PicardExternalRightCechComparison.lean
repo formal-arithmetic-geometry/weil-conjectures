@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
+import Sheaf.AlgebraicGeometry.PicardRightCechCupHomology
+
 /-! # Cup comparison for fixed right-coefficient Cech models
 
 Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech.
@@ -91,6 +93,40 @@ theorem picardExternal_right_cech_comparison
       (∀ n : ℕ, HomologicalComplex.homologyMap ψ.τ₂ (n : ℤ) =
         (a2 n).hom ≫ HomologicalComplex.homologyMap d2 (n : ℤ) ≫ (b2 n).inv) ∧
       (∀ n : ℕ, HomologicalComplex.homologyMap ψ.τ₃ (n : ℤ) =
-        (a3 n).hom ≫ HomologicalComplex.homologyMap d3 (n : ℤ) ≫ (b3 n).inv) := by sorry
+        (a3 n).hom ≫ HomologicalComplex.homologyMap d3 (n : ℤ) ≫ (b3 n).inv) := by
+  classical
+  obtain ⟨d1, hd1⟩ := picardExternalCupCochain_exists f g F S.X₁
+  obtain ⟨d2, hd2⟩ := picardExternalCupCochain_exists f g F S.X₂
+  obtain ⟨d3, hd3⟩ := picardExternalCupCochain_exists f g F S.X₃
+  obtain ⟨θ, hθ⟩ := picardRightCechCup_exists f g U V F
+  have component (G : Y.Modules) [G.IsQuasicoherent]
+      (d : picardExternalTotal f g F G ⟶
+        picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G))
+      (hd : IsPicardExternalCupCochain f g F G d) :
+      ∃ (a : ∀ n : ℕ,
+          ((picardRightTensorCechFunctor f g U V F).obj G).homology (n : ℤ) ≅
+            (picardExternalTotal f g F G).homology (n : ℤ))
+        (b : ∀ n : ℕ,
+          ((picardRightProductCechFunctor f g U V F).obj G).homology (n : ℤ) ≅
+            (picardScalarModel (pullback.fst f g ≫ f)
+              (externalCupCoefficients f g F G)).homology (n : ℤ)),
+        ∀ n : ℕ, HomologicalComplex.homologyMap (θ.app G) (n : ℤ) =
+          (a n).hom ≫ HomologicalComplex.homologyMap d (n : ℤ) ≫ (b n).inv := by
+    obtain ⟨a, b, hab⟩ := picardRightCechCup_homology f g F U V hU hV hUc hVc θ hθ G
+    refine ⟨a, b, fun n ↦ ?_⟩
+    have hn := picardExternalCupHomology_unique f g F G _
+      (fun n ↦ HomologicalComplex.homologyMap d (n : ℤ)) hab hd n
+    calc
+      HomologicalComplex.homologyMap (θ.app G) (n : ℤ) =
+          (a n).hom ≫ ((a n).inv ≫
+            HomologicalComplex.homologyMap (θ.app G) (n : ℤ) ≫ (b n).hom) ≫
+              (b n).inv := by simp
+      _ = (a n).hom ≫ HomologicalComplex.homologyMap d (n : ℤ) ≫ (b n).inv := by
+        rw [hn]
+  obtain ⟨a1, b1, h1⟩ := component S.X₁ d1 hd1
+  obtain ⟨a2, b2, h2⟩ := component S.X₂ d2 hd2
+  obtain ⟨a3, b3, h3⟩ := component S.X₃ d3 hd3
+  exact ⟨d1, d2, d3, S.mapNatTrans θ, a1, b1, a2, b2, a3, b3,
+    hd1, hd2, hd3, h1, h2, h3⟩
 
 end AlgebraicGeometry.Scheme.Modules
