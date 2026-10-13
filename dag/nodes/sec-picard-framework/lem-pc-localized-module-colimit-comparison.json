@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "The transition fraction formula and cocone identities make the g_i compatible; the fractions exhaust each localized stage.",
+   "text": "Represent each localized stage element by a fraction using LocalizedModule.induction_on. Apply hm and hg; cocone naturality identifies the numerator and denominator images. This proves compatibility of g and defines its additive colimit comparison by colimit.desc.",
    "uses": [
     "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-category-colimit"
@@ -22,26 +22,43 @@
    "elementary": true
   },
   {
-   "text": "Lift a numerator through ν and denominator through κ to a common stage. For equality lift the multiplier outside q and descend the zero cross difference via the additive colimit. Semilinearity identifies this with the stage fraction relation. Hence the underlying set comparison is bijective; addition is preserved at common stages, yielding the required additive equivalence.",
+   "text": "Apply the generic Mathlib Concrete.isColimit_exists_rep to the supplied ring colimit and additive-group colimit to lift the denominator and numerator of any target fraction. For the additive diagram first apply AddCommGrpCat.uliftFunctor, which preserves colimits, so its forgetful functor preserves the required indexing size. Move both representatives to a common upper bound; its denominator avoids the contracted prime and hg proves surjectivity of the comparison.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-criterion"
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
    "elementary": false
+  },
+  {
+   "text": "For a stage fraction whose g-image is zero, LocalizedModule.mk_eq supplies a multiplier outside q annihilating its numerator image. Lift that multiplier through the ring colimit and move to a common stage with the numerator. Semilinearity of ν makes their scalar product map to zero in M. Apply Concrete.isColimit_exists_of_rep_eq to the universe-lifted additive colimit, comparing that product with zero, to detect its zero at a later stage. Transition semilinearity identifies the product there; the multiplier stays outside the contracted prime. Hence mk_eq shows the transported localized fraction is zero. The colimit cocone identity makes the original coprojection zero.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every element of colim N has a stage representative by the same additive-group representative argument. Thus the comparison has trivial kernel and is injective. AddEquiv.ofBijective applied to this additive homomorphism and the preceding surjectivity gives the desired equivalence. colimit.ι_desc gives its prescribed formula. No separate module colimit criterion is used.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-criterion",
   "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 02JO and 037D; read online https://stacks.math.columbia.edu/tag/02JO and https://stacks.math.columbia.edu/tag/037D; detailed fraction argument supplied in Lean docstring"
+  "place": "Tags 02JO first proof paragraph and 037D first proof paragraph; direct fraction proof formalized using Mathlib Concrete colimit lemmas and AddEquiv.ofBijective. Sources read online at https://stacks.math.columbia.edu/tag/02JO and https://stacks.math.columbia.edu/tag/037D."
  },
  "mathlib_searches": [
   {
@@ -222,10 +239,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261013T151139-L-879098",
-  "kind": "interface",
+  "landing": "20261013T153458-L-1084570",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
