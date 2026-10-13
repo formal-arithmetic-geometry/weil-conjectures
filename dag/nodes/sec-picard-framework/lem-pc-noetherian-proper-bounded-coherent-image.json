@@ -16,34 +16,57 @@
  ],
  "proof": [
   {
-   "text": "Properness and the Noetherian base make Y Noetherian. Use the bounded-below hypercohomology spectral sequence for the left exact pushforward functor and the supplied bounded source. Its E2 terms are the higher direct images of coherent cohomology sheaves of A, hence coherent by proper coherence. Each total degree has a finite filtration of subquotients of these terms. On a Noetherian scheme coherence is closed under subquotients and finite extensions, so every image cohomology sheaf is coherent. The lower bound is inherited from the lower bound of A and left exactness.",
+   "text": "Properness makes Y locally Noetherian. Finite local generators and the coherent kernel clause give finite local presentations of each coherent source module. Over an affine Noetherian base use the integral-ideal filtration, finite cohomology of its factors, and short-exact finite-cohomology extension to prove finite cohomology. The semilinear affine-base sections comparison transfers finiteness to higher direct images. Restriction to affine opens and their finite presentations give finite presentation of higher direct images; together with their quasi-coherence this gives coherence. These are private proved helpers, avoiding the cyclic finite-free-model module.",
    "uses": [
-    "thm-sp-truncation-e2",
-    "lem-pc-coherent-hi",
-    "pqf-lem-coherent-ft-locnoeth"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-e2-finite-presentation-integral-filtration",
+    "lem-pc-e2-integral-ideal-proper-cohomology",
+    "lem-pc-e2-cohomology-finite-extension",
+    "lem-pc-cohomology-sections-affine-base",
+    "lem-pc-sections-higher-direct-image-quasi-coherent"
    ],
    "elementary": false
   },
   {
-   "text": "Properness makes p quasi-compact and quasi-separated, and the Noetherian T is quasi-compact. Source coherent cohomology is quasi-coherent. Choose an upper bound b for source cohomology; A[b] has no positive cohomology. The uniform derived-direct-image truncation bound gives N with image cohomology of A[b] zero in degrees at least N. Derived image commutes with shifts, so image cohomology of A vanishes in degrees at least b+N. Combine with the lower bound of step 1. Empty Y and zero A give zero image. No arbitrary-base approximation, flatness, Tor bound or pseudo-coherent representative occurs.",
+   "text": "Represent A by a strictly bounded-below complex K and transport its coherent cohomology through the representing isomorphism. Apply the truncation hypercohomology spectral sequence to module pushforward. Its E2 terms are coherent by the preceding helpers and vanish at negative first index. Kernel and cokernel closure propagates coherence to every derived page. Descending induction on the finite abutment filtration, using coherent extension closure and its stable-page graded comparisons, proves coherence in each total degree. Below the source lower bound the filtration is both full and zero, proving image vanishing. Reuse the existing generic finite-filtration helper from the bounded-below quasi-coherent direct-image module via import all; its quasi-coherent image theorem is not used.",
    "uses": [
-    "lem-pc-derived-direct-image-uniform-truncation-bound",
-    "def-pc-derived-direct-image"
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "def-pc-derived-direct-image",
+    "lem-pc-derived-direct-image-bounded-below-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each cohomology degree q choose the eventual higher-direct-image bound N(q) from the quasi-coherent module vanishing theorem over the compact target. Let c be the finite supremum of N(q)+max(q,0) over q in [a,b]. If p+q>c, the E2 term vanishes: for negative p use the spectral quadrant; for q outside [a,b] transport source vanishing and apply the additive right-derived functor; inside [a,b] arithmetic gives N(q)<=p. A zero E2 term stays zero on every derived page by induction through its kernel-cokernel construction. Every abutment graded piece is therefore zero above c. Descending induction from the zero last filtration step makes the abutment zero. Combine this upper bound with the lower bound and the coherent-abutment proof. An empty interval has supremum zero, and zero source or empty schemes require no extra assumptions. The zero-page induction is the existing private helper in HalfPlaneWeakConvergence, reused via import all; its weak-convergence theorem is not invoked.",
+   "uses": [
+    "lem-pc-higher-direct-image-local-vanishing",
+    "pqf-lem-coherent-ft-locnoeth",
+    "thm-sp-truncation-e2",
+    "lem-pc-derived-direct-image-bounded-below-qcoh",
+    "lem-sp-half-plane-weak-convergence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-derived-direct-image",
-  "lem-pc-coherent-hi",
-  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-derived-direct-image-bounded-below-qcoh",
+  "lem-pc-e2-cohomology-finite-extension",
+  "lem-pc-e2-finite-presentation-integral-filtration",
+  "lem-pc-e2-integral-ideal-proper-cohomology",
+  "lem-pc-higher-direct-image-local-vanishing",
+  "lem-pc-sections-higher-direct-image-quasi-coherent",
+  "lem-sp-half-plane-weak-convergence",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
   "pqf-lem-coherent-ft-locnoeth",
   "thm-sp-truncation-e2"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 08E2, spectral sequence and upper-bound argument; proper Noetherian specialization isolated by R2 because DirectImageBoundedCoherent has a current import cycle"
+  "place": "Tags 08E2, 02O5, 02O6, 01XJ; V2 implements proper coherence below the cyclic finite-free-model module, and uses finite E2 support instead of shifting an unbounded derived bound."
  },
  "mathlib_searches": [
   {
@@ -125,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R2",
+  "reviewer": "X-7b034",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T100111-L-2482090",
+  "landing": "20261013T124317-L-3778245",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature and proof to the node, dependencies, and sources; verified pruning, proof-only node changes, preserved public imports, clean delivery and direct-importer compilation, and all four declarations' allowed axioms (sorryAx only through existing dependencies)."
  }
 }
