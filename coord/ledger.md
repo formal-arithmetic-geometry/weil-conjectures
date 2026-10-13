@@ -10976,3 +10976,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:42 L: merged deliver/V4/Sheaf.AlgebraicGeometry.ConnectiveRankOneModelStalk (stage 3; reviewer PASS; first push; landing 20261013T034214-L-3768681 (interface); batch 20261013T034159; modules 3; new nodes 2)
 - 03:42 L: merged deliver/W4/Sheaf.CategoryTheory.SecondFiltrationIncomingRowCover (stage 3; reviewer PASS; first push; landing 20261013T034214-L-3768831 (proof); batch 20261013T034159; modules 1; new nodes 0)
 - 03:43 L: returned deliver/G4/Sheaf.AlgebraicGeometry.CoherentKernelIntersectionFiniteType (reviewer RETURN: (reviewer X-ec0d2, head ec0d2d200) the reviewer passed it, but the landing failed: vOver: same statement as AlgebraicGeo)
+- 03:45 L: returned deliver/F2/Sheaf.AlgebraicGeometry.AffinePushoutModuleSectionPresentation (reviewer RETURN: (reviewer X-39112, head 3911225c9) H2: In dag/nodes/sec-proper-base-change/lem-weil-pbc-affine-pushout-module-section-pr)
