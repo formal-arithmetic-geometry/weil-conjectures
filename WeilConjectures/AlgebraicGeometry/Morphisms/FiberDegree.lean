@@ -62,13 +62,18 @@ of its ring of global sections.
 - `AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq`,
   `AlgebraicGeometry.Scheme.Hom.finrank_eq_of_fiberDegree_eq`: a finite morphism of finite
   presentation to a reduced scheme with constant fibre degree `n` is flat of rank `n`.
+- `AlgebraicGeometry.Scheme.Hom.eventually_fiberDegree_le`: the fibre degree of a finite morphism
+  is upper semicontinuous.
+- `AlgebraicGeometry.Scheme.Hom.flat_of_fiberDegree_eq_of_isClosed`,
+  `AlgebraicGeometry.Scheme.Hom.finrank_eq_of_fiberDegree_eq_of_isClosed`: over a reduced Jacobson
+  scheme it suffices that the fibres over closed points have degree `n`.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits TensorProduct
+open CategoryTheory Limits TensorProduct Topology
 
 namespace AlgebraicGeometry
 
@@ -609,6 +614,17 @@ theorem fiberDegree_eq_finrankΓ {G : Scheme.{u}} (f : G ⟶ Spec (.of K)) [IsAf
   rw [← e'.toLinearEquiv.finrank_eq]
   exact Module.finrank_baseChange
 
+
+/-- The order of a finite scheme over a field is invariant under extension of the base field:
+for an affine `f : G ⟶ Spec K` and a field `L` over `K`, the base change `G_L ⟶ Spec L` has
+`dim_L Γ(G_L, 𝒪) = dim_K Γ(G, 𝒪)`. -/
+theorem Scheme.Hom.finrankΓ_pullback_snd {G : Scheme.{u}} (f : G ⟶ Spec (.of K)) [IsAffineHom f]
+    {L : Type u} [Field L] (g : Spec (.of L) ⟶ Spec (.of K)) :
+    (pullback.snd f g).finrankΓ = f.finrankΓ := by
+  obtain ⟨x⟩ : Nonempty (Spec (.of L)) := inferInstance
+  rw [← fiberDegree_eq_finrankΓ _ x, Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback f g),
+    fiberDegree_eq_finrankΓ]
+
 end Field
 
 section GenericPoint
@@ -770,6 +786,106 @@ theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq (h : ∀ y, f.fiberDegree y = n)
     fun y ↦ (Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y).trans (h _)).2 y
 
 end FlatOfFiberDegree
+
+section ClosedPoints
+
+variable {X Y : Scheme.{u}}
+
+/-- The affine case of `AlgebraicGeometry.Scheme.Hom.eventually_fiberDegree_le`, which reduces
+to `Module.exists_finrank_fiber_le`. -/
+private lemma Scheme.Hom.exists_fiberDegree_le_of_affine {R : CommRingCat.{u}} (f : X ⟶ Spec R)
+    [IsAffine X] [IsFinite f] (y : Spec R) :
+    ∃ a ∉ y.asIdeal, ∀ z : Spec R, a ∉ z.asIdeal → f.fiberDegree z ≤ f.fiberDegree y := by
+  wlog hX : ∃ S, X = Spec S generalizing X
+  · obtain ⟨a, hay, ha⟩ := this (X.isoSpec.inv ≫ f) ⟨_, rfl⟩
+    refine ⟨a, hay, fun z hz ↦ ?_⟩
+    simpa only [Scheme.Hom.fiberDegree_comp_left_of_isIso] using ha z hz
+  obtain ⟨S, rfl⟩ := hX
+  obtain ⟨φ, rfl⟩ := Spec.map_surjective f
+  simp only [IsFinite.SpecMap_iff] at *
+  algebraize [φ.hom]
+  have e : φ = CommRingCat.ofHom (algebraMap R S) := rfl
+  obtain ⟨a, hay, ha⟩ := Module.exists_finrank_fiber_le (R := R) (M := S) y.asIdeal
+  refine ⟨a, hay, fun z hz ↦ ?_⟩
+  rw [e, Scheme.Hom.fiberDegree_SpecMap, Scheme.Hom.fiberDegree_SpecMap]
+  exact ha z.asIdeal hz
+
+variable (f : X ⟶ Y) [IsFinite f]
+
+/-- **Upper semicontinuity of the fibre degree.** The fibre degree of a finite morphism `f` does
+not increase near a point: `f.fiberDegree y' ≤ f.fiberDegree y` for all `y'` near `y`. -/
+theorem Scheme.Hom.eventually_fiberDegree_le (y : Y) :
+    ∀ᶠ y' in 𝓝 y, f.fiberDegree y' ≤ f.fiberDegree y := by
+  obtain ⟨R, g, _, y, rfl⟩ := Y.exists_Spec_apply_eq y
+  have : IsAffine (pullback f g) := isAffine_of_isAffineHom (pullback.snd f g)
+  obtain ⟨a, hay, ha⟩ := (pullback.snd f g).exists_fiberDegree_le_of_affine y
+  have hD : IsOpen (X := Spec R) {z | a ∉ z.asIdeal} := (PrimeSpectrum.basicOpen a).isOpen
+  refine Filter.mem_of_superset ((g.isOpenEmbedding.isOpenMap _ hD).mem_nhds ⟨y, hay, rfl⟩) ?_
+  rintro _ ⟨z, hz, rfl⟩
+  change f.fiberDegree (g z) ≤ f.fiberDegree (g y)
+  rw [← Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) z,
+    ← Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback _ _) y]
+  exact ha z hz
+
+variable [JacobsonSpace Y] {n : ℕ}
+
+/-- Let `f` be a finite morphism to a Jacobson scheme (for example a scheme locally of finite
+type over a field). If the fibres of `f` over all closed points have degree `n`, then all fibres
+of `f` have degree `n`. By `AlgebraicGeometry.Scheme.Hom.eventually_fiberDegree_le`, the fibre
+degree at a point `y` is at most the fibre degree at any closed specialisation of `y`, and at
+least the fibre degree at the closed points of `closure {y}` near `y`, which exist since `Y` is
+Jacobson. -/
+theorem Scheme.Hom.fiberDegree_eq_of_forall_isClosed
+    (h : ∀ y : Y, IsClosed {y} → f.fiberDegree y = n) (y : Y) : f.fiberDegree y = n := by
+  apply le_antisymm
+  · obtain ⟨z, hz, hzc⟩ := nonempty_inter_closedPoints (Z := closure {y})
+      ⟨y, subset_closure rfl⟩ isClosed_closure.isLocallyClosed
+    rw [← h z hzc]
+    exact ((f.eventually_fiberDegree_le z).filter_mono
+      (specializes_iff_mem_closure.mpr hz)).self_of_nhds
+  · obtain ⟨U, hUy, hU, hyU⟩ := mem_nhds_iff.mp (f.eventually_fiberDegree_le y)
+    obtain ⟨z, ⟨hzU, -⟩, hzc⟩ := nonempty_inter_closedPoints (Z := U ∩ closure {y})
+      ⟨y, hyU, subset_closure rfl⟩ (hU.isLocallyClosed.inter isClosed_closure.isLocallyClosed)
+    rw [← h z hzc]
+    exact hUy hzU
+
+variable [LocallyOfFinitePresentation f] [IsReduced Y]
+
+/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+are flat.
+
+A finite morphism `f : X ⟶ Y` of finite presentation to a reduced Jacobson scheme (for example
+a reduced scheme of finite type over a field), whose fibres over all closed points of `Y` have
+the same degree `n`, is flat. -/
+theorem Scheme.Hom.flat_of_fiberDegree_eq_of_isClosed
+    (h : ∀ y : Y, IsClosed {y} → f.fiberDegree y = n) : Flat f :=
+  f.flat_of_fiberDegree_eq (f.fiberDegree_eq_of_forall_isClosed h)
+
+/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+are flat.
+
+A finite morphism `f : X ⟶ Y` of finite presentation to a reduced Jacobson scheme, whose fibres
+over all closed points of `Y` have the same degree `n`, is finite flat of rank `n`: `f_* 𝒪_X` is
+locally free of rank `n`. -/
+theorem Scheme.Hom.finrank_eq_of_fiberDegree_eq_of_isClosed
+    (h : ∀ y : Y, IsClosed {y} → f.fiberDegree y = n) (y : Y) : f.finrank y = n :=
+  f.finrank_eq_of_fiberDegree_eq (f.fiberDegree_eq_of_forall_isClosed h) y
+
+omit [LocallyOfFinitePresentation f] [IsReduced Y] in
+/-- Blueprint `lem-sc-finite-constant-length-flat`: Finite morphisms with constant fibre length
+are flat (degree part).
+
+If a finite morphism `f : X ⟶ Y` from an integral scheme to a Jacobson scheme has all fibres
+over closed points of degree `n`, then the degree `[κ(η) : κ(f η)]` of the residue field
+extension at the generic point `η` of `X` is `n`; for `f` dominant and `Y` integral this is the
+degree `[k(X) : k(Y)]` of the extension of function fields. -/
+theorem Scheme.Hom.finrank_residueField_genericPoint_of_fiberDegree_eq_of_isClosed
+    [IsIntegral X] (h : ∀ y : Y, IsClosed {y} → f.fiberDegree y = n) :
+    letI := (f.residueFieldMap (genericPoint X)).hom.toAlgebra
+    Module.finrank (Y.residueField (f (genericPoint X))) (X.residueField (genericPoint X)) = n :=
+  f.finrank_residueField_genericPoint_of_fiberDegree_eq (f.fiberDegree_eq_of_forall_isClosed h)
+
+end ClosedPoints
 
 section FiniteLocallyFree
 

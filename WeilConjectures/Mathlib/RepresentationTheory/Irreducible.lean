@@ -17,10 +17,10 @@ The constituents of a finite-dimensional representation are the irreducible succ
 quotients of a composition series, counted with multiplicity; equivalently, by Jordan-Hölder,
 the irreducible subquotients. Irreducibility itself is `Representation.IsIrreducible`.
 
-`Representation.IsConstituent` forgets the multiplicity, being a `Prop`. Recording it would
-need the Jordan-Hölder multiset of composition factors of a finite-dimensional
-representation, which Mathlib does not have; it is what the rank `N_γ` and the weight sum
-`B_γ` of blueprint `sk-d-real-detweights` are sums over.
+`Representation.IsConstituent` forgets the multiplicity, being a `Prop`. Invariants of the
+composition factors counted with multiplicity are recorded by
+`Subrepresentation.factorMultiset` (in `WeilConjectures.RepresentationTheory.CompositionFactors`);
+the rank `N_γ` and the weight sum `B_γ` of blueprint `sk-d-real-detweights` are sums over it.
 
 ## Main definitions
 
