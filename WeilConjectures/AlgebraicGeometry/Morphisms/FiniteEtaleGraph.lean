@@ -67,7 +67,7 @@ theorem Scheme.eq_of_comp_eq_of_isLocalHom {B Ω : Type u} [CommRing B] [IsLocal
   have hv := IsOpenImmersion.lift_fac _ _ hrange =≫ pullback.snd f f
   simp only [Category.assoc, pullback.diagonal_fst, pullback.diagonal_snd, Category.comp_id,
     pullback.lift_fst, pullback.lift_snd] at hu hv
-  rw [← hu, ← hv]
+  exact hu.symm.trans hv
 
 /-- A section of an étale separated morphism is both an open and a closed immersion. -/
 lemma Scheme.isOpenImmersion_and_isClosedImmersion_of_comp_eq_id {X Y : Scheme.{u}}
@@ -93,9 +93,9 @@ image of its graph `(a, 𝟙 U) : U ⟶ V ×_Y U`.
 theorem Scheme.exists_equiv_isClopen_graph {U V Y : Scheme.{u}} (p : U ⟶ Y) (q : V ⟶ Y)
     [IsFinite q] [Etale q] :
     ∃ e : {a : U ⟶ V // a ≫ q = p} ≃
-        {W : (pullback q p).Opens // IsClosed (W : Set (pullback q p)) ∧
+        {W : (pullback q p).Opens // IsClosed (W : Set ↥(pullback q p)) ∧
           IsIso (W.ι ≫ pullback.snd q p)},
-      ∀ a, ((e a).1 : Set (pullback q p)) = Set.range (pullback.lift a.1 (𝟙 U)
+      ∀ a, ((e a).1 : Set ↥(pullback q p)) = Set.range (pullback.lift a.1 (𝟙 U)
         (by rw [a.2, Category.id_comp])).base := by
   let s (a : {a : U ⟶ V // a ≫ q = p}) : U ⟶ pullback q p :=
     pullback.lift a.1 (𝟙 U) (by rw [a.2, Category.id_comp])
@@ -105,7 +105,7 @@ theorem Scheme.exists_equiv_isClopen_graph {U V Y : Scheme.{u}} (p : U ⟶ Y) (q
     have := (hs' a).1
     rw [IsIso.eq_inv_iff, ← Category.assoc, Scheme.Hom.isoOpensRange_hom_ι, hs]
   let toFun (a : {a : U ⟶ V // a ≫ q = p}) : {W : (pullback q p).Opens //
-      IsClosed (W : Set (pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)} := by
+      IsClosed (W : Set ↥(pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)} := by
     refine ⟨@Scheme.Hom.opensRange _ _ (s a) (hs' a).1, ?_, ?_⟩
     · have := (hs' a).2
       exact (s a).isClosedEmbedding.isClosed_range
@@ -115,14 +115,14 @@ theorem Scheme.exists_equiv_isClopen_graph {U V Y : Scheme.{u}} (p : U ⟶ Y) (q
         Scheme.Hom.isoOpensRange_hom_ι, hs]
       infer_instance
   let invFun (W : {W : (pullback q p).Opens //
-      IsClosed (W : Set (pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)}) :
+      IsClosed (W : Set ↥(pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)}) :
       {a : U ⟶ V // a ≫ q = p} := by
     have := W.2.2
     refine ⟨inv (W.1.ι ≫ pullback.snd q p) ≫ W.1.ι ≫ pullback.fst q p, ?_⟩
     rw [Category.assoc, Category.assoc, pullback.condition, ← Category.assoc W.1.ι,
       IsIso.inv_hom_id_assoc]
   have hinvs (W : {W : (pullback q p).Opens //
-      IsClosed (W : Set (pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)}) :
+      IsClosed (W : Set ↥(pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)}) :
       s (invFun W) = inv (W.1.ι ≫ pullback.snd q p) ≫ W.1.ι := by
     have := W.2.2
     apply pullback.hom_ext
