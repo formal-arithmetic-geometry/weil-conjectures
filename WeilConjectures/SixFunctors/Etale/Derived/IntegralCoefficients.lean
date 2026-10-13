@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsQuotientDerived
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 /-!
@@ -117,6 +118,26 @@ def IsDerivedBaseChange {K : 𝐃(X, Λ)} {K' : 𝐃(X, Λ')}
     (η : K ⟶ (derivedRestrictScalars φ X).obj K') : Prop :=
   ∀ N : 𝐃(X, Λ'), Function.Bijective fun g : K' ⟶ N ↦ η ≫ (derivedRestrictScalars φ X).map g
 
+/-- A derived base change is unique: if `η : K ⟶ R K'` is universal among morphisms from `K` to
+objects in the image of a right adjoint `R` of `F`, then `K' ≅ F K`, compatibly with `η` and the
+unit of the adjunction. -/
+lemma exists_iso_of_adjunction_of_bijective {C D : Type*} [Category* C] [Category* D]
+    {F : C ⥤ D} {R : D ⥤ C} (adj : F ⊣ R) {K : C} {K' : D} (η : K ⟶ R.obj K')
+    (hη : ∀ N : D, Function.Bijective fun g : K' ⟶ N ↦ η ≫ R.map g) :
+    ∃ e : F.obj K ≅ K', adj.unit.app K ≫ R.map e.hom = η := by
+  obtain ⟨h, hh⟩ := (hη (F.obj K)).2 (adj.unit.app K)
+  let g : F.obj K ⟶ K' := (adj.homEquiv K K').symm η
+  have hg : adj.unit.app K ≫ R.map g = η := by
+    rw [← Adjunction.homEquiv_unit, Equiv.apply_symm_apply]
+  refine ⟨⟨g, h, ?_, ?_⟩, hg⟩
+  · apply (adj.homEquiv _ _).injective
+    simp only [Adjunction.homEquiv_unit, Functor.map_comp, Functor.map_id, Category.comp_id]
+    rw [reassoc_of% hg]
+    exact hh
+  · apply (hη K').1
+    simp only [Functor.map_comp, Functor.map_id, Category.comp_id]
+    rw [reassoc_of% hh, hg]
+
 end RestrictScalars
 
 variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ)
@@ -201,8 +222,19 @@ theorem nonempty_iso_reductionModIdeal_derivedHom (n : ℕ) {K L : 𝐃(X, Λ)}
     Nonempty ((reductionModIdeal Λ X (I ^ n)).obj
         (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L) ≅
       (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj
-        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) :=
-  sorry
+        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) := by
+  let adj := derivedExtendScalarsAdjunction (I ^ n) X
+  obtain ⟨eK, -⟩ := exists_iso_of_adjunction_of_bijective adj η hη
+  obtain ⟨eL, -⟩ := exists_iso_of_adjunction_of_bijective adj η' hη'
+  obtain ⟨eR⟩ := nonempty_iso_restrictScalars_leftDerived_obj (I ^ n) X L
+  subst hI
+  obtain ⟨e₁⟩ := nonempty_iso_reductionModIdeal_derivedHom_obj hϖ n K L
+  exact ⟨e₁ ≪≫ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso
+      (eR.symm ≪≫ (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) X).mapIso
+        eL) ≪≫
+    (derivedHomCompIsoOfAdjunction adj K).app Ln ≪≫
+    (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) X).mapIso
+      (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) X).mapIso eK.op).app Ln)⟩
 
 include hϖ hI in
 /-- Blueprint `lem-coef-integral-hom-reduction`: Integral internal Hom and reduction.

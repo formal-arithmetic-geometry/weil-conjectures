@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GeometricGenericHom
 public import WeilConjectures.SixFunctors.Etale.Derived.PointBiduality
 
 /-!
-# The double dual on a geometric generic fibre 
+# The double dual on a geometric generic fibre
 
 For `p : X ⟶ 𝔸¹_k` with geometric generic fibre `g : X_η̄ ⟶ X`, `g^* ω_X ≅ ω_{X_η̄}(1)[2]`
 Zariski locally on `X`, and `g^* δ_K` is an isomorphism if and only if `δ_{g^* K}` is

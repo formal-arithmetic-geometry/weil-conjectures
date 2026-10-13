@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Biduality
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsQuotientDerived
 
 /-!
@@ -78,6 +79,50 @@ noncomputable abbrev coefficientChange (X : Scheme.{u}) : 𝐃(X, Λ) ⥤ 𝐃(X
 
 variable [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
 
+/-- A quotient of a finite ring is finite. -/
+instance finite_quotient : Finite (Λ ⧸ J) :=
+  Finite.of_surjective _ Ideal.Quotient.mk_surjective
+
+/-- Derived extension of scalars along `Λ ⟶ Λ ⧸ J` preserves Tor amplitude in `[p, q]`: the Tor
+amplitude of `K ⊗ᴸ_Λ B` over `B` is computed by `(K ⊗ᴸ_Λ B) ⊗ᴸ_B N = K ⊗ᴸ_Λ N` for `B`-modules
+`N`. This is the preservation of the Tor interval by scalar extension used in the blueprint
+proof of `cor-coef-finite-verdier`. -/
+theorem torAmplitudeIn_coefficientChange {X : Scheme.{u}} (p q : ℤ) {K : 𝐃(X, Λ)}
+    (hK : torAmplitudeIn (ModuleCat.{u + 1} Λ) X p q K) :
+    torAmplitudeIn (ModuleCat.{u + 1} (Λ ⧸ J)) X p q ((coefficientChange J X).obj K) :=
+  sorry
+
+/-- Derived extension of scalars along `Λ ⟶ Λ ⧸ J` carries `Dctf(X, Λ)` to bounded
+constructible complexes. -/
+theorem boundedConstructible_coefficientChange {X : Scheme.{u}} {K : 𝐃(X, Λ)}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    boundedConstructible (ModuleCat.{u + 1} (Λ ⧸ J)) X ((coefficientChange J X).obj K) :=
+  sorry
+
+/-- Derived extension of scalars along `Λ ⟶ Λ ⧸ J` preserves `Dctf`. -/
+theorem constructibleFiniteTor_coefficientChange {X : Scheme.{u}} {K : 𝐃(X, Λ)}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    constructibleFiniteTor (ModuleCat.{u + 1} (Λ ⧸ J)) X ((coefficientChange J X).obj K) := by
+  obtain ⟨p, q, hpq⟩ := hK.2
+  exact ⟨boundedConstructible_coefficientChange J hK, p, q,
+    torAmplitudeIn_coefficientChange J p q hpq⟩
+
+/-- Derived extension of scalars commutes with derived pullback: `(f^* K)_B ≅ f^*(K_B)`, both
+being left adjoint to `Rf_* ∘ Res ≅ Res ∘ Rf_*`. -/
+theorem nonempty_iso_coefficientChange_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : 𝐃(Y, Λ)) :
+    Nonempty ((coefficientChange J X).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
+      (L((f)^*[ModuleCat.{u + 1} (Λ ⧸ J)])).obj ((coefficientChange J Y).obj K)) :=
+  sorry
+
+/-- The dualizing complex `ω_X = Ra^! Λ` lies in `Dctf(X, Λ)`: it is `𝔻_X Λ_X`, and the Verdier
+dual preserves `Dctf` (`lem-weil-verdier-preservation-strata`, applied to `Λ_X`). -/
+theorem constructibleFiniteTor_dualizingComplex [IsAlgClosed k] {X : Scheme.{u}}
+    (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
+    [HasCompactification a] :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (dualizingComplex (ModuleCat.{u + 1} Λ) a) :=
+  sorry
+
 /-- Blueprint `lem-coef-finite-direct-image`: Finite coefficient change for ordinary direct
 image.
 
@@ -91,19 +136,6 @@ theorem nonempty_iso_coefficientChange_rightDerivedLowerStar [IsSepClosed k]
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) T K) :
     Nonempty ((coefficientChange J X).obj ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) ≅
       (R((f)_*[ModuleCat.{u + 1} (Λ ⧸ J)])).obj ((coefficientChange J T).obj K)) :=
-  sorry
-
-/-- Blueprint `lem-coef-finite-closed-shriek`: Finite coefficient change for closed exceptional
-inverse image.
-
-For a closed immersion `i : Z ⟶ X` of schemes of finite type over an algebraically closed
-field `k` and `M ∈ Dctf(X, Λ)`, `(Ri^! M) ⊗ᴸ_Λ B ≅ Ri^!(M ⊗ᴸ_Λ B)` for `B = Λ ⧸ J`. -/
-theorem nonempty_iso_coefficientChange_rightDerivedUpperShriek [IsAlgClosed k]
-    {Z X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
-    [QuasiCompact aX] (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i] {M : 𝐃(X, Λ)}
-    (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :
-    Nonempty ((coefficientChange J Z).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj M) ≅
-      (R(i)^![ModuleCat.{u + 1} (Λ ⧸ J)]).obj ((coefficientChange J X).obj M)) :=
   sorry
 
 /-- Blueprint `lem-coef-finite-dualizing`: Finite coefficient change for the dualizing object.
@@ -149,8 +181,12 @@ theorem nonempty_iso_coefficientChange_verdierDual [IsAlgClosed k] {X : Scheme.{
         torAmplitudeIn (ModuleCat.{u + 1} (Λ ⧸ J)) X p q ((coefficientChange J X).obj K) ∧
         torAmplitudeIn (ModuleCat.{u + 1} (Λ ⧸ J)) X (-q - 2 * (d : ℤ)) (-p)
           ((verdierDual (ModuleCat.{u + 1} (Λ ⧸ J)) a).obj
-            (op ((coefficientChange J X).obj K))) :=
-  sorry
+            (op ((coefficientChange J X).obj K))) := by
+  refine ⟨?_, fun d hd p q hpq ↦ ?_⟩
+  · sorry
+  · have h := torAmplitudeIn_coefficientChange J p q hpq
+    exact ⟨h, torAmplitudeIn_verdierDual (Λ ⧸ J) a d hd p q
+      (boundedConstructible_coefficientChange J hK) h⟩
 
 /-- Blueprint `lem-coef-finite-exceptional`: Finite exceptional inverse image and coefficient
 change, the description through Verdier duality.
@@ -181,8 +217,36 @@ theorem nonempty_iso_coefficientChange_rightDerivedUpperShriek_of_isSeparated [I
     (hf : f ≫ aY = aX) [HasCompactification f] {L : 𝐃(Y, Λ)}
     (hL : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
     Nonempty ((coefficientChange J X).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj L) ≅
-      (R(f)^![ModuleCat.{u + 1} (Λ ⧸ J)]).obj ((coefficientChange J Y).obj L)) :=
-  sorry
+      (R(f)^![ModuleCat.{u + 1} (Λ ⧸ J)]).obj ((coefficientChange J Y).obj L)) := by
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_verdierDual_comp (k := k) aX aY f hf hL
+  have hD : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      ((L((f)^*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L))) :=
+    constructibleFiniteTor_leftDerivedUpperStar _ f (constructibleFiniteTor_verdierDual Λ aY hL)
+  obtain ⟨e₂⟩ := (nonempty_iso_coefficientChange_verdierDual J aX hD).1
+  obtain ⟨e₃⟩ := nonempty_iso_coefficientChange_leftDerivedUpperStar J f
+    ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L))
+  obtain ⟨e₄⟩ := (nonempty_iso_coefficientChange_verdierDual J aY hL).1
+  obtain ⟨e₅⟩ := nonempty_iso_rightDerivedUpperShriek_verdierDual_comp (Λ := Λ ⧸ J) (k := k)
+    aX aY f hf (constructibleFiniteTor_coefficientChange J hL)
+  exact ⟨(coefficientChange J X).mapIso e₁ ≪≫ e₂ ≪≫
+    (verdierDual (ModuleCat.{u + 1} (Λ ⧸ J)) aX).mapIso
+      (e₃ ≪≫ (L((f)^*[ModuleCat.{u + 1} (Λ ⧸ J)])).mapIso e₄).symm.op ≪≫ e₅.symm⟩
+
+/-- Blueprint `lem-coef-finite-closed-shriek`: Finite coefficient change for closed exceptional
+inverse image.
+
+For a closed immersion `i : Z ⟶ X` of schemes of finite type over an algebraically closed
+field `k` and `M ∈ Dctf(X, Λ)`, `(Ri^! M) ⊗ᴸ_Λ B ≅ Ri^!(M ⊗ᴸ_Λ B)` for `B = Λ ⧸ J`. -/
+theorem nonempty_iso_coefficientChange_rightDerivedUpperShriek [IsAlgClosed k]
+    {Z X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
+    [QuasiCompact aX] (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i] {M : 𝐃(X, Λ)}
+    (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :
+    Nonempty ((coefficientChange J Z).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj M) ≅
+      (R(i)^![ModuleCat.{u + 1} (Λ ⧸ J)]).obj ((coefficientChange J X).obj M)) := by
+  have : HasCompactification aX := inferInstance
+  have := HasCompactification.of_isClosedImmersion i aX
+  exact nonempty_iso_coefficientChange_rightDerivedUpperShriek_of_isSeparated (k := k) J
+    (i ≫ aX) aX i rfl hM
 
 end Etale
 
