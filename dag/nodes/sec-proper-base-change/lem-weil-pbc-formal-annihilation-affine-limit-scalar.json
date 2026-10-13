@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-formal-annihilation-affine-limit-scalar",
+ "kind": "statement",
+ "title": "Scalar reverse maps on affine inverse limits",
+ "statement": "For the affine section map of coherent formal modules, every pair of scalars in K(U)^t admits a linear reverse map on inverse limits whose two composites are multiplication by their product.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 0888, final paragraph"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Construct componentwise lift maps and pass to the inverse limit using compatibility and joint monicity of projections.",
+   "uses": [
+    "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 0888"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit linear map scalar reverse maps",
+   "results": "ModuleCat.limitπLinearMap, Hausdorffification.lift, InverseSystem.invLimEquiv_symm_apply_coe, AdicCompletion.eval_lift_apply, AdicCompletion.eval_lift, AdicCompletion.transitionMap_comp_eval, Module.DirectLimit.congr_symm_apply_of, AdicCompletion.lift",
+   "date": "2026-10-13",
+   "verdict": "hits: 8"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit",
+   "results": "CategoryTheory.Limits.limit, CategoryTheory.Limits.limit.cone_x, CategoryTheory.Limits.limit.π, CategoryTheory.Limits.limit.lift, CategoryTheory.Limits.limit.isoLimitCone, CategoryTheory.Limits.lim_obj, CategoryTheory.Limits.limit.homIso, CategoryTheory.Limits.HasLimit.isoOfNatIso",
+   "date": "2026-10-13",
+   "verdict": "hits: 12"
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*map.*LinearMap",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "hits: 0"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse limit scalar composite linear map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "Codex",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedLimit",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-annihilation-affine-limit",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedLimitScalar",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleAnnihilatedLimitScalar.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_affine_limit_scalar_composites",
+  "statement": "theorem coherentFormalModule_affine_limit_scalar_composites\n    (X : Scheme.{u}) [IsNoetherian X] (I K : X.IdealSheafData)\n    (F G : CoherentFormalModule X I) (α : F ⟶ G) (t : ℕ) (ht : 1 ≤ t)\n    (h : ∀ n : ℕ,\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n        (kernel (α.hom.app (op n)))) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n        (cokernel (α.hom.app (op n))))) (U : X.affineOpens) :\n    ∀ (f g : Γ(X, U.1)), f ∈ K.ideal U ^ t → g ∈ K.ideal U ^ t →\n      ∃ k : affineLimitModule X I G U →ₗ[Γ(X, U.1)] affineLimitModule X I F U,\n        k.comp (lim.map (Functor.whiskerRight α.hom\n          (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom =\n          (f * g) • (LinearMap.id : affineLimitModule X I F U →ₗ[Γ(X, U.1)]\n            affineLimitModule X I F U) ∧\n        (lim.map (Functor.whiskerRight α.hom\n          (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom.comp k =\n          (f * g) • (LinearMap.id : affineLimitModule X I G U →ₗ[Γ(X, U.1)]\n            affineLimitModule X I G U)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T015610-L-3025811",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T015610-L-3025811",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

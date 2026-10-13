@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.RingTheory.Ideal.Operations
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedLimitScalar
+import Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal
 
 /-! # From termwise annihilation to annihilation of an affine limit
 
@@ -55,6 +57,10 @@ theorem coherentFormalModule_annihilated_affine_limit
       (↥(limit (G.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op U.1)) :
         ModuleCat Γ(X, U.1)) ⧸ LinearMap.range
         (lim.map (Functor.whiskerRight α.hom
-          (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom) := by sorry
+          (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom) := by
+  let v := (lim.map (Functor.whiskerRight α.hom
+    (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom
+  have hv := coherentFormalModule_affine_limit_scalar_composites X I K F G α t ht h U
+  simpa [v] using LinearMap.annihilated_of_scalar_composites (K.ideal U) t v hv
 
 end AlgebraicGeometry
