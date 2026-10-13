@@ -14,49 +14,37 @@
  ],
  "proof": [
   {
-   "text": "On W intersect V the map j is an isomorphism. Use it as the identification between E on V and H restricted to W. The two-open cocycle follows from the inverse identities. Apply module-object descent on W union V to glue these modules.",
+   "text": "Use the concrete pullback binarySubmodule with Q = E and iota = j. Its first projection binarySubmoduleInclusion is a map from the pullback module G to H restricted to W union V. No arbitrary existence witness is used.",
    "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "def-weil-pbc-module-binary-submodule-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
-   }
+   "elementary": true
   },
   {
-   "text": "The identity map to H on W and j on V agree on the overlap by the chosen identification. Morphism descent glues them to a map phi from the glued module G to H restricted to W union V. Its restriction to W is the gluing identification and hence is an isomorphism.",
+   "text": "Apply binarySubmodule_restrictions: the overlap isomorphism hypothesis gives an isomorphism for the first projection on W, and an isomorphism from the restriction of G on V to E. This lemma has no monomorphism or finiteness hypotheses. Compose the isomorphism on W with overFunctorMap to identify G restricted to W with H restricted to W.",
    "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules"
+    "lem-weil-pbc-module-submodule-binary-gluing-restrictions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
-   }
+   "elementary": true
   },
   {
-   "text": "Finite presentation is local and invariant under isomorphism: transport the finite local presentations of H restricted to W and of E along the gluing identifications, and combine their covering families. This yields a finite local presentation of G. Neither compactness nor quasi-coherence is needed in this step.",
+   "text": "Transport finite presentation through the two local isomorphisms using the isFinitePresentation object property. The proved private helper finitePresentation_binary_local identifies overMap restriction with iterated over restriction using Over.iteratedSliceEquiv, whose topology is transported by the defining membership formula for the slice topology. Finite presentation is preserved by the resulting equivalence by the proved source-library lemma isFinitePresentation_pushforward_of_isLeftAdjoint. The ULift Bool family of the two opens covers the union: for each point of an open T contained in the union, choose T intersect W or T intersect V according to its membership. Apply the proved source-library lemma IsFinitePresentation.of_coversTop to this family, yielding finite presentation of G. Return G, its first projection, and the already proved isomorphism on W.",
    "uses": [
     "def-weil-pbc-module-finite-type-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-module-binary-submodule-pullback",
   "def-weil-pbc-module-finite-type-presentation",
-  "lem-weil-pbc-glue-sheaves-of-modules",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+  "lem-weil-pbc-module-submodule-binary-gluing-restrictions"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+  "by": "agent",
+  "agent": "D4",
+  "date": "2026-10-13",
+  "note": "Concrete pullback route for the gluing paragraph of Stacks 01PI; reuses the proved binary restriction lemma and the proved source-library finite-presentation locality and equivalence transport lemmas. The source was read at https://stacks.math.columbia.edu/tag/01PI and https://stacks.math.columbia.edu/tag/00AK."
  },
  "mathlib_searches": [
   {
@@ -137,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "X-59957",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T100015-L-2465275",
+  "landing": "20261013T120801-L-3469876",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature to its node, the proof to its recorded dependencies, and the node edits to the permitted fields; delivered module and direct importer compile cleanly, and both proved declarations use only the three permitted axioms."
  }
 }
