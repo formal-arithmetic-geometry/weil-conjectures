@@ -14,26 +14,36 @@
  ],
  "proof": [
   {
-   "text": "The projection equations identify j with the fibre-product comparison.\nExpand the unit morphism as the ordinary adjoint transpose of its degree-zero\nmorphism. Expand the derived restriction as conjugation by derived composition.\nAssociativity of exists_derivedPullbackComposition identifies the two paths from\nLfibre^* Lt^* to the pullback for t'. Expand the base-change maps as transposes of\nthe pulled-back counit. The triangle identities and naturality of the derived\nadjunction cancel the intervening unit and counit; thus successive base change\nis the mate of the composite square. Apply canonicalSinglePullbackSquare to the\nstructure-sheaf comparison to transport its source through this equality. Apply\nH^0 and canonicalDegreeZeroMateSquare to identify the resulting mate with the\nordinary one. Naturality of the degree-zero direct-image comparison transports\nthe coefficient morphism through H^0. Transpose by the ordinary adjunction on the\nfibre product. Uniqueness of the left-adjoint comparisons identifies the tensor\ncoefficient map with c.inv and the source comparison with leftAdjointUniq followed\nby pullbackObjUnitToUnit, giving the displayed module morphism equality. This\nuses no invertibility of L or base-change map, nor any flatness, properness or\nnonempty-space condition; identity maps, zero modules and empty schemes are covered.",
+   "text": "Rewrite the derived transpose at t and tprime by its single-module description. Apply its successive base-change pasting equation, then canonicalSinglePullbackSquare to u_p followed by n_t. Naturality of the single-pullback comparison moves the pulled-back source-unit map across the new fibre projection. Cancel the invertible source comparisons (only units are used) and use faithfulness of the single embedding to obtain the ordinary module square. The naturality helper follows by injectivity of the derived Hom equivalence, canonicalSingleAdjunctionTranspose and ordinary homEquiv naturality, without unfolding derived counits.",
    "uses": [
+    "lem-sc-picard-direct-image-derived-transpose-single",
+    "lem-sc-picard-direct-image-derived-transpose-pasting",
     "lem-pc-canonical-single-pullback-square",
-    "lem-pc-canonical-degree-zero-mate-square",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-module-pullback-adjunction"
+    "lem-pc-canonical-single-adjunction-transpose"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the ordinary structure-unit square. Cancel its invertible unit-map prefix, obtaining ordinary pullback compatibility of n. Naturality of the unique tensor-to-ordinary left-adjoint isomorphism, followed by its inverse law, converts the coefficient comparison to c.inv and gives exactly the unchanged displayed statement.",
+   "uses": [
+    "lem-sc-pullback-structure-unit-square",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-picard-direct-image-derived-transpose-single",
+  "lem-sc-picard-direct-image-derived-transpose-pasting",
   "lem-pc-canonical-single-pullback-square",
-  "lem-pc-canonical-degree-zero-mate-square",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-canonical-single-adjunction-transpose",
+  "lem-sc-pullback-structure-unit-square",
   "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 08HY and 0D5S; adjunction and the parent restriction calculation"
+  "place": "Tags 08HY and 0D5S; derived transpose pasting, ordinary unit square and tensor comparison naturality"
  },
  "mathlib_searches": [
   {
@@ -111,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "X-3a5f9",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T142851-L-495662",
+  "landing": "20261013T172658-L-2100781",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the recorded statements and dependencies; all files and the direct importer compiled cleanly."
  }
 }

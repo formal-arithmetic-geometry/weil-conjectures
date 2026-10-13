@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-pullback-structure-unit-square",
+ "kind": "statement",
+ "title": "pullbackStructureUnitSquare",
+ "statement": "Schemes and their morphisms are as in [def-pc-scheme]; modules are sheaves of structure-sheaf modules [def-weil-sheaf-of-modules-category]. Let $f:X\\to S$, $g:S\\prime\\to S$, $g\\prime:X\\prime\\to X$, $f\\prime:X\\prime\\to S\\prime$ be scheme morphisms with $g\\prime\\gg f=f\\prime\\gg g$. Let $c:g\\prime{}^*f^*\\mathcal O_S\\cong f\\prime{}^*g^*\\mathcal O_S$ be pullbackComp followed by pullbackCongr followed by inverse pullbackComp [def-pc-module-pullback]. For the canonical unit maps $u_a:a^*\\mathcal O\\to\\mathcal O$, one has $c^{-1}\\gg g\\prime{}^*(u_f)\\gg u_{g\\prime}=f\\prime{}^*(u_g)\\gg u_{f\\prime}$. This is an identity of ordinary module morphisms for any commutative square, without a cartesian, flatness, or nonemptiness condition.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 08HY; ordinary pullback structure-sheaf unit calculation"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Each pullbackObjUnitToUnit is the adjoint transpose of the ring-sheaf\n morphism sending 1 to 1. The inverse of pullbackComp is the conjugate of\n pushforward composition, so the composite adjunction identifies its unit\n comparison with successive pullback of these same ring-sheaf morphisms.\n Applying the Hom equivalence for the composite shows that pullbackComp\n followed by the composite unit comparison equals pullback of the first unit\n comparison followed by the second. Transport this identity along the square\n equality by equality elimination, and apply it to both paths. Cancel the\n common composite unit comparison to obtain the square. These are identities\n of ring and module maps and do not require a nonempty scheme or a nonzero ring.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 08HY and 0D5S; explicit adjunction and structure-sheaf comparison calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison from derived pullback to a single complex is natural and derived adjunction agrees with degree zero ordinary adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical structure sheaf pullback unit is compatible with composition and commutative squares",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.Modules.pullbackComp and structure-sheaf map composition lemmas; no complete square statement",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit|canonicalSinglePullbackMap|unit_conjugateEquiv",
+   "results": "9 hits: unit_conjugateEquiv and unit_conjugateEquiv_symm in Adjunction/Mates.lean; pullbackObjUnitToUnit and its transpose in Sheaf/PullbackFree.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDirectImageUnitMorphismPullback",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "parent proof step 2: canonical mates and evaluation give the successive-base-change equation",
+   "via": [
+    "lem-sc-picard-direct-image-unit-morphism-pullback",
+    "lem-sc-picard-direct-image-section-map-restriction",
+    "lem-sc-picard-direct-image-section-naturality",
+    "lem-sc-picard-direct-image-test-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackStructureUnitSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackStructureUnitSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullbackStructureUnitSquare",
+  "statement": "theorem pullbackStructureUnitSquare\n    {X S X' S' : Scheme.{v}} (f : X ⟶ S)\n    (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')\n    (h : g' ≫ f = f' ≫ g) :\n    let U := SheafOfModules.unit S.ringCatSheaf\n    let c := (pullbackComp g' f).app U ≪≫ (pullbackCongr h).app U ≪≫\n      ((pullbackComp f' g).app U).symm\n    c.inv ≫ (pullback g').map\n        (SheafOfModules.pullbackObjUnitToUnit f.toRingCatSheafHom) ≫\n        SheafOfModules.pullbackObjUnitToUnit g'.toRingCatSheafHom =\n      (pullback f').map (SheafOfModules.pullbackObjUnitToUnit g.toRingCatSheafHom) ≫\n        SheafOfModules.pullbackObjUnitToUnit f'.toRingCatSheafHom",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3a5f9",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T172658-L-2100781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3a5f9",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T172658-L-2100781",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the recorded statements and dependencies; all files and the direct importer compiled cleanly."
+ }
+}

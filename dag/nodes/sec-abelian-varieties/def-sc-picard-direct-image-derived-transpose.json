@@ -1,0 +1,104 @@
+{
+ "id": "def-sc-picard-direct-image-derived-transpose",
+ "kind": "definition",
+ "title": "picardDirectImageDerivedTranspose",
+ "statement": "Fix the shared derived categories [def-pc-derived-category]. Schemes and their morphisms are as in [def-pc-scheme]; modules are sheaves of structure-sheaf modules [def-weil-sheaf-of-modules-category]. Let $f:X\\to S$, $k:W\\to S$, $t:T\\to W$ be scheme morphisms, and $L$ an $\\mathcal O_X$-module. Set $X_T=X\\times_S T$, $X_W=X\\times_S W$, $p_t:X_T\\to T$, $M=(\\operatorname{tensorPullback}(X_W\\to X))(L)$ and $N_t=(\\operatorname{tensorPullback}(X_T\\to X))(L)$ [lem-pc-module-pullback-adjunction]. For a derived test morphism $\\xi:Lt^*(\\mathcal O_W[0])\\to Lt^*Rp_{W,*}(M[0])$ [def-sc-picard-derived-model-sections], let $a:X_T\\to X_W$ be the unique comparison with its prescribed projections. Let $B_t$ be the canonical derived base-change map [def-pc-derived-base-change-map] followed by $Rp_{t,*}$ of the canonical single-pullback comparison [lem-pc-canonical-single-pullback-comparison] and the coefficient isomorphism from $a^*M$ to $N_t$ induced by the tensor-pullback adjunctions. Let $e_t:Lt^*(\\mathcal O_W[0])\\cong\\mathcal O_T[0]$ be the single-pullback comparison followed by the structure-sheaf unit map. Define $\\alpha_t(\\xi):Lp_t^*(\\mathcal O_T[0])\\to N_t[0]$ as the inverse Hom equivalence of the pinned derived adjunction applied to $e_t^{-1}\\gg\\xi\\gg B_t$. All maps and objects are the actual constructions used in [def-sc-picard-direct-image-unit-morphism]; no fibre-unit normalization or degree-zero homology is applied.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 08HY and 0D5S; parent morphism calculation before evaluation"
+ },
+ "stmt_deps": [
+  "def-sc-picard-direct-image-unit-morphism",
+  "def-sc-picard-derived-model-sections",
+  "def-pc-derived-base-change-map",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-canonical-single-pullback-comparison",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 08HY and 0D5S; explicit adjunction and structure-sheaf comparison calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison from derived pullback to a single complex is natural and derived adjunction agrees with degree zero ordinary adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived base change mate respects composition of pullback squares and adjoint transposition",
+   "results": "8 hits, including CategoryTheory.mateEquiv_square and pullbackComp for sheaves of modules; no match for the pinned Picard construction",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit|canonicalSinglePullbackMap|unit_conjugateEquiv",
+   "results": "9 hits: unit_conjugateEquiv and unit_conjugateEquiv_symm in Adjunction/Mates.lean; pullbackObjUnitToUnit and its transpose in Sheaf/PullbackFree.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDirectImageUnitMorphismPullback",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "parent proof step 2: canonical mates and evaluation give the successive-base-change equation",
+   "via": [
+    "lem-sc-picard-direct-image-unit-morphism-pullback",
+    "lem-sc-picard-direct-image-section-map-restriction",
+    "lem-sc-picard-direct-image-section-naturality",
+    "lem-sc-picard-direct-image-test-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDirectImageDerivedTranspose",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDirectImageDerivedTranspose.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardDirectImageDerivedTranspose",
+  "statement": "def picardDirectImageDerivedTranspose {X S : Scheme.{v}} (f : X ⟶ S)\n    (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)\n    {T : Scheme.{v}} (t : T ⟶ W)\n    (ξ : picardDerivedModelSections\n      ((schemeDerivedDirectImage (pullback.snd f k)).obj\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n            ((Modules.tensorPullback (pullback.fst f k)).obj L))) t) :\n    (derivedPullback (pullback.snd f (t ≫ k))).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 0).obj\n          (SheafOfModules.unit (moduleRings T.toRingedSpace))) ⟶\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f (t ≫ k)).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f (t ≫ k))).obj L)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3a5f9",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T172658-L-2100781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3a5f9",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T172658-L-2100781",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the recorded statements and dependencies; all files and the direct importer compiled cleanly."
+ }
+}
