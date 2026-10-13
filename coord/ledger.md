@@ -11068,3 +11068,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: returned deliver/G3/Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherenceBase (reviewer RETURN: (the landing tools, head d020a98a3) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 04:55 L: returned deliver/H3/Sheaf.AlgebraicGeometry.PerfectCohomologyFromGeometric (reviewer RETURN: (the landing tools, head 9fc3df263) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 04:55 L: returned deliver/J1/Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent (reviewer RETURN: (the landing tools, head 2e27ec365) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 04:55 L: returned deliver/J2/Sheaf.AlgebraicGeometry.AnnihilatorStalkLocalLift (reviewer RETURN: (the landing tools, head 9ebfc7c51) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
