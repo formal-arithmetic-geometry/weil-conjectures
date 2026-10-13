@@ -10981,3 +10981,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:52 L: returned deliver/N1/Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource (reviewer RETURN: (reviewer X-c2414, head c241447eb) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Abeli)
 
 - 11:52 L: batch 20261013T034159 dependency take-out
+- 03:59 L: returned deliver/E2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (reviewer RETURN: (reviewer X-310b9, head 310b91a61) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
