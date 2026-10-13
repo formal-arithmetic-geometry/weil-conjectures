@@ -1,0 +1,177 @@
+{
+ "id": "lem-weil-pbc-ideal-power-quotient-local-lifting-section",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), through Cohomology of Schemes Lemma 01YB (lemma-homs-over-open) used by lem-weil-pbc-coherent-generic-point-ideal-inclusion: 'It is injective by Properties, Lemma 01PQ' and 'Hence by Properties, Lemma 01PQ we deduce that the top horizontal arrow ... is a bijection' (first part of the proof of 01YB); decomposition of 01PQ: Finite affine lifting and eventual vanishing for annihilator quotients",
+   "via": [
+    "lem-weil-pbc-ideal-power-quotient-local-lifting",
+    "lem-weil-pbc-sections-over-quasi-compact-open",
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local lifting of quotient sections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\iota:\\mathcal I\\hookrightarrow\\mathcal O_X$ a monomorphism of modules [def-weil-sheaf-of-modules-category], with $\\mathcal I$ quasi-coherent and of finite type [pqf-def-coherent]. Put $P_n=\\mathcal I^n$ with inclusion $j_n:P_n\\hookrightarrow\\mathcal O_X$ and $P_0=\\mathcal O_X$, using the recursive ideal powers of [lem-weil-pbc-ideal-module-product-stalk]. Assume $X$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], and let $\\mathcal F$ be quasi-coherent. Let $U\\subseteq X$ be open with $x\\in U$ if and only if $\\iota_x$ is surjective. Fix sections $1_n\\in P_n(U)$ with $j_n(1_n)=1$ and maps $r_{nm}:P_m\\to P_n$ for $n\\le m$ with $j_n r_{nm}=j_m$. For an $\\mathcal O_X$-module $\\mathcal F$ and any open $W$, say a section $s\\in\\mathcal F(W)$ is annihilated by $P_n$ if for every open $W\\prime\\subseteq W$ and every $b\\in P_n(W\\prime)$, the product $j_n(b)s|_{W\\prime}$ is zero. Fix quasi-coherent $A_n$, monomorphisms $a_n:A_n\\to\\mathcal F$ whose sectionwise images are exactly these annihilators, and assume every $\\pi_n(W):\\mathcal F(W)\\to Q_n(W)$ is bijective for $W\\subseteq U$, where $Q_n=\\operatorname{coker}(a_n)$ and $\\pi_n$ is the cokernel projection [def-weil-pbc-category-colimit]. Fix $q_{nm}:Q_n\\to Q_m$ with $q_{nm}\\pi_n=\\pi_m$ for $n\\le m$. Then every $s\\in\\mathcal F(U)$ has $\\pi_{n,U}(s)=\\varphi_U(1_n)$ for some $n$ and $\\varphi:P_n\\to Q_n$. No vanishing assertion, colimit, or diagram is part of this conclusion.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-weil-pbc-category-colimit",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open identify the finite type quasi-coherent ideal with a finitely generated ideal J=(f_1,...,f_t), and F with M~ via the affine tilde/Gamma equivalence. Finite generation makes annihilators of J^n commute with localization, so hann and monicity identify A_n with Ann_M(J^n)~, and the quasi-coherent cokernel-image theorem identifies Q_n with (M/Ann_M(J^n))~.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  },
+  {
+   "text": "Write s on D(f_i) as x_i/f_i^k, with k positive. On overlaps choose a common e with (f_i f_j)^e(f_j^k x_i-f_i^k x_j)=0; replace x_i by f_i^e x_i and k by k+e. Put d=t(k-1)+1 and K={x : every f_i^k x=0}. A monomial of degree d contains f_i^k. Send it to the monomial with that exponent lowered by k, times x_i, modulo K. Multiplying a relation between monomials by f_j^k gives the original relation times x_j, hence zero, so this defines J^d → M/K. The same monomial bound gives K⊆Ann_M(J^d), and thus a map J^d → M/Ann_M(J^d). On D(f_i) its value on f_i^d is f_i^(d-k)x_i, so evaluation is x_i/f_i^k, as required. For t=0 the complement is empty and a positive ideal power supplies the zero map.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  },
+  {
+   "text": "Choose a finite affine cover with quasi-compact overlaps and construct local lifts by the preceding affine calculation. Transport to a common degree using r and q. Their equations over the monic power inclusions and epic quotient projections imply identity and composition laws and preserve evaluation. On every affine member of a finite overlap cover the difference has zero evaluation into a quasi-coherent cokernel. Cokernel closure and ideal_power_evaluation_eventually_zero on that affine scheme kill the difference after restricting to a later ideal power; composition with q preserves zero. Choose one upper bound for all local and overlap degrees. The local homomorphisms agree and glue by glue_sheaves_of_modules; section uniqueness identifies evaluation with π_n(s). Empty schemes and empty complements use zero maps; the unit ideal uses the global section map in degree zero.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-weil-pbc-ideal-power-evaluation-eventually-zero",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-ideal-power-evaluation-eventually-zero",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of a quasi coherent module on the complement of a finite type ideal lift to a morphism from a power of the ideal into the quotient by the power annihilator",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extending a section on an open complement of a finitely generated ideal to a homomorphism from an ideal power into a module quotient by its annihilator",
+   "date": "2026-10-13",
+   "results": "['AdicCompletion.exists_smodEq_pow_add_one_smul', 'AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top', 'AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq', 'Module.exists_smul_eq_zero_and_mk_eq', 'Submodule.factorPowSucc', 'Submodule.exists_injOn_mkQ_image_span_eq_of_span_eq_map_mkQ_of_le_jacobson_bot', 'Ideal.powQuotSuccInclusion', 'Submodule.factorPow']",
+   "verdict": "No exact quotient-annihilator sheaf lifting statement. Localizations and adic quotient transitions do not give this section-lifting theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-13",
+   "results": "['SheafOfModules.IsQuasicoherent', 'SheafOfModules.instIsQuasicoherentOfIsFinitePresentation', 'SheafOfModules.QuasicoherentData.isQuasicoherent', 'SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData', 'SheafOfModules.IsQuasicoherent.mk', 'SheafOfModules.instIsQuasicoherentObjIsQuasicoherent', 'SheafOfModules.Presentation.isQuasicoherent', 'SheafOfModules.isQuasicoherent_over']",
+   "verdict": "No exact quotient-annihilator sheaf lifting statement. Localizations and adic quotient transitions do not give this section-lifting theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator|sections.*complement|ideal.*power",
+   "date": "2026-10-13",
+   "results": "[]",
+   "verdict": "No exact quotient-annihilator sheaf lifting statement. Localizations and adic quotient transitions do not give this section-lifting theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowerQuotientLiftingSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerQuotientLiftingSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ideal_power_quotient_local_lifting_section",
+  "statement": "theorem ideal_power_quotient_local_lifting_section\n    {X : Scheme.{u}} {I : X.Modules}\n    (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]\n    [I.IsQuasicoherent] [I.IsFiniteType] [CompactSpace X] [QuasiSeparatedSpace X]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Opens) (one : ∀ n : ℕ, Γ((idealSheafPower ι n).1, U))\n    (r : ∀ (n m : ℕ), n ≤ m →\n      ((idealSheafPower ι m).1 ⟶ (idealSheafPower ι n).1))\n    (hU : ∀ x : X, x ∈ U ↔ Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom)\n    (hone : ∀ n : ℕ, (idealSheafPower ι n).2.app U (one n) = (1 : Γ(X, U)))\n    (hr : ∀ (n m : ℕ) (h : n ≤ m),\n      r n m h ≫ (idealSheafPower ι n).2 = (idealSheafPower ι m).2)\n    (A : ℕ → X.Modules) (a : ∀ n : ℕ, A n ⟶ F)\n    (hmono : ∀ n : ℕ, Mono (a n))\n    (hqc : ∀ n : ℕ, (A n).IsQuasicoherent)\n    (hann : ∀ (n : ℕ) (W : X.Opens) (s : Γ(F, W)),\n      s ∈ Set.range ((a n).app W) ↔\n        ∀ (W' : X.Opens) (h : W' ≤ W)\n          (b : Γ((idealSheafPower ι n).1, W')),\n          (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom\n            (F.presheaf.map (homOfLE h).op s) = 0)\n    (hquot : ∀ (n : ℕ) (W : X.Opens), W ≤ U →\n      Function.Bijective ((cokernel.π (a n)).app W))\n    (q : ∀ (n m : ℕ), n ≤ m → (cokernel (a n) ⟶ cokernel (a m)))\n    (hq : ∀ (n m : ℕ) (h : n ≤ m),\n      cokernel.π (a n) ≫ q n m h = cokernel.π (a m)) :\n    ∀ s : Γ(F, U), ∃ (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ cokernel (a n)),\n      (cokernel.π (a n)).app U s = φ.app U (one n)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T054239-L-450076",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T054239-L-450076",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
