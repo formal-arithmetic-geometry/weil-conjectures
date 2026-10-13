@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-stalk-generic-open-pullback",
+ "kind": "statement",
+ "title": "The local generic fibre is the pullback of the boundary open",
+ "statement": "Let $S$ be an integral scheme and $c:C\\to S$ any morphism of schemes [def-weil-pbc-scheme-conventions]. Let $U\\subseteq S$ be open, and $s\\notin U$ such that every generalization $t$ of $s$ outside $U$ equals $s$. Suppose $A=\\mathcal O_{S,s}$ is a discrete valuation ring, meaning a local principal ideal domain which is not a field. Write $K=k(S)$ [def-sc-function-field], $a:\\operatorname{Spec}A\\to S$, $L=C\\times_S\\operatorname{Spec}A$, $d:L\\to\\operatorname{Spec}A$, $g:L\\to C$, $b:\\operatorname{Spec}K\\to\\operatorname{Spec}A$, and $L_K=L\\times_{\\operatorname{Spec}A}\\operatorname{Spec}K$ with projection $p:L_K\\to L$ [def-pc-fibre-product]. If $k:L_K\\to C_U$ satisfies $k i_U=p g$, then the square $(k,p,i_U,g)$ is cartesian. No hypothesis on smoothness or quasi-compactness of $c$ is needed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), trait paragraph and maximal-open local reduction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-function-field",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose an irreducible uniformizer pi of A=O_{S,s}. Every nonzero element is associated to a power of pi by associated_pow_irreducible. The function field K of S is a fraction field of A; iff_of_le_of_exists_dvd then makes K a localization away from pi. Hence Spec K to Spec A is an open immersion with image D(pi).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The span of pi is the maximal ideal. A prime contains pi exactly when it is the closed point, by maximality and properness. The map Spec A to S is injective and sends its closed point to s. Minimality says all the other points map into U. Thus the inverse image of U is D(pi), the image of Spec K.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pulling back the open immersion Spec K to Spec A makes L_K to L an open immersion. Its opensRange is the inverse image of D(pi) under L to Spec A. By the pullback condition this is the inverse image of C_U under L to C. The square specified by k and hk is cartesian by IsOpenImmersion.isPullback. Empty total spaces need no separate hypothesis.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "S3",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), trait paragraph and maximal-open local reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the generic fibre of a discrete valuation ring is the complement of the closed point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectrum fraction field discrete valuation ring open immersion punctured spectrum",
+   "results": "AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.Scheme.basic_open_isOpenImmersion, AlgebraicGeometry.IsOpenImmersion.of_isLocalization, AlgebraicGeometry.ValuativeCommSq.isFractionRing, AlgebraicGeometry.basicOpenIsoSpecAway, AlgebraicGeometry.IsPreimmersion.of_isLocalization, AlgebraicGeometry.SpecToEquivOfLocalRing",
+   "date": "2026-10-13",
+   "verdict": "no exact scheme-level match"
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteValuationRing|SpecMap_stalkSpecializes_fromSpecStalk",
+   "results": "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact scheme-level match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYJ, maximal-open local reduction to Spec O_{S,s}: The local generic fibre is the pullback of the boundary open",
+   "via": [
+    "lem-sbc-stalk-normalization-generic-comparison",
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-stalk-normalization-trait-flat",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkGenericOpenPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkGenericOpenPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stalk_generic_open_isPullback",
+  "statement": "theorem stalk_generic_open_isPullback {S C : Scheme.{u}} [IsIntegral S] (c : C ⟶ S) (U : S.Opens) (s : S) (hs : s ∉ U) (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) (hdvr : IsDiscreteValuationRing (S.presheaf.stalk s)) (k : pullback (pullback.snd c (S.fromSpecStalk s)) (Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) S.functionField))) ⟶ (c ⁻¹ᵁ U).toScheme) (hk : k ≫ (c ⁻¹ᵁ U).ι = pullback.fst _ _ ≫ pullback.fst c (S.fromSpecStalk s)) : IsPullback k (pullback.fst _ _) (c ⁻¹ᵁ U).ι (pullback.fst c (S.fromSpecStalk s))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T054237-L-449456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T054237-L-449456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

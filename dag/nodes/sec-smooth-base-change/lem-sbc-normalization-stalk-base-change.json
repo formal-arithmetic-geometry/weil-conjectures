@@ -1,0 +1,139 @@
+{
+ "id": "lem-sbc-normalization-stalk-base-change",
+ "kind": "statement",
+ "title": "Relative normalization commutes with stalk base change",
+ "statement": "Let $S,C,P$ be schemes [def-weil-pbc-scheme-conventions], $c:C\\to S$ any morphism, $f:P\\to C$ a quasi-compact quasi-separated morphism, and $s\\in S$. Set $a:\\operatorname{Spec}\\mathcal O_{S,s}\\to S$, $L=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$ and $g:L\\to C$ [def-pc-fibre-product]. Let $N_f\\to C$ and $N_{P\\times_C L}\\to L$ be relative normalizations [lem-weil-pbc-relative-normalization]. Then the canonical comparison $N_{P\\times_C L}\\to N_f\\times_C L$, given by $f.\\mathrm{normalizationPullback}(g)$, is an isomorphism. No normality, smoothness, Noetherian or nonemptiness hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project; Mathlib.AlgebraicGeometry.Normalization",
+  "place": "Tags 0307 (lemma-integral-closure-localize), 035I, 02KH; Normalization.lean smooth-base-change instance, affine comparison proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood B of s in S. All points in the image of Spec O_{S,s} generalize s, so they lie in B. Around each point of L=C times_S Spec O_{S,s}, choose an affine U of C contained in the inverse image of B. Its inverse image V in L is affine by the restricted cartesian square of affine schemes. On sections that square is a pushout. The stalk ring is the localization of Gamma(S,B) at the prime of s. Transport this through GammaSpecIso; base change of localization shows Gamma(L,V) is the localization of Gamma(C,U) at the image of the prime complement.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Qcqs flat base change identifies Gamma of the pullback of P over V with the tensor product of Gamma(L,V) and Gamma(P,f^{-1}U) over Gamma(C,U). The same comparison holds for the integral, hence affine, normalization morphism. In Lean both comparisons are isIso_pushoutSection_of_isQuasiSeparated_of_flat_right.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply integral-closure localization in its tensor-product form TensorProduct.toIntegralClosure_bijective_of_isLocalization, followed by the section-ring algebra equivalence and the affine normalizationObjIso maps. Check that this ring isomorphism is the app of normalizationPullback after both pushout maps, using normalizationObjIso_hom_val, toNormalization_normalizationPullback_fst and normalizationPullback_snd. Its restriction is therefore invertible. Zariski locality on the opens V proves the global assertion.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-integral-closure-commutes-localization"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "S3",
+  "document": "Stacks Project; Mathlib.AlgebraicGeometry.Normalization",
+  "place": "Tags 0307 (lemma-integral-closure-localize), 035I, 02KH; Normalization.lean smooth-base-change instance, affine comparison proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalization commutes with localization of scheme base at a point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative normalization commutes with base change to stalk localization",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc",
+   "date": "2026-10-13",
+   "verdict": "no exact scheme-level match"
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure_bijective_of_isLocalization|normalizationPullback",
+   "results": "Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact scheme-level match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYJ, maximal-open local reduction to Spec O_{S,s}: Relative normalization commutes with stalk base change",
+   "via": [
+    "lem-sbc-stalk-normalization-generic-comparison",
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-stalk-normalization-trait-flat",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalizationStalkBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isIso_normalizationPullback_stalk",
+  "statement": "theorem Hom.isIso_normalizationPullback_stalk {S C P : Scheme.{u}} (c : C ⟶ S) (f : P ⟶ C) [QuasiCompact f] [QuasiSeparated f] (s : S) : IsIso (f.normalizationPullback (pullback.fst c (S.fromSpecStalk s)))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T054237-L-449456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T054237-L-449456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

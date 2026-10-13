@@ -16,17 +16,37 @@
  ],
  "proof": [
   {
-   "text": "Put A = O_{S,s} and K = k(S), which is a fraction field of A. The map Spec A\nhas image the generalizations of s. Minimality of s outside U says all its other points\nlie in U. A DVR has only its generic and closed points, so the inverse image of U is\nexactly Spec K. Pulling back the given generic-fibre square identifies the generic\nfibre of L = C times_S Spec A with the base change of C_eta. Pull back Z and its action\nalong this identification: its total space is the fibre product, and each action map\nis induced by the action on Z and the identity on the new base. Finiteness, etaleness,\nsurjectivity and the simply transitive action identity are preserved by base change.\nThis constructs W. The comparison square hψ identifies W with the restriction to the\npunctured local base of PA. Choose an affine neighbourhood V = Spec B of s in S,\nand cover c⁻¹(V) by affine opens E = Spec R. If the prime of s in B is q, the\ncorresponding base change of E has ring R localized at the image of B \\ q.\nThe inverse image of E in PA is qcqs: PA is finite over C_U and C_U is a\nquasi-compact open of C. Its sections therefore commute with this flat localization\nbase change. Relative normalization on E is the spectrum of the integral closure\nof R in these sections. Tag 0307 identifies its localization with the integral\nclosure for the generic cover W. The affine comparison isomorphisms preserve the\nalgebra maps from the base and agree on intersections by the universal property of\nrelative normalization (035I). Gluing them gives β with the asserted equality over L.\nThis works also for an empty total space. Invertibility of the group order and\nramification theory are not used in this comparison.",
-   "uses": [],
-   "elementary": false
+   "text": "Construct gamma:L_K to C_eta by the universal property of the given generic-fibre square. The identity b followed by a equals S.fromSpecStalk(eta) is SpecMap_stalkSpecializes_fromSpecStalk. Projection identities give gamma followed by j equals p followed by g. Thus k=gamma followed by jU commutes with C_U to C. The local-generic-open lemma makes its square cartesian.",
+   "uses": [
+    "lem-sbc-stalk-generic-open-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Base change Z along gamma with GaloisCover.exists_baseChange, obtaining W and rho. Paste its square horizontally with hpsi and vertically with the open pullback square. This gives IsPullback (rho followed by psi) (W.pi followed by p) (PA.hom followed by i_U) g. The resulting isoPullback identifies W.P with the concrete pullback of PA over L, compatibly with structure maps.",
+   "uses": [
+    "lem-sbc-galois-cover-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply stalk-base-change normalization to f=PA.hom followed by i_U. Transport normalization across isoPullback using normalizationDesc in both directions and normalization.hom_ext to prove their inverse identities. Compose the inverse stalk comparison with the inverse transported isomorphism. normalizationPullback_snd and normalizationDesc structure-map identities give the asserted equation over L.",
+   "uses": [
+    "lem-sbc-normalization-stalk-base-change"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-stalk-generic-open-pullback",
+  "lem-sbc-galois-cover-base-change",
+  "lem-sbc-normalization-stalk-base-change"
+ ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "document",
-  "document": "Stacks Project",
-  "place": "Tags 0EYJ (local reduction to the punctured spectrum), 0307 and 035I"
+  "kind": "from-source",
+  "by": "S3",
+  "document": "Stacks Project; Mathlib.AlgebraicGeometry.Normalization",
+  "place": "Tags 0EYJ, 0307, 035I and 02KH; normalization universal property and affine comparison"
  },
  "mathlib_searches": [
   {
@@ -126,9 +146,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T040748-L-3948948",
+  "landing": "20261013T054237-L-449456",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

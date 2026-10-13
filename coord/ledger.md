@@ -11300,3 +11300,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/S2/Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonShift (stage 3; reviewer PASS; after a return; landing 20261013T054236-L-449025 (proof); batch 20261013T054206; modules 1; new nodes 0)
 - 05:42 L: merged deliver/S3/Sheaf.AlgebraicGeometry.LinearCechSheafResolution (stage 3; reviewer PASS; after a return; landing 20261013T054237-L-449145 (interface); batch 20261013T054206; modules 2; new nodes 1)
 - 05:42 L: merged deliver/S3/Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineEnlargement (stage 3; reviewer PASS; first push; landing 20261013T054237-L-449289 (interface); batch 20261013T054206; modules 2; new nodes 1)
+- 05:42 L: merged deliver/S3/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison (stage 3; reviewer PASS; first push; landing 20261013T054237-L-449456 (interface); batch 20261013T054206; modules 3; new nodes 2)
