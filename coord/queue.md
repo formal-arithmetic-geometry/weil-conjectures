@@ -219,7 +219,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparison` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorRoof` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorTermsFlat` | 23 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalComparison` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TorsionCommonOpenComparisonMap` | 23 | 1 | proof |
 | `Sheaf.Paper.AffineOpenInverseImageCompatibleRefinement` | 23 | 1 | proof |
 | `Sheaf.Paper.AffineOpenInverseImageFiniteLocalLifts` | 23 | 1 | proof |
@@ -238,10 +237,10 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ExternalGlobalSectionsRestrictionComparison` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffine` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorFiniteCoverLeft` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatFibreComponentDimensionSpecialization` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GenericFibreBirationalHypersurfaceModel` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GenericFibrePartialIsoSpreadOpen` | 24 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.LocalizedOpenKFlatTensorRestriction` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.EtaleTraitSectionLift` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteModel` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorPrescribedPuncturedRootChart` | 24 | 1 | proof |
@@ -264,6 +263,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 25 | 1 | proof |
 | `Sheaf.Algebra.Homology.FiniteStripConeFiltration` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ExternalGlobalSectionsRestrictionComparisonLeft` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatModuleDescentPreorder` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.RootFactorStalkLocalization` | 25 | 1 | proof |
