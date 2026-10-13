@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-mixed-affine-sections-kflat-comparison-isIso",
+ "kind": "statement",
+ "title": "Mixed affine unit comparison is invertible on K-flat chart models",
+ "statement": "Let $g:T\\to S$ be a morphism of affine schemes [def-pc-scheme], with independent sheaf and module derived localization universes [def-pc-derived-category]. Let $P$ be a K-flat cochain complex of $\\Gamma(S,\\mathcal O_S)$-modules [def-pc-module-kflat-complex]. Let $Q$ be the localization of termwise $\\widetilde P$, restricted from $\\operatorname{Spec}\\Gamma(S,\\mathcal O_S)$ to $S$ along its canonical spectrum isomorphism [lem-pc-affine-module-complex-representative]. The transpose under the fixed scalar extension/restriction adjunction [lem-sc-mixed-global-extension-adjunction] of $R\\Gamma_S(\\eta_g(Q))$ followed by normalized Leray [lem-sc-mixed-global-sections-direct-image-iso] is invertible. Here $\\eta_g$ is the unit of the fixed sheaf pullback/direct-image adjunction [lem-pc-global-hom-adjunction]. No boundedness or flatness of $g$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Z0 and 08DW(2); cohomology.tex Tags 08HY and 0D5T; duality.tex Tag 0AA8, identification of beta"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-module-kflat-complex",
+  "lem-pc-affine-module-complex-representative",
+  "lem-sc-mixed-global-extension-adjunction",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-pc-global-hom-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Restrict termwise tilde of the given K-flat Gamma(S)-complex along the canonical spectrum chart. The affine K-flat pullback chart comparison computes its derived pullback by the base-changed complex over Gamma(T).",
+   "uses": [
+    "lem-pc-affine-kflat-pullback-chart-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived sections of the two affine tilde models recover their module complexes by the affine derived equivalence. The unit of extension/restriction on the complex is x ↦ 1 tensor x. Under tilde, this is the sheaf tensor pullback unit followed by sections of direct image. The normalized derived Leray equation identifies the localized right comparison with mixedGlobalSectionsDirectImageIso. The derived adjunction and left-adjoint uniqueness identify the resulting scalar extension with mixedGlobalExtension, preserving its unit. Thus its adjunct is a composite of the invertible chart, affine sections and scalar-extension comparisons. Perform sheaf and module localizations separately; the hom equivalence comparisons are transported by their localization universal properties, without equating w and wA.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-global-hom-adjunction",
+    "lem-sc-mixed-global-extension-adjunction",
+    "lem-sc-mixed-global-sections-direct-image-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-kflat-pullback-chart-comparison",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-global-hom-adjunction",
+  "lem-sc-mixed-global-extension-adjunction",
+  "lem-sc-mixed-global-sections-direct-image-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2), via Tag 06Z0; explicit normalization and independent-localization argument of parent proof step 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The affine scalar extension adjunction mate of the derived pullback unit is an isomorphism on K-flat module complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The extension restriction adjunction mate of global sections of the derived pullback unit is invertible for the associated sheaf of a K flat module complex",
+   "results": "Eight hits, including underived SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit and pushforwardSections_unitHomEquiv. No derived affine K-flat model mate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_right|leftAdjointUniq",
+   "results": "Mathlib.CategoryTheory.Adjunction.Basic supplies naturality; Unique supplies leftAdjointUniq and its unit equation. No affine derived theorem. Direct project rg found AffineExtensionSectionsModelMate, which uses equal localization universes, spectrum bases and affine base-ring actions. Its signature cannot directly state the present mixed-universe Gamma-ring chart computation.",
+   "date": "2026-10-13",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackMate",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 affine identification of beta: canonical pullback unit mate computed on K-flat chart models",
+   "via": [
+    "lem-sc-mixed-affine-sections-pullback-mate",
+    "lem-sc-proper-flat-image-global-hom-base-change-isIso",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedAffineSectionsKFlatComparisonIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedAffineSectionsKFlatComparisonIso.lean",
+  "declaration": "AlgebraicGeometry.mixedAffineSections_kFlat_comparison_isIso",
+  "statement": "theorem mixedAffineSections_kFlat_comparison_isIso\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]\n    {S T : Scheme.{u}} [IsAffine S] [IsAffine T]\n    (g : T ⟶ S) (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ)\n    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(S, ⊤)) (.up ℤ)).kFlat P) :\n    let Q := DerivedCategory.Q.obj\n        ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n          (@id (SheafOfModules.{u} (moduleRings (Spec Γ(S, ⊤)).toRingedSpace) ⥤\n            SheafOfModules.{u} (moduleRings S.toRingedSpace))\n            (Scheme.Modules.restrictFunctor S.toSpecΓ))\n          (by change (Scheme.Modules.restrictFunctor S.toSpecΓ).PreservesZeroMorphisms\n              infer_instance) (.up ℤ)).obj\n            ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n              (@id (ModuleCat.{u} Γ(S, ⊤) ⥤\n                SheafOfModules.{u} (moduleRings (Spec Γ(S, ⊤)).toRingedSpace))\n                (tilde.functor Γ(S, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj P))\n    IsIso (((mixedGlobalExtensionAdjunction g).homEquiv _ _).symm\n      ((schemeDerivedGlobalSections S).map ((schemeHomPullbackAdjunction g).unit.app Q) ≫\n        (mixedGlobalSectionsDirectImageIso g).hom.app ((derivedPullback g).obj Q)))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T131326-L-4034337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T131326-L-4034337",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
