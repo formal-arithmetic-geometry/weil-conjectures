@@ -13,32 +13,33 @@
  ],
  "proof": [
   {
-   "text": "Replace I by its antisymmetrization, transport F and the fixed stage models along the equivalence, and identify the colimits. A stage above the quotient class of i yields a stage above i after choosing representatives, since equivalence of indices means inequalities in both directions.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Apply the map clause of [lem-pc-fp-module-map-descent-affine] to s and r separately and extend both descended maps to a common upper stage. Scalar extension preserves finite presentation. The comparison isomorphisms of that clause agree with extendScalarsComp: both send 1 tensor m to 1 tensor (1 tensor m), and such tensors generate. Thus the base change of the composite of the descended maps is the identity.",
+   "text": "Apply finitePresentation_map_directedColimit to s and r separately, using the existing canonical preorder map clause. It supplies maps at a and b and conjugation equalities for the canonical scalar-extension comparisons.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-fp-module-map-canonical-preorder"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the equality clause of [lem-pc-fp-module-map-descent-affine] to that composite and the identity. At the resulting further stage functoriality gives the retraction identity. The extendScalarsComp comparison gives the required isomorphism for M. Transport back along the indexing equivalence and the colimit ring isomorphism.",
+   "text": "Choose a common upper bound j of a and b. Extend both maps and conjugate by extendScalarsComp. The associativity identity extendScalars_assoc and naturality prove that their conjugated extensions to the colimit remain s and r. Conjugate the given retraction identity by the comparison for M to obtain equality between the scalar extension of the composite and of the identity at j.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Scalar extension preserves finite presentation. Apply eventually_equal_maps_of_directed_preorder_colimit to the composite and identity of the extended M at j. At its later stage k the two extended maps form a retraction. Conjugate them by the natural isomorphism from direct i-to-k scalar extension to iterated i-to-j-to-k scalar extension. The middle comparison and its inverse cancel, giving the retraction equation for the required fixed models. The inverse canonical colimit comparison supplies the final Nonempty isomorphism.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-preorder-module-map-equality-descent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine"
+  "lem-pc-fp-module-map-canonical-preorder",
+  "lem-pc-preorder-module-map-equality-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, first proof paragraph, using Algebra Tag 05N7 (2) and (3); detailed transport and retraction argument by P4"
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, first proof paragraph, via Algebra Tag 05N7 (2),(3); canonical preorder map and equality interfaces with explicit scalar-extension coherence by R2"
  },
  "mathlib_searches": [
   {
@@ -122,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T100052-L-2475720",
-  "kind": "interface",
+  "landing": "20261013T111916-L-3060718",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
