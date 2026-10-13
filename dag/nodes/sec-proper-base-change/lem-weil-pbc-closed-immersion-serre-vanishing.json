@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-serre-vanishing",
+ "kind": "statement",
+ "title": "Serre vanishing for restricted projective-space twists over a Noetherian ring",
+ "statement": "Let A be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], N a natural number, and i:X→P^N_A a closed immersion [def-weil-closed-immersion]. Let F be a quasi-coherent module of finite presentation on X [lem-weil-pbc-quasi-coherent-finite-type-affine]. There exists a natural number t0 such that H^p(X,F tensor i^*O(t)) is zero for every p>0 and t>=t0, with module cohomology [pqf-def-cohomology], tensor product [def-pur-sheaf-tensor-product], and the projective-space twists [def-pc-projective-space-twist].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 01YS (2),(4) and 0B5T, preliminary closed-immersion comparison and proof of (4); https://stacks.math.columbia.edu/tag/01YS and https://stacks.math.columbia.edu/tag/0B5T read 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-def-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "Projective space over the Noetherian ring A is locally Noetherian, as is its closed subscheme X. Finite presentation implies finite type; together with quasi-coherence this makes F coherent. Pushforward along the closed immersion gives a coherent module G=i_*F on projective space.",
+   "uses": [
+    "def-pc-proj",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use projective-space Serre vanishing: a finite sum of twists surjects onto G, with coherent kernel. The N+1 standard affine opens give zero cohomology above N. Descending induction in the degree, for all coherent modules at once, combines exactness of twisting, vanishing of nonnegative twists over any base ring, and the long exact sequence to give bounds for each positive degree. Take their finite maximum and zero. The node lem-pc-projective-space-serre-vanishing states this ring-general theorem, but its recorded Lean declaration only covers fields and abelian-sheaf H; that missing generalization is part of the hole here.",
+   "uses": [
+    "lem-pc-projective-space-serre-vanishing",
+    "def-pc-projective-space-twist",
+    "lem-pc-twist-tensor",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The projection formula identifies i_*(F tensor i^*O(t)) with G tensor O(t). For the affine closed immersion, affine_morphism_cohomology_edge is an isomorphism in every degree. Thus vanishing of the latter module cohomology gives vanishing on X, with the same uniform natural-number bound.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-pc-projective-space-serre-vanishing",
+  "def-pc-projective-space-twist",
+  "lem-pc-twist-tensor",
+  "pqf-def-cohomology",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 01YS (2),(4) and 0B5T, preliminary closed-immersion comparison and proof of (4); https://stacks.math.columbia.edu/tag/01YS and https://stacks.math.columbia.edu/tag/0B5T read 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "serre|twist.*vanish|vanish.*twist",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No matching module-cohomology Serre-vanishing theorem; hits are unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre vanishing for quasi-coherent finitely presented sheaf on a closed subscheme of projective space over a Noetherian ring",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, Module.basicOpen_subset_freeLocus_iff, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "digest": "c01f788ec8a05f37",
+   "verdict": "No matching module-cohomology Serre-vanishing theorem; hits are unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Serre\"",
+   "date": "2026-10-13",
+   "results": "12 hits: Lean.Parser.ParserResolution, Lean.Parser.ParserResolution.alias, Lean.Parser.ParserResolution.category, Lean.Parser.ParserResolution.parser, CategoryTheory.ObjectProperty.IsSerreClass, CategoryTheory.ObjectProperty.instIsSerreClassIsZero, CategoryTheory.ObjectProperty.IsSerreClass.toContainsZero, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderQuotients",
+   "digest": "ccbb94ccc28e5730",
+   "verdict": "No matching module-cohomology Serre-vanishing theorem; hits are unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finitely presented quasi-coherent sheaf on a closed subscheme of projective space over a Noetherian ring, all positive cohomology vanishes after sufficiently large twists.",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentSerreVanishing",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-serre-vanishing",
+   "place": "steps 4-6: closed immersion, projection formula and projective-space vanishing; excludes the ample-embedding and residue-class steps",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionSerreVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionSerreVanishing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isZero_moduleCohomology_tensor_twist_of_closedImmersion",
+  "statement": "theorem exists_isZero_moduleCohomology_tensor_twist_of_closedImmersion\n    (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}\n    (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]\n    (F : X.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation] :\n    ∃ t₀ : ℕ, ∀ (p t : ℕ), 0 < p → t₀ ≤ t →\n      IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj\n        (tensorObj F (ProjectiveSpace.twistRestrict i t)))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T025304-L-3423446",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T025304-L-3423446",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

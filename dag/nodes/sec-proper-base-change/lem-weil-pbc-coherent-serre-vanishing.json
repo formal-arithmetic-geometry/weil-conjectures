@@ -35,111 +35,58 @@
  ],
  "proof": [
   {
-   "text": "*Noetherian setting.* $A$ is Noetherian, so $\\operatorname{Spec}(A)$ is locally Noetherian [pqf-def-locnoeth] (covered by the single affine open $\\operatorname{Spec}A$ with Noetherian ring of sections) and quasi-compact [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (iii), i.e. a Noetherian scheme. The proper morphism $f$ is of finite type [def-weil-proper-morphism], so $X$ is Noetherian, in particular locally Noetherian, by [lem-weil-pbc-finite-type-over-noetherian]. For $N\\ge0$ the scheme $P_N=\\operatorname{Proj}(A[x_0,\\dots,x_N])$ [def-pc-proj] is covered by the standard opens $D_+(x_k)=\\operatorname{Spec}(A[x_0,\\dots,x_N]_{(x_k)})$, and $A[x_0,\\dots,x_N]_{(x_k)}=A[x_0/x_k,\\dots,x_N/x_k]$ is a finitely generated $A$-algebra, hence Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]; so $P_N$ is locally Noetherian [pqf-def-locnoeth].",
+   "text": "Properness gives local finite type over Spec A and hence local Noetherianity of X. Coherence gives quasi-coherence by the locally Noetherian equivalence. On every affine open coherent_affine_sections_finite gives finite sections; Noetherianity of the section ring and Module.finitePresentation_of_finite give finitely presented sections. quasicoherent_finite_type_affine and locality over all affine opens then give F.IsFinitePresentation.",
    "uses": [
     "def-weil-pbc-noetherian-ring",
-    "pqf-def-locnoeth",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
     "def-weil-proper-morphism",
+    "pqf-def-locnoeth",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "def-pc-proj",
-    "lem-weil-pbc-finite-type-algebra-noetherian"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0B5T, proof (Noetherian hypotheses implicit in the use of Lemma 01YS and 087T)"
-   }
+   "elementary": false
   },
   {
-   "text": "*A power of $\\mathcal L$ comes from $\\mathcal O(1)$ along an immersion.* $f$ is of finite type, in particular locally of finite type, and $\\mathcal L$ is ample on $X$. By [lem-weil-pbc-ample-very-ample-immersion-affine-base] there are $d\\ge1$, $N\\ge0$, an immersion $i:X\\to P:=P_N$ with $q\\circ i=f$ ($q:P\\to\\operatorname{Spec}A$ the structure morphism) and an isomorphism $\\mathcal L^{\\otimes d}\\cong i^*\\mathcal O_P(1)$, with $\\mathcal O_P(1)$ the twisting module of [def-pc-projective-space-twist]. Fix them and write $\\mathcal M=i^*\\mathcal O_P(1)$.",
+   "text": "Apply IsAmple.exists_immersion_affine_base to obtain d>0, N and i into projective space over Spec A, with L^d identified with tensorPullback i of O(1). Separatedness of the projective structure morphism and IsProper.of_comp make i proper; its image is closed, so IsClosedImmersion.of_isPreimmersion makes i a closed immersion.",
    "uses": [
     "lem-weil-pbc-ample-very-ample-immersion-affine-base",
     "def-pc-projective-space-twist",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0B5T, proof, first sentence (Morphisms Lemma 01VT)"
-   }
-  },
-  {
-   "text": "*$i$ is a closed immersion.* $q$ is separated [lem-weil-pbc-projective-space-proj-separated] and $q\\circ i=f$ is proper, so $i$ is proper by [lem-weil-pbc-proper-over-separated]. A proper immersion is a closed immersion [lem-weil-pbc-proper-immersion-closed]. So $i:X\\to P$ is a closed immersion [def-weil-closed-immersion] of locally Noetherian schemes (Step 1).",
-   "uses": [
     "lem-weil-pbc-projective-space-proj-separated",
     "lem-weil-pbc-proper-over-separated",
     "lem-weil-pbc-proper-immersion-closed",
     "def-weil-closed-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0B5T, proof ('Since X is proper over R the morphism i is a closed immersion', Morphisms Lemma 01W6)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The twists $\\mathcal G_r$ and their twists are coherent.* For $r\\in\\{0,\\dots,d-1\\}$ and $t\\ge0$ put $\\mathcal G_{r,t}=\\mathcal F\\otimes\\mathcal L^{\\otimes r}\\otimes\\mathcal M^{\\otimes t}$ and $\\mathcal G_r=\\mathcal G_{r,0}=\\mathcal F\\otimes\\mathcal L^{\\otimes r}$ (tensor products and powers of [def-pur-sheaf-tensor-product]). $\\mathcal L$ and $\\mathcal M$ are invertible ($\\mathcal M$ because it is isomorphic to the invertible $\\mathcal L^{\\otimes d}$): every point of $X$ has an open neighbourhood $W$ on which $\\mathcal L|_W\\cong\\mathcal O_W$ and $\\mathcal M|_W\\cong\\mathcal O_W$ [def-sc-invertible-module] (intersect the two trivializing neighbourhoods), and there $\\mathcal G_{r,t}|_W\\cong\\mathcal F|_W\\otimes\\mathcal O_W\\otimes\\dots\\otimes\\mathcal O_W\\cong\\mathcal F|_W$. Since $\\mathcal F$ is coherent on the locally Noetherian $X$, it is quasi-coherent of finite type by [pqf-lem-coherent-ft-locnoeth]; both properties are local [pqf-def-coherent], so $\\mathcal G_{r,t}$ is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth] again. By [lem-weil-pbc-closed-immersion-coherent-equivalence] (1), applied to the closed immersion $i$ of locally Noetherian schemes (Step 3), $i_*\\mathcal G_r$ and every $i_*\\mathcal G_{r,t}$ are coherent $\\mathcal O_P$-modules.",
+   "text": "Induction identifies positiveTensorPower with tensorPow. Uniqueness of left adjoints identifies tensorPullback with pullback, so L.tensorPow d is isomorphic to twistRestrict i 1. For each r:Fin d, tensor-product finiteness and quasi-coherence allow the closed-immersion twist-vanishing theorem to be applied to F tensor L.tensorPow r, giving a bound t_r independent of the positive degree.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-sc-invertible-module",
-    "pqf-lem-coherent-ft-locnoeth",
-    "pqf-def-coherent",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+    "def-pc-module-pullback",
+    "lem-weil-pbc-closed-immersion-serre-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0B5T, proof ('if G is coherent, then i_*G is coherent as well', Lemma 087T)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Projection formula: $i_*\\mathcal G_{r,t}\\cong i_*\\mathcal G_r\\otimes\\mathcal O_P(t)$ for all $t\\ge0$.* Induction on $t$. For $t=0$: $\\mathcal O_P(0)$ is glued from the $\\mathcal O_{U_k}e^{(0)}_k$ with transitions $e^{(0)}_k=(x_k/x_j)^0e^{(0)}_j=e^{(0)}_j$ [def-pc-projective-space-twist], so $e^{(0)}_k\\mapsto1$ defines $\\mathcal O_P(0)\\cong\\mathcal O_P$, and $i_*\\mathcal G_r\\otimes\\mathcal O_P\\cong i_*\\mathcal G_r$. For $t\\ge1$: $\\mathcal G_{r,t}\\cong\\mathcal G_{r,t-1}\\otimes i^*\\mathcal O_P(1)$ by associativity of the tensor product [def-pur-sheaf-tensor-product]; $\\mathcal G_{r,t-1}$ is coherent (Step 4) and $\\mathcal O_P(1)$ is invertible on $P$ [def-pc-projective-space-twist], so the projection formula of [lem-pc-closed-immersion-coherent-cohomology] (closed immersion of locally Noetherian schemes, Steps 1 and 3) gives $i_*\\mathcal G_{r,t}\\cong i_*(\\mathcal G_{r,t-1}\\otimes i^*\\mathcal O_P(1))\\cong i_*\\mathcal G_{r,t-1}\\otimes\\mathcal O_P(1)$. By the induction hypothesis and [lem-pc-twist-tensor] ($\\mathcal O_P(t-1)\\otimes\\mathcal O_P(1)\\cong\\mathcal O_P(t)$), this is $\\cong i_*\\mathcal G_r\\otimes\\mathcal O_P(t-1)\\otimes\\mathcal O_P(1)\\cong i_*\\mathcal G_r\\otimes\\mathcal O_P(t)=(i_*\\mathcal G_r)(t)$.",
-   "uses": [
-    "def-pc-projective-space-twist",
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-closed-immersion-coherent-cohomology",
-    "lem-pc-twist-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0B5T, proof of (4) (projection formula, Cohomology Lemma 01E8)"
-   }
-  },
-  {
-   "text": "*Cohomology on $X$ is cohomology on $P$.* For $n=td+r$ with $t\\ge0$, $0\\le r<d$: $\\mathcal L^{\\otimes n}\\cong\\mathcal L^{\\otimes r}\\otimes(\\mathcal L^{\\otimes d})^{\\otimes t}\\cong\\mathcal L^{\\otimes r}\\otimes\\mathcal M^{\\otimes t}$ (associativity and commutativity of $\\otimes$ [def-pur-sheaf-tensor-product], and the isomorphism $\\mathcal L^{\\otimes d}\\cong\\mathcal M$ of Step 2), so $\\mathcal F\\otimes\\mathcal L^{\\otimes n}\\cong\\mathcal G_{r,t}$; as $H^p(X,-)$ is a functor [pqf-def-cohomology], $H^p(X,\\mathcal F\\otimes\\mathcal L^{\\otimes n})\\cong H^p(X,\\mathcal G_{r,t})$. The closed immersion $i$ is an affine morphism and $\\mathcal G_{r,t}$ is quasi-coherent (Step 4), so the edge map of [lem-weil-pbc-affine-morphism-cohomology-edge] is an isomorphism $H^p(P,i_*\\mathcal G_{r,t})\\cong H^p(X,\\mathcal G_{r,t})$. With Step 5: $H^p(X,\\mathcal F\\otimes\\mathcal L^{\\otimes(td+r)})\\cong H^p(P,(i_*\\mathcal G_r)(t))$ for every $p\\ge0$, $t\\ge0$, $0\\le r<d$.",
+   "text": "Set n0=d*sum_r t_r. For n>=n0 write r=n%d and t=n/d, so n=r+d*t and t>=sum_r t_r>=t_r. The tensorPow addition and multiplication isomorphisms, pullback tensor-power comparison, and O(1)^t=O(t) give an isomorphism F tensor L^n ≅ (F tensor L^r) tensor twistRestrict i t. Map this isomorphism through moduleCohomology and transport IsZero from the residue bound.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "pqf-def-cohomology",
-    "lem-weil-pbc-affine-morphism-cohomology-edge"
+    "lem-pc-twist-tensor",
+    "pqf-def-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0B5T, proof ('H^i(X,G) = H^i(P^n_R, i_*G) for any quasi-coherent G', Lemma 089W and Morphisms Lemma 01SE) and proof of (4)"
-   }
-  },
-  {
-   "text": "*Serre vanishing on $P$ and the bound $n_0$.* For each $r\\in\\{0,\\dots,d-1\\}$, $i_*\\mathcal G_r$ is a coherent module on $P=\\mathbf P^N_A$ with $A$ Noetherian (Step 4), so [lem-pc-projective-space-serre-vanishing] gives $t_r\\ge0$ with $H^p(P,(i_*\\mathcal G_r)(t))=0$ for all $t\\ge t_r$ and $p>0$ (there $\\mathcal H(t)=\\mathcal H\\otimes\\mathcal O_P(t)$). Put $T=\\max_rt_r$ and $n_0=dT$. If $n\\ge n_0$, division with remainder writes $n=td+r$ with $0\\le r<d$ and $t=\\lfloor n/d\\rfloor\\ge T\\ge t_r$, so by Step 6 $H^p(X,\\mathcal F\\otimes\\mathcal L^{\\otimes n})\\cong H^p(P,(i_*\\mathcal G_r)(t))=0$ for every $p>0$. Since there are only finitely many residues $r$, this proves the lemma.",
-   "uses": [
-    "lem-pc-projective-space-serre-vanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0B5T, proof of (4) (Lemma 01YS, coherent-lemma-coherent-projective; 'only finitely many congruence classes of integers modulo d'); Lemma 02O1 reduces to this case for an affine base"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-noetherian-ring",
-  "pqf-def-locnoeth",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
   "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "def-pc-proj",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-weil-pbc-ample-very-ample-immersion-affine-base",
   "def-pc-projective-space-twist",
   "lem-weil-pbc-projective-space-proj-separated",
@@ -148,19 +95,15 @@
   "def-weil-closed-immersion",
   "def-pur-sheaf-tensor-product",
   "def-sc-invertible-module",
-  "pqf-lem-coherent-ft-locnoeth",
-  "pqf-def-coherent",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-pc-closed-immersion-coherent-cohomology",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-closed-immersion-serre-vanishing",
   "lem-pc-twist-tensor",
-  "pqf-def-cohomology",
-  "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "lem-pc-projective-space-serre-vanishing"
+  "pqf-def-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 02O1 (coherent-lemma-kill-by-twisting), reduced to Lemma 0B5T (coherent-lemma-coherent-proper-ample) part (4) and its proof; the base is affine, so the reduction of 02O1 to an affine base and the passage from R^pf_* to H^p (Lemma 01XK) are not needed, and the absolute ampleness assumed here is the hypothesis of 0B5T (equal to f-ampleness by Morphisms Lemma 01VK)"
+  "place": "Tag 0B5T (4), closed-immersion reduction and finite residue-class argument; the coherence-to-finite-presentation step uses Tags 01XZ, 01PB and 01PC."
  },
  "mathlib_searches": [
   {
@@ -237,5 +180,15 @@
   "group": "J1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T025304-L-3423446",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

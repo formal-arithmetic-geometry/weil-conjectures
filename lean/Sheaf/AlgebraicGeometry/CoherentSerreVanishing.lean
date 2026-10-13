@@ -11,14 +11,11 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.Paper.PQFCohomology
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
-import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.ClosedImmersionSerreVanishing
 
 /-!
 # Serre vanishing over a Noetherian affine base
@@ -79,6 +76,80 @@ theorem exists_isZero_moduleCohomology_tensorPow_of_ample
     ∃ n₀ : ℕ, ∀ (p n : ℕ), 0 < p → n₀ ≤ n →
       IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj
         (tensorObj F (L.tensorPow n))) := by
-  sorry
+  classical
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  let : F.IsQuasicoherent :=
+    ((isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hF).1
+  have hfp (U : X.affineOpens) : (F.over U.1).IsFinitePresentation := by
+    let : IsNoetherianRing Γ(X, U.1) := IsLocallyNoetherian.component_noetherian U
+    let : Module.Finite Γ(X, U.1) Γ(F, U.1) :=
+      coherent_affine_sections_finite X F hF U.1 U.2
+    exact (((quasicoherent_finite_type_affine.{u, u} X).2 F inferInstance).1 U.1 U.2).2.mpr
+      (Module.finitePresentation_of_finite _ _)
+  let : F.IsFinitePresentation := SheafOfModules.IsFinitePresentation.of_coversTop F
+    (fun U : X.affineOpens ↦ U.1) ((Opens.coversTop_iff X _).mpr
+      (TopologicalSpace.IsOpenCover.mk (iSup_affineOpens_eq_top X)))
+  obtain ⟨d, hd, N, i, hi, hif, ⟨epos⟩⟩ := hL.exists_immersion_affine_base A X f L
+  let : IsImmersion i := hi
+  have hcomp : IsProper (i ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A)) ↘ Spec (.of A)) := by
+    rw [hif]
+    infer_instance
+  let : IsProper i := IsProper.of_comp i
+    (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A)) ↘ Spec (.of A))
+  let : IsClosedImmersion i := IsClosedImmersion.of_isPreimmersion i
+    (i.isClosedMap.isClosed_range)
+  have epos' : ∀ (n : ℕ) (hn : 0 < n),
+      Nonempty (SheafOfModules.positiveTensorPower X.sheaf L n hn ≅ L.tensorPow n) := by
+    let := SheafOfModules.monoidalCategory X.sheaf
+    let := SheafOfModules.symmetricCategory X.sheaf
+    intro n
+    induction n using Nat.twoStepInduction with
+    | zero => intro hn; omega
+    | one => intro hn; exact ⟨(MonoidalCategoryStruct.rightUnitor L).symm⟩
+    | more n _ ih =>
+      intro hn
+      obtain ⟨e⟩ := ih (by omega)
+      exact ⟨(MonoidalCategory.tensorIso e (Iso.refl L)) ≪≫ BraidedCategory.braiding _ _⟩
+  obtain ⟨adj⟩ := nonempty_tensorPullbackAdjunction i
+  let epb := (adj.leftAdjointUniq (pullbackPushforwardAdjunction i)).app
+    (ProjectiveSpace.twist (ULift.{u} (Fin (N + 1))) (Spec (.of A)) 1)
+  let e : L.tensorPow d ≅ ProjectiveSpace.twistRestrict i 1 :=
+    (epos' d hd).some.symm ≪≫ epos ≪≫ epb
+  have key (r : Fin d) : ∃ t₀ : ℕ, ∀ (p t : ℕ), 0 < p → t₀ ≤ t →
+      IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj
+        (tensorObj (tensorObj F (L.tensorPow r)) (ProjectiveSpace.twistRestrict i t))) := by
+    have := isQuasicoherent_tensorObj F (L.tensorPow r)
+    have := isFinitePresentation_tensorObj F (L.tensorPow r)
+    exact exists_isZero_moduleCohomology_tensor_twist_of_closedImmersion A i
+      (tensorObj F (L.tensorPow r))
+  choose t₀ ht₀ using key
+  refine ⟨d * ∑ r, t₀ r, ?_⟩
+  intro p n hp hn
+  let r : Fin d := ⟨n % d, Nat.mod_lt n hd⟩
+  let t := n / d
+  have hn' : n = r + d * t := (Nat.mod_add_div n d).symm
+  have ht : t₀ r ≤ t := by
+    refine le_trans (Finset.single_le_sum (fun _ _ ↦ Nat.zero_le _)
+      (Finset.mem_univ r)) ?_
+    exact (Nat.le_div_iff_mul_le hd).2 (by rw [mul_comm]; exact hn)
+  have hpow : ∀ s : ℕ, Nonempty ((L.tensorPow d).tensorPow s ≅
+      (ProjectiveSpace.twistRestrict i 1).tensorPow s) := by
+    intro s
+    induction s with
+    | zero => exact ⟨Iso.refl _⟩
+    | succ s ih => exact ⟨MonoidalCategory.tensorIso e ih.some⟩
+  obtain ⟨e₁⟩ := nonempty_pullback_tensorPow_iso i
+    (ProjectiveSpace.twist (ULift.{u} (Fin (N + 1))) (Spec (.of A)) 1) t
+  obtain ⟨e₂⟩ := ProjectiveSpace.nonempty_tensorPow_twist_one_iso
+    (ULift.{u} (Fin (N + 1))) (Spec (.of A)) t
+  let e₃ : L.tensorPow n ≅ tensorObj (L.tensorPow r) (ProjectiveSpace.twistRestrict i t) :=
+    eqToIso (congrArg L.tensorPow hn') ≪≫ L.tensorPowAddIso r (d * t) ≪≫
+      (MonoidalCategory.tensorIso (Iso.refl _) (L.tensorPowMulIso d t ≪≫ (hpow t).some ≪≫ e₁.symm ≪≫
+        (pullback i).mapIso e₂))
+  let e₄ : tensorObj F (L.tensorPow n) ≅
+      tensorObj (tensorObj F (L.tensorPow r)) (ProjectiveSpace.twistRestrict i t) :=
+    (MonoidalCategory.tensorIso (Iso.refl F) e₃) ≪≫ (MonoidalCategoryStruct.associator _ _ _).symm
+  exact (ht₀ r p t hp ht).of_iso
+    ((RingedSpace.moduleCohomology X.toRingedSpace p).mapIso e₄)
 
 end AlgebraicGeometry.Scheme.Modules
