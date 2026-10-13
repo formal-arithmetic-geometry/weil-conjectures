@@ -12864,3 +12864,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:51 L: merged deliver/D2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedSplit (stage 3; reviewer PASS; first push; landing 20261013T145117-L-694994 (interface); batch 20261013T145113; modules 4; new nodes 3)
 - 14:51 L: merged deliver/D4/Sheaf.AlgebraicGeometry.DerivedPullbackCanonicalTensorShiftOne (stage 3; reviewer PASS; first push; landing 20261013T145117-L-695131 (interface); batch 20261013T145113; modules 4; new nodes 3)
 - 14:51 L: merged deliver/E1/Sheaf.AlgebraicGeometry.LocalizedMixedPullbackFiniteFreeModel (stage 3; reviewer PASS; first push; landing 20261013T145118-L-695256 (proof); batch 20261013T145113; modules 1; new nodes 0)
+- 14:51 L: merged deliver/E2/Sheaf.AlgebraicGeometry.InternalHomOverEquiv (stage 3; reviewer PASS; first push; landing 20261013T145118-L-695391 (proof); batch 20261013T145113; modules 1; new nodes 0)
