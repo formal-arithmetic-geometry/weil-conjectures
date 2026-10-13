@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-integer-shift-from-one",
+ "kind": "statement",
+ "title": "Extend a degree-one comparison to coherent integer shifts",
+ "statement": "Let C and D be categories with shifts indexed by the additive group of integers, and let F:C→D be a functor. Every natural isomorphism a:([1]_C ⋙ F) ≅ (F ⋙ [1]_D) extends to a CommShift ℤ structure on F whose degree-one natural isomorphism is exactly a. No additivity, monoidality or exactness assumptions are required.",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Iteration and inverse iteration in lem-sc-derived-pullback-tensor-unit-shift; explicit Mathlib coherence proof of this formal step"
+ },
+ "proof": [
+  {
+   "text": "Postcomposition with shift by one is fully faithful. Given a comparison\nat n+1, compose its hom with the inverse of a and with the source and target\nshift addition maps, then take its unique preimage under that postcomposition.\nThis gives the comparison at n. Functor.map_preimage and cancellation show that\nadding a to it recovers the given comparison at n+1. Addition on the right by\nany comparison is injective, by faithfulness of its shift and cancellation of\nits isomorphisms. Start at the canonical zero comparison and use integer\nrecursion, adding a upwards and taking the preimage downwards. The successor\nidentity holds on both sides of zero by the inverse-step calculation. Prove the\naddition identity by integer induction on the second summand: the zero case is\nthe zero identity; the successor case is CommShift.isoAdd'_assoc; the predecessor\ncase follows by adding a on the right, using associativity and the successor\nidentity, then cancelling. The comparison at one is a by the left zero identity.\nThis proves both CommShift equations and works also for zero functors and zero\ncategories.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Iteration and inverse iteration in lem-sc-derived-pullback-tensor-unit-shift; explicit Mathlib coherence proof of this formal step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism commuting a functor with shift by one extends to a coherent integer shift structure",
+   "date": "2026-10-13",
+   "results": "Functor.CommShift.iso, commShiftIso, ofInduced; no generator extension theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "date": "2026-10-13",
+   "results": "CommShift, ofIso, comp, id, ofHasShiftOfFullyFaithful; no degree-one extension.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift.*(generator|succ|ofOne|of_one)|((generator|ofOne|of_one).*CommShift)|isoAdd",
+   "date": "2026-10-13",
+   "results": "Actual msearch grep in CategoryTheory/Shift: 23 hits, including CommShift.isoAdd and applications in Adjunction, Induced, Localization, and ShiftSequence. No generator extension declaration found.",
+   "verdict": "generic APIs used in the complete proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism commuting with shift by one extends to coherent integer shifts",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitShift",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Iteration and inverse iteration in lem-sc-derived-pullback-tensor-unit-shift; explicit Mathlib coherence proof of this formal step",
+   "via": [
+    "lem-sc-derived-pullback-tensor-unit-shift",
+    "lem-sc-derived-pullback-canonical-tensor-shift-one",
+    "lem-sc-derived-monoidal-pullback-unital-shift",
+    "lem-sc-pinned-projection-counit-exact-shift",
+    "lem-sc-right-adjoint-tensor-compatible-exact-structures",
+    "lem-sc-right-adjoint-tensor-comparison-triangle",
+    "lem-sc-right-adjoint-tensor-comparison-diagrams",
+    "lem-sc-right-adjoint-tensor-locus-triangles",
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.IntegerShiftFromOne",
+  "file": "lean/Sheaf/CategoryTheory/IntegerShiftFromOne.lean",
+  "declaration": "CategoryTheory.Functor.exists_commShift_of_one",
+  "statement": "theorem exists_commShift_of_one\n    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]\n    (F : C ⥤ D) (a : shiftFunctor C (1 : ℤ) ⋙ F ≅ F ⋙ shiftFunctor D (1 : ℤ)) :\n    ∃ s : F.CommShift ℤ, letI := s\n      F.commShiftIso (1 : ℤ) = a",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T153222-L-1059856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T153222-L-1059856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -18,32 +18,50 @@
  },
  "proof": [
   {
-   "text": "Represent the unit by the structure sheaf in degree zero and its translate\nby that complex translated by one. Termwise tensor pullback of this K-flat complex\nis the structure sheaf of Z translated by one. The comparison with derived pullback\nand the supplied monoidal unit isomorphism give e. On a K-flat complex P, rewrite\nP[1] as O_Y[1] tensor P using the first-variable Koszul map and the left unitor.\nApply the supplied inverse tensorator and e, then undo this rewrite over Z. This\nis the displayed composite. Naturality follows from the tensorator, Koszul map\nand left unitor. Iterate this comparison for positive integers, use its inverse\nfor negative integers and the canonical zero comparison at zero. Associativity\nof composition and the shift addition isomorphisms give the addition equations;\nthe zero equations are the unitor equations. Termwise tensor pullback takes the\nmapping cone of a map of K-flat resolutions to its mapping cone. The translated\nunit comparison identifies the third map, so the induced triangle is\ndistinguished. Descend through the K-flat localization; every distinguished\ntriangle is isomorphic to one of these cone triangles. This proves exactness for\nthis shift structure. The formula and coherence hold also for the zero complex\nand the zero category on an empty scheme. No choice from this existence theorem\nis used to define any data: the comparison above was constructed explicitly.",
+   "text": "Obtain the translated-unit isomorphism e and preservation of localized distinguished homotopy triangles from lem-sc-derived-pullback-translated-unit-triangles.",
    "uses": [
-    "def-pc-scheme",
-    "def-pc-derived-category",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-pc-derived-pullback",
-    "def-pc-kflat-complex",
-    "def-weil-proper-morphism",
-    "def-sc-scheme-canonical-shift-unit-iso"
+    "lem-sc-derived-pullback-translated-unit-triangles"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove naturality of c_X from the recorded two-variable Koszul shift and left-unitor naturality. Obtain inverse naturality by cancellation. Expand the explicit translated-unit pullback composite; use inverse-tensorator naturality and whisker exchange. NatIso.ofComponents packages the formula into a natural degree-one isomorphism.",
+   "uses": [
+    "def-sc-scheme-canonical-shift-unit-iso",
+    "def-sc-scheme-canonical-tensor-shift",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extend that natural degree-one comparison to CommShift ℤ with its degree-one equation using lem-sc-integer-shift-from-one. This step is fully proved in Lean.",
+   "uses": [
+    "lem-sc-integer-shift-from-one"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Mathlib Functor.distTriang_iff for the canonical Qh to represent any distinguished derived triangle as isomorphic to a localized distinguished homotopy triangle. Apply the localized-triangle lemma. Rewrite only the outer pullback shift comparison by the degree-one equation, and transport distinguishedness through pullback.mapTriangle.mapIso of the representing triangle isomorphism. Package this as IsTriangulated. The component formula follows by rewriting the same degree-one equation and reflexivity.",
+   "uses": [
+    "lem-sc-derived-pullback-translated-unit-triangles",
+    "lem-sc-integer-shift-from-one",
+    "def-pc-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-pc-derived-category",
-  "def-pc-scheme-derived-tensor-structure",
+  "lem-sc-derived-pullback-translated-unit-triangles",
+  "def-sc-scheme-canonical-shift-unit-iso",
+  "def-sc-scheme-canonical-tensor-shift",
   "def-pc-derived-pullback",
-  "def-pc-kflat-complex",
-  "def-weil-proper-morphism",
-  "def-sc-scheme-canonical-shift-unit-iso"
+  "lem-sc-integer-shift-from-one",
+  "def-pc-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/06YJ",
-  "place": "Exactness from 06YJ; transport for a supplied monoidal structure expanded from parent plan"
+  "place": "J3: proved naturality, integer extension and homotopy-localization descent; remaining cone normalization is lem-sc-derived-pullback-translated-unit-triangles"
  },
  "mathlib_searches": [
   {
@@ -171,9 +189,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T145117-L-695131",
+  "landing": "20261013T153222-L-1059856",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

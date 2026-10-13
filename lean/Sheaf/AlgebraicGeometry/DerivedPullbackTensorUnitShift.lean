@@ -11,6 +11,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.CategoryTheory.IntegerShiftFromOne
+import Sheaf.AlgebraicGeometry.DerivedPullbackTranslatedUnitTriangles
 
 /-! # Translation expressed using the translated tensor unit
 
@@ -43,6 +45,54 @@ noncomputable def derivedPullbackTensorUnitShiftIso {Z Y : Scheme.{u}} (f : Z �
     asIso (Functor.OplaxMonoidal.δ (derivedPullback f)
       ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) K) ≪≫
     tensorIso e (Iso.refl _) ≪≫ schemeCanonicalShiftUnitIso Z ((derivedPullback f).obj K)
+
+private theorem unit_shift_naturality (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    {K N : schemeDerivedCategory X} (b : K ⟶ N) :
+    (schemeCanonicalShiftUnitIso X K).hom ≫ b⟦(1 : ℤ)⟧' =
+      ((𝟙_ (schemeDerivedCategory X))⟦(1 : ℤ)⟧) ◁ b ≫
+        (schemeCanonicalShiftUnitIso X N).hom := by
+  let := schemeCanonicalTensorShift X
+  let : ∀ M : schemeDerivedCategory X, (tensorRight M).CommShift ℤ :=
+    fun M ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) M
+  have : NatTrans.CommShift ((curriedTensor (schemeDerivedCategory X)).flip.map b) ℤ :=
+    Functor.CommShift₂.commShift_flip_map (h := .int) b
+  dsimp [schemeCanonicalShiftUnitIso]
+  simp only [Category.assoc]
+  rw [← Functor.map_comp, ← leftUnitor_naturality, Functor.map_comp]
+  simpa only [Category.assoc, tensorRight, Functor.flip, curriedTensor] using
+    congrArg (fun g ↦ g ≫ (shiftFunctor (schemeDerivedCategory X) (1 : ℤ)).map (λ_ N).hom)
+      (NatTrans.shift_app_comm ((curriedTensor (schemeDerivedCategory X)).flip.map b)
+        (1 : ℤ) (𝟙_ (schemeDerivedCategory X)))
+
+private theorem unit_shift_inv_naturality (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    {K N : schemeDerivedCategory X} (b : K ⟶ N) :
+    b⟦(1 : ℤ)⟧' ≫ (schemeCanonicalShiftUnitIso X N).inv =
+      (schemeCanonicalShiftUnitIso X K).inv ≫
+        ((𝟙_ (schemeDerivedCategory X))⟦(1 : ℤ)⟧) ◁ b := by
+  apply (cancel_epi (schemeCanonicalShiftUnitIso X K).hom).1
+  rw [← Category.assoc, unit_shift_naturality]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.hom_inv_id_assoc]
+
+private theorem tensor_unit_shift_naturality {Z Y : Scheme.{u}} (f : Z ⟶ Y)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [Functor.Monoidal (derivedPullback f)]
+    (e : (derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅
+      (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧)
+    {K N : schemeDerivedCategory Y} (b : K ⟶ N) :
+    (derivedPullback f).map (b⟦(1 : ℤ)⟧') ≫
+        (derivedPullbackTensorUnitShiftIso f e N).hom =
+      (derivedPullbackTensorUnitShiftIso f e K).hom ≫
+        ((derivedPullback f).map b)⟦(1 : ℤ)⟧' := by
+  dsimp only [derivedPullbackTensorUnitShiftIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.symm_hom, asIso_hom]
+  simp only [tensorIso, Iso.refl_hom, tensorHom_def, whiskerLeft_id,
+    Category.comp_id, Category.assoc]
+  rw [← (derivedPullback f).map_comp_assoc, unit_shift_inv_naturality,
+    Functor.map_comp_assoc, ← Functor.OplaxMonoidal.δ_natural_right_assoc]
+  rw [whisker_exchange_assoc, ← unit_shift_naturality]
 
 /-- The translated-unit formula admits a coherent exact pullback shift. This only
 asserts the formula for pullback translation itself, not the tensorator square.
@@ -80,6 +130,32 @@ theorem exists_derivedPullback_tensorUnitShift
       (derivedPullback f).IsTriangulated ∧
       ∀ K : schemeDerivedCategory Y,
         ((derivedPullback f).commShiftIso (1 : ℤ)).hom.app K =
-          (derivedPullbackTensorUnitShiftIso f e K).hom := by sorry
+          (derivedPullbackTensorUnitShiftIso f e K).hom := by
+  let Qh : HomotopyCategory
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ) ⥤
+      schemeDerivedCategory Y := DerivedCategory.Qh
+  obtain ⟨e, he⟩ := exists_derivedPullback_translatedUnit_triangles f
+  let a : shiftFunctor (schemeDerivedCategory Y) (1 : ℤ) ⋙ derivedPullback f ≅
+      derivedPullback f ⋙ shiftFunctor (schemeDerivedCategory Z) (1 : ℤ) :=
+    NatIso.ofComponents (derivedPullbackTensorUnitShiftIso f e)
+      (fun b ↦ tensor_unit_shift_naturality f e b)
+  obtain ⟨sF, hsF⟩ := Functor.exists_commShift_of_one (derivedPullback f) a
+  let := sF
+  refine ⟨sF, e, ?_, ?_⟩
+  · refine ⟨fun T hT ↦ ?_⟩
+    obtain ⟨T₀, i, hT₀⟩ := (Qh.distTriang_iff T).1 hT
+    apply CategoryTheory.Pretriangulated.isomorphic_distinguished _ ?_ _
+      ((derivedPullback f).mapTriangle.mapIso i)
+    change CategoryTheory.Pretriangulated.Triangle.mk
+      ((derivedPullback f).map (Qh.mapTriangle.obj T₀).mor₁)
+      ((derivedPullback f).map (Qh.mapTriangle.obj T₀).mor₂)
+      ((derivedPullback f).map (Qh.mapTriangle.obj T₀).mor₃ ≫
+        ((derivedPullback f).commShiftIso (1 : ℤ)).hom.app
+          (Qh.mapTriangle.obj T₀).obj₁) ∈ distTriang (schemeDerivedCategory Z)
+    rw [hsF]
+    exact he T₀ hT₀
+  · intro K
+    rw [hsF]
+    rfl
 
 end AlgebraicGeometry
