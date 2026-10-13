@@ -1,0 +1,138 @@
+{
+ "id": "def-sc-localized-residue-homology",
+ "kind": "definition",
+ "title": "Derived residue homology on the localized module site",
+ "statement": "For a scheme S [def-pc-scheme], an open U, a chosen derived category of modules on its localized site [def-pc-derived-category], and x in U, define localizedResidueHomology as the composite of the derived over-site equivalence to U, derived pullback to Spec kappa(x) [def-pc-derived-pullback], degree-zero derived homology, global sections and restriction of scalars along GammaSpecIso inverse. Use the standard derived localizations on U and its residue scheme. This explicitly constructed functor takes values in kappa(x)-modules [def-weil-residue-field].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06YJ, 0D5S and 0098"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived residue homology is unchanged by restriction to an open neighbourhood of a point",
+   "results": "UNAVAILABLE: Internal Server Error from msearch.py; other searches used.",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived residue fibre homology under restriction to an open subscheme",
+   "results": "Eight hits, including Scheme.evaluation_naturality and Scheme.Gammaevaluation_naturality in Mathlib/AlgebraicGeometry/ResidueField. These concern ordinary ring maps, not the derived homology comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; assemble the existing derived and stalk comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryFactors",
+   "results": "No hits; service reported unknown identifier. The declaration was located and read in local Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean.",
+   "date": "2026-10-13",
+   "verdict": "The generic exact-localization factorization is available; no exact residue comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*[Hh]omology|[Hh]omology.*residue in Mathlib/AlgebraicGeometry; mapDerivedCategory and mapHomologicalComplexHomologyIso in Mathlib/Algebra/Homology",
+   "results": "No exact geometric residue homology theorem. Read DerivedCategory/ExactFunctor.lean and ShortComplex/PreservesHomology.lean for the generic localization and natural homology APIs.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived fibre functor of sheaves commutes with restriction to an open containing a point and its residue field isomorphism",
+   "results": "Second reader: eight hits about restrictFunctorΓ and site-point fibres, none states the derived residue homology comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fromSpecResidueField\"",
+   "results": "Second reader: twelve hits; Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField gives the commuting residue square, but none gives the derived natural comparison. Read Mathlib/AlgebraicGeometry/ResidueField.lean lines 177 and 261.",
+   "date": "2026-10-13",
+   "verdict": "Use the existing residue-square identity in the planned reduction; not an exact comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*restriction|restriction.*residue|SpecMap_residueFieldMap_fromSpecResidueField",
+   "results": "Second reader: seven hits for the residue-square identity and its uses in PullbackCarrier and UniversallyInjective. Also searched lean/Sheaf and lean/WeilConjectures: KFlatStalkResidueCohomology gives object comparisons; DerivedPullbackOpenRestrictionUniverses supplies the generic open restriction comparison, already a proof dependency.",
+   "date": "2026-10-13",
+   "verdict": "No exact natural residue homology comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ResidueStalkHomologyMapComparison",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof: apply the general theorem of the cube; structure-sheaf pushforward input for its product morphism. Tag 0E62, perfect-lemma-proper-flat-h0, local argument; Tag 0BCD, lift-perfect-from-residue-field; Tag 0E62, local unit argument, with the fixed model shape of Tag 0BCD; nonzero residue coefficient in the fixed connective rank-one model; residue homology comparison and nonzero degree-zero coefficient, steps 1–2 of lem-sc-rank-one-residue-stalk-component; residue-stalk homology map comparison: concrete functor used by proof steps 1--3",
+   "via": [
+    "lem-sc-residue-stalk-homology-map-comparison",
+    "lem-sc-residue-homology-rank-one-coefficient",
+    "lem-sc-rank-one-residue-stalk-component",
+    "lem-sc-connective-rank-one-model-stalk",
+    "lem-sc-perfect-local-degree-zero-unit",
+    "lem-sc-proper-flat-structure-sheaf-stalk-surjective",
+    "lem-sc-proper-flat-structure-sheaf-stalk",
+    "lem-sc-proper-flat-global-sections-criterion",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedResidueHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedResidueHomology.lean",
+  "declaration": "AlgebraicGeometry.localizedResidueHomology",
+  "statement": "def localizedResidueHomology (S : Scheme.{u}) (U : S.Opens)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    (x : U.toScheme) :\n    DerivedCategory (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ⥤\n      ModuleCat.{u} (U.toScheme.residueField x)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T111917-L-3061035",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T111917-L-3061035",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

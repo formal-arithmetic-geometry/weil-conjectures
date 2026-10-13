@@ -12185,3 +12185,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/R2/Sheaf.Algebra.FiniteRelationCokernelColimit (stage 3; reviewer PASS; first push; landing 20261013T111916-L-3060455 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/R2/Sheaf.Algebra.Homology.FinitePresentationColimitRetraction (stage 3; reviewer PASS; first push; landing 20261013T111916-L-3060718 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/R2/Sheaf.AlgebraicGeometry.IdealTensorRestrictedMultiplicationImage (stage 3; reviewer PASS; after a return; landing 20261013T111917-L-3060847 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/R2/Sheaf.AlgebraicGeometry.ResidueStalkHomologyMapComparison (stage 3; reviewer PASS; after a return; landing 20261013T111917-L-3061035 (interface); batch 20261013T111833; modules 4; new nodes 3)
