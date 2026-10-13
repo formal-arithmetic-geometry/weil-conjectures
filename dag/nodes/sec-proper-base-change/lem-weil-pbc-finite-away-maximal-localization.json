@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-finite-away-maximal-localization",
+ "kind": "statement",
+ "title": "Maximal localization of a finite principal-open extension",
+ "statement": "Let $S,T$ be integral domains, $m$ a maximal ideal of $S$, $s\\in S\\setminus m$, and $g:S_s\\to T$ an injective finite ring map [def-weil-pbc-module-localization-away] [def-weil-finitely-generated-module]. Set $h=g\\circ(S\\to S_s)$ and $M=h(S\\setminus m)$. Then $M^{-1}T$ [def-weil-pbc-module-localization] admits an injective finite $S_m$-algebra structure [def-weil-pbc-localization-at-prime]. Every maximal ideal $q$ of $M^{-1}T$ contracts to a maximal ideal $n_0$ of $T$, and $mT\\subseteq n_0$, where $mT$ means extension along $h$.",
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5: residue-polynomial lifting, finite splitting extension, integral closure and roots over maximal ideals"
+ },
+ "proof": [
+  {
+   "text": "Define the canonical localization map using the image of the complement of m. Injectivity of h follows from injectivity of principal localization in a domain. Injectivity descends to localization. The powers of s lie in the complement of m, so S_m is the localization of S_s at the image of that complement. The image of that monoid in T is M. Apply Module.Finite.of_isLocalization to the finite S_s-module T.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Finiteness makes the localized map integral. A maximal ideal q contracts to the unique maximal ideal of S_m by [lem-weil-pbc-finite-algebra-is-integral] and [lem-weil-pbc-integral-maximal-contracts-maximal]. Composing contraction with S -> S_m gives m, by the localization maximal ideal identity. The same composite through T gives that the contraction n0 to T contains the extension mT.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Contract n0 along g to an ideal J of S_s. Its contraction to S is m by the previous composite identity. Since S_s is a localization and m is maximal, J is maximal (Ideal.IsMaximal.of_isLocalization_of_disjoint). The prime ideal n0 lies over J in the integral extension g, so [lem-weil-pbc-integral-prime-over-maximal-maximal] proves n0 maximal.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5: residue-polynomial lifting, finite splitting extension, integral closure and roots over maximal ideals"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite integral extensions and localization at a prime ideal preserve finiteness and maximal ideals",
+   "results": "Actual hits: IsIntegrallyClosed.of_localization_maximal, IsIntegrallyClosed.of_isLocalization_maximal, instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, isIntegrallyClosed_ofLocalizationMaximal, Algebra.QuasiFiniteAt, Module.Finite.of_isLocalized_maximal, instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl, IsLocalization.AtPrime.mem_primesOver_of_isPrime. No exact match for the finite split coefficient algebra construction; generic localization lemmas are used in the proved helper.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Finite",
+   "results": "Actual hits: RingHom.Finite, RingHom.finite_algebraMap, RingHom.Finite.id, RingEquiv.finite, RingHom.Finite.of_surjective, RingHom.Finite.of_comp_finite, RingHom.Finite.comp, RingHom.Finite.tensorProductMap. No exact match for the finite split coefficient algebra construction; generic localization lemmas are used in the proved helper.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "grep",
+   "query": "RingHom.Finite.*local|finite_localization|localization.*finite",
+   "results": "Actual hits: Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/Algebra/AffineMonoid/Embedding.lean, Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. No exact match for the finite split coefficient algebra construction; generic localization lemmas are used in the proved helper.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monic polynomial annihilating a residue generator splits after a finite integral extension of a Nagata ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monic polynomial over a Nagata domain splitting in a finite integral extension",
+   "results": "Actual hits: Polynomial.Monic.exists_splits_map, AlgebraicClosure.Monics.map_eq_prod, integralClosure.mem_lifts_of_monic_of_dvd_map, AlgebraicClosure.Monics.splits_finsetProd, Irreducible.exists_dvd_monic_irreducible_of_isIntegral, Polynomial.Splits.mem_lift_of_roots_mem_range, Polynomial.mem_lift_of_splits_of_roots_mem_range, Polynomial.isIntegrallyClosed_iff'. No exact match for the finite split coefficient algebra construction; generic localization lemmas are used in the proved helper.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonSplittingPolynomialCover",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-monogenic-splitting-cover",
+   "place": "Tag 0334 Step 5: Maximal localization of a finite principal-open extension",
+   "via": [
+    "lem-weil-pbc-monogenic-splitting-polynomial-cover",
+    "lem-weil-pbc-monogenic-splitting-cover",
+    "lem-weil-pbc-monogenic-maximal-finite-cover-core",
+    "lem-weil-pbc-monogenic-maximal-finite-cover",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteAwayMaximalLocalization",
+  "file": "lean/Sheaf/RingTheory/FiniteAwayMaximalLocalization.lean",
+  "declaration": "exists_finite_away_maximal_localization",
+  "statement": "theorem exists_finite_away_maximal_localization\n    (S : Type u) (T : Type v) [CommRing S] [IsDomain S] [CommRing T] [IsDomain T]\n    (m : Ideal S) [m.IsMaximal] (s : S) (hs : s ∉ m)\n    (g : Localization.Away s →+* T) (hg : Function.Injective g) (hfin : g.Finite) :\n    let h := g.comp (algebraMap S (Localization.Away s))\n    let M := m.primeCompl.map h\n    ∃ (_ : Algebra (Localization.AtPrime m) (Localization M)),\n      Function.Injective (algebraMap (Localization.AtPrime m) (Localization M)) ∧\n      Module.Finite (Localization.AtPrime m) (Localization M) ∧\n      ∀ (q : Ideal (Localization M)) [q.IsMaximal],\n        (q.comap (algebraMap T (Localization M))).IsMaximal ∧\n        m.map h ≤ q.comap (algebraMap T (Localization M))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T040745-L-3948029",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T040745-L-3948029",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

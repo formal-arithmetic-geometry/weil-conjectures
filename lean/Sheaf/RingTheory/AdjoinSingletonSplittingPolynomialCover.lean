@@ -8,6 +8,9 @@ module
 public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.AdjoinSingletonFiniteSplitAlgebra
+import Sheaf.RingTheory.FiniteAwayMaximalLocalization
+import Mathlib.Algebra.BigOperators.Fin
 
 /-! # Split polynomial data for a finite localized cover
 Source: Stacks Project, Algebra, Tag 0334, Step 5. -/
@@ -16,6 +19,8 @@ Source: Stacks Project, Algebra, Tag 0334, Step 5. -/
 
 universe u v
 
+set_option maxHeartbeats 600000 in
+-- The existential ring structures and localization algebra make elaboration expensive.
 /-- A finite localized splitting cover carries a single positive-degree split polynomial
 whose evaluation belongs to every maximal contraction.
 Source: Stacks Project, Algebra, Tag 0334, Step 5, before extracting a linear factor.
@@ -62,4 +67,52 @@ theorem exists_adjoin_singleton_splitting_polynomial_cover
                   Algebra.adjoin R' ({z} : Set K')) -
                   algebraMap R' (Algebra.adjoin R' ({z} : Set K')) (roots i))) ∈
                 q.comap (algebraMap (Algebra.adjoin R' ({z} : Set K'))
-                  (Localization M)) := by sorry
+                  (Localization M)) := by
+  classical
+  obtain ⟨s, hs, R', K', cR, dR, nR, cK, aK, frac, hR', z, g, hg, hfin, f, hf, hd, hsplit,
+    hmem⟩ := exists_adjoin_singleton_finite_split_algebra R K hR x m
+  let S := Algebra.adjoin R ({x} : Set K)
+  let T := Algebra.adjoin R' ({z} : Set K')
+  let h : S →+* T := g.comp (algebraMap S (Localization.Away s))
+  let M := m.primeCompl.map h
+  have hs0 : s ≠ 0 := fun e ↦ hs (e ▸ m.zero_mem)
+  have hinj : Function.Injective h := hg.comp
+    (IsLocalization.injective (Localization.Away s) (Submonoid.powers_le.mpr
+      (mem_nonZeroDivisors_iff_ne_zero.mpr hs0)))
+  have hM : M ≤ nonZeroDivisors T := by
+    rintro t ⟨a, ha, rfl⟩
+    apply mem_nonZeroDivisors_iff_ne_zero.mpr
+    intro he
+    have ha0 : a = 0 := hinj (he.trans h.map_zero.symm)
+    exact ha (ha0 ▸ m.zero_mem)
+  obtain ⟨alg, hi, hfinite, hq⟩ :=
+    exists_finite_away_maximal_localization S T m s hs g hg hfin
+  let := alg
+  let t : T := ⟨z, Algebra.subset_adjoin (Set.mem_singleton z)⟩
+  let l := f.roots.toList
+  let roots : Fin l.length → R' := l.get
+  have hlen : l.length = f.natDegree := by
+    simpa [l] using hsplit.natDegree_eq_card_roots.symm
+  have heval : (∏ i : Fin l.length, (t - algebraMap R' T (roots i))) =
+      Polynomial.aeval t f := by
+    rw [hsplit.eq_prod_roots_of_monic hf]
+    simp only [map_multiset_prod, Multiset.map_map, Function.comp_def, map_sub,
+      Polynomial.aeval_X, Polynomial.aeval_C]
+    change (∏ i : Fin l.length, (t - algebraMap R' T (l.get i))) =
+      (f.roots.map (fun a ↦ t - algebraMap R' T a)).prod
+    rw [← List.prod_ofFn]
+    have he : List.ofFn (fun i ↦ t - algebraMap R' T (l.get i)) =
+        l.map (fun a ↦ t - algebraMap R' T a) := by
+      simpa only [Function.comp_def, List.ofFn_get] using
+        (List.map_ofFn (f := l.get) (g := fun a ↦ t - algebraMap R' T a)).symm
+    rw [he]
+    simp [l]
+  refine ⟨R', K', cR, dR, nR, cK, aK, frac, hR', z, M, hM, alg, hi, hfinite,
+    l.length, roots, hlen.symm ▸ hd, ?_⟩
+  intro q hqmax
+  obtain ⟨hqM, hle⟩ := hq q
+  refine ⟨hqM, ?_⟩
+  change (∏ i : Fin l.length, (t - algebraMap R' T (roots i))) ∈ _
+  rw [heval]
+  exact hle hmem
+
