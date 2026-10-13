@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-mixed-pullback-sections-counit-unit",
+ "kind": "statement",
+ "title": "Sections of a pullback counit and the normalized Leray unit",
+ "statement": "Let $g:T\\to S$ be a scheme morphism [def-pc-scheme] and choose independently sheaf and module derived localizations [def-pc-derived-category]. Let $C$ be a complex of modules on $S$, and let $\\epsilon:Q_h Lg^*\\to g^*Q_h$ be a natural transformation with the displayed Hom-equivalence normalization for the pinned derived adjunction [def-pc-derived-base-change-map], evaluated at the identity of the homotopy pullback of $C$. Conjugate $\\epsilon_C$ by the complex/homotopy quotient factors to get $e:Lg^*Q(C)\\to Q(g^*C)$. Then the ordinary-to-derived sections comparison followed by derived sections of the pullback unit, normalized Leray [lem-sc-mixed-global-sections-direct-image-iso], and restriction of derived sections of $e$, equals localization of sections of the ordinary pullback unit followed by the exact scalar restriction factor and restriction of the T-sections comparison. The exact equation is lean.statement. No affine, K-flat, boundedness or invertibility assumption is made. Sections and pullback functors are additive.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 0D5T; formal unit/naturality calculation in step 3 of lem-sc-mixed-affine-pullback-unit-normalization, with complex localization factors."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-base-change-map",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-mixed-affine-chart-sections-complex-unit-isIso",
+  "lem-sc-mixed-global-sections-direct-image-iso"
+ ],
+ "proof": [
+  {
+   "text": "Expand the supplied Hom-equivalence equation at the identity to obtain eta followed by derived direct image of epsilon equal to Q of the ordinary unit followed by the right-derived direct-image unit. Apply derived S-sections and use naturality of the sections right-derived unit at the ordinary pullback unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use naturality of the normalized Leray isomorphism at epsilon. Substitute its defining derived-unit equation. Its underived sections comparison is the identity on elements, so the ordinary map obtained is sections of the pullback unit.",
+   "uses": [
+    "lem-sc-mixed-global-sections-direct-image-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate by quotientCompQhIso and mapHomotopyCategoryFactors at C and its termwise pullback. Their naturality replaces the homotopy ordinary map by the localized complex map. The exact scalar restriction factorsh_hom_app equation, inverted, identifies the homotopy scalar factor with the complex scalar factor. Cancel paired factor isomorphisms. This is exactly the stated equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-mixed-global-sections-direct-image-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 0D5T; explicit naturality calculation written by V2 following the parent node step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction unit followed by counit compatible with right derived global sections Leray comparison",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback adjunction unit compatibility with derived global sections comparison and counit on K flat complex",
+   "results": "Found Adjunction.derived_unit and ordinary sheaf pullback/unit declarations; no complex sections/counit Leray equation.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "No matching composite found; the generic derived-unit factorization was inspected in local sources.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "mixedSectionsComplexUnit|sectionsComplexUnit.*naturality|mixedPullback_sections_counit_unit",
+   "results": "Read MixedAffineSectionsComplexUnit, MixedGlobalSectionsDirectImageIso, SchemeDerivedBaseChangeMap and the existing chart comparison. No duplicate of the generic sections/counit equation.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackUnitNormalization",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mixed-affine-pullback-unit-normalization",
+   "place": "proof step 3, generic sections and counit calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedPullbackSectionsCounitUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedPullbackSectionsCounitUnit.lean",
+  "declaration": "AlgebraicGeometry.mixedPullback_sections_counit_unit",
+  "statement": "theorem mixedPullback_sections_counit_unit {S T : Scheme.{u}} (g : T ⟶ S)\n    [(Scheme.Modules.tensorPullback g).Additive]\n    [(RingedSpace.globalSectionsFunctor S.toRingedSpace).Additive]\n    [(RingedSpace.globalSectionsFunctor T.toRingedSpace).Additive]\n    (C : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)\n    (ε : DerivedCategory.Qh ⋙ derivedPullback.{u, w} g ⟶\n      (Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ) ⋙\n        DerivedCategory.Qh\n          (C := SheafOfModules.{u} (moduleRings T.toRingedSpace)))\n    (hunit :\n      (schemeHomPullbackAdjunction.{u, w} g).homEquiv\n          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj C))\n          ((DerivedCategory.Qh\n            (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).obj\n            (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj\n              ((HomotopyCategory.quotient _ (.up ℤ)).obj C)))\n          (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj C) ≫\n            (DerivedCategory.Qh\n              (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).map (𝟙 _)) =\n      (DerivedCategory.Qh\n        (C := SheafOfModules.{u} (moduleRings S.toRingedSpace))).map\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).mapHomotopyCategory\n          (.up ℤ)).homEquiv ((HomotopyCategory.quotient _ (.up ℤ)).obj C) _ (𝟙 _)) ≫\n        (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app\n          (((Scheme.Modules.tensorPullback g).mapHomotopyCategory (.up ℤ)).obj\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj C))) :\n    let H := RingedSpace.globalSectionsFunctor S.toRingedSpace\n    let J := RingedSpace.globalSectionsFunctor T.toRingedSpace\n    let K : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings T.toRingedSpace) := Scheme.Modules.tensorPullback g\n    let R := ModuleCat.restrictScalars.{u} g.appTop.hom\n    let d : H ⟶ K ⋙ J ⋙ R := Functor.whiskerRight\n      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit H\n    let D := (K.mapHomologicalComplex (.up ℤ)).obj C\n    let e : (derivedPullback.{u, w} g).obj (DerivedCategory.Q.obj C) ⟶ DerivedCategory.Q.obj D :=\n      (derivedPullback.{u, w} g).map ((DerivedCategory.quotientCompQhIso _).inv.app C) ≫\n        ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj C) ≫\n        (DerivedCategory.Qh\n          (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).map\n          ((K.mapHomotopyCategoryFactors (.up ℤ)).hom.app C) ≫\n        (DerivedCategory.quotientCompQhIso\n          (SheafOfModules.{u} (moduleRings T.toRingedSpace))).hom.app D\n    mixedSectionsComplexUnit S C ≫\n      (schemeDerivedGlobalSections S).map\n        ((schemeHomPullbackAdjunction.{u, w} g).unit.app (DerivedCategory.Q.obj C)) ≫\n      (mixedGlobalSectionsDirectImageIso g).hom.app\n        ((derivedPullback.{u, w} g).obj (DerivedCategory.Q.obj C)) ≫\n      (schemeGlobalScalarRestriction g).map ((schemeDerivedGlobalSections T).map e) =\n    DerivedCategory.Q.map ((d.mapHomologicalComplex (.up ℤ)).app C) ≫\n      R.mapDerivedCategoryFactors.inv.app ((J.mapHomologicalComplex (.up ℤ)).obj D) ≫\n      (schemeGlobalScalarRestriction g).map (mixedSectionsComplexUnit T D)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fb1aa",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T171519-L-1983870",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fb1aa",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T171519-L-1983870",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and direct importer compile; target statement, DAG metadata, proof route, and interface changes match the packet."
+ }
+}

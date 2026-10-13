@@ -18,38 +18,46 @@
  ],
  "proof": [
   {
-   "text": "K-flat chart pullback is computed termwise. Tensor pullback/tilde base change identifies the pulled-back complex with an affine chart complex on T.",
+   "text": "Tilde preserves K-flatness, and restriction along the affine spectrum chart preserves K-flatness. Extract the original derived-pullback counit, which is invertible on this complex. Uniqueness of left derived functors transports invertibility to the counit used by the pinned adjunction. Conjugate by the complex/homotopy quotient factors to obtain the complex model isomorphism e.",
    "uses": [
-    "lem-pc-affine-kflat-pullback-chart-comparison",
-    "lem-weil-pbc-tilde-pullback-base-change"
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-kflat-open-restriction",
+    "def-pc-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
   },
   {
-   "text": "The sections unit is invertible on that chart complex; define b by sections of the pullback counit followed by its inverse.",
+   "text": "The naturality square of toSpecGamma, tensor-pullback composition and uniqueness of the pullback/restriction adjunction give the termwise chart comparison. Combine it with tensor-pullback/tilde base change. The sections unit is invertible on the resulting affine chart complex; naturality transports its invertibility to the termwise pullback of C.",
    "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
     "lem-sc-mixed-affine-chart-sections-complex-unit-isIso"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the pinned derived pullback unit factorization and sections-unit naturality, then the normalized Leray equation and its naturality at the counit; insert quotient factors.",
+   "text": "Take b to be derived T-sections of e followed by the inverse of the complex sections unit. The pinned adjunction supplies the underived Hom-equivalence factorization at the identity. Apply the generic sections/counit unit equation, then postcompose with scalar restriction of the inverse sections unit. Functoriality and inverse cancellation give exactly the required equation.",
    "uses": [
-    "lem-sc-mixed-global-sections-direct-image-iso"
+    "def-pc-derived-base-change-map",
+    "lem-sc-mixed-pullback-sections-counit-unit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-kflat-pullback-chart-comparison",
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-kflat-open-restriction",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
   "lem-weil-pbc-tilde-pullback-base-change",
   "lem-sc-mixed-affine-chart-sections-complex-unit-isIso",
-  "lem-sc-mixed-global-sections-direct-image-iso"
+  "def-pc-derived-base-change-map",
+  "lem-sc-mixed-pullback-sections-counit-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 06Z0 (affine derived sections unit), 08DV and 08DW(2) (K-flat pullback model), 0AA7 (canonical scalar-extension transpose), 0D5T (normalized Leray comparison); explicit ordinary-adjunction and localization calculation; explicit Lean proof in delivered module"
+  "place": "Tags 08DV, 08DW(2), 06Z0 and 0D5T; explicit Lean reduction by V2, with generic sections/counit factorization isolated."
  },
  "mathlib_searches": [
   {
@@ -138,11 +146,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J4",
+  "reviewer": "X-fb1aa",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T151133-L-877075",
+  "landing": "20261013T171519-L-1983870",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules and direct importer compile; target statement, DAG metadata, proof route, and interface changes match the packet."
  }
 }
