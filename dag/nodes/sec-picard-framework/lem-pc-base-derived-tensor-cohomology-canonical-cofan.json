@@ -12,33 +12,45 @@
  },
  "proof": [
   {
-   "text": "Restrict the colimiting complex cofan to R. Resolve each restricted summand K-flatly and take the termwise sum. Exactness of module sums makes the summed augmentation a quasi-isomorphism; tensor distributivity and exactness make this sum K-flat. Specialize the fixed-second-factor theorem to B in degree zero and identify its ordinary tensor with scalar extension. Compute all supplied universal derived functors using these resolutions; uniqueness of counit-compatible universal functors identifies δ_j with these canonical comparisons. Ordinary extension preserves sums, and the derived direct-sum theorem identifies the resulting cofan in D(B).",
+   "text": "Restriction of scalars preserves coproducts, and mapHomologicalComplex preserves these degreewise. Apply derivedModuleDirectSums to the restricted family to show that DerivedCategory.Q preserves its coproduct, then transport through quotientCompQhIso to the quotient followed by Qh.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-derived-tensor-second-factor-functor",
     "lem-pc-derived-module-direct-sums"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Derived module homology preserves this derived cofan. Transport its cohomology cofan through the models cohomologyIso maps; the hg equations identify its legs with the restricted g_j. Thus the B-module cofan is colimiting. Given any E-module cocone, its unique B-linear universal map respects E: for every e in E the two composites of its underlying additive map with multiplication by e agree after every g_j, since the cocone legs and g_j are E-linear. B-module coproduct uniqueness proves equality. This gives the E-linear universal map, with uniqueness inherited from B. For empty I the sum resolution is zero and the same universal property applies.",
+   "text": "Use the fully proved private scalarExtension_quasiIso_of_kFlat helper from Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso (import all). It specializes mixedTensor_kFlat_quasiIso to the B tensor unit in degree zero and transports via mapBifunctorSingle₂Iso and the left unitor. This supplies extendScalars.PreservesKFlatQuasiIso. The already proved source-library Adjunction.derivedAdjunction, with module functorial flat resolutions and Grothendieck K-injective resolutions, makes the standard leftDerivedFunctor a left adjoint. Thus it preserves coproducts. Functor.leftDerivedNatIso identifies this standard functor with mS.derived; preservesColimitsOfShape_of_natIso transfers preservation. These steps are the fully proved private helper derivedExtension_preservesCoproducts, with no new assumptions.",
+   "uses": [
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply mS.derived to the restricted derived coproduct, then derivedModuleHomology_coproduct in degree i. Counit compatibility and leftDerived_ext identify every δ_j with the invertible leftDerivedNatIso. Form the diagram isomorphism with components m_j.cohomologyIso followed by homology of δ_j at the restricted M_j. Naturality of δ_j at s_j and hg identify its legs. Precompose the fixed homology cofan by this diagram isomorphism, and transport its apex by the inverse of mS.cohomologyIso. The resulting B-module cofan has exactly the restricted legs g_j.",
    "uses": [
     "def-pc-base-derived-tensor-cohomology-model",
     "lem-pc-derived-module-homology-coproduct"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Restriction from E=A tensor_R B to B preserves coproducts and reflects isomorphisms. Mathlib reflectsColimit_of_reflectsIsomorphisms therefore reflects the colimit just proved. Apply isColimitOfIsColimitCofanMkObj and package the result in Nonempty. The argument is uniform for empty I, zero rings and unbounded complexes; it uses no scalar action calculation beyond the fact that g_j are E-linear.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-base-derived-tensor-cohomology-model",
   "lem-pc-derived-module-direct-sums",
   "lem-pc-derived-module-homology-coproduct",
-  "lem-pc-derived-tensor-second-factor-functor"
+  "lem-pc-mixed-tensor-kflat-quasi-iso"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "C3",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 06Y6, K-flat computation and independence of the derived change of rings; coproduct argument with Tag 07D9 (injectives.tex); localized counit comparison in Tag 08IB and the calculation used in Tag 0DJA(1). Official pages https://stacks.math.columbia.edu/tag/06Y6, https://stacks.math.columbia.edu/tag/07D9 and https://stacks.math.columbia.edu/tag/0DJA were read online on 2026-10-14 because the local Stacks checkout is absent."
+  "place": "Tags 06Y6, 064L and 07D9; shorter route through the source library derived adjunction, existing scalar-extension K-flat helper, universal derived-functor uniqueness, homology coproducts, and reflection by restriction of scalars."
  },
  "mathlib_searches": [
   {
@@ -127,10 +139,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T211100-L-390651",
-  "kind": "interface",
+  "landing": "20261013T215555-L-894497",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
