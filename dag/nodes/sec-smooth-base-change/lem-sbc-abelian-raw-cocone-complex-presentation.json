@@ -17,47 +17,36 @@
  ],
  "proof": [
   {
-   "text": "Base change the scheme diagram and limiting cone along affine U. Pullback universal properties give the maps, functor laws and limiting property. Affine transition permanence and qcqs base change give qcqs stages. Restrict coefficients, transport their identities and composition through upperStarComp, and place them in single complexes. Restrict H at the limit, using eH and hH for the pulled-back diagram. Restriction is a left adjoint and preserves the coefficient colimit; single complexes preserve it termwise, giving the coefficient cocone L. All complexes vanish below zero.",
+   "text": "Construct the geometric restricted single-complex system with simultaneous naturality for transitions and cocone legs. This is independent of raw derived Hom and independent of the prescribed K and B.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "def-pc-fibre-product"
+    "lem-sbc-restricted-affine-complex-system-natural"
    ],
    "elementary": false
   },
   {
-   "text": "Use the natural additive raw/restricted-cohomology comparison at every stage and at the limit. It is computed by the free-sheaf sections adjunction on an injective resolution; etale restriction preserves injectives and D+ includes fully faithfully in D. Compose these isomorphisms with e_i inverse and e_B inverse to identify K and B.pt with the cohomology of the constructed complexes.",
+   "text": "Apply exists_raw_restricted_cohomology_natural_iso at all stages and at the limit. Compose e_i inverse, the raw/restricted isomorphism, and the geometric stage isomorphism to obtain a_i:K_i to T_i, and likewise b:B.pt to the geometric cocone point. The supplied hmap and hleg equations, followed by the raw/restricted naturality and the two geometric compatibility equations, prove transition and leg naturality for a_i and b.",
    "uses": [
-    "lem-sbc-raw-restricted-cohomology-natural-iso",
-    "lem-weil-pbc-etale-restriction-injectives"
+    "lem-sbc-raw-restricted-cohomology-natural-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Set P to the exact derived adjunction-unit and global-sections comparison map in the presentation. Naturality of the raw/restricted comparison for each stage arrow identifies the five-factor raw map with P followed by cohomology of its coefficient map. The hmap equation then supplies the presentation transition equation, by homomorphism extensionality. Applying the same calculation to each cone projection and hleg supplies the leg equation. Reindex through the double-opposite equivalence. This constructs the presentation without applying continuity.",
+   "text": "Reindex using the double-opposite equivalence and form the natural isomorphism from the a_i. Transport the geometric complex presentation: compose its stage and limit isomorphisms with a_i and b. Naturality rewrites each transition and the leg equations rewrite each leg; associativity and inverse cancellation finish. The private presentation_of_iso helper performs this categorical transport. No cohomology continuity is used.",
    "uses": [
-    "lem-sbc-raw-restricted-cohomology-natural-iso",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
     "def-sbc-etale-complex-cohomology-presentation"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "def-pc-fibre-product",
+  "lem-sbc-restricted-affine-complex-system-natural",
   "lem-sbc-raw-restricted-cohomology-natural-iso",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
   "def-sbc-etale-complex-cohomology-presentation"
  ],
  "proof_origin": {
-  "by": "agent C2",
+  "by": "agent F1",
   "document": "Stacks Project",
-  "place": "Tag 09Z1, lemma-relative-colimit, affine-object reduction; Tag 03Q8 restricted cohomology; Tag 0EZM lemma-colimit-variant-complexes, input system only; parent proof steps 1 and 3; explicit raw derived-Hom coherence elaboration by C2"
+  "place": "Tags 09Z1, 03Q8, 0EZM; natural raw/restricted comparison followed by explicit transport of the restricted geometric presentation"
  },
  "mathlib_searches": [
   {
@@ -139,12 +128,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T225300-L-1801689",
+  "landing": "20261013T040745-L-3947869",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

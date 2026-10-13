@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
+import Sheaf.AlgebraicGeometry.RestrictedAffineComplexSystemNatural
 
 /-! # Complex presentation of the varying-coefficient raw diagram
 
@@ -23,6 +25,49 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+private theorem comparison_square
+    {A A' R R' K K' T T' : AddCommGrpCat.{v + 1}}
+    (e : A ≅ K) (e' : A' ≅ K') (r : A ≅ R) (r' : A' ≅ R')
+    (s : R ≅ T) (s' : R' ≅ T') (m : K ⟶ K') (n : T ⟶ T')
+    (q : R ⟶ R') (g : A → A')
+    (hm : ∀ t, m (e.hom t) = e'.hom (g t))
+    (hr : ∀ t, q (r.hom t) = r'.hom (g t))
+    (hs : ∀ t, n (s.hom t) = s'.hom (q t)) :
+    m ≫ (e'.symm ≪≫ r' ≪≫ s').hom = (e.symm ≪≫ r ≪≫ s).hom ≫ n := by
+  ext x
+  change (e'.symm ≪≫ r' ≪≫ s').hom (m x) = n ((e.symm ≪≫ r ≪≫ s).hom x)
+  simp only [Iso.trans_hom, Iso.symm_hom, AddCommGrpCat.comp_apply]
+  have hm' := hm (e.inv x)
+  simp only [Iso.inv_hom_id_apply] at hm'
+  rw [hm', Iso.hom_inv_id_apply, hs, hr]
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem presentation_of_iso
+    {J : Type v} [SmallCategory J] [IsCofiltered J]
+    {K T : Jᵒᵖ ⥤ AddCommGrpCat.{v + 1}} {B : Cocone K} {B' : Cocone T}
+    (s : EtaleComplexCohomologyPresentation T B') (a : K ≅ T) (b : B.pt ≅ B'.pt)
+    (hb : ∀ i, B.ι.app i ≫ b.hom = a.hom.app i ≫ B'.ι.app i) :
+    EtaleComplexCohomologyPresentation K B := by
+  rcases s with ⟨D, c, hc, compact, quasiSeparated, affine, F, φ, hid, hcomp,
+    n, hbelow, G, eG, hG, p, P, hP, eT, hT, L, hL, eB, hB, _⟩
+  refine ⟨D, c, hc, compact, quasiSeparated, affine, F, φ, hid, hcomp,
+    n, hbelow, G, eG, hG, p, P, hP, (fun i ↦ a.app (op i) ≪≫ eT i), ?_,
+    L, hL, b ≪≫ eB, ?_, trivial⟩
+  · intro i j f
+    calc
+      K.map f.op = (a.app (op i)).hom ≫ T.map f.op ≫ (a.app (op j)).inv := by
+        have hn : K.map f.op ≫ (a.app (op j)).hom =
+            (a.app (op i)).hom ≫ T.map f.op := a.hom.naturality f.op
+        rw [← Category.assoc, ← hn]
+        simp only [Iso.app_hom, Iso.app_inv, Category.assoc,
+          Iso.hom_inv_id_app, Category.comp_id]
+      _ = _ := by rw [hT]; simp only [Iso.trans_hom, Iso.trans_inv, Category.assoc]
+  · intro i
+    simp only [Iso.trans_hom, Iso.app_hom]
+    rw [← Category.assoc, hb, Category.assoc, hB]
+    simp only [Category.assoc]
+
+set_option backward.isDefEq.respectTransparency true in
 /-- The prescribed raw diagram and its cocone admit a geometric complex presentation.
 This asserts only the input data for continuity, with no colimit assertion on B.
 Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit, reduction to affine U),
@@ -103,6 +148,45 @@ theorem abelianRawCocone_complex_presentation {S : Scheme.{v}}
           (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i) U t)) :
     EtaleComplexCohomologyPresentation
       ((opOpEquivalence I).functor ⋙ K)
-      (B.whisker (opOpEquivalence I).functor) := by sorry
+      (B.whisker (opOpEquivalence I).functor) := by
+  obtain ⟨r, hr⟩ := exists_raw_restricted_cohomology_natural_iso S p U
+  obtain ⟨T, B', hpres, s, sB, hsB, hsT⟩ :=
+    exists_restricted_affine_complex_system_natural D c hc F φ hφid hφcomp H eH hH p U
+  let α : (opOpEquivalence I).functor ⋙ K ≅ T :=
+    NatIso.ofComponents
+      (fun i ↦ (e i.unop.unop).symm ≪≫
+        r (D.obj (op i.unop.unop)).hom (F i.unop.unop) ≪≫ s i) (by
+      intro i j f
+      change K.map f.unop.unop ≫ _ = _ ≫ T.map f
+      apply comparison_square (q := rawAffineRestrictedCohomologyMap
+        (D.map f.unop.unop.op).left (D.obj (op i.unop.unop)).hom
+        (D.obj (op j.unop.unop)).hom (Over.w (D.map f.unop.unop.op)) p
+        (F i.unop.unop) (F j.unop.unop) (φ f.unop.unop) U)
+        (g := abelianHigherDirectImageRawPullback (D.map f.unop.unop.op).left
+          (D.obj (op i.unop.unop)).hom (D.obj (op j.unop.unop)).hom
+          (Over.w (D.map f.unop.unop.op)) p (F i.unop.unop) (F j.unop.unop)
+          (φ f.unop.unop) U)
+      · exact hmap f.unop.unop
+      · exact hr _ _ _ _ _ _ _
+      · intro t
+        have ht := hsT f.unop.unop t
+        change T.map f _ = _ at ht
+        exact ht)
+  let b : B.pt ≅ B'.pt := eB.symm ≪≫ r c.pt.hom (colimit H) ≪≫ sB
+  refine presentation_of_iso hpres α b ?_
+  intro i
+  change B.ι.app i.unop.unop ≫ (eB.symm ≪≫ r c.pt.hom (colimit H) ≪≫ sB).hom =
+    ((e i.unop.unop).symm ≪≫
+      r (D.obj (op i.unop.unop)).hom (F i.unop.unop) ≪≫ s i).hom ≫ B'.ι.app i
+  apply comparison_square (q := rawAffineRestrictedCohomologyMap
+    (c.π.app (op i.unop.unop)).left (D.obj (op i.unop.unop)).hom c.pt.hom
+    (Over.w (c.π.app (op i.unop.unop))) p (F i.unop.unop) (colimit H)
+    ((eH i.unop.unop).inv ≫ colimit.ι H i.unop.unop) U)
+    (g := abelianHigherDirectImageRawPullback (c.π.app (op i.unop.unop)).left
+      (D.obj (op i.unop.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop.unop))) p
+      (F i.unop.unop) (colimit H) ((eH i.unop.unop).inv ≫ colimit.ι H i.unop.unop) U)
+  · exact hleg i.unop.unop
+  · exact hr _ _ _ _ _ _ _
+  · exact hsB i
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,144 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Tag 09Z1 proof, base change to affine U and restricted cohomology; Tag 0EZM canonical complex cocone; parent proof steps 1 and 2"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-sbc-etale-complex-cohomology-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Form the pullback diagram with stage U times_S X_i and limit U times_S X, taking maps from pullback universal properties. The same universal property proves the limit assertion. Qcqs morphisms remain qcqs after base change; since U is affine the stages are qcqs schemes. Affine transition morphisms remain affine. Restrict the sheaves and their transition maps along the second projections, transport the identity, composition and H-transition laws through the inverse-image composition isomorphisms, and put all sheaves into degree-zero single complexes, zero below zero. Inverse image, being a left adjoint, preserves the coefficient colimit; termwise colimits of single complexes are again single complexes. This supplies D,c,hc,compact,quasiSeparated,affine,F,phi,hidentity,hcomposition,a,hbelow,G,eG,hG,L,hL in the presentation. Fix the lower bound to zero. All objects in this statement concern restricted single-complex cohomology, with no raw-Hom comparison.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use P_p = rawAffineComplexPullback as a fixed canonical map. Define the stage cohomology diagram and its cocone by P_p followed by the complex coefficient maps. Naturality and composition of the derived adjunction unit, inverse-image coherence and the coefficient cocone equations prove functoriality and the displayed hT and hB equations. The stage restriction isomorphisms identify the same single complexes. Inverse image preserves the coefficient colimit and gives the limit single-complex comparison, hence restrictionLimitIso. The two comparisons on each pullback projection triangle are exactly rawAffineRestrictedCoefficient, giving the final restricted-cohomology leg equation. Do not assert B is colimiting or use continuity.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each stage arrow, the map of the pullback schemes is rawAffineRestrictedMap, and inverse-image composition identifies its coefficient map with rawAffineRestrictedCoefficient. The stage restriction isomorphisms identify the same degree-zero single complexes. The single-functor comparison and derived adjunction-unit pullback therefore identify its cohomology transition with rawAffineRestrictedCohomologyMap, giving the additional stage equation. This uses the actual base-change construction of steps 1 and 2; it is not inferred by cancelling cocone legs.",
+   "uses": [
+    "def-sbc-raw-affine-restricted-cohomology",
+    "lem-weil-pbc-inverse-image-composition",
+    "prop-weil-pbc-derived-inverse-image-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-cohomology",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "unit": "sk-lem-failure-field",
+ "chapter": "sec-smooth-base-change",
+ "id": "lem-sbc-restricted-affine-complex-system-natural",
+ "title": "Complex system naturally presenting restricted cohomology",
+ "status": "split",
+ "mathlib_match": null,
+ "statement": "Let $S$ be a scheme [def-weil-pbc-scheme-conventions], $I$ a nonempty directed preorder and $D:I^{\\mathrm{op}}\\to\\mathrm{Over}(S)$ have affine transitions and quasi-compact quasi-separated structure morphisms. Let $c$ be a cone with limiting underlying scheme cone and quasi-compact quasi-separated structure morphism. Write $g_i:X_i\\to S$, $g:X\\to S$, $a_f:X_j\\to X_i$ for $f:i\\to j$, and $a_i:X\\to X_i$ for its projections. Let $F_i$ be abelian etale sheaves [def-weil-pbc-etale-sheaves] and $\\varphi_f:a_f^{-1}F_i\\to F_j$ satisfy the canonical unital and composition HEq laws displayed in the Lean signature [lem-weil-pbc-inverse-image-composition]. Let $H:I\\to\\mathrm{Sh}(X_{\\mathrm{et}},\\mathbf{Ab})$ have a colimit and isomorphisms $eH_i:H_i\\simeq a_i^{-1}F_i$, with $H(f)=eH_i;\\mathrm{upperStarComp};a_j^{-1}(\\varphi_f);eH_j^{-1}$. Fix $p\\in\\mathbf N$ and an affine etale $U\\to S$. Write $R(g_i,F_i)$ and $R(g,\\operatorname{colim}H)$ for the restricted single-complex cohomology groups at $U$ in degree $p$ [def-sbc-raw-affine-restricted-cohomology]. There exist $T:(I^{\\mathrm{op}})^{\\mathrm{op}}\\to\\mathbf{Ab}$, a cocone $B$ on $T$, an EtaleComplexCohomologyPresentation of $T,B$ [def-sbc-etale-complex-cohomology-presentation], additive isomorphisms $s_i:R(g_i,F_i)\\simeq T_{i^{\\mathrm{op},\\mathrm{op}}}$ and $s_B:R(g,\\operatorname{colim}H)\\simeq B_{\\mathrm{pt}}$, such that simultaneously $T(f^{\\mathrm{op},\\mathrm{op}})(s_i(t))=s_j(R(a_f,\\varphi_f)(t))$ for every arrow $f:i\\to j$ and restricted class $t$, and $B_i(s_i(t))=s_B(R(a_i,eH_i^{-1};\\iota_i)(t))$ for every stage and class. Here both $R$ maps are exactly rawAffineRestrictedCohomologyMap with the over-triangle equations, as in the Lean signature. No raw derived-Hom group, prescribed raw diagram, cohomology-colimit assertion, or representative assertion occurs in the statement.",
+ "proof_origin": {
+  "by": "agent F1",
+  "document": "Stacks Project",
+  "place": "Tags 09Z1 (lemma-relative-colimit, affine-object reduction) and 0EZM (lemma-colimit-variant-complexes, input construction); parent proof steps 1 and 3; explicit stage naturality elaboration by F1"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianRawCoconeComplexPresentation",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Affine-object reduction: construct the restricted coefficient system and its canonical transition maps before applying continuity.",
+   "via": [
+    "lem-sbc-abelian-raw-cocone-complex-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CohomologyPresentation|rawAffineRestricted",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison of raw derived Hom etale cohomology with a compatible diagram of restricted single complexes",
+   "date": "2026-10-13",
+   "results": "8 hits: CochainComplex.cm5b, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.InjectiveResolution.extMk_hom, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, Algebra.FormallyEtale.of_restrictScalars",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Limits.Cocone",
+   "date": "2026-10-13",
+   "results": "12 hits: CategoryTheory.Limits.Cocone.equiv, CategoryTheory.Limits.Cocone.eta, CategoryTheory.Limits.Cocone.precomposeEquivalence, CategoryTheory.Limits.Cocone.extendId, CategoryTheory.Limits.Cocone.extendIso, CategoryTheory.Functor.mapCoconeInvMapCocone, CategoryTheory.Limits.Cocone.equivalenceOfReindexing, CategoryTheory.Limits.instIsIsoHomHomCocone",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restricted etale cohomology of varying coefficients on an inverse scheme system has a natural complex presentation",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineComplexSystemNatural",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineComplexSystemNatural.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_restricted_affine_complex_system_natural",
+  "statement": "theorem exists_restricted_affine_complex_system_natural {S : Scheme.{v}}\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Over S)\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]\n    [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]\n    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i))\n      ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j), H.map f =\n      (eH i).hom ≫\n        (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left\n          (c.π.app (op i)).left\n          (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫\n        (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H] (p : ℕ)\n    (U : S.Etale) [IsAffine U.left] :\n    ∃ (T : (Iᵒᵖ)ᵒᵖ ⥤ AddCommGrpCat.{v + 1}) (B : Cocone T),\n    EtaleComplexCohomologyPresentation T B ∧ ∃\n    (restrictionIso : ∀ i : (Iᵒᵖ)ᵒᵖ,\n      rawAffineRestrictedCohomology (D.obj (op i.unop.unop)).hom p\n        (F i.unop.unop) U ≅ T.obj i)\n    (restrictionLimitIso : rawAffineRestrictedCohomology c.pt.hom p (colimit H) U ≅ B.pt),\n    (∀ (i : (Iᵒᵖ)ᵒᵖ)\n      (t : rawAffineRestrictedCohomology (D.obj (op i.unop.unop)).hom p\n        (F i.unop.unop) U),\n      B.ι.app i ((restrictionIso i).hom t) = restrictionLimitIso.hom\n        (rawAffineRestrictedCohomologyMap (c.π.app (op i.unop.unop)).left\n          (D.obj (op i.unop.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop.unop))) p\n          (F i.unop.unop) (colimit H)\n          ((eH i.unop.unop).inv ≫ colimit.ι H i.unop.unop) U t)) ∧\n    (∀ {i j : I} (f : i ⟶ j)\n      (t : rawAffineRestrictedCohomology (D.obj (op i)).hom p (F i) U),\n      T.map ((opOpEquivalence I).inverse.map f) ((restrictionIso (op (op i))).hom t) =\n        (restrictionIso (op (op j))).hom\n          (rawAffineRestrictedCohomologyMap (D.map f.op).left\n            (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p\n            (F i) (F j) (φ f) U t))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T040745-L-3947869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T040745-L-3947869",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
