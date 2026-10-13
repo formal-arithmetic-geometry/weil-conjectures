@@ -1,0 +1,157 @@
+{
+ "id": "new-e1-self-tor-nested-affine-coordinates",
+ "kind": "statement",
+ "title": "Normalized coordinates with nested affine section compatibility",
+ "statement": "Let i:Z→Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], n a natural number, B=i_*O_Z, Q=i*H^(-n)(B[0] tensor^L B[0]) in the fixed derived tensor structure [def-pc-derived-category, def-pc-scheme-derived-tensor-structure], and E=exterior^n(i*ker(i)) [def-sc-sheaf-exterior-power, def-pc-module-pullback, def-sbc-closed-immersion-ideal-sheaf]. For an affine U of Y put A_U=Γ(Y,U), I_U=i.ker.ideal U, O_U=i^-1 U and T_U=tilde on Spec A_U followed by chart restriction, open direct image and tensor pullback. Write c_U for the normalized exterior-conormal to self-Tor map [new-r4-self-tor-conormal-comparison]. There are families of isomorphisms s_U:E|O_U≅T_U(source c_U)|O_U and t_U:T_U(target c_U)|O_U≅Q|O_U. If φ_U=s_U.hom followed by T_U(c_U)|O_U followed by t_U.hom, then for every pair of affine opens V⊆U, the component of φ_U on the entire O_V is equal to the component of φ_V on its terminal over-object. No equality on other opens or incomparable overlaps is part of this assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-sheaf-exterior-power",
+  "new-r4-self-tor-conormal-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09PQ",
+  "place": "Lemma 23.6.12; Tags 01R3 (1),(2), 06YH and preceding K-flat comparison construction; original node steps 1-3 through affine section naturality."
+ },
+ "proof": [
+  {
+   "text": "For each affine U identify the closed chart with Spec(A/I). Sheafify a projective quotient resolution using exists_affine_quotient_sheafified_resolution. Tensoring with A/I computes the fixed K-flat derived tensor on U; resolution comparison identifies its homology with the associated Tor module. Tor is annihilated by I, so tensor pullback does not change its associated quotient-module sheaf. This constructs the target coordinate t_U.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use affineOpen_kernel_conormal_sections with identity ring coordinates and the surjective affine closed-immersion section map. Its unit equation identifies ideal classes canonically with sections of the pulled-back kernel. Exterior universal properties give the source isomorphism on principal opens; localization and sheafification give s_U. Choose these conormal and resolution coordinates, not unrelated arbitrary isomorphisms.",
+   "uses": [
+    "lem-sc-affine-open-kernel-conormal-sections",
+    "lem-sc-exterior-sheaf-restrict-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For V affine contained in U refine V by principal opens of U and then of V. Flat localization preserves quotient resolutions, homology, conormal classes and Koszul augmentation maps. Evaluate the normalized comparison on wedges of ideal classes; its normalization and uniqueness identify the two localized products. Multilinearity extends from ideal classes to localized tuples, and the wedges span the exterior module. Derived resolution comparison commutes with these maps. Target separatedness on the refinement gives equality of the maps on Γ(E,O_V). This yields only the nested top-component equation, not arbitrary overlap compatibility. The argument includes n=0, empty charts, zero quotients, the zero ideal and nonregular ideals.",
+   "uses": [
+    "new-r4-self-tor-conormal-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-open-kernel-conormal-sections",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-exterior-sheaf-restrict-iso",
+  "new-r4-self-tor-conormal-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E1",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/09PQ",
+  "place": "Lemma 23.6.12; Tags 01R3 (1),(2), 06YH and preceding K-flat comparison construction; original node steps 1-3 through affine section naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Choose affine conormal exterior to self Tor coordinates compatible on sections of nested affine opens",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior conormal sheaf canonical map into derived self tensor homology compatible with affine localization",
+   "results": "; AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*localiz|localiz.*Tor",
+   "results": "; Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean, Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorCompatibleAffineMaps",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, affine Koszul self-coefficient calculation: Normalized coordinates with nested affine section compatibility.",
+   "via": [
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorNestedAffineCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorNestedAffineCoordinates.lean",
+  "declaration": "AlgebraicGeometry.exists_nested_affine_selfTor_coordinates",
+  "statement": "theorem exists_nested_affine_selfTor_coordinates\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (n : ℕ) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q := (Scheme.Modules.tensorPullback i).obj\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj\n          (S.obj B ⊗ S.obj B))\n    let E := Scheme.Modules.exteriorSheaf\n      ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n\n    let T := fun U : Y.affineOpens ↦\n      tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n        Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    let c := fun U : Y.affineOpens ↦\n      selfTorConormalComparison (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    ∃ (s : ∀ U : Y.affineOpens,\n        E.over (i ⁻¹ᵁ U.1) ≅ ((T U).obj _).over (i ⁻¹ᵁ U.1))\n      (t : ∀ U : Y.affineOpens,\n        ((T U).obj _).over (i ⁻¹ᵁ U.1) ≅ Q.over (i ⁻¹ᵁ U.1)),\n      let φ := fun U ↦ (s U).hom ≫ ((T U).map (c U)).over (i ⁻¹ᵁ U.1) ≫ (t U).hom\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1),\n        (φ U).val.app\n            (op (Over.mk (homOfLE ((TopologicalSpace.Opens.map i.base).monotone h)))) =\n          (φ V).val.app (op (Over.mk (𝟙 (i ⁻¹ᵁ V.1))))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T201745-L-3967702",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T201745-L-3967702",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
