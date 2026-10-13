@@ -13630,3 +13630,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:45 L: returned deliver/F1/Sheaf.AlgebraicGeometry.PerfectHomOpenStageMaps (reviewer RETURN: (reviewer X-754f8, head 754f80590) E2: PerfectHomOpenStageMapsCore.lean:48–87 asserts transport compatibility for arbitr)
 - 21:51 L: returned deliver/A4/Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverTensorFormula (reviewer RETURN: (reviewer X-23b39, head 23b39dc1d) E5: In lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationComponentOverTransport.lean, re)
 - 21:53 L: returned deliver/P3/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-e40cb, head e40cb87dd) E2 (review brief §4): lean/Sheaf/RingTheory/IdealKernelElementDescent.lean:99 adds `θ)
+- 21:54 L: returned deliver/B4/Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates (reviewer RETURN: (reviewer X-0d1e0, head 0d1e02f58) H10: `python3 /home/ubuntu/weil-launcher/lcompile.py --all ...` times out on Sheaf.Al)
