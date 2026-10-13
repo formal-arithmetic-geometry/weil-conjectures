@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-mixed-global-hom-adjunction-isIso",
+ "kind": "statement",
+ "title": "Counit-induced global Hom adjunction with independent localization universes",
+ "statement": "Let X,Y be qcqs schemes, f:X→Y, and a a right adjoint to the QCoh derived direct image [lem-pc-qcqs-derived-direct-image-right-adjoint]. For P∈D_QCoh(X), K∈D_QCoh(Y), normalized inverse Leray followed by the evaluation-mate direct-image internal Hom comparison [lem-sc-mixed-hom-direct-image-comparison] and Hom of the counit is an isomorphism res_f RHom_X(P,aK)→RHom_Y(Rf_*P,K). The global-module and sheaf derived localization universes are independent [lem-sc-mixed-global-sections-direct-image-iso].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0B6I, lemma-iso-global-hom"
+ },
+ "stmt_deps": [
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-sc-mixed-hom-direct-image-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Choose the evaluation-mate comparison, uniquely determined by its equation; form the counit-induced map and inverse Leray. This chooses determined comparison data rather than an arbitrary existence witness.",
+   "uses": [
+    "lem-sc-mixed-hom-direct-image-comparison",
+    "lem-sc-mixed-global-sections-direct-image-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply qcqsSheafRHomAdjunction with the fixed tensor adjunctions, mixed tensorator and its defining mate equation. It shows that the internal Hom comparison followed by Hom of the counit becomes invertible under the quasi-coherator.",
+   "uses": [
+    "lem-pc-qcqs-sheaf-rhom-adjunction",
+    "lem-pc-dq-coherator-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply dqCoherator_isIso_derivedGlobalSections in the chosen independent global localization universe. Combine its conclusion with inverse normalized Leray and functoriality of global sections to prove invertibility of the exact counit-induced global map.",
+   "uses": [
+    "lem-pc-dq-coherator-derived-global-sections",
+    "lem-sc-mixed-global-sections-direct-image-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-dq-coherator-adjunction",
+  "lem-pc-dq-coherator-derived-global-sections",
+  "lem-pc-qcqs-sheaf-rhom-adjunction",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-sc-mixed-hom-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0B6I, lemma-iso-global-hom"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived global Hom base change adjunction evaluation mate proper flat perfect",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; CategoryTheory.ExponentiableMorphism.coev_naturality; LightCondensed.ihomPoints_symm_comp; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; CategoryTheory.bijection; CategoryTheory.ExponentiableMorphism.coev_ev_assoc",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv_counit\"",
+   "results": "CategoryTheory.conjugateEquiv_counit; CategoryTheory.conjugateEquiv_counit_symm",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global Hom base change perfect complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom.*baseChange|internalHomMate|conjugateEquiv_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatGlobalHomCompositeIso",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0B6I, lemma-iso-global-hom",
+   "via": [
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedGlobalHomAdjunctionIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedGlobalHomAdjunctionIso.lean",
+  "declaration": "AlgebraicGeometry.mixedGlobalHomAdjunctionMap_isIso",
+  "statement": "theorem mixedGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property) ⊣ a) (P : schemeDerivedQCohCategory X) (K : schemeDerivedQCohCategory Y) : IsIso (mixedGlobalHomAdjunctionMap f a adj P K)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100049-L-2474808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100049-L-2474808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

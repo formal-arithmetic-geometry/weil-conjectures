@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-mixed-hom-direct-image-comparison",
+ "kind": "statement",
+ "title": "Evaluation-mate internal Hom comparison for the normalized pullback tensorator",
+ "statement": "For any morphism f:X→Y of schemes with chosen sheaf derived categories, there exists a natural transformation Rf_* RHom_X(L,M)→RHom_Y(Rf_*L,Rf_*M) whose transpose on each test morphism A→Rf_*RHom_X(L,M) is pullback tensor comparison, identity tensor counit at L, then evaluation. All tensor-Hom equivalences and adjunctions are the fixed canonical ones [def-pc-canonical-derived-tensor-hom-bijection, lem-sc-mixed-hom-tensor-pullback-iso, lem-pc-global-hom-adjunction].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 08I3 and 0B6I, evaluation mate"
+ },
+ "stmt_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-pc-global-hom-adjunction",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved generic internalHomMate_exists in GlobalHomAdjunctionIso to the fixed internal Hom functors, pullback/direct-image adjunction, normalized mixed tensorator and canonical tensor-Hom equivalences. The mate equation uniquely determines every component: set the test object equal to Rf_*RHom(L,M) and take its identity, then use the two inverse tensor-Hom and adjunction bijections. Naturality gives the natural transformation.",
+   "uses": [
+    "lem-pc-global-hom-adjunction",
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "def-pc-canonical-derived-tensor-hom-bijection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-pc-global-hom-adjunction",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 08I3 and 0B6I, evaluation mate"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived global Hom base change adjunction evaluation mate proper flat perfect",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; CategoryTheory.ExponentiableMorphism.coev_naturality; LightCondensed.ihomPoints_symm_comp; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; CategoryTheory.bijection; CategoryTheory.ExponentiableMorphism.coev_ev_assoc",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv_counit\"",
+   "results": "CategoryTheory.conjugateEquiv_counit; CategoryTheory.conjugateEquiv_counit_symm",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global Hom base change perfect complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom.*baseChange|internalHomMate|conjugateEquiv_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatGlobalHomCompositeIso",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tags 08I3 and 0B6I, evaluation mate",
+   "via": [
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedHomDirectImageComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedHomDirectImageComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_mixedHomDirectImageComparison",
+  "statement": "theorem exists_mixedHomDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) : ∃ c : derivedInternalHom (Opens.grothendieckTopology X) X.sheaf ⋙ schemeDerivedDirectImage f ⟶ (schemeDerivedDirectImage f).op.prod (schemeDerivedDirectImage f) ⋙ derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf, ∀ (L M : schemeDerivedCategory X) (A : schemeDerivedCategory Y) (α : A ⟶ (schemeDerivedDirectImage f).obj ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op L, M))), (schemeDerivedTensorHomEquiv Y) A ((schemeDerivedDirectImage f).obj L) ((schemeDerivedDirectImage f).obj M) (α ≫ c.app (op L, M)) = (schemeHomPullbackAdjunction f).homEquiv (A ⊗ (schemeDerivedDirectImage f).obj L) M ((mixedHomTensorPullbackIso f).hom.app (A, (schemeDerivedDirectImage f).obj L) ≫ (𝟙 ((derivedPullback f).obj A) ⊗ₘ (schemeHomPullbackAdjunction f).counit.app L) ≫ (schemeDerivedTensorHomEquiv X) ((derivedPullback f).obj A) L M (((schemeHomPullbackAdjunction f).homEquiv A ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op L, M))).symm α))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100049-L-2474808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100049-L-2474808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

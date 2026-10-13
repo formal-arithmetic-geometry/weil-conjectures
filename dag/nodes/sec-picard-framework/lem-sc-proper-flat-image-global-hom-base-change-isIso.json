@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-proper-flat-image-global-hom-base-change-isIso",
+ "kind": "statement",
+ "title": "Affine global Hom scalar extension out of a proper flat perfect direct image",
+ "statement": "Let Y,Y′ be affine qcqs schemes, X qcqs, f:X→Y proper flat locally of finite presentation, g:Y′→Y arbitrary, M∈D_QCoh(X) perfect and K∈D_QCoh(Y) arbitrary [def-pc-perfect-complex, def-pc-derived-category]. For independent sheaf and module derived localization universes, the transpose under global derived scalar extension/restriction of the canonical mixed pullback global Hom comparison at (Rf_*M,K) [lem-sc-flat-affine-global-hom-comparison] is an isomorphism. No right adjoint or right-adjoint base-change map occurs.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, right-hand-side computation case (1); Tags 0A1H, 0B91 and 0A6A"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "lem-sc-flat-affine-global-hom-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Compute first in standard K-injective derived localizations, including all open sites, and transport along localization equivalences. Proper-support perfect direct image applied to M and O_X concentrated in degree zero gives Rf_*M perfect: flatness makes O_X relatively flat, local finite presentation gives finite presentation, properness supplies proper support, and the tensor unitor removes O_X.",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the affine bases replace Rf_*M by a bounded finite-projective complex P over A=Γ(Y), and K by an arbitrary complex Q. Perfect RHom base change identifies the derived scalar extension of Hom(P,Q) with Hom(A′ tensor P,A′ tensor Q).",
+   "uses": [
+    "lem-pc-base-change-rhom-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine derived equivalences identify pullback with scalar extension. The K-flat tensorator equation and evaluation-mate equation identify the transpose of the algebraic map with mixedGlobalHomPullbackComparison; normalized Leray is identified by its derived-unit equation. Localization uniqueness transports this identification to the supplied independent derived universes. The displayed map is therefore the perfect RHom base-change isomorphism.",
+   "uses": [
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "lem-sc-flat-affine-global-hom-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-change-rhom-perfect",
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-sc-flat-affine-global-hom-comparison",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, right-hand-side computation case (1); Tags 0A1H, 0B91 and 0A6A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived global Hom base change adjunction evaluation mate proper flat perfect",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; CategoryTheory.ExponentiableMorphism.coev_naturality; LightCondensed.ihomPoints_symm_comp; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; CategoryTheory.bijection; CategoryTheory.ExponentiableMorphism.coev_ev_assoc",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv_counit\"",
+   "results": "CategoryTheory.conjugateEquiv_counit; CategoryTheory.conjugateEquiv_counit_symm",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global Hom base change perfect complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom.*baseChange|internalHomMate|conjugateEquiv_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic adjunction lemmas only; no exact mixed global Hom theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatGlobalHomCompositeIso",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8, right-hand-side computation case (1); Tags 0A1H, 0B91 and 0A6A",
+   "via": [
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatImageGlobalHomBaseChangeIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatImageGlobalHomBaseChangeIso.lean",
+  "declaration": "AlgebraicGeometry.properFlatImage_globalHomBaseChange_isIso",
+  "statement": "theorem properFlatImage_globalHomBaseChange_isIso [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)] {X Y Y' : Scheme.{u}} [IsAffine Y] [IsAffine Y'] [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y'] (f : X ⟶ Y) (g : Y' ⟶ Y) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (M : schemeDerivedQCohCategory X) (hM : Scheme.IsPerfect X M.obj) (K : schemeDerivedQCohCategory Y) : IsIso (((mixedGlobalExtensionAdjunction g).homEquiv _ _).symm (mixedGlobalHomPullbackComparison g ((schemeDerivedDirectImage f).obj M.obj) K.obj))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100049-L-2474808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100049-L-2474808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

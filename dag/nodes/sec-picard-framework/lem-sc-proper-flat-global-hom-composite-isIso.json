@@ -21,38 +21,30 @@
  ],
  "proof": [
   {
-   "text": "Apply proper-support perfect direct image to M tensored with the structure sheaf concentrated in degree zero. Properness supplies support; flatness and finite presentation supply the other hypotheses. Thus Rf_*M is perfect.",
+   "text": "Apply the mixed global Hom adjunction for f and f′ and affine scalar-extended global Hom base change out of Rf_*M. Map the first adjunction through scalar extension and follow by Hom of β_M inverse. Every factor is invertible.",
    "uses": [
-    "lem-pc-proper-support-perfect-direct-image"
+    "lem-sc-mixed-global-hom-adjunction-isIso",
+    "lem-sc-proper-flat-image-global-hom-base-change-isIso"
    ],
    "elementary": false
   },
   {
-   "text": "Scalar-extend the global Hom adjunction for f, apply perfect RHom base change on Y, Hom of beta inverse at M, and the inverse global Hom adjunction for f prime. All four factors are invertible.",
+   "text": "Prove the mate counit square directly by conjugateEquiv_counit, naturality and the triangle identities. Apply mixed counit-square transport. Injectivity of the extension/restriction Hom equivalence and scalar-square naturality identify the stated composite followed by the final global Hom adjunction with the invertible factorization. Cancel the final invertible adjunction map.",
    "uses": [
-    "lem-pc-global-hom-adjunction",
-    "lem-pc-base-change-rhom-perfect"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The flat-precomposition compatibility equates the transpose of this four-factor map with the transpose of the stated composite. Derived-unit and K-flat equations allow independent localization universes. Injectivity of the adjunction Hom equivalence gives equality and hence invertibility.",
-   "uses": [
-    "lem-sc-flat-precompose-pus"
+    "lem-sc-mixed-global-hom-base-change-counit-transport"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-base-change-rhom-perfect",
-  "lem-pc-global-hom-adjunction",
-  "lem-pc-proper-support-perfect-direct-image",
-  "lem-sc-flat-precompose-pus"
+  "lem-sc-mixed-global-hom-adjunction-isIso",
+  "lem-sc-mixed-global-hom-base-change-counit-transport",
+  "lem-sc-proper-flat-image-global-hom-base-change-isIso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AA8, equation duality-equation-iso, right-hand-side comparisons and final compatibility diagram"
+  "place": "Tag 0AA8, right-hand-side computation case (1) and final diagrams; implemented with independent localization universes by P2"
  },
  "mathlib_searches": [
   {
@@ -144,10 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-f26bb",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T082420-L-1650363",
-  "kind": "interface"
+  "landing": "20261013T100049-L-2474808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
