@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-proper-support-module-higher-direct-image-bound",
+ "kind": "statement",
+ "title": "Eventual higher-direct-image vanishing for one coherent module with proper support",
+ "statement": "Let S be a Noetherian scheme [def-pc-scheme] and f:X -> S locally of finite type. Let M be a coherent O_X-module [pqf-def-coherent] with support proper over S [def-weil-pbc-closed-subset-proper-over-base]. There exists N in the natural numbers such that R^p f_*M is zero for every natural p >= N. Here R^p f_* is the ordinary right derived functor of module direct image [def-pc-derived-direct-image].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E2, boundedness-above paragraph; Tag 08D5, uniform upper bound; Cohomology of Schemes, Tag 0CYS"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Local finite type over the locally Noetherian base makes X locally Noetherian. Convert coherence of M to quasi-coherence and finite type. The proper-support presentation gives a closed immersion i:Z -> X and a finite type quasi-coherent G with M isomorphic to i_*G and g=i followed by f proper. The degree-zero object is quasi-coherent by the generic qc_single helper in the module for [lem-sc-affine-derived-pushforward-t-exact], reused via import all; the geometric t-exactness theorem itself is not applied.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-sc-affine-derived-pushforward-t-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed immersion i is affine. Apply the affine derived-cohomology comparison to G[0]. Its derived image has cohomology only in degree zero, identified with i_*G. The standard heart equivalence therefore identifies Ri_*G[0] with M[0]. Derived direct-image composition identifies Rg_*G[0] with Rf_*M[0]. Use the single-object comparison with ordinary nonnegative right derived functors.",
+   "uses": [
+    "lem-sc-affine-derived-cohomology",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proper morphism g is qcqs and S is quasi-compact. Apply the positive uniform derived-direct-image bound to G[0], whose cohomology is quasi-coherent and vanishes in positive degrees. Take N.toNat and transport zero cohomology through the preceding isomorphisms.",
+   "uses": [
+    "lem-pc-derived-direct-image-uniform-truncation-bound"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "lem-sc-affine-derived-cohomology",
+  "lem-sc-affine-derived-pushforward-t-exact",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E2, boundedness-above paragraph; Tag 08D5, uniform upper bound; Cohomology of Schemes, Tag 0CYS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf proper support higher direct images vanish in sufficiently large degrees",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct images of coherent sheaf with proper support vanish in sufficiently large degrees",
+   "results": "Eight hits on generic DerivedCategory t-structure vanishing and Ext; no geometric proper-support bound.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*support.*vanish|eventually.*higherDirectImage|higherDirectImage.*eventually",
+   "results": "No hits in Mathlib. Searches in the project found the uniform qcqs bound and the proper-support presentation, used in the proof. Blueprint search found no exact statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EV proof: Rf_*E is in D^b_Coh, boundedness-above subargument of Tag 08E2",
+   "via": [
+    "lem-pc-direct-image-bounded-coherent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportHigherDirectImageBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportHigherDirectImageBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.moduleHigherDirectImage_eventually_isZero",
+  "statement": "theorem moduleHigherDirectImage_eventually_isZero\n    {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f]\n    (M : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (hM : RingedSpace.IsCoherent X.toRingedSpace M)\n    (hsupport : Scheme.Modules.HasSupportProperOver f M) :\n    ∃ N : ℕ, ∀ p : ℕ, N ≤ p →\n      IsZero (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj M)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T062524-L-733712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T062524-L-733712",
+  "kind": "interface"
+ }
+}
