@@ -10618,3 +10618,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/W4/Sheaf.AlgebraicGeometry.PicardCupProductCriterionAux (stage 3; reviewer PASS; first push; landing 20261013T015623-L-3030098 (interface); batch 20261013T015540; modules 4; new nodes 3)
 - 01:56 L: merged deliver/X3/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitFlat (stage 3; reviewer PASS; first push; landing 20261013T015624-L-3030201 (interface); batch 20261013T015540; modules 2; new nodes 1)
 - 01:56 L: merged deliver/X3/Sheaf.CategoryTheory.DerivedFunctorTriangleRetractionHomColimit (stage 3; reviewer PASS; first push; landing 20261013T015624-L-3030345 (proof); batch 20261013T015540; modules 1; new nodes 0)
+- 01:56 L: merged deliver/Y3/Sheaf.CategoryTheory.FilteredComplexSingleDifferentialDescent (stage 3; reviewer PASS; after a return; landing 20261013T015625-L-3030491 (proof); batch 20261013T015540; modules 1; new nodes 0)
