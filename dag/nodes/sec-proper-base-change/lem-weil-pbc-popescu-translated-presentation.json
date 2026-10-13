@@ -15,54 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Choose a presentation with c initial relations and Jacobian minors expressing the image of pi, together with the ideal-square condition for every remaining relation, by strict standardness. Choose lifts b_i in R of rho(P.val_i mod pi^4).",
+   "text": "Unpack the compatible quotient section. Apply exists_popescu_translated_presentation_data to obtain a presentation retaining its minor witness and ideal-square condition and whose generators are killed by that same section.",
    "uses": [
-    "def-weil-pbc-strictly-standard-element",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-weil-pbc-popescu-translated-presentation-data"
    ],
    "elementary": false
   },
   {
-   "text": "Let tau be the polynomial R-algebra automorphism sending x_i to x_i+b_i; its inverse sends x_i to x_i-b_i, since both composites fix constants and variables. Transport the relations by tau and the generator values to P.val_i-b_i. Transport the chosen polynomial lift P.sigma by tau as well. The universal property of the polynomial ring identifies the new evaluation composed with tau with the original evaluation, so its relation ideal is the kernel and the transported lift is still a right inverse.",
+   "text": "For each new generator, compatibility with alpha and the zero section value say its alpha-image has zero quotient class. Ideal.Quotient.eq_zero_iff_mem and Ideal.mem_span_singleton produce lambda_i with alpha(P.val_i)=pi^4 lambda_i; choose the family.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_popescu_translated_presentation_properties to the section, zero generator values and witnessed minor identity. It gives the relation constant coefficients and the constant-minor ideal membership.",
    "uses": [
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-weil-pbc-popescu-translated-presentation-properties"
    ],
    "elementary": false
   },
   {
-   "text": "Polynomial induction gives partial_i(tau(f))=tau(partial_i(f)): on constants and variables this is immediate, on sums it is additive, and on multiplication by a variable the two sides satisfy the same translated Leibniz rule. Determinants commute with tau by their finite sum formula. Thus the evaluated Jacobian minor identity is unchanged. Applying tau to the original ideal-square containment transports it to the new presentation; multiplication of ideals commutes with the automorphism.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The section on the new generators is zero. The composite R[x] to A to A/(pi^4) to R/(pi^4) and constant evaluation followed by R to R/(pi^4) agree on constants and variables, hence agree everywhere. Apply this identity to each relation to get constantCoeff(f_j)=pi^4 a_j. By compatibility with alpha, each alpha(P.val_i) has zero image in Lambda/(pi^4), so equals pi^4 lambda_i. These assertions use only the kernels of the principal-ideal quotient maps; no cancellation is involved.",
-   "uses": [
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the section to the strictly standard minor identity, and choose scalar lifts d_I of the images of its finitely many coefficients. Constant evaluation commutes with the determinant by its finite sum formula. Thus pi minus sum_I d_I det(constantCoeff(partial_i f_j)) is in (pi^4), say pi^4 t. Rearranging gives (1-pi^3 t)pi=sum_I d_I det(constantCoeff(partial_i f_j)). Transposing each c by c minor leaves its determinant unchanged, so this is a linear combination of the maximal row minors in the statement, and in their ideal span.",
-   "uses": [
-    "def-weil-pbc-strictly-standard-element",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": false
+   "text": "Assemble n,m,c,P,hc,lambda,a,t and the four conclusions, retaining the ideal-square condition of the translated witness.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-polynomial-partial-derivative",
-  "def-weil-pbc-strictly-standard-element"
+  "lem-weil-pbc-popescu-translated-presentation-data",
+  "lem-weil-pbc-popescu-translated-presentation-properties"
  ],
  "proof_origin": {
   "by": "document",
@@ -144,12 +123,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T231637-L-1962684",
+  "landing": "20261013T002008-L-2358152",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

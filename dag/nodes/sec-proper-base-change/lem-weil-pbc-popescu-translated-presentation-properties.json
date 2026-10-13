@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-popescu-translated-presentation-properties",
+ "kind": "statement",
+ "title": "Constant coefficients and minors from a witnessed quotient-section identity",
+ "statement": "Let R and A be commutative rings, A an R-algebra, pi in R, rho:A/(pi^4 A) -> R/(pi^4) an R-algebra map, and P a presentation of A with n generators and m relations [def-weil-pbc-finitely-presented-algebra]. Fix c <= min(n,m) and coefficients b_I in A for c-element subsets I of the generators. Assume rho(P.val_i mod pi^4)=0 for every i and pi equals the sum of b_I times the evaluated Jacobian minors of the initial c relations. Then there are a_j,t in R such that constantCoeff(P.relation_j)=pi^4 a_j for every j and (1-pi^3 t)pi belongs to the ideal of maximal row minors of the n by c constant Jacobian matrix. Polynomial rings and derivatives are as in [def-weil-pbc-mv-polynomial-ring] and [def-weil-pbc-polynomial-partial-derivative].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CR (lemma-desingularize), proof: choice of presentation through the identity for u pi, before use of Tag 07DQ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Compose evaluation with the quotient map and rho. Equality on variables identifies this algebra homomorphism with aeval zero. MvPolynomial.aeval_zero identifies every value with the quotient of the constant coefficient.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Relations evaluate to zero by Presentation.aeval_val_relation. Ideal.Quotient.eq_zero_iff_mem and Ideal.mem_span_singleton give the scalars a_j.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the composite to the supplied minor identity. Use AlgHom.map_det, RingHom.map_det, and the constant-evaluation equality entry by entry. Lift each quotient coefficient using Ideal.Quotient.mk_surjective and choose the scalar family d_I.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient of pi minus the sum d_I D_I is zero. Quotient kernel membership and Ideal.mem_span_singleton give pi-sum d_I D_I=pi^4 t. Ring normalization gives (1-pi^3 t)pi=sum d_I D_I.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every D_I is the transpose of the corresponding row minor, so Matrix.det_transpose identifies it with an ideal generator. Ideal.subset_span, Ideal.mul_mem_left, and Ideal.sum_mem finish.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CR, opening translation and quotient-minor calculation; https://stacks.math.columbia.edu/tag/07CR (read 2026-10-13)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Translate a strictly standard algebra presentation along a section modulo pi to obtain zero constant terms and a scalar Jacobian left inverse",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Translate polynomial generators of a finite algebra presentation using a section modulo a fourth power, so relation constants are divisible by that power and constant Jacobian minors generate pi modulo the fourth power",
+   "date": "2026-10-12",
+   "results": "Algebra.SubmersivePresentation.ofHasCoeffs, Algebra.SubmersivePresentation.invJacobianOfHasCoeffs, Algebra.SubmersivePresentation.map_jacobianRelationsOfHasCoeffs, Algebra.SubmersivePresentation.jacobianRelations, Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs, Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs, Algebra.SubmersivePresentation.aeval_jacobianOfHasCoeffs, Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs",
+   "verdict": "No translated-presentation theorem; the SubmersivePresentation results require different data."
+  },
+  {
+   "tool": "grep",
+   "query": "strictly.?standard|translated.*presentation|constant.*minor",
+   "date": "2026-10-12",
+   "results": "No matches",
+   "verdict": "No translated-presentation theorem; the SubmersivePresentation results require different data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial algebra automorphism translating variables by constants preserves partial derivatives and presentations",
+   "date": "2026-10-13",
+   "results": "MvPolynomial.mvPolynomialEquivMvPolynomial; Algebra.PreSubmersivePresentation.jacobian_ofAlgEquiv; Algebra.SubmersivePresentation.reindex; bivariate partial derivative equivalences.",
+   "verdict": "No matching translation or quotient-section statement. ofAlgEquiv changes the presented algebra, not its polynomial generators; the inverse substitutions are constructed directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.aeval_zero",
+   "date": "2026-10-13",
+   "results": "MvPolynomial.aeval_zero: aeval 0 p = algebraMap _ _ (constantCoeff p).",
+   "verdict": "Used for the quotient-evaluation calculation; does not state either intermediate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv.*aeval|aeval.*pderiv|translate.*presentation|presentation.*translate",
+   "date": "2026-10-13",
+   "results": "Mathlib: aeval_sumElim_pderiv_inl and submersive-presentation/cotangent formulas. Local lean/Sheaf and lean/WeilConjectures: PopescuRescaledPresentation, the generic aeval chain rule in WeilConjectures.Mathlib.Algebra.MvPolynomial.PDeriv, and the original target.",
+   "verdict": "No duplicate. aeval_sumElim_pderiv_inl treats elimination of a disjoint set of variables, not additive translations; rescaling differs. The direct polynomial-induction translation calculation takes a few lines without further imports."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuTranslatedPresentation",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Finite-etale lifting proof, essential-surjectivity approximation route: the translated presentation and constant-minor identity in the desingularization construction, before scalar left inverses and cubic substitution",
+   "via": [
+    "lem-weil-pbc-popescu-translated-presentation",
+    "lem-weil-pbc-popescu-desingularization-substitution",
+    "lem-weil-pbc-popescu-desingularization-quotient-data",
+    "lem-weil-pbc-popescu-desingularize",
+    "lem-weil-pbc-popescu-desingularize-strictly-standard",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuTranslatedPresentationProperties",
+  "file": "lean/Sheaf/RingTheory/PopescuTranslatedPresentationProperties.lean",
+  "declaration": "Algebra.exists_popescu_translated_presentation_properties",
+  "statement": "theorem exists_popescu_translated_presentation_properties\n    (R : Type u) (A : Type v) [CommRing R] [CommRing A]\n    [Algebra R A] (π : R)\n    (ρ : (A ⧸ Ideal.span {(algebraMap R A π) ^ 4}) →ₐ[R]\n      (R ⧸ Ideal.span {π ^ 4}))\n    (n m c : ℕ) (P : Presentation R A (Fin n) (Fin m)) (hc : c ≤ min n m)\n    (b : {I : Finset (Fin n) // I.card = c} → A)\n    (hzero : ∀ i, ρ (Ideal.Quotient.mk _ (P.val i)) = 0)\n    (hminor : algebraMap R A π = ∑ I : {I : Finset (Fin n) // I.card = c}, b I *\n      Matrix.det (fun j i : Fin c =>\n        aeval P.val (pderiv (I.val.orderEmbOfFin I.property i)\n          (P.relation (Fin.castLE (le_trans hc (min_le_right n m)) j))))) :\n    ∃ (a : Fin m → R) (t : R),\n      (∀ j, constantCoeff (P.relation j) = π ^ 4 * a j) ∧\n      (1 - π ^ 3 * t) * π ∈ Ideal.span (Set.range\n        (fun I : {I : Finset (Fin n) // I.card = c} ↦\n          (Matrix.submatrix\n            (fun i j ↦ constantCoeff\n              (pderiv i (P.relation (Fin.castLE (le_trans hc (min_le_right n m)) j))))\n            (I.val.orderEmbOfFin I.property) (fun j ↦ j)).det))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T002008-L-2358152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T002008-L-2358152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

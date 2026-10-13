@@ -6,6 +6,8 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.RingTheory.StrictlyStandardElement
+import Sheaf.RingTheory.PopescuTranslatedPresentationData
+import Sheaf.RingTheory.PopescuTranslatedPresentationProperties
 
 /-! # Translation of a strictly standard presentation
 
@@ -69,6 +71,18 @@ theorem exists_popescu_translated_presentation
       (∀ j : Fin m, c ≤ j.val →
         P.σ (algebraMap R A π) * P.relation j ∈
           Ideal.span {f | ∃ k : Fin m, k.val < c ∧ f = P.relation k} +
-            (Ideal.span (Set.range P.relation)) ^ 2) := by sorry
+            (Ideal.span (Set.range P.relation)) ^ 2) := by
+  classical
+  obtain ⟨ρ, hcompat⟩ := hρ
+  obtain ⟨n, m, c, P, hc, b, hzero, hminor, hsq⟩ :=
+    exists_popescu_translated_presentation_data R A π ρ hstandard
+  have hgen (i : Fin n) : ∃ l : Λ, α (P.val i) = algebraMap R Λ π ^ 4 * l := by
+    apply Ideal.mem_span_singleton.mp
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    simpa only [map_zero] using hcompat (P.val i) 0 (by simpa using hzero i)
+  choose lam hgen using hgen
+  obtain ⟨a, t, hconst, hminor⟩ :=
+    exists_popescu_translated_presentation_properties R A π ρ n m c P hc b hzero hminor
+  exact ⟨n, m, c, P, hc, lam, a, t, hgen, hconst, hminor, hsq⟩
 
 end Algebra
