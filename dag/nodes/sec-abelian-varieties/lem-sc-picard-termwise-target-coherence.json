@@ -1,0 +1,162 @@
+{
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06YJ and 0D5S; Tag 08DW for open restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The counit of derived tensor pullback on complexes is natural and compatible with composition and single complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.singleMapHomologicalComplex",
+   "results": "12 hits: HomologicalComplex.singleMapHomologicalComplex, HomologicalComplex.singleMapHomologicalComplex_hom_app_self, HomologicalComplex.singleMapHomologicalComplex_inv_app_self, HomologicalComplex.singleMapHomologicalComplex_hom_app_ne, HomologicalComplex.singleMapHomologicalComplex_inv_app_ne, HomologicalComplex.singleMapHomologicalComplex_id_hom_app, HomologicalComplex.singleMapHomologicalComplex_id_inv_app, HomologicalComplex.natTransMapHomologicalComplex_app_single_obj",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "singleMapHomologicalComplex|mapHomologicalComplexCompIso",
+   "results": "10 hits: Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left derived functor natural transformation factors through its counit and is uniquely determined by this equation",
+   "results": "Functor.leftDerived_fac_app, leftDerived_ext, leftDerivedNatTrans_fac and leftDerived_fac; categorical ingredients, not either concrete simultaneous comparison family.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; independent second reading"
+  },
+  {
+   "tool": "grep",
+   "query": "composition/counit, perfect counit, source coherence, and termwise coherence in lean/Sheaf and upstream WeilConjectures",
+   "results": "Read canonicalSinglePullbackComposition and isIso_canonicalSinglePullbackMap (ordinary single targets), and localizedPullback_perfectCounit (local-site target and independent counit); no exact statement of the pinned complex coherence families. Mathlib leftDerived_fac_app supplies the lift equation.",
+   "date": "2026-10-13",
+   "verdict": "no exact duplicate; independent second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardTermwiseModelComparison",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, degree-zero cycle lifting: Tags 06YJ and 0D5S, K-flat computation and composition; Tag 05RR, connective maps; termwise comparison target counit equation",
+   "via": [
+    "lem-sc-picard-termwise-model-comparison",
+    "lem-sc-picard-connective-model-comparison",
+    "lem-sc-picard-scalar-derived-cycles",
+    "lem-sc-picard-scalar-model-cycles-realization",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-picard-termwise-target-coherence",
+ "kind": "statement",
+ "title": "Coherent derived comparison of the perfect target model",
+ "statement": "Fix derived localizations on all schemes and open sites [def-pc-derived-category]. Let $W$ be a scheme [def-pc-scheme], $U\\subseteq W$ an open, $E\\in D(\\mathcal O_W)$, and $K$ a strictly perfect complex on the open site [def-pc-perfect-complex], with $E|_U\\cong QK$. Let $P_s$, $w:P_{s\\prime}\\cong i^*P_s$, and $\\eta_i$ be as in [def-sc-picard-termwise-models]. There are $b_{t,s,h}:Lt^*E\\cong QP_s$ for every $h:s;U.\\iota=t$. For every $i:T\\prime\\to T$, compatible equalities $i;t=t\\prime$ and $i;s=s\\prime$, and both factorizations $h,h\\prime$, they satisfy $b_{t\\prime,s\\prime,h\\prime}.\\mathrm{hom};Q(w.\\mathrm{hom})=c.\\mathrm{inv}(E);Li^*(b_{t,s,h}.\\mathrm{hom});\\eta_i(P_s)$, where $c$ is the pinned derived composition comparison [lem-pc-ringed-spaces-derived-pullback-composition]. This assertion involves no source single or chain map, and has no connectivity hypothesis. Derived pullback is that of [def-pc-derived-pullback].",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "def-pc-scheme",
+  "def-sc-picard-termwise-models",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Transport the strictly perfect model across the exact open-site equivalence; it remains bounded and each term is a finite-free retract, hence flat. Apply the bounded-flat counit.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use compatibility with exact open restriction and the fixed representing isomorphism to construct b for each factorization through U.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use associativity of the pinned derived composition and its defining counit equation on the transported K-flat model. Naturality moves the fixed representing isomorphism across the square; equality transports agree by proof irrelevance.",
+   "uses": [
+    "def-sc-picard-termwise-models",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-sc-picard-termwise-models",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent P2",
+  "document": "Stacks Project",
+  "place": "Tags 06YJ, 0D5S and 08DW",
+  "description": "Extracted the indicated part of the existing termwise comparison proof; the categorical combination is proved in Lean."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardTermwiseTargetCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardTermwiseTargetCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_termwise_target_coherence",
+  "statement": "theorem picard_termwise_target_coherence\n    (W : Scheme.{v}) (E : schemeDerivedCategory W) (U : W.Opens)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K)\n    (hE : Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅\n        DerivedCategory.Q.obj K)) :\n    ∃ b : ∀ {T : Scheme.{v}} (t : T ⟶ W) (s : T ⟶ U.toScheme),\n        s ≫ U.ι = t → ((derivedPullback t).obj E ≅\n          DerivedCategory.Q.obj (picardTermwiseModel W U K s)),\n      ∀ {T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)\n        (s : T ⟶ U.toScheme) (s' : T' ⟶ U.toScheme)\n        (ht : i ≫ t = t') (hs : i ≫ s = s')\n        (hf : s ≫ U.ι = t) (hf' : s' ≫ U.ι = t'),\n      let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition)))) i t ≪≫\n          eqToIso (congrArg (fun g : T' ⟶ W ↦ derivedPullback g) ht)\n      (b t' s' hf').hom ≫\n          DerivedCategory.Q.map (picardTermwiseModelRestrictionIso W U K i s s' hs).hom =\n        c.inv.app E ≫ (derivedPullback i).map (b t s hf).hom ≫\n          (picardTermwiseCounit i).app (picardTermwiseModel W U K s)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-17429",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T140823-L-315528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-17429",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T140823-L-315528",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem and extracted definitions against the originals, coherence statements against their nodes and sources, and proof dependencies against the Lean; all four modules and the sole direct importer compiled cleanly, with permitted axioms only and expected sorryAx."
+ }
+}

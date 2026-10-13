@@ -5,12 +5,12 @@ Authors: SHEAF group M3
 -/
 module
 
-public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Sheaf.AlgebraicGeometry.PicardTermwiseModels
 public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.PicardTermwiseSourceCoherence
+import Sheaf.AlgebraicGeometry.PicardTermwiseTargetCoherence
 
 /-! # Termwise model comparisons before imposing connectivity
 
@@ -20,34 +20,43 @@ Source: Stacks Project, Tags 06YJ and 0D5S.
 
 @[expose] public section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- Termwise tensor pullback of the model transported from the open site.
-Source: Stacks Project, Tag 06YJ.
-(blueprint: lem-sc-picard-termwise-model-comparison) -/
-abbrev picardTermwiseModel (W : Scheme.{v}) (U : W.Opens)
-    (K : CochainComplex
-      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
-    {T : Scheme.{v}} (s : T ⟶ U.toScheme) :
-    CochainComplex (SheafOfModules.{v} (moduleRings T.toRingedSpace)) ℤ := by
-  let : (Modules.overEquiv U).functor.Additive :=
-    Functor.additive_of_preserves_binary_products _
-  let : (Modules.tensorPullback s).Additive :=
-    (Classical.choose (Modules.exists_tensorPullbackAdjunction s)).left_adjoint_additive
-  exact ((Modules.tensorPullback s).mapHomologicalComplex (.up ℤ)).obj
-    (((Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K)
+/-- Transport naturality across independent source and target comparison squares. -/
+private theorem picard_comparison_transport
+    {C₀ C₁ D₀ D₁ : Type*} [Category C₀] [Category C₁] [Category D₀] [Category D₁]
+    (Q : C₀ ⥤ D₀) (Q' : C₁ ⥤ D₁) (L : D₀ ⥤ D₁) (F : C₀ ⥤ C₁)
+    (η : Q ⋙ L ⟶ F ⋙ Q')
+    {A B : D₀} {A' B' : D₁} {X Y : C₀} {X' Y' : C₁}
+    (cA : A' ≅ L.obj A) (cB : B' ≅ L.obj B)
+    (a : A ≅ Q.obj X) (b : B ≅ Q.obj Y)
+    (a' : A' ≅ Q'.obj X') (b' : B' ≅ Q'.obj Y')
+    (u : X' ≅ F.obj X) (w : Y' ≅ F.obj Y)
+    (ha : a'.hom ≫ Q'.map u.hom = cA.hom ≫ L.map a.hom ≫ η.app X)
+    (hb : b'.hom ≫ Q'.map w.hom = cB.hom ≫ L.map b.hom ≫ η.app Y)
+    (f : X ⟶ Y) :
+    cA.hom ≫ L.map (a.hom ≫ Q.map f ≫ b.inv) ≫ cB.inv =
+      a'.hom ≫ Q'.map (u.hom ≫ F.map f ≫ w.inv) ≫ b'.inv := by
+  have hn := η.naturality f
+  change L.map (Q.map f) ≫ η.app Y = η.app X ≫ Q'.map (F.map f) at hn
+  have hb' := congrArg
+    (fun z ↦ L.map b.inv ≫ cB.inv ≫ z ≫ Q'.map w.inv ≫ b'.inv) hb
+  simp only [Category.assoc, cB.inv_hom_id_assoc] at hb'
+  rw [← Q'.map_comp_assoc w.hom w.inv, w.hom_inv_id, Q'.map_id] at hb'
+  simp only [Category.id_comp, b'.hom_inv_id, Category.comp_id] at hb'
+  rw [← L.map_comp_assoc b.inv b.hom, b.inv_hom_id, L.map_id, Category.id_comp] at hb'
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Category.assoc a'.hom, ha]
+  simp only [Category.assoc]
+  rw [← reassoc_of% hn, hb']
 
-/-- The degree-zero single of the underived pullback of the source structure sheaf.
-Source: Stacks Project, Tag 06YJ.
-(blueprint: lem-sc-picard-termwise-model-comparison) -/
-abbrev picardTermwiseSource {W T : Scheme.{v}} (t : T ⟶ W) :=
-  (CochainComplex.singleFunctor
-    (SheafOfModules.{v} (moduleRings T.toRingedSpace)) 0).obj
-      ((Modules.tensorPullback t).obj (SheafOfModules.unit (moduleRings W.toRingedSpace)))
-
+set_option maxHeartbeats 800000 in
+-- The pinned comparison families elaborate large derived-category functor expressions.
 /-- Source and target object comparisons can be chosen simultaneously, so that
 restriction of a localized chain map is represented by a chain map whose zeroth
 component is ordinary tensor restriction. No connectivity is assumed: this theorem
@@ -114,7 +123,44 @@ theorem picard_termwise_model_comparison
             ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫ f.f 0) ∧
         picardDerivedModelRestriction E i t t' ht
             ((a t).hom ≫ DerivedCategory.Q.map f ≫ (b t s hf).inv) =
-          (a t').hom ≫ DerivedCategory.Q.map f' ≫ (b t' s' hf').inv := by sorry
+          (a t').hom ≫ DerivedCategory.Q.map f' ≫ (b t' s' hf').inv := by
+  obtain ⟨a, ha⟩ := picard_termwise_source_coherence W
+  obtain ⟨b, hb⟩ := picard_termwise_target_coherence W E U K hK hE
+  refine ⟨a, b, ?_⟩
+  intro T T' i t t' s s' ht hs hf hf' f
+  let : (Modules.tensorPullback i).Additive :=
+    (Classical.choose (Modules.exists_tensorPullbackAdjunction i)).left_adjoint_additive
+  let F := (Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)
+  let u := picardTermwiseSourceRestrictionIso i t t' ht
+  let w := picardTermwiseModelRestrictionIso W U K i s s' hs
+  let f' := u.hom ≫ F.map f ≫ w.inv
+  refine ⟨f', ?_, ?_⟩
+  · let ct := Modules.tensorPullbackCompositionIso i t t' ht
+    let cs := Modules.tensorPullbackCompositionIso i s s' hs
+    change (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫ f'.f 0 =
+      ct.hom.app _ ≫ (Modules.tensorPullback i).map
+        ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫ f.f 0) ≫ cs.inv.app _
+    simp [f', u, w, F, picardTermwiseSourceRestrictionIso,
+      picardTermwiseModelRestrictionIso,
+      Functor.mapHomologicalComplexCompIso, NatIso.mapHomologicalComplex,
+      NatTrans.mapHomologicalComplex, Category.assoc]
+    simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      HomologicalComplex.single_map_f_self, Category.assoc]
+    rfl
+  · let c := (Classical.choose (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition)))) i t ≪≫
+        eqToIso (congrArg (fun g : T' ⟶ W ↦ derivedPullback g) ht)
+    have hu := ha i t t' ht
+    have hw := hb i t t' s s' ht hs hf hf'
+    change (a t').hom ≫ DerivedCategory.Q.map u.hom =
+      c.inv.app _ ≫ (derivedPullback i).map (a t).hom ≫
+        (picardTermwiseCounit i).app (picardTermwiseSource t) at hu
+    change (b t' s' hf').hom ≫ DerivedCategory.Q.map w.hom =
+      c.inv.app E ≫ (derivedPullback i).map (b t s hf).hom ≫
+        (picardTermwiseCounit i).app (picardTermwiseModel W U K s) at hw
+    exact picard_comparison_transport DerivedCategory.Q DerivedCategory.Q
+      (derivedPullback i) F (picardTermwiseCounit i)
+      (c.app _).symm (c.app E).symm (a t) (b t s hf) (a t') (b t' s' hf') u w hu hw f
 
 end
 end AlgebraicGeometry.Scheme
