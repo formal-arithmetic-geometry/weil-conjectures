@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-affine-open-kernel-conormal-sections",
+ "kind": "statement",
+ "title": "Actual kernel conormal sections on an affine closed chart",
+ "statement": "Let g:X→Y be a scheme morphism [def-pc-scheme], W⊂Y and U⊂X affine opens [def-weil-affine-spectrum], with g⁻¹W=U and h:U⊆g⁻¹W. Let r:R≃Γ(Y,W) be a ring isomorphism, and let I be the kernel of ρ=g.appLE(W,U,h)∘r, assumed surjective. Let K be the actual module-sheaf kernel of O_Y→g_*O_X and N=P_g K [def-pc-module-pullback]. Give Γ(N,U) its R-action through ρ. There exists an R-linear equivalence I/I²≃Γ(N,U), sending the class of a∈I to the restriction to U of the canonical pullback-unit image [lem-pc-module-pullback-adjunction] of every s∈Γ(K,W) whose inclusion equals r(a).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01R3",
+  "place": "Tag 01R3 (1), (2), combined with Tags 00A0 and 0096; read online 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Set i=g.resLE W U h. Identify global sections of the open schemes with their ambient sections by W.topIso and U.topIso. Surjectivity of ρ and r imply surjectivity of i.appTop. Since both schemes are affine, Mathlib IsClosedImmersion.of_surjective_of_isAffine makes i a closed immersion. Under r followed by W.topIso.inv, the kernel of i.appTop is I: the U.topIso.inv factor is injective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply affine_conormal_sections_existence to i, the top affine open of W, the transported ring coordinates, and I. It gives the semilinear quotient equivalence c and its exact unit formula.",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply open_kernel_conormal_transport to obtain the open-chart section equivalence d. For any original kernel section s it supplies a local ideal section t with the same included function and identifies d of its local unit with the restricted original unit.",
+   "uses": [
+    "lem-sc-open-kernel-conormal-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the additive equivalences c and d. Their scalar formulas and W.topIso.hom∘W.topIso.inv=id make the composite R-linear through ρ. For a and s satisfying the inclusion equation, the local section t supplied by transport has inclusion equal to the transported r(a); rewrite c of the class of a by the affine unit formula and then apply the transport unit equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-open-kernel-conormal-transport",
+  "lem-weil-pbc-affine-conormal-sections-existence"
+ ],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/01R3",
+  "place": "Tag 01R3 (1), (2), combined with Tags 00A0 and 0096; read online 2026-10-13",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pullback of the kernel of a scheme structure sheaf map has sections equal to the cotangent ideal quotient on an affine closed chart, compatibly with the pullback unit",
+   "results": "Internal Server Error; service unavailable. No conclusion drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conormal sheaf commutes with restriction to an affine open and its sections are ideal modulo square",
+   "results": "IdealSheafData.map_ideal, subschemeObjIso, subschemeι_app and ker_subschemeι_app; none gives the actual module-sheaf kernel pullback with its original unit on a locally closed chart.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|Cotangent.*sections|sections.*Cotangent",
+   "results": "Only ring-theoretic Extension.Cotangent hits. Project affine_conormal_sections_existence supplies the globally closed case; the open restriction interface does not apply to a morphism which is only closed on the chart.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "affine diagonal calculation: restricting the actual kernel conormal to the closed chart",
+   "via": [
+    "stage3-diagonal-conormal-affine-ideal-class-q",
+    "lem-sc-diagonal-conormal-affine-ideal-class",
+    "stage3-diagonal-conormal-affine-derivation-span",
+    "stage3-diagonal-conormal-chosen",
+    "lem-sc-diagonal-conormal-affine-sections-base",
+    "lem-sc-diagonal-conormal-affine-sections",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenKernelConormalSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenKernelConormalSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineOpen_kernel_conormal_sections",
+  "statement": "theorem affineOpen_kernel_conormal_sections {X Y : Scheme.{u}} (g : X ⟶ Y) (W : Y.affineOpens) (U : X.affineOpens) (h : U.1 ≤ g ⁻¹ᵁ W.1) (hpre : g ⁻¹ᵁ W.1 = U.1) (R : Type v) [CommRing R] (r : R ≃+* Γ(Y, W.1)) (I : Ideal R) (hI : I = RingHom.ker ((g.appLE W.1 U.1 h).hom.comp r.toRingHom)) (hsurj : Function.Surjective ((g.appLE W.1 U.1 h).hom.comp r.toRingHom)) : let K := kernel (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom) let N := (tensorPullback g).obj K letI : Module R Γ(N, U.1) := Module.compHom _ ((g.appLE W.1 U.1 h).hom.comp r.toRingHom) ∃ e : I.Cotangent ≃ₗ[R] Γ(N, U.1), ∀ (a : I) (s : Γ(K, W.1)), (kernel.ι (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom)).val.app (op W.1) s = r a → e (I.toCotangent a) = N.presheaf.map (homOfLE h).op (((Classical.choose (exists_tensorPullbackAdjunction g)).unit.app K).val.app (op W.1) s)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T082416-L-1648941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T082416-L-1648941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

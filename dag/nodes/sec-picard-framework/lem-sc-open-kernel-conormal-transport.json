@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-open-kernel-conormal-transport",
+ "kind": "statement",
+ "title": "Localization of the actual kernel conormal and unit",
+ "statement": "Let g:X→Y be a scheme morphism [def-pc-scheme], W⊂Y and U⊂X opens with g⁻¹W=U and h:U⊆g⁻¹W. Suppose i=g.resLE W U h:U→W is a closed immersion [def-weil-closed-immersion]. Let K=ker(O_Y→g_*O_X) be the actual module-sheaf kernel and N=P_g K [def-pc-module-pullback]. Let C=i_*P_i(i.ker.toModules), using the closed-immersion ideal module [def-sbc-closed-immersion-ideal-sheaf]. Give Γ(N,U) the Γ(W,top)-action through the open-section isomorphism W.topIso.hom and g.appLE. There exists a Γ(W,top)-linear equivalence e:Γ(C,top)≃Γ(N,U). For every s∈Γ(K,W), there is t∈Γ(i.ker.toModules,top) whose inclusion is W.topIso.inv of the included s, and e carries the local pullback-unit section of t to the restriction to U of the original pullback-unit section of s [lem-pc-module-pullback-adjunction]. No assumption that g is globally closed is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01R3",
+  "place": "Tag 01R3 (1), (2), combined with Tags 00A0 and 0096; read online 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The preimage equality and the defining commutative square of resLE identify i with the restriction of g to W. On every open T in W, the open-section isomorphisms identify O_Y→g_*O_X with O_W→i_*O_U. Restriction preserves the actual kernel: evaluation on an open is left exact, and the open-section identifications commute with both structure maps. The closed-immersion ideal module is this kernel, yielding the unique ideal section t with the asserted inclusion equation.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use tensor-pullback composition around the commutative square of open inclusions to transport the kernel identification to its pullback. For the open inclusions, pullback is restriction. The composition isomorphisms are those supplied by uniqueness of left adjoints to the same pushforward.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the composition and restriction isomorphisms by the unit compatibility of uniqueness of left adjoints. The canonical unit of exists_tensorPullbackAdjunction is the sheafification of 1 tensor the inverse-image unit; restriction changes neither the sectionwise tensor nor its sheafification unit. Thus the local unit of t corresponds to the restricted original unit of s. Take top sections and the open-section identifications to produce e; both scalar structures are through g.appLE composed with W.topIso.hom.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/01R3",
+  "place": "Tag 01R3 (1), (2), combined with Tags 00A0 and 0096; read online 2026-10-13",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict the kernel of O_Y to g_* O_X to an open chart where g is a closed immersion, compatibly with the conormal pullback adjunction unit",
+   "results": "Internal Server Error; service unavailable. No conclusion drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel conormal sheaves commute with open restriction with compatibility of pullback units",
+   "results": "IdealSheafData.map_ker, ker_morphismRestrict_ideal, ker_ideal_of_isPullback_of_isOpenImmersion, and related ideal-sheaf statements. The restriction facts assume QuasiCompact g and concern the quasi-coherent ideal, not the actual module-sheaf kernel; none includes the conormal pullback unit identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*kernel|kernel.*restrict|conormal",
+   "results": "The broad grep returned unrelated group/linear-algebra/probability kernels. A focused AlgebraicGeometry grep and project searches found no Mathlib conormal transport. Project nonempty_tensorPullback_open_kernel assumes the original morphism globally closed and supplies no unit identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "affine diagonal calculation: restricting the actual kernel conormal to the closed chart",
+   "via": [
+    "stage3-diagonal-conormal-affine-ideal-class-q",
+    "lem-sc-diagonal-conormal-affine-ideal-class",
+    "stage3-diagonal-conormal-affine-derivation-span",
+    "stage3-diagonal-conormal-chosen",
+    "lem-sc-diagonal-conormal-affine-sections-base",
+    "lem-sc-diagonal-conormal-affine-sections",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenKernelConormalTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenKernelConormalTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.open_kernel_conormal_transport",
+  "statement": "theorem open_kernel_conormal_transport {X Y : Scheme.{u}} (g : X ⟶ Y) (W : Y.Opens) (U : X.Opens) (h : U ≤ g ⁻¹ᵁ W) (hpre : g ⁻¹ᵁ W = U) [IsClosedImmersion (g.resLE W U h)] : let i := g.resLE W U h let K := kernel (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom) let N := (tensorPullback g).obj K let C := (pushforward i).obj ((tensorPullback i).obj i.ker.toModules) letI : Module Γ(W.toScheme, ⊤) Γ(N, U) := Module.compHom _ ((g.appLE W U h).hom.comp W.topIso.hom.hom) ∃ e : Γ(C, ⊤) ≃ₗ[Γ(W.toScheme, ⊤)] Γ(N, U), ∀ s : Γ(K, W), ∃ t : Γ(i.ker.toModules, ⊤), i.ker.toModulesι.app ⊤ t = W.topIso.inv ((kernel.ι (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom)).val.app (op W) s) ∧ e (((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app i.ker.toModules).app ⊤ t) = N.presheaf.map (homOfLE h).op (((Classical.choose (exists_tensorPullbackAdjunction g)).unit.app K).val.app (op W) s)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T082416-L-1648941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T082416-L-1648941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
