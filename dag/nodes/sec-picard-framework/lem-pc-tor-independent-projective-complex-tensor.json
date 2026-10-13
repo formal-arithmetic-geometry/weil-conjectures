@@ -24,50 +24,50 @@
  ],
  "proof": [
   {
-   "text": "For every degree n, Q^n is a finite projective A-module. The Tor-independence hypothesis and [lem-pc-finite-projective-tor-acyclic] therefore give Tor_i^R(Q^n,B)=0 for every i>0.",
+   "text": "For each term, obtain a finite free retraction from Module.Finite.exists_comp_eq_id_of_projective. Lift its maps explicitly to ULift A-modules and check their composite on elements. Apply finiteProjective_tor_acyclic with the given lifted Tor-independence hypothesis.",
    "uses": [
     "lem-pc-finite-projective-tor-acyclic"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
+    "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors"
    }
   },
   {
-   "text": "Apply [lem-pc-termwise-tor-acyclic-derived-tensor] to Q^bullet and B. The canonical derived-to-ordinary tensor map is a quasi-isomorphism, so for every i it identifies H^i(Q^bullet tensor_R^L B) with H^i(Q^bullet tensor_R B).",
+   "text": "Apply the termwise Tor-acyclic universal-counit bridge. In comparison_eq, the right side is a composite of isomorphisms. Cancel the inverse homology preservation isomorphism and use that restriction of scalars reflects isomorphisms. Thus every comparison i is invertible.",
    "uses": [
-    "lem-pc-termwise-tor-acyclic-derived-tensor"
+    "lem-pc-termwise-tor-acyclic-base-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
+    "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors"
    }
   },
   {
-   "text": "The canonical map E=A\\otimes_R B\\to D is a localization of E, hence D is a flat E-module [lem-weil-pbc-localization-flat]. The ordinary tensor complex C^\\bullet=Q^\\bullet\\otimes_R B is a bounded complex of E-modules (C^n=Q^n\\otimes_A E). By [lem-weil-pbc-flat-tensor-exact], -\\otimes_E D preserves exactness of each sequence C^{i-1}\\to C^i\\to C^{i+1}, so it carries kernels and images of the differentials to those of C^\\bullet\\otimes_E D, giving H^i(C^\\bullet)\\otimes_E D\\cong H^i(C^\\bullet\\otimes_E D) for every i. Degreewise associativity of tensor products gives (Q^n\\otimes_R B)\\otimes_E D=(Q^n\\otimes_A E)\\otimes_E D\\cong Q^n\\otimes_A D, compatibly with differentials. Combined with Step 2, under these identifications the map in the statement is the composite of these isomorphisms, hence an isomorphism for every i.",
+   "text": "Unpack the localization witness and apply Mathlib IsLocalization.flat D S. The flat localized comparison bridge applied to the ordinary comparison isomorphisms now proves every localizedComparison i is invertible.",
    "uses": [
     "lem-weil-pbc-localization-flat",
-    "lem-weil-pbc-flat-tensor-exact"
+    "lem-pc-flat-localized-base-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: local affine reduction"
+    "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-finite-projective-tor-acyclic",
-  "lem-pc-termwise-tor-acyclic-derived-tensor",
+  "lem-pc-termwise-tor-acyclic-base-comparison",
   "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-flat-tensor-exact"
+  "lem-pc-flat-localized-base-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08IB, lemma-compare-base-change"
+  "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors; Lean assembly and model-interface transport by J4"
  },
  "mathlib_searches": [
   {
@@ -146,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100018-L-2466424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

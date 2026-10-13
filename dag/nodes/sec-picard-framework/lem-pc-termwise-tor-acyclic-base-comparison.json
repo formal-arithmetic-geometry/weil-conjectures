@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-termwise-tor-acyclic-base-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AVW case (1) proof: Tor independence identifies the base-derived tensor with the pullback tensor at each stalk; projective-complex tensor comparison, derived-to-ordinary step",
+   "via": [
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Universal derived counit on a termwise Tor-acyclic bounded complex",
+ "statement": "For commutative R-algebras A and B, a bounded complex Q of A-modules, and any BaseDerivedTensorCohomologyModel R A B Q D [def-pc-base-derived-tensor-cohomology-model], assume every positive Tor over ULift R of ULift(Q^n), with its restricted R-action, and ULift B is zero. Then the universal derived scalar-extension counit at Q restricted to R is an isomorphism. No finite-projectivity or localization hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors"
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Lift R, B and each term to the common carrier universe. The equivalences\nalong the ring isomorphisms ULift R ≃ R and ULift B ≃ B preserve homology and\nintertwine scalar extension with tensoring by ULift B (tensor symmetry accounts\nfor its placement on the right). Apply the termwise Tor-acyclic comparison to a\nK-flat resolution of the restricted bounded complex. Its tensor augmentation is\na quasi-isomorphism. The left-derived counit computed on this resolution is\ntherefore an isomorphism; uniqueness of the universal derived pair transports\nthis to M.counit. More explicitly, in the naturality square for the resolution\naugmentation, its image under the localized derived functor is invertible,\nthe counit at the K-flat source is invertible by scalarExtensionCounit_isIso_of_kFlat after transporting to the common lifted ring universe, and the ordinary-tensor image of\nthe augmentation is invertible by termwise Tor acyclicity. Thus the fourth side,\nthe counit at Q, is invertible. The argument also applies to the zero complex,\nzero rings and arbitrary bounds, including m > n. No localization or finite\nprojectivity is required.",
+   "uses": [
+    "lem-pc-termwise-tor-acyclic-derived-tensor",
+    "lem-pc-kflat-scalar-extension-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-termwise-tor-acyclic-derived-tensor",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors; interface transport written by J4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact scalar extension commutes with homology; bounded termwise Tor acyclic derived counit",
+   "results": "Service unavailable (Internal Server Error).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded complex Tor acyclic terms derived tensor ordinary comparison localization cohomology isomorphism",
+   "results": "Service unavailable (could not connect to workload).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso",
+   "results": "mapHomologyIso and its naturality lemmas exist; no match for a universal derived counit or localized model comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_mapNatTrans|extendScalarsComp|localizedComparison in Mathlib and library; blueprint_refs search termwise Tor / flat cohomology tensor",
+   "results": "Mathlib homologyMap_mapNatTrans and extendScalarsComp give parts of the flat argument. Library FlatBaseDerivedTensorComparison requires K-flatness over R, which Tor independence does not supply. No duplicate of either bridge; blueprint searches returned zero.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded complex acyclic for left derived functor counit terms higher Tor zero",
+   "results": "Second reader: working service returned projective left-derived vanishing, higher Tor of projective modules, and derived-category bounds; none computes a counit on a bounded termwise Tor-acyclic complex. Local search found scalarExtensionCounit_isIso_of_kFlat, now named as a proof dependency; Tor-acyclic terms need not be K-flat.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor",
+  "group": "J4",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TermwiseTorAcyclicBaseComparison",
+  "file": "lean/Sheaf/Algebra/Homology/TermwiseTorAcyclicBaseComparison.lean",
+  "declaration": "ModuleCat.BaseDerivedTensorCohomologyModel.counit_isIso_of_termwise_tor_acyclic",
+  "statement": "theorem counit_isIso_of_termwise_tor_acyclic\n    (M : BaseDerivedTensorCohomologyModel R A B Q D)\n    (hbounded : ∃ m n : ℤ, ∀ i : ℤ, i < m ∨ n < i → IsZero (Q.X i))\n    (hTor : ∀ (n : ℤ) (i : ℕ), 0 < i →\n      IsZero (((CategoryTheory.Tor'\n        (ModuleCat.{max uR uA uB uD v} (ULift.{max uR uA uB uD v} R)) i).obj\n        (@ModuleCat.of (ULift.{max uR uA uB uD v} R) _\n          (ULift.{max uR uA uB uD v} (Q.X n)) inferInstance\n          (Module.compHom _ (algebraMap (ULift.{max uR uA uB uD v} R)\n            (ULift.{max uR uA uB uD v} A))))).obj\n        (ModuleCat.of (ULift.{max uR uA uB uD v} R)\n          (ULift.{max uR uA uB uD v} B)))) :\n    IsIso (M.counit.app ((HomotopyCategory.quotient _ _).obj\n      (((restrictScalars.{max uR uA uB uD v} (algebraMap R A)).mapHomologicalComplex\n        (.up ℤ)).obj Q)))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100018-L-2466424",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100018-L-2466424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

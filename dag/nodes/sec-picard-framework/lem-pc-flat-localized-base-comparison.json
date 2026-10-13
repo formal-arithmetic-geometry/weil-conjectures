@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-flat-localized-base-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AVW case (1) proof: Tor independence identifies the base-derived tensor with the pullback tensor at each stalk; projective-complex tensor comparison, flat localization step",
+   "via": [
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Flat extension of an invertible ordinary base-tensor comparison",
+ "statement": "For commutative R-algebras A and B, an arbitrary complex Q of A-modules, an E=A tensor_R B algebra D flat over E, and any BaseDerivedTensorCohomologyModel R A B Q D [def-pc-base-derived-tensor-cohomology-model], assume comparison i is invertible for every i. Then localizedComparison i is invertible for every i. There is no boundedness, projectivity, Tor-independence or localization hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors"
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Let f be A → E and g be E → D. Transfer hflat to D with the restricted E-action using Module.ext and Algebra.smul_def. Apply Module.Flat.lTensor_exact to every exact short complex and Functor.exact_tfae to obtain PreservesFiniteLimits for extension along g. Its adjunction supplies preservation of finite colimits. No same-ring-universe descent theorem is used.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the scalar-extension composition isomorphism c directly by conjugateIsoEquiv from restrictScalarsComp and the composite extension/restriction adjunction. unit_conjugateEquiv_symm identifies its hom on 1 tensor q with 1 tensor (1 tensor q). Map c.symm to complexes to obtain e: g-extension of K ≅ T. ExtendScalars.hom_ext and ordinaryToLocalized_tmul show that ordinaryToLocalized in each degree is exactly the adjoint of e.hom. This is the mixed-universe version of Mathlib extendScalarsComp and needs no new deferred theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For S=K.sc i and U=T.sc i, let ψ be the short-complex map induced by e.hom, h and k their left homology data, and γ the homology map data from h.map F to k. ψ is invertible, so γ.quasiIso_iff gives IsIso γ.φH. Transpose γ.φK and γ.φH through the adjunction to define homology map data δ for ordinaryToLocalized into U.map G. The three data equations follow from homEquiv_naturality_left/right, the termwise transpose equality, and the three equations of γ. δ.homologyMap_eq and k.mapHomologyIso_eq identify the cohomology adjunct with F.map h.homologyIso.hom, then γ.φH, then k.homologyIso.inv; all are invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use injectivity of the adjunction homEquiv and its left naturality with M.localized_eq to identify M.localizedComparison i with F.map (M.comparison i) followed by the preceding cohomology adjunct. The assumed comparison is invertible and functors preserve isomorphisms. Both factors are therefore invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors; interface transport written by J4; second reading by J4 closed this theorem using mixed-universe adjunction and explicit left homology map data, adapting the argument of the existing flatScalarExtensionHomologyAdjunct_isIso without restricting the signature"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact scalar extension commutes with homology; bounded termwise Tor acyclic derived counit",
+   "results": "Service unavailable (Internal Server Error).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded complex Tor acyclic terms derived tensor ordinary comparison localization cohomology isomorphism",
+   "results": "Service unavailable (could not connect to workload).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso",
+   "results": "mapHomologyIso and its naturality lemmas exist; no match for a universal derived counit or localized model comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_mapNatTrans|extendScalarsComp|localizedComparison in Mathlib and library; blueprint_refs search termwise Tor / flat cohomology tensor",
+   "results": "Mathlib homologyMap_mapNatTrans and extendScalarsComp give parts of the flat argument. Library FlatBaseDerivedTensorComparison requires K-flatness over R, which Tor independence does not supply. No duplicate of either bridge; blueprint searches returned zero.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.lTensor_exact; ModuleCat.extendScalarsComp; ShortComplex.mapHomologyIso",
+   "results": "Second reader found lTensor_exact and homology data ingredients. Existing flatScalarExtensionHomologyAdjunct_isIso and Mathlib extendScalarsComp restrict rings to one universe. Reused their argument at the stated distinct universes and closed the theorem; no new sorry.",
+   "date": "2026-10-13",
+   "verdict": "ingredients used in proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor",
+  "group": "J4",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatLocalizedBaseComparison",
+  "file": "lean/Sheaf/Algebra/Homology/FlatLocalizedBaseComparison.lean",
+  "declaration": "ModuleCat.BaseDerivedTensorCohomologyModel.localizedComparison_isIso_of_flat",
+  "statement": "theorem localizedComparison_isIso_of_flat\n    (M : BaseDerivedTensorCohomologyModel R A B Q D)\n    (hflat : Module.Flat (A ⊗[R] B) D)\n    (hcomparison : ∀ i : ℤ, IsIso (M.comparison i)) :\n    ∀ i : ℤ, IsIso (M.localizedComparison i)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100018-L-2466424",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100018-L-2466424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
