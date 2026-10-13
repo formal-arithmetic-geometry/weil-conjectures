@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "The ideal module is the kernel of the structure-module map to the closed-subscheme pushforward. Structure modules, closed-immersion pushforwards and kernels are quasi-coherent.",
+   "text": "For J = i.ker, J.toModules is the kernel of J.toPushforwardSubscheme. The structure modules on X and J.subscheme are quasi-coherent. The pushforward along J.subschemeι is quasi-coherent by isQuasicoherent_pushforward_of_isClosedImmersion, and isQuasicoherent_kernel proves J.toModules quasi-coherent.",
    "uses": [
     "def-sbc-closed-immersion-ideal-sheaf",
     "lem-pc-closed-immersion-coherent-cohomology",
@@ -25,17 +25,16 @@
    "elementary": false
   },
   {
-   "text": "Put A = Γ(X,U), V = i⁻¹U, and ρ = i.app U. The closed immersion is affine and ρ is surjective. The section inclusion of the ideal module is injective and has range ker ρ. Transport along r identifies these sections with I, and the first isomorphism theorem identifies Γ(Z,V) with R/I.",
+   "text": "Put A = Γ(X,U), V = i⁻¹U and B = Γ(Z,V). Mathlib gives affineness of V and surjectivity of i.app U directly for the closed immersion. Its kernel on U is i.ker.ideal U by Hom.ker_apply. The ideal inclusion is injective with this range. Thus s ↦ r.symm(inclusion(s)) is an r.symm-semilinear bijection onto I. Invert it to obtain eI : I ≃ₛₗ[r] Γ(i.ker.toModules,U). The first isomorphism theorem for the surjection ρ = i.app U ∘ r gives q : R/I ≃+* B; its formula on quotient representatives proves it is r-semilinear for the A-action on B.",
    "uses": [
     "def-weil-closed-immersion",
     "def-weil-affine-spectrum",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
     "def-sbc-closed-immersion-ideal-sheaf"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exists_tensorPullback_affine_sections to the ideal module and the affine opens U,V. Transport the comparison along the section identifications from the previous step to obtain the r-semilinear equivalence I tensor_R R/I to pullback sections on V. The pure-tensor formula at b=1 identifies a tensor 1 with the adjunction-unit section. Pushforward on U restricts scalars along ρ, giving the displayed target. This step does not identify the tensor product with the cotangent quotient.",
+   "text": "Apply exists_tensorPullback_affine_sections to i,U,V and the quasi-coherent ideal module. Rewrite appLE U V le_rfl as app U in both scalar actions. Turn the bijective comparison into a linear equivalence c′ to the pushforward sections on U. Compose TensorProduct.congr eI eB with c′. If inclusion(s)=r(a), injectivity gives eI(a)=s; eB(1)=1 by the ring equivalence. The comparison formula at s tensor 1 now reduces by the identity restriction map and one_smul to the required adjunction unit formula.",
    "uses": [
     "lem-weil-pbc-module-pullback-affine-sections",
     "def-pc-module-pullback"
@@ -49,7 +48,6 @@
   "def-weil-affine-spectrum",
   "def-weil-closed-immersion",
   "lem-pc-closed-immersion-coherent-cohomology",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
   "lem-weil-pbc-module-pullback-affine-sections",
   "lem-weil-pbc-quasi-coherent-module-kernel"
  ],
@@ -120,13 +118,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261012T231639-L-1963396",
-  "kind": "interface",
+  "landing": "20261013T011927-L-2763099",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
