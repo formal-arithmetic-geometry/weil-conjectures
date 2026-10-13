@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-principal-open-cech-subset-horizontal-faces",
+ "kind": "statement",
+ "title": "Ordered horizontal faces of a single principal-open subset",
+ "statement": "Let A be a commutative ring, r a natural number, f:Fin r → A and J an integer cochain complex of module sheaves on Spec A. Use the union V, principal opens D_T, section transport, subset coordinates, insertion, and increasing tuple of [def-sc-principal-open-cech-subset-insertion], and the ordered Cech differential and double complex K of [def-sc-alternating-cech-total-complex] for U_i=V⁻¹D(f_i). Let H forget modules over the global ring of V to additive groups. Suppose hle gives D_T≤D_(T erase j), and he gives n+1-|T erase j|=n+2-|T| for j∈T. Fix n, a nonempty subset S₀, and a section x of J^(n+1-|S₀|) on D_(S₀). Put p=|S₀|-1, q=n+1-|S₀|, P the global-ring module presheaf of J^q restricted to V, L its nonnegative ordered Cech complex, and e:(K.X(p+1)).X q ≅ L.X(p+1) its extension isomorphism. For every hdeg:(p+1)+q=n+1, apply d:L.X p→L.X(p+1) to the tuple vector supported at the enumeration of S₀ with value the transported section x. Then apply e inverse and include that bidegree into total degree n+1. The result equals subset insertion in degree n+1 of the coordinates whose T component is the sum over j∈T with nonempty T erase j of (-1) raised to the number of i∈T below j, times restriction along hle of the he-transport of (Pi.single S₀ x)_(T erase j). Empty deletions contribute zero.",
+ "stmt_deps": [
+  "def-sc-principal-open-cech-subset-insertion",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FG, ordered differential immediately preceding Definition 20.23.2; Tag 08C1 and equation-global-sections-to-alternating-cech (08C0). Read at https://stacks.math.columbia.edu/tag/01FG, https://stacks.math.columbia.edu/tag/08C1 and https://stacks.math.columbia.edu/tag/08C0."
+ },
+ "proof": [
+  {
+   "text": "Fix a nonempty source subset S₀, put p=|S₀|-1 and q=n+1-|S₀|, and apply the explicit ordered Cech differential to the tuple vector supported at the increasing enumeration of S₀. At each increasing target tuple t the result is the sum over deleted positions k of signed face restriction. The source single is zero unless the deleted tuple has range S₀; equality of ranges implies equality of increasing embeddings.",
+   "uses": [
+    "def-sc-principal-open-cech-subset-insertion",
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each target range T, biject deleted positions k with j in T by evaluation of its increasing enumeration. The position k equals the number of elements of T less than j, and the deleted tuple enumerates T erase j. Naturality of overFunctorEquiv and functoriality of the coefficient presheaf identify transported face restriction with restriction along D_T ≤ D_(T erase j). The equality he identifies coefficient degrees and proof irrelevance identifies equality transports. Thus the target tuple coordinate is exactly the signed sum stated.",
+   "uses": [
+    "def-sc-principal-open-cech-subset-insertion",
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reassemble the target tuple product and apply its inverse extension isomorphism followed by the bidegree-(p+1,q) total inclusion. The supplied hdeg makes that inclusion land in degree n+1. In the subset insertion on the right, a term can be nonzero only when T erase j=S₀, hence |T|=|S₀|+1, so all other bidegrees vanish. Singleton targets have only empty deletions and contribute zero; r=0 has no nonempty S₀.",
+   "uses": [
+    "def-sc-principal-open-cech-subset-insertion",
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-principal-open-cech-subset-insertion",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FG, ordered differential immediately preceding Definition 20.23.2; Tag 08C1 and equation-global-sections-to-alternating-cech (08C0). Read at https://stacks.math.columbia.edu/tag/01FG, https://stacks.math.columbia.edu/tag/08C1 and https://stacks.math.columbia.edu/tag/08C0."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Pi.single|sum_apply|ι_D₁",
+   "results": "{\"t\": \"2026-10-13T16:11:43Z\", \"tool\": \"grep\", \"query\": \"Pi.single|sum_apply|ι_D₁\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"Mathlib/NumberTheory/NumberField/EquivReindex.lean\", \"Mathlib/NumberTheory/LSeries/Linearity.lean\", \"Mathlib/NumberTheory/LSeries/Linearity.lean\", \"Mathlib/NumberTheory/ClassNumber/Finite.lean\", \"Mathlib/NumberTheory/LSeries/PrimesInAP.lean\"], \"digest\": \"0cd4a43c3ef2cae2\"}",
+   "date": "2026-10-14",
+   "verdict": "Generic total-complex and finite-sum tools found; no principal-open supported-tuple face formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "horizontal differential total complex inclusion single coordinate Cech alternating face sum",
+   "results": "{\"t\": \"2026-10-13T16:11:44Z\", \"tool\": \"leanfinder\", \"query\": \"horizontal differential total complex inclusion single coordinate Cech alternating face sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex₂.totalAux.ιMapObj_D₁\", \"HomologicalComplex₂.totalAux.d₁_eq\", \"HomologicalComplex₂.d₁_eq\", \"HomologicalComplex₂.d₁\", \"HomologicalComplex₂.totalAux.d₁_eq'\", \"HomologicalComplex₂.totalAux.ιMapObj_D₂\", \"HomologicalComplex.mapBifunctor.ι_D₁\", \"HomologicalComplex₂.ι_D₁\"], \"digest\": \"18f04d029d1817bf\"}",
+   "date": "2026-10-14",
+   "verdict": "Generic total-complex and finite-sum tools found; no principal-open supported-tuple face formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.ι_D₁",
+   "results": "{\"t\": \"2026-10-13T16:11:48Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex₂.ι_D₁\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomologicalComplex₂.ι_D₁\"], \"digest\": \"2b94f7a0e03901a3\"}",
+   "date": "2026-10-14",
+   "verdict": "Generic total-complex and finite-sum tools found; no principal-open supported-tuple face formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "horizontal alternating Cech differential of a cochain supported on one increasing tuple",
+   "results": "{\"t\": \"2026-10-13T16:17:18Z\", \"tool\": \"leansearch\", \"query\": \"horizontal alternating Cech differential of a cochain supported on one increasing tuple\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionHorizontal",
+  "date": "2026-10-14",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-principal-open-cech-subset-insertion-horizontal",
+   "place": "Proof: ordered face calculation after identification of the horizontal total differential, restricted to one source subset.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetHorizontalFaces",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSubsetHorizontalFaces.lean",
+  "declaration": "AlgebraicGeometry.principalSubsetHorizontalFaces",
+  "statement": "theorem principalSubsetHorizontalFaces\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex (Spec (.of A)).Modules ℤ) :\n    let V := principalSubsetUnion A r f\n    let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)\n    let K := (alternatingCechDoubleFunctor U).obj (principalSubsetRestriction A r f J)\n    let H := forget₂\n      (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat\n    let D := principalSubsetOpen A r f\n    ∀ (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ,\n        n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ))\n      (n : ℤ) (S₀ : {S : Finset (Fin r) // S.Nonempty})\n      (x : (modulesSpecToSheaf.obj (J.X (n + 1 - (S₀.val.card : ℤ)))).obj.obj\n        (op (D S₀.val))),\n      let p := S₀.val.card - 1\n      let q := n + 1 - (S₀.val.card : ℤ)\n      let P := alternatingCechModulePresheaf.obj ((principalSubsetRestriction A r f J).X q)\n      let L := alternatingCechComplex U P\n      let e : (K.X ((p + 1 : ℕ) : ℤ)).X q ≅ L.X (p + 1) :=\n        L.extendXIso ComplexShape.embeddingUpNat rfl\n      ∀ (hdeg : ComplexShape.π (ComplexShape.up ℤ) (ComplexShape.up ℤ)\n          (ComplexShape.up ℤ) (((p + 1 : ℕ) : ℤ), q) = n + 1),\n      (H.map (e.inv ≫ K.ιTotal (ComplexShape.up ℤ) ((p + 1 : ℕ) : ℤ) q (n + 1) hdeg))\n        ((alternatingCechDifferential U P p).hom\n          (Pi.single (principalSubsetTuple r S₀)\n            ((principalSubsetSectionTransport A r f (J.X q) S₀).hom x))) =\n      principalSubsetInsertion A r f J (n + 1) (fun S ↦\n          ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val)))\n                    ((Pi.single S₀ x : principalSubsetCoordinates A r f J n)\n                      ⟨S.val.erase j.val, h⟩))\n          else 0)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T163535-L-1620161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T163535-L-1620161",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
