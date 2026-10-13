@@ -1,0 +1,131 @@
+{
+ "id": "lem-sbc-depth-three-punctured-finite-flat-model",
+ "kind": "statement",
+ "title": "A compatible finite flat punctured model with etale quotient",
+ "statement": "Let A be a Noetherian local ring [def-weil-pbc-noetherian-ring] of depth at least three [def-weil-pbc-depth], f in its maximal ideal, and U the complement of its closed point [def-weil-pbc-scheme-conventions]. Let q:Y→U be finite etale [def-weil-finite-integral-morphism, def-weil-etale-morphism]. If its actual restriction to the inverse image of U in Spec(A/(f)) [def-pc-fibre-product] has a finite etale extension to Spec(A/(f)), then there is a finite flat [def-weil-flat-morphism] r:F→Spec A with an isomorphism Y≅r⁻¹(U) over U, and the base change of r to Spec(A/(f)) is etale. This statement constructs the model and its quotient, and does not assert that r is etale.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BLS, 0BLL, 0BLH, 0BM6, 09ZL, 0AVY"
+ },
+ "proof": [
+  {
+   "text": "Depth at least three kills H¹_m(A) and H²_m(A) (0AVY). Identify the inverse image of U with the punctured quotient spectrum using injectivity of the quotient map and preservation of the closed point.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After faithfully flat completion, the ring is henselian along (f). Lift the given quotient cover by 09ZL and identify its punctured restriction with the completed q by full faithfulness 0BM6.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite algebra gluing 0BLH to the completed lift and the original q. Flatness of the completed lift descends to the glued finite model. Its principal quotient becomes the etale lifted quotient after completion, so quotient etaleness also descends. Gluing supplies the isomorphism over U. The zero algebra handles the empty cover.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-depth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-flat-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "C1",
+  "document": "Stacks Project",
+  "place": "Tags 0BLS, 0BLL, 0BLH, 0BM6, 09ZL, 0AVY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite flat models for punctured finite etale covers in depth at least three, with etale reduction modulo a principal ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers of punctured spectra extend from principal quotients in depth at least three",
+   "results": "8 hits: ['Algebra.exists_etale_of_isEtaleAt', 'Algebra.IsEtaleAt', 'Algebra.etaleLocus', 'Algebra.mem_etaleLocus_iff', 'Algebra.basicOpen_subset_etaleLocus_iff_etale', 'Algebra.basicOpen_subset_etaleLocus_iff', 'RingHom.Etale.ofLocalizationSpan', 'RingHom.Etale.ofLocalizationSpanTarget']",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; relevant basic lemmas read and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "unramified.*quotient|quotient.*unramified|punctured|lift.*purity",
+   "results": "6 hits: ['Mathlib/RingTheory/Unramified/LocalRing.lean', 'Mathlib/RingTheory/Unramified/LocalRing.lean', 'Mathlib/RingTheory/Unramified/Basic.lean', 'Mathlib/RingTheory/Unramified/Basic.lean', 'Mathlib/RingTheory/Unramified/Basic.lean', 'Mathlib/RingTheory/Etale/Field.lean']",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; relevant basic lemmas read and used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthThreePuncturedEtaleLifting",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-depth-three-punctured-etale-lifting",
+   "place": "Tags 0BLS, 0BLL, 0BLH, 0BM6, 09ZL, 0AVY",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthThreePuncturedFiniteFlatModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthThreePuncturedFiniteFlatModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_flat_model_of_depth_three_of_quotient_extension",
+  "statement": "theorem exists_finite_flat_model_of_depth_three_of_quotient_extension (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (f : A) (hf : f ∈ IsLocalRing.maximalIdeal A) (hdepth : (3 : ℕ∞) ≤ IsLocalRing.depth (R := A) A) (U : (Spec (.of A)).Opens) (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A) {Y : Scheme.{u}} (q : Y ⟶ U.toScheme) [IsFinite q] [Etale q] (hquot : let i := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {f}))) let V := i ⁻¹ᵁ U ∃ (F₀ : Scheme.{u}) (r₀ : F₀ ⟶ Spec (.of (A ⧸ Ideal.span {f}))), IsFinite r₀ ∧ Etale r₀ ∧ ∃ e₀ : pullback q (i ∣_ U) ≅ (r₀ ⁻¹ᵁ V).toScheme, e₀.hom ≫ r₀ ∣_ V = pullback.snd q (i ∣_ U)) : ∃ (F : Scheme.{u}) (r : F ⟶ Spec (.of A)), IsFinite r ∧ Flat r ∧ Etale (pullback.snd r (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {f}))))) ∧ ∃ e : Y ≅ (r ⁻¹ᵁ U).toScheme, e.hom ≫ r ∣_ U = q",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T145723-L-750314",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T145723-L-750314",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

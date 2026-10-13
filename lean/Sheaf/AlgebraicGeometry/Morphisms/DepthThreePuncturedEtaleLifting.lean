@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.RingTheory.Depth
+import Sheaf.AlgebraicGeometry.Morphisms.DepthThreePuncturedFiniteFlatModel
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteUnramifiedPrincipalQuotient
 
 /-!
 # Lifting a punctured finite etale cover from a principal quotient
@@ -56,6 +58,13 @@ theorem exists_finite_etale_extension_of_depth_three_of_quotient_extension
           ∃ e₀ : pullback q (i ∣_ U) ≅ (r₀ ⁻¹ᵁ V).toScheme,
             e₀.hom ≫ r₀ ∣_ V = pullback.snd q (i ∣_ U)) :
     ∃ (F : Scheme.{u}) (r : F ⟶ Spec (.of A)), IsFinite r ∧ Etale r ∧
-      ∃ e : Y ≅ (r ⁻¹ᵁ U).toScheme, e.hom ≫ r ∣_ U = q := by sorry
+      ∃ e : Y ≅ (r ⁻¹ᵁ U).toScheme, e.hom ≫ r ∣_ U = q := by
+  obtain ⟨F, r, hfinite, hflat, hquotient, e, he⟩ :=
+    exists_finite_flat_model_of_depth_three_of_quotient_extension A f hf hdepth U hU q hquot
+  let : IsFinite r := hfinite
+  let : Flat r := hflat
+  let : FormallyUnramified r :=
+    formallyUnramified_of_finite_of_principal_quotient_etale A f hf r hquotient
+  exact ⟨F, r, hfinite, Etale.of_formallyUnramified_of_flat r, e, he⟩
 
 end AlgebraicGeometry.Scheme
