@@ -4,6 +4,8 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Restrict
 
+import all Sheaf.AlgebraicGeometry.CoherentKernelConditionRestriction
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
@@ -16,6 +18,9 @@ Source: Stacks Project, Definitions 01BV and 01B5 and Lemma 01B6.
 theorem coherent_module_finite_type_local_restrict
     (X : Scheme.{u}) (F : X.Modules) :
     RingedSpace.IsCoherent X.toRingedSpace F →
-      ∀ (W : X.Opens), ((Scheme.Modules.restrictFunctor W.ι).obj F).IsFiniteType := by sorry
+      ∀ (W : X.Opens), ((Scheme.Modules.restrictFunctor W.ι).obj F).IsFiniteType := by
+  intro hF W
+  let : F.IsFiniteType := hF.1
+  exact finiteType_restrict W.ι F
 
 end AlgebraicGeometry

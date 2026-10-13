@@ -10766,3 +10766,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:40 L: merged deliver/R4/Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedGenerators (stage 3; reviewer PASS; first push; landing 20261013T024046-L-3338408 (proof); batch 20261013T024029; modules 1; new nodes 0)
 - 02:40 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernelKernel (stage 3; reviewer PASS; first push; landing 20261013T024046-L-3338524 (proof); batch 20261013T024029; modules 1; new nodes 0)
 - 02:40 L: merged deliver/S3/Sheaf.Algebra.Homology.FilteredFreeKProjectiveStep (stage 3; reviewer PASS; first push; landing 20261013T024047-L-3338689 (proof); batch 20261013T024029; modules 1; new nodes 0)
+- 02:40 L: merged deliver/S3/Sheaf.AlgebraicGeometry.CoherentModuleFiniteTypeLocalRestrict (stage 3; reviewer PASS; after a return; landing 20261013T024047-L-3338806 (proof); batch 20261013T024029; modules 1; new nodes 0)
