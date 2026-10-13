@@ -190,6 +190,30 @@ variable {G_R : GeometricOperations (ModuleCat.{u + 1} R) s}
           ((L(sheafExtendScalars (algebraMap R S) X)).obj K)}
   (hG : ExtendScalarsCompatible G_R G_S hΨ)
 
+namespace ExtendScalarsCompatible
+
+include hG
+
+/-- The inverse form of `ExtendScalarsCompatible.properComparison`: the identifications
+`Rf_* ≃ Rf_!` correspond under `Ψ`. -/
+@[reassoc]
+lemma properComparison_inv {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f] [IsProper f]
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) X K) :
+    (rightDerivedLowerStarExtendScalarsMap R S f).app K ≫
+        ((G_S.properComparison f hf).inv.app ⟨_, hΨ hf.id_source hK⟩).hom =
+      (L(sheafExtendScalars (algebraMap R S) Y)).map
+          ((G_R.properComparison f hf).inv.app ⟨K, hK⟩).hom ≫
+        (rightDerivedLowerShriekExtendScalarsMap R S f).app K := by
+  rw [← cancel_epi ((L(sheafExtendScalars (algebraMap R S) Y)).map
+    ((G_R.properComparison f hf).hom.app ⟨K, hK⟩).hom), reassoc_of% (hG.properComparison f hf hK),
+    ← Functor.map_comp_assoc, ← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id_app,
+    ← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id_app]
+  simp
+
+end ExtendScalarsCompatible
+
 include hG in
 /-- The proper pullback `RΓ_c(X, K) ⟶ RΓ_c(X', Lh^* K)` along a proper `h` commutes with
 derived scalar extension, through the comparison maps `Ψ RΓ_c ⟶ RΓ_c Ψ` and `Lh^* Ψ ≅ Ψ Lh^*`. -/
@@ -204,8 +228,44 @@ theorem properPullback_extendScalars {X X' : Scheme.{u}} {aX : X ⟶ s} {aX' : X
       (rightDerivedLowerShriekExtendScalarsMap R S aX).app K ≫
         G_S.properPullback h hh (hΨ (.id aX) hK) ≫
           (rightDerivedLowerShriek (ModuleCat.{u + 1} S) aX').map
-            ((leftDerivedUpperStarExtendScalarsIso R S h).hom.app K) :=
-  sorry
+            ((leftDerivedUpperStarExtendScalarsIso R S h).hom.app K) := by
+  subst hh
+  have hK' := G_R.ctf_upperStar h (.mk (aY := aX) rfl) hK
+  simp only [properPullback, rightDerivedLowerShriekCongr_rfl, Iso.refl_hom, NatTrans.id_app,
+    Functor.map_comp, Category.assoc]
+  dsimp only [ObjectProperty.lift_obj_obj, ObjectProperty.ι_obj, Functor.comp_obj]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [hG.lowerShriekComp h aX _ _ _ hK']
+  have n₁ := (rightDerivedLowerShriekExtendScalarsMap R S aX).naturality
+    ((G_R.properComparison h (.mk (aY := aX) rfl)).inv.app ⟨_, hK'⟩).hom
+  have n₂ := (rightDerivedLowerShriekExtendScalarsMap R S aX).naturality
+    ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) h).unit.app K)
+  dsimp only [Functor.comp_map, ObjectProperty.lift_obj_obj, ObjectProperty.ι_obj,
+    Functor.comp_obj] at n₁ n₂
+  rw [reassoc_of% n₁, reassoc_of% n₂]
+  slice_lhs 3 4 => rw [← Functor.map_comp, ← hG.properComparison_inv h _ hK']
+  have hu : (L(sheafExtendScalars (algebraMap R S) X)).map
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) h).unit.app K) ≫
+        (rightDerivedLowerStarExtendScalarsMap R S h).app _ =
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} S) h).unit.app _ ≫
+        R((h)_*[ModuleCat.{u + 1} S]).map
+          ((leftDerivedUpperStarExtendScalarsIso R S h).hom.app K) :=
+    unit_mateEquiv _ _ _ K
+  slice_lhs 2 3 => rw [← Functor.map_comp, ← Category.assoc, hu]
+  simp only [Category.assoc]
+  have hh' : IsGeometricHom s h := .mk (aY := aX) rfl
+  have hn := G_S.properComparison_inv_app_naturality h hh'
+    (M := ⟨_, G_S.ctf_upperStar h (.mk (aY := aX) rfl) (hΨ (.id aX) hK)⟩)
+    (M' := ⟨_, hΨ hh'.id_source hK'⟩)
+    ((leftDerivedUpperStarExtendScalarsIso R S h).hom.app K)
+  have hc := G_S.lowerShriekComp_hom_app_naturality h aX hh'
+    (.of_isGeometric aX) (.mk (aX := h ≫ aX) (aY := 𝟙 s) (by rw [Category.comp_id]))
+    (M := ⟨_, G_S.ctf_upperStar h (.mk (aY := aX) rfl) (hΨ (.id aX) hK)⟩)
+    (M' := ⟨_, hΨ hh'.id_source hK'⟩)
+    ((leftDerivedUpperStarExtendScalarsIso R S h).hom.app K)
+  rw [hn]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hc]
 
 include hG in
 /-- The global operator of the graph correspondence of a proper endomorphism `g` with
