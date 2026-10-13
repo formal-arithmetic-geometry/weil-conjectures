@@ -9,11 +9,11 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
-import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
-import Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage
+import Sheaf.AlgebraicGeometry.PerfectOpenSupportDetection
+import Sheaf.AlgebraicGeometry.AdjointTensorAnnihilatorTransport
+import Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 
 /-!
 # Support preservation by the right adjoint of proper flat direct image
@@ -31,6 +31,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Comparing the two derived tensor models during annihilator elaboration is expensive.
 /-- The right adjoint of proper, flat, finitely presented derived direct image preserves
 support on the complement of a quasi-compact open. `F` is the restriction of `Rf_*` to
 `D_QCoh`, identified with the recorded ambient direct image by the natural isomorphism
@@ -70,6 +72,36 @@ theorem proper_flat_rightAdjoint_open_support
       Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
         (SheafOfModules.{uT} (moduleRings X.toRingedSpace)) n).obj
           (a.obj Q).obj).val.presheaf x)) := by
-  sorry
+  classical
+  let : ∀ W : X.Opens,
+      HasDerivedCategory.{wXT} (SheafOfModules.{uT}
+        ((moduleRings X.toRingedSpace).over W)) :=
+    (nonempty_derivedOpenLocalization X).some
+  let : ∀ W : Y.Opens,
+      HasDerivedCategory.{wYT} (SheafOfModules.{uT}
+        ((moduleRings Y.toRingedSpace).over W)) :=
+    (nonempty_derivedOpenLocalization Y).some
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
+  have : CompactSpace (V : Set Y) := isCompact_iff_compactSpace.mp hV
+  apply perfect_open_support_detection X (f ⁻¹ᵁ V) (f.isCompact_preimage hV) (a.obj Q)
+  intro P hP β
+  have hpush := properFlat_derivedDirectImage_perfect f P.obj hP
+  have hFP : Scheme.IsPerfect Y (F.obj P).obj := by
+    intro y
+    obtain ⟨W, hy, K, hK, ⟨e⟩⟩ := hpush y
+    exact ⟨W, hy, K, hK,
+      ⟨(SheafOfModules.overFunctor (moduleRings Y.toRingedSpace)
+        W).mapDerivedCategory.mapIso (hF.app P) ≪≫ e⟩⟩
+  obtain ⟨I, i, hI, hi, hkill⟩ := exists_perfect_annihilator Y V
+    (F.obj P) Q ((adj.homEquiv P Q).symm β) (Or.inl hFP) hQ
+  obtain ⟨R, j, hj, hzero⟩ :=
+    adjoint_tensor_annihilator_transport f F hF a adj V P Q β I hI i hi hkill
+  let L := (SheafOfModules.overFunctor (moduleRings X.toRingedSpace)
+    (f ⁻¹ᵁ V)).mapDerivedCategory
+  have : IsIso (L.map j) := hj
+  apply (cancel_epi (L.map j)).mp
+  change L.map j ≫ L.map β.hom = L.map j ≫ 0
+  rw [← L.map_comp, hzero, L.map_zero, CategoryTheory.Limits.comp_zero]
 
 end AlgebraicGeometry

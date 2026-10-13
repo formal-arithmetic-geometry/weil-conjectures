@@ -11998,3 +11998,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/T3/Sheaf.RingTheory.DirectSumExtensionAssembly (stage 3; reviewer PASS; first push; landing 20261013T100138-L-2490398 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/T3/Sheaf.RingTheory.OpenFlatLocus (stage 3; reviewer PASS; first push; landing 20261013T100139-L-2490531 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/T4/Sheaf.AlgebraicGeometry.DirectImageQCSupportReduction (stage 3; reviewer PASS; first push; landing 20261013T100139-L-2490725 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:01 L: merged deliver/T4/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointOpenSupport (stage 3; reviewer PASS; first push; landing 20261013T100140-L-2491056 (interface); batch 20261013T095923; modules 3; new nodes 2)

@@ -27,73 +27,40 @@
  ],
  "proof": [
   {
-   "text": "Put T=Y\\setminus V and U=f^{-1}(V); U is quasi-compact and quasi-separated. If a(Q) is not supported on X\\setminus U, then a(Q)|_U\\neq 0, and perfect generation of D_QCoh(\\mathcal O_U) [lem-pc-derived-qcoh-perfect-generation] supplies a perfect complex P_U on U and a nonzero map \\alpha:P_U\\to a(Q)|_U (the objects K with \\mathrm{Hom}(P',K[n])=0 for all perfect P' and all n form a subcategory closed under shifts, cones, retracts and direct sums). The perfect-map lifting lemma [lem-sc-perfect-support-map-lift], applied with the closed subset X (empty complement), gives a perfect P on X and a map \\beta:P\\to a(Q) with P_U a direct summand of P|_U compatibly with \\alpha and \\beta|_U; hence \\beta|_U\\neq 0.",
+   "text": "Supply open derived models by nonempty_derivedOpenLocalization. Properness gives X quasi-compact and quasi-separated, and the inverse image U of V is quasi-compact. Apply global perfect open-support detection to a(Q); it suffices to kill the restriction of every beta:P→a(Q) with P perfect.",
    "uses": [
-    "lem-pc-derived-qcoh-perfect-generation",
-    "lem-sc-perfect-support-map-lift"
+    "lem-pc-derived-open-localization-universe",
+    "lem-sc-perfect-open-support-detection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G (Lemma 48.4.4), proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "By the adjunction Rf_* \\dashv a, the lifted map is adjoint to a morphism Rf_*P\\to Q.",
+   "text": "Transpose beta under adj to alpha:F(P)→Q. properFlat_derivedDirectImage_perfect makes Rf_*P perfect, and hF transfers perfectness to F(P) via local representatives. Apply case (i) of exists_perfect_annihilator to alpha and hQ to obtain I perfect and i:I→O_Y invertible over V, with its tensor action killing alpha.",
    "uses": [
-    "def-pc-derived-direct-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G (Lemma 48.4.4), proof, first paragraph"
-   }
-  },
-  {
-   "text": "Since f is proper, flat, and of finite presentation and P is perfect, the perfect-direct-image lemma [lem-pc-proper-support-perfect-direct-image], applied with \\mathcal G^\\bullet=\\mathcal O_X[0] (finitely presented, flat over Y, with support X proper over Y), shows that Rf_*P=Rf_*(P\\otimes^L\\mathcal O_X) is perfect. Since Q is supported on T and Y\\setminus T=V is quasi-compact, case (i) of the support-annihilation lemma [lem-sc-pseudo-coherent-support-annihilation] gives a perfect I and a map I\\to\\mathcal O_Y that is an isomorphism on V and for which I\\otimes^L Rf_*P\\to Rf_*P\\to Q is zero.",
-   "uses": [
-    "lem-pc-proper-support-perfect-direct-image",
+    "lem-sc-proper-flat-derived-direct-image-perfect-universes",
     "lem-sc-pseudo-coherent-support-annihilation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G (Lemma 48.4.4) via Lemmas when-sheafy and proper-flat; perfect.tex Tags 0A1H and 0A9C(1)"
-   }
+   "elementary": false
   },
   {
-   "text": "The derived projection/base-change formula identifies I\\otimes^L Rf_*P with Rf_*(Lf^*I\\otimes^L P). By adjunction, the vanishing composite in the preceding step implies that Lf^*I\\otimes^L P\\to P\\to a(Q) is zero.",
+   "text": "Apply adjoint_tensor_annihilator_transport to obtain j:R→P restricting to an isomorphism on U and satisfying j beta=0. Apply the exact derived restriction functor L; functoriality and preservation of zero give L(j)L(beta)=0. Cancel the epimorphism L(j), so L(beta)=0. The detector yields all required zero stalks.",
    "uses": [
-    "lem-pc-projection-formula"
+    "lem-sc-adjoint-tensor-annihilator-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G (Lemma 48.4.4), proof, projection-formula paragraph"
-   }
-  },
-  {
-   "text": "On U=f^{-1}(V) the map Lf^*I\\to\\mathcal O_X is an isomorphism, so the composite Lf^*I\\otimes^L P\\to P\\to a(Q) restricts on U to \\beta|_U, which is nonzero; this contradicts its vanishing. Hence a(Q) is supported on X\\setminus U.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G (Lemma 48.4.4), proof, final contradiction"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-qcoh-perfect-generation",
-  "lem-sc-perfect-support-map-lift",
-  "def-pc-derived-direct-image",
-  "lem-pc-proper-support-perfect-direct-image",
+  "lem-pc-derived-open-localization-universe",
+  "lem-sc-perfect-open-support-detection",
+  "lem-sc-proper-flat-derived-direct-image-perfect-universes",
   "lem-sc-pseudo-coherent-support-annihilation",
-  "lem-pc-projection-formula"
+  "lem-sc-adjoint-tensor-annihilator-transport"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0E4G (Lemma 48.4.4), case (1) and proof"
+  "place": "Tag 0E4G, Lemma 48.4.4(1); unbounded strengthening via perfect direct image and Tag 0A9C(i)"
  },
  "mathlib_searches": [
   {
@@ -185,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T100140-L-2491056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
