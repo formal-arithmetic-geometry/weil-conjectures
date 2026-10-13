@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-finite-affine-cech-model-acyclic-resolution",
+ "kind": "statement",
+ "title": "An acyclic resolution representing the specified finite affine section complex",
+ "statement": "Let f:X\\to T be a separated quasi-compact morphism of schemes with affine T [def-pc-scheme, def-pc-morphism-conventions], and let F be a quasi-coherent module [pqf-def-coherent]. Let V:Fin(r)\\to X.Opens be a finite affine open cover. Write G=f_* for ordinary module direct image [def-pc-ringed-spaces-derived-direct-image] and C=finiteAffineCechModel(f,F,V) [def-pc-finite-affine-cech-model]. There exist a complex D in nonnegative degrees of X-modules and an augmentation epsilon:F[0]\\to D which is a quasi-isomorphism, whose every term is G-right-acyclic [def-sp-acyclic], and a chain isomorphism G(D extended by zero to integer degrees)\\cong C. No derived localizations are supplied and no total derived isomorphism is part of this assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01XB, 01XD, 01FK, 01FM and 01I6; increasing-tuple sheaf resolution and termwise affine tilde-Gamma identification"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-coherent",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-finite-affine-cech-model",
+  "def-sp-acyclic"
+ ],
+ "proof": [
+  {
+   "text": "Construct degree p as the finite product of open direct images of F on increasing (p+1)-tuple intersections, with signed restriction differential and restriction augmentation. The two orders of deleting entries cancel. The sheaf-product construction of the usual Cech resolution applies to these increasing tuples. On each cover member insert its index, sort with sign and annihilate repetitions; the face calculation contracts the augmentation. Equivalently apply the ordered comparison, compatibly with augmentation, to the usual sheaf Cech resolution. Thus epsilon is a quasi-isomorphism. Witnesses are consumed only in proofs.",
+   "uses": [
+    "lem-pc-cech-sheaf-resolution",
+    "lem-pc-alternating-cech-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Separatedness over the affine target makes every nonempty tuple intersection affine. Transport affine-open pushforward acyclicity along the canonical affine target isomorphism T to Spec Gamma(T,O). Each factor is f_*-acyclic, and the finite product is acyclic by closure of rightAcyclic under finite products. This also includes empty intersections and degrees with no increasing tuples.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-pc-affine-open-pushforward-acyclic",
+    "def-sp-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the canonical affine chart, the tilde-Gamma counit identifies each pushforward factor with its associated section module. Its restriction naturality identifies the signed differential. Finite products and extension by zero give a chain isomorphism of the ordinary pushed complex with finiteAffineCechModel, with exactly its GammaSpecIso scalar restriction and pullback to T. For r=0 the covering equality forces X empty, and the zero complex with unique augmentation supplies the claim.",
+   "uses": [
+    "def-pc-finite-affine-cech-model",
+    "lem-weil-pbc-pushforward-tilde-spec",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-affine-cech-model",
+  "def-sp-acyclic",
+  "lem-pc-affine-open-pushforward-acyclic",
+  "lem-pc-alternating-cech-computes",
+  "lem-pc-cech-sheaf-resolution",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-pushforward-tilde-spec",
+  "lem-weil-pbc-separated-affine-open-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01XB, 01XD, 01FK, 01FM and 01I6; geometric and ordinary-complex parts of the original node plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An alternating Cech complex is an acyclic resolution of a quasicoherent sheaf on a separated scheme",
+   "results": "Internal Server Error; search service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The increasing tuple Cech sheaf complex resolves a quasicoherent sheaf and its pushforward to an affine scheme is the associated section complex",
+   "results": "8 hits: affine transition limit section lemmas and AffineZariskiSite.sheafEquiv/cocone; none constructs this resolution or chain comparison. Earlier bounded-below acyclic-sheaf query found derived maps for exact functors, not a Cech resolution.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "12 hits: termwise functors, additivity and natural isomorphisms; no acyclic resolution of this explicit model.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic.*resolution|resolution.*acyclic|exists_cech_sheaf_resolution|affineAlternatingCech_resolution_core|finiteAffineCechModel in lean/Sheaf and PlusHomology",
+   "results": "CechSheafResolution gives an unnormalized resolution without the increasing-tuple ordinary chain comparison. CechResolution has a private derived comparison, but its AffineOpenPushforwardAcyclic import reaches the item through AffineMorphism and FiniteFreeComplex. AffineAlternatingCechResolutionCore requires universal derived-category instances and base-change data and also has a transitive import cycle. No usable exact underived resolution for this model.",
+   "date": "2026-10-13",
+   "verdict": "no usable exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-affine-cech-model-derived-comparison",
+   "place": "geometric Cech-resolution and ordinary affine term-identification parts",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineCechModelAcyclicResolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineCechModelAcyclicResolution.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finiteAffineCechModel_acyclic_resolution",
+  "statement": "theorem exists_finiteAffineCechModel_acyclic_resolution\n    {X T : Scheme.{u}} (f : X ⟶ T) [IsAffine T] [IsSeparated f] [QuasiCompact f]\n    (F : X.Modules) [F.IsQuasicoherent]\n    {r : ℕ} (V : Fin r → X.Opens) (hV : ∀ i, IsAffineOpen (V i))\n    (hcover : iSup V = ⊤) :\n    ∃ (D : CochainComplex X.Modules ℕ)\n      (ε : (CochainComplex.single₀ X.Modules).obj F ⟶ D),\n      QuasiIso ε ∧\n      (∀ p, (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightAcyclic (D.X p)) ∧\n      Nonempty (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (D.extend ComplexShape.embeddingUpNat) ≅\n          finiteAffineCechModel f F V)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T045522-L-126864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T045522-L-126864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

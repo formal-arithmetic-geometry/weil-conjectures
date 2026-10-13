@@ -1,0 +1,110 @@
+{
+ "id": "src-right-derived-functor-plus-acyclic-unit",
+ "kind": "statement",
+ "title": "The bounded-below derived unit is invertible on right-acyclic complexes",
+ "statement": "Let C,D be abelian categories and F:C\\to D an additive left exact functor [def-sp-left-exact-additive], with enough injectives in C [def-sp-injective-resolutions], and supplied derived localizations on C and D [def-pc-derived-category]. If L is a bounded-below cochain complex of C and every L^n is F-right-acyclic [def-sp-acyclic], then the unit F(L)\\to R^+F(Q L) is an isomorphism in the bounded-below derived category of D. Here Q L is the localization of L, and the unit is precisely rightDerivedFunctorPlusUnit evaluated at its bounded-below homotopy quotient. No Grothendieck or K-injective hypothesis is needed.",
+ "source": {
+  "document": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology",
+  "place": "theorem isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic, lines 101-132; bounded-below acyclic resolution comparison"
+ },
+ "stmt_deps": [
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-pc-derived-category",
+  "def-sp-acyclic"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-below injective complex T and a quasi-isomorphism i:L to T using Mathlib CochainComplex.Plus.exists_quasiIso_injective. Its terms are injective and therefore F-acyclic. The acyclic resolution comparison says F(i) is a quasi-isomorphism, as realized by Functor.quasiIso_map_of_rightAcyclic. This is the first half of the existing source proof, not a new Lean lemma.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the naturality square of rightDerivedFunctorPlusUnit for i, the bottom unit is invertible on the injective complex, the right map is invertible because the derived functor inverts i, and the left map is invertible by the preceding F(i) quasi-isomorphism. Naturality and cancellation of the invertible right map imply that the top unit is invertible. This is precisely the existing, already proved source theorem; no replacement declaration is added.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology",
+  "place": "existing proof of isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of the bounded below total right derived functor is an isomorphism on right acyclic complexes",
+   "results": "Internal Server Error; unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of the bounded below total right derived functor is an isomorphism on a complex of right acyclic objects",
+   "results": "8 hits: degree-zero right/left-derived unit isomorphisms and isIso_of_isRightDerivedFunctor_of_inverts; no bounded-below acyclic-complex specialization",
+   "date": "2026-10-13",
+   "verdict": "no Mathlib match; existing upstream theorem reused"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic in lean/WeilConjectures and dag/nodes",
+   "results": "Exact source theorem in PlusHomology.lean:101-132. Used in the proof record of lem-pc-cech-resolution, but no node statement or lean.declaration records it. Added only a node attachment to this existing closed theorem.",
+   "date": "2026-10-13",
+   "verdict": "exact upstream match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-affine-cech-model-derived-comparison",
+   "place": "existing bounded-below acyclic-unit theorem used by the completed derived step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology",
+  "declaration": "CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic",
+  "statement": "theorem isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic [PreservesFiniteLimits F] (L : CochainComplex.Plus C) (hL : ∀ n, F.rightAcyclic (L.obj.X n)) : IsIso (F.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj L))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13",
+  "note": "Existing public theorem; section parameters are abelian C,D, enough injectives in C, supplied HasDerivedCategory instances on C,D, and additive F:C to D. No Lean source is changed or duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T045522-L-126864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T045522-L-126864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
