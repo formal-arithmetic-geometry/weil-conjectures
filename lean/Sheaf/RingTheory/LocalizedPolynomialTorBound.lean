@@ -1,0 +1,61 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q2
+-/
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+
+/-! # Transfer of Tor bounds to localized polynomial rings
+Source: Stacks Project, Tag 068X.
+(blueprint: lem-pc-localized-polynomial-tor-bound)
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace ModuleCat
+
+/-- Transfer the base Tor bound to a Tor bound over the localized polynomial ring.
+Source: Stacks Project, Tag 068X, lemma-recognize-perfect-over-base.
+Proof: the Hilbert basis theorem and localization make the localized polynomial ring
+Noetherian. Thus the finite module, placed in degree zero, has a bounded-above finite free
+resolution and is pseudo-coherent. Polynomial extension and localization are flat over the
+base, so this resolution is also a flat base resolution. The given Tor vanishing puts its
+base Tor amplitude in [-d,0]. Every nonzero fibre of the localization over a base prime is a
+localization of a polynomial ring in n variables over the residue field; Hilbert syzygy and
+localization give global dimension at most n. The zero fibres contribute nothing. Tag 068X
+now gives Tor amplitude [-d-n,0] over the localized ring. Computing its derived tensor with
+any module over that ring proves the displayed vanishing. The same argument covers n=0,
+d=0, and the zero module without any separate choice of resolution length.
+(blueprint: lem-pc-localized-polynomial-tor-bound)
+-/
+theorem localizedPolynomial_tor_bound_of_base_tor_bound
+    {A : Type u} [CommRing A] [IsNoetherianRing A]
+    (n : ℕ) (p : PrimeSpectrum (MvPolynomial (Fin n) A))
+    (M : ModuleCat.{u} (Localization p.asIdeal.primeCompl))
+    [Module.Finite (Localization p.asIdeal.primeCompl) M]
+    (d : ℕ)
+    (hTor : ∀ N : ModuleCat.{u} A, ∀ i : ℕ, d < i →
+      IsZero (((Tor' (ModuleCat.{u} A) i).obj
+        ((ModuleCat.restrictScalars
+          ((algebraMap (MvPolynomial (Fin n) A)
+            (Localization p.asIdeal.primeCompl)).comp MvPolynomial.C)).obj M)).obj N)) :
+    ∀ N : ModuleCat.{u} (Localization p.asIdeal.primeCompl), ∀ i : ℕ, d + n < i →
+      IsZero (((Tor' (ModuleCat.{u} (Localization p.asIdeal.primeCompl)) i).obj M).obj N) := by
+  sorry
+
+
+end ModuleCat

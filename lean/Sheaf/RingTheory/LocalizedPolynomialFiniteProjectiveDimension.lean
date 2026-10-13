@@ -10,6 +10,10 @@ public import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.RingTheory.Polynomial.Basic
+import Mathlib.RingTheory.Localization.Submodule
+import Sheaf.RingTheory.LocalizedPolynomialTorBound
+import Sheaf.RingTheory.FiniteProjectiveDimensionOfTorBound
 
 /-! # Finite projective dimension over a localized polynomial ring
 Source: Stacks Project, Tag 068X.
@@ -50,6 +54,8 @@ theorem localizedPolynomial_finiteProjectiveDimension_of_finiteTor
           ((algebraMap (MvPolynomial (Fin n) A)
             (Localization p.asIdeal.primeCompl)).comp MvPolynomial.C)).obj M)).obj N)) :
     ∃ k : ℕ, HasProjectiveDimensionLE M k := by
-  sorry
+  have hTorS := localizedPolynomial_tor_bound_of_base_tor_bound n p M d hTor
+  refine ⟨d + n, ?_⟩
+  exact finite_hasProjectiveDimensionLE_of_tor_bound M (d + n) hTorS
 
 end ModuleCat
