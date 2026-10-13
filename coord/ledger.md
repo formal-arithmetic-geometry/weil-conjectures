@@ -10932,3 +10932,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:30 L: merged deliver/K4/Sheaf.Paper.NormalLocusAssociatedPrime (stage 3; reviewer PASS; after a return; landing 20261013T033004-L-3677221 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:30 L: merged deliver/K4/Sheaf.RingTheory.FiniteLengthGlobalSubmodule (stage 3; reviewer PASS; first push; landing 20261013T033005-L-3677345 (interface); batch 20261013T032954; modules 2; new nodes 1)
 - 03:30 L: merged deliver/M2/Sheaf.RepresentationTheory.LocallyConstantCochainsDegreewiseExact (stage 3; reviewer PASS; first push; landing 20261013T033005-L-3677508 (proof); batch 20261013T032954; modules 1; new nodes 0)
+- 03:30 L: merged deliver/P1/Sheaf.AlgebraicGeometry.ExactDerivedAdjunctionSingleCounit (stage 3; reviewer PASS; first push; landing 20261013T033006-L-3677686 (proof); batch 20261013T032954; modules 1; new nodes 0)
