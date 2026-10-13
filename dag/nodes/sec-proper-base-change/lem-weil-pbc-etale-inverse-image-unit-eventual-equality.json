@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-etale-inverse-image-unit-eventual-equality",
+ "kind": "statement",
+ "title": "etale_inverse_image_unit_eventual_equality",
+ "statement": "theorem etale_inverse_image_unit_eventual_equality {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)] (i : I) (F : Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (U : (D.obj (op i)).Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left] (s t : F.obj.obj (op U)) (hst : ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (c.π.app (op i))).unit.app F).hom.app (op U) s = ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (c.π.app (op i))).unit.app F).hom.app (op U) t) : ∃ (k : I) (a : i ⟶ k), ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map a.op)).unit.app F).hom.app (op U) s = ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map a.op)).unit.app F).hom.app (op U) t",
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Intermediate reduction in Tags 09YN and 09YQ."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the geometric argument in the theorem docstring, reducing to the cited lower-level site and section results.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "S1 stage 3",
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YN and 09YQ; reduction through compatibility and eventual equality lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of two sections of a varying compatible system of etale abelian sheaves is detected at a later stage of a qcqs inverse system",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit AddCommGrpCat",
+   "date": "2026-10-13",
+   "results": "Filtered colimit IsColimit lemmas in AddCommGrpCat."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*eventual|eventual.*etale|section.*[Ee]qual",
+   "date": "2026-10-13",
+   "results": "No direct existing theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a varying system of etale sheaves on a qcqs inverse limit, two stage sections equal at the limit become equal at some later stage",
+   "date": "2026-10-13",
+   "results": "exists_app_map_eq_map_of_isLimit and related matches concern structure-sheaf sections, not varying arbitrary etale abelian sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'",
+   "date": "2026-10-13",
+   "results": "Confirms the abstract criterion used by the parent reduction; it requires eventual equality and does not supply the geometric comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar_sections|eventual_equality|exists_app_map_eq_map_of_isLimit",
+   "date": "2026-10-13",
+   "results": "Mathlib only supplies structure-sheaf equality. Local searches find fixed-site or fixed-sheaf section results requiring additional presentations, and zero_eventually depends on the parent colimit theorem, so using it would be circular."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionEventualEquality",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-limit-scalar-section-eventual-equality",
+   "place": "Intermediate result used by the eventual equality proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageUnitEventualEquality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageUnitEventualEquality.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_inverse_image_unit_eventual_equality",
+  "statement": "theorem etale_inverse_image_unit_eventual_equality {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)] (i : I) (F : Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (U : (D.obj (op i)).Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left] (s t : F.obj.obj (op U)) (hst : ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (c.π.app (op i))).unit.app F).hom.app (op U) s = ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (c.π.app (op i))).unit.app F).hom.app (op U) t) : ∃ (k : I) (a : i ⟶ k), ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map a.op)).unit.app F).hom.app (op U) s = ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map a.op)).unit.app F).hom.app (op U) t",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T054235-L-448748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T054235-L-448748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": "none"
+}

@@ -5,7 +5,12 @@ Authors: SHEAF group H4
 -/
 module
 
+import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleAbelianSectionColimitEventualEquality
+import Sheaf.AlgebraicGeometry.EtaleInverseImageUnitEventualEquality
+import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionPullbackCompatibility
+import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws
 
 /-! # Eventual equality of descended scalar sections
 
@@ -109,6 +114,104 @@ theorem etale_limit_scalar_sections_eventual_equality
             (c.π.app (op j.val))).obj (Tj j))) ≫
         L.pt.obj.map (δ j).inv.op
     ∀ (j : J) (s t : (F j.val).obj.obj (op (Tj j))), μ j s = μ j t →
-      ∃ (k : J) (a : j ⟶ k), ρ j k a s = ρ j k a t := by sorry
+      ∃ (k : J) (a : j ⟶ k), ρ j k a s = ρ j k a t := by
+  dsimp only
+  intro γ δ hγ hδ
+  have : CompactSpace ↥((𝟭 Scheme).obj T₀.left) :=
+    inferInstanceAs (CompactSpace T₀.left)
+  have : QuasiSeparatedSpace ↥((𝟭 Scheme).obj T₀.left) :=
+    inferInstanceAs (QuasiSeparatedSpace T₀.left)
+  let J := {j : I // i₀ ≤ j}
+  let Tj := fun j : J ↦
+    (MorphismProperty.Over.pullback @Etale ⊤
+      (D.map (homOfLE j.property).op)).obj T₀
+  let Tlim := (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj T₀
+  let ρ := fun (j k : J) (a : j ⟶ k) ↦
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+        (D.map (show j.val ⟶ k.val from a).op)).unit.app (F j.val)).hom.app (op (Tj j)) ≫
+        (φ (show j.val ⟶ k.val from a)).hom.app
+          (op ((MorphismProperty.Over.pullback @Etale ⊤
+            (D.map (show j.val ⟶ k.val from a).op)).obj (Tj j))) ≫
+        (F k.val).obj.map (γ j k a).inv.op
+  let ν := fun j : J ↦
+    ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+      (c.π.app (op j.val))).unit.app (F j.val)).hom.app (op (Tj j)) ≫
+      (eG j.val).inv.hom.app
+        (op ((MorphismProperty.Over.pullback @Etale ⊤
+          (c.π.app (op j.val))).obj (Tj j))) ≫
+      (G.obj j.val).obj.map (δ j).inv.op
+  intro j s t hst
+  have hmu (x : (F j.val).obj.obj (op (Tj j))) :
+      (ν j ≫ (L.ι.app j.val).hom.app (op Tlim)) x =
+        (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+          (c.π.app (op j.val))).unit.app (F j.val)).hom.app (op (Tj j)) ≫
+          (eG j.val).inv.hom.app
+            (op ((MorphismProperty.Over.pullback @Etale ⊤
+              (c.π.app (op j.val))).obj (Tj j))) ≫
+          (L.ι.app j.val).hom.app
+            (op ((MorphismProperty.Over.pullback @Etale ⊤
+              (c.π.app (op j.val))).obj (Tj j))) ≫
+          L.pt.obj.map (δ j).inv.op) x := by
+    have hn := (L.ι.app j.val).hom.naturality (δ j).inv.op
+    dsimp only [ν]
+    rw [Category.assoc, Category.assoc, hn]
+    rfl
+  have hcol : (L.ι.app j.val).hom.app (op Tlim) (ν j s) =
+      (L.ι.app j.val).hom.app (op Tlim) (ν j t) :=
+    (hmu s).trans (hst.trans (hmu t).symm)
+  have : ∀ {i k : Iᵒᵖ} (f : i ⟶ k), IsAffineHom (D.map f) :=
+    fun {_ _} _ ↦ inferInstance
+  have : IsAffineHom (c.π.app (op i₀)) := isAffineHom_π_app D c hc (op i₀)
+  have : CompactSpace Tlim.left := by
+    change CompactSpace ↥(pullback T₀.hom (c.π.app (op i₀)))
+    exact QuasiCompact.compactSpace_of_compactSpace
+      (pullback.fst T₀.hom (c.π.app (op i₀)))
+  obtain ⟨k₀, a₀, ha₀⟩ :=
+    etale_abelian_section_colimit_eventual_equality c.pt Tlim G L hL j.val
+      (ν j s) (ν j t) hcol
+  let k : J := ⟨k₀, j.property.trans (leOfHom a₀)⟩
+  let a : j ⟶ k := homOfLE (leOfHom a₀)
+  have hν := etale_limit_scalar_section_pullback_compatibility
+    D c F φ G eG hG i₀ T₀ γ δ hγ hδ
+  have hunit_norm : ν k (ρ j k a s) = ν k (ρ j k a t) := by
+    have hs := ConcreteCategory.congr_hom (hν j k a) s
+    have ht := ConcreteCategory.congr_hom (hν j k a) t
+    exact hs.symm.trans (ha₀.trans ht)
+  have hunit :
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+        (c.π.app (op k.val))).unit.app (F k.val)).hom.app (op (Tj k)) (ρ j k a s) =
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+        (c.π.app (op k.val))).unit.app (F k.val)).hom.app (op (Tj k)) (ρ j k a t) := by
+    have : IsIso ((eG k.val).inv.hom.app
+        (op ((MorphismProperty.Over.pullback @Etale ⊤
+          (c.π.app (op k.val))).obj (Tj k)))) := inferInstance
+    have : IsIso ((G.obj k.val).obj.map (δ k).inv.op) := inferInstance
+    apply (ConcreteCategory.bijective_of_isIso
+      ((eG k.val).inv.hom.app _)).1
+    apply (ConcreteCategory.bijective_of_isIso ((G.obj k.val).obj.map (δ k).inv.op)).1
+    exact hunit_norm
+  have : CompactSpace (Tj k).left := by
+    change CompactSpace ↥(pullback T₀.hom (D.map (homOfLE k.property).op))
+    exact QuasiCompact.compactSpace_of_compactSpace
+      (pullback.fst T₀.hom (D.map (homOfLE k.property).op))
+  have : QuasiSeparatedSpace (Tj k).left := by
+    change QuasiSeparatedSpace ↥(pullback T₀.hom (D.map (homOfLE k.property).op))
+    exact quasiSeparatedSpace_of_quasiSeparated
+      (pullback.fst T₀.hom (D.map (homOfLE k.property).op))
+  obtain ⟨l₀, b₀, hb₀⟩ := etale_inverse_image_unit_eventual_equality
+    D c hc k.val (F k.val) (Tj k) (ρ j k a s) (ρ j k a t) hunit
+  let l : J := ⟨l₀, k.property.trans (leOfHom b₀)⟩
+  let b : k ⟶ l := homOfLE (leOfHom b₀)
+  have hstage : ρ k l b (ρ j k a s) = ρ k l b (ρ j k a t) := by
+    exact congrArg (fun x ↦
+      ((φ b₀).hom.app
+        (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map b₀.op)).obj (Tj k))) ≫
+        (F l.val).obj.map (γ k l b).inv.op) x) hb₀
+  obtain ⟨_, hcomp, _⟩ := etale_limit_scalar_section_map_laws
+    D c F φ hidentity hcomposition G eG hG L i₀ T₀ γ δ hγ hδ
+  refine ⟨l, a ≫ b, ?_⟩
+  exact (ConcreteCategory.congr_hom (hcomp j k l a b) s).trans
+    (hstage.trans (ConcreteCategory.congr_hom (hcomp j k l a b) t).symm)
+
 
 end AlgebraicGeometry.Etale
