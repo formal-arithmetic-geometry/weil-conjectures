@@ -14,24 +14,50 @@
  ],
  "proof": [
   {
-   "text": "factor the selected composition comparison followed by the composite\ncounit into the counit of U inclusion, then the counit of j, then the\nunderived composition comparison. Cancel that last comparison against its\ninverse in the displayed source comparison. Naturality of the counit for j\nmoves the underived open tensor comparison to its source. The factorization\nof leftDerivedUnique for the open inclusion replaces the counit for U and\nthe open tensor comparison by the open derived comparison and the exact\nrestriction factor. Cancel the inverse open derived comparison. Every step\nis natural in P and requires no target open or commuting square.",
+   "text": "Evaluate the defining leftDerivedLift equation for the selected composition comparison at Qh(P). Functor.leftDerived_fac_app gives compositionCounit: the selected comparison followed by the composite pinned counit equals the mapped open counit, the pinned counit for j, and the localized ordinary composition comparison.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use SingleComplexBaseChange.tensor_composition_symm from AffineSpectrumCompositionCounitSquare to identify the ordinary comparison as the inverse tensorPullbackCompositionIso. A proof-only import all makes that existing private lemma available within the same package. For homotopyCompositionComparison choose a representative complex, express both homotopy comparison components as quotient maps, and check their composite in each degree. The ordinary composition and its inverse cancel, leaving tensor pullback of the open tensor comparison. Apply Qh to this equation.",
+   "uses": [
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-affine-spectrum-composition-counit-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold singleComplexOpenPullbackIso. Its ordinary comparison is the inverse openPinnedTensorOpenIso by associativity. Functor.leftDerivedNatTrans_app evaluates the inverse leftDerivedUnique component followed by the pinned open counit. Functor.mapDerivedCategoryNatIso_fach then yields openCounit: this composite is the exact restriction localization factor followed by Qh of the inverse termwise open comparison.",
+   "uses": [
+    "def-pc-single-complex-open-restriction-data",
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the pinned counit for j moves Qh of the open tensor comparison across that counit. Map openCounit by derivedPullback j and cancel the inverse and forward termwise open comparisons using NatTrans.mapHomotopyCategory_comp, functoriality, and the isomorphism identity. Substitute these equations into the compositionCounit equation and reassociate (sourceTriangleAlgebra). The result is the stated source-open triangle. No counit is canceled, and no geometric assumption is used.",
    "uses": [
     "def-pc-open-pinned-single-tensor-restriction-iso",
     "def-pc-single-complex-open-restriction-data",
     "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-open-pinned-single-tensor-restriction-iso",
   "def-pc-single-complex-open-restriction-data",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-affine-spectrum-composition-counit-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "Separate open-leg factorization identities and functorial tensor comparison"
+  "place": "Tags 08DW, 0D5S and 08HY; direct Lean factorization, termwise comparison cancellation and exact-open localization calculation by J4; repair reuses the existing tensor composition symmetry lemma"
  },
  "mathlib_searches": [
   {
@@ -108,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-05e7d",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T165640-L-1807483",
+  "landing": "20261013T201756-L-3972041",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node, report, and change record matched against the packet, baseline signatures, successful lcompile, import-pruning check, and downstream importer compiles."
  }
 }
