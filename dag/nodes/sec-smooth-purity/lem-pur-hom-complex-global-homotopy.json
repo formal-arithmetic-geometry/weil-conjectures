@@ -14,15 +14,15 @@
  ],
  "proof": [
   {
-   "text": "Use the projections of [lem-sc-hom-complex-projections] to construct the additive degreewise global-cochain equivalences of [lem-pur-hom-complex-global-cochains]. Use a single family of projections for all pairs of complexes. The differential projection formula proves compatibility with the external Hom differential. The map projection formula proves compatibility with precomposition and postcomposition, since homObjMap acts on global sections by ordinary composition.",
+   "text": "Use the explicit normalized additive global-cochain comparison [lem-pc-normalized-hom-complex-global-cochains], whose components are determined by the product projections [lem-sc-hom-complex-projections]. Differential compatibility constructs an isomorphism of complexes. The map projection formula and normalizedHomFactorEquiv_comp prove naturality under simultaneous precomposition and postcomposition.",
    "uses": [
-    "lem-sc-hom-complex-projections",
-    "lem-pur-hom-complex-global-cochains"
+    "lem-pc-normalized-hom-complex-global-cochains",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": false
   },
   {
-   "text": "Apply degree-zero homology to this natural chain-complex identification. Mathlib CochainComplex.HomComplex.homologyAddEquiv identifies external Hom homology with cocycles modulo coboundaries. CohomologyClass.homAddEquiv at zero, followed by the shift-zero isomorphism, identifies this with Hom in the homotopy category. On chain-map representatives the comparison sends precomposition and postcomposition to composition, and every class has a representative; hence it is natural. Assemble with NatIso.ofComponents. Zero complexes give zero groups, and products permit unbounded complexes.",
+   "text": "Apply degree-zero homology to the global complex isomorphism. Mathlib HomComplex.leftHomologyData and CohomologyClass.homAddEquiv, followed by the quotient image of shiftFunctorZero, give the external homology isomorphism to homotopy-category morphisms. Prove its value on a cocycle is the quotient of Cocycle.homOf. Construct LeftHomologyMapData for the simultaneous pre/postcomposition cochain map, proving compatibility on cocycle representatives. Its homologyMap_eq proves naturality of the external homology isomorphism. Functor.congr_map transports naturality of the global complex isomorphism to homology. Compose the two component isomorphisms with NatIso.ofComponents and the functor associator.",
    "uses": [
     "def-pur-hom-complex"
    ],
@@ -31,14 +31,16 @@
  ],
  "proof_deps": [
   "def-pur-hom-complex",
-  "lem-pur-hom-complex-global-cochains",
+  "lem-pc-normalized-hom-complex-global-cochains",
   "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "G2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Equation 0A8Z (sites-cohomology-equation-global-cohomology-hom-complex), degree zero; global computation in Lemma 08JA. Read at https://stacks.math.columbia.edu/tag/0A8Z and https://stacks.math.columbia.edu/tag/08JA.",
-  "description": "T3: degree-zero natural version of Equation 0A8Z, expanded using the existing product projection and global cochain comparisons and Mathlib external Hom cohomology."
+  "description": "Complete Lean proof using the existing explicit normalized global cochain comparison, projection naturality, and Mathlib external Hom left homology data and zero-shift homotopy comparison. No new holes."
  },
  "mathlib_searches": [
   {
@@ -128,10 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T100135-L-2489693",
-  "kind": "interface",
+  "landing": "20261013T113341-L-3183128",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
