@@ -12332,3 +12332,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:50 L: merged deliver/R4/Sheaf.Paper.SquareZeroGluedScalarExistsUnique (stage 3; reviewer PASS; first push; landing 20261013T115031-L-3326554 (proof); batch 20261013T115020; modules 1; new nodes 0)
 - 11:50 L: merged deliver/S3/Sheaf.RingTheory.AbsoluteIrreducibilitySpecialization (stage 3; reviewer PASS; first push; landing 20261013T115031-L-3326651 (proof); batch 20261013T115020; modules 1; new nodes 1)
 - 11:50 L: merged deliver/S3/Sheaf.RingTheory.FormalGlueingCanonicalFunctorMaps (stage 3; reviewer PASS; first push; landing 20261013T115031-L-3326812 (proof); batch 20261013T115020; modules 1; new nodes 0)
+- 11:50 L: merged deliver/T1/Sheaf.Algebra.FiniteFamilyModuleMapEqualityColimit (stage 3; reviewer PASS; first push; landing 20261013T115032-L-3326915 (interface); batch 20261013T115020; modules 2; new nodes 1)
