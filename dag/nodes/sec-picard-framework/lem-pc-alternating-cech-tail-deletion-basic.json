@@ -12,21 +12,37 @@
  ],
  "proof": [
   {
-   "text": "Construct the labelled deletion and insertion maps explicitly, and verify the stated finite-index identities by the defining cases of the sorting and junction operators.",
+   "text": "For an outgoing quadruple, set k=r-1, j=tau(k), and d=sigma^{-1}(j). The nonjunction and tail conditions imply a<=k and a<d. Restrict sigma and tau via the increasing omission maps to obtain permutations rho and eta, and retain the prefix length b=a. Restriction preserves stable sorting and partial sorting. The stable ordering of the pairs (t(label),label) implies the incoming inequality. These constructions give a function with the required four identities.",
    "uses": [
     "def-pc-alternating-cech-sorting-operators"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The function is injective: stable-sort uniqueness identifies sigma, the retained prefix identity identifies a, partial-sort uniqueness identifies tau, and the omitted label determines k=tau^{-1}(j), hence r=k+1.",
+   "uses": [
+    "lem-pc-alternating-cech-partial-sort-unique"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For surjectivity, start with (j,rho,b,eta). Let sigma=Tuple.sort(t) and d=sigma^{-1}(j). Stable-sort uniqueness identifies rho with the restriction of sigma deleting d. The incoming inequality implies b<d. Take a=b.castSucc and the unique partial sort tau for sigma with prefix a. Set k=tau^{-1}(j) and r=k+1. Prefix agreement implies a<=k. Deleting k from tau is a partial sort of rho with prefix b, hence equals eta by uniqueness. The resulting outgoing quadruple maps to the given incoming quadruple. Apply Equiv.ofBijective and the explicit deletion identities.",
+   "uses": [
+    "lem-pc-alternating-cech-partial-sort-unique",
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-alternating-cech-sorting-operators"
+  "def-pc-alternating-cech-sorting-operators",
+  "lem-pc-alternating-cech-partial-sort-unique"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project, Cohomology of Sheaves",
   "place": "Tag 01FM, cohomology-equation-first-homotopy (20.23.6.1), omitted verification; unsigned tail-deletion part; https://stacks.math.columbia.edu/tag/01FM",
-  "note": "Stage-3 decomposition of the correspondence proof; the construction uses only the sorting-operator definitions."
+  "note": "Q2: explicit deletion map and bijectivity, using Mathlib Tuple.sort and the existing proved partial-sort uniqueness theorem. All finite-index glue is proved locally in Lean; no new holes."
  },
  "mathlib_searches": [
   {
@@ -92,18 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "A3",
+  "reviewer": "COMPILER",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T011922-L-2761526",
+  "landing": "20261013T022423-L-3217145",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.cechTailDeletionBasic",
-   "AlgebraicGeometry.Scheme.cechTailDeletionJunction"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.cechTailDeletionBasic"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
