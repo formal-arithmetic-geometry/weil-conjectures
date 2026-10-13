@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Put U=D(g). The overFunctor restricts the sheaf to the localized open site. The overEquiv functor identifies that site with the opens of the open subscheme. Global sections of the resulting module identify naturally with the original module sections on U, with their O(U)-action. Applying the ring map A to O(U), obtained from GammaSpecIso followed by restriction, gives exactly the A-action in modulesSpecToSheaf and affineOpenSections. Naturality identifies the induced section maps, and degreewise compatibility with differentials identifies the complexes.",
+   "text": "Forget scalars on both section functors to AddCommGrpCat. For any open U, let V be the underlying open of U.overEquivalence.inverse.obj top. Extensionality of opens proves U = V, including U empty. The component of sectionsForgetIso is the original module presheaf applied to the isomorphism op U = op V. The definitions of overFunctor and overEquiv identify its target with the additive group of global sections on the open subscheme. Naturality follows from PresheafOfModules.naturality_apply. Only the section definitions of the cited nodes are used.",
    "uses": [
     "def-sc-principal-open-alternating-total",
     "def-sc-ringed-space-module-cohomology"
@@ -23,7 +23,7 @@
    "elementary": true
   },
   {
-   "text": "Restriction of scalars is exact and reflects isomorphisms: kernels, images and quotients have unchanged underlying additive groups. Its homology comparison is therefore invertible, and a homology map is invertible precisely when its scalar restriction is. Apply this in every integer degree, and transport across the natural identification from step 1. This gives both directions for any i. If U is empty, section modules are zero, so the same argument still applies.",
+   "text": "Map the natural section isomorphism to integer-indexed complexes. Compose with Mathlib Functor.mapHomologicalComplexCompIso on both sides to compare successive applications of restriction, global sections and forgetting scalars. Arrow.isoMk and quasiIso_iff_of_arrow_mk_iso identify quasi-isomorphism of the two underlying additive chain maps. Each ModuleCat-to-AddCommGrpCat forgetful functor is additive, preserves finite limits and colimits, and reflects isomorphisms. Apply Mathlib HomologicalComplex.quasiIso_map_iff_of_preservesHomology to both sides to recover the stated iff. No quasi-coherence, resolution, boundedness, or nonemptiness hypothesis is used.",
    "uses": [],
    "elementary": true
   }
@@ -35,7 +35,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D2, A-linear sections on principal opens; Tag 08BS for the open-subspace restriction convention. Explicit restriction-of-scalars identification for the definitions used here."
+  "place": "Tags 08D2 and 08BS, section-restriction comparison; direct Lean implementation N2, 2026-10-13, through underlying additive section functors and Mathlib exact forgetful functor reflection."
  },
  "mathlib_searches": [
   {
@@ -108,10 +108,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T054216-L-442498",
-  "kind": "interface",
+  "landing": "20261013T082358-L-1640959",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
