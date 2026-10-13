@@ -13,46 +13,56 @@
  },
  "proof": [
   {
-   "text": "Kernels of coherent maps are coherent. Ideal powers and their products are quasi-coherent; on the Noetherian affine basis the ideal product is finite. Thus H is coherent.",
+   "text": "The coherent kernel L of a has quasi-coherent ideal-power product H. Its inclusion into L is mono, so Noetherian coherence stability for quasi-coherent submodules proves H coherent. The t=0 power is the unit sheaf.",
    "uses": [
     "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "pqf-lem-coherent-ft-locnoeth"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Affine sections identify the kernel and ideal product with the corresponding finite module kernel and ideal multiple. The natural identification of finite-module completion with tensoring by the flat completed ring preserves this kernel and the image defining the ideal product.",
-   "uses": [
-    "lem-weil-pbc-completion-finite-module-tensor",
-    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "The natural affine-limit comparison identifies the completed section map with a_U. Its kernel is annihilated by K(U)^t, so the completed ideal product from the preceding step is zero. Every positive quotient is a quotient of that completion and hence has zero affine sections. The affine opens form a basis, so each quotient sheaf is zero.",
+   "text": "On each affine U, formalCompletion_affine_sections supplies the quotient isomorphisms and the completion isomorphism. Compose the latter with preservesLimitIso for evaluation to identify the section-system limit with AdicCompletion. Naturality is proved by checking all limit projections, choosing a lift of each quotient class and cancelling the canonical quotient projections. Mathlib AdicCompletion.map_injective then makes the completed section map of any mono into a coherent module injective. F has finite affine sections by the finite-type criterion and restriction of finite local generators.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-formal-completion-affine-sections",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the canonical map from sections into their quotient-system limit by the quotient projections. Its naturality and kernel.condition show that each section of L maps into the kernel of the limit map for a. The affine product range identifies H(U) with K(U)^t times L(U). The hypothesis kills the limit image of every generating scalar multiple; additive induction kills all product sections. Apply injectivity of the completed inclusion H to F from the preceding step to conclude that each section of H has zero canonical completion image. This needs only injectivity of completion on inclusions, not a completed-kernel equality or tensor-product flatness.",
+   "uses": [
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project the zero canonical completion image to level n to make every affine section quotient projection zero. The affine quotient comparison makes this projection surjective, hence every affine quotient section module is zero. For each open W cover W by affine opens contained in W and apply sheaf separatedness to any section and zero. Thus the identity of each positive quotient is zero, proving IsZero. This also covers empty schemes, the unit completion ideal and t=0; no faithfulness is used.",
+   "uses": [
+    "lem-weil-pbc-formal-completion-affine-sections"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
   "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
-  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-formal-completion-affine-sections",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P4",
+  "group": "R4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 088A (lemma-existence-tricky), second application of Remark 0888; affine finite-module calculation via Tag 087W and Algebra Tag 00MB. Read at https://stacks.math.columbia.edu/tag/088A, https://stacks.math.columbia.edu/tag/0888 and https://stacks.math.columbia.edu/tag/00MB."
+  "place": "Tag 088A (lemma-existence-tricky), second application of Remark 0888; affine finite-module calculation via Tag 087W and Algebra Tag 00MB. Read at https://stacks.math.columbia.edu/tag/088A, https://stacks.math.columbia.edu/tag/0888 and https://stacks.math.columbia.edu/tag/00MB.",
+  "note": "Implemented the affine calculation using the existing quotient-limit comparison and Mathlib completion injectivity; no tensor flatness or formal affine equivalence needed."
  },
  "mathlib_searches": [
   {
@@ -131,10 +141,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T031547-L-3572705",
-  "kind": "interface",
+  "landing": "20261013T111919-L-3061700",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
