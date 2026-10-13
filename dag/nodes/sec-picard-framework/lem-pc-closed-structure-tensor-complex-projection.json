@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-closed-structure-tensor-complex-projection",
+ "kind": "statement",
+ "title": "lem-pc-closed-structure-tensor-complex-projection",
+ "statement": "Let i:Z→Y be a closed immersion of schemes [def-pc-scheme], assume the recorded tensor pullback [def-pc-module-pullback] is additive, and let P be any integer-indexed cochain complex of O_Y-module sheaves [def-pc-tensor-complex-sheaves]. Put B=i_*O_Z and T=i^*P termwise. The total tensor complex Tot(P tensor B[0]) is isomorphic as an ordinary cochain complex to i_*T termwise. No resolution, K-flatness or derived category hypothesis is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu",
+  "place": "Tags 01CB and 0098"
+ },
+ "proof": [
+  {
+   "text": "Apply mapBifunctorSingle₂Iso to replace the total tensor with B[0] by termwise tensorRight B. Lift the ordinary projection natural isomorphism to complexes, then use mapHomologicalComplexCompIso to identify the composite with successive termwise pullback and pushforward.",
+   "uses": [
+    "lem-pc-closed-structure-tensor-projection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-closed-structure-tensor-projection"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "Codex",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu",
+   "place": "Tags 01CB and 0098"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed immersion ordinary projection formula tensor pushforward",
+   "results": "Service returned Internal Server Error; no absence conclusion inferred.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion tensor structure sheaf pullback pushforward",
+   "results": "Generic pushforward and pullback adjunction declarations; no matching natural projection isomorphism. Source FlatModel supplies the K-flat single tensor model.",
+   "date": "2026-10-14",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorRight\"",
+   "results": "Generic tensorRight and monoidal commutation declarations, no closed immersion formula.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*tensor|tensor.*pushforward",
+   "results": "No matching declaration found by msearch; rg additionally found tensor/pullback stalk and closed-pushforward stalk APIs.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorProjectionHomologyTermwise",
+  "date": "2026-10-14",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "quotient-coefficient Koszul calculation: the common resolution self-Tor tensor computation before conormal comparison",
+   "via": [
+    "lem-pc-self-tor-projection-homology-termwise-arrow",
+    "lem-pc-self-tor-projection-homology-termwise",
+    "lem-pc-self-tor-projection-homology",
+    "lem-pc-self-tor-pushforward-homology",
+    "new-j3-self-ext-tor-core",
+    "lem-sc-self-ext-tor-resolution-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedStructureTensorComplexProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedStructureTensorComplexProjection.lean",
+  "declaration": "AlgebraicGeometry.nonempty_closedStructure_tensor_complex_projection",
+  "statement": "theorem nonempty_closedStructure_tensor_complex_projection\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [(Scheme.Modules.tensorPullback i).Additive]\n    (P : CochainComplex (SheafOfModules.{u} Y.ringCatSheaf) ℤ) :\n    letI : MonoidalCategory (SheafOfModules.{u} Y.ringCatSheaf) :=\n      SheafOfModules.monoidalCategory Y.sheaf\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P\n    Nonempty (CochainComplex.mapBifunctor P\n      ((HomologicalComplex.single (SheafOfModules.{u} Y.ringCatSheaf) (.up ℤ) 0).obj B)\n      (curriedTensor _) ≅\n      ((Scheme.Modules.pushforward i).mapHomologicalComplex (.up ℤ)).obj T)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T231544-L-1820536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T231544-L-1820536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

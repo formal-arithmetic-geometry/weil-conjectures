@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-closed-structure-tensor-projection",
+ "kind": "statement",
+ "title": "lem-pc-closed-structure-tensor-projection",
+ "statement": "Let i:Z→Y be a closed immersion of schemes [def-pc-scheme]. Let B=i_*O_Z, as an O_Y-module sheaf. Using the sheaf tensor product [def-pur-sheaf-tensor-product] and the recorded tensor pullback [def-pc-module-pullback], the functor M↦M tensor B from Mod(O_Y) to itself is naturally isomorphic to i^* followed by i_*. This applies to all module sheaves, without flatness or quasi-coherence.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu",
+  "place": "Tags 08KS, 01CB and 0098"
+ },
+ "proof": [
+  {
+   "text": "Pair sections s of M on V and r of O_Z on the inverse-image open by r times the tensor-pullback adjunction unit applied to s. The balanced pairing commutes with restriction; the sheafification universal property gives a natural module map M tensor i_*O_Z to i_*i^*M.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At i(z), identify the source stalk with M_i(z) tensor O_Z,z and the target stalk with O_Z,z tensor M_i(z), using tensor stalks, pullback stalks and closed-pushforward stalks. Germ formulas identify the map with scalar-extension symmetry. Off the image, both stalks vanish on the open complement.",
+   "uses": [
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module stalk functors jointly reflect isomorphisms, as in the proved tensor-pullback isomorphism criterion. Hence the natural map is componentwise invertible and determines the required natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor-iso-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-pullback-tensor-iso-criterion"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "Codex",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu",
+   "place": "Tags 08KS, 01CB and 0098"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed immersion ordinary projection formula tensor pushforward",
+   "results": "Service returned Internal Server Error; no absence conclusion inferred.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion tensor structure sheaf pullback pushforward",
+   "results": "Generic pushforward and pullback adjunction declarations; no matching natural projection isomorphism. Source FlatModel supplies the K-flat single tensor model.",
+   "date": "2026-10-14",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorRight\"",
+   "results": "Generic tensorRight and monoidal commutation declarations, no closed immersion formula.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*tensor|tensor.*pushforward",
+   "results": "No matching declaration found by msearch; rg additionally found tensor/pullback stalk and closed-pushforward stalk APIs.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorProjectionHomologyTermwise",
+  "date": "2026-10-14",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "quotient-coefficient Koszul calculation: the common resolution self-Tor tensor computation before conormal comparison",
+   "via": [
+    "lem-pc-self-tor-projection-homology-termwise-arrow",
+    "lem-pc-self-tor-projection-homology-termwise",
+    "lem-pc-self-tor-projection-homology",
+    "lem-pc-self-tor-pushforward-homology",
+    "new-j3-self-ext-tor-core",
+    "lem-sc-self-ext-tor-resolution-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedStructureTensorProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedStructureTensorProjection.lean",
+  "declaration": "AlgebraicGeometry.nonempty_closedStructure_tensor_projection",
+  "statement": "theorem nonempty_closedStructure_tensor_projection\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :\n    letI := SheafOfModules.monoidalCategory Y.sheaf\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    Nonempty ((tensorRight B : SheafOfModules.{u} Y.ringCatSheaf ⥤\n      SheafOfModules.{u} Y.ringCatSheaf) ≅\n      Scheme.Modules.tensorPullback i ⋙ Scheme.Modules.pushforward i)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T231544-L-1820536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T231544-L-1820536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

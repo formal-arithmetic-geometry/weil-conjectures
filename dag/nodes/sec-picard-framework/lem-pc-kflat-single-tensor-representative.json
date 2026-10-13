@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-kflat-single-tensor-representative",
+ "kind": "statement",
+ "title": "lem-pc-kflat-single-tensor-representative",
+ "statement": "Let Y be a scheme [def-pc-scheme] with a chosen derived category D(O_Y) [def-pc-derived-category] and its fixed derived tensor [def-pc-scheme-derived-tensor-structure]. Let A,B be O_Y-module sheaves, P an arbitrary integer-indexed cochain complex, and a:P→A[0] a K-flat resolution [def-pc-kflat-complex]. Then A[0] tensor-derived B[0] is isomorphic in D(O_Y) to Q(Tot(P tensor B[0])). No boundedness or quasi-coherence condition is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-kflat-complex",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu",
+  "place": "Tags 06YH and 06YS"
+ },
+ "proof": [
+  {
+   "text": "Install the shared tensor closed structure and functorial flat resolution instances; identify acyclic-tensor K-flatness with categorical K-flatness on the homotopy quotient, using symmetry for the other factor.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved generic source QObjTensorSingleFunctorObjIso in FlatModel. The localized augmentation and singleFunctorIsoCompQ identify Q(P) with A[0]. Compose with the inverse single-total-tensor comparison from BifunctorSingle.",
+   "uses": [
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-source-kflat-module-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "Codex",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu",
+   "place": "Tags 06YH and 06YS"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed immersion ordinary projection formula tensor pushforward",
+   "results": "Service returned Internal Server Error; no absence conclusion inferred.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion tensor structure sheaf pullback pushforward",
+   "results": "Generic pushforward and pullback adjunction declarations; no matching natural projection isomorphism. Source FlatModel supplies the K-flat single tensor model.",
+   "date": "2026-10-14",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorRight\"",
+   "results": "Generic tensorRight and monoidal commutation declarations, no closed immersion formula.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*tensor|tensor.*pushforward",
+   "results": "No matching declaration found by msearch; rg additionally found tensor/pullback stalk and closed-pushforward stalk APIs.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorProjectionHomologyTermwise",
+  "date": "2026-10-14",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "quotient-coefficient Koszul calculation: the common resolution self-Tor tensor computation before conormal comparison",
+   "via": [
+    "lem-pc-self-tor-projection-homology-termwise-arrow",
+    "lem-pc-self-tor-projection-homology-termwise",
+    "lem-pc-self-tor-projection-homology",
+    "lem-pc-self-tor-pushforward-homology",
+    "new-j3-self-ext-tor-core",
+    "lem-sc-self-ext-tor-resolution-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KFlatSingleTensorRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/KFlatSingleTensorRepresentative.lean",
+  "declaration": "AlgebraicGeometry.nonempty_kFlat_single_tensor_representative",
+  "statement": "theorem nonempty_kFlat_single_tensor_representative\n    (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (A B : SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (a : P ⟶ (HomologicalComplex.single\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ) 0).obj A)\n    (hP : CochainComplex.IsKFlatResolution (R := Y.sheaf) a) :\n    letI : MonoidalCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=\n      SheafOfModules.monoidalCategory Y.sheaf\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    Nonempty (S.obj A ⊗ S.obj B ≅ DerivedCategory.Q.obj\n      (CochainComplex.mapBifunctor P\n        ((HomologicalComplex.single\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ) 0).obj B)\n        (curriedTensor _)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T231544-L-1820536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T231544-L-1820536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

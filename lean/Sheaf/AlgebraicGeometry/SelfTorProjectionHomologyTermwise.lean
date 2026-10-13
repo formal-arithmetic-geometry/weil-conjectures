@@ -4,6 +4,9 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.KFlatSingleTensorRepresentative
+import Sheaf.AlgebraicGeometry.ClosedStructureTensorComplexProjection
+import Sheaf.AlgebraicGeometry.ClosedModulePushforwardHomology
 
 @[expose] public section
 set_option autoImplicit false
@@ -12,12 +15,13 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
 /--
-The projection-formula and representative-comparison argument produces an
-invertible comparison arrow between the two displayed homology objects.  This
-is the intermediate arrow-level form used below; its proof is the combination
-of the qcqs derived projection formula, identification of the K-flat derived
-pullback with the termwise tensor pullback, and exactness of pushforward along a
-closed immersion.
+The K-flat tensor representative and ordinary closed-immersion projection
+comparison give an invertible arrow between the displayed homology objects.
+Source: Stacks Project, Tags 06YH, 08KS, 01CB and 0098.
+Proof: compute the derived tensor square using P tensor B[0], identify this
+complex with the termwise pushforward of tensorPullback(i)(P), apply homology,
+and use exact closed-immersion module pushforward to commute homology with it.
+The localization/homology comparison identifies the actual displayed objects.
 (blueprint: lem-pc-self-tor-projection-homology-termwise-arrow)
 -/
 theorem exists_selfTor_projection_homology_termwise_arrow
@@ -36,7 +40,19 @@ theorem exists_selfTor_projection_homology_termwise_arrow
     ∃ f : ((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj (S.obj B ⊗ S.obj B)) ⟶
       (Scheme.Modules.pushforward i).obj (T.homology k), IsIso f := by
-  sorry
+  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+  let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P
+  obtain ⟨e⟩ := nonempty_kFlat_single_tensor_representative Y B B P a hP
+  obtain ⟨p⟩ := nonempty_closedStructure_tensor_complex_projection i P
+  have : (Scheme.Modules.pushforward i).PreservesHomology :=
+    closed_modulePushforward_preservesHomology i
+  let q := e ≪≫ DerivedCategory.Q.mapIso p
+  let h := (DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).mapIso q ≪≫
+    (DerivedCategory.homologyFunctorFactors
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).app _ ≪≫
+    (T.sc k).mapHomologyIso (Scheme.Modules.pushforward i)
+  exact ⟨h.hom, inferInstance⟩
 
 /-- The termwise representative form of the self-Tor projection computation.
 
@@ -63,8 +79,8 @@ theorem nonempty_selfTor_projection_homology_termwise
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj (S.obj B ⊗ S.obj B)) ≅
       (Scheme.Modules.pushforward i).obj (T.homology k)) := by
   dsimp
-  obtain ⟨f, hf⟩ := exists_selfTor_projection_homology_termwise_arrow i P a hP k
-  let _ : IsIso f := hf
+  obtain ⟨f, hIso⟩ := exists_selfTor_projection_homology_termwise_arrow i P a hP k
+  let _ : IsIso f := hIso
   exact ⟨asIso f⟩
 
 end AlgebraicGeometry
