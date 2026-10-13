@@ -5,7 +5,6 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.JacobiZariskiHomologySequence
 public import Mathlib.RingTheory.Extension.ExtendScalars
 
 /-!
@@ -34,27 +33,20 @@ maps are those of `jacobiZariski_homology_sequence`, with its coefficient formul
 Existence of the linear comparison `c`, with the displayed generator formula, expresses
 that this formula is well defined. All four maps are bundled linear maps over the quotient.
 
-Proof (the node's five steps).
-1. Use the polynomial differential basis
-(`lem-weil-pbc-polynomial-ring-kahler-basis-any-variables`) to identify the kernel with
-cycles in the canonical polynomial presentation. The coefficient map S[C] to B[C]
-fixes each variable and commutes with evaluation; presentation functoriality
-(`lem-weil-pbc-nl-presentation-h1-functoriality`) gives the map on these cycles.
-2. Differentiating coefficients is an R-derivation. It kills products of two kernel
-elements, and multiplication by a polynomial acts through its evaluation, so it descends
-to a C-linear map on the conormal module. The universal property of Kahler differentials
-(`def-weil-pbc-kahler-differentials`) and tensor balancing give c. The Leibniz rule
-likewise gives the conormal differential f mod I² to 1 tensor df.
-3. Choose a set-theoretic section of B to C. Evaluate the variables at these lifts.
-The quotient isomorphism (`lem-weil-pbc-jacobi-zariski-surjection-h1`) sends the mapped
-cycle to this evaluation modulo I², independently of the section.
-4. Differentiate this evaluation using Leibniz. The coefficient terms give c applied
-to the coefficient derivative. The other terms are the evaluated partial derivatives
-of the cycle times the differentials of the lifts, and vanish because it is a cycle.
-5. This proves the composite identity on every cycle. With S = B, presentation
-functoriality makes the H1 map the identity and tensor generators make c the identity,
-giving the last equality. The polynomial evaluations use
-`def-weil-pbc-mv-polynomial-ring`; H1 uses `def-weil-pbc-smooth-ring-map`. -/
+Proof. Construct `c` by lifting the S-linear map that sends a differential to
+`1 tensor` its image in the differentials of B. Tensor balancing gives its generator
+formula. Mathlib's `cotangentComplex_comp_h1CotangentEquivCotangent` identifies the
+quotient conormal differential composed with the quotient isomorphism with the
+connecting map for R -> B -> C. It remains to compare the two connecting maps.
+
+The default morphism from the canonical S-presentation of C to its B-presentation
+fixes every variable and is therefore the polynomial coefficient map. On a monomial,
+Mathlib's `Generators.H1Cotangent.δAux_monomial` shows that coefficient differentiation
+commutes with this map and `c`; polynomial induction and additivity extend the equality
+to every polynomial. Represent an arbitrary H1 class by a kernel polynomial, use
+`Extension.Cotangent.map_mk` to compute its image, and use
+`Generators.H1Cotangent.δ_eq_δAux` on both classes. This proves the remaining identity
+without choosing lifts of elements of C or expanding partial derivatives. -/
 theorem jacobiZariski_connectingMap_naturality
     (R : Type u) (S : Type v) (B : Type w)
     [CommRing R] [CommRing S] [CommRing B]
@@ -73,6 +65,49 @@ theorem jacobiZariski_connectingMap_naturality
         c (x ⊗ₜ[S] D R S s) = x ⊗ₜ[B] D R B (algebraMap S B s)) ∧
       (δ.comp (θ.toLinearMap.comp ι) = c.comp partialS) ∧
       (δ.comp θ.toLinearMap = partialB) := by
-  sorry
+  classical
+  dsimp only
+  let C := B ⧸ I
+  let P := Extension.ofSurjective (IsScalarTower.toAlgHom R B C)
+    (Ideal.Quotient.mk_surjective : Function.Surjective (Ideal.Quotient.mk I))
+  let c : C ⊗[S] Ω[S⁄R] →ₗ[C] C ⊗[B] Ω[B⁄R] :=
+    (((TensorProduct.mk B C Ω[B⁄R] 1).restrictScalars S).comp
+      (KaehlerDifferential.map R R S B)).liftBaseChange C
+  have hc (x : C) (s : S) :
+      c (x ⊗ₜ[S] D R S s) = x ⊗ₜ[B] D R B (algebraMap S B s) := by
+    simp [c, LinearMap.liftBaseChange_tmul, smul_tmul']
+  refine ⟨c, hc, ?_, P.cotangentComplex_comp_h1CotangentEquivCotangent⟩
+  rw [← LinearMap.comp_assoc, P.cotangentComplex_comp_h1CotangentEquivCotangent]
+  let Q := Generators.self S C
+  let Q' := Generators.self B C
+  let f := Generators.defaultHom Q Q'
+  have hf (g : MvPolynomial C S) :
+      f.toAlgHom g = MvPolynomial.map (algebraMap S B) g := by
+    have he : f.toAlgHom = MvPolynomial.mapAlgHom (IsScalarTower.toAlgHom S S B) := by
+      apply MvPolynomial.algHom_ext
+      intro i
+      simp [f, Q, Q', Generators.defaultHom, Generators.self, Generators.σ]
+    exact congrArg (fun k => k g) he
+  have haux (g : MvPolynomial C S) :
+      Generators.H1Cotangent.δAux R Q' (f.toAlgHom g) =
+        c (Generators.H1Cotangent.δAux R Q g) := by
+    rw [hf]
+    induction g using MvPolynomial.induction_on' with
+    | monomial n s =>
+      rw [MvPolynomial.map_monomial, Generators.H1Cotangent.δAux_monomial,
+        Generators.H1Cotangent.δAux_monomial]
+      exact (hc _ s).symm
+    | add g h hg hh => simp only [map_add, hg, hh]
+  ext h
+  obtain ⟨x, hx⟩ := h
+  obtain ⟨g, rfl⟩ := Extension.Cotangent.mk_surjective x
+  change Generators.H1Cotangent.δ Q' (Generators.self R B)
+    (Extension.H1Cotangent.map f.toExtensionHom ⟨Extension.Cotangent.mk g, hx⟩) =
+      c (Generators.H1Cotangent.δ Q (Generators.self R S)
+        ⟨Extension.Cotangent.mk g, hx⟩)
+  change Generators.H1Cotangent.δ Q' (Generators.self R B)
+    ⟨Extension.Cotangent.map f.toExtensionHom (Extension.Cotangent.mk g), _⟩ = _
+  simp only [Extension.Cotangent.map_mk, Generators.H1Cotangent.δ_eq_δAux]
+  exact haux g.val
 
 end Algebra
