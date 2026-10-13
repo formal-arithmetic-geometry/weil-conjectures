@@ -25,46 +25,36 @@
  ],
  "proof": [
   {
-   "text": "Assume $K^\\bullet\\oplus L^\\bullet$ is $m$-pseudo-coherent. Since a witness $E^\\bullet$ is a bounded complex of projective modules, morphisms $E^\\bullet\\to C^\\bullet$ in $D(R)$ are represented by maps of complexes (Stacks, Derived Categories, Tag 064B), so for a complex the definition of the statement agrees with the one in $D(R)$ of the triangle lemma, and it is invariant under isomorphism in $D(R)$. The witness has $H^i(E^\\bullet)=0$ for $i$ large, so $H^i(K^\\bullet\\oplus L^\\bullet)=0$ for $i$ large; as cohomology commutes with finite direct sums, $K^\\bullet$ and $L^\\bullet$ are bounded above. The triangle $(K^\\bullet\\oplus L^\\bullet,\\,K^\\bullet\\oplus L^\\bullet,\\,L^\\bullet\\oplus L^\\bullet[1])$, with first map $\\mathrm{id}\\oplus 0$, is distinguished as the direct sum of the distinguished triangles $(K^\\bullet,K^\\bullet,0)$ and $(L^\\bullet,L^\\bullet,L^\\bullet\\oplus L^\\bullet[1])$ (Stacks, Derived Categories, Tag 05QS). An $m$-pseudo-coherent object is $(m+1)$-pseudo-coherent, since the same witness works. So the first term is $(m+1)$-pseudo-coherent and the second $m$-pseudo-coherent, and the first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] shows that $L^\\bullet\\oplus L^\\bullet[1]$ is $m$-pseudo-coherent.",
+   "text": "A bounded finite free witness E -> K ⊞ L with upper bound b gives vanishing cohomology of K ⊞ L in degrees at least B=max(m,b)+1. Each homology functor sends the split epimorphisms biprod.fst and biprod.snd to epimorphisms, so both summands have vanishing cohomology there. The zero-witness lemma gives B-pseudo-coherence of both K and L.",
    "uses": [
-    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+    "lem-pc-ring-m-pseudo-coherent-vanishing-base"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064X, proof of lemma-summands-pseudo-coherent through the direct-sum distinguished triangle"
-   }
+   "elementary": false
   },
   {
-   "text": "If $E^\\bullet\\to C^\\bullet$ witnesses that $C^\\bullet$ is $m$-pseudo-coherent, then $E^\\bullet[1]\\to C^\\bullet[1]$ induces on $H^i$ the map $H^{i+1}(E^\\bullet)\\to H^{i+1}(C^\\bullet)$, an isomorphism for $i\\geq m$; so $C^\\bullet[1]$ is $m$-pseudo-coherent. By induction $L^\\bullet[n]\\oplus L^\\bullet[n+1]$ is $m$-pseudo-coherent for every $n\\geq 0$. As $L^\\bullet$ is bounded above, choose $n\\geq 0$ with $H^i(L^\\bullet[n])=0$ for all $i\\geq m$; then the zero complex with the zero map $0\\to L^\\bullet[n]$ is a witness (isomorphisms $0\\to 0$ for $i>m$, and $0\\to H^m(L^\\bullet[n])=0$ is surjective), so $L^\\bullet[n]$ is $m$-pseudo-coherent (Stacks, More on Algebra, Tag 064W, part (1)). For $k=n,n-1,\\dots,1$ use the split distinguished triangle $(L^\\bullet[k],\\,L^\\bullet[k]\\oplus L^\\bullet[k-1],\\,L^\\bullet[k-1])$ (Tag 05QS): if $L^\\bullet[k]$ is $m$-pseudo-coherent, it is $(m+1)$-pseudo-coherent, and the middle term is $m$-pseudo-coherent by the shifted decomposition, so the first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] makes $L^\\bullet[k-1]$ $m$-pseudo-coherent. At $k=1$ this gives that $L^\\bullet$ is $m$-pseudo-coherent.",
+   "text": "For n >= m the original witness makes K ⊞ L n-pseudo-coherent: above n use its cohomology isomorphisms; at n=m use its epimorphism, and at n>m use its isomorphism. Transport the witness along any morphism whose homology maps are isomorphisms above n and epi at n, by composing witness maps. Apply this to the biproduct braiding to obtain the same for L ⊞ K. Suppose both K and L are (n+1)-pseudo-coherent. Apply clause one of the distinguished-triangle lemma to the split distinguished triangles K -> K ⊞ L -> L and L -> L ⊞ K -> K. This gives n-pseudo-coherence of both summands. Induct on k to obtain the simultaneous claim at degree B-k whenever m <= B-k. Taking k=(B-m).toNat proves the first clause.",
    "uses": [
     "lem-pc-ring-pseudo-coherent-distinguished-triangle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064X, induction and backward descent in the proof of lemma-summands-pseudo-coherent"
-   }
+   "elementary": false
   },
   {
-   "text": "Exchanging $K^\\bullet$ and $L^\\bullet$, also $K^\\bullet$ is $m$-pseudo-coherent. If $K^\\bullet\\oplus L^\\bullet$ is isomorphic in $D(R)$ to a bounded-above complex $Q^\\bullet$ of finite free modules, then for each $m$ the stupid truncation $\\sigma_{\\geq m}Q^\\bullet$ (the terms of degree $\\geq m$) is bounded and finite free, and $\\sigma_{\\geq m}Q^\\bullet\\to Q^\\bullet\\cong K^\\bullet\\oplus L^\\bullet$ induces isomorphisms on $H^i$ for $i>m$ and a surjection on $H^m$; so $K^\\bullet\\oplus L^\\bullet$, hence $K^\\bullet$ and $L^\\bullet$, are $m$-pseudo-coherent for every $m$. Conversely, let $C^\\bullet$ be $m$-pseudo-coherent for every $m$; the $0$-pseudo-coherent witness gives $b$ with $H^i(C^\\bullet)=0$ for $i>b$. Construct finite free $F^i$ and a map $f\\colon F^\\bullet\\to C^\\bullet$ downward, starting with $F^i=0$ for $i>b$: at stage $n$, $F^\\bullet=F^{\\geq n}$ is finite free with $H^i(f)$ an isomorphism for $i>n$ and surjective for $i=n$. Then the cone $M$ of $f$ has $H^i(M)=0$ for $i\\geq n$ by the long exact sequence, and as $F^{\\geq n}$ is $(n-1)$-pseudo-coherent (identity witness) and $C^\\bullet$ is $(n-1)$-pseudo-coherent, the first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] makes $M$ $(n-1)$-pseudo-coherent. Hence $H^{n-1}(M)$ is a finite module: for a witness $E^\\bullet\\to M$, the bounded finite free complex $E^\\bullet$ is exact in degrees $\\geq n$, so splitting it off from the top shows $\\ker(d_E^{n-1})$ is finite projective, and $H^{n-1}(E^\\bullet)$, a quotient of it, surjects onto $H^{n-1}(M)$ (Stacks, More on Algebra, Tag 064S). By the long exact sequence $H^{n-1}(C^\\bullet)\\to H^{n-1}(M)\\to H^n(F^\\bullet)\\to H^n(C^\\bullet)$, choose a finite free $F^{n-1}$ mapping onto $H^{n-1}(M)$ and lift to degree-$(n-1)$ cocycles of the cone, i.e. maps $F^{n-1}\\to C^{n-1}$ and $F^{n-1}\\to F^n$ compatible with the differentials. Then $H^n(f)$ becomes an isomorphism and $H^{n-1}(f)$ surjective. Iterating gives a bounded-above finite free complex $F^\\bullet$ with a quasi-isomorphism $F^\\bullet\\to C^\\bullet$ (Stacks, More on Algebra, Tag 064U). Applied to $K^\\bullet$ and $L^\\bullet$ this proves the final clause.",
+   "text": "Extend the existing all-m criterion from Q.obj C to any derived object using the essential surjectivity of Q and its representative isomorphism. Both pseudo-coherence and m-pseudo-coherence are invariant under this isomorphism: compose witness isomorphisms with it, or apply the generalized homology-map transport to its hom and inv. Pseudo-coherence of K ⊞ L gives m-pseudo-coherence for every m. Apply the first clause separately at each m, then the converse all-m criterion to K and L.",
    "uses": [
-    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+    "lem-pc-ring-pseudo-coherent-iff-all-m"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064U, proof of lemma-pseudo-coherent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+  "lem-pc-ring-m-pseudo-coherent-vanishing-base",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "lem-pc-ring-pseudo-coherent-iff-all-m"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 064X, lemma-summands-pseudo-coherent"
+  "place": "Tags 064X and 064U; U2 replaces shift descent by simultaneous degree descent using the same split-triangle closure and vanishing base"
  },
  "mathlib_searches": [
   {
@@ -155,5 +145,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T100144-L-2492434",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

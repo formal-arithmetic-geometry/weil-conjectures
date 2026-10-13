@@ -12005,3 +12005,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/U1/Sheaf.AlgebraicGeometry.OrderedCechModuleRetraction (stage 3; reviewer PASS; first push; landing 20261013T100142-L-2491794 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:01 L: merged deliver/U1/Sheaf.AlgebraicGeometry.PerfectDescentAffineOpen (stage 3; reviewer PASS; first push; landing 20261013T100143-L-2492034 (interface); batch 20261013T095923; modules 5; new nodes 4)
 - 10:01 L: merged deliver/U1/Sheaf.AlgebraicGeometry.PerfectDescentOpenUnion (stage 3; reviewer PASS; first push; landing 20261013T100144-L-2492201 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:01 L: merged deliver/U2/Sheaf.Algebra.Homology.RingPseudoCoherentSummand (stage 3; reviewer PASS; after a return; landing 20261013T100144-L-2492434 (proof); batch 20261013T095923; modules 1; new nodes 0)
