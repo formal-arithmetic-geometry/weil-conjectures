@@ -12590,3 +12590,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:13 L: merged deliver/E4/Sheaf.Algebra.Homology.BaseTensorDerivedComparison (stage 3; reviewer PASS; first push; landing 20261013T131324-L-4033627 (interface); batch 20261013T131320; modules 3; new nodes 2)
 - 13:13 L: merged deliver/E4/Sheaf.AlgebraicGeometry.PicardExternalAffineRectangleExact (stage 3; reviewer PASS; first push; landing 20261013T131325-L-4033822 (interface); batch 20261013T131320; modules 3; new nodes 2)
 - 13:13 L: merged deliver/K1/Sheaf.Algebra.Homology.FreeRestrictionTorBound (stage 3; reviewer PASS; first push; landing 20261013T131325-L-4034002 (proof); batch 20261013T131320; modules 1; new nodes 0)
+- 13:13 L: merged deliver/K1/Sheaf.AlgebraicGeometry.AffineBirationalOfFractionRingEquiv (stage 3; reviewer PASS; first push; landing 20261013T131326-L-4034178 (interface); batch 20261013T131320; modules 3; new nodes 2)

@@ -7,6 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Birational.Birational
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.Localization.FractionRing
+import Sheaf.AlgebraicGeometry.GenericInversePartialMapRestrictions
 
 @[expose] public section
 
@@ -39,6 +40,61 @@ theorem birationalOver_of_fractionRing_equiv
     (he : ∀ a : Γ(S, ⊤),
       e (algebraMap Γ(X, ⊤) (FractionRing Γ(X, ⊤)) (sX.appTop.hom a)) =
         algebraMap Γ(Y, ⊤) (FractionRing Γ(Y, ⊤)) (sY.appTop.hom a)) :
-    Scheme.BirationalOver sX sY := by sorry
+    Scheme.BirationalOver sX sY := by
+  have : Nonempty (⊤ : X.Opens) := ⟨⟨genericPoint X, trivial⟩⟩
+  have : Nonempty (⊤ : Y.Opens) := ⟨⟨genericPoint Y, trivial⟩⟩
+  have := functionField_isFractionRing_of_isAffineOpen X ⊤ (isAffineOpen_top X)
+  have := functionField_isFractionRing_of_isAffineOpen Y ⊤ (isAffineOpen_top Y)
+  let eX := (IsLocalization.algEquiv (nonZeroDivisors Γ(X, ⊤))
+    (FractionRing Γ(X, ⊤)) X.functionField).toRingEquiv
+  let eY := (IsLocalization.algEquiv (nonZeroDivisors Γ(Y, ⊤))
+    (FractionRing Γ(Y, ⊤)) Y.functionField).toRingEquiv
+  let eF : X.functionField ≃+* Y.functionField := eX.symm.trans (e.trans eY)
+  have heF (a : Γ(S, ⊤)) :
+      eF (X.germToFunctionField ⊤ (sX.appTop.hom a)) =
+        Y.germToFunctionField ⊤ (sY.appTop.hom a) := by
+    change eY (e (eX.symm (algebraMap Γ(X, ⊤) X.functionField _))) =
+      algebraMap Γ(Y, ⊤) Y.functionField _
+    rw [show eX.symm (algebraMap Γ(X, ⊤) X.functionField (sX.appTop.hom a)) =
+      algebraMap Γ(X, ⊤) (FractionRing Γ(X, ⊤)) (sX.appTop.hom a) from
+      (IsLocalization.algEquiv (nonZeroDivisors Γ(X, ⊤))
+        (FractionRing Γ(X, ⊤)) X.functionField).symm.commutes _]
+    rw [he]
+    exact (IsLocalization.algEquiv (nonZeroDivisors Γ(Y, ⊤))
+      (FractionRing Γ(Y, ⊤)) Y.functionField).commutes _
+  let eSpec : Spec X.functionField ≅ Spec Y.functionField :=
+    Scheme.Spec.mapIso eF.symm.toCommRingCatIso.op
+  have hc : eSpec.hom ≫ Y.fromSpecStalk (genericPoint Y) ≫ sY =
+      X.fromSpecStalk (genericPoint X) ≫ sX := by
+    apply (cancel_mono S.toSpecΓ).mp
+    change (Spec.map (CommRingCat.ofHom eF.symm.toRingHom) ≫
+      Y.fromSpecStalk (genericPoint Y) ≫ sY) ≫ S.toSpecΓ = _
+    simp only [Category.assoc, Scheme.toSpecΓ_naturality,
+      Scheme.fromSpecStalk_toSpecΓ_assoc, ← Spec.map_comp]
+    congr 1
+    ext a
+    change eF.symm (Y.germToFunctionField ⊤ (sY.appTop.hom a)) =
+      X.germToFunctionField ⊤ (sX.appTop.hom a)
+    rw [← heF, eF.symm_apply_apply]
+  have hc' : eSpec.inv ≫ X.fromSpecStalk (genericPoint X) ≫ sX =
+      Y.fromSpecStalk (genericPoint Y) ≫ sY := by
+    rw [← hc]
+    simp
+  let f := Scheme.PartialMap.ofFromSpecStalk sX sY
+    (eSpec.hom ≫ Y.fromSpecStalk (genericPoint Y)) hc
+  let g := Scheme.PartialMap.ofFromSpecStalk sY sX
+    (eSpec.inv ≫ X.fromSpecStalk (genericPoint X)) hc'
+  have hf : f.fromFunctionField = eSpec.hom ≫ Y.fromSpecStalk (genericPoint Y) :=
+    Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk sX sY _ hc
+  have hg : g.fromFunctionField = eSpec.inv ≫ X.fromSpecStalk (genericPoint X) :=
+    Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk sY sX _ hc'
+  obtain ⟨U, hU, hUf, V, hV, f', g', hfg, hgf, hres⟩ :=
+    Scheme.PartialMap.exists_inverse_restrictions_of_generic_inverse f g eSpec hf hg
+  refine ⟨⟨U, hU, V, hV, ⟨f', g', hfg, hgf⟩⟩, ?_⟩
+  change f' ≫ V.ι ≫ sY = U.ι ≫ sX
+  rw [← Category.assoc, hres, Category.assoc,
+    Scheme.PartialMap.ofFromSpecStalk_comp sX sY _ hc, ← Category.assoc,
+    Scheme.homOfLE_ι]
+
 
 end AlgebraicGeometry
