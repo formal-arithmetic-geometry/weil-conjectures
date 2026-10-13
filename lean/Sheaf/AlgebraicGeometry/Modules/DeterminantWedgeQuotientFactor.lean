@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient
+import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelRelations
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero
+import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 
 /-!
 # Factorization of the pre-quotient wedge map
@@ -67,6 +71,27 @@ theorem determinant_wedge_quotient_factor {X : Scheme.{v}}
           (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))) :
     ∃ φ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ⟶ exteriorSheaf S.X₂ r₂,
       q ≫ φ = ψ := by
-  sorry
+  have hgepi : Epi S.g := hS.epi_g
+  obtain ⟨q₀, hq₀epi, hq₀⟩ :=
+    exteriorTensor_quotient_exists S.X₁ S.X₂ S.X₃ S.g r₁ r₃
+  have hqq : q = q₀ := by
+    apply exteriorTensor_lift_hom_ext (𝟙 S.X₂) r₁ r₃ q q₀
+    intro U a c
+    change q.val.app (op U)
+        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+          (exteriorSheafSection S.X₂ r₃ U c)) =
+      q₀.val.app (op U)
+        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+          (exteriorSheafSection S.X₂ r₃ U c))
+    rw [hq U a c, hq₀ U a c]
+  have : Epi q := hqq ▸ hq₀epi
+  have hzero : CategoryTheory.Limits.kernel.ι q ≫ ψ = 0 := by
+    apply exteriorTensor_kernel_eq_zero_of_relations S hS S.X₁
+      (exteriorSheaf S.X₂ r₂) r₁ r₃ q ψ hq
+    intro U a c j d hc
+    rw [hψ U a c]
+    exact exteriorSheaf_rank_wedge_eq_zero S.f r₁ r₂ r₃ hr U a c j d hc
+  refine ⟨Abelian.epiDesc q ψ hzero, ?_⟩
+  exact Abelian.comp_epiDesc q ψ hzero
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,125 @@
+{
+ "id": "new-j1-exterior-sheaf-rank-wedge-zero",
+ "kind": "statement",
+ "title": "Vanishing of a wedge containing one more vector than the source rank",
+ "statement": "Let X be a scheme [def-pc-scheme], A a finite locally free module sheaf of rank r [def-amb-finite-locally-free-module], B any module sheaf, and f:A→B any morphism. Let n=r+s. On any open U take a tuple a of r sections of A, c of s sections of B, an index j∈Fin s, and d∈A(U) with c_j=f(d). The section of ∧^n B [def-sc-sheaf-exterior-power] given by the concatenation (f(a_1),…,f(a_r),c_1,…,c_s), reindexed by n=r+s, is zero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "On a trivializing cover of A expand its r entries and d in a basis of size r. Each term in the multilinear expansion contains r+1 images of basis vectors, so two coincide, and alternation makes the term zero. This is the same basis argument giving vanishing of exterior powers above the rank.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict also to U, use naturality of wedge sections, and glue the local zero equalities by separatedness. Rank zero gives a zero entry; s=0 has no index j. No injectivity or exactness is needed, including over zero rings and on the empty scheme.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof_origin": {
+  "by": "J1 stage3",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Alternating wedge of r+1 vectors from a locally free sheaf of rank r is zero",
+   "results": "Service unavailable: Internal Server Error. Independently rerun in second reading; no mathematical verdict from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An alternating multilinear map vanishes on a tuple containing more entries from a submodule than its finite rank",
+   "results": "AlternatingMap.map_eq_zero_of_eq and map_eq_zero_of_not_injective give repeated-entry vanishing. map_linearDependent requires a domain and torsion-free target, so does not apply to arbitrary scheme rings. No sheaf-level match.",
+   "date": "2026-10-13",
+   "verdict": "supporting algebra only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlternatingMap, Module.Basis",
+   "results": "Module.Basis.ext_alternating compares alternating maps on distinct basis tuples; it supports the local basis argument but does not supply the sheaf vanishing statement.",
+   "date": "2026-10-13",
+   "verdict": "supporting algebra only"
+  },
+  {
+   "tool": "grep",
+   "query": "(quotient|ker|surjective|span)",
+   "results": "exteriorPower.ιMulti_span_fixedDegree and basis infrastructure, no sheaf-level vanishing statement. Repository searches for exterior/wedge vanishing and locally free ranks likewise found no independent match.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeQuotientFactor",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts",
+   "via": [
+    "lem-sc-determinant-wedge-quotient-factor",
+    "new-local-wedge-at",
+    "lem-sc-determinant-wedge-morphism-local-data",
+    "lem-sc-determinant-wedge-morphism",
+    "lem-sc-determinant-short-exact-exists",
+    "lem-sc-determinant-short-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafRankWedgeZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_rank_wedge_eq_zero",
+  "statement": "theorem exteriorSheaf_rank_wedge_eq_zero {X : Scheme.{v}} {A B : X.Modules}\n    (f : A ⟶ B) (r n s : ℕ) (hr : n = r + s) [A.IsFiniteLocallyFreeOfRank r]\n    (U : X.Opens) (a : Fin r → A.val.obj (op U))\n    (c : Fin s → B.val.obj (op U)) (j : Fin s) (d : A.val.obj (op U))\n    (hc : c j = f.val.app (op U) d) :\n    exteriorSheafSection B n U\n      (fun i ↦ Fin.append (fun k ↦ f.val.app (op U) (a k)) c (Fin.cast hr i)) = 0",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T031543-L-3571627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T031543-L-3571627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
