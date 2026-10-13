@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
+public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
 
 /-!
 # The Lie algebra of a group scheme
@@ -62,7 +63,8 @@ theorem lieAlgebraSheaf_iso_pullback_tangentSheaf [Smooth G.hom] :
 
 /-- The Lie algebra `Lie(G) = Hom_{𝒪_S}(ω_{G/S}, 𝒪_S)` of a group scheme `G` over `S`: the global
 sections of the Lie algebra sheaf, the module of relative tangent vectors at the identity. Its Lie
-bracket is constructed below. (blueprint: `sk-d-tangent`) -/
+bracket is constructed in `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket`.
+(blueprint: `sk-d-tangent`, `def-wf-lie-algebra-derivation`) -/
 def Lie : Type u :=
   omega G ⟶ Scheme.Modules.unitModule S
 
@@ -73,8 +75,8 @@ noncomputable instance : Module Γ(S, ⊤) (Lie G) :=
   inferInstanceAs (Module Γ(S, ⊤) (omega G ⟶ Scheme.Modules.unitModule S))
 
 /-- The Lie algebra is the module of global sections of the Lie algebra sheaf. -/
-theorem nonempty_lie_equiv_sections : Nonempty (Lie G ≃+ Γ(lieAlgebraSheaf G, ⊤)) := by
-  sorry
+theorem nonempty_lie_equiv_sections : Nonempty (Lie G ≃+ Γ(lieAlgebraSheaf G, ⊤)) :=
+  ⟨(Scheme.Modules.ΓHomObjAddEquiv _ _).symm⟩
 
 end GrpObj
 

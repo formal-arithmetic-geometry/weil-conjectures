@@ -281,7 +281,7 @@ is cartesian, i.e. `ℙ(n; X)` is the base change of `ℙ(n; S)` along `g`. Inde
 ```
 
 are cartesian, and so is the outer rectangle.
-(blueprint: `lemma:nagata-projective-space-base-change-pullback`) -/
+(blueprint: `lemma-nagata-projective-space-base-change-pullback`) -/
 lemma isPullback_map {X S : Scheme.{u}} (g : X ⟶ S) :
     IsPullback (map n g) (ℙ(n; X) ↘ X) (ℙ(n; S) ↘ S) g := by
   refine (IsPullback.paste_horiz_iff (isPullback_over_toProjInt n S).flip (map_over n g)).mp ?_
@@ -381,7 +381,8 @@ instance isImmersion_liftBaseChange [IsImmersion b] : IsImmersion (liftBaseChang
 
 /-- The lift of a closed immersion `b : T ⟶ ℙ(n; S)` along a separated morphism `g` is a
 closed immersion: `map n g` is separated, being a base change of `g`, and closed immersions
-cancel along separated morphisms. -/
+cancel along separated morphisms.
+(blueprint: `lemma-weil-pbc-chow-embedding-over-x`, general statement) -/
 instance isClosedImmersion_liftBaseChange [IsSeparated g] [IsClosedImmersion b] :
     IsClosedImmersion (liftBaseChange a b w) :=
   have : IsClosedImmersion (liftBaseChange a b w ≫ map n g) := by

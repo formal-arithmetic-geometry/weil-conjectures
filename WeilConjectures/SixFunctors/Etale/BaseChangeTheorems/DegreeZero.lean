@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.HenselianPairSections
 
 /-!
 # Sections of étale sheaves on proper schemes over a henselian base
@@ -36,6 +38,9 @@ and are the input of the underived proper base change
   over a henselian pair.
 - `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`: the comparison
   with the closed geometric fibre over a strictly henselian local ring.
+- `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_henselianRing`,
+  `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_geometricFibre`: the
+  same for abelian sheaves.
 
 ## References
 
@@ -47,11 +52,145 @@ and are the input of the underived proper base change
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry
 
 open Scheme Etale
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Morphisms of étale `X`-schemes into an étale `X`-scheme whose structure morphism is a
+monomorphism are unique. -/
+lemma _root_.AlgebraicGeometry.Scheme.Etale.hom_ext_of_mono {X : Scheme.{u}} {V W : X.Etale}
+    [Mono W.hom] (a b : V ⟶ W) : a = b :=
+  MorphismProperty.Over.Hom.ext ((cancel_mono W.hom).1
+    ((MorphismProperty.Over.w a).trans (MorphismProperty.Over.w b).symm))
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The pullback map on global sections of an abelian étale sheaf is an isomorphism if and only
+if the pullback of sections `pullSection` between the terminal étale schemes is bijective. -/
+lemma isIso_globalSectionsUpperStarMap_iff_bijective_pullSection {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} f G) ↔
+      Function.Bijective (pullSection f G (V := Scheme.Etale.mk (𝟙 X))
+        (U := Scheme.Etale.mk (𝟙 Y)) f ((Category.comp_id _).trans (Category.id_comp _).symm)) := by
+  let eY := terminalIsoIsTerminal (Scheme.Etale.isTerminalMkId Y)
+  let eX := terminalIsoIsTerminal (Scheme.Etale.isTerminalMkId X)
+  let F := (f)^*[AddCommGrpCat.{u + 1}].obj G
+  let η := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app G
+  let P : G.obj.obj (op (Scheme.Etale.mk (𝟙 Y))) ⟶ F.obj.obj (op (Scheme.Etale.mk (𝟙 X))) :=
+    η.hom.app (op (Scheme.Etale.mk (𝟙 Y))) ≫ F.obj.map (homToPullback f f
+      ((Category.comp_id _).trans (Category.id_comp _).symm)).op
+  have : Mono (f.Etale.obj (Scheme.Etale.mk (𝟙 Y))).hom :=
+    inferInstanceAs (Mono (pullback.snd (𝟙 Y) f))
+  have key : η.hom.app (op (⊤_ Y.Etale)) ≫ F.obj.map (PreservesTerminal.iso f.Etale).inv.op =
+      G.obj.map eY.inv.op ≫ P ≫ F.obj.map eX.hom.op := by
+    have hn : G.obj.map eY.inv.op ≫ η.hom.app (op (Scheme.Etale.mk (𝟙 Y))) =
+        η.hom.app (op (⊤_ Y.Etale)) ≫ F.obj.map (f.Etale.map eY.inv).op :=
+      η.hom.naturality eY.inv.op
+    simp only [P, ← Category.assoc]
+    rw [hn]
+    simp only [Category.assoc]
+    congr 1
+    simp only [← Functor.map_comp, ← op_comp]
+    have hm : ∀ a b : ⊤_ X.Etale ⟶ f.Etale.obj (⊤_ Y.Etale), a = b := fun a b ↦
+      (cancel_mono (f.Etale.map eY.hom)).1 (Scheme.Etale.hom_ext_of_mono _ _)
+    exact congrArg (fun a ↦ F.obj.map (Quiver.Hom.op a)) (hm _ _)
+  have hg : globalSectionsUpperStarMap AddCommGrpCat.{u + 1} f G =
+      ((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app G ≫ G.obj.map eY.inv.op) ≫
+        P ≫ (F.obj.map eX.hom.op ≫
+          (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).inv.app F) := by
+    rw [globalSectionsUpperStarMap]
+    simp only [Category.assoc]
+    rw [← reassoc_of% key]
+    rfl
+  have : IsIso (G.obj.map eY.inv.op) := inferInstance
+  have : IsIso (F.obj.map eX.hom.op) := inferInstance
+  rw [hg, isIso_comp_left_iff, isIso_comp_right_iff, ConcreteCategory.isIso_iff_bijective]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The restriction of global sections of `t^* G` along `m : T' ⟶ T` is bijective if and only if
+the pullback map on global sections of `t^* G` along `m` is an isomorphism. -/
+lemma bijective_restrictAlong_iff_isIso_globalSectionsUpperStarMap {R T T' : Scheme.{u}}
+    (t : T ⟶ R) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) (m : T' ⟶ T)
+    (t' : T' ⟶ R) (ht' : t' = m ≫ t) :
+    Function.Bijective (restrictAlong t G m t' ht' (V := Scheme.Etale.mk (𝟙 T))
+      (V' := Scheme.Etale.mk (𝟙 T')) m ((Category.comp_id _).trans (Category.id_comp _).symm)) ↔
+      IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} m
+        ((t)^*[AddCommGrpCat.{u + 1}].obj G)) := by
+  rw [isIso_globalSectionsUpperStarMap_iff_bijective_pullSection]
+  have h : Function.Bijective (((upperStarComp AddCommGrpCat.{u + 1} m t t' ht').inv.app
+      G).hom.app (op (Scheme.Etale.mk (𝟙 T')))) :=
+    ConcreteCategory.bijective_of_isIso (((sheafSections _ _).obj _).map
+      ((upperStarComp AddCommGrpCat.{u + 1} m t t' ht').inv.app G))
+  have e : ⇑(restrictAlong t G m t' ht' (V := Scheme.Etale.mk (𝟙 T))
+      (V' := Scheme.Etale.mk (𝟙 T')) m ((Category.comp_id _).trans (Category.id_comp _).symm)) =
+      ⇑(((upperStarComp AddCommGrpCat.{u + 1} m t t' ht').inv.app G).hom.app
+        (op (Scheme.Etale.mk (𝟙 T')))) ∘ pullSection m ((t)^*[AddCommGrpCat.{u + 1}].obj G)
+          (V := Scheme.Etale.mk (𝟙 T')) (U := Scheme.Etale.mk (𝟙 T)) m
+          ((Category.comp_id _).trans (Category.id_comp _).symm) :=
+    funext fun s ↦ restrictAlong_apply t G m t' ht' _ _ s
+  rw [e, h.of_comp_iff']
+
+/-- The pullback of global sections of abelian sheaves along a universal homeomorphism is an
+isomorphism. -/
+instance Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_isUniversalHomeomorphism
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsUniversalHomeomorphism f]
+    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} f G) := by
+  have := isEquivalence_upperStar AddCommGrpCat.{u + 1} f
+  unfold globalSectionsUpperStarMap
+  infer_instance
+
+/-- **Étale henselian restriction in degree zero**, for abelian sheaves: the version of
+`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing` for sheaves of
+abelian groups. -/
+theorem Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_henselianRing {A : Type u}
+    [CommRing A] (I : Ideal A) [HenselianRing A I] {Y Y₀ : Scheme.{u}} (p : Y ⟶ Spec (.of A))
+    [IsProper p] (i : Y₀ ⟶ Y) (p₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
+    (h : IsPullback i p₀ p (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
+    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G) :=
+  (isIso_globalSectionsUpperStarMap_iff_bijective_pullSection i G).2
+    (bijective_pullSection_of_henselianRing I p i p₀ h G)
+
+/-- **Degree-zero comparison over a strictly henselian base**, for abelian sheaves: the version
+of `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre` for sheaves of
+abelian groups. -/
+theorem Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_geometricFibre (A : Type u)
+    [CommRing A] [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)]
+    {Z : Scheme.{u}} (p : Z ⟶ Spec (.of A)) [IsProper p]
+    (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} (pullback.fst p
+      (Spec.map (CommRingCat.ofHom
+        (algebraMap A (AlgebraicClosure (IsLocalRing.ResidueField A)))))) F) := by
+  let κ := IsLocalRing.ResidueField A
+  let s₀ : Spec (.of κ) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))
+  let t : Spec (.of (AlgebraicClosure κ)) ⟶ Spec (.of κ) :=
+    Spec.map (CommRingCat.ofHom (algebraMap κ (AlgebraicClosure κ)))
+  have hs : Spec.map (CommRingCat.ofHom (algebraMap A (AlgebraicClosure κ))) = t ≫ s₀ := by
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, IsScalarTower.algebraMap_eq A κ,
+      IsLocalRing.ResidueField.algebraMap_eq]
+  rw [hs]
+  let i₀ := pullback.fst p s₀
+  let v := (pullbackLeftPullbackSndIso p s₀ t).inv ≫ pullback.fst (pullback.snd p s₀) t
+  have hv : v ≫ i₀ = pullback.fst p (t ≫ s₀) := by
+    simp [v, i₀]
+  have : IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i₀ F) :=
+    Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_henselianRing
+      (IsLocalRing.maximalIdeal A) p i₀ (pullback.snd p s₀) (IsPullback.of_hasPullback p s₀) F
+  have : IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} (v ≫ i₀) F ≫
+      (Sheaf.Γ _ AddCommGrpCat.{u + 1}).map
+        ((upperStarComp AddCommGrpCat.{u + 1} v i₀).hom.app F)) := by
+    rw [globalSectionsUpperStarMap_comp]
+    infer_instance
+  have := IsIso.of_isIso_comp_right
+    (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} (v ≫ i₀) F)
+    ((Sheaf.Γ _ AddCommGrpCat.{u + 1}).map
+      ((upperStarComp AddCommGrpCat.{u + 1} v i₀ (v ≫ i₀) rfl).hom.app F))
+  rw [← hv]
+  exact this
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
@@ -73,14 +212,14 @@ noncomputable def Etale.projectiveLineClosedFibreRestriction (A : Type u) [CommR
 For every étale sheaf `F` of `Λ`-modules on `Y`, restriction `Γ(Y, F) ⟶ Γ(Y₀, F|_{Y₀})` is an
 isomorphism.
 
-The proof has two stages: the Zariski comparison on `Y` and on all its finite covers, from
-the connectedness of the closed fibres
-(`AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter`) and the
-spectral restriction criterion; and the passage to étale sheaves by finite-refinement descent
-(`AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale`) along the
-finite-pullback identities
-(`AlgebraicGeometry.Etale.globalSectionsUpperStarMap_identities`). The affine case is
-`AlgebraicGeometry.Etale.bijective_cohomologyMap_zero_of_henselianRing`.
+The statement reduces to abelian sheaves
+(`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_iff_forget₂`), where it is
+`AlgebraicGeometry.Etale.bijective_pullSection_of_henselianRing`: the Zariski gluing near the
+closed fibre on the finite covers of `Y`, from the connectedness of the closed fibres
+(`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`) and the spectral
+shrinking `SpectralSpace.exists_shrink_of_isConnected_inter`, and the passage to étale sheaves
+by finite refinement (`AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale`)
+and descent (`AlgebraicGeometry.Etale.exists_pullSection_eq_of_isFinite_of_surjective`).
 (blueprint: `lemma-weil-pbc-etale-degree-zero`) -/
 @[stacks 0A0C]
 theorem Etale.isIso_globalSectionsUpperStarMap_of_henselianRing {A : Type u} [CommRing A]
@@ -88,8 +227,10 @@ theorem Etale.isIso_globalSectionsUpperStarMap_of_henselianRing {A : Type u} [Co
     (i : Y₀ ⟶ Y) (p₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
     (h : IsPullback i p₀ p (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F) :=
-  sorry
+    IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F) := by
+  rw [isIso_globalSectionsUpperStarMap_iff_forget₂,
+    isIso_globalSectionsUpperStarMap_iff_bijective_pullSection]
+  exact bijective_pullSection_of_henselianRing I p i p₀ h _
 
 /-- The pullback of global sections along a universal homeomorphism is an isomorphism: the
 pullback is then an equivalence of categories of étale sheaves
@@ -120,32 +261,8 @@ theorem Etale.isIso_globalSectionsUpperStarMap_geometricFibre (A : Type u) [Comm
     (p : Z ⟶ Spec (.of A)) [IsProper p] (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) (pullback.fst p
       (Spec.map (CommRingCat.ofHom
-        (algebraMap A (AlgebraicClosure (IsLocalRing.ResidueField A)))))) F) := by
-  let κ := IsLocalRing.ResidueField A
-  let s₀ : Spec (.of κ) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))
-  let t : Spec (.of (AlgebraicClosure κ)) ⟶ Spec (.of κ) :=
-    Spec.map (CommRingCat.ofHom (algebraMap κ (AlgebraicClosure κ)))
-  have hs : Spec.map (CommRingCat.ofHom (algebraMap A (AlgebraicClosure κ))) = t ≫ s₀ := by
-    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, IsScalarTower.algebraMap_eq A κ,
-      IsLocalRing.ResidueField.algebraMap_eq]
-  rw [hs]
-  let i₀ := pullback.fst p s₀
-  let v := (pullbackLeftPullbackSndIso p s₀ t).inv ≫ pullback.fst (pullback.snd p s₀) t
-  have hv : v ≫ i₀ = pullback.fst p (t ≫ s₀) := by
-    simp [v, i₀]
-  have : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i₀ F) :=
-    Etale.isIso_globalSectionsUpperStarMap_of_henselianRing Λ (IsLocalRing.maximalIdeal A) p i₀
-      (pullback.snd p s₀) (IsPullback.of_hasPullback p s₀) F
-  have : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) (v ≫ i₀) F ≫
-      (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map
-        ((upperStarComp (ModuleCat.{u + 1} Λ) v i₀).hom.app F)) := by
-    rw [globalSectionsUpperStarMap_comp]
-    infer_instance
-  have := IsIso.of_isIso_comp_right
-    (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) (v ≫ i₀) F)
-    ((Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map
-      ((upperStarComp (ModuleCat.{u + 1} Λ) v i₀ (v ≫ i₀) rfl).hom.app F))
-  rw [← hv]
-  exact this
+        (algebraMap A (AlgebraicClosure (IsLocalRing.ResidueField A)))))) F) :=
+  (isIso_globalSectionsUpperStarMap_iff_forget₂ Λ _ F).2
+    (Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_geometricFibre A p _)
 
 end AlgebraicGeometry

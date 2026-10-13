@@ -141,7 +141,7 @@ theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     (hτ : ∃ (t : T) (φ : T.residueField t ⟶ .of k'),
       φ.hom.IsIntegral ∧ Spec.map φ ≫ T.fromSpecResidueField t = τ)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     ∃ (e₁ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
           ((Etale.baseChangeSourceFunctor Λ g (ProjectiveLine S ↘ S) q).obj F) ≃+
         Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
@@ -180,7 +180,7 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
   refine Scheme.isIso_of_isIso_sheafFiber_map _ fun t ↦ ?_
   rw [uliftPointSmallEtale, NatIso.isIso_map_iff ((pointSmallEtale _).uliftSheafFiberIso _)]

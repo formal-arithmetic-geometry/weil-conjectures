@@ -9,7 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
+public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.StalkExtensionByZero
@@ -55,11 +58,14 @@ The six-functor input — composition, base change and the open–closed triangl
   `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_of_shortExact`: blueprint
   `lem-zl-morphism-open-closed-reduction`, the open–closed reductions on the source and on the
   target and the reduction along short exact sequences of coefficients.
-- `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite` and
-  `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`:
-  blueprint `sk-l-dl-general-quasifinite`, parts 1 and 2, and their consequence
-  `AlgebraicGeometry.HasDirectImageWeightBound.of_locallyQuasiFinite`; part 3 is
+- `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`:
+  blueprint `sk-l-dl-general-quasifinite`, part 2, and its consequence
+  `AlgebraicGeometry.HasDirectImageWeightBound.of_locallyQuasiFinite`; part 1 is
+  `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite` in
+  `WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing`, part 3 is
   `WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights`.
+- `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isFinite`: blueprint
+  `lem-zl-finite-pushforward`.
 
 ## References
 
@@ -99,14 +105,6 @@ section UpperStar
 
 variable {W X : Scheme.{u}} [W.Over (Spec (CommRingCat.of k₀))]
   [X.Over (Spec (CommRingCat.of k₀))] (h : W ⟶ X) [h.IsOver (Spec (CommRingCat.of k₀))]
-
-/-- The pullback of a Weil sheaf placed in degree zero is the pullback of the sheaf, placed in
-degree zero. -/
-noncomputable def WeilComplex.upperStarToComplexIso (G : WeilSheaf k₀ l X) :
-    (WeilComplex.upperStar h).obj (WeilSheaf.toComplex.obj G) ≅
-      WeilSheaf.toComplex.obj ((WeilSheaf.upperStar h).obj G) :=
-  ObjectProperty.isoMk _
-    (((ProEtaleWeilSheaf.upperStar k₀ l h).mapDerivedCategorySingleFunctor 0).app G.obj)
 
 variable [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -149,29 +147,6 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-
-attribute [local instance] Compactification.over in
-/-- The direct image with compact support `Rf₀!G` of a Weil sheaf is concentrated in degrees
-`≥ 0`: it is `Rḡ_*` applied to the extension by zero of `G`, a sheaf. -/
-theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf k₀ l X) {n : ℤ}
-    (hn : n < 0) :
-    IsZero ((WeilComplex.homologySheaf n).obj
-      ((WeilComplex.derivedLowerShriek k₀ l f).obj (WeilSheaf.toComplex.obj G))) := by
-  rw [WeilComplex.isZero_homologySheaf_obj_iff]
-  let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
-  have e := (Functor.mapDerivedCategorySingleFunctor
-    (ProEtaleWeilSheaf.extensionByZero k₀ l c.i) 0).app G.obj
-  have h := (ProEtaleWeilSheaf.lowerStar k₀ l c.g).isGE_rightDerivedFunctor_obj_singleFunctor
-    ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).obj G.obj)
-  have : _root_.DerivedCategory.TStructure.t.IsGE
-      ((ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.obj
-        ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i ⋙ _root_.DerivedCategory.singleFunctor _ 0).obj
-          G.obj)) 0 := h
-  have h' := _root_.DerivedCategory.TStructure.t.isGE_of_iso
-    ((ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.mapIso e.symm) 0
-  have h'' : ((WeilComplex.derivedLowerShriek k₀ l f).obj
-      (WeilSheaf.toComplex.obj G)).obj.IsGE 0 := h'
-  exact _root_.DerivedCategory.isZero_of_isGE _ 0 n hn
 
 /-- If `Rʳf₀!G` is mixed of weights at most `w + r` for every `r`, then `Rf₀!G` is mixed of
 weights at most `w` as a complex, its cohomology sheaves vanishing in negative degrees. -/
@@ -291,7 +266,13 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek_of_isOpenImmersion
 
 /-- **Finite pushforward preserves upper weights** (blueprint: `lem-zl-finite-pushforward`): for a
 finite morphism `g : Z ⟶ X` of `k₀`-schemes and a Weil complex `K` on `Z` mixed of weights at
-most `w`, the complex `Rg₀*K = Rg₀!K` is mixed of weights at most `w`. -/
+most `w`, the complex `Rg₀*K = Rg₀!K` is mixed of weights at most `w`.
+
+By the passage from sheaves to complexes it suffices to treat a Weil sheaf `G`, and by the
+distinguished triangles of the short exact sequences of a mixed filtration of `G`, a punctually
+pure quotient `Q` of weight at most `w`. As `g₀*` is exact, `Rg₀*Q` is `g₀*Q` placed in degree
+zero, which is punctually pure of the same weight
+(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.lowerStar_of_isFinite`). -/
 theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isFinite
     {Z X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec
     (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
@@ -299,8 +280,38 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isFinite
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {w : ℝ}
     {K : WeilComplex k₀ l Z} (hK : K.IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.derivedLowerStar g).obj K).IsMixedOfWeightsAtMost ι w :=
-  sorry
+    ((WeilComplex.derivedLowerStar g).obj K).IsMixedOfWeightsAtMost ι w := by
+  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))
+  refine WeilComplex.IsMixedOfWeightsAtMost.map_of_forall_toComplex _ (fun v G hG ↦ ?_) hK
+  rw [WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure] at hG
+  induction hG with
+  | of_isZero hG =>
+    exact fun b ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero
+      ((WeilComplex.homologySheaf b).map_isZero
+        ((WeilComplex.derivedLowerStar g).map_isZero (WeilSheaf.toComplex.map_isZero hG))) _
+  | @of_mono G' G i _ _ hQ ih =>
+    have hS : (ShortComplex.mk i (cokernel.π i) (cokernel.condition i)).ShortExact :=
+      .mk' (ShortComplex.exact_of_g_is_cokernel _ (cokernelIsCokernel i)) inferInstance
+        inferInstance
+    refine WeilComplex.IsMixedOfWeightsAtMost.of_distTriang _
+      ((WeilComplex.derivedLowerStar g).map_distinguished _
+        (WeilSheaf.singleTriangle_distinguished hS)) ih ?_
+    obtain ⟨u, hu, hpure⟩ := hQ
+    intro b
+    obtain ⟨n, rfl⟩ | hb : (∃ n : ℕ, b = n) ∨ b < 0 := by
+      rcases le_or_gt 0 b with h | h
+      · exact Or.inl ⟨b.toNat, (Int.toNat_of_nonneg h).symm⟩
+      · exact Or.inr h
+    · rcases Nat.eq_zero_or_pos n with rfl | hn
+      · exact WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure.2
+          (ObjectProperty.prop_of_iso _
+            (WeilSheaf.homologySheafZeroDerivedLowerStarIso g (cokernel i)).symm
+            (ObjectProperty.le_filtrationClosure _ ⟨u, by simpa using hu,
+              hpure.lowerStar_of_isFinite g⟩))
+      · exact WeilSheaf.isMixedOfWeightsAtMost_of_isZero
+          (WeilSheaf.isZero_higherLowerStar_of_isFinite g _ n hn) _
+    · exact WeilSheaf.isMixedOfWeightsAtMost_of_isZero
+        (WeilSheaf.isZero_homologySheaf_derivedLowerStar_of_neg g _ hb) _
 
 /-- The direct image `i₀*` along a closed immersion `i : Z ⟶ X` carries Weil complexes mixed of
 weights at most `w` to Weil complexes mixed of weights at most `w`, the case of a closed
@@ -616,18 +627,6 @@ end OpenClosed
 
 section QuasiFinite
 
-/-- **Finite direct images are exact** (blueprint: `lemma-weil-pbc-finite-direct-image-exact`,
-with the passage to `ℚ̄_ℓ`-coefficients of `def-weil-pbc-qbar-category`): for a finite morphism
-`p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for
-`r > 0`. -/
-theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
-    [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
-    [IsFinite p] [p.IsOver (Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l T) (r : ℕ) (hr : 0 < r) :
-    IsZero ((WeilSheaf.higherLowerStar p r).obj G) :=
-  sorry
-
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
@@ -677,14 +676,6 @@ theorem WeilSheaf.isZero_higherLowerShriek_and_isMixedOfWeightsAtMost_of_quasiFi
     exact WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isFinite p
       ((WeilComplex.isMixedOfWeightsAtMost_toComplex_iff _).2
         (hF.map (WeilSheaf.extensionByZero j) fun _ _ h ↦ h.extensionByZero j))
-
-/-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the higher direct images
-with compact support `Rʳf₀!` vanish for `r > 0` (blueprint: `sk-l-dl-general-quasifinite`,
-`lem-zl-quasi-finite`, part 1). -/
-theorem isZero_higherLowerShriek_of_quasiFinite (r : ℕ) (hr : 0 < r) (F : WeilSheaf k₀ l X) :
-    IsZero ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) :=
-  (WeilSheaf.isZero_higherLowerShriek_and_isMixedOfWeightsAtMost_of_quasiFinite f
-    F).1 r hr
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
 preserves mixed upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`,

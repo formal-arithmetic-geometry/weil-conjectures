@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.AlgebraicGeometry.BaseChangeField
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.ZetaLinearAlgebra.TraceCup
@@ -79,25 +80,6 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-section BaseChange
-
-variable (k₀ : Type u) [Field k₀] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
-  (k₀' : Type u) [Field k₀'] [Algebra k₀ k₀']
-
-/-- The base change `X ×_{k₀} k₀'` of a `k₀`-scheme `X` along a field extension `k₀ → k₀'`. -/
-noncomputable abbrev Scheme.baseChangeField : Scheme.{u} :=
-  pullback (X ↘ Spec (CommRingCat.of k₀)) (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀')))
-
-/-- The base change `X ×_{k₀} k₀'` is a `k₀'`-scheme through the second projection. -/
-noncomputable instance : (X.baseChangeField k₀ k₀').Over (Spec (CommRingCat.of k₀')) :=
-  ⟨pullback.snd _ _⟩
-
-instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
-    LocallyOfFiniteType (X.baseChangeField k₀ k₀' ↘ Spec (CommRingCat.of k₀')) :=
-  MorphismProperty.IsStableUnderBaseChange.of_isPullback (P := @LocallyOfFiniteType)
-    (IsPullback.of_hasPullback _ _) ‹_›
-
-end BaseChange
 
 /-- `ℓ` stays different from the characteristic after a field extension of `k₀`. -/
 lemma fact_ringChar_ne_of_algebra (k₀ : Type u) [Field k₀] {l : ℕ} [Fact (ringChar k₀ ≠ l)]

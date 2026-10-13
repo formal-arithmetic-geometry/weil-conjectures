@@ -157,7 +157,7 @@ quasi-separated. If the exchange maps are isomorphisms in every degree at every 
 a prime, then they are isomorphisms at every torsion sheaf `F`. By the prime-factor induction
 `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_nsmul_id_eq_zero` they are
 isomorphisms at the sheaves `F[n]` killed by a positive integer; `F` is their filtered colimit
-(`AlgebraicGeometry.Scheme.IsTorsionSheaf.exists_isColimit`), and the source and the target of
+(`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf.exists_isColimit`), and the source and the target of
 the exchange map commute with filtered colimits
 (`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`).
 (blueprint: `lemma-weil-pbc-prime-torsion-devissage`) -/
@@ -165,11 +165,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf (sq : IsPullback e h
     [QuasiCompact g] [QuasiSeparated g]
     (hprime : ∀ r : ℕ, r.Prime → ∀ E : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),
       r • 𝟙 E = 0 → ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q E))
-    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] (q : ℤ) :
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionModuleSheaf F] (q : ℤ) :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
   have : QuasiCompact h := MorphismProperty.of_isPullback sq ‹_›
   have : QuasiSeparated h := MorphismProperty.of_isPullback sq ‹_›
-  obtain ⟨J, _, _, D, c, hc, rfl, hD⟩ := Scheme.IsTorsionSheaf.exists_isColimit Λ F
+  obtain ⟨J, _, _, D, c, hc, rfl, hD⟩ := Scheme.IsTorsionModuleSheaf.exists_isColimit Λ F
   have := Etale.preservesColimitsOfShape_higherDirectImage Λ g q J
   have := Etale.preservesColimitsOfShape_higherDirectImage Λ h q J
   have : PreservesColimitsOfSize.{0, 0} ((p)^*[ModuleCat.{u + 1} Λ]) :=

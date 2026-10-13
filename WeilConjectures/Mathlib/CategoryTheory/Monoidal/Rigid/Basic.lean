@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 
@@ -298,6 +299,54 @@ lemma uncurry_whiskerRight_comp_ihomTensorToIhom {X Z N T : C} (f : T ⟶ (ihom 
     uncurry (f ▷ N ≫ ihomTensorToIhom X Z N) = (α_ _ _ _).inv ≫ uncurry f ▷ N := by
   rw [uncurry_eq, uncurry_eq, MonoidalCategory.whiskerLeft_comp_assoc,
     whiskerLeft_ihomTensorToIhom_ev, associator_inv_naturality_middle_assoc, comp_whiskerRight]
+
+/-- The canonical map `[X, Z] ⊗ N ⟶ [X, Z ⊗ N]` is natural in `X`: for `f : X ⟶ Y` the square
+```
+  [Y, Z] ⊗ N ── ihomTensorToIhom ──→ [Y, Z ⊗ N]
+       │                                  │
+  [f, Z] ▷ N                         [f, Z ⊗ N]
+       ↓                                  ↓
+  [X, Z] ⊗ N ── ihomTensorToIhom ──→ [X, Z ⊗ N]
+```
+commutes. -/
+@[reassoc]
+lemma pre_app_whiskerRight_comp_ihomTensorToIhom {X Y : C} (f : X ⟶ Y) (Z N : C) :
+    (pre f).app Z ▷ N ≫ ihomTensorToIhom X Z N =
+      ihomTensorToIhom Y Z N ≫ (pre f).app (Z ⊗ N) := by
+  apply uncurry_injective
+  rw [uncurry_whiskerRight_comp_ihomTensorToIhom, uncurry_pre_app, uncurry_pre,
+    ihomTensorToIhom, uncurry_curry, associator_inv_naturality_left_assoc, comp_whiskerRight]
+
+/-- The canonical map `[X, Z] ⊗ N ⟶ [X, Z ⊗ N]` is compatible with internal currying: the
+square
+```
+  [K ⊗ A, Z] ⊗ N ─────────── ihomTensorToIhom ───────────→ [K ⊗ A, Z ⊗ N]
+        │                                                          │
+  ihomCurry ▷ N                                                ihomCurry
+        ↓                                                          ↓
+  [A, [K, Z]] ⊗ N ─ ihomTensorToIhom ─→ [A, [K, Z] ⊗ N] ─ [A, ihomTensorToIhom] ─→ [A, [K, Z ⊗ N]]
+```
+commutes. -/
+@[reassoc]
+lemma ihomTensorToIhom_comp_ihomCurry (K A Z N : C) :
+    ihomTensorToIhom (K ⊗ A) Z N ≫ ihomCurry K A (Z ⊗ N) =
+      ihomCurry K A Z ▷ N ≫ ihomTensorToIhom A ((ihom K).obj Z) N ≫
+        (ihom A).map (ihomTensorToIhom K Z N) := by
+  apply uncurry_injective
+  apply uncurry_injective
+  simp only [uncurry_eq, MonoidalCategory.whiskerLeft_comp, Category.assoc, ihomTensorToIhom,
+    ihomCurry, ihom.ev_naturality, whiskerLeft_curry_ihom_ev_app]
+  rw [associator_inv_naturality_right_assoc, whiskerLeft_curry_ihom_ev_app,
+    ← MonoidalCategory.whiskerLeft_comp_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc,
+    Category.assoc, whiskerLeft_curry_ihom_ev_app,
+    associator_inv_naturality_middle_assoc, ← comp_whiskerRight,
+    whiskerLeft_curry_ihom_ev_app, MonoidalCategory.whiskerLeft_comp_assoc]
+  have key {Y : C} (c : Y ⟶ (ihom K).obj Z) :
+      K ◁ c ▷ N ≫ (α_ _ _ _).inv ≫ (ihom.ev K).app Z ▷ N =
+        (α_ _ _ _).inv ≫ (K ◁ c ≫ (ihom.ev K).app Z) ▷ N := by
+    rw [associator_inv_naturality_middle_assoc, comp_whiskerRight]
+  rw [key, whiskerLeft_curry_ihom_ev_app]
+  monoidal
 
 /-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist (the
 categorical core).

@@ -546,9 +546,8 @@ For a perfect point complex `C` and any braiding of `D(R)`, the canonical bidual
 isomorphism for every perfect complex over any ring. -/
 theorem IsPerfect.isIso_toIhomIhomUnit [BraidedCategory (DerivedCategory (ModuleCat.{u} R))]
     {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
-    IsIso (MonoidalClosed.toIhomIhomUnit C) := by
-  obtain ⟨_⟩ := hC.isDualizable
-  exact MonoidalClosed.isIso_toIhomIhomUnit C
+    IsIso (MonoidalClosed.toIhomIhomUnit C) :=
+  MonoidalClosed.isIso_toIhomIhomUnit_of_isDualizable hC.isDualizable
 
 /-- Biduality at the point without a chosen braiding: a perfect point complex `C` is isomorphic
 to its double derived dual `C^∨∨`. This only asserts that some isomorphism exists; it is the

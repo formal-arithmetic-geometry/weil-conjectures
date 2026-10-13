@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 
 /-!
 # Coinduction for sheaves of modules over a constant ring
@@ -31,13 +32,12 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (R : Type w)
   [J.HasSheafCompose (forget₂ (ModuleCat.{w} R) AddCommGrpCat.{w})]
 
 /-- On sheaves, forgetting the `R`-module structure is left adjoint to coinduction
-`A ↦ Hom_ℤ(R, A)`, both computed objectwise. -/
+`A ↦ Hom_ℤ(R, A)`, both computed objectwise: this is the adjunction induced by
+`ModuleCat.forget₂CoinduceAdj` on coefficients. -/
 noncomputable def forget₂CoinduceAdj :
     sheafCompose J (forget₂ (ModuleCat.{w} R) AddCommGrpCat.{w}) ⊣
       sheafCompose J (ModuleCat.coinduce R) :=
-  Adjunction.restrictFullyFaithful ((ModuleCat.forget₂CoinduceAdj R).whiskerRight Cᵒᵖ)
-    (fullyFaithfulSheafToPresheaf J _) (fullyFaithfulSheafToPresheaf J _) (Iso.refl _)
-    (Iso.refl _)
+  sheafComposeAdjunction J (ModuleCat.forget₂CoinduceAdj R)
 
 /-- A monomorphism from the underlying abelian sheaf of a sheaf of `R`-modules `F` to an
 abelian sheaf `A` corresponds to a monomorphism from `F` to the coinduced sheaf of `A`. -/

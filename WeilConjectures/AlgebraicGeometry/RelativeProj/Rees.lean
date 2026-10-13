@@ -140,7 +140,9 @@ lemma flat_presheaf_map {U V : X.affineOpens} (h : U ≤ V) :
   rwa [Scheme.Hom.appLE, Scheme.Hom.id_app, Category.id_comp] at this
 
 /-- The **Rees algebra** `⨁ₙ Iⁿ` of a quasi-coherent ideal, as a quasi-coherent graded algebra:
-over an affine open `U` it is the Rees algebra of `I(U)`. -/
+over an affine open `U` it is the Rees algebra `⨁ₙ I(U)ⁿ` of `I(U)`, with multiplication induced by
+the maps `Iᵐ ⊗ Iⁿ → Iᵐ⁺ⁿ` (`powMulMap`) and unit the degree-zero copy of `𝒪_X`.
+(blueprint: `def-nagata-sheaf-rees-algebra`) -/
 noncomputable def reesData : X.GradedAlgebraData where
   obj U := reesAlgebra (I.ideal U)
   commRing U := inferInstance
@@ -197,6 +199,81 @@ lemma relProjReesIso_hom_blowupMap :
     I.relProjReesIso.hom ≫ I.blowupMap = I.reesData.relProjHom :=
   I.reesData.relProjIsoOfIsPullback_hom_comp _ _ _ _
 
+
+section PowMul
+
+variable (U : X.affineOpens)
+
+/-- The multiplication map `Iᵐ ⊗ Iⁿ → Iᵐ⁺ⁿ` of the powers of a quasi-coherent ideal over an
+affine open `U`, i.e. `I(U)ᵐ ⊗_{Γ(X, U)} I(U)ⁿ → I(U)ᵐ⁺ⁿ`, `x ⊗ y ↦ xy`. These are the
+multiplication maps of the sheaf Rees algebra `reesData`.
+(blueprint: `def-nagata-sheaf-rees-algebra`, multiplication maps) -/
+noncomputable def powMulMap (m n : ℕ) :
+    (I ^ m).ideal U ⊗[Γ(X, U.1)] (I ^ n).ideal U →ₗ[Γ(X, U.1)] (I ^ (m + n)).ideal U :=
+  TensorProduct.lift (LinearMap.mk₂ Γ(X, U.1)
+    (fun x y ↦ ⟨x.1 * y.1, by
+      rw [ideal_pow, Pi.pow_apply, pow_add]
+      exact Ideal.mul_mem_mul x.2 y.2⟩)
+    (fun x x' y ↦ Subtype.ext (add_mul _ _ _))
+    (fun r x y ↦ Subtype.ext (smul_mul_assoc _ _ _))
+    (fun x y y' ↦ Subtype.ext (mul_add _ _ _))
+    (fun r x y ↦ Subtype.ext (mul_smul_comm _ _ _)))
+
+@[simp]
+lemma coe_powMulMap_tmul {m n : ℕ} (x : (I ^ m).ideal U) (y : (I ^ n).ideal U) :
+    (I.powMulMap U m n (x ⊗ₜ y) : Γ(X, U.1)) = x * y :=
+  rfl
+
+/-- The unit `𝒪_X → I⁰` over an affine open `U`. -/
+noncomputable def powZeroUnit : Γ(X, U.1) →ₗ[Γ(X, U.1)] (I ^ 0).ideal U :=
+  LinearMap.codRestrict _ LinearMap.id fun r ↦ by simp
+
+@[simp]
+lemma coe_powZeroUnit (r : Γ(X, U.1)) : (I.powZeroUnit U r : Γ(X, U.1)) = r :=
+  rfl
+
+/-- **Associativity of ideal-power multiplication**: over every affine open `U`, the
+multiplication maps `Iᵐ ⊗ Iⁿ → Iᵐ⁺ⁿ` are associative, i.e. the two maps
+`Iᵐ ⊗ Iⁿ ⊗ Iᵏ → Iᵐ⁺ⁿ⁺ᵏ` agree, and `I⁰ = 𝒪_X` is a two-sided unit. These identities are what
+make `reesData` a graded quasi-coherent algebra.
+(blueprint: `lemma-nagata-sheaf-ideal-powers-assoc`) -/
+theorem powMulMap_assoc (m n k : ℕ) :
+    (Submodule.subtype _ ∘ₗ I.powMulMap U (m + n) k ∘ₗ
+        TensorProduct.map (I.powMulMap U m n) LinearMap.id) =
+      Submodule.subtype _ ∘ₗ I.powMulMap U m (n + k) ∘ₗ
+        TensorProduct.map LinearMap.id (I.powMulMap U n k) ∘ₗ
+        (TensorProduct.assoc Γ(X, U.1) _ _ _).toLinearMap :=
+  TensorProduct.ext_threefold fun x y z ↦ mul_assoc (x : Γ(X, U.1)) y z
+
+/-- The unit laws of the ideal-power multiplication (left unit).
+(blueprint: `lemma-nagata-sheaf-ideal-powers-assoc`) -/
+theorem powMulMap_powZeroUnit_left (n : ℕ) :
+    (Submodule.subtype _ ∘ₗ I.powMulMap U 0 n ∘ₗ
+        TensorProduct.map (I.powZeroUnit U) LinearMap.id) =
+      Submodule.subtype _ ∘ₗ (TensorProduct.lid Γ(X, U.1) _).toLinearMap :=
+  TensorProduct.ext' fun r y ↦ (smul_eq_mul r (y : Γ(X, U.1))).symm
+
+/-- The unit laws of the ideal-power multiplication (right unit).
+(blueprint: `lemma-nagata-sheaf-ideal-powers-assoc`) -/
+theorem powMulMap_powZeroUnit_right (n : ℕ) :
+    (Submodule.subtype _ ∘ₗ I.powMulMap U n 0 ∘ₗ
+        TensorProduct.map LinearMap.id (I.powZeroUnit U)) =
+      Submodule.subtype _ ∘ₗ (TensorProduct.rid Γ(X, U.1) _).toLinearMap :=
+  TensorProduct.ext' fun y r ↦ by
+    simp only [LinearMap.coe_comp, Function.comp_apply, TensorProduct.map_tmul,
+      LinearMap.id_coe, id_eq, Submodule.coe_subtype, coe_powMulMap_tmul, coe_powZeroUnit,
+      LinearEquiv.coe_coe, TensorProduct.rid_tmul, Submodule.coe_smul, smul_eq_mul]
+    exact mul_comm _ _
+
+/-- The degree-`n` piece of `reesData` over `U` is `I(U)ⁿ`, and multiplication of `reesData`
+restricts on homogeneous pieces to the multiplication maps `powMulMap`.
+(blueprint: `def-nagata-sheaf-rees-algebra`) -/
+lemma reesMonomial_mul_reesMonomial {m n : ℕ} (x : (I ^ m).ideal U) (y : (I ^ n).ideal U) :
+    reesMonomial (I.ideal U) x.1 x.2 * reesMonomial (I.ideal U) y.1 y.2 =
+      reesMonomial (I.ideal U) (I.powMulMap U m n (x ⊗ₜ y)).1 (I.powMulMap U m n (x ⊗ₜ y)).2 :=
+  reesMonomial_mul _ _ _ _ _
+
+end PowMul
 end Scheme.IdealSheafData
 
 end AlgebraicGeometry

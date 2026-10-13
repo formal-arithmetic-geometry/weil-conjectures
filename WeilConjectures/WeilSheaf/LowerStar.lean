@@ -225,6 +225,14 @@ variable [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 instance : (WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) φ).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
 
+noncomputable instance : (WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) φ).CommShift ℤ :=
+  ObjectProperty.commShiftLiftFullSubcategory _ _ _ _
+
+/-- The derived pushforward of Weil complexes is a triangulated functor. -/
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) φ).IsTriangulated :=
+  ObjectProperty.isTriangulated_liftFullSubcategory _ _ _ _
+
 instance (i : ℕ) : (WeilSheaf.higherLowerStar (k₀ := k₀) (l := l) φ i).Additive := by
   unfold WeilSheaf.higherLowerStar
   infer_instance

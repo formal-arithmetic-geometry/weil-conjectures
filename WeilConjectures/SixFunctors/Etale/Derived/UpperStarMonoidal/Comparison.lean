@@ -117,6 +117,28 @@ lemma leftDerivedUpperStarTensorIso_hom
       ((leftDerivedUpperStarTensorComparison A g).app K).app M :=
   rfl
 
+variable {A} in
+/-- The isomorphism `Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M` is natural in `K`. -/
+@[reassoc]
+lemma leftDerivedUpperStarTensorIso_hom_naturality_left
+    {K K' : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (f : K ⟶ K')
+    (M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((g)^*[A]).map (((-⊗ᴸ-(Y)[A]).map f).app M) ≫ (leftDerivedUpperStarTensorIso A g K' M).hom =
+      (leftDerivedUpperStarTensorIso A g K M).hom ≫
+        ((-⊗ᴸ-(Z)[A]).map (L((g)^*[A]).map f)).app _ :=
+  NatTrans.congr_app ((leftDerivedUpperStarTensorNatIso A g).hom.naturality f) M
+
+variable {A} in
+/-- The isomorphism `Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M` is natural in `M`. -/
+@[reassoc]
+lemma leftDerivedUpperStarTensorIso_hom_naturality_right
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology A))
+    {M M' : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (h : M ⟶ M') :
+    L((g)^*[A]).map (((-⊗ᴸ-(Y)[A]).obj K).map h) ≫ (leftDerivedUpperStarTensorIso A g K M').hom =
+      (leftDerivedUpperStarTensorIso A g K M).hom ≫
+        ((-⊗ᴸ-(Z)[A]).obj _).map (L((g)^*[A]).map h) :=
+  ((leftDerivedUpperStarTensorNatIso A g).hom.app K).naturality h
+
 /-- For a fixed complex `M` on `Y`, the derived pullback commutes with tensoring by `M`:
 `Lg^*(K ⊗ᴸ M) ≅ Lg^*K ⊗ᴸ Lg^*M`, naturally in `K`. That is, it compares the two functors
 `K ↦ Lg^*(K ⊗ᴸ M)` and `K ↦ Lg^*K ⊗ᴸ Lg^*M` from `D(Y_ét)` to `D(Z_ét)`. This is

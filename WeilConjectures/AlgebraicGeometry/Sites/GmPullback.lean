@@ -32,26 +32,11 @@ compatibility of the projections `V ×_Z X ≅ (V ×_Z Y) ×_Y X ⟶ V ×_Z Y �
 
 @[expose] public section
 
-universe u' u
+universe u
 
 open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry
-
-section
-
-variable (A : Type u') [Category.{u + 1} A]
-
-/-- The components of the composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` of étale
-pushforwards are the restriction maps along the pullback pasting isomorphisms. -/
-lemma Etale.lowerStarComp_hom_app_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
-    (G : Sheaf T.smallEtaleTopology A) (V : R.Etaleᵒᵖ) :
-    ((Etale.lowerStarComp A h₁ h₂).hom.app G).hom.app V =
-      G.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂).hom.app V.unop).op := by
-  simp only [Etale.lowerStarComp, Functor.sheafPushforwardContinuousComp']
-  exact Category.id_comp _
-
-end
 
 namespace Scheme
 

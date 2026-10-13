@@ -309,6 +309,23 @@ lemma isTriangulated_derivedComplete : (derivedComplete J I).IsTriangulated := b
   rw [derivedComplete_eq_rightOrthogonal hϖ hI]
   infer_instance
 
+/-- Every object is derived complete for the zero ideal: the tower `K ⊗ᴸ R/0ⁿ` is constant
+from `n = 1` on, with the reduction maps isomorphisms there, so `K` is its homotopy limit
+(`Pretriangulated.IsHomotopyLimit.of_isIso_π_succ`). -/
+lemma derivedComplete_bot (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
+    derivedComplete J (⊥ : Ideal R) K := by
+  have h (n : ℕ) : IsIso ((Ideal.quotPowCone (⊥ : Ideal R)).π.app (op (n + 1))) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    refine ⟨fun x y hxy ↦ ?_, Submodule.mkQ_surjective _⟩
+    have : (⊥ : Ideal R) ^ (n + 1) = ⊥ := by simp
+    change Submodule.mkQ _ x = Submodule.mkQ _ y at hxy
+    rwa [Submodule.mkQ_apply, Submodule.mkQ_apply, Submodule.Quotient.eq, this,
+      Submodule.mem_bot, sub_eq_zero] at hxy
+  have (n : ℕ) : IsIso ((derivedCompletionCone J ⊥ K).π.app (op (n + 1))) := by
+    dsimp [derivedCompletionCone, quotPowCone, Sheaf.quotPowCone]
+    infer_instance
+  exact IsHomotopyLimit.of_isIso_π_succ _
+
 end Main
 
 end DerivedCategory

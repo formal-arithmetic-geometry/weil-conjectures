@@ -12,6 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 
@@ -531,6 +532,36 @@ theorem exists_finiteType_le_comap_eq_disjoint_support [CompactSpace X] {Z : Sch
     rw [← hJ₂comap]
     exact comap_mono j le_sup_right
   · exact hJ₁disj.mono_right (by rw [coe_support_sup]; exact Set.inter_subset_left)
+
+
+/-- **Gluing finite type ideal sheaves along a quasi-compact open cover**: let `U` and `W` be
+quasi-compact opens of a quasi-separated scheme `X`, and let `I_U ⊆ 𝒪_U`, `I_W ⊆ 𝒪_W` be
+quasi-coherent ideal sheaves of finite type which agree on the overlap `U ∩ W = U ×_X W`. Then
+there is a quasi-coherent ideal sheaf on `X`, of finite type on `U ∪ W`, restricting to `I_U` on
+`U` and to `I_W` on `W`. It is the intersection of the maximal quasi-coherent extensions of
+`I_U` and `I_W`, whose restrictions are computed by flat base change of scheme-theoretic images.
+(blueprint: `lemma-nagata-glue-finite-type-ideals`) -/
+theorem exists_ofFiniteTypeOn_sup_comap_eq {U W : X.Opens} (hU : IsCompact (U : Set X))
+    (hW : IsCompact (W : Set X)) {IU : U.toScheme.IdealSheafData}
+    {IW : W.toScheme.IdealSheafData} (hIU : IU.ofFiniteType) (hIW : IW.ofFiniteType)
+    (h : IU.comap (pullback.fst U.ι W.ι) = IW.comap (pullback.snd U.ι W.ι)) :
+    ∃ I : X.IdealSheafData, I.ofFiniteTypeOn (U ⊔ W) ∧ I.comap U.ι = IU ∧ I.comap W.ι = IW := by
+  have : QuasiCompact U.ι := Scheme.Opens.quasiCompact_ι U hU
+  have : QuasiCompact W.ι := Scheme.Opens.quasiCompact_ι W hW
+  have hU' : (IU.map U.ι ⊓ IW.map W.ι).comap U.ι = IU := by
+    rw [comap_inf_of_isOpenImmersion, comap_map, inf_eq_left,
+      map_comap_of_isPullback IW (IsPullback.of_hasPullback U.ι W.ι).flip,
+      le_map_iff_comap_le]
+    exact h.le
+  have hW' : (IU.map U.ι ⊓ IW.map W.ι).comap W.ι = IW := by
+    rw [comap_inf_of_isOpenImmersion, comap_map, inf_eq_right,
+      map_comap_of_isPullback IU (IsPullback.of_hasPullback U.ι W.ι), le_map_iff_comap_le]
+    exact h.ge
+  refine ⟨IU.map U.ι ⊓ IW.map W.ι, ofFiniteTypeOn.sup ?_ ?_, hU', hW'⟩
+  · rw [ofFiniteTypeOn_iff_comap, hU']
+    exact hIU
+  · rw [ofFiniteTypeOn_iff_comap, hW']
+    exact hIW
 
 end Gluing
 

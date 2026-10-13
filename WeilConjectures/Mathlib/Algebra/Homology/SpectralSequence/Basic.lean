@@ -116,4 +116,39 @@ lemma AbutsTo.of_nonempty_iso (h : E.AbutsTo H) (e : ∀ n, Nonempty (H n ≅ H'
 
 end SpectralSequence
 
+section PageInduction
+
+variable {κ : Type*} {c : ℤ → ComplexShape κ} {r₀ : ℤ}
+
+/-- **Page induction.** A morphism of spectral sequences which is an isomorphism on the first
+page `r₀` is an isomorphism on every page: the `(r + 1)`-th page is the homology of the `r`-th
+one, compatibly with the morphism.
+
+(blueprint: `lem-sp-page-induction`) -/
+theorem SpectralSequence.Hom.isIso_hom {E E' : SpectralSequence C c r₀} (φ : E ⟶ E')
+    (h : IsIso (φ.hom r₀)) (r : ℤ) (hr : r₀ ≤ r) : IsIso (φ.hom r) := by
+  induction r, hr using Int.leInduction with
+  | base => exact h
+  | succ r hr ih =>
+    have : ∀ pq, IsIso ((φ.hom (r + 1)).f pq) := fun pq ↦ by
+      have e := φ.comm r (r + 1) pq
+      have : IsIso (HomologicalComplex.homologyMap (φ.hom r) pq) :=
+        (inferInstance : IsIso ((HomologicalComplex.homologyFunctor C _ pq).map (φ.hom r)))
+      rw [← Iso.inv_comp_eq] at e
+      rw [← e]
+      infer_instance
+    exact HomologicalComplex.Hom.isIso_of_components _
+
+/-- **Page induction for `E∞`.** A morphism of first quadrant spectral sequences which is an
+isomorphism on the `E₂`-page is an isomorphism on the `E∞`-terms.
+
+(blueprint: `lem-sp-page-induction`) -/
+theorem SpectralSequence.Hom.isIso_pageInfinity {E E' : E₂CohomologicalSpectralSequenceNat C}
+    (φ : E ⟶ E') (h : IsIso (φ.hom 2)) (pq : ℕ × ℕ) :
+    IsIso ((φ.hom (pq.1 + pq.2 + 2 : ℕ) (by lia)).f pq) := by
+  have := φ.isIso_hom h (pq.1 + pq.2 + 2 : ℕ) (by lia)
+  infer_instance
+
+end PageInduction
+
 end CategoryTheory

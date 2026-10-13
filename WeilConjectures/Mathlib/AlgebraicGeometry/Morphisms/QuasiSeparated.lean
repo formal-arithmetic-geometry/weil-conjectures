@@ -68,4 +68,11 @@ lemma quasiSeparatedSpace_of_surjective {X Y : Scheme.{u}} (f : X ⟶ Y) [Surjec
   rw [← Set.preimage_inter] at h
   simpa [Set.image_preimage_eq _ f.surjective] using h.image f.continuous
 
+/-- **Intersections of quasi-compact opens**: in a quasi-separated scheme the intersection of two
+quasi-compact open subschemes is quasi-compact. (blueprint: `pqf-lem-qs-intersection-qc`) -/
+lemma Scheme.isCompact_inf_of_quasiSeparatedSpace {X : Scheme.{u}} [QuasiSeparatedSpace X]
+    {U V : X.Opens} (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) :
+    IsCompact ((U ⊓ V : X.Opens) : Set X) :=
+  QuasiSeparatedSpace.inter_isCompact _ _ U.2 hU V.2 hV
+
 end AlgebraicGeometry

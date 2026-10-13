@@ -10,6 +10,10 @@ public import Mathlib.RingTheory.TensorProduct.IsBaseChangeFree
 public import Mathlib.RingTheory.TensorProduct.Quotient
 public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Equifibered
+public import Mathlib.RingTheory.PolynomialAlgebra
+public import Mathlib.RingTheory.TensorProduct.MonoidAlgebra
+public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
 
 /-!
 # Quotients by extended ideals are pushouts
@@ -30,6 +34,9 @@ invariant under an isomorphism of `R` (`CommRingCat.closure_range_union_eq_top_i
 - `CommRingCat.isPushout_quotient`
 - `CommRingCat.IsPushout.bijective_sum_mul`: a `ℤ`-basis is carried to a basis along a pushout
   square of commutative rings over a quotient of `ℤ`.
+- `CommRingCat.polynomialFunctor`, `CommRingCat.laurentFunctor`: the functors `R ↦ R[t]` and
+  `R ↦ R[t, t⁻¹]`; their inclusions of constants are coequifibered
+  (`CommRingCat.coequifibered_polynomialC`, `CommRingCat.coequifibered_laurentC`).
 -/
 
 @[expose] public section
@@ -129,3 +136,65 @@ theorem IsPushout.bijective_sum_mul {R A B X : CommRingCat} {f : R ⟶ A} {g : R
   rfl
 
 end CommRingCat
+
+noncomputable section
+
+open Polynomial LaurentPolynomial
+
+/-! ### Polynomial and Laurent polynomial functors -/
+
+namespace CommRingCat
+
+/-- The functor `R ↦ R[t]`. -/
+@[simps]
+noncomputable def polynomialFunctor : CommRingCat.{u} ⥤ CommRingCat.{u} where
+  obj R := .of R[X]
+  map f := ofHom (mapRingHom f.hom)
+  map_id R := by ext : 1; exact mapRingHom_id
+  map_comp f g := by ext : 1; exact (mapRingHom_comp _ _).symm
+
+/-- The inclusion of constants `R ⟶ R[t]`. -/
+@[simps]
+noncomputable def polynomialC : 𝟭 CommRingCat.{u} ⟶ polynomialFunctor where
+  app R := ofHom C
+  naturality _ _ f := by ext : 1; exact (mapRingHom_comp_C _).symm
+
+lemma coequifibered_polynomialC : polynomialC.{u}.Coequifibered := by
+  intro R S f
+  algebraize [f.hom]
+  let := Polynomial.algebra (R := R) (A := S)
+  exact CommRingCat.isPushout_of_isPushout R S R[X] S[X]
+
+/-- The functor `R ↦ R[t, t⁻¹]`. -/
+@[simps]
+noncomputable def laurentFunctor : CommRingCat.{u} ⥤ CommRingCat.{u} where
+  obj R := .of R[T;T⁻¹]
+  map f := ofHom (LaurentPolynomial.mapRingHom f.hom)
+  map_id R := by ext : 1; exact AddMonoidAlgebra.mapRingHom_id
+  map_comp f g := by ext : 1; exact AddMonoidAlgebra.mapRingHom_comp _ _
+
+/-- The inclusion of constants `R ⟶ R[t, t⁻¹]`. -/
+@[simps]
+noncomputable def laurentC : 𝟭 CommRingCat.{u} ⟶ laurentFunctor where
+  app R := ofHom LaurentPolynomial.C
+  naturality _ _ f := by
+    ext x
+    exact (LaurentPolynomial.mapRingHom_C f.hom x).symm
+
+open scoped AlgebraMonoidAlgebra in
+lemma coequifibered_laurentC : laurentC.{u}.Coequifibered := by
+  intro R S f
+  algebraize [f.hom]
+  exact CommRingCat.isPushout_of_isPushout R S R[T;T⁻¹] S[T;T⁻¹]
+
+/-- The inclusion `R[t] ⟶ R[t, t⁻¹]`. -/
+@[simps]
+noncomputable def polynomialToLaurent : polynomialFunctor.{u} ⟶ laurentFunctor where
+  app R := ofHom toLaurent
+  naturality _ _ f := by
+    ext p
+    exact (LaurentPolynomial.mapRingHom_toLaurent f.hom p).symm
+
+end CommRingCat
+
+end

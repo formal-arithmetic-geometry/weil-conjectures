@@ -9,6 +9,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.StalkPairing
+public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 public import WeilConjectures.ZetaSeries
 
 /-!
@@ -91,14 +92,8 @@ theorem WeilSheaf.trace_frobeniusEnd_stalkAt_congr {F G : WeilSheaf k₀ l X} (e
       (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
     LinearMap.trace (PadicAlgCl l) _ (G.stalkAt s m hs).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd := by
-  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_iso e s m hs
+  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_iso s m hs e
   simpa only [pow_one] using E.trace_frobeniusEnd_pow 1
-
-/-- Isomorphic Weil sheaves have the same trace function. -/
-theorem WeilSheaf.traceFunction_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G) (n : ℕ)
-    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    F.traceFunction n y = G.traceFunction n y :=
-  (WeilSheaf.trace_frobeniusEnd_stalkAt_congr e _ _ _).symm
 
 variable (k₀ l) in
 /-- The stalks `Γ(Spec k̄, s^* ℚ̄_ℓ)` of the constant Weil sheaf are one-dimensional: the unit
@@ -146,17 +141,6 @@ theorem WeilSheaf.traceFunction_adicConstant (n : ℕ)
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     (WeilSheaf.adicConstant k₀ l X).traceFunction n y = 1 :=
   WeilSheaf.trace_frobeniusEnd_stalkAt_adicConstant k₀ l _ _ _
-
-variable {k₀ l X} in
-/-- The trace function of a Weil sheaf, viewed as a Weil complex concentrated in degree zero, is
-its trace function as a sheaf. -/
-theorem WeilComplex.traceFunction_toComplex (F : WeilSheaf k₀ l X) (n : ℕ)
-    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    (WeilSheaf.toComplex.obj F).traceFunction n y = F.traceFunction n y := by
-  rw [WeilComplex.traceFunction_eq_sum (WeilSheaf.toComplex.obj F) {0}
-    (fun j hj ↦ WeilComplex.isZero_homologySheaf_singleComplex (by simpa using hj) F) n y,
-    Finset.sum_singleton, Int.negOnePow_zero, Units.val_one, one_smul]
-  exact WeilSheaf.traceFunction_congr (WeilSheaf.toComplexCompHomologySheafIso.app F) n y
 
 variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

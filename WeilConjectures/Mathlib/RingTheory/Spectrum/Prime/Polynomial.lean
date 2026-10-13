@@ -18,6 +18,10 @@ the fibre of `Spec R[X] ⟶ Spec R` over `p` contains a prime not containing `g`
 (`Polynomial.exists_primeSpectrum_notMem_comap_C_eq`), and only finitely many primes containing
 `g` (`Polynomial.finite_setOf_mem_comap_C_eq`): these correspond to the primes of `κ(p)[X]`
 containing the nonzero image of `g`.
+
+Over a field `K`, a nonzero `g ∈ K[X]` lies in only finitely many primes
+(`Polynomial.finite_setOf_mem_asIdeal`), and is coprime to some monic irreducible polynomial
+(`Polynomial.exists_monic_irreducible_isCoprime`).
 -/
 
 @[expose] public section
@@ -93,5 +97,33 @@ lemma finite_setOf_mem_comap_C_eq {g : R[X]} (p : PrimeSpectrum R)
       ← comap_asIdeal, ← comap_comp_apply, hQe]
     exact hgQ
   · rw [← comap_comp_apply, hQe]
+
+/-- Over a field, a nonzero polynomial `g` lies in only finitely many primes of `K[X]`. -/
+lemma finite_setOf_mem_asIdeal {K : Type*} [Field K] {g : K[X]} (hg : g ≠ 0) :
+    {Q : PrimeSpectrum K[X] | g ∈ Q.asIdeal}.Finite := by
+  refine (finite_setOf_mem_comap_C_eq ⟨⊥, Ideal.isPrime_bot⟩ (by simpa using hg)).subset
+    fun Q hQ ↦ ⟨hQ, ?_⟩
+  ext x
+  simp only [comap_asIdeal, Ideal.mem_comap, Submodule.mem_bot]
+  refine ⟨fun hx ↦ by_contra fun hx0 ↦ Q.isPrime.ne_top
+    (Ideal.eq_top_of_isUnit_mem _ hx (isUnit_C.mpr (Ne.isUnit hx0))), ?_⟩
+  rintro rfl
+  simp
+
+/-- Over a field, every nonzero polynomial `h` is coprime to some monic irreducible polynomial:
+take a monic irreducible factor of `h * X + 1`. -/
+lemma exists_monic_irreducible_isCoprime {K : Type*} [Field K] {h : K[X]} (hh : h ≠ 0) :
+    ∃ P : K[X], P.Monic ∧ Irreducible P ∧ IsCoprime P h := by
+  have hdeg : (h * X + 1).natDegree = h.natDegree + 1 := by
+    rw [← C_1, natDegree_add_C, natDegree_mul_X hh]
+  have hQ0 : h * X + 1 ≠ 0 := fun h0 ↦ by simp [h0] at hdeg
+  have hQ : ¬IsUnit (h * X + 1) := fun hu ↦ by simp [natDegree_eq_zero_of_isUnit hu] at hdeg
+  obtain ⟨q, hq, hqd⟩ := WfDvdMonoid.exists_irreducible_factor hQ hQ0
+  have hu : IsUnit (C q.leadingCoeff⁻¹) :=
+    isUnit_C.mpr (inv_ne_zero (leadingCoeff_ne_zero.mpr hq.ne_zero)).isUnit
+  refine ⟨q * C q.leadingCoeff⁻¹, monic_mul_leadingCoeff_inv hq.ne_zero,
+    (irreducible_mul_isUnit hu).mpr hq, ?_⟩
+  refine (isCoprime_mul_unit_right_left hu _ _).mpr (IsCoprime.of_isCoprime_of_dvd_left ?_ hqd)
+  exact ⟨1, -X, by ring⟩
 
 end Polynomial

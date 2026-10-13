@@ -587,4 +587,56 @@ theorem finrank_eq_of_coe_eq (M : (Spec R).Modules) (p : Submodule R Γ(M, ⊤))
 
 end Scheme.Modules
 
+section AssociatedSections
+
+open TensorProduct
+
+variable {A B : CommRingCat.{u}} [Algebra A B] (M : Type u) [AddCommGroup M] [Module B M]
+  [Module A M] [IsScalarTower A B M]
+
+/-- **Sections of an associated sheaf over a localization.** Let `A → B` be a ring map, `M` a
+`B`-module and `a ∈ A`. The open subscheme `Spec (B ⊗_A A_a)` of `Spec B` is the basic open
+`D(a)`, and the sections of the associated quasi-coherent sheaf `M~` over it are canonically
+`A`-linearly isomorphic to `A_a ⊗_A M`, compatibly with `m ↦ 1 ⊗ m`
+(`tildeSectionsBasicOpenTensorEquiv_apply`).
+
+(blueprint: `pqf-lem-associated-sections-localize`) -/
+noncomputable def tildeSectionsBasicOpenTensorEquiv (a : A) :
+    (ModuleCat.restrictScalars (algebraMap A B)).obj
+        ((modulesSpecToSheaf.obj (tilde (ModuleCat.of B M))).presheaf.obj
+          (.op (PrimeSpectrum.basicOpen (algebraMap A B a)))) ≃ₗ[A]
+      Localization.Away a ⊗[A] M :=
+  let N := (modulesSpecToSheaf.obj (tilde (ModuleCat.of B M))).presheaf.obj
+    (.op (PrimeSpectrum.basicOpen (algebraMap A B a)))
+  letI : Module A N := Module.compHom N (algebraMap A B)
+  haveI : IsScalarTower A B N := ⟨fun x y z ↦ by
+    rw [Algebra.smul_def, mul_smul]
+    rfl⟩
+  let φ := (tilde.toOpen (ModuleCat.of B M) (PrimeSpectrum.basicOpen (algebraMap A B a))).hom
+  haveI : IsLocalizedModule (.powers (algebraMap A B a)) φ :=
+    (fun (P : ModuleCat B) (b : B) ↦ (inferInstance : IsLocalizedModule (.powers b)
+      (tilde.toOpen P (PrimeSpectrum.basicOpen b)).hom)) (ModuleCat.of B M) _
+  haveI := IsLocalizedModule.restrictScalars_powers a φ
+  IsLocalizedModule.linearEquiv (.powers a) (φ.restrictScalars A)
+    (TensorProduct.mk A (Localization.Away a) M 1)
+
+@[simp]
+theorem tildeSectionsBasicOpenTensorEquiv_apply (a : A) (m : M) :
+    tildeSectionsBasicOpenTensorEquiv M a ((tilde.toOpen (ModuleCat.of B M)
+      (PrimeSpectrum.basicOpen (algebraMap A B a))).hom m) = 1 ⊗ₜ m := by
+  let N := (modulesSpecToSheaf.obj (tilde (ModuleCat.of B M))).presheaf.obj
+    (.op (PrimeSpectrum.basicOpen (algebraMap A B a)))
+  let : Module A N := Module.compHom N (algebraMap A B)
+  have : IsScalarTower A B N := ⟨fun x y z ↦ by
+    rw [Algebra.smul_def, mul_smul]
+    rfl⟩
+  let φ := (tilde.toOpen (ModuleCat.of B M) (PrimeSpectrum.basicOpen (algebraMap A B a))).hom
+  have : IsLocalizedModule (.powers (algebraMap A B a)) φ :=
+    (fun (P : ModuleCat B) (b : B) ↦ (inferInstance : IsLocalizedModule (.powers b)
+      (tilde.toOpen P (PrimeSpectrum.basicOpen b)).hom)) (ModuleCat.of B M) _
+  have := IsLocalizedModule.restrictScalars_powers a φ
+  exact IsLocalizedModule.linearEquiv_apply _ _ _ m
+
+end AssociatedSections
+
 end AlgebraicGeometry

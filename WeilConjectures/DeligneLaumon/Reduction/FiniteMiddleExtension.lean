@@ -6,12 +6,14 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
-public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
-public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
+public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.LisseLocus
+public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.MiddleExtension
@@ -28,7 +30,7 @@ because `C` has no isolated points, so `E ≅ j'_* j'^* E` for the inclusion `j'
 `f_* E ≅ f_* j'_* j'^* E ≅ (f ∘ j')_* j'^* E = (j ∘ f')_* j'^* E ≅ j_* f'_* j'^* E`.
 
 Hence `R⁰f₀! E ≅ f_* E` is the direct image `j_* H` of the lisse sheaf `H = f'_* j'^* E`, and the
-endpoint estimates on `𝔸¹` of `WeilConjectures.DeligneLaumon.AffineLine.Endpoints` apply to it.
+endpoint estimates on `𝔸¹` of `WeilConjectures.WeilSheaf.CurveEndpoints` apply to it.
 
 ## Main statements
 
@@ -118,11 +120,6 @@ namespace WeilSheaf
 
 variable {X Y Z : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
-
-/-- A Weil sheaf isomorphic to a lisse Weil sheaf is lisse. -/
-theorem IsLisse.of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G) (hF : F.IsLisse) : G.IsLisse :=
-  ProEtale.IsAdicLisseSheaf.of_iso
-    ((ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _).mapIso e) hF
 
 /-- The composition isomorphism `ψ_* φ_* F ≅ (φ ≫ ψ)_* F` of pushforwards of Weil sheaves. -/
 noncomputable def lowerStarCompObjIso (φ : X ⟶ Y) (ψ : Y ⟶ Z)

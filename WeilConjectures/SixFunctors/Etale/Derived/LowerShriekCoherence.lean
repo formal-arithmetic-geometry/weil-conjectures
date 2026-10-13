@@ -502,12 +502,12 @@ laws follow from those of the cartesian comparison. -/
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The pushforward along any morphism of schemes preserves injective objects, being right
 adjoint to the exact pullback. -/
-lemma preservesInjectiveObjects_lowerStar [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+lemma preservesInjectiveObjects_lowerStar_of_abelian [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
     {T S : Scheme.{u}} (h : T ⟶ S) : ((h)_*[A]).PreservesInjectiveObjects :=
   Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
     (Etale.upperStarLowerStarAdjunction A h)
 
-attribute [local instance] preservesInjectiveObjects_lowerStar
+attribute [local instance] preservesInjectiveObjects_lowerStar_of_abelian
 
 omit [HasSmallSiteSheafify A] in
 /-- The associativity law for the composition isomorphisms of the bounded below derived

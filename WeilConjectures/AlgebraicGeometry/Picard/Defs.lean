@@ -176,7 +176,7 @@ sheafification of the Picard presheaf `T ↦ Pic (X_T)`, so that on the level of
 The fppf topology on the category `Over S` of schemes over `S` is the localization
 `Scheme.fppfTopology.over S` of the fppf topology on all schemes.
 
-(blueprint: `sk-def-picard-pic`) -/
+(blueprint: `sk-def-picard-pic`, `def-sc-picard-functor`) -/
 noncomputable def picardFunctor (f : X ⟶ S) :
     Sheaf (Scheme.fppfTopology.over S) (Type (u + 1)) :=
   (presheafToSheaf (Scheme.fppfTopology.over S) (Type (u + 1))).obj (picardPresheaf f)
