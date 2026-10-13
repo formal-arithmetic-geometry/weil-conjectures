@@ -9,28 +9,55 @@
  },
  "proof": [
   {
-   "text": "Choose an affine neighbourhood V of x inside U. Its ring is the filtered colimit of its finitely generated Z-subalgebras, which are Noetherian. Restrict f and F to V and apply the single-degree specialization of Noetherian approximation to descend the finite-presentation morphism and sheaf. Preserve the cartesian comparison and the ordinary tensor-pullback identification.",
+   "text": "Choose an affine neighbourhood V of x in U. Write its section ring as the filtered colimit of its finitely generated integer subalgebras. Spec preserves this limit, and transport its cone point through V.isoSpec. Restrict f and F to the original pullback over V; relative flatness is preserved. Descend the finitely presented restricted morphism using Scheme.exists_isPullback_of_finitePresentation.",
    "uses": [
-    "lem-pc-noetherian-approximation-data"
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lemma-nagata-finite-presentation-descends",
+    "lem-pc-relatively-flat-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Increase the stage to make the descended morphism proper, using eventual properness; base change preserves the finite presentation, relative flatness and the identification of the module. Set T to the stage spectrum and W to its total open; transport through the canonical total-open isomorphism. T is affine and W compact Noetherian. Y is Noetherian since it is quasi-compact and locally of finite type over W. Return the cartesian square and module identification.",
+   "text": "Apply eventual properness to the descended morphism and the identity of its base. Its limit base change is proper by the unique pullback isomorphism. Pull back to this later proper stage, and paste the cartesian comparison squares.",
    "uses": [
-    "lem-weil-pbc-eventually-proper"
+    "lem-weil-pbc-eventually-proper",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the restricted module to the canonical pullback model using the inverse of the unique scheme isomorphism. Tensor pullback preserves finite presentation. On affine sections its relative flatness is preserved because the isomorphism identifies the section rings and module actions. Apply fixed-model flat-module descent to get a later flat finitely presented module. Properness of the source morphism survives this base change. Compose tensor-pullback composition and identity isomorphisms to recover the original restricted F.",
+   "uses": [
+    "lem-pc-flat-module-on-later-stage",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take T to be the later spectrum and W its total open. Pull the proper source and its module back along T.topIso.hom, and lift the comparison to this pullback. Cartesian pasting proves the required square, and tensor-pullback composition proves the final sheaf isomorphism. W is compact and Noetherian, and Y is Noetherian since its morphism to W is quasi-compact and locally of finite type.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-pc-tensor-pullback-finite-presentation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-noetherian-approximation-data",
-  "lem-weil-pbc-eventually-proper"
+  "def-pc-fibre-product",
+  "lem-pc-flat-module-on-later-stage",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-weil-pbc-eventually-proper",
+  "lemma-nagata-finite-presentation-descends",
+  "lemma-nagata-noetherian-inverse-system-affine"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tag 0A1H approximation paragraph specialized to a single module"
+  "document": "Stacks Project, limits.tex",
+  "place": "Tags 01ZM, 01ZR, 05LY and 081F; proper scheme descent first, then fixed-model flat-module descent"
  },
  "mathlib_searches": [
   {
@@ -108,9 +135,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T111936-L-3067908",
+  "landing": "20261013T123544-L-3711295",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

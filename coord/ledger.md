@@ -12455,3 +12455,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:35 L: merged deliver/E2/Sheaf.AlgebraicGeometry.RightAdjointMateSuccessiveBaseChange (stage 3; reviewer PASS; first push; landing 20261013T123543-L-3710886 (interface); batch 20261013T123540; modules 3; new nodes 2)
 - 12:35 L: merged deliver/F1/Sheaf.AlgebraicGeometry.RightAdjointMateSchemeIsoTransport (stage 3; reviewer PASS; first push; landing 20261013T123543-L-3710992 (interface); batch 20261013T123540; modules 3; new nodes 2)
 - 12:35 L: merged deliver/H3/Sheaf.AlgebraicGeometry.IdealPowerTorsionFreeSectionCarrier (stage 3; reviewer PASS; first push; landing 20261013T123544-L-3711186 (interface); batch 20261013T123540; modules 3; new nodes 2)
+- 12:35 L: merged deliver/H3/Sheaf.AlgebraicGeometry.ProperFlatSingleNoetherianDescent (stage 3; reviewer PASS; first push; landing 20261013T123544-L-3711295 (interface); batch 20261013T123540; modules 2; new nodes 1)
