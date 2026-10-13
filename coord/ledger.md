@@ -13210,3 +13210,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:56 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.MixedSectionsCompositionKInjective (stage 3; reviewer PASS; first push; landing 20261013T165648-L-1810468 (interface); batch 20261013T165635; modules 3; new nodes 2)
 - 16:56 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison (stage 3; reviewer PASS; first push; landing 20261013T165649-L-1810710 (interface); batch 20261013T165635; modules 4; new nodes 3)
 - 16:56 L: merged deliver/R3/Sheaf.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso (stage 3; reviewer PASS; first push; landing 20261013T165649-L-1810847 (interface); batch 20261013T165635; modules 3; new nodes 2)
+- 16:56 L: merged deliver/S4/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentCore (stage 3; reviewer PASS; first push; landing 20261013T165649-L-1810955 (proof); batch 20261013T165635; modules 1; new nodes 0)
