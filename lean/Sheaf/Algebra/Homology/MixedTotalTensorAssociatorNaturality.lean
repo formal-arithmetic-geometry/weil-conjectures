@@ -99,6 +99,9 @@ theorem mixedChainAssociator_summand :
   exact ι_mapBifunctorAssociatorX_hom (mixedModuleAssociator R A)
     P N F (.up ℤ) (.up ℤ) (.up ℤ) i j k ((i + j) + k) rfl
 
+set_option maxHeartbeats 400000 in
+-- Elaborating the nested total bifunctors and their coproduct instances needs extra heartbeats.
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical mixed total-complex associator is natural in all three complexes.
 Source: Stacks Project, Tag 0BYJ, associativity of total tensor products.
 (blueprint: lem-pc-mixed-total-tensor-associator-naturality)
@@ -120,5 +123,71 @@ theorem mixedChainAssociator_naturality :
     let Uc := Functor.uncurry.obj (Functor.uncurry.obj (bifunctorComp₂₃ T S))
     ∀ X Y (f : X ⟶ Y),
       Lc.map f ≫ (mixedChainAssociator R A Y.1.1 Y.1.2 Y.2).hom =
-        (mixedChainAssociator R A X.1.1 X.1.2 X.2).hom ≫ Uc.map f := by sorry
+        (mixedChainAssociator R A X.1.1 X.1.2 X.2).hom ≫ Uc.map f := by
+  intro T S Lc Uc X Y f
+  have : ∀ (P N : CochainComplex (ModuleCat.{u} A) ℤ)
+      (F : CochainComplex (ModuleCat.{u} R) ℤ),
+      HasGoodTrifunctor₁₂Obj (curriedTensor (ModuleCat.{u} A))
+        (ModuleCat.mixedTensor (algebraMap R A)) P N F (.up ℤ) (.up ℤ) := by
+    intro P N F s t
+    change Limits.PreservesColimit _
+      (tensorRight ((ModuleCat.extendScalars (algebraMap R A)).obj (F.X t)))
+    exact Limits.preservesColimit_of_natIso _ (BraidedCategory.tensorLeftIsoTensorRight _)
+  have : ∀ (P N : CochainComplex (ModuleCat.{u} A) ℤ)
+      (F : CochainComplex (ModuleCat.{u} R) ℤ),
+      HasGoodTrifunctor₂₃Obj (curriedTensor (ModuleCat.{u} A))
+        (ModuleCat.mixedTensor (algebraMap R A)) P N F (.up ℤ) (.up ℤ) (.up ℤ) := by
+    intro P N F s t
+    infer_instance
+  -- Test the two chain maps on each triple coproduct summand.
+  ext n : 1
+  apply mapBifunctor₁₂.hom_ext
+  intro i j k h
+  dsimp [Lc, Uc, T, S, ModuleCat.mixedTotalTensor,
+    bifunctorComp₁₂, bifunctorComp₁₂Obj, bifunctorComp₂₃, bifunctorComp₂₃Obj,
+    Functor.map₂CochainComplex, Functor.map₂HomologicalComplex]
+  simp only [Category.assoc]
+  erw [ι_mapBifunctorAssociatorX_hom_assoc (mixedModuleAssociator R A)
+    X.1.1 X.1.2 X.2 (.up ℤ) (.up ℤ) (.up ℤ) i j k n h]
+  erw [mapBifunctor₁₂.ι_eq _ _ X.1.1 X.1.2 X.2 (.up ℤ) (.up ℤ)
+    i j k (i + j) n rfl h,
+    mapBifunctor₂₃.ι_eq _ _ X.1.1 X.1.2 X.2 (.up ℤ) (.up ℤ) (.up ℤ)
+      i j k (j + k) n rfl (by simpa [ComplexShape.r, ComplexShape.π, add_assoc] using h)]
+  simp only [Category.assoc, ι_mapBifunctorMap_assoc, HomologicalComplex.id_f]
+  simp only [ModuleCat.mixedTensor, Functor.comp_obj, Functor.whiskeringLeft_obj_obj,
+    curriedTensor_obj_obj, Functor.comp_map, Functor.whiskeringLeft_obj_map,
+    Functor.whiskerLeft_app, curriedTensor_map_app, CategoryTheory.Functor.map_id,
+    curriedTensor_obj_map, whiskerLeft_id, Functor.whiskerLeft_id', NatTrans.id_app,
+    Category.id_comp]
+  simp only [← comp_whiskerRight_assoc, ι_mapBifunctorMap_assoc]
+  simp only [HomologicalComplex.id_f]
+  simp only [curriedTensor_obj_obj, curriedTensor_map_app, curriedTensor_obj_map,
+    whiskerLeft_id, ι_mapBifunctorMap, id_f, CategoryTheory.Functor.map_id, NatTrans.id_app,
+    Category.id_comp, comp_whiskerRight, whisker_assoc, Category.assoc,
+    mixedModuleAssociator, ModuleCat.mixedTensor, NatIso.ofComponents_hom_app]
+  -- Move the third component past the inner inclusion, then rebracket.
+  rw [← whisker_exchange_assoc
+    (ιMapBifunctor Y.1.1 Y.1.2 (curriedTensor _) (.up ℤ) i j (i + j) rfl)
+    ((ModuleCat.extendScalars (algebraMap R A)).map (f.2.f k))]
+  erw [← reassoc_of% (mapBifunctor₁₂.ι_eq (curriedTensor (ModuleCat.{u} A))
+    (ModuleCat.mixedTensor (algebraMap R A)) Y.1.1 Y.1.2 Y.2 (.up ℤ) (.up ℤ)
+    i j k (i + j) n rfl h)]
+  erw [ι_mapBifunctorAssociatorX_hom (mixedModuleAssociator R A)
+    Y.1.1 Y.1.2 Y.2 (.up ℤ) (.up ℤ) (.up ℤ) i j k n h]
+  -- Move the first component past the inclusion on the other side.
+  rw [whisker_exchange_assoc (f.1.1.f i)
+    (ιMapBifunctor X.1.2 X.2 (ModuleCat.mixedTensor (algebraMap R A))
+      (.up ℤ) j k (j + k) rfl)]
+  simp only [← whiskerLeft_comp_assoc, ι_mapBifunctorMap_assoc]
+  simp only [curriedTensor_obj_obj, prod_Hom, tensor_whiskerLeft, ModuleCat.mixedTensor,
+    mixedModuleAssociator, NatIso.ofComponents_hom_app, Category.assoc,
+    Iso.inv_hom_id_assoc, Functor.comp_obj, Functor.whiskeringLeft_obj_obj,
+    whiskerRight_tensor, Functor.comp_map, Functor.whiskeringLeft_obj_map,
+    Functor.whiskerLeft_app, curriedTensor_map_app, id_f, CategoryTheory.Functor.map_id,
+    curriedTensor_obj_map, whiskerLeft_id, ι_mapBifunctorMap, Functor.whiskerLeft_id',
+    NatTrans.id_app, Category.id_comp, whiskerLeft_comp, Iso.hom_inv_id_assoc]
+  erw [mapBifunctor₂₃.ι_eq (curriedTensor (ModuleCat.{u} A))
+    (ModuleCat.mixedTensor (algebraMap R A)) Y.1.1 Y.1.2 Y.2 (.up ℤ) (.up ℤ) (.up ℤ)
+    i j k (j + k) n rfl (by simpa [ComplexShape.r, ComplexShape.π, add_assoc] using h)]
+  rfl
 end DerivedCategory
