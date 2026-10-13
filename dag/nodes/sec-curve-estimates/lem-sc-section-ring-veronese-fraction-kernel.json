@@ -16,25 +16,28 @@
  ],
  "proof": [
   {
-   "text": "Write T_n for the explicit numerator isomorphism of [def-sc-section-ring-veronese-fraction-map]. On each open set trivializing L, both the section-ring product and tensor-power transition multiply coefficient functions in the structure sheaf; the tensor-power isomorphisms preserve powers of the chosen generator. Glue to obtain a_(n+b)(transition_n,b(t))=a_n(t)*s^b, where a_n(t)=of_(nd)(T_n inverse(t)). The same local calculation identifies global-function scalar multiplication with multiplication by the degree-zero ring element. Every transition difference and every scalar multiple maps to zero; additivity kills their whole submodule span.",
+   "text": "Apply the numerator transition identity [lem-sc-section-ring-veronese-numerator-transition]. The ambient localization equality criterion shows that each transition difference maps to zero, as does every scalar multiple, since transition maps are linear. Use Submodule.span_induction with predicate that every scalar multiple maps to zero: addition uses additivity of the fraction map, and the scalar step uses multiplication of scalars. Specializing to scalar one proves the relation submodule lies in the additive kernel. No span/additive-closure comparison theorem or scalar-to-section-ring coherence lemma is needed.",
    "uses": [
     "def-sc-section-ring-veronese-fraction-map",
-    "def-sc-section-fraction-presentation"
+    "def-sc-section-fraction-presentation",
+    "lem-sc-section-ring-veronese-numerator-transition"
    ],
    "elementary": false
   },
   {
-   "text": "For a finite-support numerator family z in the kernel, choose N at least every support index. Subtract the transition difference from each index n to N, so z is congruent modulo the relation submodule to a single generator of degree N with numerator t. Its image a_N(t)/s^N is zero. The localization equality criterion gives k>=0 such that s^k*a_N(t)=0. The coherence identity and injectivity of the degree-(N+k)d injection and numerator isomorphism show that transition_N,k(t)=0. The degree N to N+k relation then puts the single generator, hence z, in the relation submodule. Empty support, d=0 and nilpotent s require no changes. This proves the reverse kernel inclusion.",
+   "text": "Direct-sum induction reduces each finite sum modulo the relation span to one generator. For two generators use common degree n+m, transitioning by m and n respectively, and add their numerators. If this generator maps to zero, the ambient localization supplies a power s^b annihilating its ring numerator. The numerator transition identity and injectivity of the graded injection and the inverse numerator isomorphism show its transition is zero. The corresponding transition difference is the original generator, proving the reverse kernel inclusion.",
    "uses": [
     "def-sc-section-ring-veronese-fraction-map",
-    "def-sc-section-fraction-presentation"
+    "def-sc-section-fraction-presentation",
+    "lem-sc-section-ring-veronese-numerator-transition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-sc-section-ring-veronese-fraction-map",
   "def-sc-section-fraction-presentation",
-  "def-sc-section-ring-veronese-fraction-map"
+  "lem-sc-section-ring-veronese-numerator-transition"
  ],
  "proof_origin": {
   "by": "agent",
@@ -123,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-1177c",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T040759-L-3952109",
+  "landing": "20261013T065119-L-901696",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with all four nodes, the declared statement repair, and the sourced kernel argument; four modules and sole direct importer compile cleanly, original caller fails as reported, adaptation is exactly one forced line, and axioms match the named kernel hole."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-section-ring-veronese-numerator-transition",
+ "kind": "statement",
+ "title": "Veronese numerator compatibility with tensor-power transitions",
+ "statement": "Let X be a scheme [def-pc-scheme], L an invertible O_X-module [def-sc-invertible-module], d,n,b natural numbers, and s a degree-d element of the section ring of L [def-sc-invertible-section-ring]. For a section t of O_X tensor (L tensorPow d) tensorPow n, define a_n(t) as the underlying section-ring element of sectionRingVeroneseNumerator [def-sc-section-ring-veronese-fraction-map]. Then a_(n+b)(mulTensorPowSection(homOfGlobalSection(L tensorPow d,s_d),O_X,n,b)(t))=a_n(t)*s^b, with the transition from [def-sc-section-fraction-presentation]. No nonvanishing, reducedness, or regularity hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-sc-section-fraction-presentation",
+  "def-sc-section-ring-veronese-fraction-map"
+ ],
+ "proof": [
+  {
+   "text": "Cover X by opens with a free generator of L. Induct on tensorPowAddIso and tensorPowMulIso to show that their maps preserve the corresponding tensor-power generators; the unitors remove the tensor-unit generator. The inverse numerator identification consequently preserves coefficient functions.",
+   "uses": [
+    "def-sc-section-ring-veronese-fraction-map",
+    "def-sc-section-fraction-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Locally write s=c times the degree-d generator and the numerator as f times its tensor-unit/tensor-power generator. homOfGlobalSection sends 1 to s and its b-th tensor power sends 1 to c^b times the degree-b*d generator. mulTensorPowSection and section-ring multiplication therefore both give coefficient f*c^b in degree (n+b)*d. Naturality identifies these calculations with restrictions; sheaf separatedness glues equality. This also proves the identity for d=0, n=0, b=0, or zero s, since no division occurs.",
+   "uses": [
+    "def-sc-section-ring-veronese-fraction-map",
+    "def-sc-section-fraction-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-section-ring-veronese-fraction-map",
+  "def-sc-section-fraction-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor power section ring multiplication compatible with Veronese tensor power isomorphism",
+   "results": "Service unavailable: Internal Server Error. No verdict available.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor power isomorphism preserves multiplication of sections in the graded section ring",
+   "results": "TensorPower.gMul and GradedTensorProduct.auxEquiv_mul concern algebraic tensor products, not the explicit scheme-module tensorPowMulIso and section-ring identification. No matching transition identity.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPowMulIso|mulTensorPowSection in Mathlib; numerator.*transition in both library roots and dag/nodes; blueprint_refs search Veronese numerator transition",
+   "results": "No occurrences of these scheme-module operations in Mathlib. The library defines the operations but contains no Veronese numerator transition identity. Blueprint search found no matching blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionKernel",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-section-ring-veronese-fractions",
+   "place": "Tensor-power coherence identity in the explicit kernel computation, first paragraph",
+   "via": [
+    "lem-sc-section-ring-veronese-fraction-kernel",
+    "lem-sc-section-ring-veronese-fractions-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionRingVeroneseNumeratorTransition",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionRingVeroneseNumeratorTransition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseNumerator_transition",
+  "statement": "theorem sectionRingVeroneseNumerator_transition\n    (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d) (n b : ℕ)\n    (t : Γ((𝟙_ X.Modules) ⊗ (L.tensorPow d).tensorPow n, ⊤)) :\n    (sectionRingVeroneseNumerator X L d (n + b)\n      ((mulTensorPowSection (homOfGlobalSection (L.tensorPow d) (s.val d))\n        (𝟙_ X.Modules) n b).app ⊤ t)).val =\n      (sectionRingVeroneseNumerator X L d n t).val * s.val ^ b",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T065119-L-901696",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T065119-L-901696",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
