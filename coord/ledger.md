@@ -12902,3 +12902,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:57 L: merged deliver/S3/Sheaf.AlgebraicGeometry.KoszulSelfExtConormalCompatibleCover (stage 3; reviewer PASS; first push; landing 20261013T145729-L-752165 (interface); batch 20261013T145721; modules 3; new nodes 2)
 - 14:57 L: merged deliver/S3/Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverIndEtaleCharts (stage 3; reviewer PASS; first push; landing 20261013T145729-L-752344 (interface); batch 20261013T145721; modules 4; new nodes 3)
 - 14:57 L: merged deliver/U2/Sheaf.AlgebraicGeometry.EquidimensionalFibreOpenPartition (stage 3; reviewer PASS; first push; landing 20261013T145730-L-752517 (interface); batch 20261013T145721; modules 3; new nodes 2)
+- 14:57 L: merged deliver/U2/Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension (stage 3; reviewer PASS; first push; landing 20261013T145730-L-752720 (proof); batch 20261013T145721; modules 1; new nodes 0)

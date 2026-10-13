@@ -17,7 +17,24 @@
  ],
  "proof": [
   {
-   "text": "Regard O as an open subscheme locally of finite type over k. Choose an affine neighbourhood A of x in O. The components of A through x correspond to the components of O through x by intersection. Their dimensions remain n by Stacks 0A21 (3). Part (5) of the same source computes local dimension at x as the maximum of the dimensions of the components through x. At least one such component exists; all dimensions are n, so the maximum is n. The open-subspace equality transports this dimension from A to O and Y. The affine-neighbourhood argument needs only local finite type; empty O has no x.",
+   "text": "In the sober open subspace O, write its topological dimension as the supremum of heights for the specialization order, equivalently the dimensions of closures of points. Each closure embeds into an irreducible component through the point. Every component has dimension n, so dim O <= n. Monotonicity under subspace embeddings gives dim U <= n for every open neighbourhood U.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in O, choose its irreducible component C and construct the closed subscheme R of O from the vanishing ideal of C (Mathlib IdealSheafData.vanishingIdeal, subscheme, subschemeι). The closed immersion i has range C, so R is homeomorphic to C and irreducible. The composite R -> O -> Y -> Spec k is locally of finite type. For a neighbourhood U of x, its inverse image V in R is nonempty, since x belongs to C. Apply dimension_locally_algebraic to R and V: dim V = dim R = dim C = n. The restricted embedding V -> U then gives n <= dim U.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All open neighbourhoods of x in O have dimension n, so topologicalKrullDimAt_eq_of_forall computes their infimum as n. IsOpen.topologicalKrullDimAt_eq transports this value from O to Y.",
    "uses": [
     "lem-weil-pbc-dimension-at-point-open-subspace"
    ],
@@ -25,12 +42,16 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-dimension-at-point-open-subspace"
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme"
  ],
  "proof_origin": {
-  "by": "R4 second reader",
+  "by": "U2 second reader",
   "document": "Stacks Project",
-  "place": "Tag 0A21 (3), (5)"
+  "place": "Tag 0A21 (3); component reduction and dimension monotonicity"
  },
  "mathlib_searches": [
   {
@@ -113,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T142902-L-499957",
-  "kind": "interface",
+  "landing": "20261013T145730-L-752720",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
