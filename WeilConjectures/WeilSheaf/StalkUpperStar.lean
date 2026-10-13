@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapPow
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import Mathlib.FieldTheory.IsAlgClosed.Spectrum
 public import WeilConjectures.WeilSheaf.StalkCharpoly
@@ -54,24 +55,6 @@ lemma globalSectionsTransport_comm_of_upperStar {X Y P : Scheme.{u}} (j : X ⟶ 
       (by simp : (τ ≫ (Iso.refl _).hom) = (Iso.refl _).hom ≫ τ)]
 
 end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.Scheme.Hom
-
-variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)}
-  {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f)
-
-/-- The base change `φ̄` commutes with the powers of the geometric Galois Frobenii. -/
-theorem geometricFiberMap_comp_geometricGaloisFrobenius_pow (m : ℕ) :
-    geometricFiberMap φ h ≫ (g.geometricGaloisFrobenius ^ m).hom =
-      (f.geometricGaloisFrobenius ^ m).hom ≫ geometricFiberMap φ h := by
-  induction m with
-  | zero => exact (Category.comp_id _).trans (Category.id_comp _).symm
-  | succ m ih =>
-    rw [← CategoryTheory.Aut.pow_hom_comp_pow_hom, ← CategoryTheory.Aut.pow_hom_comp_pow_hom,
-      pow_one, pow_one, ← Category.assoc, geometricFiberMap_comp_geometricGaloisFrobenius,
-      Category.assoc, ih, Category.assoc]
-
-end AlgebraicGeometry.Scheme.Hom
 
 namespace AlgebraicGeometry.Scheme
 
