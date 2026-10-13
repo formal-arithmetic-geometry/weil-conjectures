@@ -7,6 +7,8 @@ module
 
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Sheaf.LinearAlgebra.Matrix.CauchyBinet
+import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-!
 # Nonzero maximal minors of injective matrices over fields
@@ -49,6 +51,33 @@ theorem exists_strictMono_submatrix_det_ne_zero_of_mulVec_injective
     (hinj : Function.Injective B.mulVec) :
     n ≤ p ∧ ∃ r : Fin n → Fin p, StrictMono r ∧
       (B.submatrix r id).det ≠ 0 ∧ (n = 0 → (B.submatrix r id).det = 1) := by
-  sorry
+  classical
+  obtain ⟨g, hg⟩ := B.toLin'.exists_leftInverse_of_injective
+    (LinearMap.ker_eq_bot.mpr hinj)
+  let C : Matrix (Fin n) (Fin p) K := LinearMap.toMatrix' g
+  have hCB : C * B = 1 := by
+    simpa only [LinearMap.toMatrix'_comp, LinearMap.toMatrix'_toLin',
+      LinearMap.toMatrix'_id] using congrArg LinearMap.toMatrix' hg
+  have hsum := (cauchy_binet n p C B).1
+  rw [hCB, det_one] at hsum
+  have hex : ∃ S : {S : Finset (Fin p) // S.card = n},
+      (B.submatrix (S.val.orderEmbOfFin S.property) id).det ≠ 0 := by
+    by_contra h
+    push Not at h
+    have hz : (∑ S : {S : Finset (Fin p) // S.card = n},
+        (C.submatrix id (S.val.orderEmbOfFin S.property)).det *
+          (B.submatrix (S.val.orderEmbOfFin S.property) id).det) = 0 := by
+      apply Finset.sum_eq_zero
+      intro S _
+      rw [h S, mul_zero]
+    exact one_ne_zero (hsum.trans hz)
+  obtain ⟨S, hS⟩ := hex
+  have hnp : n ≤ p := by
+    simpa only [S.property, Fintype.card_fin] using Finset.card_le_univ S.val
+  refine ⟨hnp, S.val.orderEmbOfFin S.property,
+    (S.val.orderEmbOfFin S.property).strictMono, hS, ?_⟩
+  intro hn
+  subst n
+  simp
 
 end Matrix
