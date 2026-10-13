@@ -21,46 +21,38 @@
  "unit": "sk-thm-picard-coherence",
  "proof": [
   {
-   "text": "Apply the generic-point ideal inclusion of Tag 01YE to G and the annihilation hypothesis. It gives a coherent ideal, r summands, and a monomorphism invertible near the generic point. This result is used mathematically; the present library import route through cohomological pushforward is cyclic, so its ideal-lattice construction must be formalized through stalk extension and clearing denominators without that route.",
+   "text": "Identify the ambient generic stalk of i_*O_W with the residue-field line G using the proved scalar-compatible stalk isomorphism.",
    "uses": [
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion"
+    "new-rank-one-generic-ideal-inclusion-aux"
    ],
    "elementary": false
   },
   {
-   "text": "Invertibility on the open neighbourhood gives a bijective generic stalk map. Closed pushforward identifies the source stalk with the finite direct sum of r generic ideal stalks. Zero J or r = 0 gives a zero source, contradicting target dimension one.",
+   "text": "Apply the prescribed generic-embedding extension to that isomorphism. It gives nonzero J and a mono alpha whose stalk equals the ideal-inclusion stalk followed by the chosen isomorphism.",
    "uses": [
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "lem-pc-stalk-direct-sums",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+    "new-generic-ideal-stalk-embedding-extension"
    ],
    "elementary": false
   },
   {
-   "text": "For nonzero J its generic inclusion is bijective, so its stalk is the generic local field of W. The closed-immersion surjective local-ring map onto this field has maximal kernel and induces an isomorphism with the ambient residue field. With these identifications the generic map is a residue-field linear isomorphism from r copies of that field to the target line. Mathlib Module.finrank_directSum and invariance under linear equivalence give r = 1.",
+   "text": "The generic ideal inclusion is bijective by the integral-ideal generic-stalk theorem. Use natural closed-pushforward comparison to transport this bijectivity to the ambient stalk. Its composite with the chosen line isomorphism is invertible, proving the target.",
    "uses": [
     "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "lem-pc-stalk-direct-sums"
+    "lem-weil-pbc-closed-pushforward-stalks"
    ],
    "elementary": false
-  },
-  {
-   "text": "Identify the single coproduct summand with the ideal. Compose its pushforward isomorphism with the inclusion. Monomorphisms compose, and the generic stalk of the composite is invertible.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-  "lem-weil-pbc-closed-pushforward-stalks",
-  "lem-pc-stalk-direct-sums",
-  "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+  "new-rank-one-generic-ideal-inclusion-aux",
+  "new-generic-ideal-stalk-embedding-extension",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-closed-pushforward-stalks"
  ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project, coherent.tex",
-  "place": "Tag 01YH, lemma-property-irreducible, proof: the rank calculation immediately following the ideal-sum inclusion of Tag 01YE"
+  "place": "Tags 01YH and 01YE, rank-one case using prescribed stalk-map extension and denominator clearing (01Y4, 01YB)"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -168,12 +160,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T234223-L-2126560",
+  "landing": "20261013T024032-L-3333840",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

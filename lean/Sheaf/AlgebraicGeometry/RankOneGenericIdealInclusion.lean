@@ -6,6 +6,10 @@ Authors: SHEAF group R2
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusionAux
+import Sheaf.AlgebraicGeometry.GenericIdealStalkEmbeddingExtension
+import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -69,6 +73,46 @@ theorem rank_one_generic_ideal_inclusion {X W : Scheme.{u}} [IsNoetherian X]
     ∃ (J : W.IdealSheafData), J ≠ ⊥ ∧
       ∃ (α : (pushforward i).obj J.toModules ⟶ G), Mono α ∧
         IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace
-          (i.base (genericPoint W))).map α) := by sorry
+          (i.base (genericPoint W))).map α) := by
+  obtain ⟨e⟩ := rank_one_generic_structure_stalk_iso i G hGrank
+  obtain ⟨J, hJ, α, hα, heq⟩ := generic_ideal_stalk_embedding_extension i G hGcoh
+    e.hom (ConcreteCategory.bijective_of_isIso e.hom).1
+  have hJstalk := integral_ideal_generic_stalk W J
+  have : IsIso ((RingedSpace.moduleStalkFunctor W.toRingedSpace
+      (genericPoint W)).map J.toModulesι) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr
+      ⟨hJstalk.2.1, hJstalk.2.2.2.2.mp hJ⟩
+  have hA := closedImmersion_pushforward_stalks i i.isClosedEmbedding J.toModules
+  have hB := closedImmersion_pushforward_stalks i i.isClosedEmbedding
+    (SheafOfModules.unit W.ringCatSheaf)
+  let cA := ConcreteCategory.hom (TopCat.Presheaf.stalkPushforward Ab i.base
+    J.toModules.presheaf (genericPoint W))
+  let cB := ConcreteCategory.hom (TopCat.Presheaf.stalkPushforward Ab i.base
+    (SheafOfModules.unit W.ringCatSheaf).val.presheaf (genericPoint W))
+  let f := (RingedSpace.moduleStalkFunctor X.toRingedSpace
+    (i.base (genericPoint W))).map ((pushforward i).map J.toModulesι)
+  let g := (RingedSpace.moduleStalkFunctor W.toRingedSpace
+    (genericPoint W)).map J.toModulesι
+  have hca : Function.Bijective cA := (hA.2.1 (genericPoint W)).1
+  have hcb : Function.Bijective cB := (hB.2.1 (genericPoint W)).1
+  have hg : Function.Bijective g := ConcreteCategory.bijective_of_isIso g
+  have comm (a) : cB (f a) = g (cA a) := by
+    exact congr($(hA.2.2 (SheafOfModules.unit W.ringCatSheaf) J.toModulesι
+      (genericPoint W)) a)
+  have hf : Function.Bijective f := by
+    constructor
+    · intro a b hab
+      apply hca.1
+      apply hg.1
+      rw [← comm, ← comm, hab]
+    · intro b
+      obtain ⟨a, ha⟩ := hg.2 (cB b)
+      obtain ⟨a', ha'⟩ := hca.2 a
+      refine ⟨a', hcb.1 ?_⟩
+      rw [comm, ha', ha]
+  have : IsIso f := (ConcreteCategory.isIso_iff_bijective f).mpr hf
+  refine ⟨J, hJ, α, hα, ?_⟩
+  rw [heq]
+  infer_instance
 
 end AlgebraicGeometry.Scheme.Modules

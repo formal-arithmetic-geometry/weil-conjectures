@@ -1,0 +1,178 @@
+{
+ "id": "new-rank-one-generic-ideal-inclusion-aux",
+ "kind": "statement",
+ "title": "A residue-field line is the generic stalk of the closed structure pushforward",
+ "statement": "Let $i:W\\to X$ be a closed immersion [def-weil-closed-immersion] with $W$ integral [def-pc-integral-scheme]. If the generic stalk of an $\\mathcal O_X$-module $G$ [def-weil-pbc-module-stalk] has a compatible $\\kappa(i(\\eta))$-module structure [def-weil-residue-field] of finrank one, then it is isomorphic, as an ambient stalk-ring module, to the stalk of $i_*\\mathcal O_W$ [def-pc-module-pullback] at $i(\\eta)$. No coherence, ideal, global map, or annihilation hypothesis is needed.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tags 01YH, 01YE, 01Y4 and 01YB: generic ideal-lattice argument"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing public ideal_module_product_stalk theorem to the identity inclusion of the structure module on W, and retain its structure-stalk isomorphism and germ compatibility. This reuses the library comparison rather than reproving the private unit_stalk_iso helper. Closed-pushforward comparison identifies the ambient source stalk with this stalk and describes its ambient scalar action.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic local ring is a field. Descend the surjective local stalk map by IsLocalRing.ResidueField.lift; its field source makes it injective and stalk-map surjectivity makes it surjective. Module.nonempty_linearEquiv_of_finrank_eq_one identifies the target line with the residue field. Compose these bijections, prove ambient-ring linearity from scalar compatibility, and use LinearEquiv.ofBijective.toModuleIso.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Generic ideal-lattice argument of Tags 01YH and 01YE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A prescribed generic stalk embedding from a closed pushforward structure module into a coherent sheaf extends from a nonzero ideal on the integral closed subscheme",
+   "results": {
+    "t": "2026-10-13T01:32:00Z",
+    "tool": "leansearch",
+    "query": "A prescribed generic stalk embedding from a closed pushforward structure module into a coherent sheaf extends from a nonzero ideal on the integral closed subscheme",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic stalk of a closed pushforward structure sheaf is isomorphic as an ambient stalk module to a residue field module of finrank one",
+   "results": {
+    "t": "2026-10-13T01:24:01Z",
+    "tool": "leanfinder",
+    "query": "The generic stalk of a closed pushforward structure sheaf is isomorphic as an ambient stalk module to a residue field module of finrank one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.stalkClosedPointIso",
+     "AlgebraicGeometry.stalkClosedPointIso_inv",
+     "AlgebraicGeometry.Scheme.residue",
+     "AlgebraicGeometry.Scheme.stalkClosedPointTo",
+     "AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv",
+     "AlgebraicGeometry.germ_stalkClosedPointIso_hom",
+     "AlgebraicGeometry.Scheme.residueField",
+     "AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk"
+    ],
+    "digest": "600fdf239d86ef55"
+   },
+   "date": "2026-10-13",
+   "verdict": "no matching closed-pushforward generic extension or residue-line comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.ResidueField.lift",
+   "results": {
+    "t": "2026-10-13T01:24:00Z",
+    "tool": "loogle",
+    "query": "IsLocalRing.ResidueField.lift",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "IsLocalRing.ResidueField.lift",
+     "IsLocalRing.ResidueField.lift_comp_residue",
+     "IsLocalRing.ResidueField.lift_residue_apply"
+    ],
+    "digest": "2a089929e6495893"
+   },
+   "date": "2026-10-13",
+   "verdict": "ResidueField.lift supplies the scalar-field identification, not ideal extension"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(extend|extension)|extend.*stalk|ideal.*(embedding|monomorphism)",
+   "results": {
+    "t": "2026-10-13T01:24:00Z",
+    "tool": "grep",
+    "query": "stalk.*(extend|extension)|extend.*stalk|ideal.*(embedding|monomorphism)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ResidueField.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean"
+    ],
+    "digest": "7bed0a61258fba5d"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching theorem for extending a prescribed closed-pushforward generic embedding"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusion",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-r2-rank-one-generic-ideal-inclusion",
+   "place": "generic ideal inclusion: prescribed stalk map and clearing denominators",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusionAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/RankOneGenericIdealInclusionAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.rank_one_generic_structure_stalk_iso",
+  "statement": "theorem rank_one_generic_structure_stalk_iso {X W : Scheme.{u}}\n    (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]\n    (G : X.Modules)\n    (hGrank : ∃ _inst : Module (X.residueField (i.base (genericPoint W)))\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G),\n      (∀ (a : X.presheaf.stalk (i.base (genericPoint W)))\n        (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace\n          (i.base (genericPoint W))).obj G),\n        a • v = (X.residue (i.base (genericPoint W))) a • v) ∧\n      Module.finrank (X.residueField (i.base (genericPoint W)))\n        ((RingedSpace.moduleStalkFunctor X.toRingedSpace\n          (i.base (genericPoint W))).obj G) = 1) :\n    Nonempty ((RingedSpace.moduleStalkFunctor X.toRingedSpace\n      (i.base (genericPoint W))).obj ((pushforward i).obj\n        (SheafOfModules.unit W.ringCatSheaf)) ≅\n      (RingedSpace.moduleStalkFunctor X.toRingedSpace\n        (i.base (genericPoint W))).obj G)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T024032-L-3333840",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T024032-L-3333840",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

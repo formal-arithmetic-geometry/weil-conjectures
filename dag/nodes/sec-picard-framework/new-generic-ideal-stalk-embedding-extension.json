@@ -1,0 +1,265 @@
+{
+ "id": "new-generic-ideal-stalk-embedding-extension",
+ "kind": "statement",
+ "title": "Extend a prescribed generic embedding by a nonzero ideal",
+ "statement": "Let $X$ be Noetherian [pqf-def-locnoeth], $i:W\\to X$ a closed immersion [def-weil-closed-immersion] with $W$ integral [def-pc-integral-scheme], and $G$ coherent [pqf-def-coherent]. Given an injective ambient-stalk-ring linear map $\\psi:(i_*\\mathcal O_W)_{i(\\eta)}\\to G_{i(\\eta)}$ [def-weil-pbc-module-stalk, def-pc-module-pullback], there are a nonzero quasi-coherent ideal $J$ of $W$ and a monomorphism $\\alpha:i_*J\\to G$ with $\\alpha_{i(\\eta)}=\\psi\\circ(i_*(J\\hookrightarrow\\mathcal O_W))_{i(\\eta)}$. No target-rank assumption or generic surjectivity conclusion is asserted.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tags 01YH, 01YE, 01Y4 and 01YB: generic ideal-lattice argument"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Closed pushforward of the structure module is coherent. Extend the prescribed linear stalk map to an open neighbourhood of the generic image.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-coherent-stalk-map-extends"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the reduced ideal of the complement and clear denominators by extending the local map from a power of that ideal times the source. Affine section calculations identify this source with the pushforward of its image ideal J on W. At the generic point this ideal is the unit ideal, so J is nonzero and the extended stalk map is the prescribed map composed with the ideal inclusion.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coherent kernel descends to a quasi-coherent submodule of J on W, since the defining ideal of W annihilates it. Its generic stalk is zero by injectivity of the prescribed map. On each nonempty affine open its sections inject into the fraction field, so they vanish. Thus the kernel is zero and the extension is mono.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-coherent-stalk-map-extends",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-coherent-homs-over-open",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Generic ideal-lattice argument of Tags 01YH and 01YE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A prescribed generic stalk embedding from a closed pushforward structure module into a coherent sheaf extends from a nonzero ideal on the integral closed subscheme",
+   "results": {
+    "t": "2026-10-13T01:32:00Z",
+    "tool": "leansearch",
+    "query": "A prescribed generic stalk embedding from a closed pushforward structure module into a coherent sheaf extends from a nonzero ideal on the integral closed subscheme",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic stalk of a closed pushforward structure sheaf is isomorphic as an ambient stalk module to a residue field module of finrank one",
+   "results": {
+    "t": "2026-10-13T01:24:01Z",
+    "tool": "leanfinder",
+    "query": "The generic stalk of a closed pushforward structure sheaf is isomorphic as an ambient stalk module to a residue field module of finrank one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.stalkClosedPointIso",
+     "AlgebraicGeometry.stalkClosedPointIso_inv",
+     "AlgebraicGeometry.Scheme.residue",
+     "AlgebraicGeometry.Scheme.stalkClosedPointTo",
+     "AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv",
+     "AlgebraicGeometry.germ_stalkClosedPointIso_hom",
+     "AlgebraicGeometry.Scheme.residueField",
+     "AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk"
+    ],
+    "digest": "600fdf239d86ef55"
+   },
+   "date": "2026-10-13",
+   "verdict": "no matching closed-pushforward generic extension or residue-line comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.ResidueField.lift",
+   "results": {
+    "t": "2026-10-13T01:24:00Z",
+    "tool": "loogle",
+    "query": "IsLocalRing.ResidueField.lift",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "IsLocalRing.ResidueField.lift",
+     "IsLocalRing.ResidueField.lift_comp_residue",
+     "IsLocalRing.ResidueField.lift_residue_apply"
+    ],
+    "digest": "2a089929e6495893"
+   },
+   "date": "2026-10-13",
+   "verdict": "ResidueField.lift supplies the scalar-field identification, not ideal extension"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(extend|extension)|extend.*stalk|ideal.*(embedding|monomorphism)",
+   "results": {
+    "t": "2026-10-13T01:24:00Z",
+    "tool": "grep",
+    "query": "stalk.*(extend|extension)|extend.*stalk|ideal.*(embedding|monomorphism)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ResidueField.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean",
+     "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean"
+    ],
+    "digest": "7bed0a61258fba5d"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching theorem for extending a prescribed closed-pushforward generic embedding"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice|denominator|prescribed",
+   "results": {
+    "t": "2026-10-13T02:24:07Z",
+    "tool": "grep",
+    "query": "lattice|denominator|prescribed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Tactic/FieldSimp.lean",
+     "Mathlib/Tactic/FieldSimp.lean",
+     "Mathlib/Tactic/FieldSimp.lean",
+     "Mathlib/Tactic/FieldSimp.lean",
+     "Mathlib/Tactic/FieldSimp.lean",
+     "Mathlib/NumberTheory/Bernoulli.lean",
+     "Mathlib/NumberTheory/Bernoulli.lean",
+     "Mathlib/NumberTheory/Bernoulli.lean"
+    ],
+    "digest": "18d278b3dd283fea"
+   },
+   "date": "2026-10-13",
+   "verdict": "Independent second-reading search: no prescribed generic ideal embedding extension theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extending a given injective linear map at a generic point to a sheaf morphism from an ideal lattice by clearing denominators",
+   "results": {
+    "t": "2026-10-13T02:24:09Z",
+    "tool": "leanfinder",
+    "query": "Extending a given injective linear map at a generic point to a sheaf morphism from an ideal lattice by clearing denominators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.exists_const",
+     "ModuleCat.Tilde.toOpen",
+     "ModuleCat.Tilde.const",
+     "ModuleCat.Tilde.sectionsSubmodule",
+     "ModuleCat.Tilde.isFraction",
+     "ModuleCat.Tilde.openToLocalization",
+     "PresheafOfModules.Sheafify.SMulCandidate.mk'",
+     "SheafOfModules.LocalGeneratorsData.I"
+    ],
+    "digest": "43f3b65365991986"
+   },
+   "date": "2026-10-13",
+   "verdict": "Independent second-reading search: no prescribed generic ideal embedding extension theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, ModuleCat, Function.Injective",
+   "results": {
+    "t": "2026-10-13T02:24:10Z",
+    "tool": "loogle",
+    "query": "SheafOfModules, ModuleCat, Function.Injective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "Independent second-reading search: no prescribed generic ideal embedding extension theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusion",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-r2-rank-one-generic-ideal-inclusion",
+   "place": "generic ideal inclusion: prescribed stalk map and clearing denominators",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericIdealStalkEmbeddingExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericIdealStalkEmbeddingExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.generic_ideal_stalk_embedding_extension",
+  "statement": "theorem generic_ideal_stalk_embedding_extension {X W : Scheme.{u}} [IsNoetherian X]\n    (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]\n    (G : X.Modules) (hGcoh : RingedSpace.IsCoherent X.toRingedSpace G)\n    (ψ : (RingedSpace.moduleStalkFunctor X.toRingedSpace\n        (i.base (genericPoint W))).obj ((pushforward i).obj\n          (SheafOfModules.unit W.ringCatSheaf)) ⟶\n      (RingedSpace.moduleStalkFunctor X.toRingedSpace\n        (i.base (genericPoint W))).obj G)\n    (hψ : Function.Injective ψ) :\n    ∃ (J : W.IdealSheafData), J ≠ ⊥ ∧\n      ∃ (α : (pushforward i).obj J.toModules ⟶ G), Mono α ∧\n        (RingedSpace.moduleStalkFunctor X.toRingedSpace\n          (i.base (genericPoint W))).map α =\n        (RingedSpace.moduleStalkFunctor X.toRingedSpace\n          (i.base (genericPoint W))).map ((pushforward i).map J.toModulesι) ≫ ψ",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T024032-L-3333840",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T024032-L-3333840",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
