@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-formal-affine-limit-equivalence",
+ "kind": "statement",
+ "title": "CoherentFormalModuleAffineLimitEquivalence",
+ "statement": "Let $X,I,V,A,J$ be as follows: $X$ is Noetherian, $I$ is a quasi-coherent ideal sheaf, $V$ is an affine open with Noetherian open subscheme, $A=\\Gamma(X,V)$ and $J=I(V)$. For coherent formal modules [def-weil-pbc-coherent-formal-module] and completion [def-weil-pbc-adic-completion], there is an equivalence $E:\\mathit{Coh}(V,I|_V)\\simeq\\mathrm{Fin}(\\widehat A)$ and, for each local formal module $F$, an $A$-linear limiting cone whose point is the underlying restricted $A$-module of $E(F)$ and whose diagram is the top-section system of $F$, with scalars transported along $V.\\mathrm{topIso}^{-1}$. For every $f:F\\to G$ and level $n$, its projections satisfy $\\mathrm{Res}(E(f))p_{G,n}=p_{F,n}\\Gamma(f_n)$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W (lemma-inverse-systems-affine) and Lemma 087X (lemma-inverse-systems-abelian), affine restriction; official tag pages read during this delivery"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the affine Spec transport equivalence T with diagram comparison d. Apply coherentFormalModules_affine to A, J and the canonical ofIdealTop sheaf; its ideal equality is reflexive. Compose the equivalences T and E.",
+   "uses": [
+    "lem-weil-pbc-formal-affine-spec-transport",
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each local F postcompose the supplied Spec cone with (d.app F).inv. IsLimit.postcomposeInvEquiv transports its universal property. The supplied projection naturality followed by the component of d.inv.naturality proves the local projection naturality equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-affine-spec-transport",
+  "lem-weil-pbc-coherent-formal-modules-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R1",
+  "date": "2026-10-13",
+  "based_on": "Stacks 087W and 087X; the corresponding numbered steps of lem-weil-pbc-formal-affine-limit-model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coherentFormalModules_iso_equivalence|coherentFormalModules_affine",
+   "date": "2026-10-13",
+   "results": "0 hits",
+   "verdict": "Partial section and scalar comparison tools only; no exact statement. The source library search finds coherentFormalModules_affine and coherentFormalModules_iso_equivalence, but the latter does not specify its underlying functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme isomorphism transports coherent formal modules and identifies their global section diagrams linearly",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Modules.pushforwardCongr, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.pushforwardCongr, PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf",
+   "verdict": "Partial section and scalar comparison tools only; no exact statement. The source library search finds coherentFormalModules_affine and coherentFormalModules_iso_equivalence, but the latter does not specify its underlying functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictAppIso\"",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAppIso, AlgebraicGeometry.Scheme.Modules.map_restrictAppIso_hom, AlgebraicGeometry.Scheme.Modules.restrictAppIso_inv_map, AlgebraicGeometry.Scheme.Modules.map_restrictAppIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.restrictAppIso_inv_map_assoc, AlgebraicGeometry.Scheme.Modules.smul_restrictAppIso_hom, AlgebraicGeometry.Scheme.Modules.smul_restrictAppIso_inv, AlgebraicGeometry.Scheme.Modules.smul_restrictAppIso_hom_assoc",
+   "verdict": "Partial section and scalar comparison tools only; no exact statement. The source library search finds coherentFormalModules_affine and coherentFormalModules_iso_equivalence, but the latter does not specify its underlying functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme isomorphism transports coherent formal modules and identifies their global section diagrams linearly",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineLimitModel",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Affine reduction in the finite-etale lifting route; original affine-limit-model proof steps 3",
+   "via": [
+    "lem-weil-pbc-formal-affine-limit-model",
+    "lem-weil-pbc-formal-kernel-cokernel-limit-annihilators",
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineLimitEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleAffineLimitEquivalence.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_affine_limit_equivalence",
+  "statement": "theorem coherentFormalModule_affine_limit_equivalence\n    (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)\n    [IsNoetherian V.1.toScheme] :\n    ∃ E : CoherentFormalModule V.1.toScheme (I.comap V.1.ι) ≌\n      ObjectProperty.FullSubcategory\n        (fun N : ModuleCat.{u} (AdicCompletion (I.ideal V) Γ(X, V.1)) ↦\n          Module.Finite (AdicCompletion (I.ideal V) Γ(X, V.1)) N),\n    ∃ p : ∀ F : CoherentFormalModule V.1.toScheme (I.comap V.1.ι),\n      (Functor.const ℕᵒᵖ).obj\n        ((ModuleCat.restrictScalars\n          (algebraMap Γ(X, V.1) (AdicCompletion (I.ideal V) Γ(X, V.1)))).obj\n            (E.functor.obj F).obj) ⟶\n      F.obj ⋙ (SheafOfModules.evaluation V.1.toScheme.ringCatSheaf (op ⊤) ⋙\n        ModuleCat.restrictScalars V.1.topIso.inv.hom),\n    (∀ F, Nonempty (IsLimit (Cone.mk _ (p F)))) ∧\n    (∀ (F G : CoherentFormalModule V.1.toScheme (I.comap V.1.ι))\n      (f : F ⟶ G) (n : ℕ),\n      (ModuleCat.restrictScalars\n        (algebraMap Γ(X, V.1) (AdicCompletion (I.ideal V) Γ(X, V.1)))).map\n          (E.functor.map f).hom ≫ (p G).app (op n) =\n      (p F).app (op n) ≫\n        (SheafOfModules.evaluation V.1.toScheme.ringCatSheaf (op ⊤) ⋙\n        ModuleCat.restrictScalars V.1.topIso.inv.hom).map (f.hom.app (op n)))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T054234-L-448359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T054234-L-448359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
