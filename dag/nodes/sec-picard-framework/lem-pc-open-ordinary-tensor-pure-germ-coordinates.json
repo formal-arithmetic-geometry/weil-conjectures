@@ -13,8 +13,9 @@
  },
  "proof": [
   {
-   "text": "expand tensorStalkIso using its specified tensor-pullback stalk components.\nExpand openPinnedTensorRestrictionIso into its four pinned adjunction factors.\nThe tensor-pullback unit takes a section s to 1 tensor s. The unit compatibility\nfor the pullback-composition mate, and then the restriction adjunction, identify\nits inverse comparison on these generators with restriction of the same section.\nThe hom of restrictStalkNatIso takes a restricted section germ to the ambient\nsection germ. Its input component followed by stalkCongr is precisely the input\ncoordinate written below, and stalkIso is the corresponding output ring coordinate.\nThus the displayed equation holds for c = 1 and a section germ q. Every stalk\nmodule element is a section germ, so this covers all q. For arbitrary c, linearity\nof the tensor-stalk and pinned comparison maps, and semilinearity of the output\nrestriction coordinate with its inverse inclusion ring map, multiply this identity\nby the scalar c to obtain the displayed equation. Point transport by hj is handled\nby equality induction. This is a generator calculation only: it neither constructs\nring equivalences nor input or tensor-complex isomorphisms. Empty opens have no z;\nzero rings, zero complexes and negative degrees require no additional hypothesis.",
+   "text": "Reduce the ring equivalence by RingEquiv.ext to the canonical output-open stalk equivalence, then apply the linear extension theorem to the arbitrary coefficient and stalk element.",
    "uses": [
+    "lem-pc-open-ordinary-tensor-pure-germ-coordinates-linear-extension",
     "def-pc-single-complex-base-change-stalk-condition",
     "def-pc-open-pinned-single-tensor-restriction-iso"
    ],
@@ -22,16 +23,17 @@
   }
  ],
  "proof_deps": [
+  "lem-pc-open-ordinary-tensor-pure-germ-coordinates-linear-extension",
   "def-pc-single-complex-base-change-stalk-condition",
   "def-pc-open-pinned-single-tensor-restriction-iso"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "H4",
+  "by": "worker",
+  "group": "S1",
   "date": "2026-10-14",
   "document": "Stacks Project",
   "place": "Tags 0098 and 0096",
-  "note": "Original node step 3 isolated as a generator calculation."
+  "note": "The item directly calls the proved linear-extension theorem after RingEquiv.ext; that theorem derives arbitrary scalars from the canonical c = 1 equation."
  },
  "mathlib_searches": [
   {
@@ -103,11 +105,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H4",
+  "reviewer": "X-0589f",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T201753-L-3970886",
+  "landing": "20261013T231543-L-1820183",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match the recorded nodes and statements; both modules and the direct importer compile successfully."
  }
 }
