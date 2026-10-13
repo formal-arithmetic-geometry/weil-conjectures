@@ -66,6 +66,26 @@ lemma map_mateEquiv_app_comp_mateEquiv_app
   rw [hκ, reassoc_of% hγ, ← R_C.map_comp, hβ, R_C.map_comp, reassoc_of% (h (G.obj M)),
     adj.counit_naturality, reassoc_of% ha, hϑ]
 
+omit adj adj' in
+/-- The hypothesis of `CategoryTheory.Adjunction.map_mateEquiv_app_comp_mateEquiv_app` in
+transposed form: it holds at `X` as soon as the transposes along `N_C ⊣ R_C` of both sides agree,
+which avoids the unit of `N_C ⊣ R_C`: `F' (ϑ_D♯ X) ≫ α X = α (T_D X) ≫ N_C (a X ≫ ϑ_C (F X)) ≫ ε`,
+where `ϑ_D♯ X = N_D (ϑ_D X) ≫ ε` is the transpose of `ϑ_D X` along `N_D ⊣ R_D`. -/
+lemma map_comp_mateEquiv_app_comp_map_of_transpose (X : D)
+    (h : F'.map (N_D.map (ϑ_D.app X) ≫ adj_D.counit.app (N_D.obj X)) ≫ α.hom.app X =
+      α.hom.app (T_D.obj X) ≫ N_C.map (a.app X ≫ ϑ_C.app (F.obj X)) ≫
+        adj_C.counit.app (N_C.obj (F.obj X))) :
+    F.map (ϑ_D.app X) ≫ (mateEquiv adj_D adj_C α.inv).app (N_D.obj X) ≫
+      R_C.map (α.hom.app X) = a.app X ≫ ϑ_C.app (F.obj X) := by
+  apply (adj_C.homEquiv _ _).symm.injective
+  have hγ := mateEquiv_counit adj_D adj_C α.inv (N_D.obj X)
+  have hα := α.inv.naturality (ϑ_D.app X)
+  dsimp at hγ hα
+  simp only [homEquiv_counit, Functor.map_comp, Category.assoc, counit_naturality]
+  rw [reassoc_of% hγ, reassoc_of% hα, ← Functor.map_comp_assoc, h, Iso.inv_hom_id_app_assoc,
+    Functor.map_comp, Category.assoc]
+  rfl
+
 include adj' adj_C in
 /-- **Invertibility of the base change map after restriction.** With the notation of
 `CategoryTheory.Adjunction.map_mateEquiv_app_comp_mateEquiv_app`, if `ϑ_D` and `ϑ_C` are

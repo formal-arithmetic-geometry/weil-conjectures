@@ -186,10 +186,13 @@ lemma stalkFrobenius_extendScalars (m : ℕ) (x : s ⟶ X) (hx : x ≫ W.frobeni
       (leftDerivedUpperStarExtendScalarsIso R S x).hom.app W.obj ≫
         (L(sheafExtendScalars (algebraMap R S) s)).map (W.stalkFrobenius m x hx) ≫
           (leftDerivedUpperStarExtendScalarsIso R S x).inv.app W.obj := by
-  rw [← Category.assoc, Iso.eq_comp_inv]
-  exact leftDerivedUpperStarExtendScalarsIso_hom_app_comp_map_twist R S x
-    (W.frobeniusIterate m) hx W.obj (W.coeffIterate m) ((W.extendScalars S).coeffIterate m)
-    (W.coeffIterate_extendScalars m)
+  have h := congrArg (· ≫ (leftDerivedUpperStarExtendScalarsIso R S x).inv.app W.obj)
+    (leftDerivedUpperStarExtendScalarsIso_hom_app_comp_map_twist R S x
+      (W.frobeniusIterate m) hx W.obj (W.coeffIterate m) ((W.extendScalars S).coeffIterate m)
+      (W.coeffIterate_extendScalars m))
+  simp only [Category.assoc, Iso.hom_inv_id_app] at h
+  erw [Category.comp_id] at h
+  exact h
 
 end WeilComplex
 

@@ -26,6 +26,7 @@ public import WeilConjectures.Algebra.CharpolyLocallyFree
 public import WeilConjectures.Algebra.ExtOneDirectSum
 public import WeilConjectures.Algebra.FiniteReesModuleGeneration
 public import WeilConjectures.Algebra.Homology.BifunctorLinear
+public import WeilConjectures.Algebra.Homology.BifunctorSingleComparison
 public import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 public import WeilConjectures.Algebra.Homology.ExactCouple.Convergence
 public import WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex
@@ -2396,6 +2397,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.Constru
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.OpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.Projection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Finiteness
