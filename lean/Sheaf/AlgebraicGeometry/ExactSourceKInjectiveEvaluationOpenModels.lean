@@ -10,10 +10,8 @@ public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
-import Sheaf.AlgebraicGeometry.DerivedTensorSymmetry
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverTransport
+import Sheaf.AlgebraicGeometry.KInjectiveSchemeEvaluationModels
 
 /-! # K-injective models for evaluation on the open scheme
 
@@ -46,6 +44,8 @@ local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
+set_option maxHeartbeats 1000000 in
+-- Elaborating the transported models unfolds the exact-functor factorization.
 /-- Ordinary representative evaluation when the coefficient complex is K-injective.
 Source: Stacks Project, cohomology.tex, Tags 08DJ (lemma-internal-hom),
 08DM (lemma-Rhom-strictly-perfect), and 08DQ (lemma-dual-perfect-complex).
@@ -100,6 +100,30 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
     ∃ a : N ⊗ D ≅ E.obj (DerivedCategory.Q.obj (localEvaluationTensor X U P F)),
       ∃ b : H.obj (op K, N) ≅
           E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),
-        g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f) := by sorry
+        g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f) := by
+  let L := Equivalence.functor
+    (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+    (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+    (Scheme.Modules.overEquiv U)
+  let T := L.mapHomologicalComplex (.up ℤ)
+  let E := L.mapDerivedCategory
+  let v := L.mapDerivedCategoryFactors
+  obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
+    exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
+  have : CochainComplex.IsKInjective (T.obj F) := hF
+  let eK : DerivedCategory.Q.obj (T.obj P) ≅ K := (v.app P).symm ≪≫ _eK
+  let eN : DerivedCategory.Q.obj (T.obj F) ≅ N := (v.app F).symm ≪≫ _eN
+  obtain ⟨a', b', h⟩ := exists_kInjective_scheme_evaluation_models U.toScheme K N
+    (T.obj P) (T.obj F) hhom hdual eK eN (t.inv ≫ T.map f ≫ b.hom) hf
+  refine ⟨a' ≪≫ (DerivedCategory.Q.mapIso t).symm ≪≫
+    (v.app (localEvaluationTensor X U P F)).symm,
+    b' ≪≫ (DerivedCategory.Q.mapIso b).symm ≪≫
+      (v.app (homComplex (R := X.sheaf.over U) P F)).symm, ?_⟩
+  dsimp only [Iso.trans_hom, Iso.symm_hom]
+  rw [← Category.assoc, ← Category.assoc, h]
+  simp only [Functor.mapIso_inv, Category.assoc, ← Functor.map_comp,
+    Iso.hom_inv_id, Category.comp_id]
+  simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, Iso.app_inv, L, T] using
+    congrArg (fun z ↦ a'.hom ≫ DerivedCategory.Q.map t.inv ≫ z) (v.inv.naturality f)
 
 end AlgebraicGeometry

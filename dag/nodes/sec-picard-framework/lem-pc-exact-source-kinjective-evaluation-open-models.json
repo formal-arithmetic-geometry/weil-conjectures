@@ -23,69 +23,40 @@
  },
  "proof": [
   {
-   "text": "Use the concrete over-equivalence on P,F,f. Each module on V→U becomes its section module on the corresponding open of U.toScheme, with the identical scalar action. Tensor pure sections, unit actions and local linear maps therefore have the same formulas. Equivalences preserve the products defining Hom and the coproducts defining total tensor; their canonical comparisons send projections and inclusions to the same maps. Both Hom differential and signed total differential are built from these maps, so the comparisons are chain isomorphisms. Tensoring an acyclic complex is preserved in both directions, proving preservation of K-flatness. The exact equivalence and its inverse preserve quasi-isomorphisms, and conjugation of Hom proves preservation of the assumed Hom exactness. Thus hf transports to precisely the evaluation formula on the open scheme. The exact inverse transports K-injectivity, since the Hom homotopy functors and acyclic complexes are preserved.",
+   "text": "Apply the ordinary transport lemma to the concrete degreewise image T of the over-equivalence. Obtain the tensor chain isomorphism t, the Hom chain isomorphism b, the transported Hom exactness, dual K-flatness and coefficient K-injectivity, and the transported evaluation formula.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex",
-    "def-pc-ordinary-evaluation-data",
-    "def-pc-kflat-complex",
-    "def-pur-kinjective-complex"
+    "lem-pc-ordinary-evaluation-over-transport"
    ],
    "elementary": false
   },
   {
-   "text": "The transported coefficient F is already K-injective. The derived internal Hom factorization identifies its ordinary Hom target with RHom(K,N). Take the fixed functorial K-injective resolution of the degree-zero unit. Hom exactness makes Hom(P,eta_unit) a quasi-isomorphism. The derived internal Hom factorization, its localized inverse, and eK identify the actual ordinary dual with RHom(K,1). These comparison objects are actual Hom complexes, and no arbitrary witness of mere existence defines data.",
+   "text": "The exact derived functor factorization v:Q;E isomorphic to T;Q identifies Q(TP) with K and Q(TF) with N by v.inverse followed by eK and eN. Apply the single-site K-injective evaluation model theorem to t.inverse;T(f);b. It gives a',b' and their evaluation square.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
+    "lem-pc-kinjective-scheme-evaluation-models",
     "def-pc-derived-category"
    ],
    "elementary": false
   },
   {
-   "text": "The K-flat dual computes derived tensor with every F: use symmetry to apply the K-flat first-factor comparison and then restore the order F tensor dual. Compose with eN and the dual comparison of the preceding step to get a. Take b to be the target comparison of that step. All comparison data are used existentially in the proof, not installed as choices in definitions.",
+   "text": "Compose a' with Q(t).inverse and v_tensor.inverse, and b' with Q(b).inverse and v_Hom.inverse. Substitute the single-site square; functoriality cancels Q(b);Q(b.inverse). Naturality of v.inverse on f gives Q(T(f));v_Hom.inverse=v_tensor.inverse;E(Q(f)). Postcomposing this equality with a';Q(t.inverse) is exactly the required square.",
    "uses": [
-    "lem-pc-kflat-derived-tensor-comparison",
-    "lem-sc-scheme-derived-tensor-symmetry",
-    "def-pc-kflat-complex"
+    "def-pc-derived-category"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Use K-flat resolutions of the tensor inputs and the same fixed K-injective target as the canonical tensor-Hom representative equation. Uncurry the identity of the dual and form its tensor with F. Follow a degree-(p,q) tensor inclusion by the r-th Hom projection. Associator and symmetry restore F tensor dual; evaluating the dual on P^r and acting on F^p by the unit gives the hf component when r+q=0, and every other component is zero because the unit is supported in degree zero. Evaluation is natural with the resolution maps. The tensor coproduct inclusions and Hom product projections detect equality of chain maps. Localize that equality and cancel the Hom resolution isomorphisms to obtain the square. This calculation asserts no inverse of f and uses neither boundedness nor finite freeness.",
-   "uses": [
-    "def-pc-canonical-derived-tensor-hom-bijection",
-    "lem-pc-kflat-resolution",
-    "def-pc-ordinary-evaluation-data",
-    "lem-sc-hom-complex-projections"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-canonical-derived-tensor-hom-bijection",
   "def-pc-derived-category",
-  "def-pc-kflat-complex",
-  "def-pc-ordinary-evaluation-data",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-pur-kinjective-complex",
-  "lem-pc-kflat-derived-tensor-comparison",
-  "lem-pc-kflat-resolution",
-  "lem-sc-hom-complex-projections",
-  "lem-sc-scheme-derived-tensor-symmetry",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pc-kinjective-scheme-evaluation-models",
+  "lem-pc-ordinary-evaluation-over-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "P4",
-  "date": "2026-10-13",
+  "group": "W2",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tags 08DJ (lemma-internal-hom), 08DM (lemma-Rhom-strictly-perfect), 08DQ (lemma-dual-perfect-complex): ordinary complex computation, with the stated exactness and flatness assumptions replacing the finite-perfect part",
-  "description": "Resolve the coefficient complex first and separate the K-injective representative calculation from coefficient naturality."
+  "description": "Separate the purely ordinary change of site from the single-site derived representative calculation; compose the model isomorphisms using naturality of the exact localization factorization."
  },
  "mathlib_searches": [
   {
@@ -170,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-04757",
-  "group": "P4",
+  "reviewer": "COMPILER",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T153936-L-1123777",
+  "landing": "20261013T164050-L-1668798",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile successfully, including direct importer ExactSourceEvaluationLocalComparisons; target signature and existing declarations match the repository, with only the two documented named sorries remaining."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
