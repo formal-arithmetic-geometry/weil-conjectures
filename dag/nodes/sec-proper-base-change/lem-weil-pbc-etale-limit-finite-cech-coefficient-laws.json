@@ -20,48 +20,24 @@
  ],
  "proof": [
   {
-   "text": "Apply cochain-map extensionality degreewise, then product extensionality to the target tuple projections. The target isomorphism z has an invertible presheaf image, so it can be cancelled in every component calculation.",
+   "text": "Introduce the given geometric comparison data and cochain maps. Apply the three single-law theorems to these same hypotheses and assemble their conclusions by conjunction introduction. This is a decomposition, with three open component proofs.",
    "uses": [
-    "def-weil-pbc-cech-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the identity equation, rewrite D.map_id and substitute hidentity. The unit form of upperStarId coherence identifies the adjunction unit followed by the coefficient identity with the canonical identity pullback comparison. By hgamma this comparison and gamma have equal first projections to W0 and equal structural morphisms, hence coincide. Their inverse restrictions cancel, giving the identity tuple component.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-cartesian-square-pasting"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the composite equation, substitute the tuple formulas for both arrows. Naturality moves presheaf restrictions past the unit and phi; rewrite D.map_comp and substitute hcomposition. The unit form of upperStarComp coherence replaces the composite of units and phi maps by the single composite transition. The two geometric pasting maps have equal first projections to W0 by hgamma and equal structural morphisms; pullback uniqueness identifies them. Cancel the intermediate nerve isomorphisms to obtain the tuple formula for the composite arrow.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-cartesian-square-pasting"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the leg equation apply the same unit-composition calculation with c.w and hdelta. Substitute the formula hG for G(a), cancel eG with its inverse, and evaluate the cocone equation L.w at the pulled-back product. This gives the earlier leg component. Extensionality finishes the equations. Empty K makes all tuple checks vacuous.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-etale-limit-finite-cech-coefficient-identity",
+    "lem-weil-pbc-etale-limit-finite-cech-coefficient-composition",
+    "lem-weil-pbc-etale-limit-finite-cech-coefficient-leg"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-cech-complex",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-etale-limit-finite-cech-coefficient-identity",
+  "lem-weil-pbc-etale-limit-finite-cech-coefficient-composition",
+  "lem-weil-pbc-etale-limit-finite-cech-coefficient-leg"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 09YP, displayed Cech comparison; agent expansion of coefficient-data plan step 3 (diagram and cocone laws)."
+  "place": "Tag 09YP canonical Cech comparison: separate identity, composition, and leg laws and assemble by conjunction introduction."
  },
  "mathlib_searches": [
   {
@@ -137,12 +113,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T231636-L-1962474",
+  "landing": "20261013T060416-L-582578",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

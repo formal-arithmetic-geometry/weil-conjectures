@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientIdentity
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientComposition
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientLeg
 
 /-! # Canonical coefficient maps on descended Čech complexes
 
@@ -20,6 +23,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
+-- Keep the existing signature, including its redundant geometric hypotheses.
+set_option linter.unusedVariables false in
 /-- Cochain maps with the specified coefficient components obey the diagram laws.
 Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the canonical Čech
 comparison. The inverse-image unit laws are expressed in
@@ -157,6 +162,17 @@ theorem etale_limit_finite_cech_coefficient_laws
       (∀ j : J, m j j (𝟙 j) = 𝟙 (Cj j)) ∧
       (∀ (j k r : J) (a : j ⟶ k) (b : k ⟶ r),
         m j r (a ≫ b) = m j k a ≫ m k r b) ∧
-      (∀ (j k : J) (a : j ⟶ k), m j k a ≫ l k = l j) := by sorry
+      (∀ (j k : J) (a : j ⟶ k), m j k a ≫ l k = l j) := by
+  dsimp
+  intro eNj eNlim γ δ hNj hNlim hγ hδ m l hml
+  exact ⟨etale_limit_finite_cech_coefficient_identity D c F φ hidentity hcomposition
+      G eG hG L U K V f i₀ U₀ V₀ f₀ eU eV he
+      eNj eNlim γ δ hNj hNlim hγ hδ m l hml,
+    etale_limit_finite_cech_coefficient_composition D c F φ hidentity hcomposition
+      G eG hG L U K V f i₀ U₀ V₀ f₀ eU eV he
+      eNj eNlim γ δ hNj hNlim hγ hδ m l hml,
+    etale_limit_finite_cech_coefficient_leg D c F φ hidentity hcomposition
+      G eG hG L U K V f i₀ U₀ V₀ f₀ eU eV he
+      eNj eNlim γ δ hNj hNlim hγ hδ m l hml⟩
 
 end AlgebraicGeometry.Etale
