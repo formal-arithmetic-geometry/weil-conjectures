@@ -10614,3 +10614,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/W2/Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherence (stage 3; reviewer PASS; first push; landing 20261013T015622-L-3029563 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:56 L: merged deliver/W2/Sheaf.AlgebraicGeometry.GradedModuleAffineBaseChange (stage 3; reviewer PASS; first push; landing 20261013T015622-L-3029665 (interface); batch 20261013T015540; modules 2; new nodes 1)
 - 01:56 L: merged deliver/W3/Sheaf.CategoryTheory.DerivedCoupleBoundaryVanishes (stage 3; reviewer PASS; first push; landing 20261013T015622-L-3029849 (proof); batch 20261013T015540; modules 1; new nodes 0)
+- 01:56 L: merged deliver/W4/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore (stage 3; reviewer PASS; first push; landing 20261013T015623-L-3029995 (proof); batch 20261013T015540; modules 1; new nodes 0)

@@ -25,7 +25,16 @@ comparison for `formalFunctionsFiniteι`, gives the result.
 (blueprint: lem-weil-pbc-formal-functions-finite-sheaf-quotient-closed) -/
 theorem formalFunctionsFiniteι_isClosedImmersion {X Y : Scheme.{u}} (f : X ⟶ Y)
     (y : Y) (n : ℕ) : IsClosedImmersion (formalFunctionsFiniteι f y n) := by
-  sorry
+  have hp : IsPullback (pullback.fst (formalFibreBaseMap Y y n) f)
+      (formalFunctionsFiniteι f y n)
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (formalFibreIdeal Y y n))))
+      (pullback.fst (Y.fromSpecStalk y) f) := by
+    apply ((IsPullback.of_hasPullback (Y.fromSpecStalk y) f).paste_vert_iff
+      (by simp [formalFunctionsFiniteι])).mp
+    simpa [formalFunctionsFiniteι, formalFibreBaseMap, formalFibreι] using
+      (IsPullback.of_hasPullback (formalFibreBaseMap Y y n) f)
+  apply MorphismProperty.of_isPullback hp
+  exact IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
 
 /-- Transport the closed-immersion unit quotient to the canonical finite-level map.
 Source: Stacks Project, Tags 02OD and 04CJ (1).
