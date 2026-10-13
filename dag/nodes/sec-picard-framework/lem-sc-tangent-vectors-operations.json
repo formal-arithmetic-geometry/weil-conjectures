@@ -21,7 +21,40 @@
  ],
  "proof": [
   {
-   "text": "Construct the dual-number pushout and verify the corresponding gluing or vector-space identities by the local-ring description of maps from spectra, as in Tag 0B2B.",
+   "text": "For a field K and a based scheme map b:Spec K→X over any scheme Y, define the tangent-vector subtype by its point and structure-map triangles. Prove functoriality of the square-zero coordinate maps and their compatibility with the point and projection maps by ring-homomorphism extensionality and the Spec composition law.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the finite-copy dual-number extension theorem for n=2 to obtain the unique gluing of two tangent vectors. Define addition by precomposition with the sum-of-coordinates map. Its point triangle follows from a coordinate restriction; its structure-map triangle follows by applying uniqueness to the common constant family in Y. Define scalar multiplication by coefficient scaling, and zero by the constant map. All operations satisfy both triangles.",
+   "uses": [
+    "lem-sc-dual-number-scheme-pushout"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The gluing of scale(r,a) and scale(t,a) is induced by the linear map z↦(rz,tz). Its sum restriction is scale(r+t,a). This proves additivity in the scalar, the two additive zero laws, and the inverse law with scalars -1 and 1. Exchanging coordinates of the two-copy gluing proves additive commutativity by uniqueness.",
+   "uses": [
+    "lem-sc-dual-number-scheme-pushout"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Glue a,d,e using the finite-copy extension theorem for n=3. Coordinate selection identifies their pairwise gluings with restrictions of this same three-copy gluing. Grouping its first two or last two coordinates identifies the two iterated sums with precomposition by (z0,z1,z2)↦z0+z1+z2; equality of the linear maps proves associativity.",
+   "uses": [
+    "lem-sc-dual-number-scheme-pushout"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scaling both coordinates of the two-copy gluing identifies the gluing of scale(t,a),scale(t,d). Equality of the linear maps t(z0+z1)=tz0+tz1 proves distributivity. Composition of scaling maps proves the multiplicative scalar law, and the identity and zero maps prove the remaining scalar laws.",
+   "uses": [
+    "lem-sc-dual-number-scheme-pushout"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the explicit operations and proved identities into AddCommGroup and Module structures, with the recursive natural and integer actions. Specialize K to the residue field and b to fromSpecResidueField. Zero and scalar formulas hold definitionally. Unique gluing proves the addition formula for every morphism Θ with the two prescribed restrictions.",
    "uses": [
     "lem-sc-dual-number-scheme-pushout"
    ],
@@ -32,9 +65,9 @@
   "lem-sc-dual-number-scheme-pushout"
  ],
  "proof_origin": {
-  "by": "stage-3 worker",
+  "by": "H3 stage-3 worker",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0B2B"
+  "place": "Tag 0B2B, proof of Lemma 33.16.2; explicit verification of its omitted coordinate diagrams"
  },
  "mathlib_searches": [
   {
@@ -97,13 +130,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y2",
+  "reviewer": "X-c285c",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T223426-L-1644010",
+  "landing": "20261013T001614-L-2330210",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: The unchanged theorem signature matches the node; the coordinate-gluing proof matches its recorded steps and dependency. Delivery and sole direct importer Sheaf.AlgebraicGeometry.TangentVectorsVectorSpace compile cleanly."
  }
 }
