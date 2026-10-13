@@ -6,6 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
+import Sheaf.AlgebraicGeometry.ExternalOpenFactorUnitsLeft
 
 /-! # The first-factor external section map from pullback units
 
@@ -194,7 +195,39 @@ theorem exists_externalSectionsUnitOpenTransportLeft
       ∀ (s : scalarObj f F (op V)) (t : scalarObj g G (op ⊤)),
         eT.hom (externalSectionsUnitAppLeft f g F G V (s ⊗ₜ[k] t)) =
           externalGlobalSectionsTensor (V.ι ≫ f) g (F.restrict V.ι) G
-            (eS.hom (s ⊗ₜ[k] t)) := by sorry
+            (eS.hom (s ⊗ₜ[k] t)) := by
+  obtain ⟨hTop, hRange, eF, eM, eN, hM, hN⟩ :=
+    exists_externalOpenFactorUnitsLeft f g F G V
+  have hb : externalOpenBaseChangeLeft f g V ≫ (pullback.fst f g ≫ f) =
+      pullback.fst (V.ι ≫ f) g ≫ (V.ι ≫ f) := by
+    simp [externalOpenBaseChangeLeft, ← Category.assoc]
+  obtain ⟨eT, hT⟩ := exists_scalarOpenTensorTransport (pullback.fst f g ≫ f)
+    (pullback.fst (V.ι ≫ f) g ≫ (V.ι ≫ f)) (externalOpenBaseChangeLeft f g V) hb
+    (pullback.fst f g ⁻¹ᵁ V) hTop hRange
+    ((tensorPullback (pullback.fst f g)).obj F)
+    ((tensorPullback (pullback.snd f g)).obj G) _ _ eM eN
+  refine ⟨tensorIso eF (Iso.refl _), eT, ?_⟩
+  intro s t
+  change eT.hom (tmulSection
+    ((scalarSectionUnit f (pullback.fst f g ≫ f) (pullback.fst f g) rfl F).app (op V) s)
+    (externalSecondSectionLeft f g G V t)) = _
+  rw [hT]
+  rw [scalarSectionUnit_apply, hM]
+  unfold externalSecondSectionLeft
+  change tmulSection _ (eN.hom.app ⊤
+    (tensorPullbackOpenSection (externalOpenBaseChangeLeft f g V)
+      ((tensorPullback (pullback.snd f g)).obj G) (pullback.fst f g ⁻¹ᵁ V) hTop
+      (((tensorPullback (pullback.snd f g)).obj G).val.map _
+        ((scalarSectionUnit g (pullback.fst f g ≫ f) (pullback.snd f g)
+          pullback.condition.symm G).app (op ⊤) t)))) = _
+  rw [scalarSectionUnit_apply]
+  refine (congrArg (fun z ↦ tmulSection
+    (M := (tensorPullback (pullback.fst (V.ι ≫ f) g)).obj (F.restrict V.ι))
+    (N := (tensorPullback (pullback.snd (V.ι ≫ f) g)).obj G) (U := ⊤)
+    (tensorPullbackTopSection (pullback.fst (V.ι ≫ f) g) (F.restrict V.ι) (eF.hom s)) z)
+    (hN t)).trans ?_
+  simp only [tensorIso_hom, Iso.refl_hom]
+  rfl
 
 end
 end AlgebraicGeometry.Scheme.Modules

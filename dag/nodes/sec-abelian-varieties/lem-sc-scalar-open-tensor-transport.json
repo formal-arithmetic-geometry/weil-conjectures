@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-scalar-open-tensor-transport",
+ "kind": "statement",
+ "title": "Scalar-linear tensor-section transport along an open immersion",
+ "statement": "Let k be a field, f:X→Spec k and g:Y→Spec k structure morphisms, and a:Y→X an open immersion with a≫f=g. Let U be an open of X whose inverse image is all of Y and which is contained in the image of a. For any O_X-modules M,N, O_Y-modules M′,N′ and coefficient isomorphisms a* M≅M′ and a* N≅N′, there is a k-linear isomorphism (M⊗N)(U)≅Γ(Y,M′⊗N′) carrying every tensor section s⊗t to the tensor of the two pullback-unit sections, followed by the supplied coefficient maps. Pullback-unit sections are the adjunction unit on U followed by restriction to Y. The scalar objects and tensor sections are those of [def-sc-scalar-global-sections-comparison].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0096",
+  "place": "Tags 0096 and 01CD; the open-immersion unit comparison, restriction to the top open and the tensor comparison"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-scalar-global-sections-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For any module P, compare the standard module-pullback adjunction with the specified tensor-pullback adjunction by uniqueness of left adjoints. The unit of an open immersion is bijective on an open contained in its range. The comparison is an isomorphism, so the specified unit is also bijective. Since a inverse-image U is the top open, the restriction to the top open is an isomorphism. The coefficient map of the scalar inverse-image adjunction is k-linear and agrees with this unit; this gives a scalar-linear isomorphism for P=M tensor N.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-pc-module-pullback-adjunction",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply module_pullback_tensor to a and compose its coefficient isomorphism with the tensor of the two supplied coefficient isomorphisms. Apply scalarHomApp at the top open to obtain a scalar-linear isomorphism. Compose with the unit-section isomorphism from the previous step. Naturality of the tensor coefficient map commutes with restriction to the top. Its formula on unit tensor sections, tmulSection_map and tensorHom_app_tmulSection give the required formula.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-sc-scalar-global-sections-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sc-scalar-global-sections-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0096, 0097, 01CD and 0BED",
+  "place": "Tags 0096 and 01CD; the open-immersion unit comparison, restriction to the top open and the tensor comparison; source read online"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an external tensor product of module sheaves to an open subscheme commutes with pullback units",
+   "results": "restrictFunctorIsoPullback, restrictAdjunction_unit_app_app, restrict_map, restrictFunctorComp_hom_app_app; no assembled external-product unit transport.",
+   "date": "2026-10-13",
+   "verdict": "Use the generic adjunction tools and prove sectionwise transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictAppIso\"",
+   "results": "12 hits: restrictAppIso, smul_restrictAppIso_hom/inv and restriction naturality variants.",
+   "date": "2026-10-13",
+   "verdict": "Additive restriction isomorphisms; scalar linearity and compatibility with successive units still need proof."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq_hom_app|tensorHom_app_tmulSection",
+   "results": "Mathlib Adjunction/Unique.lean:53; source TensorSection.lean:275. Local rg also found module_pullback_tensor and the normalized composition comparisons.",
+   "date": "2026-10-13",
+   "verdict": "Use uniqueness of adjoints, unit_conjugateEquiv_symm, and the proved tensor-section formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback units of module sheaves commute with restriction to an open subscheme and tensor products",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExternalSectionsUnitMapLeft",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Degree-zero Kunneth external-product normalization: Tags 0096 and 01CD; the open-immersion unit comparison, restriction to the top open and the tensor comparison",
+   "via": [
+    "lem-sc-external-sections-unit-open-transport-left",
+    "lem-sc-external-global-sections-tensor-finite-cover-left",
+    "lem-sc-external-global-sections-tensor-bijective",
+    "lem-sc-picard-external-cup-zero-tensor",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-external-global-sections-tensor-affine-right",
+    "lem-sc-external-global-sections-restriction-comparison-left"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarOpenTensorTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarOpenTensorTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_scalarOpenTensorTransport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackOpenSection",
+   "AlgebraicGeometry.Scheme.Modules.exists_scalarOpenTensorTransport"
+  ],
+  "statement": "theorem exists_scalarOpenTensorTransport\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (a : Y ⟶ X) [IsOpenImmersion a] (h : a ≫ f = g)\n    (U : X.Opens) (hTop : ⊤ ≤ a ⁻¹ᵁ U) (hRange : U ≤ a.opensRange)\n    (M N : X.Modules) (M' N' : Y.Modules)\n    (eM : (tensorPullback a).obj M ≅ M')\n    (eN : (tensorPullback a).obj N ≅ N') :\n    ∃ eT : scalarObj f (show X.Modules from M ⊗ N) (op U) ≅\n        scalarObj g (show Y.Modules from M' ⊗ N') (op ⊤),\n      ∀ (s : scalarObj f M (op U)) (t : scalarObj f N (op U)),\n        eT.hom (tmulSection s t) =\n          tmulSection (eM.hom.app ⊤ (tensorPullbackOpenSection a M U hTop s))\n            (eN.hom.app ⊤ (tensorPullbackOpenSection a N U hTop t))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T134803-L-130454",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T134803-L-130454",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
