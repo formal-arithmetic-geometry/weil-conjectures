@@ -9,7 +9,6 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Sections of tensor pullbacks on the small étale site
@@ -131,6 +130,161 @@ private theorem identitySections
   erw [hct]
   exact hs
 
+/-- The normalized composition map for a family of left adjoints.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private def compOfAdjunction
+    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
+    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
+    {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) :
+    L b ⋙ L a ≅ L (a ≫ b) :=
+  (conjugateIsoEquiv (adj (a ≫ b)) ((adj b).comp (adj a))).symm
+    (pushforwardComp a b).symm
+
+/-- Naturality of the unit on global sections.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem sectionsUnit_naturality {A B : Scheme.{u}} (f : A ⟶ B)
+    (L : B.Modules ⥤ A.Modules) (adj : L ⊣ pushforward f)
+    {M N : B.Modules} (φ : M ⟶ N) :
+    φ.app ⊤ ≫ sectionsUnitOfAdjunction f L adj N =
+      sectionsUnitOfAdjunction f L adj M ≫ (L.map φ).app ⊤ := by
+  have hu := congrArg (fun t ↦ t.app ⊤) (adj.unit_naturality φ).symm
+  change φ.app ⊤ ≫ (adj.unit.app N).app ⊤ =
+    (adj.unit.app M).app ⊤ ≫ (L.map φ).app (f ⁻¹ᵁ ⊤) at hu
+  have hn := (L.map φ).val.naturality (homOfLE f.preimage_top.ge).op
+  have ht := congrArg (fun t ↦ (forget₂ _ AddCommGrpCat).map t) hn
+  change (L.obj M).presheaf.map (homOfLE f.preimage_top.ge).op ≫ (L.map φ).app ⊤ =
+    (L.map φ).app (f ⁻¹ᵁ ⊤) ≫
+      (L.obj N).presheaf.map (homOfLE f.preimage_top.ge).op at ht
+  unfold sectionsUnitOfAdjunction
+  rw [← Category.assoc, hu, Category.assoc, ← ht, ← Category.assoc]
+
+/-- The unit equation before taking global sections.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem comp_unit
+    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
+    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
+    {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (G : C.Modules) :
+    (adj (a ≫ b)).unit.app G ≫ (pushforwardComp a b).inv.app _ =
+      (adj b).unit.app G ≫ (pushforward b).map ((adj a).unit.app ((L b).obj G)) ≫
+        (pushforward a ⋙ pushforward b).map ((compOfAdjunction L adj a b).hom.app G) := by
+  exact unit_conjugateEquiv_symm (adj (a ≫ b)) ((adj b).comp (adj a))
+    (pushforwardComp a b).inv G
+
+/-- The inverse image of the whole scheme contributes an identity restriction.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem sectionsUnit_eq {A B : Scheme.{u}} (f : A ⟶ B)
+    (L : B.Modules ⥤ A.Modules) (adj : L ⊣ pushforward f) (G : B.Modules) :
+    sectionsUnitOfAdjunction f L adj G =
+      (show Γ(G, ⊤) ⟶ Γ(L.obj G, ⊤) from (adj.unit.app G).app ⊤) := by
+  have hi : homOfLE f.preimage_top.ge = 𝟙 (⊤ : Opens A) := rfl
+  unfold sectionsUnitOfAdjunction
+  erw [hi, op_id, (L.obj G).presheaf.map_id, Category.comp_id]
+
+/-- Successive global-section units agree with the composite unit.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem sectionsUnit_comp
+    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
+    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
+    {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (G : C.Modules) :
+    sectionsUnitOfAdjunction b (L b) (adj b) G ≫
+      sectionsUnitOfAdjunction a (L a) (adj a) ((L b).obj G) ≫
+      ((compOfAdjunction L adj a b).hom.app G).app ⊤ =
+    sectionsUnitOfAdjunction (a ≫ b) (L (a ≫ b)) (adj (a ≫ b)) G := by
+  have hu := congrArg (fun t ↦ t.app ⊤) (comp_unit L adj a b G)
+  erw [sectionsUnit_eq, sectionsUnit_eq, sectionsUnit_eq]
+  simp only [Hom.comp_app, pushforward_map_app, Functor.comp_map,
+    pushforwardComp_inv_app_app] at hu
+  change ((adj (a ≫ b)).unit.app G).app ⊤ ≫ 𝟙 _ =
+    ((adj b).unit.app G).app ⊤ ≫
+      ((adj a).unit.app ((L b).obj G)).app ⊤ ≫
+      ((compOfAdjunction L adj a b).hom.app G).app ⊤ at hu
+  erw [Category.comp_id] at hu
+  exact hu.symm
+
+/-- Associativity of the normalized comparison maps.
+Source: Stacks, Tag 03DR; Mathlib `Adjunction.leftAdjointCompIso_assoc`
+(blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem compOfAdjunction_assoc
+    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
+    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
+    {A B C D : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (c : C ⟶ D) (F : D.Modules) :
+    ((compOfAdjunction L adj a b).hom.app ((L c).obj F)) ≫
+      (compOfAdjunction L adj (a ≫ b) c).hom.app F ≫
+      eqToHom (congrArg (fun f ↦ (L f).obj F) (Category.assoc a b c)) =
+    (L a).map ((compOfAdjunction L adj b c).hom.app F) ≫
+      (compOfAdjunction L adj a (b ≫ c)).hom.app F := by
+  have he : Functor.isoWhiskerLeft (pushforward a) (pushforwardComp b c) ≪≫
+      pushforwardComp a (b ≫ c) =
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (pushforwardComp a b) (pushforward c) ≪≫
+        pushforwardComp (a ≫ b) c := by
+    ext M V x
+    rfl
+  have h := Adjunction.leftAdjointCompIso_assoc (adj c) (adj b) (adj a)
+    (adj (b ≫ c)) (adj (a ≫ b)) (adj (a ≫ (b ≫ c)))
+    (pushforwardComp b c) (pushforwardComp a b)
+    (pushforwardComp (a ≫ b) c) (pushforwardComp a (b ≫ c)) he
+  have hc := congrArg (fun e ↦ e.hom.app F) h
+  dsimp only [Adjunction.leftAdjointCompIso, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.associator_inv_app] at hc
+  erw [Category.id_comp] at hc
+  erw [eqToHom_refl, Category.comp_id]
+  exact hc
+
+/-- The two section maps for three composable scheme morphisms agree.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem tripleSections
+    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
+    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
+    {A B C D : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (c : C ⟶ D) (F : D.Modules) :
+    sectionsUnitOfAdjunction (a ≫ b) (L (a ≫ b)) (adj (a ≫ b)) ((L c).obj F) ≫
+      ((compOfAdjunction L adj (a ≫ b) c).hom.app F).app ⊤ ≫
+      (eqToHom (congrArg (fun f ↦ (L f).obj F) (Category.assoc a b c))).app ⊤ =
+    (sectionsUnitOfAdjunction b (L b) (adj b) ((L c).obj F) ≫
+      ((compOfAdjunction L adj b c).hom.app F).app ⊤) ≫
+    (sectionsUnitOfAdjunction a (L a) (adj a) ((L (b ≫ c)).obj F) ≫
+      ((compOfAdjunction L adj a (b ≫ c)).hom.app F).app ⊤) := by
+  have ha := congrArg (fun φ ↦ φ.app ⊤) (compOfAdjunction_assoc L adj a b c F)
+  simp only [Hom.comp_app] at ha
+  rw [← sectionsUnit_comp L adj a b ((L c).obj F)]
+  simp only [Category.assoc]
+  rw [ha]
+  have hn := sectionsUnit_naturality a (L a) (adj a)
+    ((compOfAdjunction L adj b c).hom.app F)
+  dsimp only [Functor.comp_obj] at hn
+  exact (by simpa only [Category.assoc] using
+    congrArg (fun t ↦ sectionsUnitOfAdjunction b (L b) (adj b) ((L c).obj F) ≫
+      t ≫ ((compOfAdjunction L adj a (b ≫ c)).hom.app F).app ⊤) hn.symm)
+
+/-- Normalized sections restriction along a commutative triangle.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private def restrictionOfAdjunction
+    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
+    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
+    {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (d : A ⟶ C)
+    (p : a ≫ b = d) (F : C.Modules) : Γ((L b).obj F, ⊤) ⟶ Γ((L d).obj F, ⊤) :=
+  sectionsUnitOfAdjunction a (L a) (adj a) ((L b).obj F) ≫
+    ((compOfAdjunction L adj a b).hom.app F).app ⊤ ≫
+    (eqToHom (congrArg (fun f ↦ (L f).obj F) p)).app ⊤
+
+/-- Composition of normalized sections restrictions along commutative triangles.
+Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial). -/
+private theorem restrictionOfAdjunction_comp
+    (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
+    (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
+    {A B C D : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (c : C ⟶ D)
+    (d : B ⟶ D) (e : A ⟶ D) (p : b ≫ c = d) (q : a ≫ d = e)
+    (r : (a ≫ b) ≫ c = e) (F : D.Modules) :
+    restrictionOfAdjunction L adj (a ≫ b) c e r F =
+      restrictionOfAdjunction L adj b c d p F ≫
+        restrictionOfAdjunction L adj a d e q F := by
+  subst d
+  subst e
+  unfold restrictionOfAdjunction
+  have h := tripleSections L adj a b c F
+  simpa only [eqToHom_refl, Hom.id_app, Category.comp_id] using h
+
 /-- Restriction is semilinear over the map on global functions.
 Source: Stacks, Tag 03DR (blueprint: lem-sc-etale-qcoherent-presheaf-functorial).
 Proof: the unit is a module morphism into pushforward, whose scalar action is through
@@ -171,7 +325,9 @@ theorem etaleTensorSectionsRestriction_comp {X : Scheme.{u}} (F : X.Modules)
     {U V W : X.Etale} (h : W ⟶ V) (g : V ⟶ U) :
     etaleTensorSectionsRestriction F (h ≫ g) =
       etaleTensorSectionsRestriction F g ≫ etaleTensorSectionsRestriction F h := by
-  sorry
+  exact restrictionOfAdjunction_comp (@tensorPullback)
+    (fun {A B} f ↦ Classical.choose (exists_tensorPullbackAdjunction f))
+    h.left g.left U.hom V.hom W.hom g.w h.w (h ≫ g).w F
 
 /-- The presheaf `u ↦ Γ(U,u^*F)`, with the unit-normalized pullback restrictions.
 Source: Stacks, Tag 03DR, equation (35.8.1), and Tag 03DU, item 4
