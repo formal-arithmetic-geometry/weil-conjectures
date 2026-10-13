@@ -15,36 +15,45 @@
  ],
  "proof": [
   {
-   "text": "Use the supplied ring colimit cocones to compare A and B with their chosen colimits. Contract q along ULift.down and the cocone maps. Apply filtered-colimit localization at a prime to each ring diagram and transport through the supplied colimit isomorphisms and the ULift ring equivalences. The compatible original ring square identifies the base prime with q∩R. This gives colimit A_l ≅ R_(q∩R) and colimit B_l ≅ S_q as ring comparisons, characterized by their numerator formulas.",
+   "text": "Apply localizedRingColimitComparison to B and its explicit primeRingDiagram with identity stage equivalences. Its numerator compatibility is localRingHom_to_map. Apply the same theorem to A, using the original commuting ring square to identify the contracted stage ideals with the contraction of q′ along R′→S′. Obtain ring equivalences eB and eA with their coprojection formulas.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "lem-pc-localized-ring-colimit-comparison",
     "def-weil-pbc-category-colimit",
-    "def-weil-pbc-localization-at-prime"
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical fraction maps D_l,i→M_q are induced by ULift.down composed with ν_i. They are well defined by semilinearity and contracted denominators. Cocone naturality holds on fractions. To lift m/s in M_q, lift m using the original additive colimit and s using the top ring colimit, then move both to a common stage. Since the image of the lifted denominator is s∉q, its stage denominator is outside the contracted prime. Thus every fraction has a stage representative.",
+   "text": "Apply localizedModuleColimitComparison to D and primeModuleDiagram. The stage additive equivalences are identities and the fraction maps are primeModuleMap induced by κ and ν. Naturality of contracted primes makes transition denominators valid; primeModuleMap_mk proves the transition and target fraction formulas. Obtain eN and its coprojection formula.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-pc-localized-module-colimit-comparison",
     "def-weil-pbc-category-colimit",
-    "def-weil-pbc-module-localization",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
    ],
    "elementary": false
   },
   {
-   "text": "If two stage fractions have equal image, first move to a common stage and write them x/s and y/t. Equality in M_q gives u∉q killing t·ν(x)−s·ν(y). Lift u to the top ring diagram, pass to a common later stage, and descend the zero relation in the supplied additive colimit by eventual equality. The lifted u remains outside every contracted prime. At that later stage the fraction relation holds, so the two fractions coincide. The elementwise filtered-colimit criterion, applied over ℤ to the additive groups, proves that this fraction cocone is a colimit and gives the additive comparison colimit D_l ≅ M_q.",
+   "text": "Use Concrete.colimit_exists_rep for Bq and Nq, and a common upper bound of their representing stages. Naturality of colimit coprojections moves both representatives to that stage. The assumed localized scalar formula, the coprojection formulas for eB and eN, and primeModuleMap_smul give eN(b • x)=eB(b) • eN(x).",
    "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
     "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-criterion",
-    "def-weil-pbc-module-localization",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+    "def-weil-pbc-module-localization"
    ],
    "elementary": false
   },
   {
-   "text": "The supplied ψ has the coprojection formula, so after the ring comparisons it equals the canonical R_(q∩R)→S_q map by uniqueness of the ring-colimit mediator. Likewise any scalar and any module element can be lifted to a common localized stage. Their product is therefore determined by the supplied semilinearity equation, which identifies act with the fraction multiplication action of S_q after the additive comparison. Compose the inverse base ring comparison with R→R_(q∩R) to obtain ρ and its IsLocalization witness. The inverse additive comparison M_q→colimit D_l is R-linear because the original R-action is restricted from S by IsScalarTower, ψ matches the canonical localized ring map, and ρ matches R→R_(q∩R). This is the claimed linear equivalence.",
+   "text": "Prove eB.comp ψ = ℓ.comp eA by colimit.hom_ext, localization ringHom_ext, and the numerator formulas. Here ℓ is localRingHom for R′→S′. The original cocone square proves the resulting equality on original ring elements. Put ρ′=eA.symm.comp(algebraMap R′ R′_p); transport IsLocalization along eA.symm. Compose ρ′ with ULift.up to construct ρ. IsLocalization.of_ringEquiv_left and the explicit equality of mapped prime complements give the required R-localization witness.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct additive maps gd and gu on localized modules using primeModuleMap for ULift.down and ULift.up. Fraction induction proves they are inverse, giving eU. For e=eN.trans eU, the semilinear formula and the ring square reduce e(r • x)=r • e(x) to a calculation on fractions. Use localRingHom_to_map, mk_one_eq_algebraMap, mk_smul_mk, primeModuleMap_mk, and smul'_mk; the last numerator equality is IsScalarTower.algebraMap_smul S r m.down. Bundle e as an R-linear equivalence and take its inverse.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "def-weil-pbc-localization-at-prime",
@@ -54,19 +63,19 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-pc-localized-ring-colimit-comparison",
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
   "def-weil-pbc-module-localization",
+  "lem-pc-localized-module-colimit-comparison",
   "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-criterion"
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "M4",
+  "agent": "A4",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00RC first reduction and Tag 037D first paragraph; fraction and scalar details written out by M4. Source checked at the official Stacks pages and in a downloaded algebra.tex under the sandbox scratch directory."
+  "place": "Tag 037D proof first paragraph and Tag 00RC first reduction; checked at https://stacks.math.columbia.edu/tag/037D and https://stacks.math.columbia.edu/tag/00RC. Assembly and explicit ULift fraction calculation written by A4, using the existing localized ring and module comparison interfaces."
  },
  "mathlib_searches": [
   {
@@ -156,10 +165,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M4",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T151135-L-877636",
-  "kind": "interface",
+  "landing": "20261013T153458-L-1084423",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
