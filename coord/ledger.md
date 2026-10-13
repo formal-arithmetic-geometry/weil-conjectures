@@ -12789,3 +12789,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:28 L: returned deliver/U3/Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison (reviewer RETURN: (reviewer X-52e2d, head 52e2dfbcc) B5/C4: Incorrect source citation. In lean/Sheaf/AlgebraicGeometry/FlatBaseChangeChart)
 - 14:28 L: merged deliver/A3/Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIsoCore (stage 3; reviewer PASS; first push; landing 20261013T142850-L-495189 (proof); batch 20261013T142848; modules 1; new nodes 0)
 - 14:28 L: merged deliver/A4/Sheaf.AlgebraicGeometry.KoszulOpenAugmentationCechUnit (stage 3; reviewer PASS; first push; landing 20261013T142850-L-495365 (proof); batch 20261013T142848; modules 1; new nodes 0)
+- 14:28 L: merged deliver/B3/Sheaf.Algebra.Homology.HomComplexShiftRight (stage 3; reviewer PASS; first push; landing 20261013T142851-L-495496 (proof); batch 20261013T142848; modules 1; new nodes 0)
