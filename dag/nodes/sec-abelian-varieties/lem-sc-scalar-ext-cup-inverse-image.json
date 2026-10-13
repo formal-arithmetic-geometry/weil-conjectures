@@ -12,23 +12,25 @@
  },
  "proof": [
   {
-   "text": "The inverse image of sheaves of k-vector spaces is exact and its canonical oplax tensor comparison is an isomorphism: on stalks it is the identity on the k-tensor of the two stalks. The unit comparison identifies the inverse image of the constant sheaf k with the constant sheaf k. This is the same comparison as scalarInverseUnitIso, since both are the adjoint of the constant section 1. Expand scalarExtCup as its two tensor-functor transports and Yoneda composition. Exact-functor transport preserves composition and degree-zero morphisms. The oplax tensor comparison intertwines inverse image followed by each tensor functor with the corresponding tensor functor followed by inverse image. Apply naturality of Ext transport under these comparison transformations. The oplax left-unitor identity identifies the initial degree-zero morphism, and associativity of Ext composition gives the equality before postcomposition by phi and psi. Naturality of tensoring under phi and psi moves these degree-zero morphisms to the two inputs. Equivalently, apply inverse image to the signed resolution tensor pairing of Tag 07MB and then the two coefficient morphisms; exactness and Tag 0FKV identify both augmentations. No signs change, since all comparison maps have degree zero. The same identities apply in degree zero, for zero sheaves and on empty schemes.",
+   "text": "Expand scalarExtCup into its two Yoneda tensor transports. Ext.mapExactFunctor_comp transports that composition. Reassociate the final degree-zero coefficient map to the second transport, and apply the second-factor formula. Move its degree-zero source comparison to the first transport using Ext associativity, then apply the first-factor formula. The result is precisely the expanded cup product of the two pulled-back coefficient classes.",
    "uses": [
-    "def-sc-field-linear-module-cohomology-operations"
+    "lem-sc-scalar-ext-cup-inverse-image-first",
+    "lem-sc-scalar-ext-cup-inverse-image-second"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations"
+  "lem-sc-scalar-ext-cup-inverse-image-first",
+  "lem-sc-scalar-ext-cup-inverse-image-second"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "M1",
+  "group": "S2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology Tags 01FD, 07MB, 0FKV; generic exact inverse-image and tensor pairing argument. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages.",
-  "note": "Extracted strict part of the original node argument; specialization to the actual Lean definitions written by M1."
+  "note": "Compiling reduction into the two separate tensor-transport squares; final combination is Ext composition preservation and associativity."
  },
  "mathlib_searches": [
   {
@@ -112,9 +114,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T045539-L-131692",
+  "landing": "20261013T100121-L-2485574",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

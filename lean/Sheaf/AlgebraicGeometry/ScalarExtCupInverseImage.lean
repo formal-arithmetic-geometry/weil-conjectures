@@ -6,6 +6,8 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+import Sheaf.AlgebraicGeometry.ScalarExtCupInverseImageFirst
+import Sheaf.AlgebraicGeometry.ScalarExtCupInverseImageSecond
 
 /-! # ScalarExtCupInverseImage
 
@@ -66,7 +68,17 @@ theorem scalarExtCup_inverseImage (t : Y ⟶ X)
             (Abelian.Ext.mk₀ φ) (add_zero p))
         (((Abelian.Ext.mk₀ (scalarInverseUnitIso t).inv).comp
           (b.mapExactFunctor (scalarInverseImage t)) (zero_add q)).comp
-            (Abelian.Ext.mk₀ ψ) (add_zero q)) := by sorry
+            (Abelian.Ext.mk₀ ψ) (add_zero q)) := by
+  unfold scalarExtCup
+  rw [Abelian.Ext.mapExactFunctor_comp]
+  simp only [Abelian.Ext.comp_assoc_of_third_deg_zero]
+  rw [scalarExtCup_inverseImage_second t A B A' B' φ ψ q b]
+  rw [← Abelian.Ext.comp_assoc_of_second_deg_zero]
+  rw [← Abelian.Ext.comp_assoc _ _ _ (zero_add p) rfl (by simp)]
+  rw [← Abelian.Ext.comp_assoc_of_third_deg_zero]
+  rw [scalarExtCup_inverseImage_first t A A' φ p a]
+  simp only [Abelian.Ext.comp_assoc_of_third_deg_zero]
+
 
 end
 end AlgebraicGeometry.Scheme.Modules
