@@ -6,6 +6,8 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationData
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationCompletion
 
 /-! # From local sheaf presentations to flat stalk coordinates
 
@@ -92,6 +94,11 @@ theorem standardSingleFlatCounit_localization
             (RingedSpace.moduleStalkFunctor A.toRingedSpace a).map
                 ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap p M g)) =
               eL.hom ≫ (DerivedCategory.homologyFunctor _ n).map
-                (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ eR.hom := by sorry
+                (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ eR.hom := by
+  obtain ⟨P, hPbound, hPflat⟩ :=
+    standardSingleFlatCounit_localization_data h_affine p M hM g a
+  obtain hrest :=
+    standardSingleFlatCounit_localization_completion h_affine p M hM g a P hPbound hPflat
+  exact ⟨P, hPbound, hPflat, hrest⟩
 
 end AlgebraicGeometry

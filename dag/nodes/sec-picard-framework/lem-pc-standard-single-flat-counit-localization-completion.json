@@ -1,0 +1,106 @@
+{
+ "id": "lem-pc-standard-single-flat-counit-localization-completion",
+ "kind": "statement",
+ "title": "Derived counit completion from a bounded flat stalk complex",
+ "statement": "Under the affine open presentation hypothesis, given a bounded-above termwise-flat stalk complex P over the base stalk ring, the derived scalar-extension functor, counit, all homology identifications, and the required compatibility square exist.",
+ "stmt_deps": [
+  "def-pc-standard-single-flat-counit-presentation-on-open",
+  "def-pc-standard-single-base-change-map",
+  "lem-pc-stalk-derived-extension-comparison-intermediate"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0DJ9, 06YB and 0D5S"
+ },
+ "proof": [
+  {
+   "text": "Transport the affine sheaf presentation through exact stalks and the universal derived scalar-extension pair; apply homology and the counit compatibility to obtain the square in every degree.",
+   "uses": [
+    "def-pc-standard-single-base-change-map",
+    "lem-pc-stalk-derived-extension-comparison-intermediate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-standard-single-base-change-map",
+  "lem-pc-stalk-derived-extension-comparison-intermediate"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 0DJ9, 06YB and 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded flat stalk complex derived scalar extension",
+   "results": "no exact result",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZero complex Module.Flat stalk",
+   "results": "no exact result",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg bounded flat stalk counit",
+   "results": "no exact result",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalization",
+  "date": "2026-10-14",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-standard-single-flat-counit-localization",
+   "place": "localization proof step 3",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationCompletion",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleFlatCounitLocalizationCompletion.lean",
+  "declaration": "AlgebraicGeometry.standardSingleFlatCounit_localization_completion",
+  "statement": "theorem standardSingleFlatCounit_localization_completion\n    (h_affine : ∀ {Y₀ B₀ A₀ : Scheme.{u}} (p₀ : Y₀ ⟶ B₀)\n      [QuasiCompact p₀] [QuasiSeparated p₀] [IsAffine B₀] [IsAffine A₀]\n      (g₀ : A₀ ⟶ B₀), StandardSingleFlatCounitOnOpen p₀ g₀ ⊤)\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]\n    (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : A ⟶ B) (a : A) :\n    letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let R := B.presheaf.stalk (g a)\n    let T := A.presheaf.stalk a\n    letI := HasDerivedCategory.standard (ModuleCat.{u} R)\n    letI := HasDerivedCategory.standard (ModuleCat.{u} T)\n    ∀ (P : CochainComplex (ModuleCat.{u} R) ℤ),\n      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i)) →\n      (∀ i : ℤ, Module.Flat R (P.X i)) →\n      ∃ (LF : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} T))\n        (ε : DerivedCategory.Qh ⋙ LF ⟶\n          (ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory (.up ℤ) ⋙\n            DerivedCategory.Qh),\n        LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)) ∧\n        ∀ n : ℤ,\n          ∃ (eL : (RingedSpace.moduleStalkFunctor A.toRingedSpace a).obj\n              ((DerivedCategory.homologyFunctor _ n).obj\n                ((derivedPullback g).obj ((schemeDerivedDirectImage p).obj\n                  ((DerivedCategory.singleFunctor _ 0).obj M)))) ≅\n              (DerivedCategory.homologyFunctor _ n).obj\n                (LF.obj (DerivedCategory.Qh.obj\n                  ((HomotopyCategory.quotient _ (.up ℤ)).obj P))))\n            (eR : (DerivedCategory.homologyFunctor _ n).obj\n                (DerivedCategory.Qh.obj\n                  (((ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory\n                    (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≅\n              (RingedSpace.moduleStalkFunctor A.toRingedSpace a).obj\n                ((DerivedCategory.homologyFunctor _ n).obj\n                  ((schemeDerivedDirectImage (pullback.snd p g)).obj\n                    ((DerivedCategory.singleFunctor _ 0).obj\n                      (Scheme.Modules.tensorPullbackObj (pullback.fst p g) M))))),\n            (RingedSpace.moduleStalkFunctor A.toRingedSpace a).map\n                ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap p M g)) =\n              eL.hom ≫ (DerivedCategory.homologyFunctor _ n).map\n                (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ eR.hom",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T222412-L-1226082",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T222412-L-1226082",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
