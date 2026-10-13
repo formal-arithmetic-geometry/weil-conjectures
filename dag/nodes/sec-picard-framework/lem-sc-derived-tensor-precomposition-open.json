@@ -15,7 +15,7 @@
  },
  "proof": [
   {
-   "text": "In standard localizations, take the unit isomorphism from the canonical monoidal model of derived pullback. Transport it through the localization equivalences defining derivedPullbackAcrossUniverses. The localization tensor units are the images of the degree-zero module unit, so the K-flat unit comparison identifies the transported map with e:L(1_Y)≅1_X.",
+   "text": "Use the strong monoidal model of standard derived pullback and its inverse unit isomorphism. Localization.compUniqFunctor identifies the tensor unit (Qh of the degree-zero structure module) with the standard unit. Map this comparison by standard pullback and then the inverse standard equivalence; compose with the inverse equivalence unit. This constructs e in the specified independent universes.",
    "uses": [
     "def-pc-derived-pullback-monoidal-model",
     "def-pc-derived-pullback-across-universes"
@@ -23,20 +23,27 @@
    "elementary": false
   },
   {
-   "text": "Perfect I has quasi-coherent cohomology. Apply derived pullback preservation in the standard categories and transport cohomology along localization equivalences. Apply canonical derived tensor quasi-coherent closure with P. This gives hR.",
+   "text": "Perfect I has quasi-coherent cohomology by lem-sc-perfect-qcoherent. Uniqueness of the localization lift of homology gives homologyComparison, so both directions of schemeDerivedStandardEquivalence preserve quasi-coherence. Apply standard derived pullback preservation and transport its conclusion back to X. Apply canonical_derivedTensor_preserve_QCoh with P.property.",
    "uses": [
+    "lem-sc-perfect-qcoherent",
     "lem-pc-derived-pullback-tensor-qcoh",
     "lem-pc-canonical-derived-tensor-qcoh",
-    "def-pc-perfect-complex",
     "def-pc-derived-pullback-across-universes"
    ],
    "elementary": false
   },
   {
-   "text": "The natural open-restriction pullback comparison sends L(i) restricted to f⁻¹(V) to pullback of i restricted to V. It is an isomorphism. The natural tensor-restriction comparison sends its whisker by P to its whisker by P|f⁻¹(V). Restriction preserves the unit isomorphism e and the left unitor. Functors preserve isomorphisms, so the composite j restricts to an isomorphism.",
+   "text": "An exact functor commutes with the unique standard localization comparisons: compare its Qh factorizations and descend the resulting natural isomorphism by full faithfulness of precomposition with Qh. Apply this to both over restriction functors. Transfer the assumption on i to standard restriction, compose restriction with the over-site equivalence, and use the natural standard open-restriction pullback comparison. Reflect invertibility through the derived over equivalence and the standard comparison to obtain invertibility of restricted L(i).",
    "uses": [
     "lem-pc-affine-derived-pullback-tensor-tilde",
     "def-pc-derived-pullback-across-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct a derived localization for the open subscheme, in the given over-site universe, by composing the complex over-site equivalence with the supplied localization; its universal property follows by transport along that equivalence. The natural derived tensor restriction comparison, evaluated at the fixed second factor P, is an isomorphism between tensorRight P followed by restriction and restriction followed by tensorRight of restricted P. NatIso.isIso_map_iff and reflection through the derived over equivalence show that restriction of L(i) whiskered by P is invertible. Finally, restriction preserves the isomorphisms e.hom whiskered by P and the left unitor. Functor.map_comp and the composition instance conclude that the displayed composite is invertible.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
    ],
    "elementary": false
   }
@@ -44,15 +51,15 @@
  "proof_deps": [
   "def-pc-derived-pullback-across-universes",
   "def-pc-derived-pullback-monoidal-model",
-  "def-pc-perfect-complex",
   "lem-pc-affine-derived-pullback-tensor-tilde",
   "lem-pc-canonical-derived-tensor-qcoh",
-  "lem-pc-derived-pullback-tensor-qcoh"
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-sc-perfect-qcoherent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0E4G, Lemma 48.4.4, expanded into the two geometric steps by S1; read online at https://stacks.math.columbia.edu/tag/0E4G"
+  "document": "literature/stacks-project/perfect.tex and duality.tex",
+  "place": "Tags 08DW and 08DX, natural restriction computations; Tag 0E4G, Lemma 48.4.4 final paragraph. K1 formalized localization transport and the categorical combination from the existing stated dependencies."
  },
  "mathlib_searches": [
   {
@@ -122,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S1",
+  "reviewer": "X-8f5d4",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T111921-L-3062264",
+  "landing": "20261013T130034-L-3923421",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module compiles cleanly with its direct importer; theorem signature and target statement match base byte-for-byte, DAG dependencies match proof uses, and interface changes are local."
  }
 }
