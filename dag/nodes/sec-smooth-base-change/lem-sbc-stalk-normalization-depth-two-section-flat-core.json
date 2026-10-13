@@ -12,9 +12,11 @@
  ],
  "proof": [
   {
-   "text": "For every z over x, lift the pair (z,b) to the pullback. The projection stalk map is flat and local, hence faithfully flat. The composite stalk map is flat by the pullback identity. Flatness preserves tensor injectivity and faithful flatness reflects it, so the stalk map of p at z is flat. The full tensor argument is written inline, with no duplicated helper declarations.",
-   "uses": [],
-   "elementary": true
+   "text": "For every z over x, lift (z,b) to the pullback with Pullback.exists_preimage_pullback. The projection stalk map is flat and local, hence faithfully flat. The composite stalk map is flat by the pullback identity. Apply the already proved source-library algebra descent theorem Module.Flat.of_flat_of_faithfullyFlat to deduce flatness of the stalk map of p at z.",
+   "uses": [
+    "lem-weil-pbc-flat-algebra-faithfully-flat-descent"
+   ],
+   "elementary": false
   },
   {
    "text": "The finite flat target locus theorem makes F={y | every source stalk over y is flat} open. The first step puts x in F. Take W=F; stalk isomorphisms for restriction and the stalk criterion imply Flat (p restricted to W).",
@@ -25,6 +27,7 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
   "lem-sbc-finite-flat-target-locus"
  ],
  "proof_origin": {
@@ -32,7 +35,7 @@
   "by": "E4",
   "document": "Stacks Project",
   "place": "Tag 0EYJ, flatness descent and finite flat target locus",
-  "note": "Generalized in place to finite morphisms with a flat test; formal splitting is invoked only by the unchanged caller theorem."
+  "note": "Q4 second reading replaces the inline tensor calculation by the exact proved source-library algebra descent theorem; the statement and caller interfaces are unchanged."
  },
  "mathlib_searches": [
   {
@@ -112,12 +115,12 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-537cb",
-  "group": "E4",
+  "reviewer": "COMPILER",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T113340-L-3182609",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, proofs and holes to nodes, change record and Stacks sources; verified all four compiles, axioms, unchanged caller signature, direct-importer compile and original caller failure."
+  "landing": "20261013T222410-L-1225522",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-13",

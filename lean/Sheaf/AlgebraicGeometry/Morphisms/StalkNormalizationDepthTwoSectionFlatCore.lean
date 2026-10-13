@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus
 import Mathlib.RingTheory.RingHom.FaithfullyFlat
+import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!
 # Flatness near a point from a flat test
@@ -67,21 +68,9 @@ theorem stalk_normalization_depth_two_section_flat_core
       have hfg : (g.comp f).Flat := hcomp
       have hg : g.FaithfullyFlat := hg
       algebraize [f, g, g.comp f]
-      change Module.Flat R A
-      rw [Module.Flat.iff_lTensor_preserves_injective_linearMap]
-      intro N P _ _ _ _ l hl
-      apply (Module.FaithfullyFlat.lTensor_injective_iff_injective A B
-        (AlgebraTensorModule.lTensor A A l)).mp
-      have h : Function.Injective (LinearMap.lTensor B l) :=
-        Module.Flat.lTensor_preserves_injective_linearMap l hl
-      have heq := AlgebraTensorModule.lTensor_comp_cancelBaseChange R A A (M := B) l
-      have hh : Function.Injective ((AlgebraTensorModule.lTensor A B l).comp
-          (AlgebraTensorModule.cancelBaseChange R A A B N).toLinearMap) :=
-        h.comp (AlgebraTensorModule.cancelBaseChange R A A B N).injective
-      rw [heq] at hh
-      intro a b hab
-      apply hh
-      exact congrArg (AlgebraTensorModule.cancelBaseChange R A A B P) hab
+      have : Module.Flat R B := hfg
+      have : Module.FaithfullyFlat A B := hg
+      exact Module.Flat.of_flat_of_faithfullyFlat (A := R) (B := A) (C := B)
     change g w = z at hw
     rw [hw] at hp
     exact hp
