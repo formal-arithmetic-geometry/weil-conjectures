@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 
+import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootFiniteEtaleModel
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteStrictHenselianAlgebraEtaleSection
+import Sheaf.Paper.StrictHenselizationLocalStructure
+
 /-!
 # A section on a punctured root cover over the strict henselization
 
@@ -66,6 +70,44 @@ theorem GaloisCover.strict_hensel_root_section
     let q := Spec.map (CommRingCat.ofHom (algebraMap H A))
     let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)
     ∃ s : V.toScheme ⟶ W.P,
-      s ≫ W.π ≫ i = V.ι ≫ q ≫ Spec.map b ≫ φ := by sorry
+      s ≫ W.π ≫ i = V.ι ≫ q ≫ Spec.map b ≫ φ := by
+  classical
+  dsimp only
+  let H := strictHenselizationRing barY
+  let g := b.hom f
+  let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)
+  let N := Spec (CommRingCat.of A)
+  let q := Spec.map (CommRingCat.ofHom (algebraMap H A))
+  let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)
+  obtain ⟨E, p, _, hp, hsurj, δ, hδ⟩ :=
+    W.strict_hensel_root_finite_etale_model i G R φ f hG hf β hβ barY b hb
+  let : Etale p := hp
+  obtain ⟨hlocal, hstrict⟩ := AlgebraicGeometry.strictHenselizationLocalStructure barY
+  let : IsLocalRing H := hlocal
+  let : IsStrictlyHenselianLocalRing H := hstrict
+  have hm : ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g).Monic := by
+    exact Polynomial.monic_X_pow_sub_C g (Nat.card_pos.ne')
+  let : Module.Finite H A := hm.finite_adjoinRoot
+  obtain ⟨σ, hσ⟩ := finite_strict_henselian_algebra_etale_section H A p hsurj
+  let l : V.toScheme ⟶ pullback p V.ι :=
+    pullback.lift (V.ι ≫ σ) (𝟙 _) (by
+      rw [Category.assoc, hσ]
+      change V.ι ≫ 𝟙 N = 𝟙 V.toScheme ≫ V.ι
+      simp only [Category.comp_id, Category.id_comp])
+  change δ.hom ≫ pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ) =
+    pullback.snd p V.ι at hδ
+  refine ⟨l ≫ δ.hom ≫ pullback.fst (W.π ≫ i)
+    (V.ι ≫ q ≫ Spec.map b ≫ φ), ?_⟩
+  calc
+    (l ≫ δ.hom ≫ pullback.fst (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)) ≫
+        W.π ≫ i =
+        l ≫ δ.hom ≫ pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ) ≫
+          (V.ι ≫ q ≫ Spec.map b ≫ φ) := by
+      simp only [Category.assoc, pullback.condition]
+    _ = V.ι ≫ q ≫ Spec.map b ≫ φ := by
+      rw [← Category.assoc δ.hom, hδ]
+      change l ≫ pullback.snd p V.ι ≫ (V.ι ≫ q ≫ Spec.map b ≫ φ) = _
+      rw [← Category.assoc, show l ≫ pullback.snd p V.ι = 𝟙 _ from
+        pullback.lift_snd _ _ _, Category.id_comp]
 
 end AlgebraicGeometry.Scheme

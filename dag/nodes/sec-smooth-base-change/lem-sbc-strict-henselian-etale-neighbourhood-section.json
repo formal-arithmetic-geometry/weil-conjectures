@@ -1,0 +1,109 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C3",
+  "document": "Stacks Project",
+  "place": "Source theorem exists_section_of_etale_of_isStrictlyHenselianLocalRing; Stacks Tag 03QO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite algebras over a strictly henselian ring are products of strictly henselian local rings and every surjective etale cover has a section",
+   "date": "2026-10-13",
+   "results": "8 hits: HenselianLocalRing.TFAE, HenselianLocalRing, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePair.instFormallyEtaleRing, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Field.henselian",
+   "verdict": "No exact match for this full geometric assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsStrictlyHenselianLocalRing",
+   "date": "2026-10-13",
+   "results": "0 hits: loogle: unknown identifier 'IsStrictlyHenselianLocalRing'",
+   "verdict": "No exact match for this full geometric assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictlyHenselian|strict.*hensel.*root|root.*finite.*etale",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact match for this full geometric assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective etale morphism over a finite algebra of a strictly henselian local ring admits a section",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorStrictHenselRootSection",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph, strict henselian root calculation in 0EYG: Etale surjections over finite strictly henselian base algebras admit sections",
+   "via": [
+    "lem-sbc-regular-divisor-strict-hensel-root-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "id": "lem-sbc-strict-henselian-etale-neighbourhood-section",
+ "title": "An etale neighbourhood of a strictly henselian closed point has a section",
+ "statement": "Let R be a commutative strictly henselian local ring [def-weil-pbc-henselian-terminology], U a scheme [def-weil-pbc-scheme-conventions], f:U→Spec R etale [def-weil-pbc-etale-site], and y∈U with f(y) the closed point. There exists sigma:Spec R→U with sigma;f=id.",
+ "source": {
+  "document": "WeilConjectures/AlgebraicGeometry/Sites/StrictlyHenselian.lean",
+  "place": "exists_section_of_etale_of_isStrictlyHenselianLocalRing, lines 65-108; strictly henselian etale-neighbourhood section used in Stacks Tag 0EYG"
+ },
+ "proof": [
+  {
+   "text": "Take an affine open containing y, with coordinate ring B and prime n corresponding to y. The etale map R→B makes B_n weakly etale over R. Its structure map is local since n contracts to the maximal ideal. A local weakly etale algebra over a strictly henselian local ring has bijective structure map; invert it to define Spec R→Spec B_n, then compose with Spec B_n→Spec B→U. Naturality of Spec and the inverse equation give the section identity. This is already proved in the source library, whose declaration is used unchanged.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian",
+  "declaration": "AlgebraicGeometry.Scheme.exists_section_of_etale_of_isStrictlyHenselianLocalRing",
+  "statement": "theorem exists_section_of_etale_of_isStrictlyHenselianLocalRing {U : Scheme.{u}}\n    (f : U ⟶ Spec (.of R)) [AlgebraicGeometry.Etale f] (y : U)\n    (hy : f y = IsLocalRing.closedPoint R) :\n    ∃ σ : Spec (.of R) ⟶ U, σ ≫ f = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T131947-L-4087045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T131947-L-4087045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

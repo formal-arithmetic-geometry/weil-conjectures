@@ -1,0 +1,127 @@
+{
+ "id": "lem-sbc-finite-strict-henselian-algebra-etale-section",
+ "kind": "statement",
+ "title": "Etale surjections over finite strictly henselian base algebras admit sections",
+ "statement": "Let H be a commutative strictly henselian local ring [def-weil-pbc-henselian-terminology], A a commutative H-algebra finite as an H-module, and E a scheme [def-weil-pbc-scheme-conventions]. For every etale morphism p:E→Spec A [def-weil-pbc-etale-site] surjective on points, there is sigma:Spec A→E with sigma;p=id. No finiteness of p is required; A=0 is allowed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 04GH (finite-over-henselian), 04GK (finite-etale-over-henselian), and 0EYG (strict henselian splitting calculation)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite henselian algebra decomposition to write A as a finite product of henselian local H-algebras B_j with local structure maps and finite residue field extensions. Each residue field is separably closed by Algebra.IsAlgebraic.isSepClosed, since that of H is separably closed.",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each j, pull p back along Spec B_j→Spec A. Surjectivity provides a point over the closed point. Apply exists_section_of_etale_of_isStrictlyHenselianLocalRing, and compose the resulting section with the first pullback projection to get s_j; p = Spec B_j→Spec A.",
+   "uses": [
+    "lem-sbc-strict-henselian-etale-neighbourhood-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-product spectrum is the coproduct of the factor spectra (sigmaSpec is an isomorphism). Compose the inverse of this isomorphism with Sigma.desc s_j. Sigma.hom_ext proves its composite with p is identity. The same formula includes the empty product.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C3",
+  "document": "Stacks Project",
+  "place": "Tags 04GH (finite-over-henselian), 04GK (finite-etale-over-henselian), and 0EYG (strict henselian splitting calculation)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite algebras over a strictly henselian ring are products of strictly henselian local rings and every surjective etale cover has a section",
+   "date": "2026-10-13",
+   "results": "8 hits: HenselianLocalRing.TFAE, HenselianLocalRing, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePair.instFormallyEtaleRing, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Field.henselian",
+   "verdict": "No exact match for this full geometric assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsStrictlyHenselianLocalRing",
+   "date": "2026-10-13",
+   "results": "0 hits: loogle: unknown identifier 'IsStrictlyHenselianLocalRing'",
+   "verdict": "No exact match for this full geometric assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictlyHenselian|strict.*hensel.*root|root.*finite.*etale",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact match for this full geometric assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective etale morphism over a finite algebra of a strictly henselian local ring admits a section",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorStrictHenselRootSection",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph, strict henselian root calculation in 0EYG: Etale surjections over finite strictly henselian base algebras admit sections",
+   "via": [
+    "lem-sbc-regular-divisor-strict-hensel-root-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteStrictHenselianAlgebraEtaleSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteStrictHenselianAlgebraEtaleSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_strict_henselian_algebra_etale_section",
+  "statement": "theorem finite_strict_henselian_algebra_etale_section\n    (H A : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]\n    [CommRing A] [Algebra H A] [Module.Finite H A]\n    {E : Scheme.{u}} (p : E ⟶ Spec (.of A)) [Etale p]\n    (hp : Function.Surjective p) :\n    ∃ σ : Spec (.of A) ⟶ E, σ ≫ p = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T131947-L-4087045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T131947-L-4087045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

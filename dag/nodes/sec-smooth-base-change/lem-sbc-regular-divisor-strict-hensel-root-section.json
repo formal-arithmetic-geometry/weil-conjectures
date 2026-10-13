@@ -18,48 +18,36 @@
  ],
  "proof": [
   {
-   "text": "Pull W back and identify its base with D(f) using beta. At divisor generic points regularity makes the local rings DVRs. The stabilizer of each connected generic torsor component is its Galois group. The Galois degree formula in 09EB makes the ramification and residue degrees divide |G|; invertibility of |G| makes the ramification tame and the residue extension separable.",
+   "text": "Apply the finite etale root model theorem to obtain p:E→N and delta over V.",
    "uses": [
-    "def-sbc-normal-dominant-galois",
-    "def-weil-regular-scheme"
+    "lem-sbc-strict-hensel-root-finite-etale-model"
    ],
    "elementary": false
   },
   {
-   "text": "Pass to the canonical strict henselization H, using its pointed-neighbourhood interpretation. Flatness preserves f as a nonzerodivisor and the quotient is the strict henselization of the regular divisor ring. Apply the same stabilizer argument after this base change to see every ramification index divides n=|G|.",
+   "text": "The canonical H is strictly henselian. The polynomial X^|G|-g is monic because a finite group has positive cardinality, so its root algebra is module finite (Polynomial.Monic.finite_adjoinRoot). Apply the finite-algebra etale section theorem to p to get sigma:N→E.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-regular-scheme",
-    "def-sbc-normal-dominant-galois"
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-sbc-finite-strict-henselian-algebra-etale-section"
    ],
    "elementary": false
   },
   {
-   "text": "When barY lies on the divisor, A=H[T]/(T^n-b(f)) is a finite local extension of the strictly henselian H, hence strictly henselian. Its root T is a nonzerodivisor with regular quotient, so A is regular. By 0BRM the root extension kills ramification along its divisor. By 0EYE the pulled-back cover extends to a finite etale cover of Spec A. That cover splits over the strictly henselian ring; surjectivity of the torsor makes it nonempty. Choose a component section and restrict it to V. Its projection to W has the stated structure equation.",
-   "uses": [
-    "def-sbc-normal-dominant-galois",
-    "def-weil-pbc-strict-henselization-limit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Off the divisor b(f) is a unit. The torsor already splits over Spec H, so pull a section along q and compose with its projection to W. This gives the same equation without needing A to be local. No data definition chooses an existential witness.",
-   "uses": [
-    "def-sbc-normal-dominant-galois",
-    "def-weil-pbc-strict-henselization-limit"
-   ],
-   "elementary": false
+   "text": "Form l:V→E×_N V from V→N→E and id_V, using sigma;p=id. Compose l with delta and the first projection to W. The pullback condition, the projection equality for delta, and l;snd=id give the required structure equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sbc-normal-dominant-galois",
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-regular-scheme"
+  "lem-sbc-strict-hensel-root-finite-etale-model",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-sbc-finite-strict-henselian-algebra-etale-section"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "C3",
   "document": "Stacks Project",
-  "place": "Tags 09EB (Galois degree formula), 0BRM (Abhyankar), 0EYE (purity), and 0EYG, strictly henselian calculation through the extension C; extracted part of the original proof; source pages read at the official Stacks website"
+  "place": "0EYG construction of C, followed by finite algebra henselian section assembly and explicit pullback composition"
  },
  "mathlib_searches": [
   {
@@ -150,9 +138,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T124314-L-3777614",
+  "landing": "20261013T131947-L-4087045",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
