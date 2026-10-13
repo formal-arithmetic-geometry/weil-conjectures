@@ -12837,3 +12837,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:35 L: merged deliver/C2/Sheaf.AlgebraicGeometry.AlternatingCechPresheafLocalCocycles (stage 3; reviewer PASS; first push; landing 20261013T143544-L-560058 (proof); batch 20261013T143541; modules 1; new nodes 0)
 - 14:35 L: merged deliver/C3/Sheaf.AlgebraicGeometry.ExternalOpenCoefficientNormalized (stage 3; reviewer PASS; first push; landing 20261013T143544-L-560191 (interface); batch 20261013T143541; modules 3; new nodes 2)
 - 14:35 L: merged deliver/D4/Sheaf.AlgebraicGeometry.RelativeMVRestrictionFirst (stage 3; reviewer PASS; first push; landing 20261013T143544-L-560355 (proof); batch 20261013T143541; modules 1; new nodes 0)
+- 14:35 L: merged deliver/G1/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFormalApproximation (stage 3; reviewer PASS; first push; landing 20261013T143545-L-560515 (interface); batch 20261013T143541; modules 3; new nodes 2)
