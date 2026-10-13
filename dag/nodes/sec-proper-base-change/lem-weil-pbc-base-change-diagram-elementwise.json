@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-base-change-diagram-elementwise",
+ "kind": "statement",
+ "title": "Representatives and eventual zero for a tensor base-change diagram",
+ "statement": "Let $I$ be a nonempty directed preorder, $B:I\\to\\mathrm{CommRing}$ and $\\kappa_i:B_i\\to S$ a ring colimit cocone [def-weil-pbc-category-colimit]. Let $M$ be an $S$-module, $D:I\\to\\mathrm{Ab}$ a diagram with $B_i$-module structures, and $\\nu_i:D_i\\to M$ an additive cocone with $\\nu_i(yx)=\\kappa_i(y)\\nu_i(x)$. Suppose the maps $B_j\\otimes_{B_i}D_i\\to D_j$, $y\\otimes x\\mapsto yD(i\\to j)(x)$ for $i\\le j$, and $S\\otimes_{B_i}D_i\\to M$, $y\\otimes x\\mapsto y\\nu_i(x)$, are linear isomorphisms [def-weil-pbc-module-tensor-product]. Then every $x\\in M$ is $\\nu_i(y)$ for some $i,y$, and every $x\\in D_i$ with $\\nu_i(x)=0$ maps to zero in some $D_j$ with $j\\ge i$. No finite-generation or finite-presentation assumption is needed, and the index universe and group universe may be unrelated.",
+ "source": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tags 00D6, 00D7 and 00DD, elementwise tensor-colimit argument used for Tag 00QX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For any fixed i₀ take the upper tail. Regard the stage rings there and S as B(i₀)-modules via the given ring maps. Build the linear map from their module direct limit to S. Ring-colimit representatives show surjectivity, after moving a stage to the tail. Ring-colimit eventual equality shows injectivity, hence this map is a linear equivalence.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor this equivalence with D(i₀) and compose with the inverse of TensorProduct.directLimitLeft. Tensor induction checks that its value on a stage tensor is the map κ_i tensor id.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a stage i above i₀, choose the assumed equivalence B_i tensor D(i₀) to D_i. Tensor induction and cocone naturality prove that its composite with ν_i equals the S tensor comparison after κ_i tensor id. Represent the inverse image of x under the S equivalence in the tensor direct limit and apply the stage equivalence, obtaining a representative of x.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in D(i₀) with ν_i₀(x)=0 take 1 tensor x at the least tail index. The S comparison sends it to zero; its injectivity and the tensor-colimit equivalence imply its direct-limit class is zero. Module.DirectLimit.of.zero_exact gives a later vanishing tensor. The later-stage equivalence carries it to D(i₀ → j)(x).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tags 00D6, 00D7 and 00DD, elementwise tensor-colimit argument used for Tag 00QX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible diagram of tensor base changes over a directed ring colimit has representatives and eventual zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.directLimitLeft",
+   "results": "TensorProduct.directLimitLeft, directLimitLeft_tmul_of, directLimitLeft_rTensor_of, directLimitLeft_symm_of_tmul; signatures and source read.",
+   "date": "2026-10-13",
+   "verdict": "tool matches; diagram transport still requires a proof"
+  },
+  {
+   "tool": "grep",
+   "query": "directLimitLeft|isColimit_exists_rep|zero_exact in Mathlib; colimit representative in blueprint",
+   "results": "Mathlib.LinearAlgebra.TensorProduct.DirectLimit; Mathlib.Algebra.Colimit.Module; Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic. Existing Sheaf.Paper.DirectedColimitBaseChangeElementwise uses the chosen ring colimit and explicit tensor stages, rather than an arbitrary cocone and a transported group diagram. Blueprint search returned zero colimit-representative matches.",
+   "date": "2026-10-13",
+   "verdict": "tools found; no existing complete diagram theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FinitePresentationModuleDiagram",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "blueprint proof of lemma-weil-pbc-h1-constructible-representation, first paragraph: 'Constructible approximation therefore supplies a constructible sheaf F, a map alpha:F to I, and lifts ... satisfying the same equations' (the finite-presentation descent below that approximation); finite-presentation descent, Algebra, Tag 00QX (lemma-limit-module-essentially-finite-presentation), presentation-matrix paragraph, non-local construction used in Tag 00R1; Algebra, Tags 00D6, 00D7 and 00DD, elementwise tensor-colimit argument used for Tag 00QX",
+   "via": [
+    "lem-weil-pbc-finite-presentation-module-diagram",
+    "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.BaseChangeDiagramElementwise",
+  "file": "lean/Sheaf/RingTheory/BaseChangeDiagramElementwise.lean",
+  "declaration": "Module.baseChange_diagram_elementwise",
+  "statement": "theorem baseChange_diagram_elementwise {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (B : I ⥤ CommRingCat.{u}) (S : Type u) [CommRing S] (κ : B ⟶ (Functor.const I).obj (CommRingCat.of S)) (hκ : Nonempty (IsColimit (Cocone.mk (CommRingCat.of S) κ))) (M : Type v) [AddCommGroup M] [Module S M] (D : I ⥤ AddCommGrpCat.{v}) (ν : D ⟶ (Functor.const I).obj (AddCommGrpCat.of M)) [∀ i, Module (B.obj i) (D.obj i)] (hν : ∀ i (y : B.obj i) (x : D.obj i), (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) (y • x) = (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i)) y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x) (hbase : ∀ (i j : I) (h : i ≤ j), letI := (B.map (homOfLE h)).hom.toAlgebra ∃ e : B.obj j ⊗[B.obj i] D.obj i ≃ₗ[B.obj j] D.obj j, ∀ (y : B.obj j) (x : D.obj i), e (y ⊗ₜ[B.obj i] x) = y • (D.map (homOfLE h)).hom x) (hS : ∀ i, letI := (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i)).toAlgebra ∃ e : S ⊗[B.obj i] D.obj i ≃ₗ[S] M, ∀ (y : S) (x : D.obj i), e (y ⊗ₜ[B.obj i] x) = y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x) : (∀ x : M, ∃ (i : I) (y : D.obj i), (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) y = x) ∧ (∀ (i : I) (x : D.obj i), (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x = 0 → ∃ (j : I) (h : i ≤ j), (D.map (homOfLE h)).hom x = 0)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100010-L-2464147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100010-L-2464147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-base-change-diagram",
+ "kind": "statement",
+ "title": "Diagram and tensor comparisons from a lifted finite presentation matrix",
+ "statement": "Let $I$ be a nonempty directed preordered set, $B:I\\to\\mathrm{CommRing}$ a diagram of finite-type integer algebras [def-weil-pbc-finite-type-algebra], and $\\kappa_i:B_i\\to S$ any ring cocone. Let $M$ be an $S$-module and let $S^m\\xrightarrow{g}S^n\\xrightarrow{f}M\\to0$ be a finite free presentation: $f$ is surjective and $\\operatorname{im}(g)=\\ker(f)$. Fix $i_0\\in I$ and a matrix $A_0\\in\\operatorname{Mat}_{n\\times m}(B_{i_0})$ whose image under $\\kappa_{i_0}$ is the standard-basis matrix of $g$. Then there exist a nonempty directed preorder $J$, a final functor $F:J\\to I$, an abelian-group diagram $D:J\\to\\mathrm{Ab}$ and a cocone $\\nu_j:D_j\\to M$, with $B_{Fj}$-module structures on $D_j$, such that each $D_j$ is finite [def-weil-finitely-generated-module], transitions and cocone legs respect scalars through $B(F(i\\to j))$ and $\\kappa_{Fj}$, and the maps $B_{Fj}\\otimes_{B_{Fi}}D_i\\to D_j$ and $S\\otimes_{B_{Fj}}D_j\\to M$ sending $y\\otimes x$ to $y$ times the indicated image of $x$ are linear isomorphisms [def-weil-pbc-module-tensor-product]. If $I,B,S$ live in universe $u$ and $M$ in universe $v$, take $J$ in $u$ and $D_j$ in $v$. No ring or module colimit assertion [def-weil-pbc-category-colimit] is assumed or concluded.",
+ "source": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00QX, presentation-matrix paragraph; non-local form used in Tag 00R1, construction and tensor comparisons only"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Take the upper tail J above i₀ and its full inclusion F. A common upper bound of i₀ and any original index proves finality; nonemptiness and directedness follow directly.",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For j in J let A_j be the entrywise image of A₀ under the transition ring map and Q_j = B(Fj)^n / range(A_j.toLin'). Ring maps induce additive semilinear coordinate maps and preserve the relation submodules, giving quotient transition maps. The map f after entrywise κ kills all relations by hA and exactness, giving the cocone ν. Identity, composition and naturality follow on quotient representatives.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The classes of the standard coordinate vectors generate Q_j. A finite-type integer algebra is countable, as a quotient of a polynomial ring in finitely many variables over ℤ. Its finite powers and their quotients are countable and hence small in Type v. Transport Q_j and all maps and module actions through actual Shrink equivalences. This constructs small stage objects rather than choosing arbitrary witnesses of unproved existence.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor the presentations with B(Fj) or S. Tensor right exactness and the finite-product tensor equivalence identify them with the transported matrices. Over a later stage the resulting quotient is Q_j; over S exactness of g,f identifies it with M. The induced linear equivalences have the required pure-tensor formula, which is preserved by the small-model transports.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-tensor-finite-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tensor-finite-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00QX, presentation-matrix paragraph; non-local form used in Tag 00R1, construction and tensor comparisons only"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite matrix lifted to a stage in a directed ring diagram defines a diagram of finitely generated cokernels with tensor base change isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cokernels of a fixed finite matrix transported along ring maps are finitely generated modules and commute with tensor base change",
+   "results": "Module.Presentation.nonempty_cokernelData, ModuleCat.cokernelIsoRangeQuotient, instFinitePresentationTensorProduct, FinitePresentation.of_isBaseChange; their signatures were read. None constructs a varying-ring diagram with universe-small stage objects.",
+   "date": "2026-10-13",
+   "verdict": "partial matches; no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*[Dd]esc|[Dd]esc.*FinitePresentation; tensor.*quotient; quotientTensorEquiv in Mathlib; presentation matrix in DAG and blueprint",
+   "results": "Mathlib.RingTheory.Finiteness.Descent (faithfully flat algebra descent, different result); TensorProduct.quotientTensorEquiv and tensorQuotientEquiv (single tensor quotient). DAG contains the parent but no node for the construction after fixing the lifted matrix. Blueprint search returned zero presentation-matrix matches.",
+   "date": "2026-10-13",
+   "verdict": "partial matches; no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FinitePresentationModuleDiagram",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "blueprint proof of lemma-weil-pbc-h1-constructible-representation, first paragraph: 'Constructible approximation therefore supplies a constructible sheaf F, a map alpha:F to I, and lifts ... satisfying the same equations' (the finite-presentation descent below that approximation); finite-presentation descent, Algebra, Tag 00QX (lemma-limit-module-essentially-finite-presentation), presentation-matrix paragraph, non-local construction used in Tag 00R1; Algebra, Tag 00QX, presentation-matrix paragraph; non-local form used in Tag 00R1, construction and tensor comparisons only",
+   "via": [
+    "lem-weil-pbc-finite-presentation-module-diagram",
+    "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FinitePresentationModuleBaseChangeDiagram",
+  "file": "lean/Sheaf/RingTheory/FinitePresentationModuleBaseChangeDiagram.lean",
+  "declaration": "Module.exists_finitePresentation_baseChange_diagram",
+  "statement": "theorem exists_finitePresentation_baseChange_diagram {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (B : I ⥤ CommRingCat.{u}) (S : Type u) [CommRing S] (κ : B ⟶ (Functor.const I).obj (CommRingCat.of S)) (hfinite : ∀ i, Algebra.FiniteType ℤ (B.obj i)) (M : Type v) [AddCommGroup M] [Module S M] (n m : ℕ) (f : (Fin n → S) →ₗ[S] M) (g : (Fin m → S) →ₗ[S] (Fin n → S)) (hf : Function.Surjective f) (hexact : Function.Exact g f) (i₀ : I) (A₀ : Matrix (Fin n) (Fin m) (B.obj i₀)) (hA : ∀ a b, (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i₀)) (A₀ a b) = LinearMap.toMatrix' g a b) : ∃ (J : Type u) (_ : Preorder J) (_ : Nonempty J) (_ : IsDirected J (· ≤ ·)) (F : J ⥤ I) (_ : F.Final) (D : J ⥤ AddCommGrpCat.{v}) (ν : D ⟶ (Functor.const J).obj (AddCommGrpCat.of M)) (_ : ∀ j, Module (B.obj (F.obj j)) (D.obj j)), (∀ (i j : J) (h : i ≤ j) (y : B.obj (F.obj i)) (x : D.obj i), (D.map (homOfLE h)).hom (y • x) = (B.map (F.map (homOfLE h))).hom y • (D.map (homOfLE h)).hom x) ∧ (∀ j (y : B.obj (F.obj j)) (x : D.obj j), (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app j)) (y • x) = (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app (F.obj j))) y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app j)) x) ∧ (∀ j, Module.Finite (B.obj (F.obj j)) (D.obj j)) ∧ (∀ (i j : J) (h : i ≤ j), letI := (B.map (F.map (homOfLE h))).hom.toAlgebra ∃ e : B.obj (F.obj j) ⊗[B.obj (F.obj i)] D.obj i ≃ₗ[B.obj (F.obj j)] D.obj j, ∀ (y : B.obj (F.obj j)) (x : D.obj i), e (y ⊗ₜ[B.obj (F.obj i)] x) = y • (D.map (homOfLE h)).hom x) ∧ (∀ j, letI := (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app (F.obj j))).toAlgebra ∃ e : S ⊗[B.obj (F.obj j)] D.obj j ≃ₗ[S] M, ∀ (y : S) (x : D.obj j), e (y ⊗ₜ[B.obj (F.obj j)] x) = y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app j)) x)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100010-L-2464147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100010-L-2464147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
