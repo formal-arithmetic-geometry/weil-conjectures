@@ -7,7 +7,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 0A1D, lemma-base-change-tensor, degree-zero specialization; Tag 0DJ9, lemma-single-complex-base-change"
+  "place": "Tags 0A1D and 0DJ9; T4 stalk flat-counit coordinate reduction and existing algebraic K-flat counit proof, 2026-10-14"
  },
  "mathlib_searches": [
   {
@@ -76,48 +76,30 @@
  ],
  "proof": [
   {
-   "text": "Relative flatness makes the stalk of M[0] K-flat over the base stalk. The fibre-product stalk is flat over the tensor product of the original and new base stalk rings. Thus the localized tensor-cohomology comparison for the single complex is invertible in every degree.",
+   "text": "At an arbitrary point a of A, obtain bounded-above flat stalk counit coordinates for the actual canonical comparison. This is the geometric affine/source-open computation, isolated without asserting epicity.",
    "uses": [
-    "lem-pc-relative-flat-module-stalk",
+    "lem-pc-standard-single-stalk-flat-counit-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The model complex is K-flat by bounded-above termwise flatness. The universal scalar-extension counit is therefore invertible at this complex.",
+   "uses": [
     "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-pullback-stalk-tensor-flat",
-    "lem-pc-flat-base-derived-tensor-comparison"
+    "lem-pc-kflat-scalar-extension-counit"
    ],
    "elementary": false
   },
   {
-   "text": "Express the left-derived counit on M[0] in K-flat stalk coordinates; the localized comparison gives its coordinate-independent single-complex stalk condition. The zero terms and M give quasi-coherent cohomology before and after ordinary tensor pullback.",
-   "uses": [
-    "lem-pc-counit-stalk-condition-from-localized-comparison",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the qcqs single-complex argument: affine tensor coordinates identify the local comparison, and the two relative Mayer--Vietoris triangles and their long exact cohomology sequences glue it by induction on quasi-compact source opens. This establishes the degreewise comparison for the canonical mate followed by the same counit.",
-   "uses": [
-    "lem-pc-rf-single-complex-qcqs-induction",
-    "def-pc-standard-single-base-change-map"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take degree n of the constructed comparison and retain only its epimorphism assertion. No inverse, complementary cancellation property, or isomorphism of the derived objects is included in this statement.",
+   "text": "Apply degree-n homology and conjugate by the model isomorphisms. The displayed square identifies this invertible map with the stalk of H^n(beta), which is therefore surjective. The existing epi_of_surjective_stalk criterion yields epicity on A.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-standard-single-base-change-map",
-  "lem-pc-counit-stalk-condition-from-localized-comparison",
-  "lem-pc-flat-base-derived-tensor-comparison",
+  "lem-pc-standard-single-stalk-flat-counit-model",
   "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-pullback-stalk-tensor-flat",
-  "lem-pc-relative-flat-module-stalk",
-  "lem-pc-rf-single-complex-qcqs-induction",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
-  "lem-weil-pbc-quasi-coherent-module-kernel"
+  "lem-pc-kflat-scalar-extension-counit"
  ],
  "lean": {
   "existing": false,
@@ -143,9 +125,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T181125-L-2607888",
+  "landing": "20261013T201809-L-3977238",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
