@@ -13,29 +13,31 @@
  ],
  "proof": [
   {
-   "text": "On U_i, insert i into an increasing tuple in its ordered position, with sign (-1) to that position; set the operator to zero for a repeated index. At degree zero project to the singleton i. In dh+hd the face deleting the inserted i gives the identity; each other deletion cancels against the same restriction composite with opposite sign. This contracts the augmented complex on U_i.",
+   "text": "For each U_i use the ordered-insertion homotopy equivalence of the extended augmentation. Homotopy equivalences are quasi-isomorphisms. Exact open restriction commutes with homology. Detect invertibility of each homology map on the cover by detecting monomorphisms and the vanishing of the cokernel. Thus the extended augmentation is a quasi-isomorphism; quasiIso_extendMap_iff reflects this to the original natural-degree augmentation.",
    "uses": [
+    "lem-pc-s3-alternating-cech-sheaf-insertion-homotopy",
     "def-pc-s3-alternating-cech-sheaf-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor pullback commutes with restriction to the inverse-image opens. Apply its additivity to the local homotopy identities: it preserves sums, integer multiples, compositions and identities. Thus the pulled-back augmentation is locally a homotopy equivalence as well. Homology of module sheaves is local on the two covers, so both augmentations are quasi-isomorphisms. Extension by zero adds only zero terms. For r=0 both schemes are empty.",
+   "text": "Identify the tensor-formula pullback with the canonical module pullback by uniqueness of left adjoints to module pushforward. Use pullback composition, the equality (p restricted to U_i) followed by U_i inclusion equals the inverse-image inclusion followed by p, and restrictFunctorIsoPullback to obtain tensorPullback(p) followed by restriction to p inverse U_i isomorphic to restriction to U_i followed by canonical pullback of p restricted to U_i. The latter pullback is additive; apply mapHomotopyEquiv to the local inverse and homotopies. Transport along the natural isomorphism using arrow_mk_iso_iff for homotopyEquivalences. This proves local homotopy equivalence on the inverse-image opens. Those opens cover by iSup_preimage_eq_top, so the same cover-detection argument gives the pulled-back quasi-isomorphism. Empty covers are handled by the same mono/cokernel detection, with no chosen index.",
    "uses": [
-    "def-pc-module-pullback",
-    "def-pc-s3-alternating-cech-sheaf-construction"
+    "lem-pc-s3-alternating-cech-sheaf-insertion-homotopy",
+    "def-pc-module-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction",
   "def-pc-module-pullback",
-  "def-pc-s3-alternating-cech-sheaf-construction"
+  "lem-pc-s3-alternating-cech-sheaf-insertion-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 01FM, signed ordered faces; parent augmented-construction proof step 2, local insertion contraction; expanded module-sheaf argument by H1"
+  "place": "Tag 01FM; local homotopy lemma plus fully formalized restriction detection and pullback transport by A4"
  },
  "mathlib_searches": [
   {
@@ -140,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T062521-L-732713",
+  "landing": "20261013T082329-L-1630229",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

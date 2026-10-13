@@ -1,0 +1,163 @@
+{
+ "id": "lem-pc-s3-alternating-cech-sheaf-insertion-homotopy",
+ "kind": "statement",
+ "title": "Ordered insertion gives a local homotopy inverse",
+ "statement": "Let $X$ be a scheme, $r\\in\\mathbb N$, $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$ any family, and $G$ an $\\mathcal O_X$-module. Let $\\epsilon:G[0]\\to C$ be the explicit increasing-tuple sheaf augmentation [def-pc-s3-alternating-cech-sheaf-construction]. For every $i:\\operatorname{Fin}(r)$, restricting the extension by zero of $\\epsilon$ from natural to integer degrees to $U_i$ is a homotopy equivalence of complexes of $\\mathcal O_{U_i}$-modules. No covering condition and no pullback morphism are assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02FU (local insertion contraction), adapted to increasing tuples using Tag 01FM (alternating comparison); parent local-contraction proof"
+ },
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof": [
+  {
+   "text": "On a test open contained in U_i, define the inverse in degree zero by projection to the singleton i. In degree p+1, define h into degree p coordinatewise: insert i in the unique increasing position a of the target tuple, with sign (-1)^a, and take zero if the tuple already contains i. Adjoining i leaves the intersection with the test open unchanged, so identify the section modules along this equality rather than reversing a restriction map. These operators are linear and commute with restrictions. The reverse augmentation composite is the identity.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 02FU (local insertion contraction), adapted to increasing tuples using Tag 01FM (alternating comparison); parent local-contraction proof"
+   }
+  },
+  {
+   "text": "Expand dh+hd coordinatewise. For a tuple without i, deletion of the inserted i contributes the identity. Pair all other deletions with insertion after deletion; their restriction composites agree and their signs are opposite. For a tuple already containing i, only deletion of i followed by reinsertion contributes, again with sign one. In degree zero the missing incoming term is augmentation followed by singleton projection. These identities give both inverse homotopies on presheaves over U_i. Additive sheafification and open restriction preserve them and identify sheafification of the original sheaf with itself. Extend the inverse and homotopies by zero to integer degrees using Mathlib Homotopy.extend, so the extended restricted augmentation is a homotopy equivalence.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 02FU (local insertion contraction), adapted to increasing tuples using Tag 01FM (alternating comparison); parent local-contraction proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02FU (local insertion contraction), adapted to increasing tuples using Tag 01FM (alternating comparison); parent local-contraction proof; expanded ordered insertion and sheafification argument by A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The alternating Cech complex of a sheaf restricted to one of its covering opens is contractible by inserting the index into increasing tuples",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordered alternating Cech augmentation of sheaves restricted to any one open in its family is a homotopy equivalence by insertion of that index",
+   "results": "8 hits: CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, ChainComplex.alternatingConstHomotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda, AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant, Opens.mayerVietorisSquare, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom",
+   "date": "2026-10-13",
+   "verdict": "no exact match: extra degeneracy and normalization concern different complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"homotopy\"",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*homotopy|homotopy.*cech",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite alternating Čech complex on strictly increasing index lists admits a contracting homotopy on an open belonging to the family of opens, using signed insertion of its index",
+   "results": "8 hits: DoldKan.homotopyPToId, homotopyPInftyToId, homotopyPToId_eventually_constant, Hσ, homotopyQToZero, homotopyPInftyToId_hom, hσ; ChainComplex.alternatingConstHomotopyEquiv. These concern simplicial normalization or constant complexes, not the constructed increasing-tuple module-sheaf augmentation.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no direct replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyEquiv\", \"restrict\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extraDegeneracy|contractingHomotopy|homotopyEquivalences",
+   "results": "25 Mathlib hits, including formal-coproduct extraDegeneracyCech and general homotopy-equivalence infrastructure. Repository searches found the all-tuple local quasi-isomorphism and sorting operators; neither supplies a module-linear homotopy inverse for this explicit sheafified increasing-tuple augmentation.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no direct replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafLocalContraction",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Local insertion contraction in the alternating Cech augmented construction",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-local-contraction",
+    "lem-pc-s3-affine-alternating-cech-augmented-construction",
+    "lem-pc-s3-affine-alternating-cech-resolution-core",
+    "lem-pc-affine-alternating-cech-exchange-resolution",
+    "lem-pc-affine-alternating-cech-pinned-mate",
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSheafInsertionHomotopy",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSheafInsertionHomotopy.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheafAugmentation_restrict_homotopyEquivalence",
+  "statement": "theorem alternatingCechSheafAugmentation_restrict_homotopyEquivalence\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :\n    HomologicalComplex.homotopyEquivalences (U i).toScheme.Modules (ComplexShape.up ℤ)\n      (((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex\n        (ComplexShape.up ℤ)).map (HomologicalComplex.extendMap\n          (alternatingCechSheafAugmentation U G) ComplexShape.embeddingUpNat))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T082329-L-1630229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T082329-L-1630229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
