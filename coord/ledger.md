@@ -13380,3 +13380,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:01 L: merged deliver/M1/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetractCore (stage 3; reviewer PASS; first push; landing 20261013T190144-L-3217550 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/M1/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureTriangleCore (stage 3; reviewer PASS; first push; landing 20261013T190145-L-3217659 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/M2/Sheaf.AlgebraicGeometry.AffineSpecifiedModelChainComparison (stage 3; reviewer PASS; first push; landing 20261013T190145-L-3217805 (interface); batch 20261013T190131; modules 5; new nodes 4)
+- 19:01 L: merged deliver/M2/Sheaf.AlgebraicGeometry.OverlapPairSquareChartTransport (stage 3; reviewer PASS; first push; landing 20261013T190145-L-3218026 (proof); batch 20261013T190131; modules 1; new nodes 0)

@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Form K from the later stage overlap to the earlier stage overlap by the pullback lift of fst followed by rho_a and snd followed by rho_b. Form L from the later limit overlap to the earlier limit overlap by the lift of fst followed by delta_a and snd followed by delta_b. The commuting projection equations hr and hdeltaf make both lifts well-defined. Their composites with each projection are those specified arrows, including when an overlap is empty.",
+   "text": "Construct the stage overlap map K, the limit overlap map L, and the old and new limit-to-stage overlap maps H and Hprime by pullback.lift. Record their projection equations. By hdeltaf, L preserves the map to Z; by hdeltav the two projections of Hprime followed by K and L followed by H agree, so pullback.hom_ext identifies these composites.",
    "uses": [
     "def-pc-local-overlap-transitions",
     "def-pc-overlap-pair-canonical-comparisons"
@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "Apply the module pullback functor along L to the original pair-square equality. Conjugate its two ends by the composition comparisons associated to the limit-overlap projections. Naturality of mapComp moves the pulled component maps through these comparisons. DescentData.pullHom_hom for the restriction datum of M, using hdeltaf, identifies the pulled transition of M with its transition on the later limit overlap.",
+   "text": "Expand the transition of the restriction datum to its two mapComp-prime factors. Precompose and postcompose a universal pair square with invertible composition comparisons: cancellation gives an equivalent flattened equality between pullHom of epsilon_a and pullHom(phi) followed by pullHom of epsilon_b. Apply pullHom to the old flattened equality along L; pullHom_comp and pullHom_pullHom yield its restriction to the new overlap.",
    "uses": [
     "def-pc-local-overlap-transitions",
     "def-pc-overlap-pair-canonical-comparisons"
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "The two maps from the later limit overlap to the earlier stage overlap, one through L and the earlier limit-to-stage overlap map and the other through K and the later limit-to-stage overlap map, agree after fst and snd, by hdeltav; hence they agree by pullback.hom_ext. Apply pullHom_pullHom to identify the middle map. Apply mapComp pentagon and naturality to move the chart isomorphisms c to its two ends. Cancel adjacent comparison inverses. The resulting component isos are exactly the five factors in hepsilon; replace them by epsilonprime. The resulting map is the displayed explicit conjugate of overlapPairBaseChangeHom(phi), and the resulting equality is the required later square.",
+   "text": "Use the mapComp-prime pentagon at the two endpoints to prove that pulling a comparison-conjugated morphism commutes with flattening. Its one-sided version and pullHom_map compute the transported component homs from hepsilon. Its two-sided version computes the transported pair map, and pullHom_pullHom together with Hprime K = L H identifies its middle factor. Both computations use the same endpoint isomorphisms beta_a and beta_b. Substitute the computations in the new flattened square, cancel beta_b.inv followed by beta_b.hom, and use the restricted old equality. Finally specialize the proved categorical calculation to modulesPseudofunctor, translating its mapComp-prime factors to pullbackCompOfEq with the proved comparison identities.",
    "uses": [
     "def-pc-local-overlap-transitions",
     "def-pc-overlap-pair-canonical-comparisons"
@@ -58,7 +58,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01ZR",
-  "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+  "place": "Tag 01ZR first-proof Zariski gluing; explicit Lean proof by M2 using Mathlib pullHom composition and mapComp-prime pentagon identities. No new unproved intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -140,10 +140,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T181123-L-2607513",
-  "kind": "interface",
+  "landing": "20261013T190145-L-3218026",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
