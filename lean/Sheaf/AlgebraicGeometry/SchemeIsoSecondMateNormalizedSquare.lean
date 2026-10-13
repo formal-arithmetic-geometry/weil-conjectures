@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeIsoRightAdjointNormalized
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
-import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
+import Sheaf.AlgebraicGeometry.SchemeIsoInverseBaseChangeTransport
+import Sheaf.AlgebraicGeometry.SchemeIsoLiftedComparisonCounit
 
 /-! # Commutation of normalized source-isomorphism transport with the second mate
 
@@ -44,6 +45,53 @@ def schemeIsoMateSourceIso
     ((comp (pullback.fst f' g) e.hom).app (a.obj K).obj).symm ≪≫
     (derivedPullback (pullback.fst f' g)).mapIso (φ.app K)
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem source_iso_mate_comparison
+    {C U X Y S T : Type*}
+    [Category C] [Category U] [Category X] [Category Y] [Category S] [Category T]
+    {F : C ⥤ S} {F' : U ⥤ S} {A : S ⥤ C} {B : S ⥤ U}
+    {D : X ⥤ T} {D' : Y ⥤ T} {a : T ⥤ X} {b : T ⥤ Y}
+    {L : C ⥤ U} {M : X ⥤ Y} {H : C ⥤ X} {H' : U ⥤ Y} {G : S ⥤ T}
+    (adjA : F ⊣ A) (adjB : F' ⊣ B) (adja : D ⊣ a) (adjb : D' ⊣ b)
+    (k : F ⟶ L ⋙ F') (q : D ⟶ M ⋙ D') [IsIso q]
+    (σ : H ⋙ M ≅ L ⋙ H') (φ : A ⋙ L ≅ B) (ψ : a ⋙ M ≅ b)
+    (α : TwoSquare H F D G) (β : TwoSquare H' F' D' G)
+    (hk : ∀ K : S, k.app (A.obj K) ≫ F'.map (φ.hom.app K) ≫
+      adjB.counit.app K = adjA.counit.app K)
+    (hq : ∀ Z : T, q.app (a.obj Z) ≫ D'.map (ψ.hom.app Z) ≫
+      adjb.counit.app Z = adja.counit.app Z)
+    (hα : ∀ E : C, q.app (H.obj E) ≫ D'.map (σ.hom.app E) ≫
+      β.natTrans.app (L.obj E) = α.natTrans.app E ≫ G.map (k.app E)) (K : S) :
+    σ.hom.app (A.obj K) ≫ H'.map (φ.hom.app K) ≫
+        (mateEquiv adjB adjb β).app K =
+      M.map ((mateEquiv adjA adja α).app K) ≫ ψ.hom.app (G.obj K) := by
+  let m := (mateEquiv adjA adja α).app K
+  let n := (mateEquiv adjB adjb β).app K
+  have hm := mateEquiv_counit adjA adja α K
+  have hn := mateEquiv_counit adjB adjb β K
+  apply (adjb.homEquiv _ _).symm.injective
+  change D'.map (σ.hom.app (A.obj K) ≫ H'.map (φ.hom.app K) ≫ n) ≫
+      adjb.counit.app (G.obj K) =
+    D'.map (M.map m ≫ ψ.hom.app (G.obj K)) ≫ adjb.counit.app (G.obj K)
+  apply (cancel_epi (q.app (H.obj (A.obj K)))).mp
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hn]
+  rw [← Category.assoc (D'.map (H'.map (φ.hom.app K))),
+    ← Functor.comp_map, β.natTrans.naturality]
+  simp only [Functor.comp_map, Functor.comp_obj, Category.assoc]
+  rw [reassoc_of% hα]
+  rw [← G.map_comp_assoc, ← G.map_comp, Category.assoc (k.app (A.obj K)), hk]
+  have hqm : D.map m ≫ q.app (a.obj (G.obj K)) =
+      q.app (H.obj (A.obj K)) ≫ D'.map (M.map m) := by
+    simpa only [Functor.comp_obj, Functor.comp_map] using q.naturality m
+  rw [← Category.assoc (q.app (H.obj (A.obj K))), ← hqm]
+  simp only [Category.assoc]
+  rw [hq]
+  exact hm.symm
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The normalized endpoint comparisons commute with the fixed second-mate formula.
 Unlike the transport theorem, this asserts an equality of specified morphisms;
 it neither supplies endpoint isomorphisms nor constructs an arrow isomorphism.
@@ -123,7 +171,59 @@ theorem schemeIso_secondMate_normalized_square
         ψ.hom.app (((schemeDerivedQCohProperty T).lift
           ((schemeDerivedQCohProperty S).ι ⋙ derivedPullback g)
           (fun E ↦ (derivedPullback_tensor_preserve_QCoh g).1 E.obj E.property)).obj K)
-    := by sorry
+    := by
+  classical
+  let L := qcPullback e.hom
+  let M := qcPullback r
+  let φq : a ⋙ L ≅ b := NatIso.ofComponents
+    (fun E ↦ (schemeDerivedQCohProperty U).isoMk (φ.app E)) (by
+      intro E F t
+      ext
+      exact φ.hom.naturality t)
+  let ψq : d ⋙ M ≅ b' := NatIso.ofComponents
+    (fun E ↦ (schemeDerivedQCohProperty (pullback f' g)).isoMk (ψ.app E)) (by
+      intro E F t
+      ext
+      exact ψ.hom.naturality t)
+  obtain ⟨k, q, σ, hqiso, hordinary, hkapp, hqapp, hσapp⟩ :=
+    schemeIso_inverseBaseChange_transport
+    f f' e he g r hr₁ hr₂ hβ hβf
+  let : IsIso q := hqiso
+  have hk : ∀ E : schemeDerivedQCohCategory S,
+      k.app (a.obj E) ≫ (qcDirectImage f').map (φq.hom.app E) ≫
+        adjb.counit.app E = adja.counit.app E := by
+    intro E
+    ext
+    change (k.app (a.obj E)).hom ≫
+        (schemeDerivedDirectImage f').map (φ.hom.app E) ≫
+        (adjb.counit.app E).hom = (adja.counit.app E).hom
+    rw [hkapp]
+    simpa only [Category.assoc] using hφ E
+  have hq : ∀ E : schemeDerivedQCohCategory T,
+      q.app (d.obj E) ≫ (qcDirectImage (pullback.snd f' g)).map (ψq.hom.app E) ≫
+        adjb'.counit.app E = adjd.counit.app E := by
+    intro E
+    ext
+    change (q.app (d.obj E)).hom ≫
+        (schemeDerivedDirectImage (pullback.snd f' g)).map (ψ.hom.app E) ≫
+        (adjb'.counit.app E).hom = (adjd.counit.app E).hom
+    exact schemeIso_liftedComparison_counit (pullback.snd f g) (pullback.snd f' g)
+      (asIso r) hr₂ d b' adjd adjb' ψ q hqapp hψ E
+  have h := source_iso_mate_comparison adja adjb adjd adjb' k q σ φq ψq
+    (qcInverseBaseChange f g hβf) (qcInverseBaseChange f' g hβ)
+    hk hq hordinary K
+  rw [← dualityEquationBaseChangeMap_eq_inverseSquareMate f g a d adja adjd hβf K,
+    ← dualityEquationBaseChangeMap_eq_inverseSquareMate f' g b b' adjb adjb' hβ K] at h
+  have hambient := congrArg (fun t ↦ t.hom) h
+  change (σ.hom.app (a.obj K)).hom ≫
+      (derivedPullback (pullback.fst f' g)).map (φ.hom.app K) ≫
+      (dualityEquationBaseChangeMap f' g b b' adjb adjb' hβ K).hom =
+    (derivedPullback r).map (dualityEquationBaseChangeMap f g a d adja adjd hβf K).hom ≫
+      ψ.hom.app ((qcPullback g).obj K) at hambient
+  rw [hσapp] at hambient
+  simpa only [schemeIsoMateSourceIso, Iso.trans_hom, Iso.app_hom, Iso.app_inv,
+    Iso.symm_hom, eqToIso.hom, Functor.mapIso_hom, Category.assoc]
+    using hambient
 
 end
 end AlgebraicGeometry

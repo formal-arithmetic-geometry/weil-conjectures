@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-scheme-iso-inverse-base-change-transport",
+ "kind": "statement",
+ "title": "Transport the inverse ordinary base-change square under source isomorphisms",
+ "statement": "Let P,U,S,T be quasi-compact and quasi-separated schemes, f:P\\to S and f':U\\to S quasi-compact and quasi-separated, e:U\\cong P with e_{hom}f=f', and g:T\\to S. Put V=P\\times_S T and V'=U\\times_S T, with projections p:V\\to P, v:V\\to T, p':V'\\to U and v':V'\\to T [def-pc-fibre-product]. Let r:V'\\to V be an isomorphism with rp=p'e_{hom} and rv=v', and assume V,V' quasi-separated. Write C_Z=D_{QCoh}(O_Z) [def-pc-derived-category], and L_h,R_h for the restrictions of derived pullback and direct image [def-pc-derived-pullback, def-pc-derived-direct-image, lem-pc-qcqs-derived-direct-image-right-adjoint, lem-pc-derived-pullback-tensor-qcoh]. Assume the two ordinary base-change transformations beta_f:R_f L_g\\to L_p R_v and beta_{f'}:R_{f'}L_g\\to L_{p'}R_{v'} are invertible at every quasi-coherent object [def-pc-derived-base-change-map]. Write alpha_f=beta_f^{-1} and alpha_{f'}=beta_{f'}^{-1} [lem-sc-duality-base-change-inverse-square-mate]. Choose the pinned pullback/direct-image adjunctions A_h with units eta_h, and the canonical pullback comparisons c(a,b):L_b L_a\\cong L_{ab} [def-pc-derived-base-change-map, lem-pc-ringed-spaces-derived-pullback-composition]. Let delta_e:R_{f'}\\cong R_e R_f and delta_r:R_{v'}\\cong R_r R_v be the right-adjoint conjugates of c(e_{hom},f) and c(r,v), followed by the respective scheme-map equality transports. There exist natural transformations k:R_f\\to L_e R_{f'} and q:R_v\\to L_r R_{v'}, and a natural isomorphism sigma:L_p L_r\\cong L_e L_{p'}, uniquely specified by k_E=R_f(eta_{e,E}) delta_e^{-1}(L_e E), q_F=R_v(eta_{r,F}) delta_r^{-1}(L_r F), and sigma_E=c(r,p)_E followed by the transport along rp=p'e_{hom} and c(p',e_{hom})_E^{-1}. The map q is invertible, and for every E\\in C_P,\nq_{L_p E}\\;R_{v'}(sigma_E)\\;alpha_{f',L_e E}\n=alpha_{f,E}\\;L_g(k_E).\nComposition is written in diagrammatic order. No right adjoint to a vertical direct image and no second mate enters this statement. The q component identity is expressed after two arbitrary postcompositions in the ambient D(O_T), with no quasi-coherence requirement on their intermediate or final objects; taking both arrows to be identities recovers the displayed component, so it determines q uniquely.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0ATR",
+  "place": "Tag 0ATR, composite adjunction and conjugate calculation; Tag 0D5S, canonical pullback composition"
+ },
+ "stmt_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "def-pc-fibre-product",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-duality-base-change-inverse-square-mate"
+ ],
+ "proof": [
+  {
+   "text": "Construct k and q by the pinned adjunction unit followed by the inverse direct-image conjugate, and σ by the displayed pullback-composition formula. Naturality gives the transformations. Pullback along r is an equivalence by pullback along its inverse; its unit is invertible, so q is invertible. Reassociate the q component after arbitrary postcompositions; taking identity arrows recovers the component itself.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose ordinary base change under the pinned adjunctions. Apply derived base-change pasting, both projection equations and he, and the associativity of the canonical pullback-composition comparisons. Equality of transposes gives the ordinary transport equation. Invert the two ordinary transformations, use naturality, and cancel to get the displayed equation for the inverse ordinary squares. Full faithfulness restricts the identities to quasi-coherent objects.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-derived-base-change-pasting",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-sc-duality-base-change-inverse-square-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-derived-base-change-pasting",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-duality-base-change-inverse-square-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0ATR and 0D5S",
+  "note": "Ordinary-square subargument of the existing normalized-square plan; no second mate in this statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse ordinary base change is natural under an isomorphism of the source scheme",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm; AlgebraicGeometry.Scheme.Hom.inv_app; AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Hom.inv_appTop; AlgebraicGeometry.Scheme.inv_base_hom_base_assoc; AlgebraicGeometry.pullbackSpecIso_inv_fst'; AlgebraicGeometry.Scheme.inv_appTop",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools or unrelated scheme identities; no exact inverse-square transport theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "CategoryTheory.conjugateEquiv; CategoryTheory.conjugateEquiv_id; CategoryTheory.conjugateEquiv_iso; CategoryTheory.conjugateEquiv_of_iso; CategoryTheory.conjugateEquiv_symm_id; CategoryTheory.conjugateEquiv_symm_iso; CategoryTheory.conjugateEquiv_symm_of_iso; CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools or unrelated scheme identities; no exact inverse-square transport theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeDerivedBaseChange.*pasting|source_iso",
+   "results": "Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Preadditive/Basic.lean; Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean; Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean; Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean; Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean; Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools or unrelated scheme identities; no exact inverse-square transport theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse derived base change square is natural under an isomorphism of the source scheme with canonical adjunction comparisons",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeIsoSecondMateNormalizedSquare",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Ordinary base-change comparison under the cartesian source identification, before exceptional-adjunction transposition",
+   "via": [
+    "lem-sc-scheme-iso-second-mate-normalized-square",
+    "lem-sc-right-adjoint-mate-scheme-iso-transport-mate",
+    "lem-sc-right-adjoint-mate-scheme-iso-transport",
+    "lem-sc-right-adjoint-mate-old-base-open-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoInverseBaseChangeTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoInverseBaseChangeTransport.lean",
+  "declaration": "AlgebraicGeometry.schemeIso_inverseBaseChange_transport",
+  "statement": "theorem schemeIso_inverseBaseChange_transport\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {P U S T : Scheme.{u}}\n    [CompactSpace P] [QuasiSeparatedSpace P] [CompactSpace U] [QuasiSeparatedSpace U]\n    [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace T] [QuasiSeparatedSpace T]\n    (f : P ⟶ S) [QuasiCompact f] [QuasiSeparated f]\n    (f' : U ⟶ S) [QuasiCompact f'] [QuasiSeparated f']\n    (e : U ≅ P) (he : e.hom ≫ f = f') (g : T ⟶ S)\n    (r : pullback f' g ⟶ pullback f g)\n    (hr₁ : r ≫ pullback.fst f g = pullback.fst f' g ≫ e.hom)\n    (hr₂ : r ≫ pullback.snd f g = pullback.snd f' g)\n    [IsIso r]\n    [QuasiSeparatedSpace (pullback f g : Scheme.{u})]\n    [QuasiSeparatedSpace (pullback f' g : Scheme.{u})]\n    (hβ : ∀ E : schemeDerivedQCohCategory U,\n      IsIso (schemeDerivedBaseChangeMap f' (pullback.snd f' g) g\n        (pullback.fst f' g) pullback.condition E.obj))\n    (hβf : ∀ E : schemeDerivedQCohCategory P,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g\n        (pullback.fst f g) pullback.condition E.obj)) :\n    let adj := fun {X Y : Scheme.{u}} (v : X ⟶ Y) ↦\n      Classical.choose (exists_schemeDerivedAdjunction v\n        (hAdd := (Classical.choose exists_derivedPullbackComposition) v)\n        ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) v)\n        ((Classical.choose (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))) v))\n    let comp := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))\n    let ce := comp e.hom f ≪≫ eqToIso (congrArg (fun v ↦ derivedPullback v) he)\n    let cr := comp (asIso r).hom (pullback.snd f g) ≪≫\n      eqToIso (congrArg (fun v ↦ derivedPullback v) hr₂)\n    let δe := conjugateIsoEquiv (adj f') ((adj f).comp (adj e.hom)) ce\n    let δr := conjugateIsoEquiv (adj (pullback.snd f' g))\n      ((adj (pullback.snd f g)).comp (adj (asIso r).hom)) cr\n    ∃ (k : qcDirectImage f ⟶ qcPullback e.hom ⋙ qcDirectImage f')\n      (q : qcDirectImage (pullback.snd f g) ⟶\n        qcPullback r ⋙ qcDirectImage (pullback.snd f' g))\n      (σ : qcPullback (pullback.fst f g) ⋙ qcPullback r ≅\n        qcPullback e.hom ⋙ qcPullback (pullback.fst f' g)),\n      IsIso q ∧\n      (∀ E : schemeDerivedQCohCategory P,\n        q.app ((qcPullback (pullback.fst f g)).obj E) ≫\n          (qcDirectImage (pullback.snd f' g)).map (σ.hom.app E) ≫\n          (qcInverseBaseChange f' g hβ).app ((qcPullback e.hom).obj E) =\n        (qcInverseBaseChange f g hβf).app E ≫ (qcPullback g).map (k.app E)) ∧\n      (∀ E : schemeDerivedQCohCategory P,\n        (k.app E).hom = (schemeDerivedDirectImage f).map\n          ((adj e.hom).unit.app E.obj) ≫\n            δe.inv.app ((derivedPullback e.hom).obj E.obj)) ∧\n      (∀ (E : schemeDerivedQCohCategory (pullback f g))\n          (A B : schemeDerivedCategory T)\n          (t : ((qcPullback r ⋙ qcDirectImage (pullback.snd f' g)).obj E).obj ⟶ A)\n          (v : A ⟶ B),\n        (q.app E).hom ≫ t ≫ v =\n          (schemeDerivedDirectImage (pullback.snd f g)).map\n            ((adj (asIso r).hom).unit.app E.obj) ≫\n          δr.inv.app ((derivedPullback (asIso r).hom).obj E.obj) ≫ t ≫ v) ∧\n      (∀ E : schemeDerivedQCohCategory P,\n        (σ.hom.app E).hom =\n          (comp r (pullback.fst f g)).hom.app E.obj ≫\n            eqToHom (congrArg (fun v ↦ (derivedPullback v).obj E.obj) hr₁) ≫\n            (comp (pullback.fst f' g) e.hom).inv.app E.obj)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T155934-L-1302605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T155934-L-1302605",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
