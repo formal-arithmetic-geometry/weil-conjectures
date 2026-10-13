@@ -13299,3 +13299,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:11 L: merged deliver/H4/Sheaf.RingTheory.FilteredColimitPrimeChainDimensionBound (stage 3; reviewer PASS; first push; landing 20261013T181101-L-2601013 (proof); batch 20261013T181050; modules 1; new nodes 0)
 - 18:11 L: merged deliver/J2/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetract (stage 3; reviewer PASS; first push; landing 20261013T181102-L-2601300 (interface); batch 20261013T181050; modules 2; new nodes 1)
 - 18:11 L: merged deliver/J2/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureTriangle (stage 3; reviewer PASS; first push; landing 20261013T181102-L-2601465 (interface); batch 20261013T181050; modules 2; new nodes 1)
+- 18:11 L: merged deliver/J2/Sheaf.Algebra.Homology.LocalizedTensorComparisonShift (stage 3; reviewer PASS; first push; landing 20261013T181103-L-2601655 (proof); batch 20261013T181050; modules 1; new nodes 1)

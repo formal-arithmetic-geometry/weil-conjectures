@@ -1,0 +1,110 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-shift-component",
+ "kind": "statement",
+ "title": "Localized tensor comparison shift component",
+ "statement": "Under the hypotheses of localizedTensorComparisonProperty_shift, for a fixed cochain representative U of X[n], a K-flatness proof for U, a base-derived tensor cohomology model mU of U tensor Q, and a degree i, the localized comparison composite for U in degree i is an isomorphism.",
+ "stmt_deps": [
+  "def-pc-localized-tensor-comparison-property",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), shift transport for one representative, model and degree"
+ },
+ "proof": [
+  {
+   "text": "Shift U by -n to a K-flat representative of X, transport the model and comparison square through the canonical tensor, scalar-extension and cohomology shift isomorphisms, and apply hX to the unshifted representative. Naturality and the comparison_eq/localized_eq identities identify the transported isomorphism with the displayed composite.",
+   "uses": [
+    "def-pc-localized-tensor-comparison-property",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-localized-tensor-comparison-property",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), shift transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapBifunctor shift homologyMap",
+   "results": "No single theorem gives the specialized comparison transport.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty IsStableUnderShift",
+   "results": "No exact specialized match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localized tensor comparison shift component",
+   "results": "No exact specialized match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localized tensor comparison shift component",
+   "results": "Service unavailable; no exact match.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShift",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-localized-tensor-comparison-shift",
+   "place": "component transport"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShift",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonShift.lean",
+  "declaration": "ModuleCat.localizedTensorComparisonProperty_shift_component",
+  "statement": "theorem localizedTensorComparisonProperty_shift_component\n    (X : DerivedCategory (ModuleCat.{u} A))\n    (hX : localizedTensorComparisonProperty R A B C Q N t X) (n : ℤ)\n    (U : CochainComplex (ModuleCat.{u} A) ℤ)\n    (hU : Nonempty (DerivedCategory.Q.obj U ≅ X⟦n⟧))\n    (hK : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic)\n    (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T181103-L-2601655",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T181103-L-2601655",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

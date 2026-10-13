@@ -33,6 +33,28 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
+/-- Core component transport for shift stability.
+
+Proof: shift U by -n to a representative of X, transport its tensor model and
+comparison square across the canonical tensor, scalar-extension and cohomology
+shift isomorphisms, and apply hX. Naturality identifies the transported map
+with the displayed comparison composite.
+Source: Stacks Project, Tag 0DJA(1).
+(blueprint: lem-pc-localized-tensor-comparison-shift-component). -/
+theorem localizedTensorComparisonProperty_shift_component
+    (X : DerivedCategory (ModuleCat.{u} A))
+    (hX : localizedTensorComparisonProperty R A B C Q N t X) (n : ℤ)
+    (U : CochainComplex (ModuleCat.{u} A) ℤ)
+    (hU : Nonempty (DerivedCategory.Q.obj U ≅ X⟦n⟧))
+    (hK : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
+      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic)
+    (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C) (i : ℤ) :
+    let F := (extendScalars.{u, u, u}
+      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
+        (.up ℤ)
+    IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap
+      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by sorry
+
 /-- Localized tensor comparison in all degrees is preserved by integer shifts.
 Source: Stacks Project, Tag 0DJA(1), reindexing the cohomological comparison.
 
@@ -62,6 +84,9 @@ identity transports. The argument needs neither flatness of C nor bounds on Q.
 theorem localizedTensorComparisonProperty_shift
     (X : DerivedCategory (ModuleCat.{u} A))
     (hX : localizedTensorComparisonProperty R A B C Q N t X) (n : ℤ) :
-    localizedTensorComparisonProperty R A B C Q N t (X⟦n⟧) := by sorry
+    localizedTensorComparisonProperty R A B C Q N t (X⟦n⟧) := by
+  rw [localizedTensorComparisonProperty]
+  intro U hU hK mU i
+  exact localizedTensorComparisonProperty_shift_component R A B C Q N t X hX n U hU hK mU i
 
 end ModuleCat
