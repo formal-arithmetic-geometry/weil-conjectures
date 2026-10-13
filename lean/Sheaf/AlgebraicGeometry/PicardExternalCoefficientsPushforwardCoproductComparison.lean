@@ -10,6 +10,7 @@ public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 public import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardTensorComparison
 
 /-! # Affine-basis comparison for the presheaf coproduct
 
@@ -55,6 +56,12 @@ theorem exists_external_coproduct_comparison
         (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V))
         Y.ringCatSheaf.obj).obj
         ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj
-          (externalCupCoefficients f g F G)).val) := by sorry
+          (externalCupCoefficients f g F G)).val) := by
+  obtain ⟨eb⟩ := exists_picard_constant_sections_tensor_basis
+    k Y g (scalarObj f F (op ⊤)) G I _b
+  obtain ⟨et⟩ := exists_external_constant_sections_tensor_comparison k X Y f g F G
+  exact ⟨(PresheafOfModules.pushforward₀
+    (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V))
+    Y.ringCatSheaf.obj).mapIso eb ≪≫ et⟩
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-picard-constant-sections-tensor-basis",
+ "kind": "statement",
+ "title": "Basis expansion for constant-section tensor coefficient presheaves",
+ "statement": "For a field k [def-weil-field], a scheme Y [def-pc-scheme] with structure morphism g:Y → Spec(k), a k-module M, a sheaf G of O_Y-modules [def-weil-sheaf-of-modules-category], and a k-basis b:I→M, the presheaf coproduct of I copies of G.val [def-weil-presheaf-modules-sheafification] is isomorphic to picardConstantSectionsTensor k Y g M G. This constructed object tensors G.val with the presheaf scalar extension of the constant M presheaf along the constant-ring map induced by g [def-sc-field-linear-module-cohomology-operations]. All types and schemes lie in the same universe. This uses no quasi-coherence or geometry of a first factor.",
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, affine-open degree-zero calculation; read at https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "proof": [
+  {
+   "text": "The constant M presheaf is the coproduct of copies of the constant k module using the basis representation b.repr, sectionwise; identity restrictions commute with this expansion.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Presheaf extension of scalars is left adjoint to restriction and takes the constant unit to the structure-presheaf unit, by uniqueness of the represented Hom functor. It preserves the basis coproduct. Tensoring with G preserves coproducts, and the left unitor identifies each unit-tensor-G summand with G. Compose these isomorphisms. This also covers zero modules and empty index types.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, ordinary direct-image degree-zero tensor calculation; read at https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "basis constant vector presheaf extension of scalars tensor coproduct",
+   "results": "service unavailable: Internal Server Error",
+   "available": false,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A basis identifies constant scalar extension tensor a presheaf with a coproduct",
+   "results": "Free module and free presheaf hits; no matching scalar-extension tensor presheaf comparison.",
+   "verdict": "No exact match.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, TensorProduct",
+   "results": "TensorProduct.equivFinsuppOfBasisLeft and Module.Basis.baseChange provide the algebraic component ingredient.",
+   "verdict": "No presheaf-level or geometric comparison.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "external.*coproduct|coproduct.*external",
+   "results": "No Mathlib result; the library has the parent comparison and externalGlobalSectionsTensor_bijective_of_isAffine_right.",
+   "verdict": "No exact tensor-presheaf comparison.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardCoproductComparison",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Affine presheaf comparison, factored through constant global-sections tensor coefficients",
+   "via": [
+    "lem-sc-picard-external-coefficients-pushforward-coproduct-comparison",
+    "lem-sc-picard-external-coefficients-pushforward-coproduct",
+    "lem-sc-picard-external-coefficients-direct-images",
+    "lem-sc-picard-external-coefficients-acyclic",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardConstantSectionsTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardConstantSectionsTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_picard_constant_sections_tensor_basis",
+  "statement": "theorem exists_picard_constant_sections_tensor_basis\n    (k : Type w) [Field k] (Y : Scheme.{w})\n    (g : Y ⟶ Spec (CommRingCat.of k)) (M : ModuleCat.{w} k) (G : Y.Modules)\n    (I : Type w) (b : Module.Basis I k M) :\n    Nonempty ((∐ fun _ : I ↦ G.val) ≅ picardConstantSectionsTensor k Y g M G)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T131329-L-4035340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T131329-L-4035340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

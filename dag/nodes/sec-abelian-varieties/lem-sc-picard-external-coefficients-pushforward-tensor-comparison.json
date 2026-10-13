@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-picard-external-coefficients-pushforward-tensor-comparison",
+ "kind": "statement",
+ "title": "Affine external direct image versus constant-section tensor coefficients",
+ "statement": "Let k be a field [def-weil-field], X and Y schemes [def-pc-scheme], and f:X → Spec(k) and g:Y → Spec(k) morphisms. Assume X is quasi-compact and f has affine diagonal. Let F and G be sheaves of modules [def-weil-sheaf-of-modules-category], quasi-coherent on X and Y [pqf-def-coherent]. Give Gamma(X,F) its k-module structure scalarObj f F at the top open [def-sc-field-linear-module-cohomology-operations]. On the full subcategory of affine opens of Y, the restriction of picardConstantSectionsTensor k Y g Gamma(X,F) G [lem-sc-picard-constant-sections-tensor-basis] is isomorphic to the underlying presheaf of pr2_*(externalCupCoefficients f g F G) [pqf-def-cohomology]. All types and schemes lie in the same universe. No basis or coproduct occurs.",
+ "stmt_deps": [
+  "lem-sc-picard-constant-sections-tensor-basis",
+  "def-sc-field-linear-module-cohomology-operations",
+  "pqf-def-cohomology",
+  "pqf-def-coherent",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, affine-open degree-zero calculation; read at https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "proof": [
+  {
+   "text": "On each affine V, presheaf scalar extension along the identity functor is sectionwise extension of scalars, so the tensor coefficient presheaf has value (O_Y(V) tensor_k Gamma(X,F)) tensor_{O_Y(V)} G(V), canonically Gamma(X,F) tensor_k G(V). Balance gives the inverse and scalar linearity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the open-restriction coefficient comparison to identify sections of the external direct image over V with the external sections on X times V, then use the bijective affine-right external global-section comparison. The pure-tensor formula proves O_Y(V)-linearity and restriction compatibility. Assemble component isomorphisms with PresheafOfModules.isoMk, including empty opens and zero modules.",
+   "uses": [
+    "lem-sc-external-sections-open-comparison",
+    "lem-sc-external-global-sections-tensor-affine-right",
+    "def-sc-scalar-global-sections-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scalar-global-sections-comparison",
+  "lem-sc-external-global-sections-tensor-affine-right",
+  "lem-sc-external-sections-open-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, ordinary direct-image degree-zero tensor calculation; read at https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct image of external tensor coefficients on affine opens is the scalar extension of global sections tensored with the second coefficient presheaf",
+   "results": "service unavailable: Internal Server Error",
+   "available": false,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of external tensor product of quasi coherent modules on X times an affine scheme equal tensor product of global sections, naturally on affine open subsets",
+   "results": "Eight hits: pointwise presheaf tensor construction and affine-open section lemmas; no external direct-image comparison.",
+   "verdict": "No exact match.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.isoMk",
+   "results": "PresheafOfModules.isoMk and its component formulas assemble isomorphisms, but do not supply the geometric components.",
+   "verdict": "Assembly ingredient only.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "external.*(section|tensor)|globalSections.*tensor",
+   "results": "No Mathlib algebraic-geometry hits. The library externalGlobalSectionsTensor_bijective_of_isAffine_right and externalSectionsComponent_openComparison provide the planned component ingredients.",
+   "verdict": "No complete presheaf comparison.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardCoproductComparison",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Affine presheaf comparison, factored through constant global-sections tensor coefficients",
+   "via": [
+    "lem-sc-picard-external-coefficients-pushforward-coproduct-comparison",
+    "lem-sc-picard-external-coefficients-pushforward-coproduct",
+    "lem-sc-picard-external-coefficients-direct-images",
+    "lem-sc-picard-external-coefficients-acyclic",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCoefficientsPushforwardTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_external_constant_sections_tensor_comparison",
+  "statement": "theorem exists_external_constant_sections_tensor_comparison\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [IsAffineHom (pullback.diagonal f)]\n    (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] :\n    Nonempty ((PresheafOfModules.pushforward₀\n        (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V)) Y.ringCatSheaf.obj).obj\n        (picardConstantSectionsTensor k Y g (scalarObj f F (op ⊤)) G) ≅\n      (PresheafOfModules.pushforward₀\n        (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V)) Y.ringCatSheaf.obj).obj\n        ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj\n          (externalCupCoefficients f g F G)).val)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T131329-L-4035340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T131329-L-4035340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
