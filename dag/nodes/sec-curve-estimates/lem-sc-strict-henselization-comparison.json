@@ -1,0 +1,157 @@
+{
+ "id": "lem-sc-strict-henselization-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "boundary-stalk strict-henselization construction: comparison of the colimits before ideal and completion transport",
+   "via": [
+    "lem-sc-etale-triple-strict-henselization-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pointed-colimit comparison for an etale localization",
+ "statement": "Let R be a commutative local ring with maximal ideal m, and let K be a separable closure of its residue field. Let c be a colimit cocone of the diagram of pointed etale R-algebra triples [lem-weil-pbc-strict-henselization-triples], with point C, structural map rho:R to C, and residue map psi:C to K satisfying rho=alpha_s followed by c_s and psi followed after c_s equal to the pointed residue map for every triple s. Fix a triple t=(S,q,phi), and let A=S_q, with its local-ring structure. Let chiA:kappa(A) to K be a residue embedding whose composite with S to A to kappa(A) equals S to kappa(q) to K. Let d be a colimit cocone of the pointed etale A-algebra triples for chiA, with point D, structural map delta:A to D, and residue map psiD:D to K satisfying the analogous cocone equations. There exists a unique ring equivalence e:D to C such that e composed with S to A to D equals the cocone map S to C, and psi composed with e equals psiD. No ideal or completion assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)', using Algebra Tag 04GW (lemma-strict-henselization-different) and Tag 04GP (lemma-strict-henselization)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-weil-pbc-strict-henselization-triples to $(R,m,K)$ and to $(A,qA,K)$. The field $K$ is separably closed, and its given separable-algebraic extension structure over $\\kappa(m)$ makes it separable algebraic over $\\kappa(q)$ through the map induced by $S\\to A$, so both constructions apply. They give strictly henselian local rings $C$ and $D=A^{\\mathrm{sh}}$, with maximal ideals $m_C=mC$ and $m_D=qD$ and residue field $K$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GW and Lemma Tag 04GP, items (2)-(5)"
+   }
+  },
+  {
+   "text": "The composite $S\\to C\\to K$ equals $S\\to\\kappa(q)\\to K$, so the preimage of $m_C$ in $S$ is $q$ by the preimage clause of lem-weil-pbc-strict-henselization-triples. Hence $S\\to C$ sends every element outside $q$ to a unit and factors uniquely through the localization $A=S_q$. Thus the maps $S\\to A\\to C$ and $S\\to C$ agree.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GW, item (2), and the universal property of localization"
+   }
+  },
+  {
+   "text": "Use lem-weil-pbc-map-into-henselian-colimit over the base $A$ with source $D$, target $C$, and residue map the identity of $K$ to obtain the unique $A$-algebra map $f:D\\to C$. Use the same lemma over the base $R$ with source $C$, target $D$, and residue map the identity of $K$ to obtain the unique $R$-algebra map $g:C\\to D$. The hypotheses hold because each of $C$ and $D$ is a filtered colimit of etale algebras over its base by the strict-henselization triples construction, and both targets are henselian local with residue field $K$. In the application over R the source is C, already ind-etale over R, and the target D is made an R-algebra by R to S to A to D. No ind-etale presentation of D over R is required.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 08HR (lemma-map-into-henselian-colimit) applied over A and over R"
+   }
+  },
+  {
+   "text": "The composite $f\\circ g$ is an $R$-algebra endomorphism of $C$ with preimage $m_C$ equal to $m_C$ and residue map the identity of $K$, so the uniqueness clause of lem-weil-pbc-map-into-henselian-colimit over $R$ gives $f\\circ g=\\operatorname{id}_C$. The maps $A\\to C\\to D$ and $A\\to D$ agree: they agree on $S$ by Step 2 and the uniqueness clause for the single etale $R$-algebra $S$, and $A=S_q$ is generated from $S$ by inverting elements outside $q$. Therefore $g\\circ f$ is an $A$-algebra endomorphism of $D$ with the same local and residue properties, and uniqueness over $A$ gives $g\\circ f=\\operatorname{id}_D$. The construction of $f$ also gives compatibility $S\\to A\\to D\\to C=S\\to C$.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 08HR, uniqueness clause, applied first over R and then over A"
+   }
+  },
+  {
+   "text": "For any other ring equivalence with the stated S-compatibility, localization gives agreement of the induced maps on A. Equality of the residue maps and the uniqueness clause of the henselian-colimit mapping theorem over A then identify the equivalences.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 04GW and Lemma Tag 04GP, with Lemma Tag 08HR for the comparison maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization of an etale local algebra equals the original strict henselization",
+   "results": "8 hits about standard etale algebras and localization, including Algebra.IsEtaleAt and Algebra.FormallyEtale.localization_base; no strict-henselization comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosure",
+   "results": "12 hits including IsSepClosure.equiv and IsSepClosure.sep_closed; field-level results do not compare the pointed ring colimits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|henselization",
+   "results": "0 Mathlib hits. Local rg of the library found no existing pointed-colimit comparison; PairHenselizationCompletionData supplies the separate completion step.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict henselization invariant under etale localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleTripleStrictHenselizationIdentification",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.StrictHenselizationComparison",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_comparison",
+  "statement": "theorem strictHenselization_comparison\n    (R : CommRingCat.{u}) [IsLocalRing R]\n    (K : Type u) [Field K]\n    [Algebra ((Spec R).residueField (IsLocalRing.closedPoint R)) K]\n    [IsSepClosure ((Spec R).residueField (IsLocalRing.closedPoint R)) K]\n    (c : Cocone (etaleResidueTriplesRingDiagram R (IsLocalRing.closedPoint R) K\n      (CommRingCat.ofHom (algebraMap\n        ((Spec R).residueField (IsLocalRing.closedPoint R)) K))))\n    (hc : IsColimit c)\n    (ρ : R ⟶ c.pt) (ψ : c.pt →+* K)\n    (hρ : ∀ s, s.α ≫ c.ι.app s = ρ)\n    (hψ : ∀ s, ψ.comp (c.ι.app s).hom =\n      ((ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ).hom)\n    (t : EtaleResidueTriples R (IsLocalRing.closedPoint R) K\n      (CommRingCat.ofHom (algebraMap\n        ((Spec R).residueField (IsLocalRing.closedPoint R)) K)))\n    (A : CommRingCat.{u}) [Algebra t.B A] [IsLocalization.AtPrime A t.q.asIdeal]\n    [IsLocalRing A]\n    (χA : (Spec A).residueField (IsLocalRing.closedPoint A) ⟶ CommRingCat.of K)\n    (hχA : CommRingCat.ofHom (algebraMap t.B A) ≫ (ΓSpecIso A).inv ≫\n      (Spec A).Γevaluation (IsLocalRing.closedPoint A) ≫ χA =\n      (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ)\n    (d : Cocone (etaleResidueTriplesRingDiagram A (IsLocalRing.closedPoint A) K χA))\n    (hd : IsColimit d) (δ : A ⟶ d.pt) (ψD : d.pt →+* K)\n    (hδ : ∀ s, s.α ≫ d.ι.app s = δ)\n    (hψD : ∀ s, ψD.comp (d.ι.app s).hom =\n      ((ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ).hom) :\n    ∃! e : d.pt ≃+* c.pt,\n      e.toRingHom.comp (δ.hom.comp (algebraMap t.B A)) = (c.ι.app t).hom ∧\n      ψ.comp e.toRingHom = ψD",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T155929-L-1301024",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T155929-L-1301024",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

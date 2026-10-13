@@ -8,7 +8,9 @@ module
 public import Sheaf.RingTheory.StrictHenselizationTriples
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.MapIntoHenselianColimit
+import Sheaf.RingTheory.StrictHenselizationComparison
+import Sheaf.RingTheory.EtaleResidueTriplesLocalization
+import Sheaf.RingTheory.PairHenselizationCompletionData
 
 /-!
 # Strict henselization at an etale triple
@@ -25,6 +27,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 600000 in
+-- The scheme residue-field encodings and dependent completion transport need extra elaboration.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Strict henselization of the localization of a pointed etale algebra agrees canonically
 with the original strict henselization, including the maximal ideal and its completion.
 Source: Stacks Project, Tags 06LJ (proof of (c)), 04GW and 04GP
@@ -91,6 +97,55 @@ theorem etaleTriple_strictHenselization_identification
             Ideal.Quotient.mk ((t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))) ^ n) a →
           AdicCompletion.evalₐ ((IsLocalRing.maximalIdeal R).map ρ.hom) n (ê x) =
             Ideal.Quotient.mk (((IsLocalRing.maximalIdeal R).map ρ.hom) ^ n) (e a) := by
-  sorry
+  obtain ⟨e, he, huniq⟩ := strictHenselization_comparison R K c hc ρ ψ hρ hψ t A χA
+    hχA d hd δ ψD hδ hψD
+  obtain ⟨_, hker⟩ := etaleResidueTriples_colimit_localization R
+    (IsLocalRing.closedPoint R) K c hc ρ hρ ψ hψ
+  change RingHom.ker ψ = (IsLocalRing.maximalIdeal R).map ρ.hom at hker
+  have ht : t.q.asIdeal.map (c.ι.app t).hom =
+      (IsLocalRing.maximalIdeal R).map ρ.hom := by
+    apply le_antisymm
+    · rw [← hker, Ideal.map_le_iff_le_comap]
+      intro b hb
+      change ψ ((c.ι.app t).hom b) = 0
+      change (ψ.comp (c.ι.app t).hom) b = 0
+      rw [hψ t]
+      have hcanon := Spec.algebraMap_residueFieldIso_inv t.B t.q
+      change CommRingCat.ofHom (algebraMap t.B t.q.asIdeal.ResidueField) ≫
+        (Spec.residueFieldIso t.B t.q).inv =
+          (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q at hcanon
+      change t.φ.hom (((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q).hom b) = 0
+      have hcanon' := congrArg (fun f : t.B ⟶ (Spec t.B).residueField t.q ↦ f.hom b)
+        hcanon.symm
+      rw [hcanon']
+      change t.φ.hom ((Spec.residueFieldIso t.B t.q).inv.hom
+        (algebraMap t.B t.q.asIdeal.ResidueField b)) = 0
+      have hb' : algebraMap t.B t.q.asIdeal.ResidueField b = 0 := by
+        rw [← RingHom.mem_ker, Ideal.ker_algebraMap_residueField]
+        exact hb
+      rw [hb', map_zero, map_zero]
+    · have hover : t.q.asIdeal.comap t.α.hom = IsLocalRing.maximalIdeal R :=
+        congrArg PrimeSpectrum.asIdeal t.over
+      have hρt : (c.ι.app t).hom.comp t.α.hom = ρ.hom :=
+        congrArg CommRingCat.Hom.hom (hρ t)
+      rw [← hover, ← hρt, ← Ideal.map_map]
+      exact Ideal.map_mono Ideal.map_comap_le
+  have hI : (t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))).map e.toRingHom =
+      (IsLocalRing.maximalIdeal R).map ρ.hom := by
+    rw [Ideal.map_map, he.1]
+    exact ht
+  have hcompletion := RingTheory.pair_henselization_completion_data
+    d.pt c.pt (t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))) e.toRingHom
+    (by
+      intro n hn
+      exact (Ideal.quotientEquiv
+        ((t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))) ^ n)
+        (((t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))) ^ n).map e.toRingHom)
+        e rfl).bijective)
+  rw [hI] at hcompletion
+  obtain ⟨ê, hê, _⟩ := hcompletion
+  refine ⟨e, ⟨he.1, he.2, hI, ⟨ê, hê⟩⟩, ?_⟩
+  intro e' he'
+  exact huniq e' ⟨he'.1, he'.2.1⟩
 
 end AlgebraicGeometry.Scheme
