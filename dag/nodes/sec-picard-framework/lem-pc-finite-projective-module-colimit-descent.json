@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-finite-projective-module-colimit-descent",
+ "kind": "statement",
+ "title": "Descent of one finite projective module over a directed ring colimit",
+ "statement": "Let $I$ be a nonempty directed preorder and $F:I\\to\\mathrm{CommRing}$ a diagram with colimit $A$ [def-weil-pbc-category-colimit]. For every finite projective $A$-module $X$ [def-weil-pbc-projective-module], there are $i\\in I$ and a finite projective $F(i)$-module $M$ with an isomorphism $M\\otimes_{F(i)}A\\cong X$, where scalar extension uses the canonical map $F(i)\\to A$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, first paragraph of the proof, using Algebra Tags 05N7 and 00NX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [
+  {
+   "text": "Replace the directed preorder by its antisymmetrization. The quotient functor and a monotone choice of representatives give inverse equivalences of thin categories. Transport F and its colimit across this equivalence. A model at a representative stage, transported along the colimit ring isomorphism, gives a model for the original diagram.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
+   }
+  },
+  {
+   "text": "A finite projective module X is finitely presented by Module.finitePresentation_of_projective. Apply the object clause of [lem-pc-fp-module-map-descent-affine] to obtain a finitely presented model M at a stage i and its base-change isomorphism to X. Finite generation and projectivity give a split surjection A^r → X from a finite free module, with a section, by Module.Finite.exists_comp_eq_id_of_projective. The module (F(i))^r is its canonical finite free stage model; tensoring its finite basis identifies its base change with A^r.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
+   }
+  },
+  {
+   "text": "Transport the inclusion and retraction through the model isomorphisms, then use the map clause of [lem-pc-fp-module-map-descent-affine] to descend both maps. Choose a common stage above their stages and use the canonical iterated-base-change isomorphisms to compare their extensions. At that stage their composite becomes the identity after base change to A. The equality clause makes the composite equal the identity at a further stage. The resulting term is a summand of the transported finite free module, so it is finite and projective. Its base-change isomorphism to X is obtained by composing the previous isomorphism with the iterated-base-change comparison. Lift the index and isomorphism back from the antisymmetrization.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BC7, label more-algebra-lemma-colimit-perfect, proof of (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BC7, first proof paragraph; W3 isolates the single-term part of the existing graded descent plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite projective module over a directed colimit of commutative rings is the extension of scalars of a finite projective module at some stage",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite projective module over a directed colimit of commutative rings descends to a finite projective module at some stage",
+   "results": "Module.finitePresentation_of_projective, ModuleCat.enoughProjectives and local projectivity criteria; no directed-ring-colimit descent theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, TensorProduct",
+   "results": "Module.Projective.tensorProduct proves stability under scalar extension; dualTensorHomEquiv and related contraction lemmas do not descend module objects.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*colimit|colimit.*projective|exists.*projective.*model",
+   "results": "Mathlib hits concern projective generators and preservation of finite colimits. Repository hits include the assigned graded theorem and its affine-complex parent, which depend on it, and localization/sheaf results with different hypotheses. Blueprint search for finite projective colimit found no duplicate blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteProjectiveGradedColimitDescent",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF proof, affine approximation: descent of each individual finite projective term before taking a common stage for the bounded family",
+   "via": [
+    "lem-pc-finite-projective-graded-colimit-descent",
+    "lem-pc-affine-perfect-colimit-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FiniteProjectiveModuleColimitDescent",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteProjectiveModuleColimitDescent.lean",
+  "declaration": "ModuleCat.exists_finite_projective_module_model_of_directed_colimit",
+  "statement": "theorem exists_finite_projective_module_model_of_directed_colimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (X : ModuleCat.{u} (colimit F : CommRingCat.{u})) (hfinite : Module.Finite (colimit F : CommRingCat.{u}) X) (hprojective : Module.Projective (colimit F : CommRingCat.{u}) X) : ∃ (i : I) (M : ModuleCat.{u} (F.obj i)), Module.Finite (F.obj i) M ∧ Module.Projective (F.obj i) M ∧ Nonempty ((extendScalars (colimit.ι F i).hom).obj M ≅ X)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T082423-L-1651216",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T082423-L-1651216",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
