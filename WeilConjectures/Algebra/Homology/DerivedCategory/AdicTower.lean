@@ -172,6 +172,54 @@ lemma kernel_ι_comp_map_eq_zero (m N : ℕ) (hN : n ≤ N) :
   rw [show ϖ ^ (m + N) = ϖ ^ (N - n) * ϖ ^ (m + n) by rw [← pow_add]; congr 1; omega,
     ← smul_smul, hT.smul_eq_zero, smul_zero, comp_zero]
 
+include hT in
+/-- Multiplication by `ϖᵃ` followed by multiplication by `ϖᵇ` vanishes on `Tₘ` for
+`a + b = m`. -/
+lemma smul_comp_smul_eq_zero {a b m : ℕ} (h : a + b = m) :
+    (ϖ ^ a • 𝟙 (T.obj (op m))) ≫ (ϖ ^ b • 𝟙 (T.obj (op m))) = 0 := by
+  subst h
+  rw [Linear.smul_comp, id_comp, smul_smul, ← pow_add, add_comm, hT.smul_eq_zero]
+
+include hT in
+/-- Multiplication by `ϖᵃ` followed by multiplication by `ϖᵇ` on `Tₘ` is exact for
+`a + b = m`. -/
+lemma exact_smul_of_add_eq {a b m : ℕ} (h : a + b = m) :
+    (ShortComplex.mk _ _ (hT.smul_comp_smul_eq_zero h)).Exact := by
+  subst h
+  exact hT.exact_smul a b
+
+include hT in
+/-- If `T₁` is exact in degree `i + 1`, the transition `T_{n+1} ⟶ Tₙ` is an epimorphism on
+`Hⁱ`: it factors as `T_{n+1} ⟶ coker(ϖⁿ) ⟶ Tₙ`, the second map being a quasi-isomorphism, and
+the kernel `ϖⁿ T_{n+1} ≅ coker(ϖ on T_{n+1})` of the first one is quasi-isomorphic to `T₁`
+(blueprint: `sk-prop-trace-adic`, right exactness in the top degree). -/
+lemma epi_homologyMap_map (i : ℤ) (h₁ : (T.obj (op 1)).ExactAt (i + 1)) (n : ℕ) :
+    Epi (HomologicalComplex.homologyMap (T.map (homOfLE n.le_succ).op) i) := by
+  let X := T.obj (op (n + 1))
+  have hex := hT.exact_smul_of_add_eq (add_comm 1 n)
+  let S := ShortComplex.mk (cokernel.desc (ϖ ^ 1 • 𝟙 X) (ϖ ^ n • 𝟙 X)
+    (hT.smul_comp_smul_eq_zero (add_comm 1 n)))
+    (cokernel.π (ϖ ^ n • 𝟙 X)) (coequalizer.hom_ext (by simp))
+  let φ : ShortComplex.mk (ϖ ^ n • 𝟙 X) (cokernel.π (ϖ ^ n • 𝟙 X)) (cokernel.condition _) ⟶
+      S :=
+    { τ₁ := cokernel.π (ϖ ^ 1 • 𝟙 X)
+      τ₂ := 𝟙 _
+      τ₃ := 𝟙 _ }
+  have hS : S.ShortExact :=
+    { exact := (ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ).1
+        (ShortComplex.exact_of_g_is_cokernel _ (cokernelIsCokernel _))
+      mono_f := (ShortComplex.exact_iff_mono_cokernel_desc _).1 hex }
+  have := hT.quasiIso_cokernelDesc (Nat.le_add_left 1 n)
+  have hδ : hS.δ i (i + 1) rfl = 0 := (IsZero.of_iso (h₁.isZero_homology)
+    (asIso (HomologicalComplex.homologyMap (cokernel.desc (ϖ ^ 1 • 𝟙 X)
+      (T.map (homOfLE (Nat.le_add_left 1 n)).op) _) (i + 1)))).eq_of_tgt _ _
+  have hepi := (hS.homology_exact₃ i (i + 1) rfl).epi_f hδ
+  have := hT.quasiIso_cokernelDesc n.le_succ
+  rw [← cokernel.π_desc (ϖ ^ n • 𝟙 X) (T.map (homOfLE n.le_succ).op) (by
+    rw [Linear.smul_comp, id_comp, ← comp_id (T.map _), ← Linear.comp_smul,
+      hT.smul_eq_zero, comp_zero]), HomologicalComplex.homologyMap_comp]
+  exact epi_comp' hepi inferInstance
+
 variable [HasDerivedCategory 𝒜]
 
 variable [HasLimitsOfShape (Discrete ℕ) (DerivedCategory 𝒜)]

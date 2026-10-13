@@ -232,6 +232,73 @@ theorem iterStalk_comp_eq
   simp only [Functor.map_comp, Category.assoc]
   rw [h1, ← reassoc_of% h2, ← reassoc_of% h3, ← reassoc_of% h4, reassoc_of% h5']
 
+variable (αs : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ ⋙
+    rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s ≅
+  rightDerivedGlobalSections (ModuleCat.{u + 1} Λ') s ⋙ ModuleCat.derivedRestrictScalars ρ)
+
+/-- If two Frobenius coefficient morphisms are compatible along `t : K ⟶ Res K'`, then the
+geometric stalks of `t` at a point `x̄` fixed by `Φ^m`, read through a comparison
+`Res ∘ (-)_x̄ ≅ (-)_x̄ ∘ Res` (`AlgebraicGeometry.ProEtale.stalkCoefficientIso`), intertwine the
+stalk endomorphisms `(ψ_m)_x̄` and `(ψ'_m)_x̄` (blueprint
+`prop-trf-adic-coefficient-morphism-systems` (3)). -/
+theorem geometricStalk_map_comp_stalkCoefficientIso
+    (h : ψ ≫ t = ((upperStar (ModuleCat.{u + 1} Λ) Φ).leftDerivedFunctor).map t ≫
+      (leftDerivedUpperStarRestrictScalarsIso ρ Φ).hom.app K' ≫
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ).map ψ') (m : ℕ)
+    (x : s ⟶ X) (hx : x ≫ endPow Φ m = x) :
+    (geometricStalk Λ x).map t ≫ (stalkCoefficientIso ρ x αs).hom.app K' ≫
+        (ModuleCat.derivedRestrictScalars ρ).map ((rightDerivedGlobalSections _ s).map
+          ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ') hx).inv.app K' ≫
+            (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ') x (endPow Φ m)).hom.app K' ≫
+            ((upperStar (ModuleCat.{u + 1} Λ') x).leftDerivedFunctor).map (iterCoeff Φ ψ' m))) =
+      (rightDerivedGlobalSections _ s).map
+          ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ) hx).inv.app K ≫
+            (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) x (endPow Φ m)).hom.app K ≫
+            ((upperStar (ModuleCat.{u + 1} Λ) x).leftDerivedFunctor).map (iterCoeff Φ ψ m)) ≫
+        (geometricStalk Λ x).map t ≫ (stalkCoefficientIso ρ x αs).hom.app K' := by
+  have hα := αs.hom.naturality ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ') hx).inv.app K' ≫
+    (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ') x (endPow Φ m)).hom.app K' ≫
+    ((upperStar (ModuleCat.{u + 1} Λ') x).leftDerivedFunctor).map (iterCoeff Φ ψ' m))
+  have hs := congrArg (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s).map
+    (iterStalk_comp_eq ρ Φ ψ ψ' t h m x x hx)
+  simp only [Functor.comp_map] at hα
+  simp only [Functor.map_comp, Category.assoc] at hs
+  simp only [stalkCoefficientIso_hom_app, Functor.comp_map, Category.assoc]
+  rw [← hα]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% hs]
+
 end Generic
+
+namespace AdicSystem
+
+namespace FrobeniusSystem
+
+variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} {X : Scheme.{u}} {S : AdicSystem I X}
+  {s : Scheme.{u}} {aX : X ⟶ s} {Φ : X ⟶ X} {hΦ : Φ ≫ aX = aX} (F : S.FrobeniusSystem Φ hΦ)
+
+/-- The iterates of the Frobenius coefficient morphism of the Weil complex at level `n` are the
+iterates `ψ_{n,m}` of `ψ_n`. -/
+lemma weilComplex_coeffIterate (n m : ℕ) :
+    (F.weilComplex n).coeffIterate m = iterCoeff Φ (F.coeff n) m :=
+  coeffIterate_mk_eq_iterCoeff Φ hΦ (F.coeff n) m
+
+/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3), iterates: the iterates
+`ψ_{n,m}` form a compatible system: `ψ_{n+1,m}` followed by the transition `ν_n` is
+`L(Φ^m)^* ν_n` followed by `L(Φ^m)^* Res ≅ Res L(Φ^m)^*` and `Res ψ_{n,m}`. -/
+theorem coeffIterate_comp_map (n m : ℕ) :
+    (F.weilComplex (n + 1)).coeffIterate m ≫ S.map n =
+      ((upperStar (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) (endPow Φ m)).leftDerivedFunctor).map
+          (S.map n) ≫
+        (leftDerivedUpperStarRestrictScalarsIso
+          (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) n.le_succ))
+          (endPow Φ m)).hom.app (S.obj n) ≫
+        (levelTransitionRestrictScalars X I n.le_succ).map ((F.weilComplex n).coeffIterate m) := by
+  rw [weilComplex_coeffIterate, weilComplex_coeffIterate]
+  exact iterCoeff_comp_eq _ Φ _ _ _ (F.comm n) m
+
+end FrobeniusSystem
+
+end AdicSystem
 
 end AlgebraicGeometry.ProEtale
