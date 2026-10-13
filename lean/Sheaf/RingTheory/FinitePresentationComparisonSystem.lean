@@ -139,7 +139,7 @@ theorem exists_finitePresentation_comparison_system
   obtain ⟨i, hi, aPi, μB, hμB, ψ, hψ, hlim⟩ :=
     exists_comparison_map_finite_stage F i₀ B₀ C₀ φ₀ P Q aP e.toRingHom he
   obtain ⟨aPs, D, E, α, d, c, cD, cE, f, hD, hE, hcomm, hbij, hpush, hcompat⟩ :=
-    exists_comparison_map_base_change_system F i₀ B₀ C₀ φ₀ P Q aP e
+    exists_comparison_map_base_change_system F i₀ B₀ C₀ φ₀ P Q aP e he
       i hi aPi μB hμB ψ hψ hlim
   have hfilt : IsFiltered {j : I // i ≤ j} := by
     have : Nonempty {j : I // i ≤ j} := ⟨⟨i, le_rfl⟩⟩
