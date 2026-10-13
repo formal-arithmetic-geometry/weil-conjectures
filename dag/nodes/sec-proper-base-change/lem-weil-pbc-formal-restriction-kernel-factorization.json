@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Replace the given kernel fork by the stabilized kernel supplied by coherentFormalModule_kernel, using uniqueness of limiting forks, compatibly with the arrow into the source.",
+   "text": "Obtain the stabilized image system S, formal module K, quotient isomorphisms and arrow iota from coherentFormalModule_kernel. Keep its zero-composite equation; the global uniqueness clause is not needed. At the end the given limiting fork supplies a lift k:K -> c.pt with k followed by c.iota equal to iota.",
    "uses": [
     "lem-weil-pbc-coherent-formal-module-kernel"
    ],
@@ -24,12 +24,15 @@
    }
   },
   {
-   "text": "Restrict the stabilized image system and the ideal-power quotient presentations. Ordinary module restriction preserves kernels and cokernels. The affine section formulas identify ideal products with those of the comapped ideal; their quotient comparisons commute with projections. The same global stabilization bound remains valid on U.",
+   "text": "Coherence of the levels implies quasi-coherence. Kernels and cokernels of quasi-coherent modules are quasi-coherent, so hS identifies every S_m with a quasi-coherent abelian image. Restriction preserves kernels and cokernels, hence abelian images. Compose these comparison isomorphisms with the comparison of the restricted levelwise kernel; precomposition by an isomorphism does not change its image. Reuse the proved private restrictionQuotientIso and restrictionQuotientIso_π helpers from TorsionControlledFormalRestriction through a proof-only import all. Only these generic quotient/restriction comparisons are used, not the torsion-controlled theorem. Their proof compares recursive ideal-power product images with ideal-data powers and applies the ideal-product restriction formula, then identifies cokernels with their projection equations. Compose the quotient comparison with the restricted e_n. Applying restriction to htrans and hcomp, and rewriting the projection equations, proves the corresponding equations on U.",
    "uses": [
     "lem-weil-pbc-module-restriction-open-immersion-limits",
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-coherent-formal-module-kernel"
+    "lem-weil-pbc-torsion-controlled-formal-restriction",
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
    ],
    "elementary": false,
    "source": {
@@ -38,7 +41,7 @@
    }
   },
   {
-   "text": "Use the factorization construction on U: at later levels factor gamma through the levelwise kernel and then its image in the earlier level; epi transitions supply the earlier maps. Compose at level n+c with the quotient to K_n restricted to U and descend through the corresponding quotient of T, which is T_n. Cancel quotient projections and image inclusions to check transitions and the equation with the kernel arrow. Transport back to the given fork. Only existence is required.",
+   "text": "Apply coherentFormalModule_kernel_factorization on U to the restricted image system, restricted iota and quotient isomorphisms from the preceding step. This gives delta:T -> R(K) and delta followed by R(iota) equal to gamma. Compose delta with R(k), where k is the lift into the given limiting kernel fork from step 1. Functoriality and associativity give the required factorization through R(c.iota). No extension of T or termwise monicity is used.",
    "uses": [
     "lem-weil-pbc-formal-kernel-factorization",
     "lem-weil-pbc-coherent-formal-modules-restriction-objects"
@@ -54,16 +57,19 @@
   "lem-weil-pbc-coherent-formal-module-kernel",
   "lem-weil-pbc-coherent-formal-modules-restriction-objects",
   "lem-weil-pbc-formal-kernel-factorization",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-module-restriction-open-immersion-limits"
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-torsion-controlled-formal-restriction",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S1",
+  "group": "Y3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X (lemma-inverse-systems-abelian), construction (a)--(d), part (2) and final sentence of the proof; read at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+  "place": "Stacks Tag 087X, construction (a)--(d), especially the factorization paragraph and the final sentence; read at https://stacks.math.columbia.edu/tag/087X. Restriction comparisons are explicit Lean kernel/image/cokernel universal-property calculations. Second reading reuses the existing generic quotient-restriction helpers from TorsionControlledFormalRestriction instead of duplicating them."
  },
  "mathlib_searches": [
   {
@@ -142,10 +148,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T022428-L-3218574",
-  "kind": "interface",
+  "landing": "20261013T040807-L-3954761",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
