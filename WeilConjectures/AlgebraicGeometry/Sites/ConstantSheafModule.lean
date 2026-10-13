@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Injective
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
-public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
@@ -15,15 +15,13 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 # Constant étale sheaves of modules
 
 We transfer the computation of the global sections of a constant étale sheaf on a connected
-scheme from abelian groups to `Λ`-modules, and deduce that on the spectrum of a separably closed
-field the constant sheaf functor is an equivalence.
+scheme from abelian groups to `Λ`-modules, and deduce consequences on the spectrum of a
+separably closed field.
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.bijective_constantSheafAdj_unit_app`: for a connected scheme `X`,
   the global sections of the constant sheaf `M` of `Λ`-modules are `M`.
-- `AlgebraicGeometry.Scheme.isEquivalence_constantSheaf_of_isSepClosed`: for a separably closed
-  field `k`, the constant sheaf functor on the small étale site of `Spec k` is an equivalence.
 - `AlgebraicGeometry.Scheme.injective_constantSheaf_of_isSepClosed`: for `Λ` self-injective,
   the constant sheaf `Λ` on `Spec k` is injective.
 - `AlgebraicGeometry.Scheme.nonempty_iso_constantSheaf_of_sheafFiber_iso`: a sheaf on `Spec k`
@@ -58,7 +56,7 @@ lemma bijective_toSheafify_app_iff_forget (P : Cᵒᵖ ⥤ D) (U : Cᵒᵖ) :
       ⇑(ConcreteCategory.hom ((toSheafify J (P ⋙ CategoryTheory.forget D)).app U)) =
       ⇑(ConcreteCategory.hom ((toSheafify J P).app U)) := by
     funext x
-    exact congrArg (fun φ ↦ ConcreteCategory.hom φ x) h
+    simpa using ConcreteCategory.congr_hom h x
   rw [← Function.Bijective.of_comp_iff' he, h']
 
 end CategoryTheory
@@ -102,7 +100,8 @@ theorem bijective_constantSheafAdj_unit_app [ConnectedSpace X] {T : X.Etale}
     rw [hfun]
     exact (ConcreteCategory.bijective_of_isIso (Functor.mapIso _ i.op).hom).comp
       (bijective_toSheafify_app_terminal_moduleCat X M)
-  simpa [constantSheafAdj, Adjunction.comp_unit_app] using key
+  simp only [constantSheafAdj, Adjunction.comp_unit_app]
+  exact key
 
 /-- For a connected scheme `X` and a terminal object `T` of the small étale site of `X`, the
 unit `M ⟶ Γ(T, M_X)` of the constant sheaf adjunction is an isomorphism. -/
@@ -113,58 +112,6 @@ instance isIso_constantSheafAdj_unit_app [ConnectedSpace X] {T : X.Etale} (hT : 
 section IsSepClosed
 
 variable (k : Type u) [Field k] [IsSepClosed k] (Λ)
-
-/-- Over a separably closed field `k`, the counit `Γ(F)_k ⟶ F` of the constant sheaf
-adjunction on the small étale site of `Spec k` is an isomorphism: taking global sections is
-exact and conservative, and turns the counit into an isomorphism by a triangle identity. -/
-instance isIso_constantSheafAdj_counit_app_of_isSepClosed
-    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso ((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-      isTerminalEtalePoint).counit.app F) := by
-  let adj := constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-    (isTerminalEtalePoint (k := k))
-  let G := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-    (op (etalePoint k))
-  let φ := adj.counit.app F
-  have hG : IsIso (G.map φ) := by
-    have h := adj.right_triangle_components F
-    have : IsIso (adj.unit.app (G.obj F)) := isIso_constantSheafAdj_unit_app _ _ _
-    exact IsIso.of_isIso_fac_left h
-  have hGφ : Function.Bijective (G.map φ) := ConcreteCategory.bijective_of_isIso _
-  have : G.IsRightAdjoint := ⟨_, ⟨adj⟩⟩
-  have hmono : Mono φ := by
-    refine Preadditive.mono_of_isZero_kernel _ (isZero_of_subsingleton_sections_of_isSepClosed
-      _ ⟨fun a b ↦ ?_⟩)
-    have hinj : Function.Injective (G.map (kernel.ι φ)) := by
-      rw [← ModuleCat.mono_iff_injective]
-      infer_instance
-    have h0 (s : G.obj (kernel φ)) : s = 0 := by
-      refine hinj (hGφ.1 ?_)
-      rw [← ConcreteCategory.comp_apply, ← G.map_comp, kernel.condition, G.map_zero, map_zero,
-        map_zero]
-      rfl
-    rw [h0 a, h0 b]
-  have hepi : Epi φ := by
-    refine Preadditive.epi_of_isZero_cokernel _ (isZero_of_subsingleton_sections_of_isSepClosed
-      _ ⟨fun a b ↦ ?_⟩)
-    have hsurj : Function.Surjective (G.map (cokernel.π φ)) := by
-      rw [← ModuleCat.epi_iff_surjective]
-      infer_instance
-    have h0 (s : G.obj (cokernel φ)) : s = 0 := by
-      obtain ⟨t, rfl⟩ := hsurj s
-      obtain ⟨t', rfl⟩ := hGφ.2 t
-      rw [← ConcreteCategory.comp_apply, ← G.map_comp, cokernel.condition, G.map_zero]
-      rfl
-    rw [h0 a, h0 b]
-  exact isIso_of_mono_of_epi φ
-
-/-- **Étale sheaves on a geometric point are constant.** Over a separably closed field `k`, the
-constant sheaf functor from `Λ`-modules to étale sheaves of `Λ`-modules on `Spec k` is an
-equivalence of categories, with inverse the global sections functor. -/
-instance isEquivalence_constantSheaf_of_isSepClosed :
-    (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).IsEquivalence :=
-  (constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-    (isTerminalEtalePoint (k := k))).toEquivalence.isEquivalence_functor
 
 /-- Over a separably closed field `k` and for a self-injective ring `Λ`, the constant sheaf `Λ`
 on the small étale site of `Spec k` is an injective object: it is the image of the injective
@@ -184,7 +131,7 @@ instance injective_unit_of_isSepClosed [Module.Injective Λ Λ] :
       (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
   Injective.of_iso
     (Functor.Monoidal.εIso (presheafToSheaf (Spec (.of k)).smallEtaleTopology _)).symm
-    inferInstance
+    (injective_constantSheaf_of_isSepClosed (k := k) (Λ := Λ))
 
 variable {k Λ} in
 /-- Over a separably closed field `k`, an étale sheaf `L` of `Λ`-modules on `Spec k` whose
