@@ -24,38 +24,48 @@
  ],
  "proof": [
   {
-   "text": "Since A is not a field, its maximal ideal m contains a nonzero element. Order the nonzero elements of m by divisibility. Because A is a valuation ring, this is a directed index system, A/m is the filtered colimit of the quotients A/pi, and Spec(A/m) is the inverse limit of the affine schemes Spec(A/pi). Base change of the finitely presented morphism f along these affine maps gives an inverse system X x_Spec(A) Spec(A/pi) with affine transition maps and limit X_0. Choose one nonzero pi_0 in m and set F_{pi_0}=L|_{X x_Spec(A) Spec(A/pi_0)}; its pullbacks to later stages and to X_0 are the corresponding restrictions of L, and s restricts to a compatible system of sections.",
+   "text": "On an affine open U, use the quotient-base-change ideal formula to identify the ideal of X times Spec(A/I) with the extension of I to Gamma(U,O_X). The closed-immersion unit quotient identifies the image of ideal multiplication with the kernel of its unit. Evaluating this kernel on U and applying the affine ideal-times-module sections calculation gives: the pullback unit kills t exactly when t belongs to (I Gamma(U,O_X)) Gamma(U,L). Compare the adjunction in the unit-quotient theorem with the canonical chosen adjunction using rightAdjointUniq; its component is an automorphism, so their units have the same kernel. Invertibility supplies quasi-coherence through the source-library instance IsInvertible.isQuasicoherent.",
    "uses": [
-    "def-weil-scheme-morphism-properties",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
     "def-sc-invertible-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0EX8 proof, paragraph beginning 'Then kappa = A/m = colim A/pi'"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sc-valuation-limit-qcoh-section-descent] to F_{pi_0} and the section s|_{X x_Spec(A) Spec(A/pi_0)}. Since the pullback of this section to X_0 is s|_{X_0}=0, the eventual-zero clause gives a later stage indexed by a nonzero pi in m for which the restriction of s to X x_Spec(A) Spec(A/pi) is zero, as required.",
+   "text": "Write m as the supremum of the principal ideals (a), indexed by all a in m, including zero. These ideals are directed because ideals of a valuation ring are totally ordered. Ideal extension and ideal multiplication on a module commute with suprema (Mathlib Ideal.map_iSup and Submodule.iSup_smul). Submodule.mem_iSup_of_directed therefore shows that each affine restriction of s, which lies in m Gamma(U,L), already lies in (a_U) Gamma(U,L) for some a_U in m. These are algebraic span and directed-union calculations, implemented by the proved private helper exists_principal_stage.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Quasi-compactness of f over the affine base makes X compact; select a finite affine subcover using Mathlib isCompact_univ.elim_finite_subcover. Since A is not a field, IsLocalRing.isField_iff_maximalIdeal_eq and Submodule.exists_mem_ne_zero_of_ne_bot give a nonzero a_0 in m. Inductively compare the principal ideals of the finitely many a_U and a_0. Total ordering gives a principal ideal (pi) containing all of them, with pi in m. Its containing a_0 forces pi nonzero. The private helper finite_principal_upper_bound proves the finite induction.",
    "uses": [
-    "lem-sc-valuation-limit-qcoh-section-descent"
+    "def-weil-scheme-morphism-properties"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0EX8 proof, sentence 'If s|_{X_0} is zero, then for some pi ... Limits, Lemma limits-lemma-descend-section'"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For every affine open in the chosen finite cover, extension preserves (a_U) <= (pi), so its restricted section lies in (pi) Gamma(U,L). Apply the affine kernel criterion from step 1 in the reverse direction. Naturality of the pullback unit identifies these zero sections with restrictions of the global image of s. The sheaf uniqueness axiom, Mathlib TopCat.Sheaf.eq_of_locally_eq', makes this global image zero. This is the required vanishing modulo pi.",
+   "uses": [
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-scheme-morphism-properties",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "def-sc-invertible-module",
-  "lem-sc-valuation-limit-qcoh-section-descent"
+  "def-weil-scheme-morphism-properties"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-on-morphisms.tex",
-  "place": "More on Morphisms, Lemma 0EX8"
+  "place": "Tag 0EX8, lemma-triviality-generic-fibre-valuation-ring, closed-fibre vanishing sentence; U4 gives an affine ideal-kernel and finite-cover proof instead of constructing the inverse-limit diagram."
  },
  "mathlib_searches": [
   {
@@ -132,5 +142,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T000048-L-2232423",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
