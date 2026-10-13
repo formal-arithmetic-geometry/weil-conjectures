@@ -13336,3 +13336,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:11 L: merged deliver/U2/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselDivisorQuotientPresentation (stage 3; reviewer PASS; first push; landing 20261013T181124-L-2607727 (interface); batch 20261013T181050; modules 5; new nodes 4)
 - 18:11 L: merged deliver/U2/Sheaf.AlgebraicGeometry.StandardFlatSingleBaseChange (stage 3; reviewer PASS; after a return; landing 20261013T181125-L-2607888 (interface); batch 20261013T181050; modules 4; new nodes 3)
 - 18:11 L: merged deliver/U4/Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverTransport (stage 3; reviewer PASS; first push; landing 20261013T181125-L-2608184 (interface); batch 20261013T181050; modules 3; new nodes 2)
+- 18:11 L: merged deliver/X2/Sheaf.AlgebraicGeometry.MixedPullbackSectionsCounitUnit (stage 3; reviewer PASS; first push; landing 20261013T181126-L-2608341 (proof); batch 20261013T181050; modules 1; new nodes 0)
