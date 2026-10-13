@@ -1,116 +1,119 @@
 {
-  "kind": "statement",
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Algebra.Homology.FiniteStripConeFiltration",
-    "date": "2026-10-13",
-    "group": "U3"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-strip-cone-filtration",
-      "place": "proof decomposition",
-      "via": []
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0133",
-    "place": "Lemma 12.25.4"
-  },
-  "proof_origin": {
-    "by": "agent",
-    "document": "https://stacks.math.columbia.edu/tag/012X",
-    "place": "Second degree filtration formula, with the explicit cone construction and finite-strip bounds of lem-sc-finite-strip-cone-filtration; Lean proof by F1, 2026-10-13; second reading uses the public degreewise assembly theorem instead of duplicating its proof"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "finite strip cone filtration graded homology",
-      "results": "No exact match found.",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "DecreasingFiltration homology mappingCone",
-      "results": "No exact match found.",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "finite_strip_cone_filtration",
-      "results": "Only this planned declaration; no existing proof.",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "stmt_deps": [],
-  "proof_deps": [
-    "def-sp-double-complex-total",
-    "lem-sp-cartan-eilenberg-cone-filtration-data-assemble",
-    "def-sp-filtered-complex-subquotients"
-  ],
-  "proof": [
-    {
-      "text": "Define the degreewise step by the stated finite supremum. A larger cutoff can only remove generators, so the steps are antitone. For target generators, expand the total differential as D₁+D₂ using ι_D₁, ι_D₂, d₁_eq′ and d₂_eq′. The horizontal term preserves vertical degree and the vertical term raises it. Any term beyond the horizontal strip is zero by evaluating hsupport. The source cone generator has the negative source differential, which raises vertical degree, and the augmentation block, which lands in horizontal degree zero by hb. Maps factoring through a subobject remain so under composition, scalar multiplication and addition. The pullback of the next step therefore contains every generating image, hence their finite supremum.",
-      "uses": [
-        "def-sp-double-complex-total"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the proved CategoryTheory.Functor.filtration_of_degreewise to the antitone, differential-stable steps. Its conclusion gives a decreasing filtration whose evaluated image in every degree equals the prescribed step. The theorem constructs the subcomplexes explicitly by monic factorization, without choosing data from an unproved existence statement.",
-      "uses": [
-        "lem-sp-cartan-eilenberg-cone-filtration-data-assemble"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "At cutoff n−r every source generator and every supported target generator is included. To prove the inclusion epi, test a morphism killing it against the two cone inclusions, and test its target restriction against all total summands using total.hom_ext. Supported summands are generators; the others are zero by hsupport. The step inclusion is mono and epi, hence iso and its subobject is top. At cutoff n+2 the source condition fails and each target condition fails because i≥0, so the finite supremum is bottom. The argument includes r=0 and all integer n.",
-      "uses": [
-        "def-sp-double-complex-total",
-        "def-sp-filtered-complex-subquotients"
-      ],
-      "elementary": false
-    }
-  ],
-  "id": "lem-sc-finite-strip-cone-filtration-steps",
-  "title": "Finite-strip cone filtration steps",
-  "statement": "theorem finite_strip_cone_filtration_steps\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ)\n    (a : ∀ n : ℤ, A.X n ⟶ (K.X 0).X n)\n    (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (hb : ∀ n : ℤ, b.f n =\n      a n ≫ K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (hf : ∀ p : ℤ, (f p).f 0 = (HomologicalComplex.singleObjXSelf\n      (ComplexShape.up ℤ) 0 (A.X p)).hom ≫ a p) :\n    ∃ F : DecreasingFiltration (CochainComplex.mappingCone b),\n      (∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n          if p ≤ n - i then imageSubobject\n            (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n              (CochainComplex.mappingCone.inr b).f n) else ⊥)) ∧\n      (∀ n : ℤ, F.complexStep (n - (r : ℤ)) n = ⊤ ∧ F.complexStep (n + 2) n = ⊥)",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Algebra.Homology.FiniteStripConeFiltration",
-    "file": "lean/Sheaf/Algebra/Homology/FiniteStripConeFiltration.lean",
-    "declaration": "HomologicalComplex₂.finite_strip_cone_filtration_steps",
-    "statement": "theorem finite_strip_cone_filtration_steps\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ)\n    (a : ∀ n : ℤ, A.X n ⟶ (K.X 0).X n)\n    (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (hb : ∀ n : ℤ, b.f n =\n      a n ≫ K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (hf : ∀ p : ℤ, (f p).f 0 = (HomologicalComplex.singleObjXSelf\n      (ComplexShape.up ℤ) 0 (A.X p)).hom ≫ a p) :\n    ∃ F : DecreasingFiltration (CochainComplex.mappingCone b),\n      (∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n          if p ≤ n - i then imageSubobject\n            (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n              (CochainComplex.mappingCone.inr b).f n) else ⊥)) ∧\n      (∀ n : ℤ, F.complexStep (n - (r : ℤ)) n = ⊤ ∧ F.complexStep (n + 2) n = ⊥)",
-    "branch": "sheaf-dag",
-    "by": "U3",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "U3",
-    "result": "pass",
-    "landing": "20261013T122729-L-3633230",
-    "kind": "proof",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261013T141525-L-378626",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteStripConeFiltration",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-strip-cone-filtration",
+   "place": "proof decomposition",
+   "via": []
   }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Second degree filtration formula, with the explicit cone construction and finite-strip bounds of lem-sc-finite-strip-cone-filtration; Lean proof by F1, 2026-10-13; second reading uses the public degreewise assembly theorem instead of duplicating its proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite strip cone filtration graded homology",
+   "results": "No exact match found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DecreasingFiltration homology mappingCone",
+   "results": "No exact match found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_strip_cone_filtration",
+   "results": "Only this planned declaration; no existing proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "stmt_deps": [],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "lem-sp-cartan-eilenberg-cone-filtration-data-assemble",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Define the degreewise step by the stated finite supremum. A larger cutoff can only remove generators, so the steps are antitone. For target generators, expand the total differential as D₁+D₂ using ι_D₁, ι_D₂, d₁_eq′ and d₂_eq′. The horizontal term preserves vertical degree and the vertical term raises it. Any term beyond the horizontal strip is zero by evaluating hsupport. The source cone generator has the negative source differential, which raises vertical degree, and the augmentation block, which lands in horizontal degree zero by hb. Maps factoring through a subobject remain so under composition, scalar multiplication and addition. The pullback of the next step therefore contains every generating image, hence their finite supremum.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved CategoryTheory.Functor.filtration_of_degreewise to the antitone, differential-stable steps. Its conclusion gives a decreasing filtration whose evaluated image in every degree equals the prescribed step. The theorem constructs the subcomplexes explicitly by monic factorization, without choosing data from an unproved existence statement.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-cone-filtration-data-assemble"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At cutoff n−r every source generator and every supported target generator is included. To prove the inclusion epi, test a morphism killing it against the two cone inclusions, and test its target restriction against all total summands using total.hom_ext. Supported summands are generators; the others are zero by hsupport. The step inclusion is mono and epi, hence iso and its subobject is top. At cutoff n+2 the source condition fails and each target condition fails because i≥0, so the finite supremum is bottom. The argument includes r=0 and all integer n.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "id": "lem-sc-finite-strip-cone-filtration-steps",
+ "title": "Finite-strip cone filtration steps",
+ "statement": "theorem finite_strip_cone_filtration_steps\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ)\n    (a : ∀ n : ℤ, A.X n ⟶ (K.X 0).X n)\n    (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (hb : ∀ n : ℤ, b.f n =\n      a n ≫ K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (hf : ∀ p : ℤ, (f p).f 0 = (HomologicalComplex.singleObjXSelf\n      (ComplexShape.up ℤ) 0 (A.X p)).hom ≫ a p) :\n    ∃ F : DecreasingFiltration (CochainComplex.mappingCone b),\n      (∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n          if p ≤ n - i then imageSubobject\n            (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n              (CochainComplex.mappingCone.inr b).f n) else ⊥)) ∧\n      (∀ n : ℤ, F.complexStep (n - (r : ℤ)) n = ⊤ ∧ F.complexStep (n + 2) n = ⊥)",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteStripConeFiltration",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteStripConeFiltration.lean",
+  "declaration": "HomologicalComplex₂.finite_strip_cone_filtration_steps",
+  "statement": "theorem finite_strip_cone_filtration_steps\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ)\n    (a : ∀ n : ℤ, A.X n ⟶ (K.X 0).X n)\n    (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (hb : ∀ n : ℤ, b.f n =\n      a n ≫ K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (hf : ∀ p : ℤ, (f p).f 0 = (HomologicalComplex.singleObjXSelf\n      (ComplexShape.up ℤ) 0 (A.X p)).hom ≫ a p) :\n    ∃ F : DecreasingFiltration (CochainComplex.mappingCone b),\n      (∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n          if p ≤ n - i then imageSubobject\n            (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n              (CochainComplex.mappingCone.inr b).f n) else ⊥)) ∧\n      (∀ n : ℤ, F.complexStep (n - (r : ℤ)) n = ⊤ ∧ F.complexStep (n + 2) n = ⊥)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T122729-L-3633230",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T145125-L-697855",
+  "kind": "interface",
+  "sorry_before": [
+   "HomologicalComplex₂.finite_strip_cone_filtration_graded"
+  ],
+  "sorry_after": []
+ }
 }

@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-finite-strip-cone-filtration-graded-point",
+ "kind": "statement",
+ "status": "split",
+ "title": "Finite-strip cone diagonal three-term comparison",
+ "statement": "Let C be an abelian category and K an integer-indexed commuting double cochain complex with total [def-sp-double-complex-total]. Let r be a natural number such that the complex K.X i is zero for i<0 or r<=i. Let A be an integer cochain complex, a_n:A.X n→K^(0,n), and b:A→Tot(K) a chain map with b_n equal to a_n followed by the (0,n) total inclusion. For each integer p supply a chain map f_p from the single complex A.X p in degree zero to the horizontal row K.flip.X p, with component zero equal to a_p via the canonical single-object identification. Let F be a decreasing subcomplex filtration of Cone(b) [def-sp-filtered-complex-subquotients]. Assume its step in degree m is the join of the source inclusion image when p<=m+1 and the images of the target diagonal inclusions K^(i,m-i) for 0<=i<r and p<=m-i. Then for every p,n the short complex in degrees n-1,n,n+1 of gr_F^p Cone(b) is isomorphic to the short complex in degrees n-p-1,n-p,n-p+1 of Cone(f_p).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4, second-variable variant; explicit cone refinement of lem-sc-finite-strip-cone-filtration, step 3"
+ },
+ "proof": [
+  {
+   "text": "Take the surviving diagonal quotient in degrees n-1,n,n+1 and check its two differentials using the total and cone formulas. The vertical differential vanishes modulo the next step; the horizontal and augmentation blocks coincide with the row cone. The inverse diagonal inclusions give the short-complex isomorphism.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "degreewise diagonal quotient and two differential squares; parent cone-filtration proof step 3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-strip-cone-filtration-graded",
+   "place": "pointwise decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteStripConeFiltration",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteStripConeFiltrationGradedPoint",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteStripConeFiltrationGradedPoint.lean",
+  "declaration": "HomologicalComplex₂.finite_strip_cone_filtration_graded_point",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13",
+  "statement": "theorem finite_strip_cone_filtration_graded_point\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ)\n    (a : ∀ n : ℤ, A.X n ⟶ (K.X 0).X n)\n    (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (hb : ∀ n : ℤ, b.f n =\n      a n ≫ K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (hf : ∀ p : ℤ, (f p).f 0 = (HomologicalComplex.singleObjXSelf\n      (ComplexShape.up ℤ) 0 (A.X p)).hom ≫ a p)\n    (F : DecreasingFiltration (CochainComplex.mappingCone b))\n    (hsteps : ∀ p n : ℤ, F.complexStep p n =\n      (if p ≤ n + 1 then imageSubobject\n        ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n      (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n        if p ≤ n - i then imageSubobject\n          (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n            (CochainComplex.mappingCone.inr b).f n) else ⊥))\n    (p n : ℤ) : Nonempty ((F.gradedPiece p).sc n ≅\n      (CochainComplex.mappingCone (f p)).sc (n - p))"
+ },
+ "stmt_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-double-complex-total"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The short complex of a graded finite strip mapping cone is isomorphic to the short complex of its row cone",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "graded quotient of finite strip double cochain complex mapping cone is horizontal row cone",
+   "results": "Eight results, all generic mapping-cone constructions or factorizations; none identifies the finite-strip graded quotient.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.homologyMapIso",
+   "results": "Unknown identifier in the search index. The declaration exists in Mathlib.Algebra.Homology.ShortComplex.Homology.",
+   "date": "2026-10-13",
+   "verdict": "no indexed match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMapIso|finite_strip_cone_filtration_graded",
+   "results": "25 Mathlib hits including ShortComplex.homologyMapIso in ShortComplex/Homology.lean:552; no finite-strip structural comparison. Project rg found ConeHorizontalGradedIso, which uses natural-indexed first-quadrant complexes and horizontal rather than vertical filtration.",
+   "date": "2026-10-13",
+   "verdict": "generic homology transport only; no exact structural match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of decreasing filtration by vertical tails of total complex identifies diagonal row short complex",
+   "results": "Eight results: total diagonal inclusions and index-transport identities; no filtration quotient comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortComplex\", \"iso\"",
+   "results": "Generic short-complex isomorphism constructors and component-isomorphism criteria; no finite-strip quotient identification.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedPiece|quotient.*row|row.*quotient",
+   "results": "One unrelated spectral-object match under Algebra/Homology.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T145125-L-697855",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T145125-L-697855",
+  "kind": "interface"
+ }
+}
