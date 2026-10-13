@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Put O = f inverse W. The composite O.ι followed by f is an open immersion with image W: its image is f.opensRange intersect W, and W is contained in f.opensRange. Form its limit base change and the canonical map q to the limit base change of Z. Pull E back along q. This object is perfect by preservation of perfectness. Apply the descent hypothesis on W to this presentation and this object, obtaining j >= i, a perfect stage object and its comparison.",
+   "text": "Put O = f inverse W and r = O.ι followed by f. The opensRange_comp and image_preimage_eq_opensRange_inf identities show that r has image W. Construct q from the base change of O to the base change of Z by pullback.map. Pull E back along q; derivedPullback_preserve_perfect gives its perfectness. Apply PerfectDescentOnOpen to the presentation r and this perfect object, obtaining j, hij, Ej and a limit comparison.",
    "uses": [
     "def-pc-perfect-descent-on-open",
     "lem-pc-derived-pullback-perfect"
@@ -24,25 +24,33 @@
    "elementary": false
   },
   {
-   "text": "For any k >= j, the canonical transition map from the k base change of O to its j base change pulls back the descended object to a perfect object. Identify the k base change of O with the inverse image U of W along the k stage projection followed by f, using the cartesian restriction square. Transport the pulled object along this isomorphism. The cocone identity and functoriality of R identify the composite map from the limit with the original j stage map. The derived pullback composition comparison transports the original comparison. Compatibility of derived pullback with exact open restriction identifies pullback along q with E restricted to g inverse U. This gives the required displayed isomorphism at each k.",
+   "text": "For k >= j construct the arrow alpha from Spec R_k to Spec R_j in Over Spec R_i and the cocone arrows beta_j, beta_k. The cocone identity gives beta_k followed by alpha = beta_j. Pull Ej along baseChangeMap alpha to obtain B; pullback preserves perfectness. The baseChangeMap_comp identity and derived pullback composition turn its limit pullback into the original comparison with q pullback E.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify each inverse-image open with the corresponding base change of O via isoPullback of the pasted isPullback_morphismRestrict square and the defining base-change square. The private openBaseChange_transport lemma verifies the two projection equations for the restricted transition and for q. Pull B through the stage identification. Compose the two composition comparisons, the supplied limit comparison, the projection equalities, and singleComplexOpenPullbackIso to identify its limit pullback with exact open restriction of E. Finally rewrite inverse-image composition to match the displayed U. All scheme identifications and comparison objects are constructed, not chosen from mere existence.",
    "uses": [
     "lem-pc-derived-pullback-perfect",
     "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-pullback-open-restriction-universes"
+    "def-pc-single-complex-open-restriction-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-perfect-descent-on-open",
-  "lem-pc-derived-pullback-open-restriction-universes",
+  "def-pc-single-complex-open-restriction-data",
   "lem-pc-derived-pullback-perfect",
   "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/09RF",
-  "place": "two-open induction, separate descent and enlargement of each stage"
+  "place": "Separate descent and stage enlargement in the two-open induction; explicit Lean pullback-square transport by M1, using 09UA and 0D5S and the existing canonical open pullback comparison."
  },
  "mathlib_searches": [
   {
@@ -122,10 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T131951-L-4088098",
-  "kind": "interface",
+  "landing": "20261013T141530-L-380040",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
