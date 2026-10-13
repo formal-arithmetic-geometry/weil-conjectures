@@ -14,25 +14,24 @@
  ],
  "proof": [
   {
-   "text": "Set V=p^{-1}U and restrict the morphism of ringed spaces to V→U. On the open slice sites let H be tensor pullback along this restricted morphism followed by direct image, and let α be its canonical unit. The tensor/inverse-image Hom bijections of [lem-pc-module-pullback-adjunction] apply with the restricted ring maps. Tensor pullback is a left adjoint between additive categories and is additive (Mathlib Adjunction.left_adjoint_additive); direct image is sectionwise restriction of scalars and is additive. Their composite is additive.",
+   "text": "On the open slice over U construct the restricted structure morphism using Over.post of inverse image of opens. This functor is continuous and final by preservation of finite limits and covers. Let PU and QU be Mathlib module pullback and pushforward for this ring map. Inverse image preserves products of opens. Compose the pushforward comparison isomorphisms and use naturality of the scheme structure map to obtain SX ⋙ Q ≅ QU ⋙ S. Compose the tensor adjunction [lem-pc-module-pullback-adjunction] with the restriction adjunctions; Adjunction.leftAdjointUniq gives R ⋙ PU ≅ P ⋙ RX. Q ⋙ R ≅ RX ⋙ QU is definitional.",
    "uses": [
-    "lem-pc-module-pullback-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restriction of direct image is direct image from V: on every W⊆U both assign the sections on p^{-1}W with the identical ring action. Tensor pullback [def-pc-module-pullback] commutes with restriction. To verify the inverse-image part, intersect every neighbourhood of the image of an open subset of V with U; these intersections form a cofinal neighbourhood system. Extension of scalars uses the same restricted structural ring maps. Sheafification commutes with restriction because both have the universal property of the sheaf associated to the restricted tensor presheaf; equivalently the open-cover matching families agree. These natural identifications compose to θ:R_U H≅T_p R_U.",
-   "uses": [
+    "lem-pc-module-pullback-adjunction",
     "def-pc-module-pullback"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For every M the unit formula in [lem-pc-module-pullback-adjunction] sends a section m to the sheafification of 1 tensor its inverse-image unit. Restricting this formula to opens contained in U gives exactly the same formula for α and θ, so R_U(η_M)=α_{R_U M};θ_M. All comparisons commute with module morphisms. If U is empty the same constructions apply on its open slice; nothing requires a nonempty open or a nonzero module.",
+   "text": "The counit ε of the open restriction adjunction R ⊣ S is invertible: its underlying section map is induced by the isomorphism W → U ∩ W for W in Over U. The inverse is projection, with both identities checked in the thin category of opens. The triangle identity implies R(ι_M) is invertible. Apply PU, transport along R ⋙ PU ≅ P ⋙ RX, apply QU and transport along Q ⋙ R ≅ RX ⋙ QU. This proves that R(Q(P(ι_M))) is invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set T=P ⋙ Q and H=S ⋙ T ⋙ R. Define α by ε inverse followed by S whiskered with η and then R; define θ as the inverse of the natural transformation R(T(ι)). Cancel this invertible transformation to check the desired equation. Naturality of η rewrites η_M followed by T(ι_M) as ι_M followed by η_(S(R(M))). The triangle identity identifies R(ι_M) with ε_(R(M)) inverse, proving the equation. Restriction and S are additive by their section formulas, Q is additive by Mathlib, and the tensor adjunction gives additivity of P. Thus H is additive. No nonempty-open hypothesis is used.",
    "uses": [
     "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -42,8 +41,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01E8",
-  "place": "Tag 01E8, last paragraph of the proof, localization on Y; Tag 0096, canonical tensor-pullback adjunction",
-  "note": "Details of the open restriction step implicit in the local proof, written out by M2."
+  "place": "Last paragraph, localization on Y; Tag 0096 for the tensor adjunction",
+  "note": "K2: complete Lean proof by comparison of right adjoints and localization via the open-restriction adjunction. The restricted right-adjoint calculation specializes the proved private construction in RingedSpaceTensorPullbackPresentation; the final naturality and triangle-identity argument is proved here."
  },
  "mathlib_searches": [
   {
@@ -111,13 +110,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "X-c353c",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T225320-L-1809744",
+  "landing": "20261013T011928-L-2763595",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered theorem and proof with lem-sc-tensor-unit-open-localization and its recorded dependencies; signature and public imports unchanged, compilation clean, all proved declarations use only standard axioms, and the sole direct importer Sheaf.AlgebraicGeometry.FiniteLocallyFreeTensorUnit compiles against the delivery."
  }
 }
