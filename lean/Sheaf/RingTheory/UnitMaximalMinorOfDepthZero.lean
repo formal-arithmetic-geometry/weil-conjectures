@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 import Sheaf.LinearAlgebra.NonzeroMaximalMinorOfInjective
 
 /-!
@@ -55,6 +56,48 @@ theorem exists_isUnit_maximal_minor_of_annihilator_eq_maximalIdeal
       (∃ r : Fin n → Fin p, StrictMono r ∧ IsUnit (A.submatrix r id).det) ∧
       Ideal.span {d : R | ∃ r : Fin n → Fin p, StrictMono r ∧
         d = (A.submatrix r id).det} = ⊤ := by
-  sorry
+  classical
+  obtain ⟨z, hz⟩ := hdepth
+  let q := IsLocalRing.residue R
+  have hker : ∀ v : Fin n → IsLocalRing.ResidueField R,
+      (A.map q).mulVec v = 0 → v = 0 := by
+    intro v hv
+    choose w hw using fun j ↦ IsLocalRing.residue_surjective (v j)
+    have hqw : q ∘ w = v := funext hw
+    have haw : ∀ i, (A.mulVec w) i ∈ IsLocalRing.maximalIdeal R := by
+      intro i
+      apply (IsLocalRing.residue_eq_zero_iff _).mp
+      change q ((A.mulVec w) i) = 0
+      rw [q.map_mulVec, hqw, hv]
+      rfl
+    have hzw : A.mulVec (z • w) = A.mulVec 0 := by
+      rw [mulVec_smul, mulVec_zero]
+      ext i
+      change z * (A.mulVec w) i = 0
+      rw [mul_comm]
+      exact (hz _).mpr (haw i)
+    have hzero := hinj hzw
+    ext j
+    rw [← hw j]
+    apply (IsLocalRing.residue_eq_zero_iff _).mpr
+    apply (hz _).mp
+    have hj := congr_fun hzero j
+    change z * w j = 0 at hj
+    simpa only [mul_comm] using hj
+  have hred : Function.Injective (A.map q).mulVec := by
+    intro v w hvw
+    apply sub_eq_zero.mp
+    apply hker
+    rw [mulVec_sub, hvw, sub_self]
+  obtain ⟨hnp, r, hr, hd, _⟩ :=
+    exists_strictMono_submatrix_det_ne_zero_of_mulVec_injective (A.map q) hred
+  have hu : IsUnit (A.submatrix r id).det := by
+    apply (IsLocalRing.residue_ne_zero_iff_isUnit _).mp
+    change q (A.submatrix r id).det ≠ 0
+    rw [q.map_det]
+    exact hd
+  refine ⟨hnp, ⟨r, hr, hu⟩, ?_⟩
+  apply Ideal.eq_top_of_isUnit_mem _ _ hu
+  exact Ideal.subset_span ⟨r, hr, rfl⟩
 
 end Matrix
