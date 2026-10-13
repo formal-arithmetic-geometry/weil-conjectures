@@ -1,0 +1,97 @@
+{
+ "id": "lem-pc-fp-overlap-triple-transport",
+ "kind": "statement",
+ "title": "Transport of triple overlap equation between chosen pullbacks",
+ "statement": "theorem overlap_triple_transport\n    {C : Type*} [Category C]\n    {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat}\n    {ι : Type*} {S : C} {X : ι → C} (g : ∀ a, X a ⟶ S)\n    (T : F.OverlapTransitions g)\n    (a b d : ι)\n    (sq₀ : ∀ a b, ChosenPullback (g a) (g b))\n    (sq₀₃ : ∀ a b d, ChosenPullback₃ (sq₀ a b) (sq₀ b d) (sq₀ a d))\n    (h₀ :\n      T.hom (sq₀₃ a b d).p (sq₀₃ a b d).p₁ (sq₀₃ a b d).p₂\n          (sq₀₃ a b d).w₁ (sq₀₃ a b d).w₂ ≫\n        T.hom (sq₀₃ a b d).p (sq₀₃ a b d).p₂ (sq₀₃ a b d).p₃\n          (sq₀₃ a b d).w₂ (sq₀₃ a b d).w₃ =\n      T.hom (sq₀₃ a b d).p (sq₀₃ a b d).p₁ (sq₀₃ a b d).p₃\n          (sq₀₃ a b d).w₁ (sq₀₃ a b d).w₃)\n    (sq : ∀ a b, ChosenPullback (g a) (g b))\n    (sq₃ : ∀ a b d, ChosenPullback₃ (sq a b) (sq b d) (sq a d)) :\n      T.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₂\n          (sq₃ a b d).w₁ (sq₃ a b d).w₂ ≫\n        T.hom (sq₃ a b d).p (sq₃ a b d).p₂ (sq₃ a b d).p₃\n          (sq₃ a b d).w₂ (sq₃ a b d).w₃ =\n      T.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₃\n          (sq₃ a b d).w₁ (sq₃ a b d).w₃",
+ "stmt_deps": [
+  "def-pc-local-overlap-transitions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, finite-stage triple defect and universal-property transport"
+ },
+ "proof": [
+  {
+   "text": "The theorem is the corresponding finite-stage defect construction or universal-property transport argument; the proof is intentionally split for parallel completion.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite presentation zero map descent at a directed stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "chosen pullback universal property transport composition",
+   "results": "CategoryTheory.Limits.pullback.mapDesc and chosen pullback map composition lemmas; no exact theorem",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ChosenPullback",
+   "results": "Mathlib chosen pullback infrastructure only; no transport theorem",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleEventually",
+  "date": "2026-10-14",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-fp-overlap-triple-eventually",
+   "place": "split of the triple defect proof",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationOverlapTripleTransport.lean",
+  "declaration": "AlgebraicGeometry.overlap_triple_transport",
+  "statement": "theorem overlap_triple_transport\n    {C : Type*} [Category C]\n    {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat}\n    {ι : Type*} {S : C} {X : ι → C} (g : ∀ a, X a ⟶ S)\n    (T : F.OverlapTransitions g)\n    (a b d : ι)\n    (sq₀ : ∀ a b, ChosenPullback (g a) (g b))\n    (sq₀₃ : ∀ a b d, ChosenPullback₃ (sq₀ a b) (sq₀ b d) (sq₀ a d))\n    (h₀ :\n      T.hom (sq₀₃ a b d).p (sq₀₃ a b d).p₁ (sq₀₃ a b d).p₂\n          (sq₀₃ a b d).w₁ (sq₀₃ a b d).w₂ ≫\n        T.hom (sq₀₃ a b d).p (sq₀₃ a b d).p₂ (sq₀₃ a b d).p₃\n          (sq₀₃ a b d).w₂ (sq₀₃ a b d).w₃ =\n      T.hom (sq₀₃ a b d).p (sq₀₃ a b d).p₁ (sq₀₃ a b d).p₃\n          (sq₀₃ a b d).w₁ (sq₀₃ a b d).w₃)\n    (sq : ∀ a b, ChosenPullback (g a) (g b))\n    (sq₃ : ∀ a b d, ChosenPullback₃ (sq a b) (sq b d) (sq a d)) :\n      T.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₂\n          (sq₃ a b d).w₁ (sq₃ a b d).w₂ ≫\n        T.hom (sq₃ a b d).p (sq₃ a b d).p₂ (sq₃ a b d).p₃\n          (sq₃ a b d).w₂ (sq₃ a b d).w₃ =\n      T.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₃\n          (sq₃ a b d).w₁ (sq₃ a b d).w₃",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T165641-L-1807989",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T165641-L-1807989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

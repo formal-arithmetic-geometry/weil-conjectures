@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent
+import Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleCanonicalEventually
+import Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleTransport
 
 /-! # Persistent eventual triple overlap equation
 
@@ -25,6 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option linter.unusedVariables false in
 /-- The composition defect of a single triple overlap vanishes eventually, and remains
 zero at every later stage.
 Source: Stacks Project, Tag 01ZR (3), finite-type zero-map descent.
@@ -92,6 +95,18 @@ theorem finitePresentation_overlap_triple_eventually
               T'.hom (sq₃ a b d).p (sq₃ a b d).p₂ (sq₃ a b d).p₃
                 (sq₃ a b d).w₂ (sq₃ a b d).w₃ =
               T'.hom (sq₃ a b d).p (sq₃ a b d).p₁ (sq₃ a b d).p₃
-                (sq₃ a b d).w₁ (sq₃ a b d).w₃ := by sorry
+                (sq₃ a b d).w₁ (sq₃ a b d).w₃ := by
+  classical
+  intro k hjk
+  dsimp only
+  intro T hT hco
+  obtain ⟨l, hkl, hl⟩ := finitePresentation_overlap_triple_canonical_eventually
+    R c hc i f j hij U N a b d hN hNq k hjk T hT hco
+  refine ⟨l, hkl, ?_⟩
+  intro m hkm hlm
+  dsimp only at hl ⊢
+  obtain ⟨sq₀, sq₀₃, h₀⟩ := hl m hkm hlm
+  intro sq sq₃
+  exact overlap_triple_transport _ _ a b d sq₀ sq₀₃ h₀ sq sq₃
 
 end AlgebraicGeometry
