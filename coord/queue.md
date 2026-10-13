@@ -73,6 +73,7 @@
 | `Sheaf.AlgebraicGeometry.OpenPinnedSourceCounitTriangle` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenPinnedTargetCounitTriangle` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OverlapPairModelTransport` | 24 | 1 | proof |
+| `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
 | `Sheaf.Paper.EtaleRowSectionsEvaluationSquare` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComparisons` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardDirectImageDerivedTransposePasting` | 25 | 1 | proof |
@@ -85,7 +86,6 @@
 | `Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounitCore` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization` | 26 | 1 | proof |
 | `Sheaf.Paper.CechRefinementResolutionBeta` | 26 | 1 | proof |
-| `Sheaf.Paper.CupCechTotalCochainPairing` | 26 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocalizedTensorComparisonDerivedArrow` | 27 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocalizedTensorComparisonTriangleFiveTermDiagram` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumCompositionUnitSquare` | 27 | 1 | proof |
