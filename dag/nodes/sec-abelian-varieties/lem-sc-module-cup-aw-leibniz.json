@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-module-cup-aw-leibniz",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Signed differential identity on a nonnegative AW summand",
+ "statement": "Let X be a scheme whose module-sheaf tensor is additive in each variable. Let A,B,C be cosimplicial module sheaves and mu: A tensor B to C a natural morphism, as in [lem-sc-module-cup-godement-cosimplicial-input]. Write K_A,K_B,K_C for their alternating coface complexes extended by zero, and f(r,s;n) for the explicit front/back morphism of [def-sc-module-cup-aw-components]. If r,s,n are integers, r+s=n, and r,s are nonnegative, then f(r,s;n) followed by d_C(n,n+1) equals (d_A(r,r+1) tensor id) followed by f(r+1,s;n+1), plus (-1)^r times (id tensor d_B(s,s+1)) followed by f(r,s+1;n+1). This asserts only the local signed identity for the explicitly constructed morphisms; it asserts neither existence of a total-complex morphism nor its zero-degree normalization.",
+ "source": {
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "Banerjee, Tensor Structure on Smooth Motives, §1.1.4, printed p. 16, front/back formula immediately before (1.1.2)."
+ },
+ "stmt_deps": [
+  "lem-sc-module-cup-godement-cosimplicial-input",
+  "def-sc-module-cup-aw-components"
+ ],
+ "proof": [
+  {
+   "text": "Write f_{r,s}(i)=i and b_{r,s}(j)=r+j for the front and back inclusions.\nTransport the differentials along the three extension isomorphisms, so they\nare the alternating sums of cofaces. Naturality of μ rewrites a target coface\nas the simultaneous coface on the two factors before μ. For a coface indexed\nby i ≤ r, its composites with f_{r,s} and b_{r,s} are respectively\nf_{r+1,s} after the i-th coface and b_{r+1,s}. These give the first r+1\nterms of the differential of A. For i > r, the composites are f_{r,s+1}\nand b_{r,s+1} after the (i-r)-th coface; these are the last s+1 terms\nof (-1)^r times the differential of B. The missing term of the first sum\n(index r+1) and the missing term of the second sum (index 0) have the same\npair of simplex maps and opposite signs, hence cancel. Additivity of tensor\nand composition transports these finite-sum identities to sheaf morphisms.\nConjugating back gives the displayed equality, with the standard total sign.\nAt r=s=0 the four terms before μ in degree one are Aδ⁰ tensor Bδ⁰,\nminus Aδ¹ tensor Bδ⁰, plus Aδ¹ tensor Bδ⁰, minus Aδ¹ tensor Bδ¹.\nThe middle terms cancel, and naturality identifies the others with the two\ntarget cofaces after μ in degree zero. No degeneration, exactness or nonzero\nobject assumption is used, so zero sheaves and the empty scheme also satisfy it.",
+   "uses": [
+    "def-sc-module-cup-aw-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-aw-components"
+ ],
+ "proof_origin": {
+  "by": "R4 stage-3 worker; expanded simplex-map calculation from the cited formula",
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "Banerjee, Tensor Structure on Smooth Motives, §1.1.4, printed p. 16, front/back formula immediately before (1.1.2)."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupCosimplicialAW",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Auxiliary module-sheaf cup pairing used below the cube theorem: expand the alternating coface differential in lem-sc-module-cup-godement-aw.",
+   "via": [
+    "lem-sc-module-cup-cosimplicial-aw",
+    "lem-sc-module-cup-godement-aw"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Alexander Whitney map from tensor of alternating cosimplicial cochain complexes to pointwise tensor complex",
+   "results": "Eight hits: alternatingCofaceMapComplex, its obj/map/objD APIs and simplicial analogues. No Alexander--Whitney tensor map or Leibniz formula.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\"",
+   "results": "Twelve hits for CosimplicialObject definitions, augmented/truncated objects and colimits. No AW construction or differential identity.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "AlexanderWhitney|alexanderWhitney|mapBifunctorDesc",
+   "results": "Three hits, all mapBifunctorDesc and ι_mapBifunctorDesc in Mathlib.Algebra.Homology.Bifunctor. These assemble degreewise components but do not prove the AW differential identity.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alexander Whitney front back formula signed Leibniz differential for cosimplicial objects",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupAWLeibniz",
+  "file": "lean/Sheaf/Paper/ModuleCupAWLeibniz.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_awSummand_leibniz",
+  "statement": "theorem moduleCup_awSummand_leibniz (X : Scheme.{u}) [MonoidalPreadditive X.Modules]\n    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n    (r s n : ℤ) (h : r + s = n) (hr : 0 ≤ r) (hs : 0 ≤ s) :\n    moduleCup_awSummand X A B C μ r s n h ≫\n        (moduleCup_cosimplicialComplex X C).d n (n + 1) =\n      (moduleCup_cosimplicialComplex X A).d r (r + 1) ▷\n          (moduleCup_cosimplicialComplex X B).X s ≫\n        moduleCup_awSummand X A B C μ (r + 1) s (n + 1) (by omega) +\n      r.negOnePow • ((moduleCup_cosimplicialComplex X A).X r ◁\n          (moduleCup_cosimplicialComplex X B).d s (s + 1) ≫\n        moduleCup_awSummand X A B C μ r (s + 1) (n + 1) (by omega))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T135102-L-155586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T135102-L-155586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
