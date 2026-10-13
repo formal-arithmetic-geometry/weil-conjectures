@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-smooth-local-depth-two-finite-flat",
+ "kind": "statement",
+ "title": "Flatness of a supplied finite depth-two extension over a smooth local base",
+ "statement": "Let $A$ be a Noetherian local ring with closed point $a$ and depth at least two [def-weil-pbc-noetherian-ring, def-weil-affine-spectrum, def-weil-pbc-depth]. Let $q:L\\to\\operatorname{Spec}A$ be smooth [def-sbc-smooth-morphisms]. Let $U\\subset L$ be open, contain every point not lying over $a$, and have dense inverse image in the scheme-theoretic closed fibre $L_a$ [def-weil-pbc-scheme-conventions, def-pc-fibre-product]. Let $p:E\\to L$ be a supplied finite morphism, etale upon restriction over $U$ [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Assume depth $\\mathcal O_{E,z}\\geq2$ whenever $p(z)\\notin U$. Then $p$ is flat [def-weil-flat-morphism]. Etaleness is not asserted by this statement. The statement asserts no existence of E and no construction of an extension.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYB (pione-lemma-purity-smooth-over-depth2), formal-completion argument; Tags 0EYA, 0EY6(2),(a),(b), 07NE, 057G, 05D5 and 00MB"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness over the Noetherian base makes L locally Noetherian.\nAt points outside U the flat local depth formula gives depth at least two on L.\nBy 0EY6(2), the boundary depth on E identifies p with the canonical extension\nof its finite etale restriction; this identification commutes with flat base change.\nFiniteness over L gives finite presentation, so the flat locus on E is open.\nFiniteness makes the image of its closed complement closed; the complementary\ntarget open where p is flat contains U. If its complement\nis nonempty, choose a closed point in an affine closed-fibre chart. The residue\nextension is finite. Realize it by a finite flat local base change (07NE), and\nthen obtain a section through that point by an etale slice (057G).\nComplete a smooth affine chart in the section ideal. By 05D5 the result is\nA'[[x_1,...,x_d]], and the completion map is flat (00MB). The new base has\ndepth at least two by the flat local depth formula. If d = 0, q is etale at\nthe section point, making that point generic in its closed fibre, contrary to fibre density and\nits lying outside U. For d > 0\nthe prime m(A') times the power-series ring maps to a generic point of the\nclosed fibre, hence lies inside the inverse image of U. Apply 0EYA to extend\nthe finite etale cover on that open of the completion. Flat base change and uniqueness in 0EY6\nidentify this extension with the completed p. It is therefore flat.\nThe completion is faithfully flat after localizing at the section point;\ndescent gives flatness at all source points above the chosen target point.\nOpenness and finiteness then give a flat target neighbourhood, contradicting\nthe choice of point outside the flat target open. Thus p is flat globally.\nThe argument works affine locally, without quasi-compactness of L; empty E\nand U = L have no bad points. This conclusion asserts only flatness.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "A2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYB (pione-lemma-purity-smooth-over-depth2), formal-completion argument; Tags 0EYA, 0EY6(2),(a),(b), 07NE, 057G, 05D5 and 00MB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flatness of a finite depth two extension over a smooth local base with etale restriction dense in the closed fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flatness of a finite depth two extension over a smooth local base with etale restriction dense in the closed fibre",
+   "results": "8 hits: Algebra.Smooth.flat, Algebra.IsEtaleAt.comp, RingHom.etale_iff_formallyUnramified_and_smooth, RingHom.Etale.toAlgebra, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.comp, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing",
+   "date": "2026-10-13",
+   "verdict": "no matching purity statement"
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*[Ee]tale|[Ee]tale.*depth|purity.*[Ff]lat|[Ff]lat.*purity",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no matching purity statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFinitePurity",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Etaleness of a supplied finite depth-two extension on a smooth local scheme; local boundary extension in the depth-two paragraph of the spreading proof; Flatness of a supplied finite depth-two extension over a smooth local base",
+   "via": [
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFiniteFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SmoothLocalDepthTwoFiniteFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.flat_of_smooth_local_depth_two_finite_extension",
+  "statement": "theorem flat_of_smooth_local_depth_two_finite_extension\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]\n    (U : L.Opens)\n    (haway : ∀ y : L, q y ≠ IsLocalRing.closedPoint A → y ∈ U)\n    (hclosed : Dense (↑((q.fiberι (IsLocalRing.closedPoint A)) ⁻¹ᵁ U) :\n      Set (q.fiber (IsLocalRing.closedPoint A))))\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    {E : Scheme.{u}} (p : E ⟶ L) [IsFinite p] [Etale (p ∣_ U)]\n    (hboundary : ∀ z : E, p z ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z)) :\n    Flat p",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T022405-L-3210092",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T022405-L-3210092",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

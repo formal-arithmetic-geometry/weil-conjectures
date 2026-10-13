@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-flat-depth-two-finite-formally-unramified",
+ "kind": "statement",
+ "title": "Formal unramifiedness of a flat finite extension with source depth two on the boundary",
+ "statement": "Let $L$ be a locally Noetherian scheme and $U\\subset L$ an open [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring]. Let $p:E\\to L$ be finite and flat [def-weil-finite-integral-morphism, def-weil-flat-morphism], and suppose its restriction over $U$ is etale [def-weil-etale-morphism]. Assume $\\operatorname{depth}(\\mathcal O_{E,z})\\geq2$ whenever $p(z)\\notin U$ [def-weil-pbc-depth]. Then $p$ is formally unramified [def-weil-pbc-formally-unramified-morphism]. No smoothness or target-depth assumption is made.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BJH (pione-lemma-ramification-quasi-finite-flat), as applied in Tag 0EY6(3) (pione-lemma-extend-S2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-formally-unramified-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Finiteness over the locally Noetherian target makes E locally Noetherian\nand p quasi-finite. At z over U the restriction is etale, hence p is formally\nunramified at z. Otherwise depth O(E,z) is at least two, so z is not a generic\npoint of any irreducible component. Every generalization z' specializing to z\nwith dim O(E,z') = 1 lies over U: outside U the depth bound would contradict\ndepth bounded by local dimension. Thus p is unramified at every such z'.\nFlatness, quasi-finiteness, the nongeneric condition and this dimension-one\nunramifiedness are exactly the four hypotheses of 0BJH, which gives etaleness\nat z. Consequently p is formally unramified at every source point, and this\nproperty is local on the source. No target boundary depth, smooth family or\nfibre density is needed. Empty sources and U = L are included.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "A2",
+  "document": "Stacks Project",
+  "place": "Tag 0BJH (pione-lemma-ramification-quasi-finite-flat), as applied in Tag 0EY6(3) (pione-lemma-extend-S2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite flat morphism of locally noetherian schemes etale over an open with source boundary depth at least two is formally unramified",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite flat morphism of locally noetherian schemes etale over an open with source boundary depth at least two is formally unramified",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, RingHom.etale_iff_formallyUnramified_and_smooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, Algebra.FormallyEtale.iff_unramified_and_smooth",
+   "date": "2026-10-13",
+   "verdict": "no matching purity statement"
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*[Ee]tale|[Ee]tale.*depth|purity.*[Ff]lat|[Ff]lat.*purity",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no matching purity statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFinitePurity",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Etaleness of a supplied finite depth-two extension on a smooth local scheme; local boundary extension in the depth-two paragraph of the spreading proof; Formal unramifiedness of a flat finite extension with source depth two on the boundary",
+   "via": [
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FlatDepthTwoFiniteFormallyUnramified.lean",
+  "declaration": "AlgebraicGeometry.Scheme.formallyUnramified_of_flat_depth_two_finite_extension",
+  "statement": "theorem formallyUnramified_of_flat_depth_two_finite_extension\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    {E : Scheme.{u}} (p : E ⟶ L) [IsFinite p] [Flat p] [Etale (p ∣_ U)]\n    (hboundary : ∀ z : E, p z ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z)) :\n    FormallyUnramified p",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T022405-L-3210092",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T022405-L-3210092",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
