@@ -13,57 +13,47 @@
  ],
  "proof": [
   {
-   "text": "Replace P,Pprime,L,Lprime by K-flat representatives, and M,Mprime by their fixed functorial K-injective resolutions. For the induced morphisms between K-flat representatives, take a common K-flat refinement of each roof denominator. Into the K-injective target, the numerator lifts to a chain map modulo homotopy. Likewise Hom(Lflat,I(M)) is K-injective, so the transported input f has a chain representative phi into this Hom complex. Use hi to express all original values of t through the values on these models.",
+   "text": "Use right fractions for Qa followed by the inverse K-flat replacement of P. Resolve the roof source by a K-flat complex and compose its numerator. This gives a chain map a0 between K-flat models and two derived replacement isomorphisms satisfying ePprime;Qa=Qa0;eP. Repeat for b. The Lean private helper kflat_arrow_rep proves the construction; no common refinement is required.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
     "lem-pc-right-fraction-representation",
-    "lem-pc-right-fraction-common-refinement",
     "lem-pc-quasi-isomorphisms-multiplicative-system"
    ],
    "elementary": false
   },
   {
-   "text": "For model maps alpha,beta,gamma, compare uncurrying of alpha followed by phi followed by Hom(beta,I(gamma)) with tensor(alpha,beta) followed by uncurrying(phi) followed by I(gamma). In total degree n restrict to each summand Pprime^p tensor Lprime^q, p+q=n. The Hom product projection of pre/postcomposition is phi_p projected at q, precomposed by beta_q and postcomposed by I(gamma)_n; alpha_p acts by precomposition. Naturality of the sheaf tensor-Hom adjunction and symmetry give identical evaluations on both sides. Coproduct extensionality gives equality of chain maps. Differential compatibility is supplied by schemeTensorHomUncurryGraded_comm.",
+   "text": "On these models, HomComplex(N,I(M)) is K-injective since N is K-flat. Bijectivity of Qh on homotopy classes, and fullness of the homotopy quotient, represent every transported derived f by a chain map phi followed by the inverse fixed Hom resolution isomorphism. Naturality of Localization.fac for (b0,c) identifies Qa0;f;RHom(Qb0,Qc) with Q(a0;phi;HomComplex(b0,I(c))) followed by that inverse. Apply ht twice and substitute the localized evaluation identity.",
    "uses": [
-    "lem-pc-tensor-hom-uncurry-differential",
-    "def-pur-hom-complex",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-derived-internal-hom",
+    "def-pc-canonical-derived-tensor-hom-model",
+    "lem-pc-tensor-hom-uncurry-localized-evaluation"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Q to the component equality and use ht to substitute each value of t. The functorial resolution augmentation, localization internal-Hom comparison, and lax tensor comparison are natural, so their composites turn the model equality into the displayed equality. A homotopy of representatives yields a homotopy of the uncurried maps: uncurry its degree-minus-one components and use the signed Hom differential formula to show that its boundary is the difference. Thus Q kills that difference. Cancel the common-refinement and replacement isomorphisms using hi. This proves the equation for the specified Q-images of chain maps, without extending to general derived arrows.",
-   "uses": [
-    "def-pc-canonical-derived-tensor-hom-model",
-    "def-pc-derived-pullback-tensor-comparison",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex"
-   ],
-   "elementary": false
+   "text": "Apply hi to the original input and its transformed input along the two K-flat replacement isomorphisms, taking identity replacements in M and Mprime. The commuting replacement squares identify the two transformed inputs by functoriality of RHom. Tensor functoriality identifies the source factors. Cancel the tensor of the replacement isomorphisms to obtain the required equality. This is the fully proved generic private helper naturality_transport. The private transport helper is generalized to assume only the two specific transport equations for f and its transformed input, supplied by hi at the call site; it does not require global isomorphism naturality of the family.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-kflat-resolution",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
   "lem-pur-hom-kflat-into-kinjective",
   "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pc-right-fraction-representation",
-  "lem-pc-right-fraction-common-refinement",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-tensor-hom-uncurry-differential",
-  "def-pur-hom-complex",
-  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-derived-internal-hom",
   "def-pc-canonical-derived-tensor-hom-model",
-  "def-pc-derived-pullback-tensor-comparison",
-  "def-pur-derived-internal-hom"
+  "lem-pc-tensor-hom-uncurry-localized-evaluation"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "W3",
+  "group": "M2",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 08DJ, 0A90, 0A96; component normalization argument restricted to images of chain maps"
+  "place": "Tags 08DJ, 0A90, 0A96 and 06YS; right-fraction K-flat models, K-injective lifts, and proved isomorphism transport"
  },
  "mathlib_searches": [
   {
@@ -168,9 +158,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T060430-L-586328",
+  "landing": "20261013T082355-L-1639868",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

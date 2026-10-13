@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-tensor-hom-uncurry-localized-evaluation",
+ "kind": "theorem",
+ "title": "Localized explicit tensor-Hom evaluation is natural on chain inputs",
+ "statement": "Let X be a scheme and Q its derived localization. Let P,Pprime,L,Lprime,M,Mprime be arbitrary unbounded cochain complexes of module sheaves. Use the fixed functorial K-injective resolution I, inverse localized augmentation v_M, total tensor comparison mu(P,L), and explicit uncurrying U from [def-pc-canonical-derived-tensor-hom-model], [def-pc-derived-pullback-tensor-comparison], and [lem-pc-tensor-hom-uncurry-differential]. For chain maps a:Pprime->P, b:Lprime->L, c:M->Mprime and phi:P->HomComplex(L,I(M)) [def-pur-hom-complex], put psi=a;phi;HomComplex(b,I(c)). Then mu(Pprime,Lprime);Q U(psi);v_Mprime = (Qa tensor Qb);mu(P,L);Q U(phi);v_M;Qc. There is no unknown family of functions, no arbitrary derived input, and no K-flatness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90, componentwise evaluation and functoriality; cohomology.tex Tag 08DJ (lemma-internal-hom). Sources read online at https://stacks.math.columbia.edu/tag/0A90 and https://stacks.math.columbia.edu/tag/08DJ."
+ },
+ "stmt_deps": [
+  "def-pc-canonical-derived-tensor-hom-model",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-tensor-hom-uncurry-differential",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "On each summand Pprime^p tensor Lprime^q in total degree n=p+q, use the Hom product projection equation to compute the component of psi as a_p;phi_p projected at q;Hom(b_q,I(c)_n). Apply naturality of the sheaf tensor-Hom equivalence and of the symmetry. The component becomes (a_p tensor b_q);U(phi)_n;I(c)_n. The explicit uncurrying summand equation and coproduct extensionality imply U(psi)=Tot(a tensor b);U(phi);I(c). Differential compatibility makes both maps actual chain maps.",
+   "uses": [
+    "lem-pc-tensor-hom-uncurry-differential",
+    "def-pur-hom-complex",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Q to this chain-map equality. Naturality of its lax tensor comparison gives (Qa tensor Qb);mu(P,L)=mu(Pprime,Lprime);Q Tot(a tensor b). Naturality of the functorial resolution augmentation, followed by cancellation of its localized isomorphisms, gives QI(c);v_Mprime=v_M;Qc. Substitute both equalities and reassociate to obtain the claim.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison",
+    "def-pc-canonical-derived-tensor-hom-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-hom-uncurry-differential",
+  "def-pur-hom-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-canonical-derived-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0A90 and 08DJ; explicit component evaluation and localization naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization of evaluation on sheaf Hom complexes is natural in chain maps, using the lax tensor comparison and inverse injective resolution augmentation",
+   "results": [
+    "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+    "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality",
+    "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality"
+   ],
+   "date": "2026-10-13",
+   "verdict": "No exact statement for the fixed uncurrying and localization comparison; results concern ordinary injective resolutions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry_natural_left",
+   "results": [
+    "CategoryTheory.MonoidalClosed.uncurry_natural_left"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Ordinary uncurrying naturality is one ingredient, not the whole localized composite."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTensorHomUncurry|uncurry.*natural",
+   "results": [
+    "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:175:uncurry_natural_left",
+    "Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean",
+    "Mathlib/CategoryTheory/Sites/Monoidal.lean"
+   ],
+   "date": "2026-10-13",
+   "verdict": "No match for schemeTensorHomUncurry in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localized evaluation of sheaf Hom complex maps is natural with respect to chain maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryChainNaturality",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Canonical tensor-Hom uncurrying evaluation: componentwise naturality and localization, steps 2 and 3 of lem-pc-tensor-hom-uncurry-chain-naturality",
+   "via": [
+    "lem-pc-tensor-hom-uncurry-chain-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryLocalizedEvaluation.lean",
+  "declaration": "AlgebraicGeometry.schemeTensorHomUncurry_localized_evaluation",
+  "statement": "theorem schemeTensorHomUncurry_localized_evaluation (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (P P' L L' M M' : CochainComplex\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a : P' ⟶ P) (b : L' ⟶ L) (c : M ⟶ M')\n    (φ : P ⟶ homComplex (R := X.sheaf) L\n      ((schemeHomKInjectiveResolution X).obj M)) :\n    letI := schemeDerivedTensorMonoidal X\n    pullbackTensorModelMap X P' L' ≫\n      DerivedCategory.Q.map (schemeTensorHomUncurry X P' L' M'\n        (a ≫ φ ≫ (Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))).map\n          (X := (op L, (schemeHomKInjectiveResolution X).obj M))\n          (Y := (op L', (schemeHomKInjectiveResolution X).obj M'))\n          (b.op, (schemeHomKInjectiveResolution X).map c))) ≫\n        schemeHomResolutionInverse X M' =\n      (DerivedCategory.Q.map a ⊗ₘ DerivedCategory.Q.map b) ≫\n        (pullbackTensorModelMap X P L ≫\n          DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫\n            schemeHomResolutionInverse X M) ≫ DerivedCategory.Q.map c",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T082355-L-1639868",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T082355-L-1639868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
