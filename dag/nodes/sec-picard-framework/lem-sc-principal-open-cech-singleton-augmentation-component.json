@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-principal-open-cech-singleton-augmentation-component",
+ "kind": "statement",
+ "title": "Singleton restriction transport in the explicit subset insertion",
+ "statement": "Let A be a commutative ring, r a natural number, f:Fin r→A, and J an arbitrary integer cochain complex of module sheaves on Spec A. Use the explicit union V, restriction J′, and subset insertion from [def-sc-principal-open-cech-subset-insertion], the section transport from [lem-sc-principal-open-cech-section-transport], and the alternating total from [def-sc-alternating-cech-total-complex]. Fix degree n and a nonempty subset S of cardinality one, an inclusion D_S≤V, and an equality n=n+1-|S|. Let H forget the global-ring scalar action, L be the natural-indexed tuple row of J′^n, K the tuple double complex, and e:(K^0)^n≅L^0 the extension-by-zero component isomorphism. For s∈J^n(V), define z∈L^0 by transporting s to V, applying the degree-zero restriction alternatingCechZero, and then e.hom, after H. Let t_S be the increasing one-tuple of S. Applying principalSubsetInsertOne to the restriction of s to D_S with the given coefficient-degree transport equals H(e.inv) followed by H of the (0,n) total inclusion, applied to Pi.single t_S (z(t_S)). This statement concerns one singleton only; it asserts no sum over subsets or full augmentation equality.",
+ "stmt_deps": [
+  "def-sc-principal-open-cech-subset-insertion",
+  "lem-sc-principal-open-cech-section-transport",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, equation (20.40.0.1) (Tag 08C0), and Tag 01FM. Explicit singleton coordinate verification from the parent augmentation proof, using Mathlib AlgebraicGeometry/Modules/Sheaf.lean (restrictAppIso_inv_map) and overFunctorEquiv naturality. Source read online at https://stacks.math.columbia.edu/tag/08C1 and https://stacks.math.columbia.edu/tag/01FM."
+ },
+ "proof": [
+  {
+   "text": "Write S={i} using |S|=1. The increasing enumeration t_S is the one-tuple i, and D_S=D(f_i). Thus the tuple intersection is W=V.ι^{-1}(D_S) and V.ι(W)=D_S. Put M=J^n. In the source section transport, first identify M(V) with M(V.ι(top)); in the subset section transport identify M(D_S) with M(V.ι(W)). The two composites of these open equality maps and the restriction map agree since all maps between the same opens are equal. Apply restrictAppIso_inv_map to the inclusion W≤top to commute the inverse restriction comparison with this presheaf restriction. Apply naturality of the inverse overFunctorEquiv, evaluated on W≤top, to commute the final coefficient equivalence with restriction. This gives the W-coordinate of alternatingCechPresheafZero of the canonically transported section. The restrictScalarsId comparison in alternatingCechZero is the identity on underlying additive groups. Its extension inverse cancels e.hom, so z(t_S) is this coordinate. The equality he identifies the coefficient J^(n+1-|S|) with J^n, and proof irrelevance identifies the given equality map with this transport. Finally |S|-1=0 identifies the insertOne extension inverse and total inclusion with e.inv and the (0,n) total inclusion. Apply Pi.single at t_S and compose these two maps to obtain exactly the asserted equality.",
+   "uses": [
+    "def-sc-principal-open-cech-subset-insertion",
+    "lem-sc-principal-open-cech-section-transport",
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-principal-open-cech-subset-insertion",
+  "lem-sc-principal-open-cech-section-transport",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, equation (20.40.0.1) (Tag 08C0), and Tag 01FM. Explicit singleton coordinate verification from the parent augmentation proof, using Mathlib AlgebraicGeometry/Modules/Sheaf.lean (restrictAppIso_inv_map) and overFunctorEquiv naturality. Source read online at https://stacks.math.columbia.edu/tag/08C1 and https://stacks.math.columbia.edu/tag/01FM."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite sum of singleton insertions equals the degree zero Cech augmentation",
+   "results": "8 hits, including SimplicialObject.Splitting.decomposition_id and DoldKan summands. These concern different complexes and do not supply the canonical restriction-section transport equality.",
+   "date": "2026-10-13",
+   "verdict": "No exact singleton comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.univ_sum_single",
+   "results": "Finset.univ_sum_single found in Mathlib.Algebra.BigOperators.Pi. It proves the generic product decomposition, not the geometric singleton transport.",
+   "date": "2026-10-13",
+   "verdict": "Used its coordinatewise idea in the proved private summation helper; does not close this node."
+  },
+  {
+   "tool": "grep",
+   "query": "principalSubsetInsertOne|univ_sum_single; restrictAppIso",
+   "results": "Generic finite-sum identities found. Mathlib AlgebraicGeometry/Modules/Sheaf.lean provides restrictAppIso_inv_map; project grep found no singleton component theorem. Whole DAG grep found only the parent augmentation and unrelated sheaf insertion/contraction statements.",
+   "date": "2026-10-13",
+   "verdict": "No existing declaration gives this explicit coordinate comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of restriction of a sheaf module to an open subscheme and singleton Cech augmentation",
+   "results": "Unavailable: Internal Server Error. Recorded by msearch.py.",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionAugmentation",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-principal-open-cech-subset-insertion-augmentation",
+   "place": "Parent proof: singleton enumeration, naturality of restriction equivalence, and coefficient-degree transport.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSingletonAugmentationComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSingletonAugmentationComponent.lean",
+  "declaration": "AlgebraicGeometry.principalSubsetInsertOne_singleton_augmentation",
+  "statement": "theorem principalSubsetInsertOne_singleton_augmentation\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ)\n    (S : {S : Finset (Fin r) // S.Nonempty}) (h : S.val.card = 1)\n    (hl : principalSubsetOpen A r f S.val ≤ principalSubsetUnion A r f)\n    (he : n = n + 1 - (S.val.card : ℤ))\n    (s : (modulesSpecToSheaf.obj (J.X n)).obj.obj (op (principalSubsetUnion A r f))) :\n    let V := principalSubsetUnion A r f\n    let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)\n    let J' := principalSubsetRestriction A r f J\n    let L := alternatingCechComplex U ((alternatingCechModulePresheaf).obj (J'.X n))\n    let K := (alternatingCechDoubleFunctor U).obj J'\n    let H := forget₂\n      (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat\n    let e : (K.X 0).X n ≅ L.X 0 := L.extendXIso ComplexShape.embeddingUpNat rfl\n    let z := (H.map (alternatingCechZero U (J'.X n) ≫ e.hom))\n      ((principalOpenSectionTransport A V (J.X n)).hom s)\n    principalSubsetInsertOne A r f J n S\n      ((modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.map\n        (homOfLE hl).op\n        ((modulesSpecToSheaf.map (eqToHom (congrArg J.X he))).hom.app (op V) s)) =\n      (H.map e.inv ≫ H.map (K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n)))\n        (Pi.single (S.val.orderEmbOfFin h) (z (S.val.orderEmbOfFin h)))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T155944-L-1306527",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T155944-L-1306527",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
