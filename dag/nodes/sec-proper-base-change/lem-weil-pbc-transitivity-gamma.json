@@ -32,80 +32,81 @@
  ],
  "proof": [
   {
-   "text": "*The Jacobi-Zariski sequence.* Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] to $A=K$, $B=L$, $C=M$ with $\\varphi:L\\to M$ the inclusion. It gives the $M$-linear maps $u_M:H_1(\\mathrm{NL}_{L/K}\\otimes_LM)\\to H_1(L_{M/K})$, $v$, $\\partial$, $w$, $z$ and the exact sequence $H_1(\\mathrm{NL}_{L/K}\\otimes_LM)\\xrightarrow{u_M}H_1(L_{M/K})\\xrightarrow{v}H_1(L_{M/L})\\xrightarrow{\\partial}M\\otimes_L\\Omega_{L/K}\\xrightarrow{w}\\Omega_{M/K}\\xrightarrow{z}\\Omega_{M/L}\\to0$. Transporting $\\partial$ and $w$ along the isomorphism $M\\otimes_L\\Omega_{L/K}\\cong\\Omega_{L/K}\\otimes_LM$, $c\\otimes\\omega\\mapsto\\omega\\otimes c$, this is exactness of the sequence of the statement at $H_1(L_{M/L})$, $\\Omega_{L/K}\\otimes_LM$, $\\Omega_{M/K}$ and $\\Omega_{M/L}$. It remains to show exactness at $H_1(L_{M/K})$ and injectivity of $a$.",
+   "text": "Apply Mathlib Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat K L M, Algebra.H1Cotangent.exact_map_δ K L M, Algebra.H1Cotangent.exact_δ_mapBaseChange K L M, KaehlerDifferential.exact_mapBaseChange_map K L M, and KaehlerDifferential.map_surjective K L M. They give the five exactness/surjectivity clauses with exactly the canonical maps of the statement. Flatness of M over the field L is synthesized from the vector-space/free instance. These are the existing Mathlib six-term sequence, so the larger project theorem jacobiZariski_homology_sequence and its Tor comparison are not needed.",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence"
+    "lem-weil-pbc-vector-space-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07E2, six-term part of the displayed sequence; Tag 07D4 via Algebra Tag 00S2"
+   }
+  },
+  {
+   "text": "Prove left_injective_at_regular_stage. Apply jacobiZariski_left_injective_of_regularSequence at a regular presentation of C over L, obtaining the injective map j from the kernel of the base-changed cotangent differential. Define t on C tensor H1(K,L) by tensoring the inclusion H1(K,L) into the canonical conormal module; its image lies in the differential kernel, as checked by tensor induction. Since C is flat over the field L, Module.Flat.lTensor_preserves_injective_linearMap makes t injective. Apply the ambient conormal formula specifying j. Tensor induction identifies j composed with t with (H1Cotangent.map K K L C).liftBaseChange C. Thus the canonical left map is injective at every regular stage. No Tor vanishing/comparison theorem is used.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-vector-space-free",
+    "lem-weil-pbc-nl-presentation-h1-functoriality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07D4 (lemma-transitive-lci-at-end, lines 8459-8492): the six-term sequence of Algebra Lemma 00S2 (lemma-exact-sequence-NL), whose completion on the left is the content of 07D4/07D5 used in the proof of Lemma 07E2 (line 8615)"
+    "place": "Tag 07D4 regular-sequence clause; Tag 07E2 via Tag 07D5"
    }
   },
   {
-   "text": "*Over the field $L$ the Tor terms vanish.* Let $C$ be any $L$-algebra (it will be $M$ or an $L$-subalgebra of $M$). The $L$-module $\\Omega_{L/K}$ is free [lem-weil-pbc-vector-space-free], so $F_0=\\Omega_{L/K}$, $F_i=0$ for $i\\ge1$, with the identity $F_0\\to\\Omega_{L/K}$, is a free resolution, and by [def-weil-pbc-tor-modules] $\\operatorname{Tor}^L_i(\\Omega_{L/K},C)$ is the $i$-th homology of $\\cdots\\to0\\to F_0\\otimes_LC\\to0$, which is $0$ for $i\\ge1$. Hence, by the last clause of [lem-weil-pbc-jacobi-zariski-homology-sequence] for $K\\to L\\to C$, the $C$-linear map $\\theta_C:H_1(L_{L/K})\\otimes_LC\\to H_1(\\mathrm{NL}_{L/K}\\otimes_LC)$, $h\\otimes c\\mapsto h\\otimes c$, is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-vector-space-free",
-    "def-weil-pbc-tor-modules",
-    "lem-weil-pbc-jacobi-zariski-homology-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), its statement on H_1(NL_{B/A} tensor C) under Tor vanishing (lines 35411-35485); the flatness of every module over a field is implicit in the proof of More on Algebra 07E2 (line 8615)"
-   }
-  },
-  {
-   "text": "*The map $a$ is $u$ composed with $\\theta$.* For an $L$-subalgebra $C\\subseteq M$ (including $C=M$) let $a_C:H_1(L_{L/K})\\otimes_LC\\to H_1(L_{C/K})$, $h\\otimes c\\mapsto c\\cdot\\iota^C_*(h)$, where $\\iota^C_*$ is induced by the morphism of presentations $\\iota^C:K[L]\\to K[C]$, $[l]\\mapsto[l]$, over the square $K=K$, $L\\subseteq C$ [lem-weil-pbc-nl-presentation-h1-functoriality]; so $a_M=a$. By that node, $\\iota^C_*(g\\bmod I_{L/K}^2)=\\iota^C(g)\\bmod I_{C/K}^2$ for $g\\in I_{L/K}$ with class in $H_1(L_{L/K})$, and $\\iota^C$ is the map $\\varphi_\\sharp$ of [lem-weil-pbc-jacobi-zariski-homology-sequence] (a) for $K\\to L\\to C$. Hence $u_C(\\theta_C((g\\bmod I_{L/K}^2)\\otimes c))=c\\cdot(\\iota^C(g)\\bmod I_{C/K}^2)=a_C((g\\bmod I_{L/K}^2)\\otimes c)$, so $a_C=u_C\\circ\\theta_C$ on generators and hence everywhere. Since $\\theta_C$ is bijective (step 2), $a_C$ is injective if and only if $u_C$ is, and $\\operatorname{im}a_C=\\operatorname{im}u_C$. For $C=M$: $\\operatorname{im}a=\\operatorname{im}u_M=\\ker v$ by step 1, which is exactness at $H_1(L_{M/K})$.",
+   "text": "Prove tensor_conormal_finite_support by tensor induction. A pure tensor m tensor h, with h represented by a polynomial g in the canonical presentation ideal I(L/K), maps to the conormal class of [m] times rename(algebraMap L M)(g); canonical_conormal_tmul proves this using the presentation map on generators and linearity of the ideal quotient. The finite set for a pure tensor is {m}. In every L-subalgebra S containing m, use the same polynomial formula with m regarded as an element of S. Variable renaming sends that representative to the one over M. For zero take the zero polynomial and empty set; for a sum add representatives and take the union of the finite sets. This produces a representative G for the conormal image of x and a finite E such that every S containing E has a tensor y mapping to x and a polynomial q representing the conormal image of y, with rename(q)=G.",
    "uses": [
     "lem-weil-pbc-nl-presentation-h1-functoriality",
-    "lem-weil-pbc-jacobi-zariski-homology-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07E2 (lemma-transitivity-gamma, line 8599): the left map of its sequence is the map H_1(NL_{B/A} tensor C) -> H_1(L_{C/A}) of Lemma 07D4 (line 8484) after the identification of step 2"
-   }
-  },
-  {
-   "text": "*Finite stages.* Let $C\\subseteq M$ be an $L$-subalgebra for which there are $n,c\\ge0$, a regular sequence $f_1,\\dots,f_c$ in $L[Y_1,\\dots,Y_n]$ and an isomorphism of $L$-algebras $L[Y_1,\\dots,Y_n]/(f_1,\\dots,f_c)\\cong C$. Composing the quotient map with this isomorphism gives a surjective $L$-algebra map $\\beta:L[Y_1,\\dots,Y_n]\\to C$ with kernel $(f_1,\\dots,f_c)$, so [lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective] applies to $K\\to L\\to C$ and $u_C$ is injective (its $u$ is the $u_C$ of step 3, defined by the same formula). By step 3, $a_C:H_1(L_{L/K})\\otimes_LC\\to H_1(L_{C/K})$ is injective.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07D5 (lemma-transitive-colimit-lci-at-end, line 8508): Lemma 07D4 applied at each stage of the colimit (proof, lines 8516-8521)"
-   }
-  },
-  {
-   "text": "*Passage to $M$.* Let $x\\in H_1(L_{L/K})\\otimes_LM$ with $a(x)=0$. Write $x=\\sum_{j=1}^rh_j\\otimes m_j$ with $m_j\\in M$ and $h_j=g_j\\bmod I_{L/K}^2$, $g_j\\in I_{L/K}\\subseteq K[L]$. In $I_{M/K}/I_{M/K}^2$ (where $c\\in M$ acts as multiplication by $[c]$) we have $a(x)=G\\bmod I_{M/K}^2$ with $G=\\sum_j[m_j]\\,\\iota^M(g_j)\\in I_{M/K}$, so $a(x)=0$ means $G=\\sum_{k=1}^tp_kq_k$ for some $p_k,q_k\\in I_{M/K}$. Let $E\\subseteq M$ be the finite set consisting of $m_1,\\dots,m_r$ and of all $s\\in M$ such that the variable $[s]$ occurs in one of $p_1,q_1,\\dots,p_t,q_t$. By [lem-weil-pbc-field-extension-complete-intersection-subalgebras] for the field extension $M/L$ there are a regular sequence $f_1,\\dots,f_c$ in $L[Y_1,\\dots,Y_n]$ and an injective $L$-algebra map $L[Y_1,\\dots,Y_n]/(f_1,\\dots,f_c)\\to M$ whose image $C$ contains $E$; $C$ is an $L$-subalgebra of $M$ as in step 4, and $L\\subseteq C$. For the subset $C\\subseteq M$ the polynomial ring $K[C]$ [def-weil-pbc-mv-polynomial-ring] is the subring of $K[M]$ of polynomials in the variables $[s]$, $s\\in C$; the canonical presentation $\\gamma_C:K[C]\\to C$ [def-weil-pbc-smooth-ring-map] is the restriction of $\\gamma_M:K[M]\\to M$, and $C\\to M$ is injective, so $I_{C/K}=I_{M/K}\\cap K[C]$. Also $\\iota^M$ is $\\iota^C$ followed by $K[C]\\subseteq K[M]$. Hence $p_k,q_k\\in K[C]\\cap I_{M/K}=I_{C/K}$, $G=\\sum_j[m_j]\\iota^C(g_j)\\in I_{C/K}^2$, and for $x_C=\\sum_jh_j\\otimes m_j\\in H_1(L_{L/K})\\otimes_LC$ we get $a_C(x_C)=G\\bmod I_{C/K}^2=0$. By step 4, $x_C=0$, so $x$, the image of $x_C$ under $\\mathrm{id}\\otimes(C\\subseteq M):H_1(L_{L/K})\\otimes_LC\\to H_1(L_{L/K})\\otimes_LM$, is $0$. So $a$ is injective, and with steps 1 and 3 the whole sequence is exact.",
-   "uses": [
-    "lem-weil-pbc-field-extension-complete-intersection-subalgebras",
     "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-smooth-ring-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07E2 (line 8615: 'Combine Lemma 07D5 with Algebra, Lemma 07BV'); the passage to the colimit in Lemma 07D5 (line 8508) is Algebra, Lemma Tag 07BQ (lemma-colimits-NL, algebra.tex lines 35557-35572: R[S] = colim R_lambda[S_lambda] and I = colim I_lambda), written out here elementwise for the directed union of the subalgebras C"
+    "place": "Tag 07E2 via Tag 07D5 and Algebra Tag 07BQ: finite-support argument for canonical presentations, written out in Lean"
+   }
+  },
+  {
+   "text": "Prove relation_square_finite_support by induction on membership in I(M/K) times I(M/K). For a product p*q of relations take the union of their finite variable sets. In a subalgebra containing those variables, MvPolynomial.exists_rename_eq_of_vars_subset_range gives lifts p′,q′. Evaluation commutes with renaming (eval_rename_subalgebra), and the inclusion S -> M is injective, so the lifts evaluate to zero and lie in I(S/K). Their product belongs to I(S/K)^2 and renames to p*q. For a sum use the union of the finite sets and add the lifted square-members. Consequently any polynomial G in I(M/K)^2 has a finite variable set F ensuring that G lifts to I(S/K)^2 in every subalgebra containing F.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07E2 via Tag 07D5 and Algebra Tag 07BQ: descent of the relation ideal and its square"
+   }
+  },
+  {
+   "text": "For x in the kernel of the canonical left map, step 3 gives G and E. Its conormal class is zero, so Extension.Cotangent.mk_eq_zero_iff places G in I(M/K)^2. Step 4 gives F. Apply FieldTheory.exists_completeIntersection_subalgebra L M to E union F, obtaining an injective map iota from a regular polynomial quotient into M. Set S=iota.range. The quotient map followed by iota.rangeRestrict is surjective onto S and has kernel exactly the regular-sequence ideal, since iota is injective. Step 3 gives y and q at S; step 4 gives r in I(S/K)^2 with the same image G. Injectivity of variable renaming implies q=r, so the conormal image and hence the H1 image of y is zero. Step 2 makes y zero; its image x is zero. LinearMap.ker_eq_bot gives injectivity. Combine with step 1 to obtain the unchanged statement.",
+   "uses": [
+    "lem-weil-pbc-field-extension-complete-intersection-subalgebras",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07E2, proof combining Tag 07D5 and Algebra Tag 07BV, applied to M/L"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-jacobi-zariski-homology-sequence",
   "lem-weil-pbc-vector-space-free",
-  "def-weil-pbc-tor-modules",
-  "lem-weil-pbc-nl-presentation-h1-functoriality",
   "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
-  "lem-weil-pbc-field-extension-complete-intersection-subalgebras",
+  "lem-weil-pbc-nl-presentation-h1-functoriality",
   "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-smooth-ring-map"
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-field-extension-complete-intersection-subalgebras"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07E2 (lemma-transitivity-gamma, lines 8599-8616), proof via Lemma Tag 07D5 (lemma-transitive-colimit-lci-at-end, lines 8507-8521; from Lemma Tag 07D4, lines 8459-8505, and Algebra Lemma Tag 07BQ, lemma-colimits-NL) and Algebra Lemma Tag 07BV (lemma-colimit-syntomic, algebra.tex line 44527), applied to the extension M/L; tags verified in literature/stacks-project/tags/tags"
+  "place": "Tag 07E2 via 07D4/07D5, Algebra Tags 07BQ and 07BV. Implemented elementwise by G2 on 2026-10-13: Mathlib supplies the six-term exactness; flat tensoring the H1 inclusion gives finite-stage injectivity, and tensor/ideal-product inductions prove finite-support descent. Sources read at https://stacks.math.columbia.edu/tag/07E2, /tag/07D5, /tag/07BQ, and /tag/07BV because the local literature checkout is absent."
  },
  "mathlib_searches": [
   {
@@ -204,5 +205,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T082346-L-1635860",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
