@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.MvPolynomial.Basic
 
+import Sheaf.AlgebraicGeometry.GenericFibreBirationalHypersurfaceModel
+import Sheaf.AlgebraicGeometry.GenericFibrePartialIsoSpreadOpen
+
 /-! # A common affine open with a generic hypersurface model
 
 Source: Stacks Project, Tag 0559, first proof, and Tag 0552.
@@ -27,29 +30,18 @@ nonempty. No assertion about special fibres is made here.
 
 Source: Stacks Project, Tag 0559, first proof, the separating transcendence basis
 and common-open construction; Tag 0552, birational finite type schemes.
-Proof: write S = Spec A and X = Spec B. Flatness over the domain A embeds B in
-B tensor_A Frac(A). Geometric integrality of this generic fibre makes that ring
-a domain, hence B is a domain as well. Its fraction field L is a regular finitely
-generated extension of K = Frac(A). Choose a separating transcendence basis and
-a primitive element for the remaining finite separable extension. Take the
-primitive polynomial numerator of its minimal polynomial over K in the
-transcendence variables. It is absolutely irreducible, since L/K is regular.
-Multiply by one nonzero element of A to clear all coefficient denominators,
-obtaining P in A[t_1,...,t_n]. Its generic hypersurface is geometrically integral
-and has function field L. If L is purely transcendental, use the linear equation
-in one additional variable, also covering relative dimension zero.
-After inverting one nonzero base element the hypersurface ring is a domain:
-make the polynomial monic by a separated-powers substitution, invert its leading
-coefficient, and use freeness over the remaining polynomial variables to embed
-in the generic fibre. These operations only replace the hypersurface by an
-isomorphic open over a principal base open. The two finite type domain algebras
-now have the same function field. Express their finitely many generators as
-fractions in that field and invert all denominators. The resulting localizations
-have a common further localization, giving isomorphic nonempty principal opens
-of X and of the hypersurface. Their inclusions commute with the maps to S.
-The open in X is affine; because its defining element is nonzero in B tensor K,
-its generic fibre is nonempty, so eta belongs to its image. Compose the other
-inclusion with the localization open immersion into the original hypersurface.
+Proof: Apply the generic-fibre birational hypersurface model theorem to obtain
+P over Gamma(S, O_S), a geometrically integral generic hypersurface, and a partial
+isomorphism of the two generic fibres over kappa(eta). The hypersurface map is
+locally of finite presentation: a polynomial algebra in finitely many variables
+is finitely presented, and quotienting by one equation preserves finite
+presentation. Geometric irreducibility makes the source generic fibre nonempty.
+Apply the generic-fibre partial-isomorphism spreading theorem to obtain an open
+V in X meeting the generic fibre and an open immersion V -> H over S. Choose a
+point v in V above eta and an affine open neighbourhood W of v contained in V.
+Compose W -> V with V -> H. The composite is an open immersion over S, and v
+witnesses that eta is in the image of W -> S. Retain the geometric properties
+of the hypersurface generic fibre supplied by the model theorem.
 
 (blueprint: lem-sbc-common-generic-hypersurface-affine-open) -/
 theorem exists_common_generic_hypersurface_affine_open
@@ -65,6 +57,35 @@ theorem exists_common_generic_hypersurface_affine_open
           ((Ideal.Quotient.mk (Ideal.span {P})).comp MvPolynomial.C)) ≫ S.isoSpec.inv
         ∃ i : W.toScheme ⟶ H, IsOpenImmersion i ∧ i ≫ g = W.ι ≫ f ∧
           GeometricallyIrreducible (g.fiberToSpecResidueField η) ∧
-          GeometricallyReduced (g.fiberToSpecResidueField η) := by sorry
+          GeometricallyReduced (g.fiberToSpecResidueField η) := by
+  obtain ⟨n, P, hgeomH, hredH, p, hp⟩ :=
+    exists_generic_fibre_birational_hypersurface_model f η hη hgeom hred
+  let H := Spec (.of (MvPolynomial (Fin n) Γ(S, ⊤) ⧸ Ideal.span {P}))
+  let g : H ⟶ S := Spec.map (CommRingCat.ofHom
+    ((Ideal.Quotient.mk (Ideal.span {P})).comp MvPolynomial.C)) ≫ S.isoSpec.inv
+  have hg : LocallyOfFinitePresentation g := by
+    have hfp : Algebra.FinitePresentation Γ(S, ⊤)
+        (MvPolynomial (Fin n) Γ(S, ⊤) ⧸ Ideal.span {P}) :=
+      Algebra.FinitePresentation.quotient (Submodule.fg_span_singleton P)
+    have hspec : LocallyOfFinitePresentation
+        (Spec.map (CommRingCat.ofHom
+          ((Ideal.Quotient.mk (Ideal.span {P})).comp MvPolynomial.C))) := by
+      rw [LocallyOfFinitePresentation.SpecMap_iff]
+      exact RingHom.finitePresentation_algebraMap.mpr hfp
+    infer_instance
+  have := hgeom
+  have : IrreducibleSpace (f.fiber η) :=
+    GeometricallyIrreducible.irreducibleSpace_of_subsingleton
+      (f := f.fiberToSpecResidueField η)
+  obtain ⟨V, hηV, i, hi, hif⟩ := exists_open_of_generic_fibre_partial_iso f g η hη p hp
+  obtain ⟨v, hv⟩ := hηV
+  obtain ⟨W, hW, hvW, hWV⟩ := exists_isAffineOpen_mem_and_subset v.property
+  let j : W.toScheme ⟶ V.toScheme := X.homOfLE hWV
+  have := hi
+  refine ⟨W, hW, ?_, n, P, j ≫ i, inferInstance, ?_, hgeomH, hredH⟩
+  · refine ⟨⟨v.val, hvW⟩, ?_⟩
+    exact hv
+  · change (j ≫ i) ≫ g = W.ι ≫ f
+    rw [Category.assoc, hif, ← Category.assoc, X.homOfLE_ι hWV]
 
 end AlgebraicGeometry

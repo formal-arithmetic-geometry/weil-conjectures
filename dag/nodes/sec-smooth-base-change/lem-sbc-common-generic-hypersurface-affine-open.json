@@ -19,17 +19,34 @@
  ],
  "proof": [
   {
-   "text": "write S = Spec A and X = Spec B. Flatness over the domain A embeds B in\nB tensor_A Frac(A). Geometric integrality of this generic fibre makes that ring\na domain, hence B is a domain as well. Its fraction field L is a regular finitely\ngenerated extension of K = Frac(A). Choose a separating transcendence basis and\na primitive element for the remaining finite separable extension. Take the\nprimitive polynomial numerator of its minimal polynomial over K in the\ntranscendence variables. It is absolutely irreducible, since L/K is regular.\nMultiply by one nonzero element of A to clear all coefficient denominators,\nobtaining P in A[t_1,...,t_n]. Its generic hypersurface is geometrically integral\nand has function field L. If L is purely transcendental, use the linear equation\nin one additional variable, also covering relative dimension zero.\nAfter inverting one nonzero base element the hypersurface ring is a domain:\nmake the polynomial monic by a separated-powers substitution, invert its leading\ncoefficient, and use freeness over the remaining polynomial variables to embed\nin the generic fibre. These operations only replace the hypersurface by an\nisomorphic open over a principal base open. The two finite type domain algebras\nnow have the same function field. Express their finitely many generators as\nfractions in that field and invert all denominators. The resulting localizations\nhave a common further localization, giving isomorphic nonempty principal opens\nof X and of the hypersurface. Their inclusions commute with the maps to S.\nThe open in X is affine; because its defining element is nonzero in B tensor K,\nits generic fibre is nonempty, so eta belongs to its image. Compose the other\ninclusion with the localization open immersion into the original hypersurface.",
-   "uses": [],
+   "text": "Apply the generic-fibre birational hypersurface model theorem to obtain n, P, geometric irreducibility and reducedness of the hypersurface generic fibre, and a partial isomorphism of the generic fibres over the generic residue field.",
+   "uses": [
+    "lem-sbc-generic-fibre-birational-hypersurface-model"
+   ],
    "elementary": false
+  },
+  {
+   "text": "The quotient of the finite-variable polynomial algebra by its principal ideal is finitely presented over the base global sections. Therefore the hypersurface map g is locally of finite presentation. Generic geometric irreducibility makes the source generic fibre nonempty. Apply the spreading theorem to the partial isomorphism to get an open V in X meeting the generic fibre and an open immersion V into H over S.",
+   "uses": [
+    "lem-sbc-generic-fibre-partial-iso-spread-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose v in V mapping to eta. The affine-open basis gives an affine open W containing v and contained in V. Compose its inclusion into V with the open immersion into H. Composition preserves open immersions and the equation over S, while v witnesses eta in the image of W. Retain the two geometric properties of the hypersurface generic fibre from the first step.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-generic-fibre-birational-hypersurface-model",
+  "lem-sbc-generic-fibre-partial-iso-spread-open"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0559, lemma-geometrically-irreducible-generic-fibre, first proof, separating transcendence basis and common-open paragraphs; Tag 0552, Lemma 29.51.7",
-  "note": "Agent-written scheme specialization of the sources read online on 2026-10-13."
+  "place": "Tags 0559, 0552 and 01ZM; field model, common-open spreading, and affine neighbourhood",
+  "note": "N3 made the original plan into Lean using two strictly simpler intermediate statements. The source-integrality and monic base-localization preliminaries are unnecessary when one spreads generic common opens directly."
  },
  "mathlib_searches": [
   {
@@ -132,9 +149,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261013T100136-L-2489952",
+  "landing": "20261013T111906-L-3057343",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
