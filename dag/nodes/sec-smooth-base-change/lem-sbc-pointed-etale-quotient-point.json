@@ -1,0 +1,115 @@
+{
+ "id": "lem-sbc-pointed-etale-quotient-point",
+ "kind": "lemma",
+ "title": "Comparison of base-changed separable closures",
+ "statement": "Let A and B be commutative local rings in one universe, let π:A → B be surjective, and let K and L be separable closures of their respective residue fields. Their A- and B-algebra structures factor through the residue fields as in [def-sc-ring-strict-henselization]. Let H be extension of scalars defined by the ring pushout, as in [lem-sbc-surjective-quotient-base-change]. There is a B-algebra isomorphism H(K) ≅ L.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 05WS, lemma-quotient-strict-henselization; parent proof step 1 (residue-field comparison)"
+ },
+ "stmt_deps": [
+  "def-sc-ring-strict-henselization",
+  "lem-sbc-surjective-quotient-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The induced residue-field map is injective because it is a homomorphism of fields, and surjective by lifting first through B → k(B) and then through π. Give L the k(A)-algebra structure obtained by composing this residue-field isomorphism with k(B) → L. Transfer separability along the base-field isomorphism and use transitivity. IsSepClosure.equiv then gives e:K ≅ L satisfying e(algebraMap A K a)=algebraMap B L (π a).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set β:B → K equal to e inverse composed with B → L. The preceding equation gives βπ=A → K. The cocone with vertex K and legs id_K and β is a pushout: a map out is the K leg, its B compatibility is checked after the surjection π, and uniqueness follows from its K leg. Use uniqueness of pushouts, compose with e and transport through commAlgCatEquivUnder (including its unit isomorphism).",
+   "uses": [
+    "lem-sbc-surjective-quotient-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-surjective-quotient-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U3",
+  "document": "Stacks Project",
+  "place": "Tag 05WS, lemma-quotient-strict-henselization; parent proof step 1 (residue-field comparison)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism between local rings identifies their residue fields and the base changed separable closures",
+   "results": "Residue-field bijectivity on stalks and related lemmas; no pointed base-change comparison.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosure.equiv",
+   "results": "IsSepClosure.equiv identifies two separable closures of a common field.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointedEtale|IsSepClosure.equiv|quotientBaseChange",
+   "results": "IsSepClosure.equiv documentation found; no exact comparison theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective homomorphism between local rings identifies their residue fields and the base changed separable closures",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PointedEtaleQuotientFinal",
+  "date": "2026-10-14",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-pointed-etale-quotient-final",
+   "place": "Tag 05WS, lemma-quotient-strict-henselization; parent proof step 1 (residue-field comparison)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PointedEtaleQuotientPoint",
+  "file": "lean/Sheaf/RingTheory/PointedEtaleQuotientPoint.lean",
+  "declaration": "Algebra.pointedEtaleQuotient_point_iso",
+  "statement": "theorem pointedEtaleQuotient_point_iso\n    (A K B L : Type u) [CommRing A] [IsLocalRing A] [Field K]\n    [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]\n    [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K]\n    [CommRing B] [IsLocalRing B] [Field L]\n    [Algebra (IsLocalRing.ResidueField B) L]\n    [IsSepClosure (IsLocalRing.ResidueField B) L]\n    [Algebra B L] [IsScalarTower B (IsLocalRing.ResidueField B) L]\n    (π : A →+* B) (hπ : Function.Surjective π) :\n    Nonempty ((quotientBaseChange π).obj (CommAlgCat.of A K) ≅ CommAlgCat.of B L)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476732",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-pointed-etale-quotient-functor",
+ "kind": "lemma",
+ "title": "Construction and underlying diagram of pointed etale base change",
+ "statement": "Let A,B,K,L be commutative rings in one universe with A- and B-algebra structures on K and L. Let π:A → B be a ring map, and let H be the pushout extension-of-scalars functor of [lem-sbc-surjective-quotient-base-change]. Base change sends every etale A-algebra S to an etale B-algebra H(S). Given a B-algebra map c:H(K) → L, form the functor on pointed etale algebras [def-sc-ring-strict-henselization] by applying H to S → K and composing with c. Its underlying algebra diagram is canonically isomorphic to extension of scalars of the original diagram.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 00U2, lemma-etale, part (3); Tag 05WS, lemma-quotient-strict-henselization; parent proof step 1"
+ },
+ "stmt_deps": [
+  "def-sc-ring-strict-henselization",
+  "lem-sbc-surjective-quotient-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Apply RingHom.Etale.isStableUnderBaseChange, converted to categorical cobase-change stability, to the defining pushout. This proves the etaleness of its B-structure map.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Over.post H, Over.map c and ObjectProperty.lift to construct the pointed functor. The definitions of these functors leave the underlying algebra unchanged, so the comparison is Iso.refl.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-ring-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U3",
+  "document": "Stacks Project",
+  "place": "Tag 00U2, lemma-etale, part (3); Tag 05WS, lemma-quotient-strict-henselization; parent proof step 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Construct extension of scalars on the full subcategories of etale algebras over pointed separable closures",
+   "results": "Etale.comp and related algebra lemmas; no pointed functor.",
+   "date": "2026-10-14",
+   "verdict": "inputs found; construction needed"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Etale.isStableUnderBaseChange",
+   "results": "Exact cobase-change input found.",
+   "date": "2026-10-14",
+   "verdict": "inputs found; construction needed"
+  },
+  {
+   "tool": "grep",
+   "query": "post_forget_eq_forget_comp|liftCompιIso",
+   "results": "Over.post_forget_eq_forget_comp and ObjectProperty.liftCompιIso found.",
+   "date": "2026-10-14",
+   "verdict": "inputs found; construction needed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct extension of scalars on the full subcategories of etale algebras over pointed separable closures",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PointedEtaleQuotientFinal",
+  "date": "2026-10-14",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-pointed-etale-quotient-final",
+   "place": "Tag 00U2, lemma-etale, part (3); Tag 05WS, lemma-quotient-strict-henselization; parent proof step 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PointedEtaleQuotientFunctor",
+  "file": "lean/Sheaf/RingTheory/PointedEtaleQuotientFunctor.lean",
+  "declaration": "Algebra.quotientBaseChange_etale",
+  "statement": "theorem quotientBaseChange_etale {A B : Type u} [CommRing A] [CommRing B]\n    (π : A →+* B) (S : CommAlgCat.{u} A) (hS : Etale A S) :\n    Etale B ((quotientBaseChange π).obj S)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-14",
+  "declarations": [
+   "Algebra.quotientBaseChange_etale",
+   "Algebra.pointedEtaleBaseChange",
+   "Algebra.pointedEtaleBaseChange_forgetIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476732",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

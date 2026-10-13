@@ -12,41 +12,33 @@
  ],
  "proof": [
   {
-   "text": "Identify the residue fields using the first and third isomorphism theorems. Identify the two separable closures over that field. Base change pointed etale algebras through this comparison, and use stability of etaleness under base change to construct F and the underlying diagram comparison.",
+   "text": "Use the proved residue-field and separable-closure comparison to obtain c:H(K) ≅ L. Construct F by postcomposing the base-changed points with c and restricting to etale algebras. The underlying diagram comparison is definitional.",
    "uses": [
-    "lem-weil-pbc-quotient-residue-field"
+    "lem-sbc-pointed-etale-quotient-point",
+    "lem-sbc-pointed-etale-quotient-functor"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Identify B with A/ker π. Apply [lem-exc-etale-algebra-lift] to the pointed etale B-algebra T to obtain an etale A-algebra S and its specified reduction isomorphism. Compose the reduction with T -> L and the residue-compatible isomorphism L -> K to point S. The inverse reduction isomorphism supplies T -> F(S), giving an object of (T down F).",
+   "text": "For each pointed etale B-algebra T, install nonemptiness of its structured-arrow category. For objects X,Y, obtain a common successor Z. The arrows X → Z and Y → Z give a two-edge zigzag X → Z ← Y. Apply zigzag_isConnected and the definition of Functor.Final.",
    "uses": [
-    "lem-exc-etale-algebra-lift"
+    "lem-sbc-pointed-etale-quotient-comma-nonempty",
+    "lem-sbc-pointed-etale-quotient-comma-refinement"
    ],
-   "elementary": false
-  },
-  {
-   "text": "For two objects of (T down F), tensor their lifted A-algebras and multiply their K-points. The two maps from T agree at the point. The etale diagonal is open, so a principal neighbourhood equalizes the maps. Lift and invert its denominator in the A-tensor product. This provides a common refinement. Thus every comma category is nonempty and connected, proving finality.",
-   "uses": [
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "def-weil-etale-morphism",
-    "def-weil-unramified-morphism"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-quotient-residue-field",
-  "lem-exc-etale-algebra-lift",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "def-weil-etale-morphism",
-  "def-weil-unramified-morphism"
+  "lem-sbc-pointed-etale-quotient-functor",
+  "lem-sbc-pointed-etale-quotient-point",
+  "lem-sbc-pointed-etale-quotient-comma-nonempty",
+  "lem-sbc-pointed-etale-quotient-comma-refinement"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F1",
+  "group": "U3",
   "document": "Stacks Project",
-  "place": "Tag 05WS; pointed-algebra proof recorded in lem-sbc-strict-henselization-surjective-quotient"
+  "place": "Tag 05WS, with the explicit pointed construction and comma criterion of the parent plan"
  },
  "mathlib_searches": [
   {
@@ -114,11 +106,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-8ea20",
-  "group": "F1",
+  "reviewer": "COMPILER",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T215603-L-897456",
+  "landing": "20261013T224522-L-1476732",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched their DAG statements and change record; all modules compiled, forced adaptation failed in the original caller and succeeded in the adapted caller, and no prohibited declarations or extra interface changes were found."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

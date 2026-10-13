@@ -8,6 +8,9 @@ module
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Sheaf.RingTheory.SurjectiveQuotientBaseChange
 public import Mathlib.CategoryTheory.Limits.Final
+import Sheaf.RingTheory.PointedEtaleQuotientPoint
+import Sheaf.RingTheory.PointedEtaleQuotientCommaNonempty
+import Sheaf.RingTheory.PointedEtaleQuotientCommaRefinement
 
 /-! # Finality of pointed etale base change
 
@@ -26,24 +29,21 @@ Source: Stacks Project, Tag 05WS; pointed-colimit proof as recorded in
 lem-sbc-strict-henselization-surjective-quotient.
 (blueprint: lem-sbc-pointed-etale-quotient-final)
 
-Proof: Surjectivity identifies B with A/ker π. The induced residue-field map is an
-isomorphism. Transport K across it and identify it with the chosen separable closure
-L; separable closures are isomorphic over the residue field. Extension of scalars
-sends an etale A-algebra S pointed in K to B tensor_A S, pointed in L, and preserves
-etaleness. On morphisms use extension of scalars. This defines F and the comparison
-isomorphism of underlying diagrams. Identify B with A/ker π and apply the existing
-etale-algebra lifting result (blueprint node lem-exc-etale-algebra-lift) to the pointed
-etale B-algebra T. It supplies an etale A-algebra S and its specified reduction
-isomorphism. Compose the reduction with T -> L and the residue-compatible isomorphism
-L -> K to point S. The inverse reduction isomorphism gives T -> F(S), supplying an
-object of (T down F). For two
-objects of this comma category, tensor their A-algebras and multiply their K-points.
-The resulting two maps from T agree at the distinguished point. The diagonal of the
-etale B-algebra T is open, so they agree on a principal neighbourhood of that point.
-Lift its denominator to the A-tensor product and invert it; it remains nonzero at
-the K-point. This gives a common refinement equalizing the arrows. Thus the comma
-category is nonempty and connected, which is the finality criterion. No strict
-henselization C or colimit hypothesis is needed for this statement. -/
+Proof: The residue-field map induced by π is an isomorphism. Transport the
+separable closures across it and identify H(K) with L, where H is extension of
+scalars. Apply H to each pointed algebra S -> K and compose with this comparison;
+etaleness is stable under base change. This constructs F. Its underlying algebra
+diagram is definitionally H applied to the original diagram.
+
+The coefficient-lift theorem produces an etale lift of every underlying target
+algebra. The bijection on maps into K supplies its compatible point, so every
+comma category (T down F) is nonempty. For two comma objects, choose a common
+source successor using filteredness. Equalize their induced arrows in the target,
+which is also filtered. Lift that equalizing etale morphism relative to its source
+algebra using the same coefficient-lift construction. Its reduction isomorphism
+produces a common successor in the comma category. Thus the two objects are
+linked by a two-arrow zigzag. The connected-comma criterion gives finality.
+No strict henselization C or colimit hypothesis is used. -/
 theorem pointedEtaleQuotient_final
     (A K B L : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]
@@ -57,6 +57,19 @@ theorem pointedEtaleQuotient_final
     let Q : ObjectProperty (Over (CommAlgCat.of B L)) := fun X ↦ Etale B X.left
     ∃ F : P.FullSubcategory ⥤ Q.FullSubcategory, F.Final ∧
       Nonempty ((P.ι ⋙ Over.forget (CommAlgCat.of A K)) ⋙ quotientBaseChange π ≅
-        F ⋙ (Q.ι ⋙ Over.forget (CommAlgCat.of B L))) := by sorry
+        F ⋙ (Q.ι ⋙ Over.forget (CommAlgCat.of B L))) := by
+  classical
+  obtain ⟨c⟩ := pointedEtaleQuotient_point_iso A K B L π hπ
+  let F := pointedEtaleBaseChange π c.hom
+  refine ⟨F, ?_, ⟨pointedEtaleBaseChange_forgetIso π c.hom⟩⟩
+  refine ⟨fun T ↦ ?_⟩
+  have : Nonempty (StructuredArrow T F) :=
+    pointedEtaleQuotient_comma_nonempty A K B L π hπ c T
+  apply zigzag_isConnected
+  intro X Y
+  obtain ⟨Z, ⟨f⟩, ⟨g⟩⟩ :=
+    pointedEtaleQuotient_comma_refinement A K B L π hπ c T X Y
+  exact (Relation.ReflTransGen.single (show Zag X Z from Or.inl ⟨f⟩)).trans
+    (Relation.ReflTransGen.single (show Zag Z Y from Or.inr ⟨g⟩))
 
 end Algebra

@@ -1,0 +1,115 @@
+{
+ "id": "lem-sbc-pointed-etale-quotient-point-bijective",
+ "kind": "lemma",
+ "title": "Bijection on algebra maps into the point",
+ "statement": "Let A and B be commutative local rings in one universe and let π:A → B be surjective. Let K be a field with compatible A- and k(A)-algebra structures factoring A -> K through the residue field, as in [def-sc-ring-strict-henselization]. Let H be the extension of scalars of [lem-sbc-surjective-quotient-base-change]. For every commutative A-algebra S, the map Hom_A(S,K) → Hom_B(H(S),H(K)) induced by H is bijective.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 05WS, lemma-quotient-strict-henselization; trivial action of ker π on the residue-field point"
+ },
+ "stmt_deps": [
+  "def-sc-ring-strict-henselization",
+  "lem-sbc-surjective-quotient-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Descend A -> K along π, since its kernel is contained in the maximal ideal and hence killed in K. The cocone with vertex K and legs id and the descended B-map is a pushout. The canonical K -> H(K) is therefore an isomorphism.",
+   "uses": [
+    "lem-sbc-surjective-quotient-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the explicit algebra/under-category equivalences with Under.mapPushoutAdj. Its unit at K has the canonical underlying pushout map and so is invertible. The hom equivalence and inverse unit give surjectivity on maps to K; naturality and cancellation of the unit at K give injectivity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-surjective-quotient-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U3",
+  "document": "Stacks Project",
+  "place": "Tag 05WS, lemma-quotient-strict-henselization; trivial action of ker π on the residue-field point"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along a quotient induces a bijection on algebra maps into a field annihilating the kernel",
+   "results": "Quotient and conductor equivalences; no exact pointed hom-bijection theorem.",
+   "date": "2026-10-14",
+   "verdict": "inputs found; no exact pointed statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Adjunction.homEquiv_naturality_left found; generic adjunction input.",
+   "date": "2026-10-14",
+   "verdict": "inputs found; no exact pointed statement"
+  },
+  {
+   "tool": "grep",
+   "query": "pointed.*bijective|bijective.*pointed",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "inputs found; no exact pointed statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars along a quotient induces a bijection on algebra maps into a field annihilating the kernel",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PointedEtaleQuotientFinal",
+  "date": "2026-10-14",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-pointed-etale-quotient-final",
+   "place": "Tag 05WS, lemma-quotient-strict-henselization; trivial action of ker π on the residue-field point",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PointedEtaleQuotientPointBijective",
+  "file": "lean/Sheaf/RingTheory/PointedEtaleQuotientPointBijective.lean",
+  "declaration": "Algebra.quotientBaseChange_point_bijective",
+  "statement": "theorem quotientBaseChange_point_bijective\n    (A K B : Type u) [CommRing A] [IsLocalRing A] [Field K]\n    [Algebra (IsLocalRing.ResidueField A) K] [Algebra A K]\n    [IsScalarTower A (IsLocalRing.ResidueField A) K] [CommRing B] [IsLocalRing B]\n    (π : A →+* B) (hπ : Function.Surjective π) (S : CommAlgCat.{u} A) :\n    Function.Bijective (fun f : S ⟶ CommAlgCat.of A K ↦ (quotientBaseChange π).map f)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476732",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
