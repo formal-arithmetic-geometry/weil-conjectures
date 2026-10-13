@@ -14,6 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
+public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 
 /-!
 # The Künneth map in ordinary étale cohomology
@@ -307,6 +309,27 @@ lemma kunnethMap_naturality (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶
     Category.assoc, tensorBaseChangeMap_naturality, Functor.map_comp_assoc]
 
 end Maps
+
+section MonoidalEquivalence
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] (X : Scheme.{u})
+  {B : Type u'} [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
+  [HasDerivedCategory.{u + 1} B] [MonoidalCategory B] [MonoidalClosed B] [MonoidalPreadditive B]
+  [BraidedCategory B] [Abelian.HasFunctorialFlatResolution B]
+
+/-- A monoidal additive equivalence `F : B ⥤ X_ét` onto the category of `A`-valued étale sheaves
+on `X` commutes with the derived tensor products:
+`D(F)(N ⊗ᴸ M) ≅ D(F) N ⊗ᴸ D(F) M`. -/
+noncomputable def mapDerivedCategoryObjTensorIsoDerivedTensor
+    (F : B ⥤ Sheaf X.smallEtaleTopology A) [F.Monoidal] [F.IsEquivalence] [F.Additive]
+    (N M : DerivedCategory B) :
+    F.mapDerivedCategory.obj (N ⊗ M) ≅
+      ((derivedTensor A X).obj (F.mapDerivedCategory.obj N)).obj (F.mapDerivedCategory.obj M) :=
+  (DerivedCategory.tensorLeftCompMapDerivedCategoryIso F N).app M
+
+end MonoidalEquivalence
 
 section Constant
 
@@ -639,8 +662,24 @@ theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_of_isSepClosed
     Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C).obj C') ≅
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C ⊗
-        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C') :=
-  sorry
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C') := by
+  let E := constantSheafEquivalenceOfIsSepClosed Λ (k := k)
+  let _ : E.functor.Additive := additive_constantSheaf Λ _
+  let _ : E.inverse.Additive := additive_sheafSections_obj Λ _
+  let F := constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  have : F.IsEquivalence := E.isEquivalence_functor
+  let R := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
+  let T := derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))
+  let e (X) : F.mapDerivedCategory.obj (R.obj X) ≅ X :=
+    F.mapDerivedCategory.mapIso ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app X) ≪≫
+      E.mapDerivedCategory.counitIso.app X
+  let e' (N) : R.obj (F.mapDerivedCategory.obj N) ≅ N :=
+    (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app _ ≪≫
+      (E.mapDerivedCategory.unitIso.app N).symm
+  let i : (T.obj C).obj C' ≅ F.mapDerivedCategory.obj (R.obj C ⊗ R.obj C') :=
+    (T.mapIso (e C).symm).app C' ≪≫ (T.obj _).mapIso (e C').symm ≪≫
+      (mapDerivedCategoryObjTensorIsoDerivedTensor _ _ F (R.obj C) (R.obj C')).symm
+  exact ⟨R.mapIso i ≪≫ e' (R.obj C ⊗ R.obj C')⟩
 
 end Point
 
@@ -664,7 +703,7 @@ instance isIso_rightDerivedLowerStarProjectionMap_app_app
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
   isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed Λ hΛ aX
-    (hasFiniteCohomologicalDimension_of_isSepClosed Λ hΛ aX) E C
+    (hasFiniteCohomologicalDimension_of_isSepClosed Λ aX) E C
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- `RΓ(X, E) ⊗ᴸ RΓ(Spec k, C) ≅ RΓ(X, E ⊗ᴸ La_X^* C)` for a finite-type scheme `X` over a
