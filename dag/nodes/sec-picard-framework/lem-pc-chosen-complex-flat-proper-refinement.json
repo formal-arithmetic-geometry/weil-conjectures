@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-chosen-complex-flat-proper-refinement",
+ "kind": "statement",
+ "title": "Common flat proper refinement of an already chosen complex",
+ "statement": "Let I be a directed preorder, R:I → CommRing a diagram of Noetherian rings, and c a limiting cone of the spectra with affine point S. Fix i ≤ j, a finitely presented morphism f:X_i → Spec(R_i) [def-pc-scheme, def-pc-morphism-conventions], and a bounded cochain complex H of finitely presented modules on X_j = X_i ×_{Spec(R_i)} Spec(R_j). Assume the pullbacks of its terms to X = X_i ×_{Spec(R_i)} S [def-pc-base-change] are flat over S and have support proper over S [def-weil-pbc-closed-subset-proper-over-base]. Then there is k ≥ j and a bounded finitely presented complex K on X_k, with terms flat over Spec(R_k) and support proper over Spec(R_k), whose limit pullback is termwise isomorphic to the limit pullback of this given H, with every isomorphism commuting with every differential. This assertion starts from a chosen model H; it does not descend a complex from X.",
+ "source": {
+  "document": "Stacks Project, Limits of Schemes; Cohomology of Schemes; Sheaves of Modules",
+  "place": "Tags 05LY, 081G, 0CYS and 0097; finite common-stage enlargement of an already chosen bounded complex; final directed poset replacement, Tag 0032"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite interval of degrees outside which H is zero. For each degree inside it, view H^n on the finitely presented scheme X_j. Pullback pasting identifies its pullback to the limit with the displayed moduleBaseChange. Apply eventual flatness (05LY) and proper-support descent (081G) to this fixed term. For a preorder first restrict along a final directed poset in its thin filtered category; finality preserves the limit, so the same argument applies and its output transports back.",
+   "uses": [
+    "lem-pc-flat-module-descent",
+    "lem-pc-proper-support-descent",
+    "lem-weil-pbc-filtered-category-exists-directed-final",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each of the finitely many degrees choose a common stage above its flatness and proper-support stages, then choose one upper bound of all these stages and j. Further cartesian pullback preserves flatness, finite presentation and proper support. Zero terms outside the interval have flat sections and empty proper support. If the interval is empty take j.",
+   "uses": [
+    "lem-pc-tensor-pullback-flat-proper-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the additive tensor-pullback functor termwise to H at the common stage; it preserves zero objects, so the result is bounded. The tensor-pullback composition isomorphism and pullback pasting identify the limit pullback of this complex with that of H. Naturality with respect to H.d n m gives the displayed differential equation.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-flat-module-descent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-proper-support-descent",
+  "lem-pc-tensor-pullback-flat-proper-support",
+  "lem-weil-pbc-filtered-category-exists-directed-final"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Limits of Schemes; Cohomology of Schemes; Sheaves of Modules",
+  "place": "Tags 05LY, 081G, 0CYS and 0097; finite common-stage enlargement of an already chosen bounded complex; final directed poset replacement, Tag 0032"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An already chosen bounded finitely presented complex whose limit pullback is flat with proper support becomes flat with proper support at a common later stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An already chosen bounded finitely presented complex whose limit pullback is flat with proper support becomes flat with proper support at a common later stage",
+   "results": "No exact match. Search returned: CategoryTheory.lan_flat_of_flat, CategoryTheory.flat_of_preservesFiniteLimits, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, CategoryTheory.flat_iff_lan_flat, CategoryTheory.preservesFiniteLimits_iff_flat, Module.Flat.of_forall_exists_factorization, CategoryTheory.preservesFiniteLimits_of_flat, CommRingCat.Under.preservesFiniteLimits_of_flat",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "complex.*descent|proper.*support|eventually.*flat",
+   "results": "No exact match. Search returned: no hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFlatProperSupportDescent",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation proof: enlarge the chosen bounded finitely presented model until its terms are flat and have proper support; Tags 05LY, 081G and 0CYS",
+   "via": [
+    "lem-pc-finite-flat-proper-support-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChosenComplexFlatProperRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChosenComplexFlatProperRefinement.lean",
+  "declaration": "AlgebraicGeometry.exists_chosen_complex_flat_proper_refinement",
+  "statement": "theorem exists_chosen_complex_flat_proper_refinement\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (H : CochainComplex (pullback f (Spec.map (R.map (homOfLE hij)))).Modules ℤ)\n    (hH_bounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (H.X n))\n    (hH_fp : ∀ n : ℤ, (H.X n).IsFinitePresentation)\n    (hH_flat : ∀ n : ℤ,\n      ((Scheme.Modules.moduleBaseChange f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (H.X n)).IsFlatOver\n        (pullback.snd f (c.π.app (op i))))\n    (hH_support : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver\n      (pullback.snd f (c.π.app (op i)))\n      ((Scheme.Modules.moduleBaseChange f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (H.X n))) :\n    ∃ (k : I) (hjk : j ≤ k)\n      (K : CochainComplex\n        (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).Modules ℤ),\n      (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (K.X n)) ∧\n      (∀ n : ℤ, (K.X n).IsFinitePresentation) ∧\n      (∀ n : ℤ, (K.X n).IsFlatOver\n        (pullback.snd f (Spec.map (R.map (homOfLE (hij.trans hjk)))))) ∧\n      (∀ n : ℤ, Scheme.Modules.HasSupportProperOver\n        (pullback.snd f (Spec.map (R.map (homOfLE (hij.trans hjk))))) (K.X n)) ∧\n      ∃ e : ∀ n : ℤ,\n          (Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))).obj\n            (K.X n) ≅\n          (Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (H.X n),\n        ∀ n m : ℤ,\n          (Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))).map\n            (K.d n m) ≫ (e m).hom =\n          (e n).hom ≫ (Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (H.d n m)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T082424-L-1651614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T082424-L-1651614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

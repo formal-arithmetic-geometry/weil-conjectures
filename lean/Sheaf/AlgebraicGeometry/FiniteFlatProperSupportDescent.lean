@@ -11,8 +11,8 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.FlatBoundedComplexDescent
-import Sheaf.AlgebraicGeometry.ProperSupportDescent
+import Sheaf.AlgebraicGeometry.FinitelyPresentedComplexDescent
+import Sheaf.AlgebraicGeometry.ChosenComplexFlatProperRefinement
 
 /-!
 # Descent of bounded flat complexes with proper support
@@ -30,6 +30,40 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private theorem flatOver_of_iso {X S : Scheme.{u}} (f : X ⟶ S)
+    {M N : X.Modules} (e : M ≅ N) (hN : N.IsFlatOver f) : M.IsFlatOver f := by
+  intro V U hU
+  let : Module Γ(S, V.1) Γ(M, U.1) := Module.compHom _ (f.appLE V.1 U.1 hU).hom
+  let : Module Γ(S, V.1) Γ(N, U.1) := Module.compHom _ (f.appLE V.1 U.1 hU).hom
+  let eU := (SheafOfModules.evaluation X.ringCatSheaf (op U.1)).mapIso e
+  let eR := (ModuleCat.restrictScalars (f.appLE V.1 U.1 hU).hom).mapIso eU
+  have : Module.Flat Γ(S, V.1) ((ModuleCat.restrictScalars
+      (f.appLE V.1 U.1 hU).hom).obj
+      ((SheafOfModules.evaluation X.ringCatSheaf (op U.1)).obj N)) := hN V U hU
+  exact Module.Flat.of_linearEquiv eR.toLinearEquiv
+
+private theorem supportProper_of_iso {X S : Scheme.{u}} (f : X ⟶ S)
+    [LocallyOfFiniteType f] {M N : X.Modules} (e : M ≅ N)
+    (hN : Scheme.Modules.HasSupportProperOver f N) :
+    Scheme.Modules.HasSupportProperOver f M := by
+  obtain ⟨Z, hZ, hp⟩ := hN
+  refine ⟨Z, hZ.trans ?_, hp⟩
+  ext x
+  let es := ((Scheme.Modules.toPresheaf X) ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x).mapIso e
+  have hs : Subsingleton (M.presheaf.stalk x) ↔ Subsingleton (N.presheaf.stalk x) := by
+    constructor
+    · intro h
+      have : Subsingleton (((Scheme.Modules.toPresheaf X) ⋙
+          TopCat.Presheaf.stalkFunctor Ab.{u} x).obj M) := h
+      exact Function.Surjective.subsingleton
+        ((ConcreteCategory.bijective_of_isIso es.hom).2)
+    · intro h
+      have : Subsingleton (((Scheme.Modules.toPresheaf X) ⋙
+          TopCat.Presheaf.stalkFunctor Ab.{u} x).obj N) := h
+      exact Function.Injective.subsingleton
+        ((ConcreteCategory.bijective_of_isIso es.hom).1)
+  exact not_congr hs.symm
+
 /-- A bounded complex of finitely presented modules flat over the limit base and with
 termwise proper support descends with all these properties to a later stage.
 Source: Stacks Project, Tags 01ZR, 05LY, 081G and 0CYS
@@ -44,16 +78,16 @@ The family of isomorphisms in the conclusion commutes with every differential, h
 is an isomorphism of complexes after tensor base change (`def-pc-base-change`).
 
 Proof:
-1. Apply `lem-pc-flat-bounded-complex-descent` (Tags 01ZR and 05LY) to descend the
-   bounded complex, its finitely presented flat terms and its differentials to a stage,
-   together with an isomorphism of its base change with `G`.
-2. Apply `lem-pc-proper-support-descent` (Tag 081G and Lemma 30.26.7, Tag 0CYS) to
-   each nonzero term of this chosen complex. Each term is finitely presented and its
-   limit pullback has proper support by the given isomorphism and `hG_support`.
-3. There are only finitely many nonzero terms, so directedness gives one later stage
-   where all terms have proper support. Zero terms have empty, hence proper, support.
-   Base-changing the whole complex preserves differentials, boundedness, finite
-   presentation, flatness and the identification with `G`. -/
+1. Apply `lem-pc-fp-complex-descent` (Tag 01ZR) to descend the bounded finitely
+   presented complex, keeping its differentials and a termwise base-change isomorphism.
+2. Transport limit flatness and proper support across these isomorphisms. Flatness
+   follows by restriction of scalars of the sectionwise linear equivalences; support
+   follows because the stalkwise additive equivalences preserve being zero.
+3. Apply `lem-pc-chosen-complex-flat-proper-refinement` to this chosen finite-stage
+   complex. It enlarges the stage until every term is flat and has proper support,
+   preserving the limit pullback of the chosen complex and all its differentials.
+4. Compose the refinement isomorphisms with the descent isomorphisms. Associativity
+   and the two differential compatibility equations prove the final compatibility. -/
 theorem finite_flat_proper_support_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]
@@ -84,6 +118,35 @@ theorem finite_flat_proper_support_descent
             (T' := Over.mk (c.π.app (op i)))
             (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (Gj.d n m) ≫
               (e m).hom = (e n).hom ≫ G.d n m := by
-  sorry
+  have hG_qc : ∀ n : ℤ, (G.X n).IsQuasicoherent := by
+    intro n
+    have := hG_fp n
+    infer_instance
+  obtain ⟨j, hij, H, hH_bounded, hH_fp, _, e, he⟩ :=
+    exists_finitelyPresented_complex_of_limit R c hc i f G hG_bounded hG_fp hG_qc
+  have hH_flat : ∀ n : ℤ,
+      ((Scheme.Modules.moduleBaseChange f
+        (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+        (T' := Over.mk (c.π.app (op i)))
+        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (H.X n)).IsFlatOver
+        (pullback.snd f (c.π.app (op i))) := by
+    intro n
+    exact flatOver_of_iso _ (e n) (hG_flat n)
+  have hH_support : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver
+      (pullback.snd f (c.π.app (op i)))
+      ((Scheme.Modules.moduleBaseChange f
+        (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+        (T' := Over.mk (c.π.app (op i)))
+        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (H.X n)) := by
+    intro n
+    exact supportProper_of_iso _ (e n) (hG_support n)
+  obtain ⟨k, hjk, K, hK_bounded, hK_fp, hK_flat, hK_support, e', he'⟩ :=
+    exists_chosen_complex_flat_proper_refinement R c hc i f j hij H
+      hH_bounded hH_fp hH_flat hH_support
+  refine ⟨k, hij.trans hjk, K, hK_bounded, hK_fp, hK_flat, hK_support,
+    (fun n ↦ e' n ≪≫ e n), ?_⟩
+  intro n m
+  change _ ≫ ((e' m).hom ≫ (e m).hom) = ((e' n).hom ≫ (e n).hom) ≫ _
+  rw [← Category.assoc, he', Category.assoc, he, ← Category.assoc]
 
 end AlgebraicGeometry

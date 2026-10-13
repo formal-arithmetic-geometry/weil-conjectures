@@ -24,36 +24,38 @@
  ],
  "proof": [
   {
-   "text": "Apply the bounded-complex descent statement to the finitely presented scheme X_i and the bounded complex G^\\bullet. After increasing i, obtain a bounded complex G_i^\\bullet of finitely presented O_{X_i}-modules flat over Spec(R_i), together with an isomorphism from its base change to G^\\bullet.",
+   "text": "Finite presentation implies quasi-coherence by the existing Mathlib instance. Apply exists_finitelyPresented_complex_of_limit to G, obtaining a stage j and bounded finitely presented H with termwise isomorphisms e commuting with its differentials.",
    "uses": [
-    "lem-pc-flat-bounded-complex-descent"
+    "lem-pc-fp-complex-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemmas 32.10.2 and 32.10.4, Tags 01ZR and 05LY"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply eventual proper-support descent to each already chosen term of G_i^\\bullet. Each term is finitely presented and its base change has proper support by hypothesis. Since only finitely many terms are nonzero, directedness gives one later stage where every base-changed term has proper support. Base-changing the whole complex retains its differentials, boundedness, finite presentation, flatness, and identification with G^\\bullet.",
+   "text": "Transfer flatness to the limit pullback of H: evaluate e on each affine open, restrict its linear equivalence along the base ring map and apply Module.Flat.of_linearEquiv. Transfer proper support using the additive stalk equivalences induced by e, which preserve subsingleton stalks.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the common flat proper refinement theorem to this particular H, producing a later bounded finitely presented K with flat terms and proper support. It identifies the limit pullback of K with that of H, and not directly with G.",
    "uses": [
-    "lem-pc-proper-support-descent"
+    "lem-pc-chosen-complex-flat-proper-refinement"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex; literature/stacks-project/cohomology.tex",
-    "place": "Lemma 32.13.5, Tag 081G, together with Cohomology of Schemes Lemma 30.26.7"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Compose the refinement termwise isomorphisms with e. The displayed differential equation follows by associativity from the refinement equation and the equation for e. The new index is above i by transitivity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-flat-bounded-complex-descent",
-  "lem-pc-proper-support-descent"
+  "lem-pc-fp-complex-descent",
+  "lem-pc-chosen-complex-flat-proper-refinement"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/limits.tex; literature/stacks-project/cohomology.tex",
-  "place": "Tags 01ZR, 05LY, 081G and Cohomology Lemma 30.26.7"
+  "by": "worker",
+  "document": "Stacks Project, Tags 01ZR, 05LY, 081G and 0CYS",
+  "place": "Finite-presentation descent followed by common flat proper refinement of the chosen model; W4 Lean composition proof"
  },
  "mathlib_searches": [
   {
@@ -138,5 +140,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T082424-L-1651614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
