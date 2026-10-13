@@ -24,6 +24,8 @@ open scoped TensorProduct BigOperators
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Affine pullback sections are finite sums of section-ring multiples of unit sections.
 Source: Stacks Project, Tags 01I9 and 01IA (affine pullback), 0097 (restriction).
 (blueprint: lem-pc-coefficient-target-section-generators).
@@ -59,7 +61,75 @@ theorem coefficientTarget_section_generators
         y = ∑ i, a i •
           (M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ B ≤ W)).op
             (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW (s i))) := by
-  sorry
+  classical
+  dsimp only
+  let V := (f ⁻¹ᵁ U).ι ''ᵁ Z
+  let I := W ⊓ f' ⁻¹ᵁ B
+  have hV : IsAffineOpen V := hZ.image_of_isOpenImmersion (f ⁻¹ᵁ U).ι
+  obtain ⟨_, ha⟩ := finiteAffineCech_intersection_baseChange f U hU Z hZ g g' f' sq
+  have : IsAffineHom (W.ι ≫ f') := by rw [hW]; exact ha
+  have hI : IsAffineOpen I := by
+    have h := (hB.preimage (W.ι ≫ f')).image_of_isOpenImmersion W.ι
+    simpa only [Scheme.Hom.comp_preimage, Scheme.Hom.image_preimage_eq_opensRange_inf,
+      Scheme.Opens.opensRange_ι, I] using h
+  have hIV : I ≤ g' ⁻¹ᵁ V := by rw [← hW]; exact inf_le_left
+  let adj := Classical.choose (exists_tensorPullbackAdjunction g')
+  let e := (adj.leftAdjointUniq (pullbackPushforwardAdjunction g')).app F
+  let er := F.restrictAppIso (f ⁻¹ᵁ U).ι Z
+  let : Algebra Γ(X, V) Γ(X', I) := (g'.appLE V I hIV).hom.toAlgebra
+  obtain ⟨c, hc, _, ht, _⟩ := exists_tensorPullback_affine_sections
+    g' ⟨V, hV⟩ ⟨I, hI⟩ hIV
+  have hunit (s : Γ(F, V)) :
+      e.hom.app (g' ⁻¹ᵁ V) ((adj.unit.app F).app V s) =
+        ((pullbackPushforwardAdjunction g').unit.app F).app V s := by
+    have h := adj.unit_leftAdjointUniq_hom_app (pullbackPushforwardAdjunction g') F
+    exact congrArg (fun q ↦ q.app V s) h
+  have hgen (s : Γ(F, V)) (a : Γ(X', I)) :
+      e.hom.app I (c F inferInstance (s ⊗ₜ[Γ(X, V)] a)) =
+        a • (((pullback g').obj F).presheaf.map (homOfLE inf_le_left).op
+          (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW (er.inv s))) := by
+    rw [ht, Hom.app_smul]
+    congr 1
+    have hn := e.hom.val.naturality (homOfLE hIV).op
+    have hn' := congrArg (fun q ↦ q ((adj.unit.app F).app V s)) hn
+    simp only [ConcreteCategory.comp_apply] at hn'
+    change e.hom.app I
+        (((tensorPullback g').obj F).presheaf.map (homOfLE hIV).op
+          ((adj.unit.app F).app V s)) = _
+    change e.hom.app I
+        (((tensorPullback g').obj F).presheaf.map (homOfLE hIV).op
+          ((adj.unit.app F).app V s)) =
+        ((pullback g').obj F).presheaf.map (homOfLE hIV).op
+          (e.hom.app (g' ⁻¹ᵁ V) ((adj.unit.app F).app V s)) at hn'
+    rw [hn', hunit]
+    dsimp only [coefficientPullbackGenerator]
+    have her : er.hom (er.inv s) = s := by
+      exact ConcreteCategory.comp_apply er.inv er.hom s |>.symm.trans
+        (by simp)
+    rw [her]
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+    rfl
+  intro y
+  obtain ⟨t, ht'⟩ := (hc F inferInstance).2 (e.inv.app I y)
+  have hy : e.hom.app I (c F inferInstance t) = y := by
+    rw [ht']
+    exact (ConcreteCategory.comp_apply (e.inv.app I) (e.hom.app I) y).symm.trans
+      (by simp [← Hom.comp_app])
+  rw [← hy]
+  clear ht' hy y
+  induction t using TensorProduct.induction_on with
+  | zero =>
+    refine ⟨0, Fin.elim0, Fin.elim0, ?_⟩
+    simp
+  | tmul s a =>
+    refine ⟨1, fun _ ↦ a, fun _ ↦ er.inv s, ?_⟩
+    simpa using hgen s a
+  | add t t' h h' =>
+    obtain ⟨n, a, s, hs⟩ := h
+    obtain ⟨n', a', s', hs'⟩ := h'
+    refine ⟨n + n', Fin.addCases a a', Fin.addCases s s', ?_⟩
+    simp only [map_add, hs, hs', Fin.sum_univ_add, Fin.addCases_left,
+      Fin.addCases_right]
 
 end
 end AlgebraicGeometry.Scheme.Modules

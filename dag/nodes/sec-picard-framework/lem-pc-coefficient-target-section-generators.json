@@ -18,23 +18,22 @@
  },
  "proof": [
   {
-   "text": "The base-change affineness theorem makes W -> Tprime affine. Its inverse image of the affine open B is I, hence I is affine. The image V of Z in X is affine, being isomorphic to Z.",
+   "text": "The affine intersection base-change theorem gives that W -> Tprime is affine. Pull back the affine open B to W, then take its image under the open immersion W -> Xprime. The image-preimage identity identifies this affine open with I = W intersect fprime inverse image B. The open V = Y.ι(Z) is affine by preservation of affine opens under open immersions.",
    "uses": [
     "lem-pc-finite-affine-cech-intersection-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exists_tensorPullback_affine_sections to gprime, the affine open V, the affine open I, and F. The inclusion I <= gprime inverse image V follows from hW. Quasi-coherence is the supplied hypothesis on F. Surjectivity and tensor induction express every section as a finite sum of Gamma(I,O)-multiples of unit images.",
+   "text": "Apply exists_tensorPullback_affine_sections to gprime, the affine source open V and affine target open I, with I <= gprime inverse image V following from hW. Use the surjectivity and pure-tensor formula of its comparison c for F.",
    "uses": [
     "lem-weil-pbc-module-pullback-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Identify tensorPullback with the standard pullback as left adjoints to the same pushforward, using the adjoint-uniqueness unit equation. Identify sections on V with sections on Z by F.restrictAppIso. Naturality and composition of restrictions give exactly u(s); additive transport preserves the finite-sum equation.",
+   "text": "Compare tensorPullback gprime with pullback gprime via Adjunction.leftAdjointUniq and use unit_leftAdjointUniq_hom_app. Naturality of the comparison with restriction transports the pure-tensor formula to the standard pullback. The inverse of F.restrictAppIso identifies a section on V with a section on Z; the inverse-hom identity and composition of restrictions identify its generator with coefficientPullbackGenerator restricted to I. Take a tensor preimage of the inverse-comparison image of y. Tensor induction gives the desired finite sums: the zero case uses Fin 0, a pure tensor uses Fin 1, and addition concatenates the coefficient and source-section families with Fin.addCases. Fin.sum_univ_add verifies the sum equation.",
    "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
     "lem-weil-pbc-conjugate-iso-unit-equation",
     "lem-pc-finite-affine-cech-coefficient-comparison-map"
    ],
@@ -44,7 +43,6 @@
  "proof_deps": [
   "lem-pc-finite-affine-cech-intersection-base-change",
   "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-pc-finite-affine-cech-coefficient-comparison-map"
  ],
@@ -52,7 +50,7 @@
   "by": "worker",
   "document": "Stacks Project",
   "place": "Tags 02KG, 01I9, 01IA and 0097",
-  "note": "V3 second reading: finite target-ring generation only; independent of scalar-span calculation."
+  "note": "S4: direct transport by uniqueness of left adjoints, restriction section isomorphism, and tensor induction; no open-immersion pullback comparison needed."
  },
  "mathlib_searches": [
   {
@@ -137,10 +135,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T125449-L-3875905",
-  "kind": "interface",
+  "landing": "20261013T141533-L-381300",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
