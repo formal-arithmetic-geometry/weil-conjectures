@@ -115,9 +115,14 @@ theorem derivedBaseChange_mayerVietoris_connectingSquare
       mvBaseChangeOpenMap f f' g g' hsq.w K K' ψ (U ⊓ V) ≫
         G.map δ' ≫ (letI := csG; G.commShiftIso (1 : ℤ)).hom.app K'
  := by
-  obtain ⟨δ, δ', csF, csG, hT, hT', hF, hG⟩ :=
-    mvBoundary_data f f' g g' hsq K K' U V hU hV hUV hcover hK hK' ψ
-  refine ⟨δ, δ', csF, csG, hT, hT', hF, hG, ?_⟩
-  exact mvBoundary_equation f f' g g' hsq K K' U V hU hV hUV hcover hK hK' ψ δ δ' csF csG hT hT'
+  let δ := mvCanonicalBoundary X U V (U ⊓ V) rfl hcover K
+  let δ' := mvCanonicalBoundary X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V))
+    (Scheme.Hom.preimage_inf g').symm
+    (by rw [← Scheme.Hom.preimage_sup, hcover, Scheme.Hom.preimage_top]) K'
+  obtain ⟨hT, hT', hF, hG⟩ :=
+    mvBoundary_canonical_data f f' g g' hsq K K' U V hU hV hUV hcover hK hK' ψ
+  refine ⟨δ, δ', mvCanonicalSourceShift f g, mvCanonicalTargetShift f',
+    hT, hT', hF, hG, ?_⟩
+  exact mvBoundary_equation f f' g g' hsq K K' U V hU hV hUV hcover hK hK' ψ
 
 end AlgebraicGeometry

@@ -1,0 +1,141 @@
+{
+ "id": "def-pc-rf-mv-canonical-ses-shifts",
+ "kind": "definition",
+ "title": "Concrete SES boundaries and adjunction-compatible shifts",
+ "statement": "For schemes with derived module categories, use the fixed functorial K-injective representative and resolution isomorphism of [def-pc-derived-mayer-vietoris-canonical-data]. For a two-open cover U,V and an overlap W identified with U intersection V, construct the boundary as the inverse explicit open comparison, followed by the boundary of the concrete cover SES, followed by the shifted resolution isomorphism. Normalize the open comparison to the pinned adjunctions of [def-pc-rf-mv-base-change-components]. For each morphism g, equip derived pullback with the unique shift structure whose mate under that pinned adjunction is the existing right-derived direct-image shift. Its unit and counit commute with shifts; the Hom equivalence commutes with shifts; pullback is triangulated. Compose this shift with the direct-image shift to define the source shift, and use the existing direct-image shift on the target. These are constructions, not arbitrary choices of boundaries or shift data.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (the concrete cover SES), 08HY (pinned adjunction mate), 079W; Mathlib Shift.Adjunction and Triangulated.Adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-rf-mv-base-change-components"
+ ],
+ "proof": [
+  {
+   "text": "Compose the explicit open-image computation isomorphism with the open derived functor applied to the fixed resolution isomorphism. Transport triangleOfSESδ by its inverse and by the shifted resolution isomorphism. Equality of overlaps is handled by equality induction.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "def-pc-open-image-complex-comparison-iso",
+    "lem-pc-kinjective-mayer-vietoris-exact",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Adjunction.leftAdjointCommShift to the pinned adjunction, holding the actual right-derived direct-image shift fixed. commShift_of_rightAdjoint proves unit/counit compatibility. Expand homEquiv_unit and apply shift_unit_app and naturality of the right-adjoint shift to prove the explicit transposition identity. Apply isTriangulated_leftAdjoint, and compose the resulting source shifts.",
+   "uses": [
+    "def-pc-rf-mv-base-change-components",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-open-image-complex-comparison-iso",
+  "lem-pc-kinjective-mayer-vietoris-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-pc-rf-mv-base-change-components",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T4",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (the concrete cover SES), 08HY (pinned adjunction mate), 079W; Mathlib Shift.Adjunction and Triangulated.Adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived base change natural transformation commutes with shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 generic shift-coherence declarations; none identifies the scheme Mayer--Vietoris overlap mate.",
+   "date": "2026-10-13",
+   "verdict": "use generic coherence and project pinned mate theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris boundary morphism is natural under derived pullback",
+   "results": "8 site MayerVietorisSquare sheaf-condition and short-complex declarations, no unbounded derived scheme boundary statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSESδ_naturality|shift_unit_app",
+   "results": "Mathlib DerivedCategory.ShortExact and Shift.Adjunction give SES naturality and adjunction shift identities. Project PinnedBaseChangeMateShifts gives the normalized base-change shift comparison.",
+   "date": "2026-10-13",
+   "verdict": "use existing declarations; isolate remaining cover-mate identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction step: canonical relative Mayer--Vietoris connecting map and shift compatibility",
+   "via": [
+    "lem-pc-rf-mv-base-change-connecting-square",
+    "lem-pc-rf-mv-base-change-connecting-square-equation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalData",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeMayerVietorisCanonicalData.lean",
+  "declaration": "AlgebraicGeometry.mvCanonicalBoundary",
+  "declarations": [
+   "AlgebraicGeometry.mvCanonicalOpenComparison",
+   "AlgebraicGeometry.mvCanonicalBoundary",
+   "AlgebraicGeometry.mvCanonicalPullbackShift",
+   "AlgebraicGeometry.mvCanonicalPullbackShift_compatible",
+   "AlgebraicGeometry.mvCanonicalHomEquiv_shift",
+   "AlgebraicGeometry.mvCanonicalPullbackShift_triangulated",
+   "AlgebraicGeometry.mvCanonicalSourceShift",
+   "AlgebraicGeometry.mvCanonicalTargetShift"
+  ],
+  "statement": "def mvCanonicalBoundary (X : Scheme.{u}) (U V W : X.Opens) (hW : U ⊓ V = W) (hcover : U ⊔ V = ⊤) (K : schemeDerivedCategory X) : (schemeDerivedDirectImage W.ι).obj ((schemeOpenRestriction X W).mapDerivedCategory.obj K) ⟶ K⟦(1 : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-940bd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T222417-L-1227906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-940bd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T222417-L-1227906",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; original Boundary fails against changed dependencies while adapted Boundary compiles; signatures, imports, forced edits, nodes, report, and sole named sorry agree with the packet and review rules."
+ }
+}

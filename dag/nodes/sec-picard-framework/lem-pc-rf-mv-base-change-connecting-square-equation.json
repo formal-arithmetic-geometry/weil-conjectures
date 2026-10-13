@@ -2,43 +2,42 @@
  "id": "lem-pc-rf-mv-base-change-connecting-square-equation",
  "kind": "lemma",
  "title": "Compatibility equation for canonical Mayer--Vietoris boundaries",
- "statement": "Under the hypotheses of [lem-pc-rf-mv-base-change-connecting-square], for the canonical boundaries, shift structures, and distinguished cover triangles supplied by [lem-pc-rf-mv-base-change-connecting-square-data], the derived base-change map intertwines the two connecting morphisms after the shift commutation isomorphisms: the composite from the source overlap boundary through base change and the target morphism equals the target overlap comparison followed by the target boundary and shift isomorphism.",
+ "statement": "For a cartesian square of schemes with affine bases and quasi-compact quasi-separated f, and quasi-coherent derived objects K,K prime with psi:Lg prime star K to K prime, take a compact two-open cover with compact overlap. Use only the explicit SES boundaries and adjunction-mate shift structures constructed in [def-pc-rf-mv-canonical-ses-shifts], and the maps of [def-pc-rf-mv-base-change-components]. Then Lg star Rf star of the source SES boundary, followed by its specified composite shift and the shift of base change followed by Rf prime star(psi), equals the overlap comparison followed by Rf prime star of the target SES boundary and its specified right-derived shift. The boundary and shift data are fixed constructions, not arbitrary parameters subject to distinguishedness.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tags 08BV, 08HY and 0DJ9; naturality of connecting morphisms and adjunction-mate calculation"
  },
  "stmt_deps": [
-  "lem-pc-rf-mv-base-change-connecting-square",
-  "lem-pc-rf-mv-base-change-connecting-square-data"
+  "def-pc-rf-mv-canonical-ses-shifts",
+  "def-pc-rf-mv-base-change-components"
  ],
  "proof": [
   {
-   "text": "Represent the canonical Mayer--Vietoris boundaries by the short-exact K-injective presentations and apply naturality of the connecting morphism under the restricted chain map, using [lem-pc-derived-mayer-vietoris-functorial].",
+   "text": "Apply mvCanonicalBaseChange_shift to the overlap object, the explicitly constructed SES boundary a, n=1 and psi. This rewrites the left side as overlap base change followed by Rf prime star of the pullback boundary composite and the target shift.",
    "uses": [
-    "lem-pc-derived-mayer-vietoris-functorial",
-    "lem-pc-kinjective-mayer-vietoris-presentation"
+    "lem-pc-rf-mv-canonical-base-change-shift"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the direct-image compositions and overlap comparison with the pinned adjunction mates, using [lem-pc-derived-direct-image-composition] and [lem-pc-ringed-spaces-derived-pullback-composition]; the resulting equality is the displayed compatibility equation.",
+   "text": "Rewrite that pullback boundary composite by mvCanonicalBoundary_pullback. Expand Rf prime star.map_comp and reassociate; the first two factors are definitionally mvBaseChangeOpenMap. This gives the right side.",
    "uses": [
-    "lem-pc-derived-direct-image-composition",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-rf-mv-canonical-boundary-pullback",
+    "def-pc-rf-mv-base-change-components"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-mayer-vietoris-functorial",
-  "lem-pc-kinjective-mayer-vietoris-presentation",
-  "lem-pc-derived-direct-image-composition",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-rf-mv-canonical-base-change-shift",
+  "lem-pc-rf-mv-canonical-boundary-pullback",
+  "def-pc-rf-mv-base-change-components"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
+  "agent": "T4",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 08BV, 08HY and 0DJ9"
+  "place": "Tags 08BV, 08HY and 0DJ9: canonical shift naturality followed by the cover pullback boundary square"
  },
  "mathlib_searches": [
   {
@@ -89,9 +88,12 @@
   "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData",
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeMayerVietorisBoundaryData.lean",
   "declaration": "AlgebraicGeometry.mvBoundary_equation",
-  "statement": "theorem mvBoundary_equation {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S'] (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) [QuasiCompact f] [QuasiSeparated f] (hsq : IsPullback g' f' f g) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X') (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K') (ψ : (derivedPullback g').obj K ⟶ K') (δ : (schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj K) ⟶ K⟦(1 : ℤ)⟧) (δ' : (schemeDerivedDirectImage (g' ⁻¹ᵁ (U ⊓ V)).ι).obj ((schemeOpenRestriction X' (g' ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.obj K') ⟶ K'⟦(1 : ℤ)⟧) (csF : (schemeDerivedDirectImage f ⋙ derivedPullback g).CommShift ℤ) (csG : (schemeDerivedDirectImage f').CommShift ℤ) (hT : mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left) (homOfLE inf_le_right) (mvOpenRestrictionAdjunction X U) (mvOpenRestrictionAdjunction X V) (mvOpenRestrictionAdjunction X (U ⊓ V)) K δ ∈ distTriang (schemeDerivedCategory X)) (hT' : mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V)) ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U))) ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V))) (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ U)) (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ V)) (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ (U ⊓ V))) K' δ' ∈ distTriang (schemeDerivedCategory X')) : (schemeDerivedDirectImage f ⋙ derivedPullback g).map δ ≫ (letI := csF; (schemeDerivedDirectImage f ⋙ derivedPullback g).commShiftIso (1 : ℤ)).hom.app K ≫ (schemeDerivedBaseChangeMap f f' g g' hsq.w K ≫ (schemeDerivedDirectImage f').map ψ)⟦(1 : ℤ)⟧' = mvBaseChangeOpenMap f f' g g' hsq.w K K' ψ (U ⊓ V) ≫ (schemeDerivedDirectImage f').map δ' ≫ (letI := csG; (schemeDerivedDirectImage f').commShiftIso (1 : ℤ)).hom.app K'",
+  "declarations": [
+   "AlgebraicGeometry.mvBoundary_equation"
+  ],
+  "statement": "theorem mvBoundary_equation {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S'] (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) [QuasiCompact f] [QuasiSeparated f] (hsq : IsPullback g' f' f g) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X') (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K') (ψ : (derivedPullback g').obj K ⟶ K') : let δ := mvCanonicalBoundary X U V (U ⊓ V) rfl hcover K let δ' := mvCanonicalBoundary X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V)) (Scheme.Hom.preimage_inf g').symm (by rw [← Scheme.Hom.preimage_sup, hcover, Scheme.Hom.preimage_top]) K' let csF := mvCanonicalSourceShift f g let csG := mvCanonicalTargetShift f' (schemeDerivedDirectImage f ⋙ derivedPullback g).map δ ≫ (letI := csF; (schemeDerivedDirectImage f ⋙ derivedPullback g).commShiftIso (1 : ℤ)).hom.app K ≫ (schemeDerivedBaseChangeMap f f' g g' hsq.w K ≫ (schemeDerivedDirectImage f').map ψ)⟦(1 : ℤ)⟧' = mvBaseChangeOpenMap f f' g g' hsq.w K K' ψ (U ⊓ V) ≫ (schemeDerivedDirectImage f').map δ' ≫ (letI := csG; (schemeDerivedDirectImage f').commShiftIso (1 : ℤ)).hom.app K'",
   "branch": "sheaf-dag",
-  "by": "K3",
+  "by": "T4",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -107,11 +109,56 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "X-940bd",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T155937-L-1303796",
+  "landing": "20261013T222417-L-1227906",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile cleanly; original Boundary fails against changed dependencies while adapted Boundary compiles; signatures, imports, forced edits, nodes, report, and sole named sorry agree with the packet and review rules."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "T4 stage 2",
+  "old_statement": "Under the hypotheses of [lem-pc-rf-mv-base-change-connecting-square], for the canonical boundaries, shift structures, and distinguished cover triangles supplied by [lem-pc-rf-mv-base-change-connecting-square-data], the derived base-change map intertwines the two connecting morphisms after the shift commutation isomorphisms: the composite from the source overlap boundary through base change and the target morphism equals the target overlap comparison followed by the target boundary and shift isomorphism.",
+  "what": "The old Lean theorem universally quantified arbitrary boundaries and CommShift structures. Twisting only the source degree-n shift by (-1)^n preserved all old hypotheses and negated the nonzero characteristic-zero P1 O(-2) boundary. Replace those parameters by concrete SES boundaries and unique adjunction-mate shifts; prove their construction, distinguishedness, adjunction compatibility and Hom-equivalence shift equation. The original consuming existential theorem retains its statement and uses these specified data.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tags 08BV, 08HY and 0DJ9; naturality of connecting morphisms and adjunction-mate calculation"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-rf-mv-base-change-connecting-square",
+    "holds": true,
+    "note": "The cited use concerns canonical boundaries. The construction now pins them explicitly; the connecting-square consumer is adapted with its unchanged existential statement."
+   }
+  ],
+  "old_stmt_deps": [
+   "lem-pc-rf-mv-base-change-connecting-square",
+   "lem-pc-rf-mv-base-change-connecting-square-data"
+  ],
+  "old_proof": [
+   {
+    "text": "Represent the canonical Mayer--Vietoris boundaries by the short-exact K-injective presentations and apply naturality of the connecting morphism under the restricted chain map, using [lem-pc-derived-mayer-vietoris-functorial].",
+    "uses": [
+     "lem-pc-derived-mayer-vietoris-functorial",
+     "lem-pc-kinjective-mayer-vietoris-presentation"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Identify the direct-image compositions and overlap comparison with the pinned adjunction mates, using [lem-pc-derived-direct-image-composition] and [lem-pc-ringed-spaces-derived-pullback-composition]; the resulting equality is the displayed compatibility equation.",
+    "uses": [
+     "lem-pc-derived-direct-image-composition",
+     "lem-pc-ringed-spaces-derived-pullback-composition"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-derived-mayer-vietoris-functorial",
+   "lem-pc-kinjective-mayer-vietoris-presentation",
+   "lem-pc-derived-direct-image-composition",
+   "lem-pc-ringed-spaces-derived-pullback-composition"
+  ]
  }
 }

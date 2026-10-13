@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-rf-mv-canonical-boundary-pullback",
+ "kind": "lemma",
+ "title": "Pullback naturality of the canonical cover SES boundary",
+ "statement": "For any morphism g prime:X prime to X of schemes with derived module categories, any two-open cover X=U union V, any K,K prime and psi:Lg prime star K to K prime, use exactly the concrete SES boundaries and adjunction-compatible shifts of [def-pc-rf-mv-canonical-ses-shifts]. On X prime, the image of the source boundary under Lg prime star, followed by its constructed shift and psi[1], equals the canonical overlap base-change map for the open inclusion followed by the target SES boundary. The overlap map is the pinned base-change comparison followed by the inverse pullback/open-restriction comparison and restriction of psi, as constructed in [def-pc-rf-mv-base-change-components]. No subsequent f prime direct image or comparison on S prime occurs.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV and 08HY; Tag 0DJ9 induction diagram, the boundary square before applying the subsequent direct image"
+ },
+ "stmt_deps": [
+  "def-pc-rf-mv-canonical-ses-shifts",
+  "def-pc-rf-mv-base-change-components"
+ ],
+ "proof": [
+  {
+   "text": "Transpose psi under the pinned g prime adjunction. Represent its transpose by a chain map into a K-injective replacement of the termwise direct image of the fixed target resolution. Restrict this map on the two opens and overlap to obtain a morphism of concrete short exact cover sequences. The target sequence is split in each degree because its first term is injective; Its first term is the fixed K-injective resolution. Each open restriction is K-injective by [lem-sc-derived-k-injective-restrict-open], and its open direct image is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], since open restriction is exact. The middle term is a finite biproduct of these K-injective complexes, hence K-injective by additivity of Hom from acyclic complexes. The termwise-split SES theorem identifies its direct-image boundary with the right-derived boundary using the existing shift.",
+   "uses": [
+    "def-pc-rf-mv-canonical-ses-shifts",
+    "lem-pc-derived-functor-termwise-split-ses-triangle",
+    "lem-pc-kinjective-mayer-vietoris-exact",
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply triangleOfSESδ_naturality to this morphism of sequences and transport using the fixed resolution and open comparisons. The unit and counit identities of the open adjunctions identify the overlap map with the right-adjoint mate of the pinned pullback/open comparison. Compatibility of composition mates is normalized by the same left-derived counits and right-derived units, so it yields the displayed overlap map, not a freely chosen comparison.",
+   "uses": [
+    "def-pc-rf-mv-canonical-ses-shifts",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-pc-rf-mv-base-change-components",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the transported boundary equation back under the pinned g prime adjunction. mvCanonicalHomEquiv_shift supplies exactly the shift used in the conclusion. This completes the boundary square on X prime; later application of Rf prime star is deliberately absent.",
+   "uses": [
+    "def-pc-rf-mv-canonical-ses-shifts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-rf-mv-canonical-ses-shifts",
+  "lem-pc-derived-functor-termwise-split-ses-triangle",
+  "lem-pc-kinjective-mayer-vietoris-exact",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-pc-rf-mv-base-change-components",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T4",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV and 08HY; Tag 0DJ9 induction diagram, the boundary square before applying the subsequent direct image"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived base change natural transformation commutes with shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 generic shift-coherence declarations; none identifies the scheme Mayer--Vietoris overlap mate.",
+   "date": "2026-10-13",
+   "verdict": "use generic coherence and project pinned mate theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris boundary morphism is natural under derived pullback",
+   "results": "8 site MayerVietorisSquare sheaf-condition and short-complex declarations, no unbounded derived scheme boundary statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSESδ_naturality|shift_unit_app",
+   "results": "Mathlib DerivedCategory.ShortExact and Shift.Adjunction give SES naturality and adjunction shift identities. Project PinnedBaseChangeMateShifts gives the normalized base-change shift comparison.",
+   "date": "2026-10-13",
+   "verdict": "use existing declarations; isolate remaining cover-mate identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction step: canonical relative Mayer--Vietoris connecting map and shift compatibility",
+   "via": [
+    "lem-pc-rf-mv-base-change-connecting-square",
+    "lem-pc-rf-mv-base-change-connecting-square-equation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeMayerVietorisCanonicalPullback.lean",
+  "declaration": "AlgebraicGeometry.mvCanonicalBoundary_pullback",
+  "declarations": [
+   "AlgebraicGeometry.mvCanonicalBoundary_pullback"
+  ],
+  "statement": "theorem mvCanonicalBoundary_pullback {X X' : Scheme.{u}} (g' : X' ⟶ X) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X') (ψ : (derivedPullback g').obj K ⟶ K') (U V : X.Opens) (hcover : U ⊔ V = ⊤) : letI := mvCanonicalPullbackShift g' let δ := mvCanonicalBoundary X U V (U ⊓ V) rfl hcover K let δ' := mvCanonicalBoundary X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V)) (Scheme.Hom.preimage_inf g').symm (by rw [← Scheme.Hom.preimage_sup, hcover, Scheme.Hom.preimage_top]) K' (derivedPullback g').map δ ≫ ((derivedPullback g').commShiftIso (1 : ℤ)).hom.app K ≫ ψ⟦(1 : ℤ)⟧' = (schemeDerivedBaseChangeMap (U ⊓ V).ι (g' ⁻¹ᵁ (U ⊓ V)).ι g' (g'.resLE (U ⊓ V) (g' ⁻¹ᵁ (U ⊓ V)) le_rfl) (Scheme.Hom.resLE_comp_ι g' le_rfl) ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj K) ≫ (schemeDerivedDirectImage (g' ⁻¹ᵁ (U ⊓ V)).ι).map ((mvPullbackOpenRestrictionIso g' (U ⊓ V)).inv.app K ≫ (schemeOpenRestriction X' (g' ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.map ψ)) ≫ δ'",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-940bd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T222417-L-1227906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-940bd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T222417-L-1227906",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; original Boundary fails against changed dependencies while adapted Boundary compiles; signatures, imports, forced edits, nodes, report, and sole named sorry agree with the packet and review rules."
+ }
+}

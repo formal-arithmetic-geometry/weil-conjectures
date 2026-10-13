@@ -15,24 +15,29 @@
  ],
  "proof": [
   {
-   "text": "Choose K-injective representatives with injective terms, apply the short-exact Mayer--Vietoris presentation to each cover, and transport the connecting morphisms from triangleOfSES across the comparison isomorphisms. The derived pullback and direct-image triangulated structures preserve distinguished triangles.",
+   "text": "Use the fixed canonical boundaries and shifts of def-pc-rf-mv-canonical-ses-shifts. Prove the unit and nested restriction identities for the explicit open comparisons transported along schemeMVResolutionIso, by the localized comparison lemmas and naturality of the pinned adjunctions. The localization biproduct comparison then identifies the first two SES arrows. Inverse cancellation identifies the third. Triangle.isoMk and triangleOfSES_distinguished prove both specified cover triangles distinguished. Inverse image preserves the intersection and cover, and inclusions are unique. Adjunction-compatible pullback is triangulated by mvCanonicalPullbackShift_triangulated; direct image is triangulated for its existing right-derived shifts. Hence both specified image triangles are distinguished. Package these exact choices to prove the original existential mvBoundary_data.",
    "uses": [
-    "lem-pc-kinjective-mayer-vietoris-presentation",
-    "lem-pc-derived-mayer-vietoris-functorial",
+    "def-pc-rf-mv-canonical-ses-shifts",
+    "lem-pc-open-image-complex-comparison-unit",
+    "lem-pc-open-image-complex-comparison-restriction",
+    "lem-weil-pbc-complex-ses-triangle",
     "lem-pc-right-derived-functor-triangulated"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kinjective-mayer-vietoris-presentation",
-  "lem-pc-derived-mayer-vietoris-functorial",
+  "def-pc-rf-mv-canonical-ses-shifts",
+  "lem-pc-open-image-complex-comparison-unit",
+  "lem-pc-open-image-complex-comparison-restriction",
+  "lem-weil-pbc-complex-ses-triangle",
   "lem-pc-right-derived-functor-triangulated"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
+  "agent": "T4",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 08BV and 0DJ9"
+  "place": "Tag 08BV concrete SES, Tag 0DJ9; fixed comparisons and compatible adjunction shifts"
  },
  "mathlib_searches": [
   {
@@ -83,9 +88,13 @@
   "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData",
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeMayerVietorisBoundaryData.lean",
   "declaration": "AlgebraicGeometry.mvBoundary_data",
+  "declarations": [
+   "AlgebraicGeometry.mvBoundary_data",
+   "AlgebraicGeometry.mvBoundary_canonical_data"
+  ],
   "statement": "theorem mvBoundary_data {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S'] (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) [QuasiCompact f] [QuasiSeparated f] (hsq : IsPullback g' f' f g) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X') (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K') (ψ : (derivedPullback g').obj K ⟶ K') : ∃ (δ : (schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj K) ⟶ K⟦(1 : ℤ)⟧) (δ' : (schemeDerivedDirectImage (g' ⁻¹ᵁ (U ⊓ V)).ι).obj ((schemeOpenRestriction X' (g' ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.obj K') ⟶ K'⟦(1 : ℤ)⟧) (csF : (schemeDerivedDirectImage f ⋙ derivedPullback g).CommShift ℤ) (csG : (schemeDerivedDirectImage f').CommShift ℤ), let T := mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left) (homOfLE inf_le_right) (mvOpenRestrictionAdjunction X U) (mvOpenRestrictionAdjunction X V) (mvOpenRestrictionAdjunction X (U ⊓ V)) K δ let T' := mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V)) ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U))) ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V))) (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ U)) (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ V)) (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ (U ⊓ V))) K' δ' T ∈ distTriang (schemeDerivedCategory X) ∧ T' ∈ distTriang (schemeDerivedCategory X') ∧ (@Functor.mapTriangle _ _ _ _ _ _ (schemeDerivedDirectImage f ⋙ derivedPullback g) csF).obj T ∈ distTriang (schemeDerivedCategory S') ∧ (@Functor.mapTriangle _ _ _ _ _ _ (schemeDerivedDirectImage f') csG).obj T' ∈ distTriang (schemeDerivedCategory S')",
   "branch": "sheaf-dag",
-  "by": "K3",
+  "by": "T4",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -101,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
+  "reviewer": "X-940bd",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T155937-L-1303796",
+  "landing": "20261013T222417-L-1227906",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile cleanly; original Boundary fails against changed dependencies while adapted Boundary compiles; signatures, imports, forced edits, nodes, report, and sole named sorry agree with the packet and review rules."
  }
 }

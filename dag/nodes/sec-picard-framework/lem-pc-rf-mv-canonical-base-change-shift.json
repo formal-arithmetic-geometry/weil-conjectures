@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-rf-mv-canonical-base-change-shift",
+ "kind": "lemma",
+ "title": "Naturality with shift of the canonical base-change map",
+ "statement": "Use the boundaries and shift structures fixed by [def-pc-rf-mv-canonical-ses-shifts], but no cover or SES. For any commutative square f,f prime,g,g prime, any a:A to K[n], and any psi:Lg prime star K to K prime, the composite Lg star Rf star(a), the composite source shift, and the shift of base change at K followed by Rf prime star(psi), equals base change at A followed by Rf prime star(Lg prime star(a), the pullback shift and psi[n]) and the target shift. This is the component naturality and shift equation of the pinned base-change transformation of [lem-pc-pinned-base-change-mate-shifts].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY; naturality and shift compatibility of the pinned counit construction"
+ },
+ "stmt_deps": [
+  "def-pc-rf-mv-canonical-ses-shifts",
+  "lem-pc-pinned-base-change-mate-shifts"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the tensor-pullback additivity witnesses from exists_derivedPullbackComposition. Obtain a family of shifts compatible with the pinned left-derived counits. The pinned-derived-adjunction theorem makes this family compatible with exactly the adjunction defining mvCanonicalPullbackShift. Mathlib compatibilityUnit_unique_left identifies the family with our adjunction-mate shifts, since the right-derived shifts are fixed.",
+   "uses": [
+    "lem-pc-pinned-pullback-counit-shifts",
+    "lem-pc-pinned-derived-adjunction-shifts",
+    "def-pc-rf-mv-canonical-ses-shifts",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the actual base-change natural transformation commuting with the shifts from exists_pinned_base_change_mate_shifts. Rewrite its shift property using the equalities of shift structures. Apply its naturality at a, its shift equation at K, and the right-derived shift naturality at psi. Reassociate compositions and expand functor map_comp to obtain the formula.",
+   "uses": [
+    "lem-pc-pinned-base-change-mate-shifts",
+    "def-pc-rf-mv-canonical-ses-shifts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-pinned-pullback-counit-shifts",
+  "lem-pc-pinned-derived-adjunction-shifts",
+  "def-pc-rf-mv-canonical-ses-shifts",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-pc-pinned-base-change-mate-shifts",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T4",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY; naturality and shift compatibility of the pinned counit construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived base change natural transformation commutes with shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 generic shift-coherence declarations; none identifies the scheme Mayer--Vietoris overlap mate.",
+   "date": "2026-10-13",
+   "verdict": "use generic coherence and project pinned mate theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris boundary morphism is natural under derived pullback",
+   "results": "8 site MayerVietorisSquare sheaf-condition and short-complex declarations, no unbounded derived scheme boundary statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSESδ_naturality|shift_unit_app",
+   "results": "Mathlib DerivedCategory.ShortExact and Shift.Adjunction give SES naturality and adjunction shift identities. Project PinnedBaseChangeMateShifts gives the normalized base-change shift comparison.",
+   "date": "2026-10-13",
+   "verdict": "use existing declarations; isolate remaining cover-mate identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction step: canonical relative Mayer--Vietoris connecting map and shift compatibility",
+   "via": [
+    "lem-pc-rf-mv-base-change-connecting-square",
+    "lem-pc-rf-mv-base-change-connecting-square-equation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeMayerVietorisCanonicalShift.lean",
+  "declaration": "AlgebraicGeometry.mvCanonicalBaseChange_shift",
+  "declarations": [
+   "AlgebraicGeometry.mvCanonicalBaseChange_shift"
+  ],
+  "statement": "theorem mvCanonicalBaseChange_shift {X S X' S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (h : g' ≫ f = f' ≫ g) (A K : schemeDerivedCategory X) (K' : schemeDerivedCategory X') (ψ : (derivedPullback g').obj K ⟶ K') (n : ℤ) (a : A ⟶ K⟦n⟧) : letI := mvCanonicalPullbackShift g' let csF := mvCanonicalSourceShift f g let csG := mvCanonicalTargetShift f' (schemeDerivedDirectImage f ⋙ derivedPullback g).map a ≫ (letI := csF; (schemeDerivedDirectImage f ⋙ derivedPullback g).commShiftIso n).hom.app K ≫ (schemeDerivedBaseChangeMap f f' g g' h K ≫ (schemeDerivedDirectImage f').map ψ)⟦n⟧' = schemeDerivedBaseChangeMap f f' g g' h A ≫ (schemeDerivedDirectImage f').map ((derivedPullback g').map a ≫ ((derivedPullback g').commShiftIso n).hom.app K ≫ ψ⟦n⟧') ≫ (letI := csG; (schemeDerivedDirectImage f').commShiftIso n).hom.app K'",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-940bd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T222417-L-1227906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-940bd",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T222417-L-1227906",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; original Boundary fails against changed dependencies while adapted Boundary compiles; signatures, imports, forced edits, nodes, report, and sole named sorry agree with the packet and review rules."
+ }
+}
