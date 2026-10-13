@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-affine-base-change-chart-colimit",
+ "kind": "statement",
+ "title": "Filtered colimit of base-change affine chart rings",
+ "statement": "Let I be a directed preorder, R : I → CommRing a functor, and c a limiting cone over inverse spectra with affine vertex. Fix i ≤ j, a morphism f : Xi → Spec(R_i), and an affine open U of Xi [def-pc-scheme, def-pc-base-change]. For each k ≥ j put X_k = Xi × Spec(R_k) and V_k = pr_1^{-1}(U). Form the actual ring diagram A_k = Γ(X_k,V_k), with maps appLE along the base-change morphisms X_l → X_k. Put X = Xi × c.pt and V = pr_1^{-1}(U). Then the cocone with vertex Γ(X,V) and maps appLE along X → X_k is a colimit cocone. The charts, ring diagram, and cocone are explicitly constructed; no module sheaf or vanishing assertion is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Tags 01YZ and 01ZR (3), affine-chart reduction; global ring sections: Tag 01YW"
+ },
+ "proof": [
+  {
+   "text": "The upper-tail inclusion is cofinal: every original index has a common upper bound with j, and all parallel morphisms are equal. The base-changed scheme diagram and cone are explicitly constructed. A cone to these fibre products amounts to a cone to the spectra plus a compatible map to Xi. The original limit universal property gives the map to c.pt; the pullback universal property then gives the unique compatible map to Xi × c.pt. This formal argument is applied in Lean as Mathlib isLimitOfIsPullbackOfIsConnected after cofinal whiskering, with squares isPullback_baseChangeMap (the categorical proof of Tag 01YZ).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict each base-change scheme to the inverse image of U, using resLE for transitions and projections. Open inclusions give cartesian squares, with equality of inverse images following from pullback.map projection equations. Apply the same connected-limit theorem to show that the chart cone is limiting. The charts are affine, by permanence of affine morphisms under base change and inverse images of affine opens.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the global-sections ring colimit theorem to this limiting affine chart diagram. Whisker away the double opposite indexing category. Each chart topIso gives a natural isomorphism between the global-sections ring diagram and the explicit local-section ring diagram; resLE_app_top verifies its naturality and the compatibility of cocone legs. Transport the colimit across these natural and cocone isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-limit-global-sections-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits Tags 01YZ, 01YW, and affine reduction of 01ZR (3)",
+  "note": "Explicit Lean construction and proof of the chart-ring universal property; follows the base-change and affine ring limit argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ring of an affine open chart of a base changed inverse limit is the filtered colimit of the rings of the inverse image charts",
+   "results": "nonempty_isColimit_Γ_mapCocone gives global rings once a limiting chart cone has been constructed; no exact local base-change chart statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredient found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nonempty_isColimit_Γ_mapCocone\"",
+   "results": "One hit: AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone.",
+   "date": "2026-10-13",
+   "verdict": "ingredient found"
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_isColimit_Γ_mapCocone|appLE_comp_appLE",
+   "results": "Mathlib affine inverse-limit global sections and local-section functoriality; local DAG search found affine descent ring models with different hypotheses and constructions.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate rings of inverse image affine opens under base change form a filtered colimit at the inverse limit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSectionZeroAtStage",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-section-zero-at-stage",
+   "place": "Construction of the ring colimit of the base-change affine charts",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseChangeChartColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseChangeChartColimit.lean",
+  "declaration": "AlgebraicGeometry.AffineBaseChangeChart.isColimit_cocone",
+  "statement": "theorem isColimit_cocone [IsDirected I (· ≤ ·)]\n    (hc : IsLimit c) [IsAffine c.pt] (hU : IsAffineOpen U) :\n    Nonempty (IsColimit (cocone R i f j hij U c))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T140820-L-314281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T140820-L-314281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

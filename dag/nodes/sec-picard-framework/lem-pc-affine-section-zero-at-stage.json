@@ -16,31 +16,29 @@
  },
  "proof": [
   {
-   "text": "the inverse images of U are affine by base change of affine morphisms.\nRestrict the ring diagram to the upper tail of j. Pullback pasting and\nisLimitBaseChangeCone identify the limit chart with the inverse limit of the\nstage charts; the affine Spec/Gamma equivalence identifies its ring with their\nfiltered colimit. Quasi-coherence identifies pullback sections with scalar\nextension of G on the j-th chart. The canonical unit sends y to 1 tensor y.\nApply the zero clause of TensorProduct.directedColimitBaseChangeElementwise to\nthis tensor to obtain one later stage. The affine pullback comparison is\nbijective and therefore reflects zero. Finally uniqueness of left adjoints\nintertwines any supplied adjunction unit with the canonical unit by an\nisomorphism. Its section components preserve and reflect zero. This includes\nempty charts and zero modules and does not require finite presentation.",
+   "text": "Construct the actual upper-tail diagram of chart section rings. The new chart-colimit theorem identifies the limit chart ring as its colimit. The affine comparison of module pullback sections sends 1 tensor y to the canonical pullback unit and is injective. A proved private helper compares arbitrary supplied units with the canonical unit via leftAdjointUniq, and invertible section restrictions identify equal inverse-image opens. Transport the zero tensor from the chart-ring cocone to the chosen ring colimit, apply the zero clause of directedColimitBaseChangeElementwise to 1 tensor y at j, and use map_one to identify the image at the resulting stage with 1 tensor y. The affine comparison reflects zero there, giving the conclusion for the supplied stage adjunction.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-pc-affine-base-change-chart-colimit",
+    "lem-weil-pbc-module-pullback-affine-sections",
     "lem-weil-pbc-conjugate-iso-unit-equation",
     "lem-weil-pbc-directed-colimit-base-change-elementwise",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-scheme-over-limit",
-    "lem-weil-pbc-spec-colimit-limit"
+    "lem-weil-pbc-affine-morphism-permanence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-affine-base-change-chart-colimit",
   "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-directed-colimit-base-change-elementwise",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-scheme-over-limit",
-  "lem-weil-pbc-spec-colimit-limit"
+  "lem-weil-pbc-module-pullback-affine-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
   "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument; shorter tensor route: Algebra Tag 05LI (1), lemma-module-map-property-in-colimit",
-  "note": "Split off a strict part of the existing argument; no unit route is bypassed."
+  "note": "M1: Lean proof using explicit chart-ring cocone, affine section comparisons, adjoint uniqueness, and directed tensor vanishing."
  },
  "mathlib_searches": [
   {
@@ -116,9 +114,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T131950-L-4087997",
+  "landing": "20261013T140820-L-314281",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
