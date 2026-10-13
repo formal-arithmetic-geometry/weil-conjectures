@@ -9,6 +9,9 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Algebra.Algebra.ZMod
+import Sheaf.RingTheory.PBasisComplementMonomialBasisLinearIndependent
+import Sheaf.RingTheory.PBasisComplementMonomialBasisSpanning
+import Mathlib.LinearAlgebra.Basis.Basic
 
 /-!
 # The finite part of a p-basis over its complementary subfield
@@ -60,6 +63,11 @@ theorem pBasisComplementMonomialBasis
     (hkJ : kJ = Subfield.closure
       (Set.range (fun x : k ↦ x ^ p) ∪ {x : k | ∃ i : I, i ∉ J ∧ t i = x})) :
     ∃ b : Module.Basis (J → Fin p) kJ k,
-      ∀ E, b E = ∏ i : J, t i ^ (E i : ℕ) := by sorry
+      ∀ E, b E = ∏ i : J, t i ^ (E i : ℕ) := by
+  have hli := pBasisComplementMonomialBasis_linearIndependent p k I t hpb J kJ hkJ
+  have hsp := pBasisComplementMonomialBasis_spanning p k I t hpb J kJ hkJ
+  refine ⟨Module.Basis.mk hli hsp, ?_⟩
+  intro E
+  exact Module.Basis.mk_apply hli hsp E
 
 end RingTheory

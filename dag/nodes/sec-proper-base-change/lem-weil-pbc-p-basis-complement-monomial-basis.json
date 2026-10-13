@@ -13,36 +13,22 @@
  ],
  "proof": [
   {
-   "text": "Let F be the subfield of p-th powers. The F-span L of bounded monomials supported outside J contains 1 and all the complementary generators. For a product reduce each exponent modulo p, absorbing the removed p-th powers into F. For nonzero a in L use a inverse = (a^p) inverse times a^(p-1), since a^p lies in F. Thus L is a subfield and equals kJ by the generating property.",
+   "text": "Construct the basis using Module.Basis.mk from spanning and linear independence; mk_apply gives its monomials.",
    "uses": [
-    "def-weil-field",
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Every bounded finitely supported exponent function on I splits uniquely into a J exponent and a complementary exponent. Expand an element using the given F-basis and group its finitely many terms by the J exponent. The complementary sums belong to L=kJ. This proves spanning by the bounded J monomials.",
-   "uses": [
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a finite relation over kJ, expand each coefficient as a finite F-linear combination of complementary bounded monomials. Pairing each J exponent with each complementary exponent gives distinct original exponent functions. Independence of the given F-basis forces every F-coordinate to vanish, hence every original kJ coefficient is zero. This proves independence, and the unique coordinates define the displayed basis.",
-   "uses": [
-    "def-weil-pbc-free-module"
+    "lem-weil-pbc-p-basis-complement-monomial-basis-spanning",
+    "lem-weil-pbc-p-basis-complement-monomial-basis-linearIndependent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-field",
-  "def-weil-pbc-free-module"
+  "lem-weil-pbc-p-basis-complement-monomial-basis-spanning",
+  "lem-weil-pbc-p-basis-complement-monomial-basis-linearIndependent"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07P5 proof"
+  "place": "Tag 07P5, combining the spanning and independence components using Mathlib Module.Basis.mk"
  },
  "mathlib_searches": [
   {
@@ -120,9 +106,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T111853-L-3052825",
+  "landing": "20261013T123208-L-3677678",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
