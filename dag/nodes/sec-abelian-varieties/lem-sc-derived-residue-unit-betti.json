@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-derived-residue-unit-betti",
+ "kind": "statement",
+ "title": "Degree-zero Betti number of a derived residue unit map",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $E\\in D(\\mathcal O_S)$ [def-pc-derived-category], $s\\in S$, and $a:\\mathcal O_S[0]\\to E$. Let $i_s:\\operatorname{Spec}\\kappa(s)\\to S$ be the residue-field map [def-pc-base-change], and use derived pullback [def-pc-derived-pullback]. If $H^0(Li_s^*a)$ is invertible, then $\\beta_0(E,s)=1$, with Betti number defined in [def-sc-derived-fiber-betti]. No perfectness, boundedness, or vanishing in other degrees is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06YD and 06YJ, the structure-sheaf single specialization; Tag 0E62, residue H^0 unit map"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-base-change",
+  "def-pc-derived-pullback",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof": [
+  {
+   "text": "The structure sheaf is flat: tensoring with it is naturally the identity through the right unitor. Its single complex is bounded above and termwise flat. The preadditive tensor structure used for this argument is supplied by [lem-pc-sheaf-modules-tensor-closed].",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-pc-flat-complex-derived-pullback] to the single complex. Use nonempty_tensorPullbackAdjunction from [def-pc-module-pullback] and Adjunction.leftAdjointUniq to identify the termwise tensor pullback with ordinary pullback. The proved upstream Modules.pullbackObjUnitIso identifies ordinary pullback of the structure sheaf with the structure sheaf. Single-complex and homotopy-localization comparison isomorphisms give the private residue_unit_single_iso. This uses neither the stronger pinned tensor adjunction nor the tensor-unit theorem.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert H^0(Li_s^*a), compose with the single-unit comparison, and take H^0, global sections, and scalar restriction along GammaSpecIso. ModuleCat.restrictScalarsIsoOfEquiv identifies the resulting module with kappa(s) over itself. LinearEquiv.finrank_eq and Module.finrank_self finish the dimension calculation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 06YD and 06YJ, the structure-sheaf single specialization; Tag 0E62, residue H^0 unit map",
+  "note": "Agent elaboration of the local unit calculation using the recorded Lean interfaces. Second reading corrected dependencies to the actual nonempty adjunction and proved upstream ordinary-unit isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree zero derived pullback of the structure sheaf has one dimensional cohomology over the residue field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "map from degree zero free rank one complex to connective finite free complex with invertible residue degree zero cohomology is surjective on local homology",
+   "results": "Eight hits concerning HomComplex cocycles and Ext representatives; no scheme-local unit criterion or derived residue Betti calculation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedFiberBetti|surjective_stalk_homology|local_unit|finrank.*subsingleton",
+   "results": "No exact match in Mathlib, WeilConjectures or Sheaf. Component lemmas include Module.finrank_zero_of_subsingleton, LinearEquiv.finrank_eq, ModuleCat.restrictScalarsIsoOfEquiv, flatComplexDerivedPullback and Scheme.Modules.pullbackObjUnitIso. Blueprint searches rank one and 0E62 found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; component API used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectLocalDegreeZeroUnit",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof: apply the general theorem of the cube; structure-sheaf pushforward input for its product morphism. Tag 0E62, perfect-lemma-proper-flat-h0, local argument; Tag 0BCD, lift-perfect-from-residue-field; Tags 06YD and 06YJ, the structure-sheaf single specialization; Tag 0E62, residue H^0 unit map",
+   "via": [
+    "lem-sc-perfect-local-degree-zero-unit",
+    "lem-sc-proper-flat-structure-sheaf-stalk-surjective",
+    "lem-sc-proper-flat-structure-sheaf-stalk",
+    "lem-sc-proper-flat-global-sections-criterion",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedResidueUnitBetti",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedResidueUnitBetti.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedFiberBetti_zero_eq_one_of_unit_iso",
+  "statement": "theorem derivedFiberBetti_zero_eq_one_of_unit_iso (S : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ x : S, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (S.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory S)\n    (a : (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj\n        (SheafOfModules.unit S.ringCatSheaf) ⟶ E) (s : S)\n    (ha : IsIso ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) 0).map\n        ((derivedPullback (S.fromSpecResidueField s)).map a))) :\n    derivedFiberBetti S E 0 s = 1",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T011925-L-2762462",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T011925-L-2762462",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

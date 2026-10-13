@@ -17,32 +17,38 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sc-perfect-finite-free-residue-model] at $s$. The negative terms are zero and the degree-zero term has rank one. The fibre map identifies degree-zero fibre cohomology with the residue field. Over that field all differentials vanish: the cohomology dimensions equal the term dimensions, so both adjacent differential ranks vanish.",
+   "text": "For every negative i, evaluation of the zero fibre cohomology sheaf is zero. Its underlying vector space is a subsingleton, so Module.finrank_zero_of_subsingleton gives beta_i=0. Apply [lem-sc-derived-residue-unit-betti] to ha to give beta_0=1.",
+   "uses": [
+    "lem-sc-derived-residue-unit-betti"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sc-perfect-finite-free-residue-model] at s. Each supplied term isomorphism to the finite free sheaf gives the two retraction maps, proving the model strictly perfect. Negative Betti numbers are zero, so their finite free sheaves are zero: freeHomEquiv makes the identity equal to zero because the generator type ULift (Fin 0) is empty. Transport zero across each term isomorphism. Rewrite the degree-zero term rank with beta_0=1.",
    "uses": [
     "lem-sc-perfect-finite-free-residue-model"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Restrict $a$ to the affine neighbourhood and use [lem-pc-perfect-affine-map-representative] with the single rank-one structure-sheaf complex as source and the bounded finite free representative as target. Take stalks at $s$. Its degree-zero component is multiplication by an element with nonzero residue, hence by a unit. The chain-map equation makes the outgoing differential zero. No incoming term remains. Degree-zero cohomology is therefore the rank-one term, and multiplication by the inverse unit supplies every preimage. Exactness of stalks transports this computation to $H^0(a)_s$.",
+   "text": "Apply [lem-sc-connective-rank-one-model-stalk] to this explicit affine neighbourhood, model, strict-perfectness proof, negative-term vanishing, rank-one degree-zero isomorphism, and the supplied representative isomorphism and ha.",
    "uses": [
-    "lem-pc-perfect-affine-map-representative",
-    "def-pc-module-stalk-functor"
+    "lem-sc-connective-rank-one-model-stalk"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-stalk-functor",
-  "lem-pc-perfect-affine-map-representative",
+  "lem-sc-connective-rank-one-model-stalk",
+  "lem-sc-derived-residue-unit-betti",
   "lem-sc-perfect-finite-free-residue-model"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N1",
+  "group": "F1",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tag 0E62, perfect-lemma-proper-flat-h0, local argument; Tag 0BCD, lift-perfect-from-residue-field"
+  "place": "Tags 0E62 and 0BCD; Lean specialization of the finite-free model and separate residue dimension calculation"
  },
  "mathlib_searches": [
   {
@@ -112,12 +118,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T225321-L-1810134",
+  "landing": "20261013T011925-L-2762462",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

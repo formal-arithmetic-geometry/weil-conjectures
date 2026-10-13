@@ -10453,3 +10453,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:19 L: merged deliver/C1/Sheaf.AlgebraicGeometry.TruncatedSectionConormalResidueKernel (stage 3; reviewer PASS; first push; landing 20261013T011924-L-2762091 (proof); batch 20261013T011921; modules 1; new nodes 1)
 - 01:19 L: merged deliver/D3/Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative (stage 3; reviewer PASS; first push; landing 20261013T011924-L-2762235 (interface); batch 20261013T011921; modules 4; new nodes 3)
 - 01:19 L: merged deliver/E4/Sheaf.CategoryTheory.FilteredCohomologyImageNormalized (stage 3; reviewer PASS; after a return; landing 20261013T011925-L-2762348 (interface); batch 20261013T011921; modules 2; new nodes 1)
+- 01:19 L: merged deliver/F1/Sheaf.AlgebraicGeometry.PerfectLocalDegreeZeroUnit (stage 3; reviewer PASS; first push; landing 20261013T011925-L-2762462 (interface); batch 20261013T011921; modules 3; new nodes 2)
