@@ -39,12 +39,11 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-etale-ring-map-quasi-finite], the etale ring map $A\\to B$ is of finite type and quasi-finite at $q$. Therefore [lem-weil-pbc-dimension-inequality-quasi-finite], applied to $q$ and its contraction $p$, gives $\\dim(B_q)\\le\\dim(A_p)$. Combining the two inequalities proves equality.",
+   "text": "The etale algebra is of finite type by Mathlib typeclass inference. Mathlib/RingTheory/Unramified/LocalStructure.lean supplies Algebra.QuasiFinite for essentially finite type formally unramified algebras (lines 330-333). Hence the fibre ring is Artinian and its prime spectrum is discrete, so isOpen_discrete gives the isolated fibre point in Algebra.IsQuasiFiniteAtPrime after unfolding its definition. This is a three-line verification of quasi-finiteness that works for rings in independent universes. Apply [lem-weil-pbc-dimension-inequality-quasi-finite] to obtain the reverse inequality, and combine the inequalities by antisymmetry.",
    "uses": [
-    "lem-weil-pbc-etale-ring-map-quasi-finite",
     "lem-weil-pbc-dimension-inequality-quasi-finite"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
     "place": "Lemma Tag 07QP, proof, second paragraph: etale maps are quasi-finite and strict prime chains contract, giving the reverse inequality"
@@ -56,7 +55,6 @@
   "lem-weil-pbc-flat-local-ring-maps",
   "lem-pc-local-flat-faithful-flat-reflects-surjective",
   "lem-sc-faithfully-flat-local-dimension",
-  "lem-weil-pbc-etale-ring-map-quasi-finite",
   "lem-weil-pbc-dimension-inequality-quasi-finite"
  ],
  "proof_origin": {
@@ -152,5 +150,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T171512-L-1981547",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
