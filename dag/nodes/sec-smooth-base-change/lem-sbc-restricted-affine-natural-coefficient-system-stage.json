@@ -2,8 +2,10 @@
  "id": "lem-sbc-restricted-affine-natural-coefficient-system-stage",
  "kind": "statement",
  "title": "Stage transition equation for restricted affine complexes",
- "statement": "For the concrete restricted affine coefficient witnesses, the stage cohomology comparison intertwines the complex transition with the canonical restricted cohomology map.",
+ "statement": "For any preorder-indexed diagram D over S, coefficient family F and transition maps phi, degree p and etale U, the concrete scheme map and degree-zero complex transition of [def-sbc-restricted-affine-single-maps] and [def-sbc-restricted-affine-coefficient-construction] induce exactly the canonical restricted-cohomology map of [def-sbc-raw-affine-restricted-cohomology]. The comparisons are identities for these fixed constructions; no arbitrary complexes, transitions or comparison isomorphisms are quantified over.",
  "stmt_deps": [
+  "def-sbc-restricted-affine-single-maps",
+  "def-sbc-restricted-affine-coefficient-construction",
   "def-sbc-raw-affine-restricted-cohomology"
  ],
  "source": {
@@ -12,20 +14,24 @@
  },
  "proof": [
   {
-   "text": "Expand the degree-zero single-complex transition and the canonical restricted map; the two inverse-image composition comparisons coincide, and cohomology functoriality gives the equality.",
+   "text": "Unfold restrictedAffineDiagram, restrictedAffineK and restrictedAffineSingleTransition. The two morphism expressions coincide definitionally with rawAffineRestrictedCohomologyMap; reflexivity proves the equation for every stage arrow. No cohomology computation or invertibility assumption is needed.",
    "uses": [
+    "def-sbc-restricted-affine-single-maps",
+    "def-sbc-restricted-affine-coefficient-construction",
     "def-sbc-raw-affine-restricted-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sbc-restricted-affine-single-maps",
+  "def-sbc-restricted-affine-coefficient-construction",
   "def-sbc-raw-affine-restricted-cohomology"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent U1 second reader",
   "document": "Stacks Project",
-  "place": "Tag 09Z1"
+  "place": "Tags 09Z1 and 0EZM; concrete single-complex construction, existing Lean coherence lemmas"
  },
  "mathlib_searches": [
   {
@@ -74,10 +80,10 @@
   "module": "Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem",
   "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineNaturalCoefficientSystem.lean",
   "declaration": "AlgebraicGeometry.Etale.restricted_affine_stage_naturality",
-  "statement": "theorem restricted_affine_stage_naturality {S : Scheme.{v}} {I : Type v} [Preorder I]\n    [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) (c : Cone D)\n    (hc : IsLimit ((Over.forget S).mapCone c))\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i)) ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app \n    (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left (D.map f.op).left).hom.app (F i) ≫ \n    (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅ (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j),\n    H.map f = (eH i).hom ≫ (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map \n    f.op).left (c.π.app (op i)).left (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫ \n    (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H] (p : ℕ) (U : S.Etale) [IsAffine U.left]\n    (D' : Iᵒᵖ ⥤ Scheme.{v}) (c' : Cone D')\n    (K : ∀ i : Iᵒᵖ, CochainComplex (Sheaf (D'.obj i).smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),\n    ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K \n    i) ⟶ K j)\n    (G : (Iᵒᵖ)ᵒᵖ ⥤ CochainComplex (Sheaf c'.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅ ((upperStar AddCommGrpCat.{v + 1} (c'.π.app \n    i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K i))\n    (L : Cocone G) (r : ∀ i : Iᵒᵖ,\n    rawAffineRestrictedCohomology (D.obj (op i.unop)).hom p (F i.unop) U ≅ (cohomology \n    AddCommGrpCat.{v + 1} (D'.obj i) (p : ℤ)).obj (DerivedCategory.Q.obj (K i))) :\n    ∀ {i j : I} (f : i ⟶ j),\n      (r (op i)).hom ≫ rawAffineComplexPullback (p : ℤ) (D'.map f.op) (K (op i)) ≫ (cohomology \n    AddCommGrpCat.{v + 1} (D'.obj (op j)) (p : ℤ)).map (DerivedCategory.Q.map (ψ f.op)) = \n    rawAffineRestrictedCohomologyMap (D.map f.op).left (D.obj (op i)).hom (D.obj (op j)).hom \n    (Over.w (D.map f.op)) p (F i) (F j) (φ f) U ≫ (r (op j)).hom",
+  "statement": "theorem restricted_affine_stage_naturality {S : Scheme.{v}} {I : Type v} [Preorder I] (D : Iᵒᵖ ⥤ Over S) (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j) (p : ℕ) (U : S.Etale) : ∀ {i j : Iᵒᵖ} (f : j ⟶ i), rawAffineComplexPullback (p : ℤ) ((restrictedAffineDiagram D U).map f) (restrictedAffineK D F U i) ≫ (cohomology AddCommGrpCat.{v + 1} ((restrictedAffineDiagram D U).obj j) (p : ℤ)).map (DerivedCategory.Q.map (restrictedAffineSingleTransition D F φ U f)) = rawAffineRestrictedCohomologyMap (D.map f).left (D.obj i).hom (D.obj j).hom (Over.w (D.map f)) p (F i.unop) (F j.unop) (φ f.unop) U",
   "branch": "sheaf-dag",
-  "by": "E3",
-  "date": "2026-10-14"
+  "by": "U1",
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -92,11 +98,37 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E3",
+  "reviewer": "X-64396",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T164047-L-1667806",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T201810-L-3977531",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean signatures to their delivered nodes, the concrete stage equality to its definitions, and the documented correction to the change record; delivery and sole direct importer RestrictedAffineComplexSystemNatural compile cleanly; axiom audit passes."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "U1 stage 2",
+  "old_statement": "For the concrete restricted affine coefficient witnesses, the stage cohomology comparison intertwines the complex transition with the canonical restricted cohomology map.",
+  "what": "The former Lean signature allowed arbitrary Dprime, K, psi and r without identifying the advertised concrete witnesses. For two stages with identical groups and maps, taking r to be identity at one stage and a swap at the other forces id = swap. The first repair rCanonical with r = rCanonical was vacuous because rCanonical was unconstrained. Use the actual diagram, complexes and transition; their comparisons are identities.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tags 09Z1 and 0EZM: affine restriction and canonical coefficient maps"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-sbc-raw-affine-restricted-cohomology"
+  ],
+  "old_proof": [
+   {
+    "text": "Expand the degree-zero single-complex transition and the canonical restricted map; the two inverse-image composition comparisons coincide, and cohomology functoriality gives the equality.",
+    "uses": [
+     "def-sbc-raw-affine-restricted-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-sbc-raw-affine-restricted-cohomology"
+  ]
  }
 }

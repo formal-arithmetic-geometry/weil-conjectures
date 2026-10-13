@@ -16,45 +16,38 @@
  ],
  "proof": [
   {
-   "text": "Construct U ×_S D(i), its pullback transitions and cone U ×_S c.pt using the pullback universal property. The universal property gives identity, composition and the limit assertion. Affine, quasi-compact and quasi-separated morphisms remain so under base change; the affine target U makes stage schemes compact and quasi-separated.",
+   "text": "Choose the actual restricted diagram, cone, complexes, coefficient diagram and colimit cocone. The existing geometric constructions give the limit, compactness, quasi-separatedness, affine transitions and coefficient colimit. Terms below zero vanish by HomologicalComplex.isZero_single_obj_X.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "def-sbc-restricted-affine-coefficient-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict F_i and phi along the second projections, using rawAffineRestrictedCoefficient. The identity and associativity of upperStarComp transport the sheaf transition laws. Apply singleFunctor in degree zero. Restrict and reindex H and use eH to obtain G, eG and hG. Single complexes vanish in negative degrees. On a stage square, expand the same two upperStarComp comparisons. They are exactly rawAffineRestrictedCoefficient for the original phi(f); the single-functor comparison and Q/cohomology identify the induced complex transition with rawAffineRestrictedCohomologyMap, giving the stage morphism equality. This is proved separately from cone compatibility.",
+   "text": "The still-open construction must use the actual restricted single-complex transition and concrete cone comparisons, never arbitrary witnesses of an existential construction. Only the single-maps definitions are imported here; no transition-law or cone-naturality theorem is applied in the delivered proof.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-sbc-raw-affine-restricted-cohomology"
+    "def-sbc-restricted-affine-single-maps"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction is left adjoint and preserves the coefficient colimit. singleFunctor preserves colimits degreewise, so the image cocone L is colimiting. Its vertex is the degree-zero single complex of the restricted coefficient colimit, so it also vanishes in negative degrees, giving hbelowL. The stage cohomology comparisons r are the single-complex identifications; the preserved coefficient colimit gives rL. On each cone triangle, the inverse-image comparisons in eG are exactly rawAffineRestrictedCoefficient. Naturality of the single comparison identifies the Q-image coefficient map in the displayed morphism equation; compose with rawAffineComplexPullback.",
+   "text": "For stage arrows the corrected concrete stage equation is proved by unfolding the transition and canonical restricted-cohomology map. The main theorem still requires construction of its cone comparison and colimit data; no cone-leg theorem is applied in this delivery.",
    "uses": [
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sbc-restricted-affine-natural-coefficient-system-stage",
     "def-sbc-raw-affine-restricted-cohomology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-sbc-raw-affine-restricted-cohomology",
-  "lem-weil-pbc-left-adjoint-preserves-colimits"
+  "def-sbc-restricted-affine-coefficient-construction",
+  "def-sbc-restricted-affine-single-maps",
+  "lem-sbc-restricted-affine-natural-coefficient-system-stage",
+  "def-sbc-raw-affine-restricted-cohomology"
  ],
  "proof_origin": {
-  "by": "agent N1",
+  "by": "agent U1 second reader",
   "document": "Stacks Project",
-  "place": "Tags 09Z1 and 0EZM, affine restriction and coefficient complex construction; explicit stage compatibility in the base-change squares"
+  "place": "Tags 09Z1 and 0EZM; plan for the reopened theorem using actual single-complex constructions. No verified proof of this theorem is delivered. H9 repair: removed unused transition-law, cone-naturality and cone-leg dependencies and uses; these were not applied by the delivered Lean proof."
  },
  "mathlib_searches": [
   {
@@ -113,9 +106,9 @@
   "module": "Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem",
   "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineNaturalCoefficientSystem.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_restricted_affine_natural_coefficient_system",
-  "statement": "theorem exists_restricted_affine_natural_coefficient_system {S : Scheme.{v}}\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Over S)\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]\n    [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]\n    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i))\n      ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j), H.map f =\n      (eH i).hom ≫\n        (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left\n          (c.π.app (op i)).left\n          (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫\n        (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H] (p : ℕ)\n    (U : S.Etale) [IsAffine U.left] :\n    ∃\n    (D' : Iᵒᵖ ⥤ Scheme.{v})\n    (c' : Cone D')\n    (hc : IsLimit c')\n    (compact : ∀ i : Iᵒᵖ, CompactSpace (D'.obj i))\n    (quasiSeparated : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D'.obj i))\n    (affine : ∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D'.map f))\n    (K : ∀ i : Iᵒᵖ, CochainComplex (Sheaf (D'.obj i).smallEtaleTopology\n      AddCommGrpCat.{v + 1}) ℤ)\n    (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),\n      ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i) ⟶ K j)\n    (hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D'.map_id i)))\n        (ComplexShape.up ℤ)).hom.app (K i) ≫\n      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D'.obj i))\n        (ComplexShape.up ℤ)).hom.app (K i))\n    (hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),\n      ψ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f)\n            (D'.map (g ≫ f)) (D'.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)\n    (hbelow : ∀ (i : Iᵒᵖ) (n : ℤ), n < 0 → IsZero ((K i).X n))\n    (G : (Iᵒᵖ)ᵒᵖ ⥤ CochainComplex (Sheaf c'.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅\n      ((upperStar AddCommGrpCat.{v + 1} (c'.π.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i))\n    (hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (c'.π.app j) (D'.map f)\n            (c'.π.app i) (c'.w f).symm) (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (c'.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ (eG j).inv)\n    (L : Cocone G)\n    (hL : IsColimit L)\n    (hbelowL : ∀ n : ℤ, n < 0 → IsZero (L.pt.X n))\n    (r : ∀ i : Iᵒᵖ,\n      rawAffineRestrictedCohomology (D.obj (op i.unop)).hom p (F i.unop) U ≅\n        (cohomology AddCommGrpCat.{v + 1} (D'.obj i) (p : ℤ)).obj\n          (DerivedCategory.Q.obj (K i)))\n    (rL : rawAffineRestrictedCohomology c.pt.hom p (colimit H) U ≅\n      (cohomology AddCommGrpCat.{v + 1} c'.pt (p : ℤ)).obj\n        (DerivedCategory.Q.obj L.pt)),\n    (∀ i : Iᵒᵖ,\n      (r i).hom ≫ rawAffineComplexPullback (p : ℤ) (c'.π.app i) (K i) ≫\n        (cohomology AddCommGrpCat.{v + 1} c'.pt (p : ℤ)).map\n          (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i))) =\n      rawAffineRestrictedCohomologyMap (c.π.app (op i.unop)).left\n        (D.obj (op i.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop))) p\n        (F i.unop) (colimit H) ((eH i.unop).inv ≫ colimit.ι H i.unop) U ≫ rL.hom) ∧\n    (∀ {i j : I} (f : i ⟶ j),\n      (r (op i)).hom ≫ rawAffineComplexPullback (p : ℤ) (D'.map f.op) (K (op i)) ≫\n        (cohomology AddCommGrpCat.{v + 1} (D'.obj (op j)) (p : ℤ)).map\n          (DerivedCategory.Q.map (ψ f.op)) =\n      rawAffineRestrictedCohomologyMap (D.map f.op).left\n        (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p\n        (F i) (F j) (φ f) U ≫ (r (op j)).hom)",
+  "statement": "theorem exists_restricted_affine_natural_coefficient_system {S : Scheme.{v}} {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left] [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom] [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom] (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom] (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j) (hφid : ∀ i : I, HEq (φ (𝟙 i)) ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i))) (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g)) ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left (D.map f.op).left).hom.app (F i) ≫ (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g)) (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1}) (eH : ∀ i : I, H.obj i ≅ (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i)) (hH : ∀ {i j : I} (f : i ⟶ j), H.map f = (eH i).hom ≫ (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left (c.π.app (op i)).left (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫ (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv) [HasColimit H] (p : ℕ) (U : S.Etale) [IsAffine U.left] : ∃ (D' : Iᵒᵖ ⥤ Scheme.{v}) (c' : Cone D') (hc : IsLimit c') (compact : ∀ i : Iᵒᵖ, CompactSpace (D'.obj i)) (quasiSeparated : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D'.obj i)) (affine : ∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D'.map f)) (K : ∀ i : Iᵒᵖ, CochainComplex (Sheaf (D'.obj i).smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i), ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K i) ⟶ K j) (hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) = (NatIso.mapHomologicalComplex (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D'.map_id i))) (ComplexShape.up ℤ)).hom.app (K i) ≫ (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D'.obj i)) (ComplexShape.up ℤ)).hom.app (K i)) (hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j), ψ (g ≫ f) = (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f) (D'.map (g ≫ f)) (D'.map_comp g f)) (ComplexShape.up ℤ)).hom.app (K i) ≫ ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g) (hbelow : ∀ (i : Iᵒᵖ) (n : ℤ), n < 0 → IsZero ((K i).X n)) (G : (Iᵒᵖ)ᵒᵖ ⥤ CochainComplex (Sheaf c'.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅ ((upperStar AddCommGrpCat.{v + 1} (c'.π.app i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (K i)) (hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op = (eG i).hom ≫ (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{v + 1} (c'.π.app j) (D'.map f) (c'.π.app i) (c'.w f).symm) (ComplexShape.up ℤ)).hom.app (K i) ≫ ((upperStar AddCommGrpCat.{v + 1} (c'.π.app j)).mapHomologicalComplex (ComplexShape.up ℤ)).map (ψ f) ≫ (eG j).inv) (L : Cocone G) (hL : IsColimit L) (hbelowL : ∀ n : ℤ, n < 0 → IsZero (L.pt.X n)) (r : ∀ i : Iᵒᵖ, rawAffineRestrictedCohomology (D.obj (op i.unop)).hom p (F i.unop) U ≅ (cohomology AddCommGrpCat.{v + 1} (D'.obj i) (p : ℤ)).obj (DerivedCategory.Q.obj (K i))) (rL : rawAffineRestrictedCohomology c.pt.hom p (colimit H) U ≅ (cohomology AddCommGrpCat.{v + 1} c'.pt (p : ℤ)).obj (DerivedCategory.Q.obj L.pt)), (∀ i : Iᵒᵖ, (r i).hom ≫ rawAffineComplexPullback (p : ℤ) (c'.π.app i) (K i) ≫ (cohomology AddCommGrpCat.{v + 1} c'.pt (p : ℤ)).map (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i))) = rawAffineRestrictedCohomologyMap (c.π.app (op i.unop)).left (D.obj (op i.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop))) p (F i.unop) (colimit H) ((eH i.unop).inv ≫ colimit.ι H i.unop) U ≫ rL.hom) ∧ (∀ {i j : I} (f : i ⟶ j), (r (op i)).hom ≫ rawAffineComplexPullback (p : ℤ) (D'.map f.op) (K (op i)) ≫ (cohomology AddCommGrpCat.{v + 1} (D'.obj (op j)) (p : ℤ)).map (DerivedCategory.Q.map (ψ f.op)) = rawAffineRestrictedCohomologyMap (D.map f.op).left (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f) U ≫ (r (op j)).hom)",
   "branch": "sheaf-dag",
-  "by": "N1",
+  "by": "U1",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -131,17 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E3",
+  "reviewer": "X-64396",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T164047-L-1667806",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.exists_restricted_affine_natural_coefficient_system"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.restricted_affine_stage_naturality"
-  ]
+  "landing": "20261013T201810-L-3977531",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean signatures to their delivered nodes, the concrete stage equality to its definitions, and the documented correction to the change record; delivery and sole direct importer RestrictedAffineComplexSystemNatural compile cleanly; axiom audit passes."
  }
 }
