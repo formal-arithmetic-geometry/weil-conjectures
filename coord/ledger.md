@@ -12246,3 +12246,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:33 L: returned deliver/U2/Sheaf.RingTheory.FormalGlueingMapToAlgebraization (reviewer RETURN: (the landing tools, head f81597377) the delivery did not land: lean/Sheaf/RingTheory/FormalGlueingReplacePrime.lean chan)
 - 11:33 L: returned deliver/X3/Sheaf.AlgebraicGeometry.FinitelyPresentedComplexDescent (reviewer RETURN: (the landing tools, head 94f36e487) the delivery did not land: lean/Sheaf/AlgebraicGeometry/TensorPullbackFinitePresenta)
 - 11:33 L: merged deliver/A3/Sheaf.FieldTheory.IntersectionSubfieldsDifferentialsPowers (stage 3; reviewer PASS; first push; landing 20261013T113335-L-3180767 (interface); batch 20261013T113333; modules 2; new nodes 1)
+- 11:33 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization (stage 3; reviewer PASS; first push; landing 20261013T113335-L-3180897 (interface); batch 20261013T113333; modules 3; new nodes 2)

@@ -1,0 +1,136 @@
+{
+ "id": "lem-sbc-root-product-chart-stalk-localization-core",
+ "kind": "statement",
+ "title": "Stalk presentation of one factor of a root product chart",
+ "statement": "Let q:Z to Spec R be a scheme morphism, z in Z, f in the prime q(z), and e_k positive integers indexed by Fin m. Suppose alpha identifies Z over Spec R with the spectrum of the product of H_k=R[T]/(T^(e_k)-f). Set R0=O_(Spec R,q(z)). There exist k, f0 in the maximal ideal of R0, a maximal ideal P of D=R0[T]/(T^(e_k)-f0), and a ring isomorphism theta:O_(Z,z) to D_P respecting the structural map R0 to O_(Z,z). No etale or flatness hypothesis or conclusion is used.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYH and 0EYI: affine root charts, localization and base change of individual root factors"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "PrimeSpectrum.sigmaToPi_bijective selects k and a prime w in H_k whose image is alpha(z). The spectrum map of evaluation at k is an open immersion (Mathlib.AlgebraicGeometry.Limits); composing with alpha inverse gives an open immersion t:Spec H_k to Z with t(w)=z. The structural equality for alpha gives t followed by q equal to the canonical H_k structural map. These steps are proved in Lean.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the single-factor base-stalk localization theorem to t followed by q and w. It provides the maximal prime P and the factor stalk isomorphism.",
+   "uses": [
+    "lem-sbc-root-factor-stalk-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "An open immersion has an isomorphism on stalks. Compose that isomorphism with the factor stalk isomorphism and use stalkMap_comp to prove structural compatibility; this is the private helper and explicit Lean composition calculation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-root-factor-stalk-localization"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "A4",
+  "document": "Stacks Project",
+  "place": "Tags 0EYH and 0EYI; localization argument written explicitly in the docstring, and Lean assembly by A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk at a prime of a monic root polynomial quotient is the localization of the quotient over the base stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of AdjoinRoot polynomial commutes with localization of the coefficient ring",
+   "results": "Polynomial.isLocalization (Mathlib.RingTheory.Localization.Algebra) gives polynomial localization, but not the quotient and prime-stalk identification; Localization.awayEquivAdjoin treats inverse adjunction only.",
+   "date": "2026-10-13",
+   "verdict": "No one-line matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, AdjoinRoot",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.*local|local.*AdjoinRoot|sigmaToPi_bijective|mapPiEvalRingHom_bijective",
+   "results": "Localization.AtPrime.mapPiEvalRingHom_bijective, PrimeSpectrum.sigmaToPi_bijective and AlgebraicGeometry.Scheme sigmaSpec give the product-factor part. The private root_local lemma in StalkNormalizationTraitSectionRootPresentation is downstream and cannot be imported. No matching base-localization quotient theorem found.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; product-factor part proved in the delivery."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, tame root charts and transverse section: Tag 0EYH: etale local root product description; Tag 0EYI: pointed etale neighborhood",
+   "via": [
+    "lem-sbc-root-product-chart-stalk-localization",
+    "lem-sbc-stalk-normalization-trait-section-localized-root-chart",
+    "lem-sbc-stalk-normalization-trait-section-root-presentation",
+    "lem-sbc-stalk-normalization-trait-section-chart-generic-factor",
+    "lem-sbc-stalk-normalization-trait-section-cyclic-data",
+    "lem-sbc-stalk-normalization-trait-section-maximal-ideal",
+    "lem-sbc-stalk-normalization-trait-section-unramified",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootProductChartCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootProductChartCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rootProductChart_stalk_localization_core",
+  "statement": "theorem rootProductChart_stalk_localization_core {Z : Scheme.{u}}\n    (R : CommRingCat.{u}) (q : Z ⟶ Spec R) (z : Z)\n    (f : R) (hf : f ∈ (q z).asIdeal)\n    (m : ℕ) (e : Fin m → ℕ) (he : ∀ k, 0 < e k)\n    (α : Z ≅ Spec (CommRingCat.of (∀ k : Fin m,\n      AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f))))\n    (hα : α.hom ≫ Spec.map (CommRingCat.ofHom\n      (algebraMap R (∀ k : Fin m,\n        AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)))) = q) :\n    let R₀ := (Spec R).presheaf.stalk (q z)\n    ∃ (k : Fin m) (f₀ : R₀), f₀ ∈ IsLocalRing.maximalIdeal R₀ ∧\n      let p := (Polynomial.X : Polynomial R₀) ^ e k - Polynomial.C f₀\n      let D := AdjoinRoot p\n      ∃ (P : Ideal D) (hP : P.IsMaximal),\n        letI : P.IsPrime := hP.isPrime\n        let E := Localization.AtPrime P\n        ∃ θ : Z.presheaf.stalk z ≃+* E,\n          θ.toRingHom.comp (q.stalkMap z).hom =\n            (algebraMap D E).comp (AdjoinRoot.of p)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T113335-L-3180897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T113335-L-3180897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
