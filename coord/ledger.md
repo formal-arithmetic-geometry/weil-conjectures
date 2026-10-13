@@ -12107,3 +12107,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/F1/Sheaf.AlgebraicGeometry.OrdinaryEvaluationSourceBiproduct (stage 3; reviewer PASS; first push; landing 20261013T111844-L-3049889 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/F2/Sheaf.AlgebraicGeometry.OpenUnionHomGluing (stage 3; reviewer PASS; first push; landing 20261013T111845-L-3050040 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:18 L: merged deliver/F2/Sheaf.AlgebraicGeometry.PicardExternalCoefficientsDirectImages (stage 3; reviewer PASS; first push; landing 20261013T111845-L-3050190 (interface); batch 20261013T111833; modules 3; new nodes 2)
+- 11:18 L: merged deliver/F2/Sheaf.AlgebraicGeometry.ProperFlatOpenSquareMateIso (stage 3; reviewer PASS; first push; landing 20261013T111845-L-3050306 (proof); batch 20261013T111833; modules 1; new nodes 0)
