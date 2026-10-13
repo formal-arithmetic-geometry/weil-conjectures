@@ -19,14 +19,94 @@
  "stmt_deps": [
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-sp-kinjective-bridge"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Work with the small skeletons and coefficient ring sheaves specified in the pro-etale-modules node, and with the fixed-ring module adjunction of the comparison-morphism node. The ring-sheaves theorem makes both module-sheaf categories Grothendieck abelian, including for a noncommutative finite ring. It also applies to the one-object site with trivial topology and ring Lambda, whose module-sheaf category is the category of left Lambda-modules. The Grothendieck enough-injectives theorem therefore applies to all three categories. For the given bounded-below complex J, the bounded-below resolution-existence lemma supplies a quasi-isomorphism J -> I with I bounded below and termwise injective. The bounded-below-injectives lemma makes I K-injective.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective); injectives 079H (theorem-injective-embedding-grothendieck), 079Q (remark-existence-D)"
+   }
+  },
+  {
+   "text": "The finite-level comparison proposition gives exactness of nu_T^* on the same fixed-Lambda module sheaves. The comparison-morphism statement supplies nu_T^* left adjoint to nu_{T,*}. Apply the exact-left-adjoint lemma: each nu_{T,*}I^r is injective on the etale site. Since an additive functor takes zero to zero, nu_{T,*}I is still bounded below. It is consequently K-injective by the bounded-below-injectives lemma. Here it is I, not nu_T^* of an etale injective, that is being pushed forward; no acyclicity assertion about comparison pullback is needed.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "015Z (lemma-adjoint-preserve-injectives); derived 070J (lemma-bounded-below-injectives-K-injective)"
+   }
+  },
+  {
+   "text": "The direct image is the sectionwise restriction in the comparison-morphism statement, hence is additive and preserves kernels. Sections at the terminal object are also additive and preserve kernels: a section belongs to the kernel precisely when its image is zero. Thus these functors are left exact additive. By the K-injective definition of the right-derived construction, Rnu_{T,*}J is represented by nu_{T,*}I. Since this representative is itself bounded below and K-injective by step 2, one may use its identity as its K-injective resolution in computing the subsequent derived sections. The two sides of the desired comparison are therefore represented respectively by Gamma(T_Et,nu_{T,*}I) and Gamma(T_Proet,I). The K-injective-computes lemma justifies these computations independently of the choices, for the Grothendieck categories established in step 1.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-sp-kinjective-bridge",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies)"
+   }
+  },
+  {
+   "text": "The inclusion u_T sends the terminal object T/T to the same scheme T/T. Its direct-image formula gives (nu_{T,*}I^r)(T)=I^r(u_T(T))=I^r(T) for every integer r. On these groups the comparison is the identity, and is Lambda-linear since both module structures are the fixed scalar action in the comparison adjunction. The differentials are the same maps d_I^r(T), so these degreewise identities form an isomorphism of complexes Gamma(T_Et,nu_{T,*}I) -> Gamma(T_Proet,I). This is exactly evaluation at the final object, the comparison specified in the statement.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099R (section-comparison), opening description of the comparison inclusion; blueprint comparison-global-cohomology, evaluation sentence"
+   }
+  },
+  {
+   "text": "For a morphism between two bounded-below derived objects, choose K-injective representatives I and I-prime as in step 1. The K-injective comparison principle represents the morphism by a chain map I -> I-prime, uniquely up to homotopy: a roof is replaced by a chain map using its bijection for the quasi-isomorphism in that roof. Evaluation of that chain map commutes degreewise with the identities of step 4. Additive functors carry a chain homotopy h to the homotopy obtained by applying the functor to each h^r, since the equation f-g=dh+hd is preserved. The same comparison principle applied to resolutions of one object shows they are homotopy equivalent under that object; the K-injective-computes lemma makes these the canonical changes of resolution. Consequently the commuting squares descend independently of representative and resolution to the derived categories. The complex isomorphism in step 4 therefore yields the claimed canonical natural isomorphism.",
+   "uses": [
+    "lem-sp-kinjective-comparison-principle",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "070I (lemma-K-injective), 070Y (lemma-K-injective-defined)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-sp-kinjective-bridge",
+  "lem-sp-kinjective-computes",
+  "lem-sp-kinjective-comparison-principle"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-global-cohomology.md",
-  "place": "Proof, derived-sections identity paragraph"
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "013K, 070J, 070I and 070Y, implementing the injective-resolution/evaluation paragraph of blueprint lem-weil-pbc-comparison-global-cohomology"
  },
  "mathlib_searches": [
   {
@@ -56,15 +136,94 @@
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived functor of a composite is the composite of right derived functors when the first functor preserves injective objects",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerived_fac_assoc, CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctorAt_iff_of_isRightDerivabilityStructure, CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctor_iff_of_isRightDerivabilityStructure, CategoryTheory.Functor.rightDerived_fac_app_assoc, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit",
+   "date": "2026-10-14",
+   "verdict": "no match for the total derived comparison for the etale/pro-etale module adjunction; hits concern underived sheaves, degreewise derived functors, or abstract derived infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "12 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived",
+   "date": "2026-10-14",
+   "verdict": "no match for the total derived comparison for the etale/pro-etale module adjunction; hits concern underived sheaves, degreewise derived functors, or abstract derived infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived",
+   "results": "17 hits: Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "no match for the total derived comparison for the etale/pro-etale module adjunction; hits concern underived sheaves, degreewise derived functors, or abstract derived infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of a derived direct image along a morphism of sites",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray isomorphism derived sections of pushforward sheaves along geometric morphism of sites",
+   "results": "8 hits: TopCat.Sheaf.pushforwardForgetIso, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.sheafPushforwardContinuousIso",
+   "date": "2026-10-14",
+   "verdict": "no match for the total derived comparison for the etale/pro-etale module adjunction; hits concern underived sheaves, degreewise derived functors, or abstract derived infrastructure"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-comparison-global-cohomology",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-derived-sections-pushforward",
+  "worker": "stage1",
+  "summary": "Expanded the same-resolution proof into existence, preservation of injectives, computation, evaluation and canonical naturality steps. Reused generic nodes throughout; no new nodes, no hypothesis or conclusion changed. Checked arbitrary finite left-module coefficients rather than silently assuming commutativity.",
+  "blueprint": "Realizes the ancestor proof sentences beginning “Since nu_T^* is exact”, “For an injective pro-etale resolution” and “Underived evaluation on the final object”, through “Thus RΓ_Et Rν_{T,*}=RΓ_Proet”.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic resolution/derived-category infrastructure; this unit does not supply a competing version and this realizes its stated injective-resolution argument."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic resolution/derived-category infrastructure; this unit does not supply a competing version and this realizes its stated injective-resolution argument."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "Generic resolution/derived-category infrastructure; this unit does not supply a competing version and this realizes its stated injective-resolution argument."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution-existence",
+    "why": "Generic resolution/derived-category infrastructure; this unit does not supply a competing version and this realizes its stated injective-resolution argument."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic resolution/derived-category infrastructure; this unit does not supply a competing version and this realizes its stated injective-resolution argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sp-kinjective-computes",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-725797253",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-725797253 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, blueprint route, Stacks and Mathlib source passages, and archived target declarations. All five steps support the canonical natural evaluation isomorphism for bounded-below finite left-module coefficients, including noncommutative rings. No new nodes, duplicate splits, or introduced cycles; generic tool uses accepted. Concrete checks and inherited limitations are recorded in review.md."
+ }
 }
