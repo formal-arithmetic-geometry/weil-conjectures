@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-well-ordered-presentation-kernel-projection-data",
+ "kind": "statement",
+ "title": "Partial sums and kernel projections for supplied quotient presentations",
+ "statement": "Let $R$ be a commutative ring, $M\\in\\mathrm{ModuleCat}^{v}(R)$, and $E$ a linearly ordered type with well-founded strict order, with no universe relation imposed. Let $F_e\\subseteq M$ be monotone and exhaustive and let $P(e)$ be supplied projective resolutions [def-weil-pbc-finite-global-dimension] of $F_e/(\\sup_{i<e}F_i\\cap F_e)$ [def-weil-pbc-quotient-module]. There exist a short exact complex $S$ [def-weil-pbc-exact-sequence] with $S_3=M$ and categorically projective $S_2$, and monotone exhaustive submodules $H_e\\subseteq S_2$. Put $K_e=S_1\\cap H_e$, precisely the inverse image along $S.f$, and $V_e=(\\sup_{i<e}K_i)\\cap K_e$ viewed as a submodule of $K_e$. For every $e$, either $V_e=K_e$ or there is a surjective $R$-linear map $q_e:K_e\\to\\ker(P(e)_0\\to Q_e)$ whose linear kernel is exactly $V_e$. These maps come from component projections in the active-index direct sum [def-weil-pbc-direct-sum-modules], not from an asserted quotient isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 0D1U (lemma-colimit-projective-dimension), successor proof: projective presentation, kernel intersections, and exact sequence of successive quotients"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof": [
+  {
+   "text": "For each nonzero Q_e lift the given augmentation P(e)_0 → Q_e across F_e → Q_e by categorical projectivity. Use zero summands for zero Q_e. Define the map from the external direct sum B to M as the finite sum of those lifts and stage inclusions. Induction on e shows the partial sum through e surjects onto F_e: subtract a lift of the quotient class and lift the remainder from the predecessor union. The predecessor supremum is the union of its directed nonempty chain; at a least stage it is zero.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each active index choose an element of F_e outside U_e. Such elements at different indices differ: the element at the smaller index is in the predecessor supremum at the larger index. Thus active indices inject into M and are small in universe v. Shrink these indices and form the direct sum B of their degree-zero projectives in universe v. A map out of B lifts across any epimorphism by choosing lifts on the individual projective summands and summing them; this verifies categorical projectivity directly, without converting it to unrestricted module projectivity.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use S as the kernel complex of the constructed surjection, with H_e the partial direct sum through e in the middle object. These H_e are monotone and exhaustive by finite support; an index for empty support exists by hcover at zero. Pullback along S.f gives K_e.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each active e, restrict the component projection to K_e and transport its linear augmentation-kernel codomain to the categorical kernel. Lift the image of any augmentation-kernel vector from the predecessor partial sum and subtract it to prove surjectivity. The projection kernel is the predecessor supremum of K_i by finite support. At an inactive e no summand is added, so that predecessor submodule is top. Stop before taking the quotient isomorphism.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-quotient-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 0D1U (lemma-colimit-projective-dimension), successor proof: projective presentation, kernel intersections, and exact sequence of successive quotients; adaptation to supplied categorical projectives and partial-sum projection maps, before the first isomorphism theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A projective presentation from successive quotient resolutions of a well ordered module filtration has partial sums and kernel projection maps with predecessor kernel",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exhaustive chain of submodules with supplied projective quotient resolutions gives a projective surjection with partial sums and surjective kernel projections at each active index",
+   "date": "2026-10-13",
+   "results": "8 hits: Module.projective_lifting_property, Module.Projective.of_lifting_property, Module.Projective.of_lifting_property', Module.Projective.of_lifting_property'', Module.Finite.exists_comp_eq_id_of_projective, Module.Projective.iff_split_of_projective, Module.Projective.out, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex",
+   "verdict": "No matching partial-sum kernel-projection construction. The lifting-property hits are infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveResolution, ShortComplex",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No usable query results: identifier unresolved."
+  },
+  {
+   "tool": "grep",
+   "query": "filtration|partialSum|wellOrdered",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No matching declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.WellOrderedPresentationKernelFiltration",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Partial-sum and projection construction split during the second reading of lem-weil-pbc-well-ordered-presentation-kernel-filtration",
+   "via": [
+    "lem-weil-pbc-well-ordered-presentation-kernel-filtration",
+    "lem-weil-pbc-well-ordered-union-succ-data",
+    "lem-weil-pbc-well-ordered-union-succ-step",
+    "lem-weil-pbc-well-ordered-union-projective-dimension",
+    "lem-weil-pbc-global-dimension-finite-modules-suffice",
+    "lem-weil-pbc-regular-local-finite-gl-dim",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  }
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.WellOrderedPresentationKernelProjectionData",
+  "file": "lean/Sheaf/RingTheory/WellOrderedPresentationKernelProjectionData.lean",
+  "declaration": "ModuleCat.exists_projective_presentation_kernel_projection_data",
+  "statement": "theorem exists_projective_presentation_kernel_projection_data\n    {R : Type u} [CommRing R] (M : ModuleCat.{v} R)\n    {E : Type w} [LinearOrder E] [IsWellOrder E (· < ·)]\n    (F : E → Submodule R M) (hF : Monotone F)\n    (hcover : ∀ x : M, ∃ e : E, x ∈ F e)\n    (P : ∀ e : E, ProjectiveResolution\n      (ModuleCat.of R ((F e) ⧸\n        ((⨆ i : {j : E // j < e}, F i.val).comap (F e).subtype)))) :\n    ∃ S : ShortComplex (ModuleCat.{v} R), S.X₃ = M ∧ S.ShortExact ∧\n      Projective S.X₂ ∧ ∃ H : E → Submodule R S.X₂,\n        Monotone H ∧ (∀ x : S.X₂, ∃ e : E, x ∈ H e) ∧\n        ∀ e : E,\n          let K : E → Submodule R S.X₁ := fun i ↦ (H i).comap S.f.hom\n          let U := (⨆ i : {j : E // j < e}, K i.val).comap (K e).subtype\n          U = ⊤ ∨ ∃ q : K e →ₗ[R] (kernel ((P e).π.f 0) : ModuleCat.{v} R),\n            Function.Surjective q ∧ q.ker = U",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T054218-L-443337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T054218-L-443337",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

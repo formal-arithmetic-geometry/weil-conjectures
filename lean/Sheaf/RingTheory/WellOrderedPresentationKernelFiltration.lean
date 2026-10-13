@@ -5,6 +5,8 @@ Authors: SHEAF group P1
 -/
 module
 
+import Sheaf.RingTheory.WellOrderedPresentationKernelProjectionData
+
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 public import Mathlib.Order.RelClasses
 public import Mathlib.LinearAlgebra.Quotient.Defs
@@ -85,6 +87,24 @@ theorem exists_projective_presentation_kernel_filtration
             ((⨆ i : {j : E // j < e}, G i.val).comap (G e).subtype))) ∨
           Nonempty (ModuleCat.of R ((G e) ⧸
             ((⨆ i : {j : E // j < e}, G i.val).comap (G e).subtype)) ≅
-              kernel ((P e).π.f 0)) := by sorry
+              kernel ((P e).π.f 0)) := by
+  obtain ⟨S, hM, hS, hproj, H, hH, hHcover, hpieces⟩ :=
+    exists_projective_presentation_kernel_projection_data M F hF hcover P
+  let G : E → Submodule R S.X₁ := fun e ↦ (H e).comap S.f.hom
+  refine ⟨S, hM, hS, hproj, G, ?_, ?_, ?_⟩
+  · intro i j hij
+    exact Submodule.comap_mono (hH hij)
+  · intro x
+    obtain ⟨e, he⟩ := hHcover (S.f.hom x)
+    exact ⟨e, he⟩
+  · intro e
+    rcases hpieces e with hzero | ⟨q, hq, hker⟩
+    · left
+      change (⨆ i : {j : E // j < e}, G i.val).comap (G e).subtype = ⊤ at hzero
+      rw [hzero]
+      exact ModuleCat.isZero_of_subsingleton _
+    · right
+      exact ⟨((Submodule.quotEquivOfEq _ _ hker.symm).trans
+        (q.quotKerEquivOfSurjective hq)).toModuleIso⟩
 
 end ModuleCat
