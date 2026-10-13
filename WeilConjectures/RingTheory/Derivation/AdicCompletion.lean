@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Localization.Basic
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
 public import WeilConjectures.RingTheory.Derivation.Localization
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Extending derivations to adic completions and localizations
@@ -69,7 +70,9 @@ lemma quotPowSucc_mul (n : ℕ) (s t : R ⧸ (I ^ (n + 1) • ⊤ : Ideal R)) :
   obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective t
   rw [← map_mul, quotPowSucc_mk, quotPowSucc_mk, quotPowSucc_mk,
     AdicCompletion.transitionMap_ideal_mk, AdicCompletion.transitionMap_ideal_mk, leibniz,
-    smul_eq_mul, smul_eq_mul, map_add, map_mul, map_mul]
+    map_add]
+  simp only [smul_eq_mul]
+  rfl
 
 lemma transitionMap_quotPowSucc {m n : ℕ} (hmn : m ≤ n)
     (s : R ⧸ (I ^ (n + 1) • ⊤ : Ideal R)) :
@@ -86,10 +89,10 @@ noncomputable def adicCompletionAddMonoidHom :
     rw [transitionMap_quotPowSucc, x.prop]⟩
   map_zero' := by
     ext n
-    simp
+    exact _root_.map_zero (D.quotPowSucc I n)
   map_add' x y := by
     ext n
-    simp
+    exact _root_.map_add (D.quotPowSucc I n) _ _
 
 /-- **A derivation extends to the adic completion.** The derivation `D^∧` of the `I`-adic
 completion induced by the maps `Dₙ : R / I ^ (n + 1) → R / I ^ n`. -/
@@ -127,7 +130,7 @@ noncomputable def toLocalization : R →+ L :=
 lemma toLocalization_mul (x y : R) :
     D.toLocalization L (x * y) = RingHom.id L (algebraMap R L x) • D.toLocalization L y +
       RingHom.id L (algebraMap R L y) • D.toLocalization L x := by
-  simp [toLocalization, leibniz, add_comm]
+  simp [toLocalization, leibniz]
 
 /-- **A derivation extends to a localization.** The derivation `D_W` of `W⁻¹R` with
 `D_W (a / 1) = D a / 1`. -/
@@ -146,8 +149,8 @@ lemma localization_algebraMap (a : R) :
 lemma eq_localization (δ : Derivation ℤ L L)
     (hδ : ∀ a, δ (algebraMap R L a) = algebraMap R L (D a)) : δ = D.localization W L := by
   have := IsLocalization.derivation_ext (N := L) W (RingHom.id L) (δ₁ := δ)
-    (δ₂ := D.localization W L) (fun x y ↦ by simp [leibniz, add_comm])
-    (fun x y ↦ by simp [leibniz, add_comm]) (fun a ↦ by rw [hδ, localization_algebraMap])
+    (δ₂ := D.localization W L) (fun x y ↦ by simp [leibniz])
+    (fun x y ↦ by simp [leibniz]) (fun a ↦ by rw [hδ, localization_algebraMap])
   ext x
   exact congrFun this x
 
@@ -164,6 +167,7 @@ lemma localization_mk' (a : R) (w : W) :
   have h3 := IsLocalization.mk'_spec L a w
   rw [SubmonoidClass.coe_pow, map_pow, map_mul] at h2
   refine (hu.pow 2).mul_left_injective ?_
+  dsimp only
   linear_combination algebraMap R L w * h - algebraMap R L w * h1 + h2 -
     algebraMap R L (D w) * h3
 
