@@ -1,0 +1,110 @@
+{
+ "id": "lem-pc-finite-free-stalk-map-local-positive",
+ "kind": "statement",
+ "title": "Positive-rank local extension of finite free stalk maps",
+ "statement": "Let Y be a scheme [def-pc-scheme], r and s positive natural numbers, y a point of Y, and F_r and F_s the canonical finite free structure sheaves [def-weil-pbc-free-module] on ULift (Fin r) and ULift (Fin s). Given t: T(F_r) → T(F_s), where T is ordinary module pullback [def-pc-module-pullback] along Y.fromSpecStalk y, there is an open neighbourhood U of y and g: R_U(F_r) → R_U(F_s), where R_U is restriction, such that S_U(g) = E_U(F_r).hom ; t ; E_U(F_s).inv. Here S_U is pullback along U.fromSpecStalkOfMem y and E_U: R_U ⋙ S_U ≅ T is exactly the underlying module natural isomorphism used in [def-pc-stalk-restriction-complex-iso]: restriction-as-pullback followed by pullback composition and pullbackCongr for U.fromSpecStalkOfMem y ≫ U.ι = Y.fromSpecStalk y.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-free-module",
+  "def-pc-module-pullback",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Finite matrix coefficient extension after excluding rank-zero cases"
+ },
+ "proof": [
+  {
+   "text": "Express the morphism between finite free sheaves over the stalk spectrum as a finite matrix, represent every coefficient by a local section of the structure sheaf, intersect the finitely many coefficient neighbourhoods, and use the free universal property to form the local matrix morphism. Naturality of the comparison isomorphisms gives the stated equality.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-stalk",
+    "def-pc-module-pullback",
+    "def-pc-stalk-restriction-complex-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-pullback",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Finite matrix coefficient extension after excluding rank-zero cases"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "positive-rank finite free stalk map extends to open neighborhood",
+   "results": "No direct theorem found; matrix and germ ingredients only.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "pullbackObjFreeIso freeHomEquiv",
+   "results": "Found pullbackObjFreeIso and freeHomEquiv, but no local extension theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_germ_eq|freeHomEquiv|pullbackObjFreeIso",
+   "results": "Found free and pullback ingredients only.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkMapLocal",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-free-stalk-map-local",
+   "place": "Positive-rank case"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkMapPositive",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkMapPositive.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_free_stalk_map_of_nonempty",
+  "statement": "theorem exists_local_free_stalk_map_of_nonempty\n    {Y : Scheme.{u}} (r s : ℕ) (y : Y)\n    (hr : Nonempty (Fin r)) (hs : Nonempty (Fin s))\n    (t : (Modules.pullback (Y.fromSpecStalk y)).obj\n        (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))) ⟶\n      (Modules.pullback (Y.fromSpecStalk y)).obj\n        (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s)))) :\n    ∃ (U : Y.Opens), ∃ (hyU : y ∈ U), ∃ (g :\n      (restrictFunctor U.ι).obj\n        (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))) ⟶\n      (restrictFunctor U.ι).obj\n        (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s)))),\n      let E := Functor.isoWhiskerRight (restrictFunctorIsoPullback U.ι)\n          (Modules.pullback (U.fromSpecStalkOfMem y hyU)) ≪≫\n        pullbackComp (U.fromSpecStalkOfMem y hyU) U.ι ≪≫\n        pullbackCongr (U.fromSpecStalkOfMem_ι y hyU)\n      (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map g =\n        E.hom.app _ ≫ t ≫ E.inv.app _",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b50ce",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T010610-L-2669068",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b50ce",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T010610-L-2669068",
+  "kind": "interface",
+  "note": "independent Codex review: Packet contents matched the delivered files and DAG; both modules and the direct importer compiled cleanly, with only the named helper sorry remaining."
+ }
+}
