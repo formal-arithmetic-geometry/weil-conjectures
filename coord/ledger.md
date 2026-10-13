@@ -13338,3 +13338,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:11 L: merged deliver/U4/Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverTransport (stage 3; reviewer PASS; first push; landing 20261013T181125-L-2608184 (interface); batch 20261013T181050; modules 3; new nodes 2)
 - 18:11 L: merged deliver/X2/Sheaf.AlgebraicGeometry.MixedPullbackSectionsCounitUnit (stage 3; reviewer PASS; first push; landing 20261013T181126-L-2608341 (proof); batch 20261013T181050; modules 1; new nodes 0)
 - 18:11 L: merged deliver/X2/Sheaf.CategoryTheory.GrothendieckDerivedCompactLocalizationModel (stage 3; reviewer PASS; first push; landing 20261013T181126-L-2608536 (interface); batch 20261013T181050; modules 3; new nodes 2)
+- 18:14 L: returned deliver/T4/Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData (reviewer RETURN: (reviewer X-62c4d, head 62c4dcfaa) E1/E2 (brief point 4): DerivedBaseChangeMayerVietorisBoundaryData.lean, theorem mvBou)
