@@ -13716,3 +13716,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:24 L: merged deliver/J4/Sheaf.RingTheory.ZariskisMainAway (stage 3; reviewer PASS; first push; landing 20261013T222405-L-1223583 (proof); batch 20261013T222357; modules 1; new nodes 0)
 - 22:24 L: merged deliver/K1/Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryRingComparison (stage 3; reviewer PASS; first push; landing 20261013T222405-L-1223738 (interface); batch 20261013T222357; modules 2; new nodes 1)
 - 22:24 L: merged deliver/K2/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261013T222406-L-1223903 (proof); batch 20261013T222357; modules 1; new nodes 0)
+- 22:24 L: merged deliver/M4/Sheaf.Paper.CechCupResolutionTotalPairing (stage 3; reviewer PASS; after a return; landing 20261013T222406-L-1224042 (interface); batch 20261013T222357; modules 2; new nodes 2; change records: coord/changes/CechCupResolutionTotalPairing-new-module.md)
