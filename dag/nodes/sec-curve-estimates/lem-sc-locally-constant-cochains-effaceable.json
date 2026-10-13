@@ -14,14 +14,14 @@
  ],
  "proof": [
   {
-   "text": "Use the locally constant additive groups LC(G^n,E(M)) as terms. Open stabilizers imply locally constant orbit maps. The action face, adjacent multiplication faces and final projection face therefore preserve local constancy. Each is additive. The simplicial face identities cancel each pair in d squared, including degree zero. Postcomposition with E(f) commutes with every face, giving a functorial complex with the stated coefficient equation.",
+   "text": "Obtain the locally constant cochain functor and coordinates, coefficient and differential equations, additivity, and degreewise short exactness from Rep.exists_locallyConstantCochains_exact.",
    "uses": [
-    "def-exc-discrete-modules-category"
+    "lem-sc-locally-constant-cochains-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Equivalences between abelian categories preserve short exact sequences, and discrete-representation kernels and cokernels are underlying group kernels and cokernels: open stabilizers pass to subobjects and quotients. A locally constant function on the compact finite power G^n has finite image. Choose lifts of those finitely many values through a coefficient surjection and keep each lift constant on its clopen fiber. Thus the complex construction is degreewise exact. The homology exact sequence and its naturality give the connecting maps, exactness and naturality of T. There are no terms in negative degrees, so the initial degree-zero map is monic.",
+   "text": "Apply Mathlib degreewise short exactness to obtain short exact complexes. Construct the delta-functor with the homology functors, additive instances and snake-lemma connecting maps. Exactness at each of the three positions is homology_exact₂, homology_exact₃ and homology_exact₁. In degree zero the first term map is monic; mono_homologyMap_of_mono_of_not_rel applies because no natural number precedes zero. Naturality is δ_naturality applied to C.mapShortComplex.map of the morphism of sequences. This is proved in the private exists_homology_deltaFunctor helper.",
    "uses": [
     "lem-weil-pbc-complex-ses-homology-long-exact",
     "lem-weil-pbc-complex-ses-long-exact-naturality",
@@ -30,28 +30,32 @@
    "elementary": false
   },
   {
-   "text": "In degree zero G^0 is a point, the differential takes m to (g maps to g*m-m), and there are no incoming boundaries. Its kernel is the fixed subgroup, naturally in M. This gives the degree-zero natural isomorphism.",
-   "uses": [],
-   "elementary": true
+   "text": "Rewrite T.F using its defining equality and apply the proved natural degree-zero comparison locallyConstantCochains_invariants_zero.",
+   "uses": [
+    "lem-sc-locally-constant-cochains-invariants-zero"
+   ],
+   "elementary": false
   },
   {
-   "text": "For a discrete representation M, construct D(M)=LC(G,M) with right translation. A finite clopen partition of G has a common stabilizing open subgroup: compactness gives finitely many multiplication neighborhoods and, in a profinite group, an open subgroup refining their identity neighborhoods. Hence every element of D(M) has open stabilizer. The orbit map m maps to (x maps to x*m) is equivariant and monic by evaluation at 1. For c of positive degree define h(c)(g_1,...,g_{n-1})(x)=c(x,g_1,...,g_{n-1})(1). Local constancy on the product, using a finite cover of the compact x coordinate, makes the outer variables locally constant with the entire function in x fixed. Expanding gives dh+hd=1: the right-translation term survives as c(g_1,...,g_n)(x), while every merged and final face cancels with its paired term. For dc=0 this gives c=d(hc). Thus D(M) has zero positive cohomology. Transport the monomorphism M to D(M) back along E; its positive-degree cohomology map is zero, as required.",
+   "text": "For n>0 obtain a monomorphism M→N from locallyConstantCochains_acyclic_embedding. ExactAt.isZero_homology makes H^n(C(N)) a zero object. Rewrite T.F and use IsZero.eq_of_tgt to show its map on the monomorphism is zero.",
    "uses": [
-    "def-exc-discrete-modules-category"
+    "lem-sc-locally-constant-cochains-acyclic-embedding"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-exc-discrete-modules-category",
+  "lem-sc-locally-constant-cochains-exact",
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "lem-weil-pbc-complex-ses-long-exact-naturality",
-  "def-weil-pbc-delta-functor"
+  "def-weil-pbc-delta-functor",
+  "lem-sc-locally-constant-cochains-invariants-zero",
+  "lem-sc-locally-constant-cochains-acyclic-embedding"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG, displayed inhomogeneous differential and profinite comparison; parent steps 2 and 3. The coinduced contraction proof is supplied by the agent, as the published section does not prove the profinite comparison."
+  "place": "Tag 0DVG; G4 reduction into construction/exactness, a proved degree-zero comparison, and coinduced acyclicity. Delta-functor assembly is a complete Lean proof from Mathlib homology-sequence lemmas."
  },
  "mathlib_searches": [
   {
@@ -131,12 +135,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261012T235556-L-2201828",
+  "landing": "20261013T011925-L-2762594",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

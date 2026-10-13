@@ -1,0 +1,110 @@
+{
+ "id": "lem-sc-locally-constant-cochains-exact",
+ "kind": "statement",
+ "title": "The locally constant integer cochain complex is additive and degreewise exact",
+ "statement": "Let G be a compact Hausdorff totally disconnected topological group in universe u, let A be an abelian category, and let E: A ≌ DiscreteContinuousRep_Z(G) have carriers in max(u,s). There are a functor C: A → CochainComplex(Ab_{max(u,s)}, N) and additive coordinate equivalences C(M)^n ≃ LC(G^n,E(M)) such that coefficient maps are pointwise E(f), and the differential is g_0 acting on c(g_1,...,g_n) plus the sum over k=0,...,n of (-1)^(k+1)c(contract_k(g)). Here contract_k multiplies adjacent entries for k<n and drops the last entry for k=n. The functor C is additive and maps every short exact sequence in A to a degreewise short exact sequence of complexes. No delta-functor, degree-zero comparison, or acyclicity is asserted. The discrete representation category is [def-exc-discrete-modules-category], and A is abelian in the sense of [def-sp-abelian].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG; parent lem-sc-locally-constant-cochains-effaceable, steps 1 and 2. The profinite construction and contraction are the agent-supplied argument of the parent node."
+ },
+ "stmt_deps": [
+  "def-exc-discrete-modules-category",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Give LC(G^n,E(M)) its pointwise additive group structure. Precomposition by\nprojections and adjacent multiplication preserves local constancy. For the action face,\na locally constant cochain has finitely many values since G^n is compact. Intersect the\nopen stabilizers of these values: on each fiber and a sufficiently small coset the action\nface is constant. Thus the displayed sum is a locally constant additive differential.\nThe face identities pair each summand in d squared with its negative, so d squared is\nzero, including n=0. Equivariant coefficient maps commute with the action and the other\nfaces, hence give chain maps; identity, composition and addition hold pointwise.\nUse these actual terms and differentials to construct C and take identity coordinate\nmaps, transporting along E. Equivalences preserve short exact sequences. Kernels and\ncokernels of discrete representations are the underlying module kernels and cokernels:\nsubmodules inherit open stabilizers and quotient stabilizers contain those of lifts.\nA locally constant cochain on compact G^n has finite image and clopen fibers. Choose a\nlift of each image value through a coefficient surjection and use it on that fiber.\nThis is a locally constant lift. The kernel equation is pointwise, proving exactness\nand monicity of the first map in every degree. No finiteness of the ring is used.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG and the parent node proof, specialized to integer coefficients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant cochains of a profinite group with integer coefficients form an effaceable cohomological delta functor",
+   "results": "Actual hits: ContinuousCohomology.homogeneousCochains, ContinuousCohomology.MultiInd.complex, continuousCohomology, Rep.FiniteCyclicGroup.moduleCatCochainComplex, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, groupCohomology.map_cochainsFunctor_shortExact, groupCohomology.inhomogeneousCochains, groupCohomology.",
+   "date": "2026-10-13",
+   "verdict": "No statement of the integer locally constant cochain construction, invariants identification, or acyclic embedding. Algebraic group cochains do not impose local constancy; continuous cochains use TopModuleCat. Kernel and homology interfaces are usable for the degree-zero proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant",
+   "results": "Actual hits: LocallyConstant, LocallyConstant.const, LocallyConstant.toFun, LocallyConstant.Simps.apply, LocallyConstant.instFunLike, LocallyConstant.instInhabited, LocallyConstant.flip, LocallyConstant.map.",
+   "date": "2026-10-13",
+   "verdict": "No statement of the integer locally constant cochain construction, invariants identification, or acyclic embedding. Algebraic group cochains do not impose local constancy; continuous cochains use TopModuleCat. Kernel and homology interfaces are usable for the degree-zero proof."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*deltaFunctor|exists_locallyConstant|IsZero.*homology",
+   "results": "Actual hits: Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean, Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean.",
+   "date": "2026-10-13",
+   "verdict": "No statement of the integer locally constant cochain construction, invariants identification, or acyclic embedding. Algebraic group cochains do not impose local constancy; continuous cochains use TopModuleCat. Kernel and homology interfaces are usable for the degree-zero proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant cochain functor exact degree zero invariants coinduced acyclic compact group integer coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-locally-constant-cochains-effaceable",
+   "place": "steps 1 and 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.LocallyConstantCochainsExact",
+  "file": "lean/Sheaf/RepresentationTheory/LocallyConstantCochainsExact.lean",
+  "declaration": "Rep.exists_locallyConstantCochains_exact",
+  "statement": "theorem exists_locallyConstantCochains_exact\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (A : Type v) [Category.{w} A] [Abelian A]\n    (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G)\n    : ∃ C : A ⥤ CochainComplex AddCommGrpCat.{max u s} ℕ,\n      ∃ e : ∀ (M : A) (n : ℕ),\n          (C.obj M).X n ≃+ LocallyConstant (Fin n → G) (E.functor.obj M).obj.V,\n        (∀ (M N : A) (f : M ⟶ N) (n : ℕ) (x : (C.obj M).X n) (g : Fin n → G),\n          e N n (((C.map f).f n) x) g =\n            (E.functor.map f).hom.hom (e M n x g)) ∧\n        (∀ (M : A) (n : ℕ) (x : (C.obj M).X n) (g : Fin (n + 1) → G),\n          e M (n + 1) (((C.obj M).d n (n + 1)) x) g =\n            (E.functor.obj M).obj.ρ (g 0) (e M n x (fun k ↦ g k.succ)) +\n              ∑ k : Fin (n + 1),\n                (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g)) ∧\n        ∃ a : C.Additive,\n          letI := a\n          ∀ (S : ShortComplex A), S.ShortExact → ∀ n : ℕ,\n            ((S.map C).map (HomologicalComplex.eval\n              AddCommGrpCat.{max u s} (ComplexShape.up ℕ) n)).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T011925-L-2762594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T011925-L-2762594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12,7 +12,11 @@ public import Sheaf.CategoryTheory.DeltaFunctor
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.Topology.Connected.TotallyDisconnected
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
+import Sheaf.RepresentationTheory.LocallyConstantCochainsExact
+import Sheaf.RepresentationTheory.LocallyConstantCochainsInvariantsZero
+import Sheaf.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding
 
 /-!
 # Effaceable locally constant cochain cohomology over the integers
@@ -28,6 +32,44 @@ universe u v w s
 open CategoryTheory
 
 namespace Rep
+
+private theorem exists_homology_deltaFunctor
+    {A : Type v} [Category.{w} A] [Abelian A]
+    (C : A ⥤ CochainComplex AddCommGrpCat.{s} ℕ) [C.Additive]
+    (hs : ∀ (S : ShortComplex A), S.ShortExact → ∀ n : ℕ,
+      ((S.map C).map (HomologicalComplex.eval
+        AddCommGrpCat.{s} (ComplexShape.up ℕ) n)).ShortExact) :
+    ∃ T : CohomologicalDeltaFunctor A AddCommGrpCat.{s},
+      T.F = (fun q ↦ C ⋙ HomologicalComplex.homologyFunctor
+        AddCommGrpCat.{s} (ComplexShape.up ℕ) q) := by
+  have hse (S : ShortComplex A) (hS : S.ShortExact) : (S.map C).ShortExact :=
+    HomologicalComplex.shortExact_of_degreewise_shortExact _ (hs S hS)
+  let T : CohomologicalDeltaFunctor A AddCommGrpCat.{s} :=
+    { F := fun q ↦ C ⋙ HomologicalComplex.homologyFunctor _ _ q
+      additive := fun _ ↦ inferInstance
+      delta := fun S hS n ↦ (hse S hS).δ n (n + 1) rfl
+      mono_zero := by
+        intro S hS
+        have : Mono ((C.map S.f).f 0) := (hs S hS 0).mono_f
+        exact HomologicalComplex.mono_homologyMap_of_mono_of_not_rel
+          (C.map S.f) 0 (by
+            intro i hi
+            change i + 1 = 0 at hi
+            omega)
+      exact_middle := by
+        intro S hS n
+        exact ⟨_, (hse S hS).homology_exact₂ n⟩
+      exact_right := by
+        intro S hS n
+        exact ⟨_, (hse S hS).homology_exact₃ n (n + 1) rfl⟩
+      exact_left := by
+        intro S hS n
+        exact ⟨_, (hse S hS).homology_exact₁ n (n + 1) rfl⟩
+      naturality := by
+        intro S R hS hR φ n
+        exact HomologicalComplex.HomologySequence.δ_naturality
+          (C.mapShortComplex.map φ) (hse S hS) (hse R hR) n (n + 1) rfl }
+  exact ⟨T, rfl⟩
 
 /-- The locally constant inhomogeneous complex gives an effaceable delta-functor
 with degree zero equal to invariants. The terms, coefficient maps and differential
@@ -81,6 +123,18 @@ theorem exists_locallyConstantCochains_effaceable
             (E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
               forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat)) ∧
           (∀ (n : ℕ), 0 < n → ∀ (M : A),
-            ∃ (N : A) (f : M ⟶ N), Mono f ∧ (T.F n).map f = 0) := by sorry
+            ∃ (N : A) (f : M ⟶ N), Mono f ∧ (T.F n).map f = 0) := by
+  obtain ⟨C, e, hm, hd, ha, hs⟩ := exists_locallyConstantCochains_exact G A E
+  have : C.Additive := ha
+  obtain ⟨T, hT⟩ := exists_homology_deltaFunctor C hs
+  refine ⟨C, e, hm, hd, T, hT, ?_, ?_⟩
+  · rw [hT]
+    exact locallyConstantCochains_invariants_zero G A E C e hm hd
+  · intro n hn M
+    obtain ⟨N, f, hf, hN⟩ :=
+      locallyConstantCochains_acyclic_embedding G A E C e hm hd M
+    refine ⟨N, f, hf, ?_⟩
+    rw [hT]
+    exact ((hN n hn).isZero_homology).eq_of_tgt _ _
 
 end Rep

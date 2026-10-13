@@ -1,0 +1,111 @@
+{
+ "id": "lem-sc-locally-constant-cochains-invariants-zero",
+ "kind": "statement",
+ "title": "Degree-zero locally constant integer cochain homology is naturally invariants",
+ "statement": "Let G,A,E be as in [def-exc-discrete-modules-category] and [def-sp-abelian], with G compact Hausdorff totally disconnected. For ANY functor C from A to N-indexed cochain complexes of additive groups, and additive equivalences e identifying C(M)^n with LC(G^n,E(M)), assume coefficient maps and differentials obey the two coordinate formulas of lem-sc-locally-constant-cochains-exact. Then C followed by degree-zero homology is naturally isomorphic to E followed by the inclusion of discrete representations, integer invariants, and forgetting to additive groups. This statement requires no delta-functor or effacement.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG; parent lem-sc-locally-constant-cochains-effaceable, step 3. The profinite construction and contraction are the agent-supplied argument of the parent node."
+ },
+ "stmt_deps": [
+  "def-exc-discrete-modules-category",
+  "def-sp-abelian",
+  "lem-sc-locally-constant-cochains-exact"
+ ],
+ "proof": [
+  {
+   "text": "Fin 0 to G is a singleton. Evaluation identifies its locally constant maps\nadditively with E(M). The displayed differential for n=0 evaluates to rho(g)m-m,\nsince contractNth at the sole index drops the argument and the sign is -1.\nIts kernel is precisely the invariant submodule. There is no incoming differential\nin the N-indexed cochain complex at zero, so homology is this kernel. Compose the\ncoordinate equivalence, evaluation, and the kernel identification to obtain an\nisomorphism in AddCommGrpCat. The coefficient equation makes evaluation commute with\nevery map of A; restriction to kernels gives naturality. The inverse sends an invariant\nelement to the constant zero-degree cocycle. These maps are inverse pointwise,\nand assemble into the claimed natural isomorphism.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG and the parent node proof, specialized to integer coefficients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant cochains of a profinite group with integer coefficients form an effaceable cohomological delta functor",
+   "results": "Actual hits: ContinuousCohomology.homogeneousCochains, ContinuousCohomology.MultiInd.complex, continuousCohomology, Rep.FiniteCyclicGroup.moduleCatCochainComplex, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, groupCohomology.map_cochainsFunctor_shortExact, groupCohomology.inhomogeneousCochains, groupCohomology.",
+   "date": "2026-10-13",
+   "verdict": "No statement of the integer locally constant cochain construction, invariants identification, or acyclic embedding. Algebraic group cochains do not impose local constancy; continuous cochains use TopModuleCat. Kernel and homology interfaces are usable for the degree-zero proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant",
+   "results": "Actual hits: LocallyConstant, LocallyConstant.const, LocallyConstant.toFun, LocallyConstant.Simps.apply, LocallyConstant.instFunLike, LocallyConstant.instInhabited, LocallyConstant.flip, LocallyConstant.map.",
+   "date": "2026-10-13",
+   "verdict": "No statement of the integer locally constant cochain construction, invariants identification, or acyclic embedding. Algebraic group cochains do not impose local constancy; continuous cochains use TopModuleCat. Kernel and homology interfaces are usable for the degree-zero proof."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*deltaFunctor|exists_locallyConstant|IsZero.*homology",
+   "results": "Actual hits: Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean, Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean.",
+   "date": "2026-10-13",
+   "verdict": "No statement of the integer locally constant cochain construction, invariants identification, or acyclic embedding. Algebraic group cochains do not impose local constancy; continuous cochains use TopModuleCat. Kernel and homology interfaces are usable for the degree-zero proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant cochain functor exact degree zero invariants coinduced acyclic compact group integer coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-locally-constant-cochains-effaceable",
+   "place": "step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.LocallyConstantCochainsInvariantsZero",
+  "file": "lean/Sheaf/RepresentationTheory/LocallyConstantCochainsInvariantsZero.lean",
+  "declaration": "Rep.locallyConstantCochains_invariants_zero",
+  "statement": "theorem locallyConstantCochains_invariants_zero\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (A : Type v) [Category.{w} A] [Abelian A]\n    (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G)\n    (C : A ⥤ CochainComplex AddCommGrpCat.{max u s} ℕ)\n    (e : ∀ (M : A) (n : ℕ),\n      (C.obj M).X n ≃+ LocallyConstant (Fin n → G) (E.functor.obj M).obj.V)\n    (hm : ∀ (M N : A) (f : M ⟶ N) (n : ℕ) (x : (C.obj M).X n) (g : Fin n → G),\n      e N n (((C.map f).f n) x) g = (E.functor.map f).hom.hom (e M n x g))\n    (hd : ∀ (M : A) (n : ℕ) (x : (C.obj M).X n) (g : Fin (n + 1) → G),\n      e M (n + 1) (((C.obj M).d n (n + 1)) x) g =\n        (E.functor.obj M).obj.ρ (g 0) (e M n x (fun k ↦ g k.succ)) +\n          ∑ k : Fin (n + 1),\n            (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g))\n    : Nonempty ((C ⋙ HomologicalComplex.homologyFunctor\n        AddCommGrpCat.{max u s} (ComplexShape.up ℕ) 0) ≅\n      (E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙\n        forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T011925-L-2762594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T011925-L-2762594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
