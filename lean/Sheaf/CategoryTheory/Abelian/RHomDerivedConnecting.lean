@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group M1
+Authors: SHEAF group M1, SHEAF group H1
 -/
 module
 
@@ -11,7 +11,8 @@ public import Mathlib.Algebra.Homology.ShortComplex.Ab
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.CategoryTheory.Abelian.RHomDerivedRoofShift
+import Mathlib.CategoryTheory.Triangulated.Yoneda
 
 /-!
 # Derived Hom and connecting morphisms
@@ -100,6 +101,19 @@ theorem exists_rhom_hom_derived_connecting
               ((RV ⋙ DerivedCategory.Plus.ι).mapTriangle.obj T) n (n + 1) rfl a) =
           Φ.homologySequenceδ ((DerivedCategory.Plus.ι (C := C)).mapTriangle.obj T)
             n (n + 1) rfl (ψ T.obj₃ n a)) := by
-  sorry
+  dsimp only
+  obtain ⟨ψ, hnat, hroof⟩ := exists_rhom_hom_derived_roof M
+  refine ⟨ψ, hnat, hroof, ?_⟩
+  intro T _hT n a
+  have hs := rhom_hom_derived_roof_shift M ψ hnat hroof T.obj₁ n
+    ((DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n).map
+      ((preadditiveCoyoneda.obj (op M)).rightDerivedFunctorPlus.map T.mor₃) a)
+  rw [hnat] at hs
+  rw [preadditiveCoyoneda_homologySequenceδ_apply]
+  simp only [DerivedCategory.HomologySequence.δ, Functor.mapTriangle, Triangle.mk,
+    Functor.shiftMap, Functor.map_comp, ConcreteCategory.comp_apply,
+    Functor.comp_map, DerivedCategory.shift_homologyFunctor,
+    DerivedCategory.Plus.homologyFunctor, Category.assoc] at hs ⊢
+  exact hs
 
 end CategoryTheory.Functor

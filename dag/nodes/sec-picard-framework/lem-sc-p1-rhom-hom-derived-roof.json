@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-p1-rhom-hom-derived-roof",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: compatibility of the cohomology connecting map with composition by the boundary class; parent Steps 1 and 2; Tags 06XR (1) and 070I",
+   "via": [
+    "lem-sc-p1-rhom-hom-derived-connecting",
+    "lem-sc-p1-ext-resolution-derived-connecting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Natural RHom comparison with the cocycle roof formula",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with enough injectives [def-sp-injective-resolutions], and let $M\\in\\mathcal A$. Set $v=\\operatorname{Hom}_{\\mathcal A}(M,-)$ [def-sp-left-exact-additive], $Rv:D^+(\\mathcal A)\\to D^+(\\mathrm{Ab})$ its total right derived functor [def-weil-pbc-bounded-derived-subcategories], and $S=M[0]$ [def-weil-abstract-derived-category]. There exists a family of additive isomorphisms $\\psi_X^n:H^n(Rv(X))\\simeq\\operatorname{Hom}_{D(\\mathcal A)}(S,X[n])$, for every $X\\in D^+(\\mathcal A)$ and $n\\in\\mathbf Z$, natural in $X$: $\\psi_Y^n(H^n(Rv(g))(a))=g[n]\\circ\\psi_X^n(a)$. For every bounded below complex $K$ and every chosen quasi-isomorphism $\\varepsilon:K\\to I$ into a bounded below degreewise injective K-injective complex [def-sp-kinjective-bridge], and every cocycle $f:M\\to I^n$, the class of $f$ in $H^n(v(I))$, transported to $H^n(Rv(QK))$ by the canonical derived unit on $I$ and $Rv(Q\\varepsilon)^{-1}$, maps under $\\psi_{QK}^n$ to $f$ regarded as a localized complex map $S\\to QI[n]$, postcomposed with $(Q\\varepsilon)[n]^{-1}$. The canonical quotient-to-derived comparison isomorphisms identify the Q images with the Plus.Q images on both sides, as in the Lean formula. No compatibility with shifts between degrees or with triangles is asserted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "parent Steps 1 and 2; Tags 06XR (1) and 070I"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sp-kinjective-bridge",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Identify cohomology of Hom(M,I) with Hom-complex cocycles from M[0] modulo coboundaries. Cocycle.fromSingleMk_mem_coboundaries_iff identifies these boundaries with null-homotopic maps. A bounded below injective I and all its shifts are K-injective, so localization identifies this quotient with derived-category Hom. Transport by the inverse resolution map. Every operation is additive and the map on a cocycle is the stated roof.",
+   "uses": [
+    "def-sp-kinjective-bridge",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (1) and 070I; parent Step 1"
+   }
+  },
+  {
+   "text": "The total-derived unit on a bounded below injective complex is invertible. Every D+ object has such an injective representative; transport the comparison along a representing isomorphism. K-injective localization lifts every derived morphism to a unique homotopy class between the injective representatives. Applying Hom(M,-) and taking cohomology commutes with the lift, and the inverse resolution maps give the naturality equation. Taking the identity with two resolutions proves independence and the roof formula for every choice.",
+   "uses": [
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-sp-kinjective-bridge",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (1), 070I; parent Step 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-kinjective-bridge",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "parent Steps 1 and 2; Tags 06XR (1) and 070I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism between cohomology of right derived Hom and morphisms to shifted complexes in the derived category; Compatibility of the cohomology to derived category Hom comparison with shifting the target complex",
+   "results": "Both requests failed with service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived Hom from an object is naturally shifted morphisms in the derived category; A natural comparison from cohomology of derived Hom to shifted derived morphisms normalized on cocycles commutes with shifts",
+   "results": "CohomologyClass.toSmallShiftedHom_mk and toSmallShiftedHom, InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CohomologyClass.toHom and toHom_mk. Read Mathlib DerivedCategory.KInjective, HomComplexSingle and Injective.Ext: these concern a fixed complex or an object resolution, not the all-D+ natural comparison with its total-derived unit and roof normalization, nor its coherence across degrees.",
+   "date": "2026-10-13",
+   "verdict": "ingredients, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorShift|preadditiveCoyoneda.*homology|homology.*coyoneda in Mathlib; HomComplex|coyoneda|RHom|homology.*Hom|Hom.*homology in lean/WeilConjectures/CategoryTheory; rhom.*shift|rhom.*roof|hom.*derived.*shift|hom.*derived.*roof in lean/Sheaf/CategoryTheory and dag/nodes",
+   "results": "DerivedCategory.KInjective.Qh_map_bijective and equivOfIsKInjective supply localization. HomComplexSingle supplies cocycle constructors and boundary calculation. PlusSingle.homologyRightDerivedFunctorPlusObjQIsoOfInjective computes the derived unit on an injective complex. ShiftSequence.shiftMap and Triangulated.Yoneda.preadditiveCoyoneda_homologySequenceδ_apply give the final boundary calculation. No global roof comparison or its shift coherence. Blueprint search RHom found four internal sheaf-Hom nodes, not this external additive-Hom comparison; the parent is the only all-D+ comparison node.",
+   "date": "2026-10-13",
+   "verdict": "ingredients, no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.RHomDerivedConnecting",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.RHomDerivedRoof",
+  "declaration": "CategoryTheory.Functor.exists_rhom_hom_derived_roof",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RHomDerivedRoof.lean",
+  "statement": "theorem exists_rhom_hom_derived_roof {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}] (M : C) : let V := preadditiveCoyoneda.obj (op M) let RV := V.rightDerivedFunctorPlus let H (n : ℤ) := DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n let S := (DerivedCategory.singleFunctor C 0).obj M ∃ ψ : ∀ (X : DerivedCategory.Plus C) (n : ℤ), (H n).obj (RV.obj X) ≃+ (S ⟶ X.obj⟦n⟧), (∀ (X Y : DerivedCategory.Plus C) (g : X ⟶ Y) (n : ℤ) (a : (H n).obj (RV.obj X)), ψ Y n ((H n).map (RV.map g) a) = ψ X n a ≫ ((DerivedCategory.Plus.ι (C := C)).map g)⟦n⟧') ∧ (∀ (K : CochainComplex.Plus C) (r : CochainComplex.KInjectiveResolutionChoice K.obj) (hb : CochainComplex.plus C r.complex) (_hi : ∀ k : ℤ, Injective (r.complex.X k)) (n : ℤ) (f : M ⟶ r.complex.X n) (hf : f ≫ r.complex.d n (n + 1) = 0), let I : CochainComplex.Plus C := ⟨r.complex, hb⟩ letI := r.quasiIso let e : (DerivedCategory.Plus.Q (C := C)).obj K ≅ (DerivedCategory.Plus.Q (C := C)).obj I := (DerivedCategory.Plus.ι (C := C)).preimageIso ((DerivedCategory.quotientCompQhIso C).symm.app K.obj ≪≫ asIso (DerivedCategory.Q.map r.map) ≪≫ (DerivedCategory.quotientCompQhIso C).app r.complex) let J := V.rightDerivedComplexWithResolution K r let a := J.homologyπ n ((J.sc n).abCyclesIso.inv ⟨f, by change f ≫ r.complex.d n ((ComplexShape.up ℤ).next n) = 0 rw [CochainComplex.next] exact hf⟩) let b := (DerivedCategory.Plus.homologyFunctorObjQIso (V.mapCochainComplexPlus.obj I) n).inv a let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I) ψ ((DerivedCategory.Plus.Q (C := C)).obj K) n ((H n).map (RV.map e.inv) ((H n).map η b)) = ShiftedHom.map (Cocycle.equivHomShift.symm (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫ (CategoryTheory.inv (DerivedCategory.Q.map r.map))⟦n⟧' ≫ ((DerivedCategory.quotientCompQhIso C).hom.app K.obj)⟦n⟧')",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T065104-L-897870",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T065104-L-897870",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

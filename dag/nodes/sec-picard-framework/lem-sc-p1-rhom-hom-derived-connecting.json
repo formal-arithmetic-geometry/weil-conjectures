@@ -30,62 +30,40 @@
  ],
  "proof": [
   {
-   "text": "Let $\\varepsilon:X\\to I^\\bullet$ be a quasi-isomorphism to a bounded below complex of injectives, so $Rv(X)=\\operatorname{Hom}_{\\mathcal A}(M,I^\\bullet)$ by the bridge [def-sp-kinjective-bridge]; $I^\\bullet$ is K-injective [lem-weil-pbc-bounded-below-injectives-kinjective], hence so is $I^\\bullet[n]$ (its terms are again injective and it is bounded below). A degree-$n$ cocycle $f:M\\to I^n$ ($d^nf=0$) is exactly a morphism of complexes $f:M[0]\\to I^\\bullet[n]$, and $f=d^{n-1}g$ with $g:M\\to I^{n-1}$ exactly when $f$ is homotopic to zero (homotopy $\\pm g$, the sign being that of the differential of $I[n]$); so $H^n(Rv(X))=\\operatorname{Hom}_{K(\\mathcal A)}(M[0],I^\\bullet[n])$. The localization bijection [lem-weil-pbc-kinjective-hom-derived] for the K-injective complex $I^\\bullet[n]$ identifies this with $\\operatorname{Hom}_{D(\\mathcal A)}(M[0],I^\\bullet[n])$, and composing with the isomorphism $(\\varepsilon[n])^{-1}$ of $D(\\mathcal A)$ [def-weil-abstract-derived-category] gives $\\psi^n_X$, an isomorphism.",
+   "text": "Use the natural RHom comparison and every-resolution roof normalization. Keep the same family psi together with its naturality and roof clauses.",
    "uses": [
-    "def-sp-kinjective-bridge",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-sc-p1-rhom-hom-derived-roof"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XR (derived-lemma-compute-ext-resolutions), part (1), together with Tag 070I (K-injective localization)"
+    "place": "Tags 06XR (1), 070I; parent Steps 1 and 2"
    }
   },
   {
-   "text": "The construction is independent of the chosen resolution and natural in $X$: a morphism $g:X\\to X'$ of $D^+(\\mathcal A)$ is, by the localization bijection [lem-weil-pbc-kinjective-hom-derived] for the K-injective $I_{X'}$ [lem-weil-pbc-bounded-below-injectives-kinjective], represented by a unique homotopy class of morphisms of complexes $\\tilde g:I_X\\to I_{X'}$ with $\\tilde g\\circ\\varepsilon=\\varepsilon'\\circ g$ in $D(\\mathcal A)$, and $Rv(g)$ is $\\operatorname{Hom}_{\\mathcal A}(M,\\tilde g)$ [def-sp-kinjective-bridge]. For a cocycle $f$ the class $H^n(Rv(g))[f]=[\\tilde g^nf]$ is sent by $\\psi^n_{X'}$ to $(\\varepsilon'[n])^{-1}\\circ\\tilde g[n]\\circ f=g[n]\\circ(\\varepsilon[n])^{-1}\\circ f$ (the shift of a morphism of complexes has components $\\tilde g[n]^r=\\tilde g^{r+n}$, no sign [def-weil-abstract-derived-category]); that is, $\\psi^n_{X'}\\circ H^n(Rv(g))=(g[n]\\circ-)\\circ\\psi^n_X$. With $g=\\mathrm{id}_X$ and two resolutions this is the independence of $I$.",
+   "text": "For a triangle T and degree n class a at T.obj3, apply H^n(Rv(T.mor3)) to a. Apply unit-shift coherence to this class at T.obj1. Naturality of psi rewrites the right side as psi(T.obj3,n,a) postcomposed with the shifted image of T.mor3, the shifted inclusion comparison, and inverse shift addition. Expand the derived boundary as homology.shiftMap of the third morphism of the image triangle; this is precisely the left side. Expand the representable homologySequence boundary; this is precisely the right side. Functor.map_comp, ConcreteCategory.comp_apply and associativity equate the composites. The calculation holds for any triangle, hence each distinguished one.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "def-sp-kinjective-bridge",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I, K-injective resolutions and uniqueness of lifts up to homotopy"
-   }
-  },
-  {
-   "text": "Let $X\\to Y\\to Z\\xrightarrow{w}X[1]$ be distinguished in $D^+(\\mathcal A)$. Choosing $I_X[1]$ as the resolution of $X[1]$, the right derived functor is triangulated with shift isomorphism $\\sigma_X:Rv(X[1])=\\operatorname{Hom}_{\\mathcal A}(M,I_X[1])=Rv(X)[1]$ the identity (the differential of both is $-\\operatorname{Hom}(M,d)$), so the image triangle $Rv(X)\\to Rv(Y)\\to Rv(Z)\\xrightarrow{Rv(w)}Rv(X)[1]$ is distinguished [lem-weil-pbc-derived-direct-image-triangulated]. Its homology connecting map [lem-sf-derived-homology-long-exact] is, by the definition of that map (in the Mathlib leaf `DerivedCategory.HomologySequence.δ`, the shifted $H^0$ of the third morphism), $\\delta^n=H^n(Rv(w))$ followed by the identification $H^n(Rv(X)[1])=H^{n+1}(Rv(X))$, which is the identity on cocycles since $(K[1])^n=K^{n+1}$ with differential $-d$ [def-weil-abstract-derived-category]. Likewise $\\psi^n_{X[1]}$ computed with $I_X[1]$ equals $\\psi^{n+1}_X$, because $(I_X[1])[n]=I_X[n+1]$ as complexes (both differentials are $(-1)^{n+1}d$). Step 2 for $g=w:Z\\to X[1]$ now gives $\\psi^{n+1}_X\\circ\\delta^n=\\psi^n_{X[1]}\\circ H^n(Rv(w))=(w[n]\\circ-)\\circ\\psi^n_Z$. Finally, for the homological functor $\\Phi=\\operatorname{Hom}_{D(\\mathcal A)}(M[0],-)$, the map $\\Phi(Z[n])\\to\\Phi(X[n+1])$ of [lem-sp-long-exact-of-triangle] is $\\Phi(w[n])=w[n]\\circ-$. No sign enters: the cone triangle already carries $-p$ (Stacks convention, [def-weil-abstract-derived-category]), and neither shifting morphisms nor $\\sigma$ introduces one.",
-   "uses": [
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-sp-kinjective-bridge",
-    "def-weil-abstract-derived-category",
+    "lem-sc-p1-rhom-hom-derived-roof-shift",
     "lem-sf-derived-homology-long-exact",
     "lem-sp-long-exact-of-triangle"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TE (derived functors and connecting maps), Tag 05RS and Definition 0147 (homological functor long exact sequence)"
+    "place": "Tag 05TE; Mathlib definitions HomologySequence.δ and Functor.homologySequenceδ; parent Step 3"
    }
   }
  ],
  "proof_deps": [
-  "def-sp-kinjective-bridge",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sc-p1-rhom-hom-derived-roof",
+  "lem-sc-p1-rhom-hom-derived-roof-shift",
   "lem-sf-derived-homology-long-exact",
   "lem-sp-long-exact-of-triangle"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 05TE, 05RS, 06XR and 070I"
+  "place": "Tags 06XR (1), 070I and 05TE; naturality followed by unit-shift coherence and the Mathlib boundary definitions"
  },
  "mathlib_searches": [
   {
@@ -153,5 +131,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T065104-L-897870",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
