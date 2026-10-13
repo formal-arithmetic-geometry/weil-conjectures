@@ -1,0 +1,110 @@
+{
+ "id": "lem-sbc-root-split-away-localization-chart",
+ "kind": "statement",
+ "title": "Affine basic-open localization chart",
+ "statement": "For a commutative ring R, g in R and any natural n, put A=R[T]/(T^n-g), N=Spec A, q:Spec A to Spec R, and V=D(algebraMap R A g), using def-weil-pbc-scheme-conventions. There exist a commutative ring S, phi:R to S and e:Spec S isomorphic to V such that e followed by the inclusion and q is Spec phi, and phi(g) is a unit.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, off-divisor branch; standard basic-open localization and monic root algebra calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Set h=algebraMap R A g and S=Localization.Away h, with phi the composite algebra map. Use the inverse of Mathlib basicOpenIsoSpecAway h as e.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The basicOpenIsoSpecAway_hom_SpecMap identity, composed with the inverse isomorphism, gives compatibility with the localization map. Contravariance of Spec and composition of ring maps yield the required equation over R. IsLocalization.Away.algebraMap_isUnit h proves invertibility of phi(g).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "V4",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG motivates the off-divisor application; the explicit algebraic and scheme argument is written here and completely checked by Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monic polynomial adjoining root spectrum basic open localization is etale when derivative is invertible and has a point over each prime away from constant",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The basic open of the spectrum of a monic root algebra away from the constant is etale over the base ring when the degree is invertible",
+   "results": "Eight hits including StandardEtalePair.instEtaleRing, Algebra.IsStandardEtale, StandardEtalePresentation; inspected StandardEtalePair and its equivAwayAdjoinRoot. Ingredients, no exact scheme statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.comap, Function.Surjective",
+   "results": "Twelve hits including PrimeSpectrum.comap_surjective_of_faithfullyFlat and Algebra.IsIntegral.comap_surjective. Read both signatures. The first supplies the point-lifting ingredient.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "basicOpenIsoSpecAway|comap_surjective_of_faithfullyFlat|equivAwayAdjoinRoot",
+   "results": "25 hits. Read Mathlib/AlgebraicGeometry/Restrict.lean basicOpenIsoSpecAway and hom_SpecMap, Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean comap_surjective_of_faithfullyFlat, and Mathlib/RingTheory/Etale/StandardEtale.lean equivAwayAdjoinRoot. Read the closed source AdjoinRoot.faithfullyFlat_of_monic in WeilConjectures/Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean.",
+   "date": "2026-10-13",
+   "verdict": "ingredients used in complete Lean proofs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationPoint",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-split-away-localization-point",
+   "place": "Affine basic-open localization chart"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootSplitAwayLocalizationChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_split_away_localization_chart",
+  "statement": "theorem root_split_away_localization_chart\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∃ (S : CommRingCat.{u}) (φ : R →+* S) (e : Spec S ≅ V.toScheme),\n      e.hom ≫ V.ι ≫ q = Spec.map (CommRingCat.ofHom φ) ∧ IsUnit (φ g)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T145731-L-753015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T145731-L-753015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

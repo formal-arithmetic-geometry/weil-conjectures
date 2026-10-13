@@ -12,17 +12,36 @@
  ],
  "proof": [
   {
-   "text": "Take the explicitly constructed ring S=A[1/g]. The standard affine basic-open isomorphism gives e and the over-base identity. Over D(g) the root algebra is finite free of rank n>0, and the root and n are units, so the derivative is a unit and the cover is etale. Its residue-field fibres are nonzero finite-dimensional algebras, hence have prime ideals, proving surjectivity and providing z over y. The localization makes phi(g) a unit.",
-   "uses": [],
+   "text": "Construct S, phi and e with the affine localization chart theorem; it supplies the over-base identity and the unit phi(g).",
+   "uses": [
+    "lem-sbc-root-split-away-localization-chart"
+   ],
    "elementary": false
+  },
+  {
+   "text": "The punctured root cover V to Spec R is etale by the explicit standard etale presentation, and admits a point v above y by faithful flatness of the positive-degree monic root algebra.",
+   "uses": [
+    "lem-sbc-root-split-away-cover-etale",
+    "lem-sbc-root-split-away-cover-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set z=e.inv(v). The identity e.hom(e.inv(v))=v and compatibility over Spec R show that Spec phi sends z to y. Composition of the isomorphism e with the etale map from V gives etaleness of Spec phi. Assemble the existential witness with the unit condition. All ring data come from the explicit localization; only a prime above y is selected.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-root-split-away-localization-chart",
+  "lem-sbc-root-split-away-cover-etale",
+  "lem-sbc-root-split-away-cover-point"
+ ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "C1",
+  "kind": "written-by-agent",
+  "by": "V4",
   "document": "Stacks Project",
-  "place": "Tag 0EYG off-divisor branch, specialized to the supplied root splitting"
+  "place": "Tag 0EYG off-divisor application; explicit localization, standard etale pair, faithfully-flat lifting, and transport checked in Lean."
  },
  "mathlib_searches": [
   {
@@ -95,9 +114,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261013T141523-L-378249",
+  "landing": "20261013T145731-L-753015",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

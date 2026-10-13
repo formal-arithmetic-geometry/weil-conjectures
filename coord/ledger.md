@@ -12904,3 +12904,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:57 L: merged deliver/U2/Sheaf.AlgebraicGeometry.EquidimensionalFibreOpenPartition (stage 3; reviewer PASS; first push; landing 20261013T145730-L-752517 (interface); batch 20261013T145721; modules 3; new nodes 2)
 - 14:57 L: merged deliver/U2/Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension (stage 3; reviewer PASS; first push; landing 20261013T145730-L-752720 (proof); batch 20261013T145721; modules 1; new nodes 0)
 - 14:57 L: merged deliver/V3/Sheaf.AlgebraicGeometry.Morphisms.AffineDualRestrictionComparison (stage 3; reviewer PASS; first push; landing 20261013T145730-L-752888 (proof); batch 20261013T145721; modules 1; new nodes 0)
+- 14:57 L: merged deliver/V4/Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationPoint (stage 3; reviewer PASS; first push; landing 20261013T145731-L-753015 (interface); batch 20261013T145721; modules 4; new nodes 3)

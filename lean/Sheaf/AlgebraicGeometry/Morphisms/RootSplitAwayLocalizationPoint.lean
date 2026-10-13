@@ -2,6 +2,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationChart
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverPoint
 
 @[expose] public section
 universe u
@@ -37,6 +40,20 @@ theorem root_split_away_localization_point
     ∃ (S : CommRingCat.{u}) (φ : R →+* S) (z : Spec S) (e : Spec S ≅ V.toScheme),
       e.hom ≫ V.ι ≫ q = Spec.map (CommRingCat.ofHom φ) ∧
       Etale (Spec.map (CommRingCat.ofHom φ)) ∧
-      (Spec.map (CommRingCat.ofHom φ)) z = y ∧ IsUnit (φ g) := by sorry
+      (Spec.map (CommRingCat.ofHom φ)) z = y ∧ IsUnit (φ g) := by
+  intro A N q V
+  obtain ⟨S, φ, e, he, hunit⟩ := root_split_away_localization_chart R g n
+  have het : Etale (V.ι ≫ q) := root_split_away_cover_etale R g n hn
+  obtain ⟨v, hv⟩ : ∃ v : V.toScheme, (V.ι ≫ q) v = y :=
+    root_split_away_cover_point R g n hn.1 y hy
+  have hz : (Spec.map (CommRingCat.ofHom φ)) (e.inv v) = y := by
+    rw [← he]
+    change q (V.ι (e.hom (e.inv v))) = y
+    rw [Scheme.inv_hom_apply e v]
+    exact hv
+  have hφ : Etale (Spec.map (CommRingCat.ofHom φ)) := by
+    rw [← he]
+    infer_instance
+  exact ⟨S, φ, e.inv v, e, he, hφ, hz, hunit⟩
 
 end AlgebraicGeometry.Scheme
