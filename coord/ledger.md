@@ -12499,3 +12499,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:43 L: merged deliver/W4/Sheaf.AlgebraicGeometry.RelativeMVBoundaryCompletion (stage 3; reviewer PASS; first push; landing 20261013T124318-L-3778817 (interface); batch 20261013T124305; modules 2; new nodes 1)
 - 12:43 L: merged deliver/X2/Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalSection (stage 3; reviewer PASS; first push; landing 20261013T124319-L-3778924 (proof); batch 20261013T124305; modules 1; new nodes 0)
 - 12:43 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FlatModuleDescentPreorderStage (stage 3; reviewer PASS; first push; landing 20261013T124319-L-3779094 (proof); batch 20261013T124305; modules 1; new nodes 0)
+- 12:46 L: returned deliver/F3/Sheaf.Algebra.Homology.HomTensorDegreewiseIso (reviewer RETURN: (reviewer X-118fb, head 118fbb0ca) the reviewer passed it, but the landing failed: izedExt, CategoryTheory.LocalTensorHo)
