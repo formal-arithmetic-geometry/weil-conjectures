@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import Sheaf.AlgebraicGeometry.PrincipalQuotientMultiplicationImage
 
 /-! # Multiplication is the kernel of restriction to a principal quotient
 
@@ -31,6 +32,57 @@ open scoped AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mono_baseScalar_of_flat
+    (A : Type u) [CommRing A] [IsDomain A]
+    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [Flat f]
+    (L : X.Modules) [L.IsInvertible] (π : A) (hπ : π ≠ 0) :
+    Mono (L.smulHom (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom π)) := by
+  classical
+  let r := ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom π
+  have hinj (U : X.Opens) : Function.Injective ((L.smulHom r).app U) := by
+    have : (L.restrict U.ι).IsInvertible :=
+      IsInvertible.of_iso ((restrictFunctorIsoPullback U.ι).app L).symm
+    have h := injective_smul_sections_of_flat A (U.ι ≫ f) (L.restrict U.ι) π hπ
+    let e := L.restrictAppIso U.ι ⊤
+    have hm (s : Γ(L.restrict U.ι, ⊤)) :
+        e.hom (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫
+          (U.ι ≫ f).appTop).hom π • s) =
+        X.presheaf.map (homOfLE (show U.ι ''ᵁ ⊤ ≤ ⊤ from le_top)).op r • e.hom s := by
+      dsimp only [e]
+      rw [smul_restrictAppIso_hom_apply]
+      simp only [Scheme.Hom.comp_appTop, Scheme.Opens.ι_appTop,
+        Scheme.Opens.ι_appIso, Iso.refl_inv, r]
+      rfl
+    have h' : Function.Injective (fun s : Γ(L, U.ι ''ᵁ ⊤) ↦
+        X.presheaf.map (homOfLE (show U.ι ''ᵁ ⊤ ≤ ⊤ from le_top)).op r • s) := by
+      intro s t he
+      have he' : e.hom (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫
+            (U.ι ≫ f).appTop).hom π • e.inv s) =
+          e.hom (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫
+            (U.ι ≫ f).appTop).hom π • e.inv t) := by
+        simpa only [hm, Iso.inv_hom_id_apply] using he
+      have he'' := h ((ConcreteCategory.bijective_of_isIso e.hom).1 he')
+      exact (ConcreteCategory.bijective_of_isIso e.inv).1 he''
+    change Function.Injective (fun s : Γ(L, U) ↦
+      X.presheaf.map (homOfLE (show U ≤ ⊤ from le_top)).op r • s)
+    dsimp only [Scheme.Modules.presheaf] at h'
+    rw [U.ι_image_top] at h'
+    exact h'
+  constructor
+  intro Z g h he
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  ext s
+  apply hinj V.unop
+  exact congrArg (fun q ↦ q.app V.unop s) he
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Comparing the two chosen tensor adjunctions needs extra definitional reductions.
 /-- Over a domain, for a flat scheme and an invertible module, multiplication by a
 nonzero base scalar is the kernel of the unit restricting to its principal quotient.
 
@@ -71,6 +123,43 @@ theorem principal_quotient_unit_kernel
       (Ideal.Quotient.mk (Ideal.span {π}))))
     let η := (Classical.choose (exists_tensorPullbackAdjunction i)).unit.app L
     let μ := L.smulHom (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom π)
-    ∃ w : μ ≫ η = 0, Nonempty (IsLimit (KernelFork.ofι μ w)) := by sorry
+    ∃ w : μ ≫ η = 0, Nonempty (IsLimit (KernelFork.ofι μ w)) := by
+  classical
+  let i := pullback.fst f (Spec.map (CommRingCat.ofHom
+    (Ideal.Quotient.mk (Ideal.span {π}))))
+  have : IsClosedImmersion (Spec.map (CommRingCat.ofHom
+      (Ideal.Quotient.mk (Ideal.span {π})))) :=
+    IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+  have : IsClosedImmersion i := by
+    dsimp only [i]
+    infer_instance
+  let μ := L.smulHom (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom π)
+  let m : MonoidalCategory.tensorObj i.ker.toModules L ⟶ L :=
+    MonoidalCategory.whiskerRight i.ker.toModulesι L ≫ (MonoidalCategory.leftUnitor L).hom
+  have : Mono μ := mono_baseScalar_of_flat A f L π hπ
+  obtain ⟨e, he⟩ := principal_quotient_multiplication_image A f L π
+  let d : L ≅ image m := (imageMonoIsoSource μ).symm ≪≫ e
+  have hd : d.hom ≫ image.ι m = μ := by
+    dsimp only [d, Iso.trans_hom, Iso.symm_hom]
+    rw [Category.assoc, he, imageMonoIsoSource_inv_ι]
+  let adj₁ := Classical.choice (nonempty_tensorPullbackAdjunction i)
+  let adj₂ := Classical.choose (exists_tensorPullbackAdjunction i)
+  let t := (pushforward i).mapIso ((Adjunction.leftAdjointUniq adj₁ adj₂).app L)
+  change ∃ w : μ ≫ adj₂.unit.app L = 0, Nonempty (IsLimit (KernelFork.ofι μ w))
+  have ht : adj₁.unit.app L ≫ t.hom = adj₂.unit.app L :=
+    Adjunction.unit_leftAdjointUniq_hom_app adj₁ adj₂ L
+  obtain ⟨w, ⟨hk⟩⟩ := (closedImmersion_unit_kernel i L).2
+  have hw : μ ≫ adj₂.unit.app L = 0 := by
+    rw [← ht, ← hd, Category.assoc, ← Category.assoc (image.ι m), w]
+    simp
+  refine ⟨hw, ⟨KernelFork.IsLimit.ofι' μ hw ?_⟩⟩
+  intro K k h
+  have h' : k ≫ adj₁.unit.app L = 0 := by
+    apply (cancel_mono t.hom).mp
+    simpa only [Category.assoc, ht, zero_comp] using h
+  obtain ⟨l, hl⟩ := KernelFork.IsLimit.lift' hk k h'
+  refine ⟨l ≫ d.inv, ?_⟩
+  rw [Category.assoc, ← hd, Iso.inv_hom_id_assoc]
+  exact hl
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-principal-quotient-multiplication-image",
+ "kind": "statement",
+ "title": "Ideal multiplication for a principal quotient has the scalar image",
+ "statement": "Let A be any commutative ring, f:X -> Spec(A) a scheme morphism, F any O_X-module, and pi any element of A. Let i be the base change of Spec(A/(pi)) -> Spec(A) to X, put J=i.ker [def-sbc-closed-immersion-ideal-sheaf], let m:J tensor F -> F be its ideal action [def-pur-sheaf-tensor-product], and let mu:F -> F multiply by the image of pi under A -> Gamma(X,O_X). There exists an isomorphism e:image(mu) -> image(m) whose composite with the image inclusion of m equals the image inclusion of mu. This is an equality of image subobjects, with no claim that mu is mono or that either image inclusion is a kernel of a restriction unit.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EX8",
+  "place": "Lemma 37.33.3, divisibility step; the ideal-action description uses Modules, Lemma 17.13.4 (Tag 08KS)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Let q be Spec of A -> A/(pi), let i be its base change to X, and let r be the image of pi in Gamma(X,O_X). On an affine open U of X, ker_fst_of_isClosedImmersion and ideal_comap_appLE identify i.ker.ideal U with the extension of the quotient kernel. RingHom.ker of the quotient is span{pi}; Ideal.map_span then gives span{r restricted to U}. range_toModulesι_app identifies this ideal with the range of the ideal-sheaf inclusion on affine sections. Passing through the affine neighbourhood basis shows that the ideal inclusion on each stalk has image span{r_x}.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "StalkTensorMultiplicationRange identifies the range of J tensor F -> F with the product of the ideal inclusion range and the full stalk module. For the preceding principal ideal this is span{r_x} times F_x = r_x F_x. Naturality of smulHom and the germ action identifies the scalar endomorphism on that stalk with multiplication by r_x. The two stalk ranges coincide.",
+   "uses": [
+    "lem-weil-pbc-ideal-multiplication-stalk-range-tensor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "module_stalk_exact identifies the range of each categorical image inclusion with the range of its original map. Consequently the two monomorphisms image(scalar) -> F and image(ideal-action) -> F have equal stalk ranges. For a section of either image, equality of stalk ranges gives a local lift into the other image near each point. Shrink the representatives until their images in F agree. Such lifts are unique on overlaps because the image inclusions are mono (and hence injective on sections). Glue them by the sheaf condition. Doing this in both directions gives natural linear inverse maps over F; monicity shows their composites are identities. These define the displayed image isomorphism and its compatibility equation.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-ideal-multiplication-stalk-range-tensor",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EX8",
+  "place": "Expanded principal-ideal image identification from the divisibility step, with the stalkwise method of Tag 08KS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The image of multiplication by the ideal of a principal quotient equals the image of scalar multiplication on a sheaf of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "multiplication by base scalar on a flat scheme module is the kernel of restriction to the principal quotient",
+   "results": "Algebra.kerTensorProductMapIdToAlgHomEquiv; Module.Flat.ker_lTensor_eq; LinearMap.ker_tensorProductMk; LinearMap.tensorKerEquiv; KaehlerDifferential.range_kerCotangentToTensor",
+   "date": "2026-10-13",
+   "verdict": "Algebraic tensor-kernel results; no scheme-module image identification."
+  },
+  {
+   "tool": "grep",
+   "query": "smulHom.*kernel|kernel.*smulHom|image.*smulHom|smulHom.*image",
+   "results": "No exact image equality theorem found in Mathlib or the two project roots. The library supplies ideal_comap_appLE, range_toModulesι_app, and stalk_tensor_multiplication_range as component tools. Blueprint search for principal quotient has no matching blueprint statement.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; this is the geometric image comparison omitted between steps 1 and 3 of the parent plan."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ideal sheaf of a base changed principal closed subscheme acts on a module with the same image as multiplication by its defining section",
+   "results": "IdealSheafData.map_ideal′, ideal_map_of_isAffineHom, map_ideal_basicOpen, ideal_map, comap, map_ideal, comap_map_le; Ideal.map_includeLeft_eq.",
+   "date": "2026-10-13",
+   "verdict": "Second reader: component ideal/base-change facts, no exact scalar image comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalQuotientUnitKernel",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "valuation-ring generic triviality: image identification for division by pi after restriction to X times Spec(A/(pi))",
+   "via": [
+    "lem-sc-principal-quotient-unit-kernel",
+    "new-valuation-closed-fibre-section-divisible",
+    "lem-sc-valuation-closed-fibre-divisibility",
+    "lem-sc-picard-locus-closed-valuation-triviality",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalQuotientMultiplicationImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalQuotientMultiplicationImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.principal_quotient_multiplication_image",
+  "statement": "theorem principal_quotient_multiplication_image\n    (A : Type u) [CommRing A] {X : Scheme.{u}}\n    (f : X ⟶ Spec (CommRingCat.of A)) (F : X.Modules) (π : A) :\n    let i := pullback.fst f (Spec.map (CommRingCat.ofHom\n      (Ideal.Quotient.mk (Ideal.span {π}))))\n    let m := i.ker.toModulesι ▷ F ≫ (λ_ F).hom\n    let μ := F.smulHom (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom π)\n    ∃ e : image μ ≅ image m, e.hom ≫ image.ι m = image.ι μ",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T031535-L-3569536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T031535-L-3569536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
