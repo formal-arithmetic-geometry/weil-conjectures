@@ -45,6 +45,13 @@ theorem pIndependent_differentials_linearIndependent
     (h : LinearIndependent (IntermediateField.adjoin k (Set.range (fun a : K ↦ a ^ p)))
       (fun E : {E : I →₀ ℕ // ∀ i : I, E i < p} ↦ E.val.prod (fun i e ↦ x i ^ e))) :
     LinearIndependent K (fun i : I => KaehlerDifferential.D k K (x i)) := by
-  sorry
+  obtain ⟨J, y, bmon, hbmon⟩ := exists_pBasis_extension p x h
+  obtain ⟨bd, hbd⟩ := KaehlerDifferential.exists_basis_differentials_of_pBasis
+    p (Sum.elim x y) ⟨bmon, hbmon⟩
+  have hli : LinearIndependent K
+      (fun l : I ⊕ J ↦ KaehlerDifferential.D k K (Sum.elim x y l)) := by
+    simpa only [← hbd] using bd.linearIndependent
+  simpa only [Function.comp_def, Sum.elim_inl] using
+    hli.comp Sum.inl Sum.inl_injective
 
 end FieldTheory
