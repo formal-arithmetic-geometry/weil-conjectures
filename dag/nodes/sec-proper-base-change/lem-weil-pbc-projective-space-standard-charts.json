@@ -30,139 +30,32 @@
  ],
  "proof": [
   {
-   "text": "*The two descriptions of $\\mathcal O(1)$.* The statement takes $\\mathcal O(1)$ to be the glued module of [def-pc-projective-space-twist] (with $A=\\mathbf Z$, $d=1$) with the global sections $T_k$ whose restriction to $D_+(T_i)$ is $(T_k/T_i)e_i$; [lem-weil-pbc-projective-space-twisting-sheaf-charts] works with $\\widetilde{S(1)}$, $S=\\mathbf Z[T_k:k\\in n]$. By [lem-weil-pbc-projective-space-twist-glued-identification] there is an isomorphism of $\\mathcal O$-modules $\\theta:\\mathcal O(1)\\to\\widetilde{S(1)}$ with $\\theta(T_k)=T_k$ for all $k$. For any morphism $h:Y\\to\\mathbf P^n_{\\mathbf Z}$, $h^*\\theta:h^*\\mathcal O(1)\\to h^*\\widetilde{S(1)}$ is an isomorphism of $\\mathcal O_Y$-modules ($h^*$ is a functor [def-pc-module-pullback]) and $h^*\\theta(h^*T_k)=h^*T_k$ (naturality of the unit $\\eta:\\mathrm{id}\\to h_*h^*$: $h_*h^*\\theta\\circ\\eta=\\eta\\circ\\theta$). An isomorphism of $\\mathcal O_Y$-modules carries free generators over an open to free generators, relations $t=a\\,s$ to the same relations, and, on stalks, $\\mathfrak m_y$-multiples to $\\mathfrak m_y$-multiples, so it preserves non-vanishing loci. Hence every assertion of (b) holds for $\\mathcal O(1)$ iff it holds for $\\widetilde{S(1)}$ (apply this with $h=\\rho\\circ g$, and use the identification $g^*\\rho^*\\cong(\\rho g)^*$ of step 3, which is natural in the module). From now on $\\mathcal O(1)=\\widetilde{S(1)}$ with its sections $T_k$, as in [lem-weil-pbc-projective-space-twisting-sheaf-charts]. (This is the identification of the two descriptions recorded in the ledger on 2026-10-09.)",
+   "text": "The standard opens cover by the proved upstream iSup_standardOpen (the Proj standard-open cover pulled back to S).",
    "uses": [
-    "lem-weil-pbc-projective-space-twist-glued-identification",
-    "def-pc-projective-space-twist",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-projective-space-twisting-sheaf-charts"
+    "prop-nagata-proj-standard-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Section 01MM, Lemma 01MS (via the identification node)"
-   }
+   "elementary": false
   },
   {
-   "text": "*(a).* The homogeneous elements $T_i$ ($i\\in n$) generate the irrelevant ideal $S_+=\\bigoplus_{d>0}S_d$ of $S=\\mathbf Z[T_k:k\\in n]$: a homogeneous polynomial of positive degree is a $\\mathbf Z$-linear combination of monomials of positive degree, each divisible by some $T_i$. By the cover clause of [prop-nagata-proj-standard-open], $\\mathbf P^n_{\\mathbf Z}=\\bigcup_{i\\in n}D_+(T_i)$. Taking preimages under the continuous map $\\rho$ of [def-nagata-projective-space-base-change]: $P=\\rho^{-1}(\\mathbf P^n_{\\mathbf Z})=\\bigcup_i\\rho^{-1}(D_+(T_i))=\\bigcup_iD_+(T_i)_S$.",
+   "text": "Combine the three strictly smaller coordinate-generator, nonvanishing, and affine-coordinate components by conjunction introduction.",
    "uses": [
-    "prop-nagata-proj-standard-open",
-    "def-nagata-projective-space-base-change"
+    "lem-weil-pbc-projective-space-standard-charts-part1",
+    "lem-weil-pbc-projective-space-standard-charts-part2",
+    "lem-weil-pbc-projective-space-standard-charts-part3"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01NG (label lemma-standard-covering-projective-space), proof: Z[T_0,...,T_n]_+ = (T_0,...,T_n)"
-   }
-  },
-  {
-   "text": "*(b): reduction to $h=\\rho\\circ g$.* Let $g:Y\\to P$ and put $h=\\rho\\circ g:Y\\to\\mathbf P^n_{\\mathbf Z}$, $D=D_+(T_i)$, $Y_i=g^{-1}(D_+(T_i)_S)=g^{-1}\\rho^{-1}(D)=h^{-1}(D)$. By [lem-weil-pbc-invertible-pullback-tensor] (1) (twice), $\\mathcal O_P(1)=\\rho^*\\mathcal O(1)$ and $g^*\\mathcal O_P(1)$ are invertible ($\\mathcal O(1)$ is invertible by [lem-weil-pbc-projective-space-twisting-sheaf-charts] (i)). By [lem-weil-pbc-invertible-pullback-tensor] (2) there is an isomorphism of $\\mathcal O_Y$-modules $c:g^*\\rho^*\\mathcal O(1)\\to h^*\\mathcal O(1)$ with $c(g^*\\rho^*s)=h^*s$; with $T_k=\\rho^*T_k$ on $P$ this reads $c(g^*T_k)=h^*T_k$. Since the maps on sections of a composite of morphisms compose, $g^*(u_{j/i})=g^\\sharp(\\rho^\\sharp(T_j/T_i))=h^\\sharp(T_j/T_i)$ in $\\mathcal O_Y(Y_i)$ [def-nagata-projective-space-base-change]. As $c$ is an $\\mathcal O_Y$-linear isomorphism, (b) for $g$ follows from (b'): $h^*T_i$ is a free generator of $h^*\\mathcal O(1)$ over $Y_i$, and $h^*T_j|_{Y_i}=h^\\sharp(T_j/T_i)\\,h^*T_i|_{Y_i}$ (steps 4-6).",
-   "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
-    "def-nagata-projective-space-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Section 01ND (label section-projective-space, the text after Lemma 01NE: O_{P^n_S}(1) is the pullback of O(1) from P^n_Z)"
-   }
-  },
-  {
-   "text": "*The non-vanishing locus of $h^*T_i$ is $h^{-1}(D)$.* Let $y\\in Y$, $x=h(y)$. By [lem-weil-pbc-invertible-pullback-tensor] (3), the fibre of $h^*\\mathcal O(1)$ at $y$ is $\\mathcal O(1)(x)\\otimes_{\\kappa(x)}\\kappa(y)$ and $(h^*T_i)(y)=T_i(x)\\otimes1$; as $\\kappa(y)$ is a free $\\kappa(x)$-module, $v\\otimes1\\neq0$ for $v\\neq0$, so $(h^*T_i)(y)\\neq0$ iff $T_i(x)\\neq0$. By [lem-weil-pbc-nonvanishing-section-trivializes] (the two descriptions of the non-vanishing locus agree: value $\\neq0$ iff the germ is not in $\\mathfrak m\\cdot$stalk) and [lem-weil-pbc-projective-space-twisting-sheaf-charts] (iii), $T_i(x)\\neq0$ iff $x\\in D$. Hence $Y_{h^*T_i}=h^{-1}(D)=Y_i$. With $Y=P$, $h=\\rho$ (and $T_i=\\rho^*T_i$ on $P$) this is the last assertion of (b): $P_{T_i}=\\rho^{-1}(D)=D_+(T_i)_S$. (This is step 3 of [lem-weil-pbc-projective-morphism-chart-preimage], there for the morphism $\\psi$; Stacks Remark 0H78 for the value of a pulled-back section.)",
-   "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-projective-space-twisting-sheaf-charts"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01MV (label lemma-principal-open: W_s = D_+(f) ∩ W), pulled back; Modules, Remark 0H78 (literature/stacks-project/modules.tex) for the value of a pullback"
-   }
-  },
-  {
-   "text": "*$h^*T_i$ is a free generator over $Y_i$.* $h^*\\mathcal O(1)$ is invertible ([lem-weil-pbc-invertible-pullback-tensor] (1)). By [lem-weil-pbc-nonvanishing-section-trivializes] applied on $Y$ to $\\mathcal L=h^*\\mathcal O(1)$ and $s=h^*T_i$, the map $\\mathcal O_{Y_s}\\to\\mathcal L|_{Y_s}$, $a\\mapsto a\\,s$, is an isomorphism, i.e. for every open $V\\subseteq Y_s$ every $t\\in\\mathcal L(V)$ is $a\\cdot s|_V$ for exactly one $a\\in\\mathcal O_Y(V)$. By step 4, $Y_s=Y_i$: this is the first assertion of (b').",
-   "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-weil-pbc-nonvanishing-section-trivializes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01MS (label lemma-when-invertible), with Modules, Lemma 01CY (label lemma-s-open) (s trivializes L on X_s)"
-   }
-  },
-  {
-   "text": "*The relation $h^*T_j=h^\\sharp(T_j/T_i)\\,h^*T_i$ on $Y_i$.* By [lem-weil-pbc-projective-space-twisting-sheaf-charts] (iv), $T_j|_D=(T_j/T_i)\\cdot T_i|_D$ in $\\mathcal O(1)(D)$ with $T_j/T_i\\in\\Gamma(D,\\mathcal O)$. The unit $\\eta:\\mathcal O(1)\\to h_*h^*\\mathcal O(1)$ [def-pc-module-pullback] is a morphism of $\\mathcal O_{\\mathbf P^n_{\\mathbf Z}}$-modules, where $(h_*h^*\\mathcal O(1))(D)=(h^*\\mathcal O(1))(Y_i)$ is an $\\mathcal O(D)$-module through $h^\\sharp$, and it commutes with restriction; $\\eta(T_k)=h^*T_k$. Applying $\\eta_D$ to the identity gives $(h^*T_j)|_{Y_i}=h^\\sharp(T_j/T_i)\\cdot(h^*T_i)|_{Y_i}$, the second assertion of (b'). (Step 4 of [lem-weil-pbc-projective-morphism-chart-preimage] is the same computation for $\\psi$.) With step 3 (transport along $c$) and step 1 (transport along $\\theta$), (b) is proved.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-projective-space-twisting-sheaf-charts"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01MV and Section 01MM (O(1)(D_+(f)) = (S_f)_1, T_j/1 = (T_j/T_i)(T_i/1)); Sheaves, Section 0094 (literature/stacks-project/sheaves.tex) for the unit of f^* ⊣ f_*"
-   }
-  },
-  {
-   "text": "*(c): the open as a fibre product.* Let $S'=\\operatorname{Spec}R\\subseteq S$ be an affine open, $i\\in n$, $D=D_+(T_i)$ and $W=D_+(T_i)_S\\cap q^{-1}(S')=\\rho^{-1}(D)\\cap q^{-1}(S')$. $P=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ with projections $q,\\rho$ [def-nagata-projective-space-base-change]. By [lem-weil-pbc-open-fibre-product] (base $\\operatorname{Spec}\\mathbf Z$ with $U=\\operatorname{Spec}\\mathbf Z$, $V=S'\\subseteq S$, $W'=D\\subseteq\\mathbf P^n_{\\mathbf Z}$), the canonical morphism $\\iota:S'\\times_{\\operatorname{Spec}\\mathbf Z}D\\to P$ [def-pc-fibre-product] is an open immersion with image $q^{-1}(S')\\cap\\rho^{-1}(D)=W$, and $q\\circ\\iota$, $\\rho\\circ\\iota$ are the two projections followed by the inclusions of $S'$, $D$.",
-   "uses": [
-    "lem-weil-pbc-open-fibre-product",
-    "def-nagata-projective-space-base-change",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01JR (label lemma-open-fibre-product)"
-   }
-  },
-  {
-   "text": "*(c): the affine computation.* By [lem-weil-pbc-projective-space-twisting-sheaf-charts] (ii), $D\\cong\\operatorname{Spec}\\mathbf Z[U_j:j\\in n\\setminus\\{i\\}]$, the polynomial ring in the elements $U_j=T_j/T_i$ of $\\Gamma(D,\\mathcal O)$; and $S'=\\operatorname{Spec}R$. Every morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}\\mathbf Z$ is $\\operatorname{Spec}$ of a ring map $\\mathbf Z\\to B$ [def-weil-affine-spectrum], and there is only one ring map $\\mathbf Z\\to B$, so the maps of $S'$ and $D$ to $\\operatorname{Spec}\\mathbf Z$ are induced by the structure maps. By [lem-weil-pbc-fibre-product-affine-spectra] (base ring $\\mathbf Z$, $A=R$, $B=\\mathbf Z[U]$), $S'\\times_{\\operatorname{Spec}\\mathbf Z}D\\cong\\operatorname{Spec}(R\\otimes_{\\mathbf Z}\\mathbf Z[U])$ with projections $\\operatorname{Spec}(r\\mapsto r\\otimes1)$ and $\\operatorname{Spec}(p\\mapsto1\\otimes p)$; by [lem-weil-pbc-polynomial-scalar-extension] ($A=\\mathbf Z$), $R\\otimes_{\\mathbf Z}\\mathbf Z[U]\\cong R[U]$ with $r\\otimes1\\mapsto r$, $1\\otimes U_j\\mapsto U_j$. With step 7, $\\iota$ gives an isomorphism $\\operatorname{Spec}R[U]\\cong W$ under which $q|_W:W\\to S'$ is $\\operatorname{Spec}$ of the inclusion $R\\to R[U]$ and $\\rho|_W:W\\to D$ is $\\operatorname{Spec}$ of $\\mathbf Z[U]\\to R[U]$, $U_j\\mapsto U_j$.",
-   "uses": [
-    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-polynomial-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 01JO / Lemma 01JR (fibre products of affine schemes: Spec A ×_{Spec R} Spec B = Spec(A ⊗_R B)); Constructions, Lemma 01NG for D_+(T_i) = Spec Z[T_j/T_i]"
-   }
-  },
-  {
-   "text": "*(c): conclusion.* By step 8, $W$ is affine. Taking global sections [def-weil-affine-spectrum] ($\\Gamma(\\operatorname{Spec}B,\\mathcal O)=B$, and $\\operatorname{Spec}\\varphi$ induces $\\varphi$ on global sections), the isomorphism of step 8 gives a ring isomorphism $\\beta:R[U]\\to\\Gamma(W,\\mathcal O_P)$ which is $R$-linear for the $R$-algebra structure of $\\Gamma(W,\\mathcal O_P)$ through $q^\\sharp:R=\\Gamma(S',\\mathcal O_S)\\to\\Gamma(W,\\mathcal O_P)$ (as $q|_W$ is $\\operatorname{Spec}(R\\to R[U])$), and sends $U_j$ to $\\rho^\\sharp(T_j/T_i)|_W=u_{j/i}|_W$ (as $\\rho|_W$ is $\\operatorname{Spec}(U_j\\mapsto U_j)$ and $U_j=T_j/T_i$ in $\\Gamma(D,\\mathcal O)$). An $R$-algebra map out of the polynomial ring $R[U_j:j\\in n\\setminus\\{i\\}]$ is determined by the images of the $U_j$, so $\\beta$ is the map $U_j\\mapsto u_{j/i}$ of (c), which is therefore an isomorphism.",
-   "uses": [
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I1 (morphisms into an affine scheme / global sections of Spec)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-projective-space-twist-glued-identification",
-  "def-pc-projective-space-twist",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-projective-space-twisting-sheaf-charts",
   "prop-nagata-proj-standard-open",
-  "def-nagata-projective-space-base-change",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-weil-pbc-nonvanishing-section-trivializes",
-  "lem-weil-pbc-open-fibre-product",
-  "def-pc-fibre-product",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-polynomial-scalar-extension"
+  "lem-weil-pbc-projective-space-standard-charts-part1",
+  "lem-weil-pbc-projective-space-standard-charts-part2",
+  "lem-weil-pbc-projective-space-standard-charts-part3"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions 01NG (charts of P^n_Z), 01MS/01MV (generator and non-vanishing locus of T_i on D_+(T_i)), Section 01ND (base change to S); Schemes 01JR and Section 01JO for the restriction over Spec R. The assembly of these over P(n;S) is the agent's; the blueprint states the node nowhere (created by lem-weil-pbc-p1-power-affine-charts)."
+  "place": "Second reading Y3, 2026-10-13: reduction following Stacks 01NG/01MV, using proved upstream chart declarations and Mathlib adjunction uniqueness."
  },
  "mathlib_searches": [
   {
@@ -267,5 +160,15 @@
   "group": "E1",
   "result": "pass",
   "note": "n:Type u [Finite][Nonempty]=finite nonempty index set; (a) iSup standardOpen=top, standardOpen rfl-equal to toProjInt preimage of Proj.basicOpen X_i = node's D+(T_i)_S; (b) all Y,g,i,j: tensorPullback g of recorded twist, pulled T_i via exists_tensorPullbackAdjunction unit, exists-unique a over every V<=g^-1 chart, T_j=g^*(u_{j/i})T_i with awayXRatio i j = T_j/T_i, nonvanishingLocus(twist,T_i)=chart; (c) V,R,eV: IsAffineOpen, E: MvPolynomial {j//j!=i} R ≃+* Γ with C r via q-restriction h and X j -> u_{j/i}, same form as P1PowerAffineCharts"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2a4ec",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T000049-L-2232776",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged parent signature and component statements with DAG records and proofs; all four delivered modules and all three direct importers compile cleanly; axioms match the reported affine obligation."
  }
 }

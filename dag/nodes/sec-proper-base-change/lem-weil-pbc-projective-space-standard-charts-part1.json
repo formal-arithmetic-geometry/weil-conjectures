@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-projective-space-standard-charts-part1",
+ "kind": "lemma",
+ "title": "Tensor pullback of coordinate generators",
+ "statement": "For a finite nonempty coordinate set n and scheme S, put P = projective space over S [def-nagata-projective-space-base-change] and L = O_P(1) [def-pc-projective-space-twist]. For every scheme Y, morphism g:Y→P and indices i,j, tensorPullback g L [def-pc-module-pullback] is invertible. On every open V contained in g⁻¹(D_+(T_i)_S), each section is uniquely a times the restriction of the pulled coordinate section T_i, where the pull is the unit of [lem-pc-module-pullback-adjunction]. On g⁻¹(D_+(T_i)_S), the pulled T_j equals g-sharp(rho-sharp(T_j/T_i)) times the pulled T_i.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma (Tag 01NG, label lemma-standard-covering-projective-space) for the charts of P^n_Z; Lemma (Tag 01MV, label lemma-principal-open) and Lemma (Tag 01MS, label lemma-when-invertible) for the non-vanishing locus of T_i and the generator of O(1) on D_+(T_i); Definition (Section Tag 01ND, label definition-projective-space) for the base change; with Schemes, Lemmas 01JR and 01I4 (literature/stacks-project/schemes.tex) for the restriction over Spec R"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-nagata-affine-proj",
+  "def-sc-invertible-module",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The adjunction defining tensorPullback and the usual pullback adjunction have the\nsame right adjoint. Uniqueness of left adjoints gives an isomorphism e of their values\non O(1), and compatibility with units sends every pulled coordinate section to the usual\npullbackSection. Naturality of e gives this equality after restriction to every open.\nTransport invertibility through e. On the i-th chart the upstream theorem\nisFreeGenerator_pullbackSection_twistOneSection gives a free generator; restrict it to\nV and use its bijective scalar multiplication map to get the unique coefficient of e(t).\nInjectivity of e on sections transports both existence and uniqueness back. Finally,\napply e to the desired ratio relation, use its linearity and unit compatibility, and\napply pullbackSection_twistOneSection_map_eq_smul with indices j,i.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Second reading Y3, 2026-10-13: reduction following Stacks 01NG/01MV, using proved upstream chart declarations and Mathlib adjunction uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "standard open D_+(X_i) of projective space over a scheme is affine space, coordinates X_j / X_i",
+   "results": "AlgebraicGeometry.Proj.isAffineOpen_basicOpen, Proj.affineOpenCover, Proj.basicOpen, Proj.basicOpenIsoSpec(_hom) (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic); Scheme.affineBasicOpen",
+   "date": "2026-10-09",
+   "verdict": "no match: charts of a single Proj of a graded ring; no projective space over a scheme, no twisting sheaf sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective space over a scheme covered by standard opens where homogeneous coordinate T_i does not vanish, each isomorphic to affine space over the base",
+   "results": "AlgebraicGeometry.Proj, Proj.openCoverOfMapIrrelevantEqTop, Proj.awayι, Proj.affineOpenCoverOfIrrelevantLESpan, Proj.affineOpenCover, Proj.toSpecZero, Proj.fromOfGlobalSections (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.*)",
+   "date": "2026-10-09",
+   "verdict": "no match (pieces for P^n_Z only: Proj.basicOpenIsoSpec, Proj.iSup_basicOpen_eq_top)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProjectiveSpace\\|projectiveSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'basicOpenIsoSpec\\|iSup_basicOpen_eq_top' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "results": "no ProjectiveSpace in Mathlib; ProjectiveSpectrum/Basic.lean:161 basicOpenIsoSpec (D_+(f) ≅ Spec A_(f)), :86 iSup_basicOpen_eq_top; no twisting sheaf O(1) on Proj in Mathlib",
+   "date": "2026-10-09",
+   "verdict": "no match in Mathlib. The source repository (slopmaster2) has it sorry-free: WeilConjectures/AlgebraicGeometry/ProjectiveSpace/OfSections.lean:116 iSup_standardOpen (a); ProjectiveSpace/Twist.lean:254 isFreeGenerator_pullbackSection_twistOneSection and :270 pullbackSection_twistOneSection_map_eq_smul (b), CoordinateSection.lean:116 compl_support_zeroLocus_coordinateSection (b, non-vanishing locus); Charts.lean:117 standardOpenIso (D_+(T_i)_S ≅ A^{n-1}_S over S) and :144 isAffineOpen_standardOpen (c, in the form over S, to be restricted to Spec R)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "preimage of standard open D+(T_i) under base change of projective space over Spec R is Spec of polynomial ring R[T_j/T_i]",
+   "results": "ProjectiveSpectrum.Proj.toSpec_preimage_basicOpen, ProjIsoSpecTopComponent.ToSpec.preimage_basicOpen, Proj.toSpec_base_apply_eq_comap, ProjIsoSpecTopComponent.toSpec_preimage_basicOpen, ToSpec.toFun (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme)",
+   "date": "2026-10-09",
+   "verdict": "no match: single Proj of a graded ring only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "twisting sheaf O(1) on Proj restricted to basic open D+(f) is free with generator f",
+   "results": "Scheme.affineBasicOpen, Proj.basicOpen, ProjectiveSpectrum.Proj.toSpec, Proj.basicOpenIsoSpec, Proj.fromOfGlobalSections_resLE",
+   "date": "2026-10-09",
+   "verdict": "no match: no O(1) on Proj in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'twist\\|Twist\\|ProjectiveSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has neither projective space over a scheme nor twisting sheaves; the pieces over Z are Proj.basicOpenIsoSpec, Proj.iSup_basicOpen_eq_top (ProjectiveSpectrum/Basic.lean)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine open of projective space over an affine open in its base polynomial coordinate ring ratios",
+   "results": "Proj.isAffineOpen_basicOpen, Proj.awayι, Proj.affineOpenCover",
+   "verdict": "Pieces only; no exact combined statement.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq, unit_leftAdjointUniq_hom_app",
+   "verdict": "Pieces only; no exact combined statement.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanishingLocus|standardOpenIso|pullbackSpecIso",
+   "results": "Public SectionNonvanishingZeroLocus bridge and upstream CoordinateSection; Charts and Mathlib Pullbacks contain pieces",
+   "verdict": "Pieces only; no exact combined statement.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso|toSpec.*Iso|appTop.*X",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+   "verdict": "Independent second reading: component facts only; no exact full affine-coordinate statement.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global functions on a projective coordinate chart restricted to an affine base are a multivariate polynomial ring with prescribed generators",
+   "results": "WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq, WeierstrassCurve.Affine.CoordinateRing, WeierstrassCurve.Affine.CoordinateRing.mk, AlgebraicGeometry.AffineSpace.coord, WeierstrassCurve.Affine.CoordinateRing.instAlgebraPolynomial, WeierstrassCurve.Affine.CoordinateRing.XClass, WeierstrassCurve.Affine.CoordinateRing.YClass, WeierstrassCurve.Projective.toAffine",
+   "verdict": "Independent second reading: component facts only; no exact full affine-coordinate statement.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.algebraTensorAlgEquiv",
+   "results": "MvPolynomial.algebraTensorAlgEquiv, MvPolynomial.algebraTensorAlgEquiv_tmul, MvPolynomial.algebraTensorAlgEquiv_symm_X, MvPolynomial.algebraTensorAlgEquiv_symm_map, MvPolynomial.algebraTensorAlgEquiv_symm_monomial, MvPolynomial.algebraTensorAlgEquiv_symm_comp_aeval, Algebra.Generators.baseChangeFromBaseChange_apply, Algebra.Generators.baseChangeToBaseChange_apply",
+   "verdict": "Independent second reading: component facts only; no exact full affine-coordinate statement.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-projective-space-standard-charts",
+   "place": "component 1 of the standard-chart conjunction"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardChartsPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceStandardChartsPullback.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.projectiveSpace_standardCharts_part1",
+  "statement": "theorem projectiveSpace_standardCharts_part1 (n : Type u) (S : Scheme.{u})\n    [Finite n] [Nonempty n] :\n    (∀ (Y : Scheme.{u}) (g : Y ⟶ ℙ(n; S)) (i j : n),\n      ((Scheme.Modules.tensorPullback g).obj (twist n S 1)).IsInvertible ∧\n      (∀ (V : Y.Opens), V ≤ g ⁻¹ᵁ standardOpen n S i →\n        ∀ t : Γ((Scheme.Modules.tensorPullback g).obj (twist n S 1), V),\n          ∃! a : Γ(Y, V), t = a •\n            ((Scheme.Modules.tensorPullback g).obj (twist n S 1)).presheaf.map\n              (homOfLE (le_top : V ≤ ⊤)).op \n                (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app\n                  (twist n S 1)).val.app (op ⊤) (twistOneSection n S i))) ∧\n      ((Scheme.Modules.tensorPullback g).obj (twist n S 1)).presheaf.map\n          (homOfLE (le_top : g ⁻¹ᵁ standardOpen n S i ≤ ⊤)).op \n            (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app\n              (twist n S 1)).val.app (op ⊤) (twistOneSection n S j)) =\n        g.app (standardOpen n S i)\n          ((toProjInt n S).app\n            (Proj.basicOpen (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i))\n            (Proj.awayToSection _ _ (MvPolynomial.awayXRatio (ULift.{u} ℤ) i j))) •\n          ((Scheme.Modules.tensorPullback g).obj (twist n S 1)).presheaf.map\n            (homOfLE (le_top : g ⁻¹ᵁ standardOpen n S i ≤ ⊤)).op \n                (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app\n                  (twist n S 1)).val.app (op ⊤) (twistOneSection n S i)))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2a4ec",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T000049-L-2232776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2a4ec",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T000049-L-2232776",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged parent signature and component statements with DAG records and proofs; all four delivered modules and all three direct importers compile cleanly; axioms match the reported affine obligation."
+ }
+}

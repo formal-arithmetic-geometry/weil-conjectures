@@ -6,15 +6,12 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistGluedIdentification
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Paper.NonvanishingSectionTrivializes
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardChartsPullback
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardChartsNonvanishing
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardChartsAffine
 
 /-!
 # Standard charts and coordinate sections of projective space
@@ -109,7 +106,8 @@ theorem projectiveSpace_standardCharts (n : Type u) (S : Scheme.{u})
           ((toProjInt n S).app
             (Proj.basicOpen (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i))
             (Proj.awayToSection _ _ (MvPolynomial.awayXRatio (ULift.{u} ℤ) i j.1))) := by
-  sorry
+  exact ⟨iSup_standardOpen n S, projectiveSpace_standardCharts_part1 n S,
+    projectiveSpace_standardCharts_part2 n S, projectiveSpace_standardCharts_part3 n S⟩
 
 end
 end AlgebraicGeometry.ProjectiveSpace
