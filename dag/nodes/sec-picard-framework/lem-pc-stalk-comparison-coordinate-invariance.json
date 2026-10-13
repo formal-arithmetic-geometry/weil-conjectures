@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-stalk-comparison-coordinate-invariance",
+ "kind": "statement",
+ "title": "Invertibility of the stalk comparison is independent of K-flat coordinates",
+ "statement": "Let $f:X\\to S$, $f':X'\\to S'$, $g:S'\\to S$, and $g':X'\\to X$ form a cartesian square of schemes [def-pc-scheme, def-pc-base-change], with chosen derived categories of module sheaves. Let $K\\in D(\\mathcal O_X)$, $K'\\in D(\\mathcal O_{X'})$, and $\\varphi:L(g')^*K\\to K'$. Let $c$ and $d$ be two Coordinates for $\\varphi$ as in [def-pc-single-complex-base-change-stalk-condition]: their original representatives are K-flat, their representative isomorphisms identify them with $K,K'$, their pullback counits are invertible, and their chain maps satisfy represents. For every $z\\in X'$ and $i\\in\\mathbf Z$, stalkComparison in coordinates $c$ is invertible if and only if stalkComparison in coordinates $d$ is invertible. The comparison uses the actual stalk maps and the canonical localized model [def-pc-base-derived-tensor-cohomology-model].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-cochain-complex-modules",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8 (lemma-single-complex-base-change-condition), canonical derived comparison and representative independence"
+ },
+ "proof": [
+  {
+   "text": "Compose c.e with the inverse of d.e to identify their original complexes in D(O_X). Exact stalks and exact restriction to R transport this derived isomorphism. Universality of derived scalar extension and cohomologyIso_smul give an A-tensor-R-B-linear isomorphism of source cohomology; extend it to C. Compose c.e' with the inverse of d.e' and use exact stalks to obtain the target cohomology isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "K-flatness of the original coordinate complexes implies K-flatness of their stalk complexes. Thus ordinary extension of these stalk complexes computes derived pullback along A to C. The universal pullback counits and the degreewise tensorStalkIso identify these derived targets. Apply derived cohomology to both represents equations. The two model counit equations comparison_eq and localized_eq, together with naturality of these identifications, give a commuting square whose horizontal arrows are the displayed stalkComparison maps and whose vertical arrows are the two isomorphisms of step 1.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion",
+    "def-pc-derived-pullback",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A commuting square with invertible vertical arrows expresses either horizontal arrow as a conjugate of the other. Composition with isomorphisms preserves and reflects invertibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-kflat-stalk-criterion",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8 (lemma-single-complex-base-change-condition), canonical derived comparison and representative independence",
+  "note": "The universal-property and coordinate transport arguments written out from the canonical construction in equation-bc."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of derived tensor cohomology localized comparison under change of representative",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, Rep.Tor_map, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, Rep.torIso, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality. No exact match to the scheme cohomologyModel or Coordinates interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|stalkComparison|IsLeftDerivedFunctor",
+   "results": "0 hits: . No exact match to the scheme cohomologyModel or Coordinates interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localized derived tensor comparison is natural for quasi-isomorphisms and independent of K-flat representative coordinates",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "base-change comparison step: canonical counit stalkwise condition, through lem-pc-rf-base-change-complex; original counit transport steps 1 and 2",
+   "via": [
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkComparisonCoordinateInvariance",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkComparisonCoordinateInvariance.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.isIso_stalkComparison_iff_coordinates",
+  "statement": "theorem isIso_stalkComparison_iff_coordinates\n    {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'}\n    {φ : (derivedPullback g').obj K ⟶ K'}\n    (c d : Coordinates g' K K' φ) (z : X') (i : ℤ) :\n    IsIso (stalkComparison f f' g g' sq c z i) ↔\n      IsIso (stalkComparison f f' g g' sq d z i)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T054219-L-443556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T054219-L-443556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

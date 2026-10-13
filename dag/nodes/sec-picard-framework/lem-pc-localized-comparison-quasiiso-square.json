@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-localized-comparison-quasiiso-square",
+ "kind": "statement",
+ "title": "The localized counit comparison square for a quasi-isomorphism",
+ "statement": "Let $f:X\\to S$, $f':X'\\to S'$, $g:S'\\to S$, and $g':X'\\to X$ be morphisms of schemes [def-pc-scheme] forming a cartesian square [def-pc-base-change], with chosen derived categories of module sheaves. Let $s:P\\to G$ be a quasi-isomorphism of arbitrary cochain complexes of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules]. For $z\\in X'$ and $i\\in\\mathbf Z$, let $M_P$ and $M_G$ be the canonical cohomology models [def-pc-base-derived-tensor-cohomology-model] with actual stalk-ring actions [def-pc-single-complex-base-change-stalk-condition]. Write $L_P$ and $L_G$ for their localizedComparison maps in degree $i$, $J_P$ and $J_G$ for the homology maps of tensorStalkIso, and $T_s$ for the homology map of the stalk of termwise tensor pullback of $s$. There exists an isomorphism $e:\\operatorname{dom}(L_P)\\simeq\\operatorname{dom}(L_G)$ of $\\mathcal O_{X',z}$-modules such that $T_s\\circ J_P\\circ L_P=J_G\\circ L_G\\circ e$. No invertibility of either $L_P$, $L_G$, or $T_s$ is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-cochain-complex-modules",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8 (lemma-single-complex-base-change-condition), canonical derived comparison and representative independence"
+ },
+ "proof": [
+  {
+   "text": "Exactness of module stalks and restriction of scalars sends s to an isomorphism in D(R). Uniqueness of the universal left-derived scalar-extension functor identifies the two chosen model functors. Apply cohomology and their cohomologyIso fields; naturality for multiplication by A, using cohomologyIso_smul, makes the resulting isomorphism linear over A tensor_R B. Extend scalars to C to obtain e.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the universal counits, conjugated by the models' cohomologyIso and ordinaryIso, gives the square for comparison via comparison_eq. The generator specification of ordinaryToLocalized makes its square commute with the stalk of s. Transposing with the extension/restriction adjunction and using localized_eq gives the square for localizedComparison. Finally tensorStalkIso is natural in s: its specified components are the natural module-pullback stalk isomorphism. Apply homology and compose the squares, obtaining exactly T_s composed with J_P composed with L_P = J_G composed with L_G composed with e.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8 (lemma-single-complex-base-change-condition), canonical derived comparison and representative independence",
+  "note": "The universal-property and coordinate transport arguments written out from the canonical construction in equation-bc."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of derived tensor cohomology localized comparison under change of representative",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, Rep.Tor_map, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, Rep.torIso, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality. No exact match to the scheme cohomologyModel or Coordinates interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|stalkComparison|IsLeftDerivedFunctor",
+   "results": "0 hits: . No exact match to the scheme cohomologyModel or Coordinates interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localized derived tensor comparison is natural for quasi-isomorphisms and independent of K-flat representative coordinates",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CounitStalkConditionFromLocalizedComparison",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "base-change comparison step: canonical counit stalkwise condition, through lem-pc-rf-base-change-complex; original counit transport steps 1 and 2",
+   "via": [
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedComparisonQuasiIsoSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedComparisonQuasiIsoSquare.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_localizedComparison_quasiIso_square",
+  "statement": "theorem exists_localizedComparison_quasiIso_square\n    (P G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (s : P ⟶ G) (hs : QuasiIso s) (z : X') (i : ℤ) :\n    letI := leftAlgebra f g' z\n    letI := rightAlgebra f f' g g' sq z\n    letI := (tensorMap f f' g g' sq z).toAlgebra\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z))\n    ∃ e : (Arrow.mk ((cohomologyModel f f' g g' sq z P).localizedComparison i)).left ≅\n        (Arrow.mk ((cohomologyModel f f' g g' sq z G).localizedComparison i)).left,\n      (cohomologyModel f f' g g' sq z P).localizedComparison i ≫\n          HomologicalComplex.homologyMap (tensorStalkIso f f' g g' sq z P).hom i ≫\n          HomologicalComplex.homologyMap\n            (((RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex\n              (.up ℤ)).map\n                (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).map s)) i =\n        e.hom ≫ (cohomologyModel f f' g g' sq z G).localizedComparison i ≫\n          HomologicalComplex.homologyMap (tensorStalkIso f f' g g' sq z G).hom i",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T054219-L-443556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T054219-L-443556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
