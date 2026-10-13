@@ -12967,3 +12967,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:22 L: returned deliver/U3/Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison (reviewer RETURN: (reviewer X-38cc2, head 38cc2bb6f) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Lo)
 - 15:24 L: merged deliver/D4/Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorStrictLocalLimit (stage 3; reviewer PASS; first push; landing 20261013T152438-L-991481 (proof); batch 20261013T152436; modules 1; new nodes 0)
 - 15:24 L: merged deliver/F1/Sheaf.Paper.ModuleCupGodementPairingForModels (stage 3; reviewer PASS; first push; landing 20261013T152438-L-991657 (interface); batch 20261013T152436; modules 2; new nodes 2)
+- 15:24 L: merged deliver/G1/Sheaf.AlgebraicGeometry.PinnedPullbackCompositionShifts (stage 3; reviewer PASS; first push; landing 20261013T152438-L-991829 (proof); batch 20261013T152436; modules 1; new nodes 0)
