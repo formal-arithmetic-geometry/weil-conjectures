@@ -548,6 +548,10 @@ Proof:
    of distinguished triangles. Quasi-coherence of Rh_*E' follows from
    lem-pc-derived-direct-image-preserves-qcoh.
 -/
+-- STATEMENT-DISPUTED: Classical.choice of Nonempty comparison isomorphisms carries no
+-- canonical unit or restriction compatibility. The required triangle squares need those
+-- compatibilities, which derivedDirectImageComposition and the open-restriction interface
+-- discard. This is an interface dispute; no concrete scheme counterexample is certified.
 theorem schemeDerived_mayerVietoris_directImage
     (X Y : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y]

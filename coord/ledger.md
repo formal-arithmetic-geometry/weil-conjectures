@@ -12472,3 +12472,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:41 L: returned deliver/Q4/Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizationEvaluation (reviewer RETURN: (reviewer X-7a434, head 7a434abbc) A (reader-gate/interface compile): the delivered local witness registrations cause th)
 - 12:43 L: merged deliver/A3/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentExtension (stage 3; reviewer PASS; first push; landing 20261013T124306-L-3774882 (proof); batch 20261013T124305; modules 1; new nodes 0)
 - 12:43 L: merged deliver/B3/Sheaf.AlgebraicGeometry.CanonicalTensorHomEvaluationNaturality (stage 3; reviewer PASS; first push; landing 20261013T124307-L-3775034 (interface); batch 20261013T124305; modules 3; new nodes 2)
+- 12:43 L: merged deliver/C1/Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial (stage 3; reviewer PASS; first push; landing 20261013T124307-L-3775191 (proof); batch 20261013T124305; modules 1; new nodes 0)
