@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-ordered-cech-second-sorting-degreewise",
+ "kind": "statement",
+ "title": "Degreewise second-sorting module maps",
+ "statement": "Given a nonnegative cochain complex D and coordinate identifications e satisfying local scalar compatibility, the explicit first-repeat signed sum defines module-sheaf morphisms K_p : D^{p+1} -> D^p whose every full tuple coordinate is the corresponding first-repeat finite sum.",
+ "stmt_deps": [
+  "def-pc-ordered-cech-module-coordinates",
+  "def-pc-alternating-cech-sorting-operators",
+  "lem-pc-ordered-cech-degreewise-projection"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.2, assembly of c_2"
+ },
+ "proof_deps": [
+  "def-pc-ordered-cech-module-coordinates",
+  "def-pc-alternating-cech-sorting-operators",
+  "lem-pc-ordered-cech-degreewise-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a natural transformation of abelian presheaves preserving local scalar multiplication defines a morphism of sheaves of modules",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no search verdict inferred. Independent leanfinder, loogle and direct rg searches completed.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation between sheaves of modules locally linear on sections",
+   "results": "Found PresheafOfModules.homMk and generic sheaf hom constructions; homMk is used in the proof. No exact first-repeat assembly theorem.",
+   "date": "2026-10-13",
+   "verdict": "generic constructor used; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.homMk",
+   "results": "Found homMk and homMk_app; homMk is used directly. No Cech sorting assembly theorem.",
+   "date": "2026-10-13",
+   "verdict": "generic constructor used; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "secondSorting|sorting.*[Ll]inear|sorting.*[Mm]odule|homMk",
+   "results": "Direct rg of lean/Sheaf/AlgebraicGeometry/OrderedCech* found degreewise projection and first-sorting assembly, whose formulas differ; the additive second-sorting operators are already reused. No duplicate second-sorting module assembly.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrderedCechModuleSecondSortingBoundary",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ordered-cech-module-second-sorting-boundary",
+   "place": "Proof paragraph: construct module-sheaf maps from the explicit first-repeat sum",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrderedCechModuleSecondSortingLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrderedCechModuleSecondSortingLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.orderedCech_secondSorting_degreewise_exists",
+  "statement": "theorem orderedCech_secondSorting_degreewise_exists {X' : Scheme.{u}}\n    (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)\n    (D : CochainComplex X'.Modules ℕ)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor W₀).obj\n          ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj\n              M.presheafModuleCat)).X p)\n    (hlinear : ∀ (p : ℕ) (y : Fin (p + 1) → ULift.{u} (Fin r)) (B : X'.Opens),\n        let c : Γ(D.X p, B) → Γ(M, (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B) :=\n          fun s ↦ ((e p).hom ≫ Pi.π (fun y : Fin (p + 1) → ULift.{u} (Fin r) ↦\n            ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj\n                M.presheafModuleCat).obj\n                (op (∏ᶜ fun l ↦ W₀ (y l)))) y).app (op B) s\n        ∀ (a : Γ(X', B)) (s : Γ(D.X p, B)),\n          c (a • s) = X'.presheaf.map (prod.snd :\n            (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B ⟶ B).op a • c s)\n    : ∃ Q : ∀ p : ℕ, D.X (p + 1) ⟶ D.X p,\n      ∀ (p : ℕ) (B : X'.Opens) (s : Γ(D.X (p + 1), B))\n        (y : Fin (p + 1) → ULift.{u} (Fin r)),\n        orderedCechNaturalCoordinate M W₀ D e p B y ((Q p).app B s) =\n          orderedCechSecondSortingValue M W₀ D e p B y s",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "proof": [
+  {
+   "text": "Use orderedCechNaturalCoordinate from the degreewise projection module as the full-tuple coordinate; assemble the explicit finite first-repeat sum through the coordinate isomorphisms e, prove naturality and local scalar compatibility termwise, then lift the resulting additive presheaf morphisms to module-sheaf morphisms by PresheafOfModules.homMk.",
+   "uses": [
+    "def-pc-ordered-cech-module-coordinates",
+    "def-pc-alternating-cech-sorting-operators",
+    "lem-pc-ordered-cech-degreewise-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T113337-L-3181464",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T113337-L-3181464",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
