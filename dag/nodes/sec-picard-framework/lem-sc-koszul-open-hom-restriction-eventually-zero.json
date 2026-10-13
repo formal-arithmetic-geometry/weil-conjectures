@@ -27,37 +27,39 @@
  ],
  "proof": [
   {
-   "text": "Use the affine quasi-coherent derived equivalence to represent E by a termwise quasi-coherent complex F, corresponding to the A-module complex M. Each Koszul tail is bounded finite free. K-projectivity identifies its Hom-complex H^0 with derived Hom, naturally in the power transitions.",
+   "text": "Apply the core affine derived equivalence and essential surjectivity of Q to get a module complex representing E. The factorization natural isomorphism identifies termwise tilde with E. presentationTilde gives quasi-coherence of every term.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-sc-bounded-above-projective-kprojective"
+    "new-affine-qcoh-derived-equivalence-core"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the canonical Koszul-to-Cech-derived-sections comparison to F. It is a quasi-isomorphism. Exactness of filtered colimits of modules identifies H^0 of the source with the filtered colimit of the derived Hom groups. Evaluation at 1 identifies H^0 of derived sections with Hom from the restricted structure object. The explicit localization formula makes the comparison leg equal to restriction followed by the inverse augmentation.",
+   "text": "Apply the stagewise additive equivalences and their restriction-zero compatibility. The existing affine Koszul-Cech comparison is an isomorphism. Its degree-zero homology map, preceded by the inverse homology localization isomorphism, is therefore injective. The restriction-zero equation implies that the Hom-complex colimit class is zero.",
    "uses": [
-    "lem-sc-affine-koszul-cech-derived-comparison",
-    "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+    "lem-sc-koszul-open-hom-homology-comparison",
+    "lem-sc-affine-koszul-cech-derived-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "If restriction(phi) is zero, its comparison image is zero. Injectivity on H^0 makes its filtered-colimit class zero. The element criterion for a filtered colimit of modules gives b at least e such that precomposition with the power transition kills phi.",
-   "uses": [],
-   "elementary": true
+   "text": "The proved filtered module-complex homology criterion gives a later transition killing the stage class. Naturality of the stagewise additive equivalences identifies this with the class of precomposition by koszulOpenMap. Additive equivalences preserve zero and are injective, proving the desired equality.",
+   "uses": [
+    "lem-sc-filtered-module-complex-homology-zero",
+    "lem-sc-koszul-open-hom-homology-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-sc-bounded-above-projective-kprojective",
   "lem-sc-affine-koszul-cech-derived-comparison",
-  "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+  "lem-sc-filtered-module-complex-homology-zero",
+  "lem-sc-koszul-open-hom-homology-comparison",
+  "new-affine-qcoh-derived-equivalence-core"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08DD, Proposition 36.9.5, H^0 argument; read from the Stacks online edition"
+  "place": "Tag 08DD, Proposition 36.9.5; stagewise identification and comparison injection followed by the proved Tag 00DB filtered-homology criterion"
  },
  "mathlib_searches": [
   {
@@ -143,11 +145,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-84a0c",
-  "group": "J2",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T040748-L-3948812",
+  "landing": "20261013T054230-L-446928",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged theorem signatures, the cocone proof and both new sourced lemmas with their DAG nodes; all three delivered modules and sole direct importer Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology compile cleanly. Axioms are standard plus sorryAx from acknowledged open dependencies; accepted as a decomposition."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-filtered-module-complex-homology-zero",
+ "kind": "statement",
+ "title": "A class zero in filtered complex homology vanishes at a later stage",
+ "statement": "Let A be a commutative ring and D a diagram of cochain complexes of A-modules indexed by the natural numbers with their usual order. For an integer n, a stage e, and a class x in H^n(D_e), suppose the homology map induced by the canonical cocone leg D_e to colim D sends x to zero. Then there is b at least e such that the homology map of D(e to b) sends x to zero. Cochain complexes and homology are as in [def-pc-cochain-complex-modules].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 10.8.8, Tag 00DB, homology of directed colimits; also used in Tag 08DD"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "ModuleCat.AB gives exactness of filtered colimits. Shrink AB5 to the size of the natural-number indexing category. Regard a diagram of short complexes as a short complex of diagrams. Evaluation preserves homology, so its homology is naturally the pointwise homology diagram. The exact colimit functor preserves homology as well. Compose the two homology isomorphisms; homologyMap_mapNatTrans applied to each cocone leg verifies the resulting colimit cocone.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The adjacent-short-complex functor preserves colimits because all three evaluation functors do. Transport preservation across homologyFunctorIso to get preservation of colimits by degree-n complex homology.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The forgetful functor on modules preserves the filtered colimit. Apply Concrete.isColimit_exists_of_rep_eq to the equality of the image of x and the image of zero. This gives a common stage b and arrows e to b. Those arrows coincide because the indexing category is a preorder. Their maps preserve zero, giving the conclusion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 10.8.8, Tag 00DB, homology of directed colimits; also used in Tag 08DD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homology of filtered colimit of module complexes commutes with colimit",
+   "results": "Service returned Internal Server Error; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a directed system of module complexes a cohomology class mapping to zero in the colimit vanishes at a later stage",
+   "results": "Module.DirectLimit.of.zero_exact handles a module direct limit, not homology of a colimit complex. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*colimit|colimit.*homology",
+   "results": "Mathlib short-complex functor equivalence, ModuleCat.AB and Concrete.isColimit_exists_of_rep_eq give the assembly. Existing DirectedColimitHomology uses abelian groups and a Z x Z shape, not the module/cochain assertion. Blueprint searches for 00DB and homology filtered colimit found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "assembly only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenHomRestrictionEventuallyZero",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Lemma 10.8.8, Tag 00DB, homology of directed colimits; also used in Tag 08DD",
+   "via": [
+    "lem-sc-koszul-open-hom-restriction-eventually-zero",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredModuleComplexHomologyZero",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredModuleComplexHomologyZero.lean",
+  "declaration": "CategoryTheory.filteredModuleComplex_homology_eventually_zero",
+  "statement": "theorem filteredModuleComplex_homology_eventually_zero\n    (A : Type u) [CommRing A] (D : ℕ ⥤ CochainComplex (ModuleCat.{u} A) ℤ)\n    (n : ℤ) (e : ℕ) (x : (D.obj e).homology n)\n    (hx : HomologicalComplex.homologyMap (colimit.ι D e) n x = 0) :\n    ∃ (b : ℕ) (h : e ≤ b),\n      HomologicalComplex.homologyMap (D.map (homOfLE h)) n x = 0",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T054230-L-446928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T054230-L-446928",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

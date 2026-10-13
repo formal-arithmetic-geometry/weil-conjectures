@@ -6,10 +6,10 @@ Authors: SHEAF group J2
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison
-import Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
-import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
+import Sheaf.AlgebraicGeometry.KoszulOpenHomHomologyComparison
+import Sheaf.Algebra.Homology.FilteredModuleComplexHomologyZero
 
 /-! # Degree-zero consequences of the Koszul-to-Čech comparison
 
@@ -24,6 +24,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A derived morphism killed by restriction vanishes after a Koszul power transition.
 Source: Stacks Project, Tag 08DD, proof of Proposition 36.9.5.
 (blueprint: lem-sc-koszul-open-hom-restriction-eventually-zero)
@@ -61,6 +62,37 @@ theorem koszulOpenHom_restriction_eventually_zero
         (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
     ∀ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ E.1), R.map φ = 0 →
       ∃ (b : ℕ) (h : e ≤ b), koszulOpenMap A r f e b h ≫ φ = 0 := by
-  sorry
+  intro R
+  let := HasDerivedCategory.standard (ModuleCat.{uMain} A)
+  obtain ⟨a, ⟨ha⟩, _, _⟩ := exists_affineQCohDerivedEquivalence_core A
+  let M := DerivedCategory.Q.objPreimage (a.inverse.obj E)
+  let γ := a.functor.mapIso (DerivedCategory.Q.objObjPreimageIso (a.inverse.obj E)) ≪≫
+    a.counitIso.app E
+  let F := ((koszulOpenTilde A).mapHomologicalComplex (.up ℤ)).obj M
+  let eF : DerivedCategory.Q.obj F ≅ E.obj :=
+    (ha.app M).symm ≪≫ (schemeDerivedQCohProperty (Spec (.of A))).ι.mapIso γ
+  have hF (n : ℤ) : (F.X n).IsQuasicoherent := by
+    change ((tilde.functor (.of A)).obj (M.X n)).IsQuasicoherent
+    exact (presentationTilde (R := .of A) (M.X n) .univ (by simp) _
+      (Submodule.span_eq _)).isQuasicoherent
+  obtain ⟨α, hα, hz⟩ := koszulOpenHom_homology_comparison A r f F hF E eF
+  let N := ((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F
+  let D := koszulCechHomDiagram A r f N
+  let C := koszulCechHomColimit A r f N
+  let cmp := koszulCechDerivedComparison A r f F ≫
+    (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor.map eF.hom
+  have : IsIso cmp := affine_koszul_cech_derived_comparison A r f F hF E eF
+  let β := ((DerivedCategory.homologyFunctorFactors (ModuleCat.{uMain} A) 0).app C).inv ≫
+    (DerivedCategory.homologyFunctor (ModuleCat.{uMain} A) 0).map cmp
+  have : IsIso β := inferInstance
+  have hβ : Function.Injective β := (ConcreteCategory.isIso_iff_bijective β).mp
+    inferInstance |>.1
+  intro e φ hφ
+  have hx : HomologicalComplex.homologyMap (colimit.ι D e) 0 (α e φ) = 0 := by
+    apply hβ
+    exact (hz e φ hφ).trans (map_zero β.hom).symm
+  obtain ⟨b, h, hb⟩ := filteredModuleComplex_homology_eventually_zero A D 0 e (α e φ) hx
+  refine ⟨b, h, (α b).injective ?_⟩
+  rw [hα e b h φ, hb, map_zero]
 
 end AlgebraicGeometry
