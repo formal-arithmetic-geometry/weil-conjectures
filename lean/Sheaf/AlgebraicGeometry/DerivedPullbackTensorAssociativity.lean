@@ -8,8 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatTensorProduct
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
+
 
 /-! # Associativity of derived pullback tensor comparisons
 
@@ -39,6 +42,360 @@ attribute [local instance]
   tensorDescentModuleResolutions
   tensorDescentModuleDerivedMonoidal
   tensorDescentPullbackDescentQLax
+
+private theorem trifunctor_app_eq_of_iso
+    {C D : Type*} [Category* C] [Category* D]
+    {H K : C ⥤ C ⥤ C ⥤ D} (a b : H ⟶ K)
+    {A B C₀ A' B' C' : C} (eA : A' ≅ A) (eB : B' ≅ B) (eC : C' ≅ C₀)
+    (h : ((a.app A').app B').app C' = ((b.app A').app B').app C') :
+    ((a.app A).app B).app C₀ = ((b.app A).app B).app C₀ := by
+  have hC : ((a.app A').app B').app C₀ = ((b.app A').app B').app C₀ := by
+    rw [← cancel_epi (((H.obj A').obj B').map eC.hom)]
+    rw [((a.app A').app B').naturality, ((b.app A').app B').naturality, h]
+  have hB : ((a.app A').app B).app C₀ = ((b.app A').app B).app C₀ := by
+    have ha := congr_app ((a.app A').naturality eB.hom) C₀
+    have hb := congr_app ((b.app A').naturality eB.hom) C₀
+    rw [← cancel_epi (((H.obj A').map eB.hom).app C₀)]
+    change _ ≫ _ = _ ≫ _ at ha hb
+    rw [ha, hb, hC]
+  have ha := congr_app (congr_app (a.naturality eA.hom) B) C₀
+  have hb := congr_app (congr_app (b.naturality eA.hom) B) C₀
+  rw [← cancel_epi (((H.map eA.hom).app B).app C₀)]
+  change _ ≫ _ = _ ≫ _ at ha hb
+  rw [ha, hb, hB]
+
+open Functor.LaxMonoidal Functor.OplaxMonoidal in
+private theorem oplax_associativity_on_class
+    {K₁ K₂ D₁ D₂ : Type*} [Category* K₁] [Category* K₂]
+    [Category* D₁] [Category* D₂]
+    [MonoidalCategory K₁] [MonoidalCategory K₂]
+    [MonoidalCategory D₁] [MonoidalCategory D₂]
+    {Q₁ : K₁ ⥤ D₁} {Q₂ : K₂ ⥤ D₂} [Q₁.LaxMonoidal] [Q₂.LaxMonoidal]
+    {F : K₁ ⥤ K₂} [F.OplaxMonoidal] {G : D₁ ⥤ D₂}
+    (δG : curriedTensorPost G ⟶ curriedTensorPre G)
+    (e : ∀ a, G.obj (Q₁.obj a) ⟶ Q₂.obj (F.obj a))
+    (he : ∀ ⦃a b : K₁⦄ (f : a ⟶ b),
+      G.map (Q₁.map f) ≫ e b = e a ≫ Q₂.map (F.map f))
+    (S : K₁ → Prop)
+    (hδ : ∀ a b, S a → S b →
+      (δG.app (Q₁.obj a)).app (Q₁.obj b) ≫ (e a ⊗ₘ e b) ≫
+          μ Q₂ (F.obj a) (F.obj b) =
+        G.map (μ Q₁ a b) ≫ e (a ⊗ b) ≫ Q₂.map (δ F a b))
+    (a b c : K₁) (ha : S a) (hb : S b) (hc : S c)
+    (hab : S (a ⊗ b)) (hbc : S (b ⊗ c))
+    [IsIso (e a)] [IsIso (e b)] [IsIso (e c)]
+    [IsIso (μ Q₂ (F.obj a) (F.obj b))]
+    [IsIso (μ Q₂ (F.obj a ⊗ F.obj b) (F.obj c))] :
+    (δG.app (Q₁.obj a ⊗ Q₁.obj b)).app (Q₁.obj c) ≫
+        (δG.app (Q₁.obj a)).app (Q₁.obj b) ▷ G.obj (Q₁.obj c) ≫
+          (α_ (G.obj (Q₁.obj a)) (G.obj (Q₁.obj b)) (G.obj (Q₁.obj c))).hom =
+      G.map (α_ (Q₁.obj a) (Q₁.obj b) (Q₁.obj c)).hom ≫
+        (δG.app (Q₁.obj a)).app (Q₁.obj b ⊗ Q₁.obj c) ≫
+          G.obj (Q₁.obj a) ◁ (δG.app (Q₁.obj b)).app (Q₁.obj c) := by
+  rw [← cancel_mono ((α_ (G.obj (Q₁.obj a)) (G.obj (Q₁.obj b)) (G.obj (Q₁.obj c))).inv ≫
+    ((e a ⊗ₘ e b) ⊗ₘ e c) ≫
+    μ Q₂ (F.obj a) (F.obj b) ▷ Q₂.obj (F.obj c) ≫ μ Q₂ (F.obj a ⊗ F.obj b) (F.obj c))]
+  have l : ((δG.app (Q₁.obj a ⊗ Q₁.obj b)).app (Q₁.obj c) ≫
+      (δG.app (Q₁.obj a)).app (Q₁.obj b) ▷ G.obj (Q₁.obj c) ≫
+        (α_ (G.obj (Q₁.obj a)) (G.obj (Q₁.obj b)) (G.obj (Q₁.obj c))).hom) ≫
+      (α_ (G.obj (Q₁.obj a)) (G.obj (Q₁.obj b)) (G.obj (Q₁.obj c))).inv ≫
+        ((e a ⊗ₘ e b) ⊗ₘ e c) ≫
+        μ Q₂ (F.obj a) (F.obj b) ▷ Q₂.obj (F.obj c) ≫ μ Q₂ (F.obj a ⊗ F.obj b) (F.obj c) =
+      G.map (μ Q₁ a b ▷ Q₁.obj c) ≫ G.map (μ Q₁ (a ⊗ b) c) ≫ e ((a ⊗ b) ⊗ c) ≫
+        Q₂.map (δ F (a ⊗ b) c) ≫ Q₂.map (δ F a b ▷ F.obj c) := by
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [whiskerRight_comp_tensorHom_assoc, tensorHom_comp_whiskerRight_assoc,
+      Category.assoc ((δG.app (Q₁.obj a)).app (Q₁.obj b)),
+      hδ a b ha hb, comp_tensorHom_comp_comp]
+    simp only [Category.assoc]
+    rw [μ_natural_left, app_app_comp_whiskerRight_assoc, reassoc_of% (hδ (a ⊗ b) c hab hc)]
+  have r : (G.map (α_ (Q₁.obj a) (Q₁.obj b) (Q₁.obj c)).hom ≫
+      (δG.app (Q₁.obj a)).app (Q₁.obj b ⊗ Q₁.obj c) ≫
+        G.obj (Q₁.obj a) ◁ (δG.app (Q₁.obj b)).app (Q₁.obj c)) ≫
+      (α_ (G.obj (Q₁.obj a)) (G.obj (Q₁.obj b)) (G.obj (Q₁.obj c))).inv ≫
+        ((e a ⊗ₘ e b) ⊗ₘ e c) ≫
+        μ Q₂ (F.obj a) (F.obj b) ▷ Q₂.obj (F.obj c) ≫ μ Q₂ (F.obj a ⊗ F.obj b) (F.obj c) =
+      G.map (μ Q₁ a b ▷ Q₁.obj c) ≫ G.map (μ Q₁ (a ⊗ b) c) ≫ e ((a ⊗ b) ⊗ c) ≫
+        Q₂.map (δ F (a ⊗ b) c) ≫ Q₂.map (δ F a b ▷ F.obj c) := by
+    simp only [Category.assoc]
+    rw [← associator_inv_naturality_assoc, ← Functor.LaxMonoidal.associativity_inv,
+      whiskerLeft_comp_tensorHom_assoc, tensorHom_comp_whiskerLeft_assoc,
+      Category.assoc ((δG.app (Q₁.obj b)).app (Q₁.obj c)), hδ b c hb hc,
+      tensorHom_comp_comp_comp]
+    simp only [Category.assoc]
+    rw [μ_natural_right_assoc, app_app_comp_whiskerLeft_assoc, reassoc_of% (hδ a (b ⊗ c) ha hbc),
+      ← G.map_comp_assoc, ← G.map_comp_assoc,
+      Category.assoc (α_ (Q₁.obj a) (Q₁.obj b) (Q₁.obj c)).hom, ← Functor.LaxMonoidal.associativity,
+      G.map_comp_assoc,
+      G.map_comp_assoc]
+    rw [reassoc_of% (he (α_ a b c).hom), ← Q₂.map_comp, ← Q₂.map_comp, ← Q₂.map_comp,
+      Functor.OplaxMonoidal.associativity_inv, ← F.map_comp_assoc,
+      Iso.hom_inv_id, F.map_id, Category.id_comp,
+      Q₂.map_comp]
+  rw [l, r]
+
+
+private theorem tensor_associativity_of_inverse
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [MonoidalCategory D] (G : C ⥤ D)
+    (μ : curriedTensorPre G ≅ curriedTensorPost G) (A B C₀ : C)
+    (h : (μ.inv.app (A ⊗ B)).app C₀ ≫
+        (μ.inv.app A).app B ▷ G.obj C₀ ≫
+          (α_ (G.obj A) (G.obj B) (G.obj C₀)).hom =
+      G.map (α_ A B C₀).hom ≫ (μ.inv.app A).app (B ⊗ C₀) ≫
+        G.obj A ◁ (μ.inv.app B).app C₀) :
+    ((μ.app A).app B).hom ▷ G.obj C₀ ≫
+        ((μ.app (A ⊗ B)).app C₀).hom ≫ G.map (α_ A B C₀).hom =
+      (α_ (G.obj A) (G.obj B) (G.obj C₀)).hom ≫
+        G.obj A ◁ ((μ.app B).app C₀).hom ≫ ((μ.app A).app (B ⊗ C₀)).hom := by
+  let l := tensorIso ((μ.app A).app B) (Iso.refl (G.obj C₀)) ≪≫
+    (μ.app (A ⊗ B)).app C₀ ≪≫ G.mapIso (α_ A B C₀)
+  let r := (α_ (G.obj A) (G.obj B) (G.obj C₀)) ≪≫
+    tensorIso (Iso.refl (G.obj A)) ((μ.app B).app C₀) ≪≫ (μ.app A).app (B ⊗ C₀)
+  have hi : l.inv = r.inv := by
+    dsimp [l, r]
+    rw [← cancel_epi (G.map (α_ A B C₀).hom)]
+    rw [← cancel_mono (α_ (G.obj A) (G.obj B) (G.obj C₀)).hom]
+    simpa only [tensorIso_inv, Iso.refl_inv, tensorHom_id, id_tensorHom,
+      Iso.app_inv, Category.assoc, ← G.map_comp_assoc, Iso.hom_inv_id, G.map_id, Category.id_comp,
+      Iso.inv_hom_id, Category.comp_id] using h
+  have hh := (Iso.inv_eq_inv l r).mp hi
+  simpa only [l, r, Iso.trans_hom, tensorIso_hom, Iso.refl_hom,
+    Functor.mapIso_hom, tensorHom_id, id_tensorHom, Category.assoc] using hh
+
+private theorem pullback_preservesKFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
+    (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤
+      SheafOfModules.{uModel} (moduleRings T.toRingedSpace)) [F.Additive]
+    (hFE : F = Scheme.Modules.tensorPullback g)
+    (K : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
+    (hK : CochainComplex.IsKFlat (R := X.sheaf) K) :
+    CochainComplex.IsKFlat (R := T.sheaf)
+      ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
+  subst F
+  convert CochainComplex.isKFlat_pullback g.base T.sheaf X.sheaf ⟨g.c⟩ K hK using 1
+  rfl
+
+private theorem pullback_counit_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
+    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]
+    (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤
+      SheafOfModules.{uModel} (moduleRings T.toRingedSpace))
+    (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M)
+    (hmap : ∀ {M N} (a : M ⟶ N),
+      F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫
+        eqToHom (hF N).symm)
+    [F.Additive]
+    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶
+      F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
+    (hε : (derivedPullback g).IsLeftDerivedFunctor ε
+      (HomotopyCategory.quasiIso
+        (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))
+    (K : CochainComplex
+      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
+    (hK : CochainComplex.IsKFlat (R := X.sheaf) K) :
+    IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) := by
+  have hFE : F = Scheme.Modules.tensorPullback g :=
+    CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
+  subst F
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+      F₀, hF₀, hmap₀, hF₀add, ε₀, hderived₀, htri, hε₀⟩ :=
+    Classical.choose_spec (exists_derivedPullback g)
+  have hF₀E : F₀ = Scheme.Modules.tensorPullback g :=
+    CategoryTheory.Functor.ext hF₀ (fun _ _ a ↦ hmap₀ a)
+  subst F₀
+  have := hε₀ K hK
+  let W := HomotopyCategory.quasiIso
+    (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (.up ℤ)
+  have : (derivedPullback g).IsLeftDerivedFunctor ε W := hε
+  have : (derivedPullback g).IsLeftDerivedFunctor ε₀ W := hderived₀
+  let e := Functor.leftDerivedUnique (derivedPullback g) (derivedPullback g) ε ε₀ W
+  have he : e.hom.app (DerivedCategory.Qh.obj
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) ≫
+      ε₀.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K) =
+      ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K) := by
+    simp [e, Functor.leftDerivedNatIso]
+  rw [← he]
+  infer_instance
+
+private theorem localization_tensor_isIso (S : Scheme.{uModel})
+    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings S.toRingedSpace))]
+    (K L : CochainComplex
+      (SheafOfModules.{uModel} (moduleRings S.toRingedSpace)) ℤ)
+    (hL : CochainComplex.IsKFlat (R := S.sheaf) L) :
+    IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q K L) := by
+  have : CategoryTheory.Limits.HasColimitsOfSize.{0, 0}
+      (SheafOfModules.{uModel} (moduleRings S.toRingedSpace)) :=
+    CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uModel, uModel} _
+  let q := HomotopyCategory.quotient
+    (SheafOfModules.{uModel} (moduleRings S.toRingedSpace)) (.up ℤ)
+  let W := HomotopyCategory.quasiIso
+    (SheafOfModules.{uModel} (moduleRings S.toRingedSpace)) (.up ℤ)
+  have hk : W.kFlat (q.obj L) := by
+    apply (HomotopyCategory.kFlat_iff_preserves_acyclic _).2
+    intro M hM
+    obtain ⟨N, rfl⟩ := HomotopyCategory.quotient_obj_surjective M
+    have hN := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic N).1 hM
+    have hLN := hL N hN
+    constructor
+    · apply (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2
+      exact hLN.of_iso (β_ L N).symm
+    · exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 hLN
+  have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Qh (q.obj K) (q.obj L)) :=
+    DerivedMonoidal.isIso_counit_app_app_of_kFlat_right
+      DerivedCategory.Qh W (q.obj K) (q.obj L) hk
+  let e := DerivedCategory.quotientCompQhIso
+    (SheafOfModules.{uModel} (moduleRings S.toRingedSpace))
+  change IsIso ((e.inv.app K ⊗ₘ e.inv.app L) ≫
+    (Functor.LaxMonoidal.μ DerivedCategory.Qh (q.obj K) (q.obj L) ≫
+      DerivedCategory.Qh.map (Functor.LaxMonoidal.μ q K L)) ≫ e.hom.app (K ⊗ L))
+  infer_instance
+
+set_option maxHeartbeats 600000 in
+-- Localization tensor instances require extra elaboration.
+/-- Associativity on three K-flat representatives, before resolving arbitrary objects.
+Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
+and section-derived-pullback; parent associativity proof, steps 1 and 2.
+(blueprint: lem-pc-derived-pullback-tensor-associativity).
+Proof: the tensor products P tensor N and N tensor R are K-flat by 079R.
+The counit epsilon is invertible on K-flat objects: identify F with tensorPullback
+using hF and hmap, and compare epsilon with the counit in exists_derivedPullback
+by uniqueness of left-derived functors. The localization tensorator is invertible
+on K-flat pairs, including the images under F, since pullback preserves K-flatness.
+Use naturality of mu to replace its components at Q(P) tensor Q(N), and at
+Q(N) tensor Q(R), by components at the corresponding total tensor complexes.
+Postcompose both proposed composites with L of the right-bracketed localization
+comparison, then with the counit and Q of the two right-bracketed phi comparisons.
+The four instances of hmu for (P,N), (P tensor N,R), (N,R), and (P,N tensor R)
+replace the derived tensorators with localization tensorators and counits.
+Naturality of epsilon and associativity of the lax monoidal localization Q leave
+the image under Q of the associativity diagram for phi. To check that diagram,
+precompose in every degree n with F of each triple total-tensor summand inclusion,
+indexed by p+q+r=n. The inclusions are jointly epic, since F is the left adjoint
+tensor pullback and therefore preserves their coproduct. The summand formula hphi
+turns the two paths into inverse tensorators of mF; inverse monoidal associativity
+at P.X p, N.X q, R.X r equates them. Coproduct extensionality and then complex
+extensionality give the diagram. Apply Q and cancel the invertible comparison
+maps. This proves only the representative identity; it does not transport it to
+arbitrary derived objects. Zero complexes and the empty scheme require no separate
+nonvanishing assumptions: the same summand and cancellation argument applies. -/
+private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
+    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]
+    (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤
+      SheafOfModules.{uModel} (moduleRings T.toRingedSpace))
+    (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M)
+    (hmap : ∀ {M N} (a : M ⟶ N),
+      F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫
+        eqToHom (hF N).symm)
+    [F.Additive]
+    (mF : F.CoreMonoidal)
+    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶
+      F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
+    (hε : (derivedPullback g).IsLeftDerivedFunctor ε
+      (HomotopyCategory.quasiIso
+        (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))
+    (φ : ∀ P N : CochainComplex
+          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
+        (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+            (CochainComplex.mapBifunctor P N (curriedTensor _)) ≅
+          CochainComplex.mapBifunctor
+            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) (curriedTensor _))
+    (hφ : ∀ P N p q n (h : p + q = n),
+          F.map (HomologicalComplex.ιMapBifunctor P N (curriedTensor _)
+              (ComplexShape.up ℤ) p q n h) ≫ (φ P N).hom.f n =
+            (mF.μIso (P.X p) (N.X q)).inv ≫
+              HomologicalComplex.ιMapBifunctor
+                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N)
+                (curriedTensor _) (ComplexShape.up ℤ) p q n h)
+    (μ : curriedTensorPre (derivedPullback g) ≅ curriedTensorPost (derivedPullback g))
+    (hμ : ∀ P N : CochainComplex
+            (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
+          CochainComplex.IsKFlat (R := X.sheaf) P →
+          CochainComplex.IsKFlat (R := X.sheaf) N →
+          ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫
+              (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
+              ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
+                (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
+              DerivedCategory.Q.map (φ P N).hom =
+            (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ
+              ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫
+              Functor.LaxMonoidal.μ DerivedCategory.Q
+                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
+                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N))
+    (P N R : CochainComplex
+      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hN : CochainComplex.IsKFlat (R := X.sheaf) N)
+    (hR : CochainComplex.IsKFlat (R := X.sheaf) R)
+    : let A := DerivedCategory.Q.obj P;
+      let B := DerivedCategory.Q.obj N;
+      let C := DerivedCategory.Q.obj R;
+        ((μ.app A).app B).hom ▷ (derivedPullback g).obj C ≫
+            ((μ.app (A ⊗ B)).app C).hom ≫ (derivedPullback g).map (α_ A B C).hom =
+          (α_ ((derivedPullback g).obj A) ((derivedPullback g).obj B)
+            ((derivedPullback g).obj C)).hom ≫
+            (derivedPullback g).obj A ◁ ((μ.app B).app C).hom ≫
+            ((μ.app A).app (B ⊗ C)).hom  := by
+  let := mF.toMonoidal
+  have : F.IsLeftAdjoint := by
+    have hFE : F = Scheme.Modules.tensorPullback g :=
+      CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
+    subst F
+    obtain ⟨adj, _⟩ := Scheme.Modules.exists_tensorPullbackAdjunction g
+    exact ⟨_, ⟨adj⟩⟩
+  have hφeq (K L : CochainComplex
+      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ) :
+      (φ K L).hom =
+        ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app K).app L := by
+    ext n : 1
+    apply HomologicalComplex.mapBifunctor.hom_ext_of_map F
+    intro p q h
+    rw [hφ K L p q n h]
+    simp only [Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
+      HomologicalComplex.mapBifunctorComparison_f]
+    rw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX]
+    rfl
+  have hεiso := pullback_counit_isIso g F hF hmap ε hε
+  let Fc := F.mapHomologicalComplex (.up ℤ)
+  let : Fc.Monoidal := Functor.mapCochainComplexMonoidal F
+  let QX := DerivedCategory.Q
+    (C := SheafOfModules.{uModel} (moduleRings X.toRingedSpace))
+  let QT := DerivedCategory.Q
+    (C := SheafOfModules.{uModel} (moduleRings T.toRingedSpace))
+  let e (K : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ) :
+      (derivedPullback g).obj (QX.obj K) ⟶ QT.obj (Fc.obj K) :=
+    ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K)
+  have he {K L : CochainComplex
+      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ} (a : K ⟶ L) :
+      (derivedPullback g).map (QX.map a) ≫ e L = e K ≫ QT.map (Fc.map a) := by
+    exact ε.naturality ((HomotopyCategory.quotient _ (.up ℤ)).map a)
+  have hδ (K L) (hK : CochainComplex.IsKFlat (R := X.sheaf) K)
+      (hL : CochainComplex.IsKFlat (R := X.sheaf) L) :
+      (μ.inv.app (QX.obj K)).app (QX.obj L) ≫ (e K ⊗ₘ e L) ≫
+          Functor.LaxMonoidal.μ QT (Fc.obj K) (Fc.obj L) =
+        (derivedPullback g).map (Functor.LaxMonoidal.μ QX K L) ≫ e (K ⊗ L) ≫
+          QT.map (Functor.OplaxMonoidal.δ Fc K L) := by
+    rw [Functor.mapCochainComplex_δ, ← hφeq K L]
+    exact (((μ.app (QX.obj K)).app (QX.obj L)).inv_comp_eq).2
+      (hμ K L hK hL).symm
+  have hFE : F = Scheme.Modules.tensorPullback g :=
+    CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
+  have hFp := pullback_preservesKFlat g F hFE
+  have : IsIso (e P) := hεiso P hP
+  have : IsIso (e N) := hεiso N hN
+  have : IsIso (e R) := hεiso R hR
+  have : IsIso (Functor.LaxMonoidal.μ QT (Fc.obj P) (Fc.obj N)) :=
+    localization_tensor_isIso T (Fc.obj P) (Fc.obj N) (hFp N hN)
+  have : IsIso (Functor.LaxMonoidal.μ QT (Fc.obj P ⊗ Fc.obj N) (Fc.obj R)) :=
+    localization_tensor_isIso T (Fc.obj P ⊗ Fc.obj N) (Fc.obj R) (hFp R hR)
+  apply tensor_associativity_of_inverse (derivedPullback g) μ
+  exact oplax_associativity_on_class (Q₁ := QX) (Q₂ := QT) (F := Fc) μ.inv e (fun {_ _} a ↦ he a)
+    (CochainComplex.IsKFlat (R := X.sheaf)) hδ P N R hP hN hR
+    (CochainComplex.IsKFlat.mapBifunctor P N hP hN)
+    (CochainComplex.IsKFlat.mapBifunctor N R hN hR)
+
 
 /-- The extended natural tensor comparison satisfies the associativity law.
 Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
@@ -109,6 +466,26 @@ theorem derivedPullback_tensor_associativity {T X : Scheme.{uModel}} (g : T ⟶ 
           (α_ ((derivedPullback g).obj A) ((derivedPullback g).obj B)
             ((derivedPullback g).obj C)).hom ≫
             (derivedPullback g).obj A ◁ ((μ.app B).app C).hom ≫
-            ((μ.app A).app (B ⊗ C)).hom := by sorry
+            ((μ.app A).app (B ⊗ C)).hom  := by
+  intro A B C
+  let Q := DerivedCategory.Q
+    (C := SheafOfModules.{uModel} (moduleRings X.toRingedSpace))
+  obtain ⟨P, sP, hP, _, hsP, _⟩ :=
+    CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage A)
+  obtain ⟨N, sN, hN, _, hsN, _⟩ :=
+    CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage B)
+  obtain ⟨R, sR, hR, _, hsR, _⟩ :=
+    CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage C)
+  have : QuasiIso sP := hsP
+  have : QuasiIso sN := hsN
+  have : QuasiIso sR := hsR
+  let eA : Q.obj P ≅ A := asIso (Q.map sP) ≪≫ Q.objObjPreimageIso A
+  let eB : Q.obj N ≅ B := asIso (Q.map sN) ≪≫ Q.objObjPreimageIso B
+  let eC : Q.obj R ≅ C := asIso (Q.map sR) ≪≫ Q.objObjPreimageIso C
+  exact trifunctor_app_eq_of_iso
+    (Functor.LaxMonoidal.ofBifunctor.firstMap μ.hom)
+    (Functor.LaxMonoidal.ofBifunctor.secondMap μ.hom) eA eB eC
+    (derivedPullback_tensor_associativity_kFlat g F hF hmap mF ε hε φ hφ μ hμ
+      P N R hP hN hR)
 
 end AlgebraicGeometry

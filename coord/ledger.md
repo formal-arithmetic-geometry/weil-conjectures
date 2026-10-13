@@ -11155,3 +11155,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.SectionRingChartCrossMultiplication (stage 3; reviewer PASS; first push; landing 20261013T045552-L-134745 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:55 L: merged deliver/Q3/Sheaf.Algebra.Homology.DerivedTensorTransitivity (stage 3; reviewer PASS; first push; landing 20261013T045553-L-134940 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:55 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.Curve.AdditiveScalarBaseChange (stage 3; reviewer PASS; first push; landing 20261013T045553-L-135077 (interface); batch 20261013T045507; modules 2; new nodes 1)
+- 04:55 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.DerivedPullbackTensorAssociativity (stage 3; reviewer PASS; first push; landing 20261013T045554-L-135248 (proof); batch 20261013T045507; modules 1; new nodes 0)
