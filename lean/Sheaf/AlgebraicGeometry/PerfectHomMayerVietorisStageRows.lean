@@ -8,13 +8,8 @@ module
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
-import Sheaf.AlgebraicGeometry.PerfectThickClosure
-import Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectModel
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
-import Sheaf.AlgebraicGeometry.PerfectHomStageColimit
+import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisStageRowsCore
+import Sheaf.AlgebraicGeometry.PerfectHomTrianglePresentedRowsExact
 
 /-! # The geometric diagram before taking the exact filtered colimit
 
@@ -98,6 +93,11 @@ theorem perfect_hom_mayerVietoris_stage_rows
         PerfectHomLocalMap R c i X s₀ U V
           (colimit.desc (S.obj' 3) ⟨B.obj' 3, κ.app ⟨3, by decide⟩⟩) ∧
         PerfectHomLocalMap R c i X s₀ U V
-          (colimit.desc (S.obj' 4) ⟨B.obj' 4, κ.app ⟨4, by decide⟩⟩) := by sorry
+          (colimit.desc (S.obj' 4) ⟨B.obj' 4, κ.app ⟨4, by decide⟩⟩) := by
+  obtain ⟨S, B, κ, e, b, hS, hB, hstage, hlimit, he, hκ, h0, h1, h3, h4⟩ :=
+    perfect_hom_mayerVietoris_stage_rows_core R c hc i X s₀ U V hU hV Y t ht s hs P Q hP hQ
+  obtain ⟨hexS, hexB⟩ :=
+    perfect_hom_triangle_presented_rows_exact S B hS hB hstage hlimit
+  exact ⟨S, B, κ, e, b, hexS, hexB, he, hκ, h0, h1, h3, h4⟩
 
 end AlgebraicGeometry

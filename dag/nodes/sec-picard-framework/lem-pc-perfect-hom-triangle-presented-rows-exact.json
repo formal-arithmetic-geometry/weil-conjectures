@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-perfect-hom-triangle-presented-rows-exact",
+ "kind": "statement",
+ "title": "Exactness of rows presented by additive Hom of distinguished triangles",
+ "statement": "Let J be any small category and suppose the fixed-universe derived category of modules on every scheme exists. Let S be a five-term complex of J-indexed abelian-group diagrams and B a five-term complex of abelian groups. Suppose every evaluated short complex of S and every short complex of B is isomorphic to the ULift of additive Hom from an object M to a distinguished triangle T in the derived category of some scheme Z. Then S and B are exact.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BW, Hom exact sequence of Mayer–Vietoris; Mathlib categorical exactness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Additive coyoneda is homological, so its value on a distinguished triangle is exact. ULift preserves exactness; transfer along the given short-complex isomorphisms. Evaluation functors jointly reflect isomorphisms and preserve homology, hence jointly detect exactness. Apply this to each short complex of S, and use the same Hom-triangle argument directly for B. This is implemented with Functor.map_distinguished_exact, ShortComplex.Exact.map, ShortComplex.exact_of_iso, and JointlyReflectIsomorphisms.exact_iff.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X3",
+  "document": "Mathlib.CategoryTheory.Triangulated.Yoneda and Mathlib.CategoryTheory.Functor.ReflectsIso.Exact",
+  "place": "Categorical Hom exactness and detection by evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Covariant additive Hom sends distinguished triangles to exact sequences",
+   "results": "Functor.map_distinguished_exact and homologySequence exactness results; geometric row construction has no match.",
+   "verdict": "tool lemmas, no exact geometric match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_distinguished_exact",
+   "results": "One hit: CategoryTheory.Functor.map_distinguished_exact, Mathlib.CategoryTheory.Triangulated.HomologicalFunctor.",
+   "verdict": "tool lemma",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "map_distinguished_exact|JointlyReflectIsomorphisms.*exact_iff",
+   "results": "Six matches for map_distinguished_exact. Local source read also found JointlyReflectIsomorphisms.exact_iff.",
+   "verdict": "tool lemmas",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homological functor sends a distinguished triangle to an exact short complex",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict on matches.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homological functor exactness detected pointwise in a functor category",
+   "results": "Eight exact-functor and exactness preservation/reflection hits; no packaged pair of triangle-presented rows.",
+   "verdict": "generic tools",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.JointlyReflectIsomorphisms.exact_iff",
+   "results": "Exactness detection theorem found and its source read; already used by this proof.",
+   "verdict": "used directly",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "homologySequence_exact",
+   "results": "Thirteen generic exactness sequence hits. Mathlib Yoneda and ReflectsIso.Exact sources read; no duplicate packaged row theorem found.",
+   "verdict": "generic tools",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisStageRows",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Mayer–Vietoris Hom rows: categorical exactness",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-stage-rows"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomTrianglePresentedRowsExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomTrianglePresentedRowsExact.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_triangle_presented_rows_exact",
+  "statement": "theorem perfect_hom_triangle_presented_rows_exact\n    {J : Type u} [Category J]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (S : ComposableArrows (J ⥤ AddCommGrpCat.{max u w}) 4)\n    (B : ComposableArrows AddCommGrpCat.{max u w} 4)\n    (hS : S.IsComplex) (hB : B.IsComplex)\n    (hstage : ∀ (r : ℕ) (hr : r + 2 ≤ 4) (j : J),\n      ∃ (Z : Scheme.{u}) (M : schemeDerivedCategory Z)\n        (T : Triangle (schemeDerivedCategory Z))\n        (hT : T ∈ distTriang (schemeDerivedCategory Z)),\n        Nonempty (((S.sc hS r hr).map ((evaluation J AddCommGrpCat.{max u w}).obj j)) ≅\n          (shortComplexOfDistTriangle T hT).map\n            ((preadditiveCoyoneda.obj (Opposite.op M)) ⋙\n              AddCommGrpCat.uliftFunctor.{u})))\n    (hlimit : ∀ (r : ℕ) (hr : r + 2 ≤ 4),\n      ∃ (Z : Scheme.{u}) (M : schemeDerivedCategory Z)\n        (T : Triangle (schemeDerivedCategory Z))\n        (hT : T ∈ distTriang (schemeDerivedCategory Z)),\n        Nonempty ((B.sc hB r hr) ≅\n          (shortComplexOfDistTriangle T hT).map\n            ((preadditiveCoyoneda.obj (Opposite.op M)) ⋙\n              AddCommGrpCat.uliftFunctor.{u}))) :\n    S.Exact ∧ B.Exact",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T142908-L-502179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T142908-L-502179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
