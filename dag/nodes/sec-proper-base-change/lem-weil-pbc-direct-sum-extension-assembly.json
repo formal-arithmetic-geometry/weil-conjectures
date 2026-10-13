@@ -35,51 +35,60 @@
  ],
  "proof": [
   {
-   "text": "For each $j$, let $T_j=T\\mathbin{\\times_{P\\otimes_RS}}(C_j\\otimes_RS)$ be the pullback of the given $S$-extension $0\\to N\\otimes_RS\\to T\\to P\\otimes_RS\\to0$ along $\\iota_j\\otimes_RS$. Thus $T_j$ is an $S$-extension of $C_j\\otimes_RS$ by $N\\otimes_RS$. By the hypothesis, choose an $R$-extension $0\\to N\\to E_j\\to C_j\\to0$ and a fixed-end-term equivalence $[T_j]=[E_j\\otimes_RS]$. Applying the surjectivity of $\\Phi_R$ from [lem-weil-pbc-ext-one-direct-sum] gives an $R$-extension $0\\to N\\to E\\to P\\to0$ whose pullback along every $\\iota_j$ has class $[E_j]$. An equivalence of $R$-extensions base-changes to an equivalence of $S$-extensions, since [def-weil-module-base-change] sends identities to identities and preserves composition.",
+   "text": "For each $j$, put $f_j=1_S\\otimes\\iota_j$ and $r_j=1_S\\otimes\\pi_j$. Their composite is the identity, by base change compatibility with composition. Define $T_j=b^{-1}(\\operatorname{im}f_j)$ as a submodule of $T$, with injection $a_j(n)=a(n)$ and quotient $b_j(t)=r_j(b(t))$. Membership gives $f_j(r_j(b(t)))=b(t)$. Injectivity of $a_j$ follows from that of $a$; exactness follows from the displayed identity and exactness of $a,b$; surjectivity follows by lifting $f_j(c)$ through $b$. Thus $T_j$ is in the same universe as $T$ and the summand hypothesis applies. Choose its descended extension $N\\to E_j\\to C_j$ and equivalence. Compose the equivalence with $T_j\\hookrightarrow T$ to obtain $k_j:S\\otimes E_j\\to T$, with $k_j(1\\otimes i_j)=a$ and $bk_j=(1\\otimes\\iota_j)(1\\otimes q_j)$.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply only the surjectivity clause of [lem-weil-pbc-ext-one-direct-sum] over $R$ to the extensions $E_j$. Obtain an extension $N\\xrightarrow{i}F\\xrightarrow{q}\\bigoplus C_j$ and fixed-endpoint isomorphisms from its pullbacks to $E_j$. Their inverse maps followed by first projection give maps $f_j:E_j\\to F$ satisfying $f_ji_j=i$ and $qf_j=\\iota_jq_j$.",
    "uses": [
     "lem-weil-pbc-ext-one-direct-sum",
     "def-weil-pbc-exact-sequence",
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-module-base-change"
+    "def-weil-pbc-direct-sum-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 05EG (lemma-neighbourhood-extensions), lines 24504-24516"
-   }
+   "elementary": false
   },
   {
-   "text": "First, [lem-weil-pbc-tensor-commutes-with-colimits] identifies $P\\otimes_RS$ with $\\bigoplus_{j\\in J}(C_j\\otimes_RS)$ and carries each $\\iota_j\\otimes_RS$ to the canonical inclusion. Tensoring $0\\to N\\to E\\to P\\to0$ with the flat module $S$ gives a short exact sequence $0\\to N\\otimes_RS\\to E\\otimes_RS\\to P\\otimes_RS\\to0$ by [lem-weil-pbc-flat-tensor-exact] and [lem-weil-pbc-tensor-right-exact]. For each $j$, $(E\\mathbin{\\times_P}C_j)\\otimes_RS\\cong(E\\otimes_RS)\\mathbin{\\times_{P\\otimes_RS}}(C_j\\otimes_RS)$: the left fibre product is the kernel of $E\\oplus C_j\\to P$, tensor commutes with this finite direct sum, and [lem-weil-pbc-flat-tensor-exact] preserves the kernel. Hence the pullback tuple of $[E\\otimes_RS]$ under $\\Phi_S$ is $([E_j\\otimes_RS])_j=([T_j])_j$, which is the pullback tuple of $[T]$. The injectivity of [lem-weil-pbc-ext-one-direct-sum] for $A=S$ gives $[E\\otimes_RS]=[T]$, i.e. a fixed-end-term equivalence. The base-change equivalences used here are compatible with identities and composition by [def-weil-module-base-change].",
+   "text": "Regard $T$ as an $R$-module. Write $a_0(n)=a(1\\otimes n)$ and $t_j(e)=k_j(1\\otimes e)$. Prove the gluing assertion directly: the map $p:N\\oplus\\bigoplus E_j\\to F$, $(n,d)\\mapsto i(n)+\\sum_j f_j(d_j)$, is surjective, since the direct sum of the $q_j$ is surjective and $\\ker q=\\operatorname{im}i$. If $p(n,d)=0$, then every $q_j(d_j)=0$, so $d$ is in the image of $\\bigoplus i_j$. Write $d=(i_j(n_j))_j$. Then injectivity of $i$ gives $n+\\sum_jn_j=0$, and consequently $a_0(n)+\\sum_jt_j(d_j)=0$. Thus the map to $T$ factors through $F\\cong(N\\oplus\\bigoplus E_j)/\\ker p$, yielding $g_0:F\\to T$ with $g_0i=a_0$ and $g_0f_j=t_j$. Extend scalars by the explicit tensor lift $g(s\\otimes e)=s\\,g_0(e)$. Maps from $F$ agreeing on $i(N)$ and all $f_j(E_j)$ agree: the same surjectivity argument writes every element as $i(n)+\\sum_j f_j(d_j)$. Apply this to get $bg_0(e)=1\\otimes q(e)$, hence $g(1\\otimes i)=a$ and $bg=1\\otimes q$. All sums have finite support; the argument works for arbitrary, including empty, $J$.",
    "uses": [
-    "lem-weil-pbc-ext-one-direct-sum",
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-module-base-change",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Flat tensor exactness [lem-weil-pbc-flat-tensor-exact] gives $\\ker(1\\otimes q)=\\operatorname{im}(1\\otimes i)$; tensor right exactness [lem-weil-pbc-tensor-right-exact] gives surjectivity of $1\\otimes q$. If $g(x)=0$, then $(1\\otimes q)(x)=0$, so $x=(1\\otimes i)(n)$ and $a(n)=0$. Injectivity of $a$ forces $n=0$ and $x=0$. For any $t\\in T$, choose $x$ with $(1\\otimes q)(x)=b(t)$. Exactness of $a,b$ gives $t-g(x)=a(n)$, so $g(x+(1\\otimes i)(n))=t$. Thus $g$ is bijective and defines the required fixed-endpoint linear equivalence.",
+   "uses": [
     "lem-weil-pbc-flat-tensor-exact",
     "lem-weil-pbc-tensor-right-exact",
-    "lem-weil-pbc-tensor-commutes-with-colimits",
     "def-weil-pbc-flat-ring-map",
-    "def-weil-module-base-change",
-    "def-weil-pbc-exact-sequence"
+    "def-weil-pbc-exact-sequence",
+    "def-weil-module-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 05EG (lemma-neighbourhood-extensions), lines 24510-24527"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ext-one-direct-sum",
-  "def-weil-pbc-exact-sequence",
+  "def-weil-module-base-change",
   "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-ext-one-direct-sum",
   "lem-weil-pbc-flat-tensor-exact",
   "lem-weil-pbc-tensor-right-exact",
-  "lem-weil-pbc-tensor-commutes-with-colimits",
   "def-weil-pbc-flat-ring-map",
-  "def-weil-module-base-change"
+  "def-weil-pbc-quotient-module"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "proof of Lemma Tag 05EG (lemma-neighbourhood-extensions), lines 24504-24527"
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-13",
+  "note": "Explicit gluing argument filling the direct-sum compatibility omitted in Stacks Tag 05EG; retains Ext-one surjectivity but replaces tensor-pullback comparison and Ext-one injectivity by a quotient factorization and an elementwise short-five-lemma argument. Source: More on Algebra, proof of Lemma 05EG (lemma-neighbourhood-extensions)."
  },
  "mathlib_searches": [
   {
@@ -160,5 +169,15 @@
   "group": "K1",
   "result": "fix",
   "note": "flat R->S = (algebraMap R S).Flat; N, family C over arbitrary J (no Fintype/DecidableEq), P = ⨁ j, C j; summand hypothesis over every S-extension T (injective/Function.Exact/surjective) gives E_j, a, q short exact and θ : S⊗E ≃ T with both ends fixed (θ∘a_S = a, b∘θ = q_S); conclusion same for P; base change S ⊗[R] - as LinearMap.baseChange; J empty / zero N / zero S checked; FIX: ModuleCat+ShortComplex.ShortExact restated unbundled as G1 b04a0ec5b, let expanded, renamed LinearMap.extension_descends_of_summands"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T100138-L-2490398",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
