@@ -7,12 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.Algebra.Homology.AffinePerfectColimitDescent
-import Sheaf.AlgebraicGeometry.AffinePerfectHomColimit
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLift
+import Sheaf.AlgebraicGeometry.PerfectStalkDerivedIsoSpread
 
 /-! # Spreading a prescribed bounded free stalk model
 
@@ -30,34 +26,30 @@ noncomputable section
 /-- A given bounded finite-free stalk model of a locally strictly perfect object spreads
 with its specified ranks to an affine neighbourhood. No residue rank computation is made.
 
-Source: Stacks Project, Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX.
+Source: Stacks Project, Tag 0BCD, spreading paragraph; Tags 00CR, 0BC7 and 09RE.
 (blueprint: lem-sc-bounded-free-stalk-model-spread).
 
 Proof:
-1. Restrict the strictly perfect representative P from hlocal to an affine neighbourhood
-   W = Spec A of x, and let p be its corresponding prime. Its terms are quasi-coherent:
-   each is a direct summand of a finite free sheaf. The affine correspondence produces
-   a bounded complex C of finite projective A-modules. Its localization at p represents
-   the same derived object as the stalk of G, by the exact stalk functor applied to eG
-   and the local comparison for P. Thus eF identifies F with C_p in the derived category.
-2. Present A_p as the filtered colimit of the A_f for f outside p (Tag 00CM).
-   Apply exists_finite_projective_model_of_directed_colimit to F, whose terms are
-   finite projective by hfree, obtaining a bounded finite projective complex Q at a stage.
-   Apply affine_perfect_hom_colimit in both orders to descend eF and its inverse.
-   Its injectivity clause makes their two inverse identities hold at a common later
-   stage. Then Q represents E on that principal neighbourhood of x.
-3. Apply exists_standardFreeCover_of_finite_projective to each of the finitely many
-   possibly nonzero terms of Q. In each cover select a principal open containing p,
-   and intersect the finitely many selected principal opens. This is still principal
-   in Spec A, hence affine, and contains x. All terms are free there. Their ranks equal
-   d i: localization at p recovers F.X i, and invariant basis number over the nonzero
-   local ring identifies their finite ranks. Outside the bounds the terms are zero;
-   hfree at p and invariant basis number force d i = 0, so the asserted free sheaf
-   is zero as well. Sheafify Q and the descended derived isomorphism and transport
-   to the over-site. Sheafification and localization preserve the bounds, giving K.
-No arbitrary stalk complex is assumed to spread: bounded finite freeness and a local
-strictly perfect comparison are both used. This includes d identically zero and any
-choice of bounds, and does not require the scheme to be separated.
+1. Lift F as a complex by exists_boundedFree_stalk_complex_lift, giving an affine
+   neighbourhood U and a bounded global auxiliary complex H. On U its terms are
+   free of ranks d i, and the stalk complex of H is isomorphic to F. This uses finite
+   differential matrices directly, retaining the specified bases and ranks.
+2. The bounds of H and its termwise free isomorphisms make its restriction to U
+   strictly perfect: each free isomorphism supplies the required retraction. Compose
+   eF inversely with the derived image of the stalk complex isomorphism. This identifies
+   the derived stalks of G and H. Transport hlocal along eG to get a local strictly
+   perfect representative for Q(G), then use
+   exists_affine_restriction_iso_of_perfect_stalk_iso to extend the derived comparison
+   to an affine W containing x inside U.
+3. Set K equal to the termwise restriction of H to W. Restriction preserves zero objects,
+   hence the bounds. The restriction-composition isomorphism identifies each K.X i
+   with the restriction from U of H.X i. Apply that restriction to its given free
+   isomorphism and use mapFreeIso with overMapUnitIso to identify its image with the
+   rank-d i free sheaf on W. Finally compose the derived restriction of eG inverse,
+   the exact restriction comparison for Q, and the derived isomorphism on W.
+The two intermediate theorems separate construction of a complex from comparison of
+existing perfect models. Zero ranks, empty degree intervals and nonseparated schemes
+are allowed. No finite-projective standard free cover or residue rank computation is used.
 -/
 theorem spread_boundedFree_stalkModel
     (X : Scheme.{u})
@@ -91,7 +83,49 @@ theorem spread_boundedFree_stalkModel
           (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin (d i))))) ∧
         Nonempty ((SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅
-          DerivedCategory.Q.obj K) := by sorry
+          DerivedCategory.Q.obj K) := by
+  obtain ⟨U, hxU, _hU, H, hHbounded, hHfree, ⟨eH⟩⟩ :=
+    exists_boundedFree_stalk_complex_lift X x d F hbounded hfree
+  let R := moduleRings X.toRingedSpace
+  let A := SheafOfModules.overFunctor.{u} R U
+  have hHstrict : IsStrictlyPerfect X U
+      ((A.mapHomologicalComplex (ComplexShape.up ℤ)).obj H) := by
+    constructor
+    · obtain ⟨a, b, hab⟩ := hHbounded
+      exact ⟨a, b, fun i hi => A.map_isZero (hab i hi)⟩
+    · intro i
+      obtain ⟨e⟩ := hHfree i
+      exact ⟨d i, e.hom, e.inv, e.hom_inv_id⟩
+  have hGlocal : ∃ V : X.Opens, x ∈ V ∧
+      ∃ P : CochainComplex (SheafOfModules.{u} (R.over V)) ℤ,
+        IsStrictlyPerfect X V P ∧
+        Nonempty ((SheafOfModules.overFunctor.{u} R V).mapDerivedCategory.obj
+          (DerivedCategory.Q.obj G) ≅ DerivedCategory.Q.obj P) := by
+    obtain ⟨V, hxV, P, hP, ⟨eP⟩⟩ := hlocal
+    exact ⟨V, hxV, P, hP,
+      ⟨(SheafOfModules.overFunctor.{u} R V).mapDerivedCategory.mapIso eG ≪≫ eP⟩⟩
+  have eGH : DerivedCategory.Q.obj
+      (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj G) ≅ DerivedCategory.Q.obj
+      (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj H) :=
+    eF.symm ≪≫ DerivedCategory.Q.mapIso eH
+  obtain ⟨W, hxW, hW, hWU, ⟨eW⟩⟩ :=
+    exists_affine_restriction_iso_of_perfect_stalk_iso X x G H hGlocal U hxU hHstrict eGH
+  let B := SheafOfModules.overFunctor.{u} R W
+  let T := SheafOfModules.overMap.{u} R (homOfLE hWU : W ⟶ U)
+  let K := (B.mapHomologicalComplex (ComplexShape.up ℤ)).obj H
+  refine ⟨W, hxW, hW, K, ?_, ?_, ?_⟩
+  · obtain ⟨a, b, hab⟩ := hHbounded
+    exact ⟨a, b, fun i hi => B.map_isZero (hab i hi)⟩
+  · intro i
+    obtain ⟨e⟩ := hHfree i
+    let c := (SheafOfModules.overFunctorMap.{u} R (homOfLE hWU : W ⟶ U)).app (H.X i)
+    exact ⟨c.symm ≪≫ T.mapIso e ≪≫
+      (SheafOfModules.mapFreeIso T (ULift.{u} (Fin (d i)))
+        (SheafOfModules.overMapUnitIso (R := R) (homOfLE hWU : W ⟶ U)).symm).symm⟩
+  · exact ⟨B.mapDerivedCategory.mapIso eG.symm ≪≫
+      B.mapDerivedCategoryFactors.app G ≪≫ eW⟩
 
 end
 end AlgebraicGeometry.Scheme

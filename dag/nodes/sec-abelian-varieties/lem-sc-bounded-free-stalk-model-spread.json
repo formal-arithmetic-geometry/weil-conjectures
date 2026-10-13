@@ -15,45 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Restrict the strictly perfect representative P from hlocal to an affine neighbourhood\n   W = Spec A of x, and let p be its corresponding prime. Its terms are quasi-coherent:\n   each is a direct summand of a finite free sheaf. The affine correspondence produces\n   a bounded complex C of finite projective A-modules. Its localization at p represents\n   the same derived object as the stalk of G, by the exact stalk functor applied to eG\n   and the local comparison for P. Thus eF identifies F with C_p in the derived category.",
+   "text": "1. Lift F as a complex by exists_boundedFree_stalk_complex_lift, giving an affine\n   neighbourhood U and a bounded global auxiliary complex H. On U its terms are\n   free of ranks d i, and the stalk complex of H is isomorphic to F. This uses finite\n   differential matrices directly, retaining the specified bases and ranks.",
+   "uses": [
+    "lem-sc-bounded-free-stalk-complex-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. The bounds of H and its termwise free isomorphisms make its restriction to U\n   strictly perfect: each free isomorphism supplies the required retraction. Compose\n   eF inversely with the derived image of the stalk complex isomorphism. This identifies\n   the derived stalks of G and H. Transport hlocal along eG to get a local strictly\n   perfect representative for Q(G), then use\n   exists_affine_restriction_iso_of_perfect_stalk_iso to extend the derived comparison\n   to an affine W containing x inside U.",
    "uses": [
     "def-pc-perfect-complex",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-pc-affine-qcoh-derived-equivalence"
+    "lem-sc-perfect-stalk-derived-iso-spread"
    ],
    "elementary": false
   },
   {
-   "text": "Present A_p as the filtered colimit of the A_f for f outside p (Tag 00CM).\n   Apply exists_finite_projective_model_of_directed_colimit to F, whose terms are\n   finite projective by hfree, obtaining a bounded finite projective complex Q at a stage.\n   Apply affine_perfect_hom_colimit in both orders to descend eF and its inverse.\n   Its injectivity clause makes their two inverse identities hold at a common later\n   stage. Then Q represents E on that principal neighbourhood of x.",
+   "text": "3. Set K equal to the termwise restriction of H to W. Restriction preserves zero objects,\n   hence the bounds. The restriction-composition isomorphism identifies each K.X i\n   with the restriction from U of H.X i. Apply that restriction to its given free\n   isomorphism and use mapFreeIso with overMapUnitIso to identify its image with the\n   rank-d i free sheaf on W. Finally compose the derived restriction of eG inverse,\n   the exact restriction comparison for Q, and the derived isomorphism on W.\nThe two intermediate theorems separate construction of a complex from comparison of\nexisting perfect models. Zero ranks, empty degree intervals and nonseparated schemes\nare allowed. No finite-projective standard free cover or residue rank computation is used.\nThe dependency lem-sc-derived-hom-mayer-vietoris supplies moduleRings and the additive, finite-limit and finite-colimit restriction instances (moduleOverFunctor_* and moduleOverMap_*), not an application of the Mayer-Vietoris exact-sequence theorem.",
    "uses": [
-    "lem-weil-pbc-localization-colimit-principal-localizations",
-    "lem-pc-affine-perfect-colimit-descent",
-    "lem-pc-affine-perfect-hom-colimit"
+    "lem-sc-derived-hom-mayer-vietoris"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Apply exists_standardFreeCover_of_finite_projective to each of the finitely many\n   possibly nonzero terms of Q. In each cover select a principal open containing p,\n   and intersect the finitely many selected principal opens. This is still principal\n   in Spec A, hence affine, and contains x. All terms are free there. Their ranks equal\n   d i: localization at p recovers F.X i, and invariant basis number over the nonzero\n   local ring identifies their finite ranks. Outside the bounds the terms are zero;\n   hfree at p and invariant basis number force d i = 0, so the asserted free sheaf\n   is zero as well. Sheafify Q and the descended derived isomorphism and transport\n   to the over-site. Sheafification and localization preserve the bounds, giving K.\nNo arbitrary stalk complex is assumed to spread: bounded finite freeness and a local\nstrictly perfect comparison are both used. This includes d identically zero and any\nchoice of bounds, and does not require the scheme to be separated.",
-   "uses": [
-    "lem-weil-pbc-finite-projective-standard-free-cover",
-    "lem-pc-affine-qcoh-derived-equivalence"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-bounded-free-stalk-complex-lift",
   "def-pc-perfect-complex",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-weil-pbc-localization-colimit-principal-localizations",
-  "lem-pc-affine-perfect-colimit-descent",
-  "lem-pc-affine-perfect-hom-colimit",
-  "lem-weil-pbc-finite-projective-standard-free-cover"
+  "lem-sc-perfect-stalk-derived-iso-spread",
+  "lem-sc-derived-hom-mayer-vietoris"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX; H2 expands the scheme/stalk interface in the existing proof plan"
+  "place": "Tag 0BCD spreading paragraph, using direct finite-free matrix lifting (0BC7) and local derived-isomorphism extension (09RE); K2 Lean reduction preserves ranks under restriction"
  },
  "mathlib_searches": [
   {
@@ -138,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T015556-L-3021423",
+  "landing": "20261013T033004-L-3676957",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

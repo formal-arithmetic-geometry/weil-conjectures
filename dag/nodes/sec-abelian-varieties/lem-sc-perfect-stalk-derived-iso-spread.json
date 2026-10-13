@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-perfect-stalk-derived-iso-spread",
+ "kind": "statement",
+ "title": "Extending a derived stalk isomorphism between existing perfect models",
+ "statement": "Let X be a scheme [def-pc-scheme] and x a point, with derived categories of its module sheaves, their restrictions, and stalk modules [def-pc-derived-category, def-pc-module-stalk-functor]. Let G,H be global module-sheaf complexes. Suppose Q(G) has a strictly perfect representative on a neighborhood of x [def-pc-perfect-complex], and H restricted to an open U containing x is strictly perfect. Given an isomorphism Q(G_x) -> Q(H_x) in the derived category of stalk modules, there is an affine open W containing x with W contained in U and an isomorphism Q(G restricted to W) -> Q(H restricted to W). H is fixed; no new complex, degree bounds or prescribed ranks are constructed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine full faithfulness proof; More on Algebra Tag 0BC7 (2); Tags 00CR and 06Z0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-module-stalk-functor",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "1. Intersect U with the neighbourhood V supplied for Q(G), and take an affine\n   neighbourhood of x inside that intersection. Restrict P and H to it. These are\n   strictly perfect complexes. Their terms are retracts of finite free sheaves, hence\n   quasi-coherent; the affine correspondence gives bounded finite projective complexes\n   over the section ring A. Exactness of stalks and the local comparison for G identify\n   their prime-localized derived objects with the derived stalks of G and H.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Present the prime localization as the filtered colimit of the A_f outside the prime.\n   Full faithfulness for perfect complexes (09RE, or 0BC7 (2)) descends the given\n   isomorphism and its inverse to one common principal neighbourhood. Injectivity\n   of the Hom comparison descends both inverse identities after a further shrinking.\n   This gives an actual derived isomorphism on an affine open W containing x inside U.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-pc-affine-perfect-hom-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Use the affine derived sheaf equivalence and the restriction comparisons to identify\n   the two descended objects with Q(G restricted to W) and Q(H restricted to W).\n   Compose with these identifications to obtain the conclusion. No terms, ranks or\n   differentials of H are changed. The argument also works for zero complexes and any\n   bounds, and only takes principal opens inside one affine chart, so no separatedness\n   hypothesis is required. The derived-category universes on sheaves and stalk modules\n   may differ: comparisons are transported through their localization equivalences.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-pc-affine-perfect-hom-colimit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine full faithfulness proof; More on Algebra Tag 0BC7 (2); Tags 00CR and 06Z0; K2 expands the finite-matrix and scheme/stalk interfaces of the cited argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded finite free complex over a scheme stalk lifts to an affine neighborhood; a derived isomorphism of perfect stalk complexes extends nearby",
+   "results": "Service unavailable: Internal Server Error. No verdict from this service; independent LeanFinder, Loogle and source grep used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite free complex over a scheme stalk spreads with the same term ranks; derived isomorphisms between perfect stalk complexes extend nearby",
+   "results": "Two searches, eight hits each. Ordinary stalk restriction isomorphisms, Tilde.stalkIso, scheme spreading-out, and stalkwise isomorphism detection; no bounded complex lift or local derived-isomorphism extension.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"stalk\"; \"perfect\", \"stalk\"",
+   "results": "Both searches returned zero hits.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "spread.*[Cc]omplex|stalk.*[Ff]ree|[Ff]ree.*stalk; stalk.*[Ii]so|[Ii]so.*stalk; stalk.*complex|complex.*stalk",
+   "results": "Mathlib has rankAtStalk, free loci and ordinary stalk isomorphisms, but no complex lifting or local derived comparison. Project finite-free stalk lifting modules start with two existing complexes, use Scheme.Modules/pullback, and the homotopy-spreading theorem compares with a single-degree complex. Internal-Hom stalk localization requires a Noetherian scheme and coherent degree-zero source, so does not apply here.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundedFreeStalkModelSpread",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX; descent of a derived isomorphism and its inverse, and detection of both inverse identities",
+   "via": [
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectStalkDerivedIsoSpread",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectStalkDerivedIsoSpread.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_restriction_iso_of_perfect_stalk_iso",
+  "statement": "theorem exists_affine_restriction_iso_of_perfect_stalk_iso\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ W : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]\n    (G H : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hlocal : ∃ V : X.Opens, x ∈ V ∧\n      ∃ P : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) ℤ,\n        IsStrictlyPerfect X V P ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj\n            (DerivedCategory.Q.obj G) ≅ DerivedCategory.Q.obj P))\n    (U : X.Opens) (hxU : x ∈ U)\n    (hH : IsStrictlyPerfect X U\n      (((SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapHomologicalComplex (.up ℤ)).obj H))\n    (e : DerivedCategory.Q.obj\n        (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj G) ≅\n      DerivedCategory.Q.obj\n        (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj H)) :\n    ∃ W : X.Opens, x ∈ W ∧ IsAffineOpen W ∧ W ≤ U ∧\n      Nonempty (DerivedCategory.Q.obj\n          (((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) W).mapHomologicalComplex (.up ℤ)).obj G) ≅\n        DerivedCategory.Q.obj\n          (((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) W).mapHomologicalComplex (.up ℤ)).obj H))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T033004-L-3676957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T033004-L-3676957",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

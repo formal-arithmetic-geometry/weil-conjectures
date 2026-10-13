@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-bounded-free-stalk-complex-lift",
+ "kind": "statement",
+ "title": "Lifting a bounded free stalk complex without a derived comparison",
+ "statement": "Let X be a scheme [def-pc-scheme], x a point, R its stalk ring [def-pc-module-stalk-functor], d : Z -> N, and F a cochain complex of R-modules [def-pc-cochain-complex-modules]. Suppose F is zero outside some finite degree interval and F^i is isomorphic to R^(d i) for every i. There exist an affine open U containing x and a bounded global complex H of O_X-module sheaves [def-weil-sheaf-of-modules-category] such that H restricted to U is termwise free of rank d i and the termwise stalk complex H_x is isomorphic to F as a complex. No prescribed derived object or derived comparison is assumed or produced.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCD spreading paragraph and Tag 0BC7 finite presentation argument; Algebra Tag 00CR; ordinary module direct image"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-stalk-functor",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "1. Fix bounds a,b. The stalk ring is nonzero, since it is local. A zero free module\n   over it has rank zero, so hfree implies d i = 0 outside [a,b], including when b < a.\n   Choose bases using hfree, and express the differentials as finite matrices. There\n   are only finitely many entries and finitely many equations for the square to vanish.",
+   "uses": [
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Choose an affine neighbourhood of x. Its stalk is the prime localization of its\n   section ring, the filtered colimit of principal localizations (Tag 00CR). Lift all\n   entries to one principal neighbourhood. Every entry of each differential composite\n   has zero germ; shrink to a common later principal neighbourhood where these finitely\n   many entries vanish. Equivalently use the maps and equality clauses of finite\n   presentation descent. The rank-d i free modules and these matrices now define a\n   bounded free sheaf complex L on this affine open U. Its stalk complex is isomorphic\n   to F, since the chosen bases conjugate the differentials to their lifted matrices.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Define H by the termwise ordinary direct image along U into X: on an open V its\n   sections are the sections of L on V intersect U, with scalars restricted from V.\n   Direct image is additive and preserves zero objects, so H is bounded. Its restriction\n   to U is L. Neighbourhoods contained in U are cofinal at x, so its stalk complex is\n   the stalk complex of L. These identifications give the free-term and stalk isomorphisms.\nNo comparison with another derived object is made. Empty spectra have no x; rank-zero\nterms and empty degree intervals require no entries or equations to lift.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-pc-fp-module-map-descent-affine",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCD spreading paragraph and Tag 0BC7 finite presentation argument; Algebra Tag 00CR; ordinary module direct image; K2 expands the finite-matrix and scheme/stalk interfaces of the cited argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded finite free complex over a scheme stalk lifts to an affine neighborhood; a derived isomorphism of perfect stalk complexes extends nearby",
+   "results": "Service unavailable: Internal Server Error. No verdict from this service; independent LeanFinder, Loogle and source grep used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite free complex over a scheme stalk spreads with the same term ranks; derived isomorphisms between perfect stalk complexes extend nearby",
+   "results": "Two searches, eight hits each. Ordinary stalk restriction isomorphisms, Tilde.stalkIso, scheme spreading-out, and stalkwise isomorphism detection; no bounded complex lift or local derived-isomorphism extension.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"stalk\"; \"perfect\", \"stalk\"",
+   "results": "Both searches returned zero hits.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "spread.*[Cc]omplex|stalk.*[Ff]ree|[Ff]ree.*stalk; stalk.*[Ii]so|[Ii]so.*stalk; stalk.*complex|complex.*stalk",
+   "results": "Mathlib has rankAtStalk, free loci and ordinary stalk isomorphisms, but no complex lifting or local derived comparison. Project finite-free stalk lifting modules start with two existing complexes, use Scheme.Modules/pullback, and the homotopy-spreading theorem compares with a single-degree complex. Internal-Hom stalk localization requires a Noetherian scheme and coherent degree-zero source, so does not apply here.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundedFreeStalkModelSpread",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX; construction of the bounded finite-free complex by lifting matrices, before descent of its comparison",
+   "via": [
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedFreeStalkComplexLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_boundedFree_stalk_complex_lift",
+  "statement": "theorem exists_boundedFree_stalk_complex_lift\n    (X : Scheme.{u}) (x : X) (d : ℤ → ℕ)\n    (F : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (F.X i))\n    (hfree : ∀ i : ℤ, Nonempty (F.X i ≅ ModuleCat.of (X.presheaf.stalk x)\n      (ULift.{0} (Fin (d i) → X.presheaf.stalk x)))) :\n    ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧\n      ∃ H : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,\n        (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (H.X i)) ∧\n        (∀ i : ℤ, Nonempty\n          ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).obj\n            (H.X i) ≅ SheafOfModules.free\n              (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin (d i))))) ∧\n        Nonempty (F ≅\n          (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj H))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T033004-L-3676957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T033004-L-3676957",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
