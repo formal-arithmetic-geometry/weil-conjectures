@@ -1,0 +1,96 @@
+{
+ "id": "lem-pd-glued-effective-model-chart-pullback-single-core",
+ "kind": "statement",
+ "title": "Core chart-square verification for one glued chart",
+ "statement": "Under the local cartesian square, open immersion, over-map compatibility, and chart commutativity hypotheses, the cone formed by the chosen chart maps is a limit cone for the corresponding square [lem-pd-glued-effective-model-chart-pullback-single].",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Descent, Tag 0AP4, chart-square verification"
+ },
+ "proof": [
+  {
+   "text": "Use the open immersion and compatibility equations to identify the local square, then apply the scheme-gluing universal property to assemble the local pullback identifications.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Descent, Tag 0AP4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Nonempty IsLimit PullbackCone IsOpenImmersion scheme",
+   "results": "No exact theorem found",
+   "verdict": "No exact match after checking candidate types.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPullback open immersion scheme gluing",
+   "results": "No exact theorem found",
+   "verdict": "No exact match after inspection.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsPullback PullbackCone IsOpenImmersion Mathlib/AlgebraicGeometry",
+   "results": "No theorem establishing this gluing implication.",
+   "verdict": "No exact match in pinned Mathlib source.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GluedEffectiveModelChartPullbackSingle",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-glued-effective-model-chart-pullback-single",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GluedEffectiveModelChartPullbackSingle",
+  "file": "lean/Sheaf/AlgebraicGeometry/GluedEffectiveModelChartPullbackSingle.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.glued_model_chart_pullback_core",
+  "statement": "theorem glued_model_chart_pullback_core -- STATEMENT-DISPUTED: the stated hypotheses do not force the chart square to -- be cartesian; a chart may be empty while other charts cover the glued model. {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X} {I : Type u} (U : I → V.left.Opens) (W : I → Over Y) (q : ∀ i, (U i).toScheme ⟶ (W i).left) (W₀ : Over Y) (q₀ : V.left ⟶ W₀.left) (j : ∀ i, (W i).left ⟶ W₀.left) (i : I) (hcart : IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p) (hopen : IsOpenImmersion (j i)) (hover : j i ≫ W₀.hom = (W i).hom) (hcomm : q i ≫ j i = (U i).ι ≫ q₀) : Nonempty (IsLimit (PullbackCone.mk (q i) (U i).ι hcomm))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T001228-L-2305995",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T001228-L-2305995",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
