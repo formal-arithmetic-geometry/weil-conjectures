@@ -1,0 +1,163 @@
+{
+ "id": "lem-sc-picard-tensor-single-base-change-square",
+ "kind": "statement",
+ "title": "Pinned tensor exchange on a single complex",
+ "statement": "Choose derived categories [def-pc-derived-category]. For schemes X, S, X', T [def-pc-scheme], morphisms f:X→S, f':X'→T, g:T→S, v:X'→X with v≫f=f'≫g, and an O_X-module G, assume tensor pullback along g and v is additive [def-pc-module-pullback]. Let εg and εv be the left-derived counits pinned by exists_derivedPullbackComposition [lem-pc-ringed-spaces-derived-pullback-composition]. Let cg:Lg*(f*G[0])→(g*f*G)[0] and cv:Lv*(G[0])→(v*G)[0] be their components followed by the localized singleMapHomologicalComplex comparisons. Then cg ≫ single(beta) ≫ canonicalSingleDirectImageMap f' (v*G) = Lg*(canonicalSingleDirectImageMap f G) ≫ schemeDerivedBaseChangeMap f f' g v h (G[0]) ≫ Rf'*(cv), where beta is the specified tensor moduleBaseChangeMap [lem-weil-pbc-module-base-change-map-open-restriction] and the single direct-image comparisons are canonical [lem-pc-canonical-single-direct-image-comparison]. No flatness or invertibility is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "canonical derived mate, specialized to a single module; parent proof step 3"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-pc-canonical-single-direct-image-comparison",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Use canonicalSingleBaseChangeComparison for the arbitrary commutative square and G. Expand canonicalSinglePullbackMap as the pinned tensor comparison followed by the single of the adjunction-preserving tensor-to-ordinary isomorphism.",
+   "uses": [
+    "lem-sc-canonical-single-base-change-comparison",
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove naturality of canonicalSingleDirectImageMap along the tensor-to-ordinary v-pullback isomorphism from naturality of the right-derived unit and inverse single-complex comparison. Postcompose the tensor square with the derived direct image of the single of that isomorphism. Cancel the source tensor-to-ordinary comparison with its inverse, use the ordinary comparison identity, and cancel the postcomposed isomorphism. Only isomorphisms of ordinary pullback functors are cancelled.",
+   "uses": [
+    "lem-pc-canonical-single-direct-image-comparison",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-canonical-single-direct-image-comparison",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-canonical-single-base-change-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "single-complex specialization of the canonical mate",
+  "note": "F2 second reader proves the tensor square from the existing ordinary-pullback single comparison by unit naturality and cancellation of the adjunction-preserving isomorphisms. No hole is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation between composite additive functors commutes with the single complex comparison",
+   "results": "singleMapHomologicalComplex, mapCochainComplexSingleFunctor, and mapHomologicalComplex_naturality provide ingredients, not the derived scheme exchange square.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.singleMapHomologicalComplex",
+   "results": "Single-complex comparison and component lemmas; no derived base-change square.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*single",
+   "results": "Five unrelated Mathlib matches; library CanonicalSingleBaseChangeComparison uses ordinary pullback rather than the specified tensor pullback. CanonicalDegreeZeroMateSquare is after homology and uses ordinary mates.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change single complex tensor pullback comparison",
+   "results": "service unavailable: Internal Server Error; leanfinder, loogle and source grep supplied the available searches",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mapping a natural transformation to complexes commutes with the single functor",
+   "results": "8 hits, including mapHomologicalComplex_app_f and mapCochainComplexSingleFunctor; component ingredients only, no derived tensor exchange identity.",
+   "date": "2026-10-13",
+   "verdict": "second reader: no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.mapHomologicalComplex",
+   "results": "Unknown unqualified identifier; earlier qualified/single-complex searches are recorded above.",
+   "date": "2026-10-13",
+   "verdict": "second reader: no result"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Ee]xchange|[Ee]xchange.*single",
+   "results": "8 unrelated set-cardinality/matroid hits; direct rg in library found only homotopy exchange and ordinary-pullback comparison ingredients.",
+   "date": "2026-10-13",
+   "verdict": "second reader: no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.mapHomologicalComplex",
+   "results": "12 hits including naturality and single-object component identities; local library search found canonicalSingleBaseChangeComparison, sufficient after tensor-to-ordinary transport.",
+   "date": "2026-10-13",
+   "verdict": "second reader: reuse existing library comparison, prove transport"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.TensorDegreeZeroMateSquare",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general theorem of the cube; Tag 0BDP third paragraph, omitted canonical base-change detail; truncation-data steps 3 and 4: flat single-module identification and transport of the canonical degree-zero mate; tensor-degree-zero-mate-square proof step 3, single-complex exchange identity",
+   "via": [
+    "lem-sc-picard-tensor-degree-zero-mate-square",
+    "lem-sc-picard-rank-match-derived-truncation-data",
+    "lem-sc-picard-base-change-stalk-surjective",
+    "lem-sc-picard-rank-match-base-change",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.TensorSingleBaseChangeSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/TensorSingleBaseChangeSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorSingleBaseChangeSquare",
+  "statement": "theorem tensorSingleBaseChangeSquare\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S X' T : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ T)\n    (g : T ⟶ S) (v : X' ⟶ X) (h : v ≫ f = f' ≫ g)\n    [(tensorPullback g).Additive] [(tensorPullback v).Additive] (G : X.Modules) :\n    let εg := (Classical.choose (Classical.choose_spec\n      exists_derivedPullbackComposition.{u, w})) g\n    let εv := (Classical.choose (Classical.choose_spec\n      exists_derivedPullbackComposition.{u, w})) v\n    let cg := εg.app ((HomotopyCategory.singleFunctor _ 0).obj ((pushforward f).obj G)) ≫\n      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n        ((HomologicalComplex.singleMapHomologicalComplex\n          (tensorPullback g) (ComplexShape.up ℤ) 0).hom.app ((pushforward f).obj G)))\n    let cv := εv.app ((HomotopyCategory.singleFunctor _ 0).obj G) ≫\n      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n        ((HomologicalComplex.singleMapHomologicalComplex\n          (tensorPullback v) (ComplexShape.up ℤ) 0).hom.app G))\n    cg ≫ (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).map\n          (moduleBaseChangeMap f f' g v h G) ≫\n        canonicalSingleDirectImageMap f' ((tensorPullback v).obj G) =\n      (derivedPullback g).map (canonicalSingleDirectImageMap f G) ≫\n        schemeDerivedBaseChangeMap f f' g v h ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫\n        (schemeDerivedDirectImage f').map cv",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T082342-L-1634505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T082342-L-1634505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
