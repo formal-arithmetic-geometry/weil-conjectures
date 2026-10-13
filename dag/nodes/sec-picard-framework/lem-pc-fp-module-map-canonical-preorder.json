@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-fp-module-map-canonical-preorder",
+ "kind": "statement",
+ "title": "Canonical descent of one finitely presented module map over a directed preorder",
+ "statement": "Let I be a directed preorder, F:I\\to\\mathrm{CRing} a functor, i_0\\in I, and A=\\operatorname{colim}F [def-weil-pbc-category-colimit]. Let M,N be finitely presented F(i_0)-modules [def-sc-finitely-presented-module], and let f:A\\otimes_{F(i_0)}M\\to A\\otimes_{F(i_0)}N be A-linear. Scalar extension means tensor product, with comparison isomorphisms induced by the extension-restriction adjunction [def-pod-ring-scalar-extension]. For i\\ge i_0 let e_i(X):A\\otimes_{F(i_0)}X\\to A\\otimes_{F(i)}(F(i)\\otimes_{F(i_0)}X) be the canonical comparison, incorporating the colimit cocone equality and scalar-extension associativity. Then there is i\\ge i_0 and an F(i)-linear g:F(i)\\otimes_{F(i_0)}M\\to F(i)\\otimes_{F(i_0)}N satisfying e_i(N)^{-1}\\circ(A\\otimes_{F(i)}g)\\circ e_i(M)=f. No complex, graded family, boundedness hypothesis, or differential compatibility is involved.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7 (2), the map clause; its finite presentation matrix argument, used in Perfect Tag 09RE affine case (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sc-finitely-presented-module",
+  "def-pod-ring-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite presentations of M and N. By [lem-weil-pbc-tensor-right-exact] and [lem-weil-pbc-tensor-finite-product], their scalar extensions have the corresponding finite presentation matrices over A and every stage ring. Express the images under f of the finitely many generators of M using the chosen generators of N. Express each image of a defining relation of M as a combination of the defining relations of N.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-tensor-finite-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Using [lem-pc-filtered-colimit-commrings-elementwise], lift the finitely many image coefficients and relation-witness coefficients to stages and take a common upper bound with i0. Each entry of the matrix equation between these coefficients holds over A; the equality criterion makes it hold at a common later stage j. The generator images now kill the defining relations of M, hence determine an F(j)-linear map between the stage tensor products. Its further extension is f, as checked on generators. This uses only directed upper bounds and remains valid for preorders.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical comparisons send 1 tensor x to 1 tensor (1 tensor x), by ModuleCat.extendScalarsComp_hom_app_one_tmul. Checking both sides on these tensors gives the conjugation equality; these tensors generate the extension as an A-module. Zero generators or relations, and zero rings or modules, cause no exception to the argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tensor-finite-product",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7 (2), explicit finite presentation coefficient proof and canonical comparison identification by W3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A single map between scalar extensions of finitely presented modules over a directed preorder ring colimit descends with canonical tensor comparisons",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A single map between scalar extensions of finitely presented modules over a directed preorder ring colimit descends with canonical tensor comparisons",
+   "results": "Submodule.FG.rTensor.directLimit_apply; Submodule.FG.rTensor.directLimit_apply'; Submodule.FG.lTensor.directLimit_apply'; Submodule.FG.lTensor.directLimit_apply; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; TensorProduct.fromDirectLimit; ModuleCat.directLimitIsColimit_desc; TensorProduct.fromDirectLimit_of_tmul",
+   "verdict": "no exact match: ring map factorization, fixed-ring module colimits, and localized-module lifts do not state canonical descent of a map over varying stage rings",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*colimit|extendScalars.*descent",
+   "results": "0 hits from the Mathlib source search",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedGradedMapColimitDescent",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE affine case (1): lifting one of the finitely many graded components using finite presentation",
+   "via": [
+    "lem-pc-bounded-graded-map-colimit-descent",
+    "lem-pc-affine-perfect-chain-map-descent",
+    "lem-pc-affine-perfect-hom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.FinitePresentationMapCanonical",
+  "file": "lean/Sheaf/Algebra/FinitePresentationMapCanonical.lean",
+  "declaration": "ModuleCat.finitePresentation_map_directedColimit",
+  "statement": "theorem finitePresentation_map_directedColimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I) (M N : ModuleCat.{u} (F.obj i₀))\n    (hM : Module.FinitePresentation (F.obj i₀) M)\n    (hN : Module.FinitePresentation (F.obj i₀) N)\n    (f : (extendScalars (colimit.ι F i₀).hom).obj M ⟶\n      (extendScalars (colimit.ι F i₀).hom).obj N) :\n    let e (i : Set.Ici i₀) (X : ModuleCat.{u} (F.obj i₀)) :=\n      eqToIso (congrArg (fun r ↦ (extendScalars r).obj X)\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE i.property)).symm)) ≪≫\n      (extendScalarsComp (F.map (homOfLE i.property)).hom (colimit.ι F i.val).hom).app X\n    ∃ i : Set.Ici i₀,\n      ∃ g : (extendScalars (F.map (homOfLE i.property)).hom).obj M ⟶\n        (extendScalars (F.map (homOfLE i.property)).hom).obj N,\n        (e i M).hom ≫ (extendScalars (colimit.ι F i.val).hom).map g ≫ (e i N).inv = f",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T100213-L-2500877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T100213-L-2500877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
