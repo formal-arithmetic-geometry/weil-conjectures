@@ -106,12 +106,13 @@ lemma flat_constantSheaf_obj_of_retract {Y : Scheme.{u}} {J : Type} [Finite J] {
     (biproduct.isoCoproduct _).symm ≪≫
     biproduct.mapIso (fun _ ↦ Functor.Monoidal.εIso c) ≪≫ (c.mapBiproduct _).symm) hs
 
-/-- Blueprint `lem-sf-tor-sheaf-constructible`, the constant case: the Tor sheaves of constant
+/-- The constant case of the constructibility of Tor sheaves: the Tor sheaves of constant
 sheaves are constant. Let `π : P ⟶ M[0]` be a quasi-isomorphism from a complex `P`
 concentrated in degrees `≤ 0` whose terms have flat constant sheaves (for instance a
 projective resolution by finitely generated modules). Then `P_Y` is K-flat and resolves
 `M_Y`, so `M_Y ⊗ᴸ N_Y` is computed by the complex `P_Y ⊗ N_Y = (P ⊗ N)_Y`, and
-`Hʳ(M_Y ⊗ᴸ N_Y)` is the constant sheaf at `Hʳ(P ⊗ N) = Tor_{-r}(M, N)`. -/
+`Hʳ(M_Y ⊗ᴸ N_Y)` is the constant sheaf at `Hʳ(P ⊗ N) = Tor_{-r}(M, N)`.
+(blueprint: `lem-sf-tor-sheaf-constructible`) -/
 noncomputable def homologyDerivedTensorConstantSheafIso {Y : Scheme.{u}}
     (P : CochainComplex A ℤ) [P.IsStrictlyLE 0]
     (hP : ∀ n, ObjectProperty.flat ((constantSheaf Y.smallEtaleTopology A).obj (P.X n)))
@@ -216,12 +217,13 @@ lemma exists_retract_biproduct_unit_of_projective (X : ModuleCat.{u + 1} Λ) [Pr
 
 variable (Λ) [IsNoetherianRing Λ]
 
-/-- Blueprint `lem-sf-tor-sheaf-constructible`, the constant case: for finitely generated
+/-- The constant case of the constructibility of Tor sheaves: for finitely generated
 `Λ`-modules `M` and `N`, the Tor sheaves of the constant sheaves `M_Y` and `N_Y` are finite
 locally constant. With a projective resolution `P` of `M` by finitely generated modules,
 `Hʳ(M_Y ⊗ᴸ N_Y)` is the constant sheaf at `Hʳ(P ⊗ N) = Tor_{-r}(M, N)`
 (`AlgebraicGeometry.Etale.homologyDerivedTensorConstantSheafIso`), a subquotient of the
-finitely generated module `P^r ⊗ N`, hence finitely generated, `Λ` being noetherian. -/
+finitely generated module `P^r ⊗ N`, hence finitely generated, `Λ` being noetherian.
+(blueprint: `lem-sf-tor-sheaf-constructible`) -/
 theorem isFiniteLocallyConstantSheaf_torSheaf_constantSheaf {Y : Scheme.{u}}
     (M N : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] [Module.Finite Λ N] (r : ℤ) :
     IsFiniteLocallyConstantSheaf (torSheaf Λ r
@@ -255,14 +257,14 @@ theorem isFiniteLocallyConstantSheaf_torSheaf_constantSheaf {Y : Scheme.{u}}
       obtain ⟨J, _, ⟨h⟩⟩ := exists_retract_biproduct_unit_of_projective (R.cochainComplex.X n)
       exact flat_constantSheaf_obj_of_retract _ h) R.π' N r).symm
 
-/-- Blueprint `lem-sf-tor-sheaf-constructible`, the locally constant case: the Tor sheaves of
+/-- The locally constant case of the constructibility of Tor sheaves: the Tor sheaves of
 two finite locally constant sheaves of modules over a noetherian ring are finite locally
 constant. On a common étale cover both sheaves are constant, with finitely generated values `M`
 and `N`; the pullback to a member of the cover commutes with Tor sheaves
 (`AlgebraicGeometry.Etale.upperStarTorSheafIso`), and the Tor sheaves of `M` and `N` are
 finite locally constant
 (`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_torSheaf_constantSheaf`). Finite local
-constancy is étale local. -/
+constancy is étale local. (blueprint: `lem-sf-tor-sheaf-constructible`) -/
 theorem isFiniteLocallyConstantSheaf_torSheaf {Z : Scheme.{u}}
     (F G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
     [IsFiniteLocallyConstantSheaf G] (r : ℤ) :
@@ -294,13 +296,14 @@ theorem isFiniteLocallyConstantSheaf_torSheaf {Z : Scheme.{u}}
       (torSheafMapIso Λ r eF eG ≪≫ (upperStarTorSheafIso Λ (𝒰.f i) r F G).symm)
   exact IsFiniteLocallyConstantSheaf.of_cover 𝒰 _
 
-/-- Blueprint `lem-sf-tor-sheaf-constructible`: Tor sheaves of constructible sheaves. For a
+/-- **Tor sheaves of constructible sheaves are constructible.** For a
 noetherian ring `Λ` and constructible sheaves `F` and `G` of `Λ`-modules on `X_ét`, every Tor
 sheaf `Hʳ(F ⊗ᴸ G)` is constructible. On the strata of a common refinement of witnessing
 stratifications both pullbacks are finite locally constant, the pullback commutes with Tor
 sheaves (`AlgebraicGeometry.Etale.upperStarTorSheafIso`), and the Tor sheaves of finite
 locally constant sheaves are finite locally constant
-(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_torSheaf`). -/
+(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_torSheaf`).
+(blueprint: `lem-sf-tor-sheaf-constructible`) -/
 theorem isConstructibleSheaf_torSheaf {X : Scheme.{u}}
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
     [IsConstructibleSheaf G] (r : ℤ) :
