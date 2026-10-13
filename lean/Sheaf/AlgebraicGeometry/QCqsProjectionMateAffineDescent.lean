@@ -11,6 +11,9 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
+import Sheaf.AlgebraicGeometry.ProjectionMateAffineChartCertificate
+import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+
 /-! # Affine descent for supplied derived projection mates
 
 Source: Stacks Project, Tag 08EU, local reduction of the projection formula.
@@ -73,6 +76,30 @@ theorem qcqsProjectionMate_of_affine
     IsIso (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)
       ((derivedPullback f).obj M.obj ⊗ L.obj)
         (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫
-          (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj))) := by sorry
+          (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj))) := by
+  classical
+  let α := p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)
+    ((derivedPullback f).obj M.obj ⊗ L.obj)
+    (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫
+      (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj))
+  change IsIso α
+  apply (DerivedCategory.isIso_iff _ α).2
+  intro n
+  apply (sheaf_module_isIso_iff_isIso_over_open_cover Y.toRingedSpace Y.affineOpens
+    (fun V ↦ V.1) (iSup_affineOpens_eq_top Y) _ _ _).2
+  intro V
+  obtain ⟨A, hA, Z, hZ, hZqs, g, hg, hgqs, _eV, _eZ, _hchart, q, s, N, E, hc⟩ :=
+    exists_projectionMate_affineChart_certificate X Y f p t M L V.1 V.2
+  let := hA
+  let := hZ
+  let := hZqs
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings Z.toRingedSpace))
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+  let := hg
+  let := hgqs
+  exact hc (haffine A Z g q s N E) n
+
 
 end AlgebraicGeometry
