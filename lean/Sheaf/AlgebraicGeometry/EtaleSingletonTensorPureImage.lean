@@ -22,6 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
+set_option linter.auxLemma false in
 /-- Canonical evaluation sends a lifted pure tensor to its normalized pure section.
 Source: Stacks Project, Tag 03P2, affine tensor calculation.
 (blueprint: new-etale-singleton-tensor-pure-image)
@@ -56,7 +57,32 @@ theorem singletonTensorDegreeComparisonHom_pure_image
         (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b)) =
         (∏ k : Fin (n + 1),
           (Pi.π (fun _ : Fin (n + 1) ↦ Over.mk g) k).left.left.appTop (b k)) •
-            Modules.etaleTensorSectionsRestriction F P.hom m := by sorry
+            Modules.etaleTensorSectionsRestriction F P.hom m := by
+  -- Transport the product witness by proof irrelevance inside the proof only.
+  -- This keeps the theorem signature on the library's usual limit instances.
+  run_tac do
+    let args ← #[`X, `U, `W, `g, `n].mapM fun name ↦ do
+      return (← Lean.Meta.getLocalDeclFromUserName name).toExpr
+    let hPred ← Lean.Meta.mkAppM ``IsSingletonTensorDegreeComparison._proof_1 args
+    let hType ← Lean.Meta.inferType hPred
+    let hStd ← Lean.Meta.synthInstance hType
+    let goal ← Lean.Elab.Tactic.getMainGoal
+    let target ← goal.getType
+    let motive ← Lean.Meta.withLocalDeclD `h hType fun h ↦ do
+      let normalized := target.replace fun e ↦ if e == hStd then some h else none
+      if normalized == target then throwError "The product witness was not found"
+      Lean.Meta.mkLambdaFVars #[h] normalized
+    let eq ← Lean.Meta.mkAppM ``Subsingleton.elim #[hPred, hStd]
+    let propEq ← Lean.Meta.mkAppM ``congrArg #[motive, eq]
+    let next ← Lean.Meta.mkFreshExprSyntheticOpaqueMVar (Lean.mkApp motive hPred)
+    goal.assign (Lean.mkAppN (Lean.mkConst ``Eq.mp [.zero])
+      #[Lean.mkApp motive hPred, Lean.mkApp motive hStd, propEq, next])
+    Lean.Elab.Tactic.replaceMainGoal [next.mvarId!]
+  let := IsSingletonTensorDegreeComparison._proof_1 X U W g n
+  let := IsSingletonTensorDegreeComparison._proof_2 X F U W g n
+  let : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra
+  intro m b
+  exact hf m b
 
 end
 end AlgebraicGeometry.Scheme
