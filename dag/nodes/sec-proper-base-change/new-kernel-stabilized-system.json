@@ -55,18 +55,18 @@
  "statement": "theorem coherentFormalModule_kernel_stabilized_system {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (hc : ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) : ∃ (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj), ∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)",
  "proof": [
   {
-   "text": "Restrict the stabilized image inclusions on affines and glue the compatible system.",
+   "text": "For each n take the image of a_n : ker(alpha_(n+c)) -> F_n. Naturality of alpha induces kernel maps along shifted transition maps. Functoriality of F makes these commute with a_n. Use Mathlib image.map and image.map_homMk'_ι to obtain transition maps between the images. Cancel the monic image inclusions to prove identities and composition, and take the inclusions as a natural transformation. Finally use the inverse of Abelian.imageIsoImage to identify each term with the stated abelian image, with compatibility from imageIsoImage_hom_comp_image_ι. This construction works for every c, without the stabilization hypothesis.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "R1",
+  "group": "B3",
   "date": "2026-10-13",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X, claims (a)--(b)"
+  "document": "Mathlib.CategoryTheory.Limits.Shapes.Images and Mathlib.CategoryTheory.Abelian.Basic",
+  "place": "Direct categorical construction by the second reader: kernel.map, image.map, image.map_homMk'_ι, Abelian.imageIsoImage; realizes the system in Stacks 087X."
  },
  "lean": {
   "existing": false,
@@ -89,13 +89,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T235557-L-2202051",
-  "kind": "interface",
+  "landing": "20261013T011923-L-2761788",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
