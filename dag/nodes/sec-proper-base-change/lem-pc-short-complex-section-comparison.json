@@ -13,19 +13,29 @@
  ],
  "proof": [
   {
-   "text": "Put $Z=\\ker g$, $B=\\operatorname{im}f$, and $N=\\ker f$. Restriction to $V$ is exact. The initial long exact sequence for $0\\to N\\to M_1\\to B\\to0$ and $H^1(V,N)=0$ give surjectivity of $\\Gamma(V,M_1)\\to\\Gamma(V,B)$. The sequence for $0\\to B\\to Z\\to\\mathcal H(S)\\to0$ and $H^1(V,B)=0$ gives surjectivity of $\\Gamma(V,Z)\\to\\Gamma(V,\\mathcal H(S))$ with kernel $\\Gamma(V,B)$. Identify derived degree zero with ordinary sections using Functor.rightDerivedZeroIsoSelf.",
+   "text": "For any epimorphism f of module sheaves, restrict the short exact sequence kernel(f) -> source(f) -> target(f) to V. Restriction preserves finite limits by preservesLimitsOfSize_restrictFunctor and colimits by its left adjunction. Apply exists_rightDerived_full_long_exact to globalSectionsFunctor on V. If H^1(V,kernel(f)|V) is zero, the degree-zero connecting arrow is zero and exactness makes R^0 Gamma(f) epi. Conjugate by rightDerivedZeroIsoSelf and identify sections of the restriction over top with sections over V, obtaining epi of evaluation(f). This is the private proved helper epi_sections_of_h1_kernel_zero.",
    "uses": [
     "lem-weil-pbc-derived-functor-long-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Left exactness of sections identifies $\\Gamma(V,Z)$ with the kernel of $\\Gamma(V,g)$. The two surjections identify $\\Gamma(V,\\mathcal H(S))$ with the cokernel of the incoming map to that kernel. Exact evaluation of presheaves identifies the source with the homology of the section short complex, giving an isomorphism.",
+   "text": "Set Z=S.cycles and a=S.toCycles. The kernel of factorThruImage(a) is canonically kernel(S.f), by kernelFactorThruImage, kernelCompMono and a ≫ S.iCycles = S.f. The kernel of S.homologyπ identifies with image(a), by exactness of a -> Z -> S.homology and the kernel universal property for its image inclusion; identify image(a) with image(S.f) by the strong epi-mono factorization factorThruImage(a) followed by image.ι(a) ≫ S.iCycles. Transport the given two H^1 vanishings through these isomorphisms and apply the preceding helper, yielding epimorphisms on sections of factorThruImage(a) and S.homologyπ.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Identify this isomorphism with the displayed adjunction-defined map. The exact-sheafification homology comparison takes a sheafified cycle class to the class of that cycle. The counit returns its representative to $S$, and the adjunction unit sheafifies the original presheaf class. Thus the composite sends a section cycle to its class in $\\mathcal H(S)$. Precompose both maps with the epimorphic homology projection from section cycles; their equality there is this calculation, so they are equal. The zero incoming map and empty open are covered by the same kernel and cokernel universal properties.",
+   "text": "For a left exact functor F preserving those two epimorphisms, the short complex image(a) -> Z -> S.homology stays exact since its first map is the kernel of S.homologyπ. Compare it to the section image of a -> Z -> S.homology by F(factorThruImage(a)), identity, identity; exact_iff_of_epi_of_isIso_of_mono transfers exactness. The epi F(S.homologyπ) therefore remains a cokernel of F(a). Together with preserved cycles this is preservation of left homology. Apply this to evaluation over V followed by exact forgetting of scalars. This argument is fully proved in preservesLeftHomologyOf_of_section_epis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let L be exact sheafification, U forget the sheaf condition, and P=S.map U. Let k:P.cycles -> U(S.cycles) be the canonical kernel comparison isomorphism. Calculate the adjunction-normalized arrow t:P.homology -> U(S.homology): P.homologyπ ≫ t = k ≫ U(S.homologyπ). To verify it, apply the inverse homEquiv, commute homologyπ with the inverse mapHomologyIso, and use homologyπ_naturality of the counit. Its cyclesMap composed with the inverse mapCyclesIso equals L(k) followed by counit on S.cycles, as seen after the monic cycles inclusion and counit naturality. The calculation proves adjoint_homology_comparison_cycles without hypotheses on cohomology.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exact presheaf evaluation E to the calculation. Compare the two cycle isomorphisms after the monic section cycles inclusion: (P.mapCyclesIso E).hom ≫ E(k) = (S.mapCyclesIso (U ⋙ E)).hom. Precompose with the epimorphic section homologyπ and use the homologyπ formulas for mapHomologyIso. This gives (P.mapHomologyIso E).hom ≫ E(t) = (S.mapHomologyIso (U ⋙ E)).hom. Thus E(t) is explicitly the composite of the inverse first isomorphism with the second. It is an isomorphism and is definitionally the displayed arrow. No new lemma remains unproved and the unit route is unchanged.",
    "uses": [],
    "elementary": true
   }
@@ -34,9 +44,9 @@
   "lem-weil-pbc-derived-functor-long-exact"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, Tags 015B, 015J and 01E4",
-  "place": "Tags 015B (initial long exact sequence) and 01E4, lemma-higher-direct-images, canonical homology/sheafification comparison; dimension-shifting and short-complex argument written by T2"
+  "by": "worker N2",
+  "document": "Stacks Project, Tags 015B and 01E4; Mathlib short-complex homology universal properties",
+  "place": "Two applications of the initial right-derived long exact sequence; cycle calculation for the sheafification adjunction, proved in Sheaf.AlgebraicGeometry.ShortComplexSectionComparison"
  },
  "mathlib_searches": [
   {
@@ -134,10 +144,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T072406-L-1125327",
-  "kind": "interface",
+  "landing": "20261013T100040-L-2472307",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

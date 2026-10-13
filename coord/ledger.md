@@ -11904,3 +11904,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/N1/Sheaf.AlgebraicGeometry.PrincipalCechHorizontalSquare (stage 3; reviewer PASS; first push; landing 20261013T100038-L-2471714 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:00 L: merged deliver/N1/Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationComparisons (stage 3; reviewer PASS; first push; landing 20261013T100039-L-2471995 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/N2/Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle (stage 3; reviewer PASS; first push; landing 20261013T100039-L-2472119 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:00 L: merged deliver/N2/Sheaf.AlgebraicGeometry.ShortComplexSectionComparison (stage 3; reviewer PASS; first push; landing 20261013T100040-L-2472307 (proof); batch 20261013T095923; modules 1; new nodes 0)
