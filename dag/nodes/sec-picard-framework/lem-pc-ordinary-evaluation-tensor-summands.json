@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-ordinary-evaluation-tensor-summands",
+ "kind": "statement",
+ "title": "Unit-normalized symmetric tensor comparison and total summand equations",
+ "statement": "Let X be a scheme and U an open [def-pc-scheme], L the functor of Modules.overEquiv U and T its degreewise cochain functor. There exists a symmetric core monoidal structure m on L with unit isomorphism equal to overEquivFunctorObjUnitIso U. For all integer cochain complexes P,F on the over-U site let D=Hom(P,O[0]) be the ordinary dual [def-pc-ordinary-evaluation-data]. There is an isomorphism c:T(Tot(F tensor D)) to Tot(TF tensor TD) [def-pc-tensor-complex-sheaves]. For every p+q=n its component satisfies L(iota_F,D,p,q,n);c^n = m.mu(F^p,D^q)^(-1);iota_TF,TD,p,q,n. Symmetry is the equality L(beta_A,B);m.mu(B,A)^(-1)=m.mu(A,B)^(-1);beta_LA,LB for all module sheaves A,B. There are no boundedness or homological hypotheses.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-ordinary-evaluation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, ordinary tensor totalization; the parent node proof step 2; Mathlib overEquiv and WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap, map_ι_mapTotalXIso_inv."
+ },
+ "proof": [
+  {
+   "text": "Construct the coefficient-compatible presheaf reindexing tensorator on pure tensors. Descend it through sheafification, using the open-site sheafification comparison. Balanced relations and associativity of tensor products prove the core monoidal laws. Interchanging the pure factors proves symmetry. On the unit this reindexing is precisely the structure-sheaf restriction isomorphism overEquivFunctorObjUnitIso, so its unit is the prescribed one. This is a direct construction, not selection of a witness from a bare existence assertion.",
+   "uses": [
+    "lem-sc-localized-open-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse tensorator in each bidegree. Naturality makes it commute with each differential, so two isoOfComponents constructions give a bicomplex isomorphism. The equivalence preserves coproducts. Compose inverse mapTotalIso with total.mapIso of this bicomplex isomorphism. The map_ι_mapTotalXIso_inv and total inclusion naturality equations identify the image of each summand with the inverse tensorator followed by the target inclusion. These APIs also account for the signed vertical differential; no boundedness is needed.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "lem-sc-localized-open-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A4",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, ordinary tensor totalization; the parent node proof step 2; Mathlib overEquiv and WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap, map_ι_mapTotalXIso_inv.",
+  "description": "Detailed ordinary-complex calculation from the parent plan; literature tags read online. No derived or perfectness assertion is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme equivalence preserves tensor total complexes and ordinary internal Hom evaluation",
+   "date": "2026-10-14",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.ihomPoints_symm_comp, HomologicalComplex.ιTensorObj, PresheafOfModules.Monoidal.tensorObjMap, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction",
+   "verdict": "No exact normalized open-site summand or evaluation component theorem; use the existing monoidal and totalization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιMapBifunctor",
+   "date": "2026-10-14",
+   "results": "12 hits: HomologicalComplex.ιMapBifunctor, HomologicalComplex.ιMapBifunctorOrZero_eq, HomologicalComplex.ι_mapBifunctorDesc, HomologicalComplex.mapBifunctor.ι_D₁, HomologicalComplex.mapBifunctor.ι_D₂, HomologicalComplex.ι_mapBifunctorDesc_assoc, HomologicalComplex.mapBifunctor.hom_ext, HomologicalComplex.mapBifunctor.hom_ext_iff",
+   "verdict": "No exact normalized open-site summand or evaluation component theorem; use the existing monoidal and totalization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv.*tensor|tensor.*overEquiv",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "verdict": "No exact normalized open-site summand or evaluation component theorem; use the existing monoidal and totalization APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open site equivalence is symmetric monoidal with its canonical structure sheaf unit and preserves tensor total complex summand inclusions",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric monoidal equivalence preserves an internal Hom evaluation component after transporting the unit and tensor summand",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.Functor.homObjEquiv_apply_app, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm, CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.Functor.homObjEquiv_symm_apply_app, CategoryTheory.tensorLeftHomEquiv_symm_naturality, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def",
+   "verdict": "No exact normalized open-site summand or evaluation component theorem; use the existing monoidal and totalization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotalIso|ι_mapBifunctorMap",
+   "date": "2026-10-14",
+   "results": "2 hits: Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/Bifunctor.lean",
+   "verdict": "No exact normalized open-site summand or evaluation component theorem; use the existing monoidal and totalization APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverTensorFormula",
+  "date": "2026-10-14",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "## Proof, final paragraph: local tensor-Hom identification; ordinary Hom and evaluation compatibility with the open identifications; normalized tensor summands",
+   "via": [
+    "lem-pc-ordinary-evaluation-over-tensor-formula",
+    "lem-pc-ordinary-evaluation-over-comparisons",
+    "lem-pc-ordinary-evaluation-over-transport",
+    "lem-pc-exact-source-kinjective-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationTensorSummands",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationTensorSummands.lean",
+  "declaration": "AlgebraicGeometry.exists_ordinaryEvaluation_tensor_summands",
+  "statement": "theorem exists_ordinaryEvaluation_tensor_summands (X : Scheme.{u}) (U : X.Opens) :\n    let L := Equivalence.functor\n      (C := localEvaluationModules X U)\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)\n    let T := L.mapHomologicalComplex (.up ℤ)\n    ∃ m : L.CoreMonoidal,\n      m.εIso = Scheme.Modules.overEquivFunctorObjUnitIso U ∧\n      (∀ A B : localEvaluationModules X U,\n        L.map (β_ A B).hom ≫ (m.μIso B A).inv =\n          (m.μIso A B).inv ≫ (β_ (L.obj A) (L.obj B)).hom) ∧\n      ∀ P F : CochainComplex (localEvaluationModules X U) ℤ,\n        ∃ c : T.obj (localEvaluationTensor X U P F) ≅\n            pullbackTensorTotal U.toScheme (T.obj F) (T.obj (localEvaluationDual X U P)),\n          ∀ (p q n : ℤ) (h : p + q = n),\n            L.map (HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P)\n                (curriedTensor _) (.up ℤ) p q n h) ≫ c.hom.f n =\n              (m.μIso (F.X p) ((localEvaluationDual X U P).X q)).inv ≫\n                HomologicalComplex.ιMapBifunctor (T.obj F)\n                  (T.obj (localEvaluationDual X U P)) (curriedTensor _) (.up ℤ) p q n h",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-eca30",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T224505-L-1469096",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-eca30",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T224505-L-1469096",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery matches the stage-3 brief: target and existing signatures are unchanged, delivered modules and direct importer compile, documented split sorries/nodes and local attribute change agree."
+ }
+}

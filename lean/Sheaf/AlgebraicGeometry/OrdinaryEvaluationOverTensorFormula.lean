@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.InternalHomOverEquiv
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationTensorSummands
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationComponentOverTransport
 
 /-! # Tensor summand calculation for ordinary evaluation under open reindexing
 
@@ -30,6 +33,8 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 noncomputable local instance ordinaryOverSchemePreadditive (Y : Scheme.{u}) :
     MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
+
+attribute [local irreducible] homComplexFunctor IsSchemeOrdinaryEvaluation
 
 /-- With the Hom comparison pinned on product projections, the ordinary tensor
 comparison and a natural termwise Hom comparison can be chosen to preserve the
@@ -101,6 +106,22 @@ theorem exists_ordinaryEvaluation_over_tensor_formula (X : Scheme.{u}) (U : X.Op
                 ((c ≪≫ (((curriedTensor (SheafOfModules.{u}
                   (moduleRings U.toScheme.toRingedSpace))).map₂CochainComplex).obj
                     (T.obj F)).mapIso d).inv ≫
-                  T.map f ≫ (b F).hom) := by sorry
+                  T.map f ≫ (b F).hom) := by
+  dsimp only
+  set_option backward.isDefEq.respectTransparency true in
+    let h := internalHom_overEquiv (Y := X) U
+    let e := Classical.choose h
+    have he := Classical.choose_spec h
+    refine ⟨e, he, ?_⟩
+    intro b hπ
+    have hcalc := ordinaryEvaluation_component_over_transport X U P e he b hπ
+    let ht := exists_ordinaryEvaluation_tensor_summands X U
+    let m := Classical.choose ht
+    have hm := Classical.choose_spec ht
+    intro F
+    let hF := hm.2.2 P F
+    let c := Classical.choose hF
+    have hc := Classical.choose_spec hF
+    exact ⟨c, hcalc m hm.1 hm.2.1 F c hc⟩
 
 end AlgebraicGeometry

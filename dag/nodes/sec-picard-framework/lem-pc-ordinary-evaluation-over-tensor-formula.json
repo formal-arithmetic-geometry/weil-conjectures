@@ -16,37 +16,43 @@
  },
  "proof": [
   {
-   "text": "Construct e explicitly by reindexing compatible families of local linear maps on slice categories. Transport back along the inverse slice equivalence for its inverse. Precomposition and postcomposition commute with this construction, so e is natural and its sectionwise action is fixed. Naturality alone would not specify the normalization needed in the subsequent evaluation calculation.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Construct the tensor comparison by the pure-tensor reindexing tensorator. Naturality gives the bicomplex comparison and preservation of coproducts gives its total comparison c, retaining the tensor summand equation. Tensor with d constructed from b at the single unit and the canonical single-unit comparison.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Precompose with each tensor summand inclusion and postcompose with each Hom projection. Use the projection equation for b. When r+q=0, uncurrying both sides gives the same reindexed local map (y,phi,x) sent to y*phi(x), with unit actions identified by a. Associativity, symmetry and equal-degree maps reindex these same factors. Otherwise both expressions are zero. The product and coproduct universal properties establish the scheme formula for every local evaluation map.",
+   "text": "Apply internalHom_overEquiv to obtain the termwise comparison e and its naturality, retaining the witnesses as local terms.",
    "uses": [
-    "lem-sc-hom-complex-projections",
+    "lem-sc-internal-hom-over-equiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the unit-normalized symmetric monoidal structure and its total tensor summand comparisons. For a supplied b and its projection equations, take the tensor comparison for F and the local Hom dual of P. This c does not depend on f.",
+   "uses": [
+    "lem-pc-ordinary-evaluation-tensor-summands"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the component-transport theorem to this m and this c with their unit, symmetry and summand equations. It gives preservation of the local evaluation predicate for every f. Pair this proof with c to obtain the existential tensor comparison, then pair the result with e and its naturality. These existential witnesses are supplied by independent Hom and tensor constructions, not by restating the original existential assertion.",
+   "uses": [
+    "lem-pc-ordinary-evaluation-component-over-transport",
     "def-pc-ordinary-evaluation-data",
     "def-pc-scheme-ordinary-evaluation-formula"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-ordinary-evaluation-data",
   "def-pc-scheme-ordinary-evaluation-formula",
-  "lem-sc-hom-complex-projections"
+  "lem-pc-ordinary-evaluation-component-over-transport",
+  "lem-pc-ordinary-evaluation-tensor-summands",
+  "lem-sc-internal-hom-over-equiv"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "M2",
+  "by": "agent",
+  "group": "A4",
   "date": "2026-10-14",
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0A8X, section-hom-complexes, ordinary product terms and differential; cohomology.tex Tags 08DL and 08DQ for restriction and evaluation",
-  "description": "Ordinary-complex part of the parent proof. Stacks Tags 0A8X, 08DL, 08DM, 08DJ and 08DQ read online; no derived or perfectness assertion is used."
+  "description": "Compiling reduction to the existing internal-Hom comparison, normalized tensor summands, and evaluation compatibility for a fixed normalized tensor comparison; the main module assembles the existential witnesses."
  },
  "mathlib_searches": [
   {
@@ -143,11 +149,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "X-eca30",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T201801-L-3973494",
+  "landing": "20261013T224505-L-1469096",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivery matches the stage-3 brief: target and existing signatures are unchanged, delivered modules and direct importer compile, documented split sorries/nodes and local attribute change agree."
  }
 }
