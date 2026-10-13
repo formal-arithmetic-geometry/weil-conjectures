@@ -15,27 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical unit isomorphism sending 1 to 1 for both families in degree zero. Define positive successor isomorphisms by braiding O(1) to the right, applying the previous isomorphism tensored with O(1), and multiplying. In a coordinate chart each map sends the tensor basis to the corresponding ordinary power. This proves the positive coordinate square.",
+   "text": "Use Proj.unitIsoTwistZero in degree zero for both families. Its hom is the displayed unitToTwist of 1: extensionality on sections and points reduces this to s = s times Localization.mk 1 1. Define the positive family recursively as braiding, the previous isomorphism whiskered on the right, asIso of mu(a,1), and the integer degree cast. Symmetry cancels the two braidings in the successor square, which remains true after precomposition by tensoring any coordinate section.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The given multiplication and the inverse unit isomorphism define the perfect pairing O(1) tensor O(-1) to O. Its adjoint identifies O(-1) with the dual of O(1); on each degree-one chart inverse coordinate and dual coordinate are the corresponding bases. Iterate multiplication to define the negative family.",
+   "text": "The polynomial variables generate the graded algebra, so Proj.iSup_basicOpen_eq_top' gives the degree-one chart cover. Apply Proj.isInvertible_twist to this cover, and use isIso_dualEvaluation for L=O(1), with D its dual. The evaluation isomorphism makes tensorRight L an equivalence with inverse tensorRight D (BraidedCategory.tensorRightEquivalence). This works with Fin 2 in universe zero and k in any universe; the narrower polynomial-twist instance is not used.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf",
     "def-sc-invertible-module",
     "lem-sc-invertible-dual"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "On each coordinate chart the negative successor square sends a pure tensor of the dual basis and a coordinate to the same lower negative-degree basis: x_i^(-(a+1)) x_i = x_i^(-a). The case a=0 is the evaluation pairing to the unit. The charts cover, so equality on these bases gives the global square. The zero families were both defined by the same unit isomorphism.",
+   "text": "Suppose eNeg(a) has been constructed. Define q from D^(a+1) tensor L to O(-(a+1)) tensor L by braiding L to the front, inverse associator, evaluation whiskered by D^a, left unitor, eNeg(a), the degree cast, and the inverse of mu(-(a+1),1). Define eNeg(a+1) as the preimageIso of q under tensorRight L. Functor.map_preimage gives its whiskered hom equal to q.hom. Cancel the inverse multiplication with multiplication and the two opposite degree casts to obtain the full evaluation successor equality. Precompose with the right-unitor inverse and tensoring the coordinate section to obtain the requested negative square. Both zero isomorphisms are definitionally the same unit isomorphism. Assemble these identities in a generic, fully proved private theorem for any indexed family of unit-to-L(1) sections, then specialize to the two coordinate sections with explicit grading parameters. The private normalization and invertibility proofs keep this specialization from expanding chart data.",
    "uses": [
+    "lem-sc-invertible-dual",
     "def-weil-pbc-proj-twisting-sheaf"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -46,8 +47,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01MS and 01MU; source node step 2, iterated multiplication, dual pairing and compatibility",
-  "group": "V2",
+  "place": "Categorical recursive construction for Tags 01MS and 01MU: positive multiplication recursion and negative recursion lifted through tensorRightEquivalence; implemented by A3 using existing proved library APIs.",
+  "group": "A3",
   "date": "2026-10-13"
  },
  "mathlib_searches": [
@@ -121,13 +122,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "X-da8c7",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T225335-L-1814964",
+  "landing": "20261013T054209-L-440566",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged Lean signature matches lem-sc-p1-twist-coherent-powers; proof matches updated DAG; delivered module and sole direct importer compile cleanly; all nine declarations use only standard axioms."
  }
 }
