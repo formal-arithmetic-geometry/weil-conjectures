@@ -16,35 +16,43 @@
  ],
  "proof": [
   {
-   "text": "The canonical monoidal model of derived pullback identifies its value on the structure sheaf with the structure sheaf. The complex construction gives shift compatibility; tensoring with a shifted structure sheaf is translation.",
+   "text": "Identify the degree-zero structure sheaf with the monoidal unit using DerivedCategory.singleFunctorObjUnitIso. Use the explicit shifted tensor-unit homotopy complex, which is K-flat because the tensor unit is K-flat and K-flatness is stable under shifts. The single/quotient localization comparisons, the homotopy quotient unit isomorphism, and the localization shift comparison identify its image with the shifted structure sheaf. DerivedCategory.commShiftTensorRightQhObj and Functor.CommShift.ofIso then identify tensoring a shifted unit with translation. Translation by opposite integers gives both tensor-inverse isomorphisms. The associator and left unitor assemble tensorLeft of the shifted unit and tensorLeft of its opposite shift into an equivalence. This is the private proved helper shifted_unit_tensorLeft_isEquivalence, valid in the independent morphism universe w.",
    "uses": [
-    "def-pc-derived-pullback-monoidal-model",
-    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use nonempty_derivedPullback_structureSheaf_iso to identify pullback of the degree-zero structure sheaf with the structure sheaf. Extract the shift-commuting structure from the specification of exists_derivedPullback; its commShiftIso transports this identification to every integer shift. Compose with the pullback image of the supplied isomorphism M to O_Y[k]. Functor.isEquivalence_of_iso transports the tensorLeft equivalences of the preceding step to tensorLeft M and tensorLeft (Lf* M).",
+   "uses": [
+    "lem-sc-derived-pullback-structure-sheaf-local",
     "def-pc-derived-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Under these unit and shift identifications t(O[k],-) is an isomorphism of shifted pullback functors. The shifted adjunction conjugates it to an isomorphism of the corresponding shifted direct images. Expand the Hom-equivalence counit formula to identify this conjugate with the displayed mate. The conjugate of its inverse is its inverse, using the triangle identities. This uses the supplied comparison, not just the canonical tensorator. This is the formal conjugate-equivalence calculation of Mathlib CategoryTheory.conjugateEquiv_iso, after transporting the shift equivalences; it is not the generally false assertion that every mate of an isomorphism is invertible.",
+   "text": "For equivalences A and B and an isomorphism alpha:A followed by F to F followed by B, rotate alpha across the inverse-equivalence adjunctions a and b using mateEquiv.symm. Its formula consists of invertible units, alpha and invertible counits, so this rotated transformation beta is invertible. Apply conjugateEquiv_iso to beta and the composite adjunctions a.comp p and p.comp b. Expand the component formula: cancel the B inverse triangle, move the A inverse counit through p.unit by naturality, move the A inverse unit through alpha by naturality, and cancel the A inverse triangle. The resulting component is exactly p.homEquiv(alpha at G(L) followed by B.map of the supplied counit). This is the private proved helper equivalence_projection_mate_isIso; it does not assert invertibility for arbitrary mates.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Naturality of t, the counit and the Hom equivalence transports the isomorphism from O[k] to M along the given isomorphism. Degree zero and empty schemes use the same formula.",
+   "text": "Restrict the supplied bifunctor isomorphism t to the fixed first factor M. Its naturality at (id_M,a) gives the required natural isomorphism between tensorLeft M followed by pullback and pullback followed by tensorLeft of its image. Apply the preceding helper to the two tensorLeft equivalences. Unfold their component maps and id_tensorHom to obtain exactly the displayed supplied projection mate. All constructions include degree zero and empty schemes.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback-monoidal-model",
   "def-pc-scheme-derived-tensor-structure",
+  "lem-sc-derived-pullback-structure-sheaf-local",
   "def-pc-derived-pullback"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "N2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EU, lemma-cohomology-base-change",
-  "note": "F1: the relevant step of the existing supplied-mate plan, including arbitrary p and t."
+  "place": "Tag 08EU, lemma-cohomology-base-change, final sentence",
+  "note": "The existing unit-and-shift argument is implemented with explicit shifted K-flat units and a proved categorical rotation/conjugation calculation. Reuses the existing local derived-pullback structure-sheaf theorem instead of the monoidal-model dependency."
  },
  "mathlib_searches": [
   {
@@ -124,10 +132,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T095947-L-2456698",
-  "kind": "interface",
+  "landing": "20261013T120801-L-3469987",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
