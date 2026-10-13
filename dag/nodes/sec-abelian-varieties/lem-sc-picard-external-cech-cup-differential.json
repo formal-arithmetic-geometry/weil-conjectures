@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-picard-external-cech-cup-differential",
+ "kind": "statement",
+ "title": "Adjacent differential compatibility of external Alexander--Whitney degree maps",
+ "statement": "Let k,f,g,U,V,F,G be as in [lem-sc-picard-external-cech-cup-bidegree]. Suppose a family l_(p,q) of k-linear bidegree maps is given, each with the prescribed front/back pure-tensor coordinates. Define t_n from the tensor-total degree n to the product-cover degree n by the coproduct universal property and the target-degree equality p+q=n. Then for every n in ℕ, t_n followed by the target differential n→n+1 equals the source tensor-total differential n→n+1 followed by t_(n+1). This is a differential identity for specified maps and asserts no existence of a cochain morphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Equation 33.29.1.1 and https://stacks.math.columbia.edu/tag/07MB, equation 20.25.3.2; official pages read on 2026-10-13"
+ },
+ "stmt_deps": [
+  "lem-sc-picard-external-cech-cup-bidegree"
+ ],
+ "proof": [
+  {
+   "text": "Precompose with each (p,q) tensor-total inclusion with p+q=n. Check on pure tensors and on each product tuple. Expand the target alternating Cech differential and substitute the coordinates of [lem-sc-picard-external-cech-cup-bidegree].",
+   "uses": [
+    "lem-sc-picard-external-cech-cup-bidegree",
+    "def-sc-picard-external-right-cech-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the normalized adjunction units equates iterated pulled restrictions with their composite. Tensor sections commute with restriction. The omitted vertices before the shared vertex give d(a) cup b; those after it give (-1)^p a cup d(b). The last front and first back terms have equal sections and opposite signs and cancel. This is the signed alternating-face calculation in Tag 07MB.",
+   "uses": [
+    "def-sc-picard-external-right-cech-models",
+    "def-sc-cech-cup-product",
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-picard-external-cech-cup-bidegree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor-total differential has the same first differential and signed second differential. Its summand inclusion formulas and the proved inclusion equation for picardExternalCechCupDegreeMaps give identical results. Tensor extensionality, Cech product extensionality and total coproduct extensionality conclude the adjacent equation. The argument is valid in degree zero and for zero coefficients or empty families.",
+   "uses": [
+    "def-sc-picard-external-right-cech-models",
+    "lem-sc-picard-external-cech-cup-bidegree"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-cup-product",
+  "def-sc-picard-external-right-cech-models",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-picard-external-cech-cup-bidegree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "External Cech cup construction; scalar-section assembly and signed-face details written by R4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bilinear external Cech cup pairing commutes with the tensor total differential",
+   "results": "Internal Server Error; no result returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alexander Whitney external Cech cup cochain map tensor total complex",
+   "results": "AlternatingCofaceMapComplex.map, tensorHom, tensorObj and tensor inclusions; no external Cech summand or differential identity.",
+   "date": "2026-10-13",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorDesc",
+   "results": "mapBifunctorDesc and ι_mapBifunctorDesc provide coproduct assembly.",
+   "date": "2026-10-13",
+   "verdict": "Use for total-degree assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*cup|cup.*cech|mapBifunctorDesc",
+   "results": "Mathlib provides total coproduct assembly. Project provides same-cover CechCupProduct, scalarTensorCoefficientApp and exists_scalarPullbackCoefficient; the scalar maps construct the external summands, but there is no external scalar differential identity. blueprint_refs searches for external Cech cup and 07MB return no imported nodes.",
+   "date": "2026-10-13",
+   "verdict": "Use existing scalar maps; split differential step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCechCupComponent",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "External Cech cup component: Adjacent differential compatibility of external Alexander--Whitney degree maps",
+   "via": [
+    "lem-sc-picard-external-cech-cup-component",
+    "lem-sc-picard-external-right-cech-comparison",
+    "lem-sc-picard-right-cech-cup-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferential",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCechCupDifferential.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCechCupDegreeMaps_comm",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardExternalCechCupDegreeMaps",
+   "AlgebraicGeometry.Scheme.Modules.picardExternalCechCupDegreeMaps_ι",
+   "AlgebraicGeometry.Scheme.Modules.picardExternalCechCupDegreeMaps_comm"
+  ],
+  "statement": "theorem picardExternalCechCupDegreeMaps_comm\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) (G : Y.Modules)\n    (l : ∀ p q : ℕ, ((curriedTensor (ModuleCat.{w} k)).obj\n        (((picardCechFunctor f U).obj F).X p)).obj\n          (((picardCechFunctor g V).obj G).X q) ⟶\n      ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).X (p + q))\n    (hl : ∀ p q, IsPicardExternalCechCupBidegree f g U V F G p q (l p q)) (n : ℕ) :\n    picardExternalCechCupDegreeMaps f g U V F G l n ≫\n        ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G)).d n (n + 1) =\n      (HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)\n        ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))\n          (ComplexShape.up ℕ)).d n (n + 1) ≫\n        picardExternalCechCupDegreeMaps f g U V F G l (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T132436-L-4128389",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T132436-L-4128389",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

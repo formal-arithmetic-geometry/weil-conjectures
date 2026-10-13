@@ -14,24 +14,29 @@
  ],
  "proof": [
   {
-   "text": "Pull front and back face sections along the canonical adjunction units,\nrestrict to the common product intersection, and tensor. Both structure maps are\nover Spec k, so the resulting pairing is k-bilinear. Use the tensor universal\nproperty and the product universal property to give a map on each (p,q) summand,\nthen the coproduct universal property gives the map in each total degree.\nExpand the alternating restriction differential. The front omitted vertices\nproduce d(a) cup b, the back vertices produce (-1)^p a cup d(b), and the two\nshared-vertex terms cancel. Restriction composition and tensor-section restriction\ncompatibility identify these terms. This gives the cochain-map equation in adjacent\ndegrees; in all other degrees both differentials are zero. The universal-property\ninclusion equations give the claimed coordinates. Empty covers yield empty\nproducts, and zero coefficients yield zero pairings, so no cover hypotheses enter.",
+   "text": "Construct each bilinear (p,q) tensor summand map using [lem-sc-picard-external-cech-cup-bidegree], proved by existing scalar pullback coefficient maps, scalar tensor section maps and Cech categorical products.",
    "uses": [
-    "def-sc-picard-external-right-cech-models",
-    "def-sc-cech-cup-product",
-    "lem-pc-module-pullback-adjunction"
+    "lem-sc-picard-external-cech-cup-bidegree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use mapBifunctorDesc to assemble degree maps. The adjacent differential equality [lem-sc-picard-external-cech-cup-differential] makes them a cochain map via CochainComplex.ofHom; the complex shape supplies the nonadjacent equations. Recover each summand map with ι_mapBifunctorDesc and evaluate its coordinates, proving IsPicardExternalCechCupComponent.",
+   "uses": [
+    "lem-sc-picard-external-cech-cup-bidegree",
+    "lem-sc-picard-external-cech-cup-differential"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-picard-external-right-cech-models",
-  "def-sc-cech-cup-product",
-  "lem-pc-module-pullback-adjunction"
+  "lem-sc-picard-external-cech-cup-bidegree",
+  "lem-sc-picard-external-cech-cup-differential"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0BED and 07MB; component/naturality split and Lean assembly by V3"
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Equation 33.29.1.1 and Tag 07MB: R4 proved bilinear summands and universal-property assembly, splitting off adjacent differential compatibility."
  },
  "mathlib_searches": [
   {
@@ -113,9 +118,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T125014-L-3838458",
+  "landing": "20261013T132436-L-4128389",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

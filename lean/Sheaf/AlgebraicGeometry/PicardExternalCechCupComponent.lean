@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferential
 
 /-! # External Alexander--Whitney components
 Source: Stacks Project, Tags 0BED and 07MB.
@@ -101,7 +102,23 @@ theorem picardExternalCechCupComponent_exists
       (picardCechFunctor (pullback.fst f g ≫ f)
         (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
           pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G),
-      IsPicardExternalCechCupComponent f g U V F G c := by sorry
+      IsPicardExternalCechCupComponent f g U V F G c := by
+  classical
+  choose l hl using (fun p q ↦ picardExternalCechCupBidegree_exists f g U V F G p q)
+  let c := CochainComplex.ofHom (picardExternalCechCupDegreeMaps f g U V F G l)
+    (picardExternalCechCupDegreeMaps_comm f g U V F G l hl)
+  refine ⟨c, ?_⟩
+  intro p q a b y
+  have he := ConcreteCategory.congr_hom
+    (picardExternalCechCupDegreeMaps_ι f g U V F G l p q) (a ⊗ₜ[k] b)
+  have hc := hl p q a b y
+  apply Eq.trans _ hc
+  exact congrArg (fun z ↦ TopCat.Presheaf.cechComplexFunctorXAddEquiv
+    (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓
+      pullback.snd f g ⁻¹ᵁ V ij.2)
+    (scalarPresheaf (pullback.fst f g ≫ f) (externalCupCoefficients f g F G))
+    (p + q) z y) he
+
 
 end
 end AlgebraicGeometry.Scheme.Modules
