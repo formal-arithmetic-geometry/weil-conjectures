@@ -10532,3 +10532,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:55 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardChartsAffine (stage 3; reviewer PASS; first push; landing 20261013T015547-L-3017700 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:55 L: merged deliver/D4/Sheaf.AlgebraicGeometry.SectionRingCoefficientData (stage 3; reviewer PASS; first push; landing 20261013T015547-L-3017854 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:55 L: merged deliver/E1/Sheaf.RingTheory.AdjoinSingletonSplittingCover (stage 3; reviewer PASS; first push; landing 20261013T015547-L-3018033 (interface); batch 20261013T015540; modules 2; new nodes 1)
+- 01:55 L: merged deliver/E2/Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenComparison (stage 3; reviewer PASS; first push; landing 20261013T015548-L-3018173 (proof); batch 20261013T015540; modules 1; new nodes 0)

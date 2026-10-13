@@ -16,34 +16,34 @@
  ],
  "proof": [
   {
-   "text": "On an affine open Spec R of the normal integral base B, write the finite covers as Spec C and Spec D. They are Noetherian and normal: the first by hN and the second by etale ascent of normality 033C. A Noetherian ring with domain integrally closed stalks is the finite product of its normal-domain components. Each component of C meets n^{-1}U by density. Its nonempty part over U has open image in B because n|_U is etale, so its image contains the generic point. Every component of D also dominates B, since the etale morphism p is open. Thus both algebras embed into their finite generic algebras.",
+   "text": "For each point z of E, choose affine opens T around z and V around p(z), with T contained in the preimage of V. The section-ring map Gamma(B,V) to Gamma(E,T) is etale. For each prime a of Gamma(B,V), its prime localization is isomorphic to the stalk of B at the corresponding point of V, and hence is a normal domain by integrality of B and hB. Apply etale ascent of normality to the section-ring map. Its localization at the prime corresponding to z is isomorphic to E.presheaf.stalk z. Transport domainhood and integral closedness along this localization isomorphism. This is the proved private normal_stalks_of_etale helper.",
    "uses": [
     "lem-weil-pbc-etale-over-normal-ring-normal"
    ],
    "elementary": false
   },
   {
-   "text": "The nonempty open U contains the generic point of B. Hence e_U identifies the generic algebras of C and D over the fraction field of R. Componentwise, each algebra is exactly the integral closure of R in its generic field. Finiteness gives inclusion into that closure; conversely an element integral over R is integral over the component algebra, hence belongs to it by integral closedness. The isomorphism of generic algebras therefore identifies C with D. This is the affine relative-normalization characterization of 035I, applied componentwise, including the zero algebra for an empty cover.",
-   "uses": [
-    "lem-weil-pbc-relative-normalization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "These affine isomorphisms agree on overlaps: both are determined by the same isomorphism of generic algebras, and normal component algebras inject into those algebras. Glue the isomorphisms to e:N ≅ E. Each affine isomorphism is an R-algebra isomorphism, so e;p=n.",
+   "text": "The nonempty open U is dense in the irreducible space B by Mathlib IsOpen.dense. The finite etale map p is open: Mathlib supplies UniversallyOpen from flatness and local finite presentation and Scheme.Hom.isOpenMap. Apply Dense.preimage to conclude that p inverse image of U is dense in E. This is a direct application of the imported Mathlib declarations, with no auxiliary unproved statement.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Apply finite_normal_iso_of_dense_open to n and p, the supplied normal-domain stalks hN, the normal-domain stalks of E from step 1, U, hdense, the density from step 2, eU and heU. All hypotheses of the existing general comparison are supplied; no construction of relative normalization is needed here. The hypothesis hnU remains in the unchanged signature but the more general comparison does not require it.",
+   "uses": [
+    "lem-sbc-finite-normal-dense-open-iso"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-over-normal-ring-normal",
-  "lem-weil-pbc-relative-normalization"
+  "lem-sbc-finite-normal-dense-open-iso"
  ],
  "proof_origin": {
   "kind": "from-document",
   "by": "E2",
   "document": "Stacks Project",
-  "place": "Tags 035I, 035L and 0BQM; finite normal algebra comparison in Tag 0EYJ, step 3 of lem-sbc-finite-normal-depth-two-purity"
+  "place": "Tag 033C for etale ascent of normality; componentwise integral-closure comparison of Tag 0BQL, assembled through the existing finite_normal_iso_of_dense_open; comparison used in Tag 0EYJ."
  },
  "mathlib_searches": [
   {
@@ -129,13 +129,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
   "group": "E2",
   "result": "pass",
-  "landing": "20261012T235110-L-2171388",
-  "kind": "interface",
+  "landing": "20261013T015548-L-3018173",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
