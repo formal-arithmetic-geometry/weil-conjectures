@@ -14,46 +14,46 @@
  ],
  "proof": [
   {
-   "text": "The universal structure-sheaf unit gives H^0(X_s,O)=kappa(s). Hence X_s is nonempty, and any decomposition into two nonempty clopen pieces would yield a nontrivial idempotent, so X_s is connected. The rank of E is locally constant and thus constant on each fibre. Flat local finite presentation makes f open and properness makes it closed. Its clopen rank loci have disjoint clopen images S_r covering S. E has rank r on the inverse image of S_r; the clopen rank-locus argument is [lem-sc-picard-fiber-rank-clopen].",
-   "uses": [
-    "lem-sc-picard-fiber-rank-clopen"
-   ],
-   "elementary": false
+   "text": "Choose standard derived-category localizations for all scheme module categories and all their open over-sites. This is Mathlib HasDerivedCategory.standard and adds no hypothesis to the existing statement.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "On each S_r the finite locally free F is finitely presented and flat over the base. Apply [lem-pc-rf-perfect-base-change] to obtain perfect Rf_*F with arbitrary derived base change. H^0 of each derived pullback is the ordinary direct image p_*q^*F. All derived fibres have no negative cohomology; a finite strictly perfect model locally has Tor-amplitude [0,b] for some b.",
+   "text": "The predicate R_1 is base-change stable: specialize its universal quantifier to the composite of the new test with the base-change map. Congruence and categorical associativity identify its two rank witnesses with the required ones. Its source locality is precisely the source-local theorem.",
    "uses": [
-    "lem-pc-rf-perfect-base-change"
+    "def-sc-picard-universal-single-rank-match",
+    "lem-sc-picard-single-rank-source-local"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply [lem-sc-perfect-h0-locally-closed] with a=0 and the fixed rank r. It supplies an immersion characterized by universal rank-r freeness of the one ordinary direct image. In R_1 any local witness rank equals r, since E has rank r on the whole inverse image and every fibre is nonempty. Restriction preserves rank, and fixed-rank finite local freeness is local on the test scheme. Thus its condition is equivalent to this universal rank-r condition.",
+   "text": "For each s take its perfect chart. Apply the existing perfect lowest-cohomology locus theorem on this U with a=0, upper bound b and rank r. Keep its immersion and universal factorization criterion. Compose that equivalence with the inverse chart comparison to show that this immersion represents R_1 on U.",
    "uses": [
-    "lem-sc-perfect-h0-locally-closed",
-    "def-sc-picard-universal-single-rank-match"
+    "lem-sc-picard-single-rank-perfect-chart",
+    "lem-sc-perfect-h0-locally-closed"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "On overlapping neighbourhoods the immersions represent the same functor. Since immersions are monomorphisms, their unique identifications agree on triple overlaps and glue. The clopen strata are disjoint, so their union also glues to an immersion over S. Test morphisms factor precisely when R_1 holds: its witnesses give local factors and uniqueness glues them. On the empty test scheme both criteria hold without points; r=0 uses the same construction.",
+   "text": "Apply the generic local-immersion gluing theorem to these local representatives, base-change stability and source locality. It gives the desired global immersion and the unchanged factorization equivalence.",
    "uses": [
-    "def-sc-picard-universal-single-rank-match"
+    "lem-sc-local-immersion-locus"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-picard-universal-single-rank-match",
-  "lem-pc-rf-perfect-base-change",
+  "lem-sc-local-immersion-locus",
   "lem-sc-perfect-h0-locally-closed",
-  "lem-sc-picard-fiber-rank-clopen"
+  "lem-sc-picard-single-rank-perfect-chart",
+  "lem-sc-picard-single-rank-source-local"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "first three proof paragraphs: apply Tag 0BDL to one direct image on the reference bundle rank strata",
-  "note": "Q4 spells out the single-image construction and local synchronization implicit in the first three proof paragraphs; the unit route is unchanged."
+  "place": "first three proof paragraphs, applying Tag 0BDL locally and gluing the characterized loci",
+  "note": "V2 realizes the original four-step route in Lean: a local perfect chart, the existing lowest-cohomology locus theorem, source locality, and generic gluing. The three unfinished pieces are strictly parts of the argument."
  },
  "mathlib_searches": [
   {
@@ -128,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T034210-L-3767686",
+  "landing": "20261013T045613-L-139716",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

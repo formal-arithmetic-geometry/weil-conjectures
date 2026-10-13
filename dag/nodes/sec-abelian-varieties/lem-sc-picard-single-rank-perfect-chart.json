@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-picard-single-rank-perfect-chart",
+ "kind": "statement",
+ "title": "Local perfect charts for one universal direct-image rank condition",
+ "statement": "Let $f:X\\to S$ be flat, proper and locally of finite presentation, with universally invertible structure-sheaf adjunction unit [lem-pc-module-pullback-adjunction]. Let $E,F$ be finite locally free modules on $X$ [def-amb-finite-locally-free-module]. Use derived categories of the scheme module categories and their open over-sites in one universe [def-pc-derived-category]. For every $s\\in S$ there exist an open neighbourhood $U$, a perfect object $K$ on $U$ [def-pc-perfect-complex], $b\\in\\mathbf Z$, and $r\\in\\mathbf N$ such that $H^i(K\\otimes^{\\mathbf L}M)=0$ for every module $M$ when $i<0$ or $b<i$ [def-pc-derived-tensor-cohomology-vanishes]. For every $g:T\\to U$, the single-rank predicate $R_1(f,E,F,g\\circ\\iota_U)$ [def-sc-picard-universal-single-rank-match] holds if and only if, for every $h:T'\\to T$, $H^0(L(g\\circ h)^*K)$ is finite locally free of rank $r$ [def-pc-derived-pullback]. This statement constructs the local complex and comparison, not a representing subscheme.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first three proof paragraphs; perfect direct image and arbitrary base change, Tag 0B91(2)"
+ },
+ "stmt_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-sc-picard-universal-single-rank-match",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the unit on residue-field base changes: global functions are the residue field. Fibres are nonempty and connected (a decomposition gives a nontrivial idempotent). The rank of E is constant on each fibre. Apply the clopen fixed-fibre-rank theorem and take the stratum through s. Tensor pullback preserves rank, so E has this same rank r after every further base change on this stratum.",
+   "uses": [
+    "lem-sc-picard-fiber-rank-clopen",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite local freeness makes F finitely presented and flat relative to the stratum. Apply perfect derived direct image and arbitrary base change. Restrict to a neighbourhood of s with a finite Tor upper bound b. Every base change is the derived direct image of a sheaf in degree zero, so has no negative cohomology; by the local strictly perfect model and the fibre criterion, its Tor amplitude starts at zero. This gives K and the displayed all-module vanishing.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived base change comparison and degree-zero right-derived direct image identify H^0 of each derived pullback with the ordinary direct image of the tensor pullback of F. In a local witness for R_1, compare the rank of E on any nonempty fibre with the fixed r, so the witness rank equals r. Local rank-r witnesses on an open cover of each further test give global rank-r finite local freeness. Conversely, global rank-r freeness gives the local witness (the whole test scheme), and the reference E already has rank r. This proves both implications, including empty tests and r=0.",
+   "uses": [
+    "def-sc-picard-universal-single-rank-match",
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-sc-picard-universal-single-rank-match",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-picard-fiber-rank-clopen"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "first three proof paragraphs; perfect direct image and arbitrary base change, Tag 0B91(2)",
+  "note": "V2 spells out the corresponding local step of Tags 0BDP and 0BDL; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally a proper flat direct image of a finite locally free sheaf is a perfect complex of nonnegative Tor amplitude and its lowest cohomology gives the direct image after every base change",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally on the base a proper flat direct image of a finite locally free sheaf is represented by a perfect complex with Tor amplitude starting in zero",
+   "results": "LeanFinder returned flat-morphism API; no local perfect-chart/rank-predicate comparison. The library has PerfectDirectImageBaseChange and PicardFiberRankClopen, but neither combines the needed chart and comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?amplitude|IsPerfect|derivedDirectImage; PicardUniversalSingleRankMatch",
+   "results": "LeanFinder returned flat-morphism API; no local perfect-chart/rank-predicate comparison. The library has PerfectDirectImageBaseChange and PicardFiberRankClopen, but neither combines the needed chart and comparison. Searches of both library roots and the whole blueprint found no duplicate statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalSingleRankLocus",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "first three proof paragraphs; perfect direct image and arbitrary base change, Tag 0B91(2)",
+   "via": [
+    "lem-sc-picard-universal-single-rank-locus",
+    "lem-sc-picard-universal-rank-match-locus-core-rank",
+    "lem-sc-picard-universal-rank-match-locus-core",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardSingleRankPerfectChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardSingleRankPerfectChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_picardSingleRankPerfectChart",
+  "statement": "theorem exists_picardSingleRankPerfectChart [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] [∀ (T : Scheme.{u}) (U : T.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))] {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (E F : X.Modules) [E.IsFiniteLocallyFree] [F.IsFiniteLocallyFree] (s : S) : ∃ U : S.Opens, s ∈ U ∧ ∃ (K : schemeDerivedCategory U.toScheme) (b : ℤ) (r : ℕ), IsPerfect U.toScheme K ∧ (∀ M : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace), ∀ i : ℤ, i < 0 ∨ b < i → schemeDerivedTensorCohomologyVanishes U.toScheme K M i) ∧ ∀ (T : Scheme.{u}) (g : T ⟶ U.toScheme), PicardUniversalSingleRankMatch f E F (g ≫ U.ι) ↔ ∀ (T' : Scheme.{u}) (h : T' ⟶ T), SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) 0).obj ((derivedPullback (h ≫ g)).obj K)) r",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T045613-L-139716",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T045613-L-139716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

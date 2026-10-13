@@ -11,6 +11,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.AlgebraicGeometry.LocalImmersionLocus
+import Sheaf.AlgebraicGeometry.PicardSingleRankPerfectChart
+import Sheaf.AlgebraicGeometry.PicardSingleRankSourceLocal
+import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus
 
 /-! # The locus for one direct-image rank condition
 
@@ -64,6 +68,26 @@ theorem exists_picardUniversalSingleRankLocus {X S : Scheme.{u}} (f : X ⟶ S)
     (E F : X.Modules) [E.IsFiniteLocallyFree] [F.IsFiniteLocallyFree] :
     ∃ (W : Scheme.{u}) (j : W ⟶ S),
       IsImmersion j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S),
-        (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalSingleRankMatch f E F g := by sorry
+        (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalSingleRankMatch f E F g := by
+  let : ∀ T : Scheme.{u}, HasDerivedCategory
+      (SheafOfModules.{u} (moduleRings T.toRingedSpace)) :=
+    fun T ↦ HasDerivedCategory.standard _
+  let : ∀ (T : Scheme.{u}) (U : T.Opens), HasDerivedCategory
+      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U)) :=
+    fun T U ↦ HasDerivedCategory.standard _
+  apply exists_localImmersionLocus S (fun g ↦ PicardUniversalSingleRankMatch f E F g)
+  · intro T T' g h hg T'' k t
+    convert hg (k ≫ h) t using 1
+    congr! 8
+  · intro T g hlocal
+    exact picardUniversalSingleRankMatch_of_source_local f E F g hlocal
+  · intro s
+    obtain ⟨U, hs, K, b, r, hK, hamp, hmatch⟩ :=
+      exists_picardSingleRankPerfectChart f hO E F s
+    obtain ⟨W, j, hj, _, _, hfactor, _, _⟩ :=
+      exists_perfectLowestCohomologyLocus U.toScheme K hK 0 b hamp r
+    refine ⟨U, hs, W, j, hj, ?_⟩
+    intro T g
+    exact (hfactor T g).trans (hmatch T g).symm
 
 end AlgebraicGeometry.Scheme
