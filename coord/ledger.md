@@ -13545,3 +13545,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:46 L: batch 20261013T201736 dependency take-out
 - 20:46 L: returned deliver/P2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone (reviewer RETURN: (reviewer X-4e578, head 4e578dd70) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Trian)
 - 20:48 L: returned deliver/P1/Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare (reviewer RETURN: (reviewer X-88bcc, head 88bcc299d) F/G1: The earlier report return remains unresolved: the substantive reading is marked)
+- 20:48 L: returned deliver/D3/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric (reviewer RETURN: (reviewer X-41468, head 414686072) H2: Restore dag/nodes/sec-smooth-base-change/lem-sbc-affine-torsor-fixed-puncture-des)
