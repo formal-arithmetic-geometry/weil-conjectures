@@ -15,53 +15,63 @@
  ],
  "proof": [
   {
-   "text": "Fix x and an affine neighbourhood V with coordinate ring A. Affine neighbourhoods W of x contained in V are cofinal among neighbourhoods. IsFlatOver for each C term gives flatness of its sections on every such W over A. Express the stalk as their filtered colimit; filtered-colimit flatness gives flatness over A. The stalk ring is the localization of A at the prime of x, so flatness over A is equivalent to flatness over this stalk ring. Q has finite free stalks. Both complexes retain their upper bound, and C retains its nonnegative lower bound.",
+   "text": "For each stalk, use flat_stalk_of_affineFlatOver_identity to obtain flatness of every C term. A canonical free sheaf is a coproduct of the monoidal unit, so the proved source ObjectProperty.flat_coproduct gives its tensor flatness. flat_stalk_of_isFlat gives its stalk flatness; transport through the supplied finite-free isomorphisms to obtain flatness of each Q term.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-flat-modules",
-    "lem-weil-pbc-flat-over-localization"
+    "lem-pc-affine-flat-module-stalk-flat",
+    "lem-pc-flat-sheaf-stalk-flat",
+    "lem-weil-pbc-flat-coproduct"
    ],
    "elementary": false
   },
   {
-   "text": "The exact stalk functor carries e to a quasi-isomorphism of module complexes. Both bounded-above flat stalk complexes are K-flat. A quasi-isomorphism between K-flat complexes stays a quasi-isomorphism after tensoring with any module N in degree zero. Its target is concentrated in nonnegative degrees, so the source tensor complex is exact in degree -1. The module formulation of the tensor comparison is the one-point-site formulation, transported through the equivalence with modules.",
+   "text": "module_stalk_exact carries exact short complexes to exact short complexes. Functor.preservesHomology_of_map_exact therefore gives preservation of homology; the moduleStalkFunctor also preserves zero morphisms. Mathlib then transports e as a quasi-isomorphism and transports all three strict bounds to the stalk complexes.",
    "uses": [
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-kflat-tensor-quasi-iso"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the flat-opcycles Tor criterion to the stalk complex of Q at a=0. Its terms are free, hence flat, and tensor exactness in degree -1 was just established. Stalks preserve the cokernel, so the conclusion is flatness of the stalk of Q.opcycles(0).",
-   "uses": [
-    "lem-pc-module-flat-opcycles-tor-criterion",
     "lem-weil-pbc-module-stalk-exact"
    ],
    "elementary": false
   },
   {
-   "text": "The cokernel of Q^(-1) to Q^0 has a finite free presentation, hence is quasi-coherent. On any affine V the stalks are the localizations of its section module by the affine section/stalk tensor identification. The module local flatness criterion gives flatness of sections on V. For affine W contained in V, the section module on W is flat over its own coordinate ring, and that ring is flat over the ring of V since the inclusion is an open immersion. Transitivity gives exactly IsFlatOver for the identity. The zero module and the empty scheme need no nontriviality hypothesis.",
+   "text": "In the private proved helper module_opcycles_flat, install the standard derived category of ModuleCat and the exact integer-indexed colimit instance. Convert Module.Flat to ObjectProperty.flat by the proved source ModuleCat.flat_iff_flat. The proved source DerivedCategory.torAmplitudeIn_Q_obj_of_flat gives Tor amplitude [0,d] for C. CochainComplex.kFlat_of_isStrictlyLE_of_flat gives categorical K-flatness of Q. The quasi-isomorphism e induces a derived isomorphism E; tensor E with N[0] and compose with the proved source DerivedCategory.QObjTensorSingleFunctorObjIso. This makes the ordinary Q tensor N complex IsGE 0, hence ExactAt (-1). Apply the already proved source ObjectProperty.flat_opcycles_of_exactAt and convert back by ModuleCat.flat_iff_flat. These are applications of existing proved generic source theorems; no one-point-site conversion or new theorem with sorry is used.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "ShortComplex.mapOpcyclesIso for the exact stalk functor identifies the opcycles of the stalk complex with the stalk of Q.opcycles 0. Transfer flatness through that linear equivalence. The supplied finite-free isomorphisms make Q^(-1) and Q^0 quasi-coherent. Use isQuasicoherent_cokernel and the canonical opcycles-to-cokernel isomorphism to make Q.opcycles 0 quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private proved helper affine_sections_flat_of_flat_stalks evaluates a maximal ideal P of the affine coordinate ring at the corresponding point x. IsAffineOpen.isLocalization_stalk identifies O_x as the localization at P. The tensor module O_x tensor G(U) is a localization presentation by Mathlib tensorProduct_isLocalizedModule. affine_sections_stalk_tensor_presentation identifies it with G_x, so flatness of G_x and flatness of the localization ring give flatness over O(U). Module.flat_of_isLocalized_maximal makes G(U) flat. Finally the identity scheme morphism is flat, so its affine appLE rings are flat; Module.Flat.trans gives flatness of G(U) over O(V) for every affine pair U contained in V, exactly IsFlatOver. Empty opens and the zero ring require no points or additional assumptions.",
    "uses": [
     "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
-    "lem-pc-affine-sections-flat-over-base"
+    "lem-pc-affine-sections-flat-over-base",
+    "lem-weil-pbc-flat-over-localization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "lem-pc-affine-flat-module-stalk-flat",
   "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-flat-sheaf-stalk-flat",
   "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
-  "lem-pc-kflat-tensor-quasi-iso",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-module-flat-opcycles-tor-criterion",
-  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-flat-coproduct",
   "lem-weil-pbc-flat-over-localization",
-  "lem-weil-pbc-module-stalk-exact"
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "H3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0653 stalkwise; explicit affine section/stalk and flatness comparisons"
+  "place": "Tag 0653, stalkwise; direct applications of the proved generic source FlatModel tensor comparison and flat-opcycles criterion, followed by affine localization and maximal-ideal flatness detection"
  },
  "mathlib_searches": [
   {
@@ -133,13 +143,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T225319-L-1809584",
-  "kind": "interface",
+  "landing": "20261013T002008-L-2358046",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
