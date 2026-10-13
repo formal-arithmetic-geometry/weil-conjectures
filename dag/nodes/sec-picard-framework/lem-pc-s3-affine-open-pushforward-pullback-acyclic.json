@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-s3-affine-open-pushforward-pullback-acyclic",
+ "kind": "statement",
+ "title": "Acyclicity of a pulled-back affine-open direct image",
+ "statement": "Let $A,B$ be commutative rings, $X$ a scheme, $f:X\\to\\operatorname{Spec}A$ separated, and $g:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ arbitrary. Write $p:X_B\\to X$ and $f_B:X_B\\to\\operatorname{Spec}B$ for the projections of $X_B=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$ [def-pc-fibre-product]. If $W\\subseteq X$ is an affine open and $G$ is a quasi-coherent $\\mathcal O_X$-module, then $p^*(j_*(G|_W))$ [def-pc-module-pullback], where $j:W\\hookrightarrow X$, is $f_{B,*}$-acyclic [def-sp-acyclic]: its higher right derived direct images in all positive natural degrees vanish. No flatness, cover, complex or derived-category choice is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02KG; parent resolution affine-intersection acyclicity paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sp-acyclic"
+ ],
+ "proof": [
+  {
+   "text": "W and Spec A are affine, so W->Spec A is affine. Since f is separated, the Mathlib postcomposition property gives that j:W->X is affine. The morphism g between affine schemes is affine, so its base change p is affine. Hence W prime=p inverse W is an affine open. All these are direct Mathlib instances or theorems, also for the empty open.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use uniqueness of left adjoints to identify tensorPullback with the standard module pullback. Standard pullback preserves quasi-coherence. Its restriction/pullback and composition isomorphisms, together with p_W followed by j = j prime followed by p, give an isomorphism (p*G)|W prime -> p_W*(G|W). This is the explicit chain eR in Lean.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affinePushforward_baseChange to the restriction pullback square with f=j, f prime=j prime, base map=p, and upper map=p_W. It gives an isomorphism p*(j_*G|W) -> j prime_*(p_W*G|W). Compose with j prime_* of the inverse restriction comparison to obtain j prime_*((p*G)|W prime). Since f_B is separated and p*G is quasi-coherent, affine_open_pushforward_rightAcyclic applies to this object. Transport rightAcyclic across the composite isomorphism.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-pc-affine-open-pushforward-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-pc-affine-open-pushforward-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02KG; parent resolution affine-intersection acyclicity paragraph; expanded module-sheaf argument and Lean transport by Q2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pullback of direct image from affine open is acyclic for separated morphism to affine scheme",
+   "results": "8 hits: AlgebraicGeometry.of_targetAffineLocally_of_isPullback, AlgebraicGeometry.IsAffineHom.of_comp, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.HasAffineProperty.of_isPullback, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated, AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a quasicoherent direct image from an affine open is acyclic for a separated morphism to an affine scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*[Cc]ech.*[Ss]heaf|[Cc]ech.*[Ss]heaf.*[Rr]esolution|[Pp]ullback.*[Aa]cyclic",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlternatingCechResolutionCore",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Proof: affine Cech resolution and pulled-back cover comparison; Tag 02KG; parent resolution affine-intersection acyclicity paragraph",
+   "via": [
+    "lem-pc-s3-affine-alternating-cech-resolution-core",
+    "lem-pc-affine-alternating-cech-exchange-resolution",
+    "lem-pc-affine-alternating-cech-pinned-mate",
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenPushforwardPullbackAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenPushforwardPullbackAcyclic.lean",
+  "declaration": "AlgebraicGeometry.affine_open_pushforward_pullback_rightAcyclic",
+  "statement": "theorem affine_open_pushforward_pullback_rightAcyclic {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f] (g : Spec B ⟶ Spec A) (W : X.Opens) (hW : IsAffineOpen W) (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G] : (RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).rightAcyclic ((Scheme.Modules.tensorPullback (pullback.fst f g)).obj ((Scheme.Modules.pushforward W.ι).obj (G.restrict W.ι)))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T045551-L-134603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T045551-L-134603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

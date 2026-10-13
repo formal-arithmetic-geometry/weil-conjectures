@@ -12,9 +12,9 @@
   "lem-weil-pbc-module-base-change-map-open-restriction"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 02KG (affine arbitrary base change) and 02KH (finite affine Cech computation); expanded construction in the original exchange-resolution node docstring"
+  "place": "Original construction/contraction plan; Q2 formal reduction via bounded-below acyclic units and PlusCompatibility, with explicit zero-extension and localization transport"
  },
  "mathlib_searches": [
   {
@@ -72,21 +72,40 @@
  "statement": "Fix shared derived categories [def-pc-derived-category], rings A and B, a quasi-compact separated f:X→Spec A, g:Spec B→Spec A, a finite affine open cover U:Fin r→X.Opens with supremum top, a quasi-coherent X-module G, and additive tensor pullbacks along g and p=pullback.fst f g. There exist a homotopy complex D, an augmentation a:G[0]→D, and an isomorphism q:f_*D≅the homotopy image of affineAlternatingCechModel f U G [def-pc-affine-alternating-cech-model]. The localized augmentations Qh(a) and Qh(p*(a)) and the right-derived units for f at D and pullback.snd f g at p*D are invertible. Moreover D is isomorphic to the homotopy quotient of an integer cochain complex C whose every term is isomorphic to a finite product of W_j.ι_*(G restricted to W_j) for affine opens W:Fin n→X.Opens; n=0 is allowed.",
  "proof": [
   {
-   "text": "Construct the increasing-tuple Cech complex, contract it by insertion of a cover index, and use affine pushforward acyclicity and derived-unit compatibility to obtain the four isomorphisms and the affine tilde comparison. Retain C as the representative and enumerate its finite increasing-tuple intersections by Fin n in each degree; negative and out-of-range degrees use the empty product.",
+   "text": "Obtain C, epsilon, the pushed-forward complex isomorphism q, the two quasi-isomorphisms, and finite affine-open term presentations from the augmented construction. Extend C by zero to integer degrees, and precompose extend(epsilon) with extendSingleIso.inv. Take D to be the homotopy quotient of this extended complex, and a to be the quotient of the resulting map. Quotient factorization and mapIso(q) give the required homotopy comparison. Extension preserves quasi-isomorphisms and the precomposition is an isomorphism; localization inverts both augmentations.",
    "uses": [
-    "def-pc-affine-alternating-cech-model",
-    "lem-pc-affine-open-pushforward-acyclic",
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-pc-s3-affine-alternating-cech-augmented-construction"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each nonnegative term, transport along its product presentation. affine_open_pushforward_rightAcyclic gives acyclicity of each factor; rightAcyclic is closed under finite products. For pulled-back terms, additive pullback preserves finite products and affine_open_pushforward_pullback_rightAcyclic gives acyclicity of each factor. Extend both termwise properties to negative degrees using the zero-object property, and obtain bounded-below integer complexes on both schemes.",
+   "uses": [
+    "lem-pc-affine-open-pushforward-acyclic",
+    "lem-pc-s3-affine-open-pushforward-pullback-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic to each bounded-below complex. moduleDirectImage preserves finite limits since it is a right adjoint. The identity defining rightDerivedFunctorPlusCompatibility identifies the unbounded unit with the composite of the bounded-below unit and the compatibility isomorphism. Both factors are invertible; this proves the two unbounded derived-unit assertions, without importing a further holed lemma.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the extended C as the representative of D, with the reflexive isomorphism. For nonnegative integer k, compose extendXIso with the supplied finite product presentation at k.toNat. For negative k, isZero_extend_X gives an isomorphism with the empty product, taking n=0 and Fin.elim0. This supplies exactly the representative clause of the original statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-affine-alternating-cech-model",
+  "lem-pc-s3-affine-alternating-cech-augmented-construction",
   "lem-pc-affine-open-pushforward-acyclic",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "lem-weil-pbc-module-pullback-affine-sections"
+  "lem-pc-s3-affine-open-pushforward-pullback-acyclic",
+  "lemma-weil-pbc-leray-acyclicity",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "lean": {
   "existing": false,
@@ -111,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-76fe2",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T015611-L-3026025",
+  "landing": "20261013T045551-L-134603",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged item signature and proof with its node, both new theorem signatures with their nodes and source arguments, and the recorded dependencies; all three modules and direct importer Sheaf.AlgebraicGeometry.AffineAlternatingCechPinnedMate compile cleanly, with only standard axioms and the two declared sorry dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

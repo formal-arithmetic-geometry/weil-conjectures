@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-s3-affine-alternating-cech-augmented-construction",
+ "kind": "statement",
+ "title": "Augmented increasing-tuple sheaf complex with affine section comparison",
+ "statement": "Let $A,B$ be commutative rings, $X$ a scheme, $f:X\\to\\operatorname{Spec}A$ separated, $g:\\operatorname{Spec}B\\to\\operatorname{Spec}A$, and $p:X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B\\to X$ the projection [def-pc-fibre-product]. Let $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$ be a finite affine open cover, including $r=0$, and $G$ a quasi-coherent $\\mathcal O_X$-module. Suppose the tensor pullback $p^*$ [def-pc-module-pullback] is additive. There exist a nonnegative cochain complex $C$ of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules] and $\\epsilon:G[0]\\to C$ such that: (1) $f_*(\\operatorname{extend}C)$ is isomorphic as an integer cochain complex to the explicit affine alternating section model [def-pc-affine-alternating-cech-model]; (2) $\\epsilon$ and $p^*(\\operatorname{extend}\\epsilon)$ are quasi-isomorphisms; (3) for every $k\\in\\mathbb N$ there are $n\\in\\mathbb N$ and affine opens $W_j\\subseteq X$, $j\\in\\operatorname{Fin}(n)$, such that $C^k\\cong\\prod_j (W_j\\hookrightarrow X)_*(G|_{W_j})$. The empty product is permitted. No derived functor or derived-unit assertion is included.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01FM (ordered/alternating complex), 02KG (affine pushforward), and 02KH, separated-case proof before taking cohomology; parent resolution construction and local contraction paragraphs"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-pc-affine-alternating-cech-model"
+ ],
+ "proof": [
+  {
+   "text": "Form actual sheaves P(W)=j_W*(G restricted to W), with P(W)(V)=G(V intersection W). Restriction along W contained in Z gives P(Z)->P(W), compatible with the O_X(V)-action. In degree k take the product over increasing (k+1)-tuples, with intersections W_t, and signed face restriction differential as in the section complex. Pair the two orders of deleting two entries: restrictions agree and their signs are opposite, proving d squared zero. The restriction maps G->P(U_i) have zero composite with d, giving epsilon.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On U_i, evaluate a cochain at the tuple obtained by inserting i, sorted with sign; use zero for a repeated index. Each term is over the same intersection after restriction to U_i. In dh+hd, deleting the newly inserted i gives the original cochain, while deleting another index cancels between the two summands. This also contracts degree zero against the augmentation. Thus epsilon is locally a homotopy equivalence and is a quasi-isomorphism. Restriction of tensor pullback to p inverse U_i commutes with restriction of modules. Apply the additive tensor pullback to the same homotopy identities: it preserves sums, negatives, compositions and identities, so the pulled-back augmentation is again locally a homotopy equivalence. Extension by zero preserves both conclusions. No flatness or general preservation of quasi-isomorphisms by tensor is asserted.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Nonempty finite intersections of the U_i are affine because f is separated over an affine base. Enumerate the finite increasing-tuple type by Fin n, and reindex its product; n=0 covers degrees without tuples. Pushforward is a right adjoint and preserves these products. For each affine intersection W_t, the quasi-coherent direct image on Spec A is the tilde of Gamma(W_t,G), with its A-action through f. The tilde-Gamma counit and its naturality intertwine each restriction map. The tilde functor is additive and preserves finite biproducts. Hence the product comparisons intertwine the signed differential and assemble into the complex isomorphism with affineAlternatingCechModel. Negative degrees are zero. If r=0, the cover condition makes X empty and all module sheaves are zero.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-affine-alternating-cech-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-alternating-cech-total-complex",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pc-affine-alternating-cech-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01FM (ordered/alternating complex), 02KG (affine pushforward), and 02KH, separated-case proof before taking cohomology; parent resolution construction and local contraction paragraphs; expanded module-sheaf argument and Lean transport by Q2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Construct an augmented finite increasing tuple Cech complex of module sheaves with locally split exact augmentation and affine direct image section comparison",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an augmented increasing tuple Cech complex of sheaves of modules that is a quasi isomorphism after additive pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*[Cc]ech.*[Ss]heaf|[Cc]ech.*[Ss]heaf.*[Rr]esolution|[Pp]ullback.*[Aa]cyclic",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlternatingCechResolutionCore",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Proof: affine Cech resolution and pulled-back cover comparison; Tags 01FM (ordered/alternating complex), 02KG (affine pushforward), and 02KH, separated-case proof before taking cohomology; parent resolution construction and local contraction paragraphs",
+   "via": [
+    "lem-pc-s3-affine-alternating-cech-resolution-core",
+    "lem-pc-affine-alternating-cech-exchange-resolution",
+    "lem-pc-affine-alternating-cech-pinned-mate",
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlternatingCechAugmentedConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlternatingCechAugmentedConstruction.lean",
+  "declaration": "AlgebraicGeometry.exists_affineAlternatingCech_augmented_construction",
+  "statement": "theorem exists_affineAlternatingCech_augmented_construction {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f] (g : Spec B ⟶ Spec A) {r : ℕ} (U : Fin r → X.Opens) (hU : iSup U = ⊤) (haffine : ∀ i, IsAffineOpen (U i)) [(Scheme.Modules.tensorPullback (pullback.fst f g)).Additive] (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G] : ∃ (C : CochainComplex X.Modules ℕ) (ε : (CochainComplex.single₀ X.Modules).obj G ⟶ C), Nonempty (((Scheme.Modules.pushforward f).mapHomologicalComplex (ComplexShape.up ℤ)).obj (C.extend ComplexShape.embeddingUpNat) ≅ affineAlternatingCechModel f U G) ∧ QuasiIso ε ∧ QuasiIso (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex (ComplexShape.up ℤ)).map (HomologicalComplex.extendMap ε ComplexShape.embeddingUpNat)) ∧ ∀ k : ℕ, ∃ (n : ℕ) (W : Fin n → X.Opens), (∀ j, IsAffineOpen (W j)) ∧ Nonempty (C.X k ≅ ∏ᶜ fun j : Fin n ↦ (Scheme.Modules.pushforward (W j).ι).obj (G.restrict (W j).ι))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T045551-L-134603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T045551-L-134603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
