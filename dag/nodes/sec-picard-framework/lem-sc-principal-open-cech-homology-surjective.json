@@ -14,44 +14,36 @@
  },
  "proof": [
   {
-   "text": "Replace J by a degreewise-injective functorial K-injective resolution I. The quasi-isomorphism between the two K-injectives is a homotopy equivalence. Its sectionwise maps induce homotopy equivalences on K and T: in Cech degree p apply the coefficient homotopy with sign (-1)^p. Naturality of restrictions cancels the horizontal terms and the vertical signs multiply to one. Augmentation naturality follows from the coordinate formulas. These statements use the same finite-total homotopy calculation as the tuple model, reindexed by the unique increasing enumeration of each subset.",
+   "text": "Restrict J to V via overFunctor followed by overEquiv V. Open restriction preserves K-injectivity, and the module equivalence preserves it. The inverse images of the principal opens cover V: preimage commutes with iSup and the preimage of V by its inclusion is top.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-sc-alternating-cech-total-homotopy"
+    "lem-sc-derived-k-injective-restrict-open"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Every augmented section row of I over the cover of V is exact. Injective modules are flasque, hence remain Cech-acyclic on any open; sheaf gluing identifies the degree-zero kernel with sections over V and gives injectivity of augmentation. Ordered-to-increasing Cech comparison gives alternating row exactness; identify increasing tuples with nonempty finite subsets, and their face positions with the subset deletion signs. The augmented columns run only from -1 through r-1.",
+   "text": "Apply the existing finite-cover K-injective alternating Cech augmentation quasi-isomorphism theorem on the scheme V.toScheme to the restricted complex. No new row-exactness or staircase argument is needed.",
    "uses": [
-    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-    "lem-pc-alternating-cech-computes"
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For a total cocycle, successively kill its highest positive Cech column by subtracting the total differential of a horizontal preimage. Exactness supplies each preimage. The vertical differential alters only the preceding column. At column zero sheaf gluing produces a section over V; the cocycle equation and injectivity of the augmented row show it is closed. Thus every total cohomology class comes from K. This finite staircase never requires boundedness in the coefficient degree. For r=0, V is empty and the sheaf axiom makes its section modules zero, while the target product has no indices.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Transfer surjective of the homology map from I to J through the augmentation naturality square, whose other sides are homotopy equivalences and hence induce isomorphisms on cohomology. Degreewise coordinate isomorphisms identify these maps with the displayed alpha.",
-   "uses": [],
+   "text": "The subset comparison gives an arrow isomorphism after forgetting the two scalar actions. Exact module forgetful functors preserve and reflect quasi-isomorphisms. Transfer the forgotten tuple quasi-isomorphism across the arrow isomorphism, reflect it to alpha in A-modules, and infer that every homology map is an isomorphism and hence an epimorphism.",
+   "uses": [
+    "lem-sc-principal-open-cech-subset-comparison"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sc-alternating-cech-total-homotopy",
-  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-  "lem-pc-alternating-cech-computes"
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+  "lem-sc-principal-open-cech-subset-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08C1, finite augmented Cech staircase; surjective half of the cohomology comparison"
+  "place": "Tag 08C1 on the open union, Tag 08BS for restriction, and subset-to-increasing-tuple arrow comparison; X2 Lean proof"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -133,9 +125,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T124316-L-3778142",
+  "landing": "20261013T131330-L-4035507",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
