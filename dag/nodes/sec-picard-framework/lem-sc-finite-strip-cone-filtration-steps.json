@@ -22,9 +22,9 @@
   "place": "Lemma 12.25.4"
  },
  "proof_origin": {
-  "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/0133",
-  "place": "finite strip cone filtration proof"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Second degree filtration formula, with the explicit cone construction and finite-strip bounds of lem-sc-finite-strip-cone-filtration; Lean proof by F1, 2026-10-13; second reading uses the public degreewise assembly theorem instead of duplicating its proof"
  },
  "mathlib_searches": [
   {
@@ -52,13 +52,30 @@
  "mathlib_match": null,
  "stmt_deps": [],
  "proof_deps": [
-  "lem-sc-finite-strip-cone-filtration"
+  "def-sp-double-complex-total",
+  "lem-sp-cartan-eilenberg-cone-filtration-data-assemble",
+  "def-sp-filtered-complex-subquotients"
  ],
  "proof": [
   {
-   "text": "Construct the finite filtration by finite joins of image subobjects and verify stability under the cone differential using the bicomplex identities and support hypothesis.",
+   "text": "Define the degreewise step by the stated finite supremum. A larger cutoff can only remove generators, so the steps are antitone. For target generators, expand the total differential as D₁+D₂ using ι_D₁, ι_D₂, d₁_eq′ and d₂_eq′. The horizontal term preserves vertical degree and the vertical term raises it. Any term beyond the horizontal strip is zero by evaluating hsupport. The source cone generator has the negative source differential, which raises vertical degree, and the augmentation block, which lands in horizontal degree zero by hb. Maps factoring through a subobject remain so under composition, scalar multiplication and addition. The pullback of the next step therefore contains every generating image, hence their finite supremum.",
    "uses": [
-    "lem-sc-finite-strip-cone-filtration"
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved CategoryTheory.Functor.filtration_of_degreewise to the antitone, differential-stable steps. Its conclusion gives a decreasing filtration whose evaluated image in every degree equals the prescribed step. The theorem constructs the subcomplexes explicitly by monic factorization, without choosing data from an unproved existence statement.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-cone-filtration-data-assemble"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At cutoff n−r every source generator and every supported target generator is included. To prove the inclusion epi, test a morphism killing it against the two cone inclusions, and test its target restriction against all total summands using total.hom_ext. Supported summands are generators; the others are zero by hsupport. The step inclusion is mono and epi, hence iso and its subobject is top. At cutoff n+2 the source condition fails and each target condition fails because i≥0, so the finite supremum is bottom. The argument includes r=0 and all integer n.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients"
    ],
    "elementary": false
   }
@@ -90,9 +107,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T122729-L-3633230",
+  "landing": "20261013T141525-L-378626",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
