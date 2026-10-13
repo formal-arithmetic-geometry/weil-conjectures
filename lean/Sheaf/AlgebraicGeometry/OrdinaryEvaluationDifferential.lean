@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 public import Sheaf.Algebra.Homology.HomComplexProjections
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferentialSummand
 
 /-! # The differential identity for ordinary evaluation
 
@@ -132,6 +133,24 @@ theorem localEvaluationDegreeMap_comm (X : Scheme.{u}) (U : X.Opens)
     (_h : (ComplexShape.up ℤ).Rel n m) :
     localEvaluationDegreeMap X U P F n ≫ (homComplex (R := X.sheaf.over U) P F).d n m =
       (localEvaluationTensor X U P F).d n m ≫ localEvaluationDegreeMap X U P F m := by
-  sorry
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  apply Fan.IsLimit.hom_ext (Classical.choice
+    (homComplexProductLimit_exists (X.sheaf.over U) P F m))
+  intro r
+  change (HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P)
+      (curriedTensor _) (.up ℤ) p q n hpq ≫
+      (localEvaluationDegreeMap X U P F n ≫
+        (homComplex (R := X.sheaf.over U) P F).d n m)) ≫
+      localEvaluationProjection X U P F m r (r + m) rfl =
+    (HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P)
+      (curriedTensor _) (.up ℤ) p q n hpq ≫
+      ((localEvaluationTensor X U P F).d n m ≫
+        localEvaluationDegreeMap X U P F m)) ≫
+      localEvaluationProjection X U P F m r (r + m) rfl
+  simpa only [Category.assoc] using ordinaryEvaluation_differential_summand X U P F
+    (localEvaluationDegreeMap X U P F)
+    (fun p q n r h ↦ localEvaluationDegreeMap_formula X U P F p q n r h)
+    n m p q r _h hpq
 
 end AlgebraicGeometry

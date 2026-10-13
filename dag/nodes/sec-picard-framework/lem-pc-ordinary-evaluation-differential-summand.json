@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-ordinary-evaluation-differential-summand",
+ "kind": "statement",
+ "title": "Ordinary evaluation differential on one tensor summand",
+ "statement": "Let X be a scheme, U an open and P,F arbitrary cochain complexes of modules on U. Let D=Hom(P,O[0]) and T=Tot(F tensor D). Suppose graded maps e from T to Hom(P,F) have the ordinary evaluation component formula [lem-pc-bounded-ordinary-evaluation-assembly]. For n+1=m, on each summand F^p tensor D^q with p+q=n, and after each Hom product projection indexed by r [lem-sc-hom-complex-projections], the composites e^n d_H and d_T e^m agree. This is a single-summand, single-projection identity, without assembling the global chain-map equation.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, ordinary complex comparison; Section 20.41, Hom-complex differential"
+ },
+ "stmt_deps": [
+  "lem-sc-hom-complex-projections",
+  "lem-pc-bounded-ordinary-evaluation-assembly",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Expand the Hom differential after the rth product projection and expand the total tensor differential on the (p,q) summand. Apply the specified evaluation component equation. If r+q=0, only postcomposition with d_F contributes and naturality of evaluation and the unit action identifies the two terms. If r+q=-1, only precomposition with d_P contributes. The structure complex has zero differential, so the dual differential has sign -(-1)^q; multiplying by the tensor sign (-1)^p gives -(-1)^n because p+q=n. Naturality in P identifies these terms. For all other r+q the components vanish. Proof irrelevance identifies degree transports. This calculation applies unchanged when modules are zero or U is empty.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-pc-bounded-ordinary-evaluation-assembly",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections",
+  "lem-pc-bounded-ordinary-evaluation-assembly",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ; Section 20.41",
+  "description": "Single tensor-summand and Hom-projection calculation of ordinary evaluation; global assembly is proved separately in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation map from tensor with Hom dual to Hom complex commutes with differential",
+   "results": "unit_tensor_d₁, tensor_unit_d₂, tensorHom, ιTensorObj; no ordinary sheaf Hom evaluation identity.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctor.hom_ext",
+   "results": "HomologicalComplex.mapBifunctor.hom_ext found and used for global assembly.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*differential|differential.*evaluation",
+   "results": "Only differential-form evaluation in Mathlib. Local library has HomTensorDifferential, which is currying in two inputs rather than this evaluation construction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The evaluation map from tensor with the Hom dual complex to the Hom complex commutes with differentials",
+   "results": "UNAVAILABLE: service returned Internal Server Error. Other kinds of search and local library grep were used.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ordinary-evaluation-differential",
+   "place": "steps 2–4, projected tensor-summand differential calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferentialSummand",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationDifferentialSummand.lean",
+  "declaration": "AlgebraicGeometry.ordinaryEvaluation_differential_summand",
+  "statement": "theorem ordinaryEvaluation_differential_summand (X : Scheme.{u}) (U : X.Opens) (P F : CochainComplex (localEvaluationModules X U) ℤ) (e : ∀ n : ℤ, (localEvaluationTensor X U P F).X n ⟶ (homComplex (R := X.sheaf.over U) P F).X n) (he : ∀ (p q n r : ℤ) (h : p + q = n), HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P) (curriedTensor _) (.up ℤ) p q n h ≫ e n ≫ localEvaluationProjection X U P F n r (r + n) rfl = localEvaluationComponent X U P F p q n r h) (n m p q r : ℤ) (hnm : (ComplexShape.up ℤ).Rel n m) (hpq : p + q = n) : HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P) (curriedTensor _) (.up ℤ) p q n hpq ≫ e n ≫ (homComplex (R := X.sheaf.over U) P F).d n m ≫ localEvaluationProjection X U P F m r (r + m) rfl = HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P) (curriedTensor _) (.up ℤ) p q n hpq ≫ (localEvaluationTensor X U P F).d n m ≫ e m ≫ localEvaluationProjection X U P F m r (r + m) rfl",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T065109-L-899129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T065109-L-899129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
