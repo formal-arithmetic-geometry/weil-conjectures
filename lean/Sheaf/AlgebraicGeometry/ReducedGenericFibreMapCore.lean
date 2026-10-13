@@ -35,7 +35,8 @@ theorem exists_reduced_generic_fibre_map_core
         algebraMap (S.residueField η) k')
     (hsquare : (algebraMap k' E).comp (algebraMap (S.residueField η) k') =
       (algebraMap L E).comp (algebraMap (S.residueField η) L))
-    (aE : Algebra (S'.residueField η') E) :
+    (aE : Algebra (S'.residueField η') E)
+    (haE : aE = ((algebraMap k' E).comp e.toRingHom).toAlgebra) :
     letI := aE
     ∃ h : Spec (.of E) ⟶
           ((pullback g q).nilradical.subschemeι ≫ pullback.snd g q).fiber η',

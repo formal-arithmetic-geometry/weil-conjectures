@@ -61,7 +61,7 @@ theorem exists_reduced_generic_fibre_field_embedding_core
   let aE : Algebra (S'.residueField η') E :=
     ((algebraMap k' E).comp e.toRingHom).toAlgebra
   obtain ⟨h, hh, hb⟩ := exists_reduced_generic_fibre_map_core
-    g q η η' hq hη' L k' E j hj hjbase e he hsquare aE
+    g q η η' hq hη' L k' E j hj hjbase e he hsquare aE rfl
   refine ⟨aE, ?_⟩
   let _ := aE
   refine ⟨h, hh, hb, ?_⟩
