@@ -15,44 +15,55 @@
  ],
  "proof": [
   {
-   "text": "For each t ≥ 0, the power I^t and its product with F are quasi-coherent, and their affine section ranges are I(U)^t and I(U)^t F(U). Use the unit ideal for t=0 and the recursive multiplication construction for positive powers.",
+   "text": "Use the existing affine ideal-product theorem to obtain quasi-coherence and section ranges of all positive powers, and handle exponent zero directly using the structure module and its identity inclusion. For an arbitrary quasi-coherent ideal module K mapping to O_X, the affine tensor comparison and the affine image formula compute the multiplication image as range(K(U) -> O_X(U)) times M(U). Tensor induction proves both inclusions. This gives quasi-coherence and the affine section formula for I^t M, including t=0. For product quasi-coherence, use the public quasiCoherent_cokernel_image image clause for the tensor multiplication morphism and transport along Abelian.imageIsoImage; no duplicate product_qc theorem is stated.",
    "uses": [
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Identify the pullback of I^t F → F and G → F with the kernel of G → F/(I^t F), compatibly with the inclusions into F. Cokernels and kernels of maps of quasi-coherent modules are quasi-coherent, and affine evaluation is exact. Its image on U is therefore I(U)^t F(U) ∩ image(g(U)). Apply the affine ideal-product formula to this kernel and then map its sections to F(U). Its image is I(U)^(n-c)(I(U)^c F(U) ∩ image(g(U))).",
-   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
     "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict the quasi-coherent subsheaves to U. By the assumed module equality their modules of global sections agree inside F(U). Under the affine tilde/global-sections equivalence, this produces an isomorphism commuting with the inclusions into F restricted to U. Thus their section ranges agree on every W ⊆ U, which is exactly the conclusion. The argument includes the empty open, c=0 and n=0.",
+   "text": "For each t, form H_t as the pullback of I^t F -> F and g:G -> F. The pullback is the kernel of (p_t,-g): I^t F direct-sum G -> F, so binary direct sums and kernels make it quasi-coherent. Evaluation followed by the forgetful functor to types preserves the pullback. Compatible pairs of sections therefore show on every open W that the composite H_t -> F has range range(p_t(W)) intersect range(g(W)). Both product inclusions and these pullback inclusions are monomorphisms.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the arbitrary-ideal-module affine multiplication formula from the first step to I^(n-c) H_c. Map its section range through the inclusion H_c -> F. LinearMap.range_comp, Submodule.map_smul, and Submodule.map_top give I(U)^(n-c) times the intersection I(U)^c F(U) intersect image(g(U)). The hypothesis hmodule identifies this range with the range of H_n -> F on U.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove affine range inclusion detection for a map i:A -> F with A quasi-coherent and a monomorphism j:B -> F. The range inclusion on U says i followed by cokernel(j) vanishes on U. On a basic open D(f) inside U, every section of A is the restriction of a section over U after multiplication by a power of f. Naturality and the unit property of f on D(f) force the composite to vanish on D(f). Basic opens cover every W contained in U, and sheaf separatedness forces the composite to vanish on W. Evaluation preserves kernels, so its vanishing puts i(W) in the section range of kernel(cokernel(j)); the abelian image factorization of the monomorphism j is an isomorphism, giving a preimage in B(W). Apply this argument in both directions to I^(n-c) H_c -> F and H_n -> F, whose sources are quasi-coherent, and finish with the pullback range calculation. No compactness or positivity condition is used.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
   "lem-weil-pbc-quasi-coherent-module-cokernel-image",
   "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-affine-module-basic-open-localization"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "U4",
+  "agent": "X3",
   "date": "2026-10-13",
-  "based_on": "The affine reduction in Stacks 01YA, expanded via the existing product, kernel, cokernel, restriction, and tilde/global-sections nodes."
+  "based_on": "Stacks 01YA affine reduction, 01I8 tensor comparison and 01IC quasi-coherent kernels/images. The compiled proof uses the existing basic-open denominator lemma instead of constructing an isomorphism via tilde/global sections; all local helpers are proved. Repair: removed the duplicate product_qc helper, using the existing public cokernel/image theorem directly at both required products; the existing product_qc is private and cannot be referenced by importers."
  },
  "mathlib_searches": [
   {
@@ -123,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T025310-L-3425522",
-  "kind": "interface",
+  "landing": "20261013T054246-L-451998",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
