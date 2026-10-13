@@ -14,42 +14,47 @@
  },
  "proof": [
   {
-   "text": "Use inverse stalk maps of the four open inclusions and the endpoint identities from hj and both restriction squares. stalkMap_comp and stalkMap_congr_hom prove the four algebra-map compatibilities.",
+   "text": "Use the proved inverse open inclusion ring coordinates, endpoint transport and stalk-map composition identities to obtain all four ring compatibilities and canonical normalization of the input and output ring equivalences.",
    "uses": [
-    "def-pc-single-complex-base-change-stalk-condition",
-    "def-pc-derived-open-restriction-maps"
+    "lem-pc-open-ordinary-tensor-stalk-ring-coordinates"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Compose overFunctorEquiv with restrictStalkNatIso degreewise, transporting the input point by hj, to obtain alpha. On a common open the inverse ring germ formula and germ_smul give eA-semilinearity. Naturality for differentials gives a chain iso. Define tau on pure tensors by eC(c) tensor alpha(q); balancedness follows from semilinearity and the A-to-C compatibility. Its inverse uses the inverse maps, verified by tensor induction.",
+   "text": "Use the proved canonical semilinear input-complex isomorphism. Its component formula identifies the input coordinate with the overFunctorEquiv/restrictStalkNatIso map followed by point transport from hj. Rewrite its scalar equivalence using the input ring normalization.",
    "uses": [
-    "def-pc-single-complex-base-change-stalk-condition",
-    "def-pc-derived-open-restriction-maps"
+    "lem-pc-open-semilinear-input-complex-iso"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Expand the four factors of openPinnedTensorRestrictionIso. Their adjunction units are pinned to 1 tensor the original section. The mate equation for pushforward composition and the restriction same-germ formula identify the degreewise stalk map with tau on pure germ tensors. The defining components of tensorStalkIso and tensor induction give the displayed canonical chain-square equality.",
+   "text": "Apply the proved generic semilinear tensor-complex transport using the A-to-C compatibility. This constructs the tensor chain isomorphism and its pure-tensor formula.",
    "uses": [
-    "def-pc-single-complex-base-change-stalk-condition",
-    "def-pc-open-pinned-single-tensor-restriction-iso"
+    "lem-pc-semilinear-tensor-complex-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the pinned comparison generator equation with the normalized output ring map. Substitute the canonical input component formula, then extend the equation from pure tensors to arbitrary tensors by TensorProduct.induction_on, using additivity for the zero and sum cases.",
+   "uses": [
+    "lem-pc-open-ordinary-tensor-pure-germ-coordinates"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-open-restriction-maps",
-  "def-pc-open-pinned-single-tensor-restriction-iso",
-  "def-pc-single-complex-base-change-stalk-condition"
+  "lem-pc-open-ordinary-tensor-stalk-ring-coordinates",
+  "lem-pc-open-semilinear-input-complex-iso",
+  "lem-pc-semilinear-tensor-complex-iso",
+  "lem-pc-open-ordinary-tensor-pure-germ-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N2",
+  "group": "H4",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0098",
   "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); perfect.tex, equation-bc (Tag 0DJ7), ordinary target path; cohomology.tex, exact localization Tags 08HY and 08DW.",
-  "note": "Second reader repaired the reduction: canonical degreewise chain square, then exact homology factorization."
+  "note": "Compiled reduction: all ring, input-complex and tensor-isomorphism constructions proved; only the pinned generator equation remains a separate named theorem."
  },
  "mathlib_searches": [
   {
@@ -126,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T190149-L-3219181",
+  "landing": "20261013T201753-L-3970886",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

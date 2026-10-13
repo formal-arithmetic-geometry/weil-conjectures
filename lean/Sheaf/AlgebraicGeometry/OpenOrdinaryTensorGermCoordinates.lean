@@ -2,6 +2,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
+import Sheaf.AlgebraicGeometry.OpenOrdinaryTensorStalkRingCoordinates
+import Sheaf.AlgebraicGeometry.SemilinearTensorComplexIso
+import Sheaf.AlgebraicGeometry.OpenOrdinaryTensorPureGermCoordinates
+import Sheaf.AlgebraicGeometry.OpenSemilinearInputComplexIso
 
 @[expose] public section
 set_option autoImplicit false
@@ -13,6 +17,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
+set_option maxHeartbeats 1000000 in
+-- Checking the two explicit scalar-extension tensor types needs additional heartbeats.
 /-- Compatible ordinary tensor coordinates, pinned to the actual open restriction map.
 
 Proof: use the inverse stalk maps of the four open inclusions, transporting
@@ -112,6 +118,38 @@ theorem exists_openOrdinaryTensor_germ_coordinates
                 (g.resLE V V' hV') j sq₀ z Q₀).hom.f n) ≫
                 F₀.map (L₀.map ((openPinnedTensorRestrictionIso g'
                   (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj).inv.app (P.X n))) ≫
-                γ.hom.app ((Scheme.Modules.tensorPullback g').obj (P.X n))) := by sorry
+                γ.hom.app ((Scheme.Modules.tensorPullback g').obj (P.X n))) := by
+  dsimp only
+  let := leftAlgebra (f ∣_ V) j z
+  let := rightAlgebra (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z
+  let := (tensorMap (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z).toAlgebra
+  let := leftAlgebra f g' z.val
+  let := rightAlgebra f f' g g' sq z.val
+  let := (tensorMap f f' g g' sq z.val).toAlgebra
+  obtain ⟨eR, eA, eB, eC, hRA, hRB, hCA, hCB, heA, heC⟩ :=
+    exists_openOrdinaryTensor_stalk_ring_coordinates f f' g g' sq V V' hV' j hj sq₀ z
+  let hx := congrArg (fun k : (f' ⁻¹ᵁ V').toScheme ⟶ X => k z) hj
+  obtain ⟨α, hα₀, hαcoord⟩ :=
+    exists_openSemilinearInputComplexIso X (f ⁻¹ᵁ V) (j z) (g' z.val) hx P
+  have heA' : eA = (((f ⁻¹ᵁ V).stalkIso (j z)) ≪≫
+      X.presheaf.stalkCongr (.of_eq hx)).commRingCatIsoToRingEquiv :=
+    RingEquiv.toRingHom_injective heA
+  subst eA
+  have hα := hα₀
+  have hpure := exists_openOrdinaryTensor_pure_germ_coordinates
+    f f' g g' sq V V' hV' j hj sq₀ P z eC heC
+  obtain ⟨τ, hτ⟩ := exists_semilinearTensorComplexIso _ _ _ eC hCA _ _ α hα
+  refine ⟨eR, _, eB, eC, hRA, hRB, hCA, hCB, α, hα, τ, hτ, ?_⟩
+  intro n
+  ext x
+  induction x using TensorProduct.induction_on with
+  | zero => simp
+  | tmul c q =>
+    simp only [AddCommGrpCat.comp_apply]
+    erw [hτ n (show C z from c) q]
+    have hq := ConcreteCategory.congr_hom (hαcoord n) q
+    erw [hq]
+    exact hpure n c q
+  | add x y hx hy => simp only [map_add, hx, hy]
 
 end AlgebraicGeometry

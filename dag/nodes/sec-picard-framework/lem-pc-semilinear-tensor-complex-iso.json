@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-semilinear-tensor-complex-iso",
+ "kind": "statement",
+ "title": "Semilinear transport of scalar-extended complexes",
+ "statement": "Let A0,A1,C0,C1 be commutative rings, f0:A0 to C0 and f1:A1 to C1 ring homomorphisms, and eA:A0 equiv A1 and eC:C0 equiv C1 ring equivalences satisfying eC after f0 = f1 after eA. Let K0 and K1 be integer cochain complexes over A0 and A1, and alpha an additive chain isomorphism satisfying alpha_n(a q)=eA(a) alpha_n(q). Then the complexes obtained by extending scalars along f0 and f1 and forgetting to additive groups have a chain isomorphism tau with tau_n(c tensor q)=eC(c) tensor alpha_n(q).",
+ "stmt_deps": [],
+ "source": {
+  "document": "Mathlib/LinearAlgebra/TensorProduct/Map.lean",
+  "place": "TensorProduct.congr and congr_tmul; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, ExtendScalars.map_tmul; HomologicalComplex.Hom.isoOfComponents."
+ },
+ "proof": [
+  {
+   "text": "View eC as an eA-semilinear equivalence between C0 and C1 with their scalar actions restricted along f0 and f1; compatibility of the two ring maps proves semilinearity. Each component of alpha is an eA-semilinear equivalence. TensorProduct.congr gives degreewise additive equivalences and their pure-tensor formula.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The chain identity of alpha identifies both compositions with the differentials on pure tensors. Tensor induction extends this to all tensors. HomologicalComplex.Hom.isoOfComponents supplies the chain isomorphism, with inverse provided by the inverse tensor equivalences.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H4",
+  "date": "2026-10-14",
+  "document": "Mathlib/LinearAlgebra/TensorProduct/Map.lean",
+  "place": "TensorProduct.congr and congr_tmul; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, ExtendScalars.map_tmul; HomologicalComplex.Hom.isoOfComponents.",
+  "note": "Constructed and compiled in Lean, including all inverse and differential equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Semilinear equivalences of complexes induce an isomorphism of tensor scalar extended complexes with formula on pure tensors",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error",
+   "available": false
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"congr\"",
+   "date": "2026-10-14",
+   "results": "TensorProduct.congr, congr_tmul, congr_symm_tmul and their composition formulas.",
+   "verdict": "The degreewise tensor equivalence is available; the chain-level scalar-extension transport and its pure-tensor formula require the proved construction below."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorProduct.congr; ExtendScalars.map_tmul; isoOfComponents in Mathlib tensor maps, change of rings and homological complexes",
+   "date": "2026-10-14",
+   "results": "All three constituent constructions and their definitions found and read. No existing semilinear scalar-extension chain-isomorphism theorem found in Sheaf or WeilConjectures.",
+   "verdict": "Use TensorProduct.congr degreewise and prove differential naturality by tensor induction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenOrdinaryTensorGermCoordinates",
+  "date": "2026-10-14",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Open-locality of the single-complex stalk comparison: ordinary ring coordinates and the tensor germ comparison of Tag 0098.",
+   "via": [
+    "lem-pc-open-ordinary-tensor-germ-coordinates",
+    "lem-pc-open-ordinary-tensor-germ-transport",
+    "lem-pc-single-complex-open-ordinary-comparison",
+    "lem-pc-single-complex-open-termwise-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SemilinearTensorComplexIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearTensorComplexIso.lean",
+  "declaration": "AlgebraicGeometry.exists_semilinearTensorComplexIso",
+  "statement": "theorem exists_semilinearTensorComplexIso\n    {A₀ A₁ C₀ C₁ : Type u}\n    [CommRing A₀] [CommRing A₁] [CommRing C₀] [CommRing C₁]\n    (f₀ : A₀ →+* C₀) (f₁ : A₁ →+* C₁)\n    (eA : A₀ ≃+* A₁) (eC : C₀ ≃+* C₁)\n    (h : eC.toRingHom.comp f₀ = f₁.comp eA.toRingHom)\n    (K₀ : CochainComplex (ModuleCat.{u} A₀) ℤ)\n    (K₁ : CochainComplex (ModuleCat.{u} A₁) ℤ)\n    (α : ((forget₂ (ModuleCat.{u} A₀) AddCommGrpCat.{u}).mapHomologicalComplex\n        (.up ℤ)).obj K₀ ≅\n      ((forget₂ (ModuleCat.{u} A₁) AddCommGrpCat.{u}).mapHomologicalComplex\n        (.up ℤ)).obj K₁)\n    (hα : ∀ (n : ℤ) (a : A₀) (q : K₀.X n),\n      α.hom.f n (a • q) = eA a • (show K₁.X n from α.hom.f n q)) :\n    ∃ τ : ((forget₂ (ModuleCat.{u} C₀) AddCommGrpCat.{u}).mapHomologicalComplex\n        (.up ℤ)).obj (((ModuleCat.extendScalars f₀).mapHomologicalComplex (.up ℤ)).obj K₀) ≅\n      ((forget₂ (ModuleCat.{u} C₁) AddCommGrpCat.{u}).mapHomologicalComplex\n        (.up ℤ)).obj (((ModuleCat.extendScalars f₁).mapHomologicalComplex (.up ℤ)).obj K₁),\n      ∀ (n : ℤ) (c : C₀) (q : K₀.X n),\n        τ.hom.f n (c ⊗ₜ[A₀,f₀] q) =\n          eC c ⊗ₜ[A₁,f₁] (show K₁.X n from α.hom.f n q)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T201753-L-3970886",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T201753-L-3970886",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
