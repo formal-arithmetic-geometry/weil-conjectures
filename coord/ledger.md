@@ -12337,3 +12337,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:50 L: merged deliver/U3/Sheaf.AlgebraicGeometry.FiniteProjectiveOpenStalkMapsLift (stage 3; reviewer PASS; first push; landing 20261013T115033-L-3327218 (proof); batch 20261013T115020; modules 1; new nodes 0)
 - 11:50 L: merged deliver/U4/Sheaf.RingTheory.FormalGlueingMorphismTuple (stage 3; reviewer PASS; first push; landing 20261013T115033-L-3327320 (proof); batch 20261013T115020; modules 1; new nodes 0)
 - 11:50 L: merged deliver/V3/Sheaf.AlgebraicGeometry.TailOpenCohomologyLegNaturality (stage 3; reviewer PASS; first push; landing 20261013T115033-L-3327476 (proof); batch 20261013T115020; modules 1; new nodes 0)
+- 11:50 L: merged deliver/W3/Sheaf.FieldTheory.FrobeniusBasisCompositum (stage 3; reviewer PASS; first push; landing 20261013T115034-L-3327619 (proof); batch 20261013T115020; modules 1; new nodes 0)
