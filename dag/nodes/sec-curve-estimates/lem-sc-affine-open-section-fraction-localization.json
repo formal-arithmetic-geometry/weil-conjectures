@@ -16,37 +16,49 @@
  ],
  "proof": [
   {
-   "text": "Restrict L, F and s to Y = U.toScheme. Restriction agrees with pullback, hence preserves invertibility and quasi-coherence. Restriction of sections and tensor powers identifies all numerator groups and their transition maps.",
+   "text": "Restrict L and F to U.toScheme and take the ordinary restricted global section sU. Use restrictFunctorIsoPullback and IsInvertible.of_iso to obtain invertibility; quasi-coherence is the Mathlib restriction instance. Invoke the tensor-power section comparison to obtain numerator equivalences N and transition compatibility.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-sc-tensor-power-section-open-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Apply affine_section_localization on Y. The stalk criterion identifies its nonvanishing open with the preimage of S, whose image is U cap S. The additive closure of fraction generators equals the additive subgroup of their module span: each scalar multiple of a generator is the generator of the scalar multiple numerator. Thus the numerator comparison descends to the additive fraction quotients.",
+   "text": "Prove privately that the additive closure of the fraction generators is the underlying additive subgroup of their module span: the generators are stable under scalar multiplication by Hom.app_smul and DirectSum.of_smul; the closure is consequently a submodule. Form the direct-sum equivalence from N. Its image carries the generators bijectively to the restricted generators by transition compatibility, using the inverse N in the reverse direction. AddMonoidHom.map_closure and QuotientAddGroup.congr descend it to Q, with the generator formula hQ.",
+   "uses": [
+    "def-sc-open-section-fraction-presentation",
+    "lem-sc-tensor-power-section-open-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply affine_section_localization to the affine scheme U.toScheme and restricted data. Its nonvanishing open V equals the preimage of S, by nonvanishingLocus_restrict and hS. The image-preimage identity of an open immersion therefore identifies its image with U intersection S.",
    "uses": [
     "lem-sc-affine-section-localization",
-    "def-sc-open-section-fraction-presentation"
+    "lem-sc-nonvanishing-locus-restrict"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compose the quotient comparison and the section localization equivalence with restrictAppIso on the target. Naturality of restriction and the definition of tmulSection transport the fraction formula to the displayed coefficient-map identity. Empty U and zero s require no extra hypotheses.",
+   "text": "Obtain T on the image of V from the tensor-power section comparison. Compose Q, the affine localization equivalence e, and T. For each numerator t, rewrite Q([n,t]) by hQ, apply the affine tensor formula to N(n)(t), and use the forward implication in the coefficient comparison. This proves the original formula without changing its signature or imposing nonempty/nonzero assumptions.",
    "uses": [
+    "lem-sc-tensor-power-section-open-restriction",
     "lem-sc-affine-section-localization"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-open-section-fraction-presentation",
   "lem-sc-affine-section-localization",
+  "lem-sc-nonvanishing-locus-restrict",
+  "lem-sc-tensor-power-section-open-restriction",
   "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex; properties.tex; cohomology.tex",
-  "place": "Tags 01PW (2), equation module-invert-s, and 09MR, affine-open paragraph; explicit Lean comparison and quotient argument"
+  "place": "Tags 01PW and 09MR, affine-open restriction argument; Lean quotient comparison and composition proved by T4, with tensor-power section naturality isolated in lem-sc-tensor-power-section-open-restriction."
  },
  "mathlib_searches": [
   {
@@ -132,12 +144,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261012T205200-L-907266",
+  "landing": "20261013T015616-L-3027809",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

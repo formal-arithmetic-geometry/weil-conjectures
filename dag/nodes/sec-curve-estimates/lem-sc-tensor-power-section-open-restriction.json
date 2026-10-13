@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-tensor-power-section-open-restriction",
+ "kind": "statement",
+ "title": "Tensor-power section equations and transitions under open restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $L,F$ arbitrary $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], $s\\in\\Gamma(X,L)$ and $U\\subseteq X$ open. Put $Y=U$, $L_U=L|_Y$, $F_U=F|_Y$ [lem-weil-pbc-module-restriction-open-immersion-colimits], and let $s_U$ be the ordinary restriction of $s$ regarded as a global section of $L_U$. Tensor powers are as in [def-sc-invertible-module]; no invertibility assumption is made. There exist additive equivalences $N_n:\\Gamma(U,F\\otimes L^{\\otimes n})\\simeq\\Gamma(Y,F_U\\otimes L_U^{\\otimes n})$ for all $n\\geq0$, intertwining all transition maps $t\\mapsto t\\otimes s^b$ into degree $n+b$ [def-sc-open-section-fraction-presentation]. Moreover, for every open $V\\subseteq Y$ and open $W\\subseteq X$ with image $V=W$ under the inclusion $Y\\to X$ and $W\\subseteq U$, there is an additive section equivalence $T:\\Gamma(V,F_U)\\simeq\\Gamma(W,F)$ such that, for every $n$, $t\\in\\Gamma(U,F\\otimes L^{\\otimes n})$ and $z\\in\\Gamma(V,F_U)$, the equality $z\\otimes s_U^n=(N_n(t))|_V$ holds if and only if $s^n T(z)=t|_W$. Here multiplication by $s^n$ is the morphism obtained from the inverse right unitor and tensorPowSection, as in [def-sc-open-section-fraction-presentation]. No affine, quasi-coherent or nonvanishing hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex; properties.tex; cohomology.tex",
+  "place": "Tags 01CD (lemma-tensor-product-pullback), 01PW (lemma-invert-s-sections), restriction to opens in the proof, and 09MR, affine-open paragraph. Read via the official Stacks pages."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-sc-invertible-module",
+  "def-sc-open-section-fraction-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical restriction tensor comparison of lem-weil-pbc-module-restriction-tensor-comparison and restrictUnitIso. The inverse tensor comparison is characterized on all pure tensor sections by the displayed formula of that lemma. The tensor universal property makes it unique; checking its unit and associativity coherence on pure tensors therefore gives a strong monoidal restriction functor. Starting with the unit comparison, recursively tensor its comparison for L with the comparison in degree n. This gives isomorphisms (L.tensorPow n).restrict U.ι ≅ (L.restrict U.ι).tensorPow n. Tensor with the restricted F and evaluate on the top open. Compose restrictAppIso and the presheaf equality isomorphism for U.ι_image_top to obtain N n in the direction in the statement.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-tensor-comparison",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-sc-invertible-module",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restricted global section sU is ordinary restriction of s, followed by the inverse of restrictAppIso. The canonical unit comparison carries homOfGlobalSection L s to homOfGlobalSection LU sU: evaluate on 1 and use homOfGlobalSection_app_one. Induction on n in tensorPowSection, using the pure-tensor formula of the comparison, carries every power of s to the corresponding power of sU. Induction on the first exponent in tensorPowAddIso identifies its addition comparisons, since the zero case is the left unitor and the successor case is the associator. Expand mulTensorPowSection as right unitor, tensoring with the section power, associator and inverse tensorPowAddIso. These compatibilities give precisely N(n+b)(mul(n,b)(t)) = mulU(n,b)(N(n)(t)). No claim that all tensor sections are pure tensors is needed: coherence is an equality of sheaf morphisms detected by the tensor universal property.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-tensor-comparison",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-sc-open-section-fraction-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each V and W with U.ι image V = W, take the restriction section isomorphism for F over V and compose with the presheaf equality isomorphism for this equality to obtain T. Naturality of restrictAppIso and of the tensor-power isomorphism identifies the map from top to V applied to N(n)(t) with ambient restriction of t from U to W. The pure-tensor formula and the section-power comparison carry z tensor sU^n to T(z) tensor s^n. The equality rightUnitor_inv_comp_whiskerLeft_app identifies the latter tensor with the ambient coefficient map. Applying the numerator comparison over V, and using its injectivity for the converse, proves the displayed equivalence of equations. Every comparison used is invertible even on the empty open and for n=0 or s=0.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-tensor-comparison",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-sc-open-section-fraction-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-sc-open-section-fraction-presentation",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex; properties.tex; cohomology.tex",
+  "place": "Tag 01CD, iteration with unit and associator coherence; Tags 01PW and 09MR, restriction of tensor-power section equations. Explicit comparison argument written by T4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open immersion commutes with tensor powers of sections, multiplication by a section and restriction maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictAppIso",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Modules.restrictAppIso; AlgebraicGeometry.Scheme.Modules.map_restrictAppIso_hom; AlgebraicGeometry.Scheme.Modules.restrictAppIso_inv_map; AlgebraicGeometry.Scheme.Modules.map_restrictAppIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.restrictAppIso_inv_map_assoc; AlgebraicGeometry.Scheme.Modules.smul_restrictAppIso_hom; AlgebraicGeometry.Scheme.Modules.smul_restrictAppIso_inv; AlgebraicGeometry.Scheme.Modules.smul_restrictAppIso_hom_assoc",
+   "date": "2026-10-13",
+   "verdict": "partial match; no tensor-power section naturality theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictTensorIso|restrictUnitIso|isInvertible_restrict",
+   "results": "9 hits: Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean; Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean; Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean; Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean; Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-13",
+   "verdict": "partial match; no tensor-power section naturality theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenSectionFractionLocalization",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Picard n-torsion proof via Lemma 01XR and Lemma 09MR: affine-open degree-zero localization; steps 1 and 3 of lem-sc-affine-open-section-fraction-localization, tensor-power restriction and coefficient-map comparison.",
+   "via": [
+    "lem-sc-affine-open-section-fraction-localization",
+    "lem-sc-invert-s-cohomology-affine-open-zero",
+    "lem-sc-invert-s-cohomology",
+    "lem-sc-section-affine-open-kills-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPowerSectionOpenRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_open_restriction",
+  "statement": "theorem exists_tensorPowSection_open_restriction (X : Scheme.{u}) (L F : X.Modules)\n    (s : Γ(L, ⊤)) (U : X.Opens) :\n    let LU := L.restrict U.ι\n    let FU := F.restrict U.ι\n    let sU : Γ(LU, ⊤) :=\n      (L.restrictAppIso U.ι ⊤).inv (L.presheaf.map (homOfLE le_top).op s)\n    ∃ N : ∀ n : ℕ, Γ(F ⊗ L.tensorPow n, U) ≃+ Γ(FU ⊗ LU.tensorPow n, ⊤),\n      (∀ (n b : ℕ) (t : Γ(F ⊗ L.tensorPow n, U)),\n        N (n + b) ((mulTensorPowSection (homOfGlobalSection L s) F n b).app U t) =\n          (mulTensorPowSection (homOfGlobalSection LU sU) FU n b).app ⊤ (N n t)) ∧\n      ∀ (V : U.toScheme.Opens) (W : X.Opens) (hW : U.ι ''ᵁ V = W) (hWU : W ≤ U),\n        ∃ T : Γ(FU, V) ≃+ Γ(F, W),\n          ∀ (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, U)) (z : Γ(FU, V)),\n            tmulSection z (tensorPowSectionOne (homOfGlobalSection LU sU) n V) =\n                (FU ⊗ LU.tensorPow n).presheaf.map (homOfLE le_top).op (N n t) ↔\n              (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n                  F ⟶ (F ⊗ L.tensorPow n : X.Modules)).app W (T z) =\n                (F ⊗ L.tensorPow n).presheaf.map (homOfLE hWU).op t",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T015616-L-3027809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T015616-L-3027809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
