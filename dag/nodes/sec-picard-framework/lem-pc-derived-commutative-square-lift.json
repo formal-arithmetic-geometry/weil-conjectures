@@ -1,0 +1,104 @@
+{
+ "id": "lem-pc-derived-commutative-square-lift",
+ "kind": "statement",
+ "title": "Strict representatives of a derived commutative square",
+ "statement": "Let C be an abelian category with a derived category. For a commutative square with horizontal arrows f:X to Y and f':X' to Y' and vertical arrows a:X to X', b:Y to Y', there exist four cochain complexes K,L,K',L', arrows g,g',s,r with g r = s g', and isomorphisms from their images under Q to X,Y,X',Y', identifying each of the four localized arrows with the corresponding given arrow.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RR (derived localization), 014D (mapping cones and homotopies)"
+ },
+ "proof": [
+  {
+   "text": "Choose a complex for Y'. Repeatedly use DerivedCategory.right_fac to lift b, f', a, f, with a common source for the two outgoing arrows. Use MorphismProperty.map_eq_iff_precomp on Qh to refine this source until the composites agree in the homotopy category. Quotient fullness and homotopyOfEq give chain maps and a homotopy H of their composites. The roof factorizations give the four derived map identities.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Replace L by L direct-sum Cone(id K), g by (g,inr), and r by (r,z), where mappingCone.desc applied to H.symm gives z with inr z = s g' - g r. The square is strictly commutative. The identity cone is contractible, so the projection onto L is invertible under Q and Q(z)=0. Use this projection to transport the comparison for Y and check all four map identities.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RR (derived localization), 014D (mapping cones and homotopies)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "commutative square in derived category represented by strictly commuting chain maps",
+   "results": "HomologicalComplex.Hom.sqFrom; HomologicalComplex.Hom.sqTo; HomologicalComplex.Hom.sqFrom_right; CategoryTheory.Square.Hom; HomologicalComplex.Hom.sqFrom_comp; HomologicalComplex.Hom.sqFrom_left; DerivedCategory.left_fac; DerivedCategory.right_fac",
+   "date": "2026-10-13",
+   "verdict": "partial",
+   "how": "Search log recorded in sandbox; inspected relevant Mathlib declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commuting square of morphisms in a derived category can be represented by strictly commuting chain maps after replacing all four complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "how": "Search log recorded in sandbox; inspected relevant Mathlib declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*rotate|rotate.*mappingCone",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean; Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean; Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean",
+   "date": "2026-10-13",
+   "verdict": "partial",
+   "how": "Search log recorded in sandbox; inspected relevant Mathlib declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedCategory.EndpointConePresentation",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-endpoint-cone-presentation",
+   "place": "Strictification and endpoint-natural unrotation in the proof of the endpoint cone presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.CommutativeSquareLift",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/CommutativeSquareLift.lean",
+  "declaration": "derived_commutative_square_lift",
+  "statement": "theorem derived_commutative_square_lift\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    {X Y X' Y' : DerivedCategory C}\n    (f : X ⟶ Y) (f' : X' ⟶ Y') (a : X ⟶ X') (b : Y ⟶ Y')\n    (h : f ≫ b = a ≫ f') :\n    ∃ (K L K' L' : CochainComplex C ℤ)\n      (g : K ⟶ L) (g' : K' ⟶ L') (s : K ⟶ K') (t : L ⟶ L')\n      (_hc : g ≫ t = s ≫ g')\n      (eX : DerivedCategory.Q.obj K ≅ X) (eY : DerivedCategory.Q.obj L ≅ Y)\n      (eX' : DerivedCategory.Q.obj K' ≅ X') (eY' : DerivedCategory.Q.obj L' ≅ Y'),\n      DerivedCategory.Q.map g ≫ eY.hom = eX.hom ≫ f ∧\n      DerivedCategory.Q.map g' ≫ eY'.hom = eX'.hom ≫ f' ∧\n      DerivedCategory.Q.map s ≫ eX'.hom = eX.hom ≫ a ∧\n      DerivedCategory.Q.map t ≫ eY'.hom = eY.hom ≫ b",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T153935-L-1123451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T153935-L-1123451",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

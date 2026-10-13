@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-derived-cone-square-unrotation",
+ "kind": "statement",
+ "title": "Natural unrotation of a strict cone square",
+ "statement": "Let g:K to L and g':K' to L' be cochain maps in an abelian category with a derived category, and let s:K to K', r:L to L' satisfy g r = s g'. Let e and e' identify their localized cone triangles with the double rotations of triangles T and T'. Set t=inr(g)[-1], t'=inr(g')[-1], alpha=r[-1], beta=Cone(s,r)[-1]. For every witness hc of t beta = alpha t', there are isomorphisms d:Qtriangle(t) to T and d':Qtriangle(t') to T' such that (Q(alpha) d'_1)[1] = d_1[1] e_2^{-1} Q(r) e'_2 and Q(Cone(alpha,beta)) d'_3 = d_3 e_1^{-1} Q(s) e'_1.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014D (double-cone homotopy equivalence), 05QK (rotation)"
+ },
+ "proof": [
+  {
+   "text": "The mappingCone.rotateHomotopyEquiv and its commutation homotopies identify the rotation of Qtriangle(g) with Qtriangle(inr(g)). Combine its inverse with mappingCone.shiftTriangleIso and Q.mapTriangleCommShiftIso at -1 to compare Qtriangle(inr(g)[-1]) with the shifted rotation of Qtriangle(g).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Compose the shifted rotation of e with rotateRotateRotateIso and shiftFunctorCompIsoId to construct d, and similarly d'. Compute its first component from shift comparisons. Compute its third component as the cone-shift inverse followed by the shifted inverse double-cone equivalence and shift cancellation, followed by e_1.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Prove degreewise that mappingCone.shiftIso.inv is natural for strict cone maps and that rotateHomotopyEquiv.inv is natural for the square (r,Cone(s,r)). Apply Q and the shift functor, then use commShiftIso naturality and shift cancellation. This proves the third-component identity; the first-component identity follows directly from the shift coherence identities.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014D (double-cone homotopy equivalence), 05QK (rotation)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of the shifted cone inclusion is naturally homotopy equivalent to the original complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "how": "Search log recorded in sandbox; inspected relevant Mathlib declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of the homotopy equivalence between the cone of the cone inclusion and the shifted original cochain complex",
+   "results": "CochainComplex.mappingConeCompHomotopyEquiv_comm₂_assoc; CochainComplex.mappingConeCompHomotopyEquiv_comm₁; CochainComplex.mappingConeCompHomotopyEquiv_comm₂; CochainComplex.mappingConeCompHomotopyEquiv_comm₁_assoc; CochainComplex.mappingConeCompHomotopyEquiv_hom_inv_id_assoc; CochainComplex.mappingConeCompTriangleh_comm₁; CochainComplex.mappingConeCompHomotopyEquiv; CochainComplex.MappingConeCompHomotopyEquiv.hom",
+   "date": "2026-10-13",
+   "verdict": "partial",
+   "how": "Search log recorded in sandbox; inspected relevant Mathlib declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "rotateTrianglehIso|shiftTriangleIso|rotateHomotopyEquiv",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+   "date": "2026-10-13",
+   "verdict": "partial",
+   "how": "Search log recorded in sandbox; inspected relevant Mathlib declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedCategory.EndpointConePresentation",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-endpoint-cone-presentation",
+   "place": "Strictification and endpoint-natural unrotation in the proof of the endpoint cone presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ConeSquareUnrotation",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ConeSquareUnrotation.lean",
+  "declaration": "derived_cone_square_unrotation",
+  "statement": "theorem derived_cone_square_unrotation\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    {K L K' L' : CochainComplex C ℤ}\n    (g : K ⟶ L) (g' : K' ⟶ L') (s : K ⟶ K') (r : L ⟶ L')\n    (hs : g ≫ r = s ≫ g')\n    (T T' : Triangle (DerivedCategory C))\n    (e : DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle g) ≅\n      T.rotate.rotate)\n    (e' : DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle g') ≅\n      T'.rotate.rotate) :\n    let t := (CochainComplex.mappingCone.inr g)⟦(-1 : ℤ)⟧'\n    let t' := (CochainComplex.mappingCone.inr g')⟦(-1 : ℤ)⟧'\n    let α := r⟦(-1 : ℤ)⟧'\n    let β := (CochainComplex.mappingCone.map g g' s r hs)⟦(-1 : ℤ)⟧'\n    ∀ (hc : t ≫ β = α ≫ t'),\n    ∃ (d : DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle t) ≅ T)\n      (d' : DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle t') ≅ T'),\n      (DerivedCategory.Q.map α ≫ d'.hom.hom₁)⟦(1 : ℤ)⟧' =\n        d.hom.hom₁⟦(1 : ℤ)⟧' ≫ e.inv.hom₂ ≫ DerivedCategory.Q.map r ≫ e'.hom.hom₂ ∧\n      DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ d'.hom.hom₃ =\n        d.hom.hom₃ ≫ e.inv.hom₁ ≫ DerivedCategory.Q.map s ≫ e'.hom.hom₁",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T153935-L-1123451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T153935-L-1123451",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
