@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-derived-open-cross-components-iso",
+ "kind": "statement",
+ "title": "Invertibility of the derived overlap counit on the opposite open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U,V$ arbitrary opens and $W=U\\cap V$. Fix derived categories [def-pc-derived-category] on $X,U,V,W$ in one morphism universe. Let $r_U,r_V,r_W,s_U,s_V,e_U:r_U\\star s_U\\cong r_W,e_V:r_V\\star s_V\\cong r_W$ be the restrictions and canonical composition comparisons [def-pc-derived-open-restriction-maps], where $\\star$ means apply the first functor then the second. Let $R_U,R_V,R_W$ be the derived open direct images [def-pc-derived-direct-image]. Choose adjunction structures $\\alpha_U:r_U\\dashv R_U$, $\\alpha_V:r_V\\dashv R_V$, $\\alpha_W:r_W\\dashv R_W$ with counits $\\epsilon_U,\\epsilon_V,\\epsilon_W$. For $A\\in D(\\mathcal O_U)$, $B\\in D(\\mathcal O_V)$ and an isomorphism $c:s_UA\\cong s_VB$, define $a:R_UA\\to R_W(s_VB)$ to be the $\\alpha_W$-adjoint of $e_{U,R_UA}^{-1};s_U(\\epsilon_{U,A});c$ and $b:R_VB\\to R_W(s_VB)$ to be the $\\alpha_W$-adjoint of $e_{V,R_VB}^{-1};s_V(\\epsilon_{V,B})$. Then $r_U(b)$ and $r_V(a)$ are isomorphisms. No covering assumption is made, and no biproduct or gluing object is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DG",
+  "place": "cohomology.tex, lemma-glue (Tag 08DG), restriction of the difference-arrow summands; Tag 08FE, restriction of derived direct image"
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-pc-restrict-derived-direct-image-open] to the open immersions of V and W, restricting to U. Identify both rU(RV B) and rU(RW(sV B)) with the derived pushforward of sV B from W to U. At the underived level, the canonical restriction map is the identity on sections over intersection opens. The eV comparison is precisely the equivalence-unit comparison from [def-pc-derived-open-restriction-maps]. After inserting this comparison, the definition of b by adjunction gives that sectionwise map, by the unit-counit triangle identity. Compute with K-injective resolutions; [lem-sc-derived-k-injective-restrict-open] ensures that the restrictions are K-injective. Thus rU(b) corresponds to an identity map and is invertible.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-pc-derived-open-restriction-maps",
+    "lem-sc-derived-k-injective-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Interchange U and V in the preceding calculation. The U component a adds the derived pushforward of c to the canonical overlap restriction map. Under the Tag 08FE comparisons, rV(a) is this pushforward of c followed by the same identity comparison. Since functors preserve isomorphisms, it is invertible. Arbitrary choices of the three adjunction structures differ from the canonical derived adjunctions by natural automorphisms of their right adjoints. The homEquiv formula and naturality conjugate each component by the corresponding automorphisms, preserving invertibility. Empty opens and empty intersections use the same identity calculation in the zero category; no use of U union V = X is made.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "def-pc-derived-open-restriction-maps",
+  "lem-sc-derived-k-injective-restrict-open",
+  "def-pc-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DG",
+  "place": "Restriction calculation of lemma-glue, expanded via Tag 08FE and naturality of adjunction choices"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeOpenDifferenceDiagram",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Two-open gluing of supported perfect objects: invertibility of each cross summand in the direct-image difference diagram",
+   "via": [
+    "lem-sc-relative-open-difference-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenCrossComponentsIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenCrossComponentsIsIso.lean",
+  "declaration": "AlgebraicGeometry.derived_open_cross_components_isIso",
+  "statement": "theorem derived_open_cross_components_isIso\n    (X : Scheme.{u}) (U V : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))]\n    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)\n    (c : (schemeOpenOverlapRestriction X\n        (homOfLE inf_le_left : U ⊓ V ⟶ U)).mapDerivedCategory.obj A ≅\n      (schemeOpenOverlapRestriction X\n        (homOfLE inf_le_right : U ⊓ V ⟶ V)).mapDerivedCategory.obj B)\n    (adjU : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)\n    (adjV : (schemeOpenRestriction X V).mapDerivedCategory ⊣ schemeDerivedDirectImage V.ι)\n    (adjW : (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory ⊣\n      schemeDerivedDirectImage (U ⊓ V).ι) :\n    let rU := (schemeOpenRestriction X U).mapDerivedCategory;\n    let rV := (schemeOpenRestriction X V).mapDerivedCategory;\n    let sU := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_left : U ⊓ V ⟶ U)).mapDerivedCategory;\n    let sV := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_right : U ⊓ V ⟶ V)).mapDerivedCategory;\n    let rW := (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory;\n    let eU := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : U ⊓ V ⟶ U);\n    let eV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : U ⊓ V ⟶ V);\n    let AU := (schemeDerivedDirectImage U.ι).obj A;\n    let BV := (schemeDerivedDirectImage V.ι).obj B;\n    let a := adjW.homEquiv AU (sV.obj B)\n      (eU.inv.app AU ≫ sU.map (adjU.counit.app A) ≫ c.hom);\n    let b := adjW.homEquiv BV (sV.obj B)\n      (eV.inv.app BV ≫ sV.map (adjV.counit.app B));\n    IsIso (rU.map b) ∧ IsIso (rV.map a)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For two open immersions the adjoint overlap counit becomes an isomorphism after restriction to the other open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived adjoint overlap counit for an open immersion becomes invertible after restriction to another open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict, AlgebraicGeometry.Scheme.Hom.isIso_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict. No exact derived cross-component theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*counit|counit.*open|openRestriction",
+   "results": "11 hits: Mathlib/Topology/Category/TopCat/Opens.lean, Mathlib/Topology/Category/TopCat/Opens.lean, Mathlib/Topology/Category/TopCat/Opens.lean, Mathlib/Topology/Category/TopCat/Opens.lean, Mathlib/Topology/Order/Category/FrameAdjunction.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace.lean. No exact derived cross-component theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T111836-L-3047119",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T111836-L-3047119",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
