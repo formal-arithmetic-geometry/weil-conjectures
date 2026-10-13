@@ -1,128 +1,128 @@
 {
- "id": "lem-sc-strictly-perfect-hom-quasi-iso",
- "kind": "statement",
- "title": "Bounded finite free internal Hom preserves all quasi-isomorphisms",
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism]. Let $E^\\bullet$ be an integer cochain complex of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category, def-pur-hom-complex] such that there are integers $M,N$ with $E^p$ zero for $p<M$ and for $p>N$, and for each integer $p$ there is a natural number $r_p$ and an isomorphism $E^p\\cong\\mathcal O_X^{\\oplus r_p}$. For any quasi-isomorphism $s:G^\\bullet\\to I^\\bullet$ of integer cochain complexes [def-pc-quasi-iso-modules], the induced morphism\n$$\\mathcal Hom_X^\\bullet(E^\\bullet,s):\\mathcal Hom_X^\\bullet(E^\\bullet,G^\\bullet)\\longrightarrow\\mathcal Hom_X^\\bullet(E^\\bullet,I^\\bullet)$$\nis a quasi-isomorphism. Neither $G^\\bullet$ nor $I^\\bullet$ is required to be bounded or injective, and no derived category is assumed.",
- "stmt_deps": [
-  "def-weil-locally-ringed-space-morphism",
-  "def-weil-sheaf-of-modules-category",
-  "def-pur-hom-complex",
-  "def-pc-quasi-iso-modules"
- ],
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/08DM",
-  "place": "Lemma 20.46.9: strictly perfect Hom computes derived Hom for arbitrary coefficient complexes; mapping-cone and finite-column proof"
- },
- "proof": [
-  {
-   "text": "Combine the separate lower bound M and upper bound N into the finite interval hypothesis: a degree outside [M,N] is zero by the corresponding given bound. This also handles reversed bounds.",
-   "uses": [],
-   "elementary": true
+  "id": "lem-sc-strictly-perfect-hom-quasi-iso",
+  "kind": "statement",
+  "title": "Bounded finite free internal Hom preserves all quasi-isomorphisms",
+  "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism]. Let $E^\\bullet$ be an integer cochain complex of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category, def-pur-hom-complex] such that there are integers $M,N$ with $E^p$ zero for $p<M$ and for $p>N$, and for each integer $p$ there is a natural number $r_p$ and an isomorphism $E^p\\cong\\mathcal O_X^{\\oplus r_p}$. For any quasi-isomorphism $s:G^\\bullet\\to I^\\bullet$ of integer cochain complexes [def-pc-quasi-iso-modules], the induced morphism\n$$\\mathcal Hom_X^\\bullet(E^\\bullet,s):\\mathcal Hom_X^\\bullet(E^\\bullet,G^\\bullet)\\longrightarrow\\mathcal Hom_X^\\bullet(E^\\bullet,I^\\bullet)$$\nis a quasi-isomorphism. Neither $G^\\bullet$ nor $I^\\bullet$ is required to be bounded or injective, and no derived category is assumed.",
+  "stmt_deps": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-hom-complex",
+    "def-pc-quasi-iso-modules"
+  ],
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08DM",
+    "place": "Lemma 20.46.9: strictly perfect Hom computes derived Hom for arbitrary coefficient complexes; mapping-cone and finite-column proof"
   },
-  {
-   "text": "For every degree p and short exact sequence S, choose the finite rank r and the isomorphism E.X p to the free rank-r sheaf from hfree. Apply finiteFreeInternalHomExact and retain its short-exactness conclusion; the additional finite-sum coordinate identifications are not needed.",
-   "uses": [
-    "lem-sc-finite-free-internal-hom-exact"
-   ],
-   "elementary": false
+  "proof": [
+    {
+      "text": "The cone A of s is acyclic. For each source degree p, the finite free internal Hom functor Hom(E.X p,-) is exact, so its application to A, and every shift of that complex, is acyclic.",
+      "uses": [
+        "lem-sc-finite-free-internal-hom-exact-sequence"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Choose bounds M and N for E. Filter Hom(E,A) by source degree using the finite interval M <= p <= N. The differential involving E moves to the adjacent source column, so the associated graded complexes are precisely shifts of Hom(E.X p,A). Every successive quotient is acyclic by the previous step. The long exact sequence of homology for each degreewise split short exact filtration sequence, and induction on the finite interval, show that Hom(E,A) is acyclic. If the interval is empty all source terms vanish and Hom(E,A) is zero.",
+      "uses": [],
+      "elementary": true
+    },
+    {
+      "text": "Identify Hom(E,cone(s)) with the cone of Hom(E,s). By the mapping-cone criterion for quasi-isomorphisms, its acyclicity proves the assertion.",
+      "uses": [
+        "lem-sc-hom-complex-mapping-cone"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-finite-free-internal-hom-exact-sequence",
+    "lem-sc-hom-complex-mapping-cone"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "agent": "T2",
+    "group": "T2",
+    "date": "2026-10-13",
+    "document": "https://stacks.math.columbia.edu/tag/08DM",
+    "place": "Lemma 20.46.9: strictly perfect Hom computes derived Hom for arbitrary coefficient complexes; mapping-cone and finite-column proof"
   },
-  {
-   "text": "Apply quasiIso_homComplex_map_of_bounded_exact_terms to the finite interval and termwise exactness just established. Its finite-width induction on the stupid source tail proves the conclusion for arbitrary target complexes, without a separate mapping-cone identification.",
-   "uses": [
-    "lem-pc-bounded-exact-term-hom-quasi-iso"
-   ],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "A bounded finite free complex of sheaves of modules: internal Hom out of it preserves quasi-isomorphisms",
+      "results": "Eight hits for CM5b, derived localization, bounded Ext, and group-valued HomComplex K-projective/K-injective comparison; none for the sheaf-valued internal Hom.",
+      "date": "2026-10-13",
+      "verdict": "No exact match"
+    },
+    {
+      "tool": "loogle",
+      "query": "QuasiIso, CochainComplex",
+      "results": "12 hits: generic shift and truncation quasi-isomorphisms, derived localization, mapping-cone short exactness, and injective resolutions. None concerns sheaf-valued internal Hom from a bounded finite free complex.",
+      "date": "2026-10-13",
+      "verdict": "No exact match"
+    },
+    {
+      "tool": "grep",
+      "query": "homComplex.*(restrict|quasiIso)|quasiIso.*homComplex in Mathlib/Algebra/Homology and Mathlib/AlgebraicGeometry/Modules",
+      "results": "No hits. The project has objectwise restriction and bounded-above Hom acyclicity with a bounded-below target; neither is the required statement.",
+      "date": "2026-10-13",
+      "verdict": "No exact match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Internal Hom out of a bounded complex of finite free sheaves preserves arbitrary quasi-isomorphisms",
+      "results": "Service unavailable: Internal Server Error (msearch.py).",
+      "date": "2026-10-13",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.LocalFiniteFreeHomologyNatural",
+    "date": "2026-10-13",
+    "group": "T2"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-local-finite-free-homology-natural",
+      "place": "The coefficient-natural comparison: Bounded finite free internal Hom preserves all quasi-isomorphisms",
+      "via": []
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Algebra.Homology.StrictlyPerfectHomQuasiIso",
+    "file": "lean/Sheaf/Algebra/Homology/StrictlyPerfectHomQuasiIso.lean",
+    "declaration": "AlgebraicGeometry.quasiIso_homComplex_map_of_bounded_finiteFree",
+    "statement": "theorem quasiIso_homComplex_map_of_bounded_finiteFree\n    (X : RingedSpace.{u})\n    (E : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)\n    (hbounded : ∃ N : ℤ, ∀ p : ℤ, N < p → IsZero (E.X p))\n    (hbelow : ∃ M : ℤ, ∀ p : ℤ, p < M → IsZero (E.X p))\n    (hfree : ∀ p : ℤ, ∃ r : ℕ, Nonempty (E.X p ≅\n      SheafOfModules.free (R := moduleRings X) (ULift.{u} (Fin r))))\n    {G I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ}\n    (s : G ⟶ I) [QuasiIso s] :\n    QuasiIso (((homComplexFunctor (R := X.sheaf)).obj (op E)).map s)",
+    "branch": "sheaf-dag",
+    "by": "T2",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "X-48bed",
+    "group": "T2",
+    "result": "pass",
+    "landing": "20261013T142905-L-500939",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "X-48bed",
+    "group": "T2",
+    "result": "pass",
+    "landing": "20261013T142905-L-500939",
+    "kind": "interface",
+    "note": "independent Codex review: Packet, delivered files, DAG nodes, signatures, compilation, and direct importer all match the stage-3 requirements"
   }
- ],
- "proof_deps": [
-  "lem-sc-finite-free-internal-hom-exact",
-  "lem-pc-bounded-exact-term-hom-quasi-iso"
- ],
- "proof_origin": {
-  "by": "agent",
-  "agent": "Codex",
-  "group": "R3",
-  "date": "2026-10-13",
-  "document": "https://stacks.math.columbia.edu/tag/08DM",
-  "place": "Finite source interval argument, using the existing bounded exact-term Hom induction and finite-free internal Hom exactness."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "A bounded finite free complex of sheaves of modules: internal Hom out of it preserves quasi-isomorphisms",
-   "results": "Eight hits for CM5b, derived localization, bounded Ext, and group-valued HomComplex K-projective/K-injective comparison; none for the sheaf-valued internal Hom.",
-   "date": "2026-10-13",
-   "verdict": "No exact match"
-  },
-  {
-   "tool": "loogle",
-   "query": "QuasiIso, CochainComplex",
-   "results": "12 hits: generic shift and truncation quasi-isomorphisms, derived localization, mapping-cone short exactness, and injective resolutions. None concerns sheaf-valued internal Hom from a bounded finite free complex.",
-   "date": "2026-10-13",
-   "verdict": "No exact match"
-  },
-  {
-   "tool": "grep",
-   "query": "homComplex.*(restrict|quasiIso)|quasiIso.*homComplex in Mathlib/Algebra/Homology and Mathlib/AlgebraicGeometry/Modules",
-   "results": "No hits. The project has objectwise restriction and bounded-above Hom acyclicity with a bounded-below target; neither is the required statement.",
-   "date": "2026-10-13",
-   "verdict": "No exact match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Internal Hom out of a bounded complex of finite free sheaves preserves arbitrary quasi-isomorphisms",
-   "results": "Service unavailable: Internal Server Error (msearch.py).",
-   "date": "2026-10-13",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.LocalFiniteFreeHomologyNatural",
-  "date": "2026-10-13",
-  "group": "T2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-local-finite-free-homology-natural",
-   "place": "The coefficient-natural comparison: Bounded finite free internal Hom preserves all quasi-isomorphisms",
-   "via": []
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.StrictlyPerfectHomQuasiIso",
-  "file": "lean/Sheaf/Algebra/Homology/StrictlyPerfectHomQuasiIso.lean",
-  "declaration": "AlgebraicGeometry.quasiIso_homComplex_map_of_bounded_finiteFree",
-  "statement": "theorem quasiIso_homComplex_map_of_bounded_finiteFree\n    (X : RingedSpace.{u})\n    (E : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)\n    (hbounded : ∃ N : ℤ, ∀ p : ℤ, N < p → IsZero (E.X p))\n    (hbelow : ∃ M : ℤ, ∀ p : ℤ, p < M → IsZero (E.X p))\n    (hfree : ∀ p : ℤ, ∃ r : ℕ, Nonempty (E.X p ≅\n      SheafOfModules.free (R := moduleRings X) (ULift.{u} (Fin r))))\n    {G I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ}\n    (s : G ⟶ I) [QuasiIso s] :\n    QuasiIso (((homComplexFunctor (R := X.sheaf)).obj (op E)).map s)",
-  "branch": "sheaf-dag",
-  "by": "T2",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "X-48bed",
-  "group": "T2",
-  "result": "pass",
-  "landing": "20261013T142905-L-500939",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R3",
-  "result": "pass",
-  "landing": "20261013T144156-L-614926",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

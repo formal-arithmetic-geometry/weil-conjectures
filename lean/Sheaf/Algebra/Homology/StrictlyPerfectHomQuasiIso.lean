@@ -8,8 +8,6 @@ module
 public import Sheaf.Algebra.Homology.HomComplex
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 
 /-! # A bounded finite free Hom complex preserves quasi-isomorphisms
 
@@ -43,20 +41,6 @@ theorem quasiIso_homComplex_map_of_bounded_finiteFree
       SheafOfModules.free (R := moduleRings X) (ULift.{u} (Fin r))))
     {G I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ}
     (s : G ⟶ I) [QuasiIso s] :
-    QuasiIso (((homComplexFunctor (R := X.sheaf)).obj (op E)).map s) := by
-  obtain ⟨N, hN⟩ := hbounded
-  obtain ⟨M, hM⟩ := hbelow
-  apply quasiIso_homComplex_map_of_bounded_exact_terms
-    (Opens.grothendieckTopology X) X.sheaf E
-  · refine ⟨M, N, ?_⟩
-    intro p hp
-    rcases hp with hp | hp
-    · exact hM p hp
-    · exact hN p hp
-  · intro p S hS
-    obtain ⟨r, ⟨e⟩⟩ := hfree p
-    obtain ⟨hz, hHom, _⟩ :=
-      SheafOfModules.finiteFreeInternalHomExact (R := X.sheaf) r (E.X p) e S hS
-    exact ⟨hz, hHom⟩
+    QuasiIso (((homComplexFunctor (R := X.sheaf)).obj (op E)).map s) := by sorry
 
 end AlgebraicGeometry

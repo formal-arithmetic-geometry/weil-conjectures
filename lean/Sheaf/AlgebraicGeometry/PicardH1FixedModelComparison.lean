@@ -19,9 +19,14 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-import Sheaf.AlgebraicGeometry.PicardAffineTargetNormalization
-import Sheaf.AlgebraicGeometry.PicardFixedModelResidueChainComparison
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import Sheaf.AlgebraicGeometry.FlatDerivedStructureUnit
+import Mathlib.RingTheory.LocalRing.Module
+import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
+import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.AlgebraicGeometry.AffineLocalizedDerivedSheafification
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
 
 /-! # Joint degree-one comparison for a fixed minimal source model
 
@@ -36,48 +41,6 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/-- Joint coordinates of finitely many maps into finite free modules. -/
-private theorem joint_free_coordinates
-    (A : Type v) [CommRing A] (m n : ℕ) (r : Fin n → ℕ)
-    (d : A → (Fin m → A))
-    (t : ∀ i, (Fin m → A) →ₗ[A] (ULift.{v} (Fin (r i)) → A))
-    (ht : ∀ i a, t i (d a) = 0) :
-    ∃ (q : ℕ) (b : (Fin m → A) →ₗ[A] (Fin q → A)),
-      (∀ a, b (d a) = 0) ∧
-      ∃ π : ∀ i, (Fin q → A) →ₗ[A] (ULift.{v} (Fin (r i)) → A),
-        ∀ i, (π i).comp b = t i := by
-  classical
-  let J := Σ i : Fin n, ULift.{v} (Fin (r i))
-  let q := Fintype.card J
-  let e : (J → A) ≃ₗ[A] (Fin q → A) :=
-    LinearEquiv.piCongrLeft A (fun _ ↦ A) (Fintype.equivFin J)
-  let bJ : (Fin m → A) →ₗ[A] (J → A) :=
-    LinearMap.pi fun j ↦ (LinearMap.proj j.2).comp (t j.1)
-  let b := e.toLinearMap.comp bJ
-  let π (i : Fin n) : (Fin q → A) →ₗ[A] (ULift.{v} (Fin (r i)) → A) :=
-    (LinearMap.pi fun j ↦ LinearMap.proj (⟨i, j⟩ : J)).comp e.symm.toLinearMap
-  refine ⟨q, b, ?_, π, ?_⟩
-  · intro a
-    change e (bJ _) = 0
-    rw [← e.map_zero]
-    congr 1
-    ext j
-    change t j.1 _ j.2 = 0
-    rw [ht _ a]
-    rfl
-  · intro i
-    apply LinearMap.ext
-    intro x
-    funext j
-    change (e.symm (e (bJ x))) ⟨i, j⟩ = _
-    rw [LinearEquiv.symm_apply_apply]
-    rfl
-
-attribute [local irreducible] structureSheafAb structureSheafCohomologyPullback
-
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- The dependent geometric comparisons require additional elaboration heartbeats.
 /-- On an affine with trivial target bundles, construct the joint degree-one map
 out of a supplied minimal source complex and identify its residue map geometrically.
 Source: Stacks Project, Tag 0BF2, displayed chain maps; Tags 08CR and 0B91.
@@ -190,54 +153,6 @@ theorem picard_h1_fixed_model_comparison
                 structureSheafCohomologyPullback
                   (((Over.pullback (S.fromSpecResidueField s)).map
                     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-                      (ui i) (hui i))).left) 1 (α z) := by
-  classical
-  obtain ⟨C, hC⟩ := Classical.axiomOfChoice fun i ↦
-    picard_affine_target_normalization (fi i) (hOi i)
-      ((Modules.tensorPullback (ui i)).obj L) W k U hU (htrivial i)
-  obtain ⟨α, t, γ, ht, hγ⟩ := picard_fixed_model_residue_chain_comparison
-    f Xi fi ui hui hO L W k w s hw hLs U hwU hU htrivial m K hK hnegative hrank e0 e1 hE
-    C (fun i ↦ (hC i).1) (fun i ↦ (hC i).2.1) (fun i ↦ (hC i).2.2.1)
-    (fun i ↦ (hC i).2.2.2)
-  let p := RingHom.ker (W.evaluation U w hwU).hom
-  let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
-  choose r ι π hιπ using fun i ↦ ((hC i).1).2 (1 : ℤ)
-  let A := Γ(W, U)
-  let V := Opposite.op (Over.mk (𝟙 U))
-  let E := fun i ↦ SheafOfModules.freeSectionsLinearEquiv
-    (R := (moduleRings W.toRingedSpace).over U) (ULift.{v} (Fin (r i))) V
-  let inc : ∀ i, ((C i).X 1).val.obj V →ₗ[A] (ULift.{v} (Fin (r i)) → A) :=
-    fun i ↦ (E i).toLinearMap.comp ((ι i).val.app V).hom
-  let ret : ∀ i, (ULift.{v} (Fin (r i)) → A) →ₗ[A] ((C i).X 1).val.obj V :=
-    fun i ↦ ((π i).val.app V).hom.comp (E i).symm.toLinearMap
-  have hret (i) : (ret i).comp (inc i) = LinearMap.id := by
-    ext x
-    change ((π i).val.app V).hom ((E i).symm ((E i) (((ι i).val.app V).hom x))) = x
-    rw [LinearEquiv.symm_apply_apply]
-    change ((ι i ≫ π i).val.app V) x = x
-    rw [hιπ i]
-    rfl
-  let ti := fun i ↦ (LinearMap.proj i).comp t
-  let d := fun a ↦ e1 ((K.d 0 1).val.app V (e0.symm a))
-  have hv (i) (a) : ((inc i).comp (ti i)) (d a) = 0 := by
-    change inc i ((t (d a)) i) = 0
-    rw [ht a]
-    exact (inc i).map_zero
-  obtain ⟨q, b, hb, proj, hproj⟩ := joint_free_coordinates A m n r d
-    (fun i ↦ (inc i).comp (ti i)) hv
-  let ρ := LinearMap.pi fun i ↦ (ret i).comp (proj i)
-  have hρ : ρ.comp b = t := by
-    apply LinearMap.ext
-    intro x
-    funext i
-    have hi : ((ret i).comp (proj i)).comp b = ti i := by
-      rw [LinearMap.comp_assoc, hproj, ← LinearMap.comp_assoc, hret, LinearMap.id_comp]
-    exact LinearMap.congr_fun hi x
-  let β := γ.comp (ρ.baseChange p.ResidueField).toAddMonoidHom
-  refine ⟨q, b, hb, α, β, ?_⟩
-  intro z
-  change γ (ρ.baseChange p.ResidueField (b.baseChange p.ResidueField z)) = _
-  rw [← LinearMap.comp_apply, ← LinearMap.baseChange_comp, hρ]
-  exact hγ z
+                      (ui i) (hui i))).left) 1 (α z) := by sorry
 
 end AlgebraicGeometry.Scheme

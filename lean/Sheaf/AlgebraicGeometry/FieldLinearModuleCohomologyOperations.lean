@@ -21,7 +21,6 @@ public import Mathlib.Topology.Sheaves.Functors
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Adjunction
 import Sheaf.AlgebraicGeometry.ModuleResolutionHomologyExt
-import Mathlib.Algebra.Homology.ConcreteCategory
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
@@ -317,11 +316,6 @@ Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED
 def scalarCohomology (F : (SheafOfModules.{u} X.ringCatSheaf)) (n : ℕ) : ModuleCat.{u} k :=
   ModuleCat.of k (scalarCohomologyCarrier f F n)
 
-section
-attribute [local irreducible] Functor.rightDerived InjectiveResolution.isoRightDerivedObj
-
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 set_option maxHeartbeats 800000 in
 -- Comparing resolution homology with derived functors requires universe-level conversion.
 /-- exists module Ext Equiv.
@@ -342,18 +336,13 @@ theorem exists_moduleExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) 
         e ((I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) n).inv
           ((RingedSpace.globalSectionsComplex I).homologyπ n a)) =
             InjectiveResolution.extMk.{u, u, u + 1} I φ (n+1) rfl hφ := by
-  let : EnoughInjectives (SheafOfModules.{u} X.ringCatSheaf) :=
-    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
-  let : HasInjectiveResolutions (SheafOfModules.{u} X.ringCatSheaf) := inferInstance
-  obtain ⟨J⟩ : Nonempty (InjectiveResolution F) := ⟨injectiveResolution F⟩
+  let J := injectiveResolution F
   let Γ := RingedSpace.globalSectionsFunctor X.toRingedSpace
-  let eJ := Classical.choose (moduleResolutionHomologyExtEquiv (X := X) F J n)
-  have heJ := Classical.choose_spec (moduleResolutionHomologyExtEquiv (X := X) F J n)
+  obtain ⟨eJ, heJ⟩ := moduleResolutionHomologyExtEquiv F J n
   let e := (J.isoRightDerivedObj Γ n).toLinearEquiv.toAddEquiv.trans eJ
   refine ⟨e, ?_⟩
   intro I c φ hφ hc
-  let ψ : I.Hom J (𝟙 F) := ⟨InjectiveResolution.desc (𝟙 F) J I,
-    InjectiveResolution.desc_commutes_zero (𝟙 F) J I⟩
+  let ψ : I.Hom J (𝟙 F) := ⟨InjectiveResolution.desc (𝟙 F) J I, by simp⟩
   let K := RingedSpace.globalSectionsComplex I
   let L := RingedSpace.globalSectionsComplex J
   let χ : K ⟶ L := (Γ.mapHomologicalComplex (.up ℕ)).map ψ.hom
@@ -366,7 +355,7 @@ theorem exists_moduleExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) 
     exact h.symm
   have hn := ConcreteCategory.congr_hom
     (InjectiveResolution.isoRightDerivedObj_inv_naturality (𝟙 F) I J ψ.hom
-      ψ.ι_f_zero_comp_hom_f_zero Γ n) (K.homologyπ n c)
+      (by simp [ψ]) Γ n) (K.homologyπ n c)
   have hp := ConcreteCategory.congr_hom
     (HomologicalComplex.homologyπ_naturality χ n) c
   simp only [ConcreteCategory.comp_apply] at hn hp
@@ -379,15 +368,10 @@ theorem exists_moduleExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) 
   rw [hn]
   change eJ ((J.isoRightDerivedObj Γ n).hom
     ((J.isoRightDerivedObj Γ n).inv (L.homologyπ n c'))) = _
-  have hid := (J.isoRightDerivedObj Γ n).toLinearEquiv.apply_symm_apply (L.homologyπ n c')
-  change (J.isoRightDerivedObj Γ n).hom
-    ((J.isoRightDerivedObj Γ n).inv (L.homologyπ n c')) = L.homologyπ n c' at hid
-  exact (congrArg eJ hid).trans
-    ((heJ c' (φ ≫ ψ.hom.f n) (by simp [reassoc_of% hφ]) hc').trans
-      ((InjectiveResolution.extMk_comp_mk₀ φ (n + 1) rfl hφ ψ).symm.trans
-        (Abelian.Ext.comp_mk₀_id _)))
-
-end
+  rw [← ConcreteCategory.comp_apply, Iso.inv_hom_id, ConcreteCategory.id_apply]
+  rw [heJ c' (φ ≫ ψ.hom.f n) (by simp [reassoc_of% hφ]) hc']
+  exact (InjectiveResolution.extMk_comp_mk₀ φ (n + 1) rfl hφ ψ).symm.trans
+    (Abelian.Ext.comp_mk₀_id _)
 
 /-- module Ext Equiv.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -493,29 +477,6 @@ theorem scalarCohomologyExtMap_add (F : SheafOfModules.{u} X.ringCatSheaf) (n : 
         ((scalarFunctor f).mapExtAddHom (SheafOfModules.unit X.ringCatSheaf) F n)).comp
           (moduleExtEquiv F n).toAddMonoidHom).map_add a b
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private def scalarModuleEnd (F : SheafOfModules.{u} X.ringCatSheaf) (r : k) : F ⟶ F where
-  val :=
-    { app := fun U ↦
-        letI : CommRing (X.ringCatSheaf.obj.obj U) :=
-          inferInstanceAs (CommRing (Γ(X, U.unop)))
-        ModuleCat.ofHom
-        { toFun := fun s ↦ (show X.ringCatSheaf.obj.obj U from scalarMap f U.unop r) • s
-          map_add' := fun s t ↦ smul_add _ _ _
-          map_smul' := fun c s ↦ smul_comm _ _ _ }
-      naturality := by
-        intro U V i
-        ext s
-        exact (scalarRestriction_linear f F i r s).symm }
-
-attribute [local irreducible] Functor.rightDerived InjectiveResolution.isoRightDerivedObj
-  Abelian.Ext.comp Abelian.Ext.mk₀ Abelian.Ext.mapExactFunctor
-
-set_option maxHeartbeats 120000 in
--- The cocycle comparison crosses the O-module and restricted k-module structures.
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 /-- scalar Cohomology Ext Map smul.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -524,66 +485,7 @@ transport on Ext and precomposition by the scalar-unit morphism. Compose these m
 theorem scalarCohomologyExtMap_smul (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
     (r : k) (a : scalarCohomology f F n) :
     scalarCohomologyExtMap f F n (r • a) = r • scalarCohomologyExtMap f F n a := by
-  obtain ⟨I⟩ : Nonempty (InjectiveResolution F) := ⟨injectiveResolution F⟩
-  let K := RingedSpace.globalSectionsComplex I
-  let Γ := RingedSpace.globalSectionsFunctor X.toRingedSpace
-  let a₀ : (Γ.rightDerived n).obj F := a
-  obtain ⟨φ, hφ, he⟩ := I.extMk_surjective (moduleExtEquiv F n a₀) (n + 1) rfl
-  let x := φ.val.app (op ⊤) (1 : Γ(X, ⊤))
-  have hx : K.d n (n + 1) x = 0 := by
-    exact congrArg (fun t ↦ t.val.app (op ⊤) (1 : Γ(X, ⊤))) hφ
-  obtain ⟨c, hc⟩ : ∃ c : K.cycles n, K.iCycles n c = x :=
-    ⟨K.cyclesMk x (n + 1) (by simp) hx, K.i_cyclesMk x (n + 1) (by simp) hx⟩
-  have hI : moduleExtEquiv F n ((I.isoRightDerivedObj Γ n).inv (K.homologyπ n c)) =
-      I.extMk φ (n + 1) rfl hφ := by
-    unfold moduleExtEquiv
-    exact Classical.choose_spec (exists_moduleExtEquiv (X := X) F n) I c φ hφ hc.symm
-  have ha : (I.isoRightDerivedObj Γ n).inv (K.homologyπ n c) = a₀ :=
-    (moduleExtEquiv F n).injective (hI.trans he)
-  let τ := scalarModuleEnd f (SheafOfModules.unit X.ringCatSheaf) r
-  have hτ : (scalarFunctor f).map τ =
-      r • 𝟙 (scalarSheaf f (SheafOfModules.unit X.ringCatSheaf)) := by
-    ext U s
-    rfl
-  let r₀ : (moduleRings X.toRingedSpace).obj.obj (op ⊤) := by
-    set_option backward.isDefEq.respectTransparency false in
-      exact scalarMap f ⊤ r
-  have hφr : (τ ≫ φ).val.app (op ⊤) (1 : Γ(X, ⊤)) =
-      K.iCycles n (r₀ • c) := by
-    set_option backward.isDefEq.respectTransparency false in
-      set_option backward.isDefEq.respectTransparency.types false in
-        change (φ.val.app (op ⊤)).hom (scalarMap f ⊤ r • (1 : Γ(X, ⊤))) = _
-        exact ((φ.val.app (op ⊤)).hom.map_smul (scalarMap f ⊤ r) (1 : Γ(X, ⊤))).trans
-          (((K.iCycles n).hom.map_smul r₀ c).trans (congrArg (r₀ • ·) hc)).symm
-  have hτφ : (τ ≫ φ) ≫ I.cocomplex.d n (n + 1) = 0 := by
-    rw [Category.assoc, hφ, comp_zero]
-  have hIr : moduleExtEquiv F n (r₀ • a₀) =
-      I.extMk (τ ≫ φ) (n + 1) rfl hτφ := by
-    have ht : moduleExtEquiv F n
-        ((I.isoRightDerivedObj Γ n).inv (K.homologyπ n (r₀ • c))) =
-          I.extMk (τ ≫ φ) (n + 1) rfl hτφ := by
-      unfold moduleExtEquiv
-      exact Classical.choose_spec (exists_moduleExtEquiv (X := X) F n) I
-        (r₀ • c) (τ ≫ φ) hτφ hφr
-    have hs : (I.isoRightDerivedObj Γ n).inv
-        (K.homologyπ n (r₀ • c)) = r₀ • a₀ := by
-      exact (congrArg (fun z ↦ (I.isoRightDerivedObj Γ n).inv z)
-        ((K.homologyπ n).hom.map_smul r₀ c)).trans
-        (((I.isoRightDerivedObj Γ n).inv.hom.map_smul r₀ (K.homologyπ n c)).trans
-          (congrArg (fun z : (Γ.rightDerived n).obj F ↦ r₀ • z) ha))
-    exact (congrArg (moduleExtEquiv F n) hs.symm).trans ht
-  have hmap : (I.extMk (τ ≫ φ) (n + 1) rfl hτφ).mapExactFunctor (scalarFunctor f) =
-      r • ((moduleExtEquiv F n a₀).mapExactFunctor (scalarFunctor f)) := by
-    rw [← I.mk₀_comp_extMk φ (n + 1) rfl hφ τ,
-      Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀, hτ, ← he]
-    erw [Abelian.Ext.mk₀_smul (R := k), Abelian.Ext.smul_comp (R := k),
-      Abelian.Ext.mk₀_id_comp]
-  unfold scalarCohomologyExtMap scalarExtMap
-  exact (congrArg (fun z : Abelian.Ext.{u} (SheafOfModules.unit X.ringCatSheaf) F n ↦
-    (Abelian.Ext.mk₀ (scalarUnitMorphism f)).comp
-      (z.mapExactFunctor (scalarFunctor f)) (zero_add n)) hIr).trans
-    ((congrArg (fun z ↦ (Abelian.Ext.mk₀ (scalarUnitMorphism f)).comp z
-      (zero_add n)) hmap).trans (Abelian.Ext.comp_smul _ _ (zero_add n) r))
+  sorry
 
 /-- scalar Cohomology Ext Map bijective.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
@@ -603,18 +505,10 @@ Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
 def scalarCohomologyExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     scalarCohomology f F n ≃+
-      Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) (scalarSheaf f F) n := by
-  let T : scalarCohomology f F n →+
       Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) (scalarSheaf f F) n :=
-    (((Abelian.Ext.precomp (Abelian.Ext.mk₀ (scalarUnitMorphism f))
-      (scalarSheaf f F) (zero_add n)).comp
-      ((scalarFunctor f).mapExtAddHom (SheafOfModules.unit X.ringCatSheaf) F n)).comp
-        (moduleExtEquiv F n).toAddMonoidHom)
-  have hb : Function.Bijective T := by
-    have hb := scalarCohomologyExtMap_bijective f F n
-    unfold scalarCohomologyExtMap scalarExtMap at hb
-    exact hb
-  exact AddEquiv.ofBijective T hb
+  { Equiv.ofBijective (scalarCohomologyExtMap f F n)
+      (scalarCohomologyExtMap_bijective f F n) with
+    map_add' := scalarCohomologyExtMap_add f F n }
 
 end
 

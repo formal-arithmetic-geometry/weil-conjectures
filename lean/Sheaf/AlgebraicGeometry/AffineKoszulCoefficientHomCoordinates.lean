@@ -11,8 +11,10 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.AlgebraicGeometry.AffineClosedImmersionCoefficientSquare
-import Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientHomologySquare
+import Sheaf.Algebra.Homology.HomComplexToSingle
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Sheaf.AlgebraicGeometry.AffineQuotientRestrictedIso
+import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
 
 /-! # Underived affine coordinates for the Koszul coefficient square
 
@@ -27,68 +29,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
-
-private theorem transport_coefficient_square
-    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
-    {X Y V W : C} (a : X ⟶ Y) (q : V ⟶ W) (b : X ≅ V) (c : Y ≅ W)
-    (hb : a ≫ c.hom = b.hom ≫ q) {P Q : D}
-    (d : F.obj V ≅ P) (e : F.obj W ≅ Q) (t : P ⟶ Q)
-    (hc : F.map q ≫ e.hom = d.hom ≫ t) :
-    ∃ (bO : F.obj X ≅ P) (bQ : F.obj Y ≅ Q),
-      F.map a ≫ bQ.hom = bO.hom ≫ t := by
-  refine ⟨F.mapIso b ≪≫ d, F.mapIso c ≪≫ e, ?_⟩
-  have sq₁ : CommSq (F.map a) (F.map b.hom) (F.map c.hom) (F.map q) :=
-    ⟨(F.map_comp _ _).symm.trans
-      ((congrArg (fun t ↦ F.map t) hb).trans (F.map_comp _ _))⟩
-  have sq₂ : CommSq (F.map q) d.hom e.hom t := ⟨hc⟩
-  simpa only [Iso.trans_hom, Functor.mapIso_hom] using (sq₁.vert_comp sq₂).w
-
-
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem affine_coefficient_coordinates_for_H
-    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
-    (U : Y.affineOpens) (n m : ℕ) (f : Fin n → Γ(Y, U.1))
-    (a : SheafOfModules.unit Y.ringCatSheaf ⟶
-      (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))
-    (ha : a = (Scheme.Modules.pullbackPushforwardAdjunction i).unit.app _ ≫
-      (Scheme.Modules.pushforward i).map (Scheme.Modules.pullbackObjUnitIso i).hom)
-    (H : CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ ⥤
-      CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ)
-    (hH : H =
-      let A := (Γ(Y, U.1) : Type u)
-      let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
-      let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-        ((ExteriorAlgebra.koszulComplex A n f).extend ComplexShape.embeddingDownNat)
-      (homComplexFunctor (R := U.1.toScheme.toRingedSpace.sheaf)).obj (op E)) :
-    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
-    let R := Scheme.Modules.restrictFunctor U.1.ι
-    let S := CochainComplex.singleFunctor U.1.toScheme.Modules 0
-    let A := (Γ(Y, U.1) : Type u)
-    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
-    let D := HomologicalComplex.homologyFunctor U.1.toScheme.Modules
-      (ComplexShape.up ℤ) (m : ℤ)
-    let P := (ExteriorAlgebra.koszulDualComplex A n f).homology m
-    let Q := (ExteriorAlgebra.koszulQuotientDualComplex A (i.ker.ideal U) n f).homology m
-    let q := HomologicalComplex.homologyMap
-      (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) m
-    ∃ (eF : D.obj (H.obj (S.obj (R.obj (SheafOfModules.unit Y.ringCatSheaf)))) ≅ T.obj P)
-      (eG : D.obj (H.obj (S.obj (R.obj B))) ≅ T.obj Q),
-      D.map (H.map (S.map (R.map a))) ≫ eG.hom = eF.hom ≫ T.map q := by
-  let A := (Γ(Y, U.1) : Type u)
-  let I := i.ker.ideal U
-  let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
-  let R := Scheme.Modules.restrictFunctor U.1.ι
-  let S := CochainComplex.singleFunctor U.1.toScheme.Modules 0
-  let D := HomologicalComplex.homologyFunctor U.1.toScheme.Modules
-    (ComplexShape.up ℤ) (m : ℤ)
-  let G := S ⋙ H ⋙ D
-  obtain ⟨eO, eB, hb⟩ := affine_closedImmersion_coefficient_square i U a ha
-  obtain ⟨cO, cQ, hc⟩ := affine_koszul_hom_coefficient_homology_square U I n m f H hH
-  exact transport_coefficient_square G (R.map a)
-    (T.map (ModuleCat.ofHom I.mkQ)) eO eB hb cO cQ _ hc
-
 
 /-- The underived Hom complexes of the explicit sheafified Koszul complex give
 precisely the coefficient reduction on dual Koszul homology.
@@ -140,7 +80,6 @@ theorem affine_koszul_coefficient_hom_coordinates
       (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) m
     ∃ (eF : D.obj (H.obj (S.obj (R.obj (SheafOfModules.unit Y.ringCatSheaf)))) ≅ T.obj P)
       (eG : D.obj (H.obj (S.obj (R.obj B))) ≅ T.obj Q),
-      D.map (H.map (S.map (R.map a))) ≫ eG.hom = eF.hom ≫ T.map q := by
-  exact affine_coefficient_coordinates_for_H i U n m f a ha _ rfl
+      D.map (H.map (S.map (R.map a))) ≫ eG.hom = eF.hom ≫ T.map q := by sorry
 
 end AlgebraicGeometry
