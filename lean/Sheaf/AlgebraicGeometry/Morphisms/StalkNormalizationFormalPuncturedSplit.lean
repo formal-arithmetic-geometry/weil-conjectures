@@ -18,8 +18,10 @@ public import Sheaf.RingTheory.Depth
 
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
-import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
-import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedRestriction
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalZeroSliceSplit
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSplitAssembly
+import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFullyFaithful
 
 /-! # Formal test: PuncturedSplit -/
@@ -34,8 +36,9 @@ namespace AlgebraicGeometry.Scheme
 (blueprint: lem-sbc-stalk-normalization-formal-punctured-split)
 
 Proof: Minimality makes the inverse image of U the punctured spectrum of A.
-Normalization agrees with PA over this open, since PA is finite etale over
-the normal smooth scheme C_U. Extend the generic G-action to PA by generic
+Relative normalization agrees with PA over this open because PA is finite,
+hence integral, over C_U; smooth base change along the open inclusion gives
+the comparison. Extend the generic G-action to PA by generic
 fibre full faithfulness. The rational section point and its G-translates split
 the generic section cover. Normal generic full faithfulness extends that
 isomorphism and its inverse to the punctured local base, with uniqueness
@@ -88,6 +91,40 @@ theorem GaloisCover.exists_stalk_normalization_formal_punctured_split {S C : Sch
       let r : F ⟶ T := pullback.snd n t
       let p : E ⟶ T := Sigma.desc (fun _ : G ↦ 𝟙 T)
       ∃ e : (p ⁻¹ᵁ V).toScheme ≅ (r ⁻¹ᵁ V).toScheme,
-        e.hom ≫ r ∣_ V = p ∣_ V := by sorry
+        e.hom ≫ r ∣_ V = p ∣_ V := by
+  classical
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  dsimp only
+  intro hn d t ht hb hz
+  have h := stalk_normalization_formal_punctured_restriction
+    c G U PA s hs hmin d t hb
+  dsimp only at h
+  obtain ⟨hp, hep, hr, her, hV⟩ := h
+  have hslice := GaloisCover.stalk_normalization_formal_zero_slice_split
+    hS c σ hσ G q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ
+    s hs hmin d t hb hz
+  dsimp only at hslice
+  obtain ⟨e₀, he₀⟩ := hslice
+  let := hp
+  let := hep
+  let := hr
+  let := her
+  refine powerSeries_punctured_split_assembly _ _ _ ?_ e₀ he₀
+  by_cases hd : d = 0
+  · subst d
+    left
+    have hz : IsIso (Spec.map (CommRingCat.ofHom
+        (MvPowerSeries.constantCoeff (σ := Fin 0) :
+          MvPowerSeries (Fin 0) (S.presheaf.stalk s) →+* S.presheaf.stalk s))) := by
+      let e := (MvPowerSeries.isEmptyEquiv (Fin 0) (S.presheaf.stalk s)).toRingEquiv
+      change IsIso (Scheme.Spec.map e.toCommRingCatIso.hom.op)
+      infer_instance
+    infer_instance
+  · right
+    exact finiteEtale_powerSeries_punctured_section_fully_faithful
+      (S.presheaf.stalk s) hdepth d (Nat.pos_of_ne_zero hd) _ hV
 
 end AlgebraicGeometry.Scheme

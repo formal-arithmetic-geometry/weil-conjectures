@@ -12856,3 +12856,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/A3/Sheaf.AlgebraicGeometry.PicardBaseChangeFactorization (stage 3; reviewer PASS; first push; landing 20261013T144153-L-613852 (proof); batch 20261013T144152; modules 1; new nodes 0)
 - 14:41 L: merged deliver/C4/Sheaf.FieldTheory.TriangularFieldModelBoundedSpanning (stage 3; reviewer PASS; first push; landing 20261013T144153-L-614005 (proof); batch 20261013T144152; modules 1; new nodes 0)
 - 14:41 L: merged deliver/D2/Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates (stage 3; reviewer PASS; first push; landing 20261013T144154-L-614172 (interface); batch 20261013T144152; modules 4; new nodes 3)
+- 14:41 L: merged deliver/D2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedSplit (stage 3; reviewer PASS; first push; landing 20261013T144154-L-614317 (interface); batch 20261013T144152; modules 4; new nodes 3)

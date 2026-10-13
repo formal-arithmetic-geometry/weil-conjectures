@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-stalk-normalization-formal-punctured-restriction",
+ "kind": "statement",
+ "title": "Finite etale normalization restriction and the punctured zero slice",
+ "statement": "Let S be a Noetherian scheme, c:C→S any morphism, G a finite type indexing a coproduct, U an open of S, and PA a finite etale scheme over C_U=(c inverse image U) [def-weil-pbc-scheme-conventions, def-pc-fibre-product]. Let s lie outside U and assume every point outside U specializing to s equals s. Put A=O_{S,s}, a:Spec A→S, L=C×_S Spec A, and n:N×_C L→L, where N→C is the relative normalization of PA→C_U→C [lem-weil-pbc-relative-normalization]. For any d≥0 and t:Spec A[[X_1,...,X_d]]→L whose local-base projection is induced by coefficient inclusion [def-weil-pbc-multivariate-power-series], set T=Spec A[[X]], F=N×_C L×_L T, r:F→T, E=∐_G T, p:E→T the fold, and V=(t followed by L→C) inverse image C_U. Both p restricted to V and r restricted to V are finite etale. The constant-coefficient zero section z:Spec A→T satisfies z(x)∈V if and only if x is not the closed point of Spec A. No flatness, depth, normality, or G-action is assumed.",
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0EYJ (punctured base), 035I and 03GV; Mathlib AlgebraicGeometry/Normalization.lean: integral-morphism toNormalization isomorphism and smooth normalizationPullback; source-library finite coproduct instance."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-relative-normalization",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "The square with PA at the upper left, identity as top map, PA→C_U as left map, PA→C_U→C as right map, and C_U→C as bottom map is cartesian, since the bottom map is a monomorphism. Its second pullback projection k is finite etale. A finite morphism is integral, so Mathlib Hom.instIsIsoToNormalization gives IsIso k.toNormalization; toNormalization_fromNormalization yields k.fromNormalization=inv(k.toNormalization) followed by k. Thus k.fromNormalization is finite etale. Apply smooth base change of normalization along the open inclusion. normalizationPullback_snd then identifies the pullback of N→C with k.fromNormalization up to an isomorphism. Restriction over C_U is therefore finite etale.",
+   "uses": [
+    "lem-sbc-relative-normalization-smooth-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For either property finite or etale, form the cartesian square comparing restriction of a pullback to the pullback of the restriction. It follows by pasting the actual restriction squares with the pullback square and checking their equation after the monomorphic open inclusion. Apply this first along L→C, then along t. This proves both properties for r over V. The finite constant coproduct is finite by IsFinite.sigmaDesc from the source library, and etale by IsZariskiLocalAtSource.sigmaDesc; restriction preserves both.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Spec(constantCoeff) followed by Spec(C) is the identity because constantCoeff.comp C=id. The equation for t over Spec A and the pullback equation identify the zero-section map to S with a. Every point x of Spec A maps to a generalization of s. If a(x) is outside U, minimality gives a(x)=s; injectivity of a and its closed-point equation give x=closedPoint. Conversely the closed point maps to s outside U. This is the required equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-relative-normalization-smooth-base-change"
+ ],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "D2",
+  "document": "Stacks Project and the Lean libraries",
+  "place": "Tags 0EYJ (punctured base), 035I and 03GV; Mathlib AlgebraicGeometry/Normalization.lean: integral-morphism toNormalization isomorphism and smooth normalizationPullback; source-library finite coproduct instance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale scheme cover is trivial when its generic fibre splits over a normal integral base",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fully faithful base change of finite etale covers lifts an isomorphism and its inverse",
+   "results": "8 results including Etale.forgetFullyFaithful and etale base-change stability. No geometric zero-slice split or normalization-test preparation theorem.",
+   "verdict": "no exact match; generic categorical tools used in the proved assembly",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "zero.slice.*split|punctured.*restriction|iso_of.*pullback|preimageIso; normalizationPullback|IsIntegralHom.*IsIso",
+   "results": "Read Mathlib CategoryTheory/Functor/FullyFaithful.lean and AlgebraicGeometry/Normalization.lean. FullyFaithful.preimageIso supplies the abstract categorical idea. Relative normalization commutes with smooth base change and IsIntegralHom supplies IsIso toNormalization; these prove the preparation. No declaration provides the geometric zero-slice splitting.",
+   "verdict": "component matches used for proved lemmas; no complete slice statement",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful.preimageIso",
+   "results": "0 hits: unknown identifier; the declaration was located and read by rg.",
+   "verdict": "no service match; local source provides the categorical tool",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedSplit",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Final local calculation: identify the punctured zero slice, split its section cover, and lift the splitting by full faithfulness.",
+   "via": [
+    "lem-sbc-stalk-normalization-formal-punctured-split",
+    "lem-sbc-stalk-normalization-formal-split",
+    "lem-sbc-stalk-normalization-split-formal-test",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationFormalPuncturedRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_formal_punctured_restriction",
+  "statement": "theorem stalk_normalization_formal_punctured_restriction {S C : Scheme.{u}}\n    [IsNoetherian S]\n    (c : C ⟶ S)\n    (G : Type (u + 1)) [Finite G]\n    (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    ∀ (d : ℕ)\n      (t : Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s))) ⟶ pullback c a),\n      t ≫ pullback.snd c a =\n        Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin d))) →\n      let T := Spec (.of (MvPowerSeries (Fin d) (S.presheaf.stalk s)))\n      let F : Scheme.{u} := pullback n t\n      let E : Scheme.{u} := ∐ (fun _ : G ↦ T)\n      let V := (t ≫ pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U)\n      let r : F ⟶ T := pullback.snd n t\n      let p : E ⟶ T := Sigma.desc (fun _ : G ↦ 𝟙 T)\n      IsFinite (p ∣_ V) ∧ Etale (p ∣_ V) ∧\n      IsFinite (r ∣_ V) ∧ Etale (r ∣_ V) ∧\n      ∀ x : Spec (S.presheaf.stalk s),\n        (Spec.map (CommRingCat.ofHom\n          (MvPowerSeries.constantCoeff (σ := Fin d)))) x ∈ V ↔\n            x ≠ IsLocalRing.closedPoint (S.presheaf.stalk s)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T144154-L-614317",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T144154-L-614317",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
