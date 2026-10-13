@@ -17,13 +17,11 @@
  ],
  "proof": [
   {
-   "text": "Choose a local basis z of L on U, writing s=b z^d and t=c z^e. The free-generator hypothesis makes b a unit. The assumed equations identify rho(a/s^k) with the coefficient of a divided by b^k. By the Proj chart description, D_+(s) intersect D_+(t) is the basic open of t^d/s^e in Spec S_(s). Its preimage under q is the unit locus of c^d/b^e, equivalently that of c. This follows from the affine morphism correspondence and its basic-open preimage formula.",
+   "text": "Apply the second-chart generator theorem to show that the restriction of t is a free generator on W. Induct on k=n(d-1): exponent zero is the tensor-unit section, and the successor step is the tensor product of the preceding generator with t, transported through tensorPowAddIso. DirectSum.of_mul_of verifies that these generators are exactly the components of the section-ring powers t^k.",
    "uses": [
-    "def-sc-invertible-module",
-    "def-sc-local-free-generator",
+    "lem-sc-section-ring-second-chart-generator",
     "def-sc-invertible-section-ring",
-    "def-pc-proj",
-    "lem-weil-pbc-morphism-into-affine-scheme"
+    "def-sc-local-free-generator"
    ],
    "elementary": false,
    "source": {
@@ -32,10 +30,20 @@
    }
   },
   {
-   "text": "On this intersection use the degree-zero fraction identity xi/t^n = (xi t^{n(d-1)}/s^{ne}) / (t^d/s^e)^n. The numerator on the right has degree ned. The ring-map equations and localization give its pullback as the coefficient of xi divided by c^n, because b^{ne} and c^{n(d-1)} cancel. Multiplication by t^n gives xi. These are local equations of module sections and hence glue. The same identity handles n=0. Empty intersections give equality of unique sections. The unit criterion for powers holds without reducedness.",
+   "text": "Apply the cross-multiplication theorem. Extract the single-component representatives of ξ and t^k; DirectSum.of_mul_of and evaluation in degree ne+ke identify its right side with tensorPowAddIso.inv applied to ξ|W tensor t^k|W. Naturality moves restriction inside tensor multiplication. Linearity moves the pullback scalar inside the same isomorphism.",
    "uses": [
-    "def-sc-invertible-section-ring",
-    "def-pc-proj",
+    "lem-sc-section-ring-chart-cross-multiplication",
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+   }
+  },
+  {
+   "text": "The tensorPowAddIso map is bijective on sections, so cancel it. Tensoring on the right with the free generator t^k|W is injective by WeilConjectures IsFreeGenerator.injective_tmulSection_right. Cancel that factor and obtain the required quotient equation. This uses no additional geometric hypothesis and includes k=0, n=0 and the empty W.",
+   "uses": [
     "def-sc-local-free-generator"
    ],
    "elementary": false,
@@ -46,16 +54,16 @@
   }
  ],
  "proof_deps": [
-  "def-pc-proj",
-  "def-sc-invertible-module",
   "def-sc-invertible-section-ring",
   "def-sc-local-free-generator",
-  "lem-weil-pbc-morphism-into-affine-scheme"
+  "lem-sc-section-ring-chart-cross-multiplication",
+  "lem-sc-section-ring-second-chart-generator"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+  "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)",
+  "note": "Y2 Lean reduction into the chart-generator and cross-multiplied numerator steps, followed by proved tensor cancellation."
  },
  "mathlib_searches": [
   {
@@ -136,12 +144,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T223358-L-1634258",
+  "landing": "20261013T022436-L-3223590",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,161 @@
+{
+ "id": "lem-sc-section-ring-chart-cross-multiplication",
+ "kind": "statement",
+ "title": "Cross-multiplied numerator equation on two section-ring charts",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $L$ an invertible module [def-sc-invertible-module], $S$ its section ring [def-sc-invertible-section-ring], $d>0$, $s\\in S_d$, $U\\subseteq X$ open, and $s|_U$ a free generator [def-sc-local-free-generator]. Let $\\rho:S_{(s)}\\to\\Gamma(U,\\mathcal O_X)$ satisfy $\\rho(a/s^m)(s^m)|_U=a|_U$ for every $m\\geq0$ and $a\\in S_{md}$. Let $q:U\\to\\operatorname{Spec}S_{(s)}$ induce $\\rho$ under the canonical identifications [lem-weil-pbc-morphism-into-affine-scheme], and put $g=\\iota_s\\circ q$ [def-pc-proj]. For every $e>0$, $t\\in S_e$, $n\\geq0$ and $\\xi\\in S_{ne}$, put $W=\\operatorname{image}_X(g^{-1}D_+(t))$, $k=n(d-1)$, and $a=g^\\sharp(\\xi/t^n)\\in\\Gamma(W,\\mathcal O_X)$. Then $a\\,\\mu((t^n)|_W\\otimes(t^k)|_W)=(\\xi t^k)|_W$ in $\\Gamma(W,L^{\\otimes(ne+ke)})$, where $\\mu$ is the section-ring tensor multiplication $L^{\\otimes ne}\\otimes L^{\\otimes ke}\\cong L^{\\otimes(ne+ke)}$ [def-sc-invertible-section-ring]. The extra tensor factor is not cancelled in this statement.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-sc-local-free-generator",
+  "def-pc-proj",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put i=ne, j=n(d-1)e and η=ξ*t^(n(d-1)). This numerator has degree i+j=ned. On the intersection of the s- and t-charts set r=t^d/s^e. The homogeneous fraction identity (ξ/t^n)*r^n=η/s^(ne) follows by multiplying numerators and denominators and n+n(d-1)=nd.",
+   "uses": [
+    "def-sc-invertible-section-ring",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+   }
+  },
+  {
+   "text": "Pull the fraction identity back along q. Restriction from the s-chart is localization at r; hq identifies the map on global sections with ρ. On a local basis z of L write s=b*z^d and t=c*z^e; hs makes b a unit. The two applications of hρ to η and t^d give a*(c^d/b^e)^n=η_coeff/b^(ne). Multiply by b^(ne), a unit, to obtain a*c^(nd)=η_coeff. No cancellation of c is needed.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-local-free-generator",
+    "def-sc-invertible-section-ring",
+    "def-pc-proj",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+   }
+  },
+  {
+   "text": "Tensor multiplication and tensorPowAddIso identify c^(nd)*z^(ned) with the product of the restricted sections t^n and t^k. Naturality of these maps turns the local coefficient equality into the displayed equality in L.tensorPow(i+j); sheaf separation glues the local identities. The exponent-zero, d=1 and empty-open cases obey the same formulas.",
+   "uses": [
+    "def-sc-invertible-section-ring",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-sc-local-free-generator",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)",
+  "note": "Y2 expansion of the chart-comparison argument, checked against the online Stacks texts of Tags 01N8 and 01NK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of an invertible module is a free generator on the inverse image of its projective basic open under the section ring coefficient map",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf section ring quotient equation on one Proj chart determines the equation on another chart",
+   "date": "2026-10-13",
+   "results": "Proj.awayMap_awayToSection, Proj.awayToSection, ProjectiveSpectrum.Proj.awayToSection_apply; chart geometry only, no section-ring numerator formula or denominator free generation.",
+   "verdict": "partial matches only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.IsFreeGenerator",
+   "date": "2026-10-13",
+   "results": "No hits; online index does not contain the project-specific declaration.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective_tmulSection_right|awayι.*basicOpen|preimage.*basicOpen; sectionRing_quotient|quotient_chart|chart_transfer; generat.*pow|pow.*generat|nonvanishing.*[Pp]ow in Mathlib and both project roots",
+   "date": "2026-10-13",
+   "results": "Proj.awayι_preimage_basicOpen, Scheme.preimage_basicOpen, IsFreeGenerator.injective_tmulSection_right, IsFreeGenerator.tmulSection. SectionRingProjPreimageForward and Reverse contain private sectionRing_mul_component and power/nonvanishing lemmas. No public theorem supplies either required conclusion. blueprint_refs.py search quotient|section ring|homogeneous localization: no matching blueprint node.",
+   "verdict": "no exact match; use existing tensor cancellation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionRingQuotientChartTransfer",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "## Proof, first sentence: choose powers and sections on each component with affine nonvanishing locus containing T; the canonical-map chart construction and its pointwise verification; single-quotient-chart proof step 2: arbitrary-degree chart verification; chart-transfer proof: cleared numerator identity before tensor cancellation",
+   "via": [
+    "lem-sc-section-ring-quotient-chart-transfer",
+    "lem-sc-section-ring-single-quotient-chart",
+    "lem-sc-ample-proj-compatible-quotient-charts",
+    "lem-sc-ample-proj-canonical-map-chart-formula",
+    "lem-sc-ample-proj-canonical-map",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionRingChartCrossMultiplication",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionRingChartCrossMultiplication.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.sectionRing_chart_cross_multiplication",
+  "statement": "theorem sectionRing_chart_cross_multiplication (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible] (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens) (hs : IsFreeGenerator ((L.tensorPow d).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (s.val d))) (ρ : HomogeneousLocalization.Away (sectionRingGrade L) s.val →+* Γ(X, U)) (hρ : ∀ (n : ℕ) (ξ : sectionRingGrade L (n • d)), ρ (HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n ξ.val ξ.property) • (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op ((s.val ^ n) (n • d)) = (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (ξ.val (n • d))) (q : U.toScheme ⟶ Spec (.of (HomogeneousLocalization.Away (sectionRingGrade L) s.val))) (hq : (Scheme.ΓSpecIso (.of (HomogeneousLocalization.Away (sectionRingGrade L) s.val))).inv ≫ q.appTop = CommRingCat.ofHom ρ ≫ U.topIso.inv) : let g := q ≫ Proj.awayι (sectionRingGrade L) s.val s.property hd ∀ (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e) (n : ℕ) (ξ : sectionRingGrade L (n • e)), let W := U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) let k := n * (d - 1) (show Γ(X, W) from g.app (Proj.basicOpen (sectionRingGrade L) t.val) (Proj.awayToSection (sectionRingGrade L) t.val (HomogeneousLocalization.Away.mk (sectionRingGrade L) t.property n ξ.val ξ.property))) • (L.tensorPowAddIso (n • e) (k • e)).inv.app W (tmulSection ((L.tensorPow (n • e)).presheaf.map (homOfLE (le_top : W ≤ ⊤)).op ((t.val ^ n) (n • e))) ((L.tensorPow (k • e)).presheaf.map (homOfLE (le_top : W ≤ ⊤)).op ((t.val ^ k) (k • e)))) = (L.tensorPow (n • e + k • e)).presheaf.map (homOfLE (le_top : W ≤ ⊤)).op ((ξ.val * t.val ^ k) (n • e + k • e))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T022436-L-3223590",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T022436-L-3223590",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
