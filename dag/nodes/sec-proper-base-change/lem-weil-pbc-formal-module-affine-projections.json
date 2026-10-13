@@ -1,0 +1,118 @@
+{
+ "kind": "statement",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 0888"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleKernel",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-formal-module-affine-projections",
+ "title": "Canonical affine projections of a coherent formal module",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-systems-annihilated-by-power-kernel",
+   "place": "affine projection comparison before the scalar annihilation argument",
+   "via": [
+    "lem-weil-pbc-formal-systems-annihilated-kernel-affine-component"
+   ]
+  },
+  "same_as": null
+ },
+ "statement": "Let X be a Noetherian scheme, I a quasi-coherent ideal sheaf, F a coherent formal module for I, V an affine open, and n a natural number (level n+1). The canonical projection from the ModuleCat limit of the sections F_m(V) to F_n(V) is surjective, and its linear kernel equals I(V)^(n+1) times the whole limit module.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W, the canonical identification M/I^n M=M_n, restricted to an affine open; https://stacks.math.columbia.edu/tag/087W checked 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Restrict F to V. The restriction object theorem preserves the coherent formal system conditions. Identify the affine open scheme with Spec Γ(X,V), and its ideal with the ideal of sections.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine theorem to obtain a limiting cone with surjective level projections and kernel I(V)^(n+1) times its vertex. Use the unique linear isomorphism of this cone with the canonical ModuleCat limiting cone. The projection equations transport surjectivity and the kernel formula; linear isomorphisms transport ideal multiples of the whole module.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-coherent-formal-modules-affine"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "surjectivity and kernel of projection from inverse limit of coherent formal modules on affine open",
+   "results": "AdicCompletion.eval_surjective and scheme inverse-limit section lemmas found; none states the projection formula for coherent formal systems.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.π",
+   "results": "Service unavailable; recorded without a verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "coherentFormalModule.*projection|affine.*projection; rg coherentFormalModules_affine_limit and restriction_objects on lean/",
+   "results": "coherentFormalModules_affine_limit has the projection formula on Spec A with a chosen limiting cone; restriction_objects supplies restriction. No canonical projection formula on an arbitrary affine open.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "surjectivity kernel projection inverse limit coherent formal module affine sections",
+   "results": "Service unavailable (Internal Server Error); no verdict. LeanFinder and source grep performed instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineProjections",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleAffineProjections.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_affine_projections",
+  "statement": "theorem coherentFormalModule_affine_projections\n    (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)\n    (F : CoherentFormalModule X I) (V : X.affineOpens) (n : ℕ) :\n    Function.Surjective\n      (limit.π (F.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op V.1)) (op n)) ∧\n    LinearMap.ker\n      (limit.π (F.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op V.1)) (op n)).hom =\n      I.ideal V ^ (n + 1) • (⊤ : Submodule Γ(X, V.1)\n        (limit (F.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op V.1)) :\n          ModuleCat Γ(X, V.1)))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-599e5",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T003157-L-2428654",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-599e5",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T003157-L-2428654",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs matched their DAG statements, dependencies, source arguments, report, and import-removal record; delivery and direct importer compiled cleanly."
+ }
+}

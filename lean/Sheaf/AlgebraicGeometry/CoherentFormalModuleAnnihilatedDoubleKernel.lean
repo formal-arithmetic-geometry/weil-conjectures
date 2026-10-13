@@ -5,18 +5,12 @@ Authors: SHEAF group M1
 -/
 module
 
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelComponentAffineAnnihilation
 public import Mathlib.Algebra.Category.ModuleCat.Limits
-public import Mathlib.Data.List.TFAE
 public import Mathlib.RingTheory.Ideal.Operations
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Annihilation of kernels and cokernels of coherent formal module maps -/
@@ -53,6 +47,25 @@ theorem coherentFormalModule_annihilated_double_kernel (X : Scheme.{u}) [IsNoeth
     ∀ n : ℕ,
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (2 * t)).2
         (kernel (α.hom.app (op n)))) := by
-  sorry
+  intro n
+  let : (F.obj.obj (op n)).IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+      (F.property.1 n)).1
+  let : (G.obj.obj (op n)).IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+      (G.property.1 n)).1
+  let : (kernel (α.hom.app (op n))).IsQuasicoherent :=
+    Scheme.Modules.isQuasicoherent_kernel (α.hom.app (op n))
+  let S : Set X.affineOpens := Set.range U
+  have hS : ∀ x : X, ∃ V ∈ S, x ∈ V.1 := by
+    intro x
+    have hx : x ∈ (⨆ i, (U i).1) := by simp [hcover]
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+    exact ⟨U i, ⟨i, rfl⟩, hi⟩
+  apply (Scheme.idealPowerProduct_isZero_iff_affine_cover X
+    (kernel (α.hom.app (op n))) K S hS (2 * t)).mpr
+  rintro V ⟨i, rfl⟩
+  exact coherentFormalModule_kernel_component_affine_annihilation
+    X I K F G α (U i) t ht (h i) n
 
 end AlgebraicGeometry

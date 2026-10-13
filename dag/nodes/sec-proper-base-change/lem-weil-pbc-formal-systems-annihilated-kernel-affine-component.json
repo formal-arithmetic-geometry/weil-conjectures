@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-formal-systems-annihilated-kernel-affine-component",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-systems-annihilated-by-power-kernel",
+   "place": "affine component reduction step",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Affine component annihilation for the kernel",
+ "statement": "Let X be a Noetherian scheme, I and K quasi-coherent ideal sheaves, F and G coherent formal modules for I, and alpha:F→G. Fix a single affine open V and t≥1. If K(V)^t annihilates both the kernel and cokernel of the map of section limits over V, then K(V)^(2t) annihilates the sections over V of the kernel of alpha_n, for each n. No covering hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 0888, reduction modulo powers of I and affine kernel comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "The canonical projections from the two section limits to level n are surjective, with kernels J times the respective module, where J=I(V)^(n+1). Naturality of limit projections gives a commuting square with alpha_n(V).",
+   "uses": [
+    "lem-weil-pbc-formal-module-affine-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For f,g in K(V)^t, apply the existing scalar-composite lemma to the limit map a to obtain a linear map k with k a = fg id. Lift a section x of the component kernel through the source projection to z. Its image a(z) lies in J times the target limit. Since k is linear, fg z lies in J times the source limit and projects to zero. Injectivity of the kernel inclusion on sections gives fg x=0. Ideal multiplication extends this to K(V)^(2t).",
+   "uses": [
+    "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-module-affine-projections",
+  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 0888"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ideal annihilates kernel of quotient map using scalar quasi inverse",
+   "results": "General annihilator and torsion quotient lemmas, no formal-system comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.quotKerEquivOfSurjective",
+   "results": "Found the first isomorphism theorem; scalar-composite proof avoids quotient transport.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*ker|ker.*annihilator; rg range_map_kernelι injective_map_kernelι on lean/",
+   "results": "Existing ker_coker_annihilated_mod_ideal and injective_map_kernelι are used directly.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ideal power annihilates kernel of reduced linear map with annihilated kernel and cokernel",
+   "results": "Service unavailable (Internal Server Error); no verdict. LeanFinder and source grep performed instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleKernel",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelComponentAffineAnnihilation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelComponentAffineAnnihilation.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_component_affine_annihilation",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13",
+  "statement": "theorem coherentFormalModule_kernel_component_affine_annihilation\n    (X : Scheme.{u}) [IsNoetherian X]\n    (I K : X.IdealSheafData) (F G : CoherentFormalModule X I) (α : F ⟶ G)\n    (V : X.affineOpens) (t : ℕ) (ht : 1 ≤ t)\n    (h :\n      K.ideal V ^ t ≤ Module.annihilator Γ(X, V.1) (LinearMap.ker\n        (lim.map (Functor.whiskerRight α.hom\n          (SheafOfModules.evaluation X.ringCatSheaf (op V.1)))).hom) ∧\n      K.ideal V ^ t ≤ Module.annihilator Γ(X, V.1)\n        (↥(limit (G.obj ⋙\n          SheafOfModules.evaluation X.ringCatSheaf (op V.1)) :\n          ModuleCat Γ(X, V.1)) ⧸ LinearMap.range\n          (lim.map (Functor.whiskerRight α.hom\n          (SheafOfModules.evaluation X.ringCatSheaf (op V.1)))).hom))\n    (n : ℕ) :\n    K.ideal V ^ (2 * t) ≤\n      Module.annihilator Γ(X, V.1)\n        Γ(kernel (α.hom.app (op n)), V.1)"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-599e5",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T003157-L-2428654",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-599e5",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T003157-L-2428654",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs matched their DAG statements, dependencies, source arguments, report, and import-removal record; delivery and direct importer compiled cleanly."
+ }
+}
