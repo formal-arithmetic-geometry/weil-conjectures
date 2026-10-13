@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.AffineFlatModuleDescent
+import Sheaf.AlgebraicGeometry.FlatModuleDescentAffineCharts
 
 /-!
 # Eventual descent of flatness for finitely presented scheme modules
@@ -62,6 +63,47 @@ theorem exists_eventually_isFlatOver_of_limit
         ((Scheme.Modules.tensorPullback
           (pullback.fst f (Spec.map (R.map (homOfLE (hij.trans hjk)))))).obj M)
         (pullback.snd f (Spec.map (R.map (homOfLE (hij.trans hjk))))) := by
-  sorry
+  open scoped TensorProduct in
+    classical
+    obtain ⟨n, B, N, a, hB, hN, hlimit, hstage⟩ :=
+      exists_flat_module_descent_affine_charts R c hc i f M hflat
+    have hdescent (b : Fin n) : ∃ j : I, i ≤ j ∧
+        ∀ (k : I) (hij : i ≤ j) (hjk : j ≤ k),
+          (letI : Module (R.obj i : Type u) (N b) := Module.compHom _ (a b)
+          letI : Algebra (R.obj i : Type u) (R.obj k : Type u) :=
+            (R.map (homOfLE (hij.trans hjk))).hom.toAlgebra
+          letI : Algebra (R.obj i : Type u)
+              ((R.obj k : Type u) ⊗[(R.obj i : Type u)] (R.obj i : Type u)) :=
+            Algebra.TensorProduct.rightAlgebra
+          letI : Module (R.obj i : Type u)
+              ((R.obj k : Type u) ⊗[(R.obj i : Type u)] (R.obj i : Type u)) :=
+            Algebra.toModule
+          Module.Flat ((R.obj k : Type u) ⊗[(R.obj i : Type u)] (R.obj i : Type u))
+            (((R.obj k : Type u) ⊗[(R.obj i : Type u)] (R.obj i : Type u))
+              ⊗[(R.obj i : Type u)] (N b))) := by
+      let := (a b).toAlgebra
+      let := hB b
+      let := hN b
+      exact exists_eventually_flat_of_finitePresentation (Ni := (N b : Type u))
+        R (colimit.cocone R)
+        (colimit.isColimit R) (Algebra.ofId (R.obj i : Type u) (B b : Type u)) (hlimit b)
+    choose j hij hj using hdescent
+    have hbound (s : Finset (Fin n)) : ∃ k : I, i ≤ k ∧ ∀ b ∈ s, j b ≤ k := by
+      induction s using Finset.induction_on with
+      | empty => exact ⟨i, le_rfl, by simp⟩
+      | @insert b s _ ih =>
+        obtain ⟨k, hik, hk⟩ := ih
+        obtain ⟨l, hkl, hbl⟩ := exists_ge_ge k (j b)
+        refine ⟨l, hik.trans hkl, ?_⟩
+        intro d hd
+        rcases Finset.mem_insert.mp hd with rfl | hd
+        · exact hbl
+        · exact (hk d hd).trans hkl
+    obtain ⟨k, hik, hk⟩ := hbound Finset.univ
+    refine ⟨k, hik, ?_⟩
+    intro l hkl
+    apply hstage l (hik.trans hkl)
+    intro b
+    exact hj b l (hij b) ((hk b (Finset.mem_univ b)).trans hkl)
 
 end AlgebraicGeometry
