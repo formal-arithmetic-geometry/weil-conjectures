@@ -17,37 +17,44 @@
  ],
  "proof": [
   {
-   "text": "Define M=N(V). Injectivity of a and the containment of its range in S give a linear equivalence M to K: m maps to a(m), with the S-membership witness from the containment; every k in K has an a-preimage and uniqueness follows from injectivity. Thus K is finite, and its localization is finite.",
+   "text": "On the affine chart R is Noetherian. The FG hypothesis gives Module.Finite R S. Every submodule of S is finitely generated, so K and its prime localization are finite. Define b:M→S by codRestrict of the actual restriction unit using hMS, and c:M→K by codRestrict again. Injectivity of the unit makes c injective; membership in the comapped range makes c surjective. LinearEquiv.ofBijective and IsLocalizedModule.mapEquiv therefore identify M_p and K_p. These maps are constructed from the given unit, not chosen from an existence theorem.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Let y be the affine point of p. The affine ring stalk comparison identifies R_p with O_L,y. The quasi-coherent affine module stalk presentation identifies M_p with N_y, with the germ scalar action. After localizing M to K, these identify K_p with N_y semilinearly over the ring isomorphism. Mapping regular sequences through the ring isomorphism preserves their membership in the maximal ideal, injective multiplication at each quotient, and quotient nontriviality; hence it preserves depth. The assumed boundary depth bound therefore gives depth(K_p) at least two.",
+   "text": "Use lem-sbc-affine-module-germ-localization on N at the affine point y to localize the actual germ map. The affine ring stalk comparison identifies the stalk ring with R_p. Extend the germ localization equivalence to the localized scalar ring. A proved private semilinear depth-invariance lemma transports maximal ideals, regular sequences and lengths, with the zero-module case giving infinity. Thus depth(M_p)=depth(N_y); compose with the localized equivalence M_p≃K_p and apply the boundary depth hypothesis.",
    "uses": [
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation"
+    "lem-sbc-affine-module-germ-localization",
+    "lem-weil-pbc-affine-open-stalk-localization"
    ],
    "elementary": false
   },
   {
-   "text": "At y in U the restriction unit is an isomorphism on stalks, as restriction followed by open direct image restricts back to the original sheaf. The qcqs direct image is quasi-coherent. Identify its affine prime localization with its stalk by the same affine presentation. Then the composite M_p to S_p to P_p is an isomorphism and both inclusions are injective, so K_p to S_p is surjective. Localization of K to S to S/K is exact; its localized cokernel is therefore zero. The map comparisons are the natural germ maps and localization maps, so the composite is the given unit map.",
+   "text": "An open immersion into a locally Noetherian scheme is quasi-compact; it is quasi-separated. Apply pqf-lem-pushforward-qcoh to G=j_*(N|U). At an interior point, the restricted unit is an isomorphism by the restriction adjunction, since its counit is an isomorphism. Naturality of restrictStalkNatIso transports this to an isomorphism on the original stalks. The module-stalk functor gives its linear map. Apply lem-sbc-affine-module-germ-localization to N and G; stalkFunctor_map_germ_apply identifies the localized unit with that stalk map by IsLocalizedModule.linearMap_ext. Therefore the localized unit M_p→P_p is surjective.",
    "uses": [
     "pqf-lem-pushforward-qcoh",
-    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation"
+    "lem-sbc-affine-module-germ-localization",
+    "def-pc-module-stalk-functor"
    ],
    "elementary": false
+  },
+  {
+   "text": "Localization preserves the injective subtype S→P and the factorizations of a through b and c, as checked on fractions with LocalizedModule.map_mk. Surjectivity M_p→P_p and injectivity S_p→P_p give surjectivity M_p→S_p, hence K_p→S_p. LocalizedModule.map_exact applied to subtype and mkQ identifies the kernel of the localized quotient map with the image of K_p. Since that image is all S_p, the quotient map is zero; since the quotient map is also surjective, every element of (S/K)_p is zero. This supplies Subsingleton and completes the conjunction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+  "def-pc-module-stalk-functor",
+  "lem-sbc-affine-module-germ-localization",
   "lem-weil-pbc-affine-open-stalk-localization",
   "pqf-lem-pushforward-qcoh"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "H2",
+  "by": "T4",
   "document": "Stacks Project",
-  "place": "Tags 0E9I and 0AV8, affine source and interior comparison"
+  "place": "Tags 0E9I and 0AV8, source-depth and interior-local-isomorphism comparison; Tags 01LC and 01HV for qcqs pushforward and affine stalk localization. Lean assembly uses the restriction adjunction and exactness of module localization."
  },
  "mathlib_searches": [
   {
@@ -131,10 +138,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T111852-L-3052350",
-  "kind": "interface",
+  "landing": "20261013T123211-L-3678876",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
