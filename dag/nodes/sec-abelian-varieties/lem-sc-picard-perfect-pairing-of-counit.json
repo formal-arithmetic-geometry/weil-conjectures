@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-picard-perfect-pairing-of-counit",
+ "kind": "statement",
+ "title": "Invertible counit transports a perfect pairing to pushforward",
+ "statement": "Let p:X→Y be a scheme map [def-pc-scheme], with tensor-pullback adjunction [lem-pc-module-pullback-adjunction] whose unit at O_Y is invertible. For M,D on X and ev:M⊗D→O_X with invertible curry, suppose the counit at M is invertible. Then the curry of the explicit pushed-forward pairing [def-sc-picard-cup-product-map] is invertible. No local freeness of p_*M is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final paragraph, perfect pairing and the two displayed mutually dual bases"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-picard-cup-product-map"
+ ],
+ "proof": [
+  {
+   "text": "For every Y-module P identify Hom(P,p_*D) with Hom(p^*P,D) by adjunction, then with Hom(M⊗p^*P,O_X) by the perfect evaluation. Use the invertible counit to replace M by p^*p_*M.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the tensor comparison to identify the tensor source with p^*(p_*M⊗P). Identify O_X with p^*O_Y, apply adjunction and the inverse structure-sheaf unit, then curry. This produces a bijection Hom(P,p_*D)≃Hom(P,dual(p_*M)).",
+   "uses": [
+    "def-sc-picard-cup-product-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the tensor comparison in its second factor follows from naturality of its inverse monoidal comparison. Together with adjunction naturality and the proved cup counit identity, it identifies the bijection with postcomposition by the cup transpose. The Yoneda criterion isIso_iff_yoneda_map_bijective proves invertibility. This argument includes zero modules and empty schemes.",
+   "uses": [
+    "def-sc-picard-cup-product-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-cup-product-map",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Refinement of the supplied local dual-basis plan; categorical transport and stalk argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible adjunction counit and perfect evaluation imply a perfect pushforward pairing",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal closed adjunction curry evaluation counit isomorphism",
+   "results": "CategoryTheory.MonoidalClosed.curry'_uncurry'; CategoryTheory.MonoidalClosed.uncurry_curry; CategoryTheory.MonoidalClosed.curry_uncurry; CategoryTheory.MonoidalClosed.curry_eq; CategoryTheory.MonoidalClosed.curry_id_eq_coev; CategoryTheory.MonoidalClosed.uncurry'_curry'; CategoryTheory.CartesianClosed.curry_eq; CategoryTheory.ihom.ihom_adjunction_counit",
+   "date": "2026-10-13",
+   "verdict": "Useful component lemmas only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*[Cc]urry|[Cc]urry.*homEquiv|isIso_iff_yoneda_map_bijective",
+   "results": "Mathlib/CategoryTheory/Yoneda.lean; Mathlib/CategoryTheory/Yoneda.lean; Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean; Mathlib/CategoryTheory/Limits/Preserves/Bifunctor.lean; Mathlib/Condensed/Light/InternallyProjective.lean; Mathlib/Condensed/Light/InternallyProjective.lean; Mathlib/Condensed/Light/InternallyProjective.lean; Mathlib/CategoryTheory/Generator/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "Useful component lemmas only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCupProductLocalCriterion",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, universal locally closed Picard locus via Tag 0BDP: final paragraph, perfect pairing and the two displayed mutually dual bases",
+   "via": [
+    "lem-sc-picard-cup-product-local-dual-bases",
+    "new-picard-cup-product-equivalence",
+    "lem-sc-picard-cup-product-criterion",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardCupProductOfCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardCupProductOfCounit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_curry_picardPushforwardPairing_of_isIso_counit",
+  "statement": "theorem isIso_curry_picardPushforwardPairing_of_isIso_counit {X Y : Scheme.{u}} (p : X ⟶ Y) (hO : IsIso ((Classical.choose (exists_tensorPullbackAdjunction p)).unit.app (SheafOfModules.unit Y.ringCatSheaf))) (M D : X.Modules) (ev : M ⊗ D ⟶ SheafOfModules.unit X.ringCatSheaf) (hev : IsIso (curry ev)) (hε : IsIso ((Classical.choose (exists_tensorPullbackAdjunction p)).counit.app M)) : IsIso (curry (picardPushforwardPairing p hO M D ev))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T054214-L-441996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T054214-L-441996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

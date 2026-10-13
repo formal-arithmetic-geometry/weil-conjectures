@@ -6,8 +6,10 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardCupProductMap
-import Sheaf.AlgebraicGeometry.PullbackDualFiniteLocallyFree
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
+import Sheaf.AlgebraicGeometry.PicardCounitEqualRanks
+import Sheaf.AlgebraicGeometry.PicardCupProductSplitCounit
+import Sheaf.AlgebraicGeometry.PicardCupProductOfCounit
+import Sheaf.AlgebraicGeometry.PicardPullbackPerfectPairing
 
 /-! # The local dual-basis criterion for degree-zero cup product
 
@@ -29,27 +31,21 @@ base-change compatibility is an assumption of this local calculation.
 Source: Stacks Project, Tag 0BDP, final paragraph, the two displayed dual bases.
 (blueprint: lem-sc-picard-cup-product-local-dual-bases)
 
-Proof: Put p = X_W → W, q = X_W → X, M = q^*E and N = p_*M. Around a point of W,
-shrink to an open U on which N is free of rank r and M on X_U has rank r, using
-hRanks. The tensor-pullback comparisons identify restriction of the adjunction
-counit with the map p_U^*N_U → M_U taking each basis vector to its section.
-If the cup transpose is invertible, its inverse takes the coordinate functionals
-of the basis of N_U to sections of p_*q^*(E^dual) on U. Pullback commutes with the
-finite locally free dual, so these are functionals on M_U. By picardPushforwardPairing_counit,
-their products with the basis sections
-are delta_ij:
-applying the structure-sheaf unit sends their cup product back to evaluation.
-Thus the functionals give a left inverse to the restricted counit. On stalks this
-is a split injection between free modules of rank r over a commutative local ring.
-Its square matrix has a left inverse, hence its determinant is a unit, so it is
-invertible. The resulting inverses glue, proving the forward implication.
-Conversely an invertible counit identifies M with p^*N. Dualizing this identification
-and using the finite locally free projection formula with the structure-sheaf unit
-identifies p_*q^*(E^dual) with N^dual. In these identifications the cup product is
-ordinary evaluation: adjunction takes a section to its evaluation section, and the
-inverse structure unit takes this scalar back to O_W. Its transpose is therefore
-invertible. Rank zero uses empty matrices and the zero sheaf; an empty base has
-an empty covering, so the assertion still holds. -/
+Proof: Put p = X_W → W, q = X_W → X, M = q^*E and N = p_*M.
+If the cup transpose is invertible, the pushed pairing is perfect. Since N is
+finite locally free, pulling this exact pairing back and using the proved cup
+counit identity gives a retraction of p^*N → M. On each neighbourhood supplied
+by hRanks, this is a split injection between locally free modules of rank r.
+At stalks a split injection between finite free modules of equal rank is bijective;
+stalk detection and the open cover therefore make the counit invertible.
+Conversely the explicit evaluation pairing between q^*E and q^*(dual E) is perfect:
+monoidal pullback preserves the exact pairing, and the canonical unit comparison
+differs from the monoidal one by a scalar automorphism. If the counit is invertible,
+for every W-module P the adjunction, perfect evaluation, tensor comparison and
+invertible structure-sheaf unit identify Hom(P,p_*q^*(dual E)) with Hom(P,dual N).
+Naturality and the cup counit identity identify this bijection with postcomposition
+by the cup transpose. Yoneda proves that transpose invertible. Rank zero and empty
+schemes are included in these categorical and stalkwise arguments. -/
 theorem picardCupProduct_isIso_iff_counit_of_local_ranks
     {X S W : Scheme.{u}} (f : X ⟶ S) (E : X.Modules) [E.IsFiniteLocallyFree]
     (j : W ⟶ S)
@@ -68,6 +64,27 @@ theorem picardCupProduct_isIso_iff_counit_of_local_ranks
     IsIso (picardCupProductMap f E j hO) ↔
       IsIso ((Classical.choose
         (Modules.exists_tensorPullbackAdjunction (pullback.snd f j))).counit.app
-          ((Modules.tensorPullback (pullback.fst f j)).obj E)) := by sorry
+          ((Modules.tensorPullback (pullback.fst f j)).obj E)) := by
+  let p := pullback.snd f j
+  let q := pullback.fst f j
+  let M := (Modules.tensorPullback q).obj E
+  let D := (Modules.tensorPullback q).obj (Modules.dual E)
+  let ev : MonoidalCategoryStruct.tensorObj M D ⟶ SheafOfModules.unit (pullback f j).ringCatSheaf :=
+    (Modules.picardTensorObjIso q E (Modules.dual E)).inv ≫
+      (Modules.tensorPullback q).map (Modules.dualEvaluation E) ≫
+        (Modules.picardTensorUnitIso q).hom
+  let adj := Classical.choose (Modules.exists_tensorPullbackAdjunction p)
+  change IsIso (MonoidalClosed.curry (Modules.picardPushforwardPairing p hO M D ev)) ↔
+    IsIso (adj.counit.app M)
+  constructor
+  · intro h
+    have : ((Modules.pushforward p).obj M).IsFiniteLocallyFree := hN
+    have : IsSplitMono (adj.counit.app M) :=
+      Modules.isSplitMono_counit_of_isIso_picardPushforwardPairing p hO M D ev h
+    exact isIso_of_isSplitMono_of_picard_local_ranks f E j
+      ((Modules.pushforward p).obj M) hRanks (adj.counit.app M)
+  · intro h
+    exact Modules.isIso_curry_picardPushforwardPairing_of_isIso_counit p hO M D ev
+      (Modules.isIso_curry_picardPullbackEvaluation q E) h
 
 end AlgebraicGeometry.Scheme

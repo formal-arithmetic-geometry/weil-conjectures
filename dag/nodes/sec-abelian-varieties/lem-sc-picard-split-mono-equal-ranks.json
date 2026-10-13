@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-picard-split-mono-equal-ranks",
+ "kind": "statement",
+ "title": "Split injections of equal local rank are invertible",
+ "statement": "For scheme maps f:X→S and j:W→S [def-pc-scheme], let E be an O_X-module and N an O_W-module. Suppose every w has an open neighbourhood U and r such that N|_U and E|_X_U are finite locally free of rank r [def-sc-finite-locally-free-sheaf]. Any split monomorphism p^*N→q^*E, with p and q the base-change projections and tensor pullback [def-pc-module-pullback], is invertible.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final paragraph, perfect pairing and the two displayed mutually dual bases"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose the supplied U and r at each w. The canonical X_U→X_W is an open immersion and these maps cover X_W. Pullback-composition isomorphisms identify both restrictions with rank-r modules.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every stalk the source and target are finite free and have finrank r. Pullback preserves the retraction identity.",
+   "uses": [
+    "lem-sc-stalk-finite-free-of-finite-locally-free",
+    "lem-sc-finite-locally-free-stalk-finrank"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a split injection a:M→N between equal-rank finite free modules choose a basis isomorphism e:M≃N. The retraction b is surjective; b∘e is a surjective endomorphism, hence injective by Module.End.injective_of_surjective. Thus b is injective, and b∘a=id forces a∘b=id. Stalkwise bijectivity proves each restricted sheaf map invertible, and the open cover reflects invertibility. Zero rank and the empty cover satisfy the same argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-sc-finite-locally-free-stalk-finrank",
+  "lem-sc-stalk-finite-free-of-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Refinement of the supplied local dual-basis plan; categorical transport and stalk argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A split injection between finite locally free sheaves of the same rank is an isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split injection between finite free modules of equal rank is bijective",
+   "results": "LinearMap.linearEquivOfInjective; LinearEquiv.ofInjectiveOfFinrankEq; LinearMap.injective_iff_surjective_of_finrank_eq_finrank; OrzechProperty.bijective_of_surjective_endomorphism; LinearMap.injective_iff_surjective; LinearEquiv.coe_ofInjectiveOfFinrankEq; LinearEquiv.ofInjectiveEndo; LinearMap.linearEquivOfInjective_apply",
+   "date": "2026-10-13",
+   "verdict": "Useful component lemmas only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isSplitMono.*isIso|finrank.*[Ss]plit|injective_of_surjective",
+   "results": "Mathlib/ModelTheory/Substructures.lean; Mathlib/Algebra/Module/FinitePresentation.lean; Mathlib/Algebra/Module/FinitePresentation.lean; Mathlib/Algebra/Exact/Basic.lean; Mathlib/Algebra/Module/Equiv/Basic.lean; Mathlib/Algebra/Module/Submodule/IterateMapComap.lean; Mathlib/Algebra/Module/Submodule/Map.lean; Mathlib/Algebra/Module/CharacterModule.lean",
+   "date": "2026-10-13",
+   "verdict": "Useful component lemmas only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCupProductLocalCriterion",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, universal locally closed Picard locus via Tag 0BDP: final paragraph, perfect pairing and the two displayed mutually dual bases",
+   "via": [
+    "lem-sc-picard-cup-product-local-dual-bases",
+    "new-picard-cup-product-equivalence",
+    "lem-sc-picard-cup-product-criterion",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardCounitEqualRanks",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardCounitEqualRanks.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_of_isSplitMono_of_picard_local_ranks",
+  "statement": "theorem isIso_of_isSplitMono_of_picard_local_ranks {X S W : Scheme.{u}} (f : X ⟶ S) (E : X.Modules) (j : W ⟶ S) (N : W.Modules) (hRanks : ∀ w : W, ∃ U : W.Opens, w ∈ U ∧ ∃ r : ℕ, SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((Modules.tensorPullback U.ι).obj N) r ∧ SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((Modules.tensorPullback (pullback.fst f (U.ι ≫ j))).obj E) r) (a : (Modules.tensorPullback (pullback.snd f j)).obj N ⟶ (Modules.tensorPullback (pullback.fst f j)).obj E) [IsSplitMono a] : IsIso a",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T054214-L-441996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T054214-L-441996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

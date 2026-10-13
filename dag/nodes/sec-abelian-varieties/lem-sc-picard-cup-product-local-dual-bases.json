@@ -16,42 +16,40 @@
  ],
  "proof": [
   {
-   "text": "Use the supplied neighbourhood and shrink it so N has a finite free basis of size r; the pulled-back E on X_U has rank r. Tensor pullback along U is restriction, and the counit carries each basis vector to its section.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "If the cup transpose is invertible, lift the coordinate dual basis through its inverse. Pullback-duality turns these lifted sections into functionals on E on X_U. The proved identity picardPushforwardPairing_counit says their evaluations on the basis sections are δ_ij: the scalar cup product pulls back to evaluation. They give a left inverse to the restricted counit.",
+   "text": "Unfold the explicit cup map as the curry of picardPushforwardPairing for M=q^*E and D=q^*(dual E), with the explicit pulled-back evaluation.",
    "uses": [
-    "def-sc-picard-cup-product-map",
-    "lem-ag-pullback-dual-finite-locally-free"
+    "def-sc-picard-cup-product-map"
    ],
    "elementary": false
   },
   {
-   "text": "At each stalk the counit is a square matrix of size r with a left inverse. Multiplicativity of determinants makes its determinant a unit, hence the adjugate formula makes it invertible. These local inverses are unique and glue to invert the counit.",
-   "uses": [],
-   "elementary": true
+   "text": "If the cup transpose is invertible, finite local freeness of its first direct-image factor gives a split counit by the perfect-pairing splitting theorem. The equal-local-ranks theorem upgrades this split monomorphism to an isomorphism.",
+   "uses": [
+    "lem-sc-picard-perfect-pairing-split-counit",
+    "lem-sc-picard-split-mono-equal-ranks"
+   ],
+   "elementary": false
   },
   {
-   "text": "Conversely an invertible counit identifies q^*E with p^*N. Dualize and use pullback-duality and the finite locally free structure-unit theorem to identify p_*q^*(dual E) with dual N. The same defining cup identity then identifies cup product with ordinary evaluation, whose transpose is the identity. For rank zero all bases are empty and the argument is the identity of the zero sheaf; an empty base has an empty cover.",
+   "text": "Conversely, the explicit pulled-back evaluation is perfect because E is finite locally free. Apply the adjunction and invertible-counit theorem to conclude perfectness of the pushed pairing. Neither projection formula nor pullback-dual comparison is needed.",
    "uses": [
-    "def-sc-picard-cup-product-map",
-    "lem-ag-pullback-dual-finite-locally-free",
-    "lem-sc-finite-locally-free-tensor-unit"
+    "lem-sc-picard-pullback-perfect-evaluation",
+    "lem-sc-picard-perfect-pairing-of-counit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-picard-cup-product-map",
-  "lem-ag-pullback-dual-finite-locally-free",
-  "lem-sc-finite-locally-free-tensor-unit"
+  "lem-sc-picard-perfect-pairing-of-counit",
+  "lem-sc-picard-perfect-pairing-split-counit",
+  "lem-sc-picard-pullback-perfect-evaluation",
+  "lem-sc-picard-split-mono-equal-ranks"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "final paragraph, perfect pairing and the two displayed mutually dual bases"
+  "place": "Supplied final-paragraph plan; converse shortened using a Hom-equivalence argument"
  },
  "mathlib_searches": [
   {
@@ -133,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T015623-L-3030098",
+  "landing": "20261013T054214-L-441996",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
