@@ -24,20 +24,41 @@
  ],
  "proof": [
   {
-   "text": "Apply the abelian-category element chase described in the source.",
+   "text": "For composable f and g, identify the pullback of kernelSubobject g along f with kernelSubobject (f ≫ g). Prove both subobject inclusions by the kernel and pullback universal properties (Subobject.isPullback, pullback_factors, kernelSubobject_factors, kernelSubobject_arrow_comp). Apply this to the maps f and g of [def-sp-exact-couple].",
    "uses": [
-    "lem-sp-derived-couple-exact"
+    "def-sp-exact-couple"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use exact_g of [def-sp-exact-couple] at (p+3,q-2). Transport its codomain along the integer equalities (p+3)-1=p+2 and (q-2)+1=q-1, proved by omega. Substitution reduces the transported statement to exact_g. This gives ker g = im a and, by rewriting the pullback identity, ker d = f inverse(im a).",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Factor f as factorThruImageSubobject f followed by (imageSubobject f).arrow. The first factor is epi. The already proved source-library lemma CategoryTheory.Limits.imageSubobject_comp_of_epi (WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits) removes that epimorphic precomposition from the image of d. Rewrite exact_alpha of [def-sp-exact-couple] to obtain the kernel-alpha variant and retain exact_alpha itself as the sixth clause.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The kernel condition kernel.ι d ≫ d = 0, with d = f ≫ g from [def-sp-exact-couple], factors kernel.ι d ≫ f through kernelSubobject g. Apply imageSubobject_le to this factorization and substitute ker g = im a. Assemble the seven clauses.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-derived-couple-exact"
+  "def-sp-exact-couple"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Section 12.21: statement Lemma 12.21.2 (Tag 011R, proof omitted) with Definitions 12.21.1, 12.21.3 (Tags 011Q, 011S) and Remark 12.21.5 (Tag 0AMJ, whose footnote sketches the well-definedness of g'); the element chases of Steps 2-3 and 7-9 are written by the agent, in the test-object style of Lemma 12.21.4 (Tag 011T) and Lemma Tag 08N5. WANTED: Weibel, An Introduction to Homological Algebra, Section 5.9 (exact couples)."
+  "place": "Lemma 12.21.2 (Tag 011R), clauses (1)--(2), and Remark 12.21.5 (Tag 0AMJ). Direct universal-property proof written by T2; the source omits the proof. Uses Mathlib kernel/pullback/image APIs and the proved source-library imageSubobject_comp_of_epi lemma. Removes the circular dependence on lem-sp-derived-couple-exact."
  },
  "mathlib_searches": [
   {
@@ -149,13 +170,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T194158-L-470988",
-  "kind": "interface",
+  "landing": "20261013T015616-L-3027702",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
