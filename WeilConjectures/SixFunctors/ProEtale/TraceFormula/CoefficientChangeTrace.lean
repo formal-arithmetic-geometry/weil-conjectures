@@ -149,21 +149,18 @@ theorem trace_globalOperator_extendScalars (hG : ExtendScalarsCompatibleOverFiel
           (MonoidalCategory.trace (Correspondence.globalOperator G_R (W.graph G_R hW m) hW)) ≫
         Functor.OplaxMonoidal.η (L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))) := by
   obtain ⟨hc, hF, -⟩ := extendScalars_compactCohomology_stalk hG W hW m
-  letI : HasRightDual ((L(sheafExtendScalars (algebraMap R S) X) ⋙
-      rightDerivedLowerShriek (ModuleCat.{u + 1} S) aX).obj W.obj) :=
-    inferInstanceAs (HasRightDual
-      ((rightDerivedLowerShriek (ModuleCat.{u + 1} S) aX).obj (W.extendScalars S).obj))
-  letI : HasRightDual ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX ⋙
-      L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).obj W.obj) :=
-    inferInstanceAs (HasRightDual ((L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).obj
-      ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).obj W.obj)))
-  have h := MonoidalCategory.trace_conj
+  have he := congrArg (inv ((rightDerivedLowerShriekExtendScalarsMap R S aX).app W.obj) ≫ ·) hF
+  simp only [IsIso.inv_hom_id_assoc] at he
+  rw [← he]
+  exact (MonoidalCategory.trace_conj
+    (X := (rightDerivedLowerShriek (ModuleCat.{u + 1} S) aX).obj (W.extendScalars S).obj)
+    (Y := (L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).obj
+      ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).obj W.obj))
     (asIso ((rightDerivedLowerShriekExtendScalarsMap R S aX).app W.obj)).symm
     ((L(sheafExtendScalars (algebraMap R S) (Spec (.of k)))).map
+      (Correspondence.globalOperator G_R (W.graph G_R hW m) hW))).trans
+    (Functor.map_trace (L(sheafExtendScalars (algebraMap R S) (Spec (.of k))))
       (Correspondence.globalOperator G_R (W.graph G_R hW m) hW))
-  simp only [Iso.symm_hom, Iso.symm_inv, asIso_inv, asIso_hom, reassoc_of% hF,
-    IsIso.inv_hom_id_assoc] at h
-  exact h.trans (Functor.map_trace _ _)
 
 end WeilComplex
 

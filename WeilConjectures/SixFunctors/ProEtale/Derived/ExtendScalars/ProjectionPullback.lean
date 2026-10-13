@@ -85,8 +85,10 @@ lemma sheafExtendScalarsProjectionTranspose_upperStar
       (sheafExtendScalarsProjectionTranspose R S Z).app
         ((ProEtale.upperStar (ModuleCat.{u + 1} R) g).obj P) := by
   have h₀ : (tensorRestrictScalarsUnitUpperStarMap R S g).app P ≫
-      (sheafExtendScalarsProjection R S Z).app ((ProEtale.upperStar (ModuleCat.{u + 1} R) g).obj P) =
-      (ProEtale.upperStar (ModuleCat.{u + 1} R) g).map ((sheafExtendScalarsProjection R S Y).app P) ≫
+      (sheafExtendScalarsProjection R S Z).app
+        ((ProEtale.upperStar (ModuleCat.{u + 1} R) g).obj P) =
+      (ProEtale.upperStar (ModuleCat.{u + 1} R) g).map
+          ((sheafExtendScalarsProjection R S Y).app P) ≫
         (upperStarRestrictScalarsMap R S g).app ((sheafExtendScalars (algebraMap R S) Y).obj P) ≫
         (sheafCompose (ProEt.topology Z) (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map
           ((sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app P) := by
@@ -219,7 +221,8 @@ private lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar_aux
   have hZ := leftDerivedSheafExtendScalarsProjection_transpose R S Z
     (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj K)
   have ha := congrArg (Ψ[Z]).map
-    (leftDerivedTensorRightUpperStarMap_app_comp_counit g (upperStarSheafRestrictScalarsUnitMap R S g) K)
+    (leftDerivedTensorRightUpperStarMap_app_comp_counit g
+      (upperStarSheafRestrictScalarsUnitMap R S g) K)
   have hS := (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorCounit.naturality
     ((Functor.mapHomotopyCategoryCompIso
         (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Y) ⋙
