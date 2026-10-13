@@ -8,6 +8,10 @@ module
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
+import Sheaf.Paper.EtaleHypercohomologySupportedCETotals
+import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
+import Sheaf.CategoryTheory.CartanEilenbergAugmentationQuasiIso
+
 /-! # Support-controlled filtered resolution maps
 
 Source: Stacks Project, Tags 015J, 015K and 0EZM.
@@ -21,6 +25,32 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def sectionsUnit {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (A : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :
+    ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj A ⟶
+    ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj
+      (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj A) where
+  f i := globalSectionsUpperStarMap AddCommGrpCat.{u + 1} f (A.X i)
+  comm' i k _ := ((ceSectionsUnit f).naturality (A.d i k)).symm
+
+private theorem sectionsUnit_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
+    {A B : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ}
+    (a : A ⟶ B) :
+    ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).map a ≫ sectionsUnit f B =
+      sectionsUnit f A ≫
+        ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+          (ComplexShape.up ℤ)).map
+          (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+            (ComplexShape.up ℤ)).map a) := by
+  apply HomologicalComplex.hom_f_injective
+  funext i
+  exact (ceSectionsUnit f).naturality (a.f i)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
@@ -138,6 +168,110 @@ theorem exists_etaleHypercohomology_supported_resolution_maps :
                     (((D X K).H n).antitone_step (Int.le_add_one (le_refl q))))
                   (Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q)
                     (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q))))
-                  (t (q + 1)) (t q) (hc q)) := by sorry
+                  (t (q + 1)) (t q) (hc q)) := by
+  classical
+  obtain ⟨D, M, eInf, hE, hA⟩ :=
+    exists_etaleHypercohomology_supported_ce_filtered_totals
+  refine ⟨D, M, eInf, hE, ?_⟩
+  intro X Y f K L v n j hj w hw
+  obtain ⟨u, hu, hstable⟩ := hA f K L v
+  let g := u ≫ (D Y L).comparison
+  let s := ceSectionsLift f g
+  let e := (D X K).totalSectionsIso
+  have hg : Nonempty (Homotopy
+      (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (ComplexShape.up ℤ)).map (D X K).aug ≫ g) (v ≫ (D Y L).ρ.map)) := by
+    obtain ⟨h⟩ := (D Y L).over_K
+    exact ⟨by simpa only [g, ← Category.assoc, hu] using h.compLeft v⟩
+  let F := (upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  let ΓY := (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  let A := (((CartanEilenbergPresentation.mappedFunctor
+    (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))).obj
+      (D X K).I).flip).total (ComplexShape.up ℤ)
+  let Q := HomotopyCategory.quotient
+    (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (ComplexShape.up ℤ)
+  let : QuasiIso (D X K).aug := Functor.cartanEilenberg_augmentation_quasiIso
+    K.obj (D X K).I (D X K).a (D X K).below (D X K).rows
+    (D X K).aug (D X K).aug_formula
+  let := (D Y L).ρ.isKInjective
+  have hew : (D X K).w = e.hom ≫
+      ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (ComplexShape.up ℤ)).map (D X K).comparison :=
+    (D X K).totalSectionsIso_comparison.symm
+  -- Both maps out of the CE total extend the same augmented map. Cancel that augmentation.
+  have hcomp : Nonempty (Homotopy (F.map (D X K).aug ≫
+      (F.map (D X K).comparison ≫ j)) (v ≫ (D Y L).ρ.map)) := by
+    have h := ((upperStar AddCommGrpCat.{u + 1} f).mapHomotopy
+      (D X K).over_K.some).compRight j
+    have h' := h.trans hj.some
+    rw [Functor.map_comp] at h'
+    exact ⟨by simpa only [Category.assoc] using h'⟩
+  have heq : Q.map g = Q.map (F.map (D X K).comparison ≫ j) := by
+    apply (CochainComplex.IsKInjective.precomp_bijective_of_quasiIso
+      (F.map (D X K).aug) (D Y L).ρ.complex).injective
+    have h₁ := HomotopyCategory.eq_of_homotopy _ _ hg.some
+    have h₂ := HomotopyCategory.eq_of_homotopy _ _ hcomp.some
+    simpa only [Functor.map_comp] using h₁.trans h₂.symm
+  have h := HomotopyCategory.homotopyOfEq _ _ heq
+  -- Apply Γ to the homotopy and precompose by the sectionwise inverse-image unit.
+  have hs' : s = sectionsUnit f A ≫ ΓY.map g := by
+    apply HomologicalComplex.hom_f_injective
+    funext i
+    rfl
+  have hw' : w = sectionsUnit f (D X K).ρ.complex ≫ ΓY.map j := by
+    apply HomologicalComplex.hom_f_injective
+    funext i
+    exact hw i
+  have hΓ : HomologicalComplex.homologyMap (e.hom ≫ s) n =
+      HomologicalComplex.homologyMap ((D X K).w ≫ w) n := by
+    rw [hs']
+    have hΓh := (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomotopy h
+    have hh := (hΓh.compLeft (e.hom ≫ sectionsUnit f A)).homologyMap_eq n
+    simp only [Category.assoc] at hh
+    rw [hh, hew, hw']
+    simp only [ΓY, Functor.map_comp, Category.assoc]
+    rw [← Category.assoc (sectionsUnit f A), ← sectionsUnit_naturality f]
+    simp only [Category.assoc]
+  -- The canonical c_X is the cohomology map of D.w followed by the resolution comparison.
+  have hconj : ((D X K).c n).inv ≫ HomologicalComplex.homologyMap (e.hom ≫ s) n ≫
+      (@resolutionEtaleCohomologyIso.{u} Y L.obj (D Y L).ρ.complex
+        (D Y L).ρ.map (D Y L).ρ.quasiIso (D Y L).ρ.isKInjective n).hom =
+      (@resolutionEtaleCohomologyIso.{u} X K.obj (D X K).ρ.complex
+        (D X K).ρ.map (D X K).ρ.quasiIso (D X K).ρ.isKInjective n).inv ≫
+        HomologicalComplex.homologyMap w n ≫
+        (@resolutionEtaleCohomologyIso.{u} Y L.obj (D Y L).ρ.complex
+          (D Y L).ρ.map (D Y L).ρ.quasiIso (D Y L).ρ.isKInjective n).hom := by
+    rw [hΓ, HomologicalComplex.homologyMap_comp]
+    have hc : ((D X K).c n).inv ≫ HomologicalComplex.homologyMap (D X K).w n =
+        (@resolutionEtaleCohomologyIso.{u} X K.obj (D X K).ρ.complex
+          (D X K).ρ.map (D X K).ρ.quasiIso (D X K).ρ.isKInjective n).inv := by
+      apply (cancel_mono
+        (@resolutionEtaleCohomologyIso.{u} X K.obj (D X K).ρ.complex
+          (D X K).ρ.map (D X K).ρ.quasiIso (D X K).ρ.isKInjective n).hom).1
+      rw [Category.assoc, ← (D X K).c_formula n, Iso.inv_hom_id, Iso.inv_hom_id]
+    simp only [← Category.assoc, hc]
+  have htotal :
+      ((D X K).totalSectionsIso.hom ≫ ceSectionsLift f u ≫
+        (D Y L).totalSectionsIso.inv) ≫ (D Y L).w = e.hom ≫ s := by
+    rw [← (D Y L).totalSectionsIso_comparison]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    rw [← ceSectionsLift_comp]
+  have habut :
+      HomologicalComplex.homologyMap
+        ((D X K).totalSectionsIso.hom ≫ ceSectionsLift f u ≫
+          (D Y L).totalSectionsIso.inv) n ≫ ((D Y L).c n).hom =
+      HomologicalComplex.homologyMap (e.hom ≫ s) n ≫
+        (@resolutionEtaleCohomologyIso.{u} Y L.obj (D Y L).ρ.complex
+          (D Y L).ρ.map (D Y L).ρ.quasiIso (D Y L).ρ.isKInjective n).hom := by
+    rw [(D Y L).c_formula]
+    rw [← Category.assoc, ← HomologicalComplex.homologyMap_comp, htotal]
+  obtain ⟨t, ht, hpage⟩ := hstable n
+  refine ⟨t, ?_, hpage⟩
+  intro q
+  rw [ht q, ← Category.assoc, habut]
+  simpa only [Category.assoc] using congrArg
+    (fun z ↦ (((D X K).H n).step q).arrow ≫ z) hconj
 
 end AlgebraicGeometry.Etale

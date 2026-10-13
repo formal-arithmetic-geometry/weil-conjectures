@@ -19,49 +19,50 @@
  },
  "proof": [
   {
-   "text": "1. Choose the supported CE resolution before constructing its presentation; an arbitrary\n   existential presentation from exists_etaleHypercohomology_ce_total_maps does not suffice.\n   If K is zero in all degrees, use the zero CE resolution. Otherwise its nonzero degrees\n   have a least element b. Shift K so that b becomes zero, apply\n   exists_cartanEilenberg_resolution, and reindex back. Its zero negative rows then give\n   zero rows below b, hence below every lower bound a of K, simultaneously. Perform the\n   filtered total and page construction on these resolutions. Extend the resolution index\n   by zero; the second filtration L satisfies\n   L^p Tot^i = 0 for p > i and L^p Tot^i = Tot^i\n   for p ≤ a. The signed row comparisons give the displayed E₁ equation.",
+   "text": "Choose D, M and eInf jointly from the support-controlled augmented CE-total construction. Retain its first-page equation, strict augmentation square and stationary comparison for the same chosen total map u. No arbitrary presentation or stationary isomorphism is substituted.",
    "uses": [
-    "lem-weil-pbc-ce-total-filtered-maps",
-    "lem-sp-cartan-eilenberg-exists"
+    "lem-weil-pbc-supported-ce-filtered-totals"
    ],
    "elementary": false
   },
   {
-   "text": "2. If r ≥ max(1,q-a+2,n-q+2), then q+r > n+1 and q-r+1 ≤ a.\n   Hence the outer filtration steps in degrees n+1 and n-1 are respectively zero\n   and the whole object. The cycle/boundary formulas are their stationary formulas.\n   Apply stableSubquotient_at_bounds and transport the cohomology image filtration\n   along the specified total-to-derived comparison c. Use the canonical representative\n   quotient comparisons, rather than arbitrary isomorphisms. They depend only on q,n,r,\n   and not on the witness a. Thus eInf is defined for the existential stable-range proof;\n   proof irrelevance handles different witnesses and support bounds.",
-   "uses": [
-    "lem-sp-filtered-stable-subquotient-at-bounds"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "3. Exact inverse image and the CE comparison lift yield filtered total maps. Such a map\n   sends a cycle representative in L^q to a cycle in the target L^q, and sends a boundary\n   representative to a boundary. On the stationary quotient its map therefore sends the\n   class of z to the class of its image. The cohomology image restriction sends the same\n   class to the same image class. After quotienting by the next filtration step these\n   maps agree by the cokernel universal property. This gives precisely the displayed\n   cokernel map and proves its compatibility with the stationary comparisons.",
-   "uses": [
-    "lem-weil-pbc-ce-total-filtered-maps"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "4. For any supplied resolution lift j over v, the CE augmentation is a quasi-isomorphism\n   by cartanEilenberg_augmentation_quasiIso. Precomposition into the target K-injective\n   resolution is injective in the homotopy category, so the CE lift and comparison\n   followed by j are homotopic. Apply Γ and precompose with the sectionwise unit.\n   Its naturality and the finite-diagonal summand formulas identify the two endpoints\n   with the total-section map and the presentation w followed by the supplied w.\n   Homotopic maps have equal homology maps. Using c_formula cancels the source total\n   comparison, giving precisely the displayed conjugate of H(w). Restrict to the image\n   filtration for t and ht; naturality from step 3 gives the final equation for any hc.\n   Empty schemes, zero complexes and bidegrees outside the support are included: all\n   corresponding subquotients are zero and their comparisons are the unique maps.",
+   "text": "For a supplied resolution lift j, let g be u followed by the target comparison. The strict augmentation square and over_K give the homotopy hg. The source augmentation is a quasi-isomorphism. Exact inverse image preserves it. Both g and inverse image of the source comparison followed by j extend v up to homotopy. Injectivity of precomposition into the target K-injective resolution therefore equates their homotopy classes.",
    "uses": [
     "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
-    "lem-sp-kinjective-comparison-principle"
+    "lem-sp-kinjective-comparison-principle",
+    "def-weil-pbc-inverse-image"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply global sections to the homotopy and precompose with the sections unit and totalSectionsIso. Naturality of the unit and totalSectionsIso_comparison identify the other endpoint with the presentation w_X followed by the supplied w. Homotopy.homologyMap_eq gives hGamma. Postcomposition functoriality of ceSectionsLift identifies the chosen CE-total map followed by w_Y with totalSectionsIso_X.hom followed by ceSectionsLift(f,g).",
+   "uses": [
+    "lem-weil-pbc-ce-total-sections-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use c_formula and homologyMap_comp. Cancel the source resolution comparison to obtain hconj: the CE-total abutment map is exactly the conjugate of homologyMap w by the two resolutionEtaleCohomologyIso maps. Keep the same t and rewrite its inclusion equation using habut and hconj. The stationary-page equation is unchanged because it depends on t and hc, not on the proof ht.",
+   "uses": [
+    "def-weil-pbc-termwise-hypercohomology-presentation"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ce-total-filtered-maps",
-  "lem-sp-cartan-eilenberg-exists",
-  "lem-sp-filtered-stable-subquotient-at-bounds",
+  "lem-weil-pbc-supported-ce-filtered-totals",
   "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
-  "lem-sp-kinjective-comparison-principle"
+  "lem-sp-kinjective-comparison-principle",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "def-weil-pbc-termwise-hypercohomology-presentation"
  ],
  "proof_origin": {
-  "by": "worker W3",
-  "group": "W3",
+  "by": "agent",
+  "group": "H4",
   "date": "2026-10-13",
   "document": "Stacks Project, Tags 015J, 015K and 0EZM",
-  "place": "Support refinement of the CE total-map and filtered-resolution constructions; decomposition of the uniform-bound plan"
+  "place": "Lean homotopy comparison adapted from the proved EtaleHypercohomologyFilteredResolutionMaps and CETotalMaps; support-controlled CE stage isolated in one new obligation"
  },
  "mathlib_searches": [
   {
@@ -134,12 +135,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261012T225337-L-1815536",
+  "landing": "20261013T004334-L-2509013",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
