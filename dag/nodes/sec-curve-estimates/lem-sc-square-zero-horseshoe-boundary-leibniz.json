@@ -17,47 +17,57 @@
  ],
  "proof": [
   {
-   "text": "Use module_exactness_local_lifting for the underlying epimorphism p to choose a common open cover with lifts b_a of f and c_a of g. The products b_a*c_a lift fg. The image of i is the sectionwise kernel, so their overlap differences have unique preimages z_f,z_g,z_fg in I. Triple differences telescope to zero, giving Cech cocycles. The product of two image sections of i vanishes: hw implies each image is killed by p, and the square-zero hypothesis applies.",
+   "text": "Use module_exactness_local_lifting twice for the epimorphism underlying p, obtaining covers with lifts b of f and c of g. The product-indexed intersections form a common cover because infimum distributes over arbitrary suprema of opens. Restrict the lifts to these intersections. Naturality of p and functoriality of restriction show that they still lift f and g; their products lift fg.",
    "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-    "def-weil-pbc-exact-sequence"
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
    ],
    "elementary": false
   },
   {
-   "text": "On every overlap, b_a*c_a-b_b*c_b=(b_a-b_b)*c_a+b_b*(c_a-c_b). Apply the local-lift action equation to g with lift c_a, and to f with lift b_b; commutativity gives i(z_fg)=i(mu(g)(z_f)+mu(f)(z_g)). Injectivity of i on sections identifies these cocycles. This is purely ring algebra once the cocycles and the given lift-action equation are available.",
-   "uses": [],
+   "text": "Choose the canonical comparison family and its coefficient naturality using cechH1Map_natural. Apply boundary_cech_compatibility with that same comparison to f, g and fg, using b, c and their products respectively. This gives cycles zf, zg, zfg with overlap components b1-b0, c1-c0 and b1*c1-b0*c0 and whose classes map to the three triangle-boundary classes. The convention is t1-t0 throughout.",
+   "uses": [
+    "lem-sc-cech-h1-map-natural",
+    "lem-sc-boundary-cech-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove zfg=cyclesMap(mu f)(zg)+cyclesMap(mu g)(zf) by injectivity of the cycles inclusion, product projection extensionality, and sectionwise injectivity of i (evaluation preserves monomorphisms). The coefficient map acts componentwise by mu. Naturality of p shows b0 and c1 on each overlap lift f and g. Apply hlift to these two lifts. The image equation is then b1*c1-b0*c0=b0*(c1-c0)+c1*(b1-b0), proved by commutative ring algebra. No extra square-zero argument is needed because hlift already states the needed multiplication compatibility.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-pbc-exact-sequence"
+   ],
    "elementary": true
   },
   {
-   "text": "The local-lift boundary theorem identifies the three Cech classes with the connecting classes. Its square-zero hypothesis on image sections follows from hw as above. The canonical Cech comparison is natural in module endomorphisms and additive. Thus it sends the preceding cocycle equality to the Leibniz identity in H1. A uniform reversal of the difference convention reverses all three classes and preserves the identity; use a single convention throughout.",
+   "text": "Apply the additive homology-class map to the cycle equality. HomologicalComplex.homologyπ_naturality identifies the classes of the mapped cycles. Apply the linear canonical comparison, use cechH1Map_natural for mu f and mu g, and substitute the three boundary equations to obtain Leibniz for the triangle boundary.",
    "uses": [
-    "lem-sc-boundary-cech-local-lifts",
-    "lem-sc-cech-h1-map-natural"
+    "lem-sc-cech-h1-map-natural",
+    "lem-sc-boundary-cech-compatibility"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compute connecting classes in the chosen compatible resolutions. The horseshoe delta-functor theorem and comparison maps between resolutions give equality of transported snake boundaries for the identity ladder on the short exact sequence. Equivalently, choose a compatible resolution to compute the Cech-to-derived comparison and compute its connecting map with the same snake construction. Naturality of the resolution isomorphisms identifies this with the supplied IA,IB,IC,alpha,beta; the augmentation in degree zero is toRightDerivedZero. Hence the map d in the statement gives the same connecting classes, and the identity applies to d.",
+   "text": "Specialize rightDerived_triangle_connecting to global sections and the supplied compatible resolutions. Substitute its horseshoe-boundary equation in its triangle equation, cancel the source eqToHom transport and the target single-object comparison isomorphism, and unfold moduleCohomologyBoundary. This identifies the transported snake boundary with the triangle boundary. Short-exactness proofs are proof-irrelevant, so it applies to the supplied hΓ. Precompose by toRightDerivedZero and evaluate at the three sections, giving exactly the specified d identity.",
    "uses": [
-    "lem-weil-pbc-horseshoe-delta-functor",
-    "lem-weil-pbc-derived-functor-map-via-lift"
+    "lem-sc-p1-right-derived-triangle-connecting"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-exact-sequence",
-  "lem-sc-boundary-cech-local-lifts",
+  "def-weil-pbc-site-cech-complex",
+  "lem-sc-boundary-cech-compatibility",
   "lem-sc-cech-h1-map-natural",
-  "lem-weil-pbc-derived-functor-map-via-lift",
-  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-sc-p1-right-derived-triangle-connecting",
   "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "K3 stage-3 worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Lemma 0B8S proof; https://stacks.math.columbia.edu/tag/0B8S"
+  "place": "Tag 0B8S (lemma-boundary-derivation-over-cup-product), common-cover local-lift product calculation; existing right-derived triangle comparison supplies the boundary identification"
  },
  "mathlib_searches": [
   {
@@ -139,10 +149,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T000046-L-2231942",
-  "kind": "interface",
+  "landing": "20261013T113348-L-3185851",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
