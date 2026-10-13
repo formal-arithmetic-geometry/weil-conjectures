@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-formal-comparison-completed-affine-adjunction-model",
+ "kind": "statement",
+ "title": "Algebraized adjunction model of the completed affine comparison",
+ "statement": "Let $Y$ be Noetherian, $f:X\\to Y$ proper, and $J,K$ quasi-coherent ideal sheaves. Assume $f$ is an isomorphism over $Y\\setminus V(K)$ [def-weil-proper-morphism]. Fix an adjunction $f^*\\dashv f_*$ [def-pc-module-pullback], a coherent formal $J$-system $G$, coherent $F$ on $X$, an isomorphism $\\beta:f^*G\\simeq F^\\wedge$, and coherence of $f_*F$ [def-weil-pbc-coherent-formal-module]. Let $\\kappa:(f_*F)^\\wedge\\to f_*(F^\\wedge)$ have $\\pi_n\\kappa_n=f_*(\\pi_n)$ and let $\\alpha:G\\to(f_*F)^\\wedge$ have $\\alpha_n\\kappa_n=\\eta_{G_n}f_*(\\beta_n)$ at every positive level. For an affine $U$, put $B=\\Gamma(U,\\mathcal O_Y)$, $R=\\widehat B_{J(U)}$ [def-weil-pbc-adic-completion], $L=K(U)R$, and let $Q$ be the ideal sheaf of $L$ on $\\operatorname{Spec}R$.  For each such U there exist a scheme Z, a proper morphism p:Z to Spec R which is an isomorphism over Spec R minus V(L), an adjunction p^* left adjoint to p_*, coherent modules A0 on Spec R and F0 on Z, an isomorphism b:p^*A0 to F0, and coherence of p_*F0. There are B-linear isomorphisms from the section inverse limits of G and of the completion of f_*F to the restrictions of the R-modules of sections of A0 and p_*F0. Under these isomorphisms the inverse-limit map of alpha is sections of the adjunction unit followed by p_*b. [def-pc-fibre-product] [pqf-def-coherent] No invertibility of that module map is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-adic-completion",
+  "pqf-def-coherent",
+  "def-weil-proper-morphism",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Proof, completed-base change and algebraization paragraphs (steps 1 and 2 of the parent node)"
+ },
+ "proof": [
+  {
+   "text": "First use uniqueness of adjunctions for the same functors to absorb the natural automorphism relating the supplied and standard units into beta, preserving beta being an isomorphism and the alpha equation. Restrict to U=Spec B and base change to Spec R. Noetherian completion is flat and has unchanged positive ideal-power quotients. Degree-zero canonical flat base change identifies pushforwards and their quotient and adjunction maps. Quotient projections are epi, and formal functions identifies lim kappa as invertible; hence the two equations uniquely identify lim alpha before and after completion.",
+   "uses": [
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-flat-base-change-map-sections",
+    "lem-weil-pbc-theorem-formal-functions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Algebraize the pulled-back formal source over complete R by the affine equivalence. Coherence of tensor pullback and compatibility with completion permit full faithfulness over the proper source to lift beta and its inverse to inverse coherent maps. Proper coherent direct image gives a coherent target. The comparison equations identify alpha with completion of the adjunction map followed by pushforward of this lifted isomorphism.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-formal-completion-fully-faithful-proper",
+    "lem-pc-coherent-hi",
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take Z to be the base change to Spec R of the restriction of X to U, and p its proper projection. The inverse image of Y minus V(K) is the complement of V(K(U)R); the given isomorphism over that open remains an isomorphism after this base change. This establishes the projection hypothesis and properness, without asserting invertibility of its module adjunction unit.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package the algebraized coherent source A0, the pulled-back coherent F0, the lifted isomorphism b, the coherent direct-image witness, and the two section-limit isomorphisms. The naturality calculation from the first two steps gives the square with sections of the unit followed by pushforward of b. The statement asserts no invertibility of this map. Empty completed spectra satisfy the same construction.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-proper-morphism",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-flat-base-change-map-sections",
+  "lem-weil-pbc-flat-base-change-resolution-iso",
+  "lem-weil-pbc-formal-completion-fully-faithful-proper",
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-theorem-formal-functions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Proof, completed-base change and algebraization paragraphs (steps 1 and 2 of the parent node); Lean proof and explicit glue by B3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a proper scheme over the completed base algebraize a formal pullback isomorphism to obtain a coherent adjunction comparison with commuting inverse limit section square",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme over the completed base algebraize a formal pullback isomorphism to obtain a coherent adjunction comparison with commuting inverse limit section square",
+   "results": "Eight pullbackSpecIso projection and base-map formulas in Mathlib.AlgebraicGeometry.Pullbacks. No formal algebraization theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*completion|completion.*formal",
+   "results": "Five occurrences concerning formally smooth rings and formal properties of adic completion. No coherent geometric adjunction model.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineRestrictionIso",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-comparison-completed-affine-restriction-iso",
+   "place": "Proof, completed-base change and algebraization paragraphs (steps 1 and 2 of the parent node)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineAdjunctionModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalComparisonCompletedAffineAdjunctionModel.lean",
+  "declaration": "AlgebraicGeometry.formalComparison_completed_affine_adjunction_model",
+  "statement": "theorem formalComparison_completed_affine_adjunction_model\n    {X Y : Scheme.{u}} [IsNoetherian Y]\n    (J K : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]\n    (hV : IsIso (pullback.snd f (Scheme.Opens.ι K.support.compl)))\n    (adj : Scheme.Modules.tensorPullback f ⊣ Scheme.Modules.pushforward f)\n    (G : CoherentFormalModule Y J) (F : CoherentModules X)\n    (β : G.obj ⋙ Scheme.Modules.tensorPullback f ≅\n      formalCompletionSystem (J.comap f) F.obj)\n    (h : RingedSpace.IsCoherent Y.toRingedSpace\n      ((Scheme.Modules.pushforward f).obj F.obj))\n    (κ : formalCompletionSystem J ((Scheme.Modules.pushforward f).obj F.obj) ⟶\n      formalCompletionSystem (J.comap f) F.obj ⋙ Scheme.Modules.pushforward f)\n    (α : G ⟶ (completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩)\n    (hκ : ∀ n : ℕ,\n      formalModuleQuotientπ J (n + 1) ((Scheme.Modules.pushforward f).obj F.obj) ≫\n        κ.app (op n) =\n      (Scheme.Modules.pushforward f).map\n        (formalModuleQuotientπ (J.comap f) (n + 1) F.obj))\n    (hα : ∀ n : ℕ, α.hom.app (op n) ≫ κ.app (op n) =\n      adj.unit.app (G.obj.obj (op n)) ≫\n        (Scheme.Modules.pushforward f).map (β.hom.app (op n))) :\n    ∀ U : Y.affineOpens,\n      let B := Γ(Y, U.1)\n      let R := AdicCompletion (J.ideal U) B\n      let L := (K.ideal U).map (algebraMap B R)\n      let Q := Scheme.IdealSheafData.ofIdealTop\n        (L.map (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom)\n      ∃ (Z : Scheme.{u}) (p : Z ⟶ Spec (CommRingCat.of R))\n        (adjR : Scheme.Modules.tensorPullback p ⊣ Scheme.Modules.pushforward p)\n        (A₀ : CoherentModules (Spec (CommRingCat.of R))) (F₀ : CoherentModules Z)\n        (b : (Scheme.Modules.tensorPullback p).obj A₀.obj ≅ F₀.obj)\n        (hD : RingedSpace.IsCoherent (Spec (CommRingCat.of R)).toRingedSpace\n          ((Scheme.Modules.pushforward p).obj F₀.obj)),\n        IsProper p ∧ IsIso (pullback.snd p (Scheme.Opens.ι Q.support.compl)) ∧\n        ∃ eA₀ : limit (G.obj ⋙ SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≅\n            (ModuleCat.restrictScalars (algebraMap B R)).obj\n              ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj A₀.obj),\n        ∃ eD₀ : limit (((completion Y J).obj\n            ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩).obj ⋙\n              SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≅\n            (ModuleCat.restrictScalars (algebraMap B R)).obj\n              ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj\n                ((Scheme.Modules.pushforward p).obj F₀.obj)),\n          lim.map (Functor.whiskerRight α.hom\n            (SheafOfModules.evaluation Y.ringCatSheaf (op U.1))) ≫ eD₀.hom =\n          eA₀.hom ≫ (ModuleCat.restrictScalars (algebraMap B R)).map\n            ((moduleSpecΓFunctor (R := CommRingCat.of R)).map\n              (adjR.unit.app A₀.obj ≫ (Scheme.Modules.pushforward p).map b.hom))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630728",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

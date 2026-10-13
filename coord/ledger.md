@@ -11605,3 +11605,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/A4/Sheaf.RingTheory.ArtinianCoefficientSubalgebraStructure (stage 3; reviewer PASS; first push; landing 20261013T082329-L-1630328 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/B2/Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift (stage 3; reviewer PASS; first push; landing 20261013T082330-L-1630429 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:23 L: merged deliver/B2/Sheaf.AlgebraicGeometry.NormalizedHomotopyTensorHom (stage 3; reviewer PASS; first push; landing 20261013T082330-L-1630580 (interface); batch 20261013T082326; modules 4; new nodes 3)
+- 08:23 L: merged deliver/B3/Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineRestrictionIso (stage 3; reviewer PASS; after a return; landing 20261013T082330-L-1630728 (interface); batch 20261013T082326; modules 4; new nodes 3)

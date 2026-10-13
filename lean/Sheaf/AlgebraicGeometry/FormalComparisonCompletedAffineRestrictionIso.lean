@@ -12,6 +12,12 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 
+import Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineAdjunctionModel
+import Sheaf.AlgebraicGeometry.TensorPullbackUnitRestrictionIso
+import Sheaf.AlgebraicGeometry.CompletedAffineCoherentIsoLift
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+
 /-! # The completed affine comparison is invertible off the exceptional ideal
 
 Source: Stacks Project, Tag 088B, proof, completed-base adjunction argument.
@@ -28,6 +34,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 800000 in
+-- The nested affine-limit and section functors require additional elaboration heartbeats.
 /-- A coherent realization of the canonical comparison is invertible off the
 extended exceptional ideal. Unlike the model theorem, this supplies no objects,
 map, or limit isomorphisms: all are inputs and the commuting square is a hypothesis.
@@ -101,6 +110,70 @@ theorem formalComparison_completed_affine_restriction_isIso
           eA.hom ≫ (ModuleCat.restrictScalars (algebraMap B R)).map
             ((moduleSpecΓFunctor (R := CommRingCat.of R)).map c)) →
           IsIso ((Scheme.Modules.restrictFunctor
-            (Scheme.Opens.ι Q.support.compl)).map c) := by sorry
+            (Scheme.Opens.ι Q.support.compl)).map c) := by
+  intro U
+  dsimp only
+  classical
+  let B := Γ(Y, U.1)
+  let R := AdicCompletion (J.ideal U) B
+  let L := (K.ideal U).map (algebraMap B R)
+  let Q := Scheme.IdealSheafData.ofIdealTop
+    (L.map (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom)
+  intro A D c eA eD hs
+  have : IsNoetherianRing B := IsLocallyNoetherian.component_noetherian U
+  have : IsNoetherianRing R := AdicCompletion.isNoetherianRing (J.ideal U)
+  obtain ⟨Z, p, adjR, A₀, F₀, b, hD, _, hp, eA₀, eD₀, hs₀⟩ :=
+    formalComparison_completed_affine_adjunction_model
+      J K f hV adj G F β h κ α hκ hα U
+  let D₀ : CoherentModules (Spec (CommRingCat.of R)) :=
+    ⟨(Scheme.Modules.pushforward p).obj F₀.obj, hD⟩
+  let c₀ : A₀.obj ⟶ D₀.obj :=
+    adjR.unit.app A₀.obj ≫ (Scheme.Modules.pushforward p).map b.hom
+  let S := ModuleCat.restrictScalars (algebraMap B R)
+  let T := moduleSpecΓFunctor (R := CommRingCat.of R)
+  let V := Scheme.Modules.restrictFunctor (Scheme.Opens.ι Q.support.compl)
+  have hu := Scheme.Modules.tensorPullback_unit_restriction_isIso
+    p Q.support.compl hp adjR A₀.obj
+  have hc₀ : IsIso (V.map c₀) := by
+    dsimp only [c₀]
+    rw [V.map_comp]
+    infer_instance
+  obtain ⟨a, ha⟩ := completedAffine_coherent_iso_lift B (J.ideal U) A A₀
+    (eA.symm ≪≫ eA₀)
+  obtain ⟨d, hd⟩ := completedAffine_coherent_iso_lift B (J.ideal U) D D₀
+    (eD.symm ≪≫ eD₀)
+  change S.map (T.map a.hom) = eA.inv ≫ eA₀.hom at ha
+  change S.map (T.map d.hom) = eD.inv ≫ eD₀.hom at hd
+  change _ ≫ eD.hom = eA.hom ≫ S.map (T.map c) at hs
+  change _ ≫ eD₀.hom = eA₀.hom ≫ S.map (T.map c₀) at hs₀
+  have hsections : T.map (c ≫ d.hom) = T.map (a.hom ≫ c₀) := by
+    apply S.map_injective
+    simp only [Functor.map_comp, ha, hd]
+    apply (cancel_epi eA.hom).1
+    simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+    rw [← hs]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    exact hs₀
+  have : A.obj.IsQuasicoherent :=
+    (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType _ _).mp A.property |>.1
+  have : IsIso (Scheme.Modules.fromTildeΓ (R := CommRingCat.of R) A.obj) :=
+    Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (R := CommRingCat.of R) A.obj
+  have hconj : c ≫ d.hom = a.hom ≫ c₀ := by
+    apply (cancel_epi (Scheme.Modules.fromTildeΓ (R := CommRingCat.of R) A.obj)).1
+    have h₁ := (tilde.adjunction (R := CommRingCat.of R)).counit.naturality
+      (c ≫ d.hom)
+    have h₂ := (tilde.adjunction (R := CommRingCat.of R)).counit.naturality
+      (a.hom ≫ c₀)
+    change (tilde.functor (CommRingCat.of R)).map (T.map (c ≫ d.hom)) ≫
+        (Scheme.Modules.fromTildeΓ (R := CommRingCat.of R) D₀.obj) =
+      (Scheme.Modules.fromTildeΓ (R := CommRingCat.of R) A.obj) ≫ (c ≫ d.hom) at h₁
+    rw [hsections] at h₁
+    exact h₁.symm.trans h₂
+  have hrestricted : V.map c ≫ V.map d.hom = V.map a.hom ≫ V.map c₀ := by
+    simpa only [Functor.map_comp] using congrArg V.map hconj
+  have : IsIso (V.map c ≫ V.map d.hom) := by
+    rw [hrestricted]
+    infer_instance
+  exact IsIso.of_isIso_comp_right (V.map c) (V.map d.hom)
 
 end AlgebraicGeometry
