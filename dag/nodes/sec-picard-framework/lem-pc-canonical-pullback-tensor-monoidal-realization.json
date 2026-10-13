@@ -14,22 +14,50 @@
  ],
  "proof": [
   {
-   "text": "Construct the termwise tensor-pullback core-monoidal model from K-flat representatives, identify its module functor with tensorPullback, and transport its tensorator along the uniqueness isomorphism between left-derived counits. The K-flat coordinate equation and naturality prove that the transported inverse tensorator satisfies the canonical comparison predicate; uniqueness of that predicate identifies it with τ.",
+   "text": "Take a core-monoidal model m with its module functor F, module tensorator, left-derived counit epsilon, chain isomorphisms phi and K-flat coordinate equation. Identify F with Scheme.Modules.tensorPullback by CategoryTheory.Functor.ext on the recorded object and arrow equalities.",
    "uses": [
-    "def-pc-derived-pullback-monoidal-model",
-    "def-pc-derived-pullback-tensor-comparison"
+    "def-pc-derived-pullback-monoidal-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "The shared counit is also left-derived. Functor.leftDerivedUnique gives delta from the model counit to the shared counit, with delta.hom at Q(P) followed by the shared counit equal to epsilon at P. Transport m with Functor.Monoidal.coreMonoidalTransport delta, which transports the unit as well as the tensorator.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-derived-pullback-monoidal-model",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Verify the canonical predicate for the inverse transported tensorator: use phi on each K-flat pair; its degreewise pinning follows by rewriting the module tensorator. Cancel the original tensorator hom in the model coordinate equation. Expand the transported inverse tensorator; tensor composition and the two counit equalities replace its output composites by epsilon. Cancel delta.hom at Q(P) tensor Q(N), use naturality at the localization tensor map, and replace delta.hom followed by the shared counit on the total complex by epsilon. The result is precisely the original coordinate equation. OplaxMonoidal.delta_natural gives naturality in both inputs.",
+   "uses": [
+    "def-pc-derived-pullback-monoidal-model",
+    "def-pc-derived-pullback-tensor-comparison",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply IsCanonicalPullbackTensorComparison.unique to the verified inverse transported tensorator and the given tau. Evaluate the equality of families at each A and B, and return the transported core-monoidal structure.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-derived-pullback-monoidal-model",
-  "def-pc-derived-pullback-tensor-comparison"
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/079U",
-  "place": "Tag 079U K-flat tensor construction, with monoidal coherence and left-derived uniqueness transport as described in the Lean docstring."
+  "place": "Tag 079U, lemma-pullback-tensor-product; Lean counit transport using Mathlib leftDerivedUnique and coreMonoidalTransport, followed by the recorded canonical-comparison uniqueness theorem.",
+  "group": "S3",
+  "date": "2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -106,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T054218-L-443076",
-  "kind": "interface",
+  "landing": "20261013T100122-L-2485810",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
