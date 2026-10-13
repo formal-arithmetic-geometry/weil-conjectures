@@ -1,0 +1,105 @@
+{
+ "id": "lem-pc-cech-local-positive-section-boundary",
+ "kind": "statement",
+ "title": "Sectionwise boundaries for positive local Cech cocycles",
+ "statement": "Let X be a scheme [def-pc-scheme], I a type, U:I→Opens(X) any family, F an O_X-module sheaf, D a nonnegative cochain complex of O_X-module sheaves, and e_p natural isomorphisms of global-ring-module presheaves from the underlying presheaves of D^p to the full categorical Cech complex of W↦(V↦F(W∩V)), commuting with the differentials. For every i∈I, p≥0, and open W of U_i, every section in degree p+1 of D restricted to U_i that is killed by the next differential is the differential of a section in degree p on that same open W. No covering or augmentation is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, insertion homotopy"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Identify an open W of U_i with its image V⊆U_i in X. Evaluate e and hd on V. In Cech coordinates insert i at the first index to construct the primitive. The extra intersection with U_i equals V, deletion of the inserted first index contributes the original cocycle, and all other terms cancel by the cocycle equation with opposite alternating signs. Transport the primitive through e_p inverse and the restriction isomorphism on sections. The compatibility hd transports its boundary equation. This proves sectionwise lifting without any claim about sheaf homology or reflection of exactness.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, insertion homotopy"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex cocycles boundaries on opens contained in one member insertion contraction",
+   "results": "Eight hits on HomComplex cocycles and topological opens; no categorical local Cech section-boundary theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.Exact",
+   "results": "Unknown identifier; no mathematical verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "exactAt_cechComplex_of_le|section_boundary|exact_iff_kernel_ι_comp_cokernel_π_zero",
+   "results": "Found the generic kernel-to-cokernel exactness criterion. Repository search found TopCat.Presheaf.exactAt_cechComplex_of_le for the concrete additive Cech complex, but the categorical-presheaf and section-transport comparison is still required. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive cocycle of the Cech complex on an open contained in one covering member is a boundary by insertion of that member",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CechSheafLocalPositiveExact",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-local-positive-exact",
+   "place": "Proof paragraph 1: insertion constructs primitives on every open of U_i",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CechSheafLocalPositiveSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/CechSheafLocalPositiveSections.lean",
+  "declaration": "AlgebraicGeometry.cech_sheaf_restrict_positive_section_boundary",
+  "statement": "theorem cech_sheaf_restrict_positive_section_boundary\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)\n    (D : CochainComplex X.Modules ℕ)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor U).obj\n          ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p)\n    (hd : ∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor U).obj\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1))\n    (i : ι) (p : ℕ) :\n    let K := ((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D\n    ∀ (W : (U i).toScheme.Opens) (x : Γ((K.sc (p + 1)).X₂, W)),\n      (K.sc (p + 1)).g.app W x = 0 →\n        ∃ z : Γ((K.sc (p + 1)).X₁, W), (K.sc (p + 1)).f.app W z = x",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T054219-L-443446",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T054219-L-443446",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
