@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Sheafification and the localized open-site equivalence
 Source: Stacks Project, Tag 01CD, localized-site construction.
@@ -23,6 +23,42 @@ namespace AlgebraicGeometry
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+/- Every presheaf is a sheaf for the bottom topology. This lets us reuse the proved
+module-sheaf transport adjunction to construct its presheaf counterpart. -/
+private def botModuleLift {C : Type u} [Category.{u} C]
+    (R : Cᵒᵖ ⥤ RingCat.{u}) :
+    PresheafOfModules.{u} R ⥤ SheafOfModules.{u} (⟨R, Presheaf.isSheaf_bot R⟩) where
+  obj M := ⟨M, Presheaf.isSheaf_bot M.presheaf⟩
+  map f := ⟨f⟩
+
+private def botModuleLiftFullyFaithful {C : Type u} [Category.{u} C]
+    (R : Cᵒᵖ ⥤ RingCat.{u}) : (botModuleLift R).FullyFaithful where
+  preimage f := f.val
+
+private noncomputable def presheafTransportAdjunction
+    {C D : Type u} [Category.{u} C] [Category.{u} D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    {S : Cᵒᵖ ⥤ RingCat.{u}} {R : Dᵒᵖ ⥤ RingCat.{u}}
+    (φ : S ⟶ F.op ⋙ R) (ψ : R ⟶ G.op ⋙ S)
+    (h₁ : Functor.whiskerRight (NatTrans.op adj.counit) R =
+      ψ ≫ G.op.whiskerLeft φ)
+    (h₂ : φ ≫ F.op.whiskerLeft ψ ≫
+      Functor.whiskerRight (NatTrans.op adj.unit) S = 𝟙 S) :
+    PresheafOfModules.pushforward.{u} φ ⊣ PresheafOfModules.pushforward.{u} ψ := by
+  let Sb : Sheaf (⊥ : GrothendieckTopology C) RingCat.{u} :=
+    ⟨S, Presheaf.isSheaf_bot S⟩
+  let Rb : Sheaf (⊥ : GrothendieckTopology D) RingCat.{u} :=
+    ⟨R, Presheaf.isSheaf_bot R⟩
+  have : F.IsContinuous (⊥ : GrothendieckTopology C) (⊥ : GrothendieckTopology D) :=
+    ⟨fun _ ↦ Presieve.isSheaf_bot⟩
+  have : G.IsContinuous (⊥ : GrothendieckTopology D) (⊥ : GrothendieckTopology C) :=
+    ⟨fun _ ↦ Presieve.isSheaf_bot⟩
+  let φb : Sb ⟶ (F.sheafPushforwardContinuous RingCat _ _).obj Rb := ⟨φ⟩
+  let ψb : Rb ⟶ (G.sheafPushforwardContinuous RingCat _ _).obj Sb := ⟨ψ⟩
+  exact (SheafOfModules.pushforwardPushforwardAdj adj φb ψb h₁ h₂).restrictFullyFaithful
+    (botModuleLiftFullyFaithful R) (botModuleLiftFullyFaithful S)
+    (Iso.refl _) (Iso.refl _)
 
 /-- Sheafification commutes with transport along the localized open-site equivalence.
 Source: Stacks Project, Tag 01CD, sheafification step in the localized-site construction.
@@ -50,6 +86,26 @@ theorem exists_localizedOpen_sheafification_iso (X : Scheme.{u}) (U : X.Opens) :
           PresheafOfModules.sheafification.{u}
             (R₀ := (moduleRings U.toScheme.toRingedSpace).obj)
             (R := moduleRings U.toScheme.toRingedSpace)
-            (𝟙 (moduleRings U.toScheme.toRingedSpace).obj)) := by sorry
+            (𝟙 (moduleRings U.toScheme.toRingedSpace).obj)) := by
+  let R := moduleRings X.toRingedSpace
+  let e := (TopologicalSpace.Opens.overEquivalence U).symm
+  let φ := (U.overPullbackSheafEquivOver.app R).inv
+  let ψ := (U.sheafRestrictSheafEquivOver.app R).inv
+  have h₁ : Functor.whiskerRight (NatTrans.op e.counit) (R.over U).obj =
+      ψ.hom ≫ e.inverse.op.whiskerLeft φ.hom := rfl
+  have h₂ : φ.hom ≫ e.functor.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op e.unit) (U.sheafRestrict.obj R).obj =
+        𝟙 (U.sheafRestrict.obj R).obj := by
+    ext : 2
+    simp [φ, ψ, e, TopologicalSpace.Opens.overPullbackSheafEquivOver,
+      TopologicalSpace.Opens.sheafRestrictSheafEquivOver,
+      TopologicalSpace.Opens.overEquivalence, eqToHom_map, IsOpenMap.functor]
+    rfl
+  let adj := presheafTransportAdjunction e.toAdjunction φ.hom ψ.hom h₁ h₂
+  exact ⟨Adjunction.leftAdjointUniq
+    ((PresheafOfModules.sheafificationAdjunction.{u}
+      (𝟙 (R.over U).obj)).comp (Scheme.Modules.overEquiv U).toAdjunction)
+    (adj.comp (PresheafOfModules.sheafificationAdjunction.{u}
+      (𝟙 (moduleRings U.toScheme.toRingedSpace).obj)))⟩
 
 end AlgebraicGeometry
