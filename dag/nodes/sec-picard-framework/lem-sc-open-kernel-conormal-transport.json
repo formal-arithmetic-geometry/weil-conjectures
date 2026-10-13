@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "The preimage equality and the defining commutative square of resLE identify i with the restriction of g to W. On every open T in W, the open-section isomorphisms identify O_Y→g_*O_X with O_W→i_*O_U. Restriction preserves the actual kernel: evaluation on an open is left exact, and the open-section identifications commute with both structure maps. The closed-immersion ideal module is this kernel, yielding the unique ideal section t with the asserted inclusion equation.",
+   "text": "On every open T of W form the map alpha from the restriction of the actual module-sheaf kernel K to O_W by restricting kernel.ι and composing with restrictUnitIso. The commutative resLE square and g inverse W = U identify the zero loci of the function maps g.app and i.app. The range_map_kernelι theorem and the closed-immersion kernel ideal section description show alpha factors through i.ker.toModules. Construct delta by kernel.lift. Its inclusion equation is kernel.lift_ι. Delta is bijective on sections: injectivity follows from the two kernel inclusions and the open function isomorphism, and surjectivity follows by transporting a local ideal section to a section killed by g.app. Hom.isIso_iff_isIso_app makes delta an isomorphism.",
    "uses": [
     "def-sbc-closed-immersion-ideal-sheaf",
     "lem-weil-pbc-open-immersion-module-pullback-restriction"
@@ -24,15 +24,16 @@
    "elementary": false
   },
   {
-   "text": "Use tensor-pullback composition around the commutative square of open inclusions to transport the kernel identification to its pullback. For the open inclusions, pullback is restriction. The composition isomorphisms are those supplied by uniqueness of left adjoints to the same pushforward.",
+   "text": "For an arbitrary module M, compose restrictAdjunction W.ι with the chosen tensor-pullback adjunction of i, and compose the tensor-pullback adjunction of g with restrictAdjunction U.ι. Identify their right adjoints using pushforwardComp, pushforwardCongr of resLE_comp_ι, and inverse pushforwardComp. leftAdjointUniq gives beta: restriction_W followed by tensorPullback i is isomorphic to tensorPullback g followed by restriction_U. Taking top sections and transporting U.ι image top = U gives E. Its scalar compatibility follows from Hom.app_smul, map_smul, and resLE_app_top, so E gives the required linear equivalence for the restricted module.",
    "uses": [
-    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
     "lem-weil-pbc-open-immersion-module-pullback-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Choose the composition and restriction isomorphisms by the unit compatibility of uniqueness of left adjoints. The canonical unit of exists_tensorPullbackAdjunction is the sheafification of 1 tensor the inverse-image unit; restriction changes neither the sectionwise tensor nor its sheafification unit. Thus the local unit of t corresponds to the restricted original unit of s. Take top sections and the open-section identifications to produce e; both scalar structures are through g.appLE composed with W.topIso.hom.",
+   "text": "Evaluate unit_leftAdjointUniq_hom_app on W and s. Expand comp_unit_app and ofNatIsoRight_unit. Use naturality of beta on the equality morphism top → i inverse (W.ι inverse W), and naturality of the i-adjunction unit on top → W.ι inverse W. Compose the remaining restriction maps to obtain the unit equation for E. Finally apply tensorPullback i, pushforward i and evaluation to delta inverse and compose the resulting linear equivalence with E. Set t = delta applied to the transported s. The delta inclusion equation and naturality of kernel.ι prove the first equation; adjunction-unit naturality for delta inverse and delta hom_inv_id prove the second.",
    "uses": [
     "lem-pc-module-pullback-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation"
@@ -43,14 +44,13 @@
  "proof_deps": [
   "def-sbc-closed-immersion-ideal-sheaf",
   "lem-pc-module-pullback-adjunction",
-  "lem-pc-module-pullback-identity-composition",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
   "document": "https://stacks.math.columbia.edu/tag/01R3",
-  "place": "Tag 01R3 (1), (2), combined with Tags 00A0 and 0096; read online 2026-10-13",
-  "by": "agent"
+  "place": "Tag 01R3 (1), together with Tags 00A0 and 0096; actual kernel and adjunction proof formalized in Lean, 2026-10-13",
+  "by": "agent V3"
  },
  "mathlib_searches": [
   {
@@ -126,10 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T082416-L-1648941",
-  "kind": "interface",
+  "landing": "20261013T100204-L-2498377",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
