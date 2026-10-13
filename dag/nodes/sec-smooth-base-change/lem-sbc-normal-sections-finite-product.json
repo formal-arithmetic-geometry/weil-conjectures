@@ -1,0 +1,147 @@
+{
+ "id": "lem-sbc-normal-sections-finite-product",
+ "kind": "statement",
+ "title": "Sections on a quasi-compact normal Noetherian open are a finite product of normal domains",
+ "statement": "Let $X$ be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring] such that each stalk $\\mathcal O_{X,x}$ is an integrally closed domain [def-weil-pbc-normal-ring]. Let $U\\subseteq X$ be a quasi-compact open. There exist an integer $n\\geq 0$ and commutative rings $B_i$ for $i\\in\\{0,\\ldots,n-1\\}$, each an integrally closed domain, and a ring isomorphism $\\Gamma(U,\\mathcal O_X)\\cong\\prod_i B_i$. The empty open is included, with $n=0$ and the zero ring.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0357 (lemma-normal-disjoint-union-integral), 0358 (lemma-normal-integral-sections), and 035L, first paragraph of proof; connected components replace irreducible components using the proved locally Noetherian domain-stalk theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the open subscheme S=U. Open immersions induce stalk isomorphisms, so S has normal domain stalks. The source-library instance IsLocallyNoetherian.locallyConnectedSpace makes S locally connected. Its connected-component quotient is discrete; since S is compact, this quotient is finite (Mathlib Topology.Connected.LocallyConnected). Reindex these clopen components by Fin n.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each component is connected and locally Noetherian with domain stalks. The proved source-library theorem irreducibleSpace_of_isDomain_stalk (WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian) makes it irreducible. Domain stalks give reducedness by Mathlib isReduced_of_isReduced_stalk, hence integrality. Its sections are a domain, and the proved isIntegrallyClosed_of_isIntegrallyClosed_stalk (WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField) makes them integrally closed.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of sections to the components is a ring homomorphism. Uniqueness of gluing makes it injective. Every tuple of component sections is compatible: on different components the intersection is empty and its sections form the zero ring. Existence of gluing makes restriction surjective. RingEquiv.ofBijective and the open-subscheme topIso yield the asserted product equivalence. This proof also applies when the component index is empty.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "B3",
+  "document": "Stacks Project",
+  "place": "Tags 0357 (lemma-normal-disjoint-union-integral), 0358 (lemma-normal-integral-sections), and 035L, first paragraph of proof; connected components replace irreducible components using the proved locally Noetherian domain-stalk theorem.",
+  "note": "Complete Lean proof using the stated Mathlib and source-library results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of a quasi-compact open of a locally Noetherian scheme with normal domain stalks form a finite product of normal domains",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections on a normal locally Noetherian scheme are a finite product of integrally closed domains",
+   "results": "8 hits: AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.affine_isIntegral_iff, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, IsIntegralClosure.isNoetherianRing",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match",
+   "digest": "6e34b40d85b99b28"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*sections|sections.*normal|finite.*product.*normal",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Normalization.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match",
+   "digest": "194500843e379b24"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Local boundary extension in the trait and depth-two paragraphs, as used in Tag 0EYJ; Normality and density of the localized relative normalization; normal-local-ring clause; step 2 of lem-sbc-stalk-normalization-normal-part: unlocalized normalization has normal stalks; the finite component section-ring description in step 1 of the normal-stalk argument",
+   "via": [
+    "lem-sbc-relative-normalization-normal-stalks",
+    "lem-sbc-stalk-normalization-normal-part",
+    "lem-sbc-stalk-normalization-normal-dense",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalSectionsFiniteProduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalSectionsFiniteProduct.lean",
+  "declaration": "AlgebraicGeometry.Scheme.normal_sections_finite_product",
+  "statement": "theorem normal_sections_finite_product {X : Scheme.{u}} [IsLocallyNoetherian X]\n    (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧\n      IsIntegrallyClosed (X.presheaf.stalk x))\n    (U : X.Opens) (hU : IsCompact (U : Set X)) :\n    ∃ (n : ℕ) (B : Fin n → CommRingCat.{u}),\n      (∀ i, IsDomain (B i) ∧ IsIntegrallyClosed (B i)) ∧\n      Nonempty (Γ(X, U) ≃+* ∀ i, B i)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T040741-L-3946677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T040741-L-3946677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

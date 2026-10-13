@@ -10990,3 +10990,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/A2/Sheaf.AlgebraicGeometry.HigherDirectImageAffineCohomologyPresentation (stage 3; reviewer PASS; first push; landing 20261013T040739-L-3946199 (interface); batch 20261013T040738; modules 2; new nodes 1)
 - 04:07 L: merged deliver/A3/Sheaf.AlgebraicGeometry.EtaleCoefficientInjectiveSystemEmbedding (stage 3; reviewer PASS; first push; landing 20261013T040740-L-3946349 (interface); batch 20261013T040738; modules 3; new nodes 2)
 - 04:07 L: merged deliver/A3/Sheaf.RingTheory.RegularFiberKernelParameterLift (stage 3; reviewer PASS; first push; landing 20261013T040740-L-3946497 (proof); batch 20261013T040738; modules 1; new nodes 0)
+- 04:07 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks (stage 3; reviewer PASS; first push; landing 20261013T040741-L-3946677 (interface); batch 20261013T040738; modules 3; new nodes 2)

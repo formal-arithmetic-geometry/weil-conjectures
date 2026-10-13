@@ -1,0 +1,147 @@
+{
+ "id": "lem-sbc-integral-closure-finite-normal-product",
+ "kind": "statement",
+ "title": "Integral closure in a finite product of normal domains has normal localizations",
+ "statement": "Let $A$ and $B$ be commutative rings and let $B$ be an $A$-algebra. Let $I$ be a finite index set and let $C_i$ be integrally closed domains [def-weil-pbc-normal-ring]. Suppose that $B\\cong\\prod_{i\\in I} C_i$ as rings. Put $D=\\overline A^{\\,B}$, the integral closure of $A$ in $B$ [def-weil-pbc-integral-closure]. For every prime ideal $\\mathfrak p\\subset D$, the ring $D_{\\mathfrak p}$ is an integrally closed domain. No injectivity of $A\\to B$ is assumed; the empty product is included.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 035L (lemma-normal-normalization), affine product argument; 034L (lemma-normal-in-integrally-closed); 0CYA (lemma-finite-product-normal)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Use the ring equivalence to equip each C_i with its induced A-algebra structure. Projection sends an integral tuple to integral coordinates. Conversely, choose a monic annihilating polynomial over A for each integral coordinate and multiply these finitely many polynomials. Polynomial.monic_prod_of_monic and aeval_pi_apply₂ show that this monic product annihilates the tuple. This also covers the empty product. Thus coordinate projection gives a bijective ring homomorphism D -> product_i integralClosure A C_i.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each coordinate integral closure D_i is a domain as a subring of the domain C_i. Mathlib IsIntegrallyClosed.of_isIntegrallyClosed_of_isIntegrallyClosedIn makes D_i integrally closed because C_i is a normal domain and an integral closure is integrally closed in its ambient ring. Its prime localizations remain normal domains by isIntegrallyClosed_of_isLocalization and the domain localization instance.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved Pi.isNormalRing_of_finite [lem-weil-pbc-finite-product-normal] to the D_i. Map p across the ring equivalence from step 1 and use Localization.localRingEquiv to identify its localization with the localization of that product. Transport IsDomain and IsIntegrallyClosed across this equivalence.",
+   "uses": [
+    "lem-weil-pbc-finite-product-normal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-finite-product-normal"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "B3",
+  "document": "Stacks Project",
+  "place": "Tags 035L (lemma-normal-normalization), affine product argument; 034L (lemma-normal-in-integrally-closed); 0CYA (lemma-finite-product-normal).",
+  "note": "Complete Lean proof using the stated Mathlib and source-library results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral closure in a finite product of integrally closed domains has integrally closed domain prime localizations",
+   "results": "service unavailable: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.AtPrime.mapPiEvalRingHom_bijective",
+   "results": "1 hits: Localization.AtPrime.mapPiEvalRingHom_bijective",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match",
+   "digest": "2459eb182276f71e"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*(pi|product)|normal.*localizations",
+   "results": "7 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean, Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean, Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match",
+   "digest": "89103f6b61958b52"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Local boundary extension in the trait and depth-two paragraphs, as used in Tag 0EYJ; Normality and density of the localized relative normalization; normal-local-ring clause; step 2 of lem-sbc-stalk-normalization-normal-part: unlocalized normalization has normal stalks; the finite product integral-closure and normal localization calculation in steps 2 and 3",
+   "via": [
+    "lem-sbc-relative-normalization-normal-stalks",
+    "lem-sbc-stalk-normalization-normal-part",
+    "lem-sbc-stalk-normalization-normal-dense",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.IntegralClosureFiniteNormalProduct",
+  "file": "lean/Sheaf/RingTheory/IntegralClosureFiniteNormalProduct.lean",
+  "declaration": "integralClosure_normal_localizations_of_finite_product",
+  "statement": "theorem integralClosure_normal_localizations_of_finite_product\n    {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]\n    {ι : Type v} [Finite ι] (C : ι → Type u) [∀ i, CommRing (C i)]\n    [∀ i, IsDomain (C i)] [∀ i, IsIntegrallyClosed (C i)]\n    (e : B ≃+* ∀ i, C i) (p : Ideal (integralClosure A B)) [p.IsPrime] :\n    IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T040741-L-3946677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T040741-L-3946677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

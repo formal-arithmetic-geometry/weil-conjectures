@@ -15,38 +15,37 @@
  ],
  "proof": [
   {
-   "text": "For an affine open V of Y, W=f^{-1}(V) is quasi-compact and locally Noetherian, hence Noetherian and has finitely many irreducible components [lem-weil-pbc-noetherian-finite-components]. Each point belongs to only one component: on an affine neighbourhood the minimal primes belonging to components through that point stay distinct upon localization at its prime, whereas its domain stalk has only the zero minimal prime. Thus the components are disjoint. Their complements are finite unions of closed components, so every component W_i is clopen. Domain stalks also make W reduced: a nilpotent section has zero germs everywhere and is zero by the sheaf axiom. Each nonempty W_i is therefore an integral scheme, with integrally closed stalks inherited through its open immersion.",
+   "text": "Choose an affine neighbourhood U of the image of a point z of the relative normalization. Its inverse image in X is quasi-compact by QuasiCompact f and affine-open compactness. Apply [lem-sbc-normal-sections-finite-product] to identify its ring of sections with a finite product of normal domains.",
    "uses": [
-    "lem-weil-pbc-noetherian-finite-components"
+    "lem-sbc-normal-sections-finite-product"
    ],
    "elementary": false
   },
   {
-   "text": "The clopen components give a finite disjoint union W=∐_i W_i, so its sections form the finite product of the section rings B_i. The normalization chart over V=Spec A is Spec of the integral closure of A in this product, by [lem-weil-pbc-relative-normalization]. This closure is the product of the closures A_i of A in B_i: projection of an integral element is integral; conversely choose one monic annihilating polynomial over A for each coordinate and multiply these finitely many polynomials, obtaining a single monic polynomial annihilating the tuple. For an empty family the product is the zero ring and the chart is empty.",
+   "text": "Let V be the inverse image of U in the normalization. By [lem-weil-pbc-relative-normalization], V is affine and normalizationObjIso identifies its section ring with the integral closure of Γ(Y,U) in Γ(X,f⁻¹U). Apply [lem-sbc-integral-closure-finite-normal-product] to obtain normality of all prime localizations of this closure.",
    "uses": [
-    "lem-weil-pbc-relative-normalization"
+    "lem-weil-pbc-relative-normalization",
+    "lem-sbc-integral-closure-finite-normal-product"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-normalization-normal-stalks] to W_i -> V. These maps are qcqs: W_i is clopen in the qcqs W and quasi-compact, and V is affine. Each component normalization is integral by [lem-weil-pbc-relative-normalization] and has integrally closed stalks by the cited normal integral source theorem. The chart Spec(product_i A_i) is their disjoint union: the orthogonal coordinate idempotents identify its basic opens with Spec A_i and cover the spectrum. Every stalk in the chart is thus a normal domain, because the inclusion of its component is an open immersion and induces a stalk isomorphism. The affine inverse-image charts cover f.normalization, proving the assertion.",
-   "uses": [
-    "lem-weil-pbc-normalization-normal-stalks",
-    "lem-weil-pbc-relative-normalization"
-   ],
+   "text": "Let p be the prime of Γ(V) belonging to z, and map p across normalizationObjIso. Localization.localRingEquiv identifies the prime localizations of these isomorphic rings. The affine-open localization theorem identifies the stalk at z with the localization at p via IsLocalization.algEquiv. Compose these ring equivalences and transport IsDomain and IsIntegrallyClosed, proving the unchanged assertion. Empty charts have no points; all other edge cases are retained.",
+   "uses": [],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-finite-components",
-  "lem-weil-pbc-normalization-normal-stalks",
-  "lem-weil-pbc-relative-normalization"
+  "lem-sbc-normal-sections-finite-product",
+  "lem-weil-pbc-relative-normalization",
+  "lem-sbc-integral-closure-finite-normal-product"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "R2",
+  "by": "B3",
   "document": "Stacks Project",
-  "place": "Tag 035L (lemma-normal-normalization); Tags 0357, 0358 and 034L; read from the official Stacks web pages."
+  "place": "Tag 035L; Tags 0357, 0358, 034L and 0CYA",
+  "note": "Complete Lean proof: finite normal component sections, integral closure normal prime localizations, and affine stalk transport. The integral-source normalization theorem is not used."
  },
  "mathlib_searches": [
   {
@@ -124,9 +123,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T015611-L-3025915",
+  "landing": "20261013T040741-L-3946677",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
