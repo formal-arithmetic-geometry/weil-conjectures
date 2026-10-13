@@ -212,10 +212,10 @@
   "module": "Sheaf.Paper.SectionsOverQuasiCompactOpen",
   "declaration": "AlgebraicGeometry.sections_over_quasiCompactOpen_of_affine",
   "file": "lean/Sheaf/Paper/SectionsOverQuasiCompactOpen.lean",
-  "statement": "theorem sections_over_quasiCompactOpen_of_affine {A : Type u} [CommRing A] {M : Type u} [AddCommGroup M] [Module A M] (I : Ideal A) (hIfg : I.FG) (D : (Spec (CommRingCat.of A)).Opens) (hD : ∀ (p : PrimeSpectrum A), p ∈ D ↔ ¬ ∀ a : A, a ∈ I → a ∈ p.asIdeal) (N : ℕ → Submodule A M) (hN : ∀ n x, x ∈ N n ↔ ∀ a : A, a ∈ I ^ n → a • x = 0) : ∃ c : (Σ n : ℕ, ((ModuleCat.of A (I ^ n : Ideal A)) ⟶ ModuleCat.of A M)) → Γ(tilde (ModuleCat.of A M), D), ∃ c' : (Σ n : ℕ, ((ModuleCat.of A (I ^ n : Ideal A)) ⟶ ModuleCat.of A (M ⧸ N n))) → Γ(tilde (ModuleCat.of A M), D), Function.Injective c ∧ Function.Bijective c' ∧ ((∀ x : M, (∀ a : A, a ∈ I → a • x = 0) → x = 0) → Function.Bijective c)",
+  "statement": "theorem sections_over_quasiCompactOpen_of_affine\n    {A : Type u} [CommRing A]\n    {M : Type u} [AddCommGroup M] [Module A M]\n    (I : Ideal A) (hIfg : I.FG)\n    (D : (Spec (CommRingCat.of A)).Opens)\n    (hD : ∀ (p : PrimeSpectrum A), p ∈ D ↔ ¬ ∀ a : A, a ∈ I → a ∈ p.asIdeal)\n    (N : ℕ → Submodule A M)\n    (hN : ∀ n x, x ∈ N n ↔ ∀ a : A, a ∈ I ^ n → a • x = 0) :\n    ∃ (r : ∀ (n m : ℕ), n ≤ m →\n        (ModuleCat.of A (I ^ m : Ideal A) ⟶ ModuleCat.of A (I ^ n : Ideal A)))\n      (q : ∀ (n m : ℕ), n ≤ m →\n        (ModuleCat.of A (M ⧸ N n) ⟶ ModuleCat.of A (M ⧸ N m)))\n      (F G : ℕ ⥤ AddCommGrpCat.{u})\n      (e : ∀ n, F.obj n ≅ AddCommGrpCat.of\n        (ModuleCat.of A (I ^ n : Ideal A) ⟶ ModuleCat.of A M))\n      (e' : ∀ n, G.obj n ≅ AddCommGrpCat.of\n        (ModuleCat.of A (I ^ n : Ideal A) ⟶ ModuleCat.of A (M ⧸ N n)))\n      (c : F ⟶ (Functor.const ℕ).obj\n        (AddCommGrpCat.of Γ(tilde (R := CommRingCat.of A) (ModuleCat.of A M), D)))\n      (c' : G ⟶ (Functor.const ℕ).obj\n        (AddCommGrpCat.of Γ(tilde (R := CommRingCat.of A) (ModuleCat.of A M), D))),\n      (∀ (n m : ℕ) (h : n ≤ m) (x : (I ^ m : Ideal A)),\n        (r n m h x : A) = (x : A)) ∧\n      (∀ (n m : ℕ) (h : n ≤ m) (x : M),\n        q n m h ((N n).mkQ x) = (N m).mkQ x) ∧\n      (∀ (n m : ℕ) (h : n ≤ m)\n        (φ : ModuleCat.of A (I ^ n : Ideal A) ⟶ ModuleCat.of A M),\n        (e m).hom (F.map (homOfLE h) ((e n).inv φ)) = r n m h ≫ φ) ∧\n      (∀ (n m : ℕ) (h : n ≤ m)\n        (ψ : ModuleCat.of A (I ^ n : Ideal A) ⟶ ModuleCat.of A (M ⧸ N n)),\n        (e' m).hom (G.map (homOfLE h) ((e' n).inv ψ)) = r n m h ≫ ψ ≫ q n m h) ∧\n      (∀ (f : A) (hf : f ∈ I), ∃ hle : PrimeSpectrum.basicOpen f ≤ D,\n        (∀ (n : ℕ) (φ : ModuleCat.of A (I ^ n : Ideal A) ⟶ ModuleCat.of A M),\n          (tilde (R := CommRingCat.of A) (ModuleCat.of A M)).presheaf.map (homOfLE hle).op\n              (c.app n ((e n).inv φ)) =\n            StructureSheaf.const (R := A) (φ ⟨f ^ n, Ideal.pow_mem_pow hf n⟩)\n              (f ^ n) (PrimeSpectrum.basicOpen f)\n              (fun p hp ↦ p.asIdeal.primeCompl.pow_mem hp n)) ∧\n        (∀ (n : ℕ)\n          (ψ : ModuleCat.of A (I ^ n : Ideal A) ⟶ ModuleCat.of A (M ⧸ N n))\n          (y : M), (N n).mkQ y = ψ ⟨f ^ n, Ideal.pow_mem_pow hf n⟩ →\n          (tilde (R := CommRingCat.of A) (ModuleCat.of A M)).presheaf.map (homOfLE hle).op\n              (c'.app n ((e' n).inv ψ)) =\n            StructureSheaf.const (R := A) y (f ^ n) (PrimeSpectrum.basicOpen f)\n              (fun p hp ↦ p.asIdeal.primeCompl.pow_mem hp n))) ∧\n      Function.Injective (colimit.desc F\n        ⟨AddCommGrpCat.of Γ(tilde (R := CommRingCat.of A) (ModuleCat.of A M), D), c⟩) ∧\n      Function.Bijective (colimit.desc G\n        ⟨AddCommGrpCat.of Γ(tilde (R := CommRingCat.of A) (ModuleCat.of A M), D), c'⟩) ∧\n      ((∀ x : M, (∀ a : A, a ∈ I → a • x = 0) → x = 0) →\n        Function.Bijective (colimit.desc F\n          ⟨AddCommGrpCat.of Γ(tilde (R := CommRingCat.of A) (ModuleCat.of A M), D), c⟩))",
   "branch": "sheaf-dag",
-  "by": "M1",
-  "date": "2026-10-11",
+  "by": "R3",
+  "date": "2026-10-13",
   "existing": false
  },
  "reviewed_lean": {
@@ -225,5 +225,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2e9fb",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T060425-L-585165",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, corrected theorem signature, DAG lean.statement, change record, report, and clean lcompile result match the review requirements."
  }
 }
