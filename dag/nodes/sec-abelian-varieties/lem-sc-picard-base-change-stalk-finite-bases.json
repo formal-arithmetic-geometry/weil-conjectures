@@ -18,37 +18,43 @@
  ],
  "proof": [
   {
-   "text": "Apply the universal rank condition to the identity at h(t), choose the local frame for F according to hF, and pass to stalks. Transport this frame through h using the tensor-pullback stalk formula; this constructs a finite basis for P_t without any comparison with Q_t.",
+   "text": "Apply hR to every h and point. Choose the direct-image rank clause for E or its dual according to hF, forget the rank, and glue finite local freeness using the proved source-library Modules.isFiniteLocallyFree_of_isOpenImmersion. Uniqueness of left adjoints identifies tensorPullback with the abstract pullback and transfers its proved preservation of finite local freeness. At the identity h this gives finite local freeness of the original direct image, and then of P after pullback along h. The private rankMatch_directImage_finiteLocallyFree helper gives direct-image local freeness. The final proof applies the existing public SheafOfModules.IsFiniteLocallyFree.of_iso directly to the tensorComparison isomorphism to obtain local freeness of P, using the proved abstract-pullback instance; no separate tensorPullback_finiteLocallyFree theorem is restated.",
    "uses": [
     "def-sc-picard-universal-rank-match",
     "def-sc-finite-locally-free-sheaf",
-    "lem-weil-pbc-module-stalk-pullback"
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the universal rank condition to h at t. Fibre-product associativity and tensor-pullback composition identify the iterated target with the direct image in that condition. A local trivialization gives a finite basis for Q_t by taking germs. The identity case similarly identifies the direct image used in the first step. Neither step compares the two frame cardinalities.",
+   "text": "Use Mathlib pullbackLeftPullbackSndIso to identify the iterated fibre product with X times_S T′. The projection identities and tensor-pullback composition identify the iterated coefficient with pullback along this isomorphism of the coefficient on the single fibre product. Pushforward composition and the invertible unit for pullback/pushforward along a scheme isomorphism give the private iteratedDirectImageIso. Transport the finite local freeness obtained in the first step at h across its inverse to Q.",
    "uses": [
-    "def-sc-picard-universal-rank-match",
-    "lem-pc-module-pullback-identity-composition",
     "def-pc-base-change",
-    "def-sc-finite-locally-free-sheaf"
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "For either finite locally free module choose a finite frame near t using the proved source-library exists_mem_over_iso_free. Construct coordinate germs by restricting a representative to the intersection with the frame open and applying its coordinate projection. Naturality defines an additive map on the stalk colimit; germ_smul gives its linearity. Coordinate maps of frame germs are Kronecker deltas. Taking germs of the finite projection-inclusion sum gives the spanning identity. These two identities prove a linear equivalence of the stalk with the finite function module. Map Pi.basisFun through its inverse and reindex by Fintype.equivFin. The code adapts the already proved private coordinate-germ construction of FiniteLocallyFreeStalkFinrank; it does not import that theorem or assume any new stalk-basis statement. Apply this private finiteLocallyFree_stalk_basis helper independently to P and Q and combine the two existential witnesses.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-picard-universal-rank-match",
   "def-sc-finite-locally-free-sheaf",
-  "lem-weil-pbc-module-stalk-pullback",
-  "lem-pc-module-pullback-identity-composition",
-  "def-pc-base-change"
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-base-change",
+  "lem-pc-module-pullback-identity-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "local rank reduction, expanded using Tags 01C6 (local frames), 0098 (pullback stalks), and 0097 (composition); agent expansion of the original node argument",
-  "note": "Second-reader decomposition: this is only the finite-freeness part."
+  "place": "Finite local frames of Tag 01C6 and module functor composition of Tag 0097; T2 Lean proof using proved source-library locality and pullback preservation, fibre-product associativity, and an explicit coordinate-germ basis construction adapted from the private proved S3 construction in FiniteLocallyFreeStalkFinrank.",
+  "note": "No new sorries; the general tensor-pullback stalk formula is unnecessary. Statement and unit route unchanged. Repair of the returned duplicate declaration: removed the private tensorPullback_finiteLocallyFree helper and reused the public IsFiniteLocallyFree.of_iso theorem directly."
  },
  "mathlib_searches": [
   {
@@ -127,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-1727d",
-  "group": "V2",
+  "reviewer": "COMPILER",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T005859-L-2608019",
-  "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures with their nodes, verified only proof fields changed, and compiled the delivery plus its sole direct importer PicardRankMatchBaseChange; axiom probes show only standard axioms and the reported sorryAx dependencies."
+  "landing": "20261013T031551-L-3574188",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -10886,3 +10886,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/S4/Sheaf.AlgebraicGeometry.Morphisms.NormalizationDenseOpen (stage 3; reviewer PASS; first push; landing 20261013T031549-L-3573459 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/T1/Sheaf.CategoryTheory.ColimitSiteRawFiniteMatchingRefinement (stage 3; reviewer PASS; first push; landing 20261013T031550-L-3573646 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/T1/Sheaf.RingTheory.GlobalCompleteIntersectionPrincipalLocalization (stage 3; reviewer PASS; first push; landing 20261013T031551-L-3573887 (proof); batch 20261013T031526; modules 1; new nodes 0)
+- 03:15 L: merged deliver/T2/Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFiniteBases (stage 3; reviewer PASS; after a return; landing 20261013T031551-L-3574188 (proof); batch 20261013T031526; modules 1; new nodes 0)
