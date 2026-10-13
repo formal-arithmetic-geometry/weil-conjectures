@@ -15,12 +15,31 @@
  },
  "proof": [
   {
-   "text": "The subcomplex inclusion identifies its cycles with A intersection Z by the pullback universal property. Naturality and epimorphy of the cycle-to-homology map identify the image of f with the cohomology image step. Repeat at p+1. The ambient cycle class epimorphism has kernel B; the inverse image of the next image step is B+(A′ intersection Z). Restrict to S and use the modular identity, B contained in Z and A′ contained in A, to get the displayed inverse-image formula.",
+   "text": "Identify the image of the induced cycles map followed by the ambient cycle inclusion with A intersection Z. One inclusion follows from differential compatibility; for the other, factor the intersection through the degreewise monic subcomplex inclusion and lift to its cycles, using monicity in degree n+1. Factor the induced cycles map through this intersection; its image is the whole intersection, so the factor is epic. The equation defining c and monicity of the ambient cycle inclusion identify its composite with c. Naturality of homologyπ, and invariance of images under epic precomposition, give image(f)=I_n^p. Repeat with p+1 to express I_n^(p+1) as the image under homologyπ of the restriction of A′ intersection Z to the ambient cycles.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration",
     "def-sp-filtered-complex-subquotients",
     "lem-sp-filtered-cohomology-image-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an epimorphism q, use that q is a cokernel of its kernel, compare this cokernel with the standard cokernel projection, and apply the proved cokernel inverse-image identity to obtain q⁻¹(q(T))=ker(q)+T. The homology cokernel sequence toCycles followed by homologyπ is exact; hence mapping the kernel of homologyπ along iCycles yields the image of the incoming differential B. Mapping the inverse image of the next cohomology image step along iCycles consequently gives B+(A′ intersection Z). Reuse pullback_exists_isCokernel from FilteredNormalizedQuotientPresentation (whose proof uses pullback_exists_iso), imported with import all; all other categorical identities here are proved in Mathlib or WeilConjectures. Image composition uses the existing proved exists_image helper from FilteredComplexFirstPageCyclesBoundaries, imported with import all rather than restated.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-sp-filtered-normalized-quotient-presentation",
+    "lem-sp-filtered-complex-first-page-cycles-boundaries"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Antitonicity gives A′ contained in A, while the boundary identity gives B contained in Z. Reuse the proved subobject_modular helper from FilteredNormalizedQuotientPresentation, together with its map_pullback_mono helper for restriction along a monomorphism. Apply it with S=A intersection Z and T=A′ intersection Z to get S intersection (B+T)=(A intersection B)+T. Compose the pullbacks using c followed by iCycles = S.arrow, and use injectivity of the subobject map along the monomorphism S.arrow to conclude the required inverse-image equality.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-normalized-quotient-presentation"
    ],
    "elementary": false
   }
@@ -29,12 +48,14 @@
   "def-sp-abelian",
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
-  "lem-sp-filtered-cohomology-image-finite"
+  "lem-sp-filtered-cohomology-image-finite",
+  "lem-sp-filtered-normalized-quotient-presentation",
+  "lem-sp-filtered-complex-first-page-cycles-boundaries"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project, https://stacks.math.columbia.edu/tag/012Q",
-  "place": "Section 12.24, Equation 12.24.5.2 and the final quotient calculation of Lemma 12.24.6."
+  "place": "Section 12.24, Equation 12.24.5.2 and final quotient calculation of Lemma 12.24.6; complete Lean realization by R3 using homology naturality, cokernel inverse images, and modularity. Repair: reuse the existing private modularity, cokernel comparison and restriction helpers with import all instead of duplicating their proofs. Second reading: also reuse the existing image-composition helper from FilteredComplexFirstPageCyclesBoundaries."
  },
  "mathlib_searches": [
   {
@@ -118,10 +139,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T011925-L-2762348",
-  "kind": "interface",
+  "landing": "20261013T034211-L-3767887",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

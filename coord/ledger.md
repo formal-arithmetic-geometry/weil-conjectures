@@ -10969,3 +10969,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:42 L: merged deliver/N4/Sheaf.RingTheory.PolynomialCompletedFibreCompatibleProduct (stage 3; reviewer PASS; first push; landing 20261013T034209-L-3767405 (proof); batch 20261013T034159; modules 1; new nodes 0)
 - 03:42 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFlatEtale (stage 3; reviewer PASS; after a return; landing 20261013T034209-L-3767562 (interface); batch 20261013T034159; modules 2; new nodes 1)
 - 03:42 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusCoreRank (stage 3; reviewer PASS; first push; landing 20261013T034210-L-3767686 (interface); batch 20261013T034159; modules 4; new nodes 3)
+- 03:42 L: merged deliver/R3/Sheaf.CategoryTheory.FilteredCohomologyImageCycleMap (stage 3; reviewer PASS; after a return; landing 20261013T034211-L-3767887 (proof); batch 20261013T034159; modules 1; new nodes 0)
