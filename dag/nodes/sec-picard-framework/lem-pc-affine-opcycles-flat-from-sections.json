@@ -16,23 +16,34 @@
  ],
  "proof": [
   {
-   "text": "The counit of the affine equivalence identifies the two terms in the differential C^(a-1) -> C^a with tilde of their global sections, naturally in the differential. The tilde functor preserves cokernels, so C.opcycles a is tilde of Q=P.opcycles a. This identification needs quasi-coherence only for those two terms.",
+   "text": "Identify the sheaf and section-complex opcycles with cokernels of the differential from degree a-1 to degree a. Restrict the sheaf differential along the top affine chart Spec Gamma(S,O) -> S. The affine counit and preservation of cokernels by tilde give tildeCokernelIso. The section restriction linear equivalences are natural in the differential; cokernel.mapIso, tilde.isoTop, and preservation of cokernels by chart restriction therefore identify the module opcycles with Gamma(S,C.opcycles a). Cokernel closure gives quasi-coherence of the sheaf opcycles. These constructions use only the two specified quasi-coherent terms.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
    ],
    "elementary": false
   },
   {
-   "text": "The stalks of tilde Q are localizations of Q at the corresponding primes. Localization of the flat A-module Q is flat over the localized structure ring. For each affine open U, the prime-local flatness criterion applied to its section module gives flatness of Gamma(U,C.opcycles a) over Gamma(U,O_S).",
+   "text": "Transfer the assumed flatness through the module cokernel comparison. Rewrite equal-open identity appLE to the identity action. For each point, affine_sections_stalk_tensor_presentation on the top affine open identifies the module stalk with extension of scalars of the now-flat global sections, so it is flat over the stalk ring by Module.Flat.baseChange.",
    "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-pc-affine-sections-flat-over-base",
+    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
     "lem-weil-pbc-flat-module-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "For affine opens U contained in V, the open immersion U -> V induces a flat ring map on sections, since open immersions are flat. Transitivity with the previous section flatness proves flatness of Gamma(U,C.opcycles a) over Gamma(V,O_S). The scalar action is the one induced by the identity morphism appLE. These are all tests of IsFlatOver(identity). The zero ring, empty opens and zero cokernels satisfy the same argument.",
+   "text": "For an arbitrary affine open U and each maximal ideal P of B=Gamma(U,O), take x=U.fromSpec(P). The stalk ring at x is a localization of B at P. The canonical map Gamma(U,C.opcycles a) -> O_x tensor_B Gamma(U,C.opcycles a) is an IsLocalizedModule.AtPrime map. The affine stalk-tensor comparison identifies this tensor module with the flat sheaf stalk. Module.flat_iff_of_isLocalization gives flatness of that tensor module over B; Module.flat_of_isLocalized_maximal then gives flatness of Gamma(U,C.opcycles a) over B. The argument includes empty U and the zero ring without assuming maximal ideals exist.",
+   "uses": [
+    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each affine pair U contained in the identity preimage of V, HasRingHomProperty.appLE applied to the flat identity morphism gives flatness of Gamma(U,O) over Gamma(V,O). Install exactly the appLE algebra and restricted module action from IsFlatOver. The scalar tower follows from mul_smul. Module.Flat.trans with the affine section flatness proves every required test.",
    "uses": [
     "def-weil-flat-morphism",
     "lem-pc-module-flat-transitive"
@@ -43,15 +54,21 @@
  "proof_deps": [
   "def-weil-flat-morphism",
   "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
   "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-affine-open-stalk-localization",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
   "lem-weil-pbc-spec-module-tilde-sections"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "H3",
+  "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 01IB (affine equivalence), 01HV (associated sheaf localization), and 01U4 (affine-local flatness); step 4 of lem-pc-affine-universally-exact-opcycles-flat.; detailed affine specialization by H1"
+  "place": "Tags 01IB, 01HV, and 01U4; original affine route implemented with upstream tildeCokernelIso, the proved affine stalk-tensor presentation, Mathlib localization criteria, and flatness transitivity."
  },
  "mathlib_searches": [
   {
@@ -137,13 +154,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T235554-L-2201213",
-  "kind": "interface",
+  "landing": "20261013T015557-L-3021550",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
