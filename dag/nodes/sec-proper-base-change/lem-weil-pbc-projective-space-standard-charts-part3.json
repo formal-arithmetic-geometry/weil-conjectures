@@ -16,7 +16,15 @@
  ],
  "proof": [
   {
-   "text": "Restrict the projective-space pullback square to V and the integral chart. Its projection to V is h and gives the displayed commutative square. Use the proved upstream projIntBasicOpenIso to identify the integral chart with Spec Z[U_j], preserving coordinate ratios.",
+   "text": "Use the proved upstream standardOpenIso and its compatibility with the integral chart. For a variable X j, projIntBasicOpenIso_hom, ΓSpecIso_inv_naturality, basicOpenToSpec_app_top and homogeneousLocalizationAwayXEquiv_symm_X show that its image on the integral chart is awayToSection(awayXRatio i j). Restrict along toProjInt using resLE_app_top; this proves the standardOpenIso coordinate formula. Both helper lemmas are proved privately in the delivered module.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Put W = standardOpen i ∩ q⁻¹(V), take the canonical h = q.resLE V W inf_le_right and a = homOfLE inf_le_left. Paste Mathlib isPullback_opens_inf with isPullback_morphismRestrict q V to prove that (a,h) is the restriction pullback. Transport the chart corner along standardOpenIso and compare with the proved AffineSpace.isPullback_map V.ι. Pullback uniqueness constructs e:W≅A(J;V), J={j≠i}. Since eV identifies V with Spec R, V and A(J;V), hence W, are affine.",
    "uses": [
     "def-nagata-projective-space-base-change",
     "lem-weil-pbc-open-fibre-product"
@@ -24,15 +32,7 @@
    "elementary": false
   },
   {
-   "text": "Use eV and pullbackSpecIso to identify the restricted square with Spec of R tensor_Z Z[U_j]. Apply MvPolynomial.algebraTensorAlgEquiv and its pure-tensor formulas to get Spec R[U_j].",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-polynomial-scalar-extension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take global sections of this constructed isomorphism to obtain E. The formulas for the two projections give E(C r) and E(X j), with topIso converting global sections of the open scheme to sections of P on W.",
+   "text": "Map affine spaces along the given isomorphism eV, with inverse given by AffineSpace.map eV.inv, and compose e with this isomorphism and Mathlib AffineSpace.SpecIso J R. Global sections of the resulting d:W≅Spec R[J], followed by W.topIso, give a bijective ring map F:R[J]→Γ(P,W). AffineSpace.SpecIso_hom_appTop and the pullback projection identities compute F(C r) as W.topIso.hom((h≫eV.hom).appTop(ΓSpecIso R.inv r)). They compute F(X j) as the restriction of the coordinate formula from step 1, using Scheme.homOfLE_appTop_topIso_inv. Polynomial ringHom_ext identifies F with eval₂Hom of these coefficients and ratios. RingEquiv.ofBijective gives E; eval₂_C and eval₂_X prove the requested formulas, and resLE_comp_ι gives the required square.",
    "uses": [
     "def-weil-affine-spectrum"
    ],
@@ -42,14 +42,12 @@
  "proof_deps": [
   "def-nagata-projective-space-base-change",
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-polynomial-scalar-extension"
+  "lem-weil-pbc-open-fibre-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Second reading Y3, 2026-10-13: reduction following Stacks 01NG/01MV, using proved upstream chart declarations and Mathlib adjunction uniqueness."
+  "place": "Stacks 01NG and 01ND, with Schemes 01JR/01I4; D2, 2026-10-13: complete Lean proof through proved upstream standardOpenIso and Mathlib AffineSpace.SpecIso, without new obligations."
  },
  "mathlib_searches": [
   {
@@ -177,11 +175,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-2a4ec",
-  "group": "Y3",
+  "reviewer": "COMPILER",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T000049-L-2232776",
-  "kind": "interface",
-  "note": "independent Codex review: Matched unchanged parent signature and component statements with DAG records and proofs; all four delivered modules and all three direct importers compile cleanly; axioms match the reported affine obligation."
+  "landing": "20261013T015547-L-3017700",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
