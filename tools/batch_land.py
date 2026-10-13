@@ -51,6 +51,7 @@ import review_class as rc  # noqa: E402
 import sorry_ledger as sl  # noqa: E402
 import batch_recovery as recovery
 import import_cycles as cycles
+import repair_queue as repairs
 from pipeline_guard import alert, clear_alert
 
 ROOT = md.ROOT
@@ -172,6 +173,10 @@ def candidates(cache: dict) -> list[dict]:
                 continue
         except (OSError, ValueError):
             continue
+        if g.startswith('XR'):
+            job = repairs.read(repairs.JOBS / (g[2:] + '.json'))
+            if job.get('state') != 'delivered' or job.get('repaired_head') != head:
+                continue  # dedicated reader/result has not accepted this exact repair
         if returned_head(g, head):
             continue        # this head was returned; the group pushes a new one
         mk = read_json(marker(g, item))
@@ -190,6 +195,7 @@ def candidates(cache: dict) -> list[dict]:
         for p in PASSED.glob("*.json"):
             if p.name not in live:
                 p.unlink(missing_ok=True)               # the branch is gone
+    out.sort(key=lambda c: (not bool((read_json(marker(c["group"], c["item"])) or {}).get("repair_priority")), c["group"], c["item"]))
     return out
 
 
@@ -520,6 +526,10 @@ def land_one(plan: dict, batch_id: str) -> dict:
     sha = md.git("rev-parse", "HEAD")
     md.git("branch", "-D", br, check=False)
     marker(g, item).unlink(missing_ok=True)
+    if g.startswith('XR'):
+        jp = repairs.JOBS / (g[2:] + '.json'); job = repairs.read(jp)
+        if job:
+            job['repair_landing'] = landing; repairs.write(jp, job)
     return {"group": g, "item": item, "head": head, "reviewer": reviewer, "landing": landing, "kind": kind,
             "commit": sha, "overrides": plan.get("overrides", {}), "modules": [m["module"] for m in mods], "claim": claim_text, "state": "landed"}
 
@@ -667,16 +677,16 @@ def give_back(g, item, head, why, log):
 
 # ---------------------------------------------------------------- taking a landed delivery out
 
-def undo_entries(entries, message, *, returned=False):
+def undo_entries(entries, message, *, returned=False, repair_jobs=None):
     """Retry a stale preparation immediately, without another build or triage round."""
     for attempt in range(20):
         try:
-            return _undo_entries(entries, message, returned=returned)
+            return _undo_entries(entries, message, returned=returned, repair_jobs=repair_jobs)
         except recovery.TipMoved:
             if attempt == 19: raise
 
 
-def _undo_entries(entries, message, *, returned=False):
+def _undo_entries(entries, message, *, returned=False, repair_jobs=None):
     """Prepare outside locks; restore delivery records and sources in a single commit.
 
     See batch_recovery's docstring for the records derived from land_one and
@@ -728,6 +738,22 @@ def _undo_entries(entries, message, *, returned=False):
                 parts = re.split(r'(?=^## )', prepared[p.relative_to(ROOT).as_posix()].decode(), flags=re.M)
             kept = ''.join(x for x in parts if not x.startswith(f"## {e['item']} ("))
             prepared[p.relative_to(ROOT).as_posix()] = (kept.rstrip() + f"\n\n## {e['item']} ({ld.now()}, head {e['head'][:9]})\n\n{entry_message}\n").encode()
+    # Reserve repairs atomically with take-out; local outbox requests become
+    # runnable only when this dedicated claim appears. No original-group return.
+    for e in entries:
+        job = (repair_jobs or {}).get(key(e))
+        if not job: continue
+        cp = repairs.claim_path(e['item'])
+        current = repairs.read(cp)
+        if current and current.get('who') not in (e['group'], job['group']):
+            raise recovery.Conflict('repair claim already held by ' + current['who'])
+        prepared[cp.relative_to(ROOT).as_posix()] = json.dumps(dict(
+            who=job['group'], t=time.time(), since=ld.now(), repair=job['id'])).encode()
+        rp, before, parts = md.return_entries(e['group'], e['item'])
+        rel = rp.relative_to(ROOT).as_posix()
+        text = (prepared.get(rel) or (before or '').encode()).decode()
+        prepared[rel] = ''.join(x for x in re.split(r'(?=^## )', text, flags=re.M)
+                               if not x.startswith(f"## {e['item']} (")).encode()
     ledger = prepared.get('coord/ledger.md', (ROOT / 'coord/ledger.md').read_bytes()) or b''
     prepared['coord/ledger.md'] = ledger + f"\n- {time.strftime('%H:%M')} L: {message[:180]}\n".encode()
     with md.merge_lock():
@@ -966,13 +992,16 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
         b.pop('triage', None)
         write_json(OPEN, b)
         return
+    tip = (ld.read_json(ld.B / 'last.json') or {}).get('commit') or md.git('rev-parse', 'HEAD')
+    repair_jobs = {key(e): repairs.stage(e, tip, per[key(e)], messages[key(e)]) for e in suspects}
     try:
-        undo_entries(chosen, f"batch {b['id']} dependency take-out", returned=messages)
+        undo_entries(chosen, f"batch {b['id']} dependency take-out", returned=messages, repair_jobs=repair_jobs)
     except recovery.Conflict as x:
         withdraw(b, 'take-out conflict: ' + str(x), log); return
     for e in suspects:
         e['state'] = 'returned'; e['why'] = messages[key(e)]
-        log('TAKEN OUT and RETURNED', key(e), '|', messages[key(e)][:300])
+        e['repair'] = repair_jobs[key(e)]['id']
+        log('TAKEN OUT; REPAIR QUEUED', key(e), repair_jobs[key(e)]['group'], '|', messages[key(e)][:300])
     defer_entries(deps)
     b['round'] += 1
     b['await_recovery'] = True
@@ -1000,6 +1029,11 @@ def closure_fallback(b, last, log, imports=None):
 
 def step(cache: dict, log) -> str:
     """One step of the cycle; returns what it did (idle, landed, waiting, verified, triage, returned)."""
+    repairs.reconcile()
+    stats = repairs.counts()
+    if cache.get('_repair_stats') != stats:
+        log('REPAIR statistics', json.dumps(stats, sort_keys=True))
+        cache['_repair_stats'] = stats
     b = read_json(OPEN)
     if not b:
         return "landed" if land_batch(cache, log) else "idle"

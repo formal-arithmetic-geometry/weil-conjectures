@@ -240,6 +240,18 @@ def target_names() -> set[str]:
     return set(re.findall(r"^theorem\s+([^\s({\[:]+)", c.read_text(), re.M)) if c.is_file() else set()
 
 
+def repair_job(group, item):
+    """Only the server's take-out reservation authorizes a bounded repair scope."""
+    if not group.startswith('XR'): return None
+    try:
+        job = json.loads((ROOT / 'local/batch/repair' / (group[2:] + '.json')).read_text())
+        claim = json.loads((ROOT / 'coord/claims' / (item + '.lock')).read_text())
+    except (OSError, ValueError): return None
+    if job.get('group') != group or job.get('item') != item or claim.get('repair') != job.get('id'):
+        return None
+    return job
+
+
 def claim_holder(mod: str) -> str | None:
     p = ROOT / "coord" / "claims" / (mod.replace("/", "__") + ".lock")
     try:
@@ -464,6 +476,11 @@ def check_changes(D, f, group, nodes_base):
         if changed or added_public:
             f("d", f"{m['module']}: unheld adaptation must keep every existing signature and visibility "
                    f"identical and add only private helpers ({changed + added_public})")
+        primary = next((x for x in D['modules'] if x['role'] == 'item'), None)
+        job = repair_job(group, primary['module']) if primary else None
+        if job and m['module'] in set(job['modules'] + job['failures']):
+            D['notes'].append(m['module'] + ': dedicated red-build repair; independent reader checks compiler errors and minimal edits')
+            continue
         primary = next((x for x in D["modules"] if x["role"] == "item"), None)
         if not primary or not primary["diff"]["interface"]:
             f("d", f"{m['module']}: unheld adaptation requires the item's own interface change")

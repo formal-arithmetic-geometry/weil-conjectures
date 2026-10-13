@@ -103,12 +103,28 @@ def sorries(m):
     return li.sorry_count(p.read_text(errors="ignore")) if p.is_file() else None
 
 
+def repair_note(m):
+    try: return json.loads((WORK / 'repair-notes' / (m + '.json')).read_text())
+    except (OSError, ValueError): return {}
+
+
+def handoff_return(who, m):
+    """Any next claimant receives the failed repair's full diagnostic handoff."""
+    nr = repair_note(m)
+    if nr.get('state') != 'released': return
+    p = RETURNS / (who + '.md'); p.parent.mkdir(parents=True, exist_ok=True)
+    drop_return_entries(who, m)
+    with open(p, 'a') as f:
+        f.write('\n\n## ' + m + ' (dedicated repair handoff)\n\n'
+                + 'The previous worker ended with: ' + nr.get('note', '')
+                + '\n\nCompiler messages and attribution:\n' + nr.get('reason', '') + '\n')
+
 def take(who, m, quiet=False) -> bool:
     if stage2_parked(m):   # launcher's order 2026-10-11 05:50 UTC: parked for every group until L resolves it
         if not quiet:
             print(f"{m} is parked in stage 2 (abandoned; see tools/claim.py parked and coord/stage2-parked.md); nothing to claim")
         return False
-    if node_finished(m):   # launcher's order 2026-10-10 20:55 UTC: refuse a node already split, matched or attached
+    if node_finished(m) and repair_note(m).get('state') != 'released':   # launcher's order 2026-10-10 20:55 UTC: refuse a node already split, matched or attached
         if not quiet:
             print(f"{m} is already split, matched or attached; nothing to claim")
         return False
@@ -117,7 +133,7 @@ def take(who, m, quiet=False) -> bool:
             print(f"{who} already holds {LIMIT} claims; deliver or release one first")
         return False
     try:
-        create(m, who); print(m); return True
+        create(m, who); handoff_return(who, m); print(m); return True
     except FileExistsError:
         pass
     with open(C / ".takeover", "w") as g:
@@ -127,7 +143,7 @@ def take(who, m, quiet=False) -> bool:
             lock(m).unlink(missing_ok=True)
             log(f"{who} took over the expired claim of {r.get('who')} on {m}")
             try:
-                create(m, who); print(m); return True
+                create(m, who); handoff_return(who, m); print(m); return True
             except FileExistsError:
                 pass
     if not quiet:
@@ -226,7 +242,7 @@ def stage2_abandonments() -> dict[str, list[tuple[str, str, str]]]:
         mm = re.match(r"(\S+)Z (\S+) abandoned (\S+): (abandon:.*)$", line)
         if not mm or mm.group(1) < STAGE2_OPEN:
             continue
-        if stages.get(mm.group(3), "2") != "2":
+        if "." in mm.group(3) or stages.get(mm.group(3), "2") != "2":
             continue
         out.setdefault(mm.group(3), []).append((mm.group(1), mm.group(2), mm.group(4)))
     return out
@@ -283,6 +299,8 @@ def main() -> int:
         print(__doc__); return 0
     C.mkdir(parents=True, exist_ok=True)
     cmd = a[0]
+    if cmd == 'note':
+        print(json.dumps(repair_note(a[1]), ensure_ascii=False)); return 0
     if cmd == "next":
         who = a[1]; n = int(a[a.index("--count") + 1]) if "--count" in a else 1
         # decision of the human, 2026-10-10 evening: an open return no longer blocks new claims (every open return
@@ -292,14 +310,16 @@ def main() -> int:
         got = 0
         parked = set(stage2_abandonments()) - parked_resolved()
         skip = abandoned_recently(who)   # launcher's finding, 2026-10-10 15:30 UTC: C1 abandoned one item 29 times in half an
-        for m in queue(stage):           # hour because next handed it straight back; a group skips its own abandonments for 24 h
+        repair_items = [p.stem for p in sorted((WORK / 'repair-notes').glob('*.json'))
+                        if repair_note(p.stem).get('state') == 'released'] if stage in (None, '3') else []
+        for m in dict.fromkeys(repair_items + queue(stage)):           # hour because next handed it straight back; a group skips its own abandonments for 24 h
             if got >= n:
                 break
             if m in skip:
                 continue
-            if sorries(m) == 0:  # finished since the queue was written
+            if sorries(m) == 0 and m not in repair_items:  # finished since the queue was written
                 continue
-            if node_finished(m):  # a DAG node split, matched or Lean-attached since the queue was written (stale queue.tsv)
+            if node_finished(m) and repair_note(m).get('state') != 'released':  # a DAG node split, matched or Lean-attached since the queue was written (stale queue.tsv)
                 continue
             if attachment_pending(m):  # an attachment release L has not verified yet (launcher, 2026-10-10 17:30 UTC)
                 continue
@@ -327,6 +347,10 @@ def main() -> int:
         left = sorries(m)
         lock(m).unlink(missing_ok=True)
         if cmd == "done":
+            np = WORK / 'repair-notes' / (m + '.json')
+            nr = repair_note(m)
+            if nr:
+                nr['state'] = 'resolved'; np.write_text(json.dumps(nr, ensure_ascii=False))
             log(f"{who} done {m} (sorry left: {left}) {note}")
             print("done" + (f"; {left} sorry left, so the module returns to the queue" if left else ""))
         else:

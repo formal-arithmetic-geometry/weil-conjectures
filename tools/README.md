@@ -220,3 +220,39 @@ Upstream census warnings are reported per module without aborting unrelated sect
 Blueprint refinements: `blueprint_pr.py cut --ids <JSON list>` selects a dependency-ordered part of a large sketch. `check` rejects new folders without a statement-bearing `_section.md`, all chapter/sketch edits (including their proof objects), missing dependencies and malformed text. Mathlib leaves remain individual source citations. Run the text-only regression suite with `python3 -m unittest discover -s tools -p test_blueprint_pr.py`.
 
 Batch delivery imports are checked against tracked source modules at the batch base, installed package/toolchain sources and the same delivery, never compiled outputs. Recovery caches interface deltas per delivery/module, discards decisions after build or batch state changes, and closes verified batches before preparing new candidates. autoland3 checks SIGTERM during read-only preflight waits and attribution; active write transactions finish normally.
+
+## Repair first after a red landing
+
+Attributed red-build deliveries are taken out transactionally as before; survivors
+and deferred dependents keep moving, without bisection. `batch_land.execute` stages
+`local/batch/repair/<id>.json` with the broken snapshot, original diff and compiler
+messages. The inverse commit reserves the item for dedicated group `XR<id>` and
+removes the original group's return. The local outbox is active only with this
+claim, making interrupted take-out safe to retry.
+
+The launcher's `xrepair.py` polls every 10 seconds, runs at most eight gpt-6.1-sol
+repairs, and allows two attempts of 30 minutes including an independent reader.
+It uses a fresh sandbox at the broken tip per attempt. Only the delivery's own
+paths and failing files may change. Every touched Lean file is checked alone via
+lcompile.py within 60 seconds, never a worker global build. A timeout requires
+fixing a definition, not raising the limit. Reader-approved repairs use normal
+`deliver/XR<id>/<item>` branches via deliver3.py. Repair scope authorization is
+bound to the reserved claim and request; unchanged signatures remain mandatory
+for unheld consumer adaptations. `repair_queue.result` checks the exact pushed
+head/scope and normal landing checks; its passed marker puts it first in the next
+batch. XR branches cannot land before this result accepts them. A second red
+repair inherits the attempt count rather than restarting the budget.
+
+On CANNOT or two failures, `repair_queue.result` invokes claim.py release with an
+abandon: note, deletes the repair branch and records full compiler/attempt notes
+in coord/repair-notes. `claim.py next` puts these items first for any group, even
+if the restored item has zero textual sorry or is absent from the current queue.
+The new claimant gets a return entry headed "previous worker ended with", which
+the unchanged dispatcher puts in its repair prompt. Original groups have no open
+return and no reservation, so they do not duplicate the dedicated repair.
+
+Status: `python3 tools/repair_queue.py status` on the server, or
+`python3 ~/weil-launcher/xrepair.py status` on the launcher. The lander logs counts
+of repaired_in_place (green verification), released_to_queue, repair_still_running
+(including a delivered repair awaiting its global verification). Service files:
+xrepair.pid, xrepair.log, xrepair.out, xrepair.lock and xrepairs/<id>/.

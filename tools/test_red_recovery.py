@@ -186,7 +186,7 @@ class SelectiveRecovery(Repo):
                           dict(path=e['item'].replace('.', '/')+'.lean',module=e['item'])]))
         b=dict(id='batch',time=ld.now(),round=0,handled=[],entries=entries)
         logs=[]; calls=[]
-        with patch.object(bl,'ROOT',self.root), patch.object(bl.md,'ROOT',self.root), \
+        with patch.object(bl,'ROOT',self.root), patch.object(bl.repairs,'ROOT',self.root), patch.object(bl.repairs,'JOBS',self.root/'local/batch/repair'), patch.object(bl.md,'ROOT',self.root), \
              patch.object(bl,'BD',local/'batch'),patch.object(bl,'OPEN',local/'batch/open.json'), \
              patch.object(bl,'CLOSED',local/'batch/closed'),patch.object(bl,'PASSED',local/'batch/passed'), \
              patch.object(ld.li,'LEAN',self.root/'lean'),patch.object(ld,'LOCAL',local),patch.object(ld,'B',builds), \
@@ -225,7 +225,7 @@ class SelectiveRecovery(Repo):
         self.assertEqual(sum(e['state']=='verified' for e in b['entries']),29)
         self.assertEqual([e['item'] for e in b['entries'] if e['state']=='returned'],['Sheaf.D0'])
         self.assertIn('your change of Sheaf.D0 broke its importer Sheaf.Old',
-                      (self.root/'coord/returns/G.md').read_text())
+                      '\n'.join(x['reason'] for x in [json.loads(p.read_text()) for p in (self.root/'local/batch/repair').glob('*.json')]))
 
     def test_failing_module_batch_writer(self):
         b,calls,_=self.run_batch(own=True)
@@ -235,8 +235,11 @@ class SelectiveRecovery(Repo):
         b,calls,_=self.run_batch(bad=(0,5))
         self.assertEqual(calls,['red','green'])
         self.assertEqual(sum(e['state']=='returned' for e in b['entries']),2)
-        text=(self.root/'coord/returns/G.md').read_text()
-        self.assertIn('## Sheaf.D0',text);self.assertIn('## Sheaf.D5',text)
+        jobs=[json.loads(p.read_text()) for p in (self.root/'local/batch/repair').glob('*.json')]
+        self.assertEqual({j['item'] for j in jobs},{'Sheaf.D0','Sheaf.D5'})
+        self.assertNotIn('## Sheaf.D0',(self.root/'coord/returns/G.md').read_text())
+        for j in jobs:
+            self.assertEqual(json.loads((self.root/'coord/claims'/(j['item']+'.lock')).read_text())['who'],j['group'])
 
     def test_bad_with_two_dependents(self):
         b,calls,_=self.run_batch(deps=(1,2))
@@ -268,7 +271,7 @@ class SelectiveRecovery(Repo):
 class IncrementalGraph(Repo):
     def test_cached_graph_updates_external_tip_without_rescan(self):
         import import_cycles as ic
-        with patch.object(bl.md,'ROOT',self.root),patch.object(bl,'ROOT',self.root),patch.object(bl.li,'LEAN',self.root/'lean'), \
+        with patch.object(bl.md,'ROOT',self.root),patch.object(bl,'ROOT',self.root), patch.object(bl.repairs,'ROOT',self.root), patch.object(bl.repairs,'JOBS',self.root/'local/batch/repair'),patch.object(bl.li,'LEAN',self.root/'lean'), \
              patch.object(ic,'graph',wraps=ic.graph) as scan:
             pre=bl.Pre(); self.addCleanup(lambda: __import__('shutil').rmtree(pre.dir))
             pre.snapshot()
