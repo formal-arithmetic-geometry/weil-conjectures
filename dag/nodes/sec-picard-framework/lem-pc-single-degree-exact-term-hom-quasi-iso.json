@@ -14,21 +14,29 @@
  ],
  "proof": [
   {
-   "text": "Every product factor except the one at k is zero. Use the product universal property to identify Hom(P,M)^n with internal Hom(P^k,M^(k+n)). Since every source differential vanishes, the differential is postcomposition with d_M. The identification commutes with f componentwise, including when P^k is zero.",
-   "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The internal Hom functor is additive sectionwise. Short-exact-sequence preservation gives finite-limit and finite-colimit preservation by the exact-functor criterion.",
+   "text": "Let F be internal sheaf Hom from P.X k. Prove additivity by sectionwise extensionality. The hypothesis hexact says that S.map F is short exact for every short exact S; Functor.exact_tfae therefore supplies F.PreservesHomology.",
    "uses": [
     "lem-sp-exact-functor-preserves-homology"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the natural homology comparison for an exact functor to the degreewise image of M and N. The map on cohomology is an isomorphism because f is a quasi-isomorphism. Translation of the grading by k does not affect this assertion.",
+   "text": "Use homComplex_projections_exists to obtain the limit fan and differential and map formulas for the actual chosen Hom-complex. For p different from k, contravariant internal Hom is additive and hence carries the zero source object to zero. Projection to k is invertible: lift the family which is the identity at k and zero elsewhere; the fan universal property proves both inverse identities. This also works when P.X k is zero.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For adjacent n,m, the source differential P.d k (k+m-n) is zero since its target degree differs from k. The specified differential formula thus reduces to postcomposition with M.d (k+n) (k+m). The specified chain-map formula gives naturality with postcomposition by f in each degree. Assemble the three invertible projections into an isomorphism between the short complex at n of Hom(P,M) and F applied to the short complex of M at k+n, and similarly for N. These isomorphisms give an isomorphism of arrows.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "QuasiIsoAt f (k+n) gives a quasi-isomorphism of the three-term complex at k+n. F preserves that quasi-isomorphism by ShortComplex.quasiIso_map_of_preservesLeftHomology, the natural exact-functor homology comparison. Transport through the arrow isomorphism using ShortComplex.quasiIso_iff_of_arrow_mk_iso. Apply quasiIsoAt_iff' and quasiIso_iff for all integer n. No boundedness or shift sign convention is required.",
    "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-pc-quasi-iso-modules"
@@ -39,13 +47,14 @@
  "proof_deps": [
   "def-pc-quasi-iso-modules",
   "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
   "lem-sp-exact-functor-preserves-homology",
   "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 0A8X, 08DM, 010N and 0117",
-  "place": "The bounded exact-term Hom argument, separated into its single-degree and split-tail calculations"
+  "document": "Stacks Project, Tags 0A8X and 010N; Mathlib ShortComplex.ExactFunctor and ShortComplex.PreservesHomology",
+  "place": "K3 stage-3 proof: invertible product projections and natural isomorphisms of three-term complexes; exact-functor homology preservation"
  },
  "mathlib_searches": [
   {
@@ -125,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T022421-L-3216603",
-  "kind": "interface",
+  "landing": "20261013T040749-L-3949270",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
