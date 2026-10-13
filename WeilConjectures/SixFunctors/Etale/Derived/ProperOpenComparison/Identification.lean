@@ -193,6 +193,7 @@ theorem restrictionIso_hom_app_eq
     upperStarBLowerShriekIso_hom_app_comp, upperStarBToLowerStar_app]
   simp only [Functor.map_comp, assoc]
   rw [reassoc_of% hcancel, reassoc_of% hnatBC, reassoc_of% hnatC]
+  rfl
 
 end ProperOpenDatum
 
