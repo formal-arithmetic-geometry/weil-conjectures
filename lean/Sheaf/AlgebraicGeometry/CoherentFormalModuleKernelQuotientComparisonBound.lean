@@ -6,11 +6,8 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModuleShiftedQuotient
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Mathlib.RingTheory.Filtration
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTransitionExactBound
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTransitionEpi
 
 /-! # Artin--Rees bounds for stabilized kernel quotients
 
@@ -27,24 +24,14 @@ namespace AlgebraicGeometry
 Source: Stacks Project, Lemma 087X, claims (b)--(c).
 (blueprint: lem-weil-pbc-formal-kernel-quotient-comparison-bound).
 
-Proof: Choose a finite affine open cover of the Noetherian scheme. On each affine,
-the formal-module equivalence represents alpha by a map f of finite modules over
-the Noetherian completed ring. Put L = ker f. Artin--Rees for im f shows that the
-eventual kernel images are (L + I^(m+1) M)/I^(m+1) M. For each m, choose l
-large enough for this image calculation and l >= m+c.
-The hypothesis hc identifies this image with the image at m+c, and hS identifies
-its inclusion with j_m.
-Thus S_m is canonically L/(L intersect I^(m+1) M), with its induced transitions.
-Artin--Rees for L in M supplies b with L intersect I^(r+b) M contained in I^r L.
-Take the maximum of these bounds on the finite cover. For every d at least c and b,
-the shifted quotient at n is L/(L intersect I^(n+d+1) M + I^(n+1) L), hence
-L/I^(n+1) L. This identification respects the explicit quotient transition maps.
-Reducing the term at n+1 by I^(n+1) therefore gives the term at n, with
-the factorization equation in the conclusion. These local comparison maps agree
-on overlaps: their composites with the quotient projection are the prescribed
-transition, and that projection is epic. Glue the maps; each is locally an
-isomorphism, so the glued map is an isomorphism. The argument also
-covers I=0, I=O_X, zero modules, and the empty scheme (take the bound zero).
+Proof: The transition epimorphism lemma proves surjectivity using stabilization of
+kernel images, independently of Artin--Rees. The eventual exactness lemma supplies
+one bound and, for every sufficiently large shift and every n, the zero composite
+and exactness of the ideal-product inclusion followed by the quotient transition.
+In an abelian category an exact pair with epimorphic second arrow presents its
+target as the cokernel of the first arrow. Uniqueness of cokernels compares this
+presentation with formalModuleQuotient. Its defining equation gives precisely
+the requested equation with formalModuleQuotientπ.
 -/
 theorem coherentFormalModule_kernel_quotient_comparison_bound {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
@@ -69,6 +56,18 @@ theorem coherentFormalModule_kernel_quotient_comparison_bound {X : Scheme.{u}} [
         formalModuleQuotientπ I (n + 1)
             ((formalShiftedQuotient I S d).obj (op (n + 1))) ≫ e.hom =
           (formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op := by
-  sorry
+  obtain ⟨b, hb⟩ :=
+    coherentFormalModule_kernel_quotient_transition_exact_bound I F H α c S j hc hS
+  refine ⟨b, ?_⟩
+  intro d hd n
+  obtain ⟨hz, hex⟩ := hb d hd n
+  have := coherentFormalModule_kernel_quotient_transition_epi I F H α c S j hc hS d n
+  let k := Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι (n + 1)).2
+    ((formalShiftedQuotient I S d).obj (op (n + 1)))
+  let t := (formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op
+  let hcolim : IsColimit (CokernelCofork.ofπ t hz) := hex.gIsCokernel
+  refine ⟨(cokernelIsCokernel k).coconePointUniqueUpToIso hcolim, ?_⟩
+  exact IsColimit.comp_coconePointUniqueUpToIso_hom
+    (cokernelIsCokernel k) hcolim WalkingParallelPair.one
 
 end AlgebraicGeometry

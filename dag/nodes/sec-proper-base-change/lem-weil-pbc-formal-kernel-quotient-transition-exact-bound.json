@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), claims (b)--(d); checked at https://stacks.math.columbia.edu/tag/087X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-formal-shifted-quotient",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-formal-kernel-quotient-transition-exact-bound",
+ "title": "Eventual exactness at shifted kernel quotient terms",
+ "statement": "theorem coherentFormalModule_kernel_quotient_transition_exact_bound\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) :\n    ∃ b : ℕ, ∀ d : ℕ, max c b ≤ d → ∀ n : ℕ,\n      ∃ hz : Scheme.idealModuleProductι\n          (Scheme.idealSheafPower I.toModulesι (n + 1)).2\n          ((formalShiftedQuotient I S d).obj (op (n + 1))) ≫\n          (formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op = 0,\n        (ShortComplex.mk\n          (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι (n + 1)).2\n            ((formalShiftedQuotient I S d).obj (op (n + 1))))\n          ((formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op) hz).Exact",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientComparisonBound",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Stacks 087X proof, claims (a)--(c), kernel image and shifted quotient computation",
+   "via": [
+    "lem-weil-pbc-formal-kernel-quotient-comparison-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact pair with an epimorphic second map identifies its target with the cokernel of the first map",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact pair with epimorphic second map gives an isomorphism from the cokernel of the first map",
+   "results": "ShortComplex.Exact.isIso_g', isIso_fromOpcycles, exact_and_epi_g_iff_of_iso; generic category results, no formal-module Artin--Rees bound. Loogle also found ShortComplex.Exact.gIsCokernel.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalShiftedQuotient|imageSubobject.*epi|gIsCokernel",
+   "results": "21 Mathlib hits, including gIsCokernel and imageSubobject_comp_le_epi_of_epi. Direct rg of both library roots found the assigned comparison bound and its callers, no exactness bound or surjectivity declaration.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stabilized images of kernels in a coherent adic inverse system have quotients whose transition kernel equals the image of multiplication by the ideal power",
+   "results": "Eight completion transition and lifting declarations; none states the stabilized sheaf-kernel exactness bound.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilized.*kernel|kernel.*stabilized|shifted.*exact|exact.*shifted",
+   "results": "msearch: six irrelevant triangulated-category hits. Direct rg of lean/ finds formalTransition_epi (requires a coherent formal module already), the affine image comparison (only equality of two kernel images), and the open comparison bound and its callers. None proves shifted stabilized-image exactness.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Epi, CategoryTheory.Abelian.image",
+   "results": "Abelian.instEpiFactorThruImage and NonPreadditiveAbelian.instEpiFactorThruImage; the former is already used by infer_instance in the epi proof. Neither states the shifted formal-module exactness bound.",
+   "date": "2026-10-13",
+   "verdict": "generic ingredient only"
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, claims (a)--(c)"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTransitionExactBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelQuotientTransitionExactBound.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_quotient_transition_exact_bound",
+  "statement": "theorem coherentFormalModule_kernel_quotient_transition_exact_bound\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) :\n    ∃ b : ℕ, ∀ d : ℕ, max c b ≤ d → ∀ n : ℕ,\n      ∃ hz : Scheme.idealModuleProductι\n          (Scheme.idealSheafPower I.toModulesι (n + 1)).2\n          ((formalShiftedQuotient I S d).obj (op (n + 1))) ≫\n          (formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op = 0,\n        (ShortComplex.mk\n          (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι (n + 1)).2\n            ((formalShiftedQuotient I S d).obj (op (n + 1))))\n          ((formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op) hz).Exact",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "proof": [
+  {
+   "text": "Restrict to a finite affine cover. The affine formal-module equivalence represents\nalpha by a map f : M to N over the Noetherian completed ring. Put L = ker f.\nArtin--Rees for im f in N gives a constant a such that\nf inverse(I^t N) = L + I^(t-a) f inverse(I^a N) for t >= a.\nFor l >= m+a, its image modulo I^(m+1) M is therefore the image of L.\nChoose l also >= m+c, and use hc to identify the image at m+c with this image.\nThus the eventual kernel image in level m is L/(L intersect I^(m+1) M).\nThe isomorphisms hS transport this\nidentification to S_m; the equations with j and its naturality identify the transitions\nwith the reductions of L. Artin--Rees for L in M supplies a bound b on each affine\nwith L intersect I^(r+b) M contained in I^r L. Take the maximum on the finite cover.\nFor d >= max(c,b), the level n shifted quotient is L/I^(n+1) L: the extra intersection\nL intersect I^(n+d+1) M is contained in I^(n+1) L. Its transition from n+1 to n\nis reduction, whose kernel is I^(n+1)L/I^(n+2)L, the ideal product of its source.\nThe affine ideal-product calculation transports this equality to the sheaves.\nExactness is local, giving the asserted short-complex exactness and zero composite.\nFor I=0 these transitions are identities; for I=O_X or zero modules all terms vanish.\nThe empty scheme admits bound zero.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-artin-rees",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-formal-shifted-quotient",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-formal-shifted-quotient",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T100229-L-2505574",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T100229-L-2505574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
