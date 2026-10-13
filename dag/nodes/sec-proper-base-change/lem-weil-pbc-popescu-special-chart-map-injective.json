@@ -15,22 +15,16 @@
  ],
  "proof": [
   {
-   "text": "Substitute the original variables by their coefficient classes, the free variables by polynomial variables, and complementary z_l by a_k inverse times sum h_klj Z_j. Modulo pi the relations f_l vanish, and the k-th chart relations vanish by substitution and normalization.",
+   "text": "Use the descended C0-algebra substitution from the unlocalized lifting quotient. hcmod identifies the element t to be inverted with the image of a0. Algebra compatibility identifies its substitution with the coefficient algebra map, whose value at a0 is a unit in the localized polynomial ring. Extend the substitution to G on the localized lifting quotient using Away.liftAlgHom.",
    "uses": [
-    "lem-weil-pbc-popescu-lift-preparation",
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-weil-pbc-popescu-special-chart-substitution",
+    "def-weil-pbc-popescu-special-chart-map",
+    "lem-weil-pbc-localization-away-universal-property"
    ],
    "elementary": true
   },
   {
-   "text": "For every other chart compare the two expansions of a_k a_kprime f_l in the reduced localized conormal module. The specified basis forces each b_j=a_kprime h_klj-sum h_kprime,ljprime h_k,jprimej to vanish in the reduced coefficient chart. The surjective presentation with its specified kernel identifies that chart with Cbar[1/a_k], and passage to C0[1/a0] preserves zero. Substitution thus kills all defining relations.",
-   "uses": [
-    "lem-weil-pbc-popescu-lift-preparation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Descend the substitution through the quotients and ULift and extend it through localization. Its composite with the canonical map fixes the free variables and, by hc, polynomial induction, surjectivity of epsilon, and hcmod, fixes coefficients. It also fixes the inverse of a0 by uniqueness. Polynomial extensionality gives a left inverse, proving injectivity.",
+   "text": "The composite G with the canonical chart map fixes each free polynomial variable by the substitution values and the localization lift equation. Its restriction to localized coefficients equals C: localization ringHom_ext reduces this to the base C0, where both algebra homomorphisms commute with scalar maps. MvPolynomial.ringHom_ext gives the identity composite. Function.LeftInverse.injective finishes.",
    "uses": [
     "def-weil-pbc-popescu-special-chart-map",
     "lem-weil-pbc-localization-away-universal-property",
@@ -40,15 +34,15 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-popescu-special-chart-substitution",
   "def-weil-pbc-popescu-special-chart-map",
   "lem-weil-pbc-localization-away-universal-property",
-  "lem-weil-pbc-popescu-lift-preparation"
+  "def-weil-pbc-mv-polynomial-ring"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Stacks Project, Tag 07CP, displayed calculation modulo pi and comparison of chart coefficients; read online at https://stacks.math.columbia.edu/tag/07CP on 2026-10-13."
+  "place": "M1 reduction of the Tag 07CP argument: descent separated from localization and extensionality"
  },
  "mathlib_searches": [
   {
@@ -134,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T015554-L-3020575",
+  "landing": "20261013T045540-L-132069",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

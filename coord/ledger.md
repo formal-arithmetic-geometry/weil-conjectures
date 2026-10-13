@@ -11135,3 +11135,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/K3/Sheaf.AlgebraicGeometry.NoetherianApproximationData (stage 3; reviewer PASS; first push; landing 20261013T045538-L-131410 (interface); batch 20261013T045507; modules 4; new nodes 3)
 - 04:55 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ScalarCupPullbackNaturality (stage 3; reviewer PASS; first push; landing 20261013T045539-L-131692 (interface); batch 20261013T045507; modules 4; new nodes 3)
 - 04:55 L: merged deliver/M1/Sheaf.RingTheory.PopescuParameterCoefficients (stage 3; reviewer PASS; first push; landing 20261013T045540-L-131919 (interface); batch 20261013T045507; modules 2; new nodes 1)
+- 04:55 L: merged deliver/M1/Sheaf.RingTheory.PopescuSpecialChartInjective (stage 3; reviewer PASS; first push; landing 20261013T045540-L-132069 (interface); batch 20261013T045507; modules 2; new nodes 1)
