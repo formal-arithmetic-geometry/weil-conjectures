@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-open-stalk-unit-map-one-lift",
+ "kind": "statement",
+ "title": "One unit-source open-site stalk map lifts on one neighbourhood",
+ "statement": "Let X be a scheme [def-pc-scheme], U an open neighbourhood of x, and S_U the ambient-ring-valued open module stalk functor [def-sc-open-module-stalk-functor]. Let L be the unit module sheaf on the slice over U [def-weil-sheaf-of-modules-category], N any module sheaf on that slice, and t:S_U(L) → S_U(N) a linear morphism. There exist x ∈ V ⊆ U, a natural isomorphism a:R_VU S_V ≅ S_U for slice restriction R [def-pur-localized-ringed-site], and k:R_VU(L) → R_VU(N), with S_V(k)=a_L t a_N inverse in categorical composition order. Only the unit source is treated; no finite-rank parameter, simultaneous finite family, or further-restriction assertion occurs.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Modules Tag 01CP, lemma-stalk-internal-hom, finite-generator portion of the finite-presentation proof; Sheaves Tag 00A0 (3). Read https://stacks.math.columbia.edu/tag/01CP and https://stacks.math.columbia.edu/tag/00A0 on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-open-module-stalk-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply the slice/open-subspace equivalence to N and the unit. Mathlib Opens.sheafOfModulesEquivOverUnit identifies the image of the unit with the structure module. The open-immersion stalk ring map is an isomorphism, so the ambient-ring-valued unit stalk is the regular ambient stalk module. The map t is determined by the image of 1. Represent this image by one section on an open neighbourhood V inside U. Multiply by that section and precompose overMapUnitIso to construct the unit-source sheaf morphism k. This is the singleton-coordinate case of finite-free local stalk-map lifting; it requires no finite intersection.",
+   "uses": [
+    "lem-weil-pbc-finite-free-local-stalk-map-lift",
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the canonical natural restriction-stalk comparison. Its same-germ formula identifies the stalk of k on the unit generator with t on that generator. Linearity gives S_V(k) followed by a_N equals a_L followed by t. Compose with a_N inverse. A zero target or zero t uses the zero section; x in U excludes an empty neighbourhood.",
+   "uses": [
+    "lem-sc-open-module-stalk-restriction-comparison",
+    "new-module-restriction-stalk-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-free-local-stalk-map-lift",
+  "def-sc-open-module-stalk-functor",
+  "lem-sc-open-module-stalk-restriction-comparison",
+  "new-module-restriction-stalk-components"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P3",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Modules Tag 01CP, lemma-stalk-internal-hom, unit-source case; Sheaves Tag 00A0 (3), lemma-restrict. Reduction to one image germ written by P3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from the stalk of the unit module sheaf lifts to a sheaf morphism on an open neighborhood",
+   "results": "Eight Tilde stalk/localization hits, no unit-source lifting for arbitrary open-site module sheaves.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unit",
+   "results": "unitHomEquiv, freeCofan and their formulas provide unit sheaf universal properties, but no local stalk-map lift.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*stalk|stalk.*unit|sum.*freeπ|freeπ.*ιFree",
+   "results": "Stalk/skyscraper adjunctions, ring unit criteria and Tilde stalk maps, no open-site unit-source local lift. Additional library/DAG and whole-blueprint searches found no independent exact unit-source statement.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from the stalk of the unit module sheaf lifts to a sheaf morphism on an open neighborhood",
+   "results": "Service returned Internal Server Error. Loogle, LeanFinder and local source searches were used.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "P3",
+  "date": "2026-10-13",
+  "item": "Sheaf.AlgebraicGeometry.OpenStalkFreeMapOneLift"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Refinement of the local finite-free-source stalk-map lifting step: existence on just one neighbourhood, without uniform coordinates or further restriction. Unit-source image-germ lifting, before intersecting finite coordinate neighbourhoods.",
+   "via": [
+    "lem-sc-open-stalk-free-map-one-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenStalkUnitMapOneLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_open_stalk_unit_map_one_lift",
+  "statement": "theorem exists_open_stalk_unit_map_one_lift\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n    (t : (openModuleStalkFunctor X U ⟨x, hxU⟩).obj\n      (SheafOfModules.unit ((moduleRings X.toRingedSpace).over U)) ⟶\n      (openModuleStalkFunctor X U ⟨x, hxU⟩).obj N) :\n    ∃ (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U),\n      let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU)\n      let S := openModuleStalkFunctor X V ⟨x, hxV⟩\n      let F := SheafOfModules.unit ((moduleRings X.toRingedSpace).over U)\n      ∃ (a : R ⋙ S ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)\n        (k : R.obj F ⟶ R.obj N),\n        S.map k = a.hom.app F ≫ t ≫ a.inv.app N",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T130751-L-3986471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T130751-L-3986471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

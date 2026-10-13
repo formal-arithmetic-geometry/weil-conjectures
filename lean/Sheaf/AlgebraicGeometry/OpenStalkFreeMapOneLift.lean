@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLift
+import Sheaf.AlgebraicGeometry.OpenStalkRestrictionTransport
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # One finite-free open-site stalk map lifts on one neighbourhood
 
@@ -22,6 +25,31 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
+private theorem restriction_lift_stalk
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {R : A ⥤ B} {Q : B ⥤ C} {P : A ⥤ C} {S : C ⥤ D} {T : B ⥤ D} {H : A ⥤ D}
+    (c : R ⋙ Q ≅ P) (d : Q ⋙ S ≅ T) (a : R ⋙ T ≅ H) (e : P ⋙ S ≅ H)
+    (hc : ∀ M, S.map (c.hom.app M) ≫ e.hom.app M = d.hom.app (R.obj M) ≫ a.hom.app M)
+    {F N : A} (t : H.obj F ⟶ H.obj N) (k : R.obj F ⟶ R.obj N)
+    (hk : T.map k = a.hom.app F ≫ t ≫ a.inv.app N) :
+    S.map (c.inv.app F ≫ Q.map k ≫ c.hom.app N) =
+      e.hom.app F ≫ t ≫ e.inv.app N := by
+  apply (cancel_mono (e.hom.app N)).1
+  simp only [Category.assoc, e.inv_hom_id_app, Category.comp_id, Functor.map_comp]
+  rw [hc N]
+  have hd : S.map (Q.map k) ≫ d.hom.app (R.obj N) =
+      d.hom.app (R.obj F) ≫ T.map k := d.hom.naturality k
+  rw [← Category.assoc (S.map (Q.map k)), hd]
+  simp only [Category.assoc]
+  rw [hk]
+  simp only [Category.assoc, a.inv_hom_id_app, Category.comp_id]
+  rw [← Category.assoc (d.hom.app _), ← hc F]
+  simp only [← Category.assoc, ← S.map_comp, c.inv_hom_id_app, S.map_id,
+    Category.id_comp]
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- A single finite-free stalk map lifts on one smaller open. The comparison may
 be chosen with this lift; no comparison family or further-restriction assertion is made.
 
@@ -61,7 +89,56 @@ theorem exists_open_stalk_free_map_one_lift
         (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))
       ∃ (a : R ⋙ S ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)
         (k : R.obj F ⟶ R.obj N),
-        S.map k = a.hom.app F ≫ t ≫ a.inv.app N := by sorry
+        S.map k = a.hom.app F ≫ t ≫ a.inv.app N := by
+  classical
+  let I := ULift.{u} (Fin m)
+  let F := SheafOfModules.free (R := (moduleRings X.toRingedSpace).over U) I
+  let L := SheafOfModules.unit ((moduleRings X.toRingedSpace).over U)
+  let T := openModuleStalkFunctor X U ⟨x, hxU⟩
+  let ti (i : I) : T.obj L ⟶ T.obj N := T.map (SheafOfModules.ιFree i) ≫ t
+  obtain ⟨e, he⟩ := exists_openStalk_restriction_transport X U x hxU
+  choose D hxD hDU a k hk using fun i : I ↦
+    exists_open_stalk_unit_map_one_lift X U x hxU N (ti i)
+  let V : X.Opens := U ⊓ ⨅ i : I, D i
+  have hVU : V ≤ U := inf_le_left
+  have hVD (i : I) : V ≤ D i := inf_le_right.trans (iInf_le D i)
+  have hxV : x ∈ V := by
+    refine ⟨hxU, ?_⟩
+    rw [TopologicalSpace.Opens.coe_iInf]
+    exact Set.mem_iInter.mpr hxD
+  let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU)
+  let S := openModuleStalkFunctor X V ⟨x, hxV⟩
+  let E : R ⋙ S ≅ T := e V hxV hVU
+  have hi (i : I) : ∃ g : R.obj L ⟶ R.obj N,
+      S.map g = E.hom.app L ≫ ti i ≫ E.inv.app N := by
+    obtain ⟨c, d, hc⟩ := he (D i) (hxD i) (hDU i) (a i) V hxV (hVD i) hVU
+    let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+      (homOfLE (hVD i))
+    refine ⟨c.inv.app L ≫ Q.map (k i) ≫ c.hom.app N, ?_⟩
+    exact restriction_lift_stalk c d (a i) E hc (ti i) (k i) (hk i)
+  choose g hg using hi
+  let K : R.obj F ⟶ R.obj N := ∑ i : I, R.map (SheafOfModules.freeπ i) ≫ g i
+  refine ⟨V, hxV, hVU, E, K, ?_⟩
+  change S.map K = E.hom.app F ≫ t ≫ E.inv.app N
+  dsimp only [K]
+  rw [Functor.map_sum]
+  simp only [Functor.map_comp, hg]
+  have hn (i : I) :
+      S.map (R.map (SheafOfModules.freeπ i)) ≫ E.hom.app L =
+        E.hom.app F ≫ T.map (SheafOfModules.freeπ i) :=
+    E.hom.naturality (SheafOfModules.freeπ i)
+  simp only [← Category.assoc, hn]
+  simp only [ti, Category.assoc]
+  calc
+    _ = E.hom.app F ≫ (∑ i : I,
+        T.map (SheafOfModules.freeπ i ≫ SheafOfModules.ιFree i)) ≫
+          t ≫ E.inv.app N := by
+      simp only [Preadditive.comp_sum, Preadditive.sum_comp, Functor.map_comp,
+        Category.assoc]
+    _ = E.hom.app F ≫ t ≫ E.inv.app N := by
+      rw [← Functor.map_sum, SheafOfModules.sum_freeπ_ιFree, T.map_id,
+        Category.id_comp]
+
 
 end
 end AlgebraicGeometry.Scheme
