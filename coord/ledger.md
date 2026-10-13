@@ -10544,3 +10544,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:55 L: merged deliver/F4/Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelData (stage 3; reviewer PASS; first push; landing 20261013T015552-L-3019655 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:55 L: merged deliver/F4/Sheaf.AlgebraicGeometry.PicardBaseChangeStalkSurjective (stage 3; reviewer PASS; first push; landing 20261013T015552-L-3019860 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:55 L: merged deliver/G1/Sheaf.Algebra.Homology.HomComplexRestrictOpen (stage 3; reviewer PASS; first push; landing 20261013T015553-L-3020017 (interface); batch 20261013T015540; modules 2; new nodes 1)
+- 01:55 L: merged deliver/G2/Sheaf.AlgebraicGeometry.FormalCompletionPushforwardLift (stage 3; reviewer PASS; first push; landing 20261013T015553-L-3020203 (interface); batch 20261013T015540; modules 4; new nodes 3)

@@ -8,11 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
-import Sheaf.AlgebraicGeometry.TheoremFormalFunctions
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.FormalSystemsPullback
+import Sheaf.AlgebraicGeometry.FormalCompletionPushforwardLimitIso
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitFull
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitProjectionEpi
 
 /-! # Lifting compatible maps through the formal-functions comparison
 
@@ -35,25 +33,22 @@ Source: Stacks Project, Lemma 088B, first half of the proof, paragraphs construc
 alpha from the inverse limit of gamma; https://stacks.math.columbia.edu/tag/088B.
 (blueprint: lem-weil-pbc-formal-completion-pushforward-lift)
 
-Proof: restrict to an affine open V = Spec A of Y. Write I = J(V), H = f_*F and
-M = Gamma(V,H). The ideal-product and affine quotient formulas identify the sections of
-H/J^(n+1)H with M/I^(n+1)M. The equations for kappa identify its section maps with the
-canonical quotient maps of the degree-zero formal-functions theorem. Thus lim kappa
-is the canonical isomorphism from the completion of M to lim Gamma(f^(-1)V,F/I^(n+1)F).
-The coherent-formal-module equivalence identifies lim Gamma(V,G_n) with a finite
-completed A-module N, whose projections are surjective with kernels I^(n+1)N. Compose
-lim gamma with the inverse of lim kappa. This map is linear over the completed ring:
-its projections are linear over A/I^(n+1), and those projections detect equality.
-Consequently it induces compatible maps N/I^(n+1)N -> M/I^(n+1)M. Via the affine
-sheaf equivalence these give alpha on V. The equation alpha_n kappa_n = gamma_n
-follows after precomposition with the surjective projection N -> N/I^(n+1)N.
-The same equation determines alpha uniquely, since on limits kappa is invertible,
-and the projections of N are surjective. Restricting to a smaller affine open preserves
-all quotient maps and equations, so uniqueness identifies the local alpha maps.
-Glue their component sheaf maps on the affine basis. Transition compatibility and the
-asserted equality hold on this basis, hence globally. The zero ideal gives ordinary
-constant systems; the unit ideal gives zero systems; zero modules and empty affines
-satisfy the construction as well. No isomorphism hypothesis on gamma is used. -/
+Proof: The canonical comparison induces an isomorphism on inverse-limit sheaves:
+on an affine basis this is the degree-zero theorem on formal functions, using the
+ideal-product and quotient section formulas. Compose lim gamma with its inverse
+to obtain beta: lim G -> lim H-completion. Reconstruction of coherent formal-system
+maps from maps of limit sheaves descends beta to alpha. The defining equation of
+alpha on limits and the inverse identities give lim(alpha kappa) = lim gamma.
+Compose this equality with each target limit projection. Naturality of the limit
+cones rewrites it as pi_G,n alpha_n kappa_n = pi_G,n gamma_n. The projections of
+a coherent formal system's limit sheaf are epic: its transitions are surjective
+on affine sections, and sequential limits of surjective module towers have
+surjective projections. Cancel pi_G,n and apply natural-transformation
+extensionality. Thus alpha kappa = gamma. The reconstruction lemma contains the
+affine quotient descent and gluing; the comparison-isomorphism lemma contains
+formal functions. No isomorphism hypothesis on gamma is used. Zero and unit ideals,
+zero sheaves and the empty scheme satisfy the same construction.
+-/
 theorem formalCompletion_pushforward_lift {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]
     (G : CoherentFormalModule Y J) (F : CoherentModules X)
@@ -69,6 +64,23 @@ theorem formalCompletion_pushforward_lift {X Y : Scheme.{u}} [IsNoetherian Y]
       Scheme.Modules.pushforward f) :
     ∃ α : G ⟶ (completion Y J).obj
         ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩,
-      α.hom ≫ κ = γ := by sorry
+      α.hom ≫ κ = γ := by
+  have : IsIso (lim.map κ) := formalCompletion_pushforward_limit_isIso J f F h κ hκ
+  let H : CoherentFormalModule Y J :=
+    (completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩
+  let β : limit G.obj ⟶ limit H.obj := lim.map γ ≫ inv (lim.map κ)
+  obtain ⟨α, hα⟩ := coherentFormalModule_limit_full J G H β
+  refine ⟨α, ?_⟩
+  have heq : lim.map (α.hom ≫ κ) = lim.map γ := by
+    rw [Functor.map_comp, hα]
+    simp [β]
+  apply NatTrans.ext
+  funext j
+  obtain ⟨n⟩ := j
+  have : Epi (limit.π G.obj (op n)) :=
+    coherentFormalModule_limit_projection_epi J G n
+  apply (cancel_epi (limit.π G.obj (op n))).1
+  simpa only [lim_map, limMap_π] using
+    congrArg (fun b ↦ b ≫ limit.π _ (op n)) heq
 
 end AlgebraicGeometry

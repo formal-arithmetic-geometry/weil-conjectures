@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-module-limit-projection-epi",
+ "kind": "statement",
+ "title": "Epimorphic projections from coherent formal-module limit sheaves",
+ "statement": "Let Y be Noetherian, J a quasi-coherent ideal sheaf, and G a coherent J-adic formal module [def-weil-pbc-coherent-formal-module]. For each n\\ge0 the canonical projection lim G\\to G_n (level n+1), with the limit taken among O_Y-module sheaves, is an epimorphism. No condition on another inverse system or morphism is imposed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W and first half of Lemma 088B; checked at https://stacks.math.columbia.edu/tag/087W and https://stacks.math.columbia.edu/tag/088B"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Coherence implies quasi-coherence of every level, by isCoherent_iff_isQuasicoherent_and_isFiniteType. The defining quotient isomorphism writes each successor transition as formalModuleQuotientπ followed by an isomorphism; the quotient projection is a cokernel projection and therefore epic.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply quasiCoherent_cokernel_image to a transition φ. Since φ is epic, cancel φ in φ≫cokernel.π φ=0 to obtain cokernel.π φ=0. On an affine open the cited formula says ker(cokernel.π φ)=range φ; its left side is all sections, so the transition is surjective on affine sections.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the limit cone on an affine open. Evaluation preserves limits of module sheaves. The tail functor k↦n+k is final, because every k is at most n+k, and its opposite is initial. Restrict the evaluated limit cone to this tail. Mathlib Concrete.surjective_π_app_zero_of_surjective_map applies to its surjective successor maps and gives surjectivity of the original nth projection. Thus the limit sheaf projection is surjective on every affine open.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The target level is quasi-coherent by the first step. All affine opens cover Y, by Mathlib iSup_affineOpens_eq_top. Apply the existing epi_of_surjective_app theorem to this cover and the established sectionwise surjectivity. This proves the sheaf projection epic without finite completed-module reconstruction or formal functions.",
+   "uses": [
+    "lem-weil-pbc-quasicoherent-epi-affine-cover"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasicoherent-epi-affine-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W and first half of Lemma 088B; explicit sheaf-limit formulation and categorical glue by G2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Maps of inverse limit sheaves of coherent adic formal modules descend to maps of systems",
+   "results": "Service unavailable: Internal Server Error; msearch recorded the attempted search.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map",
+   "results": "Exact sequential-limit surjectivity ingredient in Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic. The coherent formal-module sheaf statement still needs affine transition surjectivity and local section lifting.",
+   "date": "2026-10-13",
+   "verdict": "ingredient found; no exact coherent formal-module statement"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_π_app_zero_of_surjective_map; quasiCoherent_cokernel_image; epi_of_forall_exists_app_eq",
+   "results": "Read Mathlib concrete-category sequential limits, the source local-surjectivity criterion in QuasicoherentKernel, and the affine cokernel/image formula in Sheaf.Modules.QuasiCoherentCokernelImage. No exact coherent formal-module projection theorem.",
+   "date": "2026-10-13",
+   "verdict": "existing ingredients combined in Lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalCompletionPushforwardLift",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "First half of Lemma 088B: construction of alpha from lim gamma; Epimorphic projections from coherent formal-module limit sheaves",
+   "via": [
+    "lem-weil-pbc-formal-completion-pushforward-lift",
+    "lem-weil-pbc-formal-systems-push-pull-comparison",
+    "lem-weil-pbc-formal-systems-push-pull-core",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitProjectionEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleLimitProjectionEpi.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_limit_projection_epi",
+  "statement": "theorem coherentFormalModule_limit_projection_epi {Y : Scheme.{u}} [IsNoetherian Y]\n    (J : Y.IdealSheafData) (G : CoherentFormalModule Y J) (n : ℕ) :\n    Epi (limit.π G.obj (op n))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T015553-L-3020203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T015553-L-3020203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
