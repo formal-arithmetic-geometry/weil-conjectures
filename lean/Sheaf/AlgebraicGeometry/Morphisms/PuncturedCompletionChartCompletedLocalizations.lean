@@ -6,6 +6,8 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartSectionModules
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizationsAlpha
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionChartCompletedLocalizationsD
 
 /-!
 # Completed localization and affine pullback section identifications
@@ -81,6 +83,9 @@ theorem exists_chart_completed_localizations
           (pullback q (completionSpecMap A ∣_ U)).presheaf.map
             (homOfLE (le_top :
               (pullback.fst q (completionSpecMap A ∣_ U)) ⁻¹ᵁ
-                ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ≤ ⊤)).op).hom z * d i m) := by sorry
+                ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) ≤ ⊤)).op).hom z * d i m) := by
+  obtain ⟨alpha, ha⟩ := exists_chart_completed_localizations_alpha D t f hf hV
+  obtain ⟨d, hp, hc, hs⟩ := exists_chart_completed_localizations_d D t f hf hV alpha
+  exact ⟨alpha, d, ha, hp, hc, hs⟩
 
 end AlgebraicGeometry.Scheme.CompletionGluingData
