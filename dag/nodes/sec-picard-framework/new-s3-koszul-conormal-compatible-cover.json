@@ -1,0 +1,149 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "status": "split",
+ "merged_into": null,
+ "mathlib_match": null,
+ "id": "new-s3-koszul-conormal-compatible-cover",
+ "title": "Compatible Koszul comparisons on a chosen regular cover",
+ "statement": "Let i:Z→Y be a closed immersion, V an open, n a natural number and assume Koszul-regular affine generators near V. Write B=i_*O_Z, G=H^n(RHom_Y(B[0],B[0])), T=(i*G)|V and F=dual(exteriorSheaf(i*ker(i),n))|V. There exists a family W_z of neighborhoods containing z and isomorphisms c_z:F.over W_z ≅ T.over W_z whose hom components agree on each common subopen. This statement only produces one cover; it does not extend comparisons to prescribed larger neighborhoods.",
+ "proof": [
+  {
+   "text": "Choose regular affine charts around the points of V. Compute local derived Hom using their augmented Koszul resolutions and the bounded-above finite-free model. The Hom differential is zero modulo the immersion ideal. Match the dual wedge basis with the conormal basis, sheafify and restrict to the inverse-image chart. This gives comparisons on a chosen cover.",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-affine-conormal-frame"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each overlap refine by affine neighborhoods of its points. At a point of Z the quotient local ring is nonzero, so the two conormal bases have the same rank. Shrink to compare generators by an invertible substitution modulo the ideal. Exterior powers of that substitution commute with contraction; the corresponding chain map intertwines the normalized augmentations. Modulo the ideal these exterior powers are the conormal coordinate change, so dualizing gives the same Hom coordinate change. Comparison homotopies remove the choice of substitution. Localizing the pairing formulas and applying sheaf separatedness makes the comparison maps equal on every common subopen. Do not glue beyond this chosen cover.",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-affine-conormal-frame",
+    "new-q2-koszul-generator-chain-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-j3-koszul-projective-resolution",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-affine-conormal-frame",
+  "new-q2-koszul-generator-chain-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S3",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQY",
+   "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul regular immersion canonical self Ext dual exterior conormal comparisons compatible on overlaps",
+   "results": "Service unavailable: Internal Server Error; no absence conclusion drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible local isomorphisms of sheaves of modules glue to a global isomorphism",
+   "results": "Eight hits including Scheme.Modules.Hom.isIso_iff_isIso_app and locally bijective morphism lemmas; no normalized Koszul comparison cover.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "Functor.mapIso and eleven related transport lemmas; useful for final restriction, not Koszul chart compatibility.",
+   "date": "2026-10-13",
+   "verdict": "partial tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*comparison|koszul.*conormal|compatible.*cover",
+   "results": "Six general covering-family sheaf hits; no Koszul comparison. Local rg finds KoszulSelfExtConormalLocalComparisonCore but its statement has no overlap compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalAlignment",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-koszul-self-ext-conormal-local-comparison",
+   "place": "Comparison of regular generator charts on overlaps, before gluing to supplied neighborhoods",
+   "via": [
+    "new-w4-koszul-self-ext-local-alignment"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtConormalCompatibleCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtConormalCompatibleCover.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_self_ext_conormal_compatible_cover",
+  "statement": "theorem koszulRegularImmersion_self_ext_conormal_compatible_cover\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (V : Z.Opens) (n : ℕ)\n    (hregular : ∀ z : Z, z ∈ V → ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let T := (Scheme.Modules.restrictFunctor V.ι).obj\n      ((Scheme.Modules.tensorPullback i).obj G)\n    let F := (Scheme.Modules.restrictFunctor V.ι).obj\n      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))\n    ∃ (W : V.toScheme → V.toScheme.Opens),\n      (∀ z : V.toScheme, z ∈ W z) ∧\n      ∃ c : ∀ z : V.toScheme, F.over (W z) ≅ T.over (W z),\n        ∀ (x y : V.toScheme) (U : V.toScheme.Opens)\n          (hx : U ≤ W x) (hy : U ≤ W y),\n          (c x).hom.val.app (op (Over.mk (homOfLE hx))) =\n            (c y).hom.val.app (op (Over.mk (homOfLE hy)))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T142904-L-500544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T142904-L-500544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
