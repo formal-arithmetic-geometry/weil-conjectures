@@ -8,6 +8,9 @@ module
 public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.QuasiIso
+import Sheaf.Algebra.Homology.FiniteStripConeFiltration
+import Sheaf.CategoryTheory.DegreewiseFilteredAcyclic
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Augmentation of a double complex supported in a finite horizontal strip
 
@@ -53,6 +56,19 @@ theorem quasiIso_of_finite_strip_row_augmentation
       (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X n) ⟶ K.flip.X n,
       f.f 0 = (HomologicalComplex.singleObjXSelf
         (ComplexShape.up ℤ) 0 (A.X n)).hom ≫ a n ∧ QuasiIso f) :
-    QuasiIso b := by sorry
+    QuasiIso b := by
+  classical
+  choose f hf hq using hrows
+  obtain ⟨F, _, hfinite, hgraded⟩ := finite_strip_cone_filtration K r hsupport A a b hb f hf
+  apply (CochainComplex.mappingCone.quasiIso_iff_acyclic b).mpr
+  apply degreewiseFiltered_acyclic _ F
+  · intro n
+    exact ⟨n - (r : ℤ), n + 2, hfinite n⟩
+  · intro p n
+    obtain ⟨e⟩ := hgraded p n
+    have hcone := (CochainComplex.mappingCone.quasiIso_iff_acyclic (f p)).mp (hq p)
+    apply ((F.gradedPiece p).exactAt_iff_isZero_homology n).mpr
+    exact e.isZero_iff.mpr (((CochainComplex.mappingCone (f p)).exactAt_iff_isZero_homology
+      (n - p)).mp (hcone (n - p)))
 
 end HomologicalComplex₂

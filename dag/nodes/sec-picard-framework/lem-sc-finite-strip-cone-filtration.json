@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-finite-strip-cone-filtration",
+ "kind": "statement",
+ "title": "Finite-strip augmentation cone filtration and row-cone graded homology",
+ "statement": "Let C be an abelian category [def-sp-abelian], K an integer commuting double cochain complex with total [def-sp-double-complex-total], and r a natural number, with K.X i zero when i<0 or r<=i. Let A be an integer cochain complex, a_n:A.X n→K^(0,n), and b:A→Tot(K) a chain map whose degree-n component is a_n followed by the (0,n) total inclusion. Supply arbitrary chain maps f_p:A.X p[0]→K.flip.X p with zero component the canonical single-term identification followed by a_p; no quasi-isomorphism assumption is made. Then Cone(b) has a decreasing subcomplex filtration F [def-sp-filtration] whose degree-n step at p [def-sp-filtered-complex-subquotients] is the join of the image of the cone source inclusion when p<=n+1 (zero otherwise), and the images of the target diagonal inclusions K^(i,n-i)→Tot(K)^n→Cone(b)^n for 0<=i<r and p<=n-i. Its step at n-r is full and its step at n+2 is zero in degree n. For all p,n there is a homology isomorphism H^n(gr_F^p Cone(b))≅H^(n-p)(Cone(f_p)) [lem-pur-quasi-iso-cone-acyclic].",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4, second-variable variant; finite-diagonal filtration applied to augmentation cones, as used in Tag 08C1"
+ },
+ "proof": [
+  {
+   "text": "In degree n of Cone(b), take the finite sum of the images of the source inclusion A.X(n+1) if p<=n+1 and the target diagonal inclusions K^(i,n-i) if 0<=i<r and p<=n-i. These are the stated degreewise step subobjects. Horizontal total differentials preserve n-i and vertical differentials increase it. The negative source differential increases its vertical index, while the off-diagonal block b preserves it by hb. Therefore each degreewise step is stable under the cone differential. Factor through its monic inclusion to define its differential; uniqueness and monicity give d²=0. The inclusions between steps assemble into subcomplex inclusions, defining the antitone filtration F. No object is chosen from mere existence in a definition.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtration",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The support condition makes every target summand outside 0<=i<r zero. The total universal property identifies its diagonal coproduct with the finite coproduct of the remaining summands. In degree n the target vertical degrees are n-r+1 through n, and the source degree is n+1. Hence step n-r is the entire cone and step n+2 is zero. For r=0 the target total is zero and only the source summand remains, still satisfying these bounds.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Modulo step p+1 only vertical degree p remains: the target summand K^(n-p,p), and the source A.X p exactly at n=p-1. The diagonal biproduct projections give inverse maps for this degreewise comparison because all other summands are killed. The differential raising vertical degree vanishes. The horizontal total sign ε1 is 1, and the cone off-diagonal differential is the positive augmentation a p. The canonical single-complex identifications and hf identify this with the row cone of f p in degree n-p. Thus compare the short complexes in degrees n-1,n,n+1 and n-p-1,n-p,n-p+1, respectively; the two differential squares commute by these component formulas. The short-complex homology isomorphism gives the asserted isomorphism for all integers p,n, including empty rows and negative degrees.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Explicit cone-filtration refinement of the finite-diagonal spectral-sequence argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite strip mapping cone vertical filtration graded pieces horizontal row cones",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite horizontal strip double cochain complex row quasi isomorphism augmentation total",
+   "results": "Eight results: mappingCone.quasiIso_descShortComplex and truncation quasi-isomorphism criteria; no cone filtration or graded row comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"total\"",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*quasiIso|quasiIso.*total",
+   "results": "msearch 0 hits. Direct project search finds CartanEilenbergConeFiltration, whose Grothendieck and vertical natural-indexed resolution interface does not specialize to arbitrary abelian finite-horizontal-strip complexes. BicomplexColumns finite-column comparison requires quasi-isomorphisms in the other direction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteStripAugmentation",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof, finite-cover total comparison; finite-strip augmentation proof Steps 1--2: cone filtration and graded comparison",
+   "via": [
+    "lem-sc-finite-strip-row-augmentation",
+    "lem-sc-injective-terms-alternating-cech-augmentation",
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-koszul-cech-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteStripConeFiltration",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteStripConeFiltration.lean",
+  "declaration": "HomologicalComplex₂.finite_strip_cone_filtration",
+  "statement": "theorem finite_strip_cone_filtration\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ)\n    (a : ∀ n : ℤ, A.X n ⟶ (K.X 0).X n)\n    (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (hb : ∀ n : ℤ, b.f n =\n      a n ≫ K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (hf : ∀ p : ℤ, (f p).f 0 = (HomologicalComplex.singleObjXSelf\n      (ComplexShape.up ℤ) 0 (A.X p)).hom ≫ a p) :\n    ∃ F : DecreasingFiltration (CochainComplex.mappingCone b),\n      (∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n          if p ≤ n - i then imageSubobject\n            (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n              (CochainComplex.mappingCone.inr b).f n) else ⊥)) ∧\n      (∀ n : ℤ, F.complexStep (n - (r : ℤ)) n = ⊤ ∧ F.complexStep (n + 2) n = ⊥) ∧\n      (∀ p n : ℤ, Nonempty ((F.gradedPiece p).homology n ≅\n        (CochainComplex.mappingCone (f p)).homology (n - p)))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T115030-L-3326455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T115030-L-3326455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
