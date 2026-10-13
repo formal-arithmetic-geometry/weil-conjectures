@@ -13,14 +13,14 @@
  },
  "proof": [
   {
-   "text": "Use Mathlib extAddEquivCohomologyClass to compute Ext on I. The constant-sheaf adjunction evaluated on 1 identifies each Hom group with sections over the terminal open. Its inverse sends s to the homomorphism n ↦ n • s followed by the inverse adjunction. Naturality makes this a chain isomorphism, inducing a homology isomorphism.",
+   "text": "Use the constant-sheaf adjunction homAddEquiv and uliftZMultiplesAddEquiv to identify Hom from the constant integral sheaf with terminal-open sections, additively and naturally. Compose with Cochain.fromSingleEquiv to obtain a chain isomorphism from the Hom complex of the single integral sheaf to sections of the integer-indexed resolution. Compose with mapExtendIso to identify its target with the extension by zero of abelianCechSections I. Compose extAddEquivCohomologyClass with leftHomologyData.homologyIso.symm, the induced homology isomorphism, and extendHomologyIso to obtain e.",
    "uses": [
     "def-pc-abelian-cech-comparison-construction"
    ],
    "elementary": false
   },
   {
-   "text": "For each Ext class apply extMk_surjective. Differential naturality supplies the associated section cycle, which lifts to cycles by the kernel universal property. The extEquivCohomologyClass_extMk formula proves the homology representative equation. The equations determine e on every class, including degree zero.",
+   "text": "For t, extMk_surjective supplies a and ha. Form the fromSingleMk cocycle x used by extMk. Apply leftHomologyData.cyclesIso.inv, cyclesMap of the constructed chain isomorphism, and extendCyclesIso.hom to obtain z. The cyclesIso inclusion equation, cyclesMap_i and extendCyclesIso_hom_iCycles identify its section with the adjunction evaluated at 1; differential naturality and cancellation of the degreewise equality transports give the formula. The extEquivCohomologyClass_extMk equation, pi_comp_homologyIso_inv, homologyPi_naturality and homologyPi_extendHomologyIso_hom identify e(t) with homologyPi(z). All constructions hold for q=0 and for zero sections without extra hypotheses.",
    "uses": [
     "def-pc-abelian-cech-comparison-construction"
    ],
@@ -33,7 +33,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Resolution computation implicit in Lemma 20.11.2; Mathlib CategoryTheory.Abelian.Injective.Ext, extAddEquivCohomologyClass and extMk_surjective; explicit cocycle details by U1"
+  "place": "Resolution computation implicit in Lemma 20.11.2; Mathlib CategoryTheory.Abelian.Injective.Ext, extAddEquivCohomologyClass and extMk_surjective; B2 completes the explicit Hom-complex chain isomorphism, extension-by-zero transport, and representative equations in Lean"
  },
  "mathlib_searches": [
   {
@@ -215,10 +215,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T011936-L-2766554",
-  "kind": "interface",
+  "landing": "20261013T025257-L-3421444",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

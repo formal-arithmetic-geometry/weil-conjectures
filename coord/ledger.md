@@ -10795,3 +10795,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:52 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonCore (stage 3; reviewer PASS; first push; landing 20261013T025256-L-3421140 (interface); batch 20261013T025255; modules 2; new nodes 1)
 - 02:52 L: merged deliver/A4/Sheaf.AlgebraicGeometry.CoherentStalkMapExtends (stage 3; reviewer PASS; after a return; landing 20261013T025257-L-3421247 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:52 L: merged deliver/B2/Sheaf.Algebra.Homology.LocalizedHomComplexBoundaries (stage 3; reviewer PASS; first push; landing 20261013T025257-L-3421344 (proof); batch 20261013T025255; modules 1; new nodes 0)
+- 02:52 L: merged deliver/B2/Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionIso (stage 3; reviewer PASS; first push; landing 20261013T025257-L-3421444 (proof); batch 20261013T025255; modules 1; new nodes 0)
