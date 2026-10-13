@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-pbc-completed-pullback",
-   "place": "Detailed form, comparison with Stacks 099N: passage from the completed coefficient sheaf A_T to the constant Noetherian coefficient sheaf used by Stacks. Foundational input: ringed-pullback-kflat.",
+   "place": "Foundational input: ringed-pullback-kflat (the item is the Tag 0G7E ringed-topos pullback assertion).",
    "via": [
     "lem-weil-pbc-constant-completion-equivalence"
    ]
@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Ringed pullback kflat",
- "statement": "Let $\\mathcal C,\\mathcal C'$ be small sites with sheaves of commutative rings $\\mathcal O$ on $\\mathcal C$ and $\\mathcal O\\prime$ on $\\mathcal C\\prime$, respectively, let $u:\\operatorname{Sh}(\\mathcal C')\\to\\operatorname{Sh}(\\mathcal C)$ be a morphism of topoi, meaning an adjoint pair $u^{-1}\\dashv u_*$ with $u^{-1}$ preserving finite limits, and let $c:u^{-1}\\mathcal O\\to\\mathcal O'$ be a map of sheaves of commutative rings. On module sheaves [def-weil-sheaf-of-modules-category] put $u^*M=u^{-1}M\\otimes_{u^{-1}\\mathcal O}\\mathcal O'$ [def-pur-sheaf-tensor-product]. If $P$ is a K-flat complex [def-pc-kflat-complex] of $\\mathcal O$-module sheaves and all its terms are flat [def-pc-flat-sheaf-modules], then $u^*P$ is a K-flat complex of $\\mathcal O'$-module sheaves and all its terms are flat. No flatness of $c$ is required.",
+ "statement": "Let $\\mathcal C,\\mathcal C'$ be small sites with sheaves of commutative rings $\\mathcal O$ on $\\mathcal C$ and $\\mathcal O'$ on $\\mathcal C'$, respectively, let $u:\\operatorname{Sh}(\\mathcal C')\\to\\operatorname{Sh}(\\mathcal C)$ be a morphism of topoi, meaning an adjoint pair $u^{-1}\\dashv u_*$ with $u^{-1}$ preserving finite limits, and let $c:u^{-1}\\mathcal O\\to\\mathcal O'$ be a map of sheaves of commutative rings. On module sheaves [def-weil-sheaf-of-modules-category] put $u^*M=u^{-1}M\\otimes_{u^{-1}\\mathcal O}\\mathcal O'$ [def-pur-sheaf-tensor-product]. Apply $u^*$ termwise to cochain complexes [def-pc-cochain-complex-modules]. If $P$ is a K-flat complex [def-pc-kflat-complex] of $\\mathcal O$-module sheaves and all its terms are flat [def-pc-flat-sheaf-modules], then $u^*P$ is a K-flat complex of $\\mathcal O'$-module sheaves and all its terms are flat. No flatness of $c$ is required.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0G7E (lemma-pullback-K-flat)."
@@ -22,11 +22,30 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product",
   "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-pc-cochain-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the existing general ringed-topos pullback theorem [lem-weil-pbc-ringed-topos-kflat-pullback] to the given small sites, sheaves of rings, topos morphism u, and ring map c. Its conclusion is exactly that the termwise extension-of-scalars complex u^*P is K-flat over O' and has flat terms; the notation P versus K^bullet is immaterial.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat), with the identical general statement already recorded as lem-weil-pbc-ringed-topos-kflat-pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E (lemma-pullback-K-flat)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,12 +91,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-constant-completion-equivalence",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "worker": "stage1",
+  "summary": "Audited the Stacks Tag 0G7E statement and found an existing DAG node, lem-weil-pbc-ringed-topos-kflat-pullback, with the same ringed-topos hypotheses and K-flat/flat-term conclusion. The item is split as a direct application of that existing theorem; no new node is needed. Added the cochain-complex statement dependency used by the K-flat formulation and recorded the duplicate relationship in the review.",
+  "blueprint": "Realizes the foundational input “ringed-pullback-kflat” in the completed-pullback blueprint ancestor def-weil-pbc-completed-pullback.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-66de14b67",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-66de14b67 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements. Step 1 exactly applies the existing same-unit ringed-topos theorem, matching Stacks 0G7E without a flat coefficient-map assumption. Checked definitions, duplicate candidates, small cases, dependency acyclicity, and master coefficient/base-change distinctions. No new nodes, repairs, or tool-use exceptions. Detailed findings are in review.md."
+ }
 }
