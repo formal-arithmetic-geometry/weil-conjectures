@@ -155,8 +155,8 @@ theorem exists_iso_hom_eq_smul (φ : L ≅ M) (v : Λˣ) :
         (pointSmallEtale s).sheafFiber.map ψ.hom =
           (v : Λ) • (pointSmallEtale s).sheafFiber.map φ.hom := by
   refine ⟨⟨(v : Λ) • φ.hom, ((v⁻¹ : Λˣ) : Λ) • φ.inv, ?_, ?_⟩, rfl, fun Ω _ _ s ↦ ?_⟩
-  · rw [Linear.smul_comp, Linear.comp_smul, φ.hom_inv_id, smul_smul, Units.inv_mul, one_smul]
-  · rw [Linear.smul_comp, Linear.comp_smul, φ.inv_hom_id, smul_smul, Units.mul_inv, one_smul]
+  · rw [Linear.smul_comp, Linear.comp_smul, φ.hom_inv_id, smul_smul, Units.mul_inv, one_smul]
+  · rw [Linear.smul_comp, Linear.comp_smul, φ.inv_hom_id, smul_smul, Units.inv_mul, one_smul]
   · exact (pointSmallEtale s).sheafFiber_map_smul (v : Λ) φ.hom
 
 end AlgebraicGeometry.Scheme
