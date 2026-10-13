@@ -12316,3 +12316,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:50 L: merged deliver/H4/Sheaf.AlgebraicGeometry.PerfectHomContinuityAffine (stage 3; reviewer PASS; first push; landing 20261013T115024-L-3324174 (interface); batch 20261013T115020; modules 2; new nodes 1)
 - 11:50 L: merged deliver/H4/Sheaf.AlgebraicGeometry.PerfectHomContinuityUnion (stage 3; reviewer PASS; first push; landing 20261013T115025-L-3324359 (interface); batch 20261013T115020; modules 2; new nodes 1)
 - 11:50 L: merged deliver/J2/Sheaf.Algebra.FiniteRelationQuotientComparison (stage 3; reviewer PASS; first push; landing 20261013T115025-L-3324481 (proof); batch 20261013T115020; modules 1; new nodes 0)
+- 11:50 L: merged deliver/J3/Sheaf.RingTheory.DirectedTensorCoconesColimit (stage 3; reviewer PASS; first push; landing 20261013T115025-L-3324654 (proof); batch 20261013T115020; modules 1; new nodes 0)
