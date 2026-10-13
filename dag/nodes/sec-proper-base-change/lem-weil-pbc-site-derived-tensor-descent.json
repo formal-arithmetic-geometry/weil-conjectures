@@ -26,53 +26,176 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal A=\\operatorname{Mod}(R)$, which is abelian by [def-weil-sheaf-of-modules-category]. By [lem-pc-kflat-resolution], every object of $K(R)$ receives a quasi-isomorphism from an object of $\\mathcal P_R$. Quasi-isomorphisms in $K(R)$ have right calculus of fractions by [lem-pc-quasi-isomorphisms-multiplicative-system]. This calculus restricts to $W_R$: identities and composites are unchanged; given a right Ore square in $K(R)$ for arrows between objects of $\\mathcal P_R$, replace its new upper-left vertex $Z$ by a K-flat flat-term resolution $T\\to Z$ and precompose both arrows. The arrow required to be a denominator remains a quasi-isomorphism. For cancellation, if $sf=sg$ with $s$ a denominator and $f,g$ parallel arrows in $\\mathcal P_R$, ambient right cancellation gives $t:Z\\to\\operatorname{dom}(f)$ a quasi-isomorphism with $ft=gt$; replace $Z$ by such a resolution and precompose $t$. All these equations are equations in the homotopy category, and all vertices now lie in its full subcategory $\\mathcal P_R$. Thus $W_R$ admits right fractions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-kflat-resolution",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution); Derived Categories Tag 05RT (lemma-acyclic), right calculus of fractions"
+   }
+  },
+  {
+   "text": "The inclusion induces $J:W_R^{-1}\\mathcal P_R\\to D(R)$ by [lem-weil-pbc-localization-universal-property], since $Q_R$ inverts $W_R$. For $P,Q\\in\\mathcal P_R$, represent an arbitrary $QP\\to QQ$ by a roof $P\\xleftarrow{s}Z\\xrightarrow{f}Q$ using [lem-pc-right-fraction-representation]. A resolution $r:T\\to Z$ from [lem-pc-kflat-resolution] replaces it by $P\\xleftarrow{sr}T\\xrightarrow{fr}Q$, a roof entirely in $\\mathcal P_R$ with denominator in $W_R$. Hence $J$ is full. If two such roofs have the same image, [lem-pc-right-fraction-common-refinement] supplies a common vertex $Z$ and arrows $a_i:Z\\to T_i$ with $s_1a_1=s_2a_2$ a quasi-isomorphism and $f_1a_1=f_2a_2$. Resolve $Z$ by $r:T\\to Z$ and replace $a_i$ by $a_ir$. This is a common refinement within $\\mathcal P_R$, so the roofs are equal there by the same cited criterion. Thus $J$ is faithful. Every object of $D(R)$ is represented by a complex and is isomorphic to its K-flat flat-term resolution, so $J$ is essentially surjective and is an equivalence. In particular $L=Q_R|_{\\mathcal P_R}$ is itself a localization at $W_R$: composition with the equivalence $J$ preserves the universal property of the fraction localization.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pc-right-fraction-representation",
+    "lem-pc-right-fraction-common-refinement",
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YU, resolving representatives; Categories Tags 04VI (lemma-morphisms-right-localization), 04VJ (lemma-equality-morphisms-right-localization), 04VK (lemma-properties-right-localization)"
+   }
+  },
+  {
+   "text": "Total tensor defines a bifunctor on homotopy categories, not just complexes. Use the differential of [def-pc-tensor-complex-sheaves]. If $f-f'=dh+hd$ in the first variable, $h\\otimes1$ is a degree $-1$ homotopy on the total tensor: the two cross terms with the second differential cancel because $h$ lowers the first degree by one. If $g-g'=dk+kd$ in the second variable, the homotopy on the $(p,q)$ summand is $(-1)^p1\\otimes k$; its two terms with the first differential cancel. The remaining terms give respectively $(f-f')\\otimes1$ and $1\\otimes(g-g')$. Consequently the complex bifunctor descends to $K(R)\\times K(R)$ and then, after $Q_R$, gives $B(P,Q)=Q_R\\operatorname{Tot}(P\\otimes_RQ)$ on $\\mathcal P_R\\times\\mathcal P_R$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM (lemma-derived-tor-exact), tensor on the homotopy category; explicit tensor homotopies"
+   }
+  },
+  {
+   "text": "The functor $B$ inverts $W_R$ in each variable. For a quasi-isomorphism $s:P\\to P'$ and a K-flat $Q$, [lem-pur-quasi-iso-cone-acyclic] says $C(s)$ is acyclic. By [def-pc-kflat-complex], $\\operatorname{Tot}(C(s)\\otimes_RQ)$ is acyclic. The cone formula of [def-weil-abstract-derived-category] and tensor differential of [def-pc-tensor-complex-sheaves] identify this total complex with $C(\\operatorname{Tot}(s\\otimes1_Q))$: distribute the finite sum $P'^a\\oplus P^{a+1}$ over tensor and direct sums; on the shifted $P$ summands both differentials are $-d_P\\otimes1+(-1)^{a}1\\otimes d_Q$, and the off-diagonal term is $s\\otimes1$. The cone criterion therefore makes $\\operatorname{Tot}(s\\otimes1_Q)$ a quasi-isomorphism. For the second variable use the chain symmetry $x_p\\otimes y_q\\mapsto(-1)^{pq}y_q\\otimes x_p$, whose compatibility with the two differential terms follows by substituting $p+1$ and $q+1$ in the sign; the ordinary module symmetry is the balanced pure-tensor swap [def-pur-sheaf-tensor-product]. It reduces the assertion to the first-variable argument with the K-flat first factor held fixed. Finally $Q_R$ sends these quasi-isomorphisms to isomorphisms. This uses no exactness of tensor on arbitrary complexes and no boundedness assumption.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM; Tag 06YP (lemma-K-flat-quasi-isomorphism); Derived Categories Tag 05RT (lemma-acyclic), explicit cone and symmetry computation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-universal-property] to $L$ in Step 2 twice. First curry $B$ as $\\mathcal P_R\\to\\operatorname{Fun}(\\mathcal P_R,D(R))$ and localize its first variable. A denominator maps to a natural isomorphism because all its components are isomorphisms by Step 4. This gives $B_1:D(R)\\to\\operatorname{Fun}(\\mathcal P_R,D(R))$. The second-variable denominator maps of $B_1$ are also isomorphisms: this holds at every $L(P)$ by Step 4 and hence at every derived object by the essential surjectivity of $L$ and naturality of $B_1$. Curry in the other order and localize the second variable to obtain a bifunctor $T:D(R)\\times D(R)\\to D(R)$ and a natural isomorphism $T\\circ(L\\times L)\\cong B$. Define $-\\otimes_R^{\\mathbf L}-=T$ and invert this comparison to obtain the displayed canonical representative isomorphisms. The uniqueness clauses of the localization property fix the construction up to the unique comparison preserving these isomorphisms. For a denominator $s$, the naturality equation is an equation between invertible arrows; multiplying it by their inverses gives precisely the equation for $s^{-1}$. Thus the comparisons are compatible with inversion. This is the two-variable form of the construction preceding Tag 06YU.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and preceding construction); Categories Tag 04VK; two applications of localization full faithfulness"
+   }
+  },
+  {
+   "text": "Let $U,V:D(R)\\times D(R)\\to E$ and let $\\tau$ be a natural transformation on their restrictions to $\\mathcal P_R\\times\\mathcal P_R$. For each second object $Q$, apply the natural-transformation clause of [lem-weil-pbc-localization-universal-property] in the first variable to extend $\\tau_{-,Q}$ uniquely to $D(R)$. For every arrow $Q\\to Q'$ of $\\mathcal P_R$, the two first-variable transformations in its naturality square agree on all $L(P)$ by the given naturality of $\\tau$, so they agree everywhere by the uniqueness clause. Hence these extensions form a natural transformation of functors $\\mathcal P_R\\to\\operatorname{Fun}(D(R),E)$. These functors invert $W_R$, since they are the restrictions of $U,V$ along $L$ in the second variable. Apply the same clause a second time to extend to $D(R)\\to\\operatorname{Fun}(D(R),E)$, which is the required transformation $U\\to V$. Any two extensions agree first after restriction in the second variable by uniqueness in the first, and then everywhere by uniqueness in the second. Existence and uniqueness prove the last clause without assuming $\\tau$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Categories Tag 04VK (lemma-properties-right-localization), natural-transformation enhancement as in the cited universal-property node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-kflat-resolution",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YM, 06YP, 06YU: explicit right-roof refinement and two-variable localization argument using Categories Tags 04VI/04VJ/04VK"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "For any ringed site the localization of K-flat complexes with flat terms computes the derived tensor bifunctor",
    "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor'_map_app, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact",
    "date": "2026-10-14",
-   "verdict": "no match: Tor functors use projective resolutions and give module-input homology, not unbounded K-flat sheaf-complex localization and tensor descent; no K-flat Mathlib hit"
+   "verdict": "no match: Tor uses projective resolutions of module inputs and outputs homology; ordinary sheafification monoidal structures and the Lean constructor-name utility do not state unbounded site-level K-flat flat-term localization and bifunctor descent."
   },
   {
-   "tool": "leanfinder",
-   "query": "Derived tensor of module sheaves is functorial independently of K-flat representatives on arbitrary sites",
-   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_map, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf",
+   "tool": "grep",
+   "query": "KFlat|K.flat|derivedTensor",
+   "results": "0 hits: none; subdirectory CategoryTheory",
    "date": "2026-10-14",
-   "verdict": "no match: Tor functors use projective resolutions and give module-input homology, not unbounded K-flat sheaf-complex localization and tensor descent; no K-flat Mathlib hit"
+   "verdict": "no match: Tor uses projective resolutions of module inputs and outputs homology; ordinary sheafification monoidal structures and the Lean constructor-name utility do not state unbounded site-level K-flat flat-term localization and bifunctor descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor bifunctor of sheaves of modules on a ringed site via K-flat resolutions",
+   "results": "0 hits: none; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   },
   {
    "tool": "loogle",
    "query": "\"KFlat\"",
    "results": "1 hits: Lean.mkFlatCtorOfStructCtorName",
    "date": "2026-10-14",
-   "verdict": "no match: Tor functors use projective resolutions and give module-input homology, not unbounded K-flat sheaf-complex localization and tensor descent; no K-flat Mathlib hit"
+   "verdict": "no match: Tor uses projective resolutions of module inputs and outputs homology; ordinary sheafification monoidal structures and the Lean constructor-name utility do not state unbounded site-level K-flat flat-term localization and bifunctor descent."
   },
   {
-   "tool": "grep",
-   "query": "KFlat|K.flat|derivedTensor",
-   "results": "0 hits: ; subdirectory CategoryTheory",
+   "tool": "leanfinder",
+   "query": "Derived tensor of module sheaves is functorial independently of K-flat representatives on arbitrary sites",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_map, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf",
    "date": "2026-10-14",
-   "verdict": "no match: Tor functors use projective resolutions and give module-input homology, not unbounded K-flat sheaf-complex localization and tensor descent; no K-flat Mathlib hit"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived tensor bifunctor of sheaves of modules on a ringed site via K-flat resolutions",
-   "results": "0 hits: ; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
+   "verdict": "no match: Tor uses projective resolutions of module inputs and outputs homology; ordinary sheafification monoidal structures and the Lean constructor-name utility do not state unbounded site-level K-flat flat-term localization and bifunctor descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-site-derived-tensor-descent",
+  "worker": "stage1",
+  "summary": "Kept every clause and all site/ring hypotheses. Proved the resolving-subcategory equivalence by refining Ore squares, roofs and equality witnesses with existing flat-term K-flat resolutions. Wrote tensor homotopies and cone/sign calculations explicitly and descended the bifunctor and arbitrary natural transformations by two successive localizations. No new nodes or Mathlib leaves; generic tools are reused without specializing scheme-only tensor nodes.",
+  "blueprint": "Realizes the canonical E_n identification in def-weil-pbc-four-corners, via the representative computation and simultaneous naturality used in Steps 1 and 6 of lem-weil-pbc-ringed-topoi-derived-tensor-pullback. The original blueprint states E_n <- E tensor^L P_n; it does not state this foundational tool separately.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies flat-term K-flat resolutions for arbitrary ringed sites, used to refine roofs and Ore/cancellation witnesses; the geometric unit has no such resolution theorem."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Supplies the generic cone criterion for a quasi-isomorphism in any abelian category; needed to apply the definition of K-flatness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-4d9d4d7e1",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-4d9d4d7e1 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, all cited node statements, and Stacks sources 06YS, 06YM, 06YP, 06YU, 0G7D, 06YT, 05RT, 04VI, 04VJ, and 04VK. Checked all six steps: restricted localization via K-flat resolutions, roof/refinement equivalence, tensor homotopies and signs, cone-based quasi-isomorphism preservation in both variables, two-stage localization descent, and arbitrary natural-transformation extension. Small cases (zero complexes/ring, one-object field site, unbounded complexes, nonflat Z/2) pass. No false statement, circularity, duplicate, coefficient-category mismatch, or base-change issue found; tool uses are justified and no new nodes were delivered."
+ }
 }
