@@ -24,7 +24,7 @@
    "elementary": false
   },
   {
-   "text": "The canonical tensor-pullback/tilde comparison gives T isomorphic to N. Apply stalk complexes to its inverse and compose with tensorStalkIso inverse to obtain tau. The unit equation for the tilde comparison and the germ equation for tensor-pullback stalks show that tau sends germ(1 tensor x) to 1 tensor germ(x). Such germs generate after scalar extension and localization, so the formula fixes the chain map.",
+   "text": "Construct delta:T isomorphic to N by mapHomologicalComplexCompIso of the chosen tensor-pullback/tilde isomorphism. Set tau to the stalk of delta inverse followed by tensorStalkIso inverse. Apply the tilde unit equation to the canonical section x, then the module stalk germ naturality equation. Apply the pullback-stalk germ equation to the same section and transport its scalar map using the first restriction equation of tensorMap. Cancel the two isomorphisms degreewise to obtain the stated pure-tensor formula. No generation or uniqueness argument is required.",
    "uses": [
     "lem-weil-pbc-tilde-pullback-base-change",
     "lem-weil-pbc-module-stalk-pullback",
@@ -33,7 +33,7 @@
    "elementary": false
   },
   {
-   "text": "Apply naturality of exact stalk homology and the homologyFunctorFactors equation to the stalk of T isomorphic to N. Expand affineTensorPullbackHomologyStalkIso into its localization, exact tilde homology and stalk comparison factors. Cancel the tensorStalkIso inverse in tau. The resulting three factors are exactly affineTildeHomologyLocalization followed by homology(tau), homology(tensorStalkIso) and affineRepresentativeStalkIso inverse, proving the displayed identity. No source cohomology model is used.",
+   "text": "Factor affineTensorPullbackHomologyStalkIso into the localized module isomorphism, the stalk of the exact tilde/derived homology isomorphism, and the stalk of derived homology of delta inverse. Evaluate its three isomorphisms using the proved generic mapIso_three_apply identity, which reassociates the factors by Iso.trans_assoc and applies functoriality of mapIso without unfolding the affine objects. The first two factors followed by affineRepresentativeStalkIso are affineTildeHomologyLocalization. Naturality of affineRepresentativeStalkIso for delta inverse gives the homology square. Apply homologyMap_comp to tau followed by tensorStalkIso, cancel tensorStalkIso inverse, and compose the resulting pointwise equalities to obtain the displayed coordinate equation.",
    "uses": [
     "lem-pc-affine-derived-cohomology-presentation",
     "lem-pc-affine-tensor-pullback-stalk-coordinates"
@@ -52,10 +52,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H3",
-  "date": "2026-10-13",
+  "group": "S4",
+  "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "Explicit interface decomposition of the affine localization argument, preserving its source/target construction."
+  "place": "Lean proof of the ordinary target comparison, from the unit/germ formulas and exact-stalk homology naturality; Tags 01I9, 01HV and 01AG."
  },
  "mathlib_searches": [
   {
@@ -142,10 +142,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T161729-L-1460333",
-  "kind": "interface",
+  "landing": "20261013T190154-L-3220846",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

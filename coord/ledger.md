@@ -13398,3 +13398,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.OpenPinnedTensorCounitTransport (stage 3; reviewer PASS; first push; landing 20261013T190152-L-3220432 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/S3/Sheaf.Algebra.Homology.LocalizedTensorComparisonShift (stage 3; reviewer PASS; first push; landing 20261013T190153-L-3220602 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/S3/Sheaf.Paper.CechCupResolutionRepresentatives (stage 3; reviewer PASS; after a return; landing 20261013T190153-L-3220739 (interface); batch 20261013T190131; modules 6; new nodes 5)
+- 19:01 L: merged deliver/S4/Sheaf.Algebra.Homology.AffineOrdinaryTensorStalkCoordinates (stage 3; reviewer PASS; first push; landing 20261013T190154-L-3220846 (proof); batch 20261013T190131; modules 1; new nodes 0)
