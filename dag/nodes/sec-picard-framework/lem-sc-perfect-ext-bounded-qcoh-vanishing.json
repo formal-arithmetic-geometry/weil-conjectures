@@ -26,67 +26,92 @@
  ],
  "proof": [
   {
-   "text": "By the perfect tensor-Hom comparison [lem-pc-perfect-rhom-tensor-comparison], the dual K^\\vee is perfect and has a finite Tor-amplitude interval [u,v]. The comparison identifies K^\\vee\\otimes^L L with R\\mathcal Hom(K,L), and [lem-pur-rhom-global-sections] identifies H^0(X,R\\mathcal Hom(K,L)) with Hom_{D(\\mathcal O_X)}(K,L).",
+   "text": "Equip K with quasi-coherent cohomology using lem-sc-perfect-qcoherent. Use lem-pc-perfect-rhom-tensor-comparison-dual to obtain the actual internal dual D=RHom(K,O_X), which is perfect and quasi-coherent. Transport the derived localization to each open subscheme with lem-pc-open-derived-localization-adjunction, apply lem-pc-perfect-pseudo-coherent-locally-finite-tor to D and then lem-pc-quasi-compact-finite-tor-dimension to get a common Tor interval [lo,hi], with lo<=hi.",
    "uses": [
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-perfect-rhom-tensor-comparison-dual",
+    "lem-pc-open-derived-localization-adjunction",
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-pc-quasi-compact-finite-tor-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4 (Lemma 36.13.5), label lemma-ext-from-perfect-into-bounded-QCoh"
+   }
+  },
+  {
+   "text": "Apply lem-pc-uniform-inverse-affine-sections-bound to the terminal morphism X -> Spec(Z) and its top affine open. This supplies a positive natural uniform higher-derived global-sections bound N on quasi-coherent modules. Identify Hom(O_X,-) with sections over the top open by the explicitly constructed additive natural isomorphism: evaluate a compatible family at the top open, and reconstruct it by restriction. Sections preserve countable products.",
+   "uses": [
+    "lem-pc-uniform-inverse-affine-sections-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4 (Lemma 36.13.5), label lemma-ext-from-perfect-into-bounded-QCoh"
+   }
+  },
+  {
+   "text": "For any quasi-coherent derived object E whose homology vanishes from -N to 0, use its standard truncation triangle A=truncLT(-N)E -> E -> B=truncGE(-N)E. Truncation preserves quasi-coherence. A is supported in degrees <=-N-1, so lem-pc-unbounded-derived-functor-cohomological-bound gives H^0(RGamma(A))=0. B has no homology below -N by truncation, and none from -N to 0 by the gap and the homology isomorphism of the truncation projection; hence B is supported in degrees >=1. Bounded-below negative vanishing and compatibility with the unbounded derived functor give H^0(RGamma(B))=0. Exactness of the degree-zero homology sequence kills H^0(RGamma(E)). Derive the constructed sections natural isomorphism to identify this with ringedSiteZerothHypercohomology(E). This entire argument is proved in private helpers, without new holes.",
+   "uses": [
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4 (Lemma 36.13.5), label lemma-ext-from-perfect-into-bounded-QCoh"
+   }
+  },
+  {
+   "text": "Set a=-hi-N and b=-lo; a<=b by lo<=hi and N>=0. For each j in [-N,0], [j-hi,j-lo] is contained in [a,b]. Apply lem-sc-perfect-hypercohomology-gap to D and L. Unpack its K-flat representatives and use lem-pc-kflat-derived-tensor-comparison plus homologyFunctorFactors to obtain actual vanishing of H^j(D tensor L). By lem-pc-canonical-derived-tensor-qcoh this tensor has quasi-coherent cohomology, so the preceding private global-gap argument kills its zeroth hypercohomology.",
+   "uses": [
+    "lem-sc-perfect-hypercohomology-gap",
+    "lem-pc-kflat-derived-tensor-comparison",
+    "lem-pc-canonical-derived-tensor-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4 (Lemma 36.13.5), label lemma-ext-from-perfect-into-bounded-QCoh"
+   }
+  },
+  {
+   "text": "Choose the tensor/internal-Hom adjunction and its compatible symmetry by lem-sc-derived-internal-hom-adjunction. For each L separately use lem-pc-perfect-rhom-tensor-comparison. Its perfect dual equals the fixed actual internal dual D, so equality identifies their tensor factors. Compose the tensor symmetry with its invertible comparison L tensor D -> RHom(K,L). Transport zeroth hypercohomology vanishing along this isomorphism. Finally lem-pur-rhom-global-sections gives the additive equivalence with Hom(K,L); its inverse is injective, so the Hom type is subsingleton.",
+   "uses": [
+    "lem-sc-derived-internal-hom-adjunction",
     "lem-pc-perfect-rhom-tensor-comparison",
     "lem-pur-rhom-global-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09M4 proof, lines identifying Hom(K,L) with H^0(X,K^vee tensor^L L) and choosing the Tor-amplitude interval"
-   }
-  },
-  {
-   "text": "Apply the hypercohomology spectral-sequence gap statement [lem-sc-perfect-hypercohomology-gap] to P=K^\\vee. If H^q(L)=0 for q in [j-v,j-u], then H^j(K^\\vee\\otimes^L L)=0; in particular, for j=-N,...,0 it is enough that H^i(L)=0 for every i in [-v-N,-u].",
-   "uses": [
-    "lem-sc-perfect-hypercohomology-gap"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09M4 proof, spectral sequence and the subsequent choice of the interval [-b-N,-a]"
-   }
-  },
-  {
-   "text": "Take f:X\\to \\operatorname{Spec}(\\mathbb Z). Since X is quasi-compact and quasi-separated, f is quasi-compact and quasi-separated, and its base is affine. Clause (1) of [lem-pc-finite-support-hi] makes R^qf_*G quasi-coherent for every quasi-coherent G. Thus [lem-pc-affine-vanishing] gives H^p(\\operatorname{Spec}(\\mathbb Z),R^qf_*G)=0 for p>0. The edge-map assertion [lem-pc-leray-degenerate-sections] then identifies H^q(X,G) with \\Gamma(\\operatorname{Spec}(\\mathbb Z),R^qf_*G). Clause (2) of [lem-pc-finite-support-hi] supplies n with R^qf_*G=0 for q>=n; put N=\\max(n,0), so H^q(X,G)=0 for every quasi-coherent G and q>=N. Let E=K^\\vee\\otimes^L L; it lies in D_QCoh(\\mathcal O_X) (Tag 09M4: tensor of objects with quasi-coherent cohomology, a perfect complex having quasi-coherent cohomology), and assume H^i(E)=0 for -N<=i<=0. Consider the standard truncation triangle \\tau_{\\le -N-1}E\\to E\\to\\tau_{\\ge -N}E\\to [def-sbc-standard-tstructure-derived-category] and the exact sequence H^0(X,\\tau_{\\le -N-1}E)\\to H^0(X,E)\\to H^0(X,\\tau_{\\ge -N}E). The global sections functor \\Gamma(X,-)=\\operatorname{Hom}(\\mathcal O_X,-) commutes with products and its derived functors on quasi-coherent modules vanish in degrees >=N, so [lem-pc-unbounded-derived-functor-cohomological-bound] with b=-N-1 gives H^i(X,\\tau_{\\le -N-1}E)=0 for i>-2, in particular for i=0. By the assumed vanishing, \\tau_{\\ge -N}E\\cong\\tau_{\\ge 1}E is bounded below with cohomology only in degrees >=1, so [lem-weil-pbc-derived-functor-negative-vanishing] (applied to \\Gamma(X,-):\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}) gives H^0(X,\\tau_{\\ge -N}E)=0. Hence H^0(X,E)=0.",
-   "uses": [
-    "lem-pc-finite-support-hi",
-    "lem-pc-affine-vanishing",
-    "lem-pc-leray-degenerate-sections",
-    "lem-pc-unbounded-derived-functor-cohomological-bound",
-    "lem-weil-pbc-derived-functor-negative-vanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09M4 proof, invocation of Cohomology of Schemes Lemma 30.4.4, Lemma 36.3.5 (Tag 08D4) and Derived Categories Lemma 13.16.1"
-   }
-  },
-  {
-   "text": "Set a=-v-N and b=-u. Then a<=b, and for every L whose H^i(L) vanish for i in [a,b], Step 2 makes H^j(K^\\vee\\otimes^L L)=0 for j=-N,...,0, while Step 3 gives H^0(X,K^\\vee\\otimes^L L)=0. The identification in Step 1 therefore gives Hom_{D(\\mathcal O_X)}(K,L)=0.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09M4 proof, final sentence"
+    "place": "Tag 09M4 (Lemma 36.13.5), label lemma-ext-from-perfect-into-bounded-QCoh"
    }
   }
  ],
  "proof_deps": [
+  "lem-sc-perfect-qcoherent",
+  "lem-pc-perfect-rhom-tensor-comparison-dual",
+  "lem-pc-open-derived-localization-adjunction",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-pc-quasi-compact-finite-tor-dimension",
+  "lem-pc-uniform-inverse-affine-sections-bound",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sc-perfect-hypercohomology-gap",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-pc-canonical-derived-tensor-qcoh",
   "lem-pc-perfect-rhom-tensor-comparison",
   "lem-pur-rhom-global-sections",
-  "lem-sc-perfect-hypercohomology-gap",
-  "lem-pc-finite-support-hi",
-  "lem-pc-affine-vanishing",
-  "lem-pc-leray-degenerate-sections",
-  "lem-pc-unbounded-derived-functor-cohomological-bound",
-  "lem-weil-pbc-derived-functor-negative-vanishing"
+  "lem-sc-derived-internal-hom-adjunction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09M4 (Lemma 36.13.5), proof of part (1)"
+  "place": "Tag 09M4, proof of part (1); Lean glue by C2, with existing uniform inverse-affine sections bound"
  },
  "mathlib_searches": [
   {
@@ -189,5 +214,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T095935-L-2453102",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

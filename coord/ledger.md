@@ -11803,3 +11803,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:59 L: merged deliver/C1/Sheaf.AlgebraicGeometry.SingleComplexOpenTop (stage 3; reviewer PASS; first push; landing 20261013T095934-L-2452593 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 09:59 L: merged deliver/C1/Sheaf.AlgebraicGeometry.SingleComplexOpenUnion (stage 3; reviewer PASS; first push; landing 20261013T095934-L-2452781 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 09:59 L: merged deliver/C2/Sheaf.AlgebraicGeometry.PerfectHomContinuity (stage 3; reviewer PASS; first push; landing 20261013T095935-L-2452929 (interface); batch 20261013T095923; modules 4; new nodes 3)
+- 09:59 L: merged deliver/C2/Sheaf.AlgebraicGeometry.PerfectHomGap (stage 3; reviewer PASS; first push; landing 20261013T095935-L-2453102 (proof); batch 20261013T095923; modules 1; new nodes 0)
