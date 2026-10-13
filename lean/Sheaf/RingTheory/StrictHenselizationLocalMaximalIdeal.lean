@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.IsStrictHenselization
 import Sheaf.RingTheory.StrictHenselizationTriples
+import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
 
 /-!
 # Local structure of a ring strict henselization
@@ -53,6 +54,34 @@ theorem strictHenselization_local_maximalIdeal
     [CommRing C] [Algebra A C] (hC : IsStrictHenselization A K C) :
     ∃ (_ : IsLocalRing C),
       IsLocalRing.maximalIdeal C = (IsLocalRing.maximalIdeal A).map (algebraMap A C) := by
-  sorry
+  open CategoryTheory CategoryTheory.Limits in
+  exact by
+    obtain ⟨p, hp, a, hk, ι, ⟨hι⟩, hιA⟩ := hC.triples_presentation A K C
+    let := a
+    let := hk
+    obtain ⟨_, c, ⟨hc⟩, hlocal, ρ, ψ, hρ, _, _, hm, hker, _⟩ :=
+      AlgebraicGeometry.Scheme.strictHenselization_triples (CommRingCat.of A) p K
+    let e := (hc.coconePointUniqueUpToIso hι).commRingCatIsoToRingEquiv
+    have he : e.toRingHom.comp ρ.hom = algebraMap A C := by
+      let t : AlgebraicGeometry.Scheme.EtaleResidueTriples (CommRingCat.of A) p K
+          (CommRingCat.ofHom (algebraMap
+            ((AlgebraicGeometry.Spec (CommRingCat.of A)).residueField p) K)) :=
+        ⟨CommRingCat.of A, 𝟙 _, inferInstance, p, by simp,
+          CommRingCat.ofHom (algebraMap
+            ((AlgebraicGeometry.Spec (CommRingCat.of A)).residueField p) K), by simp⟩
+      have htρ : c.ι.app t = ρ := by simpa [t] using hρ t
+      have htι : ι.app t = CommRingCat.ofHom (algebraMap A C) := by
+        simpa [t] using hιA t
+      have h := hc.comp_coconePointUniqueUpToIso_hom hι t
+      rw [htρ] at h
+      change ρ ≫ (hc.coconePointUniqueUpToIso hι).hom = ι.app t at h
+      rw [htι] at h
+      exact congrArg CommRingCat.Hom.hom h
+    let := hlocal
+    let := e.isLocalRing
+    refine ⟨inferInstance, ?_⟩
+    rw [← IsLocalRing.map_ringEquiv_maximalIdeal e, hm, hker, hp]
+    change ((IsLocalRing.maximalIdeal A).map ρ.hom).map e.toRingHom = _
+    rw [Ideal.map_map, he]
 
 end Algebra
