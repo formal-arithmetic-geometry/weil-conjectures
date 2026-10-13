@@ -18,96 +18,35 @@
  ],
  "proof": [
   {
-   "text": "Pull the cover U,V back to the presenting scheme Y and all its ring stages. Restrict the local strictly perfect models using the localized derived pullback comparison, so restrictions remain perfect; shifts remain perfect by thick closure. Perfect Q has quasi-coherent cohomology. The preimages of the two compact opens are compact and their intersection is compact by quasi-separatedness.",
+   "text": "Use the simultaneous geometric stage rows S, exact limit row B, comparison κ and central identifications supplied by the stage-row lemma.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-localized-pullback-perfect-model",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-perfect-thick-closure",
-    "lem-sc-perfect-qcoherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
-   }
-  },
-  {
-   "text": "Use the derived Mayer--Vietoris triangle at each stage and at the limit. Apply Hom(P,-), including the preceding shift. Derived open adjunction identifies the five terms as the product on U,V in degree -1, the intersection in degree -1, the global Hom, the product on U,V in degree zero, and the intersection in degree zero. They are exact rows of abelian groups. Use the functorial K-injective resolution and short-exact-sequence boundary construction of these triangles, not independently chosen arbitrary distinguished triangles; naturality of that construction is what makes the transition comparisons coherent.",
-   "uses": [
-    "lem-pc-derived-mayer-vietoris-triangle",
-    "lem-pc-ringed-spaces-derived-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
-   }
-  },
-  {
-   "text": "For a transition h apply the direct-image Mayer--Vietoris comparison to Lh*Q and then its naturality to the adjunction unit Q -> Rh*Lh*Q. Applying Hom(P,-) and derived adjunction gives all four commuting squares, including the connecting morphism. Identify the local comparisons through open restriction. At the central term cancellation of the counit-pinned composition comparisons gives exactly perfectStageMap and perfectLimitMap. Explicitly, the adjunction unit sends a stage arrow f to f followed by the unit on Q. Its adjunct is pullback(f), followed by pullback of that unit and the counit at the pulled-back Q. The adjunction triangle identity cancels the last two factors. Conjugating by the fixed composition comparisons is exactly perfectStageMap. The identical calculation for a cocone leg gives perfectLimitMap. The pinned direct-image composition comparisons on opens identify units with units of composite adjunctions, so the same cancellation supplies the local representative equations.",
-   "uses": [
-    "lem-pc-derived-mayer-vietoris-functorial",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-perfect-hom-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
-   }
-  },
-  {
-   "text": "The central stage Hom sets with their canonical transitions form a functor, and the supplied ident identifies this functor with H. Take the filtered abelian-group colimit of all five stage rows; exactness is preserved. The underlying sets of this filtered group colimit form the set colimit. Thus uniqueness of colimits gives a from the supplied d, and the central Hom group at the limit gives b. The comparison from the previous step induces φ, and its central representative equation is exactly the required perfectLimitMap pinning. For each neighboring perfect pair construct its actual stage Hom system using perfect_hom_stage_colimit, so its local comparison has a pinned set-colimit presentation.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-perfect-hom-transport",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-pc-perfect-hom-stage-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09RE, Mayer--Vietoris induction step; Cohomology Tag 08BW; online source checked 2026-10-13"
-   }
-  },
-  {
-   "text": "For each neighboring local term retain its actual presenting scheme, restricted perfect pair (with the degree -1 shift where appropriate), filtered Hom colimit, transition identifications and pinning equations. These are exactly the witnesses of PerfectHomLocalComparison. The two U,V terms are products of two such maps, and adjunction and colimit identifications transport them by equivalences. Thus all four neighboring maps satisfy PerfectHomLocalMap. Do not assume continuity and do not assert that these maps are isomorphisms.",
-   "uses": [
-    "def-pc-perfect-hom-local-comparison",
-    "def-pc-perfect-hom-local-map",
-    "lem-pc-perfect-thick-closure",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-perfect-hom-mayer-vietoris-stage-rows"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the exact filtered abelian-group colimit functor to each short complex of S, giving the exact row A=S⋙colim. Construct φ termwise using colimit.desc and prove naturality by colimit.hom_ext and κ.naturality.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose ident_j with e_j inverse to form a natural isomorphism from H to the underlying middle group diagram. The forgetful functor preserves filtered colimits, so transport its colimit cocone along that isomorphism. Uniqueness of colimits yields a. Its representative equation, colimit.ι_desc, and κ middle pinning yield the required central equation. The four locality witnesses supplied by the stage-row lemma apply definitionally to φ.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "def-pc-perfect-hom-local-comparison",
-  "def-pc-perfect-hom-local-map",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-derived-mayer-vietoris-functorial",
-  "lem-pc-derived-mayer-vietoris-triangle",
-  "lem-pc-localized-pullback-perfect-model",
-  "lem-pc-perfect-hom-stage-colimit",
-  "lem-pc-perfect-hom-transport",
-  "lem-pc-perfect-thick-closure",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-perfect-qcoherent",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-pc-perfect-hom-mayer-vietoris-stage-rows",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F2",
+  "group": "R1",
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 09RE, construction in the Mayer--Vietoris step; Cohomology Tag 08BW",
-  "note": "Explicit intermediate construction or recognition step of the existing comparison plan; no unit route changed."
+  "note": "Lean reduction to geometric stage rows, with complete filtered-colimit exactness, naturality and supplied set-colimit transport proved in the original module."
  },
  "mathlib_searches": [
   {
@@ -187,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T130033-L-3923061",
+  "landing": "20261013T133228-L-4194041",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
