@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.Algebra.Algebra.ZMod
+import Mathlib.Algebra.CharP.Algebra
+import Mathlib.Algebra.CharP.Lemmas
 
 /-!
 # Differential independence excludes the last root from the preceding field
@@ -52,6 +54,51 @@ theorem pth_root_not_mem_previous_adjoin
     (α : Fin (n + 1) → Ω)
     (hα : ∀ i : Fin (n + 1), α i ^ p = algebraMap k Ω (a i)) :
     α (Fin.last n) ∉ adjoin k (Set.range (fun i : Fin n ↦ α i.castSucc)) := by
-  sorry
+  have : CharP Ω p := charP_of_injective_algebraMap (algebraMap k Ω).injective p
+  let D := KaehlerDifferential.D (ZMod p) k
+  let S := Submodule.span k (Set.range (fun i : Fin n ↦ D (a i.castSucc)))
+  -- The universal derivation kills all p-th powers in the base field.
+  have hp : ∀ c : k, D (c ^ p) = 0 := by
+    intro c
+    rw [D.leibniz_pow, ← Nat.cast_smul_eq_nsmul k, CharP.cast_eq_zero, zero_smul]
+  -- Keep the power and its differential together through field-adjoin induction.
+  have hspan : ∀ x ∈ adjoin k (Set.range (fun i : Fin n ↦ α i.castSucc)),
+      ∃ b : k, x ^ p = algebraMap k Ω b ∧ D b ∈ S := by
+    intro x hx
+    induction hx using adjoin_induction with
+    | mem x hx =>
+        obtain ⟨i, rfl⟩ := hx
+        exact ⟨a i.castSucc, hα i.castSucc, Submodule.subset_span ⟨i, rfl⟩⟩
+    | algebraMap c =>
+        exact ⟨c ^ p, (map_pow (algebraMap k Ω) c p).symm, by rw [hp]; exact S.zero_mem⟩
+    | add x y hx hy ihx ihy =>
+        obtain ⟨b, hb, hdb⟩ := ihx
+        obtain ⟨c, hc, hdc⟩ := ihy
+        refine ⟨b + c, ?_, ?_⟩
+        · rw [add_pow_char, hb, hc, map_add]
+        · rw [map_add]
+          exact S.add_mem hdb hdc
+    | inv x hx ih =>
+        obtain ⟨b, hb, hdb⟩ := ih
+        refine ⟨b⁻¹, ?_, ?_⟩
+        · rw [inv_pow, hb, map_inv₀]
+        · rw [Derivation.leibniz_inv]
+          exact S.smul_mem _ hdb
+    | mul x y hx hy ihx ihy =>
+        obtain ⟨b, hb, hdb⟩ := ihx
+        obtain ⟨c, hc, hdc⟩ := ihy
+        refine ⟨b * c, ?_, ?_⟩
+        · rw [mul_pow, hb, hc, map_mul]
+        · rw [Derivation.leibniz]
+          exact S.add_mem (S.smul_mem _ hdc) (S.smul_mem _ hdb)
+  intro hmem
+  obtain ⟨b, hb, hdb⟩ := hspan _ hmem
+  have hab : a (Fin.last n) = b := (algebraMap k Ω).injective ((hα _).symm.trans hb)
+  apply hind.notMem_span (Fin.last n)
+  apply (Submodule.span_mono (show Set.range (fun i : Fin n ↦ D (a i.castSucc)) ⊆
+      (fun i : Fin (n + 1) ↦ D (a i)) '' {Fin.last n}ᶜ from ?_))
+  · simpa only [hab] using hdb
+  · rintro _ ⟨i, rfl⟩
+    exact ⟨i.castSucc, by simp, rfl⟩
 
 end IntermediateField
