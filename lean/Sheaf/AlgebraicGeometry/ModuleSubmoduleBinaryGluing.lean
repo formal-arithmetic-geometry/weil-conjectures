@@ -6,6 +6,8 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.ModuleSubmoduleBinaryGluingProperties
+import Sheaf.AlgebraicGeometry.ModuleBinaryLocalProperties
 
 /-! # Gluing a submodule with the ambient module on two opens
 
@@ -21,6 +23,39 @@ open CategoryTheory AlgebraicGeometry SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+open SheafOfModules in
+private theorem finiteType_of_data
+    {C : Type*} [Category* C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+    [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {M : SheafOfModules.{u} R}
+    (q : M.LocalGeneratorsData) [hq : q.IsFiniteType] : M.IsFiniteType := by
+  have : q.shrink.IsFiniteType :=
+    ⟨fun i ↦ hq.isFiniteType i.2.choose⟩
+  exact ⟨q.shrink, this⟩
+
+open SheafOfModules in
+private theorem finiteType_of_iso
+    {C : Type*} [Category* C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+    [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {M N : SheafOfModules.{u} R} (e : M ≅ N)
+    [M.IsFiniteType] : N.IsFiniteType := by
+  obtain ⟨q, hq⟩ := IsFiniteType.exists_localGeneratorsData M
+  let q' : N.LocalGeneratorsData :=
+    { I := q.I
+      X := q.X
+      coversTop := q.coversTop
+      generators i := (q.generators i).ofEpi (e.hom.over (q.X i)) }
+  have : q'.IsFiniteType := ⟨fun i ↦ by
+    have := hq.isFiniteType i
+    exact inferInstanceAs ((q.generators i).ofEpi _).IsFiniteType⟩
+  exact finiteType_of_data q'
+
+
+
 /-- Glue a finite-type submodule on V to the whole module on W when its inclusion
 is an isomorphism on the overlap. No compactness or affineness is required.
 
@@ -29,21 +64,14 @@ from a union to its affine member, gluing along the common value on the overlap.
 https://stacks.math.columbia.edu/tag/01PF
 (blueprint: lem-weil-pbc-module-submodule-binary-gluing).
 
-Proof: Since ι is mono, identify Q with its image subsheaf of H on V. For every
-open T contained in W union V, define G(T) to be the submodule of H(T) consisting
-of sections whose restriction to T intersect V belongs to this image subsheaf.
-Restriction maps preserve this condition. To verify the sheaf axiom, glue a
-compatible family in H; their restrictions to V glue in the image subsheaf,
-so the glued section again lies in G. The inclusions G(T) -> H(T) give a
-monomorphism φ. On an open contained in V, the image condition identifies G
-with Q. On an open contained in W, its intersection with V lies in W intersect V,
-where ι is an isomorphism, so the condition imposes no restriction: G is H there.
-Thus the restriction of φ to W is an isomorphism. Local presentations for Q on V
-and H on W give local presentations of G on the covering W,V, proving
-quasi-coherence. Their finite generating families give finite generating
-families for G on the same covering, proving finite type. The sectionwise
-construction works also for empty opens or disjoint W,V, and requires neither
-quasi-separatedness nor compactness. -/
+Proof: Construct G as the pullback of the direct image of Q along the restriction
+unit of H on W union V. The first projection φ is monic because direct image is a
+right adjoint and pullback preserves monomorphisms. The sectionwise pullback
+identifications make φ an isomorphism on W and identify G on V with Q. Transport
+quasi-coherence and finite type across these two isomorphisms, then apply their
+locality on the covering W,V. The concrete pullback requires no arbitrary choice
+of an existence witness, and includes empty or disjoint opens. Neither compactness
+nor affineness is used. -/
 theorem exists_submodule_binary_gluing
     (X : Scheme.{u}) (W V : X.Opens)
     (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [H.IsQuasicoherent]
@@ -55,6 +83,29 @@ theorem exists_submodule_binary_gluing
     ∃ G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (W ⊔ V)),
       G.IsQuasicoherent ∧ G.IsFiniteType ∧ ∃ (φ : G ⟶ H.over (W ⊔ V)),
         Mono φ ∧ IsIso ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
-          (homOfLE (show W ≤ W ⊔ V from le_sup_left))).map φ) := by sorry
+          (homOfLE (show W ≤ W ⊔ V from le_sup_left))).map φ) := by
+  let G := binarySubmodule X W V H Q ι
+  let φ := binarySubmoduleInclusion X W V H Q ι
+  obtain ⟨hW, ⟨eV⟩⟩ := binarySubmodule_restrictions X W V H Q ι
+  have := hW
+  let eW : (SheafOfModules.overMap (moduleRings X.toRingedSpace)
+      (homOfLE (show W ≤ W ⊔ V from le_sup_left))).obj G ≅ H.over W :=
+    asIso ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
+      (homOfLE (show W ≤ W ⊔ V from le_sup_left))).map φ) ≪≫
+      (SheafOfModules.overFunctorMap (moduleRings X.toRingedSpace)
+        (homOfLE (show W ≤ W ⊔ V from le_sup_left))).app H
+  have hWqc : ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
+      (homOfLE (show W ≤ W ⊔ V from le_sup_left))).obj G).IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent ((moduleRings X.toRingedSpace).over W)).prop_of_iso eW.symm
+      (SheafOfModules.isQuasicoherent_over H W)
+  have hWft := finiteType_of_iso (R := (moduleRings X.toRingedSpace).over W) eW.symm
+  have hVqc : ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
+      (homOfLE (show V ≤ W ⊔ V from le_sup_right))).obj G).IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent ((moduleRings X.toRingedSpace).over V)).prop_of_iso
+      eV.symm inferInstance
+  have hVft := finiteType_of_iso (R := (moduleRings X.toRingedSpace).over V) eV.symm
+  obtain ⟨hqc, hft⟩ := module_binary_local_properties X W V G
+    ⟨hWqc, hWft⟩ ⟨hVqc, hVft⟩
+  exact ⟨G, hqc, hft, φ, inferInstance, hW⟩
 
 end AlgebraicGeometry.Scheme.Modules

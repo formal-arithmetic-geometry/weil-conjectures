@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-module-submodule-binary-gluing-second-restriction",
+ "kind": "statement",
+ "title": "Second restriction of the concrete binary submodule",
+ "statement": "For any scheme $X$ [def-pc-scheme], opens $W,V$, module sheaves $H$ on $X$ and $Q$ on $V$ [def-weil-sheaf-of-modules-category], and any morphism $\\iota:Q\\to H|_V$, the concrete pullback $G$ of [def-weil-pbc-module-binary-submodule-pullback] restricts to a module isomorphic to $Q$ on $V$. No monicity or finiteness assumption is needed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-binary-submodule-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PF (lemma-extend), binary gluing paragraph; read at https://stacks.math.columbia.edu/tag/01PF"
+ },
+ "proof": [
+  {
+   "text": "For an open T contained in V, the site pullback projection T intersect V to T is an isomorphism: its inverse is the pullback lift of the identity and T to V. Thus the evaluated unit is bijective and is an isomorphism of modules. Evaluation preserves the module pullback, so its second projection is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-binary-submodule-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the restricted second projection with the adjunction counit. The counit on a test open in V is restriction along the site adjunction unit, itself an isomorphism. Hence every component of this composite is an isomorphism. Assemble these component inverses via PresheafOfModules.isoMk and reflection by the forgetful functor.",
+   "uses": [
+    "def-weil-pbc-module-binary-submodule-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-binary-submodule-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E1",
+  "date": "2026-10-13",
+  "note": "Concrete Lean implementation of the cited gluing paragraph; local properties also follow Definitions 01BE and 01B5, read on the Stacks website."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open of the pullback of a module sheaf along the direct image of a submodule",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherence and finite type of sheaves of modules are local on a cover of two opens",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.QuasicoherentData.coversTop, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-13",
+   "verdict": "related declarations; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overMapPushforwardAdj|overPullback|of_coversTop",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "related declarations; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleSubmoduleBinaryGluing",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Affine-union construction: binary submodule gluing; Second restriction of the concrete binary submodule",
+   "via": [
+    "lem-weil-pbc-module-submodule-binary-gluing",
+    "lem-weil-pbc-module-finite-type-affine-union",
+    "lem-weil-pbc-module-finite-type-affine-enlargement",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleSubmoduleBinaryGluingSecondRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSubmoduleBinaryGluingSecondRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.binarySubmodule_on_V",
+  "statement": "theorem binarySubmodule_on_V\n    (X : Scheme.{u}) (W V : X.Opens)\n    (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (Q : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n    (ι : Q ⟶ H.over V) :\n    Nonempty ((SheafOfModules.overMap (moduleRings X.toRingedSpace)\n        (homOfLE (show V ≤ W ⊔ V from le_sup_right))).obj\n          (binarySubmodule X W V H Q ι) ≅ Q)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T095942-L-2454887",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T095942-L-2454887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

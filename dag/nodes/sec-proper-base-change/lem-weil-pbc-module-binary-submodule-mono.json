@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-module-binary-submodule-mono",
+ "kind": "statement",
+ "title": "Monicity of the concrete binary submodule inclusion",
+ "statement": "For any scheme $X$ [def-pc-scheme], opens $W,V$, module sheaves $H$ on $X$ and $Q$ on $V$ [def-weil-sheaf-of-modules-category], and a monomorphism $\\iota:Q\\to H|_V$, the first projection $\\varphi$ of [def-weil-pbc-module-binary-submodule-pullback] is a monomorphism. No quasi-coherence, finite type or overlap condition is needed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-binary-submodule-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PF (lemma-extend), binary gluing paragraph; read at https://stacks.math.columbia.edu/tag/01PF"
+ },
+ "proof": [
+  {
+   "text": "Direct image is a right adjoint, hence preserves monomorphisms; transport by an isomorphism also preserves monicity. The first pullback projection of this monomorphism is mono. Lean proves this by adjunction and pullback instances.",
+   "uses": [
+    "def-weil-pbc-module-binary-submodule-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-binary-submodule-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E1",
+  "date": "2026-10-13",
+  "note": "Concrete Lean implementation of the cited gluing paragraph; local properties also follow Definitions 01BE and 01B5, read on the Stacks website."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open of the pullback of a module sheaf along the direct image of a submodule",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherence and finite type of sheaves of modules are local on a cover of two opens",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.QuasicoherentData.coversTop, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-13",
+   "verdict": "related declarations; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overMapPushforwardAdj|overPullback|of_coversTop",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "related declarations; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleSubmoduleBinaryGluing",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Affine-union construction: binary submodule gluing; Monicity of the concrete binary submodule inclusion",
+   "via": [
+    "lem-weil-pbc-module-submodule-binary-gluing",
+    "lem-weil-pbc-module-finite-type-affine-union",
+    "lem-weil-pbc-module-finite-type-affine-enlargement",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleSubmoduleBinaryGluingCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSubmoduleBinaryGluingCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.binarySubmoduleInclusion_mono",
+  "statement": "instance binarySubmoduleInclusion_mono (X : Scheme.{u}) (W V : X.Opens)\n    (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (Q : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n    (ι : Q ⟶ H.over V) [Mono ι] :\n    Mono (binarySubmoduleInclusion X W V H Q ι)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T095942-L-2454887",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T095942-L-2454887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
