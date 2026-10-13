@@ -13426,3 +13426,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:18 L: returned deliver/P3/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-fb036, head fb036c918) E2 (brief §4): IdealKernelElementDescent.lean:99 replaces the existing proof with `θ )
 
 - 03:19 L: batch 20261013T190131 dependency take-out
+- 19:20 L: returned deliver/M1/Sheaf.AlgebraicGeometry.TensorPullbackStalkSquare (reviewer RETURN: (reviewer X-56534, head 56534e675) B2 / stage-3 point 6: replace the entire node statement, proof, and proof_deps. Old s)
