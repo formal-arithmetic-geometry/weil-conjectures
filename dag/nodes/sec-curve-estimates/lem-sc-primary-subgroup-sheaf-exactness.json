@@ -18,25 +18,21 @@
  },
  "proof": [
   {
-   "text": "The subtype inclusion is injective. The projection of B to B/A is surjective with kernel A, and g*x-x in A makes it equivariant for the specified trivial quotient action. Stabilizers of subgroup elements are preimages of ambient open stabilizers; the trivial quotient has whole-group stabilizers. This gives the kernel and cokernel universal properties in discrete H-modules.",
+   "text": "The subtype inclusion is injective, hence mono in Rep and in the full subcategory of discrete continuous representations. Define the equivariant map to the explicit trivial quotient via N.mkQ; equivariance is g*x-x in A. Forget to integer modules. ShortComplex.moduleCat_exact_iff reduces exactness to lifting a quotient-kernel element: Submodule.Quotient.mk_eq_zero says its value lies in A, so use that same value as an A element. ShortComplex.exact_map_iff_of_faithful reflects this exactness to Rep. The quotient projection is epi by Rep.epi_iff_surjective and N.mkQ_surjective; Exact.gIsCokernel gives its cokernel universal property. The fully faithful inclusion reflects this colimit into discrete continuous representations.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Transport these universal properties across the supplied equivalence E and inverse image across e, itself an equivalence by inverse-image composition and the units for an isomorphism. These preserve monomorphisms, kernels, cokernels, and short exactness. Uniqueness of cokernels identifies the explicitly constructed S.X3 with the associated sheaf of the specified quotient.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false
+   "text": "Compose C.inverse with Etale.upperStar along e.inv. This functor preserves monomorphisms and cokernels: C.inverse is an equivalence and upperStar preserves finite limits and colimits. The complex formed with its mapped inclusion and cokernel projection is short exact by ShortComplex.exact_cokernel. Map the quotient cokernel cofork through this composite, and identify its colimit point with the chosen sheaf cokernel by coconePointUniqueUpToIso. This gives exactly the specified associated quotient sheaf. No comparison action hypothesis, inverse-image composition theorem, or abelian structure theorem for discrete representations is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-inverse-image-composition"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair."
+  "place": "Tags 04JQ and 03QT; blueprint lem-sc-affine-generic-second, paragraphs 1--2. Direct kernel calculation for the explicit quotient, Mathlib ShortComplex.moduleCat_exact_iff and exact_map_iff_of_faithful, Exact.gIsCokernel, fully faithful colimit reflection, CokernelCofork.mapIsColimit, and colimit uniqueness. No new theorem or sorry."
  },
  "mathlib_searches": [
   {
@@ -118,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-38891",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261012T223415-L-1640273",
-  "kind": "interface",
-  "note": "independent Codex review: Packet, delivered modules and nodes, target signature, axioms, compilation, and direct importer all matched the stage-3 brief."
+  "landing": "20261013T022414-L-3213487",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
