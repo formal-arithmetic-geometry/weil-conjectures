@@ -22,50 +22,39 @@
  ],
  "proof": [
   {
-   "text": "For the group ring $R[G]$, the category of left modules has functorial injective embeddings by [lem-exc-rg-group-algebra-functorial-injective-embeddings].",
+   "text": "Use [lem-exc-rg-representation-lifted-group-algebra-equivalence] to choose the equivalence E between the ambient representation category with carrier universe max(u,v,w) and modules over (ULift^w R)[G]. Apply [lem-exc-rg-group-algebra-functorial-injective-embeddings] with coefficient ring ULift^w R. Its carrier universe max(max(u,w),v) is exactly max(u,v,w). This supplies Jm, jm, monic components and injective values.",
    "uses": [
+    "lem-exc-rg-representation-lifted-group-algebra-equivalence",
     "lem-exc-rg-group-algebra-functorial-injective-embeddings"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Section G-modules, paragraph immediately before Tag 04JF"
-   }
+   "elementary": false
   },
   {
-   "text": "The category of $R$-modules with a $G$-action whose elements have open stabilizer is related to the group-ring module category by the fully faithful mono-preserving forgetful functor and its right adjoint given by the open-stabilizer submodule, as stated in [lem-exc-rg-open-stabilizer-adjoint].",
+   "text": "Transfer the group-ring embedding along E.functor -| E.inverse using the proved local helper transferEmbeddings. For any faithful mono-preserving V -| U and embeddings (J,j), this helper constructs the endofunctor V then J then U, with component eta_X followed by U(j_(V X)). Naturality follows by rewriting the naturalities of eta and j and U.map_comp. Monicity is Mathlib Adjunction.injectivePresentationOfMap applied to the injective presentation j_(V X). Injectivity is [lem-exc-rg-right-adjoint-preserves-injectives], realized directly by Mathlib Adjunction.map_injective. Equivalence functors satisfy faithfulness and preservation of monos automatically.",
    "uses": [
-    "lem-exc-rg-open-stabilizer-adjoint"
+    "lem-exc-rg-right-adjoint-preserves-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 04JF, proof of lemma-G-modules, definition of v and u"
-   }
+   "elementary": true
   },
   {
-   "text": "Applying the adjoint transfer lemma [lem-exc-rg-adjoint-transfer-functorial-injectives] to the data in steps 1 and 2 gives a functor $J$ on the open-stabilizer category, a natural transformation $j:\\operatorname{id}\\to J$ whose components are monomorphisms, and injective objects $J(M)$. This is the asserted functorial injective embedding.",
+   "text": "Obtain the faithful inclusion V of the discrete subcategory, its monomorphism-preservation property, and a right adjoint U from [lem-exc-rg-open-stabilizer-adjoint]. Install the two properties as local instances. Apply the same proved local helper transferEmbeddings to the ambient embedding constructed in step 2. Pair the resulting natural transformation with the composite endofunctor; the helper supplies its monic components and injective values.",
    "uses": [
-    "lem-exc-rg-adjoint-transfer-functorial-injectives",
-    "lem-exc-rg-group-algebra-functorial-injective-embeddings",
-    "lem-exc-rg-open-stabilizer-adjoint"
+    "lem-exc-rg-open-stabilizer-adjoint",
+    "lem-exc-rg-right-adjoint-preserves-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 04JF, proof of lemma-G-modules, final sentence invoking Homology Lemma 0161"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-exc-rg-representation-lifted-group-algebra-equivalence",
   "lem-exc-rg-group-algebra-functorial-injective-embeddings",
-  "lem-exc-rg-open-stabilizer-adjoint",
-  "lem-exc-rg-adjoint-transfer-functorial-injectives"
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-exc-rg-open-stabilizer-adjoint"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/injectives.tex",
-  "place": "Tag 04JF, label lemma-G-modules"
+  "place": "Tag 04JF, label lemma-G-modules: original group-ring/open-stabilizer route, with the arbitrary-ring universe bridge made explicit and the transfer construction proved locally from Mathlib."
  },
  "mathlib_searches": [
   {
@@ -159,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T022416-L-3214358",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

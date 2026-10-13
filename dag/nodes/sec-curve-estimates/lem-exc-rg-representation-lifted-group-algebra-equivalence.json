@@ -1,0 +1,120 @@
+{
+ "id": "lem-exc-rg-representation-lifted-group-algebra-equivalence",
+ "kind": "statement",
+ "title": "Arbitrary-ring representations are modules over a lifted group ring",
+ "statement": "Let R be a unital ring (not necessarily commutative) in universe u and G a group in universe v. Fix a carrier universe max(u,v,w). The category of left R-modules in that carrier universe with R-linear G-action and equivariant R-linear maps is equivalent to the category of left modules over (ULift^w R)[G] in the same carrier universe, with module-linear maps. Here ULift^w R is the ring with elements lifted from R and operations transported along the inverse ring isomorphisms up and down. The group ring consists of finitely supported functions G -> ULift^w R with convolution multiplication; coefficients commute with singleton group elements. A categorical equivalence consists of forward and reverse functors with natural unit and counit isomorphisms satisfying the triangle identities.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 04JF, label lemma-G-modules, identification of R-linear G-actions with modules over R[G]; Section G-modules, Tag 04JE. Read online at https://stacks.math.columbia.edu/tag/04JF because the local literature file is absent."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Let S=ULift(R), with the ring isomorphism S -> R given by down. For an R-linear representation (V,rho), put (sum_g a_g[g])x=sum_g down(a_g)rho(g)x. The identity acts as the identity, and on singleton elements the multiplication law is (a[g])(b[h])x=down(a)rho(g)(down(b)rho(h)x)=down(ab)rho(gh)x. Here rho(g) is R-linear; neither coefficients nor R are assumed commutative. Distribute finite sums to obtain the module multiplication law. Additivity and distributivity follow from the same finite-sum formula. On a morphism use its underlying additive map: equivariance and scalar linearity show that it respects each singleton action and hence every finite sum. This defines the forward functor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On an S[G]-module, define rx=(ULift.up(r)[1])x and rho(g)x=(1[g])x. The singleton multiplication laws give the R-module axioms, rho(gh)=rho(g)rho(h), and rho(g)(rx)=r rho(g)x, since (1[g])(ULift.up(r)[1])=(ULift.up(r)[1])(1[g]). Thus rho is an R-linear G-action. Every S[G]-linear map commutes with these scalar and group operations, defining the reverse functor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Both composites preserve the underlying additive groups and maps. The recovered action on an original representation satisfies (1[g])x=rho(g)x and its recovered scalar action is rx; the recovered group-ring action on an original module is a[g]x=(a[1])(1[g])x. Expansion into singleton terms proves equality for every group-ring element. The identity underlying additive maps therefore give unit and counit isomorphisms. They are natural because both functors preserve underlying maps, and the triangle identities hold because all underlying maps are identities. Carriers stay in universe max(u,v,w); ULift changes only the coefficient ring universe, not the carriers.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Explicit singleton-action construction of the group-ring identification used in the proof of Tag 04JF, with the universe lift inserted to match the existing embedding theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between representations of a group over a noncommutative ring and modules over the group ring",
+   "results": "Service unavailable: Internal Server Error, zero hits.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.equivalenceModuleMonoidAlgebra",
+   "results": "One hit: Rep.equivalenceModuleMonoidAlgebra in Mathlib.RepresentationTheory.Rep.Iso. Source signature requires CommRing k, so it does not handle arbitrary Ring R.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalenceModuleMonoidAlgebra|liftNCRingHom",
+   "results": "25 hits; the Rep equivalence requires CommRing, but MonoidAlgebra.liftNCRingHom supplies the algebraic extension construction when coefficient and group actions commute. Searches of lean/Sheaf, lean/WeilConjectures and the DAG found no arbitrary-ring categorical equivalence. Blueprint search for group ring found zero nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DiscreteContinuousFunctorialInjectives",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-exc-continuous-cohomology",
+   "place": "The category of discrete G-modules has enough injectives via Tag 04JF: identify the ambient R-linear G-actions with group-ring modules.",
+   "via": [
+    "lem-exc-rg-discrete-modules-functorial-injective-embeddings"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence",
+  "file": "lean/Sheaf/RepresentationTheory/RepresentationLiftedGroupAlgebraEquivalence.lean",
+  "declaration": "Rep.representation_liftedGroupAlgebra_equivalence",
+  "statement": "theorem representation_liftedGroupAlgebra_equivalence (R : Type u) [Ring R] (G : Type v) [Group G] : Nonempty (Rep.{max u v w} R G ≌ ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T022416-L-3214358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T022416-L-3214358",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

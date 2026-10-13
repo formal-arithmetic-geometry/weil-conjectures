@@ -7,9 +7,10 @@ module
 
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings
 import Sheaf.RepresentationTheory.OpenStabilizerAdjunction
+import Sheaf.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence
 
 /-!
 # Functorial injective embeddings of discrete continuous representations
@@ -25,6 +26,30 @@ universe u v w
 open CategoryTheory
 
 namespace Rep
+
+private theorem transferEmbeddings
+    {D : Type*} [Category* D] {M : Type*} [Category* M]
+    (V : D ⥤ M) (U : M ⥤ D) (adj : V ⊣ U)
+    [V.PreservesMonomorphisms] [V.Faithful]
+    (J : M ⥤ M) (j : 𝟭 M ⟶ J)
+    (hmono : ∀ X, Mono (j.app X)) (hinj : ∀ X, Injective (J.obj X)) :
+    ∃ (jd : 𝟭 D ⟶ V ⋙ J ⋙ U),
+      (∀ X, Mono (jd.app X)) ∧ ∀ X, Injective ((V ⋙ J ⋙ U).obj X) := by
+  let jd : 𝟭 D ⟶ V ⋙ J ⋙ U :=
+    { app := fun X ↦ adj.unit.app X ≫ U.map (j.app (V.obj X))
+      naturality := by
+        intro X Y f
+        dsimp
+        have hj : V.map f ≫ j.app (V.obj Y) = j.app (V.obj X) ≫ J.map (V.map f) :=
+          j.naturality (V.map f)
+        rw [← Category.assoc, ← adj.unit_naturality f, Category.assoc,
+          ← U.map_comp, hj, U.map_comp, Category.assoc] }
+  refine ⟨jd, ?_, fun X ↦ adj.map_injective _ (hinj _)⟩
+  intro X
+  have := hmono (V.obj X)
+  have := hinj (V.obj X)
+  exact (adj.injectivePresentationOfMap X
+    { J := J.obj (V.obj X), f := j.app (V.obj X) }).mono
 
 /-- (blueprint: lem-exc-rg-discrete-modules-functorial-injective-embeddings)
 For any ring `R` and topological group `G`, the category of discrete continuous
@@ -45,6 +70,18 @@ theorem discreteContinuousRep_functorialInjectiveEmbeddings_of_topologicalGroup
           DiscreteContinuousRep.{u, v, max u v w} R G)
       (j : 𝟭 (DiscreteContinuousRep.{u, v, max u v w} R G) ⟶ J),
       (∀ M, Mono (j.app M)) ∧ ∀ M, Injective (J.obj M) := by
-  sorry
+  obtain ⟨E⟩ := representation_liftedGroupAlgebra_equivalence.{u, v, w} R G
+  obtain ⟨Jm, jm, hjm, hJm⟩ :=
+    ModuleCat.groupAlgebra_functorialInjectiveEmbeddings (G := G) (ULift.{w} R)
+  obtain ⟨jr, hjr, hJr⟩ := transferEmbeddings
+    E.functor E.inverse E.toAdjunction Jm jm hjm hJm
+  obtain ⟨_, hfaithful, hmono, U, adj, _⟩ :=
+    ModuleCat.openStabilizerAdjunction.{u, v, max u v w} R G
+  let V := ModuleCat.forgetDiscreteGModule.{u, v, max u v w} R G
+  let : V.Faithful := hfaithful
+  let : V.PreservesMonomorphisms := ⟨fun f _ ↦ hmono f inferInstance⟩
+  obtain ⟨jd, hjd, hJd⟩ := transferEmbeddings
+    V U adj (E.functor ⋙ Jm ⋙ E.inverse) jr hjr hJr
+  exact ⟨V ⋙ (E.functor ⋙ Jm ⋙ E.inverse) ⋙ U, jd, hjd, hJd⟩
 
 end Rep
