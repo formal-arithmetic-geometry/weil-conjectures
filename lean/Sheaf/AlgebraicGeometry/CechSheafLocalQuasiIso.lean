@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.CechSheafLocalAugmentationKernel
+import Sheaf.AlgebraicGeometry.CechSheafLocalPositiveExact
 /-! # Local exactness of the augmented module-sheaf Čech complex
 
 Source: blueprint `lem-pc-cech-resolution`, displayed complex and proof paragraph 1.
@@ -74,6 +76,26 @@ theorem augmented_cech_sheaf_quasiIso_restrict
                   (op (∏ᶜ fun l => U (y l)))) y).app (op V) =
           F.presheafModuleCat.map (prod.snd : (∏ᶜ fun l => U (y l)) ⨯ V ⟶ V).op) (i : ι) :
     QuasiIso (((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex
-      (ComplexShape.up ℕ)).map ε) := by sorry
+      (ComplexShape.up ℕ)).map ε) := by
+  let R := (Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex (ComplexShape.up ℕ)
+  let K := R.obj ((CochainComplex.single₀ X.Modules).obj F)
+  let L := R.obj D
+  let f : K ⟶ L := R.map ε
+  change QuasiIso f
+  refine ⟨fun n ↦ ?_⟩
+  cases n with
+  | zero =>
+    obtain ⟨hk⟩ := augmented_cech_sheaf_restrict_kernel U F D ε e hd hε i
+    rw [CochainComplex.quasiIsoAt₀_iff]
+    rw [ShortComplex.quasiIso_iff_of_zeros _ (by simp [K, R])
+      (by simp [K, R]) (by simp [L, R])]
+    exact ⟨ShortComplex.exact_of_f_is_kernel _ hk, mono_of_isLimit_fork hk⟩
+  | succ p =>
+    have hK : K.ExactAt (p + 1) := by
+      apply ShortComplex.exact_of_isZero_X₂
+      exact (Scheme.Modules.restrictFunctor (U i).ι).map_isZero
+        (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℕ) 0 F (p + 1) (by omega))
+    rw [quasiIsoAt_iff_exactAt f (p + 1) hK]
+    exact cech_sheaf_restrict_exact_positive U F D e hd i p
 
 end AlgebraicGeometry

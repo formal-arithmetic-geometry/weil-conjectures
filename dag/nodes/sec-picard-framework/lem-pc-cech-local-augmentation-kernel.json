@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-cech-local-augmentation-kernel",
+ "kind": "statement",
+ "title": "Degree-zero kernel of a locally restricted Cech augmentation",
+ "statement": "Let X be a scheme [def-pc-scheme], I a type, U:I→Opens(X) a family, F an O_X-module sheaf, and D a nonnegative cochain complex of O_X-module sheaves. Let A=Γ(X,O_X), P(W)(V)=F(W∩V), with its restricted A-action, and C=Č(U,P) the full unnormalized categorical Cech complex. Assume natural A-module-presheaf isomorphisms e_p:forget(D^p)≅C^p, with forget(d_D^p) followed by e_(p+1) equal to e_p followed by d_C^p. Let ε:F[0]→D be a chain map whose degree-zero component, after e_0 and projection to any singleton tuple y, is on every open V the restriction F(V)→F(U_(y(0))∩V). For each i∈I, write R_i for restriction to U_i applied degreewise and f=R_i(ε). Then the kernel fork of d_(R_i D)^0 with vertex (R_i(F[0]))^0 and inclusion f^0 is limiting. The fork equation follows from the chain-map equation and the zero differential of F[0]. This asserts only degree-zero descent and no positive-degree exactness.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "For V⊆U_i, the product of the singleton U_i with V is canonically V. Projection to the singleton i coordinate is a left inverse to the augmentation on sections, by its specified coordinate formula. Thus the augmentation is injective on sections and is monic after restriction. This also holds on the empty open.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Project the degree-zero cocycle equation onto the pair (i,j). The two alternating cofaces are restriction of the j coordinate minus restriction of the i coordinate. Since V⊆U_i, their equality says the j coordinate is the restriction of the section obtained from the i coordinate. Thus every zero cocycle is uniquely an augmented section. The equation hd at zero transports the differential through e, and the given coordinate formula identifies the augmentation itself. These constructions commute with every restriction of V.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise inverse on zero cocycles is linear for the local structure ring, even though e itself need not be: it is inverse to the given locally linear augmentation. Therefore a module-sheaf morphism killed by d^0 factors uniquely through the augmentation, by applying these sectionwise inverse maps. This is exactly the kernel universal property on U_i, with the degree-zero single object canonically the restricted F.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The augmentation of a Cech complex of sheaves is a kernel in degree zero and is exact in positive degrees after restriction to one covering open",
+   "results": "Service returned Internal Server Error. No mathematical verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex augmentation quasi isomorphism on open cover member contracting homotopy",
+   "results": "Eight hits. ExtraDegeneracy.homotopyEquiv provides the general homotopy-equivalence consequence, but does not construct the restriction, the presheaf comparison e, or the module-sheaf maps. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIsoAt, ExactAt",
+   "results": "Service returned unknown identifier ExactAt; no hits. Direct source inspection of QuasiIso.lean supplies the degreewise assembly, not the sectionwise Cech claims.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(quasiIso|exactAt); exactAt_cechComplex_of_le; cech_zero_cocycle_compatibility",
+   "results": "Mathlib Cech.lean defines the categorical complex, without local exactness. The source library proves TopCat.Presheaf.exactAt_cechComplex_of_le for its concrete abelian-group Cech complex. A categorical-presheaf comparison and transport through e are still required. CategoryTheory.cech_zero_cocycle_compatibility is proved for the Cech complex on Over X, rather than the binary-intersection presheaf in this statement. No exact existing local module-sheaf theorem was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-resolution",
+   "place": "Proof paragraph 1: Degree-zero kernel of a locally restricted Cech augmentation",
+   "via": [
+    "lem-pc-cech-sheaf-resolution",
+    "lem-pc-cech-sheaf-local-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CechSheafLocalAugmentationKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CechSheafLocalAugmentationKernel.lean",
+  "declaration": "AlgebraicGeometry.augmented_cech_sheaf_restrict_kernel",
+  "statement": "theorem augmented_cech_sheaf_restrict_kernel\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)\n    (D : CochainComplex X.Modules ℕ)\n    (ε : (CochainComplex.single₀ X.Modules).obj F ⟶ D)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor U).obj\n          ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p)\n    (hd : ∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor U).obj\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1))\n    (hε : ∀ (y : Fin 1 → ι) (V : X.Opens),\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 F).inv ≫ ε.f 0).val ≫\n          (e 0).hom ≫\n            Pi.π (fun y : Fin 1 → ι =>\n              ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n                (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat).obj\n                  (op (∏ᶜ fun l => U (y l)))) y).app (op V) =\n          F.presheafModuleCat.map (prod.snd : (∏ᶜ fun l => U (y l)) ⨯ V ⟶ V).op) (i : ι) :\n    Nonempty (IsLimit (KernelFork.ofι\n      ((((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex\n      (ComplexShape.up ℕ)).map ε).f 0)\n      (show (((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex\n      (ComplexShape.up ℕ)).map ε).f 0 ≫\n          (((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D).d 0 1 = 0 by\n        rw [HomologicalComplex.Hom.comm]\n        simp)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T045514-L-124945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T045514-L-124945",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

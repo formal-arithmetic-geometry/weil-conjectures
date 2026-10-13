@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-cech-local-positive-exact",
+ "kind": "statement",
+ "title": "Positive-degree exactness of a locally restricted Cech complex",
+ "statement": "Let X be a scheme [def-pc-scheme], I a type, U:I→Opens(X) a family, F an O_X-module sheaf, and D a nonnegative cochain complex of O_X-module sheaves. Let A=Γ(X,O_X), P(W)(V)=F(W∩V), with its restricted A-action, and C=Č(U,P) the full unnormalized categorical Cech complex. Assume natural A-module-presheaf isomorphisms e_p:forget(D^p)≅C^p, with forget(d_D^p) followed by e_(p+1) equal to e_p followed by d_C^p. For each i∈I and p≥0, the restriction of D to U_i is exact in degree p+1. No augmentation is given or required, and no covering hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "On an open V⊆U_i, define h on the Cech coordinates by insertion of i at the beginning of the tuple and identify the extra intersection with U_i with V. This gives natural A-linear degree-lowering maps. In positive degrees, compute d h+h d: deletion of the inserted first index gives identity, while deletion of any other index cancels the shifted deletion in the other composite, with opposite signs. Thus positive-degree cocycles are boundaries. The proved TopCat.Presheaf.exactAt_cechComplex_of_le is an alternative source-library implementation of this calculation after identifying the categorical product complex with its concrete Cech complex.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Forget to underlying abelian sheaves before transporting the natural maps through e; e need not be locally O_X-linear. The equations hd give the transported contraction identity. On every V⊆U_i a positive cocycle is therefore a boundary, proving exactness of the underlying abelian sheaf complex. All terms vanish on the empty open, and the argument involves no stalks and no product-stalk interchange.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the exact faithful forgetful functor of lem-weil-pbc-module-sheaves-colimits-forgetful. Its faithfulness and preservation of kernels and cokernels imply reflection of exactness: the homology object of a short complex forgets to its underlying abelian homology object, and faithfulness reflects a zero identity morphism. Hence the restricted module-sheaf complex is exact at p+1.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The augmentation of a Cech complex of sheaves is a kernel in degree zero and is exact in positive degrees after restriction to one covering open",
+   "results": "Service returned Internal Server Error. No mathematical verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex augmentation quasi isomorphism on open cover member contracting homotopy",
+   "results": "Eight hits. ExtraDegeneracy.homotopyEquiv provides the general homotopy-equivalence consequence, but does not construct the restriction, the presheaf comparison e, or the module-sheaf maps. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIsoAt, ExactAt",
+   "results": "Service returned unknown identifier ExactAt; no hits. Direct source inspection of QuasiIso.lean supplies the degreewise assembly, not the sectionwise Cech claims.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(quasiIso|exactAt); exactAt_cechComplex_of_le; cech_zero_cocycle_compatibility",
+   "results": "Mathlib Cech.lean defines the categorical complex, without local exactness. The source library proves TopCat.Presheaf.exactAt_cechComplex_of_le for its concrete abelian-group Cech complex. A categorical-presheaf comparison and transport through e are still required. CategoryTheory.cech_zero_cocycle_compatibility is proved for the Cech complex on Over X, rather than the binary-intersection presheaf in this statement. No exact existing local module-sheaf theorem was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-resolution",
+   "place": "Proof paragraph 1: Positive-degree exactness of a locally restricted Cech complex",
+   "via": [
+    "lem-pc-cech-sheaf-resolution",
+    "lem-pc-cech-sheaf-local-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CechSheafLocalPositiveExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/CechSheafLocalPositiveExact.lean",
+  "declaration": "AlgebraicGeometry.cech_sheaf_restrict_exact_positive",
+  "statement": "theorem cech_sheaf_restrict_exact_positive\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)\n    (D : CochainComplex X.Modules ℕ)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor U).obj\n          ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p)\n    (hd : ∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor U).obj\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1))\n    (i : ι) (p : ℕ) :\n    (((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj D).ExactAt (p + 1)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T045514-L-124945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T045514-L-124945",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

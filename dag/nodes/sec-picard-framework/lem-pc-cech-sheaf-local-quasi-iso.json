@@ -12,17 +12,29 @@
  ],
  "proof": [
   {
-   "text": "Fix i and restrict to U_i. Every open V of U_i lies inside U_i. Define the degree-lowering homotopy by projecting to tuples with i inserted first, identifying the additional intersection with U_i with V itself. At degree zero project to the singleton i coordinate. These are natural maps of presheaves of global A-modules and hence of underlying abelian sheaves. The given e_p need not respect the full local O_X-action, so transport the homotopy only after forgetting to abelian sheaves.",
-   "uses": [],
+   "text": "Apply lem-pc-cech-local-augmentation-kernel to obtain the kernel universal property for the restricted degree-zero augmentation. A kernel inclusion is monic and its kernel short complex is exact. CochainComplex.quasiIsoAt₀_iff and ShortComplex.quasiIso_iff_of_zeros therefore prove the restricted augmentation is a quasi-isomorphism in degree zero. Both differentials of the single source and the incoming differential of the nonnegative target vanish.",
+   "uses": [
+    "lem-pc-cech-local-augmentation-kernel"
+   ],
    "elementary": true
   },
   {
-   "text": "In d h+h d the face deleting the inserted first index gives the identity. Every other face cancels the term obtained by deleting the shifted index before insertion, with the opposite sign. The given augmentation formula supplies the degree-zero equation and says that the projection onto i is a left inverse of the augmentation. Transport the identities through e_p; the differential equations identify them with those in D. This yields a homotopy equivalence of the restricted augmentation on underlying abelian sheaves and hence an abelian-sheaf quasi-isomorphism. Forgetting module sheaves to abelian sheaves preserves and reflects exactness (kernels on sections, cokernels by sheafifying sectionwise cokernels), so the module-sheaf augmentation is also a quasi-isomorphism. Empty U_i and the zero module satisfy the same identities; empty I has no i to check. No stalk-product interchange is used.",
+   "text": "In degree p+1 the single source has a zero object. Restriction sends this zero object to zero, so ShortComplex.exact_of_isZero_X₂ proves source exactness without an exactness assumption on restriction. Apply lem-pc-cech-local-positive-exact for target exactness. Mathlib quasiIsoAt_iff_exactAt yields the quasi-isomorphism in this degree.",
+   "uses": [
+    "lem-pc-cech-local-positive-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Case-split every natural-number degree into zero or successor and assemble the degreewise conclusions using the constructor of QuasiIso. No change to the statement, the unit route, or the meaning of any definition is made.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-cech-local-augmentation-kernel",
+  "lem-pc-cech-local-positive-exact"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
@@ -112,12 +124,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T225306-L-1803870",
+  "landing": "20261013T045514-L-124945",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
