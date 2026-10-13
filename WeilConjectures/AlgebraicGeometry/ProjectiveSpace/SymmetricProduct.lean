@@ -162,4 +162,17 @@ theorem exists_isFinite_surjective_projectiveLinePow (n : Type u) [Finite n] [No
   exact ⟨k, symmetricProduct S k e, isFinite_symmetricProduct S k e,
     surjective_symmetricProduct S k e, symmetricProduct_over S k e⟩
 
+/-- Blueprint `lem-fin-symmetric-product-finite`: A finite symmetric-product cover over a
+Noetherian base.
+
+For a scheme `S` and `n = k + 1 ≥ 1`, with `ι` a type with `n + 1` elements indexing the
+homogeneous coordinates of `ℙⁿ_S`, the symmetric product morphism `σₙ : (ℙ¹_S)ⁿ ⟶ ℙⁿ_S` is
+finite and surjective. The blueprint assumes `S` Noetherian; this is not needed here, since
+finiteness is proved by induction from the finite multiplication morphisms rather than from
+the finiteness of the fibres. -/
+theorem isFinite_and_surjective_symmetricProduct (S : Scheme.{u}) (k : ℕ) {ι : Type u}
+    (e : ι ≃ Fin (k + 1 + 1)) :
+    IsFinite (symmetricProduct S (k + 1) e) ∧ Surjective (symmetricProduct S (k + 1) e) :=
+  ⟨isFinite_symmetricProduct S (k + 1) e, surjective_symmetricProduct S (k + 1) e⟩
+
 end AlgebraicGeometry.ProjectiveSpace

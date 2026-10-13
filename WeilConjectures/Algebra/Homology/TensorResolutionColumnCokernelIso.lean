@@ -31,28 +31,31 @@ namespace HomologicalComplex₂
 
 private def columnAugmentation {R : Type u} [CommRing R]
     {M N : ModuleCat.{u} R} (P : ProjectiveResolution M) (Q : ProjectiveResolution N) :
-    (tensorBicomplex P.complex Q.complex).flip.X 0 ⟶
+    ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).flip.X 0 ⟶
       ((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P.complex where
-  f p := 𝟙 (P.complex.X p) ⊗ₘ Q.π.f 0
+  f p := P.complex.X p ◁ Q.π.f 0
   comm' p p' h := by
-    simp only [tensorBicomplex, flip_X_d, ofGradedObject_d_f,
-      Functor.mapHomologicalComplex_obj_d, Functor.flip_obj_map, curriedTensor_map_app,
-      ← tensorHom_id,
-      tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id]
+    simp only [flip_X_d, Functor.mapBifunctorHomologicalComplex_obj_obj_d_f,
+      curriedTensor_map_app, Functor.mapHomologicalComplex_obj_d, Functor.flip_obj_map]
+    exact whisker_exchange _ _
 
 private theorem columnAugmentation_zero {R : Type u} [CommRing R]
     {M N : ModuleCat.{u} R} (P : ProjectiveResolution M) (Q : ProjectiveResolution N) :
-    (tensorBicomplex P.complex Q.complex).flip.d 1 0 ≫ columnAugmentation P Q = 0 := by
-  ext p
+    ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).flip.d 1 0 ≫ columnAugmentation P Q = 0 := by
+  ext p : 1
   simp only [HomologicalComplex.comp_f, columnAugmentation, flip_d_f,
-    tensorBicomplex, ofGradedObject_X_d, tensorHom_comp_tensorHom,
-    Category.comp_id, ProjectiveResolution.complex_d_comp_π_f_zero,
+    Functor.mapBifunctorHomologicalComplex_obj_obj_X_d, curriedTensor_obj_map,
     HomologicalComplex.zero_f]
-  simp
+  change P.complex.X p ◁ Q.complex.d 1 0 ≫ P.complex.X p ◁ Q.π.f 0 = 0
+  rw [← MonoidalCategory.whiskerLeft_comp, ProjectiveResolution.complex_d_comp_π_f_zero,
+    MonoidalPreadditive.whiskerLeft_zero]
 
 private noncomputable def columnDesc {R : Type u} [CommRing R]
     {M N : ModuleCat.{u} R} (P : ProjectiveResolution M) (Q : ProjectiveResolution N) :=
-  (tensorBicomplex P.complex Q.complex).flip.descOpcycles
+  ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).flip.descOpcycles
     (columnAugmentation P Q) 1 (by simp) (columnAugmentation_zero P Q)
 
 private theorem columnDesc_isIso {R : Type u} [CommRing R]
@@ -62,8 +65,7 @@ private theorem columnDesc_isIso {R : Type u} [CommRing R]
   constructor
   · apply HomologicalComplex.exact_of_degreewise_exact
     intro p
-    simpa [ShortComplex.map, columnAugmentation, tensorBicomplex,
-      curriedTensor_obj_map, ← id_tensorHom] using
+    exact
       Q.exact₀.map_of_epi_of_preservesCokernel (tensorLeft (P.complex.X p))
         (inferInstance) (inferInstance)
   · apply HomologicalComplex.epi_of_epi_f
@@ -91,7 +93,9 @@ Cancel the projections, which are epimorphisms, to obtain the stated square. -/
 theorem tensorResolutionColumnCokernelIso (R : Type u) [CommRing R] :
     ∃ e : ∀ (M N : ModuleCat.{u} R) (P : ProjectiveResolution M)
         (Q : ProjectiveResolution N),
-        (tensorBicomplex P.complex Q.complex).flip.opcycles 0 ≅
+        ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex
+          (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).flip.opcycles 0 ≅
           ((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P.complex,
       ∀ (M N M' N' : ModuleCat.{u} R)
         (P : ProjectiveResolution M) (Q : ProjectiveResolution N)
@@ -100,28 +104,32 @@ theorem tensorResolutionColumnCokernelIso (R : Type u) [CommRing R] :
         (a : P.complex ⟶ P'.complex) (b : Q.complex ⟶ Q'.complex)
         (_ha : a.f 0 ≫ P'.π.f 0 = P.π.f 0 ≫ f)
         (_hb : b.f 0 ≫ Q'.π.f 0 = Q.π.f 0 ≫ g),
-        (e M N P Q).hom ≫ chainTensorMap a g =
+        (e M N P Q).hom ≫ ChainComplex.tensorMap a g =
           HomologicalComplex.opcyclesMap
             ((flipFunctor (ModuleCat R) (.down ℕ) (.down ℕ)).map
-              (tensorBicomplexMap a b)) 0 ≫
+              ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex
+                (.down ℕ) (.down ℕ)).map a).app Q.complex ≫
+                (((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex
+                  (.down ℕ) (.down ℕ)).obj P'.complex).map b)) 0 ≫
               (e M' N' P' Q').hom := by
   have inst (M N : ModuleCat.{u} R) (P : ProjectiveResolution M)
       (Q : ProjectiveResolution N) : IsIso (columnDesc P Q) := columnDesc_isIso P Q
   refine ⟨fun M N P Q => asIso (columnDesc P Q), ?_⟩
   intro M N M' N' P Q P' Q' f g a b ha hb
-  change columnDesc P Q ≫ chainTensorMap a g =
+  change columnDesc P Q ≫ ChainComplex.tensorMap a g =
     HomologicalComplex.opcyclesMap _ 0 ≫ columnDesc P' Q'
   rw [← CategoryTheory.cancel_epi
-    ((tensorBicomplex P.complex Q.complex).flip.pOpcycles 0)]
+    (((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex
+      (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).flip.pOpcycles 0)]
   simp only [← Category.assoc, columnDesc, HomologicalComplex.p_descOpcycles]
   erw [HomologicalComplex.p_opcyclesMap, Category.assoc,
     HomologicalComplex.p_descOpcycles]
-  ext p
-  simp only [HomologicalComplex.comp_f, columnAugmentation, chainTensorMap,
-    Functor.mapHomologicalComplex_map_f, NatTrans.mapHomologicalComplex_app_f,
-    Functor.flip_obj_map, curriedTensor_map_app, ← tensorHom_id, tensorBicomplexMap, homMk_f_f,
-    flipFunctor_map_f_f, Functor.flip_map_app, curriedTensor_obj_map, ← id_tensorHom,
-    tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id, hb]
+  ext p : 1
+  change P.complex.X p ◁ Q.π.f 0 ≫ (a.f p ▷ N ≫ P'.complex.X p ◁ g) =
+    (a.f p ▷ Q.complex.X 0 ≫ P'.complex.X p ◁ b.f 0) ≫ P'.complex.X p ◁ Q'.π.f 0
+  erw [whisker_exchange_assoc]
+  simp only [Category.assoc, ← MonoidalCategory.whiskerLeft_comp, hb]
 
 
 end HomologicalComplex₂

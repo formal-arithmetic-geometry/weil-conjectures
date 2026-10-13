@@ -45,31 +45,33 @@ private theorem row_tensor_square {R : Type u} [CommRing R]
 
 private noncomputable def rowAugmentation {R : Type u} [CommRing R]
     {M N : ModuleCat.{u} R} (P : ProjectiveResolution M) (Q : ProjectiveResolution N) :
-    (tensorBicomplex P.complex Q.complex).X 0 ⟶
+    ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).X 0 ⟶
       ((tensorRight M).mapHomologicalComplex (.down ℕ)).obj Q.complex where
-  f q := (P.π.f 0 ⊗ₘ 𝟙 (Q.complex.X q)) ≫ (β_ M (Q.complex.X q)).hom
+  f q := P.π.f 0 ▷ Q.complex.X q ≫ (β_ M (Q.complex.X q)).hom
   comm' q q' h := by
-    simp only [tensorBicomplex, ofGradedObject_X_d,
-      Functor.mapHomologicalComplex_obj_d, Functor.flip_obj_map, curriedTensor_map_app,
-      ← tensorHom_id]
-    rw [Category.assoc, ← BraidedCategory.braiding_naturality]
-    simp only [← Category.assoc, tensorHom_comp_tensorHom, Category.id_comp,
-      Category.comp_id]
-    erw [Category.comp_id]
+    change (P.π.f 0 ▷ Q.complex.X q ≫ (β_ M (Q.complex.X q)).hom) ≫ Q.complex.d q q' ▷ M =
+      P.complex.X 0 ◁ Q.complex.d q q' ≫ P.π.f 0 ▷ Q.complex.X q' ≫
+        (β_ M (Q.complex.X q')).hom
+    erw [Category.assoc, ← BraidedCategory.braiding_naturality_right]
+    exact (whisker_exchange_assoc _ _ _).symm
 
 private theorem rowAugmentation_zero {R : Type u} [CommRing R]
     {M N : ModuleCat.{u} R} (P : ProjectiveResolution M) (Q : ProjectiveResolution N) :
-    (tensorBicomplex P.complex Q.complex).d 1 0 ≫ rowAugmentation P Q = 0 := by
-  ext q
-  simp only [HomologicalComplex.comp_f, rowAugmentation, tensorBicomplex,
-    ofGradedObject_d_f, ← Category.assoc, tensorHom_comp_tensorHom,
-    Category.comp_id, ProjectiveResolution.complex_d_comp_π_f_zero,
-    HomologicalComplex.zero_f]
-  simp
+    ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).d 1 0 ≫ rowAugmentation P Q = 0 := by
+  ext q : 1
+  change P.complex.d 1 0 ▷ Q.complex.X q ≫ P.π.f 0 ▷ Q.complex.X q ≫
+    (β_ M (Q.complex.X q)).hom = 0
+  have h : P.complex.d 1 0 ▷ Q.complex.X q ≫ P.π.f 0 ▷ Q.complex.X q = 0 := by
+    rw [← MonoidalCategory.comp_whiskerRight, ProjectiveResolution.complex_d_comp_π_f_zero,
+      MonoidalPreadditive.zero_whiskerRight]
+  erw [reassoc_of% h, Limits.zero_comp]
 
 private noncomputable def rowDesc {R : Type u} [CommRing R]
     {M N : ModuleCat.{u} R} (P : ProjectiveResolution M) (Q : ProjectiveResolution N) :=
-  (tensorBicomplex P.complex Q.complex).descOpcycles
+  ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).descOpcycles
     (rowAugmentation P Q) 1 (by simp) (rowAugmentation_zero P Q)
 
 private theorem rowDesc_isIso {R : Type u} [CommRing R]
@@ -86,15 +88,15 @@ private theorem rowDesc_isIso {R : Type u} [CommRing R]
     apply ShortComplex.exact_of_iso _ hs
     refine ShortComplex.isoMk (Iso.refl _) (Iso.refl _)
       (β_ M (Q.complex.X q)) ?_ ?_
-    · simp [S, ShortComplex.map, tensorBicomplex]
-    · simp [S, ShortComplex.map, rowAugmentation]
+    · exact (Category.id_comp _).trans (Category.comp_id _).symm
+    · exact Category.id_comp _
   · apply HomologicalComplex.epi_of_epi_f
     intro q
-    change Epi ((P.π.f 0 ⊗ₘ 𝟙 (Q.complex.X q)) ≫ (β_ M (Q.complex.X q)).hom)
-    have : Epi (P.π.f 0 ⊗ₘ 𝟙 (Q.complex.X q)) := by
+    change Epi (P.π.f 0 ▷ Q.complex.X q ≫ (β_ M (Q.complex.X q)).hom)
+    have : Epi (P.π.f 0 ▷ Q.complex.X q) := by
       change Epi ((tensorRight (Q.complex.X q)).map (P.π.f 0))
       infer_instance
-    infer_instance
+    exact epi_comp' this (@IsIso.epi_of_iso _ _ _ _ _ (Iso.isIso_hom (β_ M (Q.complex.X q))))
 
 
 /-- The row cokernel complex is the singly tensored resolution, naturally
@@ -117,7 +119,9 @@ naturality of braiding to identify the resulting map with b ⊗ f. -/
 theorem tensorResolutionRowCokernelIso (R : Type u) [CommRing R] :
     ∃ e : ∀ (M N : ModuleCat.{u} R) (P : ProjectiveResolution M)
         (Q : ProjectiveResolution N),
-        (tensorBicomplex P.complex Q.complex).opcycles 0 ≅
+        ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex
+          (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).opcycles 0 ≅
           ((tensorRight M).mapHomologicalComplex (.down ℕ)).obj Q.complex,
       ∀ (M N M' N' : ModuleCat.{u} R)
         (P : ProjectiveResolution M) (Q : ProjectiveResolution N)
@@ -126,26 +130,33 @@ theorem tensorResolutionRowCokernelIso (R : Type u) [CommRing R] :
         (a : P.complex ⟶ P'.complex) (b : Q.complex ⟶ Q'.complex)
         (_ha : a.f 0 ≫ P'.π.f 0 = P.π.f 0 ≫ f)
         (_hb : b.f 0 ≫ Q'.π.f 0 = Q.π.f 0 ≫ g),
-        (e M N P Q).hom ≫ chainTensorMap b f =
+        (e M N P Q).hom ≫ ChainComplex.tensorMap b f =
           HomologicalComplex.opcyclesMap
-            (tensorBicomplexMap a b) 0 ≫
+            ((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex
+              (.down ℕ) (.down ℕ)).map a).app Q.complex ≫
+              (((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex
+                (.down ℕ) (.down ℕ)).obj P'.complex).map b) 0 ≫
               (e M' N' P' Q').hom := by
   have inst (M N : ModuleCat.{u} R) (P : ProjectiveResolution M)
       (Q : ProjectiveResolution N) : IsIso (rowDesc P Q) := rowDesc_isIso P Q
   refine ⟨fun M N P Q => asIso (rowDesc P Q), ?_⟩
   intro M N M' N' P Q P' Q' f g a b ha hb
-  change rowDesc P Q ≫ chainTensorMap b f =
+  change rowDesc P Q ≫ ChainComplex.tensorMap b f =
     HomologicalComplex.opcyclesMap _ 0 ≫ rowDesc P' Q'
   rw [← CategoryTheory.cancel_epi
-    ((tensorBicomplex P.complex Q.complex).pOpcycles 0)]
+    (((((curriedTensor (ModuleCat.{u} R)).mapBifunctorHomologicalComplex
+      (.down ℕ) (.down ℕ)).obj
+      P.complex).obj Q.complex).pOpcycles 0)]
   simp only [← Category.assoc, rowDesc, HomologicalComplex.p_descOpcycles]
   rw [HomologicalComplex.p_opcyclesMap, Category.assoc,
     HomologicalComplex.p_descOpcycles]
   ext q : 1
   change (((P.π.f 0 ⊗ₘ 𝟙 (Q.complex.X q)) ≫ (β_ M (Q.complex.X q)).hom) ≫
     ((b.f q ⊗ₘ 𝟙 M) ≫ (𝟙 (Q'.complex.X q) ⊗ₘ f))) =
-      (a.f 0 ⊗ₘ b.f q) ≫ (P'.π.f 0 ⊗ₘ 𝟙 (Q'.complex.X q)) ≫
+      (a.f 0 ▷ Q.complex.X q ≫ P'.complex.X 0 ◁ b.f q) ≫
+        (P'.π.f 0 ⊗ₘ 𝟙 (Q'.complex.X q)) ≫
         (β_ M' (Q'.complex.X q)).hom
+  rw [← tensorHom_def]
   exact row_tensor_square (P.π.f 0) (P'.π.f 0) (a.f 0) (b.f q) f ha
 
 end HomologicalComplex₂
