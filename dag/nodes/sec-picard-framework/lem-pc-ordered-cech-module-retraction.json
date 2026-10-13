@@ -14,38 +14,32 @@
  },
  "proof": [
   {
-   "text": "Evaluate e on inverse-image opens. Define R sectionwise by the inverse of a applied to the ordered coordinates q. The proved coordinate naturality and local scalar identity, with hn and hl, show that R is natural and locally linear. The face equations ha and hd identify its differential equation: deletion of an increasing entry is the corresponding usual Cech face, and the two intersection restriction composites are the unique maps between the same opens.",
+   "text": "Obtain R with its ordered coordinate formula from orderedCech_module_restriction, and independently obtain I with q(I(s))=a(s) from orderedCech_module_signedSection.",
    "uses": [
-    "def-pc-ordered-cech-module-coordinates"
+    "lem-pc-ordered-cech-module-restriction-map",
+    "lem-pc-ordered-cech-module-signed-section"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Define I on sections by signed extension of a-coordinates. A distinct tuple is transported from its unique sorted increasing tuple, multiplied by the sorting sign; a repeated tuple has value zero. Use the inverse of e and the inverse of the product-intersection isomorphisms to return to D. SignedCechExtension_differential gives stability under the differential: for distinct tuples its permutation law matches the ordered differential, while repeated tuple faces cancel in pairs. The inputs ha and hd transport this equation to I.",
+   "text": "In degree p >= 0 and on each B, apply injectivity of a p B and evaluate at t. The coordinate formula for R, evaluated on I(s), followed by the coordinate formula for I gives a(R(I(s))) t = q(I(s)) t = a(s) t. Extensionality of module-sheaf morphisms proves the identity in this degree. In negative degrees K is a zero object by hK, so the two maps out of K agree. Complex-morphism extensionality proves I followed by R is identity; retain the coordinate formula for R.",
    "uses": [
-    "lem-pc-signed-cech-extension-differential",
-    "def-pc-ordered-cech-module-coordinates"
+    "lem-pc-ordered-cech-module-restriction-map",
+    "lem-pc-ordered-cech-module-signed-section"
    ],
-   "elementary": false
-  },
-  {
-   "text": "All extension components consist of restrictions and integer multiples. Their scalar and restriction equations follow from hl, hlinear and naturality of e. Signed extension is identity on increasing tuples. Thus injectivity of a gives R after I equal to identity, and the defining equation of R gives its displayed coordinate formula. Put components in negative degrees equal to zero; hK and extension by zero make the chain equations there automatic. Empty families and empty coefficient opens require no exceptional choices.",
-   "uses": [
-    "def-pc-ordered-cech-module-coordinates"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-ordered-cech-module-coordinates",
-  "lem-pc-signed-cech-extension-differential"
+  "lem-pc-ordered-cech-module-restriction-map",
+  "lem-pc-ordered-cech-module-signed-section"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "K2",
+  "agent": "U1",
   "document": "Stacks Project, Cohomology of Sheaves",
   "place": "Tags 01FJ and 01FK",
-  "note": "Module-sheaf assembly of the cited explicit restrictions and sorting formulas."
+  "note": "Independent ordered restriction and signed-extension coordinate equations imply the retraction by injectivity and degreewise extensionality."
  },
  "mathlib_searches": [
   {
@@ -139,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T054224-L-444913",
+  "landing": "20261013T100142-L-2491794",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

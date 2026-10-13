@@ -6,6 +6,8 @@ Authors: SHEAF group K2
 module
 
 public import Sheaf.AlgebraicGeometry.OrderedCechModuleCoordinates
+import Sheaf.AlgebraicGeometry.OrderedCechModuleRestrictionMap
+import Sheaf.AlgebraicGeometry.OrderedCechModuleSignedSection
 import Sheaf.AlgebraicGeometry.SignedCechExtension
 
 /-! # Split ordered restriction for module sheaves
@@ -101,6 +103,24 @@ theorem orderedCech_module_retraction {X' T' : Scheme.{u}} (f' : X' ⟶ T')
       ComplexShape.embeddingUpNat).X (p : ℤ), B))
         (t : Fin (p + 1) ↪o Fin r),
         a p B ((rmap.f (p : ℤ)).app B s) t =
-          orderedCechModuleCoordinate f' M W₀ D e p B t s := by sorry
+          orderedCechModuleCoordinate f' M W₀ D e p B t s := by
+  obtain ⟨rmap, hr⟩ :=
+    orderedCech_module_restriction f' M W₀ K hK a hn hl ha D e hd hlinear
+  obtain ⟨imap, hi⟩ :=
+    orderedCech_module_signedSection f' M W₀ K hK a hn hl ha D e hd hlinear
+  refine ⟨rmap, imap, ?_, hr⟩
+  let : K.IsStrictlyGE 0 := hK
+  apply HomologicalComplex.hom_ext
+  intro n
+  by_cases hn : 0 ≤ n
+  · obtain ⟨p, rfl⟩ := Int.eq_ofNat_of_zero_le hn
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro B
+    ext s
+    apply (a p B.unop).injective
+    funext t
+    exact (hr p B.unop ((imap.f (p : ℤ)).app B.unop s) t).trans (hi p B.unop s t)
+  · exact (K.isZero_of_isStrictlyGE 0 n (by omega)).eq_of_src _ _
 
 end AlgebraicGeometry.Scheme.Modules
