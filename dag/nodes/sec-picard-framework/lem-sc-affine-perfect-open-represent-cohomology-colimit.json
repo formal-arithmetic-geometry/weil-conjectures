@@ -26,22 +26,38 @@
  ],
  "proof": [
   {
-   "text": "The stated intermediate conjunction follows from the finite Koszul and derived Čech arguments in the source proposition.",
+   "text": "Use the principal-unit lemma at exponent e+1. Identify its basic-open union with koszulOpen. Transport IsIso through the derived functor composition isomorphism, and take the canonical inverse v_e, with both inverse identities.",
    "uses": [
-    "lem-sc-affine-perfect-koszul-principal-unit",
-    "lem-sc-affine-koszul-cech-derived-comparison"
+    "lem-sc-affine-perfect-koszul-principal-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The structural compatibility of power transitions with augmentation implies v_b followed by the restricted power transition equals v_a, by insertion of the two inverse identities. Construct the cocone explicitly by phi mapping to v_e followed by restriction(phi); functoriality and this compatibility prove naturality.",
+   "uses": [
+    "lem-sc-affine-perfect-open-represent-cohomology-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite-stage restriction surjectivity gives joint surjectivity of the cocone legs. Equality of two legs at one stage gives equality of restricted morphisms after composition with the augmentation. Apply eventual restriction-zero vanishing to their difference and use bilinearity to obtain equality at a later stage. Types.FilteredColimit.isColimitOf' gives the colimit witness. Assemble v, both inverse identities, the explicit cocone formula, and that witness.",
+   "uses": [
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-koszul-open-hom-restriction-eventually-zero"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-affine-perfect-koszul-principal-unit",
-  "lem-sc-affine-koszul-cech-derived-comparison"
+  "lem-sc-affine-perfect-open-represent-cohomology-core",
+  "lem-sc-koszul-open-hom-restriction-surjective",
+  "lem-sc-koszul-open-hom-restriction-eventually-zero"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 08CX, 08DC, and 08DD"
+  "place": "Tag 08DD, Proposition 36.9.5, H^0 argument; read from the Stacks online edition"
  },
  "mathlib_searches": [
   {
@@ -128,13 +144,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U3",
+  "reviewer": "X-84a0c",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T232906-L-2044016",
+  "landing": "20261013T040748-L-3948812",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched unchanged theorem signatures, the cocone proof and both new sourced lemmas with their DAG nodes; all three delivered modules and sole direct importer Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology compile cleanly. Axioms are standard plus sorryAx from acknowledged open dependencies; accepted as a decomposition."
  }
 }

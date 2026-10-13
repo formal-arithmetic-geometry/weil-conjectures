@@ -1,0 +1,153 @@
+{
+ "id": "lem-sc-koszul-open-hom-restriction-eventually-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: modify the affine supported perfect complex so its map to E lifts over the affine open; Koszul representability, finite representatives and eventual equality",
+   "via": [
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Koszul restriction eventually zero",
+ "statement": "Let A be a commutative ring, X=Spec(A) [def-pc-scheme], f a finite sequence, and U the union of its principal opens [def-sc-koszul-open-system]. Let E be in D_QCoh(O_X) [def-pc-derived-category]. For every stage e and morphism phi from I_e to E whose restriction to U is zero, there exists b at least e such that the transition I_b to I_e followed by phi is zero.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section section-koszul, equation-comparison and Proposition proposition-represent-cohomology-class-on-open"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-koszul-open-system"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine quasi-coherent derived equivalence to represent E by a termwise quasi-coherent complex F, corresponding to the A-module complex M. Each Koszul tail is bounded finite free. K-projectivity identifies its Hom-complex H^0 with derived Hom, naturally in the power transitions.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical Koszul-to-Cech-derived-sections comparison to F. It is a quasi-isomorphism. Exactness of filtered colimits of modules identifies H^0 of the source with the filtered colimit of the derived Hom groups. Evaluation at 1 identifies H^0 of derived sections with Hom from the restricted structure object. The explicit localization formula makes the comparison leg equal to restriction followed by the inverse augmentation.",
+   "uses": [
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If restriction(phi) is zero, its comparison image is zero. Injectivity on H^0 makes its filtered-colimit class zero. The element criterion for a filtered colimit of modules gives b at least e such that precomposition with the power transition kills phi.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-sc-affine-koszul-cech-derived-comparison",
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DD, Proposition 36.9.5, H^0 argument; read from the Stacks online edition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The colimit of derived Hom from powers Koszul tails to a quasi-coherent complex represents sections on a union of principal opens",
+   "results": "Service unavailable (Internal Server Error), including retry with a shorter query; no search conclusion.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of Hom from finite Koszul tails computes derived sections on a union of principal opens",
+   "results": "Basic-open section/localization results, ModuleCat.Tilde.exists_const, and localCohomology.ofDiagram; none states the derived Hom assertion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Cc]olimit|[Cc]olimit.*Koszul in Mathlib; HomComplex/Hom/cohomology searches in Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "No Koszul representability declaration. Mathlib.CategoryTheory.Limits.Types.Filtered has Types.FilteredColimit.isColimitOf' for the final assembly; generic homology and K-projective tools do not supply the restriction assertions.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic assembly lemma found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a perfect Koszul complex restricting to zero on an open subset becomes zero after increasing the powers of the generators",
+   "results": "Only generic derived-category zero-map/support lemmas were returned; none asserts eventual vanishing under Koszul power transitions.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every hypercohomology class on a finite union of principal open subsets of an affine scheme lifts to a morphism from a finite free Koszul tail",
+   "results": "Returned ordinary section localization and affine-transition-limit results; these do not address unbounded derived morphisms from Koszul tails.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsColimit\", \"Type\"",
+   "results": "Generic colimit-of-types results only; the existing filtered-colimit criterion already handles assembly.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|eventually.*zero",
+   "results": "Algebra/Homology: only LocalCohomology.lean future-work note on a Koszul characterization; no finite-stage restriction assertion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyColimit",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulOpenHomRestrictionEventuallyZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenHomRestrictionEventuallyZero.lean",
+  "declaration": "AlgebraicGeometry.koszulOpenHom_restriction_eventually_zero",
+  "statement": "theorem koszulOpenHom_restriction_eventually_zero\n    (A : Type uMain) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{wMain}\n      (SheafOfModules.{uMain} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{wMain}\n      (SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]\n    [HasDerivedCategory.{wMain}\n      (SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))]\n    (E : schemeDerivedQCohCategory (Spec (.of A)))\n :\n    let R := ((SheafOfModules.overFunctor.{uMain}\n      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{uMain}\n          ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))\n        (D := SheafOfModules.{uMain}\n          (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))\n        (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory\n    ∀ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ E.1), R.map φ = 0 →\n      ∃ (b : ℕ) (h : e ≤ b), koszulOpenMap A r f e b h ≫ φ = 0",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-84a0c",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T040748-L-3948812",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-84a0c",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T040748-L-3948812",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signatures, the cocone proof and both new sourced lemmas with their DAG nodes; all three delivered modules and sole direct importer Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology compile cleanly. Axioms are standard plus sorryAx from acknowledged open dependencies; accepted as a decomposition."
+ }
+}
