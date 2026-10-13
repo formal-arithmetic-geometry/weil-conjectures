@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-scalar-cup-coefficient-naturality",
+ "kind": "statement",
+ "title": "Scalar cup product naturality in coefficients",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a scheme [def-pc-scheme], and $f:X\\to\\operatorname{Spec}(k)$. Use scalar cohomology, its recorded derived-functor coefficient maps, and its Ext-defined cup product [def-sc-field-linear-module-cohomology-operations]. For $F,G,F\\prime,G\\prime\\in X.\\mathrm{Modules}$, morphisms $\\varphi:F\\to F\\prime$, $\\psi:G\\to G\\prime$, degrees $p,q\\in\\mathbb N$ and classes $a\\in H_k^p(X,F)$, $b\\in H_k^q(X,G)$, one has $H_k^{p+q}(\\varphi\\otimes\\psi)(a\\smile b)=H_k^p(\\varphi)(a)\\smile H_k^q(\\psi)(b)$. There is no quasi-coherence assumption.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tags 01F7, 01FD, 07MB, 0FKV; Modules Tag 01CD for the normalized tensor-pullback map. Official sources https://stacks.math.columbia.edu/tag/01F7 and https://stacks.math.columbia.edu/tag/0FKV"
+ },
+ "proof": [
+  {
+   "text": "Choose injective resolutions of the four coefficient modules and comparison\nchain maps lifting phi and psi. Evaluation at 1 intertwines a comparison chain map\nwith the global-sections map, since an O-linear map sends the image of 1 to the\nimage of that section. Thus the moduleExtEquiv comparison intertwines the recorded\nright-derived-functor coefficient map with postcomposition in Ext. Restriction to\nk and precomposition by scalarUnitMorphism preserve this equality by associativity\nof Yoneda composition, giving the same assertion for scalarCohomologyExtEquiv.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the tensor coefficient, both orders send s tensor t to phi(s) tensor psi(t).\nThe tensor universal property and sheafification adjunction make this an equality\nof sheaf morphisms. Apply this square to the tensor pairing of resolution complexes:\ncomparison chain maps have degree zero, so the signs of Tag 07MB agree in both\norders. Tag 0FKV identifies its augmentation with the ordinary coefficient tensor\nmap and the derived cup product. Equivalently, associativity and naturality of\nYoneda composition identify postcomposition of scalarExtCup with the cup of the\ntwo postcompositions. Compose with scalarTensorCoefficient, use its square, and\ntransport through the injective scalarCohomologyExtEquiv. The comparison with the\nrecorded coefficient maps proved above gives the displayed equality. No acyclic\ncover or quasi-coherence assumption is used. In degree zero this is precisely the\npure-tensor identity; if a morphism or a coefficient is zero both sides are zero.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tags 01F7, 01FD, 07MB, 0FKV; Modules Tag 01CD for the normalized tensor-pullback map. Official sources https://stacks.math.columbia.edu/tag/01F7 and https://stacks.math.columbia.edu/tag/0FKV",
+  "note": "Source resolution and tensor-section argument specialized to the actual scalar Ext definitions; normalization details written by N4. This is a strict part of the combined naturality argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of cup product on sheaf cohomology under coefficient maps",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology cup product commutes with pullback and coefficient morphisms",
+   "results": "Eight hits about group-cohomology coefficient maps; none states scalar scheme-module cup naturality. A separate coefficient-naturality query also returned group cohomology and nonabelian H1, no match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp_mapExactFunctor",
+   "results": "One generic Ext transport hit, useful composition algebra but no scalar cup or normalized tensor-pullback compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup.*naturality|cup.*pullback|Cup.*naturality",
+   "results": "Mathlib search via msearch: zero hits. Local searches of both library roots and DAG found moduleCup_coefficient_naturality and moduleCup_pullback_naturality in Sheaf.Paper.CechCupPullbackCompat; these require quasicoherent coefficients and IsModuleCupProduct rather than the scalar Ext-defined cup. They cannot apply to arbitrary coefficients here. Blueprint search for cup product naturality returned no matching node.",
+   "date": "2026-10-13",
+   "verdict": "no matching unrestricted scalar lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarCupPullbackCoefficientNaturality",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof, Kunneth pullback functoriality: scalar cup product naturality in coefficients",
+   "via": [
+    "lem-sc-scalar-cup-pullback-coefficient-naturality",
+    "lem-sc-picard-kunneth-qcoh-functoriality",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarCupCoefficientNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarCupCoefficientNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCup_coefficient_naturality",
+  "statement": "theorem scalarCup_coefficient_naturality\n    (k : Type w) [Field k] (X : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (F G F' G' : X.Modules)\n    (φ : F ⟶ F') (ψ : G ⟶ G') (p q : ℕ)\n    (a : scalarCohomology f F p) (b : scalarCohomology f G q) :\n    scalarCohomologyMap f (@id ((F ⊗ G) ⟶ (F' ⊗ G')) (φ ⊗ₘ ψ)) \n        (p + q) (scalarCohomologyCup f F G p q a b) =\n      scalarCohomologyCup f F' G' p q\n        (scalarCohomologyMap f φ p a) (scalarCohomologyMap f ψ q b)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T024042-L-3337114",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T024042-L-3337114",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

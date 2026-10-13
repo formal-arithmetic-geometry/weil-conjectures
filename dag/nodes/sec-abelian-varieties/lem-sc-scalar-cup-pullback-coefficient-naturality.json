@@ -15,29 +15,39 @@
  },
  "proof": [
   {
-   "text": "Use the injective-resolution comparison defining scalarCohomologyExtEquiv.\nEvaluation of a morphism from the structure sheaf at 1 identifies its Hom complex\nwith the sections complex. Restriction to k and precomposition by scalarUnitMorphism\nidentify this with Ext from the constant k-sheaf, so this comparison is natural in\ncoefficients. The scalarPullbackCoefficient is adjoint to the normalized module\npullback unit. The resolution diagram of Tag 01FD therefore computes the same\npullback as scalarCohomologyPullback. The Yoneda tensor pairing defining scalarExtCup\nis represented by the signed resolution tensor pairing of Tag 07MB. Tag 0FKV\nidentifies that pairing with the cohomology cup product after augmentation to the\nordinary tensor. On sections, pullback of a tensor is the tensor of the pullbacks;\nthe tensor-pullback comparison has this normalization. Applying phi and psi gives\nthe tensor of their images. These equalities commute with the differentials and\naugmentations, and the sign is unchanged because the degrees p and q are unchanged.\nTransport the resulting equality of classes back through scalarCohomologyExtEquiv.\nNaturality in coefficients identifies the final coefficient map with the recorded\nderived-functor map scalarCohomologyMap, giving exactly the displayed composite.\nThis uses no affine-cover comparison inverse. At degree zero it is the section\ntensor identity; a zero coefficient or an empty scheme gives zero on both sides.",
+   "text": "Unfold scalarCohomologyMap and use Functor.map_comp for moduleCohomology and restriction of scalars. Evaluation of the composite of ModuleCat morphisms shows H(v composed with u)(x)=H(v)(H(u)(x)). Apply this to tau followed by phi tensor psi.",
    "uses": [
-    "def-sc-field-linear-module-cohomology-operations",
-    "lem-weil-pbc-module-pullback-tensor"
+    "def-sc-field-linear-module-cohomology-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology Tags 01FD (lemma-functoriality-cech), 07MB (equation-needs-signs), 0FKV (lemma-diagrams-commute); tensor-section argument of lem-sc-picard-kunneth-qcoh Step 8. Official source https://stacks.math.columbia.edu/tag/0FKV"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply scalarCup_pullback_naturality to replace the tau-adjusted pullback of a cup by the cup of the pulled-back classes.",
+   "uses": [
+    "lem-sc-scalar-cup-pullback-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalarCup_coefficient_naturality on Y to phi and psi and the two pulled-back classes. Its conclusion is exactly the remaining equality.",
+   "uses": [
+    "lem-sc-scalar-cup-coefficient-naturality"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-field-linear-module-cohomology-operations",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-sc-scalar-cup-pullback-naturality",
+  "lem-sc-scalar-cup-coefficient-naturality"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "S4",
+  "group": "N4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology Tags 01FD (lemma-functoriality-cech), 07MB (equation-needs-signs), 0FKV (lemma-diagrams-commute); tensor-section argument of lem-sc-picard-kunneth-qcoh Step 8. Official source https://stacks.math.columbia.edu/tag/0FKV",
-  "note": "Source argument specialized to the recorded scalar Ext comparisons; normalization glue written by S4."
+  "place": "Tags 01FD, 07MB, 0FKV; separate pullback and coefficient portions of the original resolution argument",
+  "note": "Compiling decomposition into two separate compatibility claims, combined by actual derived-functor composition. One upper hole closed, two strictly simpler holes added."
  },
  "mathlib_searches": [
   {
@@ -137,12 +147,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261012T234224-L-2126777",
+  "landing": "20261013T024042-L-3337114",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

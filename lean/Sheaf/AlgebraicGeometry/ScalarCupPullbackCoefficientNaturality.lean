@@ -6,6 +6,8 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+import Sheaf.AlgebraicGeometry.ScalarCupCoefficientNaturality
+import Sheaf.AlgebraicGeometry.ScalarCupPullbackNaturality
 
 /-! # Scalar cup products under pullback and coefficient maps
 
@@ -60,7 +62,14 @@ theorem scalarCup_pullback_coefficient_naturality
       scalarCohomologyCup g F' G' p q
         (scalarCohomologyMap g φ p (scalarCohomologyPullback f g t ht F p a))
         (scalarCohomologyMap g ψ q (scalarCohomologyPullback f g t ht G q b)) := by
-  sorry
+  have map_comp {M N P : Y.Modules} (u : M ⟶ N) (v : N ⟶ P)
+      (n : ℕ) (x : scalarCohomology g M n) :
+      scalarCohomologyMap g (u ≫ v) n x =
+        scalarCohomologyMap g v n (scalarCohomologyMap g u n x) := by
+    simp only [scalarCohomologyMap, Functor.map_comp, ModuleCat.hom_comp,
+      LinearMap.comp_apply]
+  rw [map_comp, scalarCup_pullback_naturality k X Y f g t ht F G p q a b]
+  exact scalarCup_coefficient_naturality k Y g _ _ F' G' φ ψ p q _ _
 
 end
 end AlgebraicGeometry.Scheme.Modules
