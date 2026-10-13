@@ -9,8 +9,10 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import Sheaf.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedGlobalSections
+import Sheaf.RingTheory.DepthLeSupportDimension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.RingTheory.MvPowerSeries.Inverse
 
 /-!
 # Injectivity of restriction on the punctured power-series section
@@ -26,35 +28,26 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Injectivity of restriction on morphisms of finite étale covers in the
-power-series punctured-section situation.  This is the uniqueness part of
-Stacks Project, Tag 0EY9: a section with zero formal restriction vanishes by
-Krull intersection and the associated-prime criterion, and formal étaleness
-then gives uniqueness on every thickening.
+power-series punctured-section situation. This is the uniqueness part of
+Stacks Project, Tag 0EY9, proved here using connectedness and a faithful
+geometric-fibre functor.
 (blueprint: lem-sbc-power-series-punctured-section-injective)
 
-Proof: Write B = A[[x_1,...,x_d]], I = (x_1,...,x_d), and U = Spec A minus its closed point.
-The thickenings V_n of U in V have structure sheaves O_V/I^n. Depth at least two
-and Hartogs (0BK0) give Gamma(U,O_U) = A. Each B/I^n is finite free over A, on
-monomials of degree less than n. Thus lim Gamma(V_n,O_V_n) = B.
-The map Gamma(V,O_V) to this limit is injective: Krull intersection shows that
-a section with zero formal restriction has zero germ at every point of U.
-The associated primes of B are pB, for associated primes p of A, by the flat
-local depth formula. Such p differ from the maximal ideal because depth A is
-positive; pB specializes to pB + I, a point of U. Hence the section vanishes
-at every associated point of V, so it vanishes. The composition from B through
-Gamma(V,O_V) to the limit is the canonical isomorphism; both maps are therefore
-isomorphisms. For a finite locally free E on the Noetherian quasi-affine V,
-global generation of E dual gives an embedding E into O^r with locally free
-cokernel Q. Embed Q into O^s similarly. The sequence 0 -> E -> O^r -> O^s
-remains exact on every V_n. Sections and inverse limits preserve its kernel,
-so the comparison for O gives Gamma(V,E) = lim Gamma(V_n,E|V_n). Apply this
-to internal Hom bundles to obtain bijectivity of completion on module maps.
-If two morphisms of finite etale covers have the same restriction to U,
-formal etaleness gives equality of their restrictions to every V_n. On finite
-locally free direct-image algebras their maps thus have identical completions.
-Injectivity of the internal Hom comparison makes the algebra maps equal.
-Relative Spec then makes the original cover morphisms equal. Empty covers
-cause no exception; the same argument applies to bundles of rank zero. -/
+Proof: The structure-sheaf comparison of Tag 0EY9 identifies Gamma(V,O_V)
+with the local power-series ring B. The punctured spectrum of A is nonempty:
+otherwise its prime spectrum would be a singleton and its Krull dimension
+would be at most zero, contradicting depth at least two and the depth bound
+by support dimension. A point of the punctured zero section gives a point
+of V, so its global section ring is nontrivial. Surjectivity of the comparison
+makes that ring local, and its idempotents are therefore zero and one.
+The connectedness-idempotent criterion shows that V is connected.
+Construct a geometric point s over the chosen point of the punctured section
+and compose it with the map to V to obtain t. The geometric-fibre functor
+at t is faithful. For a point y of the fibre of P, the pullback universal
+property lifts (y,s) to the restriction of P. Equality of the restricted
+morphisms, precomposed with this lift and followed by the target projection,
+gives equality of their values on y. Fibre extensionality and faithfulness
+then give equality of the original morphisms. Empty covers cause no exception. -/
 theorem finiteEtale_powerSeries_punctured_section_restriction_injective
     (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)
@@ -66,6 +59,45 @@ theorem finiteEtale_powerSeries_punctured_section_restriction_injective
     let z := Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d)))
     ∀ P Q : V.toScheme.FiniteEtale,
       Function.Injective ((FiniteEtale.pullback (z ∣_ V)).map (X := P) (Y := Q)) := by
-  sorry
+  classical
+  dsimp only
+  let z := Spec.map
+    (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)))
+  obtain ⟨x, hx⟩ : ∃ x : Spec (.of A), x ≠ IsLocalRing.closedPoint A := by
+    by_contra h
+    have heq : ∀ x : PrimeSpectrum A, x = IsLocalRing.closedPoint A := by
+      push Not at h
+      change ∀ x : PrimeSpectrum A, x = IsLocalRing.closedPoint A at h
+      exact h
+    have : Subsingleton (PrimeSpectrum A) := ⟨fun a b ↦ (heq a).trans (heq b).symm⟩
+    have hdim : ringKrullDim A ≤ 0 := Order.krullDim_nonpos_of_subsingleton
+    have hb := IsLocalRing.depth_le_supportDim (R := A) A
+    rw [Module.supportDim_self_eq_ringKrullDim] at hb
+    have htwo : (2 : WithBot ℕ∞) ≤ 0 :=
+      (WithBot.coe_le_coe.mpr hdepth).trans (hb.trans hdim)
+    norm_num at htwo
+  let x₀ : (z ⁻¹ᵁ V).toScheme := ⟨x, (hV x).mpr hx⟩
+  have : Nonempty V.toScheme := ⟨(z ∣_ V) x₀⟩
+  let φ := ((ΓSpecIso (.of (MvPowerSeries (Fin d) A))).inv ≫ V.ι.appTop).hom
+  -- The structure-sheaf comparison suffices; no internal Hom completion is needed.
+  have hφ := bijective_powerSeries_punctured_globalSections A hdepth d hd V hV
+  have : Nontrivial Γ(V.toScheme, ⊤) :=
+    (V.toScheme.presheaf.germ ⊤ ((z ∣_ V) x₀) trivial).hom.domain_nontrivial
+  have : IsLocalRing Γ(V.toScheme, ⊤) := IsLocalRing.of_surjective' φ hφ.2
+  have : ConnectedSpace V.toScheme :=
+    (connectedSpace_iff_isIdempotentElem V.toScheme).mpr
+      (fun e he ↦ IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem he)
+  intro P Q a b hab
+  let s := (z ⁻¹ᵁ V).toScheme.algClosurePoint x₀
+  let t := s ≫ (z ∣_ V)
+  apply (FiniteEtale.fiber t).map_injective
+  apply ConcreteCategory.hom_ext
+  intro y
+  apply FiniteEtale.fiber_ext
+  let c := Limits.pullback.lift y.left s (FiniteEtale.fiber_left_comp t y)
+  have hh := congrArg
+    (fun k ↦ c ≫ k.hom.left ≫ Limits.pullback.fst Q.obj.hom (z ∣_ V)) hab
+  change y.left ≫ a.hom.left = y.left ≫ b.hom.left
+  simpa [c, z, Category.assoc, FiniteEtale.pullback_map_hom_left] using hh
 
 end AlgebraicGeometry.Scheme
