@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-polynomial-completed-fibre-compatible-product",
+ "kind": "statement",
+ "title": "Compatible product of completed polynomial fibres",
+ "statement": "Let $A$ and $B$ be Noetherian local commutative rings [def-weil-pbc-noetherian-ring], with $B$ a finite $A$-algebra. Let $q\\subset A[X]$ be maximal with $q\\cap A=\\mathfrak m_A$, let $r\\subset A[X]$ and $s\\subset B[X]$ be prime [def-weil-polynomial-ring], and let $L$ be a field equipped with $\\kappa(r)$- and $B$-algebra structures. Suppose $e:\\kappa(s)\\cong L$ is a $B$-algebra isomorphism [def-weil-pbc-localization-at-prime] such that for every $f\\in A[X]$, the image under $e$ of its coefficientwise image in $\\kappa(s)$ equals its image under $A[X]\\to\\kappa(r)\\to L$. Put $C=(A[X]_q)^\\wedge$ [def-weil-pbc-adic-completion]. There exist $n\\ge0$ and maximal ideals $q_i\\subset B[X]$ for $i\\in\\operatorname{Fin}(n)$, each contracting to $\\mathfrak m_B$ and containing $s$, with a ring isomorphism $L\\otimes_{\\kappa(r)}(\\kappa(r)\\otimes_{A[X]}C)\\cong\\prod_i(\\kappa(s)\\otimes_{B[X]}(B[X]_{q_i})^\\wedge)$. The empty product is the zero ring. All types have one common universe.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07PU (lemma-another-helper-G-ring), proof, first paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Polynomial coefficient extension is finite, by polyEquivTensor and base change of finite modules. Apply completion_finite_extension at q to get a finite product indexed by all primes over q.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each prime over q is maximal by integrality. Its contraction in B is prime over the maximal ideal of A, hence maximal by integrality of A to B and therefore the maximal ideal of the local ring B.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compatibility equation identifies the restricted polynomial algebra structures. Cancel both base changes and tensor the completion product equivalence with kappa(s); distribute tensor over the finite product.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-algebra-tensor-product-distributes-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a prime not containing s, an element of s outside the prime has zero image in kappa(s) and unit image in the completion, so the fibre has 1=0. Restrict to primes containing s, inserting zero in the inverse, and enumerate by Fin n. The empty retained set is allowed only through this isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-product-distributes-product",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07PU (lemma-another-helper-G-ring), proof, first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product completed polynomial fibre finite coefficient extension product of local completions",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product completed polynomial fibre finite coefficient extension product of local completions",
+   "results": "Found AdicCompletion.ofTensorProductEquivOfPiFintype and polyEquivTensor_apply, not the compatible formal-fibre product presentation.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|prodRight|piRight",
+   "results": "Found Algebra.TensorProduct.cancelBaseChange and Algebra.TensorProduct.piRight; these do not include prime selection and the compatible presentation.",
+   "verdict": "partial match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialFormalFiberFiniteReduction",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 3 and 4 of polynomial-formal-fibre-finite-reduction: completion tensor product and removal of zero factors in Tag 07PU.",
+   "via": [
+    "lem-weil-pbc-polynomial-formal-fibre-finite-reduction",
+    "lem-weil-pbc-another-helper-g-ring-geometric-component",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialCompletedFibreCompatibleProduct",
+  "file": "lean/Sheaf/RingTheory/PolynomialCompletedFibreCompatibleProduct.lean",
+  "declaration": "Polynomial.completed_fibre_compatible_product",
+  "statement": "theorem completed_fibre_compatible_product (A B : Type u) [CommRing A] [CommRing B] [IsNoetherianRing A] [IsLocalRing A] [Algebra A B] [Module.Finite A B] [IsNoetherianRing B] [IsLocalRing B] (q : Ideal (Polynomial A)) [q.IsMaximal] (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A) (r : Ideal (Polynomial A)) [r.IsPrime] (L : Type u) [Field L] [Algebra r.ResidueField L] (s : Ideal (Polynomial B)) [s.IsPrime] [Algebra B L] (e : s.ResidueField ≃ₐ[B] L) (he : ∀ f : Polynomial A, e (algebraMap (Polynomial B) s.ResidueField (Polynomial.map (algebraMap A B) f)) = algebraMap r.ResidueField L (algebraMap (Polynomial A) r.ResidueField f)) : let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q) ∃ (n : ℕ) (q' : Fin n → Ideal (Polynomial B)) (qmax : ∀ i, (q' i).IsMaximal), letI := qmax (∀ i, (q' i).comap (Polynomial.C : B →+* Polynomial B) = IsLocalRing.maximalIdeal B) ∧ (∀ i, s ≤ q' i) ∧ Nonempty ((TensorProduct r.ResidueField L (r.Fiber C)) ≃+* (∀ i : Fin n, s.Fiber (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime (q' i))) (Localization.AtPrime (q' i)))))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T015600-L-3022642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T015600-L-3022642",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

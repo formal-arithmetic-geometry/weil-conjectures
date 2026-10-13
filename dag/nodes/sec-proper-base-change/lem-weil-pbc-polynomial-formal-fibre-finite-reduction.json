@@ -17,50 +17,39 @@
  ],
  "proof": [
   {
-   "text": "The nonzero prime r above zero becomes a maximal ideal of K[X], so κ(r)/K is finite. For each finite purely inseparable L/κ(r), clear denominators in monic equations for finitely many K-generators to construct a finite A-subalgebra B of L whose fraction field is L.",
+   "text": "Apply exists_finite_coefficient_model to get a finite A-subalgebra B of L, its nonzero evaluation prime s, fraction-field structure and compatible residue-field equivalence.",
    "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-finite-of-integral-generators"
+    "lem-weil-pbc-polynomial-residue-finite-coefficient-model"
    ],
    "elementary": false
   },
   {
-   "text": "B is a domain, Noetherian, local and complete, with maximal ideal over that of A. Evaluation B[X] to L has a nonzero prime kernel s above zero; the fraction field of its image, hence its residue field, is L.",
+   "text": "The subalgebra B of the field L is a domain. Apply the domain clause of finite_over_complete_local_product to obtain that B is Noetherian, local and complete.",
    "uses": [
     "lem-weil-pbc-finite-over-complete-local-product"
    ],
    "elementary": false
   },
   {
-   "text": "Apply completion-finite-extension to A[X] to B[X] at q. Tensor with L, using associativity and finite-product distributivity, to identify the extended fibre with the finite product of the fibres of the polynomial completions over B.",
+   "text": "Apply completed_fibre_compatible_product with B, s and the compatible equivalence to get the finite family of maximal ideals q_i containing s and the extended fibre isomorphism.",
    "uses": [
-    "lem-weil-pbc-completion-finite-extension",
-    "lem-weil-pbc-tensor-cancel-base-change",
-    "lem-weil-pbc-algebra-tensor-product-distributes-product"
+    "lem-weil-pbc-polynomial-completed-fibre-compatible-product"
    ],
    "elementary": false
   },
   {
-   "text": "The primes q_i over q are maximal by integrality and contract to the maximal ideal of B. When s is not contained in q_i, an element of s outside q_i is invertible and zero in the fibre, making that fibre the zero ring. Remove the zero factors by restricting the product to the finite subset of q_i containing s; the inverse supplies the unique zero coordinate at removed indices. Enumerate the retained set by Fin n, using copies of B and s in each coordinate. This gives all ideal relations, fraction-field structures and the asserted ring isomorphism; the retained index set may be empty.",
-   "uses": [
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-integral-prime-over-maximal-maximal"
-   ],
-   "elementary": false
+   "text": "Use constant families B_i=B and s_i=s. Supply all structures and collect the fraction-field and ideal relations with the product isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-algebra-tensor-product-distributes-product",
-  "lem-weil-pbc-completion-finite-extension",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-finite-of-integral-generators",
   "lem-weil-pbc-finite-over-complete-local-product",
-  "lem-weil-pbc-integral-prime-over-maximal-maximal",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-tensor-cancel-base-change"
+  "lem-weil-pbc-polynomial-completed-fibre-compatible-product",
+  "lem-weil-pbc-polynomial-residue-finite-coefficient-model"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Lemma Tag 07PU (lemma-another-helper-G-ring), proof, first paragraph"
  },
@@ -135,12 +124,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T153013-L-2351874",
+  "landing": "20261013T015600-L-3022642",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

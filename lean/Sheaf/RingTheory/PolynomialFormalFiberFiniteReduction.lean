@@ -9,9 +9,9 @@ public import Mathlib.Algebra.Polynomial.AlgebraMap
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.FractionRing
-import Sheaf.RingTheory.CompletionFiniteExtension
+import Sheaf.RingTheory.PolynomialResidueFiniteCoefficientModel
+import Sheaf.RingTheory.PolynomialCompletedFibreCompatibleProduct
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Finite product presentation of extended polynomial formal fibres
@@ -26,6 +26,7 @@ universe u
 
 namespace Polynomial
 
+set_option linter.unusedVariables false in
 /-- A finite purely inseparable base change of a nonzero polynomial formal fibre above
 zero is a finite product of linear-residue formal fibres over complete local domains.
 This is a ring presentation, with no regularity assertion.
@@ -89,6 +90,27 @@ theorem formalFiber_finiteExtension_reduction
           Nonempty ((TensorProduct r.ResidueField L (r.Fiber C)) ≃+*
             (∀ i, (s i).Fiber
               (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime (q' i)))
-                (Localization.AtPrime (q' i))))) := by sorry
+                (Localization.AtPrime (q' i))))) := by
+  classical
+  let : Algebra A L :=
+    ((algebraMap r.ResidueField L).comp
+      ((algebraMap (Polynomial A) r.ResidueField).comp Polynomial.C)).toAlgebra
+  obtain ⟨B, hfin, s, hs, hsne, hsB, hfrac, e, he⟩ :=
+    exists_finite_coefficient_model A r hr hrA L
+  have : Module.Finite A B := hfin
+  have : s.IsPrime := hs
+  obtain ⟨hnoeth, hlocal, hcomplete, _⟩ :=
+    (Algebra.finite_over_complete_local_product A B).2.2.2
+      (inferInstance : IsDomain B)
+  have : IsNoetherianRing B := hnoeth
+  have : IsLocalRing B := hlocal
+  have : IsAdicComplete (IsLocalRing.maximalIdeal B) B := hcomplete
+  obtain ⟨n, q', qmax, hqB, hsq, hiso⟩ :=
+    completed_fibre_compatible_product A B q hq r L s e he
+  have : ∀ i, (q' i).IsMaximal := qmax
+  refine ⟨n, fun _ ↦ B, fun _ ↦ inferInstance, fun _ ↦ inferInstance,
+    fun _ ↦ hnoeth, fun _ ↦ hlocal, fun _ ↦ hcomplete,
+    q', qmax, fun _ ↦ s, fun _ ↦ hs, ?_⟩
+  exact ⟨fun _ ↦ hfrac, hqB, hsq, fun _ ↦ hsne, fun _ ↦ hsB, hiso⟩
 
 end Polynomial
