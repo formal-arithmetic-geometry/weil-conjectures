@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-weil-pbc-ind-etale-algebra",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Ind-etale and ind-Zariski algebras",
- "statement": "An $A$-algebra is *ind-etale* if it is a filtered colimit of etale algebras\nof finite presentation [def-weil-pbc-scheme-conventions]. It is *ind-Zariski*\nif such a presentation can be chosen with terms finite products of\nlocalizations $A_f$. The corresponding affine scheme is an inverse limit of\naffine etale schemes, with affine transition maps. A ring map is *weakly\netale* when its map on spectra is weakly etale in\n[def-weil-pbc-scheme-conventions]; equivalently, $B$ is flat over $A$ and\nover $B\\otimes_A B$ by multiplication.",
+ "statement": "Let $A$ be a commutative ring and let $B$ be an $A$-algebra. The\n$A$-algebra $B$ is *ind-etale* if it is a filtered colimit of etale\n$A$-algebras of finite presentation [def-weil-pbc-scheme-conventions]. It is\n*ind-Zariski* if such a presentation can be chosen with terms finite products\nof localizations $A_f$. The corresponding affine scheme $\\operatorname{Spec}B$\nis an inverse limit of affine etale schemes, with affine transition maps. The\nring map $A\\to B$ is *weakly etale* when the induced map\n$\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is weakly etale in\n[def-weil-pbc-scheme-conventions]; equivalently, $B$ is flat as an $A$-module\nand is flat as a module over $B\\otimes_A B$ via the multiplication map\n$B\\otimes_A B\\to B$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-ind-etale-algebra.md",
   "place": "node def-weil-pbc-ind-etale-algebra, order 1214"
@@ -18,9 +18,38 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "definition of ind-etale, ind-Zariski, and weakly etale algebras as filtered colimits and flatness",
+   "results": "RingHom.Etale.toAlgebra (Mathlib/RingTheory/RingHom/Etale), RingHom.etale_iff_formallyUnramified_and_smooth (Mathlib/RingTheory/RingHom/Etale), RingHom.etale_algebraMap (Mathlib/RingTheory/RingHom/Etale), Algebra.Etale.exists_subalgebra_fg (Mathlib/RingTheory/Smooth/NoetherianDescent), Algebra.etaleLocus_eq_univ_iff_etale (Mathlib/RingTheory/Etale/Locus), RingHom.Etale.propertyIsLocal (Mathlib/RingTheory/RingHom/Etale), Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat (Mathlib/RingTheory/Smooth/StandardSmoothCotangent), StandardEtalePair.instFormallyEtaleRing (Mathlib/RingTheory/Etale/StandardEtale)",
+   "date": "2026-10-14",
+   "verdict": "no match: no declaration states the combined definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IndEtale, Algebra.IndZariski, Algebra.WeaklyEtale",
+   "results": "none; unknown identifier Algebra.IndEtale",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IndEtale|IndZariski|WeaklyEtale in RingTheory/ProEtale",
+   "results": "none in Mathlib source (the project-specific declarations are in WeilConjectures/RingTheory/ProEtale)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of finite presentation etale algebras ind-etale algebra; ind-Zariski; weakly etale flat diagonal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -41,5 +70,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-ind-etale-algebra",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against its blueprint and project source. It is a bundle of the ind-etale, ind-Zariski, affine inverse-limit, and weakly-etale conventions; creating separate nodes for its clauses would violate the no-clause-restatement rule. The existing def-weil-pbc-scheme-conventions node supplies the referenced scheme-level notions, so the definition is split with no new nodes or proof steps.",
+  "blueprint": "The item realizes the complete statement of blueprint node def-weil-pbc-ind-etale-algebra (order 1214); it has no proof section to further realize.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-2f400db5b",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-2f400db5b (reviewer sub-agent of L); spot-checked: Read the full item, report, blueprint source, cited scheme-conventions and étale/weakly-étale nodes, unit/chapter route, DAG duplicates, and archived master target sources. The four definition clauses, hypotheses, tensor multiplication map, edge cases, and Mathlib/project searches check out; no new nodes or proof steps exist, and no coefficient-category or base-change identification is made."
+ }
 }
