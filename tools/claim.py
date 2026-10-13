@@ -311,7 +311,9 @@ def main() -> int:
         parked = set(stage2_abandonments()) - parked_resolved()
         rp = WORK / 'repairs.txt'
         listed_repairs = {l.split()[0] for l in rp.read_text().splitlines() if l.strip() and not l.lstrip().startswith('#')} if rp.exists() else set()
-        skip = abandoned_recently(who)   # launcher's finding, 2026-10-10 15:30 UTC: C1 abandoned one item 29 times in half an
+        # the human, 2026-10-14: no lockout of a group from an item it gave up; every attempt is a fresh worker, so the
+        # same group taking it again is no different from another group (groups now keep their items; stalls are inspected)
+        skip = set()   # launcher's finding, 2026-10-10 15:30 UTC: C1 abandoned one item 29 times in half an
         repair_items = [p.stem for p in sorted((WORK / 'repair-notes').glob('*.json'))
                         if repair_note(p.stem).get('state') == 'released'] if stage in (None, '3') else []
         for m in dict.fromkeys(repair_items + queue(stage)):           # hour because next handed it straight back; a group skips its own abandonments for 24 h
