@@ -2072,9 +2072,11 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.AffineReduction
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.FiniteModel
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.FixedPoints
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Frobenius
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.GlobalOperator
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Iterate
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.KernelPushforward
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.LocalFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Localization

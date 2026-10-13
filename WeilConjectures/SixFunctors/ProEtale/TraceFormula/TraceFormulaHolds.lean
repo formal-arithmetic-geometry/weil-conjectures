@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.FiniteModel
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ModelRestriction
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Perfectness
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.PushforwardFibres
