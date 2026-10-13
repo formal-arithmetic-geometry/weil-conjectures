@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-open-stalk-restriction-transport",
+ "kind": "statement",
+ "title": "Transport of open-site stalk coordinates under further restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $x\\in U$ an open neighbourhood, and $S_A$ the module stalk functor on the slice site over $A$, with scalars restricted to $\\mathcal O_{X,x}$ [def-sc-open-module-stalk-functor]. Write $R_{BA}$ for slice restriction [def-pur-localized-ringed-site]. One can choose, before any modules or maps, natural isomorphisms $e_W:R_{WU}S_W\\cong S_U$ for all $x\\in W\\subseteq U$. For every $x\\in W\\subseteq V\\subseteq U$ and every natural isomorphism $a:R_{VU}S_V\\cong S_U$, there exist natural isomorphisms $c:R_{VU}R_{WV}\\cong R_{WU}$ and $d:R_{WV}S_W\\cong S_V$ such that for every module sheaf $M$ on the U slice, $S_W(c_M)e_{W,M}=d_{R_{VU}M}a_M$. No finite free source or prescribed map is assumed, and no neighbourhood or lifting morphism is produced.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Sheaves Tag 00A0 (3), (5), lemma-restrict; Sheaves Tag 0096, lemma-adjoint-pullback-pushforward-modules. Read https://stacks.math.columbia.edu/tag/00A0 and https://stacks.math.columbia.edu/tag/0096 on 2026-10-13. The coordinate extension calculation is the naturality and adjunction triangle argument written by T3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-open-module-stalk-functor",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Choose the canonical open-site stalk comparisons using the germ maps and their scalar linearity. These comparisons exist independently of any modules or maps. Identify iterated restriction with direct restriction by the sectionwise identity. The canonical comparisons compose because each composite sends a section germ to the same ambient germ.",
+   "uses": [
+    "lem-sc-open-module-stalk-restriction-comparison",
+    "new-module-restriction-stalk-components",
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the Mathlib open-immersion restriction/pushforward adjunction and its invertible counit through the slice/open equivalences. If R is restriction U to V, P its right adjoint, epsilon its counit, a the given comparison and e0 the canonical comparison, define b on the V stalk functor S as S(epsilon) inverse followed by e0 whiskered by P, a inverse whiskered by P, and S(epsilon). Naturality at the adjunction unit and the triangle identity give b_(R M) followed by a_M = e0_M. Composing the canonical W-to-V comparison with b gives d. Combining this equality with the canonical germ-composition formula gives the displayed law for c and d. This is independent of freeness and works for equal opens and zero modules.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-open-module-stalk-restriction-comparison",
+  "new-module-restriction-stalk-components",
+  "def-sc-open-module-stalk-functor",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Sheaves Tags 00A0 (3),(5) and 0096; naturality and triangle-identity coordinate extension, written by T3. Mathlib Scheme.Modules.restrictAdjunction and its invertible counit realize the adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphisms between module sheaf stalk functors extend through further open restriction using the fully faithful open pushforward",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictStalkNatIso\"",
+   "results": "3 hits: Scheme.Modules.restrictStalkNatIso and its hom/inv germ formulas. Underlying additive comparisons only; not arbitrary comparison extension on slice-site module stalks.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overMap.*[Cc]omp|openModuleStalk.*[Ii]so; restriction stalk (blueprint search)",
+   "results": "Mathlib overMapCompOverEquiv, restrictAdjunction, restrictStalkNatIso; existing OpenModuleStalkRestrictionComparison gives comparisons without extension of arbitrary coordinates. StalkRestrictionSubopenCompatibility uses scheme pullback complexes, not these module stalks. No blueprint nodes match restriction stalk. Whole library and DAG checked.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"iso\"",
+   "results": "Second reader: twelve Equivalence.counitIso component and cancellation hits; none extends an arbitrary stalk comparison through open restriction.",
+   "verdict": "adjunction/isomorphism infrastructure only; no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenStalkFreeMapLocalLift",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: the local perfect-model comparison in the route through perfect H0 locally closed; arbitrary inverse chain-map descent; lift part of lem-sc-perfect-open-stalk-chain-map-lift; refinement: single finite-free-source component lifting and its common restriction-stalk coordinates. Refinement: transport of stalk coordinates through one further restriction, independently of finite-source lifting.",
+   "via": [
+    "lem-sc-open-stalk-free-map-local-lift",
+    "lem-sc-perfect-open-stalk-degreewise-lift",
+    "lem-sc-perfect-open-stalk-chain-map-lift",
+    "lem-sc-perfect-stalk-quasi-iso-detection",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenStalkRestrictionTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenStalkRestrictionTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_openStalk_restriction_transport",
+  "statement": "theorem exists_openStalk_restriction_transport\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) :\n    ∃ e : ∀ (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U),\n      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU) ⋙\n        openModuleStalkFunctor X W ⟨x, hxW⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩,\n      ∀ (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U)\n        (a : SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU) ⋙\n          openModuleStalkFunctor X V ⟨x, hxV⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)\n        (W : X.Opens) (hxW : x ∈ W) (hWV : W ≤ V) (hWU : W ≤ U),\n        let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hVU)\n        let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hWV)\n        let P := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hWU)\n        ∃ (c : R ⋙ Q ≅ P)\n          (d : Q ⋙ openModuleStalkFunctor X W ⟨x, hxW⟩ ≅\n            openModuleStalkFunctor X V ⟨x, hxV⟩),\n          ∀ M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),\n            (openModuleStalkFunctor X W ⟨x, hxW⟩).map (c.hom.app M) ≫\n                (e W hxW hWU).hom.app M =\n              d.hom.app (R.obj M) ≫ a.hom.app M",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T123548-L-3712376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T123548-L-3712376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

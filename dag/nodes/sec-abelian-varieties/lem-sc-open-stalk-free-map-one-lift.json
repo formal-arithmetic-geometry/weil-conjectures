@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-open-stalk-free-map-one-lift",
+ "kind": "statement",
+ "title": "One finite-free open-site stalk map lifts on one neighbourhood",
+ "statement": "Let X be a scheme [def-pc-scheme], U an open containing x, and S_A the ambient-ring-valued open module stalk functor [def-sc-open-module-stalk-functor]. Let F be the rank-m finite free module sheaf on the U slice [def-weil-pbc-module-finite-type-presentation], N any module sheaf on that slice [def-weil-sheaf-of-modules-category], and t:S_U(F) → S_U(N) any linear map. There exist x ∈ V ⊆ U, a natural isomorphism a:R_{VU}S_V ≅ S_U for slice restriction R [def-pur-localized-ringed-site], and k:R(F) → R(N), such that S_V(k)=a_F t a_N inverse in categorical composition order. The comparison can depend on m,N,t; no uniform family of comparisons or lifting on every smaller open is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Modules Tag 01CP, lemma-stalk-internal-hom, finite-generator portion of the finite-presentation proof; Sheaves Tag 00A0 (3). Read https://stacks.math.columbia.edu/tag/01CP and https://stacks.math.columbia.edu/tag/00A0 on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-open-module-stalk-functor",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Identify the U slice with sheaves on the open subscheme U, preserving the unit and finite coproducts, hence the finite free source. Transport t across the open-immersion stalk-ring isomorphism. Apply finite-free local stalk-map lifting on U.toScheme with the identity source map: choose the finitely many image germs, represent them by sections, intersect neighbourhoods and form the free-source morphism. Rank zero uses V=U and the zero-source map.",
+   "uses": [
+    "lem-weil-pbc-finite-free-local-stalk-map-lift",
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this morphism back through the slice equivalence. Use the canonical restriction-stalk comparison a, whose germ formula sends the restricted section to the same germ. Equality on the finite basis germs and linearity give S(k) followed by a_N equals a_F followed by t. Compose with a_N inverse.",
+   "uses": [
+    "lem-sc-open-module-stalk-restriction-comparison",
+    "new-module-restriction-stalk-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-free-local-stalk-map-lift",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-sc-open-module-stalk-functor",
+  "lem-sc-open-module-stalk-restriction-comparison",
+  "new-module-restriction-stalk-components"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Modules Tag 01CP and Sheaves Tag 00A0 (3); the identity-source finite-coordinate lifting argument, transported through the slice/open equivalence and stalk-ring isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free module sheaf stalk morphism to an arbitrary module sheaf extends on one neighbourhood with a restriction stalk comparison",
+   "results": "Service unavailable: Internal Server Error. Other search kinds and local source searches were used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map from a finite free sheaf stalk to an arbitrary module sheaf stalk extends to a morphism on one open neighbourhood",
+   "results": "Eight ModuleCat.Tilde localization/stalk hits; no general sheaf lifting theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"lift\"",
+   "results": "Zero hits.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*stalk.*[Ll]ift|exists.*[Ll]ift.*stalk",
+   "results": "Mathlib search: zero hits. Library search: FiniteFreeLocalStalkMapLift and FiniteLocallyFreeStalkHomLift give germ-level ringed-space or open-subscheme results, without this slice/ambient-scalar interface. FiniteProjectiveOpenStalkMapsLift specializes to this statement but depends on the item itself, so using it would be circular. No independent exact declaration.",
+   "verdict": "related results require slice and scalar transport; downstream exact specialization is circular",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenStalkFreeMapLocalLift",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Refinement of the local finite-free-source stalk-map lifting step: existence on just one neighbourhood, without uniform coordinates or further restriction.",
+   "via": [
+    "lem-sc-open-stalk-free-map-local-lift",
+    "lem-sc-perfect-open-stalk-degreewise-lift",
+    "lem-sc-perfect-open-stalk-chain-map-lift",
+    "lem-sc-perfect-stalk-quasi-iso-detection",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenStalkFreeMapOneLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenStalkFreeMapOneLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_open_stalk_free_map_one_lift",
+  "statement": "theorem exists_open_stalk_free_map_one_lift\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (m : ℕ) (N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n    (t : (openModuleStalkFunctor X U ⟨x, hxU⟩).obj\n      (SheafOfModules.free\n        (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ⟶\n      (openModuleStalkFunctor X U ⟨x, hxU⟩).obj N) :\n    ∃ (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U),\n      let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU)\n      let S := openModuleStalkFunctor X V ⟨x, hxV⟩\n      let F := SheafOfModules.free\n        (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))\n      ∃ (a : R ⋙ S ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)\n        (k : R.obj F ⟶ R.obj N),\n        S.map k = a.hom.app F ≫ t ≫ a.inv.app N",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T123548-L-3712376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T123548-L-3712376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
