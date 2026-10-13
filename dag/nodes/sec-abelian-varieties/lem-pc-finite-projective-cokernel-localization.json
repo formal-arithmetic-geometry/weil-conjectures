@@ -21,36 +21,26 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-finite-projective-prime-local-free] to P_1 and P_2 at p. After replacing R by a principal localization R_g with g not in p, both modules are finite free, and the residue-field hypothesis is unchanged because g is invertible in kappa(p).",
-   "uses": [
-    "lem-weil-pbc-finite-projective-prime-local-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00O0, reduction to the finite-free case using Tag 00NX"
-   }
+   "text": "At the prime p put L = R_p and K = kappa(p). Tensor cancellation identifies the K-base change of phi_L with phi_K. The finite projective target is free over L by Module.free_of_flat_of_isLocalRing. Apply IsLocalRing.split_injective_iff_lTensor_residueField_injective to obtain a local left inverse. This is the private helper split_atPrime.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply [lem-pc-finite-free-map-residue-localization] to the resulting finite-free map. In the injective-fibre case it gives a further principal localization, still away from p, on which the map is injective and its cokernel is finite free, hence finite projective. In the isomorphism-fibre case it gives a localization on which the map is an isomorphism. Composing the two localizations gives the required element f not in the original prime.",
-   "uses": [
-    "lem-pc-finite-free-map-residue-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00O0, Lemma cokernel-flat, parts (1) and (3)"
-   }
+   "text": "For the injective clause, the target is finitely presented by Module.finitePresentation_of_projective. Apply Module.FinitePresentation.exists_lift_of_isLocalizedModule to the local retraction to obtain psi and s outside p with psi_L = s times the retraction. The identity psi_L phi_L = s id spreads after multiplying by t outside p, using Module.Finite.exists_smul_of_comp_eq_of_isLocalizedModule and finiteness of the source. Inverting s*t and scaling psi by s inverse gives an actual left inverse (private helper spread_split). The localized map is injective. Exact.split_tfae splits its quotient map, and Module.Projective.of_split makes the cokernel projective; finiteness is inherited from the finite target.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the bijective clause, the residue map at the prime is surjective as well as injective. Right exactness of tensor products shows that the tensor product of the local cokernel with K is zero. IsLocalRing.subsingleton_tensorProduct (Nakayama) makes the finite local cokernel zero; hence phi_L is bijective. Module.FinitePresentation.exists_notMem_bijective spreads this isomorphism to an element f outside p. IsLocalizedModule.map_bijective_iff_localizedModuleMap_bijective and the tensor localization universal property identify the resulting localized map with phi.baseChange (Localization.Away f).",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-finite-projective-prime-local-free",
-  "lem-pc-finite-free-map-residue-localization"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00O0, Lemma cokernel-flat, parts (1) and (3)"
+  "by": "worker",
+  "document": "Mathlib local splitting, finite presentation spreading, and Nakayama; Stacks Tag 00O0 supplies the statement",
+  "place": "B3 second reading, 2026-10-14: direct Mathlib route below the unit level"
  },
  "mathlib_searches": [
   {
@@ -144,5 +134,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T165638-L-1806958",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
