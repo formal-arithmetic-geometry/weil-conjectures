@@ -312,7 +312,9 @@ lemma IsOpenResolution.descRestrict_comm (hA : IsOpenResolution Ω ι) :
   have h := congrArg (fun h ↦ HomologicalComplex.Hom.f h 0)
     (InjectiveResolution.descOfQuasiIso_commutes (𝟙 _) (injectiveResolution (ℱ.restrict Ω.ι))
       (restrictAugmentation Ω ι))
-  simpa using h
+  rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, CategoryTheory.Functor.map_id,
+    HomologicalComplex.id_f, Category.id_comp] at h
+  exact h
 
 /-- The cochain map from an `Ω`-resolution of `ℱ` to the pushforward of the injective resolution
 of `ℱ|_Ω`, adjoint to a lift of the identity of `ℱ|_Ω`. -/
@@ -343,7 +345,9 @@ lemma IsOpenResolution.comp_toPushforwardResolution (hA : IsOpenResolution Ω ι
   simp only [restrictAugmentation, HomologicalComplex.comp_f,
     HomologicalComplex.singleMapHomologicalComplex_inv_app_self] at h
   simp only [HomologicalComplex.singleMapHomologicalComplex_inv_app_self]
-  done
+  simp only [Functor.mapHomologicalComplex_map_f]
+  rw [← h]
+  simp [Functor.map_comp]
 
 end Pushforward
 

@@ -36,6 +36,7 @@ public import WeilConjectures.Algebra.Homology.FlatComplex
 public import WeilConjectures.Algebra.Homology.FlatComplexBaseChange
 public import WeilConjectures.Algebra.Homology.HomologyBaseChange
 public import WeilConjectures.Algebra.Homology.HomologyBaseChangeReduced
+public import WeilConjectures.Algebra.Homology.HomologyBaseChangeTopDegree
 public import WeilConjectures.Algebra.Homology.HomologyPiAb
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
@@ -392,6 +393,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.LocalPresentation
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.AlgebraicGeometry.Modules.PicardAffine
+public import WeilConjectures.AlgebraicGeometry.Modules.PreimageGlue
+public import WeilConjectures.AlgebraicGeometry.Modules.PresentationSections
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
@@ -1283,6 +1286,7 @@ public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas
 public import WeilConjectures.Mathlib.Algebra.Lie.Solvable
 public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Basic
 public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Exact
+public import WeilConjectures.Mathlib.Algebra.Module.Presentation.Tensor
 public import WeilConjectures.Mathlib.Algebra.Module.SpanRankOperations
 public import WeilConjectures.Mathlib.Algebra.Module.StablyFree.Basic
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
@@ -1601,6 +1605,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Finiteness
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Pi
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Quotient
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.RightExactness
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Submodule
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
@@ -1857,6 +1862,8 @@ public import WeilConjectures.RingTheory.TateResidue.ResidueTheorem
 public import WeilConjectures.RingTheory.TateResidue.TateIdeals
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
+public import WeilConjectures.Scratch.Audit
+public import WeilConjectures.Scratch.BCTest
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
