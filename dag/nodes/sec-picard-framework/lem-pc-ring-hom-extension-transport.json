@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-ring-hom-extension-transport",
+ "kind": "statement",
+ "title": "Transport an ordinary normalized Hom comparison to the one-point ring site",
+ "statement": "Let A and B be commutative rings and φ:A→B. Let F and hF specify objects of scalar extension as in [def-pc-perfect-rhom-base-change-map], and M,N be module sheaves on the one-object bottom-topology site. Put M₀=M(*) and N₀=N(*), with B an A-algebra via φ. Given any B-linear map k:B tensor_A Hom_A(M₀,N₀)→Hom_B(B tensor_A M₀,B tensor_A N₀) with k(b tensor f)(c tensor x)=bc tensor f(x), there is a sheaf morphism g:F(Hom_A(M,N))→Hom_B(F(M),F(N)) satisfying the same identity using ringExtensionPure at every U; IsIso g if and only if k is bijective. No finiteness, projectivity or flatness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "equation-base-change-RHom and Lemma 0A6A; one-point-site realization in parent step 1"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-rhom-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation at the unique object is an equivalence from sheaves of modules on the one-object bottom-topology site to modules. The inverse takes constant modules; every presheaf is a sheaf. The unique arrows between objects induce inverse restriction maps by the presheaf laws. The slice has the same property, so identity-slice evaluation identifies internal-Hom sections with ordinary linear maps. The inverse sends a linear map to its conjugates by the restriction isomorphisms; naturality proves both inverse identities.",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The change-of-rings presheaf evaluates to B tensor_A M(*). Its sheafification unit is invertible (Presheaf.isSheaf_bot and CategoryTheory.isIso_toSheafify) and B-linear (the module sheafification unit). Composing its component with eqToHom(hF(M).symm) gives a B-linear equivalence sending b tensor x to ringExtensionPure. Apply this to M, N, and internal Hom.",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate k by the source and target identifications from the preceding two steps. Full faithfulness of evaluation gives the sheaf map g. Evaluation reflects isomorphisms, and the conjugating maps are linear equivalences, hence IsIso g iff k is bijective. The pure-tensor identity at the unique object is hk under those identifications. Naturality of g, internal Hom, the unit and pure tensors restricts that identity to every U. This argument uses no projectivity or finiteness assumption.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-rhom-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "equation-base-change-RHom and Lemma 0A6A; one-point-site realization in parent step 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on a one object discrete category bottom topology evaluation equivalence and internal Hom",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T06:54:10Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of modules on a one object discrete category bottom topology evaluation equivalence and internal Hom\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T07:03:10Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.evaluation\", \"SheafOfModules.evaluationPreservesLimitsOfSize\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"SheafOfModules.evaluationPreservesLimitsOfShape\", \"SheafOfModules.hasLimit\", \"SheafOfModules.createsLimit\", \"SheafOfModules.evaluationPreservesLimit\", \"SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatObjFunctorIsSheafPresheafOfModulesForgetEvaluationForgetLinearMapIdCarrierSections\"], \"digest\": \"a5898d43d0a10714\"}",
+   "verdict": "Evaluation exists, but no one-point Hom transport theorem was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "onePoint.*[Ee]quiv|RingSite.*[Ee]quiv|ringHomExtension_transport|finiteProjectiveRingHom_extension_exists",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T07:03:09Z\", \"tool\": \"grep\", \"query\": \"onePoint.*[Ee]quiv|RingSite.*[Ee]quiv|ringHomExtension_transport|finiteProjectiveRingHom_extension_exists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Topology/Compactification/OnePoint/Sphere.lean\", \"Mathlib/Topology/Compactification/OnePoint/Sphere.lean\", \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean\", \"Mathlib/CategoryTheory/Limits/Types/Coproducts.lean\", \"Mathlib/CategoryTheory/Limits/Types/Coproducts.lean\", \"Mathlib/CategoryTheory/Limits/Types/Coproducts.lean\", \"Mathlib/CategoryTheory/Limits/Types/Filtered.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\"], \"digest\": \"8aa48d5b346acae6\"}",
+   "verdict": "No Mathlib one-point ring-module transport theorem returned; repository search also found no transport declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteProjectiveRingHomExtension",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-projective-ring-hom-extension",
+   "place": "steps 1–3 of the parent proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingHomExtensionTransport",
+  "file": "lean/Sheaf/Algebra/Homology/RingHomExtensionTransport.lean",
+  "declaration": "CategoryTheory.ringHomExtension_transport",
+  "statement": "theorem ringHomExtension_transport\n    {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B)\n    (F : RingSiteModules A ⥤ RingSiteModules B)\n    (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings (ringSiteMap φ) M)\n    (M N : RingSiteModules A) :\n    letI := φ.toAlgebra\n    ∀ (k : B ⊗[A] ((M.val.obj (op ⟨PUnit.unit⟩)) →ₗ[A]\n          (N.val.obj (op ⟨PUnit.unit⟩))) →ₗ[B]\n        ((B ⊗[A] (M.val.obj (op ⟨PUnit.unit⟩))) →ₗ[B]\n          (B ⊗[A] (N.val.obj (op ⟨PUnit.unit⟩)))))\n      (hk : ∀ (b c : B)\n        (f : M.val.obj (op ⟨PUnit.unit⟩) →ₗ[A] N.val.obj (op ⟨PUnit.unit⟩))\n        (x : M.val.obj (op ⟨PUnit.unit⟩)),\n        k (b ⊗ₜ[A] f) (c ⊗ₜ[A] x) = (b * c) ⊗ₜ[A] f x),\n    ∃ g : F.obj (SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf A) M N) ⟶\n        SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf B) (F.obj M) (F.obj N),\n      (IsIso g ↔ Function.Bijective k) ∧ ∀ (U : (Discrete PUnit.{u + 1})ᵒᵖ) (b c : B)\n        (f : (SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf A) M N).val.obj U)\n        (x : M.val.obj U),\n        ((g.val.app U (ringExtensionPure φ F hF _ U b f)).app\n          (op (Over.mk (𝟙 U.unop)))) (ringExtensionPure φ F hF M U c x) =\n        ringExtensionPure φ F hF N U (b * c) ((f.app (op (Over.mk (𝟙 U.unop)))) x)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T082352-L-1638500",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T082352-L-1638500",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

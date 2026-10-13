@@ -6,6 +6,9 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
+import Mathlib.LinearAlgebra.Contraction
+import Mathlib.RingTheory.TensorProduct.IsBaseChangeHom
+import Sheaf.Algebra.Homology.RingHomExtensionTransport
 
 /-! # Termwise finite-projective tensor-Hom comparison
 
@@ -59,6 +62,27 @@ theorem finiteProjectiveRingHom_extension_exists
         ((g.val.app U (ringExtensionPure φ F hF _ U b f)).app
           (op (Over.mk (𝟙 U.unop)))) (ringExtensionPure φ F hF M U c x) =
         ringExtensionPure φ F hF N U (b * c) ((f.app (op (Over.mk (𝟙 U.unop)))) x) := by
-  sorry
+  let := φ.toAlgebra
+  let := hp
+  let := hf
+  let M₀ := M.val.obj (op ⟨PUnit.unit⟩)
+  let N₀ := N.val.obj (op ⟨PUnit.unit⟩)
+  let t := IsBaseChange.linearMapRightBaseChangeHom B M₀ (TensorProduct.mk A B N₀ 1)
+  have ht : Function.Bijective t := by
+    have he := (lTensorHomEquivHomLTensor A M₀ B N₀).bijective
+    have h : t.restrictScalars A = (lTensorHomEquivHomLTensor A M₀ B N₀).toLinearMap := by
+      ext b f x
+      simp [t, IsBaseChange.linearMapRightBaseChangeHom, TensorProduct.smul_tmul',
+        smul_eq_mul]
+    change Function.Bijective (t.restrictScalars A : _ →ₗ[A] _)
+    rw [h]
+    exact he
+  let e := (LinearEquiv.ofBijective t ht).trans (LinearMap.liftBaseChangeEquiv B)
+  have he (b c : B) (f : M₀ →ₗ[A] N₀) (x : M₀) :
+      e (b ⊗ₜ[A] f) (c ⊗ₜ[A] x) = (b * c) ⊗ₜ[A] f x := by
+    simp [e, t, IsBaseChange.linearMapRightBaseChangeHom, TensorProduct.smul_tmul',
+      smul_eq_mul]
+  obtain ⟨g, hg, hformula⟩ := ringHomExtension_transport φ F hF M N e.toLinearMap he
+  exact ⟨g, hg.mpr e.bijective, hformula⟩
 
 end CategoryTheory

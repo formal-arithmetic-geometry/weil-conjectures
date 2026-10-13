@@ -14,39 +14,40 @@
  ],
  "proof": [
   {
-   "text": "On the bottom-topology one-object site, every presheaf is a sheaf. The sheafification unit is invertible, and the slice is equivalent to the one-object category. Evaluation identifies scalar extension with B tensor_A -, and internal Hom with ordinary module Hom. Use the constructions and units of def-pc-perfect-rhom-base-change-map.",
+   "text": "Install φ.toAlgebra and the given finite/projective instances on M₀=M(*). Define t=IsBaseChange.linearMapRightBaseChangeHom B M₀ (x↦1 tensor x). After restricting scalars to A, tensor extensionality identifies t with lTensorHomEquivHomLTensor A M₀ B N₀, using the pure-tensor formula and smul_tmul'. Therefore t is bijective.",
    "uses": [
-    "def-pc-perfect-rhom-base-change-map"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For M=A^r, identify Hom_A(A^r,N) with N^r. Tensor commutes with this finite product by lem-weil-pbc-tensor-finite-product (or TensorProduct.piRight). The resulting comparison is an isomorphism and sends b tensor f, evaluated on c tensor x, to bc tensor f(x).",
-   "uses": [
-    "lem-weil-pbc-tensor-finite-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Finite generation gives a surjection A^r→M. The lifting property of projectivity supplies its section. Tensor and contravariant Hom preserve the resulting retraction; the free comparison is natural in M, so restricting it and its inverse to the retract gives the comparison for M with the same formula. Transport through evaluation, sheafification, and the given object equalities. This construction also handles M=0 and zero rings.",
-   "uses": [
+    "lem-pc-finite-projective-module-tensor-hom",
     "def-weil-finitely-generated-module",
-    "def-weil-pbc-projective-module",
-    "def-pc-perfect-rhom-base-change-map"
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose LinearEquiv.ofBijective t with LinearMap.liftBaseChangeEquiv B, the scalar extension/restriction adjunction. This gives a B-linear equivalence e from B tensor_A Hom_A(M₀,N₀) to Hom_B(B tensor_A M₀,B tensor_A N₀). Simplification of the two constructions and smul_tmul' proves e(b tensor f)(c tensor x)=bc tensor f(x).",
+   "uses": [
+    "lem-weil-pbc-scalar-extension-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the one-point-site transport theorem to e.toLinearMap and its pure-tensor formula. Its invertibility equivalence and e.bijective give IsIso g; its formula gives the required identity at every U.",
+   "uses": [
+    "lem-pc-ring-hom-extension-transport"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-rhom-base-change-map",
+  "lem-pc-finite-projective-module-tensor-hom",
   "def-weil-finitely-generated-module",
   "def-weil-pbc-projective-module",
-  "lem-weil-pbc-tensor-finite-product"
+  "lem-weil-pbc-scalar-extension-hom",
+  "lem-pc-ring-hom-extension-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Expansion of lem-pc-perfect-ring-hom-scalar-extension parent step 1: scalar extension of internal Hom from a single finite projective module"
+  "place": "K1 Lean reduction, 2026-10-13: ordinary finite-projective contraction plus scalar-extension adjunction; one-point transport split off."
  },
  "mathlib_searches": [
   {
@@ -129,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T045546-L-133347",
+  "landing": "20261013T082352-L-1638500",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
