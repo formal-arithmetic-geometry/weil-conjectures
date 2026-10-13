@@ -498,6 +498,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
+public import WeilConjectures.AlgebraicGeometry.PrimeInjectiveAcyclicity
 public import WeilConjectures.AlgebraicGeometry.PrimitiveRootsCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedCoverExtension
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Affine
