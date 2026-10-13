@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Sheaf.CategoryTheory.EssentiallyConstantSystem
-import Sheaf.CategoryTheory.EssentiallyConstantSplitting
+import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-!
 # Mittag-Leffler systems in a short exact sequence
@@ -74,6 +74,133 @@ theorem isMittagLeffler_iff_of_isEssentiallyConstant
     (hC : S.X₃.IsEssentiallyConstant) :
     (S.X₁ ⋙ forget AddCommGrpCat).IsMittagLeffler ↔
       (S.X₂ ⋙ forget AddCommGrpCat).IsMittagLeffler := by
-  sorry
+  classical
+  -- Work with the factorization through the constant summand directly, rather than
+  -- constructing the auxiliary subgroup towers in the nine-step proof plan.
+  obtain ⟨X, π, hπ, i₀, r, hr, hfactor⟩ := hC
+  have htrans (F : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) {i j k : ℕ}
+      (hij : i ≤ j) (hjk : j ≤ k) :
+      F.map (homOfLE (hij.trans hjk)).op =
+        F.map (homOfLE hjk).op ≫ F.map (homOfLE hij).op := by
+    rw [← F.map_comp]
+    congr 1
+  have hcone {j k : ℕ} (hjk : j ≤ k) :
+      π k ≫ S.X₃.map (homOfLE hjk).op = π j := by
+    induction k, hjk using Nat.le_induction with
+    | base => simp
+    | succ k hk ih =>
+      rw [htrans S.X₃ hk (Nat.le_succ k), ← Category.assoc, hπ, ih]
+  have hnat {F G : ℕᵒᵖ ⥤ AddCommGrpCat.{u}} (η : F ⟶ G)
+      {i j : ℕᵒᵖ} (f : i ⟶ j) (x : F.obj i) :
+      η.app j (F.map f x) = G.map f (η.app i x) :=
+    ConcreteCategory.congr_hom (η.naturality f) x
+  have hcomp (F : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) {i j k : ℕᵒᵖ}
+      (f : i ⟶ j) (g : j ⟶ k) (x : F.obj i) :
+      F.map (f ≫ g) x = F.map g (F.map f x) :=
+    ConcreteCategory.congr_hom (F.map_comp f g) x
+  have hsurj (n : ℕᵒᵖ) : Function.Surjective (S.g.app n) :=
+    (hS n).ab_surjective_g
+  have hzero (n : ℕᵒᵖ) (a : S.X₁.obj n) : S.g.app n (S.f.app n a) = 0 :=
+    (S.map ((evaluation ℕᵒᵖ AddCommGrpCat).obj n)).ab_zero_apply a
+  have hexact (n : ℕᵒᵖ) (b : S.X₂.obj n) (hb : S.g.app n b = 0) :
+      ∃ a : S.X₁.obj n, S.f.app n a = b :=
+    ((S.map ((evaluation ℕᵒᵖ AddCommGrpCat).obj n)).ab_exact_iff.mp (hS n).exact) b hb
+  have hfactor' (j : ℕ) : ∃ c : ℕ, ∃ (hic : i₀ ≤ c) (hjc : j ≤ c),
+      ∀ (k : ℕ) (hck : c ≤ k),
+        S.X₃.map (homOfLE (hjc.trans hck)).op =
+          S.X₃.map (homOfLE (hic.trans hck)).op ≫ r ≫ π j := by
+    obtain ⟨c, hic, hjc, hc⟩ := hfactor j
+    refine ⟨c, hic, hjc, fun k hck ↦ ?_⟩
+    rw [htrans S.X₃ hjc hck, hc, htrans S.X₃ hic hck]
+    simp only [Category.assoc]
+  have hπinj (m : ℕ) (hm : i₀ ≤ m) : Function.Injective (π m) := by
+    have hret : π m ≫ S.X₃.map (homOfLE hm).op ≫ r = 𝟙 X := by
+      rw [← Category.assoc, hcone hm, hr]
+    have hleft (x : X) : r (S.X₃.map (homOfLE hm).op (π m x)) = x :=
+      ConcreteCategory.congr_hom hret x
+    intro x y hxy
+    rw [← hleft x, ← hleft y, hxy]
+  constructor
+  · intro hA j
+    -- Lift the stable quotient part at a common later index; the difference is in A.
+    obtain ⟨i, f, hf⟩ := hA j
+    obtain ⟨c, hic, hIc, hc⟩ := hfactor' i.unop
+    refine ⟨Opposite.op c, (homOfLE hIc).op ≫ f, fun k g ↦ ?_⟩
+    rintro _ ⟨b, rfl⟩
+    let l := max c k.unop
+    have hcl : c ≤ l := Nat.le_max_left _ _
+    have hkl : k.unop ≤ l := Nat.le_max_right _ _
+    let x : X := r (S.X₃.map (homOfLE hic).op (S.g.app (Opposite.op c) b))
+    obtain ⟨d, hd⟩ := hsurj (Opposite.op l) (π l x)
+    have hz : S.g.app i
+        (S.X₂.map (homOfLE hIc).op b -
+          S.X₂.map (homOfLE (hIc.trans hcl)).op d) = 0 := by
+      rw [map_sub, hnat, hnat, hd]
+      have hb := ConcreteCategory.congr_hom (hc c (le_refl c))
+        (S.g.app (Opposite.op c) b)
+      have hd' := ConcreteCategory.congr_hom (hcone (hIc.trans hcl)) x
+      change S.X₃.map (homOfLE hIc).op (S.g.app (Opposite.op c) b) = π i.unop x at hb
+      change S.X₃.map (homOfLE (hIc.trans hcl)).op (π l x) = π i.unop x at hd'
+      rw [hb, hd', sub_self]
+    obtain ⟨a, ha⟩ := hexact i _ hz
+    obtain ⟨a', ha'⟩ := hf g ⟨a, rfl⟩
+    refine ⟨S.X₂.map (homOfLE hkl).op d + S.f.app k a', ?_⟩
+    change S.X₁.map g a' = S.X₁.map f a at ha'
+    change S.X₂.map g (_ + _) = S.X₂.map ((homOfLE hIc).op ≫ f) b
+    rw [map_add, ← hnat, ha', hnat, ha, map_sub]
+    have hcomm : (homOfLE hkl).op ≫ g = (homOfLE (hIc.trans hcl)).op ≫ f :=
+      Subsingleton.elim _ _
+    rw [← hcomp, hcomm, hcomp, hcomp]
+    abel
+  · intro hB j
+    -- Test at a split index m. A B-lift has zero stable quotient component there,
+    -- hence maps into A at every prescribed index after a further transition.
+    let m := max j.unop i₀
+    have hjm : j.unop ≤ m := Nat.le_max_left _ _
+    have h₀m : i₀ ≤ m := Nat.le_max_right _ _
+    obtain ⟨i, f, hf⟩ := hB (Opposite.op m)
+    let c := max i.unop m
+    have hic : i.unop ≤ c := Nat.le_max_left _ _
+    have hmc : m ≤ c := Nat.le_max_right _ _
+    refine ⟨Opposite.op c, (homOfLE (hjm.trans hmc)).op, fun k g ↦ ?_⟩
+    rintro _ ⟨a, rfl⟩
+    obtain ⟨cK, h₀K, hkK, hK⟩ := hfactor' k.unop
+    obtain ⟨cM, h₀M, hmM, hM⟩ := hfactor' m
+    let l := max (max c cK) cM
+    have hKl : cK ≤ l := (Nat.le_max_right c cK).trans (Nat.le_max_left _ _)
+    have hMl : cM ≤ l := Nat.le_max_right _ _
+    have hkl : k.unop ≤ l := hkK.trans hKl
+    have hml : m ≤ l := hmM.trans hMl
+    obtain ⟨b, hb⟩ := hf (homOfLE hml).op
+      ⟨S.X₂.map (homOfLE hic).op (S.f.app (Opposite.op c) a), rfl⟩
+    change S.X₂.map (homOfLE hml).op b =
+      S.X₂.map f (S.X₂.map (homOfLE hic).op (S.f.app (Opposite.op c) a)) at hb
+    have hcm : (homOfLE hic).op ≫ f = (homOfLE hmc).op := Subsingleton.elim _ _
+    rw [← hcomp, hcm, ← hnat] at hb
+    have hz : S.X₃.map (homOfLE hml).op (S.g.app (Opposite.op l) b) = 0 := by
+      rw [← hnat, hb, hzero]
+    let x : X := r (S.X₃.map (homOfLE (h₀M.trans hMl)).op
+      (S.g.app (Opposite.op l) b))
+    have hx : π m x = 0 := by
+      have he := ConcreteCategory.congr_hom (hM l hMl) (S.g.app (Opposite.op l) b)
+      change S.X₃.map (homOfLE hml).op (S.g.app (Opposite.op l) b) = π m x at he
+      rw [← he, hz]
+    have hxzero : x = 0 := hπinj m h₀m (by simpa only [map_zero] using hx)
+    have hzk : S.g.app k (S.X₂.map (homOfLE hkl).op b) = 0 := by
+      rw [hnat]
+      have he := ConcreteCategory.congr_hom (hK l hKl) (S.g.app (Opposite.op l) b)
+      change S.X₃.map (homOfLE hkl).op (S.g.app (Opposite.op l) b) = π k.unop x at he
+      rw [he, hxzero, map_zero]
+    obtain ⟨a', ha'⟩ := hexact k _ hzk
+    refine ⟨a', ?_⟩
+    change S.X₁.map g a' = S.X₁.map (homOfLE (hjm.trans hmc)).op a
+    apply (hS j).ab_injective_f
+    change S.f.app j (S.X₁.map g a') =
+      S.f.app j (S.X₁.map (homOfLE (hjm.trans hmc)).op a)
+    rw [hnat, hnat, ha', ← hcomp]
+    have hlm : (homOfLE hkl).op ≫ g = (homOfLE hml).op ≫ (homOfLE hjm).op :=
+      Subsingleton.elim _ _
+    rw [hlm, hcomp, hb, hnat, ← hcomp]
+    congr 1
 
 end CategoryTheory.ShortComplex
