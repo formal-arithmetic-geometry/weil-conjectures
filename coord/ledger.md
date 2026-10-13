@@ -10773,3 +10773,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:40 L: merged deliver/T4/Sheaf.AlgebraicGeometry.PerfectGeneratorPullback (stage 3; reviewer PASS; first push; landing 20261013T024049-L-3339564 (proof); batch 20261013T024029; modules 1; new nodes 0)
 - 02:40 L: merged deliver/U3/Sheaf.AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_torsion_cokernel (stage 3; reviewer PASS; after a return; landing 20261013T024050-L-3339689 (interface); batch 20261013T024029; modules 2; new nodes 1)
 - 02:40 L: merged deliver/U4/Sheaf.Algebra.Homology.BaseChangeRHomPerfect (stage 3; reviewer PASS; first push; landing 20261013T024050-L-3339857 (interface); batch 20261013T024029; modules 3; new nodes 2)
+- 02:40 L: merged deliver/U4/Sheaf.Paper.GradedModuleQuasicoherentRealization (stage 3; reviewer PASS; first push; landing 20261013T024051-L-3339988 (interface); batch 20261013T024029; modules 2; new nodes 1)

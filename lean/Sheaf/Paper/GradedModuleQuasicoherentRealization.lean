@@ -10,6 +10,8 @@ public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Sheaf.Paper.DerivedHomMayerVietoris
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.Paper.BalancedActionQuasicoherentRealization
 /-! # Quasi-coherent realization of a graded action
 
 Source: Stacks Project, Tag 0897, relative-spectrum construction; Tags 01LX and 01SB.
@@ -77,6 +79,124 @@ theorem gradedModule_quasicoherent_realization
           ∀ (k m : ℕ) (b : graded k),
             mu m k b ≫ iota (m + k) = iota m ≫
               (Scheme.Modules.pushforward pi).map
-                (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val)) := by sorry
+                (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val)) := by
+  classical
+  -- Use the scheme-module interface for its category and scalar endomorphisms.
+  let G : ℕ → X.Modules := G
+  let _ : ∀ m, (G m).IsQuasicoherent := hG
+  let M : X.Modules := ∐ G
+  -- The existing closure theorem indexes in Type u; reindex the countable sum.
+  have hM : M.IsQuasicoherent := by
+    let G' : ULift.{u} ℕ → X.Modules := fun m ↦ G m.down
+    have : (∐ G').IsQuasicoherent := Scheme.Modules.isQuasicoherent_sigma G'
+    exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso
+      (Sigma.reindex Equiv.ulift G) this
+  let i (m : ℕ) : G m ⟶ M := Sigma.ι G m
+  let muAdd (m k : ℕ) : graded k →+ (G m ⟶ G (m + k)) :=
+    { toFun := mu m k
+      map_add' := hmu_add m k
+      map_zero' := by
+        apply add_left_cancel (a := mu m k 0)
+        simpa only [add_zero] using (hmu_add m k 0 0).symm }
+  -- Extend homogeneous maps by the sheaf coproduct universal property.
+  let T (k : ℕ) : graded k →+ End M :=
+    { toFun := fun b ↦ Sigma.desc (fun m ↦ mu m k b ≫ i (m + k))
+      map_zero' := by
+        apply Sigma.hom_ext
+        intro m
+        change Sigma.ι G m ≫ Sigma.desc _ = Sigma.ι G m ≫ 0
+        rw [Sigma.ι_desc, show mu m k 0 = 0 from (muAdd m k).map_zero]
+        simp
+      map_add' := by
+        intro b c
+        apply Sigma.hom_ext
+        intro m
+        change Sigma.ι G m ≫ Sigma.desc _ = Sigma.ι G m ≫ (_ + _)
+        rw [Preadditive.comp_add, Sigma.ι_desc, Sigma.ι_desc, Sigma.ι_desc,
+          hmu_add, Preadditive.add_comp] }
+  have hT (k m : ℕ) (b : graded k) :
+      i m ≫ T k b = mu m k b ≫ i (m + k) := by
+    exact Sigma.ι_desc _ m
+  have transport {m n n' : ℕ} (hn : n = n')
+      {q : G m ⟶ G n} {q' : G m ⟶ G n'} (hq : HEq q q') :
+      q ≫ i n = q' ≫ i n' := by
+    subst n'
+    cases hq
+    rfl
+  have hTscalar (a : A) :
+      T 0 ⟨algebraMap A B a, hscalar a⟩ =
+        M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) := by
+    apply Sigma.hom_ext
+    intro m
+    rw [hT, ← Scheme.Modules.smulHom_naturality]
+    have hm : mu m 0 ⟨algebraMap A B a, hscalar a⟩ =
+        (G m).smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) := by
+      apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro U
+      apply ModuleCat.hom_ext
+      apply LinearMap.ext
+      intro t
+      exact eq_of_heq (hmu_scalar m a U.unop t)
+    exact congrArg (fun q ↦ q ≫ i m) hm
+  have hTunit : T 0 ⟨1, hunit⟩ = 1 := by
+    change T 0 ⟨1, hunit⟩ = 𝟙 M
+    simpa only [map_one, Scheme.Modules.smulHom_one] using hTscalar 1
+  have hTmul (k l : ℕ) (b : graded k) (c : graded l) :
+      T (k + l) ⟨b.val * c.val, hmul k l b.property c.property⟩ = T k b * T l c := by
+    apply Sigma.hom_ext
+    intro m
+    change i m ≫ _ = i m ≫ (T l c ≫ T k b)
+    rw [hT, ← Category.assoc, hT, Category.assoc, hT, ← Category.assoc]
+    exact (transport (by omega : m + l + k = m + (k + l))
+      (hmu_mul m k l b c)).symm
+  -- Internal grading identifies B with finite sums of homogeneous scalars.
+  let e := (LinearEquiv.ofBijective (DirectSum.coeLinearMap graded) hgrading).toAddEquiv
+  let act : B →+ End M := (DirectSum.toAddMonoid T).comp e.symm.toAddMonoidHom
+  have he (k : ℕ) (b : graded k) : e (DirectSum.of (fun k ↦ graded k) k b) = b.val := by
+    exact DirectSum.coeLinearMap_of graded k b
+  have hact (k : ℕ) (b : graded k) : act b.val = T k b := by
+    rw [← he k b]
+    simp [act]
+  have hactmul (b c : B) : act (b * c) = act b * act c := by
+    obtain ⟨b, rfl⟩ := e.surjective b
+    obtain ⟨c, rfl⟩ := e.surjective c
+    induction b using DirectSum.induction_on with
+    | zero => simp
+    | add b b' hb hb' => simp only [map_add, add_mul, hb, hb']
+    | of k b =>
+      induction c using DirectSum.induction_on with
+      | zero => simp
+      | add c c' hc hc' => simp only [map_add, mul_add, hc, hc']
+      | of l c =>
+        rw [he, he]
+        exact (hact (k + l) ⟨b.val * c.val, hmul k l b.property c.property⟩).trans
+          ((hTmul k l b c).trans (by rw [hact, hact]))
+  let rho : B →+* End M :=
+    { act with
+      map_one' := (hact 0 ⟨1, hunit⟩).trans hTunit
+      map_mul' := hactmul }
+  have hbalance (a : A) : rho (algebraMap A B a) =
+      M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) :=
+    (hact 0 ⟨algebraMap A B a, hscalar a⟩).trans (hTscalar a)
+  -- Geometry now uses only the balanced B-action, without the grading.
+  obtain ⟨F, hF, iso, hiso⟩ := balancedAction_quasicoherent_realization f M hM rho hbalance
+  refine ⟨F, hF, (fun m ↦ i m ≫ iso.hom), ?_, ?_⟩
+  · exact ⟨Cofan.IsColimit.mk _
+      (fun c ↦ iso.inv ≫ Sigma.desc (fun m ↦ c.inj m))
+      (by intro c m; simp [i])
+      (by
+        intro c q hq
+        apply (cancel_epi iso.hom).mp
+        apply Sigma.hom_ext
+        intro m
+        simpa [i] using hq m)⟩
+  · intro k m b
+    change mu m k b ≫ (i (m + k) ≫ iso.hom) = _
+    rw [← Category.assoc, ← hT, Category.assoc]
+    rw [← hact]
+    change i m ≫ (rho b.val ≫ iso.hom) = _
+    rw [hiso, ← Category.assoc]
+
 
 end AlgebraicGeometry
