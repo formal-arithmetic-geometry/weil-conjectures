@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-raw-module-abelian-hom-map-surjective",
+ "kind": "statement",
+ "title": "Surjective fixed raw scalar comparison",
+ "statement": "For every commutative ring Λ, k:W→S, module sheaf G on W, q∈ℕ, U∈S.Etale and A∈Over(W), the underlying additive map of rawModuleAbelianHomMap Λ k G q U A [def-sbc-raw-module-abelian-hom-map] is surjective.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree, acyclic-resolution proof"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-abelian-hom-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix an abelian derived class. Resolve A.hom^*G by injective module\nsheaves. By Tag 03FD the underlying abelian terms are acyclic for evaluation on\nevery etale object, including V = U times_S A.left. Therefore the section complex\nof this forgotten resolution computes the target derived Hom from the pulled-back\nfree represented abelian sheaf. Represent the given class by a section cocycle in\nthat complex. The very same cocycle in the module section complex defines a module\nderived class, using the free represented module sections adjunction. The explicit\nmap forgets this cocycle without changing it: freeMap carries the identity generator\nto the identity generator, while the single, shift and inverse-image comparisons\nidentify the same section. Consequently the image of the module class is the given\nabelian class. No lifting of arbitrary abelian sheaf morphisms to module morphisms\nis asserted; only sections of this module resolution are used. Degree zero, the\nzero ring and empty V are included by the identical section-complex calculation.",
+   "uses": [
+    "lem-weil-pbc-injective-module-abelian-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-injective-module-abelian-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 03FD; W3 separates the class detection and class lifting parts of the existing comparison argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Injectivity and surjectivity of the derived section comparison from module sheaves to abelian sheaves",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting scalars induces bijection on derived Hom from a free represented module sheaf to a shifted sheaf",
+   "date": "2026-10-13",
+   "results": "Free represented sections equivalences only; no explicit raw scalar map comparison",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
+   "date": "2026-10-13",
+   "results": "extAddEquivCohomologyClass exists for injective resolutions, but no scalar comparison",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAcyclic.*preadditiveCoyoneda|mapExt.*bijective; rawModuleAbelianHomMap_(injective|surjective)",
+   "date": "2026-10-13",
+   "results": "Mathlib bijectivity requires a fully faithful functor preserving injectives; no match for scalar forgetting. No duplicate raw-map clauses in the library/DAG.",
+   "verdict": "no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapIsIso",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Explicit raw scalar comparison: surjective part of componentwise invertibility",
+   "via": [
+    "lem-sbc-raw-module-abelian-hom-map-is-iso",
+    "lem-sbc-raw-module-abelian-hom-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleAbelianHomMapSurjective.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleAbelianHomMap_surjective",
+  "statement": "theorem rawModuleAbelianHomMap_surjective\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)\n    (U : S.Etale) (A : Over W) :\n    Function.Surjective (rawModuleAbelianHomMap Λ k G q U A).hom",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T142907-L-501871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T142907-L-501871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

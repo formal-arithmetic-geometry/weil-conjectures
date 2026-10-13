@@ -12,20 +12,22 @@
  ],
  "proof": [
   {
-   "text": "Put V = U times_S A.left. Pullback of the represented free sheaf\ncorepresents sections on V, for both coefficient categories. Resolve A.hom^*G\nby injective module sheaves. Restriction to the etale object V preserves\ninjectives, since its extension-by-zero left adjoint is exact. After forgetting\nscalars this resolution is acyclic for abelian sections by Tag 03FD. Thus both\nraw derived Hom groups are cohomology of the same complex of sections. On that\ncomplex the displayed map is the identity: freeMap sends the identity generator\nto the identity generator, derived forgetting is termwise forgetting, and the\nsingle, shift and coefficient comparisons identify precisely the same section.\nIt is consequently bijective and additive, so is an isomorphism in AddCommGrpCat.\nThis includes degree zero, where it is the sections adjunction, the zero ring,\nand empty V, where the section complex is zero.",
+   "text": "Use class detection to obtain injectivity and class lifting to obtain surjectivity. Combine these into bijectivity and apply ConcreteCategory.isIso_iff_bijective to the actual raw additive morphism.",
    "uses": [
-    "lem-weil-pbc-injective-module-abelian-acyclic"
+    "lem-sbc-raw-module-abelian-hom-map-injective",
+    "lem-sbc-raw-module-abelian-hom-map-surjective"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-injective-module-abelian-acyclic"
+  "lem-sbc-raw-module-abelian-hom-map-injective",
+  "lem-sbc-raw-module-abelian-hom-map-surjective"
  ],
  "proof_origin": {
-  "by": "M4",
+  "by": "W3",
   "document": "Stacks Project",
-  "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree, injective-resolution comparison"
+  "place": "Tag 03FD, class detection and class lifting split; Mathlib concrete-category bijectivity criterion"
  },
  "mathlib_searches": [
   {
@@ -101,9 +103,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M4",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T133226-L-4193562",
+  "landing": "20261013T142907-L-501871",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

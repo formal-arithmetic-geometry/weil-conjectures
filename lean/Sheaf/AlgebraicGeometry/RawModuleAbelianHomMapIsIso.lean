@@ -6,6 +6,8 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
+import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapInjective
+import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapSurjective
 
 /-! # Invertibility of the fixed raw scalar comparison
 
@@ -40,6 +42,9 @@ theorem isIso_rawModuleAbelianHomMap
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)
     (U : S.Etale) (A : Over W) :
-    IsIso (rawModuleAbelianHomMap Λ k G q U A) := by sorry
+    IsIso (rawModuleAbelianHomMap Λ k G q U A) := by
+  apply (ConcreteCategory.isIso_iff_bijective _).2
+  exact ⟨rawModuleAbelianHomMap_injective Λ k G q U A,
+    rawModuleAbelianHomMap_surjective Λ k G q U A⟩
 
 end AlgebraicGeometry.Etale

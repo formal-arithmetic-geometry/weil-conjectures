@@ -12827,3 +12827,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:29 L: merged deliver/U4/Sheaf.AlgebraicGeometry.AffineChartSectionsColimitComparison (stage 3; reviewer PASS; first push; landing 20261013T142906-L-501387 (interface); batch 20261013T142848; modules 4; new nodes 3)
 - 14:29 L: merged deliver/W2/Sheaf.Paper.FiniteStructureUnitLift (stage 3; reviewer PASS; first push; landing 20261013T142907-L-501588 (interface); batch 20261013T142848; modules 2; new nodes 1)
 - 14:29 L: merged deliver/W3/Sheaf.AlgebraicGeometry.ModuleGeneratingSectionsLocalSelection (stage 3; reviewer PASS; first push; landing 20261013T142907-L-501763 (interface); batch 20261013T142848; modules 3; new nodes 2)
+- 14:29 L: merged deliver/W3/Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapIsIso (stage 3; reviewer PASS; first push; landing 20261013T142907-L-501871 (interface); batch 20261013T142848; modules 3; new nodes 2)
