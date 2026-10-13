@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ (theorem-colimit), cofinal-tail reduction; categories.tex Tag 04AX (section-directed-colimits) for eventual equality. Source statements checked at https://stacks.math.columbia.edu/tag/09YQ and https://stacks.math.columbia.edu/tag/04AX on 2026-10-13."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-etale-limit-reindex-transition-coherence",
+ "title": "Reindexing preserves inverse-image transition coherence",
+ "statement": "Let $I$ and $J$ be preordered sets, $t:J\\to I$ a functor, and $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ a scheme diagram [def-pc-scheme, def-weil-pbc-category-colimit]. Let $F_i$ be abelian etale sheaves on $D_i$ [def-weil-pbc-abelian-etale-sheaves] with inverse-image transition maps $\\varphi_f:D(f^{\\mathrm{op}})^{-1}F_i\\to F_j$ satisfying the canonical identity and composition laws [def-weil-pbc-inverse-image]. Set $D^{\\prime}=t^{\\mathrm{op}}\\mathbin{\\circ}D$, $F^{\\prime}_j=F_{t(j)}$, and $\\varphi^{\\prime}_f=\\varphi_{t(f)}$. Then $\\varphi^{\\prime}$ satisfies the canonical inverse-image identity and composition laws for $D^{\\prime}$. No nonemptiness, directedness, affineness or limit is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the identity law at t.obj i and the composition law at t.map f and t.map g. Functoriality identifies mapped identities and composites; the opposite functor and composite diagram have these arrow and object maps. Proof irrelevance identifies equality witnesses in eqToIso and upperStarComp. This gives exactly the two restricted equations.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ (theorem-colimit), coefficient-system reindexing in the cofinal-tail restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "reindexing coherent inverse image transition maps preserves identity and composition laws",
+   "date": "2026-10-13",
+   "results": "Eight hits concerning restriction of sheaf conditions and compatible families, including CategoryTheory.Presieve.FamilyOfElements.Compatible.functorPullback. No transition coherence lemma.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStarComp\"",
+   "date": "2026-10-13",
+   "results": "0 hits.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "reindex.*coheren|restrict.*identity.*composition",
+   "date": "2026-10-13",
+   "results": "0 hits.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "reindexing coherent inverse image transition maps preserves identity and composition laws",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitAffineStageTailColimit",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The continuity invocation in Tag 0A51: transport of coefficient identity and composition equations after restriction to the upper tail above an affine stage.",
+   "via": [
+    "lem-weil-pbc-etale-limit-affine-stage-tail-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitReindexTransitionCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitReindexTransitionCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_reindex_transition_coherence",
+  "statement": "theorem etale_limit_reindex_transition_coherence\n    {I J : Type u} [Preorder I] [Preorder J]\n    (t : J ⥤ I) (D : Iᵒᵖ ⥤ Scheme.{u})\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    :\n    let D' := t.op ⋙ D\n    let F' (i : J) := F (t.obj i)\n    let φ' {i j : J} (f : i ⟶ j) := φ (t.map f)\n    ((∀ i : J, φ' (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D'.map_id (op i)))).hom.app\n        (F' i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D'.obj (op i))).hom.app (F' i)) ∧\n    (∀ (i j k : J) (f : i ⟶ j) (g : j ⟶ k),\n      φ' (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D'.map g.op) (D'.map f.op)\n          (D'.map (f ≫ g).op) (D'.map_comp g.op f.op)).hom.app (F' i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D'.map g.op)).map (φ' f) ≫ φ' g))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T125449-L-3875806",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T125449-L-3875806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
