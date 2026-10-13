@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-tensor-stalk-fixed-map-square",
+ "kind": "statement",
+ "title": "Tensor square for the fixed coordinate stalk map",
+ "statement": "For the cartesian scheme square, E,K,K', the derived map phi, the canonical tensor comparison tau with its specified counit equation, and coordinates c,d as defined in [def-pc-single-complex-base-change-stalk-condition], fix a K-flat sheaf complex P [def-pc-kflat-complex] with a derived isomorphism Q(P) to E. At a point z use the actual rings R,A,B,C and scalar-extension functors F,G of [def-pc-single-complex-base-change-stalk-condition]. Put U=P_{g'(z)}, Q=c.P_{g'(z)}, N=c.N_z, and t=tensorStalkIso(c.P);(c.t)_z : F(Q) to N. For the canonical base-derived cohomology model m_U of U tensor_A Q [def-pc-base-derived-tensor-cohomology-model], in every degree i there are C-linear source and target isomorphisms a_U,b_U making a_U;stalkComparison(d,z,i) equal to m_U.localizedComparison(i);H^i(mu_F(U,Q)^{-1};(F(U) tensor t));b_U. The complexes and map are fixed, no assertion of flatness of C or invertibility of horizontal comparisons is made, and the original comparison square is not part of this conclusion.",
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1), local computation using Tag 0BYJ"
+ },
+ "proof": [
+  {
+   "text": "Tensor the fixed K-flat complexes P and c.P. Their total tensor is K-flat. The localization tensor map and eP tensor c.e identify it with E tensor K. The stalk tensor isomorphism identifies its stalk complex with U tensor Q.",
+   "uses": [
+    "lem-pc-kflat-tensor-product",
+    "lem-pc-stalk-tensor-complex",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the specified K-flat equation for the canonical pullback tensor comparison, then compose with tensoring c.t. Its represents equation and naturality of tau identify the resulting chain map with the tensor map represented by d. The canonical degreewise pullback-stalk and scalar-extension tensor maps identify its stalk with mu_F inverse followed by F(U) tensor t.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived stalk cohomology to the representative isomorphism and d.represents to obtain b_U. Apply exists_comparisonSourceIso to the derived source isomorphism, lifting the B-linear cohomology transport to the tensor algebra using cohomologyIso_smul, and extend to C to obtain a_U. comparison_eq, localized_eq and comparisonIntoPullback_naturality give the commuting square.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-stalk-comparison-source-transport",
+    "lem-pc-stalk-comparison-pullback-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), local tensor-transitivity computation using Tag 0BYJ and equation-bc before Tag 0DJ8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Stalk comparison commuting squares for tensor product of K flat complexes and derived pullback",
+   "results": "Eight results on Flat.stalkMap and exact tensor functors; no matching coordinate tensor-square theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap_comp",
+   "results": "One result, HomologicalComplex.homologyMap_comp, used in the first-square proof of the parent; no tensor-square theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorStalkComparison|stalkComparison.*tensor",
+   "results": "msearch: zero hits. rg found the parent TensorStalkComparisonSquares and no theorem for its fixed-map tensor square. SourceTransport and PullbackNaturality handle derived coordinate changes, not the tensor chain-map equation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor stalk comparison commutes with K flat tensor representatives and derived scalar extension",
+   "results": "Service unavailable: Internal Server Error; no results.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorStalkComparisonSquares",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-tensor-stalk-comparison-squares",
+   "place": "Proof steps 2 and 3: only the tensor comparison equation, with all complexes and its chain map fixed",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorStalkFixedMapSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorStalkFixedMapSquare.lean",
+  "declaration": "AlgebraicGeometry.tensorStalkComparison_fixedMap_square",
+  "statement": "theorem tensorStalkComparison_fixedMap_square\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (E K : schemeDerivedQCohCategory X) (K' : schemeDerivedQCohCategory X')\n    (φ : (derivedPullback g').obj K.obj ⟶ K'.obj)\n    (τ : ∀ A B : schemeDerivedCategory X,\n      (derivedPullback g').obj (A ⊗ B) ⟶\n        (derivedPullback g').obj A ⊗ (derivedPullback g').obj B)\n    (hτ : IsCanonicalPullbackTensorComparison g' τ)\n    (c : SingleComplexBaseChange.Coordinates g' K.obj K'.obj φ)\n    (d : SingleComplexBaseChange.Coordinates g' (E.obj ⊗ K.obj)\n      (((derivedPullback g').obj E.obj) ⊗ K'.obj)\n      (τ E.obj K.obj ≫ ((derivedPullback g').obj E.obj ◁ φ)))\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (eP : DerivedCategory.Q.obj P ≅ E.obj) (hP : P.IsKFlat) (z : X') :\n    letI := SingleComplexBaseChange.leftAlgebra f g' z\n    letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq z\n    letI := (SingleComplexBaseChange.tensorMap f f' g g' sq z).toAlgebra\n    letI := HasDerivedCategory.standard\n      (ModuleCat.{u} (SingleComplexBaseChange.R f g' z))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' z))\n    let R := SingleComplexBaseChange.R f g' z\n    let A := SingleComplexBaseChange.A g' z\n    let B := SingleComplexBaseChange.B f' z\n    let C := SingleComplexBaseChange.C z\n    let F := (ModuleCat.extendScalars.{u, u, u}\n      ((algebraMap (TensorProduct R A B) C).comp\n        (algebraMap A (TensorProduct R A B)))).mapHomologicalComplex (.up ℤ)\n    let G := ModuleCat.extendScalars.{u, u, u} (algebraMap (TensorProduct R A B) C)\n    let S := (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex\n      (.up ℤ)\n    let U := SingleComplexBaseChange.stalkComplex g' z P\n    let Q := SingleComplexBaseChange.stalkComplex g' z c.P\n    let t := (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z c.P).hom ≫ S.map c.t\n    let mU := ModuleCat.baseDerivedTensorCohomologyModel R A B (U ⊗ Q) C\n    ∀ i : ℤ,\n      ∃ (aU : G.obj (mU.cohomology i) ≅\n          G.obj ((SingleComplexBaseChange.cohomologyModel f f' g g' sq z d.P).cohomology i))\n        (bU : (F.obj U ⊗ S.obj c.N).homology i ≅ (S.obj d.N).homology i),\n        aU.hom ≫ SingleComplexBaseChange.stalkComparison f f' g g' sq d z i =\n          mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n            ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i ≫ bU.hom",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-kflat-tensor-product",
+  "lem-pc-stalk-comparison-pullback-naturality",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-stalk-tensor-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T154357-L-1163089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T154357-L-1163089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

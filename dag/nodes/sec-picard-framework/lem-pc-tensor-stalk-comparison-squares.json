@@ -17,44 +17,44 @@
  },
  "proof": [
   {
-   "text": "Choose K-flat sheaf representatives of E,K and a K-injective representative of K prime; lift phi via the invertible pullback counit to a chain map. Take stalks to obtain U,Q,N,t. The stalk K-flat criterion proves the stated acyclicity properties.",
+   "text": "Construct the map from Spec(A tensor_R B) to X prime by the local-spectrum pullback map followed by the inverse of the square isomorphism with the chosen pullback. It is a preimmersion. The four actual stalk-map equations show that Spec C to Spec(A tensor_R B) followed by this map is X prime.fromSpecStalk(z). This composite is flat; cancellation along the monomorphism and the affine flatness criterion prove C flat over the tensor ring. This proof is the private stalkTensor_flat helper and works for arbitrary cartesian squares directly.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-stalk-criterion"
+    "lem-sbc-canonical-stalk-spectrum-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-pc-single-complex-base-change-stalk-condition"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the cartesian square along its canonical isomorphism with the chosen pullback and apply [lem-pc-pullback-stalk-tensor-flat] to the actual stalk algebra maps to obtain flatness of C over A tensor_R B. Tensor stalk and pullback stalk identifications and the cohomology model equations give the two commuting squares in these representatives. Their naturality gives the tensorator followed by the tensor of t.",
+   "text": "Choose existing coordinates e for the identity pullback map on E. Set U=stalk(e.P), Q=stalk(c.P), N=stalk(c.N) and t=tensorStalkIso(c.P);stalk(c.t). The stalk K-flat criterion supplies both acyclicity conclusions. Use the canonical model for U tensor Q and the existing cohomologyModel(c.P) for Q.",
    "uses": [
-    "lem-pc-stalk-tensor-complex",
-    "lem-pc-pullback-stalk-tensor-flat",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-kflat-stalk-criterion",
     "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical tensor-comparison predicate supplies its K-flat equation for the shared derived pullback counit. Apply that equation to E,K representatives and compose with the map representing phi. The represents equations identify the resulting map with tau followed by tensoring phi. This gives the tensor square with the canonical scalar-extension tensorator. Use coordinate invariance to transport to arbitrary c,d for these SAME derived maps; no change of the derived map or monoidal structure is made.",
+   "text": "Apply the fixed-map tensor-square theorem to e.P,e.e,e.isKFlat for a_U,b_U. For the original square use identity isomorphisms a,b: its equality is the definition of stalkComparison, homologyMap_comp, and the identity laws. Combine the flatness, the two K-flatness witnesses, and both comparison equations.",
    "uses": [
-    "def-pc-derived-pullback-tensor-comparison",
-    "lem-pc-stalk-comparison-coordinate-invariance"
+    "lem-pc-tensor-stalk-fixed-map-square",
+    "def-pc-single-complex-base-change-stalk-condition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-derived-pullback-tensor-comparison",
-  "lem-pc-kflat-resolution",
+  "def-pc-single-complex-base-change-stalk-condition",
   "lem-pc-kflat-stalk-criterion",
-  "lem-pc-pullback-stalk-tensor-flat",
-  "lem-pc-stalk-comparison-coordinate-invariance",
-  "lem-pc-stalk-tensor-complex"
+  "lem-pc-tensor-stalk-fixed-map-square",
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA(1), local stalk computation, with the mixed-ring transitivity argument of Tag 0BYJ"
+  "place": "Tag 0DJA(1), local computation: fixed coordinate chain map; flatness via local spectra using Tags 0FLS and 00HT"
  },
  "mathlib_searches": [
   {
@@ -128,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-578a5",
-  "group": "F4",
+  "reviewer": "COMPILER",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T151700-L-923921",
+  "landing": "20261013T154357-L-1163089",
   "kind": "interface",
-  "note": "independent Codex review: Delivered five modules compile cleanly; target unchanged, interfaces and DAG agree, two documented lower obligations are valid and sourced, and both forced adaptations are necessary and compile."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
