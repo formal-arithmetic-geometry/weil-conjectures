@@ -32,6 +32,8 @@ noncomputable section
 namespace AlgebraicGeometry
 
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 800000 in
 -- The sheaf tensor and total-complex instances require larger search terms and budget.
@@ -79,6 +81,9 @@ theorem exists_schemeDerivedAdjunction {X Y : Scheme.{uAdj}} (f : X ⟶ Y)
   dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
   let A := SheafOfModules.{uAdj} (moduleRings Y.toRingedSpace)
   let B := SheafOfModules.{uAdj} (moduleRings X.toRingedSpace)
+  let : Abelian A := SheafOfModules.instAbelian (moduleRings Y.toRingedSpace)
+  let : Abelian B := SheafOfModules.instAbelian (moduleRings X.toRingedSpace)
+  have := SheafOfModules.isMonoidal_W Y.sheaf
   let : MonoidalCategory A := SheafOfModules.monoidalCategory Y.sheaf
   let : SymmetricCategory A := SheafOfModules.symmetricCategory Y.sheaf
   have : MonoidalPreadditive A := Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
@@ -89,6 +94,7 @@ theorem exists_schemeDerivedAdjunction {X Y : Scheme.{uAdj}} (f : X ⟶ Y)
   have : IsGrothendieckAbelian.{uAdj} A :=
     SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
   let G : A ⥤ B := Scheme.Modules.tensorPullback f
+  have : G.Additive := hAdd
   have : G.PreservesKFlatQuasiIso := by
     refine ⟨?_⟩
     intro P Q hP hQ s hs
@@ -102,7 +108,14 @@ theorem exists_schemeDerivedAdjunction {X Y : Scheme.{uAdj}} (f : X ⟶ Y)
       exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
         (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF)).2
     exact tensorPullback_quasiIso_of_isKFlat f s (toIsKFlat P hP) (toIsKFlat Q hQ) hs
-  have := hε
+  change DerivedCategory.Qh ⋙ derivedPullback f ⟶
+    G.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh at ε
+  have : (derivedPullback f).IsLeftDerivedFunctor ε
+      (HomotopyCategory.quasiIso A (.up ℤ)) := hε
+  have : (DerivedCategory.Qh (C := A)).IsLocalization
+      (HomotopyCategory.quasiIso A (.up ℤ)) := inferInstance
+  have : (DerivedCategory.Qh (C := B)).IsLocalization
+      (HomotopyCategory.quasiIso B (.up ℤ)) := inferInstance
   have : (derivedPullback f ⋙ schemeDerivedDirectImage f).IsLeftDerivedFunctor
       ((Functor.associator _ _ _).inv ≫
         Functor.whiskerRight ε (schemeDerivedDirectImage f))
@@ -119,13 +132,19 @@ theorem exists_schemeDerivedAdjunction {X Y : Scheme.{uAdj}} (f : X ⟶ Y)
       |>.isRightDerivedFunctor_comp_of_isRightDerivabilityStructure β
         (fun I ↦ (HomotopyCategory.KInjectives.localizerMorphism_derives _)
           |>.isIso_of_isRightDerivedFunctor β I) (derivedPullback f)
-  let adj := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
+  let adj : G.mapHomotopyCategory (.up ℤ) ⊣
+      (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ) :=
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
     |>.mapHomotopyCategory (.up ℤ)
-  let d := adj.derived (HomotopyCategory.quasiIso A (.up ℤ))
+  let d := adj.derived (L₁ := DerivedCategory.Qh (C := A))
+    (L₂ := DerivedCategory.Qh (C := B)) (G' := derivedPullback f)
+    (F' := schemeDerivedDirectImage f) (HomotopyCategory.quasiIso A (.up ℤ))
     (HomotopyCategory.quasiIso B (.up ℤ)) ε β
   refine ⟨d, ?_⟩
   intro M K a
-  have fac := adj.derivedη_fac_app (HomotopyCategory.quasiIso A (.up ℤ)) ε β M
+  have fac := adj.derivedη_fac_app (L₁ := DerivedCategory.Qh (C := A))
+    (L₂ := DerivedCategory.Qh (C := B)) (G' := derivedPullback f)
+    (F' := schemeDerivedDirectImage f) (HomotopyCategory.quasiIso A (.up ℤ)) ε β M
   change d.unit.app (DerivedCategory.Qh.obj M) ≫
       (schemeDerivedDirectImage f).map (ε.app M ≫ DerivedCategory.Qh.map a) = _
   change d.unit.app (DerivedCategory.Qh.obj M) ≫
