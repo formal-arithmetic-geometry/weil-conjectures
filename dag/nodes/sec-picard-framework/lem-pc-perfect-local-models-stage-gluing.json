@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-perfect-local-models-stage-gluing",
+ "kind": "statement",
+ "title": "PerfectLocalModelsStageGluing",
+ "statement": "Let I be a directed preorder, R:I → CommRingCat a system, c a colimit cocone, i an index, and t:Z → Spec R_i locally of finite presentation, quasi-compact and quasi-separated. Fix shared derived module categories [def-pc-derived-category]. Given j≥i, put Y_j=Z times_{R_i} R_j and X=Z times_{R_i} c.pt, and let g_j:X → Y_j be the canonical base-change map induced by c_j. Let U,V be compact opens covering Y_j, A and B perfect complexes on U and V [def-pc-perfect-complex], and E any derived object on X. Suppose specified isomorphisms L(g_j|U)^*A ≅ E|_{g_j inverse U} and L(g_j|V)^*B ≅ E|_{g_j inverse V}, with canonical open restrictions [def-pc-derived-open-restriction-maps]. Then there exist k≥j, an object F of the derived category on Y_k, and a morphism a:Lg_k*F→E. Each point of Y_k has an open neighbourhood W such that LW.ι*F is perfect; each point of X has an open neighbourhood W on which the exact open restriction of a is invertible. These are neighbourhood witnesses for perfectness and invertibility; adjunction and local maps into derived direct image are not asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, two-open induction including the application of Tag 08DG"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "On the directed tail above j, descend the specified limit overlap isomorphism between the restrictions of A and B, using compactness of the overlap and finite presentation of its structure map. Preserve its prescribed pullback by coherent comparison maps.",
+   "uses": [
+    "lem-pc-perfect-descend-morphisms",
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Glue the pulled local objects with the descended overlap using Tag 08DG. Their local identifications with perfect pullbacks give the perfect-neighbourhood witnesses. Glue the compatible local comparisons by Hom Mayer-Vietoris. Their restrictions on the inverse-image cover are the prescribed isomorphisms, giving the local invertibility witnesses; do not apply global detection here.",
+   "uses": [
+    "lem-sc-derived-open-gluing",
+    "lem-sc-open-perfect-model-transport",
+    "lem-sc-scheme-derived-hom-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-perfect-descend-morphisms",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-open-gluing",
+  "lem-sc-open-perfect-model-transport",
+  "lem-sc-scheme-derived-hom-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, two-open induction including the application of Tag 08DG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect local complexes with limit pullback comparisons give compatible adjoint maps after passage to a common stage",
+   "results": "8 generic localization, lifting and parametrized-adjunction results; no geometric stage gluing theorem.",
+   "date": "2026-10-13",
+   "verdict": "No direct match; generic adjunction tools support the categorical part."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; homEquiv_symm_apply; homEquiv_counit; homEquiv_apply; homEquiv_unit.",
+   "date": "2026-10-13",
+   "verdict": "Used the inverse Hom equivalence to identify the pulled adjoint followed by counit with the original comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectOpenGluingData|perfect_local_models_stage_gluing",
+   "results": "Search service: zero hits. Local repository: PerfectOpenGluingData definition and eventual-compatibility theorem; no independent stage-gluing lemma.",
+   "date": "2026-10-13",
+   "verdict": "No existing declaration states this geometric stage-model conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect local models descend along a directed colimit and glue on a two open cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectLocalModelsEventuallyCompatible",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF, two-open induction and construction of adjoint maps",
+   "via": [
+    "lem-pc-perfect-local-models-eventually-compatible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectLocalModelsStageGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectLocalModelsStageGluing.lean",
+  "declaration": "AlgebraicGeometry.perfect_local_models_stage_gluing",
+  "statement": "theorem perfect_local_models_stage_gluing\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens)\n    (hcover : U ⊔ V = ⊤)\n    (hU : IsCompact (U : Set (pullback t (Spec.map (R.map (homOfLE hij))) : Scheme.{u})))\n    (hV : IsCompact (V : Set (pullback t (Spec.map (R.map (homOfLE hij))) : Scheme.{u})))\n    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)\n    (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B)\n    (E : schemeDerivedCategory (pullback t (Spec.map (c.ι.app i))))\n    (φU : (derivedPullback ((baseChangeMap t\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app j))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))) ∣_ U)).obj A ≅\n      (schemeOpenRestriction _ ((baseChangeMap t\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app j))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))) ⁻¹ᵁ U)).mapDerivedCategory.obj E)\n    (φV : (derivedPullback ((baseChangeMap t\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app j))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))) ∣_ V)).obj B ≅\n      (schemeOpenRestriction _ ((baseChangeMap t\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app j))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))) ⁻¹ᵁ V)).mapDerivedCategory.obj E) :\n    ∃ (k : I) (hjk : j ≤ k),\n      let g := baseChangeMap t\n        (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app k))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE (hij.trans hjk))]))\n      ∃ (F : schemeDerivedCategory\n          (pullback t (Spec.map (R.map (homOfLE (hij.trans hjk))))))\n        (a : (derivedPullback g).obj F ⟶ E),\n        (∀ x : (pullback t (Spec.map (R.map (homOfLE (hij.trans hjk)))) : Scheme.{u}),\n          ∃ W : (pullback t (Spec.map (R.map (homOfLE (hij.trans hjk))))).Opens,\n            x ∈ W ∧ W.toScheme.IsPerfect ((derivedPullback W.ι).obj F)) ∧\n        (∀ x : (pullback t (Spec.map (c.ι.app i)) : Scheme.{u}),\n          ∃ W : (pullback t (Spec.map (c.ι.app i))).Opens, x ∈ W ∧\n            IsIso ((schemeOpenRestriction _ W).mapDerivedCategory.map a))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T133746-L-44864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T133746-L-44864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

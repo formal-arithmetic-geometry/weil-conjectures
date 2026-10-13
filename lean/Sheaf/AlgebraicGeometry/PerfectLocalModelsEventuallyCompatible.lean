@@ -9,12 +9,10 @@ public import Sheaf.AlgebraicGeometry.PerfectOpenGluingData
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-
-import Sheaf.AlgebraicGeometry.PerfectDescendMorphisms
-import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.PerfectLocalModelsStageGluing
+import Sheaf.AlgebraicGeometry.PerfectOpenGluingDataOfGlobalModel
+import Sheaf.AlgebraicGeometry.PerfectOfOpenPullbacks
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
 
 /-! # Eventual compatibility of two prescribed local perfect models
 
@@ -94,6 +92,13 @@ theorem perfect_local_models_eventually_compatible
         (T' := Over.mk (Spec.map (c.ι.app i)))
         (Over.homMk (Spec.map (c.ι.app k))
           (by dsimp; rw [← Spec.map_comp, c.w (homOfLE (hij.trans hjk))]))
-      PerfectOpenGluingData g E := by sorry
+      PerfectOpenGluingData g E := by
+  obtain ⟨k, hjk, F, a, hF, ha⟩ := perfect_local_models_stage_gluing
+    R c hc i Z t j hij U V hcover hU hV A B hA hB E φU φV
+  refine ⟨k, hjk, ?_⟩
+  have hperfect := perfect_of_open_pullbacks F hF
+  have hcomparison : IsIso a := schemeDerived_isIso_of_openRestriction a ha
+  let := hcomparison
+  exact perfect_open_gluing_data_of_global_model _ E F hperfect (asIso a)
 
 end AlgebraicGeometry

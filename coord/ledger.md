@@ -12661,3 +12661,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:37 L: merged deliver/K3/Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverCyclicChartModel (stage 3; reviewer PASS; first push; landing 20261013T133745-L-44394 (interface); batch 20261013T133742; modules 3; new nodes 2)
 - 13:37 L: merged deliver/N4/Sheaf.RingTheory.LocalizedPolynomialTorBound (stage 3; reviewer PASS; first push; landing 20261013T133745-L-44520 (interface); batch 20261013T133742; modules 2; new nodes 1)
 - 13:37 L: merged deliver/P3/Sheaf.AlgebraicGeometry.BoundedGradedModuleMapDescent (stage 3; reviewer PASS; first push; landing 20261013T133746-L-44712 (interface); batch 20261013T133742; modules 3; new nodes 2)
+- 13:37 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.PerfectLocalModelsEventuallyCompatible (stage 3; reviewer PASS; first push; landing 20261013T133746-L-44864 (interface); batch 20261013T133742; modules 3; new nodes 2)

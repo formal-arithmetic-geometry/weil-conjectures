@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-perfect-open-gluing-data-global-model",
+ "kind": "statement",
+ "title": "PerfectOpenGluingDataOfGlobalModel",
+ "statement": "For any morphism g:X→Y of schemes with shared derived module categories [def-pc-derived-category], a perfect object A on Y [def-pc-perfect-complex] and an isomorphism Lg*A ≅ E [def-pc-derived-pullback], there is PerfectOpenGluingData(g,E) [def-pc-perfect-open-gluing-data]. No geometric finiteness or colimit hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, construction of the adjoint maps a,b and descent of c, before Tag 08DG"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-perfect-open-gluing-data"
+ ],
+ "proof": [
+  {
+   "text": "Exact open restriction is derived pullback by uniqueness of the left derived functor; it preserves perfectness.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the derived adjunction and take the adjoint of the global comparison. Use the top open twice. Naturality of the pullback/restriction comparison and the inverse Hom equivalence identify both restricted counit composites with restrictions of the original isomorphism. Their invertibility and the reflexive overlap equation supply the gluing datum.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "def-pc-perfect-open-gluing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-open-gluing-data",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-ringed-spaces-derived-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, construction of the adjoint maps a,b and descent of c, before Tag 08DG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect local complexes with limit pullback comparisons give compatible adjoint maps after passage to a common stage",
+   "results": "8 generic localization, lifting and parametrized-adjunction results; no geometric stage gluing theorem.",
+   "date": "2026-10-13",
+   "verdict": "No direct match; generic adjunction tools support the categorical part."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; homEquiv_symm_apply; homEquiv_counit; homEquiv_apply; homEquiv_unit.",
+   "date": "2026-10-13",
+   "verdict": "Used the inverse Hom equivalence to identify the pulled adjoint followed by counit with the original comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectOpenGluingData|perfect_local_models_stage_gluing",
+   "results": "Search service: zero hits. Local repository: PerfectOpenGluingData definition and eventual-compatibility theorem; no independent stage-gluing lemma.",
+   "date": "2026-10-13",
+   "verdict": "No existing declaration states this geometric stage-model conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect local models descend along a directed colimit and glue on a two open cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectLocalModelsEventuallyCompatible",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF, two-open induction and construction of adjoint maps",
+   "via": [
+    "lem-pc-perfect-local-models-eventually-compatible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOpenGluingDataOfGlobalModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenGluingDataOfGlobalModel.lean",
+  "declaration": "AlgebraicGeometry.perfect_open_gluing_data_of_global_model",
+  "statement": "theorem perfect_open_gluing_data_of_global_model\n    {X Y : Scheme.{u}} (g : X ⟶ Y)\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X)\n    (A : schemeDerivedCategory Y) (hA : Y.IsPerfect A)\n    (e : (derivedPullback g).obj A ≅ E) : PerfectOpenGluingData g E",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T133746-L-44864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T133746-L-44864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
