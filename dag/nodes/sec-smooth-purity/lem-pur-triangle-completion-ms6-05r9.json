@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "The square with first components s:X'\\to X and id_Y:Y\\to Y commutes, since id_Y\\circ(f\\circ s)=f\\circ s. Applying (TR3) from [def-weil-triangulated-category] gives a morphism of distinguished triangles whose third component is some t:Z'\\to Z. The two first components s and id_Y lie in S (the latter by MS1), and their square is the one above, so MS6 in [def-pur-saturated-triangulated-localization] gives t\\in S. Thus (s,id_Y,t) is the required denominator morphism of triangles.",
+   "text": "The square with components s:X′→X and id_Y:Y→Y commutes. MS1 puts id_Y in S. Apply MS6 in [def-pur-saturated-triangulated-localization] directly to the two distinguished triangles and this square: it chooses a third component t:Z′→Z in S satisfying both remaining triangle-morphism squares. Thus (s,id_Y,t) is the required denominator morphism. This is a compatible TR3 completion, not a claim that an arbitrary TR3 completion belongs to S.",
    "uses": [
     "def-weil-triangulated-category",
     "def-pur-saturated-triangulated-localization"
@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "For a prescribed denominator at Y, or at Z, rotate the given distinguished triangle using (TR2) from [def-weil-triangulated-category], apply the construction above to its first vertex, and rotate the resulting morphism back. Compatibility of S with shifts (MS5) in [def-pur-saturated-triangulated-localization] ensures that the shifted components remain in S, yielding the two analogous assertions.",
+   "text": "For a prescribed denominator s:Y′→Y, use TR1/TR2 in [def-weil-triangulated-category] to complete s≫g as the second map of a distinguished triangle with third vertex Z. Rotate both triangles and apply MS6 with components s and id_Z. Lift the resulting third component through the full shift-by-one functor; MS5 in [def-pur-saturated-triangulated-localization] gives membership in S, and faithfulness cancels the rotation signs to recover the first square. For s:Z′→Z, complete s≫h as the third map of a distinguished triangle with first vertex X. Inverse-rotate both triangles and apply MS6 with components s[-1] and id_X, using MS5 for s[-1]. Cancel the shift counit isomorphism in the last resulting square to recover the original second square. Triangle.homMk supplies both morphisms with the prescribed component exactly s.",
    "uses": [
     "def-weil-triangulated-category",
     "def-pur-saturated-triangulated-localization"
@@ -66,7 +66,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 05R9 (lemma-limit-triangles), the construction of a triangle over a prescribed denominator; the proof follows the source (metadata corrected by L at 03:14 UTC: the delivery said the source text was unavailable, but derived.tex is in the checkout)"
+  "place": "Tag 05R9 (lemma-limit-triangles), construction over a prescribed denominator; Lean realization by M1 uses Mathlib TR1 cone variants, MS6 directly, and rotation/inverse rotation. Second reading clarifies that MS6 chooses the completion in S."
  },
  "mathlib_searches": [
   {
@@ -145,5 +145,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T022419-L-3215700",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
