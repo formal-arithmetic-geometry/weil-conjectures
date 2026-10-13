@@ -27,6 +27,75 @@ universe u v
 
 namespace HenselianLocalRing
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem etale_retraction
+    (R : Type u) [CommRing R] [HenselianLocalRing R]
+    (R' : Type (max u v)) [CommRing R'] [Algebra R R']
+    (het : Algebra.Etale R R') (p : Ideal R') [p.IsPrime]
+    (hp : p.comap (algebraMap R R') = IsLocalRing.maximalIdeal R)
+    (hres : Function.Bijective
+      (Ideal.ResidueField.mapₐ (IsLocalRing.maximalIdeal R) p
+        (Algebra.ofId R R') hp.symm)) :
+    ∃ τ : R' →ₐ[R] R, p = (IsLocalRing.maximalIdeal R).comap τ.toRingHom := by
+  let R₁ := ULift.{v} R
+  let e : R₁ ≃+* R := ULift.ringEquiv
+  let : HenselianLocalRing R₁ := HenselianLocalRing.of_ringEquiv e.symm
+  let f : R₁ →+* R' := (algebraMap R R').comp e.toRingHom
+  let : Algebra R₁ R := e.toRingHom.toAlgebra
+  let : Algebra R₁ R' := f.toAlgebra
+  let : SMul R₁ R := (e.toRingHom.toAlgebra).toSMul
+  let : SMul R₁ R' := (f.toAlgebra).toSMul
+  have : IsScalarTower R₁ R R' := IsScalarTower.of_algebraMap_eq fun r ↦ rfl
+  have : Algebra.Etale R₁ R := RingHom.Etale.of_bijective e.bijective
+  have : Algebra.Etale R R' := het
+  have hf : f.Etale := Algebra.Etale.comp R₁ R R'
+  have : IsLocalHom e.toRingHom := IsLocalHom.of_surjective e.toRingHom e.surjective
+  have : AlgebraicGeometry.Etale
+      (AlgebraicGeometry.Scheme.Spec.map (CommRingCat.ofHom f).op) :=
+    (AlgebraicGeometry.HasRingHomProperty.Spec_iff
+      (P := @AlgebraicGeometry.Etale) (φ := CommRingCat.ofHom f)).mpr hf
+  have hp₁ : p.comap f = IsLocalRing.maximalIdeal R₁ := by
+    rw [show p.comap f = (p.comap (algebraMap R R')).comap e.toRingHom from rfl,
+      hp, IsLocalRing.maximalIdeal_comap]
+  have hsurj : Function.Surjective ((algebraMap R' p.ResidueField).comp f) := by
+    have heq : (algebraMap R' p.ResidueField).comp (algebraMap R R') =
+        (Ideal.ResidueField.mapₐ (IsLocalRing.maximalIdeal R) p
+          (Algebra.ofId R R') hp.symm).toRingHom.comp
+            (algebraMap R (IsLocalRing.maximalIdeal R).ResidueField) := by
+      ext r
+      exact (Ideal.ResidueField.map_algebraMap _ _ _ _ r).symm
+    change Function.Surjective
+      (((algebraMap R' p.ResidueField).comp (algebraMap R R')).comp e.toRingHom)
+    rw [heq]
+    exact (hres.2.comp (IsLocalRing.maximalIdeal R).algebraMap_residueField_surjective).comp
+      e.surjective
+  have hres₁ : Function.Bijective
+      (Ideal.ResidueField.map (IsLocalRing.maximalIdeal R₁) p f hp₁.symm) := by
+    refine ⟨RingHom.injective _, ?_⟩
+    intro x
+    obtain ⟨r, hr⟩ := hsurj x
+    exact ⟨algebraMap R₁ (IsLocalRing.maximalIdeal R₁).ResidueField r,
+      (Ideal.ResidueField.map_algebraMap _ _ _ _ r).trans hr⟩
+  obtain ⟨σ, hσ, _⟩ := existsUnique_algHom_of_henselianLocalRing_etale f p hp₁ hres₁
+  let τ : R' →ₐ[R] R :=
+    { e.toRingHom.comp σ.toRingHom with
+      commutes' := by
+        intro r
+        have h := σ.commutes (e.symm r)
+        change e (σ (algebraMap R R' r)) = r
+        change σ (f (e.symm r)) = e.symm r at h
+        have he : f (e.symm r) = algebraMap R R' r := by
+          change algebraMap R R' (e (e.symm r)) = _
+          rw [e.apply_symm_apply]
+        rw [he] at h
+        exact (congrArg e h).trans (e.apply_symm_apply r) }
+  refine ⟨τ, ?_⟩
+  rw [← hσ]
+  change (IsLocalRing.maximalIdeal R₁).comap σ.toRingHom =
+    ((IsLocalRing.maximalIdeal R).comap e.toRingHom).comap σ.toRingHom
+  rw [IsLocalRing.maximalIdeal_comap e.toRingHom]
+
 /-- A finite-type algebra over a henselian local ring splits into finitely many module-finite
 local algebras and a factor having no quasi-finite prime above the maximal ideal.
 Source: Stacks Project, Algebra, Lemma 10.153.5 (Tag 04GJ)
@@ -55,6 +124,24 @@ theorem finiteType_exists_algEquiv_pi_prod
         (∀ q : PrimeSpectrum B,
           q.asIdeal.comap (algebraMap R B) = IsLocalRing.maximalIdeal R →
             ¬ Algebra.IsQuasiFiniteAtPrime R B q) := by
-  sorry
+  classical
+  obtain ⟨C, B, cC, cB, aC, aB, ftB, α, finC, hB⟩ :=
+    Algebra.etale_retraction_finite_type_splitting R (etale_retraction R) S
+  let := cC
+  let := cB
+  let := aC
+  let := aB
+  let := ftB
+  let := finC
+  obtain ⟨n, A, comm, alg, loc, ⟨β⟩⟩ :=
+    finite_algebra_is_product_local_rings (etale_retraction R) (B := C)
+  let := comm
+  let := alg
+  let := loc
+  have : Module.Finite R (∀ i, A i) := Module.Finite.equiv β.toLinearEquiv
+  refine ⟨n, (fun i ↦ CommAlgCat.of R (A i)), CommAlgCat.of R B, ftB,
+    ⟨α.trans (AlgEquiv.prodCongr β (AlgEquiv.refl : B ≃ₐ[R] B))⟩, ?_, hB⟩
+  intro i
+  exact ⟨loc i, Module.Finite.of_pi A i⟩
 
 end HenselianLocalRing
