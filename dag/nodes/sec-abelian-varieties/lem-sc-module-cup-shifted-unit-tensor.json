@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupShiftedUnitTensor",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "General theorem of cube cohomological cup construction: comparison of products computed with acyclic resolutions; Natural tensor pairing on derived module homology with cycle normalization; Normalized shifted-unit tensor identification and its chain-map compatibility",
+   "via": [
+    "lem-sc-module-cup-derived-homology-tensor",
+    "lem-sc-module-cup-equal-derived-maps-class",
+    "lem-sc-module-cup-realization-evaluation",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "id": "lem-sc-module-cup-shifted-unit-tensor",
+ "title": "Normalized shifted-unit tensor identification and its chain-map compatibility",
+ "statement": "Let k be any commutative ring with its chosen module derived category and K-flat derived tensor. Write S(n)=k[-n] for the actual single complex [lem-sc-module-cup-homology-representability]. For all integers p,q there exists an isomorphism e:Q(S(p+q)) to Q(S(p)) tensor-derived Q(S(q)). For every pair of arbitrary complexes K,L and chain maps f:S(p) to K, g:S(q) to L, there exists a chain map h:S(p+q) to K tensor L such that (1) its degree-p+q value at 1 is the (p,q)-tensor-summand inclusion of the degree-p value of f at 1 tensor the degree-q value of g at 1, with no sign; and (2) e.hom followed by Q(f) tensor Q(g) and by the lax tensor comparison at K,L equals Q(h). The value at 1 uses singleObjXSelf.inv in each source. For cocycle maps this explicitly gives compatibility of the shifted-unit identification with tensor representatives.",
+ "stmt_deps": [
+  "lem-sc-module-cup-homology-representability",
+  "lem-pc-source-kflat-module-tensor-model"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/068G",
+  "place": "Section 15.64, equation-simple-tor-product and the tensor-of-cocycles construction; Tag 0FKU localization tensor comparison"
+ },
+ "proof": [
+  {
+   "text": "Use exists_cupShiftedUnitChainTensor for the normalized ordinary complex isomorphism i. The free rank-one module is flat by ModuleCat.flat_iff_flat, and CochainComplex.kFlat_single_obj_iff_flat proves its single complex is K-flat directly; the bounded-above flat complex node is unnecessary. Apply the source QObjTensorQObjIsoOfKFlatLeft, and identify its hom with the canonical lax comparison by unfolding its quotient/counit composite. Compose Q.mapIso i with the inverse comparison to obtain e.",
+   "uses": [
+    "lem-sc-module-cup-shifted-unit-chain-tensor",
+    "lem-sc-module-cup-homology-representability",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each f,g define h=i.hom followed by f tensor g. Evaluate CochainComplex.ιTensorObj_tensorHom_f at the transported 1 tensor 1 and rewrite with the normalization of i to prove the component formula. Functor.LaxMonoidal.μ_natural moves Q(f) tensor Q(g) across the comparison; cancel the flat-model inverse and use Q.map_comp to prove the derived equation. Thus no representative formula remains unproved in this module.",
+   "uses": [
+    "lem-sc-module-cup-shifted-unit-chain-tensor",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-shifted-unit-chain-tensor",
+  "lem-sc-module-cup-homology-representability",
+  "lem-pc-source-kflat-module-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/068G",
+  "place": "equation-simple-tor-product; Tag 0FKU localization comparison",
+  "note": "One strict underived construction remains. K-flatness, representative tensor formula, and derived compatibility are proved using closed source APIs and lax monoidal naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homology is represented by shifted free rank one modules in the derived category, compatibly with tensor cocycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a single free rank one module in the derived category is naturally isomorphic to homology with cocycle representative formula",
+   "results": "Eight hits: projective/injective Ext representative formulas and HomComplex.homologyAddEquiv, toSmallShiftedHom_mk. None has the stated ModuleCat homology linear equivalence with evaluation at 1.",
+   "date": "2026-10-14",
+   "verdict": "related infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mkHomFromSingle",
+   "results": "mkHomFromSingle, mkHomFromSingle_f, and evalCompCoyonedaCorepresentableBySingle_homEquiv_symm_apply. These construct a cycle map but do not identify its derived homology class or normalize the shifted tensor.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*tensor|tensor.*single|homology.*equiv|equiv.*homology",
+   "results": "Search service: 25 group homology and representation hits, no exact theorem. Local sources: HomComplex.homologyAddEquiv, IsKProjective.Qh_map_bijective, isKProjective_of_projective, mapBifunctorSingle1Iso and FlatModel.QObjTensorQObjIsoOfKFlatLeft give the needed infrastructure but not the complete normalized interfaces. Existing DAG node lem-pc-ring-derived-map-representative covers the K-projective localization fact; lem-pc-module-bounded-flat-kflat and lem-pc-source-kflat-module-tensor-model cover the K-flat computation.",
+   "date": "2026-10-14",
+   "verdict": "no duplicate normalized interface"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupShiftedUnitTensor",
+  "file": "lean/Sheaf/Paper/ModuleCupShiftedUnitTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cupShiftedUnitTensor",
+  "statement": "theorem exists_cupShiftedUnitTensor (p q : ℤ) :\n    ∃ e : DerivedCategory.Q.obj (cupSingleModule k (p + q)) ≅\n      DerivedCategory.Q.obj (cupSingleModule k p) ⊗\n        DerivedCategory.Q.obj (cupSingleModule k q),\n    ∀ (K L : CochainComplex (ModuleCat.{u} k) ℤ)\n      (f : cupSingleModule k p ⟶ K) (g : cupSingleModule k q ⟶ L),\n    ∃ h : cupSingleModule k (p + q) ⟶ K ⊗ L,\n      ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (p + q)\n          (ModuleCat.of k k)).inv ≫ h.f (p + q)) (1 : k) =\n        (HomologicalComplex.ιTensorObj K L p q (p + q) rfl)\n          ((((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) p\n              (ModuleCat.of k k)).inv ≫ f.f p) (1 : k)) ⊗ₜ[k]\n            (((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q\n              (ModuleCat.of k k)).inv ≫ g.f q) (1 : k))) ∧\n      e.hom ≫ (DerivedCategory.Q.map f ⊗ₘ DerivedCategory.Q.map g) ≫\n          Functor.LaxMonoidal.μ DerivedCategory.Q K L = DerivedCategory.Q.map h",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T231546-L-1821331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T231546-L-1821331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

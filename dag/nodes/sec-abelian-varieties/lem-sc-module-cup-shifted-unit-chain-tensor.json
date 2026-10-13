@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-module-cup-shifted-unit-chain-tensor",
+ "kind": "statement",
+ "title": "Normalized ordinary tensor isomorphism for shifted free modules",
+ "statement": "Let k be any commutative ring and let S(n) be the actual single free rank-one complex cupSingleModule k n of [lem-sc-module-cup-homology-representability]. For any integers p and q there exists a complex isomorphism i:S(p+q) to S(p) tensor S(q). Under the singleObjXSelf identifications in the three support degrees, i.hom evaluated at 1 equals the (p,q)-summand inclusion of 1 tensor 1. Explicitly, singleObjXSelf(p+q).inv followed by i.hom.f(p+q) applied to 1 equals ιTensorObj S(p) S(q) p q (p+q) applied to singleObjXSelf(p).inv(1) tensor singleObjXSelf(q).inv(1). This is an ordinary tensor of complexes, with no derived localization or arbitrary representative maps.",
+ "stmt_deps": [
+  "lem-sc-module-cup-homology-representability"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/068G",
+  "place": "Section 15.64, equation-simple-tor-product: the single free complexes and tensor-of-cocycles construction."
+ },
+ "proof": [
+  {
+   "text": "The ordinary total tensor of S(p) and S(q) has zero terms outside p+q: in every summand other than (p,q), at least one single-complex term is zero. The differential is zero because both single-complex differentials are zero. In degree p+q, the singleObjXSelf maps identify the only summand with k tensor_k k. Multiplication k tensor_k k to k is an isomorphism with inverse a to 1 tensor a. Compose its inverse with the summand inclusion and singleObjXSelf on the source to give the degree-p+q component; give the unique map between zero objects in every other degree. These maps commute with the zero differentials and are degreewise isomorphisms, hence form a complex isomorphism i. Its normalized value at 1 is the displayed inclusion of the transported 1 tensor transported 1. This proof includes all integer degrees and the zero ring; no nontriviality hypothesis is needed.",
+   "uses": [
+    "lem-sc-module-cup-homology-representability"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-homology-representability"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/068G",
+  "place": "equation-simple-tor-product",
+  "note": "Isolates only the normalized ordinary single-complex isomorphism from the parent; representative-map naturality and derived compatibility are proved in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product single complexes concentrated in degrees p q supported in p plus q",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of single cochain complexes concentrated in integer degrees p and q is single in p plus q",
+   "results": "Eight hits on tensor unit and summand inclusion constructions, but no normalized arbitrary-degree two-single isomorphism.",
+   "date": "2026-10-14",
+   "verdict": "related tensor infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ι_mapBifunctorMap",
+   "results": "Found the total tensor morphism summand identity. The corresponding source CochainComplex.ιTensorObj_tensorHom_f proves the representative formula from the generator normalization.",
+   "date": "2026-10-14",
+   "verdict": "used component naturality in the parent proof"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*Single|single.*Tensor|isoSingle",
+   "results": "FromJoel BifunctorSingle has single-zero comparisons and arbitrary single HasMapBifunctor instances. Devissage.isoSingle and mkHomFromSingle are relevant construction tools, but no ready normalized arbitrary-degree isomorphism. Local library/source searches found no duplicate normalized interface.",
+   "date": "2026-10-14",
+   "verdict": "construction isolated for follow-up"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupShiftedUnitTensor",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Ordinary tensor S(p) tensor S(q): construct the support-degree inverse multiplication isomorphism and normalize its generator.",
+   "via": [
+    "lem-sc-module-cup-shifted-unit-tensor",
+    "lem-sc-module-cup-derived-homology-tensor",
+    "lem-sc-module-cup-equal-derived-maps-class",
+    "lem-sc-module-cup-realization-evaluation",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupShiftedUnitChainTensor",
+  "file": "lean/Sheaf/Paper/ModuleCupShiftedUnitChainTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cupShiftedUnitChainTensor",
+  "statement": "theorem exists_cupShiftedUnitChainTensor (p q : ℤ) :\n    ∃ i : cupSingleModule k (p + q) ≅\n      cupSingleModule k p ⊗ cupSingleModule k q,\n      ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (p + q)\n          (ModuleCat.of k k)).inv ≫ i.hom.f (p + q)) (1 : k) =\n        (HomologicalComplex.ιTensorObj (cupSingleModule k p) (cupSingleModule k q)\n          p q (p + q) rfl)\n          (((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) p\n              (ModuleCat.of k k)).inv (1 : k)) ⊗ₜ[k]\n            ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q\n              (ModuleCat.of k k)).inv (1 : k)))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T231546-L-1821331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T231546-L-1821331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -13857,3 +13857,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:15 L: merged deliver/S3/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore (stage 3; reviewer PASS; first push; landing 20261013T231545-L-1820953 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/S3/Sheaf.Paper.CartierEquality (stage 3; reviewer PASS; first push; landing 20261013T231545-L-1821073 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/T2/Sheaf.AlgebraicGeometry.SelfTorBasicIdealWedgeCoordinates (stage 3; reviewer PASS; first push; landing 20261013T231546-L-1821225 (interface); batch 20261013T231527; modules 4; new nodes 3)
+- 23:15 L: merged deliver/T2/Sheaf.Paper.ModuleCupShiftedUnitTensor (stage 3; reviewer PASS; first push; landing 20261013T231546-L-1821331 (interface); batch 20261013T231527; modules 2; new nodes 2; change records: coord/changes/exists_cupShiftedUnitTensor.md)
