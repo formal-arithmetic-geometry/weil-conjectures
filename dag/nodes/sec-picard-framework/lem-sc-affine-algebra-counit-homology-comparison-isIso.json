@@ -1,0 +1,138 @@
+{
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, proof of perfect-lemma-affine-morphism-equivalence; Tag 08D4, unbounded affine cohomology"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, proof of perfect-lemma-affine-morphism-equivalence; Tag 08D4, unbounded affine cohomology"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homology of natural transformation commutes with exact functor homology comparison",
+   "results": "CategoryTheory.ShortComplex.map_leftRightHomologyComparison', CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality_assoc, CategoryTheory.NatTrans.app_homology, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality, CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality_assoc",
+   "date": "2026-10-13",
+   "verdict": "Adjunction API found; no affine comparison invertibility theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "results": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "date": "2026-10-13",
+   "verdict": "Adjunction API found; no affine comparison invertibility theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*counit|homology.*counit",
+   "results": "Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+   "date": "2026-10-13",
+   "verdict": "Adjunction API found; no affine comparison invertibility theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical cohomology comparison for affine direct image of a K injective complex is invertible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence: identify homology of the counit using the canonical affine cohomology comparison",
+   "via": [
+    "new-affine-algebra-kinjective-counit-compatibility",
+    "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
+    "lem-sc-affine-algebra-exact-derived-counit-iso",
+    "lem-sc-affine-algebra-derived-unit-homology-factorization",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-sc-affine-algebra-counit-homology-comparison-isIso",
+ "kind": "statement",
+ "title": "Invertibility of the fixed affine algebra homology comparison",
+ "statement": "For $f,P,R,a,I,n$ as in [def-sc-affine-algebra-counit-homology-comparison], assume $I$ is K-injective and every $H^j(I)$ is quasi-coherent. Then the fixed morphism $m_{I,n}:H^n(RI)\\to R(H^n(I))$ is an isomorphism. This is invertibility of a specified morphism, not mere existence of an isomorphism between these objects.",
+ "stmt_deps": [
+  "def-sc-affine-algebra-counit-homology-comparison",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "On affine inverse images, apply higher direct image vanishing and the natural unbounded quasi-coherent pushforward comparison, justified by the bound-one truncation argument. The edge map sends cycles to cohomology classes and is invertible, with the direct-image algebra action.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For tensor pullback, adjunction of the termwise multiplication counit identifies its homology mate with this canonical edge map. Transport along the unique adjunction-compatible isomorphism from any exact P to tensor pullback. Compatibility of kernels and cokernels with that isomorphism identifies the same mate; conclude invertibility.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraCounitHomologyComparisonIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraCounitHomologyComparisonIsIso.lean",
+  "declaration": "AlgebraicGeometry.affineAlgebraCounitHomologyComparison_isIso",
+  "statement": "theorem affineAlgebraCounitHomologyComparison_isIso\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤\n      SheafOfModules.{v} (moduleRings X.toRingedSpace))\n    [P.Additive] [Limits.PreservesFiniteLimits P] [Limits.PreservesFiniteColimits P]\n    (a : P ⊣ RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f))\n    (I : CochainComplex (SheafOfModules.{v} (moduleRings X.toRingedSpace)) ℤ)\n    [I.IsKInjective] (hI : ∀ n : ℤ, (I.homology n).IsQuasicoherent) (n : ℤ) :\n    IsIso (affineAlgebraCounitHomologyComparison f P a I n)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cc709",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T040746-L-3948359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cc709",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T040746-L-3948359",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, the declared correction, forced adaptation, source arguments, clean compilations and axiom probes."
+ }
+}

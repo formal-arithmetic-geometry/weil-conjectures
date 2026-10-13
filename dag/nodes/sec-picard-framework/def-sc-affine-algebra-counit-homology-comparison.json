@@ -1,0 +1,118 @@
+{
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, proof of perfect-lemma-affine-morphism-equivalence; Tag 08D4, unbounded affine cohomology"
+ },
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homology of natural transformation commutes with exact functor homology comparison",
+   "results": "CategoryTheory.ShortComplex.map_leftRightHomologyComparison', CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality_assoc, CategoryTheory.NatTrans.app_homology, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality, CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality_assoc",
+   "date": "2026-10-13",
+   "verdict": "Adjunction API found; no affine comparison invertibility theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "results": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "date": "2026-10-13",
+   "verdict": "Adjunction API found; no affine comparison invertibility theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*counit|homology.*counit",
+   "results": "Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+   "date": "2026-10-13",
+   "verdict": "Adjunction API found; no affine comparison invertibility theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical cohomology comparison for affine direct image of a K injective complex is invertible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence: identify homology of the counit using the canonical affine cohomology comparison",
+   "via": [
+    "new-affine-algebra-kinjective-counit-compatibility",
+    "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
+    "lem-sc-affine-algebra-exact-derived-counit-iso",
+    "lem-sc-affine-algebra-derived-unit-homology-factorization",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "def-sc-affine-algebra-counit-homology-comparison",
+ "kind": "definition",
+ "title": "Canonical affine algebra homology comparison as a counit mate",
+ "statement": "Let $f:X\\to Y$ be an affine morphism, and write $R=g_*$ for its direct-image-algebra module functor. Let $P\\dashv R$ be an additive exact left adjoint. For a cochain complex $I$ and $n\\in\\mathbf Z$, define $m_{I,n}:H^n(RI)\\to R(H^n(I))$ to be the adjoint mate under $P\\dashv R$ of $H^n(\\epsilon_I)\\circ c_{RI}^{-1}$, where $c$ is the exact-functor homology comparison and $\\epsilon_I$ is the termwise counit. The objects and operations are those of [def-pc-scheme], [def-sc-direct-image-algebra-derived-category], [def-pc-ringed-spaces-derived-direct-image], [def-pc-cochain-complex-modules], [def-pur-kinjective-complex], [def-weil-sheaf-of-modules-category], [lem-weil-pbc-termwise-adjunction-homotopy], [lem-weil-pbc-exact-functor-bounded-below].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-cochain-complex-modules",
+  "def-pur-kinjective-complex",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraKInjectiveCounitCompatibility.lean",
+  "declaration": "AlgebraicGeometry.affineAlgebraCounitHomologyComparison",
+  "statement": "def affineAlgebraCounitHomologyComparison\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤\n      SheafOfModules.{v} (moduleRings X.toRingedSpace))\n    [P.Additive] [Limits.PreservesFiniteLimits P] [Limits.PreservesFiniteColimits P]\n    (a : P ⊣ RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f))\n    (I : CochainComplex (SheafOfModules.{v} (moduleRings X.toRingedSpace)) ℤ)\n    (n : ℤ) :\n    (((RingedSpace.moduleDirectImage\n      (toDirectImageAlgebraSpace f)).mapHomologicalComplex (.up ℤ)).obj I).homology n ⟶\n      (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).obj (I.homology n)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cc709",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T040746-L-3948359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cc709",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T040746-L-3948359",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, the declared correction, forced adaptation, source arguments, clean compilations and axiom probes."
+ }
+}
