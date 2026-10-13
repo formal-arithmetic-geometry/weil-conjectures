@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-affine-formal-map-limit-dictionary",
+ "kind": "statement",
+ "title": "Affine formal-map dictionary with natural section-limit comparisons",
+ "statement": "Let X be affine Noetherian, J ideal sheaf data, H coherent, N a coherent formal module, and δ:N→completion(H) [def-weil-pbc-coherent-formal-module]. Put A=Γ(X,⊤), I=J(⊤), S=AdicCompletion I A, L=tilde [lem-weil-pbc-spec-module-tilde-sections] followed by chart pullback, and C=L followed by formal completion. Given P over A, ε:L(P)≅H and any η:C(P)≅C(S⊗P) [def-weil-module-base-change], there exist Q over S, an S-linear φ:Q→S⊗P, ρ:N≅C(Q restricted to A), and A-linear equivalences a:Q≅lim Γ(N_n) and b:S⊗P≅lim Γ(completion(H)_n). They satisfy δ=ρ followed by C(φ), η inverse, and completion(ε), and b(φ(x))=lim Γ(δ_n)(a(x)) for every x. No torsion assumption or annihilator conclusion is included.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 087W, 00MA and 0889(1), affine representation and tensor comparison before applying Remark 0888"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Transport along the canonical affine chart, including the ideal of the top open. Apply the affine formal-module equivalence to N. The inverse comparison gives ρ, and its limit cone gives a.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The presentation ε and coherence imply P is finite. Thus B=S tensor P is a finite complete S-module. The inverse affine comparison identifies B with lim sections C(B); compose this comparison with lim(η inverse) and lim(completion(ε)) to obtain b. In particular b depends on the supplied η, which need not be the tensor unit.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate δ by ρ inverse, completion(ε inverse), and η. Fullness of the affine formal equivalence on the finite S-modules Q and B gives φ whose completed map is that conjugate. Cancellation gives the factorization. Let a be the canonical Q-to-lim-C(Q) comparison followed by lim(ρ inverse). Naturality of the canonical comparisons followed by lim(η inverse) and lim(completion(ε)) gives the displayed elementwise square. No torsion estimate is used.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 087W, 00MA and 0889(1), affine representation and tensor comparison before applying Remark 0888"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine coherent formal modules inverse limit tensor completion naturality",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of coherent formal modules on an affine scheme is a linear map over the adic completion",
+   "results": "Scheme.Modules.Hom, ModuleCat.tilde, AdicCompletion.of and AdicCompletion.map; no sheaf-to-limit morphism dictionary",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_formal_map|formal.*presentation|completion.*tensor|annihilator.*ker",
+   "results": "CoherentFormalModulesAffine supplies equivalence and limit cones only on Spec; CoherentFormalModuleAnnihilated supplies bounds on actual section-limit maps. CompletionInternalHomAffineTensorDictionary concerns internal Hom evaluation, not a general formal source.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of equivalence between finite modules over a completed ring and inverse systems of coherent sheaves",
+   "results": "AdicCompletion.transitionMap_comp_eval, AdicCompletion.congr and piEquivFin concern module completions, not the general-affine sheaf comparison. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv, LinearMap.ker",
+   "results": "LinearEquiv.ker_comp and quotient-kernel equivalences provide linear algebra only; none gives the formal-system dictionary.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*equivalence|affine.*natural.*comparison|quotient.*cone",
+   "results": "Mathlib search has no sheaf dictionary. Local lean/ search found CoherentFormalModuleAffineLimitEquivalence (natural cones on an open subscheme, without the inverse quotient-system comparison), FormalCompletionAffineNaturalComparison (only coherent completions, not an arbitrary formal source), and CompletionInternalHomAffineTensorDictionary (internal Hom evaluation, not this map). CoherentFormalModulesAffine supplies the needed Spec-level building block, not the full theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFormalMapPresentation",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-formal-map-presentation",
+   "place": "Affine representation and naturality steps, before the torsion argument",
+   "via": [
+    "lem-weil-pbc-affine-formal-map-presentation",
+    "lem-weil-pbc-torsion-controlled-affine-candidate",
+    "lem-weil-pbc-torsion-controlled-affine-algebraization",
+    "new-stage3-torsion-controlled-easy-algebraization-bridge",
+    "lem-weil-pbc-torsion-controlled-algebraization-construction",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFormalMapLimitDictionary",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFormalMapLimitDictionary.lean",
+  "declaration": "AlgebraicGeometry.affine_formal_map_limit_dictionary",
+  "statement": "theorem affine_formal_map_limit_dictionary\n    {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)\n    (H : CoherentModules X) (N : CoherentFormalModule X J)\n    (δ : N ⟶ (completion X J).obj H) :\n    let A := Γ(X, ⊤)\n    let I := J.ideal ⟨⊤, isAffineOpen_top X⟩\n    let S := AdicCompletion I A\n    let L := tilde.functor A ⋙ Scheme.Modules.pullback X.isoSpec.hom\n    let C := L ⋙ formalCompletionFunctor J\n    ∀ (P : ModuleCat.{u} A) (ε : L.obj P ≅ H.obj)\n      (η : C.obj P ≅ C.obj (ModuleCat.of A (S ⊗[A] P))),\n    ∃ Q : ModuleCat.{u} S,\n      letI := Module.restrictScalars A S Q\n      letI := IsScalarTower.restrictScalars A S Q\n      ∃ (φ : Q →ₗ[S] S ⊗[A] P)\n        (ρ : N.obj ≅ C.obj (ModuleCat.of A Q))\n        (a : Q ≃ₗ[A] ↥(limit (N.obj ⋙\n          SheafOfModules.evaluation X.ringCatSheaf (op ⊤)) : ModuleCat A))\n        (b : (S ⊗[A] P) ≃ₗ[A] ↥(limit (((completion X J).obj H).obj ⋙\n          SheafOfModules.evaluation X.ringCatSheaf (op ⊤)) : ModuleCat A)),\n        δ.hom = ρ.hom ≫ C.map (ModuleCat.ofHom (φ.restrictScalars A)) ≫\n          η.inv ≫ (formalCompletionFunctor J).map ε.hom ∧\n        ∀ x : Q, b (φ x) =\n          (lim.map (Functor.whiskerRight δ.hom\n            (SheafOfModules.evaluation X.ringCatSheaf (op ⊤)))).hom (a x)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T082345-L-1635749",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T082345-L-1635749",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
