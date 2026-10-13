@@ -25,6 +25,99 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
+private lemma restrict_map_app {X Y : Scheme.{uBC}} (f : X ⟶ Y)
+    [IsOpenImmersion f] {M N : Y.Modules} (v : M ⟶ N) (V : X.Opens) :
+    Hom.app ((restrictFunctor f).map v) V = Hom.app v (f ''ᵁ V) := rfl
+
+@[reassoc]
+private lemma app_naturality {X : Scheme.{uBC}} {M N : X.Modules}
+    (v : M ⟶ N) {V T : X.Opens} (i : T ⟶ V) :
+    Hom.app v V ≫ N.presheaf.map i.op = M.presheaf.map i.op ≫ Hom.app v T :=
+  (v.mapPresheaf.naturality i.op).symm
+
+@[reassoc]
+private lemma comparison_sections_comp {X Y : Scheme.{uBC}} (j : Y ⟶ X)
+    [IsOpenImmersion j] {F : X.Modules} {K : Y.Modules} (e : K ≅ F.restrict j)
+    {V Q : X.Opens} {T₀ T₁ T₂ T₃ : Y.Opens}
+    (i₁ : j ''ᵁ T₀ ⟶ V) (i₂ : T₁ ⟶ T₀) (i₃ : T₂ ⟶ T₁) (i₄ : T₃ ⟶ T₂)
+    (i₅ : Q ⟶ j ''ᵁ T₃) :
+    F.presheaf.map i₁.op ≫ (F.restrict j).presheaf.map i₂.op ≫
+      Hom.app e.inv T₁ ≫ K.presheaf.map i₃.op ≫ K.presheaf.map i₄.op ≫
+        Hom.app e.hom T₃ ≫ F.presheaf.map i₅.op =
+    F.presheaf.map (i₅ ≫ j.opensFunctor.map i₄ ≫ j.opensFunctor.map i₃ ≫
+      j.opensFunctor.map i₂ ≫ i₁).op := by
+  rw [app_naturality_assoc e.inv, app_naturality_assoc e.inv]
+  have he : Hom.app e.inv T₃ ≫ Hom.app e.hom T₃ = 𝟙 _ := by
+    rw [← Hom.comp_app, e.inv_hom_id, Hom.id_app]
+  rw [← Category.assoc (Hom.app e.inv T₃), he, Category.id_comp]
+  simp only [restrict_map, ← Functor.map_comp_assoc, ← Functor.map_comp]
+  congr 1
+
+set_option maxHeartbeats 800000 in
+-- Expanding the scheme restriction comparisons requires extra elaboration fuel.
+private lemma raw_lift_sections {X Y : Scheme.{uBC}} (p : Y ⟶ X)
+    {M : X.Modules} {N : Y.Modules} (φ : M ⟶ (pushforward p).obj N) (U : X.Opens)
+    {D : U.toScheme.Modules} {K : (p ⁻¹ᵁ U).toScheme.Modules}
+    (v : D ⟶ M.restrict U.ι) (e : K ≅ N.restrict (p ⁻¹ᵁ U).ι) :
+    let W := p ⁻¹ᵁ U
+    let h := p.resLE U W le_rfl
+    let w := (restrictAdjunction W.ι).unit.app N
+    let b : M ⟶ (pushforward U.ι).obj ((pushforward h).obj K) :=
+      φ ≫ (pushforward p).map w ≫
+        (pushforwardComp W.ι p).hom.app (N.restrict W.ι) ≫
+        (pushforwardCongr (p.resLE_comp_ι (U := U) (V := W) le_rfl)).inv.app
+          (N.restrict W.ι) ≫
+        (pushforwardComp h U.ι).inv.app (N.restrict W.ι) ≫
+        (pushforward U.ι).map ((pushforward h).map e.inv)
+    let k := v ≫ ((restrictAdjunction U.ι).homEquiv M ((pushforward h).obj K)).symm b
+    Hom.app k ⊤ ≫ K.presheaf.map
+        (eqToHom (by simp) : (⊤ : W.toScheme.Opens) ⟶ h ⁻¹ᵁ ⊤).op ≫
+      Hom.app e.hom ⊤ ≫ (restrictAppIso W.ι N ⊤).hom ≫
+        N.presheaf.map (eqToHom W.ι_image_top.symm).op =
+    Hom.app v ⊤ ≫ (restrictAppIso U.ι M ⊤).hom ≫
+      M.presheaf.map (eqToHom U.ι_image_top.symm).op ≫ Hom.app φ U := by
+  intro W h w b k
+  simp only [k, Adjunction.homEquiv_counit, Hom.comp_app,
+    restrict_map_app, restrictAdjunction_counit_app_app]
+  simp only [b, w, Hom.comp_app, pushforward_map_app,
+    pushforwardComp_hom_app_app, pushforwardComp_inv_app_app,
+    pushforwardCongr_inv_app_app, restrictAdjunction_unit_app_app,
+    restrictAppIso, Iso.refl_hom, Category.assoc]
+  simp only [Category.id_comp]
+  simp only [pushforward_obj_presheaf_map]
+  let V := U.ι ''ᵁ (⊤ : U.toScheme.Opens)
+  let T₀ := W.ι ⁻¹ᵁ (p ⁻¹ᵁ V)
+  let T₁ := h ⁻¹ᵁ (U.ι ⁻¹ᵁ V)
+  let T₂ := h ⁻¹ᵁ (⊤ : U.toScheme.Opens)
+  let i₁ : W.ι ''ᵁ T₀ ⟶ p ⁻¹ᵁ V := homOfLE (W.ι.image_preimage_le _)
+  let i₂ : T₁ ⟶ T₀ := eqToHom (by
+    simpa only [Scheme.Hom.comp_preimage] using
+      congrArg (fun f ↦ f ⁻¹ᵁ V) (p.resLE_comp_ι (U := U) (V := W) le_rfl))
+  let i₃ : T₂ ⟶ T₁ := (TopologicalSpace.Opens.map h.base).map
+    (eqToHom (U.ι.preimage_image_eq ⊤).symm)
+  let i₄ : (⊤ : W.toScheme.Opens) ⟶ T₂ := eqToHom (by simp [T₂])
+  let i₅ : W ⟶ W.ι ''ᵁ (⊤ : W.toScheme.Opens) := eqToHom W.ι_image_top.symm
+  change Hom.app v ⊤ ≫ Hom.app φ V ≫ N.presheaf.map i₁.op ≫
+    (N.restrict W.ι).presheaf.map i₂.op ≫ Hom.app e.inv T₁ ≫
+      K.presheaf.map i₃.op ≫ K.presheaf.map i₄.op ≫
+        Hom.app e.hom ⊤ ≫ N.presheaf.map i₅.op =
+    Hom.app v ⊤ ≫ M.presheaf.map (eqToHom U.ι_image_top.symm).op ≫ Hom.app φ U
+  calc
+    _ = Hom.app v ⊤ ≫ Hom.app φ V ≫ N.presheaf.map
+        (i₅ ≫ W.ι.opensFunctor.map i₄ ≫ W.ι.opensFunctor.map i₃ ≫
+          W.ι.opensFunctor.map i₂ ≫ i₁).op :=
+      congrArg (fun z ↦ Hom.app v ⊤ ≫ Hom.app φ V ≫ z)
+        (comparison_sections_comp W.ι e i₁ i₂ i₃ i₄ i₅)
+    _ = Hom.app v ⊤ ≫ Hom.app φ V ≫
+        ((pushforward p).obj N).presheaf.map (eqToHom U.ι_image_top.symm).op := by
+      rw [pushforward_obj_presheaf_map]
+      exact congrArg (fun z ↦ Hom.app v ⊤ ≫ Hom.app φ V ≫ N.presheaf.map z)
+        (Subsingleton.elim _ _)
+    _ = _ := congrArg (fun z ↦ Hom.app v ⊤ ≫ z)
+      (app_naturality φ (eqToHom U.ι_image_top.symm))
+
+set_option maxHeartbeats 600000 in
+-- The nested complex functors and their restriction adjunction need extra elaboration fuel.
 /-- Evaluate a restriction-adjunction lift on sections, with arbitrary resolutions
 and their prescribed restriction comparisons. This calculation involves one scheme
 map only, and no base-change square or equality between composite inverse images.
@@ -89,6 +182,14 @@ theorem restrictionResolutionLift_sections {X Y : Scheme.{uBC}}
     ΓS.map k ≫ a.inv ≫ B.sections.hom =
       A.sections.hom ≫
         ((RingedSpace.openModuleSections X.toRingedSpace U).mapHomologicalComplex
-          (ComplexShape.up ℕ)).map t := by sorry
+          (ComplexShape.up ℕ)).map t  := by
+  intro W h C P H G e₁ e₂ e₃ w b k ΓS ΓT a ha
+  apply HomologicalComplex.hom_ext
+  intro n
+  change Hom.app (k.f n) ⊤ ≫ a.inv.f n ≫ B.sections.hom.f n =
+    A.sections.hom.f n ≫ Hom.app (t.f n) U
+  rw [ha n, A.components n, B.components n]
+  exact raw_lift_sections p (t.f n) U (A.comparison.hom.f n)
+    ((HomologicalComplex.eval _ _ n).mapIso B.comparison)
 
 end AlgebraicGeometry.Scheme.Modules
