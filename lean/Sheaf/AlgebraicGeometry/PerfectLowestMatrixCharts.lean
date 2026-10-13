@@ -11,8 +11,12 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
+import Sheaf.AlgebraicGeometry.LowestResidueModelWithinOpen
+import Sheaf.AlgebraicGeometry.AffineFreeLowestMatrixLocus
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 
 /-! # Local matrix charts for lowest cohomology
 
@@ -66,6 +70,32 @@ theorem exists_perfectLowestMatrixCharts
             SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
               ((DerivedCategory.homologyFunctor
                 (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj
-                  ((derivedPullback ((h ≫ V.ι) ≫ U.ι)).obj E)) r) := by sorry
+                  ((derivedPullback ((h ≫ V.ι) ≫ U.ι)).obj E)) r) := by
+  intro x
+  obtain ⟨_, _, O, hxO, hO, P, hbounded, hrank, ⟨eP⟩⟩ :=
+    exists_finiteFreeResidueModel S E hE (U.ι x)
+  obtain ⟨V, hxV, hV, K, hb, hl, hf, ⟨eK⟩⟩ :=
+    lowestResidueModel_withinOpen S E a b hamp U x O hxO hO P hbounded hrank eP
+  have : IsAffine V.toScheme := hV
+  have hsr : derivedFiberBetti S E a (U.ι x) ≤ r := hU (U.ι x) x.property
+  obtain ⟨Z, i, hi, hfp, hZ⟩ := exists_affineFreeLowestMatrixLocus V.toScheme K a
+    (derivedFiberBetti S E a (U.ι x)) r hsr hb hl
+    (fun j ↦ ⟨derivedFiberBetti S E j (U.ι x), hf j⟩) (hf a)
+  refine ⟨V, hxV, Z, i, hi, hfp, fun T h ↦ ?_⟩
+  obtain ⟨_, _, _, c, _⟩ := exists_derivedPullbackComposition.{u, w}
+  let e : (derivedPullback h).obj (DerivedCategory.Q.obj K) ≅
+      (derivedPullback ((h ≫ V.ι) ≫ U.ι)).obj E :=
+    (derivedPullback h).mapIso eK.symm ≪≫ (c h (V.ι ≫ U.ι)).app E ≪≫
+      eqToIso (congrArg (fun f ↦ (derivedPullback f).obj E)
+        (Category.assoc h V.ι U.ι).symm)
+  let eH := (DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).mapIso e
+  constructor
+  · intro hh
+    have := (hZ T h).mp hh
+    exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso eH
+  · intro hh
+    have := hh
+    exact (hZ T h).mpr (SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso eH.symm)
 
 end AlgebraicGeometry.Scheme

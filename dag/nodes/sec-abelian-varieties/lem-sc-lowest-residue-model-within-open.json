@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-lowest-residue-model-within-open",
+ "kind": "statement",
+ "title": "Restrict a prescribed residue model inside an open below the Tor bound",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $E$ an object of $D(\\mathcal O_S)$ [def-pc-derived-category], and $a,b\\in\\mathbf Z$. Assume $H^j(E\\otimes^L F)=0$ for every module sheaf $F$ and $j<a$ or $j>b$ [def-pc-derived-tensor-cohomology-vanishes]. Let $U\\subseteq S$ be open with inclusion $u$ [def-weil-open-immersion], $x\\in U$, and $O\\subseteq S$ an affine open containing $u(x)$ [def-weil-affine-spectrum]. Suppose a bounded complex $P$ of module sheaves on $O$ is supplied, together with an isomorphism $E|_O\\cong P$ in the derived category [def-pc-derived-pullback], and an isomorphism $P^j\\cong\\mathcal O_O^{\\oplus\\beta_j(u(x))}$ for every integer $j$ [def-sc-derived-fiber-betti]. Then there exists an open neighbourhood $V\\subseteq U$ of $x$, with inclusion $v$, whose open subscheme is affine, and a bounded-above complex $K$ of module sheaves on $V$, such that $K^j=0$ for $j<a$, $K^j\\cong\\mathcal O_V^{\\oplus\\beta_j(u(x))}$ for every integer $j$, and $L(u\\circ v)^*E\\cong K$ in the derived category. No closed subscheme or rank locus is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "affine finite-free model paragraph (with Tag 0BCD)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-pc-derived-pullback",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof": [
+  {
+   "text": "Apply the stalkwise Tor-amplitude criterion at u(x) and tensor with its residue field. The derived residue fibre has zero cohomology below a, hence beta_j(u(x))=0 for j<a. The supplied free-term isomorphisms show that P has zero terms in those degrees. This uses the Tor hypothesis only; the residue model is supplied as input.",
+   "uses": [
+    "def-pc-derived-tensor-cohomology-vanishes",
+    "def-sc-derived-fiber-betti",
+    "lem-pc-tor-amplitude-open-local",
+    "lem-pc-affine-tor-amplitude-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an affine open W containing u(x) inside O intersect U, and regard W as an open V of U. Restrict P from O to W and transport module sheaves from the over-site to W.toScheme by the canonical module equivalence. Both functors are exact, preserve zero objects and finite free sheaves with their indexing types, and preserve the upper degree bound. Exact restriction applied to the supplied derived isomorphism, and its comparison with derived pullback, produce L(u composed with v)^*E isomorphic to Q(K). The ranks remain the ranks at the original point u(x).",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-module-pullback",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-pc-module-pullback",
+  "def-sc-derived-fiber-betti",
+  "def-weil-affine-spectrum",
+  "lem-pc-affine-tor-amplitude-criterion",
+  "lem-pc-tor-amplitude-open-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "local matrix-chart argument before gluing",
+  "note": "Isolates one strictly structural part of the local chart argument. Edge cases: empty schemes, rank zero and reversed Tor bounds are included."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict a bounded finite free residue model of a perfect complex to a prescribed affine open neighbourhood with terms below its Tor amplitude zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a bounded finite free residue model to an affine neighbourhood inside a prescribed open preserving the fibre ranks and eliminating terms below a Tor amplitude bound",
+   "results": "8 hits: AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.instLocallyOfFiniteTypeResLE, AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.reduce_to_affine_nbhd, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.sourceAffineLocally_morphismRestrict, AlgebraicGeometry.HasAffineProperty.restrict, AlgebraicGeometry.instLocallyOfFinitePresentationResLE. No theorem for the same derived model or representing locus.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*model|model.*residue|[Tt]or[Aa]mplitude",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean. No theorem for the same derived model or representing locus.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectLowestMatrixCharts",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: local closed loci of finite locally free lowest direct-image cohomology, affine model and matrix steps of Tag 0BDL",
+   "via": [
+    "lem-sc-perfect-lowest-matrix-charts",
+    "lem-sc-perfect-lowest-matrix-closed-locus",
+    "lem-sc-perfect-h0-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LowestResidueModelWithinOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/LowestResidueModelWithinOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lowestResidueModel_withinOpen",
+  "statement": "theorem lowestResidueModel_withinOpen\n    [∀ T : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace))]\n    (S : Scheme.{u})\n    [∀ O : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over O))]\n    (E : schemeDerivedCategory S) (a b : ℤ)\n    (hamp : ∀ F : SheafOfModules.{u} (moduleRings S.toRingedSpace),\n      ∀ j : ℤ, j < a ∨ b < j → schemeDerivedTensorCohomologyVanishes S E F j)\n    (U : S.Opens) (x : U.toScheme) (O : S.Opens)\n    (hxO : U.ι x ∈ O) (hO : IsAffineOpen O)\n    (P : CochainComplex (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over O)) ℤ)\n    (hbounded : ∃ c d : ℤ, ∀ j : ℤ, j < c ∨ d < j → IsZero (P.X j))\n    (hrank : ∀ j : ℤ, Nonempty (P.X j ≅ SheafOfModules.free\n      (R := (moduleRings S.toRingedSpace).over O)\n        (ULift.{u} (Fin (derivedFiberBetti S E j (U.ι x))))))\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings S.toRingedSpace) O).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj P) :\n    ∃ V : U.toScheme.Opens, x ∈ V ∧ IsAffine V.toScheme ∧\n      ∃ K : CochainComplex\n          (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) ℤ,\n        (∃ c : ℤ, ∀ j : ℤ, c < j → IsZero (K.X j)) ∧\n        (∀ j : ℤ, j < a → IsZero (K.X j)) ∧\n        (∀ j : ℤ, Nonempty (K.X j ≅ SheafOfModules.free\n          (R := moduleRings V.toScheme.toRingedSpace)\n            (ULift.{u} (Fin (derivedFiberBetti S E j (U.ι x)))))) ∧\n        Nonempty ((derivedPullback (V.ι ≫ U.ι)).obj E ≅\n          DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100048-L-2474674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100048-L-2474674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
