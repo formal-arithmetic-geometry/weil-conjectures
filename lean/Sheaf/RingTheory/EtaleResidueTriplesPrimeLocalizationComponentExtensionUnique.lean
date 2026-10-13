@@ -2,6 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUniqueAux
 
 @[expose] public section
 universe u
@@ -59,7 +60,12 @@ theorem etaleResidueTriples_primeLocalization_component_extension_unique
         β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =
           (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ →
         β ≫ b' = η.app s) :
-    b = b' := by sorry
+    b = b' := by
+  obtain ⟨s, β, hα, hφ, hEpi⟩ :=
+    etaleResidueTriples_primeLocalization_component_extension_unique_aux
+      R p K χ q ψ hψ hK t
+  apply (cancel_epi β).mp
+  rw [hb s β hα hφ, hb' s β hα hφ]
 
 end AlgebraicGeometry.Scheme
 
