@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-noetherian-principal-cover-model",
+ "kind": "statement",
+ "title": "Finite coefficient model of a principal-open cover",
+ "statement": "Let R be a commutative ring, n,c natural numbers, and f_i in R[x_1,...,x_n] [def-weil-pbc-mv-polynomial-ring]. Let R₀ be a finite type integer subring of R [def-weil-pbc-finite-type-algebra], with polynomials f₀,i mapping to f_i. Let ι be any type and G_j polynomials over R₀. Suppose every prime of S=R[x]/(f_i) avoids the image of some G_j [def-weil-affine-spectrum]. There exist a subring R₁ of R containing R₀ and finite type over ℤ, such that every prime of S₁=R₁[x]/(map(R₀→R₁)(f₀,i)) avoids map(R₀→R₁)(G_j) for some j. No fibre-dimension hypothesis or conclusion is included. The indexing type may be empty and both quotient rings may be zero.",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00SU, second and final paragraphs; original approximation split steps 4-5 (Tag 00SU; source read at https://stacks.math.columbia.edu/tag/00SU)"
+ },
+ "proof": [
+  {
+   "text": "By the basic-open/unit-ideal criterion the images g_j generate 1 in S. Ideal.span_eq_top_iff_finite gives a finite subset J of their image generating 1. Choose an index j(x) for each x in J. Ideal.mem_span_range_iff_exists_fun gives coefficients b_x with sum b_x x=1. Lift b_x through the quotient map to polynomials H_x. The polynomial t=1-sum H_x map(G_j(x)) maps to zero, hence belongs to the equation ideal. Express t=sum a_i f_i by the finite-span membership criterion. For an empty cover J may be empty and the same identity gives 1 in the equation ideal.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let C be the finite union of the coefficient sets of a_i and H_x, and construct R₁ as the underlying subring of Algebra.adjoin R₀ C in R. It contains the image of R₀ by the algebra-map membership property. Algebra.FiniteType.adjoin_of_finite and transitivity prove finite type over ℤ. The other polynomials already have coefficients in R₀; their maps therefore lie over R₁. Lift a_i and H_x using MvPolynomial.mem_range_map_iff_coeffs_subset. Their lifts are uniquely determined because R₁→R is injective.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Injectivity of the coefficient map on multivariate polynomials transports sum a₁,i f₁,i=1-sum H₁,x G₁,x to R₁[x]. Apply the quotient map: the equation terms vanish, so sum bar(H₁,x) bar(G₁,x)=1. If every G_j belonged to a given prime, its closure under polynomial multiplication and finite sums would put 1 in it, contradicting properness. This proves the descended cover.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00SU, second and final paragraphs; original approximation split steps 4-5 (Tag 00SU; source read at https://stacks.math.columbia.edu/tag/00SU); J3 Lean realization, source read online"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A principal open cover of a polynomial quotient descends to a finitely generated coefficient subring",
+   "results": "Service unavailable: Internal Server Error; attempted through msearch.py. No absence verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A principal open cover with bounded dimensions of localized fibers descends to a finitely generated coefficient subring",
+   "results": "FiniteType.of_span_eq_top_target/source and RingHom.locally_iff_finite supply local criteria, not coefficient-cover descent.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exists.*subring.*closure|coefficient.*unit.*ideal|finiteType_principal_cover_model; MvPolynomial.mem_range_map_iff_coeffs_subset; Ideal.span_eq_top_iff_finite; Mathlib.RingTheory.FiniteType, Ideal, Algebra.MvPolynomial; project DAG and Lean",
+   "results": "Only elementary finite-type, coefficient lifting and ideal-membership ingredients; no duplicate coefficient-cover theorem. Smooth.NoetherianDescent requires smoothness, absent here.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NoetherianBoundedCoverDescent",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Algebra, proof of Tag 00SU, second and final paragraphs; original approximation split steps 4-5 (Tag 00SU; source read at https://stacks.math.columbia.edu/tag/00SU)",
+   "via": [
+    "lem-weil-pbc-noetherian-bounded-principal-cover-descent",
+    "lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation",
+    "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+    "lem-weil-pbc-relative-global-complete-intersection-flat",
+    "lem-weil-pbc-equation-count-fibre-dimension-flat",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NoetherianPrincipalCoverModel",
+  "file": "lean/Sheaf/Paper/NoetherianPrincipalCoverModel.lean",
+  "declaration": "Algebra.exists_finiteType_principal_cover_model",
+  "statement": "theorem exists_finiteType_principal_cover_model (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) (R₀ : Subring R) (hR₀ : Algebra.FiniteType ℤ R₀) (f₀ : Fin c → MvPolynomial (Fin n) R₀) (hf₀ : ∀ i, MvPolynomial.map R₀.subtype (f₀ i) = f i) (ι : Type v) (G : ι → MvPolynomial (Fin n) R₀) (hcover : ∀ q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)), ∃ j, Ideal.Quotient.mk (Ideal.span (Set.range f)) (MvPolynomial.map R₀.subtype (G j)) ∉ q.asIdeal) : ∃ (R₁ : Subring R) (h₀₁ : R₀ ≤ R₁), Algebra.FiniteType ℤ R₁ ∧ ∀ q : PrimeSpectrum (MvPolynomial (Fin n) R₁ ⧸ Ideal.span (Set.range (fun i ↦ MvPolynomial.map (Subring.inclusion h₀₁) (f₀ i)))), ∃ j, Ideal.Quotient.mk (Ideal.span (Set.range (fun i ↦ MvPolynomial.map (Subring.inclusion h₀₁) (f₀ i)))) (MvPolynomial.map (Subring.inclusion h₀₁) (G j)) ∉ q.asIdeal",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100016-L-2465804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100016-L-2465804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
