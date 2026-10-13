@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-ce-stationary-comparisons-at-bounds",
+ "kind": "statement",
+ "title": "Stationary comparisons at specified outer filtration bounds",
+ "statement": "Let D(X,K) be any family of termwise etale hypercohomology presentations [def-weil-pbc-termwise-hypercohomology-presentation] and let e identify each page with its actual filtered-complex cycle/boundary quotient [lem-weil-pbc-ce-stationary-page-naturality]. There are simultaneous isomorphisms eInf from page r at (q,n-q) to gr^q D.H_n whenever r>=1 and D.L^(q+r) in degree n+1 is bottom and D.L^(q-r+1) in degree n-1 is top [def-sp-filtered-complex-subquotients]. For every sections-total chain map b preserving the filtration steps and every sequence map N induced by b on graded cycle representatives, the conjugated homology map c_X^{-1} H^n(b) c_Y restricts to step maps t satisfying ht. For every proof hc of successive inclusion compatibility, on pages satisfying both outer-step equalities in source and target, N under eInf equals cokernel.map(t_(q+1),t_q,hc). No support bound, inverse-image map, augmentation or first-page formula is assumed or constructed.",
+ "stmt_deps": [
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-weil-pbc-ce-stationary-page-naturality",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012K",
+  "place": "Steps 4--5 of lem-weil-pbc-supported-ce-filtered-totals; Stacks Tag 012K cycle/boundary formulas, induced cohomology filtration and graded cohomology equation"
+ },
+ "proof": [
+  {
+   "text": "Substitute bottom and top for the outer steps in the cycle and boundary formulas. The resulting subquotient is canonically the quotient of cohomology images of successive steps; fix the isomorphism by the quotient-to-image equation on actual cycles, not by choosing an arbitrary stable isomorphism.",
+   "uses": [
+    "lem-sp-filtered-stable-subquotient-at-bounds",
+    "lem-sp-filtered-complex-quotient-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the cohomology-image comparison by D.c and D.H_formula and compose with e. Its defining representative equation gives a simultaneous comparison for all q,n,r. Proof irrelevance removes dependence on the witnesses of the outer equalities.",
+   "uses": [
+    "def-weil-pbc-termwise-hypercohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The step factorizations of b induce homology maps on the cohomology images. Restrict and transport by c to give t and ht. Cancellation of the target step monomorphism gives successive inclusion compatibility.",
+   "uses": [
+    "lem-sp-filtered-cohomology-image-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The page representative equation and the canonical quotient-to-image comparison send every actual cycle to the same cycle image under b. The actual-cycle projections onto the stationary quotients are epi; cancel them to get the cokernel.map square. Its commutativity witness is irrelevant. This also covers zero steps and totals.",
+   "uses": [
+    "lem-sp-filtered-complex-quotient-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-stable-subquotient-at-bounds",
+  "lem-sp-filtered-complex-quotient-image-comparison",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-sp-filtered-cohomology-image-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 015J, 015K and 012K",
+  "place": "Steps 4--5 of lem-weil-pbc-supported-ce-filtered-totals; Stacks Tag 012K cycle/boundary formulas, induced cohomology filtration and graded cohomology equation; explicit refinement of the existing construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartan Eilenberg spectral sequence stationary page naturality support bound",
+   "results": "8 hits: CochainComplex.isLE_iff, CochainComplex.isGE_iff, HomologicalComplex.isSupported_iff, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, CochainComplex.exactAt_of_isGE, HomologicalComplex.exactAt_of_isSupported, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stationary.*comparison|secondFiltration.*step",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered Cartan Eilenberg total has natural stationary spectral sequence comparisons at explicit support bounds",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercohomologySupportedCETotals",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 4--5 of lem-weil-pbc-supported-ce-filtered-totals; Stacks Tag 012K cycle/boundary formulas, induced cohomology filtration and graded cohomology equation",
+   "via": [
+    "lem-weil-pbc-supported-ce-filtered-totals",
+    "lem-weil-pbc-supported-resolution-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": null,
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCEStationaryComparisonsAtBounds",
+  "file": "lean/Sheaf/Paper/EtaleCEStationaryComparisonsAtBounds.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleCE_stationary_comparisons_at_bounds",
+  "statement": "theorem exists_etaleCE_stationary_comparisons_at_bounds (D : ∀ (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})), EtaleTermwiseHypercohomology X K) (e : ∀ (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})), EtaleCEQuotientRealization (D X K)) : ∃ (eInf : ∀ (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (q n r : ℤ) (hr : 1 ≤ r) (hR : (D X K).L.complexStep (q + r) (n + 1) = ⊥ ∧ (D X K).L.complexStep (q - r + 1) (n - 1) = ⊤), ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q), ∀ {X Y : Scheme.{u}} (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) (b : (D X K).sectionsTotal ⟶ (D Y L).sectionsTotal) (N : (D X K).sequence ⟶ (D Y L).sequence), (∀ q : ℤ, ∃ s : ((D X K).L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ) ⟶ ((D Y L).L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ), s ≫ ((D Y L).L.step q).arrow = ((D X K).L.step q).arrow ≫ b) → EtaleCEPageMapOnRepresentatives (D X K) (D Y L) (e X K) (e Y L) b N → ∀ n : ℤ, ∃ (t : ∀ q : ℤ, (((D X K).H n).step q : AddCommGrpCat.{u + 1}) ⟶ (((D Y L).H n).step q : AddCommGrpCat.{u + 1})) (ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow = (((D X K).H n).step q).arrow ≫ (((D X K).c n).inv ≫ HomologicalComplex.homologyMap b n ≫ ((D Y L).c n).hom)), ∀ (hc : ∀ q : ℤ, Subobject.ofLE (((D X K).H n).step (q + 1)) (((D X K).H n).step q) (((D X K).H n).antitone_step (Int.le_add_one (le_refl q))) ≫ t q = t (q + 1) ≫ Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q) (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q)))), ∀ (q r : ℤ) (hr : 1 ≤ r) (hX : (D X K).L.complexStep (q + r) (n + 1) = ⊥ ∧ (D X K).L.complexStep (q - r + 1) (n - 1) = ⊤) (hY : (D Y L).L.complexStep (q + r) (n + 1) = ⊥ ∧ (D Y L).L.complexStep (q - r + 1) (n - 1) = ⊤), (N.hom r hr).f (q, n - q) ≫ (eInf Y L q n r hr hY).hom = (eInf X K q n r hr hX).hom ≫ cokernel.map (Subobject.ofLE (((D X K).H n).step (q + 1)) (((D X K).H n).step q) (((D X K).H n).antitone_step (Int.le_add_one (le_refl q)))) (Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q) (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q)))) (t (q + 1)) (t q) (hc q)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T015556-L-3021106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T015556-L-3021106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

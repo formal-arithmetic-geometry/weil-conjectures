@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.EtaleCETotalSections
 
+import Sheaf.Paper.EtaleCESupportedFirstPageLifts
+import Sheaf.Paper.EtaleCEStationaryComparisonsAtBounds
+
 /-! # Support-controlled filtered CE totals
 
 Source: Stacks Project, Tags 015J, 015K and 0EZM.
@@ -20,6 +23,18 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
+
+private theorem supported_complexStep_antitone
+    {X : Scheme.{u}}
+    {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})}
+    (D : EtaleTermwiseHypercohomology X K) (n : ℤ) :
+    Antitone (fun q ↦ D.L.complexStep q n) := by
+  intro a b hab
+  have h := imageSubobject_comp_le
+    ((Subobject.ofLE (D.L.step b) (D.L.step a) (D.L.antitone_step hab)).f n)
+    ((D.L.step a).arrow.f n)
+  simpa only [DecreasingFiltration.complexStep, ← HomologicalComplex.comp_f,
+    Subobject.ofLE_arrow] using h
 
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
@@ -133,6 +148,40 @@ theorem exists_etaleHypercohomology_supported_ce_filtered_totals :
                     (((D X K).H n).antitone_step (Int.le_add_one (le_refl q))))
                   (Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q)
                     (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q))))
-                  (t (q + 1)) (t q) (hc q)) := by sorry
+                  (t (q + 1)) (t q) (hc q)) := by
+  obtain ⟨D, M, e, hE, hLift, hSupport⟩ := exists_etaleCE_supported_first_page_lifts
+  obtain ⟨eBounds, hStable⟩ := exists_etaleCE_stationary_comparisons_at_bounds D e
+  have bounds (X : Scheme.{u})
+      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (q n r : ℤ)
+      (hR : ∃ a : ℤ, (∀ s : ℤ, s < a → IsZero (K.obj.X s)) ∧
+        max 1 (max (q - a + 2) (n - q + 2)) ≤ r) :
+      (D X K).L.complexStep (q + r) (n + 1) = ⊥ ∧
+        (D X K).L.complexStep (q - r + 1) (n - 1) = ⊤ := by
+    obtain ⟨a, ha, hr⟩ := hR
+    have hqa : q - a + 2 ≤ r :=
+      (le_max_left _ _).trans ((le_max_right _ _).trans hr)
+    have hnq : n - q + 2 ≤ r :=
+      (le_max_right _ _).trans ((le_max_right _ _).trans hr)
+    constructor
+    · apply bot_unique
+      rw [← (hSupport X K a ha (n + 1)).2]
+      exact supported_complexStep_antitone (D X K) (n + 1) (by omega)
+    · apply top_unique
+      rw [← (hSupport X K a ha (n - 1)).1]
+      exact supported_complexStep_antitone (D X K) (n - 1) (by omega)
+  let eInf := fun X K q n r hr hR ↦ eBounds X K q n r hr (bounds X K q n r hR)
+  refine ⟨D, M, eInf, hE, ?_⟩
+  intro X Y f K L v
+  obtain ⟨u, hu, hPres, hRep⟩ := hLift f K L v
+  refine ⟨u, hu, ?_⟩
+  intro n
+  obtain ⟨t, ht, hPage⟩ := hStable K L
+    ((D X K).totalSectionsIso.hom ≫ ceSectionsLift f u ≫ (D Y L).totalSectionsIso.inv)
+    (M f K L v) hPres hRep n
+  refine ⟨t, ht, ?_⟩
+  intro hc q r hr hX hY
+  exact hPage hc q r hr (bounds X K q n r hX) (bounds Y L q n r hY)
+
 
 end AlgebraicGeometry.Etale
