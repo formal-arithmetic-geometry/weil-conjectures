@@ -8,26 +8,41 @@
  ],
  "proof": [
   {
-   "text": "Proof: Use the natural K-flat computation of derived extension from R to B\n(Stacks Tag 06Y6) to identify source with its cohomology after restriction from A.\nRestriction sends algebraMap R A r times identity to r times identity.\nThe scalar identity of exists_baseDerivedExtension_linear therefore gives the\nsource formula. For target use ordinary tensor associativity on the A-K-flat\nresolution to identify it with cohomology of derived extension from A to\nA tensor_R B, restricted to B. The pure-tensor formulas make this comparison\nnatural. Apply exists_baseDerivedExtension_linear over A to algebraMap R A r.\nBalancing in A tensor_R B identifies its image with includeRight\n(algebraMap R B r); restriction therefore gives the required B scalar.\nFor either comparison, naturality for the scalar endomorphism gives a conjugate\nof the derived scalar map. Comparison components are B-linear, so cancellation\nof their isomorphisms gives precisely the displayed equality for the existing\nfunctor. The argument also covers r = 0, r = 1 and zero coefficient rings.",
+   "text": "For an additive module functor F that preserves quasi-isomorphisms between K-flat complexes, use the existing source-library F.leftDerivedFunctor and its counit. The chosen resolution P of M is K-flat and its augmentation s:P→M is a quasi-isomorphism. Naturality at a times identity gives resolution(a times identity) followed by s equal to s followed by a times identity. A-linearity of s identifies the latter with a times identity of P followed by s. Invert Q(s) to conclude equality of the two maps on P in the derived category. Apply F.leftDerivedFunctor and use naturality and invertibility of its counit on P to conclude equality of the derived images of the termwise F maps. The two natural homology factorization isomorphisms transport this to equality on ordinary homology. If F sends a times identity to b times identity on modules, componentwise extensionality and ShortComplex.homologyMap_smul give b times identity on this homology. This is the proved private helper resolution_homology_scalar, with the standard derived localizations and exact countable colimits on ModuleCat.",
    "uses": [
-    "lem-pc-base-derived-extension-linear",
-    "def-pc-ring-tensor-cohomology",
-    "lem-pc-base-tensor-ordinary-iso"
+    "def-pc-ring-tensor-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the source take F=extendScalars(R→B). Supply PreservesKFlatQuasiIso using the already proved scalarExtension_quasiIso_of_kFlat helper from KFlatScalarExtensionDerivedIso, accessed by a proof-only import all. Restriction maps algebraMap R A r times identity to r times identity by the definition of the restricted action. On tensor generators, balancing gives F(r times identity)=algebraMap R B r times identity. Apply the preceding helper to the restricted complex.",
+   "uses": [
+    "lem-sc-kflat-scalar-extension-derived-iso",
+    "def-pc-ring-tensor-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the target take F=restrictScalars(R→A) followed by extendScalars(R→B), now viewed as a module functor from A to B. To show that it preserves quasi-isomorphisms between A-K-flat complexes, apply scalarExtension_quasiIso_of_kFlat over A with coefficients A tensor_R B, then restrict to B. The pure-tensor formulas of exists_baseTensorOrdinaryIso give an isomorphism of arrows from this map to extension after restriction, proving the required quasi-isomorphism property. At the module level restriction and tensor balancing again send algebraMap R A r times identity to algebraMap R B r times identity. Apply resolution_homology_scalar to the A-resolution and combine the source and target equalities as a conjunction. No natural choice of the ordinary tensor isomorphisms is required: only their generator formulas are used to prove the arrow square. Zero rings, zero complexes, r=0 and r=1 require no exception.",
+   "uses": [
+    "lem-sc-kflat-scalar-extension-derived-iso",
+    "lem-pc-base-tensor-ordinary-iso",
+    "def-pc-ring-tensor-cohomology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-base-derived-extension-linear",
   "def-pc-ring-tensor-cohomology",
+  "lem-sc-kflat-scalar-extension-derived-iso",
   "lem-pc-base-tensor-ordinary-iso"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F4",
+  "group": "R4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
-  "place": "Tag 06Y6 and Tag 0DJ8"
+  "place": "Tags 06Y6 and 0DJ8; source-library K-flat counit and explicit Lean naturality argument by R4. Official Stacks pages checked online because this remote clone omits literature sources."
  },
  "mathlib_searches": [
   {
@@ -108,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T125009-L-3836414",
-  "kind": "interface",
+  "landing": "20261013T140824-L-315821",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
