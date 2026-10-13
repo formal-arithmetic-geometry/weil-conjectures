@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0333, finite-family compactness and localization paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteNormalCover",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_match": null,
+ "id": "lem-weil-pbc-finite-normal-cover-sup-normal",
+ "title": "Normality of the finite supremum from a normal-fiber cover",
+ "statement": "Let A be a domain and K its fraction field. Let s be a finite set of A-subalgebras of K all contained in the integral closure of A in K. Suppose for every prime p of A, some C in s has integrally closed localizations at every prime of C contracting to p. Then every prime localization of the supremum S of s is integrally closed. No Noetherian hypothesis, local-approximation hypothesis, or finite-module hypothesis is needed for this algebraic step.",
+ "proof": [
+  {
+   "text": "Finset.sup_le gives S contained in the integral closure; hence its elements are integral over A. For q in Spec S, contract to p in Spec A and choose C in s by the covering hypothesis. The inclusion C -> S exists by Finset.le_sup. Its contraction r of q is prime, lies over p by functoriality of contraction, and C_r is integrally closed by the hypothesis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A lies in C inside K, so K is the fraction field of C and of C_r. Every element of S is integral over A and thus over C_r. Localizing S at C minus r yields an integral extension T of C_r embedded in K, since the denominators are units of C_r. Every element of T is integral over C_r, hence normality of C_r identifies T with C_r inside K. This is the defining property isIntegrallyClosed_iff, together with integrality of sums and products and localization universal properties.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "C minus r maps into S minus q. Thus S_q is a further localization of T = C_r, at nonzero denominators. Normality of localizations gives IsIntegrallyClosed S_q.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-normal-domain"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0333, reverse implication, final localization argument",
+  "url": "https://stacks.math.columbia.edu/tag/0333"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integral birational extension normal local ring same fraction field localization at prime",
+   "date": "2026-10-13",
+   "results": "instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, IsIntegralClosure.isLocalization, IsIntegrallyClosed.of_localization_maximal, IsIntegrallyClosed.of_isLocalization_maximal, IsIntegralClosure.isLocalization_of_isSeparable, IsLocalization.Away.integralClosure, IsIntegrallyClosed.of_localization, isIntegrallyClosed_ofLocalizationMaximal",
+   "verdict": "No exact match. Standard ingredients only; searched again by the second reader."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegral, IsIntegrallyClosed",
+   "date": "2026-10-13",
+   "results": "IsIntegrallyClosed.algebraMap_eq_of_integral, isIntegrallyClosed_iff, IsIntegrallyClosed.isIntegral_iff, IsIntegrallyClosed.exists_algebraMap_eq_of_isIntegral_pow, Subring.isIntegrallyClosed_iff, minpoly.prime_of_isIntegrallyClosed, IsIntegrallyClosed.minpoly_smul, minpoly.isIntegrallyClosed_eq_field_fractions'",
+   "verdict": "No exact match. Standard ingredients only; searched again by the second reader."
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegrallyClosed_of_isLocalization|isIntegrallyClosed_iff|finite_sup",
+   "date": "2026-10-13",
+   "results": "Mathlib/Topology/Algebra/InfiniteSum/Group.lean, Mathlib/Topology/Algebra/InfiniteSum/Basic.lean, Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean, Mathlib/Algebra/DirectSum/Basic.lean, Mathlib/Analysis/Meromorphic/FactorizedRational.lean, Mathlib/RingTheory/FreeCommRing.lean, Mathlib/RingTheory/FreeCommRing.lean, Mathlib/Algebra/BigOperators/Finprod.lean",
+   "verdict": "No exact match. Standard ingredients only; searched again by the second reader."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The supremum of integral intermediate subalgebras of a fraction field is locally integrally closed when their normal fibers cover the prime spectrum of the base",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-normal-cover",
+   "place": "algebraic normality transfer for the finite supremum",
+   "via": [
+    "lem-weil-pbc-finite-normal-cover"
+   ],
+   "same_as": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteNormalCoverSupNormal",
+  "file": "lean/Sheaf/RingTheory/FiniteNormalCoverSupNormal.lean",
+  "declaration": "finite_normal_cover_sup_normal",
+  "statement": "theorem finite_normal_cover_sup_normal (A : Type u) (K : Type v)\n    [CommRing A] [IsDomain A] [Field K] [Algebra A K] [IsFractionRing A K]\n    (s : Finset (Subalgebra A K))\n    (hs : ∀ C ∈ s, C ≤ integralClosure A K)\n    (hcover : ∀ (p : Ideal A) [p.IsPrime], ∃ C ∈ s,\n      ∀ (q : Ideal C) [q.IsPrime], Ideal.comap (algebraMap A C) q = p →\n        IsIntegrallyClosed (Localization.AtPrime q)) :\n    ∀ (q : Ideal (s.sup (fun C : Subalgebra A K => C) : Subalgebra A K)) [q.IsPrime],\n      IsIntegrallyClosed (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T011936-L-2766394",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T011936-L-2766394",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

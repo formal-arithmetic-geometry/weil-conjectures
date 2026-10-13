@@ -3,6 +3,9 @@ module
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
+import Sheaf.RingTheory.FiniteNormalCoverFamily
+import Sheaf.RingTheory.FiniteNormalCoverSupNormal
+
 @[expose] public section
 
 universe u v
@@ -29,4 +32,6 @@ theorem exists_finite_normal_cover (A : Type u) (K : Type v)
       (∀ C ∈ s, C ≤ integralClosure A K ∧ Module.Finite A C) ∧
       ∀ (q : Ideal S) [q.IsPrime],
         IsIntegrallyClosed (Localization.AtPrime q) := by
-  sorry
+  obtain ⟨s, hs, hcover⟩ := exists_finite_normal_cover_family A K hAway hLocal
+  refine ⟨s, s.sup (fun C : Subalgebra A K => C), rfl, hs, ?_⟩
+  exact finite_normal_cover_sup_normal A K s (fun C hC ↦ (hs C hC).1) hcover
