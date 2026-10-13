@@ -10578,3 +10578,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/Q2/Sheaf.Algebra.Homology.LocalizedHomComplexCyclesForward (stage 3; reviewer PASS; first push; landing 20261013T015607-L-3024799 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:56 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransferExtClass (stage 3; reviewer PASS; first push; landing 20261013T015607-L-3024908 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:56 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.QuasicoherentFiniteCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261013T015607-L-3025017 (proof); batch 20261013T015540; modules 1; new nodes 0)
+- 01:56 L: merged deliver/Q3/Sheaf.CategoryTheory.FilteredQuotientComparisons (stage 3; reviewer PASS; first push; landing 20261013T015608-L-3025163 (interface); batch 20261013T015540; modules 2; new nodes 1)

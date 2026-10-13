@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-filtered-quotient-map-restrictions",
+ "kind": "statement",
+ "title": "Filtered morphism restrictions to cycles, boundary quotients and representatives",
+ "statement": "Let C be an abelian category [def-sp-abelian] and U,V finite filtered integer-indexed cochain complexes [def-sp-filtration]. Fix p,q,r in Z with r >= 1, a filtered map t:U -> V, step restrictions s_i with their inclusion equations, and a graded map g with its quotient projection equation. Assume boundary-to-cycle containments hBZ for the subobjects [def-sp-filtered-complex-subquotients]. There exist kz:Z_r(U)->Z_r(V) and k:coker(B_r(U)->Z_r(U))->coker(B_r(V)->Z_r(V)) with the cycle inclusion and cokernel projection squares. The same g admits page-one restrictions kz₁,k₁ with those squares. There is also ρ:R_r(U)->R_r(V), restricting s_p in degree p+q to unquotiented cycle representatives, with its inclusion equation. All equations are exactly those of the Lean record. No comparison isomorphisms, homology naturality or image naturality are assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.4; https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "The chain-map equation and filtration preservation imply s_p sends x with dx in F^(p+r) into the same condition in V. Apply the pullback universal property of complexCycleRepresentatives to restrict (s p).f(p+q), obtaining ρ and its inclusion equation.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The projection square for g sends the image of representatives defining complexCycles into the target cycle image, giving kz. The chain-map square preserves d(F^(p-r+1)), preservation of F^p preserves the intersection with that image, and preservation of F^(p+1) preserves the added filtration step. Projection therefore sends complexBoundaries into complexBoundaries. Restrict to the boundary subobjects, check the inclusion square by monic cancellation, then apply cokernel.map to get k.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Repeat the cycle and boundary restrictions at r=1 with the same s and g to get kz₁ and k₁. Zero objects and zero filtration steps obey the same universal properties, and r=1 needs no exceptional case.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "Q3 stage-3 worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, Lemma 12.24.4; categorical expansion of its explicit-representatives argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homology cycles modulo boundaries canonical quotient isomorphism naturality",
+   "date": "2026-10-13",
+   "results": "Eight hits including HomologicalComplex.π_homologyIsoSc'_hom and ShortComplex.leftHomologyIso_inv_naturality; no restriction theorem for the project filtration subobjects.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "cokernelIso",
+   "date": "2026-10-13",
+   "results": "No hits; unknown identifier cokernelIso. Inspected Mathlib cokernel.map and its projection equation directly.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered complex morphisms restrict to cycles and boundaries and commute with the canonical image of homology comparison",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "complexCycles|homologyπ_naturality; filtered and cycle restriction in Mathlib and both library roots",
+   "date": "2026-10-13",
+   "results": "Mathlib homologyπ_naturality and cyclesMap_i are used in the parent proof. filteredQuotient_canonical_functor assumes rather than constructs the restriction maps. No identical declaration found. blueprint_refs searches filtered quotient naturality and cycle boundary map returned zero blueprint matches.",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredQuotientComparisons",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Construction step 4: restrict filtered morphisms to the explicit cycle and boundary subquotients",
+   "via": [
+    "lem-sp-filtered-quotient-comparisons-rest",
+    "lem-sp-filtered-quotient-comparisons",
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredQuotientMapRestrictions",
+  "file": "lean/Sheaf/CategoryTheory/FilteredQuotientMapRestrictions.lean",
+  "declaration": "CategoryTheory.filteredQuotient_map_restrictions",
+  "statement": "theorem filteredQuotient_map_restrictions (C : Type u) [Category.{v} C] [Abelian C] (hBZ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q r : ℤ) (hr : 1 ≤ r), U.obj.filtration.complexBoundaries p (p + q) r ≤ U.obj.filtration.complexCycles p (p + q) r) (U V : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (t : U ⟶ V) (p q r : ℤ) (hr : 1 ≤ r) (s : ∀ a : ℤ, (U.obj.filtration.step a : CochainComplex C ℤ) ⟶ (V.obj.filtration.step a : CochainComplex C ℤ)) (g : U.obj.filtration.gradedPiece p ⟶ V.obj.filtration.gradedPiece p) (hs : ∀ i : ℤ, s i ≫ (V.obj.filtration.step i).arrow = (U.obj.filtration.step i).arrow ≫ t.hom.hom) (hg : U.obj.filtration.complexQuotientπ p (p + 1) (by omega) ≫ g = s p ≫ V.obj.filtration.complexQuotientπ p (p + 1) (by omega)) : ∃ (kz : (U.obj.filtration.complexCycles p (p + q) r : C) ⟶ (V.obj.filtration.complexCycles p (p + q) r : C)) (k : cokernel (Subobject.ofLE _ _ (hBZ U p q r hr)) ⟶ cokernel (Subobject.ofLE _ _ (hBZ V p q r hr))), kz ≫ (V.obj.filtration.complexCycles p (p + q) r).arrow = (U.obj.filtration.complexCycles p (p + q) r).arrow ≫ g.f (p + q) ∧ cokernel.π (Subobject.ofLE _ _ (hBZ U p q r hr)) ≫ k = kz ≫ cokernel.π (Subobject.ofLE _ _ (hBZ V p q r hr)) ∧ (∃ (kz₁ : (U.obj.filtration.complexCycles p (p + q) 1 : C) ⟶ (V.obj.filtration.complexCycles p (p + q) 1 : C)) (k₁ : cokernel (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ⟶ cokernel (Subobject.ofLE _ _ (hBZ V p q 1 (by omega)))), kz₁ ≫ (V.obj.filtration.complexCycles p (p + q) 1).arrow = (U.obj.filtration.complexCycles p (p + q) 1).arrow ≫ g.f (p + q) ∧ cokernel.π (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≫ k₁ = kz₁ ≫ cokernel.π (Subobject.ofLE _ _ (hBZ V p q 1 (by omega)))) ∧ ∃ ρ : (U.obj.filtration.complexCycleRepresentatives p (p + q) r : C) ⟶ (V.obj.filtration.complexCycleRepresentatives p (p + q) r : C), ρ ≫ (V.obj.filtration.complexCycleRepresentatives p (p + q) r).arrow = (U.obj.filtration.complexCycleRepresentatives p (p + q) r).arrow ≫ (s p).f (p + q)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T015608-L-3025163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T015608-L-3025163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
