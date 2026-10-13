@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-scheme-ordinary-evaluation-localization",
+ "kind": "statement",
+ "title": "Localization of the ordinary scheme evaluation equation",
+ "statement": "Let Y be a scheme, Q its derived localization and H its derived internal Hom. For arbitrary complexes P,F, let O be the degree-zero unit and V=Hom(P,O). Define c_M:Q Hom(P,M) to H(QP,QM) by applying Hom(P,-) to the fixed K-injective augmentation and then the inverse localization factorization. For isomorphisms eK:QP to K, eN:QF to N and an ordinary evaluation f:Tot(F tensor V) to Hom(P,F) satisfying the component predicate [def-pc-scheme-ordinary-evaluation-formula], the canonical tensor-Hom bijection [def-pc-canonical-derived-tensor-hom-bijection] sends (eN inverse tensor identity);mu;Qf;c_F;H(eK inverse,eN) to associator;N tensor uncurrying of (c_O;H(eK inverse,QO to 1));right unitor. The map QO to 1 is the inverse quotient comparison at O. This is only a morphism equation: it assumes no Hom-exactness, no K-flatness of V and no K-injectivity of F, and asserts no comparison is invertible.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ, 08DM and 08DQ; representative evaluation calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-scheme-ordinary-evaluation-formula",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-kinjective-complex",
+  "def-pc-derived-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Resolve the tensor inputs by K-flat complexes and apply the canonical tensor-Hom representative equation into the fixed K-injective target. The map from the ordinary Hom complex is Q of Hom(P,eta_M), followed by the inverse localization factorization; it is constructed without choosing arbitrary data.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-pc-kflat-resolution",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a total tensor summand followed by a Hom projection, evaluation naturality reduces to the ordinary component equation. The degree-zero unit forces the r+q=0 unit-action term, with zero in the other degrees. Coproduct inclusions and product projections detect equality. Localize, cancel the resolution quasi-isomorphisms, and transport along eK and eN using canonical three-variable naturality. No ordinary Hom or tensor comparison map is inverted.",
+   "uses": [
+    "def-pc-scheme-ordinary-evaluation-formula",
+    "lem-sc-hom-complex-projections",
+    "def-pc-canonical-derived-tensor-hom-bijection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-scheme-ordinary-evaluation-formula",
+  "def-pur-derived-internal-hom",
+  "lem-pc-kflat-resolution",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U4",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ, 08DM and 08DQ; representative evaluation calculation",
+  "description": "Step 3 of lem-pc-kinjective-scheme-evaluation-models, isolated before inverting ordinary comparison maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom evaluation localization ordinary complexes",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of ordinary tensor evaluation into the derived internal Hom",
+   "results": "ModuleCat.ihom_ev_app and monoidalClosedHomEquiv concern degreewise module evaluation; Tor results do not express the localized Hom-complex representative equation.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeOrdinaryEvaluation|schemeOrdinaryHomComparison; homComplex.*quasi|evaluation.*localiz|evaluation.*representative",
+   "results": "No existing scheme comparison morphism or localized evaluation equation. QuasiIsoHomComplexMap proves exactness on K-injective coefficients, not this evaluation equation.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KInjectiveSchemeEvaluationModels",
+  "group": "U4",
+  "date": "2026-10-14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-kinjective-scheme-evaluation-models",
+   "place": "Proof step 3, before inversion of the ordinary comparison maps"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeOrdinaryEvaluationLocalization.lean",
+  "declaration": "AlgebraicGeometry.schemeOrdinaryEvaluation_localization",
+  "declarations": [
+   "AlgebraicGeometry.schemeOrdinaryHomComparison",
+   "AlgebraicGeometry.schemeOrdinaryEvaluation_localization"
+  ],
+  "statement": "theorem schemeOrdinaryEvaluation_localization (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (K N : schemeDerivedCategory Y)\n    (P F : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (eK : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj F ≅ N)\n    (f : pullbackTensorTotal Y F\n        (homComplex (R := Y.sheaf) P\n          ((HomologicalComplex.single _ (.up ℤ) 0).obj\n            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))) ⟶\n      homComplex (R := Y.sheaf) P F)\n    (hf : IsSchemeOrdinaryEvaluation Y P F f) :\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf\n    let O := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n    let V := homComplex (R := Y.sheaf) P O\n    let c := schemeOrdinaryHomComparison Y P F ≫ H.map (eK.inv.op, eN.hom)\n    let d := schemeOrdinaryHomComparison Y P O ≫\n      H.map (eK.inv.op, ((DerivedCategory.quotientCompQhIso _).app O).inv)\n    schemeDerivedTensorHomEquiv Y (N ⊗ DerivedCategory.Q.obj V) K N\n        ((eN.inv ▷ DerivedCategory.Q.obj V) ≫ pullbackTensorModelMap Y F V ≫\n          DerivedCategory.Q.map f ≫ c) =\n      (α_ N (DerivedCategory.Q.obj V) K).hom ≫ N ◁\n        (schemeDerivedTensorHomEquiv Y (DerivedCategory.Q.obj V) K\n          (𝟙_ (schemeDerivedCategory Y)) d) ≫ (ρ_ N).hom",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T172659-L-2101415",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T172659-L-2101415",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

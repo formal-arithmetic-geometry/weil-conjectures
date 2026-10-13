@@ -24,30 +24,28 @@
  },
  "proof": [
   {
-   "text": "The coefficient F is already K-injective. The derived internal Hom factorization identifies its ordinary Hom target with RHom(K,N). Take the fixed functorial K-injective resolution of the degree-zero unit. Hom exactness makes Hom(P,eta_unit) a quasi-isomorphism. The derived internal Hom factorization, its localized inverse, and eK identify the actual ordinary dual with RHom(K,1). These comparison objects are actual Hom complexes, and no arbitrary witness of mere existence defines data.",
+   "text": "Construct the ordinary-to-derived Hom comparison by applying Hom(P,-) to the fixed K-injective augmentation, then composing with the inverse factorization isomorphism. The hhom hypothesis makes the augmentation map a quasi-isomorphism, so localization gives an isomorphism. Transport along eK,eN and the inverse quotient comparison QO to the derived unit to obtain b and an isomorphism d:QV to H(K,1).",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
     "def-pur-derived-internal-hom",
+    "def-pc-canonical-derived-tensor-hom-bijection",
     "def-pc-derived-category"
    ],
    "elementary": false
   },
   {
-   "text": "The K-flat dual computes derived tensor with every F: use symmetry to apply the K-flat first-factor comparison and then restore the order F tensor dual. Compose with eN and the dual comparison of the preceding step to get a. Take b to be the target comparison of that step. All comparison data are used existentially in the proof, not installed as choices in definitions.",
+   "text": "From hdual, the homotopy image of V is categorically K-flat: its tensor with acyclic complexes is acyclic, and braiding supplies the other side. Apply the upstream right-factor K-flat counit invertibility and the quotient tensor comparison to show the canonical localization tensor map mu:F tensor V is invertible. Construct a as tensorIso(eN inverse,d inverse), followed by asIso(mu).",
    "uses": [
-    "lem-pc-kflat-derived-tensor-comparison",
-    "lem-sc-scheme-derived-tensor-symmetry",
-    "def-pc-kflat-complex"
+    "def-pc-kflat-complex",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback-tensor-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Use K-flat resolutions of the tensor inputs and the same fixed K-injective target as the canonical tensor-Hom representative equation. Uncurry the identity of the dual and form its tensor with F. Follow a degree-(p,q) tensor inclusion by the r-th Hom projection. Associator and symmetry restore F tensor dual; evaluating the dual on P^r and acting on F^p by the unit gives the scheme-site hf component when r+q=0, and every other component is zero because the unit is supported in degree zero. Evaluation is natural with the resolution maps. The tensor coproduct inclusions and Hom product projections detect equality of chain maps. Localize that equality and cancel the Hom resolution isomorphisms to obtain the square. This calculation asserts no inverse of f and uses neither boundedness nor finite freeness.",
+   "text": "Apply the ordinary evaluation localization equation. The canonical family naturality applied to d and the identity of H(K,1), together with associator naturality, computes the uncurrying of (N tensor d);g. Injectivity of the canonical bijection identifies that composite with (eN inverse tensor identity);mu;Qf;b inverse. Cancel N tensor d and b inverse, both isomorphisms, to obtain the required square.",
    "uses": [
-    "def-pc-canonical-derived-tensor-hom-bijection",
-    "lem-pc-kflat-resolution",
-    "def-pc-scheme-ordinary-evaluation-formula",
-    "lem-sc-hom-complex-projections"
+    "lem-pc-scheme-ordinary-evaluation-localization",
+    "def-pc-canonical-derived-tensor-hom-bijection"
    ],
    "elementary": false
   }
@@ -55,22 +53,19 @@
  "proof_deps": [
   "def-pc-canonical-derived-tensor-hom-bijection",
   "def-pc-derived-category",
+  "def-pc-derived-pullback-tensor-comparison",
   "def-pc-kflat-complex",
-  "def-pc-scheme-ordinary-evaluation-formula",
+  "def-pc-scheme-derived-tensor-structure",
   "def-pur-derived-internal-hom",
-  "lem-pc-kflat-derived-tensor-comparison",
-  "lem-pc-kflat-resolution",
-  "lem-sc-hom-complex-projections",
-  "lem-sc-scheme-derived-tensor-symmetry",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pc-scheme-ordinary-evaluation-localization"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "W2",
+  "group": "U4",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tags 08DJ, 08DM and 08DQ; representative evaluation calculation",
-  "description": "Explicit part of the original node plan; official Stacks pages 08DJ, 08DM and 08DQ read online."
+  "description": "Explicit Hom and right-factor K-flat comparison constructions; canonical naturality combines them with the remaining component calculation."
  },
  "mathlib_searches": [
   {
@@ -159,9 +154,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T164050-L-1668798",
+  "landing": "20261013T172659-L-2101415",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
