@@ -24,20 +24,41 @@
  ],
  "proof": [
   {
-   "text": "Apply the abelian-category element chase described in the source.",
+   "text": "Obtain M : DerivedMaps X from derivedMaps_exists in [def-sp-exact-couple]. This supplies all three descent equations and the exactness fields.",
    "uses": [
-    "lem-sp-derived-couple-exact"
+    "def-sp-exact-couple"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For alpha, the derivedDInclusion is an image inclusion followed by an equality isomorphism, hence monic. Compare the assumed equation with M.alpha_comm and cancel this inclusion.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For f, derivedEProjection is a cokernel projection, hence epic, and the target derivedDInclusion is monic. Compare the assumed equation with M.f_comm, reassociate, and cancel both maps using Mathlib cancel_epi and cancel_mono.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For g, factorThruImage of the incoming alpha is epic in an abelian category. Compare the assumed equation with M.g_comm and cancel this epimorphism. Assemble M and the three uniqueness implications.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-derived-couple-exact"
+  "def-sp-exact-couple"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Section 12.21: statement Lemma 12.21.2 (Tag 011R, proof omitted) with Definitions 12.21.1, 12.21.3 (Tags 011Q, 011S) and Remark 12.21.5 (Tag 0AMJ, whose footnote sketches the well-definedness of g'); the element chases of Steps 2-3 and 7-9 are written by the agent, in the test-object style of Lemma 12.21.4 (Tag 011T) and Lemma Tag 08N5. WANTED: Weibel, An Introduction to Homological Algebra, Section 5.9 (exact couples)."
+  "place": "Tags 011R and 0AMJ; E4 formalizes uniqueness directly by Mathlib mono/epi cancellation after the existing derivedMaps_exists construction. Source consulted online at https://stacks.math.columbia.edu/tag/011R and https://stacks.math.columbia.edu/tag/0AMJ because the local source file is absent."
  },
  "mathlib_searches": [
   {
@@ -149,13 +170,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261012T194158-L-470988",
-  "kind": "interface",
+  "landing": "20261013T015549-L-3018860",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
