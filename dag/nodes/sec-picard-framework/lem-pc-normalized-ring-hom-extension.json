@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-normalized-ring-hom-extension",
+ "kind": "statement",
+ "title": "Normalized scalar-extension map of ring-site Hom complexes",
+ "statement": "Let $A,B$ be commutative rings, $\\varphi:A\\to B$ a ring homomorphism, and $\\mathcal M_A,\\mathcal M_B$ the categories of sheaves of modules on the one-object category with only its identity and bottom topology, with constant rings $A,B$ [def-weil-sheaf-of-modules-category]. Let $F:\\mathcal M_A\\to\\mathcal M_B$ be additive, with specified object equalities $h_M:F(M)=M\\otimes_A B$ and maps equal to scalar extension transported by $h_M,h_N$ [def-pur-sheaf-tensor-product]. For arbitrary cochain complexes $P,Q$, let $F^\\bullet$ apply $F$ termwise and let $H_A,H_B$ be the shared Hom complexes with the actual chosen product projections [def-pur-hom-complex] into internal Homs [def-pur-sheaf-hom]. There exists a chain map $\\chi_{P,Q}:F^\\bullet H_A(P,Q)\\to H_B(F^\\bullet P,F^\\bullet Q)$ such that, at every degree $n$, coordinate $p$, site object $U$ and sections $f\\in H_A(P,Q)^n(U)$, $x\\in P^p(U)$ and $b,c\\in B$, its evaluation satisfies $\\operatorname{ev}_p(\\chi_{P,Q}(b\\otimes f))(c\\otimes x)=bc\\otimes\\operatorname{ev}_p(f)(x)$. Each displayed pure tensor means the tensor followed by the shared sheafification unit and the inverse of $h$, and each evaluation uses the projection chosen with $H_A$ or $H_B$, then the identity slice object. No boundedness, projectivity, perfectness, flatness or derived-category hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "equation-base-change-RHom; chain-level realization via sites-cohomology.tex, section-hom-complexes (Tag 0A8X)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "For every coordinate p of degree n, define the B-linear extended evaluation by (b tensor f)(c tensor x)=bc tensor f_p(x). Additivity, A-linearity of f_p and commutativity of B verify both tensor balancing relations. Slice restrictions commute with this formula. Transport through the sheafification unit and the specified object equalities of extension. Compose with each of the shared Hom-complex product projections, then use the target product universal property to assemble degree maps. This uses no assertion that tensor commutes with infinite products.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Verify the chain identity after every target product projection and on pure tensors. The given equality for F.map identifies extension of the differentials with their ordinary scalar-extension maps. In adjacent degrees the two contributions on both sides are bc tensor d_Q(f_p(x)) and minus (-1)^n bc tensor f_{p+1}(d_P(x)); additivity gives equality of their difference. In other degrees both differentials are zero. Pure tensors generate scalar extension on this bottom-topology site, and equality of product coordinates implies equality of the degree maps. Thus the assembled maps form the required chain map and have exactly the prescribed normalization.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "equation-base-change-RHom; chain-level realization via sites-cohomology.tex, section-hom-complexes (Tag 0A8X)",
+  "note": "Explicit chain-level construction underlying the canonical derived map; the differential calculation is expanded here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars natural map tensor Hom complexes to Hom of extended complexes",
+   "results": "8 hits: HomologicalComplex.tensorHom, ModuleCat.ExtendScalars.map_tmul, ModuleCat.ExtendScalars.map', HomologicalComplex.extendMap, HomologicalComplex.extendMap_f, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, HomologicalComplex.ιTensorObj, HomologicalComplex.extendMap_comp",
+   "date": "2026-10-13",
+   "verdict": "No exact Hom-complex scalar-extension comparison; hits concern ordinary maps or tensors."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Cc]hange|[Cc]hange.*homComplex",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact Hom-complex scalar-extension comparison; hits concern ordinary maps or tensors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension map from the Hom complex of modules to the Hom complex of scalar extensions exists for arbitrary complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "12 hits, including extendScalars, extendRestrictScalarsAdj and its hom equivalence; none states the normalized Hom-complex chain map.",
+   "date": "2026-10-13",
+   "verdict": "Second reading: useful termwise scalar-extension infrastructure, no duplicate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The algebraic RHom comparison underlying finite duality; here only its scalar-extension Hom-complex chain map, before derived localization.",
+   "via": [
+    "def-pc-perfect-rhom-base-change-map",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.NormalizedRingHomExtension",
+  "file": "lean/Sheaf/Algebra/Homology/NormalizedRingHomExtension.lean",
+  "declaration": "CategoryTheory.normalizedRingHomExtension_exists",
+  "statement": "theorem normalizedRingHomExtension_exists {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (F : RingSiteModules A ⥤ RingSiteModules B) (h : ∀ M, F.obj M = SheafOfModules.changeOfRings (ringSiteMap φ) M) (hm : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom (ringSiteMap φ) M f ≫ eqToHom (h N).symm) (hF : F.Additive) (P Q : CochainComplex (RingSiteModules A) ℤ) : ∃ χ : (ringExtensionComplex F hF).obj (homComplex (R := CochainComplex.onePointRingSheaf A) P Q) ⟶ homComplex (R := CochainComplex.onePointRingSheaf B) ((ringExtensionComplex F hF).obj P) ((ringExtensionComplex F hF).obj Q), ∀ (n p : ℤ) (U : (Discrete PUnit.{u + 1})ᵒᵖ) (b c : B) (f : (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n |>.val.obj U) (x : (P.X p).val.obj U), ringHomEvaluate ((ringExtensionComplex F hF).obj P) ((ringExtensionComplex F hF).obj Q) n p U (((χ.f n).val.app U) (ringExtensionPure φ F h _ U b f)) (ringExtensionPure φ F h (P.X p) U c x) = ringExtensionPure φ F h (Q.X (p + n)) U (b * c) (ringHomEvaluate P Q n p U f x)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.RingSiteModules",
+   "CategoryTheory.ringSiteMap",
+   "CategoryTheory.ringHomComplexProjection",
+   "CategoryTheory.ringHomEvaluate",
+   "CategoryTheory.ringExtensionComplex",
+   "CategoryTheory.ringExtensionPure",
+   "CategoryTheory.normalizedRingHomExtension_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4fee8",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T111927-L-3064663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4fee8",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T111927-L-3064663",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, unchanged relocated definitions, proof and remaining chain-map theorem with their DAG records; verified declared users, import compatibility, compilation and axioms."
+ }
+}
