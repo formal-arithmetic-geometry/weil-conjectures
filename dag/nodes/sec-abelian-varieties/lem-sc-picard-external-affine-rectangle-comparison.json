@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-picard-external-affine-rectangle-comparison",
+ "kind": "statement",
+ "title": "Natural affine rectangle comparison of coefficient short complexes",
+ "statement": "Let $k$ be a field [def-weil-field], let $f:X\\to\\operatorname{Spec}k$ and $g:Y\\to\\operatorname{Spec}k$ be morphisms of schemes [def-pc-scheme], and let $U\\subset X$ and $V\\subset Y$ be affine opens. Let $S=(F_1\\to F_2\\to F_3)$ be a short complex of module sheaves on $X$ with all three terms quasi-coherent [pqf-def-coherent], and let $G$ be quasi-coherent on $Y$. Put $W=\\mathrm{pr}_1^{-1}U\\cap\\mathrm{pr}_2^{-1}V$ in $X\\times_kY$ [def-pc-fibre-product]. There is an isomorphism of short complexes between the scalar sections of $S$ on $U$ tensored over $k$ with the scalar sections of $G$ on $V$, and the scalar sections on $W$ of $\\mathrm{pr}_1^*S\\otimes\\mathrm{pr}_2^*G$. Pullback means tensorPullback [def-pc-module-pullback] and scalar sections mean [def-sc-field-linear-module-cohomology-operations]. In particular, both arrows commute with the three term comparisons. There is no exactness hypothesis on $S$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, affine case and equation-kunneth-on-cech; https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "proof": [
+  {
+   "text": "The delivered canonical rectangle map is natural in the left coefficient. For each of the three quasi-coherent terms of S, use its bijectivity to obtain an isomorphism of scalar section modules via ConcreteCategory.isIso_iff_bijective and asIso.",
+   "uses": [
+    "lem-sc-picard-external-rectangle-sections-bijective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use ShortComplex.isoMk with these three isomorphisms. The two commutativity equations are the symmetries of picardExternalRectangleSectionsMap_naturality for S.f and S.g. The zero-map instance needed to form the mapped short complex follows from the additive pullback adjunction and additive tensoring. The proof is complete and requires no exactness hypothesis.",
+   "uses": [
+    "lem-sc-picard-external-rectangle-sections-bijective",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-picard-external-rectangle-sections-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Canonical affine section comparison; expanded using naturality of actual projection pullback units"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of an external product of quasi-coherent sheaves on affine opens naturally identify with tensor products of sections",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The external product on an affine rectangle induces an isomorphism of short complexes with the tensor product of affine sections",
+   "results": "Eight hits about Scheme.Pullback.Triplet.tensorCongr; none assembles module section comparisons. A separate exactness search found Module.Flat.rTensor_shortComplex_exact.",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No assembled rectangle comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "external section comparison; externalGlobalSectionsTensor_bijective_of_isAffine; scalarUnitSection; tensorHom_app_tmulSection; rTensor_shortComplex_exact",
+   "results": "Read ExternalSectionsComponents (explicit section units), ExternalGlobalSectionsTensorAffine (bijection for whole affine schemes), ModulePullbackAffineSections (natural affine pullback bijection), QuasiCoherentTensorProductAffineSections (affine tensor bijection), TensorSection (tensor naturality). None directly states the rectangle comparison natural in the coefficient; global affine result requires restriction to both factors.",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "Reuse scalarUnitSection and scalarRestriction; isolate only rectangle bijectivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.isoMk",
+   "results": "Nine hits, including ShortComplex.isoMk and its component formulas; this constructor is used in the proved comparison, but no affine rectangle statement is supplied.",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "Use isoMk to assemble the comparison"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalAffineRectangleExact",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED affine rectangle section comparison in the coefficient exactness argument",
+   "via": [
+    "lem-sc-picard-external-affine-rectangle-exact",
+    "lem-sc-picard-external-cup-left-cech-exact",
+    "lem-sc-picard-external-cup-left-comparison-complexes",
+    "lem-sc-picard-external-cup-left-homology-ladder",
+    "lem-sc-picard-external-cup-shift-left",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalAffineRectangleComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalAffineRectangleComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternal_affine_rectangle_comparison",
+  "statement": "theorem picardExternal_affine_rectangle_comparison\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (U : X.Opens) (V : Y.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V)\n    (S : ShortComplex X.Modules)\n    [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent]\n    (G : Y.Modules) [G.IsQuasicoherent] :\n    Nonempty\n      (((S.map (picardScalarSectionsFunctor f U)).map\n        (tensorRight ((picardScalarSectionsFunctor g V).obj G))) ≅\n        (S.map ((tensorPullback (pullback.fst f g) ⋙\n          tensorRight ((tensorPullback (pullback.snd f g)).obj G)) ⋙\n          picardScalarSectionsFunctor (pullback.fst f g ≫ f)\n            (pullback.fst f g ⁻¹ᵁ U ⊓ pullback.snd f g ⁻¹ᵁ V))))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T131325-L-4033822",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T131325-L-4033822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

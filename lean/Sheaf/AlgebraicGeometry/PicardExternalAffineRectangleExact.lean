@@ -11,6 +11,8 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+import Sheaf.AlgebraicGeometry.PicardExternalAffineRectangleComparison
+import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Exactness on affine rectangles of the external coefficient
 
@@ -67,7 +69,11 @@ theorem picardExternal_affine_rectangle_exact
     (G : Y.Modules) [G.IsQuasicoherent] :
     (S.map (picardExternalCoefficientFunctor f g G ⋙
       picardScalarSectionsFunctor (pullback.fst f g ≫ f)
-        (pullback.fst f g ⁻¹ᵁ U ⊓ pullback.snd f g ⁻¹ᵁ V))).ShortExact := by sorry
+        (pullback.fst f g ⁻¹ᵁ U ⊓ pullback.snd f g ⁻¹ᵁ V))).ShortExact := by
+  have hs := picardScalar_affine_sections_exact f U hU S hS
+  have ht := hs.map_of_exact (tensorRight ((picardScalarSectionsFunctor g V).obj G))
+  obtain ⟨e⟩ := picardExternal_affine_rectangle_comparison f g U V hU hV S G
+  exact ShortComplex.shortExact_of_iso e ht
 
 end
 end AlgebraicGeometry.Scheme.Modules
