@@ -3,25 +3,240 @@
  "blueprint": {
   "is": "def-weil-pbc-site-comparison-morphism",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The comparison morphism of sites",
- "statement": "For a scheme $T$, the inclusion of etale $T$-schemes into weakly etale\n$T$-schemes is continuous and preserves finite limits. It defines a geometric\nmorphism\n\n$$\n \\nu_T:T_{\\Proet}\\longrightarrow T_{\\Et},\n \\qquad\n \\nu_T^*:\\Sh(T_{\\Et})\\rightleftarrows\n \\Sh(T_{\\Proet}):\\nu_{T,*}.\n$$\n\nFor a finite discrete ring $\\Lambda$, the same adjunction acts on sheaves of\n$\\Lambda$-modules.",
+ "statement": "For a scheme $T$, the inclusion of etale $T$-schemes into weakly etale\n$T$-schemes is continuous and preserves finite limits. It defines a geometric\nmorphism\n\n$$\n \\nu_T:T_{\\Proet}\\longrightarrow T_{\\Et},\n \\qquad\n \\nu_T^*:\\Sh(T_{\\Et})\\rightleftarrows\n \\Sh(T_{\\Proet}):\\nu_{T,*}.\n$$\n\nFor a finite discrete ring $\\Lambda$, the same adjunction acts on sheaves of\n$\\Lambda$-modules.\n\nExplicitly, write $u_T:T_{\\Et}\\to T_{\\Proet}$ for the inclusion, identity on underlying schemes and arrows. Define $(\\nu_{T,*}G)(U)=G(u_T(U))$ and define $\\nu_T^*F=(u_{T,p}F)^\\#$ [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction], where $\\#$ is sheafification [def-weil-pbc-sheafification] and\n$$ (u_{T,p}F)(W)=\\varinjlim_{(U,\\,W\\to u_T(U))\\in\\mathcal I_W^{op}}F(U). $$\nThe objects of $\\mathcal I_W$ are these pairs and an arrow to $(U',\\phi')$ is an etale-site morphism $a:U\\to U'$ with $u_T(a)\\phi=\\phi'$. All indexing categories are small in the larger universe fixed for the sites. The adjunction has finite-limit-preserving left adjoint, which is the meaning of geometric morphism here. On fixed-$\\Lambda$ module sheaves [def-weil-sheaf-of-modules-category], apply these functors to the underlying sheaf of sets, addition, zero, negation and each scalar endomorphism $\\lambda_r$ ($r\\in\\Lambda$).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-site-comparison-morphism.md",
   "place": "node def-weil-pbc-site-comparison-morphism, order 1277"
  },
  "stmt_deps": [
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "An etale map $f:U\\to T$ is flat and unramified by the etale definition. Its diagonal is therefore an open immersion. An open immersion identifies the source with an open subscheme, so its induced local-ring maps are isomorphisms: transporting the module structure along such an isomorphism identifies tensoring with that local ring with the identity functor, which preserves exact sequences. Thus an open immersion is flat by the local-ring definition of flatness. In particular the diagonal of $f$ is flat, and $f$ is weakly etale by definition. Choose the etale and pro-etale sites with the same bounds inside the larger skeleton universe of the pro-etale-site node. The identity assignment on schemes and $T$-morphisms is consequently a well-defined functor $u_T:T_{\\Et}\\to T_{\\Proet}$; it preserves identities and composition because both categories use scheme morphisms.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099R (section-comparison), opening paragraph and site-choice footnote; 094P (more-morphisms-definition-weakly-etale), following sentence"
+   }
+  },
+  {
+   "text": "The object $T\\to T$ is terminal on both sites: from any object its structure morphism is the unique arrow over $T$. For arrows $U\\to V\\leftarrow U'$ in the etale site, its fibre product $P=U\\times_VU'$ is the scheme fibre product by the etale-site statement and is an etale $T$-object. Step 1 makes $P$ a pro-etale object. For any pro-etale $W\\to T$ with compatible arrows to $U,U'$, the scheme fibre-product universal property gives a unique arrow $W\\to P$, automatically over $T$; this is an arrow of the pro-etale site because its morphisms are all $T$-morphisms. Hence the same cone is a fibre-product cone there. Terminal objects and fibre products yield all finite limits: products are fibre products over the terminal object, and the equalizer of $a,b:U\\rightrightarrows V$ is the fibre product of $(a,b):U\\to V\\times_TV$ with the diagonal $V\\to V\\times_TV$. The same cones are preserved by $u_T$, proving finite-limit preservation without citing a restatement of this assertion.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-proetale-site",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099R (section-comparison), opening paragraph, using 00X6 (sites-proposition-get-morphism), terminal-object and fibre-product hypotheses"
+   }
+  },
+  {
+   "text": "Let $\\{U_i\\to U\\}$ be an etale covering family. The existing fpqc-finer-than-etale statement supplies flatness and, over every affine open $V\\subset U$, finitely many affine opens in the $U_i$ whose images have union exactly $V$. Each covering arrow is etale by the etale-site definition, hence weakly etale by the local-ring argument in step 1. These are precisely the two requirements for a pro-etale covering in the pro-etale-site statement. Thus $u_T$ sends coverings to coverings. Step 2 identifies $u_T(U_i\\times_UU_j)$ with $u_T(U_i)\\times_{u_T(U)}u_T(U_j)$. For a pro-etale sheaf $G$, the diagram testing the sheaf condition for $G\\circ u_T$ on this etale cover is therefore the sheaf-condition diagram of $G$ on its image cover. Its unique gluing proves that restriction is a sheaf. Cover preservation and these fibre-product identifications verify continuity as defined in Stacks 00WV.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "def-weil-weakly-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099R (section-comparison), opening paragraph; 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc); 00WV (sites-definition-continuous) and 00WW (sites-lemma-pushforward-sheaf)"
+   }
+  },
+  {
+   "text": "By step 3 restriction along $u_T$ sends sheaves to sheaves. Apply the sheaf adjunction lemma for sets: the sheafification of $u_{T,p}F$, with the displayed comma-category colimit, is left adjoint to restriction. Apply the presheaf pullback lemma with $\\mathcal C=T_{\\Et}$ and $\\mathcal D=T_{\\Proet}$: since the etale-site statement and step 2 give finite limits in $\\mathcal C$, preservation of fibre products by $u_T$, and the terminal object $T/T$ in both categories, $\\mathcal I_W^{op}$ is filtered and $u_{T,p}$ preserves finite limits. Sheafification preserves finite limits by the sheafification-exactness lemma; hence their composite preserves finite limits. This proves that the defined adjunction is a geometric morphism, in the asserted direction.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites Tags 00WX (lemma-adjoint-sheaves), 00X6 (proposition-get-morphism), 00WJ (lemma-sheafification-exact)"
+   }
+  },
+  {
+   "text": "For the module construction first lift the set adjunction to abelian group objects using the product-preserving adjunction lemma, and identify these with abelian sheaves using the sheaf-algebraic-structures lemma. For each $r\\in\\Lambda$, give $\\nu_T^*F$ the scalar endomorphism $\\nu_T^*(\\lambda_r)$, and $\\nu_{T,*}G$ the scalar endomorphism $\\nu_{T,*}(\\lambda_r)$. The scalar laws are $\\lambda_r0=0$, $\\lambda_r+=+\\circ(\\lambda_r\\times\\lambda_r)$, $\\lambda_{r+s}=+\\circ\\langle\\lambda_r,\\lambda_s\\rangle$, $\\lambda_{rs}=\\lambda_r\\lambda_s$, $\\lambda_1=\\mathrm{id}$ and $\\lambda_0=0\\circ!$. Product comparison identifies the image of a pairing with the pairing of its images, so applying either functor to these equations proves every scalar law for the new operations. On either site, these fixed-scalar operations are equivalent to a module action of the constant ring sheaf: the presheaf map $\\Lambda_{\\mathrm{const}}\\times H\\to H$, $(r,x)\\mapsto\\lambda_r(x)$, sheafifies to $\\underline\\Lambda\\times H\\to H$, since sheafification preserves finite products and $H^\\#=H$. The module equations follow by sheafifying the corresponding presheaf equations. Conversely any action of $\\underline\\Lambda$ restricts along the constant presheaf to these operations; uniqueness in the sheafification universal property recovers the original action. The same uniqueness shows that an additive map commuting with all $\\lambda_r$ is $\\underline\\Lambda$-linear. This construction works for every fixed ring, in particular every finite discrete ring.",
+   "uses": [
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites Tag 00YV (proposition-functoriality-algebraic-structures-topoi), module paragraph"
+   }
+  },
+  {
+   "text": "Let $L=\\nu_T^*$, $R=\\nu_{T,*}$ and let $\\eta,\\varepsilon$ be the unit and counit of the lifted abelian adjunction. If $\\alpha:LF\\to G$ commutes with every scalar endomorphism, then its transpose $R\\alpha\\circ\\eta_F$ does too: naturality gives $\\eta_F\\lambda_r=RL(\\lambda_r)\\eta_F$, and applying $R$ to $\\alpha L(\\lambda_r)=\\lambda_r\\alpha$ gives the desired equality. Conversely the inverse transpose is $\\varepsilon_G\\circ L\\beta$; applying $L$ to $\\beta\\lambda_r=R(\\lambda_r)\\beta$ gives $L\\beta\\,L\\lambda_r=LR(\\lambda_r)L\\beta$, and naturality gives $\\varepsilon_G LR(\\lambda_r)=\\lambda_r\\varepsilon_G$. Composing these equations proves $(\\varepsilon_G L\\beta)L\\lambda_r=\\lambda_r(\\varepsilon_G L\\beta)$. Hence the abelian Hom bijection restricts to the module Hom bijection. The defined functors therefore form the claimed module adjunction.",
+   "uses": [
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites Tag 00YV (proposition-functoriality-algebraic-structures-topoi), adjointness argument and module paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Section Tag 099R (section-comparison), via Sites 00WX, 00X6 and 00YV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inclusion of small etale site into proetale site continuous preserves finite limits sheaf adjunction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, CategoryTheory.Functor.sheafAdjunctionCocontinuous, AlgebraicGeometry.Scheme.etalePretopology, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.toProEt",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.toProEt'",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "toProEt|sheafAdjunction",
+   "results": "0 hits: ; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "comparison morphism from proetale to etale topos",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous finite limit preserving functor induces left exact sheaf pullback adjunction",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafPullback; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "toProEt|isContinuous_toProEt|preservesFiniteLimits_toProEt",
+   "results": "0 hits: ; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "etale_le_weaklyEtale|changeProp|toProEt",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the inclusion of etale schemes over T into weakly etale schemes is continuous and preserves finite limits",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instHasPullbacksEtale; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale to weakly etale inclusion preserves finite limits continuous functor",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "def sheafAdjunctionContinuous|def sheafPullback|HasSheafify",
+   "results": "5 hits: 55, 59, 70, 75, 85; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left adjoint restriction continuous functor sheaves of modules",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "results": "1 hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous functor between small sites has an adjunction on sheaves valued in modules over a fixed ring",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, LightCondensed.freeForgetAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.instIsLeftAdjointPullback; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the inclusion with continuity and finite-limit preservation; the general site and adjunction hits are ingredients only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -47,5 +262,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-site-comparison-morphism",
+  "worker": "stage1",
+  "summary": "Repaired D1 by dropping the clause-restating inclusion node. The parent now proves etale maps weakly etale from flatness and the open diagonal, proves finite-limit preservation using scheme universal properties, and proves continuity using the existing fpqc covering comparison. Retained the comma construction and the scalar and transpose calculations. No new nodes; no condensed-coefficient comparison asserted.",
+  "blueprint": "First sentence: steps 1-3 give the actual argument for inclusion, finite limits and continuity. Displayed geometric morphism: step 4. Final finite-discrete-module clause: steps 5-6."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-f86972310",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-f86972310 (reviewer sub-agent of L); spot-checked: Read all six steps, all seventeen cited statements, sources, and unit/chapter route. Inclusion, continuity, comma indexing, scalar actions and module adjunction check out; no new nodes or repairs. Verified the exact master condensed coefficients and base-change direction without treating this supporting definition as a derived comparison theorem. Existing dependency cycles are documented in review.md."
+ }
 }
