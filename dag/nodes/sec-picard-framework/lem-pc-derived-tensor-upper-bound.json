@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-derived-tensor-upper-bound",
+ "kind": "statement",
+ "title": "Derived tensor with a module preserves an upper cohomological bound",
+ "statement": "Let X be a scheme [def-pc-scheme], E an object of its derived category [def-pc-derived-category], and b an integer such that H^i(E)=0 for every i>b. Then for every structure-sheaf module F on X and every i>b, H^i(E\\otimes^L F)=0, expressed by [def-pc-derived-tensor-cohomology-vanishes].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EV, lemma-perfect-direct-image, proof: upper bound for derived tensor; Tags 06YS and 06YD supply bounded-above flat representatives"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "proof": [
+  {
+   "text": "The standard derived-category t-structure represents E by a complex K termwise zero above b (Mathlib DerivedCategory.isLE_iff and exists_iso_Q_obj_of_isLE).",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply bounded-above flat replacement to K, retaining the same termwise bound, to obtain a quasi-isomorphism P to K. The bounded-above flat complex P is K-flat and represents E.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For i>b and p+q=i, either p>b or q>0, so every tensor summand of P tensor F[0] in degree i is zero. Tensor is additive in each variable; coproduct extensionality makes the total term zero (WeilConjectures CochainComplex.isStrictlyLE_tensorObj). Thus its homology in degree i is zero. P witnesses the stated vanishing predicate.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-derived-tensor-cohomology-vanishes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EV, lemma-perfect-direct-image, proof: upper bound for derived tensor; Tags 06YS and 06YD supply bounded-above flat representatives"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of a bounded above complex with a module concentrated in degree zero has no cohomology above the same bound",
+   "results": "8 hits: DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.isZero_of_isGE, CochainComplex.isZero_of_isLE",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic bound/truncation lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsStrictlyLE",
+   "results": "12 hits: CochainComplex.IsStrictlyLE, CochainComplex.isStrictlyLE_of_le, CochainComplex.isStrictlyLE_iff, CochainComplex.isZero_of_isStrictlyLE, CochainComplex.instIsStrictlyLEObjIntSingleFunctor, CochainComplex.instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat, CochainComplex.isStrictlyLE_of_iso, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic bound/truncation lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*(isZero|IsZero)|IsStrictlyLE.*mapBifunctor",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match; no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a module preserves the upper cohomology bound of a bounded above complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperDirectImageFiniteTor",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EV, lemma-perfect-direct-image, proof: upper bound for derived tensor; Tags 06YS and 06YD supply bounded-above flat representatives",
+   "via": [
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorUpperBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorUpperBound.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedTensorCohomologyVanishes_of_upper_bound",
+  "statement": "theorem schemeDerivedTensorCohomologyVanishes_of_upper_bound\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (E : schemeDerivedCategory X) (b : ℤ)\n    (hE : ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E))\n    (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ) (hi : b < i) :\n    schemeDerivedTensorCohomologyVanishes X E F i",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T062516-L-731480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T062516-L-731480",
+  "kind": "interface"
+ }
+}
